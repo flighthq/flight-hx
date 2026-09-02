@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SoftKeyboardScrollAssistBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var setScrollAssistEnabled:Bool->flight._internal._Promise<SoftKeyboardSetterResult>; };
+typedef SoftKeyboardScrollAssistBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var setScrollAssistEnabled:Bool->flight._internal._Promise<SoftKeyboardSetterResult>; };

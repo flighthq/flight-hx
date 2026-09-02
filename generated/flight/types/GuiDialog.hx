@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GuiDialog = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var __GuiDialogTypeKey:flight._internal._Nothing; };
+typedef GuiDialog = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var __GuiDialogTypeKey:flight._internal._Nothing; };

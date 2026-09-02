@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef IridescencePbrExtension = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:String; var iridescence:Float; var iridescenceIor:Float; var iridescenceMap:Null<Texture>; var iridescenceMapUvSet:PbrUvSet; var iridescenceThicknessMap:Null<Texture>; var iridescenceThicknessMapUvSet:PbrUvSet; var iridescenceThicknessMax:Float; var iridescenceThicknessMin:Float; };
+typedef IridescencePbrExtension = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var iridescence:Float; var iridescenceIor:Float; var iridescenceMap:Null<Texture>; var iridescenceMapUvSet:PbrUvSet; var iridescenceThicknessMap:Null<Texture>; var iridescenceThicknessMapUvSet:PbrUvSet; var iridescenceThicknessMax:Float; var iridescenceThicknessMin:Float; };

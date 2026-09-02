@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AnimationRootMotionExtractor = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var channel:AnimationChannel; var channelIndex:Float; var clip:AnimationClip; var cycleDelta:flight._internal._Float32Array; var fromMotion:flight._internal._Float32Array; var fromSample:flight._internal._Float32Array; var powerScratch:flight._internal._Float32Array; var startSample:flight._internal._Float32Array; var toMotion:flight._internal._Float32Array; var toSample:flight._internal._Float32Array; };
+typedef AnimationRootMotionExtractor = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var channel:AnimationChannel; var channelIndex:Float; var clip:AnimationClip; var cycleDelta:flight._internal._Float32Array; var fromMotion:flight._internal._Float32Array; var fromSample:flight._internal._Float32Array; var powerScratch:flight._internal._Float32Array; var startSample:flight._internal._Float32Array; var toMotion:flight._internal._Float32Array; var toSample:flight._internal._Float32Array; };

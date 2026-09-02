@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WebServiceWorkerNotificationCapabilities = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var action:NotificationActionBackend; var activeList:NotificationActiveListBackend; var click:NotificationClickBackend; var close:NotificationCloseBackend; var delivery:NotificationDeliveryBackend; var dismiss:NotificationDismissBackend; var lifecycle:NotificationLifecycleBackend; var permission:NotificationPermissionBackend; };
+typedef WebServiceWorkerNotificationCapabilities = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var action:NotificationActionBackend; var activeList:NotificationActiveListBackend; var click:NotificationClickBackend; var close:NotificationCloseBackend; var delivery:NotificationDeliveryBackend; var dismiss:NotificationDismissBackend; var lifecycle:NotificationLifecycleBackend; var permission:NotificationPermissionBackend; };

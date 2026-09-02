@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AnisotropyPbrExtension = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:String; var anisotropyMap:Null<Texture>; var anisotropyMapUvSet:PbrUvSet; var anisotropyRotation:Float; var anisotropyStrength:Float; };
+typedef AnisotropyPbrExtension = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var anisotropyMap:Null<Texture>; var anisotropyMapUvSet:PbrUvSet; var anisotropyRotation:Float; var anisotropyStrength:Float; };

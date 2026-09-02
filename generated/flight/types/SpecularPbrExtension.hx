@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SpecularPbrExtension = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:String; var specular:Float; var specularColor:Float; var specularColorMap:Null<Texture>; var specularColorMapUvSet:PbrUvSet; var specularMap:Null<Texture>; var specularMapUvSet:PbrUvSet; };
+typedef SpecularPbrExtension = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var specular:Float; var specularColor:Float; var specularColorMap:Null<Texture>; var specularColorMapUvSet:PbrUvSet; var specularMap:Null<Texture>; var specularMapUvSet:PbrUvSet; };

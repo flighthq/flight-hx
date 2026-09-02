@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ScreenPermissionChange = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var onChange:Signal<ScreenPermissionState->Void>; };
+typedef ScreenPermissionChange = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onChange:Signal<ScreenPermissionState->Void>; };

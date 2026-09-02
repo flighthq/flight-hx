@@ -2,23 +2,24 @@
 
 Upstream commit: `98a7a58a934f55555a561a308cc23c1363c45652`
 
-This audit inventories exact calls to Flight's production `createEntity` helper. A ready site has a declared concrete Entity identity plus an exact object field set. Source-order differences are normalized after preserving initializer evaluation order. It reports closure prerequisites; it does not activate class emission.
+This audit inventories exact calls to Flight's production `createEntity` helper. A ready site has either a declared concrete Entity identity or a closed local object shape that receives a private generated identity, plus a constructible field set. Source-order differences are normalized after preserving initializer evaluation order. It reports closure prerequisites; it does not activate named-schema class emission.
 
 | Metric | Count |
 | --- | ---: |
 | Production createEntity calls | 368 |
 | Exact concrete Entity calls | 191 |
 | Exact concrete Entity schemas | 148 |
-| Constructor-ready Entity calls | 176 |
-| Blocked Entity calls | 175 |
+| Constructor-ready Entity calls | 328 |
+| Blocked Entity calls | 23 |
 | Bare Entity calls | 0 |
 | Generic Entity calls | 3 |
+| Private local Entity classes | 152 |
 | Field-order-normalized calls | 24 |
 | Missing-field-initialized calls | 9 |
-| Spread-projected calls | 4 |
-| Structural Entity calls | 141 |
+| Spread-projected calls | 11 |
+| Structural Entity calls | 4 |
 | Exact non-Entity calls | 17 |
-| Unresolved calls | 16 |
+| Unresolved calls | 1 |
 
 ## Concrete Entity identities
 
@@ -213,9 +214,9 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/connectivity/src/connectivity.ts:50:10` | `createConnectivity` | `@flighthq/types:interface#Connectivity` | `contextual` | `object` | 5 | ready | — | — |
 | `upstream/packages/dialog/src/fileDialog.ts:26:18` | `createFileDialogHandle` | `@flighthq/types:interface#FileDialogHandle` | `contextual` | `object` | 3 | ready | — | — |
 | `upstream/packages/entity/src/clone.ts:12:10` | `cloneEntity` | `generic-entity` | `contextual` | `other` | 0 | blocked | — | `generic-entity-destination`, `non-object-construction` |
-| `upstream/packages/entity/src/host.ts:8:10` | `createHost` | `structural-entity` | `contextual` | `object` | 26 | blocked | — | `spread-construction`, `structural-entity-destination` |
+| `upstream/packages/entity/src/host.ts:8:10` | `createHost` | `synthetic-entity:upstream/packages/entity/src/host.ts:8:10` | `contextual` | `object` | 26 | ready | `synthetic-class`, `spread-projection` | — |
 | `upstream/packages/font/src/font.ts:5:10` | `createFont` | `@flighthq/types:interface#Font` | `contextual` | `object` | 1 | ready | — | — |
-| `upstream/packages/font/src/glyphOutlineSource.ts:21:10` | `createGlyphRasterizerBackendFromGlyphOutlineSource` | `structural-entity` | `contextual` | `object` | 2 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/font/src/glyphOutlineSource.ts:21:10` | `createGlyphRasterizerBackendFromGlyphOutlineSource` | `synthetic-entity:upstream/packages/font/src/glyphOutlineSource.ts:21:10` | `contextual` | `object` | 2 | ready | `synthetic-class` | — |
 | `upstream/packages/geometry/src/aabb.ts:67:10` | `createAabb` | `@flighthq/types:interface#Aabb` | `contextual` | `object` | 2 | ready | — | — |
 | `upstream/packages/geometry/src/boundingSphere.ts:48:10` | `createBoundingSphere` | `@flighthq/types:interface#BoundingSphere` | `contextual` | `object` | 2 | ready | — | — |
 | `upstream/packages/geometry/src/capsule.ts:24:10` | `createCapsule` | `@flighthq/types:interface#Capsule` | `contextual` | `object` | 7 | ready | — | — |
@@ -233,74 +234,74 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/geometry/src/vector2.ts:59:10` | `createVector2` | `@flighthq/types:interface#Vector2` | `contextual` | `object` | 2 | ready | — | — |
 | `upstream/packages/geometry/src/vector3.ts:83:10` | `createVector3` | `@flighthq/types:interface#Vector3` | `contextual` | `object` | 3 | ready | — | — |
 | `upstream/packages/geometry/src/vector4.ts:89:10` | `createVector4` | `@flighthq/types:interface#Vector4` | `contextual` | `object` | 4 | ready | `field-order` | — |
-| `upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts:12:10` | `createStubGlyphRasterizerBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts:12:10` | `createStubGlyphRasterizerBackend` | `synthetic-entity:upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts:12:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
 | `upstream/packages/host-capacitor/src/capacitorApp.ts:37:50` | `createCapacitorAppCapabilities` | `@flighthq/types:type#CapacitorCommonAppCapabilities` | `contextual` | `object` | 3 | ready | — | — |
-| `upstream/packages/host-capacitor/src/capacitorApp.ts:38:15` | `createCapacitorAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-capacitor/src/capacitorApp.ts:46:11` | `createCapacitorAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-capacitor/src/capacitorApp.ts:47:14` | `createCapacitorAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-capacitor/src/capacitorApp.ts:50:10` | `createCapacitorAppCapabilities` | `structural-entity` | `contextual` | `object` | 2 | blocked | — | `spread-construction`, `structural-entity-destination` |
-| `upstream/packages/host-capacitor/src/capacitorApp.ts:52:11` | `createCapacitorAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-capacitor/src/capacitorApp.ts:53:11` | `createCapacitorAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-capacitor/src/capacitorClipboard.ts:15:10` | `createCapacitorClipboardBackend` | `structural-entity` | `contextual` | `object` | 7 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-capacitor/src/capacitorConnectivity.ts:70:10` | `createCapacitorConnectivityBackend` | `structural-entity` | `contextual` | `object` | 3 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-capacitor/src/capacitorDevice.ts:42:10` | `createCapacitorDeviceBackend` | `structural-entity` | `contextual` | `object` | 5 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-capacitor/src/capacitorDialog.ts:8:10` | `createCapacitorMessageDialogBackend` | `structural-entity` | `contextual` | `object` | 2 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-capacitor/src/capacitorDialog.ts:31:10` | `createCapacitorPromptDialogBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-capacitor/src/capacitorFileSystem.ts:14:10` | `createCapacitorFileSystemBackend` | `structural-entity` | `contextual` | `object` | 14 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-capacitor/src/capacitorGeolocation.ts:24:10` | `createCapacitorGeolocationBackend` | `structural-entity` | `contextual` | `object` | 6 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-capacitor/src/capacitorKeyboard.ts:32:10` | `createCapacitorSoftKeyboardAccessoryBarBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-capacitor/src/capacitorKeyboard.ts:46:10` | `createCapacitorSoftKeyboardChangeBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-capacitor/src/capacitorKeyboard.ts:83:10` | `createCapacitorSoftKeyboardInfoBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-capacitor/src/capacitorKeyboard.ts:98:10` | `createCapacitorSoftKeyboardResizeModeWriteBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-capacitor/src/capacitorKeyboard.ts:113:10` | `createCapacitorSoftKeyboardScrollAssistBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-capacitor/src/capacitorKeyboard.ts:126:10` | `createCapacitorSoftKeyboardStyleBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-capacitor/src/capacitorKeyboard.ts:141:10` | `createCapacitorSoftKeyboardVisibilityBackend` | `structural-entity` | `contextual` | `object` | 2 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/host-capacitor/src/capacitorApp.ts:38:15` | `createCapacitorAppCapabilities` | `synthetic-entity:upstream/packages/host-capacitor/src/capacitorApp.ts:38:15` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-capacitor/src/capacitorApp.ts:46:11` | `createCapacitorAppCapabilities` | `synthetic-entity:upstream/packages/host-capacitor/src/capacitorApp.ts:46:11` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-capacitor/src/capacitorApp.ts:47:14` | `createCapacitorAppCapabilities` | `synthetic-entity:upstream/packages/host-capacitor/src/capacitorApp.ts:47:14` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-capacitor/src/capacitorApp.ts:50:10` | `createCapacitorAppCapabilities` | `synthetic-entity:upstream/packages/host-capacitor/src/capacitorApp.ts:50:10` | `contextual` | `object` | 2 | ready | `synthetic-class`, `spread-projection` | — |
+| `upstream/packages/host-capacitor/src/capacitorApp.ts:52:11` | `createCapacitorAppCapabilities` | `synthetic-entity:upstream/packages/host-capacitor/src/capacitorApp.ts:52:11` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-capacitor/src/capacitorApp.ts:53:11` | `createCapacitorAppCapabilities` | `synthetic-entity:upstream/packages/host-capacitor/src/capacitorApp.ts:53:11` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-capacitor/src/capacitorClipboard.ts:15:10` | `createCapacitorClipboardBackend` | `synthetic-entity:upstream/packages/host-capacitor/src/capacitorClipboard.ts:15:10` | `contextual` | `object` | 7 | ready | `synthetic-class` | — |
+| `upstream/packages/host-capacitor/src/capacitorConnectivity.ts:70:10` | `createCapacitorConnectivityBackend` | `synthetic-entity:upstream/packages/host-capacitor/src/capacitorConnectivity.ts:70:10` | `contextual` | `object` | 3 | ready | `synthetic-class` | — |
+| `upstream/packages/host-capacitor/src/capacitorDevice.ts:42:10` | `createCapacitorDeviceBackend` | `synthetic-entity:upstream/packages/host-capacitor/src/capacitorDevice.ts:42:10` | `contextual` | `object` | 5 | ready | `synthetic-class` | — |
+| `upstream/packages/host-capacitor/src/capacitorDialog.ts:8:10` | `createCapacitorMessageDialogBackend` | `synthetic-entity:upstream/packages/host-capacitor/src/capacitorDialog.ts:8:10` | `contextual` | `object` | 2 | ready | `synthetic-class` | — |
+| `upstream/packages/host-capacitor/src/capacitorDialog.ts:31:10` | `createCapacitorPromptDialogBackend` | `synthetic-entity:upstream/packages/host-capacitor/src/capacitorDialog.ts:31:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-capacitor/src/capacitorFileSystem.ts:14:10` | `createCapacitorFileSystemBackend` | `synthetic-entity:upstream/packages/host-capacitor/src/capacitorFileSystem.ts:14:10` | `contextual` | `object` | 14 | ready | `synthetic-class` | — |
+| `upstream/packages/host-capacitor/src/capacitorGeolocation.ts:24:10` | `createCapacitorGeolocationBackend` | `synthetic-entity:upstream/packages/host-capacitor/src/capacitorGeolocation.ts:24:10` | `contextual` | `object` | 6 | ready | `synthetic-class` | — |
+| `upstream/packages/host-capacitor/src/capacitorKeyboard.ts:32:10` | `createCapacitorSoftKeyboardAccessoryBarBackend` | `synthetic-entity:upstream/packages/host-capacitor/src/capacitorKeyboard.ts:32:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-capacitor/src/capacitorKeyboard.ts:46:10` | `createCapacitorSoftKeyboardChangeBackend` | `synthetic-entity:upstream/packages/host-capacitor/src/capacitorKeyboard.ts:46:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-capacitor/src/capacitorKeyboard.ts:83:10` | `createCapacitorSoftKeyboardInfoBackend` | `synthetic-entity:upstream/packages/host-capacitor/src/capacitorKeyboard.ts:83:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-capacitor/src/capacitorKeyboard.ts:98:10` | `createCapacitorSoftKeyboardResizeModeWriteBackend` | `synthetic-entity:upstream/packages/host-capacitor/src/capacitorKeyboard.ts:98:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-capacitor/src/capacitorKeyboard.ts:113:10` | `createCapacitorSoftKeyboardScrollAssistBackend` | `synthetic-entity:upstream/packages/host-capacitor/src/capacitorKeyboard.ts:113:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-capacitor/src/capacitorKeyboard.ts:126:10` | `createCapacitorSoftKeyboardStyleBackend` | `synthetic-entity:upstream/packages/host-capacitor/src/capacitorKeyboard.ts:126:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-capacitor/src/capacitorKeyboard.ts:141:10` | `createCapacitorSoftKeyboardVisibilityBackend` | `synthetic-entity:upstream/packages/host-capacitor/src/capacitorKeyboard.ts:141:10` | `contextual` | `object` | 2 | ready | `synthetic-class` | — |
 | `upstream/packages/host-capacitor/src/capacitorNotification.ts:101:10` | `createCapacitorNotificationCapabilities` | `@flighthq/types:type#CapacitorNotificationCapabilities` | `contextual` | `object` | 6 | ready | — | — |
 | `upstream/packages/host-capacitor/src/capacitorProtocol.ts:9:10` | `createCapacitorProtocolCapabilities` | `@flighthq/types:type#CapacitorProtocolCapabilities` | `contextual` | `object` | 1 | ready | — | — |
-| `upstream/packages/host-capacitor/src/capacitorProtocol.ts:10:11` | `createCapacitorProtocolCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-capacitor/src/capacitorRegister.ts:103:10` | `capacitorHost` | `structural-entity` | `contextual` | `object` | 26 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/host-capacitor/src/capacitorProtocol.ts:10:11` | `createCapacitorProtocolCapabilities` | `synthetic-entity:upstream/packages/host-capacitor/src/capacitorProtocol.ts:10:11` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-capacitor/src/capacitorRegister.ts:103:10` | `capacitorHost` | `synthetic-entity:upstream/packages/host-capacitor/src/capacitorRegister.ts:103:10` | `contextual` | `object` | 26 | ready | `synthetic-class` | — |
 | `upstream/packages/host-capacitor/src/capacitorShare.ts:13:10` | `createCapacitorShareContentBackend` | `@flighthq/types:interface#CapacitorShareContentBackend` | `contextual` | `object` | 3 | ready | — | — |
-| `upstream/packages/host-capacitor/src/capacitorStatusBar.ts:40:10` | `createCapacitorStatusBarBackend` | `structural-entity` | `contextual` | `object` | 5 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/host-capacitor/src/capacitorStatusBar.ts:40:10` | `createCapacitorStatusBarBackend` | `synthetic-entity:upstream/packages/host-capacitor/src/capacitorStatusBar.ts:40:10` | `contextual` | `object` | 5 | ready | `synthetic-class` | — |
 | `upstream/packages/host-electron/src/electronApp.ts:41:49` | `createElectronAppCapabilities` | `@flighthq/types:type#ElectronCommonAppCapabilities` | `contextual` | `object` | 13 | ready | — | — |
-| `upstream/packages/host-electron/src/electronApp.ts:42:23` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:43:12` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:44:13` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 3 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:49:11` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:50:16` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:51:11` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 3 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:56:11` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:57:18` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:65:12` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:66:15` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:67:21` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:72:21` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 3 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:77:14` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:83:12` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 10 | blocked | — | `spread-construction`, `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:85:17` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:86:25` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:89:14` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:90:13` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 6 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:100:17` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:105:20` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:106:13` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:108:13` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:113:12` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 3 | blocked | — | `spread-construction`, `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:117:20` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:121:10` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `spread-construction`, `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:123:12` | `createElectronAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:128:10` | `createElectronLoginItemBackend` | `structural-entity` | `return` | `object` | 2 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronApp.ts:150:10` | `createElectronRecentDocumentsBackend` | `structural-entity` | `return` | `object` | 2 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronClipboard.ts:23:10` | `createElectronClipboardBackend` | `structural-entity` | `contextual` | `object` | 19 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronDialog.ts:18:10` | `createElectronDirectoryOpenDialogBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronDialog.ts:40:10` | `createElectronFileOpenDialogBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronDialog.ts:67:10` | `createElectronFileSaveDialogBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/host-electron/src/electronApp.ts:42:23` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:42:23` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:43:12` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:43:12` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:44:13` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:44:13` | `contextual` | `object` | 3 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:49:11` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:49:11` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:50:16` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:50:16` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:51:11` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:51:11` | `contextual` | `object` | 3 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:56:11` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:56:11` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:57:18` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:57:18` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:65:12` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:65:12` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:66:15` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:66:15` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:67:21` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:67:21` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:72:21` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:72:21` | `contextual` | `object` | 3 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:77:14` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:77:14` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:83:12` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:83:12` | `contextual` | `object` | 10 | ready | `synthetic-class`, `spread-projection` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:85:17` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:85:17` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:86:25` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:86:25` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:89:14` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:89:14` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:90:13` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:90:13` | `contextual` | `object` | 6 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:100:17` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:100:17` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:105:20` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:105:20` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:106:13` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:106:13` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:108:13` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:108:13` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:113:12` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:113:12` | `contextual` | `object` | 3 | ready | `synthetic-class`, `spread-projection` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:117:20` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:117:20` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:121:10` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:121:10` | `contextual` | `object` | 1 | ready | `synthetic-class`, `spread-projection` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:123:12` | `createElectronAppCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:123:12` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:128:10` | `createElectronLoginItemBackend` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:128:10` | `return` | `object` | 2 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronApp.ts:150:10` | `createElectronRecentDocumentsBackend` | `synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:150:10` | `return` | `object` | 2 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronClipboard.ts:23:10` | `createElectronClipboardBackend` | `synthetic-entity:upstream/packages/host-electron/src/electronClipboard.ts:23:10` | `contextual` | `object` | 19 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronDialog.ts:18:10` | `createElectronDirectoryOpenDialogBackend` | `synthetic-entity:upstream/packages/host-electron/src/electronDialog.ts:18:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronDialog.ts:40:10` | `createElectronFileOpenDialogBackend` | `synthetic-entity:upstream/packages/host-electron/src/electronDialog.ts:40:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronDialog.ts:67:10` | `createElectronFileSaveDialogBackend` | `synthetic-entity:upstream/packages/host-electron/src/electronDialog.ts:67:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
 | `upstream/packages/host-electron/src/electronIpc.ts:13:10` | `createElectronIpcMessageBackend` | `@flighthq/types:interface#IpcMessageBackend` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/host-electron/src/electronMenu.ts:29:18` | `createElectronMenuBackends` | `@flighthq/types:interface#MenuApplicationBackend` | `contextual` | `object` | 2 | not-entity | — | — |
 | `upstream/packages/host-electron/src/electronMenu.ts:44:12` | `createElectronMenuBackends` | `@flighthq/types:interface#MenuPopupBackend` | `contextual` | `object` | 1 | not-entity | — | — |
 | `upstream/packages/host-electron/src/electronMenu.ts:59:13` | `createElectronMenuBackends` | `@flighthq/types:interface#MenuSelectBackend` | `contextual` | `object` | 1 | not-entity | — | — |
 | `upstream/packages/host-electron/src/electronNotification.ts:177:44` | `createElectronNotificationCapabilities` | `structural-entity` | `contextual` | `other` | 0 | blocked | — | `non-object-construction`, `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronNotification.ts:178:10` | `createElectronNotificationCapabilities` | `structural-entity` | `contextual` | `object` | 2 | blocked | — | `spread-construction`, `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronPlatform.ts:9:10` | `createElectronPlatformBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/host-electron/src/electronNotification.ts:178:10` | `createElectronNotificationCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronNotification.ts:178:10` | `contextual` | `object` | 2 | ready | `synthetic-class`, `spread-projection` | — |
+| `upstream/packages/host-electron/src/electronPlatform.ts:9:10` | `createElectronPlatformBackend` | `synthetic-entity:upstream/packages/host-electron/src/electronPlatform.ts:9:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
 | `upstream/packages/host-electron/src/electronPower.ts:44:20` | `createElectronPowerBackends` | `@flighthq/types:interface#PowerBatteryHealthBackend` | `type-argument` | `object` | 1 | not-entity | — | — |
 | `upstream/packages/host-electron/src/electronPower.ts:49:13` | `createElectronPowerBackends` | `@flighthq/types:interface#PowerChangeBackend` | `type-argument` | `object` | 1 | not-entity | — | — |
 | `upstream/packages/host-electron/src/electronPower.ts:59:11` | `createElectronPowerBackends` | `@flighthq/types:interface#PowerIdleBackend` | `type-argument` | `object` | 2 | not-entity | — | — |
@@ -309,15 +310,15 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/host-electron/src/electronPower.ts:112:13` | `createElectronPowerBackends` | `@flighthq/types:interface#PowerStatusBackend` | `type-argument` | `object` | 1 | not-entity | — | — |
 | `upstream/packages/host-electron/src/electronPower.ts:126:17` | `createElectronPowerBackends` | `@flighthq/types:interface#PowerSuspensionBackend` | `type-argument` | `object` | 2 | not-entity | — | — |
 | `upstream/packages/host-electron/src/electronPower.ts:146:14` | `createElectronPowerBackends` | `@flighthq/types:interface#PowerThermalBackend` | `type-argument` | `object` | 2 | not-entity | — | — |
-| `upstream/packages/host-electron/src/electronProtocol.ts:7:24` | `createElectronProtocolCapabilities` | `structural-entity` | `variable` | `object` | 2 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/host-electron/src/electronProtocol.ts:7:24` | `createElectronProtocolCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronProtocol.ts:7:24` | `variable` | `object` | 2 | ready | `synthetic-class` | — |
 | `upstream/packages/host-electron/src/electronProtocol.ts:15:10` | `createElectronProtocolCapabilities` | `@flighthq/types:type#ElectronProtocolCapabilities` | `contextual` | `object` | 5 | ready | — | — |
-| `upstream/packages/host-electron/src/electronProtocol.ts:16:14` | `createElectronProtocolCapabilities` | `structural-entity` | `contextual` | `object` | 3 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronProtocol.ts:25:11` | `createElectronProtocolCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronProtocol.ts:33:24` | `createElectronProtocolCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronProtocol.ts:34:21` | `createElectronProtocolCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronRegister.ts:157:10` | `registerElectronBackends` | `structural-entity` | `contextual` | `object` | 26 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronScreen.ts:17:17` | `createElectronScreenCapabilities` | `structural-entity` | `variable` | `object` | 3 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronScreen.ts:36:18` | `createElectronScreenCapabilities` | `structural-entity` | `variable` | `object` | 1 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/host-electron/src/electronProtocol.ts:16:14` | `createElectronProtocolCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronProtocol.ts:16:14` | `contextual` | `object` | 3 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronProtocol.ts:25:11` | `createElectronProtocolCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronProtocol.ts:25:11` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronProtocol.ts:33:24` | `createElectronProtocolCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronProtocol.ts:33:24` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronProtocol.ts:34:21` | `createElectronProtocolCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronProtocol.ts:34:21` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronRegister.ts:157:10` | `registerElectronBackends` | `synthetic-entity:upstream/packages/host-electron/src/electronRegister.ts:157:10` | `contextual` | `object` | 26 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronScreen.ts:17:17` | `createElectronScreenCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronScreen.ts:17:17` | `variable` | `object` | 3 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronScreen.ts:36:18` | `createElectronScreenCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronScreen.ts:36:18` | `variable` | `object` | 1 | ready | `synthetic-class` | — |
 | `upstream/packages/host-electron/src/electronScreen.ts:71:10` | `emptyScreenInfo` | `@flighthq/types:interface#ScreenInfo` | `contextual` | `object` | 25 | ready | `field-order` | — |
 | `upstream/packages/host-electron/src/electronShell.ts:25:34` | `makeElectronShellCapabilities` | `@flighthq/types:interface#ShellBeepBackend` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/host-electron/src/electronShell.ts:30:42` | `makeElectronShellCapabilities` | `@flighthq/types:interface#ShellExternalBackend` | `contextual` | `object` | 1 | ready | — | — |
@@ -328,76 +329,76 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/host-electron/src/electronShortcut.ts:11:20` | `createElectronShortcutQueryBackend` | `@flighthq/types:interface#ShortcutQueryBackend` | `returned-variable` | `object` | 1 | ready | — | — |
 | `upstream/packages/host-electron/src/electronShortcut.ts:32:20` | `createElectronShortcutTriggerBackend` | `@flighthq/types:interface#ShortcutTriggerBackend` | `returned-variable` | `object` | 3 | ready | — | — |
 | `upstream/packages/host-electron/src/electronShortcut.ts:46:28` | `subscribe` | `structural-entity` | `variable` | `omitted` | 0 | blocked | — | `omitted-construction`, `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronStorage.ts:76:10` | `createElectronStorageBackend` | `structural-entity` | `contextual` | `object` | 5 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronTray.ts:51:21` | `createElectronTrayCapabilities` | `structural-entity` | `variable` | `object` | 4 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronTray.ts:114:17` | `createElectronTrayCapabilities` | `structural-entity` | `variable` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronTray.ts:134:19` | `createElectronTrayCapabilities` | `structural-entity` | `variable` | `object` | 2 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronTray.ts:154:16` | `createElectronTrayCapabilities` | `structural-entity` | `variable` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronTray.ts:177:13` | `createElectronTrayCapabilities` | `unresolved` | `—` | `object` | 1 | blocked | — | `unresolved-destination` |
-| `upstream/packages/host-electron/src/electronTray.ts:189:24` | `createElectronTrayCapabilities` | `unresolved` | `—` | `object` | 1 | blocked | — | `unresolved-destination` |
-| `upstream/packages/host-electron/src/electronTray.ts:192:26` | `createElectronTrayCapabilities` | `unresolved` | `—` | `object` | 1 | blocked | — | `unresolved-destination` |
-| `upstream/packages/host-electron/src/electronTray.ts:195:16` | `createElectronTrayCapabilities` | `unresolved` | `—` | `object` | 1 | blocked | — | `unresolved-destination` |
-| `upstream/packages/host-electron/src/electronTray.ts:213:26` | `createElectronTrayCapabilities` | `unresolved` | `—` | `object` | 1 | blocked | — | `unresolved-destination` |
-| `upstream/packages/host-electron/src/electronTray.ts:220:19` | `createElectronTrayCapabilities` | `unresolved` | `—` | `object` | 1 | blocked | — | `unresolved-destination` |
-| `upstream/packages/host-electron/src/electronTray.ts:221:21` | `createElectronTrayCapabilities` | `unresolved` | `—` | `object` | 1 | blocked | — | `unresolved-destination` |
-| `upstream/packages/host-electron/src/electronTray.ts:239:22` | `createElectronTrayCapabilities` | `unresolved` | `—` | `object` | 1 | blocked | — | `unresolved-destination` |
-| `upstream/packages/host-electron/src/electronTray.ts:252:14` | `createElectronTrayCapabilities` | `unresolved` | `—` | `object` | 2 | blocked | — | `unresolved-destination` |
-| `upstream/packages/host-electron/src/electronTray.ts:280:16` | `createElectronTrayCapabilities` | `unresolved` | `—` | `object` | 2 | blocked | — | `unresolved-destination` |
-| `upstream/packages/host-electron/src/electronTray.ts:313:22` | `createElectronTrayCapabilities` | `unresolved` | `—` | `object` | 1 | blocked | — | `unresolved-destination` |
+| `upstream/packages/host-electron/src/electronStorage.ts:76:10` | `createElectronStorageBackend` | `synthetic-entity:upstream/packages/host-electron/src/electronStorage.ts:76:10` | `contextual` | `object` | 5 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronTray.ts:51:21` | `createElectronTrayCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:51:21` | `variable` | `object` | 4 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronTray.ts:114:17` | `createElectronTrayCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:114:17` | `variable` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronTray.ts:134:19` | `createElectronTrayCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:134:19` | `variable` | `object` | 2 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronTray.ts:154:16` | `createElectronTrayCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:154:16` | `variable` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronTray.ts:177:13` | `createElectronTrayCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:177:13` | `—` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronTray.ts:189:24` | `createElectronTrayCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:189:24` | `—` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronTray.ts:192:26` | `createElectronTrayCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:192:26` | `—` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronTray.ts:195:16` | `createElectronTrayCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:195:16` | `—` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronTray.ts:213:26` | `createElectronTrayCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:213:26` | `—` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronTray.ts:220:19` | `createElectronTrayCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:220:19` | `—` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronTray.ts:221:21` | `createElectronTrayCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:221:21` | `—` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronTray.ts:239:22` | `createElectronTrayCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:239:22` | `—` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronTray.ts:252:14` | `createElectronTrayCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:252:14` | `—` | `object` | 2 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronTray.ts:280:16` | `createElectronTrayCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:280:16` | `—` | `object` | 2 | ready | `synthetic-class` | — |
+| `upstream/packages/host-electron/src/electronTray.ts:313:22` | `createElectronTrayCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:313:22` | `—` | `object` | 1 | ready | `synthetic-class` | — |
 | `upstream/packages/host-electron/src/electronUpdater.ts:71:10` | `createElectronUpdaterBackend` | `@flighthq/types:interface#UpdaterCommandBackend` | `contextual` | `object` | 3 | ready | — | — |
 | `upstream/packages/host-electron/src/electronUpdater.ts:133:24` | `createDownloadedUpdate` | `@flighthq/types:interface#DownloadedUpdate` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/host-tauri/src/tauriApp.ts:20:10` | `createTauriAppCapabilities` | `@flighthq/types:type#TauriAppCapabilities` | `contextual` | `object` | 7 | ready | `field-order` | — |
-| `upstream/packages/host-tauri/src/tauriApp.ts:21:13` | `createTauriAppCapabilities` | `structural-entity` | `contextual` | `object` | 3 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-tauri/src/tauriApp.ts:26:11` | `createTauriAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-tauri/src/tauriApp.ts:27:11` | `createTauriAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-tauri/src/tauriApp.ts:28:11` | `createTauriAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-tauri/src/tauriApp.ts:29:15` | `createTauriAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-tauri/src/tauriApp.ts:30:11` | `createTauriAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-tauri/src/tauriApp.ts:31:14` | `createTauriAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/host-tauri/src/tauriApp.ts:21:13` | `createTauriAppCapabilities` | `synthetic-entity:upstream/packages/host-tauri/src/tauriApp.ts:21:13` | `contextual` | `object` | 3 | ready | `synthetic-class` | — |
+| `upstream/packages/host-tauri/src/tauriApp.ts:26:11` | `createTauriAppCapabilities` | `synthetic-entity:upstream/packages/host-tauri/src/tauriApp.ts:26:11` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-tauri/src/tauriApp.ts:27:11` | `createTauriAppCapabilities` | `synthetic-entity:upstream/packages/host-tauri/src/tauriApp.ts:27:11` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-tauri/src/tauriApp.ts:28:11` | `createTauriAppCapabilities` | `synthetic-entity:upstream/packages/host-tauri/src/tauriApp.ts:28:11` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-tauri/src/tauriApp.ts:29:15` | `createTauriAppCapabilities` | `synthetic-entity:upstream/packages/host-tauri/src/tauriApp.ts:29:15` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-tauri/src/tauriApp.ts:30:11` | `createTauriAppCapabilities` | `synthetic-entity:upstream/packages/host-tauri/src/tauriApp.ts:30:11` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-tauri/src/tauriApp.ts:31:14` | `createTauriAppCapabilities` | `synthetic-entity:upstream/packages/host-tauri/src/tauriApp.ts:31:14` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
 | `upstream/packages/host-tauri/src/tauriClipboard.ts:8:10` | `createTauriClipboardBackend` | `@flighthq/types:interface#ClipboardTextBackend` | `contextual` | `object` | 4 | ready | `field-order` | — |
-| `upstream/packages/host-tauri/src/tauriDialog.ts:20:10` | `createTauriDirectoryOpenDialogBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-tauri/src/tauriDialog.ts:43:10` | `createTauriFileOpenDialogBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-tauri/src/tauriDialog.ts:70:10` | `createTauriFileSaveDialogBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/host-tauri/src/tauriDialog.ts:20:10` | `createTauriDirectoryOpenDialogBackend` | `synthetic-entity:upstream/packages/host-tauri/src/tauriDialog.ts:20:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-tauri/src/tauriDialog.ts:43:10` | `createTauriFileOpenDialogBackend` | `synthetic-entity:upstream/packages/host-tauri/src/tauriDialog.ts:43:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-tauri/src/tauriDialog.ts:70:10` | `createTauriFileSaveDialogBackend` | `synthetic-entity:upstream/packages/host-tauri/src/tauriDialog.ts:70:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
 | `upstream/packages/host-tauri/src/tauriMenu.ts:30:18` | `createTauriMenuBackends` | `@flighthq/types:interface#MenuApplicationBackend` | `contextual` | `object` | 2 | not-entity | — | — |
 | `upstream/packages/host-tauri/src/tauriMenu.ts:51:12` | `createTauriMenuBackends` | `@flighthq/types:interface#MenuPopupBackend` | `contextual` | `object` | 1 | not-entity | — | — |
 | `upstream/packages/host-tauri/src/tauriMenu.ts:62:13` | `createTauriMenuBackends` | `@flighthq/types:interface#MenuSelectBackend` | `contextual` | `object` | 1 | not-entity | — | — |
 | `upstream/packages/host-tauri/src/tauriNotification.ts:15:10` | `createTauriNotificationCapabilities` | `@flighthq/types:type#TauriNotificationCapabilities` | `contextual` | `object` | 3 | ready | — | — |
 | `upstream/packages/host-tauri/src/tauriPlatform.ts:17:10` | `createTauriPlatformBackend` | `@flighthq/types:interface#PlatformBackend` | `contextual` | `object` | 1 | not-entity | — | — |
-| `upstream/packages/host-tauri/src/tauriRegister.ts:96:10` | `registerTauriBackends` | `structural-entity` | `contextual` | `object` | 26 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/host-tauri/src/tauriRegister.ts:96:10` | `registerTauriBackends` | `synthetic-entity:upstream/packages/host-tauri/src/tauriRegister.ts:96:10` | `contextual` | `object` | 26 | ready | `synthetic-class` | — |
 | `upstream/packages/host-tauri/src/tauriShell.ts:17:42` | `makeTauriShellCapabilities` | `@flighthq/types:interface#ShellExternalBackend` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/host-tauri/src/tauriShell.ts:27:42` | `makeTauriShellCapabilities` | `@flighthq/types:interface#ShellPathOpenBackend` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/host-tauri/src/tauriShell.ts:37:46` | `makeTauriShellCapabilities` | `@flighthq/types:interface#ShellPathRevealBackend` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/host-tauri/src/tauriShortcut.ts:11:20` | `createTauriShortcutQueryBackend` | `@flighthq/types:interface#ShortcutQueryBackend` | `returned-variable` | `object` | 1 | ready | — | — |
 | `upstream/packages/host-tauri/src/tauriShortcut.ts:33:20` | `createTauriShortcutTriggerBackend` | `@flighthq/types:interface#ShortcutTriggerBackend` | `returned-variable` | `object` | 3 | ready | — | — |
 | `upstream/packages/host-tauri/src/tauriShortcut.ts:48:28` | `subscribe` | `structural-entity` | `variable` | `omitted` | 0 | blocked | — | `omitted-construction`, `structural-entity-destination` |
-| `upstream/packages/host-tauri/src/tauriTray.ts:39:21` | `createTauriTrayCapabilities` | `structural-entity` | `variable` | `object` | 4 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-tauri/src/tauriTray.ts:112:17` | `createTauriTrayCapabilities` | `structural-entity` | `variable` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-tauri/src/tauriTray.ts:118:16` | `createTauriTrayCapabilities` | `structural-entity` | `variable` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-tauri/src/tauriTray.ts:187:26` | `createTauriTrayCapabilities` | `unresolved` | `—` | `object` | 1 | blocked | — | `unresolved-destination` |
-| `upstream/packages/host-tauri/src/tauriTray.ts:192:17` | `createTauriTrayCapabilities` | `structural-entity` | `variable` | `object` | 2 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-tauri/src/tauriTray.ts:208:29` | `createTauriTrayCapabilities` | `structural-entity` | `variable` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-tauri/src/tauriTray.ts:211:19` | `createTauriTrayCapabilities` | `structural-entity` | `variable` | `object` | 2 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-tauri/src/tauriTray.ts:233:20` | `createTauriTrayCapabilities` | `unresolved` | `—` | `object` | 1 | blocked | — | `unresolved-destination` |
+| `upstream/packages/host-tauri/src/tauriTray.ts:39:21` | `createTauriTrayCapabilities` | `synthetic-entity:upstream/packages/host-tauri/src/tauriTray.ts:39:21` | `variable` | `object` | 4 | ready | `synthetic-class` | — |
+| `upstream/packages/host-tauri/src/tauriTray.ts:112:17` | `createTauriTrayCapabilities` | `synthetic-entity:upstream/packages/host-tauri/src/tauriTray.ts:112:17` | `variable` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-tauri/src/tauriTray.ts:118:16` | `createTauriTrayCapabilities` | `synthetic-entity:upstream/packages/host-tauri/src/tauriTray.ts:118:16` | `variable` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-tauri/src/tauriTray.ts:187:26` | `createTauriTrayCapabilities` | `synthetic-entity:upstream/packages/host-tauri/src/tauriTray.ts:187:26` | `—` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-tauri/src/tauriTray.ts:192:17` | `createTauriTrayCapabilities` | `synthetic-entity:upstream/packages/host-tauri/src/tauriTray.ts:192:17` | `variable` | `object` | 2 | ready | `synthetic-class` | — |
+| `upstream/packages/host-tauri/src/tauriTray.ts:208:29` | `createTauriTrayCapabilities` | `synthetic-entity:upstream/packages/host-tauri/src/tauriTray.ts:208:29` | `variable` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-tauri/src/tauriTray.ts:211:19` | `createTauriTrayCapabilities` | `synthetic-entity:upstream/packages/host-tauri/src/tauriTray.ts:211:19` | `variable` | `object` | 2 | ready | `synthetic-class` | — |
+| `upstream/packages/host-tauri/src/tauriTray.ts:233:20` | `createTauriTrayCapabilities` | `synthetic-entity:upstream/packages/host-tauri/src/tauriTray.ts:233:20` | `—` | `object` | 1 | ready | `synthetic-class` | — |
 | `upstream/packages/host-web/src/webAccessibility.ts:47:10` | `createWebAccessibilityBackend` | `@flighthq/types:interface#AccessibilityBackend` | `contextual` | `object` | 6 | ready | — | — |
-| `upstream/packages/host-web/src/webApp.ts:8:10` | `createWebAppCapabilities` | `structural-entity` | `contextual` | `object` | 7 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webApp.ts:9:12` | `createWebAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webApp.ts:21:12` | `createWebAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webApp.ts:28:13` | `createWebAppCapabilities` | `structural-entity` | `contextual` | `object` | 3 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webApp.ts:43:11` | `createWebAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webApp.ts:48:11` | `createWebAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webApp.ts:55:12` | `createWebAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webApp.ts:70:15` | `createWebAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webBitmapReadback.ts:7:10` | `createWebBitmapReadbackBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/host-web/src/webApp.ts:8:10` | `createWebAppCapabilities` | `synthetic-entity:upstream/packages/host-web/src/webApp.ts:8:10` | `contextual` | `object` | 7 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webApp.ts:9:12` | `createWebAppCapabilities` | `synthetic-entity:upstream/packages/host-web/src/webApp.ts:9:12` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webApp.ts:21:12` | `createWebAppCapabilities` | `synthetic-entity:upstream/packages/host-web/src/webApp.ts:21:12` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webApp.ts:28:13` | `createWebAppCapabilities` | `synthetic-entity:upstream/packages/host-web/src/webApp.ts:28:13` | `contextual` | `object` | 3 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webApp.ts:43:11` | `createWebAppCapabilities` | `synthetic-entity:upstream/packages/host-web/src/webApp.ts:43:11` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webApp.ts:48:11` | `createWebAppCapabilities` | `synthetic-entity:upstream/packages/host-web/src/webApp.ts:48:11` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webApp.ts:55:12` | `createWebAppCapabilities` | `synthetic-entity:upstream/packages/host-web/src/webApp.ts:55:12` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webApp.ts:70:15` | `createWebAppCapabilities` | `synthetic-entity:upstream/packages/host-web/src/webApp.ts:70:15` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webBitmapReadback.ts:7:10` | `createWebBitmapReadbackBackend` | `synthetic-entity:upstream/packages/host-web/src/webBitmapReadback.ts:7:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
 | `upstream/packages/host-web/src/webBitmapReadback.ts:33:30` | `readBitmap` | `@flighthq/types:interface#Bitmap` | `contextual` | `object` | 8 | ready | `field-order` | — |
 | `upstream/packages/host-web/src/webCanvasRenderSurface.ts:6:19` | `createWebCanvasRenderSurfaceCreator` | `@flighthq/types:interface#CanvasRenderSurfaceCreator` | `returned-variable` | `object` | 2 | ready | — | — |
-| `upstream/packages/host-web/src/webClipboard.ts:113:10` | `createWebClipboardProviderBackend` | `structural-entity` | `contextual` | `object` | 19 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webConnectivity.ts:17:10` | `createWebConnectivityBackend` | `structural-entity` | `contextual` | `object` | 4 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webCursor.ts:5:10` | `createWebCursorBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webDialog.ts:20:46` | `<module>` | `structural-entity` | `variable` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webDialog.ts:24:41` | `<module>` | `structural-entity` | `variable` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webDialog.ts:28:41` | `<module>` | `structural-entity` | `variable` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webFontLoading.ts:6:10` | `createWebFontLoadingBackend` | `structural-entity` | `contextual` | `object` | 4 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webGlyphRasterizer.ts:12:10` | `createWebGlyphRasterizerBackend` | `structural-entity` | `contextual` | `object` | 2 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/host-web/src/webClipboard.ts:113:10` | `createWebClipboardProviderBackend` | `synthetic-entity:upstream/packages/host-web/src/webClipboard.ts:113:10` | `contextual` | `object` | 19 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webConnectivity.ts:17:10` | `createWebConnectivityBackend` | `synthetic-entity:upstream/packages/host-web/src/webConnectivity.ts:17:10` | `contextual` | `object` | 4 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webCursor.ts:5:10` | `createWebCursorBackend` | `synthetic-entity:upstream/packages/host-web/src/webCursor.ts:5:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webDialog.ts:20:46` | `<module>` | `synthetic-entity:upstream/packages/host-web/src/webDialog.ts:20:46` | `variable` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webDialog.ts:24:41` | `<module>` | `synthetic-entity:upstream/packages/host-web/src/webDialog.ts:24:41` | `variable` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webDialog.ts:28:41` | `<module>` | `synthetic-entity:upstream/packages/host-web/src/webDialog.ts:28:41` | `variable` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webFontLoading.ts:6:10` | `createWebFontLoadingBackend` | `synthetic-entity:upstream/packages/host-web/src/webFontLoading.ts:6:10` | `contextual` | `object` | 4 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webGlyphRasterizer.ts:12:10` | `createWebGlyphRasterizerBackend` | `synthetic-entity:upstream/packages/host-web/src/webGlyphRasterizer.ts:12:10` | `contextual` | `object` | 2 | ready | `synthetic-class` | — |
 | `upstream/packages/host-web/src/webInputTarget.ts:15:40` | `<module>` | `@flighthq/types:interface#InputDropFileBackend` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/host-web/src/webInputTarget.ts:33:37` | `<module>` | `@flighthq/types:interface#InputFocusBackend` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/host-web/src/webInputTarget.ts:46:43` | `<module>` | `@flighthq/types:interface#InputPointerLockBackend` | `contextual` | `object` | 2 | ready | — | — |
@@ -405,34 +406,34 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/host-web/src/webInputTarget.ts:100:40` | `<module>` | `@flighthq/types:interface#RenderContextBackend` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/host-web/src/webInputTarget.ts:119:40` | `<module>` | `@flighthq/types:interface#RenderSurfaceBackend` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/host-web/src/webInputTarget.ts:131:37` | `createWebInputTargetHandle` | `@flighthq/types:interface#InputTargetHandle` | `contextual` | `object` | 1 | ready | — | — |
-| `upstream/packages/host-web/src/webKeyboard.ts:16:10` | `createWebSoftKeyboardChangeBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webKeyboard.ts:39:10` | `createWebSoftKeyboardInfoBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webKeyboard.ts:53:10` | `createWebSoftKeyboardVisibilityBackend` | `structural-entity` | `contextual` | `object` | 2 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/host-web/src/webKeyboard.ts:16:10` | `createWebSoftKeyboardChangeBackend` | `synthetic-entity:upstream/packages/host-web/src/webKeyboard.ts:16:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webKeyboard.ts:39:10` | `createWebSoftKeyboardInfoBackend` | `synthetic-entity:upstream/packages/host-web/src/webKeyboard.ts:39:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webKeyboard.ts:53:10` | `createWebSoftKeyboardVisibilityBackend` | `synthetic-entity:upstream/packages/host-web/src/webKeyboard.ts:53:10` | `contextual` | `object` | 2 | ready | `synthetic-class` | — |
 | `upstream/packages/host-web/src/webMediasession.ts:123:10` | `createWebMediaSessionActionBackend` | `@flighthq/types:interface#MediaSessionActionBackend` | `contextual` | `other` | 0 | blocked | — | `non-object-construction` |
 | `upstream/packages/host-web/src/webMediasession.ts:322:10` | `createWebMediaSessionBackend` | `@flighthq/types:interface#MediaSessionBackend` | `contextual` | `other` | 0 | blocked | — | `non-object-construction` |
-| `upstream/packages/host-web/src/webMidi.ts:111:18` | `createWebMidiProfile` | `structural-entity` | `variable` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webMidi.ts:121:34` | `createWebMidiProfile` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webMidi.ts:122:22` | `createWebMidiProfile` | `structural-entity` | `variable` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webMidi.ts:125:10` | `createWebMidiProfile` | `structural-entity` | `contextual` | `object` | 2 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webMidi.ts:140:28` | `attachWebMidiEvent` | `structural-entity` | `variable` | `object` | 1 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/host-web/src/webMidi.ts:111:18` | `createWebMidiProfile` | `synthetic-entity:upstream/packages/host-web/src/webMidi.ts:111:18` | `variable` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webMidi.ts:121:34` | `createWebMidiProfile` | `synthetic-entity:upstream/packages/host-web/src/webMidi.ts:121:34` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webMidi.ts:122:22` | `createWebMidiProfile` | `synthetic-entity:upstream/packages/host-web/src/webMidi.ts:122:22` | `variable` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webMidi.ts:125:10` | `createWebMidiProfile` | `synthetic-entity:upstream/packages/host-web/src/webMidi.ts:125:10` | `contextual` | `object` | 2 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webMidi.ts:140:28` | `attachWebMidiEvent` | `synthetic-entity:upstream/packages/host-web/src/webMidi.ts:140:28` | `variable` | `object` | 1 | ready | `synthetic-class` | — |
 | `upstream/packages/host-web/src/webNotification.ts:48:10` | `createWebPageNotificationCapabilities` | `@flighthq/types:type#WebPageNotificationCapabilities` | `contextual` | `object` | 7 | ready | — | — |
-| `upstream/packages/host-web/src/webPower.ts:181:37` | `<module>` | `structural-entity` | `variable` | `object` | 2 | blocked | — | `spread-construction`, `structural-entity-destination` |
-| `upstream/packages/host-web/src/webProtocol.ts:8:10` | `createWebProtocolCapabilities` | `structural-entity` | `contextual` | `object` | 2 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webProtocol.ts:9:13` | `createWebProtocolCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webProtocol.ts:20:19` | `createWebProtocolCapabilities` | `structural-entity` | `contextual` | `object` | 2 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webScreen.ts:178:17` | `createWebScreenCapabilities` | `structural-entity` | `variable` | `object` | 4 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webScreen.ts:221:18` | `createWebScreenCapabilities` | `structural-entity` | `variable` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webScreen.ts:242:26` | `createWebScreenCapabilities` | `structural-entity` | `variable` | `object` | 2 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webScreen.ts:272:28` | `createWebScreenCapabilities` | `structural-entity` | `variable` | `object` | 1 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/host-web/src/webPower.ts:181:37` | `<module>` | `synthetic-entity:upstream/packages/host-web/src/webPower.ts:181:37` | `variable` | `object` | 2 | ready | `synthetic-class`, `spread-projection` | — |
+| `upstream/packages/host-web/src/webProtocol.ts:8:10` | `createWebProtocolCapabilities` | `synthetic-entity:upstream/packages/host-web/src/webProtocol.ts:8:10` | `contextual` | `object` | 2 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webProtocol.ts:9:13` | `createWebProtocolCapabilities` | `synthetic-entity:upstream/packages/host-web/src/webProtocol.ts:9:13` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webProtocol.ts:20:19` | `createWebProtocolCapabilities` | `synthetic-entity:upstream/packages/host-web/src/webProtocol.ts:20:19` | `contextual` | `object` | 2 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webScreen.ts:178:17` | `createWebScreenCapabilities` | `synthetic-entity:upstream/packages/host-web/src/webScreen.ts:178:17` | `variable` | `object` | 4 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webScreen.ts:221:18` | `createWebScreenCapabilities` | `synthetic-entity:upstream/packages/host-web/src/webScreen.ts:221:18` | `variable` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webScreen.ts:242:26` | `createWebScreenCapabilities` | `synthetic-entity:upstream/packages/host-web/src/webScreen.ts:242:26` | `variable` | `object` | 2 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webScreen.ts:272:28` | `createWebScreenCapabilities` | `synthetic-entity:upstream/packages/host-web/src/webScreen.ts:272:28` | `variable` | `object` | 1 | ready | `synthetic-class` | — |
 | `upstream/packages/host-web/src/webServiceWorkerNotification.ts:60:66` | `createWebServiceWorkerNotificationCapabilities` | `@flighthq/types:type#WebServiceWorkerNotificationCapabilities` | `contextual` | `object` | 8 | ready | — | — |
 | `upstream/packages/host-web/src/webShare.ts:11:60` | `<module>` | `@flighthq/types:interface#ShareContentBackend` | `contextual` | `object` | 3 | ready | — | — |
 | `upstream/packages/host-web/src/webShare.ts:27:56` | `<module>` | `@flighthq/types:interface#ShareFilesBackend` | `contextual` | `object` | 3 | ready | — | — |
 | `upstream/packages/host-web/src/webShell.ts:6:62` | `<module>` | `@flighthq/types:interface#ShellExternalBackend` | `contextual` | `object` | 1 | ready | — | — |
-| `upstream/packages/host-web/src/webStorage.ts:20:34` | `<module>` | `structural-entity` | `variable` | `object` | 7 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webStoragePersistence.ts:14:30` | `createWebWindowStoragePersistenceCapabilities` | `structural-entity` | `variable` | `object` | 1 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/host-web/src/webStorage.ts:20:34` | `<module>` | `synthetic-entity:upstream/packages/host-web/src/webStorage.ts:20:34` | `variable` | `object` | 7 | ready | `synthetic-class` | — |
+| `upstream/packages/host-web/src/webStoragePersistence.ts:14:30` | `createWebWindowStoragePersistenceCapabilities` | `synthetic-entity:upstream/packages/host-web/src/webStoragePersistence.ts:14:30` | `variable` | `object` | 1 | ready | `synthetic-class` | — |
 | `upstream/packages/host-web/src/webStoragePersistence.ts:21:24` | `createWebWindowStoragePersistenceCapabilities` | `@flighthq/types:interface#WebWindowStoragePersistenceCapabilities` | `returned-variable` | `object` | 2 | ready | — | — |
 | `upstream/packages/host-web/src/webStoragePersistence.ts:31:24` | `createWebWorkerStoragePersistenceCapabilities` | `@flighthq/types:interface#WebWorkerStoragePersistenceCapabilities` | `returned-variable` | `object` | 1 | ready | — | — |
-| `upstream/packages/host-web/src/webStoragePersistence.ts:36:19` | `createPersistenceQueryBackend` | `structural-entity` | `variable` | `object` | 1 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/host-web/src/webStoragePersistence.ts:36:19` | `createPersistenceQueryBackend` | `synthetic-entity:upstream/packages/host-web/src/webStoragePersistence.ts:36:19` | `variable` | `object` | 1 | ready | `synthetic-class` | — |
 | `upstream/packages/image/src/imageResource.ts:8:10` | `cloneImageResource` | `@flighthq/types:interface#Image` | `contextual` | `object` | 7 | ready | — | — |
 | `upstream/packages/image/src/imageResource.ts:22:10` | `createCompressedImage` | `@flighthq/types:interface#CompressedImage` | `contextual` | `object` | 7 | ready | — | — |
 | `upstream/packages/image/src/imageResource.ts:34:27` | `createImageResource` | `@flighthq/types:interface#Image` | `contextual` | `object` | 7 | ready | — | — |
@@ -440,7 +441,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/image/src/imageResourceFrom.ts:30:10` | `createImageResourceFromImageBitmap` | `@flighthq/types:interface#Image` | `contextual` | `object` | 7 | ready | — | — |
 | `upstream/packages/image/src/imageResourceFrom.ts:42:10` | `createImageResourceFromImageElement` | `@flighthq/types:interface#Image` | `contextual` | `object` | 7 | ready | — | — |
 | `upstream/packages/image/src/imageResourceReference.ts:73:10` | `decodeEmbeddedImageResourceReference` | `unresolved` | `contextual` | `other` | 0 | blocked | — | `non-object-construction`, `unresolved-destination` |
-| `upstream/packages/keyboard/src/keyboard.ts:51:10` | `createSoftKeyboard` | `structural-entity` | `contextual` | `object` | 3 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/keyboard/src/keyboard.ts:51:10` | `createSoftKeyboard` | `synthetic-entity:upstream/packages/keyboard/src/keyboard.ts:51:10` | `contextual` | `object` | 3 | ready | `synthetic-class` | — |
 | `upstream/packages/lighting/src/ambientLight.ts:13:10` | `createAmbientLight` | `@flighthq/types:interface#AmbientLight` | `contextual` | `object` | 3 | ready | — | — |
 | `upstream/packages/lighting/src/areaLight.ts:8:10` | `cloneAreaLight` | `@flighthq/types:interface#AreaLight` | `contextual` | `object` | 12 | ready | — | — |
 | `upstream/packages/lighting/src/areaLight.ts:33:10` | `createAreaLight` | `@flighthq/types:interface#AreaLight` | `contextual` | `object` | 12 | ready | — | — |
@@ -482,7 +483,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/render-gl/src/glExternalTexture.ts:22:18` | `createExternalGlTexture` | `@flighthq/types:interface#ExternalTexture` | `contextual` | `object` | 4 | ready | `missing-field-initialization` | — |
 | `upstream/packages/render-gl/src/glPipeline.ts:29:20` | `createGlPipeline` | `@flighthq/types:interface#GlPipeline` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/render-gl/src/glRenderState.ts:51:17` | `createGlContextState` | `@flighthq/types:interface#GlContextState` | `contextual` | `object` | 1 | ready | — | — |
-| `upstream/packages/render-gl/src/glRenderTarget.ts:85:18` | `createGlRenderTarget` | `structural-entity` | `variable` | `object` | 18 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/render-gl/src/glRenderTarget.ts:85:18` | `createGlRenderTarget` | `synthetic-entity:upstream/packages/render-gl/src/glRenderTarget.ts:85:18` | `variable` | `object` | 18 | ready | `synthetic-class` | — |
 | `upstream/packages/render-wgpu/src/wgpuExternalTexture.ts:21:18` | `createExternalWgpuTexture` | `@flighthq/types:interface#ExternalTexture` | `contextual` | `object` | 4 | ready | `missing-field-initialization` | — |
 | `upstream/packages/render-wgpu/src/wgpuPipeline.ts:25:20` | `createWgpuPipeline` | `@flighthq/types:interface#WgpuPipeline` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/render-wgpu/src/wgpuRenderState.ts:55:17` | `createWgpuDeviceState` | `@flighthq/types:interface#WgpuDeviceState` | `contextual` | `object` | 1 | ready | — | — |
@@ -491,16 +492,16 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/render/src/renderState.ts:12:17` | `createRenderState` | `@flighthq/types:interface#RenderState` | `contextual` | `object` | 12 | ready | — | — |
 | `upstream/packages/scene2d-canvas/src/canvasPipeline.ts:7:20` | `createCanvasPipeline` | `@flighthq/types:interface#CanvasPipeline` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/scene2d-canvas/src/canvasRenderSurface.ts:49:19` | `finishCanvasRenderSurface` | `@flighthq/types:interface#CanvasRenderSurface` | `contextual` | `object` | 5 | ready | — | — |
-| `upstream/packages/scene2d-canvas/src/canvasTestSupport.ts:23:19` | `<anonymous>` | `structural-entity` | `variable` | `object` | 2 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/scene2d-canvas/src/canvasTestSupport.ts:23:19` | `<anonymous>` | `synthetic-entity:upstream/packages/scene2d-canvas/src/canvasTestSupport.ts:23:19` | `variable` | `object` | 2 | ready | `synthetic-class` | — |
 | `upstream/packages/scene2d-canvas/src/canvasTextLabel.ts:25:10` | `createCanvasTextLabelData` | `@flighthq/types:interface#RendererData` | `contextual` | `object` | 1 | blocked | — | `field-set-mismatch` |
 | `upstream/packages/scene2d-canvas/src/canvasTextureResolver.ts:48:21` | `createCanvasTextureResolvers` | `@flighthq/types:interface#CanvasTextureResolvers` | `contextual` | `object` | 3 | ready | `missing-field-initialization` | — |
-| `upstream/packages/scene2d-dom/src/domRichText.ts:38:10` | `createDomRichTextData` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/scene2d-dom/src/domScale9Shape.ts:31:10` | `createDomScale9ShapeData` | `structural-entity` | `contextual` | `object` | 2 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/scene2d-dom/src/domShape.ts:25:10` | `createDomShapeData` | `structural-entity` | `contextual` | `object` | 2 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/scene2d-dom/src/domTextLabel.ts:26:10` | `createDomTextData` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/scene2d-dom/src/domRichText.ts:38:10` | `createDomRichTextData` | `synthetic-entity:upstream/packages/scene2d-dom/src/domRichText.ts:38:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
+| `upstream/packages/scene2d-dom/src/domScale9Shape.ts:31:10` | `createDomScale9ShapeData` | `synthetic-entity:upstream/packages/scene2d-dom/src/domScale9Shape.ts:31:10` | `contextual` | `object` | 2 | ready | `synthetic-class` | — |
+| `upstream/packages/scene2d-dom/src/domShape.ts:25:10` | `createDomShapeData` | `synthetic-entity:upstream/packages/scene2d-dom/src/domShape.ts:25:10` | `contextual` | `object` | 2 | ready | `synthetic-class` | — |
+| `upstream/packages/scene2d-dom/src/domTextLabel.ts:26:10` | `createDomTextData` | `synthetic-entity:upstream/packages/scene2d-dom/src/domTextLabel.ts:26:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
 | `upstream/packages/scene2d-gl/src/glRichText.ts:43:10` | `createGlRichTextData` | `@flighthq/types:interface#RendererData` | `contextual` | `object` | 1 | blocked | — | `field-set-mismatch` |
-| `upstream/packages/scene2d-gl/src/glScale9Shape.ts:50:10` | `createGlScale9ShapeData` | `unresolved` | `contextual` | `object` | 7 | blocked | — | `unresolved-destination` |
-| `upstream/packages/scene2d-gl/src/glShapeData.ts:28:10` | `createGlShapeData` | `unresolved` | `contextual` | `object` | 7 | blocked | — | `unresolved-destination` |
+| `upstream/packages/scene2d-gl/src/glScale9Shape.ts:50:10` | `createGlScale9ShapeData` | `synthetic-entity:upstream/packages/scene2d-gl/src/glScale9Shape.ts:50:10` | `contextual` | `object` | 7 | ready | `synthetic-class` | — |
+| `upstream/packages/scene2d-gl/src/glShapeData.ts:28:10` | `createGlShapeData` | `synthetic-entity:upstream/packages/scene2d-gl/src/glShapeData.ts:28:10` | `contextual` | `object` | 7 | ready | `synthetic-class` | — |
 | `upstream/packages/scene2d-gl/src/glTextLabel.ts:50:10` | `createGlTextLabelData` | `@flighthq/types:interface#RendererData` | `contextual` | `object` | 5 | blocked | — | `field-set-mismatch` |
 | `upstream/packages/scene2d-resources/src/scene2DDocumentImporterRegistry.ts:26:10` | `createScene2DDocumentImporterRegistry` | `@flighthq/types:interface#Scene2DDocumentImporterRegistry` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/scene2d-wgpu/src/wgpuRendererData.ts:15:10` | `createWgpuRendererData` | `structural-entity` | `contextual` | `other` | 0 | blocked | — | `non-object-construction`, `structural-entity-destination` |
@@ -510,7 +511,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/scene3d-resources/src/sceneResourceResolver.ts:42:10` | `createScene3DResourceResolver` | `@flighthq/types:interface#Scene3DResourceResolver` | `contextual` | `object` | 2 | blocked | — | `computed-construction` |
 | `upstream/packages/scene3d-resources/src/sceneResourceSignals.ts:8:10` | `createScene3DResourceSignals` | `@flighthq/types:interface#Scene3DResourceSignals` | `contextual` | `object` | 2 | ready | — | — |
 | `upstream/packages/scene3d/src/scene.ts:14:10` | `createScene3D` | `@flighthq/types:interface#Scene3D` | `contextual` | `object` | 4 | ready | — | — |
-| `upstream/packages/scene3d/src/sceneDocument.ts:109:22` | `<anonymous>` | `structural-entity` | `variable` | `object` | 5 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/scene3d/src/sceneDocument.ts:109:22` | `<anonymous>` | `synthetic-entity:upstream/packages/scene3d/src/sceneDocument.ts:109:22` | `variable` | `object` | 5 | ready | `synthetic-class` | — |
 | `upstream/packages/screen/src/screen.ts:37:10` | `createScreenInfo` | `@flighthq/types:interface#ScreenInfo` | `contextual` | `object` | 25 | ready | `field-order` | — |
 | `upstream/packages/screen/src/screen.ts:67:10` | `createScreenMode` | `@flighthq/types:interface#ScreenMode` | `contextual` | `object` | 5 | ready | `field-order` | — |
 | `upstream/packages/screen/src/screen.ts:71:10` | `createScreenPermissionChange` | `@flighthq/types:interface#ScreenPermissionChange` | `contextual` | `object` | 1 | ready | — | — |
@@ -523,9 +524,9 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/skeleton3d/src/skeleton3d.ts:15:17` | `cloneSkeleton3D` | `@flighthq/types:interface#Skeleton3D` | `returned-variable` | `object` | 5 | ready | — | — |
 | `upstream/packages/skeleton3d/src/skeleton3d.ts:49:10` | `cloneSkeleton3DJointHierarchy` | `@flighthq/types:interface#Skeleton3D` | `contextual` | `object` | 5 | ready | — | — |
 | `upstream/packages/skeleton3d/src/skeleton3d.ts:87:20` | `createSkeleton3D` | `@flighthq/types:interface#Skeleton3D` | `returned-variable` | `object` | 5 | ready | — | — |
-| `upstream/packages/spatial/src/bvh3D.ts:42:10` | `createBvhSpatialBackend3D` | `structural-entity` | `contextual` | `object` | 9 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/spatial/src/uniformGrid.ts:61:10` | `createUniformGridSpatialBackend2D` | `structural-entity` | `contextual` | `object` | 9 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/spatial/src/uniformGrid3D.ts:48:10` | `createUniformGridSpatialBackend3D` | `structural-entity` | `contextual` | `object` | 9 | blocked | — | `structural-entity-destination` |
+| `upstream/packages/spatial/src/bvh3D.ts:42:10` | `createBvhSpatialBackend3D` | `synthetic-entity:upstream/packages/spatial/src/bvh3D.ts:42:10` | `contextual` | `object` | 9 | ready | `synthetic-class` | — |
+| `upstream/packages/spatial/src/uniformGrid.ts:61:10` | `createUniformGridSpatialBackend2D` | `synthetic-entity:upstream/packages/spatial/src/uniformGrid.ts:61:10` | `contextual` | `object` | 9 | ready | `synthetic-class` | — |
+| `upstream/packages/spatial/src/uniformGrid3D.ts:48:10` | `createUniformGridSpatialBackend3D` | `synthetic-entity:upstream/packages/spatial/src/uniformGrid3D.ts:48:10` | `contextual` | `object` | 9 | ready | `synthetic-class` | — |
 | `upstream/packages/spritesheet/src/spritesheet.ts:17:10` | `cloneSpritesheet` | `@flighthq/types:interface#Spritesheet` | `contextual` | `object` | 3 | ready | `field-order` | — |
 | `upstream/packages/spritesheet/src/spritesheet.ts:25:10` | `createSpritesheet` | `@flighthq/types:interface#Spritesheet` | `contextual` | `object` | 3 | ready | `field-order` | — |
 | `upstream/packages/spritesheet/src/spritesheetAnimation.ts:5:10` | `createSpritesheetAnimation` | `@flighthq/types:interface#SpritesheetAnimation` | `contextual` | `object` | 7 | ready | — | — |

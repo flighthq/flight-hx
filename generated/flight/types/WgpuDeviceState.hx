@@ -5,4 +5,4 @@ import Math as HxMath;
 import flight._internal._Runtime;
 
 @:noCompletion
-typedef WgpuDeviceState = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var device:flight._internal.dom.GPUDevice; };
+typedef WgpuDeviceState = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var device:flight._internal.dom.GPUDevice; };

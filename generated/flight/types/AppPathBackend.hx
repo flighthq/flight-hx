@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AppPathBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var getAppDirectoryPath:AppPathKind->String; var getAppPath:Void->String; var getExecutablePath:Void->String; };
+typedef AppPathBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getAppDirectoryPath:AppPathKind->String; var getAppPath:Void->String; var getExecutablePath:Void->String; };

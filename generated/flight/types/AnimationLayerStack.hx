@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AnimationLayerStack = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var advanceScratch:Array<AnimationPlayer>; var blendTrees:Array<AnimationBlendTree>; var channels:Array<AnimationLayerStackChannel>; var layers:Array<AnimationLayer>; var sampleScratch:flight._internal._Float32Array; var stateMachines:Array<AnimationStateMachine>; };
+typedef AnimationLayerStack = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var advanceScratch:Array<AnimationPlayer>; var blendTrees:Array<AnimationBlendTree>; var channels:Array<AnimationLayerStackChannel>; var layers:Array<AnimationLayer>; var sampleScratch:flight._internal._Float32Array; var stateMachines:Array<AnimationStateMachine>; };

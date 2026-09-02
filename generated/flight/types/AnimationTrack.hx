@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AnimationTrack = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var interpolation:AnimationInterpolation; var times:flight._internal._ArrayLike<Float>; var values:flight._internal._ArrayLike<Float>; var components:Float; var quaternion:Bool; var easing:Null<EasingFunction>; var segmentEasings:Null<Array<Null<EasingFunction>>>; };
+typedef AnimationTrack = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var interpolation:AnimationInterpolation; var times:flight._internal._ArrayLike<Float>; var values:flight._internal._ArrayLike<Float>; var components:Float; var quaternion:Bool; var easing:Null<EasingFunction>; var segmentEasings:Null<Array<Null<EasingFunction>>>; };

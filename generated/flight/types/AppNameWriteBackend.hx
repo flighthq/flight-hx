@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AppNameWriteBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var setName:String->Void; };
+typedef AppNameWriteBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var setName:String->Void; };

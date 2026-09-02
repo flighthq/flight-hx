@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AppDockBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var bounceDock:Void->Float; var cancelAttention:Float->Void; var cancelDockBounce:Float->Void; var requestAttention:Bool->Float; var setDockBadge:String->Void; var setDockMenu:Array<MenuItemTemplate>->Void; };
+typedef AppDockBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var bounceDock:Void->Float; var cancelAttention:Float->Void; var cancelDockBounce:Float->Void; var requestAttention:Bool->Float; var setDockBadge:String->Void; var setDockMenu:Array<MenuItemTemplate>->Void; };

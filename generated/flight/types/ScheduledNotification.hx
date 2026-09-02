@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ScheduledNotification = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var id:String; var request:NotificationRequest; var schedule:NotificationSchedule; };
+typedef ScheduledNotification = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var id:String; var request:NotificationRequest; var schedule:NotificationSchedule; };

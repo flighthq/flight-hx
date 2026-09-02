@@ -5,4 +5,4 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Types.BitmapTextureSourceKind;
 
-typedef Bitmap = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var alphaType:AlphaType; var gamut:String; var height:Float; var kind:Dynamic; var version:Float; var width:Float; var data:flight._internal._UInt8ClampedArray; var format:PixelFormat; };
+typedef Bitmap = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var alphaType:AlphaType; var gamut:String; var height:Float; var kind:Dynamic; var version:Float; var width:Float; var data:flight._internal._UInt8ClampedArray; var format:PixelFormat; };

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AppRecentDocumentsBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var addRecentDocument:String->Void; var clearRecentDocuments:Void->Void; };
+typedef AppRecentDocumentsBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var addRecentDocument:String->Void; var clearRecentDocuments:Void->Void; };

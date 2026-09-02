@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef InputDropFileBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var subscribe:InputTargetHandle->(String->Void)->(Void->Void); };
+typedef InputDropFileBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var subscribe:InputTargetHandle->(String->Void)->(Void->Void); };

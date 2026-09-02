@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AppVersionBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var getVersion:Void->String; };
+typedef AppVersionBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getVersion:Void->String; };

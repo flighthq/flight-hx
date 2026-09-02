@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ToonMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Dynamic; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var blendMode:BlendMode; var doubleSided:Bool; var baseColor:Float; var baseColorMap:Null<Texture>; var ramp:Null<Texture>; var steps:Float; };
+typedef ToonMaterial = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Dynamic; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var blendMode:BlendMode; var doubleSided:Bool; var baseColor:Float; var baseColorMap:Null<Texture>; var ramp:Null<Texture>; var steps:Float; };

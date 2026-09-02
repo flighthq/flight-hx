@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AppAllWindowsClosedBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var subscribe:(Void->Void)->(Void->Void); };
+typedef AppAllWindowsClosedBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var subscribe:(Void->Void)->(Void->Void); };

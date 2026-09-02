@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SpotLight = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:String; var castsShadow:Bool; var color:Float; var direction:Vector3; var innerConeCos:Float; var intensity:Float; var normalBias:Float; var outerConeCos:Float; var pcfRadius:Float; var position:Vector3; var range:Float; var shadowBias:Float; };
+typedef SpotLight = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var castsShadow:Bool; var color:Float; var direction:Vector3; var innerConeCos:Float; var intensity:Float; var normalBias:Float; var outerConeCos:Float; var pcfRadius:Float; var position:Vector3; var range:Float; var shadowBias:Float; };

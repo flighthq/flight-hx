@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ElectronMacosNotificationCapabilities = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var click:NotificationClickBackend; var close:NotificationCloseBackend; var delivery:NotificationDeliveryBackend; var dismiss:NotificationDismissBackend; var lifecycle:NotificationLifecycleBackend; var received:NotificationReceivedBackend; var action:NotificationActionBackend; var reply:NotificationReplyBackend; };
+typedef ElectronMacosNotificationCapabilities = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var click:NotificationClickBackend; var close:NotificationCloseBackend; var delivery:NotificationDeliveryBackend; var dismiss:NotificationDismissBackend; var lifecycle:NotificationLifecycleBackend; var received:NotificationReceivedBackend; var action:NotificationActionBackend; var reply:NotificationReplyBackend; };

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MediaSessionActionSignal = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var action:MediaSessionAction; var onAction:Signal<MediaSessionActionDetails->Void>; };
+typedef MediaSessionActionSignal = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var action:MediaSessionAction; var onAction:Signal<MediaSessionActionDetails->Void>; };

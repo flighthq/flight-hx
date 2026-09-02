@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AppQuitBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var quit:Void->Void; };
+typedef AppQuitBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var quit:Void->Void; };

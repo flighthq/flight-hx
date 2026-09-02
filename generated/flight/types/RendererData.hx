@@ -5,4 +5,4 @@ import Math as HxMath;
 import flight._internal._Runtime;
 
 @:noCompletion
-typedef RendererData = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; };
+typedef RendererData = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; };

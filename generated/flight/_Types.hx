@@ -193,7 +193,7 @@ typedef TauriMacosTrayCapabilities__TauriTrayCapabilitiesFor = flight._internal.
 
 typedef TauriWindowsTrayCapabilities__TauriTrayCapabilitiesFor = flight._internal._Intersection2<TauriCommonTrayCapabilities__TauriTrayCapabilitiesFor, flight._internal._Required<{ @:optional var interactionEvents:Null<TrayInteractionEventsBackend>; @:optional var tooltip:Null<TrayTooltipBackend>; }>>;
 
-typedef TextureCommon__Texture = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; };
+typedef TextureCommon__Texture = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; };
 
 typedef TextureLikeFrom__Texture<Type> = flight._internal._Conditional<Type, Texture, { var dimension:String; var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }, flight._internal._Any>;
 

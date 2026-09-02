@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TrayTooltipBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var get:TrayIcon->flight._internal._Promise<TrayTooltipReadResult>; var set:TrayIcon->String->flight._internal._Promise<TrayTooltipUpdateResult>; };
+typedef TrayTooltipBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var get:TrayIcon->flight._internal._Promise<TrayTooltipReadResult>; var set:TrayIcon->String->flight._internal._Promise<TrayTooltipUpdateResult>; };

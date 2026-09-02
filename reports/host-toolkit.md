@@ -13,7 +13,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | Portable global value keys | 35 |
 | JavaScript-only global value keys | 35 |
 | Module value keys | 0 |
-| Type uses | 9091 |
+| Type uses | 9085 |
 | Value uses | 2124 |
 | Missing toolkit entries | 0 |
 
@@ -151,7 +151,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:GPUVertexBufferLayout` | `host` | `flight._internal.dom.GPUVertexBufferLayout` | `src/flight/_internal/dom/GPUVertexBufferLayout.hx` | `dynamic-stub` | 23 |
 | `host:Headers` | `host` | `flight._internal.dom.Headers` | `src/flight/_internal/dom/Headers.hx` | `dynamic-stub` | 8 |
 | `host:HTMLAudioElement` | `host` | `flight._internal.dom.HTMLAudioElement` | `src/flight/_internal/dom/HTMLAudioElement.hx` | `dynamic-stub` | 2 |
-| `host:HTMLCanvasElement` | `host` | `flight._internal.dom.HTMLCanvasElement` | `src/flight/_internal/dom/HTMLCanvasElement.hx` | `dynamic-stub` | 301 |
+| `host:HTMLCanvasElement` | `host` | `flight._internal.dom.HTMLCanvasElement` | `src/flight/_internal/dom/HTMLCanvasElement.hx` | `dynamic-stub` | 300 |
 | `host:HTMLDivElement` | `host` | `flight._internal.dom.HTMLDivElement` | `src/flight/_internal/dom/HTMLDivElement.hx` | `dynamic-stub` | 38 |
 | `host:HTMLElement` | `host` | `flight._internal.dom.HTMLElement` | `src/flight/_internal/dom/HTMLElement.hx` | `dynamic-stub` | 279 |
 | `host:HTMLHeadElement` | `host` | `flight._internal.dom.HTMLHeadElement` | `src/flight/_internal/dom/HTMLHeadElement.hx` | `dynamic-stub` | 7 |
@@ -245,13 +245,13 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:WebGLActiveInfo` | `host` | `flight._internal.dom.WebGLActiveInfo` | `src/flight/_internal/dom/WebGLActiveInfo.hx` | `dynamic-stub` | 8 |
 | `host:WebGLBuffer` | `host` | `flight._internal.dom.WebGLBuffer` | `src/flight/_internal/dom/WebGLBuffer.hx` | `dynamic-stub` | 67 |
 | `host:WebGLContextAttributes` | `host` | `flight._internal.dom.WebGLContextAttributes` | `src/flight/_internal/dom/WebGLContextAttributes.hx` | `dynamic-stub` | 1 |
-| `host:WebGLFramebuffer` | `host` | `flight._internal.dom.WebGLFramebuffer` | `src/flight/_internal/dom/WebGLFramebuffer.hx` | `dynamic-stub` | 45 |
+| `host:WebGLFramebuffer` | `host` | `flight._internal.dom.WebGLFramebuffer` | `src/flight/_internal/dom/WebGLFramebuffer.hx` | `dynamic-stub` | 44 |
 | `host:WebGLPowerPreference` | `host` | `flight._internal.dom.WebGLPowerPreference` | `src/flight/_internal/dom/WebGLPowerPreference.hx` | `dynamic-stub` | 1 |
 | `host:WebGLProgram` | `host` | `flight._internal.dom.WebGLProgram` | `src/flight/_internal/dom/WebGLProgram.hx` | `dynamic-stub` | 252 |
-| `host:WebGLRenderbuffer` | `host` | `flight._internal.dom.WebGLRenderbuffer` | `src/flight/_internal/dom/WebGLRenderbuffer.hx` | `dynamic-stub` | 11 |
+| `host:WebGLRenderbuffer` | `host` | `flight._internal.dom.WebGLRenderbuffer` | `src/flight/_internal/dom/WebGLRenderbuffer.hx` | `dynamic-stub` | 9 |
 | `host:WebGLRenderingContext` | `host` | `flight._internal.dom.WebGLRenderingContext` | `src/flight/_internal/dom/WebGLRenderingContext.hx` | `dynamic-stub` | 8 |
 | `host:WebGLShader` | `host` | `flight._internal.dom.WebGLShader` | `src/flight/_internal/dom/WebGLShader.hx` | `dynamic-stub` | 4 |
-| `host:WebGLTexture` | `host` | `flight._internal.dom.WebGLTexture` | `src/flight/_internal/dom/WebGLTexture.hx` | `dynamic-stub` | 427 |
+| `host:WebGLTexture` | `host` | `flight._internal.dom.WebGLTexture` | `src/flight/_internal/dom/WebGLTexture.hx` | `dynamic-stub` | 425 |
 | `host:WebGLUniformLocation` | `host` | `flight._internal.dom.WebGLUniformLocation` | `src/flight/_internal/dom/WebGLUniformLocation.hx` | `dynamic-stub` | 378 |
 | `host:WebGLVertexArrayObject` | `host` | `flight._internal.dom.WebGLVertexArrayObject` | `src/flight/_internal/dom/WebGLVertexArrayObject.hx` | `dynamic-stub` | 34 |
 | `host:WebSocket` | `host` | `flight._internal.dom.WebSocket` | `src/flight/_internal/dom/WebSocket.hx` | `dynamic-stub` | 9 |

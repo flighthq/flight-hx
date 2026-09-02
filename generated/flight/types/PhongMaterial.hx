@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef PhongMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Dynamic; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var blendMode:BlendMode; var doubleSided:Bool; var diffuse:Float; var diffuseMap:Null<Texture>; var normalMap:Null<Texture>; var normalScale:Float; var shininess:Float; var specular:Float; var specularMap:Null<Texture>; };
+typedef PhongMaterial = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Dynamic; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var blendMode:BlendMode; var doubleSided:Bool; var diffuse:Float; var diffuseMap:Null<Texture>; var normalMap:Null<Texture>; var normalScale:Float; var shininess:Float; var specular:Float; var specularMap:Null<Texture>; };

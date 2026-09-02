@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SoftKeyboardInfoBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var getInfo:SoftKeyboardInfo->SoftKeyboardInfo; };
+typedef SoftKeyboardInfoBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getInfo:SoftKeyboardInfo->SoftKeyboardInfo; };

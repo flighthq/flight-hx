@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ScreenMode = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var width:Float; var height:Float; var refreshRate:Float; var colorDepth:Float; var pixelFormat:String; };
+typedef ScreenMode = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var width:Float; var height:Float; var refreshRate:Float; var colorDepth:Float; var pixelFormat:String; };

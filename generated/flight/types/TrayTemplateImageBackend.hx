@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TrayTemplateImageBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var set:TrayIcon->Bool->flight._internal._Promise<TrayTemplateImageUpdateResult>; };
+typedef TrayTemplateImageBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var set:TrayIcon->Bool->flight._internal._Promise<TrayTemplateImageUpdateResult>; };

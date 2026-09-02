@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Frustum = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var bottom:Plane; var far:Plane; var left:Plane; var near:Plane; var right:Plane; var top:Plane; };
+typedef Frustum = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var bottom:Plane; var far:Plane; var left:Plane; var near:Plane; var right:Plane; var top:Plane; };

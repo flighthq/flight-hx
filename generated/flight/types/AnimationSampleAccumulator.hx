@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AnimationSampleAccumulator = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var components:Float; var quaternion:Bool; var values:flight._internal._Float32Array; var weight:Float; };
+typedef AnimationSampleAccumulator = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var components:Float; var quaternion:Bool; var values:flight._internal._Float32Array; var weight:Float; };

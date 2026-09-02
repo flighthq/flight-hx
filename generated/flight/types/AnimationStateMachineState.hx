@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AnimationStateMachineState = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var blendTree:AnimationBlendTree; var name:String; };
+typedef AnimationStateMachineState = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var blendTree:AnimationBlendTree; var name:String; };

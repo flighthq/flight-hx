@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Connectivity = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var onChange:Signal<ConnectivityStatus->Void>; var onConnectionTypeChange:Signal<ConnectivityConnectionType->Void>; var onMeteredChange:Signal<Bool->Void>; var onOnline:Signal<Void->Void>; var onOffline:Signal<Void->Void>; };
+typedef Connectivity = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onChange:Signal<ConnectivityStatus->Void>; var onConnectionTypeChange:Signal<ConnectivityConnectionType->Void>; var onMeteredChange:Signal<Bool->Void>; var onOnline:Signal<Void->Void>; var onOffline:Signal<Void->Void>; };

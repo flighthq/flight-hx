@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef RenderCache = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:RenderCacheKind; var transform:Matrix; };
+typedef RenderCache = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:RenderCacheKind; var transform:Matrix; };

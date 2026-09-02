@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef RadioGroupController = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var __RadioGroupControllerTypeKey:flight._internal._Nothing; };
+typedef RadioGroupController = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var __RadioGroupControllerTypeKey:flight._internal._Nothing; };

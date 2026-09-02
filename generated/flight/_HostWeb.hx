@@ -342,11 +342,261 @@ import flight.types.WindowResizeTargetHandle;
 
 typedef WebAppCapabilities__webApp = flight._internal._Intersection2<Entity, flight._internal._Required<{ @:optional var badge:Null<AppBadgeBackend>; @:optional var focus:Null<AppFocusBackend>; @:optional var locale:Null<AppLocaleBackend>; @:optional var name:Null<AppNameBackend>; @:optional var quit:Null<AppQuitBackend>; @:optional var ready:Null<AppReadyBackend>; @:optional var relaunch:Null<AppRelaunchBackend>; }>>;
 
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL8C10__webApp {
+  public var badge:{ >Entity, var setBadgeCount:Float->flight._internal._Promise<Bool>; };
+  public var focus:{ >Entity, var focus:Void->Void; };
+  public var locale:{ >Entity, var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<flight._internal._Any>; var getSystemLocale:Void->String; };
+  public var name:{ >Entity, var getName:Void->String; };
+  public var quit:{ >Entity, var quit:Void->Void; };
+  public var ready:{ >Entity, var subscribe:(Void->Void)->(Void->Void); };
+  public var relaunch:{ >Entity, var relaunch:Void->Void; };
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(badge:{ >Entity, var setBadgeCount:Float->flight._internal._Promise<Bool>; }, focus:{ >Entity, var focus:Void->Void; }, locale:{ >Entity, var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<flight._internal._Any>; var getSystemLocale:Void->String; }, name:{ >Entity, var getName:Void->String; }, quit:{ >Entity, var quit:Void->Void; }, ready:{ >Entity, var subscribe:(Void->Void)->(Void->Void); }, relaunch:{ >Entity, var relaunch:Void->Void; }):Void {
+    this.__symbol__EntityRuntime = null;
+    this.badge = badge;
+    this.focus = focus;
+    this.locale = locale;
+    this.name = name;
+    this.quit = quit;
+    this.ready = ready;
+    this.relaunch = relaunch;
+  }
+}
+#else
+private typedef EntityShapeL8C10__webApp = { var badge:{ >Entity, var setBadgeCount:Float->flight._internal._Promise<Bool>; }; var focus:{ >Entity, var focus:Void->Void; }; var locale:{ >Entity, var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<flight._internal._Any>; var getSystemLocale:Void->String; }; var name:{ >Entity, var getName:Void->String; }; var quit:{ >Entity, var quit:Void->Void; }; var ready:{ >Entity, var subscribe:(Void->Void)->(Void->Void); }; var relaunch:{ >Entity, var relaunch:Void->Void; }; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL9C12__webApp {
+  public var setBadgeCount:Float->flight._internal._Promise<Bool>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(setBadgeCount:Float->flight._internal._Promise<Bool>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.setBadgeCount = setBadgeCount;
+  }
+}
+#else
+private typedef EntityShapeL9C12__webApp = { var setBadgeCount:Float->flight._internal._Promise<Bool>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL21C12__webApp {
+  public var focus:Void->Void;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(focus:Void->Void):Void {
+    this.__symbol__EntityRuntime = null;
+    this.focus = focus;
+  }
+}
+#else
+private typedef EntityShapeL21C12__webApp = { var focus:Void->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL28C13__webApp {
+  public var getLocale:Void->String;
+  public var getPreferredSystemLanguages:Void->Array<flight._internal._Any>;
+  public var getSystemLocale:Void->String;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(getLocale:Void->String, getPreferredSystemLanguages:Void->Array<flight._internal._Any>, getSystemLocale:Void->String):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getLocale = getLocale;
+    this.getPreferredSystemLanguages = getPreferredSystemLanguages;
+    this.getSystemLocale = getSystemLocale;
+  }
+}
+#else
+private typedef EntityShapeL28C13__webApp = { var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<flight._internal._Any>; var getSystemLocale:Void->String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL43C11__webApp {
+  public var getName:Void->String;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(getName:Void->String):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getName = getName;
+  }
+}
+#else
+private typedef EntityShapeL43C11__webApp = { var getName:Void->String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL48C11__webApp {
+  public var quit:Void->Void;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(quit:Void->Void):Void {
+    this.__symbol__EntityRuntime = null;
+    this.quit = quit;
+  }
+}
+#else
+private typedef EntityShapeL48C11__webApp = { var quit:Void->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL55C12__webApp {
+  public var subscribe:(Void->Void)->(Void->Void);
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(subscribe:(Void->Void)->(Void->Void)):Void {
+    this.__symbol__EntityRuntime = null;
+    this.subscribe = subscribe;
+  }
+}
+#else
+private typedef EntityShapeL55C12__webApp = { var subscribe:(Void->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL70C15__webApp {
+  public var relaunch:Void->Void;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(relaunch:Void->Void):Void {
+    this.__symbol__EntityRuntime = null;
+    this.relaunch = relaunch;
+  }
+}
+#else
+private typedef EntityShapeL70C15__webApp = { var relaunch:Void->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL7C10__webBitmapReadback {
+  public var readBitmap:flight._internal._Any->Float->Float->BitmapReadbackMode->flight._internal._Union2<{ var bitmap:flight._internal._Any; var reason:String; }, { var bitmap:Bitmap; var reason:String; }>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(readBitmap:flight._internal._Any->Float->Float->BitmapReadbackMode->flight._internal._Union2<{ var bitmap:flight._internal._Any; var reason:String; }, { var bitmap:Bitmap; var reason:String; }>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.readBitmap = readBitmap;
+  }
+}
+#else
+private typedef EntityShapeL7C10__webBitmapReadback = { var readBitmap:flight._internal._Any->Float->Float->BitmapReadbackMode->flight._internal._Union2<{ var bitmap:flight._internal._Any; var reason:String; }, { var bitmap:Bitmap; var reason:String; }>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
 typedef WebClipboardBackend__webClipboard = flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<ClipboardFormatsBackend, ClipboardImageBackend>, ClipboardTextBackend>, flight._internal._Required<{ @:optional var subscribe:Null<(Void->Void)->Void>; @:optional var unsubscribe:Null<(Void->Void)->Void>; }>>;
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL113C10__webClipboard {
+  public var readFormat:String->flight._internal._Promise<String>;
+  public var writeFormat:String->String->flight._internal._Promise<Bool>;
+  public var hasFormat:String->flight._internal._Promise<Bool>;
+  public var getFormats:Void->flight._internal._Promise<Array<String>>;
+  public var writeItems:Array<ClipboardWriteItem>->flight._internal._Promise<Bool>;
+  public var readItems:Array<String>->flight._internal._Promise<flight._internal._Record<String, String>>;
+  public var readText:Void->flight._internal._Promise<String>;
+  public var writeText:String->flight._internal._Promise<Bool>;
+  public var readHtml:Void->flight._internal._Promise<String>;
+  public var writeHtml:String->flight._internal._Promise<Bool>;
+  public var hasText:Void->flight._internal._Promise<Bool>;
+  public var readImage:Void->flight._internal._Promise<String>;
+  public var writeImage:String->flight._internal._Promise<Bool>;
+  public var hasImage:Void->flight._internal._Promise<Bool>;
+  public var readRTF:Void->flight._internal._Promise<String>;
+  public var writeRTF:String->flight._internal._Promise<Bool>;
+  public var clear:Void->flight._internal._Promise<Bool>;
+  public var subscribe:(Void->Void)->Void;
+  public var unsubscribe:(Void->Void)->Void;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(readFormat:String->flight._internal._Promise<String>, writeFormat:String->String->flight._internal._Promise<Bool>, hasFormat:String->flight._internal._Promise<Bool>, getFormats:Void->flight._internal._Promise<Array<String>>, writeItems:Array<ClipboardWriteItem>->flight._internal._Promise<Bool>, readItems:Array<String>->flight._internal._Promise<flight._internal._Record<String, String>>, readText:Void->flight._internal._Promise<String>, writeText:String->flight._internal._Promise<Bool>, readHtml:Void->flight._internal._Promise<String>, writeHtml:String->flight._internal._Promise<Bool>, hasText:Void->flight._internal._Promise<Bool>, readImage:Void->flight._internal._Promise<String>, writeImage:String->flight._internal._Promise<Bool>, hasImage:Void->flight._internal._Promise<Bool>, readRTF:Void->flight._internal._Promise<String>, writeRTF:String->flight._internal._Promise<Bool>, clear:Void->flight._internal._Promise<Bool>, subscribe:(Void->Void)->Void, unsubscribe:(Void->Void)->Void):Void {
+    this.__symbol__EntityRuntime = null;
+    this.readFormat = readFormat;
+    this.writeFormat = writeFormat;
+    this.hasFormat = hasFormat;
+    this.getFormats = getFormats;
+    this.writeItems = writeItems;
+    this.readItems = readItems;
+    this.readText = readText;
+    this.writeText = writeText;
+    this.readHtml = readHtml;
+    this.writeHtml = writeHtml;
+    this.hasText = hasText;
+    this.readImage = readImage;
+    this.writeImage = writeImage;
+    this.hasImage = hasImage;
+    this.readRTF = readRTF;
+    this.writeRTF = writeRTF;
+    this.clear = clear;
+    this.subscribe = subscribe;
+    this.unsubscribe = unsubscribe;
+  }
+}
+#else
+private typedef EntityShapeL113C10__webClipboard = { var readFormat:String->flight._internal._Promise<String>; var writeFormat:String->String->flight._internal._Promise<Bool>; var hasFormat:String->flight._internal._Promise<Bool>; var getFormats:Void->flight._internal._Promise<Array<String>>; var writeItems:Array<ClipboardWriteItem>->flight._internal._Promise<Bool>; var readItems:Array<String>->flight._internal._Promise<flight._internal._Record<String, String>>; var readText:Void->flight._internal._Promise<String>; var writeText:String->flight._internal._Promise<Bool>; var readHtml:Void->flight._internal._Promise<String>; var writeHtml:String->flight._internal._Promise<Bool>; var hasText:Void->flight._internal._Promise<Bool>; var readImage:Void->flight._internal._Promise<String>; var writeImage:String->flight._internal._Promise<Bool>; var hasImage:Void->flight._internal._Promise<Bool>; var readRTF:Void->flight._internal._Promise<String>; var writeRTF:String->flight._internal._Promise<Bool>; var clear:Void->flight._internal._Promise<Bool>; var subscribe:(Void->Void)->Void; var unsubscribe:(Void->Void)->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
 
 typedef WebConnectivityBackend__webConnectivity = { >ConnectivityStatusBackend, >ConnectivityChangeBackend, >ConnectivityReachabilityBackend, };
 
 typedef WebConnectivityConnection__webConnectivity = { @:optional var type:String; @:optional var downlink:Float; @:optional var downlinkMax:Float; @:optional var effectiveType:String; @:optional var rtt:Float; @:optional var saveData:Bool; @:optional var addEventListener:String->(Void->Void)->Void; @:optional var removeEventListener:String->(Void->Void)->Void; };
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL17C10__webConnectivity {
+  public var destroy:Void->Void;
+  public var detectReachability:ConnectivityReachabilityOptions->ConnectivityReachability->flight._internal._Promise<ConnectivityReachability>;
+  public var getStatus:ConnectivityStatus->ConnectivityStatus;
+  public var subscribe:(Void->Void)->Null<Void->Void>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(destroy:Void->Void, detectReachability:ConnectivityReachabilityOptions->ConnectivityReachability->flight._internal._Promise<ConnectivityReachability>, getStatus:ConnectivityStatus->ConnectivityStatus, subscribe:(Void->Void)->Null<Void->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.destroy = destroy;
+    this.detectReachability = detectReachability;
+    this.getStatus = getStatus;
+    this.subscribe = subscribe;
+  }
+}
+#else
+private typedef EntityShapeL17C10__webConnectivity = { var destroy:Void->Void; var detectReachability:ConnectivityReachabilityOptions->ConnectivityReachability->flight._internal._Promise<ConnectivityReachability>; var getStatus:ConnectivityStatus->ConnectivityStatus; var subscribe:(Void->Void)->Null<Void->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL5C10__webCursor {
+  public var setCursor:Null<flight._internal._Union2<String, flight._internal._Intersection2<String, flight._internal._Record<flight._internal._Any, flight._internal._Any>>>>->Void;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(setCursor:Null<flight._internal._Union2<String, flight._internal._Intersection2<String, flight._internal._Record<flight._internal._Any, flight._internal._Any>>>>->Void):Void {
+    this.__symbol__EntityRuntime = null;
+    this.setCursor = setCursor;
+  }
+}
+#else
+private typedef EntityShapeL5C10__webCursor = { var setCursor:Null<flight._internal._Union2<String, flight._internal._Intersection2<String, flight._internal._Record<flight._internal._Any, flight._internal._Any>>>>->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
 
 typedef FileSystemFileHandle__webDialog = { var kind:String; var name:String; var createWritable:Void->flight._internal._Promise<FileSystemWritableFileStream__webDialog>; var getFile:Void->flight._internal._Promise<flight._internal.dom.File>; };
 
@@ -364,11 +614,149 @@ typedef FileSystemAccessSavePickerOptions__webDialog = { @:optional var suggeste
 
 typedef WindowWithFileSystemAccess__webDialog = { @:optional var showDirectoryPicker:FileSystemAccessDirectoryPickerOptions__webDialog->flight._internal._Promise<FileSystemDirectoryHandle__webDialog>; @:optional var showOpenFilePicker:FileSystemAccessOpenPickerOptions__webDialog->flight._internal._Promise<Array<FileSystemFileHandle__webDialog>>; @:optional var showSaveFilePicker:FileSystemAccessSavePickerOptions__webDialog->flight._internal._Promise<FileSystemFileHandle__webDialog>; };
 
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL20C46__webDialog {
+  public var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.open = open;
+  }
+}
+#else
+private typedef EntityShapeL20C46__webDialog = { var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL24C41__webDialog {
+  public var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.open = open;
+  }
+}
+#else
+private typedef EntityShapeL24C41__webDialog = { var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL28C41__webDialog {
+  public var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.save = save;
+  }
+}
+#else
+private typedef EntityShapeL28C41__webDialog = { var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL6C10__webFontLoading {
+  public var addFontFace:flight._internal.dom.FontFace->Void;
+  public var checkFontFace:String->Bool;
+  public var loadFontFaces:String->flight._internal._Promise<Array<flight._internal.dom.FontFace>>;
+  public var whenReady:Void->flight._internal._Promise<flight._internal._Nothing>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(addFontFace:flight._internal.dom.FontFace->Void, checkFontFace:String->Bool, loadFontFaces:String->flight._internal._Promise<Array<flight._internal.dom.FontFace>>, whenReady:Void->flight._internal._Promise<flight._internal._Nothing>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.addFontFace = addFontFace;
+    this.checkFontFace = checkFontFace;
+    this.loadFontFaces = loadFontFaces;
+    this.whenReady = whenReady;
+  }
+}
+#else
+private typedef EntityShapeL6C10__webFontLoading = { var addFontFace:flight._internal.dom.FontFace->Void; var checkFontFace:String->Bool; var loadFontFaces:String->flight._internal._Promise<Array<flight._internal.dom.FontFace>>; var whenReady:Void->flight._internal._Promise<flight._internal._Nothing>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL12C10__webGlyphRasterizer {
+  public var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>;
+  public var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>, rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.measureMetrics = measureMetrics;
+    this.rasterize = rasterize;
+  }
+}
+#else
+private typedef EntityShapeL12C10__webGlyphRasterizer = { var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
 typedef OmitRuntime__webKeyboard<T> = flight._internal._Omit<T, Dynamic>;
 
 typedef VirtualKeyboard__webKeyboard = { >flight._internal.dom.EventTarget, var boundingRect:flight._internal.dom.DOMRect; var overlaysContent:Bool; var show:Void->Void; var hide:Void->Void; };
 
 typedef WebKeyboardGeometry__webKeyboard = { var height:Float; var width:Float; var x:Float; var y:Float; };
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL16C10__webKeyboard {
+  public var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.subscribe = subscribe;
+  }
+}
+#else
+private typedef EntityShapeL16C10__webKeyboard = { var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL39C10__webKeyboard {
+  public var getInfo:SoftKeyboardInfo->SoftKeyboardInfo;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(getInfo:SoftKeyboardInfo->SoftKeyboardInfo):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getInfo = getInfo;
+  }
+}
+#else
+private typedef EntityShapeL39C10__webKeyboard = { var getInfo:SoftKeyboardInfo->SoftKeyboardInfo; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL53C10__webKeyboard {
+  public var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>;
+  public var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>, hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.show = show;
+    this.hide = hide;
+  }
+}
+#else
+private typedef EntityShapeL53C10__webKeyboard = { var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
 
 typedef IsAny__webMediasession<T> = flight._internal._Conditional<Float, T, Bool, Bool>;
 
@@ -384,13 +772,169 @@ typedef WebMediaSessionActionSubscription__webMediasession = { var detached:Bool
 
 typedef WebMidiProfileApi__webMidi = { @:optional var permissions:flight._internal.dom.Permissions; var requestMIDIAccess:Void->flight._internal._Promise<flight._internal.dom.MIDIAccess>; };
 
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL111C18__webMidi {
+  public var requestAccess:Void->flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(requestAccess:Void->flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.requestAccess = requestAccess;
+  }
+}
+#else
+private typedef EntityShapeL111C18__webMidi = { var requestAccess:Void->flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL121C34__webMidi {
+  public var access:{ >Entity, var requestAccess:Void->flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>>; };
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(access:{ >Entity, var requestAccess:Void->flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>>; }):Void {
+    this.__symbol__EntityRuntime = null;
+    this.access = access;
+  }
+}
+#else
+private typedef EntityShapeL121C34__webMidi = { var access:{ >Entity, var requestAccess:Void->flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>>; }; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL122C22__webMidi {
+  public var getPermission:Void->flight._internal._Promise<PermissionQueryOutcome>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(getPermission:Void->flight._internal._Promise<PermissionQueryOutcome>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getPermission = getPermission;
+  }
+}
+#else
+private typedef EntityShapeL122C22__webMidi = { var getPermission:Void->flight._internal._Promise<PermissionQueryOutcome>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL125C10__webMidi {
+  public var access:{ >Entity, var requestAccess:Void->flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>>; };
+  public var permission:{ >Entity, var getPermission:Void->flight._internal._Promise<PermissionQueryOutcome>; };
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(access:{ >Entity, var requestAccess:Void->flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>>; }, permission:{ >Entity, var getPermission:Void->flight._internal._Promise<PermissionQueryOutcome>; }):Void {
+    this.__symbol__EntityRuntime = null;
+    this.access = access;
+    this.permission = permission;
+  }
+}
+#else
+private typedef EntityShapeL125C10__webMidi = { var access:{ >Entity, var requestAccess:Void->flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>>; }; var permission:{ >Entity, var getPermission:Void->flight._internal._Promise<PermissionQueryOutcome>; }; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL140C28__webMidi {
+  public var release:Void->flight._internal._Promise<{ var reason:String; }>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(release:Void->flight._internal._Promise<{ var reason:String; }>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.release = release;
+  }
+}
+#else
+private typedef EntityShapeL140C28__webMidi = { var release:Void->flight._internal._Promise<{ var reason:String; }>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
 typedef WebBatteryManager__webPower = { var chargingTime:Float; var dischargingTime:Float; var level:Float; var charging:Bool; @:optional var addEventListener:String->(Void->Void)->Void; @:optional var removeEventListener:String->(Void->Void)->Void; };
 
 typedef WebWakeLock__webPower = { var request:String->flight._internal._Promise<WebWakeLockSentinel__webPower>; };
 
 typedef WebWakeLockSentinel__webPower = { @:optional var addEventListener:String->(Void->Void)->Void; @:optional var removeEventListener:String->(Void->Void)->Void; @:optional var release:Void->flight._internal._Promise<flight._internal._Nothing>; };
 
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL181C37__webPower {
+  public var keepAwake:PowerKeepAwakeBackend;
+  public var suspension:PowerSuspensionBackend;
+  public var change:PowerChangeBackend;
+  public var status:PowerStatusBackend;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(keepAwake:PowerKeepAwakeBackend, suspension:PowerSuspensionBackend, change:PowerChangeBackend, status:PowerStatusBackend):Void {
+    this.__symbol__EntityRuntime = null;
+    this.keepAwake = keepAwake;
+    this.suspension = suspension;
+    this.change = change;
+    this.status = status;
+  }
+}
+#else
+private typedef EntityShapeL181C37__webPower = { var keepAwake:PowerKeepAwakeBackend; var suspension:PowerSuspensionBackend; var change:PowerChangeBackend; var status:PowerStatusBackend; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
 typedef WebProtocolCapabilities__webProtocol = flight._internal._Intersection2<Entity, flight._internal._Required<{ @:optional var launch:Null<ProtocolLaunchBackend>; @:optional var registration:Null<ProtocolRegistrationBackend>; }>>;
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL8C10__webProtocol {
+  public var launch:{ >Entity, var getLaunchUrl:Void->Null<String>; };
+  public var registration:{ >Entity, var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; };
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(launch:{ >Entity, var getLaunchUrl:Void->Null<String>; }, registration:{ >Entity, var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; }):Void {
+    this.__symbol__EntityRuntime = null;
+    this.launch = launch;
+    this.registration = registration;
+  }
+}
+#else
+private typedef EntityShapeL8C10__webProtocol = { var launch:{ >Entity, var getLaunchUrl:Void->Null<String>; }; var registration:{ >Entity, var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; }; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL9C13__webProtocol {
+  public var getLaunchUrl:Void->Null<String>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(getLaunchUrl:Void->Null<String>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getLaunchUrl = getLaunchUrl;
+  }
+}
+#else
+private typedef EntityShapeL9C13__webProtocol = { var getLaunchUrl:Void->Null<String>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL20C19__webProtocol {
+  public var getRegisteredSchemes:Void->Array<String>;
+  public var register:String->Bool;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(getRegisteredSchemes:Void->Array<String>, register:String->Bool):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getRegisteredSchemes = getRegisteredSchemes;
+    this.register = register;
+  }
+}
+#else
+private typedef EntityShapeL20C19__webProtocol = { var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
 
 typedef DetailedScreen__webScreen = { var availHeight:Float; var availLeft:Float; var availTop:Float; var availWidth:Float; var colorDepth:Float; var devicePixelRatio:Float; var height:Float; @:optional var isInternal:Bool; @:optional var isPrimary:Bool; var label:String; var left:Float; var pixelDepth:Float; @:optional var refreshRate:Float; var top:Float; var width:Float; };
 
@@ -400,9 +944,141 @@ typedef DisplaySubscription__webScreen = { var details:Null<ScreenDetails__webSc
 
 typedef OrientationLike__webScreen = { @:optional var angle:Float; @:optional var type:String; @:optional var addEventListener:String->(Void->Void)->Void; @:optional var removeEventListener:String->(Void->Void)->Void; };
 
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL178C17__webScreen {
+  public var destroy:Void->Void;
+  public var getCursorPosition:{ var x:Float; var y:Float; }->{ var x:Float; var y:Float; };
+  public var getPrimaryScreen:ScreenInfo->ScreenInfo;
+  public var getScreens:Array<ScreenInfo>->Array<ScreenInfo>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(destroy:Void->Void, getCursorPosition:{ var x:Float; var y:Float; }->{ var x:Float; var y:Float; }, getPrimaryScreen:ScreenInfo->ScreenInfo, getScreens:Array<ScreenInfo>->Array<ScreenInfo>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.destroy = destroy;
+    this.getCursorPosition = getCursorPosition;
+    this.getPrimaryScreen = getPrimaryScreen;
+    this.getScreens = getScreens;
+  }
+}
+#else
+private typedef EntityShapeL178C17__webScreen = { var destroy:Void->Void; var getCursorPosition:{ var x:Float; var y:Float; }->{ var x:Float; var y:Float; }; var getPrimaryScreen:ScreenInfo->ScreenInfo; var getScreens:Array<ScreenInfo>->Array<ScreenInfo>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL221C18__webScreen {
+  public var subscribe:(ScreenChangeEvent->Void)->(Void->Void);
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(subscribe:(ScreenChangeEvent->Void)->(Void->Void)):Void {
+    this.__symbol__EntityRuntime = null;
+    this.subscribe = subscribe;
+  }
+}
+#else
+private typedef EntityShapeL221C18__webScreen = { var subscribe:(ScreenChangeEvent->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL242C26__webScreen {
+  public var queryPermission:Void->flight._internal._Promise<ScreenPermissionState>;
+  public var request:Void->flight._internal._Promise<Bool>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(queryPermission:Void->flight._internal._Promise<ScreenPermissionState>, request:Void->flight._internal._Promise<Bool>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.queryPermission = queryPermission;
+    this.request = request;
+  }
+}
+#else
+private typedef EntityShapeL242C26__webScreen = { var queryPermission:Void->flight._internal._Promise<ScreenPermissionState>; var request:Void->flight._internal._Promise<Bool>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL272C28__webScreen {
+  public var subscribe:(ScreenPermissionState->Void)->(Void->Void);
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(subscribe:(ScreenPermissionState->Void)->(Void->Void)):Void {
+    this.__symbol__EntityRuntime = null;
+    this.subscribe = subscribe;
+  }
+}
+#else
+private typedef EntityShapeL272C28__webScreen = { var subscribe:(ScreenPermissionState->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
 typedef WebServiceWorkerNotificationDispatch__webServiceWorkerNotification = { var action:Notification->String->Void; var click:Notification->Void; var dismiss:Notification->Void; };
 
 typedef WebStorageBackend__webStorage = { >StorageBackend, >StorageChangeBackend, };
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL20C34__webStorage {
+  public var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>;
+  public var destroy:Void->Void;
+  public var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>;
+  public var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>;
+  public var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>;
+  public var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>;
+  public var subscribe:(StorageChange->Void)->Null<Void->Void>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>, destroy:Void->Void, getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>, keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>, removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>, setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>, subscribe:(StorageChange->Void)->Null<Void->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.clear = clear;
+    this.destroy = destroy;
+    this.getItem = getItem;
+    this.keys = keys;
+    this.removeItem = removeItem;
+    this.setItem = setItem;
+    this.subscribe = subscribe;
+  }
+}
+#else
+private typedef EntityShapeL20C34__webStorage = { var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>; var destroy:Void->Void; var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>; var subscribe:(StorageChange->Void)->Null<Void->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL14C30__webStoragePersistence {
+  public var requestPersistence:Void->flight._internal._Promise<StoragePersistenceResult>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(requestPersistence:Void->flight._internal._Promise<StoragePersistenceResult>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.requestPersistence = requestPersistence;
+  }
+}
+#else
+private typedef EntityShapeL14C30__webStoragePersistence = { var requestPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+private class EntityShapeL36C19__webStoragePersistence {
+  public var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getPersistence = getPersistence;
+  }
+}
+#else
+private typedef EntityShapeL36C19__webStoragePersistence = { var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
 
 typedef WebWindowBackend__webWindow = flight._internal._Intersection2<WindowBackend, flight._internal._Required<{ @:optional var attach:Null<ApplicationWindow->flight._internal._Any->WindowAttachmentOwnership->Bool>; @:optional var open:Null<ApplicationWindow->WindowOptions->Bool>; @:optional var close:Null<ApplicationWindow->Void>; @:optional var subscribeClose:Null<(Void->Bool)->(Void->Void)->(Void->Void)>; @:optional var subscribeMove:Null<(Float->Float->Void)->(Void->Void)>; @:optional var subscribeOrientation:Null<(Void->Void)->(Void->Void)>; @:optional var subscribeResize:Null<WindowResizeTargetHandle->(Float->Float->Float->Void)->(Void->Void)>; @:optional var subscribeVisibility:Null<(Bool->Void)->(Void->Void)>; }>>;
 
@@ -467,7 +1143,7 @@ class _HostWeb {
     root = _Runtime.coalesce(container, function():Dynamic return cast null);
     rootResolved = !_Runtime.strictEquals(container, _Runtime.field(_Runtime, 'UNDEFINED'));
     ownsRoot = _Runtime.strictEquals(container, _Runtime.field(_Runtime, 'UNDEFINED'));
-    return cast (cast createEntity((cast ({ announce: function(message:String, liveness:AccessibilityLiveness):{ var reason:String; } {
+    return cast (cast createEntity((cast ({ announce: function(message:String, liveness:AccessibilityLiveness):AccessibilityOperationOutcome<String> {
       var unavailable:Null<String> = cast _Runtime.UNDEFINED;
       var overlayRoot:flight._internal.dom.HTMLElement = cast _Runtime.UNDEFINED;
       var region:flight._internal.dom.HTMLElement = cast _Runtime.UNDEFINED;
@@ -478,7 +1154,7 @@ class _HostWeb {
       ((cast region : flight._internal.dom.HTMLElement).textContent = message);
       return cast _HostWeb._OK__webAccessibility;
       return cast _Runtime.UNDEFINED;
-    }, clear: function():{ var reason:String; } {
+    }, clear: function():AccessibilityOperationOutcome<String> {
       var unavailable:Null<String> = cast _Runtime.UNDEFINED;
       unavailable = (cast unavailableRootReason() : Null<String>);
       if ((cast !_Runtime.strictEquals(unavailable, null) : Bool)) { return cast { reason: unavailable }; }
@@ -492,7 +1168,7 @@ class _HostWeb {
       if ((cast ownsRoot : Bool)) { ({ final __hostTypeCall12 = root; __hostTypeCall12 == null ? _Runtime.UNDEFINED : __hostTypeCall12.remove(); }); }
       (root = cast (null : Dynamic));
       (rootResolved = cast (true : Dynamic));
-    }, removeNode: function(id:String):{ var reason:String; } {
+    }, removeNode: function(id:String):AccessibilityOperationOutcome<String> {
       var unavailable:Null<String> = cast _Runtime.UNDEFINED;
       var element:Null<flight._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;
       unavailable = (cast unavailableRootReason() : Null<String>);
@@ -507,7 +1183,7 @@ class _HostWeb {
       (cast element : flight._internal.dom.HTMLElement).remove();
       return cast _HostWeb._OK__webAccessibility;
       return cast _Runtime.UNDEFINED;
-    }, setFocus: function(id:String):{ var reason:String; } {
+    }, setFocus: function(id:String):AccessibilityOperationOutcome<String> {
       var unavailable:Null<String> = cast _Runtime.UNDEFINED;
       var element:Null<flight._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;
       unavailable = (cast unavailableRootReason() : Null<String>);
@@ -517,7 +1193,7 @@ class _HostWeb {
       (cast element : flight._internal.dom.HTMLElement).focus();
       return cast ((cast _Runtime.strictEquals((cast (cast element : flight._internal.dom.HTMLElement).ownerDocument : flight._internal.dom.Document).activeElement, element) : Bool) ? (cast _HostWeb._OK__webAccessibility : Dynamic) : (cast _HostWeb._FOCUS_NOT_MOVED__webAccessibility : Dynamic));
       return cast _Runtime.UNDEFINED;
-    }, setNode: function(node:AccessibilityNode):{ var reason:String; } {
+    }, setNode: function(node:AccessibilityNode):AccessibilityOperationOutcome<String> {
       var unavailable:Null<String> = cast _Runtime.UNDEFINED;
       var overlayRoot:flight._internal.dom.HTMLElement = cast _Runtime.UNDEFINED;
       var element:Null<flight._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;
@@ -663,7 +1339,7 @@ class _HostWeb {
   public static final webAccessibilityHost:flight._internal._Intersection2<Host, HasAccessibilityProvider> = (cast createHost((cast { accessibility: { provider: webAccessibilityBackend } } : Dynamic)) : flight._internal._Intersection2<Host, { var accessibility:{ var provider:AccessibilityBackend; }; }>);
 
   public static function createWebAppCapabilities():WebAppCapabilities__webApp {
-    return cast (cast (cast createEntity : Null<{ var badge:{ >Entity, var setBadgeCount:Float->flight._internal._Promise<Bool>; }; var focus:{ >Entity, var focus:Void->Void; }; var locale:{ >Entity, var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<flight._internal._Any>; var getSystemLocale:Void->String; }; var name:{ >Entity, var getName:Void->String; }; var quit:{ >Entity, var quit:Void->Void; }; var ready:{ >Entity, var subscribe:(Void->Void)->(Void->Void); }; var relaunch:{ >Entity, var relaunch:Void->Void; }; }>->{ >Entity, var badge:{ >Entity, var setBadgeCount:Float->flight._internal._Promise<Bool>; }; var focus:{ >Entity, var focus:Void->Void; }; var locale:{ >Entity, var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<flight._internal._Any>; var getSystemLocale:Void->String; }; var name:{ >Entity, var getName:Void->String; }; var quit:{ >Entity, var quit:Void->Void; }; var ready:{ >Entity, var subscribe:(Void->Void)->(Void->Void); }; var relaunch:{ >Entity, var relaunch:Void->Void; }; })(({ final __callArgument104:Dynamic = { badge: (cast (cast createEntity : Null<{ var setBadgeCount:Float->flight._internal._Promise<Bool>; }>->{ >Entity, var setBadgeCount:Float->flight._internal._Promise<Bool>; })(({ final __callArgument87:Dynamic = { setBadgeCount: function(count:Float):flight._internal._Promise<Bool> {
+    return cast (cast (cast createEntity : Null<{ var badge:{ >Entity, var setBadgeCount:Float->flight._internal._Promise<Bool>; }; var focus:{ >Entity, var focus:Void->Void; }; var locale:{ >Entity, var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<flight._internal._Any>; var getSystemLocale:Void->String; }; var name:{ >Entity, var getName:Void->String; }; var quit:{ >Entity, var quit:Void->Void; }; var ready:{ >Entity, var subscribe:(Void->Void)->(Void->Void); }; var relaunch:{ >Entity, var relaunch:Void->Void; }; }>->{ >Entity, var badge:{ >Entity, var setBadgeCount:Float->flight._internal._Promise<Bool>; }; var focus:{ >Entity, var focus:Void->Void; }; var locale:{ >Entity, var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<flight._internal._Any>; var getSystemLocale:Void->String; }; var name:{ >Entity, var getName:Void->String; }; var quit:{ >Entity, var quit:Void->Void; }; var ready:{ >Entity, var subscribe:(Void->Void)->(Void->Void); }; var relaunch:{ >Entity, var relaunch:Void->Void; }; })(({ final __callArgument104:Dynamic = ({ badge: (cast (cast createEntity : Null<{ var setBadgeCount:Float->flight._internal._Promise<Bool>; }>->{ >Entity, var setBadgeCount:Float->flight._internal._Promise<Bool>; })(({ final __callArgument87:Dynamic = ({ setBadgeCount: function(count:Float):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var __flowBranch84:Dynamic;
@@ -701,12 +1377,12 @@ class _HostWeb {
           });
         })
       );
-    } }; __callArgument87; })) : { >Entity, var setBadgeCount:Float->flight._internal._Promise<Bool>; }), focus: (cast (cast createEntity : Null<{ var focus:Void->Void; }>->{ >Entity, var focus:Void->Void; })(({ final __callArgument92:Dynamic = { focus: function():Void {
+    } } : EntityShapeL9C12__webApp); __callArgument87; })) : EntityShapeL9C12__webApp), focus: (cast (cast createEntity : Null<{ var focus:Void->Void; }>->{ >Entity, var focus:Void->Void; })(({ final __callArgument92:Dynamic = ({ focus: function():Void {
       try {
         flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'focus', cast ([] : Array<Dynamic>));
       } catch (__error:Dynamic) {
       }
-    } }; __callArgument92; })) : { >Entity, var focus:Void->Void; }), locale: (cast (cast createEntity : Null<{ var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<flight._internal._Any>; var getSystemLocale:Void->String; }>->{ >Entity, var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<flight._internal._Any>; var getSystemLocale:Void->String; })(({ final __callArgument94:Dynamic = { getLocale: function():String {
+    } } : EntityShapeL21C12__webApp); __callArgument92; })) : EntityShapeL21C12__webApp), locale: (cast (cast createEntity : Null<{ var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<flight._internal._Any>; var getSystemLocale:Void->String; }>->{ >Entity, var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<flight._internal._Any>; var getSystemLocale:Void->String; })(({ final __callArgument94:Dynamic = ({ getLocale: function():String {
       return cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) ? (cast '' : Dynamic) : (cast _Runtime.coalesce(flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'language'), function():Dynamic return cast '') : Dynamic));
       return cast _Runtime.UNDEFINED;
     }, getPreferredSystemLanguages: function():Array<flight._internal._Any> {
@@ -719,15 +1395,15 @@ class _HostWeb {
         return cast '';
       }
       return cast _Runtime.UNDEFINED;
-    } }; __callArgument94; })) : { >Entity, var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<flight._internal._Any>; var getSystemLocale:Void->String; }), name: (cast (cast createEntity : Null<{ var getName:Void->String; }>->{ >Entity, var getName:Void->String; })(({ final __callArgument96:Dynamic = { getName: function():String {
+    } } : EntityShapeL28C13__webApp); __callArgument94; })) : EntityShapeL28C13__webApp), name: (cast (cast createEntity : Null<{ var getName:Void->String; }>->{ >Entity, var getName:Void->String; })(({ final __callArgument96:Dynamic = ({ getName: function():String {
       return cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) ? (cast '' : Dynamic) : (cast flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'title') : Dynamic));
       return cast _Runtime.UNDEFINED;
-    } }; __callArgument96; })) : { >Entity, var getName:Void->String; }), quit: (cast (cast createEntity : Null<{ var quit:Void->Void; }>->{ >Entity, var quit:Void->Void; })(({ final __callArgument98:Dynamic = { quit: function():Void {
+    } } : EntityShapeL43C11__webApp); __callArgument96; })) : EntityShapeL43C11__webApp), quit: (cast (cast createEntity : Null<{ var quit:Void->Void; }>->{ >Entity, var quit:Void->Void; })(({ final __callArgument98:Dynamic = ({ quit: function():Void {
       try {
         flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'close', cast ([] : Array<Dynamic>));
       } catch (__error:Dynamic) {
       }
-    } }; __callArgument98; })) : { >Entity, var quit:Void->Void; }), ready: (cast (cast createEntity : Null<{ var subscribe:(Void->Void)->(Void->Void); }>->{ >Entity, var subscribe:(Void->Void)->(Void->Void); })(({ final __callArgument100:Dynamic = { subscribe: function(listener:Void->Void):Void->Void {
+    } } : EntityShapeL48C11__webApp); __callArgument98; })) : EntityShapeL48C11__webApp), ready: (cast (cast createEntity : Null<{ var subscribe:(Void->Void)->(Void->Void); }>->{ >Entity, var subscribe:(Void->Void)->(Void->Void); })(({ final __callArgument100:Dynamic = ({ subscribe: function(listener:Void->Void):Void->Void {
       var active:Bool = cast _Runtime.UNDEFINED;
       if ((cast ((cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) && (cast _Runtime.strictEquals((cast flight._internal.backend.DomDocumentBackend.value() : flight._internal.dom.Document).readyState, 'loading') : Bool)) : Bool)) {
         flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'addEventListener', cast (['DOMContentLoaded', listener, { once: true }] : Array<Dynamic>));
@@ -741,12 +1417,12 @@ class _HostWeb {
         (active = cast (false : Dynamic));
       };
       return cast _Runtime.UNDEFINED;
-    } }; __callArgument100; })) : { >Entity, var subscribe:(Void->Void)->(Void->Void); }), relaunch: (cast (cast createEntity : Null<{ var relaunch:Void->Void; }>->{ >Entity, var relaunch:Void->Void; })(({ final __callArgument102:Dynamic = { relaunch: function():Void {
+    } } : EntityShapeL55C12__webApp); __callArgument100; })) : EntityShapeL55C12__webApp), relaunch: (cast (cast createEntity : Null<{ var relaunch:Void->Void; }>->{ >Entity, var relaunch:Void->Void; })(({ final __callArgument102:Dynamic = ({ relaunch: function():Void {
       try {
         (cast flight._internal._HostValueLut.get('location') : flight._internal.dom.Location).reload();
       } catch (__error:Dynamic) {
       }
-    } }; __callArgument102; })) : { >Entity, var relaunch:Void->Void; }) }; __callArgument104; })) : { >Entity, var badge:{ >Entity, var setBadgeCount:Float->flight._internal._Promise<Bool>; }; var focus:{ >Entity, var focus:Void->Void; }; var locale:{ >Entity, var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<flight._internal._Any>; var getSystemLocale:Void->String; }; var name:{ >Entity, var getName:Void->String; }; var quit:{ >Entity, var quit:Void->Void; }; var ready:{ >Entity, var subscribe:(Void->Void)->(Void->Void); }; var relaunch:{ >Entity, var relaunch:Void->Void; }; });
+    } } : EntityShapeL70C15__webApp); __callArgument102; })) : EntityShapeL70C15__webApp) } : EntityShapeL8C10__webApp); __callArgument104; })) : EntityShapeL8C10__webApp);
     return cast null;
   }
 
@@ -861,7 +1537,7 @@ class _HostWeb {
   }
 
   public static function createWebBitmapReadbackBackend():{ >BitmapReadbackBackend, >Entity, } {
-    return cast (cast createEntity((cast { readBitmap: function(source:flight._internal._Any, width:Float, height:Float, mode:BitmapReadbackMode):BitmapReadbackOutcome {
+    return cast (cast createEntity((cast ({ readBitmap: function(source:flight._internal._Any, width:Float, height:Float, mode:BitmapReadbackMode):BitmapReadbackOutcome {
       var canvas:flight._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
       var probe:Bool = cast _Runtime.UNDEFINED;
       var context:Null<flight._internal.dom.CanvasRenderingContext2D> = cast _Runtime.UNDEFINED;
@@ -890,7 +1566,7 @@ class _HostWeb {
       bitmap = (cast (cast createEntity : Null<{ var alphaType:String; var gamut:String; var data:flight._internal._Any; var format:String; var height:Float; var kind:String; var version:Float; var width:Float; }>->{ >Entity, var alphaType:String; var gamut:String; var data:flight._internal._Any; var format:String; var height:Float; var kind:String; var version:Float; var width:Float; })(({ final __callArgument131:Dynamic = ({ final __structInitField0:Dynamic = 'straight'; final __structInitField1:Dynamic = (cast raw.colorSpace : String); final __structInitField2:Dynamic = raw.data; final __structInitField3:Dynamic = 'rgba8unorm'; final __structInitField4:Dynamic = raw.height; final __structInitField5:Dynamic = BitmapTextureSourceKind; final __structInitField6:Dynamic = 0.0; final __structInitField7:Dynamic = raw.width; ({ alphaType: __structInitField0, data: __structInitField2, format: __structInitField3, gamut: __structInitField1, height: __structInitField4, kind: __structInitField5, version: __structInitField6, width: __structInitField7 } : Bitmap); }); __callArgument131; })) : Bitmap);
       return cast { bitmap: bitmap, reason: 'ok' };
       return cast _Runtime.UNDEFINED;
-    } } : Dynamic)) : { >Entity, var readBitmap:flight._internal._Any->Float->Float->BitmapReadbackMode->flight._internal._Union2<{ var bitmap:flight._internal._Any; var reason:String; }, { var bitmap:Bitmap; var reason:String; }>; });
+    } } : EntityShapeL7C10__webBitmapReadback) : Dynamic)) : EntityShapeL7C10__webBitmapReadback);
     return cast null;
   }
 
@@ -910,7 +1586,7 @@ class _HostWeb {
   }
 
   public static function createWebCanvasRenderSurfaceCreator():CanvasRenderSurfaceCreator {
-    var creator:{ >Entity, var createRenderSurface:Float->Float->Float->flight._internal.dom.HTMLCanvasElement; var destroyRenderSurface:flight._internal.dom.HTMLCanvasElement->Void; } = cast _Runtime.UNDEFINED;
+    var creator:CanvasRenderSurfaceCreator = cast _Runtime.UNDEFINED;
     creator = (cast createEntity(({ final __callArgument137:Dynamic = ({ createRenderSurface: function(width:Float, height:Float, pixelRatio:Float):flight._internal.dom.HTMLCanvasElement {
       var canvas:flight._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
       canvas = flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
@@ -1213,7 +1889,7 @@ class _HostWeb {
         })
       );
     });
-    return cast (cast createEntity((cast { readFormat: readFormat, writeFormat: writeFormat, hasFormat: function(format:String):flight._internal._Promise<Bool> {
+    return cast (cast createEntity((cast ({ readFormat: readFormat, writeFormat: writeFormat, hasFormat: function(format:String):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var formats:Array<String> = cast _Runtime.UNDEFINED;
         return flight._internal._Async.flatMap((cast getFormats() : flight._internal._Promise<Array<String>>), function(__awaitValue171:Dynamic):Dynamic {
@@ -1414,7 +2090,7 @@ class _HostWeb {
     }, unsubscribe: function(callback:Void->Void):Void {
       if ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) || (cast !(cast flight._internal.backend.DomWindowBackend.hasField(flight._internal.backend.DomWindowBackend.value(), 'onclipboardchange') : Bool) : Bool)) : Bool)) { return; }
       flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast ([(cast 'clipboardchange' : String), (cast callback : flight._internal.dom.EventListener)] : Array<Dynamic>));
-    } } : Dynamic)) : { >Entity, var readFormat:String->flight._internal._Promise<String>; var writeFormat:String->String->flight._internal._Promise<Bool>; var hasFormat:String->flight._internal._Promise<Bool>; var getFormats:Void->flight._internal._Promise<Array<String>>; var writeItems:Array<ClipboardWriteItem>->flight._internal._Promise<Bool>; var readItems:Array<String>->flight._internal._Promise<flight._internal._Record<String, String>>; var readText:Void->flight._internal._Promise<String>; var writeText:String->flight._internal._Promise<Bool>; var readHtml:Void->flight._internal._Promise<String>; var writeHtml:String->flight._internal._Promise<Bool>; var hasText:Void->flight._internal._Promise<Bool>; var readImage:Void->flight._internal._Promise<String>; var writeImage:String->flight._internal._Promise<Bool>; var hasImage:Void->flight._internal._Promise<Bool>; var readRTF:Void->flight._internal._Promise<String>; var writeRTF:String->flight._internal._Promise<Bool>; var clear:Void->flight._internal._Promise<Bool>; var subscribe:(Void->Void)->Void; var unsubscribe:(Void->Void)->Void; });
+    } } : EntityShapeL113C10__webClipboard) : Dynamic)) : EntityShapeL113C10__webClipboard);
     return cast _Runtime.UNDEFINED;
   });
 
@@ -1461,7 +2137,7 @@ class _HostWeb {
     var destroyed:Bool = cast _Runtime.UNDEFINED;
     releases = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
     destroyed = false;
-    return cast (cast createEntity((cast { destroy: function():Void {
+    return cast (cast createEntity((cast ({ destroy: function():Void {
       if ((cast destroyed : Bool)) { return; }
       (destroyed = cast (true : Dynamic));
       for (release in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(releases)]))) {
@@ -1574,7 +2250,7 @@ class _HostWeb {
       ((cast releases : flight._internal._Set<Void->Void>).add(release));
       return cast release;
       return cast _Runtime.UNDEFINED;
-    } } : Dynamic)) : { >Entity, var destroy:Void->Void; var detectReachability:ConnectivityReachabilityOptions->ConnectivityReachability->flight._internal._Promise<ConnectivityReachability>; var getStatus:ConnectivityStatus->ConnectivityStatus; var subscribe:(Void->Void)->Null<Void->Void>; });
+    } } : EntityShapeL17C10__webConnectivity) : Dynamic)) : EntityShapeL17C10__webConnectivity);
     return cast null;
   }
 
@@ -1641,9 +2317,9 @@ class _HostWeb {
   public static final webDeviceBackend:DeviceBackend = (cast createWebDeviceBackend() : DeviceBackend);
 
   public static function createWebCursorBackend(element:flight._internal.dom.HTMLElement):{ >CursorBackend, >Entity, } {
-    return cast (cast (cast createEntity : Null<{ var setCursor:Null<flight._internal._Union2<String, flight._internal._Intersection2<String, flight._internal._Record<flight._internal._Any, flight._internal._Any>>>>->Void; }>->{ >Entity, var setCursor:Null<flight._internal._Union2<String, flight._internal._Intersection2<String, flight._internal._Record<flight._internal._Any, flight._internal._Any>>>>->Void; })(({ final __callArgument262:Dynamic = { setCursor: function(cursor:Null<Cursor>):Void {
+    return cast (cast (cast createEntity : Null<{ var setCursor:Null<flight._internal._Union2<String, flight._internal._Intersection2<String, flight._internal._Record<flight._internal._Any, flight._internal._Any>>>>->Void; }>->{ >Entity, var setCursor:Null<flight._internal._Union2<String, flight._internal._Intersection2<String, flight._internal._Record<flight._internal._Any, flight._internal._Any>>>>->Void; })(({ final __callArgument262:Dynamic = ({ setCursor: function(cursor:Null<Cursor>):Void {
       ((cast element.style : flight._internal.dom.CSSStyleDeclaration).cursor = _Runtime.coalesce(cursor, function():Dynamic return cast ''));
-    } }; __callArgument262; })) : { >Entity, var setCursor:Null<flight._internal._Union2<String, flight._internal._Intersection2<String, flight._internal._Record<flight._internal._Any, flight._internal._Any>>>>->Void; });
+    } } : EntityShapeL5C10__webCursor); __callArgument262; })) : EntityShapeL5C10__webCursor);
     return cast null;
   }
 
@@ -1777,7 +2453,7 @@ class _HostWeb {
 
   public static var _safeAreaInsets__webDevice:Null<SafeAreaInsets> = _Runtime.explicitNull();
 
-  public static final webDirectoryOpenDialogBackend:{ >Entity, var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>; } = (cast createEntity(({ final __callArgument271:Dynamic = { open: _HostWeb.openDirectory__webDialog }; __callArgument271; })) : { >Entity, var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>; });
+  public static final webDirectoryOpenDialogBackend:{ >Entity, var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>; } = (cast createEntity(({ final __callArgument271:Dynamic = ({ open: _HostWeb.openDirectory__webDialog } : EntityShapeL20C46__webDialog); __callArgument271; })) : EntityShapeL20C46__webDialog);
 
   public static function detectColorGamut__webDevice():String {
     if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('matchMedia'), 'undefined') : Bool)) { return cast ''; }
@@ -1823,9 +2499,9 @@ class _HostWeb {
     return cast null;
   }
 
-  public static final webFileOpenDialogBackend:{ >Entity, var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; } = (cast createEntity(({ final __callArgument273:Dynamic = { open: _HostWeb.openFile__webDialog }; __callArgument273; })) : { >Entity, var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; });
+  public static final webFileOpenDialogBackend:{ >Entity, var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; } = (cast createEntity(({ final __callArgument273:Dynamic = ({ open: _HostWeb.openFile__webDialog } : EntityShapeL24C41__webDialog); __callArgument273; })) : EntityShapeL24C41__webDialog);
 
-  public static final webFileSaveDialogBackend:{ >Entity, var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; } = (cast createEntity(({ final __callArgument275:Dynamic = { save: _HostWeb.saveFile__webDialog }; __callArgument275; })) : { >Entity, var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; });
+  public static final webFileSaveDialogBackend:{ >Entity, var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; } = (cast createEntity(({ final __callArgument275:Dynamic = ({ save: _HostWeb.saveFile__webDialog } : EntityShapeL28C41__webDialog); __callArgument275; })) : EntityShapeL28C41__webDialog);
 
   public static final webDialogHost:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<Host, HasDialogDirectoryOpen>, HasDialogFileOpen>, HasDialogFileSave>, HasDialogMessage>, HasDialogPrompt> = (cast createHost((cast { dialog: { directoryOpen: webDirectoryOpenDialogBackend, fileOpen: webFileOpenDialogBackend, fileSave: webFileSaveDialogBackend, message: webMessageDialogBackend, prompt: webPromptDialogBackend } } : Dynamic)) : flight._internal._Intersection2<Host, { var dialog:{ var directoryOpen:{ >Entity, var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>; }; var fileOpen:{ >Entity, var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; }; var fileSave:{ >Entity, var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; }; var message:MessageDialogBackend; var prompt:PromptDialogBackend; }; }>);
 
@@ -3606,7 +4282,7 @@ class _HostWeb {
   }
 
   public static function createWebFontLoadingBackend():{ >FontLoadingBackend, >Entity, } {
-    return cast (cast (cast createEntity : Null<{ var addFontFace:flight._internal.dom.FontFace->Void; var checkFontFace:String->Bool; var loadFontFaces:String->flight._internal._Promise<Array<flight._internal.dom.FontFace>>; var whenReady:Void->flight._internal._Promise<flight._internal._Nothing>; }>->{ >Entity, var addFontFace:flight._internal.dom.FontFace->Void; var checkFontFace:String->Bool; var loadFontFaces:String->flight._internal._Promise<Array<flight._internal.dom.FontFace>>; var whenReady:Void->flight._internal._Promise<flight._internal._Nothing>; })(({ final __callArgument683:Dynamic = { addFontFace: function(face:flight._internal.dom.FontFace):Void {
+    return cast (cast (cast createEntity : Null<{ var addFontFace:flight._internal.dom.FontFace->Void; var checkFontFace:String->Bool; var loadFontFaces:String->flight._internal._Promise<Array<flight._internal.dom.FontFace>>; var whenReady:Void->flight._internal._Promise<flight._internal._Nothing>; }>->{ >Entity, var addFontFace:flight._internal.dom.FontFace->Void; var checkFontFace:String->Bool; var loadFontFaces:String->flight._internal._Promise<Array<flight._internal.dom.FontFace>>; var whenReady:Void->flight._internal._Promise<flight._internal._Nothing>; })(({ final __callArgument683:Dynamic = ({ addFontFace: function(face:flight._internal.dom.FontFace):Void {
       (cast flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'fonts') : flight._internal.dom.FontFaceSet).add(face);
     }, checkFontFace: function(shorthand:String):Bool {
       return cast (cast flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'fonts') : flight._internal.dom.FontFaceSet).check(shorthand);
@@ -3621,7 +4297,7 @@ class _HostWeb {
           return flight._internal._Async.resolve(_Runtime.UNDEFINED);
         });
       }));
-    } }; __callArgument683; })) : { >Entity, var addFontFace:flight._internal.dom.FontFace->Void; var checkFontFace:String->Bool; var loadFontFaces:String->flight._internal._Promise<Array<flight._internal.dom.FontFace>>; var whenReady:Void->flight._internal._Promise<flight._internal._Nothing>; });
+    } } : EntityShapeL6C10__webFontLoading); __callArgument683; })) : EntityShapeL6C10__webFontLoading);
     return cast null;
   }
 
@@ -3723,7 +4399,7 @@ class _HostWeb {
   @:allow(flight)
   @:keep
   private static function createWebGlyphRasterizerBackend():{ >GlyphRasterizerBackend, >Entity, } {
-    return cast (cast (cast createEntity : Null<{ var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; }>->{ >Entity, var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; })(({ final __callArgument708:Dynamic = { measureMetrics: function(options:GlyphRasterizeOptions):Null<GlyphMetrics> {
+    return cast (cast (cast createEntity : Null<{ var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; }>->{ >Entity, var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; })(({ final __callArgument708:Dynamic = ({ measureMetrics: function(options:GlyphRasterizeOptions):Null<GlyphMetrics> {
       var context:Null<flight._internal._Union2<flight._internal.dom.OffscreenCanvasRenderingContext2D, flight._internal.dom.CanvasRenderingContext2D>> = cast _Runtime.UNDEFINED;
       var metrics:flight._internal.dom.TextMetrics = cast _Runtime.UNDEFINED;
       var ascent:Float = cast _Runtime.UNDEFINED;
@@ -3754,7 +4430,7 @@ class _HostWeb {
       observeGlyphRasterizerHostResult((cast 'rasterize' : String), (cast true : Bool));
       return cast (cast _HostWeb._rasterizeGlyphOnContext__webGlyphRasterizer(({ final __callArgument704:Dynamic = context; __callArgument704; }), (cast codepoint : Float), ({ final __callArgument705:Dynamic = options; __callArgument705; })) : Null<GlyphRasterizedBitmap>);
       return cast _Runtime.UNDEFINED;
-    } }; __callArgument708; })) : { >Entity, var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; });
+    } } : EntityShapeL12C10__webGlyphRasterizer); __callArgument708; })) : EntityShapeL12C10__webGlyphRasterizer);
     return cast null;
   }
 
@@ -4238,7 +4914,7 @@ class _HostWeb {
   } });
 
   public static function createWebSoftKeyboardChangeBackend():{ >SoftKeyboardChangeBackend, >Entity, } {
-    return cast (cast (cast createEntity : Null<{ var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>; }>->{ >Entity, var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>; })(({ final __callArgument805:Dynamic = { subscribe: function(listener:Void->Void):flight._internal._Promise<SoftKeyboardChangeSubscription> {
+    return cast (cast (cast createEntity : Null<{ var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>; }>->{ >Entity, var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>; })(({ final __callArgument805:Dynamic = ({ subscribe: function(listener:Void->Void):flight._internal._Promise<SoftKeyboardChangeSubscription> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var virtualKeyboard:Null<VirtualKeyboard__webKeyboard> = cast _Runtime.UNDEFINED;
         var viewport:Null<flight._internal.dom.VisualViewport> = cast _Runtime.UNDEFINED;
@@ -4258,12 +4934,12 @@ class _HostWeb {
         } };
         return cast null;
       }));
-    } }; __callArgument805; })) : { >Entity, var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>; });
+    } } : EntityShapeL16C10__webKeyboard); __callArgument805; })) : EntityShapeL16C10__webKeyboard);
     return cast null;
   }
 
   public static function createWebSoftKeyboardInfoBackend():{ >SoftKeyboardInfoBackend, >Entity, } {
-    return cast (cast (cast createEntity : Null<{ var getInfo:SoftKeyboardInfo->SoftKeyboardInfo; }>->{ >Entity, var getInfo:SoftKeyboardInfo->SoftKeyboardInfo; })(({ final __callArgument809:Dynamic = { getInfo: function(out:SoftKeyboardInfo):SoftKeyboardInfo {
+    return cast (cast (cast createEntity : Null<{ var getInfo:SoftKeyboardInfo->SoftKeyboardInfo; }>->{ >Entity, var getInfo:SoftKeyboardInfo->SoftKeyboardInfo; })(({ final __callArgument809:Dynamic = ({ getInfo: function(out:SoftKeyboardInfo):SoftKeyboardInfo {
       var geo:WebKeyboardGeometry__webKeyboard = cast _Runtime.UNDEFINED;
       geo = (cast _HostWeb.getWebKeyboardGeometry__webKeyboard() : WebKeyboardGeometry__webKeyboard);
       (out.height = cast ((cast geo : WebKeyboardGeometry__webKeyboard).height : Float));
@@ -4273,12 +4949,12 @@ class _HostWeb {
       (out.width = cast ((cast geo : WebKeyboardGeometry__webKeyboard).width : Float));
       return cast out;
       return cast _Runtime.UNDEFINED;
-    } }; __callArgument809; })) : { >Entity, var getInfo:SoftKeyboardInfo->SoftKeyboardInfo; });
+    } } : EntityShapeL39C10__webKeyboard); __callArgument809; })) : EntityShapeL39C10__webKeyboard);
     return cast null;
   }
 
   public static function createWebSoftKeyboardVisibilityBackend():{ >SoftKeyboardVisibilityBackend, >Entity, } {
-    return cast (cast (cast createEntity : Null<{ var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; }>->{ >Entity, var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; })(({ final __callArgument811:Dynamic = { show: function():flight._internal._Promise<SoftKeyboardVisibilityResult> {
+    return cast (cast (cast createEntity : Null<{ var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; }>->{ >Entity, var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; })(({ final __callArgument811:Dynamic = ({ show: function():flight._internal._Promise<SoftKeyboardVisibilityResult> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var vk:Null<VirtualKeyboard__webKeyboard> = cast _Runtime.UNDEFINED;
         vk = (cast _HostWeb.getVirtualKeyboard__webKeyboard() : Null<VirtualKeyboard__webKeyboard>);
@@ -4296,7 +4972,7 @@ class _HostWeb {
         return cast 'ok';
         return cast null;
       }));
-    } }; __callArgument811; })) : { >Entity, var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; });
+    } } : EntityShapeL53C10__webKeyboard); __callArgument811; })) : EntityShapeL53C10__webKeyboard);
     return cast null;
   }
 
@@ -4999,7 +5675,7 @@ class _HostWeb {
     accessByNative = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
     inputByNative = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
     outputByNative = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
-    access = (cast createEntity(({ final __callArgument986:Dynamic = { requestAccess: function():flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>> {
+    access = (cast createEntity(({ final __callArgument986:Dynamic = ({ requestAccess: function():flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -5018,10 +5694,10 @@ class _HostWeb {
           });
         })
       );
-    } }; __callArgument986; })) : { >Entity, var requestAccess:Void->flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>>; });
-    if ((cast !(cast includePermission : Bool) : Bool)) { return cast (cast createEntity((cast { access: access } : Dynamic)) : { >Entity, var access:{ >Entity, var requestAccess:Void->flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>>; }; }); }
-    permission = (cast createEntity(({ final __callArgument991:Dynamic = { getPermission: function():flight._internal._Promise<PermissionQueryOutcome> return (cast _HostWeb.queryWebMidiPermission__webMidi(_Runtime.field(api, 'permissions')) : flight._internal._Promise<PermissionQueryOutcome>) }; __callArgument991; })) : { >Entity, var getPermission:Void->flight._internal._Promise<PermissionQueryOutcome>; });
-    return cast (cast createEntity((cast { access: access, permission: permission } : Dynamic)) : { >Entity, var access:{ >Entity, var requestAccess:Void->flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>>; }; var permission:{ >Entity, var getPermission:Void->flight._internal._Promise<PermissionQueryOutcome>; }; });
+    } } : EntityShapeL111C18__webMidi); __callArgument986; })) : EntityShapeL111C18__webMidi);
+    if ((cast !(cast includePermission : Bool) : Bool)) { return cast (cast createEntity((cast ({ access: access } : EntityShapeL121C34__webMidi) : Dynamic)) : EntityShapeL121C34__webMidi); }
+    permission = (cast createEntity(({ final __callArgument991:Dynamic = ({ getPermission: function():flight._internal._Promise<PermissionQueryOutcome> return (cast _HostWeb.queryWebMidiPermission__webMidi(_Runtime.field(api, 'permissions')) : flight._internal._Promise<PermissionQueryOutcome>) } : EntityShapeL122C22__webMidi); __callArgument991; })) : EntityShapeL122C22__webMidi);
+    return cast (cast createEntity((cast ({ access: access, permission: permission } : EntityShapeL125C10__webMidi) : Dynamic)) : EntityShapeL125C10__webMidi);
     return cast null;
   }
 
@@ -5037,7 +5713,7 @@ class _HostWeb {
       return cast flight._internal._Async.resolve({ reason: 'operation-failed', releaseFailed: false });
     }
     released = false;
-    attachmentEntity = (cast createEntity(({ final __callArgument993:Dynamic = { release: function():flight._internal._Promise<{ var reason:String; }> {
+    attachmentEntity = (cast createEntity(({ final __callArgument993:Dynamic = ({ release: function():flight._internal._Promise<{ var reason:String; }> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         if ((cast released : Bool)) { return cast { reason: 'ok' }; }
         try {
@@ -5049,7 +5725,7 @@ class _HostWeb {
         }
         return cast null;
       }));
-    } }; __callArgument993; })) : { >Entity, var release:Void->flight._internal._Promise<{ var reason:String; }>; });
+    } } : EntityShapeL140C28__webMidi); __callArgument993; })) : EntityShapeL140C28__webMidi);
     attachment = attachmentEntity;
     return cast flight._internal._Async.resolve({ attachment: attachment, reason: 'ok' });
     return cast null;
@@ -5762,7 +6438,7 @@ class _HostWeb {
     return cast null;
   }
 
-  public static final webPowerCapabilities:{ >Entity, var keepAwake:PowerKeepAwakeBackend; var suspension:PowerSuspensionBackend; var change:PowerChangeBackend; var status:PowerStatusBackend; } = (cast createEntity(({ final __callArgument1137:Dynamic = _Runtime.mergeObjects([(cast createWebPowerReadings() : { var change:PowerChangeBackend; var status:PowerStatusBackend; }), { keepAwake: webPowerKeepAwakeBackend }, { suspension: webPowerSuspensionBackend }]); __callArgument1137; })) : { >Entity, var keepAwake:PowerKeepAwakeBackend; var suspension:PowerSuspensionBackend; var change:PowerChangeBackend; var status:PowerStatusBackend; });
+  public static final webPowerCapabilities:{ >Entity, var keepAwake:PowerKeepAwakeBackend; var suspension:PowerSuspensionBackend; var change:PowerChangeBackend; var status:PowerStatusBackend; } = (cast createEntity(({ final __callArgument1137:Dynamic = (#if flight_struct_typedef _Runtime.mergeObjects([(cast createWebPowerReadings() : { var change:PowerChangeBackend; var status:PowerStatusBackend; }), { keepAwake: webPowerKeepAwakeBackend }, { suspension: webPowerSuspensionBackend }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([(cast createWebPowerReadings() : { var change:PowerChangeBackend; var status:PowerStatusBackend; }), { keepAwake: webPowerKeepAwakeBackend }, { suspension: webPowerSuspensionBackend }]); ({ keepAwake: _Runtime.field(__structInitSource, 'keepAwake'), suspension: _Runtime.field(__structInitSource, 'suspension'), change: _Runtime.field(__structInitSource, 'change'), status: _Runtime.field(__structInitSource, 'status') } : EntityShapeL181C37__webPower); }) #end); __callArgument1137; })) : EntityShapeL181C37__webPower);
 
   public static var _wakeLockSentinel__webPower:Null<WebWakeLockSentinel__webPower> = _Runtime.explicitNull();
 
@@ -5922,7 +6598,7 @@ class _HostWeb {
   public static function createWebProtocolCapabilities():WebProtocolCapabilities__webProtocol {
     var registeredSchemes:Array<String> = cast _Runtime.UNDEFINED;
     registeredSchemes = (cast cast ([] : Array<Dynamic>));
-    return cast (cast (cast createEntity : Null<{ var launch:{ >Entity, var getLaunchUrl:Void->Null<String>; }; var registration:{ >Entity, var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; }; }>->{ >Entity, var launch:{ >Entity, var getLaunchUrl:Void->Null<String>; }; var registration:{ >Entity, var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; }; })(({ final __callArgument1154:Dynamic = { launch: (cast (cast createEntity : Null<{ var getLaunchUrl:Void->Null<String>; }>->{ >Entity, var getLaunchUrl:Void->Null<String>; })(({ final __callArgument1150:Dynamic = { getLaunchUrl: function():Null<String> {
+    return cast (cast (cast createEntity : Null<{ var launch:{ >Entity, var getLaunchUrl:Void->Null<String>; }; var registration:{ >Entity, var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; }; }>->{ >Entity, var launch:{ >Entity, var getLaunchUrl:Void->Null<String>; }; var registration:{ >Entity, var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; }; })(({ final __callArgument1154:Dynamic = ({ launch: (cast (cast createEntity : Null<{ var getLaunchUrl:Void->Null<String>; }>->{ >Entity, var getLaunchUrl:Void->Null<String>; })(({ final __callArgument1150:Dynamic = ({ getLaunchUrl: function():Null<String> {
       if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('location'), 'undefined') : Bool)) { return cast null; }
       try {
         var url:Null<String> = (cast _Runtime.construct(flight._internal._HostValueLut.get('URLSearchParams'), [(cast flight._internal._HostValueLut.get('location') : flight._internal.dom.Location).search]) : flight._internal.dom.URLSearchParams).get('url');
@@ -5931,7 +6607,7 @@ class _HostWeb {
         return cast null;
       }
       return cast _Runtime.UNDEFINED;
-    } }; __callArgument1150; })) : { >Entity, var getLaunchUrl:Void->Null<String>; }), registration: (cast (cast createEntity : Null<{ var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; }>->{ >Entity, var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; })(({ final __callArgument1152:Dynamic = { getRegisteredSchemes: function():Array<String> {
+    } } : EntityShapeL9C13__webProtocol); __callArgument1150; })) : EntityShapeL9C13__webProtocol), registration: (cast (cast createEntity : Null<{ var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; }>->{ >Entity, var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; })(({ final __callArgument1152:Dynamic = ({ getRegisteredSchemes: function():Array<String> {
       return cast _Runtime.slice(registeredSchemes, 0, null);
       return cast _Runtime.UNDEFINED;
     }, register: function(scheme:String):Bool {
@@ -5945,7 +6621,7 @@ class _HostWeb {
         return cast false;
       }
       return cast _Runtime.UNDEFINED;
-    } }; __callArgument1152; })) : { >Entity, var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; }) }; __callArgument1154; })) : { >Entity, var launch:{ >Entity, var getLaunchUrl:Void->Null<String>; }; var registration:{ >Entity, var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; }; });
+    } } : EntityShapeL20C19__webProtocol); __callArgument1152; })) : EntityShapeL20C19__webProtocol) } : EntityShapeL8C10__webProtocol); __callArgument1154; })) : EntityShapeL8C10__webProtocol);
     return cast null;
   }
 
@@ -6090,7 +6766,7 @@ class _HostWeb {
         } }
       }
     });
-    query = (cast createEntity(({ final __callArgument1196:Dynamic = { destroy: function():Void {
+    query = (cast createEntity(({ final __callArgument1196:Dynamic = ({ destroy: function():Void {
       if ((cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) {
         for (subscription in _Runtime.iterable(subscriptions)) {
           flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['resize', (cast subscription : DisplaySubscription__webScreen).handle] : Array<Dynamic>));
@@ -6124,8 +6800,8 @@ class _HostWeb {
       }
       return cast (cast fillCurrent(({ final __callArgument1194:Dynamic = out; __callArgument1194; })) : ScreenInfo);
       return cast _Runtime.UNDEFINED;
-    }, getScreens: enumerate }; __callArgument1196; })) : { >Entity, var destroy:Void->Void; var getCursorPosition:{ var x:Float; var y:Float; }->{ var x:Float; var y:Float; }; var getPrimaryScreen:ScreenInfo->ScreenInfo; var getScreens:Array<ScreenInfo>->Array<ScreenInfo>; });
-    change = (cast createEntity(({ final __callArgument1218:Dynamic = { subscribe: function(listener:ScreenChangeEvent->Void):Void->Void {
+    }, getScreens: enumerate } : EntityShapeL178C17__webScreen); __callArgument1196; })) : EntityShapeL178C17__webScreen);
+    change = (cast createEntity(({ final __callArgument1218:Dynamic = ({ subscribe: function(listener:ScreenChangeEvent->Void):Void->Void {
       var subscription:DisplaySubscription__webScreen = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast function():Void {
 
@@ -6142,8 +6818,8 @@ class _HostWeb {
         ((cast subscriptions : flight._internal._Set<DisplaySubscription__webScreen>).delete_(subscription));
       };
       return cast _Runtime.UNDEFINED;
-    } }; __callArgument1218; })) : { >Entity, var subscribe:(ScreenChangeEvent->Void)->(Void->Void); });
-    detailsBackend = (cast createEntity(({ final __callArgument1239:Dynamic = { queryPermission: function():flight._internal._Promise<ScreenPermissionState> {
+    } } : EntityShapeL221C18__webScreen); __callArgument1218; })) : EntityShapeL221C18__webScreen);
+    detailsBackend = (cast createEntity(({ final __callArgument1239:Dynamic = ({ queryPermission: function():flight._internal._Promise<ScreenPermissionState> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var __flowBranch1230:Dynamic;
@@ -6220,8 +6896,8 @@ class _HostWeb {
           });
         })
       );
-    } }; __callArgument1239; })) : { >Entity, var queryPermission:Void->flight._internal._Promise<ScreenPermissionState>; var request:Void->flight._internal._Promise<Bool>; });
-    permissionChange = (cast createEntity(({ final __callArgument1251:Dynamic = { subscribe: function(listener:ScreenPermissionState->Void):Void->Void {
+    } } : EntityShapeL242C26__webScreen); __callArgument1239; })) : EntityShapeL242C26__webScreen);
+    permissionChange = (cast createEntity(({ final __callArgument1251:Dynamic = ({ subscribe: function(listener:ScreenPermissionState->Void):Void->Void {
       var cancelled:Bool = cast _Runtime.UNDEFINED;
       var status:Null<flight._internal.dom.PermissionStatus> = cast _Runtime.UNDEFINED;
       var handle:Void->flight._internal._Union2<Bool, Void> = cast _Runtime.UNDEFINED;
@@ -6243,7 +6919,7 @@ class _HostWeb {
         ({ final __hostTypeCall1250 = status; __hostTypeCall1250 == null ? _Runtime.UNDEFINED : __hostTypeCall1250.removeEventListener('change', handle); });
       };
       return cast _Runtime.UNDEFINED;
-    } }; __callArgument1251; })) : { >Entity, var subscribe:(ScreenPermissionState->Void)->(Void->Void); });
+    } } : EntityShapeL272C28__webScreen); __callArgument1251; })) : EntityShapeL272C28__webScreen);
     return cast { change: change, details: detailsBackend, permissionChange: permissionChange, query: query };
     return cast null;
   }
@@ -6825,7 +7501,7 @@ class _HostWeb {
 
   public static var destroyed__webStorage:Bool = false;
 
-  public static final webStorageBackend:{ >Entity, var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>; var destroy:Void->Void; var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>; var subscribe:(StorageChange->Void)->Null<Void->Void>; } = (cast createEntity((cast { clear: function():StorageClearResult {
+  public static final webStorageBackend:{ >Entity, var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>; var destroy:Void->Void; var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>; var subscribe:(StorageChange->Void)->Null<Void->Void>; } = (cast createEntity((cast ({ clear: function():StorageClearResult {
     try {
       var storage:Null<flight._internal.dom.Storage> = (cast _HostWeb.getWebLocalStorage__webStorage() : Null<flight._internal.dom.Storage>);
       if ((cast _Runtime.strictEquals(storage, null) : Bool)) { return cast { reason: 'runtime-unavailable' }; }
@@ -6923,7 +7599,7 @@ class _HostWeb {
     ((cast _HostWeb.releases__webStorage : flight._internal._Set<Void->Void>).add(release));
     return cast release;
     return cast _Runtime.UNDEFINED;
-  } } : Dynamic)) : { >Entity, var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>; var destroy:Void->Void; var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>; var subscribe:(StorageChange->Void)->Null<Void->Void>; });
+  } } : EntityShapeL20C34__webStorage) : Dynamic)) : EntityShapeL20C34__webStorage);
 
   public static final webStoragePersistenceCapabilities__webStorageHost:WebWindowStoragePersistenceCapabilities = (cast createWebWindowStoragePersistenceCapabilities(({ final __callArgument1436:Dynamic = { getPermissionState: function():flight._internal._Promise<PermissionState> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
@@ -6993,8 +7669,8 @@ class _HostWeb {
 
   public static function createWebWindowStoragePersistenceCapabilities(api:WebWindowStoragePersistenceApi):WebWindowStoragePersistenceCapabilities {
     var persistenceRequest:{ >Entity, var requestPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; } = cast _Runtime.UNDEFINED;
-    var capabilities:{ >Entity, var persistenceQuery:{ >Entity, var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; }; var persistenceRequest:{ >Entity, var requestPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; }; } = cast _Runtime.UNDEFINED;
-    persistenceRequest = (cast createEntity(({ final __callArgument1445:Dynamic = { requestPersistence: function():flight._internal._Promise<StoragePersistenceResult> {
+    var capabilities:WebWindowStoragePersistenceCapabilities = cast _Runtime.UNDEFINED;
+    persistenceRequest = (cast createEntity(({ final __callArgument1445:Dynamic = ({ requestPersistence: function():flight._internal._Promise<StoragePersistenceResult> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var outcome:String = cast _Runtime.UNDEFINED;
         var permissionState:Null<String> = cast _Runtime.UNDEFINED;
@@ -7006,14 +7682,14 @@ class _HostWeb {
           });
         });
       }));
-    } }; __callArgument1445; })) : { >Entity, var requestPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; });
+    } } : EntityShapeL14C30__webStoragePersistence); __callArgument1445; })) : EntityShapeL14C30__webStoragePersistence);
     capabilities = (cast createEntity((cast ({ persistenceQuery: (cast _HostWeb.createPersistenceQueryBackend__webStoragePersistence(({ final __callArgument1453:Dynamic = api; __callArgument1453; })) : { >Entity, var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; }), persistenceRequest: persistenceRequest } : WebWindowStoragePersistenceCapabilities) : Dynamic)) : WebWindowStoragePersistenceCapabilities);
     return cast capabilities;
     return cast null;
   }
 
   public static function createWebWorkerStoragePersistenceCapabilities(api:WebWorkerStoragePersistenceApi):WebWorkerStoragePersistenceCapabilities {
-    var capabilities:{ >Entity, var persistenceQuery:{ >Entity, var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; }; } = cast _Runtime.UNDEFINED;
+    var capabilities:WebWorkerStoragePersistenceCapabilities = cast _Runtime.UNDEFINED;
     capabilities = (cast createEntity((cast ({ persistenceQuery: (cast _HostWeb.createPersistenceQueryBackend__webStoragePersistence(({ final __callArgument1457:Dynamic = api; __callArgument1457; })) : { >Entity, var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; }) } : WebWorkerStoragePersistenceCapabilities) : Dynamic)) : WebWorkerStoragePersistenceCapabilities);
     return cast capabilities;
     return cast null;
@@ -7021,7 +7697,7 @@ class _HostWeb {
 
   public static function createPersistenceQueryBackend__webStoragePersistence(api:WebWorkerStoragePersistenceApi):{ >Entity, var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; } {
     var backend:{ >Entity, var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; } = cast _Runtime.UNDEFINED;
-    backend = (cast createEntity(({ final __callArgument1467:Dynamic = { getPersistence: function():flight._internal._Promise<StoragePersistenceResult> {
+    backend = (cast createEntity(({ final __callArgument1467:Dynamic = ({ getPersistence: function():flight._internal._Promise<StoragePersistenceResult> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var outcome:String = cast _Runtime.UNDEFINED;
         var permissionState:Null<String> = cast _Runtime.UNDEFINED;
@@ -7033,7 +7709,7 @@ class _HostWeb {
           });
         });
       }));
-    } }; __callArgument1467; })) : { >Entity, var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; });
+    } } : EntityShapeL36C19__webStoragePersistence); __callArgument1467; })) : EntityShapeL36C19__webStoragePersistence);
     return cast backend;
     return cast null;
   }

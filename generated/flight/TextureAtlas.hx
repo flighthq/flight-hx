@@ -45,7 +45,7 @@ class TextureAtlas {
     Facade_TextureAtlas_flight__TextureAtlas.clearTextureAtlasRegions(target);
   }
 
-  public static function createTextureAtlas(?obj:{ @:optional var imageHeight:Null<Float>; @:optional var imageName:Null<String>; @:optional var imageWidth:Null<Float>; @:optional var regions:Null<Array<TextureAtlasRegion>>; @:optional var scale:Null<Float>; @:optional var texture:Null<Texture2D>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):flight.types.TextureAtlas {
+  public static function createTextureAtlas(?obj:{ @:optional var imageHeight:Null<Float>; @:optional var imageName:Null<String>; @:optional var imageWidth:Null<Float>; @:optional var regions:Null<Array<TextureAtlasRegion>>; @:optional var scale:Null<Float>; @:optional var texture:Null<Texture2D>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):flight.types.TextureAtlas {
     return cast Facade_TextureAtlas_flight__TextureAtlas.createTextureAtlas(obj);
     return cast null;
   }

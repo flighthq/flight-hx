@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ScreenChangeBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var subscribe:(ScreenChangeEvent->Void)->(Void->Void); };
+typedef ScreenChangeBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var subscribe:(ScreenChangeEvent->Void)->(Void->Void); };

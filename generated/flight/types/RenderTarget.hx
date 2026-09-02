@@ -5,4 +5,4 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Types.RenderTargetTextureSourceKind;
 
-typedef RenderTarget = { var width:Float; var height:Float; @:optional var format:RenderTargetFormat; @:optional var colorAttachments:Float; @:optional var colorFormats:Array<RenderTargetFormat>; @:optional var sampleCount:Float; @:optional var depth:RenderTargetDepth; @:optional var colorSpace:RenderTargetColorSpace; @:optional var clearColors:Array<Float>; @:optional var clearDepth:Float; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var alphaType:AlphaType; var gamut:String; var kind:Dynamic; var version:Float; };
+typedef RenderTarget = { var width:Float; var height:Float; @:optional var format:RenderTargetFormat; @:optional var colorAttachments:Float; @:optional var colorFormats:Array<RenderTargetFormat>; @:optional var sampleCount:Float; @:optional var depth:RenderTargetDepth; @:optional var colorSpace:RenderTargetColorSpace; @:optional var clearColors:Array<Float>; @:optional var clearDepth:Float; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var alphaType:AlphaType; var gamut:String; var kind:Dynamic; var version:Float; };

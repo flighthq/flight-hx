@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ClipboardBookmarkBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var readBookmark:Void->flight._internal._Promise<Null<ClipboardBookmark>>; var writeBookmark:String->String->flight._internal._Promise<Bool>; };
+typedef ClipboardBookmarkBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var readBookmark:Void->flight._internal._Promise<Null<ClipboardBookmark>>; var writeBookmark:String->String->flight._internal._Promise<Bool>; };

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ShareFilesBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var canShareContent:ShareFilesContent->Bool; var shareContent:ShareFilesContent->flight._internal._Promise<Bool>; var shareContentWithResult:ShareFilesContent->flight._internal._Promise<ShareResult>; };
+typedef ShareFilesBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var canShareContent:ShareFilesContent->Bool; var shareContent:ShareFilesContent->flight._internal._Promise<Bool>; var shareContentWithResult:ShareFilesContent->flight._internal._Promise<ShareResult>; };

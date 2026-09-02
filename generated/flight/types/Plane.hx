@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Plane = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var a:Float; var b:Float; var c:Float; var d:Float; };
+typedef Plane = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var a:Float; var b:Float; var c:Float; var d:Float; };

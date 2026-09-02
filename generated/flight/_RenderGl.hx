@@ -180,6 +180,56 @@ typedef SavedGlRenderState__glRenderStateBracket = { var activeTexture:Float; va
 
 typedef GlRenderTargetStorage__glRenderTarget = { >RenderTargetAxes, var framebuffer:flight._internal.dom.WebGLFramebuffer; var resolveFramebuffer:Null<flight._internal.dom.WebGLFramebuffer>; var textures:Array<flight._internal.dom.WebGLTexture>; var depthTexture:Null<flight._internal.dom.WebGLTexture>; var colorRenderbuffers:Array<flight._internal.dom.WebGLRenderbuffer>; var depthStencilRenderbuffer:Null<flight._internal.dom.WebGLRenderbuffer>; };
 
+#if !flight_struct_typedef
+@:allow(flight._RenderGl)
+@:structInit
+private class EntityShapeL85C18__glRenderTarget {
+  public var requestedAxes:RenderTargetAxes;
+  public var width:Float;
+  public var height:Float;
+  public var format:RenderTargetFormat;
+  public var colorAttachments:Float;
+  public var colorFormats:Array<RenderTargetFormat>;
+  public var depth:RenderTargetDepth;
+  public var colorSpace:RenderTargetColorSpace;
+  public var clearColors:Array<Float>;
+  public var clearDepth:Float;
+  public var sampleCount:Float;
+  public var framebuffer:flight._internal.dom.WebGLFramebuffer;
+  public var resolveFramebuffer:Null<flight._internal.dom.WebGLFramebuffer>;
+  public var textures:Array<flight._internal.dom.WebGLTexture>;
+  public var texture:flight._internal.dom.WebGLTexture;
+  public var depthTexture:Null<flight._internal.dom.WebGLTexture>;
+  public var colorRenderbuffers:Array<flight._internal.dom.WebGLRenderbuffer>;
+  public var depthStencilRenderbuffer:Null<flight._internal.dom.WebGLRenderbuffer>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(requestedAxes:RenderTargetAxes, width:Float, height:Float, format:RenderTargetFormat, colorAttachments:Float, colorFormats:Array<RenderTargetFormat>, depth:RenderTargetDepth, colorSpace:RenderTargetColorSpace, clearColors:Array<Float>, clearDepth:Float, sampleCount:Float, framebuffer:flight._internal.dom.WebGLFramebuffer, resolveFramebuffer:Null<flight._internal.dom.WebGLFramebuffer>, textures:Array<flight._internal.dom.WebGLTexture>, texture:flight._internal.dom.WebGLTexture, depthTexture:Null<flight._internal.dom.WebGLTexture>, colorRenderbuffers:Array<flight._internal.dom.WebGLRenderbuffer>, depthStencilRenderbuffer:Null<flight._internal.dom.WebGLRenderbuffer>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.requestedAxes = requestedAxes;
+    this.width = width;
+    this.height = height;
+    this.format = format;
+    this.colorAttachments = colorAttachments;
+    this.colorFormats = colorFormats;
+    this.depth = depth;
+    this.colorSpace = colorSpace;
+    this.clearColors = clearColors;
+    this.clearDepth = clearDepth;
+    this.sampleCount = sampleCount;
+    this.framebuffer = framebuffer;
+    this.resolveFramebuffer = resolveFramebuffer;
+    this.textures = textures;
+    this.texture = texture;
+    this.depthTexture = depthTexture;
+    this.colorRenderbuffers = colorRenderbuffers;
+    this.depthStencilRenderbuffer = depthStencilRenderbuffer;
+  }
+}
+#else
+private typedef EntityShapeL85C18__glRenderTarget = { var requestedAxes:RenderTargetAxes; var width:Float; var height:Float; var format:RenderTargetFormat; var colorAttachments:Float; var colorFormats:Array<RenderTargetFormat>; var depth:RenderTargetDepth; var colorSpace:RenderTargetColorSpace; var clearColors:Array<Float>; var clearDepth:Float; var sampleCount:Float; var framebuffer:flight._internal.dom.WebGLFramebuffer; var resolveFramebuffer:Null<flight._internal.dom.WebGLFramebuffer>; var textures:Array<flight._internal.dom.WebGLTexture>; var texture:flight._internal.dom.WebGLTexture; var depthTexture:Null<flight._internal.dom.WebGLTexture>; var colorRenderbuffers:Array<flight._internal.dom.WebGLRenderbuffer>; var depthStencilRenderbuffer:Null<flight._internal.dom.WebGLRenderbuffer>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
 @:noCompletion
 @:keepInit
 class _RenderGl {
@@ -2013,7 +2063,7 @@ class _RenderGl {
     if ((cast _Runtime.strictEquals(effective, null) : Bool)) { return cast null; }
     storage = (cast { width: (cast effective : RenderTargetAxes).width, height: (cast effective : RenderTargetAxes).height, format: (cast effective : RenderTargetAxes).format, colorAttachments: (cast effective : RenderTargetAxes).colorAttachments, colorFormats: _Runtime.concatArrays([_Runtime.toArray((cast effective : RenderTargetAxes).colorFormats)]), depth: (cast effective : RenderTargetAxes).depth, colorSpace: (cast effective : RenderTargetAxes).colorSpace, sampleCount: (cast effective : RenderTargetAxes).sampleCount, framebuffer: flight._internal.backend.WebGl2Backend.createFramebuffer(gl), resolveFramebuffer: null, textures: cast ([] : Array<Dynamic>), depthTexture: null, colorRenderbuffers: cast ([] : Array<Dynamic>), depthStencilRenderbuffer: null });
     texture = (cast _RenderGl.allocateGlRenderTargetStorage__glRenderTarget(({ final __callArgument614:Dynamic = state; __callArgument614; }), (cast storage : Dynamic)) : flight._internal.dom.WebGLTexture);
-    target = (cast createEntity((cast { requestedAxes: (cast _RenderGl.copyRenderTargetAxes__glRenderTarget(({ final __callArgument616:Dynamic = requested; __callArgument616; })) : RenderTargetAxes), width: (cast storage : GlRenderTargetStorage__glRenderTarget).width, height: (cast storage : GlRenderTargetStorage__glRenderTarget).height, format: (cast storage : GlRenderTargetStorage__glRenderTarget).format, colorAttachments: (cast storage : GlRenderTargetStorage__glRenderTarget).colorAttachments, colorFormats: _Runtime.concatArrays([_Runtime.toArray((cast storage : GlRenderTargetStorage__glRenderTarget).colorFormats)]), depth: (cast storage : GlRenderTargetStorage__glRenderTarget).depth, colorSpace: (cast storage : GlRenderTargetStorage__glRenderTarget).colorSpace, clearColors: _Runtime.concatArrays([_Runtime.toArray(requested.clearColors)]), clearDepth: requested.clearDepth, sampleCount: (cast storage : GlRenderTargetStorage__glRenderTarget).sampleCount, framebuffer: (cast storage : GlRenderTargetStorage__glRenderTarget).framebuffer, resolveFramebuffer: (cast storage : GlRenderTargetStorage__glRenderTarget).resolveFramebuffer, textures: (cast storage : GlRenderTargetStorage__glRenderTarget).textures, texture: texture, depthTexture: (cast storage : GlRenderTargetStorage__glRenderTarget).depthTexture, colorRenderbuffers: (cast storage : GlRenderTargetStorage__glRenderTarget).colorRenderbuffers, depthStencilRenderbuffer: (cast storage : GlRenderTargetStorage__glRenderTarget).depthStencilRenderbuffer } : Dynamic)) : { >Entity, var requestedAxes:RenderTargetAxes; var width:Float; var height:Float; var format:RenderTargetFormat; var colorAttachments:Float; var colorFormats:Array<RenderTargetFormat>; var depth:RenderTargetDepth; var colorSpace:RenderTargetColorSpace; var clearColors:Array<Float>; var clearDepth:Float; var sampleCount:Float; var framebuffer:flight._internal.dom.WebGLFramebuffer; var resolveFramebuffer:Null<flight._internal.dom.WebGLFramebuffer>; var textures:Array<flight._internal.dom.WebGLTexture>; var texture:flight._internal.dom.WebGLTexture; var depthTexture:Null<flight._internal.dom.WebGLTexture>; var colorRenderbuffers:Array<flight._internal.dom.WebGLRenderbuffer>; var depthStencilRenderbuffer:Null<flight._internal.dom.WebGLRenderbuffer>; });
+    target = (cast createEntity((cast ({ requestedAxes: (cast _RenderGl.copyRenderTargetAxes__glRenderTarget(({ final __callArgument616:Dynamic = requested; __callArgument616; })) : RenderTargetAxes), width: (cast storage : GlRenderTargetStorage__glRenderTarget).width, height: (cast storage : GlRenderTargetStorage__glRenderTarget).height, format: (cast storage : GlRenderTargetStorage__glRenderTarget).format, colorAttachments: (cast storage : GlRenderTargetStorage__glRenderTarget).colorAttachments, colorFormats: _Runtime.concatArrays([_Runtime.toArray((cast storage : GlRenderTargetStorage__glRenderTarget).colorFormats)]), depth: (cast storage : GlRenderTargetStorage__glRenderTarget).depth, colorSpace: (cast storage : GlRenderTargetStorage__glRenderTarget).colorSpace, clearColors: _Runtime.concatArrays([_Runtime.toArray(requested.clearColors)]), clearDepth: requested.clearDepth, sampleCount: (cast storage : GlRenderTargetStorage__glRenderTarget).sampleCount, framebuffer: (cast storage : GlRenderTargetStorage__glRenderTarget).framebuffer, resolveFramebuffer: (cast storage : GlRenderTargetStorage__glRenderTarget).resolveFramebuffer, textures: (cast storage : GlRenderTargetStorage__glRenderTarget).textures, texture: texture, depthTexture: (cast storage : GlRenderTargetStorage__glRenderTarget).depthTexture, colorRenderbuffers: (cast storage : GlRenderTargetStorage__glRenderTarget).colorRenderbuffers, depthStencilRenderbuffer: (cast storage : GlRenderTargetStorage__glRenderTarget).depthStencilRenderbuffer } : EntityShapeL85C18__glRenderTarget) : Dynamic)) : EntityShapeL85C18__glRenderTarget);
     flight._internal.backend.WebGl2Backend.bindFramebuffer(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flight._internal.backend.WebGl2Backend.FRAMEBUFFER), runtime.currentFramebuffer);
     (cast bindGlTextureRealization(({ final __callArgument620:Dynamic = state; __callArgument620; }), (cast null : Dynamic)) : Null<flight._internal.dom.WebGLTexture>);
     return cast target;

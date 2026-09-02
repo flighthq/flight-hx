@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ShortcutTriggerBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var destroy:Void->flight._internal._Promise<flight._internal._Nothing>; var subscribe:Accelerator->(Void->Void)->flight._internal._Promise<ShortcutTriggerSubscribeOutcome>; var unsubscribe:ShortcutTriggerSubscription->flight._internal._Promise<ShortcutTriggerUnsubscribeOutcome>; };
+typedef ShortcutTriggerBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var destroy:Void->flight._internal._Promise<flight._internal._Nothing>; var subscribe:Accelerator->(Void->Void)->flight._internal._Promise<ShortcutTriggerSubscribeOutcome>; var unsubscribe:ShortcutTriggerSubscription->flight._internal._Promise<ShortcutTriggerUnsubscribeOutcome>; };

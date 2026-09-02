@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Scene2DDocumentImporterRegistry = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var entries:Array<Scene2DDocumentImporterEntry>; };
+typedef Scene2DDocumentImporterRegistry = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var entries:Array<Scene2DDocumentImporterEntry>; };

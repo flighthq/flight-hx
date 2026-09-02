@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ProtocolRegistrationQueryBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var isRegistered:String->Bool; };
+typedef ProtocolRegistrationQueryBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var isRegistered:String->Bool; };

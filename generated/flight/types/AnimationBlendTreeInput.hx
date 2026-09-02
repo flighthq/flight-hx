@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AnimationBlendTreeInput = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var additive:Bool; var player:AnimationPlayer; var weight:Float; };
+typedef AnimationBlendTreeInput = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var additive:Bool; var player:AnimationPlayer; var weight:Float; };

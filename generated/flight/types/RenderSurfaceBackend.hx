@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef RenderSurfaceBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var resize:InputTargetHandle->Float->Float->Void; };
+typedef RenderSurfaceBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var resize:InputTargetHandle->Float->Float->Void; };

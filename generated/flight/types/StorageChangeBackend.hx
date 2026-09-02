@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef StorageChangeBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var destroy:Void->Void; var subscribe:(StorageChange->Void)->Null<Void->Void>; };
+typedef StorageChangeBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var destroy:Void->Void; var subscribe:(StorageChange->Void)->Null<Void->Void>; };

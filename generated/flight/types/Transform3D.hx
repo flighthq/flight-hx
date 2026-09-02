@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Transform3D = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var position:Vector3; var rotation:Quaternion; var scale:Vector3; };
+typedef Transform3D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var position:Vector3; var rotation:Quaternion; var scale:Vector3; };

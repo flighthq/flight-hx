@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ShellExternalBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var open:String->flight._internal._Promise<ShellExternalOutcome>; };
+typedef ShellExternalBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var open:String->flight._internal._Promise<ShellExternalOutcome>; };

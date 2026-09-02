@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SoftKeyboardAccessoryBarBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var setAccessoryBarVisible:Bool->flight._internal._Promise<SoftKeyboardSetterResult>; };
+typedef SoftKeyboardAccessoryBarBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var setAccessoryBarVisible:Bool->flight._internal._Promise<SoftKeyboardSetterResult>; };

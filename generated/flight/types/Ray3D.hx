@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Ray3D = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var direction:Vector3; var origin:Vector3; };
+typedef Ray3D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var direction:Vector3; var origin:Vector3; };

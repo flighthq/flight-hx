@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SheenPbrExtension = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:String; var sheenColor:Float; var sheenColorMap:Null<Texture>; var sheenColorMapUvSet:PbrUvSet; var sheenRoughness:Float; var sheenRoughnessMap:Null<Texture>; var sheenRoughnessMapUvSet:PbrUvSet; };
+typedef SheenPbrExtension = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var sheenColor:Float; var sheenColorMap:Null<Texture>; var sheenColorMapUvSet:PbrUvSet; var sheenRoughness:Float; var sheenRoughnessMap:Null<Texture>; var sheenRoughnessMapUvSet:PbrUvSet; };

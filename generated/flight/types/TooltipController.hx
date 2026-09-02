@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TooltipController = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var __TooltipControllerTypeKey:flight._internal._Nothing; };
+typedef TooltipController = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var __TooltipControllerTypeKey:flight._internal._Nothing; };

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ConnectivityChangeBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var destroy:Void->Void; var subscribe:(Void->Void)->Null<Void->Void>; };
+typedef ConnectivityChangeBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var destroy:Void->Void; var subscribe:(Void->Void)->Null<Void->Void>; };

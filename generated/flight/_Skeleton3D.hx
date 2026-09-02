@@ -280,7 +280,7 @@ class _Skeleton3D {
   }
 
   public static function cloneSkeleton3D(skeleton:Skeleton3D):Skeleton3D {
-    var clone:{ >Entity, var inverseBindMatrices:flight._internal._Float32Array; var jointMatrices:flight._internal._Float32Array; var joints:Array<Node3D>; var names:Null<Array<String>>; var normalMatrices:flight._internal._Float32Array; } = cast _Runtime.UNDEFINED;
+    var clone:Skeleton3D = cast _Runtime.UNDEFINED;
     clone = (cast createEntity(({ final __callArgument24:Dynamic = ({ inverseBindMatrices: new flight._internal._Float32Array(skeleton.inverseBindMatrices), jointMatrices: new flight._internal._Float32Array(skeleton.jointMatrices), joints: _Runtime.slice(skeleton.joints, 0, null), names: ((cast _Runtime.strictEquals(skeleton.names, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast _Runtime.strictEquals(skeleton.names, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.slice(skeleton.names, 0, null) : Dynamic)) : Dynamic)), normalMatrices: new flight._internal._Float32Array(skeleton.normalMatrices) } : Skeleton3D); __callArgument24; })) : Skeleton3D);
     return cast clone;
     return cast null;
@@ -361,7 +361,7 @@ class _Skeleton3D {
 
   public static function createSkeleton3D(joints:Array<Node3D>, ?inverseBindMatrices:flight._internal._Float32Array, ?names:Null<Array<String>>):Skeleton3D {
     var count:Float = cast _Runtime.UNDEFINED;
-    var skeleton:{ >Entity, var inverseBindMatrices:flight._internal._Float32Array; var jointMatrices:flight._internal._Float32Array; var joints:Array<Node3D>; var names:Null<Array<String>>; var normalMatrices:flight._internal._Float32Array; } = cast _Runtime.UNDEFINED;
+    var skeleton:Skeleton3D = cast _Runtime.UNDEFINED;
     count = _Runtime.field(joints, 'length');
     skeleton = (cast createEntity(({ final __callArgument38:Dynamic = ({ inverseBindMatrices: _Runtime.coalesce(inverseBindMatrices, function():Dynamic return cast new flight._internal._Float32Array((count * 16.0))), jointMatrices: new flight._internal._Float32Array((count * 16.0)), joints: joints, names: _Runtime.coalesce(names, function():Dynamic return cast null), normalMatrices: new flight._internal._Float32Array((count * 12.0)) } : Skeleton3D); __callArgument38; })) : Skeleton3D);
     if ((cast _Runtime.strictEquals(inverseBindMatrices, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { setSkeleton3DBindPose(({ final __callArgument40:Dynamic = skeleton; __callArgument40; })); }

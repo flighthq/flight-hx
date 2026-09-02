@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Skeleton2D = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var boneMatrices:flight._internal._Float32Array; var bones:Array<Bone2D>; var inverseBindMatrices:flight._internal._Float32Array; @:optional var skins:Null<Array<AttachmentSkin2D>>; @:optional var slots:Null<Array<Slot2D>>; var worldMatrices:flight._internal._Float32Array; };
+typedef Skeleton2D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var boneMatrices:flight._internal._Float32Array; var bones:Array<Bone2D>; var inverseBindMatrices:flight._internal._Float32Array; @:optional var skins:Null<Array<AttachmentSkin2D>>; @:optional var slots:Null<Array<Slot2D>>; var worldMatrices:flight._internal._Float32Array; };

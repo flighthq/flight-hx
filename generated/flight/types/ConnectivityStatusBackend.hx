@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ConnectivityStatusBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var getStatus:ConnectivityStatus->ConnectivityStatus; };
+typedef ConnectivityStatusBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getStatus:ConnectivityStatus->ConnectivityStatus; };

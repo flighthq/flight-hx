@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SoftKeyboardStyleBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var setStyle:SoftKeyboardStyleKind->flight._internal._Promise<SoftKeyboardSetterResult>; };
+typedef SoftKeyboardStyleBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var setStyle:SoftKeyboardStyleKind->flight._internal._Promise<SoftKeyboardSetterResult>; };

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AppLoginItemBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var getLoginItem:Void->AppLoginItem; var setLoginItem:AppLoginItemLike->Void; };
+typedef AppLoginItemBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getLoginItem:Void->AppLoginItem; var setLoginItem:AppLoginItemLike->Void; };

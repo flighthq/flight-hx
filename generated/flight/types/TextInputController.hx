@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TextInputController = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var __TextInputControllerTypeKey:flight._internal._Nothing; };
+typedef TextInputController = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var __TextInputControllerTypeKey:flight._internal._Nothing; };

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Rectangle = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var height:Float; var width:Float; var x:Float; var y:Float; };
+typedef Rectangle = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var height:Float; var width:Float; var x:Float; var y:Float; };

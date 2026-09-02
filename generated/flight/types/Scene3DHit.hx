@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Scene3DHit = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var node:Null<Mesh>; var distance:Float; var triangleIndex:Float; var u:Float; var v:Float; var w:Float; var pointX:Float; var pointY:Float; var pointZ:Float; var normalX:Float; var normalY:Float; var normalZ:Float; };
+typedef Scene3DHit = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var node:Null<Mesh>; var distance:Float; var triangleIndex:Float; var u:Float; var v:Float; var w:Float; var pointX:Float; var pointY:Float; var pointZ:Float; var normalX:Float; var normalY:Float; var normalZ:Float; };

@@ -4030,6 +4030,7 @@ describe('typed struct analysis', () => {
         class Main {
           static function main() {
             final camera = flight.types.CameraPilot.createCamera2D();
+            final entity:{?__symbol__EntityRuntime:Null<Dynamic>} = camera;
             if (!Std.isOfType(camera, flight.types.CameraPilot.Camera2D)) throw 'not a class';
             if (camera.x != 12 || camera.viewportHeight != 480 || camera.zoom != 2) throw 'bad fields';
             Reflect.setField(camera, '__symbol__EntityRuntime', { binding: null });
@@ -4362,6 +4363,47 @@ describe('typed struct analysis', () => {
     ).not.toThrow();
   });
 
+  it('emits a sealed private class for a closed structural entity allocation', () => {
+    const candidate: TypedStructCandidate = {
+      emission: 'audit-only',
+      name: 'Entity',
+      packageName: '@flighthq/types',
+      purpose: 'synthetic entity fixture',
+      source: 'upstream/packages/entity/src/entity.ts',
+    };
+    const result = lowerFixture(
+      `
+        export interface Entity { __EntityRuntimeKey?: unknown; }
+        export function createEntity<Type extends object>(obj: Type): Type & Entity {
+          return obj as Type & Entity;
+        }
+        export function createProvider(): { run(): number } & Entity {
+          return createEntity({ run() { return 1; } });
+        }
+      `,
+      candidate,
+    );
+    const synthetic = result.lowered.declarations.find(
+      (declaration) => declaration.kind === 'type' && declaration.name.startsWith('EntityShapeL'),
+    );
+    if (!synthetic || synthetic.kind !== 'type') throw new Error('Expected synthetic Entity class');
+    const fixtureModule = {
+      declarations: result.lowered.declarations,
+      haxePackage: 'flight',
+      imports: [],
+      name: 'EntityFixture',
+      packageName: '@flighthq/entity',
+    };
+    sealCppStructInitConstructors([fixtureModule]);
+    const output = emitHaxeModule(fixtureModule);
+
+    expect(result.lowered.diagnostics).toEqual([]);
+    expect(synthetic.packagePrivate).toBe(true);
+    expect(output).toContain('@:allow(flight.EntityFixture)\n@:structInit\nprivate class EntityShapeL');
+    expect(output).toContain('private function new(run:Void->Float):Void');
+    expect(output).toMatch(/\(\{ run: function\(\):Float \{[\s\S]*\} \} : EntityShapeL\d+C\d+\)/u);
+  });
+
   it('censuses class migration flows and observability by canonical schema', () => {
     const audit = classAuditFixture(
       `
@@ -4567,18 +4609,19 @@ describe('typed struct analysis', () => {
     expect(registry.resolveIdentity(renderTextureReturn)?.name).toBe('RenderTexture');
     expect(entityFactories.summary).toEqual({
       bareEntityCalls: 0,
-      blockedEntityCalls: 175,
+      blockedEntityCalls: 23,
       calls: 368,
       exactEntityCalls: 191,
       exactEntitySchemas: 148,
       exactNonEntityCalls: 17,
       genericEntityCalls: 3,
+      localEntityCalls: 152,
       normalizedFieldOrderCalls: 24,
       normalizedMissingFieldCalls: 9,
-      normalizedSpreadProjectionCalls: 4,
-      readyEntityCalls: 176,
-      structuralEntityCalls: 141,
-      unresolvedCalls: 16,
+      normalizedSpreadProjectionCalls: 11,
+      readyEntityCalls: 328,
+      structuralEntityCalls: 4,
+      unresolvedCalls: 1,
     });
     expect(entityFactories.sites.find((site) => site.factory.name === 'createMatrix4')).toMatchObject({
       blockers: [],
@@ -4597,9 +4640,10 @@ describe('typed struct analysis', () => {
       status: 'blocked',
     });
     expect(entityFactories.sites.find((site) => site.factory.name === 'createHost')).toMatchObject({
-      blockers: ['spread-construction', 'structural-entity-destination'],
-      destination: { kind: 'structural-entity' },
-      status: 'blocked',
+      blockers: [],
+      destination: { kind: 'local-entity', schemaName: 'EntityShapeL8C10' },
+      normalizations: ['synthetic-class', 'spread-projection'],
+      status: 'ready',
     });
     expect(entityFactories.sites.find((site) => site.factory.name === 'createApplicationRenderView')).toMatchObject({
       blockers: ['parameterized-destination'],
@@ -9182,7 +9226,7 @@ describe('typed struct analysis', () => {
 
   it('materializes the reviewed production mapped aliases without erasing named field types', () => {
     expect(readFileSync('generated/flight/types/ViewportLike.hx', 'utf8')).toContain(
-      'typedef ViewportLike = { @:optional var devicePixelRatio:Null<Float>; @:optional var height:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; };',
+      'typedef ViewportLike = { @:optional var devicePixelRatio:Null<Float>; @:optional var height:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; };',
     );
     expect(readFileSync('generated/flight/types/ApplicationRenderViewTargetOptions.hx', 'utf8')).toContain(
       'typedef ApplicationRenderViewTargetOptions = { @:optional var format:Null<RenderTargetFormat>; @:optional var colorAttachments:Null<Float>; @:optional var colorFormats:Null<Array<RenderTargetFormat>>;',

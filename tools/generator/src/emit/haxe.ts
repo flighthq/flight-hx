@@ -612,7 +612,7 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
         `${modifier}class ${safeName(declaration.name)}${generics} {`,
       ];
       for (const field of fields) {
-        const fieldName = field === entityRuntimeField ? '__symbol__EntityRuntime' : safeName(field.name);
+        const fieldName = typeFieldName(field.name);
         lines.push(`  public var ${fieldName}:${emitValueType(field.type)};`);
       }
       lines.push(
@@ -4084,7 +4084,8 @@ export function emitType(type: IrType): string {
       const members = [
         ...flattened.extends.map((parent) => `>${emitType(parent)},`),
         ...flattened.fields.map(
-          (field) => `${field.optional ? '@:optional ' : ''}var ${safeName(field.name)}:${emitValueType(field.type)};`,
+          (field) =>
+            `${field.optional ? '@:optional ' : ''}var ${typeFieldName(field.name)}:${emitValueType(field.type)};`,
         ),
       ];
       return `{ ${members.join(' ')} }`;
@@ -4174,6 +4175,10 @@ function safeName(name: string): string {
   }
   if (/^[0-9]/u.test(normalized)) normalized = `_${normalized}`;
   return haxeKeywords.has(normalized) ? `${normalized}_` : normalized;
+}
+
+function typeFieldName(name: string): string {
+  return name === '__EntityRuntimeKey' ? '__symbol__EntityRuntime' : safeName(name);
 }
 
 // Secondary types made package-private because their name collides with a same-package module.

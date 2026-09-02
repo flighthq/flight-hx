@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ScreenQueryBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var destroy:Void->Void; var getScreens:Array<ScreenInfo>->Array<ScreenInfo>; var getPrimaryScreen:ScreenInfo->ScreenInfo; var getCursorPosition:{ var x:Float; var y:Float; }->{ var x:Float; var y:Float; }; };
+typedef ScreenQueryBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var destroy:Void->Void; var getScreens:Array<ScreenInfo>->Array<ScreenInfo>; var getPrimaryScreen:ScreenInfo->ScreenInfo; var getCursorPosition:{ var x:Float; var y:Float; }->{ var x:Float; var y:Float; }; };

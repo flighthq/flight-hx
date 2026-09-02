@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CapacitorNotificationCapabilities = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var action:NotificationActionBackend; var click:NotificationClickBackend; var delivery:NotificationDeliveryBackend; var lifecycle:NotificationLifecycleBackend; var permission:NotificationPermissionBackend; var scheduling:NotificationSchedulingBackend; };
+typedef CapacitorNotificationCapabilities = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var action:NotificationActionBackend; var click:NotificationClickBackend; var delivery:NotificationDeliveryBackend; var lifecycle:NotificationLifecycleBackend; var permission:NotificationPermissionBackend; var scheduling:NotificationSchedulingBackend; };

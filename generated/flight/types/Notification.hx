@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Notification = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var id:String; var tag:String; var title:String; };
+typedef Notification = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var id:String; var tag:String; var title:String; };

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ClipboardChangeBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var subscribe:(Void->Void)->Void; @:optional var unsubscribe:(Void->Void)->Void; };
+typedef ClipboardChangeBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var subscribe:(Void->Void)->Void; @:optional var unsubscribe:(Void->Void)->Void; };

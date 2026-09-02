@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ScreenPermissionChangeBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var subscribe:(ScreenPermissionState->Void)->(Void->Void); };
+typedef ScreenPermissionChangeBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var subscribe:(ScreenPermissionState->Void)->(Void->Void); };

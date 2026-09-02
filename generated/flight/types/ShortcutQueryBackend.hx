@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ShortcutQueryBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var isRegistered:Accelerator->flight._internal._Promise<Bool>; };
+typedef ShortcutQueryBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var isRegistered:Accelerator->flight._internal._Promise<Bool>; };

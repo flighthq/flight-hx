@@ -4,7 +4,7 @@
     "calls": 1497,
     "memberAccesses": 3044,
     "reads": 1127,
-    "typeReferences": 6046,
+    "typeReferences": 6040,
     "types": 237,
     "writes": 420
   },
@@ -39916,7 +39916,7 @@
         "arities": [
           0
         ],
-        "count": 198,
+        "count": 197,
         "locations": [
           {
             "arity": 0,
@@ -40053,12 +40053,6 @@
           {
             "arity": 0,
             "column": 32,
-            "line": 6,
-            "source": "upstream/packages/host-web/src/webCanvasRenderSurface.ts"
-          },
-          {
-            "arity": 0,
-            "column": 9,
             "line": 6,
             "source": "upstream/packages/host-web/src/webCanvasRenderSurface.ts"
           },
@@ -55584,7 +55578,7 @@
         "arities": [
           0
         ],
-        "count": 45,
+        "count": 44,
         "locations": [
           {
             "arity": 0,
@@ -55716,12 +55710,6 @@
             "arity": 0,
             "column": 9,
             "line": 85,
-            "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
-          },
-          {
-            "arity": 0,
-            "column": 25,
-            "line": 98,
             "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
           },
           {
@@ -57429,25 +57417,13 @@
         "arities": [
           0
         ],
-        "count": 11,
+        "count": 9,
         "locations": [
           {
             "arity": 0,
             "column": 20,
             "line": 222,
             "source": "upstream/packages/render-gl/src/glRenderPass.ts"
-          },
-          {
-            "arity": 0,
-            "column": 25,
-            "line": 102,
-            "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
-          },
-          {
-            "arity": 0,
-            "column": 31,
-            "line": 103,
-            "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
           },
           {
             "arity": 0,
@@ -57641,7 +57617,7 @@
         "arities": [
           0
         ],
-        "count": 427,
+        "count": 425,
         "locations": [
           {
             "arity": 0,
@@ -59235,12 +59211,6 @@
           },
           {
             "arity": 0,
-            "column": 19,
-            "line": 101,
-            "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
-          },
-          {
-            "arity": 0,
             "column": 3,
             "line": 107,
             "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
@@ -59297,12 +59267,6 @@
             "arity": 0,
             "column": 9,
             "line": 85,
-            "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
-          },
-          {
-            "arity": 0,
-            "column": 15,
-            "line": 99,
             "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
           },
           {

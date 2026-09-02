@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ProtocolDefaultBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var isDefault:String->Bool; var removeAsDefault:String->Bool; var setAsDefault:String->Bool; };
+typedef ProtocolDefaultBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var isDefault:String->Bool; var removeAsDefault:String->Bool; var setAsDefault:String->Bool; };

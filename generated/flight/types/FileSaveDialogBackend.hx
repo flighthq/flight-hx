@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FileSaveDialogBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; };
+typedef FileSaveDialogBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; };

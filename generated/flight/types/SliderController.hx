@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SliderController = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var __SliderControllerTypeKey:flight._internal._Nothing; };
+typedef SliderController = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var __SliderControllerTypeKey:flight._internal._Nothing; };

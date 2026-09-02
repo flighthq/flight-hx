@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AppHideBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var hideApp:Void->Void; };
+typedef AppHideBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var hideApp:Void->Void; };

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ShellPathRevealBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var reveal:String->flight._internal._Promise<ShellPathRevealOutcome>; };
+typedef ShellPathRevealBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var reveal:String->flight._internal._Promise<ShellPathRevealOutcome>; };

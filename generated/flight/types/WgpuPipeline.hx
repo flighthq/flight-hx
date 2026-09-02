@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuPipeline = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var registries:WgpuRenderRegistries; };
+typedef WgpuPipeline = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var registries:WgpuRenderRegistries; };

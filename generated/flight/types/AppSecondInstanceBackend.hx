@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AppSecondInstanceBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var subscribe:(Array<String>->Void)->(Void->Void); };
+typedef AppSecondInstanceBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var subscribe:(Array<String>->Void)->(Void->Void); };

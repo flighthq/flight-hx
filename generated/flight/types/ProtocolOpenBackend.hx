@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ProtocolOpenBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var subscribe:(String->Void)->(Void->Void); };
+typedef ProtocolOpenBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var subscribe:(String->Void)->(Void->Void); };

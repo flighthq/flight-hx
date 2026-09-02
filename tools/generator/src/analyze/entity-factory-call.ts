@@ -98,7 +98,16 @@ export function entityFactoryExpandedObjectFields(
   const type = checker.getTypeAtLocation(node);
   if (type.isUnion()) return undefined;
   if (checker.getIndexTypeOfType(type, ts.IndexKind.String)) return undefined;
-  return checker.getPropertiesOfType(type).map((property) => property.getName());
+  return checker
+    .getPropertiesOfType(type)
+    .map((property) => property.getName())
+    .filter((name) => !name.startsWith('__@EntityRuntimeKey@'));
+}
+
+export function entityFactorySyntheticClassName(call: ts.CallExpression): string {
+  const source = call.getSourceFile();
+  const position = source.getLineAndCharacterOfPosition(call.getStart(source));
+  return `EntityShapeL${String(position.line + 1)}C${String(position.character + 1)}`;
 }
 
 export function entityFactoryDestinationCandidates(

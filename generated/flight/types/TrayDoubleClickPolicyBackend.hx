@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TrayDoubleClickPolicyBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var setIgnore:TrayIcon->Bool->flight._internal._Promise<TrayDoubleClickPolicyUpdateResult>; };
+typedef TrayDoubleClickPolicyBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var setIgnore:TrayIcon->Bool->flight._internal._Promise<TrayDoubleClickPolicyUpdateResult>; };

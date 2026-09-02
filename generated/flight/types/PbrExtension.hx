@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef PbrExtension = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; };
+typedef PbrExtension = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Kind; };

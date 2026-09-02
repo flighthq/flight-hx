@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef HemisphereLight = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:String; var groundColor:Float; var intensity:Float; var skyColor:Float; };
+typedef HemisphereLight = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var groundColor:Float; var intensity:Float; var skyColor:Float; };

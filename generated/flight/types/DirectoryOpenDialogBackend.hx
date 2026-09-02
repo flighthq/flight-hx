@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef DirectoryOpenDialogBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>; };
+typedef DirectoryOpenDialogBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>; };

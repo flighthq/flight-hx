@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Aabb = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var max:Vector3; var min:Vector3; };
+typedef Aabb = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var max:Vector3; var min:Vector3; };

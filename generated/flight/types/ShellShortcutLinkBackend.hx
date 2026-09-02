@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ShellShortcutLinkBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var read:String->flight._internal._Promise<ShellShortcutLinkReadOutcome>; var write:String->ShellShortcutLink->ShellShortcutWriteOperation->flight._internal._Promise<ShellShortcutLinkWriteOutcome>; };
+typedef ShellShortcutLinkBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var read:String->flight._internal._Promise<ShellShortcutLinkReadOutcome>; var write:String->ShellShortcutLink->ShellShortcutWriteOperation->flight._internal._Promise<ShellShortcutLinkWriteOutcome>; };

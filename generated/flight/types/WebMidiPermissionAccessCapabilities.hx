@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WebMidiPermissionAccessCapabilities = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var access:MidiAccessBackend; var permission:MidiPermissionBackend; };
+typedef WebMidiPermissionAccessCapabilities = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var access:MidiAccessBackend; var permission:MidiPermissionBackend; };

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef InputPointerLockBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var exit:Void->flight._internal._Promise<InputPointerLockExitOutcome>; var request:InputTargetHandle->flight._internal._Promise<InputPointerLockRequestOutcome>; };
+typedef InputPointerLockBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var exit:Void->flight._internal._Promise<InputPointerLockExitOutcome>; var request:InputTargetHandle->flight._internal._Promise<InputPointerLockRequestOutcome>; };

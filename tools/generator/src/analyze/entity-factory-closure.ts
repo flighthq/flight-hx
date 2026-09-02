@@ -8,6 +8,7 @@ import {
   entityFactoryExpandedObjectFields,
   entityFactoryObjectLiteral,
   entityFactoryObjectShape,
+  entityFactorySyntheticClassName,
   isParameterizedEntityFactoryType,
   isFlightCreateEntityCall,
   type EntityFactoryDestinationRoute,
@@ -18,6 +19,7 @@ export type EntityFactoryDestinationKind =
   | 'exact-entity'
   | 'exact-non-entity'
   | 'generic-entity'
+  | 'local-entity'
   | 'structural-entity'
   | 'unresolved';
 
@@ -34,7 +36,11 @@ export type EntityFactoryBlocker =
   | 'unresolved-destination'
   | 'unsupported-object-member';
 
-export type EntityFactoryNormalization = 'field-order' | 'missing-field-initialization' | 'spread-projection';
+export type EntityFactoryNormalization =
+  | 'field-order'
+  | 'missing-field-initialization'
+  | 'spread-projection'
+  | 'synthetic-class';
 
 export interface EntityFactoryClosureSite {
   argument: {
@@ -79,6 +85,7 @@ export interface EntityFactoryClosureAudit {
     exactEntitySchemas: number;
     exactNonEntityCalls: number;
     genericEntityCalls: number;
+    localEntityCalls: number;
     normalizedFieldOrderCalls: number;
     normalizedMissingFieldCalls: number;
     normalizedSpreadProjectionCalls: number;
@@ -140,6 +147,7 @@ export function auditEntityFactoryClosure(
       exactEntitySchemas: schemas.length,
       exactNonEntityCalls: countKind('exact-non-entity'),
       genericEntityCalls: countKind('generic-entity'),
+      localEntityCalls: countKind('local-entity'),
       normalizedFieldOrderCalls: sites.filter((site) => site.normalizations.includes('field-order')).length,
       normalizedMissingFieldCalls: sites.filter((site) => site.normalizations.includes('missing-field-initialization'))
         .length,
@@ -175,7 +183,7 @@ function auditFactorySite(
   const genericEntity = destinationCandidates.some((candidate) =>
     typeContainsEntityTypeParameter(candidate.type, checker, entityType),
   );
-  const destinationKind: EntityFactoryDestinationKind = schema
+  let destinationKind: EntityFactoryDestinationKind = schema
     ? schema.id === '@flighthq/types:interface#Entity'
       ? 'bare-entity'
       : checker.isTypeAssignableTo(exact!.type, entityType)
@@ -186,32 +194,43 @@ function auditFactorySite(
       : entityAssignable
         ? 'structural-entity'
         : 'unresolved';
+  const object = entityFactoryObjectLiteral(call);
+  const shape = object ? entityFactoryObjectShape(object) : undefined;
+  const expandedFields = object && shape?.hasSpread ? entityFactoryExpandedObjectFields(object, checker) : undefined;
+  const constructionFields = object && shape ? (expandedFields ?? shape.fields) : undefined;
+  const localEntityConstruction =
+    schema === undefined &&
+    object !== undefined &&
+    shape !== undefined &&
+    constructionFields !== undefined &&
+    !shape.hasComputed &&
+    !shape.hasUnsupported &&
+    destinationKind !== 'generic-entity';
+  if (localEntityConstruction) destinationKind = 'local-entity';
   const blockers: EntityFactoryBlocker[] = [];
   const normalizations: EntityFactoryNormalization[] = [];
   if (destinationKind === 'bare-entity') blockers.push('bare-entity-destination');
   else if (destinationKind === 'generic-entity') blockers.push('generic-entity-destination');
   else if (destinationKind === 'structural-entity') blockers.push('structural-entity-destination');
   else if (destinationKind === 'unresolved') blockers.push('unresolved-destination');
+  else if (destinationKind === 'local-entity') normalizations.push('synthetic-class');
   if (exact && isParameterizedEntityFactoryType(exact.type, checker)) blockers.push('parameterized-destination');
-  const object = entityFactoryObjectLiteral(call);
   let argument: EntityFactoryClosureSite['argument'];
-  if (object) {
-    const shape = entityFactoryObjectShape(object);
+  if (object && shape && constructionFields) {
     argument = { fields: shape.fields, kind: 'object' };
     if (shape.hasComputed) blockers.push('computed-construction');
     if (shape.hasUnsupported) blockers.push('unsupported-object-member');
-    const expandedFields = shape.hasSpread ? entityFactoryExpandedObjectFields(object, checker) : undefined;
-    const constructionFields = expandedFields ?? shape.fields;
     const exactSpreadProjection =
       shape.hasSpread &&
-      destinationKind === 'exact-entity' &&
-      schema !== undefined &&
       !shape.hasComputed &&
       !shape.hasUnsupported &&
-      sameFieldSet(
-        constructionFields,
-        schema.fields.map((field) => field.name),
-      );
+      ((destinationKind === 'exact-entity' &&
+        schema !== undefined &&
+        sameFieldSet(
+          constructionFields,
+          schema.fields.map((field) => field.name),
+        )) ||
+        destinationKind === 'local-entity');
     if (shape.hasSpread) {
       if (exactSpreadProjection) normalizations.push('spread-projection');
       else blockers.push('spread-construction');
@@ -231,7 +250,7 @@ function auditFactorySite(
   const status: EntityFactoryClosureSite['status'] =
     destinationKind === 'exact-non-entity'
       ? 'not-entity'
-      : destinationKind === 'exact-entity' && blockers.length === 0
+      : (destinationKind === 'exact-entity' || destinationKind === 'local-entity') && blockers.length === 0
         ? 'ready'
         : 'blocked';
   return {
@@ -241,7 +260,14 @@ function auditFactorySite(
     destination: {
       kind: destinationKind,
       ...(exact ? { route: exact.route } : destinationCandidates[0] ? { route: destinationCandidates[0].route } : {}),
-      ...(schema ? { schemaId: schema.id, schemaName: schema.name } : {}),
+      ...(schema
+        ? { schemaId: schema.id, schemaName: schema.name }
+        : localEntityConstruction
+          ? {
+              schemaId: syntheticEntitySchemaId(workspaceDirectory, call),
+              schemaName: entityFactorySyntheticClassName(call),
+            }
+          : {}),
       type: destinationType
         ? checker.typeToString(destinationType, undefined, ts.TypeFormatFlags.NoTruncation)
         : 'unknown',
@@ -276,6 +302,13 @@ function addFieldFindings(
   if (recordFieldOrder && fields.some((field, index) => field !== expected[index])) {
     normalizations.push('field-order');
   }
+}
+
+function syntheticEntitySchemaId(workspaceDirectory: string, call: ts.CallExpression): string {
+  const source = call.getSourceFile();
+  const position = source.getLineAndCharacterOfPosition(call.getStart(source));
+  const relativeSource = path.relative(workspaceDirectory, source.fileName);
+  return `synthetic-entity:${relativeSource}:${String(position.line + 1)}:${String(position.character + 1)}`;
 }
 
 function sameFieldSet(actual: readonly string[], expected: readonly string[]): boolean {

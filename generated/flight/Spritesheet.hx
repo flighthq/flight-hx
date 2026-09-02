@@ -34,12 +34,12 @@ class Spritesheet {
     return cast null;
   }
 
-  public static function createSpritesheet(?obj:{ @:optional var atlas:Null<TextureAtlas>; @:optional var animations:Null<flight._internal._Record<String, SpritesheetAnimation>>; @:optional var frames:Null<Array<SpritesheetFrame>>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):flight.types.Spritesheet {
+  public static function createSpritesheet(?obj:{ @:optional var atlas:Null<TextureAtlas>; @:optional var animations:Null<flight._internal._Record<String, SpritesheetAnimation>>; @:optional var frames:Null<Array<SpritesheetFrame>>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):flight.types.Spritesheet {
     return cast Facade_Spritesheet_flight__Spritesheet.createSpritesheet(obj);
     return cast null;
   }
 
-  public static function createSpritesheetAnimation(?obj:{ @:optional var frames:Null<Array<Float>>; @:optional var frameDuration:Null<Float>; @:optional var frameDurations:Null<Array<Float>>; @:optional var direction:Null<SpritesheetAnimationDirection>; @:optional var repeatCount:Null<Float>; @:optional var originX:Null<Float>; @:optional var originY:Null<Float>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):SpritesheetAnimation {
+  public static function createSpritesheetAnimation(?obj:{ @:optional var frames:Null<Array<Float>>; @:optional var frameDuration:Null<Float>; @:optional var frameDurations:Null<Array<Float>>; @:optional var direction:Null<SpritesheetAnimationDirection>; @:optional var repeatCount:Null<Float>; @:optional var originX:Null<Float>; @:optional var originY:Null<Float>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):SpritesheetAnimation {
     return cast Facade_Spritesheet_flight__Spritesheet.createSpritesheetAnimation(obj);
     return cast null;
   }

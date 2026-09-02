@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ElectronNotificationCapabilities = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var click:NotificationClickBackend; var close:NotificationCloseBackend; var delivery:NotificationDeliveryBackend; var dismiss:NotificationDismissBackend; var lifecycle:NotificationLifecycleBackend; var received:NotificationReceivedBackend; };
+typedef ElectronNotificationCapabilities = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var click:NotificationClickBackend; var close:NotificationCloseBackend; var delivery:NotificationDeliveryBackend; var dismiss:NotificationDismissBackend; var lifecycle:NotificationLifecycleBackend; var received:NotificationReceivedBackend; };

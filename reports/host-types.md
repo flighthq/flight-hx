@@ -7,7 +7,7 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | Metric | Count |
 | --- | ---: |
 | Host types | 237 |
-| Type references | 6046 |
+| Type references | 6040 |
 | Member accesses | 3044 |
 | Reads | 1127 |
 | Writes | 420 |
@@ -143,7 +143,7 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | `GeolocationPositionError` | `node_modules/typescript/lib/lib.dom.d.ts` | 8 | 0 | 1 | 2 | 0 | 0 |
 | `GlobalCompositeOperation` | `node_modules/typescript/lib/lib.dom.d.ts` | 8 | 0 | 0 | 0 | 0 | 0 |
 | `HTMLAudioElement` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 1 | 0 | 0 | 1 |
-| `HTMLCanvasElement` | `node_modules/@webgpu/types/dist/index.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 198 | 0 | 7 | 54 | 28 | 21 |
+| `HTMLCanvasElement` | `node_modules/@webgpu/types/dist/index.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 197 | 0 | 7 | 54 | 28 | 21 |
 | `HTMLDivElement` | `node_modules/typescript/lib/lib.dom.d.ts` | 14 | 0 | 10 | 13 | 3 | 8 |
 | `HTMLElement` | `node_modules/typescript/lib/lib.dom.d.ts` | 148 | 0 | 23 | 83 | 2 | 46 |
 | `HTMLHeadElement` | `node_modules/typescript/lib/lib.dom.d.ts` | 3 | 0 | 2 | 0 | 0 | 4 |
@@ -238,13 +238,13 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | `WebGLActiveInfo` | `node_modules/typescript/lib/lib.dom.d.ts` | 2 | 0 | 2 | 6 | 0 | 0 |
 | `WebGLBuffer` | `node_modules/typescript/lib/lib.dom.d.ts` | 67 | 0 | 0 | 0 | 0 | 0 |
 | `WebGLContextAttributes` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
-| `WebGLFramebuffer` | `node_modules/typescript/lib/lib.dom.d.ts` | 45 | 0 | 0 | 0 | 0 | 0 |
+| `WebGLFramebuffer` | `node_modules/typescript/lib/lib.dom.d.ts` | 44 | 0 | 0 | 0 | 0 | 0 |
 | `WebGLPowerPreference` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
 | `WebGLProgram` | `node_modules/typescript/lib/lib.dom.d.ts` | 252 | 0 | 0 | 0 | 0 | 0 |
-| `WebGLRenderbuffer` | `node_modules/typescript/lib/lib.dom.d.ts` | 11 | 0 | 0 | 0 | 0 | 0 |
+| `WebGLRenderbuffer` | `node_modules/typescript/lib/lib.dom.d.ts` | 9 | 0 | 0 | 0 | 0 | 0 |
 | `WebGLRenderingContext` | `node_modules/typescript/lib/lib.dom.d.ts` | 5 | 0 | 2 | 0 | 0 | 3 |
 | `WebGLShader` | `node_modules/typescript/lib/lib.dom.d.ts` | 4 | 0 | 0 | 0 | 0 | 0 |
-| `WebGLTexture` | `node_modules/typescript/lib/lib.dom.d.ts` | 427 | 0 | 0 | 0 | 0 | 0 |
+| `WebGLTexture` | `node_modules/typescript/lib/lib.dom.d.ts` | 425 | 0 | 0 | 0 | 0 | 0 |
 | `WebGLUniformLocation` | `node_modules/typescript/lib/lib.dom.d.ts` | 378 | 0 | 0 | 0 | 0 | 0 |
 | `WebGLVertexArrayObject` | `node_modules/typescript/lib/lib.dom.d.ts` | 34 | 0 | 0 | 0 | 0 | 0 |
 | `WebSocket` | `node_modules/@types/node/web-globals/fetch.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 8 | 1 | 5 | 2 |

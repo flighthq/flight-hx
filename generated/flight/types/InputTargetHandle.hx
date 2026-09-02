@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef InputTargetHandle = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var __brand:String; };
+typedef InputTargetHandle = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var __brand:String; };

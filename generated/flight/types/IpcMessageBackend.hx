@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef IpcMessageBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var subscribe:String->(Array<flight._internal._Any>->Void)->(Void->Void); };
+typedef IpcMessageBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var subscribe:String->(Array<flight._internal._Any>->Void)->(Void->Void); };

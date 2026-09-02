@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TrayMenuSelectionEventsBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var getSignal:TrayIcon->Null<Signal<TrayMenuSelectionEvent->Void>>; };
+typedef TrayMenuSelectionEventsBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getSignal:TrayIcon->Null<Signal<TrayMenuSelectionEvent->Void>>; };

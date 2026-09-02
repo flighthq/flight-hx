@@ -3535,7 +3535,7 @@ class _Scene2DWgpu {
     var bounds:Rectangle = cast _Runtime.UNDEFINED;
     batch = (cast (cast node : flight._internal._Any) : QuadBatch);
     data = batch.data;
-    runtime = (cast _Runtime.getIndex((cast node : { @:optional var __EntityRuntimeKey:flight._internal._Any; }), EntityRuntimeKey) : QuadBatchRuntime);
+    runtime = (cast _Runtime.getIndex((cast node : { @:optional var __symbol__EntityRuntime:flight._internal._Any; }), EntityRuntimeKey) : QuadBatchRuntime);
     instanceVelocities = runtime.instanceVelocities;
     __destructure1 = data;
     atlas = __destructure1.atlas;

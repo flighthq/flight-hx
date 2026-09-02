@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ApplicationRenderView<State, Target> = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var renderState:State; var renderTarget:Target; var viewport:Viewport; var window:ApplicationWindow; };
+typedef ApplicationRenderView<State, Target> = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var renderState:State; var renderTarget:Target; var viewport:Viewport; var window:ApplicationWindow; };

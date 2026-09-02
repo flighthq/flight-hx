@@ -942,7 +942,7 @@ class _Animation {
   public static function createAnimationRootMotionExtractor(clip:AnimationClip, channelIndex:Float):AnimationRootMotionExtractor {
     var channel:AnimationChannel = cast _Runtime.UNDEFINED;
     var width:Float = cast _Runtime.UNDEFINED;
-    var extractor:{ >Entity, var channel:AnimationChannel; var channelIndex:Float; var clip:AnimationClip; var cycleDelta:flight._internal._Float32Array; var fromMotion:flight._internal._Float32Array; var fromSample:flight._internal._Float32Array; var powerScratch:flight._internal._Float32Array; var startSample:flight._internal._Float32Array; var toMotion:flight._internal._Float32Array; var toSample:flight._internal._Float32Array; } = cast _Runtime.UNDEFINED;
+    var extractor:AnimationRootMotionExtractor = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast !(cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isInteger', cast ([channelIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast channelIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast channelIndex : Float) >= (cast _Runtime.field(clip.channels, 'length') : Float)) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.rangeError('AnimationRootMotionExtractor channel index ' + Std.string(Std.string(channelIndex)) + ' does not exist.'));
     }

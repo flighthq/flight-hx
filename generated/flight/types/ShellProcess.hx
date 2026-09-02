@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ShellProcess = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var exit:flight._internal._Promise<ShellProcessExitStatus>; var stderr:flight._internal.dom.ReadableStream<flight._internal._UInt8Array>; var stdin:flight._internal.dom.WritableStream<flight._internal._UInt8Array>; var stdout:flight._internal.dom.ReadableStream<flight._internal._UInt8Array>; var terminate:Void->Void; };
+typedef ShellProcess = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var exit:flight._internal._Promise<ShellProcessExitStatus>; var stderr:flight._internal.dom.ReadableStream<flight._internal._UInt8Array>; var stdin:flight._internal.dom.WritableStream<flight._internal._UInt8Array>; var stdout:flight._internal.dom.ReadableStream<flight._internal._UInt8Array>; var terminate:Void->Void; };

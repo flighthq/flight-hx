@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SpritesheetAnimation = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var frames:Array<Float>; var frameDuration:Float; var frameDurations:Null<Array<Float>>; var direction:SpritesheetAnimationDirection; var repeatCount:Float; var originX:Float; var originY:Float; };
+typedef SpritesheetAnimation = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var frames:Array<Float>; var frameDuration:Float; var frameDurations:Null<Array<Float>>; var direction:SpritesheetAnimationDirection; var repeatCount:Float; var originX:Float; var originY:Float; };

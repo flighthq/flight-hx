@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ScrollViewController = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var __ScrollViewControllerTypeKey:flight._internal._Nothing; };
+typedef ScrollViewController = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var __ScrollViewControllerTypeKey:flight._internal._Nothing; };

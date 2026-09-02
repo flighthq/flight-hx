@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MidiInputPort = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var id:String; var manufacturer:Null<String>; var name:Null<String>; var type:String; var version:Null<String>; };
+typedef MidiInputPort = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var id:String; var manufacturer:Null<String>; var name:Null<String>; var type:String; var version:Null<String>; };

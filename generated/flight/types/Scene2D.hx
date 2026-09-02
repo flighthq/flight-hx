@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Scene2D = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var align:ViewportAlign; var color:Null<Float>; var root:Node2D; var scaleMode:ViewportScaleMode; var scene2dHeight:Float; var scene2dWidth:Float; };
+typedef Scene2D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var align:ViewportAlign; var color:Null<Float>; var root:Node2D; var scaleMode:ViewportScaleMode; var scene2dHeight:Float; var scene2dWidth:Float; };

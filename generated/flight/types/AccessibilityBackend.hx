@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AccessibilityBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var announce:String->AccessibilityLiveness->AccessibilityOperationOutcome<String>; var clear:Void->AccessibilityOperationOutcome<String>; var destroy:Void->Void; var removeNode:String->AccessibilityOperationOutcome<String>; var setFocus:String->AccessibilityOperationOutcome<String>; var setNode:AccessibilityNode->AccessibilityOperationOutcome<String>; };
+typedef AccessibilityBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var announce:String->AccessibilityLiveness->AccessibilityOperationOutcome<String>; var clear:Void->AccessibilityOperationOutcome<String>; var destroy:Void->Void; var removeNode:String->AccessibilityOperationOutcome<String>; var setFocus:String->AccessibilityOperationOutcome<String>; var setNode:AccessibilityNode->AccessibilityOperationOutcome<String>; };

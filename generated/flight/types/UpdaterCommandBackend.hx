@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef UpdaterCommandBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var check:Void->flight._internal._Promise<AppUpdateCheckOutcome>; var destroy:Void->Void; var install:DownloadedUpdate->flight._internal._Promise<AppUpdateInstallOutcome>; };
+typedef UpdaterCommandBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var check:Void->flight._internal._Promise<AppUpdateCheckOutcome>; var destroy:Void->Void; var install:DownloadedUpdate->flight._internal._Promise<AppUpdateInstallOutcome>; };

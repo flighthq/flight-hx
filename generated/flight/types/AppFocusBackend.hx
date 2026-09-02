@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AppFocusBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var focus:Void->Void; };
+typedef AppFocusBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var focus:Void->Void; };

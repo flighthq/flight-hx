@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FlyCameraController = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var goalPitch:Float; var goalYaw:Float; var maxPitch:Float; var minPitch:Float; var pitch:Float; var position:Vector3; var smoothTime:Float; var yaw:Float; };
+typedef FlyCameraController = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var goalPitch:Float; var goalYaw:Float; var maxPitch:Float; var minPitch:Float; var pitch:Float; var position:Vector3; var smoothTime:Float; var yaw:Float; };

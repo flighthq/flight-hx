@@ -23,6 +23,24 @@ import flight.types.Path;
 import flight.types.PathWinding;
 import flight.types.RectangleLike;
 
+#if !flight_struct_typedef
+@:allow(flight._Font)
+@:structInit
+private class EntityShapeL21C10__glyphOutlineSource {
+  public var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>;
+  public var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>, rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.measureMetrics = measureMetrics;
+    this.rasterize = rasterize;
+  }
+}
+#else
+private typedef EntityShapeL21C10__glyphOutlineSource = { var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
 @:noCompletion
 class _Font {
   public static function _loadFontFaceFromBytes(family:String, bytes:flight._internal._UInt8Array):flight._internal._Promise<flight._internal.dom.FontFace> {
@@ -309,7 +327,7 @@ class _Font {
   }
 
   public static function createGlyphRasterizerBackendFromGlyphOutlineSource(source:GlyphOutlineSource):{ >GlyphRasterizerBackend, >Entity, } {
-    return cast (cast (cast createEntity : Null<{ var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; }>->{ >Entity, var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; })(({ final __callArgument45:Dynamic = { measureMetrics: function(options:GlyphRasterizeOptions):Null<GlyphMetrics> {
+    return cast (cast (cast createEntity : Null<{ var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; }>->{ >Entity, var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; })(({ final __callArgument45:Dynamic = ({ measureMetrics: function(options:GlyphRasterizeOptions):Null<GlyphMetrics> {
       var metrics:GlyphOutlineMetrics = cast _Runtime.UNDEFINED;
       var scale:Null<Float> = cast _Runtime.UNDEFINED;
       metrics = (cast source : GlyphOutlineSource).getGlyphOutlineMetrics();
@@ -320,7 +338,7 @@ class _Font {
     }, rasterize: function(codePoint:Float, options:GlyphRasterizeOptions):Null<GlyphRasterizedBitmap> {
       return cast (cast _Font.rasterizeGlyphOutlineSource__glyphOutlineSource(({ final __callArgument41:Dynamic = source; __callArgument41; }), (cast codePoint : Float), ({ final __callArgument42:Dynamic = options; __callArgument42; })) : Null<GlyphRasterizedBitmap>);
       return cast _Runtime.UNDEFINED;
-    } }; __callArgument45; })) : { >Entity, var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; });
+    } } : EntityShapeL21C10__glyphOutlineSource); __callArgument45; })) : EntityShapeL21C10__glyphOutlineSource);
     return cast null;
   }
 

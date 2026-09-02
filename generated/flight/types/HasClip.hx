@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef HasClip = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var clip:Null<ClipRegion>; };
+typedef HasClip = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var clip:Null<ClipRegion>; };

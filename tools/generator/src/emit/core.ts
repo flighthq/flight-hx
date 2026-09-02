@@ -2765,6 +2765,10 @@ function namespacePrivateDeclarations(declarations: IrDeclaration[]): void {
         value.arguments.forEach(expression);
         break;
       case 'object':
+        if (value.cppStructInit) {
+          value.cppStructInit.schemaHaxeType =
+            typeNames.get(value.cppStructInit.schemaHaxeType) ?? value.cppStructInit.schemaHaxeType;
+        }
         value.properties.forEach((property) => {
           if (property.kind === 'spread') expression(property.expression);
           else {

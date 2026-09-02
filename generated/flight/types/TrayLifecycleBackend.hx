@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TrayLifecycleBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var create:TrayIcon->TrayIconOptions->flight._internal._Promise<TrayCreateProviderResult>; var destroy:TrayIcon->flight._internal._Promise<TrayDestroyProviderResult>; var isDestroyed:TrayIcon->Bool; var list:Void->Array<TrayIcon>; };
+typedef TrayLifecycleBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var create:TrayIcon->TrayIconOptions->flight._internal._Promise<TrayCreateProviderResult>; var destroy:TrayIcon->flight._internal._Promise<TrayDestroyProviderResult>; var isDestroyed:TrayIcon->Bool; var list:Void->Array<TrayIcon>; };

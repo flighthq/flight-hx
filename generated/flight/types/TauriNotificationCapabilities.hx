@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TauriNotificationCapabilities = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var delivery:NotificationDeliveryBackend; var lifecycle:NotificationLifecycleBackend; var permission:NotificationPermissionBackend; };
+typedef TauriNotificationCapabilities = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var delivery:NotificationDeliveryBackend; var lifecycle:NotificationLifecycleBackend; var permission:NotificationPermissionBackend; };

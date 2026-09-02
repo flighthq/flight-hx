@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef PointLight = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:String; var castsShadow:Bool; var color:Float; var intensity:Float; var normalBias:Float; var pcfRadius:Float; var position:Vector3; var range:Float; var shadowBias:Float; };
+typedef PointLight = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var castsShadow:Bool; var color:Float; var intensity:Float; var normalBias:Float; var pcfRadius:Float; var position:Vector3; var range:Float; var shadowBias:Float; };

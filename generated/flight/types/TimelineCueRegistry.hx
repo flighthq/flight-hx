@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TimelineCueRegistry = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var entries:Array<TimelineCueHandlerEntry>; };
+typedef TimelineCueRegistry = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var entries:Array<TimelineCueHandlerEntry>; };

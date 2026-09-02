@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TrayBoundsBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var get:TrayIcon->flight._internal._Promise<TrayBoundsResult>; };
+typedef TrayBoundsBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var get:TrayIcon->flight._internal._Promise<TrayBoundsResult>; };

@@ -5,4 +5,4 @@ import Math as HxMath;
 import flight._internal._Runtime;
 
 @:noCompletion
-typedef GlContextState = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var gl:GlContext; };
+typedef GlContextState = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var gl:GlContext; };

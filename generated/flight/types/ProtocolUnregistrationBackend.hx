@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ProtocolUnregistrationBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var unregister:String->Bool; };
+typedef ProtocolUnregistrationBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var unregister:String->Bool; };

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ShellProcessBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var spawn:String->Array<String>->ShellProcessOptions->ShellProcess; };
+typedef ShellProcessBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var spawn:String->Array<String>->ShellProcessOptions->ShellProcess; };

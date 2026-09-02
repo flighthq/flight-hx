@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Environment = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:String; var environment:Null<Texture>; var intensity:Float; };
+typedef Environment = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var environment:Null<Texture>; var intensity:Float; };

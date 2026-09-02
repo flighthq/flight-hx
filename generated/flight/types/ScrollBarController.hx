@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ScrollBarController = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var __ScrollBarControllerTypeKey:flight._internal._Nothing; };
+typedef ScrollBarController = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var __ScrollBarControllerTypeKey:flight._internal._Nothing; };

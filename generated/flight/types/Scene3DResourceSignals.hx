@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Scene3DResourceSignals = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var onResourceFailed:Signal<Scene3DResourceEvent->Void>; var onResourceResolved:Signal<Scene3DResourceEvent->Void>; };
+typedef Scene3DResourceSignals = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onResourceFailed:Signal<Scene3DResourceEvent->Void>; var onResourceResolved:Signal<Scene3DResourceEvent->Void>; };

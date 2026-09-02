@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ShareSignals = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var onShareResult:Signal<ShareResult->Void>; };
+typedef ShareSignals = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onShareResult:Signal<ShareResult->Void>; };

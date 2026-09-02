@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ScreenDetailsBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var queryPermission:Void->flight._internal._Promise<ScreenPermissionState>; var request:Void->flight._internal._Promise<Bool>; };
+typedef ScreenDetailsBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var queryPermission:Void->flight._internal._Promise<ScreenPermissionState>; var request:Void->flight._internal._Promise<Bool>; };

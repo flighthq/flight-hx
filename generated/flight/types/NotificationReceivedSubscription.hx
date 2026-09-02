@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef NotificationReceivedSubscription = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var onNotificationReceived:Signal<Notification->Void>; };
+typedef NotificationReceivedSubscription = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onNotificationReceived:Signal<Notification->Void>; };

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CameraShake = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var trauma:Float; var decay:Float; var frequency:Float; var translationAmplitude:Float; var rotationAmplitude:Float; var time:Float; };
+typedef CameraShake = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var trauma:Float; var decay:Float; var frequency:Float; var translationAmplitude:Float; var rotationAmplitude:Float; var time:Float; };

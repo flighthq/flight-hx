@@ -30,6 +30,22 @@ import flight.types.LogLevel;
 import flight.types.Rectangle;
 import flight.types.TextureSource;
 
+#if !flight_struct_typedef
+@:allow(flight._GlyphAtlas)
+@:structInit
+private class EntityShapeL12C10__glyphRasterizerBackend {
+  public var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.rasterize = rasterize;
+  }
+}
+#else
+private typedef EntityShapeL12C10__glyphRasterizerBackend = { var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
 @:noCompletion
 class _GlyphAtlas {
   public static function disableGlyphAtlasGuards():Void {
@@ -358,7 +374,7 @@ class _GlyphAtlas {
   }
 
   public static function createStubGlyphRasterizerBackend():{ >GlyphRasterizerBackend, >Entity, } {
-    return cast (cast createEntity((cast { rasterize: function(_codepoint:Float, options:GlyphRasterizeOptions):Null<GlyphRasterizedBitmap> {
+    return cast (cast createEntity((cast ({ rasterize: function(_codepoint:Float, options:GlyphRasterizeOptions):Null<GlyphRasterizedBitmap> {
       var size:Float = cast _Runtime.UNDEFINED;
       var width:Float = cast _Runtime.UNDEFINED;
       var height:Float = cast _Runtime.UNDEFINED;
@@ -370,7 +386,7 @@ class _GlyphAtlas {
       _Runtime.fill(pixels, 255.0, 0, null, 1);
       return cast { advance: _Runtime.addNumbers(width, HxMath.max(1.0, HxMath.round((size * 0.1)))), bearingX: 0.0, bearingY: height, height: height, pixels: pixels, width: width };
       return cast _Runtime.UNDEFINED;
-    } } : Dynamic)) : { >Entity, var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; });
+    } } : EntityShapeL12C10__glyphRasterizerBackend) : Dynamic)) : EntityShapeL12C10__glyphRasterizerBackend);
     return cast null;
   }
 

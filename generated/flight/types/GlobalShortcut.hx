@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlobalShortcut = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var accelerator:Accelerator; var onTrigger:Signal<Void->Void>; };
+typedef GlobalShortcut = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var accelerator:Accelerator; var onTrigger:Signal<Void->Void>; };

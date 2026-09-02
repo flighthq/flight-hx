@@ -26,20 +26,116 @@ import flight.types.SpatialPair;
 
 typedef Bvh3D__bvh3D = { var margin:Float; var root:Float; var minX:Array<Float>; var minY:Array<Float>; var minZ:Array<Float>; var maxX:Array<Float>; var maxY:Array<Float>; var maxZ:Array<Float>; var parent:Array<Float>; var child1:Array<Float>; var child2:Array<Float>; var height:Array<Float>; var object:Array<Float>; var freeList:Array<Float>; var count:Float; var leafByObject:flight._internal._Map<SpatialObjectId, Float>; var bounds:flight._internal._Map<SpatialObjectId, SpatialAabb3D>; var declined:flight._internal._Map<SpatialObjectId, String>; var stack:Array<Float>; };
 
+#if !flight_struct_typedef
+@:allow(flight._Spatial)
+@:structInit
+private class EntityShapeL42C10__bvh3D {
+  public var clearSpatialIndex:Void->Void;
+  public var explainSpatialIndexing:Float->SpatialIndexingExplanation;
+  public var insertSpatialObject:Float->SpatialAabb3D->Bool;
+  public var querySpatialPairs:Array<SpatialPair>->Void;
+  public var querySpatialPoint:Float->Float->Float->Array<Float>->Void;
+  public var querySpatialRay:Float->Float->Float->Float->Float->Float->Array<Float>->Void;
+  public var querySpatialRegion:SpatialAabb3D->Array<Float>->Void;
+  public var removeSpatialObject:Float->Void;
+  public var updateSpatialObject:Float->SpatialAabb3D->Bool;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(clearSpatialIndex:Void->Void, explainSpatialIndexing:Float->SpatialIndexingExplanation, insertSpatialObject:Float->SpatialAabb3D->Bool, querySpatialPairs:Array<SpatialPair>->Void, querySpatialPoint:Float->Float->Float->Array<Float>->Void, querySpatialRay:Float->Float->Float->Float->Float->Float->Array<Float>->Void, querySpatialRegion:SpatialAabb3D->Array<Float>->Void, removeSpatialObject:Float->Void, updateSpatialObject:Float->SpatialAabb3D->Bool):Void {
+    this.__symbol__EntityRuntime = null;
+    this.clearSpatialIndex = clearSpatialIndex;
+    this.explainSpatialIndexing = explainSpatialIndexing;
+    this.insertSpatialObject = insertSpatialObject;
+    this.querySpatialPairs = querySpatialPairs;
+    this.querySpatialPoint = querySpatialPoint;
+    this.querySpatialRay = querySpatialRay;
+    this.querySpatialRegion = querySpatialRegion;
+    this.removeSpatialObject = removeSpatialObject;
+    this.updateSpatialObject = updateSpatialObject;
+  }
+}
+#else
+private typedef EntityShapeL42C10__bvh3D = { var clearSpatialIndex:Void->Void; var explainSpatialIndexing:Float->SpatialIndexingExplanation; var insertSpatialObject:Float->SpatialAabb3D->Bool; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialPoint:Float->Float->Float->Array<Float>->Void; var querySpatialRay:Float->Float->Float->Float->Float->Float->Array<Float>->Void; var querySpatialRegion:SpatialAabb3D->Array<Float>->Void; var removeSpatialObject:Float->Void; var updateSpatialObject:Float->SpatialAabb3D->Bool; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
 typedef GridCell__uniformGrid = { var cx:Float; var cy:Float; var ids:flight._internal._Set<SpatialObjectId>; };
 
 typedef UniformGrid__uniformGrid = { var cellSize:Float; var cells:flight._internal._Map<String, GridCell__uniformGrid>; var bounds:flight._internal._Map<SpatialObjectId, SpatialAabb2D>; var overflow:flight._internal._Set<SpatialObjectId>; var declined:flight._internal._Map<SpatialObjectId, SpatialDeclineReason>; var minCellX:Float; var minCellY:Float; var maxCellX:Float; var maxCellY:Float; var seen:flight._internal._Set<SpatialObjectId>; var pairIds:Array<SpatialObjectId>; };
 
+#if !flight_struct_typedef
+@:allow(flight._Spatial)
+@:structInit
+private class EntityShapeL61C10__uniformGrid {
+  public var insertSpatialObject:Float->SpatialAabb2D->Bool;
+  public var updateSpatialObject:Float->SpatialAabb2D->Bool;
+  public var removeSpatialObject:Float->Void;
+  public var clearSpatialIndex:Void->Void;
+  public var explainSpatialIndexing:Float->SpatialIndexingExplanation;
+  public var querySpatialPairs:Array<SpatialPair>->Void;
+  public var querySpatialRegion:SpatialAabb2D->Array<Float>->Void;
+  public var querySpatialPoint:Float->Float->Array<Float>->Void;
+  public var querySpatialRay:Float->Float->Float->Float->Array<Float>->Void;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(insertSpatialObject:Float->SpatialAabb2D->Bool, updateSpatialObject:Float->SpatialAabb2D->Bool, removeSpatialObject:Float->Void, clearSpatialIndex:Void->Void, explainSpatialIndexing:Float->SpatialIndexingExplanation, querySpatialPairs:Array<SpatialPair>->Void, querySpatialRegion:SpatialAabb2D->Array<Float>->Void, querySpatialPoint:Float->Float->Array<Float>->Void, querySpatialRay:Float->Float->Float->Float->Array<Float>->Void):Void {
+    this.__symbol__EntityRuntime = null;
+    this.insertSpatialObject = insertSpatialObject;
+    this.updateSpatialObject = updateSpatialObject;
+    this.removeSpatialObject = removeSpatialObject;
+    this.clearSpatialIndex = clearSpatialIndex;
+    this.explainSpatialIndexing = explainSpatialIndexing;
+    this.querySpatialPairs = querySpatialPairs;
+    this.querySpatialRegion = querySpatialRegion;
+    this.querySpatialPoint = querySpatialPoint;
+    this.querySpatialRay = querySpatialRay;
+  }
+}
+#else
+private typedef EntityShapeL61C10__uniformGrid = { var insertSpatialObject:Float->SpatialAabb2D->Bool; var updateSpatialObject:Float->SpatialAabb2D->Bool; var removeSpatialObject:Float->Void; var clearSpatialIndex:Void->Void; var explainSpatialIndexing:Float->SpatialIndexingExplanation; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialRegion:SpatialAabb2D->Array<Float>->Void; var querySpatialPoint:Float->Float->Array<Float>->Void; var querySpatialRay:Float->Float->Float->Float->Array<Float>->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
 typedef GridCell3D__uniformGrid3D = { var cx:Float; var cy:Float; var cz:Float; var ids:flight._internal._Set<SpatialObjectId>; };
 
 typedef UniformGrid3D__uniformGrid3D = { var cellSize:Float; var cells:flight._internal._Map<String, GridCell3D__uniformGrid3D>; var bounds:flight._internal._Map<SpatialObjectId, SpatialAabb3D>; var overflow:flight._internal._Set<SpatialObjectId>; var declined:flight._internal._Map<SpatialObjectId, SpatialDeclineReason>; var minCellX:Float; var minCellY:Float; var minCellZ:Float; var maxCellX:Float; var maxCellY:Float; var maxCellZ:Float; var seen:flight._internal._Set<SpatialObjectId>; var pairIds:Array<SpatialObjectId>; };
+
+#if !flight_struct_typedef
+@:allow(flight._Spatial)
+@:structInit
+private class EntityShapeL48C10__uniformGrid3D {
+  public var insertSpatialObject:Float->SpatialAabb3D->Bool;
+  public var updateSpatialObject:Float->SpatialAabb3D->Bool;
+  public var removeSpatialObject:Float->Void;
+  public var clearSpatialIndex:Void->Void;
+  public var explainSpatialIndexing:Float->SpatialIndexingExplanation;
+  public var querySpatialPairs:Array<SpatialPair>->Void;
+  public var querySpatialRegion:SpatialAabb3D->Array<Float>->Void;
+  public var querySpatialPoint:Float->Float->Float->Array<Float>->Void;
+  public var querySpatialRay:Float->Float->Float->Float->Float->Float->Array<Float>->Void;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(insertSpatialObject:Float->SpatialAabb3D->Bool, updateSpatialObject:Float->SpatialAabb3D->Bool, removeSpatialObject:Float->Void, clearSpatialIndex:Void->Void, explainSpatialIndexing:Float->SpatialIndexingExplanation, querySpatialPairs:Array<SpatialPair>->Void, querySpatialRegion:SpatialAabb3D->Array<Float>->Void, querySpatialPoint:Float->Float->Float->Array<Float>->Void, querySpatialRay:Float->Float->Float->Float->Float->Float->Array<Float>->Void):Void {
+    this.__symbol__EntityRuntime = null;
+    this.insertSpatialObject = insertSpatialObject;
+    this.updateSpatialObject = updateSpatialObject;
+    this.removeSpatialObject = removeSpatialObject;
+    this.clearSpatialIndex = clearSpatialIndex;
+    this.explainSpatialIndexing = explainSpatialIndexing;
+    this.querySpatialPairs = querySpatialPairs;
+    this.querySpatialRegion = querySpatialRegion;
+    this.querySpatialPoint = querySpatialPoint;
+    this.querySpatialRay = querySpatialRay;
+  }
+}
+#else
+private typedef EntityShapeL48C10__uniformGrid3D = { var insertSpatialObject:Float->SpatialAabb3D->Bool; var updateSpatialObject:Float->SpatialAabb3D->Bool; var removeSpatialObject:Float->Void; var clearSpatialIndex:Void->Void; var explainSpatialIndexing:Float->SpatialIndexingExplanation; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialRegion:SpatialAabb3D->Array<Float>->Void; var querySpatialPoint:Float->Float->Float->Array<Float>->Void; var querySpatialRay:Float->Float->Float->Float->Float->Float->Array<Float>->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
 
 @:noCompletion
 class _Spatial {
   public static function createBvhSpatialBackend3D(margin:Float = 2.0):{ >SpatialIndexBackend3D, >Entity, } {
     var tree:Bvh3D__bvh3D = cast _Runtime.UNDEFINED;
     tree = (cast _Spatial.createBvh3D__bvh3D((cast margin : Float)) : Bvh3D__bvh3D);
-    return cast (cast (cast createEntity : Null<{ var clearSpatialIndex:Void->Void; var explainSpatialIndexing:Float->SpatialIndexingExplanation; var insertSpatialObject:Float->SpatialAabb3D->Bool; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialPoint:Float->Float->Float->Array<Float>->Void; var querySpatialRay:Float->Float->Float->Float->Float->Float->Array<Float>->Void; var querySpatialRegion:SpatialAabb3D->Array<Float>->Void; var removeSpatialObject:Float->Void; var updateSpatialObject:Float->SpatialAabb3D->Bool; }>->{ >Entity, var clearSpatialIndex:Void->Void; var explainSpatialIndexing:Float->SpatialIndexingExplanation; var insertSpatialObject:Float->SpatialAabb3D->Bool; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialPoint:Float->Float->Float->Array<Float>->Void; var querySpatialRay:Float->Float->Float->Float->Float->Float->Array<Float>->Void; var querySpatialRegion:SpatialAabb3D->Array<Float>->Void; var removeSpatialObject:Float->Void; var updateSpatialObject:Float->SpatialAabb3D->Bool; })(({ final __callArgument28:Dynamic = { clearSpatialIndex: function():Void { _Spatial.clearBvh3D__bvh3D((cast tree : Dynamic)); }, explainSpatialIndexing: function(id:Float):SpatialIndexingExplanation return (cast _Spatial.explainBvh3D__bvh3D((cast tree : Dynamic), (cast id : Float)) : SpatialIndexingExplanation), insertSpatialObject: function(id:Float, bounds:SpatialAabb3D):Bool return (cast _Spatial.insertBvh3D__bvh3D((cast tree : Dynamic), (cast id : Float), ({ final __callArgument0:Dynamic = bounds; __callArgument0; }), ({ final __callArgument1:Dynamic = 'insert'; __callArgument1; })) : Bool), querySpatialPairs: function(out:Array<SpatialPair>):Void { _Spatial.queryBvh3DPairs__bvh3D((cast tree : Dynamic), ({ final __callArgument4:Dynamic = out; __callArgument4; })); }, querySpatialPoint: function(x:Float, y:Float, z:Float, out:Array<Float>):Void { _Spatial.queryBvh3DPoint__bvh3D((cast tree : Dynamic), (cast x : Float), (cast y : Float), (cast z : Float), ({ final __callArgument6:Dynamic = out; __callArgument6; })); }, querySpatialRay: function(x:Float, y:Float, z:Float, dx:Float, dy:Float, dz:Float, out:Array<Float>):Void { _Spatial.queryBvh3DRay__bvh3D((cast tree : Dynamic), (cast x : Float), (cast y : Float), (cast z : Float), (cast dx : Float), (cast dy : Float), (cast dz : Float), ({ final __callArgument8:Dynamic = out; __callArgument8; })); }, querySpatialRegion: function(region:SpatialAabb3D, out:Array<Float>):Void { _Spatial.queryBvh3DRegion__bvh3D((cast tree : Dynamic), ({ final __callArgument10:Dynamic = region; __callArgument10; }), ({ final __callArgument11:Dynamic = out; __callArgument11; })); }, removeSpatialObject: function(id:Float):Void {
+    return cast (cast (cast createEntity : Null<{ var clearSpatialIndex:Void->Void; var explainSpatialIndexing:Float->SpatialIndexingExplanation; var insertSpatialObject:Float->SpatialAabb3D->Bool; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialPoint:Float->Float->Float->Array<Float>->Void; var querySpatialRay:Float->Float->Float->Float->Float->Float->Array<Float>->Void; var querySpatialRegion:SpatialAabb3D->Array<Float>->Void; var removeSpatialObject:Float->Void; var updateSpatialObject:Float->SpatialAabb3D->Bool; }>->{ >Entity, var clearSpatialIndex:Void->Void; var explainSpatialIndexing:Float->SpatialIndexingExplanation; var insertSpatialObject:Float->SpatialAabb3D->Bool; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialPoint:Float->Float->Float->Array<Float>->Void; var querySpatialRay:Float->Float->Float->Float->Float->Float->Array<Float>->Void; var querySpatialRegion:SpatialAabb3D->Array<Float>->Void; var removeSpatialObject:Float->Void; var updateSpatialObject:Float->SpatialAabb3D->Bool; })(({ final __callArgument28:Dynamic = ({ clearSpatialIndex: function():Void { _Spatial.clearBvh3D__bvh3D((cast tree : Dynamic)); }, explainSpatialIndexing: function(id:Float):SpatialIndexingExplanation return (cast _Spatial.explainBvh3D__bvh3D((cast tree : Dynamic), (cast id : Float)) : SpatialIndexingExplanation), insertSpatialObject: function(id:Float, bounds:SpatialAabb3D):Bool return (cast _Spatial.insertBvh3D__bvh3D((cast tree : Dynamic), (cast id : Float), ({ final __callArgument0:Dynamic = bounds; __callArgument0; }), ({ final __callArgument1:Dynamic = 'insert'; __callArgument1; })) : Bool), querySpatialPairs: function(out:Array<SpatialPair>):Void { _Spatial.queryBvh3DPairs__bvh3D((cast tree : Dynamic), ({ final __callArgument4:Dynamic = out; __callArgument4; })); }, querySpatialPoint: function(x:Float, y:Float, z:Float, out:Array<Float>):Void { _Spatial.queryBvh3DPoint__bvh3D((cast tree : Dynamic), (cast x : Float), (cast y : Float), (cast z : Float), ({ final __callArgument6:Dynamic = out; __callArgument6; })); }, querySpatialRay: function(x:Float, y:Float, z:Float, dx:Float, dy:Float, dz:Float, out:Array<Float>):Void { _Spatial.queryBvh3DRay__bvh3D((cast tree : Dynamic), (cast x : Float), (cast y : Float), (cast z : Float), (cast dx : Float), (cast dy : Float), (cast dz : Float), ({ final __callArgument8:Dynamic = out; __callArgument8; })); }, querySpatialRegion: function(region:SpatialAabb3D, out:Array<Float>):Void { _Spatial.queryBvh3DRegion__bvh3D((cast tree : Dynamic), ({ final __callArgument10:Dynamic = region; __callArgument10; }), ({ final __callArgument11:Dynamic = out; __callArgument11; })); }, removeSpatialObject: function(id:Float):Void {
       var wasMissing:Bool = cast _Runtime.UNDEFINED;
       wasMissing = ((cast !(cast ((cast (cast tree : Bvh3D__bvh3D).leafByObject : flight._internal._Map<Float, Float>).has(id)) : Bool) : Bool) && (cast !(cast ((cast (cast tree : Bvh3D__bvh3D).declined : flight._internal._Map<Float, String>).has(id)) : Bool) : Bool));
       _Spatial.removeBvh3D__bvh3D((cast tree : Dynamic), (cast id : Float));
@@ -52,7 +148,7 @@ class _Spatial {
       if ((cast wasMissing : Bool)) { _Spatial.reportBvh3DIndexing__bvh3D((cast tree : Dynamic), (cast id : Float), (cast (cast _Spatial.explainBvh3D__bvh3D((cast tree : Dynamic), (cast id : Float)) : SpatialIndexingExplanation) : SpatialIndexingExplanation).mode, ({ final __callArgument24:Dynamic = 'update'; __callArgument24; }), ({ final __callArgument25:Dynamic = 'missing-id'; __callArgument25; })); }
       return cast inserted;
       return cast _Runtime.UNDEFINED;
-    } }; __callArgument28; })) : { >Entity, var clearSpatialIndex:Void->Void; var explainSpatialIndexing:Float->SpatialIndexingExplanation; var insertSpatialObject:Float->SpatialAabb3D->Bool; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialPoint:Float->Float->Float->Array<Float>->Void; var querySpatialRay:Float->Float->Float->Float->Float->Float->Array<Float>->Void; var querySpatialRegion:SpatialAabb3D->Array<Float>->Void; var removeSpatialObject:Float->Void; var updateSpatialObject:Float->SpatialAabb3D->Bool; });
+    } } : EntityShapeL42C10__bvh3D); __callArgument28; })) : EntityShapeL42C10__bvh3D);
     return cast null;
   }
 
@@ -718,7 +814,7 @@ class _Spatial {
   public static function createUniformGridSpatialBackend2D(cellSize:Float):{ >SpatialIndexBackend2D, >Entity, } {
     var grid:UniformGrid__uniformGrid = cast _Runtime.UNDEFINED;
     grid = (cast { cellSize: cellSize, cells: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), bounds: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), overflow: _Runtime.construct(flight._internal._HostValueLut.get('Set'), []), declined: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), minCellX: 0.0, minCellY: 0.0, maxCellX: 0.0, maxCellY: 0.0, seen: _Runtime.construct(flight._internal._HostValueLut.get('Set'), []), pairIds: cast ([] : Array<Dynamic>) });
-    return cast (cast (cast createEntity : Null<{ var insertSpatialObject:Float->SpatialAabb2D->Bool; var updateSpatialObject:Float->SpatialAabb2D->Bool; var removeSpatialObject:Float->Void; var clearSpatialIndex:Void->Void; var explainSpatialIndexing:Float->SpatialIndexingExplanation; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialRegion:SpatialAabb2D->Array<Float>->Void; var querySpatialPoint:Float->Float->Array<Float>->Void; var querySpatialRay:Float->Float->Float->Float->Array<Float>->Void; }>->{ >Entity, var insertSpatialObject:Float->SpatialAabb2D->Bool; var updateSpatialObject:Float->SpatialAabb2D->Bool; var removeSpatialObject:Float->Void; var clearSpatialIndex:Void->Void; var explainSpatialIndexing:Float->SpatialIndexingExplanation; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialRegion:SpatialAabb2D->Array<Float>->Void; var querySpatialPoint:Float->Float->Array<Float>->Void; var querySpatialRay:Float->Float->Float->Float->Array<Float>->Void; })(({ final __callArgument132:Dynamic = { insertSpatialObject: function(id:Float, bounds:SpatialAabb2D):Bool {
+    return cast (cast (cast createEntity : Null<{ var insertSpatialObject:Float->SpatialAabb2D->Bool; var updateSpatialObject:Float->SpatialAabb2D->Bool; var removeSpatialObject:Float->Void; var clearSpatialIndex:Void->Void; var explainSpatialIndexing:Float->SpatialIndexingExplanation; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialRegion:SpatialAabb2D->Array<Float>->Void; var querySpatialPoint:Float->Float->Array<Float>->Void; var querySpatialRay:Float->Float->Float->Float->Array<Float>->Void; }>->{ >Entity, var insertSpatialObject:Float->SpatialAabb2D->Bool; var updateSpatialObject:Float->SpatialAabb2D->Bool; var removeSpatialObject:Float->Void; var clearSpatialIndex:Void->Void; var explainSpatialIndexing:Float->SpatialIndexingExplanation; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialRegion:SpatialAabb2D->Array<Float>->Void; var querySpatialPoint:Float->Float->Array<Float>->Void; var querySpatialRay:Float->Float->Float->Float->Array<Float>->Void; })(({ final __callArgument132:Dynamic = ({ insertSpatialObject: function(id:Float, bounds:SpatialAabb2D):Bool {
       return cast (cast _Spatial._insertIntoGrid__uniformGrid((cast grid : Dynamic), (cast id : Float), ({ final __callArgument110:Dynamic = bounds; __callArgument110; }), ({ final __callArgument111:Dynamic = 'insert'; __callArgument111; })) : Bool);
       return cast _Runtime.UNDEFINED;
     }, updateSpatialObject: function(id:Float, bounds:SpatialAabb2D):Bool {
@@ -747,7 +843,7 @@ class _Spatial {
       _Spatial._queryGridPoint__uniformGrid((cast grid : Dynamic), (cast x : Float), (cast y : Float), ({ final __callArgument128:Dynamic = out; __callArgument128; }));
     }, querySpatialRay: function(x:Float, y:Float, dx:Float, dy:Float, out:Array<Float>):Void {
       _Spatial._queryGridRay__uniformGrid((cast grid : Dynamic), (cast x : Float), (cast y : Float), (cast dx : Float), (cast dy : Float), ({ final __callArgument130:Dynamic = out; __callArgument130; }));
-    } }; __callArgument132; })) : { >Entity, var insertSpatialObject:Float->SpatialAabb2D->Bool; var updateSpatialObject:Float->SpatialAabb2D->Bool; var removeSpatialObject:Float->Void; var clearSpatialIndex:Void->Void; var explainSpatialIndexing:Float->SpatialIndexingExplanation; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialRegion:SpatialAabb2D->Array<Float>->Void; var querySpatialPoint:Float->Float->Array<Float>->Void; var querySpatialRay:Float->Float->Float->Float->Array<Float>->Void; });
+    } } : EntityShapeL61C10__uniformGrid); __callArgument132; })) : EntityShapeL61C10__uniformGrid);
     return cast null;
   }
 
@@ -1220,7 +1316,7 @@ class _Spatial {
   public static function createUniformGridSpatialBackend3D(cellSize:Float):{ >SpatialIndexBackend3D, >Entity, } {
     var grid:UniformGrid3D__uniformGrid3D = cast _Runtime.UNDEFINED;
     grid = (cast { cellSize: cellSize, cells: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), bounds: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), overflow: _Runtime.construct(flight._internal._HostValueLut.get('Set'), []), declined: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), minCellX: 0.0, minCellY: 0.0, minCellZ: 0.0, maxCellX: 0.0, maxCellY: 0.0, maxCellZ: 0.0, seen: _Runtime.construct(flight._internal._HostValueLut.get('Set'), []), pairIds: cast ([] : Array<Dynamic>) });
-    return cast (cast (cast createEntity : Null<{ var insertSpatialObject:Float->SpatialAabb3D->Bool; var updateSpatialObject:Float->SpatialAabb3D->Bool; var removeSpatialObject:Float->Void; var clearSpatialIndex:Void->Void; var explainSpatialIndexing:Float->SpatialIndexingExplanation; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialRegion:SpatialAabb3D->Array<Float>->Void; var querySpatialPoint:Float->Float->Float->Array<Float>->Void; var querySpatialRay:Float->Float->Float->Float->Float->Float->Array<Float>->Void; }>->{ >Entity, var insertSpatialObject:Float->SpatialAabb3D->Bool; var updateSpatialObject:Float->SpatialAabb3D->Bool; var removeSpatialObject:Float->Void; var clearSpatialIndex:Void->Void; var explainSpatialIndexing:Float->SpatialIndexingExplanation; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialRegion:SpatialAabb3D->Array<Float>->Void; var querySpatialPoint:Float->Float->Float->Array<Float>->Void; var querySpatialRay:Float->Float->Float->Float->Float->Float->Array<Float>->Void; })(({ final __callArgument268:Dynamic = { insertSpatialObject: function(id:Float, bounds:SpatialAabb3D):Bool {
+    return cast (cast (cast createEntity : Null<{ var insertSpatialObject:Float->SpatialAabb3D->Bool; var updateSpatialObject:Float->SpatialAabb3D->Bool; var removeSpatialObject:Float->Void; var clearSpatialIndex:Void->Void; var explainSpatialIndexing:Float->SpatialIndexingExplanation; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialRegion:SpatialAabb3D->Array<Float>->Void; var querySpatialPoint:Float->Float->Float->Array<Float>->Void; var querySpatialRay:Float->Float->Float->Float->Float->Float->Array<Float>->Void; }>->{ >Entity, var insertSpatialObject:Float->SpatialAabb3D->Bool; var updateSpatialObject:Float->SpatialAabb3D->Bool; var removeSpatialObject:Float->Void; var clearSpatialIndex:Void->Void; var explainSpatialIndexing:Float->SpatialIndexingExplanation; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialRegion:SpatialAabb3D->Array<Float>->Void; var querySpatialPoint:Float->Float->Float->Array<Float>->Void; var querySpatialRay:Float->Float->Float->Float->Float->Float->Array<Float>->Void; })(({ final __callArgument268:Dynamic = ({ insertSpatialObject: function(id:Float, bounds:SpatialAabb3D):Bool {
       return cast (cast _Spatial._insertIntoGrid3D__uniformGrid3D((cast grid : Dynamic), (cast id : Float), ({ final __callArgument246:Dynamic = bounds; __callArgument246; }), ({ final __callArgument247:Dynamic = 'insert'; __callArgument247; })) : Bool);
       return cast _Runtime.UNDEFINED;
     }, updateSpatialObject: function(id:Float, bounds:SpatialAabb3D):Bool {
@@ -1249,7 +1345,7 @@ class _Spatial {
       _Spatial._queryGrid3DPoint__uniformGrid3D((cast grid : Dynamic), (cast x : Float), (cast y : Float), (cast z : Float), ({ final __callArgument264:Dynamic = out; __callArgument264; }));
     }, querySpatialRay: function(x:Float, y:Float, z:Float, dx:Float, dy:Float, dz:Float, out:Array<Float>):Void {
       _Spatial._queryGrid3DRay__uniformGrid3D((cast grid : Dynamic), (cast x : Float), (cast y : Float), (cast z : Float), (cast dx : Float), (cast dy : Float), (cast dz : Float), ({ final __callArgument266:Dynamic = out; __callArgument266; }));
-    } }; __callArgument268; })) : { >Entity, var insertSpatialObject:Float->SpatialAabb3D->Bool; var updateSpatialObject:Float->SpatialAabb3D->Bool; var removeSpatialObject:Float->Void; var clearSpatialIndex:Void->Void; var explainSpatialIndexing:Float->SpatialIndexingExplanation; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialRegion:SpatialAabb3D->Array<Float>->Void; var querySpatialPoint:Float->Float->Float->Array<Float>->Void; var querySpatialRay:Float->Float->Float->Float->Float->Float->Array<Float>->Void; });
+    } } : EntityShapeL48C10__uniformGrid3D); __callArgument268; })) : EntityShapeL48C10__uniformGrid3D);
     return cast null;
   }
 

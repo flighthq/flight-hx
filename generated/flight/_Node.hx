@@ -430,12 +430,12 @@ class _Node {
 
   @:allow(flight)
   @:keep
-  private static function initBoundsRectangleTrait(_target:HasBoundsRectangle, ?_obj:{ @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):Void {
+  private static function initBoundsRectangleTrait(_target:HasBoundsRectangle, ?_obj:{ @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):Void {
   }
 
   @:allow(flight)
   @:keep
-  private static function initClipTrait(target:HasClip, ?obj:{ @:optional var clip:Null<ClipRegion>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):Void {
+  private static function initClipTrait(target:HasClip, ?obj:{ @:optional var clip:Null<ClipRegion>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):Void {
     ((cast target : HasClip).clip = _Runtime.coalesce(({ final __structural108 = obj; __structural108 == null ? _Runtime.UNDEFINED : (cast __structural108 : { @:optional var clip:Null<ClipRegion>; }).clip; }), function():Dynamic return cast null));
   }
 
@@ -458,7 +458,7 @@ class _Node {
 
   @:allow(flight)
   @:keep
-  private static function initTransform2DTrait(target:HasTransform2D, ?obj:{ @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var rotation:Null<Float>; @:optional var scaleX:Null<Float>; @:optional var scaleY:Null<Float>; @:optional var skewX:Null<Float>; @:optional var skewY:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):Void {
+  private static function initTransform2DTrait(target:HasTransform2D, ?obj:{ @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var rotation:Null<Float>; @:optional var scaleX:Null<Float>; @:optional var scaleY:Null<Float>; @:optional var skewX:Null<Float>; @:optional var skewY:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):Void {
     (target.pivotX = cast (_Runtime.coalesce(({ final __structural111 = obj; __structural111 == null ? _Runtime.UNDEFINED : (cast __structural111 : { @:optional var pivotX:Null<Float>; }).pivotX; }), function():Dynamic return cast 0.0) : Float));
     (target.pivotY = cast (_Runtime.coalesce(({ final __structural112 = obj; __structural112 == null ? _Runtime.UNDEFINED : (cast __structural112 : { @:optional var pivotY:Null<Float>; }).pivotY; }), function():Dynamic return cast 0.0) : Float));
     (target.rotation = cast (_Runtime.coalesce(({ final __structural113 = obj; __structural113 == null ? _Runtime.UNDEFINED : (cast __structural113 : { @:optional var rotation:Null<Float>; }).rotation; }), function():Dynamic return cast 0.0) : Float));

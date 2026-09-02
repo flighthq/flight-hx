@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ShellTrashBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var moveToTrash:String->flight._internal._Promise<ShellTrashOutcome>; };
+typedef ShellTrashBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var moveToTrash:String->flight._internal._Promise<ShellTrashOutcome>; };

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef LogTransport = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var write:String->LogTransportWriteOutcome; var flush:Void->flight._internal._Promise<LogTransportFlushOutcome>; var destroy:Void->flight._internal._Promise<LogTransportDestroyOutcome>; };
+typedef LogTransport = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var write:String->LogTransportWriteOutcome; var flush:Void->flight._internal._Promise<LogTransportFlushOutcome>; var destroy:Void->flight._internal._Promise<LogTransportDestroyOutcome>; };

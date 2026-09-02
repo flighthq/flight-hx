@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AnimationCrossfade = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var channels:Array<AnimationCrossfadeChannel>; var curve:EasingFunction; var duration:Float; var elapsed:Float; var from:AnimationPlayer; var fromSample:flight._internal._Float32Array; var to:AnimationPlayer; var toSample:flight._internal._Float32Array; var weight:Float; };
+typedef AnimationCrossfade = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var channels:Array<AnimationCrossfadeChannel>; var curve:EasingFunction; var duration:Float; var elapsed:Float; var from:AnimationPlayer; var fromSample:flight._internal._Float32Array; var to:AnimationPlayer; var toSample:flight._internal._Float32Array; var weight:Float; };

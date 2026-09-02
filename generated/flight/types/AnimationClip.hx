@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AnimationClip = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var channels:Array<AnimationChannel>; var duration:Float; var events:Array<AnimationClipEvent>; };
+typedef AnimationClip = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var channels:Array<AnimationChannel>; var duration:Float; var events:Array<AnimationClipEvent>; };

@@ -8491,14 +8491,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "spread-construction",
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/entity/src/host.ts:8:10",
+        "schemaName": "EntityShapeL8C10",
         "type": "Host & Capabilities"
       },
       "factory": {
@@ -8506,9 +8505,12 @@
         "name": "createHost"
       },
       "line": 8,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class",
+        "spread-projection"
+      ],
       "source": "upstream/packages/entity/src/host.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -8543,13 +8545,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/font/src/glyphOutlineSource.ts:21:10",
+        "schemaName": "EntityShapeL21C10",
         "type": "GlyphRasterizerBackend & Entity"
       },
       "factory": {
@@ -8557,9 +8559,11 @@
         "name": "createGlyphRasterizerBackendFromGlyphOutlineSource"
       },
       "line": 21,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/font/src/glyphOutlineSource.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9054,13 +9058,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts:12:10",
+        "schemaName": "EntityShapeL12C10",
         "type": "GlyphRasterizerBackend & Entity"
       },
       "factory": {
@@ -9068,9 +9072,11 @@
         "name": "createStubGlyphRasterizerBackend"
       },
       "line": 12,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9106,13 +9112,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 15,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorApp.ts:38:15",
+        "schemaName": "EntityShapeL38C15",
         "type": "{ subscribe: (listener: () => void) => () => void; } & Entity"
       },
       "factory": {
@@ -9120,9 +9126,11 @@
         "name": "createCapacitorAppCapabilities"
       },
       "line": 38,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-capacitor/src/capacitorApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9131,13 +9139,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 11,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorApp.ts:46:11",
+        "schemaName": "EntityShapeL46C11",
         "type": "{ getName: () => string; } & Entity"
       },
       "factory": {
@@ -9145,9 +9153,11 @@
         "name": "createCapacitorAppCapabilities"
       },
       "line": 46,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-capacitor/src/capacitorApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9156,13 +9166,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 14,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorApp.ts:47:14",
+        "schemaName": "EntityShapeL47C14",
         "type": "{ getVersion: () => string; } & Entity"
       },
       "factory": {
@@ -9170,9 +9180,11 @@
         "name": "createCapacitorAppCapabilities"
       },
       "line": 47,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-capacitor/src/capacitorApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9182,14 +9194,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "spread-construction",
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorApp.ts:50:10",
+        "schemaName": "EntityShapeL50C10",
         "type": "CapacitorCommonAppCapabilities | CapacitorAndroidAppCapabilities"
       },
       "factory": {
@@ -9197,9 +9208,12 @@
         "name": "createCapacitorAppCapabilities"
       },
       "line": 50,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class",
+        "spread-projection"
+      ],
       "source": "upstream/packages/host-capacitor/src/capacitorApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9208,13 +9222,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 11,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorApp.ts:52:11",
+        "schemaName": "EntityShapeL52C11",
         "type": "{ hideApp: () => undefined; } & Entity"
       },
       "factory": {
@@ -9222,9 +9236,11 @@
         "name": "createCapacitorAppCapabilities"
       },
       "line": 52,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-capacitor/src/capacitorApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9233,13 +9249,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 11,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorApp.ts:53:11",
+        "schemaName": "EntityShapeL53C11",
         "type": "{ quit: () => undefined; } & Entity"
       },
       "factory": {
@@ -9247,9 +9263,11 @@
         "name": "createCapacitorAppCapabilities"
       },
       "line": 53,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-capacitor/src/capacitorApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9264,13 +9282,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorClipboard.ts:15:10",
+        "schemaName": "EntityShapeL15C10",
         "type": "CapacitorClipboardBackend"
       },
       "factory": {
@@ -9278,9 +9296,11 @@
         "name": "createCapacitorClipboardBackend"
       },
       "line": 15,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-capacitor/src/capacitorClipboard.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9291,13 +9311,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorConnectivity.ts:70:10",
+        "schemaName": "EntityShapeL70C10",
         "type": "CapacitorConnectivityBackend"
       },
       "factory": {
@@ -9305,9 +9325,11 @@
         "name": "createCapacitorConnectivityBackend"
       },
       "line": 70,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-capacitor/src/capacitorConnectivity.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9320,13 +9342,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorDevice.ts:42:10",
+        "schemaName": "EntityShapeL42C10",
         "type": "DeviceBackend & Entity"
       },
       "factory": {
@@ -9334,9 +9356,11 @@
         "name": "createCapacitorDeviceBackend"
       },
       "line": 42,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-capacitor/src/capacitorDevice.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9346,13 +9370,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorDialog.ts:8:10",
+        "schemaName": "EntityShapeL8C10",
         "type": "MessageDialogBackend & Entity"
       },
       "factory": {
@@ -9360,9 +9384,11 @@
         "name": "createCapacitorMessageDialogBackend"
       },
       "line": 8,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-capacitor/src/capacitorDialog.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9371,13 +9397,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorDialog.ts:31:10",
+        "schemaName": "EntityShapeL31C10",
         "type": "PromptDialogBackend & Entity"
       },
       "factory": {
@@ -9385,9 +9411,11 @@
         "name": "createCapacitorPromptDialogBackend"
       },
       "line": 31,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-capacitor/src/capacitorDialog.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9409,13 +9437,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorFileSystem.ts:14:10",
+        "schemaName": "EntityShapeL14C10",
         "type": "FileSystemBasicBackend & Entity"
       },
       "factory": {
@@ -9423,9 +9451,11 @@
         "name": "createCapacitorFileSystemBackend"
       },
       "line": 14,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9439,13 +9469,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorGeolocation.ts:24:10",
+        "schemaName": "EntityShapeL24C10",
         "type": "GeolocationBackend & Entity"
       },
       "factory": {
@@ -9453,9 +9483,11 @@
         "name": "createCapacitorGeolocationBackend"
       },
       "line": 24,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-capacitor/src/capacitorGeolocation.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9464,13 +9496,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorKeyboard.ts:32:10",
+        "schemaName": "EntityShapeL32C10",
         "type": "SoftKeyboardAccessoryBarBackend & Entity"
       },
       "factory": {
@@ -9478,9 +9510,11 @@
         "name": "createCapacitorSoftKeyboardAccessoryBarBackend"
       },
       "line": 32,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-capacitor/src/capacitorKeyboard.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9489,13 +9523,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorKeyboard.ts:46:10",
+        "schemaName": "EntityShapeL46C10",
         "type": "SoftKeyboardChangeBackend & Entity"
       },
       "factory": {
@@ -9503,9 +9537,11 @@
         "name": "createCapacitorSoftKeyboardChangeBackend"
       },
       "line": 46,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-capacitor/src/capacitorKeyboard.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9514,13 +9550,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorKeyboard.ts:83:10",
+        "schemaName": "EntityShapeL83C10",
         "type": "SoftKeyboardInfoBackend & Entity"
       },
       "factory": {
@@ -9528,9 +9564,11 @@
         "name": "createCapacitorSoftKeyboardInfoBackend"
       },
       "line": 83,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-capacitor/src/capacitorKeyboard.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9539,13 +9577,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorKeyboard.ts:98:10",
+        "schemaName": "EntityShapeL98C10",
         "type": "SoftKeyboardResizeModeWriteBackend & Entity"
       },
       "factory": {
@@ -9553,9 +9591,11 @@
         "name": "createCapacitorSoftKeyboardResizeModeWriteBackend"
       },
       "line": 98,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-capacitor/src/capacitorKeyboard.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9564,13 +9604,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorKeyboard.ts:113:10",
+        "schemaName": "EntityShapeL113C10",
         "type": "SoftKeyboardScrollAssistBackend & Entity"
       },
       "factory": {
@@ -9578,9 +9618,11 @@
         "name": "createCapacitorSoftKeyboardScrollAssistBackend"
       },
       "line": 113,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-capacitor/src/capacitorKeyboard.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9589,13 +9631,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorKeyboard.ts:126:10",
+        "schemaName": "EntityShapeL126C10",
         "type": "SoftKeyboardStyleBackend & Entity"
       },
       "factory": {
@@ -9603,9 +9645,11 @@
         "name": "createCapacitorSoftKeyboardStyleBackend"
       },
       "line": 126,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-capacitor/src/capacitorKeyboard.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9615,13 +9659,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorKeyboard.ts:141:10",
+        "schemaName": "EntityShapeL141C10",
         "type": "SoftKeyboardVisibilityBackend & Entity"
       },
       "factory": {
@@ -9629,9 +9673,11 @@
         "name": "createCapacitorSoftKeyboardVisibilityBackend"
       },
       "line": 141,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-capacitor/src/capacitorKeyboard.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9695,13 +9741,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 11,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorProtocol.ts:10:11",
+        "schemaName": "EntityShapeL10C11",
         "type": "{ subscribe: (listener: (url: string) => void) => () => void; } & Entity"
       },
       "factory": {
@@ -9709,9 +9755,11 @@
         "name": "createCapacitorProtocolCapabilities"
       },
       "line": 10,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-capacitor/src/capacitorProtocol.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9745,13 +9793,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorRegister.ts:103:10",
+        "schemaName": "EntityShapeL103C10",
         "type": "CapacitorHost<Profile>"
       },
       "factory": {
@@ -9759,9 +9807,11 @@
         "name": "capacitorHost"
       },
       "line": 103,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-capacitor/src/capacitorRegister.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9801,13 +9851,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorStatusBar.ts:40:10",
+        "schemaName": "EntityShapeL40C10",
         "type": "Entity & StatusBarColorBackend & StatusBarInfoBackend & StatusBarOverlaysBackend & StatusBarStyleBackend & StatusBarVisibilityBackend"
       },
       "factory": {
@@ -9815,9 +9865,11 @@
         "name": "createCapacitorStatusBarBackend"
       },
       "line": 40,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-capacitor/src/capacitorStatusBar.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9863,13 +9915,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 23,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:42:23",
+        "schemaName": "EntityShapeL42C23",
         "type": "{ subscribe: (listener: () => void) => () => void; } & Entity"
       },
       "factory": {
@@ -9877,9 +9929,11 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 42,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9888,13 +9942,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 12,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:43:12",
+        "schemaName": "EntityShapeL43C12",
         "type": "{ focus: () => void; } & Entity"
       },
       "factory": {
@@ -9902,9 +9956,11 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 43,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9915,13 +9971,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 13,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:44:13",
+        "schemaName": "EntityShapeL44C13",
         "type": "{ getLocale: () => string; getPreferredSystemLanguages: () => string[]; getSystemLocale: () => string; } & Entity"
       },
       "factory": {
@@ -9929,9 +9985,11 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 44,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9940,13 +9998,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 11,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:49:11",
+        "schemaName": "EntityShapeL49C11",
         "type": "{ getName: () => string; } & Entity"
       },
       "factory": {
@@ -9954,9 +10012,11 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 49,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9965,13 +10025,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 16,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:50:16",
+        "schemaName": "EntityShapeL50C16",
         "type": "{ setName: (name: string) => void; } & Entity"
       },
       "factory": {
@@ -9979,9 +10039,11 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 50,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -9992,13 +10054,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 11,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:51:11",
+        "schemaName": "EntityShapeL51C11",
         "type": "{ getAppDirectoryPath: (kind: AppPathKind) => string; getAppPath: () => string; getExecutablePath: () => string; } & Entity"
       },
       "factory": {
@@ -10006,9 +10068,11 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 51,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10017,13 +10081,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 11,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:56:11",
+        "schemaName": "EntityShapeL56C11",
         "type": "{ quit: () => void; } & Entity"
       },
       "factory": {
@@ -10031,9 +10095,11 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 56,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10042,13 +10108,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 18,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:57:18",
+        "schemaName": "EntityShapeL57C18",
         "type": "{ subscribe: (listener: (cancelHost: () => void) => void) => () => void; } & Entity"
       },
       "factory": {
@@ -10056,9 +10122,11 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 57,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10067,13 +10135,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 12,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:65:12",
+        "schemaName": "EntityShapeL65C12",
         "type": "{ subscribe: (listener: () => void) => () => void; } & Entity"
       },
       "factory": {
@@ -10081,9 +10149,11 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 65,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10092,13 +10162,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 15,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:66:15",
+        "schemaName": "EntityShapeL66C15",
         "type": "{ relaunch: () => void; } & Entity"
       },
       "factory": {
@@ -10106,9 +10176,11 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 66,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10117,13 +10189,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 21,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:67:21",
+        "schemaName": "EntityShapeL67C21",
         "type": "{ subscribe: (listener: (argv: readonly string[]) => void) => () => void; } & Entity"
       },
       "factory": {
@@ -10131,9 +10203,11 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 67,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10144,13 +10218,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 21,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:72:21",
+        "schemaName": "EntityShapeL72C21",
         "type": "{ hasSingleInstanceLock: () => boolean; releaseSingleInstanceLock: () => void; requestSingleInstanceLock: () => boolean; } & Entity"
       },
       "factory": {
@@ -10158,9 +10232,11 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 72,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10169,13 +10245,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 14,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:77:14",
+        "schemaName": "EntityShapeL77C14",
         "type": "{ getVersion: () => string; } & Entity"
       },
       "factory": {
@@ -10183,9 +10259,11 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 77,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10203,14 +10281,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "spread-construction",
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 12,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:83:12",
+        "schemaName": "EntityShapeL83C12",
         "type": "ElectronMacosAppCapabilities | ElectronWindowsAppCapabilities | ElectronLinuxAppCapabilities"
       },
       "factory": {
@@ -10218,9 +10295,12 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 83,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class",
+        "spread-projection"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10229,13 +10309,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 17,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:85:17",
+        "schemaName": "EntityShapeL85C17",
         "type": "{ subscribe: (listener: () => void) => () => void; } & Entity"
       },
       "factory": {
@@ -10243,9 +10323,11 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 85,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10254,13 +10336,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 25,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:86:25",
+        "schemaName": "EntityShapeL86C25",
         "type": "{ setActivationPolicy: (policy: \"regular\" | \"accessory\" | \"prohibited\") => void; } & Entity"
       },
       "factory": {
@@ -10268,9 +10350,11 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 86,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10279,13 +10363,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 14,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:89:14",
+        "schemaName": "EntityShapeL89C14",
         "type": "{ setBadgeCount: (count: number) => Promise<boolean>; } & Entity"
       },
       "factory": {
@@ -10293,9 +10377,11 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 89,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10309,13 +10395,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 13,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:90:13",
+        "schemaName": "EntityShapeL90C13",
         "type": "{ bounceDock: () => number; cancelAttention: (id: number) => void; cancelDockBounce: (id: number) => void; requestAttention: (critical: boolean) => number; setDockBadge: (text: string) => void; setDockMenu: (items: readonly MenuItemTemplate[]) => void; } & Entity"
       },
       "factory": {
@@ -10323,9 +10409,11 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 90,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10334,13 +10422,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 17,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:100:17",
+        "schemaName": "EntityShapeL100C17",
         "type": "{ subscribe: (listener: (path: string) => void) => () => void; } & Entity"
       },
       "factory": {
@@ -10348,9 +10436,11 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 100,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10359,13 +10449,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 20,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:105:20",
+        "schemaName": "EntityShapeL105C20",
         "type": "{ isAppHidden: () => boolean; } & Entity"
       },
       "factory": {
@@ -10373,9 +10463,11 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 105,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10384,13 +10476,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 13,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:106:13",
+        "schemaName": "EntityShapeL106C13",
         "type": "{ hideApp: () => void; } & Entity"
       },
       "factory": {
@@ -10398,9 +10490,11 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 106,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10409,13 +10503,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 13,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:108:13",
+        "schemaName": "EntityShapeL108C13",
         "type": "{ showApp: () => void; } & Entity"
       },
       "factory": {
@@ -10423,9 +10517,11 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 108,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10436,14 +10532,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "spread-construction",
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 12,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:113:12",
+        "schemaName": "EntityShapeL113C12",
         "type": "ElectronMacosAppCapabilities | ElectronWindowsAppCapabilities | ElectronLinuxAppCapabilities"
       },
       "factory": {
@@ -10451,9 +10546,12 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 113,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class",
+        "spread-projection"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10462,13 +10560,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 20,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:117:20",
+        "schemaName": "EntityShapeL117C20",
         "type": "{ setUserModelId: (id: string) => void; } & Entity"
       },
       "factory": {
@@ -10476,9 +10574,11 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 117,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10487,14 +10587,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "spread-construction",
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:121:10",
+        "schemaName": "EntityShapeL121C10",
         "type": "ElectronMacosAppCapabilities | ElectronWindowsAppCapabilities | ElectronLinuxAppCapabilities"
       },
       "factory": {
@@ -10502,9 +10601,12 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 121,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class",
+        "spread-projection"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10513,13 +10615,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 12,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:123:12",
+        "schemaName": "EntityShapeL123C12",
         "type": "{ setBadgeCount: (count: number) => Promise<boolean>; } & Entity"
       },
       "factory": {
@@ -10527,9 +10629,11 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 123,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10539,13 +10643,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "return",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:128:10",
+        "schemaName": "EntityShapeL128C10",
         "type": "{ getLoginItem(): { args: never[]; openAsHidden: boolean; openAtLogin: boolean; path: string; }; setLoginItem(settings: Readonly<AppLoginItemLike>): void; } & Entity"
       },
       "factory": {
@@ -10553,9 +10657,11 @@
         "name": "createElectronLoginItemBackend"
       },
       "line": 128,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10565,13 +10671,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "return",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronApp.ts:150:10",
+        "schemaName": "EntityShapeL150C10",
         "type": "{ addRecentDocument: (path: string) => void; clearRecentDocuments: () => void; } & Entity"
       },
       "factory": {
@@ -10579,9 +10685,11 @@
         "name": "createElectronRecentDocumentsBackend"
       },
       "line": 150,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10608,13 +10716,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronClipboard.ts:23:10",
+        "schemaName": "EntityShapeL23C10",
         "type": "ElectronClipboardBackend"
       },
       "factory": {
@@ -10622,9 +10730,11 @@
         "name": "createElectronClipboardBackend"
       },
       "line": 23,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronClipboard.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10633,13 +10743,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronDialog.ts:18:10",
+        "schemaName": "EntityShapeL18C10",
         "type": "DirectoryOpenDialogBackend & Entity"
       },
       "factory": {
@@ -10647,9 +10757,11 @@
         "name": "createElectronDirectoryOpenDialogBackend"
       },
       "line": 18,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronDialog.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10658,13 +10770,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronDialog.ts:40:10",
+        "schemaName": "EntityShapeL40C10",
         "type": "FileOpenDialogBackend & Entity"
       },
       "factory": {
@@ -10672,9 +10784,11 @@
         "name": "createElectronFileOpenDialogBackend"
       },
       "line": 40,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronDialog.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10683,13 +10797,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronDialog.ts:67:10",
+        "schemaName": "EntityShapeL67C10",
         "type": "FileSaveDialogBackend & Entity"
       },
       "factory": {
@@ -10697,9 +10811,11 @@
         "name": "createElectronFileSaveDialogBackend"
       },
       "line": 67,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronDialog.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10834,14 +10950,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "spread-construction",
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronNotification.ts:178:10",
+        "schemaName": "EntityShapeL178C10",
         "type": "ElectronNotificationCapabilities | ElectronMacosNotificationCapabilities"
       },
       "factory": {
@@ -10849,9 +10964,12 @@
         "name": "createElectronNotificationCapabilities"
       },
       "line": 178,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class",
+        "spread-projection"
+      ],
       "source": "upstream/packages/host-electron/src/electronNotification.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -10860,13 +10978,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronPlatform.ts:9:10",
+        "schemaName": "EntityShapeL9C10",
         "type": "PlatformBackend & Entity"
       },
       "factory": {
@@ -10874,9 +10992,11 @@
         "name": "createElectronPlatformBackend"
       },
       "line": 9,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronPlatform.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11093,13 +11213,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 24,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronProtocol.ts:7:24",
+        "schemaName": "EntityShapeL7C24",
         "type": "{ getRegisteredSchemes: () => string[]; register: (scheme: string) => boolean; } & Entity"
       },
       "factory": {
@@ -11107,9 +11227,11 @@
         "name": "createElectronProtocolCapabilities"
       },
       "line": 7,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronProtocol.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11149,13 +11271,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 14,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronProtocol.ts:16:14",
+        "schemaName": "EntityShapeL16C14",
         "type": "{ isDefault: (scheme: string) => boolean; removeAsDefault: (scheme: string) => boolean; setAsDefault: (scheme: string) => boolean; } & Entity"
       },
       "factory": {
@@ -11163,9 +11285,11 @@
         "name": "createElectronProtocolCapabilities"
       },
       "line": 16,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronProtocol.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11174,13 +11298,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 11,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronProtocol.ts:25:11",
+        "schemaName": "EntityShapeL25C11",
         "type": "{ subscribe: (listener: (url: string) => void) => () => void; } & Entity"
       },
       "factory": {
@@ -11188,9 +11312,11 @@
         "name": "createElectronProtocolCapabilities"
       },
       "line": 25,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronProtocol.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11199,13 +11325,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 24,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronProtocol.ts:33:24",
+        "schemaName": "EntityShapeL33C24",
         "type": "{ isRegistered: (scheme: string) => boolean; } & Entity"
       },
       "factory": {
@@ -11213,9 +11339,11 @@
         "name": "createElectronProtocolCapabilities"
       },
       "line": 33,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronProtocol.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11224,13 +11352,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 21,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronProtocol.ts:34:21",
+        "schemaName": "EntityShapeL34C21",
         "type": "{ unregister: (scheme: string) => boolean; } & Entity"
       },
       "factory": {
@@ -11238,9 +11366,11 @@
         "name": "createElectronProtocolCapabilities"
       },
       "line": 34,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronProtocol.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11274,13 +11404,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronRegister.ts:157:10",
+        "schemaName": "EntityShapeL157C10",
         "type": "ElectronMacosHost | ElectronHost<DesktopOsProfile>"
       },
       "factory": {
@@ -11288,9 +11418,11 @@
         "name": "registerElectronBackends"
       },
       "line": 157,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronRegister.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11301,13 +11433,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 17,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronScreen.ts:17:17",
+        "schemaName": "EntityShapeL17C17",
         "type": "{ getCursorPosition(out: { x: number; y: number; }): { x: number; y: number; }; getPrimaryScreen(out: ScreenInfo): ScreenInfo; getScreens(out: ScreenInfo[]): ScreenInfo[]; } & Entity"
       },
       "factory": {
@@ -11315,9 +11447,11 @@
         "name": "createElectronScreenCapabilities"
       },
       "line": 17,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronScreen.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11326,13 +11460,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 18,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronScreen.ts:36:18",
+        "schemaName": "EntityShapeL36C18",
         "type": "{ subscribe(listener: (event: Readonly<ScreenChangeEvent>) => void): () => void; } & Entity"
       },
       "factory": {
@@ -11340,9 +11474,11 @@
         "name": "createElectronScreenCapabilities"
       },
       "line": 36,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronScreen.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11633,13 +11769,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronStorage.ts:76:10",
+        "schemaName": "EntityShapeL76C10",
         "type": "StorageBackend & Entity"
       },
       "factory": {
@@ -11647,9 +11783,11 @@
         "name": "createElectronStorageBackend"
       },
       "line": 76,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronStorage.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11661,13 +11799,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 21,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:51:21",
+        "schemaName": "EntityShapeL51C21",
         "type": "{ create(tray: TrayIcon, options: Readonly<TrayIconOptions>): Promise<{ outcome: \"cancelled\"; error?: undefined; } | { error: unknown; outcome: \"invalid-icon\"; } | { error: unknown; outcome: \"tray-create-failed\"; } | { outcome: \"created\"; error?: undefined; }>; destroy(tray: TrayIcon): Promise<{ outcome: \"destroyed\"; failures?: undefined; } | { failures: { error?: unknown; step: \"native-resource\"; }[]; outcome: \"tray-destroy-failed\"; }>; isDestroyed: (tray: TrayIcon) => boolean; list: () => TrayIcon[]; } & Entity"
       },
       "factory": {
@@ -11675,9 +11813,11 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 51,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11686,13 +11826,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 17,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:114:17",
+        "schemaName": "EntityShapeL114C17",
         "type": "{ set(tray: TrayIcon, source: string): Promise<{ outcome: \"tray-destroyed\"; error?: undefined; } | { error: unknown; outcome: \"invalid-icon\"; } | { outcome: \"updated\"; error?: undefined; } | { error: unknown; outcome: \"image-update-failed\"; }>; } & Entity"
       },
       "factory": {
@@ -11700,9 +11840,11 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 114,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11712,13 +11854,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 19,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:134:19",
+        "schemaName": "EntityShapeL134C19",
         "type": "{ get(tray: TrayIcon): Promise<{ readonly outcome: \"tray-destroyed\"; readonly tooltip?: undefined; } | { readonly outcome: \"available\"; readonly tooltip: string; }>; set(tray: TrayIcon, value: string): Promise<{ outcome: \"tray-destroyed\"; error?: undefined; } | { outcome: \"updated\"; error?: undefined; } | { error: unknown; outcome: \"tooltip-update-failed\"; }>; } & Entity"
       },
       "factory": {
@@ -11726,9 +11868,11 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 134,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11737,13 +11881,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 16,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:154:16",
+        "schemaName": "EntityShapeL154C16",
         "type": "{ set(tray: TrayIcon, items: readonly MenuItemTemplate[]): Promise<{ outcome: \"tray-destroyed\"; error?: undefined; } | { error: unknown; outcome: \"menu-build-failed\"; } | { outcome: \"updated\"; error?: undefined; } | { error: unknown; outcome: \"menu-install-failed\"; }>; } & Entity"
       },
       "factory": {
@@ -11751,9 +11895,11 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 154,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11762,12 +11908,12 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "unresolved-destination"
-      ],
+      "blockers": [],
       "column": 13,
       "destination": {
-        "kind": "unresolved",
+        "kind": "local-entity",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:177:13",
+        "schemaName": "EntityShapeL177C13",
         "type": "unknown"
       },
       "factory": {
@@ -11775,9 +11921,11 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 177,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11786,12 +11934,12 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "unresolved-destination"
-      ],
+      "blockers": [],
       "column": 24,
       "destination": {
-        "kind": "unresolved",
+        "kind": "local-entity",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:189:24",
+        "schemaName": "EntityShapeL189C24",
         "type": "unknown"
       },
       "factory": {
@@ -11799,9 +11947,11 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 189,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11810,12 +11960,12 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "unresolved-destination"
-      ],
+      "blockers": [],
       "column": 26,
       "destination": {
-        "kind": "unresolved",
+        "kind": "local-entity",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:192:26",
+        "schemaName": "EntityShapeL192C26",
         "type": "unknown"
       },
       "factory": {
@@ -11823,9 +11973,11 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 192,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11834,12 +11986,12 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "unresolved-destination"
-      ],
+      "blockers": [],
       "column": 16,
       "destination": {
-        "kind": "unresolved",
+        "kind": "local-entity",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:195:16",
+        "schemaName": "EntityShapeL195C16",
         "type": "unknown"
       },
       "factory": {
@@ -11847,9 +11999,11 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 195,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11858,12 +12012,12 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "unresolved-destination"
-      ],
+      "blockers": [],
       "column": 26,
       "destination": {
-        "kind": "unresolved",
+        "kind": "local-entity",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:213:26",
+        "schemaName": "EntityShapeL213C26",
         "type": "unknown"
       },
       "factory": {
@@ -11871,9 +12025,11 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 213,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11882,12 +12038,12 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "unresolved-destination"
-      ],
+      "blockers": [],
       "column": 19,
       "destination": {
-        "kind": "unresolved",
+        "kind": "local-entity",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:220:19",
+        "schemaName": "EntityShapeL220C19",
         "type": "unknown"
       },
       "factory": {
@@ -11895,9 +12051,11 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 220,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11906,12 +12064,12 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "unresolved-destination"
-      ],
+      "blockers": [],
       "column": 21,
       "destination": {
-        "kind": "unresolved",
+        "kind": "local-entity",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:221:21",
+        "schemaName": "EntityShapeL221C21",
         "type": "unknown"
       },
       "factory": {
@@ -11919,9 +12077,11 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 221,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11930,12 +12090,12 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "unresolved-destination"
-      ],
+      "blockers": [],
       "column": 22,
       "destination": {
-        "kind": "unresolved",
+        "kind": "local-entity",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:239:22",
+        "schemaName": "EntityShapeL239C22",
         "type": "unknown"
       },
       "factory": {
@@ -11943,9 +12103,11 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 239,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11955,12 +12117,12 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "unresolved-destination"
-      ],
+      "blockers": [],
       "column": 14,
       "destination": {
-        "kind": "unresolved",
+        "kind": "local-entity",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:252:14",
+        "schemaName": "EntityShapeL252C14",
         "type": "unknown"
       },
       "factory": {
@@ -11968,9 +12130,11 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 252,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11980,12 +12144,12 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "unresolved-destination"
-      ],
+      "blockers": [],
       "column": 16,
       "destination": {
-        "kind": "unresolved",
+        "kind": "local-entity",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:280:16",
+        "schemaName": "EntityShapeL280C16",
         "type": "unknown"
       },
       "factory": {
@@ -11993,9 +12157,11 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 280,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12004,12 +12170,12 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "unresolved-destination"
-      ],
+      "blockers": [],
       "column": 22,
       "destination": {
-        "kind": "unresolved",
+        "kind": "local-entity",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:313:22",
+        "schemaName": "EntityShapeL313C22",
         "type": "unknown"
       },
       "factory": {
@@ -12017,9 +12183,11 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 313,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12115,13 +12283,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 13,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-tauri/src/tauriApp.ts:21:13",
+        "schemaName": "EntityShapeL21C13",
         "type": "{ getLocale: () => string; getPreferredSystemLanguages: () => string[]; getSystemLocale: () => string; } & Entity"
       },
       "factory": {
@@ -12129,9 +12297,11 @@
         "name": "createTauriAppCapabilities"
       },
       "line": 21,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-tauri/src/tauriApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12140,13 +12310,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 11,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-tauri/src/tauriApp.ts:26:11",
+        "schemaName": "EntityShapeL26C11",
         "type": "{ getName: () => string; } & Entity"
       },
       "factory": {
@@ -12154,9 +12324,11 @@
         "name": "createTauriAppCapabilities"
       },
       "line": 26,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-tauri/src/tauriApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12165,13 +12337,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 11,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-tauri/src/tauriApp.ts:27:11",
+        "schemaName": "EntityShapeL27C11",
         "type": "{ hideApp: () => undefined; } & Entity"
       },
       "factory": {
@@ -12179,9 +12351,11 @@
         "name": "createTauriAppCapabilities"
       },
       "line": 27,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-tauri/src/tauriApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12190,13 +12364,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 11,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-tauri/src/tauriApp.ts:28:11",
+        "schemaName": "EntityShapeL28C11",
         "type": "{ quit: () => undefined; } & Entity"
       },
       "factory": {
@@ -12204,9 +12378,11 @@
         "name": "createTauriAppCapabilities"
       },
       "line": 28,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-tauri/src/tauriApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12215,13 +12391,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 15,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-tauri/src/tauriApp.ts:29:15",
+        "schemaName": "EntityShapeL29C15",
         "type": "{ relaunch: () => undefined; } & Entity"
       },
       "factory": {
@@ -12229,9 +12405,11 @@
         "name": "createTauriAppCapabilities"
       },
       "line": 29,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-tauri/src/tauriApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12240,13 +12418,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 11,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-tauri/src/tauriApp.ts:30:11",
+        "schemaName": "EntityShapeL30C11",
         "type": "{ showApp: () => undefined; } & Entity"
       },
       "factory": {
@@ -12254,9 +12432,11 @@
         "name": "createTauriAppCapabilities"
       },
       "line": 30,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-tauri/src/tauriApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12265,13 +12445,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 14,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-tauri/src/tauriApp.ts:31:14",
+        "schemaName": "EntityShapeL31C14",
         "type": "{ getVersion: () => string; } & Entity"
       },
       "factory": {
@@ -12279,9 +12459,11 @@
         "name": "createTauriAppCapabilities"
       },
       "line": 31,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-tauri/src/tauriApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12320,13 +12502,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-tauri/src/tauriDialog.ts:20:10",
+        "schemaName": "EntityShapeL20C10",
         "type": "DirectoryOpenDialogBackend & Entity"
       },
       "factory": {
@@ -12334,9 +12516,11 @@
         "name": "createTauriDirectoryOpenDialogBackend"
       },
       "line": 20,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-tauri/src/tauriDialog.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12345,13 +12529,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-tauri/src/tauriDialog.ts:43:10",
+        "schemaName": "EntityShapeL43C10",
         "type": "FileOpenDialogBackend & Entity"
       },
       "factory": {
@@ -12359,9 +12543,11 @@
         "name": "createTauriFileOpenDialogBackend"
       },
       "line": 43,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-tauri/src/tauriDialog.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12370,13 +12556,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-tauri/src/tauriDialog.ts:70:10",
+        "schemaName": "EntityShapeL70C10",
         "type": "FileSaveDialogBackend & Entity"
       },
       "factory": {
@@ -12384,9 +12570,11 @@
         "name": "createTauriFileSaveDialogBackend"
       },
       "line": 70,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-tauri/src/tauriDialog.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12548,13 +12736,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-tauri/src/tauriRegister.ts:96:10",
+        "schemaName": "EntityShapeL96C10",
         "type": "TauriHost<Profile>"
       },
       "factory": {
@@ -12562,9 +12750,11 @@
         "name": "registerTauriBackends"
       },
       "line": 96,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-tauri/src/tauriRegister.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12727,13 +12917,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 21,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-tauri/src/tauriTray.ts:39:21",
+        "schemaName": "EntityShapeL39C21",
         "type": "{ create(tray: TrayIcon, options: Readonly<TrayIconOptions>): Promise<{ outcome: \"cancelled\"; error?: undefined; } | { error: unknown; outcome: \"tray-create-failed\"; } | { outcome: \"created\"; error?: undefined; }>; destroy(tray: TrayIcon): Promise<{ outcome: \"destroyed\"; failures?: undefined; } | { failures: { error?: unknown; step: \"native-resource\"; }[]; outcome: \"tray-destroy-failed\"; }>; isDestroyed: (tray: TrayIcon) => boolean; list: () => TrayIcon[]; } & Entity"
       },
       "factory": {
@@ -12741,9 +12931,11 @@
         "name": "createTauriTrayCapabilities"
       },
       "line": 39,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-tauri/src/tauriTray.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12752,13 +12944,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 17,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-tauri/src/tauriTray.ts:112:17",
+        "schemaName": "EntityShapeL112C17",
         "type": "{ set(tray: TrayIcon, icon: string): Promise<{ outcome: \"tray-destroyed\"; error?: undefined; } | { outcome: \"updated\"; error?: undefined; } | { error: unknown; outcome: \"image-update-failed\"; }>; } & Entity"
       },
       "factory": {
@@ -12766,9 +12958,11 @@
         "name": "createTauriTrayCapabilities"
       },
       "line": 112,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-tauri/src/tauriTray.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12777,13 +12971,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 16,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-tauri/src/tauriTray.ts:118:16",
+        "schemaName": "EntityShapeL118C16",
         "type": "{ set(tray: TrayIcon, items: readonly MenuItemTemplate[]): Promise<{ error: unknown; outcome: \"menu-build-failed\"; } | { readonly outcome: \"tray-destroyed\"; error?: undefined; } | { readonly error: Error; readonly outcome: \"menu-install-failed\"; } | { error: unknown; outcome: \"menu-install-failed\"; } | { readonly outcome: \"updated\"; error?: undefined; } | { readonly error: unknown[]; readonly outcome: \"menu-install-failed\"; }>; } & Entity"
       },
       "factory": {
@@ -12791,9 +12985,11 @@
         "name": "createTauriTrayCapabilities"
       },
       "line": 118,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-tauri/src/tauriTray.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12802,12 +12998,12 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "unresolved-destination"
-      ],
+      "blockers": [],
       "column": 26,
       "destination": {
-        "kind": "unresolved",
+        "kind": "local-entity",
+        "schemaId": "synthetic-entity:upstream/packages/host-tauri/src/tauriTray.ts:187:26",
+        "schemaName": "EntityShapeL187C26",
         "type": "unknown"
       },
       "factory": {
@@ -12815,9 +13011,11 @@
         "name": "createTauriTrayCapabilities"
       },
       "line": 187,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-tauri/src/tauriTray.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12827,13 +13025,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 17,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-tauri/src/tauriTray.ts:192:17",
+        "schemaName": "EntityShapeL192C17",
         "type": "{ get(tray: TrayIcon): Promise<{ readonly outcome: \"tray-destroyed\"; readonly title?: undefined; } | { readonly outcome: \"available\"; readonly title: string; }>; set(tray: TrayIcon, value: string): Promise<{ outcome: \"tray-destroyed\"; error?: undefined; } | { outcome: \"updated\"; error?: undefined; } | { error: unknown; outcome: \"title-update-failed\"; }>; } & Entity"
       },
       "factory": {
@@ -12841,9 +13039,11 @@
         "name": "createTauriTrayCapabilities"
       },
       "line": 192,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-tauri/src/tauriTray.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12852,13 +13052,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 29,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-tauri/src/tauriTray.ts:208:29",
+        "schemaName": "EntityShapeL208C29",
         "type": "{ getSignal: (tray: TrayIcon) => Signal<(event: Readonly<TrayInteractionEvent>) => void> | null; } & Entity"
       },
       "factory": {
@@ -12866,9 +13066,11 @@
         "name": "createTauriTrayCapabilities"
       },
       "line": 208,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-tauri/src/tauriTray.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12878,13 +13080,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 19,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-tauri/src/tauriTray.ts:211:19",
+        "schemaName": "EntityShapeL211C19",
         "type": "{ get(tray: TrayIcon): Promise<{ readonly outcome: \"tray-destroyed\"; readonly tooltip?: undefined; } | { readonly outcome: \"available\"; readonly tooltip: string; }>; set(tray: TrayIcon, value: string): Promise<{ outcome: \"tray-destroyed\"; error?: undefined; } | { outcome: \"updated\"; error?: undefined; } | { error: unknown; outcome: \"tooltip-update-failed\"; }>; } & Entity"
       },
       "factory": {
@@ -12892,9 +13094,11 @@
         "name": "createTauriTrayCapabilities"
       },
       "line": 211,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-tauri/src/tauriTray.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12903,12 +13107,12 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "unresolved-destination"
-      ],
+      "blockers": [],
       "column": 20,
       "destination": {
-        "kind": "unresolved",
+        "kind": "local-entity",
+        "schemaId": "synthetic-entity:upstream/packages/host-tauri/src/tauriTray.ts:233:20",
+        "schemaName": "EntityShapeL233C20",
         "type": "unknown"
       },
       "factory": {
@@ -12916,9 +13120,11 @@
         "name": "createTauriTrayCapabilities"
       },
       "line": 233,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-tauri/src/tauriTray.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12963,13 +13169,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webApp.ts:8:10",
+        "schemaName": "EntityShapeL8C10",
         "type": "WebAppCapabilities"
       },
       "factory": {
@@ -12977,9 +13183,11 @@
         "name": "createWebAppCapabilities"
       },
       "line": 8,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12988,13 +13196,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 12,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webApp.ts:9:12",
+        "schemaName": "EntityShapeL9C12",
         "type": "{ setBadgeCount: (count: number) => Promise<boolean>; } & Entity"
       },
       "factory": {
@@ -13002,9 +13210,11 @@
         "name": "createWebAppCapabilities"
       },
       "line": 9,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13013,13 +13223,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 12,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webApp.ts:21:12",
+        "schemaName": "EntityShapeL21C12",
         "type": "{ focus: () => void; } & Entity"
       },
       "factory": {
@@ -13027,9 +13237,11 @@
         "name": "createWebAppCapabilities"
       },
       "line": 21,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13040,13 +13252,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 13,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webApp.ts:28:13",
+        "schemaName": "EntityShapeL28C13",
         "type": "{ getLocale: () => string; getPreferredSystemLanguages: () => any[]; getSystemLocale: () => string; } & Entity"
       },
       "factory": {
@@ -13054,9 +13266,11 @@
         "name": "createWebAppCapabilities"
       },
       "line": 28,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13065,13 +13279,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 11,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webApp.ts:43:11",
+        "schemaName": "EntityShapeL43C11",
         "type": "{ getName: () => string; } & Entity"
       },
       "factory": {
@@ -13079,9 +13293,11 @@
         "name": "createWebAppCapabilities"
       },
       "line": 43,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13090,13 +13306,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 11,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webApp.ts:48:11",
+        "schemaName": "EntityShapeL48C11",
         "type": "{ quit: () => void; } & Entity"
       },
       "factory": {
@@ -13104,9 +13320,11 @@
         "name": "createWebAppCapabilities"
       },
       "line": 48,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13115,13 +13333,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 12,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webApp.ts:55:12",
+        "schemaName": "EntityShapeL55C12",
         "type": "{ subscribe: (listener: () => void) => () => void; } & Entity"
       },
       "factory": {
@@ -13129,9 +13347,11 @@
         "name": "createWebAppCapabilities"
       },
       "line": 55,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13140,13 +13360,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 15,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webApp.ts:70:15",
+        "schemaName": "EntityShapeL70C15",
         "type": "{ relaunch: () => void; } & Entity"
       },
       "factory": {
@@ -13154,9 +13374,11 @@
         "name": "createWebAppCapabilities"
       },
       "line": 70,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13165,13 +13387,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webBitmapReadback.ts:7:10",
+        "schemaName": "EntityShapeL7C10",
         "type": "BitmapReadbackBackend & Entity"
       },
       "factory": {
@@ -13179,9 +13401,11 @@
         "name": "createWebBitmapReadbackBackend"
       },
       "line": 7,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webBitmapReadback.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13268,13 +13492,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webClipboard.ts:113:10",
+        "schemaName": "EntityShapeL113C10",
         "type": "WebClipboardBackend"
       },
       "factory": {
@@ -13282,9 +13506,11 @@
         "name": "createWebClipboardProviderBackend"
       },
       "line": 113,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webClipboard.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13296,13 +13522,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webConnectivity.ts:17:10",
+        "schemaName": "EntityShapeL17C10",
         "type": "WebConnectivityBackend"
       },
       "factory": {
@@ -13310,9 +13536,11 @@
         "name": "createWebConnectivityBackend"
       },
       "line": 17,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webConnectivity.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13321,13 +13549,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webCursor.ts:5:10",
+        "schemaName": "EntityShapeL5C10",
         "type": "CursorBackend & Entity"
       },
       "factory": {
@@ -13335,9 +13563,11 @@
         "name": "createWebCursorBackend"
       },
       "line": 5,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webCursor.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13346,13 +13576,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 46,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webDialog.ts:20:46",
+        "schemaName": "EntityShapeL20C46",
         "type": "{ open: (options?: Readonly<OpenDirectoryDialogOptions>) => Promise<DirectoryOpenDialogResult>; } & Entity"
       },
       "factory": {
@@ -13360,9 +13590,11 @@
         "name": "<module>"
       },
       "line": 20,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webDialog.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13371,13 +13603,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 41,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webDialog.ts:24:41",
+        "schemaName": "EntityShapeL24C41",
         "type": "{ open: (options: Readonly<OpenFileDialogOptions>) => Promise<FileOpenDialogResult>; } & Entity"
       },
       "factory": {
@@ -13385,9 +13617,11 @@
         "name": "<module>"
       },
       "line": 24,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webDialog.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13396,13 +13630,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 41,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webDialog.ts:28:41",
+        "schemaName": "EntityShapeL28C41",
         "type": "{ save: (options: Readonly<SaveFileDialogOptions>) => Promise<FileSaveDialogResult>; } & Entity"
       },
       "factory": {
@@ -13410,9 +13644,11 @@
         "name": "<module>"
       },
       "line": 28,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webDialog.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13424,13 +13660,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webFontLoading.ts:6:10",
+        "schemaName": "EntityShapeL6C10",
         "type": "FontLoadingBackend & Entity"
       },
       "factory": {
@@ -13438,9 +13674,11 @@
         "name": "createWebFontLoadingBackend"
       },
       "line": 6,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webFontLoading.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13450,13 +13688,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webGlyphRasterizer.ts:12:10",
+        "schemaName": "EntityShapeL12C10",
         "type": "GlyphRasterizerBackend & Entity"
       },
       "factory": {
@@ -13464,9 +13702,11 @@
         "name": "createWebGlyphRasterizerBackend"
       },
       "line": 12,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13651,13 +13891,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webKeyboard.ts:16:10",
+        "schemaName": "EntityShapeL16C10",
         "type": "SoftKeyboardChangeBackend & Entity"
       },
       "factory": {
@@ -13665,9 +13905,11 @@
         "name": "createWebSoftKeyboardChangeBackend"
       },
       "line": 16,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webKeyboard.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13676,13 +13918,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webKeyboard.ts:39:10",
+        "schemaName": "EntityShapeL39C10",
         "type": "SoftKeyboardInfoBackend & Entity"
       },
       "factory": {
@@ -13690,9 +13932,11 @@
         "name": "createWebSoftKeyboardInfoBackend"
       },
       "line": 39,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webKeyboard.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13702,13 +13946,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webKeyboard.ts:53:10",
+        "schemaName": "EntityShapeL53C10",
         "type": "SoftKeyboardVisibilityBackend & Entity"
       },
       "factory": {
@@ -13716,9 +13960,11 @@
         "name": "createWebSoftKeyboardVisibilityBackend"
       },
       "line": 53,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webKeyboard.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13777,13 +14023,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 18,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webMidi.ts:111:18",
+        "schemaName": "EntityShapeL111C18",
         "type": "{ requestAccess(): Promise<{ readonly access: MidiAccess; readonly reason: \"accepted\"; } | { readonly reason: \"operation-failed\" | \"permission-denied\" | \"security-restricted\"; readonly access?: undefined; }>; } & Entity"
       },
       "factory": {
@@ -13791,9 +14037,11 @@
         "name": "createWebMidiProfile"
       },
       "line": 111,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webMidi.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13802,13 +14050,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 34,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webMidi.ts:121:34",
+        "schemaName": "EntityShapeL121C34",
         "type": "WebMidiAccessCapabilities | WebMidiPermissionAccessCapabilities"
       },
       "factory": {
@@ -13816,9 +14064,11 @@
         "name": "createWebMidiProfile"
       },
       "line": 121,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webMidi.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13827,13 +14077,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 22,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webMidi.ts:122:22",
+        "schemaName": "EntityShapeL122C22",
         "type": "{ getPermission: () => Promise<PermissionQueryOutcome>; } & Entity"
       },
       "factory": {
@@ -13841,9 +14091,11 @@
         "name": "createWebMidiProfile"
       },
       "line": 122,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webMidi.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13853,13 +14105,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webMidi.ts:125:10",
+        "schemaName": "EntityShapeL125C10",
         "type": "WebMidiAccessCapabilities | WebMidiPermissionAccessCapabilities"
       },
       "factory": {
@@ -13867,9 +14119,11 @@
         "name": "createWebMidiProfile"
       },
       "line": 125,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webMidi.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13878,13 +14132,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 28,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webMidi.ts:140:28",
+        "schemaName": "EntityShapeL140C28",
         "type": "{ release(): Promise<{ readonly reason: \"ok\"; } | { readonly reason: \"operation-failed\"; }>; } & Entity"
       },
       "factory": {
@@ -13892,9 +14146,11 @@
         "name": "attachWebMidiEvent"
       },
       "line": 140,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webMidi.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13935,14 +14191,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "spread-construction",
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 37,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webPower.ts:181:37",
+        "schemaName": "EntityShapeL181C37",
         "type": "{ keepAwake: PowerKeepAwakeBackend; suspension: PowerSuspensionBackend; change: PowerChangeBackend; status: PowerStatusBackend; } & Entity"
       },
       "factory": {
@@ -13950,9 +14205,12 @@
         "name": "<module>"
       },
       "line": 181,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class",
+        "spread-projection"
+      ],
       "source": "upstream/packages/host-web/src/webPower.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13962,13 +14220,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webProtocol.ts:8:10",
+        "schemaName": "EntityShapeL8C10",
         "type": "WebProtocolCapabilities"
       },
       "factory": {
@@ -13976,9 +14234,11 @@
         "name": "createWebProtocolCapabilities"
       },
       "line": 8,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webProtocol.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13987,13 +14247,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 13,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webProtocol.ts:9:13",
+        "schemaName": "EntityShapeL9C13",
         "type": "{ getLaunchUrl: () => string | null; } & Entity"
       },
       "factory": {
@@ -14001,9 +14261,11 @@
         "name": "createWebProtocolCapabilities"
       },
       "line": 9,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webProtocol.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -14013,13 +14275,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 19,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webProtocol.ts:20:19",
+        "schemaName": "EntityShapeL20C19",
         "type": "{ getRegisteredSchemes: () => string[]; register: (scheme: string) => boolean; } & Entity"
       },
       "factory": {
@@ -14027,9 +14289,11 @@
         "name": "createWebProtocolCapabilities"
       },
       "line": 20,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webProtocol.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -14041,13 +14305,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 17,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webScreen.ts:178:17",
+        "schemaName": "EntityShapeL178C17",
         "type": "{ destroy(): void; getCursorPosition(out: { x: number; y: number; }): { x: number; y: number; }; getPrimaryScreen(out: ScreenInfo): ScreenInfo; getScreens: (out: ScreenInfo[]) => ScreenInfo[]; } & Entity"
       },
       "factory": {
@@ -14055,9 +14319,11 @@
         "name": "createWebScreenCapabilities"
       },
       "line": 178,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webScreen.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -14066,13 +14332,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 18,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webScreen.ts:221:18",
+        "schemaName": "EntityShapeL221C18",
         "type": "{ subscribe(listener: (event: Readonly<ScreenChangeEvent>) => void): () => void; } & Entity"
       },
       "factory": {
@@ -14080,9 +14346,11 @@
         "name": "createWebScreenCapabilities"
       },
       "line": 221,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webScreen.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -14092,13 +14360,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 26,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webScreen.ts:242:26",
+        "schemaName": "EntityShapeL242C26",
         "type": "{ queryPermission(): Promise<ScreenPermissionState>; request(): Promise<boolean>; } & Entity"
       },
       "factory": {
@@ -14106,9 +14374,11 @@
         "name": "createWebScreenCapabilities"
       },
       "line": 242,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webScreen.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -14117,13 +14387,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 28,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webScreen.ts:272:28",
+        "schemaName": "EntityShapeL272C28",
         "type": "{ subscribe(listener: (state: ScreenPermissionState) => void): () => void; } & Entity"
       },
       "factory": {
@@ -14131,9 +14401,11 @@
         "name": "createWebScreenCapabilities"
       },
       "line": 272,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webScreen.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -14259,13 +14531,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 34,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webStorage.ts:20:34",
+        "schemaName": "EntityShapeL20C34",
         "type": "{ clear(): { reason: \"ok\"; } | { reason: StorageClearFailureReason; }; destroy(): void; getItem(key: string): { reason: \"ok\"; value: string | null; } | { reason: StorageGetItemFailureReason; value: null; }; keys(): { reason: \"ok\"; value: string[]; } | { reason: StorageGetItemFailureReason; value: null; }; removeItem(key: string): { reason: \"ok\"; } | { reason: StorageRemoveItemFailureReason; }; setItem(key: string, value: string): { reason: \"ok\"; } | { reason: StorageSetItemFailureReason; }; subscribe(listener: (change: Readonly<StorageChange>) => void): (() => void) | null; } & Entity"
       },
       "factory": {
@@ -14273,9 +14545,11 @@
         "name": "<module>"
       },
       "line": 20,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webStorage.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -14284,13 +14558,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 30,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webStoragePersistence.ts:14:30",
+        "schemaName": "EntityShapeL14C30",
         "type": "{ requestPersistence(): Promise<StoragePersistenceResult>; } & Entity"
       },
       "factory": {
@@ -14298,9 +14572,11 @@
         "name": "createWebWindowStoragePersistenceCapabilities"
       },
       "line": 14,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webStoragePersistence.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -14360,13 +14636,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 19,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webStoragePersistence.ts:36:19",
+        "schemaName": "EntityShapeL36C19",
         "type": "{ getPersistence(): Promise<StoragePersistenceResult>; } & Entity"
       },
       "factory": {
@@ -14374,9 +14650,11 @@
         "name": "createPersistenceQueryBackend"
       },
       "line": 36,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-web/src/webStoragePersistence.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -14597,13 +14875,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/keyboard/src/keyboard.ts:51:10",
+        "schemaName": "EntityShapeL51C10",
         "type": "SoftKeyboard & Entity"
       },
       "factory": {
@@ -14611,9 +14889,11 @@
         "name": "createSoftKeyboard"
       },
       "line": 51,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/keyboard/src/keyboard.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -15851,13 +16131,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 18,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/render-gl/src/glRenderTarget.ts:85:18",
+        "schemaName": "EntityShapeL85C18",
         "type": "{ requestedAxes: RenderTargetAxes; width: number; height: number; format: RenderTargetFormat; colorAttachments: number; colorFormats: RenderTargetFormat[]; depth: RenderTargetDepth; colorSpace: RenderTargetColorSpace; clearColors: number[]; clearDepth: number; sampleCount: number; framebuffer: WebGLFramebuffer; resolveFramebuffer: WebGLFramebuffer | null; textures: WebGLTexture[]; texture: WebGLTexture; depthTexture: WebGLTexture | null; colorRenderbuffers: WebGLRenderbuffer[]; depthStencilRenderbuffer: WebGLRenderbuffer | null; } & Entity"
       },
       "factory": {
@@ -15865,9 +16145,11 @@
         "name": "createGlRenderTarget"
       },
       "line": 85,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -16121,13 +16403,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 19,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/scene2d-canvas/src/canvasTestSupport.ts:23:19",
+        "schemaName": "EntityShapeL23C19",
         "type": "{ createRenderSurface(width: number, height: number, pixelRatio: number): HTMLCanvasElement; destroyRenderSurface(canvas: HTMLCanvasElement): void; } & Entity"
       },
       "factory": {
@@ -16135,9 +16417,11 @@
         "name": "<anonymous>"
       },
       "line": 23,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -16202,13 +16486,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/scene2d-dom/src/domRichText.ts:38:10",
+        "schemaName": "EntityShapeL38C10",
         "type": "DomRichTextData"
       },
       "factory": {
@@ -16216,9 +16500,11 @@
         "name": "createDomRichTextData"
       },
       "line": 38,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/scene2d-dom/src/domRichText.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -16228,13 +16514,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/scene2d-dom/src/domScale9Shape.ts:31:10",
+        "schemaName": "EntityShapeL31C10",
         "type": "DomScale9ShapeData"
       },
       "factory": {
@@ -16242,9 +16528,11 @@
         "name": "createDomScale9ShapeData"
       },
       "line": 31,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/scene2d-dom/src/domScale9Shape.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -16254,13 +16542,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/scene2d-dom/src/domShape.ts:25:10",
+        "schemaName": "EntityShapeL25C10",
         "type": "DomShapeData"
       },
       "factory": {
@@ -16268,9 +16556,11 @@
         "name": "createDomShapeData"
       },
       "line": 25,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/scene2d-dom/src/domShape.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -16279,13 +16569,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/scene2d-dom/src/domTextLabel.ts:26:10",
+        "schemaName": "EntityShapeL26C10",
         "type": "DomTextData"
       },
       "factory": {
@@ -16293,9 +16583,11 @@
         "name": "createDomTextData"
       },
       "line": 26,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/scene2d-dom/src/domTextLabel.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -16337,13 +16629,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "unresolved-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "unresolved",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/scene2d-gl/src/glScale9Shape.ts:50:10",
+        "schemaName": "EntityShapeL50C10",
         "type": "RendererData | null"
       },
       "factory": {
@@ -16351,9 +16643,11 @@
         "name": "createGlScale9ShapeData"
       },
       "line": 50,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -16368,13 +16662,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "unresolved-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "unresolved",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/scene2d-gl/src/glShapeData.ts:28:10",
+        "schemaName": "EntityShapeL28C10",
         "type": "RendererData | null"
       },
       "factory": {
@@ -16382,9 +16676,11 @@
         "name": "createGlShapeData"
       },
       "line": 28,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/scene2d-gl/src/glShapeData.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -16643,13 +16939,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 22,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/scene3d/src/sceneDocument.ts:109:22",
+        "schemaName": "EntityShapeL109C22",
         "type": "{ inverseBindMatrices: Float32Array<ArrayBuffer>; jointMatrices: Float32Array<ArrayBuffer>; joints: Node3D[]; names: string[] | null; normalMatrices: Float32Array<ArrayBuffer>; } & Entity"
       },
       "factory": {
@@ -16657,9 +16953,11 @@
         "name": "<anonymous>"
       },
       "line": 109,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/scene3d/src/sceneDocument.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -17037,13 +17335,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/spatial/src/bvh3D.ts:42:10",
+        "schemaName": "EntityShapeL42C10",
         "type": "SpatialIndexBackend3D & Entity"
       },
       "factory": {
@@ -17051,9 +17349,11 @@
         "name": "createBvhSpatialBackend3D"
       },
       "line": 42,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/spatial/src/bvh3D.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -17070,13 +17370,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/spatial/src/uniformGrid.ts:61:10",
+        "schemaName": "EntityShapeL61C10",
         "type": "SpatialIndexBackend2D & Entity"
       },
       "factory": {
@@ -17084,9 +17384,11 @@
         "name": "createUniformGridSpatialBackend2D"
       },
       "line": 61,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/spatial/src/uniformGrid.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -17103,13 +17405,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/spatial/src/uniformGrid3D.ts:48:10",
+        "schemaName": "EntityShapeL48C10",
         "type": "SpatialIndexBackend3D & Entity"
       },
       "factory": {
@@ -17117,9 +17419,11 @@
         "name": "createUniformGridSpatialBackend3D"
       },
       "line": 48,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/spatial/src/uniformGrid3D.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -17696,18 +18000,19 @@
   ],
   "summary": {
     "bareEntityCalls": 0,
-    "blockedEntityCalls": 175,
+    "blockedEntityCalls": 23,
     "calls": 368,
     "exactEntityCalls": 191,
     "exactEntitySchemas": 148,
     "exactNonEntityCalls": 17,
     "genericEntityCalls": 3,
+    "localEntityCalls": 152,
     "normalizedFieldOrderCalls": 24,
     "normalizedMissingFieldCalls": 9,
-    "normalizedSpreadProjectionCalls": 4,
-    "readyEntityCalls": 176,
-    "structuralEntityCalls": 141,
-    "unresolvedCalls": 16
+    "normalizedSpreadProjectionCalls": 11,
+    "readyEntityCalls": 328,
+    "structuralEntityCalls": 4,
+    "unresolvedCalls": 1
   },
   "upstreamCommit": "98a7a58a934f55555a561a308cc23c1363c45652"
 }

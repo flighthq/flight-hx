@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef StoragePersistenceRequestBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var requestPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; };
+typedef StoragePersistenceRequestBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var requestPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; };

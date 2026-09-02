@@ -4863,7 +4863,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createAluminumStandardPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
+  public static function createAluminumStandardPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
     return cast Facade_Sdk_flight__Materials.createAluminumStandardPbrMaterial(opts);
     return cast null;
   }
@@ -4958,7 +4958,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createAnisotropyPbrExtension(?opts:{ @:optional var anisotropyMap:Null<Texture>; @:optional var anisotropyMapUvSet:Null<PbrUvSet>; @:optional var anisotropyRotation:Null<Float>; @:optional var anisotropyStrength:Null<Float>; @:optional var kind:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):AnisotropyPbrExtension {
+  public static function createAnisotropyPbrExtension(?opts:{ @:optional var anisotropyMap:Null<Texture>; @:optional var anisotropyMapUvSet:Null<PbrUvSet>; @:optional var anisotropyRotation:Null<Float>; @:optional var anisotropyStrength:Null<Float>; @:optional var kind:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):AnisotropyPbrExtension {
     return cast Facade_Sdk_flight__Materials.createAnisotropyPbrExtension(opts);
     return cast null;
   }
@@ -5103,7 +5103,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createBlinnPhongMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaMap:Null<Texture>; @:optional var diffuse:Null<Float>; @:optional var diffuseMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var shininess:Null<Float>; @:optional var specular:Null<Float>; @:optional var specularMap:Null<Texture>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):BlinnPhongMaterial {
+  public static function createBlinnPhongMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaMap:Null<Texture>; @:optional var diffuse:Null<Float>; @:optional var diffuseMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var shininess:Null<Float>; @:optional var specular:Null<Float>; @:optional var specularMap:Null<Texture>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):BlinnPhongMaterial {
     return cast Facade_Sdk_flight__Materials.createBlinnPhongMaterial(opts);
     return cast null;
   }
@@ -5260,7 +5260,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createCarbonStandardPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
+  public static function createCarbonStandardPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
     return cast Facade_Sdk_flight__Materials.createCarbonStandardPbrMaterial(opts);
     return cast null;
   }
@@ -5295,7 +5295,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createClearcoatPbrExtension(?opts:{ @:optional var clearcoat:Null<Float>; @:optional var clearcoatMap:Null<Texture>; @:optional var clearcoatMapUvSet:Null<PbrUvSet>; @:optional var clearcoatNormalMap:Null<Texture>; @:optional var clearcoatNormalMapUvSet:Null<PbrUvSet>; @:optional var clearcoatNormalScale:Null<Float>; @:optional var clearcoatRoughness:Null<Float>; @:optional var clearcoatRoughnessMap:Null<Texture>; @:optional var clearcoatRoughnessMapUvSet:Null<PbrUvSet>; @:optional var kind:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):ClearcoatPbrExtension {
+  public static function createClearcoatPbrExtension(?opts:{ @:optional var clearcoat:Null<Float>; @:optional var clearcoatMap:Null<Texture>; @:optional var clearcoatMapUvSet:Null<PbrUvSet>; @:optional var clearcoatNormalMap:Null<Texture>; @:optional var clearcoatNormalMapUvSet:Null<PbrUvSet>; @:optional var clearcoatNormalScale:Null<Float>; @:optional var clearcoatRoughness:Null<Float>; @:optional var clearcoatRoughnessMap:Null<Texture>; @:optional var clearcoatRoughnessMapUvSet:Null<PbrUvSet>; @:optional var kind:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):ClearcoatPbrExtension {
     return cast Facade_Sdk_flight__Materials.createClearcoatPbrExtension(opts);
     return cast null;
   }
@@ -5505,7 +5505,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createCustomShaderMaterial(?opts:{ @:optional var kind:Null<String>; @:optional var shaderKey:Null<String>; @:optional var textures:Null<flight._internal._Record<String, Texture>>; @:optional var uniforms:Null<flight._internal._Record<String, flight._internal._Union2<Float, Array<Float>>>>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):CustomShaderMaterial {
+  public static function createCustomShaderMaterial(?opts:{ @:optional var kind:Null<String>; @:optional var shaderKey:Null<String>; @:optional var textures:Null<flight._internal._Record<String, Texture>>; @:optional var uniforms:Null<flight._internal._Record<String, flight._internal._Union2<Float, Array<Float>>>>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):CustomShaderMaterial {
     return cast Facade_Sdk_flight__Materials.createCustomShaderMaterial(opts);
     return cast null;
   }
@@ -5545,7 +5545,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createDepthMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var far:Null<Float>; @:optional var near:Null<Float>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):DepthMaterial {
+  public static function createDepthMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var far:Null<Float>; @:optional var near:Null<Float>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):DepthMaterial {
     return cast Facade_Sdk_flight__Materials.createDepthMaterial(opts);
     return cast null;
   }
@@ -5625,7 +5625,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createEmissiveMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):EmissiveMaterial {
+  public static function createEmissiveMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):EmissiveMaterial {
     return cast Facade_Sdk_flight__Materials.createEmissiveMaterial(opts);
     return cast null;
   }
@@ -5660,7 +5660,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createExtendedPbrMaterial(?opts:{ @:optional var extensions:Null<Array<PbrExtension>>; @:optional var kind:Null<String>; @:optional var standard:Null<StandardPbrMaterialProperties>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):ExtendedPbrMaterial {
+  public static function createExtendedPbrMaterial(?opts:{ @:optional var extensions:Null<Array<PbrExtension>>; @:optional var kind:Null<String>; @:optional var standard:Null<StandardPbrMaterialProperties>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):ExtendedPbrMaterial {
     return cast Facade_Sdk_flight__Materials.createExtendedPbrMaterial(opts);
     return cast null;
   }
@@ -5936,7 +5936,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createGoldStandardPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
+  public static function createGoldStandardPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
     return cast Facade_Sdk_flight__Materials.createGoldStandardPbrMaterial(opts);
     return cast null;
   }
@@ -6071,12 +6071,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createIridescencePbrExtension(?opts:{ @:optional var iridescence:Null<Float>; @:optional var iridescenceIor:Null<Float>; @:optional var iridescenceMap:Null<Texture>; @:optional var iridescenceMapUvSet:Null<PbrUvSet>; @:optional var iridescenceThicknessMap:Null<Texture>; @:optional var iridescenceThicknessMapUvSet:Null<PbrUvSet>; @:optional var iridescenceThicknessMax:Null<Float>; @:optional var iridescenceThicknessMin:Null<Float>; @:optional var kind:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):IridescencePbrExtension {
+  public static function createIridescencePbrExtension(?opts:{ @:optional var iridescence:Null<Float>; @:optional var iridescenceIor:Null<Float>; @:optional var iridescenceMap:Null<Texture>; @:optional var iridescenceMapUvSet:Null<PbrUvSet>; @:optional var iridescenceThicknessMap:Null<Texture>; @:optional var iridescenceThicknessMapUvSet:Null<PbrUvSet>; @:optional var iridescenceThicknessMax:Null<Float>; @:optional var iridescenceThicknessMin:Null<Float>; @:optional var kind:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):IridescencePbrExtension {
     return cast Facade_Sdk_flight__Materials.createIridescencePbrExtension(opts);
     return cast null;
   }
 
-  public static function createIronStandardPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
+  public static function createIronStandardPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
     return cast Facade_Sdk_flight__Materials.createIronStandardPbrMaterial(opts);
     return cast null;
   }
@@ -6096,7 +6096,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createLambertMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var diffuse:Null<Float>; @:optional var diffuseMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):LambertMaterial {
+  public static function createLambertMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var diffuse:Null<Float>; @:optional var diffuseMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):LambertMaterial {
     return cast Facade_Sdk_flight__Materials.createLambertMaterial(opts);
     return cast null;
   }
@@ -6151,7 +6151,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createMarbleStandardPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
+  public static function createMarbleStandardPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
     return cast Facade_Sdk_flight__Materials.createMarbleStandardPbrMaterial(opts);
     return cast null;
   }
@@ -6166,7 +6166,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createMatcapMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var matcap:Null<Texture>; @:optional var tint:Null<Float>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):MatcapMaterial {
+  public static function createMatcapMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var matcap:Null<Texture>; @:optional var tint:Null<Float>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):MatcapMaterial {
     return cast Facade_Sdk_flight__Materials.createMatcapMaterial(opts);
     return cast null;
   }
@@ -6326,7 +6326,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createNormalMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):NormalMaterial {
+  public static function createNormalMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):NormalMaterial {
     return cast Facade_Sdk_flight__Materials.createNormalMaterial(opts);
     return cast null;
   }
@@ -6446,7 +6446,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createPhongMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var diffuse:Null<Float>; @:optional var diffuseMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var shininess:Null<Float>; @:optional var specular:Null<Float>; @:optional var specularMap:Null<Texture>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):PhongMaterial {
+  public static function createPhongMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var diffuse:Null<Float>; @:optional var diffuseMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var shininess:Null<Float>; @:optional var specular:Null<Float>; @:optional var specularMap:Null<Texture>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):PhongMaterial {
     return cast Facade_Sdk_flight__Materials.createPhongMaterial(opts);
     return cast null;
   }
@@ -6746,7 +6746,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createPlasticStandardPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
+  public static function createPlasticStandardPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
     return cast Facade_Sdk_flight__Materials.createPlasticStandardPbrMaterial(opts);
     return cast null;
   }
@@ -6916,7 +6916,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createRubberStandardPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
+  public static function createRubberStandardPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
     return cast Facade_Sdk_flight__Materials.createRubberStandardPbrMaterial(opts);
     return cast null;
   }
@@ -7181,7 +7181,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSheenPbrExtension(?opts:{ @:optional var kind:Null<String>; @:optional var sheenColor:Null<Float>; @:optional var sheenColorMap:Null<Texture>; @:optional var sheenColorMapUvSet:Null<PbrUvSet>; @:optional var sheenRoughness:Null<Float>; @:optional var sheenRoughnessMap:Null<Texture>; @:optional var sheenRoughnessMapUvSet:Null<PbrUvSet>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):SheenPbrExtension {
+  public static function createSheenPbrExtension(?opts:{ @:optional var kind:Null<String>; @:optional var sheenColor:Null<Float>; @:optional var sheenColorMap:Null<Texture>; @:optional var sheenColorMapUvSet:Null<PbrUvSet>; @:optional var sheenRoughness:Null<Float>; @:optional var sheenRoughnessMap:Null<Texture>; @:optional var sheenRoughnessMapUvSet:Null<PbrUvSet>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):SheenPbrExtension {
     return cast Facade_Sdk_flight__Materials.createSheenPbrExtension(opts);
     return cast null;
   }
@@ -7196,7 +7196,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSilverStandardPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
+  public static function createSilverStandardPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
     return cast Facade_Sdk_flight__Materials.createSilverStandardPbrMaterial(opts);
     return cast null;
   }
@@ -7226,7 +7226,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSkinStandardPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
+  public static function createSkinStandardPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
     return cast Facade_Sdk_flight__Materials.createSkinStandardPbrMaterial(opts);
     return cast null;
   }
@@ -7266,12 +7266,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSpecularGlossinessPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var diffuse:Null<Float>; @:optional var diffuseMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var glossiness:Null<Float>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var specular:Null<Float>; @:optional var specularGlossinessMap:Null<Texture>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):SpecularGlossinessPbrMaterial {
+  public static function createSpecularGlossinessPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var diffuse:Null<Float>; @:optional var diffuseMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var glossiness:Null<Float>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var specular:Null<Float>; @:optional var specularGlossinessMap:Null<Texture>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):SpecularGlossinessPbrMaterial {
     return cast Facade_Sdk_flight__Materials.createSpecularGlossinessPbrMaterial(opts);
     return cast null;
   }
 
-  public static function createSpecularPbrExtension(?opts:{ @:optional var kind:Null<String>; @:optional var specular:Null<Float>; @:optional var specularColor:Null<Float>; @:optional var specularColorMap:Null<Texture>; @:optional var specularColorMapUvSet:Null<PbrUvSet>; @:optional var specularMap:Null<Texture>; @:optional var specularMapUvSet:Null<PbrUvSet>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):SpecularPbrExtension {
+  public static function createSpecularPbrExtension(?opts:{ @:optional var kind:Null<String>; @:optional var specular:Null<Float>; @:optional var specularColor:Null<Float>; @:optional var specularColorMap:Null<Texture>; @:optional var specularColorMapUvSet:Null<PbrUvSet>; @:optional var specularMap:Null<Texture>; @:optional var specularMapUvSet:Null<PbrUvSet>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):SpecularPbrExtension {
     return cast Facade_Sdk_flight__Materials.createSpecularPbrExtension(opts);
     return cast null;
   }
@@ -7321,12 +7321,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSpritesheet(?obj:{ @:optional var atlas:Null<TextureAtlas>; @:optional var animations:Null<flight._internal._Record<String, SpritesheetAnimation>>; @:optional var frames:Null<Array<SpritesheetFrame>>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):Spritesheet {
+  public static function createSpritesheet(?obj:{ @:optional var atlas:Null<TextureAtlas>; @:optional var animations:Null<flight._internal._Record<String, SpritesheetAnimation>>; @:optional var frames:Null<Array<SpritesheetFrame>>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):Spritesheet {
     return cast Facade_Sdk_flight__Spritesheet.createSpritesheet(obj);
     return cast null;
   }
 
-  public static function createSpritesheetAnimation(?obj:{ @:optional var frames:Null<Array<Float>>; @:optional var frameDuration:Null<Float>; @:optional var frameDurations:Null<Array<Float>>; @:optional var direction:Null<SpritesheetAnimationDirection>; @:optional var repeatCount:Null<Float>; @:optional var originX:Null<Float>; @:optional var originY:Null<Float>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):SpritesheetAnimation {
+  public static function createSpritesheetAnimation(?obj:{ @:optional var frames:Null<Array<Float>>; @:optional var frameDuration:Null<Float>; @:optional var frameDurations:Null<Array<Float>>; @:optional var direction:Null<SpritesheetAnimationDirection>; @:optional var repeatCount:Null<Float>; @:optional var originX:Null<Float>; @:optional var originY:Null<Float>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):SpritesheetAnimation {
     return cast Facade_Sdk_flight__Spritesheet.createSpritesheetAnimation(obj);
     return cast null;
   }
@@ -7386,12 +7386,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createStandardMaterial(?options:{ @:optional var kind:Null<StandardMaterialKind>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):StandardMaterial {
+  public static function createStandardMaterial(?options:{ @:optional var kind:Null<StandardMaterialKind>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):StandardMaterial {
     return cast Facade_Sdk_flight__Materials.createStandardMaterial(options);
     return cast null;
   }
 
-  public static function createStandardPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
+  public static function createStandardPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
     return cast Facade_Sdk_flight__Materials.createStandardPbrMaterial(opts);
     return cast null;
   }
@@ -7495,7 +7495,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createTextureAtlas(?obj:{ @:optional var imageHeight:Null<Float>; @:optional var imageName:Null<String>; @:optional var imageWidth:Null<Float>; @:optional var regions:Null<Array<TextureAtlasRegion>>; @:optional var scale:Null<Float>; @:optional var texture:Null<Texture2D>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):TextureAtlas {
+  public static function createTextureAtlas(?obj:{ @:optional var imageHeight:Null<Float>; @:optional var imageName:Null<String>; @:optional var imageWidth:Null<Float>; @:optional var regions:Null<Array<TextureAtlasRegion>>; @:optional var scale:Null<Float>; @:optional var texture:Null<Texture2D>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):TextureAtlas {
     return cast Facade_Sdk_flight__TextureAtlas.createTextureAtlas(obj);
     return cast null;
   }
@@ -7575,7 +7575,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createToonMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var ramp:Null<Texture>; @:optional var steps:Null<Float>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):ToonMaterial {
+  public static function createToonMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var ramp:Null<Texture>; @:optional var steps:Null<Float>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):ToonMaterial {
     return cast Facade_Sdk_flight__Materials.createToonMaterial(opts);
     return cast null;
   }
@@ -7610,7 +7610,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createTransmissionVolumePbrExtension(?opts:{ @:optional var attenuationColor:Null<Float>; @:optional var attenuationDistance:Null<Float>; @:optional var ior:Null<Float>; @:optional var kind:Null<String>; @:optional var thickness:Null<Float>; @:optional var thicknessMap:Null<Texture>; @:optional var thicknessMapUvSet:Null<PbrUvSet>; @:optional var transmission:Null<Float>; @:optional var transmissionMap:Null<Texture>; @:optional var transmissionMapUvSet:Null<PbrUvSet>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):TransmissionVolumePbrExtension {
+  public static function createTransmissionVolumePbrExtension(?opts:{ @:optional var attenuationColor:Null<Float>; @:optional var attenuationDistance:Null<Float>; @:optional var ior:Null<Float>; @:optional var kind:Null<String>; @:optional var thickness:Null<Float>; @:optional var thicknessMap:Null<Texture>; @:optional var thicknessMapUvSet:Null<PbrUvSet>; @:optional var transmission:Null<Float>; @:optional var transmissionMap:Null<Texture>; @:optional var transmissionMapUvSet:Null<PbrUvSet>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):TransmissionVolumePbrExtension {
     return cast Facade_Sdk_flight__Materials.createTransmissionVolumePbrExtension(opts);
     return cast null;
   }
@@ -7657,7 +7657,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createUnlitMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):UnlitMaterial {
+  public static function createUnlitMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):UnlitMaterial {
     return cast Facade_Sdk_flight__Materials.createUnlitMaterial(opts);
     return cast null;
   }
@@ -7692,7 +7692,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createVertexColorMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var tint:Null<Float>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):VertexColorMaterial {
+  public static function createVertexColorMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var tint:Null<Float>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):VertexColorMaterial {
     return cast Facade_Sdk_flight__Materials.createVertexColorMaterial(opts);
     return cast null;
   }
@@ -7809,17 +7809,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function createWireframeMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var color:Null<Float>; @:optional var thickness:Null<Float>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):WireframeMaterial {
+  public static function createWireframeMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var color:Null<Float>; @:optional var thickness:Null<Float>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):WireframeMaterial {
     return cast Facade_Sdk_flight__Materials.createWireframeMaterial(opts);
     return cast null;
   }
 
-  public static function createWoodStandardPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
+  public static function createWoodStandardPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
     return cast Facade_Sdk_flight__Materials.createWoodStandardPbrMaterial(opts);
     return cast null;
   }
 
-  public static function createWrappedDiffusePbrExtension(?opts:{ @:optional var kind:Null<String>; @:optional var thickness:Null<Float>; @:optional var thicknessMap:Null<Texture>; @:optional var thicknessMapUvSet:Null<PbrUvSet>; @:optional var wrappedDiffuseColor:Null<Float>; @:optional var wrappedDiffuseMap:Null<Texture>; @:optional var wrappedDiffuseMapUvSet:Null<PbrUvSet>; @:optional var wrappedDiffuseStrength:Null<Float>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):WrappedDiffusePbrExtension {
+  public static function createWrappedDiffusePbrExtension(?opts:{ @:optional var kind:Null<String>; @:optional var thickness:Null<Float>; @:optional var thicknessMap:Null<Texture>; @:optional var thicknessMapUvSet:Null<PbrUvSet>; @:optional var wrappedDiffuseColor:Null<Float>; @:optional var wrappedDiffuseMap:Null<Texture>; @:optional var wrappedDiffuseMapUvSet:Null<PbrUvSet>; @:optional var wrappedDiffuseStrength:Null<Float>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):WrappedDiffusePbrExtension {
     return cast Facade_Sdk_flight__Materials.createWrappedDiffusePbrExtension(opts);
     return cast null;
   }

@@ -10,7 +10,7 @@
     "missingEntries": 0,
     "moduleValueKeys": 0,
     "portableGlobalValueKeys": 35,
-    "typeUses": 9091,
+    "typeUses": 9085,
     "valueUses": 2124
   },
   "types": [
@@ -2465,7 +2465,7 @@
         "upstream/packages/video/src/videoResourceFrom.ts"
       ],
       "provider": "src/flight/_internal/dom/HTMLCanvasElement.hx",
-      "uses": 301
+      "uses": 300
     },
     {
       "coverage": "dynamic-stub",
@@ -3851,7 +3851,7 @@
         "upstream/packages/types/src/GlScene3DRuntime.ts"
       ],
       "provider": "src/flight/_internal/dom/WebGLFramebuffer.hx",
-      "uses": 45
+      "uses": 44
     },
     {
       "coverage": "dynamic-stub",
@@ -3973,7 +3973,7 @@
         "upstream/packages/types/src/GlRenderTarget.ts"
       ],
       "provider": "src/flight/_internal/dom/WebGLRenderbuffer.hx",
-      "uses": 11
+      "uses": 9
     },
     {
       "coverage": "dynamic-stub",
@@ -4111,7 +4111,7 @@
         "upstream/packages/types/src/GlTextureResolver.ts"
       ],
       "provider": "src/flight/_internal/dom/WebGLTexture.hx",
-      "uses": 427
+      "uses": 425
     },
     {
       "coverage": "dynamic-stub",

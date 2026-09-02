@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TrayPopupMenuBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var popup:TrayIcon->Vector2Like->flight._internal._Promise<TrayPopupMenuResult>; };
+typedef TrayPopupMenuBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var popup:TrayIcon->Vector2Like->flight._internal._Promise<TrayPopupMenuResult>; };

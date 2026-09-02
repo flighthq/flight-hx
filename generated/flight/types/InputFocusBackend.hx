@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef InputFocusBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var subscribe:InputTargetHandle->(Void->Void)->(Void->Void)->(Void->Void); };
+typedef InputFocusBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var subscribe:InputTargetHandle->(Void->Void)->(Void->Void)->(Void->Void); };

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ToggleController = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var __ToggleControllerTypeKey:flight._internal._Nothing; };
+typedef ToggleController = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var __ToggleControllerTypeKey:flight._internal._Nothing; };

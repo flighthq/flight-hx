@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MidiAccess = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; };
+typedef MidiAccess = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; };

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ConnectivityReachabilityBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var detectReachability:ConnectivityReachabilityOptions->ConnectivityReachability->flight._internal._Promise<ConnectivityReachability>; };
+typedef ConnectivityReachabilityBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var detectReachability:ConnectivityReachabilityOptions->ConnectivityReachability->flight._internal._Promise<ConnectivityReachability>; };

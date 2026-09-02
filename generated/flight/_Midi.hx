@@ -318,7 +318,7 @@ class _Midi {
   @:allow(flight)
   @:keep
   private static function createMidiInputPortResource(metadata:MidiPortMetadata__midiPort, operations:MidiInputPortResourceOperations):MidiInputPort {
-    var port:{ >Entity, var type:String; var id:String; var manufacturer:Null<String>; var name:Null<String>; var version:Null<String>; } = cast _Runtime.UNDEFINED;
+    var port:MidiInputPort = cast _Runtime.UNDEFINED;
     port = (cast createEntity(({ final __callArgument65:Dynamic = (#if flight_struct_typedef _Runtime.mergeObjects([metadata, { type: 'input' }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([metadata, { type: 'input' }]); ({ id: _Runtime.field(__structInitSource, 'id'), manufacturer: _Runtime.field(__structInitSource, 'manufacturer'), name: _Runtime.field(__structInitSource, 'name'), type: _Runtime.field(__structInitSource, 'type'), version: _Runtime.field(__structInitSource, 'version') } : MidiInputPort); }) #end); __callArgument65; })) : MidiInputPort);
     retainMidiInputPortResourceState(({ final __callArgument67:Dynamic = port; __callArgument67; }), ({ final __callArgument68:Dynamic = operations; __callArgument68; }));
     return cast port;
@@ -328,7 +328,7 @@ class _Midi {
   @:allow(flight)
   @:keep
   private static function createMidiOutputPortResource(metadata:MidiPortMetadata__midiPort, operations:MidiOutputPortResourceOperations):MidiOutputPort {
-    var port:{ >Entity, var type:String; var id:String; var manufacturer:Null<String>; var name:Null<String>; var version:Null<String>; } = cast _Runtime.UNDEFINED;
+    var port:MidiOutputPort = cast _Runtime.UNDEFINED;
     port = (cast createEntity(({ final __callArgument71:Dynamic = (#if flight_struct_typedef _Runtime.mergeObjects([metadata, { type: 'output' }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([metadata, { type: 'output' }]); ({ id: _Runtime.field(__structInitSource, 'id'), manufacturer: _Runtime.field(__structInitSource, 'manufacturer'), name: _Runtime.field(__structInitSource, 'name'), type: _Runtime.field(__structInitSource, 'type'), version: _Runtime.field(__structInitSource, 'version') } : MidiOutputPort); }) #end); __callArgument71; })) : MidiOutputPort);
     retainMidiOutputPortResourceState(({ final __callArgument73:Dynamic = port; __callArgument73; }), ({ final __callArgument74:Dynamic = operations; __callArgument74; }));
     return cast port;

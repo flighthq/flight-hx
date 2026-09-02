@@ -5,4 +5,4 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Types.VoxelGridTextureSourceKind;
 
-typedef VoxelGrid = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var alphaType:AlphaType; var gamut:String; var height:Float; var kind:Dynamic; var version:Float; var width:Float; var data:flight._internal._UInt8Array; var depth:Float; var format:PixelFormat; };
+typedef VoxelGrid = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var alphaType:AlphaType; var gamut:String; var height:Float; var kind:Dynamic; var version:Float; var width:Float; var data:flight._internal._UInt8Array; var depth:Float; var format:PixelFormat; };

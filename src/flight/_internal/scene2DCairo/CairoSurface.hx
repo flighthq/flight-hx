@@ -42,7 +42,7 @@ class CairoSurface {
    */
   public static function createCairoRenderSurfaceCreator():flight.types.CanvasRenderSurfaceCreator {
     return cast {
-      __EntityRuntimeKey: {binding: null},
+      __symbol__EntityRuntime: {binding: null},
       createRenderSurface: function(width:Float, height:Float, pixelRatio:Float) {
         final canvas = new flight._internal.backend.NativeScratchCanvas();
         canvas.width = Std.int(width * pixelRatio);

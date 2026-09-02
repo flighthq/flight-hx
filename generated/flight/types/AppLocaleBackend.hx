@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AppLocaleBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<String>; var getSystemLocale:Void->String; };
+typedef AppLocaleBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<String>; var getSystemLocale:Void->String; };

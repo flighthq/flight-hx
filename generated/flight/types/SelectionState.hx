@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SelectionState<NodeType> = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var __SelectionStateNodeTypeKey:NodeType; };
+typedef SelectionState<NodeType> = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var __SelectionStateNodeTypeKey:NodeType; };

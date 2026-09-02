@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Matrix = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; };
+typedef Matrix = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; };

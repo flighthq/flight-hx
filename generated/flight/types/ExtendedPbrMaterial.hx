@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ExtendedPbrMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:String; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var blendMode:BlendMode; var doubleSided:Bool; var extensions:Array<PbrExtension>; var standard:StandardPbrMaterialProperties; };
+typedef ExtendedPbrMaterial = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var blendMode:BlendMode; var doubleSided:Bool; var extensions:Array<PbrExtension>; var standard:StandardPbrMaterialProperties; };

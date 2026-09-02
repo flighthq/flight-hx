@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ClearcoatPbrExtension = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:String; var clearcoat:Float; var clearcoatMap:Null<Texture>; var clearcoatMapUvSet:PbrUvSet; var clearcoatNormalMap:Null<Texture>; var clearcoatNormalMapUvSet:PbrUvSet; var clearcoatNormalScale:Float; var clearcoatRoughness:Float; var clearcoatRoughnessMap:Null<Texture>; var clearcoatRoughnessMapUvSet:PbrUvSet; };
+typedef ClearcoatPbrExtension = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var clearcoat:Float; var clearcoatMap:Null<Texture>; var clearcoatMapUvSet:PbrUvSet; var clearcoatNormalMap:Null<Texture>; var clearcoatNormalMapUvSet:PbrUvSet; var clearcoatNormalScale:Float; var clearcoatRoughness:Float; var clearcoatRoughnessMap:Null<Texture>; var clearcoatRoughnessMapUvSet:PbrUvSet; };

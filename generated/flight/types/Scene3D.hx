@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Scene3D = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var animations:flight._internal._Record<String, AnimationClip>; var metadata:Null<Scene3DMetadata>; var resources:Array<ImageResourceReference>; var root:Node3D; };
+typedef Scene3D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var animations:flight._internal._Record<String, AnimationClip>; var metadata:Null<Scene3DMetadata>; var resources:Array<ImageResourceReference>; var root:Node3D; };

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Capsule = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var endX:Float; var endY:Float; var endZ:Float; var radius:Float; var startX:Float; var startY:Float; var startZ:Float; };
+typedef Capsule = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var endX:Float; var endY:Float; var endZ:Float; var radius:Float; var startX:Float; var startY:Float; var startZ:Float; };

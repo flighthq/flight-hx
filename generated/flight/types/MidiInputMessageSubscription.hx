@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MidiInputMessageSubscription = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var onMidiInputMessage:Signal<MidiInputMessage->Void>; };
+typedef MidiInputMessageSubscription = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onMidiInputMessage:Signal<MidiInputMessage->Void>; };

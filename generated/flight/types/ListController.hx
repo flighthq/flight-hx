@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ListController = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var __ListControllerTypeKey:flight._internal._Nothing; };
+typedef ListController = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var __ListControllerTypeKey:flight._internal._Nothing; };

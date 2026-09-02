@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef HasBoundsRectangle = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; };
+typedef HasBoundsRectangle = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; };

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AnimationPlayer = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var clip:AnimationClip; var loop:Bool; @:optional var loopMode:AnimationLoopMode; @:optional var onEvent:Null<Signal<AnimationClipEvent->Void>>; @:optional var onFinished:Null<Signal<Void->Void>>; @:optional var onLooped:Null<Signal<Void->Void>>; var playing:Bool; @:optional var repeatCount:Float; var speed:Float; var time:Float; };
+typedef AnimationPlayer = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var clip:AnimationClip; var loop:Bool; @:optional var loopMode:AnimationLoopMode; @:optional var onEvent:Null<Signal<AnimationClipEvent->Void>>; @:optional var onFinished:Null<Signal<Void->Void>>; @:optional var onLooped:Null<Signal<Void->Void>>; var playing:Bool; @:optional var repeatCount:Float; var speed:Float; var time:Float; };

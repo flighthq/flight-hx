@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Scene3DLights = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var ambient:Null<AmbientLight>; var directional:Null<DirectionalLight>; @:optional var hemisphere:Array<HemisphereLight>; @:optional var point:Array<PointLight>; @:optional var spot:Array<SpotLight>; };
+typedef Scene3DLights = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var ambient:Null<AmbientLight>; var directional:Null<DirectionalLight>; @:optional var hemisphere:Array<HemisphereLight>; @:optional var point:Array<PointLight>; @:optional var spot:Array<SpotLight>; };

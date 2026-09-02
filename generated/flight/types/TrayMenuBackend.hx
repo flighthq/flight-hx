@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TrayMenuBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var set:TrayIcon->Array<MenuItemTemplate>->flight._internal._Promise<TrayMenuUpdateResult>; };
+typedef TrayMenuBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var set:TrayIcon->Array<MenuItemTemplate>->flight._internal._Promise<TrayMenuUpdateResult>; };

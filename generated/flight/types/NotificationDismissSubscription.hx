@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef NotificationDismissSubscription = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var onNotificationDismiss:Signal<Notification->Void>; };
+typedef NotificationDismissSubscription = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onNotificationDismiss:Signal<Notification->Void>; };

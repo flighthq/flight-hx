@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MidiPortStateSubscription = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var onMidiPortStateChange:Signal<MidiPort->Void>; };
+typedef MidiPortStateSubscription = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onMidiPortStateChange:Signal<MidiPort->Void>; };

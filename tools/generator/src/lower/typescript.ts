@@ -7,7 +7,10 @@ import {
   createEntityCallForObjectLiteral,
   entityFactoryDestinationCandidates,
   entityFactoryExpandedObjectFields,
+  entityFactoryObjectLiteral,
   entityFactoryObjectShape,
+  entityFactorySyntheticClassName,
+  isFlightCreateEntityCall,
 } from '../analyze/entity-factory-call.ts';
 import {
   hostTypeIdentity,
@@ -41,6 +44,7 @@ import type {
   IrTypedArraySetReceiver,
   IrTypedStructBinding,
   IrType,
+  IrTypeDeclaration,
   IrTypeField,
   IrVariable,
   LoweringDiagnostic,
@@ -428,6 +432,7 @@ export function lowerTypeScriptSource(
       checker && options.program ? collectObjectMethodArityContexts(options.program, checker) : new Map(),
     scopeBindings: new WeakMap(),
     sourceFile,
+    syntheticEntityDeclarations: [],
     temporaryIndex: 0,
     typedStructs,
     utilityAliasNames,
@@ -513,7 +518,7 @@ export function lowerTypeScriptSource(
           if (!ts.isIdentifier(declaration.name)) unsupported(declaration.name, context, 'binding pattern declaration');
           const inferred = declaration.type
             ? lowerType(declaration.type, context)
-            : inferredType(declaration.name, context);
+            : (entityFactoryVariableStorageType(declaration, context) ?? inferredType(declaration.name, context));
           const erasedTypeParameters = new Set(
             declaration.initializer &&
               (ts.isArrowFunction(declaration.initializer) || ts.isFunctionExpression(declaration.initializer))
@@ -562,6 +567,8 @@ export function lowerTypeScriptSource(
       if (!(error instanceof UnsupportedSyntaxError)) throw error;
     }
   }
+
+  declarations.push(...context.syntheticEntityDeclarations);
 
   if (moduleRuntimeStatements.length > 0) {
     const declarationNames = new Set(declarations.map((declaration) => declaration.name));
@@ -1145,6 +1152,7 @@ interface LoweringContext {
   objectMethodArityContexts: ObjectMethodArityContexts;
   scopeBindings: WeakMap<ts.Node, ReadonlySet<string>>;
   sourceFile: ts.SourceFile;
+  syntheticEntityDeclarations: IrTypeDeclaration[];
   temporaryIndex: number;
   typedStructs?: TypedStructRegistry | undefined;
   utilityAliasNames: ReadonlySet<string>;
@@ -1926,7 +1934,7 @@ function inferredReturnType(node: ts.SignatureDeclaration, context: LoweringCont
   if (ts.isArrowFunction(node) || ts.isFunctionExpression(node)) {
     contextualType = checker.getContextualType(node);
   } else if (ts.isMethodDeclaration(node) && ts.isObjectLiteralExpression(node.parent)) {
-    const owner = checker.getContextualType(node.parent);
+    const owner = entityFactoryObjectDestinationType(node.parent, context) ?? checker.getContextualType(node.parent);
     const property = owner && checker.getPropertyOfType(owner, propertyName(node.name, context));
     contextualType = property && checker.getTypeOfSymbolAtLocation(property, node);
   }
@@ -3122,7 +3130,9 @@ function lowerVariables(node: ts.VariableDeclarationList, mutable: boolean, cont
           ? (declaration.initializer.typeParameters?.map((parameter) => parameter.name.text) ?? [])
           : [],
       );
-      const type = declaration.type ? lowerType(declaration.type, context) : inferredType(declaration.name, context);
+      const type = declaration.type
+        ? lowerType(declaration.type, context)
+        : (entityFactoryVariableStorageType(declaration, context) ?? inferredType(declaration.name, context));
       const loweredInitializer = declaration.initializer
         ? lowerExpression(declaration.initializer, context)
         : undefined;
@@ -3683,15 +3693,27 @@ function cppStructInitEntityFactoryConstruction(
 ): IrCppStructInitConstruction | undefined {
   const checker = context.checker;
   const registry = context.typedStructs;
-  if (!checker || !registry) return undefined;
+  if (!checker) return undefined;
   const call = createEntityCallForObjectLiteral(node, checker);
   if (!call) return undefined;
-  const binding = entityFactoryDestinationCandidates(call, checker)
-    .map((candidate) => registry.resolveFactoryIdentityConstruction(candidate.type))
-    .find((candidate) => candidate !== undefined);
-  if (!binding) return undefined;
+  const destinationCandidates = entityFactoryDestinationCandidates(call, checker);
+  const namedIdentity = registry
+    ? destinationCandidates
+        .map((candidate) => registry.resolveIdentity(candidate.type))
+        .find((candidate) => candidate !== undefined)
+    : undefined;
+  const binding = registry
+    ? destinationCandidates
+        .map((candidate) => registry.resolveFactoryIdentityConstruction(candidate.type))
+        .find((candidate) => candidate !== undefined)
+    : undefined;
   const shape = entityFactoryObjectShape(node);
   const constructionFields = shape.hasSpread ? entityFactoryExpandedObjectFields(node, checker) : shape.fields;
+  if (!binding) {
+    return namedIdentity
+      ? undefined
+      : syntheticEntityFactoryConstruction(node, call, constructionFields, shape, context);
+  }
   if (
     shape.hasComputed ||
     shape.hasUnsupported ||
@@ -3702,6 +3724,103 @@ function cppStructInitEntityFactoryConstruction(
   }
   const missingFieldNames = binding.fieldNames.filter((field) => !constructionFields.includes(field));
   return missingFieldNames.length > 0 ? { ...binding, missingFieldNames } : binding;
+}
+
+function entityFactoryObjectDestinationType(
+  node: ts.ObjectLiteralExpression,
+  context: LoweringContext,
+): ts.Type | undefined {
+  const checker = context.checker;
+  const registry = context.typedStructs;
+  if (!checker || !registry) return undefined;
+  const call = createEntityCallForObjectLiteral(node, checker);
+  if (!call) return undefined;
+  return entityFactoryDestinationCandidates(call, checker).find(
+    (candidate) => registry.resolveFactoryIdentityConstruction(candidate.type) !== undefined,
+  )?.type;
+}
+
+function entityFactoryVariableStorageType(
+  declaration: ts.VariableDeclaration,
+  context: LoweringContext,
+): IrType | undefined {
+  const checker = context.checker;
+  const registry = context.typedStructs;
+  const initializer = declaration.initializer;
+  if (!checker || !registry || !initializer || !ts.isCallExpression(initializer)) return undefined;
+  if (!isFlightCreateEntityCall(initializer, checker)) return undefined;
+  const object = entityFactoryObjectLiteral(initializer);
+  if (!object) return undefined;
+  const shape = entityFactoryObjectShape(object);
+  const constructionFields = shape.hasSpread ? entityFactoryExpandedObjectFields(object, checker) : shape.fields;
+  if (!constructionFields || shape.hasComputed || shape.hasUnsupported) return undefined;
+  const binding = entityFactoryDestinationCandidates(initializer, checker)
+    .map((candidate) => registry.resolveFactoryIdentityConstruction(candidate.type))
+    .find(
+      (candidate) =>
+        candidate !== undefined && constructionFields.every((field) => candidate.fieldNames.includes(field)),
+    );
+  return binding ? { arguments: [], kind: 'named', name: binding.schemaHaxeType } : undefined;
+}
+
+function syntheticEntityFactoryConstruction(
+  node: ts.ObjectLiteralExpression,
+  call: ts.CallExpression,
+  constructionFields: string[] | undefined,
+  shape: ReturnType<typeof entityFactoryObjectShape>,
+  context: LoweringContext,
+): IrCppStructInitConstruction | undefined {
+  const checker = context.checker;
+  if (!checker || !constructionFields || shape.hasComputed || shape.hasUnsupported) return undefined;
+  const objectType = checker.getTypeAtLocation(node);
+  const typeParameterNames = enclosingTypeParameterNames(node);
+  const fields: IrTypeField[] = [];
+  for (const name of constructionFields) {
+    const property = checker.getPropertyOfType(objectType, name);
+    if (!property) return undefined;
+    const checkerType = checker.getTypeOfSymbolAtLocation(property, node);
+    const lowered = lowerCheckerType(checkerType, node, context, new Set()) ?? {
+      kind: 'dynamic' as const,
+      reason: 'checker-known-unrepresentable' as const,
+    };
+    fields.push({
+      name,
+      optional: false,
+      type: eraseLocalTypeParameters(lowered, typeParameterNames),
+    });
+  }
+  const name = entityFactorySyntheticClassName(call);
+  const site = origin(call, context);
+  const schemaId = `synthetic-entity:${site.source}:${String(site.line)}:${String(site.column)}`;
+  if (!context.syntheticEntityDeclarations.some((declaration) => declaration.cppStructInitSchemaId === schemaId)) {
+    context.syntheticEntityDeclarations.push({
+      cppStructInitSchemaId: schemaId,
+      exported: false,
+      kind: 'type',
+      name,
+      origin: site,
+      packagePrivate: true,
+      type: {
+        extends: [],
+        fields: [
+          ...fields,
+          {
+            name: '__EntityRuntimeKey',
+            optional: true,
+            type: { inner: { kind: 'dynamic' }, kind: 'nullable' },
+          },
+        ],
+        kind: 'anonymous',
+      },
+      typeParameters: [],
+    });
+  }
+  return {
+    fieldNames: constructionFields,
+    schemaHaxeType: name,
+    schemaId,
+    schemaName: name,
+  };
 }
 
 function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpression {
