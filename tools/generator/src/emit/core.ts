@@ -243,6 +243,7 @@ export function generateCoreModules(
     }
   }
   markCppStructInitTypes(modules, structRegistry, typedStructProvenance);
+  sealCppStructInitConstructors(modules);
   verifyTypedStructEmissionCoverage(modules, structRegistry);
   const shadowedTypeNames = markShadowedSecondaryTypes(modules);
   populateSourceImports(
@@ -531,6 +532,45 @@ function markCppStructInitTypes(
   const missing = [...allowlist].filter((id) => !seen.has(id));
   if (missing.length > 0)
     throw new Error(`cpp @:structInit allowlist identities were not emitted: ${missing.join(', ')}`);
+}
+
+export function sealCppStructInitConstructors(modules: IrModule[]): void {
+  const constructionModulesBySchema = new Map<string, Set<string>>();
+  for (const module of modules) {
+    const seen = new WeakSet<object>();
+    const visit = (value: unknown): void => {
+      if (!value || typeof value !== 'object' || seen.has(value)) return;
+      seen.add(value);
+      if (Array.isArray(value)) {
+        value.forEach(visit);
+        return;
+      }
+      const record = value as Record<string, unknown>;
+      if (record.kind === 'object') {
+        const construction = record.cppStructInit as { schemaId?: unknown } | undefined;
+        if (typeof construction?.schemaId === 'string') {
+          const owners = constructionModulesBySchema.get(construction.schemaId) ?? new Set<string>();
+          owners.add(modulePath(module));
+          constructionModulesBySchema.set(construction.schemaId, owners);
+        }
+      }
+      Object.values(record).forEach(visit);
+    };
+    visit(module.declarations);
+  }
+
+  for (const module of modules) {
+    for (const declaration of module.declarations) {
+      if (declaration.kind !== 'type' || !declaration.cppStructInitSchemaId) continue;
+      const owners = [...(constructionModulesBySchema.get(declaration.cppStructInitSchemaId) ?? [])].sort();
+      if (owners.length === 0) {
+        throw new Error(
+          `sealed cpp @:structInit declaration has no construction module: ${declaration.cppStructInitSchemaId}`,
+        );
+      }
+      declaration.cppStructInitConstructorAllowModules = owners;
+    }
+  }
 }
 
 function isEntityBaseType(type: IrType): boolean {

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flight._internal._Runtime;
 
 #if !flight_struct_typedef
+@:allow(flight._Particles)
 @:structInit
 class ParticleEmitterState {
   public var burstTimer:Float;
@@ -21,7 +22,7 @@ class ParticleEmitterState {
   public var spawnAccumulator:Float;
   public var velocities:flight._internal._Float32Array;
 
-  public function new(burstTimer:Float, colorBirth:flight._internal._Float32Array, colorDeath:flight._internal._Float32Array, emitterAge:Float, lifetimes:flight._internal._Float32Array, prevX:Float, prevY:Float, prevZ:Float, random:RandomSource, rotationSpeeds:flight._internal._Float32Array, scales:flight._internal._Float32Array, spawnAccumulator:Float, velocities:flight._internal._Float32Array):Void {
+  private function new(burstTimer:Float, colorBirth:flight._internal._Float32Array, colorDeath:flight._internal._Float32Array, emitterAge:Float, lifetimes:flight._internal._Float32Array, prevX:Float, prevY:Float, prevZ:Float, random:RandomSource, rotationSpeeds:flight._internal._Float32Array, scales:flight._internal._Float32Array, spawnAccumulator:Float, velocities:flight._internal._Float32Array):Void {
     this.burstTimer = burstTimer;
     this.colorBirth = colorBirth;
     this.colorDeath = colorDeath;

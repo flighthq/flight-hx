@@ -16,7 +16,7 @@ import {
   type TypedStructCandidate,
 } from '../../tools/generator/src/analyze/typed-structs.ts';
 import { upstreamTypeScriptProgram } from '../../tools/generator/src/analyze/program.ts';
-import { validateCppStructInitProvenance } from '../../tools/generator/src/emit/core.ts';
+import { sealCppStructInitConstructors, validateCppStructInitProvenance } from '../../tools/generator/src/emit/core.ts';
 import { emitHaxeModule } from '../../tools/generator/src/emit/haxe.ts';
 import {
   entityFactoryClosureSummary,
@@ -3994,18 +3994,22 @@ describe('typed struct analysis', () => {
       type: { inner: { kind: 'dynamic' }, kind: 'nullable' },
     });
     declaration.cppStructInitSchemaId = candidateId(candidate);
-    const output = emitHaxeModule({
+    const fixtureModule = {
       declarations: result.lowered.declarations,
       haxePackage: 'flight.types',
       imports: [],
       name: 'CameraPilot',
       packageName: '@flighthq/types',
-    });
+    };
+    sealCppStructInitConstructors([fixtureModule]);
+    const output = emitHaxeModule(fixtureModule);
 
     expect(result.lowered.diagnostics).toEqual([]);
-    expect(output).toContain('#if !flight_struct_typedef\n@:structInit\nclass Camera2D {');
     expect(output).toContain(
-      'public function new(rotation:Float, viewportHeight:Float, viewportWidth:Float, x:Float, y:Float, zoom:Float):Void',
+      '#if !flight_struct_typedef\n@:allow(flight.types.CameraPilot)\n@:structInit\nclass Camera2D {',
+    );
+    expect(output).toContain(
+      'private function new(rotation:Float, viewportHeight:Float, viewportWidth:Float, x:Float, y:Float, zoom:Float):Void',
     );
     expect(output).toContain('public var __symbol__EntityRuntime:Null<Dynamic>;');
     expect(output).toContain('this.__symbol__EntityRuntime = null;');
@@ -4040,6 +4044,28 @@ describe('typed struct analysis', () => {
         stdio: 'pipe',
       }),
     ).not.toThrow();
+
+    writeFileSync(
+      path.join(fixtureDirectory, 'ExternalNewMain.hx'),
+      `
+        class ExternalNewMain {
+          static function main() {
+            new flight.types.CameraPilot.Camera2D(0, 480, 640, 12, 34, 2);
+          }
+        }
+      `,
+    );
+    let privateConstructorDiagnostic = '';
+    try {
+      execFileSync(
+        'node',
+        ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '--main', 'ExternalNewMain', '--interp'],
+        { cwd: path.resolve('.'), stdio: 'pipe' },
+      );
+    } catch (error) {
+      privateConstructorDiagnostic = String((error as { stderr?: Buffer }).stderr ?? error);
+    }
+    expect(privateConstructorDiagnostic).toContain('Cannot access private constructor');
 
     writeFileSync(
       path.join(fixtureDirectory, 'BaselineMain.hx'),

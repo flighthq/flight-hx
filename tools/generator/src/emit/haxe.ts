@@ -607,6 +607,7 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
       const lines = [
         '#if !flight_struct_typedef',
         ...completionMetadata,
+        ...(declaration.cppStructInitConstructorAllowModules ?? []).map((owner) => `@:allow(${owner})`),
         '@:structInit',
         `${modifier}class ${safeName(declaration.name)}${generics} {`,
       ];
@@ -616,7 +617,7 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
       }
       lines.push(
         '',
-        `  public function new(${constructorFields.map((field) => `${safeName(field.name)}:${emitValueType(field.type)}`).join(', ')}):Void {`,
+        `  private function new(${constructorFields.map((field) => `${safeName(field.name)}:${emitValueType(field.type)}`).join(', ')}):Void {`,
       );
       // EntityRuntimeKey is Symbol.for('EntityRuntime') in TypeScript. Native
       // targets encode that symbol as this string before reflective access.

@@ -325,6 +325,7 @@ export interface IrVariableDeclaration extends IrVariable {
 }
 
 export interface IrTypeDeclaration {
+  cppStructInitConstructorAllowModules?: string[] | undefined;
   cppStructInitSchemaId?: string | undefined;
   exported: boolean;
   kind: 'type';

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flight._internal._Runtime;
 
 #if !flight_struct_typedef
+@:allow(flight._Camera)
 @:structInit
 class Camera2D {
   public var rotation:Float;
@@ -14,7 +15,7 @@ class Camera2D {
   public var y:Float;
   public var zoom:Float;
 
-  public function new(rotation:Float, viewportHeight:Float, viewportWidth:Float, x:Float, y:Float, zoom:Float):Void {
+  private function new(rotation:Float, viewportHeight:Float, viewportWidth:Float, x:Float, y:Float, zoom:Float):Void {
     this.rotation = rotation;
     this.viewportHeight = viewportHeight;
     this.viewportWidth = viewportWidth;
