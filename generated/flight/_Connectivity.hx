@@ -60,7 +60,7 @@ class _Connectivity {
   }
 
   public static function createConnectivity():Connectivity {
-    return cast (cast createEntity((cast { onChange: (cast createSignal() : Signal<ConnectivityStatus->Void>), onConnectionTypeChange: (cast createSignal() : Signal<ConnectivityConnectionType->Void>), onMeteredChange: (cast createSignal() : Signal<Bool->Void>), onOffline: (cast createSignal() : Signal<Void->Void>), onOnline: (cast createSignal() : Signal<Void->Void>) } : Dynamic)) : { >Entity, var onChange:Signal<ConnectivityStatus->Void>; var onConnectionTypeChange:Signal<ConnectivityConnectionType->Void>; var onMeteredChange:Signal<Bool->Void>; var onOffline:Signal<Void->Void>; var onOnline:Signal<Void->Void>; });
+    return cast (cast createEntity((cast ({ onChange: (cast createSignal() : Signal<ConnectivityStatus->Void>), onConnectionTypeChange: (cast createSignal() : Signal<ConnectivityConnectionType->Void>), onMeteredChange: (cast createSignal() : Signal<Bool->Void>), onOffline: (cast createSignal() : Signal<Void->Void>), onOnline: (cast createSignal() : Signal<Void->Void>) } : Connectivity) : Dynamic)) : Connectivity);
     return cast null;
   }
 

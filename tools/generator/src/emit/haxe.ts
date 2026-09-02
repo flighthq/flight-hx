@@ -602,20 +602,26 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
         throw new Error(`cpp @:structInit declaration is not anonymous: ${declaration.cppStructInitSchemaId}`);
       }
       const fields = declaration.type.fields;
+      const entityRuntimeField = fields.find((field) => field.name === '__EntityRuntimeKey' && field.optional);
+      const constructorFields = fields.filter((field) => field !== entityRuntimeField);
       const lines = [
-        '#if (cpp && !flight_cpp_struct_init_baseline)',
+        '#if !flight_struct_typedef',
         ...completionMetadata,
         '@:structInit',
         `${modifier}class ${safeName(declaration.name)}${generics} {`,
       ];
       for (const field of fields) {
-        lines.push(`  public var ${safeName(field.name)}:${emitValueType(field.type)};`);
+        const fieldName = field === entityRuntimeField ? '__symbol__EntityRuntime' : safeName(field.name);
+        lines.push(`  public var ${fieldName}:${emitValueType(field.type)};`);
       }
       lines.push(
         '',
-        `  public function new(${fields.map((field) => `${safeName(field.name)}:${emitValueType(field.type)}`).join(', ')}):Void {`,
+        `  public function new(${constructorFields.map((field) => `${safeName(field.name)}:${emitValueType(field.type)}`).join(', ')}):Void {`,
       );
-      for (const field of fields) lines.push(`    this.${safeName(field.name)} = ${safeName(field.name)};`);
+      // EntityRuntimeKey is Symbol.for('EntityRuntime') in TypeScript. Native
+      // targets encode that symbol as this string before reflective access.
+      if (entityRuntimeField) lines.push('    this.__symbol__EntityRuntime = null;');
+      for (const field of constructorFields) lines.push(`    this.${safeName(field.name)} = ${safeName(field.name)};`);
       lines.push(
         '  }',
         '}',
@@ -2836,6 +2842,13 @@ function emitExpression(expression: IrExpression): string {
             `cpp @:structInit construction order mismatch for ${expression.cppStructInit.schemaId}: expected ${expression.cppStructInit.fieldNames.join(', ')}, received ${actualFields.join(', ')}`,
           );
         }
+        const value = `{ ${expression.properties
+          .map((property) =>
+            property.kind === 'property' ? `${safeName(property.name)}: ${emitExpression(property.value)}` : '',
+          )
+          .filter(Boolean)
+          .join(', ')} }`;
+        return emitObjectThisCapture(expression, `(${value} : ${expression.cppStructInit.schemaHaxeType})`);
       }
       if (expression.properties.some((property) => property.kind === 'spread')) {
         const value = `_Runtime.mergeObjects([${expression.properties
@@ -3352,6 +3365,13 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
     const call = expression.omittedArguments?.some(Boolean)
       ? `(#if js ${jsCall} #else ${directCall(staticArguments)} #end)`
       : directCall(staticArguments);
+    const cppStructInitFactoryType =
+      expression.callee.name === 'createEntity' &&
+      expression.arguments.length === 1 &&
+      expression.arguments[0]?.kind === 'object'
+        ? expression.arguments[0].cppStructInit?.schemaHaxeType
+        : undefined;
+    if (cppStructInitFactoryType) return `(cast ${call} : ${cppStructInitFactoryType})`;
     return expression.type &&
       expression.type.kind !== 'dynamic' &&
       !(expression.type.kind === 'primitive' && expression.type.name === 'Void')

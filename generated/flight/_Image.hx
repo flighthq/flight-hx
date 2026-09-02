@@ -231,18 +231,18 @@ class _Image {
   public static var _hostObservation__imageBackend:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
 
   public static function cloneImageResource(resource:Image):Image {
-    return cast (cast createEntity((cast { alphaType: _Runtime.field(resource, 'alphaType'), gamut: _Runtime.field(resource, 'gamut'), height: _Runtime.field(resource, 'height'), kind: _Runtime.field(resource, 'kind'), source: _Runtime.field(resource, 'source'), version: _Runtime.field(resource, 'version'), width: _Runtime.field(resource, 'width') } : Dynamic)) : { >Entity, var alphaType:AlphaType; var gamut:String; var height:Float; var kind:String; var source:flight._internal._Any; var version:Float; var width:Float; });
+    return cast (cast createEntity((cast ({ alphaType: _Runtime.field(resource, 'alphaType'), gamut: _Runtime.field(resource, 'gamut'), height: _Runtime.field(resource, 'height'), kind: _Runtime.field(resource, 'kind'), source: _Runtime.field(resource, 'source'), version: _Runtime.field(resource, 'version'), width: _Runtime.field(resource, 'width') } : Image) : Dynamic)) : Image);
     return cast null;
   }
 
   public static function createCompressedImage(compressed:CompressedImageData):CompressedImage {
-    return cast (cast createEntity(({ final __callArgument9:Dynamic = { alphaType: _Image.DECODED_ALPHA_TYPE__imageResource, compressed: compressed, gamut: _Image.DECODED_GAMUT__imageResource, height: (cast compressed.container : { var height:Float; }).height, kind: CompressedImageTextureSourceKind, version: 0.0, width: (cast compressed.container : { var width:Float; }).width }; __callArgument9; })) : { >Entity, var alphaType:String; var compressed:CompressedImageData; var gamut:String; var height:Float; var kind:String; var version:Float; var width:Float; });
+    return cast (cast createEntity(({ final __callArgument9:Dynamic = ({ alphaType: _Image.DECODED_ALPHA_TYPE__imageResource, compressed: compressed, gamut: _Image.DECODED_GAMUT__imageResource, height: (cast compressed.container : { var height:Float; }).height, kind: CompressedImageTextureSourceKind, version: 0.0, width: (cast compressed.container : { var width:Float; }).width } : CompressedImage); __callArgument9; })) : CompressedImage);
     return cast null;
   }
 
   public static function createImageResource(image:flight._internal.dom.CanvasImageSource):Image {
     var resource:Image = cast _Runtime.UNDEFINED;
-    resource = (cast createEntity(({ final __callArgument11:Dynamic = { alphaType: _Image.DECODED_ALPHA_TYPE__imageResource, gamut: _Image.DECODED_GAMUT__imageResource, height: 0.0, kind: ImageTextureSourceKind, source: image, version: 0.0, width: 0.0 }; __callArgument11; })) : { >Entity, var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flight._internal._Any; var version:Float; var width:Float; });
+    resource = (cast createEntity(({ final __callArgument11:Dynamic = ({ alphaType: _Image.DECODED_ALPHA_TYPE__imageResource, gamut: _Image.DECODED_GAMUT__imageResource, height: 0.0, kind: ImageTextureSourceKind, source: image, version: 0.0, width: 0.0 } : Image); __callArgument11; })) : Image);
     _Image.updateImageResourceSize__imageResource(({ final __callArgument13:Dynamic = resource; __callArgument13; }));
     return cast resource;
     return cast null;
@@ -287,17 +287,17 @@ class _Image {
   }
 
   public static function createImageResourceFromCanvas(canvas:flight._internal.dom.HTMLCanvasElement):Image {
-    return cast (cast createEntity(({ final __callArgument18:Dynamic = { alphaType: _Image.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: _Image.DECODED_GAMUT__imageResourceFrom, height: flight._internal.backend.CanvasElementBackend.field(canvas, 'height'), kind: ImageTextureSourceKind, source: canvas, version: 0.0, width: flight._internal.backend.CanvasElementBackend.field(canvas, 'width') }; __callArgument18; })) : { >Entity, var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flight._internal.dom.HTMLCanvasElement; var version:Float; var width:Float; });
+    return cast (cast createEntity(({ final __callArgument18:Dynamic = ({ alphaType: _Image.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: _Image.DECODED_GAMUT__imageResourceFrom, height: flight._internal.backend.CanvasElementBackend.field(canvas, 'height'), kind: ImageTextureSourceKind, source: canvas, version: 0.0, width: flight._internal.backend.CanvasElementBackend.field(canvas, 'width') } : Image); __callArgument18; })) : Image);
     return cast null;
   }
 
   public static function createImageResourceFromImageBitmap(bitmap:flight._internal.dom.ImageBitmap):Image {
-    return cast (cast createEntity(({ final __callArgument20:Dynamic = { alphaType: _Image.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: _Image.DECODED_GAMUT__imageResourceFrom, height: bitmap.height, kind: ImageTextureSourceKind, source: bitmap, version: 0.0, width: bitmap.width }; __callArgument20; })) : { >Entity, var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flight._internal.dom.ImageBitmap; var version:Float; var width:Float; });
+    return cast (cast createEntity(({ final __callArgument20:Dynamic = ({ alphaType: _Image.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: _Image.DECODED_GAMUT__imageResourceFrom, height: bitmap.height, kind: ImageTextureSourceKind, source: bitmap, version: 0.0, width: bitmap.width } : Image); __callArgument20; })) : Image);
     return cast null;
   }
 
   public static function createImageResourceFromImageElement(img:flight._internal.dom.HTMLImageElement):Image {
-    return cast (cast createEntity(({ final __callArgument22:Dynamic = { alphaType: _Image.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: _Image.DECODED_GAMUT__imageResourceFrom, height: img.height, kind: ImageTextureSourceKind, source: img, version: 0.0, width: img.width }; __callArgument22; })) : { >Entity, var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flight._internal.dom.HTMLImageElement; var version:Float; var width:Float; });
+    return cast (cast createEntity(({ final __callArgument22:Dynamic = ({ alphaType: _Image.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: _Image.DECODED_GAMUT__imageResourceFrom, height: img.height, kind: ImageTextureSourceKind, source: img, version: 0.0, width: img.width } : Image); __callArgument22; })) : Image);
     return cast null;
   }
 

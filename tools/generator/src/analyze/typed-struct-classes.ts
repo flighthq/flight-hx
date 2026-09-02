@@ -121,6 +121,7 @@ export interface TypedStructClassFeasibilityAudit {
 }
 
 interface MutableSchema extends TypedStructClassFeasibilitySchema {
+  fieldNames: ReadonlySet<string>;
   optionalFieldNames: Set<string>;
   siteKeys: Set<string>;
 }
@@ -145,6 +146,8 @@ export function auditTypedStructClassFeasibility(
   };
   const matchedSchema = (type: ts.Type | undefined): MutableSchema | undefined => {
     if (!type) return undefined;
+    const identity = registry.resolveIdentity(type);
+    if (identity) return byId.get(identity.id);
     const resolution = registry.resolve(type);
     if (resolution.kind !== 'matched' || resolution.schemas.length !== 1) return undefined;
     return byId.get(resolution.schemas[0]!.id);
@@ -190,6 +193,13 @@ export function auditTypedStructClassFeasibility(
     const key = `${target.id}|${expression.getSourceFile().fileName}|${expression.pos}|${expression.end}|${checker.typeToString(targetType)}|${checker.typeToString(sourceType)}`;
     if (transferKeys.has(key)) return;
     transferKeys.add(key);
+    if (isCreateEntityFactoryTransfer(expression, target, checker)) {
+      target.construction.objectLiterals += 1;
+      target.construction.plainObjectLiterals += 1;
+      return;
+    }
+    if (isFactoryBackedMatrix4ViewTransfer(expression, target, checker)) return;
+    if (isTransform3DRuntimeInitializerTransfer(expression, target, checker)) return;
     const sources = matchedSchemas(sourceType);
     if (sources.some((source) => source.id === target.id) && sources.length === 1) return;
     if (sources.length > 0) {
@@ -285,7 +295,7 @@ export function auditTypedStructClassFeasibility(
   schemas.sort((left, right) => left.id.localeCompare(right.id));
 
   const reportSchemas = schemas.map(
-    ({ optionalFieldNames: _optionalFieldNames, siteKeys: _siteKeys, ...schema }) => schema,
+    ({ fieldNames: _fieldNames, optionalFieldNames: _optionalFieldNames, siteKeys: _siteKeys, ...schema }) => schema,
   );
   return {
     schemaVersion: 1,
@@ -342,6 +352,7 @@ function emptySchema(candidate: TypedStructSchemaAudit): MutableSchema {
       testObjectLiterals: 0,
     },
     directAccesses: candidate.emission.directAccesses,
+    fieldNames: new Set(candidate.fields.map((field) => field.name)),
     fields: {
       optional: candidate.fields.filter((field) => field.optional).length,
       requiredUndefined: candidate.fields.filter((field) => field.requiredUndefined).length,
@@ -372,6 +383,73 @@ function emptySchema(candidate: TypedStructSchemaAudit): MutableSchema {
     sites: [],
     source: candidate.source,
   };
+}
+
+function isCreateEntityFactoryTransfer(
+  expression: ts.Expression,
+  target: MutableSchema,
+  checker: ts.TypeChecker,
+): boolean {
+  if (!ts.isCallExpression(expression) || expression.arguments.length !== 1) return false;
+  const object = expression.arguments[0];
+  if (!object || !ts.isObjectLiteralExpression(object)) return false;
+  let symbol = checker.getSymbolAtLocation(expression.expression);
+  if (symbol && (symbol.flags & ts.SymbolFlags.Alias) !== 0) symbol = checker.getAliasedSymbol(symbol);
+  if (symbol?.getName() !== 'createEntity') return false;
+  const declaration = symbol.valueDeclaration ?? symbol.declarations?.[0];
+  const declarationSource = declaration?.getSourceFile().fileName.split(path.sep).join('/');
+  if (!declarationSource?.endsWith('/upstream/packages/entity/src/entity.ts')) return false;
+  const fields = object.properties.map((property) => {
+    if (!ts.isPropertyAssignment(property) && !ts.isShorthandPropertyAssignment(property)) return undefined;
+    return propertyName(property.name);
+  });
+  if (fields.some((field) => field === undefined) || fields.length !== target.fieldNames.size) return false;
+  return fields.every((field) => field !== undefined && target.fieldNames.has(field));
+}
+
+function isFactoryBackedMatrix4ViewTransfer(
+  expression: ts.Expression,
+  target: MutableSchema,
+  checker: ts.TypeChecker,
+): boolean {
+  if (target.id !== '@flighthq/types:interface#Matrix4') return false;
+  let source = expression;
+  while (
+    ts.isParenthesizedExpression(source) ||
+    ts.isAsExpression(source) ||
+    ts.isTypeAssertionExpression(source) ||
+    ts.isSatisfiesExpression(source) ||
+    ts.isNonNullExpression(source)
+  ) {
+    source = source.expression;
+  }
+  if (!ts.isCallExpression(source)) return false;
+  let symbol = checker.getSymbolAtLocation(source.expression);
+  if (symbol && (symbol.flags & ts.SymbolFlags.Alias) !== 0) symbol = checker.getAliasedSymbol(symbol);
+  if (symbol?.getName() !== 'getNodeWorldMatrix4') return false;
+  const declaration = symbol.valueDeclaration ?? symbol.declarations?.[0];
+  const declarationSource = declaration?.getSourceFile().fileName.split(path.sep).join('/');
+  // getNodeWorldMatrix4 exposes a readonly Matrix4Like view, but its cached
+  // value is allocated exclusively by createMatrix4 before being returned.
+  return declarationSource?.endsWith('/upstream/packages/node/src/nodeTransform3d.ts') === true;
+}
+
+function isTransform3DRuntimeInitializerTransfer(
+  expression: ts.Expression,
+  target: MutableSchema,
+  checker: ts.TypeChecker,
+): boolean {
+  if (target.id !== '@flighthq/types:interface#HasTransform3DRuntime') return false;
+  const call = expression.parent;
+  if (!ts.isCallExpression(call) || !call.arguments.includes(expression)) return false;
+  let symbol = checker.getSymbolAtLocation(call.expression);
+  if (symbol && (symbol.flags & ts.SymbolFlags.Alias) !== 0) symbol = checker.getAliasedSymbol(symbol);
+  if (symbol?.getName() !== 'initTransform3DRuntimeTrait') return false;
+  const declaration = symbol.valueDeclaration ?? symbol.declarations?.[0];
+  const declarationSource = declaration?.getSourceFile().fileName.split(path.sep).join('/');
+  // The initializer overwrites both Matrix4 slots with null before this
+  // composed runtime can escape, so it cannot carry structural matrices in.
+  return declarationSource?.endsWith('/upstream/packages/node/src/hasTransform3d.ts') === true;
 }
 
 function auditObjectLiteral(

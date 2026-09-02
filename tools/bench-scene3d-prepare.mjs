@@ -5,7 +5,7 @@ import process from 'node:process';
 const pairCount = readPositiveInt(process.env.FLIGHT_SCENE3D_BENCH_PAIRS, 5);
 const variants = [
   { define: undefined, name: 'candidate' },
-  { define: 'flight_cpp_struct_init_baseline', name: 'typedef-baseline' },
+  { define: 'flight_struct_typedef', name: 'typedef-baseline' },
 ];
 
 for (const variant of variants) compile(variant);

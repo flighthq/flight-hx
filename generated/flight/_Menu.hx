@@ -85,7 +85,7 @@ class _Menu {
   }
 
   public static function createMenuHighlight():MenuHighlight {
-    return cast (cast createEntity((cast { onMenuItemHighlight: (cast createSignal() : Signal<String->Void>) } : Dynamic)) : { >Entity, var onMenuItemHighlight:Signal<String->Void>; });
+    return cast (cast createEntity((cast ({ onMenuItemHighlight: (cast createSignal() : Signal<String->Void>) } : MenuHighlight) : Dynamic)) : MenuHighlight);
     return cast null;
   }
 
@@ -100,7 +100,7 @@ class _Menu {
   }
 
   public static function createMenuSelect():MenuSelect {
-    return cast (cast createEntity((cast { onMenuItemSelect: (cast createSignal() : Signal<String->Void>) } : Dynamic)) : { >Entity, var onMenuItemSelect:Signal<String->Void>; });
+    return cast (cast createEntity((cast ({ onMenuItemSelect: (cast createSignal() : Signal<String->Void>) } : MenuSelect) : Dynamic)) : MenuSelect);
     return cast null;
   }
 

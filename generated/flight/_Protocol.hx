@@ -34,7 +34,7 @@ class _Protocol {
   }
 
   public static function createProtocolHandler():ProtocolHandler {
-    return cast (cast createEntity((cast { onOpenUrl: (cast createSignal() : Signal<String->Void>) } : Dynamic)) : { >Entity, var onOpenUrl:Signal<String->Void>; });
+    return cast (cast createEntity((cast ({ onOpenUrl: (cast createSignal() : Signal<String->Void>) } : ProtocolHandler) : Dynamic)) : ProtocolHandler);
     return cast null;
   }
 

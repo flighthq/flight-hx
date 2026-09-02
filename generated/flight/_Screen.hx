@@ -56,12 +56,12 @@ class _Screen {
   }
 
   public static function createScreenPermissionChange():ScreenPermissionChange {
-    return cast (cast createEntity((cast { onChange: (cast createSignal() : Signal<ScreenPermissionState->Void>) } : Dynamic)) : { >Entity, var onChange:Signal<ScreenPermissionState->Void>; });
+    return cast (cast createEntity((cast ({ onChange: (cast createSignal() : Signal<ScreenPermissionState->Void>) } : ScreenPermissionChange) : Dynamic)) : ScreenPermissionChange);
     return cast null;
   }
 
   public static function createScreenSignals():ScreenSignals {
-    return cast (cast createEntity((cast { onScreenAdded: (cast createSignal() : Signal<ScreenInfo->Void>), onScreenMetricsChanged: (cast createSignal() : Signal<ScreenChangeEvent->Void>), onScreenRemoved: (cast createSignal() : Signal<ScreenInfo->Void>) } : Dynamic)) : { >Entity, var onScreenAdded:Signal<ScreenInfo->Void>; var onScreenMetricsChanged:Signal<ScreenChangeEvent->Void>; var onScreenRemoved:Signal<ScreenInfo->Void>; });
+    return cast (cast createEntity((cast ({ onScreenAdded: (cast createSignal() : Signal<ScreenInfo->Void>), onScreenMetricsChanged: (cast createSignal() : Signal<ScreenChangeEvent->Void>), onScreenRemoved: (cast createSignal() : Signal<ScreenInfo->Void>) } : ScreenSignals) : Dynamic)) : ScreenSignals);
     return cast null;
   }
 

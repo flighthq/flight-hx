@@ -3769,7 +3769,7 @@ class _HostWeb {
 
   public static function createWebInputTargetHandle(element:flight._internal.dom.HTMLElement):InputTargetHandle {
     var target:InputTargetHandle = cast _Runtime.UNDEFINED;
-    target = (cast createEntity(({ final __callArgument631:Dynamic = { __brand: 'InputTargetHandle' }; __callArgument631; })) : { >Entity, var __brand:String; });
+    target = (cast createEntity(({ final __callArgument631:Dynamic = ({ __brand: 'InputTargetHandle' } : InputTargetHandle); __callArgument631; })) : InputTargetHandle);
     ((cast _HostWeb._inputTargets__webInputTarget : flight._internal._WeakMap<InputTargetHandle, flight._internal.dom.HTMLElement>).set(target, (cast element)));
     return cast target;
     return cast null;

@@ -1061,7 +1061,7 @@ class _Scene3DResources {
   @:allow(flight)
   @:keep
   private static function createScene3DMaterialTextureRegistry():Scene3DMaterialTextureRegistry {
-    return cast (cast createEntity(({ final __callArgument428:Dynamic = { extensionListers: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), listers: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []) }; __callArgument428; })) : { >Entity, var extensionListers:flight._internal._Map<flight._internal._Any, flight._internal._Any>; var listers:flight._internal._Map<flight._internal._Any, flight._internal._Any>; });
+    return cast (cast createEntity(({ final __callArgument428:Dynamic = ({ extensionListers: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), listers: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []) } : Scene3DMaterialTextureRegistry); __callArgument428; })) : Scene3DMaterialTextureRegistry);
     return cast null;
   }
 
@@ -1196,7 +1196,7 @@ class _Scene3DResources {
   @:allow(flight)
   @:keep
   private static function createScene3DResourceSignals():Scene3DResourceSignals {
-    return cast (cast createEntity((cast { onResourceFailed: (cast createSignal() : Signal<Scene3DResourceEvent->Void>), onResourceResolved: (cast createSignal() : Signal<Scene3DResourceEvent->Void>) } : Dynamic)) : { >Entity, var onResourceFailed:Signal<Scene3DResourceEvent->Void>; var onResourceResolved:Signal<Scene3DResourceEvent->Void>; });
+    return cast (cast createEntity((cast ({ onResourceFailed: (cast createSignal() : Signal<Scene3DResourceEvent->Void>), onResourceResolved: (cast createSignal() : Signal<Scene3DResourceEvent->Void>) } : Scene3DResourceSignals) : Dynamic)) : Scene3DResourceSignals);
     return cast null;
   }
 

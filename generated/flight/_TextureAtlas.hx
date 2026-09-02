@@ -67,7 +67,7 @@ class _TextureAtlas {
   public static var textureAtlasGuardsEnabled__enableTextureAtlasGuards:Bool = false;
 
   public static function createTextureAtlas(?obj:{ @:optional var texture:Null<Texture2D>; @:optional var regions:Null<Array<TextureAtlasRegion>>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):TextureAtlas {
-    return cast (cast createEntity((cast { regions: _Runtime.coalesce(({ final __structural4 = obj; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var regions:Null<Array<TextureAtlasRegion>>; }).regions; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), texture: _Runtime.coalesce(({ final __structural5 = obj; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var texture:Null<Texture2D>; }).texture; }), function():Dynamic return cast null) } : Dynamic)) : { >Entity, var regions:Array<TextureAtlasRegion>; var texture:Null<Texture2D>; });
+    return cast (cast createEntity((cast ({ regions: _Runtime.coalesce(({ final __structural4 = obj; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var regions:Null<Array<TextureAtlasRegion>>; }).regions; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), texture: _Runtime.coalesce(({ final __structural5 = obj; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var texture:Null<Texture2D>; }).texture; }), function():Dynamic return cast null) } : TextureAtlas) : Dynamic)) : TextureAtlas);
     return cast null;
   }
 

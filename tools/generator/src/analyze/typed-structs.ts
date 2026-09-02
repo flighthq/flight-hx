@@ -11,8 +11,9 @@ import { analyzeUpstream, sourcePathToHaxePackage, sourcePathToImplementationMod
 import { upstreamTypeScriptProgram } from './program.ts';
 import { semanticBodyPatchFunctionNames } from '../patch/apply.ts';
 
-// Target-conditional class emission is default-off. Every enabled schema is an
-// explicit canonical identity so an upstream declaration cannot enter silently.
+// These non-Entity class pilots predate the uniform Entity representation. They
+// remain useful layout controls, but Entity classes are discovered from their
+// factory identity rather than being added to this list one schema at a time.
 export const cppStructInitTypedStructIds: readonly string[] = [
   '@flighthq/types:interface#Camera2D',
   '@flighthq/types:interface#ParticleEmitterState',
@@ -2142,6 +2143,8 @@ export interface TypedStructRegistry {
   resolve(type: ts.Type): TypedStructResolution;
   resolveDirect(type: ts.Type): TypedStructResolution;
   resolveCppStructInitConstruction(type: ts.Type): TypedStructConstructionBinding | undefined;
+  resolveFactoryIdentityConstruction(type: ts.Type): TypedStructConstructionBinding | undefined;
+  resolveIdentity(type: ts.Type): TypedStructSchemaAudit | undefined;
   resolveField(type: ts.Type, member: string, property?: ts.Symbol): TypedStructFieldBinding | undefined;
 }
 
@@ -2902,6 +2905,25 @@ export function createTypedStructRegistry(
   const auditOnlySchemas = schemas.filter((schema) => schema.audit.emission.mode === 'audit-only');
   const resolve = createResolver(schemas);
   const resolveDirect = createResolver(directSchemas);
+  const schemasBySymbol = new Map(schemas.map((schema) => [canonicalSymbol(schema.symbol, checker), schema] as const));
+  const resolveIdentitySchema = (type: ts.Type): InternalSchema | undefined => {
+    const symbols = [type.aliasSymbol, type.getSymbol()]
+      .filter((symbol): symbol is ts.Symbol => symbol !== undefined)
+      .map((symbol) => canonicalSymbol(symbol, checker));
+    const matches = [...new Set(symbols.map((symbol) => schemasBySymbol.get(symbol)).filter((schema) => schema))];
+    return matches.length === 1 ? matches[0] : undefined;
+  };
+  const constructionBinding = (schema: InternalSchema): TypedStructConstructionBinding => ({
+    fieldNames: schema.audit.fields.map((field) => field.name),
+    // Construction sites already reference the schema in their enclosing
+    // function signature, so the public type is imported into the emitted
+    // module (or declared in that module for a fixture). The unqualified name
+    // follows that canonical import; the staging implementation path used by
+    // property bindings is not the public type module path.
+    schemaHaxeType: schema.audit.name,
+    schemaId: schema.audit.id,
+    schemaName: schema.audit.name,
+  });
   const resolveOwnedField = (
     resolverSchemas: readonly InternalSchema[],
     resolver: (type: ts.Type) => TypedStructResolution,
@@ -3002,12 +3024,15 @@ export function createTypedStructRegistry(
       ) {
         return undefined;
       }
-      return {
-        fieldNames: schema.fields.map((field) => field.name),
-        schemaHaxeType: typedStructHaxeType(schema),
-        schemaId: schema.id,
-        schemaName: schema.name,
-      };
+      const internal = schemas.find((candidate) => candidate.audit.id === schema.id);
+      return internal ? constructionBinding(internal) : undefined;
+    },
+    resolveFactoryIdentityConstruction(type) {
+      const schema = resolveIdentitySchema(type);
+      return schema?.audit.eligible ? constructionBinding(schema) : undefined;
+    },
+    resolveIdentity(type) {
+      return resolveIdentitySchema(type)?.audit;
     },
     resolveField(type, member, property) {
       const owned = resolveOwnedField(directSchemas, resolveDirect, type, member, property);

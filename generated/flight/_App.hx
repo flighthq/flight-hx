@@ -130,7 +130,7 @@ class _App {
   }
 
   public static function createApp():App {
-    return cast (cast createEntity((cast { onActivate: (cast createSignal() : Signal<Void->Void>), onAllWindowsClosed: (cast createSignal() : Signal<Void->Void>), onOpenFile: (cast createSignal() : Signal<String->Void>), onQuitRequest: (cast createSignal() : Signal<Void->Void>), onReady: (cast createSignal() : Signal<Void->Void>), onSecondInstance: (cast createSignal() : Signal<Array<String>->Void>) } : Dynamic)) : { >Entity, var onActivate:Signal<Void->Void>; var onAllWindowsClosed:Signal<Void->Void>; var onOpenFile:Signal<String->Void>; var onQuitRequest:Signal<Void->Void>; var onReady:Signal<Void->Void>; var onSecondInstance:Signal<Array<String>->Void>; });
+    return cast (cast createEntity((cast ({ onActivate: (cast createSignal() : Signal<Void->Void>), onAllWindowsClosed: (cast createSignal() : Signal<Void->Void>), onOpenFile: (cast createSignal() : Signal<String->Void>), onQuitRequest: (cast createSignal() : Signal<Void->Void>), onReady: (cast createSignal() : Signal<Void->Void>), onSecondInstance: (cast createSignal() : Signal<Array<String>->Void>) } : App) : Dynamic)) : App);
     return cast null;
   }
 

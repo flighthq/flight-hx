@@ -52,7 +52,7 @@ class _MediaSession {
   }
 
   public static function createMediaSessionActionSignal(action:MediaSessionAction):MediaSessionActionSignal {
-    return cast (cast createEntity((cast { action: action, onAction: (cast createSignal() : Signal<MediaSessionActionDetails->Void>) } : Dynamic)) : { >Entity, var action:MediaSessionAction; var onAction:Signal<MediaSessionActionDetails->Void>; });
+    return cast (cast createEntity((cast ({ action: action, onAction: (cast createSignal() : Signal<MediaSessionActionDetails->Void>) } : MediaSessionActionSignal) : Dynamic)) : MediaSessionActionSignal);
     return cast null;
   }
 

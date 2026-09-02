@@ -19,6 +19,7 @@ import {
 } from '../host-endpoints.ts';
 import type {
   IrDeclaration,
+  IrCppStructInitConstruction,
   IrDestructuringReadEscape,
   IrDestructuringReadSource,
   IrDomRootBinding,
@@ -3670,6 +3671,56 @@ function isTypedStructWrite(node: ts.PropertyAccessExpression): boolean {
   );
 }
 
+function cppStructInitEntityFactoryConstruction(
+  node: ts.ObjectLiteralExpression,
+  context: LoweringContext,
+): IrCppStructInitConstruction | undefined {
+  const checker = context.checker;
+  const registry = context.typedStructs;
+  const call = node.parent;
+  if (
+    !checker ||
+    !registry ||
+    !ts.isCallExpression(call) ||
+    call.arguments.length !== 1 ||
+    call.arguments[0] !== node
+  ) {
+    return undefined;
+  }
+  let symbol = checker.getSymbolAtLocation(call.expression);
+  if (symbol && (symbol.flags & ts.SymbolFlags.Alias) !== 0) symbol = checker.getAliasedSymbol(symbol);
+  if (symbol?.getName() !== 'createEntity') return undefined;
+  const declaration = symbol.valueDeclaration ?? symbol.declarations?.[0];
+  const declarationSource = declaration?.getSourceFile().fileName.split(path.sep).join('/');
+  if (!declarationSource?.endsWith('/upstream/packages/entity/src/entity.ts')) return undefined;
+  let binding: IrCppStructInitConstruction | undefined;
+  if (ts.isVariableDeclaration(call.parent) && call.parent.initializer === call) {
+    binding = registry.resolveFactoryIdentityConstruction(checker.getTypeAtLocation(call.parent.name));
+  } else if (ts.isReturnStatement(call.parent) && call.parent.expression === call) {
+    const owner = ts.findAncestor(call.parent.parent, (ancestor): ancestor is ts.SignatureDeclaration =>
+      ts.isFunctionLike(ancestor),
+    );
+    const signature = owner ? checker.getSignatureFromDeclaration(owner) : undefined;
+    binding = signature
+      ? registry.resolveFactoryIdentityConstruction(checker.getReturnTypeOfSignature(signature))
+      : undefined;
+  }
+  if (!binding) return undefined;
+  const fields = node.properties.map((property) => {
+    if (ts.isShorthandPropertyAssignment(property)) return property.name.text;
+    if (!ts.isPropertyAssignment(property)) return undefined;
+    const name = property.name;
+    return ts.isIdentifier(name) || ts.isStringLiteral(name) || ts.isNumericLiteral(name) ? name.text : undefined;
+  });
+  if (
+    fields.length !== binding.fieldNames.length ||
+    fields.some((field, index) => field === undefined || field !== binding.fieldNames[index])
+  ) {
+    return undefined;
+  }
+  return binding;
+}
+
 function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpression {
   const expression = lowerExpressionNode(node, context);
   const staticFacts = expressionStaticFacts(node, context);
@@ -3795,12 +3846,13 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
     return { elements: node.elements.map((element) => lowerExpression(element, context)), kind: 'array' };
   }
   if (ts.isObjectLiteralExpression(node)) {
-    const cppStructInit =
+    const contextualCppStructInit =
       context.checker && context.typedStructs
         ? context.typedStructs.resolveCppStructInitConstruction(
             context.checker.getContextualType(node) ?? context.checker.getTypeAtLocation(node),
           )
         : undefined;
+    const cppStructInit = contextualCppStructInit ?? cppStructInitEntityFactoryConstruction(node, context);
     const thisCapture = node.properties.some(
       (property) => ts.isMethodDeclaration(property) && containsLexicallyOwnedThis(property),
     )

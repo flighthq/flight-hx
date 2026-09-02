@@ -94,7 +94,7 @@ class _Storage {
   }
 
   public static function createStorageSignals():StorageSignals {
-    return cast (cast createEntity((cast { onChange: (cast createSignal() : Signal<StorageChange->Void>) } : Dynamic)) : { >Entity, var onChange:Signal<StorageChange->Void>; });
+    return cast (cast createEntity((cast ({ onChange: (cast createSignal() : Signal<StorageChange->Void>) } : StorageSignals) : Dynamic)) : StorageSignals);
     return cast null;
   }
 

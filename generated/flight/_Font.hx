@@ -72,7 +72,7 @@ class _Font {
   }
 
   public static function createFont(name:String):Font {
-    return cast (cast createEntity(({ final __callArgument11:Dynamic = { name: name }; __callArgument11; })) : { >Entity, var name:String; });
+    return cast (cast createEntity(({ final __callArgument11:Dynamic = ({ name: name } : Font); __callArgument11; })) : Font);
     return cast null;
   }
 

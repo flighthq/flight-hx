@@ -313,7 +313,7 @@ class _Skeleton3D {
         i++;
       }
     }
-    return cast (cast createEntity(({ final __callArgument28:Dynamic = { inverseBindMatrices: new flight._internal._Float32Array(skeleton.inverseBindMatrices), jointMatrices: new flight._internal._Float32Array(skeleton.jointMatrices), joints: joints, names: ((cast _Runtime.strictEquals(skeleton.names, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast _Runtime.strictEquals(skeleton.names, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.slice(skeleton.names, 0, null) : Dynamic)) : Dynamic)), normalMatrices: new flight._internal._Float32Array(skeleton.normalMatrices) }; __callArgument28; })) : { >Entity, var inverseBindMatrices:flight._internal._Float32Array; var jointMatrices:flight._internal._Float32Array; var joints:Array<Node3D>; var names:Null<Array<String>>; var normalMatrices:flight._internal._Float32Array; });
+    return cast (cast createEntity(({ final __callArgument28:Dynamic = ({ inverseBindMatrices: new flight._internal._Float32Array(skeleton.inverseBindMatrices), jointMatrices: new flight._internal._Float32Array(skeleton.jointMatrices), joints: joints, names: ((cast _Runtime.strictEquals(skeleton.names, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast _Runtime.strictEquals(skeleton.names, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.slice(skeleton.names, 0, null) : Dynamic)) : Dynamic)), normalMatrices: new flight._internal._Float32Array(skeleton.normalMatrices) } : Skeleton3D); __callArgument28; })) : Skeleton3D);
     return cast null;
   }
 

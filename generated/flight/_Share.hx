@@ -47,7 +47,7 @@ class _Share {
   }
 
   public static function enableShareSignals():ShareSignals {
-    return cast (cast createEntity((cast { onShareResult: (cast createSignal() : Signal<ShareResult->Void>) } : Dynamic)) : { >Entity, var onShareResult:Signal<ShareResult->Void>; });
+    return cast (cast createEntity((cast ({ onShareResult: (cast createSignal() : Signal<ShareResult->Void>) } : ShareSignals) : Dynamic)) : ShareSignals);
     return cast null;
   }
 

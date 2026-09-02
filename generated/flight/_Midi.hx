@@ -67,7 +67,7 @@ class _Midi {
   @:keep
   private static function createMidiAccessResource(operations:MidiAccessResourceOperations):MidiAccess {
     var access:Entity = cast _Runtime.UNDEFINED;
-    access = (cast createEntity(({ final __callArgument0:Dynamic = {  }; __callArgument0; })) : Entity);
+    access = (cast createEntity(({ final __callArgument0:Dynamic = ({  } : Entity); __callArgument0; })) : Entity);
     retainMidiAccessResourceState(({ final __callArgument2:Dynamic = access; __callArgument2; }), ({ final __callArgument3:Dynamic = operations; __callArgument3; }));
     return cast access;
     return cast null;

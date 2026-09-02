@@ -3957,13 +3957,13 @@ describe('typed struct stable declaration identity', () => {
 });
 
 describe('typed struct analysis', () => {
-  it('emits and constructs an allowlisted struct-init class only on the cpp branch', () => {
+  it('emits a default struct-init class with a global typedef oracle branch', () => {
     const candidate: TypedStructCandidate = {
       emission: 'direct',
       name: 'Camera2D',
       packageName: '@flighthq/types',
       purpose: 'cpp class pilot fixture',
-      source: 'upstream/packages/types/src/Camera2D.ts',
+      source: 'upstream/packages/types/src/CameraPilot.ts',
     };
     const result = lowerFixture(
       `
@@ -3985,6 +3985,12 @@ describe('typed struct analysis', () => {
       (item) => item.kind === 'type' && item.name === candidate.name,
     );
     if (!declaration || declaration.kind !== 'type') throw new Error('Expected Camera2D fixture type');
+    if (declaration.type.kind !== 'anonymous') throw new Error('Expected Camera2D fixture record');
+    declaration.type.fields.push({
+      name: '__EntityRuntimeKey',
+      optional: true,
+      type: { inner: { kind: 'dynamic' }, kind: 'nullable' },
+    });
     declaration.cppStructInitSchemaId = candidateId(candidate);
     const output = emitHaxeModule({
       declarations: result.lowered.declarations,
@@ -3995,21 +4001,23 @@ describe('typed struct analysis', () => {
     });
 
     expect(result.lowered.diagnostics).toEqual([]);
-    expect(output).toContain('#if (cpp && !flight_cpp_struct_init_baseline)\n@:structInit\nclass Camera2D {');
+    expect(output).toContain('#if !flight_struct_typedef\n@:structInit\nclass Camera2D {');
     expect(output).toContain(
       'public function new(rotation:Float, viewportHeight:Float, viewportWidth:Float, x:Float, y:Float, zoom:Float):Void',
     );
-    expect(output).toContain('return { rotation: 0.0, viewportHeight: 480.0, viewportWidth: 640.0, x: 12.0');
+    expect(output).toContain('public var __symbol__EntityRuntime:Null<Dynamic>;');
+    expect(output).toContain('this.__symbol__EntityRuntime = null;');
+    expect(output).toContain(
+      'return ({ rotation: 0.0, viewportHeight: 480.0, viewportWidth: 640.0, x: 12.0, y: 34.0, zoom: 2.0 } : Camera2D);',
+    );
     expect(output).not.toContain('return cast { rotation: 0.0');
+    const compilableOutput = output;
 
     const fixtureDirectory = path.resolve('build/haxe-cpp-struct-init-fixture');
     const packageDirectory = path.join(fixtureDirectory, 'flight', 'types');
     rmSync(fixtureDirectory, { force: true, recursive: true });
     mkdirSync(packageDirectory, { recursive: true });
-    writeFileSync(
-      path.join(packageDirectory, 'CameraPilot.hx'),
-      output.replace('(cpp && !flight_cpp_struct_init_baseline)', '(eval && !flight_cpp_struct_init_baseline)'),
-    );
+    writeFileSync(path.join(packageDirectory, 'CameraPilot.hx'), compilableOutput);
     writeFileSync(
       path.join(fixtureDirectory, 'Main.hx'),
       `
@@ -4018,6 +4026,8 @@ describe('typed struct analysis', () => {
             final camera = flight.types.CameraPilot.createCamera2D();
             if (!Std.isOfType(camera, flight.types.CameraPilot.Camera2D)) throw 'not a class';
             if (camera.x != 12 || camera.viewportHeight != 480 || camera.zoom != 2) throw 'bad fields';
+            Reflect.setField(camera, '__symbol__EntityRuntime', { binding: null });
+            if (!Reflect.hasField(camera, '__symbol__EntityRuntime')) throw 'missing runtime slot';
           }
         }
       `,
@@ -4050,7 +4060,7 @@ describe('typed struct analysis', () => {
           '-cp',
           'src',
           '-D',
-          'flight_cpp_struct_init_baseline',
+          'flight_struct_typedef',
           '--main',
           'BaselineMain',
           '--interp',
@@ -4070,18 +4080,55 @@ describe('typed struct analysis', () => {
         }
       `,
     );
+    const classJavaScript = path.join(fixtureDirectory, 'class.cjs');
     const candidateJavaScript = path.join(fixtureDirectory, 'candidate.cjs');
     const baselineJavaScript = path.join(fixtureDirectory, 'baseline.cjs');
-    writeFileSync(path.join(packageDirectory, 'CameraPilot.hx'), output);
+    writeFileSync(path.join(packageDirectory, 'CameraPilot.hx'), compilableOutput);
     execFileSync(
       'node',
-      ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '--main', 'JsMain', '--js', candidateJavaScript],
+      ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '--main', 'JsMain', '--js', classJavaScript],
       { cwd: path.resolve('.'), stdio: 'pipe' },
     );
-    writeFileSync(path.join(packageDirectory, 'CameraPilot.hx'), output.replace('return {', 'return cast {'));
+    execFileSync('node', [classJavaScript], { cwd: path.resolve('.'), stdio: 'pipe' });
     execFileSync(
       'node',
-      ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '--main', 'JsMain', '--js', baselineJavaScript],
+      [
+        'tools/haxe.mjs',
+        '-cp',
+        fixtureDirectory,
+        '-cp',
+        'src',
+        '-D',
+        'flight_struct_typedef',
+        '--main',
+        'JsMain',
+        '--js',
+        candidateJavaScript,
+      ],
+      { cwd: path.resolve('.'), stdio: 'pipe' },
+    );
+    writeFileSync(
+      path.join(packageDirectory, 'CameraPilot.hx'),
+      compilableOutput.replace(
+        'return ({ rotation: 0.0, viewportHeight: 480.0, viewportWidth: 640.0, x: 12.0, y: 34.0, zoom: 2.0 } : Camera2D);',
+        'return cast { rotation: 0.0, viewportHeight: 480.0, viewportWidth: 640.0, x: 12.0, y: 34.0, zoom: 2.0 };',
+      ),
+    );
+    execFileSync(
+      'node',
+      [
+        'tools/haxe.mjs',
+        '-cp',
+        fixtureDirectory,
+        '-cp',
+        'src',
+        '-D',
+        'flight_struct_typedef',
+        '--main',
+        'JsMain',
+        '--js',
+        baselineJavaScript,
+      ],
       { cwd: path.resolve('.'), stdio: 'pipe' },
     );
     expect(readFileSync(candidateJavaScript)).toEqual(readFileSync(baselineJavaScript));
@@ -4275,6 +4322,20 @@ describe('typed struct analysis', () => {
     const provenance = auditTypedStructProvenance(workspace, 'fixture', registry, classAudit, programAndChecker);
     const classAuditById = new Map(classAudit.schemas.map((schema) => [schema.id, schema]));
     const provenanceById = new Map(provenance.schemas.map((schema) => [schema.id, schema]));
+    const renderTextureSource = programAndChecker.program.getSourceFile(
+      path.resolve('upstream/packages/texture/src/renderTexture.ts'),
+    );
+    const createRenderTexture = renderTextureSource?.statements.find(
+      (statement): statement is ts.FunctionDeclaration =>
+        ts.isFunctionDeclaration(statement) && statement.name?.text === 'createRenderTexture',
+    );
+    const createRenderTextureSignature = createRenderTexture
+      ? programAndChecker.checker.getSignatureFromDeclaration(createRenderTexture)
+      : undefined;
+    if (!createRenderTextureSignature) throw new Error('Expected createRenderTexture signature');
+    const renderTextureReturn = programAndChecker.checker.getReturnTypeOfSignature(createRenderTextureSignature);
+    expect(registry.resolve(renderTextureReturn).schemas.map((schema) => schema.name)).toEqual(['RenderTexture']);
+    expect(registry.resolveIdentity(renderTextureReturn)?.name).toBe('RenderTexture');
     const typeErasureReport = JSON.parse(readFileSync('reports/type-erasures.json', 'utf8')) as {
       modules: Array<{ byReason: Record<string, number>; module: string; source: string; total: number }>;
       summary: { byReason: Record<string, number>; total: number };
@@ -5153,6 +5214,28 @@ describe('typed struct analysis', () => {
       true,
     );
     const particleEmitterDataId = '@flighthq/types:interface#ParticleEmitterData';
+    const camera3DId = '@flighthq/types:interface#Camera3D';
+    expect(classAuditById.get(camera3DId)?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: [],
+    });
+    expect(classAuditById.get(camera3DId)?.construction).toMatchObject({
+      objectLiterals: 1,
+      plainObjectLiterals: 1,
+    });
+    expect(provenanceById.get(camera3DId)?.nominalIdentity).toEqual({ blockerReasons: [], closed: true });
+    const matrix4Id = '@flighthq/types:interface#Matrix4';
+    expect(classAuditById.get(matrix4Id)?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: [],
+    });
+    expect(classAuditById.get(matrix4Id)?.construction).toMatchObject({
+      objectLiterals: 1,
+      plainObjectLiterals: 1,
+    });
+    expect(provenanceById.get(matrix4Id)?.nominalIdentity).toEqual({ blockerReasons: [], closed: true });
     expect(provenanceById.get(particleEmitterDataId)?.nominalIdentity.closed).toBe(false);
     expect(() => validateCppStructInitProvenance(cppStructInitTypedStructIds, provenance)).not.toThrow();
     expect(() => validateCppStructInitProvenance([particleEmitterDataId], provenance)).toThrow(
@@ -5161,15 +5244,12 @@ describe('typed struct analysis', () => {
     const rectangleId = '@flighthq/types:interface#Rectangle';
     const rectangleLikeId = '@flighthq/types:type#RectangleLike';
     expect(classAuditById.get(rectangleId)?.migration).toEqual({
-      mechanicallyCompatible: false,
-      normalizationReasons: ['cross-schema-transfer'],
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
       observabilityReasons: ['strict-equality'],
     });
     expect(provenanceById.has(rectangleId)).toBe(false);
-    expect(provenanceById.get(rectangleLikeId)?.nominalIdentity).toEqual({
-      blockerReasons: ['normalization-provenance'],
-      closed: false,
-    });
+    expect(provenanceById.has(rectangleLikeId)).toBe(false);
     expect(() => validateCppStructInitProvenance([rectangleId, rectangleLikeId], provenance)).toThrow(
       `cpp @:structInit schemas are not provenance-closed: ${rectangleId}, ${rectangleLikeId}`,
     );

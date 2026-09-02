@@ -130,7 +130,7 @@ class _Application {
   }
 
   public static function createApplication():Application {
-    return cast (cast createEntity((cast { deltaTime: 0.0, elapsedTime: 0.0, frameCount: 0.0, interpolationAlpha: 1.0, isRunning: false, onActivate: null, onDeactivate: null, onError: null, onExit: (cast createSignal() : Signal<Void->Void>), onFixedUpdate: null, onRender: (cast createSignal() : Signal<Void->Void>), onUpdate: (cast createSignal() : Signal<Float->Void>), windows: cast ([] : Array<Dynamic>) } : Dynamic)) : { >Entity, var frameCount:Float; var deltaTime:Float; var elapsedTime:Float; var interpolationAlpha:Float; var isRunning:Bool; var onActivate:Null<Signal<Void->Void>>; var onDeactivate:Null<Signal<Void->Void>>; var onError:Null<Signal<flight._internal._Any->Void>>; var onExit:Signal<Void->Void>; var onFixedUpdate:Null<Signal<Float->Void>>; var onRender:Signal<Void->Void>; var onUpdate:Signal<Float->Void>; var windows:Array<ApplicationWindow>; });
+    return cast (cast createEntity((cast ({ deltaTime: 0.0, elapsedTime: 0.0, frameCount: 0.0, interpolationAlpha: 1.0, isRunning: false, onActivate: null, onDeactivate: null, onError: null, onExit: (cast createSignal() : Signal<Void->Void>), onFixedUpdate: null, onRender: (cast createSignal() : Signal<Void->Void>), onUpdate: (cast createSignal() : Signal<Float->Void>), windows: cast ([] : Array<Dynamic>) } : Application) : Dynamic)) : Application);
     return cast null;
   }
 

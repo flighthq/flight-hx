@@ -102,7 +102,7 @@ class _Power {
   }
 
   public static function createPower():Power {
-    return cast (cast createEntity(({ final __callArgument9:Dynamic = { onChange: null, onCharging: null, onDischarging: null, onIdleStateChange: null, onLockScreen: null, onResume: null, onSuspend: null, onThermalStateChange: null, onUnlockScreen: null }; __callArgument9; })) : { >Entity, var onChange:flight._internal._Any; var onCharging:flight._internal._Any; var onDischarging:flight._internal._Any; var onIdleStateChange:flight._internal._Any; var onLockScreen:flight._internal._Any; var onResume:flight._internal._Any; var onSuspend:flight._internal._Any; var onThermalStateChange:flight._internal._Any; var onUnlockScreen:flight._internal._Any; });
+    return cast (cast createEntity(({ final __callArgument9:Dynamic = ({ onChange: null, onCharging: null, onDischarging: null, onIdleStateChange: null, onLockScreen: null, onResume: null, onSuspend: null, onThermalStateChange: null, onUnlockScreen: null } : Power); __callArgument9; })) : Power);
     return cast null;
   }
 

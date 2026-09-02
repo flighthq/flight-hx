@@ -1,8 +1,16 @@
 # Typed Struct Class-Emission Feasibility
 
-Status: the `Camera2D` cpp pilot passed every Gate 1-3 acceptance check. Gate 4 retains `ParticleEmitterState`; `ParticleEmitterData` was reverted after the provenance audit proved its parent ingress can carry anonymous data into a class-typed read. No Gate-5 schema is enabled. The deterministic census covers all 1,536 eligible canonical typed-struct schemas at the pinned upstream commit.
+Status: historical pilot evidence. The cpp-only, per-schema allowlist decision below was superseded by the uniform factory-created Entity model in [`upstream-b3bb4bf6-linux-hxcpp-plan.md`](upstream-b3bb4bf6-linux-hxcpp-plan.md#target-representation-model). Keep the census and benchmark evidence, but do not use the old migration gates as current policy.
 
-## Decision
+## Superseded pilot decision
+
+The original experiment used cpp-only `@:structInit` classes selected by a canonical-ID allowlist. It established three facts that carry forward: hxcpp class fields are materially faster in hot spans, unchecked casts from anonymous objects are unsound, and provenance must include containment and dynamic ingress. Its shipping policy does not carry forward.
+
+The current model uses one all-target class representation for every concrete factory-created Entity, private constructors granted to authoritative factory modules, and a program-wide `flight_struct_typedef` oracle/debug define. `create<Type>` remains the only public allocation boundary. `Has*` contracts and genuine unbranded/out/config `*Like` values are not promoted into competing concrete identities.
+
+The sections below document the earlier experiment and explain why the factory-closure work is required.
+
+## Historical decision
 
 Pilot target-conditional `@:structInit` classes on hxcpp only. Preserve the existing anonymous `typedef` on every other target, retain a canonical-ID allowlist, and begin with required-field schemas that have no normalization or observability findings. Do not emit classes on JavaScript. Do not expand to Neko until the hxcpp mechanism is benchmarked and the same allowlist passes a separate Neko CPU benchmark.
 
@@ -30,7 +38,7 @@ typedef Camera2D = {
 
 This is now the emitted shape for the exact canonical ID `@flighthq/types:upstream/packages/types/src/Camera2D.ts#Camera2D`. The generated constructor includes every declared field in deterministic declaration order and uses the same lowered field types as the typedef. `@:structInit` is the compatibility mechanism for contextual object literals; it is not a license to cast anonymous or dynamic native objects to a class.
 
-The allowlist is default-off: only exact reviewed canonical IDs enter, and generation fails when an enabled identity is absent, indirect, ineligible, generic, inherited, optional, or not an anonymous required-field record. The pilot also records construction identity in the IR, validates the exact field set and declaration order at emission, and leaves all non-cpp declarations on the existing typedef branch. A cpp build with `-D flight_cpp_struct_init_baseline` selects that same typedef branch, providing a controlled A/B baseline from one generated tree without changing the normal class-enabled build.
+The allowlist was default-off: only exact reviewed canonical IDs entered, and generation failed when an enabled identity was absent, indirect, ineligible, generic, inherited, optional, or not an anonymous required-field record. The pilot also recorded construction identity in the IR and validated the exact field set and declaration order at emission. Its same-tree baseline define has since become the program-wide `-D flight_struct_typedef` switch.
 
 ## Camera pilot verdict
 

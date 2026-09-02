@@ -98,10 +98,10 @@ Treat Linux hxcpp as practical for this tranche when all of the following hold o
 2. Camera2d script-only median is at most 8.0 ms; rendered incremental median is at most 4.0 ms.
 3. The 1,000-shape control does not regress by more than 3%.
 4. Particles rendered p95 remains below 8.33 ms (120 fps), with no increase in allocations per frame.
-5. Every native-layout tranche preserves JS output, portable Haxe behavior, render pixels, and nominal provenance closure.
+5. The typedef-oracle lane preserves JavaScript output and the verbatim upstream assertions; the class lane preserves portable Haxe behavior, render pixels, and nominal provenance closure.
 6. Horse Stacker records paired HTML/Linux p50 and p95 on real GL for the default, no-backdrop, 1x `rgba8`, and combined variants; its CPU-only scene-preparation control must pass checksum equality and the 3% control stability gate.
 
-The current aggregate harness cannot calculate p95. Adding per-frame samples is therefore the first implementation task, not an optional refinement. Before expanding the class allowlist, re-establish the existing `Camera2D` result on this pin by interleaving normal cpp builds with `-D flight_cpp_struct_init_baseline` builds. Both variants come from the same generated tree: the normal build uses the provenance-closed `@:structInit` class created by `createCamera2D`, while the define selects the anonymous typedef branch. This isolates hxcpp representation from generator and upstream drift.
+The current aggregate harness cannot calculate p95. Adding per-frame samples is therefore the first implementation task, not an optional refinement. The same generated tree must support a default class build and a program-wide `-D flight_struct_typedef` build. Interleaved C++ runs isolate representation from generator and upstream drift; the typedef JavaScript build is also the verbatim upstream oracle lane.
 
 ## Constructor-layout A/B result
 
@@ -110,6 +110,24 @@ The shared-tree switch confirms that the representation hypothesis is real but n
 A CPU-only probe then repeated the example's composed camera operations 5,000,000 times: view matrix, visible bounds, parallax, and camera mutation. Across five interleaved pairs on the same pinned CPU, the class median was 2.485 seconds versus 3.477 seconds for the typedef, 28.5% less time, with identical checksums. The fixed-offset `Camera2D` layout is therefore materially faster inside its own hot span, but that span is too small to move the whole scene reliably.
 
 The next camera-layout tranche should apply factory provenance to the larger allocation boundary: `createNode`/`createNode2D` create each node once, and the transform initializers then populate the `HasTransform2D` view on that same identity. The generator currently audits those views as cross-schema transfers rather than recognizing one factory-created native object. Normalize that identity before class emission; do not cast the existing anonymous node to a class. `BitmapRegion` remains the safest independent closed candidate, but it is no longer ahead of constructor-proven node/transform identity for the camera target.
+
+## Target representation model
+
+Flight's branded Entity contract determines one uniform representation rule; it is not a per-schema performance allowlist:
+
+1. Every concrete Entity identity produced through Flight's factory vocabulary is a behavior-free nominal class by default on every Haxe target. The public address remains `flight.types.<Type>`, fields remain public and mutable, and free functions remain the behavioral API.
+2. Construction is sealed. The generated constructor is private and `@:allow` grants only the implementation module or modules containing the authoritative factory sites. `create<Type>` remains the sole public allocator and still delegates through `createEntity`, preserving the runtime symbol stamp, pooling, sentinels, and grepable allocation vocabulary.
+3. One program-wide `flight_struct_typedef` define selects structural typedefs. The full upstream Vitest oracle compiles with that define and reuses every assertion verbatim. The same define is the C++ representation bisect; default builds use classes.
+4. `Has*` types remain composition contracts, not competing concrete identities. Host-capability traits are interface candidates. Node/render traits may use interfaces for composition only when per-frame reads narrow to the concrete node class, avoiding hxcpp virtual interface-field dispatch on the hot path.
+5. `*Like` remains for genuine unbranded values, writable out/aliasing operations, and configuration such as `Scale9Shape.scale9Grid`. A matching shape never acquires Entity identity merely because its fields happen to align.
+
+This keeps the API topology and allocation vocabulary identical while changing only representation. JavaScript class instances do have observable prototype identity, so the oracle guarantee belongs to the typedef lane rather than to byte-identical default-class output. The class lane is a separate behavioral, portability, pixel, provenance, and performance check; it does not weaken or replace the full typedef oracle.
+
+The keystone is closing `createEntity` erasure by declared identity rather than by structural shape. Structural resolution is ambiguous for derived and intersection types: for example, `createRenderTexture` simultaneously matches `RenderTexture` and `RenderTarget`. The generator now resolves the declared return symbol first, recognizes only Flight's real `createEntity`, and requires the exact literal field order. That produces a concrete-ready typed construction while the typedef branch remains behaviorally unchanged. Generic `T extends Entity`, bare `Entity`, spread/computed literals, and unresolved factory results remain explicit closure blockers rather than unchecked casts.
+
+Feasibility checks are positive for the Haxe mechanism. A minimal `@:structInit` class with a private constructor and exact factory-module `@:allow` compiles and runs through the factory; an external `new` fails with `Cannot access private constructor`. The initial source inventory finds 368 production `createEntity` calls: 165 currently resolve to a single non-`Entity` schema, 109 expose multiple structural identities, 87 resolve only to generic/bare `Entity`, and seven have no typed-struct identity. Identity-first resolution removes the false ambiguity category; the generic/bare and unresolved sites are the real work queue.
+
+The external-ingress check found ten direct `JSON.parse` roots in the provenance audit, all interchange-document schemas and none Entity-derived. No direct JSON-to-Entity root is currently known. There are still 37 dynamic-transfer findings across 12 Entity-family schemas, concentrated in generic cloning, material/import flows, node/mesh trait erasure, and renderer composition. Each must be classified as an internal identity-preserving view or normalized at its boundary before the wholesale class switch; compile success alone cannot waive it.
 
 ## 3D acceptance workload: Horse Stacker
 
@@ -129,9 +147,11 @@ The gross slowdown in this environment is therefore not principally node typedef
 1. Run Horse Stacker HTML and Linux C++ on the same real-GPU host, viewport, scene state, and quality settings. Retain the no-backdrop and 1x `rgba8` variants as controls so a target/allocation win is not misreported as a class-layout win.
 2. Measure factory-created 3D records without GL. `npm run bench:scene3d:cpp` builds a normal candidate and the same-tree typedef baseline, then interleaves five pairs of a 128-mesh `prepareScene3DRender` workload with camera and node invalidation. This is the acceptance gate for `createNode3D`/`createMesh` identity closure.
 
-The initial headless control has identical checksums and a 2.47% median paired normal-build gain, inside the 3% noise threshold. That is the expected neutral result because the current cpp class set does not include the Node3D/mesh identities exercised by this workload; it becomes an optimization gate only when that tranche changes.
+The initial headless control has identical checksums and a 2.47% median paired normal-build gain, inside the 3% noise threshold. A `Camera3D` factory/class trial then produced only a 1.63% median paired gain across five pairs (range -0.39% to +5.39%). This is useful attribution: one camera object is not a meaningful share of the scene span. It is not a reason to exclude Camera3D from the uniform Entity representation.
 
-Flight's public API should remain constructor-shaped free functions. A cpp-only internal class is an implementation of `create<Type>`, not a replacement public `new()` API. The generator must prove that the factory creates the identity and all trait initializers enrich that same identity before it emits a class; a cast from an already-created anonymous object is not sufficient.
+`Matrix4` is the strongest factory-identity proof. Its single `m` field has 133 audited direct sites, and node local/world caches are initialized to null and populated only by `createMatrix4`. The class experiment declared the real non-JS symbol slot (`__symbol__EntityRuntime`); structural `Matrix4Like` literals remained typedef values and did not trigger class construction. Five 500-iteration pairs measured a +15.20% median paired gain, and a shorter repeat measured +9.92%; both had identical checksums and four of five pairs favored the class. The host was volatile (including one reversal in each run), so these are paired-layout results rather than an end-to-end FPS projection. Matrix4 demonstrates that factory identity can recover fixed-offset performance, but it will ship as part of the uniform Entity switch rather than as a permanent one-off allowlist entry.
+
+Flight's public API remains constructor-shaped free functions. An internal class is an implementation of `create<Type>`, not a replacement public `new()` API. The generator must prove that the factory creates the identity and all trait initializers enrich that same identity before it emits a class; a cast from an already-created anonymous object is not sufficient.
 
 ## Implementation plan
 
@@ -145,19 +165,25 @@ Flight's public API should remain constructor-shaped free functions. A cpp-only 
 
 This phase is complete when it reproduces the broad current split: nearly zero rendered overhead for the cached-shape control, a large CPU and GL split for camera2d, and a much smaller GL split for particles.
 
-### P1: take the safest high-value native layout
+### P1: establish the representation switch and two CI lanes
 
-Add `@flighthq/types:interface#BitmapRegion` to the cpp-only `@:structInit` allowlist as a standalone tranche. It is the strongest current closed candidate: 674 direct sites, five required fields, one plain production literal, no normalization/observability findings, and closed nominal provenance. Its 83 input bridge signatures require bridge smoke coverage but are not a closure blocker.
+- Replace the cpp-only baseline with one all-target `flight_struct_typedef` define. Default compilation selects the class representation; the typedef define selects the existing structural declarations program-wide.
+- Route the full upstream Vitest command through the typedef build without editing any upstream test or expected value. Keep this as the correctness spine for strict equality, serialization, enumeration, spread, and prototype-sensitive behavior.
+- Add a default-class lane that compiles and smoke-runs every portable target, exercises `-dce full`, pixels, runtime Entity guards, and the paired benchmarks. Derive its shape-tolerant upstream subset mechanically and keep it additive to the full oracle.
+- Compile-test sealed construction: every generated Entity constructor is private, each authoritative factory module is granted with `@:allow`, factory construction succeeds, and an ordinary consumer's `new` fails.
 
-Acceptance requires fixed-offset member access in emitted C++, unchanged non-cpp Haxe/JS output, clean portable tests and pixels, and a statistically credible improvement in the particle script span. Keep the class only if its paired median improves by at least 5% or instrumentation proves a smaller result removes at least 10% of executed dynamic field operations in the workload.
+This phase is complete when one generated tree can run both representations deterministically and the class build is the normal no-define path on JavaScript, Eval, Python, and C++.
 
-### P2: close the factory-created CPU identity gaps
+### P2: close factory identity wholesale before enabling Entity classes
 
-1. Teach provenance that a reviewed `create<Type>` factory is a nominal allocation boundary and that its initializer chain enriches one identity. Begin with `createNode3D`/`createMesh` plus their node, appearance, transform, and mesh views. Emit one flattened cpp-only class only after every constructor and escape path closes; keep the public factory and non-cpp output unchanged. Require a stable `bench:scene3d:cpp` checksum, at least a 10% paired CPU-span gain, and no Horse Stacker pixel or render-phase regression.
-2. Apply the same rule to the two `HasTransform2D` and two `HasTransform2DRuntime` cross-schema transfers in `displayObject.ts` and `guiTestHelper.ts`. Preserve the canonical identity through the `Node`/`Node2DTraits` and `NodeRuntime` intersections instead of casting an anonymous composite. Re-run provenance, then trial the required-field transform record before the optional runtime record. The camera projection is 151 accesses per frame; require at least a 10% script-span gain and the 8.0 ms script target before expanding the class set.
-3. Preserve or normalize `ParticleEmitterData` identity in the `ParticleEmitter2D` and `ParticleEmitter3D` outer `data` slots. It has 461 direct sites and previously reduced the measured heap window, but it remains correctly blocked by normalization provenance. Enable it only after the report proves closure and the outer ingress test passes. Require a 10% particle script improvement or a 20% allocation reduction.
+1. Resolve `createEntity` by the declared destination symbol, not the complete structural match set. Require the exact upstream helper symbol, a named factory result, and an exact constructor field set/order. Emit a concrete-ready typed construction even while `flight_struct_typedef` selects the structural declaration.
+2. Generate a factory-closure report for every production `createEntity` call. Classify each as exact concrete identity, generic/bare Entity, structural intersection, spread/computed construction, or unresolved. Generation must fail before class activation if any concrete Entity factory can still return an anonymous object cast as a class.
+3. Replace generic producers such as `cloneEntity<T>` and generic subscription helpers with a representation-safe route: call the concrete public clone/create factory where one exists, or retain a typed allocator token that constructs the concrete class. Do not use runtime type guessing or an hxcpp cast.
+4. Normalize the remaining internal dynamic/trait views once at their proven identity boundary. Keep direct JSON/interchange schemas structural; if a future host/JSON path produces an Entity, validate and construct it before any class-typed read.
+5. Emit all concrete factory-created Entity identities together, with private constructors and exact factory-module grants. This is one uniform rule. The audit may order closure work for review, but it may not become a shipping per-schema allowlist.
+6. Evaluate `Has*` interfaces after the concrete Entity set is closed. Host capabilities may use interfaces directly; node/render traits require concrete-class reads on the per-frame path. Preserve `*Like` aliases at unbranded/out/config boundaries.
 
-Do not bulk-enable the remaining 841 closed candidates. `BitmapRegion`, transform state, and particle data each get their own generated delta, C++ inspection, correctness gate, and paired benchmark.
+Acceptance requires zero residual generic `createEntity` erasure for concrete Entity results, a clean class-vs-typedef behavioral differential, full typedef-oracle parity, portable class compilation, native runtime guards, pixels, and the Scene3D/Horse Stacker performance gates.
 
 ### P3: remove camera invalidation/render cost
 
@@ -175,4 +201,4 @@ After P1-P3, map sampled native stacks back to the typed-struct and erasure repo
 
 ## Recommended order
 
-The constructor-layout A/B control is complete. Continue with P0 instrumentation, P2 Node3D factory-identity closure against the new CPU gate, P2 Node2D/transform closure, P1 `BitmapRegion` as an independent closed control, P3 measured GL invalidation/caching/effect work, then P2 particle-data closure and P4 residual specialization. Horse Stacker is the real-GL 3D acceptance workload; its headless preparation control prevents the dominant target/effect cost from hiding a successful or failed layout change.
+The constructor-layout hypothesis and sealed-constructor mechanism are proven, but the former per-schema shipping plan is superseded. Continue with P1's global define/two-lane infrastructure, P2's identity-first factory report and generic-producer closure, then activate the uniform concrete Entity class set. Run P0 instrumentation alongside that work so the wholesale switch has trustworthy CPU and render acceptance data. Follow with P3 measured GL invalidation/caching/effect work and P4 residual specialization. Horse Stacker remains the real-GL 3D workload; its headless preparation control prevents the dominant target/effect cost from hiding a successful or failed layout change.

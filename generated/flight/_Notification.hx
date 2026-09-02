@@ -249,14 +249,14 @@ class _Notification {
   @:allow(flight)
   @:keep
   private static function createNotificationResource(id:String, title:String, tag:String = ''):Notification {
-    return cast (cast (cast createEntity : Null<{ var id:String; var tag:String; var title:String; }>->{ >Entity, var id:String; var tag:String; var title:String; })(({ final __callArgument78:Dynamic = { id: id, tag: tag, title: title }; __callArgument78; })) : { >Entity, var id:String; var tag:String; var title:String; });
+    return cast (cast (cast createEntity : Null<{ var id:String; var tag:String; var title:String; }>->{ >Entity, var id:String; var tag:String; var title:String; })(({ final __callArgument78:Dynamic = ({ id: id, tag: tag, title: title } : Notification); __callArgument78; })) : Notification);
     return cast null;
   }
 
   @:allow(flight)
   @:keep
   private static function createScheduledNotificationResource(id:String, request:NotificationRequest, schedule:NotificationSchedule):ScheduledNotification {
-    return cast (cast (cast createEntity : Null<{ var id:String; var request:NotificationRequest; var schedule:NotificationSchedule; }>->{ >Entity, var id:String; var request:NotificationRequest; var schedule:NotificationSchedule; })(({ final __callArgument80:Dynamic = { id: id, request: request, schedule: schedule }; __callArgument80; })) : { >Entity, var id:String; var request:NotificationRequest; var schedule:NotificationSchedule; });
+    return cast (cast (cast createEntity : Null<{ var id:String; var request:NotificationRequest; var schedule:NotificationSchedule; }>->{ >Entity, var id:String; var request:NotificationRequest; var schedule:NotificationSchedule; })(({ final __callArgument80:Dynamic = ({ id: id, request: request, schedule: schedule } : ScheduledNotification); __callArgument80; })) : ScheduledNotification);
     return cast null;
   }
 

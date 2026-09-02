@@ -553,7 +553,7 @@ class _Render {
   }
 
   public static function createRenderCache():RenderCache {
-    return cast (cast createEntity((cast { kind: RenderCacheKindValue, transform: (cast (#if js _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) #else createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix) } : Dynamic)) : { >Entity, var kind:String; var transform:Matrix; });
+    return cast (cast createEntity((cast ({ kind: RenderCacheKindValue, transform: (cast (#if js _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) #else createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix) } : RenderCache) : Dynamic)) : RenderCache);
     return cast null;
   }
 

@@ -508,11 +508,21 @@ function markCppStructInitTypes(
       }
       if (
         declaration.type.kind !== 'anonymous' ||
-        declaration.type.extends.length > 0 ||
+        declaration.type.extends.some((type) => !isEntityBaseType(type)) ||
         declaration.typeParameters.length > 0 ||
-        declaration.type.fields.some((field) => field.optional)
+        declaration.type.fields.some((field) => field.optional && field.name !== '__EntityRuntimeKey')
       ) {
-        throw new Error(`cpp @:structInit schema is not a closed required-field record: ${id}`);
+        throw new Error(
+          `cpp @:structInit schema is not a closed required-field record: ${id} (${JSON.stringify({
+            extends: declaration.type.kind === 'anonymous' ? declaration.type.extends : [],
+            optionalFields:
+              declaration.type.kind === 'anonymous'
+                ? declaration.type.fields.filter((field) => field.optional).map((field) => field.name)
+                : [],
+            typeKind: declaration.type.kind,
+            typeParameters: declaration.typeParameters,
+          })})`,
+        );
       }
       declaration.cppStructInitSchemaId = id;
       seen.add(id);
@@ -521,6 +531,10 @@ function markCppStructInitTypes(
   const missing = [...allowlist].filter((id) => !seen.has(id));
   if (missing.length > 0)
     throw new Error(`cpp @:structInit allowlist identities were not emitted: ${missing.join(', ')}`);
+}
+
+function isEntityBaseType(type: IrType): boolean {
+  return type.kind === 'named' && (type.name === 'Entity' || type.name === 'flight.types.Entity');
 }
 
 export function validateCppStructInitProvenance(

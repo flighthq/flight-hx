@@ -4,7 +4,7 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-#if (cpp && !flight_cpp_struct_init_baseline)
+#if !flight_struct_typedef
 @:structInit
 class Camera2D {
   public var rotation:Float;

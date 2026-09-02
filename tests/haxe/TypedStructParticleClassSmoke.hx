@@ -42,7 +42,7 @@ class TypedStructParticleClassSmoke {
       throw 'ParticleEmitterState lost color capacity';
     }
 
-    #if (cpp && !flight_cpp_struct_init_baseline)
+    #if !flight_struct_typedef
     if (!Std.isOfType(state, flight.types.ParticleEmitterState)) {
       throw 'ParticleEmitterState retained Gate 4 class did not construct an instance';
     }

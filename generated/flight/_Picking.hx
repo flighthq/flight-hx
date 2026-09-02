@@ -55,7 +55,7 @@ import flight.types.Vector3Like;
 @:noCompletion
 class _Picking {
   public static function createScene3DHit():Scene3DHit {
-    return cast (cast createEntity(({ final __callArgument0:Dynamic = { distance: 0.0, node: null, normalX: 0.0, normalY: 0.0, normalZ: 0.0, pointX: 0.0, pointY: 0.0, pointZ: 0.0, triangleIndex: -1.0, u: 0.0, v: 0.0, w: 0.0 }; __callArgument0; })) : { >Entity, var distance:Float; var node:flight._internal._Any; var normalX:Float; var normalY:Float; var normalZ:Float; var pointX:Float; var pointY:Float; var pointZ:Float; var triangleIndex:Float; var u:Float; var v:Float; var w:Float; });
+    return cast (cast createEntity(({ final __callArgument0:Dynamic = ({ distance: 0.0, node: null, normalX: 0.0, normalY: 0.0, normalZ: 0.0, pointX: 0.0, pointY: 0.0, pointZ: 0.0, triangleIndex: -1.0, u: 0.0, v: 0.0, w: 0.0 } : Scene3DHit); __callArgument0; })) : Scene3DHit);
     return cast null;
   }
 
