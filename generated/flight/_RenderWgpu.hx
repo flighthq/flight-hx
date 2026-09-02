@@ -1307,7 +1307,7 @@ class _RenderWgpu {
     var texture:Texture2D = cast _Runtime.UNDEFINED;
     var view:flight._internal.dom.GPUTextureView = cast _Runtime.UNDEFINED;
     var sampler:flight._internal.dom.GPUSampler = cast _Runtime.UNDEFINED;
-    source = (cast createEntity(({ final __callArgument334:Dynamic = { height: options.height, kind: ExternalTextureSourceKind, version: 0.0, width: options.width }; __callArgument334; })) : ExternalTexture);
+    source = (cast (cast createEntity(({ final __callArgument334:Dynamic = (#if flight_struct_typedef { height: options.height, kind: ExternalTextureSourceKind, version: 0.0, width: options.width } #else ({ final __structInitField0:Dynamic = options.height; final __structInitField1:Dynamic = ExternalTextureSourceKind; final __structInitField2:Dynamic = 0.0; final __structInitField3:Dynamic = options.width; ({ alphaType: cast _Runtime.UNDEFINED, gamut: cast _Runtime.UNDEFINED, height: __structInitField0, kind: __structInitField1, version: __structInitField2, width: __structInitField3 } : ExternalTexture); }) #end); __callArgument334; })) : ExternalTexture) : ExternalTexture);
     texture = (cast createTexture((cast { colorSpace: options.colorSpace, sampler: _Runtime.select(options.sampler, function():Dynamic return cast (cast cloneSampler(options.sampler) : Sampler), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), dimension: '2d', source: source } : Dynamic)) : Texture2D);
     view = handle.createView();
     sampler = (cast _RenderWgpu.getExternalWgpuSampler__wgpuExternalTexture(({ final __callArgument336:Dynamic = state; __callArgument336; }), ({ final __callArgument337:Dynamic = texture; __callArgument337; })) : flight._internal.dom.GPUSampler);

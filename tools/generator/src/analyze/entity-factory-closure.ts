@@ -34,7 +34,7 @@ export type EntityFactoryBlocker =
   | 'unresolved-destination'
   | 'unsupported-object-member';
 
-export type EntityFactoryNormalization = 'field-order' | 'spread-projection';
+export type EntityFactoryNormalization = 'field-order' | 'missing-field-initialization' | 'spread-projection';
 
 export interface EntityFactoryClosureSite {
   argument: {
@@ -80,6 +80,7 @@ export interface EntityFactoryClosureAudit {
     exactNonEntityCalls: number;
     genericEntityCalls: number;
     normalizedFieldOrderCalls: number;
+    normalizedMissingFieldCalls: number;
     normalizedSpreadProjectionCalls: number;
     readyEntityCalls: number;
     structuralEntityCalls: number;
@@ -140,6 +141,8 @@ export function auditEntityFactoryClosure(
       exactNonEntityCalls: countKind('exact-non-entity'),
       genericEntityCalls: countKind('generic-entity'),
       normalizedFieldOrderCalls: sites.filter((site) => site.normalizations.includes('field-order')).length,
+      normalizedMissingFieldCalls: sites.filter((site) => site.normalizations.includes('missing-field-initialization'))
+        .length,
       normalizedSpreadProjectionCalls: sites.filter((site) => site.normalizations.includes('spread-projection')).length,
       readyEntityCalls: sites.filter((site) => site.status === 'ready').length,
       structuralEntityCalls: countKind('structural-entity'),
@@ -262,8 +265,12 @@ function addFieldFindings(
   recordFieldOrder = true,
 ): void {
   const expected = schema.fields.map((field) => field.name);
-  if (fields.length !== expected.length || fields.some((field) => !expected.includes(field))) {
+  if (fields.some((field) => !expected.includes(field))) {
     blockers.push('field-set-mismatch');
+    return;
+  }
+  if (expected.some((field) => !fields.includes(field))) {
+    normalizations.push('missing-field-initialization');
     return;
   }
   if (recordFieldOrder && fields.some((field, index) => field !== expected[index])) {

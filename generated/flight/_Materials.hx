@@ -316,7 +316,7 @@ class _Materials {
 
   public static function cloneMaterial(source:Material):Material {
     var clone:Material = cast _Runtime.UNDEFINED;
-    clone = (cast createEntity(({ final __callArgument104:Dynamic = { kind: _Runtime.field(source, 'kind') }; __callArgument104; })) : Material);
+    clone = (cast (cast createEntity(({ final __callArgument104:Dynamic = (#if flight_struct_typedef { kind: _Runtime.field(source, 'kind') } #else ({ final __structInitField0:Dynamic = _Runtime.field(source, 'kind'); ({ kind: __structInitField0, name: cast _Runtime.UNDEFINED } : Material); }) #end); __callArgument104; })) : Material) : Material);
     _Materials.copyMaterialFields__material(({ final __callArgument106:Dynamic = clone; __callArgument106; }), ({ final __callArgument107:Dynamic = source; __callArgument107; }), (cast _Runtime.field(source, 'kind') : String));
     return cast clone;
     return cast null;
@@ -329,7 +329,7 @@ class _Materials {
 
   public static function createMaterial(kind:Kind):Material {
     var material:Material = cast _Runtime.UNDEFINED;
-    material = (cast createEntity(({ final __callArgument114:Dynamic = { kind: kind }; __callArgument114; })) : Material);
+    material = (cast (cast createEntity(({ final __callArgument114:Dynamic = (#if flight_struct_typedef { kind: kind } #else ({ final __structInitField0:Dynamic = kind; ({ kind: __structInitField0, name: cast _Runtime.UNDEFINED } : Material); }) #end); __callArgument114; })) : Material) : Material);
     ((cast material : Material).name = null);
     return cast material;
     return cast null;

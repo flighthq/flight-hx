@@ -4265,6 +4265,103 @@ describe('typed struct analysis', () => {
     ).not.toThrow();
   });
 
+  it('keeps sparse typedef construction while initializing the nominal layout', () => {
+    const candidate: TypedStructCandidate = {
+      emission: 'direct',
+      name: 'Camera2D',
+      packageName: '@flighthq/types',
+      purpose: 'struct-init missing-field fixture',
+      source: 'upstream/packages/types/src/CameraPilot.ts',
+    };
+    const result = lowerFixture(
+      `
+        export interface Camera2D { x: number; y?: number; }
+        export function createCamera2D(): Camera2D { return { x: 1 }; }
+      `,
+      candidate,
+    );
+    const declaration = result.lowered.declarations.find(
+      (item) => item.kind === 'type' && item.name === candidate.name,
+    );
+    if (!declaration || declaration.kind !== 'type') throw new Error('Expected Camera2D sparse fixture type');
+    const factory = result.lowered.declarations.find(
+      (item) => item.kind === 'function' && item.name === 'createCamera2D',
+    );
+    const returned =
+      factory?.kind === 'function' ? factory.body.find((statement) => statement.kind === 'return') : undefined;
+    if (returned?.kind !== 'return' || returned.expression?.kind !== 'object' || !returned.expression.cppStructInit) {
+      throw new Error('Expected Camera2D sparse construction');
+    }
+    returned.expression.cppStructInit.missingFieldNames = ['y'];
+    declaration.cppStructInitSchemaId = candidateId(candidate);
+    const fixtureModule = {
+      declarations: result.lowered.declarations,
+      haxePackage: 'flight.types',
+      imports: [],
+      name: 'CameraPilot',
+      packageName: '@flighthq/types',
+    };
+    sealCppStructInitConstructors([fixtureModule]);
+    const output = emitHaxeModule(fixtureModule);
+
+    expect(result.lowered.diagnostics).toEqual([]);
+    expect(output).toContain('#if flight_struct_typedef { x: 1.0 } #else');
+    expect(output).toContain('({ x: __structInitField0, y: cast _Runtime.UNDEFINED } : Camera2D)');
+
+    const fixtureDirectory = path.resolve('build/haxe-struct-init-missing-field-fixture');
+    const packageDirectory = path.join(fixtureDirectory, 'flight', 'types');
+    rmSync(fixtureDirectory, { force: true, recursive: true });
+    mkdirSync(packageDirectory, { recursive: true });
+    writeFileSync(path.join(packageDirectory, 'CameraPilot.hx'), output);
+    writeFileSync(
+      path.join(fixtureDirectory, 'Main.hx'),
+      `
+        class Main {
+          static function main() {
+            final camera = flight.types.CameraPilot.createCamera2D();
+            if (!Std.isOfType(camera, flight.types.CameraPilot.Camera2D)) throw 'not a class';
+            if (camera.x != 1 || camera.y != null) throw 'bad initialized fields';
+          }
+        }
+      `,
+    );
+    expect(() =>
+      execFileSync('node', ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '--main', 'Main', '--interp'], {
+        cwd: path.resolve('.'),
+        stdio: 'pipe',
+      }),
+    ).not.toThrow();
+    writeFileSync(
+      path.join(fixtureDirectory, 'BaselineMain.hx'),
+      `
+        class BaselineMain {
+          static function main() {
+            final camera = flight.types.CameraPilot.createCamera2D();
+            if (camera.x != 1 || camera.y != null) throw 'bad sparse fields';
+          }
+        }
+      `,
+    );
+    expect(() =>
+      execFileSync(
+        'node',
+        [
+          'tools/haxe.mjs',
+          '-cp',
+          fixtureDirectory,
+          '-cp',
+          'src',
+          '-D',
+          'flight_struct_typedef',
+          '--main',
+          'BaselineMain',
+          '--interp',
+        ],
+        { cwd: path.resolve('.'), stdio: 'pipe' },
+      ),
+    ).not.toThrow();
+  });
+
   it('censuses class migration flows and observability by canonical schema', () => {
     const audit = classAuditFixture(
       `
@@ -4470,15 +4567,16 @@ describe('typed struct analysis', () => {
     expect(registry.resolveIdentity(renderTextureReturn)?.name).toBe('RenderTexture');
     expect(entityFactories.summary).toEqual({
       bareEntityCalls: 0,
-      blockedEntityCalls: 184,
+      blockedEntityCalls: 175,
       calls: 368,
       exactEntityCalls: 191,
       exactEntitySchemas: 148,
       exactNonEntityCalls: 17,
       genericEntityCalls: 3,
       normalizedFieldOrderCalls: 24,
+      normalizedMissingFieldCalls: 9,
       normalizedSpreadProjectionCalls: 4,
-      readyEntityCalls: 167,
+      readyEntityCalls: 176,
       structuralEntityCalls: 141,
       unresolvedCalls: 16,
     });

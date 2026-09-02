@@ -64,6 +64,7 @@ export interface IrHostTypeBinding {
 
 export interface IrCppStructInitConstruction {
   fieldNames: string[];
+  missingFieldNames?: string[] | undefined;
   schemaHaxeType: string;
   schemaId: string;
   schemaName: string;

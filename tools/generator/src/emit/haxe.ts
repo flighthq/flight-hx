@@ -2848,7 +2848,7 @@ function emitExpression(expression: IrExpression): string {
             .join(', ')} }`;
           return emitObjectThisCapture(
             expression,
-            `({ final ${source}:Dynamic = ${merged}; (${value} : ${expression.cppStructInit.schemaHaxeType}); })`,
+            `(#if flight_struct_typedef ${merged} #else ({ final ${source}:Dynamic = ${merged}; (${value} : ${expression.cppStructInit.schemaHaxeType}); }) #end)`,
           );
         }
         const namedProperties = expression.properties.filter(
@@ -2857,12 +2857,31 @@ function emitExpression(expression: IrExpression): string {
         );
         const actualFields = namedProperties.map((property) => property.name);
         if (
-          actualFields.length !== expression.cppStructInit.fieldNames.length ||
           actualFields.some((field) => !expression.cppStructInit!.fieldNames.includes(field)) ||
-          expression.cppStructInit.fieldNames.some((field) => !actualFields.includes(field))
+          expression.cppStructInit.fieldNames.some(
+            (field) => !actualFields.includes(field) && !expression.cppStructInit!.missingFieldNames?.includes(field),
+          )
         ) {
           throw new Error(
             `cpp @:structInit construction field mismatch for ${expression.cppStructInit.schemaId}: expected ${expression.cppStructInit.fieldNames.join(', ')}, received ${actualFields.join(', ')}`,
+          );
+        }
+        if (expression.cppStructInit.missingFieldNames?.length) {
+          const temporaryByField = new Map<string, string>();
+          const evaluations = namedProperties.map((property, index) => {
+            const temporary = `__structInitField${String(index)}`;
+            temporaryByField.set(property.name, temporary);
+            return `final ${temporary}:Dynamic = ${emitExpression(property.value)};`;
+          });
+          const sourceValue = `{ ${namedProperties
+            .map((property) => `${safeName(property.name)}: ${emitExpression(property.value)}`)
+            .join(', ')} }`;
+          const classValue = `{ ${expression.cppStructInit.fieldNames
+            .map((field) => `${safeName(field)}: ${temporaryByField.get(field) ?? 'cast _Runtime.UNDEFINED'}`)
+            .join(', ')} }`;
+          return emitObjectThisCapture(
+            expression,
+            `(#if flight_struct_typedef ${sourceValue} #else ({ ${evaluations.join(' ')} (${classValue} : ${expression.cppStructInit.schemaHaxeType}); }) #end)`,
           );
         }
         const sourceOrderMatches = actualFields.every(

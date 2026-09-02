@@ -17139,8 +17139,8 @@
   "schemaVersion": 7,
   "staticLowering": {
     "booleanAndExpressions": 2827,
-    "booleanConditionalExpressions": 3566,
-    "booleanOrExpressions": 3469,
+    "booleanConditionalExpressions": 3567,
+    "booleanOrExpressions": 3470,
     "booleanTruthinessUses": 17717,
     "destructuringEscapes": {
       "regexp-result-array": {

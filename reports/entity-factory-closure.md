@@ -9,11 +9,12 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | Production createEntity calls | 368 |
 | Exact concrete Entity calls | 191 |
 | Exact concrete Entity schemas | 148 |
-| Constructor-ready Entity calls | 167 |
-| Blocked Entity calls | 184 |
+| Constructor-ready Entity calls | 176 |
+| Blocked Entity calls | 175 |
 | Bare Entity calls | 0 |
 | Generic Entity calls | 3 |
 | Field-order-normalized calls | 24 |
+| Missing-field-initialized calls | 9 |
 | Spread-projected calls | 4 |
 | Structural Entity calls | 141 |
 | Exact non-Entity calls | 17 |
@@ -53,7 +54,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `@flighthq/types:interface#CanvasPipeline` | 1 | 1 | 0 | `createCanvasPipeline` |
 | `@flighthq/types:interface#CanvasRenderSurface` | 1 | 1 | 0 | `finishCanvasRenderSurface` |
 | `@flighthq/types:interface#CanvasRenderSurfaceCreator` | 1 | 1 | 0 | `createWebCanvasRenderSurfaceCreator` |
-| `@flighthq/types:interface#CanvasTextureResolvers` | 1 | 0 | 1 | `createCanvasTextureResolvers` |
+| `@flighthq/types:interface#CanvasTextureResolvers` | 1 | 1 | 0 | `createCanvasTextureResolvers` |
 | `@flighthq/types:interface#CapacitorShareContentBackend` | 1 | 1 | 0 | `createCapacitorShareContentBackend` |
 | `@flighthq/types:interface#Capsule` | 1 | 1 | 0 | `createCapsule` |
 | `@flighthq/types:interface#ClearcoatPbrExtension` | 1 | 1 | 0 | `createClearcoatPbrExtension` |
@@ -64,7 +65,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `@flighthq/types:interface#DirectionalLight` | 2 | 2 | 0 | `cloneDirectionalLight`, `createDirectionalLight` |
 | `@flighthq/types:interface#DownloadedUpdate` | 1 | 1 | 0 | `createDownloadedUpdate` |
 | `@flighthq/types:interface#Environment` | 1 | 1 | 0 | `createEnvironment` |
-| `@flighthq/types:interface#ExternalTexture` | 2 | 0 | 2 | `createExternalGlTexture`, `createExternalWgpuTexture` |
+| `@flighthq/types:interface#ExternalTexture` | 2 | 2 | 0 | `createExternalGlTexture`, `createExternalWgpuTexture` |
 | `@flighthq/types:interface#FileDialogHandle` | 1 | 1 | 0 | `createFileDialogHandle` |
 | `@flighthq/types:interface#FlyCameraController` | 1 | 1 | 0 | `createFlyCameraController` |
 | `@flighthq/types:interface#Font` | 1 | 1 | 0 | `createFont` |
@@ -81,7 +82,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `@flighthq/types:interface#InputTargetHandle` | 1 | 1 | 0 | `createWebInputTargetHandle` |
 | `@flighthq/types:interface#IpcMessageBackend` | 1 | 1 | 0 | `createElectronIpcMessageBackend` |
 | `@flighthq/types:interface#IridescencePbrExtension` | 1 | 1 | 0 | `createIridescencePbrExtension` |
-| `@flighthq/types:interface#Material` | 2 | 0 | 2 | `cloneMaterial`, `createMaterial` |
+| `@flighthq/types:interface#Material` | 2 | 2 | 0 | `cloneMaterial`, `createMaterial` |
 | `@flighthq/types:interface#Matrix` | 1 | 1 | 0 | `createMatrix` |
 | `@flighthq/types:interface#Matrix3` | 1 | 1 | 0 | `createMatrix3` |
 | `@flighthq/types:interface#Matrix4` | 1 | 1 | 0 | `createMatrix4` |
@@ -108,7 +109,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `@flighthq/types:interface#RenderProxy` | 1 | 1 | 0 | `createRenderProxy` |
 | `@flighthq/types:interface#RenderState` | 1 | 1 | 0 | `createRenderState` |
 | `@flighthq/types:interface#RenderSurfaceBackend` | 1 | 1 | 0 | `<module>` |
-| `@flighthq/types:interface#RenderTarget` | 1 | 0 | 1 | `createRenderTexture` |
+| `@flighthq/types:interface#RenderTarget` | 1 | 1 | 0 | `createRenderTexture` |
 | `@flighthq/types:interface#Sampler` | 2 | 2 | 0 | `cloneSampler`, `createSampler` |
 | `@flighthq/types:interface#Scene2D` | 1 | 1 | 0 | `createScene2D` |
 | `@flighthq/types:interface#Scene2DDocumentImporterRegistry` | 1 | 1 | 0 | `createScene2DDocumentImporterRegistry` |
@@ -123,7 +124,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `@flighthq/types:interface#ScreenMode` | 1 | 1 | 0 | `createScreenMode` |
 | `@flighthq/types:interface#ScreenPermissionChange` | 1 | 1 | 0 | `createScreenPermissionChange` |
 | `@flighthq/types:interface#ScreenSignals` | 1 | 1 | 0 | `createScreenSignals` |
-| `@flighthq/types:interface#ShadedMaterial` | 1 | 0 | 1 | `createShadedMaterial` |
+| `@flighthq/types:interface#ShadedMaterial` | 1 | 1 | 0 | `createShadedMaterial` |
 | `@flighthq/types:interface#ShareContentBackend` | 1 | 1 | 0 | `<module>` |
 | `@flighthq/types:interface#ShareFilesBackend` | 1 | 1 | 0 | `<module>` |
 | `@flighthq/types:interface#ShareSignals` | 1 | 1 | 0 | `enableShareSignals` |
@@ -136,7 +137,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `@flighthq/types:interface#ShellTrashBackend` | 1 | 1 | 0 | `makeElectronShellCapabilities` |
 | `@flighthq/types:interface#ShortcutQueryBackend` | 2 | 2 | 0 | `createElectronShortcutQueryBackend`, `createTauriShortcutQueryBackend` |
 | `@flighthq/types:interface#ShortcutTriggerBackend` | 2 | 2 | 0 | `createElectronShortcutTriggerBackend`, `createTauriShortcutTriggerBackend` |
-| `@flighthq/types:interface#Skeleton2D` | 2 | 0 | 2 | `cloneSkeleton2D`, `createSkeleton2D` |
+| `@flighthq/types:interface#Skeleton2D` | 2 | 2 | 0 | `cloneSkeleton2D`, `createSkeleton2D` |
 | `@flighthq/types:interface#Skeleton3D` | 3 | 3 | 0 | `cloneSkeleton3D`, `cloneSkeleton3DJointHierarchy`, `createSkeleton3D` |
 | `@flighthq/types:interface#SpecularPbrExtension` | 1 | 1 | 0 | `createSpecularPbrExtension` |
 | `@flighthq/types:interface#SpotLight` | 2 | 2 | 0 | `cloneSpotLight`, `createSpotLight` |
@@ -456,8 +457,8 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/materials/src/clearcoatPbrExtension.ts:9:10` | `createClearcoatPbrExtension` | `@flighthq/types:interface#ClearcoatPbrExtension` | `contextual` | `object` | 10 | ready | — | — |
 | `upstream/packages/materials/src/colorScaleBias.ts:50:10` | `createColorScaleBias` | `@flighthq/types:interface#ColorScaleBias` | `contextual` | `object` | 8 | ready | `field-order` | — |
 | `upstream/packages/materials/src/iridescencePbrExtension.ts:11:10` | `createIridescencePbrExtension` | `@flighthq/types:interface#IridescencePbrExtension` | `contextual` | `object` | 9 | ready | — | — |
-| `upstream/packages/materials/src/material.ts:7:17` | `cloneMaterial` | `@flighthq/types:interface#Material` | `contextual` | `object` | 1 | blocked | — | `field-set-mismatch` |
-| `upstream/packages/materials/src/material.ts:20:20` | `createMaterial` | `@flighthq/types:interface#Material` | `contextual` | `object` | 1 | blocked | — | `field-set-mismatch` |
+| `upstream/packages/materials/src/material.ts:7:17` | `cloneMaterial` | `@flighthq/types:interface#Material` | `contextual` | `object` | 1 | ready | `missing-field-initialization` | — |
+| `upstream/packages/materials/src/material.ts:20:20` | `createMaterial` | `@flighthq/types:interface#Material` | `contextual` | `object` | 1 | ready | `missing-field-initialization` | — |
 | `upstream/packages/materials/src/sheenPbrExtension.ts:9:10` | `createSheenPbrExtension` | `@flighthq/types:interface#SheenPbrExtension` | `contextual` | `object` | 7 | ready | — | — |
 | `upstream/packages/materials/src/specularPbrExtension.ts:9:10` | `createSpecularPbrExtension` | `@flighthq/types:interface#SpecularPbrExtension` | `contextual` | `object` | 7 | ready | — | — |
 | `upstream/packages/materials/src/standardMaterial.ts:6:10` | `createStandardMaterial` | `@flighthq/types:interface#StandardMaterial` | `contextual` | `object` | 2 | ready | — | — |
@@ -478,11 +479,11 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/picking/src/pickScene3D.ts:36:10` | `createScene3DHit` | `@flighthq/types:interface#Scene3DHit` | `contextual` | `object` | 12 | ready | — | — |
 | `upstream/packages/power/src/power.ts:108:10` | `createPower` | `@flighthq/types:interface#Power` | `contextual` | `object` | 9 | ready | — | — |
 | `upstream/packages/protocol/src/protocol.ts:24:10` | `createProtocolHandler` | `@flighthq/types:interface#ProtocolHandler` | `contextual` | `object` | 1 | ready | — | — |
-| `upstream/packages/render-gl/src/glExternalTexture.ts:22:18` | `createExternalGlTexture` | `@flighthq/types:interface#ExternalTexture` | `contextual` | `object` | 4 | blocked | — | `field-set-mismatch` |
+| `upstream/packages/render-gl/src/glExternalTexture.ts:22:18` | `createExternalGlTexture` | `@flighthq/types:interface#ExternalTexture` | `contextual` | `object` | 4 | ready | `missing-field-initialization` | — |
 | `upstream/packages/render-gl/src/glPipeline.ts:29:20` | `createGlPipeline` | `@flighthq/types:interface#GlPipeline` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/render-gl/src/glRenderState.ts:51:17` | `createGlContextState` | `@flighthq/types:interface#GlContextState` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/render-gl/src/glRenderTarget.ts:85:18` | `createGlRenderTarget` | `structural-entity` | `variable` | `object` | 18 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/render-wgpu/src/wgpuExternalTexture.ts:21:18` | `createExternalWgpuTexture` | `@flighthq/types:interface#ExternalTexture` | `contextual` | `object` | 4 | blocked | — | `field-set-mismatch` |
+| `upstream/packages/render-wgpu/src/wgpuExternalTexture.ts:21:18` | `createExternalWgpuTexture` | `@flighthq/types:interface#ExternalTexture` | `contextual` | `object` | 4 | ready | `missing-field-initialization` | — |
 | `upstream/packages/render-wgpu/src/wgpuPipeline.ts:25:20` | `createWgpuPipeline` | `@flighthq/types:interface#WgpuPipeline` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/render-wgpu/src/wgpuRenderState.ts:55:17` | `createWgpuDeviceState` | `@flighthq/types:interface#WgpuDeviceState` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/render/src/renderCache.ts:18:10` | `createRenderCache` | `@flighthq/types:interface#RenderCache` | `contextual` | `object` | 2 | ready | — | — |
@@ -492,7 +493,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/scene2d-canvas/src/canvasRenderSurface.ts:49:19` | `finishCanvasRenderSurface` | `@flighthq/types:interface#CanvasRenderSurface` | `contextual` | `object` | 5 | ready | — | — |
 | `upstream/packages/scene2d-canvas/src/canvasTestSupport.ts:23:19` | `<anonymous>` | `structural-entity` | `variable` | `object` | 2 | blocked | — | `structural-entity-destination` |
 | `upstream/packages/scene2d-canvas/src/canvasTextLabel.ts:25:10` | `createCanvasTextLabelData` | `@flighthq/types:interface#RendererData` | `contextual` | `object` | 1 | blocked | — | `field-set-mismatch` |
-| `upstream/packages/scene2d-canvas/src/canvasTextureResolver.ts:48:21` | `createCanvasTextureResolvers` | `@flighthq/types:interface#CanvasTextureResolvers` | `contextual` | `object` | 3 | blocked | — | `field-set-mismatch` |
+| `upstream/packages/scene2d-canvas/src/canvasTextureResolver.ts:48:21` | `createCanvasTextureResolvers` | `@flighthq/types:interface#CanvasTextureResolvers` | `contextual` | `object` | 3 | ready | `missing-field-initialization` | — |
 | `upstream/packages/scene2d-dom/src/domRichText.ts:38:10` | `createDomRichTextData` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
 | `upstream/packages/scene2d-dom/src/domScale9Shape.ts:31:10` | `createDomScale9ShapeData` | `structural-entity` | `contextual` | `object` | 2 | blocked | — | `structural-entity-destination` |
 | `upstream/packages/scene2d-dom/src/domShape.ts:25:10` | `createDomShapeData` | `structural-entity` | `contextual` | `object` | 2 | blocked | — | `structural-entity-destination` |
@@ -514,11 +515,11 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/screen/src/screen.ts:67:10` | `createScreenMode` | `@flighthq/types:interface#ScreenMode` | `contextual` | `object` | 5 | ready | `field-order` | — |
 | `upstream/packages/screen/src/screen.ts:71:10` | `createScreenPermissionChange` | `@flighthq/types:interface#ScreenPermissionChange` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/screen/src/screen.ts:75:10` | `createScreenSignals` | `@flighthq/types:interface#ScreenSignals` | `contextual` | `object` | 3 | ready | — | — |
-| `upstream/packages/shading/src/createShadedMaterial.ts:20:20` | `createShadedMaterial` | `@flighthq/types:interface#ShadedMaterial` | `contextual` | `object` | 1 | blocked | — | `field-set-mismatch` |
+| `upstream/packages/shading/src/createShadedMaterial.ts:20:20` | `createShadedMaterial` | `@flighthq/types:interface#ShadedMaterial` | `contextual` | `object` | 1 | ready | `missing-field-initialization` | — |
 | `upstream/packages/share/src/share.ts:38:10` | `enableShareSignals` | `@flighthq/types:interface#ShareSignals` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/shortcut/src/shortcutExplicitDependency.ts:85:15` | `createGlobalShortcut` | `@flighthq/types:interface#GlobalShortcut` | `contextual` | `object` | 2 | ready | — | — |
-| `upstream/packages/skeleton2d/src/skeleton2d.ts:13:10` | `cloneSkeleton2D` | `@flighthq/types:interface#Skeleton2D` | `contextual` | `object` | 5 | blocked | — | `field-set-mismatch` |
-| `upstream/packages/skeleton2d/src/skeleton2d.ts:152:10` | `createSkeleton2D` | `@flighthq/types:interface#Skeleton2D` | `contextual` | `object` | 5 | blocked | — | `field-set-mismatch` |
+| `upstream/packages/skeleton2d/src/skeleton2d.ts:13:10` | `cloneSkeleton2D` | `@flighthq/types:interface#Skeleton2D` | `contextual` | `object` | 5 | ready | `missing-field-initialization` | — |
+| `upstream/packages/skeleton2d/src/skeleton2d.ts:152:10` | `createSkeleton2D` | `@flighthq/types:interface#Skeleton2D` | `contextual` | `object` | 5 | ready | `missing-field-initialization` | — |
 | `upstream/packages/skeleton3d/src/skeleton3d.ts:15:17` | `cloneSkeleton3D` | `@flighthq/types:interface#Skeleton3D` | `returned-variable` | `object` | 5 | ready | — | — |
 | `upstream/packages/skeleton3d/src/skeleton3d.ts:49:10` | `cloneSkeleton3DJointHierarchy` | `@flighthq/types:interface#Skeleton3D` | `contextual` | `object` | 5 | ready | — | — |
 | `upstream/packages/skeleton3d/src/skeleton3d.ts:87:20` | `createSkeleton3D` | `@flighthq/types:interface#Skeleton3D` | `returned-variable` | `object` | 5 | ready | — | — |
@@ -529,7 +530,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/spritesheet/src/spritesheet.ts:25:10` | `createSpritesheet` | `@flighthq/types:interface#Spritesheet` | `contextual` | `object` | 3 | ready | `field-order` | — |
 | `upstream/packages/spritesheet/src/spritesheetAnimation.ts:5:10` | `createSpritesheetAnimation` | `@flighthq/types:interface#SpritesheetAnimation` | `contextual` | `object` | 7 | ready | — | — |
 | `upstream/packages/storage/src/storage.ts:73:10` | `createStorageSignals` | `@flighthq/types:interface#StorageSignals` | `contextual` | `object` | 1 | ready | — | — |
-| `upstream/packages/texture/src/renderTexture.ts:18:13` | `createRenderTexture` | `@flighthq/types:interface#RenderTarget` | `contextual` | `object` | 12 | blocked | — | `field-set-mismatch` |
+| `upstream/packages/texture/src/renderTexture.ts:18:13` | `createRenderTexture` | `@flighthq/types:interface#RenderTarget` | `contextual` | `object` | 12 | ready | `missing-field-initialization` | — |
 | `upstream/packages/texture/src/sampler.ts:7:10` | `cloneSampler` | `@flighthq/types:interface#Sampler` | `contextual` | `object` | 6 | ready | — | — |
 | `upstream/packages/texture/src/sampler.ts:51:10` | `createSampler` | `@flighthq/types:interface#Sampler` | `contextual` | `object` | 6 | ready | — | — |
 | `upstream/packages/texture/src/texture.ts:46:14` | `cloneTexture` | `@flighthq/types:interface#Texture2D` | `contextual` | `object` | 2 | ready | `spread-projection` | — |

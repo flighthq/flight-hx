@@ -2637,7 +2637,7 @@ class _Scene2DCanvas {
 
   public static function createCanvasTextureResolvers(surfaceCreator:CanvasRenderSurfaceCreator):CanvasTextureResolvers {
     var resolvers:CanvasTextureResolvers = cast _Runtime.UNDEFINED;
-    resolvers = (cast createEntity(({ final __callArgument793:Dynamic = { registry: null, registryMiss: null, surfaceCreator: surfaceCreator }; __callArgument793; })) : CanvasTextureResolvers);
+    resolvers = (cast (cast createEntity(({ final __callArgument793:Dynamic = (#if flight_struct_typedef { registry: null, registryMiss: null, surfaceCreator: surfaceCreator } #else ({ final __structInitField0:Dynamic = null; final __structInitField1:Dynamic = null; final __structInitField2:Dynamic = surfaceCreator; ({ bitmapElementCache: cast _Runtime.UNDEFINED, registry: __structInitField0, registryMiss: __structInitField1, surfaceCreator: __structInitField2, textureWindowElementCache: cast _Runtime.UNDEFINED } : CanvasTextureResolvers); }) #end); __callArgument793; })) : CanvasTextureResolvers) : CanvasTextureResolvers);
     _Runtime.setIndex(resolvers, EntityRuntimeKey, { binding: null });
     ((cast _Scene2DCanvas._ownedSurfaces__canvasTextureResolver : flight._internal._WeakMap<CanvasTextureResolvers, flight._internal._Set<CanvasRenderSurface>>).set(resolvers, (cast _Runtime.construct(flight._internal._HostValueLut.get('Set'), []))));
     return cast resolvers;

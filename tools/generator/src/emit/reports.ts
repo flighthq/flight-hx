@@ -44,6 +44,7 @@ export function entityFactoryClosureSummary(audit: EntityFactoryClosureAudit): s
     `| Bare Entity calls | ${summary.bareEntityCalls} |`,
     `| Generic Entity calls | ${summary.genericEntityCalls} |`,
     `| Field-order-normalized calls | ${summary.normalizedFieldOrderCalls} |`,
+    `| Missing-field-initialized calls | ${summary.normalizedMissingFieldCalls} |`,
     `| Spread-projected calls | ${summary.normalizedSpreadProjectionCalls} |`,
     `| Structural Entity calls | ${summary.structuralEntityCalls} |`,
     `| Exact non-Entity calls | ${summary.exactNonEntityCalls} |`,

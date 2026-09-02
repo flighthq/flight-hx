@@ -1664,11 +1664,11 @@
       ]
     },
     {
-      "blockedCalls": 1,
+      "blockedCalls": 0,
       "factories": [
         "createCanvasTextureResolvers"
       ],
-      "readyCalls": 0,
+      "readyCalls": 1,
       "schemaId": "@flighthq/types:interface#CanvasTextureResolvers",
       "schemaName": "CanvasTextureResolvers",
       "sites": [
@@ -1681,9 +1681,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-set-mismatch"
-          ],
+          "blockers": [],
           "column": 21,
           "destination": {
             "kind": "exact-entity",
@@ -1697,9 +1695,11 @@
             "name": "createCanvasTextureResolvers"
           },
           "line": 48,
-          "normalizations": [],
+          "normalizations": [
+            "missing-field-initialization"
+          ],
           "source": "upstream/packages/scene2d-canvas/src/canvasTextureResolver.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -2147,12 +2147,12 @@
       ]
     },
     {
-      "blockedCalls": 2,
+      "blockedCalls": 0,
       "factories": [
         "createExternalGlTexture",
         "createExternalWgpuTexture"
       ],
-      "readyCalls": 0,
+      "readyCalls": 2,
       "schemaId": "@flighthq/types:interface#ExternalTexture",
       "schemaName": "ExternalTexture",
       "sites": [
@@ -2166,9 +2166,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-set-mismatch"
-          ],
+          "blockers": [],
           "column": 18,
           "destination": {
             "kind": "exact-entity",
@@ -2182,9 +2180,11 @@
             "name": "createExternalGlTexture"
           },
           "line": 22,
-          "normalizations": [],
+          "normalizations": [
+            "missing-field-initialization"
+          ],
           "source": "upstream/packages/render-gl/src/glExternalTexture.ts",
-          "status": "blocked"
+          "status": "ready"
         },
         {
           "argument": {
@@ -2196,9 +2196,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-set-mismatch"
-          ],
+          "blockers": [],
           "column": 18,
           "destination": {
             "kind": "exact-entity",
@@ -2212,9 +2210,11 @@
             "name": "createExternalWgpuTexture"
           },
           "line": 21,
-          "normalizations": [],
+          "normalizations": [
+            "missing-field-initialization"
+          ],
           "source": "upstream/packages/render-wgpu/src/wgpuExternalTexture.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -2990,12 +2990,12 @@
       ]
     },
     {
-      "blockedCalls": 2,
+      "blockedCalls": 0,
       "factories": [
         "cloneMaterial",
         "createMaterial"
       ],
-      "readyCalls": 0,
+      "readyCalls": 2,
       "schemaId": "@flighthq/types:interface#Material",
       "schemaName": "Material",
       "sites": [
@@ -3006,9 +3006,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-set-mismatch"
-          ],
+          "blockers": [],
           "column": 17,
           "destination": {
             "kind": "exact-entity",
@@ -3022,9 +3020,11 @@
             "name": "cloneMaterial"
           },
           "line": 7,
-          "normalizations": [],
+          "normalizations": [
+            "missing-field-initialization"
+          ],
           "source": "upstream/packages/materials/src/material.ts",
-          "status": "blocked"
+          "status": "ready"
         },
         {
           "argument": {
@@ -3033,9 +3033,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-set-mismatch"
-          ],
+          "blockers": [],
           "column": 20,
           "destination": {
             "kind": "exact-entity",
@@ -3049,9 +3047,11 @@
             "name": "createMaterial"
           },
           "line": 20,
-          "normalizations": [],
+          "normalizations": [
+            "missing-field-initialization"
+          ],
           "source": "upstream/packages/materials/src/material.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -4218,11 +4218,11 @@
       ]
     },
     {
-      "blockedCalls": 1,
+      "blockedCalls": 0,
       "factories": [
         "createRenderTexture"
       ],
-      "readyCalls": 0,
+      "readyCalls": 1,
       "schemaId": "@flighthq/types:interface#RenderTarget",
       "schemaName": "RenderTarget",
       "sites": [
@@ -4244,9 +4244,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-set-mismatch"
-          ],
+          "blockers": [],
           "column": 13,
           "destination": {
             "kind": "exact-entity",
@@ -4260,9 +4258,11 @@
             "name": "createRenderTexture"
           },
           "line": 18,
-          "normalizations": [],
+          "normalizations": [
+            "missing-field-initialization"
+          ],
           "source": "upstream/packages/texture/src/renderTexture.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -4923,11 +4923,11 @@
       ]
     },
     {
-      "blockedCalls": 1,
+      "blockedCalls": 0,
       "factories": [
         "createShadedMaterial"
       ],
-      "readyCalls": 0,
+      "readyCalls": 1,
       "schemaId": "@flighthq/types:interface#ShadedMaterial",
       "schemaName": "ShadedMaterial",
       "sites": [
@@ -4938,9 +4938,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-set-mismatch"
-          ],
+          "blockers": [],
           "column": 20,
           "destination": {
             "kind": "exact-entity",
@@ -4954,9 +4952,11 @@
             "name": "createShadedMaterial"
           },
           "line": 20,
-          "normalizations": [],
+          "normalizations": [
+            "missing-field-initialization"
+          ],
           "source": "upstream/packages/shading/src/createShadedMaterial.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -5564,12 +5564,12 @@
       ]
     },
     {
-      "blockedCalls": 2,
+      "blockedCalls": 0,
       "factories": [
         "cloneSkeleton2D",
         "createSkeleton2D"
       ],
-      "readyCalls": 0,
+      "readyCalls": 2,
       "schemaId": "@flighthq/types:interface#Skeleton2D",
       "schemaName": "Skeleton2D",
       "sites": [
@@ -5584,9 +5584,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-set-mismatch"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -5600,9 +5598,11 @@
             "name": "cloneSkeleton2D"
           },
           "line": 13,
-          "normalizations": [],
+          "normalizations": [
+            "missing-field-initialization"
+          ],
           "source": "upstream/packages/skeleton2d/src/skeleton2d.ts",
-          "status": "blocked"
+          "status": "ready"
         },
         {
           "argument": {
@@ -5615,9 +5615,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-set-mismatch"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -5631,9 +5629,11 @@
             "name": "createSkeleton2D"
           },
           "line": 152,
-          "normalizations": [],
+          "normalizations": [
+            "missing-field-initialization"
+          ],
           "source": "upstream/packages/skeleton2d/src/skeleton2d.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -15137,9 +15137,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-set-mismatch"
-      ],
+      "blockers": [],
       "column": 17,
       "destination": {
         "kind": "exact-entity",
@@ -15153,9 +15151,11 @@
         "name": "cloneMaterial"
       },
       "line": 7,
-      "normalizations": [],
+      "normalizations": [
+        "missing-field-initialization"
+      ],
       "source": "upstream/packages/materials/src/material.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -15164,9 +15164,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-set-mismatch"
-      ],
+      "blockers": [],
       "column": 20,
       "destination": {
         "kind": "exact-entity",
@@ -15180,9 +15178,11 @@
         "name": "createMaterial"
       },
       "line": 20,
-      "normalizations": [],
+      "normalizations": [
+        "missing-field-initialization"
+      ],
       "source": "upstream/packages/materials/src/material.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -15757,9 +15757,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-set-mismatch"
-      ],
+      "blockers": [],
       "column": 18,
       "destination": {
         "kind": "exact-entity",
@@ -15773,9 +15771,11 @@
         "name": "createExternalGlTexture"
       },
       "line": 22,
-      "normalizations": [],
+      "normalizations": [
+        "missing-field-initialization"
+      ],
       "source": "upstream/packages/render-gl/src/glExternalTexture.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -15879,9 +15879,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-set-mismatch"
-      ],
+      "blockers": [],
       "column": 18,
       "destination": {
         "kind": "exact-entity",
@@ -15895,9 +15893,11 @@
         "name": "createExternalWgpuTexture"
       },
       "line": 21,
-      "normalizations": [],
+      "normalizations": [
+        "missing-field-initialization"
+      ],
       "source": "upstream/packages/render-wgpu/src/wgpuExternalTexture.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -16175,9 +16175,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-set-mismatch"
-      ],
+      "blockers": [],
       "column": 21,
       "destination": {
         "kind": "exact-entity",
@@ -16191,9 +16189,11 @@
         "name": "createCanvasTextureResolvers"
       },
       "line": 48,
-      "normalizations": [],
+      "normalizations": [
+        "missing-field-initialization"
+      ],
       "source": "upstream/packages/scene2d-canvas/src/canvasTextureResolver.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -16802,9 +16802,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-set-mismatch"
-      ],
+      "blockers": [],
       "column": 20,
       "destination": {
         "kind": "exact-entity",
@@ -16818,9 +16816,11 @@
         "name": "createShadedMaterial"
       },
       "line": 20,
-      "normalizations": [],
+      "normalizations": [
+        "missing-field-initialization"
+      ],
       "source": "upstream/packages/shading/src/createShadedMaterial.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -16884,9 +16884,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-set-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -16900,9 +16898,11 @@
         "name": "cloneSkeleton2D"
       },
       "line": 13,
-      "normalizations": [],
+      "normalizations": [
+        "missing-field-initialization"
+      ],
       "source": "upstream/packages/skeleton2d/src/skeleton2d.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -16915,9 +16915,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-set-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -16931,9 +16929,11 @@
         "name": "createSkeleton2D"
       },
       "line": 152,
-      "normalizations": [],
+      "normalizations": [
+        "missing-field-initialization"
+      ],
       "source": "upstream/packages/skeleton2d/src/skeleton2d.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -17253,9 +17253,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-set-mismatch"
-      ],
+      "blockers": [],
       "column": 13,
       "destination": {
         "kind": "exact-entity",
@@ -17269,9 +17267,11 @@
         "name": "createRenderTexture"
       },
       "line": 18,
-      "normalizations": [],
+      "normalizations": [
+        "missing-field-initialization"
+      ],
       "source": "upstream/packages/texture/src/renderTexture.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -17696,15 +17696,16 @@
   ],
   "summary": {
     "bareEntityCalls": 0,
-    "blockedEntityCalls": 184,
+    "blockedEntityCalls": 175,
     "calls": 368,
     "exactEntityCalls": 191,
     "exactEntitySchemas": 148,
     "exactNonEntityCalls": 17,
     "genericEntityCalls": 3,
     "normalizedFieldOrderCalls": 24,
+    "normalizedMissingFieldCalls": 9,
     "normalizedSpreadProjectionCalls": 4,
-    "readyEntityCalls": 167,
+    "readyEntityCalls": 176,
     "structuralEntityCalls": 141,
     "unresolvedCalls": 16
   },

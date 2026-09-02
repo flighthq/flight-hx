@@ -3696,13 +3696,12 @@ function cppStructInitEntityFactoryConstruction(
     shape.hasComputed ||
     shape.hasUnsupported ||
     !constructionFields ||
-    constructionFields.length !== binding.fieldNames.length ||
-    constructionFields.some((field) => !binding.fieldNames.includes(field)) ||
-    binding.fieldNames.some((field) => !constructionFields.includes(field))
+    constructionFields.some((field) => !binding.fieldNames.includes(field))
   ) {
     return undefined;
   }
-  return binding;
+  const missingFieldNames = binding.fieldNames.filter((field) => !constructionFields.includes(field));
+  return missingFieldNames.length > 0 ? { ...binding, missingFieldNames } : binding;
 }
 
 function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpression {
