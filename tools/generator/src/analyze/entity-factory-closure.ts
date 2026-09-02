@@ -198,13 +198,16 @@ function auditFactorySite(
   const shape = object ? entityFactoryObjectShape(object) : undefined;
   const expandedFields = object && shape?.hasSpread ? entityFactoryExpandedObjectFields(object, checker) : undefined;
   const constructionFields = object && shape ? (expandedFields ?? shape.fields) : undefined;
+  const fieldsOutsideNamedSchema =
+    schema !== undefined &&
+    constructionFields?.some((field) => !schema.fields.some((schemaField) => schemaField.name === field));
   const localEntityConstruction =
-    schema === undefined &&
     object !== undefined &&
     shape !== undefined &&
     constructionFields !== undefined &&
     !shape.hasComputed &&
     !shape.hasUnsupported &&
+    (schema === undefined || (destinationKind === 'exact-entity' && fieldsOutsideNamedSchema === true)) &&
     destinationKind !== 'generic-entity';
   if (localEntityConstruction) destinationKind = 'local-entity';
   const blockers: EntityFactoryBlocker[] = [];
@@ -235,7 +238,9 @@ function auditFactorySite(
       if (exactSpreadProjection) normalizations.push('spread-projection');
       else blockers.push('spread-construction');
     }
-    if (schema) addFieldFindings(constructionFields, schema, blockers, normalizations, !shape.hasSpread);
+    if (schema && !localEntityConstruction) {
+      addFieldFindings(constructionFields, schema, blockers, normalizations, !shape.hasSpread);
+    }
   } else if (call.arguments.length === 0) {
     argument = { fields: [], kind: 'omitted' };
     blockers.push('omitted-construction');
@@ -260,20 +265,20 @@ function auditFactorySite(
     destination: {
       kind: destinationKind,
       ...(exact ? { route: exact.route } : destinationCandidates[0] ? { route: destinationCandidates[0].route } : {}),
-      ...(schema
-        ? { schemaId: schema.id, schemaName: schema.name }
-        : localEntityConstruction
-          ? {
-              schemaId: syntheticEntitySchemaId(workspaceDirectory, call),
-              schemaName: entityFactorySyntheticClassName(call),
-            }
+      ...(localEntityConstruction
+        ? {
+            schemaId: syntheticEntitySchemaId(workspaceDirectory, call),
+            schemaName: entityFactorySyntheticClassName(call),
+          }
+        : schema
+          ? { schemaId: schema.id, schemaName: schema.name }
           : {}),
       type: destinationType
         ? checker.typeToString(destinationType, undefined, ts.TypeFormatFlags.NoTruncation)
         : 'unknown',
     },
     factory: {
-      canonicalForSchema: schema ? factoryName === `create${schema.name}` : false,
+      canonicalForSchema: schema && !localEntityConstruction ? factoryName === `create${schema.name}` : false,
       name: factoryName,
     },
     line: position.line + 1,

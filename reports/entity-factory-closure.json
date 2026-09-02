@@ -3949,133 +3949,6 @@
       ]
     },
     {
-      "blockedCalls": 4,
-      "factories": [
-        "createCanvasTextLabelData",
-        "createGlRichTextData",
-        "createGlTextLabelData",
-        "createSpriteRendererData"
-      ],
-      "readyCalls": 0,
-      "schemaId": "@flighthq/types:interface#RendererData",
-      "schemaName": "RendererData",
-      "sites": [
-        {
-          "argument": {
-            "fields": [
-              "lastContentId"
-            ],
-            "kind": "object"
-          },
-          "blockers": [
-            "field-set-mismatch"
-          ],
-          "column": 10,
-          "destination": {
-            "kind": "exact-entity",
-            "route": "contextual",
-            "schemaId": "@flighthq/types:interface#RendererData",
-            "schemaName": "RendererData",
-            "type": "RendererData"
-          },
-          "factory": {
-            "canonicalForSchema": false,
-            "name": "createCanvasTextLabelData"
-          },
-          "line": 25,
-          "normalizations": [],
-          "source": "upstream/packages/scene2d-canvas/src/canvasTextLabel.ts",
-          "status": "blocked"
-        },
-        {
-          "argument": {
-            "fields": [
-              "surface"
-            ],
-            "kind": "object"
-          },
-          "blockers": [
-            "field-set-mismatch"
-          ],
-          "column": 10,
-          "destination": {
-            "kind": "exact-entity",
-            "route": "contextual",
-            "schemaId": "@flighthq/types:interface#RendererData",
-            "schemaName": "RendererData",
-            "type": "RendererData"
-          },
-          "factory": {
-            "canonicalForSchema": false,
-            "name": "createGlRichTextData"
-          },
-          "line": 43,
-          "normalizations": [],
-          "source": "upstream/packages/scene2d-gl/src/glRichText.ts",
-          "status": "blocked"
-        },
-        {
-          "argument": {
-            "fields": [
-              "surface",
-              "lastContentId",
-              "lastPixelRatio",
-              "logW",
-              "logH"
-            ],
-            "kind": "object"
-          },
-          "blockers": [
-            "field-set-mismatch"
-          ],
-          "column": 10,
-          "destination": {
-            "kind": "exact-entity",
-            "route": "contextual",
-            "schemaId": "@flighthq/types:interface#RendererData",
-            "schemaName": "RendererData",
-            "type": "RendererData"
-          },
-          "factory": {
-            "canonicalForSchema": false,
-            "name": "createGlTextLabelData"
-          },
-          "line": 50,
-          "normalizations": [],
-          "source": "upstream/packages/scene2d-gl/src/glTextLabel.ts",
-          "status": "blocked"
-        },
-        {
-          "argument": {
-            "fields": [
-              "textureIdentity",
-              "textureVersion"
-            ],
-            "kind": "object"
-          },
-          "blockers": [
-            "field-set-mismatch"
-          ],
-          "column": 10,
-          "destination": {
-            "kind": "exact-entity",
-            "route": "contextual",
-            "schemaId": "@flighthq/types:interface#RendererData",
-            "schemaName": "RendererData",
-            "type": "RendererData"
-          },
-          "factory": {
-            "canonicalForSchema": false,
-            "name": "createSpriteRendererData"
-          },
-          "line": 48,
-          "normalizations": [],
-          "source": "upstream/packages/scene2d/src/sprite.ts",
-          "status": "blocked"
-        }
-      ]
-    },
-    {
       "blockedCalls": 0,
       "factories": [
         "createRenderProxy"
@@ -7002,192 +6875,6 @@
           "normalizations": [],
           "source": "upstream/packages/host-tauri/src/tauriNotification.ts",
           "status": "ready"
-        }
-      ]
-    },
-    {
-      "blockedCalls": 6,
-      "factories": [
-        "cloneTexture",
-        "createTexture"
-      ],
-      "readyCalls": 0,
-      "schemaId": "@flighthq/types:type#Texture",
-      "schemaName": "Texture",
-      "sites": [
-        {
-          "argument": {
-            "fields": [
-              "dimension",
-              "sources"
-            ],
-            "kind": "object"
-          },
-          "blockers": [
-            "field-set-mismatch",
-            "spread-construction"
-          ],
-          "column": 14,
-          "destination": {
-            "kind": "exact-entity",
-            "route": "return",
-            "schemaId": "@flighthq/types:type#Texture",
-            "schemaName": "Texture",
-            "type": "Texture"
-          },
-          "factory": {
-            "canonicalForSchema": false,
-            "name": "cloneTexture"
-          },
-          "line": 48,
-          "normalizations": [],
-          "source": "upstream/packages/texture/src/texture.ts",
-          "status": "blocked"
-        },
-        {
-          "argument": {
-            "fields": [
-              "dimension",
-              "source"
-            ],
-            "kind": "object"
-          },
-          "blockers": [
-            "field-set-mismatch",
-            "spread-construction"
-          ],
-          "column": 14,
-          "destination": {
-            "kind": "exact-entity",
-            "route": "return",
-            "schemaId": "@flighthq/types:type#Texture",
-            "schemaName": "Texture",
-            "type": "Texture"
-          },
-          "factory": {
-            "canonicalForSchema": false,
-            "name": "cloneTexture"
-          },
-          "line": 54,
-          "normalizations": [],
-          "source": "upstream/packages/texture/src/texture.ts",
-          "status": "blocked"
-        },
-        {
-          "argument": {
-            "fields": [
-              "dimension",
-              "sources"
-            ],
-            "kind": "object"
-          },
-          "blockers": [
-            "field-set-mismatch",
-            "spread-construction"
-          ],
-          "column": 14,
-          "destination": {
-            "kind": "exact-entity",
-            "route": "return",
-            "schemaId": "@flighthq/types:type#Texture",
-            "schemaName": "Texture",
-            "type": "Texture"
-          },
-          "factory": {
-            "canonicalForSchema": false,
-            "name": "cloneTexture"
-          },
-          "line": 59,
-          "normalizations": [],
-          "source": "upstream/packages/texture/src/texture.ts",
-          "status": "blocked"
-        },
-        {
-          "argument": {
-            "fields": [
-              "dimension",
-              "sources"
-            ],
-            "kind": "object"
-          },
-          "blockers": [
-            "field-set-mismatch",
-            "spread-construction"
-          ],
-          "column": 17,
-          "destination": {
-            "kind": "exact-entity",
-            "route": "assignment",
-            "schemaId": "@flighthq/types:type#Texture",
-            "schemaName": "Texture",
-            "type": "Texture"
-          },
-          "factory": {
-            "canonicalForSchema": true,
-            "name": "createTexture"
-          },
-          "line": 119,
-          "normalizations": [],
-          "source": "upstream/packages/texture/src/texture.ts",
-          "status": "blocked"
-        },
-        {
-          "argument": {
-            "fields": [
-              "dimension",
-              "source"
-            ],
-            "kind": "object"
-          },
-          "blockers": [
-            "field-set-mismatch",
-            "spread-construction"
-          ],
-          "column": 17,
-          "destination": {
-            "kind": "exact-entity",
-            "route": "assignment",
-            "schemaId": "@flighthq/types:type#Texture",
-            "schemaName": "Texture",
-            "type": "Texture"
-          },
-          "factory": {
-            "canonicalForSchema": true,
-            "name": "createTexture"
-          },
-          "line": 126,
-          "normalizations": [],
-          "source": "upstream/packages/texture/src/texture.ts",
-          "status": "blocked"
-        },
-        {
-          "argument": {
-            "fields": [
-              "dimension",
-              "sources"
-            ],
-            "kind": "object"
-          },
-          "blockers": [
-            "field-set-mismatch",
-            "spread-construction"
-          ],
-          "column": 17,
-          "destination": {
-            "kind": "exact-entity",
-            "route": "assignment",
-            "schemaId": "@flighthq/types:type#Texture",
-            "schemaName": "Texture",
-            "type": "Texture"
-          },
-          "factory": {
-            "canonicalForSchema": true,
-            "name": "createTexture"
-          },
-          "line": 133,
-          "normalizations": [],
-          "source": "upstream/packages/texture/src/texture.ts",
-          "status": "blocked"
         }
       ]
     },
@@ -16430,15 +16117,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-set-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "exact-entity",
+        "kind": "local-entity",
         "route": "contextual",
-        "schemaId": "@flighthq/types:interface#RendererData",
-        "schemaName": "RendererData",
+        "schemaId": "synthetic-entity:upstream/packages/scene2d-canvas/src/canvasTextLabel.ts:25:10",
+        "schemaName": "EntityShapeL25C10",
         "type": "RendererData"
       },
       "factory": {
@@ -16446,9 +16131,11 @@
         "name": "createCanvasTextLabelData"
       },
       "line": 25,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/scene2d-canvas/src/canvasTextLabel.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -16596,15 +16283,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-set-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "exact-entity",
+        "kind": "local-entity",
         "route": "contextual",
-        "schemaId": "@flighthq/types:interface#RendererData",
-        "schemaName": "RendererData",
+        "schemaId": "synthetic-entity:upstream/packages/scene2d-gl/src/glRichText.ts:43:10",
+        "schemaName": "EntityShapeL43C10",
         "type": "RendererData"
       },
       "factory": {
@@ -16612,9 +16297,11 @@
         "name": "createGlRichTextData"
       },
       "line": 43,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/scene2d-gl/src/glRichText.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -16693,15 +16380,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-set-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "exact-entity",
+        "kind": "local-entity",
         "route": "contextual",
-        "schemaId": "@flighthq/types:interface#RendererData",
-        "schemaName": "RendererData",
+        "schemaId": "synthetic-entity:upstream/packages/scene2d-gl/src/glTextLabel.ts:50:10",
+        "schemaName": "EntityShapeL50C10",
         "type": "RendererData"
       },
       "factory": {
@@ -16709,9 +16394,11 @@
         "name": "createGlTextLabelData"
       },
       "line": 50,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/scene2d-gl/src/glTextLabel.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -16800,15 +16487,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-set-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "exact-entity",
+        "kind": "local-entity",
         "route": "contextual",
-        "schemaId": "@flighthq/types:interface#RendererData",
-        "schemaName": "RendererData",
+        "schemaId": "synthetic-entity:upstream/packages/scene2d/src/sprite.ts:48:10",
+        "schemaName": "EntityShapeL48C10",
         "type": "RendererData"
       },
       "factory": {
@@ -16816,9 +16501,11 @@
         "name": "createSpriteRendererData"
       },
       "line": 48,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/scene2d/src/sprite.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -17673,16 +17360,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-set-mismatch",
-        "spread-construction"
-      ],
+      "blockers": [],
       "column": 14,
       "destination": {
-        "kind": "exact-entity",
+        "kind": "local-entity",
         "route": "return",
-        "schemaId": "@flighthq/types:type#Texture",
-        "schemaName": "Texture",
+        "schemaId": "synthetic-entity:upstream/packages/texture/src/texture.ts:48:14",
+        "schemaName": "EntityShapeL48C14",
         "type": "Texture"
       },
       "factory": {
@@ -17690,9 +17374,12 @@
         "name": "cloneTexture"
       },
       "line": 48,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class",
+        "spread-projection"
+      ],
       "source": "upstream/packages/texture/src/texture.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -17702,16 +17389,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-set-mismatch",
-        "spread-construction"
-      ],
+      "blockers": [],
       "column": 14,
       "destination": {
-        "kind": "exact-entity",
+        "kind": "local-entity",
         "route": "return",
-        "schemaId": "@flighthq/types:type#Texture",
-        "schemaName": "Texture",
+        "schemaId": "synthetic-entity:upstream/packages/texture/src/texture.ts:54:14",
+        "schemaName": "EntityShapeL54C14",
         "type": "Texture"
       },
       "factory": {
@@ -17719,9 +17403,12 @@
         "name": "cloneTexture"
       },
       "line": 54,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class",
+        "spread-projection"
+      ],
       "source": "upstream/packages/texture/src/texture.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -17731,16 +17418,13 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-set-mismatch",
-        "spread-construction"
-      ],
+      "blockers": [],
       "column": 14,
       "destination": {
-        "kind": "exact-entity",
+        "kind": "local-entity",
         "route": "return",
-        "schemaId": "@flighthq/types:type#Texture",
-        "schemaName": "Texture",
+        "schemaId": "synthetic-entity:upstream/packages/texture/src/texture.ts:59:14",
+        "schemaName": "EntityShapeL59C14",
         "type": "Texture"
       },
       "factory": {
@@ -17748,9 +17432,12 @@
         "name": "cloneTexture"
       },
       "line": 59,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class",
+        "spread-projection"
+      ],
       "source": "upstream/packages/texture/src/texture.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -17760,26 +17447,26 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-set-mismatch",
-        "spread-construction"
-      ],
+      "blockers": [],
       "column": 17,
       "destination": {
-        "kind": "exact-entity",
+        "kind": "local-entity",
         "route": "assignment",
-        "schemaId": "@flighthq/types:type#Texture",
-        "schemaName": "Texture",
+        "schemaId": "synthetic-entity:upstream/packages/texture/src/texture.ts:119:17",
+        "schemaName": "EntityShapeL119C17",
         "type": "Texture"
       },
       "factory": {
-        "canonicalForSchema": true,
+        "canonicalForSchema": false,
         "name": "createTexture"
       },
       "line": 119,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class",
+        "spread-projection"
+      ],
       "source": "upstream/packages/texture/src/texture.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -17789,26 +17476,26 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-set-mismatch",
-        "spread-construction"
-      ],
+      "blockers": [],
       "column": 17,
       "destination": {
-        "kind": "exact-entity",
+        "kind": "local-entity",
         "route": "assignment",
-        "schemaId": "@flighthq/types:type#Texture",
-        "schemaName": "Texture",
+        "schemaId": "synthetic-entity:upstream/packages/texture/src/texture.ts:126:17",
+        "schemaName": "EntityShapeL126C17",
         "type": "Texture"
       },
       "factory": {
-        "canonicalForSchema": true,
+        "canonicalForSchema": false,
         "name": "createTexture"
       },
       "line": 126,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class",
+        "spread-projection"
+      ],
       "source": "upstream/packages/texture/src/texture.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -17818,26 +17505,26 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-set-mismatch",
-        "spread-construction"
-      ],
+      "blockers": [],
       "column": 17,
       "destination": {
-        "kind": "exact-entity",
+        "kind": "local-entity",
         "route": "assignment",
-        "schemaId": "@flighthq/types:type#Texture",
-        "schemaName": "Texture",
+        "schemaId": "synthetic-entity:upstream/packages/texture/src/texture.ts:133:17",
+        "schemaName": "EntityShapeL133C17",
         "type": "Texture"
       },
       "factory": {
-        "canonicalForSchema": true,
+        "canonicalForSchema": false,
         "name": "createTexture"
       },
       "line": 133,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class",
+        "spread-projection"
+      ],
       "source": "upstream/packages/texture/src/texture.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -18000,17 +17687,17 @@
   ],
   "summary": {
     "bareEntityCalls": 0,
-    "blockedEntityCalls": 23,
+    "blockedEntityCalls": 13,
     "calls": 368,
-    "exactEntityCalls": 191,
-    "exactEntitySchemas": 148,
+    "exactEntityCalls": 181,
+    "exactEntitySchemas": 146,
     "exactNonEntityCalls": 17,
     "genericEntityCalls": 3,
-    "localEntityCalls": 152,
+    "localEntityCalls": 162,
     "normalizedFieldOrderCalls": 24,
     "normalizedMissingFieldCalls": 9,
-    "normalizedSpreadProjectionCalls": 11,
-    "readyEntityCalls": 328,
+    "normalizedSpreadProjectionCalls": 17,
+    "readyEntityCalls": 338,
     "structuralEntityCalls": 4,
     "unresolvedCalls": 1
   },

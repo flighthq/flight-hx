@@ -7,16 +7,16 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | Metric | Count |
 | --- | ---: |
 | Production createEntity calls | 368 |
-| Exact concrete Entity calls | 191 |
-| Exact concrete Entity schemas | 148 |
-| Constructor-ready Entity calls | 328 |
-| Blocked Entity calls | 23 |
+| Exact concrete Entity calls | 181 |
+| Exact concrete Entity schemas | 146 |
+| Constructor-ready Entity calls | 338 |
+| Blocked Entity calls | 13 |
 | Bare Entity calls | 0 |
 | Generic Entity calls | 3 |
-| Private local Entity classes | 152 |
+| Private local Entity classes | 162 |
 | Field-order-normalized calls | 24 |
 | Missing-field-initialized calls | 9 |
-| Spread-projected calls | 11 |
+| Spread-projected calls | 17 |
 | Structural Entity calls | 4 |
 | Exact non-Entity calls | 17 |
 | Unresolved calls | 1 |
@@ -106,7 +106,6 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `@flighthq/types:interface#Rectangle` | 1 | 1 | 0 | `createRectangle` |
 | `@flighthq/types:interface#RenderCache` | 1 | 1 | 0 | `createRenderCache` |
 | `@flighthq/types:interface#RenderContextBackend` | 1 | 1 | 0 | `<module>` |
-| `@flighthq/types:interface#RendererData` | 4 | 0 | 4 | `createCanvasTextLabelData`, `createGlRichTextData`, `createGlTextLabelData`, `createSpriteRendererData` |
 | `@flighthq/types:interface#RenderProxy` | 1 | 1 | 0 | `createRenderProxy` |
 | `@flighthq/types:interface#RenderState` | 1 | 1 | 0 | `createRenderState` |
 | `@flighthq/types:interface#RenderSurfaceBackend` | 1 | 1 | 0 | `<module>` |
@@ -169,7 +168,6 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `@flighthq/types:type#ElectronProtocolCapabilities` | 1 | 1 | 0 | `createElectronProtocolCapabilities` |
 | `@flighthq/types:type#TauriAppCapabilities` | 1 | 1 | 0 | `createTauriAppCapabilities` |
 | `@flighthq/types:type#TauriNotificationCapabilities` | 1 | 1 | 0 | `createTauriNotificationCapabilities` |
-| `@flighthq/types:type#Texture` | 6 | 0 | 6 | `cloneTexture`, `createTexture` |
 | `@flighthq/types:type#TrayIconForHost` | 1 | 0 | 1 | `createTrayIcon` |
 | `@flighthq/types:type#WebPageNotificationCapabilities` | 1 | 1 | 0 | `createWebPageNotificationCapabilities` |
 | `@flighthq/types:type#WebServiceWorkerNotificationCapabilities` | 1 | 1 | 0 | `createWebServiceWorkerNotificationCapabilities` |
@@ -493,20 +491,20 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/scene2d-canvas/src/canvasPipeline.ts:7:20` | `createCanvasPipeline` | `@flighthq/types:interface#CanvasPipeline` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/scene2d-canvas/src/canvasRenderSurface.ts:49:19` | `finishCanvasRenderSurface` | `@flighthq/types:interface#CanvasRenderSurface` | `contextual` | `object` | 5 | ready | — | — |
 | `upstream/packages/scene2d-canvas/src/canvasTestSupport.ts:23:19` | `<anonymous>` | `synthetic-entity:upstream/packages/scene2d-canvas/src/canvasTestSupport.ts:23:19` | `variable` | `object` | 2 | ready | `synthetic-class` | — |
-| `upstream/packages/scene2d-canvas/src/canvasTextLabel.ts:25:10` | `createCanvasTextLabelData` | `@flighthq/types:interface#RendererData` | `contextual` | `object` | 1 | blocked | — | `field-set-mismatch` |
+| `upstream/packages/scene2d-canvas/src/canvasTextLabel.ts:25:10` | `createCanvasTextLabelData` | `synthetic-entity:upstream/packages/scene2d-canvas/src/canvasTextLabel.ts:25:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
 | `upstream/packages/scene2d-canvas/src/canvasTextureResolver.ts:48:21` | `createCanvasTextureResolvers` | `@flighthq/types:interface#CanvasTextureResolvers` | `contextual` | `object` | 3 | ready | `missing-field-initialization` | — |
 | `upstream/packages/scene2d-dom/src/domRichText.ts:38:10` | `createDomRichTextData` | `synthetic-entity:upstream/packages/scene2d-dom/src/domRichText.ts:38:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
 | `upstream/packages/scene2d-dom/src/domScale9Shape.ts:31:10` | `createDomScale9ShapeData` | `synthetic-entity:upstream/packages/scene2d-dom/src/domScale9Shape.ts:31:10` | `contextual` | `object` | 2 | ready | `synthetic-class` | — |
 | `upstream/packages/scene2d-dom/src/domShape.ts:25:10` | `createDomShapeData` | `synthetic-entity:upstream/packages/scene2d-dom/src/domShape.ts:25:10` | `contextual` | `object` | 2 | ready | `synthetic-class` | — |
 | `upstream/packages/scene2d-dom/src/domTextLabel.ts:26:10` | `createDomTextData` | `synthetic-entity:upstream/packages/scene2d-dom/src/domTextLabel.ts:26:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
-| `upstream/packages/scene2d-gl/src/glRichText.ts:43:10` | `createGlRichTextData` | `@flighthq/types:interface#RendererData` | `contextual` | `object` | 1 | blocked | — | `field-set-mismatch` |
+| `upstream/packages/scene2d-gl/src/glRichText.ts:43:10` | `createGlRichTextData` | `synthetic-entity:upstream/packages/scene2d-gl/src/glRichText.ts:43:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
 | `upstream/packages/scene2d-gl/src/glScale9Shape.ts:50:10` | `createGlScale9ShapeData` | `synthetic-entity:upstream/packages/scene2d-gl/src/glScale9Shape.ts:50:10` | `contextual` | `object` | 7 | ready | `synthetic-class` | — |
 | `upstream/packages/scene2d-gl/src/glShapeData.ts:28:10` | `createGlShapeData` | `synthetic-entity:upstream/packages/scene2d-gl/src/glShapeData.ts:28:10` | `contextual` | `object` | 7 | ready | `synthetic-class` | — |
-| `upstream/packages/scene2d-gl/src/glTextLabel.ts:50:10` | `createGlTextLabelData` | `@flighthq/types:interface#RendererData` | `contextual` | `object` | 5 | blocked | — | `field-set-mismatch` |
+| `upstream/packages/scene2d-gl/src/glTextLabel.ts:50:10` | `createGlTextLabelData` | `synthetic-entity:upstream/packages/scene2d-gl/src/glTextLabel.ts:50:10` | `contextual` | `object` | 5 | ready | `synthetic-class` | — |
 | `upstream/packages/scene2d-resources/src/scene2DDocumentImporterRegistry.ts:26:10` | `createScene2DDocumentImporterRegistry` | `@flighthq/types:interface#Scene2DDocumentImporterRegistry` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/scene2d-wgpu/src/wgpuRendererData.ts:15:10` | `createWgpuRendererData` | `structural-entity` | `contextual` | `other` | 0 | blocked | — | `non-object-construction`, `structural-entity-destination` |
 | `upstream/packages/scene2d/src/scene2d.ts:18:19` | `createScene2D` | `@flighthq/types:interface#Scene2D` | `contextual` | `object` | 6 | ready | — | — |
-| `upstream/packages/scene2d/src/sprite.ts:48:10` | `createSpriteRendererData` | `@flighthq/types:interface#RendererData` | `contextual` | `object` | 2 | blocked | — | `field-set-mismatch` |
+| `upstream/packages/scene2d/src/sprite.ts:48:10` | `createSpriteRendererData` | `synthetic-entity:upstream/packages/scene2d/src/sprite.ts:48:10` | `contextual` | `object` | 2 | ready | `synthetic-class` | — |
 | `upstream/packages/scene3d-resources/src/sceneMaterialTextureRegistry.ts:17:10` | `createScene3DMaterialTextureRegistry` | `@flighthq/types:interface#Scene3DMaterialTextureRegistry` | `contextual` | `object` | 2 | ready | — | — |
 | `upstream/packages/scene3d-resources/src/sceneResourceResolver.ts:42:10` | `createScene3DResourceResolver` | `@flighthq/types:interface#Scene3DResourceResolver` | `contextual` | `object` | 2 | blocked | — | `computed-construction` |
 | `upstream/packages/scene3d-resources/src/sceneResourceSignals.ts:8:10` | `createScene3DResourceSignals` | `@flighthq/types:interface#Scene3DResourceSignals` | `contextual` | `object` | 2 | ready | — | — |
@@ -535,12 +533,12 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/texture/src/sampler.ts:7:10` | `cloneSampler` | `@flighthq/types:interface#Sampler` | `contextual` | `object` | 6 | ready | — | — |
 | `upstream/packages/texture/src/sampler.ts:51:10` | `createSampler` | `@flighthq/types:interface#Sampler` | `contextual` | `object` | 6 | ready | — | — |
 | `upstream/packages/texture/src/texture.ts:46:14` | `cloneTexture` | `@flighthq/types:interface#Texture2D` | `contextual` | `object` | 2 | ready | `spread-projection` | — |
-| `upstream/packages/texture/src/texture.ts:48:14` | `cloneTexture` | `@flighthq/types:type#Texture` | `return` | `object` | 2 | blocked | — | `field-set-mismatch`, `spread-construction` |
-| `upstream/packages/texture/src/texture.ts:54:14` | `cloneTexture` | `@flighthq/types:type#Texture` | `return` | `object` | 2 | blocked | — | `field-set-mismatch`, `spread-construction` |
-| `upstream/packages/texture/src/texture.ts:59:14` | `cloneTexture` | `@flighthq/types:type#Texture` | `return` | `object` | 2 | blocked | — | `field-set-mismatch`, `spread-construction` |
-| `upstream/packages/texture/src/texture.ts:119:17` | `createTexture` | `@flighthq/types:type#Texture` | `assignment` | `object` | 2 | blocked | — | `field-set-mismatch`, `spread-construction` |
-| `upstream/packages/texture/src/texture.ts:126:17` | `createTexture` | `@flighthq/types:type#Texture` | `assignment` | `object` | 2 | blocked | — | `field-set-mismatch`, `spread-construction` |
-| `upstream/packages/texture/src/texture.ts:133:17` | `createTexture` | `@flighthq/types:type#Texture` | `assignment` | `object` | 2 | blocked | — | `field-set-mismatch`, `spread-construction` |
+| `upstream/packages/texture/src/texture.ts:48:14` | `cloneTexture` | `synthetic-entity:upstream/packages/texture/src/texture.ts:48:14` | `return` | `object` | 2 | ready | `synthetic-class`, `spread-projection` | — |
+| `upstream/packages/texture/src/texture.ts:54:14` | `cloneTexture` | `synthetic-entity:upstream/packages/texture/src/texture.ts:54:14` | `return` | `object` | 2 | ready | `synthetic-class`, `spread-projection` | — |
+| `upstream/packages/texture/src/texture.ts:59:14` | `cloneTexture` | `synthetic-entity:upstream/packages/texture/src/texture.ts:59:14` | `return` | `object` | 2 | ready | `synthetic-class`, `spread-projection` | — |
+| `upstream/packages/texture/src/texture.ts:119:17` | `createTexture` | `synthetic-entity:upstream/packages/texture/src/texture.ts:119:17` | `assignment` | `object` | 2 | ready | `synthetic-class`, `spread-projection` | — |
+| `upstream/packages/texture/src/texture.ts:126:17` | `createTexture` | `synthetic-entity:upstream/packages/texture/src/texture.ts:126:17` | `assignment` | `object` | 2 | ready | `synthetic-class`, `spread-projection` | — |
+| `upstream/packages/texture/src/texture.ts:133:17` | `createTexture` | `synthetic-entity:upstream/packages/texture/src/texture.ts:133:17` | `assignment` | `object` | 2 | ready | `synthetic-class`, `spread-projection` | — |
 | `upstream/packages/texture/src/texture.ts:153:19` | `createTexture2D` | `@flighthq/types:interface#Texture2D` | `contextual` | `object` | 2 | ready | `spread-projection` | — |
 | `upstream/packages/texture/src/videoTexture.ts:97:17` | `createVideoImageResource` | `@flighthq/types:interface#Image` | `contextual` | `object` | 7 | ready | `field-order` | — |
 | `upstream/packages/textureatlas/src/textureAtlas.ts:6:10` | `createTextureAtlas` | `@flighthq/types:interface#TextureAtlas` | `contextual` | `object` | 6 | ready | — | — |

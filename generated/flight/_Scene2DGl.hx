@@ -277,6 +277,22 @@ typedef ColorAdjustmentData__glColorAdjustmentMaterialFeature = flight._internal
 
 typedef GlRichTextData__glRichText = { >RendererData, var surface:Null<Raster2DSurface>; };
 
+#if !flight_struct_typedef
+@:allow(flight._Scene2DGl)
+@:structInit
+private class EntityShapeL43C10__glRichText {
+  public var surface:flight._internal._Any;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(surface:flight._internal._Any):Void {
+    this.__symbol__EntityRuntime = null;
+    this.surface = surface;
+  }
+}
+#else
+private typedef EntityShapeL43C10__glRichText = { var surface:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
 typedef GlScale9ShapeData__glScale9Shape = { >RendererData, var lastH:Float; var lastScaleX:Float; var lastScaleY:Float; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var surface:Null<Raster2DSurface>; };
 
 #if !flight_struct_typedef
@@ -336,6 +352,30 @@ private typedef EntityShapeL28C10__glShapeData = { var surface:flight._internal.
 #end
 
 typedef GlTextLabelData__glTextLabel = { >RendererData, var surface:Null<Raster2DSurface>; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; };
+
+#if !flight_struct_typedef
+@:allow(flight._Scene2DGl)
+@:structInit
+private class EntityShapeL50C10__glTextLabel {
+  public var surface:flight._internal._Any;
+  public var lastContentId:Float;
+  public var lastPixelRatio:Float;
+  public var logW:Float;
+  public var logH:Float;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(surface:flight._internal._Any, lastContentId:Float, lastPixelRatio:Float, logW:Float, logH:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.surface = surface;
+    this.lastContentId = lastContentId;
+    this.lastPixelRatio = lastPixelRatio;
+    this.logW = logW;
+    this.logH = logH;
+  }
+}
+#else
+private typedef EntityShapeL50C10__glTextLabel = { var surface:flight._internal._Any; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
 
 typedef GlVelocityProgram__glVelocity = { var program:flight._internal.dom.WebGLProgram; var quadBuffer:flight._internal.dom.WebGLBuffer; var locCorner:Float; var locClipRect:flight._internal.dom.WebGLUniformLocation; var locVelocity:flight._internal.dom.WebGLUniformLocation; };
 
@@ -2417,7 +2457,7 @@ class _Scene2DGl {
   @:allow(flight)
   @:keep
   private static function createGlRichTextData(_state:GlRenderState, _source:Renderable):RendererData {
-    return cast (cast createEntity(({ final __callArgument817:Dynamic = { surface: null }; __callArgument817; })) : { >Entity, var surface:flight._internal._Any; });
+    return cast (cast createEntity(({ final __callArgument817:Dynamic = ({ surface: null } : EntityShapeL43C10__glRichText); __callArgument817; })) : EntityShapeL43C10__glRichText);
     return cast null;
   }
 
@@ -3089,7 +3129,7 @@ class _Scene2DGl {
   }
 
   public static function createGlTextLabelData__glTextLabel(_state:GlRenderState, _source:Renderable):RendererData {
-    return cast (cast createEntity(({ final __callArgument1076:Dynamic = { surface: null, lastContentId: -1.0, lastPixelRatio: 0.0, logW: 0.0, logH: 0.0 }; __callArgument1076; })) : { >Entity, var surface:flight._internal._Any; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; });
+    return cast (cast createEntity(({ final __callArgument1076:Dynamic = ({ surface: null, lastContentId: -1.0, lastPixelRatio: 0.0, logW: 0.0, logH: 0.0 } : EntityShapeL50C10__glTextLabel); __callArgument1076; })) : EntityShapeL50C10__glTextLabel);
     return cast null;
   }
 

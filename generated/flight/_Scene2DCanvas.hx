@@ -259,6 +259,22 @@ typedef SavedCanvasState__canvasRenderTarget = { var canvas:flight._internal.dom
 
 typedef CanvasTextLabelData__canvasTextLabel = { >RendererData, var lastContentId:Float; };
 
+#if !flight_struct_typedef
+@:allow(flight._Scene2DCanvas)
+@:structInit
+private class EntityShapeL25C10__canvasTextLabel {
+  public var lastContentId:Float;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(lastContentId:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.lastContentId = lastContentId;
+  }
+}
+#else
+private typedef EntityShapeL25C10__canvasTextLabel = { var lastContentId:Float; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
 @:noCompletion
 class _Scene2DCanvas {
   public static function renderCanvasBackground(state:CanvasRenderState):Void {
@@ -2543,7 +2559,7 @@ class _Scene2DCanvas {
   public static final selectionRectangles__canvasTextInput:Array<TextSelectionRectangle> = (cast cast ([] : Array<Dynamic>));
 
   public static function createCanvasTextLabelData__canvasTextLabel(_state:CanvasRenderState, _source:Renderable):RendererData {
-    return cast (cast createEntity(({ final __callArgument760:Dynamic = { lastContentId: -1.0 }; __callArgument760; })) : { >Entity, var lastContentId:Float; });
+    return cast (cast createEntity(({ final __callArgument760:Dynamic = ({ lastContentId: -1.0 } : EntityShapeL25C10__canvasTextLabel); __callArgument760; })) : EntityShapeL25C10__canvasTextLabel);
     return cast null;
   }
 

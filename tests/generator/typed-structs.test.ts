@@ -4609,17 +4609,17 @@ describe('typed struct analysis', () => {
     expect(registry.resolveIdentity(renderTextureReturn)?.name).toBe('RenderTexture');
     expect(entityFactories.summary).toEqual({
       bareEntityCalls: 0,
-      blockedEntityCalls: 23,
+      blockedEntityCalls: 13,
       calls: 368,
-      exactEntityCalls: 191,
-      exactEntitySchemas: 148,
+      exactEntityCalls: 181,
+      exactEntitySchemas: 146,
       exactNonEntityCalls: 17,
       genericEntityCalls: 3,
-      localEntityCalls: 152,
+      localEntityCalls: 162,
       normalizedFieldOrderCalls: 24,
       normalizedMissingFieldCalls: 9,
-      normalizedSpreadProjectionCalls: 11,
-      readyEntityCalls: 328,
+      normalizedSpreadProjectionCalls: 17,
+      readyEntityCalls: 338,
       structuralEntityCalls: 4,
       unresolvedCalls: 1,
     });
@@ -4649,6 +4649,12 @@ describe('typed struct analysis', () => {
       blockers: ['parameterized-destination'],
       destination: { kind: 'exact-entity', schemaName: 'ApplicationRenderView' },
       status: 'blocked',
+    });
+    expect(entityFactories.sites.find((site) => site.factory.name === 'createCanvasTextLabelData')).toMatchObject({
+      blockers: [],
+      destination: { kind: 'local-entity', schemaName: 'EntityShapeL25C10' },
+      normalizations: ['synthetic-class'],
+      status: 'ready',
     });
     expect(
       entityFactories.sites.find((site) => site.factory.name === 'createElectronShortcutTriggerBackend'),

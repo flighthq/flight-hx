@@ -51,6 +51,210 @@ typedef CreateTexture3DOptions__texture = flight._internal._Extract<CreateTextur
 
 typedef CreateTextureCubeOptions__texture = flight._internal._Extract<CreateTextureOptions, { var dimension:String; }>;
 
+#if !flight_struct_typedef
+@:allow(flight._Texture)
+@:structInit
+private class EntityShapeL48C14__texture {
+  public var dimension:String;
+  public var sources:Array<Null<TextureSource>>;
+  public var colorSpace:TextureColorSpace;
+  public var flipX:Bool;
+  public var flipY:Bool;
+  public var sampler:Sampler;
+  public var uvOffset:Vector2;
+  public var uvRotation:Float;
+  public var uvScale:Vector2;
+  public var version:Float;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(dimension:String, sources:Array<Null<TextureSource>>, colorSpace:TextureColorSpace, flipX:Bool, flipY:Bool, sampler:Sampler, uvOffset:Vector2, uvRotation:Float, uvScale:Vector2, version:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.dimension = dimension;
+    this.sources = sources;
+    this.colorSpace = colorSpace;
+    this.flipX = flipX;
+    this.flipY = flipY;
+    this.sampler = sampler;
+    this.uvOffset = uvOffset;
+    this.uvRotation = uvRotation;
+    this.uvScale = uvScale;
+    this.version = version;
+  }
+}
+#else
+private typedef EntityShapeL48C14__texture = { var dimension:String; var sources:Array<Null<TextureSource>>; var colorSpace:TextureColorSpace; var flipX:Bool; var flipY:Bool; var sampler:Sampler; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var version:Float; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Texture)
+@:structInit
+private class EntityShapeL54C14__texture {
+  public var dimension:String;
+  public var source:Null<VoxelGrid>;
+  public var colorSpace:TextureColorSpace;
+  public var flipX:Bool;
+  public var flipY:Bool;
+  public var sampler:Sampler;
+  public var uvOffset:Vector2;
+  public var uvRotation:Float;
+  public var uvScale:Vector2;
+  public var version:Float;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(dimension:String, source:Null<VoxelGrid>, colorSpace:TextureColorSpace, flipX:Bool, flipY:Bool, sampler:Sampler, uvOffset:Vector2, uvRotation:Float, uvScale:Vector2, version:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.dimension = dimension;
+    this.source = source;
+    this.colorSpace = colorSpace;
+    this.flipX = flipX;
+    this.flipY = flipY;
+    this.sampler = sampler;
+    this.uvOffset = uvOffset;
+    this.uvRotation = uvRotation;
+    this.uvScale = uvScale;
+    this.version = version;
+  }
+}
+#else
+private typedef EntityShapeL54C14__texture = { var dimension:String; var source:Null<VoxelGrid>; var colorSpace:TextureColorSpace; var flipX:Bool; var flipY:Bool; var sampler:Sampler; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var version:Float; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Texture)
+@:structInit
+private class EntityShapeL59C14__texture {
+  public var dimension:String;
+  public var sources:TextureSourceCubeFaces;
+  public var colorSpace:TextureColorSpace;
+  public var flipX:Bool;
+  public var flipY:Bool;
+  public var sampler:Sampler;
+  public var uvOffset:Vector2;
+  public var uvRotation:Float;
+  public var uvScale:Vector2;
+  public var version:Float;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(dimension:String, sources:TextureSourceCubeFaces, colorSpace:TextureColorSpace, flipX:Bool, flipY:Bool, sampler:Sampler, uvOffset:Vector2, uvRotation:Float, uvScale:Vector2, version:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.dimension = dimension;
+    this.sources = sources;
+    this.colorSpace = colorSpace;
+    this.flipX = flipX;
+    this.flipY = flipY;
+    this.sampler = sampler;
+    this.uvOffset = uvOffset;
+    this.uvRotation = uvRotation;
+    this.uvScale = uvScale;
+    this.version = version;
+  }
+}
+#else
+private typedef EntityShapeL59C14__texture = { var dimension:String; var sources:TextureSourceCubeFaces; var colorSpace:TextureColorSpace; var flipX:Bool; var flipY:Bool; var sampler:Sampler; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var version:Float; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Texture)
+@:structInit
+private class EntityShapeL119C17__texture {
+  public var dimension:String;
+  public var sources:Array<Null<TextureSource>>;
+  public var colorSpace:TextureColorSpace;
+  public var flipX:Bool;
+  public var flipY:Bool;
+  public var sampler:Sampler;
+  public var uvOffset:Vector2;
+  public var uvRotation:Float;
+  public var uvScale:Vector2;
+  public var version:Float;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(dimension:String, sources:Array<Null<TextureSource>>, colorSpace:TextureColorSpace, flipX:Bool, flipY:Bool, sampler:Sampler, uvOffset:Vector2, uvRotation:Float, uvScale:Vector2, version:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.dimension = dimension;
+    this.sources = sources;
+    this.colorSpace = colorSpace;
+    this.flipX = flipX;
+    this.flipY = flipY;
+    this.sampler = sampler;
+    this.uvOffset = uvOffset;
+    this.uvRotation = uvRotation;
+    this.uvScale = uvScale;
+    this.version = version;
+  }
+}
+#else
+private typedef EntityShapeL119C17__texture = { var dimension:String; var sources:Array<Null<TextureSource>>; var colorSpace:TextureColorSpace; var flipX:Bool; var flipY:Bool; var sampler:Sampler; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var version:Float; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Texture)
+@:structInit
+private class EntityShapeL126C17__texture {
+  public var dimension:String;
+  public var source:Null<VoxelGrid>;
+  public var colorSpace:TextureColorSpace;
+  public var flipX:Bool;
+  public var flipY:Bool;
+  public var sampler:Sampler;
+  public var uvOffset:Vector2;
+  public var uvRotation:Float;
+  public var uvScale:Vector2;
+  public var version:Float;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(dimension:String, source:Null<VoxelGrid>, colorSpace:TextureColorSpace, flipX:Bool, flipY:Bool, sampler:Sampler, uvOffset:Vector2, uvRotation:Float, uvScale:Vector2, version:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.dimension = dimension;
+    this.source = source;
+    this.colorSpace = colorSpace;
+    this.flipX = flipX;
+    this.flipY = flipY;
+    this.sampler = sampler;
+    this.uvOffset = uvOffset;
+    this.uvRotation = uvRotation;
+    this.uvScale = uvScale;
+    this.version = version;
+  }
+}
+#else
+private typedef EntityShapeL126C17__texture = { var dimension:String; var source:Null<VoxelGrid>; var colorSpace:TextureColorSpace; var flipX:Bool; var flipY:Bool; var sampler:Sampler; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var version:Float; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Texture)
+@:structInit
+private class EntityShapeL133C17__texture {
+  public var dimension:String;
+  public var sources:TextureSourceCubeFaces;
+  public var colorSpace:TextureColorSpace;
+  public var flipX:Bool;
+  public var flipY:Bool;
+  public var sampler:Sampler;
+  public var uvOffset:Vector2;
+  public var uvRotation:Float;
+  public var uvScale:Vector2;
+  public var version:Float;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(dimension:String, sources:TextureSourceCubeFaces, colorSpace:TextureColorSpace, flipX:Bool, flipY:Bool, sampler:Sampler, uvOffset:Vector2, uvRotation:Float, uvScale:Vector2, version:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.dimension = dimension;
+    this.sources = sources;
+    this.colorSpace = colorSpace;
+    this.flipX = flipX;
+    this.flipY = flipY;
+    this.sampler = sampler;
+    this.uvOffset = uvOffset;
+    this.uvRotation = uvRotation;
+    this.uvScale = uvScale;
+    this.version = version;
+  }
+}
+#else
+private typedef EntityShapeL133C17__texture = { var dimension:String; var sources:TextureSourceCubeFaces; var colorSpace:TextureColorSpace; var flipX:Bool; var flipY:Bool; var sampler:Sampler; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var version:Float; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
 @:noCompletion
 class _Texture {
   public static function getCubeSources__cubeTexture(texture:CubeTexture):TextureSourceCubeFaces {
@@ -191,13 +395,13 @@ class _Texture {
         return cast (cast (cast createEntity((cast (#if flight_struct_typedef _Runtime.mergeObjects([common, { dimension: '2d' }, { source: (cast source : { var version:Float; var dimension:String; var source:Null<TextureSource>; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).source }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([common, { dimension: '2d' }, { source: (cast source : { var version:Float; var dimension:String; var source:Null<TextureSource>; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).source }]); ({ colorSpace: _Runtime.field(__structInitSource, 'colorSpace'), dimension: _Runtime.field(__structInitSource, 'dimension'), flipX: _Runtime.field(__structInitSource, 'flipX'), flipY: _Runtime.field(__structInitSource, 'flipY'), sampler: _Runtime.field(__structInitSource, 'sampler'), source: _Runtime.field(__structInitSource, 'source'), uvOffset: _Runtime.field(__structInitSource, 'uvOffset'), uvRotation: _Runtime.field(__structInitSource, 'uvRotation'), uvScale: _Runtime.field(__structInitSource, 'uvScale'), version: _Runtime.field(__structInitSource, 'version') } : Texture2D); }) #end) : Dynamic)) : Texture2D) : Texture2D);
       }
       else if (__switchValue == '2d-array') {
-        return cast (cast createEntity((cast _Runtime.mergeObjects([common, { dimension: '2d-array' }, { sources: _Runtime.slice((cast source : { var sources:Array<Null<TextureSource>>; var version:Float; var dimension:String; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).sources, 0, null) }]) : Dynamic)) : flight._internal._Extract<Texture, { var dimension:String; }>);
+        return cast (cast (cast createEntity((cast (#if flight_struct_typedef _Runtime.mergeObjects([common, { dimension: '2d-array' }, { sources: _Runtime.slice((cast source : { var sources:Array<Null<TextureSource>>; var version:Float; var dimension:String; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).sources, 0, null) }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([common, { dimension: '2d-array' }, { sources: _Runtime.slice((cast source : { var sources:Array<Null<TextureSource>>; var version:Float; var dimension:String; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).sources, 0, null) }]); ({ dimension: _Runtime.field(__structInitSource, 'dimension'), sources: _Runtime.field(__structInitSource, 'sources'), colorSpace: _Runtime.field(__structInitSource, 'colorSpace'), flipX: _Runtime.field(__structInitSource, 'flipX'), flipY: _Runtime.field(__structInitSource, 'flipY'), sampler: _Runtime.field(__structInitSource, 'sampler'), uvOffset: _Runtime.field(__structInitSource, 'uvOffset'), uvRotation: _Runtime.field(__structInitSource, 'uvRotation'), uvScale: _Runtime.field(__structInitSource, 'uvScale'), version: _Runtime.field(__structInitSource, 'version') } : EntityShapeL48C14__texture); }) #end) : Dynamic)) : EntityShapeL48C14__texture) : flight._internal._Extract<Texture, { var dimension:String; }>);
       }
       else if (__switchValue == '3d') {
-        return cast (cast createEntity((cast _Runtime.mergeObjects([common, { dimension: '3d' }, { source: (cast source : { var version:Float; var dimension:String; var source:Null<VoxelGrid>; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).source }]) : Dynamic)) : flight._internal._Extract<Texture, { var dimension:String; }>);
+        return cast (cast (cast createEntity((cast (#if flight_struct_typedef _Runtime.mergeObjects([common, { dimension: '3d' }, { source: (cast source : { var version:Float; var dimension:String; var source:Null<VoxelGrid>; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).source }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([common, { dimension: '3d' }, { source: (cast source : { var version:Float; var dimension:String; var source:Null<VoxelGrid>; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).source }]); ({ dimension: _Runtime.field(__structInitSource, 'dimension'), source: _Runtime.field(__structInitSource, 'source'), colorSpace: _Runtime.field(__structInitSource, 'colorSpace'), flipX: _Runtime.field(__structInitSource, 'flipX'), flipY: _Runtime.field(__structInitSource, 'flipY'), sampler: _Runtime.field(__structInitSource, 'sampler'), uvOffset: _Runtime.field(__structInitSource, 'uvOffset'), uvRotation: _Runtime.field(__structInitSource, 'uvRotation'), uvScale: _Runtime.field(__structInitSource, 'uvScale'), version: _Runtime.field(__structInitSource, 'version') } : EntityShapeL54C14__texture); }) #end) : Dynamic)) : EntityShapeL54C14__texture) : flight._internal._Extract<Texture, { var dimension:String; }>);
       }
       else if (__switchValue == 'cube') {
-        return cast (cast createEntity((cast _Runtime.mergeObjects([common, { dimension: 'cube' }, { sources: (cast (cast _Runtime.slice((cast source : { var sources:TextureSourceCubeFaces; var version:Float; var dimension:String; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).sources, 0, null) : flight._internal._Any) : TextureSourceCubeFaces) }]) : Dynamic)) : flight._internal._Extract<Texture, { var dimension:String; }>);
+        return cast (cast (cast createEntity((cast (#if flight_struct_typedef _Runtime.mergeObjects([common, { dimension: 'cube' }, { sources: (cast (cast _Runtime.slice((cast source : { var sources:TextureSourceCubeFaces; var version:Float; var dimension:String; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).sources, 0, null) : flight._internal._Any) : TextureSourceCubeFaces) }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([common, { dimension: 'cube' }, { sources: (cast (cast _Runtime.slice((cast source : { var sources:TextureSourceCubeFaces; var version:Float; var dimension:String; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).sources, 0, null) : flight._internal._Any) : TextureSourceCubeFaces) }]); ({ dimension: _Runtime.field(__structInitSource, 'dimension'), sources: _Runtime.field(__structInitSource, 'sources'), colorSpace: _Runtime.field(__structInitSource, 'colorSpace'), flipX: _Runtime.field(__structInitSource, 'flipX'), flipY: _Runtime.field(__structInitSource, 'flipY'), sampler: _Runtime.field(__structInitSource, 'sampler'), uvOffset: _Runtime.field(__structInitSource, 'uvOffset'), uvRotation: _Runtime.field(__structInitSource, 'uvRotation'), uvScale: _Runtime.field(__structInitSource, 'uvScale'), version: _Runtime.field(__structInitSource, 'version') } : EntityShapeL59C14__texture); }) #end) : Dynamic)) : EntityShapeL59C14__texture) : flight._internal._Extract<Texture, { var dimension:String; }>);
       }
     }
     return cast null;
@@ -255,13 +459,13 @@ class _Texture {
     {
       var __switchValue = ({ final __structural50 = opts; __structural50 == null ? _Runtime.UNDEFINED : (cast __structural50 : { @:optional var dimension:Null<String>; }).dimension; });
       if (__switchValue == '2d-array') {
-        (texture = cast ((cast createEntity((cast _Runtime.mergeObjects([common, { dimension: '2d-array' }, { sources: _Runtime.coalesce(_Runtime.callOptionalProperty((cast opts : { @:optional var sources:Null<Array<Null<TextureSource>>>; @:optional var version:Null<Float>; @:optional var colorSpace:Null<String>; @:optional var sampler:Null<Sampler>; @:optional var flipX:Null<Bool>; @:optional var flipY:Null<Bool>; @:optional var uvOffset:Null<Vector2>; @:optional var uvRotation:Null<Float>; @:optional var uvScale:Null<Vector2>; var dimension:String; @:optional var resource:Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }).sources, 'slice', cast ([] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>)) }]) : Dynamic)) : flight._internal._Extract<Texture, { var dimension:String; }>) : Dynamic));
+        (texture = cast ((cast (cast createEntity((cast (#if flight_struct_typedef _Runtime.mergeObjects([common, { dimension: '2d-array' }, { sources: _Runtime.coalesce(_Runtime.callOptionalProperty((cast opts : { @:optional var sources:Null<Array<Null<TextureSource>>>; @:optional var version:Null<Float>; @:optional var colorSpace:Null<String>; @:optional var sampler:Null<Sampler>; @:optional var flipX:Null<Bool>; @:optional var flipY:Null<Bool>; @:optional var uvOffset:Null<Vector2>; @:optional var uvRotation:Null<Float>; @:optional var uvScale:Null<Vector2>; var dimension:String; @:optional var resource:Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }).sources, 'slice', cast ([] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>)) }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([common, { dimension: '2d-array' }, { sources: _Runtime.coalesce(_Runtime.callOptionalProperty((cast opts : { @:optional var sources:Null<Array<Null<TextureSource>>>; @:optional var version:Null<Float>; @:optional var colorSpace:Null<String>; @:optional var sampler:Null<Sampler>; @:optional var flipX:Null<Bool>; @:optional var flipY:Null<Bool>; @:optional var uvOffset:Null<Vector2>; @:optional var uvRotation:Null<Float>; @:optional var uvScale:Null<Vector2>; var dimension:String; @:optional var resource:Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }).sources, 'slice', cast ([] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>)) }]); ({ dimension: _Runtime.field(__structInitSource, 'dimension'), sources: _Runtime.field(__structInitSource, 'sources'), colorSpace: _Runtime.field(__structInitSource, 'colorSpace'), flipX: _Runtime.field(__structInitSource, 'flipX'), flipY: _Runtime.field(__structInitSource, 'flipY'), sampler: _Runtime.field(__structInitSource, 'sampler'), uvOffset: _Runtime.field(__structInitSource, 'uvOffset'), uvRotation: _Runtime.field(__structInitSource, 'uvRotation'), uvScale: _Runtime.field(__structInitSource, 'uvScale'), version: _Runtime.field(__structInitSource, 'version') } : EntityShapeL119C17__texture); }) #end) : Dynamic)) : EntityShapeL119C17__texture) : flight._internal._Extract<Texture, { var dimension:String; }>) : Dynamic));
       }
       else if (__switchValue == '3d') {
-        (texture = cast ((cast createEntity((cast _Runtime.mergeObjects([common, { dimension: '3d' }, { source: _Runtime.coalesce((cast opts : { @:optional var version:Null<Float>; @:optional var source:Null<VoxelGrid>; @:optional var colorSpace:Null<String>; @:optional var sampler:Null<Sampler>; @:optional var flipX:Null<Bool>; @:optional var flipY:Null<Bool>; @:optional var uvOffset:Null<Vector2>; @:optional var uvRotation:Null<Float>; @:optional var uvScale:Null<Vector2>; var dimension:String; @:optional var resource:Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }).source, function():Dynamic return cast null) }]) : Dynamic)) : flight._internal._Extract<Texture, { var dimension:String; }>) : Dynamic));
+        (texture = cast ((cast (cast createEntity((cast (#if flight_struct_typedef _Runtime.mergeObjects([common, { dimension: '3d' }, { source: _Runtime.coalesce((cast opts : { @:optional var version:Null<Float>; @:optional var source:Null<VoxelGrid>; @:optional var colorSpace:Null<String>; @:optional var sampler:Null<Sampler>; @:optional var flipX:Null<Bool>; @:optional var flipY:Null<Bool>; @:optional var uvOffset:Null<Vector2>; @:optional var uvRotation:Null<Float>; @:optional var uvScale:Null<Vector2>; var dimension:String; @:optional var resource:Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }).source, function():Dynamic return cast null) }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([common, { dimension: '3d' }, { source: _Runtime.coalesce((cast opts : { @:optional var version:Null<Float>; @:optional var source:Null<VoxelGrid>; @:optional var colorSpace:Null<String>; @:optional var sampler:Null<Sampler>; @:optional var flipX:Null<Bool>; @:optional var flipY:Null<Bool>; @:optional var uvOffset:Null<Vector2>; @:optional var uvRotation:Null<Float>; @:optional var uvScale:Null<Vector2>; var dimension:String; @:optional var resource:Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }).source, function():Dynamic return cast null) }]); ({ dimension: _Runtime.field(__structInitSource, 'dimension'), source: _Runtime.field(__structInitSource, 'source'), colorSpace: _Runtime.field(__structInitSource, 'colorSpace'), flipX: _Runtime.field(__structInitSource, 'flipX'), flipY: _Runtime.field(__structInitSource, 'flipY'), sampler: _Runtime.field(__structInitSource, 'sampler'), uvOffset: _Runtime.field(__structInitSource, 'uvOffset'), uvRotation: _Runtime.field(__structInitSource, 'uvRotation'), uvScale: _Runtime.field(__structInitSource, 'uvScale'), version: _Runtime.field(__structInitSource, 'version') } : EntityShapeL126C17__texture); }) #end) : Dynamic)) : EntityShapeL126C17__texture) : flight._internal._Extract<Texture, { var dimension:String; }>) : Dynamic));
       }
       else if (__switchValue == 'cube') {
-        (texture = cast ((cast createEntity((cast _Runtime.mergeObjects([common, { dimension: 'cube' }, { sources: (cast (cast _Runtime.coalesce(_Runtime.callOptionalProperty((cast opts : { @:optional var sources:Null<TextureSourceCubeFaces>; @:optional var version:Null<Float>; @:optional var colorSpace:Null<String>; @:optional var sampler:Null<Sampler>; @:optional var flipX:Null<Bool>; @:optional var flipY:Null<Bool>; @:optional var uvOffset:Null<Vector2>; @:optional var uvRotation:Null<Float>; @:optional var uvScale:Null<Vector2>; var dimension:String; @:optional var resource:Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }).sources, 'slice', cast ([] : Array<Dynamic>)), function():Dynamic return cast cast ([null, null, null, null, null, null] : Array<Dynamic>)) : flight._internal._Any) : TextureSourceCubeFaces) }]) : Dynamic)) : flight._internal._Extract<Texture, { var dimension:String; }>) : Dynamic));
+        (texture = cast ((cast (cast createEntity((cast (#if flight_struct_typedef _Runtime.mergeObjects([common, { dimension: 'cube' }, { sources: (cast (cast _Runtime.coalesce(_Runtime.callOptionalProperty((cast opts : { @:optional var sources:Null<TextureSourceCubeFaces>; @:optional var version:Null<Float>; @:optional var colorSpace:Null<String>; @:optional var sampler:Null<Sampler>; @:optional var flipX:Null<Bool>; @:optional var flipY:Null<Bool>; @:optional var uvOffset:Null<Vector2>; @:optional var uvRotation:Null<Float>; @:optional var uvScale:Null<Vector2>; var dimension:String; @:optional var resource:Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }).sources, 'slice', cast ([] : Array<Dynamic>)), function():Dynamic return cast cast ([null, null, null, null, null, null] : Array<Dynamic>)) : flight._internal._Any) : TextureSourceCubeFaces) }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([common, { dimension: 'cube' }, { sources: (cast (cast _Runtime.coalesce(_Runtime.callOptionalProperty((cast opts : { @:optional var sources:Null<TextureSourceCubeFaces>; @:optional var version:Null<Float>; @:optional var colorSpace:Null<String>; @:optional var sampler:Null<Sampler>; @:optional var flipX:Null<Bool>; @:optional var flipY:Null<Bool>; @:optional var uvOffset:Null<Vector2>; @:optional var uvRotation:Null<Float>; @:optional var uvScale:Null<Vector2>; var dimension:String; @:optional var resource:Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }).sources, 'slice', cast ([] : Array<Dynamic>)), function():Dynamic return cast cast ([null, null, null, null, null, null] : Array<Dynamic>)) : flight._internal._Any) : TextureSourceCubeFaces) }]); ({ dimension: _Runtime.field(__structInitSource, 'dimension'), sources: _Runtime.field(__structInitSource, 'sources'), colorSpace: _Runtime.field(__structInitSource, 'colorSpace'), flipX: _Runtime.field(__structInitSource, 'flipX'), flipY: _Runtime.field(__structInitSource, 'flipY'), sampler: _Runtime.field(__structInitSource, 'sampler'), uvOffset: _Runtime.field(__structInitSource, 'uvOffset'), uvRotation: _Runtime.field(__structInitSource, 'uvRotation'), uvScale: _Runtime.field(__structInitSource, 'uvScale'), version: _Runtime.field(__structInitSource, 'version') } : EntityShapeL133C17__texture); }) #end) : Dynamic)) : EntityShapeL133C17__texture) : flight._internal._Extract<Texture, { var dimension:String; }>) : Dynamic));
       }
       else  {
         return cast (cast createTexture2D((cast (cast opts : Null<CreateTexture2DOptions>) : Dynamic)) : Texture2D);

@@ -3714,13 +3714,9 @@ function cppStructInitEntityFactoryConstruction(
       ? undefined
       : syntheticEntityFactoryConstruction(node, call, constructionFields, shape, context);
   }
-  if (
-    shape.hasComputed ||
-    shape.hasUnsupported ||
-    !constructionFields ||
-    constructionFields.some((field) => !binding.fieldNames.includes(field))
-  ) {
-    return undefined;
+  if (shape.hasComputed || shape.hasUnsupported || !constructionFields) return undefined;
+  if (constructionFields.some((field) => !binding.fieldNames.includes(field))) {
+    return syntheticEntityFactoryConstruction(node, call, constructionFields, shape, context);
   }
   const missingFieldNames = binding.fieldNames.filter((field) => !constructionFields.includes(field));
   return missingFieldNames.length > 0 ? { ...binding, missingFieldNames } : binding;
