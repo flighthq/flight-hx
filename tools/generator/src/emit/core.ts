@@ -2087,8 +2087,25 @@ function flattenStructuralTypes(declarations: IrDeclaration[]): void {
       const existing = merged.get(field.name);
       if (!existing || typeSpecificity(field.type) > typeSpecificity(existing.type)) merged.set(field.name, field);
     }
-    // TypeScript members declared directly on the child override every inherited member.
-    for (const field of localFields) merged.set(field.name, field);
+    // TypeScript members declared directly on the child override every inherited member. When such an
+    // override is a METHOD that only narrows a parameter (e.g. Scene2DRenderer.createData narrows
+    // Renderer's `Renderable` to `Node2D`), TS accepts it via bivariant method parameters, but Haxe's
+    // function parameters are soundly contravariant — the narrowed field makes the child structurally
+    // UNassignable to its parent, so a consumer passing a Scene2DRenderer into registerRenderer(renderer:
+    // Renderer) fails to compile. Keep the inherited (widened) parameter types on the override so the
+    // child stays a structural supertype instance; callers still pass the narrower node kind, a subtype.
+    for (const field of localFields) {
+      const inherited = merged.get(field.name);
+      merged.set(
+        field.name,
+        inherited &&
+          inherited.type.kind === 'function' &&
+          field.type.kind === 'function' &&
+          inherited.type.parameters.length === field.type.parameters.length
+          ? { ...field, type: { ...field.type, parameters: inherited.type.parameters } }
+          : field,
+      );
+    }
     declaration.type.extends = [];
     declaration.type.fields = [...merged.values()];
   }

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Scene2DRenderer = { @:optional var format:BatchFormat; var createData:RenderState->Node2D->Null<RendererData>; @:optional var destroyData:RenderState->RendererData->Void; @:optional var isDirty:RenderState->Renderable->Null<RendererData>->Bool; var submit:RenderState->RenderProxy2D->Void; };
+typedef Scene2DRenderer = { @:optional var format:BatchFormat; var createData:RenderState->Renderable->Null<RendererData>; @:optional var destroyData:RenderState->RendererData->Void; @:optional var isDirty:RenderState->Renderable->Null<RendererData>->Bool; var submit:RenderState->RenderProxy->Void; };
