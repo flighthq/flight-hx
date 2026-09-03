@@ -4380,12 +4380,18 @@ describe('typed struct analysis', () => {
         export function createProvider(): { run(): number } & Entity {
           return createEntity({ run() { return 1; } });
         }
+        export function createStoredProvider(): { stop(): number } & Entity {
+          const provider = { stop() { return 2; } };
+          return createEntity(provider);
+        }
       `,
       candidate,
     );
-    const synthetic = result.lowered.declarations.find(
+    const synthetics = result.lowered.declarations.filter(
       (declaration) => declaration.kind === 'type' && declaration.name.startsWith('EntityShapeL'),
     );
+    expect(synthetics).toHaveLength(2);
+    const synthetic = synthetics[0];
     if (!synthetic || synthetic.kind !== 'type') throw new Error('Expected synthetic Entity class');
     const fixtureModule = {
       declarations: result.lowered.declarations,
@@ -4609,19 +4615,19 @@ describe('typed struct analysis', () => {
     expect(registry.resolveIdentity(renderTextureReturn)?.name).toBe('RenderTexture');
     expect(entityFactories.summary).toEqual({
       bareEntityCalls: 0,
-      blockedEntityCalls: 13,
+      blockedEntityCalls: 9,
       calls: 368,
       exactEntityCalls: 181,
       exactEntitySchemas: 146,
       exactNonEntityCalls: 17,
       genericEntityCalls: 3,
-      localEntityCalls: 162,
+      localEntityCalls: 164,
       normalizedFieldOrderCalls: 24,
       normalizedMissingFieldCalls: 9,
       normalizedSpreadProjectionCalls: 17,
-      readyEntityCalls: 338,
-      structuralEntityCalls: 4,
-      unresolvedCalls: 1,
+      readyEntityCalls: 342,
+      structuralEntityCalls: 3,
+      unresolvedCalls: 0,
     });
     expect(entityFactories.sites.find((site) => site.factory.name === 'createMatrix4')).toMatchObject({
       blockers: [],
@@ -4635,7 +4641,8 @@ describe('typed struct analysis', () => {
       status: 'ready',
     });
     expect(entityFactories.sites.find((site) => site.factory.name === 'cloneEntity')).toMatchObject({
-      blockers: ['generic-entity-destination', 'non-object-construction'],
+      argument: { kind: 'object' },
+      blockers: ['generic-entity-destination', 'spread-construction'],
       destination: { kind: 'generic-entity' },
       status: 'blocked',
     });
@@ -4653,6 +4660,15 @@ describe('typed struct analysis', () => {
     expect(entityFactories.sites.find((site) => site.factory.name === 'createCanvasTextLabelData')).toMatchObject({
       blockers: [],
       destination: { kind: 'local-entity', schemaName: 'EntityShapeL25C10' },
+      normalizations: ['synthetic-class'],
+      status: 'ready',
+    });
+    expect(
+      entityFactories.sites.find((site) => site.factory.name === 'decodeEmbeddedImageResourceReference'),
+    ).toMatchObject({
+      argument: { kind: 'object' },
+      blockers: [],
+      destination: { kind: 'local-entity', schemaName: 'EntityShapeL73C10' },
       normalizations: ['synthetic-class'],
       status: 'ready',
     });

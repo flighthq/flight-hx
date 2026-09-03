@@ -60117,10 +60117,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
+        "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
@@ -60131,10 +60131,8 @@
       },
       "id": "@flighthq/types:interface#MediaSessionActionBackend",
       "migration": {
-        "mechanicallyCompatible": false,
-        "normalizationReasons": [
-          "cross-schema-transfer"
-        ],
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
         "observabilityReasons": []
       },
       "name": "MediaSessionActionBackend",
@@ -60148,25 +60146,14 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 1,
+        "crossSchemaTransfers": 0,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [
-        {
-          "column": 10,
-          "kind": "cross-schema-transfer",
-          "line": 123,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-web/src/webMediasession.ts"
-        }
-      ],
+      "sites": [],
       "source": "upstream/packages/types/src/MediaSession.ts"
     },
     {
@@ -60324,10 +60311,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
+        "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
@@ -60338,10 +60325,8 @@
       },
       "id": "@flighthq/types:interface#MediaSessionBackend",
       "migration": {
-        "mechanicallyCompatible": false,
-        "normalizationReasons": [
-          "cross-schema-transfer"
-        ],
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
         "observabilityReasons": []
       },
       "name": "MediaSessionBackend",
@@ -60355,25 +60340,14 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 1,
+        "crossSchemaTransfers": 0,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [
-        {
-          "column": 10,
-          "kind": "cross-schema-transfer",
-          "line": 322,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-web/src/webMediasession.ts"
-        }
-      ],
+      "sites": [],
       "source": "upstream/packages/types/src/MediaSession.ts"
     },
     {
@@ -138003,12 +137977,12 @@
     "anonymousStructuralTransfers": 229,
     "bridgeInputSignatures": 10470,
     "bridgeOutputSignatures": 2387,
-    "crossSchemaTransfers": 2193,
+    "crossSchemaTransfers": 2191,
     "directAccesses": 26054,
     "dynamicIngresses": 72,
-    "mechanicallyCompatibleSchemas": 1696,
-    "normalizationRequiredSchemas": 505,
-    "objectLiterals": 2515,
+    "mechanicallyCompatibleSchemas": 1698,
+    "normalizationRequiredSchemas": 503,
+    "objectLiterals": 2517,
     "objectLiteralsOmittingOptionalFields": 549,
     "objectLiteralsWithComputedKeys": 8,
     "objectLiteralsWithSpread": 234,

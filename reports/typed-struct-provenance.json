@@ -15908,21 +15908,9 @@
     },
     {
       "reasons": [
-        "cross-schema-transfer"
-      ],
-      "schemaId": "@flighthq/types:interface#MediaSessionActionBackend"
-    },
-    {
-      "reasons": [
         "anonymous-structural-transfer"
       ],
       "schemaId": "@flighthq/types:interface#MediaSessionActionDetails"
-    },
-    {
-      "reasons": [
-        "cross-schema-transfer"
-      ],
-      "schemaId": "@flighthq/types:interface#MediaSessionBackend"
     },
     {
       "reasons": [
@@ -48393,6 +48381,69 @@
         "inputPaths": [
           {
             "path": [
+              "@flighthq/types:interface#HasMediaSessionAction",
+              "media.sessionAction:@flighthq/types:interface#MediaSessionActionBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasMediaSessionAction"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "media:@flighthq/types:interface#HostMediaCapabilities",
+              "sessionAction:@flighthq/types:interface#MediaSessionActionBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "media:@flighthq/types:interface#HostMediaCapabilities",
+              "sessionAction:@flighthq/types:interface#MediaSessionActionBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#MediaSessionActionBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#MediaSessionActionBackend"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#MediaSessionActionBackend",
+            "fieldPath": "media.sessionAction",
+            "parentSchemaId": "@flighthq/types:interface#HasMediaSessionAction"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#MediaSessionActionBackend",
+            "fieldPath": "sessionAction",
+            "parentSchemaId": "@flighthq/types:interface#HostMediaCapabilities"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 2,
+      "id": "@flighthq/types:interface#MediaSessionActionBackend",
+      "name": "MediaSessionActionBackend",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/MediaSession.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
               "@flighthq/types:interface#MediaSessionActionSignal"
             ],
             "rootSchemaId": "@flighthq/types:interface#MediaSessionActionSignal"
@@ -48421,6 +48472,69 @@
       "fields": 2,
       "id": "@flighthq/types:interface#MediaSessionActionSignal",
       "name": "MediaSessionActionSignal",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/MediaSession.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasMediaSession",
+              "media.session:@flighthq/types:interface#MediaSessionBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasMediaSession"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "media:@flighthq/types:interface#HostMediaCapabilities",
+              "session:@flighthq/types:interface#MediaSessionBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "media:@flighthq/types:interface#HostMediaCapabilities",
+              "session:@flighthq/types:interface#MediaSessionBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#MediaSessionBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#MediaSessionBackend"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#MediaSessionBackend",
+            "fieldPath": "media.session",
+            "parentSchemaId": "@flighthq/types:interface#HasMediaSession"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#MediaSessionBackend",
+            "fieldPath": "session",
+            "parentSchemaId": "@flighthq/types:interface#HostMediaCapabilities"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 6,
+      "id": "@flighthq/types:interface#MediaSessionBackend",
+      "name": "MediaSessionBackend",
       "nominalIdentity": {
         "blockerReasons": [],
         "closed": true
@@ -98582,11 +98696,11 @@
   ],
   "summary": {
     "anonymousContainerTransferSchemas": 79,
-    "bridgeInputExposedSchemas": 842,
-    "bridgeOutputExposedSchemas": 856,
+    "bridgeInputExposedSchemas": 844,
+    "bridgeOutputExposedSchemas": 858,
     "blockedSchemas": 319,
-    "candidateSchemas": 1223,
-    "closedSchemas": 904,
+    "candidateSchemas": 1225,
+    "closedSchemas": 906,
     "combinedBlockedSchemas": 17,
     "containmentEdges": 2878,
     "containerOnlyBlockedSchemas": 85,
@@ -98596,7 +98710,7 @@
     "jsonParseRoots": 10,
     "normalizationOnlyBlockedSchemas": 217,
     "normalizationProvenanceBlockedSchemas": 234,
-    "normalizationRoots": 511
+    "normalizationRoots": 509
   },
   "upstreamCommit": "98a7a58a934f55555a561a308cc23c1363c45652"
 }

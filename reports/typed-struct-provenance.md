@@ -6,13 +6,13 @@ This reporting-only audit tests nominal-identity closure for the clean required-
 
 | Metric | Count |
 | --- | ---: |
-| Clean required-field candidates | 1223 |
-| Nominally closed candidates | 904 |
+| Clean required-field candidates | 1225 |
+| Nominally closed candidates | 906 |
 | Blocked candidates | 319 |
 | Normalization-provenance blockers only | 217 |
 | Container-transfer blockers only | 85 |
 | Both blocker classes | 17 |
-| Normalization roots (all eligible schemas) | 511 |
+| Normalization roots (all eligible schemas) | 509 |
 | JSON.parse roots | 10 |
 | Containment edges (all eligible schemas) | 2878 |
 | Candidates blocked by normalization provenance | 234 |
@@ -20,8 +20,8 @@ This reporting-only audit tests nominal-identity closure for the clean required-
 | Candidates with anonymous container transfers | 79 |
 | Candidates with cross-schema container transfers | 26 |
 | Candidates with dynamic container transfers | 22 |
-| Candidates exposed through bridge inputs | 842 |
-| Candidates exposed through bridge outputs | 856 |
+| Candidates exposed through bridge inputs | 844 |
+| Candidates exposed through bridge outputs | 858 |
 
 Exact containment paths, roots, transfer locations, and bridge paths are in `typed-struct-provenance.json`.
 
@@ -579,7 +579,9 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#MediaChannelSignals` | 0 | 4 | 0 | 4 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MediaFileCapturePhoto` | 0 | 4 | 0 | 0 | 0 | 2 | 0 | 1 | no | `container-transfer` |
 | `@flighthq/types:interface#MediaFileCaptureVideo` | 0 | 3 | 0 | 0 | 0 | 2 | 0 | 1 | no | `container-transfer` |
+| `@flighthq/types:interface#MediaSessionActionBackend` | 0 | 2 | 2 | 0 | 0 | 0 | 2 | 2 | yes | — |
 | `@flighthq/types:interface#MediaSessionActionSignal` | 0 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#MediaSessionBackend` | 0 | 6 | 2 | 0 | 0 | 0 | 2 | 2 | yes | — |
 | `@flighthq/types:interface#MediaSessionMetadata` | 4 | 4 | 0 | 1 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#MediaSessionOperationOutcome` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#MediaSessionPositionState` | 8 | 3 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |

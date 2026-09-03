@@ -43,6 +43,20 @@ import flight.types.WindowBackend;
 #if !flight_struct_typedef
 @:allow(flight._Entity)
 @:structInit
+private class EntityShapeL12C10__clone {
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new():Void {
+    this.__symbol__EntityRuntime = null;
+  }
+}
+#else
+private typedef EntityShapeL12C10__clone = { @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Entity)
+@:structInit
 private class EntityShapeL8C10__host {
   public var accessibility:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
   public var app:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
@@ -130,7 +144,7 @@ class _Entity {
   @:keep
   private static function cloneEntity<Type:Entity>(source:Type):Type {
     var copy:flight._internal._Record<flight._internal._Any, flight._internal._Any> = cast _Runtime.UNDEFINED;
-    copy = (cast _Runtime.mergeObjects([source]) : flight._internal._Record<Dynamic, flight._internal._Any>);
+    copy = (cast (#if flight_struct_typedef _Runtime.mergeObjects([source]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([source]); ({  } : EntityShapeL12C10__clone); }) #end) : flight._internal._Record<Dynamic, flight._internal._Any>);
     _Runtime.setIndex(copy, EntityRuntimeKey, _Runtime.field(_Runtime, 'UNDEFINED'));
     return cast (cast createEntity((cast (cast (cast copy : flight._internal._Any) : Type) : Dynamic)) : flight._internal._Intersection2<Type, Entity>);
     return cast null;

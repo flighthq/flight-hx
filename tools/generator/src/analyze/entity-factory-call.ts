@@ -24,6 +24,11 @@ export interface EntityFactoryObjectShape {
   hasUnsupported: boolean;
 }
 
+const entityFactoryCallsByObject = new WeakMap<
+  ts.TypeChecker,
+  WeakMap<ts.SourceFile, WeakMap<ts.ObjectLiteralExpression, ts.CallExpression | false>>
+>();
+
 export function isFlightCreateEntityCall(node: ts.CallExpression, checker: ts.TypeChecker): boolean {
   let symbol = checker.getSymbolAtLocation(node.expression);
   if (symbol && (symbol.flags & ts.SymbolFlags.Alias) !== 0) symbol = checker.getAliasedSymbol(symbol);
@@ -40,27 +45,74 @@ export function createEntityCallForObjectLiteral(
   let current: ts.Expression = node;
   while (isTransparentExpressionParent(current.parent, current)) current = current.parent;
   const parent = current.parent;
-  return ts.isCallExpression(parent) && parent.arguments.length === 1 && parent.arguments[0] === current
-    ? isFlightCreateEntityCall(parent, checker)
-      ? parent
-      : undefined
-    : undefined;
+  const direct =
+    ts.isCallExpression(parent) && parent.arguments.length === 1 && parent.arguments[0] === current
+      ? isFlightCreateEntityCall(parent, checker)
+        ? parent
+        : undefined
+      : undefined;
+  if (direct) return direct;
+  const indexed = entityFactoryCallByObject(node.getSourceFile(), checker).get(node);
+  return indexed || undefined;
 }
 
-export function entityFactoryObjectLiteral(call: ts.CallExpression): ts.ObjectLiteralExpression | undefined {
-  if (call.arguments.length !== 1) return undefined;
-  let argument = call.arguments[0];
-  while (
-    argument &&
-    (ts.isParenthesizedExpression(argument) ||
-      ts.isAsExpression(argument) ||
-      ts.isTypeAssertionExpression(argument) ||
-      ts.isSatisfiesExpression(argument) ||
-      ts.isNonNullExpression(argument))
-  ) {
-    argument = argument.expression;
+function entityFactoryCallByObject(
+  source: ts.SourceFile,
+  checker: ts.TypeChecker,
+): WeakMap<ts.ObjectLiteralExpression, ts.CallExpression | false> {
+  let bySource = entityFactoryCallsByObject.get(checker);
+  if (!bySource) {
+    bySource = new WeakMap();
+    entityFactoryCallsByObject.set(checker, bySource);
   }
-  return argument && ts.isObjectLiteralExpression(argument) ? argument : undefined;
+  const cached = bySource.get(source);
+  if (cached) return cached;
+  const calls = new WeakMap<ts.ObjectLiteralExpression, ts.CallExpression | false>();
+  const visit = (candidate: ts.Node): void => {
+    if (
+      ts.isCallExpression(candidate) &&
+      ts.isIdentifier(candidate.expression) &&
+      candidate.expression.text === 'createEntity' &&
+      isFlightCreateEntityCall(candidate, checker)
+    ) {
+      const object = entityFactoryObjectLiteral(candidate, checker);
+      if (object) {
+        calls.set(object, calls.has(object) ? false : candidate);
+      }
+    }
+    ts.forEachChild(candidate, visit);
+  };
+  visit(source);
+  bySource.set(source, calls);
+  return calls;
+}
+
+export function entityFactoryObjectLiteral(
+  call: ts.CallExpression,
+  checker?: ts.TypeChecker,
+): ts.ObjectLiteralExpression | undefined {
+  if (call.arguments.length !== 1) return undefined;
+  const argument = unwrapEntityFactoryExpression(call.arguments[0]!);
+  if (ts.isObjectLiteralExpression(argument)) return argument;
+  if (!checker || !ts.isIdentifier(argument)) return undefined;
+  const declaration = checker.getSymbolAtLocation(argument)?.valueDeclaration;
+  if (!declaration || !ts.isVariableDeclaration(declaration) || !declaration.initializer) return undefined;
+  const initializer = unwrapEntityFactoryExpression(declaration.initializer);
+  return ts.isObjectLiteralExpression(initializer) ? initializer : undefined;
+}
+
+function unwrapEntityFactoryExpression(expression: ts.Expression): ts.Expression {
+  let current = expression;
+  while (
+    ts.isParenthesizedExpression(current) ||
+    ts.isAsExpression(current) ||
+    ts.isTypeAssertionExpression(current) ||
+    ts.isSatisfiesExpression(current) ||
+    ts.isNonNullExpression(current)
+  ) {
+    current = current.expression;
+  }
+  return current;
 }
 
 export function entityFactoryObjectShape(node: ts.ObjectLiteralExpression): EntityFactoryObjectShape {

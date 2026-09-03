@@ -396,7 +396,7 @@ function isCreateEntityFactoryTransfer(
   checker: ts.TypeChecker,
 ): boolean {
   if (!ts.isCallExpression(expression) || !isFlightCreateEntityCall(expression, checker)) return false;
-  const object = entityFactoryObjectLiteral(expression);
+  const object = entityFactoryObjectLiteral(expression, checker);
   if (!object) return target.fieldNames.size === 0 && expression.arguments.length === 0;
   const shape = entityFactoryObjectShape(object);
   if (shape.hasComputed || shape.hasSpread || shape.hasUnsupported || shape.fields.length !== target.fieldNames.size) {

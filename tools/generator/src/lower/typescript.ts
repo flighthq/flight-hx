@@ -3745,7 +3745,7 @@ function entityFactoryVariableStorageType(
   const initializer = declaration.initializer;
   if (!checker || !registry || !initializer || !ts.isCallExpression(initializer)) return undefined;
   if (!isFlightCreateEntityCall(initializer, checker)) return undefined;
-  const object = entityFactoryObjectLiteral(initializer);
+  const object = entityFactoryObjectLiteral(initializer, checker);
   if (!object) return undefined;
   const shape = entityFactoryObjectShape(object);
   const constructionFields = shape.hasSpread ? entityFactoryExpandedObjectFields(object, checker) : shape.fields;

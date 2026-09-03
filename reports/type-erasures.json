@@ -2545,11 +2545,11 @@
       "byReason": {
         "source-unknown": 10,
         "standard-toolkit-boundary": 4,
-        "unclassified": 2
+        "unclassified": 3
       },
       "module": "flight._Entity",
       "source": "upstream/packages/entity/src/clone.ts",
-      "total": 16
+      "total": 17
     },
     {
       "byReason": {
@@ -3396,11 +3396,11 @@
         "source-any": 1,
         "source-unknown": 25,
         "standard-toolkit-boundary": 26,
-        "unclassified": 1
+        "unclassified": 2
       },
       "module": "flight._HostElectron",
       "source": "upstream/packages/host-electron/src/electronNotification.ts",
-      "total": 53
+      "total": 54
     },
     {
       "byReason": {
@@ -4038,11 +4038,11 @@
         "source-null": 4,
         "source-unknown": 2,
         "standard-toolkit-boundary": 6,
-        "unclassified": 1
+        "unclassified": 2
       },
       "module": "flight._Image",
       "source": "upstream/packages/image/src/imageResourceReference.ts",
-      "total": 14
+      "total": 15
     },
     {
       "byReason": {
@@ -12550,10 +12550,10 @@
       "source-undefined": 551,
       "source-unknown": 4741,
       "standard-toolkit-boundary": 22029,
-      "unclassified": 775
+      "unclassified": 778
     },
     "checkerKnownUnrepresentable": 0,
     "modules": 1470,
-    "total": 30452
+    "total": 30455
   }
 }

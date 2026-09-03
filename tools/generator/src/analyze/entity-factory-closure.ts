@@ -194,7 +194,7 @@ function auditFactorySite(
       : entityAssignable
         ? 'structural-entity'
         : 'unresolved';
-  const object = entityFactoryObjectLiteral(call);
+  const object = entityFactoryObjectLiteral(call, checker);
   const shape = object ? entityFactoryObjectShape(object) : undefined;
   const expandedFields = object && shape?.hasSpread ? entityFactoryExpandedObjectFields(object, checker) : undefined;
   const constructionFields = object && shape ? (expandedFields ?? shape.fields) : undefined;

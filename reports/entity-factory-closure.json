@@ -3169,22 +3169,23 @@
       ]
     },
     {
-      "blockedCalls": 1,
+      "blockedCalls": 0,
       "factories": [
         "createWebMediaSessionActionBackend"
       ],
-      "readyCalls": 0,
+      "readyCalls": 1,
       "schemaId": "@flighthq/types:interface#MediaSessionActionBackend",
       "schemaName": "MediaSessionActionBackend",
       "sites": [
         {
           "argument": {
-            "fields": [],
-            "kind": "other"
+            "fields": [
+              "destroy",
+              "subscribe"
+            ],
+            "kind": "object"
           },
-          "blockers": [
-            "non-object-construction"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -3200,7 +3201,7 @@
           "line": 123,
           "normalizations": [],
           "source": "upstream/packages/host-web/src/webMediasession.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -3242,22 +3243,27 @@
       ]
     },
     {
-      "blockedCalls": 1,
+      "blockedCalls": 0,
       "factories": [
         "createWebMediaSessionBackend"
       ],
-      "readyCalls": 0,
+      "readyCalls": 1,
       "schemaId": "@flighthq/types:interface#MediaSessionBackend",
       "schemaName": "MediaSessionBackend",
       "sites": [
         {
           "argument": {
-            "fields": [],
-            "kind": "other"
+            "fields": [
+              "clearMetadata",
+              "clearPositionState",
+              "destroy",
+              "setMetadata",
+              "setPlaybackState",
+              "setPositionState"
+            ],
+            "kind": "object"
           },
-          "blockers": [
-            "non-object-construction"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -3273,7 +3279,7 @@
           "line": 322,
           "normalizations": [],
           "source": "upstream/packages/host-web/src/webMediasession.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -8125,11 +8131,11 @@
     {
       "argument": {
         "fields": [],
-        "kind": "other"
+        "kind": "object"
       },
       "blockers": [
         "generic-entity-destination",
-        "non-object-construction"
+        "spread-construction"
       ],
       "column": 10,
       "destination": {
@@ -10607,17 +10613,23 @@
     },
     {
       "argument": {
-        "fields": [],
-        "kind": "other"
+        "fields": [
+          "click",
+          "close",
+          "delivery",
+          "dismiss",
+          "lifecycle",
+          "received"
+        ],
+        "kind": "object"
       },
-      "blockers": [
-        "non-object-construction",
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 44,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronNotification.ts:177:44",
+        "schemaName": "EntityShapeL177C44",
         "type": "ElectronNotificationCapabilities | ElectronMacosNotificationCapabilities"
       },
       "factory": {
@@ -10625,9 +10637,11 @@
         "name": "createElectronNotificationCapabilities"
       },
       "line": 177,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronNotification.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13655,12 +13669,13 @@
     },
     {
       "argument": {
-        "fields": [],
-        "kind": "other"
+        "fields": [
+          "destroy",
+          "subscribe"
+        ],
+        "kind": "object"
       },
-      "blockers": [
-        "non-object-construction"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -13676,16 +13691,21 @@
       "line": 123,
       "normalizations": [],
       "source": "upstream/packages/host-web/src/webMediasession.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
-        "fields": [],
-        "kind": "other"
+        "fields": [
+          "clearMetadata",
+          "clearPositionState",
+          "destroy",
+          "setMetadata",
+          "setPlaybackState",
+          "setPositionState"
+        ],
+        "kind": "object"
       },
-      "blockers": [
-        "non-object-construction"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -13701,7 +13721,7 @@
       "line": 322,
       "normalizations": [],
       "source": "upstream/packages/host-web/src/webMediasession.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -14531,17 +14551,25 @@
     },
     {
       "argument": {
-        "fields": [],
-        "kind": "other"
+        "fields": [
+          "alphaType",
+          "data",
+          "format",
+          "gamut",
+          "height",
+          "kind",
+          "version",
+          "width"
+        ],
+        "kind": "object"
       },
-      "blockers": [
-        "non-object-construction",
-        "unresolved-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "unresolved",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/image/src/imageResourceReference.ts:73:10",
+        "schemaName": "EntityShapeL73C10",
         "type": "Bitmap | PromiseLike<Bitmap | null> | null"
       },
       "factory": {
@@ -14549,9 +14577,11 @@
         "name": "decodeEmbeddedImageResourceReference"
       },
       "line": 73,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/image/src/imageResourceReference.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -17687,19 +17717,19 @@
   ],
   "summary": {
     "bareEntityCalls": 0,
-    "blockedEntityCalls": 13,
+    "blockedEntityCalls": 9,
     "calls": 368,
     "exactEntityCalls": 181,
     "exactEntitySchemas": 146,
     "exactNonEntityCalls": 17,
     "genericEntityCalls": 3,
-    "localEntityCalls": 162,
+    "localEntityCalls": 164,
     "normalizedFieldOrderCalls": 24,
     "normalizedMissingFieldCalls": 9,
     "normalizedSpreadProjectionCalls": 17,
-    "readyEntityCalls": 338,
-    "structuralEntityCalls": 4,
-    "unresolvedCalls": 1
+    "readyEntityCalls": 342,
+    "structuralEntityCalls": 3,
+    "unresolvedCalls": 0
   },
   "upstreamCommit": "98a7a58a934f55555a561a308cc23c1363c45652"
 }

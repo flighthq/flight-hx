@@ -9,17 +9,17 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | Production createEntity calls | 368 |
 | Exact concrete Entity calls | 181 |
 | Exact concrete Entity schemas | 146 |
-| Constructor-ready Entity calls | 338 |
-| Blocked Entity calls | 13 |
+| Constructor-ready Entity calls | 342 |
+| Blocked Entity calls | 9 |
 | Bare Entity calls | 0 |
 | Generic Entity calls | 3 |
-| Private local Entity classes | 162 |
+| Private local Entity classes | 164 |
 | Field-order-normalized calls | 24 |
 | Missing-field-initialized calls | 9 |
 | Spread-projected calls | 17 |
-| Structural Entity calls | 4 |
+| Structural Entity calls | 3 |
 | Exact non-Entity calls | 17 |
-| Unresolved calls | 1 |
+| Unresolved calls | 0 |
 
 ## Concrete Entity identities
 
@@ -87,9 +87,9 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `@flighthq/types:interface#Matrix` | 1 | 1 | 0 | `createMatrix` |
 | `@flighthq/types:interface#Matrix3` | 1 | 1 | 0 | `createMatrix3` |
 | `@flighthq/types:interface#Matrix4` | 1 | 1 | 0 | `createMatrix4` |
-| `@flighthq/types:interface#MediaSessionActionBackend` | 1 | 0 | 1 | `createWebMediaSessionActionBackend` |
+| `@flighthq/types:interface#MediaSessionActionBackend` | 1 | 1 | 0 | `createWebMediaSessionActionBackend` |
 | `@flighthq/types:interface#MediaSessionActionSignal` | 1 | 1 | 0 | `createMediaSessionActionSignal` |
-| `@flighthq/types:interface#MediaSessionBackend` | 1 | 0 | 1 | `createWebMediaSessionBackend` |
+| `@flighthq/types:interface#MediaSessionBackend` | 1 | 1 | 0 | `createWebMediaSessionBackend` |
 | `@flighthq/types:interface#MeshGeometry` | 1 | 1 | 0 | `createMeshGeometryRuntime` |
 | `@flighthq/types:interface#MidiAccess` | 1 | 1 | 0 | `createMidiAccessResource` |
 | `@flighthq/types:interface#MidiInputPort` | 1 | 1 | 0 | `createMidiInputPortResource` |
@@ -211,7 +211,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/camera/src/camera.ts:20:10` | `createCamera3D` | `@flighthq/types:interface#Camera3D` | `contextual` | `object` | 6 | ready | — | — |
 | `upstream/packages/connectivity/src/connectivity.ts:50:10` | `createConnectivity` | `@flighthq/types:interface#Connectivity` | `contextual` | `object` | 5 | ready | — | — |
 | `upstream/packages/dialog/src/fileDialog.ts:26:18` | `createFileDialogHandle` | `@flighthq/types:interface#FileDialogHandle` | `contextual` | `object` | 3 | ready | — | — |
-| `upstream/packages/entity/src/clone.ts:12:10` | `cloneEntity` | `generic-entity` | `contextual` | `other` | 0 | blocked | — | `generic-entity-destination`, `non-object-construction` |
+| `upstream/packages/entity/src/clone.ts:12:10` | `cloneEntity` | `generic-entity` | `contextual` | `object` | 0 | blocked | — | `generic-entity-destination`, `spread-construction` |
 | `upstream/packages/entity/src/host.ts:8:10` | `createHost` | `synthetic-entity:upstream/packages/entity/src/host.ts:8:10` | `contextual` | `object` | 26 | ready | `synthetic-class`, `spread-projection` | — |
 | `upstream/packages/font/src/font.ts:5:10` | `createFont` | `@flighthq/types:interface#Font` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/font/src/glyphOutlineSource.ts:21:10` | `createGlyphRasterizerBackendFromGlyphOutlineSource` | `synthetic-entity:upstream/packages/font/src/glyphOutlineSource.ts:21:10` | `contextual` | `object` | 2 | ready | `synthetic-class` | — |
@@ -297,7 +297,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/host-electron/src/electronMenu.ts:29:18` | `createElectronMenuBackends` | `@flighthq/types:interface#MenuApplicationBackend` | `contextual` | `object` | 2 | not-entity | — | — |
 | `upstream/packages/host-electron/src/electronMenu.ts:44:12` | `createElectronMenuBackends` | `@flighthq/types:interface#MenuPopupBackend` | `contextual` | `object` | 1 | not-entity | — | — |
 | `upstream/packages/host-electron/src/electronMenu.ts:59:13` | `createElectronMenuBackends` | `@flighthq/types:interface#MenuSelectBackend` | `contextual` | `object` | 1 | not-entity | — | — |
-| `upstream/packages/host-electron/src/electronNotification.ts:177:44` | `createElectronNotificationCapabilities` | `structural-entity` | `contextual` | `other` | 0 | blocked | — | `non-object-construction`, `structural-entity-destination` |
+| `upstream/packages/host-electron/src/electronNotification.ts:177:44` | `createElectronNotificationCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronNotification.ts:177:44` | `contextual` | `object` | 6 | ready | `synthetic-class` | — |
 | `upstream/packages/host-electron/src/electronNotification.ts:178:10` | `createElectronNotificationCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronNotification.ts:178:10` | `contextual` | `object` | 2 | ready | `synthetic-class`, `spread-projection` | — |
 | `upstream/packages/host-electron/src/electronPlatform.ts:9:10` | `createElectronPlatformBackend` | `synthetic-entity:upstream/packages/host-electron/src/electronPlatform.ts:9:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
 | `upstream/packages/host-electron/src/electronPower.ts:44:20` | `createElectronPowerBackends` | `@flighthq/types:interface#PowerBatteryHealthBackend` | `type-argument` | `object` | 1 | not-entity | — | — |
@@ -407,8 +407,8 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/host-web/src/webKeyboard.ts:16:10` | `createWebSoftKeyboardChangeBackend` | `synthetic-entity:upstream/packages/host-web/src/webKeyboard.ts:16:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
 | `upstream/packages/host-web/src/webKeyboard.ts:39:10` | `createWebSoftKeyboardInfoBackend` | `synthetic-entity:upstream/packages/host-web/src/webKeyboard.ts:39:10` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
 | `upstream/packages/host-web/src/webKeyboard.ts:53:10` | `createWebSoftKeyboardVisibilityBackend` | `synthetic-entity:upstream/packages/host-web/src/webKeyboard.ts:53:10` | `contextual` | `object` | 2 | ready | `synthetic-class` | — |
-| `upstream/packages/host-web/src/webMediasession.ts:123:10` | `createWebMediaSessionActionBackend` | `@flighthq/types:interface#MediaSessionActionBackend` | `contextual` | `other` | 0 | blocked | — | `non-object-construction` |
-| `upstream/packages/host-web/src/webMediasession.ts:322:10` | `createWebMediaSessionBackend` | `@flighthq/types:interface#MediaSessionBackend` | `contextual` | `other` | 0 | blocked | — | `non-object-construction` |
+| `upstream/packages/host-web/src/webMediasession.ts:123:10` | `createWebMediaSessionActionBackend` | `@flighthq/types:interface#MediaSessionActionBackend` | `contextual` | `object` | 2 | ready | — | — |
+| `upstream/packages/host-web/src/webMediasession.ts:322:10` | `createWebMediaSessionBackend` | `@flighthq/types:interface#MediaSessionBackend` | `contextual` | `object` | 6 | ready | — | — |
 | `upstream/packages/host-web/src/webMidi.ts:111:18` | `createWebMidiProfile` | `synthetic-entity:upstream/packages/host-web/src/webMidi.ts:111:18` | `variable` | `object` | 1 | ready | `synthetic-class` | — |
 | `upstream/packages/host-web/src/webMidi.ts:121:34` | `createWebMidiProfile` | `synthetic-entity:upstream/packages/host-web/src/webMidi.ts:121:34` | `contextual` | `object` | 1 | ready | `synthetic-class` | — |
 | `upstream/packages/host-web/src/webMidi.ts:122:22` | `createWebMidiProfile` | `synthetic-entity:upstream/packages/host-web/src/webMidi.ts:122:22` | `variable` | `object` | 1 | ready | `synthetic-class` | — |
@@ -438,7 +438,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/image/src/imageResourceFrom.ts:18:10` | `createImageResourceFromCanvas` | `@flighthq/types:interface#Image` | `contextual` | `object` | 7 | ready | — | — |
 | `upstream/packages/image/src/imageResourceFrom.ts:30:10` | `createImageResourceFromImageBitmap` | `@flighthq/types:interface#Image` | `contextual` | `object` | 7 | ready | — | — |
 | `upstream/packages/image/src/imageResourceFrom.ts:42:10` | `createImageResourceFromImageElement` | `@flighthq/types:interface#Image` | `contextual` | `object` | 7 | ready | — | — |
-| `upstream/packages/image/src/imageResourceReference.ts:73:10` | `decodeEmbeddedImageResourceReference` | `unresolved` | `contextual` | `other` | 0 | blocked | — | `non-object-construction`, `unresolved-destination` |
+| `upstream/packages/image/src/imageResourceReference.ts:73:10` | `decodeEmbeddedImageResourceReference` | `synthetic-entity:upstream/packages/image/src/imageResourceReference.ts:73:10` | `contextual` | `object` | 8 | ready | `synthetic-class` | — |
 | `upstream/packages/keyboard/src/keyboard.ts:51:10` | `createSoftKeyboard` | `synthetic-entity:upstream/packages/keyboard/src/keyboard.ts:51:10` | `contextual` | `object` | 3 | ready | `synthetic-class` | — |
 | `upstream/packages/lighting/src/ambientLight.ts:13:10` | `createAmbientLight` | `@flighthq/types:interface#AmbientLight` | `contextual` | `object` | 3 | ready | — | — |
 | `upstream/packages/lighting/src/areaLight.ts:8:10` | `cloneAreaLight` | `@flighthq/types:interface#AreaLight` | `contextual` | `object` | 12 | ready | — | — |

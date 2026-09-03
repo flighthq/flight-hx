@@ -914,6 +914,32 @@ typedef ElectronNotificationCapabilitiesFor__electronNotification<Profile> = fli
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
 @:structInit
+private class EntityShapeL177C44__electronNotification {
+  public var click:{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; };
+  public var close:{ var closeAllNotifications:Void->flight._internal._Promise<NotificationLifecycleOutcome>; };
+  public var delivery:{ var notify:NotificationRequest->flight._internal._Promise<NotificationDeliveryOutcome>; };
+  public var dismiss:{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; };
+  public var lifecycle:{ var destroy:Void->flight._internal._Promise<NotificationLifecycleOutcome>; };
+  public var received:{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; };
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(click:{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }, close:{ var closeAllNotifications:Void->flight._internal._Promise<NotificationLifecycleOutcome>; }, delivery:{ var notify:NotificationRequest->flight._internal._Promise<NotificationDeliveryOutcome>; }, dismiss:{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }, lifecycle:{ var destroy:Void->flight._internal._Promise<NotificationLifecycleOutcome>; }, received:{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }):Void {
+    this.__symbol__EntityRuntime = null;
+    this.click = click;
+    this.close = close;
+    this.delivery = delivery;
+    this.dismiss = dismiss;
+    this.lifecycle = lifecycle;
+    this.received = received;
+  }
+}
+#else
+private typedef EntityShapeL177C44__electronNotification = { var click:{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }; var close:{ var closeAllNotifications:Void->flight._internal._Promise<NotificationLifecycleOutcome>; }; var delivery:{ var notify:NotificationRequest->flight._internal._Promise<NotificationDeliveryOutcome>; }; var dismiss:{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }; var lifecycle:{ var destroy:Void->flight._internal._Promise<NotificationLifecycleOutcome>; }; var received:{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:structInit
 private class EntityShapeL178C10__electronNotification {
   public var action:{ var attach:(Notification->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; };
   public var reply:{ var attach:(Notification->String->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; };
@@ -2194,7 +2220,7 @@ class _HostElectron {
     destroyed = false;
     destroyCompleted = false;
     nextId = 1.0;
-    capabilities = (cast { click: (cast (cast _HostElectron.createElectronNotificationEventBackend__electronNotification : flight._internal._Set<Notification->Void>->(Void->Bool)->{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument374:Dynamic = clickListeners; __callArgument374; }), ({ final __callArgument375:Dynamic = function():Bool return destroyed; __callArgument375; })) : { var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }), close: { closeAllNotifications: closeAll }, delivery: { notify: function(request:NotificationRequest):flight._internal._Promise<NotificationDeliveryOutcome> {
+    capabilities = (cast ({ click: (cast (cast _HostElectron.createElectronNotificationEventBackend__electronNotification : flight._internal._Set<Notification->Void>->(Void->Bool)->{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument374:Dynamic = clickListeners; __callArgument374; }), ({ final __callArgument375:Dynamic = function():Bool return destroyed; __callArgument375; })) : { var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }), close: { closeAllNotifications: closeAll }, delivery: { notify: function(request:NotificationRequest):flight._internal._Promise<NotificationDeliveryOutcome> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var invalid:Array<String> = cast _Runtime.UNDEFINED;
         var id:String = cast _Runtime.UNDEFINED;
@@ -2320,7 +2346,7 @@ class _HostElectron {
           });
         })
       );
-    } }, received: (cast (cast _HostElectron.createElectronNotificationEventBackend__electronNotification : flight._internal._Set<Notification->Void>->(Void->Bool)->{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument421:Dynamic = receivedListeners; __callArgument421; }), ({ final __callArgument422:Dynamic = function():Bool return destroyed; __callArgument422; })) : { var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) });
+    } }, received: (cast (cast _HostElectron.createElectronNotificationEventBackend__electronNotification : flight._internal._Set<Notification->Void>->(Void->Bool)->{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument421:Dynamic = receivedListeners; __callArgument421; }), ({ final __callArgument422:Dynamic = function():Bool return destroyed; __callArgument422; })) : { var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) } : EntityShapeL177C44__electronNotification));
     if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'platform'), 'macos') : Bool)) { return cast (cast createEntity((cast capabilities : Dynamic)) : { >Entity, var delivery:NotificationDeliveryBackend; var close:NotificationCloseBackend; var click:NotificationClickBackend; var lifecycle:NotificationLifecycleBackend; var dismiss:NotificationDismissBackend; var received:NotificationReceivedBackend; }); }
     return cast (cast createEntity((cast (#if flight_struct_typedef _Runtime.mergeObjects([capabilities, { action: (cast (cast _HostElectron.createElectronNotificationEventBackend__electronNotification : flight._internal._Set<Notification->String->Void>->(Void->Bool)->{ var attach:(Notification->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument425:Dynamic = actionListeners; __callArgument425; }), ({ final __callArgument426:Dynamic = function():Bool return destroyed; __callArgument426; })) : { var attach:(Notification->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) }, { reply: (cast (cast _HostElectron.createElectronNotificationEventBackend__electronNotification : flight._internal._Set<Notification->String->String->Void>->(Void->Bool)->{ var attach:(Notification->String->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument429:Dynamic = replyListeners; __callArgument429; }), ({ final __callArgument430:Dynamic = function():Bool return destroyed; __callArgument430; })) : { var attach:(Notification->String->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([capabilities, { action: (cast (cast _HostElectron.createElectronNotificationEventBackend__electronNotification : flight._internal._Set<Notification->String->Void>->(Void->Bool)->{ var attach:(Notification->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument425:Dynamic = actionListeners; __callArgument425; }), ({ final __callArgument426:Dynamic = function():Bool return destroyed; __callArgument426; })) : { var attach:(Notification->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) }, { reply: (cast (cast _HostElectron.createElectronNotificationEventBackend__electronNotification : flight._internal._Set<Notification->String->String->Void>->(Void->Bool)->{ var attach:(Notification->String->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument429:Dynamic = replyListeners; __callArgument429; }), ({ final __callArgument430:Dynamic = function():Bool return destroyed; __callArgument430; })) : { var attach:(Notification->String->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) }]); ({ action: _Runtime.field(__structInitSource, 'action'), reply: _Runtime.field(__structInitSource, 'reply'), delivery: _Runtime.field(__structInitSource, 'delivery'), close: _Runtime.field(__structInitSource, 'close'), click: _Runtime.field(__structInitSource, 'click'), lifecycle: _Runtime.field(__structInitSource, 'lifecycle'), dismiss: _Runtime.field(__structInitSource, 'dismiss'), received: _Runtime.field(__structInitSource, 'received') } : EntityShapeL178C10__electronNotification); }) #end) : Dynamic)) : EntityShapeL178C10__electronNotification);
     return cast null;

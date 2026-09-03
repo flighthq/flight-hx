@@ -10,12 +10,12 @@ This is a construction, structural-flow, and observability census. It does not e
 | Direct field accesses | 26054 |
 | Declared optional fields | 2583 |
 | Declared required-undefined fields | 3 |
-| Production object literals | 2515 |
+| Production object literals | 2517 |
 | Production object literals omitting optional fields | 549 |
 | Production object literals with spread | 234 |
 | Production object literals with computed keys | 8 |
 | Test object literals | 7150 |
-| Cross-schema transfers | 2193 |
+| Cross-schema transfers | 2191 |
 | Anonymous structural transfers | 229 |
 | Dynamic ingresses | 72 |
 | Production enumerations | 12 |
@@ -25,8 +25,8 @@ This is a construction, structural-flow, and observability census. It does not e
 | Exported input signature references | 10470 |
 | Exported output signature references | 2387 |
 | Vitest oracle observations | 393 |
-| Mechanically compatible schemas | 1696 |
-| Schemas requiring normalization | 505 |
+| Mechanically compatible schemas | 1698 |
+| Schemas requiring normalization | 503 |
 | Schemas requiring observability review | 326 |
 
 Counts below are per canonical schema. Exact source locations and related schema identities are in `typed-struct-classes.json`.
@@ -1066,11 +1066,11 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#MediaFileCapturePhoto` | 0 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#MediaFileCaptureVideo` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#MedianEffect` | 0 | 2 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 1 | 0 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
-| `@flighthq/types:interface#MediaSessionActionBackend` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#MediaSessionActionBackend` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#MediaSessionActionDetails` | 0 | 4 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | no | `anonymous-structural-transfer` | — |
 | `@flighthq/types:interface#MediaSessionActionSignal` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#MediaSessionArtwork` | 0 | 3 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#MediaSessionBackend` | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#MediaSessionBackend` | 0 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#MediaSessionMetadata` | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#MediaSessionOperationOutcome` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#MediaSessionPositionState` | 8 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |

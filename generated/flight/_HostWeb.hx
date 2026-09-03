@@ -5079,7 +5079,7 @@ class _HostWeb {
       (cast _HostWeb.assertSyncVoid__webMediasession : flight._internal._Nothing->Void)(({ (cast (cast lane : WebMediaSessionActionLane__webMediasession).session : flight._internal.dom.MediaSession).setActionHandler((cast lane : WebMediaSessionActionLane__webMediasession).action, null); _Runtime.UNDEFINED; }));
       finishLane((cast lane : Dynamic));
     });
-    backend = (cast { destroy: function():Void {
+    backend = (cast ({ destroy: function():Void {
       for (sessionLanes in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(((cast lanes : flight._internal._Map<flight._internal.dom.MediaSession, flight._internal._Map<MediaSessionAction, WebMediaSessionActionLane__webMediasession>>).values()))]))) {
         for (lane in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(((cast sessionLanes : flight._internal._Map<MediaSessionAction, WebMediaSessionActionLane__webMediasession>).values()))]))) {
           var ownership:Null<WebMediaSessionOwnership__webMediasession> = ((cast _HostWeb._webMediaSessionOwnership__webMediasession : flight._internal._WeakMap<flight._internal.dom.MediaSession, WebMediaSessionOwnership__webMediasession>).get((cast lane : WebMediaSessionActionLane__webMediasession).session));
@@ -5143,7 +5143,7 @@ class _HostWeb {
       ((cast (cast lane : WebMediaSessionActionLane__webMediasession).subscriptions : flight._internal._Set<WebMediaSessionActionSubscription__webMediasession>).add(subscription));
       return cast function():Void { release((cast lane : Dynamic), (cast subscription : Dynamic)); };
       return cast _Runtime.UNDEFINED;
-    } });
+    } } : MediaSessionActionBackend));
     return cast (cast createEntity(({ final __callArgument841:Dynamic = backend; __callArgument841; })) : { >Entity, var subscribe:MediaSessionAction->(MediaSessionActionDetails->Void)->Null<Void->Void>; var destroy:Void->Void; });
     return cast null;
   }
@@ -5154,7 +5154,7 @@ class _HostWeb {
     var backend:{ var clearMetadata:Void->MediaSessionClearMetadataOutcome; var clearPositionState:Void->MediaSessionClearPositionStateOutcome; var destroy:Void->Void; var setMetadata:MediaSessionMetadata->MediaSessionSetMetadataOutcome; var setPlaybackState:MediaSessionPlaybackState->MediaSessionSetPlaybackStateOutcome; var setPositionState:MediaSessionPositionState->MediaSessionSetPositionStateOutcome; } = cast _Runtime.UNDEFINED;
     owner = (cast {  });
     publications = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
-    backend = (cast { clearMetadata: function():MediaSessionClearMetadataOutcome {
+    backend = (cast ({ clearMetadata: function():MediaSessionClearMetadataOutcome {
       var session:Null<flight._internal.dom.MediaSession> = cast _Runtime.UNDEFINED;
       var ownership:WebMediaSessionOwnership__webMediasession = cast _Runtime.UNDEFINED;
       var prior:Null<WebMediaSessionOwnedValue__webMediasession<flight._internal.dom.MediaMetadata>> = cast _Runtime.UNDEFINED;
@@ -5332,7 +5332,7 @@ class _HostWeb {
       if ((cast _Runtime.strictEquals((cast ownership : WebMediaSessionOwnership__webMediasession).positionState, owner) : Bool)) { ((cast (cast _HostWeb.getCommandPublication__webMediasession((cast publications : Dynamic), ({ final __callArgument883:Dynamic = session; __callArgument883; })) : WebMediaSessionCommandPublication__webMediasession) : WebMediaSessionCommandPublication__webMediasession).positionState = true); }
       return cast _HostWeb.OK__webMediasession;
       return cast _Runtime.UNDEFINED;
-    } });
+    } } : MediaSessionBackend));
     return cast (cast createEntity((cast backend : Dynamic)) : { >Entity, var destroy:Void->Void; var setPositionState:MediaSessionPositionState->MediaSessionSetPositionStateOutcome; var clearMetadata:Void->MediaSessionClearMetadataOutcome; var clearPositionState:Void->MediaSessionClearPositionStateOutcome; var setMetadata:MediaSessionMetadata->MediaSessionSetMetadataOutcome; var setPlaybackState:MediaSessionPlaybackState->MediaSessionSetPlaybackStateOutcome; });
     return cast null;
   }
