@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._Particles)
+@:keep
 @:structInit
 class ParticleEmitterState {
   public var burstTimer:Float;

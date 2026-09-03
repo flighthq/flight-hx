@@ -266,6 +266,7 @@ typedef WgpuRichTextData__wgpuRichText = { >RendererData, var surface:Null<Raste
 
 #if !flight_struct_typedef
 @:allow(flight._Scene2DWgpu)
+@:keep
 @:structInit
 private class EntityShapeL43C33__wgpuRichText {
   public var surface:flight._internal._Any;
@@ -284,6 +285,7 @@ typedef WgpuScale9ShapeData__wgpuScale9Shape = { >RendererData, var lastH:Float;
 
 #if !flight_struct_typedef
 @:allow(flight._Scene2DWgpu)
+@:keep
 @:structInit
 private class EntityShapeL49C33__wgpuScale9Shape {
   public var lastH:Float;
@@ -312,6 +314,7 @@ private typedef EntityShapeL49C33__wgpuScale9Shape = { var lastH:Float; var last
 
 #if !flight_struct_typedef
 @:allow(flight._Scene2DWgpu)
+@:keep
 @:structInit
 private class EntityShapeL29C33__wgpuShapeData {
   public var surface:flight._internal._Any;
@@ -344,6 +347,7 @@ typedef WgpuTextLabelData__wgpuTextLabel = { >RendererData, var surface:Null<Ras
 
 #if !flight_struct_typedef
 @:allow(flight._Scene2DWgpu)
+@:keep
 @:structInit
 private class EntityShapeL46C33__wgpuTextLabel {
   public var surface:flight._internal._Any;

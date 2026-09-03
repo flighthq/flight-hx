@@ -8,6 +8,7 @@ import flight._internal._Runtime;
 @:allow(flight._Shape)
 @:allow(flight.types.MorphShape)
 @:allow(flight.types.Scale9Shape)
+@:keep
 @:structInit
 class Shape<TData = Dynamic> extends flight.types.Node2D<TData> {
 

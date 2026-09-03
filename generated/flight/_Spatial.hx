@@ -28,6 +28,7 @@ typedef Bvh3D__bvh3D = { var margin:Float; var root:Float; var minX:Array<Float>
 
 #if !flight_struct_typedef
 @:allow(flight._Spatial)
+@:keep
 @:structInit
 private class EntityShapeL42C23__bvh3D {
   public var clearSpatialIndex:Void->Void;
@@ -64,6 +65,7 @@ typedef UniformGrid__uniformGrid = { var cellSize:Float; var cells:flight._inter
 
 #if !flight_struct_typedef
 @:allow(flight._Spatial)
+@:keep
 @:structInit
 private class EntityShapeL61C23__uniformGrid {
   public var insertSpatialObject:Float->SpatialAabb2D->Bool;
@@ -100,6 +102,7 @@ typedef UniformGrid3D__uniformGrid3D = { var cellSize:Float; var cells:flight._i
 
 #if !flight_struct_typedef
 @:allow(flight._Spatial)
+@:keep
 @:structInit
 private class EntityShapeL48C23__uniformGrid3D {
   public var insertSpatialObject:Float->SpatialAabb3D->Bool;

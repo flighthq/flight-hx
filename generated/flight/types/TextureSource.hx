@@ -10,6 +10,7 @@ import flight._internal._Runtime;
 @:allow(flight.types.ExternalTexture)
 @:allow(flight.types.Image)
 @:allow(flight.types.RenderTarget)
+@:keep
 @:structInit
 class TextureSource<TKind = Dynamic> {
   public var __symbol__EntityRuntime:Null<EntityRuntime>;

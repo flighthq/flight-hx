@@ -173,6 +173,7 @@ import flight.types.StatusBarVisibilityBackend;
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
+@:keep
 @:structInit
 private class EntityShapeL38C28__capacitorApp {
   public var subscribe:(Void->Void)->(Void->Void);
@@ -189,6 +190,7 @@ private typedef EntityShapeL38C28__capacitorApp = { var subscribe:(Void->Void)->
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
+@:keep
 @:structInit
 private class EntityShapeL46C24__capacitorApp {
   public var getName:Void->String;
@@ -205,6 +207,7 @@ private typedef EntityShapeL46C24__capacitorApp = { var getName:Void->String; @:
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
+@:keep
 @:structInit
 private class EntityShapeL47C27__capacitorApp {
   public var getVersion:Void->String;
@@ -221,6 +224,7 @@ private typedef EntityShapeL47C27__capacitorApp = { var getVersion:Void->String;
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
+@:keep
 @:structInit
 private class EntityShapeL50C23__capacitorApp {
   public var hide:{ >Entity, var hideApp:Void->flight._internal._Any; };
@@ -245,6 +249,7 @@ private typedef EntityShapeL50C23__capacitorApp = { var hide:{ >Entity, var hide
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
+@:keep
 @:structInit
 private class EntityShapeL52C24__capacitorApp {
   public var hideApp:Void->flight._internal._Any;
@@ -261,6 +266,7 @@ private typedef EntityShapeL52C24__capacitorApp = { var hideApp:Void->flight._in
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
+@:keep
 @:structInit
 private class EntityShapeL53C24__capacitorApp {
   public var quit:Void->flight._internal._Any;
@@ -279,6 +285,7 @@ typedef CapacitorClipboardBackend__capacitorClipboard = { var hasImage:Void->fli
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
+@:keep
 @:structInit
 private class EntityShapeL15C23__capacitorClipboard {
   public var readText:Void->flight._internal._Promise<String>;
@@ -309,6 +316,7 @@ typedef CapacitorConnectivityBackend__capacitorConnectivity = { var getStatus:Co
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
+@:keep
 @:structInit
 private class EntityShapeL70C23__capacitorConnectivity {
   public var destroy:Void->Void;
@@ -329,6 +337,7 @@ private typedef EntityShapeL70C23__capacitorConnectivity = { var destroy:Void->V
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
+@:keep
 @:structInit
 private class EntityShapeL42C23__capacitorDevice {
   public var getCapabilities:DeviceCapabilities->DeviceCapabilities;
@@ -353,6 +362,7 @@ private typedef EntityShapeL42C23__capacitorDevice = { var getCapabilities:Devic
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
+@:keep
 @:structInit
 private class EntityShapeL8C23__capacitorDialog {
   public var message:MessageDialogOptions->flight._internal._Promise<{ var buttonIndex:Float; var cancelled:Bool; var checkboxChecked:Bool; }>;
@@ -371,6 +381,7 @@ private typedef EntityShapeL8C23__capacitorDialog = { var message:MessageDialogO
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
+@:keep
 @:structInit
 private class EntityShapeL31C23__capacitorDialog {
   public var prompt:PromptDialogOptions->flight._internal._Promise<Null<String>>;
@@ -387,6 +398,7 @@ private typedef EntityShapeL31C23__capacitorDialog = { var prompt:PromptDialogOp
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
+@:keep
 @:structInit
 private class EntityShapeL14C23__capacitorFileSystem {
   public var readTextFile:String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Null<String>>;
@@ -429,6 +441,7 @@ private typedef EntityShapeL14C23__capacitorFileSystem = { var readTextFile:Stri
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
+@:keep
 @:structInit
 private class EntityShapeL24C23__capacitorGeolocation {
   public var getCurrentPosition:GeolocationRequestOptions->flight._internal._Promise<Null<GeoPosition>>;
@@ -457,6 +470,7 @@ typedef OmitRuntime__capacitorKeyboard<T> = flight._internal._Omit<T, Dynamic>;
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
+@:keep
 @:structInit
 private class EntityShapeL32C23__capacitorKeyboard {
   public var setAccessoryBarVisible:Bool->flight._internal._Promise<SoftKeyboardSetterResult>;
@@ -473,6 +487,7 @@ private typedef EntityShapeL32C23__capacitorKeyboard = { var setAccessoryBarVisi
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
+@:keep
 @:structInit
 private class EntityShapeL46C23__capacitorKeyboard {
   public var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>;
@@ -489,6 +504,7 @@ private typedef EntityShapeL46C23__capacitorKeyboard = { var subscribe:(Void->Vo
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
+@:keep
 @:structInit
 private class EntityShapeL83C23__capacitorKeyboard {
   public var getInfo:SoftKeyboardInfo->SoftKeyboardInfo;
@@ -505,6 +521,7 @@ private typedef EntityShapeL83C23__capacitorKeyboard = { var getInfo:SoftKeyboar
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
+@:keep
 @:structInit
 private class EntityShapeL98C23__capacitorKeyboard {
   public var setResizeMode:String->flight._internal._Promise<SoftKeyboardSetterResult>;
@@ -521,6 +538,7 @@ private typedef EntityShapeL98C23__capacitorKeyboard = { var setResizeMode:Strin
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
+@:keep
 @:structInit
 private class EntityShapeL113C23__capacitorKeyboard {
   public var setScrollAssistEnabled:Bool->flight._internal._Promise<SoftKeyboardSetterResult>;
@@ -537,6 +555,7 @@ private typedef EntityShapeL113C23__capacitorKeyboard = { var setScrollAssistEna
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
+@:keep
 @:structInit
 private class EntityShapeL126C23__capacitorKeyboard {
   public var setStyle:String->flight._internal._Promise<SoftKeyboardSetterResult>;
@@ -553,6 +572,7 @@ private typedef EntityShapeL126C23__capacitorKeyboard = { var setStyle:String->f
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
+@:keep
 @:structInit
 private class EntityShapeL141C23__capacitorKeyboard {
   public var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>;
@@ -571,6 +591,7 @@ private typedef EntityShapeL141C23__capacitorKeyboard = { var show:Void->flight.
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
+@:keep
 @:structInit
 private class EntityShapeL10C24__capacitorProtocol {
   public var subscribe:(String->Void)->(Void->Void);
@@ -589,6 +610,7 @@ typedef CapacitorHost__capacitorRegister<Profile> = flight._internal._Intersecti
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
+@:keep
 @:structInit
 private class EntityShapeL103C23__capacitorRegister {
   public var accessibility:{  };
@@ -655,6 +677,7 @@ private typedef EntityShapeL103C23__capacitorRegister = { var accessibility:{  }
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
+@:keep
 @:structInit
 private class EntityShapeL40C23__capacitorStatusBar {
   public var getInfo:StatusBarInfo->StatusBarInfo;

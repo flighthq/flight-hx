@@ -49,6 +49,7 @@ typedef ResolveImageBitmapComposition__imageResourceReference = EmbeddedImageRes
 
 #if !flight_struct_typedef
 @:allow(flight._Image)
+@:keep
 @:structInit
 private class EntityShapeL63C48__imageResourceReference {
   public var alphaType:AlphaType;

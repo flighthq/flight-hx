@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._Tilemap)
+@:keep
 @:structInit
 class Tilemap extends flight.types.Node2D<TilemapData> {
 

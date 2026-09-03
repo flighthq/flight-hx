@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._Skeleton3D)
+@:keep
 @:structInit
 class Skeleton3D {
   public var __symbol__EntityRuntime:Null<EntityRuntime>;

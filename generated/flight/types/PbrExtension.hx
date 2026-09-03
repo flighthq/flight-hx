@@ -12,6 +12,7 @@ import flight._internal._Runtime;
 @:allow(flight.types.SpecularPbrExtension)
 @:allow(flight.types.TransmissionVolumePbrExtension)
 @:allow(flight.types.WrappedDiffusePbrExtension)
+@:keep
 @:structInit
 class PbrExtension<TKind = Dynamic> {
   public var __symbol__EntityRuntime:Null<EntityRuntime>;

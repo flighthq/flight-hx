@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._Shading)
+@:keep
 @:structInit
 class ShadedMaterial extends flight.types.SurfaceMaterial<Dynamic> {
   public var diffuse:Float;

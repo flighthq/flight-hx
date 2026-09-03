@@ -13,6 +13,7 @@ import flight._internal._Runtime;
 @:allow(flight.types.HemisphereLight)
 @:allow(flight.types.PointLight)
 @:allow(flight.types.SpotLight)
+@:keep
 @:structInit
 class Light<TKind = Dynamic> {
   public var __symbol__EntityRuntime:Null<EntityRuntime>;

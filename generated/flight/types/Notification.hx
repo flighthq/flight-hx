@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._Notification)
+@:keep
 @:structInit
 class Notification {
   public var __symbol__EntityRuntime:Null<EntityRuntime>;

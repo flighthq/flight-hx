@@ -9,6 +9,7 @@ import flight._internal._Runtime;
 @:allow(flight.types.Billboard)
 @:allow(flight.types.Mesh)
 @:allow(flight.types.ParticleEmitter3D)
+@:keep
 @:structInit
 class Node3D<TData = Dynamic> {
   public var __symbol__EntityRuntime:Null<NodeRuntime<Node3DTraits>>;

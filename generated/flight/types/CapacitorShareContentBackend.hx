@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
+@:keep
 @:structInit
 class CapacitorShareContentBackend extends flight.types.ShareContentBackend<ShareContent->CapacitorShareContentOptions->flight._internal._Promise<Bool>, ShareContent->CapacitorShareContentOptions->flight._internal._Promise<ShareResult>> {
 

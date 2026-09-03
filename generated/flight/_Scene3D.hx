@@ -157,6 +157,7 @@ import flight.types.Vector3Like;
 
 #if !flight_struct_typedef
 @:allow(flight._Scene3D)
+@:keep
 @:structInit
 private class EntityShapeL109C35__sceneDocument {
   public var inverseBindMatrices:flight._internal._Float32Array;

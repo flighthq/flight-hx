@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._Camera)
+@:keep
 @:structInit
 class Camera2D {
   public var rotation:Float;

@@ -8,6 +8,7 @@ import flight._Types.ImageTextureSourceKind;
 #if !flight_struct_typedef
 @:allow(flight._Image)
 @:allow(flight._Texture)
+@:keep
 @:structInit
 class Image extends flight.types.TextureSource<Dynamic> {
   public var source:flight._internal.dom.CanvasImageSource;

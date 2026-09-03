@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._ParticleEmitter)
+@:keep
 @:structInit
 class ParticleEmitter3D extends flight.types.Node3D<ParticleEmitterData> {
   public var blendMode:ParticleBlendMode;

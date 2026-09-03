@@ -32,6 +32,7 @@ import flight.types.TextureSource;
 
 #if !flight_struct_typedef
 @:allow(flight._GlyphAtlas)
+@:keep
 @:structInit
 private class EntityShapeL12C23__glyphRasterizerBackend {
   public var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>;

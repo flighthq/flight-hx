@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._Texture)
+@:keep
 @:structInit
 class Sampler {
   public var __symbol__EntityRuntime:Null<EntityRuntime>;

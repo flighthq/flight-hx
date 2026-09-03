@@ -7,6 +7,7 @@ import flight._internal._Runtime;
 #if !flight_struct_typedef
 @:noCompletion
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 class ElectronCommonAppCapabilities {
   public var __symbol__EntityRuntime:Null<EntityRuntime>;

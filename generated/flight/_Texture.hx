@@ -53,6 +53,7 @@ typedef CreateTextureCubeOptions__texture = flight._internal._Extract<CreateText
 
 #if !flight_struct_typedef
 @:allow(flight._Texture)
+@:keep
 @:structInit
 private class EntityShapeL48C27__texture {
   public var dimension:String;
@@ -87,6 +88,7 @@ private typedef EntityShapeL48C27__texture = { var dimension:String; var sources
 
 #if !flight_struct_typedef
 @:allow(flight._Texture)
+@:keep
 @:structInit
 private class EntityShapeL54C27__texture {
   public var dimension:String;
@@ -121,6 +123,7 @@ private typedef EntityShapeL54C27__texture = { var dimension:String; var source:
 
 #if !flight_struct_typedef
 @:allow(flight._Texture)
+@:keep
 @:structInit
 private class EntityShapeL59C27__texture {
   public var dimension:String;
@@ -155,6 +158,7 @@ private typedef EntityShapeL59C27__texture = { var dimension:String; var sources
 
 #if !flight_struct_typedef
 @:allow(flight._Texture)
+@:keep
 @:structInit
 private class EntityShapeL119C30__texture {
   public var dimension:String;
@@ -189,6 +193,7 @@ private typedef EntityShapeL119C30__texture = { var dimension:String; var source
 
 #if !flight_struct_typedef
 @:allow(flight._Texture)
+@:keep
 @:structInit
 private class EntityShapeL126C30__texture {
   public var dimension:String;
@@ -223,6 +228,7 @@ private typedef EntityShapeL126C30__texture = { var dimension:String; var source
 
 #if !flight_struct_typedef
 @:allow(flight._Texture)
+@:keep
 @:structInit
 private class EntityShapeL133C30__texture {
   public var dimension:String;

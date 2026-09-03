@@ -344,6 +344,7 @@ typedef WebAppCapabilities__webApp = { @:optional var __symbol__EntityRuntime:Nu
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL8C23__webApp {
   public var badge:{ >Entity, var setBadgeCount:Float->flight._internal._Promise<Bool>; };
@@ -372,6 +373,7 @@ private typedef EntityShapeL8C23__webApp = { var badge:{ >Entity, var setBadgeCo
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL9C25__webApp {
   public var setBadgeCount:Float->flight._internal._Promise<Bool>;
@@ -388,6 +390,7 @@ private typedef EntityShapeL9C25__webApp = { var setBadgeCount:Float->flight._in
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL21C25__webApp {
   public var focus:Void->Void;
@@ -404,6 +407,7 @@ private typedef EntityShapeL21C25__webApp = { var focus:Void->Void; @:optional v
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL28C26__webApp {
   public var getLocale:Void->String;
@@ -424,6 +428,7 @@ private typedef EntityShapeL28C26__webApp = { var getLocale:Void->String; var ge
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL43C24__webApp {
   public var getName:Void->String;
@@ -440,6 +445,7 @@ private typedef EntityShapeL43C24__webApp = { var getName:Void->String; @:option
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL48C24__webApp {
   public var quit:Void->Void;
@@ -456,6 +462,7 @@ private typedef EntityShapeL48C24__webApp = { var quit:Void->Void; @:optional va
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL55C25__webApp {
   public var subscribe:(Void->Void)->(Void->Void);
@@ -472,6 +479,7 @@ private typedef EntityShapeL55C25__webApp = { var subscribe:(Void->Void)->(Void-
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL70C28__webApp {
   public var relaunch:Void->Void;
@@ -488,6 +496,7 @@ private typedef EntityShapeL70C28__webApp = { var relaunch:Void->Void; @:optiona
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL7C23__webBitmapReadback {
   public var readBitmap:flight._internal._Any->Float->Float->BitmapReadbackMode->flight._internal._Union2<{ var bitmap:flight._internal._Any; var reason:String; }, { var bitmap:Bitmap; var reason:String; }>;
@@ -506,6 +515,7 @@ typedef WebClipboardBackend__webClipboard = { var getFormats:Void->flight._inter
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL113C23__webClipboard {
   public var readFormat:String->flight._internal._Promise<String>;
@@ -562,6 +572,7 @@ typedef WebConnectivityConnection__webConnectivity = { @:optional var type:Strin
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL17C23__webConnectivity {
   public var destroy:Void->Void;
@@ -584,6 +595,7 @@ private typedef EntityShapeL17C23__webConnectivity = { var destroy:Void->Void; v
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL5C23__webCursor {
   public var setCursor:Null<flight._internal._Union2<String, flight._internal._Intersection2<String, flight._internal._Record<flight._internal._Any, flight._internal._Any>>>>->Void;
@@ -616,6 +628,7 @@ typedef WindowWithFileSystemAccess__webDialog = { @:optional var showDirectoryPi
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL20C59__webDialog {
   public var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>;
@@ -632,6 +645,7 @@ private typedef EntityShapeL20C59__webDialog = { var open:OpenDirectoryDialogOpt
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL24C54__webDialog {
   public var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>;
@@ -648,6 +662,7 @@ private typedef EntityShapeL24C54__webDialog = { var open:OpenFileDialogOptions-
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL28C54__webDialog {
   public var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>;
@@ -664,6 +679,7 @@ private typedef EntityShapeL28C54__webDialog = { var save:SaveFileDialogOptions-
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL6C23__webFontLoading {
   public var addFontFace:flight._internal.dom.FontFace->Void;
@@ -686,6 +702,7 @@ private typedef EntityShapeL6C23__webFontLoading = { var addFontFace:flight._int
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL12C23__webGlyphRasterizer {
   public var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>;
@@ -710,6 +727,7 @@ typedef WebKeyboardGeometry__webKeyboard = { var height:Float; var width:Float; 
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL16C23__webKeyboard {
   public var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>;
@@ -726,6 +744,7 @@ private typedef EntityShapeL16C23__webKeyboard = { var subscribe:(Void->Void)->f
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL39C23__webKeyboard {
   public var getInfo:SoftKeyboardInfo->SoftKeyboardInfo;
@@ -742,6 +761,7 @@ private typedef EntityShapeL39C23__webKeyboard = { var getInfo:SoftKeyboardInfo-
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL53C23__webKeyboard {
   public var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>;
@@ -774,6 +794,7 @@ typedef WebMidiProfileApi__webMidi = { @:optional var permissions:flight._intern
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL111C31__webMidi {
   public var requestAccess:Void->flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>>;
@@ -790,6 +811,7 @@ private typedef EntityShapeL111C31__webMidi = { var requestAccess:Void->flight._
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL121C47__webMidi {
   public var access:{ >Entity, var requestAccess:Void->flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>>; };
@@ -806,6 +828,7 @@ private typedef EntityShapeL121C47__webMidi = { var access:{ >Entity, var reques
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL122C35__webMidi {
   public var getPermission:Void->flight._internal._Promise<PermissionQueryOutcome>;
@@ -822,6 +845,7 @@ private typedef EntityShapeL122C35__webMidi = { var getPermission:Void->flight._
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL125C23__webMidi {
   public var access:{ >Entity, var requestAccess:Void->flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>>; };
@@ -840,6 +864,7 @@ private typedef EntityShapeL125C23__webMidi = { var access:{ >Entity, var reques
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL140C41__webMidi {
   public var release:Void->flight._internal._Promise<{ var reason:String; }>;
@@ -862,6 +887,7 @@ typedef WebWakeLockSentinel__webPower = { @:optional var addEventListener:String
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL181C50__webPower {
   public var keepAwake:PowerKeepAwakeBackend;
@@ -886,6 +912,7 @@ typedef WebProtocolCapabilities__webProtocol = { @:optional var __symbol__Entity
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL8C23__webProtocol {
   public var launch:{ >Entity, var getLaunchUrl:Void->Null<String>; };
@@ -904,6 +931,7 @@ private typedef EntityShapeL8C23__webProtocol = { var launch:{ >Entity, var getL
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL9C26__webProtocol {
   public var getLaunchUrl:Void->Null<String>;
@@ -920,6 +948,7 @@ private typedef EntityShapeL9C26__webProtocol = { var getLaunchUrl:Void->Null<St
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL20C32__webProtocol {
   public var getRegisteredSchemes:Void->Array<String>;
@@ -946,6 +975,7 @@ typedef OrientationLike__webScreen = { @:optional var angle:Float; @:optional va
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL178C30__webScreen {
   public var destroy:Void->Void;
@@ -968,6 +998,7 @@ private typedef EntityShapeL178C30__webScreen = { var destroy:Void->Void; var ge
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL221C31__webScreen {
   public var subscribe:(ScreenChangeEvent->Void)->(Void->Void);
@@ -984,6 +1015,7 @@ private typedef EntityShapeL221C31__webScreen = { var subscribe:(ScreenChangeEve
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL242C39__webScreen {
   public var queryPermission:Void->flight._internal._Promise<ScreenPermissionState>;
@@ -1002,6 +1034,7 @@ private typedef EntityShapeL242C39__webScreen = { var queryPermission:Void->flig
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL272C41__webScreen {
   public var subscribe:(ScreenPermissionState->Void)->(Void->Void);
@@ -1022,6 +1055,7 @@ typedef WebStorageBackend__webStorage = { var clear:Void->StorageClearResult; va
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL20C47__webStorage {
   public var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>;
@@ -1050,6 +1084,7 @@ private typedef EntityShapeL20C47__webStorage = { var clear:Void->flight._intern
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL14C43__webStoragePersistence {
   public var requestPersistence:Void->flight._internal._Promise<StoragePersistenceResult>;
@@ -1066,6 +1101,7 @@ private typedef EntityShapeL14C43__webStoragePersistence = { var requestPersiste
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 private class EntityShapeL36C32__webStoragePersistence {
   public var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>;

@@ -25,6 +25,7 @@ import flight.types.RectangleLike;
 
 #if !flight_struct_typedef
 @:allow(flight._Font)
+@:keep
 @:structInit
 private class EntityShapeL21C23__glyphOutlineSource {
   public var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>;

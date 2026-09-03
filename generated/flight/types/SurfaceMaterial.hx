@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight.types.ShadedMaterial)
+@:keep
 @:structInit
 class SurfaceMaterial<TKind = Dynamic> extends flight.types.Material<TKind> {
   public var alphaCutoff:Float;

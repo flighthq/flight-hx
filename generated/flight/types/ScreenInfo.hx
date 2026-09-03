@@ -7,6 +7,7 @@ import flight._internal._Runtime;
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
 @:allow(flight._Screen)
+@:keep
 @:structInit
 class ScreenInfo {
   public var __symbol__EntityRuntime:Null<EntityRuntime>;

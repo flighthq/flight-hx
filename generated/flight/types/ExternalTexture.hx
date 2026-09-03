@@ -8,6 +8,7 @@ import flight._Types.ExternalTextureSourceKind;
 #if !flight_struct_typedef
 @:allow(flight._RenderGl)
 @:allow(flight._RenderWgpu)
+@:keep
 @:structInit
 class ExternalTexture extends flight.types.TextureSource<Dynamic> {
 

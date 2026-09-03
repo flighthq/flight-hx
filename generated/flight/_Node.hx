@@ -113,6 +113,7 @@ import flight.types.ViewportScaleMode;
 
 #if !flight_struct_typedef
 @:allow(flight._Node)
+@:keep
 @:structInit
 private class EntityShapeL20C1__node {
   public var data:Null<flight._internal._Object>;

@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 class WebServiceWorkerNotificationCapabilities {
   public var __symbol__EntityRuntime:Null<EntityRuntime>;

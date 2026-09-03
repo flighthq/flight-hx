@@ -7,6 +7,7 @@ import flight._Types.CompressedImageTextureSourceKind;
 
 #if !flight_struct_typedef
 @:allow(flight._Image)
+@:keep
 @:structInit
 class CompressedImage extends flight.types.TextureSource<Dynamic> {
   public var compressed:CompressedImageData;

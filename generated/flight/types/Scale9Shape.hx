@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._Shape)
+@:keep
 @:structInit
 class Scale9Shape extends flight.types.Shape<Scale9ShapeData> {
 

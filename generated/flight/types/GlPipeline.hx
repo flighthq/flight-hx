@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._RenderGl)
+@:keep
 @:structInit
 class GlPipeline {
   public var __symbol__EntityRuntime:Null<EntityRuntime>;

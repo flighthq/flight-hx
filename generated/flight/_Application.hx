@@ -73,6 +73,7 @@ typedef ApplicationRenderViewRuntime__applicationRenderView<State, Target> = { >
 
 #if !flight_struct_typedef
 @:allow(flight._Application)
+@:keep
 @:structInit
 private class EntityShapeL43C29__applicationRenderView {
   public var renderState:flight._internal._Any;

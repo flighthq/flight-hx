@@ -640,6 +640,11 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
         classCondition,
         ...completionMetadata,
         ...(declaration.cppStructInitConstructorAllowModules ?? []).map((owner) => `@:allow(${owner})`),
+        // Record construction may survive through reflection even when DCE
+        // sees no direct read of a subclass-owned field. Retain the complete
+        // nominal layout so hxcpp never emits constructor writes to stripped
+        // members.
+        '@:keep',
         '@:structInit',
         `${modifier}class ${safeName(declaration.name)}${classGenerics}${classExtends} {`,
       ];

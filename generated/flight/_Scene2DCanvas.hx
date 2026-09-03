@@ -261,6 +261,7 @@ typedef CanvasTextLabelData__canvasTextLabel = { >RendererData, var lastContentI
 
 #if !flight_struct_typedef
 @:allow(flight._Scene2DCanvas)
+@:keep
 @:structInit
 private class EntityShapeL25C23__canvasTextLabel {
   public var lastContentId:Float;

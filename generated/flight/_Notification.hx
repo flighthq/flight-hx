@@ -62,6 +62,7 @@ typedef NotificationSubscriptionRuntime__notification = { var attachment:Null<No
 
 #if !flight_struct_typedef
 @:allow(flight._Notification)
+@:keep
 @:structInit
 private class EntityShapeL157C41__notification {
   public var onNotificationAction:Signal<Notification->String->Void>;
@@ -78,6 +79,7 @@ private typedef EntityShapeL157C41__notification = { var onNotificationAction:Si
 
 #if !flight_struct_typedef
 @:allow(flight._Notification)
+@:keep
 @:structInit
 private class EntityShapeL163C41__notification {
   public var onNotificationClick:Signal<Notification->Void>;
@@ -94,6 +96,7 @@ private typedef EntityShapeL163C41__notification = { var onNotificationClick:Sig
 
 #if !flight_struct_typedef
 @:allow(flight._Notification)
+@:keep
 @:structInit
 private class EntityShapeL169C41__notification {
   public var onNotificationDismiss:Signal<Notification->Void>;
@@ -110,6 +113,7 @@ private typedef EntityShapeL169C41__notification = { var onNotificationDismiss:S
 
 #if !flight_struct_typedef
 @:allow(flight._Notification)
+@:keep
 @:structInit
 private class EntityShapeL175C41__notification {
   public var onNotificationReceived:Signal<Notification->Void>;
@@ -126,6 +130,7 @@ private typedef EntityShapeL175C41__notification = { var onNotificationReceived:
 
 #if !flight_struct_typedef
 @:allow(flight._Notification)
+@:keep
 @:structInit
 private class EntityShapeL181C41__notification {
   public var onNotificationReply:Signal<Notification->String->String->Void>;

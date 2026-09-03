@@ -8,6 +8,7 @@ import flight._internal._Runtime;
 @:allow(flight._Materials)
 @:allow(flight.types.StandardMaterial)
 @:allow(flight.types.SurfaceMaterial)
+@:keep
 @:structInit
 class Material<TKind = Dynamic> {
   public var __symbol__EntityRuntime:Null<EntityRuntime>;

@@ -63,6 +63,7 @@ typedef MidiSubscriptionRuntime__midiSubscription = { var attachment:Null<MidiEv
 
 #if !flight_struct_typedef
 @:allow(flight._Midi)
+@:keep
 @:structInit
 private class EntityShapeL68C33__midiSubscription {
   public var onMidiAccessStateChange:Signal<MidiPort->Void>;
@@ -79,6 +80,7 @@ private typedef EntityShapeL68C33__midiSubscription = { var onMidiAccessStateCha
 
 #if !flight_struct_typedef
 @:allow(flight._Midi)
+@:keep
 @:structInit
 private class EntityShapeL72C33__midiSubscription {
   public var onMidiInputMessage:Signal<MidiInputMessage->Void>;
@@ -95,6 +97,7 @@ private typedef EntityShapeL72C33__midiSubscription = { var onMidiInputMessage:S
 
 #if !flight_struct_typedef
 @:allow(flight._Midi)
+@:keep
 @:structInit
 private class EntityShapeL76C33__midiSubscription {
   public var onMidiPortStateChange:Signal<MidiPort->Void>;

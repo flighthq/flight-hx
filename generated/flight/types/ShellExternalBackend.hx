@@ -8,6 +8,7 @@ import flight._internal._Runtime;
 @:allow(flight._HostElectron)
 @:allow(flight._HostTauri)
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 class ShellExternalBackend {
   public var __symbol__EntityRuntime:Null<EntityRuntime>;

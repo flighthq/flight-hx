@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._Node)
+@:keep
 @:structInit
 class Viewport {
   public var __symbol__EntityRuntime:Null<EntityRuntime>;

@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._Scene3D)
+@:keep
 @:structInit
 class Billboard extends flight.types.Node3D<Null<NodeData>> {
   public var geometry:MeshGeometry;

@@ -4096,7 +4096,7 @@ describe('typed struct analysis', () => {
 
     expect(result.lowered.diagnostics).toEqual([]);
     expect(output).toContain(
-      '#if !flight_struct_typedef\n@:allow(flight.types.CameraPilot)\n@:structInit\nclass Camera2D {',
+      '#if !flight_struct_typedef\n@:allow(flight.types.CameraPilot)\n@:keep\n@:structInit\nclass Camera2D {',
     );
     expect(output).toContain(
       'private function new(rotation:Float, viewportHeight:Float, viewportWidth:Float, x:Float, y:Float, zoom:Float):Void',
@@ -4516,7 +4516,7 @@ describe('typed struct analysis', () => {
 
     expect(result.lowered.diagnostics).toEqual([]);
     expect(synthetic.packagePrivate).toBe(true);
-    expect(output).toContain('@:allow(flight.EntityFixture)\n@:structInit\nprivate class EntityShapeL');
+    expect(output).toContain('@:allow(flight.EntityFixture)\n@:keep\n@:structInit\nprivate class EntityShapeL');
     expect(output).toContain('private function new(run:Void->Float):Void');
     expect(output).not.toContain('private function new():Void');
     expect(output).toMatch(/function createProvider[\s\S]*: EntityShapeL\d+C\d+/u);
@@ -5802,10 +5802,10 @@ describe('typed struct analysis', () => {
       `cpp @:structInit schemas are not provenance-closed: ${rectangleId}, ${rectangleLikeId}`,
     );
     expect(readFileSync('generated/flight/types/ParticleEmitter2D.hx', 'utf8')).toContain(
-      '@:allow(flight._ParticleEmitter)\n@:structInit\nclass ParticleEmitter2D extends flight.types.Node2D<ParticleEmitterData> {',
+      '@:allow(flight._ParticleEmitter)\n@:keep\n@:structInit\nclass ParticleEmitter2D extends flight.types.Node2D<ParticleEmitterData> {',
     );
     expect(readFileSync('generated/flight/types/ParticleEmitter3D.hx', 'utf8')).toContain(
-      '@:allow(flight._ParticleEmitter)\n@:structInit\nclass ParticleEmitter3D extends flight.types.Node3D<ParticleEmitterData> {',
+      '@:allow(flight._ParticleEmitter)\n@:keep\n@:structInit\nclass ParticleEmitter3D extends flight.types.Node3D<ParticleEmitterData> {',
     );
     expect(readFileSync('generated/flight/types/NodeData.hx', 'utf8')).toContain(
       'typedef NodeData = flight._internal._Object;',
@@ -5857,6 +5857,7 @@ describe('typed struct analysis', () => {
       const generated = readFileSync(`generated/flight/types/${name}.hx`, 'utf8');
       expect(generated, name).toContain('#if !flight_struct_typedef');
       expect(generated, name).toContain('@:allow(');
+      expect(generated, name).toContain('@:keep');
       expect(generated, name).toContain('@:structInit');
       expect(generated, name).toMatch(new RegExp(`class ${name}(?:<[^\\n]+>)?(?: extends [^\\n]+)? \\{`, 'u'));
       expect(generated, name).toContain('private function new(');

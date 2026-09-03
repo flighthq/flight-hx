@@ -8,6 +8,7 @@ import flight._Types.BitmapTextureSourceKind;
 #if !flight_struct_typedef
 @:allow(flight._Bitmap)
 @:allow(flight._HostWeb)
+@:keep
 @:structInit
 class Bitmap extends flight.types.TextureSource<Dynamic> {
   public var data:flight._internal._UInt8ClampedArray;

@@ -17,6 +17,7 @@ import flight._internal._Runtime;
 @:allow(flight.types.Sprite)
 @:allow(flight.types.TextLabel)
 @:allow(flight.types.Tilemap)
+@:keep
 @:structInit
 class Node2D<TData = Dynamic> {
   public var __symbol__EntityRuntime:Null<Dynamic>;

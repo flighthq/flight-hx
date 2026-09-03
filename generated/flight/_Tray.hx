@@ -84,6 +84,7 @@ typedef EventBackend__tray<Event> = { var getSignal:TrayIcon->Null<Signal<Event-
 
 #if !flight_struct_typedef
 @:allow(flight._Tray)
+@:keep
 @:structInit
 private class EntityShapeL75C16__tray {
   public var __symbol__EntityRuntime:Null<Dynamic>;

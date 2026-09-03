@@ -182,6 +182,7 @@ typedef GlRenderTargetStorage__glRenderTarget = { >RenderTargetAxes, var framebu
 
 #if !flight_struct_typedef
 @:allow(flight._RenderGl)
+@:keep
 @:structInit
 private class EntityShapeL85C31__glRenderTarget {
   public var requestedAxes:RenderTargetAxes;

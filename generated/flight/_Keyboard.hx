@@ -33,6 +33,7 @@ import flight.types.SoftKeyboardVisibilityResult;
 
 #if !flight_struct_typedef
 @:allow(flight._Keyboard)
+@:keep
 @:structInit
 private class EntityShapeL51C23__keyboard {
   public var onShow:Signal<Float->Void>;

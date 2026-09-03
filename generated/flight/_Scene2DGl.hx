@@ -279,6 +279,7 @@ typedef GlRichTextData__glRichText = { >RendererData, var surface:Null<Raster2DS
 
 #if !flight_struct_typedef
 @:allow(flight._Scene2DGl)
+@:keep
 @:structInit
 private class EntityShapeL43C23__glRichText {
   public var surface:flight._internal._Any;
@@ -297,6 +298,7 @@ typedef GlScale9ShapeData__glScale9Shape = { >RendererData, var lastH:Float; var
 
 #if !flight_struct_typedef
 @:allow(flight._Scene2DGl)
+@:keep
 @:structInit
 private class EntityShapeL50C23__glScale9Shape {
   public var lastH:Float;
@@ -325,6 +327,7 @@ private typedef EntityShapeL50C23__glScale9Shape = { var lastH:Float; var lastSc
 
 #if !flight_struct_typedef
 @:allow(flight._Scene2DGl)
+@:keep
 @:structInit
 private class EntityShapeL28C23__glShapeData {
   public var surface:flight._internal._Any;
@@ -355,6 +358,7 @@ typedef GlTextLabelData__glTextLabel = { >RendererData, var surface:Null<Raster2
 
 #if !flight_struct_typedef
 @:allow(flight._Scene2DGl)
+@:keep
 @:structInit
 private class EntityShapeL50C23__glTextLabel {
   public var surface:flight._internal._Any;

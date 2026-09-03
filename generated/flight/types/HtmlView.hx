@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._Scene2D)
+@:keep
 @:structInit
 class HtmlView extends flight.types.Node2D<HtmlViewData> {
 

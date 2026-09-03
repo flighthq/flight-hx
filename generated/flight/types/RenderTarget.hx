@@ -7,6 +7,7 @@ import flight._Types.RenderTargetTextureSourceKind;
 
 #if !flight_struct_typedef
 @:allow(flight._Texture)
+@:keep
 @:structInit
 class RenderTarget extends flight.types.TextureSource<Dynamic> {
   public var format:RenderTargetFormat;

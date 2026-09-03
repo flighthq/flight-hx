@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._Materials)
+@:keep
 @:structInit
 class StandardMaterial extends flight.types.Material<StandardMaterialKind> {
 

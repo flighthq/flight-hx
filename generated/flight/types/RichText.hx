@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._Text)
+@:keep
 @:structInit
 class RichText extends flight.types.TextLabel<RichTextData> {
 

@@ -156,6 +156,7 @@ typedef Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve = { var node
 
 #if (!flight_struct_typedef && !js)
 @:allow(flight._Scene3DResources)
+@:keep
 @:structInit
 private class EntityShapeL42C23__sceneResourceResolver {
   public var fetch:ImageResourceFetch;

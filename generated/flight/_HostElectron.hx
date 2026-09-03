@@ -256,6 +256,7 @@ import flight.types.WindowOptions;
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL42C36__electronApp {
   public var subscribe:(Void->Void)->(Void->Void);
@@ -272,6 +273,7 @@ private typedef EntityShapeL42C36__electronApp = { var subscribe:(Void->Void)->(
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL43C25__electronApp {
   public var focus:Void->Void;
@@ -288,6 +290,7 @@ private typedef EntityShapeL43C25__electronApp = { var focus:Void->Void; @:optio
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL44C26__electronApp {
   public var getLocale:Void->String;
@@ -308,6 +311,7 @@ private typedef EntityShapeL44C26__electronApp = { var getLocale:Void->String; v
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL49C24__electronApp {
   public var getName:Void->String;
@@ -324,6 +328,7 @@ private typedef EntityShapeL49C24__electronApp = { var getName:Void->String; @:o
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL50C29__electronApp {
   public var setName:String->Void;
@@ -340,6 +345,7 @@ private typedef EntityShapeL50C29__electronApp = { var setName:String->Void; @:o
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL51C24__electronApp {
   public var getAppDirectoryPath:AppPathKind->String;
@@ -360,6 +366,7 @@ private typedef EntityShapeL51C24__electronApp = { var getAppDirectoryPath:AppPa
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL56C24__electronApp {
   public var quit:Void->Void;
@@ -376,6 +383,7 @@ private typedef EntityShapeL56C24__electronApp = { var quit:Void->Void; @:option
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL57C31__electronApp {
   public var subscribe:((Void->Void)->Void)->(Void->Void);
@@ -392,6 +400,7 @@ private typedef EntityShapeL57C31__electronApp = { var subscribe:((Void->Void)->
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL65C25__electronApp {
   public var subscribe:(Void->Void)->(Void->Void);
@@ -408,6 +417,7 @@ private typedef EntityShapeL65C25__electronApp = { var subscribe:(Void->Void)->(
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL66C28__electronApp {
   public var relaunch:Void->Void;
@@ -424,6 +434,7 @@ private typedef EntityShapeL66C28__electronApp = { var relaunch:Void->Void; @:op
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL67C34__electronApp {
   public var subscribe:(Array<String>->Void)->(Void->Void);
@@ -440,6 +451,7 @@ private typedef EntityShapeL67C34__electronApp = { var subscribe:(Array<String>-
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL72C34__electronApp {
   public var hasSingleInstanceLock:Void->Bool;
@@ -460,6 +472,7 @@ private typedef EntityShapeL72C34__electronApp = { var hasSingleInstanceLock:Voi
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL77C27__electronApp {
   public var getVersion:Void->String;
@@ -476,6 +489,7 @@ private typedef EntityShapeL77C27__electronApp = { var getVersion:Void->String; 
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL83C25__electronApp {
   public var activate:{ >Entity, var subscribe:(Void->Void)->(Void->Void); };
@@ -536,6 +550,7 @@ private typedef EntityShapeL83C25__electronApp = { var activate:{ >Entity, var s
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL85C30__electronApp {
   public var subscribe:(Void->Void)->(Void->Void);
@@ -552,6 +567,7 @@ private typedef EntityShapeL85C30__electronApp = { var subscribe:(Void->Void)->(
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL86C38__electronApp {
   public var setActivationPolicy:String->Void;
@@ -568,6 +584,7 @@ private typedef EntityShapeL86C38__electronApp = { var setActivationPolicy:Strin
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL89C27__electronApp {
   public var setBadgeCount:Float->flight._internal._Promise<Bool>;
@@ -584,6 +601,7 @@ private typedef EntityShapeL89C27__electronApp = { var setBadgeCount:Float->flig
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL90C26__electronApp {
   public var bounceDock:Void->Float;
@@ -610,6 +628,7 @@ private typedef EntityShapeL90C26__electronApp = { var bounceDock:Void->Float; v
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL100C30__electronApp {
   public var subscribe:(String->Void)->(Void->Void);
@@ -626,6 +645,7 @@ private typedef EntityShapeL100C30__electronApp = { var subscribe:(String->Void)
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL105C33__electronApp {
   public var isAppHidden:Void->Bool;
@@ -642,6 +662,7 @@ private typedef EntityShapeL105C33__electronApp = { var isAppHidden:Void->Bool; 
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL106C26__electronApp {
   public var hideApp:Void->Void;
@@ -658,6 +679,7 @@ private typedef EntityShapeL106C26__electronApp = { var hideApp:Void->Void; @:op
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL108C26__electronApp {
   public var showApp:Void->Void;
@@ -674,6 +696,7 @@ private typedef EntityShapeL108C26__electronApp = { var showApp:Void->Void; @:op
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL113C25__electronApp {
   public var loginItem:{ >Entity, var getLoginItem:Void->{ var args:Array<flight._internal._Any>; var openAsHidden:Bool; var openAtLogin:Bool; var path:String; }; var setLoginItem:AppLoginItemLike->Void; };
@@ -720,6 +743,7 @@ private typedef EntityShapeL113C25__electronApp = { var loginItem:{ >Entity, var
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL117C33__electronApp {
   public var setUserModelId:String->Void;
@@ -736,6 +760,7 @@ private typedef EntityShapeL117C33__electronApp = { var setUserModelId:String->V
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL121C23__electronApp {
   public var badge:{ >Entity, var setBadgeCount:Float->flight._internal._Promise<Bool>; };
@@ -778,6 +803,7 @@ private typedef EntityShapeL121C23__electronApp = { var badge:{ >Entity, var set
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL123C25__electronApp {
   public var setBadgeCount:Float->flight._internal._Promise<Bool>;
@@ -794,6 +820,7 @@ private typedef EntityShapeL123C25__electronApp = { var setBadgeCount:Float->fli
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL128C23__electronApp {
   public var getLoginItem:Void->{ var args:Array<flight._internal._Any>; var openAsHidden:Bool; var openAtLogin:Bool; var path:String; };
@@ -812,6 +839,7 @@ private typedef EntityShapeL128C23__electronApp = { var getLoginItem:Void->{ var
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL150C23__electronApp {
   public var addRecentDocument:String->Void;
@@ -832,6 +860,7 @@ typedef ElectronClipboardBackend__electronClipboard = { var readBookmark:Void->f
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL23C23__electronClipboard {
   public var readText:Void->flight._internal._Promise<String>;
@@ -884,6 +913,7 @@ private typedef EntityShapeL23C23__electronClipboard = { var readText:Void->flig
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL18C23__electronDialog {
   public var open:Null<OpenDirectoryDialogOptions>->flight._internal._Promise<DirectoryOpenDialogResult>;
@@ -900,6 +930,7 @@ private typedef EntityShapeL18C23__electronDialog = { var open:Null<OpenDirector
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL40C23__electronDialog {
   public var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>;
@@ -916,6 +947,7 @@ private typedef EntityShapeL40C23__electronDialog = { var open:OpenFileDialogOpt
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL67C23__electronDialog {
   public var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>;
@@ -934,6 +966,7 @@ typedef ElectronNotificationCapabilitiesFor__electronNotification<Profile> = fli
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL75C89__electronNotification {
   public var click:{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; };
@@ -960,6 +993,7 @@ private typedef EntityShapeL75C89__electronNotification = { var click:{ var atta
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL178C23__electronNotification {
   public var action:{ var attach:(Notification->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; };
@@ -990,6 +1024,7 @@ private typedef EntityShapeL178C23__electronNotification = { var action:{ var at
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL9C23__electronPlatform {
   public var getInfo:PlatformInfo->PlatformInfo;
@@ -1006,6 +1041,7 @@ private typedef EntityShapeL9C23__electronPlatform = { var getInfo:PlatformInfo-
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL7C37__electronProtocol {
   public var getRegisteredSchemes:Void->Array<String>;
@@ -1024,6 +1060,7 @@ private typedef EntityShapeL7C37__electronProtocol = { var getRegisteredSchemes:
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL16C27__electronProtocol {
   public var isDefault:String->Bool;
@@ -1044,6 +1081,7 @@ private typedef EntityShapeL16C27__electronProtocol = { var isDefault:String->Bo
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL25C24__electronProtocol {
   public var subscribe:(String->Void)->(Void->Void);
@@ -1060,6 +1098,7 @@ private typedef EntityShapeL25C24__electronProtocol = { var subscribe:(String->V
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL33C37__electronProtocol {
   public var isRegistered:String->Bool;
@@ -1076,6 +1115,7 @@ private typedef EntityShapeL33C37__electronProtocol = { var isRegistered:String-
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL34C34__electronProtocol {
   public var unregister:String->Bool;
@@ -1096,6 +1136,7 @@ typedef ElectronMacosHost__electronRegister = { var accessibility:HostAccessibil
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL157C23__electronRegister {
   public var accessibility:{  };
@@ -1162,6 +1203,7 @@ private typedef EntityShapeL157C23__electronRegister = { var accessibility:{  };
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL17C30__electronScreen {
   public var getCursorPosition:{ var x:Float; var y:Float; }->{ var x:Float; var y:Float; };
@@ -1182,6 +1224,7 @@ private typedef EntityShapeL17C30__electronScreen = { var getCursorPosition:{ va
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL36C31__electronScreen {
   public var subscribe:(ScreenChangeEvent->Void)->(Void->Void);
@@ -1198,6 +1241,7 @@ private typedef EntityShapeL36C31__electronScreen = { var subscribe:(ScreenChang
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL46C28__electronShortcut {
   public var __symbol__EntityRuntime:Null<Dynamic>;
@@ -1216,6 +1260,7 @@ typedef StorageRecordResult__electronStorage = flight._internal._Union2<{ var re
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL76C23__electronStorage {
   public var clear:Void->{ var reason:String; };
@@ -1244,6 +1289,7 @@ typedef TrayRecord__electronTray = { var balloonActive:Bool; var balloonEvents:S
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL51C34__electronTray {
   public var create:TrayIcon->TrayIconOptions->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
@@ -1266,6 +1312,7 @@ private typedef EntityShapeL51C34__electronTray = { var create:TrayIcon->TrayIco
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL114C30__electronTray {
   public var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
@@ -1282,6 +1329,7 @@ private typedef EntityShapeL114C30__electronTray = { var set:TrayIcon->String->f
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL134C32__electronTray {
   public var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var tooltip:flight._internal._Any; }, { var outcome:String; var tooltip:String; }>>;
@@ -1300,6 +1348,7 @@ private typedef EntityShapeL134C32__electronTray = { var get:TrayIcon->flight._i
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL154C29__electronTray {
   public var set:TrayIcon->Array<MenuItemTemplate>->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
@@ -1316,6 +1365,7 @@ private typedef EntityShapeL154C29__electronTray = { var set:TrayIcon->Array<Men
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL177C26__electronTray {
   public var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<{ var outcome:String; @:optional var bounds:flight._internal._Any; @:optional var error:flight._internal._Any; }, { var bounds:{ var height:Float; var width:Float; var x:Float; var y:Float; }; var outcome:String; @:optional var error:flight._internal._Any; }>, { var error:flight._internal._Any; var outcome:String; @:optional var bounds:flight._internal._Any; }>>;
@@ -1332,6 +1382,7 @@ private typedef EntityShapeL177C26__electronTray = { var get:TrayIcon->flight._i
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL189C37__electronTray {
   public var getSignal:TrayIcon->Null<Signal<TrayInteractionEvent->Void>>;
@@ -1348,6 +1399,7 @@ private typedef EntityShapeL189C37__electronTray = { var getSignal:TrayIcon->Nul
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL192C39__electronTray {
   public var getSignal:TrayIcon->Null<Signal<TrayMenuSelectionEvent->Void>>;
@@ -1364,6 +1416,7 @@ private typedef EntityShapeL192C39__electronTray = { var getSignal:TrayIcon->Nul
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL195C29__electronTray {
   public var popup:TrayIcon->Null<Vector2Like>->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
@@ -1380,6 +1433,7 @@ private typedef EntityShapeL195C29__electronTray = { var popup:TrayIcon->Null<Ve
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL213C39__electronTray {
   public var setIgnore:TrayIcon->Bool->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
@@ -1396,6 +1450,7 @@ private typedef EntityShapeL213C39__electronTray = { var setIgnore:TrayIcon->Boo
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL220C32__electronTray {
   public var getSignal:TrayIcon->Null<Signal<TrayDropEvent->Void>>;
@@ -1412,6 +1467,7 @@ private typedef EntityShapeL220C32__electronTray = { var getSignal:TrayIcon->Nul
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL221C34__electronTray {
   public var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
@@ -1428,6 +1484,7 @@ private typedef EntityShapeL221C34__electronTray = { var set:TrayIcon->String->f
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL239C35__electronTray {
   public var set:TrayIcon->Bool->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
@@ -1444,6 +1501,7 @@ private typedef EntityShapeL239C35__electronTray = { var set:TrayIcon->Bool->fli
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL252C27__electronTray {
   public var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var title:flight._internal._Any; }, { var outcome:String; var title:String; }>>;
@@ -1462,6 +1520,7 @@ private typedef EntityShapeL252C27__electronTray = { var get:TrayIcon->flight._i
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL280C29__electronTray {
   public var display:TrayIcon->TrayBalloonOptions->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
@@ -1480,6 +1539,7 @@ private typedef EntityShapeL280C29__electronTray = { var display:TrayIcon->TrayB
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
+@:keep
 @:structInit
 private class EntityShapeL313C35__electronTray {
   public var getSignal:TrayIcon->Null<Signal<TrayBalloonEvent->Void>>;

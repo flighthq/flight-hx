@@ -129,6 +129,7 @@ import flight.types.WindowOptions;
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
+@:keep
 @:structInit
 private class EntityShapeL21C26__tauriApp {
   public var getLocale:Void->String;
@@ -149,6 +150,7 @@ private typedef EntityShapeL21C26__tauriApp = { var getLocale:Void->String; var 
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
+@:keep
 @:structInit
 private class EntityShapeL26C24__tauriApp {
   public var getName:Void->String;
@@ -165,6 +167,7 @@ private typedef EntityShapeL26C24__tauriApp = { var getName:Void->String; @:opti
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
+@:keep
 @:structInit
 private class EntityShapeL27C24__tauriApp {
   public var hideApp:Void->flight._internal._Any;
@@ -181,6 +184,7 @@ private typedef EntityShapeL27C24__tauriApp = { var hideApp:Void->flight._intern
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
+@:keep
 @:structInit
 private class EntityShapeL28C24__tauriApp {
   public var quit:Void->flight._internal._Any;
@@ -197,6 +201,7 @@ private typedef EntityShapeL28C24__tauriApp = { var quit:Void->flight._internal.
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
+@:keep
 @:structInit
 private class EntityShapeL29C28__tauriApp {
   public var relaunch:Void->flight._internal._Any;
@@ -213,6 +218,7 @@ private typedef EntityShapeL29C28__tauriApp = { var relaunch:Void->flight._inter
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
+@:keep
 @:structInit
 private class EntityShapeL30C24__tauriApp {
   public var showApp:Void->flight._internal._Any;
@@ -229,6 +235,7 @@ private typedef EntityShapeL30C24__tauriApp = { var showApp:Void->flight._intern
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
+@:keep
 @:structInit
 private class EntityShapeL31C27__tauriApp {
   public var getVersion:Void->String;
@@ -245,6 +252,7 @@ private typedef EntityShapeL31C27__tauriApp = { var getVersion:Void->String; @:o
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
+@:keep
 @:structInit
 private class EntityShapeL20C23__tauriDialog {
   public var open:Null<OpenDirectoryDialogOptions>->flight._internal._Promise<DirectoryOpenDialogResult>;
@@ -261,6 +269,7 @@ private typedef EntityShapeL20C23__tauriDialog = { var open:Null<OpenDirectoryDi
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
+@:keep
 @:structInit
 private class EntityShapeL43C23__tauriDialog {
   public var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>;
@@ -277,6 +286,7 @@ private typedef EntityShapeL43C23__tauriDialog = { var open:OpenFileDialogOption
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
+@:keep
 @:structInit
 private class EntityShapeL70C23__tauriDialog {
   public var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>;
@@ -295,6 +305,7 @@ typedef TauriHost__tauriRegister<Profile> = flight._internal._Intersection2<flig
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
+@:keep
 @:structInit
 private class EntityShapeL96C23__tauriRegister {
   public var accessibility:{  };
@@ -361,6 +372,7 @@ private typedef EntityShapeL96C23__tauriRegister = { var accessibility:{  }; var
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
+@:keep
 @:structInit
 private class EntityShapeL48C28__tauriShortcut {
   public var __symbol__EntityRuntime:Null<Dynamic>;
@@ -377,6 +389,7 @@ typedef TrayRecord__tauriTray = { var destroying:Bool; var icon:TauriTrayIcon; v
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
+@:keep
 @:structInit
 private class EntityShapeL39C34__tauriTray {
   public var create:TrayIcon->TrayIconOptions->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
@@ -399,6 +412,7 @@ private typedef EntityShapeL39C34__tauriTray = { var create:TrayIcon->TrayIconOp
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
+@:keep
 @:structInit
 private class EntityShapeL112C30__tauriTray {
   public var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
@@ -415,6 +429,7 @@ private typedef EntityShapeL112C30__tauriTray = { var set:TrayIcon->String->flig
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
+@:keep
 @:structInit
 private class EntityShapeL118C29__tauriTray {
   public var set:TrayIcon->Array<MenuItemTemplate>->flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<{ var error:flight._internal._Any; var outcome:String; }, { var outcome:String; @:optional var error:flight._internal._Any; }>, { var error:flight._internal._Any; var outcome:String; }>, { var error:Array<flight._internal._Any>; var outcome:String; }>>;
@@ -431,6 +446,7 @@ private typedef EntityShapeL118C29__tauriTray = { var set:TrayIcon->Array<MenuIt
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
+@:keep
 @:structInit
 private class EntityShapeL187C39__tauriTray {
   public var getSignal:TrayIcon->Null<Signal<TrayMenuSelectionEvent->Void>>;
@@ -447,6 +463,7 @@ private typedef EntityShapeL187C39__tauriTray = { var getSignal:TrayIcon->Null<S
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
+@:keep
 @:structInit
 private class EntityShapeL192C30__tauriTray {
   public var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var title:flight._internal._Any; }, { var outcome:String; var title:String; }>>;
@@ -465,6 +482,7 @@ private typedef EntityShapeL192C30__tauriTray = { var get:TrayIcon->flight._inte
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
+@:keep
 @:structInit
 private class EntityShapeL208C42__tauriTray {
   public var getSignal:TrayIcon->Null<Signal<TrayInteractionEvent->Void>>;
@@ -481,6 +499,7 @@ private typedef EntityShapeL208C42__tauriTray = { var getSignal:TrayIcon->Null<S
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
+@:keep
 @:structInit
 private class EntityShapeL211C32__tauriTray {
   public var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var tooltip:flight._internal._Any; }, { var outcome:String; var tooltip:String; }>>;
@@ -499,6 +518,7 @@ private typedef EntityShapeL211C32__tauriTray = { var get:TrayIcon->flight._inte
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
+@:keep
 @:structInit
 private class EntityShapeL233C33__tauriTray {
   public var set:TrayIcon->Bool->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;

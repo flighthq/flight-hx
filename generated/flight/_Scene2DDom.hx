@@ -160,6 +160,7 @@ typedef DomRichTextData__domRichText = { >RendererData, var div:Null<flight._int
 
 #if !flight_struct_typedef
 @:allow(flight._Scene2DDom)
+@:keep
 @:structInit
 private class EntityShapeL38C23__domRichText {
   public var div:flight._internal._Any;
@@ -178,6 +179,7 @@ typedef DomScale9ShapeData__domScale9Shape = { >RendererData, var canvas:Null<fl
 
 #if !flight_struct_typedef
 @:allow(flight._Scene2DDom)
+@:keep
 @:structInit
 private class EntityShapeL31C23__domScale9Shape {
   public var canvas:flight._internal._Any;
@@ -198,6 +200,7 @@ typedef DomShapeData__domShape = { >RendererData, var canvas:Null<flight._intern
 
 #if !flight_struct_typedef
 @:allow(flight._Scene2DDom)
+@:keep
 @:structInit
 private class EntityShapeL25C23__domShape {
   public var canvas:flight._internal._Any;
@@ -222,6 +225,7 @@ typedef DomTextData__domTextLabel = { >RendererData, var div:Null<flight._intern
 
 #if !flight_struct_typedef
 @:allow(flight._Scene2DDom)
+@:keep
 @:structInit
 private class EntityShapeL26C23__domTextLabel {
   public var div:flight._internal._Any;

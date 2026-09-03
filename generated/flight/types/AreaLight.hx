@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._Lighting)
+@:keep
 @:structInit
 class AreaLight extends flight.types.Light<String> {
   public var castsShadow:Bool;

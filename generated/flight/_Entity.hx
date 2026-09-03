@@ -42,6 +42,7 @@ import flight.types.WindowBackend;
 
 #if !flight_struct_typedef
 @:allow(flight._Entity)
+@:keep
 @:structInit
 private class EntityShapeL8C23__host {
   public var accessibility:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;

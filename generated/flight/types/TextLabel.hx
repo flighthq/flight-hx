@@ -7,6 +7,7 @@ import flight._internal._Runtime;
 #if !flight_struct_typedef
 @:allow(flight._Text)
 @:allow(flight.types.RichText)
+@:keep
 @:structInit
 class TextLabel<TData = Dynamic> extends flight.types.Node2D<TData> {
 
