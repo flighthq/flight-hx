@@ -45,4 +45,12 @@ beforeAll(() => {
 afterAll(() => {
   vi.useRealTimers();
   vi.unstubAllGlobals();
+  // Upstream gets per-file hermeticity from `vi.resetModules()` + re-import, which discards every
+  // `vi.spyOn` along with the module it patched. The parity run cannot resetModules (it would
+  // re-evaluate the 13 MB compiled Flight singleton per file and OOM), so a namespace spy a file
+  // installs — e.g. scene2d-gl's spies on render-gl draw functions — otherwise survives into the
+  // next file under the shared `isolate:false` worker and silently changes its results. Restore them
+  // once per file: within-file behaviour (spies set in beforeAll/beforeEach) is unchanged, only the
+  // leak across the file boundary is closed.
+  vi.restoreAllMocks();
 });
