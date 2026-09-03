@@ -1319,6 +1319,7 @@ function lowerFunction(
   context.dynamicThisCapture = thisCapture;
   try {
     const loweredParameters = lowerParameterList(node.parameters, context);
+    const nodeAllocator = nodeAllocatorParameter(node, context);
     return {
       async: hasModifier(node, ts.SyntaxKind.AsyncKeyword),
       body: bodyOwnedByPatch ? [] : [...loweredParameters.prefix, ...lowerStatementList(node.body.statements, context)],
@@ -1326,7 +1327,7 @@ function lowerFunction(
       kind: 'function',
       name: node.name.text,
       origin: origin(node, context),
-      parameters: loweredParameters.parameters,
+      parameters: [...loweredParameters.parameters, ...(nodeAllocator ? [nodeAllocator] : [])],
       returns:
         (node.type ? lowerType(node.type, context) : inferredReturnType(node, context)) ??
         (hasModifier(node, ts.SyntaxKind.AsyncKeyword)
@@ -1342,6 +1343,31 @@ function lowerFunction(
     context.classThis = previousClassThis;
     context.dynamicThisCapture = previousDynamicThisCapture;
   }
+}
+
+function nodeAllocatorParameter(node: ts.FunctionDeclaration, context: LoweringContext): IrParameter | undefined {
+  if (!['createNode', 'createNode2D', 'createNode3D'].includes(node.name?.text ?? '')) return undefined;
+  const normalizedSource = node.getSourceFile().fileName.split(path.sep).join('/');
+  const expectedSuffix =
+    node.name?.text === 'createNode'
+      ? '/upstream/packages/node/src/node.ts'
+      : node.name?.text === 'createNode2D'
+        ? '/upstream/packages/scene2d/src/displayObject.ts'
+        : '/upstream/packages/scene3d/src/sceneNode.ts';
+  if (!normalizedSource.endsWith(expectedSuffix) || !context.checker) return undefined;
+  const signature = context.checker.getSignatureFromDeclaration(node);
+  const returnType = signature && context.checker.getReturnTypeOfSignature(signature);
+  if (!returnType) return undefined;
+  const fields = syntheticEntityFieldsForType(returnType, node, context);
+  if (!fields) return undefined;
+  const construction = addSyntheticEntityFactoryDeclaration(node, fields, context);
+  return {
+    initializer: emptyEntityAllocator(construction),
+    name: '__nodeAllocator',
+    optional: true,
+    rest: false,
+    type: { kind: 'function', parameters: [], returns: { kind: 'dynamic' } },
+  };
 }
 
 function lowerFunctionOverload(node: ts.FunctionDeclaration, context: LoweringContext): IrFunctionOverload {
@@ -3814,6 +3840,48 @@ function syntheticEntityFactoryConstruction(
   return addSyntheticEntityFactoryDeclaration(node, fields, context, computedTypes.size > 0);
 }
 
+function syntheticEntityFieldsForType(
+  type: ts.Type,
+  node: ts.Node,
+  context: LoweringContext,
+): IrTypeField[] | undefined {
+  const checker = context.checker;
+  if (!checker) return undefined;
+  const typeParameterNames = enclosingTypeParameterNames(node);
+  const fields: IrTypeField[] = [];
+  for (const property of checker
+    .getPropertiesOfType(type)
+    .filter((candidate) => !candidate.getName().startsWith('__@EntityRuntimeKey@'))) {
+    const location = property.valueDeclaration ?? property.declarations?.[0] ?? node;
+    const checkerType = checker.getTypeOfSymbolAtLocation(property, location);
+    const lowered = lowerCheckerType(checkerType, node, context, new Set()) ?? {
+      kind: 'dynamic' as const,
+      reason: 'checker-known-unrepresentable' as const,
+    };
+    fields.push({
+      name: property.getName(),
+      optional: false,
+      type: eraseLocalTypeParameters(lowered, typeParameterNames),
+    });
+  }
+  return fields;
+}
+
+function emptyEntityAllocator(construction: IrCppStructInitConstruction): IrExpression {
+  return {
+    async: false,
+    body: [],
+    expression: {
+      cppStructInit: { ...construction, missingFieldNames: construction.fieldNames },
+      kind: 'object',
+      properties: [],
+    },
+    kind: 'function',
+    parameters: [],
+    returns: { kind: 'dynamic' },
+  };
+}
+
 function addSyntheticEntityFactoryDeclaration(
   allocation: ts.Node,
   fields: IrTypeField[],
@@ -4052,6 +4120,17 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
       ? freshThisCapture(context)
       : undefined;
     return {
+      ...(isDirectNodeAllocationObject(node)
+        ? {
+            allocator: {
+              arguments: [],
+              callee: { kind: 'identifier', name: '__nodeAllocator' },
+              direct: true,
+              kind: 'call',
+              typeArguments: [],
+            } as IrExpression,
+          }
+        : {}),
       ...(cppStructInit ? { cppStructInit } : {}),
       kind: 'object',
       properties: node.properties.map((property) => {
@@ -4246,10 +4325,14 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
         ? [syntheticOmittedEntityArgument]
         : (checkedCall?.arguments ?? node.arguments.map((argument) => lowerExpression(argument, context)));
     const nativeSymbolKey = nativeUniqueSymbolKeyForCall(node);
+    const nodeFactoryKind = flightNodeFactoryCallKind(node, context.checker);
+    const nodeAllocator = nodeFactoryKind ? nodeAllocatorForCall(node, nodeFactoryKind, context) : undefined;
     return {
       arguments: nativeSymbolKey
         ? [...loweredArguments, { kind: 'literal', value: nativeSymbolKey }]
-        : loweredArguments,
+        : nodeAllocator
+          ? [...loweredArguments, nodeAllocator]
+          : loweredArguments,
       callee,
       ...(syntheticOmittedEntityArgument === undefined && checkedCall?.inferenceCasts.some(Boolean)
         ? { inferenceCastArguments: checkedCall.inferenceCasts }
@@ -4266,7 +4349,7 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
       ...(direct
         ? {
             direct: true,
-            ...(directCalleeType ? { directCalleeType } : {}),
+            ...(directCalleeType && !nodeFactoryKind ? { directCalleeType } : {}),
           }
         : {}),
       kind: 'call',
@@ -4409,6 +4492,82 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
     }
   }
   return unsupported(node, context, `expression ${ts.SyntaxKind[node.kind] ?? node.kind}`);
+}
+
+type FlightNodeFactoryKind = 'createNode' | 'createNode2D' | 'createNode3D';
+
+function flightNodeFactoryCallKind(
+  node: ts.CallExpression,
+  checker: ts.TypeChecker | undefined,
+): FlightNodeFactoryKind | undefined {
+  if (!checker) return undefined;
+  const symbol = originalSymbolAtLocation(node.expression, checker);
+  const declaration = symbol?.valueDeclaration ?? symbol?.declarations?.[0];
+  if (!declaration || !ts.isFunctionDeclaration(declaration) || !declaration.name) return undefined;
+  const name = declaration.name.text;
+  if (!['createNode', 'createNode2D', 'createNode3D'].includes(name)) return undefined;
+  const source = declaration.getSourceFile().fileName.split(path.sep).join('/');
+  const expected =
+    name === 'createNode'
+      ? '/upstream/packages/node/src/node.ts'
+      : name === 'createNode2D'
+        ? '/upstream/packages/scene2d/src/displayObject.ts'
+        : '/upstream/packages/scene3d/src/sceneNode.ts';
+  return source.endsWith(expected) ? (name as FlightNodeFactoryKind) : undefined;
+}
+
+function nodeAllocatorForCall(
+  node: ts.CallExpression,
+  kind: FlightNodeFactoryKind,
+  context: LoweringContext,
+): IrExpression | undefined {
+  const checker = context.checker;
+  const registry = context.typedStructs;
+  if (!checker || !registry) return undefined;
+  const owner = ts.findAncestor(node.parent, (ancestor): ancestor is ts.FunctionDeclaration =>
+    ts.isFunctionDeclaration(ancestor),
+  );
+  if (
+    kind === 'createNode' &&
+    owner?.name &&
+    ['createNode2D', 'createNode3D'].includes(owner.name.text) &&
+    nodeAllocatorParameterOwner(owner)
+  ) {
+    return { kind: 'identifier', name: '__nodeAllocator' };
+  }
+  const destination = entityFactoryDestinationCandidates(node, checker)
+    .map((candidate) => ({ ...candidate, schema: registry.resolveIdentity(candidate.type) }))
+    .find((candidate) => candidate.schema !== undefined && candidate.schema.name !== 'Node');
+  if (!destination?.schema) return undefined;
+  const construction = ['Node2D', 'Node3D'].includes(destination.schema.name)
+    ? (() => {
+        const fields = syntheticEntityFieldsForType(destination.type, node, context);
+        return fields ? addSyntheticEntityFactoryDeclaration(node, fields, context) : undefined;
+      })()
+    : registry.resolveFactoryIdentityConstruction(destination.type);
+  return construction ? emptyEntityAllocator(construction) : undefined;
+}
+
+function nodeAllocatorParameterOwner(node: ts.FunctionDeclaration): boolean {
+  const source = node.getSourceFile().fileName.split(path.sep).join('/');
+  return (
+    (node.name?.text === 'createNode2D' && source.endsWith('/upstream/packages/scene2d/src/displayObject.ts')) ||
+    (node.name?.text === 'createNode3D' && source.endsWith('/upstream/packages/scene3d/src/sceneNode.ts'))
+  );
+}
+
+function isDirectNodeAllocationObject(node: ts.ObjectLiteralExpression): boolean {
+  const source = node.getSourceFile().fileName.split(path.sep).join('/');
+  if (!source.endsWith('/upstream/packages/node/src/node.ts')) return false;
+  const owner = ts.findAncestor(node.parent, (ancestor): ancestor is ts.FunctionDeclaration =>
+    ts.isFunctionDeclaration(ancestor),
+  );
+  return (
+    owner?.name?.text === 'createNode' &&
+    node.properties.some(
+      (property) => 'name' in property && property.name !== undefined && ts.isComputedPropertyName(property.name),
+    )
+  );
 }
 
 function entityCloneSpreadSource(node: ts.ObjectLiteralExpression): ts.Expression | undefined {

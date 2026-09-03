@@ -124,8 +124,8 @@ class Node {
     Facade_Node_flight__Node.convertNodeVector3LocalToGlobal(out, source, point);
   }
 
-  public static function createNode<Traits:flight._internal._Object, Data:NodeData, Runtime:NodeRuntime<Traits>>(nodeKind:Kind, ?obj:PartialNode<flight.types.Node<Traits>>, ?createData:NodeDataFactory<Data>, ?createNodeRuntimeFactory:NodeRuntimeFactory<Runtime>):flight._internal._Intersection2<flight.types.Node<Traits>, Traits> {
-    return cast Facade_Node_flight__Node.createNode(nodeKind, obj, createData, createNodeRuntimeFactory);
+  public static function createNode<Traits:flight._internal._Object, Data:NodeData, Runtime:NodeRuntime<Traits>>(nodeKind:Kind, ?obj:PartialNode<flight.types.Node<Traits>>, ?createData:NodeDataFactory<Data>, ?createNodeRuntimeFactory:NodeRuntimeFactory<Runtime>, ?__nodeAllocator:Void->Dynamic):flight._internal._Intersection2<flight.types.Node<Traits>, Traits> {
+    return cast Facade_Node_flight__Node.createNode(nodeKind, obj, createData, createNodeRuntimeFactory, __nodeAllocator);
     return cast null;
   }
 

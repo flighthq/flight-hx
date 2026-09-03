@@ -186,6 +186,7 @@ type IrExpressionNode =
   | { kind: 'literal'; value: boolean | null | number | string }
   | { kind: 'new'; arguments: IrExpression[]; callee: IrExpression; runtime?: boolean | undefined }
   | {
+      allocator?: IrExpression | undefined;
       cppStructInit?: IrCppStructInitConstruction | undefined;
       kind: 'object';
       properties: IrObjectMember[];

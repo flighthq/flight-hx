@@ -1336,7 +1336,7 @@
       "module": "flight._Net"
     },
     {
-      "declarations": 159,
+      "declarations": 160,
       "diagnostics": [],
       "module": "flight._Node"
     },
@@ -1461,7 +1461,7 @@
       "module": "flight._Requirements"
     },
     {
-      "declarations": 41,
+      "declarations": 42,
       "diagnostics": [],
       "module": "flight._Scene2D"
     },
@@ -1496,7 +1496,7 @@
       "module": "flight._Scene2DWgpu"
     },
     {
-      "declarations": 90,
+      "declarations": 94,
       "diagnostics": [],
       "module": "flight._Scene3D"
     },
@@ -18023,11 +18023,11 @@
       {
         "byReason": {
           "standard-toolkit-boundary": 1,
-          "unclassified": 2
+          "unclassified": 3
         },
         "module": "flight._BitmapText",
         "source": "upstream/packages/bitmaptext/src/bitmapText.ts",
-        "total": 3
+        "total": 4
       },
       {
         "byReason": {
@@ -22136,11 +22136,11 @@
       },
       {
         "byReason": {
-          "unclassified": 1
+          "unclassified": 2
         },
         "module": "flight._MovieClip",
         "source": "upstream/packages/movieclip/src/movieClip.ts",
-        "total": 1
+        "total": 2
       },
       {
         "byReason": {
@@ -22180,11 +22180,12 @@
       {
         "byReason": {
           "source-unknown": 1,
-          "standard-toolkit-boundary": 5
+          "standard-toolkit-boundary": 5,
+          "unclassified": 3
         },
         "module": "flight._Node",
         "source": "upstream/packages/node/src/node.ts",
-        "total": 6
+        "total": 9
       },
       {
         "byReason": {
@@ -22248,20 +22249,21 @@
       {
         "byReason": {
           "standard-toolkit-boundary": 22,
-          "unclassified": 2
+          "unclassified": 3
         },
         "module": "flight._ParticleEmitter",
         "source": "upstream/packages/particleemitter/src/particleEmitter.ts",
-        "total": 24
+        "total": 25
       },
       {
         "byReason": {
           "source-unknown": 2,
-          "standard-toolkit-boundary": 12
+          "standard-toolkit-boundary": 12,
+          "unclassified": 1
         },
         "module": "flight._ParticleEmitter",
         "source": "upstream/packages/particleemitter/src/particleEmitter3D.ts",
-        "total": 14
+        "total": 15
       },
       {
         "byReason": {
@@ -23201,11 +23203,11 @@
         "byReason": {
           "source-any": 2,
           "standard-toolkit-boundary": 27,
-          "unclassified": 2
+          "unclassified": 3
         },
         "module": "flight._QuadBatch",
         "source": "upstream/packages/quadbatch/src/quadBatch.ts",
-        "total": 31
+        "total": 32
       },
       {
         "byReason": {
@@ -23887,20 +23889,21 @@
       },
       {
         "byReason": {
-          "unclassified": 1
+          "unclassified": 2
         },
         "module": "flight._Scene2D",
         "source": "upstream/packages/scene2d/src/displayContainer.ts",
-        "total": 1
+        "total": 2
       },
       {
         "byReason": {
           "source-any": 2,
-          "source-unknown": 1
+          "source-unknown": 1,
+          "unclassified": 3
         },
         "module": "flight._Scene2D",
         "source": "upstream/packages/scene2d/src/displayObject.ts",
-        "total": 3
+        "total": 6
       },
       {
         "byReason": {
@@ -23912,11 +23915,11 @@
       },
       {
         "byReason": {
-          "unclassified": 2
+          "unclassified": 3
         },
         "module": "flight._Scene2D",
         "source": "upstream/packages/scene2d/src/htmlView.ts",
-        "total": 2
+        "total": 3
       },
       {
         "byReason": {
@@ -23929,11 +23932,11 @@
       {
         "byReason": {
           "standard-toolkit-boundary": 8,
-          "unclassified": 4
+          "unclassified": 5
         },
         "module": "flight._Scene2D",
         "source": "upstream/packages/scene2d/src/sprite.ts",
-        "total": 12
+        "total": 13
       },
       {
         "byReason": {
@@ -25038,6 +25041,14 @@
       },
       {
         "byReason": {
+          "unclassified": 1
+        },
+        "module": "flight._Scene3D",
+        "source": "upstream/packages/scene3d/src/billboard.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
           "standard-toolkit-boundary": 18
         },
         "module": "flight._Scene3D",
@@ -25047,11 +25058,12 @@
       {
         "byReason": {
           "source-unknown": 1,
-          "standard-toolkit-boundary": 1
+          "standard-toolkit-boundary": 1,
+          "unclassified": 2
         },
         "module": "flight._Scene3D",
         "source": "upstream/packages/scene3d/src/cloneNode3DSubtree.ts",
-        "total": 2
+        "total": 4
       },
       {
         "byReason": {
@@ -25064,11 +25076,12 @@
       {
         "byReason": {
           "source-unknown": 1,
-          "standard-toolkit-boundary": 1
+          "standard-toolkit-boundary": 1,
+          "unclassified": 1
         },
         "module": "flight._Scene3D",
         "source": "upstream/packages/scene3d/src/mesh.ts",
-        "total": 2
+        "total": 3
       },
       {
         "byReason": {
@@ -25082,11 +25095,12 @@
       {
         "byReason": {
           "source-never": 1,
-          "source-null": 1
+          "source-null": 1,
+          "unclassified": 2
         },
         "module": "flight._Scene3D",
         "source": "upstream/packages/scene3d/src/scene.ts",
-        "total": 2
+        "total": 4
       },
       {
         "byReason": {
@@ -25101,11 +25115,11 @@
           "source-null": 3,
           "source-unknown": 3,
           "standard-toolkit-boundary": 14,
-          "unclassified": 1
+          "unclassified": 3
         },
         "module": "flight._Scene3D",
         "source": "upstream/packages/scene3d/src/sceneDocument.ts",
-        "total": 21
+        "total": 23
       },
       {
         "byReason": {
@@ -25134,11 +25148,11 @@
       },
       {
         "byReason": {
-          "unclassified": 1
+          "unclassified": 4
         },
         "module": "flight._Scene3D",
         "source": "upstream/packages/scene3d/src/sceneNode.ts",
-        "total": 1
+        "total": 4
       },
       {
         "byReason": {
@@ -26438,11 +26452,11 @@
       {
         "byReason": {
           "standard-toolkit-boundary": 3,
-          "unclassified": 1
+          "unclassified": 2
         },
         "module": "flight._Shape",
         "source": "upstream/packages/shape/src/morphShape.ts",
-        "total": 4
+        "total": 5
       },
       {
         "byReason": {
@@ -26462,11 +26476,11 @@
       },
       {
         "byReason": {
-          "unclassified": 1
+          "unclassified": 2
         },
         "module": "flight._Shape",
         "source": "upstream/packages/shape/src/scale9Shape.ts",
-        "total": 1
+        "total": 2
       },
       {
         "byReason": {
@@ -26479,11 +26493,11 @@
       {
         "byReason": {
           "source-unknown": 2,
-          "unclassified": 1
+          "unclassified": 2
         },
         "module": "flight._Shape",
         "source": "upstream/packages/shape/src/shape.ts",
-        "total": 3
+        "total": 4
       },
       {
         "byReason": {
@@ -27219,29 +27233,29 @@
       },
       {
         "byReason": {
-          "unclassified": 2
+          "unclassified": 3
         },
         "module": "flight._Text",
         "source": "upstream/packages/text/src/nativeText.ts",
-        "total": 2
+        "total": 3
       },
       {
         "byReason": {
           "source-unknown": 2,
           "standard-toolkit-boundary": 50,
-          "unclassified": 2
+          "unclassified": 3
         },
         "module": "flight._Text",
         "source": "upstream/packages/text/src/richText.ts",
-        "total": 54
+        "total": 55
       },
       {
         "byReason": {
-          "unclassified": 2
+          "unclassified": 3
         },
         "module": "flight._Text",
         "source": "upstream/packages/text/src/textLabel.ts",
-        "total": 2
+        "total": 3
       },
       {
         "byReason": {
@@ -27602,11 +27616,11 @@
         "byReason": {
           "source-any": 2,
           "standard-toolkit-boundary": 15,
-          "unclassified": 2
+          "unclassified": 3
         },
         "module": "flight._Tilemap",
         "source": "upstream/packages/tilemap/src/tilemap.ts",
-        "total": 19
+        "total": 20
       },
       {
         "byReason": {
@@ -28098,6 +28112,14 @@
       },
       {
         "byReason": {
+          "unclassified": 1
+        },
+        "module": "flight.Node",
+        "source": "upstream/packages/node/src/node.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
           "source-unknown": 2
         },
         "module": "flight.Registry",
@@ -28125,6 +28147,14 @@
           "unclassified": 1
         },
         "module": "flight.Scene2D",
+        "source": "upstream/packages/scene2d/src/displayObject.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
+          "unclassified": 1
+        },
+        "module": "flight.Scene2D",
         "source": "upstream/packages/scene2d/src/htmlView.ts",
         "total": 1
       },
@@ -28142,6 +28172,14 @@
         },
         "module": "flight.Scene3D",
         "source": "upstream/packages/scene3d/src/mesh.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
+          "unclassified": 1
+        },
+        "module": "flight.Scene3D",
+        "source": "upstream/packages/scene3d/src/sceneNode.ts",
         "total": 1
       },
       {
@@ -28298,6 +28336,14 @@
       },
       {
         "byReason": {
+          "unclassified": 1
+        },
+        "module": "flight.Sdk",
+        "source": "upstream/packages/node/src/node.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
           "source-unknown": 2
         },
         "module": "flight.Sdk",
@@ -28325,6 +28371,14 @@
           "unclassified": 1
         },
         "module": "flight.Sdk",
+        "source": "upstream/packages/scene2d/src/displayObject.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
+          "unclassified": 1
+        },
+        "module": "flight.Sdk",
         "source": "upstream/packages/scene2d/src/htmlView.ts",
         "total": 1
       },
@@ -28342,6 +28396,14 @@
         },
         "module": "flight.Sdk",
         "source": "upstream/packages/scene3d/src/mesh.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
+          "unclassified": 1
+        },
+        "module": "flight.Sdk",
+        "source": "upstream/packages/scene3d/src/sceneNode.ts",
         "total": 1
       },
       {
@@ -29871,11 +29933,11 @@
         "source-undefined": 551,
         "source-unknown": 4743,
         "standard-toolkit-boundary": 22029,
-        "unclassified": 794
+        "unclassified": 832
       },
       "checkerKnownUnrepresentable": 0,
-      "modules": 1470,
-      "total": 30491
+      "modules": 1477,
+      "total": 30529
     }
   }
 }

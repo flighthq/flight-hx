@@ -158,6 +158,70 @@ import flight.types.Vector3Like;
 #if !flight_struct_typedef
 @:allow(flight._Scene3D)
 @:structInit
+private class EntityShapeL36C17__cloneNode3DSubtree {
+  public var data:Null<flight._internal._Object>;
+  public var enabled:Bool;
+  public var kind:String;
+  public var name:Null<String>;
+  public var alpha:Float;
+  public var visible:Bool;
+  public var position:Vector3;
+  public var rotation:Quaternion;
+  public var scale:Vector3;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(data:Null<flight._internal._Object>, enabled:Bool, kind:String, name:Null<String>, alpha:Float, visible:Bool, position:Vector3, rotation:Quaternion, scale:Vector3):Void {
+    this.__symbol__EntityRuntime = null;
+    this.data = data;
+    this.enabled = enabled;
+    this.kind = kind;
+    this.name = name;
+    this.alpha = alpha;
+    this.visible = visible;
+    this.position = position;
+    this.rotation = rotation;
+    this.scale = scale;
+  }
+}
+#else
+private typedef EntityShapeL36C17__cloneNode3DSubtree = { var data:Null<flight._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; var alpha:Float; var visible:Bool; var position:Vector3; var rotation:Quaternion; var scale:Vector3; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Scene3D)
+@:structInit
+private class EntityShapeL13C16__scene {
+  public var data:Null<flight._internal._Object>;
+  public var enabled:Bool;
+  public var kind:String;
+  public var name:Null<String>;
+  public var alpha:Float;
+  public var visible:Bool;
+  public var position:Vector3;
+  public var rotation:Quaternion;
+  public var scale:Vector3;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(data:Null<flight._internal._Object>, enabled:Bool, kind:String, name:Null<String>, alpha:Float, visible:Bool, position:Vector3, rotation:Quaternion, scale:Vector3):Void {
+    this.__symbol__EntityRuntime = null;
+    this.data = data;
+    this.enabled = enabled;
+    this.kind = kind;
+    this.name = name;
+    this.alpha = alpha;
+    this.visible = visible;
+    this.position = position;
+    this.rotation = rotation;
+    this.scale = scale;
+  }
+}
+#else
+private typedef EntityShapeL13C16__scene = { var data:Null<flight._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; var alpha:Float; var visible:Bool; var position:Vector3; var rotation:Quaternion; var scale:Vector3; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Scene3D)
+@:structInit
 private class EntityShapeL109C35__sceneDocument {
   public var inverseBindMatrices:flight._internal._Float32Array;
   public var jointMatrices:flight._internal._Float32Array;
@@ -179,12 +243,76 @@ private class EntityShapeL109C35__sceneDocument {
 private typedef EntityShapeL109C35__sceneDocument = { var inverseBindMatrices:flight._internal._Float32Array; var jointMatrices:flight._internal._Float32Array; var joints:Array<Node3D>; var names:Null<Array<String>>; var normalMatrices:flight._internal._Float32Array; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
+#if !flight_struct_typedef
+@:allow(flight._Scene3D)
+@:structInit
+private class EntityShapeL189C39__sceneDocument {
+  public var data:Null<flight._internal._Object>;
+  public var enabled:Bool;
+  public var kind:String;
+  public var name:Null<String>;
+  public var alpha:Float;
+  public var visible:Bool;
+  public var position:Vector3;
+  public var rotation:Quaternion;
+  public var scale:Vector3;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(data:Null<flight._internal._Object>, enabled:Bool, kind:String, name:Null<String>, alpha:Float, visible:Bool, position:Vector3, rotation:Quaternion, scale:Vector3):Void {
+    this.__symbol__EntityRuntime = null;
+    this.data = data;
+    this.enabled = enabled;
+    this.kind = kind;
+    this.name = name;
+    this.alpha = alpha;
+    this.visible = visible;
+    this.position = position;
+    this.rotation = rotation;
+    this.scale = scale;
+  }
+}
+#else
+private typedef EntityShapeL189C39__sceneDocument = { var data:Null<flight._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; var alpha:Float; var visible:Bool; var position:Vector3; var rotation:Quaternion; var scale:Vector3; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Scene3D)
+@:structInit
+private class EntityShapeL17C1__sceneNode {
+  public var data:Null<flight._internal._Object>;
+  public var enabled:Bool;
+  public var kind:String;
+  public var name:Null<String>;
+  public var alpha:Float;
+  public var visible:Bool;
+  public var position:Vector3;
+  public var rotation:Quaternion;
+  public var scale:Vector3;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(data:Null<flight._internal._Object>, enabled:Bool, kind:String, name:Null<String>, alpha:Float, visible:Bool, position:Vector3, rotation:Quaternion, scale:Vector3):Void {
+    this.__symbol__EntityRuntime = null;
+    this.data = data;
+    this.enabled = enabled;
+    this.kind = kind;
+    this.name = name;
+    this.alpha = alpha;
+    this.visible = visible;
+    this.position = position;
+    this.rotation = rotation;
+    this.scale = scale;
+  }
+}
+#else
+private typedef EntityShapeL17C1__sceneNode = { var data:Null<flight._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; var alpha:Float; var visible:Bool; var position:Vector3; var rotation:Quaternion; var scale:Vector3; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
 @:noCompletion
 class _Scene3D {
   public static function createBillboard(geometry:MeshGeometry, materials:Array<Null<Material>>, mode:BillboardMode = 'full', ?kind:Kind, ?obj:flight._internal._Partial<{ var enabled:Bool; var name:Null<String>; }>):Billboard {
     if (kind == null) kind = cast (BillboardKind : Dynamic);
     var billboard:Billboard = cast _Runtime.UNDEFINED;
-    billboard = (cast createNode3D((cast kind : String), ({ final __callArgument0:Dynamic = obj; __callArgument0; })) : Billboard);
+    billboard = (cast createNode3D((cast kind : String), ({ final __callArgument0:Dynamic = obj; __callArgument0; }), function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ alpha: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, geometry: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, materials: cast _Runtime.UNDEFINED, mode: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, position: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scale: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED } : Billboard); }) #end)) : Billboard);
     (billboard.geometry = cast (geometry : MeshGeometry));
     (billboard.materials = cast (materials : Array<Null<Material>>));
     (billboard.mode = cast (mode : BillboardMode));
@@ -486,7 +614,7 @@ class _Scene3D {
       }
       return cast clone;
     }
-    clone = (cast createNode3D((cast _Runtime.field(source, 'kind') : String), ({ final __callArgument76:Dynamic = { alpha: source.alpha, enabled: _Runtime.field(source, 'enabled'), name: _Runtime.field(source, 'name'), visible: source.visible }; __callArgument76; })) : Node3D);
+    clone = (cast createNode3D((cast _Runtime.field(source, 'kind') : String), ({ final __callArgument76:Dynamic = { alpha: source.alpha, enabled: _Runtime.field(source, 'enabled'), name: _Runtime.field(source, 'name'), visible: source.visible }; __callArgument76; }), function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, alpha: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, position: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scale: cast _Runtime.UNDEFINED } : EntityShapeL36C17__cloneNode3DSubtree); }) #end)) : Node3D);
     setNodeTransform3D((cast clone : Dynamic), ({ final __callArgument78:Dynamic = source; __callArgument78; }));
     if ((cast (cast isNodeLocalMatrix4Detached((cast source : Dynamic)) : Bool) : Bool)) {
       setNodeLocalMatrix4((cast clone : Dynamic), (cast getNodeLocalMatrix4((cast source : Dynamic)) : Matrix4Like));
@@ -543,7 +671,7 @@ class _Scene3D {
   public static function createMesh(geometry:MeshGeometry, materials:Array<Null<Material>>, ?kind:Kind, ?obj:flight._internal._Partial<{ var enabled:Bool; var name:Null<String>; }>):Mesh {
     if (kind == null) kind = cast (MeshKind : Dynamic);
     var mesh:Mesh = cast _Runtime.UNDEFINED;
-    mesh = (cast createNode3D((cast kind : String), ({ final __callArgument92:Dynamic = obj; __callArgument92; })) : Mesh);
+    mesh = (cast createNode3D((cast kind : String), ({ final __callArgument92:Dynamic = obj; __callArgument92; }), function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ alpha: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, geometry: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, materials: cast _Runtime.UNDEFINED, morph: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, position: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scale: cast _Runtime.UNDEFINED, skin: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED } : Mesh); }) #end)) : Mesh);
     (mesh.geometry = cast (geometry : MeshGeometry));
     (mesh.materials = cast (materials : Array<Null<Material>>));
     return cast mesh;
@@ -599,7 +727,7 @@ class _Scene3D {
 
   public static function createScene3D(?obj:flight._internal._Partial<{ var enabled:Bool; var name:Null<String>; }>):Scene3D {
     var root:Node3D = cast _Runtime.UNDEFINED;
-    root = (cast createNode3D((cast Node3DKind : String), ({ final __callArgument100:Dynamic = obj; __callArgument100; })) : Node3D);
+    root = (cast createNode3D((cast Node3DKind : String), ({ final __callArgument100:Dynamic = obj; __callArgument100; }), function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, alpha: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, position: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scale: cast _Runtime.UNDEFINED } : EntityShapeL13C16__scene); }) #end)) : Node3D);
     return cast (cast (cast createEntity(({ final __callArgument102:Dynamic = ({ animations: {  }, metadata: null, resources: cast ([] : Array<Dynamic>), root: root } : Scene3D); __callArgument102; })) : Scene3D) : Scene3D);
     return cast null;
   }
@@ -814,7 +942,7 @@ class _Scene3D {
     var documentMesh:Scene3DDocumentMesh = cast _Runtime.UNDEFINED;
     var meshMaterials:Array<Null<Material>> = cast _Runtime.UNDEFINED;
     var mesh:Mesh = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(node.mesh, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast createNode3D((cast node.kind : String), ({ final __callArgument156:Dynamic = { name: node.name }; __callArgument156; })) : Node3D); }
+    if ((cast _Runtime.strictEquals(node.mesh, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast createNode3D((cast node.kind : String), ({ final __callArgument156:Dynamic = { name: node.name }; __callArgument156; }), function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, alpha: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, position: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scale: cast _Runtime.UNDEFINED } : EntityShapeL189C39__sceneDocument); }) #end)) : Node3D); }
     documentMesh = flight._internal._StaticIndex.readArray(meshes, node.mesh);
     meshMaterials = (cast _Runtime.mapArray((cast documentMesh.materials : Array<Float>), function(index:Float, __unused6:Float, __unused7:Array<Float>):Material return _Runtime.coalesce(flight._internal._StaticIndex.readArray(materials, index), function():Dynamic return cast null), _Runtime.UNDEFINED));
     mesh = (cast createMesh(documentMesh.geometry, ({ final __callArgument158:Dynamic = meshMaterials; __callArgument158; }), (cast node.kind : String), ({ final __callArgument159:Dynamic = { name: node.name }; __callArgument159; })) : Mesh);
@@ -1006,10 +1134,11 @@ class _Scene3D {
     return cast null;
   }
 
-  public static function createNode3D(?kind:Kind, ?obj:flight._internal._Partial<{ var enabled:Bool; var name:Null<String>; var alpha:Float; var visible:Bool; }>):Node3D {
+  public static function createNode3D(?kind:Kind, ?obj:flight._internal._Partial<{ var enabled:Bool; var name:Null<String>; var alpha:Float; var visible:Bool; }>, ?__nodeAllocator:Void->Dynamic):Node3D {
     if (kind == null) kind = cast (Node3DKind : Dynamic);
+    if (__nodeAllocator == null) __nodeAllocator = cast (function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, alpha: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, position: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scale: cast _Runtime.UNDEFINED } : EntityShapeL17C1__sceneNode); }) #end) : Dynamic);
     var node:{ >Node<Node3DTraits>, >Node3DTraits, } = cast _Runtime.UNDEFINED;
-    node = (cast createNode((cast kind : String), (cast obj : Dynamic), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic), (cast function(__unused0:Dynamic):Node3DRuntime return createNode3DRuntime() : Dynamic)) : { >Node<Node3DTraits>, >Node3DTraits, });
+    node = (cast createNode((cast kind : String), (cast obj : Dynamic), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic), (cast function(__unused0:Dynamic):Node3DRuntime return createNode3DRuntime() : Dynamic), __nodeAllocator) : { >Node<Node3DTraits>, >Node3DTraits, });
     initAppearanceTrait(({ final __callArgument200:Dynamic = node; __callArgument200; }), ({ final __callArgument201:Dynamic = obj; __callArgument201; }));
     (#if js _Runtime.callValue(initTransform3DTrait, cast ([({ final __callArgument205:Dynamic = node; __callArgument205; })] : Array<Dynamic>)) #else initTransform3DTrait(({ final __callArgument204:Dynamic = node; __callArgument204; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     return cast (cast node : Node3D);

@@ -122,7 +122,7 @@ class _Text {
   }
 
   public static function createNativeText(?obj:PartialNode<NativeText>):NativeText {
-    return cast (cast createNode2D((cast NativeTextKind : String), (cast obj : Dynamic), (cast createNativeTextData : Dynamic), (cast function(__unused0:Dynamic):NativeTextRuntime return createNativeTextRuntime() : Dynamic)) : NativeText);
+    return cast (cast createNode2D((cast NativeTextKind : String), (cast obj : Dynamic), (cast createNativeTextData : Dynamic), (cast function(__unused0:Dynamic):NativeTextRuntime return createNativeTextRuntime() : Dynamic), function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : NativeText); }) #end)) : NativeText);
     return cast null;
   }
 
@@ -284,7 +284,7 @@ class _Text {
   }
 
   public static function createRichText(?obj:PartialNode<RichText>):RichText {
-    return cast (cast createNode2D((cast RichTextKind : String), (cast obj : Dynamic), (cast createRichTextData : Dynamic), (cast function(__unused0:Dynamic):RichTextRuntime return createRichTextRuntime() : Dynamic)) : RichText);
+    return cast (cast createNode2D((cast RichTextKind : String), (cast obj : Dynamic), (cast createRichTextData : Dynamic), (cast function(__unused0:Dynamic):RichTextRuntime return createRichTextRuntime() : Dynamic), function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : RichText); }) #end)) : RichText);
     return cast null;
   }
 
@@ -848,7 +848,7 @@ class _Text {
   }
 
   public static function createTextLabel(?obj:PartialNode<TextLabel>):TextLabel {
-    return cast (cast createNode2D((cast TextLabelKind : String), (cast obj : Dynamic), (cast createTextLabelData : Dynamic), (cast function(__unused0:Dynamic):TextLabelRuntime return createTextLabelRuntime() : Dynamic)) : TextLabel);
+    return cast (cast createNode2D((cast TextLabelKind : String), (cast obj : Dynamic), (cast createTextLabelData : Dynamic), (cast function(__unused0:Dynamic):TextLabelRuntime return createTextLabelRuntime() : Dynamic), function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : TextLabel); }) #end)) : TextLabel);
     return cast null;
   }
 

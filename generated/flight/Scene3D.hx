@@ -57,8 +57,8 @@ class Scene3D {
     return cast null;
   }
 
-  public static function createNode3D(?kind:Kind, ?obj:flight._internal._Partial<{ var enabled:Bool; var name:Null<String>; var alpha:Float; var visible:Bool; }>):Node3D {
-    return cast Facade_Scene3D_flight__Scene3D.createNode3D(kind, obj);
+  public static function createNode3D(?kind:Kind, ?obj:flight._internal._Partial<{ var enabled:Bool; var name:Null<String>; var alpha:Float; var visible:Bool; }>, ?__nodeAllocator:Void->Dynamic):Node3D {
+    return cast Facade_Scene3D_flight__Scene3D.createNode3D(kind, obj, __nodeAllocator);
     return cast null;
   }
 

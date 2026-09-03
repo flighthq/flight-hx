@@ -2834,6 +2834,22 @@ function emitExpression(expression: IrExpression): string {
       }
       return `new ${emitExpression(expression.callee)}(${expression.arguments.map(emitExpression).join(', ')})`;
     case 'object':
+      if (expression.allocator) {
+        const target = `__allocatedObject${String(temporaryIndex++)}`;
+        const assignments = expression.properties.map((property) => {
+          if (property.kind === 'computedProperty') {
+            return `_Runtime.setIndex(${target}, ${emitExpression(property.key)}, ${emitExpression(property.value)});`;
+          }
+          if (property.kind === 'property') {
+            return `_Runtime.setField(${target}, ${quote(property.name)}, ${emitExpression(property.value)});`;
+          }
+          throw new Error(`Allocated node object cannot contain a spread: ${currentSourceIdentity}`);
+        });
+        return emitObjectThisCapture(
+          expression,
+          `({ final ${target}:Dynamic = ${emitExpression(expression.allocator)}; ${assignments.join(' ')} ${target}; })`,
+        );
+      }
       if (expression.cppStructInit) {
         const typedefCondition = expression.cppStructInit.nativeOnly
           ? '(flight_struct_typedef || js)'

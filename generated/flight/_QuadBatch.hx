@@ -213,7 +213,7 @@ class _QuadBatch {
   }
 
   public static function createQuadBatch(?obj:PartialNode<QuadBatch>):QuadBatch {
-    return cast (cast createNode2D((cast QuadBatchKind : String), (cast obj : Dynamic), (cast createQuadBatchData : Dynamic), (cast function(__unused1:Dynamic):QuadBatchRuntime return createQuadBatchRuntime() : Dynamic)) : QuadBatch);
+    return cast (cast createNode2D((cast QuadBatchKind : String), (cast obj : Dynamic), (cast createQuadBatchData : Dynamic), (cast function(__unused1:Dynamic):QuadBatchRuntime return createQuadBatchRuntime() : Dynamic), function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : QuadBatch); }) #end)) : QuadBatch);
     return cast null;
   }
 

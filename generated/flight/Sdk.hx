@@ -6291,13 +6291,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function createNode<Traits:flight._internal._Object, Data:NodeData, Runtime:NodeRuntime<Traits>>(nodeKind:Kind, ?obj:PartialNode<Node<Traits>>, ?createData:NodeDataFactory<Data>, ?createNodeRuntimeFactory:NodeRuntimeFactory<Runtime>):flight._internal._Intersection2<Node<Traits>, Traits> {
-    return cast Facade_Sdk_flight__Node.createNode(nodeKind, obj, createData, createNodeRuntimeFactory);
+  public static function createNode<Traits:flight._internal._Object, Data:NodeData, Runtime:NodeRuntime<Traits>>(nodeKind:Kind, ?obj:PartialNode<Node<Traits>>, ?createData:NodeDataFactory<Data>, ?createNodeRuntimeFactory:NodeRuntimeFactory<Runtime>, ?__nodeAllocator:Void->Dynamic):flight._internal._Intersection2<Node<Traits>, Traits> {
+    return cast Facade_Sdk_flight__Node.createNode(nodeKind, obj, createData, createNodeRuntimeFactory, __nodeAllocator);
     return cast null;
   }
 
-  public static function createNode2D<R:Node2DRuntime>(kind:Kind, ?obj:PartialNode<Node2D>, ?createData:Node2DDataFactory, ?createNode2DRuntimeFactory:Node2DRuntimeFactory<R>):Node2D {
-    return cast Facade_Sdk_flight__Scene2D.createNode2D(kind, obj, createData, createNode2DRuntimeFactory);
+  public static function createNode2D<R:Node2DRuntime>(kind:Kind, ?obj:PartialNode<Node2D>, ?createData:Node2DDataFactory, ?createNode2DRuntimeFactory:Node2DRuntimeFactory<R>, ?__nodeAllocator:Void->Dynamic):Node2D {
+    return cast Facade_Sdk_flight__Scene2D.createNode2D(kind, obj, createData, createNode2DRuntimeFactory, __nodeAllocator);
     return cast null;
   }
 
@@ -6306,8 +6306,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function createNode3D(?kind:Kind, ?obj:flight._internal._Partial<{ var enabled:Bool; var name:Null<String>; var alpha:Float; var visible:Bool; }>):Node3D {
-    return cast Facade_Sdk_flight__Scene3D.createNode3D(kind, obj);
+  public static function createNode3D(?kind:Kind, ?obj:flight._internal._Partial<{ var enabled:Bool; var name:Null<String>; var alpha:Float; var visible:Bool; }>, ?__nodeAllocator:Void->Dynamic):Node3D {
+    return cast Facade_Sdk_flight__Scene3D.createNode3D(kind, obj, __nodeAllocator);
     return cast null;
   }
 

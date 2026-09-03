@@ -13,9 +13,24 @@ class TypedStructClassSmoke {
     if (camera.viewportWidth != 640 || camera.viewportHeight != 480) {
       throw 'Camera2D construction lost viewport values';
     }
+    final baseNode = flight.Node.createNode('ClassSmokeNode');
+    final node2D = flight.Scene2D.createNode2D('ClassSmokeNode2D');
+    final node3D = flight.Scene3D.createNode3D('ClassSmokeNode3D');
+    if (!baseNode.enabled || baseNode.kind != 'ClassSmokeNode' || baseNode.data != null) {
+      throw 'base Node class construction lost field values';
+    }
+    if (node2D.x != 0 || node2D.scaleX != 1 || !node2D.visible || node2D.kind != 'ClassSmokeNode2D') {
+      throw 'Node2D class construction lost trait values';
+    }
+    if (node3D.position.x != 0 || node3D.scale.x != 1 || !node3D.visible || node3D.kind != 'ClassSmokeNode3D') {
+      throw 'Node3D class construction lost trait values';
+    }
     #if !flight_struct_typedef
     if (!Std.isOfType(camera, flight.types.Camera2D)) {
       throw 'Camera2D cpp pilot did not construct a class instance';
+    }
+    if (Type.getClass(baseNode) == null || Type.getClass(node2D) == null || Type.getClass(node3D) == null) {
+      throw 'direct Node allocator did not preserve nominal class identity';
     }
     #end
   }

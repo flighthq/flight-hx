@@ -52,8 +52,8 @@ class Scene2D {
     return cast null;
   }
 
-  public static function createNode2D<R:Node2DRuntime>(kind:Kind, ?obj:PartialNode<Node2D>, ?createData:Node2DDataFactory, ?createNode2DRuntimeFactory:Node2DRuntimeFactory<R>):Node2D {
-    return cast Facade_Scene2D_flight__Scene2D.createNode2D(kind, obj, createData, createNode2DRuntimeFactory);
+  public static function createNode2D<R:Node2DRuntime>(kind:Kind, ?obj:PartialNode<Node2D>, ?createData:Node2DDataFactory, ?createNode2DRuntimeFactory:Node2DRuntimeFactory<R>, ?__nodeAllocator:Void->Dynamic):Node2D {
+    return cast Facade_Scene2D_flight__Scene2D.createNode2D(kind, obj, createData, createNode2DRuntimeFactory, __nodeAllocator);
     return cast null;
   }
 

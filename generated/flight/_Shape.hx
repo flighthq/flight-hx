@@ -700,7 +700,7 @@ class _Shape {
   }
 
   public static function createMorphShape(morph:PathMorph, ?obj:PartialNode<MorphShape>):MorphShape {
-    return cast (cast createNode2D((cast MorphShapeKind : String), (cast obj : Dynamic), (cast function(data:Null<{  }>):MorphShapeData return (cast createMorphShapeData(({ final __callArgument64:Dynamic = morph; __callArgument64; }), (cast data : Dynamic)) : MorphShapeData) : Dynamic), (cast function(__unused2:Dynamic):MorphShapeRuntime return createMorphShapeRuntime() : Dynamic)) : MorphShape);
+    return cast (cast createNode2D((cast MorphShapeKind : String), (cast obj : Dynamic), (cast function(data:Null<{  }>):MorphShapeData return (cast createMorphShapeData(({ final __callArgument64:Dynamic = morph; __callArgument64; }), (cast data : Dynamic)) : MorphShapeData) : Dynamic), (cast function(__unused2:Dynamic):MorphShapeRuntime return createMorphShapeRuntime() : Dynamic), function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : MorphShape); }) #end)) : MorphShape);
     return cast null;
   }
 
@@ -1000,7 +1000,7 @@ class _Shape {
   }
 
   public static function createScale9Shape(scale9Grid:RectangleLike, ?obj:PartialNode<Scale9Shape>):Scale9Shape {
-    return cast (cast createNode2D((cast Scale9ShapeKind : String), (cast (cast obj : PartialNode<Scale9Shape>) : Dynamic), (cast function(data:Null<{  }>):Scale9ShapeData return (cast createScale9ShapeData(({ final __callArgument217:Dynamic = scale9Grid; __callArgument217; }), (cast data : Dynamic)) : Scale9ShapeData) : Dynamic), (cast function(__unused0:Dynamic):Scale9ShapeRuntime return createScale9ShapeRuntime() : Dynamic)) : Scale9Shape);
+    return cast (cast createNode2D((cast Scale9ShapeKind : String), (cast (cast obj : PartialNode<Scale9Shape>) : Dynamic), (cast function(data:Null<{  }>):Scale9ShapeData return (cast createScale9ShapeData(({ final __callArgument217:Dynamic = scale9Grid; __callArgument217; }), (cast data : Dynamic)) : Scale9ShapeData) : Dynamic), (cast function(__unused0:Dynamic):Scale9ShapeRuntime return createScale9ShapeRuntime() : Dynamic), function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : Scale9Shape); }) #end)) : Scale9Shape);
     return cast null;
   }
 
@@ -1182,7 +1182,7 @@ class _Shape {
   }
 
   public static function createShape(?obj:PartialNode<Shape>):Shape {
-    return cast (cast createNode2D((cast ShapeKind : String), (cast obj : Dynamic), (cast createShapeData : Dynamic), (cast function(__unused0:Dynamic):ShapeRuntime return createShapeRuntime() : Dynamic)) : Shape);
+    return cast (cast createNode2D((cast ShapeKind : String), (cast obj : Dynamic), (cast createShapeData : Dynamic), (cast function(__unused0:Dynamic):ShapeRuntime return createShapeRuntime() : Dynamic), function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : Shape); }) #end)) : Shape);
     return cast null;
   }
 
