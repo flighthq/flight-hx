@@ -8,6 +8,8 @@ extern class HTMLImageElement {
   var height:Float;
   var naturalWidth(default, never):Int;
   var naturalHeight(default, never):Int;
+  var onerror:Dynamic;
+  var onload:Null<Event->Void>;
   var src:String;
   var complete(default, never):Bool;
   var crossOrigin:String;
