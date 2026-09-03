@@ -14,6 +14,7 @@ import flight.Scene3D.createNode3D;
 import flight.types.Mesh;
 import flight.types.RenderState;
 
+@:access(flight._Render)
 class Scene3DPrepareBench {
   static final branchCount = 8;
   static final meshesPerBranch = 16;
@@ -21,7 +22,7 @@ class Scene3DPrepareBench {
 
   static function main():Void {
     final iterations = readPositiveInt('FLIGHT_SCENE3D_BENCH_ITERATIONS', 500);
-    final state:RenderState = cast {sceneGraphSyncPolicy: 'requiresInvalidation'};
+    final state:RenderState = flight._Render.createRenderState({sceneGraphSyncPolicy: 'requiresInvalidation'});
     final lights = createScene3DLights();
     final camera = createCamera3D({
       far: 100,

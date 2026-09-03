@@ -1215,7 +1215,11 @@ class _Runtime {
       return (cast source : _HostConstructor).hasStaticMember(Std.string(key));
     }
     final name = Std.string(key);
-    return source != null && (Reflect.hasField(source, name) || DynamicObject.hasAttachedField(source, name));
+    return source != null && (
+      Reflect.hasField(source, name)
+      || DynamicObject.hasInstanceField(source, name)
+      || DynamicObject.hasAttachedField(source, name)
+    );
     #end
   }
 

@@ -10,6 +10,7 @@ import Math as HxMath;
  */
 class DynamicObject {
   #if !js
+  static final declaredFieldsByClass:Map<String, Map<String, Bool>> = [];
   static final frozenObjects:_IdentityMap<Bool> = new _IdentityMap();
   // Native Haxe classes cannot own fields that were not declared at compile
   // time. Preserve JavaScript's object-expando behavior in an identity sidecar
@@ -66,6 +67,23 @@ class DynamicObject {
     return js.Syntax.code('Object.prototype.hasOwnProperty.call({0}, {1})', source, name);
     #else
     return source != null && (Reflect.hasField(source, name) || hasAttachedField(source, name));
+    #end
+  }
+
+  public static function hasInstanceField(source:Dynamic, name:String):Bool {
+    #if js
+    return false;
+    #else
+    final sourceClass = Type.getClass(source);
+    if (sourceClass == null) return false;
+    final className = Type.getClassName(sourceClass);
+    var fields = declaredFieldsByClass.get(className);
+    if (fields == null) {
+      fields = [];
+      for (field in Type.getInstanceFields(sourceClass)) fields.set(field, true);
+      declaredFieldsByClass.set(className, fields);
+    }
+    return fields.exists(name);
     #end
   }
 
@@ -227,7 +245,7 @@ class DynamicObject {
   @:noInline static function setOwnField(target:Dynamic, name:String, value:Dynamic):Void {
     if (!Reflect.isFunction(target)) {
       final targetClass = Type.getClass(target);
-      if (targetClass != null && Type.getInstanceFields(targetClass).indexOf(name) < 0) {
+      if (targetClass != null && !hasInstanceField(target, name)) {
         var extra = objectFields.get(target);
         if (extra == null) {
           extra = {};

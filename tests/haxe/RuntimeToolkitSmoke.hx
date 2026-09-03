@@ -152,6 +152,9 @@ class RuntimeToolkitSmoke {
     }
     final entitySource = new RuntimeEntityCloneFixture(7);
     entitySource.__symbol__EntityRuntime = {binding: 'source'};
+    if (!_Runtime.hasField(entitySource, 'value') || !_Runtime.hasField(entitySource, '__symbol__EntityRuntime')) {
+      throw 'portable declared class fields were not visible to the in operator';
+    }
     final entityClone = _Runtime.cloneEntityShape(entitySource);
     if (entityClone == entitySource || !Std.isOfType(entityClone, RuntimeEntityCloneFixture) || entityClone.value != 7) {
       throw 'portable Entity class clone failed';
