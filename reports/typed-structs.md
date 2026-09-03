@@ -12,8 +12,8 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Audit-only schemas | 2188 |
 | Direct schemas | 752 |
 | Declared fields | 30271 |
-| Bindable accesses | 40781 |
-| Pending accesses | 14652 |
+| Bindable accesses | 40779 |
+| Pending accesses | 14650 |
 | Directly emitted accesses | 26129 |
 | Reflective survivors | 395 |
 | Dynamic escapes | 14742 |
@@ -1422,7 +1422,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#MarqueeSelectionMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#MarqueeSelectionRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 8 | 4 | 0 | 12 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MatcapMaterial` | `direct` | `new` | — | reviewed escape-free matcap material | 8 | 11 | 2 | 0 | 0 | 13 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Material` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 16 | 5 | 0 | 21 | 0 | 0 | 9 | yes | — |
+| `@flighthq/types:interface#Material` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 14 | 5 | 0 | 19 | 0 | 0 | 9 | yes | — |
 | `@flighthq/types:type#MaterialAlphaMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#MaterialData` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#MaterialLike` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | yes | — |

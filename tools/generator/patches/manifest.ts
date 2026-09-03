@@ -3,6 +3,22 @@ import { definePatches } from '../src/patch/apply.ts';
 export default definePatches([
   {
     expect: {
+      astHash: 'sha256:8bc3d74ced8427811d249dc4de6728f09afd84ead12470693ea66ea2e75ef998',
+      kind: 'function',
+    },
+    fragment: 'tools/generator/patches/bodies/materials/cloneMaterial.hx',
+    id: 'materials.clone-material.concrete-class-clone',
+    operation: 'replaceBody',
+    reason:
+      'On the nominal class representation the clone must be an instance of the source material’s concrete class, not a base entity, or later subclass field reads (StandardPbrMaterial.baseColor) fault on hxcpp — the Horse Stacker cloneHierarchy→toPreviewMaterial null crash.',
+    target: {
+      export: 'cloneMaterial',
+      package: '@flighthq/materials',
+      source: 'upstream/packages/materials/src/material.ts',
+    },
+  },
+  {
+    expect: {
       astHash: 'sha256:bec59fc28ac2cefeb3a8ee1bd234b5142511bf77ca8db1cb9e6dde7ecdd6caea',
       kind: 'function',
     },

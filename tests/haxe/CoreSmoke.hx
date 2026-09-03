@@ -270,6 +270,17 @@ class CoreSmoke {
     });
     if (!recovered) throw 'portable promise recovery failed';
     #end
+
+    // Regression: cloneMaterial must preserve the source's CONCRETE class so a caller can read subclass
+    // fields off the clone on the nominal class representation. A base-entity clone faults the fixed-offset
+    // read (the Horse Stacker cloneHierarchy -> toPreviewMaterial -> baseColor null crash); structural
+    // targets never exercised it. See tools/generator/patches/bodies/materials/cloneMaterial.hx.
+    final pbrSource = flight.Materials.createStandardPbrMaterial({baseColor: 0x112233ff, metallic: 0.5});
+    final pbrClone:flight.types.StandardPbrMaterial = cast flight.Materials.getMaterialOfKind(flight.Materials.cloneMaterial(cast pbrSource),
+      flight.Types.StandardPbrMaterialKind);
+    if (pbrClone == null) throw 'cloneMaterial lost StandardPbrMaterial class identity';
+    if (pbrClone.baseColor != pbrSource.baseColor) throw 'cloneMaterial lost baseColor: ${pbrClone.baseColor}';
+    if (pbrClone.metallic != pbrSource.metallic) throw 'cloneMaterial lost metallic: ${pbrClone.metallic}';
   }
 
   static function quarterForSmoke(value:Float):Float {
