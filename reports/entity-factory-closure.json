@@ -944,47 +944,6 @@
       ]
     },
     {
-      "blockedCalls": 1,
-      "factories": [
-        "createApplicationRenderView"
-      ],
-      "readyCalls": 0,
-      "schemaId": "@flighthq/types:interface#ApplicationRenderView",
-      "schemaName": "ApplicationRenderView",
-      "sites": [
-        {
-          "argument": {
-            "fields": [
-              "renderState",
-              "renderTarget",
-              "viewport",
-              "window"
-            ],
-            "kind": "object"
-          },
-          "blockers": [
-            "parameterized-destination"
-          ],
-          "column": 16,
-          "destination": {
-            "kind": "exact-entity",
-            "route": "contextual",
-            "schemaId": "@flighthq/types:interface#ApplicationRenderView",
-            "schemaName": "ApplicationRenderView",
-            "type": "ApplicationRenderView<State, Target>"
-          },
-          "factory": {
-            "canonicalForSchema": true,
-            "name": "createApplicationRenderView"
-          },
-          "line": 43,
-          "normalizations": [],
-          "source": "upstream/packages/application/src/applicationRenderView.ts",
-          "status": "blocked"
-        }
-      ]
-    },
-    {
       "blockedCalls": 0,
       "factories": [
         "createApplicationWindow"
@@ -6885,43 +6844,6 @@
       ]
     },
     {
-      "blockedCalls": 1,
-      "factories": [
-        "createTrayIcon"
-      ],
-      "readyCalls": 0,
-      "schemaId": "@flighthq/types:type#TrayIconForHost",
-      "schemaName": "TrayIconForHost",
-      "sites": [
-        {
-          "argument": {
-            "fields": [],
-            "kind": "omitted"
-          },
-          "blockers": [
-            "omitted-construction",
-            "parameterized-destination"
-          ],
-          "column": 16,
-          "destination": {
-            "kind": "exact-entity",
-            "route": "contextual",
-            "schemaId": "@flighthq/types:type#TrayIconForHost",
-            "schemaName": "TrayIconForHost",
-            "type": "TrayIconForHost<HostType>"
-          },
-          "factory": {
-            "canonicalForSchema": false,
-            "name": "createTrayIcon"
-          },
-          "line": 75,
-          "normalizations": [],
-          "source": "upstream/packages/tray/src/tray.ts",
-          "status": "blocked"
-        }
-      ]
-    },
-    {
       "blockedCalls": 0,
       "factories": [
         "createWebPageNotificationCapabilities"
@@ -7624,25 +7546,25 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "parameterized-destination"
-      ],
+      "blockers": [],
       "column": 16,
       "destination": {
-        "kind": "exact-entity",
+        "kind": "local-entity",
         "route": "contextual",
-        "schemaId": "@flighthq/types:interface#ApplicationRenderView",
-        "schemaName": "ApplicationRenderView",
+        "schemaId": "synthetic-entity:upstream/packages/application/src/applicationRenderView.ts:43:16",
+        "schemaName": "EntityShapeL43C16",
         "type": "ApplicationRenderView<State, Target>"
       },
       "factory": {
-        "canonicalForSchema": true,
+        "canonicalForSchema": false,
         "name": "createApplicationRenderView"
       },
       "line": 43,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/application/src/applicationRenderView.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11440,14 +11362,13 @@
         "fields": [],
         "kind": "omitted"
       },
-      "blockers": [
-        "omitted-construction",
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 28,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronShortcut.ts:46:28",
+        "schemaName": "EntityShapeL46C28",
         "type": "object & Entity"
       },
       "factory": {
@@ -11455,9 +11376,11 @@
         "name": "subscribe"
       },
       "line": 46,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-electron/src/electronShortcut.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12589,14 +12512,13 @@
         "fields": [],
         "kind": "omitted"
       },
-      "blockers": [
-        "omitted-construction",
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 28,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-tauri/src/tauriShortcut.ts:48:28",
+        "schemaName": "EntityShapeL48C28",
         "type": "object & Entity"
       },
       "factory": {
@@ -12604,9 +12526,11 @@
         "name": "subscribe"
       },
       "line": 48,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/host-tauri/src/tauriShortcut.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -17693,16 +17617,13 @@
         "fields": [],
         "kind": "omitted"
       },
-      "blockers": [
-        "omitted-construction",
-        "parameterized-destination"
-      ],
+      "blockers": [],
       "column": 16,
       "destination": {
-        "kind": "exact-entity",
+        "kind": "local-entity",
         "route": "contextual",
-        "schemaId": "@flighthq/types:type#TrayIconForHost",
-        "schemaName": "TrayIconForHost",
+        "schemaId": "synthetic-entity:upstream/packages/tray/src/tray.ts:75:16",
+        "schemaName": "EntityShapeL75C16",
         "type": "TrayIconForHost<HostType>"
       },
       "factory": {
@@ -17710,25 +17631,27 @@
         "name": "createTrayIcon"
       },
       "line": 75,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class"
+      ],
       "source": "upstream/packages/tray/src/tray.ts",
-      "status": "blocked"
+      "status": "ready"
     }
   ],
   "summary": {
     "bareEntityCalls": 0,
-    "blockedEntityCalls": 9,
+    "blockedEntityCalls": 5,
     "calls": 368,
-    "exactEntityCalls": 181,
-    "exactEntitySchemas": 146,
+    "exactEntityCalls": 179,
+    "exactEntitySchemas": 144,
     "exactNonEntityCalls": 17,
     "genericEntityCalls": 3,
-    "localEntityCalls": 164,
+    "localEntityCalls": 168,
     "normalizedFieldOrderCalls": 24,
     "normalizedMissingFieldCalls": 9,
     "normalizedSpreadProjectionCalls": 17,
-    "readyEntityCalls": 342,
-    "structuralEntityCalls": 3,
+    "readyEntityCalls": 346,
+    "structuralEntityCalls": 1,
     "unresolvedCalls": 0
   },
   "upstreamCommit": "98a7a58a934f55555a561a308cc23c1363c45652"

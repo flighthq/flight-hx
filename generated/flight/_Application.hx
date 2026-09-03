@@ -71,6 +71,28 @@ typedef ApplicationStepPolicy__application = { var fixedStepState:Null<LoopState
 
 typedef ApplicationRenderViewRuntime__applicationRenderView<State, Target> = { >EntityRuntime, var attached:Bool; var resize:ApplicationRenderViewResize<State, Target>; var synchronize:Void->Void; };
 
+#if !flight_struct_typedef
+@:allow(flight._Application)
+@:structInit
+private class EntityShapeL43C16__applicationRenderView {
+  public var renderState:flight._internal._Any;
+  public var renderTarget:flight._internal._Any;
+  public var viewport:Viewport;
+  public var window:ApplicationWindow;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(renderState:flight._internal._Any, renderTarget:flight._internal._Any, viewport:Viewport, window:ApplicationWindow):Void {
+    this.__symbol__EntityRuntime = null;
+    this.renderState = renderState;
+    this.renderTarget = renderTarget;
+    this.viewport = viewport;
+    this.window = window;
+  }
+}
+#else
+private typedef EntityShapeL43C16__applicationRenderView = { var renderState:flight._internal._Any; var renderTarget:flight._internal._Any; var viewport:Viewport; var window:ApplicationWindow; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
 typedef WindowOperationHost__window<Operation> = { var window:flight._internal._Required<{  }>; };
 
 @:noCompletion
@@ -449,7 +471,7 @@ class _Application {
   public static function createApplicationRenderView<State:RenderState, Target:RenderTargetDimensions>(window:flight._internal._IndexedAccess<ApplicationRenderView<State, Target>, String>, renderState:State, renderTarget:Target, viewport:flight._internal._IndexedAccess<ApplicationRenderView<State, Target>, String>, resize:ApplicationRenderViewResize<State, Target>):ApplicationRenderView<State, Target> {
     var view:ApplicationRenderView<State, Target> = cast _Runtime.UNDEFINED;
     var runtime:ApplicationRenderViewRuntime__applicationRenderView<State, Target> = cast _Runtime.UNDEFINED;
-    view = (cast createEntity((cast { renderState: renderState, renderTarget: renderTarget, viewport: viewport, window: window } : Dynamic)) : ApplicationRenderView<State, Target>);
+    view = (cast (cast createEntity((cast ({ renderState: renderState, renderTarget: renderTarget, viewport: viewport, window: window } : EntityShapeL43C16__applicationRenderView) : Dynamic)) : EntityShapeL43C16__applicationRenderView) : ApplicationRenderView<State, Target>);
     runtime = (cast createEntityRuntime() : ApplicationRenderViewRuntime__applicationRenderView<State, Target>);
     ((cast runtime : ApplicationRenderViewRuntime__applicationRenderView<State, Target>).attached = false);
     ((cast runtime : { var resize:ApplicationRenderViewResize<State, Target>; }).resize = resize);

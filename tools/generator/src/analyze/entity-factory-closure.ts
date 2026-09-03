@@ -201,14 +201,22 @@ function auditFactorySite(
   const fieldsOutsideNamedSchema =
     schema !== undefined &&
     constructionFields?.some((field) => !schema.fields.some((schemaField) => schemaField.name === field));
-  const localEntityConstruction =
+  const parameterizedDestination = exact ? isParameterizedEntityFactoryType(exact.type, checker) : false;
+  const localObjectConstruction =
     object !== undefined &&
     shape !== undefined &&
     constructionFields !== undefined &&
     !shape.hasComputed &&
     !shape.hasUnsupported &&
-    (schema === undefined || (destinationKind === 'exact-entity' && fieldsOutsideNamedSchema === true)) &&
+    (schema === undefined ||
+      (destinationKind === 'exact-entity' && (fieldsOutsideNamedSchema === true || parameterizedDestination))) &&
     destinationKind !== 'generic-entity';
+  const localOmittedConstruction =
+    call.arguments.length === 0 &&
+    (destinationKind === 'structural-entity' ||
+      destinationKind === 'unresolved' ||
+      (destinationKind === 'exact-entity' && parameterizedDestination));
+  const localEntityConstruction = localObjectConstruction || localOmittedConstruction;
   if (localEntityConstruction) destinationKind = 'local-entity';
   const blockers: EntityFactoryBlocker[] = [];
   const normalizations: EntityFactoryNormalization[] = [];
@@ -217,7 +225,7 @@ function auditFactorySite(
   else if (destinationKind === 'structural-entity') blockers.push('structural-entity-destination');
   else if (destinationKind === 'unresolved') blockers.push('unresolved-destination');
   else if (destinationKind === 'local-entity') normalizations.push('synthetic-class');
-  if (exact && isParameterizedEntityFactoryType(exact.type, checker)) blockers.push('parameterized-destination');
+  if (parameterizedDestination && !localEntityConstruction) blockers.push('parameterized-destination');
   let argument: EntityFactoryClosureSite['argument'];
   if (object && shape && constructionFields) {
     argument = { fields: shape.fields, kind: 'object' };
@@ -243,7 +251,7 @@ function auditFactorySite(
     }
   } else if (call.arguments.length === 0) {
     argument = { fields: [], kind: 'omitted' };
-    blockers.push('omitted-construction');
+    if (!localOmittedConstruction) blockers.push('omitted-construction');
   } else {
     argument = { fields: [], kind: 'other' };
     blockers.push('non-object-construction');

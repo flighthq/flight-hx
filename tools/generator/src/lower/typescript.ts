@@ -10,6 +10,7 @@ import {
   entityFactoryObjectLiteral,
   entityFactoryObjectShape,
   entityFactorySyntheticClassName,
+  isParameterizedEntityFactoryType,
   isFlightCreateEntityCall,
 } from '../analyze/entity-factory-call.ts';
 import {
@@ -3710,7 +3711,10 @@ function cppStructInitEntityFactoryConstruction(
   const shape = entityFactoryObjectShape(node);
   const constructionFields = shape.hasSpread ? entityFactoryExpandedObjectFields(node, checker) : shape.fields;
   if (!binding) {
-    return namedIdentity
+    const parameterizedDestination = destinationCandidates.some((candidate) =>
+      isParameterizedEntityFactoryType(candidate.type, checker),
+    );
+    return namedIdentity && !parameterizedDestination
       ? undefined
       : syntheticEntityFactoryConstruction(node, call, constructionFields, shape, context);
   }
@@ -3785,6 +3789,14 @@ function syntheticEntityFactoryConstruction(
       type: eraseLocalTypeParameters(lowered, typeParameterNames),
     });
   }
+  return addSyntheticEntityFactoryDeclaration(call, fields, context);
+}
+
+function addSyntheticEntityFactoryDeclaration(
+  call: ts.CallExpression,
+  fields: IrTypeField[],
+  context: LoweringContext,
+): IrCppStructInitConstruction {
   const name = entityFactorySyntheticClassName(call);
   const site = origin(call, context);
   const schemaId = `synthetic-entity:${site.source}:${String(site.line)}:${String(site.column)}`;
@@ -3812,10 +3824,58 @@ function syntheticEntityFactoryConstruction(
     });
   }
   return {
-    fieldNames: constructionFields,
+    fieldNames: fields.map((field) => field.name),
     schemaHaxeType: name,
     schemaId,
     schemaName: name,
+  };
+}
+
+function syntheticOmittedEntityFactoryArgument(
+  call: ts.CallExpression,
+  context: LoweringContext,
+): IrExpression | undefined {
+  const checker = context.checker;
+  if (
+    !checker ||
+    call.arguments.length !== 0 ||
+    !ts.isIdentifier(call.expression) ||
+    call.expression.text !== 'createEntity' ||
+    !isFlightCreateEntityCall(call, checker)
+  ) {
+    return undefined;
+  }
+  const registry = context.typedStructs;
+  const destination = registry
+    ? entityFactoryDestinationCandidates(call, checker).find((candidate) => {
+        const identity = registry.resolveIdentity(candidate.type);
+        return identity !== undefined && identity.id !== '@flighthq/types:interface#Entity';
+      })
+    : undefined;
+  const typeParameterNames = enclosingTypeParameterNames(call);
+  const fields: IrTypeField[] = [];
+  if (destination) {
+    for (const property of checker
+      .getPropertiesOfType(destination.type)
+      .filter((candidate) => !candidate.getName().startsWith('__@EntityRuntimeKey@'))) {
+      const location = property.valueDeclaration ?? property.declarations?.[0] ?? call;
+      const checkerType = checker.getTypeOfSymbolAtLocation(property, location);
+      const lowered = lowerCheckerType(checkerType, call, context, new Set()) ?? {
+        kind: 'dynamic' as const,
+        reason: 'checker-known-unrepresentable' as const,
+      };
+      fields.push({
+        name: property.getName(),
+        optional: false,
+        type: eraseLocalTypeParameters(lowered, typeParameterNames),
+      });
+    }
+  }
+  const construction = addSyntheticEntityFactoryDeclaration(call, fields, context);
+  return {
+    cppStructInit: fields.length > 0 ? { ...construction, missingFieldNames: construction.fieldNames } : construction,
+    kind: 'object',
+    properties: [],
   };
 }
 
@@ -4121,6 +4181,7 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
     };
   }
   if (ts.isCallExpression(node)) {
+    const syntheticOmittedEntityArgument = syntheticOmittedEntityFactoryArgument(node, context);
     const variadic = variadicCallConvention(node, context);
     const callee = lowerExpression(node.expression, context);
     const direct =
@@ -4140,12 +4201,23 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
         ? directCallArguments(node, context)
         : undefined;
     return {
-      arguments: checkedCall?.arguments ?? node.arguments.map((argument) => lowerExpression(argument, context)),
+      arguments:
+        syntheticOmittedEntityArgument !== undefined
+          ? [syntheticOmittedEntityArgument]
+          : (checkedCall?.arguments ?? node.arguments.map((argument) => lowerExpression(argument, context))),
       callee,
-      ...(checkedCall?.inferenceCasts.some(Boolean) ? { inferenceCastArguments: checkedCall.inferenceCasts } : {}),
-      ...(checkedCall?.omittedArguments.some(Boolean) ? { omittedArguments: checkedCall.omittedArguments } : {}),
-      ...(checkedCall?.undefinedArguments.some(Boolean) ? { undefinedArguments: checkedCall.undefinedArguments } : {}),
-      ...(checkedCall?.types ? { directArgumentTypes: checkedCall.types } : {}),
+      ...(syntheticOmittedEntityArgument === undefined && checkedCall?.inferenceCasts.some(Boolean)
+        ? { inferenceCastArguments: checkedCall.inferenceCasts }
+        : {}),
+      ...(syntheticOmittedEntityArgument === undefined && checkedCall?.omittedArguments.some(Boolean)
+        ? { omittedArguments: checkedCall.omittedArguments }
+        : {}),
+      ...(syntheticOmittedEntityArgument === undefined && checkedCall?.undefinedArguments.some(Boolean)
+        ? { undefinedArguments: checkedCall.undefinedArguments }
+        : {}),
+      ...(syntheticOmittedEntityArgument === undefined && checkedCall?.types
+        ? { directArgumentTypes: checkedCall.types }
+        : {}),
       ...(direct
         ? {
             direct: true,

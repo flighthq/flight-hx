@@ -82,6 +82,20 @@ typedef EventSlot__tray = String;
 
 typedef EventBackend__tray<Event> = { var getSignal:TrayIcon->Null<Signal<Event->Void>>; };
 
+#if !flight_struct_typedef
+@:allow(flight._Tray)
+@:structInit
+private class EntityShapeL75C16__tray {
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new():Void {
+    this.__symbol__EntityRuntime = null;
+  }
+}
+#else
+private typedef EntityShapeL75C16__tray = { @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
 @:noCompletion
 class _Tray {
   public static function disableTrayGuards():Void {
@@ -104,7 +118,7 @@ class _Tray {
         var tray:TrayIconForHost<HostType> = cast _Runtime.UNDEFINED;
         var result:TrayCreateProviderResult = cast _Runtime.UNDEFINED;
         var runtime:TrayRuntime__tray = cast _Runtime.UNDEFINED;
-        tray = (cast (#if js _Runtime.callValue(createEntity, cast ([] : Array<Dynamic>)) #else createEntity(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : TrayIconForHost<HostType>);
+        tray = (cast (cast createEntity(({  } : EntityShapeL75C16__tray)) : EntityShapeL75C16__tray) : TrayIconForHost<HostType>);
         return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.flatMap((cast (cast _Runtime.field(host, 'tray') : { var lifecycle:TrayLifecycleBackend; }).lifecycle : TrayLifecycleBackend).create(({ final __callArgument11:Dynamic = tray; __callArgument11; }), ({ final __callArgument12:Dynamic = options; __callArgument12; })), function(__awaitValue10:Dynamic):Dynamic {
             (result = cast (__awaitValue10 : Dynamic));

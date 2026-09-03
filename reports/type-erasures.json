@@ -203,12 +203,13 @@
     },
     {
       "byReason": {
+        "source-unknown": 2,
         "standard-toolkit-boundary": 8,
-        "unclassified": 8
+        "unclassified": 9
       },
       "module": "flight._Application",
       "source": "upstream/packages/application/src/applicationRenderView.ts",
-      "total": 16
+      "total": 19
     },
     {
       "byReason": {
@@ -3463,11 +3464,12 @@
       "byReason": {
         "source-undefined": 1,
         "source-unknown": 1,
-        "standard-toolkit-boundary": 5
+        "standard-toolkit-boundary": 5,
+        "unclassified": 1
       },
       "module": "flight._HostElectron",
       "source": "upstream/packages/host-electron/src/electronShortcut.ts",
-      "total": 7
+      "total": 8
     },
     {
       "byReason": {
@@ -3585,11 +3587,12 @@
     {
       "byReason": {
         "source-unknown": 1,
-        "standard-toolkit-boundary": 12
+        "standard-toolkit-boundary": 12,
+        "unclassified": 1
       },
       "module": "flight._HostTauri",
       "source": "upstream/packages/host-tauri/src/tauriShortcut.ts",
-      "total": 13
+      "total": 14
     },
     {
       "byReason": {
@@ -10382,11 +10385,11 @@
         "source-any": 1,
         "source-unknown": 1,
         "standard-toolkit-boundary": 8,
-        "unclassified": 2
+        "unclassified": 3
       },
       "module": "flight._Tray",
       "source": "upstream/packages/tray/src/tray.ts",
-      "total": 12
+      "total": 13
     },
     {
       "byReason": {
@@ -12548,12 +12551,12 @@
       "source-never": 186,
       "source-null": 271,
       "source-undefined": 551,
-      "source-unknown": 4741,
+      "source-unknown": 4743,
       "standard-toolkit-boundary": 22029,
-      "unclassified": 778
+      "unclassified": 782
     },
     "checkerKnownUnrepresentable": 0,
     "modules": 1470,
-    "total": 30455
+    "total": 30461
   }
 }

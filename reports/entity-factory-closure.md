@@ -7,17 +7,17 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | Metric | Count |
 | --- | ---: |
 | Production createEntity calls | 368 |
-| Exact concrete Entity calls | 181 |
-| Exact concrete Entity schemas | 146 |
-| Constructor-ready Entity calls | 342 |
-| Blocked Entity calls | 9 |
+| Exact concrete Entity calls | 179 |
+| Exact concrete Entity schemas | 144 |
+| Constructor-ready Entity calls | 346 |
+| Blocked Entity calls | 5 |
 | Bare Entity calls | 0 |
 | Generic Entity calls | 3 |
-| Private local Entity classes | 164 |
+| Private local Entity classes | 168 |
 | Field-order-normalized calls | 24 |
 | Missing-field-initialized calls | 9 |
 | Spread-projected calls | 17 |
-| Structural Entity calls | 3 |
+| Structural Entity calls | 1 |
 | Exact non-Entity calls | 17 |
 | Unresolved calls | 0 |
 
@@ -45,7 +45,6 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `@flighthq/types:interface#AnisotropyPbrExtension` | 1 | 1 | 0 | `createAnisotropyPbrExtension` |
 | `@flighthq/types:interface#App` | 1 | 1 | 0 | `createApp` |
 | `@flighthq/types:interface#Application` | 1 | 1 | 0 | `createApplication` |
-| `@flighthq/types:interface#ApplicationRenderView` | 1 | 0 | 1 | `createApplicationRenderView` |
 | `@flighthq/types:interface#ApplicationWindow` | 1 | 1 | 0 | `createApplicationWindow` |
 | `@flighthq/types:interface#AreaLight` | 2 | 2 | 0 | `cloneAreaLight`, `createAreaLight` |
 | `@flighthq/types:interface#Bitmap` | 8 | 8 | 0 | `cloneBitmap`, `createBitmap`, `createBitmapFromCanvas`, `cropBitmap`, `extendBitmap`, `makeBitmap`, `readBitmap`, `trimBitmap` |
@@ -168,7 +167,6 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `@flighthq/types:type#ElectronProtocolCapabilities` | 1 | 1 | 0 | `createElectronProtocolCapabilities` |
 | `@flighthq/types:type#TauriAppCapabilities` | 1 | 1 | 0 | `createTauriAppCapabilities` |
 | `@flighthq/types:type#TauriNotificationCapabilities` | 1 | 1 | 0 | `createTauriNotificationCapabilities` |
-| `@flighthq/types:type#TrayIconForHost` | 1 | 0 | 1 | `createTrayIcon` |
 | `@flighthq/types:type#WebPageNotificationCapabilities` | 1 | 1 | 0 | `createWebPageNotificationCapabilities` |
 | `@flighthq/types:type#WebServiceWorkerNotificationCapabilities` | 1 | 1 | 0 | `createWebServiceWorkerNotificationCapabilities` |
 
@@ -196,7 +194,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/animation/src/animationTrack.ts:130:10` | `trimAnimationTrack` | `@flighthq/types:interface#AnimationTrack` | `contextual` | `object` | 7 | ready | — | — |
 | `upstream/packages/app/src/app.ts:134:10` | `createApp` | `@flighthq/types:interface#App` | `contextual` | `object` | 6 | ready | — | — |
 | `upstream/packages/application/src/application.ts:65:10` | `createApplication` | `@flighthq/types:interface#Application` | `contextual` | `object` | 13 | ready | — | — |
-| `upstream/packages/application/src/applicationRenderView.ts:43:16` | `createApplicationRenderView` | `@flighthq/types:interface#ApplicationRenderView` | `contextual` | `object` | 4 | blocked | — | `parameterized-destination` |
+| `upstream/packages/application/src/applicationRenderView.ts:43:16` | `createApplicationRenderView` | `synthetic-entity:upstream/packages/application/src/applicationRenderView.ts:43:16` | `contextual` | `object` | 4 | ready | `synthetic-class` | — |
 | `upstream/packages/application/src/window.ts:251:10` | `createApplicationWindow` | `@flighthq/types:interface#ApplicationWindow` | `contextual` | `object` | 36 | ready | `field-order` | — |
 | `upstream/packages/bitmap/src/bitmap.ts:6:10` | `cloneBitmap` | `@flighthq/types:interface#Bitmap` | `contextual` | `object` | 8 | ready | `field-order` | — |
 | `upstream/packages/bitmap/src/bitmap.ts:74:10` | `createBitmap` | `@flighthq/types:interface#Bitmap` | `contextual` | `object` | 8 | ready | `field-order` | — |
@@ -326,7 +324,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/host-electron/src/electronShell.ts:77:10` | `createElectronShellShortcutLinkBackend` | `@flighthq/types:interface#ShellShortcutLinkBackend` | `contextual` | `object` | 2 | ready | — | — |
 | `upstream/packages/host-electron/src/electronShortcut.ts:11:20` | `createElectronShortcutQueryBackend` | `@flighthq/types:interface#ShortcutQueryBackend` | `returned-variable` | `object` | 1 | ready | — | — |
 | `upstream/packages/host-electron/src/electronShortcut.ts:32:20` | `createElectronShortcutTriggerBackend` | `@flighthq/types:interface#ShortcutTriggerBackend` | `returned-variable` | `object` | 3 | ready | — | — |
-| `upstream/packages/host-electron/src/electronShortcut.ts:46:28` | `subscribe` | `structural-entity` | `variable` | `omitted` | 0 | blocked | — | `omitted-construction`, `structural-entity-destination` |
+| `upstream/packages/host-electron/src/electronShortcut.ts:46:28` | `subscribe` | `synthetic-entity:upstream/packages/host-electron/src/electronShortcut.ts:46:28` | `variable` | `omitted` | 0 | ready | `synthetic-class` | — |
 | `upstream/packages/host-electron/src/electronStorage.ts:76:10` | `createElectronStorageBackend` | `synthetic-entity:upstream/packages/host-electron/src/electronStorage.ts:76:10` | `contextual` | `object` | 5 | ready | `synthetic-class` | — |
 | `upstream/packages/host-electron/src/electronTray.ts:51:21` | `createElectronTrayCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:51:21` | `variable` | `object` | 4 | ready | `synthetic-class` | — |
 | `upstream/packages/host-electron/src/electronTray.ts:114:17` | `createElectronTrayCapabilities` | `synthetic-entity:upstream/packages/host-electron/src/electronTray.ts:114:17` | `variable` | `object` | 1 | ready | `synthetic-class` | — |
@@ -368,7 +366,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/host-tauri/src/tauriShell.ts:37:46` | `makeTauriShellCapabilities` | `@flighthq/types:interface#ShellPathRevealBackend` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/host-tauri/src/tauriShortcut.ts:11:20` | `createTauriShortcutQueryBackend` | `@flighthq/types:interface#ShortcutQueryBackend` | `returned-variable` | `object` | 1 | ready | — | — |
 | `upstream/packages/host-tauri/src/tauriShortcut.ts:33:20` | `createTauriShortcutTriggerBackend` | `@flighthq/types:interface#ShortcutTriggerBackend` | `returned-variable` | `object` | 3 | ready | — | — |
-| `upstream/packages/host-tauri/src/tauriShortcut.ts:48:28` | `subscribe` | `structural-entity` | `variable` | `omitted` | 0 | blocked | — | `omitted-construction`, `structural-entity-destination` |
+| `upstream/packages/host-tauri/src/tauriShortcut.ts:48:28` | `subscribe` | `synthetic-entity:upstream/packages/host-tauri/src/tauriShortcut.ts:48:28` | `variable` | `omitted` | 0 | ready | `synthetic-class` | — |
 | `upstream/packages/host-tauri/src/tauriTray.ts:39:21` | `createTauriTrayCapabilities` | `synthetic-entity:upstream/packages/host-tauri/src/tauriTray.ts:39:21` | `variable` | `object` | 4 | ready | `synthetic-class` | — |
 | `upstream/packages/host-tauri/src/tauriTray.ts:112:17` | `createTauriTrayCapabilities` | `synthetic-entity:upstream/packages/host-tauri/src/tauriTray.ts:112:17` | `variable` | `object` | 1 | ready | `synthetic-class` | — |
 | `upstream/packages/host-tauri/src/tauriTray.ts:118:16` | `createTauriTrayCapabilities` | `synthetic-entity:upstream/packages/host-tauri/src/tauriTray.ts:118:16` | `variable` | `object` | 1 | ready | `synthetic-class` | — |
@@ -543,4 +541,4 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/texture/src/videoTexture.ts:97:17` | `createVideoImageResource` | `@flighthq/types:interface#Image` | `contextual` | `object` | 7 | ready | `field-order` | — |
 | `upstream/packages/textureatlas/src/textureAtlas.ts:6:10` | `createTextureAtlas` | `@flighthq/types:interface#TextureAtlas` | `contextual` | `object` | 6 | ready | — | — |
 | `upstream/packages/textureatlas/src/textureAtlasRegion.ts:121:10` | `createTextureAtlasRegion` | `@flighthq/types:interface#TextureAtlasRegion` | `contextual` | `object` | 15 | ready | `field-order` | — |
-| `upstream/packages/tray/src/tray.ts:75:16` | `createTrayIcon` | `@flighthq/types:type#TrayIconForHost` | `contextual` | `omitted` | 0 | blocked | — | `omitted-construction`, `parameterized-destination` |
+| `upstream/packages/tray/src/tray.ts:75:16` | `createTrayIcon` | `synthetic-entity:upstream/packages/tray/src/tray.ts:75:16` | `contextual` | `omitted` | 0 | ready | `synthetic-class` | — |

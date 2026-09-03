@@ -4374,7 +4374,7 @@ describe('typed struct analysis', () => {
     const result = lowerFixture(
       `
         export interface Entity { __EntityRuntimeKey?: unknown; }
-        export function createEntity<Type extends object>(obj: Type): Type & Entity {
+        export function createEntity<Type extends object>(obj?: Type): Type & Entity {
           return obj as Type & Entity;
         }
         export function createProvider(): { run(): number } & Entity {
@@ -4384,13 +4384,16 @@ describe('typed struct analysis', () => {
           const provider = { stop() { return 2; } };
           return createEntity(provider);
         }
+        export function createToken(): Entity {
+          return createEntity();
+        }
       `,
       candidate,
     );
     const synthetics = result.lowered.declarations.filter(
       (declaration) => declaration.kind === 'type' && declaration.name.startsWith('EntityShapeL'),
     );
-    expect(synthetics).toHaveLength(2);
+    expect(synthetics).toHaveLength(3);
     const synthetic = synthetics[0];
     if (!synthetic || synthetic.kind !== 'type') throw new Error('Expected synthetic Entity class');
     const fixtureModule = {
@@ -4407,6 +4410,7 @@ describe('typed struct analysis', () => {
     expect(synthetic.packagePrivate).toBe(true);
     expect(output).toContain('@:allow(flight.EntityFixture)\n@:structInit\nprivate class EntityShapeL');
     expect(output).toContain('private function new(run:Void->Float):Void');
+    expect(output).toContain('private function new():Void');
     expect(output).toMatch(/\(\{ run: function\(\):Float \{[\s\S]*\} \} : EntityShapeL\d+C\d+\)/u);
   });
 
@@ -4615,18 +4619,18 @@ describe('typed struct analysis', () => {
     expect(registry.resolveIdentity(renderTextureReturn)?.name).toBe('RenderTexture');
     expect(entityFactories.summary).toEqual({
       bareEntityCalls: 0,
-      blockedEntityCalls: 9,
+      blockedEntityCalls: 5,
       calls: 368,
-      exactEntityCalls: 181,
-      exactEntitySchemas: 146,
+      exactEntityCalls: 179,
+      exactEntitySchemas: 144,
       exactNonEntityCalls: 17,
       genericEntityCalls: 3,
-      localEntityCalls: 164,
+      localEntityCalls: 168,
       normalizedFieldOrderCalls: 24,
       normalizedMissingFieldCalls: 9,
       normalizedSpreadProjectionCalls: 17,
-      readyEntityCalls: 342,
-      structuralEntityCalls: 3,
+      readyEntityCalls: 346,
+      structuralEntityCalls: 1,
       unresolvedCalls: 0,
     });
     expect(entityFactories.sites.find((site) => site.factory.name === 'createMatrix4')).toMatchObject({
@@ -4653,9 +4657,10 @@ describe('typed struct analysis', () => {
       status: 'ready',
     });
     expect(entityFactories.sites.find((site) => site.factory.name === 'createApplicationRenderView')).toMatchObject({
-      blockers: ['parameterized-destination'],
-      destination: { kind: 'exact-entity', schemaName: 'ApplicationRenderView' },
-      status: 'blocked',
+      blockers: [],
+      destination: { kind: 'local-entity', schemaName: 'EntityShapeL43C16' },
+      normalizations: ['synthetic-class'],
+      status: 'ready',
     });
     expect(entityFactories.sites.find((site) => site.factory.name === 'createCanvasTextLabelData')).toMatchObject({
       blockers: [],
@@ -4669,6 +4674,17 @@ describe('typed struct analysis', () => {
       argument: { kind: 'object' },
       blockers: [],
       destination: { kind: 'local-entity', schemaName: 'EntityShapeL73C10' },
+      normalizations: ['synthetic-class'],
+      status: 'ready',
+    });
+    expect(
+      entityFactories.sites.find(
+        (site) => site.source.endsWith('/host-electron/src/electronShortcut.ts') && site.factory.name === 'subscribe',
+      ),
+    ).toMatchObject({
+      argument: { kind: 'omitted' },
+      blockers: [],
+      destination: { kind: 'local-entity', schemaName: 'EntityShapeL46C28' },
       normalizations: ['synthetic-class'],
       status: 'ready',
     });

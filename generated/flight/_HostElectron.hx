@@ -1175,6 +1175,20 @@ private class EntityShapeL36C18__electronScreen {
 private typedef EntityShapeL36C18__electronScreen = { var subscribe:(ScreenChangeEvent->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:structInit
+private class EntityShapeL46C28__electronShortcut {
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new():Void {
+    this.__symbol__EntityRuntime = null;
+  }
+}
+#else
+private typedef EntityShapeL46C28__electronShortcut = { @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
 typedef StorageRecord__electronStorage = flight._internal._Record<String, String>;
 
 typedef StorageRecordResult__electronStorage = flight._internal._Union2<{ var reason:String; var value:StorageRecord__electronStorage; }, { var reason:StorageGetItemFailureReason; var value:Dynamic; }>;
@@ -2878,7 +2892,7 @@ class _HostElectron {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var subscription:Entity = cast _Runtime.UNDEFINED;
         var registered:Bool = cast _Runtime.UNDEFINED;
-        subscription = (cast (#if js _Runtime.callValue(createEntity, cast ([] : Array<Dynamic>)) #else createEntity(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Entity);
+        subscription = (cast createEntity(({  } : EntityShapeL46C28__electronShortcut)) : EntityShapeL46C28__electronShortcut);
         registered = (cast globalShortcut : ElectronGlobalShortcut).register((cast accelerator : String), ({ final __callArgument696:Dynamic = trigger; __callArgument696; }));
         if ((cast !(cast registered : Bool) : Bool)) { return cast { reason: 'refused' }; }
         ((cast registrations : flight._internal._Map<ShortcutTriggerSubscription, String>).set(subscription, (cast accelerator)));

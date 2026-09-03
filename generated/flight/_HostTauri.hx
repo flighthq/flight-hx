@@ -359,6 +359,20 @@ private class EntityShapeL96C10__tauriRegister {
 private typedef EntityShapeL96C10__tauriRegister = { var accessibility:{  }; var app:TauriAppCapabilities; var clipboard:{ var text:ClipboardTextBackend; }; var connectivity:{  }; var dialog:{ var directoryOpen:{ >DirectoryOpenDialogBackend, >Entity, }; var fileOpen:{ >FileOpenDialogBackend, >Entity, }; var fileSave:{ >FileSaveDialogBackend, >Entity, }; var message:MessageDialogBackend; }; var graphics:{  }; var input:{  }; var ipc:{  }; var media:{  }; var menu:{ var application:MenuApplicationBackend; var popup:MenuPopupBackend; var select:MenuSelectBackend; }; var midi:{  }; var net:{  }; var power:{  }; var protocol:{  }; var notification:TauriNotificationCapabilities; var shortcut:{ var query:ShortcutQueryBackend; var trigger:ShortcutTriggerBackend; }; var screen:{  }; var share:{  }; var shell:HostShellCapabilities; var storage:{  }; var system:{ var platform:PlatformBackend; }; var text:{  }; var tray:TauriTrayCapabilitiesFor<flight._internal._Any>; var ui:{  }; var updater:{  }; var window:WindowBackend; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
+#if !flight_struct_typedef
+@:allow(flight._HostTauri)
+@:structInit
+private class EntityShapeL48C28__tauriShortcut {
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new():Void {
+    this.__symbol__EntityRuntime = null;
+  }
+}
+#else
+private typedef EntityShapeL48C28__tauriShortcut = { @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
 typedef TrayRecord__tauriTray = { var destroying:Bool; var icon:TauriTrayIcon; var interactionEvents:Signal<TrayInteractionEvent->Void>; var menuGeneration:Float; var menus:Array<TauriMenu>; var menuSelectionEvents:Signal<TrayMenuSelectionEvent->Void>; var nativePending:Bool; var pendingMenuOperations:flight._internal._Set<flight._internal._Promise<flight._internal._Nothing>>; var title:String; var tooltip:String; };
 
 #if !flight_struct_typedef
@@ -1373,7 +1387,7 @@ class _HostTauri {
         flight._internal._Async.protect(function():Dynamic {
           var subscription:Entity = cast _Runtime.UNDEFINED;
           var registration:flight._internal._Promise<flight._internal._Nothing> = cast _Runtime.UNDEFINED;
-          subscription = (cast (#if js _Runtime.callValue(createEntity, cast ([] : Array<Dynamic>)) #else createEntity(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Entity);
+          subscription = (cast createEntity(({  } : EntityShapeL48C28__tauriShortcut)) : EntityShapeL48C28__tauriShortcut);
           registration = (cast globalShortcut : TauriGlobalShortcutPlugin).register((cast accelerator : String), (cast function(event:TauriShortcutEvent):Void {
             if ((cast ((cast _Runtime.strictEquals(_Runtime.field(event, 'state'), 'Pressed') : Bool) && (cast ((cast registrations : flight._internal._Map<ShortcutTriggerSubscription, String>).has(subscription)) : Bool)) : Bool)) { trigger(); }
           } : Dynamic));
