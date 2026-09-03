@@ -5,4 +5,7 @@ const api = compiled.flight._Tween;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const addTweenToManager = api.addTweenToManager;
+export const hasTweenProperty = api.hasTweenProperty;
 export const initializeTween = api.initializeTween;
+export const makeTween = api.makeTween;

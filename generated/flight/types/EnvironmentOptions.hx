@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef EnvironmentOptions = { @:optional var environment:Null<Texture>; @:optional var intensity:Float; };
+typedef EnvironmentOptions = { @:optional var enabled:Bool; @:optional var environment:Null<Texture>; @:optional var intensity:Float; };

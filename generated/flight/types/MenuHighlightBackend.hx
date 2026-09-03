@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MenuHighlightBackend = { var subscribe:(String->Void)->(Void->Void); };
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class MenuHighlightBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var subscribe:(String->Void)->(Void->Void);
+
+  private function new(subscribe:(String->Void)->(Void->Void)):Void {
+    this.__symbol__EntityRuntime = null;
+    this.subscribe = subscribe;
+  }
+}
+#else
+typedef MenuHighlightBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var subscribe:(String->Void)->(Void->Void); };
+#end

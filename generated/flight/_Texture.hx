@@ -21,7 +21,7 @@ import flight.types.EmbeddedImageResourceReference;
 import flight.types.Entity;
 import flight.types.EntityRuntime;
 import flight.types.ExternalImageResourceReference;
-import flight.types.Image;
+import flight.types.ImageResource;
 import flight.types.ImageResourceReference;
 import flight.types.Matrix3Like;
 import flight.types.RenderTarget;
@@ -264,7 +264,7 @@ private typedef EntityShapeL133C30__texture = { var dimension:String; var source
 @:noCompletion
 class _Texture {
   public static function getCubeSources__cubeTexture(texture:CubeTexture):TextureSourceCubeFaces {
-    return cast (cast texture : { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }).sources;
+    return cast (cast texture : { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }).sources;
     return cast null;
   }
 
@@ -689,12 +689,12 @@ class _Texture {
   }
 
   public static function advanceVideoTexture(texture:TextureLike):Float {
-    var image:Null<Image> = cast _Runtime.UNDEFINED;
-    image = (cast _Texture.getVideoImage__videoTexture(({ final __callArgument140:Dynamic = texture; __callArgument140; })) : Null<Image>);
+    var image:Null<ImageResource> = cast _Runtime.UNDEFINED;
+    image = (cast _Texture.getVideoImage__videoTexture(({ final __callArgument140:Dynamic = texture; __callArgument140; })) : Null<ImageResource>);
     if ((cast _Runtime.looseEquals(image, null) : Bool)) { return cast (cast texture : { var version:Float; }).version; }
     _Texture.updateVideoImageSize__videoTexture(({ final __callArgument142:Dynamic = image; __callArgument142; }));
-    ((cast image : Image).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast image : Image).version + 1.0)), 0));
-    ((cast texture : { var version:Float; }).version = (cast image : Image).version);
+    ((cast image : ImageResource).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast image : ImageResource).version + 1.0)), 0));
+    ((cast texture : { var version:Float; }).version = (cast image : ImageResource).version);
     return cast (cast texture : { var version:Float; }).version;
     return cast null;
   }
@@ -709,8 +709,8 @@ class _Texture {
   }
 
   public static function createVideoTexture(source:VideoResource, ?opts:flight._internal._Partial<TextureLike>):Texture2D {
-    var image:Null<Image> = cast _Runtime.UNDEFINED;
-    image = (cast _Texture.createVideoImageResource__videoTexture(({ final __callArgument150:Dynamic = source; __callArgument150; })) : Null<Image>);
+    var image:Null<ImageResource> = cast _Runtime.UNDEFINED;
+    image = (cast _Texture.createVideoImageResource__videoTexture(({ final __callArgument150:Dynamic = source; __callArgument150; })) : Null<ImageResource>);
     return cast (cast createTexture((cast _Runtime.mergeObjects([opts, { dimension: '2d' }, { source: image }, { version: _Runtime.coalesce(({ final __structural152 = image; __structural152 == null ? _Runtime.UNDEFINED : (cast __structural152 : { var version:Float; }).version; }), function():Dynamic return cast _Texture.INITIAL_VIDEO_VERSION__videoTexture) }]) : Dynamic)) : Texture2D);
     return cast null;
   }
@@ -751,42 +751,42 @@ class _Texture {
   }
 
   public static function resetVideoTextureFrame(texture:TextureLike):Void {
-    var image:Null<Image> = cast _Runtime.UNDEFINED;
-    image = (cast _Texture.getVideoImage__videoTexture(({ final __callArgument172:Dynamic = texture; __callArgument172; })) : Null<Image>);
-    if ((cast !_Runtime.looseEquals(image, null) : Bool)) { ((cast image : Image).version = _Texture.INITIAL_VIDEO_VERSION__videoTexture); }
+    var image:Null<ImageResource> = cast _Runtime.UNDEFINED;
+    image = (cast _Texture.getVideoImage__videoTexture(({ final __callArgument172:Dynamic = texture; __callArgument172; })) : Null<ImageResource>);
+    if ((cast !_Runtime.looseEquals(image, null) : Bool)) { ((cast image : ImageResource).version = _Texture.INITIAL_VIDEO_VERSION__videoTexture); }
     ((cast texture : { var version:Float; }).version = _Texture.INITIAL_VIDEO_VERSION__videoTexture);
   }
 
   public static function setVideoTextureSource(texture:TextureLike, source:VideoResource):Void {
     if ((cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) { _Runtime.throwValue(_Runtime.error('setVideoTextureSource requires a Texture2D')); }
-    ((cast texture : { var version:Float; var dimension:String; var source:Null<TextureSource>; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).source = (cast _Texture.createVideoImageResource__videoTexture(({ final __callArgument174:Dynamic = source; __callArgument174; })) : Null<Image>));
+    ((cast texture : { var version:Float; var dimension:String; var source:Null<TextureSource>; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).source = (cast _Texture.createVideoImageResource__videoTexture(({ final __callArgument174:Dynamic = source; __callArgument174; })) : Null<ImageResource>));
     ((cast texture : { var version:Float; var dimension:String; var source:Null<TextureSource>; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).version = _Texture.INITIAL_VIDEO_VERSION__videoTexture);
   }
 
-  public static function createVideoImageResource__videoTexture(source:VideoResource):Null<Image> {
-    var image:Image = cast _Runtime.UNDEFINED;
+  public static function createVideoImageResource__videoTexture(source:VideoResource):Null<ImageResource> {
+    var image:ImageResource = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(source.element, null) : Bool)) { return cast null; }
-    image = (cast (cast createEntity(({ final __callArgument176:Dynamic = (#if flight_struct_typedef { height: 0.0, alphaType: 'straight', gamut: 'srgb', kind: ImageTextureSourceKind, source: source.element, version: _Texture.INITIAL_VIDEO_VERSION__videoTexture, width: 0.0 } #else ({ final __structInitField0:Dynamic = 0.0; final __structInitField1:Dynamic = 'straight'; final __structInitField2:Dynamic = 'srgb'; final __structInitField3:Dynamic = ImageTextureSourceKind; final __structInitField4:Dynamic = source.element; final __structInitField5:Dynamic = _Texture.INITIAL_VIDEO_VERSION__videoTexture; final __structInitField6:Dynamic = 0.0; ({ alphaType: __structInitField1, gamut: __structInitField2, height: __structInitField0, kind: __structInitField3, source: __structInitField4, version: __structInitField5, width: __structInitField6 } : Image); }) #end); __callArgument176; })) : Image) : Image);
+    image = (cast (cast createEntity(({ final __callArgument176:Dynamic = (#if flight_struct_typedef { height: 0.0, alphaType: 'straight', gamut: 'srgb', kind: ImageTextureSourceKind, source: source.element, version: _Texture.INITIAL_VIDEO_VERSION__videoTexture, width: 0.0 } #else ({ final __structInitField0:Dynamic = 0.0; final __structInitField1:Dynamic = 'straight'; final __structInitField2:Dynamic = 'srgb'; final __structInitField3:Dynamic = ImageTextureSourceKind; final __structInitField4:Dynamic = source.element; final __structInitField5:Dynamic = _Texture.INITIAL_VIDEO_VERSION__videoTexture; final __structInitField6:Dynamic = 0.0; ({ alphaType: __structInitField1, gamut: __structInitField2, height: __structInitField0, kind: __structInitField3, source: __structInitField4, version: __structInitField5, width: __structInitField6 } : ImageResource); }) #end); __callArgument176; })) : ImageResource) : ImageResource);
     _Texture.updateVideoImageSize__videoTexture(({ final __callArgument178:Dynamic = image; __callArgument178; }));
     return cast image;
     return cast null;
   }
 
   public static function getVideoElement__videoTexture(texture:TextureLike):Null<flight._internal.dom.HTMLVideoElement> {
-    return cast _Runtime.coalesce((cast ({ final __structural182 = (cast _Texture.getVideoImage__videoTexture(({ final __callArgument180:Dynamic = texture; __callArgument180; })) : Null<Image>); __structural182 == null ? _Runtime.UNDEFINED : (cast __structural182 : { var source:flight._internal._Any; }).source; }) : Null<flight._internal.dom.HTMLVideoElement>), function():Dynamic return cast null);
+    return cast _Runtime.coalesce((cast ({ final __structural182 = (cast _Texture.getVideoImage__videoTexture(({ final __callArgument180:Dynamic = texture; __callArgument180; })) : Null<ImageResource>); __structural182 == null ? _Runtime.UNDEFINED : (cast __structural182 : { var source:flight._internal._Any; }).source; }) : Null<flight._internal.dom.HTMLVideoElement>), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function getVideoImage__videoTexture(texture:TextureLike):Null<Image> {
-    return cast ((cast _Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool) ? (cast (cast (cast texture : { var version:Float; var dimension:String; var source:Null<TextureSource>; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).source : Null<Image>) : Dynamic) : (cast null : Dynamic));
+  public static function getVideoImage__videoTexture(texture:TextureLike):Null<ImageResource> {
+    return cast ((cast _Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool) ? (cast (cast (cast texture : { var version:Float; var dimension:String; var source:Null<TextureSource>; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).source : Null<ImageResource>) : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
-  public static function updateVideoImageSize__videoTexture(image:Image):Void {
+  public static function updateVideoImageSize__videoTexture(image:ImageResource):Void {
     var element:flight._internal.dom.HTMLVideoElement = cast _Runtime.UNDEFINED;
-    element = (cast (cast image : Image).source : flight._internal.dom.HTMLVideoElement);
-    ((cast image : Image).width = _Runtime.orValue((cast element : flight._internal.dom.HTMLVideoElement).videoWidth, function():Dynamic return cast 0.0));
-    ((cast image : Image).height = _Runtime.orValue((cast element : flight._internal.dom.HTMLVideoElement).videoHeight, function():Dynamic return cast 0.0));
+    element = (cast (cast image : ImageResource).source : flight._internal.dom.HTMLVideoElement);
+    ((cast image : ImageResource).width = _Runtime.orValue((cast element : flight._internal.dom.HTMLVideoElement).videoWidth, function():Dynamic return cast 0.0));
+    ((cast image : ImageResource).height = _Runtime.orValue((cast element : flight._internal.dom.HTMLVideoElement).videoHeight, function():Dynamic return cast 0.0));
   }
 
   public static final HAVE_CURRENT_DATA__videoTexture:Float = 2.0;

@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const canLerpRenderEffects = api.canLerpRenderEffects;
 export const lerpRenderEffect = api.lerpRenderEffect;
+export const RENDER_EFFECT_FIELD_ROLES = api.RENDER_EFFECT_FIELD_ROLES;

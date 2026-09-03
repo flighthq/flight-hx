@@ -3,30 +3,3 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
-import flight._Webcam as Facade_Webcam_flight__Webcam;
-import flight.types.BackendExplanation;
-import flight.types.MediaFileCaptureOptions;
-import flight.types.MediaFileCapturePhoto;
-import flight.types.MediaFileCaptureVideo;
-
-class Webcam {
-  public static function explainMediaFileCaptureBackend():BackendExplanation {
-    return cast Facade_Webcam_flight__Webcam.explainMediaFileCaptureBackend();
-    return cast null;
-  }
-
-  public static function recordMediaFileCaptureVideo(?options:MediaFileCaptureOptions):flight._internal._Promise<Null<MediaFileCaptureVideo>> {
-    return cast Facade_Webcam_flight__Webcam.recordMediaFileCaptureVideo(options);
-    return cast null;
-  }
-
-  public static function selectMediaFileCaptureImage(?options:MediaFileCaptureOptions):flight._internal._Promise<Null<MediaFileCapturePhoto>> {
-    return cast Facade_Webcam_flight__Webcam.selectMediaFileCaptureImage(options);
-    return cast null;
-  }
-
-  public static function takeMediaFileCapturePhoto(?options:MediaFileCaptureOptions):flight._internal._Promise<Null<MediaFileCapturePhoto>> {
-    return cast Facade_Webcam_flight__Webcam.takeMediaFileCapturePhoto(options);
-    return cast null;
-  }
-}

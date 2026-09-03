@@ -11,25 +11,39 @@ import flight._internal._Runtime;
 class PointLight extends flight.types.Light<String> {
   public var castsShadow:Bool;
   public var color:Float;
+  public var decay:Float;
+  public var enabled:Bool;
   public var intensity:Float;
+  public var intensityUnit:LightUnit;
   public var normalBias:Float;
   public var pcfRadius:Float;
   public var position:Vector3;
   public var range:Float;
   public var shadowBias:Float;
+  public var shadowFar:Float;
+  public var shadowMapSize:Float;
+  public var shadowNear:Float;
+  public var shadowStrength:Float;
 
-  private function new(kind:String, castsShadow:Bool, color:Float, intensity:Float, normalBias:Float, pcfRadius:Float, position:Vector3, range:Float, shadowBias:Float):Void {
+  private function new(kind:String, castsShadow:Bool, color:Float, decay:Float, enabled:Bool, intensity:Float, intensityUnit:LightUnit, normalBias:Float, pcfRadius:Float, position:Vector3, range:Float, shadowBias:Float, shadowFar:Float, shadowMapSize:Float, shadowNear:Float, shadowStrength:Float):Void {
     super(kind);
     this.castsShadow = castsShadow;
     this.color = color;
+    this.decay = decay;
+    this.enabled = enabled;
     this.intensity = intensity;
+    this.intensityUnit = intensityUnit;
     this.normalBias = normalBias;
     this.pcfRadius = pcfRadius;
     this.position = position;
     this.range = range;
     this.shadowBias = shadowBias;
+    this.shadowFar = shadowFar;
+    this.shadowMapSize = shadowMapSize;
+    this.shadowNear = shadowNear;
+    this.shadowStrength = shadowStrength;
   }
 }
 #else
-typedef PointLight = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var castsShadow:Bool; var color:Float; var intensity:Float; var normalBias:Float; var pcfRadius:Float; var position:Vector3; var range:Float; var shadowBias:Float; };
+typedef PointLight = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var castsShadow:Bool; var color:Float; var decay:Float; var enabled:Bool; var intensity:Float; var intensityUnit:LightUnit; var normalBias:Float; var pcfRadius:Float; var position:Vector3; var range:Float; var shadowBias:Float; var shadowFar:Float; var shadowMapSize:Float; var shadowNear:Float; var shadowStrength:Float; };
 #end

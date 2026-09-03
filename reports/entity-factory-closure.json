@@ -92,7 +92,9 @@
           "argument": {
             "fields": [
               "color",
+              "enabled",
               "intensity",
+              "intensityUnit",
               "kind"
             ],
             "kind": "object"
@@ -110,7 +112,7 @@
             "canonicalForSchema": true,
             "name": "createAmbientLight"
           },
-          "line": 13,
+          "line": 18,
           "normalizations": [],
           "source": "upstream/packages/lighting/src/ambientLight.ts",
           "status": "ready"
@@ -1031,8 +1033,11 @@
             "fields": [
               "castsShadow",
               "color",
+              "decay",
               "direction",
+              "enabled",
               "intensity",
+              "intensityUnit",
               "kind",
               "normalBias",
               "pcfRadius",
@@ -1040,6 +1045,10 @@
               "range",
               "right",
               "shadowBias",
+              "shadowFar",
+              "shadowMapSize",
+              "shadowNear",
+              "shadowStrength",
               "up"
             ],
             "kind": "object"
@@ -1067,8 +1076,11 @@
             "fields": [
               "castsShadow",
               "color",
+              "decay",
               "direction",
+              "enabled",
               "intensity",
+              "intensityUnit",
               "kind",
               "normalBias",
               "pcfRadius",
@@ -1076,6 +1088,10 @@
               "range",
               "right",
               "shadowBias",
+              "shadowFar",
+              "shadowMapSize",
+              "shadowNear",
+              "shadowStrength",
               "up"
             ],
             "kind": "object"
@@ -1093,9 +1109,71 @@
             "canonicalForSchema": true,
             "name": "createAreaLight"
           },
-          "line": 33,
+          "line": 40,
           "normalizations": [],
           "source": "upstream/packages/lighting/src/areaLight.ts",
+          "status": "ready"
+        }
+      ]
+    },
+    {
+      "blockedCalls": 0,
+      "factories": [
+        "cloneAudioResource",
+        "createAudioResource"
+      ],
+      "readyCalls": 2,
+      "schemaId": "@flighthq/types:interface#AudioResource",
+      "schemaName": "AudioResource",
+      "sites": [
+        {
+          "argument": {
+            "fields": [
+              "buffer"
+            ],
+            "kind": "object"
+          },
+          "blockers": [],
+          "column": 10,
+          "destination": {
+            "kind": "exact-entity",
+            "route": "contextual",
+            "schemaId": "@flighthq/types:interface#AudioResource",
+            "schemaName": "AudioResource",
+            "type": "AudioResource"
+          },
+          "factory": {
+            "canonicalForSchema": false,
+            "name": "cloneAudioResource"
+          },
+          "line": 9,
+          "normalizations": [],
+          "source": "upstream/packages/audio/src/audioResource.ts",
+          "status": "ready"
+        },
+        {
+          "argument": {
+            "fields": [
+              "buffer"
+            ],
+            "kind": "object"
+          },
+          "blockers": [],
+          "column": 10,
+          "destination": {
+            "kind": "exact-entity",
+            "route": "contextual",
+            "schemaId": "@flighthq/types:interface#AudioResource",
+            "schemaName": "AudioResource",
+            "type": "AudioResource"
+          },
+          "factory": {
+            "canonicalForSchema": true,
+            "name": "createAudioResource"
+          },
+          "line": 13,
+          "normalizations": [],
+          "source": "upstream/packages/audio/src/audioResource.ts",
           "status": "ready"
         }
       ]
@@ -1876,11 +1954,11 @@
     {
       "blockedCalls": 0,
       "factories": [
-        "createCompressedImage"
+        "createCompressedImageResource"
       ],
       "readyCalls": 1,
-      "schemaId": "@flighthq/types:interface#CompressedImage",
-      "schemaName": "CompressedImage",
+      "schemaId": "@flighthq/types:interface#CompressedImageResource",
+      "schemaName": "CompressedImageResource",
       "sites": [
         {
           "argument": {
@@ -1900,13 +1978,13 @@
           "destination": {
             "kind": "exact-entity",
             "route": "contextual",
-            "schemaId": "@flighthq/types:interface#CompressedImage",
-            "schemaName": "CompressedImage",
-            "type": "CompressedImage"
+            "schemaId": "@flighthq/types:interface#CompressedImageResource",
+            "schemaName": "CompressedImageResource",
+            "type": "CompressedImageResource"
           },
           "factory": {
             "canonicalForSchema": true,
-            "name": "createCompressedImage"
+            "name": "createCompressedImageResource"
           },
           "line": 22,
           "normalizations": [],
@@ -1968,14 +2046,22 @@
         {
           "argument": {
             "fields": [
+              "cascadeCount",
+              "cascadeSplits",
               "castsShadow",
               "color",
               "direction",
+              "enabled",
               "intensity",
+              "intensityUnit",
               "kind",
               "normalBias",
               "pcfRadius",
-              "shadowBias"
+              "shadowBias",
+              "shadowFar",
+              "shadowMapSize",
+              "shadowNear",
+              "shadowStrength"
             ],
             "kind": "object"
           },
@@ -2000,19 +2086,27 @@
         {
           "argument": {
             "fields": [
+              "cascadeCount",
+              "cascadeSplits",
               "castsShadow",
               "color",
               "direction",
+              "enabled",
               "intensity",
+              "intensityUnit",
               "kind",
               "normalBias",
               "pcfRadius",
-              "shadowBias"
+              "shadowBias",
+              "shadowFar",
+              "shadowMapSize",
+              "shadowNear",
+              "shadowStrength"
             ],
             "kind": "object"
           },
           "blockers": [],
-          "column": 10,
+          "column": 35,
           "destination": {
             "kind": "exact-entity",
             "route": "contextual",
@@ -2024,7 +2118,7 @@
             "canonicalForSchema": true,
             "name": "createDirectionalLight"
           },
-          "line": 25,
+          "line": 33,
           "normalizations": [],
           "source": "upstream/packages/lighting/src/directionalLight.ts",
           "status": "ready"
@@ -2079,6 +2173,7 @@
         {
           "argument": {
             "fields": [
+              "enabled",
               "environment",
               "intensity",
               "kind"
@@ -2261,16 +2356,17 @@
     {
       "blockedCalls": 0,
       "factories": [
-        "createFont"
+        "createFontResource"
       ],
       "readyCalls": 1,
-      "schemaId": "@flighthq/types:interface#Font",
-      "schemaName": "Font",
+      "schemaId": "@flighthq/types:interface#FontResource",
+      "schemaName": "FontResource",
       "sites": [
         {
           "argument": {
             "fields": [
-              "name"
+              "family",
+              "face"
             ],
             "kind": "object"
           },
@@ -2279,17 +2375,19 @@
           "destination": {
             "kind": "exact-entity",
             "route": "contextual",
-            "schemaId": "@flighthq/types:interface#Font",
-            "schemaName": "Font",
-            "type": "Font"
+            "schemaId": "@flighthq/types:interface#FontResource",
+            "schemaName": "FontResource",
+            "type": "FontResource"
           },
           "factory": {
             "canonicalForSchema": true,
-            "name": "createFont"
+            "name": "createFontResource"
           },
           "line": 5,
-          "normalizations": [],
-          "source": "upstream/packages/font/src/font.ts",
+          "normalizations": [
+            "field-order"
+          ],
+          "source": "upstream/packages/font/src/fontResource.ts",
           "status": "ready"
         }
       ]
@@ -2456,8 +2554,10 @@
         {
           "argument": {
             "fields": [
+              "enabled",
               "groundColor",
               "intensity",
+              "intensityUnit",
               "kind",
               "skyColor"
             ],
@@ -2476,7 +2576,7 @@
             "canonicalForSchema": true,
             "name": "createHemisphereLight"
           },
-          "line": 18,
+          "line": 20,
           "normalizations": [],
           "source": "upstream/packages/lighting/src/hemisphereLight.ts",
           "status": "ready"
@@ -2494,8 +2594,8 @@
         "createVideoImageResource"
       ],
       "readyCalls": 6,
-      "schemaId": "@flighthq/types:interface#Image",
-      "schemaName": "Image",
+      "schemaId": "@flighthq/types:interface#ImageResource",
+      "schemaName": "ImageResource",
       "sites": [
         {
           "argument": {
@@ -2515,9 +2615,9 @@
           "destination": {
             "kind": "exact-entity",
             "route": "contextual",
-            "schemaId": "@flighthq/types:interface#Image",
-            "schemaName": "Image",
-            "type": "Image"
+            "schemaId": "@flighthq/types:interface#ImageResource",
+            "schemaName": "ImageResource",
+            "type": "ImageResource"
           },
           "factory": {
             "canonicalForSchema": false,
@@ -2542,16 +2642,16 @@
             "kind": "object"
           },
           "blockers": [],
-          "column": 27,
+          "column": 35,
           "destination": {
             "kind": "exact-entity",
             "route": "contextual",
-            "schemaId": "@flighthq/types:interface#Image",
-            "schemaName": "Image",
-            "type": "Image"
+            "schemaId": "@flighthq/types:interface#ImageResource",
+            "schemaName": "ImageResource",
+            "type": "ImageResource"
           },
           "factory": {
-            "canonicalForSchema": false,
+            "canonicalForSchema": true,
             "name": "createImageResource"
           },
           "line": 34,
@@ -2577,9 +2677,9 @@
           "destination": {
             "kind": "exact-entity",
             "route": "contextual",
-            "schemaId": "@flighthq/types:interface#Image",
-            "schemaName": "Image",
-            "type": "Image"
+            "schemaId": "@flighthq/types:interface#ImageResource",
+            "schemaName": "ImageResource",
+            "type": "ImageResource"
           },
           "factory": {
             "canonicalForSchema": false,
@@ -2608,9 +2708,9 @@
           "destination": {
             "kind": "exact-entity",
             "route": "contextual",
-            "schemaId": "@flighthq/types:interface#Image",
-            "schemaName": "Image",
-            "type": "Image"
+            "schemaId": "@flighthq/types:interface#ImageResource",
+            "schemaName": "ImageResource",
+            "type": "ImageResource"
           },
           "factory": {
             "canonicalForSchema": false,
@@ -2639,9 +2739,9 @@
           "destination": {
             "kind": "exact-entity",
             "route": "contextual",
-            "schemaId": "@flighthq/types:interface#Image",
-            "schemaName": "Image",
-            "type": "Image"
+            "schemaId": "@flighthq/types:interface#ImageResource",
+            "schemaName": "ImageResource",
+            "type": "ImageResource"
           },
           "factory": {
             "canonicalForSchema": false,
@@ -2670,15 +2770,15 @@
           "destination": {
             "kind": "exact-entity",
             "route": "contextual",
-            "schemaId": "@flighthq/types:interface#Image",
-            "schemaName": "Image",
-            "type": "Image"
+            "schemaId": "@flighthq/types:interface#ImageResource",
+            "schemaName": "ImageResource",
+            "type": "ImageResource"
           },
           "factory": {
             "canonicalForSchema": false,
             "name": "createVideoImageResource"
           },
-          "line": 97,
+          "line": 104,
           "normalizations": [
             "field-order"
           ],
@@ -2716,7 +2816,7 @@
             "canonicalForSchema": false,
             "name": "<module>"
           },
-          "line": 15,
+          "line": 19,
           "normalizations": [],
           "source": "upstream/packages/host-web/src/webInputTarget.ts",
           "status": "ready"
@@ -2752,7 +2852,7 @@
             "canonicalForSchema": false,
             "name": "<module>"
           },
-          "line": 33,
+          "line": 37,
           "normalizations": [],
           "source": "upstream/packages/host-web/src/webInputTarget.ts",
           "status": "ready"
@@ -2789,7 +2889,7 @@
             "canonicalForSchema": false,
             "name": "<module>"
           },
-          "line": 46,
+          "line": 50,
           "normalizations": [],
           "source": "upstream/packages/host-web/src/webInputTarget.ts",
           "status": "ready"
@@ -2825,7 +2925,7 @@
             "canonicalForSchema": false,
             "name": "<module>"
           },
-          "line": 87,
+          "line": 91,
           "normalizations": [],
           "source": "upstream/packages/host-web/src/webInputTarget.ts",
           "status": "ready"
@@ -2861,9 +2961,81 @@
             "canonicalForSchema": false,
             "name": "createWebInputTargetHandle"
           },
-          "line": 131,
+          "line": 134,
           "normalizations": [],
           "source": "upstream/packages/host-web/src/webInputTarget.ts",
+          "status": "ready"
+        }
+      ]
+    },
+    {
+      "blockedCalls": 0,
+      "factories": [
+        "createElectronIpcHandleBackend"
+      ],
+      "readyCalls": 1,
+      "schemaId": "@flighthq/types:interface#IpcHandleBackend",
+      "schemaName": "IpcHandleBackend",
+      "sites": [
+        {
+          "argument": {
+            "fields": [
+              "handle"
+            ],
+            "kind": "object"
+          },
+          "blockers": [],
+          "column": 10,
+          "destination": {
+            "kind": "exact-entity",
+            "route": "contextual",
+            "schemaId": "@flighthq/types:interface#IpcHandleBackend",
+            "schemaName": "IpcHandleBackend",
+            "type": "IpcHandleBackend"
+          },
+          "factory": {
+            "canonicalForSchema": false,
+            "name": "createElectronIpcHandleBackend"
+          },
+          "line": 19,
+          "normalizations": [],
+          "source": "upstream/packages/host-electron/src/electronIpc.ts",
+          "status": "ready"
+        }
+      ]
+    },
+    {
+      "blockedCalls": 0,
+      "factories": [
+        "createElectronIpcInvokeBackend"
+      ],
+      "readyCalls": 1,
+      "schemaId": "@flighthq/types:interface#IpcInvokeBackend",
+      "schemaName": "IpcInvokeBackend",
+      "sites": [
+        {
+          "argument": {
+            "fields": [
+              "invoke"
+            ],
+            "kind": "object"
+          },
+          "blockers": [],
+          "column": 10,
+          "destination": {
+            "kind": "exact-entity",
+            "route": "contextual",
+            "schemaId": "@flighthq/types:interface#IpcInvokeBackend",
+            "schemaName": "IpcInvokeBackend",
+            "type": "IpcInvokeBackend"
+          },
+          "factory": {
+            "canonicalForSchema": false,
+            "name": "createElectronIpcInvokeBackend"
+          },
+          "line": 33,
+          "normalizations": [],
+          "source": "upstream/packages/host-electron/src/electronIpc.ts",
           "status": "ready"
         }
       ]
@@ -2897,7 +3069,43 @@
             "canonicalForSchema": false,
             "name": "createElectronIpcMessageBackend"
           },
-          "line": 13,
+          "line": 42,
+          "normalizations": [],
+          "source": "upstream/packages/host-electron/src/electronIpc.ts",
+          "status": "ready"
+        }
+      ]
+    },
+    {
+      "blockedCalls": 0,
+      "factories": [
+        "createElectronIpcSendBackend"
+      ],
+      "readyCalls": 1,
+      "schemaId": "@flighthq/types:interface#IpcSendBackend",
+      "schemaName": "IpcSendBackend",
+      "sites": [
+        {
+          "argument": {
+            "fields": [
+              "send"
+            ],
+            "kind": "object"
+          },
+          "blockers": [],
+          "column": 10,
+          "destination": {
+            "kind": "exact-entity",
+            "route": "contextual",
+            "schemaId": "@flighthq/types:interface#IpcSendBackend",
+            "schemaName": "IpcSendBackend",
+            "type": "IpcSendBackend"
+          },
+          "factory": {
+            "canonicalForSchema": false,
+            "name": "createElectronIpcSendBackend"
+          },
+          "line": 52,
           "normalizations": [],
           "source": "upstream/packages/host-electron/src/electronIpc.ts",
           "status": "ready"
@@ -3245,6 +3453,78 @@
     {
       "blockedCalls": 0,
       "factories": [
+        "<module>"
+      ],
+      "readyCalls": 1,
+      "schemaId": "@flighthq/types:interface#MenuHighlightBackend",
+      "schemaName": "MenuHighlightBackend",
+      "sites": [
+        {
+          "argument": {
+            "fields": [
+              "subscribe"
+            ],
+            "kind": "object"
+          },
+          "blockers": [],
+          "column": 62,
+          "destination": {
+            "kind": "exact-entity",
+            "route": "contextual",
+            "schemaId": "@flighthq/types:interface#MenuHighlightBackend",
+            "schemaName": "MenuHighlightBackend",
+            "type": "MenuHighlightBackend"
+          },
+          "factory": {
+            "canonicalForSchema": false,
+            "name": "<module>"
+          },
+          "line": 15,
+          "normalizations": [],
+          "source": "upstream/packages/host-web/src/webMenu.ts",
+          "status": "ready"
+        }
+      ]
+    },
+    {
+      "blockedCalls": 0,
+      "factories": [
+        "<module>"
+      ],
+      "readyCalls": 1,
+      "schemaId": "@flighthq/types:interface#MenuPopupBackend",
+      "schemaName": "MenuPopupBackend",
+      "sites": [
+        {
+          "argument": {
+            "fields": [
+              "popup"
+            ],
+            "kind": "object"
+          },
+          "blockers": [],
+          "column": 54,
+          "destination": {
+            "kind": "exact-entity",
+            "route": "contextual",
+            "schemaId": "@flighthq/types:interface#MenuPopupBackend",
+            "schemaName": "MenuPopupBackend",
+            "type": "MenuPopupBackend"
+          },
+          "factory": {
+            "canonicalForSchema": false,
+            "name": "<module>"
+          },
+          "line": 24,
+          "normalizations": [],
+          "source": "upstream/packages/host-web/src/webMenu.ts",
+          "status": "ready"
+        }
+      ]
+    },
+    {
+      "blockedCalls": 0,
+      "factories": [
         "createMeshGeometryRuntime"
       ],
       "readyCalls": 1,
@@ -3578,13 +3858,20 @@
             "fields": [
               "castsShadow",
               "color",
+              "decay",
+              "enabled",
               "intensity",
+              "intensityUnit",
               "kind",
               "normalBias",
               "pcfRadius",
               "position",
               "range",
-              "shadowBias"
+              "shadowBias",
+              "shadowFar",
+              "shadowMapSize",
+              "shadowNear",
+              "shadowStrength"
             ],
             "kind": "object"
           },
@@ -3611,13 +3898,20 @@
             "fields": [
               "castsShadow",
               "color",
+              "decay",
+              "enabled",
               "intensity",
+              "intensityUnit",
               "kind",
               "normalBias",
               "pcfRadius",
               "position",
               "range",
-              "shadowBias"
+              "shadowBias",
+              "shadowFar",
+              "shadowMapSize",
+              "shadowNear",
+              "shadowStrength"
             ],
             "kind": "object"
           },
@@ -3634,7 +3928,7 @@
             "canonicalForSchema": true,
             "name": "createPointLight"
           },
-          "line": 26,
+          "line": 33,
           "normalizations": [],
           "source": "upstream/packages/lighting/src/pointLight.ts",
           "status": "ready"
@@ -3681,6 +3975,82 @@
           "line": 108,
           "normalizations": [],
           "source": "upstream/packages/power/src/power.ts",
+          "status": "ready"
+        }
+      ]
+    },
+    {
+      "blockedCalls": 0,
+      "factories": [
+        "<module>"
+      ],
+      "readyCalls": 1,
+      "schemaId": "@flighthq/types:interface#PowerKeepAwakeBackend",
+      "schemaName": "PowerKeepAwakeBackend",
+      "sites": [
+        {
+          "argument": {
+            "fields": [
+              "acquire",
+              "destroy",
+              "isActive",
+              "release"
+            ],
+            "kind": "object"
+          },
+          "blockers": [],
+          "column": 64,
+          "destination": {
+            "kind": "exact-entity",
+            "route": "contextual",
+            "schemaId": "@flighthq/types:interface#PowerKeepAwakeBackend",
+            "schemaName": "PowerKeepAwakeBackend",
+            "type": "PowerKeepAwakeBackend"
+          },
+          "factory": {
+            "canonicalForSchema": false,
+            "name": "<module>"
+          },
+          "line": 29,
+          "normalizations": [],
+          "source": "upstream/packages/host-web/src/webPower.ts",
+          "status": "ready"
+        }
+      ]
+    },
+    {
+      "blockedCalls": 0,
+      "factories": [
+        "<module>"
+      ],
+      "readyCalls": 1,
+      "schemaId": "@flighthq/types:interface#PowerSuspensionBackend",
+      "schemaName": "PowerSuspensionBackend",
+      "sites": [
+        {
+          "argument": {
+            "fields": [
+              "subscribeResume",
+              "subscribeSuspend"
+            ],
+            "kind": "object"
+          },
+          "blockers": [],
+          "column": 66,
+          "destination": {
+            "kind": "exact-entity",
+            "route": "contextual",
+            "schemaId": "@flighthq/types:interface#PowerSuspensionBackend",
+            "schemaName": "PowerSuspensionBackend",
+            "type": "PowerSuspensionBackend"
+          },
+          "factory": {
+            "canonicalForSchema": false,
+            "name": "<module>"
+          },
+          "line": 88,
+          "normalizations": [],
+          "source": "upstream/packages/host-web/src/webPower.ts",
           "status": "ready"
         }
       ]
@@ -3870,7 +4240,7 @@
             "canonicalForSchema": true,
             "name": "createRenderCache"
           },
-          "line": 18,
+          "line": 25,
           "normalizations": [],
           "source": "upstream/packages/render/src/renderCache.ts",
           "status": "ready"
@@ -3906,7 +4276,7 @@
             "canonicalForSchema": false,
             "name": "<module>"
           },
-          "line": 100,
+          "line": 103,
           "normalizations": [],
           "source": "upstream/packages/host-web/src/webInputTarget.ts",
           "status": "ready"
@@ -4048,7 +4418,7 @@
             "canonicalForSchema": false,
             "name": "<module>"
           },
-          "line": 119,
+          "line": 122,
           "normalizations": [],
           "source": "upstream/packages/host-web/src/webInputTarget.ts",
           "status": "ready"
@@ -4446,7 +4816,7 @@
             "canonicalForSchema": true,
             "name": "createScene3DResourceSignals"
           },
-          "line": 8,
+          "line": 7,
           "normalizations": [],
           "source": "upstream/packages/scene3d-resources/src/sceneResourceSignals.ts",
           "status": "ready"
@@ -5378,6 +5748,7 @@
               "boneMatrices",
               "bones",
               "inverseBindMatrices",
+              "skins",
               "slots",
               "worldMatrices"
             ],
@@ -5397,9 +5768,7 @@
             "name": "cloneSkeleton2D"
           },
           "line": 13,
-          "normalizations": [
-            "missing-field-initialization"
-          ],
+          "normalizations": [],
           "source": "upstream/packages/skeleton2d/src/skeleton2d.ts",
           "status": "ready"
         },
@@ -5427,7 +5796,7 @@
             "canonicalForSchema": true,
             "name": "createSkeleton2D"
           },
-          "line": 152,
+          "line": 153,
           "normalizations": [
             "missing-field-initialization"
           ],
@@ -5593,16 +5962,24 @@
             "fields": [
               "castsShadow",
               "color",
+              "decay",
               "direction",
+              "enabled",
               "innerConeCos",
               "intensity",
+              "intensityUnit",
               "kind",
               "normalBias",
               "outerConeCos",
               "pcfRadius",
               "position",
               "range",
-              "shadowBias"
+              "shadowBias",
+              "shadowFar",
+              "shadowMapSize",
+              "shadowNear",
+              "shadowStrength",
+              "spotBlend"
             ],
             "kind": "object"
           },
@@ -5629,16 +6006,24 @@
             "fields": [
               "castsShadow",
               "color",
+              "decay",
               "direction",
+              "enabled",
               "innerConeCos",
               "intensity",
+              "intensityUnit",
               "kind",
               "normalBias",
               "outerConeCos",
               "pcfRadius",
               "position",
               "range",
-              "shadowBias"
+              "shadowBias",
+              "shadowFar",
+              "shadowMapSize",
+              "shadowNear",
+              "shadowStrength",
+              "spotBlend"
             ],
             "kind": "object"
           },
@@ -5655,9 +6040,46 @@
             "canonicalForSchema": true,
             "name": "createSpotLight"
           },
-          "line": 31,
+          "line": 39,
           "normalizations": [],
           "source": "upstream/packages/lighting/src/spotLight.ts",
+          "status": "ready"
+        }
+      ]
+    },
+    {
+      "blockedCalls": 0,
+      "factories": [
+        "createSpriteRendererData"
+      ],
+      "readyCalls": 1,
+      "schemaId": "@flighthq/types:interface#SpriteIdentityRendererData",
+      "schemaName": "SpriteIdentityRendererData",
+      "sites": [
+        {
+          "argument": {
+            "fields": [
+              "textureIdentity",
+              "textureVersion"
+            ],
+            "kind": "object"
+          },
+          "blockers": [],
+          "column": 10,
+          "destination": {
+            "kind": "exact-entity",
+            "route": "contextual",
+            "schemaId": "@flighthq/types:interface#SpriteIdentityRendererData",
+            "schemaName": "SpriteIdentityRendererData",
+            "type": "SpriteIdentityRendererData"
+          },
+          "factory": {
+            "canonicalForSchema": false,
+            "name": "createSpriteRendererData"
+          },
+          "line": 48,
+          "normalizations": [],
+          "source": "upstream/packages/scene2d/src/sprite.ts",
           "status": "ready"
         }
       ]
@@ -6294,6 +6716,44 @@
     {
       "blockedCalls": 0,
       "factories": [
+        "createVideoResource"
+      ],
+      "readyCalls": 1,
+      "schemaId": "@flighthq/types:interface#VideoResource",
+      "schemaName": "VideoResource",
+      "sites": [
+        {
+          "argument": {
+            "fields": [
+              "element",
+              "objectUrl",
+              "ownsElement"
+            ],
+            "kind": "object"
+          },
+          "blockers": [],
+          "column": 10,
+          "destination": {
+            "kind": "exact-entity",
+            "route": "contextual",
+            "schemaId": "@flighthq/types:interface#VideoResource",
+            "schemaName": "VideoResource",
+            "type": "VideoResource"
+          },
+          "factory": {
+            "canonicalForSchema": true,
+            "name": "createVideoResource"
+          },
+          "line": 16,
+          "normalizations": [],
+          "source": "upstream/packages/video/src/videoResource.ts",
+          "status": "ready"
+        }
+      ]
+    },
+    {
+      "blockedCalls": 0,
+      "factories": [
         "createViewport"
       ],
       "readyCalls": 1,
@@ -6685,6 +7145,115 @@
     {
       "blockedCalls": 0,
       "factories": [
+        "createElectronMenuBackends"
+      ],
+      "readyCalls": 1,
+      "schemaId": "@flighthq/types:type#ElectronMenuCapabilities",
+      "schemaName": "ElectronMenuCapabilities",
+      "sites": [
+        {
+          "argument": {
+            "fields": [
+              "application",
+              "popup",
+              "select"
+            ],
+            "kind": "object"
+          },
+          "blockers": [],
+          "column": 10,
+          "destination": {
+            "kind": "exact-entity",
+            "route": "contextual",
+            "schemaId": "@flighthq/types:type#ElectronMenuCapabilities",
+            "schemaName": "ElectronMenuCapabilities",
+            "type": "ElectronMenuCapabilities"
+          },
+          "factory": {
+            "canonicalForSchema": false,
+            "name": "createElectronMenuBackends"
+          },
+          "line": 26,
+          "normalizations": [],
+          "source": "upstream/packages/host-electron/src/electronMenu.ts",
+          "status": "ready"
+        }
+      ]
+    },
+    {
+      "blockedCalls": 0,
+      "factories": [
+        "createElectronPowerBackends"
+      ],
+      "readyCalls": 2,
+      "schemaId": "@flighthq/types:type#ElectronPowerCapabilities",
+      "schemaName": "ElectronPowerCapabilities",
+      "sites": [
+        {
+          "argument": {
+            "fields": [
+              "batteryHealth",
+              "change",
+              "idle",
+              "keepAwake",
+              "sessionLock",
+              "status",
+              "suspension"
+            ],
+            "kind": "object"
+          },
+          "blockers": [],
+          "column": 64,
+          "destination": {
+            "kind": "exact-entity",
+            "route": "returned-variable",
+            "schemaId": "@flighthq/types:type#ElectronPowerCapabilities",
+            "schemaName": "ElectronPowerCapabilities",
+            "type": "ElectronPowerCapabilities"
+          },
+          "factory": {
+            "canonicalForSchema": false,
+            "name": "createElectronPowerBackends"
+          },
+          "line": 34,
+          "normalizations": [
+            "missing-field-initialization"
+          ],
+          "source": "upstream/packages/host-electron/src/electronPower.ts",
+          "status": "ready"
+        },
+        {
+          "argument": {
+            "fields": [
+              "thermal"
+            ],
+            "kind": "object"
+          },
+          "blockers": [],
+          "column": 10,
+          "destination": {
+            "kind": "exact-entity",
+            "route": "contextual",
+            "schemaId": "@flighthq/types:type#ElectronPowerCapabilities",
+            "schemaName": "ElectronPowerCapabilities",
+            "type": "ElectronPowerCapabilities"
+          },
+          "factory": {
+            "canonicalForSchema": false,
+            "name": "createElectronPowerBackends"
+          },
+          "line": 137,
+          "normalizations": [
+            "spread-projection"
+          ],
+          "source": "upstream/packages/host-electron/src/electronPower.ts",
+          "status": "ready"
+        }
+      ]
+    },
+    {
+      "blockedCalls": 0,
+      "factories": [
         "createElectronProtocolCapabilities"
       ],
       "readyCalls": 1,
@@ -6718,6 +7287,116 @@
           "line": 15,
           "normalizations": [],
           "source": "upstream/packages/host-electron/src/electronProtocol.ts",
+          "status": "ready"
+        }
+      ]
+    },
+    {
+      "blockedCalls": 0,
+      "factories": [
+        "createDefaultGlBitmapShader",
+        "createGlBitmapShader"
+      ],
+      "readyCalls": 2,
+      "schemaId": "@flighthq/types:type#GlBitmapShader",
+      "schemaName": "GlBitmapShader",
+      "sites": [
+        {
+          "argument": {
+            "fields": [
+              "locations",
+              "program",
+              "bind"
+            ],
+            "kind": "object"
+          },
+          "blockers": [],
+          "column": 10,
+          "destination": {
+            "kind": "exact-entity",
+            "route": "contextual",
+            "schemaId": "@flighthq/types:type#GlBitmapShader",
+            "schemaName": "GlBitmapShader",
+            "type": "GlBitmapShader"
+          },
+          "factory": {
+            "canonicalForSchema": false,
+            "name": "createDefaultGlBitmapShader"
+          },
+          "line": 55,
+          "normalizations": [
+            "field-order"
+          ],
+          "source": "upstream/packages/render-gl/src/glShader.ts",
+          "status": "ready"
+        },
+        {
+          "argument": {
+            "fields": [
+              "locations",
+              "program",
+              "bind"
+            ],
+            "kind": "object"
+          },
+          "blockers": [],
+          "column": 10,
+          "destination": {
+            "kind": "exact-entity",
+            "route": "contextual",
+            "schemaId": "@flighthq/types:type#GlBitmapShader",
+            "schemaName": "GlBitmapShader",
+            "type": "GlBitmapShader"
+          },
+          "factory": {
+            "canonicalForSchema": true,
+            "name": "createGlBitmapShader"
+          },
+          "line": 87,
+          "normalizations": [
+            "field-order"
+          ],
+          "source": "upstream/packages/render-gl/src/glShader.ts",
+          "status": "ready"
+        }
+      ]
+    },
+    {
+      "blockedCalls": 0,
+      "factories": [
+        "createRenderCacheAdapter"
+      ],
+      "readyCalls": 1,
+      "schemaId": "@flighthq/types:type#RenderCacheAdapter",
+      "schemaName": "RenderCacheAdapter",
+      "sites": [
+        {
+          "argument": {
+            "fields": [
+              "cache",
+              "signals",
+              "adapt"
+            ],
+            "kind": "object"
+          },
+          "blockers": [],
+          "column": 39,
+          "destination": {
+            "kind": "exact-entity",
+            "route": "contextual",
+            "schemaId": "@flighthq/types:type#RenderCacheAdapter",
+            "schemaName": "RenderCacheAdapter",
+            "type": "RenderCacheAdapter"
+          },
+          "factory": {
+            "canonicalForSchema": true,
+            "name": "createRenderCacheAdapter"
+          },
+          "line": 37,
+          "normalizations": [
+            "field-order"
+          ],
+          "source": "upstream/packages/render/src/renderCache.ts",
           "status": "ready"
         }
       ]
@@ -6762,6 +7441,44 @@
             "field-order"
           ],
           "source": "upstream/packages/host-tauri/src/tauriApp.ts",
+          "status": "ready"
+        }
+      ]
+    },
+    {
+      "blockedCalls": 0,
+      "factories": [
+        "createTauriMenuBackends"
+      ],
+      "readyCalls": 1,
+      "schemaId": "@flighthq/types:type#TauriMenuCapabilities",
+      "schemaName": "TauriMenuCapabilities",
+      "sites": [
+        {
+          "argument": {
+            "fields": [
+              "application",
+              "popup",
+              "select"
+            ],
+            "kind": "object"
+          },
+          "blockers": [],
+          "column": 10,
+          "destination": {
+            "kind": "exact-entity",
+            "route": "contextual",
+            "schemaId": "@flighthq/types:type#TauriMenuCapabilities",
+            "schemaName": "TauriMenuCapabilities",
+            "type": "TauriMenuCapabilities"
+          },
+          "factory": {
+            "canonicalForSchema": false,
+            "name": "createTauriMenuBackends"
+          },
+          "line": 27,
+          "normalizations": [],
+          "source": "upstream/packages/host-tauri/src/tauriMenu.ts",
           "status": "ready"
         }
       ]
@@ -6842,6 +7559,82 @@
           "line": 48,
           "normalizations": [],
           "source": "upstream/packages/host-web/src/webNotification.ts",
+          "status": "ready"
+        }
+      ]
+    },
+    {
+      "blockedCalls": 0,
+      "factories": [
+        "<module>"
+      ],
+      "readyCalls": 1,
+      "schemaId": "@flighthq/types:type#WebPowerCapabilities",
+      "schemaName": "WebPowerCapabilities",
+      "sites": [
+        {
+          "argument": {
+            "fields": [
+              "keepAwake",
+              "suspension"
+            ],
+            "kind": "object"
+          },
+          "blockers": [],
+          "column": 59,
+          "destination": {
+            "kind": "exact-entity",
+            "route": "contextual",
+            "schemaId": "@flighthq/types:type#WebPowerCapabilities",
+            "schemaName": "WebPowerCapabilities",
+            "type": "WebPowerCapabilities"
+          },
+          "factory": {
+            "canonicalForSchema": false,
+            "name": "<module>"
+          },
+          "line": 188,
+          "normalizations": [
+            "spread-projection"
+          ],
+          "source": "upstream/packages/host-web/src/webPower.ts",
+          "status": "ready"
+        }
+      ]
+    },
+    {
+      "blockedCalls": 0,
+      "factories": [
+        "createWebPowerReadings"
+      ],
+      "readyCalls": 1,
+      "schemaId": "@flighthq/types:type#WebPowerReadingCapabilities",
+      "schemaName": "WebPowerReadingCapabilities",
+      "sites": [
+        {
+          "argument": {
+            "fields": [
+              "change",
+              "status"
+            ],
+            "kind": "object"
+          },
+          "blockers": [],
+          "column": 10,
+          "destination": {
+            "kind": "exact-entity",
+            "route": "contextual",
+            "schemaId": "@flighthq/types:type#WebPowerReadingCapabilities",
+            "schemaName": "WebPowerReadingCapabilities",
+            "type": "WebPowerReadingCapabilities"
+          },
+          "factory": {
+            "canonicalForSchema": false,
+            "name": "createWebPowerReadings"
+          },
+          "line": 113,
+          "normalizations": [],
+          "source": "upstream/packages/host-web/src/webPower.ts",
           "status": "ready"
         }
       ]
@@ -7592,6 +8385,56 @@
     {
       "argument": {
         "fields": [
+          "buffer"
+        ],
+        "kind": "object"
+      },
+      "blockers": [],
+      "column": 10,
+      "destination": {
+        "kind": "exact-entity",
+        "route": "contextual",
+        "schemaId": "@flighthq/types:interface#AudioResource",
+        "schemaName": "AudioResource",
+        "type": "AudioResource"
+      },
+      "factory": {
+        "canonicalForSchema": false,
+        "name": "cloneAudioResource"
+      },
+      "line": 9,
+      "normalizations": [],
+      "source": "upstream/packages/audio/src/audioResource.ts",
+      "status": "ready"
+    },
+    {
+      "argument": {
+        "fields": [
+          "buffer"
+        ],
+        "kind": "object"
+      },
+      "blockers": [],
+      "column": 10,
+      "destination": {
+        "kind": "exact-entity",
+        "route": "contextual",
+        "schemaId": "@flighthq/types:interface#AudioResource",
+        "schemaName": "AudioResource",
+        "type": "AudioResource"
+      },
+      "factory": {
+        "canonicalForSchema": true,
+        "name": "createAudioResource"
+      },
+      "line": 13,
+      "normalizations": [],
+      "source": "upstream/packages/audio/src/audioResource.ts",
+      "status": "ready"
+    },
+    {
+      "argument": {
+        "fields": [
           "alphaType",
           "gamut",
           "data",
@@ -8090,7 +8933,8 @@
     {
       "argument": {
         "fields": [
-          "name"
+          "family",
+          "face"
         ],
         "kind": "object"
       },
@@ -8099,17 +8943,19 @@
       "destination": {
         "kind": "exact-entity",
         "route": "contextual",
-        "schemaId": "@flighthq/types:interface#Font",
-        "schemaName": "Font",
-        "type": "Font"
+        "schemaId": "@flighthq/types:interface#FontResource",
+        "schemaName": "FontResource",
+        "type": "FontResource"
       },
       "factory": {
         "canonicalForSchema": true,
-        "name": "createFont"
+        "name": "createFontResource"
       },
       "line": 5,
-      "normalizations": [],
-      "source": "upstream/packages/font/src/font.ts",
+      "normalizations": [
+        "field-order"
+      ],
+      "source": "upstream/packages/font/src/fontResource.ts",
       "status": "ready"
     },
     {
@@ -9373,15 +10219,15 @@
       "destination": {
         "kind": "local-entity",
         "route": "contextual",
-        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorRegister.ts:103:10",
-        "schemaName": "EntityShapeL103C10",
+        "schemaId": "synthetic-entity:upstream/packages/host-capacitor/src/capacitorRegister.ts:37:10",
+        "schemaName": "EntityShapeL37C10",
         "type": "CapacitorHost<Profile>"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "capacitorHost"
       },
-      "line": 103,
+      "line": 37,
       "normalizations": [
         "synthetic-class"
       ],
@@ -10395,6 +11241,56 @@
     {
       "argument": {
         "fields": [
+          "handle"
+        ],
+        "kind": "object"
+      },
+      "blockers": [],
+      "column": 10,
+      "destination": {
+        "kind": "exact-entity",
+        "route": "contextual",
+        "schemaId": "@flighthq/types:interface#IpcHandleBackend",
+        "schemaName": "IpcHandleBackend",
+        "type": "IpcHandleBackend"
+      },
+      "factory": {
+        "canonicalForSchema": false,
+        "name": "createElectronIpcHandleBackend"
+      },
+      "line": 19,
+      "normalizations": [],
+      "source": "upstream/packages/host-electron/src/electronIpc.ts",
+      "status": "ready"
+    },
+    {
+      "argument": {
+        "fields": [
+          "invoke"
+        ],
+        "kind": "object"
+      },
+      "blockers": [],
+      "column": 10,
+      "destination": {
+        "kind": "exact-entity",
+        "route": "contextual",
+        "schemaId": "@flighthq/types:interface#IpcInvokeBackend",
+        "schemaName": "IpcInvokeBackend",
+        "type": "IpcInvokeBackend"
+      },
+      "factory": {
+        "canonicalForSchema": false,
+        "name": "createElectronIpcInvokeBackend"
+      },
+      "line": 33,
+      "normalizations": [],
+      "source": "upstream/packages/host-electron/src/electronIpc.ts",
+      "status": "ready"
+    },
+    {
+      "argument": {
+        "fields": [
           "subscribe"
         ],
         "kind": "object"
@@ -10412,9 +11308,88 @@
         "canonicalForSchema": false,
         "name": "createElectronIpcMessageBackend"
       },
-      "line": 13,
+      "line": 42,
       "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronIpc.ts",
+      "status": "ready"
+    },
+    {
+      "argument": {
+        "fields": [
+          "send"
+        ],
+        "kind": "object"
+      },
+      "blockers": [],
+      "column": 10,
+      "destination": {
+        "kind": "exact-entity",
+        "route": "contextual",
+        "schemaId": "@flighthq/types:interface#IpcSendBackend",
+        "schemaName": "IpcSendBackend",
+        "type": "IpcSendBackend"
+      },
+      "factory": {
+        "canonicalForSchema": false,
+        "name": "createElectronIpcSendBackend"
+      },
+      "line": 52,
+      "normalizations": [],
+      "source": "upstream/packages/host-electron/src/electronIpc.ts",
+      "status": "ready"
+    },
+    {
+      "argument": {
+        "fields": [
+          "send"
+        ],
+        "kind": "object"
+      },
+      "blockers": [],
+      "column": 10,
+      "destination": {
+        "kind": "local-entity",
+        "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronIpc.ts:62:10",
+        "schemaName": "EntityShapeL62C10",
+        "type": "IpcTargetedSendBackend<Target>"
+      },
+      "factory": {
+        "canonicalForSchema": false,
+        "name": "createElectronIpcTargetedSendBackend"
+      },
+      "line": 62,
+      "normalizations": [
+        "synthetic-class"
+      ],
+      "source": "upstream/packages/host-electron/src/electronIpc.ts",
+      "status": "ready"
+    },
+    {
+      "argument": {
+        "fields": [
+          "application",
+          "popup",
+          "select"
+        ],
+        "kind": "object"
+      },
+      "blockers": [],
+      "column": 10,
+      "destination": {
+        "kind": "exact-entity",
+        "route": "contextual",
+        "schemaId": "@flighthq/types:type#ElectronMenuCapabilities",
+        "schemaName": "ElectronMenuCapabilities",
+        "type": "ElectronMenuCapabilities"
+      },
+      "factory": {
+        "canonicalForSchema": false,
+        "name": "createElectronMenuBackends"
+      },
+      "line": 26,
+      "normalizations": [],
+      "source": "upstream/packages/host-electron/src/electronMenu.ts",
       "status": "ready"
     },
     {
@@ -10425,20 +11400,23 @@
         ],
         "kind": "object"
       },
-      "blockers": [],
+      "blockers": [
+        "field-set-mismatch",
+        "parameterized-destination"
+      ],
       "column": 18,
       "destination": {
         "kind": "exact-non-entity",
-        "route": "contextual",
-        "schemaId": "@flighthq/types:interface#MenuApplicationBackend",
-        "schemaName": "MenuApplicationBackend",
-        "type": "MenuApplicationBackend"
+        "route": "type-argument",
+        "schemaId": "@flighthq/types:type#EntityWithoutRuntime",
+        "schemaName": "EntityWithoutRuntime",
+        "type": "EntityWithoutRuntime<MenuApplicationBackend>"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "createElectronMenuBackends"
       },
-      "line": 29,
+      "line": 27,
       "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronMenu.ts",
       "status": "not-entity"
@@ -10450,20 +11428,23 @@
         ],
         "kind": "object"
       },
-      "blockers": [],
+      "blockers": [
+        "field-set-mismatch",
+        "parameterized-destination"
+      ],
       "column": 12,
       "destination": {
         "kind": "exact-non-entity",
-        "route": "contextual",
-        "schemaId": "@flighthq/types:interface#MenuPopupBackend",
-        "schemaName": "MenuPopupBackend",
-        "type": "MenuPopupBackend"
+        "route": "type-argument",
+        "schemaId": "@flighthq/types:type#EntityWithoutRuntime",
+        "schemaName": "EntityWithoutRuntime",
+        "type": "EntityWithoutRuntime<MenuPopupBackend>"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "createElectronMenuBackends"
       },
-      "line": 44,
+      "line": 42,
       "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronMenu.ts",
       "status": "not-entity"
@@ -10475,20 +11456,23 @@
         ],
         "kind": "object"
       },
-      "blockers": [],
+      "blockers": [
+        "field-set-mismatch",
+        "parameterized-destination"
+      ],
       "column": 13,
       "destination": {
         "kind": "exact-non-entity",
-        "route": "contextual",
-        "schemaId": "@flighthq/types:interface#MenuSelectBackend",
-        "schemaName": "MenuSelectBackend",
-        "type": "MenuSelectBackend"
+        "route": "type-argument",
+        "schemaId": "@flighthq/types:type#EntityWithoutRuntime",
+        "schemaName": "EntityWithoutRuntime",
+        "type": "EntityWithoutRuntime<MenuSelectBackend>"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "createElectronMenuBackends"
       },
-      "line": 59,
+      "line": 57,
       "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronMenu.ts",
       "status": "not-entity"
@@ -10584,24 +11568,60 @@
     {
       "argument": {
         "fields": [
-          "getBatteryHealth"
+          "batteryHealth",
+          "change",
+          "idle",
+          "keepAwake",
+          "sessionLock",
+          "status",
+          "suspension"
         ],
         "kind": "object"
       },
       "blockers": [],
-      "column": 20,
+      "column": 64,
       "destination": {
-        "kind": "exact-non-entity",
-        "route": "type-argument",
-        "schemaId": "@flighthq/types:interface#PowerBatteryHealthBackend",
-        "schemaName": "PowerBatteryHealthBackend",
-        "type": "PowerBatteryHealthBackend"
+        "kind": "exact-entity",
+        "route": "returned-variable",
+        "schemaId": "@flighthq/types:type#ElectronPowerCapabilities",
+        "schemaName": "ElectronPowerCapabilities",
+        "type": "ElectronPowerCapabilities"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "createElectronPowerBackends"
       },
-      "line": 44,
+      "line": 34,
+      "normalizations": [
+        "missing-field-initialization"
+      ],
+      "source": "upstream/packages/host-electron/src/electronPower.ts",
+      "status": "ready"
+    },
+    {
+      "argument": {
+        "fields": [
+          "getBatteryHealth"
+        ],
+        "kind": "object"
+      },
+      "blockers": [
+        "field-set-mismatch",
+        "parameterized-destination"
+      ],
+      "column": 20,
+      "destination": {
+        "kind": "exact-non-entity",
+        "route": "type-argument",
+        "schemaId": "@flighthq/types:type#EntityWithoutRuntime",
+        "schemaName": "EntityWithoutRuntime",
+        "type": "EntityWithoutRuntime<PowerBatteryHealthBackend>"
+      },
+      "factory": {
+        "canonicalForSchema": false,
+        "name": "createElectronPowerBackends"
+      },
+      "line": 37,
       "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPower.ts",
       "status": "not-entity"
@@ -10613,20 +11633,23 @@
         ],
         "kind": "object"
       },
-      "blockers": [],
+      "blockers": [
+        "field-set-mismatch",
+        "parameterized-destination"
+      ],
       "column": 13,
       "destination": {
         "kind": "exact-non-entity",
         "route": "type-argument",
-        "schemaId": "@flighthq/types:interface#PowerChangeBackend",
-        "schemaName": "PowerChangeBackend",
-        "type": "PowerChangeBackend"
+        "schemaId": "@flighthq/types:type#EntityWithoutRuntime",
+        "schemaName": "EntityWithoutRuntime",
+        "type": "EntityWithoutRuntime<PowerChangeBackend>"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "createElectronPowerBackends"
       },
-      "line": 49,
+      "line": 42,
       "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPower.ts",
       "status": "not-entity"
@@ -10639,20 +11662,23 @@
         ],
         "kind": "object"
       },
-      "blockers": [],
+      "blockers": [
+        "field-set-mismatch",
+        "parameterized-destination"
+      ],
       "column": 11,
       "destination": {
         "kind": "exact-non-entity",
         "route": "type-argument",
-        "schemaId": "@flighthq/types:interface#PowerIdleBackend",
-        "schemaName": "PowerIdleBackend",
-        "type": "PowerIdleBackend"
+        "schemaId": "@flighthq/types:type#EntityWithoutRuntime",
+        "schemaName": "EntityWithoutRuntime",
+        "type": "EntityWithoutRuntime<PowerIdleBackend>"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "createElectronPowerBackends"
       },
-      "line": 59,
+      "line": 52,
       "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPower.ts",
       "status": "not-entity"
@@ -10667,20 +11693,23 @@
         ],
         "kind": "object"
       },
-      "blockers": [],
+      "blockers": [
+        "field-set-mismatch",
+        "parameterized-destination"
+      ],
       "column": 16,
       "destination": {
         "kind": "exact-non-entity",
         "route": "type-argument",
-        "schemaId": "@flighthq/types:interface#PowerKeepAwakeBackend",
-        "schemaName": "PowerKeepAwakeBackend",
-        "type": "PowerKeepAwakeBackend"
+        "schemaId": "@flighthq/types:type#EntityWithoutRuntime",
+        "schemaName": "EntityWithoutRuntime",
+        "type": "EntityWithoutRuntime<PowerKeepAwakeBackend>"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "createElectronPowerBackends"
       },
-      "line": 69,
+      "line": 62,
       "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPower.ts",
       "status": "not-entity"
@@ -10693,20 +11722,23 @@
         ],
         "kind": "object"
       },
-      "blockers": [],
+      "blockers": [
+        "field-set-mismatch",
+        "parameterized-destination"
+      ],
       "column": 18,
       "destination": {
         "kind": "exact-non-entity",
         "route": "type-argument",
-        "schemaId": "@flighthq/types:interface#PowerSessionLockBackend",
-        "schemaName": "PowerSessionLockBackend",
-        "type": "PowerSessionLockBackend"
+        "schemaId": "@flighthq/types:type#EntityWithoutRuntime",
+        "schemaName": "EntityWithoutRuntime",
+        "type": "EntityWithoutRuntime<PowerSessionLockBackend>"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "createElectronPowerBackends"
       },
-      "line": 102,
+      "line": 95,
       "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPower.ts",
       "status": "not-entity"
@@ -10718,20 +11750,23 @@
         ],
         "kind": "object"
       },
-      "blockers": [],
+      "blockers": [
+        "field-set-mismatch",
+        "parameterized-destination"
+      ],
       "column": 13,
       "destination": {
         "kind": "exact-non-entity",
         "route": "type-argument",
-        "schemaId": "@flighthq/types:interface#PowerStatusBackend",
-        "schemaName": "PowerStatusBackend",
-        "type": "PowerStatusBackend"
+        "schemaId": "@flighthq/types:type#EntityWithoutRuntime",
+        "schemaName": "EntityWithoutRuntime",
+        "type": "EntityWithoutRuntime<PowerStatusBackend>"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "createElectronPowerBackends"
       },
-      "line": 112,
+      "line": 105,
       "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPower.ts",
       "status": "not-entity"
@@ -10744,23 +11779,53 @@
         ],
         "kind": "object"
       },
-      "blockers": [],
+      "blockers": [
+        "field-set-mismatch",
+        "parameterized-destination"
+      ],
       "column": 17,
       "destination": {
         "kind": "exact-non-entity",
         "route": "type-argument",
-        "schemaId": "@flighthq/types:interface#PowerSuspensionBackend",
-        "schemaName": "PowerSuspensionBackend",
-        "type": "PowerSuspensionBackend"
+        "schemaId": "@flighthq/types:type#EntityWithoutRuntime",
+        "schemaName": "EntityWithoutRuntime",
+        "type": "EntityWithoutRuntime<PowerSuspensionBackend>"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "createElectronPowerBackends"
       },
-      "line": 126,
+      "line": 119,
       "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPower.ts",
       "status": "not-entity"
+    },
+    {
+      "argument": {
+        "fields": [
+          "thermal"
+        ],
+        "kind": "object"
+      },
+      "blockers": [],
+      "column": 10,
+      "destination": {
+        "kind": "exact-entity",
+        "route": "contextual",
+        "schemaId": "@flighthq/types:type#ElectronPowerCapabilities",
+        "schemaName": "ElectronPowerCapabilities",
+        "type": "ElectronPowerCapabilities"
+      },
+      "factory": {
+        "canonicalForSchema": false,
+        "name": "createElectronPowerBackends"
+      },
+      "line": 137,
+      "normalizations": [
+        "spread-projection"
+      ],
+      "source": "upstream/packages/host-electron/src/electronPower.ts",
+      "status": "ready"
     },
     {
       "argument": {
@@ -10770,20 +11835,23 @@
         ],
         "kind": "object"
       },
-      "blockers": [],
+      "blockers": [
+        "field-set-mismatch",
+        "parameterized-destination"
+      ],
       "column": 14,
       "destination": {
         "kind": "exact-non-entity",
         "route": "type-argument",
-        "schemaId": "@flighthq/types:interface#PowerThermalBackend",
-        "schemaName": "PowerThermalBackend",
-        "type": "PowerThermalBackend"
+        "schemaId": "@flighthq/types:type#EntityWithoutRuntime",
+        "schemaName": "EntityWithoutRuntime",
+        "type": "EntityWithoutRuntime<PowerThermalBackend>"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "createElectronPowerBackends"
       },
-      "line": 146,
+      "line": 139,
       "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPower.ts",
       "status": "not-entity"
@@ -10992,15 +12060,15 @@
       "destination": {
         "kind": "local-entity",
         "route": "contextual",
-        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronRegister.ts:157:10",
-        "schemaName": "EntityShapeL157C10",
+        "schemaId": "synthetic-entity:upstream/packages/host-electron/src/electronRegister.ts:93:10",
+        "schemaName": "EntityShapeL93C10",
         "type": "ElectronMacosHost | ElectronHost<DesktopOsProfile>"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "registerElectronBackends"
       },
-      "line": 157,
+      "line": 93,
       "normalizations": [
         "synthetic-class"
       ],
@@ -12163,25 +13231,55 @@
     {
       "argument": {
         "fields": [
-          "destroy",
-          "setApplicationMenu"
+          "application",
+          "popup",
+          "select"
         ],
         "kind": "object"
       },
       "blockers": [],
-      "column": 18,
+      "column": 10,
       "destination": {
-        "kind": "exact-non-entity",
+        "kind": "exact-entity",
         "route": "contextual",
-        "schemaId": "@flighthq/types:interface#MenuApplicationBackend",
-        "schemaName": "MenuApplicationBackend",
-        "type": "MenuApplicationBackend"
+        "schemaId": "@flighthq/types:type#TauriMenuCapabilities",
+        "schemaName": "TauriMenuCapabilities",
+        "type": "TauriMenuCapabilities"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "createTauriMenuBackends"
       },
-      "line": 30,
+      "line": 27,
+      "normalizations": [],
+      "source": "upstream/packages/host-tauri/src/tauriMenu.ts",
+      "status": "ready"
+    },
+    {
+      "argument": {
+        "fields": [
+          "destroy",
+          "setApplicationMenu"
+        ],
+        "kind": "object"
+      },
+      "blockers": [
+        "field-set-mismatch",
+        "parameterized-destination"
+      ],
+      "column": 18,
+      "destination": {
+        "kind": "exact-non-entity",
+        "route": "type-argument",
+        "schemaId": "@flighthq/types:type#EntityWithoutRuntime",
+        "schemaName": "EntityWithoutRuntime",
+        "type": "EntityWithoutRuntime<MenuApplicationBackend>"
+      },
+      "factory": {
+        "canonicalForSchema": false,
+        "name": "createTauriMenuBackends"
+      },
+      "line": 28,
       "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriMenu.ts",
       "status": "not-entity"
@@ -12193,20 +13291,23 @@
         ],
         "kind": "object"
       },
-      "blockers": [],
+      "blockers": [
+        "field-set-mismatch",
+        "parameterized-destination"
+      ],
       "column": 12,
       "destination": {
         "kind": "exact-non-entity",
-        "route": "contextual",
-        "schemaId": "@flighthq/types:interface#MenuPopupBackend",
-        "schemaName": "MenuPopupBackend",
-        "type": "MenuPopupBackend"
+        "route": "type-argument",
+        "schemaId": "@flighthq/types:type#EntityWithoutRuntime",
+        "schemaName": "EntityWithoutRuntime",
+        "type": "EntityWithoutRuntime<MenuPopupBackend>"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "createTauriMenuBackends"
       },
-      "line": 51,
+      "line": 49,
       "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriMenu.ts",
       "status": "not-entity"
@@ -12218,20 +13319,23 @@
         ],
         "kind": "object"
       },
-      "blockers": [],
+      "blockers": [
+        "field-set-mismatch",
+        "parameterized-destination"
+      ],
       "column": 13,
       "destination": {
         "kind": "exact-non-entity",
-        "route": "contextual",
-        "schemaId": "@flighthq/types:interface#MenuSelectBackend",
-        "schemaName": "MenuSelectBackend",
-        "type": "MenuSelectBackend"
+        "route": "type-argument",
+        "schemaId": "@flighthq/types:type#EntityWithoutRuntime",
+        "schemaName": "EntityWithoutRuntime",
+        "type": "EntityWithoutRuntime<MenuSelectBackend>"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "createTauriMenuBackends"
       },
-      "line": 62,
+      "line": 60,
       "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriMenu.ts",
       "status": "not-entity"
@@ -12325,15 +13429,15 @@
       "destination": {
         "kind": "local-entity",
         "route": "contextual",
-        "schemaId": "synthetic-entity:upstream/packages/host-tauri/src/tauriRegister.ts:96:10",
-        "schemaName": "EntityShapeL96C10",
+        "schemaId": "synthetic-entity:upstream/packages/host-tauri/src/tauriRegister.ts:49:10",
+        "schemaName": "EntityShapeL49C10",
         "type": "TauriHost<Profile>"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "registerTauriBackends"
       },
-      "line": 96,
+      "line": 49,
       "normalizations": [
         "synthetic-class"
       ],
@@ -13166,15 +14270,15 @@
       "destination": {
         "kind": "local-entity",
         "route": "variable",
-        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webDialog.ts:20:46",
-        "schemaName": "EntityShapeL20C46",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webDialog.ts:31:46",
+        "schemaName": "EntityShapeL31C46",
         "type": "{ open: (options?: Readonly<OpenDirectoryDialogOptions>) => Promise<DirectoryOpenDialogResult>; } & Entity"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "<module>"
       },
-      "line": 20,
+      "line": 31,
       "normalizations": [
         "synthetic-class"
       ],
@@ -13193,15 +14297,15 @@
       "destination": {
         "kind": "local-entity",
         "route": "variable",
-        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webDialog.ts:24:41",
-        "schemaName": "EntityShapeL24C41",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webDialog.ts:35:41",
+        "schemaName": "EntityShapeL35C41",
         "type": "{ open: (options: Readonly<OpenFileDialogOptions>) => Promise<FileOpenDialogResult>; } & Entity"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "<module>"
       },
-      "line": 24,
+      "line": 35,
       "normalizations": [
         "synthetic-class"
       ],
@@ -13220,15 +14324,96 @@
       "destination": {
         "kind": "local-entity",
         "route": "variable",
-        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webDialog.ts:28:41",
-        "schemaName": "EntityShapeL28C41",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webDialog.ts:39:41",
+        "schemaName": "EntityShapeL39C41",
         "type": "{ save: (options: Readonly<SaveFileDialogOptions>) => Promise<FileSaveDialogResult>; } & Entity"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "<module>"
       },
-      "line": 28,
+      "line": 39,
+      "normalizations": [
+        "synthetic-class"
+      ],
+      "source": "upstream/packages/host-web/src/webDialog.ts",
+      "status": "ready"
+    },
+    {
+      "argument": {
+        "fields": [
+          "open"
+        ],
+        "kind": "object"
+      },
+      "blockers": [],
+      "column": 42,
+      "destination": {
+        "kind": "local-entity",
+        "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webDialog.ts:43:42",
+        "schemaName": "EntityShapeL43C42",
+        "type": "{ open: (options?: Readonly<OpenImageDialogOptions>) => Promise<ImageOpenDialogResult>; } & Entity"
+      },
+      "factory": {
+        "canonicalForSchema": false,
+        "name": "<module>"
+      },
+      "line": 43,
+      "normalizations": [
+        "synthetic-class"
+      ],
+      "source": "upstream/packages/host-web/src/webDialog.ts",
+      "status": "ready"
+    },
+    {
+      "argument": {
+        "fields": [
+          "capture"
+        ],
+        "kind": "object"
+      },
+      "blockers": [],
+      "column": 45,
+      "destination": {
+        "kind": "local-entity",
+        "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webDialog.ts:47:45",
+        "schemaName": "EntityShapeL47C45",
+        "type": "{ capture: (options?: Readonly<CapturePhotoDialogOptions>) => Promise<PhotoCaptureDialogResult>; } & Entity"
+      },
+      "factory": {
+        "canonicalForSchema": false,
+        "name": "<module>"
+      },
+      "line": 47,
+      "normalizations": [
+        "synthetic-class"
+      ],
+      "source": "upstream/packages/host-web/src/webDialog.ts",
+      "status": "ready"
+    },
+    {
+      "argument": {
+        "fields": [
+          "capture"
+        ],
+        "kind": "object"
+      },
+      "blockers": [],
+      "column": 45,
+      "destination": {
+        "kind": "local-entity",
+        "route": "variable",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webDialog.ts:51:45",
+        "schemaName": "EntityShapeL51C45",
+        "type": "{ capture: (options?: Readonly<CaptureVideoDialogOptions>) => Promise<VideoCaptureDialogResult>; } & Entity"
+      },
+      "factory": {
+        "canonicalForSchema": false,
+        "name": "<module>"
+      },
+      "line": 51,
       "normalizations": [
         "synthetic-class"
       ],
@@ -13313,7 +14498,7 @@
         "canonicalForSchema": false,
         "name": "<module>"
       },
-      "line": 15,
+      "line": 19,
       "normalizations": [],
       "source": "upstream/packages/host-web/src/webInputTarget.ts",
       "status": "ready"
@@ -13338,7 +14523,7 @@
         "canonicalForSchema": false,
         "name": "<module>"
       },
-      "line": 33,
+      "line": 37,
       "normalizations": [],
       "source": "upstream/packages/host-web/src/webInputTarget.ts",
       "status": "ready"
@@ -13364,7 +14549,7 @@
         "canonicalForSchema": false,
         "name": "<module>"
       },
-      "line": 46,
+      "line": 50,
       "normalizations": [],
       "source": "upstream/packages/host-web/src/webInputTarget.ts",
       "status": "ready"
@@ -13389,7 +14574,7 @@
         "canonicalForSchema": false,
         "name": "<module>"
       },
-      "line": 87,
+      "line": 91,
       "normalizations": [],
       "source": "upstream/packages/host-web/src/webInputTarget.ts",
       "status": "ready"
@@ -13414,7 +14599,7 @@
         "canonicalForSchema": false,
         "name": "<module>"
       },
-      "line": 100,
+      "line": 103,
       "normalizations": [],
       "source": "upstream/packages/host-web/src/webInputTarget.ts",
       "status": "ready"
@@ -13439,7 +14624,7 @@
         "canonicalForSchema": false,
         "name": "<module>"
       },
-      "line": 119,
+      "line": 122,
       "normalizations": [],
       "source": "upstream/packages/host-web/src/webInputTarget.ts",
       "status": "ready"
@@ -13464,7 +14649,7 @@
         "canonicalForSchema": false,
         "name": "createWebInputTargetHandle"
       },
-      "line": 131,
+      "line": 134,
       "normalizations": [],
       "source": "upstream/packages/host-web/src/webInputTarget.ts",
       "status": "ready"
@@ -13605,6 +14790,56 @@
       "line": 322,
       "normalizations": [],
       "source": "upstream/packages/host-web/src/webMediasession.ts",
+      "status": "ready"
+    },
+    {
+      "argument": {
+        "fields": [
+          "subscribe"
+        ],
+        "kind": "object"
+      },
+      "blockers": [],
+      "column": 62,
+      "destination": {
+        "kind": "exact-entity",
+        "route": "contextual",
+        "schemaId": "@flighthq/types:interface#MenuHighlightBackend",
+        "schemaName": "MenuHighlightBackend",
+        "type": "MenuHighlightBackend"
+      },
+      "factory": {
+        "canonicalForSchema": false,
+        "name": "<module>"
+      },
+      "line": 15,
+      "normalizations": [],
+      "source": "upstream/packages/host-web/src/webMenu.ts",
+      "status": "ready"
+    },
+    {
+      "argument": {
+        "fields": [
+          "popup"
+        ],
+        "kind": "object"
+      },
+      "blockers": [],
+      "column": 54,
+      "destination": {
+        "kind": "exact-entity",
+        "route": "contextual",
+        "schemaId": "@flighthq/types:interface#MenuPopupBackend",
+        "schemaName": "MenuPopupBackend",
+        "type": "MenuPopupBackend"
+      },
+      "factory": {
+        "canonicalForSchema": false,
+        "name": "<module>"
+      },
+      "line": 24,
+      "normalizations": [],
+      "source": "upstream/packages/host-web/src/webMenu.ts",
       "status": "ready"
     },
     {
@@ -13777,27 +15012,162 @@
     {
       "argument": {
         "fields": [
+          "acquire",
+          "destroy",
+          "isActive",
+          "release"
+        ],
+        "kind": "object"
+      },
+      "blockers": [],
+      "column": 64,
+      "destination": {
+        "kind": "exact-entity",
+        "route": "contextual",
+        "schemaId": "@flighthq/types:interface#PowerKeepAwakeBackend",
+        "schemaName": "PowerKeepAwakeBackend",
+        "type": "PowerKeepAwakeBackend"
+      },
+      "factory": {
+        "canonicalForSchema": false,
+        "name": "<module>"
+      },
+      "line": 29,
+      "normalizations": [],
+      "source": "upstream/packages/host-web/src/webPower.ts",
+      "status": "ready"
+    },
+    {
+      "argument": {
+        "fields": [
+          "subscribeResume",
+          "subscribeSuspend"
+        ],
+        "kind": "object"
+      },
+      "blockers": [],
+      "column": 66,
+      "destination": {
+        "kind": "exact-entity",
+        "route": "contextual",
+        "schemaId": "@flighthq/types:interface#PowerSuspensionBackend",
+        "schemaName": "PowerSuspensionBackend",
+        "type": "PowerSuspensionBackend"
+      },
+      "factory": {
+        "canonicalForSchema": false,
+        "name": "<module>"
+      },
+      "line": 88,
+      "normalizations": [],
+      "source": "upstream/packages/host-web/src/webPower.ts",
+      "status": "ready"
+    },
+    {
+      "argument": {
+        "fields": [
+          "change",
+          "status"
+        ],
+        "kind": "object"
+      },
+      "blockers": [],
+      "column": 10,
+      "destination": {
+        "kind": "exact-entity",
+        "route": "contextual",
+        "schemaId": "@flighthq/types:type#WebPowerReadingCapabilities",
+        "schemaName": "WebPowerReadingCapabilities",
+        "type": "WebPowerReadingCapabilities"
+      },
+      "factory": {
+        "canonicalForSchema": false,
+        "name": "createWebPowerReadings"
+      },
+      "line": 113,
+      "normalizations": [],
+      "source": "upstream/packages/host-web/src/webPower.ts",
+      "status": "ready"
+    },
+    {
+      "argument": {
+        "fields": [
+          "subscribe"
+        ],
+        "kind": "object"
+      },
+      "blockers": [
+        "field-set-mismatch",
+        "parameterized-destination"
+      ],
+      "column": 13,
+      "destination": {
+        "kind": "exact-non-entity",
+        "route": "type-argument",
+        "schemaId": "@flighthq/types:type#EntityWithoutRuntime",
+        "schemaName": "EntityWithoutRuntime",
+        "type": "EntityWithoutRuntime<PowerChangeBackend>"
+      },
+      "factory": {
+        "canonicalForSchema": false,
+        "name": "createWebPowerReadings"
+      },
+      "line": 114,
+      "normalizations": [],
+      "source": "upstream/packages/host-web/src/webPower.ts",
+      "status": "not-entity"
+    },
+    {
+      "argument": {
+        "fields": [
+          "getStatus"
+        ],
+        "kind": "object"
+      },
+      "blockers": [
+        "field-set-mismatch",
+        "parameterized-destination"
+      ],
+      "column": 13,
+      "destination": {
+        "kind": "exact-non-entity",
+        "route": "type-argument",
+        "schemaId": "@flighthq/types:type#EntityWithoutRuntime",
+        "schemaName": "EntityWithoutRuntime",
+        "type": "EntityWithoutRuntime<PowerStatusBackend>"
+      },
+      "factory": {
+        "canonicalForSchema": false,
+        "name": "createWebPowerReadings"
+      },
+      "line": 169,
+      "normalizations": [],
+      "source": "upstream/packages/host-web/src/webPower.ts",
+      "status": "not-entity"
+    },
+    {
+      "argument": {
+        "fields": [
           "keepAwake",
           "suspension"
         ],
         "kind": "object"
       },
       "blockers": [],
-      "column": 37,
+      "column": 59,
       "destination": {
-        "kind": "local-entity",
-        "route": "variable",
-        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webPower.ts:181:37",
-        "schemaName": "EntityShapeL181C37",
-        "type": "{ keepAwake: PowerKeepAwakeBackend; suspension: PowerSuspensionBackend; change: PowerChangeBackend; status: PowerStatusBackend; } & Entity"
+        "kind": "exact-entity",
+        "route": "contextual",
+        "schemaId": "@flighthq/types:type#WebPowerCapabilities",
+        "schemaName": "WebPowerCapabilities",
+        "type": "WebPowerCapabilities"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "<module>"
       },
-      "line": 181,
+      "line": 188,
       "normalizations": [
-        "synthetic-class",
         "spread-projection"
       ],
       "source": "upstream/packages/host-web/src/webPower.ts",
@@ -13901,15 +15271,15 @@
       "destination": {
         "kind": "local-entity",
         "route": "variable",
-        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webScreen.ts:178:17",
-        "schemaName": "EntityShapeL178C17",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webScreen.ts:182:17",
+        "schemaName": "EntityShapeL182C17",
         "type": "{ destroy(): void; getCursorPosition(out: { x: number; y: number; }): { x: number; y: number; }; getPrimaryScreen(out: ScreenInfo): ScreenInfo; getScreens: (out: ScreenInfo[]) => ScreenInfo[]; } & Entity"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "createWebScreenCapabilities"
       },
-      "line": 178,
+      "line": 182,
       "normalizations": [
         "synthetic-class"
       ],
@@ -13928,15 +15298,15 @@
       "destination": {
         "kind": "local-entity",
         "route": "variable",
-        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webScreen.ts:221:18",
-        "schemaName": "EntityShapeL221C18",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webScreen.ts:225:18",
+        "schemaName": "EntityShapeL225C18",
         "type": "{ subscribe(listener: (event: Readonly<ScreenChangeEvent>) => void): () => void; } & Entity"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "createWebScreenCapabilities"
       },
-      "line": 221,
+      "line": 225,
       "normalizations": [
         "synthetic-class"
       ],
@@ -13956,15 +15326,15 @@
       "destination": {
         "kind": "local-entity",
         "route": "variable",
-        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webScreen.ts:242:26",
-        "schemaName": "EntityShapeL242C26",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webScreen.ts:246:26",
+        "schemaName": "EntityShapeL246C26",
         "type": "{ queryPermission(): Promise<ScreenPermissionState>; request(): Promise<boolean>; } & Entity"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "createWebScreenCapabilities"
       },
-      "line": 242,
+      "line": 246,
       "normalizations": [
         "synthetic-class"
       ],
@@ -13983,15 +15353,15 @@
       "destination": {
         "kind": "local-entity",
         "route": "variable",
-        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webScreen.ts:272:28",
-        "schemaName": "EntityShapeL272C28",
+        "schemaId": "synthetic-entity:upstream/packages/host-web/src/webScreen.ts:276:28",
+        "schemaName": "EntityShapeL276C28",
         "type": "{ subscribe(listener: (state: ScreenPermissionState) => void): () => void; } & Entity"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "createWebScreenCapabilities"
       },
-      "line": 272,
+      "line": 276,
       "normalizations": [
         "synthetic-class"
       ],
@@ -14265,9 +15635,9 @@
       "destination": {
         "kind": "exact-entity",
         "route": "contextual",
-        "schemaId": "@flighthq/types:interface#Image",
-        "schemaName": "Image",
-        "type": "Image"
+        "schemaId": "@flighthq/types:interface#ImageResource",
+        "schemaName": "ImageResource",
+        "type": "ImageResource"
       },
       "factory": {
         "canonicalForSchema": false,
@@ -14296,13 +15666,13 @@
       "destination": {
         "kind": "exact-entity",
         "route": "contextual",
-        "schemaId": "@flighthq/types:interface#CompressedImage",
-        "schemaName": "CompressedImage",
-        "type": "CompressedImage"
+        "schemaId": "@flighthq/types:interface#CompressedImageResource",
+        "schemaName": "CompressedImageResource",
+        "type": "CompressedImageResource"
       },
       "factory": {
         "canonicalForSchema": true,
-        "name": "createCompressedImage"
+        "name": "createCompressedImageResource"
       },
       "line": 22,
       "normalizations": [],
@@ -14323,16 +15693,16 @@
         "kind": "object"
       },
       "blockers": [],
-      "column": 27,
+      "column": 35,
       "destination": {
         "kind": "exact-entity",
         "route": "contextual",
-        "schemaId": "@flighthq/types:interface#Image",
-        "schemaName": "Image",
-        "type": "Image"
+        "schemaId": "@flighthq/types:interface#ImageResource",
+        "schemaName": "ImageResource",
+        "type": "ImageResource"
       },
       "factory": {
-        "canonicalForSchema": false,
+        "canonicalForSchema": true,
         "name": "createImageResource"
       },
       "line": 34,
@@ -14358,9 +15728,9 @@
       "destination": {
         "kind": "exact-entity",
         "route": "contextual",
-        "schemaId": "@flighthq/types:interface#Image",
-        "schemaName": "Image",
-        "type": "Image"
+        "schemaId": "@flighthq/types:interface#ImageResource",
+        "schemaName": "ImageResource",
+        "type": "ImageResource"
       },
       "factory": {
         "canonicalForSchema": false,
@@ -14389,9 +15759,9 @@
       "destination": {
         "kind": "exact-entity",
         "route": "contextual",
-        "schemaId": "@flighthq/types:interface#Image",
-        "schemaName": "Image",
-        "type": "Image"
+        "schemaId": "@flighthq/types:interface#ImageResource",
+        "schemaName": "ImageResource",
+        "type": "ImageResource"
       },
       "factory": {
         "canonicalForSchema": false,
@@ -14420,9 +15790,9 @@
       "destination": {
         "kind": "exact-entity",
         "route": "contextual",
-        "schemaId": "@flighthq/types:interface#Image",
-        "schemaName": "Image",
-        "type": "Image"
+        "schemaId": "@flighthq/types:interface#ImageResource",
+        "schemaName": "ImageResource",
+        "type": "ImageResource"
       },
       "factory": {
         "canonicalForSchema": false,
@@ -14500,7 +15870,9 @@
       "argument": {
         "fields": [
           "color",
+          "enabled",
           "intensity",
+          "intensityUnit",
           "kind"
         ],
         "kind": "object"
@@ -14518,7 +15890,7 @@
         "canonicalForSchema": true,
         "name": "createAmbientLight"
       },
-      "line": 13,
+      "line": 18,
       "normalizations": [],
       "source": "upstream/packages/lighting/src/ambientLight.ts",
       "status": "ready"
@@ -14528,8 +15900,11 @@
         "fields": [
           "castsShadow",
           "color",
+          "decay",
           "direction",
+          "enabled",
           "intensity",
+          "intensityUnit",
           "kind",
           "normalBias",
           "pcfRadius",
@@ -14537,6 +15912,10 @@
           "range",
           "right",
           "shadowBias",
+          "shadowFar",
+          "shadowMapSize",
+          "shadowNear",
+          "shadowStrength",
           "up"
         ],
         "kind": "object"
@@ -14564,8 +15943,11 @@
         "fields": [
           "castsShadow",
           "color",
+          "decay",
           "direction",
+          "enabled",
           "intensity",
+          "intensityUnit",
           "kind",
           "normalBias",
           "pcfRadius",
@@ -14573,6 +15955,10 @@
           "range",
           "right",
           "shadowBias",
+          "shadowFar",
+          "shadowMapSize",
+          "shadowNear",
+          "shadowStrength",
           "up"
         ],
         "kind": "object"
@@ -14590,7 +15976,7 @@
         "canonicalForSchema": true,
         "name": "createAreaLight"
       },
-      "line": 33,
+      "line": 40,
       "normalizations": [],
       "source": "upstream/packages/lighting/src/areaLight.ts",
       "status": "ready"
@@ -14598,14 +15984,22 @@
     {
       "argument": {
         "fields": [
+          "cascadeCount",
+          "cascadeSplits",
           "castsShadow",
           "color",
           "direction",
+          "enabled",
           "intensity",
+          "intensityUnit",
           "kind",
           "normalBias",
           "pcfRadius",
-          "shadowBias"
+          "shadowBias",
+          "shadowFar",
+          "shadowMapSize",
+          "shadowNear",
+          "shadowStrength"
         ],
         "kind": "object"
       },
@@ -14630,19 +16024,27 @@
     {
       "argument": {
         "fields": [
+          "cascadeCount",
+          "cascadeSplits",
           "castsShadow",
           "color",
           "direction",
+          "enabled",
           "intensity",
+          "intensityUnit",
           "kind",
           "normalBias",
           "pcfRadius",
-          "shadowBias"
+          "shadowBias",
+          "shadowFar",
+          "shadowMapSize",
+          "shadowNear",
+          "shadowStrength"
         ],
         "kind": "object"
       },
       "blockers": [],
-      "column": 10,
+      "column": 35,
       "destination": {
         "kind": "exact-entity",
         "route": "contextual",
@@ -14654,7 +16056,7 @@
         "canonicalForSchema": true,
         "name": "createDirectionalLight"
       },
-      "line": 25,
+      "line": 33,
       "normalizations": [],
       "source": "upstream/packages/lighting/src/directionalLight.ts",
       "status": "ready"
@@ -14662,6 +16064,7 @@
     {
       "argument": {
         "fields": [
+          "enabled",
           "environment",
           "intensity",
           "kind"
@@ -14689,8 +16092,10 @@
     {
       "argument": {
         "fields": [
+          "enabled",
           "groundColor",
           "intensity",
+          "intensityUnit",
           "kind",
           "skyColor"
         ],
@@ -14709,7 +16114,7 @@
         "canonicalForSchema": true,
         "name": "createHemisphereLight"
       },
-      "line": 18,
+      "line": 20,
       "normalizations": [],
       "source": "upstream/packages/lighting/src/hemisphereLight.ts",
       "status": "ready"
@@ -14719,13 +16124,20 @@
         "fields": [
           "castsShadow",
           "color",
+          "decay",
+          "enabled",
           "intensity",
+          "intensityUnit",
           "kind",
           "normalBias",
           "pcfRadius",
           "position",
           "range",
-          "shadowBias"
+          "shadowBias",
+          "shadowFar",
+          "shadowMapSize",
+          "shadowNear",
+          "shadowStrength"
         ],
         "kind": "object"
       },
@@ -14752,13 +16164,20 @@
         "fields": [
           "castsShadow",
           "color",
+          "decay",
+          "enabled",
           "intensity",
+          "intensityUnit",
           "kind",
           "normalBias",
           "pcfRadius",
           "position",
           "range",
-          "shadowBias"
+          "shadowBias",
+          "shadowFar",
+          "shadowMapSize",
+          "shadowNear",
+          "shadowStrength"
         ],
         "kind": "object"
       },
@@ -14775,7 +16194,7 @@
         "canonicalForSchema": true,
         "name": "createPointLight"
       },
-      "line": 26,
+      "line": 33,
       "normalizations": [],
       "source": "upstream/packages/lighting/src/pointLight.ts",
       "status": "ready"
@@ -14814,16 +16233,24 @@
         "fields": [
           "castsShadow",
           "color",
+          "decay",
           "direction",
+          "enabled",
           "innerConeCos",
           "intensity",
+          "intensityUnit",
           "kind",
           "normalBias",
           "outerConeCos",
           "pcfRadius",
           "position",
           "range",
-          "shadowBias"
+          "shadowBias",
+          "shadowFar",
+          "shadowMapSize",
+          "shadowNear",
+          "shadowStrength",
+          "spotBlend"
         ],
         "kind": "object"
       },
@@ -14850,16 +16277,24 @@
         "fields": [
           "castsShadow",
           "color",
+          "decay",
           "direction",
+          "enabled",
           "innerConeCos",
           "intensity",
+          "intensityUnit",
           "kind",
           "normalBias",
           "outerConeCos",
           "pcfRadius",
           "position",
           "range",
-          "shadowBias"
+          "shadowBias",
+          "shadowFar",
+          "shadowMapSize",
+          "shadowNear",
+          "shadowStrength",
+          "spotBlend"
         ],
         "kind": "object"
       },
@@ -14876,7 +16311,7 @@
         "canonicalForSchema": true,
         "name": "createSpotLight"
       },
-      "line": 31,
+      "line": 39,
       "normalizations": [],
       "source": "upstream/packages/lighting/src/spotLight.ts",
       "status": "ready"
@@ -15759,6 +17194,93 @@
     {
       "argument": {
         "fields": [
+          "locations",
+          "program",
+          "bind"
+        ],
+        "kind": "object"
+      },
+      "blockers": [],
+      "column": 10,
+      "destination": {
+        "kind": "exact-entity",
+        "route": "contextual",
+        "schemaId": "@flighthq/types:type#GlBitmapShader",
+        "schemaName": "GlBitmapShader",
+        "type": "GlBitmapShader"
+      },
+      "factory": {
+        "canonicalForSchema": false,
+        "name": "createDefaultGlBitmapShader"
+      },
+      "line": 55,
+      "normalizations": [
+        "field-order"
+      ],
+      "source": "upstream/packages/render-gl/src/glShader.ts",
+      "status": "ready"
+    },
+    {
+      "argument": {
+        "fields": [
+          "locations",
+          "program",
+          "bind"
+        ],
+        "kind": "object"
+      },
+      "blockers": [],
+      "column": 10,
+      "destination": {
+        "kind": "exact-entity",
+        "route": "contextual",
+        "schemaId": "@flighthq/types:type#GlBitmapShader",
+        "schemaName": "GlBitmapShader",
+        "type": "GlBitmapShader"
+      },
+      "factory": {
+        "canonicalForSchema": true,
+        "name": "createGlBitmapShader"
+      },
+      "line": 87,
+      "normalizations": [
+        "field-order"
+      ],
+      "source": "upstream/packages/render-gl/src/glShader.ts",
+      "status": "ready"
+    },
+    {
+      "argument": {
+        "fields": [
+          "locations",
+          "program",
+          "bind"
+        ],
+        "kind": "object"
+      },
+      "blockers": [],
+      "column": 26,
+      "destination": {
+        "kind": "local-entity",
+        "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/render-gl/src/glTestHelper.ts:55:26",
+        "schemaName": "EntityShapeL55C26",
+        "type": "GlBitmapShader | null | undefined"
+      },
+      "factory": {
+        "canonicalForSchema": false,
+        "name": "createGlState"
+      },
+      "line": 55,
+      "normalizations": [
+        "synthetic-class"
+      ],
+      "source": "upstream/packages/render-gl/src/glTestHelper.ts",
+      "status": "ready"
+    },
+    {
+      "argument": {
+        "fields": [
           "height",
           "kind",
           "version",
@@ -15857,8 +17379,37 @@
         "canonicalForSchema": true,
         "name": "createRenderCache"
       },
-      "line": 18,
+      "line": 25,
       "normalizations": [],
+      "source": "upstream/packages/render/src/renderCache.ts",
+      "status": "ready"
+    },
+    {
+      "argument": {
+        "fields": [
+          "cache",
+          "signals",
+          "adapt"
+        ],
+        "kind": "object"
+      },
+      "blockers": [],
+      "column": 39,
+      "destination": {
+        "kind": "exact-entity",
+        "route": "contextual",
+        "schemaId": "@flighthq/types:type#RenderCacheAdapter",
+        "schemaName": "RenderCacheAdapter",
+        "type": "RenderCacheAdapter"
+      },
+      "factory": {
+        "canonicalForSchema": true,
+        "name": "createRenderCacheAdapter"
+      },
+      "line": 37,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/render/src/renderCache.ts",
       "status": "ready"
     },
@@ -16410,20 +17961,18 @@
       "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "local-entity",
+        "kind": "exact-entity",
         "route": "contextual",
-        "schemaId": "synthetic-entity:upstream/packages/scene2d/src/sprite.ts:48:10",
-        "schemaName": "EntityShapeL48C10",
-        "type": "RendererData"
+        "schemaId": "@flighthq/types:interface#SpriteIdentityRendererData",
+        "schemaName": "SpriteIdentityRendererData",
+        "type": "SpriteIdentityRendererData"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "createSpriteRendererData"
       },
       "line": 48,
-      "normalizations": [
-        "synthetic-class"
-      ],
+      "normalizations": [],
       "source": "upstream/packages/scene2d/src/sprite.ts",
       "status": "ready"
     },
@@ -16468,7 +18017,7 @@
         "route": "contextual",
         "schemaId": "synthetic-entity:upstream/packages/scene3d-resources/src/sceneResourceResolver.ts:42:10",
         "schemaName": "EntityShapeL42C10",
-        "type": "Scene3DResourceResolver"
+        "type": "Scene3DResourceResolverWithRuntime"
       },
       "factory": {
         "canonicalForSchema": false,
@@ -16503,7 +18052,7 @@
         "canonicalForSchema": true,
         "name": "createScene3DResourceSignals"
       },
-      "line": 8,
+      "line": 7,
       "normalizations": [],
       "source": "upstream/packages/scene3d-resources/src/sceneResourceSignals.ts",
       "status": "ready"
@@ -16785,6 +18334,7 @@
           "boneMatrices",
           "bones",
           "inverseBindMatrices",
+          "skins",
           "slots",
           "worldMatrices"
         ],
@@ -16804,9 +18354,7 @@
         "name": "cloneSkeleton2D"
       },
       "line": 13,
-      "normalizations": [
-        "missing-field-initialization"
-      ],
+      "normalizations": [],
       "source": "upstream/packages/skeleton2d/src/skeleton2d.ts",
       "status": "ready"
     },
@@ -16834,7 +18382,7 @@
         "canonicalForSchema": true,
         "name": "createSkeleton2D"
       },
-      "line": 152,
+      "line": 153,
       "normalizations": [
         "missing-field-initialization"
       ],
@@ -17493,15 +19041,15 @@
       "destination": {
         "kind": "exact-entity",
         "route": "contextual",
-        "schemaId": "@flighthq/types:interface#Image",
-        "schemaName": "Image",
-        "type": "Image"
+        "schemaId": "@flighthq/types:interface#ImageResource",
+        "schemaName": "ImageResource",
+        "type": "ImageResource"
       },
       "factory": {
         "canonicalForSchema": false,
         "name": "createVideoImageResource"
       },
-      "line": 97,
+      "line": 104,
       "normalizations": [
         "field-order"
       ],
@@ -17603,23 +19151,50 @@
       ],
       "source": "upstream/packages/tray/src/tray.ts",
       "status": "ready"
+    },
+    {
+      "argument": {
+        "fields": [
+          "element",
+          "objectUrl",
+          "ownsElement"
+        ],
+        "kind": "object"
+      },
+      "blockers": [],
+      "column": 10,
+      "destination": {
+        "kind": "exact-entity",
+        "route": "contextual",
+        "schemaId": "@flighthq/types:interface#VideoResource",
+        "schemaName": "VideoResource",
+        "type": "VideoResource"
+      },
+      "factory": {
+        "canonicalForSchema": true,
+        "name": "createVideoResource"
+      },
+      "line": 16,
+      "normalizations": [],
+      "source": "upstream/packages/video/src/videoResource.ts",
+      "status": "ready"
     }
   ],
   "summary": {
     "bareEntityCalls": 0,
     "blockedEntityCalls": 0,
-    "calls": 368,
-    "exactEntityCalls": 178,
-    "exactEntitySchemas": 143,
-    "exactNonEntityCalls": 17,
+    "calls": 393,
+    "exactEntityCalls": 198,
+    "exactEntitySchemas": 160,
+    "exactNonEntityCalls": 19,
     "genericEntityCalls": 0,
-    "localEntityCalls": 173,
-    "normalizedFieldOrderCalls": 24,
+    "localEntityCalls": 176,
+    "normalizedFieldOrderCalls": 28,
     "normalizedMissingFieldCalls": 9,
-    "normalizedSpreadProjectionCalls": 17,
-    "readyEntityCalls": 351,
+    "normalizedSpreadProjectionCalls": 18,
+    "readyEntityCalls": 374,
     "structuralEntityCalls": 0,
     "unresolvedCalls": 0
   },
-  "upstreamCommit": "98a7a58a934f55555a561a308cc23c1363c45652"
+  "upstreamCommit": "8d09db125a0afd3b73ca6e039a7dd25bcb9737d0"
 }

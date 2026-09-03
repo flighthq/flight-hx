@@ -9,7 +9,7 @@ import flight._Types.CompressedImageTextureSourceKind;
 @:allow(flight._Image)
 @:keep
 @:structInit
-class CompressedImage extends flight.types.TextureSource<Dynamic> {
+class CompressedImageResource extends flight.types.TextureSource<Dynamic> {
   public var compressed:CompressedImageData;
 
   private function new(alphaType:AlphaType, gamut:String, height:Float, kind:Dynamic, version:Float, width:Float, compressed:CompressedImageData):Void {
@@ -18,5 +18,5 @@ class CompressedImage extends flight.types.TextureSource<Dynamic> {
   }
 }
 #else
-typedef CompressedImage = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var alphaType:AlphaType; var gamut:String; var height:Float; var kind:Dynamic; var version:Float; var width:Float; var compressed:CompressedImageData; };
+typedef CompressedImageResource = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var alphaType:AlphaType; var gamut:String; var height:Float; var kind:Dynamic; var version:Float; var width:Float; var compressed:CompressedImageData; };
 #end

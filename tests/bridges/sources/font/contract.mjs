@@ -3,9 +3,7 @@
 function __syncDependencies() {}
 __syncDependencies();
 
-export * from './font.mjs';
 export * from './fontFormat.mjs';
-export * from './fontFrom.mjs';
 export * from './fontLoading.mjs';
 export * from './fontResource.mjs';
 export * from './fontResourceFrom.mjs';

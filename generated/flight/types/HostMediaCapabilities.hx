@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef HostMediaCapabilities = { @:optional var audioCodec:AudioBackend; @:optional var audioDevice:AudioDeviceBackend; @:optional var session:MediaSessionBackend; @:optional var sessionAction:MediaSessionActionBackend; @:optional var video:VideoCapabilityBackend; @:optional var mediaFileCapture:MediaFileCaptureBackend; };
+typedef HostMediaCapabilities = { @:optional var audioCodec:AudioBackend; @:optional var audioDevice:AudioDeviceBackend; @:optional var session:MediaSessionBackend; @:optional var sessionAction:MediaSessionActionBackend; @:optional var video:VideoCapabilityBackend; };

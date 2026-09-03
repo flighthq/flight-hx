@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef LottieRepeaterShapeItem = { @:optional var hd:Bool; @:optional var ix:Float; @:optional var nm:String; var ty:String; var c:LottieAnimatable<Float>; @:optional var m:Float; var o:LottieAnimatable<Float>; var tr:{ >LottieTransform, @:optional var eo:LottieAnimatable<Float>; @:optional var so:LottieAnimatable<Float>; }; };
+typedef LottieRepeaterShapeItem = { @:optional var hd:Bool; @:optional var ix:Float; @:optional var nm:String; var ty:String; var c:LottieAnimatable<Float>; @:optional var m:Float; var o:LottieAnimatable<Float>; var tr:LottieRepeaterTransform; };

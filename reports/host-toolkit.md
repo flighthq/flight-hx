@@ -1,20 +1,20 @@
 # Host Toolkit Dependency Audit
 
-Upstream commit: `98a7a58a934f55555a561a308cc23c1363c45652`
+Upstream commit: `8d09db125a0afd3b73ca6e039a7dd25bcb9737d0`
 
 Generated code owns checker-known source types and stable lookup keys. Maintained source owns the declarations, target values, and adapters behind those keys. Generation fails when a referenced key has no declared toolkit provider; Dynamic compatibility declarations remain visible as toolkit debt rather than changing the generated type or member expression.
 
 | Metric | Count |
 | --- | ---: |
-| Host type keys | 237 |
+| Host type keys | 239 |
 | External type keys | 1 |
-| Dynamic compatibility type entries | 212 |
-| Global value keys | 70 |
+| Dynamic compatibility type entries | 214 |
+| Global value keys | 72 |
 | Portable global value keys | 35 |
-| JavaScript-only global value keys | 35 |
+| JavaScript-only global value keys | 37 |
 | Module value keys | 0 |
-| Type uses | 9081 |
-| Value uses | 2126 |
+| Type uses | 9112 |
+| Value uses | 2136 |
 | Missing toolkit entries | 0 |
 
 ## Types
@@ -23,10 +23,10 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | --- | --- | --- | --- | --- | ---: |
 | `external:GLenum` | `external` | `flight._internal.WebExterns.GLenum` | `src/flight/_internal/WebExterns.hx` | `typed` | 1 |
 | `host:AbortController` | `host` | `flight._internal.dom.AbortController` | `src/flight/_internal/dom/AbortController.hx` | `typed` | 40 |
-| `host:AbortSignal` | `host` | `flight._internal.dom.AbortSignal` | `src/flight/_internal/dom/AbortSignal.hx` | `typed` | 409 |
+| `host:AbortSignal` | `host` | `flight._internal.dom.AbortSignal` | `src/flight/_internal/dom/AbortSignal.hx` | `typed` | 432 |
 | `host:AddEventListenerOptions` | `host` | `flight._internal.dom.AddEventListenerOptions` | `src/flight/_internal/dom/AddEventListenerOptions.hx` | `typed` | 1 |
-| `host:AudioBuffer` | `host` | `flight._internal.dom.AudioBuffer` | `src/flight/_internal/dom/AudioBuffer.hx` | `typed` | 39 |
-| `host:AudioBufferSourceNode` | `host` | `flight._internal.dom.AudioBufferSourceNode` | `src/flight/_internal/dom/AudioBufferSourceNode.hx` | `dynamic-stub` | 29 |
+| `host:AudioBuffer` | `host` | `flight._internal.dom.AudioBuffer` | `src/flight/_internal/dom/AudioBuffer.hx` | `typed` | 41 |
+| `host:AudioBufferSourceNode` | `host` | `flight._internal.dom.AudioBufferSourceNode` | `src/flight/_internal/dom/AudioBufferSourceNode.hx` | `dynamic-stub` | 30 |
 | `host:AudioContext` | `host` | `flight._internal.dom.AudioContext` | `src/flight/_internal/dom/AudioContext.hx` | `dynamic-stub` | 44 |
 | `host:AudioDestinationNode` | `host` | `flight._internal.dom.AudioDestinationNode` | `src/flight/_internal/dom/AudioDestinationNode.hx` | `dynamic-stub` | 2 |
 | `host:AudioNode` | `host` | `flight._internal.dom.AudioNode` | `src/flight/_internal/dom/AudioNode.hx` | `dynamic-stub` | 9 |
@@ -40,7 +40,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:CanvasLineCap` | `host` | `flight._internal.dom.CanvasLineCap` | `src/flight/_internal/dom/CanvasLineCap.hx` | `dynamic-stub` | 1 |
 | `host:CanvasLineJoin` | `host` | `flight._internal.dom.CanvasLineJoin` | `src/flight/_internal/dom/CanvasLineJoin.hx` | `dynamic-stub` | 1 |
 | `host:CanvasPattern` | `host` | `flight._internal.dom.CanvasPattern` | `src/flight/_internal/dom/CanvasPattern.hx` | `dynamic-stub` | 36 |
-| `host:CanvasRenderingContext2D` | `host` | `flight._internal.dom.CanvasRenderingContext2D` | `src/flight/_internal/dom/CanvasRenderingContext2D.hx` | `dynamic-stub` | 630 |
+| `host:CanvasRenderingContext2D` | `host` | `flight._internal.dom.CanvasRenderingContext2D` | `src/flight/_internal/dom/CanvasRenderingContext2D.hx` | `dynamic-stub` | 634 |
 | `host:CanvasRenderingContext2DSettings` | `host` | `flight._internal.dom.CanvasRenderingContext2DSettings` | `src/flight/_internal/dom/CanvasRenderingContext2DSettings.hx` | `dynamic-stub` | 12 |
 | `host:ChildNode` | `host` | `flight._internal.dom.ChildNode` | `src/flight/_internal/dom/ChildNode.hx` | `dynamic-stub` | 8 |
 | `host:Clipboard` | `host` | `flight._internal.dom.Clipboard` | `src/flight/_internal/dom/Clipboard.hx` | `dynamic-stub` | 22 |
@@ -49,17 +49,18 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:CompositionEvent` | `host` | `flight._internal.dom.CompositionEvent` | `src/flight/_internal/dom/CompositionEvent.hx` | `dynamic-stub` | 3 |
 | `host:Console` | `host` | `flight._internal.dom.Console` | `src/flight/_internal/dom/Console.hx` | `typed` | 2 |
 | `host:Crypto` | `host` | `flight._internal.dom.Crypto` | `src/flight/_internal/dom/Crypto.hx` | `dynamic-stub` | 3 |
-| `host:CSSStyleDeclaration` | `host` | `flight._internal.dom.CSSStyleDeclaration` | `src/flight/_internal/dom/CSSStyleDeclaration.hx` | `dynamic-stub` | 158 |
+| `host:CSSStyleDeclaration` | `host` | `flight._internal.dom.CSSStyleDeclaration` | `src/flight/_internal/dom/CSSStyleDeclaration.hx` | `dynamic-stub` | 150 |
 | `host:CustomEvent` | `host` | `flight._internal.dom.CustomEvent` | `src/flight/_internal/dom/CustomEvent.hx` | `dynamic-stub` | 3 |
 | `host:DataTransfer` | `host` | `flight._internal.dom.DataTransfer` | `src/flight/_internal/dom/DataTransfer.hx` | `dynamic-stub` | 2 |
-| `host:Document` | `host` | `flight._internal.dom.Document` | `src/flight/_internal/dom/Document.hx` | `dynamic-stub` | 142 |
+| `host:Document` | `host` | `flight._internal.dom.Document` | `src/flight/_internal/dom/Document.hx` | `dynamic-stub` | 143 |
+| `host:DocumentOrShadowRoot` | `host` | `flight._internal.dom.DocumentOrShadowRoot` | `src/flight/_internal/dom/DocumentOrShadowRoot.hx` | `dynamic-stub` | 3 |
 | `host:DOMException` | `host` | `flight._internal.dom.DOMException` | `src/flight/_internal/dom/DOMException.hx` | `typed` | 11 |
 | `host:DOMRect` | `host` | `flight._internal.dom.DOMRect` | `src/flight/_internal/dom/DOMRect.hx` | `dynamic-stub` | 17 |
 | `host:DOMRectReadOnly` | `host` | `flight._internal.dom.DOMRectReadOnly` | `src/flight/_internal/dom/DOMRectReadOnly.hx` | `dynamic-stub` | 3 |
 | `host:DOMStringMap` | `host` | `flight._internal.dom.DOMStringMap` | `src/flight/_internal/dom/DOMStringMap.hx` | `dynamic-stub` | 1 |
 | `host:DragEvent` | `host` | `flight._internal.dom.DragEvent` | `src/flight/_internal/dom/DragEvent.hx` | `dynamic-stub` | 8 |
-| `host:Element` | `host` | `flight._internal.dom.Element` | `src/flight/_internal/dom/Element.hx` | `dynamic-stub` | 22 |
-| `host:Event` | `host` | `flight._internal.dom.Event` | `src/flight/_internal/dom/Event.hx` | `dynamic-stub` | 55 |
+| `host:Element` | `host` | `flight._internal.dom.Element` | `src/flight/_internal/dom/Element.hx` | `dynamic-stub` | 19 |
+| `host:Event` | `host` | `flight._internal.dom.Event` | `src/flight/_internal/dom/Event.hx` | `dynamic-stub` | 53 |
 | `host:EventListener` | `host` | `flight._internal.dom.EventListener` | `src/flight/_internal/dom/EventListener.hx` | `dynamic-stub` | 17 |
 | `host:EventListenerObject` | `host` | `flight._internal.dom.EventListenerObject` | `src/flight/_internal/dom/EventListenerObject.hx` | `typed` | 1 |
 | `host:EventListenerOptions` | `host` | `flight._internal.dom.EventListenerOptions` | `src/flight/_internal/dom/EventListenerOptions.hx` | `typed` | 1 |
@@ -68,14 +69,14 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:EXT_texture_compression_bptc` | `host` | `flight._internal.dom.EXT_texture_compression_bptc` | `src/flight/_internal/dom/EXT_texture_compression_bptc.hx` | `dynamic-stub` | 1 |
 | `host:EXT_texture_compression_rgtc` | `host` | `flight._internal.dom.EXT_texture_compression_rgtc` | `src/flight/_internal/dom/EXT_texture_compression_rgtc.hx` | `dynamic-stub` | 1 |
 | `host:EXT_texture_filter_anisotropic` | `host` | `flight._internal.dom.EXT_texture_filter_anisotropic` | `src/flight/_internal/dom/EXT_texture_filter_anisotropic.hx` | `dynamic-stub` | 8 |
-| `host:File` | `host` | `flight._internal.dom.File` | `src/flight/_internal/dom/File.hx` | `dynamic-stub` | 42 |
-| `host:FileList` | `host` | `flight._internal.dom.FileList` | `src/flight/_internal/dom/FileList.hx` | `dynamic-stub` | 5 |
-| `host:FileReader` | `host` | `flight._internal.dom.FileReader` | `src/flight/_internal/dom/FileReader.hx` | `dynamic-stub` | 23 |
+| `host:File` | `host` | `flight._internal.dom.File` | `src/flight/_internal/dom/File.hx` | `dynamic-stub` | 58 |
+| `host:FileList` | `host` | `flight._internal.dom.FileList` | `src/flight/_internal/dom/FileList.hx` | `dynamic-stub` | 4 |
+| `host:FileReader` | `host` | `flight._internal.dom.FileReader` | `src/flight/_internal/dom/FileReader.hx` | `dynamic-stub` | 20 |
 | `host:FileSystemDirectoryHandle` | `host` | `flight._internal.dom.FileSystemDirectoryHandle` | `src/flight/_internal/dom/FileSystemDirectoryHandle.hx` | `dynamic-stub` | 22 |
 | `host:FileSystemFileHandle` | `host` | `flight._internal.dom.FileSystemFileHandle` | `src/flight/_internal/dom/FileSystemFileHandle.hx` | `dynamic-stub` | 23 |
 | `host:FileSystemWritableFileStream` | `host` | `flight._internal.dom.FileSystemWritableFileStream` | `src/flight/_internal/dom/FileSystemWritableFileStream.hx` | `dynamic-stub` | 10 |
 | `host:FileSystemWriteChunkType` | `host` | `flight._internal.dom.FileSystemWriteChunkType` | `src/flight/_internal/dom/FileSystemWriteChunkType.hx` | `dynamic-stub` | 1 |
-| `host:FontFace` | `host` | `flight._internal.dom.FontFace` | `src/flight/_internal/dom/FontFace.hx` | `dynamic-stub` | 35 |
+| `host:FontFace` | `host` | `flight._internal.dom.FontFace` | `src/flight/_internal/dom/FontFace.hx` | `dynamic-stub` | 29 |
 | `host:FontFaceSet` | `host` | `flight._internal.dom.FontFaceSet` | `src/flight/_internal/dom/FontFaceSet.hx` | `dynamic-stub` | 6 |
 | `host:FormData` | `host` | `flight._internal.dom.FormData` | `src/flight/_internal/dom/FormData.hx` | `dynamic-stub` | 1 |
 | `host:GainNode` | `host` | `flight._internal.dom.GainNode` | `src/flight/_internal/dom/GainNode.hx` | `dynamic-stub` | 50 |
@@ -151,12 +152,12 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:GPUVertexBufferLayout` | `host` | `flight._internal.dom.GPUVertexBufferLayout` | `src/flight/_internal/dom/GPUVertexBufferLayout.hx` | `dynamic-stub` | 23 |
 | `host:Headers` | `host` | `flight._internal.dom.Headers` | `src/flight/_internal/dom/Headers.hx` | `dynamic-stub` | 8 |
 | `host:HTMLAudioElement` | `host` | `flight._internal.dom.HTMLAudioElement` | `src/flight/_internal/dom/HTMLAudioElement.hx` | `dynamic-stub` | 2 |
-| `host:HTMLCanvasElement` | `host` | `flight._internal.dom.HTMLCanvasElement` | `src/flight/_internal/dom/HTMLCanvasElement.hx` | `dynamic-stub` | 298 |
+| `host:HTMLCanvasElement` | `host` | `flight._internal.dom.HTMLCanvasElement` | `src/flight/_internal/dom/HTMLCanvasElement.hx` | `dynamic-stub` | 302 |
 | `host:HTMLDivElement` | `host` | `flight._internal.dom.HTMLDivElement` | `src/flight/_internal/dom/HTMLDivElement.hx` | `dynamic-stub` | 38 |
 | `host:HTMLElement` | `host` | `flight._internal.dom.HTMLElement` | `src/flight/_internal/dom/HTMLElement.hx` | `dynamic-stub` | 279 |
 | `host:HTMLHeadElement` | `host` | `flight._internal.dom.HTMLHeadElement` | `src/flight/_internal/dom/HTMLHeadElement.hx` | `dynamic-stub` | 7 |
-| `host:HTMLImageElement` | `host` | `flight._internal.dom.HTMLImageElement` | `src/flight/_internal/dom/HTMLImageElement.hx` | `dynamic-stub` | 87 |
-| `host:HTMLInputElement` | `host` | `flight._internal.dom.HTMLInputElement` | `src/flight/_internal/dom/HTMLInputElement.hx` | `dynamic-stub` | 29 |
+| `host:HTMLImageElement` | `host` | `flight._internal.dom.HTMLImageElement` | `src/flight/_internal/dom/HTMLImageElement.hx` | `dynamic-stub` | 94 |
+| `host:HTMLInputElement` | `host` | `flight._internal.dom.HTMLInputElement` | `src/flight/_internal/dom/HTMLInputElement.hx` | `dynamic-stub` | 19 |
 | `host:HTMLLIElement` | `host` | `flight._internal.dom.HTMLLIElement` | `src/flight/_internal/dom/HTMLLIElement.hx` | `dynamic-stub` | 22 |
 | `host:HTMLLinkElement` | `host` | `flight._internal.dom.HTMLLinkElement` | `src/flight/_internal/dom/HTMLLinkElement.hx` | `dynamic-stub` | 5 |
 | `host:HTMLMediaElement` | `host` | `flight._internal.dom.HTMLMediaElement` | `src/flight/_internal/dom/HTMLMediaElement.hx` | `dynamic-stub` | 1 |
@@ -164,7 +165,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:HTMLSpanElement` | `host` | `flight._internal.dom.HTMLSpanElement` | `src/flight/_internal/dom/HTMLSpanElement.hx` | `dynamic-stub` | 15 |
 | `host:HTMLStyleElement` | `host` | `flight._internal.dom.HTMLStyleElement` | `src/flight/_internal/dom/HTMLStyleElement.hx` | `dynamic-stub` | 3 |
 | `host:HTMLUListElement` | `host` | `flight._internal.dom.HTMLUListElement` | `src/flight/_internal/dom/HTMLUListElement.hx` | `dynamic-stub` | 14 |
-| `host:HTMLVideoElement` | `host` | `flight._internal.dom.HTMLVideoElement` | `src/flight/_internal/dom/HTMLVideoElement.hx` | `dynamic-stub` | 163 |
+| `host:HTMLVideoElement` | `host` | `flight._internal.dom.HTMLVideoElement` | `src/flight/_internal/dom/HTMLVideoElement.hx` | `dynamic-stub` | 175 |
 | `host:ImageBitmap` | `host` | `flight._internal.dom.ImageBitmap` | `src/flight/_internal/dom/ImageBitmap.hx` | `dynamic-stub` | 72 |
 | `host:ImageBitmapRenderingContext` | `host` | `flight._internal.dom.ImageBitmapRenderingContext` | `src/flight/_internal/dom/ImageBitmapRenderingContext.hx` | `dynamic-stub` | 1 |
 | `host:ImageData` | `host` | `flight._internal.dom.ImageData` | `src/flight/_internal/dom/ImageData.hx` | `dynamic-stub` | 36 |
@@ -191,8 +192,8 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:MIDIOutputMap` | `host` | `flight._internal.dom.MIDIOutputMap` | `src/flight/_internal/dom/MIDIOutputMap.hx` | `dynamic-stub` | 1 |
 | `host:MIDIPort` | `host` | `flight._internal.dom.MIDIPort` | `src/flight/_internal/dom/MIDIPort.hx` | `dynamic-stub` | 6 |
 | `host:MouseEvent` | `host` | `flight._internal.dom.MouseEvent` | `src/flight/_internal/dom/MouseEvent.hx` | `dynamic-stub` | 8 |
-| `host:Navigator` | `host` | `flight._internal.dom.Navigator` | `src/flight/_internal/dom/Navigator.hx` | `dynamic-stub` | 87 |
-| `host:Node` | `host` | `flight._internal.dom.Node` | `src/flight/_internal/dom/Node.hx` | `dynamic-stub` | 5 |
+| `host:Navigator` | `host` | `flight._internal.dom.Navigator` | `src/flight/_internal/dom/Navigator.hx` | `dynamic-stub` | 82 |
+| `host:Node` | `host` | `flight._internal.dom.Node` | `src/flight/_internal/dom/Node.hx` | `dynamic-stub` | 3 |
 | `host:NodeListOf` | `host` | `flight._internal.dom.NodeListOf` | `src/flight/_internal/dom/NodeListOf.hx` | `dynamic-stub` | 2 |
 | `host:OES_texture_float_linear` | `host` | `flight._internal.dom.OES_texture_float_linear` | `src/flight/_internal/dom/OES_texture_float_linear.hx` | `dynamic-stub` | 1 |
 | `host:OffscreenCanvas` | `host` | `flight._internal.dom.OffscreenCanvas` | `src/flight/_internal/dom/OffscreenCanvas.hx` | `dynamic-stub` | 67 |
@@ -207,15 +208,16 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:PointerEvent` | `host` | `flight._internal.dom.PointerEvent` | `src/flight/_internal/dom/PointerEvent.hx` | `dynamic-stub` | 42 |
 | `host:PositionOptions` | `host` | `flight._internal.dom.PositionOptions` | `src/flight/_internal/dom/PositionOptions.hx` | `dynamic-stub` | 2 |
 | `host:Process` | `host` | `flight._internal.dom.Process` | `src/flight/_internal/dom/Process.hx` | `typed` | 1 |
-| `host:ProgressEvent` | `host` | `flight._internal.dom.ProgressEvent` | `src/flight/_internal/dom/ProgressEvent.hx` | `typed` | 6 |
+| `host:ProgressEvent` | `host` | `flight._internal.dom.ProgressEvent` | `src/flight/_internal/dom/ProgressEvent.hx` | `typed` | 2 |
 | `host:ReadableStream` | `host` | `flight._internal.dom.ReadableStream` | `src/flight/_internal/dom/ReadableStream.hx` | `dynamic-stub` | 17 |
 | `host:ReadableStreamDefaultReader` | `host` | `flight._internal.dom.ReadableStreamDefaultReader` | `src/flight/_internal/dom/ReadableStreamDefaultReader.hx` | `dynamic-stub` | 2 |
 | `host:RequestInit` | `host` | `flight._internal.dom.RequestInit` | `src/flight/_internal/dom/RequestInit.hx` | `dynamic-stub` | 7 |
 | `host:ResizeObserver` | `host` | `flight._internal.dom.ResizeObserver` | `src/flight/_internal/dom/ResizeObserver.hx` | `dynamic-stub` | 7 |
 | `host:ResizeObserverEntry` | `host` | `flight._internal.dom.ResizeObserverEntry` | `src/flight/_internal/dom/ResizeObserverEntry.hx` | `dynamic-stub` | 5 |
 | `host:Response` | `host` | `flight._internal.dom.Response` | `src/flight/_internal/dom/Response.hx` | `dynamic-stub` | 26 |
-| `host:Screen` | `host` | `flight._internal.dom.Screen` | `src/flight/_internal/dom/Screen.hx` | `dynamic-stub` | 23 |
+| `host:Screen` | `host` | `flight._internal.dom.Screen` | `src/flight/_internal/dom/Screen.hx` | `dynamic-stub` | 22 |
 | `host:ScreenOrientation` | `host` | `flight._internal.dom.ScreenOrientation` | `src/flight/_internal/dom/ScreenOrientation.hx` | `dynamic-stub` | 4 |
+| `host:ShadowRoot` | `host` | `flight._internal.dom.ShadowRoot` | `src/flight/_internal/dom/ShadowRoot.hx` | `dynamic-stub` | 1 |
 | `host:ShareData` | `host` | `flight._internal.dom.ShareData` | `src/flight/_internal/dom/ShareData.hx` | `dynamic-stub` | 14 |
 | `host:StereoPannerNode` | `host` | `flight._internal.dom.StereoPannerNode` | `src/flight/_internal/dom/StereoPannerNode.hx` | `dynamic-stub` | 19 |
 | `host:Storage` | `host` | `flight._internal.dom.Storage` | `src/flight/_internal/dom/Storage.hx` | `dynamic-stub` | 14 |
@@ -227,13 +229,13 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:Text` | `host` | `flight._internal.dom.Text` | `src/flight/_internal/dom/Text.hx` | `dynamic-stub` | 2 |
 | `host:TextDecoder` | `host` | `flight._internal.dom.TextDecoder` | `src/flight/_internal/dom/TextDecoder.hx` | `dynamic-stub` | 16 |
 | `host:TextEncoder` | `host` | `flight._internal.dom.TextEncoder` | `src/flight/_internal/dom/TextEncoder.hx` | `typed` | 2 |
-| `host:TextMetrics` | `host` | `flight._internal.dom.TextMetrics` | `src/flight/_internal/dom/TextMetrics.hx` | `dynamic-stub` | 37 |
+| `host:TextMetrics` | `host` | `flight._internal.dom.TextMetrics` | `src/flight/_internal/dom/TextMetrics.hx` | `dynamic-stub` | 36 |
 | `host:Timeout` | `host` | `flight._internal.dom.Timeout` | `src/flight/_internal/dom/Timeout.hx` | `dynamic-stub` | 36 |
 | `host:URL` | `host` | `flight._internal.dom.URL` | `src/flight/_internal/dom/URL.hx` | `dynamic-stub` | 4 |
 | `host:URLSearchParams` | `host` | `flight._internal.dom.URLSearchParams` | `src/flight/_internal/dom/URLSearchParams.hx` | `dynamic-stub` | 3 |
 | `host:VideoFrame` | `host` | `flight._internal.dom.VideoFrame` | `src/flight/_internal/dom/VideoFrame.hx` | `dynamic-stub` | 54 |
 | `host:VisualViewport` | `host` | `flight._internal.dom.VisualViewport` | `src/flight/_internal/dom/VisualViewport.hx` | `dynamic-stub` | 8 |
-| `host:WakeLock` | `host` | `flight._internal.dom.WakeLock` | `src/flight/_internal/dom/WakeLock.hx` | `dynamic-stub` | 2 |
+| `host:WakeLock` | `host` | `flight._internal.dom.WakeLock` | `src/flight/_internal/dom/WakeLock.hx` | `dynamic-stub` | 4 |
 | `host:WakeLockSentinel` | `host` | `flight._internal.dom.WakeLockSentinel` | `src/flight/_internal/dom/WakeLockSentinel.hx` | `dynamic-stub` | 2 |
 | `host:WEBGL_compressed_texture_astc` | `host` | `flight._internal.dom.WEBGL_compressed_texture_astc` | `src/flight/_internal/dom/WEBGL_compressed_texture_astc.hx` | `dynamic-stub` | 1 |
 | `host:WEBGL_compressed_texture_etc` | `host` | `flight._internal.dom.WEBGL_compressed_texture_etc` | `src/flight/_internal/dom/WEBGL_compressed_texture_etc.hx` | `dynamic-stub` | 1 |
@@ -247,7 +249,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:WebGLContextAttributes` | `host` | `flight._internal.dom.WebGLContextAttributes` | `src/flight/_internal/dom/WebGLContextAttributes.hx` | `dynamic-stub` | 1 |
 | `host:WebGLFramebuffer` | `host` | `flight._internal.dom.WebGLFramebuffer` | `src/flight/_internal/dom/WebGLFramebuffer.hx` | `dynamic-stub` | 44 |
 | `host:WebGLPowerPreference` | `host` | `flight._internal.dom.WebGLPowerPreference` | `src/flight/_internal/dom/WebGLPowerPreference.hx` | `dynamic-stub` | 1 |
-| `host:WebGLProgram` | `host` | `flight._internal.dom.WebGLProgram` | `src/flight/_internal/dom/WebGLProgram.hx` | `dynamic-stub` | 252 |
+| `host:WebGLProgram` | `host` | `flight._internal.dom.WebGLProgram` | `src/flight/_internal/dom/WebGLProgram.hx` | `dynamic-stub` | 254 |
 | `host:WebGLRenderbuffer` | `host` | `flight._internal.dom.WebGLRenderbuffer` | `src/flight/_internal/dom/WebGLRenderbuffer.hx` | `dynamic-stub` | 9 |
 | `host:WebGLRenderingContext` | `host` | `flight._internal.dom.WebGLRenderingContext` | `src/flight/_internal/dom/WebGLRenderingContext.hx` | `dynamic-stub` | 8 |
 | `host:WebGLShader` | `host` | `flight._internal.dom.WebGLShader` | `src/flight/_internal/dom/WebGLShader.hx` | `dynamic-stub` | 4 |
@@ -256,7 +258,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:WebGLVertexArrayObject` | `host` | `flight._internal.dom.WebGLVertexArrayObject` | `src/flight/_internal/dom/WebGLVertexArrayObject.hx` | `dynamic-stub` | 34 |
 | `host:WebSocket` | `host` | `flight._internal.dom.WebSocket` | `src/flight/_internal/dom/WebSocket.hx` | `dynamic-stub` | 9 |
 | `host:WheelEvent` | `host` | `flight._internal.dom.WheelEvent` | `src/flight/_internal/dom/WheelEvent.hx` | `dynamic-stub` | 9 |
-| `host:Window` | `host` | `flight._internal.dom.Window` | `src/flight/_internal/dom/Window.hx` | `dynamic-stub` | 145 |
+| `host:Window` | `host` | `flight._internal.dom.Window` | `src/flight/_internal/dom/Window.hx` | `dynamic-stub` | 144 |
 | `host:WritableStream` | `host` | `flight._internal.dom.WritableStream` | `src/flight/_internal/dom/WritableStream.hx` | `dynamic-stub` | 15 |
 | `host:WritableStreamDefaultWriter` | `host` | `flight._internal.dom.WritableStreamDefaultWriter` | `src/flight/_internal/dom/WritableStreamDefaultWriter.hx` | `dynamic-stub` | 6 |
 
@@ -282,12 +284,13 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `global:Date` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 14 |
 | `global:decodeURIComponent` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 2 |
 | `global:DeviceMotionEvent` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 7 |
-| `global:document` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 27 |
+| `global:document` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 28 |
+| `global:Document` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 1 |
 | `global:DOMException` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 15 |
 | `global:encodeURIComponent` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 2 |
 | `global:fetch` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 5 |
 | `global:File` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 1 |
-| `global:FileReader` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 4 |
+| `global:FileReader` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 5 |
 | `global:Float32Array` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 2 |
 | `global:FontFace` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 1 |
 | `global:getComputedStyle` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 1 |
@@ -307,7 +310,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `global:matchMedia` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 6 |
 | `global:MediaMetadata` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 2 |
 | `global:navigator` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 29 |
-| `global:Number` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 798 |
+| `global:Number` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 801 |
 | `global:OffscreenCanvas` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 10 |
 | `global:parseFloat` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 84 |
 | `global:parseInt` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 38 |
@@ -320,6 +323,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `global:screen` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 5 |
 | `global:Set` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 168 |
 | `global:setInterval` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 1 |
+| `global:ShadowRoot` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 1 |
 | `global:SharedArrayBuffer` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 4 |
 | `global:structuredClone` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 3 |
 | `global:TextDecoder` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 8 |
@@ -329,7 +333,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `global:URL` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 8 |
 | `global:URLSearchParams` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 1 |
 | `global:VideoFrame` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 2 |
-| `global:WeakMap` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 222 |
+| `global:WeakMap` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 225 |
 | `global:WeakSet` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 20 |
 | `global:WebSocket` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 4 |
 | `global:WheelEvent` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 3 |

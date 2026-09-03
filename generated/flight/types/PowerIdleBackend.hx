@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef PowerIdleBackend = { var getIdleState:Float->PowerIdleState; var getIdleTimeSeconds:Void->Float; };
+typedef PowerIdleBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getIdleState:Float->PowerIdleState; var getIdleTimeSeconds:Void->Float; };

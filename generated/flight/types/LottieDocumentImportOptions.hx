@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef LottieDocumentImportOptions = { @:optional var resolveImageResource:LottieImageAsset->Null<Image>; };
+typedef LottieDocumentImportOptions = { @:optional var resolveImageResource:LottieImageAsset->Null<ImageResource>; };

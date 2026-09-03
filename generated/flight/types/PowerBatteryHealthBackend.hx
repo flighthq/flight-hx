@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef PowerBatteryHealthBackend = { var getBatteryHealth:PowerBatteryHealth->PowerBatteryHealth; };
+typedef PowerBatteryHealthBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getBatteryHealth:PowerBatteryHealth->PowerBatteryHealth; };

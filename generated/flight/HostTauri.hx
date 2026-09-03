@@ -4,7 +4,6 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._HostTauri as Facade_HostTauri_flight__HostTauri;
-import flight._HostTauri.TauriHost__tauriRegister;
 import flight.types.ApplicationWindow;
 import flight.types.ClipboardTextBackend;
 import flight.types.DesktopOsProfile;
@@ -13,9 +12,6 @@ import flight.types.Entity;
 import flight.types.FileOpenDialogBackend;
 import flight.types.FileSaveDialogBackend;
 import flight.types.HostShellCapabilities;
-import flight.types.MenuApplicationBackend;
-import flight.types.MenuPopupBackend;
-import flight.types.MenuSelectBackend;
 import flight.types.MessageDialogBackend;
 import flight.types.PlatformBackend;
 import flight.types.ShellExternalBackend;
@@ -25,6 +21,8 @@ import flight.types.ShortcutQueryBackend;
 import flight.types.ShortcutTriggerBackend;
 import flight.types.TauriApi;
 import flight.types.TauriAppCapabilities;
+import flight.types.TauriHost;
+import flight.types.TauriMenuCapabilities;
 import flight.types.TauriNotificationCapabilities;
 import flight.types.TauriTrayCapabilitiesFor;
 import flight.types.WindowAttachmentOwnership;
@@ -57,7 +55,7 @@ class HostTauri {
     return cast null;
   }
 
-  public static function createTauriMenuBackends(tauri:TauriApi):{ var application:MenuApplicationBackend; var popup:MenuPopupBackend; var select:MenuSelectBackend; } {
+  public static function createTauriMenuBackends(tauri:TauriApi):TauriMenuCapabilities {
     return cast Facade_HostTauri_flight__HostTauri.createTauriMenuBackends(tauri);
     return cast null;
   }
@@ -102,7 +100,7 @@ class HostTauri {
     return cast null;
   }
 
-  public static function registerTauriBackends<Profile:DesktopOsProfile>(tauri:TauriApi, profile:Profile):TauriHost__tauriRegister<Profile> {
+  public static function registerTauriBackends<Profile:DesktopOsProfile>(tauri:TauriApi, profile:Profile):TauriHost<Profile> {
     return cast Facade_HostTauri_flight__HostTauri.registerTauriBackends(tauri, profile);
     return cast null;
   }

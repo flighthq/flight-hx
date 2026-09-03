@@ -16,6 +16,7 @@ import flight.types.AudioPlayOptions;
 import flight.types.AudioResource;
 import flight.types.BackendExplanation;
 import flight.types.BackendOperationExplanation;
+import flight.types.MediaChannelSignals;
 import flight.types.VideoChannel;
 import flight.types.VideoPlayOptions;
 import flight.types.VideoResource;
@@ -23,6 +24,10 @@ import flight.types.VideoResource;
 class Media {
   public static function addAudioBusToMixer(mixer:AudioMixer, bus:AudioBus):Void {
     Facade_Media_flight__Media.addAudioBusToMixer(mixer, bus);
+  }
+
+  public static function clearAudioChannelLoopRegion(channel:AudioChannel):Void {
+    Facade_Media_flight__Media.clearAudioChannelLoopRegion(channel);
   }
 
   public static function connectAudioChannelToNode(channel:AudioChannel, destinationNode:flight._internal.dom.AudioNode):Void {
@@ -49,6 +54,16 @@ class Media {
 
   public static function destroyVideoChannel(channel:VideoChannel):Void {
     Facade_Media_flight__Media.destroyVideoChannel(channel);
+  }
+
+  public static function enableAudioChannelSignals(channel:AudioChannel):MediaChannelSignals {
+    return cast Facade_Media_flight__Media.enableAudioChannelSignals(channel);
+    return cast null;
+  }
+
+  public static function enableVideoChannelSignals(channel:VideoChannel):MediaChannelSignals {
+    return cast Facade_Media_flight__Media.enableVideoChannelSignals(channel);
+    return cast null;
   }
 
   public static function explainAudioDeviceBackend():BackendExplanation {
@@ -89,6 +104,11 @@ class Media {
     return cast null;
   }
 
+  public static function getAudioChannelSignals(channel:AudioChannel):Null<MediaChannelSignals> {
+    return cast Facade_Media_flight__Media.getAudioChannelSignals(channel);
+    return cast null;
+  }
+
   public static function getAudioDeviceBackend():AudioDeviceBackend {
     return cast Facade_Media_flight__Media.getAudioDeviceBackend();
     return cast null;
@@ -111,6 +131,11 @@ class Media {
 
   public static function getVideoChannelHeight(channel:VideoChannel):Float {
     return cast Facade_Media_flight__Media.getVideoChannelHeight(channel);
+    return cast null;
+  }
+
+  public static function getVideoChannelSignals(channel:VideoChannel):Null<MediaChannelSignals> {
+    return cast Facade_Media_flight__Media.getVideoChannelSignals(channel);
     return cast null;
   }
 
@@ -139,8 +164,18 @@ class Media {
     return cast null;
   }
 
+  public static function isAudioChannelMuted(channel:AudioChannel):Bool {
+    return cast Facade_Media_flight__Media.isAudioChannelMuted(channel);
+    return cast null;
+  }
+
   public static function isAudioChannelPlaying(channel:AudioChannel):Bool {
     return cast Facade_Media_flight__Media.isAudioChannelPlaying(channel);
+    return cast null;
+  }
+
+  public static function isVideoChannelMuted(channel:VideoChannel):Bool {
+    return cast Facade_Media_flight__Media.isVideoChannelMuted(channel);
     return cast null;
   }
 
@@ -212,6 +247,16 @@ class Media {
     return cast null;
   }
 
+  public static function setAudioChannelLoopRegion(channel:AudioChannel, startMs:Float, endMs:Float):Bool {
+    return cast Facade_Media_flight__Media.setAudioChannelLoopRegion(channel, startMs, endMs);
+    return cast null;
+  }
+
+  public static function setAudioChannelMuted(channel:AudioChannel, value:Bool):Bool {
+    return cast Facade_Media_flight__Media.setAudioChannelMuted(channel, value);
+    return cast null;
+  }
+
   public static function setAudioChannelPan(channel:AudioChannel, value:Float):Float {
     return cast Facade_Media_flight__Media.setAudioChannelPan(channel, value);
     return cast null;
@@ -243,6 +288,11 @@ class Media {
 
   public static function setVideoChannelGain(channel:VideoChannel, value:Float):Float {
     return cast Facade_Media_flight__Media.setVideoChannelGain(channel, value);
+    return cast null;
+  }
+
+  public static function setVideoChannelMuted(channel:VideoChannel, value:Bool):Bool {
+    return cast Facade_Media_flight__Media.setVideoChannelMuted(channel, value);
     return cast null;
   }
 

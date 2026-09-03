@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MediaChannelSignals = { var onBuffering:Signal<Void->Void>; var onError:Signal<String->Void>; var onReady:Signal<Void->Void>; var onSeeked:Signal<Void->Void>; };
+typedef MediaChannelSignals = { var onBuffering:Signal<Void->Void>; var onComplete:Signal<Void->Void>; var onError:Signal<String->Void>; var onLoop:Signal<Void->Void>; var onPause:Signal<Void->Void>; var onPlay:Signal<Void->Void>; var onReady:Signal<Void->Void>; var onSeeked:Signal<Void->Void>; var onStop:Signal<Void->Void>; };

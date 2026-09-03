@@ -11,31 +11,45 @@ import flight._internal._Runtime;
 class AreaLight extends flight.types.Light<String> {
   public var castsShadow:Bool;
   public var color:Float;
+  public var decay:Float;
   public var direction:Vector3;
+  public var enabled:Bool;
   public var intensity:Float;
+  public var intensityUnit:LightUnit;
   public var normalBias:Float;
   public var pcfRadius:Float;
   public var position:Vector3;
   public var range:Float;
   public var right:Vector3;
   public var shadowBias:Float;
+  public var shadowFar:Float;
+  public var shadowMapSize:Float;
+  public var shadowNear:Float;
+  public var shadowStrength:Float;
   public var up:Vector3;
 
-  private function new(kind:String, castsShadow:Bool, color:Float, direction:Vector3, intensity:Float, normalBias:Float, pcfRadius:Float, position:Vector3, range:Float, right:Vector3, shadowBias:Float, up:Vector3):Void {
+  private function new(kind:String, castsShadow:Bool, color:Float, decay:Float, direction:Vector3, enabled:Bool, intensity:Float, intensityUnit:LightUnit, normalBias:Float, pcfRadius:Float, position:Vector3, range:Float, right:Vector3, shadowBias:Float, shadowFar:Float, shadowMapSize:Float, shadowNear:Float, shadowStrength:Float, up:Vector3):Void {
     super(kind);
     this.castsShadow = castsShadow;
     this.color = color;
+    this.decay = decay;
     this.direction = direction;
+    this.enabled = enabled;
     this.intensity = intensity;
+    this.intensityUnit = intensityUnit;
     this.normalBias = normalBias;
     this.pcfRadius = pcfRadius;
     this.position = position;
     this.range = range;
     this.right = right;
     this.shadowBias = shadowBias;
+    this.shadowFar = shadowFar;
+    this.shadowMapSize = shadowMapSize;
+    this.shadowNear = shadowNear;
+    this.shadowStrength = shadowStrength;
     this.up = up;
   }
 }
 #else
-typedef AreaLight = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var castsShadow:Bool; var color:Float; var direction:Vector3; var intensity:Float; var normalBias:Float; var pcfRadius:Float; var position:Vector3; var range:Float; var right:Vector3; var shadowBias:Float; var up:Vector3; };
+typedef AreaLight = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var castsShadow:Bool; var color:Float; var decay:Float; var direction:Vector3; var enabled:Bool; var intensity:Float; var intensityUnit:LightUnit; var normalBias:Float; var pcfRadius:Float; var position:Vector3; var range:Float; var right:Vector3; var shadowBias:Float; var shadowFar:Float; var shadowMapSize:Float; var shadowNear:Float; var shadowStrength:Float; var up:Vector3; };
 #end

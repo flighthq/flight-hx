@@ -86,7 +86,7 @@ import flight.types.EntityRuntime;
 import flight.types.FontResource;
 import flight.types.HtmlView;
 import flight.types.HtmlViewData;
-import flight.types.Image;
+import flight.types.ImageResource;
 import flight.types.KeyedTable;
 import flight.types.Matrix;
 import flight.types.MatrixLike;
@@ -130,6 +130,7 @@ import flight.types.ShapeRasterizer;
 import flight.types.SlotTable;
 import flight.types.Sprite;
 import flight.types.SpriteData;
+import flight.types.SpriteIdentityRendererData;
 import flight.types.StrokeTessellator;
 import flight.types.TextAutoSize;
 import flight.types.TextFormat;
@@ -156,7 +157,9 @@ import flight.types.TextureSourceKind;
 import flight.types.Vector2;
 import flight.types.VoxelGrid;
 
-typedef DomRichTextData__domRichText = { >RendererData, var div:Null<flight._internal.dom.HTMLDivElement>; };
+typedef DomClipStyle__domClipRectangle = { var webkitClipPath:String; };
+
+typedef DomRichTextData__domRichText = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var div:Null<flight._internal.dom.HTMLDivElement>; };
 
 #if !flight_struct_typedef
 @:allow(flight._Scene2DDom)
@@ -175,7 +178,7 @@ private class EntityShapeL38C23__domRichText {
 private typedef EntityShapeL38C23__domRichText = { var div:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
-typedef DomScale9ShapeData__domScale9Shape = { >RendererData, var canvas:Null<flight._internal.dom.HTMLCanvasElement>; var context:Null<flight._internal.dom.CanvasRenderingContext2D>; };
+typedef DomScale9ShapeData__domScale9Shape = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var canvas:Null<flight._internal.dom.HTMLCanvasElement>; var context:Null<flight._internal.dom.CanvasRenderingContext2D>; };
 
 #if !flight_struct_typedef
 @:allow(flight._Scene2DDom)
@@ -196,7 +199,7 @@ private class EntityShapeL31C23__domScale9Shape {
 private typedef EntityShapeL31C23__domScale9Shape = { var canvas:flight._internal._Any; var context:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
-typedef DomShapeData__domShape = { >RendererData, var canvas:Null<flight._internal.dom.HTMLCanvasElement>; var context:Null<flight._internal.dom.CanvasRenderingContext2D>; };
+typedef DomShapeData__domShape = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var canvas:Null<flight._internal.dom.HTMLCanvasElement>; var context:Null<flight._internal.dom.CanvasRenderingContext2D>; };
 
 #if !flight_struct_typedef
 @:allow(flight._Scene2DDom)
@@ -217,11 +220,11 @@ private class EntityShapeL25C23__domShape {
 private typedef EntityShapeL25C23__domShape = { var canvas:flight._internal._Any; var context:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
-typedef DomSpriteData__domSprite = { >RendererData, var canvas:Null<flight._internal.dom.HTMLCanvasElement>; var context:Null<flight._internal.dom.CanvasRenderingContext2D>; var image:Null<flight._internal.dom.HTMLImageElement>; var video:Null<flight._internal.dom.HTMLVideoElement>; };
+typedef DomSpriteData__domSprite = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var textureIdentity:Null<Texture>; var textureVersion:Float; var canvas:Null<flight._internal.dom.HTMLCanvasElement>; var context:Null<flight._internal.dom.CanvasRenderingContext2D>; var image:Null<flight._internal.dom.HTMLImageElement>; var video:Null<flight._internal.dom.HTMLVideoElement>; };
 
-typedef DomTextInputData__domTextInput = { >RendererData, var div:Null<flight._internal.dom.HTMLDivElement>; };
+typedef DomTextInputData__domTextInput = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var div:Null<flight._internal.dom.HTMLDivElement>; };
 
-typedef DomTextData__domTextLabel = { >RendererData, var div:Null<flight._internal.dom.HTMLDivElement>; };
+typedef DomTextData__domTextLabel = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var div:Null<flight._internal.dom.HTMLDivElement>; };
 
 #if !flight_struct_typedef
 @:allow(flight._Scene2DDom)
@@ -265,9 +268,9 @@ class _Scene2DDom {
     cache = ({ final __nullishOwner6 = runtime; final __nullishValue7:Null<flight._internal._WeakMap<Bitmap, { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }>> = cast __nullishOwner6.bitmapElementCache; __nullishValue7 == null ? (__nullishOwner6.bitmapElementCache = (cast _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []) : Null<flight._internal._WeakMap<Bitmap, { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }>>)) : (cast __nullishValue7 : Null<flight._internal._WeakMap<Bitmap, { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }>>); });
     entry = ((cast cache : flight._internal._WeakMap<Bitmap, { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }>).get((cast bitmap)));
     if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals((cast entry : { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }).version, (cast bitmap : { var version:Float; }).version) : Bool)) : Bool)) {
-      var image:Null<Image> = (cast createImageResourceFromBitmap(({ final __callArgument8:Dynamic = bitmap; __callArgument8; })) : Null<Image>);
+      var image:Null<ImageResource> = (cast createImageResourceFromBitmap(({ final __callArgument8:Dynamic = bitmap; __callArgument8; })) : Null<ImageResource>);
       if ((cast _Runtime.strictEquals(image, null) : Bool)) { return cast null; }
-      (entry = cast ({ element: (cast (cast image : Image).source : flight._internal.dom.HTMLCanvasElement), version: (cast bitmap : { var version:Float; }).version } : Dynamic));
+      (entry = cast ({ element: (cast (cast image : ImageResource).source : flight._internal.dom.HTMLCanvasElement), version: (cast bitmap : { var version:Float; }).version } : Dynamic));
       ((cast cache : flight._internal._WeakMap<Bitmap, { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }>).set((cast bitmap), (cast entry)));
     }
     return cast (cast entry : { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }).element;
@@ -496,24 +499,24 @@ class _Scene2DDom {
       var mapPoint:Float->Float->Array<Float> = (cast _Scene2DDom.createScene2DToElementPointMapper__domClipRectangle(({ final __callArgument57:Dynamic = element; __callArgument57; })) : Float->Float->Array<Float>);
       var clipPath:String = (cast buildDomContourClipPath(({ final __callArgument59:Dynamic = contour; __callArgument59; }), ({ final __callArgument60:Dynamic = mapPoint; __callArgument60; })) : String);
       ((cast (cast element : flight._internal.dom.HTMLElement).style : flight._internal.dom.CSSStyleDeclaration).clipPath = clipPath);
-      ((cast (cast (cast element : flight._internal.dom.HTMLElement).style : flight._internal._Intersection2<flight._internal.dom.CSSStyleDeclaration, { var webkitClipPath:String; }>) : { var webkitClipPath:String; }).webkitClipPath = clipPath);
+      ((cast (cast (cast element : flight._internal.dom.HTMLElement).style : DomClipStyle__domClipRectangle) : DomClipStyle__domClipRectangle).webkitClipPath = clipPath);
       return;
     }
     rect = (cast _Scene2DDom.intersectDomScene2DRectangles__domClipRectangle((cast entries : Array<DomScene2DRectangle>)) : Null<DomScene2DRectangle>);
     if ((cast _Runtime.strictEquals(rect, null) : Bool)) {
       ((cast (cast element : flight._internal.dom.HTMLElement).style : flight._internal.dom.CSSStyleDeclaration).clipPath = '');
-      ((cast (cast (cast element : flight._internal.dom.HTMLElement).style : flight._internal._Intersection2<flight._internal.dom.CSSStyleDeclaration, { var webkitClipPath:String; }>) : { var webkitClipPath:String; }).webkitClipPath = '');
+      ((cast (cast (cast element : flight._internal.dom.HTMLElement).style : DomClipStyle__domClipRectangle) : DomClipStyle__domClipRectangle).webkitClipPath = '');
       return;
     }
     if ((cast ((cast ((cast (cast rect : DomScene2DRectangle).right : Float) <= (cast (cast rect : DomScene2DRectangle).left : Float)) : Bool) || (cast ((cast (cast rect : DomScene2DRectangle).bottom : Float) <= (cast (cast rect : DomScene2DRectangle).top : Float)) : Bool)) : Bool)) {
       ((cast (cast element : flight._internal.dom.HTMLElement).style : flight._internal.dom.CSSStyleDeclaration).clipPath = _Scene2DDom.EMPTY_CLIP_PATH__domClipRectangle);
-      ((cast (cast (cast element : flight._internal.dom.HTMLElement).style : flight._internal._Intersection2<flight._internal.dom.CSSStyleDeclaration, { var webkitClipPath:String; }>) : { var webkitClipPath:String; }).webkitClipPath = _Scene2DDom.EMPTY_CLIP_PATH__domClipRectangle);
+      ((cast (cast (cast element : flight._internal.dom.HTMLElement).style : DomClipStyle__domClipRectangle) : DomClipStyle__domClipRectangle).webkitClipPath = _Scene2DDom.EMPTY_CLIP_PATH__domClipRectangle);
       return;
     }
     local = (cast _Scene2DDom.mapScene2DRectangleToElement__domClipRectangle(({ final __callArgument63:Dynamic = rect; __callArgument63; }), ({ final __callArgument64:Dynamic = element; __callArgument64; })) : DomScene2DRectangle);
     clipPath = 'polygon(' + Std.string((cast local : DomScene2DRectangle).left) + 'px ' + Std.string((cast local : DomScene2DRectangle).top) + 'px, ' + Std.string((cast local : DomScene2DRectangle).right) + 'px ' + Std.string((cast local : DomScene2DRectangle).top) + 'px, ' + Std.string((cast local : DomScene2DRectangle).right) + 'px ' + Std.string((cast local : DomScene2DRectangle).bottom) + 'px, ' + Std.string((cast local : DomScene2DRectangle).left) + 'px ' + Std.string((cast local : DomScene2DRectangle).bottom) + 'px)';
     ((cast (cast element : flight._internal.dom.HTMLElement).style : flight._internal.dom.CSSStyleDeclaration).clipPath = clipPath);
-    ((cast (cast (cast element : flight._internal.dom.HTMLElement).style : flight._internal._Intersection2<flight._internal.dom.CSSStyleDeclaration, { var webkitClipPath:String; }>) : { var webkitClipPath:String; }).webkitClipPath = clipPath);
+    ((cast (cast (cast element : flight._internal.dom.HTMLElement).style : DomClipStyle__domClipRectangle) : DomClipStyle__domClipRectangle).webkitClipPath = clipPath);
   }
 
   @:allow(flight)
@@ -705,7 +708,7 @@ class _Scene2DDom {
 
   @:allow(flight)
   @:keep
-  private static function explainDomImageSource(image:flight._internal._Union2<Image, Bitmap>):DomImageSourceKind {
+  private static function explainDomImageSource(image:flight._internal._Union2<ImageResource, Bitmap>):DomImageSourceKind {
     if ((cast _Runtime.strictEquals((cast image : { var kind:String; }).kind, BitmapTextureSourceKind) : Bool)) { return cast 'data'; }
     return cast 'element';
     return cast null;
@@ -716,7 +719,7 @@ class _Scene2DDom {
   }
 
   public static function resolveDomImageTexture__domImageTextureResolver(_state:DomRenderState, texture:Texture):Null<flight._internal.dom.CanvasImageSource> {
-    return cast _Runtime.coalesce(({ final __structural99 = (cast getTextureSource(({ final __callArgument97:Dynamic = texture; __callArgument97; })) : Null<Image>); __structural99 == null ? _Runtime.UNDEFINED : (cast __structural99 : { var source:flight._internal._Any; }).source; }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __structural99 = (cast getTextureSource(({ final __callArgument97:Dynamic = texture; __callArgument97; })) : Null<ImageResource>); __structural99 == null ? _Runtime.UNDEFINED : (cast __structural99 : { var source:flight._internal._Any; }).source; }), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -1211,14 +1214,14 @@ class _Scene2DDom {
   }
 
   public static function canvasFontAscentFallback__domRichText(ctx:flight._internal.dom.CanvasRenderingContext2D, font:String):Float {
-    var metrics:flight._internal._Intersection2<flight._internal.dom.TextMetrics, { @:optional var fontBoundingBoxAscent:Null<Float>; }> = cast _Runtime.UNDEFINED;
+    var metrics:flight._internal.dom.TextMetrics = cast _Runtime.UNDEFINED;
     var sizeMatch:Null<flight._internal._Any> = cast _Runtime.UNDEFINED;
     var size:Float = cast _Runtime.UNDEFINED;
     flight._internal.backend.Canvas2dBackend.setField(ctx, 'font', font);
-    metrics = (cast flight._internal.backend.Canvas2dBackend.call(ctx, 'measureText', cast (['H'] : Array<Dynamic>)) : flight._internal._Intersection2<flight._internal.dom.TextMetrics, { @:optional var fontBoundingBoxAscent:Float; }>);
+    metrics = flight._internal.backend.Canvas2dBackend.call(ctx, 'measureText', cast (['H'] : Array<Dynamic>));
     sizeMatch = _Runtime.callProperty(_Runtime.regexp('(\\d+(?:\\.\\d+)?)px', ''), 'exec', cast ([font] : Array<Dynamic>));
     size = _Runtime.select(sizeMatch, function():Dynamic return cast _Runtime.callValue(flight._internal._HostValueLut.get('parseFloat'), cast ([_Runtime.getIndex(sizeMatch, 1.0)] : Array<Dynamic>)), function():Dynamic return cast 12.0);
-    return cast _Runtime.coalesce((cast metrics : { var fontBoundingBoxAscent:Float; }).fontBoundingBoxAscent, function():Dynamic return cast (size * 0.85));
+    return cast _Runtime.coalesce((cast metrics : flight._internal.dom.TextMetrics).fontBoundingBoxAscent, function():Dynamic return cast (size * 0.85));
     return cast null;
   }
 
@@ -1453,7 +1456,7 @@ class _Scene2DDom {
   @:keep
   private static function drawDomSprite(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var data:Null<DomSpriteData__domSprite> = cast _Runtime.UNDEFINED;
-    var texture:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
+    var texture:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
     var source:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>> = cast _Runtime.UNDEFINED;
     var textureWidth:Float = cast _Runtime.UNDEFINED;
     var textureHeight:Float = cast _Runtime.UNDEFINED;
@@ -1461,7 +1464,7 @@ class _Scene2DDom {
     var isFullTexture:Bool = cast _Runtime.UNDEFINED;
     data = (cast (cast renderProxy : RenderProxy2D).rendererData : Null<DomSpriteData__domSprite>);
     if ((cast _Runtime.strictEquals(data, null) : Bool)) { return; }
-    texture = (cast (cast (cast (cast renderProxy : RenderProxy2D).source : Sprite) : { var data:SpriteData; }).data : { var texture:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).texture;
+    texture = (cast (cast (cast (cast renderProxy : RenderProxy2D).source : Sprite) : { var data:SpriteData; }).data : { var texture:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).texture;
     if ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) : Bool)) { return; }
     source = (cast resolveDomTexture(({ final __callArgument307:Dynamic = state; __callArgument307; }), ({ final __callArgument308:Dynamic = texture; __callArgument308; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(source, null) : Bool)) { return; }
@@ -1489,7 +1492,7 @@ class _Scene2DDom {
       ((cast data : DomSpriteData__domSprite).context = flight._internal.backend.CanvasElementBackend.call((cast data : DomSpriteData__domSprite).canvas, 'getContext', cast (['2d'] : Array<Dynamic>)));
       prepareDomElement(({ final __callArgument333:Dynamic = (cast data : DomSpriteData__domSprite).canvas; __callArgument333; }));
     }
-    texture = (cast (cast (cast (cast renderProxy : RenderProxy2D).source : Sprite) : { var data:SpriteData; }).data : { var texture:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).texture;
+    texture = (cast (cast (cast (cast renderProxy : RenderProxy2D).source : Sprite) : { var data:SpriteData; }).data : { var texture:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).texture;
     pixelRatio = (cast state : DomRenderState).pixelRatio;
     flight._internal.backend.CanvasElementBackend.setField((cast data : DomSpriteData__domSprite).canvas, 'width', ((cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).width * pixelRatio));
     flight._internal.backend.CanvasElementBackend.setField((cast data : DomSpriteData__domSprite).canvas, 'height', ((cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).height * pixelRatio));
@@ -1532,7 +1535,7 @@ class _Scene2DDom {
 
   public static function applyDomSpriteSampling__domSprite(state:DomRenderState, element:flight._internal.dom.HTMLElement, renderProxy:RenderProxy2D):Void {
     var texture:Texture = cast _Runtime.UNDEFINED;
-    texture = (cast (cast (cast (cast renderProxy : RenderProxy2D).source : Sprite) : { var data:SpriteData; }).data : { var texture:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).texture;
+    texture = (cast (cast (cast (cast renderProxy : RenderProxy2D).source : Sprite) : { var data:SpriteData; }).data : { var texture:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).texture;
     ((cast element.style : flight._internal.dom.CSSStyleDeclaration).imageRendering = ((cast ((cast (cast state : DomRenderState).allowSmoothing : Bool) && (cast !(cast StringTools.startsWith((cast (cast texture : { var sampler:Sampler; }).sampler : { var magFilter:TextureFilter; }).magFilter, 'nearest') : Bool) : Bool)) : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));
   }
 

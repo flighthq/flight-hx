@@ -34,9 +34,9 @@ import flight.types.BitmapResizeOptions;
 import flight.types.BitmapSharpenOptions;
 import flight.types.ColorScaleBiasLike;
 import flight.types.GradientSpread;
-import flight.types.Image;
 import flight.types.ImageChannel;
 import flight.types.ImageFormat;
+import flight.types.ImageResource;
 import flight.types.PixelOrder;
 import flight.types.RectangleLike;
 import flight.types.ThresholdOperation;
@@ -129,7 +129,7 @@ class Bitmap {
     Facade_Bitmap_flight__Bitmap.buildBitmapSepiaColorMatrix(out);
   }
 
-  public static function captureBitmapFromImageResource(resource:Image):Null<flight.types.Bitmap> {
+  public static function captureBitmapFromImageResource(resource:ImageResource):Null<flight.types.Bitmap> {
     return cast Facade_Bitmap_flight__Bitmap.captureBitmapFromImageResource(resource);
     return cast null;
   }

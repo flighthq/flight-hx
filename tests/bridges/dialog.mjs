@@ -3,6 +3,8 @@ import compiled from '../../build/haxe-js/flight.cjs';
 
 export const createFileDialogHandle = compiled.flight.Dialog.createFileDialogHandle;
 export const getFileDialogHandleOperations = compiled.flight.Dialog.getFileDialogHandleOperations;
+export const showCapturePhotoDialog = compiled.flight.Dialog.showCapturePhotoDialog;
+export const showCaptureVideoDialog = compiled.flight.Dialog.showCaptureVideoDialog;
 export const showConfirmDialog = compiled.flight.Dialog.showConfirmDialog;
 export const showErrorBox = compiled.flight.Dialog.showErrorBox;
 export const showErrorDialog = compiled.flight.Dialog.showErrorDialog;
@@ -10,6 +12,7 @@ export const showInfoDialog = compiled.flight.Dialog.showInfoDialog;
 export const showMessageDialog = compiled.flight.Dialog.showMessageDialog;
 export const showOpenDirectoryDialog = compiled.flight.Dialog.showOpenDirectoryDialog;
 export const showOpenFileDialog = compiled.flight.Dialog.showOpenFileDialog;
+export const showOpenImageDialog = compiled.flight.Dialog.showOpenImageDialog;
 export const showPromptDialog = compiled.flight.Dialog.showPromptDialog;
 export const showSaveFileDialog = compiled.flight.Dialog.showSaveFileDialog;
 export const showWarningDialog = compiled.flight.Dialog.showWarningDialog;

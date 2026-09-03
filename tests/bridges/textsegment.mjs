@@ -9,3 +9,4 @@ export const getWordRangeAt = compiled.flight.TextSegment.getWordRangeAt;
 export const segmentGraphemes = compiled.flight.TextSegment.segmentGraphemes;
 export const segmentSentences = compiled.flight.TextSegment.segmentSentences;
 export const segmentWords = compiled.flight.TextSegment.segmentWords;
+export const webTextSegmenterBackend = compiled.flight.TextSegment.webTextSegmenterBackend;

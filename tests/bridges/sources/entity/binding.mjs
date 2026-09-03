@@ -6,4 +6,7 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const attachEntityBinding = api.attachEntityBinding;
+export const detachEntityBinding = api.detachEntityBinding;
 export const getEntityBinding = api.getEntityBinding;
+export const getEntityBindingAs = api.getEntityBindingAs;
+export const hasEntityBinding = api.hasEntityBinding;

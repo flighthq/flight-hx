@@ -9,17 +9,21 @@ import flight._internal._Runtime;
 @:keep
 @:structInit
 class HemisphereLight extends flight.types.Light<String> {
+  public var enabled:Bool;
   public var groundColor:Float;
   public var intensity:Float;
+  public var intensityUnit:LightUnit;
   public var skyColor:Float;
 
-  private function new(kind:String, groundColor:Float, intensity:Float, skyColor:Float):Void {
+  private function new(kind:String, enabled:Bool, groundColor:Float, intensity:Float, intensityUnit:LightUnit, skyColor:Float):Void {
     super(kind);
+    this.enabled = enabled;
     this.groundColor = groundColor;
     this.intensity = intensity;
+    this.intensityUnit = intensityUnit;
     this.skyColor = skyColor;
   }
 }
 #else
-typedef HemisphereLight = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var groundColor:Float; var intensity:Float; var skyColor:Float; };
+typedef HemisphereLight = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var enabled:Bool; var groundColor:Float; var intensity:Float; var intensityUnit:LightUnit; var skyColor:Float; };
 #end

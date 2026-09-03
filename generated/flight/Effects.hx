@@ -57,6 +57,7 @@ import flight.types.PosterizeEffect;
 import flight.types.RadialBlurEffect;
 import flight.types.RenderEffect;
 import flight.types.RenderEffectCaptureGeometry;
+import flight.types.RenderEffectFieldRoles;
 import flight.types.RenderEffectInput;
 import flight.types.RenderEffectPadding;
 import flight.types.RenderEffectPaddingExplanation;
@@ -728,8 +729,8 @@ class Effects {
     return cast null;
   }
 
-  public static function lerpRenderEffect(a:RenderEffect, b:RenderEffect, t:Float, out:RenderEffect):Bool {
-    return cast Facade_Effects_flight__Effects.lerpRenderEffect(a, b, t, out);
+  public static function lerpRenderEffect(a:RenderEffect, b:RenderEffect, t:Float, out:RenderEffect, ?roles:RenderEffectFieldRoles):Bool {
+    return cast Facade_Effects_flight__Effects.lerpRenderEffect(a, b, t, out, roles);
     return cast null;
   }
 

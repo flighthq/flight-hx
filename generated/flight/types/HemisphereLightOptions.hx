@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef HemisphereLightOptions = { @:optional var groundColor:Float; @:optional var intensity:Float; @:optional var skyColor:Float; };
+typedef HemisphereLightOptions = { @:optional var enabled:Bool; @:optional var groundColor:Float; @:optional var intensity:Float; @:optional var intensityUnit:LightUnit; @:optional var skyColor:Float; };

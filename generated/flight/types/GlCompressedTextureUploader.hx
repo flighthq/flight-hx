@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlCompressedTextureUploader = GlContext->CompressedImage->Null<GlCompressedTextureDecoder>->TextureColorSpace->Bool;
+typedef GlCompressedTextureUploader = GlContext->CompressedImageResource->Null<GlCompressedTextureDecoder>->TextureColorSpace->Bool;

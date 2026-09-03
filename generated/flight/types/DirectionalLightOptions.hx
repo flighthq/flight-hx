@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef DirectionalLightOptions = { @:optional var castsShadow:Bool; @:optional var color:Float; @:optional var direction:Vector3Like; @:optional var intensity:Float; @:optional var normalBias:Float; @:optional var pcfRadius:Float; @:optional var shadowBias:Float; };
+typedef DirectionalLightOptions = { @:optional var cascadeCount:Float; @:optional var cascadeSplits:Array<Float>; @:optional var castsShadow:Bool; @:optional var color:Float; @:optional var direction:Vector3Like; @:optional var enabled:Bool; @:optional var intensity:Float; @:optional var intensityUnit:LightUnit; @:optional var normalBias:Float; @:optional var pcfRadius:Float; @:optional var shadowBias:Float; @:optional var shadowFar:Float; @:optional var shadowMapSize:Float; @:optional var shadowNear:Float; @:optional var shadowStrength:Float; };

@@ -120,10 +120,30 @@ class _Entity {
 
   @:allow(flight)
   @:keep
+  private static function detachEntityBinding(entity:Entity):Void {
+    var runtime:Null<EntityRuntime> = cast _Runtime.UNDEFINED;
+    runtime = _Runtime.getIndex(entity, EntityRuntimeKey);
+    if ((cast !_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast runtime : EntityRuntime).binding = null); }
+  }
+
+  @:allow(flight)
+  @:keep
   private static function getEntityBinding(source:Entity):Null<flight._internal._Object> {
-    var runtime:EntityRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getEntityRuntime(({ final __callArgument0:Dynamic = source; __callArgument0; })) : EntityRuntime);
-    return cast _Runtime.coalesce(_Runtime.optionalField(runtime, 'binding'), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __structural0 = _Runtime.getIndex(source, EntityRuntimeKey); __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var binding:Null<flight._internal._Object>; }).binding; }), function():Dynamic return cast null);
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function getEntityBindingAs<Type>(source:Entity):Null<Type> {
+    return cast (cast getEntityBinding(({ final __callArgument1:Dynamic = source; __callArgument1; })) : Null<Type>);
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function hasEntityBinding(source:Entity):Bool {
+    return cast !_Runtime.strictEquals((cast getEntityBinding(({ final __callArgument3:Dynamic = source; __callArgument3; })) : Null<flight._internal._Object>), null);
     return cast null;
   }
 
@@ -163,10 +183,10 @@ class _Entity {
 
   public static function warnOnDirectWrite__enableEntityRuntimeGuards(slot:EntityRuntimeWriteSlot):Void {
     if ((cast _Runtime.strictEquals(slot, 'binding-slot') : Bool)) {
-      (cast logOnce((cast 'entity:direct-binding-write' : String), ({ final __callArgument2:Dynamic = LogLevel.Warn; __callArgument2; }), (cast { message: 'EntityRuntime.binding was written directly. Use attachEntityBinding or detachEntityBinding, which keep the binding and the runtime consistent; the write was allowed but is not tracked.' } : Dynamic), ({ final __callArgument3:Dynamic = 'entity'; __callArgument3; })) : Bool);
+      (cast logOnce((cast 'entity:direct-binding-write' : String), ({ final __callArgument5:Dynamic = LogLevel.Warn; __callArgument5; }), (cast { message: 'EntityRuntime.binding was written directly. Use attachEntityBinding or detachEntityBinding, which keep the binding and the runtime consistent; the write was allowed but is not tracked.' } : Dynamic), ({ final __callArgument6:Dynamic = 'entity'; __callArgument6; })) : Bool);
       return;
     }
-    (cast logOnce((cast 'entity:direct-runtime-write' : String), ({ final __callArgument6:Dynamic = LogLevel.Warn; __callArgument6; }), (cast { message: 'An entity\'s runtime slot was written directly. Use attachEntityBinding, which allocates the slot for you; the write was allowed, but bypassing it is how a runtime ends up on the wrong entity.' } : Dynamic), ({ final __callArgument7:Dynamic = 'entity'; __callArgument7; })) : Bool);
+    (cast logOnce((cast 'entity:direct-runtime-write' : String), ({ final __callArgument9:Dynamic = LogLevel.Warn; __callArgument9; }), (cast { message: 'An entity\'s runtime slot was written directly. Use attachEntityBinding, which allocates the slot for you; the write was allowed, but bypassing it is how a runtime ends up on the wrong entity.' } : Dynamic), ({ final __callArgument10:Dynamic = 'entity'; __callArgument10; })) : Bool);
   }
 
   @:allow(flight)
@@ -182,7 +202,7 @@ class _Entity {
   public static function getEntityUid(source:Entity):String {
     var runtime:EntityRuntime = cast _Runtime.UNDEFINED;
     var uid:String = cast _Runtime.UNDEFINED;
-    runtime = (cast _Entity.ensureEntityRuntime__entityUid(({ final __callArgument10:Dynamic = source; __callArgument10; })) : EntityRuntime);
+    runtime = (cast _Entity.ensureEntityRuntime__entityUid(({ final __callArgument13:Dynamic = source; __callArgument13; })) : EntityRuntime);
     if ((cast !_Runtime.strictEquals((cast runtime : EntityRuntime).uid, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast runtime : EntityRuntime).uid; }
     uid = (cast _Entity.generateEntityUid__entityUid() : String);
     ((cast runtime : EntityRuntime).uid = uid);
@@ -192,7 +212,7 @@ class _Entity {
 
   public static function setEntityUid(source:Entity, uid:String):Void {
     var runtime:EntityRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast _Entity.ensureEntityRuntime__entityUid(({ final __callArgument12:Dynamic = source; __callArgument12; })) : EntityRuntime);
+    runtime = (cast _Entity.ensureEntityRuntime__entityUid(({ final __callArgument15:Dynamic = source; __callArgument15; })) : EntityRuntime);
     ((cast runtime : EntityRuntime).uid = uid);
   }
 

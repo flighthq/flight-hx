@@ -4,5 +4,25 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
 @:noCompletion
-typedef RenderCacheAdapter = { var adapt:RenderState->Renderable->RenderProxy2D->Null<Bool>; var cache:Null<RenderCache>; var signals:Null<RenderCacheAdapterSignals>; };
+@:allow(flight._Render)
+@:keep
+@:structInit
+class RenderCacheAdapter {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var adapt:RenderState->Renderable->RenderProxy2D->Null<Bool>;
+  public var cache:Null<RenderCache>;
+  public var signals:Null<RenderCacheAdapterSignals>;
+
+  private function new(adapt:RenderState->Renderable->RenderProxy2D->Null<Bool>, cache:Null<RenderCache>, signals:Null<RenderCacheAdapterSignals>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.adapt = adapt;
+    this.cache = cache;
+    this.signals = signals;
+  }
+}
+#else
+@:noCompletion
+typedef RenderCacheAdapter = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var adapt:RenderState->Renderable->RenderProxy2D->Null<Bool>; var cache:Null<RenderCache>; var signals:Null<RenderCacheAdapterSignals>; };
+#end

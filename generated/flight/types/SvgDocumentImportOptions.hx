@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SvgDocumentImportOptions = { @:optional var resolveImageResource:String->Null<Image>; };
+typedef SvgDocumentImportOptions = { @:optional var resolveImageResource:String->Null<ImageResource>; };

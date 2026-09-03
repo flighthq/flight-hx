@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef PowerThermalBackend = { var getThermalState:Void->PowerThermalState; var subscribeThermalStateChange:(PowerThermalState->Void)->(Void->Void); };
+typedef PowerThermalBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getThermalState:Void->PowerThermalState; var subscribeThermalStateChange:(PowerThermalState->Void)->(Void->Void); };

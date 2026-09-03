@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MediaFileCaptureVideo = { var dataUrl:String; var duration:Float; var format:String; };
+typedef DialogVideo = { var dataUrl:String; var duration:Float; var mimeType:String; };

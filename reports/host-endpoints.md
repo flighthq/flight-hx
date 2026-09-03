@@ -1,16 +1,16 @@
 # Host Endpoint Audit
 
-Upstream commit: `98a7a58a934f55555a561a308cc23c1363c45652`
+Upstream commit: `8d09db125a0afd3b73ca6e039a7dd25bcb9737d0`
 
 Receiver identities and member use are checker-derived. The shared contract selects explicit host backends where maintained target semantics exist and the maintained dynamic runtime otherwise; generation validates both routes.
 
 | Metric | Count |
 | --- | ---: |
 | Receiver bindings | 10 |
-| Canonical endpoints | 402 |
-| Property accesses | 3626 |
+| Canonical endpoints | 397 |
+| Property accesses | 3622 |
 | Calls | 2313 |
-| Reads | 1088 |
+| Reads | 1084 |
 | Writes | 225 |
 | Backend contract endpoints | 397 |
 | Dynamic-fallback endpoints in use | 21 |
@@ -81,8 +81,8 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `DomDocumentBackend` | `activeElement` | `read` | `activeElement` | `dynamic-fallback` | 1 | `src/flight/_internal/_Runtime.hx` |
 | `DomDocumentBackend` | `addEventListener` | `call` | `addEventListener` | `backend` | 10 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
 | `DomDocumentBackend` | `body` | `read` | `body` | `backend` | 8 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
-| `DomDocumentBackend` | `createElement` | `call` | `createElement` | `backend` | 48 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
-| `DomDocumentBackend` | `createElement` | `read` | `createElement` | `backend` | 4 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
+| `DomDocumentBackend` | `createElement` | `call` | `createElement` | `backend` | 49 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
+| `DomDocumentBackend` | `createElement` | `read` | `createElement` | `backend` | 5 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
 | `DomDocumentBackend` | `createTextNode` | `call` | `createTextNode` | `backend` | 2 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
 | `DomDocumentBackend` | `documentElement` | `read` | `documentElement` | `backend` | 2 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
 | `DomDocumentBackend` | `exitFullscreen` | `call` | `exitFullscreen` | `backend` | 2 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
@@ -94,7 +94,7 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `DomDocumentBackend` | `hasFocus` | `call` | `hasFocus` | `backend` | 1 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
 | `DomDocumentBackend` | `head` | `read` | `head` | `backend` | 5 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
 | `DomDocumentBackend` | `hidden` | `read` | `hidden` | `backend` | 3 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
-| `DomDocumentBackend` | `pointerLockElement` | `read` | `pointerLockElement` | `backend` | 4 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
+| `DomDocumentBackend` | `pointerLockElement` | `read` | `pointerLockElement` | `backend` | 3 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
 | `DomDocumentBackend` | `querySelector` | `call` | `querySelector` | `backend` | 1 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
 | `DomDocumentBackend` | `readyState` | `read` | `readyState` | `dynamic-fallback` | 1 | `src/flight/_internal/_Runtime.hx` |
 | `DomDocumentBackend` | `removeEventListener` | `call` | `removeEventListener` | `backend` | 11 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
@@ -102,10 +102,7 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `DomDocumentBackend` | `title` | `write` | `title` | `backend` | 1 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
 | `DomNavigatorBackend` | `canShare` | `call` | `canShare` | `dynamic-fallback` | 1 | `src/flight/_internal/_Runtime.hx` |
 | `DomNavigatorBackend` | `clipboard` | `read` | `clipboard` | `backend` | 1 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
-| `DomNavigatorBackend` | `connection` | `read` | `connection` | `backend` | 1 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
 | `DomNavigatorBackend` | `geolocation` | `read` | `geolocation` | `backend` | 1 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
-| `DomNavigatorBackend` | `getBattery` | `call` | `getBattery` | `backend` | 1 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
-| `DomNavigatorBackend` | `getBattery` | `read` | `getBattery` | `backend` | 1 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
 | `DomNavigatorBackend` | `getGamepads` | `call` | `getGamepads` | `backend` | 1 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
 | `DomNavigatorBackend` | `getGamepads` | `read` | `getGamepads` | `backend` | 1 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
 | `DomNavigatorBackend` | `gpu` | `read` | `gpu` | `backend` | 1 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
@@ -127,7 +124,6 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `DomNavigatorBackend` | `userAgent` | `read` | `userAgent` | `dynamic-fallback` | 3 | `src/flight/_internal/_Runtime.hx` |
 | `DomNavigatorBackend` | `vibrate` | `call` | `vibrate` | `backend` | 1 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
 | `DomNavigatorBackend` | `vibrate` | `read` | `vibrate` | `backend` | 1 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
-| `DomNavigatorBackend` | `virtualKeyboard` | `read` | `virtualKeyboard` | `backend` | 1 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
 | `DomNavigatorBackend` | `wakeLock` | `read` | `wakeLock` | `backend` | 2 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
 | `DomWindowBackend` | `addEventListener` | `call` | `addEventListener` | `backend` | 23 | `src/flight/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `addEventListener` | `read` | `addEventListener` | `dynamic-fallback` | 3 | `src/flight/_internal/_Runtime.hx` |
@@ -140,7 +136,6 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `DomWindowBackend` | `document` | `read` | `document` | `dynamic-fallback` | 3 | `src/flight/_internal/_Runtime.hx` |
 | `DomWindowBackend` | `focus` | `call` | `focus` | `backend` | 2 | `src/flight/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `focus` | `read` | `focus` | `backend` | 1 | `src/flight/_internal/backend/DomWindowBackend.hx` |
-| `DomWindowBackend` | `getScreenDetails` | `read` | `getScreenDetails` | `backend` | 1 | `src/flight/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `innerHeight` | `read` | `innerHeight` | `backend` | 3 | `src/flight/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `innerWidth` | `read` | `innerWidth` | `backend` | 3 | `src/flight/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `isSecureContext` | `read` | `isSecureContext` | `backend` | 1 | `src/flight/_internal/backend/DomWindowBackend.hx` |

@@ -5,3 +5,4 @@ __syncDependencies();
 
 export * from './dialog.mjs';
 export * from './fileDialog.mjs';
+export * from './mediaDialog.mjs';

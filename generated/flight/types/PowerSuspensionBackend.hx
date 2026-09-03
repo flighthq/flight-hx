@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef PowerSuspensionBackend = { var subscribeResume:(Void->Void)->(Void->Void); var subscribeSuspend:(Void->Void)->(Void->Void); };
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class PowerSuspensionBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var subscribeResume:(Void->Void)->(Void->Void);
+  public var subscribeSuspend:(Void->Void)->(Void->Void);
+
+  private function new(subscribeResume:(Void->Void)->(Void->Void), subscribeSuspend:(Void->Void)->(Void->Void)):Void {
+    this.__symbol__EntityRuntime = null;
+    this.subscribeResume = subscribeResume;
+    this.subscribeSuspend = subscribeSuspend;
+  }
+}
+#else
+typedef PowerSuspensionBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var subscribeResume:(Void->Void)->(Void->Void); var subscribeSuspend:(Void->Void)->(Void->Void); };
+#end

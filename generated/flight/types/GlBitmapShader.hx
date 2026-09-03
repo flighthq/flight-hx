@@ -4,4 +4,23 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlBitmapShader = { var program:flight._internal.dom.WebGLProgram; var bind:GlContext->GlRenderState->RenderProxy2D->Void; var locations:GlShaderLocations; };
+#if !flight_struct_typedef
+@:allow(flight._RenderGl)
+@:keep
+@:structInit
+class GlBitmapShader {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var program:flight._internal.dom.WebGLProgram;
+  public var bind:GlContext->GlRenderState->RenderProxy2D->Void;
+  public var locations:GlShaderLocations;
+
+  private function new(program:flight._internal.dom.WebGLProgram, bind:GlContext->GlRenderState->RenderProxy2D->Void, locations:GlShaderLocations):Void {
+    this.__symbol__EntityRuntime = null;
+    this.program = program;
+    this.bind = bind;
+    this.locations = locations;
+  }
+}
+#else
+typedef GlBitmapShader = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var program:flight._internal.dom.WebGLProgram; var bind:GlContext->GlRenderState->RenderProxy2D->Void; var locations:GlShaderLocations; };
+#end

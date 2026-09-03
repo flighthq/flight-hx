@@ -6,9 +6,9 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight.types.Bitmap)
-@:allow(flight.types.CompressedImage)
+@:allow(flight.types.CompressedImageResource)
 @:allow(flight.types.ExternalTexture)
-@:allow(flight.types.Image)
+@:allow(flight.types.ImageResource)
 @:allow(flight.types.RenderTarget)
 @:keep
 @:structInit

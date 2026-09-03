@@ -8,5 +8,8 @@ __syncDependencies();
 export const webDirectoryOpenDialogBackend = api.webDirectoryOpenDialogBackend;
 export const webFileOpenDialogBackend = api.webFileOpenDialogBackend;
 export const webFileSaveDialogBackend = api.webFileSaveDialogBackend;
+export const webImageOpenDialogBackend = api.webImageOpenDialogBackend;
+export const webPhotoCaptureDialogBackend = api.webPhotoCaptureDialogBackend;
+export const webVideoCaptureDialogBackend = api.webVideoCaptureDialogBackend;
 export { webMessageDialogBackend } from '@flighthq/dialog/contract';
 export { webPromptDialogBackend } from '@flighthq/dialog/contract';

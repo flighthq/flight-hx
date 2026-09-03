@@ -162,6 +162,10 @@ class Lighting {
     Facade_Lighting_flight__Lighting.setDirectionalLightTarget(out, fromX, fromY, fromZ, toX, toY, toZ);
   }
 
+  public static function setSpotLightBlend(out:SpotLight, blend:Float):Void {
+    Facade_Lighting_flight__Lighting.setSpotLightBlend(out, blend);
+  }
+
   public static function setSpotLightCone(out:SpotLight, innerDegrees:Float, outerDegrees:Float):Void {
     Facade_Lighting_flight__Lighting.setSpotLightCone(out, innerDegrees, outerDegrees);
   }

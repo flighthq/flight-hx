@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuCompressedTextureUploader = WgpuRenderState->CompressedImage->Null<WgpuCompressedTextureDecoder>->TextureColorSpace->Null<WgpuTextureEntry>;
+typedef WgpuCompressedTextureUploader = WgpuRenderState->CompressedImageResource->Null<WgpuCompressedTextureDecoder>->TextureColorSpace->Null<WgpuTextureEntry>;

@@ -67,8 +67,6 @@ import flight._UserAgent.parseUserAgentVersion;
 import flight._Video.hasVideoCapabilityHostBackend;
 import flight._Video.installVideoCapabilityHostBackend;
 import flight._Video.observeVideoCapabilityHostResult;
-import flight._Webcam.createWebMediaFileCaptureBackend;
-import flight._Webcam.installMediaFileCaptureHostBackend;
 import flight.types.AccessibilityBackend;
 import flight.types.AccessibilityLiveness;
 import flight.types.AccessibilityNode;
@@ -96,6 +94,8 @@ import flight.types.BitmapReadbackBackend;
 import flight.types.BitmapReadbackMode;
 import flight.types.BitmapReadbackOutcome;
 import flight.types.CanvasRenderSurfaceCreator;
+import flight.types.CapturePhotoDialogOptions;
+import flight.types.CaptureVideoDialogOptions;
 import flight.types.ClipboardChangeBackend;
 import flight.types.ClipboardFormatsBackend;
 import flight.types.ClipboardImageBackend;
@@ -114,6 +114,8 @@ import flight.types.DeviceBackend;
 import flight.types.DeviceCapabilities;
 import flight.types.DeviceDisplayMetrics;
 import flight.types.DeviceInfo;
+import flight.types.DialogImage;
+import flight.types.DialogVideo;
 import flight.types.DirectoryOpenDialogBackend;
 import flight.types.DirectoryOpenDialogResult;
 import flight.types.Entity;
@@ -158,8 +160,11 @@ import flight.types.HasConnectivityStatus;
 import flight.types.HasDialogDirectoryOpen;
 import flight.types.HasDialogFileOpen;
 import flight.types.HasDialogFileSave;
+import flight.types.HasDialogImageOpen;
 import flight.types.HasDialogMessage;
+import flight.types.HasDialogPhotoCapture;
 import flight.types.HasDialogPrompt;
+import flight.types.HasDialogVideoCapture;
 import flight.types.HasGraphicsRenderContextSubscription;
 import flight.types.HasGraphicsRenderSurface;
 import flight.types.HasInputDropFileSubscription;
@@ -189,9 +194,11 @@ import flight.types.HostProtocolCapabilities;
 import flight.types.HostScreenCapabilities;
 import flight.types.HostShareCapabilities;
 import flight.types.HostShellCapabilities;
-import flight.types.Image;
 import flight.types.ImageBackend;
 import flight.types.ImageFormat;
+import flight.types.ImageOpenDialogBackend;
+import flight.types.ImageOpenDialogResult;
+import flight.types.ImageResource;
 import flight.types.InputDropFileBackend;
 import flight.types.InputFocusBackend;
 import flight.types.InputPointerLockBackend;
@@ -201,7 +208,6 @@ import flight.types.InputTargetBackend;
 import flight.types.InputTargetHandle;
 import flight.types.LifecycleBackend;
 import flight.types.LoopBackend;
-import flight.types.MediaFileCaptureBackend;
 import flight.types.MediaSessionAction;
 import flight.types.MediaSessionActionBackend;
 import flight.types.MediaSessionActionDetails;
@@ -254,8 +260,11 @@ import flight.types.NotificationRequest;
 import flight.types.NotificationRequestField;
 import flight.types.OpenDirectoryDialogOptions;
 import flight.types.OpenFileDialogOptions;
+import flight.types.OpenImageDialogOptions;
 import flight.types.PermissionQueryOutcome;
 import flight.types.PermissionState;
+import flight.types.PhotoCaptureDialogBackend;
+import flight.types.PhotoCaptureDialogResult;
 import flight.types.PlatformBackend;
 import flight.types.PlatformEndianness;
 import flight.types.PlatformEngine;
@@ -319,12 +328,16 @@ import flight.types.StorageRemoveItemResult;
 import flight.types.StorageSetItemFailureReason;
 import flight.types.StorageSetItemResult;
 import flight.types.VideoCapabilityBackend;
+import flight.types.VideoCaptureDialogBackend;
+import flight.types.VideoCaptureDialogResult;
 import flight.types.WebMidiAccessCapabilities;
 import flight.types.WebMidiPermissionAccessCapabilities;
 import flight.types.WebNotificationOptions;
 import flight.types.WebPageNotificationApi;
 import flight.types.WebPageNotificationCapabilities;
 import flight.types.WebPageNotificationInstance;
+import flight.types.WebPowerCapabilities;
+import flight.types.WebPowerReadingCapabilities;
 import flight.types.WebServiceWorkerNotificationApi;
 import flight.types.WebServiceWorkerNotificationCapabilities;
 import flight.types.WebServiceWorkerNotificationEvent;
@@ -571,6 +584,8 @@ typedef WebConnectivityBackend__webConnectivity = { var getStatus:ConnectivitySt
 
 typedef WebConnectivityConnection__webConnectivity = { @:optional var type:String; @:optional var downlink:Float; @:optional var downlinkMax:Float; @:optional var effectiveType:String; @:optional var rtt:Float; @:optional var saveData:Bool; @:optional var addEventListener:String->(Void->Void)->Void; @:optional var removeEventListener:String->(Void->Void)->Void; };
 
+typedef WebConnectivityNavigator__webConnectivity = { @:optional var connection:WebConnectivityConnection__webConnectivity; };
+
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:keep
@@ -611,6 +626,8 @@ private class EntityShapeL5C23__webCursor {
 private typedef EntityShapeL5C23__webCursor = { var setCursor:Null<flight._internal._Union2<String, flight._internal._Intersection2<String, flight._internal._Record<flight._internal._Any, flight._internal._Any>>>>->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
+typedef MediaPickerFailure__webDialog = String;
+
 typedef FileSystemFileHandle__webDialog = { var kind:String; var name:String; var createWritable:Void->flight._internal._Promise<FileSystemWritableFileStream__webDialog>; var getFile:Void->flight._internal._Promise<flight._internal.dom.File>; };
 
 typedef FileSystemDirectoryHandle__webDialog = { var kind:String; var name:String; };
@@ -631,7 +648,7 @@ typedef WindowWithFileSystemAccess__webDialog = { @:optional var showDirectoryPi
 @:allow(flight._HostWeb)
 @:keep
 @:structInit
-private class EntityShapeL20C59__webDialog {
+private class EntityShapeL31C59__webDialog {
   public var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -641,14 +658,14 @@ private class EntityShapeL20C59__webDialog {
   }
 }
 #else
-private typedef EntityShapeL20C59__webDialog = { var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL31C59__webDialog = { var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:keep
 @:structInit
-private class EntityShapeL24C54__webDialog {
+private class EntityShapeL35C54__webDialog {
   public var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -658,14 +675,14 @@ private class EntityShapeL24C54__webDialog {
   }
 }
 #else
-private typedef EntityShapeL24C54__webDialog = { var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL35C54__webDialog = { var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:keep
 @:structInit
-private class EntityShapeL28C54__webDialog {
+private class EntityShapeL39C54__webDialog {
   public var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -675,7 +692,58 @@ private class EntityShapeL28C54__webDialog {
   }
 }
 #else
-private typedef EntityShapeL28C54__webDialog = { var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL39C54__webDialog = { var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+private class EntityShapeL43C55__webDialog {
+  public var open:OpenImageDialogOptions->flight._internal._Promise<ImageOpenDialogResult>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(open:OpenImageDialogOptions->flight._internal._Promise<ImageOpenDialogResult>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.open = open;
+  }
+}
+#else
+private typedef EntityShapeL43C55__webDialog = { var open:OpenImageDialogOptions->flight._internal._Promise<ImageOpenDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+private class EntityShapeL47C58__webDialog {
+  public var capture:CapturePhotoDialogOptions->flight._internal._Promise<PhotoCaptureDialogResult>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(capture:CapturePhotoDialogOptions->flight._internal._Promise<PhotoCaptureDialogResult>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.capture = capture;
+  }
+}
+#else
+private typedef EntityShapeL47C58__webDialog = { var capture:CapturePhotoDialogOptions->flight._internal._Promise<PhotoCaptureDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+private class EntityShapeL51C58__webDialog {
+  public var capture:CaptureVideoDialogOptions->flight._internal._Promise<VideoCaptureDialogResult>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(capture:CaptureVideoDialogOptions->flight._internal._Promise<VideoCaptureDialogResult>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.capture = capture;
+  }
+}
+#else
+private typedef EntityShapeL51C58__webDialog = { var capture:CaptureVideoDialogOptions->flight._internal._Promise<VideoCaptureDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
@@ -720,9 +788,13 @@ private class EntityShapeL12C23__webGlyphRasterizer {
 private typedef EntityShapeL12C23__webGlyphRasterizer = { var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
+typedef WebInputTargetStyle__webInputTarget = { var webkitTapHighlightColor:String; };
+
 typedef OmitRuntime__webKeyboard<T> = flight._internal._Omit<T, Dynamic>;
 
 typedef VirtualKeyboard__webKeyboard = { >flight._internal.dom.EventTarget, var boundingRect:flight._internal.dom.DOMRect; var overlaysContent:Bool; var show:Void->Void; var hide:Void->Void; };
+
+typedef WebKeyboardNavigator__webKeyboard = { @:optional var virtualKeyboard:VirtualKeyboard__webKeyboard; };
 
 typedef WebKeyboardGeometry__webKeyboard = { var height:Float; var width:Float; var x:Float; var y:Float; };
 
@@ -882,6 +954,8 @@ private typedef EntityShapeL140C41__webMidi = { var release:Void->flight._intern
 
 typedef WebBatteryManager__webPower = { var chargingTime:Float; var dischargingTime:Float; var level:Float; var charging:Bool; @:optional var addEventListener:String->(Void->Void)->Void; @:optional var removeEventListener:String->(Void->Void)->Void; };
 
+typedef WebBatteryNavigator__webPower = { @:optional var getBattery:Void->flight._internal._Promise<WebBatteryManager__webPower>; };
+
 typedef WebWakeLock__webPower = { var request:String->flight._internal._Promise<WebWakeLockSentinel__webPower>; };
 
 typedef WebWakeLockSentinel__webPower = { @:optional var addEventListener:String->(Void->Void)->Void; @:optional var removeEventListener:String->(Void->Void)->Void; @:optional var release:Void->flight._internal._Promise<flight._internal._Nothing>; };
@@ -890,23 +964,34 @@ typedef WebWakeLockSentinel__webPower = { @:optional var addEventListener:String
 @:allow(flight._HostWeb)
 @:keep
 @:structInit
-private class EntityShapeL181C50__webPower {
-  public var keepAwake:PowerKeepAwakeBackend;
-  public var suspension:PowerSuspensionBackend;
-  public var change:PowerChangeBackend;
-  public var status:PowerStatusBackend;
+private class EntityShapeL114C68__webPower {
+  public var subscribe:(Void->Void)->(Void->Void);
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
-  private function new(keepAwake:PowerKeepAwakeBackend, suspension:PowerSuspensionBackend, change:PowerChangeBackend, status:PowerStatusBackend):Void {
+  private function new(subscribe:(Void->Void)->(Void->Void)):Void {
     this.__symbol__EntityRuntime = null;
-    this.keepAwake = keepAwake;
-    this.suspension = suspension;
-    this.change = change;
-    this.status = status;
+    this.subscribe = subscribe;
   }
 }
 #else
-private typedef EntityShapeL181C50__webPower = { var keepAwake:PowerKeepAwakeBackend; var suspension:PowerSuspensionBackend; var change:PowerChangeBackend; var status:PowerStatusBackend; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL114C68__webPower = { var subscribe:(Void->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+private class EntityShapeL169C68__webPower {
+  public var getStatus:PowerStatus->PowerStatus;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(getStatus:PowerStatus->PowerStatus):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getStatus = getStatus;
+  }
+}
+#else
+private typedef EntityShapeL169C68__webPower = { var getStatus:PowerStatus->PowerStatus; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef WebProtocolCapabilities__webProtocol = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var registration:ProtocolRegistrationBackend; var launch:ProtocolLaunchBackend; };
@@ -970,6 +1055,8 @@ typedef DetailedScreen__webScreen = { var availHeight:Float; var availLeft:Float
 
 typedef ScreenDetails__webScreen = { var currentScreen:DetailedScreen__webScreen; var screens:Array<DetailedScreen__webScreen>; var addEventListener:String->(Void->Void)->Void; var removeEventListener:String->(Void->Void)->Void; };
 
+typedef WebScreenDetailsWindow__webScreen = { @:optional var getScreenDetails:Void->flight._internal._Promise<ScreenDetails__webScreen>; };
+
 typedef DisplaySubscription__webScreen = { var details:Null<ScreenDetails__webScreen>; var handle:Void->Void; var orientation:Null<OrientationLike__webScreen>; };
 
 typedef OrientationLike__webScreen = { @:optional var angle:Float; @:optional var type:String; @:optional var addEventListener:String->(Void->Void)->Void; @:optional var removeEventListener:String->(Void->Void)->Void; };
@@ -978,7 +1065,7 @@ typedef OrientationLike__webScreen = { @:optional var angle:Float; @:optional va
 @:allow(flight._HostWeb)
 @:keep
 @:structInit
-private class EntityShapeL178C30__webScreen {
+private class EntityShapeL182C30__webScreen {
   public var destroy:Void->Void;
   public var getCursorPosition:{ var x:Float; var y:Float; }->{ var x:Float; var y:Float; };
   public var getPrimaryScreen:ScreenInfo->ScreenInfo;
@@ -994,14 +1081,14 @@ private class EntityShapeL178C30__webScreen {
   }
 }
 #else
-private typedef EntityShapeL178C30__webScreen = { var destroy:Void->Void; var getCursorPosition:{ var x:Float; var y:Float; }->{ var x:Float; var y:Float; }; var getPrimaryScreen:ScreenInfo->ScreenInfo; var getScreens:Array<ScreenInfo>->Array<ScreenInfo>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL182C30__webScreen = { var destroy:Void->Void; var getCursorPosition:{ var x:Float; var y:Float; }->{ var x:Float; var y:Float; }; var getPrimaryScreen:ScreenInfo->ScreenInfo; var getScreens:Array<ScreenInfo>->Array<ScreenInfo>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:keep
 @:structInit
-private class EntityShapeL221C31__webScreen {
+private class EntityShapeL225C31__webScreen {
   public var subscribe:(ScreenChangeEvent->Void)->(Void->Void);
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -1011,14 +1098,14 @@ private class EntityShapeL221C31__webScreen {
   }
 }
 #else
-private typedef EntityShapeL221C31__webScreen = { var subscribe:(ScreenChangeEvent->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL225C31__webScreen = { var subscribe:(ScreenChangeEvent->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:keep
 @:structInit
-private class EntityShapeL242C39__webScreen {
+private class EntityShapeL246C39__webScreen {
   public var queryPermission:Void->flight._internal._Promise<ScreenPermissionState>;
   public var request:Void->flight._internal._Promise<Bool>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
@@ -1030,14 +1117,14 @@ private class EntityShapeL242C39__webScreen {
   }
 }
 #else
-private typedef EntityShapeL242C39__webScreen = { var queryPermission:Void->flight._internal._Promise<ScreenPermissionState>; var request:Void->flight._internal._Promise<Bool>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL246C39__webScreen = { var queryPermission:Void->flight._internal._Promise<ScreenPermissionState>; var request:Void->flight._internal._Promise<Bool>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:keep
 @:structInit
-private class EntityShapeL272C41__webScreen {
+private class EntityShapeL276C41__webScreen {
   public var subscribe:(ScreenPermissionState->Void)->(Void->Void);
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -1047,7 +1134,7 @@ private class EntityShapeL272C41__webScreen {
   }
 }
 #else
-private typedef EntityShapeL272C41__webScreen = { var subscribe:(ScreenPermissionState->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL276C41__webScreen = { var subscribe:(ScreenPermissionState->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef WebServiceWorkerNotificationDispatch__webServiceWorkerNotification = { var action:Notification->String->Void; var click:Notification->Void; var dismiss:Notification->Void; };
@@ -1134,7 +1221,6 @@ class _HostWeb {
     enableHostWebImage();
     enableHostWebRaster2DSurface();
     enableHostWebVideoCapability();
-    enableHostWebMediaFileCapture();
   }
 
   public static function createWebAccessibilityBackend(?container:flight._internal.dom.HTMLElement):AccessibilityBackend {
@@ -1509,11 +1595,11 @@ class _HostWeb {
   public static var _enabled__webAudioDevice:Bool = false;
 
   public static function enableHostWebAudioDevice():Void {
-    var inner:{ >AudioDeviceBackend, var getSourceBufferSourceNode:AudioSourceHandle->Null<flight._internal.dom.AudioBufferSourceNode>; var getSourceGainNode:AudioSourceHandle->Null<flight._internal.dom.GainNode>; var createBuffer:AudioDeviceHandle->Float->Float->Float->Array<flight._internal._Float32Array>->AudioBufferHandle; var createDevice:Float->AudioDeviceHandle; var createSource:AudioDeviceHandle->AudioBufferHandle->AudioSourceHandle; var destroyBuffer:AudioBufferHandle->Void; var destroyDevice:AudioDeviceHandle->Void; var destroySource:AudioSourceHandle->Void; var getDeviceTime:AudioDeviceHandle->Float; var onSourceEnded:AudioSourceHandle->Null<Void->Void>->Void; var resumeDevice:AudioDeviceHandle->Void; var setSourceGain:AudioSourceHandle->Float->Void; var setSourcePan:AudioSourceHandle->Float->Void; var setSourcePlaybackRate:AudioSourceHandle->Float->Void; var startSource:AudioSourceHandle->Float->Void; var stopSource:AudioSourceHandle->Void; } = cast _Runtime.UNDEFINED;
+    var inner:{ >AudioDeviceBackend, var getSourceBufferSourceNode:AudioSourceHandle->Null<flight._internal.dom.AudioBufferSourceNode>; var getSourceGainNode:AudioSourceHandle->Null<flight._internal.dom.GainNode>; var createBuffer:AudioDeviceHandle->Float->Float->Float->Array<flight._internal._Float32Array>->AudioBufferHandle; var createDevice:Float->AudioDeviceHandle; var createSource:AudioDeviceHandle->AudioBufferHandle->AudioSourceHandle; var destroyBuffer:AudioBufferHandle->Void; var destroyDevice:AudioDeviceHandle->Void; var destroySource:AudioSourceHandle->Void; var getDeviceTime:AudioDeviceHandle->Float; var onSourceEnded:AudioSourceHandle->Null<Void->Void>->Void; var resumeDevice:AudioDeviceHandle->Void; var setSourceGain:AudioSourceHandle->Float->Void; var setSourcePan:AudioSourceHandle->Float->Void; var setSourcePlaybackRate:AudioSourceHandle->Float->Void; var startSource:AudioSourceHandle->Float->Float->Void; var stopSource:AudioSourceHandle->Void; } = cast _Runtime.UNDEFINED;
     var backend:AudioDeviceBackend = cast _Runtime.UNDEFINED;
     if ((cast _HostWeb._enabled__webAudioDevice : Bool)) { return; }
     (_HostWeb._enabled__webAudioDevice = cast (true : Dynamic));
-    inner = (cast createWebAudioDeviceBackend() : { >AudioDeviceBackend, var getSourceBufferSourceNode:AudioSourceHandle->Null<flight._internal.dom.AudioBufferSourceNode>; var getSourceGainNode:AudioSourceHandle->Null<flight._internal.dom.GainNode>; var createBuffer:AudioDeviceHandle->Float->Float->Float->Array<flight._internal._Float32Array>->AudioBufferHandle; var createDevice:Float->AudioDeviceHandle; var createSource:AudioDeviceHandle->AudioBufferHandle->AudioSourceHandle; var destroyBuffer:AudioBufferHandle->Void; var destroyDevice:AudioDeviceHandle->Void; var destroySource:AudioSourceHandle->Void; var getDeviceTime:AudioDeviceHandle->Float; var onSourceEnded:AudioSourceHandle->Null<Void->Void>->Void; var resumeDevice:AudioDeviceHandle->Void; var setSourceGain:AudioSourceHandle->Float->Void; var setSourcePan:AudioSourceHandle->Float->Void; var setSourcePlaybackRate:AudioSourceHandle->Float->Void; var startSource:AudioSourceHandle->Float->Void; var stopSource:AudioSourceHandle->Void; });
+    inner = (cast createWebAudioDeviceBackend() : { >AudioDeviceBackend, var getSourceBufferSourceNode:AudioSourceHandle->Null<flight._internal.dom.AudioBufferSourceNode>; var getSourceGainNode:AudioSourceHandle->Null<flight._internal.dom.GainNode>; var createBuffer:AudioDeviceHandle->Float->Float->Float->Array<flight._internal._Float32Array>->AudioBufferHandle; var createDevice:Float->AudioDeviceHandle; var createSource:AudioDeviceHandle->AudioBufferHandle->AudioSourceHandle; var destroyBuffer:AudioBufferHandle->Void; var destroyDevice:AudioDeviceHandle->Void; var destroySource:AudioSourceHandle->Void; var getDeviceTime:AudioDeviceHandle->Float; var onSourceEnded:AudioSourceHandle->Null<Void->Void>->Void; var resumeDevice:AudioDeviceHandle->Void; var setSourceGain:AudioSourceHandle->Float->Void; var setSourcePan:AudioSourceHandle->Float->Void; var setSourcePlaybackRate:AudioSourceHandle->Float->Void; var startSource:AudioSourceHandle->Float->Float->Void; var stopSource:AudioSourceHandle->Void; });
     backend = (cast _Runtime.mergeObjects([inner, { createDevice: function(sampleRate:Float):AudioDeviceHandle {
       try {
         var result:AudioDeviceHandle = (cast inner : { var createDevice:Float->AudioDeviceHandle; }).createDevice((cast sampleRate : Float));
@@ -2313,7 +2399,7 @@ class _HostWeb {
 
   public static function getWebConnection__webConnectivity():Null<WebConnectivityConnection__webConnectivity> {
     if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool)) { return cast null; }
-    return cast _Runtime.coalesce(flight._internal.backend.DomNavigatorBackend.field((cast flight._internal.backend.DomNavigatorBackend.value() : flight._internal._Intersection2<flight._internal.dom.Navigator, { @:optional var connection:WebConnectivityConnection__webConnectivity; }>), 'connection'), function():Dynamic return cast null);
+    return cast _Runtime.coalesce((cast (cast flight._internal.backend.DomNavigatorBackend.value() : WebConnectivityNavigator__webConnectivity) : WebConnectivityNavigator__webConnectivity).connection, function():Dynamic return cast null);
     return cast null;
   }
 
@@ -2490,7 +2576,7 @@ class _HostWeb {
 
   public static var _safeAreaInsets__webDevice:Null<SafeAreaInsets> = _Runtime.explicitNull();
 
-  public static final webDirectoryOpenDialogBackend:{ >Entity, var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>; } = (cast createEntity(({ final __callArgument475:Dynamic = ({ open: (cast _HostWeb.openDirectory__webDialog : Dynamic) } : EntityShapeL20C59__webDialog); __callArgument475; })) : EntityShapeL20C59__webDialog);
+  public static final webDirectoryOpenDialogBackend:{ >Entity, var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>; } = (cast createEntity(({ final __callArgument475:Dynamic = ({ open: (cast _HostWeb.openDirectory__webDialog : Dynamic) } : EntityShapeL31C59__webDialog); __callArgument475; })) : EntityShapeL31C59__webDialog);
 
   public static function detectColorGamut__webDevice():String {
     if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('matchMedia'), 'undefined') : Bool)) { return cast ''; }
@@ -2536,50 +2622,56 @@ class _HostWeb {
     return cast null;
   }
 
-  public static final webFileOpenDialogBackend:{ >Entity, var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; } = (cast createEntity(({ final __callArgument477:Dynamic = ({ open: (cast _HostWeb.openFile__webDialog : Dynamic) } : EntityShapeL24C54__webDialog); __callArgument477; })) : EntityShapeL24C54__webDialog);
+  public static final webFileOpenDialogBackend:{ >Entity, var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; } = (cast createEntity(({ final __callArgument477:Dynamic = ({ open: (cast _HostWeb.openFile__webDialog : Dynamic) } : EntityShapeL35C54__webDialog); __callArgument477; })) : EntityShapeL35C54__webDialog);
 
-  public static final webFileSaveDialogBackend:{ >Entity, var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; } = (cast createEntity(({ final __callArgument479:Dynamic = ({ save: (cast _HostWeb.saveFile__webDialog : Dynamic) } : EntityShapeL28C54__webDialog); __callArgument479; })) : EntityShapeL28C54__webDialog);
+  public static final webFileSaveDialogBackend:{ >Entity, var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; } = (cast createEntity(({ final __callArgument479:Dynamic = ({ save: (cast _HostWeb.saveFile__webDialog : Dynamic) } : EntityShapeL39C54__webDialog); __callArgument479; })) : EntityShapeL39C54__webDialog);
 
-  public static final webDialogHost:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<Host, HasDialogDirectoryOpen>, HasDialogFileOpen>, HasDialogFileSave>, HasDialogMessage>, HasDialogPrompt> = (cast createHost((cast { dialog: { directoryOpen: webDirectoryOpenDialogBackend, fileOpen: webFileOpenDialogBackend, fileSave: webFileSaveDialogBackend, message: webMessageDialogBackend, prompt: webPromptDialogBackend } } : Dynamic)) : flight._internal._Intersection2<Host, { var dialog:{ var directoryOpen:{ >Entity, var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>; }; var fileOpen:{ >Entity, var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; }; var fileSave:{ >Entity, var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; }; var message:MessageDialogBackend; var prompt:PromptDialogBackend; }; }>);
+  public static final webImageOpenDialogBackend:{ >Entity, var open:OpenImageDialogOptions->flight._internal._Promise<ImageOpenDialogResult>; } = (cast createEntity(({ final __callArgument481:Dynamic = ({ open: (cast _HostWeb.openImage__webDialog : Dynamic) } : EntityShapeL43C55__webDialog); __callArgument481; })) : EntityShapeL43C55__webDialog);
+
+  public static final webPhotoCaptureDialogBackend:{ >Entity, var capture:CapturePhotoDialogOptions->flight._internal._Promise<PhotoCaptureDialogResult>; } = (cast createEntity(({ final __callArgument483:Dynamic = ({ capture: (cast _HostWeb.capturePhoto__webDialog : Dynamic) } : EntityShapeL47C58__webDialog); __callArgument483; })) : EntityShapeL47C58__webDialog);
+
+  public static final webVideoCaptureDialogBackend:{ >Entity, var capture:CaptureVideoDialogOptions->flight._internal._Promise<VideoCaptureDialogResult>; } = (cast createEntity(({ final __callArgument485:Dynamic = ({ capture: (cast _HostWeb.captureVideo__webDialog : Dynamic) } : EntityShapeL51C58__webDialog); __callArgument485; })) : EntityShapeL51C58__webDialog);
+
+  public static final webDialogHost:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<Host, HasDialogDirectoryOpen>, HasDialogFileOpen>, HasDialogFileSave>, HasDialogImageOpen>, HasDialogMessage>, HasDialogPhotoCapture>, HasDialogPrompt>, HasDialogVideoCapture> = (cast createHost((cast { dialog: { directoryOpen: webDirectoryOpenDialogBackend, fileOpen: webFileOpenDialogBackend, fileSave: webFileSaveDialogBackend, imageOpen: webImageOpenDialogBackend, message: webMessageDialogBackend, photoCapture: webPhotoCaptureDialogBackend, prompt: webPromptDialogBackend, videoCapture: webVideoCaptureDialogBackend } } : Dynamic)) : flight._internal._Intersection2<Host, { var dialog:{ var directoryOpen:{ >Entity, var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>; }; var fileOpen:{ >Entity, var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; }; var fileSave:{ >Entity, var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; }; var imageOpen:{ >Entity, var open:OpenImageDialogOptions->flight._internal._Promise<ImageOpenDialogResult>; }; var message:MessageDialogBackend; var photoCapture:{ >Entity, var capture:CapturePhotoDialogOptions->flight._internal._Promise<PhotoCaptureDialogResult>; }; var prompt:PromptDialogBackend; var videoCapture:{ >Entity, var capture:CaptureVideoDialogOptions->flight._internal._Promise<VideoCaptureDialogResult>; }; }; }>);
 
   public static function openDirectory__webDialog(?options:OpenDirectoryDialogOptions):flight._internal._Promise<DirectoryOpenDialogResult> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         if (options == null) options = cast ({  } : Dynamic);
         var picker:Null<Null<FileSystemAccessDirectoryPickerOptions__webDialog>->flight._internal._Promise<FileSystemDirectoryHandle__webDialog>> = cast _Runtime.UNDEFINED;
-        var __flowBranch485:Dynamic;
-        if (_Runtime.truthy(({ final __hostType484 = _Runtime.field(options, 'signal'); __hostType484 == null ? _Runtime.UNDEFINED : (cast __hostType484 : flight._internal.dom.AbortSignal).aborted; }))) {
-          __flowBranch485 = flight._internal._Async.protect(function():Dynamic {
+        var __flowBranch491:Dynamic;
+        if (_Runtime.truthy(({ final __hostType490 = _Runtime.field(options, 'signal'); __hostType490 == null ? _Runtime.UNDEFINED : (cast __hostType490 : flight._internal.dom.AbortSignal).aborted; }))) {
+          __flowBranch491 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn({ outcome: 'cancelled' });
           });
         } else {
-          __flowBranch485 = flight._internal._Async.flowNormal();
+          __flowBranch491 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch485, function():Dynamic {
-          var __flowBranch486:Dynamic;
+        return flight._internal._Async.continueFlow(__flowBranch491, function():Dynamic {
+          var __flowBranch492:Dynamic;
           if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) {
-            __flowBranch486 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch492 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn({ outcome: 'runtime-unavailable' });
             });
           } else {
-            __flowBranch486 = flight._internal._Async.flowNormal();
+            __flowBranch492 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch486, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch492, function():Dynamic {
             picker = (cast (cast flight._internal.backend.DomWindowBackend.value() : WindowWithFileSystemAccess__webDialog) : WindowWithFileSystemAccess__webDialog).showDirectoryPicker;
-            var __flowBranch487:Dynamic;
+            var __flowBranch493:Dynamic;
             if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(picker), 'function') : Bool)) {
-              __flowBranch487 = flight._internal._Async.protect(function():Dynamic {
+              __flowBranch493 = flight._internal._Async.protect(function():Dynamic {
                 return flight._internal._Async.flowReturn({ outcome: 'runtime-unavailable' });
               });
             } else {
-              __flowBranch487 = flight._internal._Async.flowNormal();
+              __flowBranch493 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch487, function():Dynamic {
+            return flight._internal._Async.continueFlow(__flowBranch493, function():Dynamic {
               return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
                 var nativeHandle:FileSystemDirectoryHandle__webDialog = cast _Runtime.UNDEFINED;
-                return flight._internal._Async.flatMap(_Runtime.callProperty(picker, 'call', cast ([flight._internal.backend.DomWindowBackend.value(), { mode: 'read' }] : Array<Dynamic>)), function(__awaitValue488:Dynamic):Dynamic {
-                  nativeHandle = __awaitValue488;
-                  return flight._internal._Async.flowReturn({ handle: (cast (#if js _Runtime.callValue(createFileDialogHandle, cast ([(cast 'Directory' : String), (cast (cast nativeHandle : FileSystemDirectoryHandle__webDialog).name : String), ({ final __callArgument490:Dynamic = null; __callArgument490; })] : Array<Dynamic>)) #else createFileDialogHandle((cast 'Directory' : String), (cast (cast nativeHandle : FileSystemDirectoryHandle__webDialog).name : String), ({ final __callArgument489:Dynamic = null; __callArgument489; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : FileDialogHandle), outcome: 'selected' });
+                return flight._internal._Async.flatMap(_Runtime.callProperty(picker, 'call', cast ([flight._internal.backend.DomWindowBackend.value(), { mode: 'read' }] : Array<Dynamic>)), function(__awaitValue494:Dynamic):Dynamic {
+                  nativeHandle = __awaitValue494;
+                  return flight._internal._Async.flowReturn({ handle: (cast (#if js _Runtime.callValue(createFileDialogHandle, cast ([(cast 'Directory' : String), (cast (cast nativeHandle : FileSystemDirectoryHandle__webDialog).name : String), ({ final __callArgument496:Dynamic = null; __callArgument496; })] : Array<Dynamic>)) #else createFileDialogHandle((cast 'Directory' : String), (cast (cast nativeHandle : FileSystemDirectoryHandle__webDialog).name : String), ({ final __callArgument495:Dynamic = null; __callArgument495; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : FileDialogHandle), outcome: 'selected' });
                 });
               }), function(__caughtError:Dynamic):Dynamic {
                 var error:Dynamic = __caughtError;
@@ -2597,27 +2689,27 @@ class _HostWeb {
   }
 
   public static function openFile__webDialog(options:OpenFileDialogOptions):flight._internal._Promise<FileOpenDialogResult> {
-    if (_Runtime.truthy(({ final __hostType491 = options.signal; __hostType491 == null ? _Runtime.UNDEFINED : (cast __hostType491 : flight._internal.dom.AbortSignal).aborted; }))) { return cast flight._internal._Async.resolve({ outcome: 'cancelled' }); }
+    if (_Runtime.truthy(({ final __hostType497 = options.signal; __hostType497 == null ? _Runtime.UNDEFINED : (cast __hostType497 : flight._internal.dom.AbortSignal).aborted; }))) { return cast flight._internal._Async.resolve({ outcome: 'cancelled' }); }
     if ((cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) {
       var picker:Null<Null<FileSystemAccessOpenPickerOptions__webDialog>->flight._internal._Promise<Array<FileSystemFileHandle__webDialog>>> = (cast (cast flight._internal.backend.DomWindowBackend.value() : WindowWithFileSystemAccess__webDialog) : WindowWithFileSystemAccess__webDialog).showOpenFilePicker;
-      if ((cast _Runtime.strictEquals(_Runtime.typeofValue(picker), 'function') : Bool)) { return cast (cast _HostWeb.openFileSystemAccessPicker__webDialog(({ final __callArgument492:Dynamic = flight._internal.backend.DomWindowBackend.value(); __callArgument492; }), (cast picker : Dynamic), ({ final __callArgument493:Dynamic = options; __callArgument493; })) : flight._internal._Promise<FileOpenDialogResult>); }
+      if ((cast _Runtime.strictEquals(_Runtime.typeofValue(picker), 'function') : Bool)) { return cast (cast _HostWeb.openFileSystemAccessPicker__webDialog(({ final __callArgument498:Dynamic = flight._internal.backend.DomWindowBackend.value(); __callArgument498; }), (cast picker : Dynamic), ({ final __callArgument499:Dynamic = options; __callArgument499; })) : flight._internal._Promise<FileOpenDialogResult>); }
     }
-    return cast (cast _HostWeb.openLegacyFilePicker__webDialog(({ final __callArgument496:Dynamic = options; __callArgument496; })) : flight._internal._Promise<FileOpenDialogResult>);
+    return cast (cast _HostWeb.openLegacyFilePicker__webDialog(({ final __callArgument502:Dynamic = options; __callArgument502; })) : flight._internal._Promise<FileOpenDialogResult>);
     return cast null;
   }
 
   public static function openFileSystemAccessPicker__webDialog(win:flight._internal.dom.Window, picker:flight._internal._IndexedAccess<WindowWithFileSystemAccess__webDialog, String>, options:OpenFileDialogOptions):flight._internal._Promise<FileOpenDialogResult> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
-        var __flowBranch504:Dynamic;
-        if (_Runtime.truthy(({ final __hostType503 = options.signal; __hostType503 == null ? _Runtime.UNDEFINED : (cast __hostType503 : flight._internal.dom.AbortSignal).aborted; }))) {
-          __flowBranch504 = flight._internal._Async.protect(function():Dynamic {
+        var __flowBranch510:Dynamic;
+        if (_Runtime.truthy(({ final __hostType509 = options.signal; __hostType509 == null ? _Runtime.UNDEFINED : (cast __hostType509 : flight._internal.dom.AbortSignal).aborted; }))) {
+          __flowBranch510 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn({ outcome: 'cancelled' });
           });
         } else {
-          __flowBranch504 = flight._internal._Async.flowNormal();
+          __flowBranch510 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch504, function():Dynamic {
+        return flight._internal._Async.continueFlow(__flowBranch510, function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
             var pickerOptions:FileSystemAccessOpenPickerOptions__webDialog = cast _Runtime.UNDEFINED;
             var types:Null<Array<FileSystemAccessPickerType__webDialog>> = cast _Runtime.UNDEFINED;
@@ -2625,28 +2717,28 @@ class _HostWeb {
             var handles:Array<FileDialogHandle> = cast _Runtime.UNDEFINED;
             pickerOptions = { multiple: _Runtime.coalesce(options.multiple, function():Dynamic return cast false) };
             types = (cast _HostWeb.buildFileSystemAccessTypes__webDialog(options.filters) : Null<Array<FileSystemAccessPickerType__webDialog>>);
-            var __flowBranch505:Dynamic;
+            var __flowBranch511:Dynamic;
             if ((cast !_Runtime.strictEquals(types, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-              __flowBranch505 = flight._internal._Async.protect(function():Dynamic {
+              __flowBranch511 = flight._internal._Async.protect(function():Dynamic {
                 ((cast pickerOptions : FileSystemAccessOpenPickerOptions__webDialog).types = types);
                 return flight._internal._Async.flowNormal();
               });
             } else {
-              __flowBranch505 = flight._internal._Async.flowNormal();
+              __flowBranch511 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch505, function():Dynamic {
-              return flight._internal._Async.flatMap(_Runtime.callProperty(picker, 'call', cast ([win, pickerOptions] : Array<Dynamic>)), function(__awaitValue506:Dynamic):Dynamic {
-                nativeHandles = __awaitValue506;
-                var __flowBranch507:Dynamic;
+            return flight._internal._Async.continueFlow(__flowBranch511, function():Dynamic {
+              return flight._internal._Async.flatMap(_Runtime.callProperty(picker, 'call', cast ([win, pickerOptions] : Array<Dynamic>)), function(__awaitValue512:Dynamic):Dynamic {
+                nativeHandles = __awaitValue512;
+                var __flowBranch513:Dynamic;
                 if ((cast _Runtime.strictEquals(_Runtime.field(nativeHandles, 'length'), 0.0) : Bool)) {
-                  __flowBranch507 = flight._internal._Async.protect(function():Dynamic {
+                  __flowBranch513 = flight._internal._Async.protect(function():Dynamic {
                     return flight._internal._Async.flowReturn({ outcome: 'file-open-failed' });
                   });
                 } else {
-                  __flowBranch507 = flight._internal._Async.flowNormal();
+                  __flowBranch513 = flight._internal._Async.flowNormal();
                 }
-                return flight._internal._Async.continueFlow(__flowBranch507, function():Dynamic {
-                  handles = (cast _Runtime.mapArray((cast nativeHandles : Array<FileSystemFileHandle__webDialog>), function(nativeHandle:FileSystemFileHandle__webDialog, __unused0:Float, __unused1:Array<FileSystemFileHandle__webDialog>):FileDialogHandle return (cast createFileDialogHandle((cast 'File' : String), (cast (cast nativeHandle : FileSystemFileHandle__webDialog).name : String), ({ final __callArgument508:Dynamic = null; __callArgument508; }), ({ final __callArgument509:Dynamic = (cast _HostWeb.fileSystemHandleOperations__webDialog((cast nativeHandle : Dynamic)) : FileDialogHandleOperations); __callArgument509; })) : FileDialogHandle), _Runtime.UNDEFINED));
+                return flight._internal._Async.continueFlow(__flowBranch513, function():Dynamic {
+                  handles = (cast _Runtime.mapArray((cast nativeHandles : Array<FileSystemFileHandle__webDialog>), function(nativeHandle:FileSystemFileHandle__webDialog, __unused0:Float, __unused1:Array<FileSystemFileHandle__webDialog>):FileDialogHandle return (cast createFileDialogHandle((cast 'File' : String), (cast (cast nativeHandle : FileSystemFileHandle__webDialog).name : String), ({ final __callArgument514:Dynamic = null; __callArgument514; }), ({ final __callArgument515:Dynamic = (cast _HostWeb.fileSystemHandleOperations__webDialog((cast nativeHandle : Dynamic)) : FileDialogHandleOperations); __callArgument515; })) : FileDialogHandle), _Runtime.UNDEFINED));
                   return flight._internal._Async.flowReturn({ handles: (cast handles : Array<flight._internal._IndexedAccess<Dynamic, Float>>), outcome: 'selected' });
                 });
               });
@@ -2665,7 +2757,7 @@ class _HostWeb {
   }
 
   public static function openLegacyFilePicker__webDialog(options:OpenFileDialogOptions):flight._internal._Promise<FileOpenDialogResult> {
-    if (_Runtime.truthy(({ final __hostType512 = options.signal; __hostType512 == null ? _Runtime.UNDEFINED : (cast __hostType512 : flight._internal.dom.AbortSignal).aborted; }))) { return cast flight._internal._Async.resolve({ outcome: 'cancelled' }); }
+    if (_Runtime.truthy(({ final __hostType518 = options.signal; __hostType518 == null ? _Runtime.UNDEFINED : (cast __hostType518 : flight._internal.dom.AbortSignal).aborted; }))) { return cast flight._internal._Async.resolve({ outcome: 'cancelled' }); }
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'createElement')), 'function') : Bool)) : Bool) || (cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast flight._internal.backend.DomWindowBackend.value() : flight._internal.dom.Window).addEventListener), 'function') : Bool)) : Bool)) {
       return cast flight._internal._Async.resolve({ outcome: 'runtime-unavailable' });
     }
@@ -2682,17 +2774,17 @@ class _HostWeb {
       var finish:FileOpenDialogResult->Void = cast _Runtime.UNDEFINED;
       var selectedResult:Void->Null<flight._internal._Union2<{ var handles:Array<FileDialogHandle>; var outcome:String; }, { var outcome:String; }>> = cast _Runtime.UNDEFINED;
       onChange = (cast function onChange():Void {
-        finish(({ final __callArgument513:Dynamic = _Runtime.coalesce((cast selectedResult() : Null<flight._internal._Union2<{ var handles:Array<FileDialogHandle>; var outcome:String; }, { var outcome:String; }>>), function():Dynamic return cast { outcome: 'cancelled' }); __callArgument513; }));
+        finish(({ final __callArgument519:Dynamic = _Runtime.coalesce((cast selectedResult() : Null<flight._internal._Union2<{ var handles:Array<FileDialogHandle>; var outcome:String; }, { var outcome:String; }>>), function():Dynamic return cast { outcome: 'cancelled' }); __callArgument519; }));
       });
       onCancel = (cast function onCancel():Void {
-        finish(({ final __callArgument515:Dynamic = { outcome: 'cancelled' }; __callArgument515; }));
+        finish(({ final __callArgument521:Dynamic = { outcome: 'cancelled' }; __callArgument521; }));
       });
       onFocus = (cast function onFocus():Void {
         if ((cast !_Runtime.strictEquals(focusTimer, null) : Bool)) { _Runtime.clearTimeout(focusTimer); }
-        (focusTimer = cast (_Runtime.setTimeout(function():Void { finish(({ final __callArgument517:Dynamic = _Runtime.coalesce((cast selectedResult() : Null<flight._internal._Union2<{ var handles:Array<FileDialogHandle>; var outcome:String; }, { var outcome:String; }>>), function():Dynamic return cast { outcome: 'cancelled' }); __callArgument517; })); }, 0.0) : Dynamic));
+        (focusTimer = cast (_Runtime.setTimeout(function():Void { finish(({ final __callArgument523:Dynamic = _Runtime.coalesce((cast selectedResult() : Null<flight._internal._Union2<{ var handles:Array<FileDialogHandle>; var outcome:String; }, { var outcome:String; }>>), function():Dynamic return cast { outcome: 'cancelled' }); __callArgument523; })); }, 0.0) : Dynamic));
       });
       onAbort = (cast function onAbort():Void {
-        finish(({ final __callArgument519:Dynamic = { outcome: 'cancelled' }; __callArgument519; }));
+        finish(({ final __callArgument525:Dynamic = { outcome: 'cancelled' }; __callArgument525; }));
       });
       focusTimer = null;
       settled = false;
@@ -2705,7 +2797,7 @@ class _HostWeb {
         (cast input : flight._internal.dom.HTMLInputElement).removeEventListener('change', onChange);
         (cast input : flight._internal.dom.HTMLInputElement).removeEventListener('cancel', onCancel);
         flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['focus', onFocus] : Array<Dynamic>));
-        ({ final __hostTypeCall521 = options.signal; __hostTypeCall521 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall521 : flight._internal.dom.AbortSignal).removeEventListener('abort', onAbort); });
+        ({ final __hostTypeCall527 = options.signal; __hostTypeCall527 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall527 : flight._internal.dom.AbortSignal).removeEventListener('abort', onAbort); });
         if ((cast !_Runtime.strictEquals(focusTimer, null) : Bool)) { _Runtime.clearTimeout(focusTimer); }
         (focusTimer = cast (null : Dynamic));
       });
@@ -2720,18 +2812,18 @@ class _HostWeb {
         var handles:Array<FileDialogHandle> = cast _Runtime.UNDEFINED;
         files = (cast input : flight._internal.dom.HTMLInputElement).files;
         if ((cast ((cast _Runtime.strictEquals(files, null) : Bool) || (cast _Runtime.strictEquals((cast files : flight._internal.dom.FileList).length, 0.0) : Bool)) : Bool)) { return cast null; }
-        handles = (cast (cast _Runtime.toArray(files, function(file:flight._internal.dom.File, __unused3:Float):FileDialogHandle return (cast createFileDialogHandle((cast 'File' : String), (cast (cast file : flight._internal.dom.File).name : String), ({ final __callArgument522:Dynamic = null; __callArgument522; }), ({ final __callArgument525:Dynamic = (cast _HostWeb.retainedFileOperations__webDialog(({ final __callArgument523:Dynamic = file; __callArgument523; })) : FileDialogHandleOperations); __callArgument525; })) : FileDialogHandle)) : Array<FileDialogHandle>) : Array<FileDialogHandle>);
+        handles = (cast (cast _Runtime.toArray(files, function(file:flight._internal.dom.File, __unused3:Float):FileDialogHandle return (cast createFileDialogHandle((cast 'File' : String), (cast (cast file : flight._internal.dom.File).name : String), ({ final __callArgument528:Dynamic = null; __callArgument528; }), ({ final __callArgument531:Dynamic = (cast _HostWeb.retainedFileOperations__webDialog(({ final __callArgument529:Dynamic = file; __callArgument529; })) : FileDialogHandleOperations); __callArgument531; })) : FileDialogHandle)) : Array<FileDialogHandle>) : Array<FileDialogHandle>);
         return cast { handles: (cast handles : Array<flight._internal._IndexedAccess<Dynamic, Float>>), outcome: 'selected' };
         return cast _Runtime.UNDEFINED;
       });
       (cast input : flight._internal.dom.HTMLInputElement).addEventListener('change', onChange);
       (cast input : flight._internal.dom.HTMLInputElement).addEventListener('cancel', onCancel);
       flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['focus', onFocus] : Array<Dynamic>));
-      ({ final __hostTypeCall530 = options.signal; __hostTypeCall530 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall530 : flight._internal.dom.AbortSignal).addEventListener('abort', onAbort, { once: true }); });
+      ({ final __hostTypeCall536 = options.signal; __hostTypeCall536 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall536 : flight._internal.dom.AbortSignal).addEventListener('abort', onAbort, { once: true }); });
       try {
         (cast input : flight._internal.dom.HTMLInputElement).click();
       } catch (__error:Dynamic) {
-        finish(({ final __callArgument531:Dynamic = { outcome: 'file-open-failed' }; __callArgument531; }));
+        finish(({ final __callArgument537:Dynamic = { outcome: 'file-open-failed' }; __callArgument537; }));
       }
     });
     return cast null;
@@ -2741,63 +2833,63 @@ class _HostWeb {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var picker:Null<Null<FileSystemAccessSavePickerOptions__webDialog>->flight._internal._Promise<FileSystemFileHandle__webDialog>> = cast _Runtime.UNDEFINED;
-        var __flowBranch539:Dynamic;
-        if (_Runtime.truthy(({ final __hostType538 = options.signal; __hostType538 == null ? _Runtime.UNDEFINED : (cast __hostType538 : flight._internal.dom.AbortSignal).aborted; }))) {
-          __flowBranch539 = flight._internal._Async.protect(function():Dynamic {
+        var __flowBranch545:Dynamic;
+        if (_Runtime.truthy(({ final __hostType544 = options.signal; __hostType544 == null ? _Runtime.UNDEFINED : (cast __hostType544 : flight._internal.dom.AbortSignal).aborted; }))) {
+          __flowBranch545 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn({ outcome: 'cancelled' });
           });
         } else {
-          __flowBranch539 = flight._internal._Async.flowNormal();
+          __flowBranch545 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch539, function():Dynamic {
-          var __flowBranch540:Dynamic;
+        return flight._internal._Async.continueFlow(__flowBranch545, function():Dynamic {
+          var __flowBranch546:Dynamic;
           if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) {
-            __flowBranch540 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch546 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn({ outcome: 'runtime-unavailable' });
             });
           } else {
-            __flowBranch540 = flight._internal._Async.flowNormal();
+            __flowBranch546 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch540, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch546, function():Dynamic {
             picker = (cast (cast flight._internal.backend.DomWindowBackend.value() : WindowWithFileSystemAccess__webDialog) : WindowWithFileSystemAccess__webDialog).showSaveFilePicker;
-            var __flowBranch541:Dynamic;
+            var __flowBranch547:Dynamic;
             if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(picker), 'function') : Bool)) {
-              __flowBranch541 = flight._internal._Async.protect(function():Dynamic {
+              __flowBranch547 = flight._internal._Async.protect(function():Dynamic {
                 return flight._internal._Async.flowReturn({ outcome: 'runtime-unavailable' });
               });
             } else {
-              __flowBranch541 = flight._internal._Async.flowNormal();
+              __flowBranch547 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch541, function():Dynamic {
+            return flight._internal._Async.continueFlow(__flowBranch547, function():Dynamic {
               return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
                 var pickerOptions:FileSystemAccessSavePickerOptions__webDialog = cast _Runtime.UNDEFINED;
                 var types:Null<Array<FileSystemAccessPickerType__webDialog>> = cast _Runtime.UNDEFINED;
                 var nativeHandle:FileSystemFileHandle__webDialog = cast _Runtime.UNDEFINED;
                 pickerOptions = {  };
-                var __flowBranch542:Dynamic;
+                var __flowBranch548:Dynamic;
                 if ((cast !_Runtime.strictEquals(options.defaultName, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-                  __flowBranch542 = flight._internal._Async.protect(function():Dynamic {
+                  __flowBranch548 = flight._internal._Async.protect(function():Dynamic {
                     ((cast pickerOptions : FileSystemAccessSavePickerOptions__webDialog).suggestedName = options.defaultName);
                     return flight._internal._Async.flowNormal();
                   });
                 } else {
-                  __flowBranch542 = flight._internal._Async.flowNormal();
+                  __flowBranch548 = flight._internal._Async.flowNormal();
                 }
-                return flight._internal._Async.continueFlow(__flowBranch542, function():Dynamic {
+                return flight._internal._Async.continueFlow(__flowBranch548, function():Dynamic {
                   types = (cast _HostWeb.buildFileSystemAccessTypes__webDialog(options.filters) : Null<Array<FileSystemAccessPickerType__webDialog>>);
-                  var __flowBranch543:Dynamic;
+                  var __flowBranch549:Dynamic;
                   if ((cast !_Runtime.strictEquals(types, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-                    __flowBranch543 = flight._internal._Async.protect(function():Dynamic {
+                    __flowBranch549 = flight._internal._Async.protect(function():Dynamic {
                       ((cast pickerOptions : FileSystemAccessSavePickerOptions__webDialog).types = types);
                       return flight._internal._Async.flowNormal();
                     });
                   } else {
-                    __flowBranch543 = flight._internal._Async.flowNormal();
+                    __flowBranch549 = flight._internal._Async.flowNormal();
                   }
-                  return flight._internal._Async.continueFlow(__flowBranch543, function():Dynamic {
-                    return flight._internal._Async.flatMap(_Runtime.callProperty(picker, 'call', cast ([flight._internal.backend.DomWindowBackend.value(), pickerOptions] : Array<Dynamic>)), function(__awaitValue544:Dynamic):Dynamic {
-                      nativeHandle = __awaitValue544;
-                      return flight._internal._Async.flowReturn({ handle: (cast createFileDialogHandle((cast 'File' : String), (cast (cast nativeHandle : FileSystemFileHandle__webDialog).name : String), ({ final __callArgument545:Dynamic = null; __callArgument545; }), ({ final __callArgument546:Dynamic = (cast _HostWeb.fileSystemHandleOperations__webDialog((cast nativeHandle : Dynamic)) : FileDialogHandleOperations); __callArgument546; })) : FileDialogHandle), outcome: 'selected' });
+                  return flight._internal._Async.continueFlow(__flowBranch549, function():Dynamic {
+                    return flight._internal._Async.flatMap(_Runtime.callProperty(picker, 'call', cast ([flight._internal.backend.DomWindowBackend.value(), pickerOptions] : Array<Dynamic>)), function(__awaitValue550:Dynamic):Dynamic {
+                      nativeHandle = __awaitValue550;
+                      return flight._internal._Async.flowReturn({ handle: (cast createFileDialogHandle((cast 'File' : String), (cast (cast nativeHandle : FileSystemFileHandle__webDialog).name : String), ({ final __callArgument551:Dynamic = null; __callArgument551; }), ({ final __callArgument552:Dynamic = (cast _HostWeb.fileSystemHandleOperations__webDialog((cast nativeHandle : Dynamic)) : FileDialogHandleOperations); __callArgument552; })) : FileDialogHandle), outcome: 'selected' });
                     });
                   });
                 });
@@ -2816,6 +2908,405 @@ class _HostWeb {
     );
   }
 
+  public static function openImage__webDialog(?options:OpenImageDialogOptions):flight._internal._Promise<ImageOpenDialogResult> {
+    return cast flight._internal._Async.finishFlow(
+      flight._internal._Async.protect(function():Dynamic {
+        if (options == null) options = cast ({  } : Dynamic);
+        var picked:flight._internal._Union2<{ var file:flight._internal.dom.File; }, { var outcome:String; }> = cast _Runtime.UNDEFINED;
+        var dataUrl:Null<String> = cast _Runtime.UNDEFINED;
+        var image:Null<flight._internal._Union2<String, DialogImage>> = cast _Runtime.UNDEFINED;
+        return flight._internal._Async.flatMap((cast (cast _HostWeb.pickMediaFile__webDialog : String->Null<String>->Null<flight._internal.dom.AbortSignal>->String->flight._internal._Promise<flight._internal._Union2<{ var file:flight._internal.dom.File; }, { var outcome:String; }>>)((cast 'image/*' : String), ({ final __callArgument564:Dynamic = _Runtime.field(_Runtime, 'UNDEFINED'); __callArgument564; }), _Runtime.field(options, 'signal'), (cast 'image-open-failed' : String)) : flight._internal._Promise<flight._internal._Union2<{ var file:flight._internal.dom.File; }, { var outcome:String; }>>), function(__awaitValue557:Dynamic):Dynamic {
+          picked = __awaitValue557;
+          var __flowBranch558:Dynamic;
+          if ((cast _Runtime.hasField(picked, 'outcome') : Bool)) {
+            __flowBranch558 = flight._internal._Async.protect(function():Dynamic {
+              return flight._internal._Async.flowReturn(picked);
+            });
+          } else {
+            __flowBranch558 = flight._internal._Async.flowNormal();
+          }
+          return flight._internal._Async.continueFlow(__flowBranch558, function():Dynamic {
+            return flight._internal._Async.flatMap((cast _HostWeb.readDataUrl__webDialog((cast picked : { var file:flight._internal.dom.File; }).file, _Runtime.field(options, 'signal')) : flight._internal._Promise<Null<String>>), function(__awaitValue559:Dynamic):Dynamic {
+              dataUrl = __awaitValue559;
+              var __flowBranch560:Dynamic;
+              if ((cast _Runtime.strictEquals(dataUrl, 'cancelled') : Bool)) {
+                __flowBranch560 = flight._internal._Async.protect(function():Dynamic {
+                  return flight._internal._Async.flowReturn({ outcome: 'cancelled' });
+                });
+              } else {
+                __flowBranch560 = flight._internal._Async.flowNormal();
+              }
+              return flight._internal._Async.continueFlow(__flowBranch560, function():Dynamic {
+                var __flowBranch561:Dynamic;
+                if ((cast _Runtime.strictEquals(dataUrl, null) : Bool)) {
+                  __flowBranch561 = flight._internal._Async.protect(function():Dynamic {
+                    return flight._internal._Async.flowReturn({ outcome: 'image-open-failed' });
+                  });
+                } else {
+                  __flowBranch561 = flight._internal._Async.flowNormal();
+                }
+                return flight._internal._Async.continueFlow(__flowBranch561, function():Dynamic {
+                  return flight._internal._Async.flatMap((cast _HostWeb.decodeImage__webDialog((cast dataUrl : String), (cast (cast (cast picked : { var file:flight._internal.dom.File; }).file : flight._internal.dom.File).type : String), _Runtime.field(options, 'signal')) : flight._internal._Promise<Null<flight._internal._Union2<String, DialogImage>>>), function(__awaitValue562:Dynamic):Dynamic {
+                    image = __awaitValue562;
+                    var __flowBranch563:Dynamic;
+                    if ((cast _Runtime.strictEquals(image, 'cancelled') : Bool)) {
+                      __flowBranch563 = flight._internal._Async.protect(function():Dynamic {
+                        return flight._internal._Async.flowReturn({ outcome: 'cancelled' });
+                      });
+                    } else {
+                      __flowBranch563 = flight._internal._Async.flowNormal();
+                    }
+                    return flight._internal._Async.continueFlow(__flowBranch563, function():Dynamic {
+                      return flight._internal._Async.flowReturn(((cast _Runtime.strictEquals(image, null) : Bool) ? (cast { outcome: 'image-open-failed' } : Dynamic) : (cast { image: image, outcome: 'selected' } : Dynamic)));
+                    });
+                  });
+                });
+              });
+            });
+          });
+        });
+      })
+    );
+  }
+
+  public static function capturePhoto__webDialog(?options:CapturePhotoDialogOptions):flight._internal._Promise<PhotoCaptureDialogResult> {
+    return cast flight._internal._Async.finishFlow(
+      flight._internal._Async.protect(function():Dynamic {
+        if (options == null) options = cast ({  } : Dynamic);
+        var picked:flight._internal._Union2<{ var file:flight._internal.dom.File; }, { var outcome:String; }> = cast _Runtime.UNDEFINED;
+        var dataUrl:Null<String> = cast _Runtime.UNDEFINED;
+        var photo:Null<flight._internal._Union2<String, DialogImage>> = cast _Runtime.UNDEFINED;
+        return flight._internal._Async.flatMap((cast (cast _HostWeb.pickMediaFile__webDialog : String->Null<String>->Null<flight._internal.dom.AbortSignal>->String->flight._internal._Promise<flight._internal._Union2<{ var file:flight._internal.dom.File; }, { var outcome:String; }>>)((cast 'image/*' : String), ({ final __callArgument575:Dynamic = _Runtime.coalesce(_Runtime.field(options, 'facingMode'), function():Dynamic return cast 'environment'); __callArgument575; }), _Runtime.field(options, 'signal'), (cast 'photo-capture-failed' : String)) : flight._internal._Promise<flight._internal._Union2<{ var file:flight._internal.dom.File; }, { var outcome:String; }>>), function(__awaitValue568:Dynamic):Dynamic {
+          picked = __awaitValue568;
+          var __flowBranch569:Dynamic;
+          if ((cast _Runtime.hasField(picked, 'outcome') : Bool)) {
+            __flowBranch569 = flight._internal._Async.protect(function():Dynamic {
+              return flight._internal._Async.flowReturn(picked);
+            });
+          } else {
+            __flowBranch569 = flight._internal._Async.flowNormal();
+          }
+          return flight._internal._Async.continueFlow(__flowBranch569, function():Dynamic {
+            return flight._internal._Async.flatMap((cast _HostWeb.readDataUrl__webDialog((cast picked : { var file:flight._internal.dom.File; }).file, _Runtime.field(options, 'signal')) : flight._internal._Promise<Null<String>>), function(__awaitValue570:Dynamic):Dynamic {
+              dataUrl = __awaitValue570;
+              var __flowBranch571:Dynamic;
+              if ((cast _Runtime.strictEquals(dataUrl, 'cancelled') : Bool)) {
+                __flowBranch571 = flight._internal._Async.protect(function():Dynamic {
+                  return flight._internal._Async.flowReturn({ outcome: 'cancelled' });
+                });
+              } else {
+                __flowBranch571 = flight._internal._Async.flowNormal();
+              }
+              return flight._internal._Async.continueFlow(__flowBranch571, function():Dynamic {
+                var __flowBranch572:Dynamic;
+                if ((cast _Runtime.strictEquals(dataUrl, null) : Bool)) {
+                  __flowBranch572 = flight._internal._Async.protect(function():Dynamic {
+                    return flight._internal._Async.flowReturn({ outcome: 'photo-capture-failed' });
+                  });
+                } else {
+                  __flowBranch572 = flight._internal._Async.flowNormal();
+                }
+                return flight._internal._Async.continueFlow(__flowBranch572, function():Dynamic {
+                  return flight._internal._Async.flatMap((cast _HostWeb.decodeImage__webDialog((cast dataUrl : String), (cast (cast (cast picked : { var file:flight._internal.dom.File; }).file : flight._internal.dom.File).type : String), _Runtime.field(options, 'signal')) : flight._internal._Promise<Null<flight._internal._Union2<String, DialogImage>>>), function(__awaitValue573:Dynamic):Dynamic {
+                    photo = __awaitValue573;
+                    var __flowBranch574:Dynamic;
+                    if ((cast _Runtime.strictEquals(photo, 'cancelled') : Bool)) {
+                      __flowBranch574 = flight._internal._Async.protect(function():Dynamic {
+                        return flight._internal._Async.flowReturn({ outcome: 'cancelled' });
+                      });
+                    } else {
+                      __flowBranch574 = flight._internal._Async.flowNormal();
+                    }
+                    return flight._internal._Async.continueFlow(__flowBranch574, function():Dynamic {
+                      return flight._internal._Async.flowReturn(((cast _Runtime.strictEquals(photo, null) : Bool) ? (cast { outcome: 'photo-capture-failed' } : Dynamic) : (cast { outcome: 'selected', photo: photo } : Dynamic)));
+                    });
+                  });
+                });
+              });
+            });
+          });
+        });
+      })
+    );
+  }
+
+  public static function captureVideo__webDialog(?options:CaptureVideoDialogOptions):flight._internal._Promise<VideoCaptureDialogResult> {
+    return cast flight._internal._Async.finishFlow(
+      flight._internal._Async.protect(function():Dynamic {
+        if (options == null) options = cast ({  } : Dynamic);
+        var picked:flight._internal._Union2<{ var file:flight._internal.dom.File; }, { var outcome:String; }> = cast _Runtime.UNDEFINED;
+        var dataUrl:Null<String> = cast _Runtime.UNDEFINED;
+        var video:Null<flight._internal._Union2<String, DialogVideo>> = cast _Runtime.UNDEFINED;
+        return flight._internal._Async.flatMap((cast (cast _HostWeb.pickMediaFile__webDialog : String->Null<String>->Null<flight._internal.dom.AbortSignal>->String->flight._internal._Promise<flight._internal._Union2<{ var file:flight._internal.dom.File; }, { var outcome:String; }>>)((cast 'video/*' : String), ({ final __callArgument586:Dynamic = _Runtime.coalesce(_Runtime.field(options, 'facingMode'), function():Dynamic return cast 'environment'); __callArgument586; }), _Runtime.field(options, 'signal'), (cast 'video-capture-failed' : String)) : flight._internal._Promise<flight._internal._Union2<{ var file:flight._internal.dom.File; }, { var outcome:String; }>>), function(__awaitValue579:Dynamic):Dynamic {
+          picked = __awaitValue579;
+          var __flowBranch580:Dynamic;
+          if ((cast _Runtime.hasField(picked, 'outcome') : Bool)) {
+            __flowBranch580 = flight._internal._Async.protect(function():Dynamic {
+              return flight._internal._Async.flowReturn(picked);
+            });
+          } else {
+            __flowBranch580 = flight._internal._Async.flowNormal();
+          }
+          return flight._internal._Async.continueFlow(__flowBranch580, function():Dynamic {
+            return flight._internal._Async.flatMap((cast _HostWeb.readDataUrl__webDialog((cast picked : { var file:flight._internal.dom.File; }).file, _Runtime.field(options, 'signal')) : flight._internal._Promise<Null<String>>), function(__awaitValue581:Dynamic):Dynamic {
+              dataUrl = __awaitValue581;
+              var __flowBranch582:Dynamic;
+              if ((cast _Runtime.strictEquals(dataUrl, 'cancelled') : Bool)) {
+                __flowBranch582 = flight._internal._Async.protect(function():Dynamic {
+                  return flight._internal._Async.flowReturn({ outcome: 'cancelled' });
+                });
+              } else {
+                __flowBranch582 = flight._internal._Async.flowNormal();
+              }
+              return flight._internal._Async.continueFlow(__flowBranch582, function():Dynamic {
+                var __flowBranch583:Dynamic;
+                if ((cast _Runtime.strictEquals(dataUrl, null) : Bool)) {
+                  __flowBranch583 = flight._internal._Async.protect(function():Dynamic {
+                    return flight._internal._Async.flowReturn({ outcome: 'video-capture-failed' });
+                  });
+                } else {
+                  __flowBranch583 = flight._internal._Async.flowNormal();
+                }
+                return flight._internal._Async.continueFlow(__flowBranch583, function():Dynamic {
+                  return flight._internal._Async.flatMap((cast _HostWeb.decodeVideo__webDialog((cast dataUrl : String), (cast (cast (cast picked : { var file:flight._internal.dom.File; }).file : flight._internal.dom.File).type : String), _Runtime.field(options, 'signal')) : flight._internal._Promise<Null<flight._internal._Union2<String, DialogVideo>>>), function(__awaitValue584:Dynamic):Dynamic {
+                    video = __awaitValue584;
+                    var __flowBranch585:Dynamic;
+                    if ((cast _Runtime.strictEquals(video, 'cancelled') : Bool)) {
+                      __flowBranch585 = flight._internal._Async.protect(function():Dynamic {
+                        return flight._internal._Async.flowReturn({ outcome: 'cancelled' });
+                      });
+                    } else {
+                      __flowBranch585 = flight._internal._Async.flowNormal();
+                    }
+                    return flight._internal._Async.continueFlow(__flowBranch585, function():Dynamic {
+                      return flight._internal._Async.flowReturn(((cast _Runtime.strictEquals(video, null) : Bool) ? (cast { outcome: 'video-capture-failed' } : Dynamic) : (cast { outcome: 'selected', video: video } : Dynamic)));
+                    });
+                  });
+                });
+              });
+            });
+          });
+        });
+      })
+    );
+  }
+
+  public static function pickMediaFile__webDialog<Failure:MediaPickerFailure__webDialog>(accept:String, capture:Null<String>, signal:Null<flight._internal.dom.AbortSignal>, failure:Failure):flight._internal._Promise<flight._internal._Union2<{ var file:flight._internal.dom.File; }, { var outcome:flight._internal._Union2<String, Failure>; }>> {
+    if (_Runtime.truthy(({ final __hostType588 = signal; __hostType588 == null ? _Runtime.UNDEFINED : __hostType588.aborted; }))) { return cast flight._internal._Async.resolve({ outcome: 'cancelled' }); }
+    if ((cast ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'createElement')), 'function') : Bool)) : Bool) || (cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('FileReader'), 'undefined') : Bool)) : Bool)) {
+      return cast flight._internal._Async.resolve({ outcome: 'runtime-unavailable' });
+    }
+    return cast flight._internal._Async.create(function(resolve:flight._internal._Any, __unused4:flight._internal._Any):Void {
+      var onChange:Void->Void = cast _Runtime.UNDEFINED;
+      var onCancel:Void->Void = cast _Runtime.UNDEFINED;
+      var onAbort:Void->Void = cast _Runtime.UNDEFINED;
+      var settled:Bool = cast _Runtime.UNDEFINED;
+      var input:flight._internal.dom.HTMLInputElement = cast _Runtime.UNDEFINED;
+      var cleanup:Void->Void = cast _Runtime.UNDEFINED;
+      var finish:flight._internal._Union2<{ var file:flight._internal.dom.File; }, { var outcome:flight._internal._Union2<String, Failure>; }>->Void = cast _Runtime.UNDEFINED;
+      onChange = (cast function onChange():Void {
+        var file:Null<flight._internal.dom.File> = cast _Runtime.UNDEFINED;
+        file = _Runtime.optionalIndex((cast input : flight._internal.dom.HTMLInputElement).files, 0.0);
+        finish((cast ((cast _Runtime.strictEquals(file, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { outcome: 'cancelled' } : Dynamic) : (cast { file: file } : Dynamic)) : Dynamic));
+      });
+      onCancel = (cast function onCancel():Void {
+        finish((cast { outcome: 'cancelled' } : Dynamic));
+      });
+      onAbort = (cast function onAbort():Void {
+        finish((cast { outcome: 'cancelled' } : Dynamic));
+      });
+      settled = false;
+      input = flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['input'] : Array<Dynamic>));
+      ((cast input : flight._internal.dom.HTMLInputElement).type = 'file');
+      ((cast input : flight._internal.dom.HTMLInputElement).accept = accept);
+      if ((cast !_Runtime.strictEquals(capture, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast input : flight._internal.dom.HTMLInputElement).capture = capture); }
+      cleanup = (cast function():Void {
+        (cast input : flight._internal.dom.HTMLInputElement).removeEventListener('change', onChange);
+        (cast input : flight._internal.dom.HTMLInputElement).removeEventListener('cancel', onCancel);
+        ({ final __hostTypeCall589 = signal; __hostTypeCall589 == null ? _Runtime.UNDEFINED : __hostTypeCall589.removeEventListener('abort', onAbort); });
+      });
+      finish = (cast function(result:flight._internal._Union2<{ var file:flight._internal.dom.File; }, { var outcome:flight._internal._Union2<String, Failure>; }>):Void {
+        if ((cast settled : Bool)) { return; }
+        (settled = cast (true : Dynamic));
+        cleanup();
+        resolve((cast result : flight._internal._Any));
+      });
+      (cast input : flight._internal.dom.HTMLInputElement).addEventListener('change', onChange);
+      (cast input : flight._internal.dom.HTMLInputElement).addEventListener('cancel', onCancel);
+      ({ final __hostTypeCall590 = signal; __hostTypeCall590 == null ? _Runtime.UNDEFINED : __hostTypeCall590.addEventListener('abort', onAbort, { once: true }); });
+      try {
+        (cast input : flight._internal.dom.HTMLInputElement).click();
+      } catch (error:Dynamic) {
+        finish((cast { outcome: (cast _HostWeb.classifyPickerFailure__webDialog((cast error : flight._internal._Any), (cast failure : Dynamic)) : flight._internal._Union2<String, Failure>) } : Dynamic));
+      }
+    });
+    return cast null;
+  }
+
+  public static function readDataUrl__webDialog(file:flight._internal.dom.File, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<String>> {
+    if (_Runtime.truthy(({ final __hostType591 = signal; __hostType591 == null ? _Runtime.UNDEFINED : __hostType591.aborted; }))) { return cast flight._internal._Async.resolve('cancelled'); }
+    if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('FileReader'), 'undefined') : Bool)) { return cast flight._internal._Async.resolve(null); }
+    return cast flight._internal._Async.create(function(resolve:flight._internal._Any, __unused5:flight._internal._Any):Void {
+      var onLoad:Void->Void = cast _Runtime.UNDEFINED;
+      var onError:Void->Void = cast _Runtime.UNDEFINED;
+      var onReaderAbort:Void->Void = cast _Runtime.UNDEFINED;
+      var onSignalAbort:Void->Void = cast _Runtime.UNDEFINED;
+      var reader:flight._internal.dom.FileReader = cast _Runtime.UNDEFINED;
+      var settled:Bool = cast _Runtime.UNDEFINED;
+      var cleanup:Void->Void = cast _Runtime.UNDEFINED;
+      var finish:Null<String>->Void = cast _Runtime.UNDEFINED;
+      onLoad = (cast function onLoad():Void {
+        finish(((cast _Runtime.strictEquals(_Runtime.typeofValue(reader.result), 'string') : Bool) ? (cast reader.result : Dynamic) : (cast null : Dynamic)));
+      });
+      onError = (cast function onError():Void {
+        finish(({ final __callArgument592:Dynamic = null; __callArgument592; }));
+      });
+      onReaderAbort = (cast function onReaderAbort():Void {
+        finish(({ final __callArgument594:Dynamic = 'cancelled'; __callArgument594; }));
+      });
+      onSignalAbort = (cast function onSignalAbort():Void {
+        reader.abort();
+        finish(({ final __callArgument596:Dynamic = 'cancelled'; __callArgument596; }));
+      });
+      try {
+        (reader = cast (_Runtime.construct(flight._internal._HostValueLut.get('FileReader'), []) : Dynamic));
+      } catch (__error:Dynamic) {
+        resolve(({ final __callArgument598:Dynamic = null; __callArgument598; }));
+        return;
+      }
+      settled = false;
+      cleanup = (cast function():Void {
+        reader.removeEventListener('load', onLoad);
+        reader.removeEventListener('error', onError);
+        reader.removeEventListener('abort', onReaderAbort);
+        ({ final __hostTypeCall600 = signal; __hostTypeCall600 == null ? _Runtime.UNDEFINED : __hostTypeCall600.removeEventListener('abort', onSignalAbort); });
+      });
+      finish = (cast function(result:Null<String>):Void {
+        if ((cast settled : Bool)) { return; }
+        (settled = cast (true : Dynamic));
+        cleanup();
+        resolve(({ final __callArgument601:Dynamic = result; __callArgument601; }));
+      });
+      reader.addEventListener('load', onLoad);
+      reader.addEventListener('error', onError);
+      reader.addEventListener('abort', onReaderAbort);
+      ({ final __hostTypeCall603 = signal; __hostTypeCall603 == null ? _Runtime.UNDEFINED : __hostTypeCall603.addEventListener('abort', onSignalAbort, { once: true }); });
+      try {
+        reader.readAsDataURL(file);
+      } catch (__error:Dynamic) {
+        finish(({ final __callArgument604:Dynamic = null; __callArgument604; }));
+      }
+    });
+    return cast null;
+  }
+
+  public static function decodeImage__webDialog(dataUrl:String, mimeType:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<flight._internal._Union2<DialogImage, String>>> {
+    if (_Runtime.truthy(({ final __hostType606 = signal; __hostType606 == null ? _Runtime.UNDEFINED : __hostType606.aborted; }))) { return cast flight._internal._Async.resolve('cancelled'); }
+    if ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'createElement')), 'function') : Bool)) : Bool)) { return cast flight._internal._Async.resolve(null); }
+    return cast flight._internal._Async.create(function(resolve:flight._internal._Any, __unused6:flight._internal._Any):Void {
+      var onAbort:Void->Void = cast _Runtime.UNDEFINED;
+      var image:flight._internal.dom.HTMLImageElement = cast _Runtime.UNDEFINED;
+      var settled:Bool = cast _Runtime.UNDEFINED;
+      var cleanup:Void->Void = cast _Runtime.UNDEFINED;
+      var finish:Null<flight._internal._Union2<String, DialogImage>>->Void = cast _Runtime.UNDEFINED;
+      onAbort = (cast function onAbort():Void {
+        finish(({ final __callArgument607:Dynamic = 'cancelled'; __callArgument607; }));
+      });
+      try {
+        (image = cast (flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['img'] : Array<Dynamic>)) : Dynamic));
+      } catch (__error:Dynamic) {
+        resolve(({ final __callArgument609:Dynamic = null; __callArgument609; }));
+        return;
+      }
+      settled = false;
+      cleanup = (cast function():Void {
+        (image.onload = null);
+        (image.onerror = null);
+        ({ final __hostTypeCall611 = signal; __hostTypeCall611 == null ? _Runtime.UNDEFINED : __hostTypeCall611.removeEventListener('abort', onAbort); });
+      });
+      finish = (cast function(result:Null<flight._internal._Union2<DialogImage, String>>):Void {
+        if ((cast settled : Bool)) { return; }
+        (settled = cast (true : Dynamic));
+        cleanup();
+        resolve(({ final __callArgument612:Dynamic = result; __callArgument612; }));
+      });
+      (image.onload = function(__unused9:flight._internal.dom.Event):Void { _Runtime.callValue(function(__unused7:flight._internal.dom.Event):Void {
+        var __destructure8:Dynamic = cast _Runtime.UNDEFINED;
+        var height:Float = cast _Runtime.UNDEFINED;
+        var width:Float = cast _Runtime.UNDEFINED;
+        __destructure8 = image;
+        height = _Runtime.field(__destructure8, 'naturalHeight');
+        width = _Runtime.field(__destructure8, 'naturalWidth');
+        finish(({ final __callArgument614:Dynamic = ((cast ((cast ((cast ((cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isFinite', cast ([height] : Array<Dynamic>)) : Bool) && (cast ((cast height : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isFinite', cast ([width] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast width : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast { dataUrl: dataUrl, height: height, mimeType: mimeType, width: width } : Dynamic) : (cast null : Dynamic)); __callArgument614; }));
+      }, cast ([] : Array<Dynamic>)); });
+      (image.onerror = function(__unused15:flight._internal._Union2<String, flight._internal.dom.Event>, __unused16:Null<String>, __unused17:Null<Float>, __unused18:Null<Float>, __unused19:Null<flight._internal._Any>):Void { _Runtime.callValue(function(__unused10:flight._internal._Union2<String, flight._internal.dom.Event>, __unused11:Null<String>, __unused12:Null<Float>, __unused13:Null<Float>, __unused14:Null<flight._internal._Any>):Void { finish(({ final __callArgument616:Dynamic = null; __callArgument616; })); }, cast ([] : Array<Dynamic>)); });
+      ({ final __hostTypeCall618 = signal; __hostTypeCall618 == null ? _Runtime.UNDEFINED : __hostTypeCall618.addEventListener('abort', onAbort, { once: true }); });
+      try {
+        (image.src = dataUrl);
+      } catch (__error:Dynamic) {
+        finish(({ final __callArgument619:Dynamic = null; __callArgument619; }));
+      }
+    });
+    return cast null;
+  }
+
+  public static function decodeVideo__webDialog(dataUrl:String, mimeType:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<flight._internal._Union2<DialogVideo, String>>> {
+    if (_Runtime.truthy(({ final __hostType621 = signal; __hostType621 == null ? _Runtime.UNDEFINED : __hostType621.aborted; }))) { return cast flight._internal._Async.resolve('cancelled'); }
+    if ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'createElement')), 'function') : Bool)) : Bool)) { return cast flight._internal._Async.resolve(null); }
+    return cast flight._internal._Async.create(function(resolve:flight._internal._Any, __unused20:flight._internal._Any):Void {
+      var onLoadedMetadata:Void->Void = cast _Runtime.UNDEFINED;
+      var onError:Void->Void = cast _Runtime.UNDEFINED;
+      var onAbort:Void->Void = cast _Runtime.UNDEFINED;
+      var video:flight._internal.dom.HTMLVideoElement = cast _Runtime.UNDEFINED;
+      var settled:Bool = cast _Runtime.UNDEFINED;
+      var cleanup:Void->Void = cast _Runtime.UNDEFINED;
+      var finish:Null<flight._internal._Union2<String, DialogVideo>>->Void = cast _Runtime.UNDEFINED;
+      onLoadedMetadata = (cast function onLoadedMetadata():Void {
+        var __destructure21:Dynamic = cast _Runtime.UNDEFINED;
+        var duration:Float = cast _Runtime.UNDEFINED;
+        __destructure21 = video;
+        duration = _Runtime.field(__destructure21, 'duration');
+        finish(({ final __callArgument622:Dynamic = ((cast ((cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isFinite', cast ([duration] : Array<Dynamic>)) : Bool) && (cast ((cast duration : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast { dataUrl: dataUrl, duration: duration, mimeType: mimeType } : Dynamic) : (cast null : Dynamic)); __callArgument622; }));
+      });
+      onError = (cast function onError():Void {
+        finish(({ final __callArgument624:Dynamic = null; __callArgument624; }));
+      });
+      onAbort = (cast function onAbort():Void {
+        finish(({ final __callArgument626:Dynamic = 'cancelled'; __callArgument626; }));
+      });
+      try {
+        (video = cast (flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['video'] : Array<Dynamic>)) : Dynamic));
+      } catch (__error:Dynamic) {
+        resolve(({ final __callArgument628:Dynamic = null; __callArgument628; }));
+        return;
+      }
+      settled = false;
+      cleanup = (cast function():Void {
+        video.removeEventListener('loadedmetadata', onLoadedMetadata);
+        video.removeEventListener('error', onError);
+        ({ final __hostTypeCall630 = signal; __hostTypeCall630 == null ? _Runtime.UNDEFINED : __hostTypeCall630.removeEventListener('abort', onAbort); });
+        video.removeAttribute('src');
+      });
+      finish = (cast function(result:Null<flight._internal._Union2<DialogVideo, String>>):Void {
+        if ((cast settled : Bool)) { return; }
+        (settled = cast (true : Dynamic));
+        cleanup();
+        resolve(({ final __callArgument631:Dynamic = result; __callArgument631; }));
+      });
+      (video.preload = 'metadata');
+      video.addEventListener('loadedmetadata', onLoadedMetadata);
+      video.addEventListener('error', onError);
+      ({ final __hostTypeCall633 = signal; __hostTypeCall633 == null ? _Runtime.UNDEFINED : __hostTypeCall633.addEventListener('abort', onAbort, { once: true }); });
+      try {
+        (video.src = dataUrl);
+        video.load();
+      } catch (__error:Dynamic) {
+        finish(({ final __callArgument634:Dynamic = null; __callArgument634; }));
+      }
+    });
+    return cast null;
+  }
+
   public static function buildFileSystemAccessTypes__webDialog(filters:Null<Array<FileDialogFilter>>):Null<Array<FileSystemAccessPickerType__webDialog>> {
     var types:Array<FileSystemAccessPickerType__webDialog> = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(filters, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(filters, 'length'), 0.0) : Bool)) : Bool)) { return cast _Runtime.field(_Runtime, 'UNDEFINED'); }
@@ -2823,10 +3314,10 @@ class _HostWeb {
     for (filter in _Runtime.iterable(filters)) {
       var accept:flight._internal._Record<String, Array<String>> = cast _Runtime.UNDEFINED;
       accept = (cast {  });
-      for (__iteration4 in _Runtime.iterable(flight._internal.DynamicObject.entries(filter.accept))) {
-        var mimeType:String = flight._internal._StaticIndex.readArray(__iteration4, 0.0);
-        var extensions:Array<String> = flight._internal._StaticIndex.readArray(__iteration4, 1.0);
-        var normalized:Array<String> = (cast _HostWeb.normalizeExtensions__webDialog(({ final __callArgument553:Dynamic = extensions; __callArgument553; })) : Array<String>);
+      for (__iteration22 in _Runtime.iterable(flight._internal.DynamicObject.entries(filter.accept))) {
+        var mimeType:String = flight._internal._StaticIndex.readArray(__iteration22, 0.0);
+        var extensions:Array<String> = flight._internal._StaticIndex.readArray(__iteration22, 1.0);
+        var normalized:Array<String> = (cast _HostWeb.normalizeExtensions__webDialog(({ final __callArgument640:Dynamic = extensions; __callArgument640; })) : Array<String>);
         if ((cast ((cast _Runtime.field(normalized, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.setIndex(accept, mimeType, normalized); }
       }
       if ((cast ((cast _Runtime.field(flight._internal.DynamicObject.keys(accept), 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(types, 'push', cast ([{ accept: accept, description: filter.name }] : Array<Dynamic>)); }
@@ -2840,11 +3331,11 @@ class _HostWeb {
     if ((cast _Runtime.strictEquals(filters, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast ''; }
     parts = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
     for (filter in _Runtime.iterable(filters)) {
-      for (__iteration5 in _Runtime.iterable(flight._internal.DynamicObject.entries(filter.accept))) {
-        var mimeType:String = flight._internal._StaticIndex.readArray(__iteration5, 0.0);
-        var extensions:Array<String> = flight._internal._StaticIndex.readArray(__iteration5, 1.0);
+      for (__iteration23 in _Runtime.iterable(flight._internal.DynamicObject.entries(filter.accept))) {
+        var mimeType:String = flight._internal._StaticIndex.readArray(__iteration23, 0.0);
+        var extensions:Array<String> = flight._internal._StaticIndex.readArray(__iteration23, 1.0);
         if ((cast !_Runtime.strictEquals(mimeType, '') : Bool)) { ((cast parts : flight._internal._Set<String>).add((cast mimeType))); }
-        for (extension in _Runtime.iterable((cast _HostWeb.normalizeExtensions__webDialog(({ final __callArgument561:Dynamic = extensions; __callArgument561; })) : Array<String>))) {
+        for (extension in _Runtime.iterable((cast _HostWeb.normalizeExtensions__webDialog(({ final __callArgument648:Dynamic = extensions; __callArgument648; })) : Array<String>))) {
           ((cast parts : flight._internal._Set<String>).add((cast extension)));
         }
       }
@@ -2854,7 +3345,7 @@ class _HostWeb {
   }
 
   public static function normalizeExtensions__webDialog(extensions:Array<String>):Array<String> {
-    return cast (cast _Runtime.mapArray((cast (cast _Runtime.filterArray((cast extensions : Array<String>), function(extension:String, __unused6:Float, __unused7:Array<String>):Bool return ((cast !_Runtime.strictEquals(extension, '') : Bool) && (cast !_Runtime.strictEquals(extension, '*') : Bool)), _Runtime.UNDEFINED)) : Array<String>), function(extension:String, __unused8:Float, __unused9:Array<String>):String return ((cast StringTools.startsWith(extension, '.') : Bool) ? (cast extension : Dynamic) : (cast '.' + Std.string(extension) + '' : Dynamic)), _Runtime.UNDEFINED));
+    return cast (cast _Runtime.mapArray((cast (cast _Runtime.filterArray((cast extensions : Array<String>), function(extension:String, __unused24:Float, __unused25:Array<String>):Bool return ((cast !_Runtime.strictEquals(extension, '') : Bool) && (cast !_Runtime.strictEquals(extension, '*') : Bool)), _Runtime.UNDEFINED)) : Array<String>), function(extension:String, __unused26:Float, __unused27:Array<String>):String return ((cast StringTools.startsWith(extension, '.') : Bool) ? (cast extension : Dynamic) : (cast '.' + Std.string(extension) + '' : Dynamic)), _Runtime.UNDEFINED));
     return cast null;
   }
 
@@ -2877,10 +3368,10 @@ class _HostWeb {
     return cast { readBinary: function(signal:Null<flight._internal.dom.AbortSignal>):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
-          ({ final __hostTypeCall563 = signal; __hostTypeCall563 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall563 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+          ({ final __hostTypeCall650 = signal; __hostTypeCall650 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall650 : flight._internal.dom.AbortSignal).throwIfAborted(); });
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.flatMap(file.arrayBuffer(), function(__awaitValue564:Dynamic):Dynamic {
-              return flight._internal._Async.flowReturn(new flight._internal._UInt8Array(__awaitValue564));
+            return flight._internal._Async.flatMap(file.arrayBuffer(), function(__awaitValue651:Dynamic):Dynamic {
+              return flight._internal._Async.flowReturn(new flight._internal._UInt8Array(__awaitValue651));
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;
@@ -2895,10 +3386,10 @@ class _HostWeb {
     }, readText: function(signal:Null<flight._internal.dom.AbortSignal>):flight._internal._Promise<Null<String>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
-          ({ final __hostTypeCall565 = signal; __hostTypeCall565 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall565 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+          ({ final __hostTypeCall652 = signal; __hostTypeCall652 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall652 : flight._internal.dom.AbortSignal).throwIfAborted(); });
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.flatMap(file.text(), function(__awaitValue566:Dynamic):Dynamic {
-              return flight._internal._Async.flowReturn(__awaitValue566);
+            return flight._internal._Async.flatMap(file.text(), function(__awaitValue653:Dynamic):Dynamic {
+              return flight._internal._Async.flowReturn(__awaitValue653);
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;
@@ -2919,10 +3410,10 @@ class _HostWeb {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var file:flight._internal.dom.File = cast _Runtime.UNDEFINED;
-          ({ final __hostTypeCall567 = signal; __hostTypeCall567 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall567 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+          ({ final __hostTypeCall654 = signal; __hostTypeCall654 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall654 : flight._internal.dom.AbortSignal).throwIfAborted(); });
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.flatMap((cast handle : FileSystemFileHandle__webDialog).getFile(), function(__awaitValue568:Dynamic):Dynamic {
-              (file = cast (__awaitValue568 : Dynamic));
+            return flight._internal._Async.flatMap((cast handle : FileSystemFileHandle__webDialog).getFile(), function(__awaitValue655:Dynamic):Dynamic {
+              (file = cast (__awaitValue655 : Dynamic));
               return flight._internal._Async.flowNormal();
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -2931,10 +3422,10 @@ class _HostWeb {
               return flight._internal._Async.flowReturn(null);
             });
           }), function():Dynamic {
-            ({ final __hostTypeCall569 = signal; __hostTypeCall569 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall569 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+            ({ final __hostTypeCall656 = signal; __hostTypeCall656 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall656 : flight._internal.dom.AbortSignal).throwIfAborted(); });
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-              return flight._internal._Async.flatMap(file.arrayBuffer(), function(__awaitValue570:Dynamic):Dynamic {
-                return flight._internal._Async.flowReturn(new flight._internal._UInt8Array(__awaitValue570));
+              return flight._internal._Async.flatMap(file.arrayBuffer(), function(__awaitValue657:Dynamic):Dynamic {
+                return flight._internal._Async.flowReturn(new flight._internal._UInt8Array(__awaitValue657));
               });
             }), function(__caughtError:Dynamic):Dynamic {
               var __error:Dynamic = __caughtError;
@@ -2951,10 +3442,10 @@ class _HostWeb {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var file:flight._internal.dom.File = cast _Runtime.UNDEFINED;
-          ({ final __hostTypeCall571 = signal; __hostTypeCall571 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall571 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+          ({ final __hostTypeCall658 = signal; __hostTypeCall658 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall658 : flight._internal.dom.AbortSignal).throwIfAborted(); });
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.flatMap((cast handle : FileSystemFileHandle__webDialog).getFile(), function(__awaitValue572:Dynamic):Dynamic {
-              (file = cast (__awaitValue572 : Dynamic));
+            return flight._internal._Async.flatMap((cast handle : FileSystemFileHandle__webDialog).getFile(), function(__awaitValue659:Dynamic):Dynamic {
+              (file = cast (__awaitValue659 : Dynamic));
               return flight._internal._Async.flowNormal();
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -2963,10 +3454,10 @@ class _HostWeb {
               return flight._internal._Async.flowReturn(null);
             });
           }), function():Dynamic {
-            ({ final __hostTypeCall573 = signal; __hostTypeCall573 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall573 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+            ({ final __hostTypeCall660 = signal; __hostTypeCall660 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall660 : flight._internal.dom.AbortSignal).throwIfAborted(); });
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-              return flight._internal._Async.flatMap(file.text(), function(__awaitValue574:Dynamic):Dynamic {
-                return flight._internal._Async.flowReturn(__awaitValue574);
+              return flight._internal._Async.flatMap(file.text(), function(__awaitValue661:Dynamic):Dynamic {
+                return flight._internal._Async.flowReturn(__awaitValue661);
               });
             }), function(__caughtError:Dynamic):Dynamic {
               var __error:Dynamic = __caughtError;
@@ -2981,13 +3472,13 @@ class _HostWeb {
       );
     }, writeBinary: function(data:flight._internal._UInt8Array, signal:Null<flight._internal.dom.AbortSignal>):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        ({ final __hostTypeCall575 = signal; __hostTypeCall575 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall575 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-        return flight._internal._Async.resolve((cast _HostWeb.writeFileSystemHandle__webDialog((cast handle : Dynamic), ({ final __callArgument576:Dynamic = _Runtime.slice(data, 0, null); __callArgument576; }), ({ final __callArgument577:Dynamic = signal; __callArgument577; })) : flight._internal._Promise<Bool>));
+        ({ final __hostTypeCall662 = signal; __hostTypeCall662 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall662 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+        return flight._internal._Async.resolve((cast _HostWeb.writeFileSystemHandle__webDialog((cast handle : Dynamic), ({ final __callArgument663:Dynamic = _Runtime.slice(data, 0, null); __callArgument663; }), ({ final __callArgument664:Dynamic = signal; __callArgument664; })) : flight._internal._Promise<Bool>));
       }));
     }, writeText: function(data:String, signal:Null<flight._internal.dom.AbortSignal>):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        ({ final __hostTypeCall580 = signal; __hostTypeCall580 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall580 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-        return flight._internal._Async.resolve((cast _HostWeb.writeFileSystemHandle__webDialog((cast handle : Dynamic), ({ final __callArgument581:Dynamic = data; __callArgument581; }), ({ final __callArgument582:Dynamic = signal; __callArgument582; })) : flight._internal._Promise<Bool>));
+        ({ final __hostTypeCall667 = signal; __hostTypeCall667 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall667 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+        return flight._internal._Async.resolve((cast _HostWeb.writeFileSystemHandle__webDialog((cast handle : Dynamic), ({ final __callArgument668:Dynamic = data; __callArgument668; }), ({ final __callArgument669:Dynamic = signal; __callArgument669; })) : flight._internal._Promise<Bool>));
       }));
     } };
     return cast null;
@@ -3000,11 +3491,11 @@ class _HostWeb {
         var aborted:Bool = cast _Runtime.UNDEFINED;
         var abortPromise:Null<flight._internal._Promise<flight._internal._Nothing>> = cast _Runtime.UNDEFINED;
         var onAbort:Void->Void = cast _Runtime.UNDEFINED;
-        ({ final __hostTypeCall602 = signal; __hostTypeCall602 == null ? _Runtime.UNDEFINED : __hostTypeCall602.throwIfAborted(); });
+        ({ final __hostTypeCall689 = signal; __hostTypeCall689 == null ? _Runtime.UNDEFINED : __hostTypeCall689.throwIfAborted(); });
         writable = null;
         return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-          return flight._internal._Async.flatMap((cast handle : FileSystemFileHandle__webDialog).createWritable(), function(__awaitValue603:Dynamic):Dynamic {
-            (writable = cast (__awaitValue603 : Dynamic));
+          return flight._internal._Async.flatMap((cast handle : FileSystemFileHandle__webDialog).createWritable(), function(__awaitValue690:Dynamic):Dynamic {
+            (writable = cast (__awaitValue690 : Dynamic));
             return flight._internal._Async.flowNormal();
           });
         }), function(__caughtError:Dynamic):Dynamic {
@@ -3013,55 +3504,55 @@ class _HostWeb {
             return flight._internal._Async.flowReturn(false);
           });
         }), function():Dynamic {
-          var __flowBranch605:Dynamic;
-          if (_Runtime.truthy(({ final __hostType604 = signal; __hostType604 == null ? _Runtime.UNDEFINED : __hostType604.aborted; }))) {
-            __flowBranch605 = flight._internal._Async.protect(function():Dynamic {
-              return flight._internal._Async.flatMap(_Runtime.callOptionalProperty(_Runtime.callOptionalValue((cast writable : FileSystemWritableFileStream__webDialog).abort, cast ([signal.reason] : Array<Dynamic>)), 'catch', cast ([function(__unused10:flight._internal._Any):Void {
+          var __flowBranch692:Dynamic;
+          if (_Runtime.truthy(({ final __hostType691 = signal; __hostType691 == null ? _Runtime.UNDEFINED : __hostType691.aborted; }))) {
+            __flowBranch692 = flight._internal._Async.protect(function():Dynamic {
+              return flight._internal._Async.flatMap(_Runtime.callOptionalProperty(_Runtime.callOptionalValue((cast writable : FileSystemWritableFileStream__webDialog).abort, cast ([signal.reason] : Array<Dynamic>)), 'catch', cast ([function(__unused28:flight._internal._Any):Void {
 
-              }] : Array<Dynamic>)), function(__awaitValue606:Dynamic):Dynamic {
-                __awaitValue606;
+              }] : Array<Dynamic>)), function(__awaitValue693:Dynamic):Dynamic {
+                __awaitValue693;
                 return flight._internal._Async.reject(signal.reason);
               });
             });
           } else {
-            __flowBranch605 = flight._internal._Async.flowNormal();
+            __flowBranch692 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch605, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch692, function():Dynamic {
             aborted = false;
             abortPromise = null;
             onAbort = function():Void {
               (aborted = cast (true : Dynamic));
-              (abortPromise = cast (_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callOptionalValue(({ final __structural609 = writable; __structural609 == null ? _Runtime.UNDEFINED : (cast __structural609 : FileSystemWritableFileStream__webDialog).abort; }), cast ([({ final __hostType610 = signal; __hostType610 == null ? _Runtime.UNDEFINED : __hostType610.reason; })] : Array<Dynamic>)), 'catch', cast ([function(__unused11:flight._internal._Any):Void {
+              (abortPromise = cast (_Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callOptionalValue(({ final __structural696 = writable; __structural696 == null ? _Runtime.UNDEFINED : (cast __structural696 : FileSystemWritableFileStream__webDialog).abort; }), cast ([({ final __hostType697 = signal; __hostType697 == null ? _Runtime.UNDEFINED : __hostType697.reason; })] : Array<Dynamic>)), 'catch', cast ([function(__unused29:flight._internal._Any):Void {
 
               }] : Array<Dynamic>)), function():Dynamic return cast flight._internal._Async.resolve()) : Dynamic));
             };
-            var __flowBranch611:Dynamic;
+            var __flowBranch698:Dynamic;
             if ((cast !_Runtime.strictEquals((cast writable : FileSystemWritableFileStream__webDialog).abort, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-              __flowBranch611 = flight._internal._Async.protect(function():Dynamic {
-                ({ final __hostTypeCall612 = signal; __hostTypeCall612 == null ? _Runtime.UNDEFINED : __hostTypeCall612.addEventListener('abort', onAbort, { once: true }); });
+              __flowBranch698 = flight._internal._Async.protect(function():Dynamic {
+                ({ final __hostTypeCall699 = signal; __hostTypeCall699 == null ? _Runtime.UNDEFINED : __hostTypeCall699.addEventListener('abort', onAbort, { once: true }); });
                 return flight._internal._Async.flowNormal();
               });
             } else {
-              __flowBranch611 = flight._internal._Async.flowNormal();
+              __flowBranch698 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch611, function():Dynamic {
+            return flight._internal._Async.continueFlow(__flowBranch698, function():Dynamic {
               return flight._internal._Async.continueFlow(flight._internal._Async.finalizeFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-                return flight._internal._Async.flatMap((cast writable : FileSystemWritableFileStream__webDialog).write(({ final __callArgument618:Dynamic = data; __callArgument618; })), function(__awaitValue613:Dynamic):Dynamic {
-                  __awaitValue613;
-                  var __flowBranch614:Dynamic;
+                return flight._internal._Async.flatMap((cast writable : FileSystemWritableFileStream__webDialog).write(({ final __callArgument705:Dynamic = data; __callArgument705; })), function(__awaitValue700:Dynamic):Dynamic {
+                  __awaitValue700;
+                  var __flowBranch701:Dynamic;
                   if ((cast aborted : Bool)) {
-                    __flowBranch614 = flight._internal._Async.protect(function():Dynamic {
-                      return flight._internal._Async.flatMap(abortPromise, function(__awaitValue615:Dynamic):Dynamic {
-                        __awaitValue615;
-                        return flight._internal._Async.reject(({ final __hostType616 = signal; __hostType616 == null ? _Runtime.UNDEFINED : __hostType616.reason; }));
+                    __flowBranch701 = flight._internal._Async.protect(function():Dynamic {
+                      return flight._internal._Async.flatMap(abortPromise, function(__awaitValue702:Dynamic):Dynamic {
+                        __awaitValue702;
+                        return flight._internal._Async.reject(({ final __hostType703 = signal; __hostType703 == null ? _Runtime.UNDEFINED : __hostType703.reason; }));
                       });
                     });
                   } else {
-                    __flowBranch614 = flight._internal._Async.flowNormal();
+                    __flowBranch701 = flight._internal._Async.flowNormal();
                   }
-                  return flight._internal._Async.continueFlow(__flowBranch614, function():Dynamic {
-                    return flight._internal._Async.flatMap((cast writable : FileSystemWritableFileStream__webDialog).close(), function(__awaitValue617:Dynamic):Dynamic {
-                      __awaitValue617;
+                  return flight._internal._Async.continueFlow(__flowBranch701, function():Dynamic {
+                    return flight._internal._Async.flatMap((cast writable : FileSystemWritableFileStream__webDialog).close(), function(__awaitValue704:Dynamic):Dynamic {
+                      __awaitValue704;
                       return flight._internal._Async.flowReturn(true);
                     });
                   });
@@ -3069,40 +3560,40 @@ class _HostWeb {
               }), function(__caughtError:Dynamic):Dynamic {
                 var __error:Dynamic = __caughtError;
                 return flight._internal._Async.protect(function():Dynamic {
-                  var __flowBranch619:Dynamic;
+                  var __flowBranch706:Dynamic;
                   if ((cast _Runtime.strictEquals(abortPromise, null) : Bool)) {
-                    __flowBranch619 = flight._internal._Async.protect(function():Dynamic {
-                      return flight._internal._Async.flatMap(_Runtime.callOptionalProperty(_Runtime.callOptionalValue((cast writable : FileSystemWritableFileStream__webDialog).abort, cast ([] : Array<Dynamic>)), 'catch', cast ([function(__unused12:flight._internal._Any):Void {
+                    __flowBranch706 = flight._internal._Async.protect(function():Dynamic {
+                      return flight._internal._Async.flatMap(_Runtime.callOptionalProperty(_Runtime.callOptionalValue((cast writable : FileSystemWritableFileStream__webDialog).abort, cast ([] : Array<Dynamic>)), 'catch', cast ([function(__unused30:flight._internal._Any):Void {
 
-                      }] : Array<Dynamic>)), function(__awaitValue620:Dynamic):Dynamic {
-                        __awaitValue620;
+                      }] : Array<Dynamic>)), function(__awaitValue707:Dynamic):Dynamic {
+                        __awaitValue707;
                         return flight._internal._Async.flowNormal();
                       });
                     });
                   } else {
-                    __flowBranch619 = flight._internal._Async.protect(function():Dynamic {
-                      return flight._internal._Async.flatMap(abortPromise, function(__awaitValue621:Dynamic):Dynamic {
-                        __awaitValue621;
+                    __flowBranch706 = flight._internal._Async.protect(function():Dynamic {
+                      return flight._internal._Async.flatMap(abortPromise, function(__awaitValue708:Dynamic):Dynamic {
+                        __awaitValue708;
                         return flight._internal._Async.flowNormal();
                       });
                     });
                   }
-                  return flight._internal._Async.continueFlow(__flowBranch619, function():Dynamic {
-                    var __flowBranch622:Dynamic;
+                  return flight._internal._Async.continueFlow(__flowBranch706, function():Dynamic {
+                    var __flowBranch709:Dynamic;
                     if ((cast aborted : Bool)) {
-                      __flowBranch622 = flight._internal._Async.protect(function():Dynamic {
-                        return flight._internal._Async.reject(({ final __hostType623 = signal; __hostType623 == null ? _Runtime.UNDEFINED : __hostType623.reason; }));
+                      __flowBranch709 = flight._internal._Async.protect(function():Dynamic {
+                        return flight._internal._Async.reject(({ final __hostType710 = signal; __hostType710 == null ? _Runtime.UNDEFINED : __hostType710.reason; }));
                       });
                     } else {
-                      __flowBranch622 = flight._internal._Async.flowNormal();
+                      __flowBranch709 = flight._internal._Async.flowNormal();
                     }
-                    return flight._internal._Async.continueFlow(__flowBranch622, function():Dynamic {
+                    return flight._internal._Async.continueFlow(__flowBranch709, function():Dynamic {
                       return flight._internal._Async.flowReturn(false);
                     });
                   });
                 });
               }), function():Dynamic {
-                ({ final __hostTypeCall624 = signal; __hostTypeCall624 == null ? _Runtime.UNDEFINED : __hostTypeCall624.removeEventListener('abort', onAbort); });
+                ({ final __hostTypeCall711 = signal; __hostTypeCall711 == null ? _Runtime.UNDEFINED : __hostTypeCall711.removeEventListener('abort', onAbort); });
                 return flight._internal._Async.flowNormal();
               }), function():Dynamic {
                 return flight._internal._Async.flowNormal();
@@ -3119,21 +3610,21 @@ class _HostWeb {
       flight._internal._Async.protect(function():Dynamic {
         var handle:Null<flight._internal.dom.FileSystemFileHandle> = cast _Runtime.UNDEFINED;
         var existing:String = cast _Runtime.UNDEFINED;
-        ({ final __hostTypeCall625 = signal; __hostTypeCall625 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall625 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-        return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast path : String), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue626:Dynamic):Dynamic {
-          handle = __awaitValue626;
-          ({ final __hostTypeCall627 = signal; __hostTypeCall627 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall627 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+        ({ final __hostTypeCall712 = signal; __hostTypeCall712 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall712 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+        return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast path : String), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue713:Dynamic):Dynamic {
+          handle = __awaitValue713;
+          ({ final __hostTypeCall714 = signal; __hostTypeCall714 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall714 : flight._internal.dom.AbortSignal).throwIfAborted(); });
           existing = '';
-          var __flowBranch628:Dynamic;
+          var __flowBranch715:Dynamic;
           if ((cast !_Runtime.strictEquals(handle, null) : Bool)) {
-            __flowBranch628 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch715 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
                 var file:flight._internal.dom.File = cast _Runtime.UNDEFINED;
-                return flight._internal._Async.flatMap((cast handle : flight._internal.dom.FileSystemFileHandle).getFile(), function(__awaitValue629:Dynamic):Dynamic {
-                  file = __awaitValue629;
-                  ({ final __hostTypeCall630 = signal; __hostTypeCall630 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall630 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-                  return flight._internal._Async.flatMap((cast file : flight._internal.dom.File).text(), function(__awaitValue631:Dynamic):Dynamic {
-                    (existing = cast (__awaitValue631 : Dynamic));
+                return flight._internal._Async.flatMap((cast handle : flight._internal.dom.FileSystemFileHandle).getFile(), function(__awaitValue716:Dynamic):Dynamic {
+                  file = __awaitValue716;
+                  ({ final __hostTypeCall717 = signal; __hostTypeCall717 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall717 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+                  return flight._internal._Async.flatMap((cast file : flight._internal.dom.File).text(), function(__awaitValue718:Dynamic):Dynamic {
+                    (existing = cast (__awaitValue718 : Dynamic));
                     return flight._internal._Async.flowNormal();
                   });
                 });
@@ -3148,11 +3639,11 @@ class _HostWeb {
               });
             });
           } else {
-            __flowBranch628 = flight._internal._Async.flowNormal();
+            __flowBranch715 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch628, function():Dynamic {
-            ({ final __hostTypeCall632 = signal; __hostTypeCall632 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall632 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-            return flight._internal._Async.flowReturn((cast _HostWeb.writeFile__webFilesystem((cast path : String), ({ final __callArgument633:Dynamic = (existing + data); __callArgument633; }), ({ final __callArgument634:Dynamic = signal; __callArgument634; })) : flight._internal._Promise<Bool>));
+          return flight._internal._Async.continueFlow(__flowBranch715, function():Dynamic {
+            ({ final __hostTypeCall719 = signal; __hostTypeCall719 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall719 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+            return flight._internal._Async.flowReturn((cast _HostWeb.writeFile__webFilesystem((cast path : String), ({ final __callArgument720:Dynamic = (existing + data); __callArgument720; }), ({ final __callArgument721:Dynamic = signal; __callArgument721; })) : flight._internal._Promise<Bool>));
           });
         });
       })
@@ -3161,36 +3652,36 @@ class _HostWeb {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var handle:Null<flight._internal.dom.FileSystemFileHandle> = cast _Runtime.UNDEFINED;
-        var __flowBranch637:Dynamic;
+        var __flowBranch724:Dynamic;
         if ((cast _Runtime.strictEquals(mode, 'executable') : Bool)) {
-          __flowBranch637 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch724 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn(false);
           });
         } else {
-          __flowBranch637 = flight._internal._Async.flowNormal();
+          __flowBranch724 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch637, function():Dynamic {
-          var __flowBranch638:Dynamic;
+        return flight._internal._Async.continueFlow(__flowBranch724, function():Dynamic {
+          var __flowBranch725:Dynamic;
           if ((cast _Runtime.strictEquals(mode, 'readable') : Bool)) {
-            __flowBranch638 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch725 = flight._internal._Async.protect(function():Dynamic {
               var handle:Null<flight._internal.dom.FileSystemFileHandle> = cast _Runtime.UNDEFINED;
               var root:Null<flight._internal.dom.FileSystemDirectoryHandle> = cast _Runtime.UNDEFINED;
-              return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast path : String), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue639:Dynamic):Dynamic {
-                handle = __awaitValue639;
-                var __flowBranch640:Dynamic;
+              return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast path : String), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue726:Dynamic):Dynamic {
+                handle = __awaitValue726;
+                var __flowBranch727:Dynamic;
                 if ((cast !_Runtime.strictEquals(handle, null) : Bool)) {
-                  __flowBranch640 = flight._internal._Async.protect(function():Dynamic {
+                  __flowBranch727 = flight._internal._Async.protect(function():Dynamic {
                     return flight._internal._Async.flowReturn(true);
                   });
                 } else {
-                  __flowBranch640 = flight._internal._Async.flowNormal();
+                  __flowBranch727 = flight._internal._Async.flowNormal();
                 }
-                return flight._internal._Async.continueFlow(__flowBranch640, function():Dynamic {
-                  return flight._internal._Async.flatMap((cast _HostWeb.getRoot__webFilesystem() : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue641:Dynamic):Dynamic {
-                    root = __awaitValue641;
+                return flight._internal._Async.continueFlow(__flowBranch727, function():Dynamic {
+                  return flight._internal._Async.flatMap((cast _HostWeb.getRoot__webFilesystem() : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue728:Dynamic):Dynamic {
+                    root = __awaitValue728;
                     if ((cast !_Runtime.strictEquals(root, null) : Bool)) {
-                      return flight._internal._Async.flatMap((cast _HostWeb.getDirectoryHandle__webFilesystem(({ final __callArgument643:Dynamic = root; __callArgument643; }), (cast _HostWeb.splitPath__webFilesystem((cast path : String)) : Array<String>), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue642:Dynamic):Dynamic {
-                        return flight._internal._Async.flowReturn(!_Runtime.strictEquals(__awaitValue642, null));
+                      return flight._internal._Async.flatMap((cast _HostWeb.getDirectoryHandle__webFilesystem(({ final __callArgument730:Dynamic = root; __callArgument730; }), (cast _HostWeb.splitPath__webFilesystem((cast path : String)) : Array<String>), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue729:Dynamic):Dynamic {
+                        return flight._internal._Async.flowReturn(!_Runtime.strictEquals(__awaitValue729, null));
                       });
                     } else {
                       return flight._internal._Async.flowReturn(!_Runtime.strictEquals(root, null));
@@ -3200,26 +3691,26 @@ class _HostWeb {
               });
             });
           } else {
-            __flowBranch638 = flight._internal._Async.flowNormal();
+            __flowBranch725 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch638, function():Dynamic {
-            return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast path : String), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue645:Dynamic):Dynamic {
-              handle = __awaitValue645;
-              var __flowBranch646:Dynamic;
+          return flight._internal._Async.continueFlow(__flowBranch725, function():Dynamic {
+            return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast path : String), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue732:Dynamic):Dynamic {
+              handle = __awaitValue732;
+              var __flowBranch733:Dynamic;
               if ((cast _Runtime.strictEquals(handle, null) : Bool)) {
-                __flowBranch646 = flight._internal._Async.protect(function():Dynamic {
+                __flowBranch733 = flight._internal._Async.protect(function():Dynamic {
                   return flight._internal._Async.flowReturn(false);
                 });
               } else {
-                __flowBranch646 = flight._internal._Async.flowNormal();
+                __flowBranch733 = flight._internal._Async.flowNormal();
               }
-              return flight._internal._Async.continueFlow(__flowBranch646, function():Dynamic {
+              return flight._internal._Async.continueFlow(__flowBranch733, function():Dynamic {
                 return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
                   var writable:flight._internal.dom.FileSystemWritableFileStream = cast _Runtime.UNDEFINED;
-                  return flight._internal._Async.flatMap((cast handle : flight._internal.dom.FileSystemFileHandle).createWritable(), function(__awaitValue647:Dynamic):Dynamic {
-                    writable = __awaitValue647;
-                    return flight._internal._Async.flatMap((cast writable : flight._internal.dom.FileSystemWritableFileStream).abort(), function(__awaitValue648:Dynamic):Dynamic {
-                      __awaitValue648;
+                  return flight._internal._Async.flatMap((cast handle : flight._internal.dom.FileSystemFileHandle).createWritable(), function(__awaitValue734:Dynamic):Dynamic {
+                    writable = __awaitValue734;
+                    return flight._internal._Async.flatMap((cast writable : flight._internal.dom.FileSystemWritableFileStream).abort(), function(__awaitValue735:Dynamic):Dynamic {
+                      __awaitValue735;
                       return flight._internal._Async.flowReturn(true);
                     });
                   });
@@ -3241,23 +3732,23 @@ class _HostWeb {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var handle:Null<flight._internal.dom.FileSystemFileHandle> = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast from : String), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue649:Dynamic):Dynamic {
-          handle = __awaitValue649;
-          var __flowBranch650:Dynamic;
+        return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast from : String), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue736:Dynamic):Dynamic {
+          handle = __awaitValue736;
+          var __flowBranch737:Dynamic;
           if ((cast _Runtime.strictEquals(handle, null) : Bool)) {
-            __flowBranch650 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch737 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(false);
             });
           } else {
-            __flowBranch650 = flight._internal._Async.flowNormal();
+            __flowBranch737 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch650, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch737, function():Dynamic {
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
               var bytes:flight._internal._UInt8Array = cast _Runtime.UNDEFINED;
-              return flight._internal._Async.flatMap((cast handle : flight._internal.dom.FileSystemFileHandle).getFile(), function(__awaitValue651:Dynamic):Dynamic {
-                return flight._internal._Async.flatMap((cast __awaitValue651 : flight._internal.dom.File).arrayBuffer(), function(__awaitValue652:Dynamic):Dynamic {
-                  bytes = new flight._internal._UInt8Array(__awaitValue652);
-                  return flight._internal._Async.flowReturn((cast (#if js _Runtime.callValue(_HostWeb.writeFile__webFilesystem, cast ([(cast to : String), ({ final __callArgument654:Dynamic = bytes; __callArgument654; })] : Array<Dynamic>)) #else _HostWeb.writeFile__webFilesystem((cast to : String), ({ final __callArgument653:Dynamic = bytes; __callArgument653; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flight._internal._Promise<Bool>));
+              return flight._internal._Async.flatMap((cast handle : flight._internal.dom.FileSystemFileHandle).getFile(), function(__awaitValue738:Dynamic):Dynamic {
+                return flight._internal._Async.flatMap((cast __awaitValue738 : flight._internal.dom.File).arrayBuffer(), function(__awaitValue739:Dynamic):Dynamic {
+                  bytes = new flight._internal._UInt8Array(__awaitValue739);
+                  return flight._internal._Async.flowReturn((cast (#if js _Runtime.callValue(_HostWeb.writeFile__webFilesystem, cast ([(cast to : String), ({ final __callArgument741:Dynamic = bytes; __callArgument741; })] : Array<Dynamic>)) #else _HostWeb.writeFile__webFilesystem((cast to : String), ({ final __callArgument740:Dynamic = bytes; __callArgument740; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flight._internal._Promise<Bool>));
                 });
               });
             }), function(__caughtError:Dynamic):Dynamic {
@@ -3275,11 +3766,11 @@ class _HostWeb {
   }, directoryExists: function(path:String):flight._internal._Promise<Bool> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
       var root:Null<flight._internal.dom.FileSystemDirectoryHandle> = cast _Runtime.UNDEFINED;
-      return flight._internal._Async.flatMap((cast _HostWeb.getRoot__webFilesystem() : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue655:Dynamic):Dynamic {
-        root = __awaitValue655;
+      return flight._internal._Async.flatMap((cast _HostWeb.getRoot__webFilesystem() : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue742:Dynamic):Dynamic {
+        root = __awaitValue742;
         if ((cast !_Runtime.strictEquals(root, null) : Bool)) {
-          return flight._internal._Async.flatMap((cast _HostWeb.getDirectoryHandle__webFilesystem(({ final __callArgument657:Dynamic = root; __callArgument657; }), (cast _HostWeb.splitPath__webFilesystem((cast path : String)) : Array<String>), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue656:Dynamic):Dynamic {
-            return flight._internal._Async.resolve(!_Runtime.strictEquals(__awaitValue656, null));
+          return flight._internal._Async.flatMap((cast _HostWeb.getDirectoryHandle__webFilesystem(({ final __callArgument744:Dynamic = root; __callArgument744; }), (cast _HostWeb.splitPath__webFilesystem((cast path : String)) : Array<String>), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue743:Dynamic):Dynamic {
+            return flight._internal._Async.resolve(!_Runtime.strictEquals(__awaitValue743, null));
           });
         } else {
           return flight._internal._Async.resolve(!_Runtime.strictEquals(root, null));
@@ -3288,37 +3779,37 @@ class _HostWeb {
     }));
   }, fileExists: function(path:String):flight._internal._Promise<Bool> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast path : String), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue659:Dynamic):Dynamic {
-        return flight._internal._Async.resolve(!_Runtime.strictEquals(__awaitValue659, null));
+      return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast path : String), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue746:Dynamic):Dynamic {
+        return flight._internal._Async.resolve(!_Runtime.strictEquals(__awaitValue746, null));
       });
     }));
   }, getFileSystemUsage: function():flight._internal._Promise<Null<{ var quotaBytes:Float; var usedBytes:Float; }>> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var storage:flight._internal.dom.StorageManager = cast _Runtime.UNDEFINED;
-        var __flowBranch660:Dynamic;
+        var __flowBranch747:Dynamic;
         if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool)) {
-          __flowBranch660 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch747 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn(null);
           });
         } else {
-          __flowBranch660 = flight._internal._Async.flowNormal();
+          __flowBranch747 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch660, function():Dynamic {
+        return flight._internal._Async.continueFlow(__flowBranch747, function():Dynamic {
           storage = flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'storage');
-          var __flowBranch661:Dynamic;
+          var __flowBranch748:Dynamic;
           if ((cast ((cast _Runtime.strictEquals(storage, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast storage : flight._internal.dom.StorageManager).estimate), 'function') : Bool)) : Bool)) {
-            __flowBranch661 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch748 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(null);
             });
           } else {
-            __flowBranch661 = flight._internal._Async.flowNormal();
+            __flowBranch748 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch661, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch748, function():Dynamic {
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
               var estimate:flight._internal.dom.StorageEstimate = cast _Runtime.UNDEFINED;
-              return flight._internal._Async.flatMap((cast storage : flight._internal.dom.StorageManager).estimate(), function(__awaitValue662:Dynamic):Dynamic {
-                estimate = __awaitValue662;
+              return flight._internal._Async.flatMap((cast storage : flight._internal.dom.StorageManager).estimate(), function(__awaitValue749:Dynamic):Dynamic {
+                estimate = __awaitValue749;
                 return flight._internal._Async.flowReturn({ quotaBytes: _Runtime.coalesce((cast estimate : flight._internal.dom.StorageEstimate).quota, function():Dynamic return cast 0.0), usedBytes: _Runtime.coalesce((cast estimate : flight._internal.dom.StorageEstimate).usage, function():Dynamic return cast 0.0) });
               });
             }), function(__caughtError:Dynamic):Dynamic {
@@ -3336,11 +3827,11 @@ class _HostWeb {
   }, makeDirectory: function(path:String):flight._internal._Promise<Bool> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
       var root:Null<flight._internal.dom.FileSystemDirectoryHandle> = cast _Runtime.UNDEFINED;
-      return flight._internal._Async.flatMap((cast _HostWeb.getRoot__webFilesystem() : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue663:Dynamic):Dynamic {
-        root = __awaitValue663;
+      return flight._internal._Async.flatMap((cast _HostWeb.getRoot__webFilesystem() : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue750:Dynamic):Dynamic {
+        root = __awaitValue750;
         if ((cast !_Runtime.strictEquals(root, null) : Bool)) {
-          return flight._internal._Async.flatMap((cast _HostWeb.getDirectoryHandle__webFilesystem(({ final __callArgument665:Dynamic = root; __callArgument665; }), (cast _HostWeb.splitPath__webFilesystem((cast path : String)) : Array<String>), (cast true : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue664:Dynamic):Dynamic {
-            return flight._internal._Async.resolve(!_Runtime.strictEquals(__awaitValue664, null));
+          return flight._internal._Async.flatMap((cast _HostWeb.getDirectoryHandle__webFilesystem(({ final __callArgument752:Dynamic = root; __callArgument752; }), (cast _HostWeb.splitPath__webFilesystem((cast path : String)) : Array<String>), (cast true : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue751:Dynamic):Dynamic {
+            return flight._internal._Async.resolve(!_Runtime.strictEquals(__awaitValue751, null));
           });
         } else {
           return flight._internal._Async.resolve(!_Runtime.strictEquals(root, null));
@@ -3351,23 +3842,23 @@ class _HostWeb {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var handle:Null<flight._internal.dom.FileSystemFileHandle> = cast _Runtime.UNDEFINED;
-        ({ final __hostTypeCall667 = signal; __hostTypeCall667 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall667 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-        return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast path : String), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue668:Dynamic):Dynamic {
-          handle = __awaitValue668;
-          ({ final __hostTypeCall669 = signal; __hostTypeCall669 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall669 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-          var __flowBranch670:Dynamic;
+        ({ final __hostTypeCall754 = signal; __hostTypeCall754 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall754 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+        return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast path : String), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue755:Dynamic):Dynamic {
+          handle = __awaitValue755;
+          ({ final __hostTypeCall756 = signal; __hostTypeCall756 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall756 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+          var __flowBranch757:Dynamic;
           if ((cast _Runtime.strictEquals(handle, null) : Bool)) {
-            __flowBranch670 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch757 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(null);
             });
           } else {
-            __flowBranch670 = flight._internal._Async.flowNormal();
+            __flowBranch757 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch670, function():Dynamic {
-            ({ final __hostTypeCall671 = signal; __hostTypeCall671 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall671 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+          return flight._internal._Async.continueFlow(__flowBranch757, function():Dynamic {
+            ({ final __hostTypeCall758 = signal; __hostTypeCall758 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall758 : flight._internal.dom.AbortSignal).throwIfAborted(); });
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-              return flight._internal._Async.flatMap((cast handle : flight._internal.dom.FileSystemFileHandle).getFile(), function(__awaitValue672:Dynamic):Dynamic {
-                return flight._internal._Async.flowReturn((cast (cast (cast __awaitValue672 : flight._internal.dom.File).stream() : flight._internal._Any) : flight._internal.dom.ReadableStream<flight._internal._UInt8Array>));
+              return flight._internal._Async.flatMap((cast handle : flight._internal.dom.FileSystemFileHandle).getFile(), function(__awaitValue759:Dynamic):Dynamic {
+                return flight._internal._Async.flowReturn((cast (cast (cast __awaitValue759 : flight._internal.dom.File).stream() : flight._internal._Any) : flight._internal.dom.ReadableStream<flight._internal._UInt8Array>));
               });
             }), function(__caughtError:Dynamic):Dynamic {
               var __error:Dynamic = __caughtError;
@@ -3385,23 +3876,23 @@ class _HostWeb {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var handle:Null<flight._internal.dom.FileSystemFileHandle> = cast _Runtime.UNDEFINED;
-        ({ final __hostTypeCall673 = signal; __hostTypeCall673 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall673 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-        return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast path : String), (cast true : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue674:Dynamic):Dynamic {
-          handle = __awaitValue674;
-          ({ final __hostTypeCall675 = signal; __hostTypeCall675 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall675 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-          var __flowBranch676:Dynamic;
+        ({ final __hostTypeCall760 = signal; __hostTypeCall760 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall760 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+        return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast path : String), (cast true : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue761:Dynamic):Dynamic {
+          handle = __awaitValue761;
+          ({ final __hostTypeCall762 = signal; __hostTypeCall762 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall762 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+          var __flowBranch763:Dynamic;
           if ((cast ((cast _Runtime.strictEquals(handle, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast handle : flight._internal.dom.FileSystemFileHandle).createWritable), 'function') : Bool)) : Bool)) {
-            __flowBranch676 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch763 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(null);
             });
           } else {
-            __flowBranch676 = flight._internal._Async.flowNormal();
+            __flowBranch763 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch676, function():Dynamic {
-            ({ final __hostTypeCall677 = signal; __hostTypeCall677 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall677 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+          return flight._internal._Async.continueFlow(__flowBranch763, function():Dynamic {
+            ({ final __hostTypeCall764 = signal; __hostTypeCall764 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall764 : flight._internal.dom.AbortSignal).throwIfAborted(); });
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-              return flight._internal._Async.flatMap((cast handle : flight._internal.dom.FileSystemFileHandle).createWritable(), function(__awaitValue678:Dynamic):Dynamic {
-                return flight._internal._Async.flowReturn((cast (cast __awaitValue678 : flight._internal._Any) : flight._internal.dom.WritableStream<flight._internal._UInt8Array>));
+              return flight._internal._Async.flatMap((cast handle : flight._internal.dom.FileSystemFileHandle).createWritable(), function(__awaitValue765:Dynamic):Dynamic {
+                return flight._internal._Async.flowReturn((cast (cast __awaitValue765 : flight._internal._Any) : flight._internal.dom.WritableStream<flight._internal._UInt8Array>));
               });
             }), function(__caughtError:Dynamic):Dynamic {
               var __error:Dynamic = __caughtError;
@@ -3420,22 +3911,22 @@ class _HostWeb {
       flight._internal._Async.protect(function():Dynamic {
         var handle:Null<flight._internal.dom.FileSystemFileHandle> = cast _Runtime.UNDEFINED;
         var file:flight._internal.dom.File = cast _Runtime.UNDEFINED;
-        ({ final __hostTypeCall679 = signal; __hostTypeCall679 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall679 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-        return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast path : String), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue680:Dynamic):Dynamic {
-          handle = __awaitValue680;
-          ({ final __hostTypeCall681 = signal; __hostTypeCall681 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall681 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-          var __flowBranch682:Dynamic;
+        ({ final __hostTypeCall766 = signal; __hostTypeCall766 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall766 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+        return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast path : String), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue767:Dynamic):Dynamic {
+          handle = __awaitValue767;
+          ({ final __hostTypeCall768 = signal; __hostTypeCall768 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall768 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+          var __flowBranch769:Dynamic;
           if ((cast _Runtime.strictEquals(handle, null) : Bool)) {
-            __flowBranch682 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch769 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(null);
             });
           } else {
-            __flowBranch682 = flight._internal._Async.flowNormal();
+            __flowBranch769 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch682, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch769, function():Dynamic {
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-              return flight._internal._Async.flatMap((cast handle : flight._internal.dom.FileSystemFileHandle).getFile(), function(__awaitValue683:Dynamic):Dynamic {
-                (file = cast (__awaitValue683 : Dynamic));
+              return flight._internal._Async.flatMap((cast handle : flight._internal.dom.FileSystemFileHandle).getFile(), function(__awaitValue770:Dynamic):Dynamic {
+                (file = cast (__awaitValue770 : Dynamic));
                 return flight._internal._Async.flowNormal();
               });
             }), function(__caughtError:Dynamic):Dynamic {
@@ -3444,10 +3935,10 @@ class _HostWeb {
                 return flight._internal._Async.flowReturn(null);
               });
             }), function():Dynamic {
-              ({ final __hostTypeCall684 = signal; __hostTypeCall684 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall684 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+              ({ final __hostTypeCall771 = signal; __hostTypeCall771 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall771 : flight._internal.dom.AbortSignal).throwIfAborted(); });
               return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-                return flight._internal._Async.flatMap(file.arrayBuffer(), function(__awaitValue685:Dynamic):Dynamic {
-                  return flight._internal._Async.flowReturn(new flight._internal._UInt8Array(__awaitValue685));
+                return flight._internal._Async.flatMap(file.arrayBuffer(), function(__awaitValue772:Dynamic):Dynamic {
+                  return flight._internal._Async.flowReturn(new flight._internal._UInt8Array(__awaitValue772));
                 });
               }), function(__caughtError:Dynamic):Dynamic {
                 var __error:Dynamic = __caughtError;
@@ -3467,22 +3958,22 @@ class _HostWeb {
       flight._internal._Async.protect(function():Dynamic {
         var handle:Null<flight._internal.dom.FileSystemFileHandle> = cast _Runtime.UNDEFINED;
         var file:flight._internal.dom.File = cast _Runtime.UNDEFINED;
-        ({ final __hostTypeCall686 = signal; __hostTypeCall686 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall686 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-        return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast path : String), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue687:Dynamic):Dynamic {
-          handle = __awaitValue687;
-          ({ final __hostTypeCall688 = signal; __hostTypeCall688 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall688 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-          var __flowBranch689:Dynamic;
+        ({ final __hostTypeCall773 = signal; __hostTypeCall773 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall773 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+        return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast path : String), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue774:Dynamic):Dynamic {
+          handle = __awaitValue774;
+          ({ final __hostTypeCall775 = signal; __hostTypeCall775 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall775 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+          var __flowBranch776:Dynamic;
           if ((cast _Runtime.strictEquals(handle, null) : Bool)) {
-            __flowBranch689 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch776 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(null);
             });
           } else {
-            __flowBranch689 = flight._internal._Async.flowNormal();
+            __flowBranch776 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch689, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch776, function():Dynamic {
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-              return flight._internal._Async.flatMap((cast handle : flight._internal.dom.FileSystemFileHandle).getFile(), function(__awaitValue690:Dynamic):Dynamic {
-                (file = cast (__awaitValue690 : Dynamic));
+              return flight._internal._Async.flatMap((cast handle : flight._internal.dom.FileSystemFileHandle).getFile(), function(__awaitValue777:Dynamic):Dynamic {
+                (file = cast (__awaitValue777 : Dynamic));
                 return flight._internal._Async.flowNormal();
               });
             }), function(__caughtError:Dynamic):Dynamic {
@@ -3491,19 +3982,19 @@ class _HostWeb {
                 return flight._internal._Async.flowReturn(null);
               });
             }), function():Dynamic {
-              ({ final __hostTypeCall691 = signal; __hostTypeCall691 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall691 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-              var __flowBranch692:Dynamic;
+              ({ final __hostTypeCall778 = signal; __hostTypeCall778 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall778 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+              var __flowBranch779:Dynamic;
               if ((cast ((cast offset : Float) >= (cast file.size : Float)) : Bool)) {
-                __flowBranch692 = flight._internal._Async.protect(function():Dynamic {
+                __flowBranch779 = flight._internal._Async.protect(function():Dynamic {
                   return flight._internal._Async.flowReturn(new flight._internal._UInt8Array(0.0));
                 });
               } else {
-                __flowBranch692 = flight._internal._Async.flowNormal();
+                __flowBranch779 = flight._internal._Async.flowNormal();
               }
-              return flight._internal._Async.continueFlow(__flowBranch692, function():Dynamic {
+              return flight._internal._Async.continueFlow(__flowBranch779, function():Dynamic {
                 return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-                  return flight._internal._Async.flatMap((cast file.slice(offset, (offset + length)) : flight._internal.dom.Blob).arrayBuffer(), function(__awaitValue693:Dynamic):Dynamic {
-                    return flight._internal._Async.flowReturn(new flight._internal._UInt8Array(__awaitValue693));
+                  return flight._internal._Async.flatMap((cast file.slice(offset, (offset + length)) : flight._internal.dom.Blob).arrayBuffer(), function(__awaitValue780:Dynamic):Dynamic {
+                    return flight._internal._Async.flowReturn(new flight._internal._UInt8Array(__awaitValue780));
                   });
                 }), function(__caughtError:Dynamic):Dynamic {
                   var __error:Dynamic = __caughtError;
@@ -3525,45 +4016,45 @@ class _HostWeb {
         var root:Null<flight._internal.dom.FileSystemDirectoryHandle> = cast _Runtime.UNDEFINED;
         var directory:Null<flight._internal.dom.FileSystemDirectoryHandle> = cast _Runtime.UNDEFINED;
         var entries:Array<FileEntry> = cast _Runtime.UNDEFINED;
-        ({ final __hostTypeCall694 = signal; __hostTypeCall694 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall694 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-        return flight._internal._Async.flatMap((cast _HostWeb.getRoot__webFilesystem() : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue695:Dynamic):Dynamic {
-          root = __awaitValue695;
-          ({ final __hostTypeCall696 = signal; __hostTypeCall696 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall696 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-          var __flowBranch697:Dynamic;
+        ({ final __hostTypeCall781 = signal; __hostTypeCall781 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall781 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+        return flight._internal._Async.flatMap((cast _HostWeb.getRoot__webFilesystem() : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue782:Dynamic):Dynamic {
+          root = __awaitValue782;
+          ({ final __hostTypeCall783 = signal; __hostTypeCall783 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall783 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+          var __flowBranch784:Dynamic;
           if ((cast _Runtime.strictEquals(root, null) : Bool)) {
-            __flowBranch697 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch784 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(cast ([] : Array<Dynamic>));
             });
           } else {
-            __flowBranch697 = flight._internal._Async.flowNormal();
+            __flowBranch784 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch697, function():Dynamic {
-            return flight._internal._Async.flatMap((cast _HostWeb.getDirectoryHandle__webFilesystem(({ final __callArgument708:Dynamic = root; __callArgument708; }), (cast _HostWeb.splitPath__webFilesystem((cast path : String)) : Array<String>), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue698:Dynamic):Dynamic {
-              directory = __awaitValue698;
-              ({ final __hostTypeCall699 = signal; __hostTypeCall699 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall699 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-              var __flowBranch700:Dynamic;
+          return flight._internal._Async.continueFlow(__flowBranch784, function():Dynamic {
+            return flight._internal._Async.flatMap((cast _HostWeb.getDirectoryHandle__webFilesystem(({ final __callArgument795:Dynamic = root; __callArgument795; }), (cast _HostWeb.splitPath__webFilesystem((cast path : String)) : Array<String>), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue785:Dynamic):Dynamic {
+              directory = __awaitValue785;
+              ({ final __hostTypeCall786 = signal; __hostTypeCall786 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall786 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+              var __flowBranch787:Dynamic;
               if ((cast _Runtime.strictEquals(directory, null) : Bool)) {
-                __flowBranch700 = flight._internal._Async.protect(function():Dynamic {
+                __flowBranch787 = flight._internal._Async.protect(function():Dynamic {
                   return flight._internal._Async.flowReturn(cast ([] : Array<Dynamic>));
                 });
               } else {
-                __flowBranch700 = flight._internal._Async.flowNormal();
+                __flowBranch787 = flight._internal._Async.flowNormal();
               }
-              return flight._internal._Async.continueFlow(__flowBranch700, function():Dynamic {
+              return flight._internal._Async.continueFlow(__flowBranch787, function():Dynamic {
                 entries = cast ([] : Array<Dynamic>);
                 return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
                   var base:String = cast _Runtime.UNDEFINED;
                   base = (cast _HostWeb.normalizePath__webFilesystem((cast path : String)) : String);
-                  var __flowIterator703:Dynamic = _Runtime.asyncIterator(_HostWeb.asAsyncEntries__webFilesystem(({ final __callArgument701:Dynamic = directory; __callArgument701; })));
+                  var __flowIterator790:Dynamic = _Runtime.asyncIterator(_HostWeb.asAsyncEntries__webFilesystem(({ final __callArgument788:Dynamic = directory; __callArgument788; })));
                   return flight._internal._Async.continueFlow(flight._internal._Async.repeatFlow(function():Dynamic {
-                    return flight._internal._Async.flatMap(_Runtime.callProperty(__flowIterator703, 'next', cast ([] : Array<Dynamic>)), function(__step:Dynamic):Dynamic {
+                    return flight._internal._Async.flatMap(_Runtime.callProperty(__flowIterator790, 'next', cast ([] : Array<Dynamic>)), function(__step:Dynamic):Dynamic {
                       if (_Runtime.truthy(_Runtime.field(__step, 'done'))) return flight._internal._Async.flowBreak();
                       var __iteration0:Dynamic = _Runtime.field(__step, 'value');
                       var name:String = cast _Runtime.UNDEFINED;
                       var handle:flight._internal._Union2<flight._internal.dom.FileSystemFileHandle, flight._internal.dom.FileSystemDirectoryHandle> = cast _Runtime.UNDEFINED;
                       name = flight._internal._StaticIndex.readArray(__iteration0, 0.0);
                       handle = flight._internal._StaticIndex.readArray(__iteration0, 1.0);
-                      ({ final __hostTypeCall705 = signal; __hostTypeCall705 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall705 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+                      ({ final __hostTypeCall792 = signal; __hostTypeCall792 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall792 : flight._internal.dom.AbortSignal).throwIfAborted(); });
                       _Runtime.callProperty(entries, 'push', cast ([{ isDirectory: _Runtime.strictEquals((cast handle : { var kind:String; }).kind, 'directory'), name: name, path: ((cast _Runtime.strictEquals(base, '') : Bool) ? (cast name : Dynamic) : (cast '' + Std.string(base) + '/' + Std.string(name) + '' : Dynamic)) }] : Array<Dynamic>));
                       return flight._internal._Async.flowNormal();
                     });
@@ -3573,15 +4064,15 @@ class _HostWeb {
                 }), function(__caughtError:Dynamic):Dynamic {
                   var __error:Dynamic = __caughtError;
                   return flight._internal._Async.protect(function():Dynamic {
-                    var __flowBranch707:Dynamic;
-                    if (_Runtime.truthy(({ final __hostType706 = signal; __hostType706 == null ? _Runtime.UNDEFINED : (cast __hostType706 : flight._internal.dom.AbortSignal).aborted; }))) {
-                      __flowBranch707 = flight._internal._Async.protect(function():Dynamic {
+                    var __flowBranch794:Dynamic;
+                    if (_Runtime.truthy(({ final __hostType793 = signal; __hostType793 == null ? _Runtime.UNDEFINED : (cast __hostType793 : flight._internal.dom.AbortSignal).aborted; }))) {
+                      __flowBranch794 = flight._internal._Async.protect(function():Dynamic {
                         return flight._internal._Async.reject((cast signal : flight._internal.dom.AbortSignal).reason);
                       });
                     } else {
-                      __flowBranch707 = flight._internal._Async.flowNormal();
+                      __flowBranch794 = flight._internal._Async.flowNormal();
                     }
-                    return flight._internal._Async.continueFlow(__flowBranch707, function():Dynamic {
+                    return flight._internal._Async.continueFlow(__flowBranch794, function():Dynamic {
                       return flight._internal._Async.flowReturn(cast ([] : Array<Dynamic>));
                     });
                   });
@@ -3600,49 +4091,49 @@ class _HostWeb {
         var root:Null<flight._internal.dom.FileSystemDirectoryHandle> = cast _Runtime.UNDEFINED;
         var directory:Null<flight._internal.dom.FileSystemDirectoryHandle> = cast _Runtime.UNDEFINED;
         var entries:Array<FileEntry> = cast _Runtime.UNDEFINED;
-        ({ final __hostTypeCall713 = ({ final __typedStruct712 = options; __typedStruct712 == null ? _Runtime.UNDEFINED : (cast __typedStruct712 : { @:optional var signal:Null<flight._internal.dom.AbortSignal>; }).signal; }); __hostTypeCall713 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall713 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-        return flight._internal._Async.flatMap((cast _HostWeb.getRoot__webFilesystem() : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue714:Dynamic):Dynamic {
-          root = __awaitValue714;
-          ({ final __hostTypeCall718 = ({ final __typedStruct717 = options; __typedStruct717 == null ? _Runtime.UNDEFINED : (cast __typedStruct717 : { @:optional var signal:Null<flight._internal.dom.AbortSignal>; }).signal; }); __hostTypeCall718 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall718 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-          var __flowBranch719:Dynamic;
+        ({ final __hostTypeCall800 = ({ final __typedStruct799 = options; __typedStruct799 == null ? _Runtime.UNDEFINED : (cast __typedStruct799 : { @:optional var signal:Null<flight._internal.dom.AbortSignal>; }).signal; }); __hostTypeCall800 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall800 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+        return flight._internal._Async.flatMap((cast _HostWeb.getRoot__webFilesystem() : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue801:Dynamic):Dynamic {
+          root = __awaitValue801;
+          ({ final __hostTypeCall805 = ({ final __typedStruct804 = options; __typedStruct804 == null ? _Runtime.UNDEFINED : (cast __typedStruct804 : { @:optional var signal:Null<flight._internal.dom.AbortSignal>; }).signal; }); __hostTypeCall805 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall805 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+          var __flowBranch806:Dynamic;
           if ((cast _Runtime.strictEquals(root, null) : Bool)) {
-            __flowBranch719 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch806 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(cast ([] : Array<Dynamic>));
             });
           } else {
-            __flowBranch719 = flight._internal._Async.flowNormal();
+            __flowBranch806 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch719, function():Dynamic {
-            return flight._internal._Async.flatMap((cast _HostWeb.getDirectoryHandle__webFilesystem(({ final __callArgument738:Dynamic = root; __callArgument738; }), (cast _HostWeb.splitPath__webFilesystem((cast path : String)) : Array<String>), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue720:Dynamic):Dynamic {
-              directory = __awaitValue720;
-              ({ final __hostTypeCall724 = ({ final __typedStruct723 = options; __typedStruct723 == null ? _Runtime.UNDEFINED : (cast __typedStruct723 : { @:optional var signal:Null<flight._internal.dom.AbortSignal>; }).signal; }); __hostTypeCall724 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall724 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-              var __flowBranch725:Dynamic;
+          return flight._internal._Async.continueFlow(__flowBranch806, function():Dynamic {
+            return flight._internal._Async.flatMap((cast _HostWeb.getDirectoryHandle__webFilesystem(({ final __callArgument825:Dynamic = root; __callArgument825; }), (cast _HostWeb.splitPath__webFilesystem((cast path : String)) : Array<String>), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue807:Dynamic):Dynamic {
+              directory = __awaitValue807;
+              ({ final __hostTypeCall811 = ({ final __typedStruct810 = options; __typedStruct810 == null ? _Runtime.UNDEFINED : (cast __typedStruct810 : { @:optional var signal:Null<flight._internal.dom.AbortSignal>; }).signal; }); __hostTypeCall811 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall811 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+              var __flowBranch812:Dynamic;
               if ((cast _Runtime.strictEquals(directory, null) : Bool)) {
-                __flowBranch725 = flight._internal._Async.protect(function():Dynamic {
+                __flowBranch812 = flight._internal._Async.protect(function():Dynamic {
                   return flight._internal._Async.flowReturn(cast ([] : Array<Dynamic>));
                 });
               } else {
-                __flowBranch725 = flight._internal._Async.flowNormal();
+                __flowBranch812 = flight._internal._Async.flowNormal();
               }
-              return flight._internal._Async.continueFlow(__flowBranch725, function():Dynamic {
+              return flight._internal._Async.continueFlow(__flowBranch812, function():Dynamic {
                 entries = cast ([] : Array<Dynamic>);
                 return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-                  return flight._internal._Async.flatMap((cast _HostWeb.walkDirectory__webFilesystem(({ final __callArgument727:Dynamic = directory; __callArgument727; }), (cast (cast _HostWeb.normalizePath__webFilesystem((cast path : String)) : String) : String), ({ final __callArgument728:Dynamic = entries; __callArgument728; }), (cast 0.0 : Float), (cast _Runtime.coalesce(({ final __typedStruct729 = options; __typedStruct729 == null ? _Runtime.UNDEFINED : (cast __typedStruct729 : { @:optional var maxDepth:Null<Float>; }).maxDepth; }), function():Dynamic return cast HxMath.POSITIVE_INFINITY) : Float), ({ final __typedStruct730 = options; __typedStruct730 == null ? _Runtime.UNDEFINED : (cast __typedStruct730 : { @:optional var signal:Null<flight._internal.dom.AbortSignal>; }).signal; })) : flight._internal._Promise<flight._internal._Nothing>), function(__awaitValue726:Dynamic):Dynamic {
-                    __awaitValue726;
+                  return flight._internal._Async.flatMap((cast _HostWeb.walkDirectory__webFilesystem(({ final __callArgument814:Dynamic = directory; __callArgument814; }), (cast (cast _HostWeb.normalizePath__webFilesystem((cast path : String)) : String) : String), ({ final __callArgument815:Dynamic = entries; __callArgument815; }), (cast 0.0 : Float), (cast _Runtime.coalesce(({ final __typedStruct816 = options; __typedStruct816 == null ? _Runtime.UNDEFINED : (cast __typedStruct816 : { @:optional var maxDepth:Null<Float>; }).maxDepth; }), function():Dynamic return cast HxMath.POSITIVE_INFINITY) : Float), ({ final __typedStruct817 = options; __typedStruct817 == null ? _Runtime.UNDEFINED : (cast __typedStruct817 : { @:optional var signal:Null<flight._internal.dom.AbortSignal>; }).signal; })) : flight._internal._Promise<flight._internal._Nothing>), function(__awaitValue813:Dynamic):Dynamic {
+                    __awaitValue813;
                     return flight._internal._Async.flowReturn(entries);
                   });
                 }), function(__caughtError:Dynamic):Dynamic {
                   var __error:Dynamic = __caughtError;
                   return flight._internal._Async.protect(function():Dynamic {
-                    var __flowBranch737:Dynamic;
-                    if (_Runtime.truthy(({ final __hostType736 = ({ final __typedStruct735 = options; __typedStruct735 == null ? _Runtime.UNDEFINED : (cast __typedStruct735 : { @:optional var signal:Null<flight._internal.dom.AbortSignal>; }).signal; }); __hostType736 == null ? _Runtime.UNDEFINED : (cast __hostType736 : flight._internal.dom.AbortSignal).aborted; }))) {
-                      __flowBranch737 = flight._internal._Async.protect(function():Dynamic {
+                    var __flowBranch824:Dynamic;
+                    if (_Runtime.truthy(({ final __hostType823 = ({ final __typedStruct822 = options; __typedStruct822 == null ? _Runtime.UNDEFINED : (cast __typedStruct822 : { @:optional var signal:Null<flight._internal.dom.AbortSignal>; }).signal; }); __hostType823 == null ? _Runtime.UNDEFINED : (cast __hostType823 : flight._internal.dom.AbortSignal).aborted; }))) {
+                      __flowBranch824 = flight._internal._Async.protect(function():Dynamic {
                         return flight._internal._Async.reject((cast (cast options : { @:optional var signal:Null<flight._internal.dom.AbortSignal>; }).signal : flight._internal.dom.AbortSignal).reason);
                       });
                     } else {
-                      __flowBranch737 = flight._internal._Async.flowNormal();
+                      __flowBranch824 = flight._internal._Async.flowNormal();
                     }
-                    return flight._internal._Async.continueFlow(__flowBranch737, function():Dynamic {
+                    return flight._internal._Async.continueFlow(__flowBranch824, function():Dynamic {
                       return flight._internal._Async.flowReturn(cast ([] : Array<Dynamic>));
                     });
                   });
@@ -3660,22 +4151,22 @@ class _HostWeb {
       flight._internal._Async.protect(function():Dynamic {
         var handle:Null<flight._internal.dom.FileSystemFileHandle> = cast _Runtime.UNDEFINED;
         var file:flight._internal.dom.File = cast _Runtime.UNDEFINED;
-        ({ final __hostTypeCall740 = signal; __hostTypeCall740 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall740 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-        return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast path : String), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue741:Dynamic):Dynamic {
-          handle = __awaitValue741;
-          ({ final __hostTypeCall742 = signal; __hostTypeCall742 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall742 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-          var __flowBranch743:Dynamic;
+        ({ final __hostTypeCall827 = signal; __hostTypeCall827 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall827 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+        return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast path : String), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue828:Dynamic):Dynamic {
+          handle = __awaitValue828;
+          ({ final __hostTypeCall829 = signal; __hostTypeCall829 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall829 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+          var __flowBranch830:Dynamic;
           if ((cast _Runtime.strictEquals(handle, null) : Bool)) {
-            __flowBranch743 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch830 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(null);
             });
           } else {
-            __flowBranch743 = flight._internal._Async.flowNormal();
+            __flowBranch830 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch743, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch830, function():Dynamic {
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-              return flight._internal._Async.flatMap((cast handle : flight._internal.dom.FileSystemFileHandle).getFile(), function(__awaitValue744:Dynamic):Dynamic {
-                (file = cast (__awaitValue744 : Dynamic));
+              return flight._internal._Async.flatMap((cast handle : flight._internal.dom.FileSystemFileHandle).getFile(), function(__awaitValue831:Dynamic):Dynamic {
+                (file = cast (__awaitValue831 : Dynamic));
                 return flight._internal._Async.flowNormal();
               });
             }), function(__caughtError:Dynamic):Dynamic {
@@ -3684,10 +4175,10 @@ class _HostWeb {
                 return flight._internal._Async.flowReturn(null);
               });
             }), function():Dynamic {
-              ({ final __hostTypeCall745 = signal; __hostTypeCall745 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall745 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+              ({ final __hostTypeCall832 = signal; __hostTypeCall832 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall832 : flight._internal.dom.AbortSignal).throwIfAborted(); });
               return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-                return flight._internal._Async.flatMap(file.text(), function(__awaitValue746:Dynamic):Dynamic {
-                  return flight._internal._Async.flowReturn(__awaitValue746);
+                return flight._internal._Async.flatMap(file.text(), function(__awaitValue833:Dynamic):Dynamic {
+                  return flight._internal._Async.flowReturn(__awaitValue833);
                 });
               }), function(__caughtError:Dynamic):Dynamic {
                 var __error:Dynamic = __caughtError;
@@ -3708,41 +4199,41 @@ class _HostWeb {
         var root:Null<flight._internal.dom.FileSystemDirectoryHandle> = cast _Runtime.UNDEFINED;
         var segments:Array<String> = cast _Runtime.UNDEFINED;
         var parent:Null<flight._internal.dom.FileSystemDirectoryHandle> = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast _HostWeb.getRoot__webFilesystem() : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue747:Dynamic):Dynamic {
-          root = __awaitValue747;
-          var __flowBranch748:Dynamic;
+        return flight._internal._Async.flatMap((cast _HostWeb.getRoot__webFilesystem() : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue834:Dynamic):Dynamic {
+          root = __awaitValue834;
+          var __flowBranch835:Dynamic;
           if ((cast _Runtime.strictEquals(root, null) : Bool)) {
-            __flowBranch748 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch835 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(false);
             });
           } else {
-            __flowBranch748 = flight._internal._Async.flowNormal();
+            __flowBranch835 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch748, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch835, function():Dynamic {
             segments = (cast _HostWeb.splitPath__webFilesystem((cast path : String)) : Array<String>);
-            var __flowBranch749:Dynamic;
+            var __flowBranch836:Dynamic;
             if ((cast _Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0) : Bool)) {
-              __flowBranch749 = flight._internal._Async.protect(function():Dynamic {
+              __flowBranch836 = flight._internal._Async.protect(function():Dynamic {
                 return flight._internal._Async.flowReturn(false);
               });
             } else {
-              __flowBranch749 = flight._internal._Async.flowNormal();
+              __flowBranch836 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch749, function():Dynamic {
-              return flight._internal._Async.flatMap((cast _HostWeb.getDirectoryHandle__webFilesystem(({ final __callArgument753:Dynamic = root; __callArgument753; }), _Runtime.slice(segments, 0.0, -1.0), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue750:Dynamic):Dynamic {
-                parent = __awaitValue750;
-                var __flowBranch751:Dynamic;
+            return flight._internal._Async.continueFlow(__flowBranch836, function():Dynamic {
+              return flight._internal._Async.flatMap((cast _HostWeb.getDirectoryHandle__webFilesystem(({ final __callArgument840:Dynamic = root; __callArgument840; }), _Runtime.slice(segments, 0.0, -1.0), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue837:Dynamic):Dynamic {
+                parent = __awaitValue837;
+                var __flowBranch838:Dynamic;
                 if ((cast _Runtime.strictEquals(parent, null) : Bool)) {
-                  __flowBranch751 = flight._internal._Async.protect(function():Dynamic {
+                  __flowBranch838 = flight._internal._Async.protect(function():Dynamic {
                     return flight._internal._Async.flowReturn(false);
                   });
                 } else {
-                  __flowBranch751 = flight._internal._Async.flowNormal();
+                  __flowBranch838 = flight._internal._Async.flowNormal();
                 }
-                return flight._internal._Async.continueFlow(__flowBranch751, function():Dynamic {
+                return flight._internal._Async.continueFlow(__flowBranch838, function():Dynamic {
                   return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-                    return flight._internal._Async.flatMap((cast parent : flight._internal.dom.FileSystemDirectoryHandle).removeEntry(flight._internal._StaticIndex.readArray(segments, _Runtime.subtractNumbers(_Runtime.field(segments, 'length'), 1.0)), { recursive: recursive }), function(__awaitValue752:Dynamic):Dynamic {
-                      __awaitValue752;
+                    return flight._internal._Async.flatMap((cast parent : flight._internal.dom.FileSystemDirectoryHandle).removeEntry(flight._internal._StaticIndex.readArray(segments, _Runtime.subtractNumbers(_Runtime.field(segments, 'length'), 1.0)), { recursive: recursive }), function(__awaitValue839:Dynamic):Dynamic {
+                      __awaitValue839;
                       return flight._internal._Async.flowReturn(true);
                     });
                   }), function(__caughtError:Dynamic):Dynamic {
@@ -3767,11 +4258,11 @@ class _HostWeb {
   }, rename: function(from:String, to:String):flight._internal._Promise<Bool> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
       var copied:Null<Bool> = cast _Runtime.UNDEFINED;
-      return flight._internal._Async.flatMap(_Runtime.callOptionalValue((cast webFileSystemBackend : FileSystemHostBackend).copy, cast ([from, to] : Array<Dynamic>)), function(__awaitValue755:Dynamic):Dynamic {
-        copied = __awaitValue755;
+      return flight._internal._Async.flatMap(_Runtime.callOptionalValue((cast webFileSystemBackend : FileSystemHostBackend).copy, cast ([from, to] : Array<Dynamic>)), function(__awaitValue842:Dynamic):Dynamic {
+        copied = __awaitValue842;
         if ((cast _Runtime.strictEquals(copied, true) : Bool)) {
-          return flight._internal._Async.flatMap((cast _HostWeb.removeFile__webFilesystem((cast from : String)) : flight._internal._Promise<Bool>), function(__awaitValue756:Dynamic):Dynamic {
-            return flight._internal._Async.resolve(__awaitValue756);
+          return flight._internal._Async.flatMap((cast _HostWeb.removeFile__webFilesystem((cast from : String)) : flight._internal._Promise<Bool>), function(__awaitValue843:Dynamic):Dynamic {
+            return flight._internal._Async.resolve(__awaitValue843);
           });
         } else {
           return flight._internal._Async.resolve(_Runtime.strictEquals(copied, true));
@@ -3783,15 +4274,15 @@ class _HostWeb {
       flight._internal._Async.protect(function():Dynamic {
         var fileHandle:Null<flight._internal.dom.FileSystemFileHandle> = cast _Runtime.UNDEFINED;
         var root:Null<flight._internal.dom.FileSystemDirectoryHandle> = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast path : String), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue757:Dynamic):Dynamic {
-          fileHandle = __awaitValue757;
-          var __flowBranch758:Dynamic;
+        return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast path : String), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue844:Dynamic):Dynamic {
+          fileHandle = __awaitValue844;
+          var __flowBranch845:Dynamic;
           if ((cast !_Runtime.strictEquals(fileHandle, null) : Bool)) {
-            __flowBranch758 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch845 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
                 var file:flight._internal.dom.File = cast _Runtime.UNDEFINED;
-                return flight._internal._Async.flatMap((cast fileHandle : flight._internal.dom.FileSystemFileHandle).getFile(), function(__awaitValue759:Dynamic):Dynamic {
-                  file = __awaitValue759;
+                return flight._internal._Async.flatMap((cast fileHandle : flight._internal.dom.FileSystemFileHandle).getFile(), function(__awaitValue846:Dynamic):Dynamic {
+                  file = __awaitValue846;
                   return flight._internal._Async.flowReturn({ createdTime: (cast file : flight._internal.dom.File).lastModified, isDirectory: false, isSymlink: false, modifiedTime: (cast file : flight._internal.dom.File).lastModified, size: (cast file : flight._internal.dom.File).size });
                 });
               }), function(__caughtError:Dynamic):Dynamic {
@@ -3804,34 +4295,34 @@ class _HostWeb {
               });
             });
           } else {
-            __flowBranch758 = flight._internal._Async.flowNormal();
+            __flowBranch845 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch758, function():Dynamic {
-            return flight._internal._Async.flatMap((cast _HostWeb.getRoot__webFilesystem() : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue760:Dynamic):Dynamic {
-              root = __awaitValue760;
+          return flight._internal._Async.continueFlow(__flowBranch845, function():Dynamic {
+            return flight._internal._Async.flatMap((cast _HostWeb.getRoot__webFilesystem() : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue847:Dynamic):Dynamic {
+              root = __awaitValue847;
               if ((cast _Runtime.strictEquals(root, null) : Bool)) {
-                var __flowBranch765:Dynamic;
+                var __flowBranch852:Dynamic;
                 if ((cast _Runtime.strictEquals(root, null) : Bool)) {
-                  __flowBranch765 = flight._internal._Async.protect(function():Dynamic {
+                  __flowBranch852 = flight._internal._Async.protect(function():Dynamic {
                     return flight._internal._Async.flowReturn(null);
                   });
                 } else {
-                  __flowBranch765 = flight._internal._Async.flowNormal();
+                  __flowBranch852 = flight._internal._Async.flowNormal();
                 }
-                return flight._internal._Async.continueFlow(__flowBranch765, function():Dynamic {
+                return flight._internal._Async.continueFlow(__flowBranch852, function():Dynamic {
                   return flight._internal._Async.flowReturn({ createdTime: 0.0, isDirectory: true, isSymlink: false, modifiedTime: 0.0, size: 0.0 });
                 });
               } else {
-                return flight._internal._Async.flatMap((cast _HostWeb.getDirectoryHandle__webFilesystem(({ final __callArgument763:Dynamic = root; __callArgument763; }), (cast _HostWeb.splitPath__webFilesystem((cast path : String)) : Array<String>), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue761:Dynamic):Dynamic {
-                  var __flowBranch762:Dynamic;
-                  if ((cast _Runtime.strictEquals(__awaitValue761, null) : Bool)) {
-                    __flowBranch762 = flight._internal._Async.protect(function():Dynamic {
+                return flight._internal._Async.flatMap((cast _HostWeb.getDirectoryHandle__webFilesystem(({ final __callArgument850:Dynamic = root; __callArgument850; }), (cast _HostWeb.splitPath__webFilesystem((cast path : String)) : Array<String>), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue848:Dynamic):Dynamic {
+                  var __flowBranch849:Dynamic;
+                  if ((cast _Runtime.strictEquals(__awaitValue848, null) : Bool)) {
+                    __flowBranch849 = flight._internal._Async.protect(function():Dynamic {
                       return flight._internal._Async.flowReturn(null);
                     });
                   } else {
-                    __flowBranch762 = flight._internal._Async.flowNormal();
+                    __flowBranch849 = flight._internal._Async.flowNormal();
                   }
-                  return flight._internal._Async.continueFlow(__flowBranch762, function():Dynamic {
+                  return flight._internal._Async.continueFlow(__flowBranch849, function():Dynamic {
                     return flight._internal._Async.flowReturn({ createdTime: 0.0, isDirectory: true, isSymlink: false, modifiedTime: 0.0, size: 0.0 });
                   });
                 });
@@ -3843,51 +4334,51 @@ class _HostWeb {
     );
   }, writeBinaryFile: function(path:String, data:flight._internal._UInt8Array, signal:Null<flight._internal.dom.AbortSignal>):flight._internal._Promise<Bool> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      ({ final __hostTypeCall766 = signal; __hostTypeCall766 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall766 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-      return flight._internal._Async.resolve((cast _HostWeb.writeFile__webFilesystem((cast path : String), ({ final __callArgument767:Dynamic = _Runtime.slice(data, 0, null); __callArgument767; }), ({ final __callArgument768:Dynamic = signal; __callArgument768; })) : flight._internal._Promise<Bool>));
+      ({ final __hostTypeCall853 = signal; __hostTypeCall853 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall853 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+      return flight._internal._Async.resolve((cast _HostWeb.writeFile__webFilesystem((cast path : String), ({ final __callArgument854:Dynamic = _Runtime.slice(data, 0, null); __callArgument854; }), ({ final __callArgument855:Dynamic = signal; __callArgument855; })) : flight._internal._Promise<Bool>));
     }));
   }, writeFileAtomic: function(path:String, data:flight._internal._Union2<String, flight._internal._UInt8Array>, signal:Null<flight._internal.dom.AbortSignal>):flight._internal._Promise<Bool> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var temporaryPath:String = cast _Runtime.UNDEFINED;
         var payload:flight._internal._Union2<String, flight._internal._UInt8Array> = cast _Runtime.UNDEFINED;
-        ({ final __hostTypeCall771 = signal; __hostTypeCall771 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall771 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+        ({ final __hostTypeCall858 = signal; __hostTypeCall858 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall858 : flight._internal.dom.AbortSignal).throwIfAborted(); });
         temporaryPath = (path + '.__atomic_tmp__');
         payload = ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'string') : Bool) ? (cast data : Dynamic) : (cast _Runtime.slice(data, 0, null) : Dynamic));
         return flight._internal._Async.continueFlow(flight._internal._Async.finalizeFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
           var temporaryHandle:Null<flight._internal.dom.FileSystemFileHandle> = cast _Runtime.UNDEFINED;
           var file:flight._internal.dom.File = cast _Runtime.UNDEFINED;
           var bytes:flight._internal._UInt8Array = cast _Runtime.UNDEFINED;
-          return flight._internal._Async.flatMap((cast _HostWeb.writeFile__webFilesystem((cast temporaryPath : String), ({ final __callArgument786:Dynamic = payload; __callArgument786; }), ({ final __callArgument787:Dynamic = signal; __callArgument787; })) : flight._internal._Promise<Bool>), function(__awaitValue772:Dynamic):Dynamic {
-            var __flowBranch773:Dynamic;
-            if ((cast !_Runtime.truthy(__awaitValue772) : Bool)) {
-              __flowBranch773 = flight._internal._Async.protect(function():Dynamic {
+          return flight._internal._Async.flatMap((cast _HostWeb.writeFile__webFilesystem((cast temporaryPath : String), ({ final __callArgument873:Dynamic = payload; __callArgument873; }), ({ final __callArgument874:Dynamic = signal; __callArgument874; })) : flight._internal._Promise<Bool>), function(__awaitValue859:Dynamic):Dynamic {
+            var __flowBranch860:Dynamic;
+            if ((cast !_Runtime.truthy(__awaitValue859) : Bool)) {
+              __flowBranch860 = flight._internal._Async.protect(function():Dynamic {
                 return flight._internal._Async.flowReturn(false);
               });
             } else {
-              __flowBranch773 = flight._internal._Async.flowNormal();
+              __flowBranch860 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch773, function():Dynamic {
-              return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast temporaryPath : String), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue774:Dynamic):Dynamic {
-                temporaryHandle = __awaitValue774;
-                ({ final __hostTypeCall775 = signal; __hostTypeCall775 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall775 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-                var __flowBranch776:Dynamic;
+            return flight._internal._Async.continueFlow(__flowBranch860, function():Dynamic {
+              return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast temporaryPath : String), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue861:Dynamic):Dynamic {
+                temporaryHandle = __awaitValue861;
+                ({ final __hostTypeCall862 = signal; __hostTypeCall862 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall862 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+                var __flowBranch863:Dynamic;
                 if ((cast _Runtime.strictEquals(temporaryHandle, null) : Bool)) {
-                  __flowBranch776 = flight._internal._Async.protect(function():Dynamic {
+                  __flowBranch863 = flight._internal._Async.protect(function():Dynamic {
                     return flight._internal._Async.flowReturn(false);
                   });
                 } else {
-                  __flowBranch776 = flight._internal._Async.flowNormal();
+                  __flowBranch863 = flight._internal._Async.flowNormal();
                 }
-                return flight._internal._Async.continueFlow(__flowBranch776, function():Dynamic {
-                  return flight._internal._Async.flatMap((cast temporaryHandle : flight._internal.dom.FileSystemFileHandle).getFile(), function(__awaitValue777:Dynamic):Dynamic {
-                    file = __awaitValue777;
-                    ({ final __hostTypeCall778 = signal; __hostTypeCall778 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall778 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-                    return flight._internal._Async.flatMap((cast file : flight._internal.dom.File).arrayBuffer(), function(__awaitValue779:Dynamic):Dynamic {
-                      bytes = new flight._internal._UInt8Array(__awaitValue779);
-                      ({ final __hostTypeCall780 = signal; __hostTypeCall780 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall780 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-                      return flight._internal._Async.flatMap((cast _HostWeb.writeFile__webFilesystem((cast path : String), ({ final __callArgument782:Dynamic = bytes; __callArgument782; }), ({ final __callArgument783:Dynamic = signal; __callArgument783; })) : flight._internal._Promise<Bool>), function(__awaitValue781:Dynamic):Dynamic {
-                        return flight._internal._Async.flowReturn(__awaitValue781);
+                return flight._internal._Async.continueFlow(__flowBranch863, function():Dynamic {
+                  return flight._internal._Async.flatMap((cast temporaryHandle : flight._internal.dom.FileSystemFileHandle).getFile(), function(__awaitValue864:Dynamic):Dynamic {
+                    file = __awaitValue864;
+                    ({ final __hostTypeCall865 = signal; __hostTypeCall865 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall865 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+                    return flight._internal._Async.flatMap((cast file : flight._internal.dom.File).arrayBuffer(), function(__awaitValue866:Dynamic):Dynamic {
+                      bytes = new flight._internal._UInt8Array(__awaitValue866);
+                      ({ final __hostTypeCall867 = signal; __hostTypeCall867 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall867 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+                      return flight._internal._Async.flatMap((cast _HostWeb.writeFile__webFilesystem((cast path : String), ({ final __callArgument869:Dynamic = bytes; __callArgument869; }), ({ final __callArgument870:Dynamic = signal; __callArgument870; })) : flight._internal._Promise<Bool>), function(__awaitValue868:Dynamic):Dynamic {
+                        return flight._internal._Async.flowReturn(__awaitValue868);
                       });
                     });
                   });
@@ -3898,21 +4389,21 @@ class _HostWeb {
         }), function(__caughtError:Dynamic):Dynamic {
           var __error:Dynamic = __caughtError;
           return flight._internal._Async.protect(function():Dynamic {
-            var __flowBranch791:Dynamic;
-            if (_Runtime.truthy(({ final __hostType790 = signal; __hostType790 == null ? _Runtime.UNDEFINED : (cast __hostType790 : flight._internal.dom.AbortSignal).aborted; }))) {
-              __flowBranch791 = flight._internal._Async.protect(function():Dynamic {
+            var __flowBranch878:Dynamic;
+            if (_Runtime.truthy(({ final __hostType877 = signal; __hostType877 == null ? _Runtime.UNDEFINED : (cast __hostType877 : flight._internal.dom.AbortSignal).aborted; }))) {
+              __flowBranch878 = flight._internal._Async.protect(function():Dynamic {
                 return flight._internal._Async.reject((cast signal : flight._internal.dom.AbortSignal).reason);
               });
             } else {
-              __flowBranch791 = flight._internal._Async.flowNormal();
+              __flowBranch878 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch791, function():Dynamic {
+            return flight._internal._Async.continueFlow(__flowBranch878, function():Dynamic {
               return flight._internal._Async.flowReturn(false);
             });
           });
         }), function():Dynamic {
-          return flight._internal._Async.flatMap((cast _HostWeb.removeFile__webFilesystem((cast temporaryPath : String)) : flight._internal._Promise<Bool>), function(__awaitValue792:Dynamic):Dynamic {
-            __awaitValue792;
+          return flight._internal._Async.flatMap((cast _HostWeb.removeFile__webFilesystem((cast temporaryPath : String)) : flight._internal._Promise<Bool>), function(__awaitValue879:Dynamic):Dynamic {
+            __awaitValue879;
             return flight._internal._Async.flowNormal();
           });
         }), function():Dynamic {
@@ -3922,8 +4413,8 @@ class _HostWeb {
     );
   }, writeTextFile: function(path:String, data:String, signal:Null<flight._internal.dom.AbortSignal>):flight._internal._Promise<Bool> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      ({ final __hostTypeCall793 = signal; __hostTypeCall793 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall793 : flight._internal.dom.AbortSignal).throwIfAborted(); });
-      return flight._internal._Async.resolve((cast _HostWeb.writeFile__webFilesystem((cast path : String), ({ final __callArgument794:Dynamic = data; __callArgument794; }), ({ final __callArgument795:Dynamic = signal; __callArgument795; })) : flight._internal._Promise<Bool>));
+      ({ final __hostTypeCall880 = signal; __hostTypeCall880 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall880 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+      return flight._internal._Async.resolve((cast _HostWeb.writeFile__webFilesystem((cast path : String), ({ final __callArgument881:Dynamic = data; __callArgument881; }), ({ final __callArgument882:Dynamic = signal; __callArgument882; })) : flight._internal._Promise<Bool>));
     }));
   } });
 
@@ -3940,13 +4431,13 @@ class _HostWeb {
         var current:flight._internal.dom.FileSystemDirectoryHandle = cast _Runtime.UNDEFINED;
         current = root;
         return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-          var __flowIterator800:Array<Dynamic> = _Runtime.iterable(segments);
-          var __flowIndex801:Int = 0;
+          var __flowIterator887:Array<Dynamic> = _Runtime.iterable(segments);
+          var __flowIndex888:Int = 0;
           return flight._internal._Async.continueFlow(flight._internal._Async.repeatFlow(function():Dynamic {
-            if (__flowIndex801 >= __flowIterator800.length) return flight._internal._Async.flowBreak();
-            var segment:Dynamic = __flowIterator800[__flowIndex801++];
-            return flight._internal._Async.flatMap((cast current : flight._internal.dom.FileSystemDirectoryHandle).getDirectoryHandle(segment, { create: create }), function(__awaitValue802:Dynamic):Dynamic {
-              (current = cast (__awaitValue802 : Dynamic));
+            if (__flowIndex888 >= __flowIterator887.length) return flight._internal._Async.flowBreak();
+            var segment:Dynamic = __flowIterator887[__flowIndex888++];
+            return flight._internal._Async.flatMap((cast current : flight._internal.dom.FileSystemDirectoryHandle).getDirectoryHandle(segment, { create: create }), function(__awaitValue889:Dynamic):Dynamic {
+              (current = cast (__awaitValue889 : Dynamic));
               return flight._internal._Async.flowNormal();
             });
           }), function():Dynamic {
@@ -3970,41 +4461,41 @@ class _HostWeb {
         var root:Null<flight._internal.dom.FileSystemDirectoryHandle> = cast _Runtime.UNDEFINED;
         var segments:Array<String> = cast _Runtime.UNDEFINED;
         var parent:Null<flight._internal.dom.FileSystemDirectoryHandle> = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast _HostWeb.getRoot__webFilesystem() : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue805:Dynamic):Dynamic {
-          root = __awaitValue805;
-          var __flowBranch806:Dynamic;
+        return flight._internal._Async.flatMap((cast _HostWeb.getRoot__webFilesystem() : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue892:Dynamic):Dynamic {
+          root = __awaitValue892;
+          var __flowBranch893:Dynamic;
           if ((cast _Runtime.strictEquals(root, null) : Bool)) {
-            __flowBranch806 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch893 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(null);
             });
           } else {
-            __flowBranch806 = flight._internal._Async.flowNormal();
+            __flowBranch893 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch806, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch893, function():Dynamic {
             segments = (cast _HostWeb.splitPath__webFilesystem((cast path : String)) : Array<String>);
-            var __flowBranch807:Dynamic;
+            var __flowBranch894:Dynamic;
             if ((cast _Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0) : Bool)) {
-              __flowBranch807 = flight._internal._Async.protect(function():Dynamic {
+              __flowBranch894 = flight._internal._Async.protect(function():Dynamic {
                 return flight._internal._Async.flowReturn(null);
               });
             } else {
-              __flowBranch807 = flight._internal._Async.flowNormal();
+              __flowBranch894 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch807, function():Dynamic {
-              return flight._internal._Async.flatMap((cast _HostWeb.getDirectoryHandle__webFilesystem(({ final __callArgument811:Dynamic = root; __callArgument811; }), _Runtime.slice(segments, 0.0, -1.0), (cast create : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue808:Dynamic):Dynamic {
-                parent = __awaitValue808;
-                var __flowBranch809:Dynamic;
+            return flight._internal._Async.continueFlow(__flowBranch894, function():Dynamic {
+              return flight._internal._Async.flatMap((cast _HostWeb.getDirectoryHandle__webFilesystem(({ final __callArgument898:Dynamic = root; __callArgument898; }), _Runtime.slice(segments, 0.0, -1.0), (cast create : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue895:Dynamic):Dynamic {
+                parent = __awaitValue895;
+                var __flowBranch896:Dynamic;
                 if ((cast _Runtime.strictEquals(parent, null) : Bool)) {
-                  __flowBranch809 = flight._internal._Async.protect(function():Dynamic {
+                  __flowBranch896 = flight._internal._Async.protect(function():Dynamic {
                     return flight._internal._Async.flowReturn(null);
                   });
                 } else {
-                  __flowBranch809 = flight._internal._Async.flowNormal();
+                  __flowBranch896 = flight._internal._Async.flowNormal();
                 }
-                return flight._internal._Async.continueFlow(__flowBranch809, function():Dynamic {
+                return flight._internal._Async.continueFlow(__flowBranch896, function():Dynamic {
                   return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-                    return flight._internal._Async.flatMap((cast parent : flight._internal.dom.FileSystemDirectoryHandle).getFileHandle(flight._internal._StaticIndex.readArray(segments, _Runtime.subtractNumbers(_Runtime.field(segments, 'length'), 1.0)), { create: create }), function(__awaitValue810:Dynamic):Dynamic {
-                      return flight._internal._Async.flowReturn(__awaitValue810);
+                    return flight._internal._Async.flatMap((cast parent : flight._internal.dom.FileSystemDirectoryHandle).getFileHandle(flight._internal._StaticIndex.readArray(segments, _Runtime.subtractNumbers(_Runtime.field(segments, 'length'), 1.0)), { create: create }), function(__awaitValue897:Dynamic):Dynamic {
+                      return flight._internal._Async.flowReturn(__awaitValue897);
                     });
                   }), function(__caughtError:Dynamic):Dynamic {
                     var __error:Dynamic = __caughtError;
@@ -4027,28 +4518,28 @@ class _HostWeb {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var storage:flight._internal.dom.StorageManager = cast _Runtime.UNDEFINED;
-        var __flowBranch813:Dynamic;
+        var __flowBranch900:Dynamic;
         if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool)) {
-          __flowBranch813 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch900 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn(null);
           });
         } else {
-          __flowBranch813 = flight._internal._Async.flowNormal();
+          __flowBranch900 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch813, function():Dynamic {
+        return flight._internal._Async.continueFlow(__flowBranch900, function():Dynamic {
           storage = flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'storage');
-          var __flowBranch814:Dynamic;
+          var __flowBranch901:Dynamic;
           if ((cast ((cast _Runtime.strictEquals(storage, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast storage : flight._internal.dom.StorageManager).getDirectory), 'function') : Bool)) : Bool)) {
-            __flowBranch814 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch901 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(null);
             });
           } else {
-            __flowBranch814 = flight._internal._Async.flowNormal();
+            __flowBranch901 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch814, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch901, function():Dynamic {
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-              return flight._internal._Async.flatMap((cast storage : flight._internal.dom.StorageManager).getDirectory(), function(__awaitValue815:Dynamic):Dynamic {
-                return flight._internal._Async.flowReturn(__awaitValue815);
+              return flight._internal._Async.flatMap((cast storage : flight._internal.dom.StorageManager).getDirectory(), function(__awaitValue902:Dynamic):Dynamic {
+                return flight._internal._Async.flowReturn(__awaitValue902);
               });
             }), function(__caughtError:Dynamic):Dynamic {
               var __error:Dynamic = __caughtError;
@@ -4074,59 +4565,59 @@ class _HostWeb {
       flight._internal._Async.protect(function():Dynamic {
         var root:Null<flight._internal.dom.FileSystemDirectoryHandle> = cast _Runtime.UNDEFINED;
         var segments:Array<String> = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast _HostWeb.getRoot__webFilesystem() : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue818:Dynamic):Dynamic {
-          root = __awaitValue818;
-          var __flowBranch819:Dynamic;
+        return flight._internal._Async.flatMap((cast _HostWeb.getRoot__webFilesystem() : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue905:Dynamic):Dynamic {
+          root = __awaitValue905;
+          var __flowBranch906:Dynamic;
           if ((cast _Runtime.strictEquals(root, null) : Bool)) {
-            __flowBranch819 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch906 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(false);
             });
           } else {
-            __flowBranch819 = flight._internal._Async.flowNormal();
+            __flowBranch906 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch819, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch906, function():Dynamic {
             segments = (cast _HostWeb.splitPath__webFilesystem((cast path : String)) : Array<String>);
-            var __flowBranch820:Dynamic;
+            var __flowBranch907:Dynamic;
             if ((cast _Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0) : Bool)) {
-              __flowBranch820 = flight._internal._Async.protect(function():Dynamic {
+              __flowBranch907 = flight._internal._Async.protect(function():Dynamic {
                 return flight._internal._Async.flowReturn(false);
               });
             } else {
-              __flowBranch820 = flight._internal._Async.flowNormal();
+              __flowBranch907 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch820, function():Dynamic {
+            return flight._internal._Async.continueFlow(__flowBranch907, function():Dynamic {
               return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
                 var parent:Null<flight._internal.dom.FileSystemDirectoryHandle> = cast _Runtime.UNDEFINED;
-                return flight._internal._Async.flatMap((cast _HostWeb.getDirectoryHandle__webFilesystem(({ final __callArgument827:Dynamic = root; __callArgument827; }), _Runtime.slice(segments, 0.0, -1.0), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue821:Dynamic):Dynamic {
-                  parent = __awaitValue821;
+                return flight._internal._Async.flatMap((cast _HostWeb.getDirectoryHandle__webFilesystem(({ final __callArgument914:Dynamic = root; __callArgument914; }), _Runtime.slice(segments, 0.0, -1.0), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemDirectoryHandle>>), function(__awaitValue908:Dynamic):Dynamic {
+                  parent = __awaitValue908;
                   if ((cast _Runtime.strictEquals(parent, null) : Bool)) {
-                    var __flowBranch825:Dynamic;
+                    var __flowBranch912:Dynamic;
                     if ((cast _Runtime.strictEquals(parent, null) : Bool)) {
-                      __flowBranch825 = flight._internal._Async.protect(function():Dynamic {
+                      __flowBranch912 = flight._internal._Async.protect(function():Dynamic {
                         return flight._internal._Async.flowReturn(false);
                       });
                     } else {
-                      __flowBranch825 = flight._internal._Async.flowNormal();
+                      __flowBranch912 = flight._internal._Async.flowNormal();
                     }
-                    return flight._internal._Async.continueFlow(__flowBranch825, function():Dynamic {
-                      return flight._internal._Async.flatMap((cast parent : flight._internal.dom.FileSystemDirectoryHandle).removeEntry(flight._internal._StaticIndex.readArray(segments, _Runtime.subtractNumbers(_Runtime.field(segments, 'length'), 1.0)), { recursive: false }), function(__awaitValue826:Dynamic):Dynamic {
-                        __awaitValue826;
+                    return flight._internal._Async.continueFlow(__flowBranch912, function():Dynamic {
+                      return flight._internal._Async.flatMap((cast parent : flight._internal.dom.FileSystemDirectoryHandle).removeEntry(flight._internal._StaticIndex.readArray(segments, _Runtime.subtractNumbers(_Runtime.field(segments, 'length'), 1.0)), { recursive: false }), function(__awaitValue913:Dynamic):Dynamic {
+                        __awaitValue913;
                         return flight._internal._Async.flowReturn(true);
                       });
                     });
                   } else {
-                    return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast path : String), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue822:Dynamic):Dynamic {
-                      var __flowBranch823:Dynamic;
-                      if ((cast _Runtime.strictEquals(__awaitValue822, null) : Bool)) {
-                        __flowBranch823 = flight._internal._Async.protect(function():Dynamic {
+                    return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast path : String), (cast false : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue909:Dynamic):Dynamic {
+                      var __flowBranch910:Dynamic;
+                      if ((cast _Runtime.strictEquals(__awaitValue909, null) : Bool)) {
+                        __flowBranch910 = flight._internal._Async.protect(function():Dynamic {
                           return flight._internal._Async.flowReturn(false);
                         });
                       } else {
-                        __flowBranch823 = flight._internal._Async.flowNormal();
+                        __flowBranch910 = flight._internal._Async.flowNormal();
                       }
-                      return flight._internal._Async.continueFlow(__flowBranch823, function():Dynamic {
-                        return flight._internal._Async.flatMap((cast parent : flight._internal.dom.FileSystemDirectoryHandle).removeEntry(flight._internal._StaticIndex.readArray(segments, _Runtime.subtractNumbers(_Runtime.field(segments, 'length'), 1.0)), { recursive: false }), function(__awaitValue824:Dynamic):Dynamic {
-                          __awaitValue824;
+                      return flight._internal._Async.continueFlow(__flowBranch910, function():Dynamic {
+                        return flight._internal._Async.flatMap((cast parent : flight._internal.dom.FileSystemDirectoryHandle).removeEntry(flight._internal._StaticIndex.readArray(segments, _Runtime.subtractNumbers(_Runtime.field(segments, 'length'), 1.0)), { recursive: false }), function(__awaitValue911:Dynamic):Dynamic {
+                          __awaitValue911;
                           return flight._internal._Async.flowReturn(true);
                         });
                       });
@@ -4156,9 +4647,9 @@ class _HostWeb {
   public static function walkDirectory__webFilesystem(directory:flight._internal.dom.FileSystemDirectoryHandle, basePath:String, out:Array<FileEntry>, depth:Float, maxDepth:Float, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<flight._internal._Nothing> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
-        var __flowIterator840:Dynamic = _Runtime.asyncIterator(_HostWeb.asAsyncEntries__webFilesystem(({ final __callArgument838:Dynamic = directory; __callArgument838; })));
+        var __flowIterator927:Dynamic = _Runtime.asyncIterator(_HostWeb.asAsyncEntries__webFilesystem(({ final __callArgument925:Dynamic = directory; __callArgument925; })));
         return flight._internal._Async.continueFlow(flight._internal._Async.repeatFlow(function():Dynamic {
-          return flight._internal._Async.flatMap(_Runtime.callProperty(__flowIterator840, 'next', cast ([] : Array<Dynamic>)), function(__step:Dynamic):Dynamic {
+          return flight._internal._Async.flatMap(_Runtime.callProperty(__flowIterator927, 'next', cast ([] : Array<Dynamic>)), function(__step:Dynamic):Dynamic {
             if (_Runtime.truthy(_Runtime.field(__step, 'done'))) return flight._internal._Async.flowBreak();
             var __iteration3:Dynamic = _Runtime.field(__step, 'value');
             var name:String = cast _Runtime.UNDEFINED;
@@ -4167,22 +4658,22 @@ class _HostWeb {
             var isDirectory:Bool = cast _Runtime.UNDEFINED;
             name = flight._internal._StaticIndex.readArray(__iteration3, 0.0);
             handle = flight._internal._StaticIndex.readArray(__iteration3, 1.0);
-            ({ final __hostTypeCall842 = signal; __hostTypeCall842 == null ? _Runtime.UNDEFINED : __hostTypeCall842.throwIfAborted(); });
+            ({ final __hostTypeCall929 = signal; __hostTypeCall929 == null ? _Runtime.UNDEFINED : __hostTypeCall929.throwIfAborted(); });
             path = ((cast _Runtime.strictEquals(basePath, '') : Bool) ? (cast name : Dynamic) : (cast '' + Std.string(basePath) + '/' + Std.string(name) + '' : Dynamic));
             isDirectory = _Runtime.strictEquals((cast handle : { var kind:String; }).kind, 'directory');
             _Runtime.callProperty(out, 'push', cast ([{ isDirectory: isDirectory, name: name, path: path }] : Array<Dynamic>));
-            var __flowBranch843:Dynamic;
+            var __flowBranch930:Dynamic;
             if ((cast ((cast isDirectory : Bool) && (cast ((cast depth : Float) < (cast maxDepth : Float)) : Bool)) : Bool)) {
-              __flowBranch843 = flight._internal._Async.protect(function():Dynamic {
-                return flight._internal._Async.flatMap((cast _HostWeb.walkDirectory__webFilesystem((cast handle : flight._internal.dom.FileSystemDirectoryHandle), (cast path : String), ({ final __callArgument845:Dynamic = out; __callArgument845; }), (cast (depth + 1.0) : Float), (cast maxDepth : Float), ({ final __callArgument846:Dynamic = signal; __callArgument846; })) : flight._internal._Promise<flight._internal._Nothing>), function(__awaitValue844:Dynamic):Dynamic {
-                  __awaitValue844;
+              __flowBranch930 = flight._internal._Async.protect(function():Dynamic {
+                return flight._internal._Async.flatMap((cast _HostWeb.walkDirectory__webFilesystem((cast handle : flight._internal.dom.FileSystemDirectoryHandle), (cast path : String), ({ final __callArgument932:Dynamic = out; __callArgument932; }), (cast (depth + 1.0) : Float), (cast maxDepth : Float), ({ final __callArgument933:Dynamic = signal; __callArgument933; })) : flight._internal._Promise<flight._internal._Nothing>), function(__awaitValue931:Dynamic):Dynamic {
+                  __awaitValue931;
                   return flight._internal._Async.flowNormal();
                 });
               });
             } else {
-              __flowBranch843 = flight._internal._Async.flowNormal();
+              __flowBranch930 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch843, function():Dynamic {
+            return flight._internal._Async.continueFlow(__flowBranch930, function():Dynamic {
               return flight._internal._Async.flowNormal();
             });
           });
@@ -4201,22 +4692,22 @@ class _HostWeb {
         var aborted:Bool = cast _Runtime.UNDEFINED;
         var abortPromise:Null<flight._internal._Promise<flight._internal._Nothing>> = cast _Runtime.UNDEFINED;
         var onAbort:Void->Void = cast _Runtime.UNDEFINED;
-        ({ final __hostTypeCall864 = signal; __hostTypeCall864 == null ? _Runtime.UNDEFINED : __hostTypeCall864.throwIfAborted(); });
-        return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast path : String), (cast true : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue865:Dynamic):Dynamic {
-          handle = __awaitValue865;
-          ({ final __hostTypeCall866 = signal; __hostTypeCall866 == null ? _Runtime.UNDEFINED : __hostTypeCall866.throwIfAborted(); });
-          var __flowBranch867:Dynamic;
+        ({ final __hostTypeCall951 = signal; __hostTypeCall951 == null ? _Runtime.UNDEFINED : __hostTypeCall951.throwIfAborted(); });
+        return flight._internal._Async.flatMap((cast _HostWeb.getFileHandle__webFilesystem((cast path : String), (cast true : Bool)) : flight._internal._Promise<Null<flight._internal.dom.FileSystemFileHandle>>), function(__awaitValue952:Dynamic):Dynamic {
+          handle = __awaitValue952;
+          ({ final __hostTypeCall953 = signal; __hostTypeCall953 == null ? _Runtime.UNDEFINED : __hostTypeCall953.throwIfAborted(); });
+          var __flowBranch954:Dynamic;
           if ((cast ((cast _Runtime.strictEquals(handle, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast handle : flight._internal.dom.FileSystemFileHandle).createWritable), 'function') : Bool)) : Bool)) {
-            __flowBranch867 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch954 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(false);
             });
           } else {
-            __flowBranch867 = flight._internal._Async.flowNormal();
+            __flowBranch954 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch867, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch954, function():Dynamic {
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-              return flight._internal._Async.flatMap((cast handle : flight._internal.dom.FileSystemFileHandle).createWritable(), function(__awaitValue868:Dynamic):Dynamic {
-                (writable = cast (__awaitValue868 : Dynamic));
+              return flight._internal._Async.flatMap((cast handle : flight._internal.dom.FileSystemFileHandle).createWritable(), function(__awaitValue955:Dynamic):Dynamic {
+                (writable = cast (__awaitValue955 : Dynamic));
                 return flight._internal._Async.flowNormal();
               });
             }), function(__caughtError:Dynamic):Dynamic {
@@ -4225,46 +4716,46 @@ class _HostWeb {
                 return flight._internal._Async.flowReturn(false);
               });
             }), function():Dynamic {
-              var __flowBranch870:Dynamic;
-              if (_Runtime.truthy(({ final __hostType869 = signal; __hostType869 == null ? _Runtime.UNDEFINED : __hostType869.aborted; }))) {
-                __flowBranch870 = flight._internal._Async.protect(function():Dynamic {
+              var __flowBranch957:Dynamic;
+              if (_Runtime.truthy(({ final __hostType956 = signal; __hostType956 == null ? _Runtime.UNDEFINED : __hostType956.aborted; }))) {
+                __flowBranch957 = flight._internal._Async.protect(function():Dynamic {
                   return flight._internal._Async.flatMap(flight._internal._Async.recover(writable.abort(signal.reason), function(__unused4:flight._internal._Any):Void {
 
-                  }), function(__awaitValue871:Dynamic):Dynamic {
-                    __awaitValue871;
+                  }), function(__awaitValue958:Dynamic):Dynamic {
+                    __awaitValue958;
                     return flight._internal._Async.reject(signal.reason);
                   });
                 });
               } else {
-                __flowBranch870 = flight._internal._Async.flowNormal();
+                __flowBranch957 = flight._internal._Async.flowNormal();
               }
-              return flight._internal._Async.continueFlow(__flowBranch870, function():Dynamic {
+              return flight._internal._Async.continueFlow(__flowBranch957, function():Dynamic {
                 aborted = false;
                 abortPromise = null;
                 onAbort = function():Void {
                   (aborted = cast (true : Dynamic));
-                  (abortPromise = cast (flight._internal._Async.recover(writable.abort(({ final __hostType873 = signal; __hostType873 == null ? _Runtime.UNDEFINED : __hostType873.reason; })), function(__unused5:flight._internal._Any):Void {
+                  (abortPromise = cast (flight._internal._Async.recover(writable.abort(({ final __hostType960 = signal; __hostType960 == null ? _Runtime.UNDEFINED : __hostType960.reason; })), function(__unused5:flight._internal._Any):Void {
 
                   }) : Dynamic));
                 };
-                ({ final __hostTypeCall874 = signal; __hostTypeCall874 == null ? _Runtime.UNDEFINED : __hostTypeCall874.addEventListener('abort', onAbort, { once: true }); });
+                ({ final __hostTypeCall961 = signal; __hostTypeCall961 == null ? _Runtime.UNDEFINED : __hostTypeCall961.addEventListener('abort', onAbort, { once: true }); });
                 return flight._internal._Async.continueFlow(flight._internal._Async.finalizeFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-                  return flight._internal._Async.flatMap(writable.write((cast data : flight._internal.dom.FileSystemWriteChunkType)), function(__awaitValue875:Dynamic):Dynamic {
-                    __awaitValue875;
-                    var __flowBranch876:Dynamic;
+                  return flight._internal._Async.flatMap(writable.write((cast data : flight._internal.dom.FileSystemWriteChunkType)), function(__awaitValue962:Dynamic):Dynamic {
+                    __awaitValue962;
+                    var __flowBranch963:Dynamic;
                     if ((cast aborted : Bool)) {
-                      __flowBranch876 = flight._internal._Async.protect(function():Dynamic {
-                        return flight._internal._Async.flatMap(abortPromise, function(__awaitValue877:Dynamic):Dynamic {
-                          __awaitValue877;
-                          return flight._internal._Async.reject(({ final __hostType878 = signal; __hostType878 == null ? _Runtime.UNDEFINED : __hostType878.reason; }));
+                      __flowBranch963 = flight._internal._Async.protect(function():Dynamic {
+                        return flight._internal._Async.flatMap(abortPromise, function(__awaitValue964:Dynamic):Dynamic {
+                          __awaitValue964;
+                          return flight._internal._Async.reject(({ final __hostType965 = signal; __hostType965 == null ? _Runtime.UNDEFINED : __hostType965.reason; }));
                         });
                       });
                     } else {
-                      __flowBranch876 = flight._internal._Async.flowNormal();
+                      __flowBranch963 = flight._internal._Async.flowNormal();
                     }
-                    return flight._internal._Async.continueFlow(__flowBranch876, function():Dynamic {
-                      return flight._internal._Async.flatMap(writable.close(), function(__awaitValue879:Dynamic):Dynamic {
-                        __awaitValue879;
+                    return flight._internal._Async.continueFlow(__flowBranch963, function():Dynamic {
+                      return flight._internal._Async.flatMap(writable.close(), function(__awaitValue966:Dynamic):Dynamic {
+                        __awaitValue966;
                         return flight._internal._Async.flowReturn(true);
                       });
                     });
@@ -4272,40 +4763,40 @@ class _HostWeb {
                 }), function(__caughtError:Dynamic):Dynamic {
                   var __error:Dynamic = __caughtError;
                   return flight._internal._Async.protect(function():Dynamic {
-                    var __flowBranch880:Dynamic;
+                    var __flowBranch967:Dynamic;
                     if ((cast _Runtime.strictEquals(abortPromise, null) : Bool)) {
-                      __flowBranch880 = flight._internal._Async.protect(function():Dynamic {
+                      __flowBranch967 = flight._internal._Async.protect(function():Dynamic {
                         return flight._internal._Async.flatMap(flight._internal._Async.recover(writable.abort(), function(__unused6:flight._internal._Any):Void {
 
-                        }), function(__awaitValue881:Dynamic):Dynamic {
-                          __awaitValue881;
+                        }), function(__awaitValue968:Dynamic):Dynamic {
+                          __awaitValue968;
                           return flight._internal._Async.flowNormal();
                         });
                       });
                     } else {
-                      __flowBranch880 = flight._internal._Async.protect(function():Dynamic {
-                        return flight._internal._Async.flatMap(abortPromise, function(__awaitValue882:Dynamic):Dynamic {
-                          __awaitValue882;
+                      __flowBranch967 = flight._internal._Async.protect(function():Dynamic {
+                        return flight._internal._Async.flatMap(abortPromise, function(__awaitValue969:Dynamic):Dynamic {
+                          __awaitValue969;
                           return flight._internal._Async.flowNormal();
                         });
                       });
                     }
-                    return flight._internal._Async.continueFlow(__flowBranch880, function():Dynamic {
-                      var __flowBranch883:Dynamic;
+                    return flight._internal._Async.continueFlow(__flowBranch967, function():Dynamic {
+                      var __flowBranch970:Dynamic;
                       if ((cast aborted : Bool)) {
-                        __flowBranch883 = flight._internal._Async.protect(function():Dynamic {
-                          return flight._internal._Async.reject(({ final __hostType884 = signal; __hostType884 == null ? _Runtime.UNDEFINED : __hostType884.reason; }));
+                        __flowBranch970 = flight._internal._Async.protect(function():Dynamic {
+                          return flight._internal._Async.reject(({ final __hostType971 = signal; __hostType971 == null ? _Runtime.UNDEFINED : __hostType971.reason; }));
                         });
                       } else {
-                        __flowBranch883 = flight._internal._Async.flowNormal();
+                        __flowBranch970 = flight._internal._Async.flowNormal();
                       }
-                      return flight._internal._Async.continueFlow(__flowBranch883, function():Dynamic {
+                      return flight._internal._Async.continueFlow(__flowBranch970, function():Dynamic {
                         return flight._internal._Async.flowReturn(false);
                       });
                     });
                   });
                 }), function():Dynamic {
-                  ({ final __hostTypeCall885 = signal; __hostTypeCall885 == null ? _Runtime.UNDEFINED : __hostTypeCall885.removeEventListener('abort', onAbort); });
+                  ({ final __hostTypeCall972 = signal; __hostTypeCall972 == null ? _Runtime.UNDEFINED : __hostTypeCall972.removeEventListener('abort', onAbort); });
                   return flight._internal._Async.flowNormal();
                 }), function():Dynamic {
                   return flight._internal._Async.flowNormal();
@@ -4319,7 +4810,7 @@ class _HostWeb {
   }
 
   public static function createWebFontLoadingBackend():{ >FontLoadingBackend, >Entity, } {
-    return cast (cast (cast createEntity : Null<{ var addFontFace:flight._internal.dom.FontFace->Void; var checkFontFace:String->Bool; var loadFontFaces:String->flight._internal._Promise<Array<flight._internal.dom.FontFace>>; var whenReady:Void->flight._internal._Promise<flight._internal._Nothing>; }>->{ >Entity, var addFontFace:flight._internal.dom.FontFace->Void; var checkFontFace:String->Bool; var loadFontFaces:String->flight._internal._Promise<Array<flight._internal.dom.FontFace>>; var whenReady:Void->flight._internal._Promise<flight._internal._Nothing>; })(({ final __callArgument888:Dynamic = ({ addFontFace: (cast function(face:flight._internal.dom.FontFace):Void {
+    return cast (cast (cast createEntity : Null<{ var addFontFace:flight._internal.dom.FontFace->Void; var checkFontFace:String->Bool; var loadFontFaces:String->flight._internal._Promise<Array<flight._internal.dom.FontFace>>; var whenReady:Void->flight._internal._Promise<flight._internal._Nothing>; }>->{ >Entity, var addFontFace:flight._internal.dom.FontFace->Void; var checkFontFace:String->Bool; var loadFontFaces:String->flight._internal._Promise<Array<flight._internal.dom.FontFace>>; var whenReady:Void->flight._internal._Promise<flight._internal._Nothing>; })(({ final __callArgument975:Dynamic = ({ addFontFace: (cast function(face:flight._internal.dom.FontFace):Void {
       (cast flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'fonts') : flight._internal.dom.FontFaceSet).add(face);
     } : Dynamic), checkFontFace: (cast function(shorthand:String):Bool {
       return cast (cast flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'fonts') : flight._internal.dom.FontFaceSet).check(shorthand);
@@ -4329,19 +4820,19 @@ class _HostWeb {
       return cast _Runtime.UNDEFINED;
     } : Dynamic), whenReady: (cast function():flight._internal._Promise<flight._internal._Nothing> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        return flight._internal._Async.flatMap((cast flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'fonts') : flight._internal.dom.FontFaceSet).ready, function(__awaitValue887:Dynamic):Dynamic {
-          __awaitValue887;
+        return flight._internal._Async.flatMap((cast flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'fonts') : flight._internal.dom.FontFaceSet).ready, function(__awaitValue974:Dynamic):Dynamic {
+          __awaitValue974;
           return flight._internal._Async.resolve(_Runtime.UNDEFINED);
         });
       }));
-    } : Dynamic) } : EntityShapeL6C23__webFontLoading); __callArgument888; })) : EntityShapeL6C23__webFontLoading);
+    } : Dynamic) } : EntityShapeL6C23__webFontLoading); __callArgument975; })) : EntityShapeL6C23__webFontLoading);
     return cast null;
   }
 
   public static function enableHostWebFontLoading():Void {
     if ((cast _HostWeb._enabled__webFontLoading : Bool)) { return; }
     (_HostWeb._enabled__webFontLoading = cast (true : Dynamic));
-    installFontLoadingHostBackend(({ final __callArgument892:Dynamic = (cast createWebFontLoadingBackend() : { >FontLoadingBackend, >Entity, }); __callArgument892; }));
+    installFontLoadingHostBackend(({ final __callArgument979:Dynamic = (cast createWebFontLoadingBackend() : { >FontLoadingBackend, >Entity, }); __callArgument979; }));
   }
 
   @:allow(flight)
@@ -4361,14 +4852,14 @@ class _HostWeb {
     backend = (cast { clearWatch: function(id:Float):Void {
       (cast inner : GeolocationBackend).clearWatch((cast id : Float));
     }, getCurrentPosition: function(options:GeolocationRequestOptions):flight._internal._Promise<Null<GeoPosition>> {
-      return cast _Runtime.callProperty((cast inner : GeolocationBackend).getCurrentPosition(({ final __callArgument896:Dynamic = options; __callArgument896; })), 'then', cast ([function(position:Null<GeoPosition>):Null<GeoPosition> {
+      return cast _Runtime.callProperty((cast inner : GeolocationBackend).getCurrentPosition(({ final __callArgument983:Dynamic = options; __callArgument983; })), 'then', cast ([function(position:Null<GeoPosition>):Null<GeoPosition> {
         observeGeolocationHostResult((cast 'getCurrentPosition' : String), (cast !_Runtime.strictEquals(position, null) : Bool));
         return cast position;
         return cast _Runtime.UNDEFINED;
       }] : Array<Dynamic>));
       return cast _Runtime.UNDEFINED;
     }, getCurrentPositionResult: function(options:GeolocationRequestOptions):flight._internal._Promise<GeoPositionResult> {
-      return cast _Runtime.callProperty((cast inner : GeolocationBackend).getCurrentPositionResult(({ final __callArgument899:Dynamic = options; __callArgument899; })), 'then', cast ([function(result:GeoPositionResult):GeoPositionResult {
+      return cast _Runtime.callProperty((cast inner : GeolocationBackend).getCurrentPositionResult(({ final __callArgument986:Dynamic = options; __callArgument986; })), 'then', cast ([function(result:GeoPositionResult):GeoPositionResult {
         observeGeolocationHostResult((cast 'getCurrentPositionResult' : String), (cast !_Runtime.strictEquals(result.position, null) : Bool));
         return cast result;
         return cast _Runtime.UNDEFINED;
@@ -4383,17 +4874,17 @@ class _HostWeb {
     }, promptForAccess: function():flight._internal._Promise<GeolocationAccessOutcome> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var outcome:GeolocationAccessOutcome = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast inner : GeolocationBackend).promptForAccess(), function(__awaitValue900:Dynamic):Dynamic {
-          outcome = __awaitValue900;
+        return flight._internal._Async.flatMap((cast inner : GeolocationBackend).promptForAccess(), function(__awaitValue987:Dynamic):Dynamic {
+          outcome = __awaitValue987;
           observeGeolocationHostResult((cast 'promptForAccess' : String), (cast !_Runtime.strictEquals((cast outcome : GeolocationAccessOutcome).reason, 'runtime-unavailable') : Bool));
           return flight._internal._Async.resolve(outcome);
         });
       }));
     }, watchPosition: function(listener:GeoPosition->Void, options:GeolocationRequestOptions, onError:Null<GeolocationErrorReason->Void>):Float {
-      return cast (cast inner : GeolocationBackend).watchPosition((cast listener : Dynamic), ({ final __callArgument901:Dynamic = options; __callArgument901; }), (cast onError : Dynamic));
+      return cast (cast inner : GeolocationBackend).watchPosition((cast listener : Dynamic), ({ final __callArgument988:Dynamic = options; __callArgument988; }), (cast onError : Dynamic));
       return cast _Runtime.UNDEFINED;
     } });
-    installGeolocationHostBackend(({ final __callArgument902:Dynamic = backend; __callArgument902; }));
+    installGeolocationHostBackend(({ final __callArgument989:Dynamic = backend; __callArgument989; }));
   }
 
   @:allow(flight)
@@ -4424,7 +4915,7 @@ class _HostWeb {
     enableHostWebRaster2DSurface();
     if ((cast _HostWeb._enabled__webGlRenderSurface : Bool)) { return; }
     (_HostWeb._enabled__webGlRenderSurface = cast (true : Dynamic));
-    setGlRenderSurfaceProvider(({ final __callArgument904:Dynamic = (cast createWebGlRenderSurfaceProvider() : GlRenderSurfaceProvider); __callArgument904; }));
+    setGlRenderSurfaceProvider(({ final __callArgument991:Dynamic = (cast createWebGlRenderSurfaceProvider() : GlRenderSurfaceProvider); __callArgument991; }));
   }
 
   @:allow(flight)
@@ -4436,7 +4927,7 @@ class _HostWeb {
   @:allow(flight)
   @:keep
   private static function createWebGlyphRasterizerBackend():{ >GlyphRasterizerBackend, >Entity, } {
-    return cast (cast (cast createEntity : Null<{ var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; }>->{ >Entity, var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; })(({ final __callArgument922:Dynamic = ({ measureMetrics: (cast function(options:GlyphRasterizeOptions):Null<GlyphMetrics> {
+    return cast (cast (cast createEntity : Null<{ var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; }>->{ >Entity, var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; })(({ final __callArgument1009:Dynamic = ({ measureMetrics: (cast function(options:GlyphRasterizeOptions):Null<GlyphMetrics> {
       var context:Null<flight._internal._Union2<flight._internal.dom.OffscreenCanvasRenderingContext2D, flight._internal.dom.CanvasRenderingContext2D>> = cast _Runtime.UNDEFINED;
       var metrics:flight._internal.dom.TextMetrics = cast _Runtime.UNDEFINED;
       var ascent:Float = cast _Runtime.UNDEFINED;
@@ -4446,7 +4937,7 @@ class _HostWeb {
         observeGlyphRasterizerHostResult((cast 'measureMetrics' : String), (cast false : Bool));
         return cast null;
       }
-      _HostWeb._applyGlyphRasterFont__webGlyphRasterizer(({ final __callArgument914:Dynamic = context; __callArgument914; }), ({ final __callArgument915:Dynamic = options; __callArgument915; }));
+      _HostWeb._applyGlyphRasterFont__webGlyphRasterizer(({ final __callArgument1001:Dynamic = context; __callArgument1001; }), ({ final __callArgument1002:Dynamic = options; __callArgument1002; }));
       metrics = flight._internal.backend.Canvas2dBackend.call(context, 'measureText', cast (['Hg'] : Array<Dynamic>));
       ascent = (cast metrics : flight._internal.dom.TextMetrics).fontBoundingBoxAscent;
       descent = (cast metrics : flight._internal.dom.TextMetrics).fontBoundingBoxDescent;
@@ -4465,16 +4956,16 @@ class _HostWeb {
         return cast null;
       }
       observeGlyphRasterizerHostResult((cast 'rasterize' : String), (cast true : Bool));
-      return cast (cast _HostWeb._rasterizeGlyphOnContext__webGlyphRasterizer(({ final __callArgument918:Dynamic = context; __callArgument918; }), (cast codepoint : Float), ({ final __callArgument919:Dynamic = options; __callArgument919; })) : Null<GlyphRasterizedBitmap>);
+      return cast (cast _HostWeb._rasterizeGlyphOnContext__webGlyphRasterizer(({ final __callArgument1005:Dynamic = context; __callArgument1005; }), (cast codepoint : Float), ({ final __callArgument1006:Dynamic = options; __callArgument1006; })) : Null<GlyphRasterizedBitmap>);
       return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL12C23__webGlyphRasterizer); __callArgument922; })) : EntityShapeL12C23__webGlyphRasterizer);
+    } : Dynamic) } : EntityShapeL12C23__webGlyphRasterizer); __callArgument1009; })) : EntityShapeL12C23__webGlyphRasterizer);
     return cast null;
   }
 
   public static function enableHostWebGlyphRasterizer():Void {
     if ((cast _HostWeb._enabled__webGlyphRasterizer : Bool)) { return; }
     (_HostWeb._enabled__webGlyphRasterizer = cast (true : Dynamic));
-    installGlyphRasterizerHostBackend(({ final __callArgument940:Dynamic = (cast createWebGlyphRasterizerBackend() : { >GlyphRasterizerBackend, >Entity, }); __callArgument940; }));
+    installGlyphRasterizerHostBackend(({ final __callArgument1027:Dynamic = (cast createWebGlyphRasterizerBackend() : { >GlyphRasterizerBackend, >Entity, }); __callArgument1027; }));
   }
 
   public static function _acquireGlyphRasterContext__webGlyphRasterizer():Null<flight._internal._Union2<flight._internal.dom.CanvasRenderingContext2D, flight._internal.dom.OffscreenCanvasRenderingContext2D>> {
@@ -4516,7 +5007,7 @@ class _HostWeb {
     var canvas:flight._internal._Union2<flight._internal.dom.HTMLCanvasElement, flight._internal.dom.OffscreenCanvas> = cast _Runtime.UNDEFINED;
     var image:flight._internal.dom.ImageData = cast _Runtime.UNDEFINED;
     text = _Runtime.fromCodePoint(codepoint);
-    _HostWeb._applyGlyphRasterFont__webGlyphRasterizer(({ final __callArgument942:Dynamic = context; __callArgument942; }), ({ final __callArgument943:Dynamic = options; __callArgument943; }));
+    _HostWeb._applyGlyphRasterFont__webGlyphRasterizer(({ final __callArgument1029:Dynamic = context; __callArgument1029; }), ({ final __callArgument1030:Dynamic = options; __callArgument1030; }));
     flight._internal.backend.Canvas2dBackend.setField(context, 'textBaseline', 'alphabetic');
     flight._internal.backend.Canvas2dBackend.setField(context, 'textAlign', 'left');
     metrics = flight._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([text] : Array<Dynamic>));
@@ -4532,7 +5023,7 @@ class _HostWeb {
     canvas = flight._internal.backend.Canvas2dBackend.field(context, 'canvas');
     flight._internal.backend.CanvasElementBackend.setField(canvas, 'width', width);
     flight._internal.backend.CanvasElementBackend.setField(canvas, 'height', height);
-    _HostWeb._applyGlyphRasterFont__webGlyphRasterizer(({ final __callArgument946:Dynamic = context; __callArgument946; }), ({ final __callArgument947:Dynamic = options; __callArgument947; }));
+    _HostWeb._applyGlyphRasterFont__webGlyphRasterizer(({ final __callArgument1033:Dynamic = context; __callArgument1033; }), ({ final __callArgument1034:Dynamic = options; __callArgument1034; }));
     flight._internal.backend.Canvas2dBackend.setField(context, 'textBaseline', 'alphabetic');
     flight._internal.backend.Canvas2dBackend.setField(context, 'textAlign', 'left');
     flight._internal.backend.Canvas2dBackend.call(context, 'clearRect', cast ([0.0, 0.0, width, height] : Array<Dynamic>));
@@ -4550,7 +5041,7 @@ class _HostWeb {
   }
 
   public static final webHapticsBackend:HapticsBackend = (cast { cancel: function():Bool {
-    return cast (cast _HostWeb._webVibrate__webHaptics(({ final __callArgument950:Dynamic = 0.0; __callArgument950; })) : Bool);
+    return cast (cast _HostWeb._webVibrate__webHaptics(({ final __callArgument1037:Dynamic = 0.0; __callArgument1037; })) : Bool);
     return cast _Runtime.UNDEFINED;
   }, capabilities: function(out:HapticsCapabilities):HapticsCapabilities {
     var supported:Bool = cast _Runtime.UNDEFINED;
@@ -4567,7 +5058,7 @@ class _HostWeb {
     var ms:Float = cast _Runtime.UNDEFINED;
     base = ((cast ((cast _Runtime.strictEquals(style, 'heavy') : Bool) || (cast _Runtime.strictEquals(style, 'rigid') : Bool)) : Bool) ? (cast 30.0 : Dynamic) : (cast ((cast _Runtime.strictEquals(style, 'medium') : Bool) ? (cast 20.0 : Dynamic) : (cast ((cast _Runtime.strictEquals(style, 'soft') : Bool) ? (cast 25.0 : Dynamic) : (cast 10.0 : Dynamic)) : Dynamic)) : Dynamic));
     ms = ((cast !_Runtime.strictEquals(intensity, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast HxMath.round(_Runtime.multiplyNumbers(base, HxMath.max(0.0, HxMath.min(1.0, intensity)))) : Dynamic) : (cast base : Dynamic));
-    return cast (cast _HostWeb._webVibrate__webHaptics(({ final __callArgument952:Dynamic = ms; __callArgument952; })) : Bool);
+    return cast (cast _HostWeb._webVibrate__webHaptics(({ final __callArgument1039:Dynamic = ms; __callArgument1039; })) : Bool);
     return cast _Runtime.UNDEFINED;
   }, isSupported: function():Bool {
     return cast (cast _HostWeb._isVibrateAvailable__webHaptics() : Bool);
@@ -4575,27 +5066,27 @@ class _HostWeb {
   }, notification: function(type:HapticNotificationType):Bool {
     var pattern:Array<Float> = cast _Runtime.UNDEFINED;
     pattern = ((cast _Runtime.strictEquals(type, 'error') : Bool) ? (cast cast ([20.0, 60.0, 20.0] : Array<Dynamic>) : Dynamic) : (cast ((cast _Runtime.strictEquals(type, 'warning') : Bool) ? (cast cast ([20.0, 60.0, 20.0, 60.0] : Array<Dynamic>) : Dynamic) : (cast cast ([15.0, 50.0, 15.0] : Array<Dynamic>) : Dynamic)) : Dynamic));
-    return cast (cast _HostWeb._webVibrate__webHaptics(({ final __callArgument954:Dynamic = pattern; __callArgument954; })) : Bool);
+    return cast (cast _HostWeb._webVibrate__webHaptics(({ final __callArgument1041:Dynamic = pattern; __callArgument1041; })) : Bool);
     return cast _Runtime.UNDEFINED;
   }, prepare: function():Void {
 
   }, selection: function():Bool {
-    return cast (cast _HostWeb._webVibrate__webHaptics(({ final __callArgument956:Dynamic = 5.0; __callArgument956; })) : Bool);
+    return cast (cast _HostWeb._webVibrate__webHaptics(({ final __callArgument1043:Dynamic = 5.0; __callArgument1043; })) : Bool);
     return cast _Runtime.UNDEFINED;
   }, vibrate: function(durationMs:Float):Bool {
-    return cast (cast _HostWeb._webVibrate__webHaptics(({ final __callArgument958:Dynamic = durationMs; __callArgument958; })) : Bool);
+    return cast (cast _HostWeb._webVibrate__webHaptics(({ final __callArgument1045:Dynamic = durationMs; __callArgument1045; })) : Bool);
     return cast _Runtime.UNDEFINED;
   }, vibratePattern: function(pattern:Array<Float>):Bool {
     if ((cast _Runtime.strictEquals(_Runtime.field(pattern, 'length'), 0.0) : Bool)) { return cast false; }
-    return cast (cast _HostWeb._webVibrate__webHaptics(({ final __callArgument960:Dynamic = (cast pattern : Array<Float>); __callArgument960; })) : Bool);
+    return cast (cast _HostWeb._webVibrate__webHaptics(({ final __callArgument1047:Dynamic = (cast pattern : Array<Float>); __callArgument1047; })) : Bool);
     return cast _Runtime.UNDEFINED;
   } });
 
-  public static final webStoragePersistenceCapabilities__webHost:WebWindowStoragePersistenceCapabilities = (cast createWebWindowStoragePersistenceCapabilities(({ final __callArgument963:Dynamic = { getPermissionState: function():flight._internal._Promise<PermissionState> {
+  public static final webStoragePersistenceCapabilities__webHost:WebWindowStoragePersistenceCapabilities = (cast createWebWindowStoragePersistenceCapabilities(({ final __callArgument1050:Dynamic = { getPermissionState: function():flight._internal._Promise<PermissionState> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
       var status:flight._internal.dom.PermissionStatus = cast _Runtime.UNDEFINED;
-      return flight._internal._Async.flatMap((cast flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'permissions') : flight._internal.dom.Permissions).query({ name: (cast 'persistent-storage' : flight._internal.dom.PermissionName) }), function(__awaitValue962:Dynamic):Dynamic {
-        status = __awaitValue962;
+      return flight._internal._Async.flatMap((cast flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'permissions') : flight._internal.dom.Permissions).query({ name: (cast 'persistent-storage' : flight._internal.dom.PermissionName) }), function(__awaitValue1049:Dynamic):Dynamic {
+        status = __awaitValue1049;
         return flight._internal._Async.resolve((cast status : flight._internal.dom.PermissionStatus).state);
       });
     }));
@@ -4607,7 +5098,7 @@ class _HostWeb {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
       return flight._internal._Async.resolve((cast flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'storage') : flight._internal.dom.StorageManager).persisted());
     }));
-  } }; __callArgument963; })) : WebWindowStoragePersistenceCapabilities);
+  } }; __callArgument1050; })) : WebWindowStoragePersistenceCapabilities);
 
   public static final webAppCapabilities__webHost:WebAppCapabilities__webApp = (cast createWebAppCapabilities() : WebAppCapabilities__webApp);
 
@@ -4630,7 +5121,7 @@ class _HostWeb {
 
   public static var _enabled__webImage:Bool = false;
 
-  public static final webInputDropFileBackend:{ >Entity, var subscribe:InputTargetHandle->(String->Void)->(Void->Void); } = (cast createEntity(({ final __callArgument976:Dynamic = ({ subscribe: (cast function(target:InputTargetHandle, listener:String->Void):Void->Void {
+  public static final webInputDropFileBackend:{ >Entity, var subscribe:InputTargetHandle->(String->Void)->(Void->Void); } = (cast createEntity(({ final __callArgument1063:Dynamic = ({ subscribe: (cast function(target:InputTargetHandle, listener:String->Void):Void->Void {
     var element:Null<flight._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;
     var onDragOver:flight._internal.dom.DragEvent->Void = cast _Runtime.UNDEFINED;
     var onDrop:flight._internal.dom.DragEvent->Void = cast _Runtime.UNDEFINED;
@@ -4639,40 +5130,40 @@ class _HostWeb {
     onDragOver = (cast function(event:flight._internal.dom.DragEvent):Void { event.preventDefault(); });
     onDrop = (cast function(event:flight._internal.dom.DragEvent):Void {
       event.preventDefault();
-      for (file in _Runtime.iterable((cast _Runtime.toArray(_Runtime.coalesce(({ final __hostType973 = event.dataTransfer; __hostType973 == null ? _Runtime.UNDEFINED : (cast __hostType973 : flight._internal.dom.DataTransfer).files; }), function():Dynamic return cast cast ([] : Array<Dynamic>))) : Array<flight._internal.dom.File>))) {
+      for (file in _Runtime.iterable((cast _Runtime.toArray(_Runtime.coalesce(({ final __hostType1060 = event.dataTransfer; __hostType1060 == null ? _Runtime.UNDEFINED : (cast __hostType1060 : flight._internal.dom.DataTransfer).files; }), function():Dynamic return cast cast ([] : Array<Dynamic>))) : Array<flight._internal.dom.File>))) {
         listener((cast (cast file : flight._internal.dom.File).name : String));
       }
     });
     (cast element : flight._internal.dom.HTMLElement).addEventListener('dragover', onDragOver);
     (cast element : flight._internal.dom.HTMLElement).addEventListener('drop', onDrop);
-    return cast (cast _HostWeb.trackWebInputTargetSubscription__webInputTarget(({ final __callArgument974:Dynamic = function():Void {
+    return cast (cast _HostWeb.trackWebInputTargetSubscription__webInputTarget(({ final __callArgument1061:Dynamic = function():Void {
       (cast element : flight._internal.dom.HTMLElement).removeEventListener('dragover', onDragOver);
       (cast element : flight._internal.dom.HTMLElement).removeEventListener('drop', onDrop);
-    }; __callArgument974; })) : Void->Void);
+    }; __callArgument1061; })) : Void->Void);
     return cast _Runtime.UNDEFINED;
-  } : Dynamic) } : InputDropFileBackend); __callArgument976; })) : InputDropFileBackend);
+  } : Dynamic) } : InputDropFileBackend); __callArgument1063; })) : InputDropFileBackend);
 
-  public static final webInputFocusBackend:{ >Entity, var subscribe:InputTargetHandle->(Void->Void)->(Void->Void)->(Void->Void); } = (cast createEntity(({ final __callArgument992:Dynamic = ({ subscribe: (cast function(target:InputTargetHandle, onFocus:Void->Void, onBlur:Void->Void):Void->Void {
+  public static final webInputFocusBackend:{ >Entity, var subscribe:InputTargetHandle->(Void->Void)->(Void->Void)->(Void->Void); } = (cast createEntity(({ final __callArgument1079:Dynamic = ({ subscribe: (cast function(target:InputTargetHandle, onFocus:Void->Void, onBlur:Void->Void):Void->Void {
     var element:Null<flight._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;
     element = ((cast _HostWeb._inputTargets__webInputTarget : flight._internal._WeakMap<InputTargetHandle, flight._internal.dom.HTMLElement>).get((cast target)));
     if ((cast _Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _HostWeb.noop__webInputTarget; }
     (cast element : flight._internal.dom.HTMLElement).addEventListener('focus', onFocus);
     (cast element : flight._internal.dom.HTMLElement).addEventListener('blur', onBlur);
-    return cast (cast _HostWeb.trackWebInputTargetSubscription__webInputTarget(({ final __callArgument990:Dynamic = function():Void {
+    return cast (cast _HostWeb.trackWebInputTargetSubscription__webInputTarget(({ final __callArgument1077:Dynamic = function():Void {
       (cast element : flight._internal.dom.HTMLElement).removeEventListener('focus', onFocus);
       (cast element : flight._internal.dom.HTMLElement).removeEventListener('blur', onBlur);
-    }; __callArgument990; })) : Void->Void);
+    }; __callArgument1077; })) : Void->Void);
     return cast _Runtime.UNDEFINED;
-  } : Dynamic) } : InputFocusBackend); __callArgument992; })) : InputFocusBackend);
+  } : Dynamic) } : InputFocusBackend); __callArgument1079; })) : InputFocusBackend);
 
-  public static final webInputPointerLockBackend:{ >Entity, var exit:Void->flight._internal._Promise<InputPointerLockExitOutcome>; var request:InputTargetHandle->flight._internal._Promise<InputPointerLockRequestOutcome>; } = (cast createEntity(({ final __callArgument1006:Dynamic = ({ exit: (cast function():flight._internal._Promise<InputPointerLockExitOutcome> {
+  public static final webInputPointerLockBackend:{ >Entity, var exit:Void->flight._internal._Promise<InputPointerLockExitOutcome>; var request:InputTargetHandle->flight._internal._Promise<InputPointerLockRequestOutcome>; } = (cast createEntity(({ final __callArgument1093:Dynamic = ({ exit: (cast function():flight._internal._Promise<InputPointerLockExitOutcome> {
     var exitPointerLock:flight._internal._Any = cast _Runtime.UNDEFINED;
     var observation:{ var outcome:flight._internal._Promise<InputPointerLockExitOutcome>; var release:Void->Void; } = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return cast flight._internal._Async.resolve(_HostWeb.POINTER_LOCK_API_UNAVAILABLE__webInputTarget); }
     if ((cast _Runtime.strictEquals(flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'pointerLockElement'), null) : Bool)) { return cast flight._internal._Async.resolve(_HostWeb.POINTER_LOCK_OK__webInputTarget); }
     exitPointerLock = flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'exitPointerLock');
     if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(exitPointerLock), 'function') : Bool)) { return cast flight._internal._Async.resolve(_HostWeb.POINTER_LOCK_API_UNAVAILABLE__webInputTarget); }
-    observation = (cast _HostWeb.observePointerLockExit__webInputTarget(({ final __callArgument1002:Dynamic = flight._internal.backend.DomDocumentBackend.value(); __callArgument1002; })) : { var outcome:flight._internal._Promise<InputPointerLockExitOutcome>; var release:Void->Void; });
+    observation = (cast _HostWeb.observePointerLockExit__webInputTarget(({ final __callArgument1089:Dynamic = flight._internal.backend.DomDocumentBackend.value(); __callArgument1089; })) : { var outcome:flight._internal._Promise<InputPointerLockExitOutcome>; var release:Void->Void; });
     try {
       _Runtime.callProperty(exitPointerLock, 'call', cast ([flight._internal.backend.DomDocumentBackend.value()] : Array<Dynamic>));
     } catch (__error:Dynamic) {
@@ -4694,7 +5185,7 @@ class _HostWeb {
     if ((cast _Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast flight._internal._Async.resolve(_HostWeb.POINTER_LOCK_TARGET_NOT_FOUND__webInputTarget); }
     requestPointerLock = (cast element : flight._internal.dom.HTMLElement).requestPointerLock;
     if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(requestPointerLock), 'function') : Bool)) { return cast flight._internal._Async.resolve(_HostWeb.POINTER_LOCK_API_UNAVAILABLE__webInputTarget); }
-    observation = (cast _HostWeb.observeLegacyPointerLockRequest__webInputTarget(({ final __callArgument1004:Dynamic = element; __callArgument1004; })) : { var outcome:flight._internal._Promise<InputPointerLockRequestOutcome>; var release:Void->Void; });
+    observation = (cast _HostWeb.observeLegacyPointerLockRequest__webInputTarget(({ final __callArgument1091:Dynamic = element; __callArgument1091; })) : { var outcome:flight._internal._Promise<InputPointerLockRequestOutcome>; var release:Void->Void; });
     try {
       (result = cast (_Runtime.callProperty(requestPointerLock, 'call', cast ([element] : Array<Dynamic>)) : Dynamic));
       if ((cast !(cast (cast _HostWeb.isPromiseLike__webInputTarget((cast result : flight._internal._Any)) : Bool) : Bool) : Bool)) { return cast (cast observation : { var outcome:flight._internal._Promise<InputPointerLockRequestOutcome>; var release:Void->Void; }).outcome; }
@@ -4705,7 +5196,7 @@ class _HostWeb {
     (cast observation : { var outcome:flight._internal._Promise<InputPointerLockRequestOutcome>; var release:Void->Void; }).release();
     return cast _Runtime.callProperty(flight._internal._Async.resolve(result), 'then', cast ([function(__unused0:flight._internal._Any):{ var reason:String; } return _HostWeb.POINTER_LOCK_OK__webInputTarget, function(error:flight._internal._Any):InputPointerLockRequestOutcome return (cast _HostWeb.classifyPointerLockRequestFailure__webInputTarget((cast error : flight._internal._Any)) : InputPointerLockRequestOutcome)] : Array<Dynamic>));
     return cast _Runtime.UNDEFINED;
-  } : Dynamic) } : InputPointerLockBackend); __callArgument1006; })) : InputPointerLockBackend);
+  } : Dynamic) } : InputPointerLockBackend); __callArgument1093; })) : InputPointerLockBackend);
 
   public static function enableHostWebImage():Void {
     var inner:ImageBackend = cast _Runtime.UNDEFINED;
@@ -4713,13 +5204,13 @@ class _HostWeb {
     if ((cast _HostWeb._enabled__webImage : Bool)) { return; }
     (_HostWeb._enabled__webImage = cast (true : Dynamic));
     inner = (cast createWebImageBackend() : ImageBackend);
-    backend = (cast { loadImageFromUrl: function(url:String, crossOrigin:Null<String>, signal:Null<flight._internal.dom.AbortSignal>):flight._internal._Promise<Image> {
+    backend = (cast { loadImageFromUrl: function(url:String, crossOrigin:Null<String>, signal:Null<flight._internal.dom.AbortSignal>):flight._internal._Promise<ImageResource> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-            var result:Image = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap((cast inner : ImageBackend).loadImageFromUrl((cast url : String), ({ final __callArgument1017:Dynamic = crossOrigin; __callArgument1017; }), ({ final __callArgument1018:Dynamic = signal; __callArgument1018; })), function(__awaitValue1016:Dynamic):Dynamic {
-              result = __awaitValue1016;
+            var result:ImageResource = cast _Runtime.UNDEFINED;
+            return flight._internal._Async.flatMap((cast inner : ImageBackend).loadImageFromUrl((cast url : String), ({ final __callArgument1104:Dynamic = crossOrigin; __callArgument1104; }), ({ final __callArgument1105:Dynamic = signal; __callArgument1105; })), function(__awaitValue1103:Dynamic):Dynamic {
+              result = __awaitValue1103;
               observeImageHostResult((cast 'loadImageFromUrl' : String), (cast true : Bool));
               return flight._internal._Async.flowReturn(result);
             });
@@ -4736,9 +5227,9 @@ class _HostWeb {
       );
     } });
     if ((cast !_Runtime.strictEquals((cast inner : ImageBackend).createImageFromBitmap, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      ((cast backend : { @:optional var createImageFromBitmap:Null<Bitmap->Image>; }).createImageFromBitmap = (cast function(bitmap:Bitmap):Image {
+      ((cast backend : { @:optional var createImageFromBitmap:Null<Bitmap->ImageResource>; }).createImageFromBitmap = (cast function(bitmap:Bitmap):ImageResource {
         try {
-          var result:Image = (cast inner : ImageBackend).createImageFromBitmap(bitmap);
+          var result:ImageResource = (cast inner : ImageBackend).createImageFromBitmap(bitmap);
           observeImageHostResult((cast 'createImageFromBitmap' : String), (cast true : Bool));
           return cast result;
         } catch (error:Dynamic) {
@@ -4748,7 +5239,7 @@ class _HostWeb {
         return cast _Runtime.UNDEFINED;
       }));
     }
-    installImageHostBackend(({ final __callArgument1019:Dynamic = backend; __callArgument1019; }));
+    installImageHostBackend(({ final __callArgument1106:Dynamic = backend; __callArgument1106; }));
   }
 
   @:allow(flight)
@@ -4757,20 +5248,20 @@ class _HostWeb {
     (_HostWeb._enabled__webImage = cast (false : Dynamic));
   }
 
-  public static final webInputTargetBackend:{ >Entity, var prepare:InputTargetHandle->Void; } = (cast createEntity(({ final __callArgument1021:Dynamic = ({ prepare: (cast function(target:InputTargetHandle):Void {
+  public static final webInputTargetBackend:{ >Entity, var prepare:InputTargetHandle->Void; } = (cast createEntity(({ final __callArgument1108:Dynamic = ({ prepare: (cast function(target:InputTargetHandle):Void {
     var element:Null<flight._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;
     element = ((cast _HostWeb._inputTargets__webInputTarget : flight._internal._WeakMap<InputTargetHandle, flight._internal.dom.HTMLElement>).get((cast target)));
     if ((cast _Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     ((cast (cast element : flight._internal.dom.HTMLElement).style : flight._internal.dom.CSSStyleDeclaration).touchAction = 'none');
     ((cast (cast element : flight._internal.dom.HTMLElement).style : flight._internal.dom.CSSStyleDeclaration).userSelect = 'none');
     ((cast (cast element : flight._internal.dom.HTMLElement).style : flight._internal.dom.CSSStyleDeclaration).webkitUserSelect = 'none');
-    ((cast (cast (cast element : flight._internal.dom.HTMLElement).style : flight._internal._Intersection2<flight._internal.dom.CSSStyleDeclaration, { var webkitTapHighlightColor:String; }>) : { var webkitTapHighlightColor:String; }).webkitTapHighlightColor = 'transparent');
+    ((cast (cast (cast element : flight._internal.dom.HTMLElement).style : WebInputTargetStyle__webInputTarget) : WebInputTargetStyle__webInputTarget).webkitTapHighlightColor = 'transparent');
     if ((cast _Runtime.isInstanceOf(element, flight._internal._HostValueLut.get('HTMLCanvasElement')) : Bool)) { ((cast (cast element : flight._internal.dom.HTMLCanvasElement).style : flight._internal.dom.CSSStyleDeclaration).transform = 'translateZ(0)'); }
-  } : Dynamic) } : InputTargetBackend); __callArgument1021; })) : InputTargetBackend);
+  } : Dynamic) } : InputTargetBackend); __callArgument1108; })) : InputTargetBackend);
 
   public static final webInputHost:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<Host, HasInputDropFileSubscription>, HasInputFocusSubscription>, HasInputHaptics>, HasInputPointerLock>, HasInputTargetPreparation>, HasSoftKeyboardChange>, HasSoftKeyboardInfo>, HasSoftKeyboardVisibility> = (cast createHost((cast { input: { dropFile: webInputDropFileBackend, focus: webInputFocusBackend, haptics: webHapticsBackend, pointerLock: webInputPointerLockBackend, softKeyboardChange: (cast createWebSoftKeyboardChangeBackend() : { >SoftKeyboardChangeBackend, >Entity, }), softKeyboardInfo: (cast createWebSoftKeyboardInfoBackend() : { >SoftKeyboardInfoBackend, >Entity, }), softKeyboardVisibility: (cast createWebSoftKeyboardVisibilityBackend() : { >SoftKeyboardVisibilityBackend, >Entity, }), target: webInputTargetBackend } } : Dynamic)) : flight._internal._Intersection2<Host, { var input:{ var dropFile:{ >Entity, var subscribe:InputTargetHandle->(String->Void)->(Void->Void); }; var focus:{ >Entity, var subscribe:InputTargetHandle->(Void->Void)->(Void->Void)->(Void->Void); }; var haptics:HapticsBackend; var pointerLock:{ >Entity, var exit:Void->flight._internal._Promise<InputPointerLockExitOutcome>; var request:InputTargetHandle->flight._internal._Promise<InputPointerLockRequestOutcome>; }; var softKeyboardChange:{ >SoftKeyboardChangeBackend, >Entity, }; var softKeyboardInfo:{ >SoftKeyboardInfoBackend, >Entity, }; var softKeyboardVisibility:{ >SoftKeyboardVisibilityBackend, >Entity, }; var target:{ >Entity, var prepare:InputTargetHandle->Void; }; }; }>);
 
-  public static final webRenderContextBackend:{ >Entity, var subscribe:InputTargetHandle->(Void->Void)->(Void->Void)->(Void->Void); } = (cast createEntity(({ final __callArgument1027:Dynamic = ({ subscribe: (cast function(target:InputTargetHandle, onLost:Void->Void, onRestored:Void->Void):Void->Void {
+  public static final webRenderContextBackend:{ >Entity, var subscribe:InputTargetHandle->(Void->Void)->(Void->Void)->(Void->Void); } = (cast createEntity(({ final __callArgument1114:Dynamic = ({ subscribe: (cast function(target:InputTargetHandle, onLost:Void->Void, onRestored:Void->Void):Void->Void {
     var element:Null<flight._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;
     var onContextLost:flight._internal.dom.Event->Void = cast _Runtime.UNDEFINED;
     element = ((cast _HostWeb._inputTargets__webInputTarget : flight._internal._WeakMap<InputTargetHandle, flight._internal.dom.HTMLElement>).get((cast target)));
@@ -4783,14 +5274,14 @@ class _HostWeb {
     });
     flight._internal.backend.CanvasElementBackend.call(element, 'addEventListener', cast (['webglcontextlost', onContextLost] : Array<Dynamic>));
     flight._internal.backend.CanvasElementBackend.call(element, 'addEventListener', cast (['webglcontextrestored', onRestored] : Array<Dynamic>));
-    return cast (cast _HostWeb.trackWebInputTargetSubscription__webInputTarget(({ final __callArgument1025:Dynamic = function():Void {
+    return cast (cast _HostWeb.trackWebInputTargetSubscription__webInputTarget(({ final __callArgument1112:Dynamic = function():Void {
       flight._internal.backend.CanvasElementBackend.call(element, 'removeEventListener', cast (['webglcontextlost', onContextLost] : Array<Dynamic>));
       flight._internal.backend.CanvasElementBackend.call(element, 'removeEventListener', cast (['webglcontextrestored', onRestored] : Array<Dynamic>));
-    }; __callArgument1025; })) : Void->Void);
+    }; __callArgument1112; })) : Void->Void);
     return cast _Runtime.UNDEFINED;
-  } : Dynamic) } : RenderContextBackend); __callArgument1027; })) : RenderContextBackend);
+  } : Dynamic) } : RenderContextBackend); __callArgument1114; })) : RenderContextBackend);
 
-  public static final webRenderSurfaceBackend:{ >Entity, var resize:InputTargetHandle->Float->Float->Void; } = (cast createEntity(({ final __callArgument1033:Dynamic = ({ resize: (cast function(target:InputTargetHandle, width:Float, height:Float):Void {
+  public static final webRenderSurfaceBackend:{ >Entity, var resize:InputTargetHandle->Float->Float->Void; } = (cast createEntity(({ final __callArgument1120:Dynamic = ({ resize: (cast function(target:InputTargetHandle, width:Float, height:Float):Void {
     var element:Null<flight._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;
     element = ((cast _HostWeb._inputTargets__webInputTarget : flight._internal._WeakMap<InputTargetHandle, flight._internal.dom.HTMLElement>).get((cast target)));
     if ((cast ((cast ((cast _Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('HTMLCanvasElement'), 'undefined') : Bool)) : Bool) || (cast !(cast _Runtime.isInstanceOf(element, flight._internal._HostValueLut.get('HTMLCanvasElement')) : Bool) : Bool)) : Bool)) {
@@ -4798,7 +5289,7 @@ class _HostWeb {
     }
     flight._internal.backend.CanvasElementBackend.setField(element, 'width', width);
     flight._internal.backend.CanvasElementBackend.setField(element, 'height', height);
-  } : Dynamic) } : RenderSurfaceBackend); __callArgument1033; })) : RenderSurfaceBackend);
+  } : Dynamic) } : RenderSurfaceBackend); __callArgument1120; })) : RenderSurfaceBackend);
 
   public static final webGraphicsHost:flight._internal._Intersection2<flight._internal._Intersection2<Host, HasGraphicsRenderContextSubscription>, HasGraphicsRenderSurface> = (cast createHost((cast { graphics: { renderContext: webRenderContextBackend, renderSurface: webRenderSurfaceBackend } } : Dynamic)) : flight._internal._Intersection2<Host, { var graphics:{ var renderContext:{ >Entity, var subscribe:InputTargetHandle->(Void->Void)->(Void->Void)->(Void->Void); }; var renderSurface:{ >Entity, var resize:InputTargetHandle->Float->Float->Void; }; }; }>);
 
@@ -4810,7 +5301,7 @@ class _HostWeb {
 
   public static function createWebInputTargetHandle(element:flight._internal.dom.HTMLElement):InputTargetHandle {
     var target:InputTargetHandle = cast _Runtime.UNDEFINED;
-    target = (cast createEntity(({ final __callArgument1035:Dynamic = ({ __brand: (cast 'InputTargetHandle' : Dynamic) } : InputTargetHandle); __callArgument1035; })) : InputTargetHandle);
+    target = (cast createEntity(({ final __callArgument1122:Dynamic = ({ __brand: (cast 'InputTargetHandle' : Dynamic) } : InputTargetHandle); __callArgument1122; })) : InputTargetHandle);
     ((cast _HostWeb._inputTargets__webInputTarget : flight._internal._WeakMap<InputTargetHandle, flight._internal.dom.HTMLElement>).set((cast target), (cast element)));
     return cast target;
     return cast null;
@@ -4866,10 +5357,10 @@ class _HostWeb {
     settle = (cast function(outcome:InputPointerLockRequestOutcome):Void {
       if ((cast !(cast active : Bool) : Bool)) { return; }
       release();
-      resolveOutcome(({ final __callArgument1039:Dynamic = outcome; __callArgument1039; }));
+      resolveOutcome(({ final __callArgument1126:Dynamic = outcome; __callArgument1126; }));
     });
-    onChange = (cast function():Void { settle(({ final __callArgument1043:Dynamic = ((cast (cast _HostWeb.isPointerLockTarget__webInputTarget(({ final __callArgument1041:Dynamic = element; __callArgument1041; })) : Bool) : Bool) ? (cast _HostWeb.POINTER_LOCK_OK__webInputTarget : Dynamic) : (cast _HostWeb.POINTER_LOCK_OPERATION_FAILED__webInputTarget : Dynamic)); __callArgument1043; })); });
-    onError = (cast function():Void { settle(({ final __callArgument1047:Dynamic = _HostWeb.POINTER_LOCK_OPERATION_FAILED__webInputTarget; __callArgument1047; })); });
+    onChange = (cast function():Void { settle(({ final __callArgument1130:Dynamic = ((cast (cast _HostWeb.isPointerLockTarget__webInputTarget(({ final __callArgument1128:Dynamic = element; __callArgument1128; })) : Bool) : Bool) ? (cast _HostWeb.POINTER_LOCK_OK__webInputTarget : Dynamic) : (cast _HostWeb.POINTER_LOCK_OPERATION_FAILED__webInputTarget : Dynamic)); __callArgument1130; })); });
+    onError = (cast function():Void { settle(({ final __callArgument1134:Dynamic = _HostWeb.POINTER_LOCK_OPERATION_FAILED__webInputTarget; __callArgument1134; })); });
     outcome = flight._internal._Async.create(function(resolve:flight._internal._Any, __unused2:flight._internal._Any):Void {
       (resolveOutcome = cast (resolve : Dynamic));
     });
@@ -4895,7 +5386,7 @@ class _HostWeb {
     onChange = (cast function():Void {
       if ((cast !(cast active : Bool) : Bool)) { return; }
       release();
-      resolveOutcome(({ final __callArgument1049:Dynamic = ((cast _Runtime.strictEquals(flight._internal.backend.DomDocumentBackend.field(ownerDocument, 'pointerLockElement'), null) : Bool) ? (cast _HostWeb.POINTER_LOCK_OK__webInputTarget : Dynamic) : (cast _HostWeb.POINTER_LOCK_OPERATION_FAILED__webInputTarget : Dynamic)); __callArgument1049; }));
+      resolveOutcome(({ final __callArgument1136:Dynamic = ((cast _Runtime.strictEquals(flight._internal.backend.DomDocumentBackend.field(ownerDocument, 'pointerLockElement'), null) : Bool) ? (cast _HostWeb.POINTER_LOCK_OK__webInputTarget : Dynamic) : (cast _HostWeb.POINTER_LOCK_OPERATION_FAILED__webInputTarget : Dynamic)); __callArgument1136; }));
     });
     outcome = flight._internal._Async.create(function(resolve:flight._internal._Any, __unused4:flight._internal._Any):Void {
       (resolveOutcome = cast (resolve : Dynamic));
@@ -4906,9 +5397,11 @@ class _HostWeb {
   }
 
   public static function isPointerLockTarget__webInputTarget(element:flight._internal.dom.HTMLElement):Bool {
-    var root:flight._internal._Intersection2<flight._internal.dom.Node, { @:optional var pointerLockElement:Null<flight._internal.dom.Element>; }> = cast _Runtime.UNDEFINED;
-    root = (cast element.getRootNode() : flight._internal._Intersection2<flight._internal.dom.Node, { @:optional var pointerLockElement:Null<flight._internal.dom.Element>; }>);
-    return cast _Runtime.strictEquals(((cast _Runtime.hasField(root, 'pointerLockElement') : Bool) ? (cast (cast root : { @:optional var pointerLockElement:Null<flight._internal.dom.Element>; }).pointerLockElement : Dynamic) : (cast flight._internal.backend.DomDocumentBackend.field(element.ownerDocument, 'pointerLockElement') : Dynamic)), element);
+    var root:flight._internal.dom.Node = cast _Runtime.UNDEFINED;
+    var pointerLockRoot:flight._internal.dom.DocumentOrShadowRoot = cast _Runtime.UNDEFINED;
+    root = element.getRootNode();
+    pointerLockRoot = ((cast ((cast _Runtime.isInstanceOf(root, flight._internal._HostValueLut.get('Document')) : Bool) || (cast _Runtime.isInstanceOf(root, flight._internal._HostValueLut.get('ShadowRoot')) : Bool)) : Bool) ? (cast root : Dynamic) : (cast element.ownerDocument : Dynamic));
+    return cast _Runtime.strictEquals(pointerLockRoot.pointerLockElement, element);
     return cast null;
   }
 
@@ -4951,15 +5444,15 @@ class _HostWeb {
   } });
 
   public static function createWebSoftKeyboardChangeBackend():{ >SoftKeyboardChangeBackend, >Entity, } {
-    return cast (cast (cast createEntity : Null<{ var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>; }>->{ >Entity, var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>; })(({ final __callArgument1055:Dynamic = ({ subscribe: (cast function(listener:Void->Void):flight._internal._Promise<SoftKeyboardChangeSubscription> {
+    return cast (cast (cast createEntity : Null<{ var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>; }>->{ >Entity, var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>; })(({ final __callArgument1142:Dynamic = ({ subscribe: (cast function(listener:Void->Void):flight._internal._Promise<SoftKeyboardChangeSubscription> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var virtualKeyboard:Null<VirtualKeyboard__webKeyboard> = cast _Runtime.UNDEFINED;
         var viewport:Null<flight._internal.dom.VisualViewport> = cast _Runtime.UNDEFINED;
         if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast { result: 'acquisition-failed', unsubscribe: null }; }
         virtualKeyboard = (cast _HostWeb.getVirtualKeyboard__webKeyboard() : Null<VirtualKeyboard__webKeyboard>);
         if ((cast !_Runtime.strictEquals(virtualKeyboard, null) : Bool)) {
-          (cast virtualKeyboard : VirtualKeyboard__webKeyboard).addEventListener((cast 'geometrychange' : String), ({ final __callArgument1053:Dynamic = listener; __callArgument1053; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-          return cast { result: 'ok', unsubscribe: function():Void { (cast virtualKeyboard : VirtualKeyboard__webKeyboard).removeEventListener((cast 'geometrychange' : String), ({ final __callArgument1054:Dynamic = listener; __callArgument1054; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end); } };
+          (cast virtualKeyboard : VirtualKeyboard__webKeyboard).addEventListener((cast 'geometrychange' : String), ({ final __callArgument1140:Dynamic = listener; __callArgument1140; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+          return cast { result: 'ok', unsubscribe: function():Void { (cast virtualKeyboard : VirtualKeyboard__webKeyboard).removeEventListener((cast 'geometrychange' : String), ({ final __callArgument1141:Dynamic = listener; __callArgument1141; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end); } };
         }
         viewport = flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'visualViewport');
         if ((cast ((cast _Runtime.strictEquals(viewport, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(viewport, null) : Bool)) : Bool)) { return cast { result: 'acquisition-failed', unsubscribe: null }; }
@@ -4971,12 +5464,12 @@ class _HostWeb {
         } };
         return cast null;
       }));
-    } : Dynamic) } : EntityShapeL16C23__webKeyboard); __callArgument1055; })) : EntityShapeL16C23__webKeyboard);
+    } : Dynamic) } : EntityShapeL16C23__webKeyboard); __callArgument1142; })) : EntityShapeL16C23__webKeyboard);
     return cast null;
   }
 
   public static function createWebSoftKeyboardInfoBackend():{ >SoftKeyboardInfoBackend, >Entity, } {
-    return cast (cast (cast createEntity : Null<{ var getInfo:SoftKeyboardInfo->SoftKeyboardInfo; }>->{ >Entity, var getInfo:SoftKeyboardInfo->SoftKeyboardInfo; })(({ final __callArgument1061:Dynamic = ({ getInfo: (cast function(out:SoftKeyboardInfo):SoftKeyboardInfo {
+    return cast (cast (cast createEntity : Null<{ var getInfo:SoftKeyboardInfo->SoftKeyboardInfo; }>->{ >Entity, var getInfo:SoftKeyboardInfo->SoftKeyboardInfo; })(({ final __callArgument1148:Dynamic = ({ getInfo: (cast function(out:SoftKeyboardInfo):SoftKeyboardInfo {
       var geo:WebKeyboardGeometry__webKeyboard = cast _Runtime.UNDEFINED;
       geo = (cast _HostWeb.getWebKeyboardGeometry__webKeyboard() : WebKeyboardGeometry__webKeyboard);
       (out.height = cast ((cast geo : WebKeyboardGeometry__webKeyboard).height : Float));
@@ -4986,12 +5479,12 @@ class _HostWeb {
       (out.width = cast ((cast geo : WebKeyboardGeometry__webKeyboard).width : Float));
       return cast out;
       return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL39C23__webKeyboard); __callArgument1061; })) : EntityShapeL39C23__webKeyboard);
+    } : Dynamic) } : EntityShapeL39C23__webKeyboard); __callArgument1148; })) : EntityShapeL39C23__webKeyboard);
     return cast null;
   }
 
   public static function createWebSoftKeyboardVisibilityBackend():{ >SoftKeyboardVisibilityBackend, >Entity, } {
-    return cast (cast (cast createEntity : Null<{ var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; }>->{ >Entity, var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; })(({ final __callArgument1063:Dynamic = ({ show: (cast function():flight._internal._Promise<SoftKeyboardVisibilityResult> {
+    return cast (cast (cast createEntity : Null<{ var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; }>->{ >Entity, var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; })(({ final __callArgument1150:Dynamic = ({ show: (cast function():flight._internal._Promise<SoftKeyboardVisibilityResult> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var vk:Null<VirtualKeyboard__webKeyboard> = cast _Runtime.UNDEFINED;
         vk = (cast _HostWeb.getVirtualKeyboard__webKeyboard() : Null<VirtualKeyboard__webKeyboard>);
@@ -5009,15 +5502,15 @@ class _HostWeb {
         return cast 'ok';
         return cast null;
       }));
-    } : Dynamic) } : EntityShapeL53C23__webKeyboard); __callArgument1063; })) : EntityShapeL53C23__webKeyboard);
+    } : Dynamic) } : EntityShapeL53C23__webKeyboard); __callArgument1150; })) : EntityShapeL53C23__webKeyboard);
     return cast null;
   }
 
   public static function getVirtualKeyboard__webKeyboard():Null<VirtualKeyboard__webKeyboard> {
-    var nav:flight._internal._Intersection2<flight._internal.dom.Navigator, { @:optional var virtualKeyboard:Null<VirtualKeyboard__webKeyboard>; }> = cast _Runtime.UNDEFINED;
+    var nav:WebKeyboardNavigator__webKeyboard = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool)) { return cast null; }
-    nav = (cast flight._internal.backend.DomNavigatorBackend.value() : flight._internal._Intersection2<flight._internal.dom.Navigator, { @:optional var virtualKeyboard:VirtualKeyboard__webKeyboard; }>);
-    return cast _Runtime.coalesce(flight._internal.backend.DomNavigatorBackend.field(nav, 'virtualKeyboard'), function():Dynamic return cast null);
+    nav = (cast flight._internal.backend.DomNavigatorBackend.value() : WebKeyboardNavigator__webKeyboard);
+    return cast _Runtime.coalesce((cast nav : WebKeyboardNavigator__webKeyboard).virtualKeyboard, function():Dynamic return cast null);
     return cast null;
   }
 
@@ -5044,23 +5537,9 @@ class _HostWeb {
     return cast null;
   }
 
-  public static final webAppHost:flight._internal._Intersection2<Host, { var app:{ var exit:ApplicationExitBackend; var loop:LoopBackend; var visibility:ApplicationVisibilityBackend; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var name:AppNameBackend; var ready:AppReadyBackend; var focus:AppFocusBackend; var badge:AppBadgeBackend; var quit:AppQuitBackend; var locale:AppLocaleBackend; var relaunch:AppRelaunchBackend; }; }> = (cast createHost((cast { app: _Runtime.mergeObjects([_HostWeb.webAppCapabilities__webAppHost, { exit: webApplicationExitBackend }, { loop: webLoopBackend }, { visibility: webApplicationVisibilityBackend }]) } : Dynamic)) : flight._internal._Intersection2<Host, { var app:{ var exit:ApplicationExitBackend; var loop:LoopBackend; var visibility:ApplicationVisibilityBackend; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var name:AppNameBackend; var ready:AppReadyBackend; var focus:AppFocusBackend; var badge:AppBadgeBackend; var quit:AppQuitBackend; var locale:AppLocaleBackend; var relaunch:AppRelaunchBackend; }; }>);
-
-  public static var _enabled__webMediaFileCapture:Bool = false;
+  public static final webAppHost:flight._internal._Intersection2<Host, { var app:{ var exit:ApplicationExitBackend; var loop:LoopBackend; var visibility:ApplicationVisibilityBackend; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var name:AppNameBackend; var ready:AppReadyBackend; var focus:AppFocusBackend; var badge:AppBadgeBackend; var quit:AppQuitBackend; var locale:AppLocaleBackend; var relaunch:AppRelaunchBackend; }; }> = (cast createHost((cast { app: _Runtime.mergeObjects([_HostWeb.webAppCapabilities__webAppHost, { exit: webApplicationExitBackend }, { loop: webLoopBackend }, { visibility: webApplicationVisibilityBackend }]) } : Dynamic)) : flight._internal._Intersection2<Host, { var app:{ var exit:ApplicationExitBackend; var loop:LoopBackend; var visibility:ApplicationVisibilityBackend; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var name:AppNameBackend; var ready:AppReadyBackend; var focus:AppFocusBackend; var badge:AppBadgeBackend; var quit:AppQuitBackend; var locale:AppLocaleBackend; var relaunch:AppRelaunchBackend; }; }>);
 
   public static final OK__webMediasession:{ var reason:String; } = (cast { reason: 'ok' });
-
-  public static function enableHostWebMediaFileCapture():Void {
-    if ((cast _HostWeb._enabled__webMediaFileCapture : Bool)) { return; }
-    (_HostWeb._enabled__webMediaFileCapture = cast (true : Dynamic));
-    installMediaFileCaptureHostBackend((cast createWebMediaFileCaptureBackend() : MediaFileCaptureBackend));
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function resetHostWebMediaFileCaptureForTest():Void {
-    (_HostWeb._enabled__webMediaFileCapture = cast (false : Dynamic));
-  }
 
   public static final INVALID_ARTWORK_SOURCE__webMediasession:{ var reason:String; } = (cast { reason: 'invalid-artwork-source' });
 
@@ -5094,10 +5573,10 @@ class _HostWeb {
       }
       ((cast (cast lane : WebMediaSessionActionLane__webMediasession).subscriptions : flight._internal._Set<WebMediaSessionActionSubscription__webMediasession>).clear());
       sessionLanes = ((cast lanes : flight._internal._Map<flight._internal.dom.MediaSession, flight._internal._Map<MediaSessionAction, WebMediaSessionActionLane__webMediasession>>).get((cast (cast lane : WebMediaSessionActionLane__webMediasession).session)));
-      if ((cast _Runtime.strictEquals(({ final __collection1067:Dynamic = sessionLanes; __collection1067 == null ? _Runtime.UNDEFINED : ((cast __collection1067 : flight._internal._Map<MediaSessionAction, WebMediaSessionActionLane__webMediasession>).get((cast (cast lane : WebMediaSessionActionLane__webMediasession).action))); }), lane) : Bool)) { ((cast sessionLanes : flight._internal._Map<MediaSessionAction, WebMediaSessionActionLane__webMediasession>).delete_((cast (cast lane : WebMediaSessionActionLane__webMediasession).action))); }
-      if ((cast _Runtime.strictEquals(({ final __collection1068:Dynamic = sessionLanes; __collection1068 == null ? _Runtime.UNDEFINED : (cast __collection1068 : flight._internal._Map<MediaSessionAction, WebMediaSessionActionLane__webMediasession>).size; }), 0.0) : Bool)) { ((cast lanes : flight._internal._Map<flight._internal.dom.MediaSession, flight._internal._Map<MediaSessionAction, WebMediaSessionActionLane__webMediasession>>).delete_((cast (cast lane : WebMediaSessionActionLane__webMediasession).session))); }
+      if ((cast _Runtime.strictEquals(({ final __collection1154:Dynamic = sessionLanes; __collection1154 == null ? _Runtime.UNDEFINED : ((cast __collection1154 : flight._internal._Map<MediaSessionAction, WebMediaSessionActionLane__webMediasession>).get((cast (cast lane : WebMediaSessionActionLane__webMediasession).action))); }), lane) : Bool)) { ((cast sessionLanes : flight._internal._Map<MediaSessionAction, WebMediaSessionActionLane__webMediasession>).delete_((cast (cast lane : WebMediaSessionActionLane__webMediasession).action))); }
+      if ((cast _Runtime.strictEquals(({ final __collection1155:Dynamic = sessionLanes; __collection1155 == null ? _Runtime.UNDEFINED : (cast __collection1155 : flight._internal._Map<MediaSessionAction, WebMediaSessionActionLane__webMediasession>).size; }), 0.0) : Bool)) { ((cast lanes : flight._internal._Map<flight._internal.dom.MediaSession, flight._internal._Map<MediaSessionAction, WebMediaSessionActionLane__webMediasession>>).delete_((cast (cast lane : WebMediaSessionActionLane__webMediasession).session))); }
       ownership = ((cast _HostWeb._webMediaSessionOwnership__webMediasession : flight._internal._WeakMap<flight._internal.dom.MediaSession, WebMediaSessionOwnership__webMediasession>).get((cast (cast lane : WebMediaSessionActionLane__webMediasession).session)));
-      if ((cast _Runtime.strictEquals(({ final __collection1071:Dynamic = ({ final __structural1070 = ownership; __structural1070 == null ? _Runtime.UNDEFINED : (cast __structural1070 : { var actions:flight._internal._Map<MediaSessionAction, flight._internal._Object>; }).actions; }); __collection1071 == null ? _Runtime.UNDEFINED : ((cast __collection1071 : flight._internal._Map<MediaSessionAction, flight._internal._Object>).get((cast (cast lane : WebMediaSessionActionLane__webMediasession).action))); }), (cast lane : WebMediaSessionActionLane__webMediasession).token) : Bool)) { ((cast (cast ownership : WebMediaSessionOwnership__webMediasession).actions : flight._internal._Map<MediaSessionAction, flight._internal._Object>).delete_((cast (cast lane : WebMediaSessionActionLane__webMediasession).action))); }
+      if ((cast _Runtime.strictEquals(({ final __collection1158:Dynamic = ({ final __structural1157 = ownership; __structural1157 == null ? _Runtime.UNDEFINED : (cast __structural1157 : { var actions:flight._internal._Map<MediaSessionAction, flight._internal._Object>; }).actions; }); __collection1158 == null ? _Runtime.UNDEFINED : ((cast __collection1158 : flight._internal._Map<MediaSessionAction, flight._internal._Object>).get((cast (cast lane : WebMediaSessionActionLane__webMediasession).action))); }), (cast lane : WebMediaSessionActionLane__webMediasession).token) : Bool)) { ((cast (cast ownership : WebMediaSessionOwnership__webMediasession).actions : flight._internal._Map<MediaSessionAction, flight._internal._Object>).delete_((cast (cast lane : WebMediaSessionActionLane__webMediasession).action))); }
       if ((cast !_Runtime.strictEquals(ownership, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _HostWeb.pruneWebMediaSessionOwnership__webMediasession((cast lane : WebMediaSessionActionLane__webMediasession).session, (cast ownership : Dynamic)); }
     });
     release = (cast function(lane:WebMediaSessionActionLane__webMediasession, subscription:WebMediaSessionActionSubscription__webMediasession):Void {
@@ -5109,7 +5588,7 @@ class _HostWeb {
         return;
       }
       ownership = ((cast _HostWeb._webMediaSessionOwnership__webMediasession : flight._internal._WeakMap<flight._internal.dom.MediaSession, WebMediaSessionOwnership__webMediasession>).get((cast (cast lane : WebMediaSessionActionLane__webMediasession).session)));
-      if ((cast !_Runtime.strictEquals(({ final __collection1074:Dynamic = ({ final __structural1073 = ownership; __structural1073 == null ? _Runtime.UNDEFINED : (cast __structural1073 : { var actions:flight._internal._Map<MediaSessionAction, flight._internal._Object>; }).actions; }); __collection1074 == null ? _Runtime.UNDEFINED : ((cast __collection1074 : flight._internal._Map<MediaSessionAction, flight._internal._Object>).get((cast (cast lane : WebMediaSessionActionLane__webMediasession).action))); }), (cast lane : WebMediaSessionActionLane__webMediasession).token) : Bool)) {
+      if ((cast !_Runtime.strictEquals(({ final __collection1161:Dynamic = ({ final __structural1160 = ownership; __structural1160 == null ? _Runtime.UNDEFINED : (cast __structural1160 : { var actions:flight._internal._Map<MediaSessionAction, flight._internal._Object>; }).actions; }); __collection1161 == null ? _Runtime.UNDEFINED : ((cast __collection1161 : flight._internal._Map<MediaSessionAction, flight._internal._Object>).get((cast (cast lane : WebMediaSessionActionLane__webMediasession).action))); }), (cast lane : WebMediaSessionActionLane__webMediasession).token) : Bool)) {
         finishLane((cast lane : Dynamic));
         return;
       }
@@ -5120,7 +5599,7 @@ class _HostWeb {
       for (sessionLanes in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(((cast lanes : flight._internal._Map<flight._internal.dom.MediaSession, flight._internal._Map<MediaSessionAction, WebMediaSessionActionLane__webMediasession>>).values()))]))) {
         for (lane in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(((cast sessionLanes : flight._internal._Map<MediaSessionAction, WebMediaSessionActionLane__webMediasession>).values()))]))) {
           var ownership:Null<WebMediaSessionOwnership__webMediasession> = ((cast _HostWeb._webMediaSessionOwnership__webMediasession : flight._internal._WeakMap<flight._internal.dom.MediaSession, WebMediaSessionOwnership__webMediasession>).get((cast (cast lane : WebMediaSessionActionLane__webMediasession).session)));
-          if ((cast !_Runtime.strictEquals(({ final __collection1099:Dynamic = ({ final __structural1098 = ownership; __structural1098 == null ? _Runtime.UNDEFINED : (cast __structural1098 : { var actions:flight._internal._Map<MediaSessionAction, flight._internal._Object>; }).actions; }); __collection1099 == null ? _Runtime.UNDEFINED : ((cast __collection1099 : flight._internal._Map<MediaSessionAction, flight._internal._Object>).get((cast (cast lane : WebMediaSessionActionLane__webMediasession).action))); }), (cast lane : WebMediaSessionActionLane__webMediasession).token) : Bool)) {
+          if ((cast !_Runtime.strictEquals(({ final __collection1186:Dynamic = ({ final __structural1185 = ownership; __structural1185 == null ? _Runtime.UNDEFINED : (cast __structural1185 : { var actions:flight._internal._Map<MediaSessionAction, flight._internal._Object>; }).actions; }); __collection1186 == null ? _Runtime.UNDEFINED : ((cast __collection1186 : flight._internal._Map<MediaSessionAction, flight._internal._Object>).get((cast (cast lane : WebMediaSessionActionLane__webMediasession).action))); }), (cast lane : WebMediaSessionActionLane__webMediasession).token) : Bool)) {
             finishLane((cast lane : Dynamic));
             continue;
           }
@@ -5140,8 +5619,8 @@ class _HostWeb {
       session = (cast _HostWeb.getWebMediaSession__webMediasession() : Null<flight._internal.dom.MediaSession>);
       if ((cast ((cast _Runtime.strictEquals(session, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast session : flight._internal.dom.MediaSession).setActionHandler), 'function') : Bool)) : Bool)) { return cast null; }
       sessionLanes = ((cast lanes : flight._internal._Map<flight._internal.dom.MediaSession, flight._internal._Map<MediaSessionAction, WebMediaSessionActionLane__webMediasession>>).get((cast session)));
-      lane = ({ final __collection1100:Dynamic = sessionLanes; __collection1100 == null ? _Runtime.UNDEFINED : ((cast __collection1100 : flight._internal._Map<MediaSessionAction, WebMediaSessionActionLane__webMediasession>).get((cast action))); });
-      ownership = (cast _HostWeb.getWebMediaSessionOwnership__webMediasession(({ final __callArgument1101:Dynamic = session; __callArgument1101; })) : WebMediaSessionOwnership__webMediasession);
+      lane = ({ final __collection1187:Dynamic = sessionLanes; __collection1187 == null ? _Runtime.UNDEFINED : ((cast __collection1187 : flight._internal._Map<MediaSessionAction, WebMediaSessionActionLane__webMediasession>).get((cast action))); });
+      ownership = (cast _HostWeb.getWebMediaSessionOwnership__webMediasession(({ final __callArgument1188:Dynamic = session; __callArgument1188; })) : WebMediaSessionOwnership__webMediasession);
       if ((cast ((cast !_Runtime.strictEquals(lane, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(((cast (cast ownership : WebMediaSessionOwnership__webMediasession).actions : flight._internal._Map<MediaSessionAction, flight._internal._Object>).get((cast action))), (cast lane : WebMediaSessionActionLane__webMediasession).token) : Bool)) : Bool)) {
         finishLane((cast lane : Dynamic));
         (lane = cast (_Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
@@ -5156,9 +5635,9 @@ class _HostWeb {
         handler = (cast function(details:MediaSessionActionDetails):Void {
           var current:Null<WebMediaSessionOwnership__webMediasession> = cast _Runtime.UNDEFINED;
           current = ((cast _HostWeb._webMediaSessionOwnership__webMediasession : flight._internal._WeakMap<flight._internal.dom.MediaSession, WebMediaSessionOwnership__webMediasession>).get((cast session)));
-          if ((cast !_Runtime.strictEquals(({ final __collection1105:Dynamic = ({ final __structural1104 = current; __structural1104 == null ? _Runtime.UNDEFINED : (cast __structural1104 : { var actions:flight._internal._Map<MediaSessionAction, flight._internal._Object>; }).actions; }); __collection1105 == null ? _Runtime.UNDEFINED : ((cast __collection1105 : flight._internal._Map<MediaSessionAction, flight._internal._Object>).get((cast action))); }), token) : Bool)) { return; }
+          if ((cast !_Runtime.strictEquals(({ final __collection1192:Dynamic = ({ final __structural1191 = current; __structural1191 == null ? _Runtime.UNDEFINED : (cast __structural1191 : { var actions:flight._internal._Map<MediaSessionAction, flight._internal._Object>; }).actions; }); __collection1192 == null ? _Runtime.UNDEFINED : ((cast __collection1192 : flight._internal._Map<MediaSessionAction, flight._internal._Object>).get((cast action))); }), token) : Bool)) { return; }
           for (subscription in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray((cast installedLane : WebMediaSessionActionLane__webMediasession).subscriptions)]))) {
-            if ((cast !(cast (cast subscription : WebMediaSessionActionSubscription__webMediasession).detached : Bool) : Bool)) { (cast subscription : WebMediaSessionActionSubscription__webMediasession).listener(({ final __callArgument1108:Dynamic = details; __callArgument1108; })); }
+            if ((cast !(cast (cast subscription : WebMediaSessionActionSubscription__webMediasession).detached : Bool) : Bool)) { (cast subscription : WebMediaSessionActionSubscription__webMediasession).listener(({ final __callArgument1195:Dynamic = details; __callArgument1195; })); }
           }
         });
         var prior:Null<flight._internal._Object> = ((cast (cast ownership : WebMediaSessionOwnership__webMediasession).actions : flight._internal._Map<MediaSessionAction, flight._internal._Object>).get((cast action)));
@@ -5169,7 +5648,7 @@ class _HostWeb {
           if ((cast _Runtime.strictEquals(((cast (cast ownership : WebMediaSessionOwnership__webMediasession).actions : flight._internal._Map<MediaSessionAction, flight._internal._Object>).get((cast action))), token) : Bool)) {
             if ((cast _Runtime.strictEquals(prior, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast (cast ownership : WebMediaSessionOwnership__webMediasession).actions : flight._internal._Map<MediaSessionAction, flight._internal._Object>).delete_((cast action))); } else { ((cast (cast ownership : WebMediaSessionOwnership__webMediasession).actions : flight._internal._Map<MediaSessionAction, flight._internal._Object>).set((cast action), (cast prior))); }
           }
-          _HostWeb.pruneWebMediaSessionOwnership__webMediasession(({ final __callArgument1109:Dynamic = session; __callArgument1109; }), (cast ownership : Dynamic));
+          _HostWeb.pruneWebMediaSessionOwnership__webMediasession(({ final __callArgument1196:Dynamic = session; __callArgument1196; }), (cast ownership : Dynamic));
           return cast null;
         }
         (sessionLanes ??= _Runtime.construct(flight._internal._HostValueLut.get('Map'), []));
@@ -5181,7 +5660,7 @@ class _HostWeb {
       return cast function():Void { release((cast lane : Dynamic), (cast subscription : Dynamic)); };
       return cast _Runtime.UNDEFINED;
     } : Dynamic) } : MediaSessionActionBackend));
-    return cast (cast createEntity(({ final __callArgument1111:Dynamic = backend; __callArgument1111; })) : { >Entity, var subscribe:MediaSessionAction->(MediaSessionActionDetails->Void)->Null<Void->Void>; var destroy:Void->Void; });
+    return cast (cast createEntity(({ final __callArgument1198:Dynamic = backend; __callArgument1198; })) : { >Entity, var subscribe:MediaSessionAction->(MediaSessionActionDetails->Void)->Null<Void->Void>; var destroy:Void->Void; });
     return cast null;
   }
 
@@ -5198,7 +5677,7 @@ class _HostWeb {
       var publication:Null<WebMediaSessionCommandPublication__webMediasession> = cast _Runtime.UNDEFINED;
       session = (cast _HostWeb.getWebMediaSession__webMediasession() : Null<flight._internal.dom.MediaSession>);
       if ((cast _Runtime.strictEquals(session, null) : Bool)) { return cast _HostWeb.MEDIA_SESSION_UNAVAILABLE__webMediasession; }
-      ownership = (cast _HostWeb.getWebMediaSessionOwnership__webMediasession(({ final __callArgument1155:Dynamic = session; __callArgument1155; })) : WebMediaSessionOwnership__webMediasession);
+      ownership = (cast _HostWeb.getWebMediaSessionOwnership__webMediasession(({ final __callArgument1242:Dynamic = session; __callArgument1242; })) : WebMediaSessionOwnership__webMediasession);
       prior = (cast ownership : WebMediaSessionOwnership__webMediasession).metadata;
       try {
         ((cast session : flight._internal.dom.MediaSession).metadata = null);
@@ -5209,9 +5688,9 @@ class _HostWeb {
       publication = ((cast publications : flight._internal._Map<flight._internal.dom.MediaSession, WebMediaSessionCommandPublication__webMediasession>).get((cast session)));
       if ((cast !_Runtime.strictEquals(publication, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         ((cast publication : WebMediaSessionCommandPublication__webMediasession).metadata = null);
-        _HostWeb.pruneCommandPublication__webMediasession((cast publications : Dynamic), ({ final __callArgument1157:Dynamic = session; __callArgument1157; }), (cast publication : Dynamic));
+        _HostWeb.pruneCommandPublication__webMediasession((cast publications : Dynamic), ({ final __callArgument1244:Dynamic = session; __callArgument1244; }), (cast publication : Dynamic));
       }
-      _HostWeb.pruneWebMediaSessionOwnership__webMediasession(({ final __callArgument1159:Dynamic = session; __callArgument1159; }), (cast ownership : Dynamic));
+      _HostWeb.pruneWebMediaSessionOwnership__webMediasession(({ final __callArgument1246:Dynamic = session; __callArgument1246; }), (cast ownership : Dynamic));
       return cast _HostWeb.OK__webMediasession;
       return cast _Runtime.UNDEFINED;
     } : Dynamic), clearPositionState: (cast function():MediaSessionClearPositionStateOutcome {
@@ -5222,7 +5701,7 @@ class _HostWeb {
       session = (cast _HostWeb.getWebMediaSession__webMediasession() : Null<flight._internal.dom.MediaSession>);
       if ((cast _Runtime.strictEquals(session, null) : Bool)) { return cast _HostWeb.MEDIA_SESSION_UNAVAILABLE__webMediasession; }
       if ((cast !_Runtime.strictEquals(_Runtime.typeofValue((cast session : flight._internal.dom.MediaSession).setPositionState), 'function') : Bool)) { return cast _HostWeb.POSITION_STATE_UNAVAILABLE__webMediasession; }
-      ownership = (cast _HostWeb.getWebMediaSessionOwnership__webMediasession(({ final __callArgument1161:Dynamic = session; __callArgument1161; })) : WebMediaSessionOwnership__webMediasession);
+      ownership = (cast _HostWeb.getWebMediaSessionOwnership__webMediasession(({ final __callArgument1248:Dynamic = session; __callArgument1248; })) : WebMediaSessionOwnership__webMediasession);
       prior = (cast ownership : WebMediaSessionOwnership__webMediasession).positionState;
       try {
         (cast _HostWeb.assertSyncVoid__webMediasession : flight._internal._Nothing->Void)(({ (cast session : flight._internal.dom.MediaSession).setPositionState(_Runtime.field(_Runtime, 'UNDEFINED')); _Runtime.UNDEFINED; }));
@@ -5233,9 +5712,9 @@ class _HostWeb {
       publication = ((cast publications : flight._internal._Map<flight._internal.dom.MediaSession, WebMediaSessionCommandPublication__webMediasession>).get((cast session)));
       if ((cast !_Runtime.strictEquals(publication, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         ((cast publication : WebMediaSessionCommandPublication__webMediasession).positionState = false);
-        _HostWeb.pruneCommandPublication__webMediasession((cast publications : Dynamic), ({ final __callArgument1163:Dynamic = session; __callArgument1163; }), (cast publication : Dynamic));
+        _HostWeb.pruneCommandPublication__webMediasession((cast publications : Dynamic), ({ final __callArgument1250:Dynamic = session; __callArgument1250; }), (cast publication : Dynamic));
       }
-      _HostWeb.pruneWebMediaSessionOwnership__webMediasession(({ final __callArgument1165:Dynamic = session; __callArgument1165; }), (cast ownership : Dynamic));
+      _HostWeb.pruneWebMediaSessionOwnership__webMediasession(({ final __callArgument1252:Dynamic = session; __callArgument1252; }), (cast ownership : Dynamic));
       return cast _HostWeb.OK__webMediasession;
       return cast _Runtime.UNDEFINED;
     } : Dynamic), destroy: (cast function():Void {
@@ -5249,7 +5728,7 @@ class _HostWeb {
         }
         if ((cast !_Runtime.strictEquals((cast publication : WebMediaSessionCommandPublication__webMediasession).metadata, null) : Bool)) {
           var owned:Null<WebMediaSessionOwnedValue__webMediasession<flight._internal.dom.MediaMetadata>> = (cast ownership : WebMediaSessionOwnership__webMediasession).metadata;
-          if ((cast !_Runtime.strictEquals(({ final __structural1169 = owned; __structural1169 == null ? _Runtime.UNDEFINED : (cast __structural1169 : { var owner:flight._internal._Object; }).owner; }), owner) : Bool)) { ((cast publication : WebMediaSessionCommandPublication__webMediasession).metadata = null); } else { if ((cast ((cast !_Runtime.strictEquals((cast owned : WebMediaSessionOwnedValue__webMediasession<flight._internal.dom.MediaMetadata>).value, (cast publication : WebMediaSessionCommandPublication__webMediasession).metadata) : Bool) || (cast !_Runtime.strictEquals((cast session : flight._internal.dom.MediaSession).metadata, (cast owned : WebMediaSessionOwnedValue__webMediasession<flight._internal.dom.MediaMetadata>).value) : Bool)) : Bool)) {
+          if ((cast !_Runtime.strictEquals(({ final __structural1256 = owned; __structural1256 == null ? _Runtime.UNDEFINED : (cast __structural1256 : { var owner:flight._internal._Object; }).owner; }), owner) : Bool)) { ((cast publication : WebMediaSessionCommandPublication__webMediasession).metadata = null); } else { if ((cast ((cast !_Runtime.strictEquals((cast owned : WebMediaSessionOwnedValue__webMediasession<flight._internal.dom.MediaMetadata>).value, (cast publication : WebMediaSessionCommandPublication__webMediasession).metadata) : Bool) || (cast !_Runtime.strictEquals((cast session : flight._internal.dom.MediaSession).metadata, (cast owned : WebMediaSessionOwnedValue__webMediasession<flight._internal.dom.MediaMetadata>).value) : Bool)) : Bool)) {
             ((cast ownership : WebMediaSessionOwnership__webMediasession).metadata = null);
             ((cast publication : WebMediaSessionCommandPublication__webMediasession).metadata = null);
           } else {
@@ -5263,7 +5742,7 @@ class _HostWeb {
         }
         if ((cast !_Runtime.strictEquals((cast publication : WebMediaSessionCommandPublication__webMediasession).playbackState, null) : Bool)) {
           var owned:Null<WebMediaSessionOwnedValue__webMediasession<MediaSessionPlaybackState>> = (cast ownership : WebMediaSessionOwnership__webMediasession).playbackState;
-          if ((cast !_Runtime.strictEquals(({ final __structural1170 = owned; __structural1170 == null ? _Runtime.UNDEFINED : (cast __structural1170 : { var owner:flight._internal._Object; }).owner; }), owner) : Bool)) { ((cast publication : WebMediaSessionCommandPublication__webMediasession).playbackState = null); } else { if ((cast ((cast !_Runtime.strictEquals((cast owned : WebMediaSessionOwnedValue__webMediasession<MediaSessionPlaybackState>).value, (cast publication : WebMediaSessionCommandPublication__webMediasession).playbackState) : Bool) || (cast !_Runtime.strictEquals((cast session : flight._internal.dom.MediaSession).playbackState, (cast owned : WebMediaSessionOwnedValue__webMediasession<MediaSessionPlaybackState>).value) : Bool)) : Bool)) {
+          if ((cast !_Runtime.strictEquals(({ final __structural1257 = owned; __structural1257 == null ? _Runtime.UNDEFINED : (cast __structural1257 : { var owner:flight._internal._Object; }).owner; }), owner) : Bool)) { ((cast publication : WebMediaSessionCommandPublication__webMediasession).playbackState = null); } else { if ((cast ((cast !_Runtime.strictEquals((cast owned : WebMediaSessionOwnedValue__webMediasession<MediaSessionPlaybackState>).value, (cast publication : WebMediaSessionCommandPublication__webMediasession).playbackState) : Bool) || (cast !_Runtime.strictEquals((cast session : flight._internal.dom.MediaSession).playbackState, (cast owned : WebMediaSessionOwnedValue__webMediasession<MediaSessionPlaybackState>).value) : Bool)) : Bool)) {
             ((cast ownership : WebMediaSessionOwnership__webMediasession).playbackState = null);
             ((cast publication : WebMediaSessionCommandPublication__webMediasession).playbackState = null);
           } else {
@@ -5285,8 +5764,8 @@ class _HostWeb {
             }
           } }
         }
-        _HostWeb.pruneWebMediaSessionOwnership__webMediasession(({ final __callArgument1171:Dynamic = session; __callArgument1171; }), (cast ownership : Dynamic));
-        _HostWeb.pruneCommandPublication__webMediasession((cast publications : Dynamic), ({ final __callArgument1173:Dynamic = session; __callArgument1173; }), (cast publication : Dynamic));
+        _HostWeb.pruneWebMediaSessionOwnership__webMediasession(({ final __callArgument1258:Dynamic = session; __callArgument1258; }), (cast ownership : Dynamic));
+        _HostWeb.pruneCommandPublication__webMediasession((cast publications : Dynamic), ({ final __callArgument1260:Dynamic = session; __callArgument1260; }), (cast publication : Dynamic));
       }
     } : Dynamic), setMetadata: (cast function(metadata:MediaSessionMetadata):MediaSessionSetMetadataOutcome {
       var session:Null<flight._internal.dom.MediaSession> = cast _Runtime.UNDEFINED;
@@ -5302,7 +5781,7 @@ class _HostWeb {
       } catch (error:Dynamic) {
         return cast ((cast _Runtime.isInstanceOfName(error, 'TypeError') : Bool) ? (cast _HostWeb.INVALID_ARTWORK_SOURCE__webMediasession : Dynamic) : (cast _HostWeb.OPERATION_FAILED__webMediasession : Dynamic));
       }
-      ownership = (cast _HostWeb.getWebMediaSessionOwnership__webMediasession(({ final __callArgument1175:Dynamic = session; __callArgument1175; })) : WebMediaSessionOwnership__webMediasession);
+      ownership = (cast _HostWeb.getWebMediaSessionOwnership__webMediasession(({ final __callArgument1262:Dynamic = session; __callArgument1262; })) : WebMediaSessionOwnership__webMediasession);
       prior = (cast ownership : WebMediaSessionOwnership__webMediasession).metadata;
       record = (cast { owner: owner, value: published });
       ((cast ownership : WebMediaSessionOwnership__webMediasession).metadata = record);
@@ -5310,11 +5789,11 @@ class _HostWeb {
         ((cast session : flight._internal.dom.MediaSession).metadata = published);
       } catch (__error:Dynamic) {
         if ((cast _Runtime.strictEquals((cast ownership : WebMediaSessionOwnership__webMediasession).metadata, record) : Bool)) { ((cast ownership : WebMediaSessionOwnership__webMediasession).metadata = prior); }
-        _HostWeb.pruneWebMediaSessionOwnership__webMediasession(({ final __callArgument1177:Dynamic = session; __callArgument1177; }), (cast ownership : Dynamic));
+        _HostWeb.pruneWebMediaSessionOwnership__webMediasession(({ final __callArgument1264:Dynamic = session; __callArgument1264; }), (cast ownership : Dynamic));
         return cast _HostWeb.OPERATION_FAILED__webMediasession;
       }
       if ((cast !_Runtime.strictEquals((cast ownership : WebMediaSessionOwnership__webMediasession).metadata, record) : Bool)) { return cast _HostWeb.OK__webMediasession; }
-      ((cast (cast _HostWeb.getCommandPublication__webMediasession((cast publications : Dynamic), ({ final __callArgument1179:Dynamic = session; __callArgument1179; })) : WebMediaSessionCommandPublication__webMediasession) : WebMediaSessionCommandPublication__webMediasession).metadata = published);
+      ((cast (cast _HostWeb.getCommandPublication__webMediasession((cast publications : Dynamic), ({ final __callArgument1266:Dynamic = session; __callArgument1266; })) : WebMediaSessionCommandPublication__webMediasession) : WebMediaSessionCommandPublication__webMediasession).metadata = published);
       return cast _HostWeb.OK__webMediasession;
       return cast _Runtime.UNDEFINED;
     } : Dynamic), setPlaybackState: (cast function(state:MediaSessionPlaybackState):MediaSessionSetPlaybackStateOutcome {
@@ -5325,7 +5804,7 @@ class _HostWeb {
       var publication:Null<WebMediaSessionCommandPublication__webMediasession> = cast _Runtime.UNDEFINED;
       session = (cast _HostWeb.getWebMediaSession__webMediasession() : Null<flight._internal.dom.MediaSession>);
       if ((cast _Runtime.strictEquals(session, null) : Bool)) { return cast _HostWeb.MEDIA_SESSION_UNAVAILABLE__webMediasession; }
-      ownership = (cast _HostWeb.getWebMediaSessionOwnership__webMediasession(({ final __callArgument1181:Dynamic = session; __callArgument1181; })) : WebMediaSessionOwnership__webMediasession);
+      ownership = (cast _HostWeb.getWebMediaSessionOwnership__webMediasession(({ final __callArgument1268:Dynamic = session; __callArgument1268; })) : WebMediaSessionOwnership__webMediasession);
       prior = (cast ownership : WebMediaSessionOwnership__webMediasession).playbackState;
       record = ((cast _Runtime.strictEquals(state, 'none') : Bool) ? (cast null : Dynamic) : (cast { owner: owner, value: state } : Dynamic));
       ((cast ownership : WebMediaSessionOwnership__webMediasession).playbackState = record);
@@ -5333,7 +5812,7 @@ class _HostWeb {
         ((cast session : flight._internal.dom.MediaSession).playbackState = state);
       } catch (__error:Dynamic) {
         if ((cast _Runtime.strictEquals((cast ownership : WebMediaSessionOwnership__webMediasession).playbackState, record) : Bool)) { ((cast ownership : WebMediaSessionOwnership__webMediasession).playbackState = prior); }
-        _HostWeb.pruneWebMediaSessionOwnership__webMediasession(({ final __callArgument1183:Dynamic = session; __callArgument1183; }), (cast ownership : Dynamic));
+        _HostWeb.pruneWebMediaSessionOwnership__webMediasession(({ final __callArgument1270:Dynamic = session; __callArgument1270; }), (cast ownership : Dynamic));
         return cast _HostWeb.OPERATION_FAILED__webMediasession;
       }
       if ((cast !_Runtime.strictEquals((cast ownership : WebMediaSessionOwnership__webMediasession).playbackState, record) : Bool)) { return cast _HostWeb.OK__webMediasession; }
@@ -5341,11 +5820,11 @@ class _HostWeb {
       if ((cast _Runtime.strictEquals(state, 'none') : Bool)) {
         if ((cast !_Runtime.strictEquals(publication, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           ((cast publication : WebMediaSessionCommandPublication__webMediasession).playbackState = null);
-          _HostWeb.pruneCommandPublication__webMediasession((cast publications : Dynamic), ({ final __callArgument1185:Dynamic = session; __callArgument1185; }), (cast publication : Dynamic));
+          _HostWeb.pruneCommandPublication__webMediasession((cast publications : Dynamic), ({ final __callArgument1272:Dynamic = session; __callArgument1272; }), (cast publication : Dynamic));
         }
-        _HostWeb.pruneWebMediaSessionOwnership__webMediasession(({ final __callArgument1187:Dynamic = session; __callArgument1187; }), (cast ownership : Dynamic));
+        _HostWeb.pruneWebMediaSessionOwnership__webMediasession(({ final __callArgument1274:Dynamic = session; __callArgument1274; }), (cast ownership : Dynamic));
       } else {
-        ((cast (cast _HostWeb.getCommandPublication__webMediasession((cast publications : Dynamic), ({ final __callArgument1189:Dynamic = session; __callArgument1189; })) : WebMediaSessionCommandPublication__webMediasession) : WebMediaSessionCommandPublication__webMediasession).playbackState = state);
+        ((cast (cast _HostWeb.getCommandPublication__webMediasession((cast publications : Dynamic), ({ final __callArgument1276:Dynamic = session; __callArgument1276; })) : WebMediaSessionCommandPublication__webMediasession) : WebMediaSessionCommandPublication__webMediasession).playbackState = state);
       }
       return cast _HostWeb.OK__webMediasession;
       return cast _Runtime.UNDEFINED;
@@ -5356,17 +5835,17 @@ class _HostWeb {
       session = (cast _HostWeb.getWebMediaSession__webMediasession() : Null<flight._internal.dom.MediaSession>);
       if ((cast _Runtime.strictEquals(session, null) : Bool)) { return cast _HostWeb.MEDIA_SESSION_UNAVAILABLE__webMediasession; }
       if ((cast !_Runtime.strictEquals(_Runtime.typeofValue((cast session : flight._internal.dom.MediaSession).setPositionState), 'function') : Bool)) { return cast _HostWeb.POSITION_STATE_UNAVAILABLE__webMediasession; }
-      ownership = (cast _HostWeb.getWebMediaSessionOwnership__webMediasession(({ final __callArgument1191:Dynamic = session; __callArgument1191; })) : WebMediaSessionOwnership__webMediasession);
+      ownership = (cast _HostWeb.getWebMediaSessionOwnership__webMediasession(({ final __callArgument1278:Dynamic = session; __callArgument1278; })) : WebMediaSessionOwnership__webMediasession);
       prior = (cast ownership : WebMediaSessionOwnership__webMediasession).positionState;
       ((cast ownership : WebMediaSessionOwnership__webMediasession).positionState = owner);
       try {
         (cast _HostWeb.assertSyncVoid__webMediasession : flight._internal._Nothing->Void)(({ (cast session : flight._internal.dom.MediaSession).setPositionState(state); _Runtime.UNDEFINED; }));
       } catch (__error:Dynamic) {
         if ((cast _Runtime.strictEquals((cast ownership : WebMediaSessionOwnership__webMediasession).positionState, owner) : Bool)) { ((cast ownership : WebMediaSessionOwnership__webMediasession).positionState = prior); }
-        _HostWeb.pruneWebMediaSessionOwnership__webMediasession(({ final __callArgument1193:Dynamic = session; __callArgument1193; }), (cast ownership : Dynamic));
+        _HostWeb.pruneWebMediaSessionOwnership__webMediasession(({ final __callArgument1280:Dynamic = session; __callArgument1280; }), (cast ownership : Dynamic));
         return cast _HostWeb.OPERATION_FAILED__webMediasession;
       }
-      if ((cast _Runtime.strictEquals((cast ownership : WebMediaSessionOwnership__webMediasession).positionState, owner) : Bool)) { ((cast (cast _HostWeb.getCommandPublication__webMediasession((cast publications : Dynamic), ({ final __callArgument1195:Dynamic = session; __callArgument1195; })) : WebMediaSessionCommandPublication__webMediasession) : WebMediaSessionCommandPublication__webMediasession).positionState = true); }
+      if ((cast _Runtime.strictEquals((cast ownership : WebMediaSessionOwnership__webMediasession).positionState, owner) : Bool)) { ((cast (cast _HostWeb.getCommandPublication__webMediasession((cast publications : Dynamic), ({ final __callArgument1282:Dynamic = session; __callArgument1282; })) : WebMediaSessionCommandPublication__webMediasession) : WebMediaSessionCommandPublication__webMediasession).positionState = true); }
       return cast _HostWeb.OK__webMediasession;
       return cast _Runtime.UNDEFINED;
     } : Dynamic) } : MediaSessionBackend));
@@ -5374,18 +5853,18 @@ class _HostWeb {
     return cast null;
   }
 
-  public static final webMenuHighlightBackend:MenuHighlightBackend = (cast { subscribe: function(listener:String->Void):Void->Void {
+  public static final webMenuHighlightBackend:MenuHighlightBackend = (cast createEntity(({ final __callArgument1284:Dynamic = ({ subscribe: (cast function(listener:String->Void):Void->Void {
     ((cast _HostWeb._highlightListeners__webMenu : flight._internal._Set<String->Void>).add((cast listener)));
     return cast function():Void {
       ((cast _HostWeb._highlightListeners__webMenu : flight._internal._Set<String->Void>).delete_((cast listener)));
     };
     return cast _Runtime.UNDEFINED;
-  } });
+  } : Dynamic) } : MenuHighlightBackend); __callArgument1284; })) : MenuHighlightBackend);
 
-  public static final webMenuPopupBackend:MenuPopupBackend = (cast { popup: function(items:Array<MenuItemTemplate>, x:Float, y:Float):flight._internal._Promise<Null<String>> {
-    return cast (cast _HostWeb.showWebContextMenu__webMenu(({ final __callArgument1197:Dynamic = items; __callArgument1197; }), (cast x : Float), (cast y : Float)) : flight._internal._Promise<Null<String>>);
+  public static final webMenuPopupBackend:MenuPopupBackend = (cast createEntity(({ final __callArgument1290:Dynamic = ({ popup: (cast function(items:Array<MenuItemTemplate>, x:Float, y:Float):flight._internal._Promise<Null<String>> {
+    return cast (cast _HostWeb.showWebContextMenu__webMenu(({ final __callArgument1288:Dynamic = items; __callArgument1288; }), (cast x : Float), (cast y : Float)) : flight._internal._Promise<Null<String>>);
     return cast _Runtime.UNDEFINED;
-  } });
+  } : Dynamic) } : MenuPopupBackend); __callArgument1290; })) : MenuPopupBackend);
 
   public static function getWebMediaSession__webMediasession():Null<flight._internal.dom.MediaSession> {
     if ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) || (cast _Runtime.strictEquals(flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'mediaSession'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast null; }
@@ -5461,7 +5940,7 @@ class _HostWeb {
         flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'removeEventListener', cast (['keydown', onKeyDown] : Array<Dynamic>));
         (cast overlay : flight._internal.dom.HTMLDivElement).remove();
         (cast menu : flight._internal.dom.HTMLUListElement).remove();
-        resolve(({ final __callArgument1199:Dynamic = selectedId; __callArgument1199; }));
+        resolve(({ final __callArgument1296:Dynamic = selectedId; __callArgument1296; }));
       });
       moveFocus = (cast function moveFocus(delta:Float):Void {
         var items:Array<flight._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;
@@ -5482,13 +5961,13 @@ class _HostWeb {
           }
         }, _Runtime.UNDEFINED);
         focused = flight._internal._StaticIndex.readArray(items, focusIndex);
-        itemId = _Runtime.optionalIndex(({ final __hostType1202 = focused; __hostType1202 == null ? _Runtime.UNDEFINED : (cast __hostType1202 : flight._internal.dom.HTMLElement).dataset; }), 'itemId');
+        itemId = _Runtime.optionalIndex(({ final __hostType1299 = focused; __hostType1299 == null ? _Runtime.UNDEFINED : (cast __hostType1299 : flight._internal.dom.HTMLElement).dataset; }), 'itemId');
         if ((cast !_Runtime.strictEquals(itemId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _HostWeb._emitHighlight__webMenu((cast itemId : String)); }
       });
       onKeyDown = (cast function onKeyDown(e:flight._internal.dom.KeyboardEvent):Void {
         if ((cast _Runtime.strictEquals(e.key, 'Escape') : Bool)) {
           e.preventDefault();
-          close(({ final __callArgument1203:Dynamic = null; __callArgument1203; }));
+          close(({ final __callArgument1300:Dynamic = null; __callArgument1300; }));
         } else { if ((cast _Runtime.strictEquals(e.key, 'ArrowDown') : Bool)) {
           e.preventDefault();
           moveFocus((cast 1.0 : Float));
@@ -5500,24 +5979,24 @@ class _HostWeb {
           var focused:flight._internal.dom.HTMLElement = flight._internal._StaticIndex.readArray((cast _Runtime.toArray(focusableItems) : Array<flight._internal.dom.HTMLElement>), focusIndex);
           if ((cast !_Runtime.strictEquals(focused, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
             var itemId:Null<String> = _Runtime.getIndex((cast focused : flight._internal.dom.HTMLElement).dataset, 'itemId');
-            if ((cast !_Runtime.strictEquals(itemId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { close(({ final __callArgument1205:Dynamic = itemId; __callArgument1205; })); }
+            if ((cast !_Runtime.strictEquals(itemId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { close(({ final __callArgument1302:Dynamic = itemId; __callArgument1302; })); }
           }
         } } } }
       });
       if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) {
-        resolve(({ final __callArgument1207:Dynamic = null; __callArgument1207; }));
+        resolve(({ final __callArgument1304:Dynamic = null; __callArgument1304; }));
         return;
       }
       overlay = flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['div'] : Array<Dynamic>));
       ((cast (cast overlay : flight._internal.dom.HTMLDivElement).style : flight._internal.dom.CSSStyleDeclaration).cssText = 'position:fixed;inset:0;z-index:2147483646;');
-      menu = (cast _HostWeb.buildWebMenuElement__webMenu(({ final __callArgument1209:Dynamic = items; __callArgument1209; }), ({ final __callArgument1212:Dynamic = function(id:String):Void { close(({ final __callArgument1210:Dynamic = id; __callArgument1210; })); }; __callArgument1212; })) : flight._internal.dom.HTMLUListElement);
+      menu = (cast _HostWeb.buildWebMenuElement__webMenu(({ final __callArgument1306:Dynamic = items; __callArgument1306; }), ({ final __callArgument1309:Dynamic = function(id:String):Void { close(({ final __callArgument1307:Dynamic = id; __callArgument1307; })); }; __callArgument1309; })) : flight._internal.dom.HTMLUListElement);
       focusableItems = (cast menu : flight._internal.dom.HTMLUListElement).querySelectorAll(':scope > li[data-enabled="true"]');
       focusIndex = -1.0;
-      (cast overlay : flight._internal.dom.HTMLDivElement).addEventListener('click', function(__unused2:flight._internal.dom.PointerEvent):Void { close(({ final __callArgument1217:Dynamic = null; __callArgument1217; })); });
+      (cast overlay : flight._internal.dom.HTMLDivElement).addEventListener('click', function(__unused2:flight._internal.dom.PointerEvent):Void { close(({ final __callArgument1314:Dynamic = null; __callArgument1314; })); });
       flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'addEventListener', cast (['keydown', onKeyDown] : Array<Dynamic>));
       (cast flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'body') : flight._internal.dom.HTMLElement).appendChild(overlay);
       (cast flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'body') : flight._internal.dom.HTMLElement).appendChild(menu);
-      clampMenu(({ final __callArgument1219:Dynamic = menu; __callArgument1219; }), (cast x : Float), (cast y : Float));
+      clampMenu(({ final __callArgument1316:Dynamic = menu; __callArgument1316; }), (cast x : Float), (cast y : Float));
     });
     return cast null;
   }
@@ -5584,7 +6063,7 @@ class _HostWeb {
           if ((cast ((cast !_Runtime.strictEquals(accelEl, null) : Bool) && (cast !_Runtime.strictEquals(accelEl, labelEl) : Bool)) : Bool)) { ((cast (cast accelEl : flight._internal.dom.HTMLElement).style : flight._internal.dom.CSSStyleDeclaration).color = '#888'); }
         });
         if ((cast hasSubmenu : Bool)) {
-          var submenuEl:flight._internal.dom.HTMLUListElement = (cast _HostWeb.buildWebMenuElement__webMenu(({ final __callArgument1223:Dynamic = item.submenu; __callArgument1223; }), ({ final __callArgument1224:Dynamic = onSelect; __callArgument1224; })) : flight._internal.dom.HTMLUListElement);
+          var submenuEl:flight._internal.dom.HTMLUListElement = (cast _HostWeb.buildWebMenuElement__webMenu(({ final __callArgument1320:Dynamic = item.submenu; __callArgument1320; }), ({ final __callArgument1321:Dynamic = onSelect; __callArgument1321; })) : flight._internal.dom.HTMLUListElement);
           ((cast (cast submenuEl : flight._internal.dom.HTMLUListElement).style : flight._internal.dom.CSSStyleDeclaration).position = 'absolute');
           ((cast (cast submenuEl : flight._internal.dom.HTMLUListElement).style : flight._internal.dom.CSSStyleDeclaration).top = '0');
           ((cast (cast submenuEl : flight._internal.dom.HTMLUListElement).style : flight._internal.dom.CSSStyleDeclaration).left = '100%');
@@ -5647,24 +6126,24 @@ class _HostWeb {
       var port:MidiInputPort = cast _Runtime.UNDEFINED;
       retained = ((cast inputByNative : flight._internal._WeakMap<flight._internal.dom.MIDIInput, MidiInputPort>).get((cast native)));
       if ((cast !_Runtime.strictEquals(retained, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast retained; }
-      port = (cast createMidiInputPortResource(({ final __callArgument1229:Dynamic = native; __callArgument1229; }), ({ final __callArgument1240:Dynamic = { attachMessage: function(listener:flight._internal._UInt8Array->Float->Void):flight._internal._Promise<MidiEventBackendAttachOutcome> return (cast (cast _HostWeb.attachWebMidiEvent__webMidi : flight._internal.dom.MIDIInput->String->(flight._internal.dom.MIDIMessageEvent->Void)->flight._internal._Promise<MidiEventBackendAttachOutcome>)(({ final __callArgument1230:Dynamic = native; __callArgument1230; }), (cast 'midimessage' : String), ({ final __callArgument1231:Dynamic = function(event:flight._internal.dom.MIDIMessageEvent):Void {
+      port = (cast createMidiInputPortResource(({ final __callArgument1326:Dynamic = native; __callArgument1326; }), ({ final __callArgument1337:Dynamic = { attachMessage: function(listener:flight._internal._UInt8Array->Float->Void):flight._internal._Promise<MidiEventBackendAttachOutcome> return (cast (cast _HostWeb.attachWebMidiEvent__webMidi : flight._internal.dom.MIDIInput->String->(flight._internal.dom.MIDIMessageEvent->Void)->flight._internal._Promise<MidiEventBackendAttachOutcome>)(({ final __callArgument1327:Dynamic = native; __callArgument1327; }), (cast 'midimessage' : String), ({ final __callArgument1328:Dynamic = function(event:flight._internal.dom.MIDIMessageEvent):Void {
         if ((cast ((cast _Runtime.strictEquals(event.data, null) : Bool) || (cast _Runtime.strictEquals(flight._internal._StaticIndex.readUint8ArrayTyped((cast event.data : flight._internal._UInt8Array), (cast 0.0 : Float)), 240.0) : Bool)) : Bool)) { return; }
         listener(new flight._internal._UInt8Array(event.data), (cast event.timeStamp : Float));
-      }; __callArgument1231; })) : flight._internal._Promise<MidiEventBackendAttachOutcome>), attachStateChange: function(listener:Void->Void):flight._internal._Promise<MidiEventBackendAttachOutcome> return (cast (cast _HostWeb.attachWebMidiEvent__webMidi : flight._internal.dom.MIDIInput->String->(flight._internal.dom.Event->Void)->flight._internal._Promise<MidiEventBackendAttachOutcome>)(({ final __callArgument1234:Dynamic = native; __callArgument1234; }), (cast 'statechange' : String), ({ final __callArgument1235:Dynamic = function(__unused0:flight._internal.dom.Event):Void { listener(); }; __callArgument1235; })) : flight._internal._Promise<MidiEventBackendAttachOutcome>), close: function():flight._internal._Promise<flight._internal._Nothing> {
+      }; __callArgument1328; })) : flight._internal._Promise<MidiEventBackendAttachOutcome>), attachStateChange: function(listener:Void->Void):flight._internal._Promise<MidiEventBackendAttachOutcome> return (cast (cast _HostWeb.attachWebMidiEvent__webMidi : flight._internal.dom.MIDIInput->String->(flight._internal.dom.Event->Void)->flight._internal._Promise<MidiEventBackendAttachOutcome>)(({ final __callArgument1331:Dynamic = native; __callArgument1331; }), (cast 'statechange' : String), ({ final __callArgument1332:Dynamic = function(__unused0:flight._internal.dom.Event):Void { listener(); }; __callArgument1332; })) : flight._internal._Promise<MidiEventBackendAttachOutcome>), close: function():flight._internal._Promise<flight._internal._Nothing> {
         return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-          return flight._internal._Async.flatMap(native.close(), function(__awaitValue1238:Dynamic):Dynamic {
-            __awaitValue1238;
+          return flight._internal._Async.flatMap(native.close(), function(__awaitValue1335:Dynamic):Dynamic {
+            __awaitValue1335;
             return flight._internal._Async.resolve(_Runtime.UNDEFINED);
           });
         }));
       }, getConnection: function():MidiPortConnection return native.connection, getState: function():MidiPortState return native.state, open: function():flight._internal._Promise<flight._internal._Nothing> {
         return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-          return flight._internal._Async.flatMap(native.open(), function(__awaitValue1239:Dynamic):Dynamic {
-            __awaitValue1239;
+          return flight._internal._Async.flatMap(native.open(), function(__awaitValue1336:Dynamic):Dynamic {
+            __awaitValue1336;
             return flight._internal._Async.resolve(_Runtime.UNDEFINED);
           });
         }));
-      } }; __callArgument1240; })) : MidiInputPort);
+      } }; __callArgument1337; })) : MidiInputPort);
       ((cast inputByNative : flight._internal._WeakMap<flight._internal.dom.MIDIInput, MidiInputPort>).set((cast native), (cast port)));
       return cast port;
       return cast _Runtime.UNDEFINED;
@@ -5674,21 +6153,21 @@ class _HostWeb {
       var port:MidiOutputPort = cast _Runtime.UNDEFINED;
       retained = ((cast outputByNative : flight._internal._WeakMap<flight._internal.dom.MIDIOutput, MidiOutputPort>).get((cast native)));
       if ((cast !_Runtime.strictEquals(retained, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast retained; }
-      port = (cast createMidiOutputPortResource(({ final __callArgument1253:Dynamic = native; __callArgument1253; }), ({ final __callArgument1260:Dynamic = { attachStateChange: function(listener:Void->Void):flight._internal._Promise<MidiEventBackendAttachOutcome> return (cast (cast _HostWeb.attachWebMidiEvent__webMidi : flight._internal.dom.MIDIOutput->String->(flight._internal.dom.Event->Void)->flight._internal._Promise<MidiEventBackendAttachOutcome>)(({ final __callArgument1254:Dynamic = native; __callArgument1254; }), (cast 'statechange' : String), ({ final __callArgument1255:Dynamic = function(__unused1:flight._internal.dom.Event):Void { listener(); }; __callArgument1255; })) : flight._internal._Promise<MidiEventBackendAttachOutcome>), close: function():flight._internal._Promise<flight._internal._Nothing> {
+      port = (cast createMidiOutputPortResource(({ final __callArgument1350:Dynamic = native; __callArgument1350; }), ({ final __callArgument1357:Dynamic = { attachStateChange: function(listener:Void->Void):flight._internal._Promise<MidiEventBackendAttachOutcome> return (cast (cast _HostWeb.attachWebMidiEvent__webMidi : flight._internal.dom.MIDIOutput->String->(flight._internal.dom.Event->Void)->flight._internal._Promise<MidiEventBackendAttachOutcome>)(({ final __callArgument1351:Dynamic = native; __callArgument1351; }), (cast 'statechange' : String), ({ final __callArgument1352:Dynamic = function(__unused1:flight._internal.dom.Event):Void { listener(); }; __callArgument1352; })) : flight._internal._Promise<MidiEventBackendAttachOutcome>), close: function():flight._internal._Promise<flight._internal._Nothing> {
         return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-          return flight._internal._Async.flatMap(native.close(), function(__awaitValue1258:Dynamic):Dynamic {
-            __awaitValue1258;
+          return flight._internal._Async.flatMap(native.close(), function(__awaitValue1355:Dynamic):Dynamic {
+            __awaitValue1355;
             return flight._internal._Async.resolve(_Runtime.UNDEFINED);
           });
         }));
       }, getConnection: function():MidiPortConnection return native.connection, getState: function():MidiPortState return native.state, open: function():flight._internal._Promise<flight._internal._Nothing> {
         return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-          return flight._internal._Async.flatMap(native.open(), function(__awaitValue1259:Dynamic):Dynamic {
-            __awaitValue1259;
+          return flight._internal._Async.flatMap(native.open(), function(__awaitValue1356:Dynamic):Dynamic {
+            __awaitValue1356;
             return flight._internal._Async.resolve(_Runtime.UNDEFINED);
           });
         }));
-      }, send: function(data:Array<Float>, timestamp:Null<Float>):Void { native.send(_Runtime.concatArrays([_Runtime.toArray(data)]), timestamp); } }; __callArgument1260; })) : MidiOutputPort);
+      }, send: function(data:Array<Float>, timestamp:Null<Float>):Void { native.send(_Runtime.concatArrays([_Runtime.toArray(data)]), timestamp); } }; __callArgument1357; })) : MidiOutputPort);
       ((cast outputByNative : flight._internal._WeakMap<flight._internal.dom.MIDIOutput, MidiOutputPort>).set((cast native), (cast port)));
       return cast port;
       return cast _Runtime.UNDEFINED;
@@ -5702,9 +6181,9 @@ class _HostWeb {
       var access:MidiAccess = cast _Runtime.UNDEFINED;
       retained = ((cast accessByNative : flight._internal._WeakMap<flight._internal.dom.MIDIAccess, MidiAccess>).get((cast native)));
       if ((cast !_Runtime.strictEquals(retained, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast retained; }
-      access = (cast createMidiAccessResource(({ final __callArgument1281:Dynamic = { attachStateChange: function(listener:MidiPort->Void):flight._internal._Promise<MidiEventBackendAttachOutcome> return (cast (cast _HostWeb.attachWebMidiEvent__webMidi : flight._internal.dom.MIDIAccess->String->(flight._internal.dom.MIDIConnectionEvent->Void)->flight._internal._Promise<MidiEventBackendAttachOutcome>)(({ final __callArgument1269:Dynamic = native; __callArgument1269; }), (cast 'statechange' : String), ({ final __callArgument1270:Dynamic = function(event:flight._internal.dom.MIDIConnectionEvent):Void {
+      access = (cast createMidiAccessResource(({ final __callArgument1378:Dynamic = { attachStateChange: function(listener:MidiPort->Void):flight._internal._Promise<MidiEventBackendAttachOutcome> return (cast (cast _HostWeb.attachWebMidiEvent__webMidi : flight._internal.dom.MIDIAccess->String->(flight._internal.dom.MIDIConnectionEvent->Void)->flight._internal._Promise<MidiEventBackendAttachOutcome>)(({ final __callArgument1366:Dynamic = native; __callArgument1366; }), (cast 'statechange' : String), ({ final __callArgument1367:Dynamic = function(event:flight._internal.dom.MIDIConnectionEvent):Void {
         if ((cast !_Runtime.strictEquals(event.port, null) : Bool)) { listener((cast toPort(event.port) : MidiPort)); }
-      }; __callArgument1270; })) : flight._internal._Promise<MidiEventBackendAttachOutcome>), getInputPorts: function():Array<MidiInputPort> return (cast (cast _HostWeb.mapMidiPorts__webMidi : { var forEach:(flight._internal.dom.MIDIInput->Void)->Void; }->(flight._internal.dom.MIDIInput->MidiInputPort)->Array<MidiInputPort>)(({ final __callArgument1273:Dynamic = native.inputs; __callArgument1273; }), ({ final __callArgument1274:Dynamic = toInput; __callArgument1274; })) : Array<MidiInputPort>), getOutputPorts: function():Array<MidiOutputPort> return (cast (cast _HostWeb.mapMidiPorts__webMidi : { var forEach:(flight._internal.dom.MIDIOutput->Void)->Void; }->(flight._internal.dom.MIDIOutput->MidiOutputPort)->Array<MidiOutputPort>)(({ final __callArgument1277:Dynamic = native.outputs; __callArgument1277; }), ({ final __callArgument1278:Dynamic = toOutput; __callArgument1278; })) : Array<MidiOutputPort>) }; __callArgument1281; })) : MidiAccess);
+      }; __callArgument1367; })) : flight._internal._Promise<MidiEventBackendAttachOutcome>), getInputPorts: function():Array<MidiInputPort> return (cast (cast _HostWeb.mapMidiPorts__webMidi : { var forEach:(flight._internal.dom.MIDIInput->Void)->Void; }->(flight._internal.dom.MIDIInput->MidiInputPort)->Array<MidiInputPort>)(({ final __callArgument1370:Dynamic = native.inputs; __callArgument1370; }), ({ final __callArgument1371:Dynamic = toInput; __callArgument1371; })) : Array<MidiInputPort>), getOutputPorts: function():Array<MidiOutputPort> return (cast (cast _HostWeb.mapMidiPorts__webMidi : { var forEach:(flight._internal.dom.MIDIOutput->Void)->Void; }->(flight._internal.dom.MIDIOutput->MidiOutputPort)->Array<MidiOutputPort>)(({ final __callArgument1374:Dynamic = native.outputs; __callArgument1374; }), ({ final __callArgument1375:Dynamic = toOutput; __callArgument1375; })) : Array<MidiOutputPort>) }; __callArgument1378; })) : MidiAccess);
       ((cast accessByNative : flight._internal._WeakMap<flight._internal.dom.MIDIAccess, MidiAccess>).set((cast native), (cast access)));
       return cast access;
       return cast _Runtime.UNDEFINED;
@@ -5712,14 +6191,14 @@ class _HostWeb {
     accessByNative = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
     inputByNative = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
     outputByNative = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
-    access = (cast createEntity(({ final __callArgument1301:Dynamic = ({ requestAccess: (cast function():flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>> {
+    access = (cast createEntity(({ final __callArgument1398:Dynamic = ({ requestAccess: (cast function():flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
             var native:flight._internal.dom.MIDIAccess = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap(_Runtime.callProperty(api, 'requestMIDIAccess', cast ([] : Array<Dynamic>)), function(__awaitValue1298:Dynamic):Dynamic {
-              native = __awaitValue1298;
-              return flight._internal._Async.flowReturn({ access: (cast toAccess(({ final __callArgument1299:Dynamic = native; __callArgument1299; })) : MidiAccess), reason: 'accepted' });
+            return flight._internal._Async.flatMap(_Runtime.callProperty(api, 'requestMIDIAccess', cast ([] : Array<Dynamic>)), function(__awaitValue1395:Dynamic):Dynamic {
+              native = __awaitValue1395;
+              return flight._internal._Async.flowReturn({ access: (cast toAccess(({ final __callArgument1396:Dynamic = native; __callArgument1396; })) : MidiAccess), reason: 'accepted' });
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var error:Dynamic = __caughtError;
@@ -5731,9 +6210,9 @@ class _HostWeb {
           });
         })
       );
-    } : Dynamic) } : EntityShapeL111C31__webMidi); __callArgument1301; })) : EntityShapeL111C31__webMidi);
+    } : Dynamic) } : EntityShapeL111C31__webMidi); __callArgument1398; })) : EntityShapeL111C31__webMidi);
     if ((cast !(cast includePermission : Bool) : Bool)) { return cast (cast createEntity((cast ({ access: (cast access : Dynamic) } : EntityShapeL121C47__webMidi) : Dynamic)) : EntityShapeL121C47__webMidi); }
-    permission = (cast createEntity(({ final __callArgument1309:Dynamic = ({ getPermission: (cast function():flight._internal._Promise<PermissionQueryOutcome> return (cast _HostWeb.queryWebMidiPermission__webMidi(_Runtime.field(api, 'permissions')) : flight._internal._Promise<PermissionQueryOutcome>) : Dynamic) } : EntityShapeL122C35__webMidi); __callArgument1309; })) : EntityShapeL122C35__webMidi);
+    permission = (cast createEntity(({ final __callArgument1406:Dynamic = ({ getPermission: (cast function():flight._internal._Promise<PermissionQueryOutcome> return (cast _HostWeb.queryWebMidiPermission__webMidi(_Runtime.field(api, 'permissions')) : flight._internal._Promise<PermissionQueryOutcome>) : Dynamic) } : EntityShapeL122C35__webMidi); __callArgument1406; })) : EntityShapeL122C35__webMidi);
     return cast (cast createEntity((cast ({ access: (cast access : Dynamic), permission: (cast permission : Dynamic) } : EntityShapeL125C23__webMidi) : Dynamic)) : EntityShapeL125C23__webMidi);
     return cast null;
   }
@@ -5750,7 +6229,7 @@ class _HostWeb {
       return cast flight._internal._Async.resolve({ reason: 'operation-failed', releaseFailed: false });
     }
     released = false;
-    attachmentEntity = (cast createEntity(({ final __callArgument1311:Dynamic = ({ release: (cast function():flight._internal._Promise<{ var reason:String; }> {
+    attachmentEntity = (cast createEntity(({ final __callArgument1408:Dynamic = ({ release: (cast function():flight._internal._Promise<{ var reason:String; }> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         if ((cast released : Bool)) { return cast { reason: 'ok' }; }
         try {
@@ -5762,7 +6241,7 @@ class _HostWeb {
         }
         return cast null;
       }));
-    } : Dynamic) } : EntityShapeL140C41__webMidi); __callArgument1311; })) : EntityShapeL140C41__webMidi);
+    } : Dynamic) } : EntityShapeL140C41__webMidi); __callArgument1408; })) : EntityShapeL140C41__webMidi);
     attachment = attachmentEntity;
     return cast flight._internal._Async.resolve({ attachment: attachment, reason: 'ok' });
     return cast null;
@@ -5779,19 +6258,19 @@ class _HostWeb {
   public static function queryWebMidiPermission__webMidi(permissions:Null<flight._internal.dom.Permissions>):flight._internal._Promise<PermissionQueryOutcome> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
-        var __flowBranch1313:Dynamic;
+        var __flowBranch1410:Dynamic;
         if ((cast ((cast _Runtime.strictEquals(permissions, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(permissions.query), 'function') : Bool)) : Bool)) {
-          __flowBranch1313 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch1410 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn({ reason: 'runtime-unavailable' });
           });
         } else {
-          __flowBranch1313 = flight._internal._Async.flowNormal();
+          __flowBranch1410 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch1313, function():Dynamic {
+        return flight._internal._Async.continueFlow(__flowBranch1410, function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
             var status:flight._internal.dom.PermissionStatus = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap(permissions.query((cast { name: 'midi', sysex: false } : flight._internal.dom.PermissionDescriptor)), function(__awaitValue1314:Dynamic):Dynamic {
-              status = __awaitValue1314;
+            return flight._internal._Async.flatMap(permissions.query((cast { name: 'midi', sysex: false } : flight._internal.dom.PermissionDescriptor)), function(__awaitValue1411:Dynamic):Dynamic {
+              status = __awaitValue1411;
               return flight._internal._Async.flowReturn(((cast (cast _HostWeb.isPermissionState__webMidi((cast (cast status : flight._internal.dom.PermissionStatus).state : flight._internal._Any)) : Bool) : Bool) ? (cast { reason: 'ok', state: (cast status : flight._internal.dom.PermissionStatus).state } : Dynamic) : (cast { reason: 'operation-failed' } : Dynamic)));
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -5839,16 +6318,16 @@ class _HostWeb {
           var controller:flight._internal.dom.AbortController = cast _Runtime.UNDEFINED;
           var teardownAbort:Void->Void = cast _Runtime.UNDEFINED;
           controller = _Runtime.construct(flight._internal._HostValueLut.get('AbortController'), []);
-          teardownAbort = (cast _HostWeb._wireNetAbort__webNet(({ final __callArgument1315:Dynamic = controller; __callArgument1315; }), request.timeoutMs, ({ final __structural1316 = options; __structural1316 == null ? _Runtime.UNDEFINED : (cast __structural1316 : { @:optional var signal:Null<flight._internal.dom.AbortSignal>; }).signal; })) : Void->Void);
+          teardownAbort = (cast _HostWeb._wireNetAbort__webNet(({ final __callArgument1412:Dynamic = controller; __callArgument1412; }), request.timeoutMs, ({ final __structural1413 = options; __structural1413 == null ? _Runtime.UNDEFINED : (cast __structural1413 : { @:optional var signal:Null<flight._internal.dom.AbortSignal>; }).signal; })) : Void->Void);
           return flight._internal._Async.continueFlow(flight._internal._Async.finalizeFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
             var response:flight._internal.dom.Response = cast _Runtime.UNDEFINED;
             var headers:flight._internal._Record<String, String> = cast _Runtime.UNDEFINED;
             var body:flight._internal._Any = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap(_Runtime.callValue(flight._internal._HostValueLut.get('fetch'), cast ([request.url, (cast _HostWeb._toNetFetchInit__webNet(({ final __callArgument1327:Dynamic = request; __callArgument1327; }), (cast controller : flight._internal.dom.AbortController).signal) : flight._internal.dom.RequestInit)] : Array<Dynamic>)), function(__awaitValue1319:Dynamic):Dynamic {
-              response = __awaitValue1319;
+            return flight._internal._Async.flatMap(_Runtime.callValue(flight._internal._HostValueLut.get('fetch'), cast ([request.url, (cast _HostWeb._toNetFetchInit__webNet(({ final __callArgument1424:Dynamic = request; __callArgument1424; }), (cast controller : flight._internal.dom.AbortController).signal) : flight._internal.dom.RequestInit)] : Array<Dynamic>)), function(__awaitValue1416:Dynamic):Dynamic {
+              response = __awaitValue1416;
               headers = (cast _HostWeb._readNetResponseHeaders__webNet((cast response : flight._internal.dom.Response).headers) : flight._internal._Record<String, String>);
-              return flight._internal._Async.flatMap((cast _HostWeb._readNetResponseBody__webNet(({ final __callArgument1321:Dynamic = response; __callArgument1321; }), ({ final __callArgument1322:Dynamic = _Runtime.coalesce(request.responseType, function():Dynamic return cast 'text'); __callArgument1322; }), ({ final __structural1323 = options; __structural1323 == null ? _Runtime.UNDEFINED : (cast __structural1323 : { @:optional var progress:Null<Signal<NetProgress->Void>>; }).progress; })) : flight._internal._Promise<flight._internal._Any>), function(__awaitValue1320:Dynamic):Dynamic {
-                body = __awaitValue1320;
+              return flight._internal._Async.flatMap((cast _HostWeb._readNetResponseBody__webNet(({ final __callArgument1418:Dynamic = response; __callArgument1418; }), ({ final __callArgument1419:Dynamic = _Runtime.coalesce(request.responseType, function():Dynamic return cast 'text'); __callArgument1419; }), ({ final __structural1420 = options; __structural1420 == null ? _Runtime.UNDEFINED : (cast __structural1420 : { @:optional var progress:Null<Signal<NetProgress->Void>>; }).progress; })) : flight._internal._Promise<flight._internal._Any>), function(__awaitValue1417:Dynamic):Dynamic {
+                body = __awaitValue1417;
                 return flight._internal._Async.flowReturn({ status: (cast response : flight._internal.dom.Response).status, statusText: (cast response : flight._internal.dom.Response).statusText, ok: (cast response : flight._internal.dom.Response).ok, headers: headers, body: body, url: ((cast !_Runtime.strictEquals((cast response : flight._internal.dom.Response).url, '') : Bool) ? (cast (cast response : flight._internal.dom.Response).url : Dynamic) : (cast request.url : Dynamic)) });
               });
             });
@@ -5873,34 +6352,34 @@ class _HostWeb {
 
   @:allow(flight)
   @:keep
-  private static final webPowerKeepAwakeBackend:PowerKeepAwakeBackend = (cast { acquire: function(mode:PowerKeepAwakeMode):flight._internal._Promise<PowerKeepAwakeAcquireResult> {
+  private static final webPowerKeepAwakeBackend:PowerKeepAwakeBackend = (cast createEntity(({ final __callArgument1444:Dynamic = ({ acquire: (cast function(mode:PowerKeepAwakeMode):flight._internal._Promise<PowerKeepAwakeAcquireResult> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var wakeLock:Null<WebWakeLock__webPower> = cast _Runtime.UNDEFINED;
         var sentinel:WebWakeLockSentinel__webPower = cast _Runtime.UNDEFINED;
         var onRelease:Void->Void = cast _Runtime.UNDEFINED;
-        var __flowBranch1329:Dynamic;
+        var __flowBranch1435:Dynamic;
         if ((cast _Runtime.strictEquals(mode, 'PreventAppSuspension') : Bool)) {
-          __flowBranch1329 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch1435 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn({ reason: 'unavailable' });
           });
         } else {
-          __flowBranch1329 = flight._internal._Async.flowNormal();
+          __flowBranch1435 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch1329, function():Dynamic {
+        return flight._internal._Async.continueFlow(__flowBranch1435, function():Dynamic {
           wakeLock = (cast _HostWeb._getWebWakeLock__webPower() : Null<WebWakeLock__webPower>);
-          var __flowBranch1330:Dynamic;
+          var __flowBranch1436:Dynamic;
           if ((cast _Runtime.strictEquals(wakeLock, null) : Bool)) {
-            __flowBranch1330 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch1436 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn({ reason: 'unavailable' });
             });
           } else {
-            __flowBranch1330 = flight._internal._Async.flowNormal();
+            __flowBranch1436 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch1330, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch1436, function():Dynamic {
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-              return flight._internal._Async.flatMap((cast wakeLock : WebWakeLock__webPower).request((cast 'screen' : String)), function(__awaitValue1331:Dynamic):Dynamic {
-                (sentinel = cast (__awaitValue1331 : Dynamic));
+              return flight._internal._Async.flatMap((cast wakeLock : WebWakeLock__webPower).request((cast 'screen' : String)), function(__awaitValue1437:Dynamic):Dynamic {
+                (sentinel = cast (__awaitValue1437 : Dynamic));
                 return flight._internal._Async.flowNormal();
               });
             }), function(__caughtError:Dynamic):Dynamic {
@@ -5922,7 +6401,7 @@ class _HostWeb {
         });
       })
     );
-  }, destroy: function():Void {
+  } : Dynamic), destroy: (cast function():Void {
     _Runtime.voidValue((cast _HostWeb._releaseSentinel__webPower() : flight._internal._Promise<flight._internal._Nothing>));
     for (__iteration0 in _Runtime.iterable(_HostWeb._wakeLockReleaseListeners__webPower)) {
       var sentinel:WebWakeLockSentinel__webPower = flight._internal._StaticIndex.readArray(__iteration0, 0.0);
@@ -5930,27 +6409,27 @@ class _HostWeb {
       _Runtime.callOptionalValue((cast sentinel : WebWakeLockSentinel__webPower).removeEventListener, cast (['release', onRelease] : Array<Dynamic>));
     }
     ((cast _HostWeb._wakeLockReleaseListeners__webPower : flight._internal._Map<WebWakeLockSentinel__webPower, Void->Void>).clear());
-  }, isActive: function():Bool {
+  } : Dynamic), isActive: (cast function():Bool {
     return cast !_Runtime.strictEquals(_HostWeb._wakeLockSentinel__webPower, null);
     return cast _Runtime.UNDEFINED;
-  }, release: function():flight._internal._Promise<PowerKeepAwakeReleaseResult> {
+  } : Dynamic), release: (cast function():flight._internal._Promise<PowerKeepAwakeReleaseResult> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var sentinel:Null<WebWakeLockSentinel__webPower> = cast _Runtime.UNDEFINED;
         var onRelease:Null<Void->Void> = cast _Runtime.UNDEFINED;
         sentinel = _HostWeb._wakeLockSentinel__webPower;
-        var __flowBranch1334:Dynamic;
+        var __flowBranch1440:Dynamic;
         if ((cast _Runtime.strictEquals(sentinel, null) : Bool)) {
-          __flowBranch1334 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch1440 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn({ reason: 'inactive' });
           });
         } else {
-          __flowBranch1334 = flight._internal._Async.flowNormal();
+          __flowBranch1440 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch1334, function():Dynamic {
+        return flight._internal._Async.continueFlow(__flowBranch1440, function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.flatMap(_Runtime.callOptionalValue((cast sentinel : WebWakeLockSentinel__webPower).release, cast ([] : Array<Dynamic>)), function(__awaitValue1335:Dynamic):Dynamic {
-              __awaitValue1335;
+            return flight._internal._Async.flatMap(_Runtime.callOptionalValue((cast sentinel : WebWakeLockSentinel__webPower).release, cast ([] : Array<Dynamic>)), function(__awaitValue1441:Dynamic):Dynamic {
+              __awaitValue1441;
               return flight._internal._Async.flowNormal();
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -5959,27 +6438,27 @@ class _HostWeb {
               return flight._internal._Async.flowReturn({ reason: 'failed' });
             });
           }), function():Dynamic {
-            var __flowBranch1336:Dynamic;
+            var __flowBranch1442:Dynamic;
             if ((cast _Runtime.strictEquals(_HostWeb._wakeLockSentinel__webPower, sentinel) : Bool)) {
-              __flowBranch1336 = flight._internal._Async.protect(function():Dynamic {
+              __flowBranch1442 = flight._internal._Async.protect(function():Dynamic {
                 (_HostWeb._wakeLockSentinel__webPower = cast (null : Dynamic));
                 return flight._internal._Async.flowNormal();
               });
             } else {
-              __flowBranch1336 = flight._internal._Async.flowNormal();
+              __flowBranch1442 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch1336, function():Dynamic {
+            return flight._internal._Async.continueFlow(__flowBranch1442, function():Dynamic {
               onRelease = ((cast _HostWeb._wakeLockReleaseListeners__webPower : flight._internal._Map<WebWakeLockSentinel__webPower, Void->Void>).get((cast sentinel)));
-              var __flowBranch1337:Dynamic;
+              var __flowBranch1443:Dynamic;
               if ((cast !_Runtime.strictEquals(onRelease, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-                __flowBranch1337 = flight._internal._Async.protect(function():Dynamic {
+                __flowBranch1443 = flight._internal._Async.protect(function():Dynamic {
                   _Runtime.callOptionalValue((cast sentinel : WebWakeLockSentinel__webPower).removeEventListener, cast (['release', onRelease] : Array<Dynamic>));
                   return flight._internal._Async.flowNormal();
                 });
               } else {
-                __flowBranch1337 = flight._internal._Async.flowNormal();
+                __flowBranch1443 = flight._internal._Async.flowNormal();
               }
-              return flight._internal._Async.continueFlow(__flowBranch1337, function():Dynamic {
+              return flight._internal._Async.continueFlow(__flowBranch1443, function():Dynamic {
                 ((cast _HostWeb._wakeLockReleaseListeners__webPower : flight._internal._Map<WebWakeLockSentinel__webPower, Void->Void>).delete_((cast sentinel)));
                 return flight._internal._Async.flowReturn({ reason: 'ok' });
               });
@@ -5988,7 +6467,7 @@ class _HostWeb {
         });
       })
     );
-  } });
+  } : Dynamic) } : PowerKeepAwakeBackend); __callArgument1444; })) : PowerKeepAwakeBackend);
 
   public static function _netContentLength__webNet(headers:flight._internal.dom.Headers):Float {
     var raw:Null<String> = cast _Runtime.UNDEFINED;
@@ -6031,47 +6510,47 @@ class _HostWeb {
   public static function _readNetResponseBody__webNet(response:flight._internal.dom.Response, responseType:NetResponseType, progress:Null<Signal<NetProgress->Void>>):flight._internal._Promise<NetResponseBody> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
-        var __flowBranch1346:Dynamic;
+        var __flowBranch1472:Dynamic;
         if ((cast !_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          __flowBranch1346 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch1472 = flight._internal._Async.protect(function():Dynamic {
             var buffer:haxe.io.Bytes = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap((cast _HostWeb._readNetResponseWithProgress__webNet(({ final __callArgument1352:Dynamic = response; __callArgument1352; }), ({ final __callArgument1353:Dynamic = progress; __callArgument1353; })) : flight._internal._Promise<haxe.io.Bytes>), function(__awaitValue1347:Dynamic):Dynamic {
-              buffer = __awaitValue1347;
-              return flight._internal._Async.flowReturn(_HostWeb._decodeNetBuffer__webNet(({ final __callArgument1348:Dynamic = buffer; __callArgument1348; }), ({ final __callArgument1349:Dynamic = responseType; __callArgument1349; })));
+            return flight._internal._Async.flatMap((cast _HostWeb._readNetResponseWithProgress__webNet(({ final __callArgument1478:Dynamic = response; __callArgument1478; }), ({ final __callArgument1479:Dynamic = progress; __callArgument1479; })) : flight._internal._Promise<haxe.io.Bytes>), function(__awaitValue1473:Dynamic):Dynamic {
+              buffer = __awaitValue1473;
+              return flight._internal._Async.flowReturn(_HostWeb._decodeNetBuffer__webNet(({ final __callArgument1474:Dynamic = buffer; __callArgument1474; }), ({ final __callArgument1475:Dynamic = responseType; __callArgument1475; })));
             });
           });
         } else {
-          __flowBranch1346 = flight._internal._Async.flowNormal();
+          __flowBranch1472 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch1346, function():Dynamic {
-          var __flowBranch1356:Dynamic;
+        return flight._internal._Async.continueFlow(__flowBranch1472, function():Dynamic {
+          var __flowBranch1482:Dynamic;
           if ((cast _Runtime.strictEquals(responseType, 'arraybuffer') : Bool)) {
-            __flowBranch1356 = flight._internal._Async.protect(function():Dynamic {
-              return flight._internal._Async.flatMap(response.arrayBuffer(), function(__awaitValue1357:Dynamic):Dynamic {
-                return flight._internal._Async.flowReturn(__awaitValue1357);
+            __flowBranch1482 = flight._internal._Async.protect(function():Dynamic {
+              return flight._internal._Async.flatMap(response.arrayBuffer(), function(__awaitValue1483:Dynamic):Dynamic {
+                return flight._internal._Async.flowReturn(__awaitValue1483);
               });
             });
           } else {
-            __flowBranch1356 = flight._internal._Async.flowNormal();
+            __flowBranch1482 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch1356, function():Dynamic {
-            var __flowBranch1358:Dynamic;
+          return flight._internal._Async.continueFlow(__flowBranch1482, function():Dynamic {
+            var __flowBranch1484:Dynamic;
             if ((cast _Runtime.strictEquals(responseType, 'blob') : Bool)) {
-              __flowBranch1358 = flight._internal._Async.protect(function():Dynamic {
-                return flight._internal._Async.flatMap(response.blob(), function(__awaitValue1359:Dynamic):Dynamic {
-                  return flight._internal._Async.flowReturn(__awaitValue1359);
+              __flowBranch1484 = flight._internal._Async.protect(function():Dynamic {
+                return flight._internal._Async.flatMap(response.blob(), function(__awaitValue1485:Dynamic):Dynamic {
+                  return flight._internal._Async.flowReturn(__awaitValue1485);
                 });
               });
             } else {
-              __flowBranch1358 = flight._internal._Async.flowNormal();
+              __flowBranch1484 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch1358, function():Dynamic {
-              var __flowBranch1360:Dynamic;
+            return flight._internal._Async.continueFlow(__flowBranch1484, function():Dynamic {
+              var __flowBranch1486:Dynamic;
               if ((cast _Runtime.strictEquals(responseType, 'json') : Bool)) {
-                __flowBranch1360 = flight._internal._Async.protect(function():Dynamic {
+                __flowBranch1486 = flight._internal._Async.protect(function():Dynamic {
                   return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-                    return flight._internal._Async.flatMap(response.json(), function(__awaitValue1361:Dynamic):Dynamic {
-                      return flight._internal._Async.flowReturn((cast __awaitValue1361 : flight._internal._Any));
+                    return flight._internal._Async.flatMap(response.json(), function(__awaitValue1487:Dynamic):Dynamic {
+                      return flight._internal._Async.flowReturn((cast __awaitValue1487 : flight._internal._Any));
                     });
                   }), function(__caughtError:Dynamic):Dynamic {
                     var __error:Dynamic = __caughtError;
@@ -6083,11 +6562,11 @@ class _HostWeb {
                   });
                 });
               } else {
-                __flowBranch1360 = flight._internal._Async.flowNormal();
+                __flowBranch1486 = flight._internal._Async.flowNormal();
               }
-              return flight._internal._Async.continueFlow(__flowBranch1360, function():Dynamic {
-                return flight._internal._Async.flatMap(response.text(), function(__awaitValue1362:Dynamic):Dynamic {
-                  return flight._internal._Async.flowReturn(__awaitValue1362);
+              return flight._internal._Async.continueFlow(__flowBranch1486, function():Dynamic {
+                return flight._internal._Async.flatMap(response.text(), function(__awaitValue1488:Dynamic):Dynamic {
+                  return flight._internal._Async.flowReturn(__awaitValue1488);
                 });
               });
             });
@@ -6109,20 +6588,20 @@ class _HostWeb {
         var offset:Float = cast _Runtime.UNDEFINED;
         total = (cast _HostWeb._netContentLength__webNet(response.headers) : Float);
         stream = response.body;
-        var __flowBranch1365:Dynamic;
+        var __flowBranch1491:Dynamic;
         if ((cast ((cast _Runtime.strictEquals(stream, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast stream : flight._internal.dom.ReadableStream<Dynamic>).getReader), 'function') : Bool)) : Bool)) {
-          __flowBranch1365 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch1491 = flight._internal._Async.protect(function():Dynamic {
             var buffer:haxe.io.Bytes = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap(response.arrayBuffer(), function(__awaitValue1366:Dynamic):Dynamic {
-              buffer = __awaitValue1366;
+            return flight._internal._Async.flatMap(response.arrayBuffer(), function(__awaitValue1492:Dynamic):Dynamic {
+              buffer = __awaitValue1492;
               _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[progress], [{ phase: 'download', loaded: _Runtime.field(buffer, 'byteLength'), total: ((cast ((cast total : Float) >= (cast 0.0 : Float)) : Bool) ? (cast total : Dynamic) : (cast _Runtime.field(buffer, 'byteLength') : Dynamic)) }]]), 1);
               return flight._internal._Async.flowReturn(buffer);
             });
           });
         } else {
-          __flowBranch1365 = flight._internal._Async.flowNormal();
+          __flowBranch1491 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch1365, function():Dynamic {
+        return flight._internal._Async.continueFlow(__flowBranch1491, function():Dynamic {
           reader = (cast stream : flight._internal.dom.ReadableStream<Dynamic>).getReader();
           chunks = cast ([] : Array<Dynamic>);
           loaded = 0.0;
@@ -6133,28 +6612,28 @@ class _HostWeb {
                 var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
                 var done:Bool = cast _Runtime.UNDEFINED;
                 var value:Null<flight._internal._UInt8Array> = cast _Runtime.UNDEFINED;
-                return flight._internal._Async.flatMap((cast reader : flight._internal.dom.ReadableStreamDefaultReader<Dynamic>).read(), function(__awaitValue1367:Dynamic):Dynamic {
-                  __destructure0 = __awaitValue1367;
+                return flight._internal._Async.flatMap((cast reader : flight._internal.dom.ReadableStreamDefaultReader<Dynamic>).read(), function(__awaitValue1493:Dynamic):Dynamic {
+                  __destructure0 = __awaitValue1493;
                   done = _Runtime.field(__destructure0, 'done');
                   value = _Runtime.field(__destructure0, 'value');
-                  var __flowBranch1368:Dynamic;
+                  var __flowBranch1494:Dynamic;
                   if ((cast done : Bool)) {
-                    __flowBranch1368 = flight._internal._Async.protect(function():Dynamic {
+                    __flowBranch1494 = flight._internal._Async.protect(function():Dynamic {
                       return flight._internal._Async.flowBreak();
                     });
                   } else {
-                    __flowBranch1368 = flight._internal._Async.flowNormal();
+                    __flowBranch1494 = flight._internal._Async.flowNormal();
                   }
-                  return flight._internal._Async.continueFlow(__flowBranch1368, function():Dynamic {
-                    var __flowBranch1369:Dynamic;
+                  return flight._internal._Async.continueFlow(__flowBranch1494, function():Dynamic {
+                    var __flowBranch1495:Dynamic;
                     if ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-                      __flowBranch1369 = flight._internal._Async.protect(function():Dynamic {
+                      __flowBranch1495 = flight._internal._Async.protect(function():Dynamic {
                         return flight._internal._Async.flowContinue();
                       });
                     } else {
-                      __flowBranch1369 = flight._internal._Async.flowNormal();
+                      __flowBranch1495 = flight._internal._Async.flowNormal();
                     }
-                    return flight._internal._Async.continueFlow(__flowBranch1369, function():Dynamic {
+                    return flight._internal._Async.continueFlow(__flowBranch1495, function():Dynamic {
                       _Runtime.callProperty(chunks, 'push', cast ([value] : Array<Dynamic>));
                       (loaded = cast ((loaded + _Runtime.field(value, 'byteLength')) : Dynamic));
                       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[progress], [{ phase: 'download', loaded: loaded, total: ((cast ((cast total : Float) >= (cast 0.0 : Float)) : Bool) ? (cast total : Dynamic) : (cast 0.0 : Dynamic)) }]]), 1);
@@ -6254,24 +6733,24 @@ class _HostWeb {
         flight._internal._Async.protect(function():Dynamic {
           var failures:Array<NotificationLifecycleFailure> = cast _Runtime.UNDEFINED;
           failures = cast ([] : Array<Dynamic>);
-          var __flowIterator1372:Array<Dynamic> = _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(((cast nativeByNotification : flight._internal._Map<Notification, WebPageNotificationInstance>).keys()))]));
-          var __flowIndex1373:Int = 0;
+          var __flowIterator1498:Array<Dynamic> = _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(((cast nativeByNotification : flight._internal._Map<Notification, WebPageNotificationInstance>).keys()))]));
+          var __flowIndex1499:Int = 0;
           return flight._internal._Async.continueFlow(flight._internal._Async.repeatFlow(function():Dynamic {
-            if (__flowIndex1373 >= __flowIterator1372.length) return flight._internal._Async.flowBreak();
-            var notification:Dynamic = __flowIterator1372[__flowIndex1373++];
+            if (__flowIndex1499 >= __flowIterator1498.length) return flight._internal._Async.flowBreak();
+            var notification:Dynamic = __flowIterator1498[__flowIndex1499++];
             var outcome:{ var reason:String; } = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap((cast closeOne(({ final __callArgument1376:Dynamic = notification; __callArgument1376; })) : flight._internal._Promise<{ var reason:String; }>), function(__awaitValue1374:Dynamic):Dynamic {
-              outcome = __awaitValue1374;
-              var __flowBranch1375:Dynamic;
+            return flight._internal._Async.flatMap((cast closeOne(({ final __callArgument1502:Dynamic = notification; __callArgument1502; })) : flight._internal._Promise<{ var reason:String; }>), function(__awaitValue1500:Dynamic):Dynamic {
+              outcome = __awaitValue1500;
+              var __flowBranch1501:Dynamic;
               if ((cast _Runtime.strictEquals((cast outcome : { var reason:String; }).reason, 'operation-failed') : Bool)) {
-                __flowBranch1375 = flight._internal._Async.protect(function():Dynamic {
+                __flowBranch1501 = flight._internal._Async.protect(function():Dynamic {
                   _Runtime.callProperty(failures, 'push', cast ([{ id: (cast notification : Notification).id, operation: 'close' }] : Array<Dynamic>));
                   return flight._internal._Async.flowNormal();
                 });
               } else {
-                __flowBranch1375 = flight._internal._Async.flowNormal();
+                __flowBranch1501 = flight._internal._Async.flowNormal();
               }
-              return flight._internal._Async.continueFlow(__flowBranch1375, function():Dynamic {
+              return flight._internal._Async.continueFlow(__flowBranch1501, function():Dynamic {
                 return flight._internal._Async.flowNormal();
               });
             });
@@ -6288,7 +6767,7 @@ class _HostWeb {
     destroyed = false;
     destroyCompleted = false;
     nextId = 1.0;
-    return cast (cast createEntity((cast ({ click: (cast (cast (cast _HostWeb.makeWebNotificationEventBackend__webNotification : flight._internal._Set<Notification->Void>->(Void->Bool)->{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument1416:Dynamic = clickListeners; __callArgument1416; }), ({ final __callArgument1417:Dynamic = function():Bool return destroyed; __callArgument1417; })) : { var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) : Dynamic), close: (cast { closeAllNotifications: closeAll } : Dynamic), delivery: (cast { notify: function(request:NotificationRequest):flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<{ var reason:String; @:optional var fields:flight._internal._Any; @:optional var notification:flight._internal._Any; }, { var fields:Array<String>; var reason:String; @:optional var notification:flight._internal._Any; }>, { var notification:Notification; var reason:String; @:optional var fields:flight._internal._Any; }>> {
+    return cast (cast createEntity((cast ({ click: (cast (cast (cast _HostWeb.makeWebNotificationEventBackend__webNotification : flight._internal._Set<Notification->Void>->(Void->Bool)->{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument1542:Dynamic = clickListeners; __callArgument1542; }), ({ final __callArgument1543:Dynamic = function():Bool return destroyed; __callArgument1543; })) : { var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) : Dynamic), close: (cast { closeAllNotifications: closeAll } : Dynamic), delivery: (cast { notify: function(request:NotificationRequest):flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<{ var reason:String; @:optional var fields:flight._internal._Any; @:optional var notification:flight._internal._Any; }, { var fields:Array<String>; var reason:String; @:optional var notification:flight._internal._Any; }>, { var notification:Notification; var reason:String; @:optional var fields:flight._internal._Any; }>> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var invalid:Array<String> = cast _Runtime.UNDEFINED;
         var id:String = cast _Runtime.UNDEFINED;
@@ -6296,28 +6775,28 @@ class _HostWeb {
         var native:WebPageNotificationInstance = cast _Runtime.UNDEFINED;
         var notification:Notification = cast _Runtime.UNDEFINED;
         if ((cast destroyed : Bool)) { return cast { reason: 'operation-failed' }; }
-        invalid = (cast _HostWeb.getWebPageInvalidNotificationRequestFields__webNotification(({ final __callArgument1420:Dynamic = request; __callArgument1420; })) : Array<String>);
+        invalid = (cast _HostWeb.getWebPageInvalidNotificationRequestFields__webNotification(({ final __callArgument1546:Dynamic = request; __callArgument1546; })) : Array<String>);
         if ((cast ((cast _Runtime.field(invalid, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { return cast { fields: invalid, reason: 'invalid-request' }; }
         if ((cast !_Runtime.strictEquals((cast _Runtime.field(api, 'Notification') : { var permission:NotificationPermission; var requestPermission:Void->flight._internal._Promise<NotificationPermission>; }).permission, 'granted') : Bool)) { return cast { reason: 'permission-denied' }; }
         id = _Runtime.coalesce(request.id, function():Dynamic return cast 'web-notification-' + Std.string(nextId++) + '');
         tag = _Runtime.coalesce(request.tag, function():Dynamic return cast 'flight-web-notification-' + Std.string(nextId++) + '');
         try {
-          (native = cast (_Runtime.construct(_Runtime.field(api, 'Notification'), [request.title, (cast _HostWeb.toWebNotificationOptions__webNotification(({ final __callArgument1422:Dynamic = request; __callArgument1422; }), (cast tag : String)) : WebNotificationOptions)]) : Dynamic));
+          (native = cast (_Runtime.construct(_Runtime.field(api, 'Notification'), [request.title, (cast _HostWeb.toWebNotificationOptions__webNotification(({ final __callArgument1548:Dynamic = request; __callArgument1548; }), (cast tag : String)) : WebNotificationOptions)]) : Dynamic));
         } catch (__error:Dynamic) {
           return cast { reason: 'operation-failed' };
         }
         notification = (cast createNotificationResource((cast id : String), (cast request.title : String), (cast tag : String)) : Notification);
         ((cast nativeByNotification : flight._internal._Map<Notification, WebPageNotificationInstance>).set((cast notification), (cast native)));
-        bindNotificationClose(({ final __callArgument1424:Dynamic = notification; __callArgument1424; }), (cast function():flight._internal._Promise<NotificationCloseOutcome> return (cast closeOne(({ final __callArgument1425:Dynamic = notification; __callArgument1425; })) : flight._internal._Promise<{ var reason:String; }>) : Dynamic));
+        bindNotificationClose(({ final __callArgument1550:Dynamic = notification; __callArgument1550; }), (cast function():flight._internal._Promise<NotificationCloseOutcome> return (cast closeOne(({ final __callArgument1551:Dynamic = notification; __callArgument1551; })) : flight._internal._Promise<{ var reason:String; }>) : Dynamic));
         ((cast native : { var onclick:Null<Void->Void>; }).onclick = (cast function():Void {
           for (listener in _Runtime.iterable(clickListeners)) {
-            listener(({ final __callArgument1432:Dynamic = notification; __callArgument1432; }));
+            listener(({ final __callArgument1558:Dynamic = notification; __callArgument1558; }));
           }
         }));
         ((cast native : { var onclose:Null<Void->Void>; }).onclose = (cast function():Void {
           ((cast nativeByNotification : flight._internal._Map<Notification, WebPageNotificationInstance>).delete_((cast notification)));
           for (listener in _Runtime.iterable(dismissListeners)) {
-            listener(({ final __callArgument1436:Dynamic = notification; __callArgument1436; }));
+            listener(({ final __callArgument1562:Dynamic = notification; __callArgument1562; }));
           }
         }));
         ((cast native : { var onerror:Null<Void->Void>; }).onerror = (cast function():Void {
@@ -6325,41 +6804,41 @@ class _HostWeb {
         }));
         ((cast native : { var onshow:Null<Void->Void>; }).onshow = (cast function():Void {
           for (listener in _Runtime.iterable(receivedListeners)) {
-            listener(({ final __callArgument1440:Dynamic = notification; __callArgument1440; }));
+            listener(({ final __callArgument1566:Dynamic = notification; __callArgument1566; }));
           }
         }));
         return cast { notification: notification, reason: 'accepted' };
         return cast null;
       }));
-    } } : Dynamic), dismiss: (cast (cast (cast _HostWeb.makeWebNotificationEventBackend__webNotification : flight._internal._Set<Notification->Void>->(Void->Bool)->{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument1442:Dynamic = dismissListeners; __callArgument1442; }), ({ final __callArgument1443:Dynamic = function():Bool return destroyed; __callArgument1443; })) : { var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) : Dynamic), lifecycle: (cast { destroy: function():flight._internal._Promise<NotificationLifecycleOutcome> {
+    } } : Dynamic), dismiss: (cast (cast (cast _HostWeb.makeWebNotificationEventBackend__webNotification : flight._internal._Set<Notification->Void>->(Void->Bool)->{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument1568:Dynamic = dismissListeners; __callArgument1568; }), ({ final __callArgument1569:Dynamic = function():Bool return destroyed; __callArgument1569; })) : { var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) : Dynamic), lifecycle: (cast { destroy: function():flight._internal._Promise<NotificationLifecycleOutcome> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var outcome:NotificationLifecycleOutcome = cast _Runtime.UNDEFINED;
-          var __flowBranch1446:Dynamic;
+          var __flowBranch1572:Dynamic;
           if ((cast destroyCompleted : Bool)) {
-            __flowBranch1446 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch1572 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn({ reason: 'already-destroyed' });
             });
           } else {
-            __flowBranch1446 = flight._internal._Async.flowNormal();
+            __flowBranch1572 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch1446, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch1572, function():Dynamic {
             (destroyed = cast (true : Dynamic));
             ((cast clickListeners : flight._internal._Set<Notification->Void>).clear());
             ((cast dismissListeners : flight._internal._Set<Notification->Void>).clear());
             ((cast receivedListeners : flight._internal._Set<Notification->Void>).clear());
-            return flight._internal._Async.flatMap((cast closeAll() : flight._internal._Promise<NotificationLifecycleOutcome>), function(__awaitValue1447:Dynamic):Dynamic {
-              outcome = __awaitValue1447;
-              var __flowBranch1448:Dynamic;
+            return flight._internal._Async.flatMap((cast closeAll() : flight._internal._Promise<NotificationLifecycleOutcome>), function(__awaitValue1573:Dynamic):Dynamic {
+              outcome = __awaitValue1573;
+              var __flowBranch1574:Dynamic;
               if ((cast _Runtime.strictEquals((cast outcome : { var reason:String; }).reason, 'ok') : Bool)) {
-                __flowBranch1448 = flight._internal._Async.protect(function():Dynamic {
+                __flowBranch1574 = flight._internal._Async.protect(function():Dynamic {
                   (destroyCompleted = cast (true : Dynamic));
                   return flight._internal._Async.flowNormal();
                 });
               } else {
-                __flowBranch1448 = flight._internal._Async.flowNormal();
+                __flowBranch1574 = flight._internal._Async.flowNormal();
               }
-              return flight._internal._Async.continueFlow(__flowBranch1448, function():Dynamic {
+              return flight._internal._Async.continueFlow(__flowBranch1574, function():Dynamic {
                 return flight._internal._Async.flowReturn(outcome);
               });
             });
@@ -6380,8 +6859,8 @@ class _HostWeb {
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
             var permission:NotificationPermission = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap((cast _Runtime.field(api, 'Notification') : { var permission:NotificationPermission; var requestPermission:Void->flight._internal._Promise<NotificationPermission>; }).requestPermission(), function(__awaitValue1449:Dynamic):Dynamic {
-              permission = __awaitValue1449;
+            return flight._internal._Async.flatMap((cast _Runtime.field(api, 'Notification') : { var permission:NotificationPermission; var requestPermission:Void->flight._internal._Promise<NotificationPermission>; }).requestPermission(), function(__awaitValue1575:Dynamic):Dynamic {
+              permission = __awaitValue1575;
               return flight._internal._Async.flowReturn({ reason: ((cast _Runtime.strictEquals(permission, 'default') : Bool) ? (cast 'dismissed' : Dynamic) : (cast permission : Dynamic)) });
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -6394,7 +6873,7 @@ class _HostWeb {
           });
         })
       );
-    } } : Dynamic), received: (cast (cast (cast _HostWeb.makeWebNotificationEventBackend__webNotification : flight._internal._Set<Notification->Void>->(Void->Bool)->{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument1450:Dynamic = receivedListeners; __callArgument1450; }), ({ final __callArgument1451:Dynamic = function():Bool return destroyed; __callArgument1451; })) : { var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) : Dynamic) } : WebPageNotificationCapabilities) : Dynamic)) : WebPageNotificationCapabilities);
+    } } : Dynamic), received: (cast (cast (cast _HostWeb.makeWebNotificationEventBackend__webNotification : flight._internal._Set<Notification->Void>->(Void->Bool)->{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument1576:Dynamic = receivedListeners; __callArgument1576; }), ({ final __callArgument1577:Dynamic = function():Bool return destroyed; __callArgument1577; })) : { var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) : Dynamic) } : WebPageNotificationCapabilities) : Dynamic)) : WebPageNotificationCapabilities);
     return cast null;
   }
 
@@ -6436,27 +6915,27 @@ class _HostWeb {
 
   @:allow(flight)
   @:keep
-  private static final webPowerSuspensionBackend:PowerSuspensionBackend = (cast { subscribeResume: function(listener:Void->Void):Void->Void {
+  private static final webPowerSuspensionBackend:PowerSuspensionBackend = (cast createEntity(({ final __callArgument1656:Dynamic = ({ subscribeResume: (cast function(listener:Void->Void):Void->Void {
     if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return cast function():Void {
 
     }; }
     flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'addEventListener', cast (['resume', listener] : Array<Dynamic>));
     return cast function():Void { flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'removeEventListener', cast (['resume', listener] : Array<Dynamic>)); };
     return cast _Runtime.UNDEFINED;
-  }, subscribeSuspend: function(listener:Void->Void):Void->Void {
+  } : Dynamic), subscribeSuspend: (cast function(listener:Void->Void):Void->Void {
     if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return cast function():Void {
 
     }; }
     flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'addEventListener', cast (['freeze', listener] : Array<Dynamic>));
     return cast function():Void { flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'removeEventListener', cast (['freeze', listener] : Array<Dynamic>)); };
     return cast _Runtime.UNDEFINED;
-  } });
+  } : Dynamic) } : PowerSuspensionBackend); __callArgument1656; })) : PowerSuspensionBackend);
 
   public static function getWebPlatformInfo__webPlatform(out:PlatformInfo):PlatformInfo {
     var nav:Null<flight._internal.dom.Navigator> = cast _Runtime.UNDEFINED;
     var ua:String = cast _Runtime.UNDEFINED;
     nav = ((cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) ? (cast flight._internal.backend.DomNavigatorBackend.value() : Dynamic) : (cast null : Dynamic));
-    ua = _Runtime.coalesce(({ final __hostType1530 = nav; __hostType1530 == null ? _Runtime.UNDEFINED : (cast __hostType1530 : flight._internal.dom.Navigator).userAgent; }), function():Dynamic return cast '');
+    ua = _Runtime.coalesce(({ final __hostType1658 = nav; __hostType1658 == null ? _Runtime.UNDEFINED : (cast __hostType1658 : flight._internal.dom.Navigator).userAgent; }), function():Dynamic return cast '');
     (out.name = cast ((cast parseUserAgentName((cast ua : String)) : PlatformName) : PlatformName));
     (out.kind = cast ((cast parseUserAgentKind(out.name) : PlatformKind) : PlatformKind));
     (out.version = cast ((cast parseUserAgentVersion((cast ua : String), out.name) : String) : String));
@@ -6475,13 +6954,13 @@ class _HostWeb {
     return cast null;
   }
 
-  public static final webPowerCapabilities:{ >Entity, var keepAwake:PowerKeepAwakeBackend; var suspension:PowerSuspensionBackend; var change:PowerChangeBackend; var status:PowerStatusBackend; } = (cast createEntity(({ final __callArgument1531:Dynamic = (#if flight_struct_typedef _Runtime.mergeObjects([(cast createWebPowerReadings() : { var change:PowerChangeBackend; var status:PowerStatusBackend; }), { keepAwake: webPowerKeepAwakeBackend }, { suspension: webPowerSuspensionBackend }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([(cast createWebPowerReadings() : { var change:PowerChangeBackend; var status:PowerStatusBackend; }), { keepAwake: webPowerKeepAwakeBackend }, { suspension: webPowerSuspensionBackend }]); ({ keepAwake: _Runtime.field(__structInitSource, 'keepAwake'), suspension: _Runtime.field(__structInitSource, 'suspension'), change: _Runtime.field(__structInitSource, 'change'), status: _Runtime.field(__structInitSource, 'status') } : EntityShapeL181C50__webPower); }) #end); __callArgument1531; })) : EntityShapeL181C50__webPower);
+  public static final webPowerCapabilities:WebPowerCapabilities = (cast createEntity((cast (#if flight_struct_typedef _Runtime.mergeObjects([(cast createWebPowerReadings() : WebPowerReadingCapabilities), { keepAwake: webPowerKeepAwakeBackend }, { suspension: webPowerSuspensionBackend }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([(cast createWebPowerReadings() : WebPowerReadingCapabilities), { keepAwake: webPowerKeepAwakeBackend }, { suspension: webPowerSuspensionBackend }]); ({ change: _Runtime.field(__structInitSource, 'change'), keepAwake: _Runtime.field(__structInitSource, 'keepAwake'), status: _Runtime.field(__structInitSource, 'status'), suspension: _Runtime.field(__structInitSource, 'suspension') } : WebPowerCapabilities); }) #end) : Dynamic)) : WebPowerCapabilities);
 
   public static var _wakeLockSentinel__webPower:Null<WebWakeLockSentinel__webPower> = _Runtime.explicitNull();
 
   @:allow(flight)
   @:keep
-  private static function createWebPowerReadings():{ var change:PowerChangeBackend; var status:PowerStatusBackend; } {
+  private static function createWebPowerReadings():WebPowerReadingCapabilities {
     var cachedCharging:Bool = cast _Runtime.UNDEFINED;
     var cachedChargingTime:Float = cast _Runtime.UNDEFINED;
     var cachedDischargingTime:Float = cast _Runtime.UNDEFINED;
@@ -6490,7 +6969,7 @@ class _HostWeb {
     cachedChargingTime = -1.0;
     cachedDischargingTime = -1.0;
     cachedLevel = -1.0;
-    return cast { change: { subscribe: function(listener:Void->Void):Void->Void {
+    return cast (cast createEntity((cast ({ change: (cast (cast createEntity(({ final __callArgument1735:Dynamic = ({ subscribe: (cast function(listener:Void->Void):Void->Void {
       var battery:Null<flight._internal._Promise<WebBatteryManager__webPower>> = cast _Runtime.UNDEFINED;
       var manager:Null<WebBatteryManager__webPower> = cast _Runtime.UNDEFINED;
       var onLevelChange:Void->Void = cast _Runtime.UNDEFINED;
@@ -6543,14 +7022,14 @@ class _HostWeb {
       });
       return cast function():Void {
         (cancelled = cast (true : Dynamic));
-        ({ final __optionalOwner1535 = manager; if (__optionalOwner1535 != null) { final __optionalCall1534 = (cast __optionalOwner1535 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall1534 != null) __optionalCall1534((cast 'levelchange' : String), ({ final __callArgument1533:Dynamic = onLevelChange; __callArgument1533; })); } });
-        ({ final __optionalOwner1538 = manager; if (__optionalOwner1538 != null) { final __optionalCall1537 = (cast __optionalOwner1538 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall1537 != null) __optionalCall1537((cast 'chargingchange' : String), ({ final __callArgument1536:Dynamic = onChargingChange; __callArgument1536; })); } });
-        ({ final __optionalOwner1541 = manager; if (__optionalOwner1541 != null) { final __optionalCall1540 = (cast __optionalOwner1541 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall1540 != null) __optionalCall1540((cast 'chargingtimechange' : String), ({ final __callArgument1539:Dynamic = onChargingTimeChange; __callArgument1539; })); } });
-        ({ final __optionalOwner1544 = manager; if (__optionalOwner1544 != null) { final __optionalCall1543 = (cast __optionalOwner1544 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall1543 != null) __optionalCall1543((cast 'dischargingtimechange' : String), ({ final __callArgument1542:Dynamic = onDischargingTimeChange; __callArgument1542; })); } });
+        ({ final __optionalOwner1725 = manager; if (__optionalOwner1725 != null) { final __optionalCall1724 = (cast __optionalOwner1725 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall1724 != null) __optionalCall1724((cast 'levelchange' : String), ({ final __callArgument1723:Dynamic = onLevelChange; __callArgument1723; })); } });
+        ({ final __optionalOwner1728 = manager; if (__optionalOwner1728 != null) { final __optionalCall1727 = (cast __optionalOwner1728 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall1727 != null) __optionalCall1727((cast 'chargingchange' : String), ({ final __callArgument1726:Dynamic = onChargingChange; __callArgument1726; })); } });
+        ({ final __optionalOwner1731 = manager; if (__optionalOwner1731 != null) { final __optionalCall1730 = (cast __optionalOwner1731 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall1730 != null) __optionalCall1730((cast 'chargingtimechange' : String), ({ final __callArgument1729:Dynamic = onChargingTimeChange; __callArgument1729; })); } });
+        ({ final __optionalOwner1734 = manager; if (__optionalOwner1734 != null) { final __optionalCall1733 = (cast __optionalOwner1734 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall1733 != null) __optionalCall1733((cast 'dischargingtimechange' : String), ({ final __callArgument1732:Dynamic = onDischargingTimeChange; __callArgument1732; })); } });
         (manager = cast (null : Dynamic));
       };
       return cast _Runtime.UNDEFINED;
-    } }, status: { getStatus: function(out:PowerStatus):PowerStatus {
+    } : Dynamic) } : EntityShapeL114C68__webPower); __callArgument1735; })) : EntityShapeL114C68__webPower) : Dynamic), status: (cast (cast createEntity(({ final __callArgument1761:Dynamic = ({ getStatus: (cast function(out:PowerStatus):PowerStatus {
       (out.batteryLevel = cast (cachedLevel : Float));
       (out.chargingTime = cast (cachedChargingTime : Float));
       (out.dischargingTime = cast (cachedDischargingTime : Float));
@@ -6561,19 +7040,19 @@ class _HostWeb {
       (out.thermalState = cast ('Unknown' : PowerThermalState));
       return cast out;
       return cast _Runtime.UNDEFINED;
-    } } };
+    } : Dynamic) } : EntityShapeL169C68__webPower); __callArgument1761; })) : EntityShapeL169C68__webPower) : Dynamic) } : WebPowerReadingCapabilities) : Dynamic)) : WebPowerReadingCapabilities);
     return cast null;
   }
 
   public static final _wakeLockReleaseListeners__webPower:flight._internal._Map<WebWakeLockSentinel__webPower, Void->Void> = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
 
   public static function _getWebBatteryManagerPromise__webPower():Null<flight._internal._Promise<WebBatteryManager__webPower>> {
-    var nav:flight._internal._Intersection2<flight._internal.dom.Navigator, { @:optional var getBattery:Null<Void->flight._internal._Promise<WebBatteryManager__webPower>>; }> = cast _Runtime.UNDEFINED;
+    var nav:WebBatteryNavigator__webPower = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool)) { return cast null; }
-    nav = (cast flight._internal.backend.DomNavigatorBackend.value() : flight._internal._Intersection2<flight._internal.dom.Navigator, { @:optional var getBattery:Void->flight._internal._Promise<WebBatteryManager__webPower>; }>);
-    if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomNavigatorBackend.field(nav, 'getBattery')), 'function') : Bool)) { return cast null; }
+    nav = (cast flight._internal.backend.DomNavigatorBackend.value() : WebBatteryNavigator__webPower);
+    if ((cast !_Runtime.strictEquals(_Runtime.typeofValue((cast nav : WebBatteryNavigator__webPower).getBattery), 'function') : Bool)) { return cast null; }
     try {
-      return cast flight._internal.backend.DomNavigatorBackend.call(nav, 'getBattery', cast ([] : Array<Dynamic>));
+      return cast (cast nav : WebBatteryNavigator__webPower).getBattery();
     } catch (__error:Dynamic) {
       return cast null;
     }
@@ -6582,13 +7061,13 @@ class _HostWeb {
 
   public static function _getWebWakeLock__webPower():Null<WebWakeLock__webPower> {
     if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool)) { return cast null; }
-    return cast _Runtime.coalesce(flight._internal.backend.DomNavigatorBackend.field((cast flight._internal.backend.DomNavigatorBackend.value() : flight._internal._Intersection2<flight._internal.dom.Navigator, { @:optional var wakeLock:WebWakeLock__webPower; }>), 'wakeLock'), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'wakeLock'), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function _isDenial__webPower(error:flight._internal._Any):Bool {
     var name:Null<String> = cast _Runtime.UNDEFINED;
-    name = ({ final __structural1545 = (cast error : Null<{ @:optional var name:String; }>); __structural1545 == null ? _Runtime.UNDEFINED : (cast __structural1545 : { @:optional var name:Null<String>; }).name; });
+    name = ({ final __structural1867 = (cast error : Null<{ @:optional var name:String; }>); __structural1867 == null ? _Runtime.UNDEFINED : (cast __structural1867 : { @:optional var name:Null<String>; }).name; });
     return cast ((cast _Runtime.strictEquals(name, 'NotAllowedError') : Bool) || (cast _Runtime.strictEquals(name, 'SecurityError') : Bool));
     return cast null;
   }
@@ -6598,19 +7077,19 @@ class _HostWeb {
       flight._internal._Async.protect(function():Dynamic {
         var sentinel:Null<WebWakeLockSentinel__webPower> = cast _Runtime.UNDEFINED;
         sentinel = _HostWeb._wakeLockSentinel__webPower;
-        var __flowBranch1546:Dynamic;
+        var __flowBranch1868:Dynamic;
         if ((cast _Runtime.strictEquals(sentinel, null) : Bool)) {
-          __flowBranch1546 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch1868 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn(_Runtime.UNDEFINED);
           });
         } else {
-          __flowBranch1546 = flight._internal._Async.flowNormal();
+          __flowBranch1868 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch1546, function():Dynamic {
+        return flight._internal._Async.continueFlow(__flowBranch1868, function():Dynamic {
           (_HostWeb._wakeLockSentinel__webPower = cast (null : Dynamic));
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.flatMap(_Runtime.callOptionalValue((cast sentinel : WebWakeLockSentinel__webPower).release, cast ([] : Array<Dynamic>)), function(__awaitValue1547:Dynamic):Dynamic {
-              __awaitValue1547;
+            return flight._internal._Async.flatMap(_Runtime.callOptionalValue((cast sentinel : WebWakeLockSentinel__webPower).release, cast ([] : Array<Dynamic>)), function(__awaitValue1869:Dynamic):Dynamic {
+              __awaitValue1869;
               return flight._internal._Async.flowNormal();
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -6626,7 +7105,7 @@ class _HostWeb {
     );
   }
 
-  public static final webPowerHost:flight._internal._Intersection2<Host, { var power:{ >Entity, var keepAwake:PowerKeepAwakeBackend; var suspension:PowerSuspensionBackend; var change:PowerChangeBackend; var status:PowerStatusBackend; }; }> = (cast createHost((cast { power: webPowerCapabilities } : Dynamic)) : flight._internal._Intersection2<Host, { var power:{ >Entity, var keepAwake:PowerKeepAwakeBackend; var suspension:PowerSuspensionBackend; var change:PowerChangeBackend; var status:PowerStatusBackend; }; }>);
+  public static final webPowerHost:flight._internal._Intersection2<Host, { var power:WebPowerCapabilities; }> = (cast createHost((cast { power: webPowerCapabilities } : Dynamic)) : flight._internal._Intersection2<Host, { var power:WebPowerCapabilities; }>);
 
   public static final webProtocolHost:flight._internal._Intersection2<Host, { var protocol:WebProtocolCapabilities__webProtocol; }> = (cast createHost((cast { protocol: (cast createWebProtocolCapabilities() : WebProtocolCapabilities__webProtocol) } : Dynamic)) : flight._internal._Intersection2<Host, { var protocol:WebProtocolCapabilities__webProtocol; }>);
 
@@ -6635,7 +7114,7 @@ class _HostWeb {
   public static function createWebProtocolCapabilities():WebProtocolCapabilities__webProtocol {
     var registeredSchemes:Array<String> = cast _Runtime.UNDEFINED;
     registeredSchemes = (cast cast ([] : Array<Dynamic>));
-    return cast (cast (cast createEntity : Null<{ var launch:{ >Entity, var getLaunchUrl:Void->Null<String>; }; var registration:{ >Entity, var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; }; }>->{ >Entity, var launch:{ >Entity, var getLaunchUrl:Void->Null<String>; }; var registration:{ >Entity, var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; }; })(({ final __callArgument1556:Dynamic = ({ launch: (cast (cast (cast createEntity : Null<{ var getLaunchUrl:Void->Null<String>; }>->{ >Entity, var getLaunchUrl:Void->Null<String>; })(({ final __callArgument1552:Dynamic = ({ getLaunchUrl: (cast function():Null<String> {
+    return cast (cast (cast createEntity : Null<{ var launch:{ >Entity, var getLaunchUrl:Void->Null<String>; }; var registration:{ >Entity, var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; }; }>->{ >Entity, var launch:{ >Entity, var getLaunchUrl:Void->Null<String>; }; var registration:{ >Entity, var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; }; })(({ final __callArgument1878:Dynamic = ({ launch: (cast (cast (cast createEntity : Null<{ var getLaunchUrl:Void->Null<String>; }>->{ >Entity, var getLaunchUrl:Void->Null<String>; })(({ final __callArgument1874:Dynamic = ({ getLaunchUrl: (cast function():Null<String> {
       if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('location'), 'undefined') : Bool)) { return cast null; }
       try {
         var url:Null<String> = (cast _Runtime.construct(flight._internal._HostValueLut.get('URLSearchParams'), [(cast flight._internal._HostValueLut.get('location') : flight._internal.dom.Location).search]) : flight._internal.dom.URLSearchParams).get('url');
@@ -6644,7 +7123,7 @@ class _HostWeb {
         return cast null;
       }
       return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL9C26__webProtocol); __callArgument1552; })) : EntityShapeL9C26__webProtocol) : Dynamic), registration: (cast (cast (cast createEntity : Null<{ var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; }>->{ >Entity, var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; })(({ final __callArgument1554:Dynamic = ({ getRegisteredSchemes: (cast function():Array<String> {
+    } : Dynamic) } : EntityShapeL9C26__webProtocol); __callArgument1874; })) : EntityShapeL9C26__webProtocol) : Dynamic), registration: (cast (cast (cast createEntity : Null<{ var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; }>->{ >Entity, var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; })(({ final __callArgument1876:Dynamic = ({ getRegisteredSchemes: (cast function():Array<String> {
       return cast _Runtime.slice(registeredSchemes, 0, null);
       return cast _Runtime.UNDEFINED;
     } : Dynamic), register: (cast function(scheme:String):Bool {
@@ -6658,7 +7137,7 @@ class _HostWeb {
         return cast false;
       }
       return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL20C32__webProtocol); __callArgument1554; })) : EntityShapeL20C32__webProtocol) : Dynamic) } : EntityShapeL8C23__webProtocol); __callArgument1556; })) : EntityShapeL8C23__webProtocol);
+    } : Dynamic) } : EntityShapeL20C32__webProtocol); __callArgument1876; })) : EntityShapeL20C32__webProtocol) : Dynamic) } : EntityShapeL8C23__webProtocol); __callArgument1878; })) : EntityShapeL8C23__webProtocol);
     return cast null;
   }
 
@@ -6722,7 +7201,7 @@ class _HostWeb {
     (_HostWeb._enabled__webRaster2DSurface = cast (false : Dynamic));
   }
 
-  public static final webScreenHost:flight._internal._Intersection2<Host, { var screen:flight._internal._Any; }> = (cast createHost(({ final __callArgument1566:Dynamic = { screen: webScreenCapabilities }; __callArgument1566; })) : flight._internal._Intersection2<Host, { var screen:flight._internal._Any; }>);
+  public static final webScreenHost:flight._internal._Intersection2<Host, { var screen:flight._internal._Any; }> = (cast createHost(({ final __callArgument1888:Dynamic = { screen: webScreenCapabilities }; __callArgument1888; })) : flight._internal._Intersection2<Host, { var screen:flight._internal._Any; }>);
 
   public static function createWebScreenCapabilities():flight._internal._Required<HostScreenCapabilities> {
     var cached:Array<ScreenInfo> = cast _Runtime.UNDEFINED;
@@ -6748,7 +7227,7 @@ class _HostWeb {
     subscriptions = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
     snapshot = (cast function(info:ScreenInfo):ScreenInfo return flight._internal.DynamicObject.assign((cast createScreenInfo() : ScreenInfo), info));
     fillDetailed = (cast function(out:ScreenInfo, screen:DetailedScreen__webScreen, index:Float, primary:Float):ScreenInfo {
-      flight._internal.DynamicObject.assign(out, { id: index, x: (cast screen : DetailedScreen__webScreen).left, y: (cast screen : DetailedScreen__webScreen).top, width: (cast screen : DetailedScreen__webScreen).width, height: (cast screen : DetailedScreen__webScreen).height, workWidth: (cast screen : DetailedScreen__webScreen).availWidth, workHeight: (cast screen : DetailedScreen__webScreen).availHeight, scaleFactor: _Runtime.orValue((cast screen : DetailedScreen__webScreen).devicePixelRatio, function():Dynamic return cast 1.0), isPrimary: _Runtime.coalesce((cast screen : DetailedScreen__webScreen).isPrimary, function():Dynamic return cast _Runtime.strictEquals(index, primary)), rotation: _Runtime.coalesce(({ final __structural1568 = (cast _HostWeb.orientation__webScreen() : Null<OrientationLike__webScreen>); __structural1568 == null ? _Runtime.UNDEFINED : (cast __structural1568 : { @:optional var angle:Null<Float>; }).angle; }), function():Dynamic return cast -1.0), orientation: (cast _HostWeb.orientationName__webScreen() : ScreenOrientation), refreshRate: _Runtime.select(_Runtime.andValue((cast screen : DetailedScreen__webScreen).refreshRate, function():Dynamic return cast ((cast (cast screen : DetailedScreen__webScreen).refreshRate : Float) > (cast 0.0 : Float))), function():Dynamic return cast (cast screen : DetailedScreen__webScreen).refreshRate, function():Dynamic return cast -1.0), colorDepth: _Runtime.coalesce((cast screen : DetailedScreen__webScreen).colorDepth, function():Dynamic return cast -1.0), pixelDepth: _Runtime.coalesce((cast screen : DetailedScreen__webScreen).pixelDepth, function():Dynamic return cast -1.0), physicalWidth: HxMath.round(_Runtime.multiplyNumbers((cast screen : DetailedScreen__webScreen).width, _Runtime.orValue((cast screen : DetailedScreen__webScreen).devicePixelRatio, function():Dynamic return cast 1.0))), physicalHeight: HxMath.round(_Runtime.multiplyNumbers((cast screen : DetailedScreen__webScreen).height, _Runtime.orValue((cast screen : DetailedScreen__webScreen).devicePixelRatio, function():Dynamic return cast 1.0))), isHdr: (cast _HostWeb.media__webScreen((cast '(dynamic-range: high)' : String)) : Bool), colorSpace: ((cast (cast _HostWeb.media__webScreen((cast '(color-gamut: rec2020)' : String)) : Bool) : Bool) ? (cast 'rec2020' : Dynamic) : (cast ((cast (cast _HostWeb.media__webScreen((cast '(color-gamut: p3)' : String)) : Bool) : Bool) ? (cast 'display-p3' : Dynamic) : (cast 'srgb' : Dynamic)) : Dynamic)), maxLuminance: -1.0, depthPerComponent: -1.0, dpi: -1.0, label: _Runtime.coalesce((cast screen : DetailedScreen__webScreen).label, function():Dynamic return cast ''), internal: _Runtime.coalesce((cast screen : DetailedScreen__webScreen).isInternal, function():Dynamic return cast false), touchSupport: 'unknown', monochrome: false });
+      flight._internal.DynamicObject.assign(out, { id: index, x: (cast screen : DetailedScreen__webScreen).left, y: (cast screen : DetailedScreen__webScreen).top, width: (cast screen : DetailedScreen__webScreen).width, height: (cast screen : DetailedScreen__webScreen).height, workWidth: (cast screen : DetailedScreen__webScreen).availWidth, workHeight: (cast screen : DetailedScreen__webScreen).availHeight, scaleFactor: _Runtime.orValue((cast screen : DetailedScreen__webScreen).devicePixelRatio, function():Dynamic return cast 1.0), isPrimary: _Runtime.coalesce((cast screen : DetailedScreen__webScreen).isPrimary, function():Dynamic return cast _Runtime.strictEquals(index, primary)), rotation: _Runtime.coalesce(({ final __structural1890 = (cast _HostWeb.orientation__webScreen() : Null<OrientationLike__webScreen>); __structural1890 == null ? _Runtime.UNDEFINED : (cast __structural1890 : { @:optional var angle:Null<Float>; }).angle; }), function():Dynamic return cast -1.0), orientation: (cast _HostWeb.orientationName__webScreen() : ScreenOrientation), refreshRate: _Runtime.select(_Runtime.andValue((cast screen : DetailedScreen__webScreen).refreshRate, function():Dynamic return cast ((cast (cast screen : DetailedScreen__webScreen).refreshRate : Float) > (cast 0.0 : Float))), function():Dynamic return cast (cast screen : DetailedScreen__webScreen).refreshRate, function():Dynamic return cast -1.0), colorDepth: _Runtime.coalesce((cast screen : DetailedScreen__webScreen).colorDepth, function():Dynamic return cast -1.0), pixelDepth: _Runtime.coalesce((cast screen : DetailedScreen__webScreen).pixelDepth, function():Dynamic return cast -1.0), physicalWidth: HxMath.round(_Runtime.multiplyNumbers((cast screen : DetailedScreen__webScreen).width, _Runtime.orValue((cast screen : DetailedScreen__webScreen).devicePixelRatio, function():Dynamic return cast 1.0))), physicalHeight: HxMath.round(_Runtime.multiplyNumbers((cast screen : DetailedScreen__webScreen).height, _Runtime.orValue((cast screen : DetailedScreen__webScreen).devicePixelRatio, function():Dynamic return cast 1.0))), isHdr: (cast _HostWeb.media__webScreen((cast '(dynamic-range: high)' : String)) : Bool), colorSpace: ((cast (cast _HostWeb.media__webScreen((cast '(color-gamut: rec2020)' : String)) : Bool) : Bool) ? (cast 'rec2020' : Dynamic) : (cast ((cast (cast _HostWeb.media__webScreen((cast '(color-gamut: p3)' : String)) : Bool) : Bool) ? (cast 'display-p3' : Dynamic) : (cast 'srgb' : Dynamic)) : Dynamic)), maxLuminance: -1.0, depthPerComponent: -1.0, dpi: -1.0, label: _Runtime.coalesce((cast screen : DetailedScreen__webScreen).label, function():Dynamic return cast ''), internal: _Runtime.coalesce((cast screen : DetailedScreen__webScreen).isInternal, function():Dynamic return cast false), touchSupport: 'unknown', monochrome: false });
       return cast out;
       return cast _Runtime.UNDEFINED;
     });
@@ -6757,11 +7236,11 @@ class _HostWeb {
       if ((cast !_Runtime.strictEquals(details, null) : Bool)) {
         var index:Float = HxMath.max(0.0, _Runtime.callProperty((cast details : ScreenDetails__webScreen).screens, 'indexOf', cast ([(cast details : ScreenDetails__webScreen).currentScreen] : Array<Dynamic>)));
         var primary:Float = HxMath.max(0.0, _Runtime.findIndex((cast details : ScreenDetails__webScreen).screens, function(screen:DetailedScreen__webScreen, __unused0:Float, __unused1:Array<DetailedScreen__webScreen>):Null<Bool> return (cast screen : DetailedScreen__webScreen).isPrimary));
-        return cast (cast fillDetailed(({ final __callArgument1569:Dynamic = out; __callArgument1569; }), (cast (cast details : ScreenDetails__webScreen).currentScreen : Dynamic), (cast index : Float), (cast primary : Float)) : ScreenInfo);
+        return cast (cast fillDetailed(({ final __callArgument1891:Dynamic = out; __callArgument1891; }), (cast (cast details : ScreenDetails__webScreen).currentScreen : Dynamic), (cast index : Float), (cast primary : Float)) : ScreenInfo);
       }
       if ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) || (cast _Runtime.strictEquals(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'screen'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast flight._internal.DynamicObject.assign(out, (cast createScreenInfo() : ScreenInfo)); }
       screen = flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'screen');
-      flight._internal.DynamicObject.assign(out, { id: 0.0, x: 0.0, y: 0.0, width: (cast screen : flight._internal.dom.Screen).width, height: (cast screen : flight._internal.dom.Screen).height, workWidth: (cast screen : flight._internal.dom.Screen).availWidth, workHeight: (cast screen : flight._internal.dom.Screen).availHeight, scaleFactor: _Runtime.orValue(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'devicePixelRatio'), function():Dynamic return cast 1.0), isPrimary: true, rotation: _Runtime.coalesce(({ final __structural1571 = (cast _HostWeb.orientation__webScreen() : Null<OrientationLike__webScreen>); __structural1571 == null ? _Runtime.UNDEFINED : (cast __structural1571 : { @:optional var angle:Null<Float>; }).angle; }), function():Dynamic return cast -1.0), orientation: (cast _HostWeb.orientationName__webScreen() : ScreenOrientation), refreshRate: -1.0, colorDepth: _Runtime.coalesce((cast screen : flight._internal.dom.Screen).colorDepth, function():Dynamic return cast -1.0), pixelDepth: _Runtime.coalesce((cast screen : flight._internal.dom.Screen).pixelDepth, function():Dynamic return cast -1.0), physicalWidth: HxMath.round(_Runtime.multiplyNumbers((cast screen : flight._internal.dom.Screen).width, _Runtime.orValue(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'devicePixelRatio'), function():Dynamic return cast 1.0))), physicalHeight: HxMath.round(_Runtime.multiplyNumbers((cast screen : flight._internal.dom.Screen).height, _Runtime.orValue(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'devicePixelRatio'), function():Dynamic return cast 1.0))), isHdr: (cast _HostWeb.media__webScreen((cast '(dynamic-range: high)' : String)) : Bool), colorSpace: ((cast (cast _HostWeb.media__webScreen((cast '(color-gamut: rec2020)' : String)) : Bool) : Bool) ? (cast 'rec2020' : Dynamic) : (cast ((cast (cast _HostWeb.media__webScreen((cast '(color-gamut: p3)' : String)) : Bool) : Bool) ? (cast 'display-p3' : Dynamic) : (cast 'srgb' : Dynamic)) : Dynamic)), maxLuminance: -1.0, depthPerComponent: -1.0, dpi: -1.0, label: '', internal: false, touchSupport: 'unknown', monochrome: false });
+      flight._internal.DynamicObject.assign(out, { id: 0.0, x: 0.0, y: 0.0, width: (cast screen : flight._internal.dom.Screen).width, height: (cast screen : flight._internal.dom.Screen).height, workWidth: (cast screen : flight._internal.dom.Screen).availWidth, workHeight: (cast screen : flight._internal.dom.Screen).availHeight, scaleFactor: _Runtime.orValue(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'devicePixelRatio'), function():Dynamic return cast 1.0), isPrimary: true, rotation: _Runtime.coalesce(({ final __structural1893 = (cast _HostWeb.orientation__webScreen() : Null<OrientationLike__webScreen>); __structural1893 == null ? _Runtime.UNDEFINED : (cast __structural1893 : { @:optional var angle:Null<Float>; }).angle; }), function():Dynamic return cast -1.0), orientation: (cast _HostWeb.orientationName__webScreen() : ScreenOrientation), refreshRate: -1.0, colorDepth: _Runtime.coalesce((cast screen : flight._internal.dom.Screen).colorDepth, function():Dynamic return cast -1.0), pixelDepth: _Runtime.coalesce((cast screen : flight._internal.dom.Screen).pixelDepth, function():Dynamic return cast -1.0), physicalWidth: HxMath.round(_Runtime.multiplyNumbers((cast screen : flight._internal.dom.Screen).width, _Runtime.orValue(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'devicePixelRatio'), function():Dynamic return cast 1.0))), physicalHeight: HxMath.round(_Runtime.multiplyNumbers((cast screen : flight._internal.dom.Screen).height, _Runtime.orValue(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'devicePixelRatio'), function():Dynamic return cast 1.0))), isHdr: (cast _HostWeb.media__webScreen((cast '(dynamic-range: high)' : String)) : Bool), colorSpace: ((cast (cast _HostWeb.media__webScreen((cast '(color-gamut: rec2020)' : String)) : Bool) : Bool) ? (cast 'rec2020' : Dynamic) : (cast ((cast (cast _HostWeb.media__webScreen((cast '(color-gamut: p3)' : String)) : Bool) : Bool) ? (cast 'display-p3' : Dynamic) : (cast 'srgb' : Dynamic)) : Dynamic)), maxLuminance: -1.0, depthPerComponent: -1.0, dpi: -1.0, label: '', internal: false, touchSupport: 'unknown', monochrome: false });
       return cast out;
       return cast _Runtime.UNDEFINED;
     });
@@ -6773,13 +7252,13 @@ class _HostWeb {
       }
       if ((cast _Runtime.strictEquals(details, null) : Bool)) {
         _Runtime.setLength(out, 1.0);
-        ({ var __indexedObject1572:Dynamic = out; var __indexedKey1573:Dynamic = 0.0; flight._internal._StaticIndex.writeArray(__indexedObject1572, __indexedKey1573, (flight._internal._StaticIndex.readArray(__indexedObject1572, __indexedKey1573) ?? (cast createScreenInfo() : ScreenInfo))); });
+        ({ var __indexedObject1894:Dynamic = out; var __indexedKey1895:Dynamic = 0.0; flight._internal._StaticIndex.writeArray(__indexedObject1894, __indexedKey1895, (flight._internal._StaticIndex.readArray(__indexedObject1894, __indexedKey1895) ?? (cast createScreenInfo() : ScreenInfo))); });
         (cast fillCurrent(flight._internal._StaticIndex.readArray(out, 0.0)) : ScreenInfo);
       } else {
         var primary:Float = HxMath.max(0.0, _Runtime.findIndex((cast details : ScreenDetails__webScreen).screens, function(screen:DetailedScreen__webScreen, __unused2:Float, __unused3:Array<DetailedScreen__webScreen>):Null<Bool> return (cast screen : DetailedScreen__webScreen).isPrimary));
         _Runtime.setLength(out, _Runtime.field((cast details : ScreenDetails__webScreen).screens, 'length'));
         _Runtime.forEachArray((cast (cast details : ScreenDetails__webScreen).screens : Array<DetailedScreen__webScreen>), function(screen:DetailedScreen__webScreen, index:Float, __unused4:Array<DetailedScreen__webScreen>):Void {
-          ({ var __indexedObject1574:Dynamic = out; var __indexedKey1575:Dynamic = index; flight._internal._StaticIndex.writeArray(__indexedObject1574, __indexedKey1575, (flight._internal._StaticIndex.readArray(__indexedObject1574, __indexedKey1575) ?? (cast createScreenInfo() : ScreenInfo))); });
+          ({ var __indexedObject1896:Dynamic = out; var __indexedKey1897:Dynamic = index; flight._internal._StaticIndex.writeArray(__indexedObject1896, __indexedKey1897, (flight._internal._StaticIndex.readArray(__indexedObject1896, __indexedKey1897) ?? (cast createScreenInfo() : ScreenInfo))); });
           (cast fillDetailed(flight._internal._StaticIndex.readArray(out, index), (cast screen : Dynamic), (cast index : Float), (cast primary : Float)) : ScreenInfo);
         }, _Runtime.UNDEFINED);
       }
@@ -6792,23 +7271,23 @@ class _HostWeb {
       var next:Array<ScreenInfo> = cast _Runtime.UNDEFINED;
       previousCache = cached;
       next = (cast cast ([] : Array<Dynamic>));
-      (cast enumerate(({ final __callArgument1576:Dynamic = next; __callArgument1576; })) : Array<ScreenInfo>);
+      (cast enumerate(({ final __callArgument1898:Dynamic = next; __callArgument1898; })) : Array<ScreenInfo>);
       for (previous in _Runtime.iterable(previousCache)) {
-        if ((cast !(cast _Runtime.callProperty(next, 'some', cast ([function(screen:ScreenInfo, __unused5:Float, __unused6:Array<ScreenInfo>):Bool return _Runtime.strictEquals(screen.id, previous.id)] : Array<Dynamic>)) : Bool) : Bool)) { listener(({ final __callArgument1580:Dynamic = { kind: 'ScreenRemoved', screen: previous, changedMetrics: null }; __callArgument1580; })); }
+        if ((cast !(cast _Runtime.callProperty(next, 'some', cast ([function(screen:ScreenInfo, __unused5:Float, __unused6:Array<ScreenInfo>):Bool return _Runtime.strictEquals(screen.id, previous.id)] : Array<Dynamic>)) : Bool) : Bool)) { listener(({ final __callArgument1902:Dynamic = { kind: 'ScreenRemoved', screen: previous, changedMetrics: null }; __callArgument1902; })); }
       }
       for (current in _Runtime.iterable(next)) {
         var previous:Null<ScreenInfo> = _Runtime.find(previousCache, function(screen:ScreenInfo, __unused7:Float, __unused8:Array<ScreenInfo>):Bool return _Runtime.strictEquals(screen.id, current.id));
-        if ((cast _Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { listener(({ final __callArgument1584:Dynamic = { kind: 'ScreenAdded', screen: current, changedMetrics: null }; __callArgument1584; })); } else { if ((cast !(cast (cast _HostWeb.sameGeometry__webScreen(({ final __callArgument1586:Dynamic = previous; __callArgument1586; }), ({ final __callArgument1587:Dynamic = current; __callArgument1587; })) : Bool) : Bool) : Bool)) {
-          listener(({ final __callArgument1590:Dynamic = { kind: 'ScreenMetricsChanged', screen: current, changedMetrics: { bounds: true, workArea: true, scaleFactor: true, orientation: true } }; __callArgument1590; }));
+        if ((cast _Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { listener(({ final __callArgument1906:Dynamic = { kind: 'ScreenAdded', screen: current, changedMetrics: null }; __callArgument1906; })); } else { if ((cast !(cast (cast _HostWeb.sameGeometry__webScreen(({ final __callArgument1908:Dynamic = previous; __callArgument1908; }), ({ final __callArgument1909:Dynamic = current; __callArgument1909; })) : Bool) : Bool) : Bool)) {
+          listener(({ final __callArgument1912:Dynamic = { kind: 'ScreenMetricsChanged', screen: current, changedMetrics: { bounds: true, workArea: true, scaleFactor: true, orientation: true } }; __callArgument1912; }));
         } }
       }
     });
-    query = (cast createEntity(({ final __callArgument1612:Dynamic = ({ destroy: (cast function():Void {
+    query = (cast createEntity(({ final __callArgument1934:Dynamic = ({ destroy: (cast function():Void {
       if ((cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) {
         for (subscription in _Runtime.iterable(subscriptions)) {
           flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['resize', (cast subscription : DisplaySubscription__webScreen).handle] : Array<Dynamic>));
-          ({ final __optionalOwner1605 = (cast subscription : DisplaySubscription__webScreen).orientation; if (__optionalOwner1605 != null) { final __optionalCall1604 = (cast __optionalOwner1605 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall1604 != null) __optionalCall1604((cast 'change' : String), (cast subscription : DisplaySubscription__webScreen).handle); } });
-          ({ final __optionalOwner1607 = (cast subscription : DisplaySubscription__webScreen).details; if (__optionalOwner1607 != null) { final __optionalCall1606 = (cast __optionalOwner1607 : { var removeEventListener:String->(Void->Void)->Void; }).removeEventListener; if (__optionalCall1606 != null) __optionalCall1606((cast 'screenschange' : String), (cast subscription : DisplaySubscription__webScreen).handle); } });
+          ({ final __optionalOwner1927 = (cast subscription : DisplaySubscription__webScreen).orientation; if (__optionalOwner1927 != null) { final __optionalCall1926 = (cast __optionalOwner1927 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall1926 != null) __optionalCall1926((cast 'change' : String), (cast subscription : DisplaySubscription__webScreen).handle); } });
+          ({ final __optionalOwner1929 = (cast subscription : DisplaySubscription__webScreen).details; if (__optionalOwner1929 != null) { final __optionalCall1928 = (cast __optionalOwner1929 : { var removeEventListener:String->(Void->Void)->Void; }).removeEventListener; if (__optionalCall1928 != null) __optionalCall1928((cast 'screenschange' : String), (cast subscription : DisplaySubscription__webScreen).handle); } });
         }
       }
       ((cast subscriptions : flight._internal._Set<DisplaySubscription__webScreen>).clear());
@@ -6833,45 +7312,45 @@ class _HostWeb {
     } : Dynamic), getPrimaryScreen: (cast function(out:ScreenInfo):ScreenInfo {
       if ((cast ((cast !_Runtime.strictEquals(details, null) : Bool) && (cast ((cast _Runtime.field((cast details : ScreenDetails__webScreen).screens, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
         var index:Float = HxMath.max(0.0, _Runtime.findIndex((cast details : ScreenDetails__webScreen).screens, function(screen:DetailedScreen__webScreen, __unused9:Float, __unused10:Array<DetailedScreen__webScreen>):Null<Bool> return (cast screen : DetailedScreen__webScreen).isPrimary));
-        return cast (cast fillDetailed(({ final __callArgument1608:Dynamic = out; __callArgument1608; }), (cast flight._internal._StaticIndex.readArray((cast details : ScreenDetails__webScreen).screens, index) : Dynamic), (cast index : Float), (cast index : Float)) : ScreenInfo);
+        return cast (cast fillDetailed(({ final __callArgument1930:Dynamic = out; __callArgument1930; }), (cast flight._internal._StaticIndex.readArray((cast details : ScreenDetails__webScreen).screens, index) : Dynamic), (cast index : Float), (cast index : Float)) : ScreenInfo);
       }
-      return cast (cast fillCurrent(({ final __callArgument1610:Dynamic = out; __callArgument1610; })) : ScreenInfo);
+      return cast (cast fillCurrent(({ final __callArgument1932:Dynamic = out; __callArgument1932; })) : ScreenInfo);
       return cast _Runtime.UNDEFINED;
-    } : Dynamic), getScreens: (cast enumerate : Dynamic) } : EntityShapeL178C30__webScreen); __callArgument1612; })) : EntityShapeL178C30__webScreen);
-    change = (cast createEntity(({ final __callArgument1654:Dynamic = ({ subscribe: (cast function(listener:ScreenChangeEvent->Void):Void->Void {
+    } : Dynamic), getScreens: (cast enumerate : Dynamic) } : EntityShapeL182C30__webScreen); __callArgument1934; })) : EntityShapeL182C30__webScreen);
+    change = (cast createEntity(({ final __callArgument1976:Dynamic = ({ subscribe: (cast function(listener:ScreenChangeEvent->Void):Void->Void {
       var subscription:DisplaySubscription__webScreen = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast function():Void {
 
       }; }
-      subscription = (cast { details: details, handle: (cast makeChangeHandler(({ final __callArgument1644:Dynamic = listener; __callArgument1644; })) : Void->Void), orientation: (cast _HostWeb.orientation__webScreen() : Null<OrientationLike__webScreen>) });
+      subscription = (cast { details: details, handle: (cast makeChangeHandler(({ final __callArgument1966:Dynamic = listener; __callArgument1966; })) : Void->Void), orientation: (cast _HostWeb.orientation__webScreen() : Null<OrientationLike__webScreen>) });
       flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['resize', (cast subscription : DisplaySubscription__webScreen).handle] : Array<Dynamic>));
-      ({ final __optionalOwner1647 = (cast subscription : DisplaySubscription__webScreen).orientation; if (__optionalOwner1647 != null) { final __optionalCall1646 = (cast __optionalOwner1647 : { @:optional var addEventListener:Null<String->(Void->Void)->Void>; }).addEventListener; if (__optionalCall1646 != null) __optionalCall1646((cast 'change' : String), (cast subscription : DisplaySubscription__webScreen).handle); } });
-      ({ final __optionalOwner1649 = (cast subscription : DisplaySubscription__webScreen).details; if (__optionalOwner1649 != null) { final __optionalCall1648 = (cast __optionalOwner1649 : { var addEventListener:String->(Void->Void)->Void; }).addEventListener; if (__optionalCall1648 != null) __optionalCall1648((cast 'screenschange' : String), (cast subscription : DisplaySubscription__webScreen).handle); } });
+      ({ final __optionalOwner1969 = (cast subscription : DisplaySubscription__webScreen).orientation; if (__optionalOwner1969 != null) { final __optionalCall1968 = (cast __optionalOwner1969 : { @:optional var addEventListener:Null<String->(Void->Void)->Void>; }).addEventListener; if (__optionalCall1968 != null) __optionalCall1968((cast 'change' : String), (cast subscription : DisplaySubscription__webScreen).handle); } });
+      ({ final __optionalOwner1971 = (cast subscription : DisplaySubscription__webScreen).details; if (__optionalOwner1971 != null) { final __optionalCall1970 = (cast __optionalOwner1971 : { var addEventListener:String->(Void->Void)->Void; }).addEventListener; if (__optionalCall1970 != null) __optionalCall1970((cast 'screenschange' : String), (cast subscription : DisplaySubscription__webScreen).handle); } });
       ((cast subscriptions : flight._internal._Set<DisplaySubscription__webScreen>).add((cast subscription)));
       return cast function():Void {
         flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['resize', (cast subscription : DisplaySubscription__webScreen).handle] : Array<Dynamic>));
-        ({ final __optionalOwner1651 = (cast subscription : DisplaySubscription__webScreen).orientation; if (__optionalOwner1651 != null) { final __optionalCall1650 = (cast __optionalOwner1651 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall1650 != null) __optionalCall1650((cast 'change' : String), (cast subscription : DisplaySubscription__webScreen).handle); } });
-        ({ final __optionalOwner1653 = (cast subscription : DisplaySubscription__webScreen).details; if (__optionalOwner1653 != null) { final __optionalCall1652 = (cast __optionalOwner1653 : { var removeEventListener:String->(Void->Void)->Void; }).removeEventListener; if (__optionalCall1652 != null) __optionalCall1652((cast 'screenschange' : String), (cast subscription : DisplaySubscription__webScreen).handle); } });
+        ({ final __optionalOwner1973 = (cast subscription : DisplaySubscription__webScreen).orientation; if (__optionalOwner1973 != null) { final __optionalCall1972 = (cast __optionalOwner1973 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall1972 != null) __optionalCall1972((cast 'change' : String), (cast subscription : DisplaySubscription__webScreen).handle); } });
+        ({ final __optionalOwner1975 = (cast subscription : DisplaySubscription__webScreen).details; if (__optionalOwner1975 != null) { final __optionalCall1974 = (cast __optionalOwner1975 : { var removeEventListener:String->(Void->Void)->Void; }).removeEventListener; if (__optionalCall1974 != null) __optionalCall1974((cast 'screenschange' : String), (cast subscription : DisplaySubscription__webScreen).handle); } });
         ((cast subscriptions : flight._internal._Set<DisplaySubscription__webScreen>).delete_((cast subscription)));
       };
       return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL221C31__webScreen); __callArgument1654; })) : EntityShapeL221C31__webScreen);
-    detailsBackend = (cast createEntity(({ final __callArgument1694:Dynamic = ({ queryPermission: (cast function():flight._internal._Promise<ScreenPermissionState> {
+    } : Dynamic) } : EntityShapeL225C31__webScreen); __callArgument1976; })) : EntityShapeL225C31__webScreen);
+    detailsBackend = (cast createEntity(({ final __callArgument2016:Dynamic = ({ queryPermission: (cast function():flight._internal._Promise<ScreenPermissionState> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
-          var __flowBranch1685:Dynamic;
+          var __flowBranch2007:Dynamic;
           if ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) || (cast _Runtime.strictEquals(flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'permissions'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-            __flowBranch1685 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch2007 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn('prompt');
             });
           } else {
-            __flowBranch1685 = flight._internal._Async.flowNormal();
+            __flowBranch2007 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch1685, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch2007, function():Dynamic {
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
               var status:flight._internal.dom.PermissionStatus = cast _Runtime.UNDEFINED;
-              return flight._internal._Async.flatMap((cast flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'permissions') : flight._internal.dom.Permissions).query({ name: (cast 'window-management' : flight._internal.dom.PermissionName) }), function(__awaitValue1686:Dynamic):Dynamic {
-                status = __awaitValue1686;
+              return flight._internal._Async.flatMap((cast flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'permissions') : flight._internal.dom.Permissions).query({ name: (cast 'window-management' : flight._internal.dom.PermissionName) }), function(__awaitValue2008:Dynamic):Dynamic {
+                status = __awaitValue2008;
                 return flight._internal._Async.flowReturn((cast (cast status : flight._internal.dom.PermissionStatus).state : ScreenPermissionState));
               });
             }), function(__caughtError:Dynamic):Dynamic {
@@ -6889,31 +7368,31 @@ class _HostWeb {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var request:Null<Void->flight._internal._Promise<ScreenDetails__webScreen>> = cast _Runtime.UNDEFINED;
-          var __flowBranch1687:Dynamic;
+          var __flowBranch2009:Dynamic;
           if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) {
-            __flowBranch1687 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch2009 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(false);
             });
           } else {
-            __flowBranch1687 = flight._internal._Async.flowNormal();
+            __flowBranch2009 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch1687, function():Dynamic {
-            request = flight._internal.backend.DomWindowBackend.field((cast flight._internal.backend.DomWindowBackend.value() : flight._internal._Intersection2<flight._internal.dom.Window, { @:optional var getScreenDetails:Void->flight._internal._Promise<ScreenDetails__webScreen>; }>), 'getScreenDetails');
-            var __flowBranch1688:Dynamic;
+          return flight._internal._Async.continueFlow(__flowBranch2009, function():Dynamic {
+            request = (cast (cast flight._internal.backend.DomWindowBackend.value() : WebScreenDetailsWindow__webScreen) : WebScreenDetailsWindow__webScreen).getScreenDetails;
+            var __flowBranch2010:Dynamic;
             if ((cast _Runtime.strictEquals(request, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-              __flowBranch1688 = flight._internal._Async.protect(function():Dynamic {
+              __flowBranch2010 = flight._internal._Async.protect(function():Dynamic {
                 return flight._internal._Async.flowReturn(false);
               });
             } else {
-              __flowBranch1688 = flight._internal._Async.flowNormal();
+              __flowBranch2010 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch1688, function():Dynamic {
+            return flight._internal._Async.continueFlow(__flowBranch2010, function():Dynamic {
               return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
                 var next:ScreenDetails__webScreen = cast _Runtime.UNDEFINED;
-                return flight._internal._Async.flatMap(_Runtime.callProperty(request, 'call', cast ([flight._internal.backend.DomWindowBackend.value()] : Array<Dynamic>)), function(__awaitValue1689:Dynamic):Dynamic {
-                  next = __awaitValue1689;
+                return flight._internal._Async.flatMap(_Runtime.callProperty(request, 'call', cast ([flight._internal.backend.DomWindowBackend.value()] : Array<Dynamic>)), function(__awaitValue2011:Dynamic):Dynamic {
+                  next = __awaitValue2011;
                   for (subscription in _Runtime.iterable(subscriptions)) {
-                    ({ final __optionalOwner1693 = (cast subscription : DisplaySubscription__webScreen).details; if (__optionalOwner1693 != null) { final __optionalCall1692 = (cast __optionalOwner1693 : { var removeEventListener:String->(Void->Void)->Void; }).removeEventListener; if (__optionalCall1692 != null) __optionalCall1692((cast 'screenschange' : String), (cast subscription : DisplaySubscription__webScreen).handle); } });
+                    ({ final __optionalOwner2015 = (cast subscription : DisplaySubscription__webScreen).details; if (__optionalOwner2015 != null) { final __optionalCall2014 = (cast __optionalOwner2015 : { var removeEventListener:String->(Void->Void)->Void; }).removeEventListener; if (__optionalCall2014 != null) __optionalCall2014((cast 'screenschange' : String), (cast subscription : DisplaySubscription__webScreen).handle); } });
                     (cast next : ScreenDetails__webScreen).addEventListener((cast 'screenschange' : String), (cast subscription : DisplaySubscription__webScreen).handle);
                     ((cast subscription : DisplaySubscription__webScreen).details = next);
                   }
@@ -6933,8 +7412,8 @@ class _HostWeb {
           });
         })
       );
-    } : Dynamic) } : EntityShapeL242C39__webScreen); __callArgument1694; })) : EntityShapeL242C39__webScreen);
-    permissionChange = (cast createEntity(({ final __callArgument1716:Dynamic = ({ subscribe: (cast function(listener:ScreenPermissionState->Void):Void->Void {
+    } : Dynamic) } : EntityShapeL246C39__webScreen); __callArgument2016; })) : EntityShapeL246C39__webScreen);
+    permissionChange = (cast createEntity(({ final __callArgument2038:Dynamic = ({ subscribe: (cast function(listener:ScreenPermissionState->Void):Void->Void {
       var cancelled:Bool = cast _Runtime.UNDEFINED;
       var status:Null<flight._internal.dom.PermissionStatus> = cast _Runtime.UNDEFINED;
       var handle:Void->flight._internal._Union2<Bool, Void> = cast _Runtime.UNDEFINED;
@@ -6953,10 +7432,10 @@ class _HostWeb {
       }));
       return cast function():Void {
         (cancelled = cast (true : Dynamic));
-        ({ final __hostTypeCall1715 = status; __hostTypeCall1715 == null ? _Runtime.UNDEFINED : __hostTypeCall1715.removeEventListener('change', handle); });
+        ({ final __hostTypeCall2037 = status; __hostTypeCall2037 == null ? _Runtime.UNDEFINED : __hostTypeCall2037.removeEventListener('change', handle); });
       };
       return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL272C41__webScreen); __callArgument1716; })) : EntityShapeL272C41__webScreen);
+    } : Dynamic) } : EntityShapeL276C41__webScreen); __callArgument2038; })) : EntityShapeL276C41__webScreen);
     return cast { change: change, details: detailsBackend, permissionChange: permissionChange, query: query };
     return cast null;
   }
@@ -6972,13 +7451,13 @@ class _HostWeb {
 
   public static function orientation__webScreen():Null<OrientationLike__webScreen> {
     if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast null; }
-    return cast _Runtime.coalesce((cast (cast flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'screen') : flight._internal._Intersection2<flight._internal.dom.Screen, { @:optional var orientation:OrientationLike__webScreen; }>) : { var orientation:flight._internal._Intersection2<flight._internal.dom.ScreenOrientation, OrientationLike__webScreen>; }).orientation, function():Dynamic return cast null);
+    return cast _Runtime.coalesce((cast flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'screen') : flight._internal.dom.Screen).orientation, function():Dynamic return cast null);
     return cast null;
   }
 
   public static function orientationName__webScreen():flight._internal._IndexedAccess<ScreenInfo, String> {
     var type:String = cast _Runtime.UNDEFINED;
-    type = _Runtime.coalesce(({ final __structural1720 = (cast _HostWeb.orientation__webScreen() : Null<OrientationLike__webScreen>); __structural1720 == null ? _Runtime.UNDEFINED : (cast __structural1720 : { @:optional var type:Null<String>; }).type; }), function():Dynamic return cast '');
+    type = _Runtime.coalesce(({ final __structural2042 = (cast _HostWeb.orientation__webScreen() : Null<OrientationLike__webScreen>); __structural2042 == null ? _Runtime.UNDEFINED : (cast __structural2042 : { @:optional var type:Null<String>; }).type; }), function():Dynamic return cast '');
     if ((cast StringTools.startsWith(type, 'portrait-primary') : Bool)) { return cast 'Portrait'; }
     if ((cast StringTools.startsWith(type, 'portrait-secondary') : Bool)) { return cast 'PortraitFlipped'; }
     if ((cast StringTools.startsWith(type, 'landscape-secondary') : Bool)) { return cast 'LandscapeFlipped'; }
@@ -7010,18 +7489,18 @@ class _HostWeb {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var nativeNotifications:flight._internal._Any = cast _Runtime.UNDEFINED;
-          var __flowBranch1721:Dynamic;
+          var __flowBranch2043:Dynamic;
           if ((cast !_Runtime.strictEquals(((cast notificationByTag : flight._internal._Map<String, Notification>).get((cast (cast notification : Notification).tag))), notification) : Bool)) {
-            __flowBranch1721 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch2043 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn({ reason: 'already-closed' });
             });
           } else {
-            __flowBranch1721 = flight._internal._Async.flowNormal();
+            __flowBranch2043 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch1721, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch2043, function():Dynamic {
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-              return flight._internal._Async.flatMap((cast _Runtime.field(api, 'registration') : WebServiceWorkerNotificationRegistration).getNotifications(({ final __callArgument1723:Dynamic = { tag: (cast notification : Notification).tag }; __callArgument1723; })), function(__awaitValue1722:Dynamic):Dynamic {
-                (nativeNotifications = cast (__awaitValue1722 : Dynamic));
+              return flight._internal._Async.flatMap((cast _Runtime.field(api, 'registration') : WebServiceWorkerNotificationRegistration).getNotifications(({ final __callArgument2045:Dynamic = { tag: (cast notification : Notification).tag }; __callArgument2045; })), function(__awaitValue2044:Dynamic):Dynamic {
+                (nativeNotifications = cast (__awaitValue2044 : Dynamic));
                 return flight._internal._Async.flowNormal();
               });
             }), function(__caughtError:Dynamic):Dynamic {
@@ -7054,24 +7533,24 @@ class _HostWeb {
         flight._internal._Async.protect(function():Dynamic {
           var failures:Array<NotificationLifecycleFailure> = cast _Runtime.UNDEFINED;
           failures = cast ([] : Array<Dynamic>);
-          var __flowIterator1726:Array<Dynamic> = _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(((cast notificationByTag : flight._internal._Map<String, Notification>).values()))]));
-          var __flowIndex1727:Int = 0;
+          var __flowIterator2048:Array<Dynamic> = _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(((cast notificationByTag : flight._internal._Map<String, Notification>).values()))]));
+          var __flowIndex2049:Int = 0;
           return flight._internal._Async.continueFlow(flight._internal._Async.repeatFlow(function():Dynamic {
-            if (__flowIndex1727 >= __flowIterator1726.length) return flight._internal._Async.flowBreak();
-            var notification:Dynamic = __flowIterator1726[__flowIndex1727++];
+            if (__flowIndex2049 >= __flowIterator2048.length) return flight._internal._Async.flowBreak();
+            var notification:Dynamic = __flowIterator2048[__flowIndex2049++];
             var outcome:{ var reason:String; } = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap((cast closeOne(({ final __callArgument1730:Dynamic = notification; __callArgument1730; })) : flight._internal._Promise<{ var reason:String; }>), function(__awaitValue1728:Dynamic):Dynamic {
-              outcome = __awaitValue1728;
-              var __flowBranch1729:Dynamic;
+            return flight._internal._Async.flatMap((cast closeOne(({ final __callArgument2052:Dynamic = notification; __callArgument2052; })) : flight._internal._Promise<{ var reason:String; }>), function(__awaitValue2050:Dynamic):Dynamic {
+              outcome = __awaitValue2050;
+              var __flowBranch2051:Dynamic;
               if ((cast _Runtime.strictEquals((cast outcome : { var reason:String; }).reason, 'operation-failed') : Bool)) {
-                __flowBranch1729 = flight._internal._Async.protect(function():Dynamic {
+                __flowBranch2051 = flight._internal._Async.protect(function():Dynamic {
                   _Runtime.callProperty(failures, 'push', cast ([{ id: (cast notification : Notification).id, operation: 'close' }] : Array<Dynamic>));
                   return flight._internal._Async.flowNormal();
                 });
               } else {
-                __flowBranch1729 = flight._internal._Async.flowNormal();
+                __flowBranch2051 = flight._internal._Async.flowNormal();
               }
-              return flight._internal._Async.continueFlow(__flowBranch1729, function():Dynamic {
+              return flight._internal._Async.continueFlow(__flowBranch2051, function():Dynamic {
                 return flight._internal._Async.flowNormal();
               });
             });
@@ -7088,14 +7567,14 @@ class _HostWeb {
     destroyed = false;
     destroyCompleted = false;
     nextId = 1.0;
-    capabilities = (cast createEntity((cast ({ action: (cast (cast (cast _HostWeb.makeWebServiceWorkerNotificationEventBackend__webServiceWorkerNotification : flight._internal._Set<Notification->String->Void>->(Void->Bool)->{ var attach:(Notification->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument1764:Dynamic = actionListeners; __callArgument1764; }), ({ final __callArgument1765:Dynamic = function():Bool return destroyed; __callArgument1765; })) : { var attach:(Notification->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) : Dynamic), activeList: (cast { getActiveNotifications: function():flight._internal._Promise<flight._internal._Union2<{ var reason:String; @:optional var notifications:flight._internal._Any; }, { var notifications:Array<Notification>; var reason:String; }>> {
+    capabilities = (cast createEntity((cast ({ action: (cast (cast (cast _HostWeb.makeWebServiceWorkerNotificationEventBackend__webServiceWorkerNotification : flight._internal._Set<Notification->String->Void>->(Void->Bool)->{ var attach:(Notification->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument2086:Dynamic = actionListeners; __callArgument2086; }), ({ final __callArgument2087:Dynamic = function():Bool return destroyed; __callArgument2087; })) : { var attach:(Notification->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) : Dynamic), activeList: (cast { getActiveNotifications: function():flight._internal._Promise<flight._internal._Union2<{ var reason:String; @:optional var notifications:flight._internal._Any; }, { var notifications:Array<Notification>; var reason:String; }>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var nativeNotifications:flight._internal._Any = cast _Runtime.UNDEFINED;
           var notifications:Array<Notification> = cast _Runtime.UNDEFINED;
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.flatMap((cast _Runtime.field(api, 'registration') : WebServiceWorkerNotificationRegistration).getNotifications(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end), function(__awaitValue1768:Dynamic):Dynamic {
-              (nativeNotifications = cast (__awaitValue1768 : Dynamic));
+            return flight._internal._Async.flatMap((cast _Runtime.field(api, 'registration') : WebServiceWorkerNotificationRegistration).getNotifications(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end), function(__awaitValue2090:Dynamic):Dynamic {
+              (nativeNotifications = cast (__awaitValue2090 : Dynamic));
               return flight._internal._Async.flowNormal();
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -7113,35 +7592,35 @@ class _HostWeb {
           });
         })
       );
-    } } : Dynamic), click: (cast (cast (cast _HostWeb.makeWebServiceWorkerNotificationEventBackend__webServiceWorkerNotification : flight._internal._Set<Notification->Void>->(Void->Bool)->{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument1771:Dynamic = clickListeners; __callArgument1771; }), ({ final __callArgument1772:Dynamic = function():Bool return destroyed; __callArgument1772; })) : { var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) : Dynamic), close: (cast { closeAllNotifications: closeAll } : Dynamic), delivery: (cast { notify: function(request:NotificationRequest):flight._internal._Promise<flight._internal._Union2<{ var reason:String; @:optional var notification:flight._internal._Any; }, { var notification:Notification; var reason:String; }>> {
+    } } : Dynamic), click: (cast (cast (cast _HostWeb.makeWebServiceWorkerNotificationEventBackend__webServiceWorkerNotification : flight._internal._Set<Notification->Void>->(Void->Bool)->{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument2093:Dynamic = clickListeners; __callArgument2093; }), ({ final __callArgument2094:Dynamic = function():Bool return destroyed; __callArgument2094; })) : { var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) : Dynamic), close: (cast { closeAllNotifications: closeAll } : Dynamic), delivery: (cast { notify: function(request:NotificationRequest):flight._internal._Promise<flight._internal._Union2<{ var reason:String; @:optional var notification:flight._internal._Any; }, { var notification:Notification; var reason:String; }>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var id:String = cast _Runtime.UNDEFINED;
           var tag:String = cast _Runtime.UNDEFINED;
           var notification:Null<Notification> = cast _Runtime.UNDEFINED;
-          var __flowBranch1775:Dynamic;
+          var __flowBranch2097:Dynamic;
           if ((cast destroyed : Bool)) {
-            __flowBranch1775 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch2097 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn({ reason: 'operation-failed' });
             });
           } else {
-            __flowBranch1775 = flight._internal._Async.flowNormal();
+            __flowBranch2097 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch1775, function():Dynamic {
-            var __flowBranch1776:Dynamic;
+          return flight._internal._Async.continueFlow(__flowBranch2097, function():Dynamic {
+            var __flowBranch2098:Dynamic;
             if ((cast !_Runtime.strictEquals((cast _Runtime.field(api, 'permission') : { var getPermission:Void->NotificationPermission; var requestPermission:Void->flight._internal._Promise<NotificationPermission>; }).getPermission(), 'granted') : Bool)) {
-              __flowBranch1776 = flight._internal._Async.protect(function():Dynamic {
+              __flowBranch2098 = flight._internal._Async.protect(function():Dynamic {
                 return flight._internal._Async.flowReturn({ reason: 'permission-denied' });
               });
             } else {
-              __flowBranch1776 = flight._internal._Async.flowNormal();
+              __flowBranch2098 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch1776, function():Dynamic {
+            return flight._internal._Async.continueFlow(__flowBranch2098, function():Dynamic {
               id = _Runtime.coalesce(request.id, function():Dynamic return cast 'service-worker-notification-' + Std.string(nextId++) + '');
               tag = _Runtime.coalesce(request.tag, function():Dynamic return cast 'flight-service-worker-notification-' + Std.string(nextId++) + '');
               return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-                return flight._internal._Async.flatMap((cast _Runtime.field(api, 'registration') : WebServiceWorkerNotificationRegistration).showNotification((cast request.title : String), ({ final __callArgument1780:Dynamic = (cast _HostWeb.toServiceWorkerNotificationOptions__webServiceWorkerNotification(({ final __callArgument1778:Dynamic = request; __callArgument1778; }), (cast tag : String)) : WebNotificationOptions); __callArgument1780; })), function(__awaitValue1777:Dynamic):Dynamic {
-                  __awaitValue1777;
+                return flight._internal._Async.flatMap((cast _Runtime.field(api, 'registration') : WebServiceWorkerNotificationRegistration).showNotification((cast request.title : String), ({ final __callArgument2102:Dynamic = (cast _HostWeb.toServiceWorkerNotificationOptions__webServiceWorkerNotification(({ final __callArgument2100:Dynamic = request; __callArgument2100; }), (cast tag : String)) : WebNotificationOptions); __callArgument2102; })), function(__awaitValue2099:Dynamic):Dynamic {
+                  __awaitValue2099;
                   return flight._internal._Async.flowNormal();
                 });
               }), function(__caughtError:Dynamic):Dynamic {
@@ -7151,18 +7630,18 @@ class _HostWeb {
                 });
               }), function():Dynamic {
                 notification = ((cast notificationByTag : flight._internal._Map<String, Notification>).get((cast tag)));
-                var __flowBranch1781:Dynamic;
+                var __flowBranch2103:Dynamic;
                 if ((cast _Runtime.strictEquals(notification, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-                  __flowBranch1781 = flight._internal._Async.protect(function():Dynamic {
+                  __flowBranch2103 = flight._internal._Async.protect(function():Dynamic {
                     (notification = cast ((cast createNotificationResource((cast id : String), (cast request.title : String), (cast tag : String)) : Notification) : Dynamic));
                     ((cast notificationByTag : flight._internal._Map<String, Notification>).set((cast tag), (cast notification)));
-                    bindNotificationClose(({ final __callArgument1782:Dynamic = notification; __callArgument1782; }), (cast function():flight._internal._Promise<NotificationCloseOutcome> return (cast closeOne(({ final __callArgument1783:Dynamic = notification; __callArgument1783; })) : flight._internal._Promise<{ var reason:String; }>) : Dynamic));
+                    bindNotificationClose(({ final __callArgument2104:Dynamic = notification; __callArgument2104; }), (cast function():flight._internal._Promise<NotificationCloseOutcome> return (cast closeOne(({ final __callArgument2105:Dynamic = notification; __callArgument2105; })) : flight._internal._Promise<{ var reason:String; }>) : Dynamic));
                     return flight._internal._Async.flowNormal();
                   });
                 } else {
-                  __flowBranch1781 = flight._internal._Async.flowNormal();
+                  __flowBranch2103 = flight._internal._Async.flowNormal();
                 }
-                return flight._internal._Async.continueFlow(__flowBranch1781, function():Dynamic {
+                return flight._internal._Async.continueFlow(__flowBranch2103, function():Dynamic {
                   return flight._internal._Async.flowReturn({ notification: notification, reason: 'accepted' });
                 });
               });
@@ -7170,35 +7649,35 @@ class _HostWeb {
           });
         })
       );
-    } } : Dynamic), dismiss: (cast (cast (cast _HostWeb.makeWebServiceWorkerNotificationEventBackend__webServiceWorkerNotification : flight._internal._Set<Notification->Void>->(Void->Bool)->{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument1788:Dynamic = dismissListeners; __callArgument1788; }), ({ final __callArgument1789:Dynamic = function():Bool return destroyed; __callArgument1789; })) : { var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) : Dynamic), lifecycle: (cast { destroy: function():flight._internal._Promise<NotificationLifecycleOutcome> {
+    } } : Dynamic), dismiss: (cast (cast (cast _HostWeb.makeWebServiceWorkerNotificationEventBackend__webServiceWorkerNotification : flight._internal._Set<Notification->Void>->(Void->Bool)->{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument2110:Dynamic = dismissListeners; __callArgument2110; }), ({ final __callArgument2111:Dynamic = function():Bool return destroyed; __callArgument2111; })) : { var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) : Dynamic), lifecycle: (cast { destroy: function():flight._internal._Promise<NotificationLifecycleOutcome> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var outcome:NotificationLifecycleOutcome = cast _Runtime.UNDEFINED;
-          var __flowBranch1792:Dynamic;
+          var __flowBranch2114:Dynamic;
           if ((cast destroyCompleted : Bool)) {
-            __flowBranch1792 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch2114 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn({ reason: 'already-destroyed' });
             });
           } else {
-            __flowBranch1792 = flight._internal._Async.flowNormal();
+            __flowBranch2114 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch1792, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch2114, function():Dynamic {
             (destroyed = cast (true : Dynamic));
             ((cast actionListeners : flight._internal._Set<Notification->String->Void>).clear());
             ((cast clickListeners : flight._internal._Set<Notification->Void>).clear());
             ((cast dismissListeners : flight._internal._Set<Notification->Void>).clear());
-            return flight._internal._Async.flatMap((cast closeAll() : flight._internal._Promise<NotificationLifecycleOutcome>), function(__awaitValue1793:Dynamic):Dynamic {
-              outcome = __awaitValue1793;
-              var __flowBranch1794:Dynamic;
+            return flight._internal._Async.flatMap((cast closeAll() : flight._internal._Promise<NotificationLifecycleOutcome>), function(__awaitValue2115:Dynamic):Dynamic {
+              outcome = __awaitValue2115;
+              var __flowBranch2116:Dynamic;
               if ((cast _Runtime.strictEquals((cast outcome : { var reason:String; }).reason, 'ok') : Bool)) {
-                __flowBranch1794 = flight._internal._Async.protect(function():Dynamic {
+                __flowBranch2116 = flight._internal._Async.protect(function():Dynamic {
                   (destroyCompleted = cast (true : Dynamic));
                   return flight._internal._Async.flowNormal();
                 });
               } else {
-                __flowBranch1794 = flight._internal._Async.flowNormal();
+                __flowBranch2116 = flight._internal._Async.flowNormal();
               }
-              return flight._internal._Async.continueFlow(__flowBranch1794, function():Dynamic {
+              return flight._internal._Async.continueFlow(__flowBranch2116, function():Dynamic {
                 return flight._internal._Async.flowReturn(outcome);
               });
             });
@@ -7219,8 +7698,8 @@ class _HostWeb {
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
             var permission:NotificationPermission = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap((cast _Runtime.field(api, 'permission') : { var getPermission:Void->NotificationPermission; var requestPermission:Void->flight._internal._Promise<NotificationPermission>; }).requestPermission(), function(__awaitValue1795:Dynamic):Dynamic {
-              permission = __awaitValue1795;
+            return flight._internal._Async.flatMap((cast _Runtime.field(api, 'permission') : { var getPermission:Void->NotificationPermission; var requestPermission:Void->flight._internal._Promise<NotificationPermission>; }).requestPermission(), function(__awaitValue2117:Dynamic):Dynamic {
+              permission = __awaitValue2117;
               return flight._internal._Async.flowReturn({ reason: ((cast _Runtime.strictEquals(permission, 'default') : Bool) ? (cast 'dismissed' : Dynamic) : (cast permission : Dynamic)) });
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -7236,15 +7715,15 @@ class _HostWeb {
     } } : Dynamic) } : WebServiceWorkerNotificationCapabilities) : Dynamic)) : WebServiceWorkerNotificationCapabilities);
     ((cast _HostWeb._webServiceWorkerNotificationDispatch__webServiceWorkerNotification : flight._internal._WeakMap<WebServiceWorkerNotificationCapabilities, WebServiceWorkerNotificationDispatch__webServiceWorkerNotification>).set((cast capabilities), (cast { action: function(notification:Notification, actionId:String):Void {
       for (listener in _Runtime.iterable(actionListeners)) {
-        listener(({ final __callArgument1862:Dynamic = notification; __callArgument1862; }), (cast actionId : String));
+        listener(({ final __callArgument2184:Dynamic = notification; __callArgument2184; }), (cast actionId : String));
       }
     }, click: function(notification:Notification):Void {
       for (listener in _Runtime.iterable(clickListeners)) {
-        listener(({ final __callArgument1866:Dynamic = notification; __callArgument1866; }));
+        listener(({ final __callArgument2188:Dynamic = notification; __callArgument2188; }));
       }
     }, dismiss: function(notification:Notification):Void {
       for (listener in _Runtime.iterable(dismissListeners)) {
-        listener(({ final __callArgument1870:Dynamic = notification; __callArgument1870; }));
+        listener(({ final __callArgument2192:Dynamic = notification; __callArgument2192; }));
       }
     } })));
     ((cast _HostWeb._webServiceWorkerNotificationByTag__webServiceWorkerNotification : flight._internal._WeakMap<WebServiceWorkerNotificationCapabilities, flight._internal._Map<String, Notification>>).set((cast capabilities), (cast notificationByTag)));
@@ -7255,16 +7734,16 @@ class _HostWeb {
   public static function notifyWebServiceWorkerNotificationEvent(capabilities:WebServiceWorkerNotificationCapabilities, event:WebServiceWorkerNotificationEvent):Void {
     var notification:Null<Notification> = cast _Runtime.UNDEFINED;
     var dispatch:Null<WebServiceWorkerNotificationDispatch__webServiceWorkerNotification> = cast _Runtime.UNDEFINED;
-    notification = ({ final __collection1872:Dynamic = ((cast _HostWeb._webServiceWorkerNotificationByTag__webServiceWorkerNotification : flight._internal._WeakMap<WebServiceWorkerNotificationCapabilities, flight._internal._Map<String, Notification>>).get((cast capabilities))); __collection1872 == null ? _Runtime.UNDEFINED : ((cast __collection1872 : flight._internal._Map<String, Notification>).get((cast _Runtime.field(event, 'notificationTag')))); });
+    notification = ({ final __collection2194:Dynamic = ((cast _HostWeb._webServiceWorkerNotificationByTag__webServiceWorkerNotification : flight._internal._WeakMap<WebServiceWorkerNotificationCapabilities, flight._internal._Map<String, Notification>>).get((cast capabilities))); __collection2194 == null ? _Runtime.UNDEFINED : ((cast __collection2194 : flight._internal._Map<String, Notification>).get((cast _Runtime.field(event, 'notificationTag')))); });
     dispatch = ((cast _HostWeb._webServiceWorkerNotificationDispatch__webServiceWorkerNotification : flight._internal._WeakMap<WebServiceWorkerNotificationCapabilities, WebServiceWorkerNotificationDispatch__webServiceWorkerNotification>).get((cast capabilities)));
     if ((cast ((cast _Runtime.strictEquals(notification, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(dispatch, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return; }
     if ((cast _Runtime.strictEquals(_Runtime.field(event, 'type'), 'notificationclose') : Bool)) {
-      (cast dispatch : WebServiceWorkerNotificationDispatch__webServiceWorkerNotification).dismiss(({ final __callArgument1873:Dynamic = notification; __callArgument1873; }));
+      (cast dispatch : WebServiceWorkerNotificationDispatch__webServiceWorkerNotification).dismiss(({ final __callArgument2195:Dynamic = notification; __callArgument2195; }));
     } else { if ((cast ((cast _Runtime.strictEquals(_Runtime.field(event, 'actionId'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(event, 'actionId'), '') : Bool)) : Bool)) {
-      (cast dispatch : WebServiceWorkerNotificationDispatch__webServiceWorkerNotification).click(({ final __callArgument1874:Dynamic = notification; __callArgument1874; }));
+      (cast dispatch : WebServiceWorkerNotificationDispatch__webServiceWorkerNotification).click(({ final __callArgument2196:Dynamic = notification; __callArgument2196; }));
     } else {
-      (cast dispatch : WebServiceWorkerNotificationDispatch__webServiceWorkerNotification).action(({ final __callArgument1875:Dynamic = notification; __callArgument1875; }), (cast _Runtime.field(event, 'actionId') : String));
-      (cast dispatch : WebServiceWorkerNotificationDispatch__webServiceWorkerNotification).click(({ final __callArgument1876:Dynamic = notification; __callArgument1876; }));
+      (cast dispatch : WebServiceWorkerNotificationDispatch__webServiceWorkerNotification).action(({ final __callArgument2197:Dynamic = notification; __callArgument2197; }), (cast _Runtime.field(event, 'actionId') : String));
+      (cast dispatch : WebServiceWorkerNotificationDispatch__webServiceWorkerNotification).click(({ final __callArgument2198:Dynamic = notification; __callArgument2198; }));
     } }
   }
 
@@ -7290,31 +7769,31 @@ class _HostWeb {
   }
 
   public static function toServiceWorkerNotificationOptions__webServiceWorkerNotification(request:NotificationRequest, tag:String):WebNotificationOptions {
-    return cast { actions: ({ final __collection1877:Dynamic = request.actions; __collection1877 == null ? _Runtime.UNDEFINED : (cast _Runtime.mapArray((cast __collection1877 : Array<NotificationAction>), function(action:NotificationAction, __unused0:Float, __unused1:Array<NotificationAction>):{ var action:String; var icon:Null<String>; var title:String; } return { action: action.id, icon: action.icon, title: action.title }, _Runtime.UNDEFINED)); }), badge: request.badge, body: request.body, data: request.data, dir: request.dir, icon: request.icon, image: request.image, lang: request.lang, renotify: request.renotify, requireInteraction: request.requireInteraction, silent: request.silent, tag: tag, timestamp: request.timestamp, vibrate: request.vibrate };
+    return cast { actions: ({ final __collection2199:Dynamic = request.actions; __collection2199 == null ? _Runtime.UNDEFINED : (cast _Runtime.mapArray((cast __collection2199 : Array<NotificationAction>), function(action:NotificationAction, __unused0:Float, __unused1:Array<NotificationAction>):{ var action:String; var icon:Null<String>; var title:String; } return { action: action.id, icon: action.icon, title: action.title }, _Runtime.UNDEFINED)); }), badge: request.badge, body: request.body, data: request.data, dir: request.dir, icon: request.icon, image: request.image, lang: request.lang, renotify: request.renotify, requireInteraction: request.requireInteraction, silent: request.silent, tag: tag, timestamp: request.timestamp, vibrate: request.vibrate };
     return cast null;
   }
 
   public static final webShareContentBackend:ShareContentBackend = (cast createEntity((cast ({ canShareContent: (cast function(content:ShareContent):Bool {
-    return cast ((cast (cast _HostWeb.hasShareableContent__webShare(({ final __callArgument1896:Dynamic = content; __callArgument1896; })) : Bool) : Bool) && (cast (cast _HostWeb.canNavigatorShare__webShare((cast _HostWeb.contentToNavigatorData__webShare(({ final __callArgument1898:Dynamic = content; __callArgument1898; })) : flight._internal.dom.ShareData)) : Bool) : Bool));
+    return cast ((cast (cast _HostWeb.hasShareableContent__webShare(({ final __callArgument2218:Dynamic = content; __callArgument2218; })) : Bool) : Bool) && (cast (cast _HostWeb.canNavigatorShare__webShare((cast _HostWeb.contentToNavigatorData__webShare(({ final __callArgument2220:Dynamic = content; __callArgument2220; })) : flight._internal.dom.ShareData)) : Bool) : Bool));
     return cast _Runtime.UNDEFINED;
   } : Dynamic), shareContent: (cast function(content:ShareContent):flight._internal._Promise<Bool> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      if ((cast !(cast (cast _HostWeb.hasShareableContent__webShare(({ final __callArgument1902:Dynamic = content; __callArgument1902; })) : Bool) : Bool) : Bool)) { return cast false; }
-      return cast (cast _HostWeb.invokeNavigatorShare__webShare((cast _HostWeb.contentToNavigatorData__webShare(({ final __callArgument1904:Dynamic = content; __callArgument1904; })) : flight._internal.dom.ShareData)) : flight._internal._Promise<Bool>);
+      if ((cast !(cast (cast _HostWeb.hasShareableContent__webShare(({ final __callArgument2224:Dynamic = content; __callArgument2224; })) : Bool) : Bool) : Bool)) { return cast false; }
+      return cast (cast _HostWeb.invokeNavigatorShare__webShare((cast _HostWeb.contentToNavigatorData__webShare(({ final __callArgument2226:Dynamic = content; __callArgument2226; })) : flight._internal.dom.ShareData)) : flight._internal._Promise<Bool>);
       return cast null;
     }));
   } : Dynamic), shareContentWithResult: (cast function(content:ShareContent):flight._internal._Promise<ShareResult> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      if ((cast !(cast (cast _HostWeb.hasShareableContent__webShare(({ final __callArgument1908:Dynamic = content; __callArgument1908; })) : Bool) : Bool) : Bool)) { return cast (cast _HostWeb.failedResult__webShare((cast false : Bool)) : ShareResult); }
-      return cast (cast _HostWeb.invokeNavigatorShareWithResult__webShare((cast _HostWeb.contentToNavigatorData__webShare(({ final __callArgument1910:Dynamic = content; __callArgument1910; })) : flight._internal.dom.ShareData)) : flight._internal._Promise<ShareResult>);
+      if ((cast !(cast (cast _HostWeb.hasShareableContent__webShare(({ final __callArgument2230:Dynamic = content; __callArgument2230; })) : Bool) : Bool) : Bool)) { return cast (cast _HostWeb.failedResult__webShare((cast false : Bool)) : ShareResult); }
+      return cast (cast _HostWeb.invokeNavigatorShareWithResult__webShare((cast _HostWeb.contentToNavigatorData__webShare(({ final __callArgument2232:Dynamic = content; __callArgument2232; })) : flight._internal.dom.ShareData)) : flight._internal._Promise<ShareResult>);
       return cast null;
     }));
   } : Dynamic) } : ShareContentBackend) : Dynamic)) : ShareContentBackend);
 
-  public static final webShareFilesBackend:ShareFilesBackend = (cast createEntity(({ final __callArgument1982:Dynamic = ({ canShareContent: (cast function(content:ShareFilesContent):Bool {
+  public static final webShareFilesBackend:ShareFilesBackend = (cast createEntity(({ final __callArgument2304:Dynamic = ({ canShareContent: (cast function(content:ShareFilesContent):Bool {
     if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(content, 'files'), 'length'), 0.0) : Bool)) { return cast false; }
     try {
-      return cast (cast _HostWeb.canNavigatorShare__webShare((cast _HostWeb.filesToNavigatorData__webShare(({ final __callArgument1966:Dynamic = content; __callArgument1966; })) : flight._internal.dom.ShareData)) : Bool);
+      return cast (cast _HostWeb.canNavigatorShare__webShare((cast _HostWeb.filesToNavigatorData__webShare(({ final __callArgument2288:Dynamic = content; __callArgument2288; })) : flight._internal.dom.ShareData)) : Bool);
     } catch (__error:Dynamic) {
       return cast false;
     }
@@ -7322,18 +7801,18 @@ class _HostWeb {
   } : Dynamic), shareContent: (cast function(content:ShareFilesContent):flight._internal._Promise<Bool> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
-        var __flowBranch1970:Dynamic;
+        var __flowBranch2292:Dynamic;
         if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(content, 'files'), 'length'), 0.0) : Bool)) {
-          __flowBranch1970 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch2292 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn(false);
           });
         } else {
-          __flowBranch1970 = flight._internal._Async.flowNormal();
+          __flowBranch2292 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch1970, function():Dynamic {
+        return flight._internal._Async.continueFlow(__flowBranch2292, function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.flatMap((cast _HostWeb.invokeNavigatorShare__webShare((cast _HostWeb.filesToNavigatorData__webShare(({ final __callArgument1972:Dynamic = content; __callArgument1972; })) : flight._internal.dom.ShareData)) : flight._internal._Promise<Bool>), function(__awaitValue1971:Dynamic):Dynamic {
-              return flight._internal._Async.flowReturn(__awaitValue1971);
+            return flight._internal._Async.flatMap((cast _HostWeb.invokeNavigatorShare__webShare((cast _HostWeb.filesToNavigatorData__webShare(({ final __callArgument2294:Dynamic = content; __callArgument2294; })) : flight._internal.dom.ShareData)) : flight._internal._Promise<Bool>), function(__awaitValue2293:Dynamic):Dynamic {
+              return flight._internal._Async.flowReturn(__awaitValue2293);
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;
@@ -7349,18 +7828,18 @@ class _HostWeb {
   } : Dynamic), shareContentWithResult: (cast function(content:ShareFilesContent):flight._internal._Promise<ShareResult> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
-        var __flowBranch1976:Dynamic;
+        var __flowBranch2298:Dynamic;
         if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(content, 'files'), 'length'), 0.0) : Bool)) {
-          __flowBranch1976 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch2298 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn((cast _HostWeb.failedResult__webShare((cast false : Bool)) : ShareResult));
           });
         } else {
-          __flowBranch1976 = flight._internal._Async.flowNormal();
+          __flowBranch2298 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch1976, function():Dynamic {
+        return flight._internal._Async.continueFlow(__flowBranch2298, function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.flatMap((cast _HostWeb.invokeNavigatorShareWithResult__webShare((cast _HostWeb.filesToNavigatorData__webShare(({ final __callArgument1978:Dynamic = content; __callArgument1978; })) : flight._internal.dom.ShareData)) : flight._internal._Promise<ShareResult>), function(__awaitValue1977:Dynamic):Dynamic {
-              return flight._internal._Async.flowReturn(__awaitValue1977);
+            return flight._internal._Async.flatMap((cast _HostWeb.invokeNavigatorShareWithResult__webShare((cast _HostWeb.filesToNavigatorData__webShare(({ final __callArgument2300:Dynamic = content; __callArgument2300; })) : flight._internal.dom.ShareData)) : flight._internal._Promise<ShareResult>), function(__awaitValue2299:Dynamic):Dynamic {
+              return flight._internal._Async.flowReturn(__awaitValue2299);
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;
@@ -7373,11 +7852,11 @@ class _HostWeb {
         });
       })
     );
-  } : Dynamic) } : ShareFilesBackend); __callArgument1982; })) : ShareFilesBackend);
+  } : Dynamic) } : ShareFilesBackend); __callArgument2304; })) : ShareFilesBackend);
 
   public static final webShareHost:flight._internal._Intersection2<flight._internal._Intersection2<Host, HasShareContent>, HasShareFiles> = (cast createHost((cast { share: { content: webShareContentBackend, files: webShareFilesBackend } } : Dynamic)) : flight._internal._Intersection2<Host, { var share:{ var content:ShareContentBackend; var files:ShareFilesBackend; }; }>);
 
-  public static final webShellExternalBackend:ShellExternalBackend = (cast createEntity(({ final __callArgument2016:Dynamic = ({ open: (cast function(url:String):flight._internal._Promise<ShellExternalOutcome> {
+  public static final webShellExternalBackend:ShellExternalBackend = (cast createEntity(({ final __callArgument2338:Dynamic = ({ open: (cast function(url:String):flight._internal._Promise<ShellExternalOutcome> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
       if ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'open')), 'function') : Bool)) : Bool)) {
         return cast { reason: 'operation-failed' };
@@ -7389,12 +7868,12 @@ class _HostWeb {
       }
       return cast null;
     }));
-  } : Dynamic) } : ShellExternalBackend); __callArgument2016; })) : ShellExternalBackend);
+  } : Dynamic) } : ShellExternalBackend); __callArgument2338; })) : ShellExternalBackend);
 
   public static function canNavigatorShare__webShare(data:flight._internal.dom.ShareData):Bool {
     if ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'share')), 'function') : Bool)) : Bool)) { return cast false; }
     try {
-      return cast _Runtime.coalesce(({ final __hostTypeCall2018 = flight._internal.backend.DomNavigatorBackend.value(); (cast __hostTypeCall2018 : flight._internal.dom.Navigator).canShare == null ? _Runtime.UNDEFINED : (cast __hostTypeCall2018 : flight._internal.dom.Navigator).canShare(data); }), function():Dynamic return cast true);
+      return cast _Runtime.coalesce(({ final __hostTypeCall2340 = flight._internal.backend.DomNavigatorBackend.value(); (cast __hostTypeCall2340 : flight._internal.dom.Navigator).canShare == null ? _Runtime.UNDEFINED : (cast __hostTypeCall2340 : flight._internal.dom.Navigator).canShare(data); }), function():Dynamic return cast true);
     } catch (__error:Dynamic) {
       return cast false;
     }
@@ -7417,7 +7896,7 @@ class _HostWeb {
   }
 
   public static function filesToNavigatorData__webShare(content:ShareFilesContent):flight._internal.dom.ShareData {
-    return cast _Runtime.mergeObjects([(cast _HostWeb.contentToNavigatorData__webShare(({ final __callArgument2019:Dynamic = content; __callArgument2019; })) : flight._internal.dom.ShareData), { files: _Runtime.callProperty(_Runtime.field(content, 'files'), 'map', cast ([_HostWeb.shareFileToDomFile__webShare] : Array<Dynamic>)) }]);
+    return cast _Runtime.mergeObjects([(cast _HostWeb.contentToNavigatorData__webShare(({ final __callArgument2341:Dynamic = content; __callArgument2341; })) : flight._internal.dom.ShareData), { files: _Runtime.callProperty(_Runtime.field(content, 'files'), 'map', cast ([_HostWeb.shareFileToDomFile__webShare] : Array<Dynamic>)) }]);
     return cast null;
   }
 
@@ -7429,18 +7908,18 @@ class _HostWeb {
   public static function invokeNavigatorShare__webShare(data:flight._internal.dom.ShareData):flight._internal._Promise<Bool> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
-        var __flowBranch2021:Dynamic;
+        var __flowBranch2343:Dynamic;
         if ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'share')), 'function') : Bool)) : Bool)) {
-          __flowBranch2021 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch2343 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn(false);
           });
         } else {
-          __flowBranch2021 = flight._internal._Async.flowNormal();
+          __flowBranch2343 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch2021, function():Dynamic {
+        return flight._internal._Async.continueFlow(__flowBranch2343, function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.flatMap(flight._internal.backend.DomNavigatorBackend.call(flight._internal.backend.DomNavigatorBackend.value(), 'share', cast ([data] : Array<Dynamic>)), function(__awaitValue2022:Dynamic):Dynamic {
-              __awaitValue2022;
+            return flight._internal._Async.flatMap(flight._internal.backend.DomNavigatorBackend.call(flight._internal.backend.DomNavigatorBackend.value(), 'share', cast ([data] : Array<Dynamic>)), function(__awaitValue2344:Dynamic):Dynamic {
+              __awaitValue2344;
               return flight._internal._Async.flowReturn(true);
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -7459,18 +7938,18 @@ class _HostWeb {
   public static function invokeNavigatorShareWithResult__webShare(data:flight._internal.dom.ShareData):flight._internal._Promise<ShareResult> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
-        var __flowBranch2023:Dynamic;
+        var __flowBranch2345:Dynamic;
         if ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'share')), 'function') : Bool)) : Bool)) {
-          __flowBranch2023 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch2345 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn((cast _HostWeb.failedResult__webShare((cast false : Bool)) : ShareResult));
           });
         } else {
-          __flowBranch2023 = flight._internal._Async.flowNormal();
+          __flowBranch2345 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch2023, function():Dynamic {
+        return flight._internal._Async.continueFlow(__flowBranch2345, function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.flatMap(flight._internal.backend.DomNavigatorBackend.call(flight._internal.backend.DomNavigatorBackend.value(), 'share', cast ([data] : Array<Dynamic>)), function(__awaitValue2024:Dynamic):Dynamic {
-              __awaitValue2024;
+            return flight._internal._Async.flatMap(flight._internal.backend.DomNavigatorBackend.call(flight._internal.backend.DomNavigatorBackend.value(), 'share', cast ([data] : Array<Dynamic>)), function(__awaitValue2346:Dynamic):Dynamic {
+              __awaitValue2346;
               return flight._internal._Async.flowReturn({ activityType: null, completed: true, dismissed: false });
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -7619,7 +8098,7 @@ class _HostWeb {
     }
     handler = (cast function(event:flight._internal.dom.StorageEvent):Void {
       if ((cast ((cast !_Runtime.strictEquals(event.storageArea, null) : Bool) && (cast !_Runtime.strictEquals(event.storageArea, storage) : Bool)) : Bool)) { return; }
-      listener(({ final __callArgument2031:Dynamic = { key: event.key, newValue: event.newValue, oldValue: event.oldValue }; __callArgument2031; }));
+      listener(({ final __callArgument2353:Dynamic = { key: event.key, newValue: event.newValue, oldValue: event.oldValue }; __callArgument2353; }));
     });
     try {
       flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['storage', handler] : Array<Dynamic>));
@@ -7638,11 +8117,11 @@ class _HostWeb {
     return cast _Runtime.UNDEFINED;
   } : Dynamic) } : EntityShapeL20C47__webStorage) : Dynamic)) : EntityShapeL20C47__webStorage);
 
-  public static final webStoragePersistenceCapabilities__webStorageHost:WebWindowStoragePersistenceCapabilities = (cast createWebWindowStoragePersistenceCapabilities(({ final __callArgument2042:Dynamic = { getPermissionState: function():flight._internal._Promise<PermissionState> {
+  public static final webStoragePersistenceCapabilities__webStorageHost:WebWindowStoragePersistenceCapabilities = (cast createWebWindowStoragePersistenceCapabilities(({ final __callArgument2364:Dynamic = { getPermissionState: function():flight._internal._Promise<PermissionState> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
       var status:flight._internal.dom.PermissionStatus = cast _Runtime.UNDEFINED;
-      return flight._internal._Async.flatMap((cast flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'permissions') : flight._internal.dom.Permissions).query({ name: (cast 'persistent-storage' : flight._internal.dom.PermissionName) }), function(__awaitValue2041:Dynamic):Dynamic {
-        status = __awaitValue2041;
+      return flight._internal._Async.flatMap((cast flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'permissions') : flight._internal.dom.Permissions).query({ name: (cast 'persistent-storage' : flight._internal.dom.PermissionName) }), function(__awaitValue2363:Dynamic):Dynamic {
+        status = __awaitValue2363;
         return flight._internal._Async.resolve((cast status : flight._internal.dom.PermissionStatus).state);
       });
     }));
@@ -7654,7 +8133,7 @@ class _HostWeb {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
       return flight._internal._Async.resolve((cast flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'storage') : flight._internal.dom.StorageManager).persisted());
     }));
-  } }; __callArgument2042; })) : WebWindowStoragePersistenceCapabilities);
+  } }; __callArgument2364; })) : WebWindowStoragePersistenceCapabilities);
 
   public static function classifyWebStorageClearFailure__webStorage(error:flight._internal._Any):StorageClearFailureReason {
     var name:Null<String> = cast _Runtime.UNDEFINED;
@@ -7707,46 +8186,46 @@ class _HostWeb {
   public static function createWebWindowStoragePersistenceCapabilities(api:WebWindowStoragePersistenceApi):WebWindowStoragePersistenceCapabilities {
     var persistenceRequest:{ >Entity, var requestPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; } = cast _Runtime.UNDEFINED;
     var capabilities:WebWindowStoragePersistenceCapabilities = cast _Runtime.UNDEFINED;
-    persistenceRequest = (cast createEntity(({ final __callArgument2057:Dynamic = ({ requestPersistence: (cast function():flight._internal._Promise<StoragePersistenceResult> {
+    persistenceRequest = (cast createEntity(({ final __callArgument2379:Dynamic = ({ requestPersistence: (cast function():flight._internal._Promise<StoragePersistenceResult> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var outcome:String = cast _Runtime.UNDEFINED;
         var permissionState:Null<String> = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast _HostWeb.observePersistenceOutcome__webStoragePersistence(({ final __callArgument2055:Dynamic = function():flight._internal._Promise<Bool> return _Runtime.callProperty(api, 'persist', cast ([] : Array<Dynamic>)); __callArgument2055; })) : flight._internal._Promise<String>), function(__awaitValue2051:Dynamic):Dynamic {
-          outcome = __awaitValue2051;
-          return flight._internal._Async.flatMap((cast _HostWeb.observePermissionState__webStoragePersistence(({ final __callArgument2053:Dynamic = function():flight._internal._Promise<PermissionState> return _Runtime.callProperty(api, 'getPermissionState', cast ([] : Array<Dynamic>)); __callArgument2053; })) : flight._internal._Promise<Null<String>>), function(__awaitValue2052:Dynamic):Dynamic {
-            permissionState = __awaitValue2052;
+        return flight._internal._Async.flatMap((cast _HostWeb.observePersistenceOutcome__webStoragePersistence(({ final __callArgument2377:Dynamic = function():flight._internal._Promise<Bool> return _Runtime.callProperty(api, 'persist', cast ([] : Array<Dynamic>)); __callArgument2377; })) : flight._internal._Promise<String>), function(__awaitValue2373:Dynamic):Dynamic {
+          outcome = __awaitValue2373;
+          return flight._internal._Async.flatMap((cast _HostWeb.observePermissionState__webStoragePersistence(({ final __callArgument2375:Dynamic = function():flight._internal._Promise<PermissionState> return _Runtime.callProperty(api, 'getPermissionState', cast ([] : Array<Dynamic>)); __callArgument2375; })) : flight._internal._Promise<Null<String>>), function(__awaitValue2374:Dynamic):Dynamic {
+            permissionState = __awaitValue2374;
             return flight._internal._Async.resolve({ outcome: outcome, permissionState: permissionState });
           });
         });
       }));
-    } : Dynamic) } : EntityShapeL14C43__webStoragePersistence); __callArgument2057; })) : EntityShapeL14C43__webStoragePersistence);
-    capabilities = (cast createEntity((cast ({ persistenceQuery: (cast (cast _HostWeb.createPersistenceQueryBackend__webStoragePersistence(({ final __callArgument2073:Dynamic = api; __callArgument2073; })) : { >Entity, var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; }) : Dynamic), persistenceRequest: (cast persistenceRequest : Dynamic) } : WebWindowStoragePersistenceCapabilities) : Dynamic)) : WebWindowStoragePersistenceCapabilities);
+    } : Dynamic) } : EntityShapeL14C43__webStoragePersistence); __callArgument2379; })) : EntityShapeL14C43__webStoragePersistence);
+    capabilities = (cast createEntity((cast ({ persistenceQuery: (cast (cast _HostWeb.createPersistenceQueryBackend__webStoragePersistence(({ final __callArgument2395:Dynamic = api; __callArgument2395; })) : { >Entity, var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; }) : Dynamic), persistenceRequest: (cast persistenceRequest : Dynamic) } : WebWindowStoragePersistenceCapabilities) : Dynamic)) : WebWindowStoragePersistenceCapabilities);
     return cast capabilities;
     return cast null;
   }
 
   public static function createWebWorkerStoragePersistenceCapabilities(api:WebWorkerStoragePersistenceApi):WebWorkerStoragePersistenceCapabilities {
     var capabilities:WebWorkerStoragePersistenceCapabilities = cast _Runtime.UNDEFINED;
-    capabilities = (cast createEntity((cast ({ persistenceQuery: (cast (cast _HostWeb.createPersistenceQueryBackend__webStoragePersistence(({ final __callArgument2081:Dynamic = api; __callArgument2081; })) : { >Entity, var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; }) : Dynamic) } : WebWorkerStoragePersistenceCapabilities) : Dynamic)) : WebWorkerStoragePersistenceCapabilities);
+    capabilities = (cast createEntity((cast ({ persistenceQuery: (cast (cast _HostWeb.createPersistenceQueryBackend__webStoragePersistence(({ final __callArgument2403:Dynamic = api; __callArgument2403; })) : { >Entity, var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; }) : Dynamic) } : WebWorkerStoragePersistenceCapabilities) : Dynamic)) : WebWorkerStoragePersistenceCapabilities);
     return cast capabilities;
     return cast null;
   }
 
   public static function createPersistenceQueryBackend__webStoragePersistence(api:WebWorkerStoragePersistenceApi):{ >Entity, var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; } {
     var backend:{ >Entity, var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; } = cast _Runtime.UNDEFINED;
-    backend = (cast createEntity(({ final __callArgument2099:Dynamic = ({ getPersistence: (cast function():flight._internal._Promise<StoragePersistenceResult> {
+    backend = (cast createEntity(({ final __callArgument2421:Dynamic = ({ getPersistence: (cast function():flight._internal._Promise<StoragePersistenceResult> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var outcome:String = cast _Runtime.UNDEFINED;
         var permissionState:Null<String> = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast _HostWeb.observePersistenceOutcome__webStoragePersistence(({ final __callArgument2097:Dynamic = function():flight._internal._Promise<Bool> return _Runtime.callProperty(api, 'persisted', cast ([] : Array<Dynamic>)); __callArgument2097; })) : flight._internal._Promise<String>), function(__awaitValue2093:Dynamic):Dynamic {
-          outcome = __awaitValue2093;
-          return flight._internal._Async.flatMap((cast _HostWeb.observePermissionState__webStoragePersistence(({ final __callArgument2095:Dynamic = function():flight._internal._Promise<PermissionState> return _Runtime.callProperty(api, 'getPermissionState', cast ([] : Array<Dynamic>)); __callArgument2095; })) : flight._internal._Promise<Null<String>>), function(__awaitValue2094:Dynamic):Dynamic {
-            permissionState = __awaitValue2094;
+        return flight._internal._Async.flatMap((cast _HostWeb.observePersistenceOutcome__webStoragePersistence(({ final __callArgument2419:Dynamic = function():flight._internal._Promise<Bool> return _Runtime.callProperty(api, 'persisted', cast ([] : Array<Dynamic>)); __callArgument2419; })) : flight._internal._Promise<String>), function(__awaitValue2415:Dynamic):Dynamic {
+          outcome = __awaitValue2415;
+          return flight._internal._Async.flatMap((cast _HostWeb.observePermissionState__webStoragePersistence(({ final __callArgument2417:Dynamic = function():flight._internal._Promise<PermissionState> return _Runtime.callProperty(api, 'getPermissionState', cast ([] : Array<Dynamic>)); __callArgument2417; })) : flight._internal._Promise<Null<String>>), function(__awaitValue2416:Dynamic):Dynamic {
+            permissionState = __awaitValue2416;
             return flight._internal._Async.resolve({ outcome: outcome, permissionState: permissionState });
           });
         });
       }));
-    } : Dynamic) } : EntityShapeL36C32__webStoragePersistence); __callArgument2099; })) : EntityShapeL36C32__webStoragePersistence);
+    } : Dynamic) } : EntityShapeL36C32__webStoragePersistence); __callArgument2421; })) : EntityShapeL36C32__webStoragePersistence);
     return cast backend;
     return cast null;
   }
@@ -7756,8 +8235,8 @@ class _HostWeb {
       flight._internal._Async.protect(function():Dynamic {
         return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
           var state:PermissionState = cast _Runtime.UNDEFINED;
-          return flight._internal._Async.flatMap((cast getPermissionState() : flight._internal._Promise<PermissionState>), function(__awaitValue2113:Dynamic):Dynamic {
-            state = __awaitValue2113;
+          return flight._internal._Async.flatMap((cast getPermissionState() : flight._internal._Promise<PermissionState>), function(__awaitValue2435:Dynamic):Dynamic {
+            state = __awaitValue2435;
             return flight._internal._Async.flowReturn(((cast ((cast ((cast _Runtime.strictEquals(state, 'denied') : Bool) || (cast _Runtime.strictEquals(state, 'granted') : Bool)) : Bool) || (cast _Runtime.strictEquals(state, 'prompt') : Bool)) : Bool) ? (cast state : Dynamic) : (cast null : Dynamic)));
           });
         }), function(__caughtError:Dynamic):Dynamic {
@@ -7776,8 +8255,8 @@ class _HostWeb {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-          return flight._internal._Async.flatMap((cast operation() : flight._internal._Promise<Bool>), function(__awaitValue2114:Dynamic):Dynamic {
-            if ((cast __awaitValue2114 : Bool)) {
+          return flight._internal._Async.flatMap((cast operation() : flight._internal._Promise<Bool>), function(__awaitValue2436:Dynamic):Dynamic {
+            if ((cast __awaitValue2436 : Bool)) {
               return flight._internal._Async.flowReturn('persistent');
             } else {
               return flight._internal._Async.flowReturn('best-effort');
@@ -7799,25 +8278,25 @@ class _HostWeb {
 
   public static final webWindowBackend:WebWindowBackend__webWindow = (cast { attach: function(win:ApplicationWindow, handle:flight._internal._Any, ownership:WindowAttachmentOwnership):Bool {
     if ((cast !(cast (cast _HostWeb.isWebWindow__webWindow((cast handle : flight._internal._Any)) : Bool) : Bool) : Bool)) { return cast false; }
-    return cast (cast _HostWeb.attachWebWindow__webWindow(({ final __callArgument2115:Dynamic = win; __callArgument2115; }), ({ final __callArgument2116:Dynamic = handle; __callArgument2116; }), ({ final __callArgument2117:Dynamic = ownership; __callArgument2117; })) : Bool);
+    return cast (cast _HostWeb.attachWebWindow__webWindow(({ final __callArgument2437:Dynamic = win; __callArgument2437; }), ({ final __callArgument2438:Dynamic = handle; __callArgument2438; }), ({ final __callArgument2439:Dynamic = ownership; __callArgument2439; })) : Bool);
     return cast _Runtime.UNDEFINED;
   }, center: function(win:ApplicationWindow):Void {
     var handle:Null<flight._internal.dom.Window> = cast _Runtime.UNDEFINED;
-    handle = (cast _HostWeb.getWebWindowHandle__webWindow(({ final __callArgument2121:Dynamic = win; __callArgument2121; })) : Null<flight._internal.dom.Window>);
+    handle = (cast _HostWeb.getWebWindowHandle__webWindow(({ final __callArgument2443:Dynamic = win; __callArgument2443; })) : Null<flight._internal.dom.Window>);
     if ((cast ((cast _Runtime.strictEquals(handle, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomWindowBackend.field(handle, 'moveTo')), 'function') : Bool)) : Bool)) { return; }
     try {
       flight._internal.backend.DomWindowBackend.call(handle, 'moveTo', cast ([HxMath.round((_Runtime.subtractNumbers((cast flight._internal.backend.DomWindowBackend.field(handle, 'screen') : flight._internal.dom.Screen).availWidth, win.width) / 2.0)), HxMath.round((_Runtime.subtractNumbers((cast flight._internal.backend.DomWindowBackend.field(handle, 'screen') : flight._internal.dom.Screen).availHeight, win.height) / 2.0))] : Array<Dynamic>));
     } catch (__error:Dynamic) {
     }
   }, close: function(win:ApplicationWindow):Void {
-    _HostWeb.detachWebWindow__webWindow(({ final __callArgument2123:Dynamic = win; __callArgument2123; }), (cast true : Bool));
+    _HostWeb.detachWebWindow__webWindow(({ final __callArgument2445:Dynamic = win; __callArgument2445; }), (cast true : Bool));
   }, focus: function(win:ApplicationWindow):Void {
     var handle:Null<flight._internal.dom.Window> = cast _Runtime.UNDEFINED;
-    handle = (cast _HostWeb.getWebWindowHandle__webWindow(({ final __callArgument2125:Dynamic = win; __callArgument2125; })) : Null<flight._internal.dom.Window>);
+    handle = (cast _HostWeb.getWebWindowHandle__webWindow(({ final __callArgument2447:Dynamic = win; __callArgument2447; })) : Null<flight._internal.dom.Window>);
     if ((cast ((cast !_Runtime.strictEquals(handle, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomWindowBackend.field(handle, 'focus')), 'function') : Bool)) : Bool)) { flight._internal.backend.DomWindowBackend.call(handle, 'focus', cast ([] : Array<Dynamic>)); }
   }, getBounds: function(win:ApplicationWindow, out:WindowBounds):WindowBounds {
     var handle:Null<flight._internal.dom.Window> = cast _Runtime.UNDEFINED;
-    handle = (cast _HostWeb.getWebWindowHandle__webWindow(({ final __callArgument2127:Dynamic = win; __callArgument2127; })) : Null<flight._internal.dom.Window>);
+    handle = (cast _HostWeb.getWebWindowHandle__webWindow(({ final __callArgument2449:Dynamic = win; __callArgument2449; })) : Null<flight._internal.dom.Window>);
     (out.x = cast (_Runtime.coalesce(flight._internal.backend.DomWindowBackend.field(handle, 'screenX'), function():Dynamic return cast win.x) : Float));
     (out.y = cast (_Runtime.coalesce(flight._internal.backend.DomWindowBackend.field(handle, 'screenY'), function():Dynamic return cast win.y) : Float));
     (out.width = cast (_Runtime.coalesce(flight._internal.backend.DomWindowBackend.field(handle, 'innerWidth'), function():Dynamic return cast win.width) : Float));
@@ -7825,14 +8304,14 @@ class _HostWeb {
     return cast out;
     return cast _Runtime.UNDEFINED;
   }, open: function(win:ApplicationWindow):Bool {
-    return cast ((cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) && (cast (cast _HostWeb.attachWebWindow__webWindow(({ final __callArgument2129:Dynamic = win; __callArgument2129; }), ({ final __callArgument2130:Dynamic = flight._internal.backend.DomWindowBackend.value(); __callArgument2130; }), ({ final __callArgument2131:Dynamic = 'host'; __callArgument2131; })) : Bool) : Bool));
+    return cast ((cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) && (cast (cast _HostWeb.attachWebWindow__webWindow(({ final __callArgument2451:Dynamic = win; __callArgument2451; }), ({ final __callArgument2452:Dynamic = flight._internal.backend.DomWindowBackend.value(); __callArgument2452; }), ({ final __callArgument2453:Dynamic = 'host'; __callArgument2453; })) : Bool) : Bool));
     return cast _Runtime.UNDEFINED;
   }, setFullscreen: function(win:ApplicationWindow, fullscreen:Bool):Void {
     var document:Null<flight._internal.dom.Document> = cast _Runtime.UNDEFINED;
-    document = ({ final __hostType2137 = (cast _HostWeb.getWebWindowHandle__webWindow(({ final __callArgument2135:Dynamic = win; __callArgument2135; })) : Null<flight._internal.dom.Window>); __hostType2137 == null ? _Runtime.UNDEFINED : (cast __hostType2137 : flight._internal.dom.Window).document; });
+    document = ({ final __hostType2459 = (cast _HostWeb.getWebWindowHandle__webWindow(({ final __callArgument2457:Dynamic = win; __callArgument2457; })) : Null<flight._internal.dom.Window>); __hostType2459 == null ? _Runtime.UNDEFINED : (cast __hostType2459 : flight._internal.dom.Window).document; });
     if ((cast _Runtime.strictEquals(document, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     try {
-      if ((cast fullscreen : Bool)) { _Runtime.voidValue(_Runtime.callOptionalProperty(({ final __hostTypeCall2139 = flight._internal.backend.DomDocumentBackend.field(document, 'documentElement'); (cast __hostTypeCall2139 : flight._internal.dom.HTMLElement).requestFullscreen == null ? _Runtime.UNDEFINED : (cast __hostTypeCall2139 : flight._internal.dom.HTMLElement).requestFullscreen(); }), 'catch', cast ([function(__unused0:flight._internal._Any):Void {
+      if ((cast fullscreen : Bool)) { _Runtime.voidValue(_Runtime.callOptionalProperty(({ final __hostTypeCall2461 = flight._internal.backend.DomDocumentBackend.field(document, 'documentElement'); (cast __hostTypeCall2461 : flight._internal.dom.HTMLElement).requestFullscreen == null ? _Runtime.UNDEFINED : (cast __hostTypeCall2461 : flight._internal.dom.HTMLElement).requestFullscreen(); }), 'catch', cast ([function(__unused0:flight._internal._Any):Void {
 
       }] : Array<Dynamic>))); } else { _Runtime.voidValue(_Runtime.callOptionalProperty(flight._internal.backend.DomDocumentBackend.callOptional(document, 'exitFullscreen', cast ([] : Array<Dynamic>)), 'catch', cast ([function(__unused1:flight._internal._Any):Void {
 
@@ -7842,7 +8321,7 @@ class _HostWeb {
   }, setIcon: function(win:ApplicationWindow, icon:String):Void {
     var document:Null<flight._internal.dom.Document> = cast _Runtime.UNDEFINED;
     var link:Null<flight._internal.dom.HTMLLinkElement> = cast _Runtime.UNDEFINED;
-    document = ({ final __hostType2142 = (cast _HostWeb.getWebWindowHandle__webWindow(({ final __callArgument2140:Dynamic = win; __callArgument2140; })) : Null<flight._internal.dom.Window>); __hostType2142 == null ? _Runtime.UNDEFINED : (cast __hostType2142 : flight._internal.dom.Window).document; });
+    document = ({ final __hostType2464 = (cast _HostWeb.getWebWindowHandle__webWindow(({ final __callArgument2462:Dynamic = win; __callArgument2462; })) : Null<flight._internal.dom.Window>); __hostType2464 == null ? _Runtime.UNDEFINED : (cast __hostType2464 : flight._internal.dom.Window).document; });
     if ((cast _Runtime.strictEquals(document, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     link = flight._internal.backend.DomDocumentBackend.call(document, 'querySelector', cast (['link[rel="icon"]'] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(link, null) : Bool)) {
@@ -7853,7 +8332,7 @@ class _HostWeb {
     ((cast link : flight._internal.dom.HTMLLinkElement).href = icon);
   }, setPosition: function(win:ApplicationWindow, x:Float, y:Float):Void {
     var handle:Null<flight._internal.dom.Window> = cast _Runtime.UNDEFINED;
-    handle = (cast _HostWeb.getWebWindowHandle__webWindow(({ final __callArgument2143:Dynamic = win; __callArgument2143; })) : Null<flight._internal.dom.Window>);
+    handle = (cast _HostWeb.getWebWindowHandle__webWindow(({ final __callArgument2465:Dynamic = win; __callArgument2465; })) : Null<flight._internal.dom.Window>);
     if ((cast ((cast _Runtime.strictEquals(handle, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomWindowBackend.field(handle, 'moveTo')), 'function') : Bool)) : Bool)) { return; }
     try {
       flight._internal.backend.DomWindowBackend.call(handle, 'moveTo', cast ([x, y] : Array<Dynamic>));
@@ -7861,7 +8340,7 @@ class _HostWeb {
     }
   }, setSize: function(win:ApplicationWindow, width:Float, height:Float):Void {
     var handle:Null<flight._internal.dom.Window> = cast _Runtime.UNDEFINED;
-    handle = (cast _HostWeb.getWebWindowHandle__webWindow(({ final __callArgument2145:Dynamic = win; __callArgument2145; })) : Null<flight._internal.dom.Window>);
+    handle = (cast _HostWeb.getWebWindowHandle__webWindow(({ final __callArgument2467:Dynamic = win; __callArgument2467; })) : Null<flight._internal.dom.Window>);
     if ((cast ((cast _Runtime.strictEquals(handle, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomWindowBackend.field(handle, 'resizeTo')), 'function') : Bool)) : Bool)) { return; }
     try {
       flight._internal.backend.DomWindowBackend.call(handle, 'resizeTo', cast ([width, height] : Array<Dynamic>));
@@ -7869,7 +8348,7 @@ class _HostWeb {
     }
   }, setTitle: function(win:ApplicationWindow, title:String):Void {
     var document:Null<flight._internal.dom.Document> = cast _Runtime.UNDEFINED;
-    document = ({ final __hostType2149 = (cast _HostWeb.getWebWindowHandle__webWindow(({ final __callArgument2147:Dynamic = win; __callArgument2147; })) : Null<flight._internal.dom.Window>); __hostType2149 == null ? _Runtime.UNDEFINED : (cast __hostType2149 : flight._internal.dom.Window).document; });
+    document = ({ final __hostType2471 = (cast _HostWeb.getWebWindowHandle__webWindow(({ final __callArgument2469:Dynamic = win; __callArgument2469; })) : Null<flight._internal.dom.Window>); __hostType2471 == null ? _Runtime.UNDEFINED : (cast __hostType2471 : flight._internal.dom.Window).document; });
     if ((cast !_Runtime.strictEquals(document, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal.backend.DomDocumentBackend.setField(document, 'title', title); }
   }, subscribeClose: function(onCloseRequest:Void->Bool, onClose:Void->Void):Void->Void {
     var pageWindow:flight._internal.dom.Window = cast _Runtime.UNDEFINED;
@@ -7883,10 +8362,10 @@ class _HostWeb {
     });
     flight._internal.backend.DomWindowBackend.call(pageWindow, 'addEventListener', cast (['beforeunload', onBeforeUnload] : Array<Dynamic>));
     flight._internal.backend.DomWindowBackend.call(pageWindow, 'addEventListener', cast (['pagehide', onClose] : Array<Dynamic>));
-    return cast (cast _HostWeb.trackWebWindowSubscription__webWindow(({ final __callArgument2150:Dynamic = function():Void {
+    return cast (cast _HostWeb.trackWebWindowSubscription__webWindow(({ final __callArgument2472:Dynamic = function():Void {
       flight._internal.backend.DomWindowBackend.call(pageWindow, 'removeEventListener', cast (['beforeunload', onBeforeUnload] : Array<Dynamic>));
       flight._internal.backend.DomWindowBackend.call(pageWindow, 'removeEventListener', cast (['pagehide', onClose] : Array<Dynamic>));
-    }; __callArgument2150; })) : Void->Void);
+    }; __callArgument2472; })) : Void->Void);
     return cast _Runtime.UNDEFINED;
   }, subscribeMove: function(listener:Float->Float->Void):Void->Void {
     var pageWindow:flight._internal.dom.Window = cast _Runtime.UNDEFINED;
@@ -7899,14 +8378,14 @@ class _HostWeb {
       }
     });
     flight._internal.backend.DomWindowBackend.call(pageWindow, 'addEventListener', cast (['resize', handler] : Array<Dynamic>));
-    return cast (cast _HostWeb.trackWebWindowSubscription__webWindow(({ final __callArgument2152:Dynamic = function():Void { flight._internal.backend.DomWindowBackend.call(pageWindow, 'removeEventListener', cast (['resize', handler] : Array<Dynamic>)); }; __callArgument2152; })) : Void->Void);
+    return cast (cast _HostWeb.trackWebWindowSubscription__webWindow(({ final __callArgument2474:Dynamic = function():Void { flight._internal.backend.DomWindowBackend.call(pageWindow, 'removeEventListener', cast (['resize', handler] : Array<Dynamic>)); }; __callArgument2474; })) : Void->Void);
     return cast _Runtime.UNDEFINED;
   }, subscribeOrientation: function(listener:Void->Void):Void->Void {
     var orientation:flight._internal.dom.ScreenOrientation = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('screen'), 'undefined') : Bool) || (cast _Runtime.strictEquals((cast flight._internal._HostValueLut.get('screen') : flight._internal.dom.Screen).orientation, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast _HostWeb.noop__webWindow; }
     orientation = (cast flight._internal._HostValueLut.get('screen') : flight._internal.dom.Screen).orientation;
     (cast orientation : flight._internal.dom.ScreenOrientation).addEventListener('change', listener);
-    return cast (cast _HostWeb.trackWebWindowSubscription__webWindow(({ final __callArgument2154:Dynamic = function():Void { (cast orientation : flight._internal.dom.ScreenOrientation).removeEventListener('change', listener); }; __callArgument2154; })) : Void->Void);
+    return cast (cast _HostWeb.trackWebWindowSubscription__webWindow(({ final __callArgument2476:Dynamic = function():Void { (cast orientation : flight._internal.dom.ScreenOrientation).removeEventListener('change', listener); }; __callArgument2476; })) : Void->Void);
     return cast _Runtime.UNDEFINED;
   }, subscribeResize: function(target:WindowResizeTargetHandle, listener:Float->Float->Float->Void):Void->Void {
     var element:Null<flight._internal.dom.Element> = cast _Runtime.UNDEFINED;
@@ -7919,7 +8398,7 @@ class _HostWeb {
       }
     }]);
     (cast observer : flight._internal.dom.ResizeObserver).observe(element);
-    return cast (cast _HostWeb.trackWebWindowSubscription__webWindow(({ final __callArgument2158:Dynamic = function():Void { (cast observer : flight._internal.dom.ResizeObserver).disconnect(); }; __callArgument2158; })) : Void->Void);
+    return cast (cast _HostWeb.trackWebWindowSubscription__webWindow(({ final __callArgument2480:Dynamic = function():Void { (cast observer : flight._internal.dom.ResizeObserver).disconnect(); }; __callArgument2480; })) : Void->Void);
     return cast _Runtime.UNDEFINED;
   }, subscribeVisibility: function(listener:Bool->Void):Void->Void {
     var pageDocument:flight._internal.dom.Document = cast _Runtime.UNDEFINED;
@@ -7928,7 +8407,7 @@ class _HostWeb {
     pageDocument = flight._internal.backend.DomDocumentBackend.value();
     handler = (cast function():Void { listener((cast !(cast flight._internal.backend.DomDocumentBackend.field(pageDocument, 'hidden') : Bool) : Bool)); });
     flight._internal.backend.DomDocumentBackend.call(pageDocument, 'addEventListener', cast (['visibilitychange', handler] : Array<Dynamic>));
-    return cast (cast _HostWeb.trackWebWindowSubscription__webWindow(({ final __callArgument2160:Dynamic = function():Void { flight._internal.backend.DomDocumentBackend.call(pageDocument, 'removeEventListener', cast (['visibilitychange', handler] : Array<Dynamic>)); }; __callArgument2160; })) : Void->Void);
+    return cast (cast _HostWeb.trackWebWindowSubscription__webWindow(({ final __callArgument2482:Dynamic = function():Void { flight._internal.backend.DomDocumentBackend.call(pageDocument, 'removeEventListener', cast (['visibilitychange', handler] : Array<Dynamic>)); }; __callArgument2482; })) : Void->Void);
     return cast _Runtime.UNDEFINED;
   } });
 
@@ -7962,18 +8441,18 @@ class _HostWeb {
   public static final webFullscreenBackend:flight._internal._Intersection2<FullscreenBackend, flight._internal._Required<{ @:optional var subscribe:Null<(Bool->Void)->Void>; @:optional var unsubscribe:Null<(Bool->Void)->Void>; }>> = (cast { exit: function():flight._internal._Promise<Bool> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
-        var __flowBranch2162:Dynamic;
+        var __flowBranch2484:Dynamic;
         if ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast flight._internal.backend.DomDocumentBackend.value() : flight._internal.dom.Document).exitFullscreen), 'function') : Bool)) : Bool)) {
-          __flowBranch2162 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch2484 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn(false);
           });
         } else {
-          __flowBranch2162 = flight._internal._Async.flowNormal();
+          __flowBranch2484 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch2162, function():Dynamic {
+        return flight._internal._Async.continueFlow(__flowBranch2484, function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.flatMap(flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'exitFullscreen', cast ([] : Array<Dynamic>)), function(__awaitValue2163:Dynamic):Dynamic {
-              __awaitValue2163;
+            return flight._internal._Async.flatMap(flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'exitFullscreen', cast ([] : Array<Dynamic>)), function(__awaitValue2485:Dynamic):Dynamic {
+              __awaitValue2485;
               return flight._internal._Async.flowReturn(true);
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -7992,18 +8471,18 @@ class _HostWeb {
       flight._internal._Async.protect(function():Dynamic {
         var element:Null<flight._internal.dom.Element> = cast _Runtime.UNDEFINED;
         element = ((cast _HostWeb._fullscreenTargets__webWindow : flight._internal._WeakMap<FullscreenTargetHandle, flight._internal.dom.Element>).get((cast target)));
-        var __flowBranch2164:Dynamic;
+        var __flowBranch2486:Dynamic;
         if ((cast ((cast _Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast element : flight._internal.dom.Element).requestFullscreen), 'function') : Bool)) : Bool)) {
-          __flowBranch2164 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch2486 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn(false);
           });
         } else {
-          __flowBranch2164 = flight._internal._Async.flowNormal();
+          __flowBranch2486 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch2164, function():Dynamic {
+        return flight._internal._Async.continueFlow(__flowBranch2486, function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.flatMap((cast element : flight._internal.dom.Element).requestFullscreen(), function(__awaitValue2165:Dynamic):Dynamic {
-              __awaitValue2165;
+            return flight._internal._Async.flatMap((cast element : flight._internal.dom.Element).requestFullscreen(), function(__awaitValue2487:Dynamic):Dynamic {
+              __awaitValue2487;
               return flight._internal._Async.flowReturn(true);
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -8019,7 +8498,7 @@ class _HostWeb {
     );
   }, subscribe: function(callback:Bool->Void):Void {
     var handler:Void->Void = cast _Runtime.UNDEFINED;
-    (cast webFullscreenBackend : { var unsubscribe:(Bool->Void)->Void; }).unsubscribe(({ final __callArgument2166:Dynamic = callback; __callArgument2166; }));
+    (cast webFullscreenBackend : { var unsubscribe:(Bool->Void)->Void; }).unsubscribe(({ final __callArgument2488:Dynamic = callback; __callArgument2488; }));
     if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return; }
     handler = (cast function():Void { callback((cast !_Runtime.strictEquals((cast flight._internal.backend.DomDocumentBackend.value() : flight._internal.dom.Document).fullscreenElement, null) : Bool)); });
     ((cast _HostWeb._fullscreenListeners__webWindow : flight._internal._Map<Bool->Void, Void->Void>).set((cast callback), (cast handler)));
@@ -8050,7 +8529,7 @@ class _HostWeb {
     enableHostWebRaster2DSurface();
     if ((cast _HostWeb._enabled__webWgpuRenderSurface : Bool)) { return; }
     (_HostWeb._enabled__webWgpuRenderSurface = cast (true : Dynamic));
-    setWgpuRenderSurfaceProvider(({ final __callArgument2167:Dynamic = (cast createWebWgpuRenderSurfaceProvider() : WgpuRenderSurfaceProvider); __callArgument2167; }));
+    setWgpuRenderSurfaceProvider(({ final __callArgument2489:Dynamic = (cast createWebWgpuRenderSurfaceProvider() : WgpuRenderSurfaceProvider); __callArgument2489; }));
   }
 
   @:allow(flight)
@@ -8059,7 +8538,7 @@ class _HostWeb {
     (_HostWeb._enabled__webWgpuRenderSurface = cast (false : Dynamic));
   }
 
-  public static final webHost:flight._internal._Intersection2<Host, { var accessibility:flight._internal._Intersection2<HostAccessibilityCapabilities, { var provider:AccessibilityBackend; }>; var app:{ var exit:ApplicationExitBackend; var loop:LoopBackend; var visibility:ApplicationVisibilityBackend; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var name:AppNameBackend; var ready:AppReadyBackend; var focus:AppFocusBackend; var badge:AppBadgeBackend; var quit:AppQuitBackend; var locale:AppLocaleBackend; var relaunch:AppRelaunchBackend; }; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var change:flight._internal._Any; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostConnectivityCapabilities, { var change:ConnectivityChangeBackend; }>, { var reachability:ConnectivityReachabilityBackend; }>, { var status:ConnectivityStatusBackend; }>; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>, { var prompt:PromptDialogBackend; }>; var graphics:flight._internal._Intersection2<flight._internal._Intersection2<HostGraphicsCapabilities, { var renderContext:RenderContextBackend; }>, { var renderSurface:RenderSurfaceBackend; }>; var input:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostInputCapabilities, { var dropFile:InputDropFileBackend; }>, { var focus:InputFocusBackend; }>, { var haptics:HapticsBackend; }>, { var pointerLock:InputPointerLockBackend; }>, { var target:InputTargetBackend; }>, { var softKeyboardChange:SoftKeyboardChangeBackend; }>, { var softKeyboardInfo:SoftKeyboardInfoBackend; }>, { var softKeyboardVisibility:SoftKeyboardVisibilityBackend; }>; var ipc:{  }; var media:{ var session:MediaSessionBackend; var sessionAction:MediaSessionActionBackend; }; var menu:flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var highlight:MenuHighlightBackend; }>, { var popup:MenuPopupBackend; }>; var midi:{  }; var net:flight._internal._Intersection2<HostNetCapabilities, { var http:NetBackend; var socket:SocketBackend; }>; var power:{ >Entity, var keepAwake:PowerKeepAwakeBackend; var suspension:PowerSuspensionBackend; var change:PowerChangeBackend; var status:PowerStatusBackend; }; var protocol:WebProtocolCapabilities__webProtocol; var notification:{  }; var screen:flight._internal._Any; var share:flight._internal._Intersection2<flight._internal._Intersection2<HostShareCapabilities, { var content:ShareContentBackend; }>, { var files:ShareFilesBackend; }>; var shell:flight._internal._Intersection2<HostShellCapabilities, { var external:ShellExternalBackend; }>; var shortcut:{  }; var storage:{ var change:{ >Entity, var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>; var destroy:Void->Void; var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>; var subscribe:(StorageChange->Void)->Null<Void->Void>; }; var fileSystem:FileSystemHostBackend; var local:{ >Entity, var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>; var destroy:Void->Void; var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>; var subscribe:(StorageChange->Void)->Null<Void->Void>; }; var persistenceQuery:StoragePersistenceQueryBackend; var persistenceRequest:StoragePersistenceRequestBackend; }; var system:{ var device:DeviceBackend; var lifecycle:LifecycleBackend; var platform:PlatformBackend; var sensors:SensorsBackend; }; var text:{  }; var tray:{  }; var ui:{ var fullscreen:FullscreenBackend; var statusBarColor:StatusBarColorBackend; }; var updater:{  }; var window:WebWindowBackend__webWindow; }> = (cast createHost((cast { accessibility: (cast webAccessibilityHost : { var accessibility:flight._internal._Intersection2<HostAccessibilityCapabilities, { var provider:AccessibilityBackend; }>; }).accessibility, app: _Runtime.mergeObjects([_HostWeb.webAppCapabilities__webHost, { exit: webApplicationExitBackend }, { loop: webLoopBackend }, { visibility: webApplicationVisibilityBackend }]), clipboard: (cast webClipboardHost : { var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var change:flight._internal._Any; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; }).clipboard, connectivity: (cast webConnectivityHost : { var connectivity:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostConnectivityCapabilities, { var change:ConnectivityChangeBackend; }>, { var reachability:ConnectivityReachabilityBackend; }>, { var status:ConnectivityStatusBackend; }>; }).connectivity, dialog: (cast webDialogHost : { var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>, { var prompt:PromptDialogBackend; }>; }).dialog, graphics: (cast webGraphicsHost : { var graphics:flight._internal._Intersection2<flight._internal._Intersection2<HostGraphicsCapabilities, { var renderContext:RenderContextBackend; }>, { var renderSurface:RenderSurfaceBackend; }>; }).graphics, input: (cast webInputHost : { var input:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostInputCapabilities, { var dropFile:InputDropFileBackend; }>, { var focus:InputFocusBackend; }>, { var haptics:HapticsBackend; }>, { var pointerLock:InputPointerLockBackend; }>, { var target:InputTargetBackend; }>, { var softKeyboardChange:SoftKeyboardChangeBackend; }>, { var softKeyboardInfo:SoftKeyboardInfoBackend; }>, { var softKeyboardVisibility:SoftKeyboardVisibilityBackend; }>; }).input, ipc: {  }, media: { session: webMediaSessionBackend, sessionAction: webMediaSessionActionBackend }, menu: (cast webMenuHost : { var menu:flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var highlight:MenuHighlightBackend; }>, { var popup:MenuPopupBackend; }>; }).menu, midi: {  }, net: (cast webHostNet : { var net:flight._internal._Intersection2<HostNetCapabilities, { var http:NetBackend; var socket:SocketBackend; }>; }).net, power: webPowerCapabilities, protocol: _HostWeb.webProtocolCapabilities__webHost, notification: {  }, screen: webScreenCapabilities, share: (cast webShareHost : { var share:flight._internal._Intersection2<flight._internal._Intersection2<HostShareCapabilities, { var content:ShareContentBackend; }>, { var files:ShareFilesBackend; }>; }).share, shell: (cast webShellHost : { var shell:flight._internal._Intersection2<HostShellCapabilities, { var external:ShellExternalBackend; }>; }).shell, shortcut: {  }, storage: { change: webStorageBackend, fileSystem: webFileSystemBackend, local: webStorageBackend, persistenceQuery: (cast _HostWeb.webStoragePersistenceCapabilities__webHost : WebWindowStoragePersistenceCapabilities).persistenceQuery, persistenceRequest: (cast _HostWeb.webStoragePersistenceCapabilities__webHost : WebWindowStoragePersistenceCapabilities).persistenceRequest }, system: { device: webDeviceBackend, lifecycle: webLifecycleBackend, platform: webPlatformBackend, sensors: webSensorsBackend }, text: {  }, tray: {  }, ui: { fullscreen: webFullscreenBackend, statusBarColor: webStatusBarColorBackend }, updater: {  }, window: webWindowBackend } : Dynamic)) : flight._internal._Intersection2<Host, { var accessibility:flight._internal._Intersection2<HostAccessibilityCapabilities, { var provider:AccessibilityBackend; }>; var app:{ var exit:ApplicationExitBackend; var loop:LoopBackend; var visibility:ApplicationVisibilityBackend; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var name:AppNameBackend; var ready:AppReadyBackend; var focus:AppFocusBackend; var badge:AppBadgeBackend; var quit:AppQuitBackend; var locale:AppLocaleBackend; var relaunch:AppRelaunchBackend; }; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var change:flight._internal._Any; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostConnectivityCapabilities, { var change:ConnectivityChangeBackend; }>, { var reachability:ConnectivityReachabilityBackend; }>, { var status:ConnectivityStatusBackend; }>; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>, { var prompt:PromptDialogBackend; }>; var graphics:flight._internal._Intersection2<flight._internal._Intersection2<HostGraphicsCapabilities, { var renderContext:RenderContextBackend; }>, { var renderSurface:RenderSurfaceBackend; }>; var input:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostInputCapabilities, { var dropFile:InputDropFileBackend; }>, { var focus:InputFocusBackend; }>, { var haptics:HapticsBackend; }>, { var pointerLock:InputPointerLockBackend; }>, { var target:InputTargetBackend; }>, { var softKeyboardChange:SoftKeyboardChangeBackend; }>, { var softKeyboardInfo:SoftKeyboardInfoBackend; }>, { var softKeyboardVisibility:SoftKeyboardVisibilityBackend; }>; var ipc:{  }; var media:{ var session:MediaSessionBackend; var sessionAction:MediaSessionActionBackend; }; var menu:flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var highlight:MenuHighlightBackend; }>, { var popup:MenuPopupBackend; }>; var midi:{  }; var net:flight._internal._Intersection2<HostNetCapabilities, { var http:NetBackend; var socket:SocketBackend; }>; var power:{ >Entity, var keepAwake:PowerKeepAwakeBackend; var suspension:PowerSuspensionBackend; var change:PowerChangeBackend; var status:PowerStatusBackend; }; var protocol:WebProtocolCapabilities__webProtocol; var notification:{  }; var screen:flight._internal._Any; var share:flight._internal._Intersection2<flight._internal._Intersection2<HostShareCapabilities, { var content:ShareContentBackend; }>, { var files:ShareFilesBackend; }>; var shell:flight._internal._Intersection2<HostShellCapabilities, { var external:ShellExternalBackend; }>; var shortcut:{  }; var storage:{ var change:{ >Entity, var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>; var destroy:Void->Void; var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>; var subscribe:(StorageChange->Void)->Null<Void->Void>; }; var fileSystem:FileSystemHostBackend; var local:{ >Entity, var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>; var destroy:Void->Void; var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>; var subscribe:(StorageChange->Void)->Null<Void->Void>; }; var persistenceQuery:StoragePersistenceQueryBackend; var persistenceRequest:StoragePersistenceRequestBackend; }; var system:{ var device:DeviceBackend; var lifecycle:LifecycleBackend; var platform:PlatformBackend; var sensors:SensorsBackend; }; var text:{  }; var tray:{  }; var ui:{ var fullscreen:FullscreenBackend; var statusBarColor:StatusBarColorBackend; }; var updater:{  }; var window:WebWindowBackend__webWindow; }>);
+  public static final webHost:flight._internal._Intersection2<Host, { var accessibility:flight._internal._Intersection2<HostAccessibilityCapabilities, { var provider:AccessibilityBackend; }>; var app:{ var exit:ApplicationExitBackend; var loop:LoopBackend; var visibility:ApplicationVisibilityBackend; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var name:AppNameBackend; var ready:AppReadyBackend; var focus:AppFocusBackend; var badge:AppBadgeBackend; var quit:AppQuitBackend; var locale:AppLocaleBackend; var relaunch:AppRelaunchBackend; }; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var change:flight._internal._Any; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostConnectivityCapabilities, { var change:ConnectivityChangeBackend; }>, { var reachability:ConnectivityReachabilityBackend; }>, { var status:ConnectivityStatusBackend; }>; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var imageOpen:ImageOpenDialogBackend; }>, { var message:MessageDialogBackend; }>, { var photoCapture:PhotoCaptureDialogBackend; }>, { var prompt:PromptDialogBackend; }>, { var videoCapture:VideoCaptureDialogBackend; }>; var graphics:flight._internal._Intersection2<flight._internal._Intersection2<HostGraphicsCapabilities, { var renderContext:RenderContextBackend; }>, { var renderSurface:RenderSurfaceBackend; }>; var input:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostInputCapabilities, { var dropFile:InputDropFileBackend; }>, { var focus:InputFocusBackend; }>, { var haptics:HapticsBackend; }>, { var pointerLock:InputPointerLockBackend; }>, { var target:InputTargetBackend; }>, { var softKeyboardChange:SoftKeyboardChangeBackend; }>, { var softKeyboardInfo:SoftKeyboardInfoBackend; }>, { var softKeyboardVisibility:SoftKeyboardVisibilityBackend; }>; var ipc:{  }; var media:{ var session:MediaSessionBackend; var sessionAction:MediaSessionActionBackend; }; var menu:flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var highlight:MenuHighlightBackend; }>, { var popup:MenuPopupBackend; }>; var midi:{  }; var net:flight._internal._Intersection2<HostNetCapabilities, { var http:NetBackend; var socket:SocketBackend; }>; var power:WebPowerCapabilities; var protocol:WebProtocolCapabilities__webProtocol; var notification:{  }; var screen:flight._internal._Any; var share:flight._internal._Intersection2<flight._internal._Intersection2<HostShareCapabilities, { var content:ShareContentBackend; }>, { var files:ShareFilesBackend; }>; var shell:flight._internal._Intersection2<HostShellCapabilities, { var external:ShellExternalBackend; }>; var shortcut:{  }; var storage:{ var change:{ >Entity, var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>; var destroy:Void->Void; var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>; var subscribe:(StorageChange->Void)->Null<Void->Void>; }; var fileSystem:FileSystemHostBackend; var local:{ >Entity, var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>; var destroy:Void->Void; var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>; var subscribe:(StorageChange->Void)->Null<Void->Void>; }; var persistenceQuery:StoragePersistenceQueryBackend; var persistenceRequest:StoragePersistenceRequestBackend; }; var system:{ var device:DeviceBackend; var lifecycle:LifecycleBackend; var platform:PlatformBackend; var sensors:SensorsBackend; }; var text:{  }; var tray:{  }; var ui:{ var fullscreen:FullscreenBackend; var statusBarColor:StatusBarColorBackend; }; var updater:{  }; var window:WebWindowBackend__webWindow; }> = (cast createHost((cast { accessibility: (cast webAccessibilityHost : { var accessibility:flight._internal._Intersection2<HostAccessibilityCapabilities, { var provider:AccessibilityBackend; }>; }).accessibility, app: _Runtime.mergeObjects([_HostWeb.webAppCapabilities__webHost, { exit: webApplicationExitBackend }, { loop: webLoopBackend }, { visibility: webApplicationVisibilityBackend }]), clipboard: (cast webClipboardHost : { var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var change:flight._internal._Any; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; }).clipboard, connectivity: (cast webConnectivityHost : { var connectivity:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostConnectivityCapabilities, { var change:ConnectivityChangeBackend; }>, { var reachability:ConnectivityReachabilityBackend; }>, { var status:ConnectivityStatusBackend; }>; }).connectivity, dialog: (cast webDialogHost : { var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var imageOpen:ImageOpenDialogBackend; }>, { var message:MessageDialogBackend; }>, { var photoCapture:PhotoCaptureDialogBackend; }>, { var prompt:PromptDialogBackend; }>, { var videoCapture:VideoCaptureDialogBackend; }>; }).dialog, graphics: (cast webGraphicsHost : { var graphics:flight._internal._Intersection2<flight._internal._Intersection2<HostGraphicsCapabilities, { var renderContext:RenderContextBackend; }>, { var renderSurface:RenderSurfaceBackend; }>; }).graphics, input: (cast webInputHost : { var input:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostInputCapabilities, { var dropFile:InputDropFileBackend; }>, { var focus:InputFocusBackend; }>, { var haptics:HapticsBackend; }>, { var pointerLock:InputPointerLockBackend; }>, { var target:InputTargetBackend; }>, { var softKeyboardChange:SoftKeyboardChangeBackend; }>, { var softKeyboardInfo:SoftKeyboardInfoBackend; }>, { var softKeyboardVisibility:SoftKeyboardVisibilityBackend; }>; }).input, ipc: {  }, media: { session: webMediaSessionBackend, sessionAction: webMediaSessionActionBackend }, menu: (cast webMenuHost : { var menu:flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var highlight:MenuHighlightBackend; }>, { var popup:MenuPopupBackend; }>; }).menu, midi: {  }, net: (cast webHostNet : { var net:flight._internal._Intersection2<HostNetCapabilities, { var http:NetBackend; var socket:SocketBackend; }>; }).net, power: webPowerCapabilities, protocol: _HostWeb.webProtocolCapabilities__webHost, notification: {  }, screen: webScreenCapabilities, share: (cast webShareHost : { var share:flight._internal._Intersection2<flight._internal._Intersection2<HostShareCapabilities, { var content:ShareContentBackend; }>, { var files:ShareFilesBackend; }>; }).share, shell: (cast webShellHost : { var shell:flight._internal._Intersection2<HostShellCapabilities, { var external:ShellExternalBackend; }>; }).shell, shortcut: {  }, storage: { change: webStorageBackend, fileSystem: webFileSystemBackend, local: webStorageBackend, persistenceQuery: (cast _HostWeb.webStoragePersistenceCapabilities__webHost : WebWindowStoragePersistenceCapabilities).persistenceQuery, persistenceRequest: (cast _HostWeb.webStoragePersistenceCapabilities__webHost : WebWindowStoragePersistenceCapabilities).persistenceRequest }, system: { device: webDeviceBackend, lifecycle: webLifecycleBackend, platform: webPlatformBackend, sensors: webSensorsBackend }, text: {  }, tray: {  }, ui: { fullscreen: webFullscreenBackend, statusBarColor: webStatusBarColorBackend }, updater: {  }, window: webWindowBackend } : Dynamic)) : flight._internal._Intersection2<Host, { var accessibility:flight._internal._Intersection2<HostAccessibilityCapabilities, { var provider:AccessibilityBackend; }>; var app:{ var exit:ApplicationExitBackend; var loop:LoopBackend; var visibility:ApplicationVisibilityBackend; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var name:AppNameBackend; var ready:AppReadyBackend; var focus:AppFocusBackend; var badge:AppBadgeBackend; var quit:AppQuitBackend; var locale:AppLocaleBackend; var relaunch:AppRelaunchBackend; }; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var change:flight._internal._Any; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostConnectivityCapabilities, { var change:ConnectivityChangeBackend; }>, { var reachability:ConnectivityReachabilityBackend; }>, { var status:ConnectivityStatusBackend; }>; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var imageOpen:ImageOpenDialogBackend; }>, { var message:MessageDialogBackend; }>, { var photoCapture:PhotoCaptureDialogBackend; }>, { var prompt:PromptDialogBackend; }>, { var videoCapture:VideoCaptureDialogBackend; }>; var graphics:flight._internal._Intersection2<flight._internal._Intersection2<HostGraphicsCapabilities, { var renderContext:RenderContextBackend; }>, { var renderSurface:RenderSurfaceBackend; }>; var input:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostInputCapabilities, { var dropFile:InputDropFileBackend; }>, { var focus:InputFocusBackend; }>, { var haptics:HapticsBackend; }>, { var pointerLock:InputPointerLockBackend; }>, { var target:InputTargetBackend; }>, { var softKeyboardChange:SoftKeyboardChangeBackend; }>, { var softKeyboardInfo:SoftKeyboardInfoBackend; }>, { var softKeyboardVisibility:SoftKeyboardVisibilityBackend; }>; var ipc:{  }; var media:{ var session:MediaSessionBackend; var sessionAction:MediaSessionActionBackend; }; var menu:flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var highlight:MenuHighlightBackend; }>, { var popup:MenuPopupBackend; }>; var midi:{  }; var net:flight._internal._Intersection2<HostNetCapabilities, { var http:NetBackend; var socket:SocketBackend; }>; var power:WebPowerCapabilities; var protocol:WebProtocolCapabilities__webProtocol; var notification:{  }; var screen:flight._internal._Any; var share:flight._internal._Intersection2<flight._internal._Intersection2<HostShareCapabilities, { var content:ShareContentBackend; }>, { var files:ShareFilesBackend; }>; var shell:flight._internal._Intersection2<HostShellCapabilities, { var external:ShellExternalBackend; }>; var shortcut:{  }; var storage:{ var change:{ >Entity, var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>; var destroy:Void->Void; var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>; var subscribe:(StorageChange->Void)->Null<Void->Void>; }; var fileSystem:FileSystemHostBackend; var local:{ >Entity, var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>; var destroy:Void->Void; var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>; var subscribe:(StorageChange->Void)->Null<Void->Void>; }; var persistenceQuery:StoragePersistenceQueryBackend; var persistenceRequest:StoragePersistenceRequestBackend; }; var system:{ var device:DeviceBackend; var lifecycle:LifecycleBackend; var platform:PlatformBackend; var sensors:SensorsBackend; }; var text:{  }; var tray:{  }; var ui:{ var fullscreen:FullscreenBackend; var statusBarColor:StatusBarColorBackend; }; var updater:{  }; var window:WebWindowBackend__webWindow; }>);
 
   public static final webUiHost:flight._internal._Intersection2<Host, { var ui:{ var fullscreen:FullscreenBackend; var statusBarColor:StatusBarColorBackend; }; }> = (cast createHost((cast { ui: { fullscreen: webFullscreenBackend, statusBarColor: webStatusBarColorBackend } } : Dynamic)) : flight._internal._Intersection2<Host, { var ui:{ var fullscreen:FullscreenBackend; var statusBarColor:StatusBarColorBackend; }; }>);
 
@@ -8117,8 +8596,8 @@ class _HostWeb {
     mapped = ((cast _HostWeb._handles__webWindow : flight._internal._WeakMap<flight._internal.dom.Window, ApplicationWindow>).get((cast handle)));
     if ((cast ((cast !_Runtime.strictEquals(mapped, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(mapped, win) : Bool)) : Bool)) { return cast false; }
     onPageHide = (cast function():Void {
-      _HostWeb.detachWebWindow__webWindow(({ final __callArgument2173:Dynamic = win; __callArgument2173; }), (cast false : Bool));
-      notifyWindowClosed(({ final __callArgument2175:Dynamic = win; __callArgument2175; }));
+      _HostWeb.detachWebWindow__webWindow(({ final __callArgument2495:Dynamic = win; __callArgument2495; }), (cast false : Bool));
+      notifyWindowClosed(({ final __callArgument2497:Dynamic = win; __callArgument2497; }));
     });
     flight._internal.backend.DomWindowBackend.call(handle, 'addEventListener', cast (['pagehide', onPageHide] : Array<Dynamic>));
     ((cast _HostWeb._records__webWindow : flight._internal._WeakMap<ApplicationWindow, WebWindowRecord__webWindow>).set((cast win), (cast { cleanup: function():Void { flight._internal.backend.DomWindowBackend.call(handle, 'removeEventListener', cast (['pagehide', onPageHide] : Array<Dynamic>)); }, handle: handle, ownership: ownership })));
@@ -8142,7 +8621,7 @@ class _HostWeb {
   }
 
   public static function getWebWindowHandle__webWindow(win:ApplicationWindow):Null<flight._internal.dom.Window> {
-    return cast _Runtime.coalesce(({ final __structural2177 = ((cast _HostWeb._records__webWindow : flight._internal._WeakMap<ApplicationWindow, WebWindowRecord__webWindow>).get((cast win))); __structural2177 == null ? _Runtime.UNDEFINED : (cast __structural2177 : { var handle:flight._internal.dom.Window; }).handle; }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __structural2499 = ((cast _HostWeb._records__webWindow : flight._internal._WeakMap<ApplicationWindow, WebWindowRecord__webWindow>).get((cast win))); __structural2499 == null ? _Runtime.UNDEFINED : (cast __structural2499 : { var handle:flight._internal.dom.Window; }).handle; }), function():Dynamic return cast null);
     return cast null;
   }
 

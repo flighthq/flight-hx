@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef PowerChangeBackend = { var subscribe:(Void->Void)->(Void->Void); };
+typedef PowerChangeBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var subscribe:(Void->Void)->(Void->Void); };

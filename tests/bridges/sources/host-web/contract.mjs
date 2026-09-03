@@ -44,7 +44,6 @@ export * from './webInputTarget.mjs';
 export * from './webKeyboard.mjs';
 export * from './webLifecycle.mjs';
 export * from './webLoop.mjs';
-export * from './webMediaFileCapture.mjs';
 export * from './webMediaHost.mjs';
 export * from './webMediasession.mjs';
 export * from './webMenu.mjs';

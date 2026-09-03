@@ -4,4 +4,25 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef PowerKeepAwakeBackend = { var acquire:PowerKeepAwakeMode->flight._internal._Promise<PowerKeepAwakeAcquireResult>; @:optional var destroy:Void->Void; var isActive:Void->Bool; var release:Void->flight._internal._Promise<PowerKeepAwakeReleaseResult>; };
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class PowerKeepAwakeBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var acquire:PowerKeepAwakeMode->flight._internal._Promise<PowerKeepAwakeAcquireResult>;
+  public var destroy:Void->Void;
+  public var isActive:Void->Bool;
+  public var release:Void->flight._internal._Promise<PowerKeepAwakeReleaseResult>;
+
+  private function new(acquire:PowerKeepAwakeMode->flight._internal._Promise<PowerKeepAwakeAcquireResult>, destroy:Void->Void, isActive:Void->Bool, release:Void->flight._internal._Promise<PowerKeepAwakeReleaseResult>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.acquire = acquire;
+    this.destroy = destroy;
+    this.isActive = isActive;
+    this.release = release;
+  }
+}
+#else
+typedef PowerKeepAwakeBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var acquire:PowerKeepAwakeMode->flight._internal._Promise<PowerKeepAwakeAcquireResult>; @:optional var destroy:Void->Void; var isActive:Void->Bool; var release:Void->flight._internal._Promise<PowerKeepAwakeReleaseResult>; };
+#end

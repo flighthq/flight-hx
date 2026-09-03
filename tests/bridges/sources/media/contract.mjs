@@ -7,4 +7,5 @@ export * from './audioChannel.mjs';
 export * from './audioDeviceBackend.mjs';
 export * from './audioMixer.mjs';
 export * from './enableAudioMixerGuards.mjs';
+export * from './mediaChannelSignals.mjs';
 export * from './videoChannel.mjs';

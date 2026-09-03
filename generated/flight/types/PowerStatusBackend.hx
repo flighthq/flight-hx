@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef PowerStatusBackend = { var getStatus:PowerStatus->PowerStatus; };
+typedef PowerStatusBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getStatus:PowerStatus->PowerStatus; };

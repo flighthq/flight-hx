@@ -7,6 +7,8 @@ import flight.Types.EntityRuntimeKey;
 import flight._Entity.createEntity;
 import flight._Entity.createEntityRuntime;
 import flight._Types.EntityRuntimeKey;
+import flight.types.CapturePhotoDialogOptions;
+import flight.types.CaptureVideoDialogOptions;
 import flight.types.DirectoryOpenDialogBackend;
 import flight.types.DirectoryOpenDialogResult;
 import flight.types.EntityRuntime;
@@ -20,16 +22,26 @@ import flight.types.FileSaveDialogResult;
 import flight.types.HasDialogDirectoryOpen;
 import flight.types.HasDialogFileOpen;
 import flight.types.HasDialogFileSave;
+import flight.types.HasDialogImageOpen;
 import flight.types.HasDialogMessage;
+import flight.types.HasDialogPhotoCapture;
 import flight.types.HasDialogPrompt;
+import flight.types.HasDialogVideoCapture;
+import flight.types.ImageOpenDialogBackend;
+import flight.types.ImageOpenDialogResult;
 import flight.types.MessageDialogBackend;
 import flight.types.MessageDialogOptions;
 import flight.types.MessageDialogResult;
 import flight.types.OpenDirectoryDialogOptions;
 import flight.types.OpenFileDialogOptions;
+import flight.types.OpenImageDialogOptions;
+import flight.types.PhotoCaptureDialogBackend;
+import flight.types.PhotoCaptureDialogResult;
 import flight.types.PromptDialogBackend;
 import flight.types.PromptDialogOptions;
 import flight.types.SaveFileDialogOptions;
+import flight.types.VideoCaptureDialogBackend;
+import flight.types.VideoCaptureDialogResult;
 
 @:noCompletion
 class _Dialog {
@@ -151,6 +163,21 @@ class _Dialog {
 
   public static function showSaveFileDialog(host:HasDialogFileSave, options:SaveFileDialogOptions):flight._internal._Promise<FileSaveDialogResult> {
     return cast (cast (cast (cast host : HasDialogFileSave).dialog : { var fileSave:FileSaveDialogBackend; }).fileSave : FileSaveDialogBackend).save(({ final __callArgument15:Dynamic = options; __callArgument15; }));
+    return cast null;
+  }
+
+  public static function showCapturePhotoDialog(host:HasDialogPhotoCapture, ?options:CapturePhotoDialogOptions):flight._internal._Promise<PhotoCaptureDialogResult> {
+    return cast ((cast _Runtime.strictEquals(options, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast (cast (cast host : HasDialogPhotoCapture).dialog : { var photoCapture:PhotoCaptureDialogBackend; }).photoCapture : PhotoCaptureDialogBackend).capture(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Dynamic) : (cast (cast (cast (cast host : HasDialogPhotoCapture).dialog : { var photoCapture:PhotoCaptureDialogBackend; }).photoCapture : PhotoCaptureDialogBackend).capture(({ final __callArgument16:Dynamic = options; __callArgument16; })) : Dynamic));
+    return cast null;
+  }
+
+  public static function showCaptureVideoDialog(host:HasDialogVideoCapture, ?options:CaptureVideoDialogOptions):flight._internal._Promise<VideoCaptureDialogResult> {
+    return cast ((cast _Runtime.strictEquals(options, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast (cast (cast host : HasDialogVideoCapture).dialog : { var videoCapture:VideoCaptureDialogBackend; }).videoCapture : VideoCaptureDialogBackend).capture(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Dynamic) : (cast (cast (cast (cast host : HasDialogVideoCapture).dialog : { var videoCapture:VideoCaptureDialogBackend; }).videoCapture : VideoCaptureDialogBackend).capture(({ final __callArgument17:Dynamic = options; __callArgument17; })) : Dynamic));
+    return cast null;
+  }
+
+  public static function showOpenImageDialog(host:HasDialogImageOpen, ?options:OpenImageDialogOptions):flight._internal._Promise<ImageOpenDialogResult> {
+    return cast ((cast _Runtime.strictEquals(options, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast (cast (cast host : HasDialogImageOpen).dialog : { var imageOpen:ImageOpenDialogBackend; }).imageOpen : ImageOpenDialogBackend).open(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Dynamic) : (cast (cast (cast (cast host : HasDialogImageOpen).dialog : { var imageOpen:ImageOpenDialogBackend; }).imageOpen : ImageOpenDialogBackend).open(({ final __callArgument18:Dynamic = options; __callArgument18; })) : Dynamic));
     return cast null;
   }
 }

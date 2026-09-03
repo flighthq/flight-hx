@@ -2,7 +2,7 @@
 import compiled from '../../build/haxe-js/flight.cjs';
 
 export const cloneImageResource = compiled.flight.Image.cloneImageResource;
-export const createCompressedImage = compiled.flight.Image.createCompressedImage;
+export const createCompressedImageResource = compiled.flight.Image.createCompressedImageResource;
 export const createEmbeddedImageResourceReference = compiled.flight.Image.createEmbeddedImageResourceReference;
 export const createExternalImageResourceReference = compiled.flight.Image.createExternalImageResourceReference;
 export const createImageResource = compiled.flight.Image.createImageResource;

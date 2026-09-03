@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef HostIpcCapabilities = { @:optional var message:IpcMessageBackend; };
+typedef HostIpcCapabilities = { @:optional var handle:IpcHandleBackend; @:optional var invoke:IpcInvokeBackend; @:optional var message:IpcMessageBackend; @:optional var send:IpcSendBackend; @:optional var targetedSend:IpcTargetedSendBackend<Dynamic>; };

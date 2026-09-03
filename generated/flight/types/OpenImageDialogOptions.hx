@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MediaFileCaptureFacingMode = String;
+typedef OpenImageDialogOptions = { @:optional var signal:flight._internal.dom.AbortSignal; };

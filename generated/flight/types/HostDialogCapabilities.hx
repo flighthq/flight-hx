@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef HostDialogCapabilities = { @:optional var directoryOpen:DirectoryOpenDialogBackend; @:optional var fileOpen:FileOpenDialogBackend; @:optional var fileSave:FileSaveDialogBackend; @:optional var message:MessageDialogBackend; @:optional var prompt:PromptDialogBackend; };
+typedef HostDialogCapabilities = { @:optional var directoryOpen:DirectoryOpenDialogBackend; @:optional var fileOpen:FileOpenDialogBackend; @:optional var fileSave:FileSaveDialogBackend; @:optional var imageOpen:ImageOpenDialogBackend; @:optional var message:MessageDialogBackend; @:optional var photoCapture:PhotoCaptureDialogBackend; @:optional var prompt:PromptDialogBackend; @:optional var videoCapture:VideoCaptureDialogBackend; };

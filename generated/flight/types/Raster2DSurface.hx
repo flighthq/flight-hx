@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Raster2DSurface = { var width:Float; var height:Float; var context:flight._internal.dom.CanvasRenderingContext2D; var image:Image; };
+typedef Raster2DSurface = { var width:Float; var height:Float; var context:flight._internal.dom.CanvasRenderingContext2D; var image:ImageResource; };

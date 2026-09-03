@@ -748,7 +748,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free clock',
   },
   {
-    declarationFingerprint: 'sha256:9ea86c550f139c78db1e1e5f74465c7b5551ae23b4269fa6f342fabefe27471a',
+    declarationFingerprint: 'sha256:adc86b7b98f59e94bd1d927a4700655d542ddaa53a072cebcf83a79a541fa41d',
     id: '@flighthq/types:interface#AreaLight',
     purpose: 'reviewed escape-free area light',
   },
@@ -868,7 +868,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free Scene3D document node',
   },
   {
-    declarationFingerprint: 'sha256:5aa15d73a4d69dda6f617f278e05d90700a178b45474ec248e36e1a1139373ae',
+    declarationFingerprint: 'sha256:958286508ea320b3aa03ef4d94c2abf8a888b01bba9b6f8a7f8278c2a8d948d1',
     id: '@flighthq/types:interface#DirectionalLight',
     purpose: 'reviewed escape-free directional light',
   },
@@ -1413,22 +1413,22 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free Lottie text document',
   },
   {
-    declarationFingerprint: 'sha256:2692ed3168285d890bf7abb2054c889a2ddeeaf73b7ed333349c732c3705c662',
+    declarationFingerprint: 'sha256:0b4525699938a5628140650ab2034e8bad788875786387d90d814ad0d61e3d24',
     id: '@flighthq/types:interface#AreaLightOptions',
     purpose: 'reviewed escape-free area-light options',
   },
   {
-    declarationFingerprint: 'sha256:d0bf1578d5df68cbb0e862e25e3ac2b9d7a0141cb8461c4a9226d61baecee179',
+    declarationFingerprint: 'sha256:223b476703cc3e62879542f4a2048b13edbd213c9f7d101e50a87b0c3f70c732',
     id: '@flighthq/types:interface#SpotLightOptions',
     purpose: 'reviewed escape-free spot-light options',
   },
   {
-    declarationFingerprint: 'sha256:35ec8d4b09d8b5e4ec4a3bb1b4cc4df6cae2b1df2ee5ff01c43296dc64029d2c',
+    declarationFingerprint: 'sha256:a69fec825950a1a99d0b1ddab38c424c231ddc8de0c13a5ecd24f79a51678402',
     id: '@flighthq/types:interface#PointLightOptions',
     purpose: 'reviewed escape-free point-light options',
   },
   {
-    declarationFingerprint: 'sha256:ae22f5138e53cd2df7b843f130bdd9febf39d2cad6f130edf563bb11fc9f4431',
+    declarationFingerprint: 'sha256:c0a6bf4a005dd31930379a8aa13dc57df33773f78507444760dd135d2914cc2a',
     id: '@flighthq/types:interface#DirectionalLightOptions',
     purpose: 'reviewed escape-free directional-light options',
   },
@@ -1698,7 +1698,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free quad-batch runtime',
   },
   {
-    declarationFingerprint: 'sha256:8f5956e935f6aa84c5eb19bef04c2b1e4be1d2b138d4fc7bc1ba46e6b5b95e20',
+    declarationFingerprint: 'sha256:4f76b48f7affac57f2a933d877fbd5978b70bb09d2915f551425a9ce8ce1ac69',
     id: '@flighthq/types:interface#Raster2DSurface',
     purpose: 'reviewed escape-free backend-neutral raster surface',
   },
@@ -2210,9 +2210,6 @@ const approvedTypedStructRenames = new Map<string, string>([
   ['@flighthq/types:interface#SceneAnimationTarget', '@flighthq/types:interface#Scene3DAnimationTarget'],
   ['@flighthq/types:interface#SceneNodeTraits', '@flighthq/types:interface#Node3DTraits'],
   ['@flighthq/types:interface#Surface', '@flighthq/types:interface#Bitmap'],
-  ['@flighthq/types:interface#WebcamCaptureOptions', '@flighthq/types:interface#MediaFileCaptureOptions'],
-  ['@flighthq/types:interface#WebcamPhoto', '@flighthq/types:interface#MediaFileCapturePhoto'],
-  ['@flighthq/types:interface#WebcamVideo', '@flighthq/types:interface#MediaFileCaptureVideo'],
   ['@flighthq/types:type#SceneRuntime', '@flighthq/types:type#Scene3DRuntime'],
 ]);
 
@@ -2232,12 +2229,13 @@ const approvedTypedStructReplacementRemovals = new Map<string, string[]>([
       '@flighthq/types:interface#UpdaterCommandBackend',
     ],
   ],
+  ['@flighthq/types:interface#Font', ['@flighthq/types:interface#FontResource']],
   [
     '@flighthq/types:interface#ImageResource',
     [
       '@flighthq/types:interface#Bitmap',
-      '@flighthq/types:interface#CompressedImage',
-      '@flighthq/types:interface#Image',
+      '@flighthq/types:interface#CompressedImageResource',
+      '@flighthq/types:interface#ImageResource',
     ],
   ],
   [
@@ -2299,14 +2297,30 @@ const approvedTypedStructReplacementRemovals = new Map<string, string[]>([
   ],
   [
     '@flighthq/types:interface#VideoTexture',
-    ['@flighthq/types:interface#Image', '@flighthq/types:interface#VideoResource', '@flighthq/types:type#Texture'],
+    [
+      '@flighthq/types:interface#ImageResource',
+      '@flighthq/types:interface#VideoResource',
+      '@flighthq/types:type#Texture',
+    ],
   ],
+  [
+    '@flighthq/types:interface#WebcamCaptureOptions',
+    [
+      '@flighthq/types:interface#CapturePhotoDialogOptions',
+      '@flighthq/types:interface#CaptureVideoDialogOptions',
+      '@flighthq/types:interface#OpenImageDialogOptions',
+    ],
+  ],
+  ['@flighthq/types:interface#WebcamPhoto', ['@flighthq/types:interface#DialogImage']],
+  ['@flighthq/types:interface#WebcamVideo', ['@flighthq/types:interface#DialogVideo']],
   [
     '@flighthq/types:interface#WebcamStream',
     [
-      '@flighthq/types:interface#MediaFileCaptureBackend',
-      '@flighthq/types:interface#MediaFileCapturePhoto',
-      '@flighthq/types:interface#MediaFileCaptureVideo',
+      '@flighthq/types:interface#DialogImage',
+      '@flighthq/types:interface#DialogVideo',
+      '@flighthq/types:interface#ImageOpenDialogBackend',
+      '@flighthq/types:interface#PhotoCaptureDialogBackend',
+      '@flighthq/types:interface#VideoCaptureDialogBackend',
     ],
   ],
 ]);

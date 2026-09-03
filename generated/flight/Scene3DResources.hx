@@ -7,7 +7,7 @@ import flight._Scene3DResources as Facade_Scene3DResources_flight__Scene3DResour
 import flight.types.ExternalImageResourceReference;
 import flight.types.GltfScene3DDocumentLoadOptions;
 import flight.types.HasNetHttp;
-import flight.types.Image;
+import flight.types.ImageResource;
 import flight.types.ImageResourceReference;
 import flight.types.LoadScene3DResourcesOptions;
 import flight.types.ObjMaterialLibrary;
@@ -18,6 +18,7 @@ import flight.types.Scene3DDocumentLoadOptions;
 import flight.types.Scene3DKindUsage;
 import flight.types.Scene3DResourceResolver;
 import flight.types.Scene3DResourceResolverOptions;
+import flight.types.Scene3DResourceResolverWithRuntime;
 import flight.types.Scene3DResourceRevealOptions;
 import flight.types.Scene3DResourceSignals;
 import flight.types.Scene3DResources;
@@ -29,35 +30,35 @@ import flight.types.TweenManager;
 import flight.types.UpdateScene3DResourceStreamingOptions;
 
 class Scene3DResources {
-  public static function areScene3DResourceFailureGuardsEnabled(resolver:Scene3DResourceResolver):Bool {
+  public static function areScene3DResourceFailureGuardsEnabled(resolver:Scene3DResourceResolverWithRuntime):Bool {
     return cast Facade_Scene3DResources_flight__Scene3DResources.areScene3DResourceFailureGuardsEnabled(resolver);
     return cast null;
   }
 
-  public static function createBuiltInScene3DResourceResolver(?options:Scene3DResourceResolverOptions):Scene3DResourceResolver {
+  public static function createBuiltInScene3DResourceResolver(?options:Scene3DResourceResolverOptions):Scene3DResourceResolverWithRuntime {
     return cast Facade_Scene3DResources_flight__Scene3DResources.createBuiltInScene3DResourceResolver(options);
     return cast null;
   }
 
-  public static function createScene3DResourceResolver(?options:Scene3DResourceResolverOptions):Scene3DResourceResolver {
+  public static function createScene3DResourceResolver(?options:Scene3DResourceResolverOptions):Scene3DResourceResolverWithRuntime {
     return cast Facade_Scene3DResources_flight__Scene3DResources.createScene3DResourceResolver(options);
     return cast null;
   }
 
-  public static function disableScene3DResourceFailureGuards(resolver:Scene3DResourceResolver):Void {
+  public static function disableScene3DResourceFailureGuards(resolver:Scene3DResourceResolverWithRuntime):Void {
     Facade_Scene3DResources_flight__Scene3DResources.disableScene3DResourceFailureGuards(resolver);
   }
 
-  public static function disposeScene3DResourceResolver(resolver:Scene3DResourceResolver):Void {
+  public static function disposeScene3DResourceResolver(resolver:Scene3DResourceResolverWithRuntime):Void {
     Facade_Scene3DResources_flight__Scene3DResources.disposeScene3DResourceResolver(resolver);
   }
 
-  public static function enableScene3DResourceFailureGuards(resolver:Scene3DResourceResolver):Void->Void {
+  public static function enableScene3DResourceFailureGuards(resolver:Scene3DResourceResolverWithRuntime):Void->Void {
     return cast Facade_Scene3DResources_flight__Scene3DResources.enableScene3DResourceFailureGuards(resolver);
     return cast null;
   }
 
-  public static function enableScene3DResourceSignals(resolver:Scene3DResourceResolver):Scene3DResourceSignals {
+  public static function enableScene3DResourceSignals(resolver:Scene3DResourceResolverWithRuntime):Scene3DResourceSignals {
     return cast Facade_Scene3DResources_flight__Scene3DResources.enableScene3DResourceSignals(resolver);
     return cast null;
   }
@@ -66,7 +67,7 @@ class Scene3DResources {
     Facade_Scene3DResources_flight__Scene3DResources.explainScene3DResourceCoverage(out, resolver, usage, catalog);
   }
 
-  public static function fetchWebImageResource(ref:ExternalImageResourceReference, signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<Image>> {
+  public static function fetchWebImageResource(ref:ExternalImageResourceReference, signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<ImageResource>> {
     return cast Facade_Scene3DResources_flight__Scene3DResources.fetchWebImageResource(ref, signal);
     return cast null;
   }
@@ -76,7 +77,7 @@ class Scene3DResources {
     return cast null;
   }
 
-  public static function getScene3DResourceSignals(resolver:Scene3DResourceResolver):Null<Scene3DResourceSignals> {
+  public static function getScene3DResourceSignals(resolver:Scene3DResourceResolverWithRuntime):Null<Scene3DResourceSignals> {
     return cast Facade_Scene3DResources_flight__Scene3DResources.getScene3DResourceSignals(resolver);
     return cast null;
   }
@@ -130,7 +131,7 @@ class Scene3DResources {
     return cast null;
   }
 
-  public static function loadScene3DResources(scene:Scene3D, resolver:Scene3DResourceResolver, ?options:LoadScene3DResourcesOptions):flight._internal._Promise<flight._internal._Nothing> {
+  public static function loadScene3DResources(scene:Scene3D, resolver:Scene3DResourceResolverWithRuntime, ?options:LoadScene3DResourcesOptions):flight._internal._Promise<flight._internal._Nothing> {
     return cast Facade_Scene3DResources_flight__Scene3DResources.loadScene3DResources(scene, resolver, options);
     return cast null;
   }
@@ -145,17 +146,17 @@ class Scene3DResources {
     return cast null;
   }
 
-  public static function resolveScene3DResources(scene:Scene3D, resolver:Scene3DResourceResolver, ?options:ResolveScene3DResourcesOptions):flight.types.Scene3DResources {
+  public static function resolveScene3DResources(scene:Scene3D, resolver:Scene3DResourceResolverWithRuntime, ?options:ResolveScene3DResourcesOptions):flight.types.Scene3DResources {
     return cast Facade_Scene3DResources_flight__Scene3DResources.resolveScene3DResources(scene, resolver, options);
     return cast null;
   }
 
-  public static function retryFailedScene3DResources(scene:Scene3D, resolver:Scene3DResourceResolver, ?options:UpdateScene3DResourceStreamingOptions):Float {
+  public static function retryFailedScene3DResources(scene:Scene3D, resolver:Scene3DResourceResolverWithRuntime, ?options:UpdateScene3DResourceStreamingOptions):Float {
     return cast Facade_Scene3DResources_flight__Scene3DResources.retryFailedScene3DResources(scene, resolver, options);
     return cast null;
   }
 
-  public static function revealScene3DResourcesOnResolve(resolver:Scene3DResourceResolver, scene:Scene3D, tweenManager:TweenManager, ?options:Scene3DResourceRevealOptions):Void->Void {
+  public static function revealScene3DResourcesOnResolve(resolver:Scene3DResourceResolverWithRuntime, scene:Scene3D, tweenManager:TweenManager, ?options:Scene3DResourceRevealOptions):Void->Void {
     return cast Facade_Scene3DResources_flight__Scene3DResources.revealScene3DResourcesOnResolve(resolver, scene, tweenManager, options);
     return cast null;
   }
@@ -164,12 +165,12 @@ class Scene3DResources {
     Facade_Scene3DResources_flight__Scene3DResources.setScene3DDocumentResourceBasePathFromUrl(document, url);
   }
 
-  public static function updateScene3DResourceStreaming(scene:Scene3D, resolver:Scene3DResourceResolver, ?options:UpdateScene3DResourceStreamingOptions):flight.types.Scene3DResources {
+  public static function updateScene3DResourceStreaming(scene:Scene3D, resolver:Scene3DResourceResolverWithRuntime, ?options:UpdateScene3DResourceStreamingOptions):flight.types.Scene3DResources {
     return cast Facade_Scene3DResources_flight__Scene3DResources.updateScene3DResourceStreaming(scene, resolver, options);
     return cast null;
   }
 
-  public static function waitForScene3DResourceResolver(resolver:Scene3DResourceResolver):flight._internal._Promise<flight._internal._Nothing> {
+  public static function waitForScene3DResourceResolver(resolver:Scene3DResourceResolverWithRuntime):flight._internal._Promise<flight._internal._Nothing> {
     return cast Facade_Scene3DResources_flight__Scene3DResources.waitForScene3DResourceResolver(resolver);
     return cast null;
   }

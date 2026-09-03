@@ -2544,8 +2544,8 @@ class _SceneDocument {
     if ((cast !_Runtime.strictEquals(({ final __structural652 = runtime; __structural652 == null ? _Runtime.UNDEFINED : (cast __structural652 : { @:optional var traits:flight._internal._Any; }).traits; }), Node2DTraitsKey) : Bool)) { return cast false; }
     previous = (cast scene : Scene2D).root;
     ((cast scene : Scene2D).root = (cast root : Node2D));
-    ((cast (cast getNodeRuntime((cast root : Dynamic)) : Node2DRuntime) : { var scene2d:Null<Scene2D>; }).scene2d = scene);
-    ((cast (cast getNodeRuntime((cast previous : Dynamic)) : Node2DRuntime) : { var scene2d:Null<Scene2D>; }).scene2d = null);
+    ((cast (cast getNodeRuntime((cast root : Dynamic)) : Node2DRuntime) : Node2DRuntime).scene2d = scene);
+    ((cast (cast getNodeRuntime((cast previous : Dynamic)) : Node2DRuntime) : Node2DRuntime).scene2d = null);
     return cast true;
     return cast null;
   }

@@ -4,6 +4,7 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight.Types.Node2DTraitsKey;
+import flight._Color.lerpColor;
 import flight._Geometry.copyMatrix;
 import flight._Geometry.copyRectangle;
 import flight._Geometry.createMatrix;
@@ -84,6 +85,7 @@ import flight.types.RegistryEntryState;
 import flight.types.RegistryTableEntry;
 import flight.types.RenderEffect;
 import flight.types.RenderEffectCaptureGeometry;
+import flight.types.RenderEffectFieldRoles;
 import flight.types.RenderEffectInput;
 import flight.types.RenderEffectPadding;
 import flight.types.RenderEffectPaddingExplanation;
@@ -1444,7 +1446,12 @@ class _Effects {
     return cast null;
   }
 
-  public static function lerpRenderEffect(a:RenderEffect, b:RenderEffect, t:Float, out:RenderEffect):Bool {
+  @:allow(flight)
+  @:keep
+  private static final RENDER_EFFECT_FIELD_ROLES:RenderEffectFieldRoles = (cast { BevelEffect: { highlightColor: 'packedColor', shadowColor: 'packedColor' }, ConvolutionEffect: { color: 'packedColor' }, DropShadowEffect: { color: 'packedColor' }, InnerGlowEffect: { color: 'packedColor' }, InnerShadowEffect: { color: 'packedColor' }, OuterGlowEffect: { color: 'packedColor' }, OutlineEffect: { color: 'packedColor' }, ScreenSpaceFogEffect: { color: 'packedColor' }, VignetteEffect: { color: 'packedColor' }, VolumetricLightEffect: { lightColor: 'packedColor' } });
+
+  public static function lerpRenderEffect(a:RenderEffect, b:RenderEffect, t:Float, out:RenderEffect, ?roles:RenderEffectFieldRoles):Bool {
+    if (roles == null) roles = cast ({ BevelEffect: { highlightColor: 'packedColor', shadowColor: 'packedColor' }, ConvolutionEffect: { color: 'packedColor' }, DropShadowEffect: { color: 'packedColor' }, InnerGlowEffect: { color: 'packedColor' }, InnerShadowEffect: { color: 'packedColor' }, OuterGlowEffect: { color: 'packedColor' }, OutlineEffect: { color: 'packedColor' }, ScreenSpaceFogEffect: { color: 'packedColor' }, VignetteEffect: { color: 'packedColor' }, VolumetricLightEffect: { lightColor: 'packedColor' } } : Dynamic);
     var tc:Float = cast _Runtime.UNDEFINED;
     var numericKeys:flight._internal._Set<String> = cast _Runtime.UNDEFINED;
     var booleanKeys:flight._internal._Set<String> = cast _Runtime.UNDEFINED;
@@ -1452,6 +1459,7 @@ class _Effects {
     var aRec:flight._internal._Record<String, flight._internal._Any> = cast _Runtime.UNDEFINED;
     var bRec:flight._internal._Record<String, flight._internal._Any> = cast _Runtime.UNDEFINED;
     var outRecord:flight._internal._Record<String, flight._internal._Any> = cast _Runtime.UNDEFINED;
+    var kindRoles:flight._internal._Record<String, String> = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(_Runtime.field(a, 'kind'), _Runtime.field(b, 'kind')) : Bool)) { return cast false; }
     tc = HxMath.max(0.0, HxMath.min(1.0, t));
     numericKeys = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
@@ -1479,14 +1487,15 @@ class _Effects {
       }
     }
     outRecord = (cast (cast out : flight._internal._Any) : flight._internal._Record<String, flight._internal._Any>);
+    kindRoles = _Runtime.getIndex(roles, (cast _Runtime.field(a, 'kind') : String));
     for (key in _Runtime.iterable(numericKeys)) {
       var va:Null<Float> = (cast _Runtime.getIndex(aRec, key) : Null<Float>);
       var vb:Null<Float> = (cast _Runtime.getIndex(bRec, key) : Null<Float>);
-      if ((cast ((cast !_Runtime.strictEquals(va, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(vb, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-        _Runtime.setIndex(outRecord, key, (va + ((vb - va) * tc)));
-      } else {
+      if ((cast ((cast _Runtime.strictEquals(va, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(vb, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
         _Runtime.setIndex(outRecord, key, ((cast ((cast tc : Float) < (cast 0.5 : Float)) : Bool) ? (cast va : Dynamic) : (cast vb : Dynamic)));
+        continue;
       }
+      _Runtime.setIndex(outRecord, key, ((cast _Runtime.strictEquals(_Runtime.optionalIndex(kindRoles, key), 'packedColor') : Bool) ? (cast (cast lerpColor((cast va : Float), (cast vb : Float), (cast tc : Float)) : Float) : Dynamic) : (cast (va + ((vb - va) * tc)) : Dynamic)));
     }
     for (key in _Runtime.iterable(booleanKeys)) {
       _Runtime.setIndex(outRecord, key, ((cast ((cast tc : Float) < (cast 0.5 : Float)) : Bool) ? (cast _Runtime.getIndex(aRec, key) : Dynamic) : (cast _Runtime.getIndex(bRec, key) : Dynamic)));

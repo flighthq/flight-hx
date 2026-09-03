@@ -4,16 +4,38 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Ipc as Facade_Ipc_flight__Ipc;
+import flight.types.HasIpcHandle;
+import flight.types.HasIpcInvoke;
 import flight.types.HasIpcMessage;
+import flight.types.HasIpcSend;
+import flight.types.HasIpcTargetedSend;
 
 class Ipc {
+  public static function invokeIpc(host:HasIpcInvoke, channel:String, ...args:flight._internal._Any):flight._internal._Promise<flight._internal._Any> {
+    return cast _Runtime.callHaxeRestValue(Facade_Ipc_flight__Ipc.invokeIpc, _Runtime.concatArrays([[host], [channel], _Runtime.toArray(args)]), 2);
+    return cast null;
+  }
+
   public static function onceIpcMessage(host:HasIpcMessage, channel:String, listener:Array<flight._internal._Any>->Void):Void->Void {
     return cast Facade_Ipc_flight__Ipc.onceIpcMessage(host, channel, listener);
+    return cast null;
+  }
+
+  public static function onIpcInvoke(host:HasIpcHandle, channel:String, handler:Array<flight._internal._Any>->flight._internal._Any):Void->Void {
+    return cast Facade_Ipc_flight__Ipc.onIpcInvoke(host, channel, handler);
     return cast null;
   }
 
   public static function onIpcMessage(host:HasIpcMessage, channel:String, listener:Array<flight._internal._Any>->Void):Void->Void {
     return cast Facade_Ipc_flight__Ipc.onIpcMessage(host, channel, listener);
     return cast null;
+  }
+
+  public static function sendIpcMessage(host:HasIpcSend, channel:String, ...args:flight._internal._Any):Void {
+    _Runtime.callHaxeRestValue(Facade_Ipc_flight__Ipc.sendIpcMessage, _Runtime.concatArrays([[host], [channel], _Runtime.toArray(args)]), 2);
+  }
+
+  public static function sendIpcMessageTo<Target>(host:HasIpcTargetedSend<Target>, target:Target, channel:String, ...args:flight._internal._Any):Void {
+    _Runtime.callHaxeRestValue(Facade_Ipc_flight__Ipc.sendIpcMessageTo, _Runtime.concatArrays([[host], [target], [channel], _Runtime.toArray(args)]), 3);
   }
 }

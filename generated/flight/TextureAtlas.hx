@@ -6,7 +6,7 @@ import flight._internal._Runtime;
 import flight._TextureAtlas as Facade_TextureAtlas_flight__TextureAtlas;
 import flight.types.EntityRuntime;
 import flight.types.GridSliceOptions;
-import flight.types.Image;
+import flight.types.ImageResource;
 import flight.types.RectangleLike;
 import flight.types.Texture2D;
 import flight.types.TextureAtlas;
@@ -70,7 +70,7 @@ class TextureAtlas {
     return cast null;
   }
 
-  public static function createTextureAtlasFromImageResource(resource:Image):flight.types.TextureAtlas {
+  public static function createTextureAtlasFromImageResource(resource:ImageResource):flight.types.TextureAtlas {
     return cast Facade_TextureAtlas_flight__TextureAtlas.createTextureAtlasFromImageResource(resource);
     return cast null;
   }

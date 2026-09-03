@@ -4,6 +4,8 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Dialog as Facade_Dialog_flight__Dialog;
+import flight.types.CapturePhotoDialogOptions;
+import flight.types.CaptureVideoDialogOptions;
 import flight.types.DirectoryOpenDialogResult;
 import flight.types.FileDialogHandle;
 import flight.types.FileDialogHandleOperations;
@@ -12,14 +14,21 @@ import flight.types.FileSaveDialogResult;
 import flight.types.HasDialogDirectoryOpen;
 import flight.types.HasDialogFileOpen;
 import flight.types.HasDialogFileSave;
+import flight.types.HasDialogImageOpen;
 import flight.types.HasDialogMessage;
+import flight.types.HasDialogPhotoCapture;
 import flight.types.HasDialogPrompt;
+import flight.types.HasDialogVideoCapture;
+import flight.types.ImageOpenDialogResult;
 import flight.types.MessageDialogOptions;
 import flight.types.MessageDialogResult;
 import flight.types.OpenDirectoryDialogOptions;
 import flight.types.OpenFileDialogOptions;
+import flight.types.OpenImageDialogOptions;
+import flight.types.PhotoCaptureDialogResult;
 import flight.types.PromptDialogOptions;
 import flight.types.SaveFileDialogOptions;
+import flight.types.VideoCaptureDialogResult;
 
 class Dialog {
   public static function createFileDialogHandle(kind:flight._internal._IndexedAccess<FileDialogHandle, String>, name:String, path:Null<String>, ?operations:Null<FileDialogHandleOperations>):FileDialogHandle {
@@ -29,6 +38,16 @@ class Dialog {
 
   public static function getFileDialogHandleOperations(handle:FileDialogHandle):Null<FileDialogHandleOperations> {
     return cast Facade_Dialog_flight__Dialog.getFileDialogHandleOperations(handle);
+    return cast null;
+  }
+
+  public static function showCapturePhotoDialog(host:HasDialogPhotoCapture, ?options:CapturePhotoDialogOptions):flight._internal._Promise<PhotoCaptureDialogResult> {
+    return cast Facade_Dialog_flight__Dialog.showCapturePhotoDialog(host, options);
+    return cast null;
+  }
+
+  public static function showCaptureVideoDialog(host:HasDialogVideoCapture, ?options:CaptureVideoDialogOptions):flight._internal._Promise<VideoCaptureDialogResult> {
+    return cast Facade_Dialog_flight__Dialog.showCaptureVideoDialog(host, options);
     return cast null;
   }
 
@@ -64,6 +83,11 @@ class Dialog {
 
   public static function showOpenFileDialog(host:HasDialogFileOpen, options:OpenFileDialogOptions):flight._internal._Promise<FileOpenDialogResult> {
     return cast Facade_Dialog_flight__Dialog.showOpenFileDialog(host, options);
+    return cast null;
+  }
+
+  public static function showOpenImageDialog(host:HasDialogImageOpen, ?options:OpenImageDialogOptions):flight._internal._Promise<ImageOpenDialogResult> {
+    return cast Facade_Dialog_flight__Dialog.showOpenImageDialog(host, options);
     return cast null;
   }
 

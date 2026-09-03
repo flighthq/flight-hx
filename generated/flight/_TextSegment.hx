@@ -3,6 +3,7 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight.types.HasTextSegmenter;
 import flight.types.TextSegment;
 import flight.types.TextSegmentGranularity;
 import flight.types.TextSegmentRange;
@@ -10,49 +11,49 @@ import flight.types.TextSegmenterBackend;
 
 @:noCompletion
 class _TextSegment {
-  public static function segmentGraphemes(text:String, ?locale:String):Array<TextSegment> {
-    return cast (cast (cast getTextSegmenterBackend() : TextSegmenterBackend) : TextSegmenterBackend).segment((cast text : String), ({ final __callArgument0:Dynamic = 'grapheme'; __callArgument0; }), ({ final __callArgument1:Dynamic = locale; __callArgument1; }));
+  public static function segmentGraphemes(text:String, ?locale:String, ?host:HasTextSegmenter):Array<TextSegment> {
+    return cast (cast (cast getTextSegmenterBackend(({ final __callArgument2:Dynamic = host; __callArgument2; })) : TextSegmenterBackend) : TextSegmenterBackend).segment((cast text : String), ({ final __callArgument4:Dynamic = 'grapheme'; __callArgument4; }), ({ final __callArgument5:Dynamic = locale; __callArgument5; }));
     return cast null;
   }
 
-  public static function segmentSentences(text:String, ?locale:String):Array<TextSegment> {
-    return cast (cast (cast getTextSegmenterBackend() : TextSegmenterBackend) : TextSegmenterBackend).segment((cast text : String), ({ final __callArgument2:Dynamic = 'sentence'; __callArgument2; }), ({ final __callArgument3:Dynamic = locale; __callArgument3; }));
+  public static function segmentSentences(text:String, ?locale:String, ?host:HasTextSegmenter):Array<TextSegment> {
+    return cast (cast (cast getTextSegmenterBackend(({ final __callArgument8:Dynamic = host; __callArgument8; })) : TextSegmenterBackend) : TextSegmenterBackend).segment((cast text : String), ({ final __callArgument10:Dynamic = 'sentence'; __callArgument10; }), ({ final __callArgument11:Dynamic = locale; __callArgument11; }));
     return cast null;
   }
 
-  public static function segmentWords(text:String, ?locale:String):Array<TextSegment> {
-    return cast (cast (cast getTextSegmenterBackend() : TextSegmenterBackend) : TextSegmenterBackend).segment((cast text : String), ({ final __callArgument4:Dynamic = 'word'; __callArgument4; }), ({ final __callArgument5:Dynamic = locale; __callArgument5; }));
+  public static function segmentWords(text:String, ?locale:String, ?host:HasTextSegmenter):Array<TextSegment> {
+    return cast (cast (cast getTextSegmenterBackend(({ final __callArgument14:Dynamic = host; __callArgument14; })) : TextSegmenterBackend) : TextSegmenterBackend).segment((cast text : String), ({ final __callArgument16:Dynamic = 'word'; __callArgument16; }), ({ final __callArgument17:Dynamic = locale; __callArgument17; }));
     return cast null;
   }
 
-  public static function getNextGraphemeBoundary(text:String, index:Float, ?locale:String):Float {
-    return cast (cast _TextSegment.nextSegmentBoundary__textSegmentBoundary((cast segmentGraphemes((cast text : String), ({ final __callArgument6:Dynamic = locale; __callArgument6; })) : Array<TextSegment>), (cast index : Float), (cast _Runtime.field(text, 'length') : Float)) : Float);
+  public static function getNextGraphemeBoundary(text:String, index:Float, ?locale:String, ?host:HasTextSegmenter):Float {
+    return cast (cast _TextSegment.nextSegmentBoundary__textSegmentBoundary((cast segmentGraphemes((cast text : String), ({ final __callArgument18:Dynamic = locale; __callArgument18; }), ({ final __callArgument19:Dynamic = host; __callArgument19; })) : Array<TextSegment>), (cast index : Float), (cast _Runtime.field(text, 'length') : Float)) : Float);
     return cast null;
   }
 
-  public static function getNextWordBoundary(text:String, index:Float, ?locale:String):Float {
-    return cast (cast _TextSegment.nextSegmentBoundary__textSegmentBoundary((cast segmentWords((cast text : String), ({ final __callArgument10:Dynamic = locale; __callArgument10; })) : Array<TextSegment>), (cast index : Float), (cast _Runtime.field(text, 'length') : Float)) : Float);
+  public static function getNextWordBoundary(text:String, index:Float, ?locale:String, ?host:HasTextSegmenter):Float {
+    return cast (cast _TextSegment.nextSegmentBoundary__textSegmentBoundary((cast segmentWords((cast text : String), ({ final __callArgument26:Dynamic = locale; __callArgument26; }), ({ final __callArgument27:Dynamic = host; __callArgument27; })) : Array<TextSegment>), (cast index : Float), (cast _Runtime.field(text, 'length') : Float)) : Float);
     return cast null;
   }
 
-  public static function getPreviousGraphemeBoundary(text:String, index:Float, ?locale:String):Float {
-    return cast (cast _TextSegment.previousSegmentBoundary__textSegmentBoundary((cast segmentGraphemes((cast text : String), ({ final __callArgument14:Dynamic = locale; __callArgument14; })) : Array<TextSegment>), (cast index : Float)) : Float);
+  public static function getPreviousGraphemeBoundary(text:String, index:Float, ?locale:String, ?host:HasTextSegmenter):Float {
+    return cast (cast _TextSegment.previousSegmentBoundary__textSegmentBoundary((cast segmentGraphemes((cast text : String), ({ final __callArgument34:Dynamic = locale; __callArgument34; }), ({ final __callArgument35:Dynamic = host; __callArgument35; })) : Array<TextSegment>), (cast index : Float)) : Float);
     return cast null;
   }
 
-  public static function getPreviousWordBoundary(text:String, index:Float, ?locale:String):Float {
-    return cast (cast _TextSegment.previousSegmentBoundary__textSegmentBoundary((cast segmentWords((cast text : String), ({ final __callArgument18:Dynamic = locale; __callArgument18; })) : Array<TextSegment>), (cast index : Float)) : Float);
+  public static function getPreviousWordBoundary(text:String, index:Float, ?locale:String, ?host:HasTextSegmenter):Float {
+    return cast (cast _TextSegment.previousSegmentBoundary__textSegmentBoundary((cast segmentWords((cast text : String), ({ final __callArgument42:Dynamic = locale; __callArgument42; }), ({ final __callArgument43:Dynamic = host; __callArgument43; })) : Array<TextSegment>), (cast index : Float)) : Float);
     return cast null;
   }
 
-  public static function getWordRangeAt(text:String, index:Float, ?locale:String):Null<TextSegmentRange> {
+  public static function getWordRangeAt(text:String, index:Float, ?locale:String, ?host:HasTextSegmenter):Null<TextSegmentRange> {
     var clamped:Float = cast _Runtime.UNDEFINED;
     var lookup:Float = cast _Runtime.UNDEFINED;
     var segments:Array<TextSegment> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) { return cast null; }
     clamped = (cast _TextSegment.clampIndex__textSegmentBoundary((cast index : Float), (cast _Runtime.field(text, 'length') : Float)) : Float);
     lookup = ((cast _Runtime.strictEquals(clamped, _Runtime.field(text, 'length')) : Bool) ? (cast _Runtime.subtractNumbers(_Runtime.field(text, 'length'), 1.0) : Dynamic) : (cast clamped : Dynamic));
-    segments = (cast segmentWords((cast text : String), ({ final __callArgument22:Dynamic = locale; __callArgument22; })) : Array<TextSegment>);
+    segments = (cast segmentWords((cast text : String), ({ final __callArgument50:Dynamic = locale; __callArgument50; }), ({ final __callArgument51:Dynamic = host; __callArgument51; })) : Array<TextSegment>);
     for (segment in _Runtime.iterable(segments)) {
       if ((cast ((cast ((cast lookup : Float) >= (cast segment.start : Float)) : Bool) && (cast ((cast lookup : Float) < (cast segment.end : Float)) : Bool)) : Bool)) {
         return cast ((cast _Runtime.strictEquals(segment.isWordLike, true) : Bool) ? (cast { start: segment.start, end: segment.end } : Dynamic) : (cast null : Dynamic));
@@ -103,11 +104,12 @@ class _TextSegment {
     return cast null;
   }
 
+  public static final webTextSegmenterBackend:TextSegmenterBackend = (cast createWebTextSegmenterBackend() : TextSegmenterBackend);
+
   @:allow(flight)
   @:keep
-  private static function getTextSegmenterBackend():TextSegmenterBackend {
-    if ((cast _Runtime.strictEquals(_TextSegment._backend__textSegmenterBackend, null) : Bool)) { (_TextSegment._backend__textSegmenterBackend = cast ((cast createWebTextSegmenterBackend() : TextSegmenterBackend) : Dynamic)); }
-    return cast _TextSegment._backend__textSegmenterBackend;
+  private static function getTextSegmenterBackend(?host:HasTextSegmenter):TextSegmenterBackend {
+    return cast _Runtime.coalesce(_Runtime.coalesce(({ final __structural61 = ({ final __structural60 = host; __structural60 == null ? _Runtime.UNDEFINED : (cast __structural60 : { var text:{ var segmenter:TextSegmenterBackend; }; }).text; }); __structural61 == null ? _Runtime.UNDEFINED : (cast __structural61 : { var segmenter:TextSegmenterBackend; }).segmenter; }), function():Dynamic return cast _TextSegment._backend__textSegmenterBackend), function():Dynamic return cast webTextSegmenterBackend);
     return cast null;
   }
 
@@ -145,7 +147,7 @@ class _TextSegment {
     var segmenter:Null<flight._internal._Any> = cast _Runtime.UNDEFINED;
     var out:Array<TextSegment> = cast _Runtime.UNDEFINED;
     var isWordGranularity:Bool = cast _Runtime.UNDEFINED;
-    segmenter = (cast _TextSegment.getCachedSegmenter__textSegmenterBackend(({ final __callArgument30:Dynamic = locale; __callArgument30; }), ({ final __callArgument31:Dynamic = granularity; __callArgument31; })) : Null<flight._internal._Any>);
+    segmenter = (cast _TextSegment.getCachedSegmenter__textSegmenterBackend(({ final __callArgument62:Dynamic = locale; __callArgument62; }), ({ final __callArgument63:Dynamic = granularity; __callArgument63; })) : Null<flight._internal._Any>);
     if ((cast _Runtime.strictEquals(segmenter, null) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     out = (cast cast ([] : Array<Dynamic>));
     isWordGranularity = _Runtime.strictEquals(granularity, 'word');

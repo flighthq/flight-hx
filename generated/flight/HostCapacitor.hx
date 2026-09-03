@@ -6,11 +6,11 @@ import flight._internal._Runtime;
 import flight._HostCapacitor as Facade_HostCapacitor_flight__HostCapacitor;
 import flight._HostCapacitor.CapacitorClipboardBackend__capacitorClipboard;
 import flight._HostCapacitor.CapacitorConnectivityBackend__capacitorConnectivity;
-import flight._HostCapacitor.CapacitorHost__capacitorRegister;
 import flight.types.CapacitorAndroidAppCapabilities;
 import flight.types.CapacitorApi;
 import flight.types.CapacitorAppCapabilitiesFor;
 import flight.types.CapacitorCommonAppCapabilities;
+import flight.types.CapacitorHost;
 import flight.types.CapacitorNotificationCapabilities;
 import flight.types.CapacitorProtocolCapabilities;
 import flight.types.CapacitorShareContentBackend;
@@ -36,7 +36,7 @@ import flight.types.StatusBarStyleBackend;
 import flight.types.StatusBarVisibilityBackend;
 
 class HostCapacitor {
-  public static function capacitorHost<Profile:MobileOsProfile>(capacitor:CapacitorApi, profile:Profile):CapacitorHost__capacitorRegister<Profile> {
+  public static function capacitorHost<Profile:MobileOsProfile>(capacitor:CapacitorApi, profile:Profile):CapacitorHost<Profile> {
     return cast Facade_HostCapacitor_flight__HostCapacitor.capacitorHost(capacitor, profile);
     return cast null;
   }
@@ -145,7 +145,7 @@ class HostCapacitor {
     return cast null;
   }
 
-  public static function registerCapacitorBackends<Profile:MobileOsProfile>(capacitor:CapacitorApi, profile:Profile):CapacitorHost__capacitorRegister<Profile> {
+  public static function registerCapacitorBackends<Profile:MobileOsProfile>(capacitor:CapacitorApi, profile:Profile):CapacitorHost<Profile> {
     return cast Facade_HostCapacitor_flight__HostCapacitor.registerCapacitorBackends(capacitor, profile);
     return cast null;
   }

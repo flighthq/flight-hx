@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MenuApplicationBackend = { @:optional var destroy:Void->Void; var setApplicationMenu:Array<MenuItemTemplate>->Bool; };
+typedef MenuApplicationBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var destroy:Void->Void; var setApplicationMenu:Array<MenuItemTemplate>->Bool; };

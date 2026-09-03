@@ -1246,7 +1246,7 @@ class _TextLayout {
 
   public static function getTextLayoutMeasureProvider():Null<TextMeasureFunction> {
     if ((cast !_Runtime.strictEquals(_TextLayout._measureProvider__textLayoutMeasure, null) : Bool)) { return cast _TextLayout._measureProvider__textLayoutMeasure; }
-    if ((cast !_Runtime.strictEquals((cast getTextShaperBackend() : Null<TextShaperBackend>), null) : Bool)) { return cast measureText; }
+    if ((cast !_Runtime.strictEquals((cast (#if js _Runtime.callValue(getTextShaperBackend, cast ([] : Array<Dynamic>)) #else getTextShaperBackend(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Null<TextShaperBackend>), null) : Bool)) { return cast measureText; }
     return cast null;
     return cast null;
   }

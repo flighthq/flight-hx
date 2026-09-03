@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef PowerSessionLockBackend = { var subscribeLock:(Void->Void)->(Void->Void); var subscribeUnlock:(Void->Void)->(Void->Void); };
+typedef PowerSessionLockBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var subscribeLock:(Void->Void)->(Void->Void); var subscribeUnlock:(Void->Void)->(Void->Void); };

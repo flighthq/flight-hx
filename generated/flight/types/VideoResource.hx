@@ -4,4 +4,23 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef VideoResource = { var element:Null<flight._internal.dom.CanvasImageSource>; var objectUrl:Null<String>; var ownsElement:Bool; };
+#if !flight_struct_typedef
+@:allow(flight._Video)
+@:keep
+@:structInit
+class VideoResource {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var element:Null<flight._internal.dom.CanvasImageSource>;
+  public var objectUrl:Null<String>;
+  public var ownsElement:Bool;
+
+  private function new(element:Null<flight._internal.dom.CanvasImageSource>, objectUrl:Null<String>, ownsElement:Bool):Void {
+    this.__symbol__EntityRuntime = null;
+    this.element = element;
+    this.objectUrl = objectUrl;
+    this.ownsElement = ownsElement;
+  }
+}
+#else
+typedef VideoResource = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var element:Null<flight._internal.dom.CanvasImageSource>; var objectUrl:Null<String>; var ownsElement:Bool; };
+#end

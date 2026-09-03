@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 import flight._TextShaper as Facade_TextShaper_flight__TextShaper;
 import flight.types.FontMetrics;
 import flight.types.GlyphExtents;
+import flight.types.HasTextShaper;
 import flight.types.ShapeRunOptions;
 import flight.types.ShapedRun;
 import flight.types.TextFormat;
@@ -70,48 +71,48 @@ class TextShaper {
     return cast null;
   }
 
-  public static function getCodePointForGlyph(glyphId:Float, _format:TextFormat):Float {
-    return cast Facade_TextShaper_flight__TextShaper.getCodePointForGlyph(glyphId, _format);
+  public static function getCodePointForGlyph(glyphId:Float, _format:TextFormat, ?host:HasTextShaper):Float {
+    return cast Facade_TextShaper_flight__TextShaper.getCodePointForGlyph(glyphId, _format, host);
     return cast null;
   }
 
-  public static function getFontMetrics(format:TextFormat):Null<FontMetrics> {
-    return cast Facade_TextShaper_flight__TextShaper.getFontMetrics(format);
+  public static function getFontMetrics(format:TextFormat, ?host:HasTextShaper):Null<FontMetrics> {
+    return cast Facade_TextShaper_flight__TextShaper.getFontMetrics(format, host);
     return cast null;
   }
 
-  public static function getFontMetricsInto(format:TextFormat, out:FontMetrics):Bool {
-    return cast Facade_TextShaper_flight__TextShaper.getFontMetricsInto(format, out);
+  public static function getFontMetricsInto(format:TextFormat, out:FontMetrics, ?host:HasTextShaper):Bool {
+    return cast Facade_TextShaper_flight__TextShaper.getFontMetricsInto(format, out, host);
     return cast null;
   }
 
-  public static function getFontUnitScale(format:TextFormat):Float {
-    return cast Facade_TextShaper_flight__TextShaper.getFontUnitScale(format);
+  public static function getFontUnitScale(format:TextFormat, ?host:HasTextShaper):Float {
+    return cast Facade_TextShaper_flight__TextShaper.getFontUnitScale(format, host);
     return cast null;
   }
 
-  public static function getGlyphExtents(glyphId:Float, _format:TextFormat):Null<GlyphExtents> {
-    return cast Facade_TextShaper_flight__TextShaper.getGlyphExtents(glyphId, _format);
+  public static function getGlyphExtents(glyphId:Float, _format:TextFormat, ?host:HasTextShaper):Null<GlyphExtents> {
+    return cast Facade_TextShaper_flight__TextShaper.getGlyphExtents(glyphId, _format, host);
     return cast null;
   }
 
-  public static function getGlyphExtentsBatch(glyphIds:Array<Float>, _format:TextFormat, out:Array<GlyphExtents>):Float {
-    return cast Facade_TextShaper_flight__TextShaper.getGlyphExtentsBatch(glyphIds, _format, out);
+  public static function getGlyphExtentsBatch(glyphIds:Array<Float>, _format:TextFormat, out:Array<GlyphExtents>, ?host:HasTextShaper):Float {
+    return cast Facade_TextShaper_flight__TextShaper.getGlyphExtentsBatch(glyphIds, _format, out, host);
     return cast null;
   }
 
-  public static function getGlyphExtentsInto(glyphId:Float, _format:TextFormat, out:GlyphExtents):Bool {
-    return cast Facade_TextShaper_flight__TextShaper.getGlyphExtentsInto(glyphId, _format, out);
+  public static function getGlyphExtentsInto(glyphId:Float, _format:TextFormat, out:GlyphExtents, ?host:HasTextShaper):Bool {
+    return cast Facade_TextShaper_flight__TextShaper.getGlyphExtentsInto(glyphId, _format, out, host);
     return cast null;
   }
 
-  public static function getGlyphIndexForCodePoint(codePoint:Float, _format:TextFormat):Float {
-    return cast Facade_TextShaper_flight__TextShaper.getGlyphIndexForCodePoint(codePoint, _format);
+  public static function getGlyphIndexForCodePoint(codePoint:Float, _format:TextFormat, ?host:HasTextShaper):Float {
+    return cast Facade_TextShaper_flight__TextShaper.getGlyphIndexForCodePoint(codePoint, _format, host);
     return cast null;
   }
 
-  public static function getGlyphName(glyphId:Float, _format:TextFormat):String {
-    return cast Facade_TextShaper_flight__TextShaper.getGlyphName(glyphId, _format);
+  public static function getGlyphName(glyphId:Float, _format:TextFormat, ?host:HasTextShaper):String {
+    return cast Facade_TextShaper_flight__TextShaper.getGlyphName(glyphId, _format, host);
     return cast null;
   }
 
@@ -130,8 +131,8 @@ class TextShaper {
     return cast null;
   }
 
-  public static function measureText(text:String, format:TextFormat):Float {
-    return cast Facade_TextShaper_flight__TextShaper.measureText(text, format);
+  public static function measureText(text:String, format:TextFormat, ?host:HasTextShaper):Float {
+    return cast Facade_TextShaper_flight__TextShaper.measureText(text, format, host);
     return cast null;
   }
 
@@ -139,23 +140,23 @@ class TextShaper {
     Facade_TextShaper_flight__TextShaper.releaseShapedRun(run);
   }
 
-  public static function shapeTextRun(text:String, format:TextFormat, ?options:ShapeRunOptions):Null<ShapedRun> {
-    return cast Facade_TextShaper_flight__TextShaper.shapeTextRun(text, format, options);
+  public static function shapeTextRun(text:String, format:TextFormat, ?options:ShapeRunOptions, ?host:HasTextShaper):Null<ShapedRun> {
+    return cast Facade_TextShaper_flight__TextShaper.shapeTextRun(text, format, options, host);
     return cast null;
   }
 
-  public static function shapeTextRunCached(cache:TextShaperCache, text:String, format:TextFormat, ?options:ShapeRunOptions):Null<ShapedRun> {
-    return cast Facade_TextShaper_flight__TextShaper.shapeTextRunCached(cache, text, format, options);
+  public static function shapeTextRunCached(cache:TextShaperCache, text:String, format:TextFormat, ?options:ShapeRunOptions, ?host:HasTextShaper):Null<ShapedRun> {
+    return cast Facade_TextShaper_flight__TextShaper.shapeTextRunCached(cache, text, format, options, host);
     return cast null;
   }
 
-  public static function shapeTextRunInto(text:String, format:TextFormat, out:ShapedRun, ?options:ShapeRunOptions):Bool {
-    return cast Facade_TextShaper_flight__TextShaper.shapeTextRunInto(text, format, out, options);
+  public static function shapeTextRunInto(text:String, format:TextFormat, out:ShapedRun, ?options:ShapeRunOptions, ?host:HasTextShaper):Bool {
+    return cast Facade_TextShaper_flight__TextShaper.shapeTextRunInto(text, format, out, options, host);
     return cast null;
   }
 
-  public static function shapeTextRuns(text:String, format:TextFormat, ?options:TextShaperOptions):Array<ShapedRun> {
-    return cast Facade_TextShaper_flight__TextShaper.shapeTextRuns(text, format, options);
+  public static function shapeTextRuns(text:String, format:TextFormat, ?options:TextShaperOptions, ?host:HasTextShaper):Array<ShapedRun> {
+    return cast Facade_TextShaper_flight__TextShaper.shapeTextRuns(text, format, options, host);
     return cast null;
   }
 }

@@ -2,16 +2,16 @@
   "moduleValues": [],
   "schemaVersion": 1,
   "summary": {
-    "dynamicTypeEntries": 212,
+    "dynamicTypeEntries": 214,
     "externalTypeKeys": 1,
-    "globalValueKeys": 70,
-    "hostTypeKeys": 237,
-    "jsOnlyGlobalValueKeys": 35,
+    "globalValueKeys": 72,
+    "hostTypeKeys": 239,
+    "jsOnlyGlobalValueKeys": 37,
     "missingEntries": 0,
     "moduleValueKeys": 0,
     "portableGlobalValueKeys": 35,
-    "typeUses": 9081,
-    "valueUses": 2126
+    "typeUses": 9112,
+    "valueUses": 2136
   },
   "types": [
     {
@@ -82,7 +82,7 @@
         "upstream/packages/types/src/Dialog.ts",
         "upstream/packages/types/src/ElectronApi.ts",
         "upstream/packages/types/src/FileSystem.ts",
-        "upstream/packages/types/src/Image.ts",
+        "upstream/packages/types/src/ImageResource.ts",
         "upstream/packages/types/src/ImageResourceReference.ts",
         "upstream/packages/types/src/Net.ts",
         "upstream/packages/types/src/ResourceLoadItem.ts",
@@ -92,7 +92,7 @@
         "upstream/packages/video/src/videoResourceFrom.ts"
       ],
       "provider": "src/flight/_internal/dom/AbortSignal.hx",
-      "uses": 409
+      "uses": 432
     },
     {
       "coverage": "typed",
@@ -120,7 +120,7 @@
         "upstream/packages/types/src/AudioResource.ts"
       ],
       "provider": "src/flight/_internal/dom/AudioBuffer.hx",
-      "uses": 39
+      "uses": 41
     },
     {
       "coverage": "dynamic-stub",
@@ -133,7 +133,7 @@
         "upstream/packages/media/src/audioDeviceBackend.ts"
       ],
       "provider": "src/flight/_internal/dom/AudioBufferSourceNode.hx",
-      "uses": 29
+      "uses": 30
     },
     {
       "coverage": "dynamic-stub",
@@ -300,7 +300,7 @@
         "upstream/packages/types/src/DomTextureResolver.ts",
         "upstream/packages/types/src/GlContextRuntime.ts",
         "upstream/packages/types/src/HostImageSource.ts",
-        "upstream/packages/types/src/Image.ts",
+        "upstream/packages/types/src/ImageResource.ts",
         "upstream/packages/types/src/VideoCapabilityBackend.ts",
         "upstream/packages/types/src/VideoResource.ts",
         "upstream/packages/types/src/WgpuDeviceRuntime.ts",
@@ -394,6 +394,7 @@
         "upstream/packages/scene2d-canvas/src/canvasParticleEmitter2D.ts",
         "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts",
         "upstream/packages/scene2d-canvas/src/canvasRenderState.ts",
+        "upstream/packages/scene2d-canvas/src/canvasRenderStateHandles.ts",
         "upstream/packages/scene2d-canvas/src/canvasRenderSurface.ts",
         "upstream/packages/scene2d-canvas/src/canvasRenderTarget.ts",
         "upstream/packages/scene2d-canvas/src/canvasRichText.ts",
@@ -434,7 +435,7 @@
         "upstream/packages/types/src/WgpuRichTextOverlay.ts"
       ],
       "provider": "src/flight/_internal/dom/CanvasRenderingContext2D.hx",
-      "uses": 630
+      "uses": 634
     },
     {
       "coverage": "dynamic-stub",
@@ -558,7 +559,7 @@
         "upstream/packages/scene2d-dom/src/domTransform.ts"
       ],
       "provider": "src/flight/_internal/dom/CSSStyleDeclaration.hx",
-      "uses": 158
+      "uses": 150
     },
     {
       "coverage": "dynamic-stub",
@@ -616,11 +617,21 @@
         "upstream/packages/scene2d-dom/src/domSprite.ts",
         "upstream/packages/scene2d-dom/src/domTextInput.ts",
         "upstream/packages/scene2d-dom/src/domTextLabel.ts",
-        "upstream/packages/textshaper-canvas/src/canvasTextShaper.ts",
-        "upstream/packages/webcam/src/mediaFileCapture.ts"
+        "upstream/packages/textshaper-canvas/src/canvasTextShaper.ts"
       ],
       "provider": "src/flight/_internal/dom/Document.hx",
-      "uses": 142
+      "uses": 143
+    },
+    {
+      "coverage": "dynamic-stub",
+      "haxeType": "flight._internal.dom.DocumentOrShadowRoot",
+      "key": "host:DocumentOrShadowRoot",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/host-web/src/webInputTarget.ts"
+      ],
+      "provider": "src/flight/_internal/dom/DocumentOrShadowRoot.hx",
+      "uses": 3
     },
     {
       "coverage": "typed",
@@ -696,7 +707,7 @@
         "upstream/packages/scene2d-dom/src/domTextInput.ts"
       ],
       "provider": "src/flight/_internal/dom/Element.hx",
-      "uses": 22
+      "uses": 19
     },
     {
       "coverage": "dynamic-stub",
@@ -704,6 +715,7 @@
       "key": "host:Event",
       "kind": "host",
       "locations": [
+        "upstream/packages/host-web/src/webDialog.ts",
         "upstream/packages/host-web/src/webInputTarget.ts",
         "upstream/packages/host-web/src/webMidi.ts",
         "upstream/packages/input/src/inputManager.ts",
@@ -711,11 +723,10 @@
         "upstream/packages/loader/src/resourceLoader.ts",
         "upstream/packages/media/src/audioDeviceBackend.ts",
         "upstream/packages/scene3d-resources/src/resolveScene3DResources.ts",
-        "upstream/packages/socket/src/socket.ts",
-        "upstream/packages/webcam/src/mediaFileCapture.ts"
+        "upstream/packages/socket/src/socket.ts"
       ],
       "provider": "src/flight/_internal/dom/Event.hx",
-      "uses": 55
+      "uses": 53
     },
     {
       "coverage": "dynamic-stub",
@@ -821,11 +832,10 @@
         "upstream/packages/host-web/src/webDialog.ts",
         "upstream/packages/host-web/src/webFilesystem.ts",
         "upstream/packages/host-web/src/webInputTarget.ts",
-        "upstream/packages/host-web/src/webShare.ts",
-        "upstream/packages/webcam/src/mediaFileCapture.ts"
+        "upstream/packages/host-web/src/webShare.ts"
       ],
       "provider": "src/flight/_internal/dom/File.hx",
-      "uses": 42
+      "uses": 58
     },
     {
       "coverage": "dynamic-stub",
@@ -834,11 +844,10 @@
       "kind": "host",
       "locations": [
         "upstream/packages/host-web/src/webDialog.ts",
-        "upstream/packages/host-web/src/webInputTarget.ts",
-        "upstream/packages/webcam/src/mediaFileCapture.ts"
+        "upstream/packages/host-web/src/webInputTarget.ts"
       ],
       "provider": "src/flight/_internal/dom/FileList.hx",
-      "uses": 5
+      "uses": 4
     },
     {
       "coverage": "dynamic-stub",
@@ -847,10 +856,10 @@
       "kind": "host",
       "locations": [
         "upstream/packages/host-web/src/webClipboard.ts",
-        "upstream/packages/webcam/src/mediaFileCapture.ts"
+        "upstream/packages/host-web/src/webDialog.ts"
       ],
       "provider": "src/flight/_internal/dom/FileReader.hx",
-      "uses": 23
+      "uses": 20
     },
     {
       "coverage": "dynamic-stub",
@@ -903,7 +912,6 @@
       "kind": "host",
       "locations": [
         "upstream/packages/font/src/_fontFaceLoad.ts",
-        "upstream/packages/font/src/fontFrom.ts",
         "upstream/packages/font/src/fontLoading.ts",
         "upstream/packages/font/src/fontResourceFrom.ts",
         "upstream/packages/host-web/src/webFontLoading.ts",
@@ -911,7 +919,7 @@
         "upstream/packages/types/src/FontResource.ts"
       ],
       "provider": "src/flight/_internal/dom/FontFace.hx",
-      "uses": 35
+      "uses": 29
     },
     {
       "coverage": "dynamic-stub",
@@ -2431,6 +2439,7 @@
         "upstream/packages/scene2d-canvas/src/canvasParticleEmitter2D.ts",
         "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts",
         "upstream/packages/scene2d-canvas/src/canvasRenderState.ts",
+        "upstream/packages/scene2d-canvas/src/canvasRenderStateHandles.ts",
         "upstream/packages/scene2d-canvas/src/canvasRenderSurface.ts",
         "upstream/packages/scene2d-canvas/src/canvasRenderTarget.ts",
         "upstream/packages/scene2d-canvas/src/canvasRenderTexture.ts",
@@ -2465,7 +2474,7 @@
         "upstream/packages/video/src/videoResourceFrom.ts"
       ],
       "provider": "src/flight/_internal/dom/HTMLCanvasElement.hx",
-      "uses": 298
+      "uses": 302
     },
     {
       "coverage": "dynamic-stub",
@@ -2542,6 +2551,7 @@
       "key": "host:HTMLImageElement",
       "kind": "host",
       "locations": [
+        "upstream/packages/host-web/src/webDialog.ts",
         "upstream/packages/host-web/src/webVideoCapability.ts",
         "upstream/packages/image/src/imageBackend.ts",
         "upstream/packages/image/src/imageResource.ts",
@@ -2574,7 +2584,7 @@
         "upstream/packages/video/src/videoResourceFrom.ts"
       ],
       "provider": "src/flight/_internal/dom/HTMLImageElement.hx",
-      "uses": 87
+      "uses": 94
     },
     {
       "coverage": "dynamic-stub",
@@ -2582,11 +2592,10 @@
       "key": "host:HTMLInputElement",
       "kind": "host",
       "locations": [
-        "upstream/packages/host-web/src/webDialog.ts",
-        "upstream/packages/webcam/src/mediaFileCapture.ts"
+        "upstream/packages/host-web/src/webDialog.ts"
       ],
       "provider": "src/flight/_internal/dom/HTMLInputElement.hx",
-      "uses": 29
+      "uses": 19
     },
     {
       "coverage": "dynamic-stub",
@@ -2672,6 +2681,7 @@
       "key": "host:HTMLVideoElement",
       "kind": "host",
       "locations": [
+        "upstream/packages/host-web/src/webDialog.ts",
         "upstream/packages/host-web/src/webVideoCapability.ts",
         "upstream/packages/image/src/imageResource.ts",
         "upstream/packages/media/src/videoChannel.ts",
@@ -2701,7 +2711,7 @@
         "upstream/packages/video/src/videoResourceFrom.ts"
       ],
       "provider": "src/flight/_internal/dom/HTMLVideoElement.hx",
-      "uses": 163
+      "uses": 175
     },
     {
       "coverage": "dynamic-stub",
@@ -3069,7 +3079,7 @@
         "upstream/packages/sensors/src/sensors.ts"
       ],
       "provider": "src/flight/_internal/dom/Navigator.hx",
-      "uses": 87
+      "uses": 82
     },
     {
       "coverage": "dynamic-stub",
@@ -3081,7 +3091,7 @@
         "upstream/packages/scene2d-dom/src/domReconcile.ts"
       ],
       "provider": "src/flight/_internal/dom/Node.hx",
-      "uses": 5
+      "uses": 3
     },
     {
       "coverage": "dynamic-stub",
@@ -3298,11 +3308,10 @@
       "key": "host:ProgressEvent",
       "kind": "host",
       "locations": [
-        "upstream/packages/host-web/src/webClipboard.ts",
-        "upstream/packages/webcam/src/mediaFileCapture.ts"
+        "upstream/packages/host-web/src/webClipboard.ts"
       ],
       "provider": "src/flight/_internal/dom/ProgressEvent.hx",
-      "uses": 6
+      "uses": 2
     },
     {
       "coverage": "dynamic-stub",
@@ -3389,7 +3398,7 @@
         "upstream/packages/host-web/src/webWindow.ts"
       ],
       "provider": "src/flight/_internal/dom/Screen.hx",
-      "uses": 23
+      "uses": 22
     },
     {
       "coverage": "dynamic-stub",
@@ -3402,6 +3411,17 @@
       ],
       "provider": "src/flight/_internal/dom/ScreenOrientation.hx",
       "uses": 4
+    },
+    {
+      "coverage": "dynamic-stub",
+      "haxeType": "flight._internal.dom.ShadowRoot",
+      "key": "host:ShadowRoot",
+      "kind": "host",
+      "locations": [
+        "upstream/packages/host-web/src/webInputTarget.ts"
+      ],
+      "provider": "src/flight/_internal/dom/ShadowRoot.hx",
+      "uses": 1
     },
     {
       "coverage": "dynamic-stub",
@@ -3580,7 +3600,7 @@
         "upstream/packages/textshaper-canvas/src/canvasTextShaper.ts"
       ],
       "provider": "src/flight/_internal/dom/TextMetrics.hx",
-      "uses": 37
+      "uses": 36
     },
     {
       "coverage": "dynamic-stub",
@@ -3685,7 +3705,7 @@
         "upstream/packages/permissions/src/permission.ts"
       ],
       "provider": "src/flight/_internal/dom/WakeLock.hx",
-      "uses": 2
+      "uses": 4
     },
     {
       "coverage": "dynamic-stub",
@@ -3960,7 +3980,7 @@
         "upstream/packages/types/src/GlShapeMeshBinding.ts"
       ],
       "provider": "src/flight/_internal/dom/WebGLProgram.hx",
-      "uses": 252
+      "uses": 254
     },
     {
       "coverage": "dynamic-stub",
@@ -4296,7 +4316,7 @@
         "upstream/packages/sensors/src/sensors.ts"
       ],
       "provider": "src/flight/_internal/dom/Window.hx",
-      "uses": 145
+      "uses": 144
     },
     {
       "coverage": "dynamic-stub",
@@ -4325,7 +4345,7 @@
       "uses": 6
     }
   ],
-  "upstreamCommit": "98a7a58a934f55555a561a308cc23c1363c45652",
+  "upstreamCommit": "8d09db125a0afd3b73ca6e039a7dd25bcb9737d0",
   "values": [
     {
       "coverage": "portable",
@@ -4528,11 +4548,19 @@
         "generated/flight/_HostWeb.hx",
         "generated/flight/_Lifecycle.hx",
         "generated/flight/_Scene2DDom.hx",
-        "generated/flight/_TextShaperCanvas.hx",
-        "generated/flight/_Webcam.hx"
+        "generated/flight/_TextShaperCanvas.hx"
       ],
       "provider": "src/flight/_internal/_HostValueLut.hx",
-      "uses": 27
+      "uses": 28
+    },
+    {
+      "coverage": "js-only",
+      "key": "global:Document",
+      "locations": [
+        "generated/flight/_HostWeb.hx"
+      ],
+      "provider": "src/flight/_internal/_HostValueLut.hx",
+      "uses": 1
     },
     {
       "coverage": "portable",
@@ -4576,11 +4604,10 @@
       "coverage": "js-only",
       "key": "global:FileReader",
       "locations": [
-        "generated/flight/_HostWeb.hx",
-        "generated/flight/_Webcam.hx"
+        "generated/flight/_HostWeb.hx"
       ],
       "provider": "src/flight/_internal/_HostValueLut.hx",
-      "uses": 4
+      "uses": 5
     },
     {
       "coverage": "portable",
@@ -4906,7 +4933,7 @@
         "generated/flight/_Xml.hx"
       ],
       "provider": "src/flight/_internal/_HostValueLut.hx",
-      "uses": 798
+      "uses": 801
     },
     {
       "coverage": "js-only",
@@ -5089,6 +5116,15 @@
     },
     {
       "coverage": "js-only",
+      "key": "global:ShadowRoot",
+      "locations": [
+        "generated/flight/_HostWeb.hx"
+      ],
+      "provider": "src/flight/_internal/_HostValueLut.hx",
+      "uses": 1
+    },
+    {
+      "coverage": "js-only",
       "key": "global:SharedArrayBuffer",
       "locations": [
         "generated/flight/_RenderWgpu.hx"
@@ -5226,12 +5262,14 @@
         "generated/flight/_Statechart.hx",
         "generated/flight/_StatusBar.hx",
         "generated/flight/_Storage.hx",
+        "generated/flight/_TextShaper.hx",
         "generated/flight/_TextureAtlas.hx",
+        "generated/flight/_Tween.hx",
         "generated/flight/_Updater.hx",
         "generated/flight/_Velocity.hx"
       ],
       "provider": "src/flight/_internal/_HostValueLut.hx",
-      "uses": 222
+      "uses": 225
     },
     {
       "coverage": "portable",

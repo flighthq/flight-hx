@@ -124,6 +124,14 @@ typedef Physics3DBroadphasePublication__physics3DBroadphasePublication = { var b
 
 typedef Physics3DPositionScratch__solver = { var manifold:CollisionContactManifold3D; var centerA:Array<Float>; var centerB:Array<Float>; };
 
+typedef SerializedPhysics3DWorld__world = { @:optional var index:SpatialIndexBackend3D; @:optional var jointEvents:flight._internal._IndexedAccess<Physics3DWorld, String>; var solver:{ @:optional var constraintByPair:flight._internal._Map<Float, Physics3DContactConstraint>; }; };
+
+typedef SerializedPhysics3DBody__world = { @:optional var colliders:Array<Physics3DCollider>; };
+
+typedef SerializedPhysics3DContact__world = { @:optional var colliderA:Float; @:optional var colliderB:Float; };
+
+typedef SerializedPhysics3DSolverConfig__world = { @:optional var maxCcdRotationSubsteps:Float; };
+
 typedef Physics3DQueryScratch__worldQueries = { var candidateBodies:Array<Float>; var colliderBounds:SpatialAabb3D; var raycastHit:CollisionRaycastHit3D; var timeOfImpact:CollisionTimeOfImpact3D; };
 
 @:noCompletion
@@ -6543,8 +6551,8 @@ class _Physics3D {
   public static function hydratePhysics3DWorld(world:Physics3DWorld):Bool {
     var serializedVersion:flight._internal._Any = cast _Runtime.UNDEFINED;
     var version:Float = cast _Runtime.UNDEFINED;
-    var legacyWorld:{ @:optional var index:Null<SpatialIndexBackend3D>; @:optional var jointEvents:Null<Physics3DJointEvents>; var solver:{ >Physics3DSequentialImpulseState, @:optional var constraintByPair:Null<flight._internal._Map<Float, Physics3DContactConstraint>>; }; } = cast _Runtime.UNDEFINED;
-    var legacyConfig:{ >Physics3DSolverConfig, @:optional var maxCcdRotationSubsteps:Null<Float>; } = cast _Runtime.UNDEFINED;
+    var serializedWorld:SerializedPhysics3DWorld__world = cast _Runtime.UNDEFINED;
+    var serializedConfig:SerializedPhysics3DSolverConfig__world = cast _Runtime.UNDEFINED;
     assertPhysics3DWorldNotStepping(({ final __callArgument2715:Dynamic = world; __callArgument2715; }));
     serializedVersion = (cast (cast (cast world : flight._internal._Any) : { @:optional var version:flight._internal._Any; }) : { @:optional var version:flight._internal._Any; }).version;
     if ((cast ((cast !_Runtime.strictEquals(serializedVersion, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.typeofValue(serializedVersion), 'number') : Bool)) : Bool)) { return cast false; }
@@ -6553,25 +6561,24 @@ class _Physics3D {
       return cast false;
     }
     if ((cast _Runtime.strictEquals(version, Physics3DWorldVersion) : Bool)) { return cast true; }
-    legacyWorld = (cast (cast world : flight._internal._Any) : { @:optional var index:SpatialIndexBackend3D; @:optional var jointEvents:flight._internal._IndexedAccess<Physics3DWorld, String>; var solver:flight._internal._Intersection2<flight._internal._IndexedAccess<Physics3DWorld, String>, { @:optional var constraintByPair:flight._internal._Map<Float, Physics3DContactConstraint>; }>; });
-    legacyConfig = (cast world.config : flight._internal._Intersection2<Physics3DSolverConfig, { @:optional var maxCcdRotationSubsteps:Float; }>);
+    serializedWorld = (cast (cast world : flight._internal._Any) : SerializedPhysics3DWorld__world);
+    serializedConfig = (cast (cast world.config : flight._internal._Any) : SerializedPhysics3DSolverConfig__world);
     if ((cast ((cast version : Float) < (cast 2.0 : Float)) : Bool)) {
-      ({ final __nullishOwner2717 = legacyWorld; final __nullishValue2718:Null<SpatialIndexBackend3D> = cast (cast __nullishOwner2717 : { @:optional var index:Null<SpatialIndexBackend3D>; @:optional var jointEvents:Null<Physics3DJointEvents>; var solver:{ >Physics3DSequentialImpulseState, @:optional var constraintByPair:Null<flight._internal._Map<Float, Physics3DContactConstraint>>; }; }).index; __nullishValue2718 == null ? ((cast __nullishOwner2717 : { @:optional var index:Null<SpatialIndexBackend3D>; @:optional var jointEvents:Null<Physics3DJointEvents>; var solver:{ >Physics3DSequentialImpulseState, @:optional var constraintByPair:Null<flight._internal._Map<Float, Physics3DContactConstraint>>; }; }).index = (cast (cast createUniformGridSpatialBackend3D((cast 1.0 : Float)) : { >SpatialIndexBackend3D, >Entity, }) : Null<SpatialIndexBackend3D>)) : (cast __nullishValue2718 : Null<SpatialIndexBackend3D>); });
+      ({ final __nullishOwner2717 = serializedWorld; final __nullishValue2718:Null<SpatialIndexBackend3D> = cast (cast __nullishOwner2717 : SerializedPhysics3DWorld__world).index; __nullishValue2718 == null ? ((cast __nullishOwner2717 : SerializedPhysics3DWorld__world).index = (cast (cast createUniformGridSpatialBackend3D((cast 1.0 : Float)) : { >SpatialIndexBackend3D, >Entity, }) : Null<SpatialIndexBackend3D>)) : (cast __nullishValue2718 : Null<SpatialIndexBackend3D>); });
       for (body in _Runtime.iterable(world.bodies)) {
-        var legacyBody:{ >RigidBody3D, @:optional var colliders:Null<Array<Physics3DCollider>>; } = (cast body : flight._internal._Intersection2<RigidBody3D, { @:optional var colliders:Array<Physics3DCollider>; }>);
-        ({ final __nullishOwner2721 = legacyBody; final __nullishValue2722:Null<Array<Physics3DCollider>> = cast (cast __nullishOwner2721 : { var colliders:Array<Physics3DCollider>; }).colliders; __nullishValue2722 == null ? ((cast __nullishOwner2721 : { var colliders:Array<Physics3DCollider>; }).colliders = (cast cast ([] : Array<Dynamic>) : Array<Physics3DCollider>)) : (cast __nullishValue2722 : Array<Physics3DCollider>); });
+        ({ final __nullishOwner2721 = (cast (cast body : flight._internal._Any) : SerializedPhysics3DBody__world); final __nullishValue2722:Null<Array<Physics3DCollider>> = cast (cast __nullishOwner2721 : SerializedPhysics3DBody__world).colliders; __nullishValue2722 == null ? ((cast __nullishOwner2721 : SerializedPhysics3DBody__world).colliders = (cast cast ([] : Array<Dynamic>) : Null<Array<Physics3DCollider>>)) : (cast __nullishValue2722 : Null<Array<Physics3DCollider>>); });
       }
       for (contact in _Runtime.iterable(world.contacts)) {
-        var legacyContact:{ >Physics3DContact, @:optional var colliderA:Null<Float>; @:optional var colliderB:Null<Float>; } = (cast contact : flight._internal._Intersection2<Physics3DContact, { @:optional var colliderA:Float; @:optional var colliderB:Float; }>);
-        ({ final __nullishOwner2725 = legacyContact; final __nullishValue2726:Null<Float> = cast (cast __nullishOwner2725 : { var colliderA:Float; }).colliderA; __nullishValue2726 == null ? ((cast __nullishOwner2725 : { var colliderA:Float; }).colliderA = (cast 0.0 : Float)) : (cast __nullishValue2726 : Float); });
-        ({ final __nullishOwner2727 = legacyContact; final __nullishValue2728:Null<Float> = cast (cast __nullishOwner2727 : { var colliderB:Float; }).colliderB; __nullishValue2728 == null ? ((cast __nullishOwner2727 : { var colliderB:Float; }).colliderB = (cast 0.0 : Float)) : (cast __nullishValue2728 : Float); });
+        var serializedContact:SerializedPhysics3DContact__world = (cast (cast contact : flight._internal._Any) : SerializedPhysics3DContact__world);
+        ({ final __nullishOwner2725 = serializedContact; final __nullishValue2726:Null<Float> = cast (cast __nullishOwner2725 : SerializedPhysics3DContact__world).colliderA; __nullishValue2726 == null ? ((cast __nullishOwner2725 : SerializedPhysics3DContact__world).colliderA = (cast 0.0 : Null<Float>)) : (cast __nullishValue2726 : Null<Float>); });
+        ({ final __nullishOwner2727 = serializedContact; final __nullishValue2728:Null<Float> = cast (cast __nullishOwner2727 : SerializedPhysics3DContact__world).colliderB; __nullishValue2728 == null ? ((cast __nullishOwner2727 : SerializedPhysics3DContact__world).colliderB = (cast 0.0 : Null<Float>)) : (cast __nullishValue2728 : Null<Float>); });
       }
     }
-    ({ final __nullishOwner2729 = legacyWorld; final __nullishValue2730:Null<Physics3DJointEvents> = cast (cast __nullishOwner2729 : { @:optional var index:Null<SpatialIndexBackend3D>; @:optional var jointEvents:Null<Physics3DJointEvents>; var solver:{ >Physics3DSequentialImpulseState, @:optional var constraintByPair:Null<flight._internal._Map<Float, Physics3DContactConstraint>>; }; }).jointEvents; __nullishValue2730 == null ? ((cast __nullishOwner2729 : { @:optional var index:Null<SpatialIndexBackend3D>; @:optional var jointEvents:Null<Physics3DJointEvents>; var solver:{ >Physics3DSequentialImpulseState, @:optional var constraintByPair:Null<flight._internal._Map<Float, Physics3DContactConstraint>>; }; }).jointEvents = (cast { broke: cast ([] : Array<Dynamic>) } : Null<Physics3DJointEvents>)) : (cast __nullishValue2730 : Null<Physics3DJointEvents>); });
-    ({ final __nullishOwner2731 = legacyConfig; final __nullishValue2732:Null<Float> = cast (cast __nullishOwner2731 : { var maxCcdRotationSubsteps:Float; }).maxCcdRotationSubsteps; __nullishValue2732 == null ? ((cast __nullishOwner2731 : { var maxCcdRotationSubsteps:Float; }).maxCcdRotationSubsteps = (cast (cast (cast createPhysics3DSolverConfig() : Physics3DSolverConfig) : Physics3DSolverConfig).maxCcdRotationSubsteps : Float)) : (cast __nullishValue2732 : Float); });
+    ({ final __nullishOwner2729 = serializedWorld; final __nullishValue2730:Null<Physics3DJointEvents> = cast (cast __nullishOwner2729 : SerializedPhysics3DWorld__world).jointEvents; __nullishValue2730 == null ? ((cast __nullishOwner2729 : SerializedPhysics3DWorld__world).jointEvents = (cast { broke: cast ([] : Array<Dynamic>) } : Null<Physics3DJointEvents>)) : (cast __nullishValue2730 : Null<Physics3DJointEvents>); });
+    ({ final __nullishOwner2731 = serializedConfig; final __nullishValue2732:Null<Float> = cast (cast __nullishOwner2731 : SerializedPhysics3DSolverConfig__world).maxCcdRotationSubsteps; __nullishValue2732 == null ? ((cast __nullishOwner2731 : SerializedPhysics3DSolverConfig__world).maxCcdRotationSubsteps = (cast (cast (cast createPhysics3DSolverConfig() : Physics3DSolverConfig) : Physics3DSolverConfig).maxCcdRotationSubsteps : Null<Float>)) : (cast __nullishValue2732 : Null<Float>); });
     ((cast world.solver : Physics3DSequentialImpulseState).constraints = cast ([] : Array<Dynamic>));
     ((cast world.solver : Physics3DSequentialImpulseState).constraintByContact = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []));
-    _Runtime.deleteField((cast legacyWorld : { @:optional var index:Null<SpatialIndexBackend3D>; @:optional var jointEvents:Null<Physics3DJointEvents>; var solver:{ >Physics3DSequentialImpulseState, @:optional var constraintByPair:Null<flight._internal._Map<Float, Physics3DContactConstraint>>; }; }).solver, 'constraintByPair');
+    _Runtime.deleteField((cast serializedWorld : SerializedPhysics3DWorld__world).solver, 'constraintByPair');
     (world.version = cast (Physics3DWorldVersion : Float));
     return cast true;
     return cast null;
@@ -6852,8 +6859,8 @@ class _Physics3D {
         i--;
       }
     }
-    _Physics3D.removePhysics3DContactEventsForBody__world((cast world.events : Physics3DContactEvents).began, (cast index : Float));
-    _Physics3D.removePhysics3DContactEventsForBody__world((cast world.events : Physics3DContactEvents).ended, (cast index : Float));
+    _Physics3D.removePhysics3DContactEventsForBody__world((cast (cast world.events : Physics3DContactEvents).began : Dynamic), (cast index : Float));
+    _Physics3D.removePhysics3DContactEventsForBody__world((cast (cast world.events : Physics3DContactEvents).ended : Dynamic), (cast index : Float));
     _Runtime.setLength((cast world.solver : Physics3DSequentialImpulseState).constraints, 0.0);
     ((cast (cast world.solver : Physics3DSequentialImpulseState).constraintByContact : flight._internal._Map<Physics3DContact, Physics3DContactConstraint>).clear());
     _Physics3D.clearPhysics3DSolveWorkspace__world(({ final __callArgument2824:Dynamic = world; __callArgument2824; }));

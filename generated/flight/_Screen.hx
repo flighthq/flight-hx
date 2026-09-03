@@ -4,6 +4,7 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Entity.createEntity;
+import flight._Entity.stripEntityRuntime;
 import flight._Signals.clearSignal;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
@@ -267,11 +268,11 @@ class _Screen {
   public static final _scratchPoint__screen:{ var x:Float; var y:Float; } = (cast { x: 0.0, y: 0.0 });
 
   public static function copyScreenInfo__screen(src:ScreenInfo, dst:ScreenInfo):Void {
-    flight._internal.DynamicObject.assign(dst, src);
+    flight._internal.DynamicObject.assign(dst, (cast stripEntityRuntime(({ final __callArgument88:Dynamic = src; __callArgument88; })) : { var height:Float; var width:Float; var x:Float; var y:Float; var rotation:Float; var colorSpace:ScreenColorSpace; var id:Float; var label:String; var orientation:ScreenOrientation; var scaleFactor:Float; var colorDepth:Float; var internal:Bool; var monochrome:Bool; var touchSupport:String; var isPrimary:Bool; var workWidth:Float; var workHeight:Float; var refreshRate:Float; var pixelDepth:Float; var physicalWidth:Float; var physicalHeight:Float; var isHdr:Bool; var maxLuminance:Float; var depthPerComponent:Float; var dpi:Float; }));
   }
 
   public static function fillDefaultScreenInfo__screen(out:ScreenInfo):ScreenInfo {
-    _Screen.copyScreenInfo__screen((cast createScreenInfo() : ScreenInfo), ({ final __callArgument88:Dynamic = out; __callArgument88; }));
+    _Screen.copyScreenInfo__screen((cast createScreenInfo() : ScreenInfo), ({ final __callArgument90:Dynamic = out; __callArgument90; }));
     return cast out;
     return cast null;
   }

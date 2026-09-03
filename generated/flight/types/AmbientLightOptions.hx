@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AmbientLightOptions = { @:optional var color:Float; @:optional var intensity:Float; };
+typedef AmbientLightOptions = { @:optional var color:Float; @:optional var enabled:Bool; @:optional var intensity:Float; @:optional var intensityUnit:LightUnit; };

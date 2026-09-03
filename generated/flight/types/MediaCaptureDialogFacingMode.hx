@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MediaFileCapturePhoto = { var dataUrl:String; var width:Float; var height:Float; var format:String; };
+typedef MediaCaptureDialogFacingMode = String;

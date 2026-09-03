@@ -10,7 +10,7 @@ import flight._Types.ImageTextureSourceKind;
 @:allow(flight._Texture)
 @:keep
 @:structInit
-class Image extends flight.types.TextureSource<Dynamic> {
+class ImageResource extends flight.types.TextureSource<Dynamic> {
   public var source:flight._internal.dom.CanvasImageSource;
 
   private function new(alphaType:AlphaType, gamut:String, height:Float, kind:Dynamic, version:Float, width:Float, source:flight._internal.dom.CanvasImageSource):Void {
@@ -19,5 +19,5 @@ class Image extends flight.types.TextureSource<Dynamic> {
   }
 }
 #else
-typedef Image = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var alphaType:AlphaType; var gamut:String; var height:Float; var kind:Dynamic; var version:Float; var width:Float; var source:flight._internal.dom.CanvasImageSource; };
+typedef ImageResource = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var alphaType:AlphaType; var gamut:String; var height:Float; var kind:Dynamic; var version:Float; var width:Float; var source:flight._internal.dom.CanvasImageSource; };
 #end

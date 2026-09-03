@@ -5,4 +5,8 @@ const api = compiled.flight._HostElectron;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const createElectronIpcHandleBackend = api.createElectronIpcHandleBackend;
+export const createElectronIpcInvokeBackend = api.createElectronIpcInvokeBackend;
 export const createElectronIpcMessageBackend = api.createElectronIpcMessageBackend;
+export const createElectronIpcSendBackend = api.createElectronIpcSendBackend;
+export const createElectronIpcTargetedSendBackend = api.createElectronIpcTargetedSendBackend;

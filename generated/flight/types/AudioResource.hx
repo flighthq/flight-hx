@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AudioResource = { var buffer:Null<flight._internal.dom.AudioBuffer>; };
+#if !flight_struct_typedef
+@:allow(flight._Audio)
+@:keep
+@:structInit
+class AudioResource {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var buffer:Null<flight._internal.dom.AudioBuffer>;
+
+  private function new(buffer:Null<flight._internal.dom.AudioBuffer>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.buffer = buffer;
+  }
+}
+#else
+typedef AudioResource = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var buffer:Null<flight._internal.dom.AudioBuffer>; };
+#end

@@ -5,6 +5,7 @@ const api = compiled.flight._Media;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const clearAudioChannelLoopRegion = api.clearAudioChannelLoopRegion;
 export const connectAudioChannelToNode = api.connectAudioChannelToNode;
 export const destroyAudioChannel = api.destroyAudioChannel;
 export const fadeAudioChannelGain = api.fadeAudioChannelGain;
@@ -14,12 +15,15 @@ export const getAudioChannelInputNode = api.getAudioChannelInputNode;
 export const getAudioChannelOutputNode = api.getAudioChannelOutputNode;
 export const hasAudioChannelFade = api.hasAudioChannelFade;
 export const hasAudioChannelNodeAccess = api.hasAudioChannelNodeAccess;
+export const isAudioChannelMuted = api.isAudioChannelMuted;
 export const isAudioChannelPlaying = api.isAudioChannelPlaying;
 export const pauseAudioChannel = api.pauseAudioChannel;
 export const playAudioResource = api.playAudioResource;
 export const resumeAudioChannel = api.resumeAudioChannel;
 export const setAudioChannelCurrentTime = api.setAudioChannelCurrentTime;
 export const setAudioChannelGain = api.setAudioChannelGain;
+export const setAudioChannelLoopRegion = api.setAudioChannelLoopRegion;
+export const setAudioChannelMuted = api.setAudioChannelMuted;
 export const setAudioChannelPan = api.setAudioChannelPan;
 export const setAudioChannelPlaybackRate = api.setAudioChannelPlaybackRate;
 export const stopAudioChannel = api.stopAudioChannel;

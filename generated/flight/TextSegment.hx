@@ -4,47 +4,51 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._TextSegment as Facade_TextSegment_flight__TextSegment;
+import flight.types.HasTextSegmenter;
 import flight.types.TextSegment;
 import flight.types.TextSegmentRange;
+import flight.types.TextSegmenterBackend;
 
 class TextSegment {
-  public static function getNextGraphemeBoundary(text:String, index:Float, ?locale:String):Float {
-    return cast Facade_TextSegment_flight__TextSegment.getNextGraphemeBoundary(text, index, locale);
+  public static function getNextGraphemeBoundary(text:String, index:Float, ?locale:String, ?host:HasTextSegmenter):Float {
+    return cast Facade_TextSegment_flight__TextSegment.getNextGraphemeBoundary(text, index, locale, host);
     return cast null;
   }
 
-  public static function getNextWordBoundary(text:String, index:Float, ?locale:String):Float {
-    return cast Facade_TextSegment_flight__TextSegment.getNextWordBoundary(text, index, locale);
+  public static function getNextWordBoundary(text:String, index:Float, ?locale:String, ?host:HasTextSegmenter):Float {
+    return cast Facade_TextSegment_flight__TextSegment.getNextWordBoundary(text, index, locale, host);
     return cast null;
   }
 
-  public static function getPreviousGraphemeBoundary(text:String, index:Float, ?locale:String):Float {
-    return cast Facade_TextSegment_flight__TextSegment.getPreviousGraphemeBoundary(text, index, locale);
+  public static function getPreviousGraphemeBoundary(text:String, index:Float, ?locale:String, ?host:HasTextSegmenter):Float {
+    return cast Facade_TextSegment_flight__TextSegment.getPreviousGraphemeBoundary(text, index, locale, host);
     return cast null;
   }
 
-  public static function getPreviousWordBoundary(text:String, index:Float, ?locale:String):Float {
-    return cast Facade_TextSegment_flight__TextSegment.getPreviousWordBoundary(text, index, locale);
+  public static function getPreviousWordBoundary(text:String, index:Float, ?locale:String, ?host:HasTextSegmenter):Float {
+    return cast Facade_TextSegment_flight__TextSegment.getPreviousWordBoundary(text, index, locale, host);
     return cast null;
   }
 
-  public static function getWordRangeAt(text:String, index:Float, ?locale:String):Null<TextSegmentRange> {
-    return cast Facade_TextSegment_flight__TextSegment.getWordRangeAt(text, index, locale);
+  public static function getWordRangeAt(text:String, index:Float, ?locale:String, ?host:HasTextSegmenter):Null<TextSegmentRange> {
+    return cast Facade_TextSegment_flight__TextSegment.getWordRangeAt(text, index, locale, host);
     return cast null;
   }
 
-  public static function segmentGraphemes(text:String, ?locale:String):Array<flight.types.TextSegment> {
-    return cast Facade_TextSegment_flight__TextSegment.segmentGraphemes(text, locale);
+  public static function segmentGraphemes(text:String, ?locale:String, ?host:HasTextSegmenter):Array<flight.types.TextSegment> {
+    return cast Facade_TextSegment_flight__TextSegment.segmentGraphemes(text, locale, host);
     return cast null;
   }
 
-  public static function segmentSentences(text:String, ?locale:String):Array<flight.types.TextSegment> {
-    return cast Facade_TextSegment_flight__TextSegment.segmentSentences(text, locale);
+  public static function segmentSentences(text:String, ?locale:String, ?host:HasTextSegmenter):Array<flight.types.TextSegment> {
+    return cast Facade_TextSegment_flight__TextSegment.segmentSentences(text, locale, host);
     return cast null;
   }
 
-  public static function segmentWords(text:String, ?locale:String):Array<flight.types.TextSegment> {
-    return cast Facade_TextSegment_flight__TextSegment.segmentWords(text, locale);
+  public static function segmentWords(text:String, ?locale:String, ?host:HasTextSegmenter):Array<flight.types.TextSegment> {
+    return cast Facade_TextSegment_flight__TextSegment.segmentWords(text, locale, host);
     return cast null;
   }
+
+  public static final webTextSegmenterBackend:TextSegmenterBackend = Facade_TextSegment_flight__TextSegment.webTextSegmenterBackend;
 }

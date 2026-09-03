@@ -957,7 +957,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@15365",
+      "fieldPath": "traits.__@NodeTraitsKey@15381",
       "parentSchemaId": "@flighthq/types:interface#BitmapTextRuntime"
     },
     {
@@ -1716,14 +1716,14 @@
       "parentSchemaId": "@flighthq/types:interface#CompositeCommand"
     },
     {
-      "childSchemaId": "@flighthq/types:interface#CompressedImageData",
-      "fieldPath": "compressed",
-      "parentSchemaId": "@flighthq/types:interface#CompressedImage"
-    },
-    {
       "childSchemaId": "@flighthq/types:interface#TextureContainer",
       "fieldPath": "container",
       "parentSchemaId": "@flighthq/types:interface#CompressedImageData"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#CompressedImageData",
+      "fieldPath": "compressed",
+      "parentSchemaId": "@flighthq/types:interface#CompressedImageResource"
     },
     {
       "childSchemaId": "@flighthq/types:interface#Signal",
@@ -1917,7 +1917,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@15365",
+      "fieldPath": "traits.__@NodeTraitsKey@15381",
       "parentSchemaId": "@flighthq/types:interface#DisplayObjectRuntime"
     },
     {
@@ -2796,12 +2796,12 @@
       "parentSchemaId": "@flighthq/types:interface#GlContextRuntime"
     },
     {
-      "childSchemaId": "@flighthq/types:interface#Image",
+      "childSchemaId": "@flighthq/types:interface#ImageResource",
       "fieldPath": "videoSrgbTextureCache<WeakMap:0>",
       "parentSchemaId": "@flighthq/types:interface#GlContextRuntime"
     },
     {
-      "childSchemaId": "@flighthq/types:interface#Image",
+      "childSchemaId": "@flighthq/types:interface#ImageResource",
       "fieldPath": "videoTextureCache<WeakMap:0>",
       "parentSchemaId": "@flighthq/types:interface#GlContextRuntime"
     },
@@ -3043,6 +3043,16 @@
     {
       "childSchemaId": "@flighthq/types:interface#ColorScaleBias",
       "fieldPath": "quadBatchWriterUniformColorScaleBias",
+      "parentSchemaId": "@flighthq/types:interface#GlRenderStateRuntime"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Entity",
+      "fieldPath": "defaultBitmapShader",
+      "parentSchemaId": "@flighthq/types:interface#GlRenderStateRuntime"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Entity",
+      "fieldPath": "materialBitmapShaderMap<Map:1>",
       "parentSchemaId": "@flighthq/types:interface#GlRenderStateRuntime"
     },
     {
@@ -3996,14 +4006,29 @@
       "parentSchemaId": "@flighthq/types:interface#HasDialogFileSave"
     },
     {
+      "childSchemaId": "@flighthq/types:interface#ImageOpenDialogBackend",
+      "fieldPath": "dialog.imageOpen",
+      "parentSchemaId": "@flighthq/types:interface#HasDialogImageOpen"
+    },
+    {
       "childSchemaId": "@flighthq/types:interface#MessageDialogBackend",
       "fieldPath": "dialog.message",
       "parentSchemaId": "@flighthq/types:interface#HasDialogMessage"
     },
     {
+      "childSchemaId": "@flighthq/types:interface#PhotoCaptureDialogBackend",
+      "fieldPath": "dialog.photoCapture",
+      "parentSchemaId": "@flighthq/types:interface#HasDialogPhotoCapture"
+    },
+    {
       "childSchemaId": "@flighthq/types:interface#PromptDialogBackend",
       "fieldPath": "dialog.prompt",
       "parentSchemaId": "@flighthq/types:interface#HasDialogPrompt"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#VideoCaptureDialogBackend",
+      "fieldPath": "dialog.videoCapture",
+      "parentSchemaId": "@flighthq/types:interface#HasDialogVideoCapture"
     },
     {
       "childSchemaId": "@flighthq/types:interface#BitmapEncodeBackend",
@@ -4071,9 +4096,29 @@
       "parentSchemaId": "@flighthq/types:interface#HasInputTargetPreparation"
     },
     {
+      "childSchemaId": "@flighthq/types:interface#IpcHandleBackend",
+      "fieldPath": "ipc.handle",
+      "parentSchemaId": "@flighthq/types:interface#HasIpcHandle"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#IpcInvokeBackend",
+      "fieldPath": "ipc.invoke",
+      "parentSchemaId": "@flighthq/types:interface#HasIpcInvoke"
+    },
+    {
       "childSchemaId": "@flighthq/types:interface#IpcMessageBackend",
       "fieldPath": "ipc.message",
       "parentSchemaId": "@flighthq/types:interface#HasIpcMessage"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#IpcSendBackend",
+      "fieldPath": "ipc.send",
+      "parentSchemaId": "@flighthq/types:interface#HasIpcSend"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#IpcTargetedSendBackend",
+      "fieldPath": "ipc.targetedSend",
+      "parentSchemaId": "@flighthq/types:interface#HasIpcTargetedSend"
     },
     {
       "childSchemaId": "@flighthq/types:interface#Material",
@@ -4089,11 +4134,6 @@
       "childSchemaId": "@flighthq/types:interface#AudioDeviceBackend",
       "fieldPath": "media.audioDevice",
       "parentSchemaId": "@flighthq/types:interface#HasMediaAudioDevice"
-    },
-    {
-      "childSchemaId": "@flighthq/types:interface#MediaFileCaptureBackend",
-      "fieldPath": "media.mediaFileCapture",
-      "parentSchemaId": "@flighthq/types:interface#HasMediaFileCapture"
     },
     {
       "childSchemaId": "@flighthq/types:interface#MediaSessionBackend",
@@ -4981,13 +5021,28 @@
       "parentSchemaId": "@flighthq/types:interface#HostDialogCapabilities"
     },
     {
+      "childSchemaId": "@flighthq/types:interface#ImageOpenDialogBackend",
+      "fieldPath": "imageOpen",
+      "parentSchemaId": "@flighthq/types:interface#HostDialogCapabilities"
+    },
+    {
       "childSchemaId": "@flighthq/types:interface#MessageDialogBackend",
       "fieldPath": "message",
       "parentSchemaId": "@flighthq/types:interface#HostDialogCapabilities"
     },
     {
+      "childSchemaId": "@flighthq/types:interface#PhotoCaptureDialogBackend",
+      "fieldPath": "photoCapture",
+      "parentSchemaId": "@flighthq/types:interface#HostDialogCapabilities"
+    },
+    {
       "childSchemaId": "@flighthq/types:interface#PromptDialogBackend",
       "fieldPath": "prompt",
+      "parentSchemaId": "@flighthq/types:interface#HostDialogCapabilities"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#VideoCaptureDialogBackend",
+      "fieldPath": "videoCapture",
       "parentSchemaId": "@flighthq/types:interface#HostDialogCapabilities"
     },
     {
@@ -5091,8 +5146,28 @@
       "parentSchemaId": "@flighthq/types:interface#HostInputCapabilities"
     },
     {
+      "childSchemaId": "@flighthq/types:interface#IpcHandleBackend",
+      "fieldPath": "handle",
+      "parentSchemaId": "@flighthq/types:interface#HostIpcCapabilities"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#IpcInvokeBackend",
+      "fieldPath": "invoke",
+      "parentSchemaId": "@flighthq/types:interface#HostIpcCapabilities"
+    },
+    {
       "childSchemaId": "@flighthq/types:interface#IpcMessageBackend",
       "fieldPath": "message",
+      "parentSchemaId": "@flighthq/types:interface#HostIpcCapabilities"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#IpcSendBackend",
+      "fieldPath": "send",
+      "parentSchemaId": "@flighthq/types:interface#HostIpcCapabilities"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#IpcTargetedSendBackend",
+      "fieldPath": "targetedSend",
       "parentSchemaId": "@flighthq/types:interface#HostIpcCapabilities"
     },
     {
@@ -5103,11 +5178,6 @@
     {
       "childSchemaId": "@flighthq/types:interface#AudioDeviceBackend",
       "fieldPath": "audioDevice",
-      "parentSchemaId": "@flighthq/types:interface#HostMediaCapabilities"
-    },
-    {
-      "childSchemaId": "@flighthq/types:interface#MediaFileCaptureBackend",
-      "fieldPath": "mediaFileCapture",
       "parentSchemaId": "@flighthq/types:interface#HostMediaCapabilities"
     },
     {
@@ -5617,7 +5687,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@15365",
+      "fieldPath": "traits.__@NodeTraitsKey@15381",
       "parentSchemaId": "@flighthq/types:interface#HtmlViewRuntime"
     },
     {
@@ -6106,13 +6176,48 @@
       "parentSchemaId": "@flighthq/types:interface#LibgdxParseResult"
     },
     {
-      "childSchemaId": "@flighthq/types:interface#LibgdxRangeValue",
+      "childSchemaId": "@flighthq/types:interface#LibgdxActiveRangeValue",
       "fieldPath": "angle",
       "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
     },
     {
-      "childSchemaId": "@flighthq/types:interface#LibgdxRangeValue",
+      "childSchemaId": "@flighthq/types:interface#LibgdxActiveRangeValue",
       "fieldPath": "delay",
+      "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LibgdxActiveRangeValue",
+      "fieldPath": "gravity",
+      "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LibgdxActiveRangeValue",
+      "fieldPath": "lifeOffset",
+      "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LibgdxActiveRangeValue",
+      "fieldPath": "rotation",
+      "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LibgdxActiveRangeValue",
+      "fieldPath": "velocity",
+      "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LibgdxActiveRangeValue",
+      "fieldPath": "wind",
+      "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LibgdxActiveRangeValue",
+      "fieldPath": "xOffset",
+      "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LibgdxActiveRangeValue",
+      "fieldPath": "yOffset",
       "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
     },
     {
@@ -6127,22 +6232,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#LibgdxRangeValue",
-      "fieldPath": "gravity",
-      "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
-    },
-    {
-      "childSchemaId": "@flighthq/types:interface#LibgdxRangeValue",
       "fieldPath": "life",
-      "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
-    },
-    {
-      "childSchemaId": "@flighthq/types:interface#LibgdxRangeValue",
-      "fieldPath": "lifeOffset",
-      "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
-    },
-    {
-      "childSchemaId": "@flighthq/types:interface#LibgdxRangeValue",
-      "fieldPath": "rotation",
       "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
     },
     {
@@ -6163,26 +6253,6 @@
     {
       "childSchemaId": "@flighthq/types:interface#LibgdxRangeValue",
       "fieldPath": "transparency",
-      "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
-    },
-    {
-      "childSchemaId": "@flighthq/types:interface#LibgdxRangeValue",
-      "fieldPath": "velocity",
-      "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
-    },
-    {
-      "childSchemaId": "@flighthq/types:interface#LibgdxRangeValue",
-      "fieldPath": "wind",
-      "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
-    },
-    {
-      "childSchemaId": "@flighthq/types:interface#LibgdxRangeValue",
-      "fieldPath": "xOffset",
-      "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
-    },
-    {
-      "childSchemaId": "@flighthq/types:interface#LibgdxRangeValue",
-      "fieldPath": "yOffset",
       "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
     },
     {
@@ -6756,6 +6826,11 @@
       "parentSchemaId": "@flighthq/types:interface#LottieRepeaterShapeItem"
     },
     {
+      "childSchemaId": "@flighthq/types:interface#LottieRepeaterTransform",
+      "fieldPath": "tr",
+      "parentSchemaId": "@flighthq/types:interface#LottieRepeaterShapeItem"
+    },
+    {
       "childSchemaId": "@flighthq/types:interface#LottieStaticProperty",
       "fieldPath": "c",
       "parentSchemaId": "@flighthq/types:interface#LottieRepeaterShapeItem"
@@ -6766,9 +6841,109 @@
       "parentSchemaId": "@flighthq/types:interface#LottieRepeaterShapeItem"
     },
     {
-      "childSchemaId": "@flighthq/types:interface#LottieTransform",
-      "fieldPath": "tr",
-      "parentSchemaId": "@flighthq/types:interface#LottieRepeaterShapeItem"
+      "childSchemaId": "@flighthq/types:interface#LottieAnimatedProperty",
+      "fieldPath": "a",
+      "parentSchemaId": "@flighthq/types:interface#LottieRepeaterTransform"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LottieAnimatedProperty",
+      "fieldPath": "eo",
+      "parentSchemaId": "@flighthq/types:interface#LottieRepeaterTransform"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LottieAnimatedProperty",
+      "fieldPath": "o",
+      "parentSchemaId": "@flighthq/types:interface#LottieRepeaterTransform"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LottieAnimatedProperty",
+      "fieldPath": "p",
+      "parentSchemaId": "@flighthq/types:interface#LottieRepeaterTransform"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LottieAnimatedProperty",
+      "fieldPath": "r",
+      "parentSchemaId": "@flighthq/types:interface#LottieRepeaterTransform"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LottieAnimatedProperty",
+      "fieldPath": "rz",
+      "parentSchemaId": "@flighthq/types:interface#LottieRepeaterTransform"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LottieAnimatedProperty",
+      "fieldPath": "s",
+      "parentSchemaId": "@flighthq/types:interface#LottieRepeaterTransform"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LottieAnimatedProperty",
+      "fieldPath": "sa",
+      "parentSchemaId": "@flighthq/types:interface#LottieRepeaterTransform"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LottieAnimatedProperty",
+      "fieldPath": "sk",
+      "parentSchemaId": "@flighthq/types:interface#LottieRepeaterTransform"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LottieAnimatedProperty",
+      "fieldPath": "so",
+      "parentSchemaId": "@flighthq/types:interface#LottieRepeaterTransform"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LottieSeparatedPositionProperty",
+      "fieldPath": "p",
+      "parentSchemaId": "@flighthq/types:interface#LottieRepeaterTransform"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LottieStaticProperty",
+      "fieldPath": "a",
+      "parentSchemaId": "@flighthq/types:interface#LottieRepeaterTransform"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LottieStaticProperty",
+      "fieldPath": "eo",
+      "parentSchemaId": "@flighthq/types:interface#LottieRepeaterTransform"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LottieStaticProperty",
+      "fieldPath": "o",
+      "parentSchemaId": "@flighthq/types:interface#LottieRepeaterTransform"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LottieStaticProperty",
+      "fieldPath": "p",
+      "parentSchemaId": "@flighthq/types:interface#LottieRepeaterTransform"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LottieStaticProperty",
+      "fieldPath": "r",
+      "parentSchemaId": "@flighthq/types:interface#LottieRepeaterTransform"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LottieStaticProperty",
+      "fieldPath": "rz",
+      "parentSchemaId": "@flighthq/types:interface#LottieRepeaterTransform"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LottieStaticProperty",
+      "fieldPath": "s",
+      "parentSchemaId": "@flighthq/types:interface#LottieRepeaterTransform"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LottieStaticProperty",
+      "fieldPath": "sa",
+      "parentSchemaId": "@flighthq/types:interface#LottieRepeaterTransform"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LottieStaticProperty",
+      "fieldPath": "sk",
+      "parentSchemaId": "@flighthq/types:interface#LottieRepeaterTransform"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#LottieStaticProperty",
+      "fieldPath": "so",
+      "parentSchemaId": "@flighthq/types:interface#LottieRepeaterTransform"
     },
     {
       "childSchemaId": "@flighthq/types:interface#LottieAnimatedProperty",
@@ -7162,7 +7337,27 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Signal",
+      "fieldPath": "onComplete",
+      "parentSchemaId": "@flighthq/types:interface#MediaChannelSignals"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Signal",
       "fieldPath": "onError",
+      "parentSchemaId": "@flighthq/types:interface#MediaChannelSignals"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Signal",
+      "fieldPath": "onLoop",
+      "parentSchemaId": "@flighthq/types:interface#MediaChannelSignals"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Signal",
+      "fieldPath": "onPause",
+      "parentSchemaId": "@flighthq/types:interface#MediaChannelSignals"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Signal",
+      "fieldPath": "onPlay",
       "parentSchemaId": "@flighthq/types:interface#MediaChannelSignals"
     },
     {
@@ -7173,6 +7368,11 @@
     {
       "childSchemaId": "@flighthq/types:interface#Signal",
       "fieldPath": "onSeeked",
+      "parentSchemaId": "@flighthq/types:interface#MediaChannelSignals"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Signal",
+      "fieldPath": "onStop",
       "parentSchemaId": "@flighthq/types:interface#MediaChannelSignals"
     },
     {
@@ -7462,7 +7662,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@15365",
+      "fieldPath": "traits.__@NodeTraitsKey@15381",
       "parentSchemaId": "@flighthq/types:interface#MorphShapeRuntime"
     },
     {
@@ -7582,7 +7782,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@15365",
+      "fieldPath": "traits.__@NodeTraitsKey@15381",
       "parentSchemaId": "@flighthq/types:interface#MovieClipRuntime"
     },
     {
@@ -7692,7 +7892,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@15365",
+      "fieldPath": "traits.__@NodeTraitsKey@15381",
       "parentSchemaId": "@flighthq/types:interface#NativeTextRuntime"
     },
     {
@@ -7744,6 +7944,91 @@
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
       "fieldPath": "node",
       "parentSchemaId": "@flighthq/types:interface#Node2DAnimationTarget"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Adjustment",
+      "fieldPath": "colorAdjustments[]",
+      "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#ColorScaleBias",
+      "fieldPath": "resolvedColorScaleBias",
+      "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#InteractionSignals",
+      "fieldPath": "interactionSignals",
+      "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Matrix",
+      "fieldPath": "localMatrix",
+      "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Matrix",
+      "fieldPath": "worldMatrix",
+      "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Node",
+      "fieldPath": "children[]",
+      "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Node",
+      "fieldPath": "parent",
+      "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Node2DTraits",
+      "fieldPath": "children[]",
+      "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Node2DTraits",
+      "fieldPath": "parent",
+      "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Node2DTraits",
+      "fieldPath": "traits.__@NodeTraitsKey@15381",
+      "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Node2DTraits",
+      "fieldPath": "traits<NodeTraitsKey:0>",
+      "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#NodeInteractionState",
+      "fieldPath": "interactionState",
+      "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#NodeSignals",
+      "fieldPath": "nodeSignals",
+      "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Rectangle",
+      "fieldPath": "boundsRectangle",
+      "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Rectangle",
+      "fieldPath": "localBoundsRectangle",
+      "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Rectangle",
+      "fieldPath": "worldBoundsRectangle",
+      "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Scene2D",
+      "fieldPath": "scene2d",
+      "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
     },
     {
       "childSchemaId": "@flighthq/types:interface#ClipRegion",
@@ -8027,7 +8312,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@15365",
+      "fieldPath": "traits.__@NodeTraitsKey@15381",
       "parentSchemaId": "@flighthq/types:interface#ParticleEmitter2DRuntime"
     },
     {
@@ -8807,7 +9092,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@15365",
+      "fieldPath": "traits.__@NodeTraitsKey@15381",
       "parentSchemaId": "@flighthq/types:interface#QuadBatchRuntime"
     },
     {
@@ -8871,7 +9156,7 @@
       "parentSchemaId": "@flighthq/types:interface#RadioGroupControllerSignals"
     },
     {
-      "childSchemaId": "@flighthq/types:interface#Image",
+      "childSchemaId": "@flighthq/types:interface#ImageResource",
       "fieldPath": "image",
       "parentSchemaId": "@flighthq/types:interface#Raster2DSurface"
     },
@@ -9422,7 +9707,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@15365",
+      "fieldPath": "traits.__@NodeTraitsKey@15381",
       "parentSchemaId": "@flighthq/types:interface#RichTextRuntime"
     },
     {
@@ -9722,7 +10007,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@15365",
+      "fieldPath": "traits.__@NodeTraitsKey@15381",
       "parentSchemaId": "@flighthq/types:interface#Scale9ShapeRuntime"
     },
     {
@@ -10316,6 +10601,11 @@
       "parentSchemaId": "@flighthq/types:interface#Scene3DResourceResolverRuntime"
     },
     {
+      "childSchemaId": "@flighthq/types:interface#Scene3DMaterialTextureRegistry",
+      "fieldPath": "registry",
+      "parentSchemaId": "@flighthq/types:interface#Scene3DResourceResolverWithRuntime"
+    },
+    {
       "childSchemaId": "@flighthq/types:interface#Scene3D",
       "fieldPath": "scene",
       "parentSchemaId": "@flighthq/types:interface#Scene3DResources"
@@ -10772,7 +11062,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@15365",
+      "fieldPath": "traits.__@NodeTraitsKey@15381",
       "parentSchemaId": "@flighthq/types:interface#ShapeRuntime"
     },
     {
@@ -11336,6 +11626,11 @@
       "parentSchemaId": "@flighthq/types:interface#SpriteData"
     },
     {
+      "childSchemaId": "@flighthq/types:interface#Texture2D",
+      "fieldPath": "textureIdentity",
+      "parentSchemaId": "@flighthq/types:interface#SpriteIdentityRendererData"
+    },
+    {
       "childSchemaId": "@flighthq/types:interface#Adjustment",
       "fieldPath": "colorAdjustments[]",
       "parentSchemaId": "@flighthq/types:interface#SpriteRuntime"
@@ -11382,7 +11677,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@15365",
+      "fieldPath": "traits.__@NodeTraitsKey@15381",
       "parentSchemaId": "@flighthq/types:interface#SpriteRuntime"
     },
     {
@@ -12002,7 +12297,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@15365",
+      "fieldPath": "traits.__@NodeTraitsKey@15381",
       "parentSchemaId": "@flighthq/types:interface#TextLabelRuntime"
     },
     {
@@ -12552,7 +12847,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@15365",
+      "fieldPath": "traits.__@NodeTraitsKey@15381",
       "parentSchemaId": "@flighthq/types:interface#TilemapRuntime"
     },
     {
@@ -13181,12 +13476,12 @@
       "parentSchemaId": "@flighthq/types:interface#WgpuDeviceRuntime"
     },
     {
-      "childSchemaId": "@flighthq/types:interface#Image",
+      "childSchemaId": "@flighthq/types:interface#ImageResource",
       "fieldPath": "videoSrgbTextureCache<WeakMap:0>",
       "parentSchemaId": "@flighthq/types:interface#WgpuDeviceRuntime"
     },
     {
-      "childSchemaId": "@flighthq/types:interface#Image",
+      "childSchemaId": "@flighthq/types:interface#ImageResource",
       "fieldPath": "videoTextureCache<WeakMap:0>",
       "parentSchemaId": "@flighthq/types:interface#WgpuDeviceRuntime"
     },
@@ -13496,12 +13791,12 @@
       "parentSchemaId": "@flighthq/types:interface#WgpuRenderStateRuntime"
     },
     {
-      "childSchemaId": "@flighthq/types:interface#Image",
+      "childSchemaId": "@flighthq/types:interface#ImageResource",
       "fieldPath": "videoSrgbTextureCache<WeakMap:0>",
       "parentSchemaId": "@flighthq/types:interface#WgpuRenderStateRuntime"
     },
     {
-      "childSchemaId": "@flighthq/types:interface#Image",
+      "childSchemaId": "@flighthq/types:interface#ImageResource",
       "fieldPath": "videoTextureCache<WeakMap:0>",
       "parentSchemaId": "@flighthq/types:interface#WgpuRenderStateRuntime"
     },
@@ -14620,6 +14915,12 @@
     },
     {
       "reasons": [
+        "cross-schema-transfer"
+      ],
+      "schemaId": "@flighthq/types:interface#AreaLight"
+    },
+    {
+      "reasons": [
         "anonymous-structural-transfer",
         "json-parse-root"
       ],
@@ -14726,6 +15027,7 @@
     },
     {
       "reasons": [
+        "anonymous-structural-transfer",
         "cross-schema-transfer"
       ],
       "schemaId": "@flighthq/types:interface#BitmapShadowBlurOptions"
@@ -14988,7 +15290,7 @@
       "reasons": [
         "cross-schema-transfer"
       ],
-      "schemaId": "@flighthq/types:interface#CompressedImage"
+      "schemaId": "@flighthq/types:interface#CompressedImageResource"
     },
     {
       "reasons": [
@@ -15699,7 +16001,7 @@
         "cross-schema-transfer",
         "object-literal-computed"
       ],
-      "schemaId": "@flighthq/types:interface#Image"
+      "schemaId": "@flighthq/types:interface#ImageResource"
     },
     {
       "reasons": [
@@ -15807,13 +16109,19 @@
     },
     {
       "reasons": [
+        "object-literal-spread"
+      ],
+      "schemaId": "@flighthq/types:interface#LibgdxActiveRangeValue"
+    },
+    {
+      "reasons": [
         "cross-schema-transfer"
       ],
       "schemaId": "@flighthq/types:interface#LibgdxParseOptions"
     },
     {
       "reasons": [
-        "object-literal-spread"
+        "cross-schema-transfer"
       ],
       "schemaId": "@flighthq/types:interface#LibgdxRangeValue"
     },
@@ -15892,12 +16200,6 @@
         "dynamic-ingress"
       ],
       "schemaId": "@flighthq/types:interface#Matrix"
-    },
-    {
-      "reasons": [
-        "object-literal-spread"
-      ],
-      "schemaId": "@flighthq/types:interface#MediaFileCaptureOptions"
     },
     {
       "reasons": [
@@ -16059,6 +16361,12 @@
         "anonymous-structural-transfer"
       ],
       "schemaId": "@flighthq/types:interface#Node2DData"
+    },
+    {
+      "reasons": [
+        "cross-schema-transfer"
+      ],
+      "schemaId": "@flighthq/types:interface#Node2DRuntime"
     },
     {
       "reasons": [
@@ -16706,6 +17014,12 @@
     },
     {
       "reasons": [
+        "cross-schema-transfer"
+      ],
+      "schemaId": "@flighthq/types:interface#Scene3DResourceResolverWithRuntime"
+    },
+    {
+      "reasons": [
         "anonymous-structural-transfer"
       ],
       "schemaId": "@flighthq/types:interface#ScreenChangedMetrics"
@@ -17027,6 +17341,12 @@
         "cross-schema-transfer"
       ],
       "schemaId": "@flighthq/types:interface#Sprite"
+    },
+    {
+      "reasons": [
+        "cross-schema-transfer"
+      ],
+      "schemaId": "@flighthq/types:interface#SpriteIdentityRendererData"
     },
     {
       "reasons": [
@@ -17666,6 +17986,12 @@
         "cross-schema-transfer"
       ],
       "schemaId": "@flighthq/types:type#RectangleLike"
+    },
+    {
+      "reasons": [
+        "cross-schema-transfer"
+      ],
+      "schemaId": "@flighthq/types:type#RenderProxyAdapter"
     },
     {
       "reasons": [
@@ -23782,62 +24108,6 @@
         "inputPaths": [
           {
             "path": [
-              "@flighthq/types:interface#AreaLight"
-            ],
-            "rootSchemaId": "@flighthq/types:interface#AreaLight"
-          }
-        ],
-        "outputPaths": [
-          {
-            "path": [
-              "@flighthq/types:interface#AreaLight"
-            ],
-            "rootSchemaId": "@flighthq/types:interface#AreaLight"
-          }
-        ]
-      },
-      "containment": {
-        "children": [
-          {
-            "childSchemaId": "@flighthq/types:interface#Vector3",
-            "fieldPath": "direction",
-            "parentSchemaId": "@flighthq/types:interface#AreaLight"
-          },
-          {
-            "childSchemaId": "@flighthq/types:interface#Vector3",
-            "fieldPath": "position",
-            "parentSchemaId": "@flighthq/types:interface#AreaLight"
-          },
-          {
-            "childSchemaId": "@flighthq/types:interface#Vector3",
-            "fieldPath": "right",
-            "parentSchemaId": "@flighthq/types:interface#AreaLight"
-          },
-          {
-            "childSchemaId": "@flighthq/types:interface#Vector3",
-            "fieldPath": "up",
-            "parentSchemaId": "@flighthq/types:interface#AreaLight"
-          }
-        ],
-        "parents": []
-      },
-      "directAccesses": 34,
-      "fields": 12,
-      "id": "@flighthq/types:interface#AreaLight",
-      "name": "AreaLight",
-      "nominalIdentity": {
-        "blockerReasons": [],
-        "closed": true
-      },
-      "normalizationProvenance": [],
-      "source": "upstream/packages/types/src/AreaLight.ts",
-      "transfers": []
-    },
-    {
-      "bridgeExposure": {
-        "inputPaths": [
-          {
-            "path": [
               "@flighthq/types:interface#AsepriteArrayDocument",
               "frames[]:@flighthq/types:interface#AsepriteArrayFrame"
             ],
@@ -24771,8 +25041,8 @@
         ],
         "parents": []
       },
-      "directAccesses": 45,
-      "fields": 9,
+      "directAccesses": 62,
+      "fields": 12,
       "id": "@flighthq/types:interface#AudioChannel",
       "name": "AudioChannel",
       "nominalIdentity": {
@@ -25833,7 +26103,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 177,
+      "directAccesses": 181,
       "fields": 2,
       "id": "@flighthq/types:interface#BoundingSphere",
       "name": "BoundingSphere",
@@ -28449,6 +28719,14 @@
           },
           {
             "path": [
+              "@flighthq/types:interface#Node2DRuntime",
+              "children[]:@flighthq/types:interface#Node2DTraits",
+              "clip:@flighthq/types:interface#ClipRegion"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
+          },
+          {
+            "path": [
               "@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
@@ -28811,6 +29089,14 @@
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#NativeTextRuntime"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Node2DRuntime",
+              "children[]:@flighthq/types:interface#Node2DTraits",
+              "clip:@flighthq/types:interface#ClipRegion"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
           },
           {
             "path": [
@@ -29316,6 +29602,17 @@
             "dynamic-ingress"
           ],
           "rootSchemaId": "@flighthq/types:interface#Node2DAnimationTarget"
+        },
+        {
+          "path": [
+            "@flighthq/types:interface#Node2DRuntime",
+            "children[]:@flighthq/types:interface#Node2DTraits",
+            "clip:@flighthq/types:interface#ClipRegion"
+          ],
+          "reasons": [
+            "cross-schema-transfer"
+          ],
+          "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
         },
         {
           "path": [
@@ -30923,6 +31220,13 @@
           },
           {
             "path": [
+              "@flighthq/types:interface#Node2DRuntime",
+              "resolvedColorScaleBias:@flighthq/types:interface#ColorScaleBias"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
+          },
+          {
+            "path": [
               "@flighthq/types:interface#NodeRuntime",
               "resolvedColorScaleBias:@flighthq/types:interface#ColorScaleBias"
             ],
@@ -31066,6 +31370,13 @@
               "resolvedColorScaleBias:@flighthq/types:interface#ColorScaleBias"
             ],
             "rootSchemaId": "@flighthq/types:interface#NativeTextRuntime"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Node2DRuntime",
+              "resolvedColorScaleBias:@flighthq/types:interface#ColorScaleBias"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
           },
           {
             "path": [
@@ -31222,6 +31533,11 @@
             "childSchemaId": "@flighthq/types:interface#ColorScaleBias",
             "fieldPath": "resolvedColorScaleBias",
             "parentSchemaId": "@flighthq/types:interface#NativeTextRuntime"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#ColorScaleBias",
+            "fieldPath": "resolvedColorScaleBias",
+            "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
           },
           {
             "childSchemaId": "@flighthq/types:interface#ColorScaleBias",
@@ -31402,6 +31718,16 @@
             "cross-schema-transfer"
           ],
           "rootSchemaId": "@flighthq/types:interface#NativeTextRuntime"
+        },
+        {
+          "path": [
+            "@flighthq/types:interface#Node2DRuntime",
+            "resolvedColorScaleBias:@flighthq/types:interface#ColorScaleBias"
+          ],
+          "reasons": [
+            "cross-schema-transfer"
+          ],
+          "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
         },
         {
           "path": [
@@ -31906,25 +32232,25 @@
         "inputPaths": [
           {
             "path": [
-              "@flighthq/types:interface#CompressedImage",
-              "compressed:@flighthq/types:interface#CompressedImageData"
-            ],
-            "rootSchemaId": "@flighthq/types:interface#CompressedImage"
-          },
-          {
-            "path": [
               "@flighthq/types:interface#CompressedImageData"
             ],
             "rootSchemaId": "@flighthq/types:interface#CompressedImageData"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#CompressedImageResource",
+              "compressed:@flighthq/types:interface#CompressedImageData"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#CompressedImageResource"
           }
         ],
         "outputPaths": [
           {
             "path": [
-              "@flighthq/types:interface#CompressedImage",
+              "@flighthq/types:interface#CompressedImageResource",
               "compressed:@flighthq/types:interface#CompressedImageData"
             ],
-            "rootSchemaId": "@flighthq/types:interface#CompressedImage"
+            "rootSchemaId": "@flighthq/types:interface#CompressedImageResource"
           }
         ]
       },
@@ -31940,7 +32266,7 @@
           {
             "childSchemaId": "@flighthq/types:interface#CompressedImageData",
             "fieldPath": "compressed",
-            "parentSchemaId": "@flighthq/types:interface#CompressedImage"
+            "parentSchemaId": "@flighthq/types:interface#CompressedImageResource"
           }
         ]
       },
@@ -31957,13 +32283,13 @@
       "normalizationProvenance": [
         {
           "path": [
-            "@flighthq/types:interface#CompressedImage",
+            "@flighthq/types:interface#CompressedImageResource",
             "compressed:@flighthq/types:interface#CompressedImageData"
           ],
           "reasons": [
             "cross-schema-transfer"
           ],
-          "rootSchemaId": "@flighthq/types:interface#CompressedImage"
+          "rootSchemaId": "@flighthq/types:interface#CompressedImageResource"
         }
       ],
       "source": "upstream/packages/types/src/CompressedImageData.ts",
@@ -32336,6 +32662,90 @@
     },
     {
       "bridgeExposure": {
+        "inputPaths": [],
+        "outputPaths": []
+      },
+      "containment": {
+        "children": [],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 4,
+      "id": "@flighthq/types:interface#DialogImage",
+      "name": "DialogImage",
+      "nominalIdentity": {
+        "blockerReasons": [
+          "container-transfer"
+        ],
+        "closed": false
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Dialog.ts",
+      "transfers": [
+        {
+          "column": 31,
+          "kind": "anonymous-container-transfer",
+          "line": 356,
+          "source": "upstream/packages/host-web/src/webDialog.ts"
+        },
+        {
+          "column": 95,
+          "kind": "anonymous-container-transfer",
+          "line": 357,
+          "source": "upstream/packages/host-web/src/webDialog.ts"
+        },
+        {
+          "column": 15,
+          "kind": "anonymous-container-transfer",
+          "line": 363,
+          "source": "upstream/packages/host-web/src/webDialog.ts"
+        }
+      ]
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [],
+        "outputPaths": []
+      },
+      "containment": {
+        "children": [],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 3,
+      "id": "@flighthq/types:interface#DialogVideo",
+      "name": "DialogVideo",
+      "nominalIdentity": {
+        "blockerReasons": [
+          "container-transfer"
+        ],
+        "closed": false
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Dialog.ts",
+      "transfers": [
+        {
+          "column": 31,
+          "kind": "anonymous-container-transfer",
+          "line": 405,
+          "source": "upstream/packages/host-web/src/webDialog.ts"
+        },
+        {
+          "column": 95,
+          "kind": "anonymous-container-transfer",
+          "line": 406,
+          "source": "upstream/packages/host-web/src/webDialog.ts"
+        },
+        {
+          "column": 15,
+          "kind": "anonymous-container-transfer",
+          "line": 412,
+          "source": "upstream/packages/host-web/src/webDialog.ts"
+        }
+      ]
+    },
+    {
+      "bridgeExposure": {
         "inputPaths": [
           {
             "path": [
@@ -32695,7 +33105,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 36,
+      "directAccesses": 37,
       "fields": 16,
       "id": "@flighthq/types:interface#ElectronApi",
       "name": "ElectronApi",
@@ -32989,6 +33399,74 @@
       "normalizationProvenance": [],
       "source": "upstream/packages/types/src/ElectronApi.ts",
       "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#ElectronIpcRenderer"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#ElectronIpcRenderer"
+          }
+        ],
+        "outputPaths": []
+      },
+      "containment": {
+        "children": [],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 2,
+      "id": "@flighthq/types:interface#ElectronIpcRenderer",
+      "name": "ElectronIpcRenderer",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/ElectronApi.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#ElectronIpcTarget"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#ElectronIpcTarget"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#ElectronIpcTarget",
+      "name": "ElectronIpcTarget",
+      "nominalIdentity": {
+        "blockerReasons": [
+          "container-transfer"
+        ],
+        "closed": false
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/ElectronApi.ts",
+      "transfers": [
+        {
+          "column": 10,
+          "kind": "cross-schema-container-transfer",
+          "line": 93,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Entity"
+          ],
+          "source": "upstream/packages/host-electron/src/electronRegister.ts"
+        }
+      ]
     },
     {
       "bridgeExposure": {
@@ -33388,7 +33866,7 @@
         "parents": []
       },
       "directAccesses": 0,
-      "fields": 3,
+      "fields": 4,
       "id": "@flighthq/types:interface#Environment",
       "name": "Environment",
       "nominalIdentity": {
@@ -35476,34 +35954,6 @@
       },
       "normalizationProvenance": [],
       "source": "upstream/packages/types/src/FocusManager.ts",
-      "transfers": []
-    },
-    {
-      "bridgeExposure": {
-        "inputPaths": [],
-        "outputPaths": [
-          {
-            "path": [
-              "@flighthq/types:interface#Font"
-            ],
-            "rootSchemaId": "@flighthq/types:interface#Font"
-          }
-        ]
-      },
-      "containment": {
-        "children": [],
-        "parents": []
-      },
-      "directAccesses": 0,
-      "fields": 1,
-      "id": "@flighthq/types:interface#Font",
-      "name": "Font",
-      "nominalIdentity": {
-        "blockerReasons": [],
-        "closed": true
-      },
-      "normalizationProvenance": [],
-      "source": "upstream/packages/types/src/Font.ts",
       "transfers": []
     },
     {
@@ -40822,6 +41272,47 @@
         "inputPaths": [
           {
             "path": [
+              "@flighthq/types:interface#HasDialogImageOpen"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasDialogImageOpen"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasDialogImageOpen"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasDialogImageOpen"
+          }
+        ]
+      },
+      "containment": {
+        "children": [
+          {
+            "childSchemaId": "@flighthq/types:interface#ImageOpenDialogBackend",
+            "fieldPath": "dialog.imageOpen",
+            "parentSchemaId": "@flighthq/types:interface#HasDialogImageOpen"
+          }
+        ],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#HasDialogImageOpen",
+      "name": "HasDialogImageOpen",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Host.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
               "@flighthq/types:interface#HasDialogMessage"
             ],
             "rootSchemaId": "@flighthq/types:interface#HasDialogMessage"
@@ -40863,6 +41354,47 @@
         "inputPaths": [
           {
             "path": [
+              "@flighthq/types:interface#HasDialogPhotoCapture"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasDialogPhotoCapture"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasDialogPhotoCapture"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasDialogPhotoCapture"
+          }
+        ]
+      },
+      "containment": {
+        "children": [
+          {
+            "childSchemaId": "@flighthq/types:interface#PhotoCaptureDialogBackend",
+            "fieldPath": "dialog.photoCapture",
+            "parentSchemaId": "@flighthq/types:interface#HasDialogPhotoCapture"
+          }
+        ],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#HasDialogPhotoCapture",
+      "name": "HasDialogPhotoCapture",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Host.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
               "@flighthq/types:interface#HasDialogPrompt"
             ],
             "rootSchemaId": "@flighthq/types:interface#HasDialogPrompt"
@@ -40891,6 +41423,47 @@
       "fields": 1,
       "id": "@flighthq/types:interface#HasDialogPrompt",
       "name": "HasDialogPrompt",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Host.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasDialogVideoCapture"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasDialogVideoCapture"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasDialogVideoCapture"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasDialogVideoCapture"
+          }
+        ]
+      },
+      "containment": {
+        "children": [
+          {
+            "childSchemaId": "@flighthq/types:interface#VideoCaptureDialogBackend",
+            "fieldPath": "dialog.videoCapture",
+            "parentSchemaId": "@flighthq/types:interface#HasDialogVideoCapture"
+          }
+        ],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#HasDialogVideoCapture",
+      "name": "HasDialogVideoCapture",
       "nominalIdentity": {
         "blockerReasons": [],
         "closed": true
@@ -41353,6 +41926,81 @@
         "inputPaths": [
           {
             "path": [
+              "@flighthq/types:interface#HasIpcHandle"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasIpcHandle"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasIpcHandle"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasIpcHandle"
+          }
+        ]
+      },
+      "containment": {
+        "children": [
+          {
+            "childSchemaId": "@flighthq/types:interface#IpcHandleBackend",
+            "fieldPath": "ipc.handle",
+            "parentSchemaId": "@flighthq/types:interface#HasIpcHandle"
+          }
+        ],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#HasIpcHandle",
+      "name": "HasIpcHandle",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Host.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasIpcInvoke"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasIpcInvoke"
+          }
+        ],
+        "outputPaths": []
+      },
+      "containment": {
+        "children": [
+          {
+            "childSchemaId": "@flighthq/types:interface#IpcInvokeBackend",
+            "fieldPath": "ipc.invoke",
+            "parentSchemaId": "@flighthq/types:interface#HasIpcInvoke"
+          }
+        ],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#HasIpcInvoke",
+      "name": "HasIpcInvoke",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Host.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
               "@flighthq/types:interface#HasIpcMessage"
             ],
             "rootSchemaId": "@flighthq/types:interface#HasIpcMessage"
@@ -41381,6 +42029,81 @@
       "fields": 1,
       "id": "@flighthq/types:interface#HasIpcMessage",
       "name": "HasIpcMessage",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Host.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasIpcSend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasIpcSend"
+          }
+        ],
+        "outputPaths": []
+      },
+      "containment": {
+        "children": [
+          {
+            "childSchemaId": "@flighthq/types:interface#IpcSendBackend",
+            "fieldPath": "ipc.send",
+            "parentSchemaId": "@flighthq/types:interface#HasIpcSend"
+          }
+        ],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#HasIpcSend",
+      "name": "HasIpcSend",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Host.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasIpcTargetedSend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasIpcTargetedSend"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasIpcTargetedSend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasIpcTargetedSend"
+          }
+        ]
+      },
+      "containment": {
+        "children": [
+          {
+            "childSchemaId": "@flighthq/types:interface#IpcTargetedSendBackend",
+            "fieldPath": "ipc.targetedSend",
+            "parentSchemaId": "@flighthq/types:interface#HasIpcTargetedSend"
+          }
+        ],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#HasIpcTargetedSend",
+      "name": "HasIpcTargetedSend",
       "nominalIdentity": {
         "blockerReasons": [],
         "closed": true
@@ -41435,33 +42158,6 @@
       "fields": 1,
       "id": "@flighthq/types:interface#HasMediaAudioDevice",
       "name": "HasMediaAudioDevice",
-      "nominalIdentity": {
-        "blockerReasons": [],
-        "closed": true
-      },
-      "normalizationProvenance": [],
-      "source": "upstream/packages/types/src/Host.ts",
-      "transfers": []
-    },
-    {
-      "bridgeExposure": {
-        "inputPaths": [],
-        "outputPaths": []
-      },
-      "containment": {
-        "children": [
-          {
-            "childSchemaId": "@flighthq/types:interface#MediaFileCaptureBackend",
-            "fieldPath": "media.mediaFileCapture",
-            "parentSchemaId": "@flighthq/types:interface#HasMediaFileCapture"
-          }
-        ],
-        "parents": []
-      },
-      "directAccesses": 0,
-      "fields": 1,
-      "id": "@flighthq/types:interface#HasMediaFileCapture",
-      "name": "HasMediaFileCapture",
       "nominalIdentity": {
         "blockerReasons": [],
         "closed": true
@@ -44027,7 +44723,14 @@
     },
     {
       "bridgeExposure": {
-        "inputPaths": [],
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasTextSegmenter"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasTextSegmenter"
+          }
+        ],
         "outputPaths": []
       },
       "containment": {
@@ -44054,7 +44757,14 @@
     },
     {
       "bridgeExposure": {
-        "inputPaths": [],
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasTextShaper"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasTextShaper"
+          }
+        ],
         "outputPaths": []
       },
       "containment": {
@@ -45438,6 +46148,70 @@
     },
     {
       "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasDialogImageOpen",
+              "dialog.imageOpen:@flighthq/types:interface#ImageOpenDialogBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasDialogImageOpen"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "dialog:@flighthq/types:interface#HostDialogCapabilities",
+              "imageOpen:@flighthq/types:interface#ImageOpenDialogBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasDialogImageOpen",
+              "dialog.imageOpen:@flighthq/types:interface#ImageOpenDialogBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasDialogImageOpen"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "dialog:@flighthq/types:interface#HostDialogCapabilities",
+              "imageOpen:@flighthq/types:interface#ImageOpenDialogBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#ImageOpenDialogBackend",
+            "fieldPath": "dialog.imageOpen",
+            "parentSchemaId": "@flighthq/types:interface#HasDialogImageOpen"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#ImageOpenDialogBackend",
+            "fieldPath": "imageOpen",
+            "parentSchemaId": "@flighthq/types:interface#HostDialogCapabilities"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#ImageOpenDialogBackend",
+      "name": "ImageOpenDialogBackend",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/ImageOpenDialogBackend.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
         "inputPaths": [],
         "outputPaths": [
           {
@@ -46339,7 +47113,7 @@
         {
           "column": 20,
           "kind": "dynamic-container-transfer",
-          "line": 173,
+          "line": 174,
           "source": "upstream/packages/interaction/src/interactionManager.ts"
         }
       ]
@@ -46347,6 +47121,13 @@
     {
       "bridgeExposure": {
         "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Node2DRuntime",
+              "interactionSignals:@flighthq/types:interface#InteractionSignals"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
+          },
           {
             "path": [
               "@flighthq/types:interface#NodeRuntime",
@@ -46417,6 +47198,13 @@
               "interactionSignals:@flighthq/types:interface#InteractionSignals"
             ],
             "rootSchemaId": "@flighthq/types:interface#NativeTextRuntime"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Node2DRuntime",
+              "interactionSignals:@flighthq/types:interface#InteractionSignals"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
           },
           {
             "path": [
@@ -46610,6 +47398,11 @@
           {
             "childSchemaId": "@flighthq/types:interface#InteractionSignals",
             "fieldPath": "interactionSignals",
+            "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#InteractionSignals",
+            "fieldPath": "interactionSignals",
             "parentSchemaId": "@flighthq/types:interface#NodeRuntime"
           },
           {
@@ -46727,6 +47520,16 @@
         },
         {
           "path": [
+            "@flighthq/types:interface#Node2DRuntime",
+            "interactionSignals:@flighthq/types:interface#InteractionSignals"
+          ],
+          "reasons": [
+            "cross-schema-transfer"
+          ],
+          "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
+        },
+        {
+          "path": [
             "@flighthq/types:interface#NodeRuntime",
             "interactionSignals:@flighthq/types:interface#InteractionSignals"
           ],
@@ -46818,6 +47621,272 @@
         }
       ],
       "source": "upstream/packages/types/src/InteractionSignals.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasIpcHandle",
+              "ipc.handle:@flighthq/types:interface#IpcHandleBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasIpcHandle"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "ipc:@flighthq/types:interface#HostIpcCapabilities",
+              "handle:@flighthq/types:interface#IpcHandleBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasIpcHandle",
+              "ipc.handle:@flighthq/types:interface#IpcHandleBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasIpcHandle"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "ipc:@flighthq/types:interface#HostIpcCapabilities",
+              "handle:@flighthq/types:interface#IpcHandleBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#IpcHandleBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#IpcHandleBackend"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#IpcHandleBackend",
+            "fieldPath": "ipc.handle",
+            "parentSchemaId": "@flighthq/types:interface#HasIpcHandle"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#IpcHandleBackend",
+            "fieldPath": "handle",
+            "parentSchemaId": "@flighthq/types:interface#HostIpcCapabilities"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#IpcHandleBackend",
+      "name": "IpcHandleBackend",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Ipc.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasIpcInvoke",
+              "ipc.invoke:@flighthq/types:interface#IpcInvokeBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasIpcInvoke"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "ipc:@flighthq/types:interface#HostIpcCapabilities",
+              "invoke:@flighthq/types:interface#IpcInvokeBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "ipc:@flighthq/types:interface#HostIpcCapabilities",
+              "invoke:@flighthq/types:interface#IpcInvokeBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#IpcInvokeBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#IpcInvokeBackend"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#IpcInvokeBackend",
+            "fieldPath": "ipc.invoke",
+            "parentSchemaId": "@flighthq/types:interface#HasIpcInvoke"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#IpcInvokeBackend",
+            "fieldPath": "invoke",
+            "parentSchemaId": "@flighthq/types:interface#HostIpcCapabilities"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#IpcInvokeBackend",
+      "name": "IpcInvokeBackend",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Ipc.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasIpcSend",
+              "ipc.send:@flighthq/types:interface#IpcSendBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasIpcSend"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "ipc:@flighthq/types:interface#HostIpcCapabilities",
+              "send:@flighthq/types:interface#IpcSendBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "ipc:@flighthq/types:interface#HostIpcCapabilities",
+              "send:@flighthq/types:interface#IpcSendBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#IpcSendBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#IpcSendBackend"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#IpcSendBackend",
+            "fieldPath": "ipc.send",
+            "parentSchemaId": "@flighthq/types:interface#HasIpcSend"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#IpcSendBackend",
+            "fieldPath": "send",
+            "parentSchemaId": "@flighthq/types:interface#HostIpcCapabilities"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#IpcSendBackend",
+      "name": "IpcSendBackend",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Ipc.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasIpcTargetedSend",
+              "ipc.targetedSend:@flighthq/types:interface#IpcTargetedSendBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasIpcTargetedSend"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "ipc:@flighthq/types:interface#HostIpcCapabilities",
+              "targetedSend:@flighthq/types:interface#IpcTargetedSendBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasIpcTargetedSend",
+              "ipc.targetedSend:@flighthq/types:interface#IpcTargetedSendBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasIpcTargetedSend"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "ipc:@flighthq/types:interface#HostIpcCapabilities",
+              "targetedSend:@flighthq/types:interface#IpcTargetedSendBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#IpcTargetedSendBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#IpcTargetedSendBackend"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#IpcTargetedSendBackend",
+            "fieldPath": "ipc.targetedSend",
+            "parentSchemaId": "@flighthq/types:interface#HasIpcTargetedSend"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#IpcTargetedSendBackend",
+            "fieldPath": "targetedSend",
+            "parentSchemaId": "@flighthq/types:interface#HostIpcCapabilities"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#IpcTargetedSendBackend",
+      "name": "IpcTargetedSendBackend",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Ipc.ts",
       "transfers": []
     },
     {
@@ -47104,13 +48173,48 @@
       "containment": {
         "children": [
           {
-            "childSchemaId": "@flighthq/types:interface#LibgdxRangeValue",
+            "childSchemaId": "@flighthq/types:interface#LibgdxActiveRangeValue",
             "fieldPath": "angle",
             "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
           },
           {
-            "childSchemaId": "@flighthq/types:interface#LibgdxRangeValue",
+            "childSchemaId": "@flighthq/types:interface#LibgdxActiveRangeValue",
             "fieldPath": "delay",
+            "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#LibgdxActiveRangeValue",
+            "fieldPath": "gravity",
+            "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#LibgdxActiveRangeValue",
+            "fieldPath": "lifeOffset",
+            "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#LibgdxActiveRangeValue",
+            "fieldPath": "rotation",
+            "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#LibgdxActiveRangeValue",
+            "fieldPath": "velocity",
+            "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#LibgdxActiveRangeValue",
+            "fieldPath": "wind",
+            "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#LibgdxActiveRangeValue",
+            "fieldPath": "xOffset",
+            "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#LibgdxActiveRangeValue",
+            "fieldPath": "yOffset",
             "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
           },
           {
@@ -47125,22 +48229,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#LibgdxRangeValue",
-            "fieldPath": "gravity",
-            "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
-          },
-          {
-            "childSchemaId": "@flighthq/types:interface#LibgdxRangeValue",
             "fieldPath": "life",
-            "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
-          },
-          {
-            "childSchemaId": "@flighthq/types:interface#LibgdxRangeValue",
-            "fieldPath": "lifeOffset",
-            "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
-          },
-          {
-            "childSchemaId": "@flighthq/types:interface#LibgdxRangeValue",
-            "fieldPath": "rotation",
             "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
           },
           {
@@ -47161,26 +48250,6 @@
           {
             "childSchemaId": "@flighthq/types:interface#LibgdxRangeValue",
             "fieldPath": "transparency",
-            "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
-          },
-          {
-            "childSchemaId": "@flighthq/types:interface#LibgdxRangeValue",
-            "fieldPath": "velocity",
-            "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
-          },
-          {
-            "childSchemaId": "@flighthq/types:interface#LibgdxRangeValue",
-            "fieldPath": "wind",
-            "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
-          },
-          {
-            "childSchemaId": "@flighthq/types:interface#LibgdxRangeValue",
-            "fieldPath": "xOffset",
-            "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
-          },
-          {
-            "childSchemaId": "@flighthq/types:interface#LibgdxRangeValue",
-            "fieldPath": "yOffset",
             "parentSchemaId": "@flighthq/types:interface#LibgdxParticleDocument"
           }
         ],
@@ -48251,7 +49320,14 @@
     {
       "bridgeExposure": {
         "inputPaths": [],
-        "outputPaths": []
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#MediaChannelSignals"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#MediaChannelSignals"
+          }
+        ]
       },
       "containment": {
         "children": [
@@ -48262,7 +49338,27 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Signal",
+            "fieldPath": "onComplete",
+            "parentSchemaId": "@flighthq/types:interface#MediaChannelSignals"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#Signal",
             "fieldPath": "onError",
+            "parentSchemaId": "@flighthq/types:interface#MediaChannelSignals"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#Signal",
+            "fieldPath": "onLoop",
+            "parentSchemaId": "@flighthq/types:interface#MediaChannelSignals"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#Signal",
+            "fieldPath": "onPause",
+            "parentSchemaId": "@flighthq/types:interface#MediaChannelSignals"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#Signal",
+            "fieldPath": "onPlay",
             "parentSchemaId": "@flighthq/types:interface#MediaChannelSignals"
           },
           {
@@ -48274,12 +49370,17 @@
             "childSchemaId": "@flighthq/types:interface#Signal",
             "fieldPath": "onSeeked",
             "parentSchemaId": "@flighthq/types:interface#MediaChannelSignals"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#Signal",
+            "fieldPath": "onStop",
+            "parentSchemaId": "@flighthq/types:interface#MediaChannelSignals"
           }
         ],
         "parents": []
       },
       "directAccesses": 0,
-      "fields": 4,
+      "fields": 9,
       "id": "@flighthq/types:interface#MediaChannelSignals",
       "name": "MediaChannelSignals",
       "nominalIdentity": {
@@ -48289,92 +49390,6 @@
       "normalizationProvenance": [],
       "source": "upstream/packages/types/src/MediaChannelSignals.ts",
       "transfers": []
-    },
-    {
-      "bridgeExposure": {
-        "inputPaths": [],
-        "outputPaths": [
-          {
-            "path": [
-              "@flighthq/types:interface#MediaFileCapturePhoto"
-            ],
-            "rootSchemaId": "@flighthq/types:interface#MediaFileCapturePhoto"
-          }
-        ]
-      },
-      "containment": {
-        "children": [],
-        "parents": []
-      },
-      "directAccesses": 0,
-      "fields": 4,
-      "id": "@flighthq/types:interface#MediaFileCapturePhoto",
-      "name": "MediaFileCapturePhoto",
-      "nominalIdentity": {
-        "blockerReasons": [
-          "container-transfer"
-        ],
-        "closed": false
-      },
-      "normalizationProvenance": [],
-      "source": "upstream/packages/types/src/MediaFileCapture.ts",
-      "transfers": [
-        {
-          "column": 19,
-          "kind": "anonymous-container-transfer",
-          "line": 18,
-          "source": "upstream/packages/webcam/src/mediaFileCapture.ts"
-        },
-        {
-          "column": 19,
-          "kind": "anonymous-container-transfer",
-          "line": 54,
-          "source": "upstream/packages/webcam/src/mediaFileCapture.ts"
-        }
-      ]
-    },
-    {
-      "bridgeExposure": {
-        "inputPaths": [],
-        "outputPaths": [
-          {
-            "path": [
-              "@flighthq/types:interface#MediaFileCaptureVideo"
-            ],
-            "rootSchemaId": "@flighthq/types:interface#MediaFileCaptureVideo"
-          }
-        ]
-      },
-      "containment": {
-        "children": [],
-        "parents": []
-      },
-      "directAccesses": 0,
-      "fields": 3,
-      "id": "@flighthq/types:interface#MediaFileCaptureVideo",
-      "name": "MediaFileCaptureVideo",
-      "nominalIdentity": {
-        "blockerReasons": [
-          "container-transfer"
-        ],
-        "closed": false
-      },
-      "normalizationProvenance": [],
-      "source": "upstream/packages/types/src/MediaFileCapture.ts",
-      "transfers": [
-        {
-          "column": 19,
-          "kind": "anonymous-container-transfer",
-          "line": 62,
-          "source": "upstream/packages/webcam/src/mediaFileCapture.ts"
-        },
-        {
-          "column": 19,
-          "kind": "anonymous-container-transfer",
-          "line": 97,
-          "source": "upstream/packages/webcam/src/mediaFileCapture.ts"
-        }
-      ]
     },
     {
       "bridgeExposure": {
@@ -48746,6 +49761,13 @@
           },
           {
             "path": [
+              "@flighthq/types:interface#HostMenuCapabilities",
+              "highlight:@flighthq/types:interface#MenuHighlightBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HostMenuCapabilities"
+          },
+          {
+            "path": [
               "@flighthq/types:interface#MenuHighlightBackend"
             ],
             "rootSchemaId": "@flighthq/types:interface#MenuHighlightBackend"
@@ -48813,6 +49835,13 @@
               "popup:@flighthq/types:interface#MenuPopupBackend"
             ],
             "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#HostMenuCapabilities",
+              "popup:@flighthq/types:interface#MenuPopupBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HostMenuCapabilities"
           },
           {
             "path": [
@@ -48924,6 +49953,13 @@
               "select:@flighthq/types:interface#MenuSelectBackend"
             ],
             "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#HostMenuCapabilities",
+              "select:@flighthq/types:interface#MenuSelectBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HostMenuCapabilities"
           }
         ]
       },
@@ -51136,6 +52172,13 @@
           },
           {
             "path": [
+              "@flighthq/types:interface#Node2DRuntime",
+              "children[]:@flighthq/types:interface#Node2DTraits"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
+          },
+          {
+            "path": [
               "@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#Node2DTraits"
@@ -51346,6 +52389,13 @@
           },
           {
             "path": [
+              "@flighthq/types:interface#Node2DRuntime",
+              "children[]:@flighthq/types:interface#Node2DTraits"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
+          },
+          {
+            "path": [
               "@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#Node2DTraits"
@@ -51513,7 +52563,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@15365",
+            "fieldPath": "traits.__@NodeTraitsKey@15381",
             "parentSchemaId": "@flighthq/types:interface#BitmapTextRuntime"
           },
           {
@@ -51558,7 +52608,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@15365",
+            "fieldPath": "traits.__@NodeTraitsKey@15381",
             "parentSchemaId": "@flighthq/types:interface#DisplayObjectRuntime"
           },
           {
@@ -51593,7 +52643,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@15365",
+            "fieldPath": "traits.__@NodeTraitsKey@15381",
             "parentSchemaId": "@flighthq/types:interface#HtmlViewRuntime"
           },
           {
@@ -51628,7 +52678,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@15365",
+            "fieldPath": "traits.__@NodeTraitsKey@15381",
             "parentSchemaId": "@flighthq/types:interface#MorphShapeRuntime"
           },
           {
@@ -51648,7 +52698,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@15365",
+            "fieldPath": "traits.__@NodeTraitsKey@15381",
             "parentSchemaId": "@flighthq/types:interface#MovieClipRuntime"
           },
           {
@@ -51668,7 +52718,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@15365",
+            "fieldPath": "traits.__@NodeTraitsKey@15381",
             "parentSchemaId": "@flighthq/types:interface#NativeTextRuntime"
           },
           {
@@ -51684,6 +52734,26 @@
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
             "fieldPath": "children[]",
+            "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#Node2DTraits",
+            "fieldPath": "parent",
+            "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#Node2DTraits",
+            "fieldPath": "traits.__@NodeTraitsKey@15381",
+            "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#Node2DTraits",
+            "fieldPath": "traits<NodeTraitsKey:0>",
+            "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#Node2DTraits",
+            "fieldPath": "children[]",
             "parentSchemaId": "@flighthq/types:interface#ParticleEmitter2DRuntime"
           },
           {
@@ -51693,7 +52763,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@15365",
+            "fieldPath": "traits.__@NodeTraitsKey@15381",
             "parentSchemaId": "@flighthq/types:interface#ParticleEmitter2DRuntime"
           },
           {
@@ -51723,7 +52793,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@15365",
+            "fieldPath": "traits.__@NodeTraitsKey@15381",
             "parentSchemaId": "@flighthq/types:interface#QuadBatchRuntime"
           },
           {
@@ -51743,7 +52813,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@15365",
+            "fieldPath": "traits.__@NodeTraitsKey@15381",
             "parentSchemaId": "@flighthq/types:interface#RichTextRuntime"
           },
           {
@@ -51763,7 +52833,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@15365",
+            "fieldPath": "traits.__@NodeTraitsKey@15381",
             "parentSchemaId": "@flighthq/types:interface#Scale9ShapeRuntime"
           },
           {
@@ -51843,7 +52913,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@15365",
+            "fieldPath": "traits.__@NodeTraitsKey@15381",
             "parentSchemaId": "@flighthq/types:interface#ShapeRuntime"
           },
           {
@@ -51888,7 +52958,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@15365",
+            "fieldPath": "traits.__@NodeTraitsKey@15381",
             "parentSchemaId": "@flighthq/types:interface#SpriteRuntime"
           },
           {
@@ -51933,7 +53003,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@15365",
+            "fieldPath": "traits.__@NodeTraitsKey@15381",
             "parentSchemaId": "@flighthq/types:interface#TextLabelRuntime"
           },
           {
@@ -51953,7 +53023,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@15365",
+            "fieldPath": "traits.__@NodeTraitsKey@15381",
             "parentSchemaId": "@flighthq/types:interface#TilemapRuntime"
           },
           {
@@ -52124,6 +53194,16 @@
         },
         {
           "path": [
+            "@flighthq/types:interface#Node2DRuntime",
+            "children[]:@flighthq/types:interface#Node2DTraits"
+          ],
+          "reasons": [
+            "cross-schema-transfer"
+          ],
+          "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
+        },
+        {
+          "path": [
             "@flighthq/types:interface#ParticleEmitter2DRuntime",
             "children[]:@flighthq/types:interface#Node2DTraits"
           ],
@@ -52227,16 +53307,6 @@
           "line": 54,
           "relatedSchemaIds": [
             "@flighthq/types:interface#BitmapText"
-          ],
-          "source": "upstream/packages/bitmaptext/src/bitmapText.ts"
-        },
-        {
-          "column": 39,
-          "kind": "cross-schema-container-transfer",
-          "line": 71,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#BitmapTextRuntime",
-            "@flighthq/types:type#MethodsOf"
           ],
           "source": "upstream/packages/bitmaptext/src/bitmapText.ts"
         },
@@ -52544,12 +53614,6 @@
         },
         {
           "column": 46,
-          "kind": "anonymous-container-transfer",
-          "line": 33,
-          "source": "upstream/packages/gui/src/guiTestHelper.ts"
-        },
-        {
-          "column": 68,
           "kind": "anonymous-container-transfer",
           "line": 33,
           "source": "upstream/packages/gui/src/guiTestHelper.ts"
@@ -52913,16 +53977,6 @@
           "source": "upstream/packages/particleemitter/src/particleEmitter.ts"
         },
         {
-          "column": 39,
-          "kind": "cross-schema-container-transfer",
-          "line": 207,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#ParticleEmitter2DRuntime",
-            "@flighthq/types:type#MethodsOf"
-          ],
-          "source": "upstream/packages/particleemitter/src/particleEmitter.ts"
-        },
-        {
           "column": 27,
           "kind": "cross-schema-container-transfer",
           "line": 267,
@@ -52979,16 +54033,6 @@
           "line": 190,
           "relatedSchemaIds": [
             "@flighthq/types:interface#QuadBatch"
-          ],
-          "source": "upstream/packages/quadbatch/src/quadBatch.ts"
-        },
-        {
-          "column": 39,
-          "kind": "cross-schema-container-transfer",
-          "line": 205,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#QuadBatchRuntime",
-            "@flighthq/types:type#MethodsOf"
           ],
           "source": "upstream/packages/quadbatch/src/quadBatch.ts"
         },
@@ -53057,15 +54101,6 @@
           "relatedSchemaIds": [
             "@flighthq/types:interface#Node",
             "@flighthq/types:type#NodeAny"
-          ],
-          "source": "upstream/packages/scene-document/src/sceneDocumentScene2DMaterialization.ts"
-        },
-        {
-          "column": 4,
-          "kind": "dynamic-container-transfer",
-          "line": 291,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#NodeRuntime"
           ],
           "source": "upstream/packages/scene-document/src/sceneDocumentScene2DMaterialization.ts"
         },
@@ -53870,6 +54905,16 @@
           "source": "upstream/packages/scene2d/src/displayContainer.ts"
         },
         {
+          "column": 33,
+          "kind": "cross-schema-container-transfer",
+          "line": 53,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Node2DRuntime",
+            "@flighthq/types:type#MethodsOf"
+          ],
+          "source": "upstream/packages/scene2d/src/displayObject.ts"
+        },
+        {
           "column": 16,
           "kind": "anonymous-container-transfer",
           "line": 54,
@@ -53881,16 +54926,6 @@
           "line": 22,
           "relatedSchemaIds": [
             "@flighthq/types:interface#HtmlView"
-          ],
-          "source": "upstream/packages/scene2d/src/htmlView.ts"
-        },
-        {
-          "column": 30,
-          "kind": "cross-schema-container-transfer",
-          "line": 34,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#HtmlViewRuntime",
-            "@flighthq/types:type#MethodsOf"
           ],
           "source": "upstream/packages/scene2d/src/htmlView.ts"
         },
@@ -53936,16 +54971,6 @@
           "line": 35,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Sprite"
-          ],
-          "source": "upstream/packages/scene2d/src/sprite.ts"
-        },
-        {
-          "column": 39,
-          "kind": "cross-schema-container-transfer",
-          "line": 52,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#SpriteRuntime",
-            "@flighthq/types:type#MethodsOf"
           ],
           "source": "upstream/packages/scene2d/src/sprite.ts"
         },
@@ -54036,16 +55061,6 @@
           "line": 45,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Shape"
-          ],
-          "source": "upstream/packages/shape/src/shape.ts"
-        },
-        {
-          "column": 39,
-          "kind": "cross-schema-container-transfer",
-          "line": 55,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#ShapeRuntime",
-            "@flighthq/types:type#MethodsOf"
           ],
           "source": "upstream/packages/shape/src/shape.ts"
         },
@@ -54491,16 +55506,6 @@
           "source": "upstream/packages/text/src/nativeText.ts"
         },
         {
-          "column": 35,
-          "kind": "cross-schema-container-transfer",
-          "line": 56,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#NativeTextRuntime",
-            "@flighthq/types:type#MethodsOf"
-          ],
-          "source": "upstream/packages/text/src/nativeText.ts"
-        },
-        {
           "column": 28,
           "kind": "cross-schema-container-transfer",
           "line": 64,
@@ -54659,16 +55664,6 @@
           "line": 113,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RichText"
-          ],
-          "source": "upstream/packages/text/src/richText.ts"
-        },
-        {
-          "column": 35,
-          "kind": "cross-schema-container-transfer",
-          "line": 139,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#RichTextRuntime",
-            "@flighthq/types:type#MethodsOf"
           ],
           "source": "upstream/packages/text/src/richText.ts"
         },
@@ -54916,16 +55911,6 @@
           "source": "upstream/packages/text/src/textLabel.ts"
         },
         {
-          "column": 35,
-          "kind": "cross-schema-container-transfer",
-          "line": 90,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#TextLabelRuntime",
-            "@flighthq/types:type#MethodsOf"
-          ],
-          "source": "upstream/packages/text/src/textLabel.ts"
-        },
-        {
           "column": 27,
           "kind": "cross-schema-container-transfer",
           "line": 105,
@@ -55102,16 +56087,6 @@
           "line": 53,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Tilemap"
-          ],
-          "source": "upstream/packages/tilemap/src/tilemap.ts"
-        },
-        {
-          "column": 30,
-          "kind": "cross-schema-container-transfer",
-          "line": 71,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#TilemapRuntime",
-            "@flighthq/types:type#MethodsOf"
           ],
           "source": "upstream/packages/tilemap/src/tilemap.ts"
         },
@@ -55575,7 +56550,7 @@
         {
           "column": 19,
           "kind": "cross-schema-container-transfer",
-          "line": 91,
+          "line": 92,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Mesh"
           ],
@@ -55872,6 +56847,13 @@
           },
           {
             "path": [
+              "@flighthq/types:interface#Node2DRuntime",
+              "interactionState:@flighthq/types:interface#NodeInteractionState"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
+          },
+          {
+            "path": [
               "@flighthq/types:interface#NodeRuntime",
               "interactionState:@flighthq/types:interface#NodeInteractionState"
             ],
@@ -55942,6 +56924,13 @@
               "interactionState:@flighthq/types:interface#NodeInteractionState"
             ],
             "rootSchemaId": "@flighthq/types:interface#NativeTextRuntime"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Node2DRuntime",
+              "interactionState:@flighthq/types:interface#NodeInteractionState"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
           },
           {
             "path": [
@@ -56076,6 +57065,11 @@
           {
             "childSchemaId": "@flighthq/types:interface#NodeInteractionState",
             "fieldPath": "interactionState",
+            "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#NodeInteractionState",
+            "fieldPath": "interactionState",
             "parentSchemaId": "@flighthq/types:interface#NodeRuntime"
           },
           {
@@ -56190,6 +57184,16 @@
             "cross-schema-transfer"
           ],
           "rootSchemaId": "@flighthq/types:interface#NativeTextRuntime"
+        },
+        {
+          "path": [
+            "@flighthq/types:interface#Node2DRuntime",
+            "interactionState:@flighthq/types:interface#NodeInteractionState"
+          ],
+          "reasons": [
+            "cross-schema-transfer"
+          ],
+          "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
         },
         {
           "path": [
@@ -56625,6 +57629,13 @@
         "inputPaths": [
           {
             "path": [
+              "@flighthq/types:interface#Node2DRuntime",
+              "nodeSignals:@flighthq/types:interface#NodeSignals"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
+          },
+          {
+            "path": [
               "@flighthq/types:interface#NodeRuntime",
               "nodeSignals:@flighthq/types:interface#NodeSignals"
             ],
@@ -56687,6 +57698,13 @@
               "nodeSignals:@flighthq/types:interface#NodeSignals"
             ],
             "rootSchemaId": "@flighthq/types:interface#NativeTextRuntime"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Node2DRuntime",
+              "nodeSignals:@flighthq/types:interface#NodeSignals"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
           },
           {
             "path": [
@@ -56821,6 +57839,11 @@
           {
             "childSchemaId": "@flighthq/types:interface#NodeSignals",
             "fieldPath": "nodeSignals",
+            "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#NodeSignals",
+            "fieldPath": "nodeSignals",
             "parentSchemaId": "@flighthq/types:interface#NodeRuntime"
           },
           {
@@ -56935,6 +57958,16 @@
             "cross-schema-transfer"
           ],
           "rootSchemaId": "@flighthq/types:interface#NativeTextRuntime"
+        },
+        {
+          "path": [
+            "@flighthq/types:interface#Node2DRuntime",
+            "nodeSignals:@flighthq/types:interface#NodeSignals"
+          ],
+          "reasons": [
+            "cross-schema-transfer"
+          ],
+          "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
         },
         {
           "path": [
@@ -57067,9 +58100,9 @@
           "source": "upstream/packages/interaction/src/focusManager.ts"
         },
         {
-          "column": 19,
+          "column": 32,
           "kind": "dynamic-container-transfer",
-          "line": 933,
+          "line": 935,
           "relatedSchemaIds": [
             "@flighthq/types:interface#NodeRuntime"
           ],
@@ -57258,7 +58291,7 @@
         {
           "column": 28,
           "kind": "dynamic-container-transfer",
-          "line": 42,
+          "line": 38,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Node",
             "@flighthq/types:interface#RenderCache",
@@ -59707,6 +60740,70 @@
         "inputPaths": [
           {
             "path": [
+              "@flighthq/types:interface#HasDialogPhotoCapture",
+              "dialog.photoCapture:@flighthq/types:interface#PhotoCaptureDialogBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasDialogPhotoCapture"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "dialog:@flighthq/types:interface#HostDialogCapabilities",
+              "photoCapture:@flighthq/types:interface#PhotoCaptureDialogBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasDialogPhotoCapture",
+              "dialog.photoCapture:@flighthq/types:interface#PhotoCaptureDialogBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasDialogPhotoCapture"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "dialog:@flighthq/types:interface#HostDialogCapabilities",
+              "photoCapture:@flighthq/types:interface#PhotoCaptureDialogBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#PhotoCaptureDialogBackend",
+            "fieldPath": "dialog.photoCapture",
+            "parentSchemaId": "@flighthq/types:interface#HasDialogPhotoCapture"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#PhotoCaptureDialogBackend",
+            "fieldPath": "photoCapture",
+            "parentSchemaId": "@flighthq/types:interface#HostDialogCapabilities"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#PhotoCaptureDialogBackend",
+      "name": "PhotoCaptureDialogBackend",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/PhotoCaptureDialogBackend.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
               "@flighthq/types:interface#Physics2DAbi"
             ],
             "rootSchemaId": "@flighthq/types:interface#Physics2DAbi"
@@ -61976,13 +63073,13 @@
         {
           "column": 53,
           "kind": "dynamic-container-transfer",
-          "line": 325,
+          "line": 324,
           "source": "upstream/packages/physics3d/src/world.ts"
         },
         {
           "column": 38,
           "kind": "dynamic-container-transfer",
-          "line": 451,
+          "line": 445,
           "source": "upstream/packages/physics3d/src/world.ts"
         }
       ]
@@ -62053,13 +63150,13 @@
         {
           "column": 53,
           "kind": "dynamic-container-transfer",
-          "line": 325,
+          "line": 324,
           "source": "upstream/packages/physics3d/src/world.ts"
         },
         {
           "column": 38,
           "kind": "dynamic-container-transfer",
-          "line": 451,
+          "line": 445,
           "source": "upstream/packages/physics3d/src/world.ts"
         }
       ]
@@ -63474,6 +64571,13 @@
               "batteryHealth:@flighthq/types:interface#PowerBatteryHealthBackend"
             ],
             "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#HostPowerCapabilities",
+              "batteryHealth:@flighthq/types:interface#PowerBatteryHealthBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HostPowerCapabilities"
           }
         ]
       },
@@ -63545,6 +64649,13 @@
               "change:@flighthq/types:interface#PowerChangeBackend"
             ],
             "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#HostPowerCapabilities",
+              "change:@flighthq/types:interface#PowerChangeBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HostPowerCapabilities"
           }
         ]
       },
@@ -63623,6 +64734,13 @@
               "idle:@flighthq/types:interface#PowerIdleBackend"
             ],
             "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#HostPowerCapabilities",
+              "idle:@flighthq/types:interface#PowerIdleBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HostPowerCapabilities"
           }
         ]
       },
@@ -63698,19 +64816,19 @@
         {
           "column": 36,
           "kind": "anonymous-container-transfer",
+          "line": 64,
+          "source": "upstream/packages/host-electron/src/electronPower.ts"
+        },
+        {
+          "column": 18,
+          "kind": "anonymous-container-transfer",
+          "line": 69,
+          "source": "upstream/packages/host-electron/src/electronPower.ts"
+        },
+        {
+          "column": 18,
+          "kind": "anonymous-container-transfer",
           "line": 71,
-          "source": "upstream/packages/host-electron/src/electronPower.ts"
-        },
-        {
-          "column": 18,
-          "kind": "anonymous-container-transfer",
-          "line": 76,
-          "source": "upstream/packages/host-electron/src/electronPower.ts"
-        },
-        {
-          "column": 18,
-          "kind": "anonymous-container-transfer",
-          "line": 78,
           "source": "upstream/packages/host-electron/src/electronPower.ts"
         }
       ]
@@ -63747,19 +64865,19 @@
         {
           "column": 35,
           "kind": "anonymous-container-transfer",
-          "line": 91,
+          "line": 84,
           "source": "upstream/packages/host-electron/src/electronPower.ts"
         },
         {
           "column": 18,
           "kind": "anonymous-container-transfer",
-          "line": 96,
+          "line": 89,
           "source": "upstream/packages/host-electron/src/electronPower.ts"
         },
         {
           "column": 16,
           "kind": "anonymous-container-transfer",
-          "line": 99,
+          "line": 92,
           "source": "upstream/packages/host-electron/src/electronPower.ts"
         }
       ]
@@ -63792,6 +64910,13 @@
               "sessionLock:@flighthq/types:interface#PowerSessionLockBackend"
             ],
             "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#HostPowerCapabilities",
+              "sessionLock:@flighthq/types:interface#PowerSessionLockBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HostPowerCapabilities"
           }
         ]
       },
@@ -63905,6 +65030,13 @@
               "status:@flighthq/types:interface#PowerStatusBackend"
             ],
             "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#HostPowerCapabilities",
+              "status:@flighthq/types:interface#PowerStatusBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HostPowerCapabilities"
           }
         ]
       },
@@ -63976,6 +65108,13 @@
               "suspension:@flighthq/types:interface#PowerSuspensionBackend"
             ],
             "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#HostPowerCapabilities",
+              "suspension:@flighthq/types:interface#PowerSuspensionBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HostPowerCapabilities"
           },
           {
             "path": [
@@ -64060,6 +65199,13 @@
               "thermal:@flighthq/types:interface#PowerThermalBackend"
             ],
             "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#HostPowerCapabilities",
+              "thermal:@flighthq/types:interface#PowerThermalBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HostPowerCapabilities"
           }
         ]
       },
@@ -65392,7 +66538,7 @@
       "containment": {
         "children": [
           {
-            "childSchemaId": "@flighthq/types:interface#Image",
+            "childSchemaId": "@flighthq/types:interface#ImageResource",
             "fieldPath": "image",
             "parentSchemaId": "@flighthq/types:interface#Raster2DSurface"
           }
@@ -67194,7 +68340,7 @@
         {
           "column": 18,
           "kind": "dynamic-container-transfer",
-          "line": 312,
+          "line": 311,
           "source": "upstream/packages/physics3d/src/world.ts"
         }
       ]
@@ -69498,6 +70644,14 @@
           },
           {
             "path": [
+              "@flighthq/types:interface#SpriteIdentityRendererData",
+              "textureIdentity:@flighthq/types:interface#Texture2D",
+              "sampler:@flighthq/types:interface#Sampler"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#SpriteIdentityRendererData"
+          },
+          {
+            "path": [
               "@flighthq/types:interface#SpriteRuntime",
               "localBoundsTexture:@flighthq/types:interface#Texture2D",
               "sampler:@flighthq/types:interface#Sampler"
@@ -70094,6 +71248,17 @@
         },
         {
           "path": [
+            "@flighthq/types:interface#SpriteIdentityRendererData",
+            "textureIdentity:@flighthq/types:interface#Texture2D",
+            "sampler:@flighthq/types:interface#Sampler"
+          ],
+          "reasons": [
+            "cross-schema-transfer"
+          ],
+          "rootSchemaId": "@flighthq/types:interface#SpriteIdentityRendererData"
+        },
+        {
+          "path": [
             "@flighthq/types:interface#SpriteRuntime",
             "localBoundsTexture:@flighthq/types:interface#Texture2D",
             "sampler:@flighthq/types:interface#Sampler"
@@ -70460,6 +71625,13 @@
           },
           {
             "path": [
+              "@flighthq/types:interface#Node2DRuntime",
+              "scene2d:@flighthq/types:interface#Scene2D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
+          },
+          {
+            "path": [
               "@flighthq/types:interface#RichTextRuntime",
               "scene2d:@flighthq/types:interface#Scene2D"
             ],
@@ -70528,6 +71700,13 @@
               "scene2d:@flighthq/types:interface#Scene2D"
             ],
             "rootSchemaId": "@flighthq/types:interface#NativeTextRuntime"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Node2DRuntime",
+              "scene2d:@flighthq/types:interface#Scene2D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
           },
           {
             "path": [
@@ -70650,6 +71829,11 @@
           {
             "childSchemaId": "@flighthq/types:interface#Scene2D",
             "fieldPath": "scene2d",
+            "parentSchemaId": "@flighthq/types:interface#Node2DRuntime"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#Scene2D",
+            "fieldPath": "scene2d",
             "parentSchemaId": "@flighthq/types:interface#ParticleEmitter2DRuntime"
           },
           {
@@ -70759,6 +71943,16 @@
             "cross-schema-transfer"
           ],
           "rootSchemaId": "@flighthq/types:interface#NativeTextRuntime"
+        },
+        {
+          "path": [
+            "@flighthq/types:interface#Node2DRuntime",
+            "scene2d:@flighthq/types:interface#Scene2D"
+          ],
+          "reasons": [
+            "cross-schema-transfer"
+          ],
+          "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
         },
         {
           "path": [
@@ -72133,6 +73327,13 @@
               "registry:@flighthq/types:interface#Scene3DMaterialTextureRegistry"
             ],
             "rootSchemaId": "@flighthq/types:interface#Scene3DResourceResolverOptions"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Scene3DResourceResolverWithRuntime",
+              "registry:@flighthq/types:interface#Scene3DMaterialTextureRegistry"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Scene3DResourceResolverWithRuntime"
           }
         ],
         "outputPaths": [
@@ -72144,10 +73345,10 @@
           },
           {
             "path": [
-              "@flighthq/types:interface#Scene3DResourceResolver",
+              "@flighthq/types:interface#Scene3DResourceResolverWithRuntime",
               "registry:@flighthq/types:interface#Scene3DMaterialTextureRegistry"
             ],
-            "rootSchemaId": "@flighthq/types:interface#Scene3DResourceResolver"
+            "rootSchemaId": "@flighthq/types:interface#Scene3DResourceResolverWithRuntime"
           }
         ]
       },
@@ -72163,6 +73364,11 @@
             "childSchemaId": "@flighthq/types:interface#Scene3DMaterialTextureRegistry",
             "fieldPath": "registry",
             "parentSchemaId": "@flighthq/types:interface#Scene3DResourceResolverOptions"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#Scene3DMaterialTextureRegistry",
+            "fieldPath": "registry",
+            "parentSchemaId": "@flighthq/types:interface#Scene3DResourceResolverWithRuntime"
           }
         ]
       },
@@ -72186,6 +73392,16 @@
             "cross-schema-transfer"
           ],
           "rootSchemaId": "@flighthq/types:interface#Scene3DResourceResolver"
+        },
+        {
+          "path": [
+            "@flighthq/types:interface#Scene3DResourceResolverWithRuntime",
+            "registry:@flighthq/types:interface#Scene3DMaterialTextureRegistry"
+          ],
+          "reasons": [
+            "cross-schema-transfer"
+          ],
+          "rootSchemaId": "@flighthq/types:interface#Scene3DResourceResolverWithRuntime"
         }
       ],
       "source": "upstream/packages/types/src/Scene3DResources.ts",
@@ -75388,6 +76604,15 @@
           },
           {
             "path": [
+              "@flighthq/types:interface#Node2DRuntime",
+              "interactionSignals:@flighthq/types:interface#InteractionSignals",
+              "onClick:@flighthq/types:interface#Signal",
+              "data:@flighthq/types:interface#SignalData"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
+          },
+          {
+            "path": [
               "@flighthq/types:interface#NodeRuntime",
               "interactionSignals:@flighthq/types:interface#InteractionSignals",
               "onClick:@flighthq/types:interface#Signal",
@@ -75997,6 +77222,14 @@
           },
           {
             "path": [
+              "@flighthq/types:interface#MediaChannelSignals",
+              "onBuffering:@flighthq/types:interface#Signal",
+              "data:@flighthq/types:interface#SignalData"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#MediaChannelSignals"
+          },
+          {
+            "path": [
               "@flighthq/types:interface#MediaSessionActionSignal",
               "onAction:@flighthq/types:interface#Signal",
               "data:@flighthq/types:interface#SignalData"
@@ -76098,6 +77331,15 @@
               "data:@flighthq/types:interface#SignalData"
             ],
             "rootSchemaId": "@flighthq/types:interface#NativeTextRuntime"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Node2DRuntime",
+              "interactionSignals:@flighthq/types:interface#InteractionSignals",
+              "onClick:@flighthq/types:interface#Signal",
+              "data:@flighthq/types:interface#SignalData"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
           },
           {
             "path": [
@@ -76821,6 +78063,18 @@
             "anonymous-structural-transfer"
           ],
           "rootSchemaId": "@flighthq/types:interface#NetRequestOptions"
+        },
+        {
+          "path": [
+            "@flighthq/types:interface#Node2DRuntime",
+            "interactionSignals:@flighthq/types:interface#InteractionSignals",
+            "onClick:@flighthq/types:interface#Signal",
+            "data:@flighthq/types:interface#SignalData"
+          ],
+          "reasons": [
+            "cross-schema-transfer"
+          ],
+          "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
         },
         {
           "path": [
@@ -82678,6 +83932,13 @@
         "inputPaths": [
           {
             "path": [
+              "@flighthq/types:interface#HasTextSegmenter",
+              "text.segmenter:@flighthq/types:interface#TextSegmenterBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasTextSegmenter"
+          },
+          {
+            "path": [
               "@flighthq/types:interface#Host",
               "text:@flighthq/types:interface#HostTextCapabilities",
               "segmenter:@flighthq/types:interface#TextSegmenterBackend"
@@ -83518,20 +84779,20 @@
         "inputPaths": [
           {
             "path": [
-              "@flighthq/types:interface#CompressedImage",
-              "compressed:@flighthq/types:interface#CompressedImageData",
-              "container:@flighthq/types:interface#TextureContainer",
-              "levels[]:@flighthq/types:interface#TextureContainerLevel"
-            ],
-            "rootSchemaId": "@flighthq/types:interface#CompressedImage"
-          },
-          {
-            "path": [
               "@flighthq/types:interface#CompressedImageData",
               "container:@flighthq/types:interface#TextureContainer",
               "levels[]:@flighthq/types:interface#TextureContainerLevel"
             ],
             "rootSchemaId": "@flighthq/types:interface#CompressedImageData"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#CompressedImageResource",
+              "compressed:@flighthq/types:interface#CompressedImageData",
+              "container:@flighthq/types:interface#TextureContainer",
+              "levels[]:@flighthq/types:interface#TextureContainerLevel"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#CompressedImageResource"
           },
           {
             "path": [
@@ -83544,12 +84805,12 @@
         "outputPaths": [
           {
             "path": [
-              "@flighthq/types:interface#CompressedImage",
+              "@flighthq/types:interface#CompressedImageResource",
               "compressed:@flighthq/types:interface#CompressedImageData",
               "container:@flighthq/types:interface#TextureContainer",
               "levels[]:@flighthq/types:interface#TextureContainerLevel"
             ],
-            "rootSchemaId": "@flighthq/types:interface#CompressedImage"
+            "rootSchemaId": "@flighthq/types:interface#CompressedImageResource"
           },
           {
             "path": [
@@ -83583,7 +84844,7 @@
       "normalizationProvenance": [
         {
           "path": [
-            "@flighthq/types:interface#CompressedImage",
+            "@flighthq/types:interface#CompressedImageResource",
             "compressed:@flighthq/types:interface#CompressedImageData",
             "container:@flighthq/types:interface#TextureContainer",
             "levels[]:@flighthq/types:interface#TextureContainerLevel"
@@ -83591,7 +84852,7 @@
           "reasons": [
             "cross-schema-transfer"
           ],
-          "rootSchemaId": "@flighthq/types:interface#CompressedImage"
+          "rootSchemaId": "@flighthq/types:interface#CompressedImageResource"
         }
       ],
       "source": "upstream/packages/types/src/TextureContainerLevel.ts",
@@ -88557,7 +89818,7 @@
           }
         ]
       },
-      "directAccesses": 91,
+      "directAccesses": 88,
       "fields": 19,
       "id": "@flighthq/types:interface#Tween",
       "name": "Tween",
@@ -88573,8 +89834,8 @@
         {
           "column": 12,
           "kind": "anonymous-container-transfer",
-          "line": 159,
-          "source": "upstream/packages/tween/src/tween.ts"
+          "line": 24,
+          "source": "upstream/packages/tween/src/internal.ts"
         },
         {
           "column": 13,
@@ -88613,7 +89874,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 16,
+      "directAccesses": 17,
       "fields": 3,
       "id": "@flighthq/types:interface#TweenManager",
       "name": "TweenManager",
@@ -88688,8 +89949,8 @@
         {
           "column": 45,
           "kind": "anonymous-container-transfer",
-          "line": 116,
-          "source": "upstream/packages/tween/src/tween.ts"
+          "line": 83,
+          "source": "upstream/packages/tween/src/internal.ts"
         }
       ]
     },
@@ -90562,6 +91823,14 @@
           },
           {
             "path": [
+              "@flighthq/types:interface#SpriteIdentityRendererData",
+              "textureIdentity:@flighthq/types:interface#Texture2D",
+              "uvOffset:@flighthq/types:interface#Vector2"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#SpriteIdentityRendererData"
+          },
+          {
+            "path": [
               "@flighthq/types:interface#SpriteRuntime",
               "localBoundsTexture:@flighthq/types:interface#Texture2D",
               "uvOffset:@flighthq/types:interface#Vector2"
@@ -91247,6 +92516,17 @@
             "cross-schema-transfer"
           ],
           "rootSchemaId": "@flighthq/types:interface#Sprite"
+        },
+        {
+          "path": [
+            "@flighthq/types:interface#SpriteIdentityRendererData",
+            "textureIdentity:@flighthq/types:interface#Texture2D",
+            "uvOffset:@flighthq/types:interface#Vector2"
+          ],
+          "reasons": [
+            "cross-schema-transfer"
+          ],
+          "rootSchemaId": "@flighthq/types:interface#SpriteIdentityRendererData"
         },
         {
           "path": [
@@ -92214,7 +93494,7 @@
           }
         ]
       },
-      "directAccesses": 1402,
+      "directAccesses": 1408,
       "fields": 3,
       "id": "@flighthq/types:interface#Vector3",
       "name": "Vector3",
@@ -92225,6 +93505,16 @@
         "closed": false
       },
       "normalizationProvenance": [
+        {
+          "path": [
+            "@flighthq/types:interface#AreaLight",
+            "direction:@flighthq/types:interface#Vector3"
+          ],
+          "reasons": [
+            "cross-schema-transfer"
+          ],
+          "rootSchemaId": "@flighthq/types:interface#AreaLight"
+        },
         {
           "path": [
             "@flighthq/types:interface#Billboard",
@@ -93104,6 +94394,70 @@
         "inputPaths": [
           {
             "path": [
+              "@flighthq/types:interface#HasDialogVideoCapture",
+              "dialog.videoCapture:@flighthq/types:interface#VideoCaptureDialogBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasDialogVideoCapture"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "dialog:@flighthq/types:interface#HostDialogCapabilities",
+              "videoCapture:@flighthq/types:interface#VideoCaptureDialogBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasDialogVideoCapture",
+              "dialog.videoCapture:@flighthq/types:interface#VideoCaptureDialogBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasDialogVideoCapture"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "dialog:@flighthq/types:interface#HostDialogCapabilities",
+              "videoCapture:@flighthq/types:interface#VideoCaptureDialogBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#VideoCaptureDialogBackend",
+            "fieldPath": "dialog.videoCapture",
+            "parentSchemaId": "@flighthq/types:interface#HasDialogVideoCapture"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#VideoCaptureDialogBackend",
+            "fieldPath": "videoCapture",
+            "parentSchemaId": "@flighthq/types:interface#HostDialogCapabilities"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#VideoCaptureDialogBackend",
+      "name": "VideoCaptureDialogBackend",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/VideoCaptureDialogBackend.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
               "@flighthq/types:interface#VideoChannel"
             ],
             "rootSchemaId": "@flighthq/types:interface#VideoChannel"
@@ -93133,8 +94487,8 @@
         ],
         "parents": []
       },
-      "directAccesses": 47,
-      "fields": 8,
+      "directAccesses": 51,
+      "fields": 9,
       "id": "@flighthq/types:interface#VideoChannel",
       "name": "VideoChannel",
       "nominalIdentity": {
@@ -96789,6 +98143,14 @@
           },
           {
             "path": [
+              "@flighthq/types:interface#Node2DRuntime",
+              "interactionState:@flighthq/types:interface#NodeInteractionState",
+              "hitArea:@flighthq/types:type#NodeAny"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
+          },
+          {
+            "path": [
               "@flighthq/types:interface#NodeRuntime",
               "interactionState:@flighthq/types:interface#NodeInteractionState",
               "hitArea:@flighthq/types:type#NodeAny"
@@ -96983,6 +98345,14 @@
               "hitArea:@flighthq/types:type#NodeAny"
             ],
             "rootSchemaId": "@flighthq/types:interface#NativeTextRuntime"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Node2DRuntime",
+              "interactionState:@flighthq/types:interface#NodeInteractionState",
+              "hitArea:@flighthq/types:type#NodeAny"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
           },
           {
             "path": [
@@ -97530,6 +98900,17 @@
         },
         {
           "path": [
+            "@flighthq/types:interface#Node2DRuntime",
+            "interactionState:@flighthq/types:interface#NodeInteractionState",
+            "hitArea:@flighthq/types:type#NodeAny"
+          ],
+          "reasons": [
+            "cross-schema-transfer"
+          ],
+          "rootSchemaId": "@flighthq/types:interface#Node2DRuntime"
+        },
+        {
+          "path": [
             "@flighthq/types:interface#NodeRuntime",
             "interactionState:@flighthq/types:interface#NodeInteractionState",
             "hitArea:@flighthq/types:type#NodeAny"
@@ -97783,25 +99164,25 @@
         {
           "column": 22,
           "kind": "dynamic-container-transfer",
-          "line": 172,
+          "line": 173,
           "source": "upstream/packages/interaction/src/interactionManager.ts"
         },
         {
           "column": 20,
           "kind": "dynamic-container-transfer",
-          "line": 173,
+          "line": 174,
           "source": "upstream/packages/interaction/src/interactionManager.ts"
         },
         {
           "column": 25,
           "kind": "dynamic-container-transfer",
-          "line": 178,
+          "line": 179,
           "source": "upstream/packages/interaction/src/interactionManager.ts"
         },
         {
           "column": 19,
           "kind": "dynamic-container-transfer",
-          "line": 410,
+          "line": 411,
           "relatedSchemaIds": [
             "@flighthq/types:interface#NodeRuntime"
           ],
@@ -97810,7 +99191,7 @@
         {
           "column": 11,
           "kind": "dynamic-container-transfer",
-          "line": 415,
+          "line": 416,
           "relatedSchemaIds": [
             "@flighthq/types:interface#NodeRuntime"
           ],
@@ -98101,176 +99482,6 @@
       },
       "normalizationProvenance": [],
       "source": "upstream/packages/types/src/RenderCacheAdapterSignals.ts",
-      "transfers": []
-    },
-    {
-      "bridgeExposure": {
-        "inputPaths": [
-          {
-            "path": [
-              "@flighthq/types:interface#DomRenderStateRuntime",
-              "renderProxyAdapterMap<WeakMap:1>:@flighthq/types:type#RenderProxyAdapter"
-            ],
-            "rootSchemaId": "@flighthq/types:interface#DomRenderStateRuntime"
-          },
-          {
-            "path": [
-              "@flighthq/types:interface#GlRenderStateRuntime",
-              "renderProxyAdapterMap<WeakMap:1>:@flighthq/types:type#RenderProxyAdapter"
-            ],
-            "rootSchemaId": "@flighthq/types:interface#GlRenderStateRuntime"
-          },
-          {
-            "path": [
-              "@flighthq/types:interface#WgpuRenderStateRuntime",
-              "renderProxyAdapterMap<WeakMap:1>:@flighthq/types:type#RenderProxyAdapter"
-            ],
-            "rootSchemaId": "@flighthq/types:interface#WgpuRenderStateRuntime"
-          },
-          {
-            "path": [
-              "@flighthq/types:type#RenderProxyAdapter"
-            ],
-            "rootSchemaId": "@flighthq/types:type#RenderProxyAdapter"
-          }
-        ],
-        "outputPaths": [
-          {
-            "path": [
-              "@flighthq/types:interface#CanvasRenderStateRuntime",
-              "renderProxyAdapterMap<WeakMap:1>:@flighthq/types:type#RenderProxyAdapter"
-            ],
-            "rootSchemaId": "@flighthq/types:interface#CanvasRenderStateRuntime"
-          },
-          {
-            "path": [
-              "@flighthq/types:interface#DomRenderStateRuntime",
-              "renderProxyAdapterMap<WeakMap:1>:@flighthq/types:type#RenderProxyAdapter"
-            ],
-            "rootSchemaId": "@flighthq/types:interface#DomRenderStateRuntime"
-          },
-          {
-            "path": [
-              "@flighthq/types:interface#GlRenderStateRuntime",
-              "renderProxyAdapterMap<WeakMap:1>:@flighthq/types:type#RenderProxyAdapter"
-            ],
-            "rootSchemaId": "@flighthq/types:interface#GlRenderStateRuntime"
-          },
-          {
-            "path": [
-              "@flighthq/types:interface#RenderStateRuntime",
-              "renderProxyAdapterMap<WeakMap:1>:@flighthq/types:type#RenderProxyAdapter"
-            ],
-            "rootSchemaId": "@flighthq/types:interface#RenderStateRuntime"
-          },
-          {
-            "path": [
-              "@flighthq/types:interface#WgpuRenderStateRuntime",
-              "renderProxyAdapterMap<WeakMap:1>:@flighthq/types:type#RenderProxyAdapter"
-            ],
-            "rootSchemaId": "@flighthq/types:interface#WgpuRenderStateRuntime"
-          },
-          {
-            "path": [
-              "@flighthq/types:type#RenderProxyAdapter"
-            ],
-            "rootSchemaId": "@flighthq/types:type#RenderProxyAdapter"
-          }
-        ]
-      },
-      "containment": {
-        "children": [],
-        "parents": [
-          {
-            "childSchemaId": "@flighthq/types:type#RenderProxyAdapter",
-            "fieldPath": "renderProxyAdapterMap<WeakMap:1>",
-            "parentSchemaId": "@flighthq/types:interface#CanvasRenderStateRuntime"
-          },
-          {
-            "childSchemaId": "@flighthq/types:type#RenderProxyAdapter",
-            "fieldPath": "renderProxyAdapterMap<WeakMap:1>",
-            "parentSchemaId": "@flighthq/types:interface#DomRenderStateRuntime"
-          },
-          {
-            "childSchemaId": "@flighthq/types:type#RenderProxyAdapter",
-            "fieldPath": "renderProxyAdapterMap<WeakMap:1>",
-            "parentSchemaId": "@flighthq/types:interface#GlRenderStateRuntime"
-          },
-          {
-            "childSchemaId": "@flighthq/types:type#RenderProxyAdapter",
-            "fieldPath": "renderProxyAdapterMap<WeakMap:1>",
-            "parentSchemaId": "@flighthq/types:interface#RenderStateRuntime"
-          },
-          {
-            "childSchemaId": "@flighthq/types:type#RenderProxyAdapter",
-            "fieldPath": "renderProxyAdapterMap<WeakMap:1>",
-            "parentSchemaId": "@flighthq/types:interface#WgpuRenderStateRuntime"
-          }
-        ]
-      },
-      "directAccesses": 0,
-      "fields": 1,
-      "id": "@flighthq/types:type#RenderProxyAdapter",
-      "name": "RenderProxyAdapter",
-      "nominalIdentity": {
-        "blockerReasons": [
-          "normalization-provenance"
-        ],
-        "closed": false
-      },
-      "normalizationProvenance": [
-        {
-          "path": [
-            "@flighthq/types:interface#CanvasRenderStateRuntime",
-            "renderProxyAdapterMap<WeakMap:1>:@flighthq/types:type#RenderProxyAdapter"
-          ],
-          "reasons": [
-            "cross-schema-transfer"
-          ],
-          "rootSchemaId": "@flighthq/types:interface#CanvasRenderStateRuntime"
-        },
-        {
-          "path": [
-            "@flighthq/types:interface#DomRenderStateRuntime",
-            "renderProxyAdapterMap<WeakMap:1>:@flighthq/types:type#RenderProxyAdapter"
-          ],
-          "reasons": [
-            "cross-schema-transfer"
-          ],
-          "rootSchemaId": "@flighthq/types:interface#DomRenderStateRuntime"
-        },
-        {
-          "path": [
-            "@flighthq/types:interface#GlRenderStateRuntime",
-            "renderProxyAdapterMap<WeakMap:1>:@flighthq/types:type#RenderProxyAdapter"
-          ],
-          "reasons": [
-            "cross-schema-transfer"
-          ],
-          "rootSchemaId": "@flighthq/types:interface#GlRenderStateRuntime"
-        },
-        {
-          "path": [
-            "@flighthq/types:interface#RenderStateRuntime",
-            "renderProxyAdapterMap<WeakMap:1>:@flighthq/types:type#RenderProxyAdapter"
-          ],
-          "reasons": [
-            "cross-schema-transfer"
-          ],
-          "rootSchemaId": "@flighthq/types:interface#RenderStateRuntime"
-        },
-        {
-          "path": [
-            "@flighthq/types:interface#WgpuRenderStateRuntime",
-            "renderProxyAdapterMap<WeakMap:1>:@flighthq/types:type#RenderProxyAdapter"
-          ],
-          "reasons": [
-            "cross-schema-transfer"
-          ],
-          "rootSchemaId": "@flighthq/types:interface#WgpuRenderStateRuntime"
-        }
-      ],
-      "source": "upstream/packages/types/src/RenderProxyAdapter.ts",
       "transfers": []
     },
     {
@@ -98696,21 +99907,21 @@
   ],
   "summary": {
     "anonymousContainerTransferSchemas": 79,
-    "bridgeInputExposedSchemas": 844,
-    "bridgeOutputExposedSchemas": 858,
+    "bridgeInputExposedSchemas": 859,
+    "bridgeOutputExposedSchemas": 867,
     "blockedSchemas": 319,
-    "candidateSchemas": 1225,
-    "closedSchemas": 906,
+    "candidateSchemas": 1237,
+    "closedSchemas": 918,
     "combinedBlockedSchemas": 17,
-    "containmentEdges": 2878,
-    "containerOnlyBlockedSchemas": 85,
-    "containerTransferBlockedSchemas": 102,
-    "crossSchemaContainerTransferSchemas": 26,
+    "containmentEdges": 2937,
+    "containerOnlyBlockedSchemas": 86,
+    "containerTransferBlockedSchemas": 103,
+    "crossSchemaContainerTransferSchemas": 27,
     "dynamicContainerTransferSchemas": 22,
     "jsonParseRoots": 10,
-    "normalizationOnlyBlockedSchemas": 217,
-    "normalizationProvenanceBlockedSchemas": 234,
-    "normalizationRoots": 509
+    "normalizationOnlyBlockedSchemas": 216,
+    "normalizationProvenanceBlockedSchemas": 233,
+    "normalizationRoots": 514
   },
-  "upstreamCommit": "98a7a58a934f55555a561a308cc23c1363c45652"
+  "upstreamCommit": "8d09db125a0afd3b73ca6e039a7dd25bcb9737d0"
 }

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef HasMediaFileCapture = { var media:{ var mediaFileCapture:MediaFileCaptureBackend; }; };
+typedef HasDialogPhotoCapture = { var dialog:{ var photoCapture:PhotoCaptureDialogBackend; }; };

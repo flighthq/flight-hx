@@ -29,6 +29,7 @@ export const selectScene3DForwardLights = compiled.flight.Lighting.selectScene3D
 export const setAreaLightOrientation = compiled.flight.Lighting.setAreaLightOrientation;
 export const setDirectionalLightDirection = compiled.flight.Lighting.setDirectionalLightDirection;
 export const setDirectionalLightTarget = compiled.flight.Lighting.setDirectionalLightTarget;
+export const setSpotLightBlend = compiled.flight.Lighting.setSpotLightBlend;
 export const setSpotLightCone = compiled.flight.Lighting.setSpotLightCone;
 export const setSpotLightDirection = compiled.flight.Lighting.setSpotLightDirection;
 export const setSpotLightTarget = compiled.flight.Lighting.setSpotLightTarget;

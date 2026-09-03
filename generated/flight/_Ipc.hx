@@ -3,11 +3,24 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight.types.HasIpcHandle;
+import flight.types.HasIpcInvoke;
 import flight.types.HasIpcMessage;
+import flight.types.HasIpcSend;
+import flight.types.HasIpcTargetedSend;
+import flight.types.IpcHandleBackend;
+import flight.types.IpcInvokeBackend;
 import flight.types.IpcMessageBackend;
+import flight.types.IpcSendBackend;
+import flight.types.IpcTargetedSendBackend;
 
 @:noCompletion
 class _Ipc {
+  public static function invokeIpc(host:HasIpcInvoke, channel:String, ...args:flight._internal._Any):flight._internal._Promise<flight._internal._Any> {
+    return cast (cast (cast (cast host : HasIpcInvoke).ipc : { var invoke:IpcInvokeBackend; }).invoke : IpcInvokeBackend).invoke((cast channel : String), ({ final __callArgument0:Dynamic = args; __callArgument0; }));
+    return cast null;
+  }
+
   public static function onceIpcMessage(host:HasIpcMessage, channel:String, listener:Array<flight._internal._Any>->Void):Void->Void {
     var unsubscribe:Null<Void->Void> = cast _Runtime.UNDEFINED;
     var done:Bool = cast _Runtime.UNDEFINED;
@@ -19,18 +32,31 @@ class _Ipc {
       (done = cast (true : Dynamic));
       _Runtime.callOptionalValue(unsubscribe, cast ([] : Array<Dynamic>));
     });
-    (unsubscribe = cast ((cast (cast (cast host : HasIpcMessage).ipc : { var message:IpcMessageBackend; }).message : IpcMessageBackend).subscribe((cast channel : String), ({ final __callArgument0:Dynamic = function(args:Array<flight._internal._Any>):Void {
+    (unsubscribe = cast ((cast (cast (cast host : HasIpcMessage).ipc : { var message:IpcMessageBackend; }).message : IpcMessageBackend).subscribe((cast channel : String), ({ final __callArgument1:Dynamic = function(args:Array<flight._internal._Any>):Void {
       if ((cast done : Bool)) { return; }
       release();
       _Runtime.callHaxeRestValue(listener, _Runtime.concatArrays([_Runtime.toArray(args)]), 0);
-    }; __callArgument0; })) : Dynamic));
+    }; __callArgument1; })) : Dynamic));
     if ((cast done : Bool)) { (cast unsubscribe : Void->Void)(); }
     return cast release;
     return cast null;
   }
 
-  public static function onIpcMessage(host:HasIpcMessage, channel:String, listener:Array<flight._internal._Any>->Void):Void->Void {
-    return cast (cast (cast (cast host : HasIpcMessage).ipc : { var message:IpcMessageBackend; }).message : IpcMessageBackend).subscribe((cast channel : String), ({ final __callArgument1:Dynamic = function(args:Array<flight._internal._Any>):Void { _Runtime.callHaxeRestValue(listener, _Runtime.concatArrays([_Runtime.toArray(args)]), 0); }; __callArgument1; }));
+  public static function onIpcInvoke(host:HasIpcHandle, channel:String, handler:Array<flight._internal._Any>->flight._internal._Any):Void->Void {
+    return cast (cast (cast (cast host : HasIpcHandle).ipc : { var handle:IpcHandleBackend; }).handle : IpcHandleBackend).handle((cast channel : String), ({ final __callArgument2:Dynamic = handler; __callArgument2; }));
     return cast null;
+  }
+
+  public static function onIpcMessage(host:HasIpcMessage, channel:String, listener:Array<flight._internal._Any>->Void):Void->Void {
+    return cast (cast (cast (cast host : HasIpcMessage).ipc : { var message:IpcMessageBackend; }).message : IpcMessageBackend).subscribe((cast channel : String), ({ final __callArgument3:Dynamic = function(args:Array<flight._internal._Any>):Void { _Runtime.callHaxeRestValue(listener, _Runtime.concatArrays([_Runtime.toArray(args)]), 0); }; __callArgument3; }));
+    return cast null;
+  }
+
+  public static function sendIpcMessage(host:HasIpcSend, channel:String, ...args:flight._internal._Any):Void {
+    (cast (cast (cast host : HasIpcSend).ipc : { var send:IpcSendBackend; }).send : IpcSendBackend).send((cast channel : String), ({ final __callArgument4:Dynamic = args; __callArgument4; }));
+  }
+
+  public static function sendIpcMessageTo<Target>(host:HasIpcTargetedSend<Target>, target:Target, channel:String, ...args:flight._internal._Any):Void {
+    (cast (cast (cast host : HasIpcTargetedSend<Target>).ipc : { var targetedSend:IpcTargetedSendBackend<Target>; }).targetedSend : IpcTargetedSendBackend<Target>).send((cast target : Dynamic), (cast channel : String), ({ final __callArgument5:Dynamic = args; __callArgument5; }));
   }
 }

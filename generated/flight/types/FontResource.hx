@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FontResource = { var family:String; var face:Null<flight._internal.dom.FontFace>; };
+#if !flight_struct_typedef
+@:allow(flight._Font)
+@:keep
+@:structInit
+class FontResource {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var family:String;
+  public var face:Null<flight._internal.dom.FontFace>;
+
+  private function new(family:String, face:Null<flight._internal.dom.FontFace>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.family = family;
+    this.face = face;
+  }
+}
+#else
+typedef FontResource = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var family:String; var face:Null<flight._internal.dom.FontFace>; };
+#end

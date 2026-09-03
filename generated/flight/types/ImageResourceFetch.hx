@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ImageResourceFetch = ExternalImageResourceReference->flight._internal.dom.AbortSignal->flight._internal._Promise<Null<Image>>;
+typedef ImageResourceFetch = ExternalImageResourceReference->flight._internal.dom.AbortSignal->flight._internal._Promise<Null<ImageResource>>;

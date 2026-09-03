@@ -5,18 +5,12 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Font as Facade_Font_flight__Font;
 import flight.types.Entity;
-import flight.types.Font;
 import flight.types.FontResource;
 import flight.types.FontUrl;
 import flight.types.GlyphOutlineSource;
 import flight.types.GlyphRasterizerBackend;
 
 class Font {
-  public static function createFont(name:String):flight.types.Font {
-    return cast Facade_Font_flight__Font.createFont(name);
-    return cast null;
-  }
-
   public static function createFontResource(family:String):FontResource {
     return cast Facade_Font_flight__Font.createFontResource(family);
     return cast null;
@@ -44,26 +38,6 @@ class Font {
 
   public static function isFontLoaded(family:String, ?style:String):Bool {
     return cast Facade_Font_flight__Font.isFontLoaded(family, style);
-    return cast null;
-  }
-
-  public static function loadFontFromBytes(bytes:flight._internal._UInt8Array, family:String):flight._internal._Promise<flight.types.Font> {
-    return cast Facade_Font_flight__Font.loadFontFromBytes(bytes, family);
-    return cast null;
-  }
-
-  public static function loadFontFromName(name:String):flight._internal._Promise<flight.types.Font> {
-    return cast Facade_Font_flight__Font.loadFontFromName(name);
-    return cast null;
-  }
-
-  public static function loadFontFromUrl(url:String, family:String):flight._internal._Promise<flight.types.Font> {
-    return cast Facade_Font_flight__Font.loadFontFromUrl(url, family);
-    return cast null;
-  }
-
-  public static function loadFontFromUrls(sources:Array<FontUrl>, family:String):flight._internal._Promise<flight.types.Font> {
-    return cast Facade_Font_flight__Font.loadFontFromUrls(sources, family);
     return cast null;
   }
 

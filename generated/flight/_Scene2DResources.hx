@@ -22,7 +22,7 @@ import flight.types.DisplayObject;
 import flight.types.Entity;
 import flight.types.ExternalAudioResourceReference;
 import flight.types.ExternalImageResourceReference;
-import flight.types.Image;
+import flight.types.ImageResource;
 import flight.types.ImageResourceFetch;
 import flight.types.ImageResourceReference;
 import flight.types.ImportDiagnostic;
@@ -271,7 +271,7 @@ class _Scene2DResources {
     }
   }
 
-  public static final rejectExternalImageResource__loadScene2DImageResources:ImageResourceFetch = (cast function(__unused6:ExternalImageResourceReference, __unused7:flight._internal.dom.AbortSignal):flight._internal._Promise<flight._internal._Any> return _Runtime.callValue(function(__unused4:ExternalImageResourceReference, __unused5:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<Image>> return flight._internal._Async.resolve(null), cast ([] : Array<Dynamic>)));
+  public static final rejectExternalImageResource__loadScene2DImageResources:ImageResourceFetch = (cast function(__unused6:ExternalImageResourceReference, __unused7:flight._internal.dom.AbortSignal):flight._internal._Promise<flight._internal._Any> return _Runtime.callValue(function(__unused4:ExternalImageResourceReference, __unused5:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<ImageResource>> return flight._internal._Async.resolve(null), cast ([] : Array<Dynamic>)));
 
   public static function resolveScene2DResources(document:Scene2DDocument, ?options:ResolveScene2DResourcesOptions):Scene2DResources {
     var resolved:flight._internal._IndexedAccess<Scene2DResources, String> = cast _Runtime.UNDEFINED;

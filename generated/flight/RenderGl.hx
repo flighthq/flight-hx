@@ -21,7 +21,7 @@ import flight.types.GlRenderTextureExplanation;
 import flight.types.GlRenderTexturePool;
 import flight.types.GlTextureRealization;
 import flight.types.GlTextureResolver;
-import flight.types.Image;
+import flight.types.ImageResource;
 import flight.types.KeyedTable;
 import flight.types.Matrix;
 import flight.types.RenderPassPreserve;
@@ -55,7 +55,7 @@ class RenderGl {
     Facade_RenderGl_flight__RenderGl.beginGlRenderPass(state, target, preserve, viewport);
   }
 
-  public static function bindGlImageResourceTexture(state:GlRenderState, image:Image, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, ?premultiply:Bool, ?colorSpace:TextureColorSpace):flight._internal.dom.WebGLTexture {
+  public static function bindGlImageResourceTexture(state:GlRenderState, image:ImageResource, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, ?premultiply:Bool, ?colorSpace:TextureColorSpace):flight._internal.dom.WebGLTexture {
     return cast Facade_RenderGl_flight__RenderGl.bindGlImageResourceTexture(state, image, sampler, smoothingOverride, premultiply, colorSpace);
     return cast null;
   }

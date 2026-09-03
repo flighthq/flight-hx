@@ -9,15 +9,17 @@ import flight._internal._Runtime;
 @:keep
 @:structInit
 class Environment extends flight.types.Light<String> {
+  public var enabled:Bool;
   public var environment:Null<Texture>;
   public var intensity:Float;
 
-  private function new(kind:String, environment:Null<Texture>, intensity:Float):Void {
+  private function new(kind:String, enabled:Bool, environment:Null<Texture>, intensity:Float):Void {
     super(kind);
+    this.enabled = enabled;
     this.environment = environment;
     this.intensity = intensity;
   }
 }
 #else
-typedef Environment = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var environment:Null<Texture>; var intensity:Float; };
+typedef Environment = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var enabled:Bool; var environment:Null<Texture>; var intensity:Float; };
 #end

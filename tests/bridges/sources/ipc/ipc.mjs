@@ -5,5 +5,9 @@ const api = compiled.flight._Ipc;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const invokeIpc = api.invokeIpc;
 export const onceIpcMessage = api.onceIpcMessage;
+export const onIpcInvoke = api.onIpcInvoke;
 export const onIpcMessage = api.onIpcMessage;
+export const sendIpcMessage = api.sendIpcMessage;
+export const sendIpcMessageTo = api.sendIpcMessageTo;

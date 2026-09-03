@@ -10,14 +10,18 @@ import flight._internal._Runtime;
 @:structInit
 class AmbientLight extends flight.types.Light<String> {
   public var color:Float;
+  public var enabled:Bool;
   public var intensity:Float;
+  public var intensityUnit:LightUnit;
 
-  private function new(kind:String, color:Float, intensity:Float):Void {
+  private function new(kind:String, color:Float, enabled:Bool, intensity:Float, intensityUnit:LightUnit):Void {
     super(kind);
     this.color = color;
+    this.enabled = enabled;
     this.intensity = intensity;
+    this.intensityUnit = intensityUnit;
   }
 }
 #else
-typedef AmbientLight = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var color:Float; var intensity:Float; };
+typedef AmbientLight = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var color:Float; var enabled:Bool; var intensity:Float; var intensityUnit:LightUnit; };
 #end

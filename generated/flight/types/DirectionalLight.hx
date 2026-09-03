@@ -9,25 +9,41 @@ import flight._internal._Runtime;
 @:keep
 @:structInit
 class DirectionalLight extends flight.types.Light<String> {
+  public var cascadeCount:Float;
+  public var cascadeSplits:Array<Float>;
   public var castsShadow:Bool;
   public var color:Float;
   public var direction:Vector3;
+  public var enabled:Bool;
   public var intensity:Float;
+  public var intensityUnit:LightUnit;
   public var normalBias:Float;
   public var pcfRadius:Float;
   public var shadowBias:Float;
+  public var shadowFar:Float;
+  public var shadowMapSize:Float;
+  public var shadowNear:Float;
+  public var shadowStrength:Float;
 
-  private function new(kind:String, castsShadow:Bool, color:Float, direction:Vector3, intensity:Float, normalBias:Float, pcfRadius:Float, shadowBias:Float):Void {
+  private function new(kind:String, cascadeCount:Float, cascadeSplits:Array<Float>, castsShadow:Bool, color:Float, direction:Vector3, enabled:Bool, intensity:Float, intensityUnit:LightUnit, normalBias:Float, pcfRadius:Float, shadowBias:Float, shadowFar:Float, shadowMapSize:Float, shadowNear:Float, shadowStrength:Float):Void {
     super(kind);
+    this.cascadeCount = cascadeCount;
+    this.cascadeSplits = cascadeSplits;
     this.castsShadow = castsShadow;
     this.color = color;
     this.direction = direction;
+    this.enabled = enabled;
     this.intensity = intensity;
+    this.intensityUnit = intensityUnit;
     this.normalBias = normalBias;
     this.pcfRadius = pcfRadius;
     this.shadowBias = shadowBias;
+    this.shadowFar = shadowFar;
+    this.shadowMapSize = shadowMapSize;
+    this.shadowNear = shadowNear;
+    this.shadowStrength = shadowStrength;
   }
 }
 #else
-typedef DirectionalLight = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var castsShadow:Bool; var color:Float; var direction:Vector3; var intensity:Float; var normalBias:Float; var pcfRadius:Float; var shadowBias:Float; };
+typedef DirectionalLight = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var cascadeCount:Float; var cascadeSplits:Array<Float>; var castsShadow:Bool; var color:Float; var direction:Vector3; var enabled:Bool; var intensity:Float; var intensityUnit:LightUnit; var normalBias:Float; var pcfRadius:Float; var shadowBias:Float; var shadowFar:Float; var shadowMapSize:Float; var shadowNear:Float; var shadowStrength:Float; };
 #end
