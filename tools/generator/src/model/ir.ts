@@ -230,6 +230,7 @@ type IrExpressionNode =
       hostTypeBinding?: IrHostTypeBinding | undefined;
       structuralReceiverType?: IrType | undefined;
       typedStructBinding?: IrTypedStructBinding | undefined;
+      uncheckedTypedStructBinding?: IrTypedStructBinding | undefined;
     }
   | { flags: string; kind: 'regexp'; pattern: string }
   | { kind: 'template'; parts: Array<IrExpression | string> }

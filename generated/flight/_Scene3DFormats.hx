@@ -1702,7 +1702,7 @@ class _Scene3DFormats {
       reportImportDiagnostic(({ final __callArgument580:Dynamic = diagnostics; __callArgument580; }), ({ final __callArgument581:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument581; }), (cast 'awd2.material-specular-strength-clamped' : String), (cast 'resolveAwdMaterial' : String), ({ final __callArgument582:Dynamic = { strength: strength }; __callArgument582; }));
     }
     material = (cast (cast createShadedMaterial((cast { diffuse: diffuse, diffuseMap: diffuseTexture, normalMap: normalTexture, shininess: _Runtime.coalesce((cast parsed : ParsedMaterial__awd2Parse).gloss, function():Dynamic return cast AWD2_MATERIAL_DEFAULT_GLOSS), specular: (cast _Scene3DFormats.getAwdSpecularRgba__awd2Parse((cast parsed : ParsedMaterial__awd2Parse).specularColor, (cast strength : Float)) : Float), specularMap: specularTexture } : Dynamic)) : flight._internal._Any) : Material);
-    if ((cast ((cast !_Runtime.strictEquals((cast parsed : ParsedMaterial__awd2Parse).alpha, null) : Bool) && (cast ((cast (cast parsed : ParsedMaterial__awd2Parse).alpha : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { ((cast (cast (cast material : flight._internal._Any) : SurfaceMaterial) : { var alphaMode:MaterialAlphaMode; }).alphaMode = cast ('blend' : MaterialAlphaMode)); }
+    if ((cast ((cast !_Runtime.strictEquals((cast parsed : ParsedMaterial__awd2Parse).alpha, null) : Bool) && (cast ((cast (cast parsed : ParsedMaterial__awd2Parse).alpha : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { _Runtime.setField((cast (cast material : flight._internal._Any) : SurfaceMaterial), 'alphaMode', 'blend'); }
     ((cast material : Material).name = ((cast ((cast _Runtime.field((cast parsed : ParsedMaterial__awd2Parse).name, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast parsed : ParsedMaterial__awd2Parse).name : Dynamic) : (cast null : Dynamic)));
     index = _Runtime.field(document.materials, 'length');
     _Runtime.callProperty(document.materials, 'push', cast ([(cast (cast material : flight._internal._Any) : MaterialLike)] : Array<Dynamic>));
@@ -2268,9 +2268,9 @@ class _Scene3DFormats {
         var material:MaterialLike = flight._internal._StaticIndex.readArray((cast _Runtime.field(context, 'document') : { var materials:Array<MaterialLike>; }).materials, i);
         if ((cast _Runtime.strictEquals(material, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
         if ((cast _Runtime.strictEquals(_Runtime.field(material, 'kind'), StandardPbrMaterialKind) : Bool)) {
-          ((cast (cast (cast material : flight._internal._Any) : StandardPbrMaterial) : { var emissiveStrength:Float; }).emissiveStrength = cast (strength : Float));
+          _Runtime.setField((cast (cast material : flight._internal._Any) : StandardPbrMaterial), 'emissiveStrength', strength);
         } else { if ((cast _Runtime.strictEquals(_Runtime.field(material, 'kind'), ExtendedPbrMaterialKind) : Bool)) {
-          ((cast (cast (cast (cast material : flight._internal._Any) : ExtendedPbrMaterial) : { var standard:StandardPbrMaterialProperties; }).standard : { var emissiveStrength:Float; }).emissiveStrength = cast (strength : Float));
+          ((cast _Runtime.field((cast (cast material : flight._internal._Any) : ExtendedPbrMaterial), 'standard') : { var emissiveStrength:Float; }).emissiveStrength = cast (strength : Float));
         } }
         i++;
       }
@@ -2310,17 +2310,17 @@ class _Scene3DFormats {
     if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals(_Runtime.field(existing, 'kind'), ExtendedPbrMaterialKind) : Bool)) {
       var extended:ExtendedPbrMaterial = (cast (cast existing : flight._internal._Any) : ExtendedPbrMaterial);
-      if ((cast _Runtime.callProperty(extended.extensions, 'some', cast ([function(entry:PbrExtension, __unused0:Float, __unused1:Array<PbrExtension>):Bool return _Runtime.strictEquals(entry.kind, extension.kind)] : Array<Dynamic>)) : Bool)) { return cast false; }
-      (extended.extensions = cast (_Runtime.concatArrays([_Runtime.toArray(extended.extensions), [extension]]) : Array<PbrExtension>));
+      if ((cast _Runtime.callProperty(_Runtime.field(extended, 'extensions'), 'some', cast ([function(entry:PbrExtension, __unused0:Float, __unused1:Array<PbrExtension>):Bool return _Runtime.strictEquals(entry.kind, extension.kind)] : Array<Dynamic>)) : Bool)) { return cast false; }
+      _Runtime.setField(extended, 'extensions', _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(extended, 'extensions')), [extension]]));
       return cast true;
     }
     if ((cast !_Runtime.strictEquals(_Runtime.field(existing, 'kind'), StandardPbrMaterialKind) : Bool)) { return cast false; }
     standard = (cast (cast existing : flight._internal._Any) : StandardPbrMaterial);
     promoted = (cast createExtendedPbrMaterial((cast { extensions: cast ([extension] : Array<Dynamic>), standard: (cast createStandardPbrMaterialProperties((cast standard : Dynamic)) : StandardPbrMaterialProperties) } : Dynamic)) : ExtendedPbrMaterial);
-    (promoted.alphaCutoff = cast (standard.alphaCutoff : Float));
-    (promoted.alphaMode = cast (standard.alphaMode : MaterialAlphaMode));
-    (promoted.doubleSided = cast (standard.doubleSided : Bool));
-    (promoted.name = cast (standard.name : Null<String>));
+    (promoted.alphaCutoff = cast (_Runtime.field(standard, 'alphaCutoff') : Float));
+    (promoted.alphaMode = cast (_Runtime.field(standard, 'alphaMode') : MaterialAlphaMode));
+    (promoted.doubleSided = cast (_Runtime.field(standard, 'doubleSided') : Bool));
+    (promoted.name = cast (_Runtime.field(standard, 'name') : Null<String>));
     flight._internal._StaticIndex.writeArray(document.materials, index, (cast (cast promoted : flight._internal._Any) : MaterialLike));
     return cast true;
     return cast null;
@@ -2334,7 +2334,7 @@ class _Scene3DFormats {
     material = flight._internal._StaticIndex.readArray(document.materials, index);
     if ((cast ((cast _Runtime.strictEquals(material, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(material, 'kind'), ExtendedPbrMaterialKind) : Bool)) : Bool)) { return cast null; }
     extended = (cast (cast material : flight._internal._Any) : ExtendedPbrMaterial);
-    return cast _Runtime.coalesce(_Runtime.find(extended.extensions, function(entry:PbrExtension, __unused2:Float, __unused3:Array<PbrExtension>):Bool return _Runtime.strictEquals(entry.kind, kind)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(_Runtime.find(_Runtime.field(extended, 'extensions'), function(entry:PbrExtension, __unused2:Float, __unused3:Array<PbrExtension>):Bool return _Runtime.strictEquals(entry.kind, kind)), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -3847,11 +3847,11 @@ class _Scene3DFormats {
         var standard:StandardPbrMaterial = (cast (cast existing : flight._internal._Any) : StandardPbrMaterial);
         var diffuse:Array<Float> = _Runtime.coalesce((cast block : GltfMaterialsPbrSpecularGlossiness).diffuseFactor, function():Dynamic return cast cast ([1.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
         var specular:Array<Float> = _Runtime.coalesce((cast block : GltfMaterialsPbrSpecularGlossiness).specularFactor, function():Dynamic return cast cast ([1.0, 1.0, 1.0] : Array<Dynamic>));
-        var replacement:SpecularGlossinessPbrMaterial = (cast createSpecularGlossinessPbrMaterial((cast { diffuse: (cast packLinearToColor(({ final __callArgument1535:Dynamic = cast ([_Runtime.coalesce(flight._internal._StaticIndex.readFloatArrayTyped((cast diffuse : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 1.0), _Runtime.coalesce(flight._internal._StaticIndex.readFloatArrayTyped((cast diffuse : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast 1.0), _Runtime.coalesce(flight._internal._StaticIndex.readFloatArrayTyped((cast diffuse : Array<Float>), (cast 2.0 : Float)), function():Dynamic return cast 1.0), _Runtime.coalesce(flight._internal._StaticIndex.readFloatArrayTyped((cast diffuse : Array<Float>), (cast 3.0 : Float)), function():Dynamic return cast 1.0)] : Array<Dynamic>); __callArgument1535; })) : Float), diffuseMap: _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsPbrSpecularGlossiness).diffuseTexture, 'srgb'] : Array<Dynamic>)), emissive: standard.emissive, emissiveMap: standard.emissiveMap, emissiveStrength: standard.emissiveStrength, glossiness: _Runtime.coalesce((cast block : GltfMaterialsPbrSpecularGlossiness).glossinessFactor, function():Dynamic return cast 1.0), normalMap: standard.normalMap, normalScale: standard.normalScale, occlusionMap: standard.occlusionMap, occlusionStrength: standard.occlusionStrength, specular: (cast packLinearToColor(({ final __callArgument1537:Dynamic = cast ([_Runtime.coalesce(flight._internal._StaticIndex.readFloatArrayTyped((cast specular : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 1.0), _Runtime.coalesce(flight._internal._StaticIndex.readFloatArrayTyped((cast specular : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast 1.0), _Runtime.coalesce(flight._internal._StaticIndex.readFloatArrayTyped((cast specular : Array<Float>), (cast 2.0 : Float)), function():Dynamic return cast 1.0), 1.0] : Array<Dynamic>); __callArgument1537; })) : Float), specularGlossinessMap: _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsPbrSpecularGlossiness).specularGlossinessTexture, 'srgb'] : Array<Dynamic>)) } : Dynamic)) : SpecularGlossinessPbrMaterial);
-        (replacement.alphaCutoff = cast (standard.alphaCutoff : Float));
-        (replacement.alphaMode = cast (standard.alphaMode : MaterialAlphaMode));
-        (replacement.doubleSided = cast (standard.doubleSided : Bool));
-        (replacement.name = cast (standard.name : Null<String>));
+        var replacement:SpecularGlossinessPbrMaterial = (cast createSpecularGlossinessPbrMaterial((cast { diffuse: (cast packLinearToColor(({ final __callArgument1535:Dynamic = cast ([_Runtime.coalesce(flight._internal._StaticIndex.readFloatArrayTyped((cast diffuse : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 1.0), _Runtime.coalesce(flight._internal._StaticIndex.readFloatArrayTyped((cast diffuse : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast 1.0), _Runtime.coalesce(flight._internal._StaticIndex.readFloatArrayTyped((cast diffuse : Array<Float>), (cast 2.0 : Float)), function():Dynamic return cast 1.0), _Runtime.coalesce(flight._internal._StaticIndex.readFloatArrayTyped((cast diffuse : Array<Float>), (cast 3.0 : Float)), function():Dynamic return cast 1.0)] : Array<Dynamic>); __callArgument1535; })) : Float), diffuseMap: _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsPbrSpecularGlossiness).diffuseTexture, 'srgb'] : Array<Dynamic>)), emissive: _Runtime.field(standard, 'emissive'), emissiveMap: _Runtime.field(standard, 'emissiveMap'), emissiveStrength: _Runtime.field(standard, 'emissiveStrength'), glossiness: _Runtime.coalesce((cast block : GltfMaterialsPbrSpecularGlossiness).glossinessFactor, function():Dynamic return cast 1.0), normalMap: _Runtime.field(standard, 'normalMap'), normalScale: _Runtime.field(standard, 'normalScale'), occlusionMap: _Runtime.field(standard, 'occlusionMap'), occlusionStrength: _Runtime.field(standard, 'occlusionStrength'), specular: (cast packLinearToColor(({ final __callArgument1537:Dynamic = cast ([_Runtime.coalesce(flight._internal._StaticIndex.readFloatArrayTyped((cast specular : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 1.0), _Runtime.coalesce(flight._internal._StaticIndex.readFloatArrayTyped((cast specular : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast 1.0), _Runtime.coalesce(flight._internal._StaticIndex.readFloatArrayTyped((cast specular : Array<Float>), (cast 2.0 : Float)), function():Dynamic return cast 1.0), 1.0] : Array<Dynamic>); __callArgument1537; })) : Float), specularGlossinessMap: _Runtime.callProperty(context, 'resolveTexture', cast ([(cast block : GltfMaterialsPbrSpecularGlossiness).specularGlossinessTexture, 'srgb'] : Array<Dynamic>)) } : Dynamic)) : SpecularGlossinessPbrMaterial);
+        (replacement.alphaCutoff = cast (_Runtime.field(standard, 'alphaCutoff') : Float));
+        (replacement.alphaMode = cast (_Runtime.field(standard, 'alphaMode') : MaterialAlphaMode));
+        (replacement.doubleSided = cast (_Runtime.field(standard, 'doubleSided') : Bool));
+        (replacement.name = cast (_Runtime.field(standard, 'name') : Null<String>));
         flight._internal._StaticIndex.writeArray((cast _Runtime.field(context, 'document') : { var materials:Array<MaterialLike>; }).materials, i, (cast (cast replacement : flight._internal._Any) : MaterialLike));
         i++;
       }
@@ -3934,11 +3934,11 @@ class _Scene3DFormats {
         var existing:MaterialLike = flight._internal._StaticIndex.readArray((cast _Runtime.field(context, 'document') : { var materials:Array<MaterialLike>; }).materials, i);
         if ((cast ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(existing, 'kind'), StandardPbrMaterialKind) : Bool)) : Bool)) { i++; continue; }
         var standard:StandardPbrMaterial = (cast (cast existing : flight._internal._Any) : StandardPbrMaterial);
-        var replacement:UnlitMaterial = (cast createUnlitMaterial((cast { baseColor: standard.baseColor, baseColorMap: standard.baseColorMap } : Dynamic)) : UnlitMaterial);
-        (replacement.alphaCutoff = cast (standard.alphaCutoff : Float));
-        (replacement.alphaMode = cast (standard.alphaMode : MaterialAlphaMode));
-        (replacement.doubleSided = cast (standard.doubleSided : Bool));
-        (replacement.name = cast (standard.name : Null<String>));
+        var replacement:UnlitMaterial = (cast createUnlitMaterial((cast { baseColor: _Runtime.field(standard, 'baseColor'), baseColorMap: _Runtime.field(standard, 'baseColorMap') } : Dynamic)) : UnlitMaterial);
+        (replacement.alphaCutoff = cast (_Runtime.field(standard, 'alphaCutoff') : Float));
+        (replacement.alphaMode = cast (_Runtime.field(standard, 'alphaMode') : MaterialAlphaMode));
+        (replacement.doubleSided = cast (_Runtime.field(standard, 'doubleSided') : Bool));
+        (replacement.name = cast (_Runtime.field(standard, 'name') : Null<String>));
         flight._internal._StaticIndex.writeArray((cast _Runtime.field(context, 'document') : { var materials:Array<MaterialLike>; }).materials, i, (cast (cast replacement : flight._internal._Any) : MaterialLike));
         i++;
       }
@@ -6328,7 +6328,7 @@ class _Scene3DFormats {
     while ((cast ((cast _Runtime.field(stack, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       var node:Node3D = _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>));
       if ((cast (cast isMesh((cast node : flight._internal._Any)) : Bool) : Bool)) {
-        var skin:Null<Skin> = (cast (cast (cast node : flight._internal._Any) : Mesh) : { @:optional var skin:Null<Skin>; }).skin;
+        var skin:Null<Skin> = _Runtime.field((cast (cast node : flight._internal._Any) : Mesh), 'skin');
         if ((cast !_Runtime.looseEquals(skin, null) : Bool)) { return cast (cast (cast skin : { var skeleton:Skeleton3D; }).skeleton : { var joints:Array<Node3D>; }).joints; }
       }
       _Runtime.callProperty(stack, 'push', _Runtime.concatArrays([_Runtime.toArray((cast getNodeChildren((cast node : Dynamic)) : Array<NodeOf<Node3DTraits>>))]));

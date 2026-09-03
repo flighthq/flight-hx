@@ -4397,17 +4397,17 @@ class _Scene3DWgpu {
       var rigidDrawBindGroup:flight._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
       var drawBindGroup:flight._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
       mesh = (cast (cast node : flight._internal._Any) : Mesh);
-      if ((cast _Runtime.looseEquals(mesh.geometry, null) : Bool)) { return; }
+      if ((cast _Runtime.looseEquals(_Runtime.field(mesh, 'geometry'), null) : Bool)) { return; }
       skinned = _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural1672 = skinning; __structural1672 == null ? _Runtime.UNDEFINED : (cast __structural1672 : { var isGpuSkinned:Mesh->Bool; }).isGpuSkinned; }), cast ([mesh] : Array<Dynamic>)), function():Dynamic return cast false);
       pipeline = ((cast skinned : Bool) ? (cast (cast _Scene3DWgpu.ensureWgpuShadowDepthPipeline__wgpuShadowMap(({ final __callArgument1673:Dynamic = state; __callArgument1673; }), (cast true : Bool)) : flight._internal.dom.GPURenderPipeline) : Dynamic) : (cast rigidPipeline : Dynamic));
-      upload = (cast ensureWgpuMeshUpload(({ final __callArgument1675:Dynamic = state; __callArgument1675; }), mesh.geometry, (cast skinned : Bool)) : WgpuMeshUpload);
+      upload = (cast ensureWgpuMeshUpload(({ final __callArgument1675:Dynamic = state; __callArgument1675; }), _Runtime.field(mesh, 'geometry'), (cast skinned : Bool)) : WgpuMeshUpload);
       if ((cast !_Runtime.strictEquals(pipeline, boundPipeline) : Bool)) {
         (cast pass : flight._internal.dom.GPURenderPassEncoder).setPipeline(pipeline);
         (boundPipeline = cast (pipeline : Dynamic));
       }
       world = (cast getNodeWorldMatrix4((cast mesh : Dynamic)) : Matrix4);
       multiplyMatrix4(({ final __callArgument1677:Dynamic = _Scene3DWgpu._shadowProxy__wgpuShadowMap.worldMatrix; __callArgument1677; }), ({ final __callArgument1678:Dynamic = lightMatrix; __callArgument1678; }), ({ final __callArgument1679:Dynamic = world; __callArgument1679; }));
-      jointMatrices = ((cast skinned : Bool) ? (cast (cast (cast mesh.skin : { var skeleton:Skeleton3D; }).skeleton : { var jointMatrices:flight._internal._Float32Array; }).jointMatrices : Dynamic) : (cast null : Dynamic));
+      jointMatrices = ((cast skinned : Bool) ? (cast (cast (cast _Runtime.field(mesh, 'skin') : { var skeleton:Skeleton3D; }).skeleton : { var jointMatrices:flight._internal._Float32Array; }).jointMatrices : Dynamic) : (cast null : Dynamic));
       (_Scene3DWgpu._shadowProxy__wgpuShadowMap.jointMatrices = cast (jointMatrices : Null<flight._internal._Float32Array>));
       skinDrawBindGroup = ((cast _Runtime.strictEquals(jointMatrices, null) : Bool) ? (cast null : Dynamic) : (cast (cast skinning : WgpuSkinningAdapter).getDrawBindGroup(({ final __callArgument1683:Dynamic = state; __callArgument1683; }), ({ final __callArgument1684:Dynamic = jointMatrices; __callArgument1684; })) : Dynamic));
       rigidDrawBindGroup = (cast writeWgpuDrawUniform(({ final __callArgument1685:Dynamic = state; __callArgument1685; }), ({ final __callArgument1686:Dynamic = _Scene3DWgpu._shadowProxy__wgpuShadowMap; __callArgument1686; })) : flight._internal.dom.GPUBindGroup);

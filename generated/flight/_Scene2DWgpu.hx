@@ -3549,7 +3549,7 @@ class _Scene2DWgpu {
     var wtx:Float = cast _Runtime.UNDEFINED;
     var wty:Float = cast _Runtime.UNDEFINED;
     emitter = (cast (cast node : flight._internal._Any) : ParticleEmitter2D);
-    __destructure0 = emitter.data;
+    __destructure0 = _Runtime.field(emitter, 'data');
     atlas = __destructure0.atlas;
     ids = __destructure0.ids;
     particleCount = __destructure0.particleCount;
@@ -3636,7 +3636,7 @@ class _Scene2DWgpu {
     var spatial:Spatial2DNode<Dynamic> = cast _Runtime.UNDEFINED;
     var bounds:Rectangle = cast _Runtime.UNDEFINED;
     batch = (cast (cast node : flight._internal._Any) : QuadBatch);
-    data = batch.data;
+    data = _Runtime.field(batch, 'data');
     runtime = (cast _Runtime.getIndex((cast node : { @:optional var __symbol__EntityRuntime:flight._internal._Any; }), EntityRuntimeKey) : QuadBatchRuntime);
     instanceVelocities = runtime.instanceVelocities;
     __destructure1 = data;

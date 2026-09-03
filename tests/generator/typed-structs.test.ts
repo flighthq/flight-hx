@@ -5836,6 +5836,17 @@ describe('typed struct analysis', () => {
     expect(internalScene3D).not.toContain('var node:Dynamic = cast _Runtime.UNDEFINED;');
     expect(internalScene3D).toContain('return cast (cast node : Node3D);');
     expect(publicScene3D).toMatch(/public static function createNode3D[^\n]+\):Node3D \{/u);
+    expect(internalScene3D).toContain("_Runtime.looseEquals(_Runtime.field(mesh, 'geometry'), null)");
+    expect(internalScene3D).not.toContain('_Runtime.looseEquals(mesh.geometry, null)');
+    const internalScene3DGl = readFileSync('generated/flight/_Scene3DGl.hx', 'utf8');
+    expect(internalScene3DGl).toContain("_Runtime.looseEquals(_Runtime.field(mesh, 'geometry'), null)");
+    expect(internalScene3DGl).not.toContain('_Runtime.looseEquals(mesh.geometry, null)');
+    const internalScene3DWgpu = readFileSync('generated/flight/_Scene3DWgpu.hx', 'utf8');
+    expect(internalScene3DWgpu).toContain("_Runtime.looseEquals(_Runtime.field(mesh, 'geometry'), null)");
+    expect(internalScene3DWgpu).not.toContain('_Runtime.looseEquals(mesh.geometry, null)');
+    const internalSkeleton3D = readFileSync('generated/flight/_Skeleton3D.hx', 'utf8');
+    expect(internalSkeleton3D).toContain("_Runtime.looseEquals(_Runtime.field(mesh, 'geometry'), null)");
+    expect(internalSkeleton3D).not.toContain('_Runtime.looseEquals(mesh.geometry, null)');
     const additionalNominalClassNames = [
       'Billboard',
       'BlinnPhongMaterial',

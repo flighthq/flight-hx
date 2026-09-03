@@ -266,7 +266,7 @@ class _Skeleton3D {
     var children:Null<Array<flight._internal._Any>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(scene, 'enabled') : Bool) : Bool)) { return; }
     mesh = (cast (cast scene : flight._internal._Any) : Mesh);
-    if ((cast !_Runtime.looseEquals(mesh.geometry, null) : Bool)) { prepareMeshSkinning(({ final __callArgument20:Dynamic = mesh; __callArgument20; })); }
+    if ((cast !_Runtime.looseEquals(_Runtime.field(mesh, 'geometry'), null) : Bool)) { prepareMeshSkinning(({ final __callArgument20:Dynamic = mesh; __callArgument20; })); }
     children = _Runtime.field((cast getNodeRuntime((cast scene : Dynamic)) : NodeRuntime<flight._internal._Any>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {

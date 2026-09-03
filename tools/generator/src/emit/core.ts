@@ -951,12 +951,12 @@ function verifyTypedStructEmissionCoverage(modules: IrModule[], registry: TypedS
     }
     if (!value || typeof value !== 'object') return;
     const record = value as Record<string, unknown>;
-    if (record.kind === 'property' && record.typedStructBinding) {
-      const binding = record.typedStructBinding as { schemaId: string };
+    if (record.kind === 'property' && (record.typedStructBinding || record.uncheckedTypedStructBinding)) {
+      const binding = (record.typedStructBinding ?? record.uncheckedTypedStructBinding) as { schemaId: string };
       counts.set(binding.schemaId, (counts.get(binding.schemaId) ?? 0) + 1);
     }
     for (const [key, child] of Object.entries(record)) {
-      if (key !== 'typedStructBinding') visit(child);
+      if (key !== 'typedStructBinding' && key !== 'uncheckedTypedStructBinding') visit(child);
     }
   };
   visit(modules);

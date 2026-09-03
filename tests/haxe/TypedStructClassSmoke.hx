@@ -31,6 +31,7 @@ class TypedStructClassSmoke {
     final vector3Input:{var max:flight.types.Vector3Like;} = {max: vector3};
     final meshMaterials:Array<Null<flight.types.Material<Dynamic>>> = [standardPbrMaterial, vertexColorMaterial];
     final gltfDocument = flight.Scene3DFormats.parseGltf('{"asset":{"version":"2.0"},"materials":[{}]}');
+    flight.Scene3D.prepareScene3DMorph(node3D);
     if (!baseNode.enabled || baseNode.kind != 'ClassSmokeNode' || baseNode.data != null) {
       throw 'base Node class construction lost field values';
     }

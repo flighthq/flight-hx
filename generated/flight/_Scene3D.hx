@@ -586,7 +586,7 @@ class _Scene3D {
     var children:Null<Array<flight._internal._Any>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(scene, 'enabled') : Bool) : Bool)) { return; }
     mesh = (cast (cast scene : flight._internal._Any) : Mesh);
-    if ((cast !_Runtime.looseEquals(mesh.geometry, null) : Bool)) { updateMeshMorph(({ final __callArgument96:Dynamic = mesh; __callArgument96; })); }
+    if ((cast !_Runtime.looseEquals(_Runtime.field(mesh, 'geometry'), null) : Bool)) { updateMeshMorph(({ final __callArgument96:Dynamic = mesh; __callArgument96; })); }
     children = _Runtime.field((cast getNodeRuntime((cast scene : Dynamic)) : NodeRuntime<flight._internal._Any>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
@@ -743,7 +743,7 @@ class _Scene3D {
         var skinIndex:Null<Float> = ({ final __typedStruct145 = flight._internal._StaticIndex.readArray(document.meshes, meshIndex); __typedStruct145 == null ? _Runtime.UNDEFINED : (cast __typedStruct145 : { @:optional var skin:Null<Float>; }).skin; });
         if ((cast _Runtime.strictEquals(skinIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
         var skin:Null<Skin> = flight._internal._StaticIndex.readArray(skins, skinIndex);
-        if ((cast !_Runtime.strictEquals(skin, null) : Bool)) { ((cast (cast (cast flight._internal._StaticIndex.readArray(nodes, i) : flight._internal._Any) : Mesh) : { @:optional var skin:Null<Skin>; }).skin = cast (skin : Null<Skin>)); }
+        if ((cast !_Runtime.strictEquals(skin, null) : Bool)) { _Runtime.setField((cast (cast flight._internal._StaticIndex.readArray(nodes, i) : flight._internal._Any) : Mesh), 'skin', skin); }
         i++;
       }
     }

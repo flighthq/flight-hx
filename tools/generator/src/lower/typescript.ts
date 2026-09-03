@@ -1100,6 +1100,53 @@ function structuralReceiverType(node: ts.PropertyAccessExpression, context: Lowe
     : undefined;
 }
 
+/**
+ * `source as unknown as Struct` is an explicit request for JavaScript-style
+ * structural reinterpretation. A migrated native class may have the asserted
+ * field while the runtime value is only one of its base classes, so emitting a
+ * fixed-offset class read would reinterpret the wrong hxcpp object layout.
+ */
+function isUncheckedTypedStructReceiver(node: ts.Expression, context: LoweringContext): boolean {
+  const checker = context.checker;
+  const registry = context.typedStructs;
+  if (!checker || !registry || !hasUncheckedAssertionSource(node, checker, new Set())) return false;
+  const resolution = registry.resolveDirect(checker.getTypeAtLocation(node));
+  return (
+    resolution.kind === 'matched' &&
+    resolution.schemas.some((schema) => schema.eligible && schema.emission.mode === 'direct')
+  );
+}
+
+function hasUncheckedAssertionSource(node: ts.Expression, checker: ts.TypeChecker, seen: Set<ts.Symbol>): boolean {
+  let current = node;
+  while (
+    ts.isParenthesizedExpression(current) ||
+    ts.isNonNullExpression(current) ||
+    ts.isSatisfiesExpression(current) ||
+    ts.isAsExpression(current) ||
+    ts.isTypeAssertionExpression(current)
+  ) {
+    if (
+      (ts.isAsExpression(current) || ts.isTypeAssertionExpression(current)) &&
+      (current.type.kind === ts.SyntaxKind.AnyKeyword || current.type.kind === ts.SyntaxKind.UnknownKeyword)
+    ) {
+      return true;
+    }
+    current = current.expression;
+  }
+  if (!ts.isIdentifier(current)) return false;
+  const symbol = checker.getSymbolAtLocation(current);
+  if (!symbol || seen.has(symbol)) return false;
+  seen.add(symbol);
+  const declaration = symbol.valueDeclaration;
+  return Boolean(
+    declaration &&
+    ts.isVariableDeclaration(declaration) &&
+    declaration.initializer &&
+    hasUncheckedAssertionSource(declaration.initializer, checker, seen),
+  );
+}
+
 function variadicCallConvention(
   node: ts.CallExpression,
   context: LoweringContext,
@@ -4500,11 +4547,18 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
     const objectIsCollection = collectionBinding(node.expression, node.name.text, context);
     const objectIsTypedArray = typedArrayBinding(node.expression, node.name.text, context);
     const objectIsString = standardStringBinding(node.expression, node.name.text, context);
+    const uncheckedTypedStructReceiver = isUncheckedTypedStructReceiver(node.expression, context);
     const generatedClass = generatedClassBinding(node.expression, context);
     const hostTypeBinding = hostTypeMemberBinding(node, context);
-    const typedStructBinding = typedStructPropertyBinding(node, context);
+    const resolvedTypedStructBinding = typedStructPropertyBinding(node, context);
+    const typedStructBinding = uncheckedTypedStructReceiver ? undefined : resolvedTypedStructBinding;
+    const uncheckedTypedStructBinding = uncheckedTypedStructReceiver ? resolvedTypedStructBinding : undefined;
     const structuralType =
-      !context.preserveExpressionTypes || generatedClass || hostTypeBinding || typedStructBinding
+      !context.preserveExpressionTypes ||
+      uncheckedTypedStructReceiver ||
+      generatedClass ||
+      hostTypeBinding ||
+      typedStructBinding
         ? undefined
         : structuralReceiverType(node, context);
     return {
@@ -4523,6 +4577,7 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
       optional: ts.isOptionalChain(node),
       ...(structuralType ? { structuralReceiverType: structuralType } : {}),
       typedStructBinding,
+      uncheckedTypedStructBinding,
     };
   }
   if (ts.isElementAccessExpression(node) && node.argumentExpression) {
@@ -4663,7 +4718,9 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
             loweredRight,
             context.checker?.getTypeAtLocation(node.left),
             context,
-            left.kind === 'property' ? (left.type ?? left.typedStructBinding?.field.type) : left.type,
+            left.kind === 'property'
+              ? (left.type ?? left.typedStructBinding?.field.type ?? left.uncheckedTypedStructBinding?.field.type)
+              : left.type,
           )
         : loweredRight;
     if (assignment) {

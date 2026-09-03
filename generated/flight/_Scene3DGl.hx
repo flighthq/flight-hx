@@ -3750,8 +3750,8 @@ class _Scene3DGl {
       var program:GlMeshProgram = cast _Runtime.UNDEFINED;
       var upload:GlMeshUpload = cast _Runtime.UNDEFINED;
       mesh = (cast (cast node : flight._internal._Any) : Mesh);
-      if ((cast _Runtime.looseEquals(mesh.geometry, null) : Bool)) { return; }
-      skinned = ((cast !_Runtime.looseEquals(mesh.skin, null) : Bool) && (cast (cast hasMeshGeometrySkin(mesh.geometry) : Bool) : Bool));
+      if ((cast _Runtime.looseEquals(_Runtime.field(mesh, 'geometry'), null) : Bool)) { return; }
+      skinned = ((cast !_Runtime.looseEquals(_Runtime.field(mesh, 'skin'), null) : Bool) && (cast (cast hasMeshGeometrySkin(_Runtime.field(mesh, 'geometry')) : Bool) : Bool));
       program = ((cast skinned : Bool) ? (cast (skinnedProgram ??= (cast (cast ensureGlScene3DProgram : GlRenderState->String->(GlContext->GlMeshProgram)->GlMeshProgram)(({ final __callArgument1231:Dynamic = state; __callArgument1231; }), (cast 'shadow:depth:skin' : String), ({ final __callArgument1232:Dynamic = _Scene3DGl.compileShadowDepthSkinnedProgram__glShadowMap; __callArgument1232; })) : GlMeshProgram)) : Dynamic) : (cast rigidProgram : Dynamic));
       if ((cast !_Runtime.strictEquals(program, boundProgram) : Bool)) {
         flight._internal.backend.WebGl2Backend.useProgram(gl, program.program);
@@ -3760,12 +3760,12 @@ class _Scene3DGl {
       }
       flight._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, program.locModel, false, (cast (cast getNodeWorldMatrix4((cast mesh : Dynamic)) : Matrix4Like) : { var m:flight._internal._Float32Array; }).m, _Runtime.field(_Runtime, 'UNDEFINED'), _Runtime.field(_Runtime, 'UNDEFINED'));
       if ((cast skinned : Bool)) {
-        var jointMatrices:flight._internal._Float32Array = (cast (cast mesh.skin : { var skeleton:Skeleton3D; }).skeleton : { var jointMatrices:flight._internal._Float32Array; }).jointMatrices;
+        var jointMatrices:flight._internal._Float32Array = (cast (cast _Runtime.field(mesh, 'skin') : { var skeleton:Skeleton3D; }).skeleton : { var jointMatrices:flight._internal._Float32Array; }).jointMatrices;
         flight._internal.backend.WebGl2Backend.activeTexture(gl, (flight._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flight._internal.backend.WebGl2Backend.TEXTURE0) + SKIN_PALETTE_TEXTURE_UNIT));
         (#if js _Runtime.callValue(uploadGlSkinPaletteTexture, cast ([({ final __callArgument1239:Dynamic = gl; __callArgument1239; }), (cast ensureGlSkinPalette(({ final __callArgument1240:Dynamic = state; __callArgument1240; })) : GlSkinPaletteTexture), ({ final __callArgument1242:Dynamic = jointMatrices; __callArgument1242; }), (cast (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(jointMatrices, 'length'), 16.0)) | 0) : Float)] : Array<Dynamic>)) #else uploadGlSkinPaletteTexture(({ final __callArgument1235:Dynamic = gl; __callArgument1235; }), (cast ensureGlSkinPalette(({ final __callArgument1236:Dynamic = state; __callArgument1236; })) : GlSkinPaletteTexture), ({ final __callArgument1238:Dynamic = jointMatrices; __callArgument1238; }), (cast (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(jointMatrices, 'length'), 16.0)) | 0) : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
         flight._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.coalesce(program.locJointTexture, function():Dynamic return cast null), SKIN_PALETTE_TEXTURE_UNIT);
       }
-      upload = (cast ensureGlMeshUpload(({ final __callArgument1243:Dynamic = state; __callArgument1243; }), mesh.geometry, (cast skinned : Bool)) : GlMeshUpload);
+      upload = (cast ensureGlMeshUpload(({ final __callArgument1243:Dynamic = state; __callArgument1243; }), _Runtime.field(mesh, 'geometry'), (cast skinned : Bool)) : GlMeshUpload);
       flight._internal.backend.WebGl2Backend.bindVertexArray(gl, upload.vao);
       if ((cast !_Runtime.strictEquals(upload.indexBuffer, null) : Bool)) {
         flight._internal.backend.WebGl2Backend.drawElements(gl, upload.primitiveMode, upload.indexCount, upload.indexType, 0.0);
