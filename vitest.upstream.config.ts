@@ -87,6 +87,11 @@ const packageInclude = selectedPackage
   ? [`upstream/packages/${selectedPackage}/src/**/*.test.ts`]
   : ['upstream/packages/*/src/**/*.test.ts'];
 const commonExclude = ['**/.claude/**', '**/node_modules/**', '**/surfaceWasm.test.ts'];
+// The shared tier trades hermeticity for speed (`isolate: false`, one module registry per worker).
+// A file that leaks module state — a populated registry, an unrestored namespace spy — can then change
+// a later file's result. The harness's isolation-retry sets FLIGHT_UPSTREAM_ISOLATE=1 to re-run a
+// failed package's files hermetically and tell a real port failure from shared-worker pollution.
+const sharedIsolate = process.env.FLIGHT_UPSTREAM_ISOLATE === '1';
 
 export default defineConfig({
   plugins: [compiledFlightBridge()],
@@ -113,7 +118,7 @@ export default defineConfig({
         extends: true,
         test: {
           name: 'shared',
-          isolate: false,
+          isolate: sharedIsolate,
           include: packageInclude,
           exclude: [...commonExclude, ...isolatedTestFiles],
         },

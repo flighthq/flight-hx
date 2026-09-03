@@ -181,6 +181,17 @@ function testSummary(output) {
   return /Tests\s+([^\n]+)/u.exec(output)?.[1]?.trim();
 }
 
+// The test files a failed run reported as failing, as repo-relative paths. Vitest prints
+// `FAIL  upstream/packages/<pkg>/src/<file>.test.ts > <name>` (optionally behind a `|project|` tag)
+// for each. Used to re-run only those files hermetically in the isolation-retry.
+function parseFailingFiles(output) {
+  const files = new Set();
+  const pattern = /(?:^|\s)FAIL\s+(?:\|[^|]*\|\s+)?(upstream\/\S+?\.test\.[cm]?tsx?)/gu;
+  let match;
+  while ((match = pattern.exec(output ?? '')) !== null) files.add(match[1]);
+  return [...files];
+}
+
 const packageNames = readdirSync(packagesDirectory, { withFileTypes: true })
   .filter((entry) => entry.isDirectory())
   .map((entry) => entry.name)
@@ -200,7 +211,7 @@ const packageTests = packageNames.map((packageName) => ({
 const runnable = packageTests.filter((item) => item.files.length > 0);
 const testedPackageCount = runnable.length;
 
-function runPackage(packageName, files) {
+function runPackage(packageName, files, { extraArgs = [], extraEnv = {} } = {}) {
   return new Promise((resolve) => {
     const start = performance.now();
     const child = spawn(
@@ -213,6 +224,7 @@ function runPackage(packageName, files) {
         '--reporter=dot',
         '--maxWorkers=1',
         '--no-file-parallelism',
+        ...extraArgs,
       ],
       {
         cwd: repositoryRoot,
@@ -224,6 +236,7 @@ function runPackage(packageName, files) {
           // exit 1. Give vitest workers explicit headroom; an existing
           // NODE_OPTIONS wins so callers can still override.
           NODE_OPTIONS: process.env.NODE_OPTIONS ?? '--max-old-space-size=6144',
+          ...extraEnv,
         },
       },
     );
@@ -270,19 +283,46 @@ let failures = 0;
 
 process.stdout.write(`Running ${String(testedPackageCount)} package suites with ${String(jobs)} job(s).\n`);
 
+// The shared-worker parity run is fast but not hermetic: a file that leaks module state or an
+// unrestored spy can fail a later file that passes in isolation. Rather than pay per-file isolation for
+// the whole sweep (re-evaluating the 13 MB compiled bundle per file OOMs), re-run ONLY a failed
+// package's failing files hermetically. A failure that survives is a real port difference; one that
+// clears was shared-worker pollution. Set FLIGHT_UPSTREAM_NO_ISOLATION_RETRY=1 to disable.
+const isolationRetryEnabled =
+  process.env.FLIGHT_UPSTREAM_ISOLATE !== '1' && process.env.FLIGHT_UPSTREAM_NO_ISOLATION_RETRY !== '1';
+async function isolationRetry(result, item) {
+  if (!isolationRetryEnabled || result.status !== 'failed') return result;
+  const failingFiles = parseFailingFiles(result.failureOutput);
+  if (failingFiles.length === 0) return result;
+  const retry = await runPackage(item.packageName, failingFiles, {
+    extraArgs: failingFiles,
+    extraEnv: { FLIGHT_UPSTREAM_ISOLATE: '1' },
+  });
+  if (retry.status !== 'passed') return result;
+  return {
+    ...result,
+    durationMs: result.durationMs + retry.durationMs,
+    failureOutput: undefined,
+    isolationRecovered: true,
+    isolationRecoveredFiles: failingFiles,
+    status: 'passed',
+  };
+}
+
 // Bounded concurrency pool over the runnable packages.
 const queue = [...runnable];
 async function worker() {
   for (;;) {
     const next = queue.shift();
     if (!next) return;
-    const result = await runPackage(next.packageName, next.files);
+    const result = await isolationRetry(await runPackage(next.packageName, next.files), next);
     results.set(next.packageName, result);
     executed += 1;
     if (result.status !== 'passed') failures += 1;
     const label = `[${String(executed).padStart(3, ' ')}/${String(testedPackageCount).padStart(3, ' ')}] ${next.packageName}`;
+    const recovered = result.isolationRecovered ? ' (isolation-recovered)' : '';
     process.stdout.write(
-      `${label} ... ${result.status}${result.summary ? ` (${result.summary})` : ''} ${String(result.durationMs)}ms\n`,
+      `${label} ... ${result.status}${recovered}${result.summary ? ` (${result.summary})` : ''} ${String(result.durationMs)}ms\n`,
     );
     if (result.status !== 'passed' && selectedPackage) process.stdout.write(`${result.failureOutput}\n`);
   }
@@ -298,6 +338,8 @@ const packages = packageTests.map(({ files, packageName }) => {
     error: result.error,
     exitCode: result.exitCode,
     failureOutput: result.failureOutput,
+    isolationRecovered: result.isolationRecovered ?? false,
+    isolationRecoveredFiles: result.isolationRecoveredFiles,
     package: packageName,
     signal: result.signal,
     status: result.status,
@@ -335,6 +377,15 @@ process.stdout.write(
     `(${String(reviewedFailures)} reviewed, ${String(unreviewedFailures)} unreviewed), ` +
     `${String(fixedSinceReview)} fixed since review, ${String(packageNames.length - executed)} without tests.\n`,
 );
+const isolationRecovered = packages.filter((item) => item.isolationRecovered).map((item) => item.package);
+if (isolationRecovered.length > 0) {
+  // These packages failed the shared-worker run but passed a hermetic per-file re-run: the port is
+  // correct and the failure was cross-file pollution. Surfaced (not silently swallowed) so a rising
+  // count flags harness hermeticity debt rather than masking it.
+  process.stdout.write(
+    `Shared-worker pollution recovered under isolation (${String(isolationRecovered.length)}): ${isolationRecovered.join(', ')}.\n`,
+  );
+}
 for (const [label, status] of [
   ['Reviewed parity differences', 'reviewed-failure'],
   ['Unreviewed parity differences', 'unreviewed-failure'],
