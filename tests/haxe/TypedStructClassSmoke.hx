@@ -17,6 +17,8 @@ class TypedStructClassSmoke {
     final node2D = flight.Scene2D.createNode2D('ClassSmokeNode2D');
     final node3D = flight.Scene3D.createNode3D('ClassSmokeNode3D');
     final displayObject = flight.Scene2D.createDisplayObject();
+    final particleEmitter2D = flight.ParticleEmitter.createParticleEmitter2D();
+    final particleEmitter3D = flight.ParticleEmitter.createParticleEmitter3D();
     final matrix4 = flight.Geometry.createMatrix4();
     if (!baseNode.enabled || baseNode.kind != 'ClassSmokeNode' || baseNode.data != null) {
       throw 'base Node class construction lost field values';
@@ -30,6 +32,9 @@ class TypedStructClassSmoke {
     if (!displayObject.enabled || displayObject.x != 0 || matrix4.m.length != 16) {
       throw 'wholesale Entity class construction lost field values';
     }
+    if (!particleEmitter2D.enabled || particleEmitter2D.x != 0 || !particleEmitter3D.enabled) {
+      throw 'derived Node class construction lost field values';
+    }
     #if !flight_struct_typedef
     if (!Std.isOfType(camera, flight.types.Camera2D)) {
       throw 'Camera2D cpp pilot did not construct a class instance';
@@ -42,6 +47,12 @@ class TypedStructClassSmoke {
     }
     if (!Std.isOfType(displayObject, flight.types.DisplayObject)) {
       throw 'derived Node factory did not construct its public class identity';
+    }
+    if (
+      !Std.isOfType(particleEmitter2D, flight.types.ParticleEmitter2D) ||
+      !Std.isOfType(particleEmitter3D, flight.types.ParticleEmitter3D)
+    ) {
+      throw 'cross-module Node factory did not construct its public class identity';
     }
     if (!Std.isOfType(matrix4, flight.types.Matrix4)) {
       throw 'ordinary Entity factory did not construct its public class identity';

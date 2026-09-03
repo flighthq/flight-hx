@@ -8,7 +8,7 @@ import flight._internal._Runtime;
 @:allow(flight._Shape)
 @:structInit
 class Scale9Shape {
-  public var __symbol__EntityRuntime:Null<{ >NodeRuntime<Node2DTraits>, >EntityRuntime, }>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
   public var data:Scale9ShapeData;
   public var enabled:Bool;
   public var kind:Kind;
@@ -53,5 +53,5 @@ class Scale9Shape {
   }
 }
 #else
-typedef Scale9Shape = { @:optional var __symbol__EntityRuntime:Null<{ >NodeRuntime<Node2DTraits>, >EntityRuntime, }>; var data:Scale9ShapeData; var enabled:Bool; var kind:Kind; var name:Null<String>; var alpha:Float; var visible:Bool; var blendMode:Null<BlendMode>; var clip:Null<ClipRegion>; var material:Null<Material>; var materialData:Null<MaterialData>; var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; };
+typedef Scale9Shape = { @:optional var __symbol__EntityRuntime:Null<Dynamic>; var data:Scale9ShapeData; var enabled:Bool; var kind:Kind; var name:Null<String>; var alpha:Float; var visible:Bool; var blendMode:Null<BlendMode>; var clip:Null<ClipRegion>; var material:Null<Material>; var materialData:Null<MaterialData>; var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; };
 #end

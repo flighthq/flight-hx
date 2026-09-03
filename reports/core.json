@@ -28806,13 +28806,21 @@
         "byReason": {
           "unclassified": 1
         },
+        "module": "flight.types.BitmapText",
+        "source": "upstream/packages/types/src/BitmapText.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
+          "unclassified": 1
+        },
         "module": "flight.types.BlinnPhongMaterial",
         "source": "upstream/packages/types/src/BlinnPhongMaterial.ts",
         "total": 1
       },
       {
         "byReason": {
-          "source-any": 1
+          "unclassified": 1
         },
         "module": "flight.types.BoundsNodeAny",
         "source": "upstream/packages/types/src/HasBoundsRectangle.ts",
@@ -28896,6 +28904,14 @@
         },
         "module": "flight.types.DepthMaterial",
         "source": "upstream/packages/types/src/DepthMaterial.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
+          "unclassified": 1
+        },
+        "module": "flight.types.DisplayObject",
+        "source": "upstream/packages/types/src/DisplayObject.ts",
         "total": 1
       },
       {
@@ -29126,6 +29142,14 @@
         "byReason": {
           "unclassified": 1
         },
+        "module": "flight.types.HtmlView",
+        "source": "upstream/packages/types/src/HtmlView.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
+          "unclassified": 1
+        },
         "module": "flight.types.Image",
         "source": "upstream/packages/types/src/Image.ts",
         "total": 1
@@ -29278,8 +29302,32 @@
         "byReason": {
           "unclassified": 1
         },
+        "module": "flight.types.MorphShape",
+        "source": "upstream/packages/types/src/MorphShape.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
+          "unclassified": 1
+        },
         "module": "flight.types.MouseButton",
         "source": "upstream/packages/types/src/MouseButton.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
+          "unclassified": 1
+        },
+        "module": "flight.types.MovieClip",
+        "source": "upstream/packages/types/src/MovieClip.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
+          "unclassified": 1
+        },
+        "module": "flight.types.NativeText",
+        "source": "upstream/packages/types/src/NativeText.ts",
         "total": 1
       },
       {
@@ -29296,6 +29344,14 @@
         },
         "module": "flight.types.NetResponseBody",
         "source": "upstream/packages/types/src/Net.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
+          "unclassified": 1
+        },
+        "module": "flight.types.Node2D",
+        "source": "upstream/packages/types/src/Node2D.ts",
         "total": 1
       },
       {
@@ -29350,6 +29406,14 @@
         "byReason": {
           "unclassified": 1
         },
+        "module": "flight.types.ParticleEmitter2D",
+        "source": "upstream/packages/types/src/ParticleEmitter2D.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
+          "unclassified": 1
+        },
         "module": "flight.types.ParticleFormatKind",
         "source": "upstream/packages/types/src/ParticleFormatKind.ts",
         "total": 1
@@ -29368,6 +29432,14 @@
         },
         "module": "flight.types.PhongMaterial",
         "source": "upstream/packages/types/src/PhongMaterial.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
+          "unclassified": 1
+        },
+        "module": "flight.types.QuadBatch",
+        "source": "upstream/packages/types/src/QuadBatch.ts",
         "total": 1
       },
       {
@@ -29438,6 +29510,14 @@
         "byReason": {
           "unclassified": 1
         },
+        "module": "flight.types.RichText",
+        "source": "upstream/packages/types/src/RichText.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
+          "unclassified": 1
+        },
         "module": "flight.types.RiveAnimationLoop",
         "source": "upstream/packages/types/src/RiveDocument.ts",
         "total": 1
@@ -29470,6 +29550,14 @@
         "byReason": {
           "unclassified": 1
         },
+        "module": "flight.types.Scale9Shape",
+        "source": "upstream/packages/types/src/Scale9Shape.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
+          "unclassified": 1
+        },
         "module": "flight.types.SceneCoverage",
         "source": "upstream/packages/types/src/SceneCoverageEntry.ts",
         "total": 1
@@ -29480,6 +29568,14 @@
         },
         "module": "flight.types.ShadedMaterial",
         "source": "upstream/packages/types/src/ShadedMaterial.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
+          "unclassified": 1
+        },
+        "module": "flight.types.Shape",
+        "source": "upstream/packages/types/src/Shape.ts",
         "total": 1
       },
       {
@@ -29552,6 +29648,14 @@
         },
         "module": "flight.types.SpecularGlossinessPbrMaterial",
         "source": "upstream/packages/types/src/SpecularGlossinessPbrMaterial.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
+          "unclassified": 1
+        },
+        "module": "flight.types.Sprite",
+        "source": "upstream/packages/types/src/Sprite.ts",
         "total": 1
       },
       {
@@ -29672,6 +29776,22 @@
         },
         "module": "flight.types.TextInputSource",
         "source": "upstream/packages/types/src/TextInputManager.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
+          "unclassified": 1
+        },
+        "module": "flight.types.TextLabel",
+        "source": "upstream/packages/types/src/TextLabel.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
+          "unclassified": 1
+        },
+        "module": "flight.types.Tilemap",
+        "source": "upstream/packages/types/src/Tilemap.ts",
         "total": 1
       },
       {
@@ -29935,17 +30055,17 @@
     "summary": {
       "byReason": {
         "external-toolkit-boundary": 609,
-        "source-any": 1295,
+        "source-any": 1294,
         "source-never": 194,
         "source-null": 277,
         "source-undefined": 551,
         "source-unknown": 4743,
         "standard-toolkit-boundary": 22029,
-        "unclassified": 827
+        "unclassified": 843
       },
       "checkerKnownUnrepresentable": 0,
-      "modules": 1478,
-      "total": 30525
+      "modules": 1493,
+      "total": 30540
     }
   }
 }

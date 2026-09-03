@@ -2350,8 +2350,13 @@ function lowerConcreteEntityIntersectionAlias(
       : concreteMappedPropertyName(property, propertyDeclaration, context);
     if (!name || fieldNames.has(name)) return undefined;
     const checkerType = checker.getTypeOfSymbolAtLocation(property, propertyDeclaration);
-    const fieldType = concreteMappedFieldType(checkerType, propertyDeclaration, declaration, context);
-    if (!fieldType) return undefined;
+    const mappedFieldType = concreteMappedFieldType(checkerType, propertyDeclaration, declaration, context);
+    if (!mappedFieldType) return undefined;
+    const mappedInner = mappedFieldType.kind === 'nullable' ? mappedFieldType.inner : mappedFieldType;
+    const fieldType =
+      entityRuntime && mappedInner.kind === 'anonymous' && mappedInner.extends.length > 0
+        ? ({ inner: { kind: 'dynamic' }, kind: 'nullable' } as const)
+        : mappedFieldType;
     fieldNames.add(name);
     fields.push({
       name,

@@ -5714,6 +5714,18 @@ describe('typed struct analysis', () => {
     expect(readFileSync('generated/flight/types/NodeData.hx', 'utf8')).toContain(
       'typedef NodeData = flight._internal._Object;',
     );
+    const internalScene2D = readFileSync('generated/flight/_Scene2D.hx', 'utf8');
+    const publicScene2D = readFileSync('generated/flight/Scene2D.hx', 'utf8');
+    const internalScene3D = readFileSync('generated/flight/_Scene3D.hx', 'utf8');
+    const publicScene3D = readFileSync('generated/flight/Scene3D.hx', 'utf8');
+    expect(internalScene2D).toMatch(/public static function createNode2D[^\n]+\):Dynamic \{/u);
+    expect(internalScene2D).toContain('var out:Dynamic = cast _Runtime.UNDEFINED;');
+    expect(internalScene2D).not.toContain('out = (cast createNode(');
+    expect(publicScene2D).toMatch(/public static function createNode2D[^\n]+\):Node2D \{/u);
+    expect(internalScene3D).toMatch(/public static function createNode3D[^\n]+\):Dynamic \{/u);
+    expect(internalScene3D).toContain('var node:Dynamic = cast _Runtime.UNDEFINED;');
+    expect(internalScene3D).not.toContain('return cast (cast node : Node3D);');
+    expect(publicScene3D).toMatch(/public static function createNode3D[^\n]+\):Node3D \{/u);
     const additionalNominalClassNames = [
       'Billboard',
       'BitmapText',

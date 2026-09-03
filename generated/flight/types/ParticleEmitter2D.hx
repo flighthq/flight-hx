@@ -8,7 +8,7 @@ import flight._internal._Runtime;
 @:allow(flight._ParticleEmitter)
 @:structInit
 class ParticleEmitter2D {
-  public var __symbol__EntityRuntime:Null<{ >NodeRuntime<Node2DTraits>, >EntityRuntime, }>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
   public var data:ParticleEmitterData;
   public var enabled:Bool;
   public var kind:Kind;
@@ -53,5 +53,5 @@ class ParticleEmitter2D {
   }
 }
 #else
-typedef ParticleEmitter2D = { @:optional var __symbol__EntityRuntime:Null<{ >NodeRuntime<Node2DTraits>, >EntityRuntime, }>; var data:ParticleEmitterData; var enabled:Bool; var kind:Kind; var name:Null<String>; var alpha:Float; var visible:Bool; var blendMode:Null<BlendMode>; var clip:Null<ClipRegion>; var material:Null<Material>; var materialData:Null<MaterialData>; var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; };
+typedef ParticleEmitter2D = { @:optional var __symbol__EntityRuntime:Null<Dynamic>; var data:ParticleEmitterData; var enabled:Bool; var kind:Kind; var name:Null<String>; var alpha:Float; var visible:Bool; var blendMode:Null<BlendMode>; var clip:Null<ClipRegion>; var material:Null<Material>; var materialData:Null<MaterialData>; var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; };
 #end

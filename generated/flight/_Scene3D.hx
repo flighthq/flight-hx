@@ -1006,14 +1006,14 @@ class _Scene3D {
     return cast null;
   }
 
-  public static function createNode3D(?kind:Kind, ?obj:flight._internal._Partial<{ var enabled:Bool; var name:Null<String>; var alpha:Float; var visible:Bool; }>, ?__nodeAllocator:Void->Dynamic):Node3D {
+  public static function createNode3D(?kind:Kind, ?obj:flight._internal._Partial<{ var enabled:Bool; var name:Null<String>; var alpha:Float; var visible:Bool; }>, ?__nodeAllocator:Void->Dynamic):Dynamic {
     if (kind == null) kind = cast (Node3DKind : Dynamic);
     if (__nodeAllocator == null) __nodeAllocator = cast (function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ alpha: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, position: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scale: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED } : Node3D); }) #end) : Dynamic);
-    var node:{ >Node<Node3DTraits>, >Node3DTraits, } = cast _Runtime.UNDEFINED;
+    var node:Dynamic = cast _Runtime.UNDEFINED;
     node = (cast createNode((cast kind : String), (cast obj : Dynamic), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic), (cast function(__unused0:Dynamic):Node3DRuntime return createNode3DRuntime() : Dynamic), __nodeAllocator) : { >Node<Node3DTraits>, >Node3DTraits, });
     initAppearanceTrait(({ final __callArgument200:Dynamic = node; __callArgument200; }), ({ final __callArgument201:Dynamic = obj; __callArgument201; }));
     (#if js _Runtime.callValue(initTransform3DTrait, cast ([({ final __callArgument205:Dynamic = node; __callArgument205; })] : Array<Dynamic>)) #else initTransform3DTrait(({ final __callArgument204:Dynamic = node; __callArgument204; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    return cast (cast node : Node3D);
+    return cast node;
     return cast null;
   }
 
