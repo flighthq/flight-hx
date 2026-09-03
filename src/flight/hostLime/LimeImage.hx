@@ -12,7 +12,7 @@ class LimeImage {
     return flight._Image.createWebImageBackend();
     #else
     return cast {
-      loadImageFromUrl: function(url:String, _crossOrigin:Null<String>, signal:Null<AbortSignal>):_Promise<flight.types.Image> {
+      loadImageFromUrl: function(url:String, _crossOrigin:Null<String>, signal:Null<AbortSignal>):_Promise<flight.types.ImageResource> {
         return loadNativeImage(url, signal);
       },
     };
@@ -20,7 +20,7 @@ class LimeImage {
   }
 
   #if !js
-  static function loadNativeImage(url:String, signal:Null<AbortSignal>):_Promise<flight.types.Image> {
+  static function loadNativeImage(url:String, signal:Null<AbortSignal>):_Promise<flight.types.ImageResource> {
     return new _Promise(function(resolve, reject) {
       var settled = false;
       var onAbort:Null<Void->Void> = null;

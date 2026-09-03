@@ -110,7 +110,7 @@ class HostLime {
         return inner.loadImageFromUrl(url, crossOrigin, signal).then(function(image) {
           observeImageHostResult('loadImageFromUrl', true);
           return image;
-        }, function(error):flight.types.Image {
+        }, function(error):flight.types.ImageResource {
           observeImageHostResult('loadImageFromUrl', false);
           throw error;
         });
