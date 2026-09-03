@@ -7,9 +7,7 @@ import flight._internal._Runtime;
 #if !flight_struct_typedef
 @:allow(flight._Materials)
 @:structInit
-class IridescencePbrExtension {
-  public var __symbol__EntityRuntime:Null<EntityRuntime>;
-  public var kind:String;
+class IridescencePbrExtension extends flight.types.PbrExtension<String> {
   public var iridescence:Float;
   public var iridescenceIor:Float;
   public var iridescenceMap:Null<Texture>;
@@ -20,8 +18,7 @@ class IridescencePbrExtension {
   public var iridescenceThicknessMin:Float;
 
   private function new(kind:String, iridescence:Float, iridescenceIor:Float, iridescenceMap:Null<Texture>, iridescenceMapUvSet:PbrUvSet, iridescenceThicknessMap:Null<Texture>, iridescenceThicknessMapUvSet:PbrUvSet, iridescenceThicknessMax:Float, iridescenceThicknessMin:Float):Void {
-    this.__symbol__EntityRuntime = null;
-    this.kind = kind;
+    super(kind);
     this.iridescence = iridescence;
     this.iridescenceIor = iridescenceIor;
     this.iridescenceMap = iridescenceMap;

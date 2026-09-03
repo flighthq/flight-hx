@@ -423,7 +423,7 @@ class _Runtime {
 
   public static function copyObject(source:Dynamic):Dynamic {
     final output:Dynamic = {};
-    for (field in Reflect.fields(source)) Reflect.setField(output, field, Reflect.field(source, field));
+    for (field in DynamicObject.keys(source)) DynamicObject.writeField(output, field, DynamicObject.readField(source, field));
     return output;
   }
 
@@ -439,7 +439,7 @@ class _Runtime {
   public static function cloneEntityShape<T>(source:T):T {
     final sourceClass = Type.getClass(source);
     final output:Dynamic = sourceClass == null ? {} : Type.createEmptyInstance(sourceClass);
-    for (field in Reflect.fields(source)) Reflect.setField(output, field, Reflect.field(source, field));
+    for (field in DynamicObject.keys(source)) DynamicObject.writeField(output, field, DynamicObject.readField(source, field));
     return cast output;
   }
 
@@ -490,14 +490,14 @@ class _Runtime {
   }
 
   public static function deleteField(target:Dynamic, name:String):Bool {
-    return Reflect.deleteField(target, name);
+    return DynamicObject.deleteOwnField(target, name);
   }
 
   public static function deleteIndex(target:Dynamic, key:Dynamic):Bool {
     #if js
     return js.Syntax.code('delete {0}[{1}]', target, key);
     #else
-    return Reflect.deleteField(target, Std.string(key));
+    return DynamicObject.deleteOwnField(target, Std.string(key));
     #end
   }
 
@@ -535,7 +535,7 @@ class _Runtime {
       return index < 0 || index >= values.length ? UNDEFINED : _LimeTypedArray.readRaw(values, index);
     }
     #end
-    return Reflect.field(source, Std.string(key));
+    return DynamicObject.readField(source, Std.string(key));
     #end
   }
 
@@ -547,7 +547,7 @@ class _Runtime {
     #if js
     return js.Syntax.code('globalThis.Reflect.get({0}, {1})', source, key);
     #else
-    return Reflect.field(source, Std.string(key));
+    return DynamicObject.readField(source, Std.string(key));
     #end
   }
 
@@ -577,7 +577,7 @@ class _Runtime {
     #if !js
     if (DynamicObject.hasCallableField(source, name)) return DynamicObject.callableField(source, name);
     #end
-    return source == null ? null : Reflect.field(source, name);
+    return source == null ? null : DynamicObject.readField(source, name);
   }
 
   public static inline function equals(left:Dynamic, right:Dynamic):Bool {
@@ -703,7 +703,7 @@ class _Runtime {
   }
 
   public static inline function optionalField(source:Dynamic, field:String):Dynamic {
-    return source == null ? UNDEFINED : Reflect.field(source, field);
+    return source == null ? UNDEFINED : DynamicObject.readField(source, field);
   }
 
   public static function numberToString(value:Float, radix:Float):String {
@@ -927,13 +927,13 @@ class _Runtime {
     #if js
     js.Syntax.code('globalThis.Reflect.set({0}, {1}, {2})', target, key, value);
     #else
-    Reflect.setField(target, Std.string(key), value);
+    DynamicObject.writeField(target, Std.string(key), value);
     #end
     return value;
   }
 
   public static inline function setField(target:Dynamic, name:String, value:Dynamic):Dynamic {
-    Reflect.setField(target, name, value);
+    DynamicObject.writeField(target, name, value);
     return value;
   }
 
@@ -950,7 +950,7 @@ class _Runtime {
       _LimeTypedArray.writeRaw(cast target, Std.int(key), value);
     #end
     } else {
-      Reflect.setField(target, Std.string(key), value);
+      DynamicObject.writeField(target, Std.string(key), value);
     }
     #end
     return value;
@@ -993,7 +993,7 @@ class _Runtime {
   }
 
   public static function assignObject(target:Dynamic, source:Dynamic):Dynamic {
-    for (field in Reflect.fields(source)) Reflect.setField(target, field, Reflect.field(source, field));
+    for (field in DynamicObject.keys(source)) DynamicObject.writeField(target, field, DynamicObject.readField(source, field));
     return target;
   }
 
@@ -1215,7 +1215,7 @@ class _Runtime {
       return (cast source : _HostConstructor).hasStaticMember(Std.string(key));
     }
     final name = Std.string(key);
-    return source != null && (Reflect.hasField(source, name) || DynamicObject.hasCallableField(source, name));
+    return source != null && (Reflect.hasField(source, name) || DynamicObject.hasAttachedField(source, name));
     #end
   }
 
@@ -1307,7 +1307,7 @@ class _Runtime {
     #if js
     return js.Syntax.code('(function(value) { const keys = []; for (const key in value) keys.push(key); return keys; })({0})', source);
     #else
-    return source == null ? [] : Reflect.fields(source);
+    return source == null ? [] : DynamicObject.keys(source);
     #end
   }
 
@@ -1324,7 +1324,7 @@ class _Runtime {
   }
 
   public static function objectEntries(source:Dynamic):Array<Array<Dynamic>> {
-    return [for (field in Reflect.fields(source)) [field, Reflect.field(source, field)]];
+    return [for (field in DynamicObject.keys(source)) [field, DynamicObject.readField(source, field)]];
   }
 
   public static inline function orValue(left:Dynamic, right:Void->Dynamic):Dynamic {

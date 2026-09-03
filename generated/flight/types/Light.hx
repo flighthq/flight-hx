@@ -4,4 +4,25 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._SceneDocument)
+@:allow(flight.types.AmbientLight)
+@:allow(flight.types.AreaLight)
+@:allow(flight.types.DirectionalLight)
+@:allow(flight.types.Environment)
+@:allow(flight.types.HemisphereLight)
+@:allow(flight.types.PointLight)
+@:allow(flight.types.SpotLight)
+@:structInit
+class Light<TKind = Dynamic> {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var kind:TKind;
+
+  private function new(kind:TKind):Void {
+    this.__symbol__EntityRuntime = null;
+    this.kind = kind;
+  }
+}
+#else
 typedef Light = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Kind; };
+#end

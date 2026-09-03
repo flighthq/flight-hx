@@ -424,7 +424,10 @@ function auditTypeErasures(modules: IrModule[]): TypeErasureAudit {
           const reason = typeof record.reason === 'string' ? record.reason : 'unclassified';
           byReason.set(reason, (byReason.get(reason) ?? 0) + 1);
         }
-        Object.values(record).forEach(visit);
+        for (const [key, child] of Object.entries(record)) {
+          if (['cppStructInitBase', 'cppStructInitGenericFields', 'sourceExtends'].includes(key)) continue;
+          visit(child);
+        }
       };
       visit(declarations);
       const total = [...byReason.values()].reduce((sum, count) => sum + count, 0);
@@ -547,6 +550,222 @@ function markCppStructInitTypes(
   const missing = [...allowlist].filter((id) => !seen.has(id));
   if (missing.length > 0)
     throw new Error(`cpp @:structInit allowlist identities were not emitted: ${missing.join(', ')}`);
+  markCppStructInitInheritance(modules, candidatesByDeclaration);
+}
+
+export function markCppStructInitInheritance(
+  modules: IrModule[],
+  candidatesByDeclaration: ReadonlyMap<string, { id: string }> = new Map(),
+): void {
+  const typeOwners = new Map<Extract<IrDeclaration, { kind: 'type' }>, IrModule>();
+  const typesByName = new Map<string, Extract<IrDeclaration, { kind: 'type' }>>();
+  for (const module of modules) {
+    for (const declaration of module.declarations) {
+      if (declaration.kind !== 'type') continue;
+      typeOwners.set(declaration, module);
+      if (module.packageName === '@flighthq/types') typesByName.set(declaration.name, declaration);
+    }
+  }
+
+  const entity = typesByName.get('Entity');
+  if (!entity || entity.type.kind !== 'anonymous' || entity.typeParameters.length > 0) {
+    throw new Error('nominal Entity hierarchy requires a non-generic anonymous Entity declaration');
+  }
+
+  const classTypes = new Set(
+    [...typeOwners.keys()].filter((declaration) => declaration.cppStructInitSchemaId !== undefined),
+  );
+  const hasEntityRuntime = (declaration: Extract<IrDeclaration, { kind: 'type' }>): boolean =>
+    declaration.type.kind === 'anonymous' &&
+    declaration.type.fields.some((field) => field.name === '__EntityRuntimeKey');
+  const canBeClassBase = (declaration: Extract<IrDeclaration, { kind: 'type' }>): boolean =>
+    declaration !== entity &&
+    declaration.exported &&
+    !declaration.packagePrivate &&
+    !/^Has[A-Z]/u.test(declaration.name) &&
+    !declaration.name.endsWith('Traits') &&
+    declaration.type.kind === 'anonymous' &&
+    declaration.typeParameters.length === 0 &&
+    hasEntityRuntime(declaration);
+  const namedParents = (declaration: Extract<IrDeclaration, { kind: 'type' }>) =>
+    (declaration.sourceExtends ?? []).flatMap((type) => {
+      if (type.kind !== 'named') return [];
+      const name = type.name.split('.').at(-1)!;
+      const parent = typesByName.get(name);
+      return parent && parent !== declaration ? [parent] : [];
+    });
+
+  const addClassAncestors = (
+    declaration: Extract<IrDeclaration, { kind: 'type' }>,
+    stack: ReadonlySet<Extract<IrDeclaration, { kind: 'type' }>>,
+  ): void => {
+    if (stack.has(declaration)) {
+      throw new Error(`nominal Entity hierarchy contains a cycle at ${declaration.name}`);
+    }
+    const nextStack = new Set([...stack, declaration]);
+    for (const parent of namedParents(declaration)) {
+      if (canBeClassBase(parent)) {
+        if (!classTypes.has(parent)) {
+          const candidate = candidatesByDeclaration.get(
+            `${parent.origin.packageName}:${parent.origin.source}#${parent.name}`,
+          );
+          parent.cppStructInitSchemaId = candidate?.id ?? `${parent.origin.packageName}:nominal-base#${parent.name}`;
+          parent.cppStructInitBaseOnly = true;
+          classTypes.add(parent);
+        }
+      }
+      addClassAncestors(parent, nextStack);
+    }
+  };
+  for (const declaration of [...classTypes]) {
+    if (hasEntityRuntime(declaration)) addClassAncestors(declaration, new Set());
+  }
+  const reachableClassParents = (
+    declaration: Extract<IrDeclaration, { kind: 'type' }>,
+    stack: ReadonlySet<Extract<IrDeclaration, { kind: 'type' }>>,
+  ): Set<Extract<IrDeclaration, { kind: 'type' }>> => {
+    if (stack.has(declaration)) {
+      throw new Error(`nominal Entity hierarchy contains a cycle at ${declaration.name}`);
+    }
+    const nextStack = new Set([...stack, declaration]);
+    const parents = new Set<Extract<IrDeclaration, { kind: 'type' }>>();
+    for (const parent of namedParents(declaration)) {
+      if (classTypes.has(parent)) parents.add(parent);
+      else for (const ancestor of reachableClassParents(parent, nextStack)) parents.add(ancestor);
+    }
+    return parents;
+  };
+  const baseByType = new Map<Extract<IrDeclaration, { kind: 'type' }>, Extract<IrDeclaration, { kind: 'type' }>>();
+  for (const declaration of classTypes) {
+    if (declaration === entity || !hasEntityRuntime(declaration)) continue;
+    const parents = [...reachableClassParents(declaration, new Set())];
+    const nearest = parents.filter(
+      (candidate) =>
+        !parents.some((other) => other !== candidate && reachableClassParents(other, new Set()).has(candidate)),
+    );
+    const selected = nearest.length === 1 ? nearest[0] : undefined;
+    if (nearest.length > 1) {
+      throw new Error(
+        `nominal Entity hierarchy has ambiguous class bases for ${declaration.name}: ${nearest
+          .map((parent) => parent.name)
+          .sort()
+          .join(', ')}`,
+      );
+    }
+    if (selected) baseByType.set(declaration, selected);
+  }
+
+  const sourceDescendsFrom = (
+    declaration: Extract<IrDeclaration, { kind: 'type' }>,
+    ancestor: Extract<IrDeclaration, { kind: 'type' }>,
+    stack: ReadonlySet<Extract<IrDeclaration, { kind: 'type' }>>,
+  ): boolean => {
+    if (declaration === ancestor) return true;
+    if (stack.has(declaration)) {
+      throw new Error(`nominal Entity hierarchy contains a cycle at ${declaration.name}`);
+    }
+    const nextStack = new Set([...stack, declaration]);
+    return namedParents(declaration).some((parent) => sourceDescendsFrom(parent, ancestor, nextStack));
+  };
+  // A real class chain makes the inherited node prefix a compiler-enforced
+  // layout property. Never permit an activated Node2D/Node3D descendant to
+  // fall back to an unrelated flat class.
+  for (const familyName of ['Node2D', 'Node3D']) {
+    const root = typesByName.get(familyName);
+    if (!root || !classTypes.has(root)) continue;
+    for (const declaration of classTypes) {
+      if (declaration === root || !sourceDescendsFrom(declaration, root, new Set())) continue;
+      let base = baseByType.get(declaration);
+      while (base && base !== root) base = baseByType.get(base);
+      if (base !== root) {
+        throw new Error(
+          `nominal ${familyName} descendant ${declaration.name} does not inherit the ${familyName} class layout`,
+        );
+      }
+    }
+  }
+
+  const fieldByName = (declaration: Extract<IrDeclaration, { kind: 'type' }>) => {
+    if (declaration.type.kind !== 'anonymous') throw new Error(`nominal class is not anonymous: ${declaration.name}`);
+    return new Map(declaration.type.fields.map((field) => [field.name, field]));
+  };
+  const descendants = (ancestor: Extract<IrDeclaration, { kind: 'type' }>) =>
+    [...classTypes].filter((candidate) => {
+      let current = baseByType.get(candidate);
+      while (current) {
+        if (current === ancestor) return true;
+        current = baseByType.get(current);
+      }
+      return false;
+    });
+  for (const declaration of classTypes) {
+    if (declaration.type.kind !== 'anonymous') continue;
+    const fields = fieldByName(declaration);
+    const differing = new Set<string>();
+    for (const child of descendants(declaration)) {
+      const childFields = fieldByName(child);
+      for (const [name, field] of fields) {
+        const childField = childFields.get(name);
+        if (!childField) {
+          throw new Error(`nominal subclass ${child.name} is missing inherited field ${declaration.name}.${name}`);
+        }
+        if (JSON.stringify(childField.type) !== JSON.stringify(field.type)) differing.add(name);
+      }
+    }
+    const usedNames = new Set(declaration.typeParameters);
+    declaration.cppStructInitGenericFields = declaration.type.fields.flatMap((field) => {
+      if (!differing.has(field.name)) return [];
+      const stem = field.name === '__EntityRuntimeKey' ? 'Runtime' : field.name.replace(/[^A-Za-z0-9]/gu, ' ');
+      const pascal = stem
+        .split(/\s+/u)
+        .filter(Boolean)
+        .map((part) => `${part[0]!.toUpperCase()}${part.slice(1)}`)
+        .join('');
+      let name = `T${pascal || 'Field'}`;
+      let suffix = 2;
+      while (usedNames.has(name)) name = `T${pascal || 'Field'}${String(suffix++)}`;
+      usedNames.add(name);
+      return [{ fieldName: field.name, name, type: field.type }];
+    });
+  }
+
+  for (const declaration of classTypes) {
+    if (declaration.type.kind !== 'anonymous') continue;
+    const base = baseByType.get(declaration);
+    const baseFields = base ? fieldByName(base) : new Map<string, IrTypeField>();
+    declaration.cppStructInitOwnFieldNames = declaration.type.fields
+      .filter((field) => !baseFields.has(field.name))
+      .map((field) => field.name);
+    if (!base || base.type.kind !== 'anonymous') continue;
+    const childFields = fieldByName(declaration);
+    const childGenerics = new Map(
+      (declaration.cppStructInitGenericFields ?? []).map((field) => [field.fieldName, field.name]),
+    );
+    const baseOwner = typeOwners.get(base);
+    if (!baseOwner) throw new Error(`nominal class base has no module: ${base.name}`);
+    declaration.cppStructInitBase = {
+      constructorFieldNames: base.type.fields
+        .filter((field) => !(field.name === '__EntityRuntimeKey' && field.optional))
+        .map((field) => field.name),
+      genericFields: (base.cppStructInitGenericFields ?? []).map((field) => {
+        const childField = childFields.get(field.fieldName);
+        if (!childField) {
+          throw new Error(
+            `nominal subclass ${declaration.name} is missing generic field ${base.name}.${field.fieldName}`,
+          );
+        }
+        const typeParameter = childGenerics.get(field.fieldName);
+        return typeParameter
+          ? { fieldName: field.fieldName, typeParameter }
+          : { fieldName: field.fieldName, type: childField.type };
+      }),
+      haxeType: modulePath(baseOwner),
+    };
+  }
+  // Heritage has served its purpose once the nominal class spine is recorded.
+  // Keeping the source-only graph in emission IR would make import/toolkit audits
+  // treat erased TypeScript utility constituents as generated Haxe dependencies.
+  for (const declaration of typeOwners.keys()) declaration.sourceExtends = undefined;
 }
 
 function nodeAllocatorSchemaIds(modules: IrModule[]): Set<string> {
@@ -572,6 +791,14 @@ function nodeAllocatorSchemaIds(modules: IrModule[]): Set<string> {
 
 export function sealCppStructInitConstructors(modules: IrModule[]): void {
   const constructionModulesBySchema = new Map<string, Set<string>>();
+  const subclassModulesByBase = new Map<string, Set<string>>();
+  const schemaByHaxeType = new Map<string, string>();
+  for (const module of modules) {
+    for (const declaration of module.declarations) {
+      if (declaration.kind !== 'type' || !declaration.cppStructInitSchemaId) continue;
+      schemaByHaxeType.set(declarationImportPath(module, declaration), declaration.cppStructInitSchemaId);
+    }
+  }
   for (const module of modules) {
     const seen = new WeakSet<object>();
     const visit = (value: unknown): void => {
@@ -593,12 +820,36 @@ export function sealCppStructInitConstructors(modules: IrModule[]): void {
       Object.values(record).forEach(visit);
     };
     visit(module.declarations);
+    for (const declaration of module.declarations) {
+      if (declaration.kind === 'function') {
+        for (const haxeType of declaration.cppStructInitConstructs ?? []) {
+          const schemaId = schemaByHaxeType.get(haxeType);
+          if (!schemaId) {
+            throw new Error(
+              `semantic body ${modulePath(module)}.${declaration.name} constructs inactive cpp @:structInit type ${haxeType}`,
+            );
+          }
+          const owners = constructionModulesBySchema.get(schemaId) ?? new Set<string>();
+          owners.add(modulePath(module));
+          constructionModulesBySchema.set(schemaId, owners);
+        }
+      }
+      if (declaration.kind !== 'type' || !declaration.cppStructInitBase) continue;
+      const owners = subclassModulesByBase.get(declaration.cppStructInitBase.haxeType) ?? new Set<string>();
+      owners.add(modulePath(module));
+      subclassModulesByBase.set(declaration.cppStructInitBase.haxeType, owners);
+    }
   }
 
   for (const module of modules) {
     for (const declaration of module.declarations) {
       if (declaration.kind !== 'type' || !declaration.cppStructInitSchemaId) continue;
-      const owners = [...(constructionModulesBySchema.get(declaration.cppStructInitSchemaId) ?? [])].sort();
+      const owners = [
+        ...new Set([
+          ...(constructionModulesBySchema.get(declaration.cppStructInitSchemaId) ?? []),
+          ...(subclassModulesByBase.get(modulePath(module)) ?? []),
+        ]),
+      ].sort();
       if (owners.length === 0) {
         throw new Error(
           `sealed cpp @:structInit declaration has no construction module: ${declaration.cppStructInitSchemaId}`,

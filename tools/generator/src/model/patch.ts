@@ -19,11 +19,12 @@ interface BasePatch {
 export type SemanticPatch =
   | (BasePatch & { operation: 'remove' })
   | (BasePatch & { name: string; operation: 'rename' })
-  | (BasePatch & { operation: 'replaceBody'; fragment: string })
+  | (BasePatch & { constructsCppStructInitTypes?: string[]; operation: 'replaceBody'; fragment: string })
   | (BasePatch & { operation: 'replaceType'; type: IrType });
 
 export interface PatchAuditRecord {
   astHash: string;
+  constructsCppStructInitTypes?: string[] | undefined;
   id: string;
   operation: SemanticPatch['operation'];
   reason: string;

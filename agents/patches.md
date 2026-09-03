@@ -55,6 +55,8 @@ The Haxe fragment is stored separately for syntax highlighting and review. Inlin
 
 Prefer the narrowest operation that expresses the semantic exception. Add a new operation to the typed model, validator, audit, and tests before using it in the manifest; do not invent manifest fields that the patch engine ignores.
 
+A `replaceBody` patch that constructs a sealed generated class must list its fully qualified Haxe type in `constructsCppStructInitTypes`. Constructor sealing then grants only that patched module access, and generation fails if the named class is absent or inactive.
+
 ## Fingerprints and Drift
 
 Every patch carries a normalized AST fingerprint for the declaration or module it expects. The fingerprint excludes formatting-only changes but includes semantic shape: declaration kind, name, parameters, types, modifiers, and normalized body.

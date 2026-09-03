@@ -6,50 +6,12 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._Text)
+@:allow(flight.types.RichText)
 @:structInit
-class TextLabel {
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-  public var data:TextLabelData;
-  public var enabled:Bool;
-  public var kind:Kind;
-  public var name:Null<String>;
-  public var alpha:Float;
-  public var visible:Bool;
-  public var blendMode:Null<BlendMode>;
-  public var clip:Null<ClipRegion>;
-  public var material:Null<Material>;
-  public var materialData:Null<MaterialData>;
-  public var pivotX:Float;
-  public var pivotY:Float;
-  public var rotation:Float;
-  public var scaleX:Float;
-  public var scaleY:Float;
-  public var skewX:Float;
-  public var skewY:Float;
-  public var x:Float;
-  public var y:Float;
+class TextLabel<TData = Dynamic> extends flight.types.Node2D<TData> {
 
-  private function new(data:TextLabelData, enabled:Bool, kind:Kind, name:Null<String>, alpha:Float, visible:Bool, blendMode:Null<BlendMode>, clip:Null<ClipRegion>, material:Null<Material>, materialData:Null<MaterialData>, pivotX:Float, pivotY:Float, rotation:Float, scaleX:Float, scaleY:Float, skewX:Float, skewY:Float, x:Float, y:Float):Void {
-    this.__symbol__EntityRuntime = null;
-    this.data = data;
-    this.enabled = enabled;
-    this.kind = kind;
-    this.name = name;
-    this.alpha = alpha;
-    this.visible = visible;
-    this.blendMode = blendMode;
-    this.clip = clip;
-    this.material = material;
-    this.materialData = materialData;
-    this.pivotX = pivotX;
-    this.pivotY = pivotY;
-    this.rotation = rotation;
-    this.scaleX = scaleX;
-    this.scaleY = scaleY;
-    this.skewX = skewX;
-    this.skewY = skewY;
-    this.x = x;
-    this.y = y;
+  private function new(data:TData, enabled:Bool, kind:Kind, name:Null<String>, alpha:Float, visible:Bool, blendMode:Null<BlendMode>, clip:Null<ClipRegion>, material:Null<Material>, materialData:Null<MaterialData>, pivotX:Float, pivotY:Float, rotation:Float, scaleX:Float, scaleY:Float, skewX:Float, skewY:Float, x:Float, y:Float):Void {
+    super(data, enabled, kind, name, alpha, visible, blendMode, clip, material, materialData, pivotX, pivotY, rotation, scaleX, scaleY, skewX, skewY, x, y);
   }
 }
 #else

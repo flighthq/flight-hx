@@ -4,4 +4,23 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight.types.ShadedMaterial)
+@:structInit
+class SurfaceMaterial<TKind = Dynamic> extends flight.types.Material<TKind> {
+  public var alphaCutoff:Float;
+  public var alphaMode:MaterialAlphaMode;
+  public var blendMode:BlendMode;
+  public var doubleSided:Bool;
+
+  private function new(kind:TKind, name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool):Void {
+    super(kind, name);
+    this.alphaCutoff = alphaCutoff;
+    this.alphaMode = alphaMode;
+    this.blendMode = blendMode;
+    this.doubleSided = doubleSided;
+  }
+}
+#else
 typedef SurfaceMaterial = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var blendMode:BlendMode; var doubleSided:Bool; };
+#end

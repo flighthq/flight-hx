@@ -7,14 +7,7 @@ import flight._internal._Runtime;
 #if !flight_struct_typedef
 @:allow(flight._Shading)
 @:structInit
-class ShadedMaterial {
-  public var __symbol__EntityRuntime:Null<EntityRuntime>;
-  public var kind:Dynamic;
-  public var name:Null<String>;
-  public var alphaCutoff:Float;
-  public var alphaMode:MaterialAlphaMode;
-  public var blendMode:BlendMode;
-  public var doubleSided:Bool;
+class ShadedMaterial extends flight.types.SurfaceMaterial<Dynamic> {
   public var diffuse:Float;
   public var diffuseMap:Null<Texture>;
   public var modifiers:Array<Modifier>;
@@ -25,13 +18,7 @@ class ShadedMaterial {
   public var specularMap:Null<Texture>;
 
   private function new(kind:Dynamic, name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, diffuse:Float, diffuseMap:Null<Texture>, modifiers:Array<Modifier>, normalMap:Null<Texture>, normalScale:Float, shininess:Float, specular:Float, specularMap:Null<Texture>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.kind = kind;
-    this.name = name;
-    this.alphaCutoff = alphaCutoff;
-    this.alphaMode = alphaMode;
-    this.blendMode = blendMode;
-    this.doubleSided = doubleSided;
+    super(kind, name, alphaCutoff, alphaMode, blendMode, doubleSided);
     this.diffuse = diffuse;
     this.diffuseMap = diffuseMap;
     this.modifiers = modifiers;

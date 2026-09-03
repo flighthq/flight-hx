@@ -7,9 +7,7 @@ import flight._internal._Runtime;
 #if !flight_struct_typedef
 @:allow(flight._Lighting)
 @:structInit
-class DirectionalLight {
-  public var __symbol__EntityRuntime:Null<EntityRuntime>;
-  public var kind:String;
+class DirectionalLight extends flight.types.Light<String> {
   public var castsShadow:Bool;
   public var color:Float;
   public var direction:Vector3;
@@ -19,8 +17,7 @@ class DirectionalLight {
   public var shadowBias:Float;
 
   private function new(kind:String, castsShadow:Bool, color:Float, direction:Vector3, intensity:Float, normalBias:Float, pcfRadius:Float, shadowBias:Float):Void {
-    this.__symbol__EntityRuntime = null;
-    this.kind = kind;
+    super(kind);
     this.castsShadow = castsShadow;
     this.color = color;
     this.direction = direction;

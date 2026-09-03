@@ -7,9 +7,7 @@ import flight._internal._Runtime;
 #if !flight_struct_typedef
 @:allow(flight._Materials)
 @:structInit
-class SpecularPbrExtension {
-  public var __symbol__EntityRuntime:Null<EntityRuntime>;
-  public var kind:String;
+class SpecularPbrExtension extends flight.types.PbrExtension<String> {
   public var specular:Float;
   public var specularColor:Float;
   public var specularColorMap:Null<Texture>;
@@ -18,8 +16,7 @@ class SpecularPbrExtension {
   public var specularMapUvSet:PbrUvSet;
 
   private function new(kind:String, specular:Float, specularColor:Float, specularColorMap:Null<Texture>, specularColorMapUvSet:PbrUvSet, specularMap:Null<Texture>, specularMapUvSet:PbrUvSet):Void {
-    this.__symbol__EntityRuntime = null;
-    this.kind = kind;
+    super(kind);
     this.specular = specular;
     this.specularColor = specularColor;
     this.specularColorMap = specularColorMap;

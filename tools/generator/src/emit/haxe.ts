@@ -280,17 +280,12 @@ function emitModuleValue(declaration: Extract<IrDeclaration, { kind: 'function' 
       : '';
     return [`${access} static ${mutability} ${safeName(declaration.name)}${type}${initializer};`];
   }
-  const dynamicNodeResult = dynamicNodeAllocatorResult(declaration);
-  const emittedReturns: IrType = dynamicNodeResult ? { kind: 'dynamic' } : declaration.returns;
-  const emittedBody = dynamicNodeResult
-    ? dynamicNodeAllocatorBody(declaration.body, dynamicNodeResult)
-    : declaration.body;
   const generics = emitTypeParameters(declaration.typeParameters, declaration.typeParameterConstraints);
   const directOnly = currentDirectFunctions.has(declaration.name);
   const parameters = directOnly ? '__flightArguments:Array<Dynamic>' : emitParameters(declaration.parameters);
   // High-arity `directOnly` shims stay private; everything else is public.
   const functionAccess = directOnly || declaration.allowPackage ? 'private' : 'public';
-  const signature = `${functionAccess} static function ${safeName(declaration.name)}${generics}(${parameters}):${emitType(emittedReturns)}`;
+  const signature = `${functionAccess} static function ${safeName(declaration.name)}${generics}(${parameters}):${emitType(declaration.returns)}`;
   const overloads = directOnly ? [] : emitFunctionOverloads(declaration);
 
   const bodyLines: string[] = [];
@@ -306,10 +301,12 @@ function emitModuleValue(declaration: Extract<IrDeclaration, { kind: 'function' 
     bodyLines.push(...emitParameterInitializers(declaration.parameters));
     bodyLines.push(...splitLines(declaration.haxeBody));
   } else {
-    bodyLines.push(...emitFunctionBody(emittedBody, declaration.parameters, emittedReturns, declaration.async));
+    bodyLines.push(
+      ...emitFunctionBody(declaration.body, declaration.parameters, declaration.returns, declaration.async),
+    );
   }
-  if (!isVoidType(emittedReturns)) {
-    if (declaration.async && isPromiseNothingType(emittedReturns)) {
+  if (!isVoidType(declaration.returns)) {
+    if (declaration.async && isPromiseNothingType(declaration.returns)) {
       bodyLines.push('#if js', 'return;', '#else', 'return cast null;', '#end');
     } else {
       bodyLines.push('return cast null;');
@@ -344,64 +341,6 @@ function emitModuleValue(declaration: Extract<IrDeclaration, { kind: 'function' 
     throw new Error(`Generator async lowering does not support ${declaration.origin.source}:${declaration.name}`);
   }
   return [...overloads, `${signature} {`, ...indent([...emitThisCapture(declaration.thisCapture), ...bodyLines]), '}'];
-}
-
-function dynamicNodeAllocatorResult(declaration: Extract<IrDeclaration, { kind: 'function' }>): string | undefined {
-  if (
-    !['createNode2D', 'createNode3D'].includes(declaration.name) ||
-    !declaration.parameters.some((parameter) => parameter.name === '__nodeAllocator')
-  ) {
-    return undefined;
-  }
-  let returned: Extract<IrStatement, { kind: 'return' }> | undefined;
-  for (let index = declaration.body.length - 1; index >= 0; index--) {
-    const statement = declaration.body[index]!;
-    if (statement.kind !== 'return') continue;
-    returned = statement;
-    break;
-  }
-  let expression = returned?.expression;
-  while (expression?.kind === 'cast') expression = expression.expression;
-  if (expression?.kind !== 'identifier') return undefined;
-  return declaration.body.some(
-    (statement) =>
-      statement.kind === 'variable' && statement.declarations.some((variable) => variable.name === expression.name),
-  )
-    ? expression.name
-    : undefined;
-}
-
-function dynamicNodeAllocatorBody(statements: IrStatement[], resultName: string): IrStatement[] {
-  return statements.map((statement) => {
-    if (statement.kind === 'variable') {
-      return {
-        ...statement,
-        declarations: statement.declarations.map((variable) => {
-          if (variable.name !== resultName) return variable;
-          let initializer = variable.initializer;
-          while (initializer?.kind === 'cast') initializer = initializer.expression;
-          return { ...variable, initializer, type: { kind: 'dynamic' } };
-        }),
-      };
-    }
-    if (
-      statement.kind === 'expression' &&
-      statement.expression.kind === 'assignment' &&
-      statement.expression.operator === '=' &&
-      statement.expression.left.kind === 'identifier' &&
-      statement.expression.left.name === resultName
-    ) {
-      let right = statement.expression.right;
-      while (right.kind === 'cast') right = right.expression;
-      return { ...statement, expression: { ...statement.expression, right } };
-    }
-    if (statement.kind !== 'return' || !statement.expression) return statement;
-    let expression = statement.expression;
-    while (expression.kind === 'cast') expression = expression.expression;
-    return expression.kind === 'identifier' && expression.name === resultName
-      ? { ...statement, expression: { kind: 'identifier', name: resultName } }
-      : statement;
-  });
 }
 
 function emitFunctionOverloads(declaration: Extract<IrDeclaration, { kind: 'function' }>): string[] {
@@ -665,6 +604,35 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
       const fields = declaration.type.fields;
       const entityRuntimeField = fields.find((field) => field.name === '__EntityRuntimeKey' && field.optional);
       const constructorFields = fields.filter((field) => field !== entityRuntimeField);
+      const genericFields = new Map(
+        (declaration.cppStructInitGenericFields ?? []).map((field) => [field.fieldName, field]),
+      );
+      const classGenericParameters = [
+        ...declaration.typeParameters,
+        ...[...genericFields.values()]
+          // Haxe class parameters are invariant. A Dynamic default keeps a
+          // concrete descendant assignable to the unparameterized base,
+          // while the descendant's explicit argument retains its field type.
+          .map((field) => `${field.name} = Dynamic`),
+      ];
+      const classGenerics = classGenericParameters.length > 0 ? `<${classGenericParameters.join(', ')}>` : '';
+      const classFieldType = (field: (typeof fields)[number]): string =>
+        genericFields.get(field.name)?.name ?? emitValueType(field.type);
+      const ownFieldNames = new Set(declaration.cppStructInitOwnFieldNames ?? fields.map((field) => field.name));
+      const ownFields = fields.filter((field) => ownFieldNames.has(field.name));
+      const baseArguments =
+        declaration.cppStructInitBase && declaration.cppStructInitBase.genericFields.length > 0
+          ? `<${declaration.cppStructInitBase.genericFields
+              .map((field) => {
+                if (field.typeParameter) return field.typeParameter;
+                if (field.type) return emitType(field.type);
+                throw new Error(`nominal class base argument has no type for ${declaration.name}.${field.fieldName}`);
+              })
+              .join(', ')}>`
+          : '';
+      const classExtends = declaration.cppStructInitBase
+        ? ` extends ${declaration.cppStructInitBase.haxeType}${baseArguments}`
+        : '';
       const classCondition = declaration.cppStructInitNativeOnly
         ? '#if (!flight_struct_typedef && !js)'
         : '#if !flight_struct_typedef';
@@ -673,20 +641,29 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
         ...completionMetadata,
         ...(declaration.cppStructInitConstructorAllowModules ?? []).map((owner) => `@:allow(${owner})`),
         '@:structInit',
-        `${modifier}class ${safeName(declaration.name)}${generics} {`,
+        `${modifier}class ${safeName(declaration.name)}${classGenerics}${classExtends} {`,
       ];
-      for (const field of fields) {
+      for (const field of ownFields) {
         const fieldName = typeFieldName(field.name);
-        lines.push(`  public var ${fieldName}:${emitValueType(field.type)};`);
+        lines.push(`  public var ${fieldName}:${classFieldType(field)};`);
       }
       lines.push(
         '',
-        `  private function new(${constructorFields.map((field) => `${safeName(field.name)}:${emitValueType(field.type)}`).join(', ')}):Void {`,
+        `  private function new(${constructorFields.map((field) => `${safeName(field.name)}:${classFieldType(field)}`).join(', ')}):Void {`,
       );
+      if (declaration.cppStructInitBase) {
+        lines.push(
+          `    super(${declaration.cppStructInitBase.constructorFieldNames.map((name) => safeName(name)).join(', ')});`,
+        );
+      }
       // EntityRuntimeKey is Symbol.for('EntityRuntime') in TypeScript. Native
       // targets encode that symbol as this string before reflective access.
-      if (entityRuntimeField) lines.push('    this.__symbol__EntityRuntime = null;');
-      for (const field of constructorFields) lines.push(`    this.${safeName(field.name)} = ${safeName(field.name)};`);
+      if (entityRuntimeField && ownFieldNames.has(entityRuntimeField.name)) {
+        lines.push('    this.__symbol__EntityRuntime = null;');
+      }
+      for (const field of constructorFields.filter((field) => ownFieldNames.has(field.name))) {
+        lines.push(`    this.${safeName(field.name)} = ${safeName(field.name)};`);
+      }
       lines.push(
         '  }',
         '}',
@@ -4194,9 +4171,10 @@ export function emitType(type: IrType): string {
   switch (type.kind) {
     case 'anonymous': {
       const flattened = flattenAnonymousType(type);
+      const fields = new Map(flattened.fields.map((field) => [field.name, field]));
       const members = [
         ...flattened.extends.map((parent) => `>${emitType(parent)},`),
-        ...flattened.fields.map(
+        ...[...fields.values()].map(
           (field) =>
             `${field.optional ? '@:optional ' : ''}var ${typeFieldName(field.name)}:${emitValueType(field.type)};`,
         ),

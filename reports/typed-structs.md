@@ -12,8 +12,8 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Audit-only schemas | 2151 |
 | Direct schemas | 756 |
 | Declared fields | 29999 |
-| Bindable accesses | 40594 |
-| Pending accesses | 14540 |
+| Bindable accesses | 40592 |
+| Pending accesses | 14538 |
 | Directly emitted accesses | 26054 |
 | Reflective survivors | 463 |
 | Dynamic escapes | 14816 |
@@ -2097,7 +2097,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Scene3DDocumentAnimation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 4 | 1 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DDocumentAnimationChannel` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DDocumentCamera` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 13 | 2 | 0 | 15 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#Scene3DDocumentLight` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 15 | 2 | 0 | 17 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:interface#Scene3DDocumentLight` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 15 | 0 | 0 | 15 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:interface#Scene3DDocumentLoadOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DDocumentLoadProgress` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DDocumentMesh` | `direct` | `new` | — | reviewed escape-free Scene3D document mesh | 5 | 6 | 6 | 0 | 0 | 12 | 0 | 0 | yes | — |

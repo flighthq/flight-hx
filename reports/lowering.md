@@ -7,15 +7,15 @@
 | Candidate declarations | 17154 |
 | Lowered declarations | 17154 |
 | Current diagnostics | 0 |
-| Proven explicit Boolean truthiness uses | 17751 |
+| Proven explicit Boolean truthiness uses | 17739 |
 | Proven Boolean conditional conditions | 3574 |
-| Proven Boolean logical-left truthiness uses | 6661 |
-| Proven Boolean logical expressions | 6325 |
+| Proven Boolean logical-left truthiness uses | 6660 |
+| Proven Boolean logical expressions | 6324 |
 | Proven numeric relations | 7911 |
-| Direct Boolean truthiness uses | 17717 |
+| Direct Boolean truthiness uses | 17705 |
 | Direct Boolean conditional expressions | 3569 |
 | Direct Boolean `&&` expressions | 2827 |
-| Direct Boolean `\|\|` expressions | 3470 |
+| Direct Boolean `\|\|` expressions | 3469 |
 | Direct numeric relations | 7899 |
 | Proven indexed expressions | 13567 |
 | Proven indexed reads | 9232 |
@@ -188,7 +188,7 @@
 | `@flighthq/render-gl` | 241 | 241 | 0 | 273 | 39 | 113 | 0 |
 | `@flighthq/render-wgpu` | 249 | 249 | 0 | 432 | 74 | 97 | 0 |
 | `@flighthq/requirements` | 9 | 9 | 0 | 4 | 0 | 1 | 0 |
-| `@flighthq/scene-document` | 200 | 200 | 0 | 803 | 82 | 64 | 0 |
+| `@flighthq/scene-document` | 200 | 200 | 0 | 790 | 82 | 64 | 0 |
 | `@flighthq/scene2d` | 40 | 40 | 0 | 20 | 3 | 22 | 0 |
 | `@flighthq/scene2d-canvas` | 199 | 199 | 0 | 352 | 70 | 171 | 0 |
 | `@flighthq/scene2d-dom` | 123 | 123 | 0 | 192 | 38 | 25 | 0 |

@@ -4,4 +4,32 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight.types.Bitmap)
+@:allow(flight.types.CompressedImage)
+@:allow(flight.types.ExternalTexture)
+@:allow(flight.types.Image)
+@:allow(flight.types.RenderTarget)
+@:structInit
+class TextureSource<TKind = Dynamic> {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var alphaType:AlphaType;
+  public var gamut:String;
+  public var height:Float;
+  public var kind:TKind;
+  public var version:Float;
+  public var width:Float;
+
+  private function new(alphaType:AlphaType, gamut:String, height:Float, kind:TKind, version:Float, width:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.alphaType = alphaType;
+    this.gamut = gamut;
+    this.height = height;
+    this.kind = kind;
+    this.version = version;
+    this.width = width;
+  }
+}
+#else
 typedef TextureSource = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var alphaType:AlphaType; var gamut:String; var height:Float; var kind:TextureSourceKind; var version:Float; var width:Float; };
+#end

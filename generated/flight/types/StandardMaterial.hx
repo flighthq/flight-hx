@@ -7,15 +7,10 @@ import flight._internal._Runtime;
 #if !flight_struct_typedef
 @:allow(flight._Materials)
 @:structInit
-class StandardMaterial {
-  public var __symbol__EntityRuntime:Null<EntityRuntime>;
-  public var kind:StandardMaterialKind;
-  public var name:Null<String>;
+class StandardMaterial extends flight.types.Material<StandardMaterialKind> {
 
   private function new(kind:StandardMaterialKind, name:Null<String>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.kind = kind;
-    this.name = name;
+    super(kind, name);
   }
 }
 #else

@@ -9,25 +9,12 @@ import flight._Types.BitmapTextureSourceKind;
 @:allow(flight._Bitmap)
 @:allow(flight._HostWeb)
 @:structInit
-class Bitmap {
-  public var __symbol__EntityRuntime:Null<EntityRuntime>;
-  public var alphaType:AlphaType;
-  public var gamut:String;
-  public var height:Float;
-  public var kind:Dynamic;
-  public var version:Float;
-  public var width:Float;
+class Bitmap extends flight.types.TextureSource<Dynamic> {
   public var data:flight._internal._UInt8ClampedArray;
   public var format:PixelFormat;
 
   private function new(alphaType:AlphaType, gamut:String, height:Float, kind:Dynamic, version:Float, width:Float, data:flight._internal._UInt8ClampedArray, format:PixelFormat):Void {
-    this.__symbol__EntityRuntime = null;
-    this.alphaType = alphaType;
-    this.gamut = gamut;
-    this.height = height;
-    this.kind = kind;
-    this.version = version;
-    this.width = width;
+    super(alphaType, gamut, height, kind, version, width);
     this.data = data;
     this.format = format;
   }

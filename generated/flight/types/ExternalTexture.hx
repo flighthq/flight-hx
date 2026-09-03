@@ -9,23 +9,10 @@ import flight._Types.ExternalTextureSourceKind;
 @:allow(flight._RenderGl)
 @:allow(flight._RenderWgpu)
 @:structInit
-class ExternalTexture {
-  public var __symbol__EntityRuntime:Null<EntityRuntime>;
-  public var alphaType:AlphaType;
-  public var gamut:String;
-  public var height:Float;
-  public var kind:Dynamic;
-  public var version:Float;
-  public var width:Float;
+class ExternalTexture extends flight.types.TextureSource<Dynamic> {
 
   private function new(alphaType:AlphaType, gamut:String, height:Float, kind:Dynamic, version:Float, width:Float):Void {
-    this.__symbol__EntityRuntime = null;
-    this.alphaType = alphaType;
-    this.gamut = gamut;
-    this.height = height;
-    this.kind = kind;
-    this.version = version;
-    this.width = width;
+    super(alphaType, gamut, height, kind, version, width);
   }
 }
 #else

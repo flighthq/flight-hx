@@ -8955,14 +8955,13 @@
       "byReason": {
         "source-any": 48,
         "source-null": 2,
-        "source-undefined": 1,
-        "source-unknown": 263,
-        "standard-toolkit-boundary": 209,
+        "source-unknown": 244,
+        "standard-toolkit-boundary": 207,
         "unclassified": 10
       },
       "module": "flight._SceneDocument",
       "source": "upstream/packages/scene-document/src/flightDocumentText.ts",
-      "total": 533
+      "total": 511
     },
     {
       "byReason": {
@@ -12746,13 +12745,13 @@
       "source-any": 1294,
       "source-never": 194,
       "source-null": 277,
-      "source-undefined": 551,
-      "source-unknown": 4743,
-      "standard-toolkit-boundary": 22029,
+      "source-undefined": 550,
+      "source-unknown": 4724,
+      "standard-toolkit-boundary": 22027,
       "unclassified": 843
     },
     "checkerKnownUnrepresentable": 0,
     "modules": 1493,
-    "total": 30540
+    "total": 30518
   }
 }

@@ -7,33 +7,14 @@ import flight._internal._Runtime;
 #if !flight_struct_typedef
 @:allow(flight._Scene3D)
 @:structInit
-class Mesh {
-  public var __symbol__EntityRuntime:Null<NodeRuntime<Node3DTraits>>;
-  public var data:Null<NodeData>;
-  public var enabled:Bool;
-  public var kind:Kind;
-  public var name:Null<String>;
-  public var alpha:Float;
-  public var visible:Bool;
-  public var position:Vector3;
-  public var rotation:Quaternion;
-  public var scale:Vector3;
+class Mesh extends flight.types.Node3D<Null<NodeData>> {
   public var geometry:MeshGeometry;
   public var materials:Array<Null<Material>>;
   public var morph:Null<MeshMorph>;
   public var skin:Null<Skin>;
 
   private function new(data:Null<NodeData>, enabled:Bool, kind:Kind, name:Null<String>, alpha:Float, visible:Bool, position:Vector3, rotation:Quaternion, scale:Vector3, geometry:MeshGeometry, materials:Array<Null<Material>>, morph:Null<MeshMorph>, skin:Null<Skin>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.data = data;
-    this.enabled = enabled;
-    this.kind = kind;
-    this.name = name;
-    this.alpha = alpha;
-    this.visible = visible;
-    this.position = position;
-    this.rotation = rotation;
-    this.scale = scale;
+    super(data, enabled, kind, name, alpha, visible, position, rotation, scale);
     this.geometry = geometry;
     this.materials = materials;
     this.morph = morph;

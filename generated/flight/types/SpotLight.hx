@@ -7,9 +7,7 @@ import flight._internal._Runtime;
 #if !flight_struct_typedef
 @:allow(flight._Lighting)
 @:structInit
-class SpotLight {
-  public var __symbol__EntityRuntime:Null<EntityRuntime>;
-  public var kind:String;
+class SpotLight extends flight.types.Light<String> {
   public var castsShadow:Bool;
   public var color:Float;
   public var direction:Vector3;
@@ -23,8 +21,7 @@ class SpotLight {
   public var shadowBias:Float;
 
   private function new(kind:String, castsShadow:Bool, color:Float, direction:Vector3, innerConeCos:Float, intensity:Float, normalBias:Float, outerConeCos:Float, pcfRadius:Float, position:Vector3, range:Float, shadowBias:Float):Void {
-    this.__symbol__EntityRuntime = null;
-    this.kind = kind;
+    super(kind);
     this.castsShadow = castsShadow;
     this.color = color;
     this.direction = direction;

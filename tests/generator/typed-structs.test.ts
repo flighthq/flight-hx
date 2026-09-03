@@ -16,7 +16,11 @@ import {
   type TypedStructCandidate,
 } from '../../tools/generator/src/analyze/typed-structs.ts';
 import { upstreamTypeScriptProgram } from '../../tools/generator/src/analyze/program.ts';
-import { sealCppStructInitConstructors, validateCppStructInitProvenance } from '../../tools/generator/src/emit/core.ts';
+import {
+  markCppStructInitInheritance,
+  sealCppStructInitConstructors,
+  validateCppStructInitProvenance,
+} from '../../tools/generator/src/emit/core.ts';
 import { emitHaxeModule } from '../../tools/generator/src/emit/haxe.ts';
 import {
   entityFactoryClosureSummary,
@@ -25,7 +29,14 @@ import {
   typedStructSummary,
 } from '../../tools/generator/src/emit/reports.ts';
 import { lowerTypeScriptSource } from '../../tools/generator/src/lower/typescript.ts';
-import type { IrExpression, IrTypedStructBinding } from '../../tools/generator/src/model/ir.ts';
+import type {
+  IrExpression,
+  IrModule,
+  IrType,
+  IrTypeDeclaration,
+  IrTypeField,
+  IrTypedStructBinding,
+} from '../../tools/generator/src/model/ir.ts';
 
 const fixtureCandidate: TypedStructCandidate = {
   emission: 'direct',
@@ -3959,6 +3970,85 @@ describe('typed struct stable declaration identity', () => {
 });
 
 describe('typed struct analysis', () => {
+  it('turns retained source heritage into a real nominal class spine', () => {
+    const runtimeField = {
+      name: '__EntityRuntimeKey',
+      optional: true,
+      type: { inner: { kind: 'dynamic' }, kind: 'nullable' } as IrType,
+    };
+    const named = (name: string): IrType => ({ arguments: [], kind: 'named', name });
+    const declaration = (
+      name: string,
+      fields: IrTypeField[],
+      parent?: string,
+      activated = false,
+    ): IrTypeDeclaration => ({
+      ...(activated ? { cppStructInitSchemaId: `fixture:${name}` } : {}),
+      exported: true,
+      kind: 'type',
+      name,
+      origin: {
+        column: 1,
+        fingerprint: name,
+        line: 1,
+        packageName: '@flighthq/types',
+        source: `upstream/packages/types/src/${name}.ts`,
+      },
+      ...(parent ? { sourceExtends: [named(parent)] } : {}),
+      type: { extends: [], fields, kind: 'anonymous' },
+      typeParameters: [],
+    });
+    const entity = declaration('Entity', [runtimeField]);
+    const node2D = declaration(
+      'Node2D',
+      [
+        runtimeField,
+        { name: 'data', optional: false, type: named('NodeData') },
+        { name: 'x', optional: false, type: { kind: 'primitive', name: 'Float' } },
+      ],
+      'Entity',
+      true,
+    );
+    const shape = declaration(
+      'Shape',
+      [
+        runtimeField,
+        { name: 'data', optional: false, type: named('ShapeData') },
+        { name: 'x', optional: false, type: { kind: 'primitive', name: 'Float' } },
+      ],
+      'Node2D',
+    );
+    const morphShape = declaration(
+      'MorphShape',
+      [
+        runtimeField,
+        { name: 'data', optional: false, type: named('MorphShapeData') },
+        { name: 'x', optional: false, type: { kind: 'primitive', name: 'Float' } },
+        { name: 'morph', optional: false, type: { kind: 'primitive', name: 'Float' } },
+      ],
+      'Shape',
+      true,
+    );
+    const modules: IrModule[] = [entity, node2D, shape, morphShape].map((item) => ({
+      declarations: [item],
+      haxePackage: 'flight.types',
+      imports: [],
+      name: item.name,
+      packageName: '@flighthq/types',
+    }));
+
+    markCppStructInitInheritance(modules);
+
+    expect(entity.cppStructInitSchemaId).toBeUndefined();
+    expect(node2D.cppStructInitGenericFields).toMatchObject([{ fieldName: 'data', name: 'TData' }]);
+    expect(shape.cppStructInitBaseOnly).toBe(true);
+    expect(shape.cppStructInitBase).toMatchObject({ haxeType: 'flight.types.Node2D' });
+    expect(morphShape.cppStructInitBase).toMatchObject({ haxeType: 'flight.types.Shape' });
+    expect(emitHaxeModule(modules[1]!)).toContain('class Node2D<TData = Dynamic> {');
+    expect(emitHaxeModule(modules[2]!)).toContain('class Shape<TData = Dynamic> extends flight.types.Node2D<TData> {');
+    expect(emitHaxeModule(modules[3]!)).toContain('class MorphShape extends flight.types.Shape<MorphShapeData> {');
+  });
+
   it('emits a default struct-init class with a global typedef oracle branch', () => {
     const candidate: TypedStructCandidate = {
       emission: 'direct',
@@ -4384,6 +4474,11 @@ describe('typed struct analysis', () => {
           const provider = { stop() { return 2; } };
           return createEntity(provider);
         }
+        export function createReassignedProvider(): { pause(): number } & Entity {
+          let provider = { pause() { return 6; } };
+          provider = { pause() { return 7; } };
+          return createEntity(provider);
+        }
         export function createToken(): Entity {
           return createEntity();
         }
@@ -4394,6 +4489,9 @@ describe('typed struct analysis', () => {
         function createWrapped<T extends Entity>(fields: Omit<T, keyof Entity>): T {
           return createEntity(fields) as T;
         }
+        function copyUnknown<T extends Entity>(source: T): T {
+          return createEntity({ ...source }) as T;
+        }
         export function createWrappedProvider(): { start(): number } & Entity {
           return createWrapped({ start() { return 5; } });
         }
@@ -4403,7 +4501,7 @@ describe('typed struct analysis', () => {
     const synthetics = result.lowered.declarations.filter(
       (declaration) => declaration.kind === 'type' && declaration.name.startsWith('EntityShapeL'),
     );
-    expect(synthetics).toHaveLength(5);
+    expect(synthetics).toHaveLength(4);
     const synthetic = synthetics[0];
     if (!synthetic || synthetic.kind !== 'type') throw new Error('Expected synthetic Entity class');
     const fixtureModule = {
@@ -4420,16 +4518,14 @@ describe('typed struct analysis', () => {
     expect(synthetic.packagePrivate).toBe(true);
     expect(output).toContain('@:allow(flight.EntityFixture)\n@:structInit\nprivate class EntityShapeL');
     expect(output).toContain('private function new(run:Void->Float):Void');
-    expect(output).toContain('private function new():Void');
-    expect(output).toMatch(/\(\{ run: function\(\):Float \{[\s\S]*\} \} : EntityShapeL\d+C\d+\)/u);
+    expect(output).not.toContain('private function new():Void');
+    expect(output).toMatch(/function createProvider[\s\S]*: EntityShapeL\d+C\d+/u);
     expect(output).toMatch(/_Runtime\.symbol\('Runtime', '__symbol__[0-9a-f]{20}'\)/u);
     expect(output).toContain('#if (!flight_struct_typedef && !js)');
     expect(output).toMatch(
       /#if \(flight_struct_typedef \|\| js\) _Runtime\.objectFromPairs\(\[[\s\S]*RuntimeKey[\s\S]*#else \(\{ run:/u,
     );
-    expect(output).toMatch(
-      /function createWrappedProvider[\s\S]*\{ start: function\(\):Float[\s\S]*: EntityShapeL24C32/u,
-    );
+    expect(output).toMatch(/function createWrappedProvider[\s\S]*: EntityShapeL\d+C\d+/u);
   });
 
   it('prefers a returned concrete Entity identity over its inferred base storage', () => {
@@ -5706,10 +5802,10 @@ describe('typed struct analysis', () => {
       `cpp @:structInit schemas are not provenance-closed: ${rectangleId}, ${rectangleLikeId}`,
     );
     expect(readFileSync('generated/flight/types/ParticleEmitter2D.hx', 'utf8')).toContain(
-      '@:allow(flight._ParticleEmitter)\n@:structInit\nclass ParticleEmitter2D {',
+      '@:allow(flight._ParticleEmitter)\n@:structInit\nclass ParticleEmitter2D extends flight.types.Node2D<ParticleEmitterData> {',
     );
     expect(readFileSync('generated/flight/types/ParticleEmitter3D.hx', 'utf8')).toContain(
-      '@:allow(flight._ParticleEmitter)\n@:structInit\nclass ParticleEmitter3D {',
+      '@:allow(flight._ParticleEmitter)\n@:structInit\nclass ParticleEmitter3D extends flight.types.Node3D<ParticleEmitterData> {',
     );
     expect(readFileSync('generated/flight/types/NodeData.hx', 'utf8')).toContain(
       'typedef NodeData = flight._internal._Object;',
@@ -5718,13 +5814,12 @@ describe('typed struct analysis', () => {
     const publicScene2D = readFileSync('generated/flight/Scene2D.hx', 'utf8');
     const internalScene3D = readFileSync('generated/flight/_Scene3D.hx', 'utf8');
     const publicScene3D = readFileSync('generated/flight/Scene3D.hx', 'utf8');
-    expect(internalScene2D).toMatch(/public static function createNode2D[^\n]+\):Dynamic \{/u);
-    expect(internalScene2D).toContain('var out:Dynamic = cast _Runtime.UNDEFINED;');
-    expect(internalScene2D).not.toContain('out = (cast createNode(');
+    expect(internalScene2D).toMatch(/public static function createNode2D[^\n]+\):Node2D \{/u);
+    expect(internalScene2D).toContain('var out:Node2D = cast _Runtime.UNDEFINED;');
     expect(publicScene2D).toMatch(/public static function createNode2D[^\n]+\):Node2D \{/u);
-    expect(internalScene3D).toMatch(/public static function createNode3D[^\n]+\):Dynamic \{/u);
-    expect(internalScene3D).toContain('var node:Dynamic = cast _Runtime.UNDEFINED;');
-    expect(internalScene3D).not.toContain('return cast (cast node : Node3D);');
+    expect(internalScene3D).toMatch(/public static function createNode3D[^\n]+\):Node3D \{/u);
+    expect(internalScene3D).not.toContain('var node:Dynamic = cast _Runtime.UNDEFINED;');
+    expect(internalScene3D).toContain('return cast (cast node : Node3D);');
     expect(publicScene3D).toMatch(/public static function createNode3D[^\n]+\):Node3D \{/u);
     const additionalNominalClassNames = [
       'Billboard',
@@ -5732,6 +5827,7 @@ describe('typed struct analysis', () => {
       'Camera2D',
       'DisplayObject',
       'HtmlView',
+      'Light',
       'Mesh',
       'MorphShape',
       'MovieClip',
@@ -5741,25 +5837,28 @@ describe('typed struct analysis', () => {
       'ParticleEmitter2D',
       'ParticleEmitter3D',
       'ParticleEmitterState',
+      'PbrExtension',
       'QuadBatch',
       'RichText',
       'Scale9Shape',
       'Shape',
       'Sprite',
+      'SurfaceMaterial',
       'TextLabel',
+      'TextureSource',
       'Tilemap',
     ];
     const nominalClassNames = [
       ...new Set([...entityFactories.schemas.map((schema) => schema.schemaName), ...additionalNominalClassNames]),
     ].sort();
     expect(entityFactories.schemas).toHaveLength(143);
-    expect(nominalClassNames).toHaveLength(164);
+    expect(nominalClassNames).toHaveLength(168);
     for (const name of nominalClassNames) {
       const generated = readFileSync(`generated/flight/types/${name}.hx`, 'utf8');
       expect(generated, name).toContain('#if !flight_struct_typedef');
       expect(generated, name).toContain('@:allow(');
       expect(generated, name).toContain('@:structInit');
-      expect(generated, name).toContain(`class ${name} {`);
+      expect(generated, name).toMatch(new RegExp(`class ${name}(?:<[^\\n]+>)?(?: extends [^\\n]+)? \\{`, 'u'));
       expect(generated, name).toContain('private function new(');
     }
 

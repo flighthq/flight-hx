@@ -7,9 +7,7 @@ import flight._internal._Runtime;
 #if !flight_struct_typedef
 @:allow(flight._Materials)
 @:structInit
-class WrappedDiffusePbrExtension {
-  public var __symbol__EntityRuntime:Null<EntityRuntime>;
-  public var kind:String;
+class WrappedDiffusePbrExtension extends flight.types.PbrExtension<String> {
   public var thickness:Float;
   public var thicknessMap:Null<Texture>;
   public var thicknessMapUvSet:PbrUvSet;
@@ -19,8 +17,7 @@ class WrappedDiffusePbrExtension {
   public var wrappedDiffuseStrength:Float;
 
   private function new(kind:String, thickness:Float, thicknessMap:Null<Texture>, thicknessMapUvSet:PbrUvSet, wrappedDiffuseColor:Float, wrappedDiffuseMap:Null<Texture>, wrappedDiffuseMapUvSet:PbrUvSet, wrappedDiffuseStrength:Float):Void {
-    this.__symbol__EntityRuntime = null;
-    this.kind = kind;
+    super(kind);
     this.thickness = thickness;
     this.thicknessMap = thicknessMap;
     this.thicknessMapUvSet = thicknessMapUvSet;

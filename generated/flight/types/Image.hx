@@ -9,24 +9,11 @@ import flight._Types.ImageTextureSourceKind;
 @:allow(flight._Image)
 @:allow(flight._Texture)
 @:structInit
-class Image {
-  public var __symbol__EntityRuntime:Null<EntityRuntime>;
-  public var alphaType:AlphaType;
-  public var gamut:String;
-  public var height:Float;
-  public var kind:Dynamic;
-  public var version:Float;
-  public var width:Float;
+class Image extends flight.types.TextureSource<Dynamic> {
   public var source:flight._internal.dom.CanvasImageSource;
 
   private function new(alphaType:AlphaType, gamut:String, height:Float, kind:Dynamic, version:Float, width:Float, source:flight._internal.dom.CanvasImageSource):Void {
-    this.__symbol__EntityRuntime = null;
-    this.alphaType = alphaType;
-    this.gamut = gamut;
-    this.height = height;
-    this.kind = kind;
-    this.version = version;
-    this.width = width;
+    super(alphaType, gamut, height, kind, version, width);
     this.source = source;
   }
 }

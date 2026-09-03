@@ -7,9 +7,7 @@ import flight._internal._Runtime;
 #if !flight_struct_typedef
 @:allow(flight._Materials)
 @:structInit
-class SheenPbrExtension {
-  public var __symbol__EntityRuntime:Null<EntityRuntime>;
-  public var kind:String;
+class SheenPbrExtension extends flight.types.PbrExtension<String> {
   public var sheenColor:Float;
   public var sheenColorMap:Null<Texture>;
   public var sheenColorMapUvSet:PbrUvSet;
@@ -18,8 +16,7 @@ class SheenPbrExtension {
   public var sheenRoughnessMapUvSet:PbrUvSet;
 
   private function new(kind:String, sheenColor:Float, sheenColorMap:Null<Texture>, sheenColorMapUvSet:PbrUvSet, sheenRoughness:Float, sheenRoughnessMap:Null<Texture>, sheenRoughnessMapUvSet:PbrUvSet):Void {
-    this.__symbol__EntityRuntime = null;
-    this.kind = kind;
+    super(kind);
     this.sheenColor = sheenColor;
     this.sheenColorMap = sheenColorMap;
     this.sheenColorMapUvSet = sheenColorMapUvSet;

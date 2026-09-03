@@ -7,15 +7,12 @@ import flight._internal._Runtime;
 #if !flight_struct_typedef
 @:allow(flight._Lighting)
 @:structInit
-class Environment {
-  public var __symbol__EntityRuntime:Null<EntityRuntime>;
-  public var kind:String;
+class Environment extends flight.types.Light<String> {
   public var environment:Null<Texture>;
   public var intensity:Float;
 
   private function new(kind:String, environment:Null<Texture>, intensity:Float):Void {
-    this.__symbol__EntityRuntime = null;
-    this.kind = kind;
+    super(kind);
     this.environment = environment;
     this.intensity = intensity;
   }

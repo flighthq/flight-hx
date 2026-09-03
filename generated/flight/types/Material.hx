@@ -6,13 +6,15 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._Materials)
+@:allow(flight.types.StandardMaterial)
+@:allow(flight.types.SurfaceMaterial)
 @:structInit
-class Material {
+class Material<TKind = Dynamic> {
   public var __symbol__EntityRuntime:Null<EntityRuntime>;
-  public var kind:Kind;
+  public var kind:TKind;
   public var name:Null<String>;
 
-  private function new(kind:Kind, name:Null<String>):Void {
+  private function new(kind:TKind, name:Null<String>):Void {
     this.__symbol__EntityRuntime = null;
     this.kind = kind;
     this.name = name;

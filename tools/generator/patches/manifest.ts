@@ -50,6 +50,23 @@ export default definePatches([
     },
   },
   {
+    constructsCppStructInitTypes: ['flight.types.Light'],
+    expect: {
+      astHash: 'sha256:e70a303cadb7a840475076d753614dd86d625c6c585deccf5589cc39e568365e',
+      kind: 'function',
+    },
+    fragment: 'tools/generator/patches/bodies/scene-document/readLight.hx',
+    id: 'scene-document.read-light.construct-open-light-base',
+    operation: 'replaceBody',
+    reason:
+      'A native open-kind Light descriptor must allocate the sealed Light base class before reflective extension fields are copied onto it.',
+    target: {
+      export: 'readLight__flightDocumentText',
+      package: '@flighthq/scene-document',
+      source: 'upstream/packages/scene-document/src/flightDocumentText.ts',
+    },
+  },
+  {
     expect: {
       astHash: 'sha256:500b25d369a38f3546e52f19b5e28242c48129246ad75ece9ef42427b9202c58',
       kind: 'function',

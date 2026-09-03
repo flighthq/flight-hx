@@ -140,10 +140,10 @@ class _Scene2D {
     return cast null;
   }
 
-  public static function createNode2D<R:Node2DRuntime>(kind:Kind, ?obj:PartialNode<Node2D>, ?createData:Node2DDataFactory, ?createNode2DRuntimeFactory:Node2DRuntimeFactory<R>, ?__nodeAllocator:Void->Dynamic):Dynamic {
+  public static function createNode2D<R:Node2DRuntime>(kind:Kind, ?obj:PartialNode<Node2D>, ?createData:Node2DDataFactory, ?createNode2DRuntimeFactory:Node2DRuntimeFactory<R>, ?__nodeAllocator:Void->Dynamic):Node2D {
     if (__nodeAllocator == null) __nodeAllocator = cast (function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : Node2D); }) #end) : Dynamic);
-    var out:Dynamic = cast _Runtime.UNDEFINED;
-    out = createNode((cast kind : String), (cast obj : Dynamic), (cast createData : Dynamic), (cast _Runtime.coalesce(createNode2DRuntimeFactory, function():Dynamic return cast (cast (cast createNode2DRuntime : flight._internal._Any) : NodeRuntimeFactory<R>)) : Dynamic), __nodeAllocator);
+    var out:Node2D = cast _Runtime.UNDEFINED;
+    out = (cast createNode((cast kind : String), (cast obj : Dynamic), (cast createData : Dynamic), (cast _Runtime.coalesce(createNode2DRuntimeFactory, function():Dynamic return cast (cast (cast createNode2DRuntime : flight._internal._Any) : NodeRuntimeFactory<R>)) : Dynamic), __nodeAllocator) : Node2D);
     initTransform2DTrait(({ final __callArgument2:Dynamic = out; __callArgument2; }), (cast obj : Dynamic));
     initBoundsRectangleTrait(({ final __callArgument4:Dynamic = out; __callArgument4; }), (cast obj : Dynamic));
     initAppearanceTrait(({ final __callArgument6:Dynamic = out; __callArgument6; }), ({ final __callArgument7:Dynamic = obj; __callArgument7; }));

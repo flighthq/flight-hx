@@ -2239,9 +2239,9 @@
       "packageName": "@flighthq/scene-document",
       "staticFacts": {
         "booleanConditionalTruthiness": 24,
-        "booleanExplicitTruthiness": 636,
-        "booleanLogicalExpressions": 132,
-        "booleanLogicalTruthiness": 143,
+        "booleanExplicitTruthiness": 624,
+        "booleanLogicalExpressions": 131,
+        "booleanLogicalTruthiness": 142,
         "indexedAccesses": {
           "expressions": 64,
           "reads": 64,
@@ -3668,8 +3668,8 @@
     "staticEmission": {
       "booleanAndExpressions": 2827,
       "booleanConditionalExpressions": 3569,
-      "booleanOrExpressions": 3470,
-      "booleanTruthinessUses": 17717,
+      "booleanOrExpressions": 3469,
+      "booleanTruthinessUses": 17705,
       "destructuringEscapes": {
         "regexp-result-array": {
           "assignment": 0,
@@ -3840,9 +3840,9 @@
     },
     "staticFacts": {
       "booleanConditionalTruthiness": 3574,
-      "booleanExplicitTruthiness": 17751,
-      "booleanLogicalExpressions": 6325,
-      "booleanLogicalTruthiness": 6661,
+      "booleanExplicitTruthiness": 17739,
+      "booleanLogicalExpressions": 6324,
+      "booleanLogicalTruthiness": 6660,
       "indexedAccesses": {
         "expressions": 13567,
         "reads": 9232,

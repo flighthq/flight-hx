@@ -109,7 +109,7 @@ function objectLiteralArgument(
   if (ts.isObjectLiteralExpression(argument)) return argument;
   if (!ts.isIdentifier(argument)) return undefined;
   const declaration = checker.getSymbolAtLocation(argument)?.valueDeclaration;
-  if (!declaration || !ts.isVariableDeclaration(declaration) || !declaration.initializer) return undefined;
+  if (!isEffectivelyFinalVariableDeclaration(declaration) || !declaration.initializer) return undefined;
   const initializer = unwrapEntityFactoryExpression(declaration.initializer);
   return ts.isObjectLiteralExpression(initializer) ? initializer : undefined;
 }
@@ -161,7 +161,7 @@ export function entityFactoryObjectLiteral(
   if (ts.isObjectLiteralExpression(argument)) return argument;
   if (!checker || !ts.isIdentifier(argument)) return undefined;
   const declaration = checker.getSymbolAtLocation(argument)?.valueDeclaration;
-  if (!declaration || !ts.isVariableDeclaration(declaration) || !declaration.initializer) return undefined;
+  if (!isEffectivelyFinalVariableDeclaration(declaration) || !declaration.initializer) return undefined;
   const initializer = unwrapEntityFactoryExpression(declaration.initializer);
   return ts.isObjectLiteralExpression(initializer) ? initializer : undefined;
 }
@@ -235,9 +235,18 @@ export function nativeUniqueSymbolKeyForExpression(node: ts.Expression, checker:
     symbol = checker.getAliasedSymbol(symbol);
   }
   const declaration = symbol?.valueDeclaration ?? symbol?.declarations?.[0];
-  if (!declaration || !ts.isVariableDeclaration(declaration) || !declaration.initializer) return undefined;
+  if (!isEffectivelyFinalVariableDeclaration(declaration) || !declaration.initializer) return undefined;
   const initializer = unwrapEntityFactoryExpression(declaration.initializer);
   return ts.isCallExpression(initializer) ? nativeUniqueSymbolKeyForCall(initializer) : undefined;
+}
+
+function isEffectivelyFinalVariableDeclaration(node: ts.Node | undefined): node is ts.VariableDeclaration {
+  return Boolean(
+    node &&
+    ts.isVariableDeclaration(node) &&
+    ts.isVariableDeclarationList(node.parent) &&
+    (node.parent.flags & ts.NodeFlags.Const) !== 0,
+  );
 }
 
 export function entityFactoryResolvedObjectFields(
@@ -265,6 +274,15 @@ export function entityFactoryExpandedObjectFields(
   node: ts.ObjectLiteralExpression,
   checker: ts.TypeChecker,
 ): string[] | undefined {
+  if (
+    node.properties.some(
+      (property) =>
+        ts.isSpreadAssignment(property) &&
+        spreadMayContainUnknownProperties(checker.getTypeAtLocation(property.expression), checker),
+    )
+  ) {
+    return undefined;
+  }
   const type = checker.getTypeAtLocation(node);
   if (type.isUnion()) return undefined;
   if (checker.getIndexTypeOfType(type, ts.IndexKind.String)) return undefined;
@@ -279,6 +297,18 @@ export function entityFactoryExpandedObjectFields(
         : property.getName();
     })
     .filter((name) => !name.startsWith('__@EntityRuntimeKey@'));
+}
+
+function spreadMayContainUnknownProperties(type: ts.Type, checker: ts.TypeChecker, seen = new Set<ts.Type>()): boolean {
+  if (seen.has(type)) return false;
+  seen.add(type);
+  if ((type.flags & (ts.TypeFlags.Any | ts.TypeFlags.Unknown | ts.TypeFlags.TypeParameter)) !== 0) return true;
+  if (type.isUnionOrIntersection()) {
+    return type.types.some((item) => spreadMayContainUnknownProperties(item, checker, seen));
+  }
+  return Boolean(
+    checker.getIndexTypeOfType(type, ts.IndexKind.String) ?? checker.getIndexTypeOfType(type, ts.IndexKind.Number),
+  );
 }
 
 export function entityFactorySyntheticClassName(node: ts.Node): string {

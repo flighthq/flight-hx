@@ -6,10 +6,21 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._Scene2D)
+@:allow(flight.types.BitmapText)
+@:allow(flight.types.DisplayObject)
+@:allow(flight.types.HtmlView)
+@:allow(flight.types.MovieClip)
+@:allow(flight.types.NativeText)
+@:allow(flight.types.ParticleEmitter2D)
+@:allow(flight.types.QuadBatch)
+@:allow(flight.types.Shape)
+@:allow(flight.types.Sprite)
+@:allow(flight.types.TextLabel)
+@:allow(flight.types.Tilemap)
 @:structInit
-class Node2D {
+class Node2D<TData = Dynamic> {
   public var __symbol__EntityRuntime:Null<Dynamic>;
-  public var data:Null<NodeData>;
+  public var data:TData;
   public var enabled:Bool;
   public var kind:Kind;
   public var name:Null<String>;
@@ -29,7 +40,7 @@ class Node2D {
   public var x:Float;
   public var y:Float;
 
-  private function new(data:Null<NodeData>, enabled:Bool, kind:Kind, name:Null<String>, alpha:Float, visible:Bool, blendMode:Null<BlendMode>, clip:Null<ClipRegion>, material:Null<Material>, materialData:Null<MaterialData>, pivotX:Float, pivotY:Float, rotation:Float, scaleX:Float, scaleY:Float, skewX:Float, skewY:Float, x:Float, y:Float):Void {
+  private function new(data:TData, enabled:Bool, kind:Kind, name:Null<String>, alpha:Float, visible:Bool, blendMode:Null<BlendMode>, clip:Null<ClipRegion>, material:Null<Material>, materialData:Null<MaterialData>, pivotX:Float, pivotY:Float, rotation:Float, scaleX:Float, scaleY:Float, skewX:Float, skewY:Float, x:Float, y:Float):Void {
     this.__symbol__EntityRuntime = null;
     this.data = data;
     this.enabled = enabled;

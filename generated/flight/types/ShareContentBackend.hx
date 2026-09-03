@@ -6,14 +6,15 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
+@:allow(flight.types.CapacitorShareContentBackend)
 @:structInit
-class ShareContentBackend {
+class ShareContentBackend<TShareContent = Dynamic, TShareContentWithResult = Dynamic> {
   public var __symbol__EntityRuntime:Null<EntityRuntime>;
   public var canShareContent:ShareContent->Bool;
-  public var shareContent:ShareContent->flight._internal._Promise<Bool>;
-  public var shareContentWithResult:ShareContent->flight._internal._Promise<ShareResult>;
+  public var shareContent:TShareContent;
+  public var shareContentWithResult:TShareContentWithResult;
 
-  private function new(canShareContent:ShareContent->Bool, shareContent:ShareContent->flight._internal._Promise<Bool>, shareContentWithResult:ShareContent->flight._internal._Promise<ShareResult>):Void {
+  private function new(canShareContent:ShareContent->Bool, shareContent:TShareContent, shareContentWithResult:TShareContentWithResult):Void {
     this.__symbol__EntityRuntime = null;
     this.canShareContent = canShareContent;
     this.shareContent = shareContent;

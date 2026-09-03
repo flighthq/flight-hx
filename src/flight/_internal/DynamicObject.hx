@@ -11,6 +11,10 @@ import Math as HxMath;
 class DynamicObject {
   #if !js
   static final frozenObjects:_IdentityMap<Bool> = new _IdentityMap();
+  // Native Haxe classes cannot own fields that were not declared at compile
+  // time. Preserve JavaScript's object-expando behavior in an identity sidecar
+  // so open Entity records can still use nominal classes on hxcpp.
+  static final objectFields:_IdentityMap<Dynamic> = new _IdentityMap();
   // JavaScript functions are objects and can own fields. Native Haxe closure
   // values cannot, so retain fields assigned to them behind the same identity.
   static final callableTargets:Array<Dynamic> = [];
@@ -61,13 +65,17 @@ class DynamicObject {
     #if js
     return js.Syntax.code('Object.prototype.hasOwnProperty.call({0}, {1})', source, name);
     #else
-    return source != null && (Reflect.hasField(source, name) || hasCallableField(source, name));
+    return source != null && (Reflect.hasField(source, name) || hasAttachedField(source, name));
     #end
   }
 
   public static function keys(source:Dynamic):Array<String> {
     final result = Reflect.fields(source);
     #if !js
+    final extra = objectFields.get(source);
+    if (extra != null) {
+      for (name in Reflect.fields(extra)) if (result.indexOf(name) < 0) result.push(name);
+    }
     final index = callableIndex(source);
     if (index >= 0) {
       final attached = callableFields[index];
@@ -79,6 +87,51 @@ class DynamicObject {
 
   public static function values(source:Dynamic):Array<Dynamic> {
     return [for (name in keys(source)) ownField(source, name)];
+  }
+
+  public static inline function readField(source:Dynamic, name:String):Dynamic {
+    #if js
+    return js.Syntax.code('{0}[{1}]', source, name);
+    #else
+    return hasAttachedField(source, name) ? attachedField(source, name) : Reflect.field(source, name);
+    #end
+  }
+
+  public static inline function writeField(target:Dynamic, name:String, value:Dynamic):Dynamic {
+    setOwnField(target, name, value);
+    return value;
+  }
+
+  public static function deleteOwnField(target:Dynamic, name:String):Bool {
+    #if js
+    return js.Syntax.code('delete {0}[{1}]', target, name);
+    #else
+    final extra = objectFields.get(target);
+    if (extra != null && Reflect.hasField(extra, name)) return Reflect.deleteField(extra, name);
+    final callableIndex = callableIndex(target);
+    if (callableIndex >= 0 && Reflect.hasField(callableFields[callableIndex], name)) {
+      return Reflect.deleteField(callableFields[callableIndex], name);
+    }
+    return Reflect.deleteField(target, name);
+    #end
+  }
+
+  public static function hasAttachedField(source:Dynamic, name:String):Bool {
+    #if js
+    return false;
+    #else
+    final extra = objectFields.get(source);
+    return (extra != null && Reflect.hasField(extra, name)) || hasCallableField(source, name);
+    #end
+  }
+
+  public static function attachedField(source:Dynamic, name:String):Dynamic {
+    #if js
+    return null;
+    #else
+    final extra = objectFields.get(source);
+    return extra != null && Reflect.hasField(extra, name) ? Reflect.field(extra, name) : callableField(source, name);
+    #end
   }
 
   @:noInline public static function hasCallableField(source:Dynamic, name:String):Bool {
@@ -168,11 +221,21 @@ class DynamicObject {
 
   #if !js
   static function ownField(source:Dynamic, name:String):Dynamic {
-    return hasCallableField(source, name) ? callableField(source, name) : Reflect.field(source, name);
+    return hasAttachedField(source, name) ? attachedField(source, name) : Reflect.field(source, name);
   }
 
   @:noInline static function setOwnField(target:Dynamic, name:String, value:Dynamic):Void {
     if (!Reflect.isFunction(target)) {
+      final targetClass = Type.getClass(target);
+      if (targetClass != null && Type.getInstanceFields(targetClass).indexOf(name) < 0) {
+        var extra = objectFields.get(target);
+        if (extra == null) {
+          extra = {};
+          objectFields.set(target, extra);
+        }
+        Reflect.setField(extra, name, value);
+        return;
+      }
       Reflect.setField(target, name, value);
       return;
     }

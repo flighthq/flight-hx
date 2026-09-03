@@ -392938,7 +392938,7 @@
       "accesses": {
         "calls": 0,
         "reads": 15,
-        "writes": 2
+        "writes": 0
       },
       "declarationFingerprint": "sha256:4fd9e5cd40feb8c2bd878f06b8d4d8e90398b0b1560e85161c7f6f94b934bd04",
       "declarationKind": "interface",
@@ -392947,7 +392947,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 17,
+        "pendingAccesses": 15,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -550427,7 +550427,7 @@
   "schemaVersion": 5,
   "summary": {
     "auditOnlySchemas": 2151,
-    "bindableAccesses": 40594,
+    "bindableAccesses": 40592,
     "candidates": 2910,
     "directAccesses": 26054,
     "directSchemas": 756,
@@ -550435,7 +550435,7 @@
     "escapes": 14816,
     "fields": 29999,
     "ineligible": 709,
-    "pendingAccesses": 14540,
+    "pendingAccesses": 14538,
     "reflectiveSurvivors": 463
   },
   "upstreamCommit": "98a7a58a934f55555a561a308cc23c1363c45652"

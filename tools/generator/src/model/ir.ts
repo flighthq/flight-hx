@@ -302,6 +302,7 @@ export interface IrFunctionDeclaration {
   allowPackage?: string | undefined;
   async?: boolean | undefined;
   body: IrStatement[];
+  cppStructInitConstructs?: string[] | undefined;
   exported: boolean;
   haxeBody?: string | undefined;
   haxeCondition?: string | undefined;
@@ -335,6 +336,16 @@ export interface IrVariableDeclaration extends IrVariable {
 }
 
 export interface IrTypeDeclaration {
+  cppStructInitBase?:
+    | {
+        constructorFieldNames: string[];
+        genericFields: Array<{ fieldName: string; type?: IrType | undefined; typeParameter?: string | undefined }>;
+        haxeType: string;
+      }
+    | undefined;
+  cppStructInitBaseOnly?: true | undefined;
+  cppStructInitGenericFields?: Array<{ fieldName: string; name: string; type: IrType }> | undefined;
+  cppStructInitOwnFieldNames?: string[] | undefined;
   cppStructInitConstructorAllowModules?: string[] | undefined;
   cppStructInitNativeOnly?: true | undefined;
   cppStructInitSchemaId?: string | undefined;
@@ -347,6 +358,8 @@ export interface IrTypeDeclaration {
   // in the same Haxe package (the module owns the package identity; this secondary type
   // shadow-resolves to it). See `markShadowedSecondaryTypes` in emit/core.ts.
   packagePrivate?: boolean;
+  /** Direct TypeScript interface heritage or named intersection constituents, retained before structural flattening. */
+  sourceExtends?: IrType[] | undefined;
   type: IrType;
   typeParameters: string[];
 }

@@ -6,10 +6,13 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._Scene3D)
+@:allow(flight.types.Billboard)
+@:allow(flight.types.Mesh)
+@:allow(flight.types.ParticleEmitter3D)
 @:structInit
-class Node3D {
+class Node3D<TData = Dynamic> {
   public var __symbol__EntityRuntime:Null<NodeRuntime<Node3DTraits>>;
-  public var data:Null<NodeData>;
+  public var data:TData;
   public var enabled:Bool;
   public var kind:Kind;
   public var name:Null<String>;
@@ -19,7 +22,7 @@ class Node3D {
   public var rotation:Quaternion;
   public var scale:Vector3;
 
-  private function new(data:Null<NodeData>, enabled:Bool, kind:Kind, name:Null<String>, alpha:Float, visible:Bool, position:Vector3, rotation:Quaternion, scale:Vector3):Void {
+  private function new(data:TData, enabled:Bool, kind:Kind, name:Null<String>, alpha:Float, visible:Bool, position:Vector3, rotation:Quaternion, scale:Vector3):Void {
     this.__symbol__EntityRuntime = null;
     this.data = data;
     this.enabled = enabled;

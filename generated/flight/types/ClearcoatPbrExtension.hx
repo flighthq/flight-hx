@@ -7,9 +7,7 @@ import flight._internal._Runtime;
 #if !flight_struct_typedef
 @:allow(flight._Materials)
 @:structInit
-class ClearcoatPbrExtension {
-  public var __symbol__EntityRuntime:Null<EntityRuntime>;
-  public var kind:String;
+class ClearcoatPbrExtension extends flight.types.PbrExtension<String> {
   public var clearcoat:Float;
   public var clearcoatMap:Null<Texture>;
   public var clearcoatMapUvSet:PbrUvSet;
@@ -21,8 +19,7 @@ class ClearcoatPbrExtension {
   public var clearcoatRoughnessMapUvSet:PbrUvSet;
 
   private function new(kind:String, clearcoat:Float, clearcoatMap:Null<Texture>, clearcoatMapUvSet:PbrUvSet, clearcoatNormalMap:Null<Texture>, clearcoatNormalMapUvSet:PbrUvSet, clearcoatNormalScale:Float, clearcoatRoughness:Float, clearcoatRoughnessMap:Null<Texture>, clearcoatRoughnessMapUvSet:PbrUvSet):Void {
-    this.__symbol__EntityRuntime = null;
-    this.kind = kind;
+    super(kind);
     this.clearcoat = clearcoat;
     this.clearcoatMap = clearcoatMap;
     this.clearcoatMapUvSet = clearcoatMapUvSet;

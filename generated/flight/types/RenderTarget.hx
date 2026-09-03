@@ -8,9 +8,7 @@ import flight._Types.RenderTargetTextureSourceKind;
 #if !flight_struct_typedef
 @:allow(flight._Texture)
 @:structInit
-class RenderTarget {
-  public var width:Float;
-  public var height:Float;
+class RenderTarget extends flight.types.TextureSource<Dynamic> {
   public var format:RenderTargetFormat;
   public var colorAttachments:Float;
   public var colorFormats:Array<RenderTargetFormat>;
@@ -19,16 +17,9 @@ class RenderTarget {
   public var colorSpace:RenderTargetColorSpace;
   public var clearColors:Array<Float>;
   public var clearDepth:Float;
-  public var __symbol__EntityRuntime:Null<EntityRuntime>;
-  public var alphaType:AlphaType;
-  public var gamut:String;
-  public var kind:Dynamic;
-  public var version:Float;
 
   private function new(width:Float, height:Float, format:RenderTargetFormat, colorAttachments:Float, colorFormats:Array<RenderTargetFormat>, sampleCount:Float, depth:RenderTargetDepth, colorSpace:RenderTargetColorSpace, clearColors:Array<Float>, clearDepth:Float, alphaType:AlphaType, gamut:String, kind:Dynamic, version:Float):Void {
-    this.__symbol__EntityRuntime = null;
-    this.width = width;
-    this.height = height;
+    super(alphaType, gamut, height, kind, version, width);
     this.format = format;
     this.colorAttachments = colorAttachments;
     this.colorFormats = colorFormats;
@@ -37,10 +28,6 @@ class RenderTarget {
     this.colorSpace = colorSpace;
     this.clearColors = clearColors;
     this.clearDepth = clearDepth;
-    this.alphaType = alphaType;
-    this.gamut = gamut;
-    this.kind = kind;
-    this.version = version;
   }
 }
 #else

@@ -475,16 +475,18 @@ export function lowerTypeScriptSource(
         }
         accountedDeclarations += 1;
       } else if (ts.isInterfaceDeclaration(statement)) {
+        const sourceExtends =
+          statement.heritageClauses
+            ?.filter((clause) => clause.token === ts.SyntaxKind.ExtendsKeyword)
+            .flatMap((clause) => clause.types.map((item) => lowerExpressionWithTypeArguments(item, context))) ?? [];
         declarations.push({
           exported: hasModifier(statement, ts.SyntaxKind.ExportKeyword),
           kind: 'type',
           name: statement.name.text,
           origin: origin(statement, context),
+          sourceExtends,
           type: {
-            extends:
-              statement.heritageClauses
-                ?.filter((clause) => clause.token === ts.SyntaxKind.ExtendsKeyword)
-                .flatMap((clause) => clause.types.map((item) => lowerExpressionWithTypeArguments(item, context))) ?? [],
+            extends: sourceExtends,
             fields: lowerTypeMembers(statement.members, context),
             kind: 'anonymous',
           },
@@ -497,6 +499,7 @@ export function lowerTypeScriptSource(
           kind: 'type',
           name: statement.name.text,
           origin: origin(statement, context),
+          sourceExtends: lowerTypeAliasSourceExtends(statement.type, context),
           type:
             lowerConcreteClosedMappedAlias(statement, context) ??
             lowerConcreteEntityIntersectionAlias(statement, context) ??
@@ -644,6 +647,21 @@ export function lowerTypeScriptSource(
     ),
     staticFacts: auditStaticFacts(declarations),
   };
+}
+
+function lowerTypeAliasSourceExtends(node: ts.TypeNode, context: LoweringContext): IrType[] | undefined {
+  if (!ts.isIntersectionTypeNode(node)) return undefined;
+  const parents = node.types.flatMap((item): IrType[] => {
+    if (!ts.isTypeReferenceNode(item)) return [];
+    return [
+      {
+        arguments: item.typeArguments?.map((argument) => lowerType(argument, context)) ?? [],
+        kind: 'named',
+        name: item.typeName.getText(context.sourceFile),
+      },
+    ];
+  });
+  return parents.length > 0 ? parents : undefined;
 }
 
 function collectPlatformBindingNames(
@@ -1349,22 +1367,17 @@ function lowerFunction(
 }
 
 function nodeAllocatorParameter(node: ts.FunctionDeclaration, context: LoweringContext): IrParameter | undefined {
-  if (!['createNode', 'createNode2D', 'createNode3D'].includes(node.name?.text ?? '')) return undefined;
-  const normalizedSource = node.getSourceFile().fileName.split(path.sep).join('/');
-  const expectedSuffix =
-    node.name?.text === 'createNode'
-      ? '/upstream/packages/node/src/node.ts'
-      : node.name?.text === 'createNode2D'
-        ? '/upstream/packages/scene2d/src/displayObject.ts'
-        : '/upstream/packages/scene3d/src/sceneNode.ts';
-  if (!normalizedSource.endsWith(expectedSuffix) || !context.checker) return undefined;
+  const kind = flightNodeFactoryDeclarationKind(node);
+  if (!kind || !context.checker) return undefined;
   const signature = context.checker.getSignatureFromDeclaration(node);
   const returnType = signature && context.checker.getReturnTypeOfSignature(signature);
   if (!returnType) return undefined;
   const publicConstruction =
-    node.name?.text === 'createNode' ? undefined : context.typedStructs?.resolveFactoryIdentityConstruction(returnType);
+    kind === 'createNode' ? undefined : context.typedStructs?.resolveFactoryIdentityConstruction(returnType);
   const fields = publicConstruction ? undefined : syntheticEntityFieldsForType(returnType, node, context);
-  if (!publicConstruction && !fields) return undefined;
+  if (!publicConstruction && !fields) {
+    throw new Error(`nominal ${kind} allocator parameter has no constructible return layout`);
+  }
   const construction = publicConstruction ?? addSyntheticEntityFactoryDeclaration(node, fields!, context);
   return {
     initializer: emptyEntityAllocator({ ...construction, nodeAllocator: true }),
@@ -3997,12 +4010,32 @@ function syntheticOmittedEntityFactoryArgument(
     return undefined;
   }
   const registry = context.typedStructs;
+  const destinationCandidates = entityFactoryDestinationCandidates(call, checker);
   const destination = registry
-    ? entityFactoryDestinationCandidates(call, checker).find((candidate) => {
+    ? destinationCandidates.find((candidate) => {
         const identity = registry.resolveIdentity(candidate.type);
         return identity !== undefined && identity.id !== '@flighthq/types:interface#Entity';
       })
     : undefined;
+  if (destination && !entityFactoryTypeHasRuntimeMarker(destination.type, checker)) return undefined;
+  if (destination && !isParameterizedEntityFactoryType(destination.type, checker)) {
+    const construction = registry?.resolveFactoryIdentityConstruction(destination.type);
+    if (!construction) return undefined;
+    return {
+      cppStructInit: { ...construction, missingFieldNames: construction.fieldNames },
+      kind: 'object',
+      properties: [],
+    };
+  }
+  if (
+    !destination &&
+    (destinationCandidates.some(
+      (candidate) => registry?.resolveIdentity(candidate.type)?.id === '@flighthq/types:interface#Entity',
+    ) ||
+      destinationCandidates.some((candidate) => entityFactoryTypeHasEntityTypeParameter(candidate.type, checker)))
+  ) {
+    return undefined;
+  }
   const typeParameterNames = enclosingTypeParameterNames(call);
   const fields: IrTypeField[] = [];
   if (destination) {
@@ -4028,6 +4061,35 @@ function syntheticOmittedEntityFactoryArgument(
     kind: 'object',
     properties: [],
   };
+}
+
+function entityFactoryTypeHasRuntimeMarker(type: ts.Type, checker: ts.TypeChecker): boolean {
+  return checker.getPropertiesOfType(type).some((property) => property.getName().startsWith('__@EntityRuntimeKey@'));
+}
+
+function entityFactoryTypeHasEntityTypeParameter(
+  type: ts.Type,
+  checker: ts.TypeChecker,
+  seen = new Set<ts.Type>(),
+): boolean {
+  if (seen.has(type)) return false;
+  seen.add(type);
+  if ((type.flags & ts.TypeFlags.TypeParameter) !== 0) {
+    const constraint = checker.getBaseConstraintOfType(type);
+    return constraint ? entityFactoryTypeHasRuntimeMarker(constraint, checker) : false;
+  }
+  if (
+    type.isUnionOrIntersection() &&
+    type.types.some((item) => entityFactoryTypeHasEntityTypeParameter(item, checker, seen))
+  ) {
+    return true;
+  }
+  const arguments_ =
+    type.aliasTypeArguments ??
+    ((type.flags & ts.TypeFlags.Object) !== 0 && (type as ts.ObjectType).objectFlags & ts.ObjectFlags.Reference
+      ? checker.getTypeArguments(type as ts.TypeReference)
+      : []);
+  return arguments_.some((item) => entityFactoryTypeHasEntityTypeParameter(item, checker, seen));
 }
 
 function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpression {
@@ -4574,6 +4636,20 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
 
 type FlightNodeFactoryKind = 'createNode' | 'createNode2D' | 'createNode3D';
 
+const flightNodeFactoryPackage: Record<FlightNodeFactoryKind, string> = {
+  createNode: 'node',
+  createNode2D: 'scene2d',
+  createNode3D: 'scene3d',
+};
+
+function flightNodeFactoryDeclarationKind(node: ts.FunctionDeclaration): FlightNodeFactoryKind | undefined {
+  const name = node.name?.text;
+  if (!name || !['createNode', 'createNode2D', 'createNode3D'].includes(name)) return undefined;
+  const kind = name as FlightNodeFactoryKind;
+  const source = node.getSourceFile().fileName.split(path.sep).join('/');
+  return source.includes(`/upstream/packages/${flightNodeFactoryPackage[kind]}/`) ? kind : undefined;
+}
+
 function flightNodeFactoryCallKind(
   node: ts.CallExpression,
   checker: ts.TypeChecker | undefined,
@@ -4581,17 +4657,9 @@ function flightNodeFactoryCallKind(
   if (!checker) return undefined;
   const symbol = originalSymbolAtLocation(node.expression, checker);
   const declaration = symbol?.valueDeclaration ?? symbol?.declarations?.[0];
-  if (!declaration || !ts.isFunctionDeclaration(declaration) || !declaration.name) return undefined;
-  const name = declaration.name.text;
-  if (!['createNode', 'createNode2D', 'createNode3D'].includes(name)) return undefined;
-  const source = declaration.getSourceFile().fileName.split(path.sep).join('/');
-  const expected =
-    name === 'createNode'
-      ? '/upstream/packages/node/src/node.ts'
-      : name === 'createNode2D'
-        ? '/upstream/packages/scene2d/src/displayObject.ts'
-        : '/upstream/packages/scene3d/src/sceneNode.ts';
-  return source.endsWith(expected) ? (name as FlightNodeFactoryKind) : undefined;
+  return declaration && ts.isFunctionDeclaration(declaration)
+    ? flightNodeFactoryDeclarationKind(declaration)
+    : undefined;
 }
 
 function nodeAllocatorForCall(
@@ -4601,7 +4669,9 @@ function nodeAllocatorForCall(
 ): IrExpression | undefined {
   const checker = context.checker;
   const registry = context.typedStructs;
-  if (!checker || !registry) return undefined;
+  if (!checker || !registry) {
+    throw new Error(`nominal ${kind} call cannot be lowered without typed-struct analysis`);
+  }
   const owner = ts.findAncestor(node.parent, (ancestor): ancestor is ts.FunctionDeclaration =>
     ts.isFunctionDeclaration(ancestor),
   );
@@ -4613,30 +4683,40 @@ function nodeAllocatorForCall(
   ) {
     return { kind: 'identifier', name: '__nodeAllocator' };
   }
-  const destination = entityFactoryDestinationCandidates(node, checker)
-    .map((candidate) => ({ ...candidate, schema: registry.resolveIdentity(candidate.type) }))
+  const destinationTypes = entityFactoryDestinationCandidates(node, checker).map((candidate) => candidate.type);
+  const inferredType = checker.getTypeAtLocation(node);
+  if (!destinationTypes.includes(inferredType)) destinationTypes.push(inferredType);
+  const destination = destinationTypes
+    .map((type) => ({ schema: registry.resolveIdentity(type), type }))
     .find((candidate) => candidate.schema !== undefined && candidate.schema.name !== 'Node');
-  if (!destination?.schema) return undefined;
+  if (!destination?.schema) throw unresolvedNodeAllocator(node, kind, 'no concrete destination identity');
   const construction = registry.resolveFactoryIdentityConstruction(destination.type);
-  return construction ? emptyEntityAllocator({ ...construction, nodeAllocator: true }) : undefined;
+  if (!construction) {
+    throw unresolvedNodeAllocator(node, kind, `destination ${destination.schema.name} has no closed construction`);
+  }
+  return emptyEntityAllocator({ ...construction, nodeAllocator: true });
 }
 
-function nodeAllocatorParameterOwner(node: ts.FunctionDeclaration): boolean {
-  const source = node.getSourceFile().fileName.split(path.sep).join('/');
-  return (
-    (node.name?.text === 'createNode2D' && source.endsWith('/upstream/packages/scene2d/src/displayObject.ts')) ||
-    (node.name?.text === 'createNode3D' && source.endsWith('/upstream/packages/scene3d/src/sceneNode.ts'))
+function unresolvedNodeAllocator(node: ts.CallExpression, kind: FlightNodeFactoryKind, reason: string): Error {
+  const source = node.getSourceFile();
+  const position = source.getLineAndCharacterOfPosition(node.getStart(source));
+  const normalized = source.fileName.split(path.sep).join('/');
+  return new Error(
+    `nominal ${kind} allocator is unresolved at ${normalized}:${String(position.line + 1)}:${String(position.character + 1)} (${reason})`,
   );
 }
 
+function nodeAllocatorParameterOwner(node: ts.FunctionDeclaration): boolean {
+  return ['createNode2D', 'createNode3D'].includes(flightNodeFactoryDeclarationKind(node) ?? '');
+}
+
 function isDirectNodeAllocationObject(node: ts.ObjectLiteralExpression): boolean {
-  const source = node.getSourceFile().fileName.split(path.sep).join('/');
-  if (!source.endsWith('/upstream/packages/node/src/node.ts')) return false;
   const owner = ts.findAncestor(node.parent, (ancestor): ancestor is ts.FunctionDeclaration =>
     ts.isFunctionDeclaration(ancestor),
   );
   return (
-    owner?.name?.text === 'createNode' &&
+    owner !== undefined &&
+    flightNodeFactoryDeclarationKind(owner) === 'createNode' &&
     node.properties.some(
       (property) => 'name' in property && property.name !== undefined && ts.isComputedPropertyName(property.name),
     )

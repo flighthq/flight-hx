@@ -7,17 +7,10 @@ import flight._internal._Runtime;
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
 @:structInit
-class CapacitorShareContentBackend {
-  public var __symbol__EntityRuntime:Null<EntityRuntime>;
-  public var canShareContent:ShareContent->Bool;
-  public var shareContent:ShareContent->CapacitorShareContentOptions->flight._internal._Promise<Bool>;
-  public var shareContentWithResult:ShareContent->CapacitorShareContentOptions->flight._internal._Promise<ShareResult>;
+class CapacitorShareContentBackend extends flight.types.ShareContentBackend<ShareContent->CapacitorShareContentOptions->flight._internal._Promise<Bool>, ShareContent->CapacitorShareContentOptions->flight._internal._Promise<ShareResult>> {
 
   private function new(canShareContent:ShareContent->Bool, shareContent:ShareContent->CapacitorShareContentOptions->flight._internal._Promise<Bool>, shareContentWithResult:ShareContent->CapacitorShareContentOptions->flight._internal._Promise<ShareResult>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.canShareContent = canShareContent;
-    this.shareContent = shareContent;
-    this.shareContentWithResult = shareContentWithResult;
+    super(canShareContent, shareContent, shareContentWithResult);
   }
 }
 #else

@@ -7,9 +7,7 @@ import flight._internal._Runtime;
 #if !flight_struct_typedef
 @:allow(flight._Materials)
 @:structInit
-class TransmissionVolumePbrExtension {
-  public var __symbol__EntityRuntime:Null<EntityRuntime>;
-  public var kind:String;
+class TransmissionVolumePbrExtension extends flight.types.PbrExtension<String> {
   public var attenuationColor:Float;
   public var attenuationDistance:Float;
   public var ior:Float;
@@ -21,8 +19,7 @@ class TransmissionVolumePbrExtension {
   public var transmissionMapUvSet:PbrUvSet;
 
   private function new(kind:String, attenuationColor:Float, attenuationDistance:Float, ior:Float, thickness:Float, thicknessMap:Null<Texture>, thicknessMapUvSet:PbrUvSet, transmission:Float, transmissionMap:Null<Texture>, transmissionMapUvSet:PbrUvSet):Void {
-    this.__symbol__EntityRuntime = null;
-    this.kind = kind;
+    super(kind);
     this.attenuationColor = attenuationColor;
     this.attenuationDistance = attenuationDistance;
     this.ior = ior;

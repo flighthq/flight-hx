@@ -63,6 +63,7 @@ export function applySemanticPatches(
       case 'replaceBody':
         if (declaration.kind !== 'function') throw new Error(`Semantic patch ${patch.id} requires a function`);
         declaration.haxeBody = readFileSync(path.resolve(workspaceDirectory, patch.fragment), 'utf8').trimEnd();
+        declaration.cppStructInitConstructs = patch.constructsCppStructInitTypes;
         break;
       case 'replaceType':
         if (declaration.kind !== 'type') throw new Error(`Semantic patch ${patch.id} requires a type`);
@@ -71,6 +72,9 @@ export function applySemanticPatches(
     }
     applied.push({
       astHash: declaration.origin.fingerprint,
+      ...(patch.operation === 'replaceBody' && patch.constructsCppStructInitTypes
+        ? { constructsCppStructInitTypes: patch.constructsCppStructInitTypes }
+        : {}),
       id: patch.id,
       operation: patch.operation,
       reason: patch.reason,
