@@ -152,7 +152,7 @@ class CoreSmoke {
     if (emittedTuple != '1,2,4') throw 'signal rest arguments failed';
 
     final tweenTarget:{var x:Float;} = {x: 0.0};
-    final tween = flight._Tween.makeTween__tween(
+    final tween = flight._Tween.makeTween(
       tweenTarget,
       1.0,
       cast {x: 2.0},
