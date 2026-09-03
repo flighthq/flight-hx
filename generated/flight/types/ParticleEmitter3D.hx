@@ -4,4 +4,36 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ParticleEmitter3D = { var data:ParticleEmitterData; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<NodeRuntime<Node3DTraits>>; var alpha:Float; var visible:Bool; var position:Vector3; var rotation:Quaternion; var scale:Vector3; var blendMode:ParticleBlendMode; };
+#if !flight_struct_typedef
+@:allow(flight._ParticleEmitter)
+@:structInit
+class ParticleEmitter3D {
+  public var __symbol__EntityRuntime:Null<NodeRuntime<Node3DTraits>>;
+  public var data:ParticleEmitterData;
+  public var enabled:Bool;
+  public var kind:Kind;
+  public var name:Null<String>;
+  public var alpha:Float;
+  public var visible:Bool;
+  public var position:Vector3;
+  public var rotation:Quaternion;
+  public var scale:Vector3;
+  public var blendMode:ParticleBlendMode;
+
+  private function new(data:ParticleEmitterData, enabled:Bool, kind:Kind, name:Null<String>, alpha:Float, visible:Bool, position:Vector3, rotation:Quaternion, scale:Vector3, blendMode:ParticleBlendMode):Void {
+    this.__symbol__EntityRuntime = null;
+    this.data = data;
+    this.enabled = enabled;
+    this.kind = kind;
+    this.name = name;
+    this.alpha = alpha;
+    this.visible = visible;
+    this.position = position;
+    this.rotation = rotation;
+    this.scale = scale;
+    this.blendMode = blendMode;
+  }
+}
+#else
+typedef ParticleEmitter3D = { @:optional var __symbol__EntityRuntime:Null<NodeRuntime<Node3DTraits>>; var data:ParticleEmitterData; var enabled:Bool; var kind:Kind; var name:Null<String>; var alpha:Float; var visible:Bool; var position:Vector3; var rotation:Quaternion; var scale:Vector3; var blendMode:ParticleBlendMode; };
+#end

@@ -4,4 +4,28 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Geometry)
+@:structInit
+class Frustum {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var bottom:Plane;
+  public var far:Plane;
+  public var left:Plane;
+  public var near:Plane;
+  public var right:Plane;
+  public var top:Plane;
+
+  private function new(bottom:Plane, far:Plane, left:Plane, near:Plane, right:Plane, top:Plane):Void {
+    this.__symbol__EntityRuntime = null;
+    this.bottom = bottom;
+    this.far = far;
+    this.left = left;
+    this.near = near;
+    this.right = right;
+    this.top = top;
+  }
+}
+#else
 typedef Frustum = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var bottom:Plane; var far:Plane; var left:Plane; var near:Plane; var right:Plane; var top:Plane; };
+#end

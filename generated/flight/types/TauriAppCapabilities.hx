@@ -4,4 +4,30 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TauriAppCapabilities = flight._internal._Intersection2<Entity, flight._internal._Required<{ @:optional var hide:Null<AppHideBackend>; @:optional var locale:Null<AppLocaleBackend>; @:optional var name:Null<AppNameBackend>; @:optional var quit:Null<AppQuitBackend>; @:optional var relaunch:Null<AppRelaunchBackend>; @:optional var show:Null<AppShowBackend>; @:optional var version:Null<AppVersionBackend>; }>>;
+#if !flight_struct_typedef
+@:allow(flight._HostTauri)
+@:structInit
+class TauriAppCapabilities {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var name:AppNameBackend;
+  public var version:AppVersionBackend;
+  public var hide:AppHideBackend;
+  public var show:AppShowBackend;
+  public var quit:AppQuitBackend;
+  public var locale:AppLocaleBackend;
+  public var relaunch:AppRelaunchBackend;
+
+  private function new(name:AppNameBackend, version:AppVersionBackend, hide:AppHideBackend, show:AppShowBackend, quit:AppQuitBackend, locale:AppLocaleBackend, relaunch:AppRelaunchBackend):Void {
+    this.__symbol__EntityRuntime = null;
+    this.name = name;
+    this.version = version;
+    this.hide = hide;
+    this.show = show;
+    this.quit = quit;
+    this.locale = locale;
+    this.relaunch = relaunch;
+  }
+}
+#else
+typedef TauriAppCapabilities = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var name:AppNameBackend; var version:AppVersionBackend; var hide:AppHideBackend; var show:AppShowBackend; var quit:AppQuitBackend; var locale:AppLocaleBackend; var relaunch:AppRelaunchBackend; };
+#end

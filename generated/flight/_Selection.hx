@@ -244,10 +244,10 @@ class _Selection {
     var runtime:SelectionStateRuntime<NodeType> = cast _Runtime.UNDEFINED;
     var previousActiveNode:Null<NodeType> = cast _Runtime.UNDEFINED;
     runtime = (cast _Selection.getSelectionStateRuntime__selectionState((cast state : Dynamic)) : SelectionStateRuntime<NodeType>);
-    if ((cast ((cast (cast runtime : SelectionStateRuntime<NodeType>).selectedNodeSet : flight._internal._Set<NodeType>).has(node)) : Bool)) { return; }
+    if ((cast ((cast (cast runtime : SelectionStateRuntime<NodeType>).selectedNodeSet : flight._internal._Set<NodeType>).has((cast node))) : Bool)) { return; }
     previousActiveNode = (cast runtime : SelectionStateRuntime<NodeType>).activeNode;
     _Runtime.callProperty((cast runtime : SelectionStateRuntime<NodeType>).selectedNodes, 'push', cast ([node] : Array<Dynamic>));
-    ((cast (cast runtime : SelectionStateRuntime<NodeType>).selectedNodeSet : flight._internal._Set<NodeType>).add(node));
+    ((cast (cast runtime : SelectionStateRuntime<NodeType>).selectedNodeSet : flight._internal._Set<NodeType>).add((cast node)));
     ((cast runtime : SelectionStateRuntime<NodeType>).activeNode = node);
     _Selection.emitSelectionChanges__selectionState((cast runtime : Dynamic), (cast true : Bool), (cast previousActiveNode : Dynamic));
   }
@@ -300,7 +300,7 @@ class _Selection {
   }
 
   public static function isNodeSelected<NodeType:HierarchyNodeAny>(state:SelectionState<NodeType>, node:NodeType):Bool {
-    return cast ((cast (cast (cast _Selection.getSelectionStateRuntime__selectionState((cast state : Dynamic)) : SelectionStateRuntime<NodeType>) : SelectionStateRuntime<NodeType>).selectedNodeSet : flight._internal._Set<NodeType>).has(node));
+    return cast ((cast (cast (cast _Selection.getSelectionStateRuntime__selectionState((cast state : Dynamic)) : SelectionStateRuntime<NodeType>) : SelectionStateRuntime<NodeType>).selectedNodeSet : flight._internal._Set<NodeType>).has((cast node)));
     return cast null;
   }
 
@@ -308,9 +308,9 @@ class _Selection {
     var runtime:SelectionStateRuntime<NodeType> = cast _Runtime.UNDEFINED;
     var previousActiveNode:Null<NodeType> = cast _Runtime.UNDEFINED;
     runtime = (cast _Selection.getSelectionStateRuntime__selectionState((cast state : Dynamic)) : SelectionStateRuntime<NodeType>);
-    if ((cast !(cast ((cast (cast runtime : SelectionStateRuntime<NodeType>).selectedNodeSet : flight._internal._Set<NodeType>).has(node)) : Bool) : Bool)) { return; }
+    if ((cast !(cast ((cast (cast runtime : SelectionStateRuntime<NodeType>).selectedNodeSet : flight._internal._Set<NodeType>).has((cast node))) : Bool) : Bool)) { return; }
     previousActiveNode = (cast runtime : SelectionStateRuntime<NodeType>).activeNode;
-    ((cast (cast runtime : SelectionStateRuntime<NodeType>).selectedNodeSet : flight._internal._Set<NodeType>).delete_(node));
+    ((cast (cast runtime : SelectionStateRuntime<NodeType>).selectedNodeSet : flight._internal._Set<NodeType>).delete_((cast node)));
     _Runtime.splice((cast runtime : SelectionStateRuntime<NodeType>).selectedNodes, Std.int(_Runtime.callProperty((cast runtime : SelectionStateRuntime<NodeType>).selectedNodes, 'indexOf', cast ([node] : Array<Dynamic>))), Std.int(1.0), []);
     if ((cast _Runtime.strictEquals((cast runtime : SelectionStateRuntime<NodeType>).activeNode, node) : Bool)) {
       ((cast runtime : SelectionStateRuntime<NodeType>).activeNode = _Runtime.coalesce(flight._internal._StaticIndex.readArray((cast runtime : SelectionStateRuntime<NodeType>).selectedNodes, _Runtime.subtractNumbers(_Runtime.field((cast runtime : SelectionStateRuntime<NodeType>).selectedNodes, 'length'), 1.0)), function():Dynamic return cast null));
@@ -331,8 +331,8 @@ class _Selection {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(candidates, 'length') : Float)) : Bool)) {
         var candidate:NodeType = flight._internal._StaticIndex.readArray(candidates, i);
-        if ((cast ((cast selectedNodeSet : flight._internal._Set<NodeType>).has(candidate)) : Bool)) { i++; continue; }
-        ((cast selectedNodeSet : flight._internal._Set<NodeType>).add(candidate));
+        if ((cast ((cast selectedNodeSet : flight._internal._Set<NodeType>).has((cast candidate))) : Bool)) { i++; continue; }
+        ((cast selectedNodeSet : flight._internal._Set<NodeType>).add((cast candidate)));
         _Runtime.callProperty(selectedNodes, 'push', cast ([candidate] : Array<Dynamic>));
         i++;
       }

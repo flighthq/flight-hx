@@ -184,7 +184,7 @@ class _EffectsCanvas {
 
   public static function getCanvasBlendEffectBackdrop(state:CanvasRenderState, backdropKey:Null<String>):Null<CanvasRenderTarget> {
     if ((cast _Runtime.strictEquals(backdropKey, null) : Bool)) { return cast null; }
-    return cast _Runtime.coalesce(({ final __collection136:Dynamic = (cast (cast getCanvasRenderStateRuntime(({ final __callArgument134:Dynamic = state; __callArgument134; })) : CanvasRenderStateRuntime) : { @:optional var canvasBlendEffectBackdrops:Null<flight._internal._Map<String, CanvasRenderTarget>>; }).canvasBlendEffectBackdrops; __collection136 == null ? _Runtime.UNDEFINED : ((cast __collection136 : flight._internal._Map<String, CanvasRenderTarget>).get(backdropKey)); }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection136:Dynamic = (cast (cast getCanvasRenderStateRuntime(({ final __callArgument134:Dynamic = state; __callArgument134; })) : CanvasRenderStateRuntime) : { @:optional var canvasBlendEffectBackdrops:Null<flight._internal._Map<String, CanvasRenderTarget>>; }).canvasBlendEffectBackdrops; __collection136 == null ? _Runtime.UNDEFINED : ((cast __collection136 : flight._internal._Map<String, CanvasRenderTarget>).get((cast backdropKey))); }), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -200,11 +200,11 @@ class _EffectsCanvas {
   public static function registerCanvasBlendEffectBackdrop(state:CanvasRenderState, backdropKey:String, target:CanvasRenderTarget):Void {
     var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getCanvasRenderStateRuntime(({ final __callArgument141:Dynamic = state; __callArgument141; })) : CanvasRenderStateRuntime);
-    ((cast ({ final __nullishOwner145 = runtime; final __nullishValue146:Null<flight._internal._Map<String, CanvasRenderTarget>> = cast __nullishOwner145.canvasBlendEffectBackdrops; __nullishValue146 == null ? (__nullishOwner145.canvasBlendEffectBackdrops = (cast _Runtime.construct(flight._internal._HostValueLut.get('Map'), []) : Null<flight._internal._Map<String, CanvasRenderTarget>>)) : (cast __nullishValue146 : Null<flight._internal._Map<String, CanvasRenderTarget>>); }) : flight._internal._Map<Dynamic, Dynamic>).set(backdropKey, (cast target)));
+    ((cast ({ final __nullishOwner145 = runtime; final __nullishValue146:Null<flight._internal._Map<String, CanvasRenderTarget>> = cast __nullishOwner145.canvasBlendEffectBackdrops; __nullishValue146 == null ? (__nullishOwner145.canvasBlendEffectBackdrops = (cast _Runtime.construct(flight._internal._HostValueLut.get('Map'), []) : Null<flight._internal._Map<String, CanvasRenderTarget>>)) : (cast __nullishValue146 : Null<flight._internal._Map<String, CanvasRenderTarget>>); }) : flight._internal._Map<Dynamic, Dynamic>).set((cast backdropKey), (cast target)));
   }
 
   public static function unregisterCanvasBlendEffectBackdrop(state:CanvasRenderState, backdropKey:String):Bool {
-    return cast _Runtime.coalesce(({ final __collection151:Dynamic = (cast (cast getCanvasRenderStateRuntime(({ final __callArgument149:Dynamic = state; __callArgument149; })) : CanvasRenderStateRuntime) : { @:optional var canvasBlendEffectBackdrops:Null<flight._internal._Map<String, CanvasRenderTarget>>; }).canvasBlendEffectBackdrops; __collection151 == null ? _Runtime.UNDEFINED : ((cast __collection151 : flight._internal._Map<String, CanvasRenderTarget>).delete_(backdropKey)); }), function():Dynamic return cast false);
+    return cast _Runtime.coalesce(({ final __collection151:Dynamic = (cast (cast getCanvasRenderStateRuntime(({ final __callArgument149:Dynamic = state; __callArgument149; })) : CanvasRenderStateRuntime) : { @:optional var canvasBlendEffectBackdrops:Null<flight._internal._Map<String, CanvasRenderTarget>>; }).canvasBlendEffectBackdrops; __collection151 == null ? _Runtime.UNDEFINED : ((cast __collection151 : flight._internal._Map<String, CanvasRenderTarget>).delete_((cast backdropKey))); }), function():Dynamic return cast false);
     return cast null;
   }
 
@@ -1298,7 +1298,7 @@ class _EffectsCanvas {
   @:keep
   private static function getCanvasRenderEffectRunner(state:CanvasRenderState, kind:String):Null<CanvasRenderEffectRunner> {
     var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:CanvasRenderEffectRunner; }>> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast (cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument724:Dynamic = state; __callArgument724; })) : CanvasRenderStateRuntime) : { var registries:CanvasRenderRegistries; }).registries : CanvasRenderRegistries).renderEffects : KeyedTable<CanvasRenderEffectRunner>).entries : flight._internal._Map<String, RegistryTableEntry<CanvasRenderEffectRunner>>).get(kind));
+    entry = ((cast (cast (cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument724:Dynamic = state; __callArgument724; })) : CanvasRenderStateRuntime) : { var registries:CanvasRenderRegistries; }).registries : CanvasRenderRegistries).renderEffects : KeyedTable<CanvasRenderEffectRunner>).entries : flight._internal._Map<String, RegistryTableEntry<CanvasRenderEffectRunner>>).get((cast kind)));
     return cast ((cast _Runtime.strictEquals(({ final __structural726 = entry; __structural726 == null ? _Runtime.UNDEFINED : (cast __structural726 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:CanvasRenderEffectRunner; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
@@ -1306,7 +1306,7 @@ class _EffectsCanvas {
   @:allow(flight)
   @:keep
   private static function hasCanvasRenderEffectRunner(state:CanvasRenderState, kind:String):Bool {
-    return cast _Runtime.strictEquals(({ final __structural731 = ((cast (cast (cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument729:Dynamic = state; __callArgument729; })) : CanvasRenderStateRuntime) : { var registries:CanvasRenderRegistries; }).registries : CanvasRenderRegistries).renderEffects : KeyedTable<CanvasRenderEffectRunner>).entries : flight._internal._Map<String, RegistryTableEntry<CanvasRenderEffectRunner>>).get(kind)); __structural731 == null ? _Runtime.UNDEFINED : (cast __structural731 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
+    return cast _Runtime.strictEquals(({ final __structural731 = ((cast (cast (cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument729:Dynamic = state; __callArgument729; })) : CanvasRenderStateRuntime) : { var registries:CanvasRenderRegistries; }).registries : CanvasRenderRegistries).renderEffects : KeyedTable<CanvasRenderEffectRunner>).entries : flight._internal._Map<String, RegistryTableEntry<CanvasRenderEffectRunner>>).get((cast kind))); __structural731 == null ? _Runtime.UNDEFINED : (cast __structural731 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
     return cast null;
   }
 

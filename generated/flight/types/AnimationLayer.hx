@@ -4,4 +4,26 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Animation)
+@:structInit
+class AnimationLayer {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var additive:Bool;
+  public var blendTree:Null<AnimationBlendTree>;
+  public var channelIndices:Null<Array<Float>>;
+  public var stateMachine:Null<AnimationStateMachine>;
+  public var weight:Float;
+
+  private function new(additive:Bool, blendTree:Null<AnimationBlendTree>, channelIndices:Null<Array<Float>>, stateMachine:Null<AnimationStateMachine>, weight:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.additive = additive;
+    this.blendTree = blendTree;
+    this.channelIndices = channelIndices;
+    this.stateMachine = stateMachine;
+    this.weight = weight;
+  }
+}
+#else
 typedef AnimationLayer = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var additive:Bool; var blendTree:Null<AnimationBlendTree>; var channelIndices:Null<Array<Float>>; var stateMachine:Null<AnimationStateMachine>; var weight:Float; };
+#end

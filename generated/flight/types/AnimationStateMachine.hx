@@ -4,4 +4,40 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Animation)
+@:structInit
+class AnimationStateMachine {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var advanceScratch:Array<AnimationPlayer>;
+  public var channels:Array<AnimationStateMachineChannel>;
+  public var currentStateIndex:Float;
+  public var fromSample:flight._internal._Float32Array;
+  public var states:Array<AnimationStateMachineState>;
+  public var toSample:flight._internal._Float32Array;
+  public var transitionCurve:EasingFunction;
+  public var transitionDuration:Float;
+  public var transitionElapsed:Float;
+  public var transitionFromStateIndex:Null<Float>;
+  public var transitionToStateIndex:Null<Float>;
+  public var transitionWeight:Float;
+
+  private function new(advanceScratch:Array<AnimationPlayer>, channels:Array<AnimationStateMachineChannel>, currentStateIndex:Float, fromSample:flight._internal._Float32Array, states:Array<AnimationStateMachineState>, toSample:flight._internal._Float32Array, transitionCurve:EasingFunction, transitionDuration:Float, transitionElapsed:Float, transitionFromStateIndex:Null<Float>, transitionToStateIndex:Null<Float>, transitionWeight:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.advanceScratch = advanceScratch;
+    this.channels = channels;
+    this.currentStateIndex = currentStateIndex;
+    this.fromSample = fromSample;
+    this.states = states;
+    this.toSample = toSample;
+    this.transitionCurve = transitionCurve;
+    this.transitionDuration = transitionDuration;
+    this.transitionElapsed = transitionElapsed;
+    this.transitionFromStateIndex = transitionFromStateIndex;
+    this.transitionToStateIndex = transitionToStateIndex;
+    this.transitionWeight = transitionWeight;
+  }
+}
+#else
 typedef AnimationStateMachine = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var advanceScratch:Array<AnimationPlayer>; var channels:Array<AnimationStateMachineChannel>; var currentStateIndex:Float; var fromSample:flight._internal._Float32Array; var states:Array<AnimationStateMachineState>; var toSample:flight._internal._Float32Array; var transitionCurve:EasingFunction; var transitionDuration:Float; var transitionElapsed:Float; var transitionFromStateIndex:Null<Float>; var transitionToStateIndex:Null<Float>; var transitionWeight:Float; };
+#end

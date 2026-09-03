@@ -5,4 +5,4 @@ import Math as HxMath;
 import flight._internal._Runtime;
 
 @:noCompletion
-typedef CapacitorAndroidAppCapabilities = flight._internal._Intersection2<CapacitorCommonAppCapabilities, flight._internal._Required<{ @:optional var hide:Null<AppHideBackend>; @:optional var quit:Null<AppQuitBackend>; }>>;
+typedef CapacitorAndroidAppCapabilities = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var name:AppNameBackend; var version:AppVersionBackend; var activate:AppActivateBackend; var hide:AppHideBackend; var quit:AppQuitBackend; };

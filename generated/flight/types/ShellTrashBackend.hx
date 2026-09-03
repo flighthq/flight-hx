@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:structInit
+class ShellTrashBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var moveToTrash:String->flight._internal._Promise<ShellTrashOutcome>;
+
+  private function new(moveToTrash:String->flight._internal._Promise<ShellTrashOutcome>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.moveToTrash = moveToTrash;
+  }
+}
+#else
 typedef ShellTrashBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var moveToTrash:String->flight._internal._Promise<ShellTrashOutcome>; };
+#end

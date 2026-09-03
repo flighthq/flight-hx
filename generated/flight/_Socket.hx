@@ -80,7 +80,7 @@ class _Socket {
     }
     if ((cast ((cast _Runtime.strictEquals(runtime.readyState, 'closing') : Bool) || (cast _Runtime.strictEquals(runtime.readyState, 'closed') : Bool)) : Bool)) { return; }
     (runtime.readyState = cast ('closing' : SocketReadyState));
-    ({ final __optionalOwner5 = runtime.connection; if (__optionalOwner5 != null) { final __optionalCall4 = (cast __optionalOwner5 : { var closeSocketConnection:Null<Float>->Null<String>->Void; }).closeSocketConnection; if (__optionalCall4 != null) __optionalCall4(code, reason); } });
+    ({ final __optionalOwner7 = runtime.connection; if (__optionalOwner7 != null) { final __optionalCall6 = (cast __optionalOwner7 : { var closeSocketConnection:Null<Float>->Null<String>->Void; }).closeSocketConnection; if (__optionalCall6 != null) __optionalCall6(({ final __callArgument4:Dynamic = code; __callArgument4; }), ({ final __callArgument5:Dynamic = reason; __callArgument5; })); } });
   }
 
   public static function createSocket(host:HasNetSocket, options:SocketOptions):Socket {
@@ -90,7 +90,7 @@ class _Socket {
     runtime = (cast { connection: null, signals: null, readyState: 'connecting', delivering: true, disposed: false });
     socket = (cast { url: _Runtime.field(options, 'url'), runtime: runtime });
     backend = (cast (cast host : HasNetSocket).net : { var socket:SocketBackend; }).socket;
-    (runtime.connection = cast (((cast _Runtime.strictEquals(backend, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast null : Dynamic) : (cast (cast backend : SocketBackend).openSocket(({ final __callArgument6:Dynamic = options; __callArgument6; }), (cast _Socket.makeSocketEventSink__socket(({ final __callArgument7:Dynamic = runtime; __callArgument7; })) : SocketEventSink)) : Dynamic)) : Null<SocketConnection>));
+    (runtime.connection = cast (((cast _Runtime.strictEquals(backend, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast null : Dynamic) : (cast (cast backend : SocketBackend).openSocket(({ final __callArgument8:Dynamic = options; __callArgument8; }), (cast _Socket.makeSocketEventSink__socket(({ final __callArgument9:Dynamic = runtime; __callArgument9; })) : SocketEventSink)) : Dynamic)) : Null<SocketConnection>));
     if ((cast _Runtime.strictEquals(runtime.connection, null) : Bool)) { _Runtime.callOptionalValue(_Socket._guard__socket, cast ([{ operation: 'createSocket', reason: 'no-connection', socket: socket }] : Array<Dynamic>)); }
     return cast socket;
     return cast null;
@@ -128,8 +128,8 @@ class _Socket {
   public static function disposeSocket(socket:Socket):Void {
     var runtime:SocketRuntime = cast _Runtime.UNDEFINED;
     if ((cast (cast socket.runtime : { var disposed:Bool; }).disposed : Bool)) { return; }
-    (#if js _Runtime.callValue(closeSocket, cast ([({ final __callArgument10:Dynamic = socket; __callArgument10; })] : Array<Dynamic>)) #else closeSocket(({ final __callArgument9:Dynamic = socket; __callArgument9; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    detachSocket(({ final __callArgument11:Dynamic = socket; __callArgument11; }));
+    (#if js _Runtime.callValue(closeSocket, cast ([({ final __callArgument12:Dynamic = socket; __callArgument12; })] : Array<Dynamic>)) #else closeSocket(({ final __callArgument11:Dynamic = socket; __callArgument11; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    detachSocket(({ final __callArgument13:Dynamic = socket; __callArgument13; }));
     runtime = socket.runtime;
     (runtime.connection = cast (null : Null<SocketConnection>));
     (runtime.signals = cast (null : Null<SocketSignals>));
@@ -154,7 +154,7 @@ class _Socket {
   }
 
   public static function openTcpSocket(host:HasNetSocket, options:TcpSocketOptions):Null<TcpSocketConnection> {
-    return cast _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural13 = (cast (cast host : HasNetSocket).net : { var socket:SocketBackend; }).socket; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : SocketBackend).openTcpSocket; }), cast ([options] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural15 = (cast (cast host : HasNetSocket).net : { var socket:SocketBackend; }).socket; __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : SocketBackend).openTcpSocket; }), cast ([options] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -166,7 +166,7 @@ class _Socket {
       return cast false;
     }
     if ((cast ((cast !_Runtime.strictEquals(runtime.readyState, 'open') : Bool) || (cast _Runtime.strictEquals(runtime.connection, null) : Bool)) : Bool)) { return cast false; }
-    return cast (cast runtime.connection : SocketConnection).sendSocketFrame(({ final __callArgument14:Dynamic = data; __callArgument14; }));
+    return cast (cast runtime.connection : SocketConnection).sendSocketFrame(({ final __callArgument16:Dynamic = data; __callArgument16; }));
     return cast null;
   }
 

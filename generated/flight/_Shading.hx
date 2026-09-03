@@ -180,7 +180,7 @@ class _Shading {
   }
 
   public static function isBuiltInModifierSlot(value:String):Bool {
-    return cast ((cast _Shading.BUILT_IN_SLOTS__isBuiltInModifierSlot : flight._internal._Set<String>).has(value));
+    return cast ((cast _Shading.BUILT_IN_SLOTS__isBuiltInModifierSlot : flight._internal._Set<String>).has((cast value)));
     return cast null;
   }
 
@@ -197,11 +197,11 @@ class _Shading {
   }
 
   public static function registerModifier(registry:ModifierRegistry, definition:ModifierDefinition):Void {
-    ((cast _Runtime.field(registry, 'definitions') : flight._internal._Map<String, ModifierDefinition>).set(_Runtime.field(definition, 'kind'), (cast definition)));
+    ((cast _Runtime.field(registry, 'definitions') : flight._internal._Map<String, ModifierDefinition>).set((cast _Runtime.field(definition, 'kind')), (cast definition)));
   }
 
   public static function resolveModifier(registry:ModifierRegistry, kind:ModifierKind):Null<ModifierDefinition> {
-    return cast _Runtime.coalesce(((cast _Runtime.field(registry, 'definitions') : flight._internal._Map<String, ModifierDefinition>).get(kind)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _Runtime.field(registry, 'definitions') : flight._internal._Map<String, ModifierDefinition>).get((cast kind))), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -220,7 +220,7 @@ class _Shading {
 
   public static function getModifierSlotRank__orderModifierStack(slot:ModifierSlot):Float {
     var rank:Null<Float> = cast _Runtime.UNDEFINED;
-    rank = ((cast _Shading.SLOT_RANK__orderModifierStack : flight._internal._Map<String, Float>).get(slot));
+    rank = ((cast _Shading.SLOT_RANK__orderModifierStack : flight._internal._Map<String, Float>).get((cast slot)));
     return cast ((cast !_Runtime.strictEquals(rank, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast rank : Dynamic) : (cast (cast _Shading.SLOT_RANK__orderModifierStack : flight._internal._Map<String, Float>).size : Dynamic));
     return cast null;
   }

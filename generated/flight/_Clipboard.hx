@@ -32,7 +32,7 @@ class _Clipboard {
     change = (cast (cast host : HasClipboardChange).clipboard : { var change:flight._internal._Any; }).change;
     callback = (cast function():Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[watch.onChange]]), 1); });
     _Runtime.callProperty(change, 'subscribe', cast ([callback] : Array<Dynamic>));
-    ((cast _Clipboard._watchSubscriptions__clipboard : flight._internal._Map<ClipboardWatch, { var callback:Void->Void; var change:flight._internal._Any; }>).set(watch, (cast { callback: callback, change: change })));
+    ((cast _Clipboard._watchSubscriptions__clipboard : flight._internal._Map<ClipboardWatch, { var callback:Void->Void; var change:flight._internal._Any; }>).set((cast watch), (cast { callback: callback, change: change })));
   }
 
   public static function clearClipboard(host:HasClipboardText):flight._internal._Promise<Bool> {
@@ -47,10 +47,10 @@ class _Clipboard {
 
   public static function detachClipboardWatch(watch:ClipboardWatch):Void {
     var subscription:Null<{ var callback:Void->Void; var change:flight._internal._Any; }> = cast _Runtime.UNDEFINED;
-    subscription = ((cast _Clipboard._watchSubscriptions__clipboard : flight._internal._Map<ClipboardWatch, { var callback:Void->Void; var change:flight._internal._Any; }>).get(watch));
+    subscription = ((cast _Clipboard._watchSubscriptions__clipboard : flight._internal._Map<ClipboardWatch, { var callback:Void->Void; var change:flight._internal._Any; }>).get((cast watch)));
     if ((cast !_Runtime.strictEquals(subscription, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callProperty((cast subscription : { var callback:Void->Void; var change:flight._internal._Any; }).change, 'unsubscribe', cast ([(cast subscription : { var callback:Void->Void; var change:flight._internal._Any; }).callback] : Array<Dynamic>));
-      ((cast _Clipboard._watchSubscriptions__clipboard : flight._internal._Map<ClipboardWatch, { var callback:Void->Void; var change:flight._internal._Any; }>).delete_(watch));
+      ((cast _Clipboard._watchSubscriptions__clipboard : flight._internal._Map<ClipboardWatch, { var callback:Void->Void; var change:flight._internal._Any; }>).delete_((cast watch)));
     }
   }
 

@@ -33,7 +33,7 @@ class _Screen {
     var unsubscribe:Void->Void = cast _Runtime.UNDEFINED;
     detachScreenPermissionChange(({ final __callArgument0:Dynamic = permissionChange; __callArgument0; }));
     unsubscribe = (cast (cast (cast host : HasScreenPermissionChange).screen : { var permissionChange:ScreenPermissionChangeBackend; }).permissionChange : ScreenPermissionChangeBackend).subscribe(({ final __callArgument2:Dynamic = function(state:ScreenPermissionState):Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast permissionChange : ScreenPermissionChange).onChange], [state]]), 1); }; __callArgument2; }));
-    ((cast _Screen._permissionSubscriptions__screen : flight._internal._WeakMap<ScreenPermissionChange, Void->Void>).set(permissionChange, (cast unsubscribe)));
+    ((cast _Screen._permissionSubscriptions__screen : flight._internal._WeakMap<ScreenPermissionChange, Void->Void>).set((cast permissionChange), (cast unsubscribe)));
   }
 
   public static function attachScreenSignals(host:HasScreenChange, signals:ScreenSignals):Void {
@@ -42,7 +42,7 @@ class _Screen {
     unsubscribe = (cast (cast (cast host : HasScreenChange).screen : { var change:ScreenChangeBackend; }).change : ScreenChangeBackend).subscribe((cast function(event:ScreenChangeEvent):Void {
       if ((cast _Runtime.strictEquals(event.kind, 'ScreenAdded') : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signals.onScreenAdded], [event.screen]]), 1); } else { if ((cast _Runtime.strictEquals(event.kind, 'ScreenRemoved') : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signals.onScreenRemoved], [event.screen]]), 1); } else { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signals.onScreenMetricsChanged], [event]]), 1); } }
     } : Dynamic));
-    ((cast _Screen._signalSubscriptions__screen : flight._internal._WeakMap<ScreenSignals, Void->Void>).set(signals, (cast unsubscribe)));
+    ((cast _Screen._signalSubscriptions__screen : flight._internal._WeakMap<ScreenSignals, Void->Void>).set((cast signals), (cast unsubscribe)));
   }
 
   public static function createScreenInfo():ScreenInfo {
@@ -56,23 +56,23 @@ class _Screen {
   }
 
   public static function createScreenPermissionChange():ScreenPermissionChange {
-    return cast (cast createEntity((cast ({ onChange: (cast createSignal() : Signal<ScreenPermissionState->Void>) } : ScreenPermissionChange) : Dynamic)) : ScreenPermissionChange);
+    return cast (cast createEntity((cast ({ onChange: (cast (cast createSignal() : Signal<ScreenPermissionState->Void>) : Dynamic) } : ScreenPermissionChange) : Dynamic)) : ScreenPermissionChange);
     return cast null;
   }
 
   public static function createScreenSignals():ScreenSignals {
-    return cast (cast createEntity((cast ({ onScreenAdded: (cast createSignal() : Signal<ScreenInfo->Void>), onScreenMetricsChanged: (cast createSignal() : Signal<ScreenChangeEvent->Void>), onScreenRemoved: (cast createSignal() : Signal<ScreenInfo->Void>) } : ScreenSignals) : Dynamic)) : ScreenSignals);
+    return cast (cast createEntity((cast ({ onScreenAdded: (cast (cast createSignal() : Signal<ScreenInfo->Void>) : Dynamic), onScreenMetricsChanged: (cast (cast createSignal() : Signal<ScreenChangeEvent->Void>) : Dynamic), onScreenRemoved: (cast (cast createSignal() : Signal<ScreenInfo->Void>) : Dynamic) } : ScreenSignals) : Dynamic)) : ScreenSignals);
     return cast null;
   }
 
   public static function detachScreenPermissionChange(permissionChange:ScreenPermissionChange):Void {
-    _Runtime.callOptionalValue(((cast _Screen._permissionSubscriptions__screen : flight._internal._WeakMap<ScreenPermissionChange, Void->Void>).get(permissionChange)), cast ([] : Array<Dynamic>));
-    ((cast _Screen._permissionSubscriptions__screen : flight._internal._WeakMap<ScreenPermissionChange, Void->Void>).delete_(permissionChange));
+    _Runtime.callOptionalValue(((cast _Screen._permissionSubscriptions__screen : flight._internal._WeakMap<ScreenPermissionChange, Void->Void>).get((cast permissionChange))), cast ([] : Array<Dynamic>));
+    ((cast _Screen._permissionSubscriptions__screen : flight._internal._WeakMap<ScreenPermissionChange, Void->Void>).delete_((cast permissionChange)));
   }
 
   public static function detachScreenSignals(signals:ScreenSignals):Void {
-    _Runtime.callOptionalValue(((cast _Screen._signalSubscriptions__screen : flight._internal._WeakMap<ScreenSignals, Void->Void>).get(signals)), cast ([] : Array<Dynamic>));
-    ((cast _Screen._signalSubscriptions__screen : flight._internal._WeakMap<ScreenSignals, Void->Void>).delete_(signals));
+    _Runtime.callOptionalValue(((cast _Screen._signalSubscriptions__screen : flight._internal._WeakMap<ScreenSignals, Void->Void>).get((cast signals))), cast ([] : Array<Dynamic>));
+    ((cast _Screen._signalSubscriptions__screen : flight._internal._WeakMap<ScreenSignals, Void->Void>).delete_((cast signals)));
   }
 
   public static function dipToScreenPoint(screen:ScreenInfo, point:Vector2Like, out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {

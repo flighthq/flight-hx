@@ -4,4 +4,88 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Application)
+@:structInit
+class ApplicationWindow {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var title:String;
+  public var x:Float;
+  public var y:Float;
+  public var width:Float;
+  public var height:Float;
+  public var devicePixelRatio:Float;
+  public var minimized:Bool;
+  public var maximized:Bool;
+  public var fullscreen:Bool;
+  public var focused:Bool;
+  public var visible:Bool;
+  public var resizable:Bool;
+  public var alwaysOnTop:Bool;
+  public var skipTaskbar:Bool;
+  public var opacity:Float;
+  public var icon:String;
+  public var minWidth:Float;
+  public var minHeight:Float;
+  public var maxWidth:Float;
+  public var maxHeight:Float;
+  public var onActivate:Signal<Void->Void>;
+  public var onClose:Signal<Void->Void>;
+  public var onCloseRequest:Signal<Void->Void>;
+  public var onDeactivate:Signal<Void->Void>;
+  public var onDropFile:Signal<String->Void>;
+  public var onFocusIn:Signal<Void->Void>;
+  public var onFocusOut:Signal<Void->Void>;
+  public var onFullscreenChanged:Signal<Void->Void>;
+  public var onMaximize:Signal<Void->Void>;
+  public var onMinimize:Signal<Void->Void>;
+  public var onMove:Signal<Void->Void>;
+  public var onOrientationChanged:Signal<Void->Void>;
+  public var onRenderContextLost:Signal<Void->Void>;
+  public var onRenderContextRestored:Signal<Void->Void>;
+  public var onResize:Signal<Void->Void>;
+  public var onRestore:Signal<Void->Void>;
+
+  private function new(title:String, x:Float, y:Float, width:Float, height:Float, devicePixelRatio:Float, minimized:Bool, maximized:Bool, fullscreen:Bool, focused:Bool, visible:Bool, resizable:Bool, alwaysOnTop:Bool, skipTaskbar:Bool, opacity:Float, icon:String, minWidth:Float, minHeight:Float, maxWidth:Float, maxHeight:Float, onActivate:Signal<Void->Void>, onClose:Signal<Void->Void>, onCloseRequest:Signal<Void->Void>, onDeactivate:Signal<Void->Void>, onDropFile:Signal<String->Void>, onFocusIn:Signal<Void->Void>, onFocusOut:Signal<Void->Void>, onFullscreenChanged:Signal<Void->Void>, onMaximize:Signal<Void->Void>, onMinimize:Signal<Void->Void>, onMove:Signal<Void->Void>, onOrientationChanged:Signal<Void->Void>, onRenderContextLost:Signal<Void->Void>, onRenderContextRestored:Signal<Void->Void>, onResize:Signal<Void->Void>, onRestore:Signal<Void->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.title = title;
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.devicePixelRatio = devicePixelRatio;
+    this.minimized = minimized;
+    this.maximized = maximized;
+    this.fullscreen = fullscreen;
+    this.focused = focused;
+    this.visible = visible;
+    this.resizable = resizable;
+    this.alwaysOnTop = alwaysOnTop;
+    this.skipTaskbar = skipTaskbar;
+    this.opacity = opacity;
+    this.icon = icon;
+    this.minWidth = minWidth;
+    this.minHeight = minHeight;
+    this.maxWidth = maxWidth;
+    this.maxHeight = maxHeight;
+    this.onActivate = onActivate;
+    this.onClose = onClose;
+    this.onCloseRequest = onCloseRequest;
+    this.onDeactivate = onDeactivate;
+    this.onDropFile = onDropFile;
+    this.onFocusIn = onFocusIn;
+    this.onFocusOut = onFocusOut;
+    this.onFullscreenChanged = onFullscreenChanged;
+    this.onMaximize = onMaximize;
+    this.onMinimize = onMinimize;
+    this.onMove = onMove;
+    this.onOrientationChanged = onOrientationChanged;
+    this.onRenderContextLost = onRenderContextLost;
+    this.onRenderContextRestored = onRenderContextRestored;
+    this.onResize = onResize;
+    this.onRestore = onRestore;
+  }
+}
+#else
 typedef ApplicationWindow = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var title:String; var x:Float; var y:Float; var width:Float; var height:Float; var devicePixelRatio:Float; var minimized:Bool; var maximized:Bool; var fullscreen:Bool; var focused:Bool; var visible:Bool; var resizable:Bool; var alwaysOnTop:Bool; var skipTaskbar:Bool; var opacity:Float; var icon:String; var minWidth:Float; var minHeight:Float; var maxWidth:Float; var maxHeight:Float; var onActivate:Signal<Void->Void>; var onClose:Signal<Void->Void>; var onCloseRequest:Signal<Void->Void>; var onDeactivate:Signal<Void->Void>; var onDropFile:Signal<String->Void>; var onFocusIn:Signal<Void->Void>; var onFocusOut:Signal<Void->Void>; var onFullscreenChanged:Signal<Void->Void>; var onMaximize:Signal<Void->Void>; var onMinimize:Signal<Void->Void>; var onMove:Signal<Void->Void>; var onOrientationChanged:Signal<Void->Void>; var onRenderContextLost:Signal<Void->Void>; var onRenderContextRestored:Signal<Void->Void>; var onResize:Signal<Void->Void>; var onRestore:Signal<Void->Void>; };
+#end

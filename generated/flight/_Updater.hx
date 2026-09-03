@@ -52,7 +52,7 @@ class _Updater {
               __flowBranch1 = flight._internal._Async.protect(function():Dynamic {
                 return flight._internal._Async.continueFlow(flight._internal._Async.protect(function():Dynamic {
                   var existingOwner:Null<UpdaterCommandBackend> = cast _Runtime.UNDEFINED;
-                  existingOwner = ((cast _Updater._downloadOwners__updater : flight._internal._WeakMap<DownloadedUpdate, UpdaterCommandBackend>).get((cast outcome : { var reason:String; var update:DownloadedUpdate; }).update));
+                  existingOwner = ((cast _Updater._downloadOwners__updater : flight._internal._WeakMap<DownloadedUpdate, UpdaterCommandBackend>).get((cast (cast outcome : { var reason:String; var update:DownloadedUpdate; }).update)));
                   var __flowBranch2:Dynamic;
                   if ((cast ((cast !_Runtime.strictEquals(existingOwner, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(existingOwner, provider) : Bool)) : Bool)) {
                     __flowBranch2 = flight._internal._Async.protect(function():Dynamic {
@@ -62,7 +62,7 @@ class _Updater {
                     __flowBranch2 = flight._internal._Async.flowNormal();
                   }
                   return flight._internal._Async.continueFlow(__flowBranch2, function():Dynamic {
-                    ((cast _Updater._downloadOwners__updater : flight._internal._WeakMap<DownloadedUpdate, UpdaterCommandBackend>).set((cast outcome : { var reason:String; var update:DownloadedUpdate; }).update, (cast provider)));
+                    ((cast _Updater._downloadOwners__updater : flight._internal._WeakMap<DownloadedUpdate, UpdaterCommandBackend>).set((cast (cast outcome : { var reason:String; var update:DownloadedUpdate; }).update), (cast provider)));
                     return flight._internal._Async.flowReturn(flight._internal.DynamicObject.freeze({ reason: 'downloaded', update: (cast outcome : { var reason:String; var update:DownloadedUpdate; }).update }));
                   });
                 }), function():Dynamic {
@@ -99,7 +99,7 @@ class _Updater {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var origin:Null<UpdaterCommandBackend> = cast _Runtime.UNDEFINED;
-        origin = ((cast _Updater._downloadOwners__updater : flight._internal._WeakMap<DownloadedUpdate, UpdaterCommandBackend>).get(update));
+        origin = ((cast _Updater._downloadOwners__updater : flight._internal._WeakMap<DownloadedUpdate, UpdaterCommandBackend>).get((cast update)));
         var __flowBranch5:Dynamic;
         if ((cast _Runtime.strictEquals(origin, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           __flowBranch5 = flight._internal._Async.protect(function():Dynamic {
@@ -123,7 +123,7 @@ class _Updater {
                   __flowBranch7 = flight._internal._Async.flowNormal();
                 }
                 return flight._internal._Async.continueFlow(__flowBranch7, function():Dynamic {
-                  ((cast _Updater._downloadOwners__updater : flight._internal._WeakMap<DownloadedUpdate, UpdaterCommandBackend>).delete_(update));
+                  ((cast _Updater._downloadOwners__updater : flight._internal._WeakMap<DownloadedUpdate, UpdaterCommandBackend>).delete_((cast update)));
                   return flight._internal._Async.flowReturn(_Updater.INSTALL_OK__updater);
                 });
               });
@@ -139,7 +139,7 @@ class _Updater {
                   __flowBranch10 = flight._internal._Async.flowNormal();
                 }
                 return flight._internal._Async.continueFlow(__flowBranch10, function():Dynamic {
-                  ((cast _Updater._downloadOwners__updater : flight._internal._WeakMap<DownloadedUpdate, UpdaterCommandBackend>).delete_(update));
+                  ((cast _Updater._downloadOwners__updater : flight._internal._WeakMap<DownloadedUpdate, UpdaterCommandBackend>).delete_((cast update)));
                   return flight._internal._Async.flowReturn(_Updater.INSTALL_OK__updater);
                 });
               });

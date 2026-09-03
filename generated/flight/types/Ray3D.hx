@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Geometry)
+@:structInit
+class Ray3D {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var direction:Vector3;
+  public var origin:Vector3;
+
+  private function new(direction:Vector3, origin:Vector3):Void {
+    this.__symbol__EntityRuntime = null;
+    this.direction = direction;
+    this.origin = origin;
+  }
+}
+#else
 typedef Ray3D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var direction:Vector3; var origin:Vector3; };
+#end

@@ -4,4 +4,36 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Texture)
+@:structInit
+class Texture2D {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var flipX:Bool;
+  public var flipY:Bool;
+  public var uvOffset:Vector2;
+  public var uvRotation:Float;
+  public var uvScale:Vector2;
+  public var colorSpace:TextureColorSpace;
+  public var sampler:Sampler;
+  public var version:Float;
+  public var dimension:String;
+  public var source:Null<TextureSource>;
+
+  private function new(flipX:Bool, flipY:Bool, uvOffset:Vector2, uvRotation:Float, uvScale:Vector2, colorSpace:TextureColorSpace, sampler:Sampler, version:Float, dimension:String, source:Null<TextureSource>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.flipX = flipX;
+    this.flipY = flipY;
+    this.uvOffset = uvOffset;
+    this.uvRotation = uvRotation;
+    this.uvScale = uvScale;
+    this.colorSpace = colorSpace;
+    this.sampler = sampler;
+    this.version = version;
+    this.dimension = dimension;
+    this.source = source;
+  }
+}
+#else
 typedef Texture2D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var dimension:String; var source:Null<TextureSource>; };
+#end

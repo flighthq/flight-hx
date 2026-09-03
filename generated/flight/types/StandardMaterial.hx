@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Materials)
+@:structInit
+class StandardMaterial {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var kind:StandardMaterialKind;
+  public var name:Null<String>;
+
+  private function new(kind:StandardMaterialKind, name:Null<String>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.kind = kind;
+    this.name = name;
+  }
+}
+#else
 typedef StandardMaterial = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:StandardMaterialKind; @:optional var name:Null<String>; };
+#end

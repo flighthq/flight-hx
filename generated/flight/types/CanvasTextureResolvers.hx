@@ -4,4 +4,26 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Scene2DCanvas)
+@:structInit
+class CanvasTextureResolvers {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var surfaceCreator:CanvasRenderSurfaceCreator;
+  public var registry:Null<flight._internal._Map<TextureSourceKind, CanvasTextureResolver>>;
+  public var bitmapElementCache:flight._internal._WeakMap<Bitmap, { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }>;
+  public var textureWindowElementCache:flight._internal._WeakMap<Texture, { var element:flight._internal.dom.HTMLCanvasElement; var surface:CanvasRenderSurface; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flight._internal.dom.CanvasImageSource; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }>;
+  public var registryMiss:Null<RenderRegistry->Kind->Void>;
+
+  private function new(surfaceCreator:CanvasRenderSurfaceCreator, registry:Null<flight._internal._Map<TextureSourceKind, CanvasTextureResolver>>, bitmapElementCache:flight._internal._WeakMap<Bitmap, { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }>, textureWindowElementCache:flight._internal._WeakMap<Texture, { var element:flight._internal.dom.HTMLCanvasElement; var surface:CanvasRenderSurface; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flight._internal.dom.CanvasImageSource; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }>, registryMiss:Null<RenderRegistry->Kind->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.surfaceCreator = surfaceCreator;
+    this.registry = registry;
+    this.bitmapElementCache = bitmapElementCache;
+    this.textureWindowElementCache = textureWindowElementCache;
+    this.registryMiss = registryMiss;
+  }
+}
+#else
 typedef CanvasTextureResolvers = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var surfaceCreator:CanvasRenderSurfaceCreator; @:optional var registry:Null<flight._internal._Map<TextureSourceKind, CanvasTextureResolver>>; @:optional var bitmapElementCache:flight._internal._WeakMap<Bitmap, { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }>; @:optional var textureWindowElementCache:flight._internal._WeakMap<Texture, { var element:flight._internal.dom.HTMLCanvasElement; var surface:CanvasRenderSurface; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flight._internal.dom.CanvasImageSource; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }>; @:optional var registryMiss:Null<RenderRegistry->Kind->Void>; };
+#end

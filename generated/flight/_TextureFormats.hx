@@ -207,8 +207,8 @@ class _TextureFormats {
     log2Height = flight._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flight._internal._UInt8Array), (cast (headerOffset + 2.0) : Float));
     mipCount = flight._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flight._internal._UInt8Array), (cast (headerOffset + 3.0) : Float));
     formatCode = (_Runtime.toInt32(typeFormatByte) & _Runtime.toInt32(_TextureFormats.atfFormatCodeMask__parseAtf));
-    alpha = ((cast _TextureFormats.atfAlphaFormatCodes__parseAtf : flight._internal._Set<Float>).has(formatCode));
-    if ((cast ((cast !(cast alpha : Bool) : Bool) && (cast !(cast ((cast _TextureFormats.atfOpaqueFormatCodes__parseAtf : flight._internal._Set<Float>).has(formatCode)) : Bool) : Bool)) : Bool)) {
+    alpha = ((cast _TextureFormats.atfAlphaFormatCodes__parseAtf : flight._internal._Set<Float>).has((cast formatCode)));
+    if ((cast ((cast !(cast alpha : Bool) : Bool) && (cast !(cast ((cast _TextureFormats.atfOpaqueFormatCodes__parseAtf : flight._internal._Set<Float>).has((cast formatCode))) : Bool) : Bool)) : Bool)) {
       return cast (cast _TextureFormats.reject__parseAtf((cast failure : Dynamic), ({ final __callArgument32:Dynamic = 'format-unsupported'; __callArgument32; })) : Null<Array<TextureContainer>>);
     }
     if ((cast ((cast ((cast log2Width : Float) > (cast _TextureFormats.atfMaxLog2Dimension__parseAtf : Float)) : Bool) || (cast ((cast log2Height : Float) > (cast _TextureFormats.atfMaxLog2Dimension__parseAtf : Float)) : Bool)) : Bool)) {

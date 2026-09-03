@@ -275,7 +275,7 @@ private class EntityShapeL53C24__capacitorApp {
 private typedef EntityShapeL53C24__capacitorApp = { var quit:Void->flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
-typedef CapacitorClipboardBackend__capacitorClipboard = { >ClipboardImageBackend, >ClipboardTextBackend, };
+typedef CapacitorClipboardBackend__capacitorClipboard = { var hasImage:Void->flight._internal._Promise<Bool>; var readImage:Void->flight._internal._Promise<String>; var writeImage:String->flight._internal._Promise<Bool>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var clear:Void->flight._internal._Promise<Bool>; var hasText:Void->flight._internal._Promise<Bool>; var readText:Void->flight._internal._Promise<String>; var writeText:String->flight._internal._Promise<Bool>; };
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
@@ -305,7 +305,7 @@ private class EntityShapeL15C23__capacitorClipboard {
 private typedef EntityShapeL15C23__capacitorClipboard = { var readText:Void->flight._internal._Promise<String>; var writeText:String->flight._internal._Promise<Bool>; var hasText:Void->flight._internal._Promise<Bool>; var readImage:Void->flight._internal._Promise<String>; var writeImage:String->flight._internal._Promise<Bool>; var hasImage:Void->flight._internal._Promise<Bool>; var clear:Void->flight._internal._Promise<Bool>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
-typedef CapacitorConnectivityBackend__capacitorConnectivity = { >ConnectivityStatusBackend, >ConnectivityChangeBackend, };
+typedef CapacitorConnectivityBackend__capacitorConnectivity = { var getStatus:ConnectivityStatus->ConnectivityStatus; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var destroy:Void->Void; var subscribe:(Void->Void)->Null<Void->Void>; };
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
@@ -695,19 +695,19 @@ class _HostCapacitor {
     }] : Array<Dynamic>)), function(__unused0:flight._internal._Any):Void {
 
     }));
-    common = (cast createEntity((cast ({ activate: (cast createEntity(({ final __callArgument18:Dynamic = ({ subscribe: function(listener:Void->Void):Void->Void return (cast _HostCapacitor.toCapacitorUnsubscribe__capacitorApp((cast capacitor.app : CapacitorAppPlugin).addListener((cast 'appStateChange' : String), ({ final __callArgument16:Dynamic = function(state:{ var isActive:Bool; }):Void {
+    common = (cast createEntity((cast ({ activate: (cast (cast createEntity(({ final __callArgument18:Dynamic = ({ subscribe: (cast function(listener:Void->Void):Void->Void return (cast _HostCapacitor.toCapacitorUnsubscribe__capacitorApp((cast capacitor.app : CapacitorAppPlugin).addListener((cast 'appStateChange' : String), ({ final __callArgument16:Dynamic = function(state:{ var isActive:Bool; }):Void {
       if ((cast (cast state : { var isActive:Bool; }).isActive : Bool)) { listener(); }
-    }; __callArgument16; }))) : Void->Void) } : EntityShapeL38C28__capacitorApp); __callArgument18; })) : EntityShapeL38C28__capacitorApp), name: (cast createEntity(({ final __callArgument24:Dynamic = ({ getName: function():String return name } : EntityShapeL46C24__capacitorApp); __callArgument24; })) : EntityShapeL46C24__capacitorApp), version: (cast createEntity(({ final __callArgument26:Dynamic = ({ getVersion: function():String return version } : EntityShapeL47C27__capacitorApp); __callArgument26; })) : EntityShapeL47C27__capacitorApp) } : CapacitorCommonAppCapabilities) : Dynamic)) : CapacitorCommonAppCapabilities);
+    }; __callArgument16; }))) : Void->Void) : Dynamic) } : EntityShapeL38C28__capacitorApp); __callArgument18; })) : EntityShapeL38C28__capacitorApp) : Dynamic), name: (cast (cast createEntity(({ final __callArgument24:Dynamic = ({ getName: (cast function():String return name : Dynamic) } : EntityShapeL46C24__capacitorApp); __callArgument24; })) : EntityShapeL46C24__capacitorApp) : Dynamic), version: (cast (cast createEntity(({ final __callArgument26:Dynamic = ({ getVersion: (cast function():String return version : Dynamic) } : EntityShapeL47C27__capacitorApp); __callArgument26; })) : EntityShapeL47C27__capacitorApp) : Dynamic) } : CapacitorCommonAppCapabilities) : Dynamic)) : CapacitorCommonAppCapabilities);
     if ((cast _Runtime.strictEquals(profile, 'ios') : Bool)) { return cast common; }
-    return cast (cast createEntity((cast (#if flight_struct_typedef _Runtime.mergeObjects([common, { hide: (cast createEntity(({ final __callArgument56:Dynamic = ({ hideApp: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast capacitor.app : CapacitorAppPlugin).minimizeApp(), function(__unused1:flight._internal._Any):Void {
+    return cast (cast createEntity((cast (#if flight_struct_typedef _Runtime.mergeObjects([common, { hide: (cast createEntity(({ final __callArgument56:Dynamic = ({ hideApp: (cast function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast capacitor.app : CapacitorAppPlugin).minimizeApp(), function(__unused1:flight._internal._Any):Void {
 
-    })) } : EntityShapeL52C24__capacitorApp); __callArgument56; })) : EntityShapeL52C24__capacitorApp) }, { quit: (cast createEntity(({ final __callArgument58:Dynamic = ({ quit: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast capacitor.app : CapacitorAppPlugin).exitApp(), function(__unused2:flight._internal._Any):Void {
+    })) : Dynamic) } : EntityShapeL52C24__capacitorApp); __callArgument56; })) : EntityShapeL52C24__capacitorApp) }, { quit: (cast createEntity(({ final __callArgument58:Dynamic = ({ quit: (cast function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast capacitor.app : CapacitorAppPlugin).exitApp(), function(__unused2:flight._internal._Any):Void {
 
-    })) } : EntityShapeL53C24__capacitorApp); __callArgument58; })) : EntityShapeL53C24__capacitorApp) }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([common, { hide: (cast createEntity(({ final __callArgument56:Dynamic = ({ hideApp: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast capacitor.app : CapacitorAppPlugin).minimizeApp(), function(__unused1:flight._internal._Any):Void {
+    })) : Dynamic) } : EntityShapeL53C24__capacitorApp); __callArgument58; })) : EntityShapeL53C24__capacitorApp) }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([common, { hide: (cast createEntity(({ final __callArgument56:Dynamic = ({ hideApp: (cast function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast capacitor.app : CapacitorAppPlugin).minimizeApp(), function(__unused1:flight._internal._Any):Void {
 
-    })) } : EntityShapeL52C24__capacitorApp); __callArgument56; })) : EntityShapeL52C24__capacitorApp) }, { quit: (cast createEntity(({ final __callArgument58:Dynamic = ({ quit: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast capacitor.app : CapacitorAppPlugin).exitApp(), function(__unused2:flight._internal._Any):Void {
+    })) : Dynamic) } : EntityShapeL52C24__capacitorApp); __callArgument56; })) : EntityShapeL52C24__capacitorApp) }, { quit: (cast createEntity(({ final __callArgument58:Dynamic = ({ quit: (cast function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast capacitor.app : CapacitorAppPlugin).exitApp(), function(__unused2:flight._internal._Any):Void {
 
-    })) } : EntityShapeL53C24__capacitorApp); __callArgument58; })) : EntityShapeL53C24__capacitorApp) }]); ({ hide: _Runtime.field(__structInitSource, 'hide'), quit: _Runtime.field(__structInitSource, 'quit'), name: _Runtime.field(__structInitSource, 'name'), version: _Runtime.field(__structInitSource, 'version'), activate: _Runtime.field(__structInitSource, 'activate') } : EntityShapeL50C23__capacitorApp); }) #end) : Dynamic)) : EntityShapeL50C23__capacitorApp);
+    })) : Dynamic) } : EntityShapeL53C24__capacitorApp); __callArgument58; })) : EntityShapeL53C24__capacitorApp) }]); ({ hide: _Runtime.field(__structInitSource, 'hide'), quit: _Runtime.field(__structInitSource, 'quit'), name: _Runtime.field(__structInitSource, 'name'), version: _Runtime.field(__structInitSource, 'version'), activate: _Runtime.field(__structInitSource, 'activate') } : EntityShapeL50C23__capacitorApp); }) #end) : Dynamic)) : EntityShapeL50C23__capacitorApp);
     return cast null;
   }
 
@@ -736,7 +736,7 @@ class _HostCapacitor {
   public static function createCapacitorClipboardBackend(capacitor:CapacitorApi):CapacitorClipboardBackend__capacitorClipboard {
     var clipboard:CapacitorClipboardPlugin = cast _Runtime.UNDEFINED;
     clipboard = capacitor.clipboard;
-    return cast (cast createEntity(({ final __callArgument84:Dynamic = ({ readText: function():flight._internal._Promise<String> {
+    return cast (cast createEntity(({ final __callArgument84:Dynamic = ({ readText: (cast function():flight._internal._Promise<String> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -755,7 +755,7 @@ class _HostCapacitor {
           });
         })
       );
-    }, writeText: function(text:String):flight._internal._Promise<Bool> {
+    } : Dynamic), writeText: (cast function(text:String):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -773,7 +773,7 @@ class _HostCapacitor {
           });
         })
       );
-    }, hasText: function():flight._internal._Promise<Bool> {
+    } : Dynamic), hasText: (cast function():flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -792,7 +792,7 @@ class _HostCapacitor {
           });
         })
       );
-    }, readImage: function():flight._internal._Promise<String> {
+    } : Dynamic), readImage: (cast function():flight._internal._Promise<String> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -811,7 +811,7 @@ class _HostCapacitor {
           });
         })
       );
-    }, writeImage: function(dataUrl:String):flight._internal._Promise<Bool> {
+    } : Dynamic), writeImage: (cast function(dataUrl:String):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -829,7 +829,7 @@ class _HostCapacitor {
           });
         })
       );
-    }, hasImage: function():flight._internal._Promise<Bool> {
+    } : Dynamic), hasImage: (cast function():flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -846,7 +846,7 @@ class _HostCapacitor {
           });
         })
       );
-    }, clear: function():flight._internal._Promise<Bool> {
+    } : Dynamic), clear: (cast function():flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -864,7 +864,7 @@ class _HostCapacitor {
           });
         })
       );
-    } } : EntityShapeL15C23__capacitorClipboard); __callArgument84; })) : EntityShapeL15C23__capacitorClipboard);
+    } : Dynamic) } : EntityShapeL15C23__capacitorClipboard); __callArgument84; })) : EntityShapeL15C23__capacitorClipboard);
     return cast null;
   }
 
@@ -921,27 +921,27 @@ class _HostCapacitor {
     }] : Array<Dynamic>)), function(__unused2:flight._internal._Any):Void {
 
     });
-    return cast (cast createEntity(({ final __callArgument138:Dynamic = ({ destroy: function():Void {
+    return cast (cast createEntity(({ final __callArgument138:Dynamic = ({ destroy: (cast function():Void {
       if ((cast destroyed : Bool)) { return; }
       (destroyed = cast (true : Dynamic));
       ((cast subscribers : flight._internal._Set<Void->Void>).clear());
       removeHandle();
-    }, getStatus: function(out:ConnectivityStatus):ConnectivityStatus {
+    } : Dynamic), getStatus: (cast function(out:ConnectivityStatus):ConnectivityStatus {
       _HostCapacitor.copyStatus__capacitorConnectivity(({ final __callArgument134:Dynamic = out; __callArgument134; }), ({ final __callArgument135:Dynamic = mirror; __callArgument135; }));
       return cast out;
       return cast _Runtime.UNDEFINED;
-    }, subscribe: function(listener:Void->Void):Null<Void->Void> {
+    } : Dynamic), subscribe: (cast function(listener:Void->Void):Null<Void->Void> {
       var active:Bool = cast _Runtime.UNDEFINED;
       if ((cast destroyed : Bool)) { return cast null; }
-      ((cast subscribers : flight._internal._Set<Void->Void>).add(listener));
+      ((cast subscribers : flight._internal._Set<Void->Void>).add((cast listener)));
       active = true;
       return cast function():Void {
         if ((cast !(cast active : Bool) : Bool)) { return; }
         (active = cast (false : Dynamic));
-        ((cast subscribers : flight._internal._Set<Void->Void>).delete_(listener));
+        ((cast subscribers : flight._internal._Set<Void->Void>).delete_((cast listener)));
       };
       return cast _Runtime.UNDEFINED;
-    } } : EntityShapeL70C23__capacitorConnectivity); __callArgument138; })) : EntityShapeL70C23__capacitorConnectivity);
+    } : Dynamic) } : EntityShapeL70C23__capacitorConnectivity); __callArgument138; })) : EntityShapeL70C23__capacitorConnectivity);
     return cast null;
   }
 
@@ -986,13 +986,13 @@ class _HostCapacitor {
     }] : Array<Dynamic>)), function(__unused1:flight._internal._Any):Void {
 
     });
-    return cast (cast (cast createEntity : Null<{ var getCapabilities:DeviceCapabilities->DeviceCapabilities; var getDisplayMetrics:DeviceDisplayMetrics->DeviceDisplayMetrics; var getId:Void->String; var getInfo:DeviceInfo->DeviceInfo; var getSafeAreaInsets:SafeAreaInsets->SafeAreaInsets; }>->{ >Entity, var getCapabilities:DeviceCapabilities->DeviceCapabilities; var getDisplayMetrics:DeviceDisplayMetrics->DeviceDisplayMetrics; var getId:Void->String; var getInfo:DeviceInfo->DeviceInfo; var getSafeAreaInsets:SafeAreaInsets->SafeAreaInsets; })(({ final __callArgument170:Dynamic = ({ getCapabilities: function(out:DeviceCapabilities):DeviceCapabilities {
+    return cast (cast (cast createEntity : Null<{ var getCapabilities:DeviceCapabilities->DeviceCapabilities; var getDisplayMetrics:DeviceDisplayMetrics->DeviceDisplayMetrics; var getId:Void->String; var getInfo:DeviceInfo->DeviceInfo; var getSafeAreaInsets:SafeAreaInsets->SafeAreaInsets; }>->{ >Entity, var getCapabilities:DeviceCapabilities->DeviceCapabilities; var getDisplayMetrics:DeviceDisplayMetrics->DeviceDisplayMetrics; var getId:Void->String; var getInfo:DeviceInfo->DeviceInfo; var getSafeAreaInsets:SafeAreaInsets->SafeAreaInsets; })(({ final __callArgument170:Dynamic = ({ getCapabilities: (cast function(out:DeviceCapabilities):DeviceCapabilities {
       (out.hasKeyboard = cast (false : Bool));
       (out.hasMouse = cast (false : Bool));
       (out.hasStylus = cast (false : Bool));
       return cast out;
       return cast _Runtime.UNDEFINED;
-    }, getDisplayMetrics: function(out:DeviceDisplayMetrics):DeviceDisplayMetrics {
+    } : Dynamic), getDisplayMetrics: (cast function(out:DeviceDisplayMetrics):DeviceDisplayMetrics {
       (out.colorDepth = cast (-1.0 : Float));
       (out.densityDpi = cast (-1.0 : Float));
       (out.logicalHeight = cast (-1.0 : Float));
@@ -1002,10 +1002,10 @@ class _HostCapacitor {
       (out.pixelRatio = cast (-1.0 : Float));
       return cast out;
       return cast _Runtime.UNDEFINED;
-    }, getId: function():String {
+    } : Dynamic), getId: (cast function():String {
       return cast cachedId;
       return cast _Runtime.UNDEFINED;
-    }, getInfo: function(out:DeviceInfo):DeviceInfo {
+    } : Dynamic), getInfo: (cast function(out:DeviceInfo):DeviceInfo {
       var info:Null<CapacitorDeviceInfo> = cast _Runtime.UNDEFINED;
       info = cachedInfo;
       (out.arch = cast ('' : String));
@@ -1035,14 +1035,14 @@ class _HostCapacitor {
       (out.webViewVersion = cast (_Runtime.coalesce(({ final __typedStruct169 = info; __typedStruct169 == null ? _Runtime.UNDEFINED : (cast __typedStruct169 : { var webViewVersion:String; }).webViewVersion; }), function():Dynamic return cast '') : String));
       return cast out;
       return cast _Runtime.UNDEFINED;
-    }, getSafeAreaInsets: function(out:SafeAreaInsets):SafeAreaInsets {
+    } : Dynamic), getSafeAreaInsets: (cast function(out:SafeAreaInsets):SafeAreaInsets {
       (out.top = cast (0.0 : Float));
       (out.right = cast (0.0 : Float));
       (out.bottom = cast (0.0 : Float));
       (out.left = cast (0.0 : Float));
       return cast out;
       return cast _Runtime.UNDEFINED;
-    } } : EntityShapeL42C23__capacitorDevice); __callArgument170; })) : EntityShapeL42C23__capacitorDevice);
+    } : Dynamic) } : EntityShapeL42C23__capacitorDevice); __callArgument170; })) : EntityShapeL42C23__capacitorDevice);
     return cast null;
   }
 
@@ -1056,7 +1056,7 @@ class _HostCapacitor {
   public static function createCapacitorMessageDialogBackend(capacitor:CapacitorApi):{ >MessageDialogBackend, >Entity, } {
     var dialog:CapacitorDialogPlugin = cast _Runtime.UNDEFINED;
     dialog = capacitor.dialog;
-    return cast (cast createEntity((cast ({ message: function(options:MessageDialogOptions):flight._internal._Promise<MessageDialogResult> {
+    return cast (cast createEntity((cast ({ message: (cast function(options:MessageDialogOptions):flight._internal._Promise<MessageDialogResult> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var __flowBranch203:Dynamic;
@@ -1075,7 +1075,7 @@ class _HostCapacitor {
           });
         })
       );
-    }, confirm: function(options:MessageDialogOptions):flight._internal._Promise<Bool> {
+    } : Dynamic), confirm: (cast function(options:MessageDialogOptions):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var result:CapacitorDialogConfirmResult = cast _Runtime.UNDEFINED;
@@ -1095,14 +1095,14 @@ class _HostCapacitor {
           });
         })
       );
-    } } : EntityShapeL8C23__capacitorDialog) : Dynamic)) : EntityShapeL8C23__capacitorDialog);
+    } : Dynamic) } : EntityShapeL8C23__capacitorDialog) : Dynamic)) : EntityShapeL8C23__capacitorDialog);
     return cast null;
   }
 
   public static function createCapacitorPromptDialogBackend(capacitor:CapacitorApi):{ >PromptDialogBackend, >Entity, } {
     var dialog:CapacitorDialogPlugin = cast _Runtime.UNDEFINED;
     dialog = capacitor.dialog;
-    return cast (cast createEntity((cast ({ prompt: function(options:PromptDialogOptions):flight._internal._Promise<Null<String>> {
+    return cast (cast createEntity((cast ({ prompt: (cast function(options:PromptDialogOptions):flight._internal._Promise<Null<String>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var result:CapacitorDialogPromptResult = cast _Runtime.UNDEFINED;
@@ -1122,14 +1122,14 @@ class _HostCapacitor {
           });
         })
       );
-    } } : EntityShapeL31C23__capacitorDialog) : Dynamic)) : EntityShapeL31C23__capacitorDialog);
+    } : Dynamic) } : EntityShapeL31C23__capacitorDialog) : Dynamic)) : EntityShapeL31C23__capacitorDialog);
     return cast null;
   }
 
   public static function createCapacitorFileSystemBackend(capacitor:CapacitorApi):{ >FileSystemBasicBackend, >Entity, } {
     var filesystem:CapacitorFilesystemPlugin = cast _Runtime.UNDEFINED;
     filesystem = capacitor.filesystem;
-    return cast (cast (cast createEntity : Null<{ var readTextFile:String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Null<String>>; var writeTextFile:String->String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>; var readBinaryFile:String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Null<flight._internal._UInt8Array>>; var writeBinaryFile:String->flight._internal._UInt8Array->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>; var fileExists:String->flight._internal._Promise<Bool>; var directoryExists:String->flight._internal._Promise<Bool>; var removeFile:String->flight._internal._Promise<Bool>; var removeDirectory:String->Null<Bool>->flight._internal._Promise<Bool>; var makeDirectory:String->flight._internal._Promise<Bool>; var readDirectory:String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Array<FileEntry>>; var statFile:String->flight._internal._Promise<Null<FileStat>>; var rename:String->String->flight._internal._Promise<Bool>; var copy:String->String->flight._internal._Promise<Bool>; var appendTextFile:String->String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>; }>->{ >Entity, var readTextFile:String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Null<String>>; var writeTextFile:String->String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>; var readBinaryFile:String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Null<flight._internal._UInt8Array>>; var writeBinaryFile:String->flight._internal._UInt8Array->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>; var fileExists:String->flight._internal._Promise<Bool>; var directoryExists:String->flight._internal._Promise<Bool>; var removeFile:String->flight._internal._Promise<Bool>; var removeDirectory:String->Null<Bool>->flight._internal._Promise<Bool>; var makeDirectory:String->flight._internal._Promise<Bool>; var readDirectory:String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Array<FileEntry>>; var statFile:String->flight._internal._Promise<Null<FileStat>>; var rename:String->String->flight._internal._Promise<Bool>; var copy:String->String->flight._internal._Promise<Bool>; var appendTextFile:String->String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>; })(({ final __callArgument328:Dynamic = ({ readTextFile: function(path:String, signal:Null<flight._internal.dom.AbortSignal>):flight._internal._Promise<Null<String>> {
+    return cast (cast (cast createEntity : Null<{ var readTextFile:String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Null<String>>; var writeTextFile:String->String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>; var readBinaryFile:String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Null<flight._internal._UInt8Array>>; var writeBinaryFile:String->flight._internal._UInt8Array->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>; var fileExists:String->flight._internal._Promise<Bool>; var directoryExists:String->flight._internal._Promise<Bool>; var removeFile:String->flight._internal._Promise<Bool>; var removeDirectory:String->Null<Bool>->flight._internal._Promise<Bool>; var makeDirectory:String->flight._internal._Promise<Bool>; var readDirectory:String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Array<FileEntry>>; var statFile:String->flight._internal._Promise<Null<FileStat>>; var rename:String->String->flight._internal._Promise<Bool>; var copy:String->String->flight._internal._Promise<Bool>; var appendTextFile:String->String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>; }>->{ >Entity, var readTextFile:String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Null<String>>; var writeTextFile:String->String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>; var readBinaryFile:String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Null<flight._internal._UInt8Array>>; var writeBinaryFile:String->flight._internal._UInt8Array->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>; var fileExists:String->flight._internal._Promise<Bool>; var directoryExists:String->flight._internal._Promise<Bool>; var removeFile:String->flight._internal._Promise<Bool>; var removeDirectory:String->Null<Bool>->flight._internal._Promise<Bool>; var makeDirectory:String->flight._internal._Promise<Bool>; var readDirectory:String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Array<FileEntry>>; var statFile:String->flight._internal._Promise<Null<FileStat>>; var rename:String->String->flight._internal._Promise<Bool>; var copy:String->String->flight._internal._Promise<Bool>; var appendTextFile:String->String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>; })(({ final __callArgument328:Dynamic = ({ readTextFile: (cast function(path:String, signal:Null<flight._internal.dom.AbortSignal>):flight._internal._Promise<Null<String>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var data:flight._internal._Union2<flight._internal.dom.Blob, String> = cast _Runtime.UNDEFINED;
@@ -1150,7 +1150,7 @@ class _HostCapacitor {
           });
         })
       );
-    }, writeTextFile: function(path:String, data:String, signal:Null<flight._internal.dom.AbortSignal>):flight._internal._Promise<Bool> {
+    } : Dynamic), writeTextFile: (cast function(path:String, data:String, signal:Null<flight._internal.dom.AbortSignal>):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           ({ final __hostTypeCall291 = signal; __hostTypeCall291 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall291 : flight._internal.dom.AbortSignal).throwIfAborted(); });
@@ -1169,7 +1169,7 @@ class _HostCapacitor {
           });
         })
       );
-    }, readBinaryFile: function(path:String, signal:Null<flight._internal.dom.AbortSignal>):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
+    } : Dynamic), readBinaryFile: (cast function(path:String, signal:Null<flight._internal.dom.AbortSignal>):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var data:flight._internal._Union2<flight._internal.dom.Blob, String> = cast _Runtime.UNDEFINED;
@@ -1190,7 +1190,7 @@ class _HostCapacitor {
           });
         })
       );
-    }, writeBinaryFile: function(path:String, data:flight._internal._UInt8Array, signal:Null<flight._internal.dom.AbortSignal>):flight._internal._Promise<Bool> {
+    } : Dynamic), writeBinaryFile: (cast function(path:String, data:flight._internal._UInt8Array, signal:Null<flight._internal.dom.AbortSignal>):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           ({ final __hostTypeCall300 = signal; __hostTypeCall300 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall300 : flight._internal.dom.AbortSignal).throwIfAborted(); });
@@ -1209,7 +1209,7 @@ class _HostCapacitor {
           });
         })
       );
-    }, fileExists: function(path:String):flight._internal._Promise<Bool> {
+    } : Dynamic), fileExists: (cast function(path:String):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -1226,7 +1226,7 @@ class _HostCapacitor {
           });
         })
       );
-    }, directoryExists: function(path:String):flight._internal._Promise<Bool> {
+    } : Dynamic), directoryExists: (cast function(path:String):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -1243,7 +1243,7 @@ class _HostCapacitor {
           });
         })
       );
-    }, removeFile: function(path:String):flight._internal._Promise<Bool> {
+    } : Dynamic), removeFile: (cast function(path:String):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -1261,7 +1261,7 @@ class _HostCapacitor {
           });
         })
       );
-    }, removeDirectory: function(path:String, recursive:Null<Bool>):flight._internal._Promise<Bool> {
+    } : Dynamic), removeDirectory: (cast function(path:String, recursive:Null<Bool>):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -1279,7 +1279,7 @@ class _HostCapacitor {
           });
         })
       );
-    }, makeDirectory: function(path:String):flight._internal._Promise<Bool> {
+    } : Dynamic), makeDirectory: (cast function(path:String):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -1297,7 +1297,7 @@ class _HostCapacitor {
           });
         })
       );
-    }, readDirectory: function(path:String, signal:Null<flight._internal.dom.AbortSignal>):flight._internal._Promise<Array<FileEntry>> {
+    } : Dynamic), readDirectory: (cast function(path:String, signal:Null<flight._internal.dom.AbortSignal>):flight._internal._Promise<Array<FileEntry>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var files:flight._internal._IndexedAccess<Dynamic, String> = cast _Runtime.UNDEFINED;
@@ -1318,7 +1318,7 @@ class _HostCapacitor {
           });
         })
       );
-    }, statFile: function(path:String):flight._internal._Promise<Null<FileStat>> {
+    } : Dynamic), statFile: (cast function(path:String):flight._internal._Promise<Null<FileStat>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -1339,7 +1339,7 @@ class _HostCapacitor {
           });
         })
       );
-    }, rename: function(from:String, to:String):flight._internal._Promise<Bool> {
+    } : Dynamic), rename: (cast function(from:String, to:String):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -1357,7 +1357,7 @@ class _HostCapacitor {
           });
         })
       );
-    }, copy: function(from:String, to:String):flight._internal._Promise<Bool> {
+    } : Dynamic), copy: (cast function(from:String, to:String):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -1375,7 +1375,7 @@ class _HostCapacitor {
           });
         })
       );
-    }, appendTextFile: function(path:String, data:String, signal:Null<flight._internal.dom.AbortSignal>):flight._internal._Promise<Bool> {
+    } : Dynamic), appendTextFile: (cast function(path:String, data:String, signal:Null<flight._internal.dom.AbortSignal>):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           ({ final __hostTypeCall325 = signal; __hostTypeCall325 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall325 : flight._internal.dom.AbortSignal).throwIfAborted(); });
@@ -1394,7 +1394,7 @@ class _HostCapacitor {
           });
         })
       );
-    } } : EntityShapeL14C23__capacitorFileSystem); __callArgument328; })) : EntityShapeL14C23__capacitorFileSystem);
+    } : Dynamic) } : EntityShapeL14C23__capacitorFileSystem); __callArgument328; })) : EntityShapeL14C23__capacitorFileSystem);
     return cast null;
   }
 
@@ -1458,7 +1458,7 @@ class _HostCapacitor {
     geolocation = capacitor.geolocation;
     nextWatchId = 1.0;
     watchIds = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
-    return cast (cast createEntity((cast ({ getCurrentPosition: function(options:GeolocationRequestOptions):flight._internal._Promise<Null<GeoPosition>> {
+    return cast (cast createEntity((cast ({ getCurrentPosition: (cast function(options:GeolocationRequestOptions):flight._internal._Promise<Null<GeoPosition>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -1475,7 +1475,7 @@ class _HostCapacitor {
           });
         })
       );
-    }, getCurrentPositionResult: function(options:GeolocationRequestOptions):flight._internal._Promise<GeoPositionResult> {
+    } : Dynamic), getCurrentPositionResult: (cast function(options:GeolocationRequestOptions):flight._internal._Promise<GeoPositionResult> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -1494,32 +1494,32 @@ class _HostCapacitor {
           });
         })
       );
-    }, isAvailable: function():Bool {
+    } : Dynamic), isAvailable: (cast function():Bool {
       return cast true;
       return cast _Runtime.UNDEFINED;
-    }, watchPosition: function(listener:GeoPosition->Void, options:GeolocationRequestOptions, onError:Null<GeolocationErrorReason->Void>):Float {
+    } : Dynamic), watchPosition: (cast function(listener:GeoPosition->Void, options:GeolocationRequestOptions, onError:Null<GeolocationErrorReason->Void>):Float {
       var numericId:Float = cast _Runtime.UNDEFINED;
       numericId = nextWatchId++;
-      ((cast watchIds : flight._internal._Map<Float, Null<String>>).set(numericId, (cast null)));
+      ((cast watchIds : flight._internal._Map<Float, Null<String>>).set((cast numericId), (cast null)));
       flight._internal._Async.recover(_Runtime.callProperty((cast geolocation : CapacitorGeolocationPlugin).watchPosition(({ final __callArgument528:Dynamic = options; __callArgument528; }), ({ final __callArgument535:Dynamic = function(position:Null<CapacitorPosition>, err:flight._internal._Any):Void {
         if ((cast ((cast !_Runtime.strictEquals(position, null) : Bool) && (cast !_Runtime.strictEquals(position, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { listener((cast _HostCapacitor.toGeoPosition__capacitorGeolocation(({ final __callArgument529:Dynamic = position; __callArgument529; })) : GeoPosition)); } else { if ((cast ((cast !_Runtime.strictEquals(err, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(onError, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { onError(({ final __callArgument533:Dynamic = 'unavailable'; __callArgument533; })); } }
       }; __callArgument535; })), 'then', cast ([function(stringId:String):Void {
-        if ((cast ((cast watchIds : flight._internal._Map<Float, Null<String>>).has(numericId)) : Bool)) { ((cast watchIds : flight._internal._Map<Float, Null<String>>).set(numericId, (cast stringId))); } else { flight._internal._Async.recover((cast geolocation : CapacitorGeolocationPlugin).clearWatch(({ final __callArgument537:Dynamic = { id: stringId }; __callArgument537; })), function(__unused0:flight._internal._Any):Void {
+        if ((cast ((cast watchIds : flight._internal._Map<Float, Null<String>>).has((cast numericId))) : Bool)) { ((cast watchIds : flight._internal._Map<Float, Null<String>>).set((cast numericId), (cast stringId))); } else { flight._internal._Async.recover((cast geolocation : CapacitorGeolocationPlugin).clearWatch(({ final __callArgument537:Dynamic = { id: stringId }; __callArgument537; })), function(__unused0:flight._internal._Any):Void {
 
         }); }
       }] : Array<Dynamic>)), function(__unused1:flight._internal._Any):Void {
-        ((cast watchIds : flight._internal._Map<Float, Null<String>>).delete_(numericId));
+        ((cast watchIds : flight._internal._Map<Float, Null<String>>).delete_((cast numericId)));
       });
       return cast numericId;
       return cast _Runtime.UNDEFINED;
-    }, clearWatch: function(id:Float):Void {
+    } : Dynamic), clearWatch: (cast function(id:Float):Void {
       var stringId:Null<String> = cast _Runtime.UNDEFINED;
-      stringId = ((cast watchIds : flight._internal._Map<Float, Null<String>>).get(id));
-      ((cast watchIds : flight._internal._Map<Float, Null<String>>).delete_(id));
+      stringId = ((cast watchIds : flight._internal._Map<Float, Null<String>>).get((cast id)));
+      ((cast watchIds : flight._internal._Map<Float, Null<String>>).delete_((cast id)));
       if ((cast ((cast !_Runtime.strictEquals(stringId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(stringId, null) : Bool)) : Bool)) { flight._internal._Async.recover((cast geolocation : CapacitorGeolocationPlugin).clearWatch(({ final __callArgument539:Dynamic = { id: stringId }; __callArgument539; })), function(__unused2:flight._internal._Any):Void {
 
       }); }
-    }, promptForAccess: function():flight._internal._Promise<GeolocationAccessOutcome> {
+    } : Dynamic), promptForAccess: (cast function():flight._internal._Promise<GeolocationAccessOutcome> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -1558,7 +1558,7 @@ class _HostCapacitor {
           });
         })
       );
-    } } : EntityShapeL24C23__capacitorGeolocation) : Dynamic)) : EntityShapeL24C23__capacitorGeolocation);
+    } : Dynamic) } : EntityShapeL24C23__capacitorGeolocation) : Dynamic)) : EntityShapeL24C23__capacitorGeolocation);
     return cast null;
   }
 
@@ -1625,7 +1625,7 @@ class _HostCapacitor {
   }
 
   public static function createCapacitorSoftKeyboardAccessoryBarBackend(capacitor:CapacitorApi):{ >SoftKeyboardAccessoryBarBackend, >Entity, } {
-    return cast (cast (cast createEntity : Null<{ var setAccessoryBarVisible:Bool->flight._internal._Promise<SoftKeyboardSetterResult>; }>->{ >Entity, var setAccessoryBarVisible:Bool->flight._internal._Promise<SoftKeyboardSetterResult>; })(({ final __callArgument683:Dynamic = ({ setAccessoryBarVisible: function(visible:Bool):flight._internal._Promise<SoftKeyboardSetterResult> {
+    return cast (cast (cast createEntity : Null<{ var setAccessoryBarVisible:Bool->flight._internal._Promise<SoftKeyboardSetterResult>; }>->{ >Entity, var setAccessoryBarVisible:Bool->flight._internal._Promise<SoftKeyboardSetterResult>; })(({ final __callArgument683:Dynamic = ({ setAccessoryBarVisible: (cast function(visible:Bool):flight._internal._Promise<SoftKeyboardSetterResult> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -1643,14 +1643,14 @@ class _HostCapacitor {
           });
         })
       );
-    } } : EntityShapeL32C23__capacitorKeyboard); __callArgument683; })) : EntityShapeL32C23__capacitorKeyboard);
+    } : Dynamic) } : EntityShapeL32C23__capacitorKeyboard); __callArgument683; })) : EntityShapeL32C23__capacitorKeyboard);
     return cast null;
   }
 
   public static function createCapacitorSoftKeyboardChangeBackend(capacitor:CapacitorApi):{ >SoftKeyboardChangeBackend, >Entity, } {
     var keyboard:CapacitorKeyboardPlugin = cast _Runtime.UNDEFINED;
     keyboard = capacitor.keyboard;
-    return cast (cast (cast createEntity : Null<{ var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>; }>->{ >Entity, var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>; })(({ final __callArgument697:Dynamic = ({ subscribe: function(listener:Void->Void):flight._internal._Promise<SoftKeyboardChangeSubscription> {
+    return cast (cast (cast createEntity : Null<{ var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>; }>->{ >Entity, var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>; })(({ final __callArgument697:Dynamic = ({ subscribe: (cast function(listener:Void->Void):flight._internal._Promise<SoftKeyboardChangeSubscription> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var showHandle:CapacitorPluginListenerHandle = cast _Runtime.UNDEFINED;
@@ -1680,7 +1680,7 @@ class _HostCapacitor {
           });
         })
       );
-    } } : EntityShapeL46C23__capacitorKeyboard); __callArgument697; })) : EntityShapeL46C23__capacitorKeyboard);
+    } : Dynamic) } : EntityShapeL46C23__capacitorKeyboard); __callArgument697; })) : EntityShapeL46C23__capacitorKeyboard);
     return cast null;
   }
 
@@ -1703,7 +1703,7 @@ class _HostCapacitor {
     }; __callArgument710; })), function(__unused5:flight._internal._Any):Void {
 
     });
-    return cast (cast (cast createEntity : Null<{ var getInfo:SoftKeyboardInfo->SoftKeyboardInfo; }>->{ >Entity, var getInfo:SoftKeyboardInfo->SoftKeyboardInfo; })(({ final __callArgument711:Dynamic = ({ getInfo: function(out:SoftKeyboardInfo):SoftKeyboardInfo {
+    return cast (cast (cast createEntity : Null<{ var getInfo:SoftKeyboardInfo->SoftKeyboardInfo; }>->{ >Entity, var getInfo:SoftKeyboardInfo->SoftKeyboardInfo; })(({ final __callArgument711:Dynamic = ({ getInfo: (cast function(out:SoftKeyboardInfo):SoftKeyboardInfo {
       (out.visible = cast (mirrorVisible : Bool));
       (out.height = cast (mirrorHeight : Float));
       (out.x = cast (0.0 : Float));
@@ -1711,12 +1711,12 @@ class _HostCapacitor {
       (out.width = cast (0.0 : Float));
       return cast out;
       return cast _Runtime.UNDEFINED;
-    } } : EntityShapeL83C23__capacitorKeyboard); __callArgument711; })) : EntityShapeL83C23__capacitorKeyboard);
+    } : Dynamic) } : EntityShapeL83C23__capacitorKeyboard); __callArgument711; })) : EntityShapeL83C23__capacitorKeyboard);
     return cast null;
   }
 
   public static function createCapacitorSoftKeyboardResizeModeWriteBackend(capacitor:CapacitorApi):{ >SoftKeyboardResizeModeWriteBackend, >Entity, } {
-    return cast (cast (cast createEntity : Null<{ var setResizeMode:String->flight._internal._Promise<SoftKeyboardSetterResult>; }>->{ >Entity, var setResizeMode:String->flight._internal._Promise<SoftKeyboardSetterResult>; })(({ final __callArgument717:Dynamic = ({ setResizeMode: function(mode:SoftKeyboardResizeMode):flight._internal._Promise<SoftKeyboardSetterResult> {
+    return cast (cast (cast createEntity : Null<{ var setResizeMode:String->flight._internal._Promise<SoftKeyboardSetterResult>; }>->{ >Entity, var setResizeMode:String->flight._internal._Promise<SoftKeyboardSetterResult>; })(({ final __callArgument717:Dynamic = ({ setResizeMode: (cast function(mode:SoftKeyboardResizeMode):flight._internal._Promise<SoftKeyboardSetterResult> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -1734,12 +1734,12 @@ class _HostCapacitor {
           });
         })
       );
-    } } : EntityShapeL98C23__capacitorKeyboard); __callArgument717; })) : EntityShapeL98C23__capacitorKeyboard);
+    } : Dynamic) } : EntityShapeL98C23__capacitorKeyboard); __callArgument717; })) : EntityShapeL98C23__capacitorKeyboard);
     return cast null;
   }
 
   public static function createCapacitorSoftKeyboardScrollAssistBackend(capacitor:CapacitorApi):{ >SoftKeyboardScrollAssistBackend, >Entity, } {
-    return cast (cast (cast createEntity : Null<{ var setScrollAssistEnabled:Bool->flight._internal._Promise<SoftKeyboardSetterResult>; }>->{ >Entity, var setScrollAssistEnabled:Bool->flight._internal._Promise<SoftKeyboardSetterResult>; })(({ final __callArgument727:Dynamic = ({ setScrollAssistEnabled: function(enabled:Bool):flight._internal._Promise<SoftKeyboardSetterResult> {
+    return cast (cast (cast createEntity : Null<{ var setScrollAssistEnabled:Bool->flight._internal._Promise<SoftKeyboardSetterResult>; }>->{ >Entity, var setScrollAssistEnabled:Bool->flight._internal._Promise<SoftKeyboardSetterResult>; })(({ final __callArgument727:Dynamic = ({ setScrollAssistEnabled: (cast function(enabled:Bool):flight._internal._Promise<SoftKeyboardSetterResult> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -1757,12 +1757,12 @@ class _HostCapacitor {
           });
         })
       );
-    } } : EntityShapeL113C23__capacitorKeyboard); __callArgument727; })) : EntityShapeL113C23__capacitorKeyboard);
+    } : Dynamic) } : EntityShapeL113C23__capacitorKeyboard); __callArgument727; })) : EntityShapeL113C23__capacitorKeyboard);
     return cast null;
   }
 
   public static function createCapacitorSoftKeyboardStyleBackend(capacitor:CapacitorApi):{ >SoftKeyboardStyleBackend, >Entity, } {
-    return cast (cast (cast createEntity : Null<{ var setStyle:String->flight._internal._Promise<SoftKeyboardSetterResult>; }>->{ >Entity, var setStyle:String->flight._internal._Promise<SoftKeyboardSetterResult>; })(({ final __callArgument737:Dynamic = ({ setStyle: function(style:SoftKeyboardStyleKind):flight._internal._Promise<SoftKeyboardSetterResult> {
+    return cast (cast (cast createEntity : Null<{ var setStyle:String->flight._internal._Promise<SoftKeyboardSetterResult>; }>->{ >Entity, var setStyle:String->flight._internal._Promise<SoftKeyboardSetterResult>; })(({ final __callArgument737:Dynamic = ({ setStyle: (cast function(style:SoftKeyboardStyleKind):flight._internal._Promise<SoftKeyboardSetterResult> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -1780,12 +1780,12 @@ class _HostCapacitor {
           });
         })
       );
-    } } : EntityShapeL126C23__capacitorKeyboard); __callArgument737; })) : EntityShapeL126C23__capacitorKeyboard);
+    } : Dynamic) } : EntityShapeL126C23__capacitorKeyboard); __callArgument737; })) : EntityShapeL126C23__capacitorKeyboard);
     return cast null;
   }
 
   public static function createCapacitorSoftKeyboardVisibilityBackend(capacitor:CapacitorApi):{ >SoftKeyboardVisibilityBackend, >Entity, } {
-    return cast (cast (cast createEntity : Null<{ var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; }>->{ >Entity, var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; })(({ final __callArgument747:Dynamic = ({ show: function():flight._internal._Promise<SoftKeyboardVisibilityResult> {
+    return cast (cast (cast createEntity : Null<{ var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; }>->{ >Entity, var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; })(({ final __callArgument747:Dynamic = ({ show: (cast function():flight._internal._Promise<SoftKeyboardVisibilityResult> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -1803,7 +1803,7 @@ class _HostCapacitor {
           });
         })
       );
-    }, hide: function():flight._internal._Promise<SoftKeyboardVisibilityResult> {
+    } : Dynamic), hide: (cast function():flight._internal._Promise<SoftKeyboardVisibilityResult> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -1821,7 +1821,7 @@ class _HostCapacitor {
           });
         })
       );
-    } } : EntityShapeL141C23__capacitorKeyboard); __callArgument747; })) : EntityShapeL141C23__capacitorKeyboard);
+    } : Dynamic) } : EntityShapeL141C23__capacitorKeyboard); __callArgument747; })) : EntityShapeL141C23__capacitorKeyboard);
     return cast null;
   }
 
@@ -1849,26 +1849,26 @@ class _HostCapacitor {
     var nextNumericId:Float = cast _Runtime.UNDEFINED;
     getNotification = (cast function getNotification(number:Float):Notification {
       var notification:Null<Notification> = cast _Runtime.UNDEFINED;
-      notification = ((cast notificationByNumber : flight._internal._Map<Float, Notification>).get(number));
+      notification = ((cast notificationByNumber : flight._internal._Map<Float, Notification>).get((cast number)));
       if ((cast _Runtime.strictEquals(notification, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         (notification = cast ((cast (#if js _Runtime.callValue(createNotificationResource, cast ([(cast 'capacitor-notification-' + Std.string(number) + '' : String), (cast '' : String)] : Array<Dynamic>)) #else createNotificationResource((cast 'capacitor-notification-' + Std.string(number) + '' : String), (cast '' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Notification) : Dynamic));
-        ((cast notificationByNumber : flight._internal._Map<Float, Notification>).set(number, (cast notification)));
+        ((cast notificationByNumber : flight._internal._Map<Float, Notification>).set((cast number), (cast notification)));
       }
       return cast notification;
       return cast _Runtime.UNDEFINED;
     });
     trackScheduled = (cast function trackScheduled(number:Float, scheduled:ScheduledNotification):Void {
-      ((cast scheduledByNumber : flight._internal._Map<Float, ScheduledNotification>).set(number, (cast scheduled)));
-      ((cast numberByScheduled : flight._internal._WeakMap<ScheduledNotification, Float>).set(scheduled, (cast number)));
+      ((cast scheduledByNumber : flight._internal._Map<Float, ScheduledNotification>).set((cast number), (cast scheduled)));
+      ((cast numberByScheduled : flight._internal._WeakMap<ScheduledNotification, Float>).set((cast scheduled), (cast number)));
       bindScheduledNotificationCancel(({ final __callArgument753:Dynamic = scheduled; __callArgument753; }), (cast function():flight._internal._Promise<NotificationCancelOutcome> return (cast cancelOne(({ final __callArgument754:Dynamic = scheduled; __callArgument754; })) : flight._internal._Promise<{ var reason:String; }>) : Dynamic));
     });
     cancelOne = (cast function(scheduled:ScheduledNotification):flight._internal._Promise<{ var reason:String; }> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var number:Null<Float> = cast _Runtime.UNDEFINED;
-          number = ((cast numberByScheduled : flight._internal._WeakMap<ScheduledNotification, Float>).get(scheduled));
+          number = ((cast numberByScheduled : flight._internal._WeakMap<ScheduledNotification, Float>).get((cast scheduled)));
           var __flowBranch759:Dynamic;
-          if ((cast ((cast _Runtime.strictEquals(number, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(((cast scheduledByNumber : flight._internal._Map<Float, ScheduledNotification>).get(number)), scheduled) : Bool)) : Bool)) {
+          if ((cast ((cast _Runtime.strictEquals(number, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(((cast scheduledByNumber : flight._internal._Map<Float, ScheduledNotification>).get((cast number))), scheduled) : Bool)) : Bool)) {
             __flowBranch759 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn({ reason: 'already-cancelled' });
             });
@@ -1887,8 +1887,8 @@ class _HostCapacitor {
                 return flight._internal._Async.flowReturn({ reason: 'operation-failed' });
               });
             }), function():Dynamic {
-              ((cast scheduledByNumber : flight._internal._Map<Float, ScheduledNotification>).delete_(number));
-              ((cast numberByScheduled : flight._internal._WeakMap<ScheduledNotification, Float>).delete_(scheduled));
+              ((cast scheduledByNumber : flight._internal._Map<Float, ScheduledNotification>).delete_((cast number)));
+              ((cast numberByScheduled : flight._internal._WeakMap<ScheduledNotification, Float>).delete_((cast scheduled)));
               return flight._internal._Async.flowReturn({ reason: 'ok' });
             });
           });
@@ -1978,14 +1978,14 @@ class _HostCapacitor {
                         });
                       }), function():Dynamic {
                         (released = cast (true : Dynamic));
-                        ((cast liveAttachments : flight._internal._Map<NotificationEventAttachment, String>).delete_(attachment));
+                        ((cast liveAttachments : flight._internal._Map<NotificationEventAttachment, String>).delete_((cast attachment)));
                         return flight._internal._Async.flowReturn({ reason: 'ok' });
                       });
                     });
                   })
                 );
               } };
-              ((cast liveAttachments : flight._internal._Map<NotificationEventAttachment, String>).set(attachment, (cast 'subscription-' + Std.string(nextAttachmentId++) + '')));
+              ((cast liveAttachments : flight._internal._Map<NotificationEventAttachment, String>).set((cast attachment), (cast 'subscription-' + Std.string(nextAttachmentId++) + '')));
               return flight._internal._Async.flowReturn({ attachment: attachment, reason: 'ok' });
             });
           });
@@ -2001,15 +2001,15 @@ class _HostCapacitor {
     destroyCompleted = false;
     nextAttachmentId = 1.0;
     nextNumericId = 1.0;
-    return cast (cast createEntity(({ final __callArgument875:Dynamic = ({ action: { attach: function(listener:Notification->String->Void):flight._internal._Promise<NotificationEventBackendAttachOutcome> {
+    return cast (cast createEntity(({ final __callArgument875:Dynamic = ({ action: (cast { attach: function(listener:Notification->String->Void):flight._internal._Promise<NotificationEventBackendAttachOutcome> {
       return cast (cast attachEvent(({ final __callArgument824:Dynamic = function(action:CapacitorLocalNotificationAction):Void { listener((cast getNotification((cast (cast _Runtime.field(action, 'notification') : { var id:Float; }).id : Float)) : Notification), (cast _Runtime.field(action, 'actionId') : String)); }; __callArgument824; })) : flight._internal._Promise<NotificationEventBackendAttachOutcome>);
       return cast _Runtime.UNDEFINED;
-    } }, click: { attach: function(listener:Notification->Void):flight._internal._Promise<NotificationEventBackendAttachOutcome> {
+    } } : Dynamic), click: (cast { attach: function(listener:Notification->Void):flight._internal._Promise<NotificationEventBackendAttachOutcome> {
       return cast (cast attachEvent(({ final __callArgument826:Dynamic = function(action:CapacitorLocalNotificationAction):Void {
         if ((cast _Runtime.strictEquals(_Runtime.field(action, 'actionId'), 'tap') : Bool)) { listener((cast getNotification((cast (cast _Runtime.field(action, 'notification') : { var id:Float; }).id : Float)) : Notification)); }
       }; __callArgument826; })) : flight._internal._Promise<NotificationEventBackendAttachOutcome>);
       return cast _Runtime.UNDEFINED;
-    } }, delivery: { notify: function(request:NotificationRequest):flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<{ var reason:String; @:optional var fields:flight._internal._Any; @:optional var notification:flight._internal._Any; }, { var fields:Array<String>; var reason:String; @:optional var notification:flight._internal._Any; }>, { var notification:Notification; var reason:String; @:optional var fields:flight._internal._Any; }>> {
+    } } : Dynamic), delivery: (cast { notify: function(request:NotificationRequest):flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<{ var reason:String; @:optional var fields:flight._internal._Any; @:optional var notification:flight._internal._Any; }, { var fields:Array<String>; var reason:String; @:optional var notification:flight._internal._Any; }>, { var notification:Notification; var reason:String; @:optional var fields:flight._internal._Any; }>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var invalid:Array<String> = cast _Runtime.UNDEFINED;
@@ -2078,7 +2078,7 @@ class _HostCapacitor {
                     }
                     return flight._internal._Async.continueFlow(__flowBranch836, function():Dynamic {
                       notification = (cast (#if js _Runtime.callValue(createNotificationResource, cast ([(cast _Runtime.coalesce(request.id, function():Dynamic return cast 'capacitor-notification-' + Std.string(number) + '') : String), (cast request.title : String)] : Array<Dynamic>)) #else createNotificationResource((cast _Runtime.coalesce(request.id, function():Dynamic return cast 'capacitor-notification-' + Std.string(number) + '') : String), (cast request.title : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Notification);
-                      ((cast notificationByNumber : flight._internal._Map<Float, Notification>).set(number, (cast notification)));
+                      ((cast notificationByNumber : flight._internal._Map<Float, Notification>).set((cast number), (cast notification)));
                       return flight._internal._Async.flowReturn({ notification: notification, reason: 'accepted' });
                     });
                   });
@@ -2088,7 +2088,7 @@ class _HostCapacitor {
           });
         })
       );
-    } }, lifecycle: { destroy: function():flight._internal._Promise<flight._internal._Union2<{ var reason:String; @:optional var failures:flight._internal._Any; }, { var failures:Array<NotificationLifecycleFailure>; var reason:String; }>> {
+    } } : Dynamic), lifecycle: (cast { destroy: function():flight._internal._Promise<flight._internal._Union2<{ var reason:String; @:optional var failures:flight._internal._Any; }, { var failures:Array<NotificationLifecycleFailure>; var reason:String; }>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var failures:Array<NotificationLifecycleFailure> = cast _Runtime.UNDEFINED;
@@ -2161,7 +2161,7 @@ class _HostCapacitor {
           });
         })
       );
-    } }, permission: { getPermission: function():flight._internal._Promise<flight._internal._Union2<{ var permission:String; var reason:String; }, { var reason:String; @:optional var permission:flight._internal._Any; }>> {
+    } } : Dynamic), permission: (cast { getPermission: function():flight._internal._Promise<flight._internal._Union2<{ var permission:String; var reason:String; }, { var reason:String; @:optional var permission:flight._internal._Any; }>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -2197,7 +2197,7 @@ class _HostCapacitor {
           });
         })
       );
-    } }, scheduling: { cancelAllScheduledNotifications: cancelAll, getPendingNotifications: function():flight._internal._Promise<flight._internal._Union2<{ var reason:String; @:optional var notifications:flight._internal._Any; }, { var notifications:Array<ScheduledNotification>; var reason:String; }>> {
+    } } : Dynamic), scheduling: (cast { cancelAllScheduledNotifications: cancelAll, getPendingNotifications: function():flight._internal._Promise<flight._internal._Union2<{ var reason:String; @:optional var notifications:flight._internal._Any; }, { var notifications:Array<ScheduledNotification>; var reason:String; }>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var pending:flight._internal._Any = cast _Runtime.UNDEFINED;
@@ -2215,7 +2215,7 @@ class _HostCapacitor {
           }), function():Dynamic {
             values = (cast _Runtime.mapArray((cast (cast pending : CapacitorLocalNotificationsPending).notifications : Array<CapacitorLocalNotificationSchema>), function(schema:CapacitorLocalNotificationSchema, __unused3:Float, __unused4:Array<CapacitorLocalNotificationSchema>):ScheduledNotification {
               var scheduled:Null<ScheduledNotification> = cast _Runtime.UNDEFINED;
-              scheduled = ((cast scheduledByNumber : flight._internal._Map<Float, ScheduledNotification>).get((cast schema : CapacitorLocalNotificationSchema).id));
+              scheduled = ((cast scheduledByNumber : flight._internal._Map<Float, ScheduledNotification>).get((cast (cast schema : CapacitorLocalNotificationSchema).id)));
               if ((cast _Runtime.strictEquals(scheduled, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
                 var id:String = 'capacitor-scheduled-notification-' + Std.string((cast schema : CapacitorLocalNotificationSchema).id) + '';
                 var request:{ var body:Null<String>; var id:String; var title:String; } = cast _Runtime.UNDEFINED;
@@ -2313,14 +2313,14 @@ class _HostCapacitor {
           });
         })
       );
-    } } } : CapacitorNotificationCapabilities); __callArgument875; })) : CapacitorNotificationCapabilities);
+    } } : Dynamic) } : CapacitorNotificationCapabilities); __callArgument875; })) : CapacitorNotificationCapabilities);
     return cast null;
   }
 
   public static function getCapacitorInvalidNotificationRequestFields__capacitorNotification(request:NotificationRequest):Array<NotificationRequestField> {
     var allowed:flight._internal._Set<String> = cast _Runtime.UNDEFINED;
     allowed = _Runtime.construct(flight._internal._HostValueLut.get('Set'), [cast (['body', 'id', 'title'] : Array<Dynamic>)]);
-    return cast (cast _Runtime.filterArray((cast (cast flight._internal.DynamicObject.keys(request) : Array<NotificationRequestField>) : Array<NotificationRequestField>), function(field:String, __unused7:Float, __unused8:Array<String>):Bool return ((cast !_Runtime.strictEquals(_Runtime.getIndex(request, field), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast ((cast allowed : flight._internal._Set<String>).has(field)) : Bool) : Bool)), _Runtime.UNDEFINED));
+    return cast (cast _Runtime.filterArray((cast (cast flight._internal.DynamicObject.keys(request) : Array<NotificationRequestField>) : Array<NotificationRequestField>), function(field:String, __unused7:Float, __unused8:Array<String>):Bool return ((cast !_Runtime.strictEquals(_Runtime.getIndex(request, field), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast ((cast allowed : flight._internal._Set<String>).has((cast field))) : Bool) : Bool)), _Runtime.UNDEFINED));
     return cast null;
   }
 
@@ -2353,10 +2353,10 @@ class _HostCapacitor {
   }
 
   public static function createCapacitorProtocolCapabilities(capacitor:CapacitorApi):CapacitorProtocolCapabilities {
-    return cast (cast createEntity((cast ({ open: (cast createEntity(({ final __callArgument995:Dynamic = ({ subscribe: function(listener:String->Void):Void->Void {
+    return cast (cast createEntity((cast ({ open: (cast (cast createEntity(({ final __callArgument995:Dynamic = ({ subscribe: (cast function(listener:String->Void):Void->Void {
       return cast (cast _HostCapacitor.toCapacitorUnsubscribe__capacitorProtocol((cast capacitor.app : CapacitorAppPlugin).addListener((cast 'appUrlOpen' : String), ({ final __callArgument993:Dynamic = function(event:{ var url:String; }):Void { listener((cast (cast event : { var url:String; }).url : String)); }; __callArgument993; }))) : Void->Void);
       return cast _Runtime.UNDEFINED;
-    } } : EntityShapeL10C24__capacitorProtocol); __callArgument995; })) : EntityShapeL10C24__capacitorProtocol) } : CapacitorProtocolCapabilities) : Dynamic)) : CapacitorProtocolCapabilities);
+    } : Dynamic) } : EntityShapeL10C24__capacitorProtocol); __callArgument995; })) : EntityShapeL10C24__capacitorProtocol) : Dynamic) } : CapacitorProtocolCapabilities) : Dynamic)) : CapacitorProtocolCapabilities);
     return cast null;
   }
 
@@ -2391,7 +2391,7 @@ class _HostCapacitor {
     clipboard = (cast createCapacitorClipboardBackend(({ final __callArgument1023:Dynamic = capacitor; __callArgument1023; })) : CapacitorClipboardBackend__capacitorClipboard);
     connectivity = (cast createCapacitorConnectivityBackend(({ final __callArgument1025:Dynamic = capacitor; __callArgument1025; })) : CapacitorConnectivityBackend__capacitorConnectivity);
     statusBar = (cast createCapacitorStatusBarBackend(({ final __callArgument1027:Dynamic = capacitor; __callArgument1027; })) : { >Entity, >StatusBarColorBackend, >StatusBarInfoBackend, >StatusBarOverlaysBackend, >StatusBarStyleBackend, >StatusBarVisibilityBackend, });
-    return cast (cast createEntity((cast ({ accessibility: {  }, app: app, clipboard: { image: clipboard, text: clipboard }, connectivity: { change: connectivity, status: connectivity }, dialog: { message: (cast createCapacitorMessageDialogBackend(({ final __callArgument1059:Dynamic = capacitor; __callArgument1059; })) : { >MessageDialogBackend, >Entity, }), prompt: (cast createCapacitorPromptDialogBackend(({ final __callArgument1061:Dynamic = capacitor; __callArgument1061; })) : { >PromptDialogBackend, >Entity, }) }, graphics: {  }, input: { haptics: (cast createCapacitorHapticsBackend(({ final __callArgument1063:Dynamic = capacitor; __callArgument1063; })) : HapticsBackend), softKeyboardAccessoryBar: (cast createCapacitorSoftKeyboardAccessoryBarBackend(({ final __callArgument1065:Dynamic = capacitor; __callArgument1065; })) : { >SoftKeyboardAccessoryBarBackend, >Entity, }), softKeyboardChange: (cast createCapacitorSoftKeyboardChangeBackend(({ final __callArgument1067:Dynamic = capacitor; __callArgument1067; })) : { >SoftKeyboardChangeBackend, >Entity, }), softKeyboardInfo: (cast createCapacitorSoftKeyboardInfoBackend(({ final __callArgument1069:Dynamic = capacitor; __callArgument1069; })) : { >SoftKeyboardInfoBackend, >Entity, }), softKeyboardResizeModeWrite: (cast createCapacitorSoftKeyboardResizeModeWriteBackend(({ final __callArgument1071:Dynamic = capacitor; __callArgument1071; })) : { >SoftKeyboardResizeModeWriteBackend, >Entity, }), softKeyboardScrollAssist: (cast createCapacitorSoftKeyboardScrollAssistBackend(({ final __callArgument1073:Dynamic = capacitor; __callArgument1073; })) : { >SoftKeyboardScrollAssistBackend, >Entity, }), softKeyboardStyle: (cast createCapacitorSoftKeyboardStyleBackend(({ final __callArgument1075:Dynamic = capacitor; __callArgument1075; })) : { >SoftKeyboardStyleBackend, >Entity, }), softKeyboardVisibility: (cast createCapacitorSoftKeyboardVisibilityBackend(({ final __callArgument1077:Dynamic = capacitor; __callArgument1077; })) : { >SoftKeyboardVisibilityBackend, >Entity, }) }, ipc: {  }, media: {  }, menu: {  }, midi: {  }, net: {  }, power: {  }, protocol: (cast createCapacitorProtocolCapabilities(({ final __callArgument1079:Dynamic = capacitor; __callArgument1079; })) : CapacitorProtocolCapabilities), notification: (cast createCapacitorNotificationCapabilities(({ final __callArgument1081:Dynamic = capacitor; __callArgument1081; })) : CapacitorNotificationCapabilities), shortcut: {  }, screen: {  }, share: { content: (cast createCapacitorShareContentBackend(({ final __callArgument1083:Dynamic = capacitor; __callArgument1083; })) : CapacitorShareContentBackend) }, shell: {  }, storage: { fileSystem: (cast createCapacitorFileSystemBackend(({ final __callArgument1085:Dynamic = capacitor; __callArgument1085; })) : { >FileSystemBasicBackend, >Entity, }) }, system: { device: (cast createCapacitorDeviceBackend(({ final __callArgument1087:Dynamic = capacitor; __callArgument1087; })) : { >DeviceBackend, >Entity, }) }, text: {  }, tray: {  }, ui: { statusBarColor: statusBar, statusBarInfo: statusBar, statusBarOverlays: statusBar, statusBarStyle: statusBar, statusBarVisibility: statusBar }, updater: {  }, window: {  } } : EntityShapeL103C23__capacitorRegister) : Dynamic)) : EntityShapeL103C23__capacitorRegister);
+    return cast (cast createEntity((cast ({ accessibility: (cast {  } : Dynamic), app: (cast app : Dynamic), clipboard: (cast { image: clipboard, text: clipboard } : Dynamic), connectivity: (cast { change: connectivity, status: connectivity } : Dynamic), dialog: (cast { message: (cast createCapacitorMessageDialogBackend(({ final __callArgument1059:Dynamic = capacitor; __callArgument1059; })) : { >MessageDialogBackend, >Entity, }), prompt: (cast createCapacitorPromptDialogBackend(({ final __callArgument1061:Dynamic = capacitor; __callArgument1061; })) : { >PromptDialogBackend, >Entity, }) } : Dynamic), graphics: (cast {  } : Dynamic), input: (cast { haptics: (cast createCapacitorHapticsBackend(({ final __callArgument1063:Dynamic = capacitor; __callArgument1063; })) : HapticsBackend), softKeyboardAccessoryBar: (cast createCapacitorSoftKeyboardAccessoryBarBackend(({ final __callArgument1065:Dynamic = capacitor; __callArgument1065; })) : { >SoftKeyboardAccessoryBarBackend, >Entity, }), softKeyboardChange: (cast createCapacitorSoftKeyboardChangeBackend(({ final __callArgument1067:Dynamic = capacitor; __callArgument1067; })) : { >SoftKeyboardChangeBackend, >Entity, }), softKeyboardInfo: (cast createCapacitorSoftKeyboardInfoBackend(({ final __callArgument1069:Dynamic = capacitor; __callArgument1069; })) : { >SoftKeyboardInfoBackend, >Entity, }), softKeyboardResizeModeWrite: (cast createCapacitorSoftKeyboardResizeModeWriteBackend(({ final __callArgument1071:Dynamic = capacitor; __callArgument1071; })) : { >SoftKeyboardResizeModeWriteBackend, >Entity, }), softKeyboardScrollAssist: (cast createCapacitorSoftKeyboardScrollAssistBackend(({ final __callArgument1073:Dynamic = capacitor; __callArgument1073; })) : { >SoftKeyboardScrollAssistBackend, >Entity, }), softKeyboardStyle: (cast createCapacitorSoftKeyboardStyleBackend(({ final __callArgument1075:Dynamic = capacitor; __callArgument1075; })) : { >SoftKeyboardStyleBackend, >Entity, }), softKeyboardVisibility: (cast createCapacitorSoftKeyboardVisibilityBackend(({ final __callArgument1077:Dynamic = capacitor; __callArgument1077; })) : { >SoftKeyboardVisibilityBackend, >Entity, }) } : Dynamic), ipc: (cast {  } : Dynamic), media: (cast {  } : Dynamic), menu: (cast {  } : Dynamic), midi: (cast {  } : Dynamic), net: (cast {  } : Dynamic), power: (cast {  } : Dynamic), protocol: (cast (cast createCapacitorProtocolCapabilities(({ final __callArgument1079:Dynamic = capacitor; __callArgument1079; })) : CapacitorProtocolCapabilities) : Dynamic), notification: (cast (cast createCapacitorNotificationCapabilities(({ final __callArgument1081:Dynamic = capacitor; __callArgument1081; })) : CapacitorNotificationCapabilities) : Dynamic), shortcut: (cast {  } : Dynamic), screen: (cast {  } : Dynamic), share: (cast { content: (cast createCapacitorShareContentBackend(({ final __callArgument1083:Dynamic = capacitor; __callArgument1083; })) : CapacitorShareContentBackend) } : Dynamic), shell: (cast {  } : Dynamic), storage: (cast { fileSystem: (cast createCapacitorFileSystemBackend(({ final __callArgument1085:Dynamic = capacitor; __callArgument1085; })) : { >FileSystemBasicBackend, >Entity, }) } : Dynamic), system: (cast { device: (cast createCapacitorDeviceBackend(({ final __callArgument1087:Dynamic = capacitor; __callArgument1087; })) : { >DeviceBackend, >Entity, }) } : Dynamic), text: (cast {  } : Dynamic), tray: (cast {  } : Dynamic), ui: (cast { statusBarColor: statusBar, statusBarInfo: statusBar, statusBarOverlays: statusBar, statusBarStyle: statusBar, statusBarVisibility: statusBar } : Dynamic), updater: (cast {  } : Dynamic), window: (cast {  } : Dynamic) } : EntityShapeL103C23__capacitorRegister) : Dynamic)) : EntityShapeL103C23__capacitorRegister);
     return cast null;
   }
 
@@ -2404,7 +2404,7 @@ class _HostCapacitor {
   public static function createCapacitorShareContentBackend(capacitor:CapacitorApi):CapacitorShareContentBackend {
     var share:CapacitorSharePlugin = cast _Runtime.UNDEFINED;
     share = capacitor.share;
-    return cast (cast createEntity((cast ({ canShareContent: _HostCapacitor.hasShareableContent__capacitorShare, shareContent: function(content:ShareContent, options:Null<CapacitorShareContentOptions>):flight._internal._Promise<Bool> {
+    return cast (cast createEntity((cast ({ canShareContent: (cast _HostCapacitor.hasShareableContent__capacitorShare : Dynamic), shareContent: (cast function(content:ShareContent, options:Null<CapacitorShareContentOptions>):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var __flowBranch1169:Dynamic;
@@ -2432,7 +2432,7 @@ class _HostCapacitor {
           });
         })
       );
-    }, shareContentWithResult: function(content:ShareContent, options:Null<CapacitorShareContentOptions>):flight._internal._Promise<ShareResult> {
+    } : Dynamic), shareContentWithResult: (cast function(content:ShareContent, options:Null<CapacitorShareContentOptions>):flight._internal._Promise<ShareResult> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var __flowBranch1175:Dynamic;
@@ -2461,7 +2461,7 @@ class _HostCapacitor {
           });
         })
       );
-    } } : CapacitorShareContentBackend) : Dynamic)) : CapacitorShareContentBackend);
+    } : Dynamic) } : CapacitorShareContentBackend) : Dynamic)) : CapacitorShareContentBackend);
     return cast null;
   }
 
@@ -2480,7 +2480,7 @@ class _HostCapacitor {
     }] : Array<Dynamic>)), function(__unused0:flight._internal._Any):Void {
 
     });
-    return cast (cast (cast createEntity : Null<{ var getInfo:StatusBarInfo->StatusBarInfo; var setBackgroundColor:Float->Void; var setOverlaysContent:Bool->Void; var setStyle:StatusBarStyle->Void; var setVisible:Bool->Void; }>->{ >Entity, var getInfo:StatusBarInfo->StatusBarInfo; var setBackgroundColor:Float->Void; var setOverlaysContent:Bool->Void; var setStyle:StatusBarStyle->Void; var setVisible:Bool->Void; })(({ final __callArgument1229:Dynamic = ({ getInfo: function(out:StatusBarInfo):StatusBarInfo {
+    return cast (cast (cast createEntity : Null<{ var getInfo:StatusBarInfo->StatusBarInfo; var setBackgroundColor:Float->Void; var setOverlaysContent:Bool->Void; var setStyle:StatusBarStyle->Void; var setVisible:Bool->Void; }>->{ >Entity, var getInfo:StatusBarInfo->StatusBarInfo; var setBackgroundColor:Float->Void; var setOverlaysContent:Bool->Void; var setStyle:StatusBarStyle->Void; var setVisible:Bool->Void; })(({ final __callArgument1229:Dynamic = ({ getInfo: (cast function(out:StatusBarInfo):StatusBarInfo {
       var info:Null<CapacitorStatusBarInfoResult> = cast _Runtime.UNDEFINED;
       info = cachedInfo;
       (out.color = cast (((cast !_Runtime.strictEquals(({ final __structural1216 = info; __structural1216 == null ? _Runtime.UNDEFINED : (cast __structural1216 : { @:optional var color:Null<String>; }).color; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast _HostCapacitor.hexToRgba__capacitorStatusBar((cast (cast info : CapacitorStatusBarInfoResult).color : String)) : Float) : Dynamic) : (cast 0.0 : Dynamic)) : Float));
@@ -2490,25 +2490,25 @@ class _HostCapacitor {
       (out.visible = cast (_Runtime.coalesce(({ final __structural1218 = info; __structural1218 == null ? _Runtime.UNDEFINED : (cast __structural1218 : { var visible:Bool; }).visible; }), function():Dynamic return cast true) : Bool));
       return cast out;
       return cast _Runtime.UNDEFINED;
-    }, setBackgroundColor: function(color:Float):Void {
+    } : Dynamic), setBackgroundColor: (cast function(color:Float):Void {
       flight._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).setBackgroundColor(({ final __callArgument1220:Dynamic = { color: (cast _HostCapacitor.rgbaToHex__capacitorStatusBar((cast color : Float)) : String) }; __callArgument1220; })), function(__unused1:flight._internal._Any):Void {
 
       });
-    }, setOverlaysContent: function(overlay:Bool):Void {
+    } : Dynamic), setOverlaysContent: (cast function(overlay:Bool):Void {
       flight._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).setOverlaysWebView(({ final __callArgument1222:Dynamic = { overlay: overlay }; __callArgument1222; })), function(__unused2:flight._internal._Any):Void {
 
       });
-    }, setStyle: function(style:StatusBarStyle):Void {
+    } : Dynamic), setStyle: (cast function(style:StatusBarStyle):Void {
       flight._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).setStyle(({ final __callArgument1228:Dynamic = { style: (cast _HostCapacitor.toCapacitorStyle__capacitorStatusBar(({ final __callArgument1226:Dynamic = style; __callArgument1226; })) : String) }; __callArgument1228; })), function(__unused3:flight._internal._Any):Void {
 
       });
-    }, setVisible: function(visible:Bool):Void {
+    } : Dynamic), setVisible: (cast function(visible:Bool):Void {
       if ((cast visible : Bool)) { flight._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).show(), function(__unused4:flight._internal._Any):Void {
 
       }); } else { flight._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).hide(), function(__unused5:flight._internal._Any):Void {
 
       }); }
-    } } : EntityShapeL40C23__capacitorStatusBar); __callArgument1229; })) : EntityShapeL40C23__capacitorStatusBar);
+    } : Dynamic) } : EntityShapeL40C23__capacitorStatusBar); __callArgument1229; })) : EntityShapeL40C23__capacitorStatusBar);
     return cast null;
   }
 

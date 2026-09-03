@@ -5,4 +5,4 @@ import Math as HxMath;
 import flight._internal._Runtime;
 
 @:noCompletion
-typedef ElectronWindowsAppCapabilities = flight._internal._Intersection2<ElectronCommonAppCapabilities, flight._internal._Required<{ @:optional var loginItem:Null<AppLoginItemBackend>; @:optional var recentDocuments:Null<AppRecentDocumentsBackend>; @:optional var userModelId:Null<AppUserModelIdBackend>; }>>;
+typedef ElectronWindowsAppCapabilities = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var name:AppNameBackend; var version:AppVersionBackend; var path:AppPathBackend; var allWindowsClosed:AppAllWindowsClosedBackend; var quitRequest:AppQuitRequestBackend; var ready:AppReadyBackend; var secondInstance:AppSecondInstanceBackend; var focus:AppFocusBackend; var quit:AppQuitBackend; var locale:AppLocaleBackend; var nameWrite:AppNameWriteBackend; var relaunch:AppRelaunchBackend; var singleInstance:AppSingleInstanceBackend; var loginItem:AppLoginItemBackend; var recentDocuments:AppRecentDocumentsBackend; var userModelId:AppUserModelIdBackend; };

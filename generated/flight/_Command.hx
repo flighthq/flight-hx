@@ -347,7 +347,7 @@ class _Command {
       var i:Float = _Runtime.subtractNumbers(_Runtime.field((cast history : CommandHistory).entries, 'length'), 1.0);
       while ((cast ((cast i : Float) >= (cast start : Float)) : Bool)) {
         var command:Command = flight._internal._StaticIndex.readArray((cast history : CommandHistory).entries, i);
-        ({ final __optionalOwner80 = (cast getCommandBinding(({ final __callArgument81:Dynamic = history; __callArgument81; }), (cast (cast command : Command).kind : String)) : Null<CommandBinding>); if (__optionalOwner80 != null) { final __optionalCall79 = (cast __optionalOwner80 : { var undo:Command->Void; }).undo; if (__optionalCall79 != null) __optionalCall79(command); } });
+        ({ final __optionalOwner81 = (cast getCommandBinding(({ final __callArgument82:Dynamic = history; __callArgument82; }), (cast (cast command : Command).kind : String)) : Null<CommandBinding>); if (__optionalOwner81 != null) { final __optionalCall80 = (cast __optionalOwner81 : { var undo:Command->Void; }).undo; if (__optionalCall80 != null) __optionalCall80(({ final __callArgument79:Dynamic = command; __callArgument79; })); } });
         i--;
       }
     }
@@ -355,7 +355,7 @@ class _Command {
     ((cast history : CommandHistory).index = start);
     ((cast history : CommandHistory).transactionDepth = 0.0);
     ((cast history : CommandHistory).transactionLabel = null);
-    notifyCommandHistoryChanged(({ final __callArgument83:Dynamic = history; __callArgument83; }));
+    notifyCommandHistoryChanged(({ final __callArgument84:Dynamic = history; __callArgument84; }));
     return cast true;
     return cast null;
   }
@@ -383,7 +383,7 @@ class _Command {
     _Runtime.setLength((cast history : CommandHistory).entries, start);
     _Runtime.callProperty((cast history : CommandHistory).entries, 'push', cast ([((cast _Runtime.strictEquals(_Runtime.field(collected, 'length'), 1.0) : Bool) ? (cast flight._internal._StaticIndex.readArray(collected, 0.0) : Dynamic) : (cast (cast createCompositeCommand((cast label : String), (cast collected : Dynamic)) : CompositeCommand) : Dynamic))] : Array<Dynamic>));
     ((cast history : CommandHistory).index = (start + 1.0));
-    notifyCommandHistoryChanged(({ final __callArgument85:Dynamic = history; __callArgument85; }));
+    notifyCommandHistoryChanged(({ final __callArgument86:Dynamic = history; __callArgument86; }));
     return cast true;
     return cast null;
   }
@@ -395,20 +395,20 @@ class _Command {
 
   public static function explainCommandDispatch(history:CommandHistory, command:Command):CommandDispatchExplanation {
     var missingKind:Null<String> = cast _Runtime.UNDEFINED;
-    missingKind = (cast _Command.findMissingCommandKind__explainCommandDispatch(({ final __callArgument87:Dynamic = history; __callArgument87; }), ({ final __callArgument88:Dynamic = command; __callArgument88; })) : Null<String>);
+    missingKind = (cast _Command.findMissingCommandKind__explainCommandDispatch(({ final __callArgument88:Dynamic = history; __callArgument88; }), ({ final __callArgument89:Dynamic = command; __callArgument89; })) : Null<String>);
     return cast { missingKind: missingKind, resolved: _Runtime.strictEquals(missingKind, null) };
     return cast null;
   }
 
   public static function findMissingCommandKind__explainCommandDispatch(history:CommandHistory, command:Command):Null<String> {
     var children:Null<Array<Command>> = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals((cast getCommandBinding(({ final __callArgument91:Dynamic = history; __callArgument91; }), (cast _Runtime.field(command, 'kind') : String)) : Null<CommandBinding>), null) : Bool)) { return cast _Runtime.field(command, 'kind'); }
+    if ((cast _Runtime.strictEquals((cast getCommandBinding(({ final __callArgument92:Dynamic = history; __callArgument92; }), (cast _Runtime.field(command, 'kind') : String)) : Null<CommandBinding>), null) : Bool)) { return cast _Runtime.field(command, 'kind'); }
     children = (cast (cast command : { @:optional var children:Null<Array<Command>>; @:optional var kind:Null<Kind>; @:optional var label:Null<String>; }) : { @:optional var children:Null<Array<Command>>; @:optional var kind:Null<String>; @:optional var label:Null<String>; }).children;
     if ((cast _Runtime.strictEquals(children, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-        var missing:Null<String> = (cast _Command.findMissingCommandKind__explainCommandDispatch(({ final __callArgument93:Dynamic = history; __callArgument93; }), flight._internal._StaticIndex.readArray(children, i)) : Null<String>);
+        var missing:Null<String> = (cast _Command.findMissingCommandKind__explainCommandDispatch(({ final __callArgument94:Dynamic = history; __callArgument94; }), flight._internal._StaticIndex.readArray(children, i)) : Null<String>);
         if ((cast !_Runtime.strictEquals(missing, null) : Bool)) { return cast missing; }
         i++;
       }

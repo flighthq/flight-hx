@@ -4,4 +4,36 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Geometry)
+@:structInit
+class Obb {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var centerX:Float;
+  public var centerY:Float;
+  public var centerZ:Float;
+  public var halfExtentX:Float;
+  public var halfExtentY:Float;
+  public var halfExtentZ:Float;
+  public var orientationW:Float;
+  public var orientationX:Float;
+  public var orientationY:Float;
+  public var orientationZ:Float;
+
+  private function new(centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationW:Float, orientationX:Float, orientationY:Float, orientationZ:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.centerX = centerX;
+    this.centerY = centerY;
+    this.centerZ = centerZ;
+    this.halfExtentX = halfExtentX;
+    this.halfExtentY = halfExtentY;
+    this.halfExtentZ = halfExtentZ;
+    this.orientationW = orientationW;
+    this.orientationX = orientationX;
+    this.orientationY = orientationY;
+    this.orientationZ = orientationZ;
+  }
+}
+#else
 typedef Obb = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var centerX:Float; var centerY:Float; var centerZ:Float; var halfExtentX:Float; var halfExtentY:Float; var halfExtentZ:Float; var orientationW:Float; var orientationX:Float; var orientationY:Float; var orientationZ:Float; };
+#end

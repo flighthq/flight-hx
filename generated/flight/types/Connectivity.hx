@@ -4,4 +4,26 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Connectivity)
+@:structInit
+class Connectivity {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onChange:Signal<ConnectivityStatus->Void>;
+  public var onConnectionTypeChange:Signal<ConnectivityConnectionType->Void>;
+  public var onMeteredChange:Signal<Bool->Void>;
+  public var onOnline:Signal<Void->Void>;
+  public var onOffline:Signal<Void->Void>;
+
+  private function new(onChange:Signal<ConnectivityStatus->Void>, onConnectionTypeChange:Signal<ConnectivityConnectionType->Void>, onMeteredChange:Signal<Bool->Void>, onOnline:Signal<Void->Void>, onOffline:Signal<Void->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onChange = onChange;
+    this.onConnectionTypeChange = onConnectionTypeChange;
+    this.onMeteredChange = onMeteredChange;
+    this.onOnline = onOnline;
+    this.onOffline = onOffline;
+  }
+}
+#else
 typedef Connectivity = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onChange:Signal<ConnectivityStatus->Void>; var onConnectionTypeChange:Signal<ConnectivityConnectionType->Void>; var onMeteredChange:Signal<Bool->Void>; var onOnline:Signal<Void->Void>; var onOffline:Signal<Void->Void>; };
+#end

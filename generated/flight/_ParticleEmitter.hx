@@ -1314,7 +1314,7 @@ class _ParticleEmitter {
           var dx:Float = flight._internal._StaticIndex.readFloat32ArrayTyped((cast data.transforms : flight._internal._Float32Array), (cast tt : Float));
           var dy:Float = flight._internal._StaticIndex.readFloat32ArrayTyped((cast data.transforms : flight._internal._Float32Array), (cast (tt + 1.0) : Float));
           _Runtime.callOptionalValue(onDeath, cast ([dx, dy, 0.0] : Array<Dynamic>));
-          ({ final __optionalOwner199 = ({ final __typedStruct200 = signals; __typedStruct200 == null ? _Runtime.UNDEFINED : (cast __typedStruct200 : { var onParticleDeath:Signal<Float->Float->Float->Void>; }).onParticleDeath; }); if (__optionalOwner199 != null) { final __optionalCall198 = (cast __optionalOwner199 : { var emit:Float->Float->Float->Void; }).emit; if (__optionalCall198 != null) __optionalCall198(dx, dy, 0.0); } });
+          ({ final __optionalOwner199 = ({ final __typedStruct200 = signals; __typedStruct200 == null ? _Runtime.UNDEFINED : (cast __typedStruct200 : { var onParticleDeath:Signal<Float->Float->Float->Void>; }).onParticleDeath; }); if (__optionalOwner199 != null) { final __optionalCall198 = (cast __optionalOwner199 : { var emit:Float->Float->Float->Void; }).emit; if (__optionalCall198 != null) __optionalCall198((cast dx : Float), (cast dy : Float), (cast 0.0 : Float)); } });
         }
         liveCount--;
         if ((cast ((cast i : Float) < (cast liveCount : Float)) : Bool)) {
@@ -1762,7 +1762,7 @@ class _ParticleEmitter {
           var dy:Float = flight._internal._StaticIndex.readFloat32ArrayTyped((cast data.transforms : flight._internal._Float32Array), (cast (tt + 1.0) : Float));
           var dz:Float = flight._internal._StaticIndex.readFloat32ArrayTyped((cast positionsZ : flight._internal._Float32Array), (cast i : Float));
           _Runtime.callOptionalValue(onDeath, cast ([dx, dy, dz] : Array<Dynamic>));
-          ({ final __optionalOwner256 = ({ final __typedStruct257 = signals; __typedStruct257 == null ? _Runtime.UNDEFINED : (cast __typedStruct257 : { var onParticleDeath:Signal<Float->Float->Float->Void>; }).onParticleDeath; }); if (__optionalOwner256 != null) { final __optionalCall255 = (cast __optionalOwner256 : { var emit:Float->Float->Float->Void; }).emit; if (__optionalCall255 != null) __optionalCall255(dx, dy, dz); } });
+          ({ final __optionalOwner256 = ({ final __typedStruct257 = signals; __typedStruct257 == null ? _Runtime.UNDEFINED : (cast __typedStruct257 : { var onParticleDeath:Signal<Float->Float->Float->Void>; }).onParticleDeath; }); if (__optionalOwner256 != null) { final __optionalCall255 = (cast __optionalOwner256 : { var emit:Float->Float->Float->Void; }).emit; if (__optionalCall255 != null) __optionalCall255((cast dx : Float), (cast dy : Float), (cast dz : Float)); } });
         }
         liveCount--;
         if ((cast ((cast i : Float) < (cast liveCount : Float)) : Bool)) {

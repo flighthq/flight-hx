@@ -328,21 +328,21 @@ class _Compression {
   public static final ZLIB_TRAILER_BYTES__compress:Float = 4.0;
 
   public static function getDecompressor(compression:Compression):Null<Decompressor> {
-    return cast _Runtime.coalesce(((cast _Compression._decompressors__decompressor : flight._internal._Map<Compression, Decompressor>).get(compression)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _Compression._decompressors__decompressor : flight._internal._Map<Compression, Decompressor>).get((cast compression))), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function hasDecompressor(compression:Compression):Bool {
-    return cast ((cast _Compression._decompressors__decompressor : flight._internal._Map<Compression, Decompressor>).has(compression));
+    return cast ((cast _Compression._decompressors__decompressor : flight._internal._Map<Compression, Decompressor>).has((cast compression)));
     return cast null;
   }
 
   public static function registerDecompressor(compression:Compression, decompress:Decompressor):Void {
-    ((cast _Compression._decompressors__decompressor : flight._internal._Map<Compression, Decompressor>).set(compression, (cast decompress)));
+    ((cast _Compression._decompressors__decompressor : flight._internal._Map<Compression, Decompressor>).set((cast compression), (cast decompress)));
   }
 
   public static function unregisterDecompressor(compression:Compression):Void {
-    ((cast _Compression._decompressors__decompressor : flight._internal._Map<Compression, Decompressor>).delete_(compression));
+    ((cast _Compression._decompressors__decompressor : flight._internal._Map<Compression, Decompressor>).delete_((cast compression)));
   }
 
   public static final _decompressors__decompressor:flight._internal._Map<Compression, Decompressor> = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);

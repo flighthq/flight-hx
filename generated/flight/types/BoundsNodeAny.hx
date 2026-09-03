@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef BoundsNodeAny = flight._internal._Intersection2<NodeAny, HasBoundsRectangle>;
+typedef BoundsNodeAny = { @:optional var __symbol__EntityRuntime:Null<{ >NodeRuntime<flight._internal._Any>, >EntityRuntime, }>; var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; };

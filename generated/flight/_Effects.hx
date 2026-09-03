@@ -1464,18 +1464,18 @@ class _Effects {
       var va:flight._internal._Any = _Runtime.getIndex(aRec, key);
       var vb:flight._internal._Any = _Runtime.getIndex(bRec, key);
       if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(va), 'number') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'number') : Bool)) : Bool)) {
-        ((cast numericKeys : flight._internal._Set<String>).add(key));
+        ((cast numericKeys : flight._internal._Set<String>).add((cast key)));
       } else { if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(va), 'boolean') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'boolean') : Bool)) : Bool)) {
-        ((cast booleanKeys : flight._internal._Set<String>).add(key));
+        ((cast booleanKeys : flight._internal._Set<String>).add((cast key)));
       } else { if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(va), 'string') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'string') : Bool)) : Bool)) {
-        ((cast stringKeys : flight._internal._Set<String>).add(key));
+        ((cast stringKeys : flight._internal._Set<String>).add((cast key)));
       } } }
     }
     for (key in _Runtime.iterable(flight._internal.DynamicObject.keys(bRec))) {
       if ((cast _Runtime.strictEquals(key, 'kind') : Bool)) { continue; }
-      if ((cast ((cast ((cast !(cast ((cast numericKeys : flight._internal._Set<String>).has(key)) : Bool) : Bool) && (cast !(cast ((cast booleanKeys : flight._internal._Set<String>).has(key)) : Bool) : Bool)) : Bool) && (cast !(cast ((cast stringKeys : flight._internal._Set<String>).has(key)) : Bool) : Bool)) : Bool)) {
+      if ((cast ((cast ((cast !(cast ((cast numericKeys : flight._internal._Set<String>).has((cast key))) : Bool) : Bool) && (cast !(cast ((cast booleanKeys : flight._internal._Set<String>).has((cast key))) : Bool) : Bool)) : Bool) && (cast !(cast ((cast stringKeys : flight._internal._Set<String>).has((cast key))) : Bool) : Bool)) : Bool)) {
         var vb:flight._internal._Any = _Runtime.getIndex(bRec, key);
-        if ((cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'number') : Bool)) { ((cast numericKeys : flight._internal._Set<String>).add(key)); } else { if ((cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'boolean') : Bool)) { ((cast booleanKeys : flight._internal._Set<String>).add(key)); } else { if ((cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'string') : Bool)) { ((cast stringKeys : flight._internal._Set<String>).add(key)); } } }
+        if ((cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'number') : Bool)) { ((cast numericKeys : flight._internal._Set<String>).add((cast key))); } else { if ((cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'boolean') : Bool)) { ((cast booleanKeys : flight._internal._Set<String>).add((cast key))); } else { if ((cast _Runtime.strictEquals(_Runtime.typeofValue(vb), 'string') : Bool)) { ((cast stringKeys : flight._internal._Set<String>).add((cast key))); } } }
       }
     }
     outRecord = (cast (cast out : flight._internal._Any) : flight._internal._Record<String, flight._internal._Any>);
@@ -1575,7 +1575,7 @@ class _Effects {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast length : Float)) : Bool)) {
         var effect:RenderEffect = (cast ((cast _Runtime.strictEquals(list, null) : Bool) ? (cast effects : Dynamic) : (cast flight._internal._StaticIndex.readArray(list, index) : Dynamic)) : RenderEffect);
-        var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:RenderEffectPaddingResolver; }>> = ({ final __collection139:Dynamic = entries; __collection139 == null ? _Runtime.UNDEFINED : ((cast __collection139 : flight._internal._Map<String, RegistryTableEntry<RenderEffectPaddingResolver>>).get(_Runtime.field(effect, 'kind'))); });
+        var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:RenderEffectPaddingResolver; }>> = ({ final __collection139:Dynamic = entries; __collection139 == null ? _Runtime.UNDEFINED : ((cast __collection139 : flight._internal._Map<String, RegistryTableEntry<RenderEffectPaddingResolver>>).get((cast _Runtime.field(effect, 'kind')))); });
         if ((cast !_Runtime.strictEquals(({ final __structural140 = entry; __structural140 == null ? _Runtime.UNDEFINED : (cast __structural140 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) {
           if ((cast !(cast (cast _Effects.hasEarlierKind__renderEffectPadding(({ final __callArgument141:Dynamic = list; __callArgument141; }), (cast index : Float), (cast _Runtime.field(effect, 'kind') : String)) : Bool) : Bool) : Bool)) {
             _Runtime.callOptionalProperty(missingKinds, 'push', cast ([_Runtime.field(effect, 'kind')] : Array<Dynamic>));

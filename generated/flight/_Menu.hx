@@ -64,14 +64,14 @@ class _Menu {
     var unsubscribe:Void->Void = cast _Runtime.UNDEFINED;
     detachMenuHighlight(({ final __callArgument0:Dynamic = highlight; __callArgument0; }));
     unsubscribe = (cast (cast (cast host : HasMenuHighlight).menu : { var highlight:MenuHighlightBackend; }).highlight : MenuHighlightBackend).subscribe(({ final __callArgument2:Dynamic = function(id:String):Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast highlight : MenuHighlight).onMenuItemHighlight], [id]]), 1); }; __callArgument2; }));
-    ((cast _Menu._highlightUnsubscribe__menu : flight._internal._WeakMap<MenuHighlight, Void->Void>).set(highlight, (cast unsubscribe)));
+    ((cast _Menu._highlightUnsubscribe__menu : flight._internal._WeakMap<MenuHighlight, Void->Void>).set((cast highlight), (cast unsubscribe)));
   }
 
   public static function attachMenuSelect(host:HasMenuSelect, select:MenuSelect):Void {
     var unsubscribe:Void->Void = cast _Runtime.UNDEFINED;
     detachMenuSelect(({ final __callArgument3:Dynamic = select; __callArgument3; }));
     unsubscribe = (cast (cast (cast host : HasMenuSelect).menu : { var select:MenuSelectBackend; }).select : MenuSelectBackend).subscribe(({ final __callArgument5:Dynamic = function(id:String):Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast select : MenuSelect).onMenuItemSelect], [id]]), 1); }; __callArgument5; }));
-    ((cast _Menu._selectUnsubscribe__menu : flight._internal._WeakMap<MenuSelect, Void->Void>).set(select, (cast unsubscribe)));
+    ((cast _Menu._selectUnsubscribe__menu : flight._internal._WeakMap<MenuSelect, Void->Void>).set((cast select), (cast unsubscribe)));
   }
 
   public static function cloneMenuTemplate(template:MenuItemTemplate):MenuItemTemplate {
@@ -85,7 +85,7 @@ class _Menu {
   }
 
   public static function createMenuHighlight():MenuHighlight {
-    return cast (cast createEntity((cast ({ onMenuItemHighlight: (cast createSignal() : Signal<String->Void>) } : MenuHighlight) : Dynamic)) : MenuHighlight);
+    return cast (cast createEntity((cast ({ onMenuItemHighlight: (cast (cast createSignal() : Signal<String->Void>) : Dynamic) } : MenuHighlight) : Dynamic)) : MenuHighlight);
     return cast null;
   }
 
@@ -100,7 +100,7 @@ class _Menu {
   }
 
   public static function createMenuSelect():MenuSelect {
-    return cast (cast createEntity((cast ({ onMenuItemSelect: (cast createSignal() : Signal<String->Void>) } : MenuSelect) : Dynamic)) : MenuSelect);
+    return cast (cast createEntity((cast ({ onMenuItemSelect: (cast (cast createSignal() : Signal<String->Void>) : Dynamic) } : MenuSelect) : Dynamic)) : MenuSelect);
     return cast null;
   }
 
@@ -110,7 +110,7 @@ class _Menu {
     pending = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
     for (host in _Runtime.iterable(hosts)) {
       var provider:MenuApplicationBackend = (cast (cast host : HasMenuApplication).menu : { var application:MenuApplicationBackend; }).application;
-      if ((cast !(cast ((cast _Menu._destroyedApplication__menu : flight._internal._WeakSet<MenuApplicationBackend>).has(provider)) : Bool) : Bool)) { ((cast pending : flight._internal._Set<MenuApplicationBackend>).add(provider)); }
+      if ((cast !(cast ((cast _Menu._destroyedApplication__menu : flight._internal._WeakSet<MenuApplicationBackend>).has((cast provider))) : Bool) : Bool)) { ((cast pending : flight._internal._Set<MenuApplicationBackend>).add((cast provider))); }
     }
     failure = null;
     for (provider in _Runtime.iterable(pending)) {
@@ -120,19 +120,19 @@ class _Menu {
         (failure ??= error);
         continue;
       }
-      ((cast _Menu._destroyedApplication__menu : flight._internal._WeakSet<MenuApplicationBackend>).add(provider));
+      ((cast _Menu._destroyedApplication__menu : flight._internal._WeakSet<MenuApplicationBackend>).add((cast provider)));
     }
     if ((cast !_Runtime.strictEquals(failure, null) : Bool)) { _Runtime.throwValue(failure); }
   }
 
   public static function detachMenuHighlight(highlight:MenuHighlight):Void {
-    _Runtime.callOptionalValue(((cast _Menu._highlightUnsubscribe__menu : flight._internal._WeakMap<MenuHighlight, Void->Void>).get(highlight)), cast ([] : Array<Dynamic>));
-    ((cast _Menu._highlightUnsubscribe__menu : flight._internal._WeakMap<MenuHighlight, Void->Void>).delete_(highlight));
+    _Runtime.callOptionalValue(((cast _Menu._highlightUnsubscribe__menu : flight._internal._WeakMap<MenuHighlight, Void->Void>).get((cast highlight))), cast ([] : Array<Dynamic>));
+    ((cast _Menu._highlightUnsubscribe__menu : flight._internal._WeakMap<MenuHighlight, Void->Void>).delete_((cast highlight)));
   }
 
   public static function detachMenuSelect(select:MenuSelect):Void {
-    _Runtime.callOptionalValue(((cast _Menu._selectUnsubscribe__menu : flight._internal._WeakMap<MenuSelect, Void->Void>).get(select)), cast ([] : Array<Dynamic>));
-    ((cast _Menu._selectUnsubscribe__menu : flight._internal._WeakMap<MenuSelect, Void->Void>).delete_(select));
+    _Runtime.callOptionalValue(((cast _Menu._selectUnsubscribe__menu : flight._internal._WeakMap<MenuSelect, Void->Void>).get((cast select))), cast ([] : Array<Dynamic>));
+    ((cast _Menu._selectUnsubscribe__menu : flight._internal._WeakMap<MenuSelect, Void->Void>).delete_((cast select)));
   }
 
   public static function disposeMenuHighlight(highlight:MenuHighlight):Void {
@@ -178,7 +178,7 @@ class _Menu {
   }
 
   public static function _validateItem__menu(item:MenuItemTemplate, seen:flight._internal._Set<MenuItemTemplate>):Null<String> {
-    if ((cast ((cast seen : flight._internal._Set<MenuItemTemplate>).has(item)) : Bool)) {
+    if ((cast ((cast seen : flight._internal._Set<MenuItemTemplate>).has((cast item))) : Bool)) {
       _Runtime.throwValue(_Runtime.error('validateMenuItemTemplate: cyclic submenu reference detected'));
     }
     if ((cast _Runtime.strictEquals(item.type, 'separator') : Bool)) {
@@ -202,12 +202,12 @@ class _Menu {
     if ((cast !_Runtime.strictEquals(item.submenu, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var groupError:Null<String> = (cast _Menu._validateRadioGroups__menu(item.submenu) : Null<String>);
       if ((cast !_Runtime.strictEquals(groupError, null) : Bool)) { return cast groupError; }
-      ((cast seen : flight._internal._Set<MenuItemTemplate>).add(item));
+      ((cast seen : flight._internal._Set<MenuItemTemplate>).add((cast item)));
       for (child in _Runtime.iterable(item.submenu)) {
         var err:Null<String> = (cast _Menu._validateItem__menu(({ final __callArgument22:Dynamic = child; __callArgument22; }), ({ final __callArgument23:Dynamic = seen; __callArgument23; })) : Null<String>);
         if ((cast !_Runtime.strictEquals(err, null) : Bool)) { return cast err; }
       }
-      ((cast seen : flight._internal._Set<MenuItemTemplate>).delete_(item));
+      ((cast seen : flight._internal._Set<MenuItemTemplate>).delete_((cast item)));
     }
     return cast null;
     return cast null;

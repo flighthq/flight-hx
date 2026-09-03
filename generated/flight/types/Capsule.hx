@@ -4,4 +4,30 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Geometry)
+@:structInit
+class Capsule {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var endX:Float;
+  public var endY:Float;
+  public var endZ:Float;
+  public var radius:Float;
+  public var startX:Float;
+  public var startY:Float;
+  public var startZ:Float;
+
+  private function new(endX:Float, endY:Float, endZ:Float, radius:Float, startX:Float, startY:Float, startZ:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.endX = endX;
+    this.endY = endY;
+    this.endZ = endZ;
+    this.radius = radius;
+    this.startX = startX;
+    this.startY = startY;
+    this.startZ = startZ;
+  }
+}
+#else
 typedef Capsule = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var endX:Float; var endY:Float; var endZ:Float; var radius:Float; var startX:Float; var startY:Float; var startZ:Float; };
+#end

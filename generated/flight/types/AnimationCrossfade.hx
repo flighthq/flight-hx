@@ -4,4 +4,34 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Animation)
+@:structInit
+class AnimationCrossfade {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var channels:Array<AnimationCrossfadeChannel>;
+  public var curve:EasingFunction;
+  public var duration:Float;
+  public var elapsed:Float;
+  public var from:AnimationPlayer;
+  public var fromSample:flight._internal._Float32Array;
+  public var to:AnimationPlayer;
+  public var toSample:flight._internal._Float32Array;
+  public var weight:Float;
+
+  private function new(channels:Array<AnimationCrossfadeChannel>, curve:EasingFunction, duration:Float, elapsed:Float, from:AnimationPlayer, fromSample:flight._internal._Float32Array, to:AnimationPlayer, toSample:flight._internal._Float32Array, weight:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.channels = channels;
+    this.curve = curve;
+    this.duration = duration;
+    this.elapsed = elapsed;
+    this.from = from;
+    this.fromSample = fromSample;
+    this.to = to;
+    this.toSample = toSample;
+    this.weight = weight;
+  }
+}
+#else
 typedef AnimationCrossfade = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var channels:Array<AnimationCrossfadeChannel>; var curve:EasingFunction; var duration:Float; var elapsed:Float; var from:AnimationPlayer; var fromSample:flight._internal._Float32Array; var to:AnimationPlayer; var toSample:flight._internal._Float32Array; var weight:Float; };
+#end

@@ -4,4 +4,28 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._CameraControls)
+@:structInit
+class CameraShake {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var trauma:Float;
+  public var decay:Float;
+  public var frequency:Float;
+  public var translationAmplitude:Float;
+  public var rotationAmplitude:Float;
+  public var time:Float;
+
+  private function new(trauma:Float, decay:Float, frequency:Float, translationAmplitude:Float, rotationAmplitude:Float, time:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.trauma = trauma;
+    this.decay = decay;
+    this.frequency = frequency;
+    this.translationAmplitude = translationAmplitude;
+    this.rotationAmplitude = rotationAmplitude;
+    this.time = time;
+  }
+}
+#else
 typedef CameraShake = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var trauma:Float; var decay:Float; var frequency:Float; var translationAmplitude:Float; var rotationAmplitude:Float; var time:Float; };
+#end

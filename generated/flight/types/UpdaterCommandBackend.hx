@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:structInit
+class UpdaterCommandBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var check:Void->flight._internal._Promise<AppUpdateCheckOutcome>;
+  public var destroy:Void->Void;
+  public var install:DownloadedUpdate->flight._internal._Promise<AppUpdateInstallOutcome>;
+
+  private function new(check:Void->flight._internal._Promise<AppUpdateCheckOutcome>, destroy:Void->Void, install:DownloadedUpdate->flight._internal._Promise<AppUpdateInstallOutcome>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.check = check;
+    this.destroy = destroy;
+    this.install = install;
+  }
+}
+#else
 typedef UpdaterCommandBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var check:Void->flight._internal._Promise<AppUpdateCheckOutcome>; var destroy:Void->Void; var install:DownloadedUpdate->flight._internal._Promise<AppUpdateInstallOutcome>; };
+#end

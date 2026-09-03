@@ -4,4 +4,26 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Node)
+@:structInit
+class Viewport {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var devicePixelRatio:Float;
+  public var height:Float;
+  public var width:Float;
+  public var x:Float;
+  public var y:Float;
+
+  private function new(devicePixelRatio:Float, height:Float, width:Float, x:Float, y:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.devicePixelRatio = devicePixelRatio;
+    this.height = height;
+    this.width = width;
+    this.x = x;
+    this.y = y;
+  }
+}
+#else
 typedef Viewport = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var devicePixelRatio:Float; var height:Float; var width:Float; var x:Float; var y:Float; };
+#end

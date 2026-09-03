@@ -4,4 +4,28 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._App)
+@:structInit
+class App {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onActivate:Signal<Void->Void>;
+  public var onAllWindowsClosed:Signal<Void->Void>;
+  public var onOpenFile:Signal<String->Void>;
+  public var onQuitRequest:Signal<Void->Void>;
+  public var onReady:Signal<Void->Void>;
+  public var onSecondInstance:Signal<Array<String>->Void>;
+
+  private function new(onActivate:Signal<Void->Void>, onAllWindowsClosed:Signal<Void->Void>, onOpenFile:Signal<String->Void>, onQuitRequest:Signal<Void->Void>, onReady:Signal<Void->Void>, onSecondInstance:Signal<Array<String>->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onActivate = onActivate;
+    this.onAllWindowsClosed = onAllWindowsClosed;
+    this.onOpenFile = onOpenFile;
+    this.onQuitRequest = onQuitRequest;
+    this.onReady = onReady;
+    this.onSecondInstance = onSecondInstance;
+  }
+}
+#else
 typedef App = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onActivate:Signal<Void->Void>; var onAllWindowsClosed:Signal<Void->Void>; var onOpenFile:Signal<String->Void>; var onQuitRequest:Signal<Void->Void>; var onReady:Signal<Void->Void>; var onSecondInstance:Signal<Array<String>->Void>; };
+#end

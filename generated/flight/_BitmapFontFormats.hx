@@ -68,13 +68,13 @@ class _BitmapFontFormats {
     codepoints = (cast _Runtime.concatArrays([_Runtime.toArray(((cast font.glyphs : flight._internal._Map<Float, GlyphEntry>).keys()))]));
     _Runtime.callProperty(lines, 'push', cast (['chars count=' + Std.string(_Runtime.field(codepoints, 'length')) + ''] : Array<Dynamic>));
     for (codepoint in _Runtime.iterable(codepoints)) {
-      var glyph:GlyphEntry = (cast ((cast font.glyphs : flight._internal._Map<Float, GlyphEntry>).get(codepoint)) : GlyphEntry);
+      var glyph:GlyphEntry = (cast ((cast font.glyphs : flight._internal._Map<Float, GlyphEntry>).get((cast codepoint))) : GlyphEntry);
       _Runtime.callProperty(lines, 'push', cast ([('char id=' + Std.string(codepoint) + ' x=' + Std.string(glyph.x) + ' y=' + Std.string(glyph.y) + ' width=' + Std.string(glyph.width) + ' height=' + Std.string(glyph.height) + ' ' + 'xoffset=' + Std.string(glyph.bearingX) + ' yoffset=' + Std.string((base - glyph.bearingY)) + ' xadvance=' + Std.string(glyph.advance) + ' page=' + Std.string(glyph.page) + ' chnl=15')] : Array<Dynamic>));
     }
     kernKeys = (cast _Runtime.concatArrays([_Runtime.toArray(((cast font.kerning : flight._internal._Map<Float, Float>).keys()))]));
     _Runtime.callProperty(lines, 'push', cast (['kernings count=' + Std.string(_Runtime.field(kernKeys, 'length')) + ''] : Array<Dynamic>));
     for (key in _Runtime.iterable(kernKeys)) {
-      var amount:Float = (cast ((cast font.kerning : flight._internal._Map<Float, Float>).get(key)) : Float);
+      var amount:Float = (cast ((cast font.kerning : flight._internal._Map<Float, Float>).get((cast key))) : Float);
       (cast unpackBitmapFontKerningKey((cast key : Float), ({ final __callArgument8:Dynamic = _BitmapFontFormats._kerningPair__bitmapFontFnt; __callArgument8; })) : BitmapFontKerningPair);
       _Runtime.callProperty(lines, 'push', cast (['kerning first=' + Std.string((cast _BitmapFontFormats._kerningPair__bitmapFontFnt : BitmapFontKerningPair).left) + ' second=' + Std.string((cast _BitmapFontFormats._kerningPair__bitmapFontFnt : BitmapFontKerningPair).right) + ' amount=' + Std.string(amount) + ''] : Array<Dynamic>));
     }
@@ -329,20 +329,20 @@ class _BitmapFontFormats {
       for (page in _Runtime.iterable(record.pages)) {
         var atlas:Null<TextureAtlas> = (cast resolvePage((cast page.id : Float), (cast page.file : String)) : Null<TextureAtlas>);
         if ((cast !_Runtime.strictEquals(atlas, null) : Bool)) {
-          ((cast resolved : flight._internal._Map<Float, TextureAtlas>).set(page.id, (cast atlas)));
+          ((cast resolved : flight._internal._Map<Float, TextureAtlas>).set((cast page.id), (cast atlas)));
           if ((cast ((cast page.id : Float) > (cast maxPageId : Float)) : Bool)) { (maxPageId = cast (page.id : Dynamic)); }
         }
       }
     }
     for (char in _Runtime.iterable(record.chars)) {
-      if ((cast !(cast ((cast resolved : flight._internal._Map<Float, TextureAtlas>).has(char.page)) : Bool) : Bool)) { return cast null; }
+      if ((cast !(cast ((cast resolved : flight._internal._Map<Float, TextureAtlas>).has((cast char.page))) : Bool) : Bool)) { return cast null; }
       if ((cast ((cast char.page : Float) > (cast maxPageId : Float)) : Bool)) { (maxPageId = cast (char.page : Dynamic)); }
     }
     pages = (cast cast ([] : Array<Dynamic>));
     {
       var id:Float = 0.0;
       while ((cast ((cast id : Float) <= (cast maxPageId : Float)) : Bool)) {
-        var atlas:Null<TextureAtlas> = ((cast resolved : flight._internal._Map<Float, TextureAtlas>).get(id));
+        var atlas:Null<TextureAtlas> = ((cast resolved : flight._internal._Map<Float, TextureAtlas>).get((cast id)));
         if ((cast !_Runtime.strictEquals(atlas, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal._StaticIndex.writeArray(pages, id, atlas); }
         id++;
       }

@@ -136,10 +136,10 @@ class _Velocity {
   @:keep
   private static function ensureVelocitySample(field:VelocityField, source:flight._internal._Object):VelocitySample {
     var sample:Null<VelocitySample> = cast _Runtime.UNDEFINED;
-    sample = ((cast field.samples : flight._internal._WeakMap<flight._internal._Object, VelocitySample>).get(source));
+    sample = ((cast field.samples : flight._internal._WeakMap<flight._internal._Object, VelocitySample>).get((cast source)));
     if ((cast _Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (sample = cast ({ previousWorldTransform: null, velocity: { x: 0.0, y: 0.0 }, lastFrameId: -1.0, explicitFrameId: -1.0 } : Dynamic));
-      ((cast field.samples : flight._internal._WeakMap<flight._internal._Object, VelocitySample>).set(source, (cast sample)));
+      ((cast field.samples : flight._internal._WeakMap<flight._internal._Object, VelocitySample>).set((cast source), (cast sample)));
     }
     return cast sample;
     return cast null;
@@ -151,7 +151,7 @@ class _Velocity {
     var explicit:Bool = cast _Runtime.UNDEFINED;
     var x:Float = cast _Runtime.UNDEFINED;
     var y:Float = cast _Runtime.UNDEFINED;
-    sample = ((cast field.samples : flight._internal._WeakMap<flight._internal._Object, VelocitySample>).get(source));
+    sample = ((cast field.samples : flight._internal._WeakMap<flight._internal._Object, VelocitySample>).get((cast source)));
     currentFrameId = field.frameId;
     if ((cast _Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       return cast { currentFrameId: currentFrameId, explicit: false, lastFrameId: -1.0, reason: 'no-sample', x: 0.0, y: 0.0 };
@@ -172,7 +172,7 @@ class _Velocity {
 
   public static function getVelocity(field:VelocityField, source:flight._internal._Object, out:Velocity2D):Velocity2D {
     var sample:Null<VelocitySample> = cast _Runtime.UNDEFINED;
-    sample = ((cast field.samples : flight._internal._WeakMap<flight._internal._Object, VelocitySample>).get(source));
+    sample = ((cast field.samples : flight._internal._WeakMap<flight._internal._Object, VelocitySample>).get((cast source)));
     if ((cast ((cast _Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals((cast sample : { var lastFrameId:Float; }).lastFrameId, field.frameId) : Bool)) : Bool)) {
       (out.x = cast (0.0 : Float));
       (out.y = cast (0.0 : Float));
@@ -186,7 +186,7 @@ class _Velocity {
 
   public static function hasVelocity(field:VelocityField, source:flight._internal._Object):Bool {
     var sample:Null<VelocitySample> = cast _Runtime.UNDEFINED;
-    sample = ((cast field.samples : flight._internal._WeakMap<flight._internal._Object, VelocitySample>).get(source));
+    sample = ((cast field.samples : flight._internal._WeakMap<flight._internal._Object, VelocitySample>).get((cast source)));
     return cast _Runtime.andValue(((cast !_Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast sample : { var lastFrameId:Float; }).lastFrameId, field.frameId) : Bool)), function():Dynamic return cast _Runtime.orValue(!_Runtime.strictEquals((cast (cast sample : { var velocity:Velocity2D; }).velocity : { var x:Float; }).x, 0.0), function():Dynamic return cast !_Runtime.strictEquals((cast (cast sample : { var velocity:Velocity2D; }).velocity : { var y:Float; }).y, 0.0)));
     return cast null;
   }

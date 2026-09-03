@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Geometry)
+@:structInit
+class Matrix4 {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var m:flight._internal._Float32Array;
+
+  private function new(m:flight._internal._Float32Array):Void {
+    this.__symbol__EntityRuntime = null;
+    this.m = m;
+  }
+}
+#else
 typedef Matrix4 = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var m:flight._internal._Float32Array; };
+#end

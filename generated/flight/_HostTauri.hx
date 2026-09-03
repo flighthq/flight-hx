@@ -533,23 +533,23 @@ class _HostTauri {
     _Runtime.voidValue(flight._internal._Async.recover(_Runtime.callProperty((cast tauri.os : TauriOsModule).locale(), 'then', cast ([function(value:Null<String>):String return (locale = cast (_Runtime.coalesce(value, function():Dynamic return cast '') : Dynamic))] : Array<Dynamic>)), function(__unused2:flight._internal._Any):Void {
 
     }));
-    return cast (cast createEntity((cast (#if flight_struct_typedef { locale: (cast createEntity(({ final __callArgument0:Dynamic = ({ getLocale: function():String return locale, getPreferredSystemLanguages: function():Array<String> return ((cast _Runtime.strictEquals(locale, '') : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([locale] : Array<Dynamic>) : Dynamic)), getSystemLocale: function():String return locale } : EntityShapeL21C26__tauriApp); __callArgument0; })) : EntityShapeL21C26__tauriApp), name: (cast createEntity(({ final __callArgument2:Dynamic = ({ getName: function():String return name } : EntityShapeL26C24__tauriApp); __callArgument2; })) : EntityShapeL26C24__tauriApp), hide: (cast createEntity(({ final __callArgument4:Dynamic = ({ hideApp: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.app : TauriAppModule).hide(), function(__unused3:flight._internal._Any):Void {
+    return cast (cast createEntity((cast (#if flight_struct_typedef { locale: (cast createEntity(({ final __callArgument0:Dynamic = ({ getLocale: (cast function():String return locale : Dynamic), getPreferredSystemLanguages: (cast function():Array<String> return ((cast _Runtime.strictEquals(locale, '') : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([locale] : Array<Dynamic>) : Dynamic)) : Dynamic), getSystemLocale: (cast function():String return locale : Dynamic) } : EntityShapeL21C26__tauriApp); __callArgument0; })) : EntityShapeL21C26__tauriApp), name: (cast createEntity(({ final __callArgument2:Dynamic = ({ getName: (cast function():String return name : Dynamic) } : EntityShapeL26C24__tauriApp); __callArgument2; })) : EntityShapeL26C24__tauriApp), hide: (cast createEntity(({ final __callArgument4:Dynamic = ({ hideApp: (cast function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.app : TauriAppModule).hide(), function(__unused3:flight._internal._Any):Void {
 
-    })) } : EntityShapeL27C24__tauriApp); __callArgument4; })) : EntityShapeL27C24__tauriApp), quit: (cast createEntity(({ final __callArgument10:Dynamic = ({ quit: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.process : TauriProcessPlugin).exit(({ final __callArgument9:Dynamic = 0.0; __callArgument9; })), function(__unused4:flight._internal._Any):Void {
+    })) : Dynamic) } : EntityShapeL27C24__tauriApp); __callArgument4; })) : EntityShapeL27C24__tauriApp), quit: (cast createEntity(({ final __callArgument10:Dynamic = ({ quit: (cast function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.process : TauriProcessPlugin).exit(({ final __callArgument9:Dynamic = 0.0; __callArgument9; })), function(__unused4:flight._internal._Any):Void {
 
-    })) } : EntityShapeL28C24__tauriApp); __callArgument10; })) : EntityShapeL28C24__tauriApp), relaunch: (cast createEntity(({ final __callArgument16:Dynamic = ({ relaunch: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.process : TauriProcessPlugin).relaunch(), function(__unused5:flight._internal._Any):Void {
+    })) : Dynamic) } : EntityShapeL28C24__tauriApp); __callArgument10; })) : EntityShapeL28C24__tauriApp), relaunch: (cast createEntity(({ final __callArgument16:Dynamic = ({ relaunch: (cast function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.process : TauriProcessPlugin).relaunch(), function(__unused5:flight._internal._Any):Void {
 
-    })) } : EntityShapeL29C28__tauriApp); __callArgument16; })) : EntityShapeL29C28__tauriApp), show: (cast createEntity(({ final __callArgument18:Dynamic = ({ showApp: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.app : TauriAppModule).show(), function(__unused6:flight._internal._Any):Void {
+    })) : Dynamic) } : EntityShapeL29C28__tauriApp); __callArgument16; })) : EntityShapeL29C28__tauriApp), show: (cast createEntity(({ final __callArgument18:Dynamic = ({ showApp: (cast function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.app : TauriAppModule).show(), function(__unused6:flight._internal._Any):Void {
 
-    })) } : EntityShapeL30C24__tauriApp); __callArgument18; })) : EntityShapeL30C24__tauriApp), version: (cast createEntity(({ final __callArgument20:Dynamic = ({ getVersion: function():String return version } : EntityShapeL31C27__tauriApp); __callArgument20; })) : EntityShapeL31C27__tauriApp) } #else ({ final __structInitField0:Dynamic = (cast createEntity(({ final __callArgument22:Dynamic = ({ getLocale: function():String return locale, getPreferredSystemLanguages: function():Array<String> return ((cast _Runtime.strictEquals(locale, '') : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([locale] : Array<Dynamic>) : Dynamic)), getSystemLocale: function():String return locale } : EntityShapeL21C26__tauriApp); __callArgument22; })) : EntityShapeL21C26__tauriApp); final __structInitField1:Dynamic = (cast createEntity(({ final __callArgument24:Dynamic = ({ getName: function():String return name } : EntityShapeL26C24__tauriApp); __callArgument24; })) : EntityShapeL26C24__tauriApp); final __structInitField2:Dynamic = (cast createEntity(({ final __callArgument26:Dynamic = ({ hideApp: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.app : TauriAppModule).hide(), function(__unused3:flight._internal._Any):Void {
+    })) : Dynamic) } : EntityShapeL30C24__tauriApp); __callArgument18; })) : EntityShapeL30C24__tauriApp), version: (cast createEntity(({ final __callArgument20:Dynamic = ({ getVersion: (cast function():String return version : Dynamic) } : EntityShapeL31C27__tauriApp); __callArgument20; })) : EntityShapeL31C27__tauriApp) } #else ({ final __structInitField0:Dynamic = (cast createEntity(({ final __callArgument22:Dynamic = ({ getLocale: (cast function():String return locale : Dynamic), getPreferredSystemLanguages: (cast function():Array<String> return ((cast _Runtime.strictEquals(locale, '') : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([locale] : Array<Dynamic>) : Dynamic)) : Dynamic), getSystemLocale: (cast function():String return locale : Dynamic) } : EntityShapeL21C26__tauriApp); __callArgument22; })) : EntityShapeL21C26__tauriApp); final __structInitField1:Dynamic = (cast createEntity(({ final __callArgument24:Dynamic = ({ getName: (cast function():String return name : Dynamic) } : EntityShapeL26C24__tauriApp); __callArgument24; })) : EntityShapeL26C24__tauriApp); final __structInitField2:Dynamic = (cast createEntity(({ final __callArgument26:Dynamic = ({ hideApp: (cast function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.app : TauriAppModule).hide(), function(__unused3:flight._internal._Any):Void {
 
-    })) } : EntityShapeL27C24__tauriApp); __callArgument26; })) : EntityShapeL27C24__tauriApp); final __structInitField3:Dynamic = (cast createEntity(({ final __callArgument32:Dynamic = ({ quit: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.process : TauriProcessPlugin).exit(({ final __callArgument31:Dynamic = 0.0; __callArgument31; })), function(__unused4:flight._internal._Any):Void {
+    })) : Dynamic) } : EntityShapeL27C24__tauriApp); __callArgument26; })) : EntityShapeL27C24__tauriApp); final __structInitField3:Dynamic = (cast createEntity(({ final __callArgument32:Dynamic = ({ quit: (cast function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.process : TauriProcessPlugin).exit(({ final __callArgument31:Dynamic = 0.0; __callArgument31; })), function(__unused4:flight._internal._Any):Void {
 
-    })) } : EntityShapeL28C24__tauriApp); __callArgument32; })) : EntityShapeL28C24__tauriApp); final __structInitField4:Dynamic = (cast createEntity(({ final __callArgument38:Dynamic = ({ relaunch: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.process : TauriProcessPlugin).relaunch(), function(__unused5:flight._internal._Any):Void {
+    })) : Dynamic) } : EntityShapeL28C24__tauriApp); __callArgument32; })) : EntityShapeL28C24__tauriApp); final __structInitField4:Dynamic = (cast createEntity(({ final __callArgument38:Dynamic = ({ relaunch: (cast function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.process : TauriProcessPlugin).relaunch(), function(__unused5:flight._internal._Any):Void {
 
-    })) } : EntityShapeL29C28__tauriApp); __callArgument38; })) : EntityShapeL29C28__tauriApp); final __structInitField5:Dynamic = (cast createEntity(({ final __callArgument40:Dynamic = ({ showApp: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.app : TauriAppModule).show(), function(__unused6:flight._internal._Any):Void {
+    })) : Dynamic) } : EntityShapeL29C28__tauriApp); __callArgument38; })) : EntityShapeL29C28__tauriApp); final __structInitField5:Dynamic = (cast createEntity(({ final __callArgument40:Dynamic = ({ showApp: (cast function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.app : TauriAppModule).show(), function(__unused6:flight._internal._Any):Void {
 
-    })) } : EntityShapeL30C24__tauriApp); __callArgument40; })) : EntityShapeL30C24__tauriApp); final __structInitField6:Dynamic = (cast createEntity(({ final __callArgument42:Dynamic = ({ getVersion: function():String return version } : EntityShapeL31C27__tauriApp); __callArgument42; })) : EntityShapeL31C27__tauriApp); ({ hide: __structInitField2, locale: __structInitField0, name: __structInitField1, quit: __structInitField3, relaunch: __structInitField4, show: __structInitField5, version: __structInitField6 } : TauriAppCapabilities); }) #end) : Dynamic)) : TauriAppCapabilities);
+    })) : Dynamic) } : EntityShapeL30C24__tauriApp); __callArgument40; })) : EntityShapeL30C24__tauriApp); final __structInitField6:Dynamic = (cast createEntity(({ final __callArgument42:Dynamic = ({ getVersion: (cast function():String return version : Dynamic) } : EntityShapeL31C27__tauriApp); __callArgument42; })) : EntityShapeL31C27__tauriApp); ({ hide: __structInitField2, locale: __structInitField0, name: __structInitField1, quit: __structInitField3, relaunch: __structInitField4, show: __structInitField5, version: __structInitField6 } : TauriAppCapabilities); }) #end) : Dynamic)) : TauriAppCapabilities);
     return cast null;
   }
 
@@ -701,7 +701,7 @@ class _HostTauri {
   }
 
   public static function createTauriDirectoryOpenDialogBackend(tauri:TauriApi):{ >DirectoryOpenDialogBackend, >Entity, } {
-    return cast (cast createEntity((cast ({ open: function(options:Null<OpenDirectoryDialogOptions>):flight._internal._Promise<DirectoryOpenDialogResult> {
+    return cast (cast createEntity((cast ({ open: (cast function(options:Null<OpenDirectoryDialogOptions>):flight._internal._Promise<DirectoryOpenDialogResult> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var open:Null<TauriDialogOpenOptions>->flight._internal._Promise<Null<flight._internal._Union2<String, Array<String>>>> = cast _Runtime.UNDEFINED;
@@ -768,12 +768,12 @@ class _HostTauri {
           });
         })
       );
-    } } : EntityShapeL20C23__tauriDialog) : Dynamic)) : EntityShapeL20C23__tauriDialog);
+    } : Dynamic) } : EntityShapeL20C23__tauriDialog) : Dynamic)) : EntityShapeL20C23__tauriDialog);
     return cast null;
   }
 
   public static function createTauriFileOpenDialogBackend(tauri:TauriApi):{ >FileOpenDialogBackend, >Entity, } {
-    return cast (cast createEntity((cast ({ open: function(options:OpenFileDialogOptions):flight._internal._Promise<FileOpenDialogResult> {
+    return cast (cast createEntity((cast ({ open: (cast function(options:OpenFileDialogOptions):flight._internal._Promise<FileOpenDialogResult> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var open:Null<TauriDialogOpenOptions>->flight._internal._Promise<Null<flight._internal._Union2<String, Array<String>>>> = cast _Runtime.UNDEFINED;
@@ -838,12 +838,12 @@ class _HostTauri {
           });
         })
       );
-    } } : EntityShapeL43C23__tauriDialog) : Dynamic)) : EntityShapeL43C23__tauriDialog);
+    } : Dynamic) } : EntityShapeL43C23__tauriDialog) : Dynamic)) : EntityShapeL43C23__tauriDialog);
     return cast null;
   }
 
   public static function createTauriFileSaveDialogBackend(tauri:TauriApi):{ >FileSaveDialogBackend, >Entity, } {
-    return cast (cast createEntity((cast ({ save: function(options:SaveFileDialogOptions):flight._internal._Promise<FileSaveDialogResult> {
+    return cast (cast createEntity((cast ({ save: (cast function(options:SaveFileDialogOptions):flight._internal._Promise<FileSaveDialogResult> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var save:Null<TauriDialogSaveOptions>->flight._internal._Promise<Null<String>> = cast _Runtime.UNDEFINED;
@@ -904,7 +904,7 @@ class _HostTauri {
           });
         })
       );
-    } } : EntityShapeL70C23__tauriDialog) : Dynamic)) : EntityShapeL70C23__tauriDialog);
+    } : Dynamic) } : EntityShapeL70C23__tauriDialog) : Dynamic)) : EntityShapeL70C23__tauriDialog);
     return cast null;
   }
 
@@ -965,7 +965,7 @@ class _HostTauri {
     for (values in _Runtime.iterable(flight._internal.DynamicObject.values(filter.accept))) {
       for (extension in _Runtime.iterable(values)) {
         var normalized:String = _Runtime.replace(extension, _Runtime.regexp('^\\.', ''), '', false);
-        if ((cast ((cast !_Runtime.strictEquals(normalized, '') : Bool) && (cast !_Runtime.strictEquals(normalized, '*') : Bool)) : Bool)) { ((cast extensions : flight._internal._Set<String>).add(normalized)); }
+        if ((cast ((cast !_Runtime.strictEquals(normalized, '') : Bool) && (cast !_Runtime.strictEquals(normalized, '*') : Bool)) : Bool)) { ((cast extensions : flight._internal._Set<String>).add((cast normalized))); }
       }
     }
     return cast _Runtime.concatArrays([_Runtime.toArray(extensions)]);
@@ -1008,10 +1008,10 @@ class _HostTauri {
     menuModule = tauri.menu;
     selectListener = null;
     destroyed = false;
-    return cast { application: (cast createEntity(({ final __callArgument260:Dynamic = ({ destroy: function():Void {
+    return cast { application: (cast createEntity(({ final __callArgument260:Dynamic = ({ destroy: (cast function():Void {
       if ((cast destroyed : Bool)) { return; }
       (destroyed = cast (true : Dynamic));
-    }, setApplicationMenu: function(items:Array<MenuItemTemplate>):Bool {
+    } : Dynamic), setApplicationMenu: (cast function(items:Array<MenuItemTemplate>):Bool {
       _Runtime.voidValue(flight._internal._Async.recover(_Runtime.callValue(function():flight._internal._Promise<flight._internal._Nothing> {
         return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
           var built:Array<TauriMenuItemHandle> = cast _Runtime.UNDEFINED;
@@ -1032,7 +1032,7 @@ class _HostTauri {
       }));
       return cast true;
       return cast _Runtime.UNDEFINED;
-    } } : MenuApplicationBackend); __callArgument260; })) : MenuApplicationBackend), popup: (cast createEntity(({ final __callArgument354:Dynamic = ({ popup: function(items:Array<MenuItemTemplate>, x:Float, y:Float):flight._internal._Promise<Null<String>> {
+    } : Dynamic) } : MenuApplicationBackend); __callArgument260; })) : MenuApplicationBackend), popup: (cast createEntity(({ final __callArgument354:Dynamic = ({ popup: (cast function(items:Array<MenuItemTemplate>, x:Float, y:Float):flight._internal._Promise<Null<String>> {
       return cast flight._internal._Async.create(function(resolve:flight._internal._Any, __unused1:flight._internal._Any):Void {
         _Runtime.voidValue(flight._internal._Async.recover(_Runtime.callValue(function():flight._internal._Promise<flight._internal._Nothing> {
           return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
@@ -1052,13 +1052,13 @@ class _HostTauri {
         }, cast ([] : Array<Dynamic>)), function(__unused2:flight._internal._Any):Void { resolve(({ final __callArgument352:Dynamic = null; __callArgument352; })); }));
       });
       return cast _Runtime.UNDEFINED;
-    } } : MenuPopupBackend); __callArgument354; })) : MenuPopupBackend), select: (cast createEntity(({ final __callArgument412:Dynamic = ({ subscribe: function(listener:String->Void):Void->Void {
+    } : Dynamic) } : MenuPopupBackend); __callArgument354; })) : MenuPopupBackend), select: (cast createEntity(({ final __callArgument412:Dynamic = ({ subscribe: (cast function(listener:String->Void):Void->Void {
       (selectListener = cast (listener : Dynamic));
       return cast function():Void {
         if ((cast _Runtime.strictEquals(selectListener, listener) : Bool)) { (selectListener = cast (null : Dynamic)); }
       };
       return cast _Runtime.UNDEFINED;
-    } } : MenuSelectBackend); __callArgument412; })) : MenuSelectBackend) };
+    } : Dynamic) } : MenuSelectBackend); __callArgument412; })) : MenuSelectBackend) };
     return cast null;
   }
 
@@ -1124,7 +1124,7 @@ class _HostTauri {
     notification = tauri.notification;
     destroyed = false;
     nextId = 1.0;
-    return cast (cast createEntity((cast ({ delivery: { notify: function(request:NotificationRequest):flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<{ var reason:String; @:optional var fields:flight._internal._Any; @:optional var notification:flight._internal._Any; }, { var fields:Array<String>; var reason:String; @:optional var notification:flight._internal._Any; }>, { var notification:Notification; var reason:String; @:optional var fields:flight._internal._Any; }>> {
+    return cast (cast createEntity((cast ({ delivery: (cast { notify: function(request:NotificationRequest):flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<{ var reason:String; @:optional var fields:flight._internal._Any; @:optional var notification:flight._internal._Any; }, { var fields:Array<String>; var reason:String; @:optional var notification:flight._internal._Any; }>, { var notification:Notification; var reason:String; @:optional var fields:flight._internal._Any; }>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var invalid:Array<String> = cast _Runtime.UNDEFINED;
@@ -1187,14 +1187,14 @@ class _HostTauri {
           });
         })
       );
-    } }, lifecycle: { destroy: function():flight._internal._Promise<{ var reason:String; }> {
+    } } : Dynamic), lifecycle: (cast { destroy: function():flight._internal._Promise<{ var reason:String; }> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         if ((cast destroyed : Bool)) { return cast { reason: 'already-destroyed' }; }
         (destroyed = cast (true : Dynamic));
         return cast { reason: 'ok' };
         return cast null;
       }));
-    } }, permission: { getPermission: function():flight._internal._Promise<flight._internal._Union2<{ var permission:String; var reason:String; }, { var reason:String; @:optional var permission:flight._internal._Any; }>> {
+    } } : Dynamic), permission: (cast { getPermission: function():flight._internal._Promise<flight._internal._Union2<{ var permission:String; var reason:String; }, { var reason:String; @:optional var permission:flight._internal._Any; }>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -1230,14 +1230,14 @@ class _HostTauri {
           });
         })
       );
-    } } } : TauriNotificationCapabilities) : Dynamic)) : TauriNotificationCapabilities);
+    } } : Dynamic) } : TauriNotificationCapabilities) : Dynamic)) : TauriNotificationCapabilities);
     return cast null;
   }
 
   public static function getTauriInvalidNotificationRequestFields__tauriNotification(request:NotificationRequest):Array<NotificationRequestField> {
     var allowed:flight._internal._Set<String> = cast _Runtime.UNDEFINED;
     allowed = _Runtime.construct(flight._internal._HostValueLut.get('Set'), [cast (['body', 'icon', 'id', 'title'] : Array<Dynamic>)]);
-    return cast (cast _Runtime.filterArray((cast (cast flight._internal.DynamicObject.keys(request) : Array<NotificationRequestField>) : Array<NotificationRequestField>), function(field:String, __unused0:Float, __unused1:Array<String>):Bool return ((cast !_Runtime.strictEquals(_Runtime.getIndex(request, field), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast ((cast allowed : flight._internal._Set<String>).has(field)) : Bool) : Bool)), _Runtime.UNDEFINED));
+    return cast (cast _Runtime.filterArray((cast (cast flight._internal.DynamicObject.keys(request) : Array<NotificationRequestField>) : Array<NotificationRequestField>), function(field:String, __unused0:Float, __unused1:Array<String>):Bool return ((cast !_Runtime.strictEquals(_Runtime.getIndex(request, field), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast ((cast allowed : flight._internal._Set<String>).has((cast field))) : Bool) : Bool)), _Runtime.UNDEFINED));
     return cast null;
   }
 
@@ -1251,7 +1251,7 @@ class _HostTauri {
     }] : Array<Dynamic>)), function(__unused0:flight._internal._Any):Void {
 
     });
-    return cast (cast createEntity((cast ({ getInfo: function(out:PlatformInfo):PlatformInfo {
+    return cast (cast createEntity((cast ({ getInfo: (cast function(out:PlatformInfo):PlatformInfo {
       (out.name = cast ((cast _HostTauri.toPlatformName__tauriPlatform((cast (cast os : TauriOsModule).platform() : String)) : PlatformName) : PlatformName));
       (out.kind = cast ('desktop' : PlatformKind));
       (out.version = cast ((cast os : TauriOsModule).version() : String));
@@ -1261,7 +1261,7 @@ class _HostTauri {
       (out.runtime = cast ('tauri' : PlatformRuntime));
       return cast out;
       return cast _Runtime.UNDEFINED;
-    } } : PlatformBackend) : Dynamic)) : PlatformBackend);
+    } : Dynamic) } : PlatformBackend) : Dynamic)) : PlatformBackend);
     return cast null;
   }
 
@@ -1294,7 +1294,7 @@ class _HostTauri {
     menu = (cast createTauriMenuBackends(({ final __callArgument496:Dynamic = tauri; __callArgument496; })) : { var application:MenuApplicationBackend; var popup:MenuPopupBackend; var select:MenuSelectBackend; });
     shell = (cast makeTauriShellCapabilities(({ final __callArgument498:Dynamic = tauri; __callArgument498; })) : HostShellCapabilities);
     window = (cast createTauriWindowBackend(({ final __callArgument500:Dynamic = tauri; __callArgument500; })) : WindowBackend);
-    return cast (cast createEntity((cast ({ accessibility: {  }, app: app, clipboard: { text: clipboard }, connectivity: {  }, dialog: dialog, graphics: {  }, input: {  }, ipc: {  }, media: {  }, menu: menu, midi: {  }, net: {  }, power: {  }, protocol: {  }, notification: notification, shortcut: { query: query, trigger: trigger }, screen: {  }, share: {  }, shell: shell, storage: {  }, system: { platform: (cast createTauriPlatformBackend(({ final __callArgument506:Dynamic = tauri; __callArgument506; })) : PlatformBackend) }, text: {  }, tray: (cast createTauriTrayCapabilities(({ final __callArgument508:Dynamic = tauri; __callArgument508; }), (cast profile : Dynamic)) : TauriTrayCapabilitiesFor<Profile>), ui: {  }, updater: {  }, window: window } : EntityShapeL96C23__tauriRegister) : Dynamic)) : EntityShapeL96C23__tauriRegister);
+    return cast (cast createEntity((cast ({ accessibility: (cast {  } : Dynamic), app: (cast app : Dynamic), clipboard: (cast { text: clipboard } : Dynamic), connectivity: (cast {  } : Dynamic), dialog: (cast dialog : Dynamic), graphics: (cast {  } : Dynamic), input: (cast {  } : Dynamic), ipc: (cast {  } : Dynamic), media: (cast {  } : Dynamic), menu: (cast menu : Dynamic), midi: (cast {  } : Dynamic), net: (cast {  } : Dynamic), power: (cast {  } : Dynamic), protocol: (cast {  } : Dynamic), notification: (cast notification : Dynamic), shortcut: (cast { query: query, trigger: trigger } : Dynamic), screen: (cast {  } : Dynamic), share: (cast {  } : Dynamic), shell: (cast shell : Dynamic), storage: (cast {  } : Dynamic), system: (cast { platform: (cast createTauriPlatformBackend(({ final __callArgument506:Dynamic = tauri; __callArgument506; })) : PlatformBackend) } : Dynamic), text: (cast {  } : Dynamic), tray: (cast (cast createTauriTrayCapabilities(({ final __callArgument508:Dynamic = tauri; __callArgument508; }), (cast profile : Dynamic)) : TauriTrayCapabilitiesFor<Profile>) : Dynamic), ui: (cast {  } : Dynamic), updater: (cast {  } : Dynamic), window: (cast window : Dynamic) } : EntityShapeL96C23__tauriRegister) : Dynamic)) : EntityShapeL96C23__tauriRegister);
     return cast null;
   }
 
@@ -1304,7 +1304,7 @@ class _HostTauri {
     var pathOpen:ShellPathOpenBackend = cast _Runtime.UNDEFINED;
     var pathReveal:ShellPathRevealBackend = cast _Runtime.UNDEFINED;
     opener = tauri.opener;
-    external = (cast createEntity(({ final __callArgument520:Dynamic = ({ open: function(url:String):flight._internal._Promise<ShellExternalOutcome> {
+    external = (cast createEntity(({ final __callArgument520:Dynamic = ({ open: (cast function(url:String):flight._internal._Promise<ShellExternalOutcome> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -1322,8 +1322,8 @@ class _HostTauri {
           });
         })
       );
-    } } : ShellExternalBackend); __callArgument520; })) : ShellExternalBackend);
-    pathOpen = (cast createEntity(({ final __callArgument526:Dynamic = ({ open: function(path:String):flight._internal._Promise<ShellPathOpenOutcome> {
+    } : Dynamic) } : ShellExternalBackend); __callArgument520; })) : ShellExternalBackend);
+    pathOpen = (cast createEntity(({ final __callArgument526:Dynamic = ({ open: (cast function(path:String):flight._internal._Promise<ShellPathOpenOutcome> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -1341,8 +1341,8 @@ class _HostTauri {
           });
         })
       );
-    } } : ShellPathOpenBackend); __callArgument526; })) : ShellPathOpenBackend);
-    pathReveal = (cast createEntity(({ final __callArgument532:Dynamic = ({ reveal: function(path:String):flight._internal._Promise<ShellPathRevealOutcome> {
+    } : Dynamic) } : ShellPathOpenBackend); __callArgument526; })) : ShellPathOpenBackend);
+    pathReveal = (cast createEntity(({ final __callArgument532:Dynamic = ({ reveal: (cast function(path:String):flight._internal._Promise<ShellPathRevealOutcome> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -1360,7 +1360,7 @@ class _HostTauri {
           });
         })
       );
-    } } : ShellPathRevealBackend); __callArgument532; })) : ShellPathRevealBackend);
+    } : Dynamic) } : ShellPathRevealBackend); __callArgument532; })) : ShellPathRevealBackend);
     return cast { external: external, pathOpen: pathOpen, pathReveal: pathReveal };
     return cast null;
   }
@@ -1372,13 +1372,13 @@ class _HostTauri {
 
   public static function createTauriShortcutQueryBackend(tauri:TauriApi):ShortcutQueryBackend {
     var provider:ShortcutQueryBackend = cast _Runtime.UNDEFINED;
-    provider = (cast createEntity(({ final __callArgument538:Dynamic = ({ isRegistered: function(accelerator:Accelerator):flight._internal._Promise<Bool> {
+    provider = (cast createEntity(({ final __callArgument538:Dynamic = ({ isRegistered: (cast function(accelerator:Accelerator):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         return flight._internal._Async.flatMap((cast tauri.globalShortcut : TauriGlobalShortcutPlugin).isRegistered((cast accelerator : String)), function(__awaitValue537:Dynamic):Dynamic {
           return flight._internal._Async.resolve(__awaitValue537);
         });
       }));
-    } } : ShortcutQueryBackend); __callArgument538; })) : ShortcutQueryBackend);
+    } : Dynamic) } : ShortcutQueryBackend); __callArgument538; })) : ShortcutQueryBackend);
     return cast provider;
     return cast null;
   }
@@ -1397,7 +1397,7 @@ class _HostTauri {
             for (__iteration0 in _Runtime.iterable(registrations)) {
               var subscription:ShortcutTriggerSubscription = flight._internal._StaticIndex.readArray(__iteration0, 0.0);
               var registered:String = flight._internal._StaticIndex.readArray(__iteration0, 1.0);
-              if ((cast _Runtime.strictEquals(registered, accelerator) : Bool)) { ((cast registrations : flight._internal._Map<ShortcutTriggerSubscription, String>).delete_(subscription)); }
+              if ((cast _Runtime.strictEquals(registered, accelerator) : Bool)) { ((cast registrations : flight._internal._Map<ShortcutTriggerSubscription, String>).delete_((cast subscription))); }
             }
             return flight._internal._Async.flowNormal();
           });
@@ -1407,7 +1407,7 @@ class _HostTauri {
     globalShortcut = tauri.globalShortcut;
     registrations = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
     pending = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
-    provider = (cast createEntity((cast ({ destroy: function():flight._internal._Promise<flight._internal._Nothing> {
+    provider = (cast createEntity((cast ({ destroy: (cast function():flight._internal._Promise<flight._internal._Nothing> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var firstError:flight._internal._Any = cast _Runtime.UNDEFINED;
@@ -1460,35 +1460,35 @@ class _HostTauri {
           });
         })
       );
-    }, subscribe: function(accelerator:Accelerator, trigger:Void->Void):flight._internal._Promise<ShortcutTriggerSubscribeOutcome> {
+    } : Dynamic), subscribe: (cast function(accelerator:Accelerator, trigger:Void->Void):flight._internal._Promise<ShortcutTriggerSubscribeOutcome> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var subscription:Entity = cast _Runtime.UNDEFINED;
           var registration:flight._internal._Promise<flight._internal._Nothing> = cast _Runtime.UNDEFINED;
           subscription = (cast createEntity(({  } : EntityShapeL48C28__tauriShortcut)) : EntityShapeL48C28__tauriShortcut);
           registration = (cast globalShortcut : TauriGlobalShortcutPlugin).register((cast accelerator : String), (cast function(event:TauriShortcutEvent):Void {
-            if ((cast ((cast _Runtime.strictEquals(_Runtime.field(event, 'state'), 'Pressed') : Bool) && (cast ((cast registrations : flight._internal._Map<ShortcutTriggerSubscription, String>).has(subscription)) : Bool)) : Bool)) { trigger(); }
+            if ((cast ((cast _Runtime.strictEquals(_Runtime.field(event, 'state'), 'Pressed') : Bool) && (cast ((cast registrations : flight._internal._Map<ShortcutTriggerSubscription, String>).has((cast subscription))) : Bool)) : Bool)) { trigger(); }
           } : Dynamic));
-          ((cast pending : flight._internal._Set<flight._internal._Promise<flight._internal._Nothing>>).add(registration));
+          ((cast pending : flight._internal._Set<flight._internal._Promise<flight._internal._Nothing>>).add((cast registration)));
           return flight._internal._Async.continueFlow(flight._internal._Async.finalizeFlow(flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flatMap(registration, function(__awaitValue560:Dynamic):Dynamic {
               __awaitValue560;
-              ((cast registrations : flight._internal._Map<ShortcutTriggerSubscription, String>).set(subscription, (cast accelerator)));
+              ((cast registrations : flight._internal._Map<ShortcutTriggerSubscription, String>).set((cast subscription), (cast accelerator)));
               return flight._internal._Async.flowReturn({ reason: 'subscribed', subscription: subscription });
             });
           }), function():Dynamic {
-            ((cast pending : flight._internal._Set<flight._internal._Promise<flight._internal._Nothing>>).delete_(registration));
+            ((cast pending : flight._internal._Set<flight._internal._Promise<flight._internal._Nothing>>).delete_((cast registration)));
             return flight._internal._Async.flowNormal();
           }), function():Dynamic {
             return flight._internal._Async.flowNormal();
           });
         })
       );
-    }, unsubscribe: function(subscription:ShortcutTriggerSubscription):flight._internal._Promise<ShortcutTriggerUnsubscribeOutcome> {
+    } : Dynamic), unsubscribe: (cast function(subscription:ShortcutTriggerSubscription):flight._internal._Promise<ShortcutTriggerUnsubscribeOutcome> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var accelerator:Null<String> = cast _Runtime.UNDEFINED;
-          accelerator = ((cast registrations : flight._internal._Map<ShortcutTriggerSubscription, String>).get(subscription));
+          accelerator = ((cast registrations : flight._internal._Map<ShortcutTriggerSubscription, String>).get((cast subscription)));
           var __flowBranch561:Dynamic;
           if ((cast _Runtime.strictEquals(accelerator, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
             __flowBranch561 = flight._internal._Async.protect(function():Dynamic {
@@ -1505,7 +1505,7 @@ class _HostTauri {
           });
         })
       );
-    } } : ShortcutTriggerBackend) : Dynamic)) : ShortcutTriggerBackend);
+    } : Dynamic) } : ShortcutTriggerBackend) : Dynamic)) : ShortcutTriggerBackend);
     return cast provider;
     return cast null;
   }
@@ -1520,7 +1520,7 @@ class _HostTauri {
     var interactionEvents:{ >Entity, var getSignal:TrayIcon->Null<Signal<TrayInteractionEvent->Void>>; } = cast _Runtime.UNDEFINED;
     var tooltip:{ >Entity, var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var tooltip:flight._internal._Any; }, { var outcome:String; var tooltip:String; }>>; var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; } = cast _Runtime.UNDEFINED;
     records = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
-    lifecycle = (cast createEntity(({ final __callArgument623:Dynamic = ({ create: function(tray:TrayIcon, options:TrayIconOptions):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
+    lifecycle = (cast createEntity(({ final __callArgument623:Dynamic = ({ create: (cast function(tray:TrayIcon, options:TrayIconOptions):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var interactionEvents:Signal<TrayInteractionEvent->Void> = cast _Runtime.UNDEFINED;
@@ -1601,7 +1601,7 @@ class _HostTauri {
                       __flowBranch613 = flight._internal._Async.flowNormal();
                     }
                     return flight._internal._Async.continueFlow(__flowBranch613, function():Dynamic {
-                      ((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).set(tray, (cast { destroying: false, icon: icon, interactionEvents: interactionEvents, menuGeneration: 0.0, menus: cast ([] : Array<Dynamic>), menuSelectionEvents: menuSelectionEvents, nativePending: true, pendingMenuOperations: _Runtime.construct(flight._internal._HostValueLut.get('Set'), []), title: _Runtime.coalesce(options.title, function():Dynamic return cast ''), tooltip: _Runtime.coalesce(options.tooltip, function():Dynamic return cast '') })));
+                      ((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).set((cast tray), (cast { destroying: false, icon: icon, interactionEvents: interactionEvents, menuGeneration: 0.0, menus: cast ([] : Array<Dynamic>), menuSelectionEvents: menuSelectionEvents, nativePending: true, pendingMenuOperations: _Runtime.construct(flight._internal._HostValueLut.get('Set'), []), title: _Runtime.coalesce(options.title, function():Dynamic return cast ''), tooltip: _Runtime.coalesce(options.tooltip, function():Dynamic return cast '') })));
                       return flight._internal._Async.flowReturn({ outcome: 'created' });
                     });
                   });
@@ -1611,12 +1611,12 @@ class _HostTauri {
           });
         })
       );
-    }, destroy: function(tray:TrayIcon):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var failures:flight._internal._Any; }, { var failures:Array<{ @:optional var error:flight._internal._Any; var step:String; }>; var outcome:String; }>> {
+    } : Dynamic), destroy: (cast function(tray:TrayIcon):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var failures:flight._internal._Any; }, { var failures:Array<{ @:optional var error:flight._internal._Any; var step:String; }>; var outcome:String; }>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var record:Null<TrayRecord__tauriTray> = cast _Runtime.UNDEFINED;
           var failures:Array<{ @:optional var error:flight._internal._Any; var step:String; }> = cast _Runtime.UNDEFINED;
-          record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).get(tray));
+          record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).get((cast tray)));
           var __flowBranch615:Dynamic;
           if ((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
             __flowBranch615 = flight._internal._Async.protect(function():Dynamic {
@@ -1703,7 +1703,7 @@ class _HostTauri {
                     __flowBranch621 = flight._internal._Async.flowNormal();
                   }
                   return flight._internal._Async.continueFlow(__flowBranch621, function():Dynamic {
-                    ((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).delete_(tray));
+                    ((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).delete_((cast tray)));
                     return flight._internal._Async.flowReturn({ outcome: 'destroyed' });
                   });
                 });
@@ -1712,7 +1712,7 @@ class _HostTauri {
           });
         })
       );
-    }, isDestroyed: function(tray:TrayIcon):Bool return _Runtime.coalesce(({ final __structural622 = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).get(tray)); __structural622 == null ? _Runtime.UNDEFINED : (cast __structural622 : { var destroying:Bool; }).destroying; }), function():Dynamic return cast true), list: function():Array<TrayIcon> return (cast _Runtime.mapArray((cast (cast _Runtime.filterArray((cast _Runtime.concatArrays([_Runtime.toArray(((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).entries()))]) : Array<Dynamic>), function(__parameter0:Array<flight._internal._Union2<TrayIcon, TrayRecord__tauriTray>>, __unused1:Float, __unused2:Array<Array<flight._internal._Union2<TrayIcon, TrayRecord__tauriTray>>>):Bool {
+    } : Dynamic), isDestroyed: (cast function(tray:TrayIcon):Bool return _Runtime.coalesce(({ final __structural622 = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).get((cast tray))); __structural622 == null ? _Runtime.UNDEFINED : (cast __structural622 : { var destroying:Bool; }).destroying; }), function():Dynamic return cast true) : Dynamic), list: (cast function():Array<TrayIcon> return (cast _Runtime.mapArray((cast (cast _Runtime.filterArray((cast _Runtime.concatArrays([_Runtime.toArray(((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).entries()))]) : Array<Dynamic>), function(__parameter0:Array<flight._internal._Union2<TrayIcon, TrayRecord__tauriTray>>, __unused1:Float, __unused2:Array<Array<flight._internal._Union2<TrayIcon, TrayRecord__tauriTray>>>):Bool {
       var record:TrayRecord__tauriTray = cast _Runtime.UNDEFINED;
       record = flight._internal._StaticIndex.readArray(__parameter0, 1.0);
       return cast !(cast (cast record : TrayRecord__tauriTray).destroying : Bool);
@@ -1722,8 +1722,8 @@ class _HostTauri {
       tray = flight._internal._StaticIndex.readArray(__parameter3, 0.0);
       return cast tray;
       return cast _Runtime.UNDEFINED;
-    }, _Runtime.UNDEFINED)) } : EntityShapeL39C34__tauriTray); __callArgument623; })) : EntityShapeL39C34__tauriTray);
-    image = (cast createEntity(({ final __callArgument675:Dynamic = ({ set: function(tray:TrayIcon, icon:String):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
+    }, _Runtime.UNDEFINED)) : Dynamic) } : EntityShapeL39C34__tauriTray); __callArgument623; })) : EntityShapeL39C34__tauriTray);
+    image = (cast createEntity(({ final __callArgument675:Dynamic = ({ set: (cast function(tray:TrayIcon, icon:String):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         return flight._internal._Async.resolve((cast _HostTauri.update__tauriTray((cast records : Dynamic), ({ final __callArgument671:Dynamic = tray; __callArgument671; }), (cast 'image-update-failed' : String), (cast function(record:TrayRecord__tauriTray):flight._internal._Promise<flight._internal._Nothing> {
           return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
@@ -1731,8 +1731,8 @@ class _HostTauri {
           }));
         } : Dynamic)) : flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>));
       }));
-    } } : EntityShapeL112C30__tauriTray); __callArgument675; })) : EntityShapeL112C30__tauriTray);
-    menu = (cast createEntity(({ final __callArgument735:Dynamic = ({ set: function(tray:TrayIcon, items:Array<MenuItemTemplate>):flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<{ var error:flight._internal._Any; var outcome:String; }, { var outcome:String; @:optional var error:flight._internal._Any; }>, { var error:flight._internal._Any; var outcome:String; }>, { var error:Array<flight._internal._Any>; var outcome:String; }>> {
+    } : Dynamic) } : EntityShapeL112C30__tauriTray); __callArgument675; })) : EntityShapeL112C30__tauriTray);
+    menu = (cast createEntity(({ final __callArgument735:Dynamic = ({ set: (cast function(tray:TrayIcon, items:Array<MenuItemTemplate>):flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<{ var error:flight._internal._Any; var outcome:String; }, { var outcome:String; @:optional var error:flight._internal._Any; }>, { var error:flight._internal._Any; var outcome:String; }>, { var error:Array<flight._internal._Any>; var outcome:String; }>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var record:Null<TrayRecord__tauriTray> = cast _Runtime.UNDEFINED;
@@ -1751,7 +1751,7 @@ class _HostTauri {
             pendingOperation = flight._internal._Async.create(function(resolve:flight._internal._Any, __unused6:flight._internal._Any):Void {
               (finishOperation = cast (resolve : Dynamic));
             });
-            ((cast (cast record : TrayRecord__tauriTray).pendingMenuOperations : flight._internal._Set<flight._internal._Promise<flight._internal._Nothing>>).add(pendingOperation));
+            ((cast (cast record : TrayRecord__tauriTray).pendingMenuOperations : flight._internal._Set<flight._internal._Promise<flight._internal._Nothing>>).add((cast pendingOperation)));
             return flight._internal._Async.continueFlow(flight._internal._Async.finalizeFlow(flight._internal._Async.protect(function():Dynamic {
               var generation:Float = cast _Runtime.UNDEFINED;
               var built:TauriMenu = cast _Runtime.UNDEFINED;
@@ -1842,7 +1842,7 @@ class _HostTauri {
                 });
               });
             }), function():Dynamic {
-              ((cast (cast record : TrayRecord__tauriTray).pendingMenuOperations : flight._internal._Set<flight._internal._Promise<flight._internal._Nothing>>).delete_(pendingOperation));
+              ((cast (cast record : TrayRecord__tauriTray).pendingMenuOperations : flight._internal._Set<flight._internal._Promise<flight._internal._Nothing>>).delete_((cast pendingOperation)));
               finishOperation();
               return flight._internal._Async.flowNormal();
             }), function():Dynamic {
@@ -1851,15 +1851,15 @@ class _HostTauri {
           });
         })
       );
-    } } : EntityShapeL118C29__tauriTray); __callArgument735; })) : EntityShapeL118C29__tauriTray);
-    common = (cast { image: image, lifecycle: lifecycle, menu: menu, menuSelectionEvents: (cast createEntity(({ final __callArgument793:Dynamic = ({ getSignal: function(tray:TrayIcon):Null<Signal<TrayMenuSelectionEvent->Void>> return _Runtime.coalesce(({ final __structural792 = (cast _HostTauri.activeRecord__tauriTray((cast records : Dynamic), ({ final __callArgument790:Dynamic = tray; __callArgument790; })) : Null<TrayRecord__tauriTray>); __structural792 == null ? _Runtime.UNDEFINED : (cast __structural792 : { var menuSelectionEvents:Signal<TrayMenuSelectionEvent->Void>; }).menuSelectionEvents; }), function():Dynamic return cast null) } : EntityShapeL187C39__tauriTray); __callArgument793; })) : EntityShapeL187C39__tauriTray) });
-    title = (cast createEntity(({ final __callArgument817:Dynamic = ({ get: function(tray:TrayIcon):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var title:flight._internal._Any; }, { var outcome:String; var title:String; }>> {
+    } : Dynamic) } : EntityShapeL118C29__tauriTray); __callArgument735; })) : EntityShapeL118C29__tauriTray);
+    common = (cast { image: image, lifecycle: lifecycle, menu: menu, menuSelectionEvents: (cast createEntity(({ final __callArgument793:Dynamic = ({ getSignal: (cast function(tray:TrayIcon):Null<Signal<TrayMenuSelectionEvent->Void>> return _Runtime.coalesce(({ final __structural792 = (cast _HostTauri.activeRecord__tauriTray((cast records : Dynamic), ({ final __callArgument790:Dynamic = tray; __callArgument790; })) : Null<TrayRecord__tauriTray>); __structural792 == null ? _Runtime.UNDEFINED : (cast __structural792 : { var menuSelectionEvents:Signal<TrayMenuSelectionEvent->Void>; }).menuSelectionEvents; }), function():Dynamic return cast null) : Dynamic) } : EntityShapeL187C39__tauriTray); __callArgument793; })) : EntityShapeL187C39__tauriTray) });
+    title = (cast createEntity(({ final __callArgument817:Dynamic = ({ get: (cast function(tray:TrayIcon):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var title:flight._internal._Any; }, { var outcome:String; var title:String; }>> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var record:Null<TrayRecord__tauriTray> = cast _Runtime.UNDEFINED;
         record = (cast _HostTauri.activeRecord__tauriTray((cast records : Dynamic), ({ final __callArgument809:Dynamic = tray; __callArgument809; })) : Null<TrayRecord__tauriTray>);
         return flight._internal._Async.resolve(((cast _Runtime.strictEquals(record, null) : Bool) ? (cast { outcome: 'tray-destroyed' } : Dynamic) : (cast { outcome: 'available', title: (cast record : TrayRecord__tauriTray).title } : Dynamic)));
       }));
-    }, set: function(tray:TrayIcon, value:String):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
+    } : Dynamic), set: (cast function(tray:TrayIcon, value:String):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var result:flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }> = cast _Runtime.UNDEFINED;
@@ -1872,7 +1872,7 @@ class _HostTauri {
             var __flowBranch812:Dynamic;
             if ((cast _Runtime.strictEquals((cast result : { var outcome:String; }).outcome, 'updated') : Bool)) {
               __flowBranch812 = flight._internal._Async.protect(function():Dynamic {
-                ((cast ((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).get(tray)) : TrayRecord__tauriTray).title = value);
+                ((cast ((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).get((cast tray))) : TrayRecord__tauriTray).title = value);
                 return flight._internal._Async.flowNormal();
               });
             } else {
@@ -1884,16 +1884,16 @@ class _HostTauri {
           });
         })
       );
-    } } : EntityShapeL192C30__tauriTray); __callArgument817; })) : EntityShapeL192C30__tauriTray);
+    } : Dynamic) } : EntityShapeL192C30__tauriTray); __callArgument817; })) : EntityShapeL192C30__tauriTray);
     if ((cast _Runtime.strictEquals(profile, 'linux') : Bool)) { return cast (cast (cast _Runtime.mergeObjects([common, { title: title }]) : flight._internal._Any) : TauriTrayCapabilitiesFor<Profile>); }
-    interactionEvents = (cast createEntity(({ final __callArgument841:Dynamic = ({ getSignal: function(tray:TrayIcon):Null<Signal<TrayInteractionEvent->Void>> return _Runtime.coalesce(({ final __structural840 = (cast _HostTauri.activeRecord__tauriTray((cast records : Dynamic), ({ final __callArgument838:Dynamic = tray; __callArgument838; })) : Null<TrayRecord__tauriTray>); __structural840 == null ? _Runtime.UNDEFINED : (cast __structural840 : { var interactionEvents:Signal<TrayInteractionEvent->Void>; }).interactionEvents; }), function():Dynamic return cast null) } : EntityShapeL208C42__tauriTray); __callArgument841; })) : EntityShapeL208C42__tauriTray);
-    tooltip = (cast createEntity(({ final __callArgument865:Dynamic = ({ get: function(tray:TrayIcon):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var tooltip:flight._internal._Any; }, { var outcome:String; var tooltip:String; }>> {
+    interactionEvents = (cast createEntity(({ final __callArgument841:Dynamic = ({ getSignal: (cast function(tray:TrayIcon):Null<Signal<TrayInteractionEvent->Void>> return _Runtime.coalesce(({ final __structural840 = (cast _HostTauri.activeRecord__tauriTray((cast records : Dynamic), ({ final __callArgument838:Dynamic = tray; __callArgument838; })) : Null<TrayRecord__tauriTray>); __structural840 == null ? _Runtime.UNDEFINED : (cast __structural840 : { var interactionEvents:Signal<TrayInteractionEvent->Void>; }).interactionEvents; }), function():Dynamic return cast null) : Dynamic) } : EntityShapeL208C42__tauriTray); __callArgument841; })) : EntityShapeL208C42__tauriTray);
+    tooltip = (cast createEntity(({ final __callArgument865:Dynamic = ({ get: (cast function(tray:TrayIcon):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var tooltip:flight._internal._Any; }, { var outcome:String; var tooltip:String; }>> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var record:Null<TrayRecord__tauriTray> = cast _Runtime.UNDEFINED;
         record = (cast _HostTauri.activeRecord__tauriTray((cast records : Dynamic), ({ final __callArgument857:Dynamic = tray; __callArgument857; })) : Null<TrayRecord__tauriTray>);
         return flight._internal._Async.resolve(((cast _Runtime.strictEquals(record, null) : Bool) ? (cast { outcome: 'tray-destroyed' } : Dynamic) : (cast { outcome: 'available', tooltip: (cast record : TrayRecord__tauriTray).tooltip } : Dynamic)));
       }));
-    }, set: function(tray:TrayIcon, value:String):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
+    } : Dynamic), set: (cast function(tray:TrayIcon, value:String):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var result:flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }> = cast _Runtime.UNDEFINED;
@@ -1906,7 +1906,7 @@ class _HostTauri {
             var __flowBranch860:Dynamic;
             if ((cast _Runtime.strictEquals((cast result : { var outcome:String; }).outcome, 'updated') : Bool)) {
               __flowBranch860 = flight._internal._Async.protect(function():Dynamic {
-                ((cast ((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).get(tray)) : TrayRecord__tauriTray).tooltip = value);
+                ((cast ((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).get((cast tray))) : TrayRecord__tauriTray).tooltip = value);
                 return flight._internal._Async.flowNormal();
               });
             } else {
@@ -1918,11 +1918,11 @@ class _HostTauri {
           });
         })
       );
-    } } : EntityShapeL211C32__tauriTray); __callArgument865; })) : EntityShapeL211C32__tauriTray);
+    } : Dynamic) } : EntityShapeL211C32__tauriTray); __callArgument865; })) : EntityShapeL211C32__tauriTray);
     if ((cast _Runtime.strictEquals(profile, 'windows') : Bool)) {
       return cast (cast (cast _Runtime.mergeObjects([common, { interactionEvents: interactionEvents }, { tooltip: tooltip }]) : flight._internal._Any) : TauriTrayCapabilitiesFor<Profile>);
     }
-    return cast (cast (cast _Runtime.mergeObjects([common, { interactionEvents: interactionEvents }, { templateImage: (cast createEntity(({ final __callArgument887:Dynamic = ({ set: function(tray:TrayIcon, isTemplate:Bool):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
+    return cast (cast (cast _Runtime.mergeObjects([common, { interactionEvents: interactionEvents }, { templateImage: (cast createEntity(({ final __callArgument887:Dynamic = ({ set: (cast function(tray:TrayIcon, isTemplate:Bool):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         return flight._internal._Async.resolve((cast _HostTauri.update__tauriTray((cast records : Dynamic), ({ final __callArgument885:Dynamic = tray; __callArgument885; }), (cast 'template-image-update-failed' : String), (cast function(record:TrayRecord__tauriTray):flight._internal._Promise<flight._internal._Nothing> {
           return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
@@ -1930,13 +1930,13 @@ class _HostTauri {
           }));
         } : Dynamic)) : flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>));
       }));
-    } } : EntityShapeL233C33__tauriTray); __callArgument887; })) : EntityShapeL233C33__tauriTray) }, { title: title }, { tooltip: tooltip }]) : flight._internal._Any) : TauriTrayCapabilitiesFor<Profile>);
+    } : Dynamic) } : EntityShapeL233C33__tauriTray); __callArgument887; })) : EntityShapeL233C33__tauriTray) }, { title: title }, { tooltip: tooltip }]) : flight._internal._Any) : TauriTrayCapabilitiesFor<Profile>);
     return cast null;
   }
 
   public static function activeRecord__tauriTray(records:flight._internal._Map<TrayIcon, TrayRecord__tauriTray>, tray:TrayIcon):Null<TrayRecord__tauriTray> {
     var record:Null<TrayRecord__tauriTray> = cast _Runtime.UNDEFINED;
-    record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).get(tray));
+    record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).get((cast tray)));
     return cast ((cast ((cast !_Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast (cast record : TrayRecord__tauriTray).destroying : Bool) : Bool)) : Bool) ? (cast record : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
@@ -2074,7 +2074,7 @@ class _HostTauri {
     windows = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
     run = (cast function(win:ApplicationWindow, fn:TauriWindow->flight._internal._Promise<flight._internal._Any>):Void {
       var record:Null<TauriWindowRecord__tauriWindow> = cast _Runtime.UNDEFINED;
-      record = ((cast windows : flight._internal._WeakMap<ApplicationWindow, TauriWindowRecord__tauriWindow>).get(win));
+      record = ((cast windows : flight._internal._WeakMap<ApplicationWindow, TauriWindowRecord__tauriWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       flight._internal._Async.recover((cast fn((cast record : TauriWindowRecord__tauriWindow).handle) : flight._internal._Promise<flight._internal._Any>), function(__unused0:flight._internal._Any):Void {
 
@@ -2082,10 +2082,10 @@ class _HostTauri {
     });
     detach = (cast function(win:ApplicationWindow):Null<TauriWindowRecord__tauriWindow> {
       var record:Null<TauriWindowRecord__tauriWindow> = cast _Runtime.UNDEFINED;
-      record = ((cast windows : flight._internal._WeakMap<ApplicationWindow, TauriWindowRecord__tauriWindow>).get(win));
+      record = ((cast windows : flight._internal._WeakMap<ApplicationWindow, TauriWindowRecord__tauriWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
-      ((cast windows : flight._internal._WeakMap<ApplicationWindow, TauriWindowRecord__tauriWindow>).delete_(win));
-      ((cast handles : flight._internal._WeakMap<TauriWindow, ApplicationWindow>).delete_((cast record : TauriWindowRecord__tauriWindow).handle));
+      ((cast windows : flight._internal._WeakMap<ApplicationWindow, TauriWindowRecord__tauriWindow>).delete_((cast win)));
+      ((cast handles : flight._internal._WeakMap<TauriWindow, ApplicationWindow>).delete_((cast (cast record : TauriWindowRecord__tauriWindow).handle)));
       ((cast record : TauriWindowRecord__tauriWindow).detached = true);
       for (cleanup in _Runtime.iterable((cast record : TauriWindowRecord__tauriWindow).cleanup)) {
         cleanup();
@@ -2105,13 +2105,13 @@ class _HostTauri {
       var existing:Null<TauriWindowRecord__tauriWindow> = cast _Runtime.UNDEFINED;
       var mapped:Null<ApplicationWindow> = cast _Runtime.UNDEFINED;
       var record:TauriWindowRecord__tauriWindow = cast _Runtime.UNDEFINED;
-      existing = ((cast windows : flight._internal._WeakMap<ApplicationWindow, TauriWindowRecord__tauriWindow>).get(win));
+      existing = ((cast windows : flight._internal._WeakMap<ApplicationWindow, TauriWindowRecord__tauriWindow>).get((cast win)));
       if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast ((cast _Runtime.strictEquals((cast existing : TauriWindowRecord__tauriWindow).handle, handle) : Bool) && (cast _Runtime.strictEquals((cast existing : TauriWindowRecord__tauriWindow).ownership, ownership) : Bool)); }
-      mapped = ((cast handles : flight._internal._WeakMap<TauriWindow, ApplicationWindow>).get(handle));
+      mapped = ((cast handles : flight._internal._WeakMap<TauriWindow, ApplicationWindow>).get((cast handle)));
       if ((cast ((cast !_Runtime.strictEquals(mapped, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(mapped, win) : Bool)) : Bool)) { return cast false; }
       record = (cast { cleanup: cast ([] : Array<Dynamic>), detached: false, handle: handle, ownership: ownership });
-      ((cast windows : flight._internal._WeakMap<ApplicationWindow, TauriWindowRecord__tauriWindow>).set(win, (cast record)));
-      ((cast handles : flight._internal._WeakMap<TauriWindow, ApplicationWindow>).set(handle, (cast win)));
+      ((cast windows : flight._internal._WeakMap<ApplicationWindow, TauriWindowRecord__tauriWindow>).set((cast win), (cast record)));
+      ((cast handles : flight._internal._WeakMap<TauriWindow, ApplicationWindow>).set((cast handle), (cast win)));
       addCleanup((cast record : Dynamic), (cast handle : TauriWindow).onMoved((cast function(event:{ var payload:TauriPhysicalPositionLike; }):Void {
         (win.x = cast ((cast (cast event : { var payload:TauriPhysicalPositionLike; }).payload : TauriPhysicalPositionLike).x : Float));
         (win.y = cast ((cast (cast event : { var payload:TauriPhysicalPositionLike; }).payload : TauriPhysicalPositionLike).y : Float));

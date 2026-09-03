@@ -261,18 +261,18 @@ class _Image {
   public static var _hostObservation__imageBackend:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
 
   public static function cloneImageResource(resource:Image):Image {
-    return cast (cast createEntity((cast ({ alphaType: _Runtime.field(resource, 'alphaType'), gamut: _Runtime.field(resource, 'gamut'), height: _Runtime.field(resource, 'height'), kind: _Runtime.field(resource, 'kind'), source: _Runtime.field(resource, 'source'), version: _Runtime.field(resource, 'version'), width: _Runtime.field(resource, 'width') } : Image) : Dynamic)) : Image);
+    return cast (cast createEntity((cast ({ alphaType: (cast _Runtime.field(resource, 'alphaType') : Dynamic), gamut: (cast _Runtime.field(resource, 'gamut') : Dynamic), height: (cast _Runtime.field(resource, 'height') : Dynamic), kind: (cast _Runtime.field(resource, 'kind') : Dynamic), source: (cast _Runtime.field(resource, 'source') : Dynamic), version: (cast _Runtime.field(resource, 'version') : Dynamic), width: (cast _Runtime.field(resource, 'width') : Dynamic) } : Image) : Dynamic)) : Image);
     return cast null;
   }
 
   public static function createCompressedImage(compressed:CompressedImageData):CompressedImage {
-    return cast (cast createEntity(({ final __callArgument9:Dynamic = ({ alphaType: _Image.DECODED_ALPHA_TYPE__imageResource, compressed: compressed, gamut: _Image.DECODED_GAMUT__imageResource, height: (cast compressed.container : { var height:Float; }).height, kind: CompressedImageTextureSourceKind, version: 0.0, width: (cast compressed.container : { var width:Float; }).width } : CompressedImage); __callArgument9; })) : CompressedImage);
+    return cast (cast createEntity(({ final __callArgument9:Dynamic = ({ alphaType: (cast _Image.DECODED_ALPHA_TYPE__imageResource : Dynamic), compressed: (cast compressed : Dynamic), gamut: (cast _Image.DECODED_GAMUT__imageResource : Dynamic), height: (cast (cast compressed.container : { var height:Float; }).height : Dynamic), kind: (cast CompressedImageTextureSourceKind : Dynamic), version: (cast 0.0 : Dynamic), width: (cast (cast compressed.container : { var width:Float; }).width : Dynamic) } : CompressedImage); __callArgument9; })) : CompressedImage);
     return cast null;
   }
 
   public static function createImageResource(image:flight._internal.dom.CanvasImageSource):Image {
     var resource:Image = cast _Runtime.UNDEFINED;
-    resource = (cast createEntity(({ final __callArgument11:Dynamic = ({ alphaType: _Image.DECODED_ALPHA_TYPE__imageResource, gamut: _Image.DECODED_GAMUT__imageResource, height: 0.0, kind: ImageTextureSourceKind, source: image, version: 0.0, width: 0.0 } : Image); __callArgument11; })) : Image);
+    resource = (cast createEntity(({ final __callArgument11:Dynamic = ({ alphaType: (cast _Image.DECODED_ALPHA_TYPE__imageResource : Dynamic), gamut: (cast _Image.DECODED_GAMUT__imageResource : Dynamic), height: (cast 0.0 : Dynamic), kind: (cast ImageTextureSourceKind : Dynamic), source: (cast image : Dynamic), version: (cast 0.0 : Dynamic), width: (cast 0.0 : Dynamic) } : Image); __callArgument11; })) : Image);
     _Image.updateImageResourceSize__imageResource(({ final __callArgument13:Dynamic = resource; __callArgument13; }));
     return cast resource;
     return cast null;
@@ -317,17 +317,17 @@ class _Image {
   }
 
   public static function createImageResourceFromCanvas(canvas:flight._internal.dom.HTMLCanvasElement):Image {
-    return cast (cast createEntity(({ final __callArgument18:Dynamic = ({ alphaType: _Image.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: _Image.DECODED_GAMUT__imageResourceFrom, height: flight._internal.backend.CanvasElementBackend.field(canvas, 'height'), kind: ImageTextureSourceKind, source: canvas, version: 0.0, width: flight._internal.backend.CanvasElementBackend.field(canvas, 'width') } : Image); __callArgument18; })) : Image);
+    return cast (cast createEntity(({ final __callArgument18:Dynamic = ({ alphaType: (cast _Image.DECODED_ALPHA_TYPE__imageResourceFrom : Dynamic), gamut: (cast _Image.DECODED_GAMUT__imageResourceFrom : Dynamic), height: (cast flight._internal.backend.CanvasElementBackend.field(canvas, 'height') : Dynamic), kind: (cast ImageTextureSourceKind : Dynamic), source: (cast canvas : Dynamic), version: (cast 0.0 : Dynamic), width: (cast flight._internal.backend.CanvasElementBackend.field(canvas, 'width') : Dynamic) } : Image); __callArgument18; })) : Image);
     return cast null;
   }
 
   public static function createImageResourceFromImageBitmap(bitmap:flight._internal.dom.ImageBitmap):Image {
-    return cast (cast createEntity(({ final __callArgument20:Dynamic = ({ alphaType: _Image.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: _Image.DECODED_GAMUT__imageResourceFrom, height: bitmap.height, kind: ImageTextureSourceKind, source: bitmap, version: 0.0, width: bitmap.width } : Image); __callArgument20; })) : Image);
+    return cast (cast createEntity(({ final __callArgument20:Dynamic = ({ alphaType: (cast _Image.DECODED_ALPHA_TYPE__imageResourceFrom : Dynamic), gamut: (cast _Image.DECODED_GAMUT__imageResourceFrom : Dynamic), height: (cast bitmap.height : Dynamic), kind: (cast ImageTextureSourceKind : Dynamic), source: (cast bitmap : Dynamic), version: (cast 0.0 : Dynamic), width: (cast bitmap.width : Dynamic) } : Image); __callArgument20; })) : Image);
     return cast null;
   }
 
   public static function createImageResourceFromImageElement(img:flight._internal.dom.HTMLImageElement):Image {
-    return cast (cast createEntity(({ final __callArgument22:Dynamic = ({ alphaType: _Image.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: _Image.DECODED_GAMUT__imageResourceFrom, height: img.height, kind: ImageTextureSourceKind, source: img, version: 0.0, width: img.width } : Image); __callArgument22; })) : Image);
+    return cast (cast createEntity(({ final __callArgument22:Dynamic = ({ alphaType: (cast _Image.DECODED_ALPHA_TYPE__imageResourceFrom : Dynamic), gamut: (cast _Image.DECODED_GAMUT__imageResourceFrom : Dynamic), height: (cast img.height : Dynamic), kind: (cast ImageTextureSourceKind : Dynamic), source: (cast img : Dynamic), version: (cast 0.0 : Dynamic), width: (cast img.width : Dynamic) } : Image); __callArgument22; })) : Image);
     return cast null;
   }
 
@@ -423,7 +423,7 @@ class _Image {
               __flowBranch65 = flight._internal._Async.flowNormal();
             }
             return flight._internal._Async.continueFlow(__flowBranch65, function():Dynamic {
-              bitmap = ({ alphaType: ref.alphaType, data: new flight._internal._UInt8ClampedArray((cast decoded : DecodedImage).data), format: 'rgba8unorm', gamut: 'srgb', height: (cast decoded : DecodedImage).height, kind: BitmapTextureSourceKind, version: 0.0, width: (cast decoded : DecodedImage).width } : EntityShapeL63C48__imageResourceReference);
+              bitmap = ({ alphaType: (cast ref.alphaType : Dynamic), data: (cast new flight._internal._UInt8ClampedArray((cast decoded : DecodedImage).data) : Dynamic), format: (cast 'rgba8unorm' : Dynamic), gamut: (cast 'srgb' : Dynamic), height: (cast (cast decoded : DecodedImage).height : Dynamic), kind: (cast BitmapTextureSourceKind : Dynamic), version: (cast 0.0 : Dynamic), width: (cast (cast decoded : DecodedImage).width : Dynamic) } : EntityShapeL63C48__imageResourceReference);
               return flight._internal._Async.flowReturn((cast createEntity((cast bitmap : Dynamic)) : { >Entity, var data:flight._internal._UInt8ClampedArray; var format:PixelFormat; var height:Float; var width:Float; var kind:String; var version:Float; var alphaType:AlphaType; var gamut:String; }));
             });
           });

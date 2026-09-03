@@ -13,7 +13,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | Portable global value keys | 35 |
 | JavaScript-only global value keys | 35 |
 | Module value keys | 0 |
-| Type uses | 9085 |
+| Type uses | 9081 |
 | Value uses | 2126 |
 | Missing toolkit entries | 0 |
 
@@ -40,7 +40,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:CanvasLineCap` | `host` | `flight._internal.dom.CanvasLineCap` | `src/flight/_internal/dom/CanvasLineCap.hx` | `dynamic-stub` | 1 |
 | `host:CanvasLineJoin` | `host` | `flight._internal.dom.CanvasLineJoin` | `src/flight/_internal/dom/CanvasLineJoin.hx` | `dynamic-stub` | 1 |
 | `host:CanvasPattern` | `host` | `flight._internal.dom.CanvasPattern` | `src/flight/_internal/dom/CanvasPattern.hx` | `dynamic-stub` | 36 |
-| `host:CanvasRenderingContext2D` | `host` | `flight._internal.dom.CanvasRenderingContext2D` | `src/flight/_internal/dom/CanvasRenderingContext2D.hx` | `dynamic-stub` | 632 |
+| `host:CanvasRenderingContext2D` | `host` | `flight._internal.dom.CanvasRenderingContext2D` | `src/flight/_internal/dom/CanvasRenderingContext2D.hx` | `dynamic-stub` | 630 |
 | `host:CanvasRenderingContext2DSettings` | `host` | `flight._internal.dom.CanvasRenderingContext2DSettings` | `src/flight/_internal/dom/CanvasRenderingContext2DSettings.hx` | `dynamic-stub` | 12 |
 | `host:ChildNode` | `host` | `flight._internal.dom.ChildNode` | `src/flight/_internal/dom/ChildNode.hx` | `dynamic-stub` | 8 |
 | `host:Clipboard` | `host` | `flight._internal.dom.Clipboard` | `src/flight/_internal/dom/Clipboard.hx` | `dynamic-stub` | 22 |
@@ -151,7 +151,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:GPUVertexBufferLayout` | `host` | `flight._internal.dom.GPUVertexBufferLayout` | `src/flight/_internal/dom/GPUVertexBufferLayout.hx` | `dynamic-stub` | 23 |
 | `host:Headers` | `host` | `flight._internal.dom.Headers` | `src/flight/_internal/dom/Headers.hx` | `dynamic-stub` | 8 |
 | `host:HTMLAudioElement` | `host` | `flight._internal.dom.HTMLAudioElement` | `src/flight/_internal/dom/HTMLAudioElement.hx` | `dynamic-stub` | 2 |
-| `host:HTMLCanvasElement` | `host` | `flight._internal.dom.HTMLCanvasElement` | `src/flight/_internal/dom/HTMLCanvasElement.hx` | `dynamic-stub` | 300 |
+| `host:HTMLCanvasElement` | `host` | `flight._internal.dom.HTMLCanvasElement` | `src/flight/_internal/dom/HTMLCanvasElement.hx` | `dynamic-stub` | 298 |
 | `host:HTMLDivElement` | `host` | `flight._internal.dom.HTMLDivElement` | `src/flight/_internal/dom/HTMLDivElement.hx` | `dynamic-stub` | 38 |
 | `host:HTMLElement` | `host` | `flight._internal.dom.HTMLElement` | `src/flight/_internal/dom/HTMLElement.hx` | `dynamic-stub` | 279 |
 | `host:HTMLHeadElement` | `host` | `flight._internal.dom.HTMLHeadElement` | `src/flight/_internal/dom/HTMLHeadElement.hx` | `dynamic-stub` | 7 |

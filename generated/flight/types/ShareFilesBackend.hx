@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+class ShareFilesBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var canShareContent:ShareFilesContent->Bool;
+  public var shareContent:ShareFilesContent->flight._internal._Promise<Bool>;
+  public var shareContentWithResult:ShareFilesContent->flight._internal._Promise<ShareResult>;
+
+  private function new(canShareContent:ShareFilesContent->Bool, shareContent:ShareFilesContent->flight._internal._Promise<Bool>, shareContentWithResult:ShareFilesContent->flight._internal._Promise<ShareResult>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.canShareContent = canShareContent;
+    this.shareContent = shareContent;
+    this.shareContentWithResult = shareContentWithResult;
+  }
+}
+#else
 typedef ShareFilesBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var canShareContent:ShareFilesContent->Bool; var shareContent:ShareFilesContent->flight._internal._Promise<Bool>; var shareContentWithResult:ShareFilesContent->flight._internal._Promise<ShareResult>; };
+#end

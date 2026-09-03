@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Geometry)
+@:structInit
+class Aabb {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var max:Vector3;
+  public var min:Vector3;
+
+  private function new(max:Vector3, min:Vector3):Void {
+    this.__symbol__EntityRuntime = null;
+    this.max = max;
+    this.min = min;
+  }
+}
+#else
 typedef Aabb = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var max:Vector3; var min:Vector3; };
+#end

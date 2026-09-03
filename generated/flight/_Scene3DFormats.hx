@@ -439,31 +439,31 @@ class _Scene3DFormats {
       if ((cast _Runtime.strictEquals(namespace, AWD2_NAMESPACE_CORE) : Bool)) {
         if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_TRIANGLE_GEOMETRY) : Bool)) {
           var geoms:Array<ParsedGeometry__awd2Parse> = (cast _Scene3DFormats.parseTriangleGeometryBlock__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument28:Dynamic = source; __callArgument28; }), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast geometryWide : Bool), ({ final __callArgument29:Dynamic = diagnostics; __callArgument29; })) : Array<ParsedGeometry__awd2Parse>);
-          ((cast geometryBlocks : flight._internal._Map<Float, Array<ParsedGeometry__awd2Parse>>).set(blockId, (cast geoms)));
+          ((cast geometryBlocks : flight._internal._Map<Float, Array<ParsedGeometry__awd2Parse>>).set((cast blockId), (cast geoms)));
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_CONTAINER) : Bool)) {
           var container:Null<ParsedContainer__awd2Parse> = (cast _Scene3DFormats.parseContainerBlock__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument32:Dynamic = source; __callArgument32; }), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast matrixWide : Bool), ({ final __callArgument33:Dynamic = diagnostics; __callArgument33; })) : Null<ParsedContainer__awd2Parse>);
-          if ((cast !_Runtime.strictEquals(container, null) : Bool)) { ((cast containerBlocks : flight._internal._Map<Float, ParsedContainer__awd2Parse>).set(blockId, (cast container))); }
+          if ((cast !_Runtime.strictEquals(container, null) : Bool)) { ((cast containerBlocks : flight._internal._Map<Float, ParsedContainer__awd2Parse>).set((cast blockId), (cast container))); }
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_MESH_INSTANCE) : Bool)) {
           var meshInst:Null<ParsedMeshInstance__awd2Parse> = (cast _Scene3DFormats.parseMeshInstanceBlock__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument36:Dynamic = source; __callArgument36; }), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast matrixWide : Bool), ({ final __callArgument37:Dynamic = diagnostics; __callArgument37; })) : Null<ParsedMeshInstance__awd2Parse>);
-          if ((cast !_Runtime.strictEquals(meshInst, null) : Bool)) { ((cast meshInstanceBlocks : flight._internal._Map<Float, ParsedMeshInstance__awd2Parse>).set(blockId, (cast meshInst))); }
+          if ((cast !_Runtime.strictEquals(meshInst, null) : Bool)) { ((cast meshInstanceBlocks : flight._internal._Map<Float, ParsedMeshInstance__awd2Parse>).set((cast blockId), (cast meshInst))); }
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_LIGHT) : Bool)) {
           var light:Null<ParsedLight__awd2Parse> = (cast _Scene3DFormats.parseLightBlock__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument40:Dynamic = source; __callArgument40; }), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast matrixWide : Bool), ({ final __callArgument41:Dynamic = diagnostics; __callArgument41; })) : Null<ParsedLight__awd2Parse>);
-          if ((cast !_Runtime.strictEquals(light, null) : Bool)) { ((cast lightBlocks : flight._internal._Map<Float, ParsedLight__awd2Parse>).set(blockId, (cast light))); }
+          if ((cast !_Runtime.strictEquals(light, null) : Bool)) { ((cast lightBlocks : flight._internal._Map<Float, ParsedLight__awd2Parse>).set((cast blockId), (cast light))); }
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_CAMERA) : Bool)) {
           var camera:Null<ParsedCamera__awd2Parse> = (cast _Scene3DFormats.parseCameraBlock__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument44:Dynamic = source; __callArgument44; }), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast matrixWide : Bool), ({ final __callArgument45:Dynamic = diagnostics; __callArgument45; })) : Null<ParsedCamera__awd2Parse>);
-          if ((cast !_Runtime.strictEquals(camera, null) : Bool)) { ((cast cameraBlocks : flight._internal._Map<Float, ParsedCamera__awd2Parse>).set(blockId, (cast camera))); }
+          if ((cast !_Runtime.strictEquals(camera, null) : Bool)) { ((cast cameraBlocks : flight._internal._Map<Float, ParsedCamera__awd2Parse>).set((cast blockId), (cast camera))); }
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_LIGHT_PICKER) : Bool)) {
           var picker:Null<ParsedLightPicker__awd2Parse> = (cast _Scene3DFormats.parseLightPickerBlock__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument48:Dynamic = source; __callArgument48; }), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), ({ final __callArgument49:Dynamic = diagnostics; __callArgument49; })) : Null<ParsedLightPicker__awd2Parse>);
-          if ((cast !_Runtime.strictEquals(picker, null) : Bool)) { ((cast lightPickerBlocks : flight._internal._Map<Float, ParsedLightPicker__awd2Parse>).set(blockId, (cast picker))); }
+          if ((cast !_Runtime.strictEquals(picker, null) : Bool)) { ((cast lightPickerBlocks : flight._internal._Map<Float, ParsedLightPicker__awd2Parse>).set((cast blockId), (cast picker))); }
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_MATERIAL) : Bool)) {
           var material:Null<ParsedMaterial__awd2Parse> = (cast _Scene3DFormats.parseMaterialBlock__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument52:Dynamic = source; __callArgument52; }), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), ({ final __callArgument53:Dynamic = diagnostics; __callArgument53; })) : Null<ParsedMaterial__awd2Parse>);
-          if ((cast !_Runtime.strictEquals(material, null) : Bool)) { ((cast materialBlocks : flight._internal._Map<Float, ParsedMaterial__awd2Parse>).set(blockId, (cast material))); }
+          if ((cast !_Runtime.strictEquals(material, null) : Bool)) { ((cast materialBlocks : flight._internal._Map<Float, ParsedMaterial__awd2Parse>).set((cast blockId), (cast material))); }
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_TEXTURE) : Bool)) {
           var texture:Null<ParsedTexture__awd2Parse> = (cast _Scene3DFormats.parseTextureBlock__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument56:Dynamic = source; __callArgument56; }), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), ({ final __callArgument57:Dynamic = diagnostics; __callArgument57; })) : Null<ParsedTexture__awd2Parse>);
-          if ((cast !_Runtime.strictEquals(texture, null) : Bool)) { ((cast textureBlocks : flight._internal._Map<Float, ParsedTexture__awd2Parse>).set(blockId, (cast texture))); }
+          if ((cast !_Runtime.strictEquals(texture, null) : Bool)) { ((cast textureBlocks : flight._internal._Map<Float, ParsedTexture__awd2Parse>).set((cast blockId), (cast texture))); }
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_SKELETON) : Bool)) {
           var skeleton:Null<ParsedSkeleton__awd2Parse> = (cast _Scene3DFormats.parseSkeletonBlock__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument60:Dynamic = source; __callArgument60; }), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast matrixWide : Bool), ({ final __callArgument61:Dynamic = diagnostics; __callArgument61; })) : Null<ParsedSkeleton__awd2Parse>);
-          if ((cast !_Runtime.strictEquals(skeleton, null) : Bool)) { ((cast skeletonBlocks : flight._internal._Map<Float, ParsedSkeleton__awd2Parse>).set(blockId, (cast skeleton))); }
+          if ((cast !_Runtime.strictEquals(skeleton, null) : Bool)) { ((cast skeletonBlocks : flight._internal._Map<Float, ParsedSkeleton__awd2Parse>).set((cast blockId), (cast skeleton))); }
         } else { if ((cast !(cast (cast _Scene3DFormats.isAwdBlockHandledLater__awd2Parse((cast blockType : Float)) : Bool) : Bool) : Bool)) {
           _Scene3DFormats.tallyUnhandledAwdBlock__awd2Parse(({ final __callArgument64:Dynamic = unhandledBlocks; __callArgument64; }), (cast namespace : Float), (cast blockType : Float), (cast blockId : Float));
         } } } } } } } } } }
@@ -493,7 +493,7 @@ class _Scene3DFormats {
       var container:ParsedContainer__awd2Parse = flight._internal._StaticIndex.readArray(__iteration0, 1.0);
       var nodeIndex:Float = _Runtime.field(document.nodes, 'length');
       _Runtime.callProperty(document.nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: _Runtime.orValue((cast container : ParsedContainer__awd2Parse).name, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: (cast _Scene3DFormats.awdTransformToTransform3D__awd2Parse((cast container : ParsedContainer__awd2Parse).transform) : Transform3D) }] : Array<Dynamic>));
-      ((cast nodeIndexForBlock : flight._internal._Map<Float, Float>).set(blockId, (cast nodeIndex)));
+      ((cast nodeIndexForBlock : flight._internal._Map<Float, Float>).set((cast blockId), (cast nodeIndex)));
     }
     resolvedMaterials = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
     materialForSubset = (cast function(meshInst:ParsedMeshInstance__awd2Parse, subsetIndex:Float):Array<Float> {
@@ -507,7 +507,7 @@ class _Scene3DFormats {
     for (__iteration1 in _Runtime.iterable(meshInstanceBlocks)) {
       var blockId:Float = flight._internal._StaticIndex.readArray(__iteration1, 0.0);
       var meshInst:ParsedMeshInstance__awd2Parse = flight._internal._StaticIndex.readArray(__iteration1, 1.0);
-      var geometries:Null<Array<ParsedGeometry__awd2Parse>> = ((cast geometryBlocks : flight._internal._Map<Float, Array<ParsedGeometry__awd2Parse>>).get((cast meshInst : ParsedMeshInstance__awd2Parse).geometryId));
+      var geometries:Null<Array<ParsedGeometry__awd2Parse>> = ((cast geometryBlocks : flight._internal._Map<Float, Array<ParsedGeometry__awd2Parse>>).get((cast (cast meshInst : ParsedMeshInstance__awd2Parse).geometryId)));
       var transform:Transform3D = (cast _Scene3DFormats.awdTransformToTransform3D__awd2Parse((cast meshInst : ParsedMeshInstance__awd2Parse).transform) : Transform3D);
       var nodeIndex:Float = cast _Runtime.UNDEFINED;
       if ((cast ((cast !_Runtime.strictEquals(geometries, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(geometries, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
@@ -546,17 +546,17 @@ class _Scene3DFormats {
           reportImportDiagnostic(({ final __callArgument96:Dynamic = diagnostics; __callArgument96; }), ({ final __callArgument97:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument97; }), (cast 'awd2.mesh-instance-missing-geometry' : String), (cast 'parseAwd2' : String), ({ final __callArgument98:Dynamic = { block: blockId, geometry: (cast meshInst : ParsedMeshInstance__awd2Parse).geometryId }; __callArgument98; }));
         }
       }
-      ((cast nodeIndexForBlock : flight._internal._Map<Float, Float>).set(blockId, (cast nodeIndex)));
+      ((cast nodeIndexForBlock : flight._internal._Map<Float, Float>).set((cast blockId), (cast nodeIndex)));
     }
     parented = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
     for (__iteration2 in _Runtime.iterable(containerBlocks)) {
       var blockId:Float = flight._internal._StaticIndex.readArray(__iteration2, 0.0);
       var container:ParsedContainer__awd2Parse = flight._internal._StaticIndex.readArray(__iteration2, 1.0);
       if ((cast !_Runtime.strictEquals((cast container : ParsedContainer__awd2Parse).parentId, 0.0) : Bool)) {
-        var parentIndex:Null<Float> = ((cast nodeIndexForBlock : flight._internal._Map<Float, Float>).get((cast container : ParsedContainer__awd2Parse).parentId));
+        var parentIndex:Null<Float> = ((cast nodeIndexForBlock : flight._internal._Map<Float, Float>).get((cast (cast container : ParsedContainer__awd2Parse).parentId)));
         if ((cast !_Runtime.strictEquals(parentIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          _Runtime.callProperty((cast flight._internal._StaticIndex.readArray(document.nodes, parentIndex) : { var children:Array<Float>; }).children, 'push', cast ([((cast nodeIndexForBlock : flight._internal._Map<Float, Float>).get(blockId))] : Array<Dynamic>));
-          ((cast parented : flight._internal._Set<Float>).add(blockId));
+          _Runtime.callProperty((cast flight._internal._StaticIndex.readArray(document.nodes, parentIndex) : { var children:Array<Float>; }).children, 'push', cast ([((cast nodeIndexForBlock : flight._internal._Map<Float, Float>).get((cast blockId)))] : Array<Dynamic>));
+          ((cast parented : flight._internal._Set<Float>).add((cast blockId)));
         }
       }
     }
@@ -564,29 +564,29 @@ class _Scene3DFormats {
       var blockId:Float = flight._internal._StaticIndex.readArray(__iteration3, 0.0);
       var meshInst:ParsedMeshInstance__awd2Parse = flight._internal._StaticIndex.readArray(__iteration3, 1.0);
       if ((cast !_Runtime.strictEquals((cast meshInst : ParsedMeshInstance__awd2Parse).parentId, 0.0) : Bool)) {
-        var parentIndex:Null<Float> = ((cast nodeIndexForBlock : flight._internal._Map<Float, Float>).get((cast meshInst : ParsedMeshInstance__awd2Parse).parentId));
+        var parentIndex:Null<Float> = ((cast nodeIndexForBlock : flight._internal._Map<Float, Float>).get((cast (cast meshInst : ParsedMeshInstance__awd2Parse).parentId)));
         if ((cast !_Runtime.strictEquals(parentIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          _Runtime.callProperty((cast flight._internal._StaticIndex.readArray(document.nodes, parentIndex) : { var children:Array<Float>; }).children, 'push', cast ([((cast nodeIndexForBlock : flight._internal._Map<Float, Float>).get(blockId))] : Array<Dynamic>));
-          ((cast parented : flight._internal._Set<Float>).add(blockId));
+          _Runtime.callProperty((cast flight._internal._StaticIndex.readArray(document.nodes, parentIndex) : { var children:Array<Float>; }).children, 'push', cast ([((cast nodeIndexForBlock : flight._internal._Map<Float, Float>).get((cast blockId)))] : Array<Dynamic>));
+          ((cast parented : flight._internal._Set<Float>).add((cast blockId)));
         }
       }
     }
     for (blockId in _Runtime.iterable(((cast nodeIndexForBlock : flight._internal._Map<Float, Float>).keys()))) {
-      if ((cast !(cast ((cast parented : flight._internal._Set<Float>).has(blockId)) : Bool) : Bool)) { _Runtime.callProperty((cast flight._internal._StaticIndex.readArray(document.scenes, 0.0) : { var rootNodes:Array<Float>; }).rootNodes, 'push', cast ([((cast nodeIndexForBlock : flight._internal._Map<Float, Float>).get(blockId))] : Array<Dynamic>)); }
+      if ((cast !(cast ((cast parented : flight._internal._Set<Float>).has((cast blockId))) : Bool) : Bool)) { _Runtime.callProperty((cast flight._internal._StaticIndex.readArray(document.scenes, 0.0) : { var rootNodes:Array<Float>; }).rootNodes, 'push', cast ([((cast nodeIndexForBlock : flight._internal._Map<Float, Float>).get((cast blockId)))] : Array<Dynamic>)); }
     }
     lightDrops = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
     for (light in _Runtime.iterable(((cast lightBlocks : flight._internal._Map<Float, ParsedLight__awd2Parse>).values()))) {
-      _Scene3DFormats.buildAwdDocumentLights__awd2Parse((cast light : Dynamic), ((cast nodeIndexForBlock : flight._internal._Map<Float, Float>).get((cast light : ParsedLight__awd2Parse).parentId)), ({ final __callArgument110:Dynamic = document; __callArgument110; }), (cast lightDrops : Dynamic));
+      _Scene3DFormats.buildAwdDocumentLights__awd2Parse((cast light : Dynamic), ((cast nodeIndexForBlock : flight._internal._Map<Float, Float>).get((cast (cast light : ParsedLight__awd2Parse).parentId))), ({ final __callArgument110:Dynamic = document; __callArgument110; }), (cast lightDrops : Dynamic));
     }
     _Scene3DFormats.flushAwdLightDrops__awd2Parse((cast lightDrops : Dynamic), ({ final __callArgument112:Dynamic = diagnostics; __callArgument112; }));
     for (camera in _Runtime.iterable(((cast cameraBlocks : flight._internal._Map<Float, ParsedCamera__awd2Parse>).values()))) {
-      _Scene3DFormats.buildAwdDocumentCamera__awd2Parse((cast camera : Dynamic), ((cast nodeIndexForBlock : flight._internal._Map<Float, Float>).get((cast camera : ParsedCamera__awd2Parse).parentId)), ({ final __callArgument116:Dynamic = document; __callArgument116; }), ({ final __callArgument117:Dynamic = diagnostics; __callArgument117; }));
+      _Scene3DFormats.buildAwdDocumentCamera__awd2Parse((cast camera : Dynamic), ((cast nodeIndexForBlock : flight._internal._Map<Float, Float>).get((cast (cast camera : ParsedCamera__awd2Parse).parentId))), ({ final __callArgument116:Dynamic = document; __callArgument116; }), ({ final __callArgument117:Dynamic = diagnostics; __callArgument117; }));
     }
     for (__iteration4 in _Runtime.iterable(lightPickerBlocks)) {
       var blockId:Float = flight._internal._StaticIndex.readArray(__iteration4, 0.0);
       var picker:ParsedLightPicker__awd2Parse = flight._internal._StaticIndex.readArray(__iteration4, 1.0);
       for (lightId in _Runtime.iterable((cast picker : ParsedLightPicker__awd2Parse).lightIds)) {
-        if ((cast !(cast ((cast lightBlocks : flight._internal._Map<Float, ParsedLight__awd2Parse>).has(lightId)) : Bool) : Bool)) {
+        if ((cast !(cast ((cast lightBlocks : flight._internal._Map<Float, ParsedLight__awd2Parse>).has((cast lightId))) : Bool) : Bool)) {
           reportImportDiagnostic(({ final __callArgument124:Dynamic = diagnostics; __callArgument124; }), ({ final __callArgument125:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument125; }), (cast 'awd2.light-picker-missing-light' : String), (cast 'parseAwd2' : String), ({ final __callArgument126:Dynamic = { block: blockId, light: lightId }; __callArgument126; }));
         }
       }
@@ -650,13 +650,13 @@ class _Scene3DFormats {
       if ((cast _Runtime.strictEquals(namespace, AWD2_NAMESPACE_CORE) : Bool)) {
         if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_SKELETON) : Bool)) {
           var skeleton:Null<ParsedSkeleton__awd2Parse> = (cast _Scene3DFormats.parseSkeletonBlock__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument162:Dynamic = source; __callArgument162; }), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast matrixWide : Bool), ({ final __callArgument163:Dynamic = diagnostics; __callArgument163; })) : Null<ParsedSkeleton__awd2Parse>);
-          if ((cast !_Runtime.strictEquals(skeleton, null) : Bool)) { ((cast skeletonBlocks : flight._internal._Map<Float, ParsedSkeleton__awd2Parse>).set(blockId, (cast skeleton))); }
+          if ((cast !_Runtime.strictEquals(skeleton, null) : Bool)) { ((cast skeletonBlocks : flight._internal._Map<Float, ParsedSkeleton__awd2Parse>).set((cast blockId), (cast skeleton))); }
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_SKELETON_POSE) : Bool)) {
           var pose:Null<ParsedSkeletonPose__awd2Parse> = (cast _Scene3DFormats.parseSkeletonPoseBlock__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument166:Dynamic = source; __callArgument166; }), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast matrixWide : Bool), ({ final __callArgument167:Dynamic = diagnostics; __callArgument167; })) : Null<ParsedSkeletonPose__awd2Parse>);
-          if ((cast !_Runtime.strictEquals(pose, null) : Bool)) { ((cast poseBlocks : flight._internal._Map<Float, ParsedSkeletonPose__awd2Parse>).set(blockId, (cast pose))); }
+          if ((cast !_Runtime.strictEquals(pose, null) : Bool)) { ((cast poseBlocks : flight._internal._Map<Float, ParsedSkeletonPose__awd2Parse>).set((cast blockId), (cast pose))); }
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_SKELETON_ANIMATION) : Bool)) {
           var anim:Null<ParsedSkeletonAnimation__awd2Parse> = (cast _Scene3DFormats.parseSkeletonAnimationBlock__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument170:Dynamic = source; __callArgument170; }), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), ({ final __callArgument171:Dynamic = diagnostics; __callArgument171; })) : Null<ParsedSkeletonAnimation__awd2Parse>);
-          if ((cast !_Runtime.strictEquals(anim, null) : Bool)) { ((cast animationBlocks : flight._internal._Map<Float, ParsedSkeletonAnimation__awd2Parse>).set(blockId, (cast anim))); }
+          if ((cast !_Runtime.strictEquals(anim, null) : Bool)) { ((cast animationBlocks : flight._internal._Map<Float, ParsedSkeletonAnimation__awd2Parse>).set((cast blockId), (cast anim))); }
         } } }
       }
       (offset = cast ((blockDataStart + blockLength) : Dynamic));
@@ -723,9 +723,9 @@ class _Scene3DFormats {
           var p:Float = 0.0;
           while ((cast ((cast p : Float) < (cast poseCount : Float)) : Bool)) {
             var poseBlockId:Float = (cast flight._internal._StaticIndex.readArray(_Runtime.field(parsedAnimation, 'poses'), p) : { var duration:Float; var poseBlockId:Float; }).poseBlockId;
-            var pose:Null<ParsedSkeletonPose__awd2Parse> = ((cast poseBlocks : flight._internal._Map<Float, ParsedSkeletonPose__awd2Parse>).get(poseBlockId));
+            var pose:Null<ParsedSkeletonPose__awd2Parse> = ((cast poseBlocks : flight._internal._Map<Float, ParsedSkeletonPose__awd2Parse>).get((cast poseBlockId)));
             if ((cast _Runtime.strictEquals(pose, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-              ({ final __collection198:Dynamic = missingPoseBlocks; __collection198 == null ? _Runtime.UNDEFINED : ((cast __collection198 : flight._internal._Set<Float>).add(poseBlockId)); });
+              ({ final __collection198:Dynamic = missingPoseBlocks; __collection198 == null ? _Runtime.UNDEFINED : ((cast __collection198 : flight._internal._Set<Float>).add((cast poseBlockId))); });
               _Runtime.pushMany(translationValues, cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
               _Runtime.pushMany(rotationValues, cast ([0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
               _Runtime.pushMany(scaleValues, cast ([1.0, 1.0, 1.0] : Array<Dynamic>));
@@ -796,13 +796,13 @@ class _Scene3DFormats {
       if ((cast _Runtime.strictEquals(namespace, AWD2_NAMESPACE_CORE) : Bool)) {
         if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_SKELETON) : Bool)) {
           var skeleton:Null<ParsedSkeleton__awd2Parse> = (cast (#if js _Runtime.callValue(_Scene3DFormats.parseSkeletonBlock__awd2Parse, cast ([(cast view : flight._internal._Any), ({ final __callArgument222:Dynamic = source; __callArgument222; }), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast matrixWide : Bool)] : Array<Dynamic>)) #else _Scene3DFormats.parseSkeletonBlock__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument221:Dynamic = source; __callArgument221; }), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast matrixWide : Bool), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Null<ParsedSkeleton__awd2Parse>);
-          if ((cast !_Runtime.strictEquals(skeleton, null) : Bool)) { ((cast skeletonBlocks : flight._internal._Map<Float, ParsedSkeleton__awd2Parse>).set(blockId, (cast skeleton))); }
+          if ((cast !_Runtime.strictEquals(skeleton, null) : Bool)) { ((cast skeletonBlocks : flight._internal._Map<Float, ParsedSkeleton__awd2Parse>).set((cast blockId), (cast skeleton))); }
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_SKELETON_POSE) : Bool)) {
           var pose:Null<ParsedSkeletonPose__awd2Parse> = (cast _Scene3DFormats.parseSkeletonPoseBlock__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument223:Dynamic = source; __callArgument223; }), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), (cast matrixWide : Bool), ({ final __callArgument224:Dynamic = diagnostics; __callArgument224; })) : Null<ParsedSkeletonPose__awd2Parse>);
-          if ((cast !_Runtime.strictEquals(pose, null) : Bool)) { ((cast poseBlocks : flight._internal._Map<Float, ParsedSkeletonPose__awd2Parse>).set(blockId, (cast pose))); }
+          if ((cast !_Runtime.strictEquals(pose, null) : Bool)) { ((cast poseBlocks : flight._internal._Map<Float, ParsedSkeletonPose__awd2Parse>).set((cast blockId), (cast pose))); }
         } else { if ((cast _Runtime.strictEquals(blockType, AWD2_BLOCK_SKELETON_ANIMATION) : Bool)) {
           var anim:Null<ParsedSkeletonAnimation__awd2Parse> = (cast _Scene3DFormats.parseSkeletonAnimationBlock__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument227:Dynamic = source; __callArgument227; }), (cast blockDataStart : Float), (cast (blockDataStart + blockLength) : Float), ({ final __callArgument228:Dynamic = diagnostics; __callArgument228; })) : Null<ParsedSkeletonAnimation__awd2Parse>);
-          if ((cast !_Runtime.strictEquals(anim, null) : Bool)) { ((cast animationBlocks : flight._internal._Map<Float, ParsedSkeletonAnimation__awd2Parse>).set(blockId, (cast anim))); }
+          if ((cast !_Runtime.strictEquals(anim, null) : Bool)) { ((cast animationBlocks : flight._internal._Map<Float, ParsedSkeletonAnimation__awd2Parse>).set((cast blockId), (cast anim))); }
         } } }
       }
       (offset = cast ((blockDataStart + blockLength) : Dynamic));
@@ -863,9 +863,9 @@ class _Scene3DFormats {
           var p:Float = 0.0;
           while ((cast ((cast p : Float) < (cast poseCount : Float)) : Bool)) {
             var poseBlockId:Float = (cast flight._internal._StaticIndex.readArray(_Runtime.field(parsedAnimation, 'poses'), p) : { var duration:Float; var poseBlockId:Float; }).poseBlockId;
-            var pose:Null<ParsedSkeletonPose__awd2Parse> = ((cast poseBlocks : flight._internal._Map<Float, ParsedSkeletonPose__awd2Parse>).get(poseBlockId));
+            var pose:Null<ParsedSkeletonPose__awd2Parse> = ((cast poseBlocks : flight._internal._Map<Float, ParsedSkeletonPose__awd2Parse>).get((cast poseBlockId)));
             if ((cast _Runtime.strictEquals(pose, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-              ({ final __collection241:Dynamic = missingPoseBlocks; __collection241 == null ? _Runtime.UNDEFINED : ((cast __collection241 : flight._internal._Set<Float>).add(poseBlockId)); });
+              ({ final __collection241:Dynamic = missingPoseBlocks; __collection241 == null ? _Runtime.UNDEFINED : ((cast __collection241 : flight._internal._Set<Float>).add((cast poseBlockId))); });
               _Runtime.pushMany(translationValues, cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
               _Runtime.pushMany(rotationValues, cast ([0.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
               _Runtime.pushMany(scaleValues, cast ([1.0, 1.0, 1.0] : Array<Dynamic>));
@@ -1529,7 +1529,7 @@ class _Scene3DFormats {
     (offset = cast ((offset + 1.0) : Dynamic));
     props = (cast _Scene3DFormats.readAwdProperties__awd2Parse((cast view : flight._internal._Any), (cast offset : Float), (cast end : Float)) : { var end:Float; var values:flight._internal._Map<Float, { var length:Float; var offset:Float; }>; });
     values = (cast props : { var end:Float; var values:flight._internal._Map<Float, { var length:Float; var offset:Float; }>; }).values;
-    hasRadius = ((cast values : flight._internal._Map<Float, { var length:Float; var offset:Float; }>).has(AWD2_LIGHT_PROP_RADIUS));
+    hasRadius = ((cast values : flight._internal._Map<Float, { var length:Float; var offset:Float; }>).has((cast AWD2_LIGHT_PROP_RADIUS)));
     return cast { ambient: _Runtime.coalesce((cast _Scene3DFormats.readAwdPropertyNumber__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument488:Dynamic = values; __callArgument488; }), (cast AWD2_LIGHT_PROP_AMBIENT : Float)) : Null<Float>), function():Dynamic return cast AWD2_LIGHT_DEFAULT_AMBIENT), ambientRgb: _Runtime.coalesce((cast _Scene3DFormats.readAwdPropertyUint32__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument490:Dynamic = values; __callArgument490; }), (cast AWD2_LIGHT_PROP_AMBIENT_COLOR : Float)) : Null<Float>), function():Dynamic return cast AWD2_LIGHT_DEFAULT_RGB), castsShadow: ((cast _Runtime.coalesce((cast _Scene3DFormats.readAwdPropertyUint8__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument492:Dynamic = values; __callArgument492; }), (cast AWD2_LIGHT_PROP_SHADOW_MAPPER : Float)) : Null<Float>), function():Dynamic return cast 0.0) : Float) > (cast 0.0 : Float)), diffuse: _Runtime.coalesce((cast _Scene3DFormats.readAwdPropertyNumber__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument494:Dynamic = values; __callArgument494; }), (cast AWD2_LIGHT_PROP_DIFFUSE : Float)) : Null<Float>), function():Dynamic return cast AWD2_LIGHT_DEFAULT_DIFFUSE), directionX: _Runtime.coalesce((cast _Scene3DFormats.readAwdPropertyNumber__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument496:Dynamic = values; __callArgument496; }), (cast AWD2_LIGHT_PROP_DIRECTION_X : Float)) : Null<Float>), function():Dynamic return cast 0.0), directionY: _Runtime.coalesce((cast _Scene3DFormats.readAwdPropertyNumber__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument498:Dynamic = values; __callArgument498; }), (cast AWD2_LIGHT_PROP_DIRECTION_Y : Float)) : Null<Float>), function():Dynamic return cast -1.0), directionZ: _Runtime.coalesce((cast _Scene3DFormats.readAwdPropertyNumber__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument500:Dynamic = values; __callArgument500; }), (cast AWD2_LIGHT_PROP_DIRECTION_Z : Float)) : Null<Float>), function():Dynamic return cast 1.0), fallOff: _Runtime.coalesce((cast _Scene3DFormats.readAwdPropertyNumber__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument502:Dynamic = values; __callArgument502; }), (cast AWD2_LIGHT_PROP_FALLOFF : Float)) : Null<Float>), function():Dynamic return cast AWD2_LIGHT_DEFAULT_FALLOFF), hasRadius: hasRadius, lightType: lightType, name: (cast nameResult : { var end:Float; var value:String; }).value, parentId: parentId, radius: _Runtime.coalesce((cast _Scene3DFormats.readAwdPropertyNumber__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument504:Dynamic = values; __callArgument504; }), (cast AWD2_LIGHT_PROP_RADIUS : Float)) : Null<Float>), function():Dynamic return cast AWD2_LIGHT_DEFAULT_RADIUS), rgb: _Runtime.coalesce((cast _Scene3DFormats.readAwdPropertyUint32__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument506:Dynamic = values; __callArgument506; }), (cast AWD2_LIGHT_PROP_COLOR : Float)) : Null<Float>), function():Dynamic return cast AWD2_LIGHT_DEFAULT_RGB), specular: _Runtime.coalesce((cast _Scene3DFormats.readAwdPropertyNumber__awd2Parse((cast view : flight._internal._Any), ({ final __callArgument508:Dynamic = values; __callArgument508; }), (cast AWD2_LIGHT_PROP_SPECULAR : Float)) : Null<Float>), function():Dynamic return cast AWD2_LIGHT_DEFAULT_SPECULAR), transform: (cast transformResult : { var end:Float; var transform:flight._internal._Float64Array; }).transform };
     return cast null;
   }
@@ -1629,7 +1629,7 @@ class _Scene3DFormats {
       var fieldLength:Float = _Runtime.callProperty(dv, 'getUint32', cast ([offset, true] : Array<Dynamic>));
       (offset = cast ((offset + 4.0) : Dynamic));
       if ((cast ((cast (offset + fieldLength) : Float) > (cast listEnd : Float)) : Bool)) { break; }
-      ((cast values : flight._internal._Map<Float, { var length:Float; var offset:Float; }>).set(key, (cast { length: fieldLength, offset: offset })));
+      ((cast values : flight._internal._Map<Float, { var length:Float; var offset:Float; }>).set((cast key), (cast { length: fieldLength, offset: offset })));
       (offset = cast ((offset + fieldLength) : Dynamic));
     }
     return cast { end: listEnd, values: values };
@@ -1638,7 +1638,7 @@ class _Scene3DFormats {
 
   public static function readAwdPropertyFloat32__awd2Parse(view:Dynamic, values:flight._internal._Map<Float, { var length:Float; var offset:Float; }>, key:Float):Null<Float> {
     var entry:Null<{ var length:Float; var offset:Float; }> = cast _Runtime.UNDEFINED;
-    entry = ((cast values : flight._internal._Map<Float, { var length:Float; var offset:Float; }>).get(key));
+    entry = ((cast values : flight._internal._Map<Float, { var length:Float; var offset:Float; }>).get((cast key)));
     if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast (cast entry : { var length:Float; var offset:Float; }).length : Float) < (cast 4.0 : Float)) : Bool)) : Bool)) { return cast null; }
     return cast _Runtime.callProperty((cast view : Dynamic), 'getFloat32', cast ([(cast entry : { var length:Float; var offset:Float; }).offset, true] : Array<Dynamic>));
     return cast null;
@@ -1647,7 +1647,7 @@ class _Scene3DFormats {
   public static function readAwdPropertyNumber__awd2Parse(view:Dynamic, values:flight._internal._Map<Float, { var length:Float; var offset:Float; }>, key:Float):Null<Float> {
     var entry:Null<{ var length:Float; var offset:Float; }> = cast _Runtime.UNDEFINED;
     var dv:flight._internal._Any = cast _Runtime.UNDEFINED;
-    entry = ((cast values : flight._internal._Map<Float, { var length:Float; var offset:Float; }>).get(key));
+    entry = ((cast values : flight._internal._Map<Float, { var length:Float; var offset:Float; }>).get((cast key)));
     if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast (cast entry : { var length:Float; var offset:Float; }).length : Float) < (cast 4.0 : Float)) : Bool)) : Bool)) { return cast null; }
     dv = (cast view : Dynamic);
     return cast ((cast ((cast (cast entry : { var length:Float; var offset:Float; }).length : Float) >= (cast 8.0 : Float)) : Bool) ? (cast _Runtime.callProperty(dv, 'getFloat64', cast ([(cast entry : { var length:Float; var offset:Float; }).offset, true] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callProperty(dv, 'getFloat32', cast ([(cast entry : { var length:Float; var offset:Float; }).offset, true] : Array<Dynamic>)) : Dynamic));
@@ -1656,7 +1656,7 @@ class _Scene3DFormats {
 
   public static function readAwdPropertyUint8__awd2Parse(view:Dynamic, values:flight._internal._Map<Float, { var length:Float; var offset:Float; }>, key:Float):Null<Float> {
     var entry:Null<{ var length:Float; var offset:Float; }> = cast _Runtime.UNDEFINED;
-    entry = ((cast values : flight._internal._Map<Float, { var length:Float; var offset:Float; }>).get(key));
+    entry = ((cast values : flight._internal._Map<Float, { var length:Float; var offset:Float; }>).get((cast key)));
     if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast (cast entry : { var length:Float; var offset:Float; }).length : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { return cast null; }
     return cast _Runtime.callProperty((cast view : Dynamic), 'getUint8', cast ([(cast entry : { var length:Float; var offset:Float; }).offset] : Array<Dynamic>));
     return cast null;
@@ -1664,7 +1664,7 @@ class _Scene3DFormats {
 
   public static function readAwdPropertyUint32__awd2Parse(view:Dynamic, values:flight._internal._Map<Float, { var length:Float; var offset:Float; }>, key:Float):Null<Float> {
     var entry:Null<{ var length:Float; var offset:Float; }> = cast _Runtime.UNDEFINED;
-    entry = ((cast values : flight._internal._Map<Float, { var length:Float; var offset:Float; }>).get(key));
+    entry = ((cast values : flight._internal._Map<Float, { var length:Float; var offset:Float; }>).get((cast key)));
     if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast (cast entry : { var length:Float; var offset:Float; }).length : Float) < (cast 4.0 : Float)) : Bool)) : Bool)) { return cast null; }
     return cast _Runtime.callProperty((cast view : Dynamic), 'getUint32', cast ([(cast entry : { var length:Float; var offset:Float; }).offset, true] : Array<Dynamic>));
     return cast null;
@@ -1681,12 +1681,12 @@ class _Scene3DFormats {
     var material:Material = cast _Runtime.UNDEFINED;
     var index:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(materialId, 0.0) : Bool)) { return cast -1.0; }
-    cached = ((cast cache : flight._internal._Map<Float, Float>).get(materialId));
+    cached = ((cast cache : flight._internal._Map<Float, Float>).get((cast materialId)));
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
-    parsed = ((cast materialBlocks : flight._internal._Map<Float, ParsedMaterial__awd2Parse>).get(materialId));
+    parsed = ((cast materialBlocks : flight._internal._Map<Float, ParsedMaterial__awd2Parse>).get((cast materialId)));
     if ((cast _Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       reportImportDiagnostic(({ final __callArgument556:Dynamic = diagnostics; __callArgument556; }), ({ final __callArgument557:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument557; }), (cast 'awd2.material-missing' : String), (cast 'resolveAwdMaterial' : String), ({ final __callArgument558:Dynamic = { material: materialId }; __callArgument558; }));
-      ((cast cache : flight._internal._Map<Float, Float>).set(materialId, (cast -1.0)));
+      ((cast cache : flight._internal._Map<Float, Float>).set((cast materialId), (cast -1.0)));
       return cast -1.0;
     }
     diffuseTexture = ((cast !_Runtime.strictEquals((cast parsed : ParsedMaterial__awd2Parse).diffuseTextureId, 0.0) : Bool) ? (cast (cast _Scene3DFormats.resolveAwdTexture__awd2Parse((cast (cast parsed : ParsedMaterial__awd2Parse).diffuseTextureId : Float), (cast textureBlocks : Dynamic), ({ final __callArgument562:Dynamic = document; __callArgument562; }), ({ final __callArgument563:Dynamic = diagnostics; __callArgument563; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>) : Dynamic) : (cast null : Dynamic));
@@ -1706,14 +1706,14 @@ class _Scene3DFormats {
     ((cast material : Material).name = ((cast ((cast _Runtime.field((cast parsed : ParsedMaterial__awd2Parse).name, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast parsed : ParsedMaterial__awd2Parse).name : Dynamic) : (cast null : Dynamic)));
     index = _Runtime.field(document.materials, 'length');
     _Runtime.callProperty(document.materials, 'push', cast ([(cast (cast material : flight._internal._Any) : MaterialLike)] : Array<Dynamic>));
-    ((cast cache : flight._internal._Map<Float, Float>).set(materialId, (cast index)));
+    ((cast cache : flight._internal._Map<Float, Float>).set((cast materialId), (cast index)));
     return cast index;
     return cast null;
   }
 
   public static function resolveAwdTexture__awd2Parse(textureId:Float, textureBlocks:flight._internal._Map<Float, ParsedTexture__awd2Parse>, document:Scene3DDocument, ?diagnostics:Array<ImportDiagnostic>):Null<Texture> {
     var parsed:Null<ParsedTexture__awd2Parse> = cast _Runtime.UNDEFINED;
-    parsed = ((cast textureBlocks : flight._internal._Map<Float, ParsedTexture__awd2Parse>).get(textureId));
+    parsed = ((cast textureBlocks : flight._internal._Map<Float, ParsedTexture__awd2Parse>).get((cast textureId)));
     if ((cast _Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       reportImportDiagnostic(({ final __callArgument586:Dynamic = diagnostics; __callArgument586; }), ({ final __callArgument587:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument587; }), (cast 'awd2.texture-missing' : String), (cast 'resolveAwdTexture' : String), ({ final __callArgument588:Dynamic = { texture: textureId }; __callArgument588; }));
       return cast null;
@@ -2007,8 +2007,8 @@ class _Scene3DFormats {
 
   public static function tallyAwdLightDrop__awd2Parse(tallies:flight._internal._Map<String, AwdLightDropTally__awd2Parse>, severity:ImportDiagnosticSeverity, kind:String, origin:String, firstDetail:flight._internal._Record<String, flight._internal._Union2<flight._internal._Union2<Bool, Float>, String>>):Void {
     var existing:Null<AwdLightDropTally__awd2Parse> = cast _Runtime.UNDEFINED;
-    existing = ((cast tallies : flight._internal._Map<String, AwdLightDropTally__awd2Parse>).get(kind));
-    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flight._internal._Map<String, AwdLightDropTally__awd2Parse>).set(kind, (cast { count: 1.0, detail: firstDetail, kind: kind, origin: origin, severity: severity }))); } else { (cast existing : AwdLightDropTally__awd2Parse).count++; }
+    existing = ((cast tallies : flight._internal._Map<String, AwdLightDropTally__awd2Parse>).get((cast kind)));
+    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flight._internal._Map<String, AwdLightDropTally__awd2Parse>).set((cast kind), (cast { count: 1.0, detail: firstDetail, kind: kind, origin: origin, severity: severity }))); } else { (cast existing : AwdLightDropTally__awd2Parse).count++; }
   }
 
   public static function flushAwdLightDrops__awd2Parse(tallies:flight._internal._Map<String, AwdLightDropTally__awd2Parse>, ?diagnostics:Array<ImportDiagnostic>):Void {
@@ -2023,7 +2023,7 @@ class _Scene3DFormats {
       var picked:flight._internal._Set<Float> = _Runtime.construct(flight._internal._HostValueLut.get('Set'), [(cast picker : ParsedLightPicker__awd2Parse).lightIds]);
       if ((cast !_Runtime.strictEquals((cast picked : flight._internal._Set<Float>).size, (cast lightBlockIds : flight._internal._Set<Float>).size) : Bool)) { return cast true; }
       for (id in _Runtime.iterable(lightBlockIds)) {
-        if ((cast !(cast ((cast picked : flight._internal._Set<Float>).has(id)) : Bool) : Bool)) { return cast true; }
+        if ((cast !(cast ((cast picked : flight._internal._Set<Float>).has((cast id))) : Bool) : Bool)) { return cast true; }
       }
     }
     return cast false;
@@ -2034,9 +2034,9 @@ class _Scene3DFormats {
     var key:String = cast _Runtime.UNDEFINED;
     var entry:Null<{ var blockType:Float; var count:Float; var firstBlockId:Float; var namespace:Float; }> = cast _Runtime.UNDEFINED;
     key = '' + Std.string(namespace) + ':' + Std.string(blockType) + '';
-    entry = ((cast tally : flight._internal._Map<String, { var blockType:Float; var count:Float; var firstBlockId:Float; var namespace:Float; }>).get(key));
+    entry = ((cast tally : flight._internal._Map<String, { var blockType:Float; var count:Float; var firstBlockId:Float; var namespace:Float; }>).get((cast key)));
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      ((cast tally : flight._internal._Map<String, { var blockType:Float; var count:Float; var firstBlockId:Float; var namespace:Float; }>).set(key, (cast { blockType: blockType, count: 1.0, firstBlockId: blockId, namespace: namespace })));
+      ((cast tally : flight._internal._Map<String, { var blockType:Float; var count:Float; var firstBlockId:Float; var namespace:Float; }>).set((cast key), (cast { blockType: blockType, count: 1.0, firstBlockId: blockId, namespace: namespace })));
       return;
     }
     (cast entry : { var blockType:Float; var count:Float; var firstBlockId:Float; var namespace:Float; }).count++;
@@ -2595,10 +2595,10 @@ class _Scene3DFormats {
     if ((cast ((cast _Runtime.strictEquals(handlers, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(handlers, 'length'), 0.0) : Bool)) : Bool)) { return; }
     selected = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
     for (handler in _Runtime.iterable(handlers)) {
-      if ((cast ((cast selected : flight._internal._Map<String, GltfExtensionHandler>).has((cast handler : GltfExtensionHandler).kind)) : Bool)) {
+      if ((cast ((cast selected : flight._internal._Map<String, GltfExtensionHandler>).has((cast (cast handler : GltfExtensionHandler).kind))) : Bool)) {
         _Scene3DFormats.tallyGltfDrop__gltfParse((cast gltfDrops : Dynamic), ({ final __callArgument966:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument966; }), (cast 'gltf.duplicate-extension-handler' : String), (cast '' : String), ({ final __callArgument967:Dynamic = { firstKind: (cast handler : GltfExtensionHandler).kind }; __callArgument967; }));
       }
-      ((cast selected : flight._internal._Map<String, GltfExtensionHandler>).set((cast handler : GltfExtensionHandler).kind, (cast handler)));
+      ((cast selected : flight._internal._Map<String, GltfExtensionHandler>).set((cast (cast handler : GltfExtensionHandler).kind), (cast handler)));
     }
     context = (cast { buildNodeTransform: function(node:Float):Transform3D {
       return cast (cast _Scene3DFormats.cloneGltfTransform__gltfParse(({ final __callArgument970:Dynamic = _Runtime.coalesce(flight._internal._StaticIndex.readArray(nodeWorldTransforms, node), function():Dynamic return cast (cast _Scene3DFormats.createIdentityTransform__gltfParse() : Transform3D)); __callArgument970; })) : Transform3D);
@@ -3074,7 +3074,7 @@ class _Scene3DFormats {
 
   public static function isSupportedGltfExtension__gltfParse(extension:String, handlers:Null<Array<GltfExtensionHandler>>):Bool {
     if ((cast _Runtime.strictEquals(extension, 'KHR_draco_mesh_compression') : Bool)) { return cast (cast hasGltfDracoDecoder() : Bool); }
-    return cast ((cast ((cast _Scene3DFormats.CORE_GLTF_EXTENSIONS__gltfParse : flight._internal._Set<String>).has(extension)) : Bool) || (cast _Runtime.strictEquals(_Runtime.callOptionalProperty(handlers, 'some', cast ([function(handler:GltfExtensionHandler, __unused25:Float, __unused26:Array<GltfExtensionHandler>):Bool return _Runtime.strictEquals((cast handler : GltfExtensionHandler).kind, extension)] : Array<Dynamic>)), true) : Bool));
+    return cast ((cast ((cast _Scene3DFormats.CORE_GLTF_EXTENSIONS__gltfParse : flight._internal._Set<String>).has((cast extension))) : Bool) || (cast _Runtime.strictEquals(_Runtime.callOptionalProperty(handlers, 'some', cast ([function(handler:GltfExtensionHandler, __unused25:Float, __unused26:Array<GltfExtensionHandler>):Bool return _Runtime.strictEquals((cast handler : GltfExtensionHandler).kind, extension)] : Array<Dynamic>)), true) : Bool));
     return cast null;
   }
 
@@ -3657,13 +3657,13 @@ class _Scene3DFormats {
     var roots:Array<Float> = cast _Runtime.UNDEFINED;
     referenced = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
     for (node in _Runtime.iterable(nodes)) {
-      if ((cast !_Runtime.strictEquals(node.children, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { for (c in _Runtime.iterable(node.children)) {   ((cast referenced : flight._internal._Set<Float>).add(c)); } }
+      if ((cast !_Runtime.strictEquals(node.children, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { for (c in _Runtime.iterable(node.children)) {   ((cast referenced : flight._internal._Set<Float>).add((cast c))); } }
     }
     roots = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) {
-        if ((cast !(cast ((cast referenced : flight._internal._Set<Float>).has(i)) : Bool) : Bool)) { _Runtime.callProperty(roots, 'push', cast ([i] : Array<Dynamic>)); }
+        if ((cast !(cast ((cast referenced : flight._internal._Set<Float>).has((cast i))) : Bool) : Bool)) { _Runtime.callProperty(roots, 'push', cast ([i] : Array<Dynamic>)); }
         i++;
       }
     }
@@ -3727,8 +3727,8 @@ class _Scene3DFormats {
     var existing:Null<GltfDropTally__gltfParse> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(tallies, null) : Bool)) { return; }
     key = '' + Std.string(kind) + '|' + Std.string(discriminator) + '';
-    existing = ((cast tallies : flight._internal._Map<String, GltfDropTally__gltfParse>).get(key));
-    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flight._internal._Map<String, GltfDropTally__gltfParse>).set(key, (cast { count: 1.0, detail: firstDetail, kind: kind, severity: severity }))); } else { (cast existing : GltfDropTally__gltfParse).count++; }
+    existing = ((cast tallies : flight._internal._Map<String, GltfDropTally__gltfParse>).get((cast key)));
+    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flight._internal._Map<String, GltfDropTally__gltfParse>).set((cast key), (cast { count: 1.0, detail: firstDetail, kind: kind, severity: severity }))); } else { (cast existing : GltfDropTally__gltfParse).count++; }
   }
 
   public static final GltfPunctualLightsExtensionHandler:GltfExtensionHandler = (cast { apply: function(context:GltfExtensionContext):Void {
@@ -3800,8 +3800,8 @@ class _Scene3DFormats {
   public static function tallyLightDrop__gltfPunctualLights(tallies:Null<flight._internal._Map<String, LightDropTally__gltfPunctualLights>>, severity:ImportDiagnosticSeverity, kind:String, firstDetail:flight._internal._Record<String, flight._internal._Union2<flight._internal._Union2<Bool, Float>, String>>):Void {
     var existing:Null<LightDropTally__gltfPunctualLights> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(tallies, null) : Bool)) { return; }
-    existing = ((cast tallies : flight._internal._Map<String, LightDropTally__gltfPunctualLights>).get(kind));
-    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flight._internal._Map<String, LightDropTally__gltfPunctualLights>).set(kind, (cast { count: 1.0, detail: firstDetail, kind: kind, severity: severity }))); } else { (cast existing : LightDropTally__gltfPunctualLights).count++; }
+    existing = ((cast tallies : flight._internal._Map<String, LightDropTally__gltfPunctualLights>).get((cast kind)));
+    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flight._internal._Map<String, LightDropTally__gltfPunctualLights>).set((cast kind), (cast { count: 1.0, detail: firstDetail, kind: kind, severity: severity }))); } else { (cast existing : LightDropTally__gltfPunctualLights).count++; }
   }
 
   public static final GltfSheenExtensionHandler:GltfExtensionHandler = (cast { apply: function(context:GltfExtensionContext):Void {
@@ -4091,7 +4091,7 @@ class _Scene3DFormats {
               continue;
             }
             var key:String = '' + Std.string(vertIdx) + '/' + Std.string(texIdx) + '';
-            var idx:Null<Float> = ((cast dedup : flight._internal._Map<String, Float>).get(key));
+            var idx:Null<Float> = ((cast dedup : flight._internal._Map<String, Float>).get((cast key)));
             if ((cast _Runtime.strictEquals(idx, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
               (idx = cast (_Runtime.divideNumbers(_Runtime.field(interleavedVertices, 'length'), CANONICAL_FLOATS_PER_VERTEX) : Dynamic));
               var p:Float = (vertIdx * 3.0);
@@ -4100,7 +4100,7 @@ class _Scene3DFormats {
               _Runtime.pushMany(interleavedVertices, cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
               _Runtime.pushMany(interleavedVertices, cast ([flight._internal._StaticIndex.readFloat32ArrayTyped((cast texS : flight._internal._Float32Array), (cast texIdx : Float)), flight._internal._StaticIndex.readFloat32ArrayTyped((cast texT : flight._internal._Float32Array), (cast texIdx : Float))] : Array<Dynamic>));
               _Runtime.callProperty(sourceVertexIndices, 'push', cast ([vertIdx] : Array<Dynamic>));
-              ((cast dedup : flight._internal._Map<String, Float>).set(key, (cast idx)));
+              ((cast dedup : flight._internal._Map<String, Float>).set((cast key), (cast idx)));
             }
             _Runtime.callProperty(indices, 'push', cast ([idx] : Array<Dynamic>));
             c++;
@@ -4201,7 +4201,7 @@ class _Scene3DFormats {
               flight._internal._StaticIndex.writeFloat32ArrayTyped((cast normals : flight._internal._Float32Array), (cast (p + 1.0) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast n : Array<Float>), (cast 2.0 : Float)) : Float));
               flight._internal._StaticIndex.writeFloat32ArrayTyped((cast normals : flight._internal._Float32Array), (cast (p + 2.0) : Float), (cast -flight._internal._StaticIndex.readFloatArrayTyped((cast n : Array<Float>), (cast 1.0 : Float)) : Float));
             } else { if ((cast !_Runtime.strictEquals(outOfRangeNormals, null) : Bool)) {
-              ((cast outOfRangeNormals : flight._internal._Set<Float>).add(ni));
+              ((cast outOfRangeNormals : flight._internal._Set<Float>).add((cast ni)));
             } }
             i++;
           }
@@ -4312,12 +4312,12 @@ class _Scene3DFormats {
     name = base;
     {
       var n:Float = 2.0;
-      while ((cast ((cast usedNames : flight._internal._Set<String>).has(name)) : Bool)) {
+      while ((cast ((cast usedNames : flight._internal._Set<String>).has((cast name))) : Bool)) {
         (name = cast ('' + Std.string(base) + '.' + Std.string(n) + '' : Dynamic));
         n++;
       }
     }
-    ((cast usedNames : flight._internal._Set<String>).add(name));
+    ((cast usedNames : flight._internal._Set<String>).add((cast name)));
     return cast name;
     return cast null;
   }
@@ -4538,7 +4538,7 @@ class _Scene3DFormats {
     }
     nodeByName = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
     for (joint in _Runtime.iterable(joints)) {
-      if (_Runtime.truthy((cast joint : { var name:Null<String>; }).name)) { ((cast nodeByName : flight._internal._Map<String, Node3D>).set((cast joint : { var name:Null<String>; }).name, (cast joint))); }
+      if (_Runtime.truthy((cast joint : { var name:Null<String>; }).name)) { ((cast nodeByName : flight._internal._Map<String, Node3D>).set((cast (cast joint : { var name:Null<String>; }).name), (cast joint))); }
     }
     componentTotal = (cast _Scene3DFormats.totalMd5AnimComponents__md5AnimParse((cast hierarchy : Dynamic)) : Float);
     if ((cast ((cast ((cast declaredComponents : Float) >= (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals(declaredComponents, componentTotal) : Bool)) : Bool)) {
@@ -4607,7 +4607,7 @@ class _Scene3DFormats {
         }
         (#if js _Runtime.callValue(convertPositionsZUpToYUp, cast ([({ final __callArgument1766:Dynamic = translationValues; __callArgument1766; })] : Array<Dynamic>)) #else convertPositionsZUpToYUp(({ final __callArgument1765:Dynamic = translationValues; __callArgument1765; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
         (#if js _Runtime.callValue(convertQuaternionsZUpToYUp, cast ([({ final __callArgument1768:Dynamic = rotationValues; __callArgument1768; })] : Array<Dynamic>)) #else convertQuaternionsZUpToYUp(({ final __callArgument1767:Dynamic = rotationValues; __callArgument1767; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-        var node:Node3D = _Runtime.coalesce(((cast nodeByName : flight._internal._Map<String, Node3D>).get((cast entry : Md5AnimHierarchyEntry__md5AnimParse).name)), function():Dynamic return cast flight._internal._StaticIndex.readArray(joints, j));
+        var node:Node3D = _Runtime.coalesce(((cast nodeByName : flight._internal._Map<String, Node3D>).get((cast (cast entry : Md5AnimHierarchyEntry__md5AnimParse).name))), function():Dynamic return cast flight._internal._StaticIndex.readArray(joints, j));
         var translationTrack:AnimationTrack = (cast createAnimationTrack((cast { components: 3.0, times: times, values: translationValues } : Dynamic)) : AnimationTrack);
         _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel(({ final __callArgument1769:Dynamic = translationTrack; __callArgument1769; }), (cast { node: node, path: Scene3DAnimationPathTranslation } : flight._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
         var rotationTrack:AnimationTrack = (cast createAnimationTrack((cast { components: 4.0, quaternion: true, times: times, values: rotationValues } : Dynamic)) : AnimationTrack);
@@ -4765,8 +4765,8 @@ class _Scene3DFormats {
     var existing:Null<Md5AnimDropTally__md5AnimParse> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(tallies, null) : Bool)) { return; }
     key = '' + Std.string(kind) + '|' + Std.string(discriminator) + '';
-    existing = ((cast tallies : flight._internal._Map<String, Md5AnimDropTally__md5AnimParse>).get(key));
-    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flight._internal._Map<String, Md5AnimDropTally__md5AnimParse>).set(key, (cast { count: 1.0, detail: firstDetail, kind: kind, severity: severity }))); } else { (cast existing : Md5AnimDropTally__md5AnimParse).count++; }
+    existing = ((cast tallies : flight._internal._Map<String, Md5AnimDropTally__md5AnimParse>).get((cast key)));
+    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flight._internal._Map<String, Md5AnimDropTally__md5AnimParse>).set((cast key), (cast { count: 1.0, detail: firstDetail, kind: kind, severity: severity }))); } else { (cast existing : Md5AnimDropTally__md5AnimParse).count++; }
   }
 
   public static function countMd5AnimFlagComponents__md5AnimParse(flags:Float):Float {
@@ -5433,8 +5433,8 @@ class _Scene3DFormats {
     var existing:Null<Md5DropTally__md5Parse> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(tallies, null) : Bool)) { return; }
     key = '' + Std.string(kind) + '|' + Std.string(discriminator) + '';
-    existing = ((cast tallies : flight._internal._Map<String, Md5DropTally__md5Parse>).get(key));
-    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flight._internal._Map<String, Md5DropTally__md5Parse>).set(key, (cast { count: 1.0, detail: firstDetail, kind: kind, severity: severity }))); } else { (cast existing : Md5DropTally__md5Parse).count++; }
+    existing = ((cast tallies : flight._internal._Map<String, Md5DropTally__md5Parse>).get((cast key)));
+    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flight._internal._Map<String, Md5DropTally__md5Parse>).set((cast key), (cast { count: 1.0, detail: firstDetail, kind: kind, severity: severity }))); } else { (cast existing : Md5DropTally__md5Parse).count++; }
   }
 
   public static function parseMd5DeclaredCount__md5Parse(line:String):Float {
@@ -5521,7 +5521,7 @@ class _Scene3DFormats {
             if (__switchValue == 'newmtl') {
               {
                 (current = cast ((cast _Scene3DFormats.createDefaultObjMaterial__mtlParse((cast args : String)) : ObjMaterial) : Dynamic));
-                ((cast materials : flight._internal._Map<String, ObjMaterial>).set(args, (cast current)));
+                ((cast materials : flight._internal._Map<String, ObjMaterial>).set((cast args), (cast current)));
               }
             }
             else if (__switchValue == 'Ka') {
@@ -5810,8 +5810,8 @@ class _Scene3DFormats {
     var existing:Null<MtlDropTally__mtlParse> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(tallies, null) : Bool)) { return; }
     key = '' + Std.string(kind) + '|' + Std.string(discriminator) + '';
-    existing = ((cast tallies : flight._internal._Map<String, MtlDropTally__mtlParse>).get(key));
-    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flight._internal._Map<String, MtlDropTally__mtlParse>).set(key, (cast { count: 1.0, detail: firstDetail, kind: kind, severity: severity }))); } else { (cast existing : MtlDropTally__mtlParse).count++; }
+    existing = ((cast tallies : flight._internal._Map<String, MtlDropTally__mtlParse>).get((cast key)));
+    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flight._internal._Map<String, MtlDropTally__mtlParse>).set((cast key), (cast { count: 1.0, detail: firstDetail, kind: kind, severity: severity }))); } else { (cast existing : MtlDropTally__mtlParse).count++; }
   }
 
   public static function createScene3DFromObj(source:String, ?materials:ObjMaterialLibrary, ?diagnostics:Array<ImportDiagnostic>):Scene3D {
@@ -6017,10 +6017,10 @@ class _Scene3DFormats {
 
   public static function getOrCreateBucket__objParse(buckets:flight._internal._Map<String, MaterialBucket__objParse>, material:String):MaterialBucket__objParse {
     var bucket:Null<MaterialBucket__objParse> = cast _Runtime.UNDEFINED;
-    bucket = ((cast buckets : flight._internal._Map<String, MaterialBucket__objParse>).get(material));
+    bucket = ((cast buckets : flight._internal._Map<String, MaterialBucket__objParse>).get((cast material)));
     if ((cast _Runtime.strictEquals(bucket, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (bucket = cast ({ dedup: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), indices: cast ([] : Array<Dynamic>), vertices: cast ([] : Array<Dynamic>) } : Dynamic));
-      ((cast buckets : flight._internal._Map<String, MaterialBucket__objParse>).set(material, (cast bucket)));
+      ((cast buckets : flight._internal._Map<String, MaterialBucket__objParse>).set((cast material), (cast bucket)));
     }
     return cast bucket;
     return cast null;
@@ -6067,7 +6067,7 @@ class _Scene3DFormats {
       }
     }
     key = ((cast ((cast normalIdx : Float) >= (cast 0.0 : Float)) : Bool) ? (cast '' + Std.string(posIdx) + '/' + Std.string(uvIdx) + '/' + Std.string(normalIdx) + '' : Dynamic) : (cast '' + Std.string(posIdx) + '/' + Std.string(uvIdx) + '/s' + Std.string(smoothingGroup) + '' : Dynamic));
-    existing = ((cast (cast bucket : MaterialBucket__objParse).dedup : flight._internal._Map<String, Float>).get(key));
+    existing = ((cast (cast bucket : MaterialBucket__objParse).dedup : flight._internal._Map<String, Float>).get((cast key)));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
     vertexIndex = _Runtime.divideNumbers(_Runtime.field((cast bucket : MaterialBucket__objParse).vertices, 'length'), CANONICAL_FLOATS_PER_VERTEX);
     _Runtime.pushMany((cast bucket : MaterialBucket__objParse).vertices, cast ([flight._internal._StaticIndex.readFloatArrayTyped((cast positions : Array<Float>), (cast (posIdx * 3.0) : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast positions : Array<Float>), (cast ((posIdx * 3.0) + 1.0) : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast positions : Array<Float>), (cast ((posIdx * 3.0) + 2.0) : Float))] : Array<Dynamic>));
@@ -6082,7 +6082,7 @@ class _Scene3DFormats {
     } else {
       _Runtime.pushMany((cast bucket : MaterialBucket__objParse).vertices, cast ([0.0, 0.0] : Array<Dynamic>));
     }
-    ((cast (cast bucket : MaterialBucket__objParse).dedup : flight._internal._Map<String, Float>).set(key, (cast vertexIndex)));
+    ((cast (cast bucket : MaterialBucket__objParse).dedup : flight._internal._Map<String, Float>).set((cast key), (cast vertexIndex)));
     return cast vertexIndex;
     return cast null;
   }
@@ -6192,7 +6192,7 @@ class _Scene3DFormats {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(elements, 'length') : Float)) : Bool)) {
         var source:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast elements : Array<Float>), (cast i : Float));
-        var emitted:Null<Float> = ((cast dedup : flight._internal._Map<Float, Float>).get(source));
+        var emitted:Null<Float> = ((cast dedup : flight._internal._Map<Float, Float>).get((cast source)));
         if ((cast _Runtime.strictEquals(emitted, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           (emitted = cast (_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), CANONICAL_FLOATS_PER_VERTEX) : Dynamic));
           _Runtime.pushMany(vertices, cast ([flight._internal._StaticIndex.readFloatArrayTyped((cast sourcePositions : Array<Float>), (cast (source * 3.0) : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast sourcePositions : Array<Float>), (cast ((source * 3.0) + 1.0) : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast sourcePositions : Array<Float>), (cast ((source * 3.0) + 2.0) : Float))] : Array<Dynamic>));
@@ -6203,7 +6203,7 @@ class _Scene3DFormats {
               pad++;
             }
           }
-          ((cast dedup : flight._internal._Map<Float, Float>).set(source, (cast emitted)));
+          ((cast dedup : flight._internal._Map<Float, Float>).set((cast source), (cast emitted)));
         }
         _Runtime.callProperty(indices, 'push', cast ([emitted] : Array<Dynamic>));
         i++;
@@ -6284,21 +6284,21 @@ class _Scene3DFormats {
     var material:Material = cast _Runtime.UNDEFINED;
     var index:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(name, '') : Bool)) { return cast -1.0; }
-    cached = ((cast cache : flight._internal._Map<String, Float>).get(name));
+    cached = ((cast cache : flight._internal._Map<String, Float>).get((cast name)));
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
-    parsed = ({ final __collection2363:Dynamic = ({ final __typedStruct2362 = library; __typedStruct2362 == null ? _Runtime.UNDEFINED : (cast __typedStruct2362 : { var materials:flight._internal._Map<String, ObjMaterial>; }).materials; }); __collection2363 == null ? _Runtime.UNDEFINED : ((cast __collection2363 : flight._internal._Map<String, ObjMaterial>).get(name)); });
+    parsed = ({ final __collection2363:Dynamic = ({ final __typedStruct2362 = library; __typedStruct2362 == null ? _Runtime.UNDEFINED : (cast __typedStruct2362 : { var materials:flight._internal._Map<String, ObjMaterial>; }).materials; }); __collection2363 == null ? _Runtime.UNDEFINED : ((cast __collection2363 : flight._internal._Map<String, ObjMaterial>).get((cast name))); });
     if ((cast _Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       if ((cast !_Runtime.strictEquals(library, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         reportImportDiagnostic(({ final __callArgument2364:Dynamic = diagnostics; __callArgument2364; }), ({ final __callArgument2365:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument2365; }), (cast 'obj.material-missing' : String), (cast 'resolveObjMaterial' : String), ({ final __callArgument2366:Dynamic = { name: name }; __callArgument2366; }));
       }
-      ((cast cache : flight._internal._Map<String, Float>).set(name, (cast -1.0)));
+      ((cast cache : flight._internal._Map<String, Float>).set((cast name), (cast -1.0)));
       return cast -1.0;
     }
     material = (cast (cast ((cast (cast _Scene3DFormats.hasObjPbrDirectives__objParse(({ final __callArgument2370:Dynamic = parsed; __callArgument2370; })) : Bool) : Bool) ? (cast (cast _Scene3DFormats.objMaterialToStandardPbr__objParse(({ final __callArgument2372:Dynamic = parsed; __callArgument2372; }), ({ final __callArgument2373:Dynamic = document; __callArgument2373; }), ({ final __callArgument2374:Dynamic = diagnostics; __callArgument2374; })) : StandardPbrMaterial) : Dynamic) : (cast (cast _Scene3DFormats.objMaterialToBlinnPhong__objParse(({ final __callArgument2378:Dynamic = parsed; __callArgument2378; }), ({ final __callArgument2379:Dynamic = document; __callArgument2379; }), ({ final __callArgument2380:Dynamic = diagnostics; __callArgument2380; })) : BlinnPhongMaterial) : Dynamic)) : flight._internal._Any) : Material);
     ((cast material : Material).name = name);
     index = _Runtime.field(document.materials, 'length');
     _Runtime.callProperty(document.materials, 'push', cast ([(cast (cast material : flight._internal._Any) : MaterialLike)] : Array<Dynamic>));
-    ((cast cache : flight._internal._Map<String, Float>).set(name, (cast index)));
+    ((cast cache : flight._internal._Map<String, Float>).set((cast name), (cast index)));
     return cast index;
     return cast null;
   }
@@ -6318,8 +6318,8 @@ class _Scene3DFormats {
     var existing:Null<ObjDropTally__objParse> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(tallies, null) : Bool)) { return; }
     key = '' + Std.string(kind) + '|' + Std.string(discriminator) + '';
-    existing = ((cast tallies : flight._internal._Map<String, ObjDropTally__objParse>).get(key));
-    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flight._internal._Map<String, ObjDropTally__objParse>).set(key, (cast { count: 1.0, detail: firstDetail, kind: kind, severity: severity }))); } else { (cast existing : ObjDropTally__objParse).count++; }
+    existing = ((cast tallies : flight._internal._Map<String, ObjDropTally__objParse>).get((cast key)));
+    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flight._internal._Map<String, ObjDropTally__objParse>).set((cast key), (cast { count: 1.0, detail: firstDetail, kind: kind, severity: severity }))); } else { (cast existing : ObjDropTally__objParse).count++; }
   }
 
   public static function findScene3DSkeletonJoints(root:Node3D):Null<Array<Node3D>> {
@@ -6558,7 +6558,7 @@ class _Scene3DFormats {
         _Scene3DFormats.parseThreeDsObject__threeDsParse((cast view : flight._internal._Any), (cast cursor : Float), (cast chunkEnd : Float), ({ final __callArgument2446:Dynamic = meshes; __callArgument2446; }), ({ final __callArgument2447:Dynamic = lights; __callArgument2447; }), ({ final __callArgument2448:Dynamic = cameras; __callArgument2448; }), (cast threeDsDrops : Dynamic));
       } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_MATERIAL) : Bool)) {
         var material:ThreeDsMaterial = (cast _Scene3DFormats.parseMaterial__threeDsParse((cast view : flight._internal._Any), (cast cursor : Float), (cast chunkEnd : Float)) : ThreeDsMaterial);
-        if ((cast ((cast _Runtime.field(material.name, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { ((cast materials : flight._internal._Map<String, ThreeDsMaterial>).set(material.name, (cast material))); }
+        if ((cast ((cast _Runtime.field(material.name, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { ((cast materials : flight._internal._Map<String, ThreeDsMaterial>).set((cast material.name), (cast material))); }
       } } }
       (cursor = cast (chunkEnd : Dynamic));
     }
@@ -6964,7 +6964,7 @@ class _Scene3DFormats {
     }
     positions = (cast (cast _Runtime.toArray(mesh.vertices) : Array<Float>) : Array<Float>);
     transform = (cast createTransform3D() : Transform3D);
-    pivot = _Runtime.coalesce(((cast pivots : flight._internal._Map<String, Array<Float>>).get(mesh.name)), function():Dynamic return cast null);
+    pivot = _Runtime.coalesce(((cast pivots : flight._internal._Map<String, Array<Float>>).get((cast mesh.name))), function():Dynamic return cast null);
     localized = false;
     if ((cast !_Runtime.strictEquals(mesh.localMatrix, null) : Bool)) {
       (localized = cast ((cast _Scene3DFormats.localizeThreeDsPositions__threeDsParse(({ final __callArgument2540:Dynamic = positions; __callArgument2540; }), mesh.localMatrix, ({ final __callArgument2541:Dynamic = pivot; __callArgument2541; }), ({ final __callArgument2542:Dynamic = transform; __callArgument2542; }), (cast mesh.name : String), (cast threeDsDrops : Dynamic)) : Bool) : Dynamic));
@@ -7182,7 +7182,7 @@ class _Scene3DFormats {
         for (__iteration6 in _Runtime.iterable((cast _Scene3DFormats.collectThreeDsPivots__threeDsParse((cast view : flight._internal._Any), (cast cursor : Float)) : flight._internal._Map<String, Array<Float>>))) {
           var name:String = flight._internal._StaticIndex.readArray(__iteration6, 0.0);
           var pivot:Array<Float> = flight._internal._StaticIndex.readArray(__iteration6, 1.0);
-          ((cast pivots : flight._internal._Map<String, Array<Float>>).set(name, (cast pivot)));
+          ((cast pivots : flight._internal._Map<String, Array<Float>>).set((cast name), (cast pivot)));
         }
       } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_KEYFRAME) : Bool)) {
         _Scene3DFormats.collectThreeDsNodePivots__threeDsParse((cast view : flight._internal._Any), (cast cursor : Float), (cast chunkEnd : Float), ({ final __callArgument2622:Dynamic = pivots; __callArgument2622; }));
@@ -7217,7 +7217,7 @@ class _Scene3DFormats {
           (inner = cast (innerEnd : Dynamic));
         }
         if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(name, null) : Bool) && (cast ((cast _Runtime.field(name, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast !_Runtime.strictEquals(pivot, null) : Bool)) : Bool) && (cast _Runtime.orValue(((cast !_Runtime.strictEquals(flight._internal._StaticIndex.readFloatArrayTyped((cast pivot : Array<Float>), (cast 0.0 : Float)), 0.0) : Bool) || (cast !_Runtime.strictEquals(flight._internal._StaticIndex.readFloatArrayTyped((cast pivot : Array<Float>), (cast 1.0 : Float)), 0.0) : Bool)), function():Dynamic return cast !_Runtime.strictEquals(flight._internal._StaticIndex.readFloatArrayTyped((cast pivot : Array<Float>), (cast 2.0 : Float)), 0.0)) : Bool)) : Bool)) {
-          ((cast pivots : flight._internal._Map<String, Array<Float>>).set(name, (cast pivot)));
+          ((cast pivots : flight._internal._Map<String, Array<Float>>).set((cast name), (cast pivot)));
         }
       }
       (cursor = cast (chunkEnd : Dynamic));
@@ -7305,16 +7305,16 @@ class _Scene3DFormats {
     var cached:Null<Float> = cast _Runtime.UNDEFINED;
     var index:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(name, 'length'), 0.0) : Bool)) { return cast -1.0; }
-    parsed = ((cast materials : flight._internal._Map<String, ThreeDsMaterial>).get(name));
+    parsed = ((cast materials : flight._internal._Map<String, ThreeDsMaterial>).get((cast name)));
     if ((cast _Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Scene3DFormats.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument2744:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument2744; }), (cast '3ds.material-missing' : String), (cast '' : String), ({ final __callArgument2745:Dynamic = { firstName: name }; __callArgument2745; }));
       return cast -1.0;
     }
-    cached = ((cast materialIndexByName : flight._internal._Map<String, Float>).get(name));
+    cached = ((cast materialIndexByName : flight._internal._Map<String, Float>).get((cast name)));
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
     index = _Runtime.field(document.materials, 'length');
     _Runtime.callProperty(document.materials, 'push', cast ([(cast (cast _Scene3DFormats.threeDsMaterialToBlinnPhong__threeDsParse(({ final __callArgument2748:Dynamic = parsed; __callArgument2748; }), ({ final __callArgument2749:Dynamic = document; __callArgument2749; })) : flight._internal._Any) : MaterialLike)] : Array<Dynamic>));
-    ((cast materialIndexByName : flight._internal._Map<String, Float>).set(name, (cast index)));
+    ((cast materialIndexByName : flight._internal._Map<String, Float>).set((cast name), (cast index)));
     return cast index;
     return cast null;
   }
@@ -7498,7 +7498,7 @@ class _Scene3DFormats {
     var existing:Null<ThreeDsDropTally__threeDsParse> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(tallies, null) : Bool)) { return; }
     key = '' + Std.string(kind) + '|' + Std.string(discriminator) + '';
-    existing = ((cast tallies : flight._internal._Map<String, ThreeDsDropTally__threeDsParse>).get(key));
-    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flight._internal._Map<String, ThreeDsDropTally__threeDsParse>).set(key, (cast { count: 1.0, detail: firstDetail, kind: kind, severity: severity }))); } else { (cast existing : ThreeDsDropTally__threeDsParse).count++; }
+    existing = ((cast tallies : flight._internal._Map<String, ThreeDsDropTally__threeDsParse>).get((cast key)));
+    if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast tallies : flight._internal._Map<String, ThreeDsDropTally__threeDsParse>).set((cast key), (cast { count: 1.0, detail: firstDetail, kind: kind, severity: severity }))); } else { (cast existing : ThreeDsDropTally__threeDsParse).count++; }
   }
 }

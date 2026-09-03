@@ -4,4 +4,24 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Geometry)
+@:structInit
+class Rectangle {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var height:Float;
+  public var width:Float;
+  public var x:Float;
+  public var y:Float;
+
+  private function new(height:Float, width:Float, x:Float, y:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.height = height;
+    this.width = width;
+    this.x = x;
+    this.y = y;
+  }
+}
+#else
 typedef Rectangle = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var height:Float; var width:Float; var x:Float; var y:Float; };
+#end

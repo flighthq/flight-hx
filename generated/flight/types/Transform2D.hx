@@ -4,4 +4,34 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Geometry)
+@:structInit
+class Transform2D {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var pivotX:Float;
+  public var pivotY:Float;
+  public var rotation:Float;
+  public var scaleX:Float;
+  public var scaleY:Float;
+  public var skewX:Float;
+  public var skewY:Float;
+  public var x:Float;
+  public var y:Float;
+
+  private function new(pivotX:Float, pivotY:Float, rotation:Float, scaleX:Float, scaleY:Float, skewX:Float, skewY:Float, x:Float, y:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.pivotX = pivotX;
+    this.pivotY = pivotY;
+    this.rotation = rotation;
+    this.scaleX = scaleX;
+    this.scaleY = scaleY;
+    this.skewX = skewX;
+    this.skewY = skewY;
+    this.x = x;
+    this.y = y;
+  }
+}
+#else
 typedef Transform2D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; };
+#end

@@ -4,4 +4,24 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Lighting)
+@:structInit
+class HemisphereLight {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var kind:String;
+  public var groundColor:Float;
+  public var intensity:Float;
+  public var skyColor:Float;
+
+  private function new(kind:String, groundColor:Float, intensity:Float, skyColor:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.kind = kind;
+    this.groundColor = groundColor;
+    this.intensity = intensity;
+    this.skyColor = skyColor;
+  }
+}
+#else
 typedef HemisphereLight = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var groundColor:Float; var intensity:Float; var skyColor:Float; };
+#end

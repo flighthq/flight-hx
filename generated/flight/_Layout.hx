@@ -695,7 +695,7 @@ class _Layout {
   }
 
   public static function registerLayoutResolver(state:LayoutState, kind:String, resolver:Null<LayoutResolver>):Void {
-    if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ((cast state.resolvers : flight._internal._Map<String, LayoutResolver>).delete_(kind)); } else { ((cast state.resolvers : flight._internal._Map<String, LayoutResolver>).set(kind, (cast resolver))); }
+    if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ((cast state.resolvers : flight._internal._Map<String, LayoutResolver>).delete_((cast kind))); } else { ((cast state.resolvers : flight._internal._Map<String, LayoutResolver>).set((cast kind), (cast resolver))); }
   }
 
   public static function explainLayoutResolution(state:LayoutState, tree:LayoutTree, nodeIndex:Float):Null<LayoutResolutionExplanation> {
@@ -713,7 +713,7 @@ class _Layout {
     {
       var i:Float = (nodeIndex + 1.0);
       while ((cast ((cast i : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) {
-        if ((cast ((cast _Runtime.strictEquals((cast flight._internal._StaticIndex.readArray(nodes, i) : { var parentIndex:Float; }).parentIndex, nodeIndex) : Bool) && (cast !(cast ((cast state.resolvers : flight._internal._Map<String, LayoutResolver>).has(node.kind)) : Bool) : Bool)) : Bool)) {
+        if ((cast ((cast _Runtime.strictEquals((cast flight._internal._StaticIndex.readArray(nodes, i) : { var parentIndex:Float; }).parentIndex, nodeIndex) : Bool) && (cast !(cast ((cast state.resolvers : flight._internal._Map<String, LayoutResolver>).has((cast node.kind))) : Bool) : Bool)) : Bool)) {
           return cast (cast _Layout.explanation__resolveLayoutTree(({ final __callArgument141:Dynamic = (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).UnregisteredKind; __callArgument141; }), (cast nodeIndex : Float), (cast -1.0 : Float), ({ final __callArgument142:Dynamic = node.kind; __callArgument142; })) : LayoutResolutionExplanation);
         }
         i++;
@@ -759,7 +759,7 @@ class _Layout {
           continue;
         }
         var parentKind:String = (cast flight._internal._StaticIndex.readArray(nodes, parentIndex) : { var kind:String; }).kind;
-        var resolver:Null<LayoutResolver> = ((cast state.resolvers : flight._internal._Map<String, LayoutResolver>).get(parentKind));
+        var resolver:Null<LayoutResolver> = ((cast state.resolvers : flight._internal._Map<String, LayoutResolver>).get((cast parentKind)));
         if ((cast _Runtime.strictEquals(resolver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           return cast (cast _Layout.failLayoutResolution__resolveLayoutTree(({ final __callArgument171:Dynamic = state; __callArgument171; }), ({ final __callArgument172:Dynamic = tree; __callArgument172; }), ({ final __callArgument173:Dynamic = (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).UnregisteredKind; __callArgument173; }), (cast parentIndex : Float), (cast -1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument174:Dynamic = parentKind; __callArgument174; })) : Bool);
         }

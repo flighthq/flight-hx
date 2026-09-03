@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+class MediaSessionActionBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var destroy:Void->Void;
+  public var subscribe:MediaSessionAction->(MediaSessionActionDetails->Void)->Null<Void->Void>;
+
+  private function new(destroy:Void->Void, subscribe:MediaSessionAction->(MediaSessionActionDetails->Void)->Null<Void->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.destroy = destroy;
+    this.subscribe = subscribe;
+  }
+}
+#else
 typedef MediaSessionActionBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var destroy:Void->Void; var subscribe:MediaSessionAction->(MediaSessionActionDetails->Void)->Null<Void->Void>; };
+#end

@@ -4,5 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:noCompletion
+@:allow(flight._RenderWgpu)
+@:structInit
+class WgpuDeviceState {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var device:flight._internal.dom.GPUDevice;
+
+  private function new(device:flight._internal.dom.GPUDevice):Void {
+    this.__symbol__EntityRuntime = null;
+    this.device = device;
+  }
+}
+#else
 @:noCompletion
 typedef WgpuDeviceState = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var device:flight._internal.dom.GPUDevice; };
+#end

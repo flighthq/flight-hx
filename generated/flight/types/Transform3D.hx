@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Geometry)
+@:structInit
+class Transform3D {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var position:Vector3;
+  public var rotation:Quaternion;
+  public var scale:Vector3;
+
+  private function new(position:Vector3, rotation:Quaternion, scale:Vector3):Void {
+    this.__symbol__EntityRuntime = null;
+    this.position = position;
+    this.rotation = rotation;
+    this.scale = scale;
+  }
+}
+#else
 typedef Transform3D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var position:Vector3; var rotation:Quaternion; var scale:Vector3; };
+#end

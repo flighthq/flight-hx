@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Geometry)
+@:structInit
+class BoundingSphere {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var center:Vector3;
+  public var radius:Float;
+
+  private function new(center:Vector3, radius:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.center = center;
+    this.radius = radius;
+  }
+}
+#else
 typedef BoundingSphere = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var center:Vector3; var radius:Float; };
+#end

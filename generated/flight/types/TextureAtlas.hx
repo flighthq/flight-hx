@@ -4,4 +4,28 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._TextureAtlas)
+@:structInit
+class TextureAtlas {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var imageHeight:Float;
+  public var imageName:Null<String>;
+  public var imageWidth:Float;
+  public var regions:Array<TextureAtlasRegion>;
+  public var scale:Float;
+  public var texture:Null<Texture2D>;
+
+  private function new(imageHeight:Float, imageName:Null<String>, imageWidth:Float, regions:Array<TextureAtlasRegion>, scale:Float, texture:Null<Texture2D>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.imageHeight = imageHeight;
+    this.imageName = imageName;
+    this.imageWidth = imageWidth;
+    this.regions = regions;
+    this.scale = scale;
+    this.texture = texture;
+  }
+}
+#else
 typedef TextureAtlas = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var imageHeight:Float; var imageName:Null<String>; var imageWidth:Float; var regions:Array<TextureAtlasRegion>; var scale:Float; var texture:Null<Texture2D>; };
+#end

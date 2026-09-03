@@ -114,8 +114,8 @@ class _Midi {
   @:allow(flight)
   @:keep
   private static function createMidiAccessResource(operations:MidiAccessResourceOperations):MidiAccess {
-    var access:Entity = cast _Runtime.UNDEFINED;
-    access = (cast createEntity(({ final __callArgument0:Dynamic = ({  } : Entity); __callArgument0; })) : Entity);
+    var access:MidiAccess = cast _Runtime.UNDEFINED;
+    access = (cast createEntity(({ final __callArgument0:Dynamic = ({  } : MidiAccess); __callArgument0; })) : MidiAccess);
     retainMidiAccessResourceState(({ final __callArgument2:Dynamic = access; __callArgument2; }), ({ final __callArgument3:Dynamic = operations; __callArgument3; }));
     return cast access;
     return cast null;
@@ -198,7 +198,7 @@ class _Midi {
                 });
               } else {
                 __flowBranch33 = flight._internal._Async.protect(function():Dynamic {
-                  ((cast (cast state : MidiAccessResourceState__midiResource).subscriptions : flight._internal._Set<MidiAccessStateSubscription>).delete_(subscription));
+                  ((cast (cast state : MidiAccessResourceState__midiResource).subscriptions : flight._internal._Set<MidiAccessStateSubscription>).delete_((cast subscription)));
                   return flight._internal._Async.flowNormal();
                 });
               }
@@ -225,7 +225,7 @@ class _Midi {
                   });
                 } else {
                   __flowBranch39 = flight._internal._Async.protect(function():Dynamic {
-                    ((cast (cast state : MidiAccessResourceState__midiResource).knownPorts : flight._internal._Set<MidiPort>).delete_(port));
+                    ((cast (cast state : MidiAccessResourceState__midiResource).knownPorts : flight._internal._Set<MidiPort>).delete_((cast port)));
                     return flight._internal._Async.flowNormal();
                   });
                 }
@@ -264,13 +264,13 @@ class _Midi {
       if ((cast _Runtime.strictEquals(kind, 'input') : Bool)) {
         var ports:Array<MidiInputPort> = (cast _Runtime.concatArrays([_Runtime.toArray((cast (cast state : MidiAccessResourceState__midiResource).operations : MidiAccessResourceOperations).getInputPorts())]));
         for (port in _Runtime.iterable(ports)) {
-          ((cast (cast state : MidiAccessResourceState__midiResource).knownPorts : flight._internal._Set<MidiPort>).add(port));
+          ((cast (cast state : MidiAccessResourceState__midiResource).knownPorts : flight._internal._Set<MidiPort>).add((cast port)));
         }
         return cast { ports: ports, reason: 'ok' };
       }
       var ports:Array<MidiOutputPort> = (cast _Runtime.concatArrays([_Runtime.toArray((cast (cast state : MidiAccessResourceState__midiResource).operations : MidiAccessResourceOperations).getOutputPorts())]));
       for (port in _Runtime.iterable(ports)) {
-        ((cast (cast state : MidiAccessResourceState__midiResource).knownPorts : flight._internal._Set<MidiPort>).add(port));
+        ((cast (cast state : MidiAccessResourceState__midiResource).knownPorts : flight._internal._Set<MidiPort>).add((cast port)));
       }
       return cast { ports: ports, reason: 'ok' };
     } catch (__error:Dynamic) {
@@ -575,7 +575,7 @@ class _Midi {
                 });
               } else {
                 __flowBranch135 = flight._internal._Async.protect(function():Dynamic {
-                  ((cast (cast state : { var stateSubscriptions:flight._internal._Set<MidiPortStateSubscription>; }).stateSubscriptions : flight._internal._Set<MidiPortStateSubscription>).delete_(subscription));
+                  ((cast (cast state : { var stateSubscriptions:flight._internal._Set<MidiPortStateSubscription>; }).stateSubscriptions : flight._internal._Set<MidiPortStateSubscription>).delete_((cast subscription)));
                   return flight._internal._Async.flowNormal();
                 });
               }
@@ -603,7 +603,7 @@ class _Midi {
                       });
                     } else {
                       __flowBranch142 = flight._internal._Async.protect(function():Dynamic {
-                        ((cast (cast state : MidiInputPortResourceState__midiResource).messageSubscriptions : flight._internal._Set<MidiInputMessageSubscription>).delete_(subscription));
+                        ((cast (cast state : MidiInputPortResourceState__midiResource).messageSubscriptions : flight._internal._Set<MidiInputMessageSubscription>).delete_((cast subscription)));
                         return flight._internal._Async.flowNormal();
                       });
                     }
@@ -743,25 +743,25 @@ class _Midi {
   public static final portStates__midiResource:flight._internal._WeakMap<MidiPort, MidiPortResourceState__midiResource> = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
 
   public static function getMidiAccessResourceState(access:MidiAccess):Null<MidiAccessResourceState__midiResource> {
-    return cast ((cast _Midi.accessStates__midiResource : flight._internal._WeakMap<MidiAccess, MidiAccessResourceState__midiResource>).get(access));
+    return cast ((cast _Midi.accessStates__midiResource : flight._internal._WeakMap<MidiAccess, MidiAccessResourceState__midiResource>).get((cast access)));
     return cast null;
   }
 
   public static function getMidiPortResourceState(port:MidiPort):Null<MidiPortResourceState__midiResource> {
-    return cast ((cast _Midi.portStates__midiResource : flight._internal._WeakMap<MidiPort, MidiPortResourceState__midiResource>).get(port));
+    return cast ((cast _Midi.portStates__midiResource : flight._internal._WeakMap<MidiPort, MidiPortResourceState__midiResource>).get((cast port)));
     return cast null;
   }
 
   public static function retainMidiAccessResourceState(access:MidiAccess, operations:MidiAccessResourceOperations):Void {
-    ((cast _Midi.accessStates__midiResource : flight._internal._WeakMap<MidiAccess, MidiAccessResourceState__midiResource>).set(access, (cast { disposeCompleted: false, disposePending: null, disposed: false, knownPorts: _Runtime.construct(flight._internal._HostValueLut.get('Set'), []), operations: operations, subscriptions: _Runtime.construct(flight._internal._HostValueLut.get('Set'), []) })));
+    ((cast _Midi.accessStates__midiResource : flight._internal._WeakMap<MidiAccess, MidiAccessResourceState__midiResource>).set((cast access), (cast { disposeCompleted: false, disposePending: null, disposed: false, knownPorts: _Runtime.construct(flight._internal._HostValueLut.get('Set'), []), operations: operations, subscriptions: _Runtime.construct(flight._internal._HostValueLut.get('Set'), []) })));
   }
 
   public static function retainMidiInputPortResourceState(port:MidiInputPort, operations:MidiInputPortResourceOperations):Void {
-    ((cast _Midi.portStates__midiResource : flight._internal._WeakMap<MidiPort, MidiPortResourceState__midiResource>).set(port, (cast _Runtime.mergeObjects([(cast _Midi.createMidiPortState__midiResource((cast 'input' : String), ({ final __callArgument151:Dynamic = operations; __callArgument151; })) : MidiInputPortResourceState__midiResource), { messageSubscriptions: _Runtime.construct(flight._internal._HostValueLut.get('Set'), []) }]))));
+    ((cast _Midi.portStates__midiResource : flight._internal._WeakMap<MidiPort, MidiPortResourceState__midiResource>).set((cast port), (cast _Runtime.mergeObjects([(cast _Midi.createMidiPortState__midiResource((cast 'input' : String), ({ final __callArgument151:Dynamic = operations; __callArgument151; })) : MidiInputPortResourceState__midiResource), { messageSubscriptions: _Runtime.construct(flight._internal._HostValueLut.get('Set'), []) }]))));
   }
 
   public static function retainMidiOutputPortResourceState(port:MidiOutputPort, operations:MidiOutputPortResourceOperations):Void {
-    ((cast _Midi.portStates__midiResource : flight._internal._WeakMap<MidiPort, MidiPortResourceState__midiResource>).set(port, (cast (cast _Midi.createMidiPortState__midiResource((cast 'output' : String), ({ final __callArgument153:Dynamic = operations; __callArgument153; })) : MidiOutputPortResourceState__midiResource))));
+    ((cast _Midi.portStates__midiResource : flight._internal._WeakMap<MidiPort, MidiPortResourceState__midiResource>).set((cast port), (cast (cast _Midi.createMidiPortState__midiResource((cast 'output' : String), ({ final __callArgument153:Dynamic = operations; __callArgument153; })) : MidiOutputPortResourceState__midiResource))));
   }
 
   public static function createMidiPortState__midiResource<Kind:flight._internal._IndexedAccess<MidiPortResourceState__midiResource, String>, Operations:flight._internal._IndexedAccess<MidiPortResourceState__midiResource, String>>(kind:Kind, operations:Operations):flight._internal._Any {
@@ -774,7 +774,7 @@ class _Midi {
     state = (cast getMidiAccessResourceState(({ final __callArgument155:Dynamic = access; __callArgument155; })) : Null<MidiAccessResourceState__midiResource>);
     if ((cast ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast (cast state : MidiAccessResourceState__midiResource).disposed : Bool)) : Bool)) { return cast flight._internal._Async.resolve((cast _Midi.attachFailure__midiSubscription() : MidiSubscriptionAttachOutcome)); }
     return cast (cast _Midi.attachMidiSubscription__midiSubscription(({ final __callArgument157:Dynamic = subscription; __callArgument157; }), (cast state : MidiAccessResourceState__midiResource).subscriptions, (cast function(listener:Array<MidiPort>->Void):flight._internal._Promise<MidiEventBackendAttachOutcome> return (cast (cast state : MidiAccessResourceState__midiResource).operations : MidiAccessResourceOperations).attachStateChange(({ final __callArgument158:Dynamic = listener; __callArgument158; })) : Dynamic), ({ final __callArgument159:Dynamic = function(port:MidiPort):Void {
-      ((cast (cast state : MidiAccessResourceState__midiResource).knownPorts : flight._internal._Set<MidiPort>).add(port));
+      ((cast (cast state : MidiAccessResourceState__midiResource).knownPorts : flight._internal._Set<MidiPort>).add((cast port)));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast subscription : MidiAccessStateSubscription).onMidiAccessStateChange], [port]]), 1);
     }; __callArgument159; })) : flight._internal._Promise<MidiSubscriptionAttachOutcome>);
     return cast null;
@@ -797,17 +797,17 @@ class _Midi {
   }
 
   public static function createMidiAccessStateSubscription():MidiAccessStateSubscription {
-    return cast (cast (cast _Midi.createMidiSubscription__midiSubscription : { var onMidiAccessStateChange:Signal<MidiPort->Void>; }->MidiAccessStateSubscription)(({ final __callArgument179:Dynamic = ({ onMidiAccessStateChange: (cast (cast createSignal : Void->Signal<MidiPort->Void>)() : Signal<MidiPort->Void>) } : EntityShapeL68C33__midiSubscription); __callArgument179; })) : MidiAccessStateSubscription);
+    return cast (cast (cast _Midi.createMidiSubscription__midiSubscription : { var onMidiAccessStateChange:Signal<MidiPort->Void>; }->MidiAccessStateSubscription)(({ final __callArgument179:Dynamic = ({ onMidiAccessStateChange: (cast (cast (cast createSignal : Void->Signal<MidiPort->Void>)() : Signal<MidiPort->Void>) : Dynamic) } : EntityShapeL68C33__midiSubscription); __callArgument179; })) : MidiAccessStateSubscription);
     return cast null;
   }
 
   public static function createMidiInputMessageSubscription():MidiInputMessageSubscription {
-    return cast (cast _Midi.createMidiSubscription__midiSubscription((cast ({ onMidiInputMessage: (cast createSignal() : Signal<MidiInputMessage->Void>) } : EntityShapeL72C33__midiSubscription) : Dynamic)) : MidiInputMessageSubscription);
+    return cast (cast _Midi.createMidiSubscription__midiSubscription((cast ({ onMidiInputMessage: (cast (cast createSignal() : Signal<MidiInputMessage->Void>) : Dynamic) } : EntityShapeL72C33__midiSubscription) : Dynamic)) : MidiInputMessageSubscription);
     return cast null;
   }
 
   public static function createMidiPortStateSubscription():MidiPortStateSubscription {
-    return cast (cast (cast _Midi.createMidiSubscription__midiSubscription : { var onMidiPortStateChange:Signal<MidiPort->Void>; }->MidiPortStateSubscription)(({ final __callArgument181:Dynamic = ({ onMidiPortStateChange: (cast (cast createSignal : Void->Signal<MidiPort->Void>)() : Signal<MidiPort->Void>) } : EntityShapeL76C33__midiSubscription); __callArgument181; })) : MidiPortStateSubscription);
+    return cast (cast (cast _Midi.createMidiSubscription__midiSubscription : { var onMidiPortStateChange:Signal<MidiPort->Void>; }->MidiPortStateSubscription)(({ final __callArgument181:Dynamic = ({ onMidiPortStateChange: (cast (cast (cast createSignal : Void->Signal<MidiPort->Void>)() : Signal<MidiPort->Void>) : Dynamic) } : EntityShapeL76C33__midiSubscription); __callArgument181; })) : MidiPortStateSubscription);
     return cast null;
   }
 
@@ -846,7 +846,7 @@ class _Midi {
   public static function createMidiSubscription__midiSubscription<Subscription:Entity>(fields:flight._internal._Omit<Subscription, flight._internal._Symbol>):Subscription {
     var subscription:Subscription = cast _Runtime.UNDEFINED;
     subscription = (cast (cast createEntity : Null<flight._internal._Any>->Entity)(({ final __callArgument199:Dynamic = fields; __callArgument199; })) : Subscription);
-    ((cast _Midi.subscriptionStates__midiSubscription : flight._internal._WeakMap<Entity, MidiSubscriptionRuntime__midiSubscription>).set(subscription, (cast { attachment: null, attaching: null, disposeCompleted: false, disposed: false, generation: 0.0, ownerSubscriptions: null })));
+    ((cast _Midi.subscriptionStates__midiSubscription : flight._internal._WeakMap<Entity, MidiSubscriptionRuntime__midiSubscription>).set((cast subscription), (cast { attachment: null, attaching: null, disposeCompleted: false, disposed: false, generation: 0.0, ownerSubscriptions: null })));
     return cast subscription;
     return cast null;
   }
@@ -858,7 +858,7 @@ class _Midi {
         var generation:Float = cast _Runtime.UNDEFINED;
         var attaching:flight._internal._Promise<MidiSubscriptionAttachOutcome> = cast _Runtime.UNDEFINED;
         var outcome:MidiSubscriptionAttachOutcome = cast _Runtime.UNDEFINED;
-        runtime = ((cast _Midi.subscriptionStates__midiSubscription : flight._internal._WeakMap<Entity, MidiSubscriptionRuntime__midiSubscription>).get(subscription));
+        runtime = ((cast _Midi.subscriptionStates__midiSubscription : flight._internal._WeakMap<Entity, MidiSubscriptionRuntime__midiSubscription>).get((cast subscription)));
         var __flowBranch205:Dynamic;
         if ((cast ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast (cast runtime : MidiSubscriptionRuntime__midiSubscription).disposed : Bool)) : Bool)) {
           __flowBranch205 = flight._internal._Async.protect(function():Dynamic {
@@ -926,7 +926,7 @@ class _Midi {
             return flight._internal._Async.continueFlow(__flowBranch209, function():Dynamic {
               generation = ++(cast runtime : MidiSubscriptionRuntime__midiSubscription).generation;
               ((cast runtime : MidiSubscriptionRuntime__midiSubscription).ownerSubscriptions = (cast ownerSubscriptions : flight._internal._Set<Entity>));
-              ((cast ownerSubscriptions : flight._internal._Set<Subscription>).add(subscription));
+              ((cast ownerSubscriptions : flight._internal._Set<Subscription>).add((cast subscription)));
               attaching = (cast _Midi.performMidiAttach__midiSubscription(({ final __callArgument215:Dynamic = subscription; __callArgument215; }), (cast runtime : Dynamic), (cast generation : Float), (cast attach : Dynamic), (cast listener : Dynamic)) : flight._internal._Promise<MidiSubscriptionAttachOutcome>);
               ((cast runtime : MidiSubscriptionRuntime__midiSubscription).attaching = attaching);
               return flight._internal._Async.flatMap(attaching, function(__awaitValue217:Dynamic):Dynamic {
@@ -1006,7 +1006,7 @@ class _Midi {
       flight._internal._Async.protect(function():Dynamic {
         var runtime:Null<MidiSubscriptionRuntime__midiSubscription> = cast _Runtime.UNDEFINED;
         var invalidatedAttach:Bool = cast _Runtime.UNDEFINED;
-        runtime = ((cast _Midi.subscriptionStates__midiSubscription : flight._internal._WeakMap<Entity, MidiSubscriptionRuntime__midiSubscription>).get(subscription));
+        runtime = ((cast _Midi.subscriptionStates__midiSubscription : flight._internal._WeakMap<Entity, MidiSubscriptionRuntime__midiSubscription>).get((cast subscription)));
         var __flowBranch241:Dynamic;
         if ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           __flowBranch241 = flight._internal._Async.protect(function():Dynamic {
@@ -1077,7 +1077,7 @@ class _Midi {
         var runtime:Null<MidiSubscriptionRuntime__midiSubscription> = cast _Runtime.UNDEFINED;
         var attachFailed:Bool = cast _Runtime.UNDEFINED;
         var releaseFailed:Bool = cast _Runtime.UNDEFINED;
-        runtime = ((cast _Midi.subscriptionStates__midiSubscription : flight._internal._WeakMap<Entity, MidiSubscriptionRuntime__midiSubscription>).get(subscription));
+        runtime = ((cast _Midi.subscriptionStates__midiSubscription : flight._internal._WeakMap<Entity, MidiSubscriptionRuntime__midiSubscription>).get((cast subscription)));
         var __flowBranch253:Dynamic;
         if ((cast ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast (cast runtime : MidiSubscriptionRuntime__midiSubscription).disposeCompleted : Bool)) : Bool)) {
           __flowBranch253 = flight._internal._Async.protect(function():Dynamic {
@@ -1222,7 +1222,7 @@ class _Midi {
   }
 
   public static function untrackMidiSubscription__midiSubscription(subscription:Entity, runtime:MidiSubscriptionRuntime__midiSubscription):Void {
-    ({ final __collection274:Dynamic = (cast runtime : MidiSubscriptionRuntime__midiSubscription).ownerSubscriptions; __collection274 == null ? _Runtime.UNDEFINED : ((cast __collection274 : flight._internal._Set<Entity>).delete_(subscription)); });
+    ({ final __collection274:Dynamic = (cast runtime : MidiSubscriptionRuntime__midiSubscription).ownerSubscriptions; __collection274 == null ? _Runtime.UNDEFINED : ((cast __collection274 : flight._internal._Set<Entity>).delete_((cast subscription))); });
     ((cast runtime : MidiSubscriptionRuntime__midiSubscription).ownerSubscriptions = null);
   }
 

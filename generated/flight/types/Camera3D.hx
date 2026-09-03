@@ -4,4 +4,28 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Camera)
+@:structInit
+class Camera3D {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var far:Float;
+  public var inverseViewProjection:Matrix4;
+  public var jitter:Vector2;
+  public var near:Float;
+  public var projection:Projection;
+  public var view:Matrix4;
+
+  private function new(far:Float, inverseViewProjection:Matrix4, jitter:Vector2, near:Float, projection:Projection, view:Matrix4):Void {
+    this.__symbol__EntityRuntime = null;
+    this.far = far;
+    this.inverseViewProjection = inverseViewProjection;
+    this.jitter = jitter;
+    this.near = near;
+    this.projection = projection;
+    this.view = view;
+  }
+}
+#else
 typedef Camera3D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var far:Float; var inverseViewProjection:Matrix4; var jitter:Vector2; var near:Float; var projection:Projection; var view:Matrix4; };
+#end

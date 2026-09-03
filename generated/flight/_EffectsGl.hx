@@ -161,7 +161,7 @@ class _EffectsGl {
   @:allow(flight)
   @:keep
   private static function areGlRenderEffectGuardsEnabled(state:GlRenderState):Bool {
-    return cast ((cast _EffectsGl._guardedStates__enableGlRenderEffectGuards : flight._internal._WeakSet<GlRenderState>).has(state));
+    return cast ((cast _EffectsGl._guardedStates__enableGlRenderEffectGuards : flight._internal._WeakSet<GlRenderState>).has((cast state)));
     return cast null;
   }
 
@@ -169,14 +169,14 @@ class _EffectsGl {
     setGlRenderEffectApplicationGuard(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast null : Dynamic));
     setGlCustomShaderSourceGuard(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast null : Dynamic));
     setGlRenderEffectPipelineSkipGuard(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast null : Dynamic));
-    ((cast _EffectsGl._guardedStates__enableGlRenderEffectGuards : flight._internal._WeakSet<GlRenderState>).delete_(state));
+    ((cast _EffectsGl._guardedStates__enableGlRenderEffectGuards : flight._internal._WeakSet<GlRenderState>).delete_((cast state)));
   }
 
   public static function enableGlRenderEffectGuards(state:GlRenderState):Void {
     setGlRenderEffectApplicationGuard(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast _EffectsGl.warnGlRenderEffectApplication__enableGlRenderEffectGuards : Dynamic));
     setGlCustomShaderSourceGuard(({ final __callArgument8:Dynamic = state; __callArgument8; }), (cast _EffectsGl.warnGlCustomShaderSourceReregistered__enableGlRenderEffectGuards : Dynamic));
     setGlRenderEffectPipelineSkipGuard(({ final __callArgument10:Dynamic = state; __callArgument10; }), (cast _EffectsGl.warnGlRenderEffectPipelineSkip__enableGlRenderEffectGuards : Dynamic));
-    ((cast _EffectsGl._guardedStates__enableGlRenderEffectGuards : flight._internal._WeakSet<GlRenderState>).add(state));
+    ((cast _EffectsGl._guardedStates__enableGlRenderEffectGuards : flight._internal._WeakSet<GlRenderState>).add((cast state)));
   }
 
   public static function warnGlCustomShaderSourceReregistered__enableGlRenderEffectGuards(_state:GlRenderState, shaderKey:String, _previousSource:String, _nextSource:String):Void {
@@ -306,12 +306,12 @@ class _EffectsGl {
 
   public static function getGlBevelCompositeShader__glBevelEffect(state:GlRenderState):BevelCompositeLocations__glBevelEffect {
     var loc:Null<BevelCompositeLocations__glBevelEffect> = cast _Runtime.UNDEFINED;
-    loc = ((cast _EffectsGl.bevelCompositeShaders__glBevelEffect : flight._internal._WeakMap<GlContext, BevelCompositeLocations__glBevelEffect>).get((cast state : GlRenderState).gl));
+    loc = ((cast _EffectsGl.bevelCompositeShaders__glBevelEffect : flight._internal._WeakMap<GlContext, BevelCompositeLocations__glBevelEffect>).get((cast (cast state : GlRenderState).gl)));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:GlContext = (cast state : GlRenderState).gl;
       var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument116:Dynamic = gl; __callArgument116; }), (cast _EffectsGl.BEVEL_COMPOSITE_FRAGMENT_SRC__glBevelEffect : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base, { locHighlight: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_highlight') }, { locShadow: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_shadow') }, { locOffset: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_offset') }, { locIntensity: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_intensity') }, { locClipMode: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_clipMode') }]) : Dynamic));
-      ((cast _EffectsGl.bevelCompositeShaders__glBevelEffect : flight._internal._WeakMap<GlContext, BevelCompositeLocations__glBevelEffect>).set((cast state : GlRenderState).gl, (cast loc)));
+      ((cast _EffectsGl.bevelCompositeShaders__glBevelEffect : flight._internal._WeakMap<GlContext, BevelCompositeLocations__glBevelEffect>).set((cast (cast state : GlRenderState).gl), (cast loc)));
     }
     return cast loc;
     return cast null;
@@ -437,7 +437,7 @@ class _EffectsGl {
   @:keep
   private static function getGlBlendEffectBackdrop(state:GlRenderState, backdropKey:Null<String>):Null<flight._internal.dom.WebGLTexture> {
     if ((cast _Runtime.strictEquals(backdropKey, null) : Bool)) { return cast null; }
-    return cast _Runtime.coalesce(({ final __collection239:Dynamic = ((cast _EffectsGl._backdrops__glBlendEffect : flight._internal._WeakMap<GlRenderState, flight._internal._Map<String, flight._internal.dom.WebGLTexture>>).get(state)); __collection239 == null ? _Runtime.UNDEFINED : ((cast __collection239 : flight._internal._Map<String, flight._internal.dom.WebGLTexture>).get(backdropKey)); }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection239:Dynamic = ((cast _EffectsGl._backdrops__glBlendEffect : flight._internal._WeakMap<GlRenderState, flight._internal._Map<String, flight._internal.dom.WebGLTexture>>).get((cast state))); __collection239 == null ? _Runtime.UNDEFINED : ((cast __collection239 : flight._internal._Map<String, flight._internal.dom.WebGLTexture>).get((cast backdropKey))); }), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -447,18 +447,18 @@ class _EffectsGl {
 
   public static function registerGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String, texture:flight._internal.dom.WebGLTexture):Void {
     var registry:Null<flight._internal._Map<String, flight._internal.dom.WebGLTexture>> = cast _Runtime.UNDEFINED;
-    registry = ((cast _EffectsGl._backdrops__glBlendEffect : flight._internal._WeakMap<GlRenderState, flight._internal._Map<String, flight._internal.dom.WebGLTexture>>).get(state));
+    registry = ((cast _EffectsGl._backdrops__glBlendEffect : flight._internal._WeakMap<GlRenderState, flight._internal._Map<String, flight._internal.dom.WebGLTexture>>).get((cast state)));
     if ((cast _Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (registry = cast (_Runtime.construct(flight._internal._HostValueLut.get('Map'), []) : Dynamic));
-      ((cast _EffectsGl._backdrops__glBlendEffect : flight._internal._WeakMap<GlRenderState, flight._internal._Map<String, flight._internal.dom.WebGLTexture>>).set(state, (cast registry)));
+      ((cast _EffectsGl._backdrops__glBlendEffect : flight._internal._WeakMap<GlRenderState, flight._internal._Map<String, flight._internal.dom.WebGLTexture>>).set((cast state), (cast registry)));
     }
-    ((cast registry : flight._internal._Map<String, flight._internal.dom.WebGLTexture>).set(backdropKey, (cast texture)));
+    ((cast registry : flight._internal._Map<String, flight._internal.dom.WebGLTexture>).set((cast backdropKey), (cast texture)));
   }
 
   @:allow(flight)
   @:keep
   private static function unregisterGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String):Bool {
-    return cast _Runtime.coalesce(({ final __collection244:Dynamic = ((cast _EffectsGl._backdrops__glBlendEffect : flight._internal._WeakMap<GlRenderState, flight._internal._Map<String, flight._internal.dom.WebGLTexture>>).get(state)); __collection244 == null ? _Runtime.UNDEFINED : ((cast __collection244 : flight._internal._Map<String, flight._internal.dom.WebGLTexture>).delete_(backdropKey)); }), function():Dynamic return cast false);
+    return cast _Runtime.coalesce(({ final __collection244:Dynamic = ((cast _EffectsGl._backdrops__glBlendEffect : flight._internal._WeakMap<GlRenderState, flight._internal._Map<String, flight._internal.dom.WebGLTexture>>).get((cast state))); __collection244 == null ? _Runtime.UNDEFINED : ((cast __collection244 : flight._internal._Map<String, flight._internal.dom.WebGLTexture>).delete_((cast backdropKey))); }), function():Dynamic return cast false);
     return cast null;
   }
 
@@ -973,7 +973,7 @@ class _EffectsGl {
 
   public static function getGlCustomShaderSource(state:GlRenderState, shaderKey:String):Null<String> {
     var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:String; }>> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument707:Dynamic = state; __callArgument707; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).customEffectShaders : KeyedTable<String>).entries : flight._internal._Map<String, RegistryTableEntry<String>>).get(shaderKey));
+    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument707:Dynamic = state; __callArgument707; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).customEffectShaders : KeyedTable<String>).entries : flight._internal._Map<String, RegistryTableEntry<String>>).get((cast shaderKey)));
     return cast ((cast _Runtime.strictEquals(({ final __structural709 = entry; __structural709 == null ? _Runtime.UNDEFINED : (cast __structural709 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:String; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
@@ -995,7 +995,7 @@ class _EffectsGl {
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument716:Dynamic = state; __callArgument716; })) : GlRenderStateRuntime);
     previousSource = (cast getGlCustomShaderSource(({ final __callArgument718:Dynamic = state; __callArgument718; }), (cast shaderKey : String)) : Null<String>);
     if ((cast ((cast !_Runtime.strictEquals(previousSource, null) : Bool) && (cast !_Runtime.strictEquals(previousSource, fragmentSource) : Bool)) : Bool)) {
-      _Runtime.callOptionalValue(((cast _EffectsGl._sourceGuards__glCustomShaderEffect : flight._internal._WeakMap<GlRenderState, GlCustomShaderSourceGuard>).get(state)), cast ([state, shaderKey, previousSource, fragmentSource] : Array<Dynamic>));
+      _Runtime.callOptionalValue(((cast _EffectsGl._sourceGuards__glCustomShaderEffect : flight._internal._WeakMap<GlRenderState, GlCustomShaderSourceGuard>).get((cast state))), cast ([state, shaderKey, previousSource, fragmentSource] : Array<Dynamic>));
     }
     ((cast runtime.registries : GlRenderRegistries).customEffectShaders = (cast withRegistryTableEntry((cast (cast runtime.registries : GlRenderRegistries).customEffectShaders : Dynamic), (cast shaderKey : String), (cast fragmentSource : String)) : KeyedTable<String>));
   }
@@ -1003,7 +1003,7 @@ class _EffectsGl {
   @:allow(flight)
   @:keep
   private static function setGlCustomShaderSourceGuard(state:GlRenderState, guard:Null<GlCustomShaderSourceGuard>):Void {
-    if ((cast _Runtime.strictEquals(guard, null) : Bool)) { ((cast _EffectsGl._sourceGuards__glCustomShaderEffect : flight._internal._WeakMap<GlRenderState, GlCustomShaderSourceGuard>).delete_(state)); } else { ((cast _EffectsGl._sourceGuards__glCustomShaderEffect : flight._internal._WeakMap<GlRenderState, GlCustomShaderSourceGuard>).set(state, (cast guard))); }
+    if ((cast _Runtime.strictEquals(guard, null) : Bool)) { ((cast _EffectsGl._sourceGuards__glCustomShaderEffect : flight._internal._WeakMap<GlRenderState, GlCustomShaderSourceGuard>).delete_((cast state))); } else { ((cast _EffectsGl._sourceGuards__glCustomShaderEffect : flight._internal._WeakMap<GlRenderState, GlCustomShaderSourceGuard>).set((cast state), (cast guard))); }
   }
 
   public static final _sourceGuards__glCustomShaderEffect:flight._internal._WeakMap<GlRenderState, GlCustomShaderSourceGuard> = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
@@ -1212,12 +1212,12 @@ class _EffectsGl {
 
   public static function getGlBlitOffsetShader__glEffectBlitShader(state:GlRenderState):BlitOffsetShaderLocations__glEffectBlitShader {
     var loc:Null<BlitOffsetShaderLocations__glEffectBlitShader> = cast _Runtime.UNDEFINED;
-    loc = ((cast _EffectsGl.blitOffsetShaders__glEffectBlitShader : flight._internal._WeakMap<GlContext, BlitOffsetShaderLocations__glEffectBlitShader>).get((cast state : GlRenderState).gl));
+    loc = ((cast _EffectsGl.blitOffsetShaders__glEffectBlitShader : flight._internal._WeakMap<GlContext, BlitOffsetShaderLocations__glEffectBlitShader>).get((cast (cast state : GlRenderState).gl)));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:GlContext = (cast state : GlRenderState).gl;
       var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument870:Dynamic = gl; __callArgument870; }), (cast _EffectsGl.BLIT_OFFSET_FRAGMENT_SRC__glEffectBlitShader : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base, { locOffset: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_offset') }]) : Dynamic));
-      ((cast _EffectsGl.blitOffsetShaders__glEffectBlitShader : flight._internal._WeakMap<GlContext, BlitOffsetShaderLocations__glEffectBlitShader>).set((cast state : GlRenderState).gl, (cast loc)));
+      ((cast _EffectsGl.blitOffsetShaders__glEffectBlitShader : flight._internal._WeakMap<GlContext, BlitOffsetShaderLocations__glEffectBlitShader>).set((cast (cast state : GlRenderState).gl), (cast loc)));
     }
     return cast loc;
     return cast null;
@@ -1225,11 +1225,11 @@ class _EffectsGl {
 
   public static function getGlBlitShader__glEffectBlitShader(state:GlRenderState):GlFullscreenProgram {
     var loc:Null<GlFullscreenProgram> = cast _Runtime.UNDEFINED;
-    loc = ((cast _EffectsGl.blitShaders__glEffectBlitShader : flight._internal._WeakMap<GlContext, GlFullscreenProgram>).get((cast state : GlRenderState).gl));
+    loc = ((cast _EffectsGl.blitShaders__glEffectBlitShader : flight._internal._WeakMap<GlContext, GlFullscreenProgram>).get((cast (cast state : GlRenderState).gl)));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:GlContext = (cast state : GlRenderState).gl;
       (loc = cast ((cast compileGlFullscreenProgram(({ final __callArgument872:Dynamic = gl; __callArgument872; }), (cast _EffectsGl.BLIT_FRAGMENT_SRC__glEffectBlitShader : String)) : GlFullscreenProgram) : Dynamic));
-      ((cast _EffectsGl.blitShaders__glEffectBlitShader : flight._internal._WeakMap<GlContext, GlFullscreenProgram>).set((cast state : GlRenderState).gl, (cast loc)));
+      ((cast _EffectsGl.blitShaders__glEffectBlitShader : flight._internal._WeakMap<GlContext, GlFullscreenProgram>).set((cast (cast state : GlRenderState).gl), (cast loc)));
     }
     return cast loc;
     return cast null;
@@ -1237,11 +1237,11 @@ class _EffectsGl {
 
   public static function getGlEraseShader__glEffectBlitShader(state:GlRenderState):GlFullscreenProgram {
     var loc:Null<GlFullscreenProgram> = cast _Runtime.UNDEFINED;
-    loc = ((cast _EffectsGl.eraseShaders__glEffectBlitShader : flight._internal._WeakMap<GlContext, GlFullscreenProgram>).get((cast state : GlRenderState).gl));
+    loc = ((cast _EffectsGl.eraseShaders__glEffectBlitShader : flight._internal._WeakMap<GlContext, GlFullscreenProgram>).get((cast (cast state : GlRenderState).gl)));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:GlContext = (cast state : GlRenderState).gl;
       (loc = cast ((cast compileGlFullscreenProgram(({ final __callArgument874:Dynamic = gl; __callArgument874; }), (cast _EffectsGl.ERASE_FRAGMENT_SRC__glEffectBlitShader : String)) : GlFullscreenProgram) : Dynamic));
-      ((cast _EffectsGl.eraseShaders__glEffectBlitShader : flight._internal._WeakMap<GlContext, GlFullscreenProgram>).set((cast state : GlRenderState).gl, (cast loc)));
+      ((cast _EffectsGl.eraseShaders__glEffectBlitShader : flight._internal._WeakMap<GlContext, GlFullscreenProgram>).set((cast (cast state : GlRenderState).gl), (cast loc)));
     }
     return cast loc;
     return cast null;
@@ -1322,12 +1322,12 @@ class _EffectsGl {
 
   public static function getBoxBlurShader__glEffectBoxBlur(state:GlRenderState):BoxBlurShaderLocations__glEffectBoxBlur {
     var loc:Null<BoxBlurShaderLocations__glEffectBoxBlur> = cast _Runtime.UNDEFINED;
-    loc = ((cast _EffectsGl.boxBlurShaders__glEffectBoxBlur : flight._internal._WeakMap<GlContext, BoxBlurShaderLocations__glEffectBoxBlur>).get((cast state : GlRenderState).gl));
+    loc = ((cast _EffectsGl.boxBlurShaders__glEffectBoxBlur : flight._internal._WeakMap<GlContext, BoxBlurShaderLocations__glEffectBoxBlur>).get((cast (cast state : GlRenderState).gl)));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:GlContext = (cast state : GlRenderState).gl;
       var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument918:Dynamic = gl; __callArgument918; }), (cast _EffectsGl.BOX_BLUR_FRAGMENT_SRC__glEffectBoxBlur : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base, { locTexelSize: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_texelSize') }, { locRadius: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_radius') }, { locDirection: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_direction') }, { locEdgeColor: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_edgeColor') }, { locUseEdgeColor: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_useEdgeColor') }]) : Dynamic));
-      ((cast _EffectsGl.boxBlurShaders__glEffectBoxBlur : flight._internal._WeakMap<GlContext, BoxBlurShaderLocations__glEffectBoxBlur>).set((cast state : GlRenderState).gl, (cast loc)));
+      ((cast _EffectsGl.boxBlurShaders__glEffectBoxBlur : flight._internal._WeakMap<GlContext, BoxBlurShaderLocations__glEffectBoxBlur>).set((cast (cast state : GlRenderState).gl), (cast loc)));
     }
     return cast loc;
     return cast null;
@@ -1412,15 +1412,15 @@ class _EffectsGl {
     var cache:Null<flight._internal._Map<String, GlFullscreenProgram>> = cast _Runtime.UNDEFINED;
     var existing:Null<GlFullscreenProgram> = cast _Runtime.UNDEFINED;
     var compiled:GlFullscreenProgram = cast _Runtime.UNDEFINED;
-    cache = ((cast _EffectsGl._programs__glEffectProgramCache : flight._internal._WeakMap<GlContext, flight._internal._Map<String, GlFullscreenProgram>>).get((cast state : GlRenderState).gl));
+    cache = ((cast _EffectsGl._programs__glEffectProgramCache : flight._internal._WeakMap<GlContext, flight._internal._Map<String, GlFullscreenProgram>>).get((cast (cast state : GlRenderState).gl)));
     if ((cast _Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (cache = cast (_Runtime.construct(flight._internal._HostValueLut.get('Map'), []) : Dynamic));
-      ((cast _EffectsGl._programs__glEffectProgramCache : flight._internal._WeakMap<GlContext, flight._internal._Map<String, GlFullscreenProgram>>).set((cast state : GlRenderState).gl, (cast cache)));
+      ((cast _EffectsGl._programs__glEffectProgramCache : flight._internal._WeakMap<GlContext, flight._internal._Map<String, GlFullscreenProgram>>).set((cast (cast state : GlRenderState).gl), (cast cache)));
     }
-    existing = ((cast cache : flight._internal._Map<String, GlFullscreenProgram>).get(key));
+    existing = ((cast cache : flight._internal._Map<String, GlFullscreenProgram>).get((cast key)));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
     compiled = (cast compileGlFullscreenProgram((cast state : GlRenderState).gl, (cast fragmentSource : String)) : GlFullscreenProgram);
-    ((cast cache : flight._internal._Map<String, GlFullscreenProgram>).set(key, (cast compiled)));
+    ((cast cache : flight._internal._Map<String, GlFullscreenProgram>).set((cast key), (cast compiled)));
     return cast compiled;
     return cast null;
   }
@@ -1431,15 +1431,15 @@ class _EffectsGl {
     var cache:Null<flight._internal._Map<String, Null<flight._internal.dom.WebGLUniformLocation>>> = cast _Runtime.UNDEFINED;
     var existing:Null<flight._internal.dom.WebGLUniformLocation> = cast _Runtime.UNDEFINED;
     var loc:Null<flight._internal.dom.WebGLUniformLocation> = cast _Runtime.UNDEFINED;
-    cache = ((cast _EffectsGl._uniformLocations__glEffectProgramCache : flight._internal._WeakMap<GlFullscreenProgram, flight._internal._Map<String, Null<flight._internal.dom.WebGLUniformLocation>>>).get(program));
+    cache = ((cast _EffectsGl._uniformLocations__glEffectProgramCache : flight._internal._WeakMap<GlFullscreenProgram, flight._internal._Map<String, Null<flight._internal.dom.WebGLUniformLocation>>>).get((cast program)));
     if ((cast _Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (cache = cast (_Runtime.construct(flight._internal._HostValueLut.get('Map'), []) : Dynamic));
-      ((cast _EffectsGl._uniformLocations__glEffectProgramCache : flight._internal._WeakMap<GlFullscreenProgram, flight._internal._Map<String, Null<flight._internal.dom.WebGLUniformLocation>>>).set(program, (cast cache)));
+      ((cast _EffectsGl._uniformLocations__glEffectProgramCache : flight._internal._WeakMap<GlFullscreenProgram, flight._internal._Map<String, Null<flight._internal.dom.WebGLUniformLocation>>>).set((cast program), (cast cache)));
     }
-    existing = ((cast cache : flight._internal._Map<String, Null<flight._internal.dom.WebGLUniformLocation>>).get(name));
+    existing = ((cast cache : flight._internal._Map<String, Null<flight._internal.dom.WebGLUniformLocation>>).get((cast name)));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
     loc = flight._internal.backend.WebGl2Backend.getUniformLocation((cast state : GlRenderState).gl, _Runtime.field(program, 'program'), name);
-    ((cast cache : flight._internal._Map<String, Null<flight._internal.dom.WebGLUniformLocation>>).set(name, (cast loc)));
+    ((cast cache : flight._internal._Map<String, Null<flight._internal.dom.WebGLUniformLocation>>).set((cast name), (cast loc)));
     return cast loc;
     return cast null;
   }
@@ -1486,12 +1486,12 @@ class _EffectsGl {
 
   public static function getGlInvertTintShader__glEffectTintShader(state:GlRenderState):TintShaderLocations__glEffectTintShader {
     var loc:Null<TintShaderLocations__glEffectTintShader> = cast _Runtime.UNDEFINED;
-    loc = ((cast _EffectsGl.invertTintShaders__glEffectTintShader : flight._internal._WeakMap<GlContext, TintShaderLocations__glEffectTintShader>).get((cast state : GlRenderState).gl));
+    loc = ((cast _EffectsGl.invertTintShaders__glEffectTintShader : flight._internal._WeakMap<GlContext, TintShaderLocations__glEffectTintShader>).get((cast (cast state : GlRenderState).gl)));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:GlContext = (cast state : GlRenderState).gl;
       var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument958:Dynamic = gl; __callArgument958; }), (cast _EffectsGl.INVERT_TINT_FRAGMENT_SRC__glEffectTintShader : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base, { locColor: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_color') }, { locAlpha: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_alpha') }, { locStrength: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_strength') }]) : Dynamic));
-      ((cast _EffectsGl.invertTintShaders__glEffectTintShader : flight._internal._WeakMap<GlContext, TintShaderLocations__glEffectTintShader>).set((cast state : GlRenderState).gl, (cast loc)));
+      ((cast _EffectsGl.invertTintShaders__glEffectTintShader : flight._internal._WeakMap<GlContext, TintShaderLocations__glEffectTintShader>).set((cast (cast state : GlRenderState).gl), (cast loc)));
     }
     return cast loc;
     return cast null;
@@ -1499,12 +1499,12 @@ class _EffectsGl {
 
   public static function getGlTintShader__glEffectTintShader(state:GlRenderState):TintShaderLocations__glEffectTintShader {
     var loc:Null<TintShaderLocations__glEffectTintShader> = cast _Runtime.UNDEFINED;
-    loc = ((cast _EffectsGl.tintShaders__glEffectTintShader : flight._internal._WeakMap<GlContext, TintShaderLocations__glEffectTintShader>).get((cast state : GlRenderState).gl));
+    loc = ((cast _EffectsGl.tintShaders__glEffectTintShader : flight._internal._WeakMap<GlContext, TintShaderLocations__glEffectTintShader>).get((cast (cast state : GlRenderState).gl)));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:GlContext = (cast state : GlRenderState).gl;
       var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument960:Dynamic = gl; __callArgument960; }), (cast _EffectsGl.TINT_FRAGMENT_SRC__glEffectTintShader : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base, { locColor: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_color') }, { locAlpha: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_alpha') }, { locStrength: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_strength') }]) : Dynamic));
-      ((cast _EffectsGl.tintShaders__glEffectTintShader : flight._internal._WeakMap<GlContext, TintShaderLocations__glEffectTintShader>).set((cast state : GlRenderState).gl, (cast loc)));
+      ((cast _EffectsGl.tintShaders__glEffectTintShader : flight._internal._WeakMap<GlContext, TintShaderLocations__glEffectTintShader>).set((cast (cast state : GlRenderState).gl), (cast loc)));
     }
     return cast loc;
     return cast null;
@@ -1733,12 +1733,12 @@ class _EffectsGl {
 
   public static function getApplyShader__glGradientBevelEffect(state:GlRenderState):BevelApplyLocations__glGradientBevelEffect {
     var loc:Null<BevelApplyLocations__glGradientBevelEffect> = cast _Runtime.UNDEFINED;
-    loc = ((cast _EffectsGl.applyShaders__glGradientBevelEffect : flight._internal._WeakMap<GlContext, BevelApplyLocations__glGradientBevelEffect>).get((cast state : GlRenderState).gl));
+    loc = ((cast _EffectsGl.applyShaders__glGradientBevelEffect : flight._internal._WeakMap<GlContext, BevelApplyLocations__glGradientBevelEffect>).get((cast (cast state : GlRenderState).gl)));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:GlContext = (cast state : GlRenderState).gl;
       var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument1132:Dynamic = gl; __callArgument1132; }), (cast _EffectsGl.BEVEL_APPLY_FRAGMENT_SRC__glGradientBevelEffect : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base, { locRamp: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_ramp') }, { locSource: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_source') }]) : Dynamic));
-      ((cast _EffectsGl.applyShaders__glGradientBevelEffect : flight._internal._WeakMap<GlContext, BevelApplyLocations__glGradientBevelEffect>).set((cast state : GlRenderState).gl, (cast loc)));
+      ((cast _EffectsGl.applyShaders__glGradientBevelEffect : flight._internal._WeakMap<GlContext, BevelApplyLocations__glGradientBevelEffect>).set((cast (cast state : GlRenderState).gl), (cast loc)));
     }
     return cast loc;
     return cast null;
@@ -1746,12 +1746,12 @@ class _EffectsGl {
 
   public static function getEncodeShader__glGradientBevelEffect(state:GlRenderState):BevelEncodeLocations__glGradientBevelEffect {
     var loc:Null<BevelEncodeLocations__glGradientBevelEffect> = cast _Runtime.UNDEFINED;
-    loc = ((cast _EffectsGl.encodeShaders__glGradientBevelEffect : flight._internal._WeakMap<GlContext, BevelEncodeLocations__glGradientBevelEffect>).get((cast state : GlRenderState).gl));
+    loc = ((cast _EffectsGl.encodeShaders__glGradientBevelEffect : flight._internal._WeakMap<GlContext, BevelEncodeLocations__glGradientBevelEffect>).get((cast (cast state : GlRenderState).gl)));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:GlContext = (cast state : GlRenderState).gl;
       var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument1134:Dynamic = gl; __callArgument1134; }), (cast _EffectsGl.BEVEL_ENCODE_FRAGMENT_SRC__glGradientBevelEffect : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base, { locOffset: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_offset') }]) : Dynamic));
-      ((cast _EffectsGl.encodeShaders__glGradientBevelEffect : flight._internal._WeakMap<GlContext, BevelEncodeLocations__glGradientBevelEffect>).set((cast state : GlRenderState).gl, (cast loc)));
+      ((cast _EffectsGl.encodeShaders__glGradientBevelEffect : flight._internal._WeakMap<GlContext, BevelEncodeLocations__glGradientBevelEffect>).set((cast (cast state : GlRenderState).gl), (cast loc)));
     }
     return cast loc;
     return cast null;
@@ -1824,12 +1824,12 @@ class _EffectsGl {
 
   public static function getLookupShader__glGradientGlowEffect(state:GlRenderState):GradientLookupLocations__glGradientGlowEffect {
     var loc:Null<GradientLookupLocations__glGradientGlowEffect> = cast _Runtime.UNDEFINED;
-    loc = ((cast _EffectsGl.lookupShaders__glGradientGlowEffect : flight._internal._WeakMap<GlContext, GradientLookupLocations__glGradientGlowEffect>).get((cast state : GlRenderState).gl));
+    loc = ((cast _EffectsGl.lookupShaders__glGradientGlowEffect : flight._internal._WeakMap<GlContext, GradientLookupLocations__glGradientGlowEffect>).get((cast (cast state : GlRenderState).gl)));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:GlContext = (cast state : GlRenderState).gl;
       var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument1230:Dynamic = gl; __callArgument1230; }), (cast _EffectsGl.GRADIENT_LOOKUP_FRAGMENT_SRC__glGradientGlowEffect : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base, { locRamp: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_ramp') }]) : Dynamic));
-      ((cast _EffectsGl.lookupShaders__glGradientGlowEffect : flight._internal._WeakMap<GlContext, GradientLookupLocations__glGradientGlowEffect>).set((cast state : GlRenderState).gl, (cast loc)));
+      ((cast _EffectsGl.lookupShaders__glGradientGlowEffect : flight._internal._WeakMap<GlContext, GradientLookupLocations__glGradientGlowEffect>).set((cast (cast state : GlRenderState).gl), (cast loc)));
     }
     return cast loc;
     return cast null;
@@ -1922,12 +1922,12 @@ class _EffectsGl {
 
   public static function getClipShader__glInnerGlowEffect(state:GlRenderState):InnerClipLocations__glInnerGlowEffect {
     var loc:Null<GlFullscreenProgram> = cast _Runtime.UNDEFINED;
-    loc = ((cast _EffectsGl.clipShaders__glInnerGlowEffect : flight._internal._WeakMap<GlContext, GlFullscreenProgram>).get((cast state : GlRenderState).gl));
+    loc = ((cast _EffectsGl.clipShaders__glInnerGlowEffect : flight._internal._WeakMap<GlContext, GlFullscreenProgram>).get((cast (cast state : GlRenderState).gl)));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:GlContext = (cast state : GlRenderState).gl;
       var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument1336:Dynamic = gl; __callArgument1336; }), (cast _EffectsGl.INNER_CLIP_FRAGMENT_SRC__glInnerGlowEffect : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base]) : Dynamic));
-      ((cast _EffectsGl.clipShaders__glInnerGlowEffect : flight._internal._WeakMap<GlContext, GlFullscreenProgram>).set((cast state : GlRenderState).gl, (cast loc)));
+      ((cast _EffectsGl.clipShaders__glInnerGlowEffect : flight._internal._WeakMap<GlContext, GlFullscreenProgram>).set((cast (cast state : GlRenderState).gl), (cast loc)));
     }
     return cast loc;
     return cast null;
@@ -2014,12 +2014,12 @@ class _EffectsGl {
 
   public static function getClipShader__glInnerShadowEffect(state:GlRenderState):InnerClipLocations__glInnerShadowEffect {
     var loc:Null<GlFullscreenProgram> = cast _Runtime.UNDEFINED;
-    loc = ((cast _EffectsGl.clipShaders__glInnerShadowEffect : flight._internal._WeakMap<GlContext, GlFullscreenProgram>).get((cast state : GlRenderState).gl));
+    loc = ((cast _EffectsGl.clipShaders__glInnerShadowEffect : flight._internal._WeakMap<GlContext, GlFullscreenProgram>).get((cast (cast state : GlRenderState).gl)));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:GlContext = (cast state : GlRenderState).gl;
       var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument1440:Dynamic = gl; __callArgument1440; }), (cast _EffectsGl.INNER_CLIP_FRAGMENT_SRC__glInnerShadowEffect : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base]) : Dynamic));
-      ((cast _EffectsGl.clipShaders__glInnerShadowEffect : flight._internal._WeakMap<GlContext, GlFullscreenProgram>).set((cast state : GlRenderState).gl, (cast loc)));
+      ((cast _EffectsGl.clipShaders__glInnerShadowEffect : flight._internal._WeakMap<GlContext, GlFullscreenProgram>).set((cast (cast state : GlRenderState).gl), (cast loc)));
     }
     return cast loc;
     return cast null;
@@ -2502,7 +2502,7 @@ class _EffectsGl {
   @:allow(flight)
   @:keep
   private static function setGlRenderEffectPipelineSkipGuard(state:GlRenderState, guard:Null<GlRenderEffectPipelineSkipGuard>):Void {
-    if ((cast _Runtime.strictEquals(guard, null) : Bool)) { ((cast _EffectsGl._skipGuards__glRenderEffectPipeline : flight._internal._WeakMap<GlRenderState, GlRenderEffectPipelineSkipGuard>).delete_(state)); } else { ((cast _EffectsGl._skipGuards__glRenderEffectPipeline : flight._internal._WeakMap<GlRenderState, GlRenderEffectPipelineSkipGuard>).set(state, (cast guard))); }
+    if ((cast _Runtime.strictEquals(guard, null) : Bool)) { ((cast _EffectsGl._skipGuards__glRenderEffectPipeline : flight._internal._WeakMap<GlRenderState, GlRenderEffectPipelineSkipGuard>).delete_((cast state))); } else { ((cast _EffectsGl._skipGuards__glRenderEffectPipeline : flight._internal._WeakMap<GlRenderState, GlRenderEffectPipelineSkipGuard>).set((cast state), (cast guard))); }
   }
 
   public static function setGlRenderEffectVelocityTexture(pipeline:GlRenderEffectPipeline, texture:Null<flight._internal.dom.WebGLTexture>):Void {
@@ -2524,7 +2524,7 @@ class _EffectsGl {
   public static final PRESENT_FRAGMENT_SRC__glRenderEffectPipeline:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nout vec4 o_color;\nvoid main() {\n  o_color = texture(u_texture0, v_texCoord);\n}';
 
   public static function reportGlRenderEffectPipelineSkip__glRenderEffectPipeline(state:GlRenderState, kind:String):Void {
-    _Runtime.callOptionalValue(((cast _EffectsGl._skipGuards__glRenderEffectPipeline : flight._internal._WeakMap<GlRenderState, GlRenderEffectPipelineSkipGuard>).get(state)), cast ([state, kind] : Array<Dynamic>));
+    _Runtime.callOptionalValue(((cast _EffectsGl._skipGuards__glRenderEffectPipeline : flight._internal._WeakMap<GlRenderState, GlRenderEffectPipelineSkipGuard>).get((cast state))), cast ([state, kind] : Array<Dynamic>));
   }
 
   public static final _skipGuards__glRenderEffectPipeline:flight._internal._WeakMap<GlRenderState, GlRenderEffectPipelineSkipGuard> = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
@@ -2533,7 +2533,7 @@ class _EffectsGl {
   @:keep
   private static function getGlRenderEffectRunner(state:GlRenderState, kind:String):Null<GlRenderEffectRunner> {
     var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:GlRenderEffectRegistration; }>> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument1800:Dynamic = state; __callArgument1800; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).renderEffects : KeyedTable<GlRenderEffectRegistration>).entries : flight._internal._Map<String, RegistryTableEntry<GlRenderEffectRegistration>>).get(kind));
+    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument1800:Dynamic = state; __callArgument1800; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).renderEffects : KeyedTable<GlRenderEffectRegistration>).entries : flight._internal._Map<String, RegistryTableEntry<GlRenderEffectRegistration>>).get((cast kind)));
     return cast ((cast _Runtime.strictEquals(({ final __structural1802 = entry; __structural1802 == null ? _Runtime.UNDEFINED : (cast __structural1802 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast (cast entry : { var state:String; var value:GlRenderEffectRegistration; }).value : GlRenderEffectRegistration).runner : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
@@ -2541,7 +2541,7 @@ class _EffectsGl {
   @:allow(flight)
   @:keep
   private static function hasGlRenderEffectRunner(state:GlRenderState, kind:String):Bool {
-    return cast _Runtime.strictEquals(({ final __structural1807 = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument1805:Dynamic = state; __callArgument1805; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).renderEffects : KeyedTable<GlRenderEffectRegistration>).entries : flight._internal._Map<String, RegistryTableEntry<GlRenderEffectRegistration>>).get(kind)); __structural1807 == null ? _Runtime.UNDEFINED : (cast __structural1807 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
+    return cast _Runtime.strictEquals(({ final __structural1807 = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument1805:Dynamic = state; __callArgument1805; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).renderEffects : KeyedTable<GlRenderEffectRegistration>).entries : flight._internal._Map<String, RegistryTableEntry<GlRenderEffectRegistration>>).get((cast kind))); __structural1807 == null ? _Runtime.UNDEFINED : (cast __structural1807 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
     return cast null;
   }
 
@@ -2549,7 +2549,7 @@ class _EffectsGl {
   @:keep
   private static function isGlRenderEffectResolvable(state:GlRenderState, effect:RenderEffect):Bool {
     var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:GlRenderEffectRegistration; }>> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument1810:Dynamic = state; __callArgument1810; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).renderEffects : KeyedTable<GlRenderEffectRegistration>).entries : flight._internal._Map<String, RegistryTableEntry<GlRenderEffectRegistration>>).get(_Runtime.field(effect, 'kind')));
+    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument1810:Dynamic = state; __callArgument1810; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).renderEffects : KeyedTable<GlRenderEffectRegistration>).entries : flight._internal._Map<String, RegistryTableEntry<GlRenderEffectRegistration>>).get((cast _Runtime.field(effect, 'kind'))));
     if ((cast !_Runtime.strictEquals(({ final __structural1812 = entry; __structural1812 == null ? _Runtime.UNDEFINED : (cast __structural1812 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) { return cast false; }
     return cast ((cast _Runtime.strictEquals((cast (cast entry : { var state:String; var value:GlRenderEffectRegistration; }).value : GlRenderEffectRegistration).isResolvable, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast (cast (cast entry : { var state:String; var value:GlRenderEffectRegistration; }).value : GlRenderEffectRegistration).isResolvable(({ final __callArgument1813:Dynamic = state; __callArgument1813; }), ({ final __callArgument1814:Dynamic = effect; __callArgument1814; })) : Bool));
     return cast null;
@@ -2633,12 +2633,12 @@ class _EffectsGl {
   @:allow(flight)
   @:keep
   private static function setGlRenderEffectApplicationGuard(state:GlRenderState, guard:Null<GlRenderEffectApplicationGuard>):Void {
-    if ((cast _Runtime.strictEquals(guard, null) : Bool)) { ((cast _EffectsGl._guards__glRenderTextureEffect : flight._internal._WeakMap<GlRenderState, GlRenderEffectApplicationGuard>).delete_(state)); } else { ((cast _EffectsGl._guards__glRenderTextureEffect : flight._internal._WeakMap<GlRenderState, GlRenderEffectApplicationGuard>).set(state, (cast guard))); }
+    if ((cast _Runtime.strictEquals(guard, null) : Bool)) { ((cast _EffectsGl._guards__glRenderTextureEffect : flight._internal._WeakMap<GlRenderState, GlRenderEffectApplicationGuard>).delete_((cast state))); } else { ((cast _EffectsGl._guards__glRenderTextureEffect : flight._internal._WeakMap<GlRenderState, GlRenderEffectApplicationGuard>).set((cast state), (cast guard))); }
   }
 
   public static function reportGlRenderEffectApplication__glRenderTextureEffect(state:GlRenderState, explanation:GlRenderEffectApplicationExplanation):Void {
     if ((cast ((cast _Runtime.strictEquals(explanation.status, 'complete') : Bool) || (cast _Runtime.strictEquals(explanation.status, 'no-effects') : Bool)) : Bool)) { return; }
-    _Runtime.callOptionalValue(((cast _EffectsGl._guards__glRenderTextureEffect : flight._internal._WeakMap<GlRenderState, GlRenderEffectApplicationGuard>).get(state)), cast ([state, explanation] : Array<Dynamic>));
+    _Runtime.callOptionalValue(((cast _EffectsGl._guards__glRenderTextureEffect : flight._internal._WeakMap<GlRenderState, GlRenderEffectApplicationGuard>).get((cast state))), cast ([state, explanation] : Array<Dynamic>));
   }
 
   public static final _guards__glRenderTextureEffect:flight._internal._WeakMap<GlRenderState, GlRenderEffectApplicationGuard> = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);

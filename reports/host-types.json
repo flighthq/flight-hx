@@ -4,7 +4,7 @@
     "calls": 1497,
     "memberAccesses": 3044,
     "reads": 1127,
-    "typeReferences": 6040,
+    "typeReferences": 6036,
     "types": 237,
     "writes": 420
   },
@@ -9586,7 +9586,7 @@
         "arities": [
           0
         ],
-        "count": 169,
+        "count": 167,
         "locations": [
           {
             "arity": 0,
@@ -9800,12 +9800,6 @@
           },
           {
             "arity": 0,
-            "column": 12,
-            "line": 48,
-            "source": "upstream/packages/scene2d-canvas/src/canvasCache.ts"
-          },
-          {
-            "arity": 0,
             "column": 3,
             "line": 20,
             "source": "upstream/packages/scene2d-canvas/src/canvasClipRectangle.ts"
@@ -9935,12 +9929,6 @@
             "column": 24,
             "line": 52,
             "source": "upstream/packages/scene2d-canvas/src/canvasRenderSurface.ts"
-          },
-          {
-            "arity": 0,
-            "column": 12,
-            "line": 18,
-            "source": "upstream/packages/scene2d-canvas/src/canvasRenderTarget.ts"
           },
           {
             "arity": 0,
@@ -39916,7 +39904,7 @@
         "arities": [
           0
         ],
-        "count": 197,
+        "count": 195,
         "locations": [
           {
             "arity": 0,
@@ -40514,12 +40502,6 @@
           },
           {
             "arity": 0,
-            "column": 11,
-            "line": 47,
-            "source": "upstream/packages/scene2d-canvas/src/canvasCache.ts"
-          },
-          {
-            "arity": 0,
             "column": 10,
             "line": 11,
             "source": "upstream/packages/scene2d-canvas/src/canvasElement.ts"
@@ -40661,12 +40643,6 @@
             "column": 32,
             "line": 49,
             "source": "upstream/packages/scene2d-canvas/src/canvasRenderSurface.ts"
-          },
-          {
-            "arity": 0,
-            "column": 11,
-            "line": 17,
-            "source": "upstream/packages/scene2d-canvas/src/canvasRenderTarget.ts"
           },
           {
             "arity": 0,

@@ -4,4 +4,28 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostCapacitor)
+@:structInit
+class CapacitorNotificationCapabilities {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var action:NotificationActionBackend;
+  public var click:NotificationClickBackend;
+  public var delivery:NotificationDeliveryBackend;
+  public var lifecycle:NotificationLifecycleBackend;
+  public var permission:NotificationPermissionBackend;
+  public var scheduling:NotificationSchedulingBackend;
+
+  private function new(action:NotificationActionBackend, click:NotificationClickBackend, delivery:NotificationDeliveryBackend, lifecycle:NotificationLifecycleBackend, permission:NotificationPermissionBackend, scheduling:NotificationSchedulingBackend):Void {
+    this.__symbol__EntityRuntime = null;
+    this.action = action;
+    this.click = click;
+    this.delivery = delivery;
+    this.lifecycle = lifecycle;
+    this.permission = permission;
+    this.scheduling = scheduling;
+  }
+}
+#else
 typedef CapacitorNotificationCapabilities = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var action:NotificationActionBackend; var click:NotificationClickBackend; var delivery:NotificationDeliveryBackend; var lifecycle:NotificationLifecycleBackend; var permission:NotificationPermissionBackend; var scheduling:NotificationSchedulingBackend; };
+#end

@@ -15,6 +15,7 @@ import {
   sourcePathToModule,
 } from '../analyze/inventory.ts';
 import { excludedPackageDirectories } from '../analyze/exclusions.ts';
+import type { EntityFactoryClosureAudit } from '../analyze/entity-factory-closure.ts';
 import { validateHostEndpointCoverage, type HostEndpointAudit } from '../analyze/host-endpoints.ts';
 import { createHostTypeAudit, type HostTypeAudit } from '../analyze/host-types.ts';
 import { upstreamTypeScriptProgram } from '../analyze/program.ts';
@@ -131,6 +132,7 @@ export function generateCoreModules(
   check: boolean,
   typedStructs: TypedStructRegistry,
   typedStructProvenance: TypedStructProvenanceAudit,
+  entityFactoryClosure: EntityFactoryClosureAudit,
   hostEndpoints: HostEndpointAudit,
 ): CoreGenerationReport {
   validateHostEndpointCoverage(hostEndpoints);
@@ -242,7 +244,7 @@ export function generateCoreModules(
       });
     }
   }
-  markCppStructInitTypes(modules, structRegistry, typedStructProvenance);
+  markCppStructInitTypes(modules, structRegistry, typedStructProvenance, entityFactoryClosure);
   sealCppStructInitConstructors(modules);
   verifyTypedStructEmissionCoverage(modules, structRegistry);
   const shadowedTypeNames = markShadowedSecondaryTypes(modules);
@@ -485,14 +487,25 @@ function markCppStructInitTypes(
   modules: IrModule[],
   registry: TypedStructRegistry,
   provenance: TypedStructProvenanceAudit,
+  entityFactoryClosure: EntityFactoryClosureAudit,
 ): void {
-  const allowlist = new Set(cppStructInitTypedStructIds);
+  if (entityFactoryClosure.summary.blockedEntityCalls > 0) {
+    throw new Error(
+      `uniform Entity class activation has ${String(entityFactoryClosure.summary.blockedEntityCalls)} blocked factory calls`,
+    );
+  }
+  const entitySchemaIds = new Set(entityFactoryClosure.schemas.map((schema) => schema.schemaId));
+  const nodeSchemaIds = nodeAllocatorSchemaIds(modules);
+  const allowlist = new Set([...cppStructInitTypedStructIds, ...entitySchemaIds, ...nodeSchemaIds]);
   const candidatesByDeclaration = new Map(
     registry.report.candidates.map((candidate) => [
       `${candidate.definingPackageName}:${candidate.source}#${candidate.name}`,
       candidate,
     ]),
   );
+  // The two historical non-Entity controls retain their independent provenance
+  // gate. Entity schemas are admitted as one set by complete factory closure;
+  // node-derived identities additionally require a typed allocator token.
   validateCppStructInitProvenance(cppStructInitTypedStructIds, provenance);
   const seen = new Set<string>();
   for (const module of modules) {
@@ -501,17 +514,19 @@ function markCppStructInitTypes(
       const candidate = candidatesByDeclaration.get(
         `${declaration.origin.packageName}:${declaration.origin.source}#${declaration.name}`,
       );
-      const id = candidate?.id;
+      const id = candidate?.id ?? declaration.cppStructInitSchemaId;
       if (!id) continue;
       if (!allowlist.has(id)) continue;
-      if (!candidate.eligible || candidate.emission.mode !== 'direct') {
+      const historicalControl = cppStructInitTypedStructIds.includes(id);
+      if (historicalControl && (!candidate?.eligible || candidate.emission.mode !== 'direct')) {
         throw new Error(`cpp @:structInit schema is not direct-eligible: ${id}`);
       }
       if (
         declaration.type.kind !== 'anonymous' ||
         declaration.type.extends.some((type) => !isEntityBaseType(type)) ||
         declaration.typeParameters.length > 0 ||
-        declaration.type.fields.some((field) => field.optional && field.name !== '__EntityRuntimeKey')
+        (historicalControl &&
+          declaration.type.fields.some((field) => field.optional && field.name !== '__EntityRuntimeKey'))
       ) {
         throw new Error(
           `cpp @:structInit schema is not a closed required-field record: ${id} (${JSON.stringify({
@@ -532,6 +547,27 @@ function markCppStructInitTypes(
   const missing = [...allowlist].filter((id) => !seen.has(id));
   if (missing.length > 0)
     throw new Error(`cpp @:structInit allowlist identities were not emitted: ${missing.join(', ')}`);
+}
+
+function nodeAllocatorSchemaIds(modules: IrModule[]): Set<string> {
+  const ids = new Set<string>();
+  const seen = new WeakSet<object>();
+  const visit = (value: unknown): void => {
+    if (!value || typeof value !== 'object' || seen.has(value)) return;
+    seen.add(value);
+    if (Array.isArray(value)) {
+      value.forEach(visit);
+      return;
+    }
+    const record = value as Record<string, unknown>;
+    const construction = record.cppStructInit as { nodeAllocator?: unknown; schemaId?: unknown } | undefined;
+    if (construction?.nodeAllocator === true && typeof construction.schemaId === 'string') {
+      ids.add(construction.schemaId);
+    }
+    Object.values(record).forEach(visit);
+  };
+  modules.forEach(visit);
+  return ids;
 }
 
 export function sealCppStructInitConstructors(modules: IrModule[]): void {

@@ -4,4 +4,36 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Animation)
+@:structInit
+class AnimationRootMotionExtractor {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var channel:AnimationChannel;
+  public var channelIndex:Float;
+  public var clip:AnimationClip;
+  public var cycleDelta:flight._internal._Float32Array;
+  public var fromMotion:flight._internal._Float32Array;
+  public var fromSample:flight._internal._Float32Array;
+  public var powerScratch:flight._internal._Float32Array;
+  public var startSample:flight._internal._Float32Array;
+  public var toMotion:flight._internal._Float32Array;
+  public var toSample:flight._internal._Float32Array;
+
+  private function new(channel:AnimationChannel, channelIndex:Float, clip:AnimationClip, cycleDelta:flight._internal._Float32Array, fromMotion:flight._internal._Float32Array, fromSample:flight._internal._Float32Array, powerScratch:flight._internal._Float32Array, startSample:flight._internal._Float32Array, toMotion:flight._internal._Float32Array, toSample:flight._internal._Float32Array):Void {
+    this.__symbol__EntityRuntime = null;
+    this.channel = channel;
+    this.channelIndex = channelIndex;
+    this.clip = clip;
+    this.cycleDelta = cycleDelta;
+    this.fromMotion = fromMotion;
+    this.fromSample = fromSample;
+    this.powerScratch = powerScratch;
+    this.startSample = startSample;
+    this.toMotion = toMotion;
+    this.toSample = toSample;
+  }
+}
+#else
 typedef AnimationRootMotionExtractor = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var channel:AnimationChannel; var channelIndex:Float; var clip:AnimationClip; var cycleDelta:flight._internal._Float32Array; var fromMotion:flight._internal._Float32Array; var fromSample:flight._internal._Float32Array; var powerScratch:flight._internal._Float32Array; var startSample:flight._internal._Float32Array; var toMotion:flight._internal._Float32Array; var toSample:flight._internal._Float32Array; };
+#end

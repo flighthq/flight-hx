@@ -4,4 +4,34 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Power)
+@:structInit
+class Power {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onChange:Null<Signal<PowerStatus->Void>>;
+  public var onCharging:Null<Signal<Void->Void>>;
+  public var onDischarging:Null<Signal<Void->Void>>;
+  public var onIdleStateChange:Null<Signal<Void->Void>>;
+  public var onLockScreen:Null<Signal<Void->Void>>;
+  public var onResume:Null<Signal<Void->Void>>;
+  public var onSuspend:Null<Signal<Void->Void>>;
+  public var onThermalStateChange:Null<Signal<PowerThermalState->Void>>;
+  public var onUnlockScreen:Null<Signal<Void->Void>>;
+
+  private function new(onChange:Null<Signal<PowerStatus->Void>>, onCharging:Null<Signal<Void->Void>>, onDischarging:Null<Signal<Void->Void>>, onIdleStateChange:Null<Signal<Void->Void>>, onLockScreen:Null<Signal<Void->Void>>, onResume:Null<Signal<Void->Void>>, onSuspend:Null<Signal<Void->Void>>, onThermalStateChange:Null<Signal<PowerThermalState->Void>>, onUnlockScreen:Null<Signal<Void->Void>>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onChange = onChange;
+    this.onCharging = onCharging;
+    this.onDischarging = onDischarging;
+    this.onIdleStateChange = onIdleStateChange;
+    this.onLockScreen = onLockScreen;
+    this.onResume = onResume;
+    this.onSuspend = onSuspend;
+    this.onThermalStateChange = onThermalStateChange;
+    this.onUnlockScreen = onUnlockScreen;
+  }
+}
+#else
 typedef Power = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onChange:Null<Signal<PowerStatus->Void>>; var onCharging:Null<Signal<Void->Void>>; var onDischarging:Null<Signal<Void->Void>>; var onIdleStateChange:Null<Signal<Void->Void>>; var onLockScreen:Null<Signal<Void->Void>>; var onResume:Null<Signal<Void->Void>>; var onSuspend:Null<Signal<Void->Void>>; var onThermalStateChange:Null<Signal<PowerThermalState->Void>>; var onUnlockScreen:Null<Signal<Void->Void>>; };
+#end

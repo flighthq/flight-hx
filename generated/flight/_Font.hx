@@ -90,7 +90,7 @@ class _Font {
   }
 
   public static function createFont(name:String):Font {
-    return cast (cast createEntity(({ final __callArgument11:Dynamic = ({ name: name } : Font); __callArgument11; })) : Font);
+    return cast (cast createEntity(({ final __callArgument11:Dynamic = ({ name: (cast name : Dynamic) } : Font); __callArgument11; })) : Font);
     return cast null;
   }
 
@@ -327,7 +327,7 @@ class _Font {
   }
 
   public static function createGlyphRasterizerBackendFromGlyphOutlineSource(source:GlyphOutlineSource):{ >GlyphRasterizerBackend, >Entity, } {
-    return cast (cast (cast createEntity : Null<{ var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; }>->{ >Entity, var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; })(({ final __callArgument49:Dynamic = ({ measureMetrics: function(options:GlyphRasterizeOptions):Null<GlyphMetrics> {
+    return cast (cast (cast createEntity : Null<{ var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; }>->{ >Entity, var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; })(({ final __callArgument49:Dynamic = ({ measureMetrics: (cast function(options:GlyphRasterizeOptions):Null<GlyphMetrics> {
       var metrics:GlyphOutlineMetrics = cast _Runtime.UNDEFINED;
       var scale:Null<Float> = cast _Runtime.UNDEFINED;
       metrics = (cast source : GlyphOutlineSource).getGlyphOutlineMetrics();
@@ -335,10 +335,10 @@ class _Font {
       if ((cast _Runtime.strictEquals(scale, null) : Bool)) { return cast null; }
       return cast { ascent: _Runtime.multiplyNumbers(_Runtime.field(metrics, 'ascent'), scale), descent: _Runtime.multiplyNumbers(_Runtime.field(metrics, 'descent'), scale), lineGap: _Runtime.multiplyNumbers(_Runtime.field(metrics, 'lineGap'), scale) };
       return cast _Runtime.UNDEFINED;
-    }, rasterize: function(codePoint:Float, options:GlyphRasterizeOptions):Null<GlyphRasterizedBitmap> {
+    } : Dynamic), rasterize: (cast function(codePoint:Float, options:GlyphRasterizeOptions):Null<GlyphRasterizedBitmap> {
       return cast (cast _Font.rasterizeGlyphOutlineSource__glyphOutlineSource(({ final __callArgument45:Dynamic = source; __callArgument45; }), (cast codePoint : Float), ({ final __callArgument46:Dynamic = options; __callArgument46; })) : Null<GlyphRasterizedBitmap>);
       return cast _Runtime.UNDEFINED;
-    } } : EntityShapeL21C23__glyphOutlineSource); __callArgument49; })) : EntityShapeL21C23__glyphOutlineSource);
+    } : Dynamic) } : EntityShapeL21C23__glyphOutlineSource); __callArgument49; })) : EntityShapeL21C23__glyphOutlineSource);
     return cast null;
   }
 

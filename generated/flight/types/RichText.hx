@@ -4,4 +4,54 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef RichText = { var data:RichTextData; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<NodeRuntime<Node2DTraits>>; var alpha:Float; var visible:Bool; var blendMode:Null<BlendMode>; var clip:Null<ClipRegion>; var material:Null<Material>; var materialData:Null<MaterialData>; var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Text)
+@:structInit
+class RichText {
+  public var __symbol__EntityRuntime:Null<{ >NodeRuntime<Node2DTraits>, >EntityRuntime, }>;
+  public var data:RichTextData;
+  public var enabled:Bool;
+  public var kind:Kind;
+  public var name:Null<String>;
+  public var alpha:Float;
+  public var visible:Bool;
+  public var blendMode:Null<BlendMode>;
+  public var clip:Null<ClipRegion>;
+  public var material:Null<Material>;
+  public var materialData:Null<MaterialData>;
+  public var pivotX:Float;
+  public var pivotY:Float;
+  public var rotation:Float;
+  public var scaleX:Float;
+  public var scaleY:Float;
+  public var skewX:Float;
+  public var skewY:Float;
+  public var x:Float;
+  public var y:Float;
+
+  private function new(data:RichTextData, enabled:Bool, kind:Kind, name:Null<String>, alpha:Float, visible:Bool, blendMode:Null<BlendMode>, clip:Null<ClipRegion>, material:Null<Material>, materialData:Null<MaterialData>, pivotX:Float, pivotY:Float, rotation:Float, scaleX:Float, scaleY:Float, skewX:Float, skewY:Float, x:Float, y:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.data = data;
+    this.enabled = enabled;
+    this.kind = kind;
+    this.name = name;
+    this.alpha = alpha;
+    this.visible = visible;
+    this.blendMode = blendMode;
+    this.clip = clip;
+    this.material = material;
+    this.materialData = materialData;
+    this.pivotX = pivotX;
+    this.pivotY = pivotY;
+    this.rotation = rotation;
+    this.scaleX = scaleX;
+    this.scaleY = scaleY;
+    this.skewX = skewX;
+    this.skewY = skewY;
+    this.x = x;
+    this.y = y;
+  }
+}
+#else
+typedef RichText = { @:optional var __symbol__EntityRuntime:Null<{ >NodeRuntime<Node2DTraits>, >EntityRuntime, }>; var data:RichTextData; var enabled:Bool; var kind:Kind; var name:Null<String>; var alpha:Float; var visible:Bool; var blendMode:Null<BlendMode>; var clip:Null<ClipRegion>; var material:Null<Material>; var materialData:Null<MaterialData>; var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; };
+#end

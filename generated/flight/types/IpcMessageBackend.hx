@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:structInit
+class IpcMessageBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var subscribe:String->(Array<flight._internal._Any>->Void)->(Void->Void);
+
+  private function new(subscribe:String->(Array<flight._internal._Any>->Void)->(Void->Void)):Void {
+    this.__symbol__EntityRuntime = null;
+    this.subscribe = subscribe;
+  }
+}
+#else
 typedef IpcMessageBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var subscribe:String->(Array<flight._internal._Any>->Void)->(Void->Void); };
+#end

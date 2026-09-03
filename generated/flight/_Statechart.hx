@@ -47,10 +47,10 @@ class _Statechart {
 
   public static function getStatechartGuardChartId__enableStatechartGuards(chart:flight._internal._Object):Float {
     var id:Null<Float> = cast _Runtime.UNDEFINED;
-    id = ((cast _Statechart.statechartGuardChartIds__enableStatechartGuards : flight._internal._WeakMap<flight._internal._Object, Float>).get(chart));
+    id = ((cast _Statechart.statechartGuardChartIds__enableStatechartGuards : flight._internal._WeakMap<flight._internal._Object, Float>).get((cast chart)));
     if ((cast _Runtime.strictEquals(id, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (id = cast (_Statechart.nextStatechartGuardChartId__enableStatechartGuards++ : Dynamic));
-      ((cast _Statechart.statechartGuardChartIds__enableStatechartGuards : flight._internal._WeakMap<flight._internal._Object, Float>).set(chart, (cast id)));
+      ((cast _Statechart.statechartGuardChartIds__enableStatechartGuards : flight._internal._WeakMap<flight._internal._Object, Float>).set((cast chart), (cast id)));
     }
     return cast id;
     return cast null;

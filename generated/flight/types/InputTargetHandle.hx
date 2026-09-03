@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+class InputTargetHandle {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var __brand:String;
+
+  private function new(__brand:String):Void {
+    this.__symbol__EntityRuntime = null;
+    this.__brand = __brand;
+  }
+}
+#else
 typedef InputTargetHandle = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var __brand:String; };
+#end

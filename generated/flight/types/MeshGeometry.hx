@@ -4,4 +4,30 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Mesh)
+@:structInit
+class MeshGeometry {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var bounds:Null<Aabb>;
+  public var indices:Null<flight._internal._Union2<flight._internal._UInt16Array, flight._internal._UInt32Array>>;
+  public var layout:VertexAttributeLayout;
+  public var subsets:Array<MeshSubset>;
+  public var topology:PrimitiveTopology;
+  public var version:Float;
+  public var vertices:flight._internal._Float32Array;
+
+  private function new(bounds:Null<Aabb>, indices:Null<flight._internal._Union2<flight._internal._UInt16Array, flight._internal._UInt32Array>>, layout:VertexAttributeLayout, subsets:Array<MeshSubset>, topology:PrimitiveTopology, version:Float, vertices:flight._internal._Float32Array):Void {
+    this.__symbol__EntityRuntime = null;
+    this.bounds = bounds;
+    this.indices = indices;
+    this.layout = layout;
+    this.subsets = subsets;
+    this.topology = topology;
+    this.version = version;
+    this.vertices = vertices;
+  }
+}
+#else
 typedef MeshGeometry = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var bounds:Null<Aabb>; var indices:Null<flight._internal._Union2<flight._internal._UInt16Array, flight._internal._UInt32Array>>; var layout:VertexAttributeLayout; var subsets:Array<MeshSubset>; var topology:PrimitiveTopology; var version:Float; var vertices:flight._internal._Float32Array; };
+#end

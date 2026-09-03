@@ -4,4 +4,40 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._CameraControls)
+@:structInit
+class OrbitCameraController {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var azimuth:Float;
+  public var distance:Float;
+  public var goalAzimuth:Float;
+  public var goalDistance:Float;
+  public var goalPolar:Float;
+  public var maxDistance:Float;
+  public var maxPolar:Float;
+  public var minDistance:Float;
+  public var minPolar:Float;
+  public var polar:Float;
+  public var smoothTime:Float;
+  public var target:Vector3;
+
+  private function new(azimuth:Float, distance:Float, goalAzimuth:Float, goalDistance:Float, goalPolar:Float, maxDistance:Float, maxPolar:Float, minDistance:Float, minPolar:Float, polar:Float, smoothTime:Float, target:Vector3):Void {
+    this.__symbol__EntityRuntime = null;
+    this.azimuth = azimuth;
+    this.distance = distance;
+    this.goalAzimuth = goalAzimuth;
+    this.goalDistance = goalDistance;
+    this.goalPolar = goalPolar;
+    this.maxDistance = maxDistance;
+    this.maxPolar = maxPolar;
+    this.minDistance = minDistance;
+    this.minPolar = minPolar;
+    this.polar = polar;
+    this.smoothTime = smoothTime;
+    this.target = target;
+  }
+}
+#else
 typedef OrbitCameraController = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var azimuth:Float; var distance:Float; var goalAzimuth:Float; var goalDistance:Float; var goalPolar:Float; var maxDistance:Float; var maxPolar:Float; var minDistance:Float; var minPolar:Float; var polar:Float; var smoothTime:Float; var target:Vector3; };
+#end

@@ -1461,7 +1461,7 @@
       "module": "flight._Requirements"
     },
     {
-      "declarations": 42,
+      "declarations": 41,
       "diagnostics": [],
       "module": "flight._Scene2D"
     },
@@ -1496,7 +1496,7 @@
       "module": "flight._Scene2DWgpu"
     },
     {
-      "declarations": 94,
+      "declarations": 90,
       "diagnostics": [],
       "module": "flight._Scene3D"
     },
@@ -23899,11 +23899,11 @@
         "byReason": {
           "source-any": 2,
           "source-unknown": 1,
-          "unclassified": 3
+          "unclassified": 2
         },
         "module": "flight._Scene2D",
         "source": "upstream/packages/scene2d/src/displayObject.ts",
-        "total": 6
+        "total": 5
       },
       {
         "byReason": {
@@ -25059,11 +25059,11 @@
         "byReason": {
           "source-unknown": 1,
           "standard-toolkit-boundary": 1,
-          "unclassified": 2
+          "unclassified": 1
         },
         "module": "flight._Scene3D",
         "source": "upstream/packages/scene3d/src/cloneNode3DSubtree.ts",
-        "total": 4
+        "total": 3
       },
       {
         "byReason": {
@@ -25096,11 +25096,11 @@
         "byReason": {
           "source-never": 1,
           "source-null": 1,
-          "unclassified": 2
+          "unclassified": 1
         },
         "module": "flight._Scene3D",
         "source": "upstream/packages/scene3d/src/scene.ts",
-        "total": 4
+        "total": 3
       },
       {
         "byReason": {
@@ -25115,11 +25115,11 @@
           "source-null": 3,
           "source-unknown": 3,
           "standard-toolkit-boundary": 14,
-          "unclassified": 3
+          "unclassified": 2
         },
         "module": "flight._Scene3D",
         "source": "upstream/packages/scene3d/src/sceneDocument.ts",
-        "total": 23
+        "total": 22
       },
       {
         "byReason": {
@@ -25148,11 +25148,11 @@
       },
       {
         "byReason": {
-          "unclassified": 4
+          "unclassified": 3
         },
         "module": "flight._Scene3D",
         "source": "upstream/packages/scene3d/src/sceneNode.ts",
-        "total": 4
+        "total": 3
       },
       {
         "byReason": {
@@ -28812,6 +28812,14 @@
       },
       {
         "byReason": {
+          "source-any": 1
+        },
+        "module": "flight.types.BoundsNodeAny",
+        "source": "upstream/packages/types/src/HasBoundsRectangle.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
           "unclassified": 1
         },
         "module": "flight.types.ByteReader",
@@ -29927,17 +29935,17 @@
     "summary": {
       "byReason": {
         "external-toolkit-boundary": 609,
-        "source-any": 1294,
+        "source-any": 1295,
         "source-never": 194,
         "source-null": 277,
         "source-undefined": 551,
         "source-unknown": 4743,
         "standard-toolkit-boundary": 22029,
-        "unclassified": 832
+        "unclassified": 827
       },
       "checkerKnownUnrepresentable": 0,
-      "modules": 1477,
-      "total": 30529
+      "modules": 1478,
+      "total": 30525
     }
   }
 }

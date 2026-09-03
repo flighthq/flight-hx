@@ -4,4 +4,36 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Animation)
+@:structInit
+class AnimationPlayer {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var clip:AnimationClip;
+  public var loop:Bool;
+  public var loopMode:AnimationLoopMode;
+  public var onEvent:Null<Signal<AnimationClipEvent->Void>>;
+  public var onFinished:Null<Signal<Void->Void>>;
+  public var onLooped:Null<Signal<Void->Void>>;
+  public var playing:Bool;
+  public var repeatCount:Float;
+  public var speed:Float;
+  public var time:Float;
+
+  private function new(clip:AnimationClip, loop:Bool, loopMode:AnimationLoopMode, onEvent:Null<Signal<AnimationClipEvent->Void>>, onFinished:Null<Signal<Void->Void>>, onLooped:Null<Signal<Void->Void>>, playing:Bool, repeatCount:Float, speed:Float, time:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.clip = clip;
+    this.loop = loop;
+    this.loopMode = loopMode;
+    this.onEvent = onEvent;
+    this.onFinished = onFinished;
+    this.onLooped = onLooped;
+    this.playing = playing;
+    this.repeatCount = repeatCount;
+    this.speed = speed;
+    this.time = time;
+  }
+}
+#else
 typedef AnimationPlayer = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var clip:AnimationClip; var loop:Bool; @:optional var loopMode:AnimationLoopMode; @:optional var onEvent:Null<Signal<AnimationClipEvent->Void>>; @:optional var onFinished:Null<Signal<Void->Void>>; @:optional var onLooped:Null<Signal<Void->Void>>; var playing:Bool; @:optional var repeatCount:Float; var speed:Float; var time:Float; };
+#end

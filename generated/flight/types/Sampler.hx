@@ -4,4 +4,28 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Texture)
+@:structInit
+class Sampler {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var anisotropy:Float;
+  public var magFilter:TextureFilter;
+  public var minFilter:TextureFilter;
+  public var mipmaps:Bool;
+  public var wrapU:TextureWrap;
+  public var wrapV:TextureWrap;
+
+  private function new(anisotropy:Float, magFilter:TextureFilter, minFilter:TextureFilter, mipmaps:Bool, wrapU:TextureWrap, wrapV:TextureWrap):Void {
+    this.__symbol__EntityRuntime = null;
+    this.anisotropy = anisotropy;
+    this.magFilter = magFilter;
+    this.minFilter = minFilter;
+    this.mipmaps = mipmaps;
+    this.wrapU = wrapU;
+    this.wrapV = wrapV;
+  }
+}
+#else
 typedef Sampler = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var anisotropy:Float; var magFilter:TextureFilter; var minFilter:TextureFilter; var mipmaps:Bool; var wrapU:TextureWrap; var wrapV:TextureWrap; };
+#end

@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._RenderGl)
+@:structInit
+class GlPipeline {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var registries:GlRenderRegistries;
+
+  private function new(registries:GlRenderRegistries):Void {
+    this.__symbol__EntityRuntime = null;
+    this.registries = registries;
+  }
+}
+#else
 typedef GlPipeline = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var registries:GlRenderRegistries; };
+#end

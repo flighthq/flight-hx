@@ -1017,7 +1017,7 @@ class _Collision {
   public static final surfaceB__collideContactManifold3D:Array<Float> = (cast cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
 
   public static function getCollisionFaceQuery3D(kind:CollisionShapeKind3D):Null<CollisionFaceQuery3D> {
-    return cast _Runtime.coalesce(((cast _Collision.collisionFaceQueries3D__collisionFace3D : flight._internal._Map<CollisionShapeKind3D, CollisionFaceQuery3D>).get(kind)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _Collision.collisionFaceQueries3D__collisionFace3D : flight._internal._Map<CollisionShapeKind3D, CollisionFaceQuery3D>).get((cast kind))), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -1125,7 +1125,7 @@ class _Collision {
   }
 
   public static function registerCollisionFaceQuery3D(kind:CollisionShapeKind3D, query:CollisionFaceQuery3D):Void {
-    ((cast _Collision.collisionFaceQueries3D__collisionFace3D : flight._internal._Map<CollisionShapeKind3D, CollisionFaceQuery3D>).set(kind, (cast query)));
+    ((cast _Collision.collisionFaceQueries3D__collisionFace3D : flight._internal._Map<CollisionShapeKind3D, CollisionFaceQuery3D>).set((cast kind), (cast query)));
   }
 
   public static function rotateFaceVector__collisionFace3D(vectorX:Float, vectorY:Float, vectorZ:Float, quaternion:Array<Float>, conjugate:Bool, out:Array<Float>):Void {
@@ -1481,12 +1481,12 @@ class _Collision {
   }
 
   public static function getCollisionPairTest2D(kindA:CollisionShapeKind2D, kindB:CollisionShapeKind2D):Null<CollisionPairTest2D> {
-    return cast _Runtime.coalesce(((cast _Collision.collisionPairTests2D__collisionSupport2D : flight._internal._Map<String, CollisionPairTest2D>).get((cast _Collision.getCollisionPairKey2D__collisionSupport2D(({ final __callArgument268:Dynamic = kindA; __callArgument268; }), ({ final __callArgument269:Dynamic = kindB; __callArgument269; })) : String))), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _Collision.collisionPairTests2D__collisionSupport2D : flight._internal._Map<String, CollisionPairTest2D>).get((cast (cast _Collision.getCollisionPairKey2D__collisionSupport2D(({ final __callArgument268:Dynamic = kindA; __callArgument268; }), ({ final __callArgument269:Dynamic = kindB; __callArgument269; })) : String)))), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getCollisionSupport2D(kind:CollisionShapeKind2D):Null<CollisionSupport2D> {
-    return cast _Runtime.coalesce(((cast _Collision.collisionSupports2D__collisionSupport2D : flight._internal._Map<CollisionShapeKind2D, CollisionSupport2D>).get(kind)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _Collision.collisionSupports2D__collisionSupport2D : flight._internal._Map<CollisionShapeKind2D, CollisionSupport2D>).get((cast kind))), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -1498,11 +1498,11 @@ class _Collision {
   }
 
   public static function registerCollisionPairTest2D(kindA:CollisionShapeKind2D, kindB:CollisionShapeKind2D, test:CollisionPairTest2D):Void {
-    ((cast _Collision.collisionPairTests2D__collisionSupport2D : flight._internal._Map<String, CollisionPairTest2D>).set((cast _Collision.getCollisionPairKey2D__collisionSupport2D(({ final __callArgument288:Dynamic = kindA; __callArgument288; }), ({ final __callArgument289:Dynamic = kindB; __callArgument289; })) : String), (cast test)));
+    ((cast _Collision.collisionPairTests2D__collisionSupport2D : flight._internal._Map<String, CollisionPairTest2D>).set((cast (cast _Collision.getCollisionPairKey2D__collisionSupport2D(({ final __callArgument288:Dynamic = kindA; __callArgument288; }), ({ final __callArgument289:Dynamic = kindB; __callArgument289; })) : String)), (cast test)));
   }
 
   public static function registerCollisionSupport2D(kind:CollisionShapeKind2D, support:CollisionSupport2D):Void {
-    ((cast _Collision.collisionSupports2D__collisionSupport2D : flight._internal._Map<CollisionShapeKind2D, CollisionSupport2D>).set(kind, (cast support)));
+    ((cast _Collision.collisionSupports2D__collisionSupport2D : flight._internal._Map<CollisionShapeKind2D, CollisionSupport2D>).set((cast kind), (cast support)));
   }
 
   public static function supportCollisionAabb2D(shape:CollisionShape2D, dirX:Float, dirY:Float, out:Array<Float>):Void {
@@ -1590,12 +1590,12 @@ class _Collision {
   }
 
   public static function getCollisionPairTest3D(kindA:CollisionShapeKind3D, kindB:CollisionShapeKind3D):Null<CollisionPairTest3D> {
-    return cast _Runtime.coalesce(((cast _Collision.collisionPairTests3D__collisionSupport3D : flight._internal._Map<String, CollisionPairTest3D>).get((cast _Collision.getCollisionPairKey3D__collisionSupport3D(({ final __callArgument302:Dynamic = kindA; __callArgument302; }), ({ final __callArgument303:Dynamic = kindB; __callArgument303; })) : String))), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _Collision.collisionPairTests3D__collisionSupport3D : flight._internal._Map<String, CollisionPairTest3D>).get((cast (cast _Collision.getCollisionPairKey3D__collisionSupport3D(({ final __callArgument302:Dynamic = kindA; __callArgument302; }), ({ final __callArgument303:Dynamic = kindB; __callArgument303; })) : String)))), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getCollisionSupport3D(kind:CollisionShapeKind3D):Null<CollisionSupport3D> {
-    return cast _Runtime.coalesce(((cast _Collision.collisionSupports3D__collisionSupport3D : flight._internal._Map<CollisionShapeKind3D, CollisionSupport3D>).get(kind)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _Collision.collisionSupports3D__collisionSupport3D : flight._internal._Map<CollisionShapeKind3D, CollisionSupport3D>).get((cast kind))), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -1610,11 +1610,11 @@ class _Collision {
   }
 
   public static function registerCollisionPairTest3D(kindA:CollisionShapeKind3D, kindB:CollisionShapeKind3D, test:CollisionPairTest3D):Void {
-    ((cast _Collision.collisionPairTests3D__collisionSupport3D : flight._internal._Map<String, CollisionPairTest3D>).set((cast _Collision.getCollisionPairKey3D__collisionSupport3D(({ final __callArgument334:Dynamic = kindA; __callArgument334; }), ({ final __callArgument335:Dynamic = kindB; __callArgument335; })) : String), (cast test)));
+    ((cast _Collision.collisionPairTests3D__collisionSupport3D : flight._internal._Map<String, CollisionPairTest3D>).set((cast (cast _Collision.getCollisionPairKey3D__collisionSupport3D(({ final __callArgument334:Dynamic = kindA; __callArgument334; }), ({ final __callArgument335:Dynamic = kindB; __callArgument335; })) : String)), (cast test)));
   }
 
   public static function registerCollisionSupport3D(kind:CollisionShapeKind3D, support:CollisionSupport3D):Void {
-    ((cast _Collision.collisionSupports3D__collisionSupport3D : flight._internal._Map<CollisionShapeKind3D, CollisionSupport3D>).set(kind, (cast support)));
+    ((cast _Collision.collisionSupports3D__collisionSupport3D : flight._internal._Map<CollisionShapeKind3D, CollisionSupport3D>).set((cast kind), (cast support)));
   }
 
   public static function supportCollisionAabb3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Void {
@@ -7537,7 +7537,7 @@ class _Collision {
     if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(heightfield, 'columns')] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(heightfield, 'rows')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(heightfield, 'columns') : Float) < (cast 2.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(heightfield, 'rows') : Float) < (cast 2.0 : Float)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(heightfield, 'heights'), 'length'), _Runtime.multiplyNumbers(_Runtime.field(heightfield, 'columns'), _Runtime.field(heightfield, 'rows'))) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(heightfield, 'cellSizeX')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(heightfield, 'cellSizeZ')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(heightfield, 'cellSizeX') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(heightfield, 'cellSizeZ') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(heightfield, 'version')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(heightfield, 'version') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast !(cast (cast _Collision.isCollisionTriangleSurfacePoseValid3D__triangleMesh3D(({ final __callArgument1617:Dynamic = heightfield; __callArgument1617; })) : Bool) : Bool) : Bool)) : Bool)) {
       return cast 'degenerate-shape';
     }
-    cached = ((cast _Collision.collisionHeightfieldValidations3D__triangleMesh3D : flight._internal._WeakMap<CollisionHeightfield3D, CollisionHeightfieldValidationCache3D__triangleMesh3D>).get(heightfield));
+    cached = ((cast _Collision.collisionHeightfieldValidations3D__triangleMesh3D : flight._internal._WeakMap<CollisionHeightfield3D, CollisionHeightfieldValidationCache3D__triangleMesh3D>).get((cast heightfield)));
     if ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast cached : CollisionHeightfieldValidationCache3D__triangleMesh3D).heights, _Runtime.field(heightfield, 'heights')) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast cached : CollisionHeightfieldValidationCache3D__triangleMesh3D).columns, _Runtime.field(heightfield, 'columns')) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast cached : CollisionHeightfieldValidationCache3D__triangleMesh3D).rows, _Runtime.field(heightfield, 'rows')) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast cached : CollisionHeightfieldValidationCache3D__triangleMesh3D).version, _Runtime.field(heightfield, 'version')) : Bool)) : Bool)) {
       return cast (cast cached : CollisionHeightfieldValidationCache3D__triangleMesh3D).status;
     }
@@ -7548,7 +7548,7 @@ class _Collision {
         break;
       }
     }
-    ((cast _Collision.collisionHeightfieldValidations3D__triangleMesh3D : flight._internal._WeakMap<CollisionHeightfield3D, CollisionHeightfieldValidationCache3D__triangleMesh3D>).set(heightfield, (cast { heights: _Runtime.field(heightfield, 'heights'), columns: _Runtime.field(heightfield, 'columns'), rows: _Runtime.field(heightfield, 'rows'), version: _Runtime.field(heightfield, 'version'), status: status })));
+    ((cast _Collision.collisionHeightfieldValidations3D__triangleMesh3D : flight._internal._WeakMap<CollisionHeightfield3D, CollisionHeightfieldValidationCache3D__triangleMesh3D>).set((cast heightfield), (cast { heights: _Runtime.field(heightfield, 'heights'), columns: _Runtime.field(heightfield, 'columns'), rows: _Runtime.field(heightfield, 'rows'), version: _Runtime.field(heightfield, 'version'), status: status })));
     return cast status;
     return cast null;
   }
@@ -7560,7 +7560,7 @@ class _Collision {
     if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.field(_Runtime.field(mesh, 'points'), 'length') : Float) < (cast 9.0 : Float)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.fmod(_Runtime.field(_Runtime.field(mesh, 'points'), 'length'), 3.0), 0.0) : Bool)) : Bool) || (cast ((cast _Runtime.field(_Runtime.field(mesh, 'indices'), 'length') : Float) < (cast 3.0 : Float)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.fmod(_Runtime.field(_Runtime.field(mesh, 'indices'), 'length'), 3.0), 0.0) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(mesh, 'version')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(mesh, 'version') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast !(cast (cast _Collision.isCollisionTriangleSurfacePoseValid3D__triangleMesh3D(({ final __callArgument1621:Dynamic = mesh; __callArgument1621; })) : Bool) : Bool) : Bool)) : Bool)) {
       return cast 'degenerate-shape';
     }
-    cached = ((cast _Collision.collisionTriangleMeshValidations3D__triangleMesh3D : flight._internal._WeakMap<CollisionTriangleMesh3D, CollisionTriangleMeshValidationCache3D__triangleMesh3D>).get(mesh));
+    cached = ((cast _Collision.collisionTriangleMeshValidations3D__triangleMesh3D : flight._internal._WeakMap<CollisionTriangleMesh3D, CollisionTriangleMeshValidationCache3D__triangleMesh3D>).get((cast mesh)));
     if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast cached : CollisionTriangleMeshValidationCache3D__triangleMesh3D).points, _Runtime.field(mesh, 'points')) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast cached : CollisionTriangleMeshValidationCache3D__triangleMesh3D).indices, _Runtime.field(mesh, 'indices')) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast cached : CollisionTriangleMeshValidationCache3D__triangleMesh3D).version, _Runtime.field(mesh, 'version')) : Bool)) : Bool)) {
       return cast (cast cached : CollisionTriangleMeshValidationCache3D__triangleMesh3D).status;
     }
@@ -7592,7 +7592,7 @@ class _Collision {
         }
       }
     }
-    ((cast _Collision.collisionTriangleMeshValidations3D__triangleMesh3D : flight._internal._WeakMap<CollisionTriangleMesh3D, CollisionTriangleMeshValidationCache3D__triangleMesh3D>).set(mesh, (cast { points: _Runtime.field(mesh, 'points'), indices: _Runtime.field(mesh, 'indices'), version: _Runtime.field(mesh, 'version'), status: status })));
+    ((cast _Collision.collisionTriangleMeshValidations3D__triangleMesh3D : flight._internal._WeakMap<CollisionTriangleMesh3D, CollisionTriangleMeshValidationCache3D__triangleMesh3D>).set((cast mesh), (cast { points: _Runtime.field(mesh, 'points'), indices: _Runtime.field(mesh, 'indices'), version: _Runtime.field(mesh, 'version'), status: status })));
     return cast status;
     return cast null;
   }
@@ -7849,7 +7849,7 @@ class _Collision {
   public static function getCollisionHeightfieldTriangleMesh3D__triangleMesh3D(heightfield:CollisionHeightfield3D):CollisionTriangleMesh3D {
     var cache:Null<CollisionHeightfieldMeshCache3D__triangleMesh3D> = cast _Runtime.UNDEFINED;
     var mesh:CollisionTriangleMesh3D = cast _Runtime.UNDEFINED;
-    cache = ((cast _Collision.collisionHeightfieldMeshes3D__triangleMesh3D : flight._internal._WeakMap<CollisionHeightfield3D, CollisionHeightfieldMeshCache3D__triangleMesh3D>).get(heightfield));
+    cache = ((cast _Collision.collisionHeightfieldMeshes3D__triangleMesh3D : flight._internal._WeakMap<CollisionHeightfield3D, CollisionHeightfieldMeshCache3D__triangleMesh3D>).get((cast heightfield)));
     if ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(cache, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals((cast cache : CollisionHeightfieldMeshCache3D__triangleMesh3D).heights, _Runtime.field(heightfield, 'heights')) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast cache : CollisionHeightfieldMeshCache3D__triangleMesh3D).columns, _Runtime.field(heightfield, 'columns')) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast cache : CollisionHeightfieldMeshCache3D__triangleMesh3D).rows, _Runtime.field(heightfield, 'rows')) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast cache : CollisionHeightfieldMeshCache3D__triangleMesh3D).cellSizeX, _Runtime.field(heightfield, 'cellSizeX')) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast cache : CollisionHeightfieldMeshCache3D__triangleMesh3D).cellSizeZ, _Runtime.field(heightfield, 'cellSizeZ')) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast cache : CollisionHeightfieldMeshCache3D__triangleMesh3D).version, _Runtime.field(heightfield, 'version')) : Bool)) : Bool)) {
       var points:Array<Float> = _Runtime.createArray((_Runtime.multiplyNumbers(_Runtime.field(heightfield, 'columns'), _Runtime.field(heightfield, 'rows')) * 3.0));
       {
@@ -7895,7 +7895,7 @@ class _Collision {
         }
       }
       (cache = cast ({ heights: _Runtime.field(heightfield, 'heights'), columns: _Runtime.field(heightfield, 'columns'), rows: _Runtime.field(heightfield, 'rows'), cellSizeX: _Runtime.field(heightfield, 'cellSizeX'), cellSizeZ: _Runtime.field(heightfield, 'cellSizeZ'), version: _Runtime.field(heightfield, 'version'), mesh: (cast createCollisionTriangleMesh3D(({ final __callArgument1729:Dynamic = points; __callArgument1729; }), ({ final __callArgument1730:Dynamic = indices; __callArgument1730; })) : CollisionTriangleMesh3D) } : Dynamic));
-      ((cast _Collision.collisionHeightfieldMeshes3D__triangleMesh3D : flight._internal._WeakMap<CollisionHeightfield3D, CollisionHeightfieldMeshCache3D__triangleMesh3D>).set(heightfield, (cast cache)));
+      ((cast _Collision.collisionHeightfieldMeshes3D__triangleMesh3D : flight._internal._WeakMap<CollisionHeightfield3D, CollisionHeightfieldMeshCache3D__triangleMesh3D>).set((cast heightfield), (cast cache)));
     }
     mesh = (cast cache : CollisionHeightfieldMeshCache3D__triangleMesh3D).mesh;
     ((cast mesh : CollisionTriangleMesh3D).x = _Runtime.field(heightfield, 'x'));
@@ -7911,10 +7911,10 @@ class _Collision {
 
   public static function getCollisionTriangleMeshAcceleration3D__triangleMesh3D(mesh:CollisionTriangleMesh3D):CollisionTriangleMeshAcceleration3D__triangleMesh3D {
     var acceleration:Null<CollisionTriangleMeshAcceleration3D__triangleMesh3D> = cast _Runtime.UNDEFINED;
-    acceleration = ((cast _Collision.collisionTriangleMeshAccelerations3D__triangleMesh3D : flight._internal._WeakMap<CollisionTriangleMesh3D, CollisionTriangleMeshAcceleration3D__triangleMesh3D>).get(mesh));
+    acceleration = ((cast _Collision.collisionTriangleMeshAccelerations3D__triangleMesh3D : flight._internal._WeakMap<CollisionTriangleMesh3D, CollisionTriangleMeshAcceleration3D__triangleMesh3D>).get((cast mesh)));
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(acceleration, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals((cast acceleration : CollisionTriangleMeshAcceleration3D__triangleMesh3D).points, _Runtime.field(mesh, 'points')) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast acceleration : CollisionTriangleMeshAcceleration3D__triangleMesh3D).indices, _Runtime.field(mesh, 'indices')) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast acceleration : CollisionTriangleMeshAcceleration3D__triangleMesh3D).version, _Runtime.field(mesh, 'version')) : Bool)) : Bool)) {
       (acceleration = cast ((cast _Collision.buildCollisionTriangleMeshAcceleration3D__triangleMesh3D(({ final __callArgument1733:Dynamic = mesh; __callArgument1733; })) : CollisionTriangleMeshAcceleration3D__triangleMesh3D) : Dynamic));
-      ((cast _Collision.collisionTriangleMeshAccelerations3D__triangleMesh3D : flight._internal._WeakMap<CollisionTriangleMesh3D, CollisionTriangleMeshAcceleration3D__triangleMesh3D>).set(mesh, (cast acceleration)));
+      ((cast _Collision.collisionTriangleMeshAccelerations3D__triangleMesh3D : flight._internal._WeakMap<CollisionTriangleMesh3D, CollisionTriangleMeshAcceleration3D__triangleMesh3D>).set((cast mesh), (cast acceleration)));
     }
     return cast acceleration;
     return cast null;

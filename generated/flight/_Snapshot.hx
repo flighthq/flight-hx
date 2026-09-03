@@ -68,14 +68,14 @@ class _Snapshot {
     visit = (cast function(value:flight._internal._Any):Void {
       var kind:Null<String> = cast _Runtime.UNDEFINED;
       if ((cast ((cast _Runtime.strictEquals(value, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool)) : Bool)) { return; }
-      if ((cast ((cast seen : flight._internal._Set<flight._internal._Object>).has(value)) : Bool)) {
+      if ((cast ((cast seen : flight._internal._Set<flight._internal._Object>).has((cast value))) : Bool)) {
         (cyclic = cast (true : Dynamic));
         return;
       }
-      ((cast seen : flight._internal._Set<flight._internal._Object>).add(value));
+      ((cast seen : flight._internal._Set<flight._internal._Object>).add((cast value)));
       kind = (cast _Snapshot.nonPlainSnapshotKind__enableSnapshotGuards(({ final __callArgument6:Dynamic = value; __callArgument6; })) : Null<String>);
       if ((cast !_Runtime.strictEquals(kind, null) : Bool)) {
-        ((cast nonPlain : flight._internal._Set<String>).add(kind));
+        ((cast nonPlain : flight._internal._Set<String>).add((cast kind)));
         return;
       }
       if ((cast _Runtime.isArray(value) : Bool)) {
@@ -186,7 +186,7 @@ class _Snapshot {
       var aValue:flight._internal._Any = _Runtime.getIndex(aRecord, key);
       var bValue:flight._internal._Any = _Runtime.getIndex(bRecord, key);
       if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(aValue), 'number') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(bValue), 'number') : Bool)) : Bool)) {
-        _Runtime.setIndex(outRecord, key, ((cast ((cast _Runtime.strictEquals(paths, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast paths : flight._internal._Set<String>).has((cast _Snapshot.snapshotPath__interpolateSnapshots((cast prefix : String), (cast key : String)) : String))) : Bool)) : Bool) ? (cast (cast lerp((cast aValue : Float), (cast bValue : Float), (cast t : Float)) : Float) : Dynamic) : (cast bValue : Dynamic)));
+        _Runtime.setIndex(outRecord, key, ((cast ((cast _Runtime.strictEquals(paths, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast paths : flight._internal._Set<String>).has((cast (cast _Snapshot.snapshotPath__interpolateSnapshots((cast prefix : String), (cast key : String)) : String)))) : Bool)) : Bool) ? (cast (cast lerp((cast aValue : Float), (cast bValue : Float), (cast t : Float)) : Float) : Dynamic) : (cast bValue : Dynamic)));
         continue;
       }
       if ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(aValue, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(aValue), 'object') : Bool)) : Bool) && (cast !_Runtime.strictEquals(bValue, null) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(bValue), 'object') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.isArray(aValue), _Runtime.isArray(bValue)) : Bool)) : Bool)) {

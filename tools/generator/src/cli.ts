@@ -73,7 +73,14 @@ try {
       if (!typedStructProvenance) throw new Error('Expected typed-struct provenance audit');
       if (!entityFactoryClosure) throw new Error('Expected Entity factory closure audit');
       if (!hostEndpoints) throw new Error('Expected host-endpoint audit');
-      const core = generateCoreModules(workspaceDirectory, check, typedStructs, typedStructProvenance, hostEndpoints);
+      const core = generateCoreModules(
+        workspaceDirectory,
+        check,
+        typedStructs,
+        typedStructProvenance,
+        entityFactoryClosure,
+        hostEndpoints,
+      );
       for (const excluded of core.excludedPackages) {
         process.stderr.write(`Excluded (not translated): ${excluded.packageName} — ${excluded.reason}\n`);
       }

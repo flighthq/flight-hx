@@ -36,7 +36,7 @@ class _MediaSession {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signal : MediaSessionActionSignal).onAction], [details]]), 1);
     } : Dynamic));
     if ((cast _Runtime.strictEquals(unsubscribe, null) : Bool)) { return cast false; }
-    ((cast _MediaSession._actionSubscriptions__mediasession : flight._internal._WeakMap<MediaSessionActionSignal, Void->Void>).set(signal, (cast unsubscribe)));
+    ((cast _MediaSession._actionSubscriptions__mediasession : flight._internal._WeakMap<MediaSessionActionSignal, Void->Void>).set((cast signal), (cast unsubscribe)));
     return cast true;
     return cast null;
   }
@@ -52,7 +52,7 @@ class _MediaSession {
   }
 
   public static function createMediaSessionActionSignal(action:MediaSessionAction):MediaSessionActionSignal {
-    return cast (cast createEntity((cast ({ action: action, onAction: (cast createSignal() : Signal<MediaSessionActionDetails->Void>) } : MediaSessionActionSignal) : Dynamic)) : MediaSessionActionSignal);
+    return cast (cast createEntity((cast ({ action: (cast action : Dynamic), onAction: (cast (cast createSignal() : Signal<MediaSessionActionDetails->Void>) : Dynamic) } : MediaSessionActionSignal) : Dynamic)) : MediaSessionActionSignal);
     return cast null;
   }
 
@@ -75,10 +75,10 @@ class _MediaSession {
 
   public static function detachMediaSessionAction(signal:MediaSessionActionSignal):Void {
     var unsubscribe:Null<Void->Void> = cast _Runtime.UNDEFINED;
-    unsubscribe = ((cast _MediaSession._actionSubscriptions__mediasession : flight._internal._WeakMap<MediaSessionActionSignal, Void->Void>).get(signal));
+    unsubscribe = ((cast _MediaSession._actionSubscriptions__mediasession : flight._internal._WeakMap<MediaSessionActionSignal, Void->Void>).get((cast signal)));
     if ((cast _Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     unsubscribe();
-    ((cast _MediaSession._actionSubscriptions__mediasession : flight._internal._WeakMap<MediaSessionActionSignal, Void->Void>).delete_(signal));
+    ((cast _MediaSession._actionSubscriptions__mediasession : flight._internal._WeakMap<MediaSessionActionSignal, Void->Void>).delete_((cast signal)));
   }
 
   public static function disposeMediaSessionActionSignal(signal:MediaSessionActionSignal):Void {

@@ -224,19 +224,19 @@ class _Scene3DResources {
   }
 
   public static function areScene3DResourceFailureGuardsEnabled(resolver:Scene3DResourceResolver):Bool {
-    return cast ((cast _Scene3DResources._guards__enableScene3DResourceFailureGuards : flight._internal._WeakMap<Scene3DResourceResolver, Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards>).has(resolver));
+    return cast ((cast _Scene3DResources._guards__enableScene3DResourceFailureGuards : flight._internal._WeakMap<Scene3DResourceResolver, Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards>).has((cast resolver)));
     return cast null;
   }
 
   public static function disableScene3DResourceFailureGuards(resolver:Scene3DResourceResolver):Void {
     var guard:Null<Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards> = cast _Runtime.UNDEFINED;
     var signals:Scene3DResourceSignals = cast _Runtime.UNDEFINED;
-    guard = ((cast _Scene3DResources._guards__enableScene3DResourceFailureGuards : flight._internal._WeakMap<Scene3DResourceResolver, Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards>).get(resolver));
+    guard = ((cast _Scene3DResources._guards__enableScene3DResourceFailureGuards : flight._internal._WeakMap<Scene3DResourceResolver, Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards>).get((cast resolver)));
     if ((cast _Runtime.strictEquals(guard, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     signals = (cast enableScene3DResourceSignals(({ final __callArgument26:Dynamic = resolver; __callArgument26; })) : Scene3DResourceSignals);
     disconnectSignal((cast signals.onResourceFailed : Dynamic), (cast guard : Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards).failed);
     disconnectSignal((cast signals.onResourceResolved : Dynamic), (cast guard : Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards).resolved);
-    ((cast _Scene3DResources._guards__enableScene3DResourceFailureGuards : flight._internal._WeakMap<Scene3DResourceResolver, Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards>).delete_(resolver));
+    ((cast _Scene3DResources._guards__enableScene3DResourceFailureGuards : flight._internal._WeakMap<Scene3DResourceResolver, Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards>).delete_((cast resolver)));
   }
 
   public static function enableScene3DResourceFailureGuards(resolver:Scene3DResourceResolver):Void->Void {
@@ -244,22 +244,22 @@ class _Scene3DResources {
     var signals:Scene3DResourceSignals = cast _Runtime.UNDEFINED;
     var failed:Scene3DResourceEvent->Void = cast _Runtime.UNDEFINED;
     var resolved:Scene3DResourceEvent->Void = cast _Runtime.UNDEFINED;
-    if ((cast ((cast _Scene3DResources._guards__enableScene3DResourceFailureGuards : flight._internal._WeakMap<Scene3DResourceResolver, Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards>).has(resolver)) : Bool)) { return cast function():Void { disableScene3DResourceFailureGuards(({ final __callArgument28:Dynamic = resolver; __callArgument28; })); }; }
+    if ((cast ((cast _Scene3DResources._guards__enableScene3DResourceFailureGuards : flight._internal._WeakMap<Scene3DResourceResolver, Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards>).has((cast resolver))) : Bool)) { return cast function():Void { disableScene3DResourceFailureGuards(({ final __callArgument28:Dynamic = resolver; __callArgument28; })); }; }
     warned = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
     signals = (cast enableScene3DResourceSignals(({ final __callArgument30:Dynamic = resolver; __callArgument30; })) : Scene3DResourceSignals);
     failed = (cast function(event:Scene3DResourceEvent):Void {
       var explanation:ImageResourceReferenceResolutionExplanation = cast _Runtime.UNDEFINED;
-      if ((cast ((cast ((cast warned : flight._internal._WeakMap<ImageResourceReference, Null<ImageResourceFailure>>).has(event.ref)) : Bool) && (cast _Runtime.strictEquals(((cast warned : flight._internal._WeakMap<ImageResourceReference, Null<ImageResourceFailure>>).get(event.ref)), (cast event.ref : { var failure:Null<ImageResourceFailure>; }).failure) : Bool)) : Bool)) { return; }
-      ((cast warned : flight._internal._WeakMap<ImageResourceReference, Null<ImageResourceFailure>>).set(event.ref, (cast (cast event.ref : { var failure:Null<ImageResourceFailure>; }).failure)));
+      if ((cast ((cast ((cast warned : flight._internal._WeakMap<ImageResourceReference, Null<ImageResourceFailure>>).has((cast event.ref))) : Bool) && (cast _Runtime.strictEquals(((cast warned : flight._internal._WeakMap<ImageResourceReference, Null<ImageResourceFailure>>).get((cast event.ref))), (cast event.ref : { var failure:Null<ImageResourceFailure>; }).failure) : Bool)) : Bool)) { return; }
+      ((cast warned : flight._internal._WeakMap<ImageResourceReference, Null<ImageResourceFailure>>).set((cast event.ref), (cast (cast event.ref : { var failure:Null<ImageResourceFailure>; }).failure)));
       explanation = (cast explainImageResourceReferenceResolution(event.ref) : ImageResourceReferenceResolutionExplanation);
       (cast logOnce((cast 'scene-resources:image-resource-resolution-failed:' + Std.string(++_Scene3DResources._attemptId__enableScene3DResourceFailureGuards) + '' : String), ({ final __callArgument32:Dynamic = LogLevel.Warn; __callArgument32; }), (cast { failureKind: _Runtime.coalesce(({ final __structural33 = (cast explanation : ImageResourceReferenceResolutionExplanation).failure; __structural33 == null ? _Runtime.UNDEFINED : (cast __structural33 : { var kind:ImageResourceFailureKind; }).kind; }), function():Dynamic return cast null), failureName: _Runtime.coalesce(({ final __structural34 = (cast explanation : ImageResourceReferenceResolutionExplanation).failure; __structural34 == null ? _Runtime.UNDEFINED : (cast __structural34 : { var name:Null<String>; }).name; }), function():Dynamic return cast null), failureMessage: _Runtime.coalesce(({ final __structural35 = (cast explanation : ImageResourceReferenceResolutionExplanation).failure; __structural35 == null ? _Runtime.UNDEFINED : (cast __structural35 : { var message:String; }).message; }), function():Dynamic return cast null), message: 'Scene3D resource acquisition failed — call retryFailedScene3DResources to request it again', resourceKind: (cast explanation : ImageResourceReferenceResolutionExplanation).kind } : Dynamic), ({ final __callArgument36:Dynamic = 'scene-resources'; __callArgument36; })) : Bool);
     });
     resolved = (cast function(event:Scene3DResourceEvent):Void {
-      ((cast warned : flight._internal._WeakMap<ImageResourceReference, Null<ImageResourceFailure>>).delete_(event.ref));
+      ((cast warned : flight._internal._WeakMap<ImageResourceReference, Null<ImageResourceFailure>>).delete_((cast event.ref)));
     });
     (#if js _Runtime.callValue(connectSignal, cast ([(cast signals.onResourceFailed : Dynamic), ({ final __callArgument43:Dynamic = failed; __callArgument43; })] : Array<Dynamic>)) #else connectSignal((cast signals.onResourceFailed : Dynamic), ({ final __callArgument42:Dynamic = failed; __callArgument42; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     (#if js _Runtime.callValue(connectSignal, cast ([(cast signals.onResourceResolved : Dynamic), ({ final __callArgument45:Dynamic = resolved; __callArgument45; })] : Array<Dynamic>)) #else connectSignal((cast signals.onResourceResolved : Dynamic), ({ final __callArgument44:Dynamic = resolved; __callArgument44; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    ((cast _Scene3DResources._guards__enableScene3DResourceFailureGuards : flight._internal._WeakMap<Scene3DResourceResolver, Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards>).set(resolver, (cast { failed: failed, resolved: resolved })));
+    ((cast _Scene3DResources._guards__enableScene3DResourceFailureGuards : flight._internal._WeakMap<Scene3DResourceResolver, Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards>).set((cast resolver), (cast { failed: failed, resolved: resolved })));
     return cast function():Void { disableScene3DResourceFailureGuards(({ final __callArgument46:Dynamic = resolver; __callArgument46; })); };
     return cast null;
   }
@@ -329,8 +329,8 @@ class _Scene3DResources {
     seen = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
     for (resource in _Runtime.iterable(scene.resources)) {
       for (texture in _Runtime.iterable(_Runtime.coalesce((cast resource : { @:optional var textures:Null<Array<Texture>>; }).textures, function():Dynamic return cast cast ([] : Array<Dynamic>)))) {
-        if ((cast ((cast seen : flight._internal._Set<Texture>).has(texture)) : Bool)) { continue; }
-        ((cast seen : flight._internal._Set<Texture>).add(texture));
+        if ((cast ((cast seen : flight._internal._Set<Texture>).has((cast texture))) : Bool)) { continue; }
+        ((cast seen : flight._internal._Set<Texture>).add((cast texture)));
         _Runtime.callProperty(out, 'push', cast ([texture] : Array<Dynamic>));
       }
     }
@@ -437,7 +437,7 @@ class _Scene3DResources {
         uris = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
         for (buffer in _Runtime.iterable(_Runtime.coalesce(gltf.buffers, function():Dynamic return cast cast ([] : Array<Dynamic>)))) {
           var uri:Null<String> = buffer.uri;
-          if ((cast ((cast !_Runtime.strictEquals(uri, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast StringTools.startsWith(uri, 'data:') : Bool) : Bool)) : Bool)) { ((cast uris : flight._internal._Set<String>).add(uri)); }
+          if ((cast ((cast !_Runtime.strictEquals(uri, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast StringTools.startsWith(uri, 'data:') : Bool) : Bool)) : Bool)) { ((cast uris : flight._internal._Set<String>).add((cast uri))); }
         }
         externalBuffers = {  };
         entries = _Runtime.concatArrays([_Runtime.toArray(uris)]);
@@ -551,14 +551,14 @@ class _Scene3DResources {
         {
           var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field((cast resources : Scene3DResources).resolved, 'length') : Float)) : Bool)) {
-            ((cast refs : flight._internal._Set<ImageResourceReference>).add((cast flight._internal._StaticIndex.readArray((cast resources : Scene3DResources).resolved, i) : Scene3DResourceResolution).ref));
+            ((cast refs : flight._internal._Set<ImageResourceReference>).add((cast (cast flight._internal._StaticIndex.readArray((cast resources : Scene3DResources).resolved, i) : Scene3DResourceResolution).ref)));
             i++;
           }
         }
         {
           var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field((cast resources : Scene3DResources).unresolved, 'length') : Float)) : Bool)) {
-            ((cast refs : flight._internal._Set<ImageResourceReference>).add((cast flight._internal._StaticIndex.readArray((cast resources : Scene3DResources).unresolved, i) : Scene3DResourceWorkingSet).ref));
+            ((cast refs : flight._internal._Set<ImageResourceReference>).add((cast (cast flight._internal._StaticIndex.readArray((cast resources : Scene3DResources).unresolved, i) : Scene3DResourceWorkingSet).ref)));
             i++;
           }
         }
@@ -572,7 +572,7 @@ class _Scene3DResources {
             loaded++;
             continue;
           }
-          var entry:Null<Scene3DResourceInFlight> = ((cast runtime.inFlight : flight._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).get(ref));
+          var entry:Null<Scene3DResourceInFlight> = ((cast runtime.inFlight : flight._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).get((cast ref)));
           if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
           _Runtime.callProperty(pending, 'push', cast ([_Runtime.callProperty((cast entry : { var promise:flight._internal._Promise<flight._internal._Nothing>; }).promise, 'then', cast ([function(__unused0:flight._internal._Nothing):Void {
             loaded++;
@@ -714,15 +714,15 @@ class _Scene3DResources {
         if ((cast _Runtime.looseEquals(ref, null) : Bool)) { i++; continue; }
         var source:Null<TextureSource> = ((cast _Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool) ? (cast (cast texture : Texture2D).source : Dynamic) : (cast null : Dynamic));
         if ((cast !_Runtime.strictEquals(source, null) : Bool)) {
-          ((cast runtime.resolved : flight._internal._Map<ImageResourceReference, TextureSource>).set(ref, (cast source)));
+          ((cast runtime.resolved : flight._internal._Map<ImageResourceReference, TextureSource>).set((cast ref), (cast source)));
           ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = null);
           ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved);
         }
         if ((cast ((cast !_Runtime.strictEquals(({ final __structural264 = options; __structural264 == null ? _Runtime.UNDEFINED : (cast __structural264 : { @:optional var select:Null<Texture->ImageResourceReference->Bool>; }).select; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast _Runtime.callProperty(options, 'select', cast ([texture, ref] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { i++; continue; }
-        var subscribers:Null<Array<Texture>> = ((cast working : flight._internal._Map<ImageResourceReference, Array<Texture>>).get(ref));
+        var subscribers:Null<Array<Texture>> = ((cast working : flight._internal._Map<ImageResourceReference, Array<Texture>>).get((cast ref)));
         if ((cast _Runtime.strictEquals(subscribers, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           (subscribers = cast (cast ([] : Array<Dynamic>) : Dynamic));
-          ((cast working : flight._internal._Map<ImageResourceReference, Array<Texture>>).set(ref, (cast subscribers)));
+          ((cast working : flight._internal._Map<ImageResourceReference, Array<Texture>>).set((cast ref), (cast subscribers)));
         }
         _Runtime.callProperty(subscribers, 'push', cast ([texture] : Array<Dynamic>));
         i++;
@@ -733,7 +733,7 @@ class _Scene3DResources {
     for (__iteration0 in _Runtime.iterable(working)) {
       var ref:ImageResourceReference = flight._internal._StaticIndex.readArray(__iteration0, 0.0);
       var subscribers:Array<Texture> = flight._internal._StaticIndex.readArray(__iteration0, 1.0);
-      var source:Null<TextureSource> = ((cast runtime.resolved : flight._internal._Map<ImageResourceReference, TextureSource>).get(ref));
+      var source:Null<TextureSource> = ((cast runtime.resolved : flight._internal._Map<ImageResourceReference, TextureSource>).get((cast ref)));
       if ((cast _Runtime.strictEquals(source, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         if ((cast _Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved) : Bool)) { ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Unresolved); }
         _Runtime.callProperty(unresolved, 'push', cast ([{ ref: ref, textures: subscribers }] : Array<Dynamic>));
@@ -771,7 +771,7 @@ class _Scene3DResources {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(groups, 'length') : Float)) : Bool)) {
-        ((cast out : flight._internal._Map<ImageResourceReference, Array<Texture>>).set((cast flight._internal._StaticIndex.readArray(groups, i) : Scene3DResourceWorkingSet).ref, (cast (cast flight._internal._StaticIndex.readArray(groups, i) : Scene3DResourceWorkingSet).textures)));
+        ((cast out : flight._internal._Map<ImageResourceReference, Array<Texture>>).set((cast (cast flight._internal._StaticIndex.readArray(groups, i) : Scene3DResourceWorkingSet).ref), (cast (cast flight._internal._StaticIndex.readArray(groups, i) : Scene3DResourceWorkingSet).textures)));
         i++;
       }
     }
@@ -783,20 +783,20 @@ class _Scene3DResources {
     for (__iteration1 in _Runtime.iterable(runtime.inFlight)) {
       var ref:ImageResourceReference = flight._internal._StaticIndex.readArray(__iteration1, 0.0);
       var entry:Scene3DResourceInFlight = flight._internal._StaticIndex.readArray(__iteration1, 1.0);
-      var subscribers:Null<Array<Texture>> = ((cast working : flight._internal._Map<ImageResourceReference, Array<Texture>>).get(ref));
+      var subscribers:Null<Array<Texture>> = ((cast working : flight._internal._Map<ImageResourceReference, Array<Texture>>).get((cast ref)));
       if ((cast ((cast !_Runtime.strictEquals(subscribers, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(subscribers, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
         ((cast entry.subscribers : flight._internal._Set<Texture>).clear());
         {
           var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(subscribers, 'length') : Float)) : Bool)) {
-            ((cast entry.subscribers : flight._internal._Set<Texture>).add(flight._internal._StaticIndex.readArray(subscribers, i)));
+            ((cast entry.subscribers : flight._internal._Set<Texture>).add((cast flight._internal._StaticIndex.readArray(subscribers, i))));
             i++;
           }
         }
         continue;
       }
       (cast entry.controller : flight._internal.dom.AbortController).abort();
-      ((cast runtime.inFlight : flight._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).delete_(ref));
+      ((cast runtime.inFlight : flight._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).delete_((cast ref)));
       if ((cast _Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Loading) : Bool)) {
         ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Unresolved);
       }
@@ -806,8 +806,8 @@ class _Scene3DResources {
   public static function finishScene3DResourceResolution__resolveScene3DResources(resolver:Scene3DResourceResolver, ref:ImageResourceReference, entry:Scene3DResourceInFlight, source:Null<TextureSource>):Void {
     var runtime:Scene3DResourceResolverRuntime = cast _Runtime.UNDEFINED;
     runtime = _Runtime.getIndex((cast resolver : Scene3DResourceResolverWithRuntime), Scene3DResourceResolverRuntimeKey);
-    if ((cast !_Runtime.strictEquals(((cast runtime.inFlight : flight._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).get(ref)), entry) : Bool)) { return; }
-    ((cast runtime.inFlight : flight._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).delete_(ref));
+    if ((cast !_Runtime.strictEquals(((cast runtime.inFlight : flight._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).get((cast ref))), entry) : Bool)) { return; }
+    ((cast runtime.inFlight : flight._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).delete_((cast ref)));
     if ((cast _Runtime.strictEquals(source, null) : Bool)) {
       ({ final __nullishOwner297 = ref; final __nullishValue298:Null<ImageResourceFailure> = cast (cast __nullishOwner297 : { var failure:Null<ImageResourceFailure>; }).failure; __nullishValue298 == null ? ((cast __nullishOwner297 : { var failure:Null<ImageResourceFailure>; }).failure = (cast { kind: (cast ImageResourceFailureKindValue : { var Error:String; var Unavailable:String; }).Unavailable, message: 'Image resource resolution returned no source', name: null } : Null<ImageResourceFailure>)) : (cast __nullishValue298 : Null<ImageResourceFailure>); });
       ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed);
@@ -816,7 +816,7 @@ class _Scene3DResources {
       }
       return;
     }
-    ((cast runtime.resolved : flight._internal._Map<ImageResourceReference, TextureSource>).set(ref, (cast source)));
+    ((cast runtime.resolved : flight._internal._Map<ImageResourceReference, TextureSource>).set((cast ref), (cast source)));
     ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = null);
     ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved);
     for (texture in _Runtime.iterable(entry.subscribers)) {
@@ -827,8 +827,8 @@ class _Scene3DResources {
   public static function failScene3DResourceResolution__resolveScene3DResources(resolver:Scene3DResourceResolver, ref:ImageResourceReference, entry:Scene3DResourceInFlight, cause:flight._internal._Any):Void {
     var runtime:Scene3DResourceResolverRuntime = cast _Runtime.UNDEFINED;
     runtime = _Runtime.getIndex((cast resolver : Scene3DResourceResolverWithRuntime), Scene3DResourceResolverRuntimeKey);
-    if ((cast !_Runtime.strictEquals(((cast runtime.inFlight : flight._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).get(ref)), entry) : Bool)) { return; }
-    ((cast runtime.inFlight : flight._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).delete_(ref));
+    if ((cast !_Runtime.strictEquals(((cast runtime.inFlight : flight._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).get((cast ref))), entry) : Bool)) { return; }
+    ((cast runtime.inFlight : flight._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).delete_((cast ref)));
     if ((cast (cast (cast entry.controller : flight._internal.dom.AbortController).signal : flight._internal.dom.AbortSignal).aborted : Bool)) { return; }
     ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = (cast createImageResourceFailure((cast cause : flight._internal._Any)) : ImageResourceFailure));
     ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed);
@@ -860,7 +860,7 @@ class _Scene3DResources {
     for (__iteration2 in _Runtime.iterable(working)) {
       var ref:ImageResourceReference = flight._internal._StaticIndex.readArray(__iteration2, 0.0);
       var subscribers:Array<Texture> = flight._internal._StaticIndex.readArray(__iteration2, 1.0);
-      var resolved:Null<TextureSource> = ((cast runtime.resolved : flight._internal._Map<ImageResourceReference, TextureSource>).get(ref));
+      var resolved:Null<TextureSource> = ((cast runtime.resolved : flight._internal._Map<ImageResourceReference, TextureSource>).get((cast ref)));
       if ((cast !_Runtime.strictEquals(resolved, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = null);
         ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved);
@@ -873,7 +873,7 @@ class _Scene3DResources {
         }
         continue;
       }
-      if ((cast ((cast runtime.inFlight : flight._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).has(ref)) : Bool)) { continue; }
+      if ((cast ((cast runtime.inFlight : flight._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).has((cast ref))) : Bool)) { continue; }
       if ((cast _Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved) : Bool)) { ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Unresolved); }
       if ((cast !_Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Unresolved) : Bool)) { continue; }
       ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = null);
@@ -898,7 +898,7 @@ class _Scene3DResources {
       var entry:Scene3DResourceInFlight = cast _Runtime.UNDEFINED;
       entry = (cast { controller: controller, promise: _Scene3DResources._resolvedVoid__resolveScene3DResources, subscribers: _Runtime.construct(flight._internal._HostValueLut.get('Set'), [subscribers]) });
       (entry.promise = cast (_Runtime.callProperty(handle.promise, 'then', cast ([function(source:Null<TextureSource>):Void { _Scene3DResources.finishScene3DResourceResolution__resolveScene3DResources(({ final __callArgument349:Dynamic = resolver; __callArgument349; }), ({ final __callArgument350:Dynamic = ref; __callArgument350; }), ({ final __callArgument351:Dynamic = entry; __callArgument351; }), ({ final __callArgument352:Dynamic = source; __callArgument352; })); }, function(cause:flight._internal._Any):Void { _Scene3DResources.failScene3DResourceResolution__resolveScene3DResources(({ final __callArgument357:Dynamic = resolver; __callArgument357; }), ({ final __callArgument358:Dynamic = ref; __callArgument358; }), ({ final __callArgument359:Dynamic = entry; __callArgument359; }), (cast cause : flight._internal._Any)); }] : Array<Dynamic>)) : flight._internal._Promise<flight._internal._Nothing>));
-      ((cast runtime.inFlight : flight._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).set(ref, (cast entry)));
+      ((cast runtime.inFlight : flight._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).set((cast ref), (cast entry)));
     }
   }
 
@@ -924,11 +924,11 @@ class _Scene3DResources {
     signals = (cast enableScene3DResourceSignals(({ final __callArgument372:Dynamic = resolver; __callArgument372; })) : Scene3DResourceSignals);
     slot = (cast function(event:{ var texture:Texture; }):Void {
       var textureOwners:Null<Array<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>> = cast _Runtime.UNDEFINED;
-      textureOwners = ((cast ownersByTexture : flight._internal._Map<Texture, Array<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>>).get((cast event : { var texture:Texture; }).texture));
+      textureOwners = ((cast ownersByTexture : flight._internal._Map<Texture, Array<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>>).get((cast (cast event : { var texture:Texture; }).texture)));
       if ((cast _Runtime.strictEquals(textureOwners, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-      ((cast ownersByTexture : flight._internal._Map<Texture, Array<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>>).delete_((cast event : { var texture:Texture; }).texture));
+      ((cast ownersByTexture : flight._internal._Map<Texture, Array<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>>).delete_((cast (cast event : { var texture:Texture; }).texture)));
       for (owner in _Runtime.iterable(textureOwners)) {
-        ((cast (cast owner : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).pending : flight._internal._Set<Texture>).delete_((cast event : { var texture:Texture; }).texture));
+        ((cast (cast owner : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).pending : flight._internal._Set<Texture>).delete_((cast (cast event : { var texture:Texture; }).texture)));
         if ((cast _Runtime.strictEquals((cast (cast owner : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).pending : flight._internal._Set<Texture>).size, 0.0) : Bool)) {
           (cast createTween(({ final __callArgument376:Dynamic = tweenManager; __callArgument376; }), (cast owner : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).node, (cast fadeSeconds : Float), (cast { alpha: 1.0 } : Dynamic), (cast tweenOptions : Dynamic)) : Tween<Node3D>);
         }
@@ -968,18 +968,18 @@ class _Scene3DResources {
               var texture:Texture = flight._internal._StaticIndex.readArray(slots, j);
               var ref:Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>> = (cast getScene3DTextureResourceReference(({ final __callArgument382:Dynamic = scene; __callArgument382; }), ({ final __callArgument383:Dynamic = texture; __callArgument383; })) : Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>);
               if ((cast ((cast ((cast _Runtime.looseEquals(ref, null) : Bool) || (cast (cast hasTextureSource(({ final __callArgument386:Dynamic = texture; __callArgument386; })) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed) : Bool)) : Bool)) { j++; continue; }
-              var ownerState:Null<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve> = ((cast ownersByNode : flight._internal._Map<Node3D, Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>).get(owner));
+              var ownerState:Null<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve> = ((cast ownersByNode : flight._internal._Map<Node3D, Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>).get((cast owner)));
               if ((cast _Runtime.strictEquals(ownerState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
                 (ownerState = cast ({ node: owner, pending: _Runtime.construct(flight._internal._HostValueLut.get('Set'), []) } : Dynamic));
-                ((cast ownersByNode : flight._internal._Map<Node3D, Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>).set(owner, (cast ownerState)));
+                ((cast ownersByNode : flight._internal._Map<Node3D, Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>).set((cast owner), (cast ownerState)));
                 _Runtime.callProperty(owners, 'push', cast ([ownerState] : Array<Dynamic>));
               }
-              if ((cast ((cast (cast ownerState : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).pending : flight._internal._Set<Texture>).has(texture)) : Bool)) { j++; continue; }
-              ((cast (cast ownerState : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).pending : flight._internal._Set<Texture>).add(texture));
-              var textureOwners:Null<Array<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>> = ((cast ownersByTexture : flight._internal._Map<Texture, Array<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>>).get(texture));
+              if ((cast ((cast (cast ownerState : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).pending : flight._internal._Set<Texture>).has((cast texture))) : Bool)) { j++; continue; }
+              ((cast (cast ownerState : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).pending : flight._internal._Set<Texture>).add((cast texture)));
+              var textureOwners:Null<Array<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>> = ((cast ownersByTexture : flight._internal._Map<Texture, Array<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>>).get((cast texture)));
               if ((cast _Runtime.strictEquals(textureOwners, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
                 (textureOwners = cast (cast ([] : Array<Dynamic>) : Dynamic));
-                ((cast ownersByTexture : flight._internal._Map<Texture, Array<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>>).set(texture, (cast textureOwners)));
+                ((cast ownersByTexture : flight._internal._Map<Texture, Array<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>>).set((cast texture), (cast textureOwners)));
               }
               _Runtime.callProperty(textureOwners, 'push', cast ([ownerState] : Array<Dynamic>));
               j++;
@@ -1081,7 +1081,7 @@ class _Scene3DResources {
   @:allow(flight)
   @:keep
   private static function createScene3DMaterialTextureRegistry():Scene3DMaterialTextureRegistry {
-    return cast (cast createEntity(({ final __callArgument428:Dynamic = ({ extensionListers: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), listers: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []) } : Scene3DMaterialTextureRegistry); __callArgument428; })) : Scene3DMaterialTextureRegistry);
+    return cast (cast createEntity(({ final __callArgument428:Dynamic = ({ extensionListers: (cast _Runtime.construct(flight._internal._HostValueLut.get('Map'), []) : Dynamic), listers: (cast _Runtime.construct(flight._internal._HostValueLut.get('Map'), []) : Dynamic) } : Scene3DMaterialTextureRegistry); __callArgument428; })) : Scene3DMaterialTextureRegistry);
     return cast null;
   }
 
@@ -1089,14 +1089,14 @@ class _Scene3DResources {
   @:keep
   private static function getScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry, material:Material, out:Array<Texture>):Void {
     var lister:Null<Scene3DMaterialTextureLister> = cast _Runtime.UNDEFINED;
-    lister = ((cast registry.listers : flight._internal._Map<String, Scene3DMaterialTextureLister>).get(_Runtime.field(material, 'kind')));
+    lister = ((cast registry.listers : flight._internal._Map<String, Scene3DMaterialTextureLister>).get((cast _Runtime.field(material, 'kind'))));
     if ((cast !_Runtime.strictEquals(lister, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { lister(({ final __callArgument430:Dynamic = material; __callArgument430; }), ({ final __callArgument431:Dynamic = out; __callArgument431; })); }
   }
 
   @:allow(flight)
   @:keep
   private static function hasScene3DMaterialTextureLister(registry:Scene3DMaterialTextureRegistry, kind:Kind):Bool {
-    return cast ((cast registry.listers : flight._internal._Map<String, Scene3DMaterialTextureLister>).has(kind));
+    return cast ((cast registry.listers : flight._internal._Map<String, Scene3DMaterialTextureLister>).has((cast kind)));
     return cast null;
   }
 
@@ -1111,7 +1111,7 @@ class _Scene3DResources {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(extended.extensions, 'length') : Float)) : Bool)) {
           var extension:PbrExtension = flight._internal._StaticIndex.readArray(extended.extensions, i);
-          var lister:Null<Scene3DPbrExtensionTextureLister> = ((cast registry.extensionListers : flight._internal._Map<String, Scene3DPbrExtensionTextureLister>).get(extension.kind));
+          var lister:Null<Scene3DPbrExtensionTextureLister> = ((cast registry.extensionListers : flight._internal._Map<String, Scene3DPbrExtensionTextureLister>).get((cast extension.kind)));
           if ((cast !_Runtime.strictEquals(lister, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { lister(({ final __callArgument437:Dynamic = extension; __callArgument437; }), ({ final __callArgument438:Dynamic = out; __callArgument438; })); }
           i++;
         }
@@ -1122,13 +1122,13 @@ class _Scene3DResources {
   @:allow(flight)
   @:keep
   private static function registerScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry, kind:Kind, lister:Scene3DMaterialTextureLister):Void {
-    ((cast registry.listers : flight._internal._Map<String, Scene3DMaterialTextureLister>).set(kind, (cast lister)));
+    ((cast registry.listers : flight._internal._Map<String, Scene3DMaterialTextureLister>).set((cast kind), (cast lister)));
   }
 
   @:allow(flight)
   @:keep
   private static function registerScene3DPbrExtensionTextures(registry:Scene3DMaterialTextureRegistry, kind:Kind, lister:Scene3DPbrExtensionTextureLister):Void {
-    ((cast registry.extensionListers : flight._internal._Map<String, Scene3DPbrExtensionTextureLister>).set(kind, (cast lister)));
+    ((cast registry.extensionListers : flight._internal._Map<String, Scene3DPbrExtensionTextureLister>).set((cast kind), (cast lister)));
   }
 
   @:allow(flight)
@@ -1172,9 +1172,9 @@ class _Scene3DResources {
       while ((cast ((cast i : Float) < (cast _Runtime.field(textures, 'length') : Float)) : Bool)) {
         var texture:Texture = flight._internal._StaticIndex.readArray(textures, i);
         var ref:Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>> = (cast getScene3DTextureResourceReference(({ final __callArgument466:Dynamic = scene; __callArgument466; }), ({ final __callArgument467:Dynamic = texture; __callArgument467; })) : Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>);
-        if ((cast ((cast _Runtime.looseEquals(ref, null) : Bool) || (cast ((cast reset : flight._internal._Set<ImageResourceReference>).has(ref)) : Bool)) : Bool)) { i++; continue; }
+        if ((cast ((cast _Runtime.looseEquals(ref, null) : Bool) || (cast ((cast reset : flight._internal._Set<ImageResourceReference>).has((cast ref))) : Bool)) : Bool)) { i++; continue; }
         if ((cast ((cast !_Runtime.strictEquals(({ final __typedStruct470 = options; __typedStruct470 == null ? _Runtime.UNDEFINED : __typedStruct470.select; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast (options.select)(({ final __callArgument471:Dynamic = texture; __callArgument471; }), ({ final __callArgument472:Dynamic = ref; __callArgument472; })) : Bool) : Bool)) : Bool)) { i++; continue; }
-        if ((cast (cast resetFailedImageResourceReference(({ final __callArgument473:Dynamic = ref; __callArgument473; })) : Bool) : Bool)) { ((cast reset : flight._internal._Set<ImageResourceReference>).add(ref)); }
+        if ((cast (cast resetFailedImageResourceReference(({ final __callArgument473:Dynamic = ref; __callArgument473; })) : Bool) : Bool)) { ((cast reset : flight._internal._Set<ImageResourceReference>).add((cast ref))); }
         i++;
       }
     }
@@ -1197,7 +1197,7 @@ class _Scene3DResources {
     var loader:ResourceLoader = cast _Runtime.UNDEFINED;
     loader = (cast createResourceLoader((cast { dedupe: false, maxConcurrent: ({ final __typedStruct483 = options; __typedStruct483 == null ? _Runtime.UNDEFINED : __typedStruct483.maxConcurrent; }), streaming: true } : Dynamic)) : ResourceLoader);
     startResourceLoad(({ final __callArgument485:Dynamic = loader; __callArgument485; }));
-    return cast (cast createEntity((cast (#if (flight_struct_typedef || js) _Runtime.objectFromPairs([{ key: 'fetch', value: _Runtime.coalesce(({ final __typedStruct487 = options; __typedStruct487 == null ? _Runtime.UNDEFINED : __typedStruct487.fetch; }), function():Dynamic return cast fetchWebImageResource) }, { key: 'registry', value: _Runtime.coalesce(({ final __typedStruct488 = options; __typedStruct488 == null ? _Runtime.UNDEFINED : __typedStruct488.registry; }), function():Dynamic return cast (cast createScene3DMaterialTextureRegistry() : Scene3DMaterialTextureRegistry)) }, { key: Scene3DResourceResolverRuntimeKey, value: { inFlight: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), loader: loader, resolved: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), signals: null } }]) #else ({ fetch: _Runtime.coalesce(({ final __typedStruct489 = options; __typedStruct489 == null ? _Runtime.UNDEFINED : __typedStruct489.fetch; }), function():Dynamic return cast fetchWebImageResource), registry: _Runtime.coalesce(({ final __typedStruct490 = options; __typedStruct490 == null ? _Runtime.UNDEFINED : __typedStruct490.registry; }), function():Dynamic return cast (cast createScene3DMaterialTextureRegistry() : Scene3DMaterialTextureRegistry)), __symbol__823d0845a4177b8034ca: { inFlight: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), loader: loader, resolved: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), signals: null } } : EntityShapeL42C23__sceneResourceResolver) #end) : Dynamic)) : EntityShapeL42C23__sceneResourceResolver);
+    return cast (cast createEntity((cast (#if (flight_struct_typedef || js) _Runtime.objectFromPairs([{ key: 'fetch', value: _Runtime.coalesce(({ final __typedStruct487 = options; __typedStruct487 == null ? _Runtime.UNDEFINED : __typedStruct487.fetch; }), function():Dynamic return cast fetchWebImageResource) }, { key: 'registry', value: _Runtime.coalesce(({ final __typedStruct488 = options; __typedStruct488 == null ? _Runtime.UNDEFINED : __typedStruct488.registry; }), function():Dynamic return cast (cast createScene3DMaterialTextureRegistry() : Scene3DMaterialTextureRegistry)) }, { key: Scene3DResourceResolverRuntimeKey, value: { inFlight: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), loader: loader, resolved: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), signals: null } }]) #else ({ fetch: (cast _Runtime.coalesce(({ final __typedStruct489 = options; __typedStruct489 == null ? _Runtime.UNDEFINED : __typedStruct489.fetch; }), function():Dynamic return cast fetchWebImageResource) : Dynamic), registry: (cast _Runtime.coalesce(({ final __typedStruct490 = options; __typedStruct490 == null ? _Runtime.UNDEFINED : __typedStruct490.registry; }), function():Dynamic return cast (cast createScene3DMaterialTextureRegistry() : Scene3DMaterialTextureRegistry)) : Dynamic), __symbol__823d0845a4177b8034ca: (cast { inFlight: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), loader: loader, resolved: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), signals: null } : Dynamic) } : EntityShapeL42C23__sceneResourceResolver) #end) : Dynamic)) : EntityShapeL42C23__sceneResourceResolver);
     return cast null;
   }
 
@@ -1216,7 +1216,7 @@ class _Scene3DResources {
   @:allow(flight)
   @:keep
   private static function createScene3DResourceSignals():Scene3DResourceSignals {
-    return cast (cast createEntity((cast ({ onResourceFailed: (cast createSignal() : Signal<Scene3DResourceEvent->Void>), onResourceResolved: (cast createSignal() : Signal<Scene3DResourceEvent->Void>) } : Scene3DResourceSignals) : Dynamic)) : Scene3DResourceSignals);
+    return cast (cast createEntity((cast ({ onResourceFailed: (cast (cast createSignal() : Signal<Scene3DResourceEvent->Void>) : Dynamic), onResourceResolved: (cast (cast createSignal() : Signal<Scene3DResourceEvent->Void>) : Dynamic) } : Scene3DResourceSignals) : Dynamic)) : Scene3DResourceSignals);
     return cast null;
   }
 

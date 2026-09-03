@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Notification)
+@:structInit
+class Notification {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var id:String;
+  public var tag:String;
+  public var title:String;
+
+  private function new(id:String, tag:String, title:String):Void {
+    this.__symbol__EntityRuntime = null;
+    this.id = id;
+    this.tag = tag;
+    this.title = title;
+  }
+}
+#else
 typedef Notification = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var id:String; var tag:String; var title:String; };
+#end

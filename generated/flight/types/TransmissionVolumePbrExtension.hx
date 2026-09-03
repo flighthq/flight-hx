@@ -4,4 +4,36 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Materials)
+@:structInit
+class TransmissionVolumePbrExtension {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var kind:String;
+  public var attenuationColor:Float;
+  public var attenuationDistance:Float;
+  public var ior:Float;
+  public var thickness:Float;
+  public var thicknessMap:Null<Texture>;
+  public var thicknessMapUvSet:PbrUvSet;
+  public var transmission:Float;
+  public var transmissionMap:Null<Texture>;
+  public var transmissionMapUvSet:PbrUvSet;
+
+  private function new(kind:String, attenuationColor:Float, attenuationDistance:Float, ior:Float, thickness:Float, thicknessMap:Null<Texture>, thicknessMapUvSet:PbrUvSet, transmission:Float, transmissionMap:Null<Texture>, transmissionMapUvSet:PbrUvSet):Void {
+    this.__symbol__EntityRuntime = null;
+    this.kind = kind;
+    this.attenuationColor = attenuationColor;
+    this.attenuationDistance = attenuationDistance;
+    this.ior = ior;
+    this.thickness = thickness;
+    this.thicknessMap = thicknessMap;
+    this.thicknessMapUvSet = thicknessMapUvSet;
+    this.transmission = transmission;
+    this.transmissionMap = transmissionMap;
+    this.transmissionMapUvSet = transmissionMapUvSet;
+  }
+}
+#else
 typedef TransmissionVolumePbrExtension = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var attenuationColor:Float; var attenuationDistance:Float; var ior:Float; var thickness:Float; var thicknessMap:Null<Texture>; var thicknessMapUvSet:PbrUvSet; var transmission:Float; var transmissionMap:Null<Texture>; var transmissionMapUvSet:PbrUvSet; };
+#end

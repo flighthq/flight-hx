@@ -4,4 +4,40 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Picking)
+@:structInit
+class Scene3DHit {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var node:Null<Mesh>;
+  public var distance:Float;
+  public var triangleIndex:Float;
+  public var u:Float;
+  public var v:Float;
+  public var w:Float;
+  public var pointX:Float;
+  public var pointY:Float;
+  public var pointZ:Float;
+  public var normalX:Float;
+  public var normalY:Float;
+  public var normalZ:Float;
+
+  private function new(node:Null<Mesh>, distance:Float, triangleIndex:Float, u:Float, v:Float, w:Float, pointX:Float, pointY:Float, pointZ:Float, normalX:Float, normalY:Float, normalZ:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.node = node;
+    this.distance = distance;
+    this.triangleIndex = triangleIndex;
+    this.u = u;
+    this.v = v;
+    this.w = w;
+    this.pointX = pointX;
+    this.pointY = pointY;
+    this.pointZ = pointZ;
+    this.normalX = normalX;
+    this.normalY = normalY;
+    this.normalZ = normalZ;
+  }
+}
+#else
 typedef Scene3DHit = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var node:Null<Mesh>; var distance:Float; var triangleIndex:Float; var u:Float; var v:Float; var w:Float; var pointX:Float; var pointY:Float; var pointZ:Float; var normalX:Float; var normalY:Float; var normalZ:Float; };
+#end

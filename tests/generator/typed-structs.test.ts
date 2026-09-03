@@ -4014,7 +4014,7 @@ describe('typed struct analysis', () => {
     expect(output).toContain('public var __symbol__EntityRuntime:Null<Dynamic>;');
     expect(output).toContain('this.__symbol__EntityRuntime = null;');
     expect(output).toContain(
-      'return ({ rotation: 0.0, viewportHeight: 480.0, viewportWidth: 640.0, x: 12.0, y: 34.0, zoom: 2.0 } : Camera2D);',
+      'return ({ rotation: (cast 0.0 : Dynamic), viewportHeight: (cast 480.0 : Dynamic), viewportWidth: (cast 640.0 : Dynamic), x: (cast 12.0 : Dynamic), y: (cast 34.0 : Dynamic), zoom: (cast 2.0 : Dynamic) } : Camera2D);',
     );
     expect(output).not.toContain('return cast { rotation: 0.0');
     const compilableOutput = output;
@@ -4139,7 +4139,7 @@ describe('typed struct analysis', () => {
     writeFileSync(
       path.join(packageDirectory, 'CameraPilot.hx'),
       compilableOutput.replace(
-        'return ({ rotation: 0.0, viewportHeight: 480.0, viewportWidth: 640.0, x: 12.0, y: 34.0, zoom: 2.0 } : Camera2D);',
+        'return ({ rotation: (cast 0.0 : Dynamic), viewportHeight: (cast 480.0 : Dynamic), viewportWidth: (cast 640.0 : Dynamic), x: (cast 12.0 : Dynamic), y: (cast 34.0 : Dynamic), zoom: (cast 2.0 : Dynamic) } : Camera2D);',
         'return cast { rotation: 0.0, viewportHeight: 480.0, viewportWidth: 640.0, x: 12.0, y: 34.0, zoom: 2.0 };',
       ),
     );
@@ -4430,6 +4430,48 @@ describe('typed struct analysis', () => {
     expect(output).toMatch(
       /function createWrappedProvider[\s\S]*\{ start: function\(\):Float[\s\S]*: EntityShapeL24C32/u,
     );
+  });
+
+  it('prefers a returned concrete Entity identity over its inferred base storage', () => {
+    const entityCandidate: TypedStructCandidate = {
+      emission: 'audit-only',
+      name: 'Entity',
+      packageName: '@flighthq/types',
+      purpose: 'base Entity fixture',
+      source: 'upstream/packages/entity/src/entity.ts',
+    };
+    const midiAccessCandidate: TypedStructCandidate = {
+      ...entityCandidate,
+      name: 'MidiAccess',
+      purpose: 'returned concrete Entity fixture',
+    };
+    const result = lowerFixture(
+      `
+        export interface Entity { __EntityRuntimeKey?: unknown; }
+        export interface MidiAccess extends Entity {}
+        export function createEntity<Type extends object>(obj: Type): Type & Entity {
+          return obj as Type & Entity;
+        }
+        export function createMidiAccess(): MidiAccess {
+          const access = createEntity({});
+          return access;
+        }
+      `,
+      entityCandidate,
+      [midiAccessCandidate],
+    );
+    const output = emitHaxeModule({
+      declarations: result.lowered.declarations,
+      haxePackage: 'flight',
+      imports: [],
+      name: 'ReturnedEntityFixture',
+      packageName: '@flighthq/entity',
+    });
+
+    expect(result.lowered.diagnostics).toEqual([]);
+    expect(output).toContain('var access:MidiAccess');
+    expect(output).toContain('} : MidiAccess)');
+    expect(output).not.toContain('var access:Entity');
   });
 
   it('censuses class migration flows and observability by canonical schema', () => {
@@ -5664,14 +5706,86 @@ describe('typed struct analysis', () => {
       `cpp @:structInit schemas are not provenance-closed: ${rectangleId}, ${rectangleLikeId}`,
     );
     expect(readFileSync('generated/flight/types/ParticleEmitter2D.hx', 'utf8')).toContain(
-      'typedef ParticleEmitter2D = { var data:ParticleEmitterData;',
+      '@:allow(flight._ParticleEmitter)\n@:structInit\nclass ParticleEmitter2D {',
     );
     expect(readFileSync('generated/flight/types/ParticleEmitter3D.hx', 'utf8')).toContain(
-      'typedef ParticleEmitter3D = { var data:ParticleEmitterData;',
+      '@:allow(flight._ParticleEmitter)\n@:structInit\nclass ParticleEmitter3D {',
     );
     expect(readFileSync('generated/flight/types/NodeData.hx', 'utf8')).toContain(
       'typedef NodeData = flight._internal._Object;',
     );
+    const additionalNominalClassNames = [
+      'Billboard',
+      'BitmapText',
+      'Camera2D',
+      'DisplayObject',
+      'HtmlView',
+      'Mesh',
+      'MorphShape',
+      'MovieClip',
+      'NativeText',
+      'Node2D',
+      'Node3D',
+      'ParticleEmitter2D',
+      'ParticleEmitter3D',
+      'ParticleEmitterState',
+      'QuadBatch',
+      'RichText',
+      'Scale9Shape',
+      'Shape',
+      'Sprite',
+      'TextLabel',
+      'Tilemap',
+    ];
+    const nominalClassNames = [
+      ...new Set([...entityFactories.schemas.map((schema) => schema.schemaName), ...additionalNominalClassNames]),
+    ].sort();
+    expect(entityFactories.schemas).toHaveLength(143);
+    expect(nominalClassNames).toHaveLength(164);
+    for (const name of nominalClassNames) {
+      const generated = readFileSync(`generated/flight/types/${name}.hx`, 'utf8');
+      expect(generated, name).toContain('#if !flight_struct_typedef');
+      expect(generated, name).toContain('@:allow(');
+      expect(generated, name).toContain('@:structInit');
+      expect(generated, name).toContain(`class ${name} {`);
+      expect(generated, name).toContain('private function new(');
+    }
+
+    const sealedConstructorDirectory = path.resolve('build/haxe-sealed-entity-constructor-fixture');
+    rmSync(sealedConstructorDirectory, { force: true, recursive: true });
+    mkdirSync(sealedConstructorDirectory, { recursive: true });
+    writeFileSync(
+      path.join(sealedConstructorDirectory, 'Main.hx'),
+      `
+        class Main {
+          static function main() {
+            new flight.types.MidiAccess();
+          }
+        }
+      `,
+    );
+    let sealedConstructorDiagnostic = '';
+    try {
+      execFileSync(
+        'node',
+        [
+          'tools/haxe.mjs',
+          '-cp',
+          sealedConstructorDirectory,
+          '-cp',
+          'src',
+          '-cp',
+          'generated',
+          '--main',
+          'Main',
+          '--interp',
+        ],
+        { cwd: path.resolve('.'), stdio: 'pipe' },
+      );
+    } catch (error) {
+      sealedConstructorDiagnostic = String((error as { stderr?: Buffer }).stderr ?? error);
+    }
+    expect(sealedConstructorDiagnostic).toContain('Cannot access private constructor');
 
     expect(report.summary).toEqual({
       auditOnlySchemas: report.candidates.filter((candidate) => candidate.emission.mode === 'audit-only').length,
@@ -9358,7 +9472,11 @@ describe('typed struct analysis', () => {
   });
 });
 
-function lowerFixture(text: string, candidate: TypedStructCandidate = fixtureCandidate) {
+function lowerFixture(
+  text: string,
+  candidate: TypedStructCandidate = fixtureCandidate,
+  additionalCandidates: readonly TypedStructCandidate[] = [],
+) {
   const workspace = '/workspace';
   const fileName = `${workspace}/${candidate.source}`;
   const options: ts.CompilerOptions = {
@@ -9376,7 +9494,13 @@ function lowerFixture(text: string, candidate: TypedStructCandidate = fixtureCan
   const source = program.getSourceFile(fileName);
   if (!source) throw new Error(`Fixture program is missing ${fileName}`);
   const checker = program.getTypeChecker();
-  const registry = createTypedStructRegistry(workspace, 'fixture', [candidate], program, checker);
+  const registry = createTypedStructRegistry(
+    workspace,
+    'fixture',
+    [candidate, ...additionalCandidates],
+    program,
+    checker,
+  );
   return {
     lowered: lowerTypeScriptSource(source, '@flighthq/types', workspace, checker, registry),
     registry,

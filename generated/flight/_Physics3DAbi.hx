@@ -867,57 +867,57 @@ class _Physics3DAbi {
       (nextWorldHandle = cast ((nextWorldHandle + 1.0) : Dynamic));
       world = (cast (#if js _Runtime.callValue(createPhysics3DWorld, cast ([] : Array<Dynamic>)) #else createPhysics3DWorld(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Physics3DWorld);
       registerBuiltInPhysics3DJointSolvers(({ final __callArgument106:Dynamic = world; __callArgument106; }));
-      ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).set(handle, (cast (cast _Physics3DAbi.createReferenceWorld__referencePhysics3DAbi(({ final __callArgument108:Dynamic = world; __callArgument108; })) : ReferencePhysics3DAbiWorld__referencePhysics3DAbi))));
+      ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).set((cast handle), (cast (cast _Physics3DAbi.createReferenceWorld__referencePhysics3DAbi(({ final __callArgument108:Dynamic = world; __callArgument108; })) : ReferencePhysics3DAbiWorld__referencePhysics3DAbi))));
       return cast handle;
       return cast _Runtime.UNDEFINED;
     }, destroyWorld: function(handle:Float):Bool {
-      if ((cast _Runtime.strictEquals(({ final __structural110 = ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).get(handle)); __structural110 == null ? _Runtime.UNDEFINED : (cast __structural110 : { var stepping:Bool; }).stepping; }), true) : Bool)) { return cast false; }
-      return cast ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).delete_(handle));
+      if ((cast _Runtime.strictEquals(({ final __structural110 = ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).get((cast handle))); __structural110 == null ? _Runtime.UNDEFINED : (cast __structural110 : { var stepping:Bool; }).stepping; }), true) : Bool)) { return cast false; }
+      return cast ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).delete_((cast handle)));
       return cast _Runtime.UNDEFINED;
     }, getWorldStatus: function(handle:Float):Physics3DAbiWorldStatus {
       var state:Null<ReferencePhysics3DAbiWorld__referencePhysics3DAbi> = cast _Runtime.UNDEFINED;
-      state = ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).get(handle));
+      state = ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).get((cast handle)));
       if ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast 'Stale'; }
       return cast ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).stepping : Bool) ? (cast 'Busy' : Dynamic) : (cast 'Ready' : Dynamic));
       return cast _Runtime.UNDEFINED;
     }, execute: function(handle:Float, commands:Physics3DAbiCommandBuffer, out:Physics3DAbiExecutionResult):Bool {
       var state:Null<ReferencePhysics3DAbiWorld__referencePhysics3DAbi> = cast _Runtime.UNDEFINED;
-      state = ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).get(handle));
+      state = ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).get((cast handle)));
       if ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast _Physics3DAbi.failExecution__referencePhysics3DAbi(({ final __callArgument111:Dynamic = out; __callArgument111; }), ({ final __callArgument112:Dynamic = 'StaleWorld'; __callArgument112; }), (cast 0.0 : Float), (cast Physics3DAbiCommandHeaderByteLength : Float), (cast 0.0 : Float)) : Bool); }
       if ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).stepping : Bool)) { return cast (cast _Physics3DAbi.failExecution__referencePhysics3DAbi(({ final __callArgument115:Dynamic = out; __callArgument115; }), ({ final __callArgument116:Dynamic = 'BusyWorld'; __callArgument116; }), (cast 0.0 : Float), (cast Physics3DAbiCommandHeaderByteLength : Float), (cast 0.0 : Float)) : Bool); }
       return cast (cast _Physics3DAbi.executeCommands__referencePhysics3DAbi((cast state : Dynamic), ({ final __callArgument119:Dynamic = commands; __callArgument119; }), ({ final __callArgument120:Dynamic = out; __callArgument120; })) : Bool);
       return cast _Runtime.UNDEFINED;
     }, step: function(handle:Float, dt:Float, hooks:Null<Physics3DAbiContactHooks>):Physics3DAbiStepStatus {
       var state:Null<ReferencePhysics3DAbiWorld__referencePhysics3DAbi> = cast _Runtime.UNDEFINED;
-      state = ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).get(handle));
+      state = ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).get((cast handle)));
       if ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast 'StaleWorld'; }
       if ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).stepping : Bool)) { return cast 'BusyWorld'; }
       return cast (cast _Physics3DAbi.stepReferenceWorld__referencePhysics3DAbi((cast state : Dynamic), (cast dt : Float), ({ final __callArgument123:Dynamic = hooks; __callArgument123; })) : Physics3DAbiStepStatus);
       return cast _Runtime.UNDEFINED;
     }, readBodies: function(handle:Float, bodyIds:Null<flight._internal._UInt32Array>, out:Physics3DAbiBodyBuffer):Bool {
       var state:Null<ReferencePhysics3DAbiWorld__referencePhysics3DAbi> = cast _Runtime.UNDEFINED;
-      state = ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).get(handle));
+      state = ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).get((cast handle)));
       if ((cast ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).stepping : Bool)) : Bool)) { return cast false; }
       _Physics3DAbi.readBodies__referencePhysics3DAbi((cast state : Dynamic), ({ final __callArgument125:Dynamic = bodyIds; __callArgument125; }), ({ final __callArgument126:Dynamic = out; __callArgument126; }));
       return cast true;
       return cast _Runtime.UNDEFINED;
     }, readContacts: function(handle:Float, selection:Physics3DAbiContactSelection, out:Physics3DAbiContactBuffer):Bool {
       var state:Null<ReferencePhysics3DAbiWorld__referencePhysics3DAbi> = cast _Runtime.UNDEFINED;
-      state = ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).get(handle));
+      state = ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).get((cast handle)));
       if ((cast ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).stepping : Bool)) : Bool)) { return cast false; }
       _Physics3DAbi.readContacts__referencePhysics3DAbi((cast state : Dynamic), ({ final __callArgument129:Dynamic = selection; __callArgument129; }), ({ final __callArgument130:Dynamic = out; __callArgument130; }));
       return cast true;
       return cast _Runtime.UNDEFINED;
     }, readJoints: function(handle:Float, out:Physics3DAbiJointBuffer):Bool {
       var state:Null<ReferencePhysics3DAbiWorld__referencePhysics3DAbi> = cast _Runtime.UNDEFINED;
-      state = ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).get(handle));
+      state = ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).get((cast handle)));
       if ((cast ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).stepping : Bool)) : Bool)) { return cast false; }
       _Physics3DAbi.readJoints__referencePhysics3DAbi((cast state : Dynamic), ({ final __callArgument133:Dynamic = out; __callArgument133; }));
       return cast true;
       return cast _Runtime.UNDEFINED;
     }, queryPoint: function(handle:Float, x:Float, y:Float, z:Float, filter:Null<Physics3DQueryFilter>, out:Physics3DAbiQueryBuffer):Bool {
       var state:Null<ReferencePhysics3DAbiWorld__referencePhysics3DAbi> = cast _Runtime.UNDEFINED;
-      state = ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).get(handle));
+      state = ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).get((cast handle)));
       if ((cast ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).stepping : Bool)) : Bool)) { return cast false; }
       queryPhysics3DPoint((cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).world, (cast x : Float), (cast y : Float), (cast z : Float), (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).query, (cast _Runtime.coalesce(filter, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) : Dynamic));
       _Physics3DAbi.writeQueryHits__referencePhysics3DAbi((cast state : Dynamic), (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).query, ({ final __callArgument135:Dynamic = out; __callArgument135; }));
@@ -926,7 +926,7 @@ class _Physics3DAbi {
     }, queryRay: function(handle:Float, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, maxFraction:Float, closest:Bool, filter:Null<Physics3DQueryFilter>, out:Physics3DAbiQueryBuffer):Bool {
       var state:Null<ReferencePhysics3DAbiWorld__referencePhysics3DAbi> = cast _Runtime.UNDEFINED;
       var query:Physics3DWorld->Float->Float->Float->Float->Float->Float->Physics3DRayResult->Float->Null<Physics3DQueryFilter>->Void = cast _Runtime.UNDEFINED;
-      state = ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).get(handle));
+      state = ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).get((cast handle)));
       if ((cast ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).stepping : Bool)) : Bool)) { return cast false; }
       query = ((cast closest : Bool) ? (cast queryPhysics3DRayClosest : Dynamic) : (cast queryPhysics3DRay : Dynamic));
       query((cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).world, (cast originX : Float), (cast originY : Float), (cast originZ : Float), (cast directionX : Float), (cast directionY : Float), (cast directionZ : Float), (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).ray, (cast maxFraction : Float), (cast _Runtime.coalesce(filter, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) : Dynamic));
@@ -935,7 +935,7 @@ class _Physics3DAbi {
       return cast _Runtime.UNDEFINED;
     }, queryRegion: function(handle:Float, region:SpatialAabb3D, filter:Null<Physics3DQueryFilter>, out:Physics3DAbiQueryBuffer):Bool {
       var state:Null<ReferencePhysics3DAbiWorld__referencePhysics3DAbi> = cast _Runtime.UNDEFINED;
-      state = ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).get(handle));
+      state = ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).get((cast handle)));
       if ((cast ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).stepping : Bool)) : Bool)) { return cast false; }
       queryPhysics3DRegion((cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).world, ({ final __callArgument139:Dynamic = region; __callArgument139; }), (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).query, (cast _Runtime.coalesce(filter, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) : Dynamic));
       _Physics3DAbi.writeQueryHits__referencePhysics3DAbi((cast state : Dynamic), (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).query, ({ final __callArgument141:Dynamic = out; __callArgument141; }));
@@ -943,7 +943,7 @@ class _Physics3DAbi {
       return cast _Runtime.UNDEFINED;
     }, queryShapeCast: function(handle:Float, shape:CollisionBuiltInShape3D, dx:Float, dy:Float, dz:Float, maxFraction:Float, filter:Null<Physics3DQueryFilter>, out:Physics3DAbiQueryBuffer):Bool {
       var state:Null<ReferencePhysics3DAbiWorld__referencePhysics3DAbi> = cast _Runtime.UNDEFINED;
-      state = ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).get(handle));
+      state = ((cast worlds : flight._internal._Map<Float, ReferencePhysics3DAbiWorld__referencePhysics3DAbi>).get((cast handle)));
       if ((cast ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).stepping : Bool)) : Bool)) { return cast false; }
       queryPhysics3DShapeCast((cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).world, ({ final __callArgument143:Dynamic = shape; __callArgument143; }), (cast dx : Float), (cast dy : Float), (cast dz : Float), (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).shapeCast, (cast maxFraction : Float), (cast _Runtime.coalesce(filter, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) : Dynamic));
       _Physics3DAbi.writeShapeCastHit__referencePhysics3DAbi((cast state : Dynamic), ({ final __callArgument145:Dynamic = out; __callArgument145; }));
@@ -1088,7 +1088,7 @@ class _Physics3DAbi {
     type = (cast _Physics3DAbi.decodeBodyType__referencePhysics3DAbi((cast (_Runtime.toInt32(flags) & _Runtime.toInt32((cast Physics3DAbiBodyFlag : { var TypeMask:Float; var FixedRotation:Float; var Bullet:Float; var Sleeping:Float; var SleepEnabled:Float; }).TypeMask)) : Float)) : Null<String>);
     values = (cast _Physics3DAbi.readFloat64Values__referencePhysics3DAbi((cast command : Dynamic), (cast 8.0 : Float), (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyValues) : Array<Float>);
     if ((cast ((cast _Runtime.strictEquals(type, null) : Bool) || (cast !(cast (cast _Physics3DAbi.isBodyValueBlockValid__referencePhysics3DAbi(({ final __callArgument199:Dynamic = values; __callArgument199; })) : Bool) : Bool) : Bool)) : Bool)) { return cast 'RejectedMutation'; }
-    body = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).get(_Runtime.field(command, 'objectId')));
+    body = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).get((cast _Runtime.field(command, 'objectId'))));
     added = _Runtime.strictEquals(body, _Runtime.field(_Runtime, 'UNDEFINED'));
     (body ??= (cast createRigidBody3D(({ final __callArgument201:Dynamic = type; __callArgument201; })) : RigidBody3D));
     if ((cast !(cast (cast setPhysics3DBodyType(({ final __callArgument203:Dynamic = body; __callArgument203; }), ({ final __callArgument204:Dynamic = type; __callArgument204; })) : Bool) : Bool) : Bool)) { return cast 'RejectedMutation'; }
@@ -1107,8 +1107,8 @@ class _Physics3DAbi {
     _Physics3DAbi.writeBodyDynamicValues__referencePhysics3DAbi(({ final __callArgument221:Dynamic = body; __callArgument221; }), ({ final __callArgument222:Dynamic = values; __callArgument222; }), (cast flags : Float));
     if ((cast added : Bool)) {
       (cast addPhysics3DBody((cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).world, ({ final __callArgument225:Dynamic = body; __callArgument225; })) : Float);
-      ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).set(_Runtime.field(command, 'objectId'), (cast body)));
-      ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByBody : flight._internal._Map<RigidBody3D, Float>).set(body, (cast _Runtime.field(command, 'objectId'))));
+      ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).set((cast _Runtime.field(command, 'objectId')), (cast body)));
+      ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByBody : flight._internal._Map<RigidBody3D, Float>).set((cast body), (cast _Runtime.field(command, 'objectId'))));
       _Physics3DAbi.insertSorted__referencePhysics3DAbi((cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyIds, (cast _Runtime.field(command, 'objectId') : Float));
     }
     return cast 'Complete';
@@ -1120,26 +1120,26 @@ class _Physics3DAbi {
     if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(command, 'byteLength'), (cast Physics3DAbiCommandByteLength : { var SetGravity:Float; var SetSolverConfig:Float; var SetBody:Float; var DestroyBody:Float; var SetColliderMinimum:Float; var DestroyCollider:Float; var SetJoint:Float; var DestroyJoint:Float; var BodyAction:Float; var WakeBody:Float; }).DestroyBody) : Bool) || (cast !(cast (cast _Physics3DAbi.isObjectId__referencePhysics3DAbi((cast _Runtime.field(command, 'objectId') : Float)) : Bool) : Bool) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(command, 'relatedId'), 0.0) : Bool)) : Bool)) {
       return cast 'InvalidCommand';
     }
-    body = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).get(_Runtime.field(command, 'objectId')));
+    body = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).get((cast _Runtime.field(command, 'objectId'))));
     if ((cast _Runtime.strictEquals(body, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast 'MissingBody'; }
     for (__iteration0 in _Runtime.iterable((cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).colliderById)) {
       var id:Float = flight._internal._StaticIndex.readArray(__iteration0, 0.0);
       var held:ReferencePhysics3DAbiCollider__referencePhysics3DAbi = flight._internal._StaticIndex.readArray(__iteration0, 1.0);
       if ((cast !_Runtime.strictEquals((cast held : ReferencePhysics3DAbiCollider__referencePhysics3DAbi).bodyId, _Runtime.field(command, 'objectId')) : Bool)) { continue; }
-      ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).colliderById : flight._internal._Map<Float, ReferencePhysics3DAbiCollider__referencePhysics3DAbi>).delete_(id));
-      ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByCollider : flight._internal._Map<Physics3DCollider, Float>).delete_((cast held : ReferencePhysics3DAbiCollider__referencePhysics3DAbi).collider));
+      ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).colliderById : flight._internal._Map<Float, ReferencePhysics3DAbiCollider__referencePhysics3DAbi>).delete_((cast id)));
+      ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByCollider : flight._internal._Map<Physics3DCollider, Float>).delete_((cast (cast held : ReferencePhysics3DAbiCollider__referencePhysics3DAbi).collider)));
     }
     for (__iteration1 in _Runtime.iterable((cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).jointById)) {
       var id:Float = flight._internal._StaticIndex.readArray(__iteration1, 0.0);
       var joint:Physics3DJoint = flight._internal._StaticIndex.readArray(__iteration1, 1.0);
       if ((cast ((cast !_Runtime.strictEquals((cast joint : Physics3DJoint).bodyA, (cast body : RigidBody3D).index) : Bool) && (cast !_Runtime.strictEquals((cast joint : Physics3DJoint).bodyB, (cast body : RigidBody3D).index) : Bool)) : Bool)) { continue; }
-      ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).jointById : flight._internal._Map<Float, Physics3DJoint>).delete_(id));
-      ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByJoint : flight._internal._Map<Physics3DJoint, Float>).delete_(joint));
+      ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).jointById : flight._internal._Map<Float, Physics3DJoint>).delete_((cast id)));
+      ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByJoint : flight._internal._Map<Physics3DJoint, Float>).delete_((cast joint)));
       _Physics3DAbi.removeSorted__referencePhysics3DAbi((cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).jointIds, (cast id : Float));
     }
     (cast removePhysics3DBody((cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).world, ({ final __callArgument231:Dynamic = body; __callArgument231; })) : Bool);
-    ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).delete_(_Runtime.field(command, 'objectId')));
-    ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByBody : flight._internal._Map<RigidBody3D, Float>).delete_(body));
+    ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).delete_((cast _Runtime.field(command, 'objectId'))));
+    ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByBody : flight._internal._Map<RigidBody3D, Float>).delete_((cast body)));
     _Physics3DAbi.removeSorted__referencePhysics3DAbi((cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyIds, (cast _Runtime.field(command, 'objectId') : Float));
     return cast 'Complete';
     return cast null;
@@ -1161,7 +1161,7 @@ class _Physics3DAbi {
     if ((cast ((cast ((cast !(cast (cast _Physics3DAbi.isObjectId__referencePhysics3DAbi((cast _Runtime.field(command, 'objectId') : Float)) : Bool) : Bool) : Bool) || (cast !(cast (cast _Physics3DAbi.isObjectId__referencePhysics3DAbi((cast _Runtime.field(command, 'relatedId') : Float)) : Bool) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(command, 'byteLength') : Float) < (cast (cast Physics3DAbiCommandByteLength : { var SetGravity:Float; var SetSolverConfig:Float; var SetBody:Float; var DestroyBody:Float; var SetColliderMinimum:Float; var DestroyCollider:Float; var SetJoint:Float; var DestroyJoint:Float; var BodyAction:Float; var WakeBody:Float; }).SetColliderMinimum : Float)) : Bool)) : Bool)) {
       return cast 'InvalidCommand';
     }
-    body = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).get(_Runtime.field(command, 'relatedId')));
+    body = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).get((cast _Runtime.field(command, 'relatedId'))));
     if ((cast _Runtime.strictEquals(body, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast 'MissingBody'; }
     colliderFlags = _Runtime.callProperty(_Runtime.field(command, 'view'), 'getUint32', cast ([_Runtime.field(command, 'payload'), true] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals((_Runtime.toInt32(colliderFlags) & 1), colliderFlags) : Bool)) { return cast 'InvalidCommand'; }
@@ -1185,16 +1185,16 @@ class _Physics3DAbi {
       return cast 'RejectedMutation';
     }
     collider = (cast createPhysics3DCollider(({ final __callArgument235:Dynamic = shape; __callArgument235; }), (cast { density: density, friction: friction, restitution: restitution } : Dynamic), (cast { categoryBits: categoryBits, maskBits: maskBits, groupIndex: groupIndex } : Dynamic), (cast !_Runtime.strictEquals((_Runtime.toInt32(colliderFlags) & 1), 0.0) : Bool)) : Physics3DCollider);
-    previous = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).colliderById : flight._internal._Map<Float, ReferencePhysics3DAbiCollider__referencePhysics3DAbi>).get(_Runtime.field(command, 'objectId')));
+    previous = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).colliderById : flight._internal._Map<Float, ReferencePhysics3DAbiCollider__referencePhysics3DAbi>).get((cast _Runtime.field(command, 'objectId'))));
     if ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var previousBody:Null<RigidBody3D> = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).get((cast previous : ReferencePhysics3DAbiCollider__referencePhysics3DAbi).bodyId));
+      var previousBody:Null<RigidBody3D> = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).get((cast (cast previous : ReferencePhysics3DAbiCollider__referencePhysics3DAbi).bodyId)));
       if ((cast _Runtime.strictEquals(previousBody, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast 'MissingBody'; }
       (cast removePhysics3DCollider((cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).world, ({ final __callArgument237:Dynamic = previousBody; __callArgument237; }), (cast previous : ReferencePhysics3DAbiCollider__referencePhysics3DAbi).collider) : Bool);
-      ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByCollider : flight._internal._Map<Physics3DCollider, Float>).delete_((cast previous : ReferencePhysics3DAbiCollider__referencePhysics3DAbi).collider));
+      ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByCollider : flight._internal._Map<Physics3DCollider, Float>).delete_((cast (cast previous : ReferencePhysics3DAbiCollider__referencePhysics3DAbi).collider)));
     }
     (cast addPhysics3DCollider((cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).world, ({ final __callArgument239:Dynamic = body; __callArgument239; }), ({ final __callArgument240:Dynamic = collider; __callArgument240; })) : Physics3DCollider);
-    ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).colliderById : flight._internal._Map<Float, ReferencePhysics3DAbiCollider__referencePhysics3DAbi>).set(_Runtime.field(command, 'objectId'), (cast { bodyId: _Runtime.field(command, 'relatedId'), collider: collider })));
-    ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByCollider : flight._internal._Map<Physics3DCollider, Float>).set(collider, (cast _Runtime.field(command, 'objectId'))));
+    ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).colliderById : flight._internal._Map<Float, ReferencePhysics3DAbiCollider__referencePhysics3DAbi>).set((cast _Runtime.field(command, 'objectId')), (cast { bodyId: _Runtime.field(command, 'relatedId'), collider: collider })));
+    ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByCollider : flight._internal._Map<Physics3DCollider, Float>).set((cast collider), (cast _Runtime.field(command, 'objectId'))));
     return cast 'Complete';
     return cast null;
   }
@@ -1205,12 +1205,12 @@ class _Physics3DAbi {
     if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(command, 'byteLength'), (cast Physics3DAbiCommandByteLength : { var SetGravity:Float; var SetSolverConfig:Float; var SetBody:Float; var DestroyBody:Float; var SetColliderMinimum:Float; var DestroyCollider:Float; var SetJoint:Float; var DestroyJoint:Float; var BodyAction:Float; var WakeBody:Float; }).DestroyCollider) : Bool) || (cast !(cast (cast _Physics3DAbi.isObjectId__referencePhysics3DAbi((cast _Runtime.field(command, 'objectId') : Float)) : Bool) : Bool) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(command, 'relatedId'), 0.0) : Bool)) : Bool)) {
       return cast 'InvalidCommand';
     }
-    held = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).colliderById : flight._internal._Map<Float, ReferencePhysics3DAbiCollider__referencePhysics3DAbi>).get(_Runtime.field(command, 'objectId')));
+    held = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).colliderById : flight._internal._Map<Float, ReferencePhysics3DAbiCollider__referencePhysics3DAbi>).get((cast _Runtime.field(command, 'objectId'))));
     if ((cast _Runtime.strictEquals(held, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast 'MissingCollider'; }
-    body = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).get((cast held : ReferencePhysics3DAbiCollider__referencePhysics3DAbi).bodyId));
+    body = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).get((cast (cast held : ReferencePhysics3DAbiCollider__referencePhysics3DAbi).bodyId)));
     if ((cast ((cast _Runtime.strictEquals(body, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast (cast removePhysics3DCollider((cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).world, ({ final __callArgument243:Dynamic = body; __callArgument243; }), (cast held : ReferencePhysics3DAbiCollider__referencePhysics3DAbi).collider) : Bool) : Bool) : Bool)) : Bool)) { return cast 'MissingBody'; }
-    ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).colliderById : flight._internal._Map<Float, ReferencePhysics3DAbiCollider__referencePhysics3DAbi>).delete_(_Runtime.field(command, 'objectId')));
-    ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByCollider : flight._internal._Map<Physics3DCollider, Float>).delete_((cast held : ReferencePhysics3DAbiCollider__referencePhysics3DAbi).collider));
+    ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).colliderById : flight._internal._Map<Float, ReferencePhysics3DAbiCollider__referencePhysics3DAbi>).delete_((cast _Runtime.field(command, 'objectId'))));
+    ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByCollider : flight._internal._Map<Physics3DCollider, Float>).delete_((cast (cast held : ReferencePhysics3DAbiCollider__referencePhysics3DAbi).collider)));
     return cast 'Complete';
     return cast null;
   }
@@ -1236,8 +1236,8 @@ class _Physics3DAbi {
     bodyAId = _Runtime.callProperty(_Runtime.field(command, 'view'), 'getUint32', cast ([_Runtime.addNumbers(_Runtime.field(command, 'payload'), 4.0), true] : Array<Dynamic>));
     bodyBId = _Runtime.callProperty(_Runtime.field(command, 'view'), 'getUint32', cast ([_Runtime.addNumbers(_Runtime.field(command, 'payload'), 8.0), true] : Array<Dynamic>));
     if ((cast ((cast !(cast (cast _Physics3DAbi.isObjectId__referencePhysics3DAbi((cast bodyAId : Float)) : Bool) : Bool) : Bool) || (cast !(cast (cast _Physics3DAbi.isObjectId__referencePhysics3DAbi((cast bodyBId : Float)) : Bool) : Bool) : Bool)) : Bool)) { return cast 'InvalidCommand'; }
-    bodyA = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).get(bodyAId));
-    bodyB = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).get(bodyBId));
+    bodyA = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).get((cast bodyAId)));
+    bodyB = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).get((cast bodyBId)));
     if ((cast ((cast _Runtime.strictEquals(bodyA, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(bodyB, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast 'MissingBody'; }
     flags = _Runtime.callProperty(_Runtime.field(command, 'view'), 'getUint32', cast ([_Runtime.addNumbers(_Runtime.field(command, 'payload'), 12.0), true] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32((cast _Physics3DAbi.getJointFlagMask__referencePhysics3DAbi((cast kind : Float)) : Float))), flags) : Bool)) { return cast 'InvalidCommand'; }
@@ -1247,14 +1247,14 @@ class _Physics3DAbi {
     joint = (cast _Physics3DAbi.createJoint__referencePhysics3DAbi((cast kind : Float), (cast (cast bodyA : RigidBody3D).index : Float), (cast (cast bodyB : RigidBody3D).index : Float), (cast flags : Float), ({ final __callArgument249:Dynamic = common; __callArgument249; }), ({ final __callArgument250:Dynamic = values; __callArgument250; })) : Null<Physics3DJoint>);
     if ((cast _Runtime.strictEquals(joint, null) : Bool)) { return cast 'UnsupportedJoint'; }
     ((cast joint : Physics3DJoint).broken = !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32((1 << 1))), 0.0));
-    previous = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).jointById : flight._internal._Map<Float, Physics3DJoint>).get(_Runtime.field(command, 'objectId')));
+    previous = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).jointById : flight._internal._Map<Float, Physics3DJoint>).get((cast _Runtime.field(command, 'objectId'))));
     if ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (cast removePhysics3DJoint((cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).world, ({ final __callArgument253:Dynamic = previous; __callArgument253; })) : Bool);
-      ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByJoint : flight._internal._Map<Physics3DJoint, Float>).delete_(previous));
+      ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByJoint : flight._internal._Map<Physics3DJoint, Float>).delete_((cast previous)));
     }
     (cast (cast addPhysics3DJoint : Physics3DWorld->Physics3DJoint->Physics3DJoint)((cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).world, ({ final __callArgument255:Dynamic = joint; __callArgument255; })) : Physics3DJoint);
-    ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).jointById : flight._internal._Map<Float, Physics3DJoint>).set(_Runtime.field(command, 'objectId'), (cast joint)));
-    ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByJoint : flight._internal._Map<Physics3DJoint, Float>).set(joint, (cast _Runtime.field(command, 'objectId'))));
+    ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).jointById : flight._internal._Map<Float, Physics3DJoint>).set((cast _Runtime.field(command, 'objectId')), (cast joint)));
+    ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByJoint : flight._internal._Map<Physics3DJoint, Float>).set((cast joint), (cast _Runtime.field(command, 'objectId'))));
     if ((cast _Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Physics3DAbi.insertSorted__referencePhysics3DAbi((cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).jointIds, (cast _Runtime.field(command, 'objectId') : Float)); }
     return cast 'Complete';
     return cast null;
@@ -1265,11 +1265,11 @@ class _Physics3DAbi {
     if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(command, 'byteLength'), (cast Physics3DAbiCommandByteLength : { var SetGravity:Float; var SetSolverConfig:Float; var SetBody:Float; var DestroyBody:Float; var SetColliderMinimum:Float; var DestroyCollider:Float; var SetJoint:Float; var DestroyJoint:Float; var BodyAction:Float; var WakeBody:Float; }).DestroyJoint) : Bool) || (cast !(cast (cast _Physics3DAbi.isObjectId__referencePhysics3DAbi((cast _Runtime.field(command, 'objectId') : Float)) : Bool) : Bool) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(command, 'relatedId'), 0.0) : Bool)) : Bool)) {
       return cast 'InvalidCommand';
     }
-    joint = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).jointById : flight._internal._Map<Float, Physics3DJoint>).get(_Runtime.field(command, 'objectId')));
+    joint = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).jointById : flight._internal._Map<Float, Physics3DJoint>).get((cast _Runtime.field(command, 'objectId'))));
     if ((cast _Runtime.strictEquals(joint, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast 'MissingJoint'; }
     (cast removePhysics3DJoint((cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).world, ({ final __callArgument257:Dynamic = joint; __callArgument257; })) : Bool);
-    ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).jointById : flight._internal._Map<Float, Physics3DJoint>).delete_(_Runtime.field(command, 'objectId')));
-    ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByJoint : flight._internal._Map<Physics3DJoint, Float>).delete_(joint));
+    ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).jointById : flight._internal._Map<Float, Physics3DJoint>).delete_((cast _Runtime.field(command, 'objectId'))));
+    ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByJoint : flight._internal._Map<Physics3DJoint, Float>).delete_((cast joint)));
     _Physics3DAbi.removeSorted__referencePhysics3DAbi((cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).jointIds, (cast _Runtime.field(command, 'objectId') : Float));
     return cast 'Complete';
     return cast null;
@@ -1280,7 +1280,7 @@ class _Physics3DAbi {
     if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(command, 'byteLength'), (cast Physics3DAbiCommandByteLength : { var SetGravity:Float; var SetSolverConfig:Float; var SetBody:Float; var DestroyBody:Float; var SetColliderMinimum:Float; var DestroyCollider:Float; var SetJoint:Float; var DestroyJoint:Float; var BodyAction:Float; var WakeBody:Float; }).BodyAction) : Bool) || (cast !(cast (cast _Physics3DAbi.isObjectId__referencePhysics3DAbi((cast _Runtime.field(command, 'objectId') : Float)) : Bool) : Bool) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(command, 'relatedId'), 0.0) : Bool)) : Bool)) {
       return cast 'InvalidCommand';
     }
-    body = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).get(_Runtime.field(command, 'objectId')));
+    body = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).get((cast _Runtime.field(command, 'objectId'))));
     if ((cast _Runtime.strictEquals(body, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast 'MissingBody'; }
     return cast ((cast (cast action(({ final __callArgument259:Dynamic = body; __callArgument259; }), (cast _Runtime.callProperty(_Runtime.field(command, 'view'), 'getFloat64', cast ([_Runtime.field(command, 'payload'), true] : Array<Dynamic>)) : Float), (cast _Runtime.callProperty(_Runtime.field(command, 'view'), 'getFloat64', cast ([_Runtime.addNumbers(_Runtime.field(command, 'payload'), 8.0), true] : Array<Dynamic>)) : Float), (cast _Runtime.callProperty(_Runtime.field(command, 'view'), 'getFloat64', cast ([_Runtime.addNumbers(_Runtime.field(command, 'payload'), 16.0), true] : Array<Dynamic>)) : Float)) : Bool) : Bool) ? (cast 'Complete' : Dynamic) : (cast 'RejectedMutation' : Dynamic));
     return cast null;
@@ -1291,7 +1291,7 @@ class _Physics3DAbi {
     if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(command, 'byteLength'), (cast Physics3DAbiCommandByteLength : { var SetGravity:Float; var SetSolverConfig:Float; var SetBody:Float; var DestroyBody:Float; var SetColliderMinimum:Float; var DestroyCollider:Float; var SetJoint:Float; var DestroyJoint:Float; var BodyAction:Float; var WakeBody:Float; }).BodyAction) : Bool) || (cast !(cast (cast _Physics3DAbi.isObjectId__referencePhysics3DAbi((cast _Runtime.field(command, 'objectId') : Float)) : Bool) : Bool) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(command, 'relatedId'), 0.0) : Bool)) : Bool)) {
       return cast 'InvalidCommand';
     }
-    body = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).get(_Runtime.field(command, 'objectId')));
+    body = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).get((cast _Runtime.field(command, 'objectId'))));
     if ((cast _Runtime.strictEquals(body, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast 'MissingBody'; }
     return cast ((cast (cast action(({ final __callArgument261:Dynamic = body; __callArgument261; }), (cast _Runtime.callProperty(_Runtime.field(command, 'view'), 'getFloat64', cast ([_Runtime.field(command, 'payload'), true] : Array<Dynamic>)) : Float), (cast _Runtime.callProperty(_Runtime.field(command, 'view'), 'getFloat64', cast ([_Runtime.addNumbers(_Runtime.field(command, 'payload'), 8.0), true] : Array<Dynamic>)) : Float), (cast _Runtime.callProperty(_Runtime.field(command, 'view'), 'getFloat64', cast ([_Runtime.addNumbers(_Runtime.field(command, 'payload'), 16.0), true] : Array<Dynamic>)) : Float), (cast _Runtime.callProperty(_Runtime.field(command, 'view'), 'getFloat64', cast ([_Runtime.addNumbers(_Runtime.field(command, 'payload'), 24.0), true] : Array<Dynamic>)) : Float), (cast _Runtime.callProperty(_Runtime.field(command, 'view'), 'getFloat64', cast ([_Runtime.addNumbers(_Runtime.field(command, 'payload'), 32.0), true] : Array<Dynamic>)) : Float), (cast _Runtime.callProperty(_Runtime.field(command, 'view'), 'getFloat64', cast ([_Runtime.addNumbers(_Runtime.field(command, 'payload'), 40.0), true] : Array<Dynamic>)) : Float)) : Bool) : Bool) ? (cast 'Complete' : Dynamic) : (cast 'RejectedMutation' : Dynamic));
     return cast null;
@@ -1302,7 +1302,7 @@ class _Physics3DAbi {
     if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.field(command, 'byteLength'), (cast Physics3DAbiCommandByteLength : { var SetGravity:Float; var SetSolverConfig:Float; var SetBody:Float; var DestroyBody:Float; var SetColliderMinimum:Float; var DestroyCollider:Float; var SetJoint:Float; var DestroyJoint:Float; var BodyAction:Float; var WakeBody:Float; }).WakeBody) : Bool) || (cast !(cast (cast _Physics3DAbi.isObjectId__referencePhysics3DAbi((cast _Runtime.field(command, 'objectId') : Float)) : Bool) : Bool) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(command, 'relatedId'), 0.0) : Bool)) : Bool)) {
       return cast 'InvalidCommand';
     }
-    body = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).get(_Runtime.field(command, 'objectId')));
+    body = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).get((cast _Runtime.field(command, 'objectId'))));
     if ((cast _Runtime.strictEquals(body, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast 'MissingBody'; }
     wakePhysics3DBody(({ final __callArgument263:Dynamic = body; __callArgument263; }));
     return cast 'Complete';
@@ -1501,7 +1501,7 @@ class _Physics3DAbi {
         var i:Float = 0.0;
         while ((cast ((cast ((cast i : Float) < (cast _Runtime.field((cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyIds, 'length') : Float)) : Bool) && (cast ((cast out.count : Float) < (cast capacity : Float)) : Bool)) : Bool)) {
           var id:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyIds : Array<Float>), (cast i : Float));
-          var body:Null<RigidBody3D> = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).get(id));
+          var body:Null<RigidBody3D> = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).get((cast id)));
           if ((cast _Runtime.strictEquals(body, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (i = cast ((i + 1.0) : Dynamic)); continue; }
           _Physics3DAbi.writeBody__referencePhysics3DAbi((cast id : Float), ({ final __callArgument314:Dynamic = body; __callArgument314; }), ({ final __callArgument315:Dynamic = out; __callArgument315; }), (cast out.count : Float));
           (out.count += 1.0);
@@ -1514,7 +1514,7 @@ class _Physics3DAbi {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(bodyIds, 'length') : Float)) : Bool)) {
         var id:Float = flight._internal._StaticIndex.readUint32ArrayTyped((cast bodyIds : flight._internal._UInt32Array), (cast i : Float));
-        var body:Null<RigidBody3D> = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).get(id));
+        var body:Null<RigidBody3D> = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).bodyById : flight._internal._Map<Float, RigidBody3D>).get((cast id)));
         if ((cast _Runtime.strictEquals(body, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (i = cast ((i + 1.0) : Dynamic)); continue; }
         (out.requiredCount += 1.0);
         if ((cast ((cast out.count : Float) >= (cast capacity : Float)) : Bool)) { (i = cast ((i + 1.0) : Dynamic)); continue; }
@@ -1564,7 +1564,7 @@ class _Physics3DAbi {
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).jointIds, 'length') : Float)) : Bool)) {
         if ((cast ((cast out.count : Float) >= (cast capacity : Float)) : Bool)) { break; }
         var id:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).jointIds : Array<Float>), (cast i : Float));
-        var joint:Null<Physics3DJoint> = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).jointById : flight._internal._Map<Float, Physics3DJoint>).get(id));
+        var joint:Null<Physics3DJoint> = ((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).jointById : flight._internal._Map<Float, Physics3DJoint>).get((cast id)));
         if ((cast _Runtime.strictEquals(joint, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (i = cast ((i + 1.0) : Dynamic)); continue; }
         var at:Float = out.count;
         flight._internal._StaticIndex.writeUint32ArrayTyped((cast out.ids : flight._internal._UInt32Array), (cast at : Float), (cast id : Float));
@@ -1631,15 +1631,15 @@ class _Physics3DAbi {
     var idAt:Float = cast _Runtime.UNDEFINED;
     var flags:Float = cast _Runtime.UNDEFINED;
     var valueAt:Float = cast _Runtime.UNDEFINED;
-    bodyA = ((cast (cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).world : { var bodyByIndex:flight._internal._Map<Float, RigidBody3D>; }).bodyByIndex : flight._internal._Map<Float, RigidBody3D>).get(_Runtime.field(contact, 'bodyA')));
-    bodyB = ((cast (cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).world : { var bodyByIndex:flight._internal._Map<Float, RigidBody3D>; }).bodyByIndex : flight._internal._Map<Float, RigidBody3D>).get(_Runtime.field(contact, 'bodyB')));
+    bodyA = ((cast (cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).world : { var bodyByIndex:flight._internal._Map<Float, RigidBody3D>; }).bodyByIndex : flight._internal._Map<Float, RigidBody3D>).get((cast _Runtime.field(contact, 'bodyA'))));
+    bodyB = ((cast (cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).world : { var bodyByIndex:flight._internal._Map<Float, RigidBody3D>; }).bodyByIndex : flight._internal._Map<Float, RigidBody3D>).get((cast _Runtime.field(contact, 'bodyB'))));
     colliderA = _Runtime.optionalIndex(({ final __structural335 = bodyA; __structural335 == null ? _Runtime.UNDEFINED : (cast __structural335 : { var colliders:Array<Physics3DCollider>; }).colliders; }), _Runtime.field(contact, 'colliderA'));
     colliderB = _Runtime.optionalIndex(({ final __structural337 = bodyB; __structural337 == null ? _Runtime.UNDEFINED : (cast __structural337 : { var colliders:Array<Physics3DCollider>; }).colliders; }), _Runtime.field(contact, 'colliderB'));
     idAt = (at * Physics3DAbiContactIdStride);
-    flight._internal._StaticIndex.writeUint32ArrayTyped((cast out.ids : flight._internal._UInt32Array), (cast idAt : Float), (cast ((cast _Runtime.strictEquals(bodyA, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.coalesce(((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByBody : flight._internal._Map<RigidBody3D, Float>).get(bodyA)), function():Dynamic return cast 0.0) : Dynamic)) : Float));
-    flight._internal._StaticIndex.writeUint32ArrayTyped((cast out.ids : flight._internal._UInt32Array), (cast (idAt + 1.0) : Float), (cast ((cast _Runtime.strictEquals(bodyB, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.coalesce(((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByBody : flight._internal._Map<RigidBody3D, Float>).get(bodyB)), function():Dynamic return cast 0.0) : Dynamic)) : Float));
-    flight._internal._StaticIndex.writeUint32ArrayTyped((cast out.ids : flight._internal._UInt32Array), (cast (idAt + 2.0) : Float), (cast ((cast _Runtime.strictEquals(colliderA, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.coalesce(((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByCollider : flight._internal._Map<Physics3DCollider, Float>).get(colliderA)), function():Dynamic return cast 0.0) : Dynamic)) : Float));
-    flight._internal._StaticIndex.writeUint32ArrayTyped((cast out.ids : flight._internal._UInt32Array), (cast (idAt + 3.0) : Float), (cast ((cast _Runtime.strictEquals(colliderB, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.coalesce(((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByCollider : flight._internal._Map<Physics3DCollider, Float>).get(colliderB)), function():Dynamic return cast 0.0) : Dynamic)) : Float));
+    flight._internal._StaticIndex.writeUint32ArrayTyped((cast out.ids : flight._internal._UInt32Array), (cast idAt : Float), (cast ((cast _Runtime.strictEquals(bodyA, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.coalesce(((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByBody : flight._internal._Map<RigidBody3D, Float>).get((cast bodyA))), function():Dynamic return cast 0.0) : Dynamic)) : Float));
+    flight._internal._StaticIndex.writeUint32ArrayTyped((cast out.ids : flight._internal._UInt32Array), (cast (idAt + 1.0) : Float), (cast ((cast _Runtime.strictEquals(bodyB, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.coalesce(((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByBody : flight._internal._Map<RigidBody3D, Float>).get((cast bodyB))), function():Dynamic return cast 0.0) : Dynamic)) : Float));
+    flight._internal._StaticIndex.writeUint32ArrayTyped((cast out.ids : flight._internal._UInt32Array), (cast (idAt + 2.0) : Float), (cast ((cast _Runtime.strictEquals(colliderA, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.coalesce(((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByCollider : flight._internal._Map<Physics3DCollider, Float>).get((cast colliderA))), function():Dynamic return cast 0.0) : Dynamic)) : Float));
+    flight._internal._StaticIndex.writeUint32ArrayTyped((cast out.ids : flight._internal._UInt32Array), (cast (idAt + 3.0) : Float), (cast ((cast _Runtime.strictEquals(colliderB, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.coalesce(((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByCollider : flight._internal._Map<Physics3DCollider, Float>).get((cast colliderB))), function():Dynamic return cast 0.0) : Dynamic)) : Float));
     flags = 0.0;
     if ((cast _Runtime.field(contact, 'enabled') : Bool)) { (flags = (_Runtime.toInt32(flags) | _Runtime.toInt32((cast Physics3DAbiContactFlag : { var Enabled:Float; var Sensor:Float; var Touching:Float; }).Enabled))); }
     if ((cast _Runtime.field(contact, 'sensor') : Bool)) { (flags = (_Runtime.toInt32(flags) | _Runtime.toInt32((cast Physics3DAbiContactFlag : { var Enabled:Float; var Sensor:Float; var Touching:Float; }).Sensor))); }
@@ -1730,8 +1730,8 @@ class _Physics3DAbi {
   }
 
   public static function writeQueryIdentity__referencePhysics3DAbi(state:ReferencePhysics3DAbiWorld__referencePhysics3DAbi, body:RigidBody3D, collider:Physics3DCollider, out:Physics3DAbiQueryBuffer, at:Float):Void {
-    flight._internal._StaticIndex.writeUint32ArrayTyped((cast out.bodyIds : flight._internal._UInt32Array), (cast at : Float), (cast _Runtime.coalesce(((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByBody : flight._internal._Map<RigidBody3D, Float>).get(body)), function():Dynamic return cast 0.0) : Float));
-    flight._internal._StaticIndex.writeUint32ArrayTyped((cast out.colliderIds : flight._internal._UInt32Array), (cast at : Float), (cast _Runtime.coalesce(((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByCollider : flight._internal._Map<Physics3DCollider, Float>).get(collider)), function():Dynamic return cast 0.0) : Float));
+    flight._internal._StaticIndex.writeUint32ArrayTyped((cast out.bodyIds : flight._internal._UInt32Array), (cast at : Float), (cast _Runtime.coalesce(((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByBody : flight._internal._Map<RigidBody3D, Float>).get((cast body))), function():Dynamic return cast 0.0) : Float));
+    flight._internal._StaticIndex.writeUint32ArrayTyped((cast out.colliderIds : flight._internal._UInt32Array), (cast at : Float), (cast _Runtime.coalesce(((cast (cast state : ReferencePhysics3DAbiWorld__referencePhysics3DAbi).idByCollider : flight._internal._Map<Physics3DCollider, Float>).get((cast collider))), function():Dynamic return cast 0.0) : Float));
   }
 
   public static function clearQueryBuffer__referencePhysics3DAbi(out:Physics3DAbiQueryBuffer, requiredCount:Float):Void {

@@ -112,10 +112,10 @@ class DirectedGraph__martinezKernel {
     var existing:Null<Float> = cast _Runtime.UNDEFINED;
     var index:Float = cast _Runtime.UNDEFINED;
     key = '' + Std.string((cast _PathBoolean.snap__martinezKernel((cast x : Float)) : Float)) + ',' + Std.string((cast _PathBoolean.snap__martinezKernel((cast y : Float)) : Float)) + '';
-    existing = ((cast this.keys : flight._internal._Map<String, Float>).get(key));
+    existing = ((cast this.keys : flight._internal._Map<String, Float>).get((cast key)));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
     index = _Runtime.field(this.xs, 'length');
-    ((cast this.keys : flight._internal._Map<String, Float>).set(key, (cast index)));
+    ((cast this.keys : flight._internal._Map<String, Float>).set((cast key), (cast index)));
     _Runtime.callProperty(this.xs, 'push', cast ([x] : Array<Dynamic>));
     _Runtime.callProperty(this.ys, 'push', cast ([y] : Array<Dynamic>));
     _Runtime.callProperty(this.outgoing, 'push', cast ([cast ([] : Array<Dynamic>)] : Array<Dynamic>));
@@ -581,10 +581,10 @@ class _PathBoolean {
         (by = cast ((cast seg : ArrangementSegment__martinezKernel).ay : Dynamic));
       }
       var key:String = '' + Std.string((cast _PathBoolean.snap__martinezKernel((cast ax : Float)) : Float)) + ',' + Std.string((cast _PathBoolean.snap__martinezKernel((cast ay : Float)) : Float)) + ',' + Std.string((cast _PathBoolean.snap__martinezKernel((cast bx : Float)) : Float)) + ',' + Std.string((cast _PathBoolean.snap__martinezKernel((cast by : Float)) : Float)) + '';
-      var unique:Null<UniqueSegment__martinezKernel> = ((cast map : flight._internal._Map<String, UniqueSegment__martinezKernel>).get(key));
+      var unique:Null<UniqueSegment__martinezKernel> = ((cast map : flight._internal._Map<String, UniqueSegment__martinezKernel>).get((cast key)));
       if ((cast _Runtime.strictEquals(unique, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         (unique = cast ({ ax: ax, ay: ay, bx: bx, by: by, subjectDelta: 0.0, clipDelta: 0.0 } : Dynamic));
-        ((cast map : flight._internal._Map<String, UniqueSegment__martinezKernel>).set(key, (cast unique)));
+        ((cast map : flight._internal._Map<String, UniqueSegment__martinezKernel>).set((cast key), (cast unique)));
       }
       if ((cast (cast seg : ArrangementSegment__martinezKernel).isSubject : Bool)) { ((cast unique : UniqueSegment__martinezKernel).subjectDelta += (cast seg : ArrangementSegment__martinezKernel).windingDelta); } else { ((cast unique : UniqueSegment__martinezKernel).clipDelta += (cast seg : ArrangementSegment__martinezKernel).windingDelta); }
     }
@@ -807,7 +807,7 @@ class _PathBoolean {
         var previousEndY:Float = (vy + (signedDelta * flight._internal._StaticIndex.readFloatArrayTyped((cast normalY : Array<Float>), (cast previous : Float))));
         var thisStartX:Float = (vx + (signedDelta * flight._internal._StaticIndex.readFloatArrayTyped((cast normalX : Array<Float>), (cast k : Float))));
         var thisStartY:Float = (vy + (signedDelta * flight._internal._StaticIndex.readFloatArrayTyped((cast normalY : Array<Float>), (cast k : Float))));
-        if ((cast ((cast capIndices : flight._internal._Set<Float>).has(k)) : Bool)) {
+        if ((cast ((cast capIndices : flight._internal._Set<Float>).has((cast k))) : Bool)) {
           _PathBoolean.emitOffsetEndCap__offsetPath(({ final __callArgument167:Dynamic = ring; __callArgument167; }), (cast vx : Float), (cast vy : Float), (cast previousEndX : Float), (cast previousEndY : Float), (cast thisStartX : Float), (cast thisStartY : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast previous : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast previous : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast k : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast k : Float)) : Float), (cast HxMath.abs(signedDelta) : Float), ({ final __callArgument168:Dynamic = end; __callArgument168; }), (cast arcTolerance : Float));
         } else {
           _PathBoolean.emitOffsetJoin__offsetPath(({ final __callArgument171:Dynamic = ring; __callArgument171; }), (cast vx : Float), (cast vy : Float), (cast previousEndX : Float), (cast previousEndY : Float), (cast thisStartX : Float), (cast thisStartY : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast previous : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast previous : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast k : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast k : Float)) : Float), (cast signedDelta : Float), ({ final __callArgument172:Dynamic = join; __callArgument172; }), (cast miterLimit : Float), (cast arcTolerance : Float));

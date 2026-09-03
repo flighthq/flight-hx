@@ -4,4 +4,32 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Materials)
+@:structInit
+class ColorScaleBias {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var alphaScale:Float;
+  public var alphaBias:Float;
+  public var blueScale:Float;
+  public var blueBias:Float;
+  public var greenScale:Float;
+  public var greenBias:Float;
+  public var redScale:Float;
+  public var redBias:Float;
+
+  private function new(alphaScale:Float, alphaBias:Float, blueScale:Float, blueBias:Float, greenScale:Float, greenBias:Float, redScale:Float, redBias:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.alphaScale = alphaScale;
+    this.alphaBias = alphaBias;
+    this.blueScale = blueScale;
+    this.blueBias = blueBias;
+    this.greenScale = greenScale;
+    this.greenBias = greenBias;
+    this.redScale = redScale;
+    this.redBias = redBias;
+  }
+}
+#else
 typedef ColorScaleBias = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var alphaScale:Float; var alphaBias:Float; var blueScale:Float; var blueBias:Float; var greenScale:Float; var greenBias:Float; var redScale:Float; var redBias:Float; };
+#end

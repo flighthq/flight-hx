@@ -796,7 +796,7 @@ class _Particles {
 
   public static function createParticleEmitterState(?random:RandomSource):ParticleEmitterState {
     if (random == null) random = cast (HxMath.random : Dynamic);
-    return ({ burstTimer: 0.0, colorBirth: new flight._internal._Float32Array(), colorDeath: new flight._internal._Float32Array(), emitterAge: 0.0, lifetimes: new flight._internal._Float32Array(), prevX: HxMath.NaN, prevY: HxMath.NaN, prevZ: HxMath.NaN, random: random, rotationSpeeds: new flight._internal._Float32Array(), scales: new flight._internal._Float32Array(), spawnAccumulator: 0.0, velocities: new flight._internal._Float32Array() } : ParticleEmitterState);
+    return ({ burstTimer: (cast 0.0 : Dynamic), colorBirth: (cast new flight._internal._Float32Array() : Dynamic), colorDeath: (cast new flight._internal._Float32Array() : Dynamic), emitterAge: (cast 0.0 : Dynamic), lifetimes: (cast new flight._internal._Float32Array() : Dynamic), prevX: (cast HxMath.NaN : Dynamic), prevY: (cast HxMath.NaN : Dynamic), prevZ: (cast HxMath.NaN : Dynamic), random: (cast random : Dynamic), rotationSpeeds: (cast new flight._internal._Float32Array() : Dynamic), scales: (cast new flight._internal._Float32Array() : Dynamic), spawnAccumulator: (cast 0.0 : Dynamic), velocities: (cast new flight._internal._Float32Array() : Dynamic) } : ParticleEmitterState);
     return cast null;
   }
 

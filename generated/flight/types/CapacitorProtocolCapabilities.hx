@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CapacitorProtocolCapabilities = flight._internal._Intersection2<Entity, flight._internal._Required<{ @:optional var open:Null<ProtocolOpenBackend>; }>>;
+#if !flight_struct_typedef
+@:allow(flight._HostCapacitor)
+@:structInit
+class CapacitorProtocolCapabilities {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var open:ProtocolOpenBackend;
+
+  private function new(open:ProtocolOpenBackend):Void {
+    this.__symbol__EntityRuntime = null;
+    this.open = open;
+  }
+}
+#else
+typedef CapacitorProtocolCapabilities = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var open:ProtocolOpenBackend; };
+#end

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ParticleObject = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; var alpha:Float; var visible:Bool; var colorScaleBias:Null<ColorScaleBias>; };
+typedef ParticleObject = { var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var alpha:Float; var visible:Bool; var colorScaleBias:Null<ColorScaleBias>; };

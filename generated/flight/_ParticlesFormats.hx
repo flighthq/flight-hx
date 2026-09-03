@@ -143,7 +143,7 @@ class _ParticlesFormats {
   }
 
   public static function getParticleFormatCodec(kind:ParticleFormatKind):Null<ParticleFormatCodec> {
-    return cast _Runtime.coalesce(((cast _ParticlesFormats._registry__formatRegistry : flight._internal._Map<String, ParticleFormatCodec>).get(kind)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _ParticlesFormats._registry__formatRegistry : flight._internal._Map<String, ParticleFormatCodec>).get((cast kind))), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -154,7 +154,7 @@ class _ParticlesFormats {
 
   public static function parseRegisteredParticleFormat(text:String, kind:String):ParticleConfigParseResult {
     var codec:Null<ParticleFormatCodec> = cast _Runtime.UNDEFINED;
-    codec = ((cast _ParticlesFormats._registry__formatRegistry : flight._internal._Map<String, ParticleFormatCodec>).get(kind));
+    codec = ((cast _ParticlesFormats._registry__formatRegistry : flight._internal._Map<String, ParticleFormatCodec>).get((cast kind)));
     if ((cast !_Runtime.truthy(codec) : Bool)) {
       var diagnostics:Array<ImportDiagnostic> = (cast cast ([] : Array<Dynamic>));
       reportImportDiagnostic(({ final __callArgument2:Dynamic = diagnostics; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument3; }), (cast 'particles.unknown-format' : String), (cast 'parseRegisteredParticleFormat' : String), ({ final __callArgument4:Dynamic = { reason: 'no-registered-codec' }; __callArgument4; }));
@@ -172,11 +172,11 @@ class _ParticlesFormats {
   }
 
   public static function registerParticleFormat(kind:ParticleFormatKind, codec:ParticleFormatCodec):Void {
-    ((cast _ParticlesFormats._registry__formatRegistry : flight._internal._Map<String, ParticleFormatCodec>).set(kind, (cast codec)));
+    ((cast _ParticlesFormats._registry__formatRegistry : flight._internal._Map<String, ParticleFormatCodec>).set((cast kind), (cast codec)));
   }
 
   public static function unregisterParticleFormat(kind:ParticleFormatKind):Bool {
-    return cast ((cast _ParticlesFormats._registry__formatRegistry : flight._internal._Map<String, ParticleFormatCodec>).delete_(kind));
+    return cast ((cast _ParticlesFormats._registry__formatRegistry : flight._internal._Map<String, ParticleFormatCodec>).delete_((cast kind)));
     return cast null;
   }
 
@@ -214,7 +214,7 @@ class _ParticlesFormats {
 
   public static function boolKey__libgdxParse(section:LibgdxSection__libgdxParse, key:String, def:Bool = false):Bool {
     var v:Null<String> = cast _Runtime.UNDEFINED;
-    v = ((cast section : LibgdxSection__libgdxParse).get(key));
+    v = ((cast section : LibgdxSection__libgdxParse).get((cast key)));
     if ((cast _Runtime.strictEquals(v, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast def; }
     return cast _Runtime.strictEquals(v, 'true');
     return cast null;
@@ -404,7 +404,7 @@ class _ParticlesFormats {
   public static function numKey__libgdxParse(section:LibgdxSection__libgdxParse, key:String, def:Float = 0.0):Float {
     var v:Null<String> = cast _Runtime.UNDEFINED;
     var n:Float = cast _Runtime.UNDEFINED;
-    v = ((cast section : LibgdxSection__libgdxParse).get(key));
+    v = ((cast section : LibgdxSection__libgdxParse).get((cast key)));
     if ((cast _Runtime.strictEquals(v, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast def; }
     n = _Runtime.callValue(flight._internal._HostValueLut.get('parseFloat'), cast ([v] : Array<Dynamic>));
     return cast ((cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isFinite', cast ([n] : Array<Dynamic>)) : Bool) ? (cast n : Dynamic) : (cast def : Dynamic));
@@ -428,7 +428,7 @@ class _ParticlesFormats {
       var colonIdx:Float = _Runtime.callProperty(line, 'indexOf', cast ([':'] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(colonIdx, -1.0) : Bool)) {
         if ((cast ((cast !_Runtime.strictEquals(currentSection, '') : Bool) || (cast ((cast (cast current : LibgdxSection__libgdxParse).size : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-          ((cast sections : flight._internal._Map<String, LibgdxSection__libgdxParse>).set(currentSection, (cast current)));
+          ((cast sections : flight._internal._Map<String, LibgdxSection__libgdxParse>).set((cast currentSection), (cast current)));
         }
         (currentSection = cast (line : Dynamic));
         (current = cast (_Runtime.construct(flight._internal._HostValueLut.get('Map'), []) : Dynamic));
@@ -436,11 +436,11 @@ class _ParticlesFormats {
       } else {
         var key:String = StringTools.trim(Std.string(_Runtime.slice(line, 0.0, colonIdx)));
         var value:String = StringTools.trim(Std.string(_Runtime.slice(line, (colonIdx + 1.0), null)));
-        ((cast current : LibgdxSection__libgdxParse).set(key, (cast value)));
+        ((cast current : LibgdxSection__libgdxParse).set((cast key), (cast value)));
       }
     }
     if ((cast ((cast !_Runtime.strictEquals(currentSection, '') : Bool) || (cast ((cast (cast current : LibgdxSection__libgdxParse).size : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      ((cast sections : flight._internal._Map<String, LibgdxSection__libgdxParse>).set(currentSection, (cast current)));
+      ((cast sections : flight._internal._Map<String, LibgdxSection__libgdxParse>).set((cast currentSection), (cast current)));
     }
     return cast { header: header, sections: sections };
     return cast null;
@@ -514,8 +514,8 @@ class _ParticlesFormats {
     var spawnShape:{ var shape:String; var edges:Bool; var side:String; } = cast _Runtime.UNDEFINED;
     emitterKey = _Runtime.find(_Runtime.concatArrays([_Runtime.toArray(((cast sections : flight._internal._Map<String, LibgdxSection__libgdxParse>).keys()))]), function(k:String, __unused14:Float, __unused15:Array<String>):Bool return ((cast StringTools.startsWith(k, '- ') : Bool) && (cast StringTools.endsWith(Std.string(k), ' -') : Bool)));
     emitterName = _Runtime.coalesce(_Runtime.callOptionalProperty(_Runtime.callOptionalProperty(emitterKey, 'slice', cast ([2.0, -2.0] : Array<Dynamic>)), 'trim', cast ([] : Array<Dynamic>)), function():Dynamic return cast '');
-    root = _Runtime.coalesce(_Runtime.coalesce(_Runtime.coalesce(((cast !_Runtime.strictEquals(emitterKey, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast ((cast sections : flight._internal._Map<String, LibgdxSection__libgdxParse>).get(emitterKey)) : Dynamic) : (cast null : Dynamic)), function():Dynamic return cast ((cast sections : flight._internal._Map<String, LibgdxSection__libgdxParse>).get('Particle Effect'))), function():Dynamic return cast ((cast sections : flight._internal._Map<String, LibgdxSection__libgdxParse>).get(''))), function():Dynamic return cast _Runtime.construct(flight._internal._HostValueLut.get('Map'), []));
-    get = (cast function(name:String):LibgdxSection__libgdxParse return _Runtime.coalesce(((cast sections : flight._internal._Map<String, LibgdxSection__libgdxParse>).get(name)), function():Dynamic return cast _Runtime.construct(flight._internal._HostValueLut.get('Map'), [])));
+    root = _Runtime.coalesce(_Runtime.coalesce(_Runtime.coalesce(((cast !_Runtime.strictEquals(emitterKey, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast ((cast sections : flight._internal._Map<String, LibgdxSection__libgdxParse>).get((cast emitterKey))) : Dynamic) : (cast null : Dynamic)), function():Dynamic return cast ((cast sections : flight._internal._Map<String, LibgdxSection__libgdxParse>).get((cast 'Particle Effect')))), function():Dynamic return cast ((cast sections : flight._internal._Map<String, LibgdxSection__libgdxParse>).get((cast '')))), function():Dynamic return cast _Runtime.construct(flight._internal._HostValueLut.get('Map'), []));
+    get = (cast function(name:String):LibgdxSection__libgdxParse return _Runtime.coalesce(((cast sections : flight._internal._Map<String, LibgdxSection__libgdxParse>).get((cast name))), function():Dynamic return cast _Runtime.construct(flight._internal._HostValueLut.get('Map'), [])));
     delaySection = (cast get((cast 'Delay' : String)) : LibgdxSection__libgdxParse);
     durationSection = (cast get((cast 'Duration' : String)) : LibgdxSection__libgdxParse);
     emissionSection = (cast get((cast 'Emission' : String)) : LibgdxSection__libgdxParse);
@@ -560,7 +560,7 @@ class _ParticlesFormats {
   }
 
   public static function strKey__libgdxParse(section:LibgdxSection__libgdxParse, key:String, def:String = ''):String {
-    return cast _Runtime.coalesce(((cast section : LibgdxSection__libgdxParse).get(key)), function():Dynamic return cast def);
+    return cast _Runtime.coalesce(((cast section : LibgdxSection__libgdxParse).get((cast key))), function():Dynamic return cast def);
     return cast null;
   }
 
@@ -2198,7 +2198,7 @@ class _ParticlesFormats {
     shape = (cast (cast raw : { var shape:flight._internal._Any; }).shape : Null<flight._internal._Record<String, flight._internal._Any>>);
     if ((cast ((cast ((cast !_Runtime.looseEquals(shape, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(shape), 'object') : Bool)) : Bool) && (cast (cast _ParticlesFormats.rb__unityParse((cast (cast shape : { var enabled:flight._internal._Any; }).enabled : flight._internal._Any), (cast false : Bool)) : Bool) : Bool)) : Bool)) {
       var shapeType:String = (cast _ParticlesFormats.rs__unityParse((cast (cast shape : { var shapeType:flight._internal._Any; }).shapeType : flight._internal._Any), (cast 'Cone' : String)) : String);
-      if ((cast !(cast ((cast _ParticlesFormats.KNOWN_UNITY_SHAPES__unityParse : flight._internal._Set<String>).has(shapeType)) : Bool) : Bool)) {
+      if ((cast !(cast ((cast _ParticlesFormats.KNOWN_UNITY_SHAPES__unityParse : flight._internal._Set<String>).has((cast shapeType))) : Bool) : Bool)) {
         reportImportDiagnostic(({ final __callArgument668:Dynamic = diagnostics; __callArgument668; }), ({ final __callArgument669:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument669; }), (cast 'unity.shape-unsupported' : String), (cast 'collectUnityDiagnostics' : String), ({ final __callArgument670:Dynamic = { shapeType: shapeType }; __callArgument670; }));
       }
     }

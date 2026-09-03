@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostTauri)
+@:structInit
+class TauriNotificationCapabilities {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var delivery:NotificationDeliveryBackend;
+  public var lifecycle:NotificationLifecycleBackend;
+  public var permission:NotificationPermissionBackend;
+
+  private function new(delivery:NotificationDeliveryBackend, lifecycle:NotificationLifecycleBackend, permission:NotificationPermissionBackend):Void {
+    this.__symbol__EntityRuntime = null;
+    this.delivery = delivery;
+    this.lifecycle = lifecycle;
+    this.permission = permission;
+  }
+}
+#else
 typedef TauriNotificationCapabilities = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var delivery:NotificationDeliveryBackend; var lifecycle:NotificationLifecycleBackend; var permission:NotificationPermissionBackend; };
+#end

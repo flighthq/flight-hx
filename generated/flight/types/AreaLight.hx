@@ -4,4 +4,40 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Lighting)
+@:structInit
+class AreaLight {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var kind:String;
+  public var castsShadow:Bool;
+  public var color:Float;
+  public var direction:Vector3;
+  public var intensity:Float;
+  public var normalBias:Float;
+  public var pcfRadius:Float;
+  public var position:Vector3;
+  public var range:Float;
+  public var right:Vector3;
+  public var shadowBias:Float;
+  public var up:Vector3;
+
+  private function new(kind:String, castsShadow:Bool, color:Float, direction:Vector3, intensity:Float, normalBias:Float, pcfRadius:Float, position:Vector3, range:Float, right:Vector3, shadowBias:Float, up:Vector3):Void {
+    this.__symbol__EntityRuntime = null;
+    this.kind = kind;
+    this.castsShadow = castsShadow;
+    this.color = color;
+    this.direction = direction;
+    this.intensity = intensity;
+    this.normalBias = normalBias;
+    this.pcfRadius = pcfRadius;
+    this.position = position;
+    this.range = range;
+    this.right = right;
+    this.shadowBias = shadowBias;
+    this.up = up;
+  }
+}
+#else
 typedef AreaLight = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var castsShadow:Bool; var color:Float; var direction:Vector3; var intensity:Float; var normalBias:Float; var pcfRadius:Float; var position:Vector3; var range:Float; var right:Vector3; var shadowBias:Float; var up:Vector3; };
+#end

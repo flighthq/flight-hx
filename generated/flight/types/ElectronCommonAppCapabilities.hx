@@ -4,5 +4,44 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
 @:noCompletion
-typedef ElectronCommonAppCapabilities = flight._internal._Intersection2<Entity, flight._internal._Required<{ @:optional var allWindowsClosed:Null<AppAllWindowsClosedBackend>; @:optional var focus:Null<AppFocusBackend>; @:optional var locale:Null<AppLocaleBackend>; @:optional var name:Null<AppNameBackend>; @:optional var nameWrite:Null<AppNameWriteBackend>; @:optional var path:Null<AppPathBackend>; @:optional var quit:Null<AppQuitBackend>; @:optional var quitRequest:Null<AppQuitRequestBackend>; @:optional var ready:Null<AppReadyBackend>; @:optional var relaunch:Null<AppRelaunchBackend>; @:optional var secondInstance:Null<AppSecondInstanceBackend>; @:optional var singleInstance:Null<AppSingleInstanceBackend>; @:optional var version:Null<AppVersionBackend>; }>>;
+@:allow(flight._HostElectron)
+@:structInit
+class ElectronCommonAppCapabilities {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var name:AppNameBackend;
+  public var version:AppVersionBackend;
+  public var path:AppPathBackend;
+  public var allWindowsClosed:AppAllWindowsClosedBackend;
+  public var quitRequest:AppQuitRequestBackend;
+  public var ready:AppReadyBackend;
+  public var secondInstance:AppSecondInstanceBackend;
+  public var focus:AppFocusBackend;
+  public var quit:AppQuitBackend;
+  public var locale:AppLocaleBackend;
+  public var nameWrite:AppNameWriteBackend;
+  public var relaunch:AppRelaunchBackend;
+  public var singleInstance:AppSingleInstanceBackend;
+
+  private function new(name:AppNameBackend, version:AppVersionBackend, path:AppPathBackend, allWindowsClosed:AppAllWindowsClosedBackend, quitRequest:AppQuitRequestBackend, ready:AppReadyBackend, secondInstance:AppSecondInstanceBackend, focus:AppFocusBackend, quit:AppQuitBackend, locale:AppLocaleBackend, nameWrite:AppNameWriteBackend, relaunch:AppRelaunchBackend, singleInstance:AppSingleInstanceBackend):Void {
+    this.__symbol__EntityRuntime = null;
+    this.name = name;
+    this.version = version;
+    this.path = path;
+    this.allWindowsClosed = allWindowsClosed;
+    this.quitRequest = quitRequest;
+    this.ready = ready;
+    this.secondInstance = secondInstance;
+    this.focus = focus;
+    this.quit = quit;
+    this.locale = locale;
+    this.nameWrite = nameWrite;
+    this.relaunch = relaunch;
+    this.singleInstance = singleInstance;
+  }
+}
+#else
+@:noCompletion
+typedef ElectronCommonAppCapabilities = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var name:AppNameBackend; var version:AppVersionBackend; var path:AppPathBackend; var allWindowsClosed:AppAllWindowsClosedBackend; var quitRequest:AppQuitRequestBackend; var ready:AppReadyBackend; var secondInstance:AppSecondInstanceBackend; var focus:AppFocusBackend; var quit:AppQuitBackend; var locale:AppLocaleBackend; var nameWrite:AppNameWriteBackend; var relaunch:AppRelaunchBackend; var singleInstance:AppSingleInstanceBackend; };
+#end

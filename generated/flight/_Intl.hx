@@ -10,14 +10,14 @@ class _Intl {
   public static function getCached<T>(key:String, build:Void->T):T {
     var existing:flight._internal._Any = cast _Runtime.UNDEFINED;
     var built:T = cast _Runtime.UNDEFINED;
-    existing = ((cast _Intl.formatterCache__cache : flight._internal._Map<String, flight._internal._Any>).get(key));
+    existing = ((cast _Intl.formatterCache__cache : flight._internal._Map<String, flight._internal._Any>).get((cast key)));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast existing : T); }
     built = (cast build() : T);
     if ((cast ((cast (cast _Intl.formatterCache__cache : flight._internal._Map<String, flight._internal._Any>).size : Float) >= (cast _Intl.cacheCapacity__cache : Float)) : Bool)) {
       var oldest:Null<String> = (cast _Runtime.callProperty(((cast _Intl.formatterCache__cache : flight._internal._Map<String, flight._internal._Any>).keys()), 'next', cast ([] : Array<Dynamic>)) : { var value:Null<String>; }).value;
-      if ((cast !_Runtime.strictEquals(oldest, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast _Intl.formatterCache__cache : flight._internal._Map<String, flight._internal._Any>).delete_(oldest)); }
+      if ((cast !_Runtime.strictEquals(oldest, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast _Intl.formatterCache__cache : flight._internal._Map<String, flight._internal._Any>).delete_((cast oldest))); }
     }
-    ((cast _Intl.formatterCache__cache : flight._internal._Map<String, flight._internal._Any>).set(key, (cast built)));
+    ((cast _Intl.formatterCache__cache : flight._internal._Map<String, flight._internal._Any>).set((cast key), (cast built)));
     return cast built;
     return cast null;
   }

@@ -129,14 +129,14 @@ class _TextSegment {
     var built:flight._internal._Any = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('Intl'), 'undefined') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(flight._internal._HostValueLut.get('Intl'), 'Segmenter')), 'undefined') : Bool)) : Bool)) { return cast null; }
     key = '' + Std.string(_Runtime.coalesce(locale, function():Dynamic return cast '')) + '|' + Std.string(granularity) + '';
-    existing = ((cast _TextSegment._segmenterCache__textSegmenterBackend : flight._internal._Map<String, flight._internal._Any>).get(key));
+    existing = ((cast _TextSegment._segmenterCache__textSegmenterBackend : flight._internal._Map<String, flight._internal._Any>).get((cast key)));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
     built = _Runtime.construct(_Runtime.field(flight._internal._HostValueLut.get('Intl'), 'Segmenter'), [locale, { granularity: granularity }]);
     if ((cast ((cast (cast _TextSegment._segmenterCache__textSegmenterBackend : flight._internal._Map<String, flight._internal._Any>).size : Float) >= (cast _TextSegment._segmenterCacheCapacity__textSegmenterBackend : Float)) : Bool)) {
       var oldest:Null<String> = (cast _Runtime.callProperty(((cast _TextSegment._segmenterCache__textSegmenterBackend : flight._internal._Map<String, flight._internal._Any>).keys()), 'next', cast ([] : Array<Dynamic>)) : { var value:Null<String>; }).value;
-      if ((cast !_Runtime.strictEquals(oldest, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast _TextSegment._segmenterCache__textSegmenterBackend : flight._internal._Map<String, flight._internal._Any>).delete_(oldest)); }
+      if ((cast !_Runtime.strictEquals(oldest, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast _TextSegment._segmenterCache__textSegmenterBackend : flight._internal._Map<String, flight._internal._Any>).delete_((cast oldest))); }
     }
-    ((cast _TextSegment._segmenterCache__textSegmenterBackend : flight._internal._Map<String, flight._internal._Any>).set(key, (cast built)));
+    ((cast _TextSegment._segmenterCache__textSegmenterBackend : flight._internal._Map<String, flight._internal._Any>).set((cast key), (cast built)));
     return cast built;
     return cast null;
   }

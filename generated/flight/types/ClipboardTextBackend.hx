@@ -4,4 +4,24 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostTauri)
+@:structInit
+class ClipboardTextBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var clear:Void->flight._internal._Promise<Bool>;
+  public var hasText:Void->flight._internal._Promise<Bool>;
+  public var readText:Void->flight._internal._Promise<String>;
+  public var writeText:String->flight._internal._Promise<Bool>;
+
+  private function new(clear:Void->flight._internal._Promise<Bool>, hasText:Void->flight._internal._Promise<Bool>, readText:Void->flight._internal._Promise<String>, writeText:String->flight._internal._Promise<Bool>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.clear = clear;
+    this.hasText = hasText;
+    this.readText = readText;
+    this.writeText = writeText;
+  }
+}
+#else
 typedef ClipboardTextBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var clear:Void->flight._internal._Promise<Bool>; var hasText:Void->flight._internal._Promise<Bool>; var readText:Void->flight._internal._Promise<String>; var writeText:String->flight._internal._Promise<Bool>; };
+#end

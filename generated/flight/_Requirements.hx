@@ -34,7 +34,7 @@ class _Requirements {
     var baselineKeys:flight._internal._Set<String> = cast _Runtime.UNDEFINED;
     covers = (cast _Requirements.intersectSorted__requirementSet(_Runtime.field(requirements, 'covers'), _Runtime.field(baseline, 'covers')) : Array<RequirementFacet>);
     baselineKeys = _Runtime.construct(flight._internal._HostValueLut.get('Set'), [(cast _Runtime.mapArray((cast _Runtime.field(baseline, 'requirements') : Array<Requirement>), function(requirement:Requirement, __unused0:Float, __unused1:Array<Requirement>):String return (cast _Requirements.requirementIdentity__requirementSet(requirement.facet, (cast requirement.key : String)) : String), _Runtime.UNDEFINED))]);
-    return cast (cast createRequirementSet(({ final __callArgument10:Dynamic = covers; __callArgument10; }), (cast _Runtime.filterArray((cast _Runtime.field(requirements, 'requirements') : Array<Requirement>), function(requirement:Requirement, __unused2:Float, __unused3:Array<Requirement>):Bool return ((cast _Runtime.includes(covers, requirement.facet) : Bool) && (cast !(cast ((cast baselineKeys : flight._internal._Set<String>).has((cast _Requirements.requirementIdentity__requirementSet(requirement.facet, (cast requirement.key : String)) : String))) : Bool) : Bool)), _Runtime.UNDEFINED))) : RequirementSet);
+    return cast (cast createRequirementSet(({ final __callArgument10:Dynamic = covers; __callArgument10; }), (cast _Runtime.filterArray((cast _Runtime.field(requirements, 'requirements') : Array<Requirement>), function(requirement:Requirement, __unused2:Float, __unused3:Array<Requirement>):Bool return ((cast _Runtime.includes(covers, requirement.facet) : Bool) && (cast !(cast ((cast baselineKeys : flight._internal._Set<String>).has((cast (cast _Requirements.requirementIdentity__requirementSet(requirement.facet, (cast requirement.key : String)) : String)))) : Bool) : Bool)), _Runtime.UNDEFINED))) : RequirementSet);
     return cast null;
   }
 
@@ -61,7 +61,7 @@ class _Requirements {
     var byIdentity:flight._internal._Map<String, Requirement> = cast _Runtime.UNDEFINED;
     byIdentity = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
     for (requirement in _Runtime.iterable(requirements)) {
-      ((cast byIdentity : flight._internal._Map<String, Requirement>).set((cast _Requirements.requirementIdentity__requirementSet(requirement.facet, (cast requirement.key : String)) : String), (cast { facet: requirement.facet, key: requirement.key })));
+      ((cast byIdentity : flight._internal._Map<String, Requirement>).set((cast (cast _Requirements.requirementIdentity__requirementSet(requirement.facet, (cast requirement.key : String)) : String)), (cast { facet: requirement.facet, key: requirement.key })));
     }
     return cast _Runtime.sortAndReturn(_Runtime.concatArrays([_Runtime.toArray(((cast byIdentity : flight._internal._Map<String, Requirement>).values()))]), function(a:Requirement, b:Requirement) return _Runtime.orValue((cast a.facet : { var localeCompare:flight._internal._Any; }).localeCompare((cast b.facet : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end), function():Dynamic return cast _Runtime.callProperty(a.key, 'localeCompare', cast ([b.key] : Array<Dynamic>))));
     return cast null;
@@ -70,7 +70,7 @@ class _Requirements {
   public static function intersectSorted__requirementSet(first:Array<RequirementFacet>, second:Array<RequirementFacet>):Array<RequirementFacet> {
     var secondValues:flight._internal._Set<RequirementFacet> = cast _Runtime.UNDEFINED;
     secondValues = _Runtime.construct(flight._internal._HostValueLut.get('Set'), [second]);
-    return cast (cast _Requirements.distinctSorted__requirementSet((cast _Runtime.filterArray((cast first : Array<RequirementFacet>), function(value:RequirementFacet, __unused4:Float, __unused5:Array<RequirementFacet>):Bool return ((cast secondValues : flight._internal._Set<RequirementFacet>).has(value)), _Runtime.UNDEFINED))) : Array<RequirementFacet>);
+    return cast (cast _Requirements.distinctSorted__requirementSet((cast _Runtime.filterArray((cast first : Array<RequirementFacet>), function(value:RequirementFacet, __unused4:Float, __unused5:Array<RequirementFacet>):Bool return ((cast secondValues : flight._internal._Set<RequirementFacet>).has((cast value))), _Runtime.UNDEFINED))) : Array<RequirementFacet>);
     return cast null;
   }
 

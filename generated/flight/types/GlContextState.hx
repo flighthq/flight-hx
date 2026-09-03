@@ -4,5 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:noCompletion
+@:allow(flight._RenderGl)
+@:structInit
+class GlContextState {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var gl:GlContext;
+
+  private function new(gl:GlContext):Void {
+    this.__symbol__EntityRuntime = null;
+    this.gl = gl;
+  }
+}
+#else
 @:noCompletion
 typedef GlContextState = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var gl:GlContext; };
+#end

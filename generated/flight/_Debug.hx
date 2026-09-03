@@ -102,11 +102,11 @@ class _Debug {
   }
 
   public static function registerDebugSubsystem(name:DebugSubsystemName, hooks:DebugSubsystemHooks):Void {
-    ((cast _Debug._subsystems__debug : flight._internal._Map<String, DebugSubsystemHooks>).set(name, (cast hooks)));
+    ((cast _Debug._subsystems__debug : flight._internal._Map<String, DebugSubsystemHooks>).set((cast name), (cast hooks)));
   }
 
   public static function unregisterDebugSubsystem(name:DebugSubsystemName):Bool {
-    return cast ((cast _Debug._subsystems__debug : flight._internal._Map<String, DebugSubsystemHooks>).delete_(name));
+    return cast ((cast _Debug._subsystems__debug : flight._internal._Map<String, DebugSubsystemHooks>).delete_((cast name)));
     return cast null;
   }
 
@@ -154,7 +154,7 @@ class _Debug {
     if ((cast _Runtime.strictEquals(names, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _Runtime.concatArrays([_Runtime.toArray(((cast _Debug._subsystems__debug : flight._internal._Map<String, DebugSubsystemHooks>).values()))]); }
     resolved = (cast cast ([] : Array<Dynamic>));
     for (name in _Runtime.iterable(names)) {
-      var hooks:Null<DebugSubsystemHooks> = ((cast _Debug._subsystems__debug : flight._internal._Map<String, DebugSubsystemHooks>).get(name));
+      var hooks:Null<DebugSubsystemHooks> = ((cast _Debug._subsystems__debug : flight._internal._Map<String, DebugSubsystemHooks>).get((cast name)));
       if ((cast !_Runtime.strictEquals(hooks, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(resolved, 'push', cast ([hooks] : Array<Dynamic>)); }
     }
     return cast resolved;

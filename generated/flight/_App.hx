@@ -130,15 +130,15 @@ class _App {
   }
 
   public static function createApp():App {
-    return cast (cast createEntity((cast ({ onActivate: (cast createSignal() : Signal<Void->Void>), onAllWindowsClosed: (cast createSignal() : Signal<Void->Void>), onOpenFile: (cast createSignal() : Signal<String->Void>), onQuitRequest: (cast createSignal() : Signal<Void->Void>), onReady: (cast createSignal() : Signal<Void->Void>), onSecondInstance: (cast createSignal() : Signal<Array<String>->Void>) } : App) : Dynamic)) : App);
+    return cast (cast createEntity((cast ({ onActivate: (cast (cast createSignal() : Signal<Void->Void>) : Dynamic), onAllWindowsClosed: (cast (cast createSignal() : Signal<Void->Void>) : Dynamic), onOpenFile: (cast (cast createSignal() : Signal<String->Void>) : Dynamic), onQuitRequest: (cast (cast createSignal() : Signal<Void->Void>) : Dynamic), onReady: (cast (cast createSignal() : Signal<Void->Void>) : Dynamic), onSecondInstance: (cast (cast createSignal() : Signal<Array<String>->Void>) : Dynamic) } : App) : Dynamic)) : App);
     return cast null;
   }
 
   public static function detachApp(app:App):Void {
     var subscriptions:Null<AppSubscriptions__app> = cast _Runtime.UNDEFINED;
-    subscriptions = ((cast _App._subscriptions__app : flight._internal._WeakMap<App, AppSubscriptions__app>).get(app));
+    subscriptions = ((cast _App._subscriptions__app : flight._internal._WeakMap<App, AppSubscriptions__app>).get((cast app)));
     if ((cast _Runtime.strictEquals(subscriptions, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    ((cast _App._subscriptions__app : flight._internal._WeakMap<App, AppSubscriptions__app>).delete_(app));
+    ((cast _App._subscriptions__app : flight._internal._WeakMap<App, AppSubscriptions__app>).delete_((cast app)));
     for (unsubscribe in _Runtime.iterable(flight._internal.DynamicObject.values(subscriptions))) {
       _Runtime.callOptionalValue(unsubscribe, cast ([] : Array<Dynamic>));
     }
@@ -276,9 +276,9 @@ class _App {
 
   public static function replaceAppSubscription__app(app:App, key:String, unsubscribe:Void->Void):Void {
     var subscriptions:AppSubscriptions__app = cast _Runtime.UNDEFINED;
-    subscriptions = _Runtime.coalesce(((cast _App._subscriptions__app : flight._internal._WeakMap<App, AppSubscriptions__app>).get(app)), function():Dynamic return cast {  });
+    subscriptions = _Runtime.coalesce(((cast _App._subscriptions__app : flight._internal._WeakMap<App, AppSubscriptions__app>).get((cast app))), function():Dynamic return cast {  });
     _Runtime.callOptionalValue(_Runtime.getIndex(subscriptions, key), cast ([] : Array<Dynamic>));
     _Runtime.setIndex(subscriptions, key, unsubscribe);
-    ((cast _App._subscriptions__app : flight._internal._WeakMap<App, AppSubscriptions__app>).set(app, (cast subscriptions)));
+    ((cast _App._subscriptions__app : flight._internal._WeakMap<App, AppSubscriptions__app>).set((cast app), (cast subscriptions)));
   }
 }

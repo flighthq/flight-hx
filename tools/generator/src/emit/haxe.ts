@@ -2466,7 +2466,8 @@ function emitExpression(expression: IrExpression): string {
           }
           const left = expression.left;
           const field = directTypedStructField(left, object);
-          const assigned = (value: string): string => typedStructAssignmentValue(left, value);
+          const assigned = (value: string): string =>
+            typedStructAssignmentValue(left, value, expression.nominalEntityCast === true);
           if (expression.operator === '=') {
             return `(${field} = ${assigned(emitExpression(expression.right))})`;
           }
@@ -2946,7 +2947,9 @@ function emitExpression(expression: IrExpression): string {
           );
         }
         const value = `{ ${constructionProperties
-          .map((property) => `${safeName(property.constructionName)}: ${emitExpression(property.value)}`)
+          .map(
+            (property) => `${safeName(property.constructionName)}: (cast ${emitExpression(property.value)} : Dynamic)`,
+          )
           .join(', ')} }`;
         return emitObjectThisCapture(
           expression,
@@ -3369,12 +3372,16 @@ function directTypedStructField(
   return `${typedOwner}.${safeName(binding.field.name)}`;
 }
 
-function typedStructAssignmentValue(expression: Extract<IrExpression, { kind: 'property' }>, value: string): string {
+function typedStructAssignmentValue(
+  expression: Extract<IrExpression, { kind: 'property' }>,
+  value: string,
+  nominalEntityCast = false,
+): string {
   const type = expression.type ?? expression.typedStructBinding?.field.type;
   if (!type) {
     throw new Error(`Typed-struct assignment has no field type: ${currentSourceIdentity}:${expression.name}`);
   }
-  return `cast (${value} : ${emitType(type)})`;
+  return nominalEntityCast ? `cast (cast ${value} : Dynamic)` : `cast (${value} : ${emitType(type)})`;
 }
 
 function emitTypedStructRead(expression: Extract<IrExpression, { kind: 'property' }>): string {
@@ -3403,8 +3410,11 @@ function emitOptionalDirectVoidPropertyCall(
 ): string | undefined {
   const callableType = propertyFunctionType(property);
   if (callableType?.returns.kind !== 'primitive' || callableType.returns.name !== 'Void') return undefined;
+  const checkedExpression = expression.directArgumentTypes
+    ? expression
+    : { ...expression, directArgumentTypes: callableType.parameters };
   const arguments_ = expression.arguments
-    .map((argument, index) => emitCheckedCallArgument(expression, argument, index))
+    .map((argument, index) => emitCheckedCallArgument(checkedExpression, argument, index))
     .join(', ');
   const callableTemporary = `__optionalCall${String(temporaryIndex++)}`;
   if (!property.optional) {
@@ -3623,13 +3633,7 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
         return `({ final ${temporary}:Dynamic = ${owner}; ${temporary} == null ? _Runtime.UNDEFINED : ${call(temporary)}; })`;
       }
       const method = expression.callee.name === 'delete' ? 'delete_' : safeName(expression.callee.name);
-      const collectionBinding = expression.callee.binding;
-      const collectionName = expression.callee.name;
-      const arguments_ = expression.arguments.map((argument, index) =>
-        collectionBinding.includes('MapCollection') && collectionName === 'set' && index === 1
-          ? `(cast ${emitExpression(argument)})`
-          : emitExpression(argument),
-      );
+      const arguments_ = expression.arguments.map((argument) => `(cast ${emitExpression(argument)})`);
       const call = (target: string) => `((cast ${target} : ${collectionType}).${method}(${arguments_.join(', ')}))`;
       if (!(expression.optional || expression.callee.optional)) return call(owner);
       const temporary = `__collection${String(temporaryIndex++)}`;

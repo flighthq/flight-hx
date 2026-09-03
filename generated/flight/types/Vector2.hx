@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Geometry)
+@:structInit
+class Vector2 {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var x:Float;
+  public var y:Float;
+
+  private function new(x:Float, y:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.x = x;
+    this.y = y;
+  }
+}
+#else
 typedef Vector2 = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var x:Float; var y:Float; };
+#end

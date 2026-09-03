@@ -4,4 +4,42 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Application)
+@:structInit
+class Application {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var deltaTime:Float;
+  public var elapsedTime:Float;
+  public var frameCount:Float;
+  public var interpolationAlpha:Float;
+  public var isRunning:Bool;
+  public var onActivate:Null<Signal<Void->Void>>;
+  public var onDeactivate:Null<Signal<Void->Void>>;
+  public var onError:Null<Signal<flight._internal._Any->Void>>;
+  public var onExit:Signal<Void->Void>;
+  public var onFixedUpdate:Null<Signal<Float->Void>>;
+  public var onRender:Signal<Void->Void>;
+  public var onUpdate:Signal<Float->Void>;
+  public var windows:Array<ApplicationWindow>;
+
+  private function new(deltaTime:Float, elapsedTime:Float, frameCount:Float, interpolationAlpha:Float, isRunning:Bool, onActivate:Null<Signal<Void->Void>>, onDeactivate:Null<Signal<Void->Void>>, onError:Null<Signal<flight._internal._Any->Void>>, onExit:Signal<Void->Void>, onFixedUpdate:Null<Signal<Float->Void>>, onRender:Signal<Void->Void>, onUpdate:Signal<Float->Void>, windows:Array<ApplicationWindow>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.deltaTime = deltaTime;
+    this.elapsedTime = elapsedTime;
+    this.frameCount = frameCount;
+    this.interpolationAlpha = interpolationAlpha;
+    this.isRunning = isRunning;
+    this.onActivate = onActivate;
+    this.onDeactivate = onDeactivate;
+    this.onError = onError;
+    this.onExit = onExit;
+    this.onFixedUpdate = onFixedUpdate;
+    this.onRender = onRender;
+    this.onUpdate = onUpdate;
+    this.windows = windows;
+  }
+}
+#else
 typedef Application = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var deltaTime:Float; var elapsedTime:Float; var frameCount:Float; var interpolationAlpha:Float; var isRunning:Bool; var onActivate:Null<Signal<Void->Void>>; var onDeactivate:Null<Signal<Void->Void>>; var onError:Null<Signal<flight._internal._Any->Void>>; var onExit:Signal<Void->Void>; var onFixedUpdate:Null<Signal<Float->Void>>; var onRender:Signal<Void->Void>; var onUpdate:Signal<Float->Void>; var windows:Array<ApplicationWindow>; };
+#end

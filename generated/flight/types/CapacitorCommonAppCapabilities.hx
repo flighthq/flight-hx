@@ -4,5 +4,24 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
 @:noCompletion
-typedef CapacitorCommonAppCapabilities = flight._internal._Intersection2<Entity, flight._internal._Required<{ @:optional var activate:Null<AppActivateBackend>; @:optional var name:Null<AppNameBackend>; @:optional var version:Null<AppVersionBackend>; }>>;
+@:allow(flight._HostCapacitor)
+@:structInit
+class CapacitorCommonAppCapabilities {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var name:AppNameBackend;
+  public var version:AppVersionBackend;
+  public var activate:AppActivateBackend;
+
+  private function new(name:AppNameBackend, version:AppVersionBackend, activate:AppActivateBackend):Void {
+    this.__symbol__EntityRuntime = null;
+    this.name = name;
+    this.version = version;
+    this.activate = activate;
+  }
+}
+#else
+@:noCompletion
+typedef CapacitorCommonAppCapabilities = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var name:AppNameBackend; var version:AppVersionBackend; var activate:AppActivateBackend; };
+#end

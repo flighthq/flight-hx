@@ -35,12 +35,12 @@ class _BitmapFont {
     glyphs = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
     for (glyph in _Runtime.iterable(data.glyphs)) {
       var page:Float = _Runtime.coalesce(glyph.page, function():Dynamic return cast 0.0);
-      ((cast glyphs : flight._internal._Map<Float, GlyphEntry>).set(glyph.codepoint, (cast { advance: glyph.advance, bearingX: glyph.bearingX, bearingY: glyph.bearingY, height: glyph.height, page: (cast _BitmapFont.resolveBitmapFontGlyphPage__bitmapFont((cast glyph.codepoint : Float), (cast page : Float), (cast pageCount : Float)) : Float), width: glyph.width, x: glyph.x, y: glyph.y })));
+      ((cast glyphs : flight._internal._Map<Float, GlyphEntry>).set((cast glyph.codepoint), (cast { advance: glyph.advance, bearingX: glyph.bearingX, bearingY: glyph.bearingY, height: glyph.height, page: (cast _BitmapFont.resolveBitmapFontGlyphPage__bitmapFont((cast glyph.codepoint : Float), (cast page : Float), (cast pageCount : Float)) : Float), width: glyph.width, x: glyph.x, y: glyph.y })));
     }
     kerning = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
     if ((cast !_Runtime.strictEquals(data.kerning, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       for (pair in _Runtime.iterable(data.kerning)) {
-        ((cast kerning : flight._internal._Map<Float, Float>).set((cast packBitmapFontKerningKey((cast pair.left : Float), (cast pair.right : Float)) : Float), (cast pair.amount)));
+        ((cast kerning : flight._internal._Map<Float, Float>).set((cast (cast packBitmapFontKerningKey((cast pair.left : Float), (cast pair.right : Float)) : Float)), (cast pair.amount)));
       }
     }
     return cast { encoding: _Runtime.coalesce(data.encoding, function():Dynamic return cast 'raster'), glyphs: glyphs, kerning: kerning, metrics: { ascent: (cast data.metrics : { var ascent:Float; }).ascent, descent: (cast data.metrics : { var descent:Float; }).descent, lineGap: (cast data.metrics : { var lineGap:Float; }).lineGap }, pages: _Runtime.slice(data.pages, 0, null) };
@@ -48,12 +48,12 @@ class _BitmapFont {
   }
 
   public static function getBitmapFontGlyph(font:BitmapFont, codepoint:Float):Null<GlyphEntry> {
-    return cast _Runtime.coalesce(((cast font.glyphs : flight._internal._Map<Float, GlyphEntry>).get(codepoint)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast font.glyphs : flight._internal._Map<Float, GlyphEntry>).get((cast codepoint))), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getBitmapFontKerning(font:BitmapFont, left:Float, right:Float):Float {
-    return cast _Runtime.coalesce(((cast font.kerning : flight._internal._Map<Float, Float>).get((cast packBitmapFontKerningKey((cast left : Float), (cast right : Float)) : Float))), function():Dynamic return cast 0.0);
+    return cast _Runtime.coalesce(((cast font.kerning : flight._internal._Map<Float, Float>).get((cast (cast packBitmapFontKerningKey((cast left : Float), (cast right : Float)) : Float)))), function():Dynamic return cast 0.0);
     return cast null;
   }
 
@@ -73,7 +73,7 @@ class _BitmapFont {
   }
 
   public static function hasBitmapFontGlyph(font:BitmapFont, codepoint:Float):Bool {
-    return cast ((cast font.glyphs : flight._internal._Map<Float, GlyphEntry>).has(codepoint));
+    return cast ((cast font.glyphs : flight._internal._Map<Float, GlyphEntry>).has((cast codepoint)));
     return cast null;
   }
 
@@ -168,7 +168,7 @@ class _BitmapFont {
     var glyph:Null<GlyphEntry> = cast _Runtime.UNDEFINED;
     var shared:{ var glyphHeight:Float; var glyphWidth:Float; var page:Float; var pageCount:Float; } = cast _Runtime.UNDEFINED;
     pageCount = _Runtime.field(font.pages, 'length');
-    glyph = ((cast font.glyphs : flight._internal._Map<Float, GlyphEntry>).get(codepoint));
+    glyph = ((cast font.glyphs : flight._internal._Map<Float, GlyphEntry>).get((cast codepoint)));
     if ((cast _Runtime.strictEquals(glyph, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       return cast { glyphHeight: 0.0, glyphWidth: 0.0, page: -1.0, pageCount: pageCount, reason: 'no-glyph', renderable: false };
     }

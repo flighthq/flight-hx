@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Scene3DResources)
+@:structInit
+class Scene3DMaterialTextureRegistry {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var extensionListers:flight._internal._Map<Kind, Scene3DPbrExtensionTextureLister>;
+  public var listers:flight._internal._Map<Kind, Scene3DMaterialTextureLister>;
+
+  private function new(extensionListers:flight._internal._Map<Kind, Scene3DPbrExtensionTextureLister>, listers:flight._internal._Map<Kind, Scene3DMaterialTextureLister>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.extensionListers = extensionListers;
+    this.listers = listers;
+  }
+}
+#else
 typedef Scene3DMaterialTextureRegistry = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var extensionListers:flight._internal._Map<Kind, Scene3DPbrExtensionTextureLister>; var listers:flight._internal._Map<Kind, Scene3DMaterialTextureLister>; };
+#end

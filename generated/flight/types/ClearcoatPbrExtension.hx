@@ -4,4 +4,36 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Materials)
+@:structInit
+class ClearcoatPbrExtension {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var kind:String;
+  public var clearcoat:Float;
+  public var clearcoatMap:Null<Texture>;
+  public var clearcoatMapUvSet:PbrUvSet;
+  public var clearcoatNormalMap:Null<Texture>;
+  public var clearcoatNormalMapUvSet:PbrUvSet;
+  public var clearcoatNormalScale:Float;
+  public var clearcoatRoughness:Float;
+  public var clearcoatRoughnessMap:Null<Texture>;
+  public var clearcoatRoughnessMapUvSet:PbrUvSet;
+
+  private function new(kind:String, clearcoat:Float, clearcoatMap:Null<Texture>, clearcoatMapUvSet:PbrUvSet, clearcoatNormalMap:Null<Texture>, clearcoatNormalMapUvSet:PbrUvSet, clearcoatNormalScale:Float, clearcoatRoughness:Float, clearcoatRoughnessMap:Null<Texture>, clearcoatRoughnessMapUvSet:PbrUvSet):Void {
+    this.__symbol__EntityRuntime = null;
+    this.kind = kind;
+    this.clearcoat = clearcoat;
+    this.clearcoatMap = clearcoatMap;
+    this.clearcoatMapUvSet = clearcoatMapUvSet;
+    this.clearcoatNormalMap = clearcoatNormalMap;
+    this.clearcoatNormalMapUvSet = clearcoatNormalMapUvSet;
+    this.clearcoatNormalScale = clearcoatNormalScale;
+    this.clearcoatRoughness = clearcoatRoughness;
+    this.clearcoatRoughnessMap = clearcoatRoughnessMap;
+    this.clearcoatRoughnessMapUvSet = clearcoatRoughnessMapUvSet;
+  }
+}
+#else
 typedef ClearcoatPbrExtension = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var clearcoat:Float; var clearcoatMap:Null<Texture>; var clearcoatMapUvSet:PbrUvSet; var clearcoatNormalMap:Null<Texture>; var clearcoatNormalMapUvSet:PbrUvSet; var clearcoatNormalScale:Float; var clearcoatRoughness:Float; var clearcoatRoughnessMap:Null<Texture>; var clearcoatRoughnessMapUvSet:PbrUvSet; };
+#end

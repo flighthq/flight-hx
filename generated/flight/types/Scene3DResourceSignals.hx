@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Scene3DResources)
+@:structInit
+class Scene3DResourceSignals {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onResourceFailed:Signal<Scene3DResourceEvent->Void>;
+  public var onResourceResolved:Signal<Scene3DResourceEvent->Void>;
+
+  private function new(onResourceFailed:Signal<Scene3DResourceEvent->Void>, onResourceResolved:Signal<Scene3DResourceEvent->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onResourceFailed = onResourceFailed;
+    this.onResourceResolved = onResourceResolved;
+  }
+}
+#else
 typedef Scene3DResourceSignals = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onResourceFailed:Signal<Scene3DResourceEvent->Void>; var onResourceResolved:Signal<Scene3DResourceEvent->Void>; };
+#end

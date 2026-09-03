@@ -4,4 +4,24 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Animation)
+@:structInit
+class AnimationSampleAccumulator {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var components:Float;
+  public var quaternion:Bool;
+  public var values:flight._internal._Float32Array;
+  public var weight:Float;
+
+  private function new(components:Float, quaternion:Bool, values:flight._internal._Float32Array, weight:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.components = components;
+    this.quaternion = quaternion;
+    this.values = values;
+    this.weight = weight;
+  }
+}
+#else
 typedef AnimationSampleAccumulator = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var components:Float; var quaternion:Bool; var values:flight._internal._Float32Array; var weight:Float; };
+#end

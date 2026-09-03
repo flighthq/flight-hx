@@ -91,7 +91,7 @@ class _Geometry {
     var max:Vector3 = cast _Runtime.UNDEFINED;
     min = (cast createVector3(({ final __callArgument12:Dynamic = _Runtime.coalesce(minX, function():Dynamic return cast HxMath.POSITIVE_INFINITY); __callArgument12; }), ({ final __callArgument13:Dynamic = _Runtime.coalesce(minY, function():Dynamic return cast HxMath.POSITIVE_INFINITY); __callArgument13; }), ({ final __callArgument14:Dynamic = _Runtime.coalesce(minZ, function():Dynamic return cast HxMath.POSITIVE_INFINITY); __callArgument14; })) : Vector3);
     max = (cast createVector3(({ final __callArgument18:Dynamic = _Runtime.coalesce(maxX, function():Dynamic return cast HxMath.NEGATIVE_INFINITY); __callArgument18; }), ({ final __callArgument19:Dynamic = _Runtime.coalesce(maxY, function():Dynamic return cast HxMath.NEGATIVE_INFINITY); __callArgument19; }), ({ final __callArgument20:Dynamic = _Runtime.coalesce(maxZ, function():Dynamic return cast HxMath.NEGATIVE_INFINITY); __callArgument20; })) : Vector3);
-    return cast (cast createEntity((cast ({ max: max, min: min } : Aabb) : Dynamic)) : Aabb);
+    return cast (cast createEntity((cast ({ max: (cast max : Dynamic), min: (cast min : Dynamic) } : Aabb) : Dynamic)) : Aabb);
     return cast null;
   }
 
@@ -430,7 +430,7 @@ class _Geometry {
   public static function createBoundingSphere(?centerX:Float, ?centerY:Float, ?centerZ:Float, ?radius:Float):BoundingSphere {
     var center:Vector3 = cast _Runtime.UNDEFINED;
     center = (cast createVector3(({ final __callArgument32:Dynamic = _Runtime.coalesce(centerX, function():Dynamic return cast 0.0); __callArgument32; }), ({ final __callArgument33:Dynamic = _Runtime.coalesce(centerY, function():Dynamic return cast 0.0); __callArgument33; }), ({ final __callArgument34:Dynamic = _Runtime.coalesce(centerZ, function():Dynamic return cast 0.0); __callArgument34; })) : Vector3);
-    return cast (cast createEntity((cast ({ center: center, radius: _Runtime.coalesce(radius, function():Dynamic return cast -1.0) } : BoundingSphere) : Dynamic)) : BoundingSphere);
+    return cast (cast createEntity((cast ({ center: (cast center : Dynamic), radius: (cast _Runtime.coalesce(radius, function():Dynamic return cast -1.0) : Dynamic) } : BoundingSphere) : Dynamic)) : BoundingSphere);
     return cast null;
   }
 
@@ -626,7 +626,7 @@ class _Geometry {
   }
 
   public static function createCapsule(startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):Capsule {
-    return cast (cast createEntity(({ final __callArgument38:Dynamic = ({ endX: endX, endY: endY, endZ: endZ, radius: radius, startX: startX, startY: startY, startZ: startZ } : Capsule); __callArgument38; })) : Capsule);
+    return cast (cast createEntity(({ final __callArgument38:Dynamic = ({ endX: (cast endX : Dynamic), endY: (cast endY : Dynamic), endZ: (cast endZ : Dynamic), radius: (cast radius : Dynamic), startX: (cast startX : Dynamic), startY: (cast startY : Dynamic), startZ: (cast startZ : Dynamic) } : Capsule); __callArgument38; })) : Capsule);
     return cast null;
   }
 
@@ -1075,7 +1075,7 @@ class _Geometry {
   public static final acquireFunctionsByReleaseFunction__enableGeometryPoolGuards:flight._internal._Record<GeometryPoolReleaseFunction__enableGeometryPoolGuards, String> = (cast { releaseMatrix: 'acquireMatrix or acquireIdentityMatrix', releaseMatrix3: 'acquireMatrix3 or acquireIdentityMatrix3', releaseMatrix4: 'acquireMatrix4 or acquireIdentityMatrix4', releaseQuaternion: 'acquireQuaternion or acquireIdentityQuaternion', releaseRectangle: 'acquireRectangle or acquireEmptyRectangle', releaseVector2: 'acquireVector2 or acquireEmptyVector2', releaseVector3: 'acquireVector3 or acquireEmptyVector3', releaseVector4: 'acquireVector4 or acquireEmptyVector4' });
 
   public static function createFrustum():Frustum {
-    return cast (cast createEntity((cast ({ bottom: (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane), far: (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane), left: (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane), near: (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane), right: (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane), top: (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane) } : Frustum) : Dynamic)) : Frustum);
+    return cast (cast createEntity((cast ({ bottom: (cast (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane) : Dynamic), far: (cast (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane) : Dynamic), left: (cast (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane) : Dynamic), near: (cast (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane) : Dynamic), right: (cast (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane) : Dynamic), top: (cast (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane) : Dynamic) } : Frustum) : Dynamic)) : Frustum);
     return cast null;
   }
 
@@ -1441,7 +1441,7 @@ class _Geometry {
   }
 
   public static function createMatrix(?a:Float, ?b:Float, ?c:Float, ?d:Float, ?tx:Float, ?ty:Float):Matrix {
-    return cast (cast createEntity(({ final __callArgument160:Dynamic = ({ a: _Runtime.coalesce(a, function():Dynamic return cast 1.0), b: _Runtime.coalesce(b, function():Dynamic return cast 0.0), c: _Runtime.coalesce(c, function():Dynamic return cast 0.0), d: _Runtime.coalesce(d, function():Dynamic return cast 1.0), tx: _Runtime.coalesce(tx, function():Dynamic return cast 0.0), ty: _Runtime.coalesce(ty, function():Dynamic return cast 0.0) } : Matrix); __callArgument160; })) : Matrix);
+    return cast (cast createEntity(({ final __callArgument160:Dynamic = ({ a: (cast _Runtime.coalesce(a, function():Dynamic return cast 1.0) : Dynamic), b: (cast _Runtime.coalesce(b, function():Dynamic return cast 0.0) : Dynamic), c: (cast _Runtime.coalesce(c, function():Dynamic return cast 0.0) : Dynamic), d: (cast _Runtime.coalesce(d, function():Dynamic return cast 1.0) : Dynamic), tx: (cast _Runtime.coalesce(tx, function():Dynamic return cast 0.0) : Dynamic), ty: (cast _Runtime.coalesce(ty, function():Dynamic return cast 0.0) : Dynamic) } : Matrix); __callArgument160; })) : Matrix);
     return cast null;
   }
 
@@ -1932,7 +1932,7 @@ class _Geometry {
     var m:flight._internal._Float32Array = cast _Runtime.UNDEFINED;
     var out:Matrix3 = cast _Runtime.UNDEFINED;
     m = new flight._internal._Float32Array(_Geometry.__identity__matrix3);
-    out = (cast createEntity(({ final __callArgument204:Dynamic = ({ m: m } : Matrix3); __callArgument204; })) : Matrix3);
+    out = (cast createEntity(({ final __callArgument204:Dynamic = ({ m: (cast m : Dynamic) } : Matrix3); __callArgument204; })) : Matrix3);
     if ((cast !_Runtime.strictEquals(m00, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 0.0 : Float), (cast m00 : Float)); }
     if ((cast !_Runtime.strictEquals(m01, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 3.0 : Float), (cast m01 : Float)); }
     if ((cast !_Runtime.strictEquals(m02, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 6.0 : Float), (cast m02 : Float)); }
@@ -2619,7 +2619,7 @@ class _Geometry {
     var m:flight._internal._Float32Array = cast _Runtime.UNDEFINED;
     var out:Matrix4 = cast _Runtime.UNDEFINED;
     m = new flight._internal._Float32Array(_Geometry.__identity__matrix4);
-    out = (cast createEntity(({ final __callArgument282:Dynamic = ({ m: m } : Matrix4); __callArgument282; })) : Matrix4);
+    out = (cast createEntity(({ final __callArgument282:Dynamic = ({ m: (cast m : Dynamic) } : Matrix4); __callArgument282; })) : Matrix4);
     if ((cast !_Runtime.strictEquals(m00, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 0.0 : Float), (cast m00 : Float)); }
     if ((cast !_Runtime.strictEquals(m01, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 1.0 : Float), (cast m01 : Float)); }
     if ((cast !_Runtime.strictEquals(m02, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 2.0 : Float), (cast m02 : Float)); }
@@ -3490,7 +3490,7 @@ class _Geometry {
   public static final pool__matrixPool:Array<Matrix> = (cast cast ([] : Array<Dynamic>));
 
   public static function createObb(centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Obb {
-    return cast (cast createEntity(({ final __callArgument410:Dynamic = ({ centerX: centerX, centerY: centerY, centerZ: centerZ, halfExtentX: halfExtentX, halfExtentY: halfExtentY, halfExtentZ: halfExtentZ, orientationW: orientationW, orientationX: orientationX, orientationY: orientationY, orientationZ: orientationZ } : Obb); __callArgument410; })) : Obb);
+    return cast (cast createEntity(({ final __callArgument410:Dynamic = ({ centerX: (cast centerX : Dynamic), centerY: (cast centerY : Dynamic), centerZ: (cast centerZ : Dynamic), halfExtentX: (cast halfExtentX : Dynamic), halfExtentY: (cast halfExtentY : Dynamic), halfExtentZ: (cast halfExtentZ : Dynamic), orientationW: (cast orientationW : Dynamic), orientationX: (cast orientationX : Dynamic), orientationY: (cast orientationY : Dynamic), orientationZ: (cast orientationZ : Dynamic) } : Obb); __callArgument410; })) : Obb);
     return cast null;
   }
 
@@ -4191,7 +4191,7 @@ class _Geometry {
   }
 
   public static function createPlane(?a:Float, ?b:Float, ?c:Float, ?d:Float):Plane {
-    return cast (cast createEntity(({ final __callArgument420:Dynamic = ({ a: _Runtime.coalesce(a, function():Dynamic return cast 0.0), b: _Runtime.coalesce(b, function():Dynamic return cast 0.0), c: _Runtime.coalesce(c, function():Dynamic return cast 0.0), d: _Runtime.coalesce(d, function():Dynamic return cast 0.0) } : Plane); __callArgument420; })) : Plane);
+    return cast (cast createEntity(({ final __callArgument420:Dynamic = ({ a: (cast _Runtime.coalesce(a, function():Dynamic return cast 0.0) : Dynamic), b: (cast _Runtime.coalesce(b, function():Dynamic return cast 0.0) : Dynamic), c: (cast _Runtime.coalesce(c, function():Dynamic return cast 0.0) : Dynamic), d: (cast _Runtime.coalesce(d, function():Dynamic return cast 0.0) : Dynamic) } : Plane); __callArgument420; })) : Plane);
     return cast null;
   }
 
@@ -4959,7 +4959,7 @@ class _Geometry {
   public static final pool__quaternionPool:Array<Quaternion> = (cast cast ([] : Array<Dynamic>));
 
   public static function createRay3D(?originX:Float, ?originY:Float, ?originZ:Float, ?directionX:Float, ?directionY:Float, ?directionZ:Float):Ray3D {
-    return cast (cast createEntity((cast ({ direction: (cast createVector3(({ final __callArgument452:Dynamic = _Runtime.coalesce(directionX, function():Dynamic return cast 0.0); __callArgument452; }), ({ final __callArgument453:Dynamic = _Runtime.coalesce(directionY, function():Dynamic return cast 0.0); __callArgument453; }), ({ final __callArgument454:Dynamic = _Runtime.coalesce(directionZ, function():Dynamic return cast 1.0); __callArgument454; })) : Vector3), origin: (cast createVector3(({ final __callArgument458:Dynamic = _Runtime.coalesce(originX, function():Dynamic return cast 0.0); __callArgument458; }), ({ final __callArgument459:Dynamic = _Runtime.coalesce(originY, function():Dynamic return cast 0.0); __callArgument459; }), ({ final __callArgument460:Dynamic = _Runtime.coalesce(originZ, function():Dynamic return cast 0.0); __callArgument460; })) : Vector3) } : Ray3D) : Dynamic)) : Ray3D);
+    return cast (cast createEntity((cast ({ direction: (cast (cast createVector3(({ final __callArgument452:Dynamic = _Runtime.coalesce(directionX, function():Dynamic return cast 0.0); __callArgument452; }), ({ final __callArgument453:Dynamic = _Runtime.coalesce(directionY, function():Dynamic return cast 0.0); __callArgument453; }), ({ final __callArgument454:Dynamic = _Runtime.coalesce(directionZ, function():Dynamic return cast 1.0); __callArgument454; })) : Vector3) : Dynamic), origin: (cast (cast createVector3(({ final __callArgument458:Dynamic = _Runtime.coalesce(originX, function():Dynamic return cast 0.0); __callArgument458; }), ({ final __callArgument459:Dynamic = _Runtime.coalesce(originY, function():Dynamic return cast 0.0); __callArgument459; }), ({ final __callArgument460:Dynamic = _Runtime.coalesce(originZ, function():Dynamic return cast 0.0); __callArgument460; })) : Vector3) : Dynamic) } : Ray3D) : Dynamic)) : Ray3D);
     return cast null;
   }
 
@@ -5755,7 +5755,7 @@ class _Geometry {
   public static final pool__rectanglePool:Array<Rectangle> = (cast cast ([] : Array<Dynamic>));
 
   public static function createTransform2D(?x:Float, ?y:Float, ?rotation:Float, ?scaleX:Float, ?scaleY:Float, ?skewX:Float, ?skewY:Float, ?pivotX:Float, ?pivotY:Float):Transform2D {
-    return cast (cast createEntity(({ final __callArgument550:Dynamic = ({ pivotX: _Runtime.coalesce(pivotX, function():Dynamic return cast 0.0), pivotY: _Runtime.coalesce(pivotY, function():Dynamic return cast 0.0), rotation: _Runtime.coalesce(rotation, function():Dynamic return cast 0.0), scaleX: _Runtime.coalesce(scaleX, function():Dynamic return cast 1.0), scaleY: _Runtime.coalesce(scaleY, function():Dynamic return cast 1.0), skewX: _Runtime.coalesce(skewX, function():Dynamic return cast 0.0), skewY: _Runtime.coalesce(skewY, function():Dynamic return cast 0.0), x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0) } : Transform2D); __callArgument550; })) : Transform2D);
+    return cast (cast createEntity(({ final __callArgument550:Dynamic = ({ pivotX: (cast _Runtime.coalesce(pivotX, function():Dynamic return cast 0.0) : Dynamic), pivotY: (cast _Runtime.coalesce(pivotY, function():Dynamic return cast 0.0) : Dynamic), rotation: (cast _Runtime.coalesce(rotation, function():Dynamic return cast 0.0) : Dynamic), scaleX: (cast _Runtime.coalesce(scaleX, function():Dynamic return cast 1.0) : Dynamic), scaleY: (cast _Runtime.coalesce(scaleY, function():Dynamic return cast 1.0) : Dynamic), skewX: (cast _Runtime.coalesce(skewX, function():Dynamic return cast 0.0) : Dynamic), skewY: (cast _Runtime.coalesce(skewY, function():Dynamic return cast 0.0) : Dynamic), x: (cast _Runtime.coalesce(x, function():Dynamic return cast 0.0) : Dynamic), y: (cast _Runtime.coalesce(y, function():Dynamic return cast 0.0) : Dynamic) } : Transform2D); __callArgument550; })) : Transform2D);
     return cast null;
   }
 
@@ -5880,7 +5880,7 @@ class _Geometry {
   }
 
   public static function createVector2(?x:Float, ?y:Float):Vector2 {
-    return cast (cast createEntity(({ final __callArgument596:Dynamic = ({ x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0) } : Vector2); __callArgument596; })) : Vector2);
+    return cast (cast createEntity(({ final __callArgument596:Dynamic = ({ x: (cast _Runtime.coalesce(x, function():Dynamic return cast 0.0) : Dynamic), y: (cast _Runtime.coalesce(y, function():Dynamic return cast 0.0) : Dynamic) } : Vector2); __callArgument596; })) : Vector2);
     return cast null;
   }
 
@@ -6243,7 +6243,7 @@ class _Geometry {
   }
 
   public static function createVector3(?x:Float, ?y:Float, ?z:Float):Vector3 {
-    return cast (cast createEntity(({ final __callArgument622:Dynamic = ({ x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), z: _Runtime.coalesce(z, function():Dynamic return cast 0.0) } : Vector3); __callArgument622; })) : Vector3);
+    return cast (cast createEntity(({ final __callArgument622:Dynamic = ({ x: (cast _Runtime.coalesce(x, function():Dynamic return cast 0.0) : Dynamic), y: (cast _Runtime.coalesce(y, function():Dynamic return cast 0.0) : Dynamic), z: (cast _Runtime.coalesce(z, function():Dynamic return cast 0.0) : Dynamic) } : Vector3); __callArgument622; })) : Vector3);
     return cast null;
   }
 

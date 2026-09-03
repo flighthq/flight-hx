@@ -329,7 +329,7 @@ class _Tray {
           try {
             disconnectSignal((cast signal : Dynamic), (cast listener : Dynamic));
             ((cast release : TrayReleaseRuntime__tray).released = true);
-            ((cast (cast runtime : TrayRuntime__tray).releases : flight._internal._Set<TrayReleaseRuntime__tray>).delete_(release));
+            ((cast (cast runtime : TrayRuntime__tray).releases : flight._internal._Set<TrayReleaseRuntime__tray>).delete_((cast release)));
             return cast { outcome: 'released' };
           } catch (error:Dynamic) {
             return cast { error: error, outcome: 'release-failed' };
@@ -337,7 +337,7 @@ class _Tray {
           return cast null;
         }));
       } });
-      ((cast (cast runtime : TrayRuntime__tray).releases : flight._internal._Set<TrayReleaseRuntime__tray>).add(release));
+      ((cast (cast runtime : TrayRuntime__tray).releases : flight._internal._Set<TrayReleaseRuntime__tray>).add((cast release)));
       return cast { outcome: 'attached', release: release };
     } catch (error:Dynamic) {
       return cast { error: error, outcome: 'subscription-failed' };

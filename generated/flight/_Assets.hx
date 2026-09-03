@@ -39,27 +39,27 @@ class _Assets {
     var entry:AssetEntry = cast _Runtime.UNDEFINED;
     var loadPromise:flight._internal._Promise<flight._internal._Any> = cast _Runtime.UNDEFINED;
     runtime = library.runtime;
-    descriptor = ((cast runtime.descriptors : flight._internal._Map<String, AssetDescriptor>).get(id));
+    descriptor = ((cast runtime.descriptors : flight._internal._Map<String, AssetDescriptor>).get((cast id)));
     if ((cast _Runtime.strictEquals(descriptor, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callOptionalValue(runtime.acquireGuard, cast ([library, { id: id, refCount: 0.0, status: 'missing-descriptor', type: null }] : Array<Dynamic>));
       return cast flight._internal._Async.reject(_Runtime.error('assets: no descriptor for id "' + Std.string(id) + '"'));
     }
-    adapter = ((cast runtime.adapters : flight._internal._Map<AssetType, AssetLoaderAdapter<flight._internal._Any>>).get((cast descriptor : { var type:AssetType; }).type));
+    adapter = ((cast runtime.adapters : flight._internal._Map<AssetType, AssetLoaderAdapter<flight._internal._Any>>).get((cast (cast descriptor : { var type:AssetType; }).type)));
     if ((cast _Runtime.strictEquals(adapter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callOptionalValue(runtime.acquireGuard, cast ([library, { id: id, refCount: 0.0, status: 'missing-loader', type: (cast descriptor : { var type:AssetType; }).type }] : Array<Dynamic>));
       return cast flight._internal._Async.reject(_Runtime.error('assets: no loader for type "' + Std.string((cast descriptor : { var type:AssetType; }).type) + '"'));
     }
-    existing = ((cast runtime.entries : flight._internal._Map<String, AssetEntry>).get(id));
+    existing = ((cast runtime.entries : flight._internal._Map<String, AssetEntry>).get((cast id)));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (cast existing : { var refcount:Float; }).refcount++;
       if ((cast (cast existing : { var resident:Bool; }).resident : Bool)) { return cast flight._internal._Async.resolve((cast (cast existing : { var value:flight._internal._Any; }).value : T)); }
       return cast (cast (cast existing : { var loadPromise:Null<flight._internal._Promise<flight._internal._Any>>; }).loadPromise : flight._internal._Promise<T>);
     }
     entry = (cast { value: _Runtime.field(_Runtime, 'UNDEFINED'), refcount: 1.0, loadPromise: null, resident: false });
-    ((cast runtime.freedIds : flight._internal._Set<String>).delete_(id));
-    ((cast runtime.entries : flight._internal._Map<String, AssetEntry>).set(id, (cast entry)));
+    ((cast runtime.freedIds : flight._internal._Set<String>).delete_((cast id)));
+    ((cast runtime.entries : flight._internal._Map<String, AssetEntry>).set((cast id), (cast entry)));
     loadPromise = _Runtime.callProperty((cast adapter : AssetLoaderAdapter<flight._internal._Any>).load(({ final __callArgument2:Dynamic = descriptor; __callArgument2; })), 'then', cast ([function(value:flight._internal._Any):flight._internal._Any {
-      if ((cast ((cast !_Runtime.strictEquals(((cast runtime.entries : flight._internal._Map<String, AssetEntry>).get(id)), entry) : Bool) || (cast ((cast entry.refcount : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
+      if ((cast ((cast !_Runtime.strictEquals(((cast runtime.entries : flight._internal._Map<String, AssetEntry>).get((cast id))), entry) : Bool) || (cast ((cast entry.refcount : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
         (cast adapter : AssetLoaderAdapter<flight._internal._Any>).dispose((cast value : flight._internal._Any));
         return cast value;
       }
@@ -69,7 +69,7 @@ class _Assets {
       return cast value;
       return cast _Runtime.UNDEFINED;
     }, function(error:flight._internal._Any):flight._internal._Any {
-      if ((cast _Runtime.strictEquals(((cast runtime.entries : flight._internal._Map<String, AssetEntry>).get(id)), entry) : Bool)) { ((cast runtime.entries : flight._internal._Map<String, AssetEntry>).delete_(id)); }
+      if ((cast _Runtime.strictEquals(((cast runtime.entries : flight._internal._Map<String, AssetEntry>).get((cast id))), entry) : Bool)) { ((cast runtime.entries : flight._internal._Map<String, AssetEntry>).delete_((cast id))); }
       _Runtime.throwValue(error);
       return cast _Runtime.UNDEFINED;
     }] : Array<Dynamic>));
@@ -92,8 +92,8 @@ class _Assets {
       var id:String = flight._internal._StaticIndex.readArray(__iteration0, 0.0);
       var entry:AssetEntry = flight._internal._StaticIndex.readArray(__iteration0, 1.0);
       if ((cast !(cast entry.resident : Bool) : Bool)) { continue; }
-      var descriptor:Null<AssetDescriptor> = ((cast runtime.descriptors : flight._internal._Map<String, AssetDescriptor>).get(id));
-      var adapter:Null<AssetLoaderAdapter<flight._internal._Any>> = ((cast !_Runtime.strictEquals(descriptor, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast ((cast runtime.adapters : flight._internal._Map<AssetType, AssetLoaderAdapter<flight._internal._Any>>).get((cast descriptor : { var type:AssetType; }).type)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+      var descriptor:Null<AssetDescriptor> = ((cast runtime.descriptors : flight._internal._Map<String, AssetDescriptor>).get((cast id)));
+      var adapter:Null<AssetLoaderAdapter<flight._internal._Any>> = ((cast !_Runtime.strictEquals(descriptor, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast ((cast runtime.adapters : flight._internal._Map<AssetType, AssetLoaderAdapter<flight._internal._Any>>).get((cast (cast descriptor : { var type:AssetType; }).type))) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
       if ((cast !_Runtime.strictEquals(adapter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast adapter : AssetLoaderAdapter<flight._internal._Any>).dispose((cast entry.value : flight._internal._Any)); }
     }
     ((cast runtime.adapters : flight._internal._Map<AssetType, AssetLoaderAdapter<flight._internal._Any>>).clear());
@@ -106,13 +106,13 @@ class _Assets {
 
   public static function getAsset<T>(library:AssetLibrary, id:String):Null<T> {
     var entry:Null<AssetEntry> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast library.runtime : { var entries:flight._internal._Map<String, AssetEntry>; }).entries : flight._internal._Map<String, AssetEntry>).get(id));
+    entry = ((cast (cast library.runtime : { var entries:flight._internal._Map<String, AssetEntry>; }).entries : flight._internal._Map<String, AssetEntry>).get((cast id)));
     return cast ((cast ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast entry : { var resident:Bool; }).resident : Bool)) : Bool) ? (cast (cast (cast entry : { var value:flight._internal._Any; }).value : T) : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function getAssetGroupIds(library:AssetLibrary, name:String):Array<String> {
-    return cast _Runtime.coalesce(_Runtime.callOptionalProperty(((cast (cast library.runtime : { var groups:flight._internal._Map<String, Array<String>>; }).groups : flight._internal._Map<String, Array<String>>).get(name)), 'slice', cast ([] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>));
+    return cast _Runtime.coalesce(_Runtime.callOptionalProperty(((cast (cast library.runtime : { var groups:flight._internal._Map<String, Array<String>>; }).groups : flight._internal._Map<String, Array<String>>).get((cast name))), 'slice', cast ([] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>));
     return cast null;
   }
 
@@ -123,7 +123,7 @@ class _Assets {
 
   public static function getAssetRefCount(library:AssetLibrary, id:String):Float {
     var entry:Null<AssetEntry> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast library.runtime : { var entries:flight._internal._Map<String, AssetEntry>; }).entries : flight._internal._Map<String, AssetEntry>).get(id));
+    entry = ((cast (cast library.runtime : { var entries:flight._internal._Map<String, AssetEntry>; }).entries : flight._internal._Map<String, AssetEntry>).get((cast id)));
     return cast ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast entry : { var refcount:Float; }).refcount : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
@@ -140,7 +140,7 @@ class _Assets {
         var results:Array<flight._internal._Any> = cast _Runtime.UNDEFINED;
         var failed:Null<flight._internal._Any> = cast _Runtime.UNDEFINED;
         runtime = library.runtime;
-        ids = ((cast runtime.groups : flight._internal._Map<String, Array<String>>).get(name));
+        ids = ((cast runtime.groups : flight._internal._Map<String, Array<String>>).get((cast name)));
         var __flowBranch26:Dynamic;
         if ((cast ((cast _Runtime.strictEquals(ids, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(ids, 'length'), 0.0) : Bool)) : Bool)) {
           __flowBranch26 = flight._internal._Async.protect(function():Dynamic {
@@ -172,7 +172,7 @@ class _Assets {
           return flight._internal._Async.continueFlow(__flowBranch28, function():Dynamic {
             itemPromises = cast ([] : Array<Dynamic>);
             for (id in _Runtime.iterable(ids)) {
-              var entry:Null<AssetEntry> = ((cast runtime.entries : flight._internal._Map<String, AssetEntry>).get(id));
+              var entry:Null<AssetEntry> = ((cast runtime.entries : flight._internal._Map<String, AssetEntry>).get((cast id)));
               if ((cast ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast entry : { var resident:Bool; }).resident : Bool)) : Bool)) {
                 _Runtime.callProperty(itemPromises, 'push', cast ([(cast (cast acquireAsset : AssetLibrary->String->flight._internal._Promise<flight._internal._Any>)(({ final __callArgument37:Dynamic = library; __callArgument37; }), (cast id : String)) : flight._internal._Promise<flight._internal._Any>)] : Array<Dynamic>));
                 continue;
@@ -214,25 +214,25 @@ class _Assets {
     var storedDescriptor:AssetDescriptor = cast _Runtime.UNDEFINED;
     var groups:Null<Array<String>> = cast _Runtime.UNDEFINED;
     runtime = library.runtime;
-    previous = ((cast runtime.descriptors : flight._internal._Map<String, AssetDescriptor>).get(descriptor.id));
-    if ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast runtime.entries : flight._internal._Map<String, AssetEntry>).has(descriptor.id)) : Bool)) : Bool)) {
+    previous = ((cast runtime.descriptors : flight._internal._Map<String, AssetDescriptor>).get((cast descriptor.id)));
+    if ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast runtime.entries : flight._internal._Map<String, AssetEntry>).has((cast descriptor.id))) : Bool)) : Bool)) {
       if ((cast (cast _Assets.isEquivalentAssetDescriptor__assetLibrary(({ final __callArgument52:Dynamic = previous; __callArgument52; }), ({ final __callArgument53:Dynamic = descriptor; __callArgument53; })) : Bool) : Bool)) { return; }
       _Runtime.throwValue(_Runtime.error('assets: cannot replace acquired descriptor "' + Std.string(descriptor.id) + '" (releaseAsset first)'));
     }
     if ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Assets.removeAssetDescriptorGroups__assetLibrary(({ final __callArgument56:Dynamic = runtime; __callArgument56; }), ({ final __callArgument57:Dynamic = previous; __callArgument57; })); }
-    if ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast (cast _Assets.isEquivalentAssetDescriptor__assetLibrary(({ final __callArgument60:Dynamic = previous; __callArgument60; }), ({ final __callArgument61:Dynamic = descriptor; __callArgument61; })) : Bool) : Bool) : Bool)) : Bool)) { ((cast runtime.freedIds : flight._internal._Set<String>).delete_(descriptor.id)); }
+    if ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast (cast _Assets.isEquivalentAssetDescriptor__assetLibrary(({ final __callArgument60:Dynamic = previous; __callArgument60; }), ({ final __callArgument61:Dynamic = descriptor; __callArgument61; })) : Bool) : Bool) : Bool)) : Bool)) { ((cast runtime.freedIds : flight._internal._Set<String>).delete_((cast descriptor.id))); }
     storedDescriptor = (cast _Assets.copyAssetDescriptor__assetLibrary(({ final __callArgument64:Dynamic = descriptor; __callArgument64; })) : AssetDescriptor);
-    ((cast runtime.descriptors : flight._internal._Map<String, AssetDescriptor>).set(descriptor.id, (cast storedDescriptor)));
+    ((cast runtime.descriptors : flight._internal._Map<String, AssetDescriptor>).set((cast descriptor.id), (cast storedDescriptor)));
     groups = storedDescriptor.groups;
     if ((cast _Runtime.strictEquals(groups, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(groups, 'length') : Float)) : Bool)) {
         var group:String = flight._internal._StaticIndex.readArray(groups, i);
-        var members:Null<Array<String>> = ((cast runtime.groups : flight._internal._Map<String, Array<String>>).get(group));
+        var members:Null<Array<String>> = ((cast runtime.groups : flight._internal._Map<String, Array<String>>).get((cast group)));
         if ((cast _Runtime.strictEquals(members, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           (members = cast (cast ([] : Array<Dynamic>) : Dynamic));
-          ((cast runtime.groups : flight._internal._Map<String, Array<String>>).set(group, (cast members)));
+          ((cast runtime.groups : flight._internal._Map<String, Array<String>>).set((cast group), (cast members)));
         }
         if ((cast !(cast _Runtime.includes(members, descriptor.id) : Bool) : Bool)) { _Runtime.callProperty(members, 'push', cast ([descriptor.id] : Array<Dynamic>)); }
         i++;
@@ -241,18 +241,18 @@ class _Assets {
   }
 
   public static function registerAssetLoader<T>(library:AssetLibrary, type:AssetType, adapter:AssetLoaderAdapter<T>):Void {
-    ((cast (cast library.runtime : { var adapters:flight._internal._Map<AssetType, AssetLoaderAdapter<flight._internal._Any>>; }).adapters : flight._internal._Map<AssetType, AssetLoaderAdapter<flight._internal._Any>>).set(type, (cast (cast adapter : AssetLoaderAdapter<flight._internal._Any>))));
+    ((cast (cast library.runtime : { var adapters:flight._internal._Map<AssetType, AssetLoaderAdapter<flight._internal._Any>>; }).adapters : flight._internal._Map<AssetType, AssetLoaderAdapter<flight._internal._Any>>).set((cast type), (cast (cast adapter : AssetLoaderAdapter<flight._internal._Any>))));
   }
 
   public static function registerAssetManifest(library:AssetLibrary, manifest:AssetManifest):Void {
     var descriptors:flight._internal._Map<String, AssetDescriptor> = cast _Runtime.UNDEFINED;
     descriptors = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
     for (descriptor in _Runtime.iterable(manifest)) {
-      ((cast descriptors : flight._internal._Map<String, AssetDescriptor>).set(descriptor.id, (cast descriptor)));
+      ((cast descriptors : flight._internal._Map<String, AssetDescriptor>).set((cast descriptor.id), (cast descriptor)));
     }
     for (descriptor in _Runtime.iterable(((cast descriptors : flight._internal._Map<String, AssetDescriptor>).values()))) {
-      var previous:Null<AssetDescriptor> = ((cast (cast library.runtime : { var descriptors:flight._internal._Map<String, AssetDescriptor>; }).descriptors : flight._internal._Map<String, AssetDescriptor>).get(descriptor.id));
-      if ((cast ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast (cast library.runtime : { var entries:flight._internal._Map<String, AssetEntry>; }).entries : flight._internal._Map<String, AssetEntry>).has(descriptor.id)) : Bool)) : Bool) && (cast !(cast (cast _Assets.isEquivalentAssetDescriptor__assetLibrary(({ final __callArgument70:Dynamic = previous; __callArgument70; }), ({ final __callArgument71:Dynamic = descriptor; __callArgument71; })) : Bool) : Bool) : Bool)) : Bool)) {
+      var previous:Null<AssetDescriptor> = ((cast (cast library.runtime : { var descriptors:flight._internal._Map<String, AssetDescriptor>; }).descriptors : flight._internal._Map<String, AssetDescriptor>).get((cast descriptor.id)));
+      if ((cast ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast (cast library.runtime : { var entries:flight._internal._Map<String, AssetEntry>; }).entries : flight._internal._Map<String, AssetEntry>).has((cast descriptor.id))) : Bool)) : Bool) && (cast !(cast (cast _Assets.isEquivalentAssetDescriptor__assetLibrary(({ final __callArgument70:Dynamic = previous; __callArgument70; }), ({ final __callArgument71:Dynamic = descriptor; __callArgument71; })) : Bool) : Bool) : Bool)) : Bool)) {
         _Runtime.throwValue(_Runtime.error('assets: cannot replace acquired descriptor "' + Std.string(descriptor.id) + '" (releaseAsset first)'));
       }
     }
@@ -265,7 +265,7 @@ class _Assets {
     var runtime:AssetLibraryRuntime = cast _Runtime.UNDEFINED;
     var entry:Null<AssetEntry> = cast _Runtime.UNDEFINED;
     runtime = library.runtime;
-    entry = ((cast runtime.entries : flight._internal._Map<String, AssetEntry>).get(id));
+    entry = ((cast runtime.entries : flight._internal._Map<String, AssetEntry>).get((cast id)));
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     (cast entry : { var refcount:Float; }).refcount--;
     if ((cast ((cast (cast entry : { var refcount:Float; }).refcount : Float) > (cast 0.0 : Float)) : Bool)) { return; }
@@ -274,7 +274,7 @@ class _Assets {
 
   public static function releaseAssetGroup(library:AssetLibrary, name:String):Void {
     var ids:Null<Array<String>> = cast _Runtime.UNDEFINED;
-    ids = ((cast (cast library.runtime : { var groups:flight._internal._Map<String, Array<String>>; }).groups : flight._internal._Map<String, Array<String>>).get(name));
+    ids = ((cast (cast library.runtime : { var groups:flight._internal._Map<String, Array<String>>; }).groups : flight._internal._Map<String, Array<String>>).get((cast name)));
     if ((cast _Runtime.strictEquals(ids, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     for (id in _Runtime.iterable(ids)) {
       releaseAsset(({ final __callArgument86:Dynamic = library; __callArgument86; }), (cast id : String));
@@ -290,11 +290,11 @@ class _Assets {
   public static function disposeAssetEntry__assetLibrary(runtime:AssetLibraryRuntime, id:String, entry:AssetEntry):Void {
     var descriptor:Null<AssetDescriptor> = cast _Runtime.UNDEFINED;
     var adapter:Null<AssetLoaderAdapter<flight._internal._Any>> = cast _Runtime.UNDEFINED;
-    ((cast runtime.entries : flight._internal._Map<String, AssetEntry>).delete_(id));
-    ((cast runtime.freedIds : flight._internal._Set<String>).add(id));
+    ((cast runtime.entries : flight._internal._Map<String, AssetEntry>).delete_((cast id)));
+    ((cast runtime.freedIds : flight._internal._Set<String>).add((cast id)));
     if ((cast !(cast entry.resident : Bool) : Bool)) { return; }
-    descriptor = ((cast runtime.descriptors : flight._internal._Map<String, AssetDescriptor>).get(id));
-    adapter = ((cast !_Runtime.strictEquals(descriptor, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast ((cast runtime.adapters : flight._internal._Map<AssetType, AssetLoaderAdapter<flight._internal._Any>>).get((cast descriptor : { var type:AssetType; }).type)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+    descriptor = ((cast runtime.descriptors : flight._internal._Map<String, AssetDescriptor>).get((cast id)));
+    adapter = ((cast !_Runtime.strictEquals(descriptor, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast ((cast runtime.adapters : flight._internal._Map<AssetType, AssetLoaderAdapter<flight._internal._Any>>).get((cast (cast descriptor : { var type:AssetType; }).type))) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
     if ((cast !_Runtime.strictEquals(adapter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast adapter : AssetLoaderAdapter<flight._internal._Any>).dispose((cast entry.value : flight._internal._Any)); }
   }
 
@@ -319,7 +319,7 @@ class _Assets {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(aGroups, 'length') : Float)) : Bool)) {
-        if ((cast !(cast ((cast bUniqueGroups : flight._internal._Set<String>).has(flight._internal._StaticIndex.readArray(aGroups, i))) : Bool) : Bool)) { return cast false; }
+        if ((cast !(cast ((cast bUniqueGroups : flight._internal._Set<String>).has((cast flight._internal._StaticIndex.readArray(aGroups, i)))) : Bool) : Bool)) { return cast false; }
         i++;
       }
     }
@@ -335,11 +335,11 @@ class _Assets {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(groups, 'length') : Float)) : Bool)) {
         var group:String = flight._internal._StaticIndex.readArray(groups, i);
-        var members:Null<Array<String>> = ((cast runtime.groups : flight._internal._Map<String, Array<String>>).get(group));
+        var members:Null<Array<String>> = ((cast runtime.groups : flight._internal._Map<String, Array<String>>).get((cast group)));
         if ((cast _Runtime.strictEquals(members, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
         var index:Float = _Runtime.callProperty(members, 'indexOf', cast ([descriptor.id] : Array<Dynamic>));
         if ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool)) { _Runtime.splice(members, Std.int(index), Std.int(1.0), []); }
-        if ((cast _Runtime.strictEquals(_Runtime.field(members, 'length'), 0.0) : Bool)) { ((cast runtime.groups : flight._internal._Map<String, Array<String>>).delete_(group)); }
+        if ((cast _Runtime.strictEquals(_Runtime.field(members, 'length'), 0.0) : Bool)) { ((cast runtime.groups : flight._internal._Map<String, Array<String>>).delete_((cast group))); }
         i++;
       }
     }
@@ -371,15 +371,15 @@ class _Assets {
     var type:AssetType = cast _Runtime.UNDEFINED;
     var entry:Null<AssetEntry> = cast _Runtime.UNDEFINED;
     runtime = library.runtime;
-    descriptor = ((cast runtime.descriptors : flight._internal._Map<String, AssetDescriptor>).get(id));
+    descriptor = ((cast runtime.descriptors : flight._internal._Map<String, AssetDescriptor>).get((cast id)));
     if ((cast _Runtime.strictEquals(descriptor, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { id: id, refCount: 0.0, status: 'missing-descriptor', type: null }; }
     type = (cast descriptor : { var type:AssetType; }).type;
-    if ((cast !(cast ((cast runtime.adapters : flight._internal._Map<AssetType, AssetLoaderAdapter<flight._internal._Any>>).has(type)) : Bool) : Bool)) { return cast { id: id, refCount: 0.0, status: 'missing-loader', type: type }; }
-    entry = ((cast runtime.entries : flight._internal._Map<String, AssetEntry>).get(id));
+    if ((cast !(cast ((cast runtime.adapters : flight._internal._Map<AssetType, AssetLoaderAdapter<flight._internal._Any>>).has((cast type))) : Bool) : Bool)) { return cast { id: id, refCount: 0.0, status: 'missing-loader', type: type }; }
+    entry = ((cast runtime.entries : flight._internal._Map<String, AssetEntry>).get((cast id)));
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       return cast { id: id, refCount: (cast entry : { var refcount:Float; }).refcount, status: ((cast (cast entry : { var resident:Bool; }).resident : Bool) ? (cast 'resident' : Dynamic) : (cast 'loading' : Dynamic)), type: type };
     }
-    return cast { id: id, refCount: 0.0, status: ((cast ((cast runtime.freedIds : flight._internal._Set<String>).has(id)) : Bool) ? (cast 'freed' : Dynamic) : (cast 'never-acquired' : Dynamic)), type: type };
+    return cast { id: id, refCount: 0.0, status: ((cast ((cast runtime.freedIds : flight._internal._Set<String>).has((cast id))) : Bool) ? (cast 'freed' : Dynamic) : (cast 'never-acquired' : Dynamic)), type: type };
     return cast null;
   }
 }

@@ -4,4 +4,30 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Animation)
+@:structInit
+class AnimationTrack {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var interpolation:AnimationInterpolation;
+  public var times:flight._internal._ArrayLike<Float>;
+  public var values:flight._internal._ArrayLike<Float>;
+  public var components:Float;
+  public var quaternion:Bool;
+  public var easing:Null<EasingFunction>;
+  public var segmentEasings:Null<Array<Null<EasingFunction>>>;
+
+  private function new(interpolation:AnimationInterpolation, times:flight._internal._ArrayLike<Float>, values:flight._internal._ArrayLike<Float>, components:Float, quaternion:Bool, easing:Null<EasingFunction>, segmentEasings:Null<Array<Null<EasingFunction>>>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.interpolation = interpolation;
+    this.times = times;
+    this.values = values;
+    this.components = components;
+    this.quaternion = quaternion;
+    this.easing = easing;
+    this.segmentEasings = segmentEasings;
+  }
+}
+#else
 typedef AnimationTrack = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var interpolation:AnimationInterpolation; var times:flight._internal._ArrayLike<Float>; var values:flight._internal._ArrayLike<Float>; var components:Float; var quaternion:Bool; var easing:Null<EasingFunction>; var segmentEasings:Null<Array<Null<EasingFunction>>>; };
+#end

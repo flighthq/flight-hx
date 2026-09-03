@@ -114,7 +114,7 @@ class _ImageCodec {
   @:allow(flight)
   @:keep
   private static function getImageBitmapComposer(kind:String):Null<ImageBitmapComposer> {
-    return cast _Runtime.coalesce(((cast _ImageCodec.composers__imageBitmapComposerRegistry : flight._internal._Map<String, ImageBitmapComposer>).get(kind)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _ImageCodec.composers__imageBitmapComposerRegistry : flight._internal._Map<String, ImageBitmapComposer>).get((cast kind))), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -128,20 +128,20 @@ class _ImageCodec {
   @:allow(flight)
   @:keep
   private static function hasImageBitmapComposer(kind:String):Bool {
-    return cast ((cast _ImageCodec.composers__imageBitmapComposerRegistry : flight._internal._Map<String, ImageBitmapComposer>).has(kind));
+    return cast ((cast _ImageCodec.composers__imageBitmapComposerRegistry : flight._internal._Map<String, ImageBitmapComposer>).has((cast kind)));
     return cast null;
   }
 
   @:allow(flight)
   @:keep
   private static function registerImageBitmapComposer(kind:String, composer:ImageBitmapComposer):Void {
-    ((cast _ImageCodec.composers__imageBitmapComposerRegistry : flight._internal._Map<String, ImageBitmapComposer>).set(kind, (cast composer)));
+    ((cast _ImageCodec.composers__imageBitmapComposerRegistry : flight._internal._Map<String, ImageBitmapComposer>).set((cast kind), (cast composer)));
   }
 
   @:allow(flight)
   @:keep
   private static function unregisterImageBitmapComposer(kind:String):Void {
-    ((cast _ImageCodec.composers__imageBitmapComposerRegistry : flight._internal._Map<String, ImageBitmapComposer>).delete_(kind));
+    ((cast _ImageCodec.composers__imageBitmapComposerRegistry : flight._internal._Map<String, ImageBitmapComposer>).delete_((cast kind)));
   }
 
   public static final composers__imageBitmapComposerRegistry:flight._internal._Map<String, ImageBitmapComposer> = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
@@ -151,7 +151,7 @@ class _ImageCodec {
   }
 
   public static function getImageDecoder(mimeType:String):Null<ImageDecoder> {
-    return cast _Runtime.coalesce(((cast _ImageCodec.decoders__imageDecoderRegistry : flight._internal._Map<String, ImageDecoder>).get(mimeType)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _ImageCodec.decoders__imageDecoderRegistry : flight._internal._Map<String, ImageDecoder>).get((cast mimeType))), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -161,16 +161,16 @@ class _ImageCodec {
   }
 
   public static function hasImageDecoder(mimeType:String):Bool {
-    return cast ((cast _ImageCodec.decoders__imageDecoderRegistry : flight._internal._Map<String, ImageDecoder>).has(mimeType));
+    return cast ((cast _ImageCodec.decoders__imageDecoderRegistry : flight._internal._Map<String, ImageDecoder>).has((cast mimeType)));
     return cast null;
   }
 
   public static function registerImageDecoder(mimeType:String, decoder:ImageDecoder):Void {
-    ((cast _ImageCodec.decoders__imageDecoderRegistry : flight._internal._Map<String, ImageDecoder>).set(mimeType, (cast decoder)));
+    ((cast _ImageCodec.decoders__imageDecoderRegistry : flight._internal._Map<String, ImageDecoder>).set((cast mimeType), (cast decoder)));
   }
 
   public static function unregisterImageDecoder(mimeType:String):Void {
-    ((cast _ImageCodec.decoders__imageDecoderRegistry : flight._internal._Map<String, ImageDecoder>).delete_(mimeType));
+    ((cast _ImageCodec.decoders__imageDecoderRegistry : flight._internal._Map<String, ImageDecoder>).delete_((cast mimeType)));
   }
 
   public static final decoders__imageDecoderRegistry:flight._internal._Map<String, ImageDecoder> = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
@@ -180,7 +180,7 @@ class _ImageCodec {
   }
 
   public static function getImageEncoder(mimeType:String):Null<ImageEncoder> {
-    return cast _Runtime.coalesce(((cast _ImageCodec.encoders__imageEncoderRegistry : flight._internal._Map<String, ImageEncoder>).get(mimeType)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _ImageCodec.encoders__imageEncoderRegistry : flight._internal._Map<String, ImageEncoder>).get((cast mimeType))), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -190,16 +190,16 @@ class _ImageCodec {
   }
 
   public static function hasImageEncoder(mimeType:String):Bool {
-    return cast ((cast _ImageCodec.encoders__imageEncoderRegistry : flight._internal._Map<String, ImageEncoder>).has(mimeType));
+    return cast ((cast _ImageCodec.encoders__imageEncoderRegistry : flight._internal._Map<String, ImageEncoder>).has((cast mimeType)));
     return cast null;
   }
 
   public static function registerImageEncoder(mimeType:String, encoder:ImageEncoder):Void {
-    ((cast _ImageCodec.encoders__imageEncoderRegistry : flight._internal._Map<String, ImageEncoder>).set(mimeType, (cast encoder)));
+    ((cast _ImageCodec.encoders__imageEncoderRegistry : flight._internal._Map<String, ImageEncoder>).set((cast mimeType), (cast encoder)));
   }
 
   public static function unregisterImageEncoder(mimeType:String):Void {
-    ((cast _ImageCodec.encoders__imageEncoderRegistry : flight._internal._Map<String, ImageEncoder>).delete_(mimeType));
+    ((cast _ImageCodec.encoders__imageEncoderRegistry : flight._internal._Map<String, ImageEncoder>).delete_((cast mimeType)));
   }
 
   public static final encoders__imageEncoderRegistry:flight._internal._Map<String, ImageEncoder> = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);

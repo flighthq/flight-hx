@@ -4,4 +4,24 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Scene3D)
+@:structInit
+class Scene3D {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var animations:flight._internal._Record<String, AnimationClip>;
+  public var metadata:Null<Scene3DMetadata>;
+  public var resources:Array<ImageResourceReference>;
+  public var root:Node3D;
+
+  private function new(animations:flight._internal._Record<String, AnimationClip>, metadata:Null<Scene3DMetadata>, resources:Array<ImageResourceReference>, root:Node3D):Void {
+    this.__symbol__EntityRuntime = null;
+    this.animations = animations;
+    this.metadata = metadata;
+    this.resources = resources;
+    this.root = root;
+  }
+}
+#else
 typedef Scene3D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var animations:flight._internal._Record<String, AnimationClip>; var metadata:Null<Scene3DMetadata>; var resources:Array<ImageResourceReference>; var root:Node3D; };
+#end

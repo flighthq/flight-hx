@@ -42,10 +42,10 @@ class _Registry {
       {
         var __switchValue = (cast entry : { var state:String; }).state;
         if (__switchValue == (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) {
-          ((cast entries : flight._internal._Map<String, RegistryTableEntry<T>>).set(key, (cast entry)));
+          ((cast entries : flight._internal._Map<String, RegistryTableEntry<T>>).set((cast key), (cast entry)));
         }
         else if (__switchValue == (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Tombstoned) {
-          ((cast entries : flight._internal._Map<String, RegistryTableEntry<T>>).set(key, (cast entry)));
+          ((cast entries : flight._internal._Map<String, RegistryTableEntry<T>>).set((cast key), (cast entry)));
         }
         else  {
           {
@@ -120,7 +120,7 @@ class _Registry {
   public static function withoutRegistryTableEntry<T>(table:KeyedTable<T>, key:Kind):KeyedTable<T> {
     var entries:flight._internal._Map<String, RegistryTableEntry<T>> = cast _Runtime.UNDEFINED;
     entries = _Runtime.construct(flight._internal._HostValueLut.get('Map'), [_Runtime.field(table, 'entries')]);
-    ((cast entries : flight._internal._Map<String, RegistryTableEntry<T>>).delete_(key));
+    ((cast entries : flight._internal._Map<String, RegistryTableEntry<T>>).delete_((cast key)));
     return cast { entries: entries, onMiss: _Runtime.field(table, 'onMiss'), registry: _Runtime.field(table, 'registry'), shape: 'keyed' };
     return cast null;
   }
@@ -128,7 +128,7 @@ class _Registry {
   public static function withRegistryTableEntry<T>(table:KeyedTable<T>, key:Kind, value:T):KeyedTable<T> {
     var entries:flight._internal._Map<String, RegistryTableEntry<T>> = cast _Runtime.UNDEFINED;
     entries = _Runtime.construct(flight._internal._HostValueLut.get('Map'), [_Runtime.field(table, 'entries')]);
-    ((cast entries : flight._internal._Map<String, RegistryTableEntry<T>>).set(key, (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: value })));
+    ((cast entries : flight._internal._Map<String, RegistryTableEntry<T>>).set((cast key), (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: value })));
     return cast { entries: entries, onMiss: _Runtime.field(table, 'onMiss'), registry: _Runtime.field(table, 'registry'), shape: 'keyed' };
     return cast null;
   }
@@ -136,7 +136,7 @@ class _Registry {
   public static function withRegistryTableTombstone<T>(table:KeyedTable<T>, key:Kind):KeyedTable<T> {
     var entries:flight._internal._Map<String, RegistryTableEntry<T>> = cast _Runtime.UNDEFINED;
     entries = _Runtime.construct(flight._internal._HostValueLut.get('Map'), [_Runtime.field(table, 'entries')]);
-    ((cast entries : flight._internal._Map<String, RegistryTableEntry<T>>).set(key, (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Tombstoned })));
+    ((cast entries : flight._internal._Map<String, RegistryTableEntry<T>>).set((cast key), (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Tombstoned })));
     return cast { entries: entries, onMiss: _Runtime.field(table, 'onMiss'), registry: _Runtime.field(table, 'registry'), shape: 'keyed' };
     return cast null;
   }
@@ -144,7 +144,7 @@ class _Registry {
   public static function getRegistryTableEntryState__registryTable<T>(table:RegistryTable<T>, key:Kind):Null<RegistryTableEntry<T>> {
     var ordinal:Float = cast _Runtime.UNDEFINED;
     var value:Null<T> = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals((cast table : { var shape:String; }).shape, 'keyed') : Bool)) { return cast _Runtime.coalesce(((cast _Runtime.field(table, 'entries') : flight._internal._Map<String, RegistryTableEntry<T>>).get(key)), function():Dynamic return cast null); }
+    if ((cast _Runtime.strictEquals((cast table : { var shape:String; }).shape, 'keyed') : Bool)) { return cast _Runtime.coalesce(((cast _Runtime.field(table, 'entries') : flight._internal._Map<String, RegistryTableEntry<T>>).get((cast key))), function():Dynamic return cast null); }
     if ((cast _Runtime.strictEquals((cast table : { var shape:String; }).shape, 'slot') : Bool)) { return cast ((cast _Runtime.strictEquals(key, _Runtime.field(table, 'registry')) : Bool) ? (cast _Runtime.field(table, 'entry') : Dynamic) : (cast null : Dynamic)); }
     ordinal = _Runtime.callProperty(_Runtime.field(table, 'vocabulary'), 'indexOf', cast ([key] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(ordinal, -1.0) : Bool)) { return cast null; }

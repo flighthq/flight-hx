@@ -33,7 +33,7 @@ class _Lifecycle {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onStateChange], [state]]), 1);
       if ((cast ((cast _Runtime.strictEquals(state, 'active') : Bool) && (cast !_Runtime.strictEquals(previous, 'active') : Bool)) : Bool)) {
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onResume]]), 1);
-        var saved:Null<flight._internal._Record<String, flight._internal._Any>> = ((cast _Lifecycle._savedState__lifecycle : flight._internal._WeakMap<AppLifecycle, flight._internal._Record<String, flight._internal._Any>>).get(app));
+        var saved:Null<flight._internal._Record<String, flight._internal._Any>> = ((cast _Lifecycle._savedState__lifecycle : flight._internal._WeakMap<AppLifecycle, flight._internal._Record<String, flight._internal._Any>>).get((cast app)));
         if ((cast !_Runtime.strictEquals(saved, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onRestoreState], [saved]]), 1);
         }
@@ -42,7 +42,7 @@ class _Lifecycle {
         var stateBag:flight._internal._Record<String, flight._internal._Any> = cast _Runtime.UNDEFINED;
         stateBag = (cast {  });
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onSaveState], [stateBag]]), 1);
-        ((cast _Lifecycle._savedState__lifecycle : flight._internal._WeakMap<AppLifecycle, flight._internal._Record<String, flight._internal._Any>>).set(app, (cast stateBag)));
+        ((cast _Lifecycle._savedState__lifecycle : flight._internal._WeakMap<AppLifecycle, flight._internal._Record<String, flight._internal._Any>>).set((cast app), (cast stateBag)));
       } }
       (previous = cast (state : Dynamic));
     }; __callArgument2; }));
@@ -52,7 +52,7 @@ class _Lifecycle {
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onMemoryWarning], [level]]), 1);
       }] : Array<Dynamic>)) : Dynamic));
     }
-    ((cast _Lifecycle._subscriptions__lifecycle : flight._internal._WeakMap<AppLifecycle, Void->Void>).set(app, (cast function():Void {
+    ((cast _Lifecycle._subscriptions__lifecycle : flight._internal._WeakMap<AppLifecycle, Void->Void>).set((cast app), (cast function():Void {
       unsubscribeState();
       _Runtime.callOptionalValue(unsubscribeMemory, cast ([] : Array<Dynamic>));
     })));
@@ -143,16 +143,16 @@ class _Lifecycle {
 
   public static function detachAppLifecycle(app:AppLifecycle):Void {
     var unsubscribe:Null<Void->Void> = cast _Runtime.UNDEFINED;
-    unsubscribe = ((cast _Lifecycle._subscriptions__lifecycle : flight._internal._WeakMap<AppLifecycle, Void->Void>).get(app));
+    unsubscribe = ((cast _Lifecycle._subscriptions__lifecycle : flight._internal._WeakMap<AppLifecycle, Void->Void>).get((cast app)));
     if ((cast !_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       unsubscribe();
-      ((cast _Lifecycle._subscriptions__lifecycle : flight._internal._WeakMap<AppLifecycle, Void->Void>).delete_(app));
+      ((cast _Lifecycle._subscriptions__lifecycle : flight._internal._WeakMap<AppLifecycle, Void->Void>).delete_((cast app)));
     }
   }
 
   public static function disposeAppLifecycle(app:AppLifecycle):Void {
     detachAppLifecycle(({ final __callArgument12:Dynamic = app; __callArgument12; }));
-    ((cast _Lifecycle._savedState__lifecycle : flight._internal._WeakMap<AppLifecycle, flight._internal._Record<String, flight._internal._Any>>).delete_(app));
+    ((cast _Lifecycle._savedState__lifecycle : flight._internal._WeakMap<AppLifecycle, flight._internal._Record<String, flight._internal._Any>>).delete_((cast app)));
   }
 
   @:allow(flight)

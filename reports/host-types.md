@@ -7,7 +7,7 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | Metric | Count |
 | --- | ---: |
 | Host types | 237 |
-| Type references | 6040 |
+| Type references | 6036 |
 | Member accesses | 3044 |
 | Reads | 1127 |
 | Writes | 420 |
@@ -34,7 +34,7 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | `CanvasLineCap` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
 | `CanvasLineJoin` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
 | `CanvasPattern` | `node_modules/typescript/lib/lib.dom.d.ts` | 36 | 0 | 0 | 0 | 0 | 0 |
-| `CanvasRenderingContext2D` | `node_modules/typescript/lib/lib.dom.d.ts` | 169 | 0 | 47 | 4 | 170 | 289 |
+| `CanvasRenderingContext2D` | `node_modules/typescript/lib/lib.dom.d.ts` | 167 | 0 | 47 | 4 | 170 | 289 |
 | `CanvasRenderingContext2DSettings` | `node_modules/typescript/lib/lib.dom.d.ts` | 12 | 0 | 0 | 0 | 0 | 0 |
 | `ChildNode` | `node_modules/typescript/lib/lib.dom.d.ts` | 4 | 0 | 3 | 3 | 1 | 0 |
 | `Clipboard` | `node_modules/typescript/lib/lib.dom.d.ts` | 6 | 0 | 4 | 7 | 0 | 9 |
@@ -143,7 +143,7 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | `GeolocationPositionError` | `node_modules/typescript/lib/lib.dom.d.ts` | 8 | 0 | 1 | 2 | 0 | 0 |
 | `GlobalCompositeOperation` | `node_modules/typescript/lib/lib.dom.d.ts` | 8 | 0 | 0 | 0 | 0 | 0 |
 | `HTMLAudioElement` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 1 | 0 | 0 | 1 |
-| `HTMLCanvasElement` | `node_modules/@webgpu/types/dist/index.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 197 | 0 | 7 | 54 | 28 | 21 |
+| `HTMLCanvasElement` | `node_modules/@webgpu/types/dist/index.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 195 | 0 | 7 | 54 | 28 | 21 |
 | `HTMLDivElement` | `node_modules/typescript/lib/lib.dom.d.ts` | 14 | 0 | 10 | 13 | 3 | 8 |
 | `HTMLElement` | `node_modules/typescript/lib/lib.dom.d.ts` | 148 | 0 | 23 | 83 | 2 | 46 |
 | `HTMLHeadElement` | `node_modules/typescript/lib/lib.dom.d.ts` | 3 | 0 | 2 | 0 | 0 | 4 |

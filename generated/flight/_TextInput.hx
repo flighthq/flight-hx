@@ -388,7 +388,7 @@ class _TextInput {
       else if (__switchValue == 'copy') {
         {
           var copyText:String = (cast getTextInputSelectionText(({ final __callArgument131:Dynamic = source; __callArgument131; })) : String);
-          if ((cast ((cast _Runtime.field(copyText, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { ({ final __optionalOwner134 = options; if (__optionalOwner134 != null) { final __optionalCall133 = (cast __optionalOwner134 : { @:optional var onCopy:Null<String->Void>; }).onCopy; if (__optionalCall133 != null) __optionalCall133(copyText); } }); }
+          if ((cast ((cast _Runtime.field(copyText, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { ({ final __optionalOwner134 = options; if (__optionalOwner134 != null) { final __optionalCall133 = (cast __optionalOwner134 : { @:optional var onCopy:Null<String->Void>; }).onCopy; if (__optionalCall133 != null) __optionalCall133((cast copyText : String)); } }); }
           return cast true;
         }
       }
@@ -396,7 +396,7 @@ class _TextInput {
         {
           var cutText:String = (cast getTextInputSelectionText(({ final __callArgument135:Dynamic = source; __callArgument135; })) : String);
           if ((cast ((cast _Runtime.field(cutText, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-            ({ final __optionalOwner138 = options; if (__optionalOwner138 != null) { final __optionalCall137 = (cast __optionalOwner138 : { @:optional var onCopy:Null<String->Void>; }).onCopy; if (__optionalCall137 != null) __optionalCall137(cutText); } });
+            ({ final __optionalOwner138 = options; if (__optionalOwner138 != null) { final __optionalCall137 = (cast __optionalOwner138 : { @:optional var onCopy:Null<String->Void>; }).onCopy; if (__optionalCall137 != null) __optionalCall137((cast cutText : String)); } });
             (#if js _Runtime.callValue(replaceSelectedTextInput, cast ([({ final __callArgument140:Dynamic = source; __callArgument140; }), (cast '' : String)] : Array<Dynamic>)) #else replaceSelectedTextInput(({ final __callArgument139:Dynamic = source; __callArgument139; }), (cast '' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
           }
           return cast true;

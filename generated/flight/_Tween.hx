@@ -113,13 +113,13 @@ class _Tween {
   }
 
   public static function getTweensOf(manager:TweenManager, target:flight._internal._Object):Array<Tween<flight._internal._Any>> {
-    return cast _Runtime.coalesce(((cast manager.tweens : flight._internal._Map<flight._internal._Object, Array<Tween<flight._internal._Any>>>).get(target)), function():Dynamic return cast cast ([] : Array<Dynamic>));
+    return cast _Runtime.coalesce(((cast manager.tweens : flight._internal._Map<flight._internal._Object, Array<Tween<flight._internal._Any>>>).get((cast target))), function():Dynamic return cast cast ([] : Array<Dynamic>));
     return cast null;
   }
 
   public static function hasTweensOf(manager:TweenManager, target:flight._internal._Object):Bool {
     var list:Null<Array<Tween<flight._internal._Any>>> = cast _Runtime.UNDEFINED;
-    list = ((cast manager.tweens : flight._internal._Map<flight._internal._Object, Array<Tween<flight._internal._Any>>>).get(target));
+    list = ((cast manager.tweens : flight._internal._Map<flight._internal._Object, Array<Tween<flight._internal._Any>>>).get((cast target)));
     return cast ((cast !_Runtime.strictEquals(list, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast _Runtime.field(list, 'length') : Float) > (cast 0.0 : Float)) : Bool));
     return cast null;
   }
@@ -161,7 +161,7 @@ class _Tween {
 
   public static function pauseTweens(manager:TweenManager, target:flight._internal._Object):Void {
     var list:Null<Array<Tween<flight._internal._Any>>> = cast _Runtime.UNDEFINED;
-    list = ((cast manager.tweens : flight._internal._Map<flight._internal._Object, Array<Tween<flight._internal._Any>>>).get(target));
+    list = ((cast manager.tweens : flight._internal._Map<flight._internal._Object, Array<Tween<flight._internal._Any>>>).get((cast target)));
     if ((cast _Runtime.strictEquals(list, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     for (tween in _Runtime.iterable(list)) {
       (tween.paused = cast (true : Bool));
@@ -170,10 +170,10 @@ class _Tween {
 
   public static function registerTween__tween<T:flight._internal._Object>(manager:TweenManager, tween:Tween<T>, overwrite:Bool):Void {
     var list:Null<Array<Tween<flight._internal._Any>>> = cast _Runtime.UNDEFINED;
-    list = ((cast manager.tweens : flight._internal._Map<flight._internal._Object, Array<Tween<flight._internal._Any>>>).get(tween.target));
+    list = ((cast manager.tweens : flight._internal._Map<flight._internal._Object, Array<Tween<flight._internal._Any>>>).get((cast tween.target)));
     if ((cast _Runtime.strictEquals(list, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (list = cast (cast ([] : Array<Dynamic>) : Dynamic));
-      ((cast manager.tweens : flight._internal._Map<flight._internal._Object, Array<Tween<flight._internal._Any>>>).set(tween.target, (cast list)));
+      ((cast manager.tweens : flight._internal._Map<flight._internal._Object, Array<Tween<flight._internal._Any>>>).set((cast tween.target), (cast list)));
     }
     if ((cast overwrite : Bool)) {
       {
@@ -214,7 +214,7 @@ class _Tween {
 
   public static function resumeTweens(manager:TweenManager, target:flight._internal._Object):Void {
     var list:Null<Array<Tween<flight._internal._Any>>> = cast _Runtime.UNDEFINED;
-    list = ((cast manager.tweens : flight._internal._Map<flight._internal._Object, Array<Tween<flight._internal._Any>>>).get(target));
+    list = ((cast manager.tweens : flight._internal._Map<flight._internal._Object, Array<Tween<flight._internal._Any>>>).get((cast target)));
     if ((cast _Runtime.strictEquals(list, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     for (tween in _Runtime.iterable(list)) {
       (tween.paused = cast (false : Bool));
@@ -251,7 +251,7 @@ class _Tween {
 
   public static function stopTweens(manager:TweenManager, target:flight._internal._Object, ?propertyMap:NumericProps<flight._internal._Any>, ?options:StopTweenOptions):Void {
     var list:Null<Array<Tween<flight._internal._Any>>> = cast _Runtime.UNDEFINED;
-    list = ((cast manager.tweens : flight._internal._Map<flight._internal._Object, Array<Tween<flight._internal._Any>>>).get(target));
+    list = ((cast manager.tweens : flight._internal._Map<flight._internal._Object, Array<Tween<flight._internal._Any>>>).get((cast target)));
     if ((cast _Runtime.strictEquals(list, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     for (tween in _Runtime.iterable(list)) {
       if ((cast !_Runtime.strictEquals(propertyMap, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
@@ -463,7 +463,7 @@ class _Tween {
         }
         i--;
       }
-      if ((cast _Runtime.strictEquals(_Runtime.field(list, 'length'), 0.0) : Bool)) { ((cast manager.tweens : flight._internal._Map<flight._internal._Object, Array<Tween<flight._internal._Any>>>).delete_(target)); }
+      if ((cast _Runtime.strictEquals(_Runtime.field(list, 'length'), 0.0) : Bool)) { ((cast manager.tweens : flight._internal._Map<flight._internal._Object, Array<Tween<flight._internal._Any>>>).delete_((cast target))); }
     }
   }
 }

@@ -497,7 +497,10 @@ export function lowerTypeScriptSource(
           kind: 'type',
           name: statement.name.text,
           origin: origin(statement, context),
-          type: lowerConcreteClosedMappedAlias(statement, context) ?? lowerType(statement.type, context),
+          type:
+            lowerConcreteClosedMappedAlias(statement, context) ??
+            lowerConcreteEntityIntersectionAlias(statement, context) ??
+            lowerType(statement.type, context),
           typeParameters: statement.typeParameters?.map((parameter) => parameter.name.text) ?? [],
         });
         accountedDeclarations += 1;
@@ -1358,11 +1361,13 @@ function nodeAllocatorParameter(node: ts.FunctionDeclaration, context: LoweringC
   const signature = context.checker.getSignatureFromDeclaration(node);
   const returnType = signature && context.checker.getReturnTypeOfSignature(signature);
   if (!returnType) return undefined;
-  const fields = syntheticEntityFieldsForType(returnType, node, context);
-  if (!fields) return undefined;
-  const construction = addSyntheticEntityFactoryDeclaration(node, fields, context);
+  const publicConstruction =
+    node.name?.text === 'createNode' ? undefined : context.typedStructs?.resolveFactoryIdentityConstruction(returnType);
+  const fields = publicConstruction ? undefined : syntheticEntityFieldsForType(returnType, node, context);
+  if (!publicConstruction && !fields) return undefined;
+  const construction = publicConstruction ?? addSyntheticEntityFactoryDeclaration(node, fields!, context);
   return {
-    initializer: emptyEntityAllocator(construction),
+    initializer: emptyEntityAllocator({ ...construction, nodeAllocator: true }),
     name: '__nodeAllocator',
     optional: true,
     rest: false,
@@ -2312,6 +2317,49 @@ function lowerConcreteClosedMappedAlias(
 
   const resolved = checker.getTypeFromTypeNode(declaration.type);
   return lowerResolvedConcreteMappedType(resolved, declaration.type.typeArguments[0]!, declaration, context);
+}
+
+function lowerConcreteEntityIntersectionAlias(
+  declaration: ts.TypeAliasDeclaration,
+  context: LoweringContext,
+): Extract<IrType, { kind: 'anonymous' }> | undefined {
+  const checker = context.checker;
+  if (!checker || declaration.typeParameters?.length || !ts.isIntersectionTypeNode(declaration.type)) {
+    return undefined;
+  }
+  const resolved = checker.getTypeFromTypeNode(declaration.type);
+  if (
+    (resolved.flags & (ts.TypeFlags.Object | ts.TypeFlags.Intersection)) === 0 ||
+    checker.getIndexInfosOfType(resolved).length > 0 ||
+    checker.getSignaturesOfType(resolved, ts.SignatureKind.Call).length > 0 ||
+    checker.getSignaturesOfType(resolved, ts.SignatureKind.Construct).length > 0
+  ) {
+    return undefined;
+  }
+  const properties = checker.getPropertiesOfType(resolved);
+  if (!properties.some((property) => property.getName().startsWith('__@EntityRuntimeKey@'))) return undefined;
+
+  const fields: IrTypeField[] = [];
+  const fieldNames = new Set<string>();
+  for (const property of properties) {
+    const propertyDeclaration = property.valueDeclaration ?? property.declarations?.[0];
+    if (!propertyDeclaration || propertyDeclaration.getSourceFile().isDeclarationFile) return undefined;
+    const entityRuntime = property.getName().startsWith('__@EntityRuntimeKey@');
+    const name = entityRuntime
+      ? '__EntityRuntimeKey'
+      : concreteMappedPropertyName(property, propertyDeclaration, context);
+    if (!name || fieldNames.has(name)) return undefined;
+    const checkerType = checker.getTypeOfSymbolAtLocation(property, propertyDeclaration);
+    const fieldType = concreteMappedFieldType(checkerType, propertyDeclaration, declaration, context);
+    if (!fieldType) return undefined;
+    fieldNames.add(name);
+    fields.push({
+      name,
+      optional: entityRuntime || (property.flags & ts.SymbolFlags.Optional) !== 0,
+      type: fieldType,
+    });
+  }
+  return { extends: [], fields, kind: 'anonymous' };
 }
 
 function lowerConcreteClosedMappedTypeReference(
@@ -3727,16 +3775,20 @@ function cppStructInitEntityFactoryConstruction(
   const call = createEntityCallForObjectLiteral(node, checker);
   if (!call) return undefined;
   const destinationCandidates = entityFactoryDestinationCandidates(call, checker);
-  const namedIdentity = registry
-    ? destinationCandidates
-        .map((candidate) => registry.resolveIdentity(candidate.type))
-        .find((candidate) => candidate !== undefined)
-    : undefined;
-  const binding = registry
-    ? destinationCandidates
-        .map((candidate) => registry.resolveFactoryIdentityConstruction(candidate.type))
-        .find((candidate) => candidate !== undefined)
-    : undefined;
+  const identities = registry
+    ? destinationCandidates.flatMap((candidate) => {
+        const identity = registry.resolveIdentity(candidate.type);
+        return identity ? [identity] : [];
+      })
+    : [];
+  const namedIdentity = identities.find((identity) => identity.name !== 'Entity') ?? identities[0];
+  const bindings = registry
+    ? destinationCandidates.flatMap((candidate) => {
+        const candidateBinding = registry.resolveFactoryIdentityConstruction(candidate.type);
+        return candidateBinding ? [candidateBinding] : [];
+      })
+    : [];
+  const binding = bindings.find((candidate) => candidate.schemaName !== 'Entity') ?? bindings[0];
   const shape = entityFactoryObjectShape(node);
   const constructionFields = shape.hasSpread
     ? entityFactoryExpandedObjectFields(node, checker)
@@ -3766,9 +3818,11 @@ function entityFactoryObjectDestinationType(
   if (!checker || !registry) return undefined;
   const call = createEntityCallForObjectLiteral(node, checker);
   if (!call) return undefined;
-  return entityFactoryDestinationCandidates(call, checker).find(
-    (candidate) => registry.resolveFactoryIdentityConstruction(candidate.type) !== undefined,
-  )?.type;
+  const candidates = entityFactoryDestinationCandidates(call, checker).flatMap((candidate) => {
+    const binding = registry.resolveFactoryIdentityConstruction(candidate.type);
+    return binding ? [{ binding, type: candidate.type }] : [];
+  });
+  return (candidates.find((candidate) => candidate.binding.schemaName !== 'Entity') ?? candidates[0])?.type;
 }
 
 function entityFactoryVariableStorageType(
@@ -3787,12 +3841,11 @@ function entityFactoryVariableStorageType(
     ? entityFactoryExpandedObjectFields(object, checker)
     : entityFactoryResolvedObjectFields(object, checker);
   if (!constructionFields || shape.hasUnsupported) return undefined;
-  const binding = entityFactoryDestinationCandidates(initializer, checker)
-    .map((candidate) => registry.resolveFactoryIdentityConstruction(candidate.type))
-    .find(
-      (candidate) =>
-        candidate !== undefined && constructionFields.every((field) => candidate.fieldNames.includes(field)),
-    );
+  const bindings = entityFactoryDestinationCandidates(initializer, checker).flatMap((candidate) => {
+    const binding = registry.resolveFactoryIdentityConstruction(candidate.type);
+    return binding && constructionFields.every((field) => binding.fieldNames.includes(field)) ? [binding] : [];
+  });
+  const binding = bindings.find((candidate) => candidate.schemaName !== 'Entity') ?? bindings[0];
   return binding ? { arguments: [], kind: 'named', name: binding.schemaHaxeType } : undefined;
 }
 
@@ -4425,7 +4478,27 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
             left.kind === 'property' ? (left.type ?? left.typedStructBinding?.field.type) : left.type,
           )
         : loweredRight;
-    if (assignment) return { kind: 'assignment', left, operator, right };
+    if (assignment) {
+      const checker = context.checker;
+      const registry = context.typedStructs;
+      const targetIdentity =
+        checker && registry
+          ? registry.resolveIdentity(checker.getNonNullableType(checker.getTypeAtLocation(node.left)))
+          : undefined;
+      const sourceIdentity =
+        checker && registry
+          ? registry.resolveIdentity(checker.getNonNullableType(checker.getTypeAtLocation(node.right)))
+          : undefined;
+      return {
+        kind: 'assignment',
+        left,
+        ...(targetIdentity && sourceIdentity && targetIdentity.id !== sourceIdentity.id
+          ? { nominalEntityCast: true as const }
+          : {}),
+        operator,
+        right,
+      };
+    }
     return {
       domRootBinding: operator === 'in' ? domRootBinding(node.right, context) : undefined,
       kind: 'binary',
@@ -4539,13 +4612,8 @@ function nodeAllocatorForCall(
     .map((candidate) => ({ ...candidate, schema: registry.resolveIdentity(candidate.type) }))
     .find((candidate) => candidate.schema !== undefined && candidate.schema.name !== 'Node');
   if (!destination?.schema) return undefined;
-  const construction = ['Node2D', 'Node3D'].includes(destination.schema.name)
-    ? (() => {
-        const fields = syntheticEntityFieldsForType(destination.type, node, context);
-        return fields ? addSyntheticEntityFactoryDeclaration(node, fields, context) : undefined;
-      })()
-    : registry.resolveFactoryIdentityConstruction(destination.type);
-  return construction ? emptyEntityAllocator(construction) : undefined;
+  const construction = registry.resolveFactoryIdentityConstruction(destination.type);
+  return construction ? emptyEntityAllocator({ ...construction, nodeAllocator: true }) : undefined;
 }
 
 function nodeAllocatorParameterOwner(node: ts.FunctionDeclaration): boolean {

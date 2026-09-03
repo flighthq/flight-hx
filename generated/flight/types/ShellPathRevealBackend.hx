@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:allow(flight._HostTauri)
+@:structInit
+class ShellPathRevealBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var reveal:String->flight._internal._Promise<ShellPathRevealOutcome>;
+
+  private function new(reveal:String->flight._internal._Promise<ShellPathRevealOutcome>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.reveal = reveal;
+  }
+}
+#else
 typedef ShellPathRevealBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var reveal:String->flight._internal._Promise<ShellPathRevealOutcome>; };
+#end

@@ -1027,7 +1027,7 @@ class _TextLayout {
           (activeGroup = cast (null : Dynamic));
         }
         commitLine();
-        ((cast paragraphLastLines : flight._internal._Set<Float>).add((lineIndex - 1.0)));
+        ((cast paragraphLastLines : flight._internal._Set<Float>).add((cast (lineIndex - 1.0))));
         if ((cast (cast checkTruncation() : Bool) : Bool)) { break; }
         if ((cast !(cast multiline : Bool) : Bool)) { break; }
         (textIndex = cast ((breakIndex + 1.0) : Dynamic));
@@ -1080,7 +1080,7 @@ class _TextLayout {
         i--;
       }
     }
-    ((cast paragraphLastLines : flight._internal._Set<Float>).add(lineIndex));
+    ((cast paragraphLastLines : flight._internal._Set<Float>).add((cast lineIndex)));
   }
 
   public static function applyAlignment__textLayout(groups:Array<TextLayoutGroup>, containerWidth:Float, lineWidths:Array<Float>, direction:TextDirection, justification:TextJustification, paragraphLastLines:flight._internal._Set<Float>, text:String):Void {
@@ -1119,7 +1119,7 @@ class _TextLayout {
     {
       var li:Float = 0.0;
       while ((cast ((cast li : Float) < (cast lineCount : Float)) : Bool)) {
-        if ((cast ((cast paragraphLastLines : flight._internal._Set<Float>).has(li)) : Bool)) { li++; continue; }
+        if ((cast ((cast paragraphLastLines : flight._internal._Set<Float>).has((cast li))) : Bool)) { li++; continue; }
         var lineGroups:Array<TextLayoutGroup> = (cast cast ([] : Array<Dynamic>));
         for (g in _Runtime.iterable(groups)) {
           if ((cast ((cast _Runtime.strictEquals(g.lineIndex, li) : Bool) && (cast _Runtime.strictEquals((cast g.format : TextFormat).align, 'justify') : Bool)) : Bool)) { _Runtime.callProperty(lineGroups, 'push', cast ([g] : Array<Dynamic>)); }

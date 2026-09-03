@@ -22,7 +22,7 @@ import flight.types.Signal;
 @:noCompletion
 class _Share {
   public static function attachShareSignals(signals:ShareSignals):Void {
-    ((cast _Share._attachedSignals__share : flight._internal._Set<ShareSignals>).add(signals));
+    ((cast _Share._attachedSignals__share : flight._internal._Set<ShareSignals>).add((cast signals)));
   }
 
   public static function canShareContent(host:HasShareContent, content:ShareContent):Bool {
@@ -38,7 +38,7 @@ class _Share {
   }
 
   public static function detachShareSignals(signals:ShareSignals):Void {
-    ((cast _Share._attachedSignals__share : flight._internal._Set<ShareSignals>).delete_(signals));
+    ((cast _Share._attachedSignals__share : flight._internal._Set<ShareSignals>).delete_((cast signals)));
   }
 
   public static function disposeShareSignals(signals:ShareSignals):Void {
@@ -47,7 +47,7 @@ class _Share {
   }
 
   public static function enableShareSignals():ShareSignals {
-    return cast (cast createEntity((cast ({ onShareResult: (cast createSignal() : Signal<ShareResult->Void>) } : ShareSignals) : Dynamic)) : ShareSignals);
+    return cast (cast createEntity((cast ({ onShareResult: (cast (cast createSignal() : Signal<ShareResult->Void>) : Dynamic) } : ShareSignals) : Dynamic)) : ShareSignals);
     return cast null;
   }
 

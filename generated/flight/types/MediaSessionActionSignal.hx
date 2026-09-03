@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._MediaSession)
+@:structInit
+class MediaSessionActionSignal {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var action:MediaSessionAction;
+  public var onAction:Signal<MediaSessionActionDetails->Void>;
+
+  private function new(action:MediaSessionAction, onAction:Signal<MediaSessionActionDetails->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.action = action;
+    this.onAction = onAction;
+  }
+}
+#else
 typedef MediaSessionActionSignal = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var action:MediaSessionAction; var onAction:Signal<MediaSessionActionDetails->Void>; };
+#end

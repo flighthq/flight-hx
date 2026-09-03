@@ -680,15 +680,15 @@ class _Node {
     var bCur:Null<NodeOf<Traits>> = cast _Runtime.UNDEFINED;
     aAncestors = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
     aNode = (cast a : NodeOf<Traits>);
-    ((cast aAncestors : flight._internal._Set<NodeOf<Traits>>).add(aNode));
+    ((cast aAncestors : flight._internal._Set<NodeOf<Traits>>).add((cast aNode)));
     cur = (cast getNodeParent((cast aNode : Dynamic)) : Null<NodeOf<Traits>>);
     while ((cast !_Runtime.strictEquals(cur, null) : Bool)) {
-      ((cast aAncestors : flight._internal._Set<NodeOf<Traits>>).add(cur));
+      ((cast aAncestors : flight._internal._Set<NodeOf<Traits>>).add((cast cur)));
       (cur = cast ((cast getNodeParent((cast cur : Dynamic)) : Null<NodeOf<Traits>>) : Dynamic));
     }
     bCur = (cast b : NodeOf<Traits>);
     while ((cast !_Runtime.strictEquals(bCur, null) : Bool)) {
-      if ((cast ((cast aAncestors : flight._internal._Set<NodeOf<Traits>>).has(bCur)) : Bool)) { return cast bCur; }
+      if ((cast ((cast aAncestors : flight._internal._Set<NodeOf<Traits>>).has((cast bCur))) : Bool)) { return cast bCur; }
       (bCur = cast ((cast getNodeParent((cast bCur : Dynamic)) : Null<NodeOf<Traits>>) : Dynamic));
     }
     return cast null;
@@ -1117,14 +1117,14 @@ class _Node {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast list.entryCount : Float)) : Bool)) {
-        ((cast listIndex : flight._internal._Map<NodeAny, Float>).set(flight._internal._StaticIndex.readArray(list.nodes, i), (cast i)));
+        ((cast listIndex : flight._internal._Map<NodeAny, Float>).set((cast flight._internal._StaticIndex.readArray(list.nodes, i)), (cast i)));
         i++;
       }
     }
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-        if ((cast !(cast ((cast listIndex : flight._internal._Map<NodeAny, Float>).has(flight._internal._StaticIndex.readArray(children, i))) : Bool) : Bool)) { i++; continue; }
+        if ((cast !(cast ((cast listIndex : flight._internal._Map<NodeAny, Float>).has((cast flight._internal._StaticIndex.readArray(children, i)))) : Bool) : Bool)) { i++; continue; }
         _Runtime.callProperty(members, 'push', cast ([flight._internal._StaticIndex.readArray(children, i)] : Array<Dynamic>));
         _Runtime.callProperty(slots, 'push', cast ([i] : Array<Dynamic>));
         i++;
@@ -1139,8 +1139,8 @@ class _Node {
     _Runtime.callProperty(members, 'sort', cast ([function(a:NodeAny, b:NodeAny):Float {
       var ai:Float = cast _Runtime.UNDEFINED;
       var bi:Float = cast _Runtime.UNDEFINED;
-      ai = (cast ((cast listIndex : flight._internal._Map<NodeAny, Float>).get(a)) : Float);
-      bi = (cast ((cast listIndex : flight._internal._Map<NodeAny, Float>).get(b)) : Float);
+      ai = (cast ((cast listIndex : flight._internal._Map<NodeAny, Float>).get((cast a))) : Float);
+      bi = (cast ((cast listIndex : flight._internal._Map<NodeAny, Float>).get((cast b))) : Float);
       return cast ((cast !_Runtime.strictEquals(flight._internal._StaticIndex.readFloatArrayTyped((cast sortKeys : Array<Float>), (cast ai : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast sortKeys : Array<Float>), (cast bi : Float))) : Bool) ? (cast (flight._internal._StaticIndex.readFloatArrayTyped((cast sortKeys : Array<Float>), (cast ai : Float)) - flight._internal._StaticIndex.readFloatArrayTyped((cast sortKeys : Array<Float>), (cast bi : Float))) : Dynamic) : (cast (ai - bi) : Dynamic));
       return cast _Runtime.UNDEFINED;
     }] : Array<Dynamic>));
@@ -1875,7 +1875,7 @@ class _Node {
   public static final _emptyChildren__traversal:Array<flight._internal._Any> = (cast cast ([] : Array<Dynamic>));
 
   public static function createViewport(?obj:ViewportLike):Viewport {
-    return cast (cast createEntity(({ final __callArgument325:Dynamic = ({ devicePixelRatio: _Runtime.coalesce(({ final __structural320 = obj; __structural320 == null ? _Runtime.UNDEFINED : (cast __structural320 : { @:optional var devicePixelRatio:Null<Float>; }).devicePixelRatio; }), function():Dynamic return cast 1.0), height: _Runtime.coalesce(({ final __structural321 = obj; __structural321 == null ? _Runtime.UNDEFINED : (cast __structural321 : { @:optional var height:Null<Float>; }).height; }), function():Dynamic return cast 0.0), width: _Runtime.coalesce(({ final __structural322 = obj; __structural322 == null ? _Runtime.UNDEFINED : (cast __structural322 : { @:optional var width:Null<Float>; }).width; }), function():Dynamic return cast 0.0), x: _Runtime.coalesce(({ final __structural323 = obj; __structural323 == null ? _Runtime.UNDEFINED : (cast __structural323 : { @:optional var x:Null<Float>; }).x; }), function():Dynamic return cast 0.0), y: _Runtime.coalesce(({ final __structural324 = obj; __structural324 == null ? _Runtime.UNDEFINED : (cast __structural324 : { @:optional var y:Null<Float>; }).y; }), function():Dynamic return cast 0.0) } : Viewport); __callArgument325; })) : Viewport);
+    return cast (cast createEntity(({ final __callArgument325:Dynamic = ({ devicePixelRatio: (cast _Runtime.coalesce(({ final __structural320 = obj; __structural320 == null ? _Runtime.UNDEFINED : (cast __structural320 : { @:optional var devicePixelRatio:Null<Float>; }).devicePixelRatio; }), function():Dynamic return cast 1.0) : Dynamic), height: (cast _Runtime.coalesce(({ final __structural321 = obj; __structural321 == null ? _Runtime.UNDEFINED : (cast __structural321 : { @:optional var height:Null<Float>; }).height; }), function():Dynamic return cast 0.0) : Dynamic), width: (cast _Runtime.coalesce(({ final __structural322 = obj; __structural322 == null ? _Runtime.UNDEFINED : (cast __structural322 : { @:optional var width:Null<Float>; }).width; }), function():Dynamic return cast 0.0) : Dynamic), x: (cast _Runtime.coalesce(({ final __structural323 = obj; __structural323 == null ? _Runtime.UNDEFINED : (cast __structural323 : { @:optional var x:Null<Float>; }).x; }), function():Dynamic return cast 0.0) : Dynamic), y: (cast _Runtime.coalesce(({ final __structural324 = obj; __structural324 == null ? _Runtime.UNDEFINED : (cast __structural324 : { @:optional var y:Null<Float>; }).y; }), function():Dynamic return cast 0.0) : Dynamic) } : Viewport); __callArgument325; })) : Viewport);
     return cast null;
   }
 

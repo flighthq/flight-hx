@@ -405,6 +405,48 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain('>EntityWithoutRuntime<Bitmap>');
   });
 
+  it('materializes concrete Entity intersections into their complete nominal record', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/types/src/entityCapabilities.ts',
+      `
+        declare const EntityRuntimeKey: unique symbol;
+        interface EntityRuntime { binding: object | null; }
+        interface Entity { [EntityRuntimeKey]: EntityRuntime | undefined; }
+        interface HostCapabilities { activate?: () => void; name?: () => string; }
+        export type CommonCapabilities = Entity & Required<Pick<HostCapabilities, 'activate' | 'name'>>;
+        export type ExtendedCapabilities = CommonCapabilities & Readonly<{ close: () => void }>;
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/types', '/workspace', checker);
+    const common = lowered.declarations.find(
+      (declaration) => declaration.kind === 'type' && declaration.name === 'CommonCapabilities',
+    );
+    const extended = lowered.declarations.find(
+      (declaration) => declaration.kind === 'type' && declaration.name === 'ExtendedCapabilities',
+    );
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(common?.kind === 'type' ? common.type : undefined).toMatchObject({
+      extends: [],
+      fields: expect.arrayContaining([
+        expect.objectContaining({ name: '__EntityRuntimeKey', optional: true }),
+        expect.objectContaining({ name: 'activate', optional: false }),
+        expect.objectContaining({ name: 'name', optional: false }),
+      ]),
+      kind: 'anonymous',
+    });
+    expect(extended?.kind === 'type' ? extended.type : undefined).toMatchObject({
+      extends: [],
+      fields: expect.arrayContaining([
+        expect.objectContaining({ name: '__EntityRuntimeKey', optional: true }),
+        expect.objectContaining({ name: 'activate', optional: false }),
+        expect.objectContaining({ name: 'close', optional: false }),
+        expect.objectContaining({ name: 'name', optional: false }),
+      ]),
+      kind: 'anonymous',
+    });
+  });
+
   it('routes SharedArrayBuffer runtime checks through the explicit host-value LUT', () => {
     const { checker, source } = typedSource(
       '/workspace/upstream/packages/render-wgpu/src/sharedBuffer.ts',

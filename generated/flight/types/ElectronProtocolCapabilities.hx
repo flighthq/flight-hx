@@ -4,4 +4,26 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ElectronProtocolCapabilities = flight._internal._Intersection2<Entity, flight._internal._Required<{ @:optional var default_:Null<ProtocolDefaultBackend>; @:optional var open:Null<ProtocolOpenBackend>; @:optional var registration:Null<ProtocolRegistrationBackend>; @:optional var registrationQuery:Null<ProtocolRegistrationQueryBackend>; @:optional var unregistration:Null<ProtocolUnregistrationBackend>; }>>;
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:structInit
+class ElectronProtocolCapabilities {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var default_:ProtocolDefaultBackend;
+  public var open:ProtocolOpenBackend;
+  public var registration:ProtocolRegistrationBackend;
+  public var registrationQuery:ProtocolRegistrationQueryBackend;
+  public var unregistration:ProtocolUnregistrationBackend;
+
+  private function new(default_:ProtocolDefaultBackend, open:ProtocolOpenBackend, registration:ProtocolRegistrationBackend, registrationQuery:ProtocolRegistrationQueryBackend, unregistration:ProtocolUnregistrationBackend):Void {
+    this.__symbol__EntityRuntime = null;
+    this.default_ = default_;
+    this.open = open;
+    this.registration = registration;
+    this.registrationQuery = registrationQuery;
+    this.unregistration = unregistration;
+  }
+}
+#else
+typedef ElectronProtocolCapabilities = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var default_:ProtocolDefaultBackend; var open:ProtocolOpenBackend; var registration:ProtocolRegistrationBackend; var registrationQuery:ProtocolRegistrationQueryBackend; var unregistration:ProtocolUnregistrationBackend; };
+#end

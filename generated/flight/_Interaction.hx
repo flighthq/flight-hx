@@ -545,7 +545,7 @@ class _Interaction {
     inverseMatrixTransformPointXY(({ final __callArgument94:Dynamic = _Interaction.hitTestScratchPoint__hitTests; __callArgument94; }), ({ final __callArgument95:Dynamic = (cast getNodeWorldMatrix((cast (cast node : Node2D) : Dynamic)) : Matrix); __callArgument95; }), (cast x : Float), (cast y : Float));
     ((cast out : HitTestResult).localX = (cast _Interaction.hitTestScratchPoint__hitTests : { var x:Float; var y:Float; }).x);
     ((cast out : HitTestResult).localY = (cast _Interaction.hitTestScratchPoint__hitTests : { var x:Float; var y:Float; }).y);
-    exact = ((cast _Interaction.hitTestExactRegistry__hitTests : flight._internal._Map<String, HitTestPreciseFunction>).get(_Runtime.field(node, 'kind')));
+    exact = ((cast _Interaction.hitTestExactRegistry__hitTests : flight._internal._Map<String, HitTestPreciseFunction>).get((cast _Runtime.field(node, 'kind'))));
     ((cast out : HitTestResult).subIndex = _Runtime.select(exact, function():Dynamic return cast (cast exact(({ final __callArgument98:Dynamic = node; __callArgument98; }), (cast x : Float), (cast y : Float)) : Float), function():Dynamic return cast -1.0));
   }
 
@@ -608,11 +608,11 @@ class _Interaction {
   }
 
   public static function registerHitTest(kind:Kind, fn:HitTestFunction):Void {
-    ((cast _Interaction.hitTestRegistry__hitTests : flight._internal._Map<String, HitTestFunction>).set(kind, (cast fn)));
+    ((cast _Interaction.hitTestRegistry__hitTests : flight._internal._Map<String, HitTestFunction>).set((cast kind), (cast fn)));
   }
 
   public static function registerHitTestPrecise(kind:Kind, fn:HitTestPreciseFunction):Void {
-    ((cast _Interaction.hitTestExactRegistry__hitTests : flight._internal._Map<String, HitTestPreciseFunction>).set(kind, (cast fn)));
+    ((cast _Interaction.hitTestExactRegistry__hitTests : flight._internal._Map<String, HitTestPreciseFunction>).set((cast kind), (cast fn)));
   }
 
   public static function findFirstHit__hitTests(node:NodeAny, x:Float, y:Float, precise:Bool):Null<NodeAny> {
@@ -693,10 +693,10 @@ class _Interaction {
   public static function testNodeGeometry__hitTests(node:NodeAny, x:Float, y:Float, precise:Bool):Bool {
     var coarse:Null<HitTestFunction> = cast _Runtime.UNDEFINED;
     if ((cast precise : Bool)) {
-      var exact:Null<HitTestPreciseFunction> = ((cast _Interaction.hitTestExactRegistry__hitTests : flight._internal._Map<String, HitTestPreciseFunction>).get(_Runtime.field(node, 'kind')));
+      var exact:Null<HitTestPreciseFunction> = ((cast _Interaction.hitTestExactRegistry__hitTests : flight._internal._Map<String, HitTestPreciseFunction>).get((cast _Runtime.field(node, 'kind'))));
       if ((cast !_Runtime.strictEquals(exact, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast ((cast (cast exact(({ final __callArgument159:Dynamic = node; __callArgument159; }), (cast x : Float), (cast y : Float)) : Float) : Float) >= (cast 0.0 : Float)); }
     }
-    coarse = ((cast _Interaction.hitTestRegistry__hitTests : flight._internal._Map<String, HitTestFunction>).get(_Runtime.field(node, 'kind')));
+    coarse = ((cast _Interaction.hitTestRegistry__hitTests : flight._internal._Map<String, HitTestFunction>).get((cast _Runtime.field(node, 'kind'))));
     return cast _Runtime.select(coarse, function():Dynamic return cast (cast coarse(({ final __callArgument161:Dynamic = node; __callArgument161; }), (cast x : Float), (cast y : Float)) : Bool), function():Dynamic return cast false);
     return cast null;
   }
@@ -707,7 +707,7 @@ class _Interaction {
     if ((cast _Runtime.strictEquals(hitArea, 'bounds') : Bool)) { return cast (cast (cast hitTestGraphLocalBounds : Node<flight._internal._Any>->Float->Float->Bool)(({ final __callArgument163:Dynamic = node; __callArgument163; }), (cast x : Float), (cast y : Float)) : Bool); }
     if ((cast _Runtime.hasField(hitArea, 'kind') : Bool)) {
       var proxy:NodeAny = (cast hitArea : NodeAny);
-      var proxyHit:Null<HitTestFunction> = ((cast _Interaction.hitTestRegistry__hitTests : flight._internal._Map<String, HitTestFunction>).get(_Runtime.field(proxy, 'kind')));
+      var proxyHit:Null<HitTestFunction> = ((cast _Interaction.hitTestRegistry__hitTests : flight._internal._Map<String, HitTestFunction>).get((cast _Runtime.field(proxy, 'kind'))));
       return cast _Runtime.select(proxyHit, function():Dynamic return cast (cast proxyHit(({ final __callArgument165:Dynamic = proxy; __callArgument165; }), (cast x : Float), (cast y : Float)) : Bool), function():Dynamic return cast (cast (cast hitTestGraphLocalBounds : Node<flight._internal._Any>->Float->Float->Bool)(({ final __callArgument167:Dynamic = proxy; __callArgument167; }), (cast x : Float), (cast y : Float)) : Bool));
     }
     inverseMatrixTransformPointXY(({ final __callArgument169:Dynamic = _Interaction.hitTestScratchPoint__hitTests; __callArgument169; }), ({ final __callArgument170:Dynamic = (cast getNodeWorldMatrix((cast (cast node : Node2D) : Dynamic)) : Matrix); __callArgument170; }), (cast x : Float), (cast y : Float));
@@ -725,7 +725,7 @@ class _Interaction {
   public static final hitTestExactRegistry__hitTests:flight._internal._Map<String, HitTestPreciseFunction> = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
 
   public static function captureInteractionPointer<N:NodeAny>(manager:InteractionManager<N>, pointerId:Float, target:N):Void {
-    ((cast manager.pointerCaptures : flight._internal._Map<Float, N>).set(pointerId, (cast target)));
+    ((cast manager.pointerCaptures : flight._internal._Map<Float, N>).set((cast pointerId), (cast target)));
   }
 
   public static function connectInputToInteraction<N:NodeAny>(input:InteractionInputSource, manager:InteractionManager<N>, coordScale:Float = 1.0):Void->Void {
@@ -862,16 +862,16 @@ class _Interaction {
     var oldTarget:Null<N> = cast _Runtime.UNDEFINED;
     var target:Null<N> = cast _Runtime.UNDEFINED;
     pointerId = _Runtime.coalesce(({ final __typedStruct232 = options; __typedStruct232 == null ? _Runtime.UNDEFINED : __typedStruct232.pointerId; }), function():Dynamic return cast 0.0);
-    existingState = ((cast manager.pointerStates : flight._internal._Map<Float, InteractionPointerState<N>>).get(pointerId));
+    existingState = ((cast manager.pointerStates : flight._internal._Map<Float, InteractionPointerState<N>>).get((cast pointerId)));
     if ((cast !_Runtime.strictEquals(existingState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Interaction.resetInteractionClickState__interactionManager((cast existingState : Dynamic)); }
     if ((cast !(cast (cast _Interaction.isPointerSignalNeeded__interactionManager((cast manager : Dynamic), ({ final __callArgument233:Dynamic = _Interaction.cancelSignalNames__interactionManager; __callArgument233; })) : Bool) : Bool) : Bool)) { return; }
     state = _Runtime.coalesce(existingState, function():Dynamic return cast (cast _Interaction.getInteractionPointerState__interactionManager((cast manager : Dynamic), (cast pointerId : Float)) : InteractionPointerState<N>));
-    captured = _Runtime.coalesce(((cast manager.pointerCaptures : flight._internal._Map<Float, N>).get(pointerId)), function():Dynamic return cast null);
+    captured = _Runtime.coalesce(((cast manager.pointerCaptures : flight._internal._Map<Float, N>).get((cast pointerId))), function():Dynamic return cast null);
     oldTarget = state.pointerOverTarget;
     target = _Runtime.coalesce(_Runtime.coalesce(captured, function():Dynamic return cast state.pointerDownTarget), function():Dynamic return cast oldTarget);
     (state.pointerDownTarget = cast (null : Null<N>));
     (state.pointerOverTarget = cast (null : Null<N>));
-    ((cast manager.pointerCaptures : flight._internal._Map<Float, N>).delete_(pointerId));
+    ((cast manager.pointerCaptures : flight._internal._Map<Float, N>).delete_((cast pointerId)));
     _Interaction.setPointerData__interactionManager(({ final __callArgument235:Dynamic = target; __callArgument235; }), ({ final __callArgument236:Dynamic = null; __callArgument236; }), (cast x : Float), (cast y : Float), (cast -1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument237:Dynamic = options; __callArgument237; }));
     if ((cast !_Runtime.strictEquals(target, null) : Bool)) {
       if ((cast ((cast _Runtime.strictEquals(manager.dispatchLayers, null) : Bool) || (cast (cast _Interaction.dispatchInteractionLayers__interactionManager((cast manager : Dynamic), (cast target : Dynamic), (cast 'onPointerCancel' : String), ({ final __callArgument241:Dynamic = _Interaction._pointerData__interactionManager; __callArgument241; })) : Bool) : Bool)) : Bool)) {
@@ -993,8 +993,8 @@ class _Interaction {
 
   public static function releaseInteractionPointer<N:NodeAny>(manager:InteractionManager<N>, pointerId:Float):Void {
     var state:Null<InteractionPointerState<N>> = cast _Runtime.UNDEFINED;
-    ((cast manager.pointerCaptures : flight._internal._Map<Float, N>).delete_(pointerId));
-    state = ((cast manager.pointerStates : flight._internal._Map<Float, InteractionPointerState<N>>).get(pointerId));
+    ((cast manager.pointerCaptures : flight._internal._Map<Float, N>).delete_((cast pointerId)));
+    state = ((cast manager.pointerStates : flight._internal._Map<Float, InteractionPointerState<N>>).get((cast pointerId)));
     if ((cast !_Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Interaction.resetInteractionClickState__interactionManager((cast state : Dynamic)); }
   }
 
@@ -1118,11 +1118,11 @@ class _Interaction {
 
   public static function decrementInteractionSignalSubscriberCount__interactionManager<N:NodeAny>(manager:InteractionManager<N>, name:InteractionSignalName):Void {
     var count:Float = cast _Runtime.UNDEFINED;
-    count = _Runtime.coalesce(((cast manager.signalSubscriberCounts : flight._internal._Map<String, Float>).get(name)), function():Dynamic return cast 0.0);
+    count = _Runtime.coalesce(((cast manager.signalSubscriberCounts : flight._internal._Map<String, Float>).get((cast name))), function():Dynamic return cast 0.0);
     if ((cast ((cast count : Float) <= (cast 1.0 : Float)) : Bool)) {
-      ((cast manager.signalSubscriberCounts : flight._internal._Map<String, Float>).delete_(name));
+      ((cast manager.signalSubscriberCounts : flight._internal._Map<String, Float>).delete_((cast name)));
     } else {
-      ((cast manager.signalSubscriberCounts : flight._internal._Map<String, Float>).set(name, (cast (count - 1.0))));
+      ((cast manager.signalSubscriberCounts : flight._internal._Map<String, Float>).set((cast name), (cast (count - 1.0))));
     }
   }
 
@@ -1130,7 +1130,7 @@ class _Interaction {
     var captured:Null<N> = cast _Runtime.UNDEFINED;
     var root:N = cast _Runtime.UNDEFINED;
     if ((cast !(cast manager.enabled : Bool) : Bool)) { return cast null; }
-    captured = ((cast manager.pointerCaptures : flight._internal._Map<Float, N>).get(pointerId));
+    captured = ((cast manager.pointerCaptures : flight._internal._Map<Float, N>).get((cast pointerId)));
     if ((cast !_Runtime.strictEquals(captured, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast captured; }
     if ((cast !_Runtime.strictEquals(manager.spatialIndex, null) : Bool)) { return cast (cast findSpatialInteractionTarget((cast manager : Dynamic), (cast x : Float), (cast y : Float), (cast manager.precise : Bool)) : Null<N>); }
     root = manager.root;
@@ -1211,10 +1211,10 @@ class _Interaction {
 
   public static function getInteractionPointerState__interactionManager<N:NodeAny>(manager:InteractionManager<N>, pointerId:Float):InteractionPointerState<N> {
     var state:Null<InteractionPointerState<N>> = cast _Runtime.UNDEFINED;
-    state = ((cast manager.pointerStates : flight._internal._Map<Float, InteractionPointerState<N>>).get(pointerId));
+    state = ((cast manager.pointerStates : flight._internal._Map<Float, InteractionPointerState<N>>).get((cast pointerId)));
     if ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (state = cast ({ lastClickTarget: null, lastClickTime: -HxMath.POSITIVE_INFINITY, lastPointerClickButton: -1.0, lastPointerClickInteractionState: null, lastPointerClickTarget: null, lastPointerClickTime: -HxMath.POSITIVE_INFINITY, lastPointerClickX: 0.0, lastPointerClickY: 0.0, pointerDownTarget: null, pointerOverTarget: null } : Dynamic));
-      ((cast manager.pointerStates : flight._internal._Map<Float, InteractionPointerState<N>>).set(pointerId, (cast state)));
+      ((cast manager.pointerStates : flight._internal._Map<Float, InteractionPointerState<N>>).set((cast pointerId), (cast state)));
     }
     return cast state;
     return cast null;
@@ -1242,12 +1242,12 @@ class _Interaction {
   }
 
   public static function getTrackedInteractionSignalSlot__interactionManager<N:NodeAny, Name:InteractionSignalName>(manager:InteractionManager<N>, target:N, name:Name, slot:InteractionSignalSlot__interactionManager<Name>):Null<AnyInteractionSignalSlot> {
-    return cast _Runtime.coalesce(({ final __collection386:Dynamic = ({ final __collection385:Dynamic = ((cast manager.trackedSignalSlots : flight._internal._Map<N, flight._internal._Map<String, flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>>).get(target)); __collection385 == null ? _Runtime.UNDEFINED : ((cast __collection385 : flight._internal._Map<String, flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>).get(name)); }); __collection386 == null ? _Runtime.UNDEFINED : ((cast __collection386 : flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>).get((cast slot : AnyInteractionSignalSlot))); }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection386:Dynamic = ({ final __collection385:Dynamic = ((cast manager.trackedSignalSlots : flight._internal._Map<N, flight._internal._Map<String, flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>>).get((cast target))); __collection385 == null ? _Runtime.UNDEFINED : ((cast __collection385 : flight._internal._Map<String, flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>).get((cast name))); }); __collection386 == null ? _Runtime.UNDEFINED : ((cast __collection386 : flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>).get((cast (cast slot : AnyInteractionSignalSlot)))); }), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function hasInteractionSignalSubscriber__interactionManager<N:NodeAny>(manager:InteractionManager<N>, name:InteractionSignalName):Bool {
-    if ((cast ((cast _Runtime.coalesce(((cast manager.signalSubscriberCounts : flight._internal._Map<String, Float>).get(name)), function():Dynamic return cast 0.0) : Float) > (cast 0.0 : Float)) : Bool)) { return cast true; }
+    if ((cast ((cast _Runtime.coalesce(((cast manager.signalSubscriberCounts : flight._internal._Map<String, Float>).get((cast name))), function():Dynamic return cast 0.0) : Float) > (cast 0.0 : Float)) : Bool)) { return cast true; }
     if ((cast manager.trackedSubscribersOnly : Bool)) { return cast false; }
     return cast (cast (cast _Interaction.hasInteractionSignalSubscriberInGraph__interactionManager : { var ___u40_EntityRuntimeKey_u40_10719:Null<NodeRuntime<flight._internal._Any>>; var data:Null<flight._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)(({ final __callArgument387:Dynamic = manager.root; __callArgument387; }), (cast name : String)) : Bool);
     return cast null;
@@ -1269,7 +1269,7 @@ class _Interaction {
   }
 
   public static function incrementInteractionSignalSubscriberCount__interactionManager<N:NodeAny>(manager:InteractionManager<N>, name:InteractionSignalName):Void {
-    ((cast manager.signalSubscriberCounts : flight._internal._Map<String, Float>).set(name, (cast _Runtime.addNumbers(_Runtime.coalesce(((cast manager.signalSubscriberCounts : flight._internal._Map<String, Float>).get(name)), function():Dynamic return cast 0.0), 1.0))));
+    ((cast manager.signalSubscriberCounts : flight._internal._Map<String, Float>).set((cast name), (cast _Runtime.addNumbers(_Runtime.coalesce(((cast manager.signalSubscriberCounts : flight._internal._Map<String, Float>).get((cast name))), function():Dynamic return cast 0.0), 1.0))));
   }
 
   public static function isInteractionSignalCancelled__interactionManager<N:NodeAny>(source:N, name:InteractionSignalName):Bool {
@@ -1293,12 +1293,12 @@ class _Interaction {
   public static function removeTrackedInteractionSignalSlot__interactionManager<N:NodeAny, Name:InteractionSignalName>(manager:InteractionManager<N>, target:N, name:Name, slot:InteractionSignalSlot__interactionManager<Name>):Void {
     var targetSlots:Null<flight._internal._Map<String, flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>> = cast _Runtime.UNDEFINED;
     var signalSlots:Null<flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>> = cast _Runtime.UNDEFINED;
-    targetSlots = ((cast manager.trackedSignalSlots : flight._internal._Map<N, flight._internal._Map<String, flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>>).get(target));
-    signalSlots = ({ final __collection398:Dynamic = targetSlots; __collection398 == null ? _Runtime.UNDEFINED : ((cast __collection398 : flight._internal._Map<String, flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>).get(name)); });
+    targetSlots = ((cast manager.trackedSignalSlots : flight._internal._Map<N, flight._internal._Map<String, flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>>).get((cast target)));
+    signalSlots = ({ final __collection398:Dynamic = targetSlots; __collection398 == null ? _Runtime.UNDEFINED : ((cast __collection398 : flight._internal._Map<String, flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>).get((cast name))); });
     if ((cast _Runtime.strictEquals(signalSlots, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    ((cast signalSlots : flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>).delete_((cast slot : AnyInteractionSignalSlot)));
-    if ((cast _Runtime.strictEquals((cast signalSlots : flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>).size, 0.0) : Bool)) { ((cast targetSlots : flight._internal._Map<Dynamic, Dynamic>).delete_(name)); }
-    if ((cast _Runtime.strictEquals((cast targetSlots : flight._internal._Map<Dynamic, Dynamic>).size, 0.0) : Bool)) { ((cast manager.trackedSignalSlots : flight._internal._Map<N, flight._internal._Map<String, flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>>).delete_(target)); }
+    ((cast signalSlots : flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>).delete_((cast (cast slot : AnyInteractionSignalSlot))));
+    if ((cast _Runtime.strictEquals((cast signalSlots : flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>).size, 0.0) : Bool)) { ((cast targetSlots : flight._internal._Map<Dynamic, Dynamic>).delete_((cast name))); }
+    if ((cast _Runtime.strictEquals((cast targetSlots : flight._internal._Map<Dynamic, Dynamic>).size, 0.0) : Bool)) { ((cast manager.trackedSignalSlots : flight._internal._Map<N, flight._internal._Map<String, flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>>).delete_((cast target))); }
   }
 
   public static function setKeyboardData__interactionManager(key:String, keyCode:Float, modifiers:Null<{ @:optional var altKey:Null<Bool>; @:optional var ctrlKey:Null<Bool>; @:optional var key:Null<String>; @:optional var keyCode:Null<Float>; @:optional var metaKey:Null<Bool>; @:optional var shiftKey:Null<Bool>; }>):Void {
@@ -1344,17 +1344,17 @@ class _Interaction {
   public static function setTrackedInteractionSignalSlot__interactionManager<N:NodeAny, Name:InteractionSignalName>(manager:InteractionManager<N>, target:N, name:Name, slot:InteractionSignalSlot__interactionManager<Name>, connectedSlot:InteractionSignalSlot__interactionManager<Name>):Void {
     var targetSlots:Null<flight._internal._Map<String, flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>> = cast _Runtime.UNDEFINED;
     var signalSlots:Null<flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>> = cast _Runtime.UNDEFINED;
-    targetSlots = ((cast manager.trackedSignalSlots : flight._internal._Map<N, flight._internal._Map<String, flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>>).get(target));
+    targetSlots = ((cast manager.trackedSignalSlots : flight._internal._Map<N, flight._internal._Map<String, flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>>).get((cast target)));
     if ((cast _Runtime.strictEquals(targetSlots, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (targetSlots = cast (_Runtime.construct(flight._internal._HostValueLut.get('Map'), []) : Dynamic));
-      ((cast manager.trackedSignalSlots : flight._internal._Map<N, flight._internal._Map<String, flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>>).set(target, (cast targetSlots)));
+      ((cast manager.trackedSignalSlots : flight._internal._Map<N, flight._internal._Map<String, flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>>).set((cast target), (cast targetSlots)));
     }
-    signalSlots = ((cast targetSlots : flight._internal._Map<String, flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>).get(name));
+    signalSlots = ((cast targetSlots : flight._internal._Map<String, flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>).get((cast name)));
     if ((cast _Runtime.strictEquals(signalSlots, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (signalSlots = cast (_Runtime.construct(flight._internal._HostValueLut.get('Map'), []) : Dynamic));
-      ((cast targetSlots : flight._internal._Map<String, flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>).set(name, (cast signalSlots)));
+      ((cast targetSlots : flight._internal._Map<String, flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>).set((cast name), (cast signalSlots)));
     }
-    ((cast signalSlots : flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>).set((cast slot : AnyInteractionSignalSlot), (cast (cast connectedSlot : AnyInteractionSignalSlot))));
+    ((cast signalSlots : flight._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>).set((cast (cast slot : AnyInteractionSignalSlot)), (cast (cast connectedSlot : AnyInteractionSignalSlot))));
   }
 
   public static function setPointerDataLocalPosition__interactionManager(data:PointerEventData, currentTarget:NodeAny):Void {
@@ -1398,7 +1398,7 @@ class _Interaction {
     var bestRank:Float = cast _Runtime.UNDEFINED;
     index = manager.spatialIndex;
     if ((cast _Runtime.strictEquals(index, null) : Bool)) { return cast null; }
-    nodes = ((cast _Interaction.managerCandidates__interactionSpatialIndex : flight._internal._WeakMap<flight._internal._Object, Array<NodeAny>>).get(manager));
+    nodes = ((cast _Interaction.managerCandidates__interactionSpatialIndex : flight._internal._WeakMap<flight._internal._Object, Array<NodeAny>>).get((cast manager)));
     if ((cast ((cast _Runtime.strictEquals(nodes, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(nodes, 'length'), 0.0) : Bool)) : Bool)) { return cast null; }
     querySpatialPoint2D(({ final __callArgument424:Dynamic = index; __callArgument424; }), (cast x : Float), (cast y : Float), ({ final __callArgument425:Dynamic = _Interaction.spatialQueryOut__interactionSpatialIndex; __callArgument425; }));
     best = null;
@@ -1427,7 +1427,7 @@ class _Interaction {
     if ((cast _Runtime.strictEquals(index, null) : Bool)) { return; }
     nodes = (cast cast ([] : Array<Dynamic>));
     _Interaction.collectSpatialCandidates__interactionSpatialIndex(({ final __callArgument430:Dynamic = manager.root; __callArgument430; }), ({ final __callArgument431:Dynamic = nodes; __callArgument431; }));
-    ((cast _Interaction.managerCandidates__interactionSpatialIndex : flight._internal._WeakMap<flight._internal._Object, Array<NodeAny>>).set(manager, (cast nodes)));
+    ((cast _Interaction.managerCandidates__interactionSpatialIndex : flight._internal._WeakMap<flight._internal._Object, Array<NodeAny>>).set((cast manager), (cast nodes)));
     clearSpatialIndex2D(({ final __callArgument434:Dynamic = index; __callArgument434; }));
     {
       var rank:Float = 0.0;
@@ -1698,10 +1698,10 @@ class _Interaction {
       var state:Null<FlightDocumentInteractiveState> = _Runtime.getIndex(states, phase);
       if ((cast _Runtime.strictEquals(state, null) : Bool)) { continue; }
       for (extension in _Runtime.iterable((cast state : FlightDocumentInteractiveState).extensions)) {
-        var fieldNames:Null<Array<String>> = ((cast names : flight._internal._Map<String, Array<String>>).get((cast extension : FlightDocumentInteractiveStateExtensionDescriptor).kind));
+        var fieldNames:Null<Array<String>> = ((cast names : flight._internal._Map<String, Array<String>>).get((cast (cast extension : FlightDocumentInteractiveStateExtensionDescriptor).kind)));
         if ((cast _Runtime.strictEquals(fieldNames, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           (fieldNames = cast (cast ([] : Array<Dynamic>) : Dynamic));
-          ((cast names : flight._internal._Map<String, Array<String>>).set((cast extension : FlightDocumentInteractiveStateExtensionDescriptor).kind, (cast fieldNames)));
+          ((cast names : flight._internal._Map<String, Array<String>>).set((cast (cast extension : FlightDocumentInteractiveStateExtensionDescriptor).kind), (cast fieldNames)));
         }
         for (name in _Runtime.iterable(flight._internal.DynamicObject.keys((cast extension : FlightDocumentInteractiveStateExtensionDescriptor).fields))) {
           if ((cast !(cast _Runtime.includes(fieldNames, name) : Bool) : Bool)) { _Runtime.callProperty(fieldNames, 'push', cast ([name] : Array<Dynamic>)); }
@@ -1818,10 +1818,10 @@ class _Interaction {
     if ((cast _Runtime.strictEquals(image.kind, BitmapTextureSourceKind) : Bool)) { return cast (cast image : Bitmap); }
     if ((cast !_Runtime.strictEquals(image.kind, ImageTextureSourceKind) : Bool)) { return cast null; }
     resource = (cast image : Image);
-    cached = ((cast _Interaction.bitmapCache__registerSpriteHitTest : flight._internal._WeakMap<Image, Bitmap>).get(resource));
+    cached = ((cast _Interaction.bitmapCache__registerSpriteHitTest : flight._internal._WeakMap<Image, Bitmap>).get((cast resource)));
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
     bitmap = (cast captureBitmapFromImageResource(({ final __callArgument604:Dynamic = resource; __callArgument604; })) : Null<Bitmap>);
-    if ((cast !_Runtime.strictEquals(bitmap, null) : Bool)) { ((cast _Interaction.bitmapCache__registerSpriteHitTest : flight._internal._WeakMap<Image, Bitmap>).set(resource, (cast bitmap))); }
+    if ((cast !_Runtime.strictEquals(bitmap, null) : Bool)) { ((cast _Interaction.bitmapCache__registerSpriteHitTest : flight._internal._WeakMap<Image, Bitmap>).set((cast resource), (cast bitmap))); }
     return cast bitmap;
     return cast null;
   }

@@ -106,10 +106,10 @@ class _Flow {
     if ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool)) {
       return;
     }
-    ({ final __optionalCall9 = (cast flight._internal._StaticIndex.readArray(states, index) : { @:optional var onUpdate:Null<Float->Void>; }).onUpdate; if (__optionalCall9 != null) __optionalCall9(deltaTime); });
+    ({ final __optionalCall9 = (cast flight._internal._StaticIndex.readArray(states, index) : { @:optional var onUpdate:Null<Float->Void>; }).onUpdate; if (__optionalCall9 != null) __optionalCall9((cast deltaTime : Float)); });
     while (_Runtime.truthy(_Runtime.andValue(((cast index : Float) > (cast 0.0 : Float)), function():Dynamic return cast (cast flight._internal._StaticIndex.readArray(states, index) : { @:optional var updateBelow:Null<Bool>; }).updateBelow))) {
       index--;
-      ({ final __optionalCall10 = (cast flight._internal._StaticIndex.readArray(states, index) : { @:optional var onUpdate:Null<Float->Void>; }).onUpdate; if (__optionalCall10 != null) __optionalCall10(deltaTime); });
+      ({ final __optionalCall10 = (cast flight._internal._StaticIndex.readArray(states, index) : { @:optional var onUpdate:Null<Float->Void>; }).onUpdate; if (__optionalCall10 != null) __optionalCall10((cast deltaTime : Float)); });
     }
   }
 }

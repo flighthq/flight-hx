@@ -458,22 +458,22 @@ class _TilemapFormats {
           i++;
           continue;
         }
-        var group:Null<TilesetGroup__tiledProject> = ((cast byFirstGid : flight._internal._Map<Float, Null<TilesetGroup__tiledProject>>).get((cast ref : { var firstGid:Float; }).firstGid));
+        var group:Null<TilesetGroup__tiledProject> = ((cast byFirstGid : flight._internal._Map<Float, Null<TilesetGroup__tiledProject>>).get((cast (cast ref : { var firstGid:Float; }).firstGid)));
         if ((cast _Runtime.strictEquals(group, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           var layout:Null<{ var atlas:Null<TextureAtlas>; var tileHeight:Float; var tileWidth:Float; }> = (cast resolveTileset(({ final __callArgument107:Dynamic = ref; __callArgument107; })) : Null<{ var atlas:Null<TextureAtlas>; var tileHeight:Float; var tileWidth:Float; }>);
           if ((cast _Runtime.strictEquals(layout, null) : Bool)) {
-            ((cast byFirstGid : flight._internal._Map<Float, Null<TilesetGroup__tiledProject>>).set((cast ref : { var firstGid:Float; }).firstGid, (cast null)));
+            ((cast byFirstGid : flight._internal._Map<Float, Null<TilesetGroup__tiledProject>>).set((cast (cast ref : { var firstGid:Float; }).firstGid), (cast null)));
             (group = cast (null : Dynamic));
           } else {
             (anyResolved = cast (true : Dynamic));
             (group = cast ({ firstGid: (cast ref : { var firstGid:Float; }).firstGid, layout: layout, tiles: _Runtime.fill(new flight._internal._Int16Array(cellCount), -1.0, 0, null, 1) } : Dynamic));
-            ((cast byFirstGid : flight._internal._Map<Float, Null<TilesetGroup__tiledProject>>).set((cast ref : { var firstGid:Float; }).firstGid, (cast group)));
+            ((cast byFirstGid : flight._internal._Map<Float, Null<TilesetGroup__tiledProject>>).set((cast (cast ref : { var firstGid:Float; }).firstGid), (cast group)));
             _Runtime.callProperty(groups, 'push', cast ([group] : Array<Dynamic>));
           }
         }
         if ((cast _Runtime.strictEquals(group, null) : Bool)) {
           cellsLeftEmpty++;
-          ((cast unresolvedTilesets : flight._internal._Set<Float>).add((cast ref : { var firstGid:Float; }).firstGid));
+          ((cast unresolvedTilesets : flight._internal._Set<Float>).add((cast (cast ref : { var firstGid:Float; }).firstGid)));
           i++;
           continue;
         }

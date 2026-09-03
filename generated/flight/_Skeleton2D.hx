@@ -1072,12 +1072,12 @@ class _Skeleton2D {
   @:allow(flight)
   @:keep
   private static function getSkeleton2DConstraintSolver(kind:Skeleton2DConstraintKind):Null<Skeleton2DConstraintSolver> {
-    return cast _Runtime.coalesce(((cast _Skeleton2D._solvers__skeleton2dConstraint : flight._internal._Map<String, Skeleton2DConstraintSolver>).get(kind)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _Skeleton2D._solvers__skeleton2dConstraint : flight._internal._Map<String, Skeleton2DConstraintSolver>).get((cast kind))), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function registerSkeleton2DConstraintSolver(kind:Skeleton2DConstraintKind, solve:Skeleton2DConstraintSolver):Void {
-    ((cast _Skeleton2D._solvers__skeleton2dConstraint : flight._internal._Map<String, Skeleton2DConstraintSolver>).set(kind, (cast solve)));
+    ((cast _Skeleton2D._solvers__skeleton2dConstraint : flight._internal._Map<String, Skeleton2DConstraintSolver>).set((cast kind), (cast solve)));
   }
 
   public static function solveSkeleton2DConstraints(skeleton:Skeleton2D, constraints:Array<Skeleton2DConstraint>):Void {
@@ -1085,7 +1085,7 @@ class _Skeleton2D {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(constraints, 'length') : Float)) : Bool)) {
         var constraint:Skeleton2DConstraint = flight._internal._StaticIndex.readArray(constraints, i);
-        var solve:Null<Skeleton2DConstraintSolver> = ((cast _Skeleton2D._solvers__skeleton2dConstraint : flight._internal._Map<String, Skeleton2DConstraintSolver>).get(_Runtime.field(constraint, 'kind')));
+        var solve:Null<Skeleton2DConstraintSolver> = ((cast _Skeleton2D._solvers__skeleton2dConstraint : flight._internal._Map<String, Skeleton2DConstraintSolver>).get((cast _Runtime.field(constraint, 'kind'))));
         if ((cast _Runtime.strictEquals(solve, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
         solve(({ final __callArgument186:Dynamic = skeleton; __callArgument186; }), ({ final __callArgument187:Dynamic = constraint; __callArgument187; }));
         i++;
@@ -1096,7 +1096,7 @@ class _Skeleton2D {
   @:allow(flight)
   @:keep
   private static function unregisterSkeleton2DConstraintSolver(kind:Skeleton2DConstraintKind):Void {
-    ((cast _Skeleton2D._solvers__skeleton2dConstraint : flight._internal._Map<String, Skeleton2DConstraintSolver>).delete_(kind));
+    ((cast _Skeleton2D._solvers__skeleton2dConstraint : flight._internal._Map<String, Skeleton2DConstraintSolver>).delete_((cast kind)));
   }
 
   public static final _solvers__skeleton2dConstraint:flight._internal._Map<String, Skeleton2DConstraintSolver> = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);

@@ -4,4 +4,26 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Midi)
+@:structInit
+class MidiOutputPort {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var id:String;
+  public var manufacturer:Null<String>;
+  public var name:Null<String>;
+  public var type:String;
+  public var version:Null<String>;
+
+  private function new(id:String, manufacturer:Null<String>, name:Null<String>, type:String, version:Null<String>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.id = id;
+    this.manufacturer = manufacturer;
+    this.name = name;
+    this.type = type;
+    this.version = version;
+  }
+}
+#else
 typedef MidiOutputPort = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var id:String; var manufacturer:Null<String>; var name:Null<String>; var type:String; var version:Null<String>; };
+#end

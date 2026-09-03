@@ -5,4 +5,44 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Types.RenderTargetTextureSourceKind;
 
+#if !flight_struct_typedef
+@:allow(flight._Texture)
+@:structInit
+class RenderTarget {
+  public var width:Float;
+  public var height:Float;
+  public var format:RenderTargetFormat;
+  public var colorAttachments:Float;
+  public var colorFormats:Array<RenderTargetFormat>;
+  public var sampleCount:Float;
+  public var depth:RenderTargetDepth;
+  public var colorSpace:RenderTargetColorSpace;
+  public var clearColors:Array<Float>;
+  public var clearDepth:Float;
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var alphaType:AlphaType;
+  public var gamut:String;
+  public var kind:Dynamic;
+  public var version:Float;
+
+  private function new(width:Float, height:Float, format:RenderTargetFormat, colorAttachments:Float, colorFormats:Array<RenderTargetFormat>, sampleCount:Float, depth:RenderTargetDepth, colorSpace:RenderTargetColorSpace, clearColors:Array<Float>, clearDepth:Float, alphaType:AlphaType, gamut:String, kind:Dynamic, version:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.width = width;
+    this.height = height;
+    this.format = format;
+    this.colorAttachments = colorAttachments;
+    this.colorFormats = colorFormats;
+    this.sampleCount = sampleCount;
+    this.depth = depth;
+    this.colorSpace = colorSpace;
+    this.clearColors = clearColors;
+    this.clearDepth = clearDepth;
+    this.alphaType = alphaType;
+    this.gamut = gamut;
+    this.kind = kind;
+    this.version = version;
+  }
+}
+#else
 typedef RenderTarget = { var width:Float; var height:Float; @:optional var format:RenderTargetFormat; @:optional var colorAttachments:Float; @:optional var colorFormats:Array<RenderTargetFormat>; @:optional var sampleCount:Float; @:optional var depth:RenderTargetDepth; @:optional var colorSpace:RenderTargetColorSpace; @:optional var clearColors:Array<Float>; @:optional var clearDepth:Float; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var alphaType:AlphaType; var gamut:String; var kind:Dynamic; var version:Float; };
+#end

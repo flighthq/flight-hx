@@ -102,7 +102,7 @@ class _Audio {
   } });
 
   public static function getAudioDecoder(mimeType:String):Null<AudioDecoder> {
-    return cast _Runtime.coalesce(((cast _Audio.decoders__audioDecoderRegistry : flight._internal._Map<String, AudioDecoder>).get((cast getAudioMimeTypeEssence((cast mimeType : String)) : String))), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _Audio.decoders__audioDecoderRegistry : flight._internal._Map<String, AudioDecoder>).get((cast (cast getAudioMimeTypeEssence((cast mimeType : String)) : String)))), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -112,16 +112,16 @@ class _Audio {
   }
 
   public static function hasAudioDecoder(mimeType:String):Bool {
-    return cast ((cast _Audio.decoders__audioDecoderRegistry : flight._internal._Map<String, AudioDecoder>).has((cast getAudioMimeTypeEssence((cast mimeType : String)) : String)));
+    return cast ((cast _Audio.decoders__audioDecoderRegistry : flight._internal._Map<String, AudioDecoder>).has((cast (cast getAudioMimeTypeEssence((cast mimeType : String)) : String))));
     return cast null;
   }
 
   public static function registerAudioDecoder(mimeType:String, decoder:AudioDecoder):Void {
-    ((cast _Audio.decoders__audioDecoderRegistry : flight._internal._Map<String, AudioDecoder>).set((cast getAudioMimeTypeEssence((cast mimeType : String)) : String), (cast decoder)));
+    ((cast _Audio.decoders__audioDecoderRegistry : flight._internal._Map<String, AudioDecoder>).set((cast (cast getAudioMimeTypeEssence((cast mimeType : String)) : String)), (cast decoder)));
   }
 
   public static function unregisterAudioDecoder(mimeType:String):Void {
-    ((cast _Audio.decoders__audioDecoderRegistry : flight._internal._Map<String, AudioDecoder>).delete_((cast getAudioMimeTypeEssence((cast mimeType : String)) : String)));
+    ((cast _Audio.decoders__audioDecoderRegistry : flight._internal._Map<String, AudioDecoder>).delete_((cast (cast getAudioMimeTypeEssence((cast mimeType : String)) : String))));
   }
 
   public static final decoders__audioDecoderRegistry:flight._internal._Map<String, AudioDecoder> = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);

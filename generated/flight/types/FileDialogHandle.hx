@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Dialog)
+@:structInit
+class FileDialogHandle {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var kind:String;
+  public var name:String;
+  public var path:Null<String>;
+
+  private function new(kind:String, name:String, path:Null<String>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.kind = kind;
+    this.name = name;
+    this.path = path;
+  }
+}
+#else
 typedef FileDialogHandle = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var name:String; var path:Null<String>; };
+#end

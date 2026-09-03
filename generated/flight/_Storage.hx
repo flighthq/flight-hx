@@ -56,7 +56,7 @@ class _Storage {
     detachStorage(({ final __callArgument0:Dynamic = signals; __callArgument0; }));
     unsubscribe = (cast (cast (cast host : HasStorageChange).storage : { var change:StorageChangeBackend; }).change : StorageChangeBackend).subscribe((cast function(change:StorageChange):Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signals.onChange], [change]]), 1); } : Dynamic));
     if ((cast _Runtime.strictEquals(unsubscribe, null) : Bool)) { return cast false; }
-    ((cast _Storage._subscriptions__storage : flight._internal._WeakMap<StorageSignals, Void->Void>).set(signals, (cast unsubscribe)));
+    ((cast _Storage._subscriptions__storage : flight._internal._WeakMap<StorageSignals, Void->Void>).set((cast signals), (cast unsubscribe)));
     return cast true;
     return cast null;
   }
@@ -94,7 +94,7 @@ class _Storage {
   }
 
   public static function createStorageSignals():StorageSignals {
-    return cast (cast createEntity((cast ({ onChange: (cast createSignal() : Signal<StorageChange->Void>) } : StorageSignals) : Dynamic)) : StorageSignals);
+    return cast (cast createEntity((cast ({ onChange: (cast (cast createSignal() : Signal<StorageChange->Void>) : Dynamic) } : StorageSignals) : Dynamic)) : StorageSignals);
     return cast null;
   }
 
@@ -104,9 +104,9 @@ class _Storage {
 
   public static function detachStorage(signals:StorageSignals):Void {
     var unsubscribe:Null<Void->Void> = cast _Runtime.UNDEFINED;
-    unsubscribe = ((cast _Storage._subscriptions__storage : flight._internal._WeakMap<StorageSignals, Void->Void>).get(signals));
+    unsubscribe = ((cast _Storage._subscriptions__storage : flight._internal._WeakMap<StorageSignals, Void->Void>).get((cast signals)));
     if ((cast _Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    ((cast _Storage._subscriptions__storage : flight._internal._WeakMap<StorageSignals, Void->Void>).delete_(signals));
+    ((cast _Storage._subscriptions__storage : flight._internal._WeakMap<StorageSignals, Void->Void>).delete_((cast signals)));
     unsubscribe();
   }
 
@@ -471,10 +471,10 @@ class _Storage {
       if ((cast ((cast !(cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isInteger', cast ([migration.version] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast migration.version : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
         _Runtime.throwValue(_Runtime.rangeError('Storage migration versions must be positive integers'));
       }
-      if ((cast ((cast versions : flight._internal._Set<Float>).has(migration.version)) : Bool)) {
+      if ((cast ((cast versions : flight._internal._Set<Float>).has((cast migration.version))) : Bool)) {
         _Runtime.throwValue(_Runtime.rangeError('Storage migration version ' + Std.string(migration.version) + ' is duplicated'));
       }
-      ((cast versions : flight._internal._Set<Float>).add(migration.version));
+      ((cast versions : flight._internal._Set<Float>).add((cast migration.version)));
     }
     return cast _Runtime.sortAndReturn(_Runtime.concatArrays([_Runtime.toArray(migrations)]), function(a:StorageMigration, b:StorageMigration) return (a.version - b.version));
     return cast null;

@@ -259,12 +259,12 @@ class _Scene2DDom {
     if ((cast _Runtime.strictEquals(bitmap, null) : Bool)) { return cast null; }
     runtime = (cast getDomRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : DomRenderStateRuntime);
     cache = ({ final __nullishOwner6 = runtime; final __nullishValue7:Null<flight._internal._WeakMap<Bitmap, { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }>> = cast __nullishOwner6.bitmapElementCache; __nullishValue7 == null ? (__nullishOwner6.bitmapElementCache = (cast _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []) : Null<flight._internal._WeakMap<Bitmap, { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }>>)) : (cast __nullishValue7 : Null<flight._internal._WeakMap<Bitmap, { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }>>); });
-    entry = ((cast cache : flight._internal._WeakMap<Bitmap, { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }>).get(bitmap));
+    entry = ((cast cache : flight._internal._WeakMap<Bitmap, { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }>).get((cast bitmap)));
     if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals((cast entry : { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }).version, (cast bitmap : { var version:Float; }).version) : Bool)) : Bool)) {
       var image:Null<Image> = (cast createImageResourceFromBitmap(({ final __callArgument8:Dynamic = bitmap; __callArgument8; })) : Null<Image>);
       if ((cast _Runtime.strictEquals(image, null) : Bool)) { return cast null; }
       (entry = cast ({ element: (cast (cast image : Image).source : flight._internal.dom.HTMLCanvasElement), version: (cast bitmap : { var version:Float; }).version } : Dynamic));
-      ((cast cache : flight._internal._WeakMap<Bitmap, { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }>).set(bitmap, (cast entry)));
+      ((cast cache : flight._internal._WeakMap<Bitmap, { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }>).set((cast bitmap), (cast entry)));
     }
     return cast (cast entry : { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }).element;
     return cast null;
@@ -277,7 +277,7 @@ class _Scene2DDom {
   @:allow(flight)
   @:keep
   private static function getDomCssFilter(renderProxy:RenderProxy2D):Null<String> {
-    return cast ((cast _Scene2DDom._cssFilterBindings__domCSSFilterBinding : flight._internal._WeakMap<RenderProxy2D, String>).get(renderProxy));
+    return cast ((cast _Scene2DDom._cssFilterBindings__domCSSFilterBinding : flight._internal._WeakMap<RenderProxy2D, String>).get((cast renderProxy)));
     return cast null;
   }
 
@@ -285,10 +285,10 @@ class _Scene2DDom {
     var renderProxy:RenderProxy2D = cast _Runtime.UNDEFINED;
     renderProxy = (cast getOrCreateRenderProxy2D(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = node; __callArgument11; })) : RenderProxy2D);
     if ((cast _Runtime.strictEquals(filter, null) : Bool)) {
-      ((cast _Scene2DDom._cssFilterBindings__domCSSFilterBinding : flight._internal._WeakMap<RenderProxy2D, String>).delete_(renderProxy));
+      ((cast _Scene2DDom._cssFilterBindings__domCSSFilterBinding : flight._internal._WeakMap<RenderProxy2D, String>).delete_((cast renderProxy)));
       return;
     }
-    ((cast _Scene2DDom._cssFilterBindings__domCSSFilterBinding : flight._internal._WeakMap<RenderProxy2D, String>).set(renderProxy, (cast filter)));
+    ((cast _Scene2DDom._cssFilterBindings__domCSSFilterBinding : flight._internal._WeakMap<RenderProxy2D, String>).set((cast renderProxy), (cast filter)));
   }
 
   public static final _cssFilterBindings__domCSSFilterBinding:flight._internal._WeakMap<RenderProxy2D, String> = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
@@ -303,11 +303,11 @@ class _Scene2DDom {
     var targets:flight._internal._Map<RenderCache, CanvasRenderTarget> = cast _Runtime.UNDEFINED;
     var target:Null<CanvasRenderTarget> = cast _Runtime.UNDEFINED;
     targets = (cast _Scene2DDom.getTargets__domCache(({ final __callArgument18:Dynamic = state; __callArgument18; })) : flight._internal._Map<RenderCache, CanvasRenderTarget>);
-    target = ((cast targets : flight._internal._Map<RenderCache, CanvasRenderTarget>).get(cache));
+    target = ((cast targets : flight._internal._Map<RenderCache, CanvasRenderTarget>).get((cast cache)));
     if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (target = cast ((cast createCanvasRenderTarget(({ final __callArgument20:Dynamic = creator; __callArgument20; }), (cast width : Float), (cast height : Float)) : CanvasRenderTarget) : Dynamic));
       prepareDomElement(({ final __callArgument22:Dynamic = (cast target : { var canvas:flight._internal.dom.HTMLCanvasElement; }).canvas; __callArgument22; }));
-      ((cast targets : flight._internal._Map<RenderCache, CanvasRenderTarget>).set(cache, (cast target)));
+      ((cast targets : flight._internal._Map<RenderCache, CanvasRenderTarget>).set((cast cache), (cast target)));
     } else {
       resizeCanvasRenderTarget(({ final __callArgument24:Dynamic = target; __callArgument24; }), (cast width : Float), (cast height : Float));
     }
@@ -318,7 +318,7 @@ class _Scene2DDom {
   @:allow(flight)
   @:keep
   private static function getDomRenderCacheTarget(state:DomRenderState, cache:RenderCache):Null<CanvasRenderTarget> {
-    return cast _Runtime.coalesce(((cast (cast _Scene2DDom.getTargets__domCache(({ final __callArgument28:Dynamic = state; __callArgument28; })) : flight._internal._Map<RenderCache, CanvasRenderTarget>) : flight._internal._Map<RenderCache, CanvasRenderTarget>).get(cache)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast (cast _Scene2DDom.getTargets__domCache(({ final __callArgument28:Dynamic = state; __callArgument28; })) : flight._internal._Map<RenderCache, CanvasRenderTarget>) : flight._internal._Map<RenderCache, CanvasRenderTarget>).get((cast cache))), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -328,9 +328,9 @@ class _Scene2DDom {
     var targets:flight._internal._Map<RenderCache, CanvasRenderTarget> = cast _Runtime.UNDEFINED;
     var target:Null<CanvasRenderTarget> = cast _Runtime.UNDEFINED;
     targets = (cast _Scene2DDom.getTargets__domCache(({ final __callArgument30:Dynamic = state; __callArgument30; })) : flight._internal._Map<RenderCache, CanvasRenderTarget>);
-    target = ((cast targets : flight._internal._Map<RenderCache, CanvasRenderTarget>).get(cache));
+    target = ((cast targets : flight._internal._Map<RenderCache, CanvasRenderTarget>).get((cast cache)));
     if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    ((cast targets : flight._internal._Map<RenderCache, CanvasRenderTarget>).delete_(cache));
+    ((cast targets : flight._internal._Map<RenderCache, CanvasRenderTarget>).delete_((cast cache)));
     destroyCanvasRenderTarget(({ final __callArgument32:Dynamic = target; __callArgument32; }));
   }
 
@@ -342,7 +342,7 @@ class _Scene2DDom {
     cache = (cast getRenderProxyCache(({ final __callArgument34:Dynamic = state; __callArgument34; }), (cast data : RenderProxy2D).source) : Null<RenderCache>);
     if ((cast _Runtime.strictEquals(cache, null) : Bool)) { return; }
     domState = (cast state : DomRenderState);
-    target = ((cast (cast _Scene2DDom.getTargets__domCache(({ final __callArgument38:Dynamic = domState; __callArgument38; })) : flight._internal._Map<RenderCache, CanvasRenderTarget>) : flight._internal._Map<RenderCache, CanvasRenderTarget>).get(cache));
+    target = ((cast (cast _Scene2DDom.getTargets__domCache(({ final __callArgument38:Dynamic = domState; __callArgument38; })) : flight._internal._Map<RenderCache, CanvasRenderTarget>) : flight._internal._Map<RenderCache, CanvasRenderTarget>).get((cast cache)));
     if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     canvas = (cast target : { var canvas:flight._internal.dom.HTMLCanvasElement; }).canvas;
     setDomTransformWithOffset(({ final __callArgument40:Dynamic = canvas; __callArgument40; }), (cast data : RenderProxy2D).transform2D, (cast 0.0 : Float), (cast 0.0 : Float), (cast (cast domState : DomRenderState).roundPixels : Bool));
@@ -354,10 +354,10 @@ class _Scene2DDom {
 
   public static function getTargets__domCache(state:DomRenderState):flight._internal._Map<RenderCache, CanvasRenderTarget> {
     var targets:Null<flight._internal._Map<RenderCache, CanvasRenderTarget>> = cast _Runtime.UNDEFINED;
-    targets = ((cast _Scene2DDom._renderCacheTargets__domCache : flight._internal._WeakMap<DomRenderState, flight._internal._Map<RenderCache, CanvasRenderTarget>>).get(state));
+    targets = ((cast _Scene2DDom._renderCacheTargets__domCache : flight._internal._WeakMap<DomRenderState, flight._internal._Map<RenderCache, CanvasRenderTarget>>).get((cast state)));
     if ((cast _Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (targets = cast (_Runtime.construct(flight._internal._HostValueLut.get('Map'), []) : Dynamic));
-      ((cast _Scene2DDom._renderCacheTargets__domCache : flight._internal._WeakMap<DomRenderState, flight._internal._Map<RenderCache, CanvasRenderTarget>>).set(state, (cast targets)));
+      ((cast _Scene2DDom._renderCacheTargets__domCache : flight._internal._WeakMap<DomRenderState, flight._internal._Map<RenderCache, CanvasRenderTarget>>).set((cast state), (cast targets)));
     }
     return cast targets;
     return cast null;
@@ -474,7 +474,7 @@ class _Scene2DDom {
     var rect:Null<DomScene2DRectangle> = cast _Runtime.UNDEFINED;
     var local:DomScene2DRectangle = cast _Runtime.UNDEFINED;
     var clipPath:String = cast _Runtime.UNDEFINED;
-    element = ((cast (cast (cast getDomRenderStateRuntime(({ final __callArgument55:Dynamic = state; __callArgument55; })) : DomRenderStateRuntime) : { var domElementMap:flight._internal._WeakMap<RenderProxy2D, flight._internal.dom.HTMLElement>; }).domElementMap : flight._internal._WeakMap<RenderProxy2D, flight._internal.dom.HTMLElement>).get(data));
+    element = ((cast (cast (cast getDomRenderStateRuntime(({ final __callArgument55:Dynamic = state; __callArgument55; })) : DomRenderStateRuntime) : { var domElementMap:flight._internal._WeakMap<RenderProxy2D, flight._internal.dom.HTMLElement>; }).domElementMap : flight._internal._WeakMap<RenderProxy2D, flight._internal.dom.HTMLElement>).get((cast data)));
     if ((cast _Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     contour = null;
     {
@@ -652,7 +652,7 @@ class _Scene2DDom {
   public static final _domFontAscentCache__domFontSource:flight._internal._Map<String, Float> = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
 
   public static function getDomFontAscentCached(font:String):Null<Float> {
-    return cast ((cast _Scene2DDom._domFontAscentCache__domFontSource : flight._internal._Map<String, Float>).get(font));
+    return cast ((cast _Scene2DDom._domFontAscentCache__domFontSource : flight._internal._Map<String, Float>).get((cast font)));
     return cast null;
   }
 
@@ -663,13 +663,13 @@ class _Scene2DDom {
     family = source.family;
     for (key in _Runtime.iterable(((cast _Scene2DDom._domFontAscentCache__domFontSource : flight._internal._Map<String, Float>).keys()))) {
       if ((cast ((cast _Runtime.includes(key, '\'' + Std.string(family) + '\'') : Bool) || (cast _Runtime.includes(key, '"' + Std.string(family) + '"') : Bool)) : Bool)) {
-        ((cast _Scene2DDom._domFontAscentCache__domFontSource : flight._internal._Map<String, Float>).delete_(key));
+        ((cast _Scene2DDom._domFontAscentCache__domFontSource : flight._internal._Map<String, Float>).delete_((cast key)));
       }
     }
   }
 
   public static function setDomFontAscentCached(font:String, ascent:Float):Void {
-    ((cast _Scene2DDom._domFontAscentCache__domFontSource : flight._internal._Map<String, Float>).set(font, (cast ascent)));
+    ((cast _Scene2DDom._domFontAscentCache__domFontSource : flight._internal._Map<String, Float>).set((cast font), (cast ascent)));
   }
 
   @:allow(flight)
@@ -858,17 +858,17 @@ class _Scene2DDom {
       if ((cast !(cast (cast current : { var enabled:Bool; }).enabled : Bool) : Bool)) { continue; }
       var data:Null<RenderProxy2D> = (cast getRenderProxy2D(({ final __callArgument122:Dynamic = state; __callArgument122; }), ({ final __callArgument123:Dynamic = current; __callArgument123; })) : Null<RenderProxy2D>);
       if ((cast _Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
-      ({ final __optionalOwner127 = clipHooks; if (__optionalOwner127 != null) { final __optionalCall126 = (cast __optionalOwner127 : { var popClip:RenderState->RenderProxy2D->Node2D->Void; }).popClip; if (__optionalCall126 != null) __optionalCall126(state, data, current); } });
-      if ((cast !(cast (cast isRenderProxyVisible(({ final __callArgument128:Dynamic = data; __callArgument128; })) : Bool) : Bool) : Bool)) { continue; }
-      ({ final __optionalOwner131 = clipHooks; if (__optionalOwner131 != null) { final __optionalCall130 = (cast __optionalOwner131 : { var pushClip:RenderState->RenderProxy2D->Node2D->Void; }).pushClip; if (__optionalCall130 != null) __optionalCall130(state, data, current); } });
+      ({ final __optionalOwner130 = clipHooks; if (__optionalOwner130 != null) { final __optionalCall129 = (cast __optionalOwner130 : { var popClip:RenderState->RenderProxy2D->Node2D->Void; }).popClip; if (__optionalCall129 != null) __optionalCall129(({ final __callArgument126:Dynamic = state; __callArgument126; }), ({ final __callArgument127:Dynamic = data; __callArgument127; }), ({ final __callArgument128:Dynamic = current; __callArgument128; })); } });
+      if ((cast !(cast (cast isRenderProxyVisible(({ final __callArgument131:Dynamic = data; __callArgument131; })) : Bool) : Bool) : Bool)) { continue; }
+      ({ final __optionalOwner137 = clipHooks; if (__optionalOwner137 != null) { final __optionalCall136 = (cast __optionalOwner137 : { var pushClip:RenderState->RenderProxy2D->Node2D->Void; }).pushClip; if (__optionalCall136 != null) __optionalCall136(({ final __callArgument133:Dynamic = state; __callArgument133; }), ({ final __callArgument134:Dynamic = data; __callArgument134; }), ({ final __callArgument135:Dynamic = current; __callArgument135; })); } });
       if ((cast !_Runtime.strictEquals((cast data : RenderProxy2D).renderer, null) : Bool)) {
-        var result:{ var newLength:Float; var needsReconcile:Bool; } = (cast (#if js _Runtime.callValue(processDomNode, cast ([({ final __callArgument137:Dynamic = runtime; __callArgument137; }), ({ final __callArgument138:Dynamic = data; __callArgument138; }), (cast frameId : Float), ({ final __callArgument141:Dynamic = function():Void { (cast (cast data : RenderProxy2D).renderer : Renderer).submit(({ final __callArgument139:Dynamic = state; __callArgument139; }), ({ final __callArgument140:Dynamic = data; __callArgument140; })); }; __callArgument141; }), (cast newLength : Float)] : Array<Dynamic>)) #else processDomNode(({ final __callArgument132:Dynamic = runtime; __callArgument132; }), ({ final __callArgument133:Dynamic = data; __callArgument133; }), (cast frameId : Float), ({ final __callArgument136:Dynamic = function():Void { (cast (cast data : RenderProxy2D).renderer : Renderer).submit(({ final __callArgument134:Dynamic = state; __callArgument134; }), ({ final __callArgument135:Dynamic = data; __callArgument135; })); }; __callArgument136; }), (cast newLength : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : { var newLength:Float; var needsReconcile:Bool; });
+        var result:{ var newLength:Float; var needsReconcile:Bool; } = (cast (#if js _Runtime.callValue(processDomNode, cast ([({ final __callArgument143:Dynamic = runtime; __callArgument143; }), ({ final __callArgument144:Dynamic = data; __callArgument144; }), (cast frameId : Float), ({ final __callArgument147:Dynamic = function():Void { (cast (cast data : RenderProxy2D).renderer : Renderer).submit(({ final __callArgument145:Dynamic = state; __callArgument145; }), ({ final __callArgument146:Dynamic = data; __callArgument146; })); }; __callArgument147; }), (cast newLength : Float)] : Array<Dynamic>)) #else processDomNode(({ final __callArgument138:Dynamic = runtime; __callArgument138; }), ({ final __callArgument139:Dynamic = data; __callArgument139; }), (cast frameId : Float), ({ final __callArgument142:Dynamic = function():Void { (cast (cast data : RenderProxy2D).renderer : Renderer).submit(({ final __callArgument140:Dynamic = state; __callArgument140; }), ({ final __callArgument141:Dynamic = data; __callArgument141; })); }; __callArgument142; }), (cast newLength : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : { var newLength:Float; var needsReconcile:Bool; });
         (newLength = cast ((cast result : { var newLength:Float; var needsReconcile:Bool; }).newLength : Dynamic));
         if ((cast (cast result : { var newLength:Float; var needsReconcile:Bool; }).needsReconcile : Bool)) { (needsReconcile = cast (true : Dynamic)); }
-        ({ final __optionalOwner143 = applyClip; if (__optionalOwner143 != null) { final __optionalCall142 = (cast __optionalOwner143 : { var apply:DomRenderState->RenderProxy2D->Void; }).apply; if (__optionalCall142 != null) __optionalCall142(state, data); } });
+        ({ final __optionalOwner151 = applyClip; if (__optionalOwner151 != null) { final __optionalCall150 = (cast __optionalOwner151 : { var apply:DomRenderState->RenderProxy2D->Void; }).apply; if (__optionalCall150 != null) __optionalCall150(({ final __callArgument148:Dynamic = state; __callArgument148; }), ({ final __callArgument149:Dynamic = data; __callArgument149; })); } });
       }
       if ((cast (cast data : RenderProxy2D).traverseChildren : Bool)) {
-        var children:Null<Array<NodeOf<Node2DTraits>>> = _Runtime.field((cast getNode2DRuntime(({ final __callArgument144:Dynamic = current; __callArgument144; })) : Node2DRuntime), 'children');
+        var children:Null<Array<NodeOf<Node2DTraits>>> = _Runtime.field((cast getNode2DRuntime(({ final __callArgument152:Dynamic = current; __callArgument152; })) : Node2DRuntime), 'children');
         if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
           {
             var i:Float = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
@@ -880,11 +880,11 @@ class _Scene2DDom {
         }
       }
     }
-    ({ final __optionalOwner147 = clipHooks; if (__optionalOwner147 != null) { final __optionalCall146 = (cast __optionalOwner147 : { var finalize:RenderState->Void; }).finalize; if (__optionalCall146 != null) __optionalCall146(state); } });
-    if ((cast (cast hasDomStructureChanged(({ final __callArgument148:Dynamic = runtime; __callArgument148; }), (cast newLength : Float), (cast needsReconcile : Bool)) : Bool) : Bool)) {
-      reconcileDomContainer(({ final __callArgument150:Dynamic = container; __callArgument150; }), ({ final __callArgument151:Dynamic = runtime; __callArgument151; }), (cast newLength : Float));
+    ({ final __optionalOwner156 = clipHooks; if (__optionalOwner156 != null) { final __optionalCall155 = (cast __optionalOwner156 : { var finalize:RenderState->Void; }).finalize; if (__optionalCall155 != null) __optionalCall155(({ final __callArgument154:Dynamic = state; __callArgument154; })); } });
+    if ((cast (cast hasDomStructureChanged(({ final __callArgument157:Dynamic = runtime; __callArgument157; }), (cast newLength : Float), (cast needsReconcile : Bool)) : Bool) : Bool)) {
+      reconcileDomContainer(({ final __callArgument159:Dynamic = container; __callArgument159; }), ({ final __callArgument160:Dynamic = runtime; __callArgument160; }), (cast newLength : Float));
     }
-    swapDomOrderLists(({ final __callArgument154:Dynamic = runtime; __callArgument154; }), (cast newLength : Float));
+    swapDomOrderLists(({ final __callArgument163:Dynamic = runtime; __callArgument163; }), (cast newLength : Float));
   }
 
   public static function hasDomStructureChanged(runtime:DomRenderStateRuntime, newLength:Float, needsReconcile:Bool):Bool {
@@ -906,20 +906,20 @@ class _Scene2DDom {
     var appearanceDirty:Bool = cast _Runtime.UNDEFINED;
     var transformDirty:Bool = cast _Runtime.UNDEFINED;
     var needsReconcile:Bool = cast _Runtime.UNDEFINED;
-    isNew = !(cast ((cast runtime.domElementMap : flight._internal._WeakMap<RenderProxy2D, flight._internal.dom.HTMLElement>).has(data)) : Bool);
+    isNew = !(cast ((cast runtime.domElementMap : flight._internal._WeakMap<RenderProxy2D, flight._internal.dom.HTMLElement>).has((cast data))) : Bool);
     appearanceDirty = _Runtime.strictEquals((cast data : RenderProxy2D).appearanceFrameId, currentFrameId);
     transformDirty = _Runtime.strictEquals((cast data : RenderProxy2D).transformFrameId, currentFrameId);
     needsReconcile = false;
     if ((cast ((cast ((cast ((cast isNew : Bool) || (cast appearanceDirty : Bool)) : Bool) || (cast transformDirty : Bool)) : Bool) || (cast forceDraw : Bool)) : Bool)) {
-      var prevElement:Null<flight._internal.dom.HTMLElement> = ((cast isNew : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast runtime.domElementMap : flight._internal._WeakMap<RenderProxy2D, flight._internal.dom.HTMLElement>).get(data)) : Dynamic));
+      var prevElement:Null<flight._internal.dom.HTMLElement> = ((cast isNew : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast runtime.domElementMap : flight._internal._WeakMap<RenderProxy2D, flight._internal.dom.HTMLElement>).get((cast data))) : Dynamic));
       (runtime.domCurrentElement = cast (null : Null<flight._internal.dom.HTMLElement>));
       drawFn();
       var newElement:flight._internal._Any = runtime.domCurrentElement;
       if ((cast !_Runtime.strictEquals(newElement, null) : Bool)) {
-        ((cast runtime.domElementMap : flight._internal._WeakMap<RenderProxy2D, flight._internal.dom.HTMLElement>).set(data, (cast newElement)));
+        ((cast runtime.domElementMap : flight._internal._WeakMap<RenderProxy2D, flight._internal.dom.HTMLElement>).set((cast data), (cast newElement)));
         if ((cast !_Runtime.strictEquals(newElement, prevElement) : Bool)) { (needsReconcile = cast (true : Dynamic)); }
       } else { if ((cast !_Runtime.strictEquals(prevElement, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        ((cast runtime.domElementMap : flight._internal._WeakMap<RenderProxy2D, flight._internal.dom.HTMLElement>).delete_(data));
+        ((cast runtime.domElementMap : flight._internal._WeakMap<RenderProxy2D, flight._internal.dom.HTMLElement>).delete_((cast data)));
         (needsReconcile = cast (true : Dynamic));
       } }
     }
@@ -939,22 +939,22 @@ class _Scene2DDom {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast newLength : Float)) : Bool)) {
-        var el:Null<flight._internal.dom.HTMLElement> = ((cast runtime.domElementMap : flight._internal._WeakMap<RenderProxy2D, flight._internal.dom.HTMLElement>).get(flight._internal._StaticIndex.readArray(runtime.domNextOrderList, i)));
-        if ((cast !_Runtime.strictEquals(el, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast keepSet : flight._internal._Set<flight._internal.dom.HTMLElement>).add(el)); }
+        var el:Null<flight._internal.dom.HTMLElement> = ((cast runtime.domElementMap : flight._internal._WeakMap<RenderProxy2D, flight._internal.dom.HTMLElement>).get((cast flight._internal._StaticIndex.readArray(runtime.domNextOrderList, i))));
+        if ((cast !_Runtime.strictEquals(el, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast keepSet : flight._internal._Set<flight._internal.dom.HTMLElement>).add((cast el))); }
         i++;
       }
     }
     child = container.firstChild;
     while ((cast !_Runtime.strictEquals(child, null) : Bool)) {
       var next:Null<flight._internal.dom.ChildNode> = (cast child : flight._internal.dom.ChildNode).nextSibling;
-      if ((cast !(cast ((cast keepSet : flight._internal._Set<flight._internal.dom.HTMLElement>).has((cast child : flight._internal.dom.HTMLElement))) : Bool) : Bool)) { container.removeChild(child); }
+      if ((cast !(cast ((cast keepSet : flight._internal._Set<flight._internal.dom.HTMLElement>).has((cast (cast child : flight._internal.dom.HTMLElement)))) : Bool) : Bool)) { container.removeChild(child); }
       (child = cast (next : Dynamic));
     }
     nextSibling = null;
     {
       var i:Float = (newLength - 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-        var el:Null<flight._internal.dom.HTMLElement> = ((cast runtime.domElementMap : flight._internal._WeakMap<RenderProxy2D, flight._internal.dom.HTMLElement>).get(flight._internal._StaticIndex.readArray(runtime.domNextOrderList, i)));
+        var el:Null<flight._internal.dom.HTMLElement> = ((cast runtime.domElementMap : flight._internal._WeakMap<RenderProxy2D, flight._internal.dom.HTMLElement>).get((cast flight._internal._StaticIndex.readArray(runtime.domNextOrderList, i))));
         if ((cast _Runtime.strictEquals(el, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i--; continue; }
         if ((cast ((cast !_Runtime.strictEquals((cast el : flight._internal.dom.HTMLElement).nextSibling, nextSibling) : Bool) || (cast !_Runtime.strictEquals((cast el : flight._internal.dom.HTMLElement).parentNode, container) : Bool)) : Bool)) {
           container.insertBefore(el, nextSibling);
@@ -978,7 +978,7 @@ class _Scene2DDom {
     var state:DomRenderState = cast _Runtime.UNDEFINED;
     var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;
     state = (cast _createRenderState((cast { pixelRatio: _Runtime.coalesce((cast options : { @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var pixelRatio:Null<Float>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).pixelRatio, function():Dynamic return cast 1.0), renderTransform2D: (cast (#if js _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) #else createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix), roundPixels: _Runtime.coalesce((cast options : { @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var pixelRatio:Null<Float>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).roundPixels, function():Dynamic return cast false), sceneGraphSyncPolicy: (cast options : { @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var pixelRatio:Null<Float>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).sceneGraphSyncPolicy } : Dynamic)) : DomRenderState);
-    if ((cast !_Runtime.looseEquals((cast options : { @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var pixelRatio:Null<Float>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).backgroundColor, null) : Bool)) { setRenderStateBackgroundColor(({ final __callArgument156:Dynamic = state; __callArgument156; }), (cast (cast options : { @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var pixelRatio:Null<Float>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).backgroundColor : Float)); }
+    if ((cast !_Runtime.looseEquals((cast options : { @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var pixelRatio:Null<Float>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).backgroundColor, null) : Bool)) { setRenderStateBackgroundColor(({ final __callArgument165:Dynamic = state; __callArgument165; }), (cast (cast options : { @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var pixelRatio:Null<Float>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).backgroundColor : Float)); }
     ((cast state : { var applyBlendMode:Null<flight._internal.dom.HTMLElement->Null<String>->Void>; }).applyBlendMode = (cast null));
     ((cast state : { var domCssFilterResolver:Null<RenderProxy2D->Null<String>>; }).domCssFilterResolver = (cast null));
     ((cast (cast state : { var element:flight._internal.dom.HTMLElement; }) : { var element:flight._internal.dom.HTMLElement; }).element = element);
@@ -1017,7 +1017,7 @@ class _Scene2DDom {
   }
 
   public static function createDomRichTextData__domRichText(_state:RenderState, _source:Renderable):DomRichTextData__domRichText {
-    return cast (cast createEntity(({ final __callArgument158:Dynamic = ({ div: null } : EntityShapeL38C23__domRichText); __callArgument158; })) : EntityShapeL38C23__domRichText);
+    return cast (cast createEntity(({ final __callArgument167:Dynamic = ({ div: (cast null : Dynamic) } : EntityShapeL38C23__domRichText); __callArgument167; })) : EntityShapeL38C23__domRichText);
     return cast null;
   }
 
@@ -1034,16 +1034,16 @@ class _Scene2DDom {
   @:allow(flight)
   @:keep
   private static function drawDomRichText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
-    _Scene2DDom.drawDomRichTextField__domRichText(({ final __callArgument160:Dynamic = state; __callArgument160; }), ({ final __callArgument161:Dynamic = renderProxy; __callArgument161; }));
+    _Scene2DDom.drawDomRichTextField__domRichText(({ final __callArgument169:Dynamic = state; __callArgument169; }), ({ final __callArgument170:Dynamic = renderProxy; __callArgument170; }));
     if ((cast ((cast !_Runtime.strictEquals(_Scene2DDom._domTextInputOverlay__domRichText, null) : Bool) && (cast !_Runtime.strictEquals((cast (cast getRichTextRuntime((cast (cast renderProxy : RenderProxy2D).source : RichText)) : RichTextRuntime) : { var input:Null<TextInputState>; }).input, null) : Bool)) : Bool)) {
-      (cast _Scene2DDom._domTextInputOverlay__domRichText : DomRenderState->RenderProxy2D->Void)(({ final __callArgument164:Dynamic = state; __callArgument164; }), ({ final __callArgument165:Dynamic = renderProxy; __callArgument165; }));
+      (cast _Scene2DDom._domTextInputOverlay__domRichText : DomRenderState->RenderProxy2D->Void)(({ final __callArgument173:Dynamic = state; __callArgument173; }), ({ final __callArgument174:Dynamic = renderProxy; __callArgument174; }));
     }
   }
 
   @:allow(flight)
   @:keep
   private static function drawDomRichTextMask(state:DomRenderState, renderProxy:RenderProxy2D):Void {
-    drawDomRichText(({ final __callArgument168:Dynamic = state; __callArgument168; }), ({ final __callArgument169:Dynamic = renderProxy; __callArgument169; }));
+    drawDomRichText(({ final __callArgument177:Dynamic = state; __callArgument177; }), ({ final __callArgument178:Dynamic = renderProxy; __callArgument178; }));
   }
 
   public static function drawDomRichTextField__domRichText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
@@ -1087,25 +1087,25 @@ class _Scene2DDom {
     scrollV = __destructure0.scrollV;
     if ((cast _Runtime.strictEquals((cast data : DomRichTextData__domRichText).div, null) : Bool)) {
       ((cast data : DomRichTextData__domRichText).div = flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['div'] : Array<Dynamic>)));
-      prepareDomElement(({ final __callArgument172:Dynamic = (cast data : DomRichTextData__domRichText).div; __callArgument172; }));
+      prepareDomElement(({ final __callArgument181:Dynamic = (cast data : DomRichTextData__domRichText).div; __callArgument181; }));
       ((cast (cast (cast data : DomRichTextData__domRichText).div : flight._internal.dom.HTMLDivElement).style : flight._internal.dom.CSSStyleDeclaration).overflow = 'hidden');
     }
-    richTextRuntime = (cast getRichTextRuntime(({ final __callArgument174:Dynamic = source; __callArgument174; })) : RichTextRuntime);
-    content = (cast getRichTextContent(({ final __callArgument176:Dynamic = richTextRuntime; __callArgument176; })) : RichTextContent);
-    computeRichTextContent(({ final __callArgument178:Dynamic = content; __callArgument178; }), source.data, (cast getRichTextPasswordCharacter(({ final __callArgument179:Dynamic = source; __callArgument179; })) : Null<String>));
+    richTextRuntime = (cast getRichTextRuntime(({ final __callArgument183:Dynamic = source; __callArgument183; })) : RichTextRuntime);
+    content = (cast getRichTextContent(({ final __callArgument185:Dynamic = richTextRuntime; __callArgument185; })) : RichTextContent);
+    computeRichTextContent(({ final __callArgument187:Dynamic = content; __callArgument187; }), source.data, (cast getRichTextPasswordCharacter(({ final __callArgument188:Dynamic = source; __callArgument188; })) : Null<String>));
     __destructure1 = content;
     text = __destructure1.text;
     ctx = (cast _Scene2DDom.getMeasureCtx__domRichText() : Null<flight._internal.dom.CanvasRenderingContext2D>);
     if ((cast _Runtime.strictEquals(ctx, null) : Bool)) { return; }
     measure = (cast function(t:String, fmt:TextFormat):Float {
-      flight._internal.backend.Canvas2dBackend.setField(ctx, 'font', (cast computeTextFormatFontString(({ final __callArgument184:Dynamic = fmt; __callArgument184; })) : String));
+      flight._internal.backend.Canvas2dBackend.setField(ctx, 'font', (cast computeTextFormatFontString(({ final __callArgument193:Dynamic = fmt; __callArgument193; })) : String));
       return cast (cast flight._internal.backend.Canvas2dBackend.call(ctx, 'measureText', cast ([t] : Array<Dynamic>)) : flight._internal.dom.TextMetrics).width;
       return cast _Runtime.UNDEFINED;
     });
     result = (cast getTextLayoutResult((cast richTextRuntime : TextLabelRuntime)) : TextLayoutResult);
-    computeTextLayout(({ final __callArgument186:Dynamic = result; __callArgument186; }), ({ final __callArgument187:Dynamic = { text: text, formatRanges: content.formatRanges, width: ((cast wordWrap : Bool) ? (cast (cast source.data : { var width:Float; }).width : Dynamic) : (cast 10000.0 : Dynamic)), height: (cast source.data : { var height:Float; }).height, measure: measure, multiline: multiline, verticalAlign: ((cast _Runtime.strictEquals((cast source.data : { var autoSize:TextAutoSize; }).autoSize, 'none') : Bool) ? (cast (cast source.data : { var verticalAlign:TextVerticalAlign; }).verticalAlign : Dynamic) : (cast 'top' : Dynamic)), wordWrap: wordWrap }; __callArgument187; }));
-    fieldW = (cast computeTextBoundsWidth((cast source.data : Dynamic), ({ final __callArgument190:Dynamic = result; __callArgument190; })) : Float);
-    fieldH = (cast computeTextBoundsHeight((cast source.data : Dynamic), ({ final __callArgument192:Dynamic = result; __callArgument192; })) : Float);
+    computeTextLayout(({ final __callArgument195:Dynamic = result; __callArgument195; }), ({ final __callArgument196:Dynamic = { text: text, formatRanges: content.formatRanges, width: ((cast wordWrap : Bool) ? (cast (cast source.data : { var width:Float; }).width : Dynamic) : (cast 10000.0 : Dynamic)), height: (cast source.data : { var height:Float; }).height, measure: measure, multiline: multiline, verticalAlign: ((cast _Runtime.strictEquals((cast source.data : { var autoSize:TextAutoSize; }).autoSize, 'none') : Bool) ? (cast (cast source.data : { var verticalAlign:TextVerticalAlign; }).verticalAlign : Dynamic) : (cast 'top' : Dynamic)), wordWrap: wordWrap }; __callArgument196; }));
+    fieldW = (cast computeTextBoundsWidth((cast source.data : Dynamic), ({ final __callArgument199:Dynamic = result; __callArgument199; })) : Float);
+    fieldH = (cast computeTextBoundsHeight((cast source.data : Dynamic), ({ final __callArgument201:Dynamic = result; __callArgument201; })) : Float);
     div = (cast data : DomRichTextData__domRichText).div;
     ((cast (cast div : flight._internal.dom.HTMLDivElement).style : flight._internal.dom.CSSStyleDeclaration).width = '' + Std.string(fieldW) + 'px');
     ((cast (cast div : flight._internal.dom.HTMLDivElement).style : flight._internal.dom.CSSStyleDeclaration).height = '' + Std.string(fieldH) + 'px');
@@ -1113,8 +1113,8 @@ class _Scene2DDom {
     ((cast (cast div : flight._internal.dom.HTMLDivElement).style : flight._internal.dom.CSSStyleDeclaration).border = ((cast border : Bool) ? (cast '1px solid ' + Std.string((cast computeRgbHexString((cast borderColor : Float)) : String)) + '' : Dynamic) : (cast '' : Dynamic)));
     if ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) {
       ((cast div : flight._internal.dom.HTMLDivElement).innerHTML = '');
-      applyDomStyle(({ final __callArgument194:Dynamic = state; __callArgument194; }), ({ final __callArgument195:Dynamic = div; __callArgument195; }), ({ final __callArgument196:Dynamic = renderProxy; __callArgument196; }));
-      setDomRendererElement(({ final __callArgument200:Dynamic = state; __callArgument200; }), ({ final __callArgument201:Dynamic = div; __callArgument201; }));
+      applyDomStyle(({ final __callArgument203:Dynamic = state; __callArgument203; }), ({ final __callArgument204:Dynamic = div; __callArgument204; }), ({ final __callArgument205:Dynamic = renderProxy; __callArgument205; }));
+      setDomRendererElement(({ final __callArgument209:Dynamic = state; __callArgument209; }), ({ final __callArgument210:Dynamic = div; __callArgument210; }));
       return;
     }
     firstVisibleLine = (scrollV - 1.0);
@@ -1122,7 +1122,7 @@ class _Scene2DDom {
     scrollXOffset = scrollH;
     html = '';
     if ((cast ((cast (cast source.data : { var selectable:Bool; }).selectable : Bool) && (cast !_Runtime.strictEquals(richTextRuntime.selectionBeginIndex, richTextRuntime.selectionEndIndex) : Bool)) : Bool)) {
-      getRichTextSelectionRectangles((cast _Scene2DDom._richTextSelectionRectangles__domRichText : Dynamic), (cast richTextRuntime.selectionBeginIndex : Float), (cast richTextRuntime.selectionEndIndex : Float), ({ final __callArgument204:Dynamic = result; __callArgument204; }));
+      getRichTextSelectionRectangles((cast _Scene2DDom._richTextSelectionRectangles__domRichText : Dynamic), (cast richTextRuntime.selectionBeginIndex : Float), (cast richTextRuntime.selectionEndIndex : Float), ({ final __callArgument213:Dynamic = result; __callArgument213; }));
       for (rectangle in _Runtime.iterable(_Scene2DDom._richTextSelectionRectangles__domRichText)) {
         (html = cast ((html + '<div style="position:absolute;left:' + Std.string(((cast rectangle : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).x - scrollXOffset)) + 'px;top:' + Std.string(((cast rectangle : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).y - scrollYOffset)) + 'px;width:' + Std.string((cast rectangle : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).width) + 'px;height:' + Std.string((cast rectangle : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).height) + 'px;background:' + Std.string(_Scene2DDom.DOM_SELECTION_COLOR__domRichText) + ';opacity:' + Std.string(_Scene2DDom.DOM_SELECTION_ALPHA__domRichText) + ';pointer-events:none;"></div>') : Dynamic));
       }
@@ -1133,11 +1133,11 @@ class _Scene2DDom {
       var fmt:TextFormat = group.format;
       var slice:String = (cast escapeDomHtmlString((cast _Runtime.substring(text, group.startIndex, group.endIndex) : String)) : String);
       var x:Float = (group.offsetX - scrollXOffset);
-      var fontStr:String = (cast computeTextFormatFontString(({ final __callArgument210:Dynamic = fmt; __callArgument210; })) : String);
-      var fontAscent:Float = (cast _Scene2DDom.getDomFontAscent__domRichText(({ final __callArgument212:Dynamic = ctx; __callArgument212; }), (cast fontStr : String)) : Float);
+      var fontStr:String = (cast computeTextFormatFontString(({ final __callArgument219:Dynamic = fmt; __callArgument219; })) : String);
+      var fontAscent:Float = (cast _Scene2DDom.getDomFontAscent__domRichText(({ final __callArgument221:Dynamic = ctx; __callArgument221; }), (cast fontStr : String)) : Float);
       var y:Float = (((group.offsetY + group.ascent) - fontAscent) - scrollYOffset);
-      if (_Runtime.truthy(_Runtime.andValue((cast fmt : TextFormat).bullet, function():Dynamic return cast !(cast ((cast bulletLines : flight._internal._Set<Float>).has(group.lineIndex)) : Bool)))) {
-        ((cast bulletLines : flight._internal._Set<Float>).add(group.lineIndex));
+      if (_Runtime.truthy(_Runtime.andValue((cast fmt : TextFormat).bullet, function():Dynamic return cast !(cast ((cast bulletLines : flight._internal._Set<Float>).has((cast group.lineIndex))) : Bool)))) {
+        ((cast bulletLines : flight._internal._Set<Float>).add((cast group.lineIndex)));
         var bulletSize:Float = _Runtime.coalesce((cast fmt : TextFormat).size, function():Dynamic return cast 12.0);
         var bulletX:Float = ((x - (bulletSize * 0.7)) - _Scene2DDom.DOM_BULLET_GAP__domRichText);
         var bulletStyle:String = 'position:absolute;left:' + Std.string(bulletX) + 'px;top:' + Std.string(y) + 'px;font:' + Std.string(fontStr) + ';line-height:1;color:' + Std.string((cast computeRgbaCssString((cast _Runtime.coalesce((cast fmt : TextFormat).color, function():Dynamic return cast (cast source.data : { var textColor:Float; }).textColor) : Float)) : String)) + ';white-space:nowrap;';
@@ -1170,8 +1170,8 @@ class _Scene2DDom {
       (html = cast ((html + '<div style="' + Std.string(style) + '">' + Std.string(slice) + '</div>') : Dynamic));
     }
     ((cast div : flight._internal.dom.HTMLDivElement).innerHTML = html);
-    applyDomStyle(({ final __callArgument214:Dynamic = state; __callArgument214; }), ({ final __callArgument215:Dynamic = div; __callArgument215; }), ({ final __callArgument216:Dynamic = renderProxy; __callArgument216; }));
-    setDomRendererElement(({ final __callArgument220:Dynamic = state; __callArgument220; }), ({ final __callArgument221:Dynamic = div; __callArgument221; }));
+    applyDomStyle(({ final __callArgument223:Dynamic = state; __callArgument223; }), ({ final __callArgument224:Dynamic = div; __callArgument224; }), ({ final __callArgument225:Dynamic = renderProxy; __callArgument225; }));
+    setDomRendererElement(({ final __callArgument229:Dynamic = state; __callArgument229; }), ({ final __callArgument230:Dynamic = div; __callArgument230; }));
   }
 
   public static final DOM_BULLET_GAP__domRichText:Float = 4.0;
@@ -1181,7 +1181,7 @@ class _Scene2DDom {
     var ascent:Float = cast _Runtime.UNDEFINED;
     cached = (cast getDomFontAscentCached((cast font : String)) : Null<Float>);
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
-    ascent = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined'), function():Dynamic return cast flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'body')), function():Dynamic return cast (cast _Scene2DDom.probeCssFontAscent__domRichText((cast font : String)) : Float), function():Dynamic return cast (cast _Scene2DDom.canvasFontAscentFallback__domRichText(({ final __callArgument224:Dynamic = ctx; __callArgument224; }), (cast font : String)) : Float));
+    ascent = _Runtime.select(_Runtime.andValue(!_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined'), function():Dynamic return cast flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'body')), function():Dynamic return cast (cast _Scene2DDom.probeCssFontAscent__domRichText((cast font : String)) : Float), function():Dynamic return cast (cast _Scene2DDom.canvasFontAscentFallback__domRichText(({ final __callArgument233:Dynamic = ctx; __callArgument233; }), (cast font : String)) : Float));
     setDomFontAscentCached((cast font : String), (cast ascent : Float));
     return cast ascent;
     return cast null;
@@ -1283,7 +1283,7 @@ class _Scene2DDom {
   @:allow(flight)
   @:keep
   private static function createDomScale9ShapeData(_state:RenderState, _source:Renderable):DomScale9ShapeData__domScale9Shape {
-    return cast (cast createEntity(({ final __callArgument226:Dynamic = ({ canvas: null, context: null } : EntityShapeL31C23__domScale9Shape); __callArgument226; })) : EntityShapeL31C23__domScale9Shape);
+    return cast (cast createEntity(({ final __callArgument235:Dynamic = ({ canvas: (cast null : Dynamic), context: (cast null : Dynamic) } : EntityShapeL31C23__domScale9Shape); __callArgument235; })) : EntityShapeL31C23__domScale9Shape);
     return cast null;
   }
 
@@ -1309,21 +1309,21 @@ class _Scene2DDom {
     commands = _Runtime.field(__destructure0, 'commands');
     scale9Grid = _Runtime.field(__destructure0, 'scale9Grid');
     if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { return; }
-    rasterizer = (cast getDomShapeRasterizer(({ final __callArgument228:Dynamic = state; __callArgument228; })) : Null<ShapeRasterizer>);
+    rasterizer = (cast getDomShapeRasterizer(({ final __callArgument237:Dynamic = state; __callArgument237; })) : Null<ShapeRasterizer>);
     if ((cast _Runtime.strictEquals(rasterizer, null) : Bool)) {
-      _Runtime.callOptionalValue((cast (cast getDomRenderStateRuntime(({ final __callArgument234:Dynamic = state; __callArgument234; })) : DomRenderStateRuntime) : { var registryMiss:Null<flight._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; }).registryMiss, cast ([RenderRegistry.ShapeRasterizer, Scale9ShapeKind] : Array<Dynamic>));
+      _Runtime.callOptionalValue((cast (cast getDomRenderStateRuntime(({ final __callArgument243:Dynamic = state; __callArgument243; })) : DomRenderStateRuntime) : { var registryMiss:Null<flight._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; }).registryMiss, cast ([RenderRegistry.ShapeRasterizer, Scale9ShapeKind] : Array<Dynamic>));
       return;
     }
     bounds = (cast getNodeLocalBoundsRectangle((cast source : Dynamic)) : Rectangle);
-    mapper = (cast buildDomScale9Mapper(({ final __callArgument236:Dynamic = bounds; __callArgument236; }), ({ final __callArgument237:Dynamic = scale9Grid; __callArgument237; }), (cast source.scaleX : Float), (cast source.scaleY : Float)) : Null<Scale9Mapper>);
+    mapper = (cast buildDomScale9Mapper(({ final __callArgument245:Dynamic = bounds; __callArgument245; }), ({ final __callArgument246:Dynamic = scale9Grid; __callArgument246; }), (cast source.scaleX : Float), (cast source.scaleY : Float)) : Null<Scale9Mapper>);
     if ((cast _Runtime.strictEquals(mapper, null) : Bool)) {
-      drawDomShape(({ final __callArgument240:Dynamic = state; __callArgument240; }), ({ final __callArgument241:Dynamic = renderProxy; __callArgument241; }));
+      drawDomShape(({ final __callArgument249:Dynamic = state; __callArgument249; }), ({ final __callArgument250:Dynamic = renderProxy; __callArgument250; }));
       return;
     }
     if ((cast _Runtime.strictEquals((cast data : DomScale9ShapeData__domScale9Shape).canvas, null) : Bool)) {
       ((cast data : DomScale9ShapeData__domScale9Shape).canvas = flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>)));
       ((cast data : DomScale9ShapeData__domScale9Shape).context = flight._internal.backend.CanvasElementBackend.call((cast data : DomScale9ShapeData__domScale9Shape).canvas, 'getContext', cast (['2d'] : Array<Dynamic>)));
-      prepareDomElement(({ final __callArgument244:Dynamic = (cast data : DomScale9ShapeData__domScale9Shape).canvas; __callArgument244; }));
+      prepareDomElement(({ final __callArgument253:Dynamic = (cast data : DomScale9ShapeData__domScale9Shape).canvas; __callArgument253; }));
     }
     w = HxMath.max(1.0, HxMath.ceil((bounds.width * source.scaleX)));
     h = HxMath.max(1.0, HxMath.ceil((bounds.height * source.scaleY)));
@@ -1333,14 +1333,14 @@ class _Scene2DDom {
     ((cast (cast (cast data : DomScale9ShapeData__domScale9Shape).canvas : flight._internal.dom.HTMLCanvasElement).style : flight._internal.dom.CSSStyleDeclaration).width = '' + Std.string(w) + 'px');
     ((cast (cast (cast data : DomScale9ShapeData__domScale9Shape).canvas : flight._internal.dom.HTMLCanvasElement).style : flight._internal.dom.CSSStyleDeclaration).height = '' + Std.string(h) + 'px');
     ctx = (cast data : DomScale9ShapeData__domScale9Shape).context;
-    mapScale9ShapeCommands(({ final __callArgument246:Dynamic = _Scene2DDom._remappedCommands__domScale9Shape; __callArgument246; }), ({ final __callArgument247:Dynamic = commands; __callArgument247; }), ({ final __callArgument248:Dynamic = mapper; __callArgument248; }));
+    mapScale9ShapeCommands(({ final __callArgument255:Dynamic = _Scene2DDom._remappedCommands__domScale9Shape; __callArgument255; }), ({ final __callArgument256:Dynamic = commands; __callArgument256; }), ({ final __callArgument257:Dynamic = mapper; __callArgument257; }));
     flight._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, (-bounds.x * pixelRatio), (-bounds.y * pixelRatio)] : Array<Dynamic>));
-    rasterizer(({ final __callArgument252:Dynamic = ctx; __callArgument252; }), ({ final __callArgument253:Dynamic = _Scene2DDom._remappedCommands__domScale9Shape; __callArgument253; }), ({ final __callArgument254:Dynamic = state; __callArgument254; }));
+    rasterizer(({ final __callArgument261:Dynamic = ctx; __callArgument261; }), ({ final __callArgument262:Dynamic = _Scene2DDom._remappedCommands__domScale9Shape; __callArgument262; }), ({ final __callArgument263:Dynamic = state; __callArgument263; }));
     ((cast (cast (cast data : DomScale9ShapeData__domScale9Shape).canvas : flight._internal.dom.HTMLCanvasElement).style : flight._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast (cast renderProxy : RenderProxy2D).alpha : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string((cast renderProxy : RenderProxy2D).alpha) : Dynamic) : (cast '' : Dynamic)));
     ((cast (cast (cast data : DomScale9ShapeData__domScale9Shape).canvas : flight._internal.dom.HTMLCanvasElement).style : flight._internal.dom.CSSStyleDeclaration).imageRendering = ((cast (cast state : DomRenderState).allowSmoothing : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));
     _Runtime.callOptionalValue((cast state : DomRenderState).applyBlendMode, cast ([(cast data : DomScale9ShapeData__domScale9Shape).canvas, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
-    _Scene2DDom.setStrippedDomTransform__domScale9Shape(({ final __callArgument258:Dynamic = (cast data : DomScale9ShapeData__domScale9Shape).canvas; __callArgument258; }), ({ final __callArgument259:Dynamic = (cast renderProxy : RenderProxy2D).transform2D; __callArgument259; }), (cast source.scaleX : Float), (cast source.scaleY : Float), (cast (cast state : DomRenderState).roundPixels : Bool));
-    setDomRendererElement(({ final __callArgument262:Dynamic = state; __callArgument262; }), ({ final __callArgument263:Dynamic = (cast data : DomScale9ShapeData__domScale9Shape).canvas; __callArgument263; }));
+    _Scene2DDom.setStrippedDomTransform__domScale9Shape(({ final __callArgument267:Dynamic = (cast data : DomScale9ShapeData__domScale9Shape).canvas; __callArgument267; }), ({ final __callArgument268:Dynamic = (cast renderProxy : RenderProxy2D).transform2D; __callArgument268; }), (cast source.scaleX : Float), (cast source.scaleY : Float), (cast (cast state : DomRenderState).roundPixels : Bool));
+    setDomRendererElement(({ final __callArgument271:Dynamic = state; __callArgument271; }), ({ final __callArgument272:Dynamic = (cast data : DomScale9ShapeData__domScale9Shape).canvas; __callArgument272; }));
   }
 
   public static final defaultDomScale9ShapeRenderer:Scene2DRenderer = (cast { createData: createDomScale9ShapeData, submit: drawDomScale9Shape });
@@ -1362,7 +1362,7 @@ class _Scene2DDom {
   }
 
   public static function createDomShapeData__domShape(_state:RenderState, _source:Renderable):DomShapeData__domShape {
-    return cast (cast createEntity(({ final __callArgument266:Dynamic = ({ canvas: null, context: null } : EntityShapeL25C23__domShape); __callArgument266; })) : EntityShapeL25C23__domShape);
+    return cast (cast createEntity(({ final __callArgument275:Dynamic = ({ canvas: (cast null : Dynamic), context: (cast null : Dynamic) } : EntityShapeL25C23__domShape); __callArgument275; })) : EntityShapeL25C23__domShape);
     return cast null;
   }
 
@@ -1385,15 +1385,15 @@ class _Scene2DDom {
     __destructure0 = source.data;
     commands = __destructure0.commands;
     if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { return; }
-    rasterizer = (cast getDomShapeRasterizer(({ final __callArgument268:Dynamic = state; __callArgument268; })) : Null<ShapeRasterizer>);
+    rasterizer = (cast getDomShapeRasterizer(({ final __callArgument277:Dynamic = state; __callArgument277; })) : Null<ShapeRasterizer>);
     if ((cast _Runtime.strictEquals(rasterizer, null) : Bool)) {
-      _Runtime.callOptionalValue((cast (cast getDomRenderStateRuntime(({ final __callArgument274:Dynamic = state; __callArgument274; })) : DomRenderStateRuntime) : { var registryMiss:Null<flight._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; }).registryMiss, cast ([RenderRegistry.ShapeRasterizer, ShapeKind] : Array<Dynamic>));
+      _Runtime.callOptionalValue((cast (cast getDomRenderStateRuntime(({ final __callArgument283:Dynamic = state; __callArgument283; })) : DomRenderStateRuntime) : { var registryMiss:Null<flight._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; }).registryMiss, cast ([RenderRegistry.ShapeRasterizer, ShapeKind] : Array<Dynamic>));
       return;
     }
     if ((cast _Runtime.strictEquals((cast data : DomShapeData__domShape).canvas, null) : Bool)) {
       ((cast data : DomShapeData__domShape).canvas = flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>)));
       ((cast data : DomShapeData__domShape).context = flight._internal.backend.CanvasElementBackend.call((cast data : DomShapeData__domShape).canvas, 'getContext', cast (['2d'] : Array<Dynamic>)));
-      prepareDomElement(({ final __callArgument276:Dynamic = (cast data : DomShapeData__domShape).canvas; __callArgument276; }));
+      prepareDomElement(({ final __callArgument285:Dynamic = (cast data : DomShapeData__domShape).canvas; __callArgument285; }));
     }
     bounds = (cast getNodeLocalBoundsRectangle((cast source : Dynamic)) : Rectangle);
     w = HxMath.max(1.0, HxMath.ceil(bounds.width));
@@ -1405,14 +1405,14 @@ class _Scene2DDom {
     ((cast (cast (cast data : DomShapeData__domShape).canvas : flight._internal.dom.HTMLCanvasElement).style : flight._internal.dom.CSSStyleDeclaration).height = '' + Std.string(h) + 'px');
     ctx = (cast data : DomShapeData__domShape).context;
     flight._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, (-bounds.x * pixelRatio), (-bounds.y * pixelRatio)] : Array<Dynamic>));
-    rasterizer(({ final __callArgument278:Dynamic = ctx; __callArgument278; }), (cast commands : Dynamic), ({ final __callArgument279:Dynamic = state; __callArgument279; }));
+    rasterizer(({ final __callArgument287:Dynamic = ctx; __callArgument287; }), (cast commands : Dynamic), ({ final __callArgument288:Dynamic = state; __callArgument288; }));
     ((cast (cast (cast data : DomShapeData__domShape).canvas : flight._internal.dom.HTMLCanvasElement).style : flight._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast (cast renderProxy : RenderProxy2D).alpha : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string((cast renderProxy : RenderProxy2D).alpha) : Dynamic) : (cast '' : Dynamic)));
     if ((cast !_Runtime.strictEquals((cast state : DomRenderState).domCssFilterResolver, null) : Bool)) {
-      ((cast (cast (cast data : DomShapeData__domShape).canvas : flight._internal.dom.HTMLCanvasElement).style : flight._internal.dom.CSSStyleDeclaration).filter = _Runtime.coalesce((cast state : DomRenderState).domCssFilterResolver(({ final __callArgument282:Dynamic = renderProxy; __callArgument282; })), function():Dynamic return cast ''));
+      ((cast (cast (cast data : DomShapeData__domShape).canvas : flight._internal.dom.HTMLCanvasElement).style : flight._internal.dom.CSSStyleDeclaration).filter = _Runtime.coalesce((cast state : DomRenderState).domCssFilterResolver(({ final __callArgument291:Dynamic = renderProxy; __callArgument291; })), function():Dynamic return cast ''));
     }
     _Runtime.callOptionalValue((cast state : DomRenderState).applyBlendMode, cast ([(cast data : DomShapeData__domShape).canvas, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
-    setDomTransformWithOffset(({ final __callArgument283:Dynamic = (cast data : DomShapeData__domShape).canvas; __callArgument283; }), (cast renderProxy : RenderProxy2D).transform2D, (cast bounds.x : Float), (cast bounds.y : Float), (cast (cast state : DomRenderState).roundPixels : Bool));
-    setDomRendererElement(({ final __callArgument285:Dynamic = state; __callArgument285; }), ({ final __callArgument286:Dynamic = (cast data : DomShapeData__domShape).canvas; __callArgument286; }));
+    setDomTransformWithOffset(({ final __callArgument292:Dynamic = (cast data : DomShapeData__domShape).canvas; __callArgument292; }), (cast renderProxy : RenderProxy2D).transform2D, (cast bounds.x : Float), (cast bounds.y : Float), (cast (cast state : DomRenderState).roundPixels : Bool));
+    setDomRendererElement(({ final __callArgument294:Dynamic = state; __callArgument294; }), ({ final __callArgument295:Dynamic = (cast data : DomShapeData__domShape).canvas; __callArgument295; }));
   }
 
   public static final defaultDomShapeRenderer:Scene2DRenderer = (cast { createData: _Scene2DDom.createDomShapeData__domShape, submit: drawDomShape });
@@ -1421,22 +1421,22 @@ class _Scene2DDom {
 
   public static function getDomShapeRasterizer(state:DomRenderState):Null<ShapeRasterizer> {
     var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:ShapeRasterizer; }>> = cast _Runtime.UNDEFINED;
-    entry = (cast (cast (cast (cast getDomRenderStateRuntime(({ final __callArgument289:Dynamic = state; __callArgument289; })) : DomRenderStateRuntime) : { var registries:DomRenderRegistries; }).registries : { var shapeRasterizer:SlotTable<ShapeRasterizer>; }).shapeRasterizer : SlotTable<ShapeRasterizer>).entry;
-    return cast ((cast _Runtime.strictEquals(({ final __structural291 = entry; __structural291 == null ? _Runtime.UNDEFINED : (cast __structural291 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:ShapeRasterizer; }).value : Dynamic) : (cast null : Dynamic));
+    entry = (cast (cast (cast (cast getDomRenderStateRuntime(({ final __callArgument298:Dynamic = state; __callArgument298; })) : DomRenderStateRuntime) : { var registries:DomRenderRegistries; }).registries : { var shapeRasterizer:SlotTable<ShapeRasterizer>; }).shapeRasterizer : SlotTable<ShapeRasterizer>).entry;
+    return cast ((cast _Runtime.strictEquals(({ final __structural300 = entry; __structural300 == null ? _Runtime.UNDEFINED : (cast __structural300 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:ShapeRasterizer; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function registerDomShapeRasterizer(state:DomRenderState, rasterizer:Null<ShapeRasterizer>):Void {
     var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;
     var table:SlotTable<ShapeRasterizer> = cast _Runtime.UNDEFINED;
-    runtime = (cast getDomRenderStateRuntime(({ final __callArgument292:Dynamic = state; __callArgument292; })) : DomRenderStateRuntime);
+    runtime = (cast getDomRenderStateRuntime(({ final __callArgument301:Dynamic = state; __callArgument301; })) : DomRenderStateRuntime);
     table = (cast runtime.registries : { var shapeRasterizer:SlotTable<ShapeRasterizer>; }).shapeRasterizer;
     ((cast runtime.registries : { var shapeRasterizer:SlotTable<ShapeRasterizer>; }).shapeRasterizer = cast (_Runtime.mergeObjects([table, { entry: ((cast _Runtime.strictEquals(rasterizer, null) : Bool) ? (cast null : Dynamic) : (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: rasterizer } : Dynamic)) }]) : SlotTable<ShapeRasterizer>));
   }
 
   public static function createDomSpriteData__domSprite(state:RenderState, source:Renderable):DomSpriteData__domSprite {
     var data:DomSpriteData__domSprite = cast _Runtime.UNDEFINED;
-    data = (cast createSpriteRendererData(({ final __callArgument294:Dynamic = state; __callArgument294; }), ({ final __callArgument295:Dynamic = source; __callArgument295; })) : DomSpriteData__domSprite);
+    data = (cast createSpriteRendererData(({ final __callArgument303:Dynamic = state; __callArgument303; }), ({ final __callArgument304:Dynamic = source; __callArgument304; })) : DomSpriteData__domSprite);
     ((cast data : DomSpriteData__domSprite).canvas = null);
     ((cast data : DomSpriteData__domSprite).context = null);
     ((cast data : DomSpriteData__domSprite).image = null);
@@ -1459,18 +1459,18 @@ class _Scene2DDom {
     if ((cast _Runtime.strictEquals(data, null) : Bool)) { return; }
     texture = (cast (cast (cast (cast renderProxy : RenderProxy2D).source : Sprite) : { var data:SpriteData; }).data : { var texture:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).texture;
     if ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) : Bool)) { return; }
-    source = (cast resolveDomTexture(({ final __callArgument298:Dynamic = state; __callArgument298; }), ({ final __callArgument299:Dynamic = texture; __callArgument299; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>);
+    source = (cast resolveDomTexture(({ final __callArgument307:Dynamic = state; __callArgument307; }), ({ final __callArgument308:Dynamic = texture; __callArgument308; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(source, null) : Bool)) { return; }
-    textureWidth = (cast getTextureWidth(({ final __callArgument302:Dynamic = texture; __callArgument302; })) : Float);
-    textureHeight = (cast getTextureHeight(({ final __callArgument304:Dynamic = texture; __callArgument304; })) : Float);
+    textureWidth = (cast getTextureWidth(({ final __callArgument311:Dynamic = texture; __callArgument311; })) : Float);
+    textureHeight = (cast getTextureHeight(({ final __callArgument313:Dynamic = texture; __callArgument313; })) : Float);
     sourceRectangle = (cast { height: HxMath.abs(((cast (cast texture : Texture2D).uvScale : { var y:Float; }).y * textureHeight)), width: HxMath.abs(((cast (cast texture : Texture2D).uvScale : { var x:Float; }).x * textureWidth)), x: ((cast (cast texture : Texture2D).uvOffset : { var x:Float; }).x * textureWidth), y: ((cast (cast texture : Texture2D).uvOffset : { var y:Float; }).y * textureHeight) });
     isFullTexture = ((cast ((cast ((cast _Runtime.strictEquals((cast sourceRectangle : { var height:Float; var width:Float; var x:Float; var y:Float; }).x, 0.0) : Bool) && (cast _Runtime.strictEquals((cast sourceRectangle : { var height:Float; var width:Float; var x:Float; var y:Float; }).y, 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast sourceRectangle : { var height:Float; var width:Float; var x:Float; var y:Float; }).width, textureWidth) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast sourceRectangle : { var height:Float; var width:Float; var x:Float; var y:Float; }).height, textureHeight) : Bool));
     if ((cast ((cast isFullTexture : Bool) && (cast _Runtime.isInstanceOf(source, flight._internal._HostValueLut.get('HTMLVideoElement')) : Bool)) : Bool)) {
-      _Scene2DDom.renderSpriteAsVideo__domSprite(({ final __callArgument306:Dynamic = state; __callArgument306; }), ({ final __callArgument307:Dynamic = renderProxy; __callArgument307; }), (cast data : Dynamic), ({ final __callArgument308:Dynamic = source; __callArgument308; }));
+      _Scene2DDom.renderSpriteAsVideo__domSprite(({ final __callArgument315:Dynamic = state; __callArgument315; }), ({ final __callArgument316:Dynamic = renderProxy; __callArgument316; }), (cast data : Dynamic), ({ final __callArgument317:Dynamic = source; __callArgument317; }));
     } else { if ((cast ((cast isFullTexture : Bool) && (cast _Runtime.isInstanceOf(source, flight._internal._HostValueLut.get('HTMLImageElement')) : Bool)) : Bool)) {
-      _Scene2DDom.renderSpriteAsImage__domSprite(({ final __callArgument312:Dynamic = state; __callArgument312; }), ({ final __callArgument313:Dynamic = renderProxy; __callArgument313; }), (cast data : Dynamic), ({ final __callArgument314:Dynamic = source; __callArgument314; }));
+      _Scene2DDom.renderSpriteAsImage__domSprite(({ final __callArgument321:Dynamic = state; __callArgument321; }), ({ final __callArgument322:Dynamic = renderProxy; __callArgument322; }), (cast data : Dynamic), ({ final __callArgument323:Dynamic = source; __callArgument323; }));
     } else {
-      _Scene2DDom.renderSpriteAsCanvas__domSprite(({ final __callArgument318:Dynamic = state; __callArgument318; }), ({ final __callArgument319:Dynamic = renderProxy; __callArgument319; }), (cast data : Dynamic), (cast source : flight._internal._Any), ({ final __callArgument320:Dynamic = sourceRectangle; __callArgument320; }));
+      _Scene2DDom.renderSpriteAsCanvas__domSprite(({ final __callArgument327:Dynamic = state; __callArgument327; }), ({ final __callArgument328:Dynamic = renderProxy; __callArgument328; }), (cast data : Dynamic), (cast source : flight._internal._Any), ({ final __callArgument329:Dynamic = sourceRectangle; __callArgument329; }));
     } }
   }
 
@@ -1483,7 +1483,7 @@ class _Scene2DDom {
     if ((cast _Runtime.strictEquals((cast data : DomSpriteData__domSprite).canvas, null) : Bool)) {
       ((cast data : DomSpriteData__domSprite).canvas = flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>)));
       ((cast data : DomSpriteData__domSprite).context = flight._internal.backend.CanvasElementBackend.call((cast data : DomSpriteData__domSprite).canvas, 'getContext', cast (['2d'] : Array<Dynamic>)));
-      prepareDomElement(({ final __callArgument324:Dynamic = (cast data : DomSpriteData__domSprite).canvas; __callArgument324; }));
+      prepareDomElement(({ final __callArgument333:Dynamic = (cast data : DomSpriteData__domSprite).canvas; __callArgument333; }));
     }
     texture = (cast (cast (cast (cast renderProxy : RenderProxy2D).source : Sprite) : { var data:SpriteData; }).data : { var texture:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).texture;
     pixelRatio = (cast state : DomRenderState).pixelRatio;
@@ -1495,9 +1495,9 @@ class _Scene2DDom {
     if ((cast !_Runtime.strictEquals(pixelRatio, 1.0) : Bool)) { flight._internal.backend.Canvas2dBackend.call(context, 'scale', cast ([pixelRatio, pixelRatio] : Array<Dynamic>)); }
     flight._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', ((cast (cast state : DomRenderState).allowSmoothing : Bool) && (cast !(cast StringTools.startsWith((cast (cast texture : { var sampler:Sampler; }).sampler : { var magFilter:TextureFilter; }).magFilter, 'nearest') : Bool) : Bool)));
     flight._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([source, (cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).x, (cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).y, (cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).width, (cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).height, 0.0, 0.0, (cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).width, (cast sourceRectangle : { var x:Float; var y:Float; var width:Float; var height:Float; }).height] : Array<Dynamic>));
-    applyDomStyle(({ final __callArgument326:Dynamic = state; __callArgument326; }), ({ final __callArgument327:Dynamic = (cast data : DomSpriteData__domSprite).canvas; __callArgument327; }), ({ final __callArgument328:Dynamic = renderProxy; __callArgument328; }));
-    _Scene2DDom.applyDomSpriteSampling__domSprite(({ final __callArgument332:Dynamic = state; __callArgument332; }), ({ final __callArgument333:Dynamic = (cast data : DomSpriteData__domSprite).canvas; __callArgument333; }), ({ final __callArgument334:Dynamic = renderProxy; __callArgument334; }));
-    setDomRendererElement(({ final __callArgument338:Dynamic = state; __callArgument338; }), ({ final __callArgument339:Dynamic = (cast data : DomSpriteData__domSprite).canvas; __callArgument339; }));
+    applyDomStyle(({ final __callArgument335:Dynamic = state; __callArgument335; }), ({ final __callArgument336:Dynamic = (cast data : DomSpriteData__domSprite).canvas; __callArgument336; }), ({ final __callArgument337:Dynamic = renderProxy; __callArgument337; }));
+    _Scene2DDom.applyDomSpriteSampling__domSprite(({ final __callArgument341:Dynamic = state; __callArgument341; }), ({ final __callArgument342:Dynamic = (cast data : DomSpriteData__domSprite).canvas; __callArgument342; }), ({ final __callArgument343:Dynamic = renderProxy; __callArgument343; }));
+    setDomRendererElement(({ final __callArgument347:Dynamic = state; __callArgument347; }), ({ final __callArgument348:Dynamic = (cast data : DomSpriteData__domSprite).canvas; __callArgument348; }));
   }
 
   public static function renderSpriteAsImage__domSprite(state:DomRenderState, renderProxy:RenderProxy2D, data:DomSpriteData__domSprite, source:flight._internal.dom.HTMLImageElement):Void {
@@ -1507,12 +1507,12 @@ class _Scene2DDom {
     if ((cast _Runtime.strictEquals((cast data : DomSpriteData__domSprite).image, null) : Bool)) {
       ((cast data : DomSpriteData__domSprite).image = flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['img'] : Array<Dynamic>)));
       ((cast (cast data : DomSpriteData__domSprite).image : flight._internal.dom.HTMLImageElement).crossOrigin = 'anonymous');
-      prepareDomElement(({ final __callArgument342:Dynamic = (cast data : DomSpriteData__domSprite).image; __callArgument342; }));
+      prepareDomElement(({ final __callArgument351:Dynamic = (cast data : DomSpriteData__domSprite).image; __callArgument351; }));
     }
     if ((cast !_Runtime.strictEquals((cast (cast data : DomSpriteData__domSprite).image : flight._internal.dom.HTMLImageElement).src, source.src) : Bool)) { ((cast (cast data : DomSpriteData__domSprite).image : flight._internal.dom.HTMLImageElement).src = source.src); }
-    applyDomStyle(({ final __callArgument344:Dynamic = state; __callArgument344; }), ({ final __callArgument345:Dynamic = (cast data : DomSpriteData__domSprite).image; __callArgument345; }), ({ final __callArgument346:Dynamic = renderProxy; __callArgument346; }));
-    _Scene2DDom.applyDomSpriteSampling__domSprite(({ final __callArgument350:Dynamic = state; __callArgument350; }), ({ final __callArgument351:Dynamic = (cast data : DomSpriteData__domSprite).image; __callArgument351; }), ({ final __callArgument352:Dynamic = renderProxy; __callArgument352; }));
-    setDomRendererElement(({ final __callArgument356:Dynamic = state; __callArgument356; }), ({ final __callArgument357:Dynamic = (cast data : DomSpriteData__domSprite).image; __callArgument357; }));
+    applyDomStyle(({ final __callArgument353:Dynamic = state; __callArgument353; }), ({ final __callArgument354:Dynamic = (cast data : DomSpriteData__domSprite).image; __callArgument354; }), ({ final __callArgument355:Dynamic = renderProxy; __callArgument355; }));
+    _Scene2DDom.applyDomSpriteSampling__domSprite(({ final __callArgument359:Dynamic = state; __callArgument359; }), ({ final __callArgument360:Dynamic = (cast data : DomSpriteData__domSprite).image; __callArgument360; }), ({ final __callArgument361:Dynamic = renderProxy; __callArgument361; }));
+    setDomRendererElement(({ final __callArgument365:Dynamic = state; __callArgument365; }), ({ final __callArgument366:Dynamic = (cast data : DomSpriteData__domSprite).image; __callArgument366; }));
   }
 
   public static function renderSpriteAsVideo__domSprite(state:DomRenderState, renderProxy:RenderProxy2D, data:DomSpriteData__domSprite, source:flight._internal.dom.HTMLVideoElement):Void {
@@ -1520,10 +1520,10 @@ class _Scene2DDom {
     ((cast data : DomSpriteData__domSprite).context = null);
     ((cast data : DomSpriteData__domSprite).image = null);
     ((cast data : DomSpriteData__domSprite).video = source);
-    prepareDomElement(({ final __callArgument360:Dynamic = source; __callArgument360; }));
-    applyDomStyle(({ final __callArgument362:Dynamic = state; __callArgument362; }), ({ final __callArgument363:Dynamic = source; __callArgument363; }), ({ final __callArgument364:Dynamic = renderProxy; __callArgument364; }));
-    _Scene2DDom.applyDomSpriteSampling__domSprite(({ final __callArgument368:Dynamic = state; __callArgument368; }), ({ final __callArgument369:Dynamic = source; __callArgument369; }), ({ final __callArgument370:Dynamic = renderProxy; __callArgument370; }));
-    setDomRendererElement(({ final __callArgument374:Dynamic = state; __callArgument374; }), ({ final __callArgument375:Dynamic = source; __callArgument375; }));
+    prepareDomElement(({ final __callArgument369:Dynamic = source; __callArgument369; }));
+    applyDomStyle(({ final __callArgument371:Dynamic = state; __callArgument371; }), ({ final __callArgument372:Dynamic = source; __callArgument372; }), ({ final __callArgument373:Dynamic = renderProxy; __callArgument373; }));
+    _Scene2DDom.applyDomSpriteSampling__domSprite(({ final __callArgument377:Dynamic = state; __callArgument377; }), ({ final __callArgument378:Dynamic = source; __callArgument378; }), ({ final __callArgument379:Dynamic = renderProxy; __callArgument379; }));
+    setDomRendererElement(({ final __callArgument383:Dynamic = state; __callArgument383; }), ({ final __callArgument384:Dynamic = source; __callArgument384; }));
   }
 
   public static function applyDomSpriteSampling__domSprite(state:DomRenderState, element:flight._internal.dom.HTMLElement, renderProxy:RenderProxy2D):Void {
@@ -1537,10 +1537,10 @@ class _Scene2DDom {
   @:allow(flight)
   @:keep
   private static function applyDomStyle(state:DomRenderState, element:flight._internal.dom.HTMLElement, node:RenderProxy2D):Void {
-    setDomTransform(({ final __callArgument378:Dynamic = element; __callArgument378; }), (cast node : RenderProxy2D).transform2D, (cast (cast state : DomRenderState).roundPixels : Bool));
+    setDomTransform(({ final __callArgument387:Dynamic = element; __callArgument387; }), (cast node : RenderProxy2D).transform2D, (cast (cast state : DomRenderState).roundPixels : Bool));
     ((cast element.style : flight._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast (cast node : RenderProxy2D).alpha : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string((cast node : RenderProxy2D).alpha) : Dynamic) : (cast '' : Dynamic)));
     ((cast element.style : flight._internal.dom.CSSStyleDeclaration).imageRendering = ((cast (cast state : DomRenderState).allowSmoothing : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));
-    if ((cast !_Runtime.strictEquals((cast state : DomRenderState).domCssFilterResolver, null) : Bool)) { ((cast element.style : flight._internal.dom.CSSStyleDeclaration).filter = _Runtime.coalesce((cast state : DomRenderState).domCssFilterResolver(({ final __callArgument380:Dynamic = node; __callArgument380; })), function():Dynamic return cast '')); }
+    if ((cast !_Runtime.strictEquals((cast state : DomRenderState).domCssFilterResolver, null) : Bool)) { ((cast element.style : flight._internal.dom.CSSStyleDeclaration).filter = _Runtime.coalesce((cast state : DomRenderState).domCssFilterResolver(({ final __callArgument389:Dynamic = node; __callArgument389; })), function():Dynamic return cast '')); }
     _Runtime.callOptionalValue((cast state : DomRenderState).applyBlendMode, cast ([element, (cast node : RenderProxy2D).blendMode] : Array<Dynamic>));
   }
 
@@ -1557,7 +1557,7 @@ class _Scene2DDom {
   @:allow(flight)
   @:keep
   private static function setDomRendererElement(state:DomRenderState, element:flight._internal.dom.HTMLElement):Void {
-    ((cast (cast getDomRenderStateRuntime(({ final __callArgument381:Dynamic = state; __callArgument381; })) : DomRenderStateRuntime) : { var domCurrentElement:Null<flight._internal.dom.HTMLElement>; }).domCurrentElement = cast (element : Null<flight._internal.dom.HTMLElement>));
+    ((cast (cast getDomRenderStateRuntime(({ final __callArgument390:Dynamic = state; __callArgument390; })) : DomRenderStateRuntime) : { var domCurrentElement:Null<flight._internal.dom.HTMLElement>; }).domCurrentElement = cast (element : Null<flight._internal.dom.HTMLElement>));
   }
 
   @:allow(flight)
@@ -1587,23 +1587,23 @@ class _Scene2DDom {
       (_Scene2DDom._keyframesInjected__domTextInput = cast (true : Dynamic));
     }
     source = (cast (cast renderProxy : RenderProxy2D).source : RichText);
-    input = (cast getTextInputState(({ final __callArgument383:Dynamic = source; __callArgument383; })) : Null<TextInputState>);
+    input = (cast getTextInputState(({ final __callArgument392:Dynamic = source; __callArgument392; })) : Null<TextInputState>);
     if ((cast _Runtime.strictEquals(input, null) : Bool)) { return; }
-    layout = (cast (cast getRichTextRuntime(({ final __callArgument385:Dynamic = source; __callArgument385; })) : RichTextRuntime) : { var textLayout:Null<TextLayoutResult>; }).textLayout;
+    layout = (cast (cast getRichTextRuntime(({ final __callArgument394:Dynamic = source; __callArgument394; })) : RichTextRuntime) : { var textLayout:Null<TextLayoutResult>; }).textLayout;
     data = (cast (cast renderProxy : RenderProxy2D).rendererData : Null<DomTextInputData__domTextInput>);
-    if ((cast ((cast ((cast _Runtime.andValue(!(cast (cast input : { var focused:Bool; }).focused : Bool), function():Dynamic return cast !(cast (cast input : { var alwaysShowSelection:Bool; }).alwaysShowSelection : Bool)) : Bool) || (cast _Runtime.strictEquals(layout, null) : Bool)) : Bool) || (cast _Runtime.looseEquals(({ final __structural387 = data; __structural387 == null ? _Runtime.UNDEFINED : (cast __structural387 : { var div:Null<flight._internal.dom.HTMLDivElement>; }).div; }), null) : Bool)) : Bool)) { return; }
+    if ((cast ((cast ((cast _Runtime.andValue(!(cast (cast input : { var focused:Bool; }).focused : Bool), function():Dynamic return cast !(cast (cast input : { var alwaysShowSelection:Bool; }).alwaysShowSelection : Bool)) : Bool) || (cast _Runtime.strictEquals(layout, null) : Bool)) : Bool) || (cast _Runtime.looseEquals(({ final __structural396 = data; __structural396 == null ? _Runtime.UNDEFINED : (cast __structural396 : { var div:Null<flight._internal.dom.HTMLDivElement>; }).div; }), null) : Bool)) : Bool)) { return; }
     firstVisibleLine = ((cast source.data : { var scrollV:Float; }).scrollV - 1.0);
     scrollYOffset = ((cast ((cast firstVisibleLine : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast getRichTextScrollYOffset((cast layout : { var lineHeights:Array<Float>; }).lineHeights, (cast firstVisibleLine : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic));
     scrollXOffset = (cast source.data : { var scrollH:Float; }).scrollH;
     selColor = (cast computeRgbHexString((cast (cast input : { var selectionColor:Float; }).selectionColor : Float)) : String);
     selAlpha = (cast input : { var selectionAlpha:Float; }).selectionAlpha;
     html = '';
-    getTextInputSelectionRectangles(({ final __callArgument388:Dynamic = _Scene2DDom.selectionRectangles__domTextInput; __callArgument388; }), ({ final __callArgument389:Dynamic = source; __callArgument389; }), ({ final __callArgument390:Dynamic = layout; __callArgument390; }));
+    getTextInputSelectionRectangles(({ final __callArgument397:Dynamic = _Scene2DDom.selectionRectangles__domTextInput; __callArgument397; }), ({ final __callArgument398:Dynamic = source; __callArgument398; }), ({ final __callArgument399:Dynamic = layout; __callArgument399; }));
     for (rect in _Runtime.iterable(_Scene2DDom.selectionRectangles__domTextInput)) {
       (html = cast ((html + '<div data-input-overlay style="position:absolute;left:' + Std.string((rect.x - scrollXOffset)) + 'px;top:' + Std.string((rect.y - scrollYOffset)) + 'px;width:' + Std.string(rect.width) + 'px;height:' + Std.string(rect.height) + 'px;background:' + Std.string(selColor) + ';opacity:' + Std.string(selAlpha) + ';pointer-events:none;"></div>') : Dynamic));
     }
-    if ((cast ((cast (cast input : { var focused:Bool; }).focused : Bool) && (cast _Runtime.strictEquals((cast getTextInputSelectionBeginIndex(({ final __callArgument396:Dynamic = source; __callArgument396; })) : Float), (cast getTextInputSelectionEndIndex(({ final __callArgument398:Dynamic = source; __callArgument398; })) : Float)) : Bool)) : Bool)) {
-      getTextInputCaretRectangle(({ final __callArgument400:Dynamic = _Scene2DDom.caretRectangle__domTextInput; __callArgument400; }), ({ final __callArgument401:Dynamic = source; __callArgument401; }), ({ final __callArgument402:Dynamic = layout; __callArgument402; }));
+    if ((cast ((cast (cast input : { var focused:Bool; }).focused : Bool) && (cast _Runtime.strictEquals((cast getTextInputSelectionBeginIndex(({ final __callArgument405:Dynamic = source; __callArgument405; })) : Float), (cast getTextInputSelectionEndIndex(({ final __callArgument407:Dynamic = source; __callArgument407; })) : Float)) : Bool)) : Bool)) {
+      getTextInputCaretRectangle(({ final __callArgument409:Dynamic = _Scene2DDom.caretRectangle__domTextInput; __callArgument409; }), ({ final __callArgument410:Dynamic = source; __callArgument410; }), ({ final __callArgument411:Dynamic = layout; __callArgument411; }));
       (html = cast ((html + '<div data-input-overlay style="position:absolute;left:' + Std.string(((cast _Scene2DDom.caretRectangle__domTextInput : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).x - scrollXOffset)) + 'px;top:' + Std.string(((cast _Scene2DDom.caretRectangle__domTextInput : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).y - scrollYOffset)) + 'px;width:' + Std.string((cast input : { var caretWidth:Float; }).caretWidth) + 'px;height:' + Std.string((cast _Scene2DDom.caretRectangle__domTextInput : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).height) + 'px;background:' + Std.string((cast computeRgbHexString((cast (cast input : { var caretColor:Float; }).caretColor : Float)) : String)) + ';animation:flight-caret-blink 1s step-end infinite;pointer-events:none;"></div>') : Dynamic));
     }
     for (el in _Runtime.iterable((cast (cast data : DomTextInputData__domTextInput).div : flight._internal.dom.HTMLDivElement).querySelectorAll('[data-input-overlay]'))) {
@@ -1615,7 +1615,7 @@ class _Scene2DDom {
   }
 
   public static function enableDomTextInput():Void {
-    registerDomTextInputOverlay(({ final __callArgument408:Dynamic = drawDomTextInputOverlay; __callArgument408; }));
+    registerDomTextInputOverlay(({ final __callArgument417:Dynamic = drawDomTextInputOverlay; __callArgument417; }));
   }
 
   public static function injectCaretBlinkKeyframes__domTextInput():Void {
@@ -1635,7 +1635,7 @@ class _Scene2DDom {
   public static final selectionRectangles__domTextInput:Array<TextSelectionRectangle> = (cast cast ([] : Array<Dynamic>));
 
   public static function createDomTextData__domTextLabel(_state:RenderState, _source:Renderable):DomTextData__domTextLabel {
-    return cast (cast createEntity(({ final __callArgument410:Dynamic = ({ div: null } : EntityShapeL26C23__domTextLabel); __callArgument410; })) : EntityShapeL26C23__domTextLabel);
+    return cast (cast createEntity(({ final __callArgument419:Dynamic = ({ div: (cast null : Dynamic) } : EntityShapeL26C23__domTextLabel); __callArgument419; })) : EntityShapeL26C23__domTextLabel);
     return cast null;
   }
 
@@ -1673,16 +1673,16 @@ class _Scene2DDom {
     if ((cast _Runtime.strictEquals(ctx, null) : Bool)) { return; }
     if ((cast _Runtime.strictEquals((cast data : DomTextData__domTextLabel).div, null) : Bool)) {
       ((cast data : DomTextData__domTextLabel).div = flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['div'] : Array<Dynamic>)));
-      prepareDomElement(({ final __callArgument412:Dynamic = (cast data : DomTextData__domTextLabel).div; __callArgument412; }));
+      prepareDomElement(({ final __callArgument421:Dynamic = (cast data : DomTextData__domTextLabel).div; __callArgument421; }));
       ((cast (cast (cast data : DomTextData__domTextLabel).div : flight._internal.dom.HTMLDivElement).style : flight._internal.dom.CSSStyleDeclaration).overflow = 'hidden');
     }
     measure = (cast function(t:String, format:TextFormat):Float {
-      flight._internal.backend.Canvas2dBackend.setField(ctx, 'font', (cast computeTextFormatFontString(({ final __callArgument414:Dynamic = format; __callArgument414; })) : String));
+      flight._internal.backend.Canvas2dBackend.setField(ctx, 'font', (cast computeTextFormatFontString(({ final __callArgument423:Dynamic = format; __callArgument423; })) : String));
       return cast (cast flight._internal.backend.Canvas2dBackend.call(ctx, 'measureText', cast ([t] : Array<Dynamic>)) : flight._internal.dom.TextMetrics).width;
       return cast _Runtime.UNDEFINED;
     });
-    result = (cast getTextLayoutResult((cast getTextLabelRuntime(({ final __callArgument416:Dynamic = source; __callArgument416; })) : TextLabelRuntime)) : TextLayoutResult);
-    computeTextLayout(({ final __callArgument420:Dynamic = result; __callArgument420; }), ({ final __callArgument423:Dynamic = { text: text, formatRanges: cast ([(cast createTextFormatRange(({ final __callArgument421:Dynamic = textFormat; __callArgument421; }), (cast 0.0 : Float), (cast _Runtime.field(text, 'length') : Float)) : TextFormatRange)] : Array<Dynamic>), width: (cast source.data : { var width:Float; }).width, height: (cast source.data : { var height:Float; }).height, measure: measure, verticalAlign: ((cast _Runtime.strictEquals((cast source.data : { var autoSize:TextAutoSize; }).autoSize, 'none') : Bool) ? (cast (cast source.data : { var verticalAlign:TextVerticalAlign; }).verticalAlign : Dynamic) : (cast 'top' : Dynamic)) }; __callArgument423; }));
+    result = (cast getTextLayoutResult((cast getTextLabelRuntime(({ final __callArgument425:Dynamic = source; __callArgument425; })) : TextLabelRuntime)) : TextLayoutResult);
+    computeTextLayout(({ final __callArgument429:Dynamic = result; __callArgument429; }), ({ final __callArgument432:Dynamic = { text: text, formatRanges: cast ([(cast createTextFormatRange(({ final __callArgument430:Dynamic = textFormat; __callArgument430; }), (cast 0.0 : Float), (cast _Runtime.field(text, 'length') : Float)) : TextFormatRange)] : Array<Dynamic>), width: (cast source.data : { var width:Float; }).width, height: (cast source.data : { var height:Float; }).height, measure: measure, verticalAlign: ((cast _Runtime.strictEquals((cast source.data : { var autoSize:TextAutoSize; }).autoSize, 'none') : Bool) ? (cast (cast source.data : { var verticalAlign:TextVerticalAlign; }).verticalAlign : Dynamic) : (cast 'top' : Dynamic)) }; __callArgument432; }));
     divWidth = 0.0;
     for (group in _Runtime.iterable(result.groups)) {
       var right:Float = (group.offsetX + group.width);
@@ -1696,14 +1696,14 @@ class _Scene2DDom {
       var slice:String = (cast escapeDomHtmlString((cast _Runtime.substring(text, group.startIndex, group.endIndex) : String)) : String);
       var x:Float = group.offsetX;
       var y:Float = group.offsetY;
-      var style:String = 'position:absolute;left:' + Std.string(x) + 'px;top:' + Std.string(y) + 'px;font:' + Std.string((cast computeTextFormatFontString(({ final __callArgument432:Dynamic = fmt; __callArgument432; })) : String)) + ';';
+      var style:String = 'position:absolute;left:' + Std.string(x) + 'px;top:' + Std.string(y) + 'px;font:' + Std.string((cast computeTextFormatFontString(({ final __callArgument441:Dynamic = fmt; __callArgument441; })) : String)) + ';';
       (style = cast ((style + 'color:' + Std.string((cast computeRgbaCssString((cast _Runtime.coalesce((cast fmt : TextFormat).color, function():Dynamic return cast 255.0) : Float)) : String)) + ';white-space:nowrap;') : Dynamic));
       if (_Runtime.truthy((cast fmt : TextFormat).underline)) { (style = cast ((style + 'text-decoration:underline;') : Dynamic)); }
       (html = cast ((html + '<div style="' + Std.string(style) + '">' + Std.string(slice) + '</div>') : Dynamic));
     }
     ((cast (cast data : DomTextData__domTextLabel).div : flight._internal.dom.HTMLDivElement).innerHTML = html);
-    applyDomStyle(({ final __callArgument434:Dynamic = state; __callArgument434; }), ({ final __callArgument435:Dynamic = (cast data : DomTextData__domTextLabel).div; __callArgument435; }), ({ final __callArgument436:Dynamic = renderProxy; __callArgument436; }));
-    setDomRendererElement(({ final __callArgument440:Dynamic = state; __callArgument440; }), ({ final __callArgument441:Dynamic = (cast data : DomTextData__domTextLabel).div; __callArgument441; }));
+    applyDomStyle(({ final __callArgument443:Dynamic = state; __callArgument443; }), ({ final __callArgument444:Dynamic = (cast data : DomTextData__domTextLabel).div; __callArgument444; }), ({ final __callArgument445:Dynamic = renderProxy; __callArgument445; }));
+    setDomRendererElement(({ final __callArgument449:Dynamic = state; __callArgument449; }), ({ final __callArgument450:Dynamic = (cast data : DomTextData__domTextLabel).div; __callArgument450; }));
   }
 
   public static final defaultDomTextLabelRenderer:Scene2DRenderer = (cast { createData: _Scene2DDom.createDomTextData__domTextLabel, submit: drawDomTextLabel });
@@ -1712,10 +1712,10 @@ class _Scene2DDom {
     var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;
     var table:KeyedTable<DomTextureResolver> = cast _Runtime.UNDEFINED;
     var entries:flight._internal._Map<String, RegistryTableEntry<DomTextureResolver>> = cast _Runtime.UNDEFINED;
-    runtime = (cast getDomRenderStateRuntime(({ final __callArgument444:Dynamic = state; __callArgument444; })) : DomRenderStateRuntime);
+    runtime = (cast getDomRenderStateRuntime(({ final __callArgument453:Dynamic = state; __callArgument453; })) : DomRenderStateRuntime);
     table = (cast runtime.registries : { var textureResolvers:KeyedTable<DomTextureResolver>; }).textureResolvers;
     entries = _Runtime.construct(flight._internal._HostValueLut.get('Map'), [(cast table : KeyedTable<DomTextureResolver>).entries]);
-    if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ((cast entries : flight._internal._Map<String, RegistryTableEntry<DomTextureResolver>>).delete_(sourceKind)); } else { ((cast entries : flight._internal._Map<String, RegistryTableEntry<DomTextureResolver>>).set(sourceKind, (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: resolver }))); }
+    if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ((cast entries : flight._internal._Map<String, RegistryTableEntry<DomTextureResolver>>).delete_((cast sourceKind))); } else { ((cast entries : flight._internal._Map<String, RegistryTableEntry<DomTextureResolver>>).set((cast sourceKind), (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: resolver }))); }
     ((cast runtime.registries : { var textureResolvers:KeyedTable<DomTextureResolver>; }).textureResolvers = cast (_Runtime.mergeObjects([table, { entries: entries }]) : KeyedTable<DomTextureResolver>));
   }
 
@@ -1726,15 +1726,15 @@ class _Scene2DDom {
     var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;
     var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:DomTextureResolver; }>> = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) { return cast null; }
-    sourceKind = (cast getTextureSourceKind(({ final __callArgument446:Dynamic = texture; __callArgument446; })) : Null<String>);
+    sourceKind = (cast getTextureSourceKind(({ final __callArgument455:Dynamic = texture; __callArgument455; })) : Null<String>);
     if ((cast _Runtime.strictEquals(sourceKind, null) : Bool)) { return cast null; }
-    runtime = (cast getDomRenderStateRuntime(({ final __callArgument448:Dynamic = state; __callArgument448; })) : DomRenderStateRuntime);
-    entry = ((cast (cast (cast runtime.registries : { var textureResolvers:KeyedTable<DomTextureResolver>; }).textureResolvers : KeyedTable<DomTextureResolver>).entries : flight._internal._Map<String, RegistryTableEntry<DomTextureResolver>>).get(sourceKind));
-    if ((cast !_Runtime.strictEquals(({ final __structural450 = entry; __structural450 == null ? _Runtime.UNDEFINED : (cast __structural450 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) {
+    runtime = (cast getDomRenderStateRuntime(({ final __callArgument457:Dynamic = state; __callArgument457; })) : DomRenderStateRuntime);
+    entry = ((cast (cast (cast runtime.registries : { var textureResolvers:KeyedTable<DomTextureResolver>; }).textureResolvers : KeyedTable<DomTextureResolver>).entries : flight._internal._Map<String, RegistryTableEntry<DomTextureResolver>>).get((cast sourceKind)));
+    if ((cast !_Runtime.strictEquals(({ final __structural459 = entry; __structural459 == null ? _Runtime.UNDEFINED : (cast __structural459 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) {
       _Runtime.callOptionalValue(runtime.registryMiss, cast ([RenderRegistry.TextureResolver, sourceKind] : Array<Dynamic>));
       return cast null;
     }
-    return cast (cast entry : { var state:String; var value:DomTextureResolver; }).value(({ final __callArgument451:Dynamic = state; __callArgument451; }), ({ final __callArgument452:Dynamic = texture; __callArgument452; }));
+    return cast (cast entry : { var state:String; var value:DomTextureResolver; }).value(({ final __callArgument460:Dynamic = state; __callArgument460; }), ({ final __callArgument461:Dynamic = texture; __callArgument461; }));
     return cast null;
   }
 
@@ -1775,19 +1775,19 @@ class _Scene2DDom {
   @:allow(flight)
   @:keep
   private static function areDomTextureResolverGuardsEnabled(state:DomRenderState):Bool {
-    return cast (cast areRenderRegistryGuardsEnabled(({ final __callArgument453:Dynamic = state; __callArgument453; })) : Bool);
+    return cast (cast areRenderRegistryGuardsEnabled(({ final __callArgument462:Dynamic = state; __callArgument462; })) : Bool);
     return cast null;
   }
 
   public static function enableDomTextureResolverGuards(state:DomRenderState):Void {
-    enableRenderRegistryGuards(({ final __callArgument455:Dynamic = state; __callArgument455; }));
+    enableRenderRegistryGuards(({ final __callArgument464:Dynamic = state; __callArgument464; }));
   }
 
   public static function explainDomTextureResolution(state:DomRenderState, texture:Texture):TextureResolutionExplanation {
     var kind:Null<String> = cast _Runtime.UNDEFINED;
-    kind = (cast getTextureSourceKind(({ final __callArgument457:Dynamic = texture; __callArgument457; })) : Null<String>);
+    kind = (cast getTextureSourceKind(({ final __callArgument466:Dynamic = texture; __callArgument466; })) : Null<String>);
     if ((cast _Runtime.strictEquals(kind, null) : Bool)) { return cast { kind: kind, status: 'missing-kind' }; }
-    return cast { kind: kind, status: ((cast _Runtime.strictEquals(({ final __structural463 = ((cast (cast (cast (cast (cast getDomRenderStateRuntime(({ final __callArgument461:Dynamic = state; __callArgument461; })) : DomRenderStateRuntime) : { var registries:DomRenderRegistries; }).registries : { var textureResolvers:KeyedTable<DomTextureResolver>; }).textureResolvers : KeyedTable<DomTextureResolver>).entries : flight._internal._Map<String, RegistryTableEntry<DomTextureResolver>>).get(kind)); __structural463 == null ? _Runtime.UNDEFINED : (cast __structural463 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast 'registered' : Dynamic) : (cast 'missing-resolver' : Dynamic)) };
+    return cast { kind: kind, status: ((cast _Runtime.strictEquals(({ final __structural472 = ((cast (cast (cast (cast (cast getDomRenderStateRuntime(({ final __callArgument470:Dynamic = state; __callArgument470; })) : DomRenderStateRuntime) : { var registries:DomRenderRegistries; }).registries : { var textureResolvers:KeyedTable<DomTextureResolver>; }).textureResolvers : KeyedTable<DomTextureResolver>).entries : flight._internal._Map<String, RegistryTableEntry<DomTextureResolver>>).get((cast kind))); __structural472 == null ? _Runtime.UNDEFINED : (cast __structural472 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast 'registered' : Dynamic) : (cast 'missing-resolver' : Dynamic)) };
     return cast null;
   }
 }

@@ -1841,8 +1841,8 @@ class _Shape {
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field((cast source.data : { var commands:Array<ShapeCommandToken>; }).commands, 'length') : Float)) : Bool)) {
       var key:String = (cast flight._internal._StaticIndex.readArray((cast source.data : { var commands:Array<ShapeCommandToken>; }).commands, i) : String);
-      if ((cast ((cast _Runtime.strictEquals((cast getShapeBoundsCommand((cast key : String)) : Null<ShapeBoundsCommand<String>>), null) : Bool) && (cast !(cast ((cast seen : flight._internal._Set<String>).has(key)) : Bool) : Bool)) : Bool)) {
-        ((cast seen : flight._internal._Set<String>).add(key));
+      if ((cast ((cast _Runtime.strictEquals((cast getShapeBoundsCommand((cast key : String)) : Null<ShapeBoundsCommand<String>>), null) : Bool) && (cast !(cast ((cast seen : flight._internal._Set<String>).has((cast key))) : Bool) : Bool)) : Bool)) {
+        ((cast seen : flight._internal._Set<String>).add((cast key)));
         _Runtime.callProperty(missingCommandKeys, 'push', cast ([key] : Array<Dynamic>));
       }
       (i = cast ((i + ((cast flight._internal._StaticIndex.readArray((cast source.data : { var commands:Array<ShapeCommandToken>; }).commands, (i + 1.0)) : Float) + 2.0)) : Dynamic));
@@ -1888,7 +1888,7 @@ class _Shape {
   @:allow(flight)
   @:keep
   private static function getShapeBoundsCommand(key:String):Null<ShapeBoundsCommand<String>> {
-    return cast _Runtime.coalesce(((cast _Shape._commands__shapeBoundsRegistry : flight._internal._Map<String, ShapeBoundsCommand<String>>).get(key)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _Shape._commands__shapeBoundsRegistry : flight._internal._Map<String, ShapeBoundsCommand<String>>).get((cast key))), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -1903,8 +1903,8 @@ class _Shape {
   @:keep
   private static function registerShapeBoundsCommand<K:ShapeCommandKey>(command:ShapeBoundsCommand<K>):Void {
     var previous:Null<ShapeBoundsCommand<String>> = cast _Runtime.UNDEFINED;
-    previous = ((cast _Shape._commands__shapeBoundsRegistry : flight._internal._Map<String, ShapeBoundsCommand<String>>).get((cast command : ShapeBoundsCommand<K>).key));
-    ((cast _Shape._commands__shapeBoundsRegistry : flight._internal._Map<String, ShapeBoundsCommand<String>>).set((cast command : ShapeBoundsCommand<K>).key, (cast command)));
+    previous = ((cast _Shape._commands__shapeBoundsRegistry : flight._internal._Map<String, ShapeBoundsCommand<String>>).get((cast (cast command : ShapeBoundsCommand<K>).key)));
+    ((cast _Shape._commands__shapeBoundsRegistry : flight._internal._Map<String, ShapeBoundsCommand<String>>).set((cast (cast command : ShapeBoundsCommand<K>).key), (cast command)));
     if ((cast ((cast _Runtime.strictEquals(({ final __structural255 = previous; __structural255 == null ? _Runtime.UNDEFINED : (cast __structural255 : { var fillBounds:Null<ShapeBoundsCommandHandler>; }).fillBounds; }), (cast command : ShapeBoundsCommand<K>).fillBounds) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(previous, 'strokeBounds'), (cast command : ShapeBoundsCommand<K>).strokeBounds) : Bool)) : Bool)) { return; }
     _Shape._revision__shapeBoundsRegistry++;
   }
@@ -1912,7 +1912,7 @@ class _Shape {
   @:allow(flight)
   @:keep
   private static function unregisterShapeBoundsCommand(key:String):Void {
-    if ((cast !(cast ((cast _Shape._commands__shapeBoundsRegistry : flight._internal._Map<String, ShapeBoundsCommand<String>>).delete_(key)) : Bool) : Bool)) { return; }
+    if ((cast !(cast ((cast _Shape._commands__shapeBoundsRegistry : flight._internal._Map<String, ShapeBoundsCommand<String>>).delete_((cast key))) : Bool) : Bool)) { return; }
     _Shape._revision__shapeBoundsRegistry++;
   }
 

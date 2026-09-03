@@ -4,4 +4,28 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Animation)
+@:structInit
+class AnimationLayerStack {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var advanceScratch:Array<AnimationPlayer>;
+  public var blendTrees:Array<AnimationBlendTree>;
+  public var channels:Array<AnimationLayerStackChannel>;
+  public var layers:Array<AnimationLayer>;
+  public var sampleScratch:flight._internal._Float32Array;
+  public var stateMachines:Array<AnimationStateMachine>;
+
+  private function new(advanceScratch:Array<AnimationPlayer>, blendTrees:Array<AnimationBlendTree>, channels:Array<AnimationLayerStackChannel>, layers:Array<AnimationLayer>, sampleScratch:flight._internal._Float32Array, stateMachines:Array<AnimationStateMachine>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.advanceScratch = advanceScratch;
+    this.blendTrees = blendTrees;
+    this.channels = channels;
+    this.layers = layers;
+    this.sampleScratch = sampleScratch;
+    this.stateMachines = stateMachines;
+  }
+}
+#else
 typedef AnimationLayerStack = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var advanceScratch:Array<AnimationPlayer>; var blendTrees:Array<AnimationBlendTree>; var channels:Array<AnimationLayerStackChannel>; var layers:Array<AnimationLayer>; var sampleScratch:flight._internal._Float32Array; var stateMachines:Array<AnimationStateMachine>; };
+#end

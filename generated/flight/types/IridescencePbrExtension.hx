@@ -4,4 +4,34 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Materials)
+@:structInit
+class IridescencePbrExtension {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var kind:String;
+  public var iridescence:Float;
+  public var iridescenceIor:Float;
+  public var iridescenceMap:Null<Texture>;
+  public var iridescenceMapUvSet:PbrUvSet;
+  public var iridescenceThicknessMap:Null<Texture>;
+  public var iridescenceThicknessMapUvSet:PbrUvSet;
+  public var iridescenceThicknessMax:Float;
+  public var iridescenceThicknessMin:Float;
+
+  private function new(kind:String, iridescence:Float, iridescenceIor:Float, iridescenceMap:Null<Texture>, iridescenceMapUvSet:PbrUvSet, iridescenceThicknessMap:Null<Texture>, iridescenceThicknessMapUvSet:PbrUvSet, iridescenceThicknessMax:Float, iridescenceThicknessMin:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.kind = kind;
+    this.iridescence = iridescence;
+    this.iridescenceIor = iridescenceIor;
+    this.iridescenceMap = iridescenceMap;
+    this.iridescenceMapUvSet = iridescenceMapUvSet;
+    this.iridescenceThicknessMap = iridescenceThicknessMap;
+    this.iridescenceThicknessMapUvSet = iridescenceThicknessMapUvSet;
+    this.iridescenceThicknessMax = iridescenceThicknessMax;
+    this.iridescenceThicknessMin = iridescenceThicknessMin;
+  }
+}
+#else
 typedef IridescencePbrExtension = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var iridescence:Float; var iridescenceIor:Float; var iridescenceMap:Null<Texture>; var iridescenceMapUvSet:PbrUvSet; var iridescenceThicknessMap:Null<Texture>; var iridescenceThicknessMapUvSet:PbrUvSet; var iridescenceThicknessMax:Float; var iridescenceThicknessMin:Float; };
+#end

@@ -4,5 +4,62 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:noCompletion
+@:allow(flight._Render)
+@:structInit
+class RenderProxy {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var source:Renderable;
+  public var kind:Kind;
+  public var next:Null<RenderProxy>;
+  public var alpha:Float;
+  public var appearanceFrameId:Float;
+  public var blendMode:Null<BlendMode>;
+  public var colorScaleBias:Null<ColorScaleBias>;
+  public var colorMatrix:Null<Array<Float>>;
+  public var material:Null<Material>;
+  public var materialData:Null<MaterialData>;
+  public var lastAppearanceId:Float;
+  public var lastChildrenId:Float;
+  public var lastLocalContentId:Float;
+  public var lastLocalTransformId:Float;
+  public var lastParentReferenceId:Float;
+  public var name:Null<String>;
+  public var renderer:Null<Renderer>;
+  public var rendererData:Null<RendererData>;
+  public var rendererDataSource:Null<Renderable>;
+  public var rendererMapId:Float;
+  public var transformFrameId:Float;
+  public var visible:Bool;
+
+  private function new(source:Renderable, kind:Kind, next:Null<RenderProxy>, alpha:Float, appearanceFrameId:Float, blendMode:Null<BlendMode>, colorScaleBias:Null<ColorScaleBias>, colorMatrix:Null<Array<Float>>, material:Null<Material>, materialData:Null<MaterialData>, lastAppearanceId:Float, lastChildrenId:Float, lastLocalContentId:Float, lastLocalTransformId:Float, lastParentReferenceId:Float, name:Null<String>, renderer:Null<Renderer>, rendererData:Null<RendererData>, rendererDataSource:Null<Renderable>, rendererMapId:Float, transformFrameId:Float, visible:Bool):Void {
+    this.__symbol__EntityRuntime = null;
+    this.source = source;
+    this.kind = kind;
+    this.next = next;
+    this.alpha = alpha;
+    this.appearanceFrameId = appearanceFrameId;
+    this.blendMode = blendMode;
+    this.colorScaleBias = colorScaleBias;
+    this.colorMatrix = colorMatrix;
+    this.material = material;
+    this.materialData = materialData;
+    this.lastAppearanceId = lastAppearanceId;
+    this.lastChildrenId = lastChildrenId;
+    this.lastLocalContentId = lastLocalContentId;
+    this.lastLocalTransformId = lastLocalTransformId;
+    this.lastParentReferenceId = lastParentReferenceId;
+    this.name = name;
+    this.renderer = renderer;
+    this.rendererData = rendererData;
+    this.rendererDataSource = rendererDataSource;
+    this.rendererMapId = rendererMapId;
+    this.transformFrameId = transformFrameId;
+    this.visible = visible;
+  }
+}
+#else
 @:noCompletion
 typedef RenderProxy = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var source:Renderable; var kind:Kind; var next:Null<RenderProxy>; var alpha:Float; var appearanceFrameId:Float; var blendMode:Null<BlendMode>; var colorScaleBias:Null<ColorScaleBias>; @:optional var colorMatrix:Null<Array<Float>>; var material:Null<Material>; var materialData:Null<MaterialData>; var lastAppearanceId:Float; var lastChildrenId:Float; var lastLocalContentId:Float; var lastLocalTransformId:Float; var lastParentReferenceId:Float; var name:Null<String>; var renderer:Null<Renderer>; var rendererData:Null<RendererData>; var rendererDataSource:Null<Renderable>; var rendererMapId:Float; var transformFrameId:Float; var visible:Bool; };
+#end

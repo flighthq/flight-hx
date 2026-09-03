@@ -36,13 +36,13 @@ class _Binpack {
     if ((cast _Runtime.strictEquals(_Runtime.field((cast result : PackResult).unpacked, 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     outstanding = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
     for (id in _Runtime.iterable((cast result : PackResult).unpacked)) {
-      ((cast outstanding : flight._internal._Map<RectangleId, Float>).set(id, (cast _Runtime.addNumbers(_Runtime.coalesce(((cast outstanding : flight._internal._Map<RectangleId, Float>).get(id)), function():Dynamic return cast 0.0), 1.0))));
+      ((cast outstanding : flight._internal._Map<RectangleId, Float>).set((cast id), (cast _Runtime.addNumbers(_Runtime.coalesce(((cast outstanding : flight._internal._Map<RectangleId, Float>).get((cast id))), function():Dynamic return cast 0.0), 1.0))));
     }
     explanations = (cast cast ([] : Array<Dynamic>));
     for (rectangle in _Runtime.iterable(rectangles)) {
-      var remaining:Float = _Runtime.coalesce(((cast outstanding : flight._internal._Map<RectangleId, Float>).get(rectangle.id)), function():Dynamic return cast 0.0);
+      var remaining:Float = _Runtime.coalesce(((cast outstanding : flight._internal._Map<RectangleId, Float>).get((cast rectangle.id))), function():Dynamic return cast 0.0);
       if ((cast _Runtime.strictEquals(remaining, 0.0) : Bool)) { continue; }
-      ((cast outstanding : flight._internal._Map<RectangleId, Float>).set(rectangle.id, (cast (remaining - 1.0))));
+      ((cast outstanding : flight._internal._Map<RectangleId, Float>).set((cast rectangle.id), (cast (remaining - 1.0))));
       _Runtime.callProperty(explanations, 'push', cast ([{ id: rectangle.id, reason: (cast _Binpack.getUnpackedReason__explainUnpackedRectangles(({ final __callArgument12:Dynamic = rectangle; __callArgument12; }), (cast usableWidth : Float), (cast usableHeight : Float), (cast allowRotation : Bool)) : UnpackedRectangleReason), usableWidth: usableWidth, usableHeight: usableHeight }] : Array<Dynamic>));
     }
     return cast explanations;

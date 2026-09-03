@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Spritesheet)
+@:structInit
+class Spritesheet {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var atlas:Null<TextureAtlas>;
+  public var animations:flight._internal._Record<String, SpritesheetAnimation>;
+  public var frames:Array<SpritesheetFrame>;
+
+  private function new(atlas:Null<TextureAtlas>, animations:flight._internal._Record<String, SpritesheetAnimation>, frames:Array<SpritesheetFrame>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.atlas = atlas;
+    this.animations = animations;
+    this.frames = frames;
+  }
+}
+#else
 typedef Spritesheet = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var atlas:Null<TextureAtlas>; var animations:flight._internal._Record<String, SpritesheetAnimation>; var frames:Array<SpritesheetFrame>; };
+#end

@@ -50,7 +50,7 @@ class _TextMarkup {
   }
 
   public static function registerMarkupTag(registry:MarkupTagRegistry, name:String, handler:MarkupTagHandler):Void {
-    ((cast _Runtime.field(registry, 'handlers') : flight._internal._Map<String, MarkupTagHandler>).set(_Runtime.callProperty(name, 'toLowerCase', cast ([] : Array<Dynamic>)), (cast handler)));
+    ((cast _Runtime.field(registry, 'handlers') : flight._internal._Map<String, MarkupTagHandler>).set((cast _Runtime.callProperty(name, 'toLowerCase', cast ([] : Array<Dynamic>))), (cast handler)));
   }
 
   public static function registerStandardMarkupTags(registry:MarkupTagRegistry):Void {
@@ -545,7 +545,7 @@ class _TextMarkup {
       return;
     }
     top = flight._internal._StaticIndex.readArray(stack, _Runtime.subtractNumbers(_Runtime.field(stack, 'length'), 1.0));
-    handler = ((cast handlers : flight._internal._Map<String, MarkupTagHandler>).get(name));
+    handler = ((cast handlers : flight._internal._Map<String, MarkupTagHandler>).get((cast name)));
     if ((cast _Runtime.strictEquals(handler, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       if ((cast !(cast selfClosing : Bool) : Bool)) { _Runtime.callProperty(stack, 'push', cast ([_Runtime.mergeObjects([top])] : Array<Dynamic>)); }
       return;

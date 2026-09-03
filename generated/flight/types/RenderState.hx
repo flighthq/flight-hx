@@ -4,4 +4,40 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Render)
+@:structInit
+class RenderState {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var allowSmoothing:Bool;
+  public var backgroundColor:Float;
+  public var backgroundColorRgba:Array<Float>;
+  public var backgroundColorString:String;
+  public var currentClipDepth:Float;
+  public var displayObjectClipHooks:Null<Scene2DClipHooks>;
+  public var pixelRatio:Float;
+  public var renderAlpha:Float;
+  public var renderBlendMode:Null<BlendMode>;
+  public var renderTransform2D:Null<Matrix>;
+  public var sceneGraphSyncPolicy:Scene3DGraphSyncPolicy;
+  public var roundPixels:Bool;
+
+  private function new(allowSmoothing:Bool, backgroundColor:Float, backgroundColorRgba:Array<Float>, backgroundColorString:String, currentClipDepth:Float, displayObjectClipHooks:Null<Scene2DClipHooks>, pixelRatio:Float, renderAlpha:Float, renderBlendMode:Null<BlendMode>, renderTransform2D:Null<Matrix>, sceneGraphSyncPolicy:Scene3DGraphSyncPolicy, roundPixels:Bool):Void {
+    this.__symbol__EntityRuntime = null;
+    this.allowSmoothing = allowSmoothing;
+    this.backgroundColor = backgroundColor;
+    this.backgroundColorRgba = backgroundColorRgba;
+    this.backgroundColorString = backgroundColorString;
+    this.currentClipDepth = currentClipDepth;
+    this.displayObjectClipHooks = displayObjectClipHooks;
+    this.pixelRatio = pixelRatio;
+    this.renderAlpha = renderAlpha;
+    this.renderBlendMode = renderBlendMode;
+    this.renderTransform2D = renderTransform2D;
+    this.sceneGraphSyncPolicy = sceneGraphSyncPolicy;
+    this.roundPixels = roundPixels;
+  }
+}
+#else
 typedef RenderState = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var allowSmoothing:Bool; var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; var currentClipDepth:Float; var displayObjectClipHooks:Null<Scene2DClipHooks>; var pixelRatio:Float; var renderAlpha:Float; var renderBlendMode:Null<BlendMode>; var renderTransform2D:Null<Matrix>; var sceneGraphSyncPolicy:Scene3DGraphSyncPolicy; var roundPixels:Bool; };
+#end

@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:structInit
+class ShellShortcutLinkBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var read:String->flight._internal._Promise<ShellShortcutLinkReadOutcome>;
+  public var write:String->ShellShortcutLink->ShellShortcutWriteOperation->flight._internal._Promise<ShellShortcutLinkWriteOutcome>;
+
+  private function new(read:String->flight._internal._Promise<ShellShortcutLinkReadOutcome>, write:String->ShellShortcutLink->ShellShortcutWriteOperation->flight._internal._Promise<ShellShortcutLinkWriteOutcome>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.read = read;
+    this.write = write;
+  }
+}
+#else
 typedef ShellShortcutLinkBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var read:String->flight._internal._Promise<ShellShortcutLinkReadOutcome>; var write:String->ShellShortcutLink->ShellShortcutWriteOperation->flight._internal._Promise<ShellShortcutLinkWriteOutcome>; };
+#end

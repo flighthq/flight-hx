@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:allow(flight._HostTauri)
+@:structInit
+class ShortcutQueryBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var isRegistered:Accelerator->flight._internal._Promise<Bool>;
+
+  private function new(isRegistered:Accelerator->flight._internal._Promise<Bool>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.isRegistered = isRegistered;
+  }
+}
+#else
 typedef ShortcutQueryBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var isRegistered:Accelerator->flight._internal._Promise<Bool>; };
+#end

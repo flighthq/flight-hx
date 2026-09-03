@@ -4,4 +4,30 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Materials)
+@:structInit
+class SpecularPbrExtension {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var kind:String;
+  public var specular:Float;
+  public var specularColor:Float;
+  public var specularColorMap:Null<Texture>;
+  public var specularColorMapUvSet:PbrUvSet;
+  public var specularMap:Null<Texture>;
+  public var specularMapUvSet:PbrUvSet;
+
+  private function new(kind:String, specular:Float, specularColor:Float, specularColorMap:Null<Texture>, specularColorMapUvSet:PbrUvSet, specularMap:Null<Texture>, specularMapUvSet:PbrUvSet):Void {
+    this.__symbol__EntityRuntime = null;
+    this.kind = kind;
+    this.specular = specular;
+    this.specularColor = specularColor;
+    this.specularColorMap = specularColorMap;
+    this.specularColorMapUvSet = specularColorMapUvSet;
+    this.specularMap = specularMap;
+    this.specularMapUvSet = specularMapUvSet;
+  }
+}
+#else
 typedef SpecularPbrExtension = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var specular:Float; var specularColor:Float; var specularColorMap:Null<Texture>; var specularColorMapUvSet:PbrUvSet; var specularMap:Null<Texture>; var specularMapUvSet:PbrUvSet; };
+#end

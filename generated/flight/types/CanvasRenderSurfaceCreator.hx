@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+class CanvasRenderSurfaceCreator {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var createRenderSurface:Float->Float->Float->Null<flight._internal.dom.HTMLCanvasElement>;
+  public var destroyRenderSurface:flight._internal.dom.HTMLCanvasElement->Void;
+
+  private function new(createRenderSurface:Float->Float->Float->Null<flight._internal.dom.HTMLCanvasElement>, destroyRenderSurface:flight._internal.dom.HTMLCanvasElement->Void):Void {
+    this.__symbol__EntityRuntime = null;
+    this.createRenderSurface = createRenderSurface;
+    this.destroyRenderSurface = destroyRenderSurface;
+  }
+}
+#else
 typedef CanvasRenderSurfaceCreator = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var createRenderSurface:Float->Float->Float->Null<flight._internal.dom.HTMLCanvasElement>; var destroyRenderSurface:flight._internal.dom.HTMLCanvasElement->Void; };
+#end

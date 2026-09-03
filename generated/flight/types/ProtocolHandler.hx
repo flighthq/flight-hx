@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Protocol)
+@:structInit
+class ProtocolHandler {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onOpenUrl:Signal<String->Void>;
+
+  private function new(onOpenUrl:Signal<String->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onOpenUrl = onOpenUrl;
+  }
+}
+#else
 typedef ProtocolHandler = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onOpenUrl:Signal<String->Void>; };
+#end

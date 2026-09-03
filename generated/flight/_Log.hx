@@ -49,7 +49,7 @@ class _Log {
   }
 
   public static function clearLogChannelLevel(channel:String):Void {
-    ((cast _Log._channelLevels__log : flight._internal._Map<String, LogLevel>).delete_(channel));
+    ((cast _Log._channelLevels__log : flight._internal._Map<String, LogLevel>).delete_((cast channel)));
   }
 
   public static function clearLogChannelLevels():Void {
@@ -78,7 +78,7 @@ class _Log {
 
   public static function clearMemoryLogSink(handle:MemoryLogSink):Void {
     var state:Null<MemoryLogSinkState__log> = cast _Runtime.UNDEFINED;
-    state = ((cast _Log._memorySinkStates__log : flight._internal._WeakMap<MemoryLogSink, MemoryLogSinkState__log>).get(handle));
+    state = ((cast _Log._memorySinkStates__log : flight._internal._WeakMap<MemoryLogSink, MemoryLogSinkState__log>).get((cast handle)));
     if ((cast !_Runtime.truthy(state) : Bool)) { return; }
     _Runtime.setLength((cast state : MemoryLogSinkState__log).buf, 0.0);
     ((cast state : MemoryLogSinkState__log).head = 0.0);
@@ -97,7 +97,7 @@ class _Log {
     flush = (cast function():Void {
       var state:BufferedLogSinkState__log = cast _Runtime.UNDEFINED;
       var batch:Array<LogEntry> = cast _Runtime.UNDEFINED;
-      state = ((cast _Log._bufferedSinkStates__log : flight._internal._WeakMap<BufferedLogSink, BufferedLogSinkState__log>).get(handle));
+      state = ((cast _Log._bufferedSinkStates__log : flight._internal._WeakMap<BufferedLogSink, BufferedLogSinkState__log>).get((cast handle)));
       if ((cast _Runtime.strictEquals(_Runtime.field((cast state : BufferedLogSinkState__log).buf, 'length'), 0.0) : Bool)) { return; }
       batch = _Runtime.splice((cast state : BufferedLogSinkState__log).buf, Std.int(0.0), Std.int((cast state : BufferedLogSinkState__log).buf.length - Std.int(0.0)), []);
       for (entry in _Runtime.iterable(batch)) {
@@ -106,7 +106,7 @@ class _Log {
     });
     sink = function(entry:LogEntry):Void {
       var state:BufferedLogSinkState__log = cast _Runtime.UNDEFINED;
-      state = ((cast _Log._bufferedSinkStates__log : flight._internal._WeakMap<BufferedLogSink, BufferedLogSinkState__log>).get(handle));
+      state = ((cast _Log._bufferedSinkStates__log : flight._internal._WeakMap<BufferedLogSink, BufferedLogSinkState__log>).get((cast handle)));
       _Runtime.callProperty((cast state : BufferedLogSinkState__log).buf, 'push', cast ([{ level: entry.level, channel: entry.channel, data: entry.data }] : Array<Dynamic>));
       if ((cast ((cast _Runtime.field((cast state : BufferedLogSinkState__log).buf, 'length') : Float) >= (cast size : Float)) : Bool)) { flush(); }
     };
@@ -115,7 +115,7 @@ class _Log {
     if ((cast ((cast ((cast intervalMs : Float) > (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('setInterval'), 'undefined') : Bool)) : Bool)) {
       (timer = cast (_Runtime.setInterval(flush, intervalMs) : Dynamic));
     }
-    ((cast _Log._bufferedSinkStates__log : flight._internal._WeakMap<BufferedLogSink, BufferedLogSinkState__log>).set(handle, (cast { buf: cast ([] : Array<Dynamic>), timer: timer, flush: flush })));
+    ((cast _Log._bufferedSinkStates__log : flight._internal._WeakMap<BufferedLogSink, BufferedLogSinkState__log>).set((cast handle), (cast { buf: cast ([] : Array<Dynamic>), timer: timer, flush: flush })));
     return cast handle;
     return cast null;
   }
@@ -162,12 +162,12 @@ class _Log {
     formatter = _Runtime.coalesce((cast options : { @:optional var formatter:Null<LogFormatter>; }).formatter, function():Dynamic return cast (cast createJsonLogFormatter() : LogFormatter));
     sink = function(entry:LogEntry):Void {
       var state:Null<FileLogSinkState__log> = cast _Runtime.UNDEFINED;
-      state = ((cast _Log._fileLogSinkStates__log : flight._internal._WeakMap<FileLogSink, FileLogSinkState__log>).get(handle));
+      state = ((cast _Log._fileLogSinkStates__log : flight._internal._WeakMap<FileLogSink, FileLogSinkState__log>).get((cast handle)));
       if ((cast ((cast ((cast !_Runtime.truthy(state) : Bool) || (cast !_Runtime.strictEquals((cast state : FileLogSinkState__log).status, 'active') : Bool)) : Bool) || (cast _Runtime.strictEquals((cast state : FileLogSinkState__log).transport, null) : Bool)) : Bool)) { return; }
       (cast (cast state : FileLogSinkState__log).transport : LogTransport).write((cast ((cast formatter(({ final __callArgument24:Dynamic = entry; __callArgument24; })) : String) + '\n') : String));
     };
     handle = (cast _Runtime.objectFromPairs([{ key: EntityRuntimeKey, value: _Runtime.field(_Runtime, 'UNDEFINED') }, { key: 'sink', value: sink }]));
-    ((cast _Log._fileLogSinkStates__log : flight._internal._WeakMap<FileLogSink, FileLogSinkState__log>).set(handle, (cast { destroyPromise: null, status: 'active', transport: transport })));
+    ((cast _Log._fileLogSinkStates__log : flight._internal._WeakMap<FileLogSink, FileLogSinkState__log>).set((cast handle), (cast { destroyPromise: null, status: 'active', transport: transport })));
     return cast handle;
     return cast null;
   }
@@ -228,7 +228,7 @@ class _Log {
       }
     };
     handle = (cast { sink: sink });
-    ((cast _Log._memorySinkStates__log : flight._internal._WeakMap<MemoryLogSink, MemoryLogSinkState__log>).set(handle, (cast state)));
+    ((cast _Log._memorySinkStates__log : flight._internal._WeakMap<MemoryLogSink, MemoryLogSinkState__log>).set((cast handle), (cast state)));
     return cast handle;
     return cast null;
   }
@@ -257,9 +257,9 @@ class _Log {
         (windowStart = cast (now : Dynamic));
       }
       key = ((cast perChannel : Bool) ? (cast entry.channel : Dynamic) : (cast null : Dynamic));
-      current = _Runtime.coalesce(((cast counts : flight._internal._Map<Null<String>, Float>).get(key)), function():Dynamic return cast 0.0);
+      current = _Runtime.coalesce(((cast counts : flight._internal._Map<Null<String>, Float>).get((cast key))), function():Dynamic return cast 0.0);
       if ((cast ((cast current : Float) >= (cast maxPerInterval : Float)) : Bool)) { return; }
-      ((cast counts : flight._internal._Map<Null<String>, Float>).set(key, (cast (current + 1.0))));
+      ((cast counts : flight._internal._Map<Null<String>, Float>).set((cast key), (cast (current + 1.0))));
       target(({ final __callArgument32:Dynamic = entry; __callArgument32; }));
     };
     return cast { sink: sink };
@@ -305,7 +305,7 @@ class _Log {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var state:Null<FileLogSinkState__log> = cast _Runtime.UNDEFINED;
-        state = ((cast _Log._fileLogSinkStates__log : flight._internal._WeakMap<FileLogSink, FileLogSinkState__log>).get(handle));
+        state = ((cast _Log._fileLogSinkStates__log : flight._internal._WeakMap<FileLogSink, FileLogSinkState__log>).get((cast handle)));
         var __flowBranch36:Dynamic;
         if ((cast !_Runtime.truthy(state) : Bool)) {
           __flowBranch36 = flight._internal._Async.protect(function():Dynamic {
@@ -340,7 +340,7 @@ class _Log {
 
   public static function disposeLogSink(handle:BufferedLogSink):Void {
     var state:Null<BufferedLogSinkState__log> = cast _Runtime.UNDEFINED;
-    state = ((cast _Log._bufferedSinkStates__log : flight._internal._WeakMap<BufferedLogSink, BufferedLogSinkState__log>).get(handle));
+    state = ((cast _Log._bufferedSinkStates__log : flight._internal._WeakMap<BufferedLogSink, BufferedLogSinkState__log>).get((cast handle)));
     if ((cast !_Runtime.truthy(state) : Bool)) { return; }
     if ((cast !_Runtime.strictEquals((cast state : BufferedLogSinkState__log).timer, null) : Bool)) { _Runtime.clearInterval((cast state : BufferedLogSinkState__log).timer); }
     (cast state : BufferedLogSinkState__log).flush();
@@ -382,12 +382,12 @@ class _Log {
 
   public static function flushLogSink(handle:BufferedLogSink):Void {
     var state:Null<BufferedLogSinkState__log> = cast _Runtime.UNDEFINED;
-    state = ((cast _Log._bufferedSinkStates__log : flight._internal._WeakMap<BufferedLogSink, BufferedLogSinkState__log>).get(handle));
+    state = ((cast _Log._bufferedSinkStates__log : flight._internal._WeakMap<BufferedLogSink, BufferedLogSinkState__log>).get((cast handle)));
     if (_Runtime.truthy(state)) { (cast state : BufferedLogSinkState__log).flush(); }
   }
 
   public static function getLogChannelLevel(channel:String):Null<LogLevel> {
-    return cast _Runtime.coalesce(((cast _Log._channelLevels__log : flight._internal._Map<String, LogLevel>).get(channel)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _Log._channelLevels__log : flight._internal._Map<String, LogLevel>).get((cast channel))), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -411,7 +411,7 @@ class _Log {
     var __destructure3:Dynamic = cast _Runtime.UNDEFINED;
     var buf:Array<LogEntry> = cast _Runtime.UNDEFINED;
     var head:Float = cast _Runtime.UNDEFINED;
-    state = ((cast _Log._memorySinkStates__log : flight._internal._WeakMap<MemoryLogSink, MemoryLogSinkState__log>).get(handle));
+    state = ((cast _Log._memorySinkStates__log : flight._internal._WeakMap<MemoryLogSink, MemoryLogSinkState__log>).get((cast handle)));
     if ((cast !_Runtime.truthy(state) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     __destructure3 = state;
     buf = _Runtime.field(__destructure3, 'buf');
@@ -499,8 +499,8 @@ class _Log {
 
   public static function logOnce(key:String, level:LogLevel, data:flight._internal._Union2<LogData, LogDataProvider>, ?channel:Null<String>):Bool {
     if (channel == null) channel = cast (null : Dynamic);
-    if ((cast ((cast _Log._onceKeys__log : flight._internal._Set<String>).has(key)) : Bool)) { return cast false; }
-    ((cast _Log._onceKeys__log : flight._internal._Set<String>).add(key));
+    if ((cast ((cast _Log._onceKeys__log : flight._internal._Set<String>).has((cast key))) : Bool)) { return cast false; }
+    ((cast _Log._onceKeys__log : flight._internal._Set<String>).add((cast key)));
     log(({ final __callArgument191:Dynamic = level; __callArgument191; }), ({ final __callArgument192:Dynamic = data; __callArgument192; }), ({ final __callArgument193:Dynamic = channel; __callArgument193; }));
     return cast true;
     return cast null;
@@ -556,12 +556,12 @@ class _Log {
   }
 
   public static function parseLogLevel(name:String):Null<LogLevel> {
-    return cast _Runtime.coalesce(((cast _Log._levelByName__log : flight._internal._Map<String, LogLevel>).get(_Runtime.callProperty(name, 'toLowerCase', cast ([] : Array<Dynamic>)))), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast _Log._levelByName__log : flight._internal._Map<String, LogLevel>).get((cast _Runtime.callProperty(name, 'toLowerCase', cast ([] : Array<Dynamic>))))), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function registerLogSerializer(kind:String, fn:flight._internal._Any->flight._internal._Record<String, flight._internal._Any>):Void {
-    ((cast _Log._serializers__log : flight._internal._Map<String, flight._internal._Any->flight._internal._Record<String, flight._internal._Any>>).set(kind, (cast fn)));
+    ((cast _Log._serializers__log : flight._internal._Map<String, flight._internal._Any->flight._internal._Record<String, flight._internal._Any>>).set((cast kind), (cast fn)));
   }
 
   public static function removeLogSink(sink:LogSink):Bool {
@@ -584,7 +584,7 @@ class _Log {
   }
 
   public static function setLogChannelLevel(channel:String, level:LogLevel):Void {
-    ((cast _Log._channelLevels__log : flight._internal._Map<String, LogLevel>).set(channel, (cast level)));
+    ((cast _Log._channelLevels__log : flight._internal._Map<String, LogLevel>).set((cast channel), (cast level)));
   }
 
   public static function setLogConsoleLevel(level:LogLevel):Void {
@@ -699,7 +699,7 @@ class _Log {
       var value:flight._internal._Any = flight._internal._StaticIndex.readArray(__iteration10, 1.0);
       if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(value, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool)) : Bool) && (cast _Runtime.hasField(value, '__kind') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue((cast (cast value : flight._internal._Record<String, flight._internal._Any>) : { var __kind:flight._internal._Any; }).__kind), 'string') : Bool)) : Bool)) {
         var kind:String = (cast (cast (cast value : flight._internal._Record<String, flight._internal._Any>) : { var __kind:flight._internal._Any; }).__kind : String);
-        var fn:Null<flight._internal._Any->flight._internal._Record<String, flight._internal._Any>> = ((cast _Log._serializers__log : flight._internal._Map<String, flight._internal._Any->flight._internal._Record<String, flight._internal._Any>>).get(kind));
+        var fn:Null<flight._internal._Any->flight._internal._Record<String, flight._internal._Any>> = ((cast _Log._serializers__log : flight._internal._Map<String, flight._internal._Any->flight._internal._Record<String, flight._internal._Any>>).get((cast kind)));
         _Runtime.setIndex(result, key, _Runtime.select(fn, function():Dynamic return cast (cast fn((cast value : flight._internal._Any)) : flight._internal._Record<String, flight._internal._Any>), function():Dynamic return cast value));
       } else {
         _Runtime.setIndex(result, key, value);
@@ -773,7 +773,7 @@ class _Log {
   public static function _passesLevelGate__log(level:LogLevel, channel:Null<String>):Bool {
     var gate:LogLevel = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(_Log._sinks__log, 'length'), 0.0) : Bool) && (cast _Runtime.strictEquals(_Log._logSignals__log, null) : Bool)) : Bool)) { return cast false; }
-    gate = ((cast ((cast !_Runtime.strictEquals(channel, null) : Bool) && (cast ((cast _Log._channelLevels__log : flight._internal._Map<String, LogLevel>).has(channel)) : Bool)) : Bool) ? (cast ((cast _Log._channelLevels__log : flight._internal._Map<String, LogLevel>).get(channel)) : Dynamic) : (cast _Log._level__log : Dynamic));
+    gate = ((cast ((cast !_Runtime.strictEquals(channel, null) : Bool) && (cast ((cast _Log._channelLevels__log : flight._internal._Map<String, LogLevel>).has((cast channel))) : Bool)) : Bool) ? (cast ((cast _Log._channelLevels__log : flight._internal._Map<String, LogLevel>).get((cast channel))) : Dynamic) : (cast _Log._level__log : Dynamic));
     return cast ((cast ((cast level : Float) <= (cast gate : Float)) : Bool) && (cast !_Runtime.strictEquals(level, LogLevel.None) : Bool));
     return cast null;
   }

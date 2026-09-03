@@ -172,7 +172,7 @@ class _Mesh {
   public static function createMeshGeometryRuntime__meshGeometry(fields:{ var bounds:Null<Aabb>; var indices:Null<flight._internal._Union2<flight._internal._UInt16Array, flight._internal._UInt32Array>>; var layout:VertexAttributeLayout; var subsets:Array<MeshSubset>; var topology:PrimitiveTopology; var version:Float; var vertices:flight._internal._Float32Array; }):MeshGeometry {
     var geometry:MeshGeometry = cast _Runtime.UNDEFINED;
     var runtime:MeshGeometryRuntime = cast _Runtime.UNDEFINED;
-    geometry = (cast (cast createEntity((cast ({ bounds: (cast fields : { var version:Float; var vertices:flight._internal._Float32Array; var bounds:Null<Aabb>; var indices:Null<flight._internal._Union2<flight._internal._UInt32Array, flight._internal._UInt16Array>>; var layout:VertexAttributeLayout; var subsets:Array<MeshSubset>; var topology:PrimitiveTopology; }).bounds, indices: (cast fields : { var version:Float; var vertices:flight._internal._Float32Array; var bounds:Null<Aabb>; var indices:Null<flight._internal._Union2<flight._internal._UInt32Array, flight._internal._UInt16Array>>; var layout:VertexAttributeLayout; var subsets:Array<MeshSubset>; var topology:PrimitiveTopology; }).indices, layout: (cast fields : { var version:Float; var vertices:flight._internal._Float32Array; var bounds:Null<Aabb>; var indices:Null<flight._internal._Union2<flight._internal._UInt32Array, flight._internal._UInt16Array>>; var layout:VertexAttributeLayout; var subsets:Array<MeshSubset>; var topology:PrimitiveTopology; }).layout, subsets: (cast fields : { var version:Float; var vertices:flight._internal._Float32Array; var bounds:Null<Aabb>; var indices:Null<flight._internal._Union2<flight._internal._UInt32Array, flight._internal._UInt16Array>>; var layout:VertexAttributeLayout; var subsets:Array<MeshSubset>; var topology:PrimitiveTopology; }).subsets, topology: (cast fields : { var version:Float; var vertices:flight._internal._Float32Array; var bounds:Null<Aabb>; var indices:Null<flight._internal._Union2<flight._internal._UInt32Array, flight._internal._UInt16Array>>; var layout:VertexAttributeLayout; var subsets:Array<MeshSubset>; var topology:PrimitiveTopology; }).topology, version: (cast fields : { var version:Float; var vertices:flight._internal._Float32Array; var bounds:Null<Aabb>; var indices:Null<flight._internal._Union2<flight._internal._UInt32Array, flight._internal._UInt16Array>>; var layout:VertexAttributeLayout; var subsets:Array<MeshSubset>; var topology:PrimitiveTopology; }).version, vertices: (cast fields : { var version:Float; var vertices:flight._internal._Float32Array; var bounds:Null<Aabb>; var indices:Null<flight._internal._Union2<flight._internal._UInt32Array, flight._internal._UInt16Array>>; var layout:VertexAttributeLayout; var subsets:Array<MeshSubset>; var topology:PrimitiveTopology; }).vertices } : MeshGeometry) : Dynamic)) : MeshGeometry) : MeshGeometry);
+    geometry = (cast (cast createEntity((cast ({ bounds: (cast (cast fields : { var version:Float; var vertices:flight._internal._Float32Array; var bounds:Null<Aabb>; var indices:Null<flight._internal._Union2<flight._internal._UInt32Array, flight._internal._UInt16Array>>; var layout:VertexAttributeLayout; var subsets:Array<MeshSubset>; var topology:PrimitiveTopology; }).bounds : Dynamic), indices: (cast (cast fields : { var version:Float; var vertices:flight._internal._Float32Array; var bounds:Null<Aabb>; var indices:Null<flight._internal._Union2<flight._internal._UInt32Array, flight._internal._UInt16Array>>; var layout:VertexAttributeLayout; var subsets:Array<MeshSubset>; var topology:PrimitiveTopology; }).indices : Dynamic), layout: (cast (cast fields : { var version:Float; var vertices:flight._internal._Float32Array; var bounds:Null<Aabb>; var indices:Null<flight._internal._Union2<flight._internal._UInt32Array, flight._internal._UInt16Array>>; var layout:VertexAttributeLayout; var subsets:Array<MeshSubset>; var topology:PrimitiveTopology; }).layout : Dynamic), subsets: (cast (cast fields : { var version:Float; var vertices:flight._internal._Float32Array; var bounds:Null<Aabb>; var indices:Null<flight._internal._Union2<flight._internal._UInt32Array, flight._internal._UInt16Array>>; var layout:VertexAttributeLayout; var subsets:Array<MeshSubset>; var topology:PrimitiveTopology; }).subsets : Dynamic), topology: (cast (cast fields : { var version:Float; var vertices:flight._internal._Float32Array; var bounds:Null<Aabb>; var indices:Null<flight._internal._Union2<flight._internal._UInt32Array, flight._internal._UInt16Array>>; var layout:VertexAttributeLayout; var subsets:Array<MeshSubset>; var topology:PrimitiveTopology; }).topology : Dynamic), version: (cast (cast fields : { var version:Float; var vertices:flight._internal._Float32Array; var bounds:Null<Aabb>; var indices:Null<flight._internal._Union2<flight._internal._UInt32Array, flight._internal._UInt16Array>>; var layout:VertexAttributeLayout; var subsets:Array<MeshSubset>; var topology:PrimitiveTopology; }).version : Dynamic), vertices: (cast (cast fields : { var version:Float; var vertices:flight._internal._Float32Array; var bounds:Null<Aabb>; var indices:Null<flight._internal._Union2<flight._internal._UInt32Array, flight._internal._UInt16Array>>; var layout:VertexAttributeLayout; var subsets:Array<MeshSubset>; var topology:PrimitiveTopology; }).vertices : Dynamic) } : MeshGeometry) : Dynamic)) : MeshGeometry) : MeshGeometry);
     runtime = (cast { attributeDataView: null, binding: null, boundsVersion: ((cast !_Runtime.strictEquals((cast fields : { var version:Float; var vertices:flight._internal._Float32Array; var bounds:Null<Aabb>; var indices:Null<flight._internal._Union2<flight._internal._UInt32Array, flight._internal._UInt16Array>>; var layout:VertexAttributeLayout; var subsets:Array<MeshSubset>; var topology:PrimitiveTopology; }).bounds, null) : Bool) ? (cast (cast fields : { var version:Float; var vertices:flight._internal._Float32Array; var bounds:Null<Aabb>; var indices:Null<flight._internal._Union2<flight._internal._UInt32Array, flight._internal._UInt16Array>>; var layout:VertexAttributeLayout; var subsets:Array<MeshSubset>; var topology:PrimitiveTopology; }).version : Dynamic) : (cast -1.0 : Dynamic)), morphBindPose: null, morphBlendedWeights: null, skinBindPose: null, webglData: null, webgpuData: null });
     _Runtime.setIndex(geometry, EntityRuntimeKey, runtime);
     return cast geometry;
@@ -811,7 +811,7 @@ class _Mesh {
       var len:Float = cast _Runtime.UNDEFINED;
       var idx:Float = cast _Runtime.UNDEFINED;
       key = ((cast ((cast a : Float) < (cast b : Float)) : Bool) ? (cast '' + Std.string(a) + '_' + Std.string(b) + '' : Dynamic) : (cast '' + Std.string(b) + '_' + Std.string(a) + '' : Dynamic));
-      cached = ((cast midpointCache : flight._internal._Map<String, Float>).get(key));
+      cached = ((cast midpointCache : flight._internal._Map<String, Float>).get((cast key)));
       if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
       va = flight._internal._StaticIndex.readArray(verts, a);
       vb = flight._internal._StaticIndex.readArray(verts, b);
@@ -824,7 +824,7 @@ class _Mesh {
       (mz = cast ((mz / len) : Dynamic));
       idx = _Runtime.field(verts, 'length');
       _Runtime.callProperty(verts, 'push', cast ([cast ([mx, my, mz] : Array<Dynamic>)] : Array<Dynamic>));
-      ((cast midpointCache : flight._internal._Map<String, Float>).set(key, (cast idx)));
+      ((cast midpointCache : flight._internal._Map<String, Float>).set((cast key), (cast idx)));
       return cast idx;
       return cast _Runtime.UNDEFINED;
     });
@@ -981,7 +981,7 @@ class _Mesh {
         var mlen:Float = cast _Runtime.UNDEFINED;
         var idx:Float = cast _Runtime.UNDEFINED;
         key = ((cast ((cast a : Float) < (cast b : Float)) : Bool) ? (cast '' + Std.string(a) + '_' + Std.string(b) + '' : Dynamic) : (cast '' + Std.string(b) + '_' + Std.string(a) + '' : Dynamic));
-        hit = ((cast midCache : flight._internal._Map<String, Float>).get(key));
+        hit = ((cast midCache : flight._internal._Map<String, Float>).get((cast key)));
         if ((cast !_Runtime.strictEquals(hit, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast hit; }
         va = flight._internal._StaticIndex.readArray(verts, a);
         vb = flight._internal._StaticIndex.readArray(verts, b);
@@ -994,7 +994,7 @@ class _Mesh {
         (mz = cast ((mz / mlen) : Dynamic));
         idx = _Runtime.field(verts, 'length');
         _Runtime.callProperty(verts, 'push', cast ([cast ([mx, my, mz] : Array<Dynamic>)] : Array<Dynamic>));
-        ((cast midCache : flight._internal._Map<String, Float>).set(key, (cast idx)));
+        ((cast midCache : flight._internal._Map<String, Float>).set((cast key), (cast idx)));
         return cast idx;
         return cast _Runtime.UNDEFINED;
       });
@@ -1749,11 +1749,11 @@ class _Mesh {
       while ((cast ((cast vertex : Float) < (cast vertexCount : Float)) : Bool)) {
         var position:Float = ((vertex * floatsPerVertex) + _Mesh.POSITION_OFFSET__meshGeometryCompute);
         var hash:Float = (cast _Mesh.hashMeshGeometryPosition__meshGeometryCompute((cast flight._internal._StaticIndex.readUint32ArrayTyped((cast bits : flight._internal._UInt32Array), (cast position : Float)) : Float), (cast flight._internal._StaticIndex.readUint32ArrayTyped((cast bits : flight._internal._UInt32Array), (cast (position + 1.0) : Float)) : Float), (cast flight._internal._StaticIndex.readUint32ArrayTyped((cast bits : flight._internal._UInt32Array), (cast (position + 2.0) : Float)) : Float)) : Float);
-        var bucket:Null<Array<Float>> = ((cast buckets : flight._internal._Map<Float, Array<Float>>).get(hash));
+        var bucket:Null<Array<Float>> = ((cast buckets : flight._internal._Map<Float, Array<Float>>).get((cast hash)));
         var representative:Float = vertex;
         if ((cast _Runtime.strictEquals(bucket, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           (bucket = cast (cast ([] : Array<Dynamic>) : Dynamic));
-          ((cast buckets : flight._internal._Map<Float, Array<Float>>).set(hash, (cast bucket)));
+          ((cast buckets : flight._internal._Map<Float, Array<Float>>).set((cast hash), (cast bucket)));
         } else {
           for (candidate in _Runtime.iterable(bucket)) {
             var candidatePosition:Float = ((candidate * floatsPerVertex) + _Mesh.POSITION_OFFSET__meshGeometryCompute);
@@ -2353,7 +2353,7 @@ class _Mesh {
       while ((cast ((cast vertex : Float) < (cast vertexCount : Float)) : Bool)) {
         var sourceOffset:Float = (vertex * stride);
         var hash:Float = (cast _Mesh.hashVertexRecord__meshGeometryIndex(({ final __callArgument412:Dynamic = sourceBytes; __callArgument412; }), (cast sourceOffset : Float), (cast stride : Float)) : Float);
-        var candidates:Null<Array<Float>> = ((cast candidatesByHash : flight._internal._Map<Float, Array<Float>>).get(hash));
+        var candidates:Null<Array<Float>> = ((cast candidatesByHash : flight._internal._Map<Float, Array<Float>>).get((cast hash)));
         var uniqueIndex:Float = -1.0;
         if ((cast !_Runtime.strictEquals(candidates, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           {
@@ -2371,7 +2371,7 @@ class _Mesh {
         if ((cast ((cast uniqueIndex : Float) < (cast 0.0 : Float)) : Bool)) {
           (uniqueIndex = cast (uniqueCount++ : Dynamic));
           (cast uniqueBytes : flight._internal._UInt8Array).set((cast sourceBytes : flight._internal._UInt8Array).subarray(Std.int(sourceOffset), Std.int((sourceOffset + stride))), Std.int((uniqueIndex * stride)));
-          if ((cast _Runtime.strictEquals(candidates, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast candidatesByHash : flight._internal._Map<Float, Array<Float>>).set(hash, (cast cast ([uniqueIndex] : Array<Dynamic>)))); } else { _Runtime.callProperty(candidates, 'push', cast ([uniqueIndex] : Array<Dynamic>)); }
+          if ((cast _Runtime.strictEquals(candidates, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast candidatesByHash : flight._internal._Map<Float, Array<Float>>).set((cast hash), (cast cast ([uniqueIndex] : Array<Dynamic>)))); } else { _Runtime.callProperty(candidates, 'push', cast ([uniqueIndex] : Array<Dynamic>)); }
         }
         flight._internal._StaticIndex.writeUint32ArrayTyped((cast sourceToUnique : flight._internal._UInt32Array), (cast vertex : Float), (cast uniqueIndex : Float));
         vertex++;

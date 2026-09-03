@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Font)
+@:structInit
+class Font {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var name:String;
+
+  private function new(name:String):Void {
+    this.__symbol__EntityRuntime = null;
+    this.name = name;
+  }
+}
+#else
 typedef Font = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var name:String; };
+#end

@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Notification)
+@:structInit
+class ScheduledNotification {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var id:String;
+  public var request:NotificationRequest;
+  public var schedule:NotificationSchedule;
+
+  private function new(id:String, request:NotificationRequest, schedule:NotificationSchedule):Void {
+    this.__symbol__EntityRuntime = null;
+    this.id = id;
+    this.request = request;
+    this.schedule = schedule;
+  }
+}
+#else
 typedef ScheduledNotification = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var id:String; var request:NotificationRequest; var schedule:NotificationSchedule; };
+#end

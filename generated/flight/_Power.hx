@@ -98,11 +98,11 @@ class _Power {
       }, _Power._idlePollingIntervalMs__power);
       _Runtime.callProperty(teardowns, 'push', cast ([function():Void { _Runtime.clearInterval(idleIntervalId); }] : Array<Dynamic>));
     }
-    ((cast _Power._subscriptions__power : flight._internal._WeakMap<Power, Array<Void->Void>>).set(power, (cast teardowns)));
+    ((cast _Power._subscriptions__power : flight._internal._WeakMap<Power, Array<Void->Void>>).set((cast power), (cast teardowns)));
   }
 
   public static function createPower():Power {
-    return cast (cast createEntity(({ final __callArgument9:Dynamic = ({ onChange: null, onCharging: null, onDischarging: null, onIdleStateChange: null, onLockScreen: null, onResume: null, onSuspend: null, onThermalStateChange: null, onUnlockScreen: null } : Power); __callArgument9; })) : Power);
+    return cast (cast createEntity(({ final __callArgument9:Dynamic = ({ onChange: (cast null : Dynamic), onCharging: (cast null : Dynamic), onDischarging: (cast null : Dynamic), onIdleStateChange: (cast null : Dynamic), onLockScreen: (cast null : Dynamic), onResume: (cast null : Dynamic), onSuspend: (cast null : Dynamic), onThermalStateChange: (cast null : Dynamic), onUnlockScreen: (cast null : Dynamic) } : Power); __callArgument9; })) : Power);
     return cast null;
   }
 
@@ -112,7 +112,7 @@ class _Power {
     pending = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
     for (host in _Runtime.iterable(hosts)) {
       var provider:PowerKeepAwakeBackend = (cast (cast host : HasPowerKeepAwake).power : { var keepAwake:PowerKeepAwakeBackend; }).keepAwake;
-      if ((cast !(cast ((cast _Power._destroyedKeepAwake__power : flight._internal._WeakSet<PowerKeepAwakeBackend>).has(provider)) : Bool) : Bool)) { ((cast pending : flight._internal._Set<PowerKeepAwakeBackend>).add(provider)); }
+      if ((cast !(cast ((cast _Power._destroyedKeepAwake__power : flight._internal._WeakSet<PowerKeepAwakeBackend>).has((cast provider))) : Bool) : Bool)) { ((cast pending : flight._internal._Set<PowerKeepAwakeBackend>).add((cast provider))); }
     }
     failure = null;
     for (provider in _Runtime.iterable(pending)) {
@@ -122,7 +122,7 @@ class _Power {
         (failure ??= error);
         continue;
       }
-      ((cast _Power._destroyedKeepAwake__power : flight._internal._WeakSet<PowerKeepAwakeBackend>).add(provider));
+      ((cast _Power._destroyedKeepAwake__power : flight._internal._WeakSet<PowerKeepAwakeBackend>).add((cast provider)));
     }
     if ((cast !_Runtime.strictEquals(failure, null) : Bool)) { _Runtime.throwValue(failure); }
   }
@@ -130,9 +130,9 @@ class _Power {
   public static function detachPower(power:Power):Void {
     var teardowns:Null<Array<Void->Void>> = cast _Runtime.UNDEFINED;
     var failure:flight._internal._Any = cast _Runtime.UNDEFINED;
-    teardowns = ((cast _Power._subscriptions__power : flight._internal._WeakMap<Power, Array<Void->Void>>).get(power));
+    teardowns = ((cast _Power._subscriptions__power : flight._internal._WeakMap<Power, Array<Void->Void>>).get((cast power)));
     if ((cast _Runtime.strictEquals(teardowns, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    ((cast _Power._subscriptions__power : flight._internal._WeakMap<Power, Array<Void->Void>>).delete_(power));
+    ((cast _Power._subscriptions__power : flight._internal._WeakMap<Power, Array<Void->Void>>).delete_((cast power)));
     failure = null;
     for (teardown in _Runtime.iterable(teardowns)) {
       try {

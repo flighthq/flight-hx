@@ -4,4 +4,28 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Scene2D)
+@:structInit
+class Scene2D {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var align:ViewportAlign;
+  public var color:Null<Float>;
+  public var root:Node2D;
+  public var scaleMode:ViewportScaleMode;
+  public var scene2dHeight:Float;
+  public var scene2dWidth:Float;
+
+  private function new(align:ViewportAlign, color:Null<Float>, root:Node2D, scaleMode:ViewportScaleMode, scene2dHeight:Float, scene2dWidth:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.align = align;
+    this.color = color;
+    this.root = root;
+    this.scaleMode = scaleMode;
+    this.scene2dHeight = scene2dHeight;
+    this.scene2dWidth = scene2dWidth;
+  }
+}
+#else
 typedef Scene2D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var align:ViewportAlign; var color:Null<Float>; var root:Node2D; var scaleMode:ViewportScaleMode; var scene2dHeight:Float; var scene2dWidth:Float; };
+#end

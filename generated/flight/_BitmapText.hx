@@ -295,7 +295,7 @@ class _BitmapText {
     var image:Null<TextureSource> = cast _Runtime.UNDEFINED;
     var pageData:BitmapTextPage = cast _Runtime.UNDEFINED;
     var context:BitmapTextPageContext__updateBitmapText = cast _Runtime.UNDEFINED;
-    cached = ((cast pages : flight._internal._Map<Float, BitmapTextPageContext__updateBitmapText>).get(page));
+    cached = ((cast pages : flight._internal._Map<Float, BitmapTextPageContext__updateBitmapText>).get((cast page)));
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
     image = (cast glyphSource : GlyphSource).getGlyphAtlasImage(({ final __callArgument60:Dynamic = page; __callArgument60; }));
     if ((cast _Runtime.strictEquals(image, null) : Bool)) { return cast null; }
@@ -309,7 +309,7 @@ class _BitmapText {
       setTextureSource(({ final __callArgument61:Dynamic = (cast pageData.atlas : { var texture:Null<Texture2D>; }).texture; __callArgument61; }), (cast image : Dynamic));
     }
     context = (cast { page: pageData, regionByCodepoint: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []) });
-    ((cast pages : flight._internal._Map<Float, BitmapTextPageContext__updateBitmapText>).set(page, (cast context)));
+    ((cast pages : flight._internal._Map<Float, BitmapTextPageContext__updateBitmapText>).set((cast page), (cast context)));
     return cast context;
     return cast null;
   }
@@ -410,11 +410,11 @@ class _BitmapText {
               if ((cast _Runtime.strictEquals(context, null) : Bool)) { continue; }
               var quadX:Float = ((penX + (cast glyph : BitmapTextGlyph__updateBitmapText).penWithinWord) + entry.bearingX);
               var quadY:Float = (baselineY - entry.bearingY);
-              var regionId:Null<Float> = ((cast (cast context : BitmapTextPageContext__updateBitmapText).regionByCodepoint : flight._internal._Map<Float, Float>).get((cast glyph : BitmapTextGlyph__updateBitmapText).codepoint));
+              var regionId:Null<Float> = ((cast (cast context : BitmapTextPageContext__updateBitmapText).regionByCodepoint : flight._internal._Map<Float, Float>).get((cast (cast glyph : BitmapTextGlyph__updateBitmapText).codepoint)));
               if ((cast _Runtime.strictEquals(regionId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
                 (#if js _Runtime.callValue(addTextureAtlasRegion, cast ([(cast (cast context : BitmapTextPageContext__updateBitmapText).page : { var atlas:TextureAtlas; }).atlas, (cast entry.x : Float), (cast entry.y : Float), (cast entry.width : Float), (cast entry.height : Float)] : Array<Dynamic>)) #else addTextureAtlasRegion((cast (cast context : BitmapTextPageContext__updateBitmapText).page : { var atlas:TextureAtlas; }).atlas, (cast entry.x : Float), (cast entry.y : Float), (cast entry.width : Float), (cast entry.height : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
                 (regionId = cast (_Runtime.subtractNumbers(_Runtime.field((cast (cast (cast context : BitmapTextPageContext__updateBitmapText).page : { var atlas:TextureAtlas; }).atlas : { var regions:Array<TextureAtlasRegion>; }).regions, 'length'), 1.0) : Dynamic));
-                ((cast (cast context : BitmapTextPageContext__updateBitmapText).regionByCodepoint : flight._internal._Map<Float, Float>).set((cast glyph : BitmapTextGlyph__updateBitmapText).codepoint, (cast regionId)));
+                ((cast (cast context : BitmapTextPageContext__updateBitmapText).regionByCodepoint : flight._internal._Map<Float, Float>).set((cast (cast glyph : BitmapTextGlyph__updateBitmapText).codepoint), (cast regionId)));
               }
               _BitmapText.appendBitmapTextPageQuad__updateBitmapText((cast context : BitmapTextPageContext__updateBitmapText).page, (cast regionId : Float), (cast quadX : Float), (cast quadY : Float));
               if ((cast ((cast quadX : Float) < (cast minX : Float)) : Bool)) { (minX = cast (quadX : Dynamic)); }

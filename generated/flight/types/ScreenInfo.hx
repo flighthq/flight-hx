@@ -4,4 +4,67 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:allow(flight._Screen)
+@:structInit
+class ScreenInfo {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var id:Float;
+  public var x:Float;
+  public var y:Float;
+  public var width:Float;
+  public var height:Float;
+  public var workWidth:Float;
+  public var workHeight:Float;
+  public var scaleFactor:Float;
+  public var isPrimary:Bool;
+  public var rotation:Float;
+  public var orientation:ScreenOrientation;
+  public var refreshRate:Float;
+  public var colorDepth:Float;
+  public var pixelDepth:Float;
+  public var physicalWidth:Float;
+  public var physicalHeight:Float;
+  public var isHdr:Bool;
+  public var colorSpace:ScreenColorSpace;
+  public var maxLuminance:Float;
+  public var depthPerComponent:Float;
+  public var dpi:Float;
+  public var label:String;
+  public var internal:Bool;
+  public var touchSupport:String;
+  public var monochrome:Bool;
+
+  private function new(id:Float, x:Float, y:Float, width:Float, height:Float, workWidth:Float, workHeight:Float, scaleFactor:Float, isPrimary:Bool, rotation:Float, orientation:ScreenOrientation, refreshRate:Float, colorDepth:Float, pixelDepth:Float, physicalWidth:Float, physicalHeight:Float, isHdr:Bool, colorSpace:ScreenColorSpace, maxLuminance:Float, depthPerComponent:Float, dpi:Float, label:String, internal:Bool, touchSupport:String, monochrome:Bool):Void {
+    this.__symbol__EntityRuntime = null;
+    this.id = id;
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.workWidth = workWidth;
+    this.workHeight = workHeight;
+    this.scaleFactor = scaleFactor;
+    this.isPrimary = isPrimary;
+    this.rotation = rotation;
+    this.orientation = orientation;
+    this.refreshRate = refreshRate;
+    this.colorDepth = colorDepth;
+    this.pixelDepth = pixelDepth;
+    this.physicalWidth = physicalWidth;
+    this.physicalHeight = physicalHeight;
+    this.isHdr = isHdr;
+    this.colorSpace = colorSpace;
+    this.maxLuminance = maxLuminance;
+    this.depthPerComponent = depthPerComponent;
+    this.dpi = dpi;
+    this.label = label;
+    this.internal = internal;
+    this.touchSupport = touchSupport;
+    this.monochrome = monochrome;
+  }
+}
+#else
 typedef ScreenInfo = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var id:Float; var x:Float; var y:Float; var width:Float; var height:Float; var workWidth:Float; var workHeight:Float; var scaleFactor:Float; var isPrimary:Bool; var rotation:Float; var orientation:ScreenOrientation; var refreshRate:Float; var colorDepth:Float; var pixelDepth:Float; var physicalWidth:Float; var physicalHeight:Float; var isHdr:Bool; var colorSpace:ScreenColorSpace; var maxLuminance:Float; var depthPerComponent:Float; var dpi:Float; var label:String; var internal:Bool; var touchSupport:String; var monochrome:Bool; };
+#end

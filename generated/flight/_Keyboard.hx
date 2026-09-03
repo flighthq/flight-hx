@@ -94,7 +94,7 @@ class _Keyboard {
             __flowBranch9 = flight._internal._Async.flowNormal();
           }
           return flight._internal._Async.continueFlow(__flowBranch9, function():Dynamic {
-            ((cast _Keyboard._subscriptions__keyboard : flight._internal._WeakMap<SoftKeyboard, Void->Void>).set(keyboard, (cast (cast subscription : SoftKeyboardChangeSubscription).unsubscribe)));
+            ((cast _Keyboard._subscriptions__keyboard : flight._internal._WeakMap<SoftKeyboard, Void->Void>).set((cast keyboard), (cast (cast subscription : SoftKeyboardChangeSubscription).unsubscribe)));
             return flight._internal._Async.flowReturn('ok');
           });
         });
@@ -103,16 +103,16 @@ class _Keyboard {
   }
 
   public static function createSoftKeyboard():{ >SoftKeyboard, >Entity, } {
-    return cast (cast createEntity((cast ({ onShow: (cast createSignal() : Signal<Float->Void>), onHide: (cast createSignal() : Signal<Void->Void>), onResize: (cast createSignal() : Signal<Float->Void>) } : EntityShapeL51C23__keyboard) : Dynamic)) : EntityShapeL51C23__keyboard);
+    return cast (cast createEntity((cast ({ onShow: (cast (cast createSignal() : Signal<Float->Void>) : Dynamic), onHide: (cast (cast createSignal() : Signal<Void->Void>) : Dynamic), onResize: (cast (cast createSignal() : Signal<Float->Void>) : Dynamic) } : EntityShapeL51C23__keyboard) : Dynamic)) : EntityShapeL51C23__keyboard);
     return cast null;
   }
 
   public static function detachSoftKeyboard(keyboard:SoftKeyboard):Void {
     var unsubscribe:Null<Void->Void> = cast _Runtime.UNDEFINED;
-    unsubscribe = ((cast _Keyboard._subscriptions__keyboard : flight._internal._WeakMap<SoftKeyboard, Void->Void>).get(keyboard));
+    unsubscribe = ((cast _Keyboard._subscriptions__keyboard : flight._internal._WeakMap<SoftKeyboard, Void->Void>).get((cast keyboard)));
     if ((cast !_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       unsubscribe();
-      ((cast _Keyboard._subscriptions__keyboard : flight._internal._WeakMap<SoftKeyboard, Void->Void>).delete_(keyboard));
+      ((cast _Keyboard._subscriptions__keyboard : flight._internal._WeakMap<SoftKeyboard, Void->Void>).delete_((cast keyboard)));
     }
   }
 

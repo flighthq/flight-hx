@@ -4,4 +4,46 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._TextureAtlas)
+@:structInit
+class TextureAtlasRegion {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var height:Float;
+  public var id:Float;
+  public var name:Null<String>;
+  public var originalHeight:Null<Float>;
+  public var originalWidth:Null<Float>;
+  public var pageName:Null<String>;
+  public var pivotX:Null<Float>;
+  public var pivotY:Null<Float>;
+  public var rotated:Bool;
+  public var sourceX:Float;
+  public var sourceY:Float;
+  public var trimmed:Bool;
+  public var x:Float;
+  public var y:Float;
+  public var width:Float;
+
+  private function new(height:Float, id:Float, name:Null<String>, originalHeight:Null<Float>, originalWidth:Null<Float>, pageName:Null<String>, pivotX:Null<Float>, pivotY:Null<Float>, rotated:Bool, sourceX:Float, sourceY:Float, trimmed:Bool, x:Float, y:Float, width:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.height = height;
+    this.id = id;
+    this.name = name;
+    this.originalHeight = originalHeight;
+    this.originalWidth = originalWidth;
+    this.pageName = pageName;
+    this.pivotX = pivotX;
+    this.pivotY = pivotY;
+    this.rotated = rotated;
+    this.sourceX = sourceX;
+    this.sourceY = sourceY;
+    this.trimmed = trimmed;
+    this.x = x;
+    this.y = y;
+    this.width = width;
+  }
+}
+#else
 typedef TextureAtlasRegion = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var height:Float; var id:Float; var name:Null<String>; var originalHeight:Null<Float>; var originalWidth:Null<Float>; var pageName:Null<String>; var pivotX:Null<Float>; var pivotY:Null<Float>; var rotated:Bool; var sourceX:Float; var sourceY:Float; var trimmed:Bool; var x:Float; var y:Float; var width:Float; };
+#end

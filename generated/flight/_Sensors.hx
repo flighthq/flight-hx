@@ -85,7 +85,7 @@ class _Sensors {
     unsubscribeQuaternion = (cast backend : SensorsBackend).subscribeQuaternion(({ final __callArgument11:Dynamic = function(reading:QuaternionReading):Void {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[sensors.onQuaternion], [reading]]), 1);
     }; __callArgument11; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    ((cast _Sensors._subscriptions__sensors : flight._internal._WeakMap<Sensors, Void->Void>).set(sensors, (cast function():Void {
+    ((cast _Sensors._subscriptions__sensors : flight._internal._WeakMap<Sensors, Void->Void>).set((cast sensors), (cast function():Void {
       unsubscribeAbsoluteOrientation();
       unsubscribeAmbientLight();
       unsubscribeBarometer();
@@ -652,10 +652,10 @@ class _Sensors {
 
   public static function detachSensors(sensors:Sensors):Void {
     var unsubscribe:Null<Void->Void> = cast _Runtime.UNDEFINED;
-    unsubscribe = ((cast _Sensors._subscriptions__sensors : flight._internal._WeakMap<Sensors, Void->Void>).get(sensors));
+    unsubscribe = ((cast _Sensors._subscriptions__sensors : flight._internal._WeakMap<Sensors, Void->Void>).get((cast sensors)));
     if ((cast !_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       unsubscribe();
-      ((cast _Sensors._subscriptions__sensors : flight._internal._WeakMap<Sensors, Void->Void>).delete_(sensors));
+      ((cast _Sensors._subscriptions__sensors : flight._internal._WeakMap<Sensors, Void->Void>).delete_((cast sensors)));
     }
   }
 

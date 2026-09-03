@@ -10,7 +10,7 @@
     "missingEntries": 0,
     "moduleValueKeys": 0,
     "portableGlobalValueKeys": 35,
-    "typeUses": 9085,
+    "typeUses": 9081,
     "valueUses": 2126
   },
   "types": [
@@ -434,7 +434,7 @@
         "upstream/packages/types/src/WgpuRichTextOverlay.ts"
       ],
       "provider": "src/flight/_internal/dom/CanvasRenderingContext2D.hx",
-      "uses": 632
+      "uses": 630
     },
     {
       "coverage": "dynamic-stub",
@@ -2465,7 +2465,7 @@
         "upstream/packages/video/src/videoResourceFrom.ts"
       ],
       "provider": "src/flight/_internal/dom/HTMLCanvasElement.hx",
-      "uses": 300
+      "uses": 298
     },
     {
       "coverage": "dynamic-stub",

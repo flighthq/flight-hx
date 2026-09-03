@@ -4,4 +4,26 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Lighting)
+@:structInit
+class Scene3DLights {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var ambient:Null<AmbientLight>;
+  public var directional:Null<DirectionalLight>;
+  public var hemisphere:Array<HemisphereLight>;
+  public var point:Array<PointLight>;
+  public var spot:Array<SpotLight>;
+
+  private function new(ambient:Null<AmbientLight>, directional:Null<DirectionalLight>, hemisphere:Array<HemisphereLight>, point:Array<PointLight>, spot:Array<SpotLight>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.ambient = ambient;
+    this.directional = directional;
+    this.hemisphere = hemisphere;
+    this.point = point;
+    this.spot = spot;
+  }
+}
+#else
 typedef Scene3DLights = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var ambient:Null<AmbientLight>; var directional:Null<DirectionalLight>; @:optional var hemisphere:Array<HemisphereLight>; @:optional var point:Array<PointLight>; @:optional var spot:Array<SpotLight>; };
+#end

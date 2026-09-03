@@ -4,4 +4,26 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Scene2DCanvas)
+@:structInit
+class CanvasRenderSurface {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var canvas:flight._internal.dom.HTMLCanvasElement;
+  public var context:flight._internal.dom.CanvasRenderingContext2D;
+  public var contextAttributes:flight._internal.dom.CanvasRenderingContext2DSettings;
+  public var creator:CanvasRenderSurfaceCreator;
+  public var options:CanvasRenderSurfaceOptions;
+
+  private function new(canvas:flight._internal.dom.HTMLCanvasElement, context:flight._internal.dom.CanvasRenderingContext2D, contextAttributes:flight._internal.dom.CanvasRenderingContext2DSettings, creator:CanvasRenderSurfaceCreator, options:CanvasRenderSurfaceOptions):Void {
+    this.__symbol__EntityRuntime = null;
+    this.canvas = canvas;
+    this.context = context;
+    this.contextAttributes = contextAttributes;
+    this.creator = creator;
+    this.options = options;
+  }
+}
+#else
 typedef CanvasRenderSurface = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var canvas:flight._internal.dom.HTMLCanvasElement; var context:flight._internal.dom.CanvasRenderingContext2D; var contextAttributes:flight._internal.dom.CanvasRenderingContext2DSettings; var creator:CanvasRenderSurfaceCreator; var options:CanvasRenderSurfaceOptions; };
+#end

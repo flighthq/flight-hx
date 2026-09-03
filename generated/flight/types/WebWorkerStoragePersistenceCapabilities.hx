@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+class WebWorkerStoragePersistenceCapabilities {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var persistenceQuery:StoragePersistenceQueryBackend;
+
+  private function new(persistenceQuery:StoragePersistenceQueryBackend):Void {
+    this.__symbol__EntityRuntime = null;
+    this.persistenceQuery = persistenceQuery;
+  }
+}
+#else
 typedef WebWorkerStoragePersistenceCapabilities = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var persistenceQuery:StoragePersistenceQueryBackend; };
+#end

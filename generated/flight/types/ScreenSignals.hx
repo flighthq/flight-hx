@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Screen)
+@:structInit
+class ScreenSignals {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onScreenAdded:Signal<ScreenInfo->Void>;
+  public var onScreenMetricsChanged:Signal<ScreenChangeEvent->Void>;
+  public var onScreenRemoved:Signal<ScreenInfo->Void>;
+
+  private function new(onScreenAdded:Signal<ScreenInfo->Void>, onScreenMetricsChanged:Signal<ScreenChangeEvent->Void>, onScreenRemoved:Signal<ScreenInfo->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onScreenAdded = onScreenAdded;
+    this.onScreenMetricsChanged = onScreenMetricsChanged;
+    this.onScreenRemoved = onScreenRemoved;
+  }
+}
+#else
 typedef ScreenSignals = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onScreenAdded:Signal<ScreenInfo->Void>; var onScreenMetricsChanged:Signal<ScreenChangeEvent->Void>; var onScreenRemoved:Signal<ScreenInfo->Void>; };
+#end

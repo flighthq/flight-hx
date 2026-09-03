@@ -328,7 +328,7 @@ class _Scene2DResources {
   }
 
   public static function createScene2DDocumentImporterRegistry():Scene2DDocumentImporterRegistry {
-    return cast (cast createEntity(({ final __callArgument140:Dynamic = ({ entries: cast ([] : Array<Dynamic>) } : Scene2DDocumentImporterRegistry); __callArgument140; })) : Scene2DDocumentImporterRegistry);
+    return cast (cast createEntity(({ final __callArgument140:Dynamic = ({ entries: (cast cast ([] : Array<Dynamic>) : Dynamic) } : Scene2DDocumentImporterRegistry); __callArgument140; })) : Scene2DDocumentImporterRegistry);
     return cast null;
   }
 

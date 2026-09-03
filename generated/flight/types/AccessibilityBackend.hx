@@ -4,4 +4,28 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+class AccessibilityBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var announce:String->AccessibilityLiveness->AccessibilityOperationOutcome<String>;
+  public var clear:Void->AccessibilityOperationOutcome<String>;
+  public var destroy:Void->Void;
+  public var removeNode:String->AccessibilityOperationOutcome<String>;
+  public var setFocus:String->AccessibilityOperationOutcome<String>;
+  public var setNode:AccessibilityNode->AccessibilityOperationOutcome<String>;
+
+  private function new(announce:String->AccessibilityLiveness->AccessibilityOperationOutcome<String>, clear:Void->AccessibilityOperationOutcome<String>, destroy:Void->Void, removeNode:String->AccessibilityOperationOutcome<String>, setFocus:String->AccessibilityOperationOutcome<String>, setNode:AccessibilityNode->AccessibilityOperationOutcome<String>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.announce = announce;
+    this.clear = clear;
+    this.destroy = destroy;
+    this.removeNode = removeNode;
+    this.setFocus = setFocus;
+    this.setNode = setNode;
+  }
+}
+#else
 typedef AccessibilityBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var announce:String->AccessibilityLiveness->AccessibilityOperationOutcome<String>; var clear:Void->AccessibilityOperationOutcome<String>; var destroy:Void->Void; var removeNode:String->AccessibilityOperationOutcome<String>; var setFocus:String->AccessibilityOperationOutcome<String>; var setNode:AccessibilityNode->AccessibilityOperationOutcome<String>; };
+#end

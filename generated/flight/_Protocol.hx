@@ -30,11 +30,11 @@ class _Protocol {
     var backend:ProtocolOpenBackend = cast _Runtime.UNDEFINED;
     detachProtocolHandler(({ final __callArgument0:Dynamic = handler; __callArgument0; }));
     backend = (cast (cast host : HasProtocolOpen).protocol : { var open:ProtocolOpenBackend; }).open;
-    ((cast _Protocol._subscriptions__protocol : flight._internal._WeakMap<ProtocolHandler, Void->Void>).set(handler, (cast (cast backend : ProtocolOpenBackend).subscribe(({ final __callArgument2:Dynamic = function(url:String):Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[handler.onOpenUrl], [url]]), 1); }; __callArgument2; })))));
+    ((cast _Protocol._subscriptions__protocol : flight._internal._WeakMap<ProtocolHandler, Void->Void>).set((cast handler), (cast (cast backend : ProtocolOpenBackend).subscribe(({ final __callArgument2:Dynamic = function(url:String):Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[handler.onOpenUrl], [url]]), 1); }; __callArgument2; })))));
   }
 
   public static function createProtocolHandler():ProtocolHandler {
-    return cast (cast createEntity((cast ({ onOpenUrl: (cast createSignal() : Signal<String->Void>) } : ProtocolHandler) : Dynamic)) : ProtocolHandler);
+    return cast (cast createEntity((cast ({ onOpenUrl: (cast (cast createSignal() : Signal<String->Void>) : Dynamic) } : ProtocolHandler) : Dynamic)) : ProtocolHandler);
     return cast null;
   }
 
@@ -77,8 +77,8 @@ class _Protocol {
   }
 
   public static function detachProtocolHandler(handler:ProtocolHandler):Void {
-    _Runtime.callOptionalValue(((cast _Protocol._subscriptions__protocol : flight._internal._WeakMap<ProtocolHandler, Void->Void>).get(handler)), cast ([] : Array<Dynamic>));
-    ((cast _Protocol._subscriptions__protocol : flight._internal._WeakMap<ProtocolHandler, Void->Void>).delete_(handler));
+    _Runtime.callOptionalValue(((cast _Protocol._subscriptions__protocol : flight._internal._WeakMap<ProtocolHandler, Void->Void>).get((cast handler))), cast ([] : Array<Dynamic>));
+    ((cast _Protocol._subscriptions__protocol : flight._internal._WeakMap<ProtocolHandler, Void->Void>).delete_((cast handler)));
   }
 
   public static function disposeProtocolHandler(handler:ProtocolHandler):Void {
@@ -110,7 +110,7 @@ class _Protocol {
     var lower:String = cast _Runtime.UNDEFINED;
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(scheme), 'string') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(scheme, 'length'), 0.0) : Bool)) : Bool)) { return cast false; }
     lower = _Runtime.callProperty(scheme, 'toLowerCase', cast ([] : Array<Dynamic>));
-    if ((cast ((cast _Protocol._reservedSchemes__protocol : flight._internal._Set<String>).has(lower)) : Bool)) { return cast false; }
+    if ((cast ((cast _Protocol._reservedSchemes__protocol : flight._internal._Set<String>).has((cast lower))) : Bool)) { return cast false; }
     return cast _Runtime.callProperty(_Protocol._schemePattern__protocol, 'test', cast ([lower] : Array<Dynamic>));
     return cast null;
   }

@@ -54,13 +54,13 @@ class _Connectivity {
       }
     }; __callArgument2; }));
     if ((cast _Runtime.strictEquals(unsubscribe, null) : Bool)) { return cast false; }
-    ((cast _Connectivity._subscriptions__connectivity : flight._internal._WeakMap<Connectivity, Void->Void>).set(connectivity, (cast unsubscribe)));
+    ((cast _Connectivity._subscriptions__connectivity : flight._internal._WeakMap<Connectivity, Void->Void>).set((cast connectivity), (cast unsubscribe)));
     return cast true;
     return cast null;
   }
 
   public static function createConnectivity():Connectivity {
-    return cast (cast createEntity((cast ({ onChange: (cast createSignal() : Signal<ConnectivityStatus->Void>), onConnectionTypeChange: (cast createSignal() : Signal<ConnectivityConnectionType->Void>), onMeteredChange: (cast createSignal() : Signal<Bool->Void>), onOffline: (cast createSignal() : Signal<Void->Void>), onOnline: (cast createSignal() : Signal<Void->Void>) } : Connectivity) : Dynamic)) : Connectivity);
+    return cast (cast createEntity((cast ({ onChange: (cast (cast createSignal() : Signal<ConnectivityStatus->Void>) : Dynamic), onConnectionTypeChange: (cast (cast createSignal() : Signal<ConnectivityConnectionType->Void>) : Dynamic), onMeteredChange: (cast (cast createSignal() : Signal<Bool->Void>) : Dynamic), onOffline: (cast (cast createSignal() : Signal<Void->Void>) : Dynamic), onOnline: (cast (cast createSignal() : Signal<Void->Void>) : Dynamic) } : Connectivity) : Dynamic)) : Connectivity);
     return cast null;
   }
 
@@ -70,9 +70,9 @@ class _Connectivity {
 
   public static function detachConnectivity(connectivity:Connectivity):Void {
     var unsubscribe:Null<Void->Void> = cast _Runtime.UNDEFINED;
-    unsubscribe = ((cast _Connectivity._subscriptions__connectivity : flight._internal._WeakMap<Connectivity, Void->Void>).get(connectivity));
+    unsubscribe = ((cast _Connectivity._subscriptions__connectivity : flight._internal._WeakMap<Connectivity, Void->Void>).get((cast connectivity)));
     if ((cast _Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    ((cast _Connectivity._subscriptions__connectivity : flight._internal._WeakMap<Connectivity, Void->Void>).delete_(connectivity));
+    ((cast _Connectivity._subscriptions__connectivity : flight._internal._WeakMap<Connectivity, Void->Void>).delete_((cast connectivity)));
     unsubscribe();
   }
 

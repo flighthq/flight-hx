@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Scene3DResourceResolverWithRuntime = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var fetch:ImageResourceFetch; var registry:Scene3DMaterialTextureRegistry; @:optional var __Scene3DResourceResolverRuntimeKey:Scene3DResourceResolverRuntime; };
+typedef Scene3DResourceResolverWithRuntime = { var fetch:ImageResourceFetch; var registry:Scene3DMaterialTextureRegistry; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var __Scene3DResourceResolverRuntimeKey:Scene3DResourceResolverRuntime; };

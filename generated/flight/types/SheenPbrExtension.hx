@@ -4,4 +4,30 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Materials)
+@:structInit
+class SheenPbrExtension {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var kind:String;
+  public var sheenColor:Float;
+  public var sheenColorMap:Null<Texture>;
+  public var sheenColorMapUvSet:PbrUvSet;
+  public var sheenRoughness:Float;
+  public var sheenRoughnessMap:Null<Texture>;
+  public var sheenRoughnessMapUvSet:PbrUvSet;
+
+  private function new(kind:String, sheenColor:Float, sheenColorMap:Null<Texture>, sheenColorMapUvSet:PbrUvSet, sheenRoughness:Float, sheenRoughnessMap:Null<Texture>, sheenRoughnessMapUvSet:PbrUvSet):Void {
+    this.__symbol__EntityRuntime = null;
+    this.kind = kind;
+    this.sheenColor = sheenColor;
+    this.sheenColorMap = sheenColorMap;
+    this.sheenColorMapUvSet = sheenColorMapUvSet;
+    this.sheenRoughness = sheenRoughness;
+    this.sheenRoughnessMap = sheenRoughnessMap;
+    this.sheenRoughnessMapUvSet = sheenRoughnessMapUvSet;
+  }
+}
+#else
 typedef SheenPbrExtension = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var sheenColor:Float; var sheenColorMap:Null<Texture>; var sheenColorMapUvSet:PbrUvSet; var sheenRoughness:Float; var sheenRoughnessMap:Null<Texture>; var sheenRoughnessMapUvSet:PbrUvSet; };
+#end

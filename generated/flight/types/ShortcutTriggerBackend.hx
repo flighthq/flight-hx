@@ -4,4 +4,23 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:allow(flight._HostTauri)
+@:structInit
+class ShortcutTriggerBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var destroy:Void->flight._internal._Promise<flight._internal._Nothing>;
+  public var subscribe:Accelerator->(Void->Void)->flight._internal._Promise<ShortcutTriggerSubscribeOutcome>;
+  public var unsubscribe:ShortcutTriggerSubscription->flight._internal._Promise<ShortcutTriggerUnsubscribeOutcome>;
+
+  private function new(destroy:Void->flight._internal._Promise<flight._internal._Nothing>, subscribe:Accelerator->(Void->Void)->flight._internal._Promise<ShortcutTriggerSubscribeOutcome>, unsubscribe:ShortcutTriggerSubscription->flight._internal._Promise<ShortcutTriggerUnsubscribeOutcome>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.destroy = destroy;
+    this.subscribe = subscribe;
+    this.unsubscribe = unsubscribe;
+  }
+}
+#else
 typedef ShortcutTriggerBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var destroy:Void->flight._internal._Promise<flight._internal._Nothing>; var subscribe:Accelerator->(Void->Void)->flight._internal._Promise<ShortcutTriggerSubscribeOutcome>; var unsubscribe:ShortcutTriggerSubscription->flight._internal._Promise<ShortcutTriggerUnsubscribeOutcome>; };
+#end

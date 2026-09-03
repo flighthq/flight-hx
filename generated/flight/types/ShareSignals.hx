@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Share)
+@:structInit
+class ShareSignals {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onShareResult:Signal<ShareResult->Void>;
+
+  private function new(onShareResult:Signal<ShareResult->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onShareResult = onShareResult;
+  }
+}
+#else
 typedef ShareSignals = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onShareResult:Signal<ShareResult->Void>; };
+#end

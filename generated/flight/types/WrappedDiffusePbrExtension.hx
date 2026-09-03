@@ -4,4 +4,32 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Materials)
+@:structInit
+class WrappedDiffusePbrExtension {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var kind:String;
+  public var thickness:Float;
+  public var thicknessMap:Null<Texture>;
+  public var thicknessMapUvSet:PbrUvSet;
+  public var wrappedDiffuseColor:Float;
+  public var wrappedDiffuseMap:Null<Texture>;
+  public var wrappedDiffuseMapUvSet:PbrUvSet;
+  public var wrappedDiffuseStrength:Float;
+
+  private function new(kind:String, thickness:Float, thicknessMap:Null<Texture>, thicknessMapUvSet:PbrUvSet, wrappedDiffuseColor:Float, wrappedDiffuseMap:Null<Texture>, wrappedDiffuseMapUvSet:PbrUvSet, wrappedDiffuseStrength:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.kind = kind;
+    this.thickness = thickness;
+    this.thicknessMap = thicknessMap;
+    this.thicknessMapUvSet = thicknessMapUvSet;
+    this.wrappedDiffuseColor = wrappedDiffuseColor;
+    this.wrappedDiffuseMap = wrappedDiffuseMap;
+    this.wrappedDiffuseMapUvSet = wrappedDiffuseMapUvSet;
+    this.wrappedDiffuseStrength = wrappedDiffuseStrength;
+  }
+}
+#else
 typedef WrappedDiffusePbrExtension = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var thickness:Float; var thicknessMap:Null<Texture>; var thicknessMapUvSet:PbrUvSet; var wrappedDiffuseColor:Float; var wrappedDiffuseMap:Null<Texture>; var wrappedDiffuseMapUvSet:PbrUvSet; var wrappedDiffuseStrength:Float; };
+#end

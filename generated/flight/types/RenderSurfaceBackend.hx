@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+class RenderSurfaceBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var resize:InputTargetHandle->Float->Float->Void;
+
+  private function new(resize:InputTargetHandle->Float->Float->Void):Void {
+    this.__symbol__EntityRuntime = null;
+    this.resize = resize;
+  }
+}
+#else
 typedef RenderSurfaceBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var resize:InputTargetHandle->Float->Float->Void; };
+#end

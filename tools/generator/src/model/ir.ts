@@ -66,6 +66,7 @@ export interface IrCppStructInitConstruction {
   fieldNames: string[];
   missingFieldNames?: string[] | undefined;
   nativeOnly?: true | undefined;
+  nodeAllocator?: true | undefined;
   schemaHaxeType: string;
   schemaId: string;
   schemaName: string;
@@ -139,7 +140,13 @@ export interface IrExpressionStaticFacts {
 type IrExpressionNode =
   | { kind: 'array'; elements: IrExpression[] }
   | { kind: 'await'; expression: IrExpression }
-  | { kind: 'assignment'; left: IrExpression; operator: string; right: IrExpression }
+  | {
+      kind: 'assignment';
+      left: IrExpression;
+      nominalEntityCast?: true | undefined;
+      operator: string;
+      right: IrExpression;
+    }
   | {
       domRootBinding?: IrDomRootBinding | undefined;
       kind: 'binary';

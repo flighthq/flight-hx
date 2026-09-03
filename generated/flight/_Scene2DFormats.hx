@@ -341,7 +341,7 @@ class _Scene2DFormats {
     for (layer in _Runtime.iterable(layers)) {
       var node:DisplayObject = (cast _Scene2DFormats.createLottieLayerNode__lottieDocument(({ final __callArgument23:Dynamic = layer; __callArgument23; }), (cast context : Dynamic)) : DisplayObject);
       _Runtime.callProperty(ordered, 'push', cast ([{ layer: layer, node: node }] : Array<Dynamic>));
-      if ((cast !_Runtime.strictEquals(layer.ind, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast nodes : flight._internal._Map<Float, DisplayObject>).set(layer.ind, (cast node))); }
+      if ((cast !_Runtime.strictEquals(layer.ind, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast nodes : flight._internal._Map<Float, DisplayObject>).set((cast layer.ind), (cast node))); }
     }
     {
       var index:Float = _Runtime.subtractNumbers(_Runtime.field(ordered, 'length'), 1.0);
@@ -349,7 +349,7 @@ class _Scene2DFormats {
         var __destructure4 = flight._internal._StaticIndex.readArray(ordered, index);
         var layer:LottieLayer = _Runtime.field(__destructure4, 'layer');
         var node:DisplayObject = _Runtime.field(__destructure4, 'node');
-        var parent:Null<DisplayObject> = ((cast _Runtime.strictEquals(layer.parent, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast nodes : flight._internal._Map<Float, DisplayObject>).get(layer.parent)) : Dynamic));
+        var parent:Null<DisplayObject> = ((cast _Runtime.strictEquals(layer.parent, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast nodes : flight._internal._Map<Float, DisplayObject>).get((cast layer.parent))) : Dynamic));
         (cast addNodeChild((cast _Runtime.coalesce(parent, function():Dynamic return cast root) : Dynamic), (cast node : Dynamic)) : NodeOf<Node2DTraits>);
         index--;
       }
@@ -705,7 +705,7 @@ class _Scene2DFormats {
   public static function appendLottieImage__lottieDocument(parent:DisplayObject, layer:LottieLayer, context:LottieImportContext__lottieDocument):Void {
     var asset:Null<flight._internal._Union2<LottieImageAsset, LottiePrecompositionAsset>> = cast _Runtime.UNDEFINED;
     var image:Null<Image> = cast _Runtime.UNDEFINED;
-    asset = ((cast _Runtime.strictEquals(layer.refId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast (cast context : LottieImportContext__lottieDocument).assets : flight._internal._Map<String, LottieAsset>).get(layer.refId)) : Dynamic));
+    asset = ((cast _Runtime.strictEquals(layer.refId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast (cast context : LottieImportContext__lottieDocument).assets : flight._internal._Map<String, LottieAsset>).get((cast layer.refId))) : Dynamic));
     if ((cast ((cast _Runtime.strictEquals(asset, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast (cast _Scene2DFormats.isImageAsset__lottieDocument(({ final __callArgument230:Dynamic = asset; __callArgument230; })) : Bool) : Bool) : Bool)) : Bool)) {
       _Scene2DFormats.reportLottieDrop__lottieDocument((cast context : Dynamic), (cast 'lottie.unresolved-asset' : String), (cast 'appendLottieImage' : String), ({ final __callArgument232:Dynamic = { id: _Runtime.coalesce(layer.refId, function():Dynamic return cast '') }; __callArgument232; }));
       return;
@@ -736,18 +736,18 @@ class _Scene2DFormats {
     var id:Null<String> = cast _Runtime.UNDEFINED;
     var asset:Null<flight._internal._Union2<LottieImageAsset, LottiePrecompositionAsset>> = cast _Runtime.UNDEFINED;
     id = layer.refId;
-    asset = ((cast _Runtime.strictEquals(id, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast (cast context : LottieImportContext__lottieDocument).assets : flight._internal._Map<String, LottieAsset>).get(id)) : Dynamic));
+    asset = ((cast _Runtime.strictEquals(id, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast (cast context : LottieImportContext__lottieDocument).assets : flight._internal._Map<String, LottieAsset>).get((cast id))) : Dynamic));
     if ((cast ((cast ((cast _Runtime.strictEquals(id, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(asset, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast !(cast (cast _Scene2DFormats.isPrecompositionAsset__lottieDocument(({ final __callArgument248:Dynamic = asset; __callArgument248; })) : Bool) : Bool) : Bool)) : Bool)) {
       _Scene2DFormats.reportLottieDrop__lottieDocument((cast context : Dynamic), (cast 'lottie.unresolved-asset' : String), (cast 'appendLottiePrecomposition' : String), ({ final __callArgument250:Dynamic = { id: _Runtime.coalesce(id, function():Dynamic return cast '') }; __callArgument250; }));
       return;
     }
-    if ((cast ((cast (cast context : LottieImportContext__lottieDocument).resolvingPrecompositions : flight._internal._Set<String>).has(id)) : Bool)) {
+    if ((cast ((cast (cast context : LottieImportContext__lottieDocument).resolvingPrecompositions : flight._internal._Set<String>).has((cast id))) : Bool)) {
       _Scene2DFormats.reportLottieDrop__lottieDocument((cast context : Dynamic), (cast 'lottie.recursive-precomposition' : String), (cast 'appendLottiePrecomposition' : String), ({ final __callArgument252:Dynamic = { id: id }; __callArgument252; }));
       return;
     }
-    ((cast (cast context : LottieImportContext__lottieDocument).resolvingPrecompositions : flight._internal._Set<String>).add(id));
+    ((cast (cast context : LottieImportContext__lottieDocument).resolvingPrecompositions : flight._internal._Set<String>).add((cast id)));
     _Scene2DFormats.appendLottieLayers__lottieDocument(({ final __callArgument254:Dynamic = parent; __callArgument254; }), (cast asset : LottiePrecompositionAsset).layers, (cast _Runtime.mergeObjects([context, { frameOffset: ((cast context : LottieImportContext__lottieDocument).frameOffset + _Runtime.multiplyNumbers(_Runtime.coalesce(layer.st, function():Dynamic return cast 0.0), (cast context : LottieImportContext__lottieDocument).frameScale)) }, { frameScale: _Runtime.multiplyNumbers((cast context : LottieImportContext__lottieDocument).frameScale, _Runtime.coalesce(layer.sr, function():Dynamic return cast 1.0)) }]) : Dynamic));
-    ((cast (cast context : LottieImportContext__lottieDocument).resolvingPrecompositions : flight._internal._Set<String>).delete_(id));
+    ((cast (cast context : LottieImportContext__lottieDocument).resolvingPrecompositions : flight._internal._Set<String>).delete_((cast id)));
   }
 
   public static function appendLottieShapeItems__lottieDocument(parent:DisplayObject, items:Array<LottieShapeItem>, context:LottieImportContext__lottieDocument, ?name:Null<String>):Void {
@@ -1290,13 +1290,13 @@ class _Scene2DFormats {
     var fixed:Null<String> = cast _Runtime.UNDEFINED;
     var advanced:Null<String> = cast _Runtime.UNDEFINED;
     mode = _Runtime.coalesce(layer.bm, function():Dynamic return cast 0.0);
-    fixed = ((cast _Scene2DFormats._lottieFixedBlendModes__lottieDocument : flight._internal._Map<Float, String>).get(mode));
+    fixed = ((cast _Scene2DFormats._lottieFixedBlendModes__lottieDocument : flight._internal._Map<Float, String>).get((cast mode)));
     if ((cast !_Runtime.strictEquals(fixed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       ((cast target : { var blendMode:Null<String>; }).blendMode = fixed);
       return;
     }
     ((cast target : { var blendMode:Null<String>; }).blendMode = (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Normal);
-    advanced = ((cast _Scene2DFormats._lottieAdvancedBlendModes__lottieDocument : flight._internal._Map<Float, String>).get(mode));
+    advanced = ((cast _Scene2DFormats._lottieAdvancedBlendModes__lottieDocument : flight._internal._Map<Float, String>).get((cast mode)));
     if ((cast !_Runtime.strictEquals(advanced, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty((cast context : LottieImportContext__lottieDocument).advancedBlends, 'push', cast ([{ mode: advanced, node: target }] : Array<Dynamic>)); }
   }
 
@@ -1776,14 +1776,14 @@ class _Scene2DFormats {
     var slot:RiveProperty = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast ((cast objectIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast objectIndex : Float) >= (cast _Runtime.field(artboard.objects, 'length') : Float)) : Bool)) : Bool) || (cast ((cast propertyKey : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
     object = flight._internal._StaticIndex.readArray(artboard.objects, objectIndex);
-    rebuild = ((cast rebuilds : flight._internal._Map<Float, Void->Void>).get((cast _Scene2DFormats.findRiveShapeOwner__riveAnimation(({ final __callArgument838:Dynamic = artboard; __callArgument838; }), (cast objectIndex : Float)) : Float)));
+    rebuild = ((cast rebuilds : flight._internal._Map<Float, Void->Void>).get((cast (cast _Scene2DFormats.findRiveShapeOwner__riveAnimation(({ final __callArgument838:Dynamic = artboard; __callArgument838; }), (cast objectIndex : Float)) : Float))));
     if ((cast _Runtime.strictEquals(rebuild, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
     property = _Runtime.find(object.properties, function(candidate:RiveProperty, __unused0:Float, __unused1:Array<RiveProperty>):Bool return _Runtime.strictEquals(candidate.key, propertyKey));
     slot = _Runtime.coalesce(property, function():Dynamic return cast { key: propertyKey, type: defaultType, value: 0.0 });
     if ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(object.properties, 'push', cast ([slot] : Array<Dynamic>)); }
     return cast { riveApply: function(sample:flight._internal._Union2<Array<Float>, flight._internal._Float32Array>):Void {
       (slot.value = cast (((cast _Runtime.strictEquals(slot.type, (cast RiveFieldTypeValue : { var Uint:Float; var String:Float; var Double:Float; var Color:Float; }).Color) : Bool) ? (cast (cast _Scene2DFormats.packRiveColorSample__riveAnimation(({ final __callArgument840:Dynamic = sample; __callArgument840; })) : Float) : Dynamic) : (cast flight._internal._StaticIndex.readArrayOrFloat32Array(sample, 0.0) : Dynamic)) : RiveValue));
-      ((cast _Scene2DFormats._pendingRebuilds__riveAnimation : flight._internal._Set<Void->Void>).add(rebuild));
+      ((cast _Scene2DFormats._pendingRebuilds__riveAnimation : flight._internal._Set<Void->Void>).add((cast rebuild)));
     } };
     return cast null;
   }
@@ -1825,7 +1825,7 @@ class _Scene2DFormats {
     if ((cast _Runtime.strictEquals(type, _Scene2DFormats.RIVE_INTERPOLATION_HOLD__riveAnimation) : Bool)) { return cast _Scene2DFormats._holdEasing__riveAnimation; }
     if ((cast _Runtime.strictEquals(type, _Scene2DFormats.RIVE_INTERPOLATION_LINEAR__riveAnimation) : Bool)) { return cast null; }
     id = (cast _Scene2DFormats.readRiveNumber__riveAnimation(({ final __callArgument844:Dynamic = keyframe; __callArgument844; }), (cast _Scene2DFormats.RIVE_KEYFRAME_INTERPOLATOR_ID__riveAnimation : Float), (cast -1.0 : Float)) : Float);
-    easing = ((cast interpolators : flight._internal._Map<Float, EasingFunction>).get(id));
+    easing = ((cast interpolators : flight._internal._Map<Float, EasingFunction>).get((cast id)));
     if ((cast _Runtime.strictEquals(easing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       reportImportDiagnostic(({ final __callArgument846:Dynamic = diagnostics; __callArgument846; }), ({ final __callArgument847:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument847; }), (cast 'rive.keyframe-easing-substituted' : String), (cast 'toRiveSegmentEasing' : String), ({ final __callArgument848:Dynamic = { interpolationType: type, interpolatorId: id, substitutedAs: 'linear' }; __callArgument848; }));
       return cast null;
@@ -1842,12 +1842,12 @@ class _Scene2DFormats {
       while ((cast ((cast ((cast index : Float) < (cast (cast range : { var end:Float; var start:Float; }).end : Float)) : Bool) && (cast ((cast index : Float) < (cast _Runtime.field(objects, 'length') : Float)) : Bool)) : Bool)) {
         var source:RiveCoreObject = flight._internal._StaticIndex.readArray(objects, index);
         if ((cast (cast isRiveCoreTypeDerivedFrom((cast source.typeKey : Float), (cast _Scene2DFormats.RIVE_CUBIC_INTERPOLATOR__riveAnimation : Float)) : Bool) : Bool)) {
-          ((cast interpolators : flight._internal._Map<Float, EasingFunction>).set(index, (cast (cast easeCubicBezier((cast (cast _Scene2DFormats.readRiveNumber__riveAnimation(({ final __callArgument852:Dynamic = source; __callArgument852; }), (cast _Scene2DFormats.RIVE_INTERPOLATOR_X1__riveAnimation : Float), (cast 0.42 : Float)) : Float) : Float), (cast (cast _Scene2DFormats.readRiveNumber__riveAnimation(({ final __callArgument854:Dynamic = source; __callArgument854; }), (cast _Scene2DFormats.RIVE_INTERPOLATOR_Y1__riveAnimation : Float), (cast 0.0 : Float)) : Float) : Float), (cast (cast _Scene2DFormats.readRiveNumber__riveAnimation(({ final __callArgument856:Dynamic = source; __callArgument856; }), (cast _Scene2DFormats.RIVE_INTERPOLATOR_X2__riveAnimation : Float), (cast 0.58 : Float)) : Float) : Float), (cast (cast _Scene2DFormats.readRiveNumber__riveAnimation(({ final __callArgument858:Dynamic = source; __callArgument858; }), (cast _Scene2DFormats.RIVE_INTERPOLATOR_Y2__riveAnimation : Float), (cast 1.0 : Float)) : Float) : Float)) : EasingFunction))));
+          ((cast interpolators : flight._internal._Map<Float, EasingFunction>).set((cast index), (cast (cast easeCubicBezier((cast (cast _Scene2DFormats.readRiveNumber__riveAnimation(({ final __callArgument852:Dynamic = source; __callArgument852; }), (cast _Scene2DFormats.RIVE_INTERPOLATOR_X1__riveAnimation : Float), (cast 0.42 : Float)) : Float) : Float), (cast (cast _Scene2DFormats.readRiveNumber__riveAnimation(({ final __callArgument854:Dynamic = source; __callArgument854; }), (cast _Scene2DFormats.RIVE_INTERPOLATOR_Y1__riveAnimation : Float), (cast 0.0 : Float)) : Float) : Float), (cast (cast _Scene2DFormats.readRiveNumber__riveAnimation(({ final __callArgument856:Dynamic = source; __callArgument856; }), (cast _Scene2DFormats.RIVE_INTERPOLATOR_X2__riveAnimation : Float), (cast 0.58 : Float)) : Float) : Float), (cast (cast _Scene2DFormats.readRiveNumber__riveAnimation(({ final __callArgument858:Dynamic = source; __callArgument858; }), (cast _Scene2DFormats.RIVE_INTERPOLATOR_Y2__riveAnimation : Float), (cast 1.0 : Float)) : Float) : Float)) : EasingFunction))));
           index++;
           continue;
         }
         if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast source.typeKey : Float), (cast _Scene2DFormats.RIVE_ELASTIC_INTERPOLATOR__riveAnimation : Float)) : Bool) : Bool) : Bool)) { index++; continue; }
-        ((cast interpolators : flight._internal._Map<Float, EasingFunction>).set(index, (cast (cast _Scene2DFormats.toRiveElasticEasing__riveAnimation(({ final __callArgument868:Dynamic = source; __callArgument868; }), ({ final __callArgument869:Dynamic = diagnostics; __callArgument869; })) : EasingFunction))));
+        ((cast interpolators : flight._internal._Map<Float, EasingFunction>).set((cast index), (cast (cast _Scene2DFormats.toRiveElasticEasing__riveAnimation(({ final __callArgument868:Dynamic = source; __callArgument868; }), ({ final __callArgument869:Dynamic = diagnostics; __callArgument869; })) : EasingFunction))));
         index++;
       }
     }
@@ -2076,15 +2076,15 @@ class _Scene2DFormats {
         var target:Null<DisplayObject> = ((cast ((cast owner : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flight._internal._StaticIndex.readArray(nodes, owner) : Dynamic) : (cast null : Dynamic));
         if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { index++; continue; }
         var source:Float = (cast _Scene2DFormats.readRiveNumber__riveClipping(({ final __callArgument910:Dynamic = object; __callArgument910; }), (cast _Scene2DFormats.RIVE_CLIP_SOURCE_ID__riveClipping : Float), (cast -1.0 : Float)) : Float);
-        var paths:Null<Array<RivePathRecord>> = ((cast shapePaths : flight._internal._Map<Float, Array<RivePathRecord>>).get(source));
+        var paths:Null<Array<RivePathRecord>> = ((cast shapePaths : flight._internal._Map<Float, Array<RivePathRecord>>).get((cast source)));
         if ((cast ((cast _Runtime.strictEquals(paths, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(paths, 'length'), 0.0) : Bool)) : Bool)) {
           reportImportDiagnostic(({ final __callArgument912:Dynamic = diagnostics; __callArgument912; }), ({ final __callArgument913:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument913; }), (cast 'rive.unresolved-clipping-source' : String), (cast 'applyRiveClipping' : String), ({ final __callArgument914:Dynamic = { index: index, source: source }; __callArgument914; }));
           index++;
           continue;
         }
         var next:Path = (cast _Scene2DFormats.createRiveClipPath__riveClipping(({ final __callArgument918:Dynamic = paths; __callArgument918; }), flight._internal._StaticIndex.readArray(relative, owner), flight._internal._StaticIndex.readArray(relative, source), ({ final __callArgument919:Dynamic = object; __callArgument919; })) : Path);
-        var current:Null<Path> = ((cast clips : flight._internal._Map<DisplayObject, Path>).get(target));
-        ((cast clips : flight._internal._Map<DisplayObject, Path>).set(target, (cast ((cast _Runtime.strictEquals(current, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast next : Dynamic) : (cast (cast (#if js _Runtime.callValue(intersectPaths, cast ([({ final __callArgument924:Dynamic = current; __callArgument924; }), ({ final __callArgument925:Dynamic = next; __callArgument925; })] : Array<Dynamic>)) #else intersectPaths(({ final __callArgument922:Dynamic = current; __callArgument922; }), ({ final __callArgument923:Dynamic = next; __callArgument923; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Path) : Dynamic)))));
+        var current:Null<Path> = ((cast clips : flight._internal._Map<DisplayObject, Path>).get((cast target)));
+        ((cast clips : flight._internal._Map<DisplayObject, Path>).set((cast target), (cast ((cast _Runtime.strictEquals(current, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast next : Dynamic) : (cast (cast (#if js _Runtime.callValue(intersectPaths, cast ([({ final __callArgument924:Dynamic = current; __callArgument924; }), ({ final __callArgument925:Dynamic = next; __callArgument925; })] : Array<Dynamic>)) #else intersectPaths(({ final __callArgument922:Dynamic = current; __callArgument922; }), ({ final __callArgument923:Dynamic = next; __callArgument923; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Path) : Dynamic)))));
         index++;
       }
     }
@@ -2230,7 +2230,7 @@ class _Scene2DFormats {
   public static final RIVE_TRANSFORM_RESOLVED__riveClipping:Float = 2.0;
 
   public static function getRiveCorePropertyFieldType(key:Float):Null<RiveFieldType> {
-    return cast ((cast _Scene2DFormats._fieldTypesByKey__riveCoreProperties : flight._internal._Map<Float, RiveFieldType>).get(key));
+    return cast ((cast _Scene2DFormats._fieldTypesByKey__riveCoreProperties : flight._internal._Map<Float, RiveFieldType>).get((cast key)));
     return cast null;
   }
 
@@ -2253,16 +2253,16 @@ class _Scene2DFormats {
     var table:flight._internal._Map<Float, RiveFieldType> = cast _Runtime.UNDEFINED;
     table = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
     for (key in _Runtime.iterable(_Scene2DFormats.RIVE_UINT_PROPERTY_KEYS__riveCoreProperties)) {
-      ((cast table : flight._internal._Map<Float, RiveFieldType>).set(key, (cast (cast RiveFieldTypeValue : { var Uint:Float; var String:Float; var Double:Float; var Color:Float; }).Uint)));
+      ((cast table : flight._internal._Map<Float, RiveFieldType>).set((cast key), (cast (cast RiveFieldTypeValue : { var Uint:Float; var String:Float; var Double:Float; var Color:Float; }).Uint)));
     }
     for (key in _Runtime.iterable(_Scene2DFormats.RIVE_STRING_PROPERTY_KEYS__riveCoreProperties)) {
-      ((cast table : flight._internal._Map<Float, RiveFieldType>).set(key, (cast (cast RiveFieldTypeValue : { var Uint:Float; var String:Float; var Double:Float; var Color:Float; }).String)));
+      ((cast table : flight._internal._Map<Float, RiveFieldType>).set((cast key), (cast (cast RiveFieldTypeValue : { var Uint:Float; var String:Float; var Double:Float; var Color:Float; }).String)));
     }
     for (key in _Runtime.iterable(_Scene2DFormats.RIVE_DOUBLE_PROPERTY_KEYS__riveCoreProperties)) {
-      ((cast table : flight._internal._Map<Float, RiveFieldType>).set(key, (cast (cast RiveFieldTypeValue : { var Uint:Float; var String:Float; var Double:Float; var Color:Float; }).Double)));
+      ((cast table : flight._internal._Map<Float, RiveFieldType>).set((cast key), (cast (cast RiveFieldTypeValue : { var Uint:Float; var String:Float; var Double:Float; var Color:Float; }).Double)));
     }
     for (key in _Runtime.iterable(_Scene2DFormats.RIVE_COLOR_PROPERTY_KEYS__riveCoreProperties)) {
-      ((cast table : flight._internal._Map<Float, RiveFieldType>).set(key, (cast (cast RiveFieldTypeValue : { var Uint:Float; var String:Float; var Double:Float; var Color:Float; }).Color)));
+      ((cast table : flight._internal._Map<Float, RiveFieldType>).set((cast key), (cast (cast RiveFieldTypeValue : { var Uint:Float; var String:Float; var Double:Float; var Color:Float; }).Color)));
     }
     return cast table;
     return cast null;
@@ -2271,7 +2271,7 @@ class _Scene2DFormats {
   public static final _fieldTypesByKey__riveCoreProperties:flight._internal._Map<Float, RiveFieldType> = (cast _Scene2DFormats.buildRiveFieldTypeTable__riveCoreProperties() : flight._internal._Map<Float, RiveFieldType>);
 
   public static function getRiveCoreTypeName(typeKey:Float):Null<String> {
-    return cast ({ final __structural1016 = ((cast _Scene2DFormats._typesByKey__riveCoreTypes : flight._internal._Map<Float, RiveCoreTypeRow__riveCoreTypes>).get(typeKey)); __structural1016 == null ? _Runtime.UNDEFINED : (cast __structural1016 : { var name:String; }).name; });
+    return cast ({ final __structural1016 = ((cast _Scene2DFormats._typesByKey__riveCoreTypes : flight._internal._Map<Float, RiveCoreTypeRow__riveCoreTypes>).get((cast typeKey))); __structural1016 == null ? _Runtime.UNDEFINED : (cast __structural1016 : { var name:String; }).name; });
     return cast null;
   }
 
@@ -2280,7 +2280,7 @@ class _Scene2DFormats {
     current = typeKey;
     while ((cast ((cast !_Runtime.strictEquals(current, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(current, _Scene2DFormats.RIVE_NO_PARENT__riveCoreTypes) : Bool)) : Bool)) {
       if ((cast _Runtime.strictEquals(current, ancestorTypeKey) : Bool)) { return cast true; }
-      (current = cast (({ final __structural1017 = ((cast _Scene2DFormats._typesByKey__riveCoreTypes : flight._internal._Map<Float, RiveCoreTypeRow__riveCoreTypes>).get(current)); __structural1017 == null ? _Runtime.UNDEFINED : (cast __structural1017 : { var parent:Float; }).parent; }) : Dynamic));
+      (current = cast (({ final __structural1017 = ((cast _Scene2DFormats._typesByKey__riveCoreTypes : flight._internal._Map<Float, RiveCoreTypeRow__riveCoreTypes>).get((cast current))); __structural1017 == null ? _Runtime.UNDEFINED : (cast __structural1017 : { var parent:Float; }).parent; }) : Dynamic));
     }
     return cast false;
     return cast null;
@@ -2294,7 +2294,7 @@ class _Scene2DFormats {
     var table:flight._internal._Map<Float, RiveCoreTypeRow__riveCoreTypes> = cast _Runtime.UNDEFINED;
     table = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
     for (row in _Runtime.iterable(_Scene2DFormats.RIVE_CORE_TYPES__riveCoreTypes)) {
-      ((cast table : flight._internal._Map<Float, RiveCoreTypeRow__riveCoreTypes>).set((cast row : RiveCoreTypeRow__riveCoreTypes).key, (cast row)));
+      ((cast table : flight._internal._Map<Float, RiveCoreTypeRow__riveCoreTypes>).set((cast (cast row : RiveCoreTypeRow__riveCoreTypes).key), (cast row)));
     }
     return cast table;
     return cast null;
@@ -2319,7 +2319,7 @@ class _Scene2DFormats {
     }
     fieldTypes = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
     for (entry in _Runtime.iterable((cast header : RiveDocumentHeader).tableOfContents)) {
-      ((cast fieldTypes : flight._internal._Map<Float, Float>).set((cast entry : RivePropertyFieldType).key, (cast (cast entry : RivePropertyFieldType).type)));
+      ((cast fieldTypes : flight._internal._Map<Float, Float>).set((cast (cast entry : RivePropertyFieldType).key), (cast (cast entry : RivePropertyFieldType).type)));
     }
     objects = (cast cast ([] : Array<Dynamic>));
     while ((cast ((cast (cast cursor : RiveCursor__riveDocument).position : Float) < (cast _Runtime.field((cast cursor : RiveCursor__riveDocument).bytes, 'length') : Float)) : Bool)) {
@@ -2392,7 +2392,7 @@ class _Scene2DFormats {
         var key:Float = (cast _Scene2DFormats.readRiveVarUint__riveDocument((cast cursor : Dynamic)) : Float);
         if ((cast (cast cursor : RiveCursor__riveDocument).overflowed : Bool)) { return cast null; }
         if ((cast _Runtime.strictEquals(key, 0.0) : Bool)) { return cast { properties: properties, typeKey: typeKey }; }
-        var type:Null<Float> = _Runtime.coalesce((cast getRiveCorePropertyFieldType((cast key : Float)) : Null<Float>), function():Dynamic return cast ((cast fieldTypes : flight._internal._Map<Float, Float>).get(key)));
+        var type:Null<Float> = _Runtime.coalesce((cast getRiveCorePropertyFieldType((cast key : Float)) : Null<Float>), function():Dynamic return cast ((cast fieldTypes : flight._internal._Map<Float, Float>).get((cast key))));
         if ((cast _Runtime.strictEquals(type, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           ((cast cursor : RiveCursor__riveDocument).unknownPropertyKey = key);
           return cast null;
@@ -2564,11 +2564,11 @@ class _Scene2DFormats {
           index++;
           continue;
         }
-        var list:Null<NodeOrderList<Node2DTraits>> = ((cast lists : flight._internal._Map<Node2D, NodeOrderList<Node2DTraits>>).get(parent));
+        var list:Null<NodeOrderList<Node2DTraits>> = ((cast lists : flight._internal._Map<Node2D, NodeOrderList<Node2DTraits>>).get((cast parent)));
         if ((cast _Runtime.strictEquals(list, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           (list = cast ((cast (cast createNodeOrderList : Void->NodeOrderList<Node2DTraits>)() : NodeOrderList<Node2DTraits>) : Dynamic));
           setNodeOrderListFromNodeChildren(({ final __callArgument1064:Dynamic = list; __callArgument1064; }), (cast parent : Dynamic));
-          ((cast lists : flight._internal._Map<Node2D, NodeOrderList<Node2DTraits>>).set(parent, (cast list)));
+          ((cast lists : flight._internal._Map<Node2D, NodeOrderList<Node2DTraits>>).set((cast parent), (cast list)));
         }
         if ((cast (cast target : { var isAbove:Bool; var node:Node2D; }).isAbove : Bool)) { setNodeOrderListEntryAbove(({ final __callArgument1066:Dynamic = list; __callArgument1066; }), (cast governed : Dynamic), (cast (cast target : { var isAbove:Bool; var node:Node2D; }).node : Dynamic)); } else { setNodeOrderListEntryBelow(({ final __callArgument1068:Dynamic = list; __callArgument1068; }), (cast governed : Dynamic), (cast (cast target : { var isAbove:Bool; var node:Node2D; }).node : Dynamic)); }
         index++;
@@ -2637,21 +2637,21 @@ class _Scene2DFormats {
         if ((cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast _Scene2DFormats.RIVE_LAYOUT_PARTICIPANT_TYPE_KEY__riveLayout : Float)) : Bool) : Bool)) {
           var targetIndex:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast artboard.parentIndices : Array<Float>), (cast index : Float));
           if ((cast ((cast ((cast ((cast targetIndex : Float) > (cast 0.0 : Float)) : Bool) && (cast !_Runtime.strictEquals(flight._internal._StaticIndex.readArray(nodes, targetIndex), null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(flight._internal._StaticIndex.readArray(nodes, targetIndex), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-            ((cast providers : flight._internal._Map<Float, RiveLayoutProvider__riveLayout>).set(targetIndex, (cast { sourceIndex: targetIndex, styleIndex: index, targetIndex: targetIndex, type: 'participant' })));
+            ((cast providers : flight._internal._Map<Float, RiveLayoutProvider__riveLayout>).set((cast targetIndex), (cast { sourceIndex: targetIndex, styleIndex: index, targetIndex: targetIndex, type: 'participant' })));
           }
           index++;
           continue;
         }
         if ((cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast _Scene2DFormats.RIVE_NESTED_ARTBOARD_LAYOUT_TYPE_KEY__riveLayout : Float)) : Bool) : Bool)) {
           if ((cast ((cast !_Runtime.strictEquals(flight._internal._StaticIndex.readArray(nodes, index), null) : Bool) && (cast !_Runtime.strictEquals(flight._internal._StaticIndex.readArray(nodes, index), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-            ((cast providers : flight._internal._Map<Float, RiveLayoutProvider__riveLayout>).set(index, (cast { sourceIndex: index, styleIndex: index, targetIndex: index, type: 'nested' })));
+            ((cast providers : flight._internal._Map<Float, RiveLayoutProvider__riveLayout>).set((cast index), (cast { sourceIndex: index, styleIndex: index, targetIndex: index, type: 'nested' })));
           }
           index++;
           continue;
         }
         if ((cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast _Scene2DFormats.RIVE_GRID_ITEM_PLACEMENT_TYPE_KEY__riveLayout : Float)) : Bool) : Bool)) {
           var owner:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast artboard.parentIndices : Array<Float>), (cast index : Float));
-          if ((cast ((cast owner : Float) >= (cast 0.0 : Float)) : Bool)) { ((cast placements : flight._internal._Map<Float, RiveCoreObject>).set(owner, (cast object))); }
+          if ((cast ((cast owner : Float) >= (cast 0.0 : Float)) : Bool)) { ((cast placements : flight._internal._Map<Float, RiveCoreObject>).set((cast owner), (cast object))); }
         }
         index++;
       }
@@ -2661,16 +2661,16 @@ class _Scene2DFormats {
     for (provider in _Runtime.iterable(((cast providers : flight._internal._Map<Float, RiveLayoutProvider__riveLayout>).values()))) {
       var start:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast artboard.parentIndices : Array<Float>), (cast (cast provider : RiveLayoutProvider__riveLayout).sourceIndex : Float));
       var parent:Float = (cast _Scene2DFormats.findRiveLayoutParent__riveLayout(({ final __callArgument1095:Dynamic = artboard; __callArgument1095; }), (cast componentProviders : Dynamic), (cast start : Float), (cast (cast provider : RiveLayoutProvider__riveLayout).sourceIndex : Float)) : Float);
-      ((cast providerParents : flight._internal._Map<Float, Float>).set((cast provider : RiveLayoutProvider__riveLayout).sourceIndex, (cast parent)));
+      ((cast providerParents : flight._internal._Map<Float, Float>).set((cast (cast provider : RiveLayoutProvider__riveLayout).sourceIndex), (cast parent)));
       if ((cast ((cast parent : Float) < (cast 0.0 : Float)) : Bool)) { continue; }
-      var children:Array<RiveLayoutProvider__riveLayout> = _Runtime.coalesce(((cast providerChildren : flight._internal._Map<Float, Array<RiveLayoutProvider__riveLayout>>).get(parent)), function():Dynamic return cast cast ([] : Array<Dynamic>));
+      var children:Array<RiveLayoutProvider__riveLayout> = _Runtime.coalesce(((cast providerChildren : flight._internal._Map<Float, Array<RiveLayoutProvider__riveLayout>>).get((cast parent))), function():Dynamic return cast cast ([] : Array<Dynamic>));
       _Runtime.callProperty(children, 'push', cast ([provider] : Array<Dynamic>));
-      ((cast providerChildren : flight._internal._Map<Float, Array<RiveLayoutProvider__riveLayout>>).set(parent, (cast children)));
+      ((cast providerChildren : flight._internal._Map<Float, Array<RiveLayoutProvider__riveLayout>>).set((cast parent), (cast children)));
     }
     for (children in _Runtime.iterable(((cast providerChildren : flight._internal._Map<Float, Array<RiveLayoutProvider__riveLayout>>).values()))) {
       _Runtime.callProperty(children, 'sort', cast ([_Scene2DFormats.compareRiveLayoutProviders__riveLayout] : Array<Dynamic>));
     }
-    roots = _Runtime.callProperty((cast _Runtime.filterArray((cast _Runtime.concatArrays([_Runtime.toArray(((cast componentProviders : flight._internal._Map<Float, RiveLayoutProvider__riveLayout>).values()))]) : Array<Dynamic>), function(provider:RiveLayoutProvider__riveLayout, __unused0:Float, __unused1:Array<RiveLayoutProvider__riveLayout>):Bool return ((cast _Runtime.coalesce(((cast providerParents : flight._internal._Map<Float, Float>).get((cast provider : RiveLayoutProvider__riveLayout).sourceIndex)), function():Dynamic return cast -1.0) : Float) < (cast 0.0 : Float)), _Runtime.UNDEFINED)), 'sort', cast ([_Scene2DFormats.compareRiveLayoutProviders__riveLayout] : Array<Dynamic>));
+    roots = _Runtime.callProperty((cast _Runtime.filterArray((cast _Runtime.concatArrays([_Runtime.toArray(((cast componentProviders : flight._internal._Map<Float, RiveLayoutProvider__riveLayout>).values()))]) : Array<Dynamic>), function(provider:RiveLayoutProvider__riveLayout, __unused0:Float, __unused1:Array<RiveLayoutProvider__riveLayout>):Bool return ((cast _Runtime.coalesce(((cast providerParents : flight._internal._Map<Float, Float>).get((cast (cast provider : RiveLayoutProvider__riveLayout).sourceIndex))), function():Dynamic return cast -1.0) : Float) < (cast 0.0 : Float)), _Runtime.UNDEFINED)), 'sort', cast ([_Scene2DFormats.compareRiveLayoutProviders__riveLayout] : Array<Dynamic>));
     imports = (cast cast ([] : Array<Dynamic>));
     for (root in _Runtime.iterable(roots)) {
       var layoutNodes:Array<LayoutNode<Dynamic, Dynamic>> = (cast cast ([] : Array<Dynamic>));
@@ -2699,7 +2699,7 @@ class _Scene2DFormats {
           index++;
           continue;
         }
-        ((cast providers : flight._internal._Map<Float, RiveLayoutProvider__riveLayout>).set(index, (cast { sourceIndex: index, styleIndex: styleIndex, targetIndex: index, type: 'component' })));
+        ((cast providers : flight._internal._Map<Float, RiveLayoutProvider__riveLayout>).set((cast index), (cast { sourceIndex: index, styleIndex: styleIndex, targetIndex: index, type: 'component' })));
         index++;
       }
     }
@@ -2713,7 +2713,7 @@ class _Scene2DFormats {
     index = start;
     child = initialChild;
     while ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool)) {
-      if ((cast ((cast components : flight._internal._Map<Float, RiveLayoutProvider__riveLayout>).has(index)) : Bool)) { return cast index; }
+      if ((cast ((cast components : flight._internal._Map<Float, RiveLayoutProvider__riveLayout>).has((cast index))) : Bool)) { return cast index; }
       var object:RiveCoreObject = flight._internal._StaticIndex.readArray(artboard.objects, index);
       if ((cast _Runtime.strictEquals(object.typeKey, _Scene2DFormats.RIVE_NODE_TYPE_KEY__riveLayout) : Bool)) {
         (child = cast (index : Dynamic));
@@ -2747,15 +2747,15 @@ class _Scene2DFormats {
     if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return; }
     source = flight._internal._StaticIndex.readArray(artboard.objects, _Runtime.field(provider, 'sourceIndex'));
     style = flight._internal._StaticIndex.readArray(artboard.objects, _Runtime.field(provider, 'styleIndex'));
-    children = _Runtime.coalesce(((cast childrenByProvider : flight._internal._Map<Float, Array<RiveLayoutProvider__riveLayout>>).get(_Runtime.field(provider, 'sourceIndex'))), function():Dynamic return cast cast ([] : Array<Dynamic>));
+    children = _Runtime.coalesce(((cast childrenByProvider : flight._internal._Map<Float, Array<RiveLayoutProvider__riveLayout>>).get((cast _Runtime.field(provider, 'sourceIndex')))), function():Dynamic return cast cast ([] : Array<Dynamic>));
     context = ((cast _Runtime.strictEquals(_Runtime.field(provider, 'type'), 'component') : Bool) ? (cast (cast _Scene2DFormats.createRiveLayoutContext__riveLayout((cast _Runtime.field(provider, 'sourceIndex') : Float), ({ final __callArgument1121:Dynamic = style; __callArgument1121; }), (cast _Runtime.coalesce(({ final __structural1122 = parentContext; __structural1122 == null ? _Runtime.UNDEFINED : (cast __structural1122 : { var rtl:Bool; }).rtl; }), function():Dynamic return cast false) : Bool), (cast _Runtime.field(children, 'length') : Float)) : RiveLayoutContext__riveLayout) : Dynamic) : (cast null : Dynamic));
-    itemStyle = ((cast _Runtime.strictEquals(parentContext, null) : Bool) ? (cast null : Dynamic) : (cast (cast _Scene2DFormats.createRiveItemStyle__riveLayout(({ final __callArgument1125:Dynamic = artboard; __callArgument1125; }), (cast provider : Dynamic), ({ final __callArgument1126:Dynamic = source; __callArgument1126; }), ({ final __callArgument1127:Dynamic = style; __callArgument1127; }), (cast parentContext : Dynamic), ((cast placements : flight._internal._Map<Float, RiveCoreObject>).get(_Runtime.field(provider, 'sourceIndex')))) : Null<flight._internal._Union2<FlexLayoutItemStyle, GridLayoutItemStyle>>) : Dynamic));
+    itemStyle = ((cast _Runtime.strictEquals(parentContext, null) : Bool) ? (cast null : Dynamic) : (cast (cast _Scene2DFormats.createRiveItemStyle__riveLayout(({ final __callArgument1125:Dynamic = artboard; __callArgument1125; }), (cast provider : Dynamic), ({ final __callArgument1126:Dynamic = source; __callArgument1126; }), ({ final __callArgument1127:Dynamic = style; __callArgument1127; }), (cast parentContext : Dynamic), ((cast placements : flight._internal._Map<Float, RiveCoreObject>).get((cast _Runtime.field(provider, 'sourceIndex'))))) : Null<flight._internal._Union2<FlexLayoutItemStyle, GridLayoutItemStyle>>) : Dynamic));
     kind = ((cast ((cast _Runtime.strictEquals(context, null) : Bool) || (cast _Runtime.strictEquals((cast context : RiveLayoutContext__riveLayout).layoutType, _Scene2DFormats.RIVE_LAYOUT_TYPE_FLEX__riveLayout) : Bool)) : Bool) ? (cast FlexLayoutKind : Dynamic) : (cast GridLayoutKind : Dynamic));
     containerStyle = ((cast _Runtime.strictEquals(context, null) : Bool) ? (cast null : Dynamic) : (cast ((cast _Runtime.strictEquals((cast context : RiveLayoutContext__riveLayout).layoutType, _Scene2DFormats.RIVE_LAYOUT_TYPE_FLEX__riveLayout) : Bool) ? (cast (cast _Scene2DFormats.createRiveFlexContainerStyle__riveLayout(({ final __callArgument1131:Dynamic = style; __callArgument1131; }), (cast context : Dynamic), ({ final __callArgument1132:Dynamic = diagnostics; __callArgument1132; })) : FlexLayoutContainerStyle) : Dynamic) : (cast (cast _Scene2DFormats.createRiveGridContainerStyle__riveLayout(({ final __callArgument1135:Dynamic = artboard; __callArgument1135; }), (cast _Runtime.field(provider, 'sourceIndex') : Float), ({ final __callArgument1136:Dynamic = style; __callArgument1136; }), (cast context : Dynamic), ({ final __callArgument1137:Dynamic = diagnostics; __callArgument1137; })) : GridLayoutContainerStyle) : Dynamic)) : Dynamic));
     nodeIndex = _Runtime.field(nodes, 'length');
     _Runtime.callProperty(nodes, 'push', cast ([{ containerStyle: containerStyle, itemStyle: itemStyle, kind: kind, parentIndex: parentIndex }] : Array<Dynamic>));
     _Runtime.callProperty(targets, 'push', cast ([target] : Array<Dynamic>));
-    if ((cast ((cast !(cast ((cast components : flight._internal._Map<Float, RiveLayoutProvider__riveLayout>).has(_Runtime.field(provider, 'sourceIndex'))) : Bool) : Bool) || (cast _Runtime.strictEquals(context, null) : Bool)) : Bool)) { return; }
+    if ((cast ((cast !(cast ((cast components : flight._internal._Map<Float, RiveLayoutProvider__riveLayout>).has((cast _Runtime.field(provider, 'sourceIndex')))) : Bool) : Bool) || (cast _Runtime.strictEquals(context, null) : Bool)) : Bool)) { return; }
     for (child in _Runtime.iterable(children)) {
       _Scene2DFormats.appendRiveLayoutProvider__riveLayout(({ final __callArgument1143:Dynamic = artboard; __callArgument1143; }), ({ final __callArgument1144:Dynamic = displayNodes; __callArgument1144; }), (cast components : Dynamic), (cast childrenByProvider : Dynamic), ({ final __callArgument1145:Dynamic = placements; __callArgument1145; }), (cast child : Dynamic), (cast nodeIndex : Float), (cast context : Dynamic), ({ final __callArgument1146:Dynamic = nodes; __callArgument1146; }), ({ final __callArgument1147:Dynamic = targets; __callArgument1147; }), ({ final __callArgument1148:Dynamic = diagnostics; __callArgument1148; }));
     }
@@ -3358,7 +3358,7 @@ class _Scene2DFormats {
       if ((cast ((cast _Runtime.strictEquals(shape, null) : Bool) || (cast _Runtime.strictEquals(shape, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { continue; }
       var rebuild:Void->Void = cast _Runtime.UNDEFINED;
       rebuild = (cast function():Void { _Scene2DFormats.rebuildRiveShape__riveScene2D((cast shape : Shape), ({ final __callArgument1432:Dynamic = artboard; __callArgument1432; }), (cast shapeIndex : Float), ({ final __callArgument1433:Dynamic = shapePaths; __callArgument1433; }), ({ final __callArgument1434:Dynamic = _Runtime.field(_Runtime, 'UNDEFINED'); __callArgument1434; })); });
-      ((cast rebuilds : flight._internal._Map<Float, Void->Void>).set(shapeIndex, (cast rebuild)));
+      ((cast rebuilds : flight._internal._Map<Float, Void->Void>).set((cast shapeIndex), (cast rebuild)));
       _Scene2DFormats.rebuildRiveShape__riveScene2D((cast shape : Shape), ({ final __callArgument1438:Dynamic = artboard; __callArgument1438; }), (cast shapeIndex : Float), ({ final __callArgument1439:Dynamic = shapePaths; __callArgument1439; }), ({ final __callArgument1440:Dynamic = diagnostics; __callArgument1440; }));
     }
     span = (cast { end: artboard.streamEnd, start: artboard.streamStart });
@@ -3401,11 +3401,11 @@ class _Scene2DFormats {
   public static function rebuildRiveShape__riveScene2D(shape:Shape, artboard:RiveArtboardGraph, shapeIndex:Float, shapePaths:flight._internal._Map<Float, Array<RivePathRecord>>, diagnostics:Null<Array<ImportDiagnostic>>):Void {
     var records:Array<RivePathRecord> = cast _Runtime.UNDEFINED;
     records = (cast cast ([] : Array<Dynamic>));
-    for (pathIndex in _Runtime.iterable(_Runtime.coalesce(({ final __collection1500:Dynamic = ((cast shapePaths : flight._internal._Map<Float, Array<RivePathRecord>>).get(shapeIndex)); __collection1500 == null ? _Runtime.UNDEFINED : (cast _Runtime.mapArray((cast __collection1500 : Array<RivePathRecord>), function(record:RivePathRecord, __unused4:Float, __unused5:Array<RivePathRecord>):Float return record.pathIndex, _Runtime.UNDEFINED)); }), function():Dynamic return cast cast ([] : Array<Dynamic>)))) {
+    for (pathIndex in _Runtime.iterable(_Runtime.coalesce(({ final __collection1500:Dynamic = ((cast shapePaths : flight._internal._Map<Float, Array<RivePathRecord>>).get((cast shapeIndex))); __collection1500 == null ? _Runtime.UNDEFINED : (cast _Runtime.mapArray((cast __collection1500 : Array<RivePathRecord>), function(record:RivePathRecord, __unused4:Float, __unused5:Array<RivePathRecord>):Float return record.pathIndex, _Runtime.UNDEFINED)); }), function():Dynamic return cast cast ([] : Array<Dynamic>)))) {
       var record:Null<RivePathRecord> = (cast _Scene2DFormats.createRivePathRecord__riveScene2D(({ final __callArgument1501:Dynamic = artboard; __callArgument1501; }), (cast pathIndex : Float), ({ final __callArgument1502:Dynamic = _Runtime.field(_Runtime, 'UNDEFINED'); __callArgument1502; })) : Null<RivePathRecord>);
       if ((cast !_Runtime.strictEquals(record, null) : Bool)) { _Runtime.callProperty(records, 'push', cast ([record] : Array<Dynamic>)); }
     }
-    ((cast shapePaths : flight._internal._Map<Float, Array<RivePathRecord>>).set(shapeIndex, (cast records)));
+    ((cast shapePaths : flight._internal._Map<Float, Array<RivePathRecord>>).set((cast shapeIndex), (cast records)));
     clearShapeCommands(({ final __callArgument1505:Dynamic = shape; __callArgument1505; }));
     appendRiveShapePaint(({ final __callArgument1507:Dynamic = shape; __callArgument1507; }), ({ final __callArgument1508:Dynamic = artboard; __callArgument1508; }), (cast shapeIndex : Float), ({ final __callArgument1509:Dynamic = records; __callArgument1509; }), ({ final __callArgument1510:Dynamic = diagnostics; __callArgument1510; }));
   }
@@ -3421,9 +3421,9 @@ class _Scene2DFormats {
     }
     record = (cast _Scene2DFormats.createRivePathRecord__riveScene2D(({ final __callArgument1523:Dynamic = artboard; __callArgument1523; }), (cast index : Float), ({ final __callArgument1524:Dynamic = diagnostics; __callArgument1524; })) : Null<RivePathRecord>);
     if ((cast _Runtime.strictEquals(record, null) : Bool)) { return; }
-    records = _Runtime.coalesce(((cast shapePaths : flight._internal._Map<Float, Array<RivePathRecord>>).get(owner)), function():Dynamic return cast cast ([] : Array<Dynamic>));
+    records = _Runtime.coalesce(((cast shapePaths : flight._internal._Map<Float, Array<RivePathRecord>>).get((cast owner))), function():Dynamic return cast cast ([] : Array<Dynamic>));
     _Runtime.callProperty(records, 'push', cast ([record] : Array<Dynamic>));
-    ((cast shapePaths : flight._internal._Map<Float, Array<RivePathRecord>>).set(owner, (cast records)));
+    ((cast shapePaths : flight._internal._Map<Float, Array<RivePathRecord>>).set((cast owner), (cast records)));
   }
 
   public static function createRivePathRecord__riveScene2D(artboard:RiveArtboardGraph, index:Float, diagnostics:Null<Array<ImportDiagnostic>>):Null<RivePathRecord> {
@@ -3503,13 +3503,13 @@ class _Scene2DFormats {
     var mode:Null<String> = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast source.typeKey : Float), (cast _Scene2DFormats.RIVE_DRAWABLE_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool) : Bool)) { return; }
     value = (cast _Scene2DFormats.readRiveNumber__riveScene2D(({ final __callArgument1597:Dynamic = source; __callArgument1597; }), (cast _Scene2DFormats.RIVE_BLEND_MODE__riveScene2D : Float), (cast _Scene2DFormats.RIVE_BLEND_SRC_OVER__riveScene2D : Float)) : Float);
-    fixed = ((cast _Scene2DFormats.RIVE_FIXED_BLEND_MODES__riveScene2D : flight._internal._Map<Float, String>).get(value));
+    fixed = ((cast _Scene2DFormats.RIVE_FIXED_BLEND_MODES__riveScene2D : flight._internal._Map<Float, String>).get((cast value)));
     if ((cast !_Runtime.strictEquals(fixed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (target.blendMode = cast (fixed : Null<String>));
       return;
     }
     (target.blendMode = cast ((cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Normal : Null<String>));
-    mode = ((cast _Scene2DFormats.RIVE_ADVANCED_BLEND_MODES__riveScene2D : flight._internal._Map<Float, String>).get(value));
+    mode = ((cast _Scene2DFormats.RIVE_ADVANCED_BLEND_MODES__riveScene2D : flight._internal._Map<Float, String>).get((cast value)));
     if ((cast !_Runtime.strictEquals(mode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(advanced, 'push', cast ([{ mode: mode, node: target }] : Array<Dynamic>)); }
   }
 
@@ -3590,8 +3590,8 @@ class _Scene2DFormats {
     var sprite:Sprite = cast _Runtime.UNDEFINED;
     texture = (cast createTexture((cast { dimension: '2d', source: null } : Dynamic)) : Texture2D);
     sprite = (cast createSprite((cast { data: { texture: texture }, name: name } : Dynamic)) : Sprite);
-    ((cast _Scene2DFormats._imageTextures__riveScene2DDocument : flight._internal._WeakMap<Node2D, Texture>).set(sprite, (cast texture)));
-    ((cast _Scene2DFormats._imageAssetIndices__riveScene2DDocument : flight._internal._WeakMap<Node2D, Float>).set(sprite, (cast assetIndex)));
+    ((cast _Scene2DFormats._imageTextures__riveScene2DDocument : flight._internal._WeakMap<Node2D, Texture>).set((cast sprite), (cast texture)));
+    ((cast _Scene2DFormats._imageAssetIndices__riveScene2DDocument : flight._internal._WeakMap<Node2D, Float>).set((cast sprite), (cast assetIndex)));
     return cast sprite;
     return cast null;
   }
@@ -3608,7 +3608,7 @@ class _Scene2DFormats {
 
   public static function collectRiveSlots__riveScene2DDocument(node:Node2D, artboards:Array<RiveArtboardImport>, slots:Array<Scene2DSlotReference>):Void {
     var nested:Null<Float> = cast _Runtime.UNDEFINED;
-    nested = ((cast _Scene2DFormats._nestedArtboards__riveScene2DDocument : flight._internal._WeakMap<Node2D, Float>).get(node));
+    nested = ((cast _Scene2DFormats._nestedArtboards__riveScene2DDocument : flight._internal._WeakMap<Node2D, Float>).get((cast node)));
     if ((cast !_Runtime.strictEquals(nested, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var target:RiveArtboardImport = flight._internal._StaticIndex.readArray(artboards, nested);
       _Runtime.callProperty(slots, 'push', cast ([{ content: null, linkage: ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast null : Dynamic) : (cast _Runtime.field(target, 'name') : Dynamic)), name: ((cast ((cast !_Runtime.strictEquals((cast node : { var name:Null<String>; }).name, null) : Bool) && (cast !_Runtime.strictEquals((cast node : { var name:Null<String>; }).name, '') : Bool)) : Bool) ? (cast (cast node : { var name:Null<String>; }).name : Dynamic) : (cast _Runtime.coalesce(_Runtime.optionalField(target, 'name'), function():Dynamic return cast '') : Dynamic)), required: false, target: node }] : Array<Dynamic>));
@@ -3647,8 +3647,8 @@ class _Scene2DFormats {
       var walk:Node2D->Void = cast _Runtime.UNDEFINED;
       walk = (cast function(node:Node2D):Void {
         var texture:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10719:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
-        texture = ((cast _Scene2DFormats._imageTextures__riveScene2DDocument : flight._internal._WeakMap<Node2D, Texture>).get(node));
-        if ((cast ((cast !_Runtime.strictEquals(texture, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(((cast _Scene2DFormats._imageAssetIndices__riveScene2DDocument : flight._internal._WeakMap<Node2D, Float>).get(node)), assetIndex) : Bool)) : Bool)) { _Runtime.callProperty(textures, 'push', cast ([texture] : Array<Dynamic>)); }
+        texture = ((cast _Scene2DFormats._imageTextures__riveScene2DDocument : flight._internal._WeakMap<Node2D, Texture>).get((cast node)));
+        if ((cast ((cast !_Runtime.strictEquals(texture, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(((cast _Scene2DFormats._imageAssetIndices__riveScene2DDocument : flight._internal._WeakMap<Node2D, Float>).get((cast node))), assetIndex) : Bool)) : Bool)) { _Runtime.callProperty(textures, 'push', cast ([texture] : Array<Dynamic>)); }
         {
           var index:Float = 0.0;
           while ((cast ((cast index : Float) < (cast (cast getNodeChildCount((cast node : Dynamic)) : Float) : Float)) : Bool)) {
@@ -3681,7 +3681,7 @@ class _Scene2DFormats {
   @:allow(flight)
   @:keep
   private static function markRiveNestedArtboard(node:Node2D, artboardIndex:Float):Void {
-    ((cast _Scene2DFormats._nestedArtboards__riveScene2DDocument : flight._internal._WeakMap<Node2D, Float>).set(node, (cast artboardIndex)));
+    ((cast _Scene2DFormats._nestedArtboards__riveScene2DDocument : flight._internal._WeakMap<Node2D, Float>).set((cast node), (cast artboardIndex)));
   }
 
   public static function toRiveMimeType__riveScene2DDocument(bytes:flight._internal._UInt8Array, assetIndex:Float, diagnostics:Null<Array<ImportDiagnostic>>):Null<String> {
@@ -4553,9 +4553,9 @@ class _Scene2DFormats {
     if ((cast _Runtime.strictEquals(_Runtime.field(components, 'length'), 0.0) : Bool)) { return cast null; }
     depths = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
     for (component in _Runtime.iterable(components)) {
-      ((cast depths : flight._internal._Map<Float, Float>).set(component, (cast (cast _Scene2DFormats.toRiveComponentDepth__riveSkeleton(({ final __callArgument1977:Dynamic = artboard; __callArgument1977; }), (cast component : Float)) : Float))));
+      ((cast depths : flight._internal._Map<Float, Float>).set((cast component), (cast (cast _Scene2DFormats.toRiveComponentDepth__riveSkeleton(({ final __callArgument1977:Dynamic = artboard; __callArgument1977; }), (cast component : Float)) : Float))));
     }
-    ordered = _Runtime.sortAndReturn(_Runtime.slice(components, 0, null), function(a:Float, b:Float) return _Runtime.orValue(_Runtime.subtractNumbers(_Runtime.coalesce(((cast depths : flight._internal._Map<Float, Float>).get(a)), function():Dynamic return cast 0.0), _Runtime.coalesce(((cast depths : flight._internal._Map<Float, Float>).get(b)), function():Dynamic return cast 0.0)), function():Dynamic return cast (a - b)));
+    ordered = _Runtime.sortAndReturn(_Runtime.slice(components, 0, null), function(a:Float, b:Float) return _Runtime.orValue(_Runtime.subtractNumbers(_Runtime.coalesce(((cast depths : flight._internal._Map<Float, Float>).get((cast a))), function():Dynamic return cast 0.0), _Runtime.coalesce(((cast depths : flight._internal._Map<Float, Float>).get((cast b))), function():Dynamic return cast 0.0)), function():Dynamic return cast (a - b)));
     {
       var position:Float = 0.0;
       while ((cast ((cast position : Float) < (cast _Runtime.field(ordered, 'length') : Float)) : Bool)) {
@@ -5008,8 +5008,8 @@ class _Scene2DFormats {
     style = ((cast ((cast ((cast styleIndex : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast styleIndex : Float) < (cast _Runtime.field(artboard.objects, 'length') : Float)) : Bool)) : Bool) ? (cast flight._internal._StaticIndex.readArray(artboard.objects, styleIndex) : Dynamic) : (cast null : Dynamic));
     format = (cast { align: ((cast _Runtime.strictEquals(align, _Scene2DFormats.RIVE_ALIGN_RIGHT__riveText) : Bool) ? (cast 'right' : Dynamic) : (cast ((cast _Runtime.strictEquals(align, _Scene2DFormats.RIVE_ALIGN_CENTER__riveText) : Bool) ? (cast 'center' : Dynamic) : (cast 'left' : Dynamic)) : Dynamic)), color: (cast _Scene2DFormats.readRiveStyleColor__riveText(({ final __callArgument2138:Dynamic = artboard; __callArgument2138; }), (cast styleIndex : Float)) : Float) });
     if ((cast _Runtime.strictEquals(style, null) : Bool)) {
-      if ((cast ((cast ((cast styleIndex : Float) >= (cast 0.0 : Float)) : Bool) && (cast !(cast ((cast unresolvedStyles : flight._internal._Set<Float>).has(styleIndex)) : Bool) : Bool)) : Bool)) {
-        ((cast unresolvedStyles : flight._internal._Set<Float>).add(styleIndex));
+      if ((cast ((cast ((cast styleIndex : Float) >= (cast 0.0 : Float)) : Bool) && (cast !(cast ((cast unresolvedStyles : flight._internal._Set<Float>).has((cast styleIndex))) : Bool) : Bool)) : Bool)) {
+        ((cast unresolvedStyles : flight._internal._Set<Float>).add((cast styleIndex)));
         reportImportDiagnostic(({ final __callArgument2140:Dynamic = diagnostics; __callArgument2140; }), ({ final __callArgument2141:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument2141; }), (cast 'rive.text-unresolved-style' : String), (cast 'createRiveTextFormat' : String), ({ final __callArgument2142:Dynamic = { styleIndex: styleIndex }; __callArgument2142; }));
       }
       return cast format;
@@ -5194,7 +5194,7 @@ class _Scene2DFormats {
     maskReference = (cast _Scene2DFormats.parseUrlReference__svgDocument((cast _Scene2DFormats.attribute__svgDocument(({ final __callArgument2224:Dynamic = element; __callArgument2224; }), (cast 'mask' : String)) : Null<String>)) : Null<String>);
     clipId = _Runtime.coalesce(clipReference, function():Dynamic return cast maskReference);
     if ((cast _Runtime.strictEquals(clipId, null) : Bool)) { return; }
-    clipElement = ((cast (cast context : SvgImportContext__svgDocument).elementsById : flight._internal._Map<String, XmlElement>).get(clipId));
+    clipElement = ((cast (cast context : SvgImportContext__svgDocument).elementsById : flight._internal._Map<String, XmlElement>).get((cast clipId)));
     if ((cast _Runtime.strictEquals(clipElement, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       reportImportDiagnostic((cast context : SvgImportContext__svgDocument).diagnostics, ({ final __callArgument2228:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument2228; }), (cast 'svg.unresolved-clip-reference' : String), (cast 'applySvgElementClip' : String), ({ final __callArgument2229:Dynamic = { id: clipId }; __callArgument2229; }));
       return;
@@ -5284,7 +5284,7 @@ class _Scene2DFormats {
     var childCount:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals((cast target : { var kind:String; }).kind, TextLabelKind) : Bool) || (cast _Runtime.strictEquals((cast target : { var kind:String; }).kind, RichTextKind) : Bool)) : Bool)) { return cast null; }
     out = (cast (#if js _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>)) #else createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Rectangle);
-    recorded = ((cast (cast context : SvgImportContext__svgDocument).objectBoundingBoxes : flight._internal._Map<Node2D, Rectangle>).get(target));
+    recorded = ((cast (cast context : SvgImportContext__svgDocument).objectBoundingBoxes : flight._internal._Map<Node2D, Rectangle>).get((cast target)));
     if ((cast _Runtime.strictEquals((cast target : { var kind:String; }).kind, ShapeKind) : Bool)) {
       var shapeBounds:Rectangle = (cast (#if js _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>)) #else createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Rectangle);
       if ((cast !(cast (cast getShapeBounds(({ final __callArgument2266:Dynamic = shapeBounds; __callArgument2266; }), (cast target : Shape), ({ final __callArgument2267:Dynamic = 'fill'; __callArgument2267; })) : Bool) : Bool) : Bool)) { return cast null; }
@@ -5439,18 +5439,18 @@ class _Scene2DFormats {
     var referencedRegion:ClipRegion = cast _Runtime.UNDEFINED;
     id = (cast _Scene2DFormats.parseUrlReference__svgDocument((cast _Scene2DFormats.attribute__svgDocument(({ final __callArgument2448:Dynamic = element; __callArgument2448; }), (cast 'clip-path' : String)) : Null<String>)) : Null<String>);
     if ((cast _Runtime.strictEquals(id, null) : Bool)) { return cast base; }
-    referenced = ((cast (cast context : SvgImportContext__svgDocument).elementsById : flight._internal._Map<String, XmlElement>).get(id));
-    if ((cast ((cast _Runtime.strictEquals(referenced, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast (cast context : SvgImportContext__svgDocument).resolvingClips : flight._internal._Set<String>).has(id)) : Bool)) : Bool)) {
-      reportImportDiagnostic((cast context : SvgImportContext__svgDocument).diagnostics, ({ final __callArgument2452:Dynamic = ((cast ((cast (cast context : SvgImportContext__svgDocument).resolvingClips : flight._internal._Set<String>).has(id)) : Bool) ? (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : Dynamic) : (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : Dynamic)); __callArgument2452; }), (cast 'svg.unresolved-clip-reference' : String), (cast 'intersectSvgClipReference' : String), ({ final __callArgument2453:Dynamic = { id: id }; __callArgument2453; }));
+    referenced = ((cast (cast context : SvgImportContext__svgDocument).elementsById : flight._internal._Map<String, XmlElement>).get((cast id)));
+    if ((cast ((cast _Runtime.strictEquals(referenced, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast (cast context : SvgImportContext__svgDocument).resolvingClips : flight._internal._Set<String>).has((cast id))) : Bool)) : Bool)) {
+      reportImportDiagnostic((cast context : SvgImportContext__svgDocument).diagnostics, ({ final __callArgument2452:Dynamic = ((cast ((cast (cast context : SvgImportContext__svgDocument).resolvingClips : flight._internal._Set<String>).has((cast id))) : Bool) ? (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : Dynamic) : (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : Dynamic)); __callArgument2452; }), (cast 'svg.unresolved-clip-reference' : String), (cast 'intersectSvgClipReference' : String), ({ final __callArgument2453:Dynamic = { id: id }; __callArgument2453; }));
       return cast base;
     }
     if ((cast ((cast !_Runtime.strictEquals(transform, null) : Bool) && (cast (cast _Scene2DFormats.usesSvgObjectBoundingBoxUnits__svgDocument(({ final __callArgument2456:Dynamic = referenced; __callArgument2456; })) : Bool) : Bool)) : Bool)) {
       reportImportDiagnostic((cast context : SvgImportContext__svgDocument).diagnostics, ({ final __callArgument2458:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument2458; }), (cast 'svg.clip-nested-intersection-unsupported' : String), (cast 'intersectSvgClipReference' : String), ({ final __callArgument2459:Dynamic = { id: id, reason: 'transformed-object-bounding-box-target' }; __callArgument2459; }));
       return cast base;
     }
-    ((cast (cast context : SvgImportContext__svgDocument).resolvingClips : flight._internal._Set<String>).add(id));
+    ((cast (cast context : SvgImportContext__svgDocument).resolvingClips : flight._internal._Set<String>).add((cast id)));
     referencedRegion = (cast _Scene2DFormats.createSvgClipRegion__svgDocument(({ final __callArgument2462:Dynamic = referenced; __callArgument2462; }), ({ final __callArgument2463:Dynamic = base.rect; __callArgument2463; }), (cast context : Dynamic)) : ClipRegion);
-    ((cast (cast context : SvgImportContext__svgDocument).resolvingClips : flight._internal._Set<String>).delete_(id));
+    ((cast (cast context : SvgImportContext__svgDocument).resolvingClips : flight._internal._Set<String>).delete_((cast id)));
     if ((cast !_Runtime.strictEquals(transform, null) : Bool)) { transformClipRegion(({ final __callArgument2466:Dynamic = referencedRegion; __callArgument2466; }), ({ final __callArgument2467:Dynamic = referencedRegion; __callArgument2467; }), ({ final __callArgument2468:Dynamic = transform; __callArgument2468; })); }
     intersectClipRegions(({ final __callArgument2472:Dynamic = base; __callArgument2472; }), ({ final __callArgument2473:Dynamic = base; __callArgument2473; }), ({ final __callArgument2474:Dynamic = referencedRegion; __callArgument2474; }));
     return cast base;
@@ -5463,18 +5463,18 @@ class _Scene2DFormats {
     var referenced:Null<XmlElement> = cast _Runtime.UNDEFINED;
     href = (cast _Scene2DFormats.attribute__svgDocument(({ final __callArgument2478:Dynamic = element; __callArgument2478; }), (cast 'href' : String)) : Null<String>);
     id = ((cast _Runtime.strictEquals(_Runtime.callOptionalProperty(href, 'startsWith', cast (['#'] : Array<Dynamic>)), true) : Bool) ? (cast _Runtime.slice(href, 1.0, null) : Dynamic) : (cast null : Dynamic));
-    if ((cast ((cast _Runtime.strictEquals(id, null) : Bool) || (cast ((cast (cast context : SvgImportContext__svgDocument).resolvingClipUses : flight._internal._Set<String>).has(id)) : Bool)) : Bool)) {
+    if ((cast ((cast _Runtime.strictEquals(id, null) : Bool) || (cast ((cast (cast context : SvgImportContext__svgDocument).resolvingClipUses : flight._internal._Set<String>).has((cast id))) : Bool)) : Bool)) {
       reportImportDiagnostic((cast context : SvgImportContext__svgDocument).diagnostics, ({ final __callArgument2480:Dynamic = ((cast _Runtime.strictEquals(id, null) : Bool) ? (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : Dynamic) : (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : Dynamic)); __callArgument2480; }), (cast ((cast _Runtime.strictEquals(id, null) : Bool) ? (cast 'svg.unresolved-use' : Dynamic) : (cast 'svg.recursive-use' : Dynamic)) : String), (cast 'collectSvgClipUseGeometry' : String), ({ final __callArgument2481:Dynamic = ((cast _Runtime.strictEquals(id, null) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast { id: id } : Dynamic)); __callArgument2481; }));
       return;
     }
-    referenced = ((cast (cast context : SvgImportContext__svgDocument).elementsById : flight._internal._Map<String, XmlElement>).get(id));
+    referenced = ((cast (cast context : SvgImportContext__svgDocument).elementsById : flight._internal._Map<String, XmlElement>).get((cast id)));
     if ((cast _Runtime.strictEquals(referenced, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       reportImportDiagnostic((cast context : SvgImportContext__svgDocument).diagnostics, ({ final __callArgument2484:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument2484; }), (cast 'svg.unresolved-use' : String), (cast 'collectSvgClipUseGeometry' : String), ({ final __callArgument2485:Dynamic = { id: id }; __callArgument2485; }));
       return;
     }
-    ((cast (cast context : SvgImportContext__svgDocument).resolvingClipUses : flight._internal._Set<String>).add(id));
+    ((cast (cast context : SvgImportContext__svgDocument).resolvingClipUses : flight._internal._Set<String>).add((cast id)));
     _Scene2DFormats.collectSvgClipGeometryElement__svgDocument(({ final __callArgument2488:Dynamic = referenced; __callArgument2488; }), (cast style : Dynamic), ({ final __callArgument2489:Dynamic = transform; __callArgument2489; }), (cast context : Dynamic), (cast out : Dynamic), ({ final __callArgument2490:Dynamic = element; __callArgument2490; }));
-    ((cast (cast context : SvgImportContext__svgDocument).resolvingClipUses : flight._internal._Set<String>).delete_(id));
+    ((cast (cast context : SvgImportContext__svgDocument).resolvingClipUses : flight._internal._Set<String>).delete_((cast id)));
   }
 
   public static function copyNonEmptySvgBounds__svgDocument(out:Rectangle, source:Rectangle, hasBounds:Bool):Bool {
@@ -5530,7 +5530,7 @@ class _Scene2DFormats {
       _Scene2DFormats.appendSvgShapePaint__svgDocument(({ final __callArgument2528:Dynamic = shape; __callArgument2528; }), ({ final __callArgument2529:Dynamic = path; __callArgument2529; }), (cast style : Dynamic), ({ final __callArgument2530:Dynamic = element; __callArgument2530; }), (cast context : Dynamic));
       var bounds:Rectangle = (cast (#if js _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>)) #else createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Rectangle);
       (cast getPathBounds(({ final __callArgument2534:Dynamic = path; __callArgument2534; }), ({ final __callArgument2535:Dynamic = bounds; __callArgument2535; })) : Bool);
-      ((cast (cast context : SvgImportContext__svgDocument).objectBoundingBoxes : flight._internal._Map<Node2D, Rectangle>).set(shape, (cast bounds)));
+      ((cast (cast context : SvgImportContext__svgDocument).objectBoundingBoxes : flight._internal._Map<Node2D, Rectangle>).set((cast shape), (cast bounds)));
       _Scene2DFormats.applySvgElementClip__svgDocument(({ final __callArgument2538:Dynamic = shape; __callArgument2538; }), ({ final __callArgument2539:Dynamic = element; __callArgument2539; }), (cast context : Dynamic), ({ final __callArgument2540:Dynamic = bounds; __callArgument2540; }));
       return cast shape;
     }
@@ -5681,16 +5681,16 @@ class _Scene2DFormats {
     var referencedNode:Null<Node2D> = cast _Runtime.UNDEFINED;
     href = (cast _Scene2DFormats.attribute__svgDocument(({ final __callArgument2775:Dynamic = element; __callArgument2775; }), (cast 'href' : String)) : Null<String>);
     id = ((cast _Runtime.strictEquals(_Runtime.callOptionalProperty(href, 'startsWith', cast (['#'] : Array<Dynamic>)), true) : Bool) ? (cast _Runtime.slice(href, 1.0, null) : Dynamic) : (cast null : Dynamic));
-    if ((cast ((cast _Runtime.strictEquals(id, null) : Bool) || (cast ((cast (cast context : SvgImportContext__svgDocument).resolvingUses : flight._internal._Set<String>).has(id)) : Bool)) : Bool)) {
+    if ((cast ((cast _Runtime.strictEquals(id, null) : Bool) || (cast ((cast (cast context : SvgImportContext__svgDocument).resolvingUses : flight._internal._Set<String>).has((cast id))) : Bool)) : Bool)) {
       reportImportDiagnostic((cast context : SvgImportContext__svgDocument).diagnostics, ({ final __callArgument2777:Dynamic = ((cast _Runtime.strictEquals(id, null) : Bool) ? (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : Dynamic) : (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : Dynamic)); __callArgument2777; }), (cast ((cast _Runtime.strictEquals(id, null) : Bool) ? (cast 'svg.unresolved-use' : Dynamic) : (cast 'svg.recursive-use' : Dynamic)) : String), (cast 'createSvgUseNode' : String), ({ final __callArgument2778:Dynamic = ((cast _Runtime.strictEquals(id, null) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast { id: id } : Dynamic)); __callArgument2778; }));
       return cast null;
     }
-    referenced = ((cast (cast context : SvgImportContext__svgDocument).elementsById : flight._internal._Map<String, XmlElement>).get(id));
+    referenced = ((cast (cast context : SvgImportContext__svgDocument).elementsById : flight._internal._Map<String, XmlElement>).get((cast id)));
     if ((cast _Runtime.strictEquals(referenced, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       reportImportDiagnostic((cast context : SvgImportContext__svgDocument).diagnostics, ({ final __callArgument2781:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument2781; }), (cast 'svg.unresolved-use' : String), (cast 'createSvgUseNode' : String), ({ final __callArgument2782:Dynamic = { id: id }; __callArgument2782; }));
       return cast null;
     }
-    ((cast (cast context : SvgImportContext__svgDocument).resolvingUses : flight._internal._Set<String>).add(id));
+    ((cast (cast context : SvgImportContext__svgDocument).resolvingUses : flight._internal._Set<String>).add((cast id)));
     (#if js _Runtime.callValue(_Scene2DFormats.reportRemainingUnsupportedSvgElements__svgDocument, cast ([({ final __callArgument2786:Dynamic = referenced; __callArgument2786; }), (cast context : Dynamic)] : Array<Dynamic>)) #else _Scene2DFormats.reportRemainingUnsupportedSvgElements__svgDocument(({ final __callArgument2785:Dynamic = referenced; __callArgument2785; }), (cast context : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     container = (cast (#if js _Runtime.callValue(createDisplayObject, cast ([] : Array<Dynamic>)) #else createDisplayObject(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : DisplayObject);
     placement = (cast createMatrix(({ final __callArgument2787:Dynamic = 1.0; __callArgument2787; }), ({ final __callArgument2788:Dynamic = 0.0; __callArgument2788; }), ({ final __callArgument2789:Dynamic = 0.0; __callArgument2789; }), ({ final __callArgument2790:Dynamic = 1.0; __callArgument2790; }), ({ final __callArgument2793:Dynamic = (cast _Scene2DFormats.numberAttribute__svgDocument(({ final __callArgument2791:Dynamic = element; __callArgument2791; }), (cast 'x' : String), (cast 0.0 : Float)) : Float); __callArgument2793; }), ({ final __callArgument2796:Dynamic = (cast _Scene2DFormats.numberAttribute__svgDocument(({ final __callArgument2794:Dynamic = element; __callArgument2794; }), (cast 'y' : String), (cast 0.0 : Float)) : Float); __callArgument2796; })) : Matrix);
@@ -5698,7 +5698,7 @@ class _Scene2DFormats {
     referencedNode = ((cast _Runtime.strictEquals((cast _Scene2DFormats.localName__svgDocument((cast (cast referenced : { var name:String; }).name : String)) : String), 'symbol') : Bool) ? (cast (cast _Scene2DFormats.createSvgSymbolNode__svgDocument(({ final __callArgument2813:Dynamic = referenced; __callArgument2813; }), ({ final __callArgument2814:Dynamic = element; __callArgument2814; }), (cast style : Dynamic), (cast context : Dynamic)) : DisplayObject) : Dynamic) : (cast (cast _Scene2DFormats.createSvgElementNode__svgDocument(({ final __callArgument2817:Dynamic = referenced; __callArgument2817; }), (cast style : Dynamic), (cast context : Dynamic)) : Null<Node2D>) : Dynamic));
     if ((cast !_Runtime.strictEquals(referencedNode, null) : Bool)) { (cast addNodeChild((cast container : Dynamic), (cast referencedNode : Dynamic)) : NodeOf<Node2DTraits>); }
     _Scene2DFormats.applySvgElementClip__svgDocument(({ final __callArgument2819:Dynamic = container; __callArgument2819; }), ({ final __callArgument2820:Dynamic = element; __callArgument2820; }), (cast context : Dynamic), (cast _Scene2DFormats.createSvgNode2DBounds__svgDocument(({ final __callArgument2821:Dynamic = container; __callArgument2821; }), (cast context : Dynamic)) : Null<Rectangle>));
-    ((cast (cast context : SvgImportContext__svgDocument).resolvingUses : flight._internal._Set<String>).delete_(id));
+    ((cast (cast context : SvgImportContext__svgDocument).resolvingUses : flight._internal._Set<String>).delete_((cast id)));
     return cast container;
     return cast null;
   }
@@ -5914,9 +5914,9 @@ class _Scene2DFormats {
     var indexElement:XmlElement->Null<XmlElement>->Void = cast _Runtime.UNDEFINED;
     indexElement = (cast function(element:XmlElement, parent:Null<XmlElement>):Void {
       var id:Null<String> = cast _Runtime.UNDEFINED;
-      ((cast (cast context : SvgImportContext__svgDocument).parentByElement : flight._internal._Map<XmlElement, Null<XmlElement>>).set(element, (cast parent)));
+      ((cast (cast context : SvgImportContext__svgDocument).parentByElement : flight._internal._Map<XmlElement, Null<XmlElement>>).set((cast element), (cast parent)));
       id = (cast _Scene2DFormats.attribute__svgDocument(({ final __callArgument2999:Dynamic = element; __callArgument2999; }), (cast 'id' : String)) : Null<String>);
-      if ((cast !_Runtime.strictEquals(id, null) : Bool)) { ((cast (cast context : SvgImportContext__svgDocument).elementsById : flight._internal._Map<String, XmlElement>).set(id, (cast element))); }
+      if ((cast !_Runtime.strictEquals(id, null) : Bool)) { ((cast (cast context : SvgImportContext__svgDocument).elementsById : flight._internal._Map<String, XmlElement>).set((cast id), (cast element))); }
       for (child in _Runtime.iterable(element.children)) {
         indexElement(({ final __callArgument3003:Dynamic = child; __callArgument3003; }), ({ final __callArgument3004:Dynamic = element; __callArgument3004; }));
       }
@@ -5929,7 +5929,7 @@ class _Scene2DFormats {
       id = (cast _Scene2DFormats.attribute__svgDocument(({ final __callArgument3012:Dynamic = element; __callArgument3012; }), (cast 'id' : String)) : Null<String>);
       if ((cast ((cast !_Runtime.strictEquals(id, null) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(name, 'linearGradient'), function():Dynamic return cast _Runtime.strictEquals(name, 'radialGradient')) : Bool)) : Bool)) {
         var gradient:Null<SvgGradient__svgDocument> = (cast _Scene2DFormats.parseSvgGradient__svgDocument(({ final __callArgument3014:Dynamic = element; __callArgument3014; }), (cast context : Dynamic)) : Null<SvgGradient__svgDocument>);
-        if ((cast !_Runtime.strictEquals(gradient, null) : Bool)) { ((cast (cast context : SvgImportContext__svgDocument).gradientsById : flight._internal._Map<String, SvgGradient__svgDocument>).set(id, (cast gradient))); }
+        if ((cast !_Runtime.strictEquals(gradient, null) : Bool)) { ((cast (cast context : SvgImportContext__svgDocument).gradientsById : flight._internal._Map<String, SvgGradient__svgDocument>).set((cast id), (cast gradient))); }
       }
     }; __callArgument3016; }));
   }
@@ -6087,18 +6087,18 @@ class _Scene2DFormats {
     kind = ((cast _Runtime.strictEquals((cast _Scene2DFormats.localName__svgDocument((cast element.name : String)) : String), 'linearGradient') : Bool) ? (cast 'linear' : Dynamic) : (cast 'radial' : Dynamic));
     href = (cast _Scene2DFormats.attribute__svgDocument(({ final __callArgument3064:Dynamic = element; __callArgument3064; }), (cast 'href' : String)) : Null<String>);
     inheritedId = ((cast _Runtime.strictEquals(_Runtime.callOptionalProperty(href, 'startsWith', cast (['#'] : Array<Dynamic>)), true) : Bool) ? (cast _Runtime.slice(href, 1.0, null) : Dynamic) : (cast null : Dynamic));
-    inherited = ((cast _Runtime.strictEquals(inheritedId, null) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast (cast context : SvgImportContext__svgDocument).gradientsById : flight._internal._Map<String, SvgGradient__svgDocument>).get(inheritedId)) : Dynamic));
-    if ((cast ((cast ((cast _Runtime.strictEquals(inherited, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(inheritedId, null) : Bool)) : Bool) && (cast !(cast ((cast (cast context : SvgImportContext__svgDocument).resolvingGradients : flight._internal._Set<String>).has(inheritedId)) : Bool) : Bool)) : Bool)) {
-      var inheritedElement:Null<XmlElement> = ((cast (cast context : SvgImportContext__svgDocument).elementsById : flight._internal._Map<String, XmlElement>).get(inheritedId));
+    inherited = ((cast _Runtime.strictEquals(inheritedId, null) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast (cast context : SvgImportContext__svgDocument).gradientsById : flight._internal._Map<String, SvgGradient__svgDocument>).get((cast inheritedId))) : Dynamic));
+    if ((cast ((cast ((cast _Runtime.strictEquals(inherited, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(inheritedId, null) : Bool)) : Bool) && (cast !(cast ((cast (cast context : SvgImportContext__svgDocument).resolvingGradients : flight._internal._Set<String>).has((cast inheritedId))) : Bool) : Bool)) : Bool)) {
+      var inheritedElement:Null<XmlElement> = ((cast (cast context : SvgImportContext__svgDocument).elementsById : flight._internal._Map<String, XmlElement>).get((cast inheritedId)));
       if ((cast ((cast !_Runtime.strictEquals(inheritedElement, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals((cast _Scene2DFormats.localName__svgDocument((cast (cast inheritedElement : { var name:String; }).name : String)) : String), 'linearGradient'), function():Dynamic return cast _Runtime.strictEquals((cast _Scene2DFormats.localName__svgDocument((cast (cast inheritedElement : { var name:String; }).name : String)) : String), 'radialGradient')) : Bool)) : Bool)) {
-        ((cast (cast context : SvgImportContext__svgDocument).resolvingGradients : flight._internal._Set<String>).add(inheritedId));
+        ((cast (cast context : SvgImportContext__svgDocument).resolvingGradients : flight._internal._Set<String>).add((cast inheritedId)));
         (inherited = cast (_Runtime.coalesce((cast _Scene2DFormats.parseSvgGradient__svgDocument(({ final __callArgument3066:Dynamic = inheritedElement; __callArgument3066; }), (cast context : Dynamic)) : Null<SvgGradient__svgDocument>), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) : Dynamic));
-        ((cast (cast context : SvgImportContext__svgDocument).resolvingGradients : flight._internal._Set<String>).delete_(inheritedId));
-        if ((cast !_Runtime.strictEquals(inherited, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast (cast context : SvgImportContext__svgDocument).gradientsById : flight._internal._Map<String, SvgGradient__svgDocument>).set(inheritedId, (cast inherited))); }
+        ((cast (cast context : SvgImportContext__svgDocument).resolvingGradients : flight._internal._Set<String>).delete_((cast inheritedId)));
+        if ((cast !_Runtime.strictEquals(inherited, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast (cast context : SvgImportContext__svgDocument).gradientsById : flight._internal._Map<String, SvgGradient__svgDocument>).set((cast inheritedId), (cast inherited))); }
       }
     }
     if ((cast ((cast !_Runtime.strictEquals(inheritedId, null) : Bool) && (cast _Runtime.strictEquals(inherited, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-      reportImportDiagnostic((cast context : SvgImportContext__svgDocument).diagnostics, ({ final __callArgument3068:Dynamic = ((cast ((cast (cast context : SvgImportContext__svgDocument).resolvingGradients : flight._internal._Set<String>).has(inheritedId)) : Bool) ? (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : Dynamic) : (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : Dynamic)); __callArgument3068; }), (cast ((cast ((cast (cast context : SvgImportContext__svgDocument).resolvingGradients : flight._internal._Set<String>).has(inheritedId)) : Bool) ? (cast 'svg.recursive-gradient' : Dynamic) : (cast 'svg.unresolved-gradient-reference' : Dynamic)) : String), (cast 'parseSvgGradient' : String), ({ final __callArgument3069:Dynamic = { id: inheritedId }; __callArgument3069; }));
+      reportImportDiagnostic((cast context : SvgImportContext__svgDocument).diagnostics, ({ final __callArgument3068:Dynamic = ((cast ((cast (cast context : SvgImportContext__svgDocument).resolvingGradients : flight._internal._Set<String>).has((cast inheritedId))) : Bool) ? (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject : Dynamic) : (cast (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop : Dynamic)); __callArgument3068; }), (cast ((cast ((cast (cast context : SvgImportContext__svgDocument).resolvingGradients : flight._internal._Set<String>).has((cast inheritedId))) : Bool) ? (cast 'svg.recursive-gradient' : Dynamic) : (cast 'svg.unresolved-gradient-reference' : Dynamic)) : String), (cast 'parseSvgGradient' : String), ({ final __callArgument3069:Dynamic = { id: inheritedId }; __callArgument3069; }));
     }
     stops = (cast cast ([] : Array<Dynamic>));
     for (child in _Runtime.iterable(element.children)) {
@@ -6269,8 +6269,8 @@ class _Scene2DFormats {
 
   public static function reportUnsupportedSvgElement__svgDocument(element:XmlElement, context:SvgImportContext__svgDocument, origin:String):Void {
     var name:String = cast _Runtime.UNDEFINED;
-    if ((cast ((cast (cast context : SvgImportContext__svgDocument).reportedUnsupportedElements : flight._internal._Set<XmlElement>).has(element)) : Bool)) { return; }
-    ((cast (cast context : SvgImportContext__svgDocument).reportedUnsupportedElements : flight._internal._Set<XmlElement>).add(element));
+    if ((cast ((cast (cast context : SvgImportContext__svgDocument).reportedUnsupportedElements : flight._internal._Set<XmlElement>).has((cast element))) : Bool)) { return; }
+    ((cast (cast context : SvgImportContext__svgDocument).reportedUnsupportedElements : flight._internal._Set<XmlElement>).add((cast element)));
     name = (cast _Scene2DFormats.localName__svgDocument((cast element.name : String)) : String);
     reportImportDiagnostic((cast context : SvgImportContext__svgDocument).diagnostics, ({ final __callArgument3279:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument3279; }), (cast 'svg.unsupported-' + Std.string(name) + '' : String), (cast origin : String), ({ final __callArgument3280:Dynamic = { element: name }; __callArgument3280; }));
   }
@@ -6283,7 +6283,7 @@ class _Scene2DFormats {
   public static function resolveSvgGradient__svgDocument(value:String, context:SvgImportContext__svgDocument):Null<SvgGradient__svgDocument> {
     var id:Null<String> = cast _Runtime.UNDEFINED;
     id = (cast _Scene2DFormats.parseUrlReference__svgDocument(({ final __callArgument3283:Dynamic = value; __callArgument3283; })) : Null<String>);
-    return cast ((cast _Runtime.strictEquals(id, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.coalesce(((cast _Runtime.field(context, 'gradientsById') : flight._internal._Map<String, SvgGradient__svgDocument>).get(id)), function():Dynamic return cast null) : Dynamic));
+    return cast ((cast _Runtime.strictEquals(id, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.coalesce(((cast _Runtime.field(context, 'gradientsById') : flight._internal._Map<String, SvgGradient__svgDocument>).get((cast id))), function():Dynamic return cast null) : Dynamic));
     return cast null;
   }
 
@@ -6305,22 +6305,22 @@ class _Scene2DFormats {
     inheritedProperties = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
     for (name in _Runtime.iterable(flight._internal.DynamicObject.keys(declarations))) {
       if ((cast !_Runtime.strictEquals(StringTools.trim(Std.string(_Runtime.getIndex(declarations, name))), 'inherit') : Bool)) { continue; }
-      ((cast inheritedProperties : flight._internal._Set<String>).add(name));
+      ((cast inheritedProperties : flight._internal._Set<String>).add((cast name)));
       _Runtime.deleteIndex(declarations, name);
     }
     style = (cast _Runtime.mergeObjects([parentStyle]));
     ((cast style : SvgStyle__svgDocument).clipRule = (cast _Scene2DFormats.resolveSvgWinding__svgDocument(({ final __callArgument3301:Dynamic = _Runtime.getIndex(declarations, 'clip-rule'); __callArgument3301; }), (cast style : SvgStyle__svgDocument).clipRule) : PathWinding));
     ((cast style : SvgStyle__svgDocument).color = _Runtime.coalesce((cast declarations : { var color:String; }).color, function():Dynamic return cast (cast style : SvgStyle__svgDocument).color));
-    ((cast style : SvgStyle__svgDocument).display = ((cast ((cast inheritedProperties : flight._internal._Set<String>).has('display')) : Bool) ? (cast _Runtime.field(parentStyle, 'display') : Dynamic) : (cast _Runtime.coalesce((cast declarations : { var display:String; }).display, function():Dynamic return cast 'inline') : Dynamic)));
+    ((cast style : SvgStyle__svgDocument).display = ((cast ((cast inheritedProperties : flight._internal._Set<String>).has((cast 'display'))) : Bool) ? (cast _Runtime.field(parentStyle, 'display') : Dynamic) : (cast _Runtime.coalesce((cast declarations : { var display:String; }).display, function():Dynamic return cast 'inline') : Dynamic)));
     ((cast style : SvgStyle__svgDocument).fill = _Runtime.coalesce((cast declarations : { var fill:String; }).fill, function():Dynamic return cast (cast style : SvgStyle__svgDocument).fill));
     ((cast style : SvgStyle__svgDocument).fillOpacity = (cast _Scene2DFormats.clamp__svgDocument((cast (cast _Scene2DFormats.parseCssNumber__svgDocument(({ final __callArgument3303:Dynamic = _Runtime.getIndex(declarations, 'fill-opacity'); __callArgument3303; }), (cast (cast style : SvgStyle__svgDocument).fillOpacity : Float)) : Float) : Float), (cast 0.0 : Float), (cast 1.0 : Float)) : Float));
     ((cast style : SvgStyle__svgDocument).fillRule = (cast _Scene2DFormats.resolveSvgWinding__svgDocument(({ final __callArgument3307:Dynamic = _Runtime.getIndex(declarations, 'fill-rule'); __callArgument3307; }), (cast style : SvgStyle__svgDocument).fillRule) : PathWinding));
-    ((cast style : SvgStyle__svgDocument).filter = ((cast ((cast inheritedProperties : flight._internal._Set<String>).has('filter')) : Bool) ? (cast _Runtime.field(parentStyle, 'filter') : Dynamic) : (cast _Runtime.coalesce((cast declarations : { var filter:String; }).filter, function():Dynamic return cast 'none') : Dynamic)));
+    ((cast style : SvgStyle__svgDocument).filter = ((cast ((cast inheritedProperties : flight._internal._Set<String>).has((cast 'filter'))) : Bool) ? (cast _Runtime.field(parentStyle, 'filter') : Dynamic) : (cast _Runtime.coalesce((cast declarations : { var filter:String; }).filter, function():Dynamic return cast 'none') : Dynamic)));
     ((cast style : SvgStyle__svgDocument).fontFamily = _Runtime.coalesce(_Runtime.getIndex(declarations, 'font-family'), function():Dynamic return cast (cast style : SvgStyle__svgDocument).fontFamily));
     ((cast style : SvgStyle__svgDocument).fontSize = (cast _Scene2DFormats.parseSvgLength__svgDocument(({ final __callArgument3309:Dynamic = _Runtime.coalesce(_Runtime.getIndex(declarations, 'font-size'), function():Dynamic return cast null); __callArgument3309; }), (cast (cast style : SvgStyle__svgDocument).fontSize : Float)) : Float));
     ((cast style : SvgStyle__svgDocument).fontStyle = _Runtime.coalesce(_Runtime.getIndex(declarations, 'font-style'), function():Dynamic return cast (cast style : SvgStyle__svgDocument).fontStyle));
     ((cast style : SvgStyle__svgDocument).fontWeight = _Runtime.coalesce(_Runtime.getIndex(declarations, 'font-weight'), function():Dynamic return cast (cast style : SvgStyle__svgDocument).fontWeight));
-    ((cast style : SvgStyle__svgDocument).opacity = ((cast ((cast inheritedProperties : flight._internal._Set<String>).has('opacity')) : Bool) ? (cast _Runtime.field(parentStyle, 'opacity') : Dynamic) : (cast (cast _Scene2DFormats.clamp__svgDocument((cast (cast _Scene2DFormats.parseCssNumber__svgDocument(({ final __callArgument3311:Dynamic = (cast declarations : { var opacity:String; }).opacity; __callArgument3311; }), (cast 1.0 : Float)) : Float) : Float), (cast 0.0 : Float), (cast 1.0 : Float)) : Float) : Dynamic)));
+    ((cast style : SvgStyle__svgDocument).opacity = ((cast ((cast inheritedProperties : flight._internal._Set<String>).has((cast 'opacity'))) : Bool) ? (cast _Runtime.field(parentStyle, 'opacity') : Dynamic) : (cast (cast _Scene2DFormats.clamp__svgDocument((cast (cast _Scene2DFormats.parseCssNumber__svgDocument(({ final __callArgument3311:Dynamic = (cast declarations : { var opacity:String; }).opacity; __callArgument3311; }), (cast 1.0 : Float)) : Float) : Float), (cast 0.0 : Float), (cast 1.0 : Float)) : Float) : Dynamic)));
     ((cast style : SvgStyle__svgDocument).stroke = _Runtime.coalesce((cast declarations : { var stroke:String; }).stroke, function():Dynamic return cast (cast style : SvgStyle__svgDocument).stroke));
     ((cast style : SvgStyle__svgDocument).strokeDasharray = _Runtime.coalesce(_Runtime.getIndex(declarations, 'stroke-dasharray'), function():Dynamic return cast (cast style : SvgStyle__svgDocument).strokeDasharray));
     ((cast style : SvgStyle__svgDocument).strokeDashoffset = (cast _Scene2DFormats.parseSvgLength__svgDocument(({ final __callArgument3315:Dynamic = _Runtime.coalesce(_Runtime.getIndex(declarations, 'stroke-dashoffset'), function():Dynamic return cast null); __callArgument3315; }), (cast (cast style : SvgStyle__svgDocument).strokeDashoffset : Float)) : Float));
@@ -6340,12 +6340,12 @@ class _Scene2DFormats {
     var parent:Null<XmlElement> = cast _Runtime.UNDEFINED;
     var parentStyle:SvgStyle__svgDocument = cast _Runtime.UNDEFINED;
     var style:SvgStyle__svgDocument = cast _Runtime.UNDEFINED;
-    cached = ((cast (cast context : SvgImportContext__svgDocument).resolvedDefinitionStyles : flight._internal._Map<XmlElement, SvgStyle__svgDocument>).get(element));
+    cached = ((cast (cast context : SvgImportContext__svgDocument).resolvedDefinitionStyles : flight._internal._Map<XmlElement, SvgStyle__svgDocument>).get((cast element)));
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
-    parent = _Runtime.coalesce(((cast (cast context : SvgImportContext__svgDocument).parentByElement : flight._internal._Map<XmlElement, Null<XmlElement>>).get(element)), function():Dynamic return cast null);
+    parent = _Runtime.coalesce(((cast (cast context : SvgImportContext__svgDocument).parentByElement : flight._internal._Map<XmlElement, Null<XmlElement>>).get((cast element))), function():Dynamic return cast null);
     parentStyle = ((cast _Runtime.strictEquals(parent, null) : Bool) ? (cast _Scene2DFormats.defaultSvgStyle__svgDocument : Dynamic) : (cast (cast _Scene2DFormats.resolveSvgDefinitionStyle__svgDocument(({ final __callArgument3325:Dynamic = parent; __callArgument3325; }), (cast context : Dynamic)) : SvgStyle__svgDocument) : Dynamic));
     style = (cast _Scene2DFormats.resolveSvgStyle__svgDocument(({ final __callArgument3327:Dynamic = element; __callArgument3327; }), (cast parentStyle : Dynamic), (cast context : Dynamic)) : SvgStyle__svgDocument);
-    ((cast (cast context : SvgImportContext__svgDocument).resolvedDefinitionStyles : flight._internal._Map<XmlElement, SvgStyle__svgDocument>).set(element, (cast style)));
+    ((cast (cast context : SvgImportContext__svgDocument).resolvedDefinitionStyles : flight._internal._Map<XmlElement, SvgStyle__svgDocument>).set((cast element), (cast style)));
     return cast style;
     return cast null;
   }

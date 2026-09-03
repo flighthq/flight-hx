@@ -424,7 +424,7 @@ class _TextBidi {
     {
       var r:Float = 0.0;
       while ((cast ((cast r : Float) < (cast _Runtime.field(runs, 'length') : Float)) : Bool)) {
-        ((cast runByFirst : flight._internal._Map<Float, Float>).set(flight._internal._StaticIndex.readFloatArrayTyped((cast (cast flight._internal._StaticIndex.readArray(runs, r) : { var indices:Array<Float>; var keptStart:Float; var keptEnd:Float; }).indices : Array<Float>), (cast 0.0 : Float)), (cast r)));
+        ((cast runByFirst : flight._internal._Map<Float, Float>).set((cast flight._internal._StaticIndex.readFloatArrayTyped((cast (cast flight._internal._StaticIndex.readArray(runs, r) : { var indices:Array<Float>; var keptStart:Float; var keptEnd:Float; }).indices : Array<Float>), (cast 0.0 : Float))), (cast r)));
         r++;
       }
     }
@@ -451,7 +451,7 @@ class _TextBidi {
             var lastIdx:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast (cast run : { var indices:Array<Float>; var keptStart:Float; var keptEnd:Float; }).indices : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field((cast run : { var indices:Array<Float>; var keptStart:Float; var keptEnd:Float; }).indices, 'length'), 1.0) : Float));
             var lastType:BidiClass = flight._internal._StaticIndex.readArray(original, lastIdx);
             if ((cast ((cast _Runtime.orValue(((cast _Runtime.strictEquals(lastType, 'LRI') : Bool) || (cast _Runtime.strictEquals(lastType, 'RLI') : Bool)), function():Dynamic return cast _Runtime.strictEquals(lastType, 'FSI')) : Bool) && (cast ((cast flight._internal._StaticIndex.readInt32ArrayTyped((cast matchingPdi : flight._internal._Int32Array), (cast lastIdx : Float)) : Float) < (cast length : Float)) : Bool)) : Bool)) {
-              var next:Null<Float> = ((cast runByFirst : flight._internal._Map<Float, Float>).get(flight._internal._StaticIndex.readInt32ArrayTyped((cast matchingPdi : flight._internal._Int32Array), (cast lastIdx : Float))));
+              var next:Null<Float> = ((cast runByFirst : flight._internal._Map<Float, Float>).get((cast flight._internal._StaticIndex.readInt32ArrayTyped((cast matchingPdi : flight._internal._Int32Array), (cast lastIdx : Float)))));
               if ((cast _Runtime.strictEquals(next, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { break; }
               (current = cast (next : Dynamic));
             } else {

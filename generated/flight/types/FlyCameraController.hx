@@ -4,4 +4,32 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._CameraControls)
+@:structInit
+class FlyCameraController {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var goalPitch:Float;
+  public var goalYaw:Float;
+  public var maxPitch:Float;
+  public var minPitch:Float;
+  public var pitch:Float;
+  public var position:Vector3;
+  public var smoothTime:Float;
+  public var yaw:Float;
+
+  private function new(goalPitch:Float, goalYaw:Float, maxPitch:Float, minPitch:Float, pitch:Float, position:Vector3, smoothTime:Float, yaw:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.goalPitch = goalPitch;
+    this.goalYaw = goalYaw;
+    this.maxPitch = maxPitch;
+    this.minPitch = minPitch;
+    this.pitch = pitch;
+    this.position = position;
+    this.smoothTime = smoothTime;
+    this.yaw = yaw;
+  }
+}
+#else
 typedef FlyCameraController = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var goalPitch:Float; var goalYaw:Float; var maxPitch:Float; var minPitch:Float; var pitch:Float; var position:Vector3; var smoothTime:Float; var yaw:Float; };
+#end

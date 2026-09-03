@@ -100,7 +100,7 @@ class _SpritesheetFormats {
     var firstDuration:Float = cast _Runtime.UNDEFINED;
     var uniform:Bool = cast _Runtime.UNDEFINED;
     tagFrameNames = _Runtime.slice(frameNames, tag.from, (tag.to + 1.0));
-    durations = (cast _Runtime.mapArray((cast tagFrameNames : Array<String>), function(n:String, __unused0:Float, __unused1:Array<String>):Float return _Runtime.coalesce(((cast durationMap : flight._internal._Map<String, Float>).get(n)), function():Dynamic return cast 100.0), _Runtime.UNDEFINED));
+    durations = (cast _Runtime.mapArray((cast tagFrameNames : Array<String>), function(n:String, __unused0:Float, __unused1:Array<String>):Float return _Runtime.coalesce(((cast durationMap : flight._internal._Map<String, Float>).get((cast n))), function():Dynamic return cast 100.0), _Runtime.UNDEFINED));
     firstDuration = _Runtime.coalesce(flight._internal._StaticIndex.readFloatArrayTyped((cast durations : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 100.0);
     uniform = _Runtime.callProperty(durations, 'every', cast ([function(d:Float, __unused2:Float, __unused3:Array<Float>):Bool return _Runtime.strictEquals(d, firstDuration)] : Array<Dynamic>));
     return cast (cast createSpritesheetAnimationData(({ final __callArgument2:Dynamic = { direction: _Runtime.coalesce(tag.direction, function():Dynamic return cast 'forward'), frameDuration: firstDuration, frameDurations: ((cast uniform : Bool) ? (cast null : Dynamic) : (cast durations : Dynamic)), frameNames: tagFrameNames, name: tag.name, repeatCount: -1.0 }; __callArgument2; })) : SpritesheetAnimationData);
@@ -121,13 +121,13 @@ class _SpritesheetFormats {
     durationMap = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
     if ((cast _Runtime.isArray((cast doc : { var frames:flight._internal._Union2<Array<AsepriteArrayFrame>, flight._internal._Record<String, AsepriteBaseFrame>>; }).frames) : Bool)) {
       for (entry in _Runtime.iterable((cast (cast doc : { var frames:flight._internal._Union2<Array<AsepriteArrayFrame>, flight._internal._Record<String, AsepriteBaseFrame>>; }).frames : Array<AsepriteArrayFrame>))) {
-        ((cast durationMap : flight._internal._Map<String, Float>).set(entry.filename, (cast entry.duration)));
+        ((cast durationMap : flight._internal._Map<String, Float>).set((cast entry.filename), (cast entry.duration)));
       }
     } else {
       for (__iteration6 in _Runtime.iterable(flight._internal.DynamicObject.entries((cast doc : { var frames:flight._internal._Union2<Array<AsepriteArrayFrame>, flight._internal._Record<String, AsepriteBaseFrame>>; }).frames))) {
         var name:String = flight._internal._StaticIndex.readArray(__iteration6, 0.0);
         var entry:AsepriteBaseFrame = flight._internal._StaticIndex.readArray(__iteration6, 1.0);
-        ((cast durationMap : flight._internal._Map<String, Float>).set(name, (cast entry.duration)));
+        ((cast durationMap : flight._internal._Map<String, Float>).set((cast name), (cast entry.duration)));
       }
     }
     __destructure7 = doc;
@@ -257,7 +257,7 @@ class _SpritesheetFormats {
         var keyEl:XmlElement = flight._internal._StaticIndex.readArray(children, i);
         var valEl:XmlElement = flight._internal._StaticIndex.readArray(children, (i + 1.0));
         if (_Runtime.truthy(_Runtime.andValue(_Runtime.strictEquals(({ final __typedStruct64 = keyEl; __typedStruct64 == null ? _Runtime.UNDEFINED : __typedStruct64.name; }), 'key'), function():Dynamic return cast valEl))) {
-          ((cast map : flight._internal._Map<String, XmlElement>).set(keyEl.text, (cast valEl)));
+          ((cast map : flight._internal._Map<String, XmlElement>).set((cast keyEl.text), (cast valEl)));
         }
         (i = cast ((i + 2.0) : Dynamic));
       }
@@ -298,13 +298,13 @@ class _SpritesheetFormats {
     } }
     if ((cast !_Runtime.truthy(rootDict) : Bool)) { return cast { frames: {  }, metadata: { format: 0.0, size: '{0,0}', textureFileName: '' } }; }
     rootMap = (cast _SpritesheetFormats.dictToMap__cocosPlistParse(({ final __callArgument70:Dynamic = rootDict; __callArgument70; })) : flight._internal._Map<String, XmlElement>);
-    metaEl = ((cast rootMap : flight._internal._Map<String, XmlElement>).get('metadata'));
+    metaEl = ((cast rootMap : flight._internal._Map<String, XmlElement>).get((cast 'metadata')));
     metadata = (cast { format: 0.0, size: '{0,0}', textureFileName: '' });
     if ((cast _Runtime.strictEquals(({ final __typedStruct72 = metaEl; __typedStruct72 == null ? _Runtime.UNDEFINED : (cast __typedStruct72 : { var name:String; }).name; }), 'dict') : Bool)) {
       var metaMap:flight._internal._Map<String, XmlElement> = (cast _SpritesheetFormats.dictToMap__cocosPlistParse(({ final __callArgument73:Dynamic = metaEl; __callArgument73; })) : flight._internal._Map<String, XmlElement>);
-      (metadata = cast ({ format: (cast _SpritesheetFormats.getIntValue__cocosPlistParse(((cast metaMap : flight._internal._Map<String, XmlElement>).get('format'))) : Float), size: (cast _SpritesheetFormats.getTextValue__cocosPlistParse(((cast metaMap : flight._internal._Map<String, XmlElement>).get('size'))) : String), textureFileName: _Runtime.orValue((cast _SpritesheetFormats.getTextValue__cocosPlistParse(((cast metaMap : flight._internal._Map<String, XmlElement>).get('textureFileName'))) : String), function():Dynamic return cast (cast _SpritesheetFormats.getTextValue__cocosPlistParse(((cast metaMap : flight._internal._Map<String, XmlElement>).get('realTextureFileName'))) : String)) } : Dynamic));
+      (metadata = cast ({ format: (cast _SpritesheetFormats.getIntValue__cocosPlistParse(((cast metaMap : flight._internal._Map<String, XmlElement>).get((cast 'format')))) : Float), size: (cast _SpritesheetFormats.getTextValue__cocosPlistParse(((cast metaMap : flight._internal._Map<String, XmlElement>).get((cast 'size')))) : String), textureFileName: _Runtime.orValue((cast _SpritesheetFormats.getTextValue__cocosPlistParse(((cast metaMap : flight._internal._Map<String, XmlElement>).get((cast 'textureFileName')))) : String), function():Dynamic return cast (cast _SpritesheetFormats.getTextValue__cocosPlistParse(((cast metaMap : flight._internal._Map<String, XmlElement>).get((cast 'realTextureFileName')))) : String)) } : Dynamic));
     }
-    framesEl = ((cast rootMap : flight._internal._Map<String, XmlElement>).get('frames'));
+    framesEl = ((cast rootMap : flight._internal._Map<String, XmlElement>).get((cast 'frames')));
     frames = (cast {  });
     if ((cast _Runtime.strictEquals(({ final __typedStruct75 = framesEl; __typedStruct75 == null ? _Runtime.UNDEFINED : (cast __typedStruct75 : { var name:String; }).name; }), 'dict') : Bool)) {
       var framesMap:flight._internal._Map<String, XmlElement> = (cast _SpritesheetFormats.dictToMap__cocosPlistParse(({ final __callArgument76:Dynamic = framesEl; __callArgument76; })) : flight._internal._Map<String, XmlElement>);
@@ -313,19 +313,19 @@ class _SpritesheetFormats {
         var frameEl:XmlElement = flight._internal._StaticIndex.readArray(__iteration2, 1.0);
         if ((cast !_Runtime.strictEquals(frameEl.name, 'dict') : Bool)) { continue; }
         var fm:flight._internal._Map<String, XmlElement> = (cast _SpritesheetFormats.dictToMap__cocosPlistParse(({ final __callArgument80:Dynamic = frameEl; __callArgument80; })) : flight._internal._Map<String, XmlElement>);
-        var hasSpriteFields:Bool = ((cast fm : flight._internal._Map<String, XmlElement>).has('spriteOffset'));
-        var hasFrame:Bool = ((cast ((cast fm : flight._internal._Map<String, XmlElement>).has('frame')) : Bool) || (cast ((cast fm : flight._internal._Map<String, XmlElement>).has('textureRect')) : Bool));
+        var hasSpriteFields:Bool = ((cast fm : flight._internal._Map<String, XmlElement>).has((cast 'spriteOffset')));
+        var hasFrame:Bool = ((cast ((cast fm : flight._internal._Map<String, XmlElement>).has((cast 'frame'))) : Bool) || (cast ((cast fm : flight._internal._Map<String, XmlElement>).has((cast 'textureRect'))) : Bool));
         if ((cast ((cast !(cast hasFrame : Bool) : Bool) && (cast !(cast hasSpriteFields : Bool) : Bool)) : Bool)) {
           reportImportDiagnostic(({ final __callArgument82:Dynamic = diagnostics; __callArgument82; }), ({ final __callArgument83:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument83; }), (cast 'spritesheet.cocos-plist.unrecognized-frame' : String), (cast 'parseCocosPlistXml' : String), ({ final __callArgument84:Dynamic = { frame: frameName }; __callArgument84; }));
           continue;
         }
-        var rectStr:String = (cast _SpritesheetFormats.getTextValue__cocosPlistParse(({ final __callArgument88:Dynamic = _Runtime.coalesce(((cast fm : flight._internal._Map<String, XmlElement>).get('frame')), function():Dynamic return cast ((cast fm : flight._internal._Map<String, XmlElement>).get('textureRect'))); __callArgument88; })) : String);
-        var rotated:Bool = (cast _SpritesheetFormats.getBoolValue__cocosPlistParse(({ final __callArgument90:Dynamic = _Runtime.coalesce(((cast fm : flight._internal._Map<String, XmlElement>).get('textureRotated')), function():Dynamic return cast ((cast fm : flight._internal._Map<String, XmlElement>).get('rotated'))); __callArgument90; })) : Bool);
-        var offsetStr:String = (cast _SpritesheetFormats.getTextValue__cocosPlistParse(({ final __callArgument92:Dynamic = _Runtime.coalesce(((cast fm : flight._internal._Map<String, XmlElement>).get('spriteOffset')), function():Dynamic return cast ((cast fm : flight._internal._Map<String, XmlElement>).get('offset'))); __callArgument92; })) : String);
-        var sourceSizeStr:String = (cast _SpritesheetFormats.getTextValue__cocosPlistParse(({ final __callArgument94:Dynamic = _Runtime.coalesce(((cast fm : flight._internal._Map<String, XmlElement>).get('spriteSourceSize')), function():Dynamic return cast ((cast fm : flight._internal._Map<String, XmlElement>).get('sourceSize'))); __callArgument94; })) : String);
-        var sizeStr:String = (cast _SpritesheetFormats.getTextValue__cocosPlistParse(({ final __callArgument96:Dynamic = _Runtime.coalesce(((cast fm : flight._internal._Map<String, XmlElement>).get('spriteSize')), function():Dynamic return cast ((cast fm : flight._internal._Map<String, XmlElement>).get('size'))); __callArgument96; })) : String);
-        var trimmed:Bool = (cast _SpritesheetFormats.getBoolValue__cocosPlistParse(({ final __callArgument98:Dynamic = _Runtime.coalesce(((cast fm : flight._internal._Map<String, XmlElement>).get('spriteTrimmed')), function():Dynamic return cast ((cast fm : flight._internal._Map<String, XmlElement>).get('trimmed'))); __callArgument98; })) : Bool);
-        var aliasEl:Null<XmlElement> = ((cast fm : flight._internal._Map<String, XmlElement>).get('aliases'));
+        var rectStr:String = (cast _SpritesheetFormats.getTextValue__cocosPlistParse(({ final __callArgument88:Dynamic = _Runtime.coalesce(((cast fm : flight._internal._Map<String, XmlElement>).get((cast 'frame'))), function():Dynamic return cast ((cast fm : flight._internal._Map<String, XmlElement>).get((cast 'textureRect')))); __callArgument88; })) : String);
+        var rotated:Bool = (cast _SpritesheetFormats.getBoolValue__cocosPlistParse(({ final __callArgument90:Dynamic = _Runtime.coalesce(((cast fm : flight._internal._Map<String, XmlElement>).get((cast 'textureRotated'))), function():Dynamic return cast ((cast fm : flight._internal._Map<String, XmlElement>).get((cast 'rotated')))); __callArgument90; })) : Bool);
+        var offsetStr:String = (cast _SpritesheetFormats.getTextValue__cocosPlistParse(({ final __callArgument92:Dynamic = _Runtime.coalesce(((cast fm : flight._internal._Map<String, XmlElement>).get((cast 'spriteOffset'))), function():Dynamic return cast ((cast fm : flight._internal._Map<String, XmlElement>).get((cast 'offset')))); __callArgument92; })) : String);
+        var sourceSizeStr:String = (cast _SpritesheetFormats.getTextValue__cocosPlistParse(({ final __callArgument94:Dynamic = _Runtime.coalesce(((cast fm : flight._internal._Map<String, XmlElement>).get((cast 'spriteSourceSize'))), function():Dynamic return cast ((cast fm : flight._internal._Map<String, XmlElement>).get((cast 'sourceSize')))); __callArgument94; })) : String);
+        var sizeStr:String = (cast _SpritesheetFormats.getTextValue__cocosPlistParse(({ final __callArgument96:Dynamic = _Runtime.coalesce(((cast fm : flight._internal._Map<String, XmlElement>).get((cast 'spriteSize'))), function():Dynamic return cast ((cast fm : flight._internal._Map<String, XmlElement>).get((cast 'size')))); __callArgument96; })) : String);
+        var trimmed:Bool = (cast _SpritesheetFormats.getBoolValue__cocosPlistParse(({ final __callArgument98:Dynamic = _Runtime.coalesce(((cast fm : flight._internal._Map<String, XmlElement>).get((cast 'spriteTrimmed'))), function():Dynamic return cast ((cast fm : flight._internal._Map<String, XmlElement>).get((cast 'trimmed')))); __callArgument98; })) : Bool);
+        var aliasEl:Null<XmlElement> = ((cast fm : flight._internal._Map<String, XmlElement>).get((cast 'aliases')));
         var aliases:Array<String> = (cast cast ([] : Array<Dynamic>));
         if ((cast _Runtime.strictEquals(({ final __typedStruct100 = aliasEl; __typedStruct100 == null ? _Runtime.UNDEFINED : (cast __typedStruct100 : { var name:String; }).name; }), 'array') : Bool)) {
           for (child in _Runtime.iterable((cast aliasEl : { var children:Array<XmlElement>; }).children)) {
@@ -612,8 +612,8 @@ class _SpritesheetFormats {
       var base:String = _Runtime.getIndex(__destructure5, 1.0);
       var numStr:String = _Runtime.getIndex(__destructure5, 2.0);
       var index:Float = _Runtime.callValue(flight._internal._HostValueLut.get('parseInt'), cast ([numStr, 10.0] : Array<Dynamic>));
-      var bucket:Null<Array<{ var name:String; var index:Float; }>> = ((cast groups : flight._internal._Map<String, Array<{ var name:String; var index:Float; }>>).get(base));
-      if (_Runtime.truthy(bucket)) { _Runtime.callProperty(bucket, 'push', cast ([{ index: index, name: name }] : Array<Dynamic>)); } else { ((cast groups : flight._internal._Map<String, Array<{ var name:String; var index:Float; }>>).set(base, (cast cast ([{ index: index, name: name }] : Array<Dynamic>)))); }
+      var bucket:Null<Array<{ var name:String; var index:Float; }>> = ((cast groups : flight._internal._Map<String, Array<{ var name:String; var index:Float; }>>).get((cast base)));
+      if (_Runtime.truthy(bucket)) { _Runtime.callProperty(bucket, 'push', cast ([{ index: index, name: name }] : Array<Dynamic>)); } else { ((cast groups : flight._internal._Map<String, Array<{ var name:String; var index:Float; }>>).set((cast base), (cast cast ([{ index: index, name: name }] : Array<Dynamic>)))); }
     }
     animations = (cast cast ([] : Array<Dynamic>));
     for (__iteration6 in _Runtime.iterable(groups)) {
@@ -835,8 +835,8 @@ class _SpritesheetFormats {
       var base:String = _Runtime.getIndex(__destructure0, 1.0);
       var numStr:String = _Runtime.getIndex(__destructure0, 2.0);
       var index:Float = _Runtime.callValue(flight._internal._HostValueLut.get('parseInt'), cast ([numStr, 10.0] : Array<Dynamic>));
-      var bucket:Null<Array<{ var name:String; var index:Float; }>> = ((cast groups : flight._internal._Map<String, Array<{ var name:String; var index:Float; }>>).get(base));
-      if (_Runtime.truthy(bucket)) { _Runtime.callProperty(bucket, 'push', cast ([{ index: index, name: name }] : Array<Dynamic>)); } else { ((cast groups : flight._internal._Map<String, Array<{ var name:String; var index:Float; }>>).set(base, (cast cast ([{ index: index, name: name }] : Array<Dynamic>)))); }
+      var bucket:Null<Array<{ var name:String; var index:Float; }>> = ((cast groups : flight._internal._Map<String, Array<{ var name:String; var index:Float; }>>).get((cast base)));
+      if (_Runtime.truthy(bucket)) { _Runtime.callProperty(bucket, 'push', cast ([{ index: index, name: name }] : Array<Dynamic>)); } else { ((cast groups : flight._internal._Map<String, Array<{ var name:String; var index:Float; }>>).set((cast base), (cast cast ([{ index: index, name: name }] : Array<Dynamic>)))); }
     }
     animations = (cast cast ([] : Array<Dynamic>));
     for (__iteration1 in _Runtime.iterable(groups)) {

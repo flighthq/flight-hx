@@ -5,4 +5,30 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Types.CompressedImageTextureSourceKind;
 
+#if !flight_struct_typedef
+@:allow(flight._Image)
+@:structInit
+class CompressedImage {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var alphaType:AlphaType;
+  public var gamut:String;
+  public var height:Float;
+  public var kind:Dynamic;
+  public var version:Float;
+  public var width:Float;
+  public var compressed:CompressedImageData;
+
+  private function new(alphaType:AlphaType, gamut:String, height:Float, kind:Dynamic, version:Float, width:Float, compressed:CompressedImageData):Void {
+    this.__symbol__EntityRuntime = null;
+    this.alphaType = alphaType;
+    this.gamut = gamut;
+    this.height = height;
+    this.kind = kind;
+    this.version = version;
+    this.width = width;
+    this.compressed = compressed;
+  }
+}
+#else
 typedef CompressedImage = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var alphaType:AlphaType; var gamut:String; var height:Float; var kind:Dynamic; var version:Float; var width:Float; var compressed:CompressedImageData; };
+#end

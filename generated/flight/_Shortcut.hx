@@ -80,7 +80,7 @@ class _Shortcut {
   }
 
   public static function getAcceleratorKeyLabel(key:ShortcutKeyName):String {
-    return cast _Runtime.coalesce(((cast _Shortcut._keyDisplayNames__shortcut : flight._internal._Map<ShortcutKeyName, String>).get(key)), function():Dynamic return cast key);
+    return cast _Runtime.coalesce(((cast _Shortcut._keyDisplayNames__shortcut : flight._internal._Map<ShortcutKeyName, String>).get((cast key))), function():Dynamic return cast key);
     return cast null;
   }
 
@@ -217,7 +217,7 @@ class _Shortcut {
     key = null;
     for (token in _Runtime.iterable(tokens)) {
       var lower:String = _Runtime.callProperty(token, 'toLowerCase', cast ([] : Array<Dynamic>));
-      var mod:Null<String> = ((cast _Shortcut._modifierAliases__shortcut : flight._internal._Map<String, ShortcutModifier>).get(lower));
+      var mod:Null<String> = ((cast _Shortcut._modifierAliases__shortcut : flight._internal._Map<String, ShortcutModifier>).get((cast lower)));
       if ((cast !_Runtime.strictEquals(mod, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         if ((cast !_Runtime.strictEquals(_Runtime.callProperty(modifiers, 'indexOf', cast ([mod] : Array<Dynamic>)), -1.0) : Bool)) {
           return cast { reason: 'duplicate-modifier', token: token };
@@ -233,7 +233,7 @@ class _Shortcut {
     if ((cast _Runtime.strictEquals(key, null) : Bool)) {
       return cast { reason: 'missing-key', token: '' };
     }
-    canonicalKey = ((cast _Shortcut._keyAliases__shortcut : flight._internal._Map<String, ShortcutKeyName>).get(_Runtime.callProperty(key, 'toLowerCase', cast ([] : Array<Dynamic>))));
+    canonicalKey = ((cast _Shortcut._keyAliases__shortcut : flight._internal._Map<String, ShortcutKeyName>).get((cast _Runtime.callProperty(key, 'toLowerCase', cast ([] : Array<Dynamic>)))));
     if ((cast _Runtime.strictEquals(canonicalKey, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       return cast { reason: 'unknown-key', token: key };
     }
@@ -299,7 +299,7 @@ class _Shortcut {
       flight._internal._Async.protect(function():Dynamic {
         var provider:ShortcutTriggerBackend = cast _Runtime.UNDEFINED;
         var __flowBranch34:Dynamic;
-        if ((cast ((cast _Shortcut._attachments__shortcutExplicitDependency : flight._internal._WeakMap<GlobalShortcut, GlobalShortcutAttachment__shortcutExplicitDependency>).has(shortcut)) : Bool)) {
+        if ((cast ((cast _Shortcut._attachments__shortcutExplicitDependency : flight._internal._WeakMap<GlobalShortcut, GlobalShortcutAttachment__shortcutExplicitDependency>).has((cast shortcut))) : Bool)) {
           __flowBranch34 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn(_Shortcut.ALREADY_ATTACHED__shortcutExplicitDependency);
           });
@@ -308,7 +308,7 @@ class _Shortcut {
         }
         return flight._internal._Async.continueFlow(__flowBranch34, function():Dynamic {
           var __flowBranch35:Dynamic;
-          if ((cast ((cast _Shortcut._attachedByAccelerator__shortcutExplicitDependency : flight._internal._Map<String, GlobalShortcut>).has((cast shortcut : GlobalShortcut).accelerator)) : Bool)) {
+          if ((cast ((cast _Shortcut._attachedByAccelerator__shortcutExplicitDependency : flight._internal._Map<String, GlobalShortcut>).has((cast (cast shortcut : GlobalShortcut).accelerator))) : Bool)) {
             __flowBranch35 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(_Shortcut.ALREADY_REGISTERED__shortcutExplicitDependency);
             });
@@ -317,7 +317,7 @@ class _Shortcut {
           }
           return flight._internal._Async.continueFlow(__flowBranch35, function():Dynamic {
             var __flowBranch36:Dynamic;
-            if ((cast ((cast _Shortcut._pendingAccelerators__shortcutExplicitDependency : flight._internal._Set<String>).has((cast shortcut : GlobalShortcut).accelerator)) : Bool)) {
+            if ((cast ((cast _Shortcut._pendingAccelerators__shortcutExplicitDependency : flight._internal._Set<String>).has((cast (cast shortcut : GlobalShortcut).accelerator))) : Bool)) {
               __flowBranch36 = flight._internal._Async.protect(function():Dynamic {
                 return flight._internal._Async.flowReturn(_Shortcut.REGISTRATION_IN_PROGRESS__shortcutExplicitDependency);
               });
@@ -326,7 +326,7 @@ class _Shortcut {
             }
             return flight._internal._Async.continueFlow(__flowBranch36, function():Dynamic {
               provider = (cast (cast host : HasShortcutTrigger).shortcut : { var trigger:ShortcutTriggerBackend; }).trigger;
-              ((cast _Shortcut._pendingAccelerators__shortcutExplicitDependency : flight._internal._Set<String>).add((cast shortcut : GlobalShortcut).accelerator));
+              ((cast _Shortcut._pendingAccelerators__shortcutExplicitDependency : flight._internal._Set<String>).add((cast (cast shortcut : GlobalShortcut).accelerator)));
               return flight._internal._Async.continueFlow(flight._internal._Async.finalizeFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
                 var outcome:ShortcutTriggerSubscribeOutcome = cast _Runtime.UNDEFINED;
                 var attachment:{ var provider:ShortcutTriggerBackend; var subscription:ShortcutTriggerSubscription; } = cast _Runtime.UNDEFINED;
@@ -343,8 +343,8 @@ class _Shortcut {
                   return flight._internal._Async.continueFlow(__flowBranch38, function():Dynamic {
                     attachment = { provider: provider, subscription: (cast outcome : { var reason:String; var subscription:ShortcutTriggerSubscription; }).subscription };
                     return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-                      ((cast _Shortcut._attachments__shortcutExplicitDependency : flight._internal._WeakMap<GlobalShortcut, GlobalShortcutAttachment__shortcutExplicitDependency>).set(shortcut, (cast attachment)));
-                      ((cast _Shortcut._attachedByAccelerator__shortcutExplicitDependency : flight._internal._Map<String, GlobalShortcut>).set((cast shortcut : GlobalShortcut).accelerator, (cast shortcut)));
+                      ((cast _Shortcut._attachments__shortcutExplicitDependency : flight._internal._WeakMap<GlobalShortcut, GlobalShortcutAttachment__shortcutExplicitDependency>).set((cast shortcut), (cast attachment)));
+                      ((cast _Shortcut._attachedByAccelerator__shortcutExplicitDependency : flight._internal._Map<String, GlobalShortcut>).set((cast (cast shortcut : GlobalShortcut).accelerator), (cast shortcut)));
                       return flight._internal._Async.flowNormal();
                     }), function(__caughtError:Dynamic):Dynamic {
                       var __error:Dynamic = __caughtError;
@@ -374,7 +374,7 @@ class _Shortcut {
                   return flight._internal._Async.flowReturn(_Shortcut.TRIGGER_ATTACH_FAILED__shortcutExplicitDependency);
                 });
               }), function():Dynamic {
-                ((cast _Shortcut._pendingAccelerators__shortcutExplicitDependency : flight._internal._Set<String>).delete_((cast shortcut : GlobalShortcut).accelerator));
+                ((cast _Shortcut._pendingAccelerators__shortcutExplicitDependency : flight._internal._Set<String>).delete_((cast (cast shortcut : GlobalShortcut).accelerator)));
                 return flight._internal._Async.flowNormal();
               }), function():Dynamic {
                 return flight._internal._Async.flowNormal();
@@ -392,7 +392,7 @@ class _Shortcut {
     parsed = (cast makeParsedAccelerator() : ParsedAccelerator);
     outcome = (cast parseAcceleratorDetailed((cast accelerator : String), ({ final __callArgument41:Dynamic = parsed; __callArgument41; })) : flight._internal._Union2<ParsedAccelerator, AcceleratorParseError>);
     if ((cast _Runtime.hasField(outcome, 'reason') : Bool)) { return cast { parseError: outcome, reason: 'unparseable' }; }
-    return cast { reason: 'created', shortcut: (cast createEntity((cast ({ accelerator: (cast _Shortcut.formatParsedAccelerator__shortcutExplicitDependency(({ final __callArgument45:Dynamic = outcome; __callArgument45; })) : String), onTrigger: (cast createSignal() : Signal<Void->Void>) } : GlobalShortcut) : Dynamic)) : GlobalShortcut) };
+    return cast { reason: 'created', shortcut: (cast createEntity((cast ({ accelerator: (cast (cast _Shortcut.formatParsedAccelerator__shortcutExplicitDependency(({ final __callArgument45:Dynamic = outcome; __callArgument45; })) : String) : Dynamic), onTrigger: (cast (cast createSignal() : Signal<Void->Void>) : Dynamic) } : GlobalShortcut) : Dynamic)) : GlobalShortcut) };
     return cast null;
   }
 
@@ -407,7 +407,7 @@ class _Shortcut {
         var attachment:Null<GlobalShortcutAttachment__shortcutExplicitDependency> = cast _Runtime.UNDEFINED;
         var selected:ShortcutTriggerBackend = cast _Runtime.UNDEFINED;
         var provider:ShortcutTriggerBackend = cast _Runtime.UNDEFINED;
-        attachment = ((cast _Shortcut._attachments__shortcutExplicitDependency : flight._internal._WeakMap<GlobalShortcut, GlobalShortcutAttachment__shortcutExplicitDependency>).get(shortcut));
+        attachment = ((cast _Shortcut._attachments__shortcutExplicitDependency : flight._internal._WeakMap<GlobalShortcut, GlobalShortcutAttachment__shortcutExplicitDependency>).get((cast shortcut)));
         var __flowBranch51:Dynamic;
         if ((cast _Runtime.strictEquals(attachment, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           __flowBranch51 = flight._internal._Async.protect(function():Dynamic {
@@ -441,11 +441,11 @@ class _Shortcut {
               return flight._internal._Async.flowReturn(_Shortcut.TRIGGER_DETACH_FAILED__shortcutExplicitDependency);
             });
           }), function():Dynamic {
-            ((cast _Shortcut._attachments__shortcutExplicitDependency : flight._internal._WeakMap<GlobalShortcut, GlobalShortcutAttachment__shortcutExplicitDependency>).delete_(shortcut));
+            ((cast _Shortcut._attachments__shortcutExplicitDependency : flight._internal._WeakMap<GlobalShortcut, GlobalShortcutAttachment__shortcutExplicitDependency>).delete_((cast shortcut)));
             var __flowBranch54:Dynamic;
-            if ((cast _Runtime.strictEquals(((cast _Shortcut._attachedByAccelerator__shortcutExplicitDependency : flight._internal._Map<String, GlobalShortcut>).get((cast shortcut : GlobalShortcut).accelerator)), shortcut) : Bool)) {
+            if ((cast _Runtime.strictEquals(((cast _Shortcut._attachedByAccelerator__shortcutExplicitDependency : flight._internal._Map<String, GlobalShortcut>).get((cast (cast shortcut : GlobalShortcut).accelerator))), shortcut) : Bool)) {
               __flowBranch54 = flight._internal._Async.protect(function():Dynamic {
-                ((cast _Shortcut._attachedByAccelerator__shortcutExplicitDependency : flight._internal._Map<String, GlobalShortcut>).delete_((cast shortcut : GlobalShortcut).accelerator));
+                ((cast _Shortcut._attachedByAccelerator__shortcutExplicitDependency : flight._internal._Map<String, GlobalShortcut>).delete_((cast (cast shortcut : GlobalShortcut).accelerator)));
                 return flight._internal._Async.flowNormal();
               });
             } else {

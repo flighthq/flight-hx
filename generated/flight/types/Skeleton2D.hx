@@ -4,4 +4,28 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Skeleton2D)
+@:structInit
+class Skeleton2D {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var boneMatrices:flight._internal._Float32Array;
+  public var bones:Array<Bone2D>;
+  public var inverseBindMatrices:flight._internal._Float32Array;
+  public var skins:Null<Array<AttachmentSkin2D>>;
+  public var slots:Null<Array<Slot2D>>;
+  public var worldMatrices:flight._internal._Float32Array;
+
+  private function new(boneMatrices:flight._internal._Float32Array, bones:Array<Bone2D>, inverseBindMatrices:flight._internal._Float32Array, skins:Null<Array<AttachmentSkin2D>>, slots:Null<Array<Slot2D>>, worldMatrices:flight._internal._Float32Array):Void {
+    this.__symbol__EntityRuntime = null;
+    this.boneMatrices = boneMatrices;
+    this.bones = bones;
+    this.inverseBindMatrices = inverseBindMatrices;
+    this.skins = skins;
+    this.slots = slots;
+    this.worldMatrices = worldMatrices;
+  }
+}
+#else
 typedef Skeleton2D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var boneMatrices:flight._internal._Float32Array; var bones:Array<Bone2D>; var inverseBindMatrices:flight._internal._Float32Array; @:optional var skins:Null<Array<AttachmentSkin2D>>; @:optional var slots:Null<Array<Slot2D>>; var worldMatrices:flight._internal._Float32Array; };
+#end

@@ -4,4 +4,26 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Screen)
+@:structInit
+class ScreenMode {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var width:Float;
+  public var height:Float;
+  public var refreshRate:Float;
+  public var colorDepth:Float;
+  public var pixelFormat:String;
+
+  private function new(width:Float, height:Float, refreshRate:Float, colorDepth:Float, pixelFormat:String):Void {
+    this.__symbol__EntityRuntime = null;
+    this.width = width;
+    this.height = height;
+    this.refreshRate = refreshRate;
+    this.colorDepth = colorDepth;
+    this.pixelFormat = pixelFormat;
+  }
+}
+#else
 typedef ScreenMode = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var width:Float; var height:Float; var refreshRate:Float; var colorDepth:Float; var pixelFormat:String; };
+#end

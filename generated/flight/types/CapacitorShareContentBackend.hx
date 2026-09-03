@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostCapacitor)
+@:structInit
+class CapacitorShareContentBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var canShareContent:ShareContent->Bool;
+  public var shareContent:ShareContent->CapacitorShareContentOptions->flight._internal._Promise<Bool>;
+  public var shareContentWithResult:ShareContent->CapacitorShareContentOptions->flight._internal._Promise<ShareResult>;
+
+  private function new(canShareContent:ShareContent->Bool, shareContent:ShareContent->CapacitorShareContentOptions->flight._internal._Promise<Bool>, shareContentWithResult:ShareContent->CapacitorShareContentOptions->flight._internal._Promise<ShareResult>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.canShareContent = canShareContent;
+    this.shareContent = shareContent;
+    this.shareContentWithResult = shareContentWithResult;
+  }
+}
+#else
 typedef CapacitorShareContentBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var canShareContent:ShareContent->Bool; var shareContent:ShareContent->CapacitorShareContentOptions->flight._internal._Promise<Bool>; var shareContentWithResult:ShareContent->CapacitorShareContentOptions->flight._internal._Promise<ShareResult>; };
+#end

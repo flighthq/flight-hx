@@ -4,4 +4,28 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:structInit
+class MediaSessionBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var clearMetadata:Void->MediaSessionClearMetadataOutcome;
+  public var clearPositionState:Void->MediaSessionClearPositionStateOutcome;
+  public var destroy:Void->Void;
+  public var setMetadata:MediaSessionMetadata->MediaSessionSetMetadataOutcome;
+  public var setPlaybackState:MediaSessionPlaybackState->MediaSessionSetPlaybackStateOutcome;
+  public var setPositionState:MediaSessionPositionState->MediaSessionSetPositionStateOutcome;
+
+  private function new(clearMetadata:Void->MediaSessionClearMetadataOutcome, clearPositionState:Void->MediaSessionClearPositionStateOutcome, destroy:Void->Void, setMetadata:MediaSessionMetadata->MediaSessionSetMetadataOutcome, setPlaybackState:MediaSessionPlaybackState->MediaSessionSetPlaybackStateOutcome, setPositionState:MediaSessionPositionState->MediaSessionSetPositionStateOutcome):Void {
+    this.__symbol__EntityRuntime = null;
+    this.clearMetadata = clearMetadata;
+    this.clearPositionState = clearPositionState;
+    this.destroy = destroy;
+    this.setMetadata = setMetadata;
+    this.setPlaybackState = setPlaybackState;
+    this.setPositionState = setPositionState;
+  }
+}
+#else
 typedef MediaSessionBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var clearMetadata:Void->MediaSessionClearMetadataOutcome; var clearPositionState:Void->MediaSessionClearPositionStateOutcome; var destroy:Void->Void; var setMetadata:MediaSessionMetadata->MediaSessionSetMetadataOutcome; var setPlaybackState:MediaSessionPlaybackState->MediaSessionSetPlaybackStateOutcome; var setPositionState:MediaSessionPositionState->MediaSessionSetPositionStateOutcome; };
+#end
