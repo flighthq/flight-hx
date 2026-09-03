@@ -12,7 +12,7 @@ class UnlitMaterial extends flight.types.SurfaceMaterial<Dynamic> {
   public var baseColor:Float;
   public var baseColorMap:Null<Texture>;
 
-  private function new(kind:Dynamic, name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, baseColor:Float, baseColorMap:Null<Texture>):Void {
+  private function new(kind:Dynamic, ?name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, baseColor:Float, baseColorMap:Null<Texture>):Void {
     super(kind, name, alphaCutoff, alphaMode, blendMode, doubleSided);
     this.baseColor = baseColor;
     this.baseColorMap = baseColorMap;

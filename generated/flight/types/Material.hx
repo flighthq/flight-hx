@@ -15,7 +15,7 @@ class Material<TKind = Dynamic> {
   public var kind:TKind;
   public var name:Null<String>;
 
-  private function new(kind:TKind, name:Null<String>):Void {
+  private function new(kind:TKind, ?name:Null<String>):Void {
     this.__symbol__EntityRuntime = null;
     this.kind = kind;
     this.name = name;

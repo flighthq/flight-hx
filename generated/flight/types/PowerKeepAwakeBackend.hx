@@ -11,11 +11,11 @@ import flight._internal._Runtime;
 class PowerKeepAwakeBackend {
   public var __symbol__EntityRuntime:Null<EntityRuntime>;
   public var acquire:PowerKeepAwakeMode->flight._internal._Promise<PowerKeepAwakeAcquireResult>;
-  public var destroy:Void->Void;
+  public var destroy:Null<Void->Void>;
   public var isActive:Void->Bool;
   public var release:Void->flight._internal._Promise<PowerKeepAwakeReleaseResult>;
 
-  private function new(acquire:PowerKeepAwakeMode->flight._internal._Promise<PowerKeepAwakeAcquireResult>, destroy:Void->Void, isActive:Void->Bool, release:Void->flight._internal._Promise<PowerKeepAwakeReleaseResult>):Void {
+  private function new(acquire:PowerKeepAwakeMode->flight._internal._Promise<PowerKeepAwakeAcquireResult>, ?destroy:Null<Void->Void>, isActive:Void->Bool, release:Void->flight._internal._Promise<PowerKeepAwakeReleaseResult>):Void {
     this.__symbol__EntityRuntime = null;
     this.acquire = acquire;
     this.destroy = destroy;

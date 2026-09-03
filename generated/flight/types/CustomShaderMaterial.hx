@@ -13,7 +13,7 @@ class CustomShaderMaterial extends flight.types.SurfaceMaterial<String> {
   public var textures:Null<flight._internal._Record<String, Texture>>;
   public var uniforms:Null<flight._internal._Record<String, flight._internal._Union2<Float, Array<Float>>>>;
 
-  private function new(kind:String, name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, shaderKey:String, textures:Null<flight._internal._Record<String, Texture>>, uniforms:Null<flight._internal._Record<String, flight._internal._Union2<Float, Array<Float>>>>):Void {
+  private function new(kind:String, ?name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, shaderKey:String, textures:Null<flight._internal._Record<String, Texture>>, uniforms:Null<flight._internal._Record<String, flight._internal._Union2<Float, Array<Float>>>>):Void {
     super(kind, name, alphaCutoff, alphaMode, blendMode, doubleSided);
     this.shaderKey = shaderKey;
     this.textures = textures;

@@ -22,7 +22,7 @@ class SpecularGlossinessPbrMaterial extends flight.types.SurfaceMaterial<Dynamic
   public var specular:Float;
   public var specularGlossinessMap:Null<Texture>;
 
-  private function new(kind:Dynamic, name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, diffuse:Float, diffuseMap:Null<Texture>, emissive:Float, emissiveMap:Null<Texture>, emissiveStrength:Float, glossiness:Float, normalMap:Null<Texture>, normalScale:Float, occlusionMap:Null<Texture>, occlusionStrength:Float, specular:Float, specularGlossinessMap:Null<Texture>):Void {
+  private function new(kind:Dynamic, ?name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, diffuse:Float, diffuseMap:Null<Texture>, emissive:Float, emissiveMap:Null<Texture>, emissiveStrength:Float, glossiness:Float, normalMap:Null<Texture>, normalScale:Float, occlusionMap:Null<Texture>, occlusionStrength:Float, specular:Float, specularGlossinessMap:Null<Texture>):Void {
     super(kind, name, alphaCutoff, alphaMode, blendMode, doubleSided);
     this.diffuse = diffuse;
     this.diffuseMap = diffuseMap;

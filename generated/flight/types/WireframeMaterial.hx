@@ -12,7 +12,7 @@ class WireframeMaterial extends flight.types.SurfaceMaterial<Dynamic> {
   public var color:Float;
   public var thickness:Float;
 
-  private function new(kind:Dynamic, name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, color:Float, thickness:Float):Void {
+  private function new(kind:Dynamic, ?name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, color:Float, thickness:Float):Void {
     super(kind, name, alphaCutoff, alphaMode, blendMode, doubleSided);
     this.color = color;
     this.thickness = thickness;

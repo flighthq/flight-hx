@@ -23,7 +23,7 @@ class StandardPbrMaterial extends flight.types.SurfaceMaterial<Dynamic> {
   public var occlusionStrength:Float;
   public var roughness:Float;
 
-  private function new(kind:Dynamic, name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, alphaMap:Null<Texture>, baseColor:Float, baseColorMap:Null<Texture>, emissive:Float, emissiveMap:Null<Texture>, emissiveStrength:Float, metallic:Float, metallicRoughnessMap:Null<Texture>, normalMap:Null<Texture>, normalScale:Float, occlusionMap:Null<Texture>, occlusionStrength:Float, roughness:Float):Void {
+  private function new(kind:Dynamic, ?name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, alphaMap:Null<Texture>, baseColor:Float, baseColorMap:Null<Texture>, emissive:Float, emissiveMap:Null<Texture>, emissiveStrength:Float, metallic:Float, metallicRoughnessMap:Null<Texture>, normalMap:Null<Texture>, normalScale:Float, occlusionMap:Null<Texture>, occlusionStrength:Float, roughness:Float):Void {
     super(kind, name, alphaCutoff, alphaMode, blendMode, doubleSided);
     this.alphaMap = alphaMap;
     this.baseColor = baseColor;

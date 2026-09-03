@@ -11,7 +11,7 @@ import flight._internal._Runtime;
 class VertexColorMaterial extends flight.types.SurfaceMaterial<Dynamic> {
   public var tint:Float;
 
-  private function new(kind:Dynamic, name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, tint:Float):Void {
+  private function new(kind:Dynamic, ?name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, tint:Float):Void {
     super(kind, name, alphaCutoff, alphaMode, blendMode, doubleSided);
     this.tint = tint;
   }

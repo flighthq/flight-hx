@@ -12,7 +12,7 @@ class NormalMaterial extends flight.types.SurfaceMaterial<Dynamic> {
   public var normalMap:Null<Texture>;
   public var normalScale:Float;
 
-  private function new(kind:Dynamic, name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, normalMap:Null<Texture>, normalScale:Float):Void {
+  private function new(kind:Dynamic, ?name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, normalMap:Null<Texture>, normalScale:Float):Void {
     super(kind, name, alphaCutoff, alphaMode, blendMode, doubleSided);
     this.normalMap = normalMap;
     this.normalScale = normalScale;

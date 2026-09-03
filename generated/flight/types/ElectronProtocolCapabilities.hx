@@ -4,12 +4,15 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-#if !flight_struct_typedef
+#if (!flight_struct_typedef || js)
 @:allow(flight._HostElectron)
 @:keep
 @:structInit
 class ElectronProtocolCapabilities {
   public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  #if js
+  @:native('default')
+  #end
   public var default_:ProtocolDefaultBackend;
   public var open:ProtocolOpenBackend;
   public var registration:ProtocolRegistrationBackend;

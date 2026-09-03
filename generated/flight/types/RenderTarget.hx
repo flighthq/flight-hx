@@ -10,16 +10,16 @@ import flight._Types.RenderTargetTextureSourceKind;
 @:keep
 @:structInit
 class RenderTarget extends flight.types.TextureSource<Dynamic> {
-  public var format:RenderTargetFormat;
-  public var colorAttachments:Float;
-  public var colorFormats:Array<RenderTargetFormat>;
-  public var sampleCount:Float;
-  public var depth:RenderTargetDepth;
-  public var colorSpace:RenderTargetColorSpace;
-  public var clearColors:Array<Float>;
-  public var clearDepth:Float;
+  public var format:Null<RenderTargetFormat>;
+  public var colorAttachments:Null<Float>;
+  public var colorFormats:Null<Array<RenderTargetFormat>>;
+  public var sampleCount:Null<Float>;
+  public var depth:Null<RenderTargetDepth>;
+  public var colorSpace:Null<RenderTargetColorSpace>;
+  public var clearColors:Null<Array<Float>>;
+  public var clearDepth:Null<Float>;
 
-  private function new(width:Float, height:Float, format:RenderTargetFormat, colorAttachments:Float, colorFormats:Array<RenderTargetFormat>, sampleCount:Float, depth:RenderTargetDepth, colorSpace:RenderTargetColorSpace, clearColors:Array<Float>, clearDepth:Float, alphaType:AlphaType, gamut:String, kind:Dynamic, version:Float):Void {
+  private function new(width:Float, height:Float, ?format:Null<RenderTargetFormat>, ?colorAttachments:Null<Float>, ?colorFormats:Null<Array<RenderTargetFormat>>, ?sampleCount:Null<Float>, ?depth:Null<RenderTargetDepth>, ?colorSpace:Null<RenderTargetColorSpace>, ?clearColors:Null<Array<Float>>, ?clearDepth:Null<Float>, alphaType:AlphaType, gamut:String, kind:Dynamic, version:Float):Void {
     super(alphaType, gamut, height, kind, version, width);
     this.format = format;
     this.colorAttachments = colorAttachments;

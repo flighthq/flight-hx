@@ -616,8 +616,10 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
           .map((field) => `${field.name} = Dynamic`),
       ];
       const classGenerics = classGenericParameters.length > 0 ? `<${classGenericParameters.join(', ')}>` : '';
-      const classFieldType = (field: (typeof fields)[number]): string =>
-        genericFields.get(field.name)?.name ?? emitValueType(field.type);
+      const classFieldType = (field: (typeof fields)[number]): string => {
+        const fieldType = genericFields.get(field.name)?.name ?? emitValueType(field.type);
+        return field.optional && field.type.kind !== 'nullable' ? `Null<${fieldType}>` : fieldType;
+      };
       const ownFieldNames = new Set(declaration.cppStructInitOwnFieldNames ?? fields.map((field) => field.name));
       const ownFields = fields.filter((field) => ownFieldNames.has(field.name));
       const baseArguments =
@@ -633,9 +635,12 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
       const classExtends = declaration.cppStructInitBase
         ? ` extends ${declaration.cppStructInitBase.haxeType}${baseArguments}`
         : '';
-      const classCondition = declaration.cppStructInitNativeOnly
-        ? '#if (!flight_struct_typedef && !js)'
-        : '#if !flight_struct_typedef';
+      const hasUnsafeFieldName = fields.some((field) => safeName(field.name) !== field.name);
+      const classCondition = hasUnsafeFieldName
+        ? '#if (!flight_struct_typedef || js)'
+        : declaration.cppStructInitNativeOnly
+          ? '#if (!flight_struct_typedef && !js)'
+          : '#if !flight_struct_typedef';
       const lines = [
         classCondition,
         ...completionMetadata,
@@ -650,11 +655,14 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
       ];
       for (const field of ownFields) {
         const fieldName = typeFieldName(field.name);
+        if (safeName(field.name) !== field.name) {
+          lines.push('  #if js', `  @:native(${quote(field.name)})`, '  #end');
+        }
         lines.push(`  public var ${fieldName}:${classFieldType(field)};`);
       }
       lines.push(
         '',
-        `  private function new(${constructorFields.map((field) => `${safeName(field.name)}:${classFieldType(field)}`).join(', ')}):Void {`,
+        `  private function new(${constructorFields.map((field) => `${field.optional ? '?' : ''}${safeName(field.name)}:${classFieldType(field)}`).join(', ')}):Void {`,
       );
       if (declaration.cppStructInitBase) {
         lines.push(
@@ -2913,9 +2921,11 @@ function emitExpression(expression: IrExpression): string {
         );
       }
       if (expression.cppStructInit) {
-        const typedefCondition = expression.cppStructInit.nativeOnly
-          ? '(flight_struct_typedef || js)'
-          : 'flight_struct_typedef';
+        const hasUnsafeFieldName = expression.cppStructInit.fieldNames.some((field) => safeName(field) !== field);
+        const typedefCondition =
+          expression.cppStructInit.nativeOnly || hasUnsafeFieldName
+            ? '(flight_struct_typedef || js)'
+            : 'flight_struct_typedef';
         if (expression.properties.some((property) => property.kind === 'spread')) {
           const source = '__structInitSource';
           const merged = `_Runtime.mergeObjects([${expression.properties
@@ -2960,7 +2970,11 @@ function emitExpression(expression: IrExpression): string {
             `cpp @:structInit construction field mismatch for ${expression.cppStructInit.schemaId}: expected ${expression.cppStructInit.fieldNames.join(', ')}, received ${actualFields.join(', ')}`,
           );
         }
-        const sourceValue = expression.properties.some((property) => property.kind === 'computedProperty')
+        const sourceValue = expression.properties.some(
+          (property) =>
+            property.kind === 'computedProperty' ||
+            (property.kind === 'property' && safeName(property.name) !== property.name),
+        )
           ? `_Runtime.objectFromPairs([${expression.properties
               .map((property) =>
                 property.kind === 'computedProperty'
@@ -3014,7 +3028,11 @@ function emitExpression(expression: IrExpression): string {
           .join(', ')} }`;
         return emitObjectThisCapture(
           expression,
-          expression.properties.some((property) => property.kind === 'computedProperty')
+          expression.properties.some(
+            (property) =>
+              property.kind === 'computedProperty' ||
+              (property.kind === 'property' && safeName(property.name) !== property.name),
+          )
             ? `(#if ${typedefCondition} ${sourceValue} #else (${value} : ${expression.cppStructInit.schemaHaxeType}) #end)`
             : `(${value} : ${expression.cppStructInit.schemaHaxeType})`,
         );

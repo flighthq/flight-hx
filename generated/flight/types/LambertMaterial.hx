@@ -14,7 +14,7 @@ class LambertMaterial extends flight.types.SurfaceMaterial<Dynamic> {
   public var emissive:Float;
   public var emissiveMap:Null<Texture>;
 
-  private function new(kind:Dynamic, name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, diffuse:Float, diffuseMap:Null<Texture>, emissive:Float, emissiveMap:Null<Texture>):Void {
+  private function new(kind:Dynamic, ?name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, diffuse:Float, diffuseMap:Null<Texture>, emissive:Float, emissiveMap:Null<Texture>):Void {
     super(kind, name, alphaCutoff, alphaMode, blendMode, doubleSided);
     this.diffuse = diffuse;
     this.diffuseMap = diffuseMap;

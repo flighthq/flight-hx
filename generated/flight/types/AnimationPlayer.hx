@@ -12,16 +12,16 @@ class AnimationPlayer {
   public var __symbol__EntityRuntime:Null<EntityRuntime>;
   public var clip:AnimationClip;
   public var loop:Bool;
-  public var loopMode:AnimationLoopMode;
+  public var loopMode:Null<AnimationLoopMode>;
   public var onEvent:Null<Signal<AnimationClipEvent->Void>>;
   public var onFinished:Null<Signal<Void->Void>>;
   public var onLooped:Null<Signal<Void->Void>>;
   public var playing:Bool;
-  public var repeatCount:Float;
+  public var repeatCount:Null<Float>;
   public var speed:Float;
   public var time:Float;
 
-  private function new(clip:AnimationClip, loop:Bool, loopMode:AnimationLoopMode, onEvent:Null<Signal<AnimationClipEvent->Void>>, onFinished:Null<Signal<Void->Void>>, onLooped:Null<Signal<Void->Void>>, playing:Bool, repeatCount:Float, speed:Float, time:Float):Void {
+  private function new(clip:AnimationClip, loop:Bool, ?loopMode:Null<AnimationLoopMode>, ?onEvent:Null<Signal<AnimationClipEvent->Void>>, ?onFinished:Null<Signal<Void->Void>>, ?onLooped:Null<Signal<Void->Void>>, playing:Bool, ?repeatCount:Null<Float>, speed:Float, time:Float):Void {
     this.__symbol__EntityRuntime = null;
     this.clip = clip;
     this.loop = loop;

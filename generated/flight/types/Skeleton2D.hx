@@ -17,7 +17,7 @@ class Skeleton2D {
   public var slots:Null<Array<Slot2D>>;
   public var worldMatrices:flight._internal._Float32Array;
 
-  private function new(boneMatrices:flight._internal._Float32Array, bones:Array<Bone2D>, inverseBindMatrices:flight._internal._Float32Array, skins:Null<Array<AttachmentSkin2D>>, slots:Null<Array<Slot2D>>, worldMatrices:flight._internal._Float32Array):Void {
+  private function new(boneMatrices:flight._internal._Float32Array, bones:Array<Bone2D>, inverseBindMatrices:flight._internal._Float32Array, ?skins:Null<Array<AttachmentSkin2D>>, ?slots:Null<Array<Slot2D>>, worldMatrices:flight._internal._Float32Array):Void {
     this.__symbol__EntityRuntime = null;
     this.boneMatrices = boneMatrices;
     this.bones = bones;

@@ -18,7 +18,7 @@ class BlinnPhongMaterial extends flight.types.SurfaceMaterial<Dynamic> {
   public var specular:Float;
   public var specularMap:Null<Texture>;
 
-  private function new(kind:Dynamic, name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, alphaMap:Null<Texture>, diffuse:Float, diffuseMap:Null<Texture>, normalMap:Null<Texture>, normalScale:Float, shininess:Float, specular:Float, specularMap:Null<Texture>):Void {
+  private function new(kind:Dynamic, ?name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, alphaMap:Null<Texture>, diffuse:Float, diffuseMap:Null<Texture>, normalMap:Null<Texture>, normalScale:Float, shininess:Float, specular:Float, specularMap:Null<Texture>):Void {
     super(kind, name, alphaCutoff, alphaMode, blendMode, doubleSided);
     this.alphaMap = alphaMap;
     this.diffuse = diffuse;

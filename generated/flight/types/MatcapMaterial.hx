@@ -12,7 +12,7 @@ class MatcapMaterial extends flight.types.SurfaceMaterial<Dynamic> {
   public var matcap:Null<Texture>;
   public var tint:Float;
 
-  private function new(kind:Dynamic, name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, matcap:Null<Texture>, tint:Float):Void {
+  private function new(kind:Dynamic, ?name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, matcap:Null<Texture>, tint:Float):Void {
     super(kind, name, alphaCutoff, alphaMode, blendMode, doubleSided);
     this.matcap = matcap;
     this.tint = tint;

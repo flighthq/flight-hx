@@ -30,7 +30,7 @@ class SurfaceMaterial<TKind = Dynamic> extends flight.types.Material<TKind> {
   public var blendMode:BlendMode;
   public var doubleSided:Bool;
 
-  private function new(kind:TKind, name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool):Void {
+  private function new(kind:TKind, ?name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool):Void {
     super(kind, name);
     this.alphaCutoff = alphaCutoff;
     this.alphaMode = alphaMode;

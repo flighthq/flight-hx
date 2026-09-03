@@ -28,6 +28,11 @@ describe('maintained runtime bindings', () => {
     expect(runtime).not.toContain("name == 'delete'");
   });
 
+  it('uses exact 32-bit multiplication on JavaScript', () => {
+    const runtime = readFileSync(path.join(workspace, 'src', 'flight', '_internal', '_Runtime.hx'), 'utf8');
+    expect(runtime).toContain("js.Syntax.code('Math.imul({0}, {1})', a, b)");
+  });
+
   it('expands WebGL2 operations to typed target APIs without reflection', () => {
     const source = readFileSync(
       path.join(workspace, 'src', 'flight', '_internal', 'WebGl2RenderingContext.hx'),

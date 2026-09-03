@@ -13,7 +13,7 @@ class EmissiveMaterial extends flight.types.SurfaceMaterial<Dynamic> {
   public var emissiveMap:Null<Texture>;
   public var emissiveStrength:Float;
 
-  private function new(kind:Dynamic, name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, emissive:Float, emissiveMap:Null<Texture>, emissiveStrength:Float):Void {
+  private function new(kind:Dynamic, ?name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, emissive:Float, emissiveMap:Null<Texture>, emissiveStrength:Float):Void {
     super(kind, name, alphaCutoff, alphaMode, blendMode, doubleSided);
     this.emissive = emissive;
     this.emissiveMap = emissiveMap;

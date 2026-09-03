@@ -2919,7 +2919,25 @@ class _HostElectron {
       return cast succeeded;
       return cast _Runtime.UNDEFINED;
     } : Dynamic) } : EntityShapeL7C37__electronProtocol); __callArgument1696; })) : EntityShapeL7C37__electronProtocol);
-    return cast (cast createEntity((cast ({ default_: (cast (cast createEntity(({ final __callArgument1714:Dynamic = ({ isDefault: (cast function(scheme:String):Bool return (cast app : ElectronApp).isDefaultProtocolClient((cast scheme : String)) : Dynamic), removeAsDefault: (cast function(scheme:String):Bool return (cast app : ElectronApp).removeAsDefaultProtocolClient((cast scheme : String)) : Dynamic), setAsDefault: (cast function(scheme:String):Bool {
+    return cast (cast createEntity((cast (#if (flight_struct_typedef || js) _Runtime.objectFromPairs([{ key: 'default', value: (cast createEntity(({ final __callArgument1698:Dynamic = ({ isDefault: (cast function(scheme:String):Bool return (cast app : ElectronApp).isDefaultProtocolClient((cast scheme : String)) : Dynamic), removeAsDefault: (cast function(scheme:String):Bool return (cast app : ElectronApp).removeAsDefaultProtocolClient((cast scheme : String)) : Dynamic), setAsDefault: (cast function(scheme:String):Bool {
+      var succeeded:Bool = cast _Runtime.UNDEFINED;
+      succeeded = (cast app : ElectronApp).setAsDefaultProtocolClient((cast scheme : String));
+      if ((cast succeeded : Bool)) { ((cast registered : flight._internal._Set<String>).add((cast scheme))); }
+      return cast succeeded;
+      return cast _Runtime.UNDEFINED;
+    } : Dynamic) } : EntityShapeL16C27__electronProtocol); __callArgument1698; })) : EntityShapeL16C27__electronProtocol) }, { key: 'open', value: (cast createEntity(({ final __callArgument1704:Dynamic = ({ subscribe: (cast function(listener:String->Void):Void->Void {
+      var handler:Array<flight._internal._Any>->Void = cast _Runtime.UNDEFINED;
+      handler = (cast _Runtime.haxeRest(function(...args:flight._internal._Any):Void { listener((cast Std.string(_Runtime.coalesce(flight._internal._StaticIndex.readArray(args, 1.0), function():Dynamic return cast '')) : String)); }, 0));
+      (cast app : ElectronApp).on((cast 'open-url' : String), ({ final __callArgument1702:Dynamic = handler; __callArgument1702; }));
+      return cast function():Void { (cast app : ElectronApp).removeListener((cast 'open-url' : String), ({ final __callArgument1703:Dynamic = handler; __callArgument1703; })); };
+      return cast _Runtime.UNDEFINED;
+    } : Dynamic) } : EntityShapeL25C24__electronProtocol); __callArgument1704; })) : EntityShapeL25C24__electronProtocol) }, { key: 'registration', value: registration }, { key: 'registrationQuery', value: (cast createEntity(({ final __callArgument1710:Dynamic = ({ isRegistered: (cast function(scheme:String):Bool return (cast app : ElectronApp).isDefaultProtocolClient((cast scheme : String)) : Dynamic) } : EntityShapeL33C37__electronProtocol); __callArgument1710; })) : EntityShapeL33C37__electronProtocol) }, { key: 'unregistration', value: (cast createEntity(({ final __callArgument1712:Dynamic = ({ unregister: (cast function(scheme:String):Bool {
+      var succeeded:Bool = cast _Runtime.UNDEFINED;
+      succeeded = (cast app : ElectronApp).removeAsDefaultProtocolClient((cast scheme : String));
+      if ((cast succeeded : Bool)) { ((cast registered : flight._internal._Set<String>).delete_((cast scheme))); }
+      return cast succeeded;
+      return cast _Runtime.UNDEFINED;
+    } : Dynamic) } : EntityShapeL34C34__electronProtocol); __callArgument1712; })) : EntityShapeL34C34__electronProtocol) }]) #else ({ default_: (cast (cast createEntity(({ final __callArgument1714:Dynamic = ({ isDefault: (cast function(scheme:String):Bool return (cast app : ElectronApp).isDefaultProtocolClient((cast scheme : String)) : Dynamic), removeAsDefault: (cast function(scheme:String):Bool return (cast app : ElectronApp).removeAsDefaultProtocolClient((cast scheme : String)) : Dynamic), setAsDefault: (cast function(scheme:String):Bool {
       var succeeded:Bool = cast _Runtime.UNDEFINED;
       succeeded = (cast app : ElectronApp).setAsDefaultProtocolClient((cast scheme : String));
       if ((cast succeeded : Bool)) { ((cast registered : flight._internal._Set<String>).add((cast scheme))); }
@@ -2937,7 +2955,7 @@ class _HostElectron {
       if ((cast succeeded : Bool)) { ((cast registered : flight._internal._Set<String>).delete_((cast scheme))); }
       return cast succeeded;
       return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL34C34__electronProtocol); __callArgument1728; })) : EntityShapeL34C34__electronProtocol) : Dynamic) } : ElectronProtocolCapabilities) : Dynamic)) : ElectronProtocolCapabilities);
+    } : Dynamic) } : EntityShapeL34C34__electronProtocol); __callArgument1728; })) : EntityShapeL34C34__electronProtocol) : Dynamic) } : ElectronProtocolCapabilities) #end) : Dynamic)) : ElectronProtocolCapabilities);
     return cast null;
   }
 

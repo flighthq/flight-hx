@@ -16,7 +16,7 @@ class Skeleton3D {
   public var joints:Array<Node3D>;
   public var names:Null<Array<String>>;
 
-  private function new(inverseBindMatrices:flight._internal._Float32Array, jointMatrices:flight._internal._Float32Array, normalMatrices:flight._internal._Float32Array, joints:Array<Node3D>, names:Null<Array<String>>):Void {
+  private function new(inverseBindMatrices:flight._internal._Float32Array, jointMatrices:flight._internal._Float32Array, normalMatrices:flight._internal._Float32Array, joints:Array<Node3D>, ?names:Null<Array<String>>):Void {
     this.__symbol__EntityRuntime = null;
     this.inverseBindMatrices = inverseBindMatrices;
     this.jointMatrices = jointMatrices;

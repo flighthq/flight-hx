@@ -4,7 +4,7 @@ cursor = cast {
   argumentOffset: 0.0,
   commands: commands,
   getArgument: function(relativeIndex:Float):Null<ShapeCommandToken> {
-    if (relativeIndex < 0 || relativeIndex >= cursor.argumentCount) return null;
+    if (relativeIndex < 0 || relativeIndex >= cursor.argumentCount) return cast _Runtime.UNDEFINED;
     return cursor.commands[Std.int(cursor.argumentOffset + relativeIndex)];
   },
   length: 0.0,

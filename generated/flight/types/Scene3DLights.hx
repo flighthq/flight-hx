@@ -12,11 +12,11 @@ class Scene3DLights {
   public var __symbol__EntityRuntime:Null<EntityRuntime>;
   public var ambient:Null<AmbientLight>;
   public var directional:Null<DirectionalLight>;
-  public var hemisphere:Array<HemisphereLight>;
-  public var point:Array<PointLight>;
-  public var spot:Array<SpotLight>;
+  public var hemisphere:Null<Array<HemisphereLight>>;
+  public var point:Null<Array<PointLight>>;
+  public var spot:Null<Array<SpotLight>>;
 
-  private function new(ambient:Null<AmbientLight>, directional:Null<DirectionalLight>, hemisphere:Array<HemisphereLight>, point:Array<PointLight>, spot:Array<SpotLight>):Void {
+  private function new(ambient:Null<AmbientLight>, directional:Null<DirectionalLight>, ?hemisphere:Null<Array<HemisphereLight>>, ?point:Null<Array<PointLight>>, ?spot:Null<Array<SpotLight>>):Void {
     this.__symbol__EntityRuntime = null;
     this.ambient = ambient;
     this.directional = directional;

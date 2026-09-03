@@ -10,7 +10,7 @@ import flight._internal._Runtime;
 @:structInit
 class StandardMaterial extends flight.types.Material<StandardMaterialKind> {
 
-  private function new(kind:StandardMaterialKind, name:Null<String>):Void {
+  private function new(kind:StandardMaterialKind, ?name:Null<String>):Void {
     super(kind, name);
   }
 }

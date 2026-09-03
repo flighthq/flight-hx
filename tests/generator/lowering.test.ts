@@ -3567,9 +3567,9 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(lowered.diagnostics).toEqual([]);
     expect(output).toContain('final __optionalOwner1 = handler');
     expect(output).toContain('(cast __optionalOwner1 : { var submit:Float->Void; }).submit');
-    expect(output).toContain('if (__optionalCall0 != null) __optionalCall0(value)');
+    expect(output).toContain('if (__optionalCall0 != null) __optionalCall0((cast value : Float))');
     expect(output).toContain('@:optional var optional:Null<Float->Void>');
-    expect(output).toContain('if (__optionalCall2 != null) __optionalCall2(value)');
+    expect(output).toContain('if (__optionalCall2 != null) __optionalCall2((cast value : Float))');
     expect(output).toContain('_Runtime.callOptionalValue(({ final __structural');
     expect(output.match(/_Runtime\.callOptionalValue/g)).toHaveLength(1);
   });

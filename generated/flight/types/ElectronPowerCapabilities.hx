@@ -19,7 +19,7 @@ class ElectronPowerCapabilities {
   public var suspension:PowerSuspensionBackend;
   public var thermal:Null<PowerThermalBackend>;
 
-  private function new(status:PowerStatusBackend, change:PowerChangeBackend, batteryHealth:PowerBatteryHealthBackend, idle:PowerIdleBackend, keepAwake:PowerKeepAwakeBackend, sessionLock:PowerSessionLockBackend, suspension:PowerSuspensionBackend, thermal:Null<PowerThermalBackend>):Void {
+  private function new(status:PowerStatusBackend, change:PowerChangeBackend, batteryHealth:PowerBatteryHealthBackend, idle:PowerIdleBackend, keepAwake:PowerKeepAwakeBackend, sessionLock:PowerSessionLockBackend, suspension:PowerSuspensionBackend, ?thermal:Null<PowerThermalBackend>):Void {
     this.__symbol__EntityRuntime = null;
     this.status = status;
     this.change = change;

@@ -14,7 +14,7 @@ class ToonMaterial extends flight.types.SurfaceMaterial<Dynamic> {
   public var ramp:Null<Texture>;
   public var steps:Float;
 
-  private function new(kind:Dynamic, name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, baseColor:Float, baseColorMap:Null<Texture>, ramp:Null<Texture>, steps:Float):Void {
+  private function new(kind:Dynamic, ?name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, baseColor:Float, baseColorMap:Null<Texture>, ramp:Null<Texture>, steps:Float):Void {
     super(kind, name, alphaCutoff, alphaMode, blendMode, doubleSided);
     this.baseColor = baseColor;
     this.baseColorMap = baseColorMap;

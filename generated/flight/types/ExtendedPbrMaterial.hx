@@ -12,7 +12,7 @@ class ExtendedPbrMaterial extends flight.types.SurfaceMaterial<String> {
   public var extensions:Array<PbrExtension>;
   public var standard:StandardPbrMaterialProperties;
 
-  private function new(kind:String, name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, extensions:Array<PbrExtension>, standard:StandardPbrMaterialProperties):Void {
+  private function new(kind:String, ?name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, extensions:Array<PbrExtension>, standard:StandardPbrMaterialProperties):Void {
     super(kind, name, alphaCutoff, alphaMode, blendMode, doubleSided);
     this.extensions = extensions;
     this.standard = standard;

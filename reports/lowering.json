@@ -3669,7 +3669,7 @@
       "booleanAndExpressions": 2833,
       "booleanConditionalExpressions": 3581,
       "booleanOrExpressions": 3474,
-      "booleanTruthinessUses": 17745,
+      "booleanTruthinessUses": 17747,
       "destructuringEscapes": {
         "regexp-result-array": {
           "assignment": 0,
@@ -3766,12 +3766,12 @@
         "asyncFlowForOfValues": 21
       },
       "indexedAccesses": {
-        "reads": 9711,
+        "reads": 9712,
         "writes": 4475
       },
       "indexedReceivers": {
         "Array": {
-          "reads": 6764,
+          "reads": 6765,
           "writes": 1472
         },
         "ArrayOrFloat32Array": {

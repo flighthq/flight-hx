@@ -25,7 +25,8 @@ class SceneLightSmoke {
       near: 0.1,
       projection: createPerspectiveProjection({aspect: 4 / 3, fovY: Math.PI / 4}),
     });
-    final state:RenderState = cast {};
+    final createRenderState = Reflect.field(flight._Render, 'createRenderState');
+    final state:RenderState = cast Reflect.callMethod(flight._Render, createRenderState, []);
     final list = prepareScene3DRender(state, scene, camera, lights);
     if (
       list.lights.data == null ||

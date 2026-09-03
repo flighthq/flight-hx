@@ -609,7 +609,11 @@ class _Runtime {
   }
 
   public static inline function imul(a:Int, b:Int):Int {
+    #if js
+    return js.Syntax.code('Math.imul({0}, {1})', a, b);
+    #else
     return a * b;
+    #end
   }
 
   public static inline function isFinite(value:Float):Bool {

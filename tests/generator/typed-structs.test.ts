@@ -59,10 +59,10 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toMatchObject({
       baseline: 404,
       kindChanged: 3,
-      preserved: 214,
-      relocated: 135,
-      removed: 26,
-      renamed: 26,
+      preserved: 212,
+      relocated: 136,
+      removed: 30,
+      renamed: 23,
     });
     expect(discovery.migration.summary.newAuditOnly).toBe(unreviewedAdditions.length);
     expect(discovery.migration).toMatchObject({
@@ -75,7 +75,7 @@ describe('typed struct stable declaration identity', () => {
         discovery.candidates.filter((candidate) => candidate.migration.status === 'new').length,
     );
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
-    expect(relocated).toHaveLength(135);
+    expect(relocated).toHaveLength(136);
     expect(
       relocated.every(
         (candidate) =>
@@ -2719,7 +2719,7 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free clock',
       },
       {
-        declarationFingerprint: 'sha256:9ea86c550f139c78db1e1e5f74465c7b5551ae23b4269fa6f342fabefe27471a',
+        declarationFingerprint: 'sha256:adc86b7b98f59e94bd1d927a4700655d542ddaa53a072cebcf83a79a541fa41d',
         id: '@flighthq/types:interface#AreaLight',
         purpose: 'reviewed escape-free area light',
       },
@@ -2839,7 +2839,7 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free Scene3D document node',
       },
       {
-        declarationFingerprint: 'sha256:5aa15d73a4d69dda6f617f278e05d90700a178b45474ec248e36e1a1139373ae',
+        declarationFingerprint: 'sha256:958286508ea320b3aa03ef4d94c2abf8a888b01bba9b6f8a7f8278c2a8d948d1',
         id: '@flighthq/types:interface#DirectionalLight',
         purpose: 'reviewed escape-free directional light',
       },
@@ -3384,22 +3384,22 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free Lottie text document',
       },
       {
-        declarationFingerprint: 'sha256:2692ed3168285d890bf7abb2054c889a2ddeeaf73b7ed333349c732c3705c662',
+        declarationFingerprint: 'sha256:0b4525699938a5628140650ab2034e8bad788875786387d90d814ad0d61e3d24',
         id: '@flighthq/types:interface#AreaLightOptions',
         purpose: 'reviewed escape-free area-light options',
       },
       {
-        declarationFingerprint: 'sha256:d0bf1578d5df68cbb0e862e25e3ac2b9d7a0141cb8461c4a9226d61baecee179',
+        declarationFingerprint: 'sha256:223b476703cc3e62879542f4a2048b13edbd213c9f7d101e50a87b0c3f70c732',
         id: '@flighthq/types:interface#SpotLightOptions',
         purpose: 'reviewed escape-free spot-light options',
       },
       {
-        declarationFingerprint: 'sha256:35ec8d4b09d8b5e4ec4a3bb1b4cc4df6cae2b1df2ee5ff01c43296dc64029d2c',
+        declarationFingerprint: 'sha256:a69fec825950a1a99d0b1ddab38c424c231ddc8de0c13a5ecd24f79a51678402',
         id: '@flighthq/types:interface#PointLightOptions',
         purpose: 'reviewed escape-free point-light options',
       },
       {
-        declarationFingerprint: 'sha256:ae22f5138e53cd2df7b843f130bdd9febf39d2cad6f130edf563bb11fc9f4431',
+        declarationFingerprint: 'sha256:c0a6bf4a005dd31930379a8aa13dc57df33773f78507444760dd135d2914cc2a',
         id: '@flighthq/types:interface#DirectionalLightOptions',
         purpose: 'reviewed escape-free directional-light options',
       },
@@ -3669,7 +3669,7 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free quad-batch runtime',
       },
       {
-        declarationFingerprint: 'sha256:8f5956e935f6aa84c5eb19bef04c2b1e4be1d2b138d4fc7bc1ba46e6b5b95e20',
+        declarationFingerprint: 'sha256:4f76b48f7affac57f2a933d877fbd5978b70bb09d2915f551425a9ce8ce1ac69',
         id: '@flighthq/types:interface#Raster2DSurface',
         purpose: 'reviewed escape-free backend-neutral raster surface',
       },
@@ -3921,7 +3921,7 @@ describe('typed struct stable declaration identity', () => {
       baselineId: '@flighthq/types:interface#Texture',
       status: 'kind-changed',
     });
-    expect(discovery.migration.removed).toHaveLength(26);
+    expect(discovery.migration.removed).toHaveLength(30);
     expect(discovery.migration.removed).toEqual(
       expect.arrayContaining([
         {
@@ -3937,8 +3937,8 @@ describe('typed struct stable declaration identity', () => {
           baselineId: '@flighthq/types:interface#ImageResource',
           successorIds: [
             '@flighthq/types:interface#Bitmap',
-            '@flighthq/types:interface#CompressedImage',
-            '@flighthq/types:interface#Image',
+            '@flighthq/types:interface#CompressedImageResource',
+            '@flighthq/types:interface#ImageResource',
           ],
         },
         {
@@ -3948,7 +3948,7 @@ describe('typed struct stable declaration identity', () => {
         {
           baselineId: '@flighthq/types:interface#VideoTexture',
           successorIds: [
-            '@flighthq/types:interface#Image',
+            '@flighthq/types:interface#ImageResource',
             '@flighthq/types:interface#VideoResource',
             '@flighthq/types:type#Texture',
           ],
@@ -3956,14 +3956,19 @@ describe('typed struct stable declaration identity', () => {
         {
           baselineId: '@flighthq/types:interface#WebcamStream',
           successorIds: [
-            '@flighthq/types:interface#MediaFileCaptureBackend',
-            '@flighthq/types:interface#MediaFileCapturePhoto',
-            '@flighthq/types:interface#MediaFileCaptureVideo',
+            '@flighthq/types:interface#DialogImage',
+            '@flighthq/types:interface#DialogVideo',
+            '@flighthq/types:interface#ImageOpenDialogBackend',
+            '@flighthq/types:interface#PhotoCaptureDialogBackend',
+            '@flighthq/types:interface#VideoCaptureDialogBackend',
           ],
         },
       ]),
     );
-    expect(byId.has('@flighthq/types:interface#ImageResource')).toBe(false);
+    expect(byId.get('@flighthq/types:interface#ImageResource')?.migration).toEqual({
+      baselineId: null,
+      status: 'new',
+    });
     expect(byId.has('@flighthq/types:interface#Tileset')).toBe(false);
     expect(byId.has('@flighthq/types:interface#VideoTexture')).toBe(false);
   });
@@ -4251,6 +4256,85 @@ describe('typed struct analysis', () => {
       { cwd: path.resolve('.'), stdio: 'pipe' },
     );
     expect(readFileSync(candidateJavaScript)).toEqual(readFileSync(baselineJavaScript));
+  });
+
+  it('preserves reserved JavaScript field names on struct-init classes', () => {
+    const candidate: TypedStructCandidate = {
+      emission: 'direct',
+      name: 'Camera2D',
+      packageName: '@flighthq/types',
+      purpose: 'reserved field fixture',
+      source: 'upstream/packages/types/src/CameraPilot.ts',
+    };
+    const result = lowerFixture(
+      `
+        export interface Camera2D {
+          default: string;
+          secure: string;
+        }
+        export function createCamera2D(): Camera2D {
+          return { default: 'standard', secure: 'secure' };
+        }
+      `,
+      candidate,
+    );
+    const declaration = result.lowered.declarations.find(
+      (item) => item.kind === 'type' && item.name === candidate.name,
+    );
+    if (!declaration || declaration.kind !== 'type') throw new Error('Expected reserved field fixture type');
+    declaration.cppStructInitSchemaId = candidateId(candidate);
+    const fixtureModule = {
+      declarations: result.lowered.declarations,
+      haxePackage: 'flight.types',
+      imports: [],
+      name: 'CameraPilot',
+      packageName: '@flighthq/types',
+    };
+    sealCppStructInitConstructors([fixtureModule]);
+    const output = emitHaxeModule(fixtureModule);
+
+    expect(result.lowered.diagnostics).toEqual([]);
+    expect(output).toContain('#if (!flight_struct_typedef || js)');
+    expect(output).toContain("@:native('default')");
+    expect(output).toContain("_Runtime.objectFromPairs([{ key: 'default'");
+
+    const fixtureDirectory = path.resolve('build/haxe-js-reserved-struct-init-fixture');
+    const packageDirectory = path.join(fixtureDirectory, 'flight', 'types');
+    rmSync(fixtureDirectory, { force: true, recursive: true });
+    mkdirSync(packageDirectory, { recursive: true });
+    writeFileSync(path.join(packageDirectory, 'CameraPilot.hx'), output);
+    writeFileSync(
+      path.join(fixtureDirectory, 'Main.hx'),
+      `
+        class Main {
+          static function main() {
+            final capabilities = flight.types.CameraPilot.createCamera2D();
+            if (capabilities.default_ != 'standard') throw 'bad reserved field access';
+            if (!Reflect.hasField(capabilities, 'default')) throw 'missing native reserved field';
+            if (Reflect.hasField(capabilities, 'default_')) throw 'leaked mangled field';
+          }
+        }
+      `,
+    );
+    const outputJavaScript = path.join(fixtureDirectory, 'main.cjs');
+    execFileSync(
+      'node',
+      [
+        'tools/haxe.mjs',
+        '-cp',
+        fixtureDirectory,
+        '-cp',
+        'src',
+        '-D',
+        'flight_struct_typedef',
+        '--main',
+        'Main',
+        '--js',
+        outputJavaScript,
+      ],
+      { cwd: path.resolve('.'), stdio: 'pipe' },
+    );
+    expect(() => execFileSync('node', [outputJavaScript], { cwd: path.resolve('.'), stdio: 'pipe' })).not.toThrow();
   });
 
   it('canonicalizes struct-init field order after preserving initializer evaluation order', () => {
@@ -4776,16 +4860,16 @@ describe('typed struct analysis', () => {
     expect(entityFactories.summary).toEqual({
       bareEntityCalls: 0,
       blockedEntityCalls: 0,
-      calls: 368,
-      exactEntityCalls: 178,
-      exactEntitySchemas: 143,
-      exactNonEntityCalls: 17,
+      calls: 393,
+      exactEntityCalls: 198,
+      exactEntitySchemas: 160,
+      exactNonEntityCalls: 19,
       genericEntityCalls: 0,
-      localEntityCalls: 173,
-      normalizedFieldOrderCalls: 24,
+      localEntityCalls: 176,
+      normalizedFieldOrderCalls: 28,
       normalizedMissingFieldCalls: 9,
-      normalizedSpreadProjectionCalls: 17,
-      readyEntityCalls: 351,
+      normalizedSpreadProjectionCalls: 18,
+      readyEntityCalls: 374,
       structuralEntityCalls: 0,
       unresolvedCalls: 0,
     });
@@ -4877,13 +4961,20 @@ describe('typed struct analysis', () => {
       entityFactories.sites.find(
         (site) =>
           site.source.endsWith('/host-electron/src/electronPower.ts') &&
-          site.destination.schemaName === 'PowerStatusBackend',
+          site.argument.kind === 'object' &&
+          site.argument.fields.includes('getStatus'),
       ),
     ).toMatchObject({
-      destination: { kind: 'exact-non-entity', route: 'type-argument', schemaName: 'PowerStatusBackend' },
+      blockers: ['field-set-mismatch', 'parameterized-destination'],
+      destination: {
+        kind: 'exact-non-entity',
+        route: 'type-argument',
+        schemaName: 'EntityWithoutRuntime',
+        type: 'EntityWithoutRuntime<PowerStatusBackend>',
+      },
       status: 'not-entity',
     });
-    expect(entityFactoryClosureSummary(entityFactories)).toContain('| Production createEntity calls | 368 |');
+    expect(entityFactoryClosureSummary(entityFactories)).toContain('| Production createEntity calls | 393 |');
     const typeErasureReport = JSON.parse(readFileSync('reports/type-erasures.json', 'utf8')) as {
       modules: Array<{ byReason: Record<string, number>; module: string; source: string; total: number }>;
       summary: { byReason: Record<string, number>; total: number };
@@ -5897,11 +5988,11 @@ describe('typed struct analysis', () => {
     const nominalClassNames = [
       ...new Set([...entityFactories.schemas.map((schema) => schema.schemaName), ...additionalNominalClassNames]),
     ].sort();
-    expect(entityFactories.schemas).toHaveLength(143);
-    expect(nominalClassNames).toHaveLength(188);
+    expect(entityFactories.schemas).toHaveLength(160);
+    expect(nominalClassNames).toHaveLength(205);
     for (const name of nominalClassNames) {
       const generated = readFileSync(`generated/flight/types/${name}.hx`, 'utf8');
-      expect(generated, name).toContain('#if !flight_struct_typedef');
+      expect(generated, name).toMatch(/#if (?:!flight_struct_typedef|\(!flight_struct_typedef \|\| js\))/u);
       expect(generated, name).toContain('@:allow(');
       expect(generated, name).toContain('@:keep');
       expect(generated, name).toContain('@:structInit');
@@ -5971,10 +6062,10 @@ describe('typed struct analysis', () => {
     expect(report.migration.summary).toMatchObject({
       baseline: 404,
       kindChanged: 3,
-      preserved: 214,
-      relocated: 135,
-      removed: 26,
-      renamed: 26,
+      preserved: 212,
+      relocated: 136,
+      removed: 30,
+      renamed: 23,
     });
     expect(report.migration.summary.newAuditOnly).toBe(
       report.candidates.filter(
@@ -6124,7 +6215,7 @@ describe('typed struct analysis', () => {
       reasons: [],
     });
     expect(wgpuRenderStateRuntime).toMatchObject({
-      declarationFingerprint: 'sha256:98f76831e154a026450321ea0bfc3cef4b621c07bc1dd110b6bbe79adf8982f2',
+      declarationFingerprint: 'sha256:0713334b596d9ed434fad6a96cdcb8376500ef06a093d7f2b4a8f2aee957bde0',
       eligible: true,
       emission: { directAccesses: 0, mode: 'audit-only', pendingAccesses: 692, reflectiveSurvivors: [] },
       escapes: expect.arrayContaining([expect.objectContaining({ reason: 'presence-sensitive' })]),
@@ -6362,7 +6453,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'AreaLight',
-        'sha256:9ea86c550f139c78db1e1e5f74465c7b5551ae23b4269fa6f342fabefe27471a',
+        'sha256:adc86b7b98f59e94bd1d927a4700655d542ddaa53a072cebcf83a79a541fa41d',
         'reviewed escape-free area light',
       ],
       [
@@ -6542,7 +6633,7 @@ describe('typed struct analysis', () => {
     for (const [name, declarationFingerprint, purpose] of [
       [
         'DirectionalLight',
-        'sha256:5aa15d73a4d69dda6f617f278e05d90700a178b45474ec248e36e1a1139373ae',
+        'sha256:958286508ea320b3aa03ef4d94c2abf8a888b01bba9b6f8a7f8278c2a8d948d1',
         'reviewed escape-free directional light',
       ],
       [
@@ -7367,22 +7458,22 @@ describe('typed struct analysis', () => {
     for (const [name, declarationFingerprint, purpose] of [
       [
         'AreaLightOptions',
-        'sha256:2692ed3168285d890bf7abb2054c889a2ddeeaf73b7ed333349c732c3705c662',
+        'sha256:0b4525699938a5628140650ab2034e8bad788875786387d90d814ad0d61e3d24',
         'reviewed escape-free area-light options',
       ],
       [
         'SpotLightOptions',
-        'sha256:d0bf1578d5df68cbb0e862e25e3ac2b9d7a0141cb8461c4a9226d61baecee179',
+        'sha256:223b476703cc3e62879542f4a2048b13edbd213c9f7d101e50a87b0c3f70c732',
         'reviewed escape-free spot-light options',
       ],
       [
         'PointLightOptions',
-        'sha256:35ec8d4b09d8b5e4ec4a3bb1b4cc4df6cae2b1df2ee5ff01c43296dc64029d2c',
+        'sha256:a69fec825950a1a99d0b1ddab38c424c231ddc8de0c13a5ecd24f79a51678402',
         'reviewed escape-free point-light options',
       ],
       [
         'DirectionalLightOptions',
-        'sha256:ae22f5138e53cd2df7b843f130bdd9febf39d2cad6f130edf563bb11fc9f4431',
+        'sha256:c0a6bf4a005dd31930379a8aa13dc57df33773f78507444760dd135d2914cc2a',
         'reviewed escape-free directional-light options',
       ],
     ] as const) {
@@ -7792,7 +7883,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'Raster2DSurface',
-        'sha256:8f5956e935f6aa84c5eb19bef04c2b1e4be1d2b138d4fc7bc1ba46e6b5b95e20',
+        'sha256:4f76b48f7affac57f2a933d877fbd5978b70bb09d2915f551425a9ce8ce1ac69',
         'reviewed escape-free backend-neutral raster surface',
       ],
     ] as const) {
@@ -9004,7 +9095,7 @@ describe('typed struct analysis', () => {
       ),
     ).toBe(true);
     expect(reviewedDirectCandidates.reduce((total, candidate) => total + candidate.emission.directAccesses, 0)).toBe(
-      13_928,
+      13_976,
     );
 
     // Merged implementation modules invalidate whole-file receiver-name scans:

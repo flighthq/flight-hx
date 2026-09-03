@@ -35,7 +35,7 @@ class RenderProxy {
   public var transformFrameId:Float;
   public var visible:Bool;
 
-  private function new(source:Renderable, kind:Kind, next:Null<RenderProxy>, alpha:Float, appearanceFrameId:Float, blendMode:Null<BlendMode>, colorScaleBias:Null<ColorScaleBias>, colorMatrix:Null<Array<Float>>, material:Null<Material>, materialData:Null<MaterialData>, lastAppearanceId:Float, lastChildrenId:Float, lastLocalContentId:Float, lastLocalTransformId:Float, lastParentReferenceId:Float, name:Null<String>, renderer:Null<Renderer>, rendererData:Null<RendererData>, rendererDataSource:Null<Renderable>, rendererMapId:Float, transformFrameId:Float, visible:Bool):Void {
+  private function new(source:Renderable, kind:Kind, next:Null<RenderProxy>, alpha:Float, appearanceFrameId:Float, blendMode:Null<BlendMode>, colorScaleBias:Null<ColorScaleBias>, ?colorMatrix:Null<Array<Float>>, material:Null<Material>, materialData:Null<MaterialData>, lastAppearanceId:Float, lastChildrenId:Float, lastLocalContentId:Float, lastLocalTransformId:Float, lastParentReferenceId:Float, name:Null<String>, renderer:Null<Renderer>, rendererData:Null<RendererData>, rendererDataSource:Null<Renderable>, rendererMapId:Float, transformFrameId:Float, visible:Bool):Void {
     this.__symbol__EntityRuntime = null;
     this.source = source;
     this.kind = kind;

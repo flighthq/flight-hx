@@ -14,7 +14,7 @@ class Mesh extends flight.types.Node3D<Null<NodeData>> {
   public var morph:Null<MeshMorph>;
   public var skin:Null<Skin>;
 
-  private function new(data:Null<NodeData>, enabled:Bool, kind:Kind, name:Null<String>, alpha:Float, visible:Bool, position:Vector3, rotation:Quaternion, scale:Vector3, geometry:MeshGeometry, materials:Array<Null<Material>>, morph:Null<MeshMorph>, skin:Null<Skin>):Void {
+  private function new(data:Null<NodeData>, enabled:Bool, kind:Kind, name:Null<String>, alpha:Float, visible:Bool, position:Vector3, rotation:Quaternion, scale:Vector3, geometry:MeshGeometry, materials:Array<Null<Material>>, ?morph:Null<MeshMorph>, ?skin:Null<Skin>):Void {
     super(data, enabled, kind, name, alpha, visible, position, rotation, scale);
     this.geometry = geometry;
     this.materials = materials;
