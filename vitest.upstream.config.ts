@@ -1,11 +1,24 @@
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { defineConfig, type Plugin } from 'vitest/config';
+import { REGISTRY_ISOLATED_TEST_FILES } from './upstream/scripts/registryIsolatedTests';
 
 const repositoryRoot = path.resolve('.');
 const packagesDirectory = path.join(repositoryRoot, 'upstream/packages');
 const bridgesDirectory = path.join(repositoryRoot, 'tests/bridges');
 const selectedPackage = process.env.FLIGHT_UPSTREAM_PACKAGE;
+
+// Files that assert a PROCESS-global invariant (e.g. `packages/shape` asserts importing the module
+// registers nothing) cannot share a module registry with their siblings. Upstream routes them to an
+// `isolate: true` project in its own vitest config; the parity harness must do the same, or the
+// import-time assertion is decided by file scheduling under the shared `isolate: false` worker rather
+// than by the code. Paths in the list are relative to `upstream/`; prefix them to this config's root.
+const isolatedTestFiles = REGISTRY_ISOLATED_TEST_FILES.map((file) => `upstream/${file}`);
+// The harness runs one package per invocation, so only carve out the isolated project when the selected
+// package actually owns an isolated file — otherwise the isolated project would match nothing and error.
+const selectedIsolatedTestFiles = isolatedTestFiles.filter(
+  (file) => !selectedPackage || file.startsWith(`upstream/packages/${selectedPackage}/`),
+);
 export const bridgeHookTimeoutMs = 30_000;
 export const bridgeTestTimeoutMs = 30_000;
 
@@ -70,6 +83,11 @@ function compiledFlightBridge(): Plugin {
   };
 }
 
+const packageInclude = selectedPackage
+  ? [`upstream/packages/${selectedPackage}/src/**/*.test.ts`]
+  : ['upstream/packages/*/src/**/*.test.ts'];
+const commonExclude = ['**/.claude/**', '**/node_modules/**', '**/surfaceWasm.test.ts'];
+
 export default defineConfig({
   plugins: [compiledFlightBridge()],
   test: {
@@ -80,15 +98,39 @@ export default defineConfig({
     // timeout bounded, but give bridge-backed setup and stress tests enough time.
     hookTimeout: bridgeHookTimeoutMs,
     testTimeout: bridgeTestTimeoutMs,
-    isolate: false,
     setupFiles: [
       path.join(repositoryRoot, 'upstream/vitest.setup.ts'),
       path.join(repositoryRoot, 'tests/upstream/reset.setup.ts'),
     ],
     unstubGlobals: true,
-    exclude: ['**/.claude/**', '**/node_modules/**', '**/surfaceWasm.test.ts'],
-    include: selectedPackage
-      ? [`upstream/packages/${selectedPackage}/src/**/*.test.ts`]
-      : ['upstream/packages/*/src/**/*.test.ts'],
+    exclude: commonExclude,
+    // Mirror upstream's isolation split: the shared tier reuses one module registry per worker
+    // (`isolate: false`, the large speedup), while process-global-invariant files run in their own
+    // process (`isolate: true`). The shared tier must exclude the isolated files or they run twice —
+    // once vacuously in the shared worker where the invariant is already violated by a sibling.
+    projects: [
+      {
+        extends: true,
+        test: {
+          name: 'shared',
+          isolate: false,
+          include: packageInclude,
+          exclude: [...commonExclude, ...isolatedTestFiles],
+        },
+      },
+      ...(selectedIsolatedTestFiles.length > 0
+        ? [
+            {
+              extends: true,
+              test: {
+                name: 'isolated',
+                isolate: true,
+                include: selectedIsolatedTestFiles,
+                exclude: commonExclude,
+              },
+            },
+          ]
+        : []),
+    ],
   },
 });
