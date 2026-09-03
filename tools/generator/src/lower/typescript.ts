@@ -1476,6 +1476,7 @@ function promotedEntityFactoryDeclarations(context: LoweringContext): ReadonlySe
           calleeIdentity.declarationKind === 'interface' &&
           ownerIdentity.declarationKind === 'interface' &&
           calleeIdentity.id !== ownerIdentity.id &&
+          checker.isTypeAssignableTo(ownerReturn, calleeReturn) &&
           destinations.some((candidate) => candidate.id === ownerIdentity.id) &&
           calleeReturn &&
           ownerReturn &&
@@ -4847,6 +4848,8 @@ function promotedEntityFactoryAllocatorForCall(
         candidate.identity !== undefined &&
         candidate.identity.declarationKind === 'interface' &&
         entityFactoryTypeHasRuntimeMarker(candidate.type, checker) &&
+        calleeReturn !== undefined &&
+        checker.isTypeAssignableTo(candidate.type, calleeReturn) &&
         candidate.identity.id !== calleeIdentity?.id,
     );
   if (!destination?.construction || !destination.identity) return undefined;

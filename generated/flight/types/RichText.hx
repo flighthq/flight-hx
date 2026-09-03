@@ -5,7 +5,6 @@ import Math as HxMath;
 import flight._internal._Runtime;
 
 #if !flight_struct_typedef
-@:allow(flight._Scene2DFormats)
 @:allow(flight._Text)
 @:keep
 @:structInit

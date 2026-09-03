@@ -5822,6 +5822,9 @@ describe('typed struct analysis', () => {
     expect(readFileSync('generated/flight/types/Vector3Like.hx', 'utf8')).toContain(
       'abstract Vector3Like(Dynamic) from flight.types.Vector3 from Vector3Like__Structural to Vector3Like__Structural {}',
     );
+    const internalMaterials = readFileSync('generated/flight/_Materials.hx', 'utf8');
+    expect(internalMaterials).not.toMatch(/public static function createStandardPbrMaterial\([^\n]*__entityAllocator/u);
+    expect(internalMaterials).toMatch(/public static function createSurfaceMaterial\([^\n]*__entityAllocator/u);
     const internalScene2D = readFileSync('generated/flight/_Scene2D.hx', 'utf8');
     const publicScene2D = readFileSync('generated/flight/Scene2D.hx', 'utf8');
     const internalScene3D = readFileSync('generated/flight/_Scene3D.hx', 'utf8');

@@ -6,7 +6,6 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._Scene2D)
-@:allow(flight._Scene2DFormats)
 @:keep
 @:structInit
 class DisplayObject extends flight.types.Node2D<Null<NodeData>> {

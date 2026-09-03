@@ -30,6 +30,7 @@ class TypedStructClassSmoke {
     final vector3 = flight.Geometry.createVector3(1, 2, 3);
     final vector3Input:{var max:flight.types.Vector3Like;} = {max: vector3};
     final meshMaterials:Array<Null<flight.types.Material<Dynamic>>> = [standardPbrMaterial, vertexColorMaterial];
+    final gltfDocument = flight.Scene3DFormats.parseGltf('{"asset":{"version":"2.0"},"materials":[{}]}');
     if (!baseNode.enabled || baseNode.kind != 'ClassSmokeNode' || baseNode.data != null) {
       throw 'base Node class construction lost field values';
     }
@@ -42,7 +43,7 @@ class TypedStructClassSmoke {
     if (!displayObject.enabled || displayObject.x != 0 || matrix4.m.length != 16) {
       throw 'wholesale Entity class construction lost field values';
     }
-    if (vector3Input.max.z != 3 || meshMaterials.length != 2) {
+    if (vector3Input.max.z != 3 || meshMaterials.length != 2 || gltfDocument.materials.length != 1) {
       throw 'nominal entities were rejected by structural input seams';
     }
     if (!particleEmitter2D.enabled || particleEmitter2D.x != 0 || !particleEmitter3D.enabled) {
@@ -91,6 +92,7 @@ class TypedStructClassSmoke {
       !Std.isOfType(standardMaterial, flight.types.Material) ||
       !Std.isOfType(standardPbrMaterial, flight.types.SurfaceMaterial) ||
       !Std.isOfType(standardPbrMaterial, flight.types.Material) ||
+      !Std.isOfType(gltfDocument.materials[0], flight.types.StandardPbrMaterial) ||
       !Std.isOfType(vertexColorMaterial, flight.types.SurfaceMaterial) ||
       !Std.isOfType(vertexColorMaterial, flight.types.Material) ||
       !Std.isOfType(shadedMaterial, flight.types.SurfaceMaterial) ||

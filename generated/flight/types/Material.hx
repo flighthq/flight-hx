@@ -6,7 +6,6 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._Materials)
-@:allow(flight._Scene3DFormats)
 @:allow(flight.types.StandardMaterial)
 @:allow(flight.types.SurfaceMaterial)
 @:keep

@@ -21730,12 +21730,12 @@
       },
       {
         "byReason": {
-          "nominal-factory-allocator": 4,
+          "nominal-factory-allocator": 3,
           "unclassified": 3
         },
         "module": "flight._Materials",
         "source": "upstream/packages/materials/src/classicMaterials.ts",
-        "total": 7
+        "total": 6
       },
       {
         "byReason": {
@@ -21797,13 +21797,13 @@
       },
       {
         "byReason": {
-          "nominal-factory-allocator": 3,
+          "nominal-factory-allocator": 2,
           "standard-toolkit-boundary": 12,
           "unclassified": 2
         },
         "module": "flight._Materials",
         "source": "upstream/packages/materials/src/pbrMaterials.ts",
-        "total": 17
+        "total": 16
       },
       {
         "byReason": {
@@ -23963,13 +23963,12 @@
       },
       {
         "byReason": {
-          "nominal-factory-allocator": 2,
           "standard-toolkit-boundary": 8,
           "unclassified": 5
         },
         "module": "flight._Scene2D",
         "source": "upstream/packages/scene2d/src/sprite.ts",
-        "total": 15
+        "total": 13
       },
       {
         "byReason": {
@@ -24552,21 +24551,19 @@
       },
       {
         "byReason": {
-          "nominal-factory-allocator": 2,
           "standard-toolkit-boundary": 26
         },
         "module": "flight._Scene2DFormats",
         "source": "upstream/packages/scene2d-formats/src/riveScene2D.ts",
-        "total": 28
+        "total": 26
       },
       {
         "byReason": {
-          "nominal-factory-allocator": 1,
           "standard-toolkit-boundary": 9
         },
         "module": "flight._Scene2DFormats",
         "source": "upstream/packages/scene2d-formats/src/riveScene2DDocument.ts",
-        "total": 10
+        "total": 9
       },
       {
         "byReason": {
@@ -24618,12 +24615,11 @@
       },
       {
         "byReason": {
-          "nominal-factory-allocator": 2,
           "standard-toolkit-boundary": 9
         },
         "module": "flight._Scene2DFormats",
         "source": "upstream/packages/scene2d-formats/src/riveText.ts",
-        "total": 11
+        "total": 9
       },
       {
         "byReason": {
@@ -25272,7 +25268,6 @@
       },
       {
         "byReason": {
-          "nominal-factory-allocator": 1,
           "source-any": 1,
           "source-never": 7,
           "source-unknown": 3,
@@ -25281,7 +25276,7 @@
         },
         "module": "flight._Scene3DFormats",
         "source": "upstream/packages/scene3d-formats/src/gltfParse.ts",
-        "total": 156
+        "total": 155
       },
       {
         "byReason": {
@@ -25336,14 +25331,13 @@
       },
       {
         "byReason": {
-          "nominal-factory-allocator": 1,
           "source-unknown": 2,
           "standard-toolkit-boundary": 84,
           "unclassified": 1
         },
         "module": "flight._Scene3DFormats",
         "source": "upstream/packages/scene3d-formats/src/md2Parse.ts",
-        "total": 88
+        "total": 87
       },
       {
         "byReason": {
@@ -25356,14 +25350,13 @@
       },
       {
         "byReason": {
-          "nominal-factory-allocator": 1,
           "source-any": 1,
           "source-unknown": 2,
           "standard-toolkit-boundary": 128
         },
         "module": "flight._Scene3DFormats",
         "source": "upstream/packages/scene3d-formats/src/md5Parse.ts",
-        "total": 132
+        "total": 131
       },
       {
         "byReason": {
@@ -25402,7 +25395,6 @@
       },
       {
         "byReason": {
-          "nominal-factory-allocator": 1,
           "source-never": 6,
           "source-unknown": 4,
           "standard-toolkit-boundary": 268,
@@ -25410,7 +25402,7 @@
         },
         "module": "flight._Scene3DFormats",
         "source": "upstream/packages/scene3d-formats/src/threeDsParse.ts",
-        "total": 299
+        "total": 298
       },
       {
         "byReason": {
@@ -26533,13 +26525,12 @@
       },
       {
         "byReason": {
-          "nominal-factory-allocator": 2,
           "source-unknown": 2,
           "unclassified": 2
         },
         "module": "flight._Shape",
         "source": "upstream/packages/shape/src/shape.ts",
-        "total": 6
+        "total": 4
       },
       {
         "byReason": {
@@ -28122,12 +28113,11 @@
       },
       {
         "byReason": {
-          "nominal-factory-allocator": 1,
           "unclassified": 3
         },
         "module": "flight.Materials",
         "source": "upstream/packages/materials/src/classicMaterials.ts",
-        "total": 4
+        "total": 3
       },
       {
         "byReason": {
@@ -28147,12 +28137,11 @@
       },
       {
         "byReason": {
-          "nominal-factory-allocator": 1,
           "unclassified": 2
         },
         "module": "flight.Materials",
         "source": "upstream/packages/materials/src/pbrMaterials.ts",
-        "total": 3
+        "total": 2
       },
       {
         "byReason": {
@@ -28220,12 +28209,11 @@
       },
       {
         "byReason": {
-          "nominal-factory-allocator": 1,
           "unclassified": 1
         },
         "module": "flight.Scene2D",
         "source": "upstream/packages/scene2d/src/sprite.ts",
-        "total": 2
+        "total": 1
       },
       {
         "byReason": {
@@ -28365,12 +28353,11 @@
       },
       {
         "byReason": {
-          "nominal-factory-allocator": 1,
           "unclassified": 3
         },
         "module": "flight.Sdk",
         "source": "upstream/packages/materials/src/classicMaterials.ts",
-        "total": 4
+        "total": 3
       },
       {
         "byReason": {
@@ -28390,12 +28377,11 @@
       },
       {
         "byReason": {
-          "nominal-factory-allocator": 1,
           "unclassified": 2
         },
         "module": "flight.Sdk",
         "source": "upstream/packages/materials/src/pbrMaterials.ts",
-        "total": 3
+        "total": 2
       },
       {
         "byReason": {
@@ -28463,12 +28449,11 @@
       },
       {
         "byReason": {
-          "nominal-factory-allocator": 1,
           "unclassified": 1
         },
         "module": "flight.Sdk",
         "source": "upstream/packages/scene2d/src/sprite.ts",
-        "total": 2
+        "total": 1
       },
       {
         "byReason": {
@@ -28484,14 +28469,6 @@
         },
         "module": "flight.Sdk",
         "source": "upstream/packages/scene3d/src/sceneNode.ts",
-        "total": 1
-      },
-      {
-        "byReason": {
-          "nominal-factory-allocator": 1
-        },
-        "module": "flight.Sdk",
-        "source": "upstream/packages/shape/src/shape.ts",
         "total": 1
       },
       {
@@ -28638,14 +28615,6 @@
         },
         "module": "flight.Sdk",
         "source": "upstream/packages/types/src/RenderRegistrySignals.ts",
-        "total": 1
-      },
-      {
-        "byReason": {
-          "nominal-factory-allocator": 1
-        },
-        "module": "flight.Shape",
-        "source": "upstream/packages/shape/src/shape.ts",
         "total": 1
       },
       {
@@ -30151,7 +30120,7 @@
     "summary": {
       "byReason": {
         "external-toolkit-boundary": 609,
-        "nominal-factory-allocator": 55,
+        "nominal-factory-allocator": 32,
         "source-any": 1294,
         "source-never": 194,
         "source-null": 277,
@@ -30161,8 +30130,8 @@
         "unclassified": 843
       },
       "checkerKnownUnrepresentable": 0,
-      "modules": 1502,
-      "total": 30573
+      "modules": 1500,
+      "total": 30550
     }
   }
 }
