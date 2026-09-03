@@ -16,15 +16,25 @@ beforeAll(() => {
     const element = createElement.call(this, localName, options);
     if (element instanceof HTMLCanvasElement) {
       const getContext = element.getContext;
-      element.getContext = function (this: HTMLCanvasElement, contextId: string, ...args: unknown[]) {
-        const context = (getContext as (...values: unknown[]) => unknown).call(this, contextId, ...args);
-        // vitest-webgl-canvas-mock manufactures a canvas-shaped copy for this
-        // readonly property. Real contexts retain the exact source element.
-        if (contextId === '2d' && context && typeof context === 'object') {
-          Object.defineProperty(context, 'canvas', { configurable: true, value: this });
-        }
-        return context;
-      } as typeof element.getContext;
+      // Define the per-instance override as NON-ENUMERABLE. The native `getContext` lives on the
+      // prototype, so a real canvas has no own enumerable `getContext`; a plain assignment here would
+      // add one, and surfaces that ARE the canvas (e.g. render-wgpu's size-only presentation surface,
+      // asserted to carry no DOM member via `Object.keys`) would then leak it. `defineProperty` with
+      // enumerable:false keeps the 2d-context canvas-identity fix without changing the key set.
+      Object.defineProperty(element, 'getContext', {
+        configurable: true,
+        enumerable: false,
+        writable: true,
+        value: function (this: HTMLCanvasElement, contextId: string, ...args: unknown[]) {
+          const context = (getContext as (...values: unknown[]) => unknown).call(this, contextId, ...args);
+          // vitest-webgl-canvas-mock manufactures a canvas-shaped copy for this
+          // readonly property. Real contexts retain the exact source element.
+          if (contextId === '2d' && context && typeof context === 'object') {
+            Object.defineProperty(context, 'canvas', { configurable: true, value: this });
+          }
+          return context;
+        } as typeof element.getContext,
+      });
     }
     return element;
   } as typeof document.createElement & Record<PropertyKey, unknown>;
