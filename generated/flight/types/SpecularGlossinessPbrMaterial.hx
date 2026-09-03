@@ -4,4 +4,40 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Materials)
+@:keep
+@:structInit
+class SpecularGlossinessPbrMaterial extends flight.types.SurfaceMaterial<Dynamic> {
+  public var diffuse:Float;
+  public var diffuseMap:Null<Texture>;
+  public var emissive:Float;
+  public var emissiveMap:Null<Texture>;
+  public var emissiveStrength:Float;
+  public var glossiness:Float;
+  public var normalMap:Null<Texture>;
+  public var normalScale:Float;
+  public var occlusionMap:Null<Texture>;
+  public var occlusionStrength:Float;
+  public var specular:Float;
+  public var specularGlossinessMap:Null<Texture>;
+
+  private function new(kind:Dynamic, name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, diffuse:Float, diffuseMap:Null<Texture>, emissive:Float, emissiveMap:Null<Texture>, emissiveStrength:Float, glossiness:Float, normalMap:Null<Texture>, normalScale:Float, occlusionMap:Null<Texture>, occlusionStrength:Float, specular:Float, specularGlossinessMap:Null<Texture>):Void {
+    super(kind, name, alphaCutoff, alphaMode, blendMode, doubleSided);
+    this.diffuse = diffuse;
+    this.diffuseMap = diffuseMap;
+    this.emissive = emissive;
+    this.emissiveMap = emissiveMap;
+    this.emissiveStrength = emissiveStrength;
+    this.glossiness = glossiness;
+    this.normalMap = normalMap;
+    this.normalScale = normalScale;
+    this.occlusionMap = occlusionMap;
+    this.occlusionStrength = occlusionStrength;
+    this.specular = specular;
+    this.specularGlossinessMap = specularGlossinessMap;
+  }
+}
+#else
 typedef SpecularGlossinessPbrMaterial = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Dynamic; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var blendMode:BlendMode; var doubleSided:Bool; var diffuse:Float; var diffuseMap:Null<Texture>; var emissive:Float; var emissiveMap:Null<Texture>; var emissiveStrength:Float; var glossiness:Float; var normalMap:Null<Texture>; var normalScale:Float; var occlusionMap:Null<Texture>; var occlusionStrength:Float; var specular:Float; var specularGlossinessMap:Null<Texture>; };
+#end

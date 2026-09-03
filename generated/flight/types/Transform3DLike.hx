@@ -4,4 +4,10 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+private typedef Transform3DLike__Structural = { var position:Vector3; var rotation:Quaternion; var scale:Vector3; };
+@:forward(position, rotation, scale)
+abstract Transform3DLike(Dynamic) from flight.types.Transform3D from Transform3DLike__Structural to Transform3DLike__Structural {}
+#else
 typedef Transform3DLike = { var position:Vector3; var rotation:Quaternion; var scale:Vector3; };
+#end

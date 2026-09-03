@@ -4,4 +4,10 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+private typedef BoundingSphereLike__Structural = { var center:Vector3; var radius:Float; };
+@:forward(center, radius)
+abstract BoundingSphereLike(Dynamic) from flight.types.BoundingSphere from BoundingSphereLike__Structural to BoundingSphereLike__Structural {}
+#else
 typedef BoundingSphereLike = { var center:Vector3; var radius:Float; };
+#end

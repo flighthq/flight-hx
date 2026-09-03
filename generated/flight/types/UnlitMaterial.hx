@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Materials)
+@:keep
+@:structInit
+class UnlitMaterial extends flight.types.SurfaceMaterial<Dynamic> {
+  public var baseColor:Float;
+  public var baseColorMap:Null<Texture>;
+
+  private function new(kind:Dynamic, name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, baseColor:Float, baseColorMap:Null<Texture>):Void {
+    super(kind, name, alphaCutoff, alphaMode, blendMode, doubleSided);
+    this.baseColor = baseColor;
+    this.baseColorMap = baseColorMap;
+  }
+}
+#else
 typedef UnlitMaterial = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Dynamic; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var blendMode:BlendMode; var doubleSided:Bool; var baseColor:Float; var baseColorMap:Null<Texture>; };
+#end

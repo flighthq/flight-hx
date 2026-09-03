@@ -4,4 +4,10 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+private typedef Matrix3Like__Structural = { var m:flight._internal._Float32Array; };
+@:forward(m)
+abstract Matrix3Like(Dynamic) from flight.types.Matrix3 from Matrix3Like__Structural to Matrix3Like__Structural {}
+#else
 typedef Matrix3Like = { var m:flight._internal._Float32Array; };
+#end

@@ -4,4 +4,10 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+private typedef Ray3DLike__Structural = { var direction:Vector3; var origin:Vector3; };
+@:forward(direction, origin)
+abstract Ray3DLike(Dynamic) from flight.types.Ray3D from Ray3DLike__Structural to Ray3DLike__Structural {}
+#else
 typedef Ray3DLike = { var direction:Vector3; var origin:Vector3; };
+#end

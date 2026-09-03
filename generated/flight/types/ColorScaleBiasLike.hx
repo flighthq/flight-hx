@@ -4,4 +4,10 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+private typedef ColorScaleBiasLike__Structural = { var alphaScale:Float; var alphaBias:Float; var blueScale:Float; var blueBias:Float; var greenScale:Float; var greenBias:Float; var redScale:Float; var redBias:Float; };
+@:forward(alphaScale, alphaBias, blueScale, blueBias, greenScale, greenBias, redScale, redBias)
+abstract ColorScaleBiasLike(Dynamic) from flight.types.ColorScaleBias from ColorScaleBiasLike__Structural to ColorScaleBiasLike__Structural {}
+#else
 typedef ColorScaleBiasLike = { var alphaScale:Float; var alphaBias:Float; var blueScale:Float; var blueBias:Float; var greenScale:Float; var greenBias:Float; var redScale:Float; var redBias:Float; };
+#end

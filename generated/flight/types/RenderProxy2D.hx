@@ -4,5 +4,24 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:noCompletion
+@:allow(flight._Render)
+@:keep
+@:structInit
+class RenderProxy2D extends flight.types.RenderProxy {
+  public var transform2D:Matrix;
+  public var traverseChildren:Bool;
+  public var clipDepth:Float;
+
+  private function new(source:Renderable, kind:Kind, next:Null<RenderProxy>, alpha:Float, appearanceFrameId:Float, blendMode:Null<BlendMode>, colorScaleBias:Null<ColorScaleBias>, colorMatrix:Null<Array<Float>>, material:Null<Material>, materialData:Null<MaterialData>, lastAppearanceId:Float, lastChildrenId:Float, lastLocalContentId:Float, lastLocalTransformId:Float, lastParentReferenceId:Float, name:Null<String>, renderer:Null<Renderer>, rendererData:Null<RendererData>, rendererDataSource:Null<Renderable>, rendererMapId:Float, transformFrameId:Float, visible:Bool, transform2D:Matrix, traverseChildren:Bool, clipDepth:Float):Void {
+    super(source, kind, next, alpha, appearanceFrameId, blendMode, colorScaleBias, colorMatrix, material, materialData, lastAppearanceId, lastChildrenId, lastLocalContentId, lastLocalTransformId, lastParentReferenceId, name, renderer, rendererData, rendererDataSource, rendererMapId, transformFrameId, visible);
+    this.transform2D = transform2D;
+    this.traverseChildren = traverseChildren;
+    this.clipDepth = clipDepth;
+  }
+}
+#else
 @:noCompletion
 typedef RenderProxy2D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var source:Renderable; var kind:Kind; var next:Null<RenderProxy>; var alpha:Float; var appearanceFrameId:Float; var blendMode:Null<BlendMode>; var colorScaleBias:Null<ColorScaleBias>; @:optional var colorMatrix:Null<Array<Float>>; var material:Null<Material>; var materialData:Null<MaterialData>; var lastAppearanceId:Float; var lastChildrenId:Float; var lastLocalContentId:Float; var lastLocalTransformId:Float; var lastParentReferenceId:Float; var name:Null<String>; var renderer:Null<Renderer>; var rendererData:Null<RendererData>; var rendererDataSource:Null<Renderable>; var rendererMapId:Float; var transformFrameId:Float; var visible:Bool; var transform2D:Matrix; var traverseChildren:Bool; var clipDepth:Float; };
+#end

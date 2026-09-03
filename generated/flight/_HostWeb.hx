@@ -281,6 +281,7 @@ import flight.types.RenderSurfaceBackend;
 import flight.types.SafeAreaInsets;
 import flight.types.SaveFileDialogOptions;
 import flight.types.ScreenChangeEvent;
+import flight.types.ScreenColorSpace;
 import flight.types.ScreenInfo;
 import flight.types.ScreenOrientation;
 import flight.types.ScreenPermissionState;

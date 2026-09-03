@@ -5810,6 +5810,18 @@ describe('typed struct analysis', () => {
     expect(readFileSync('generated/flight/types/NodeData.hx', 'utf8')).toContain(
       'typedef NodeData = flight._internal._Object;',
     );
+    expect(readFileSync('generated/flight/types/StandardPbrMaterial.hx', 'utf8')).toContain(
+      'class StandardPbrMaterial extends flight.types.SurfaceMaterial<Dynamic> {',
+    );
+    expect(readFileSync('generated/flight/types/VertexColorMaterial.hx', 'utf8')).toContain(
+      'class VertexColorMaterial extends flight.types.SurfaceMaterial<Dynamic> {',
+    );
+    expect(readFileSync('generated/flight/types/GlRenderState.hx', 'utf8')).toContain(
+      'class GlRenderState extends flight.types.RenderState {',
+    );
+    expect(readFileSync('generated/flight/types/Vector3Like.hx', 'utf8')).toContain(
+      'abstract Vector3Like(Dynamic) from flight.types.Vector3 from Vector3Like__Structural to Vector3Like__Structural {}',
+    );
     const internalScene2D = readFileSync('generated/flight/_Scene2D.hx', 'utf8');
     const publicScene2D = readFileSync('generated/flight/Scene2D.hx', 'utf8');
     const internalScene3D = readFileSync('generated/flight/_Scene3D.hx', 'utf8');
@@ -5823,36 +5835,56 @@ describe('typed struct analysis', () => {
     expect(publicScene3D).toMatch(/public static function createNode3D[^\n]+\):Node3D \{/u);
     const additionalNominalClassNames = [
       'Billboard',
+      'BlinnPhongMaterial',
       'BitmapText',
       'Camera2D',
+      'CanvasRenderState',
+      'CustomShaderMaterial',
+      'DepthMaterial',
       'DisplayObject',
+      'DomRenderState',
+      'EmissiveMaterial',
+      'ExtendedPbrMaterial',
+      'GlRenderState',
       'HtmlView',
+      'LambertMaterial',
       'Light',
+      'MatcapMaterial',
       'Mesh',
       'MorphShape',
       'MovieClip',
       'NativeText',
       'Node2D',
       'Node3D',
+      'NormalMaterial',
       'ParticleEmitter2D',
       'ParticleEmitter3D',
       'ParticleEmitterState',
       'PbrExtension',
+      'PhongMaterial',
       'QuadBatch',
+      'RenderProxy2D',
       'RichText',
       'Scale9Shape',
       'Shape',
+      'SpecularGlossinessPbrMaterial',
       'Sprite',
+      'StandardPbrMaterial',
       'SurfaceMaterial',
       'TextLabel',
       'TextureSource',
       'Tilemap',
+      'ToonMaterial',
+      'UnlitMaterial',
+      'VertexColorMaterial',
+      'WgpuRenderState',
+      'WireframeMaterial',
     ];
     const nominalClassNames = [
       ...new Set([...entityFactories.schemas.map((schema) => schema.schemaName), ...additionalNominalClassNames]),
     ].sort();
     expect(entityFactories.schemas).toHaveLength(143);
-    expect(nominalClassNames).toHaveLength(168);
+    expect(nominalClassNames).toHaveLength(188);
     for (const name of nominalClassNames) {
       const generated = readFileSync(`generated/flight/types/${name}.hx`, 'utf8');
       expect(generated, name).toContain('#if !flight_struct_typedef');
@@ -5969,10 +6001,10 @@ describe('typed struct analysis', () => {
         total: 24,
       },
       {
-        byReason: { 'standard-toolkit-boundary': 8 },
+        byReason: { 'nominal-factory-allocator': 1, 'standard-toolkit-boundary': 8 },
         module: 'flight._Scene2DCanvas',
         source: 'upstream/packages/scene2d-canvas/src/canvasRenderState.ts',
-        total: 8,
+        total: 9,
       },
       {
         byReason: { 'standard-toolkit-boundary': 26 },

@@ -4,4 +4,10 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+private typedef Camera3DLike__Structural = { var far:Float; var inverseViewProjection:Matrix4; var jitter:Vector2; var near:Float; var projection:Projection; var view:Matrix4; };
+@:forward(far, inverseViewProjection, jitter, near, projection, view)
+abstract Camera3DLike(Dynamic) from flight.types.Camera3D from Camera3DLike__Structural to Camera3DLike__Structural {}
+#else
 typedef Camera3DLike = { var far:Float; var inverseViewProjection:Matrix4; var jitter:Vector2; var near:Float; var projection:Projection; var view:Matrix4; };
+#end

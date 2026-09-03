@@ -4,4 +4,10 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+private typedef Transform2DLike__Structural = { var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; };
+@:forward(pivotX, pivotY, rotation, scaleX, scaleY, skewX, skewY, x, y)
+abstract Transform2DLike(Dynamic) from flight.types.Transform2D from Transform2DLike__Structural to Transform2DLike__Structural {}
+#else
 typedef Transform2DLike = { var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; };
+#end

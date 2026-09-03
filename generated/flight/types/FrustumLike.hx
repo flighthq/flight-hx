@@ -4,4 +4,10 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+private typedef FrustumLike__Structural = { var bottom:Plane; var far:Plane; var left:Plane; var near:Plane; var right:Plane; var top:Plane; };
+@:forward(bottom, far, left, near, right, top)
+abstract FrustumLike(Dynamic) from flight.types.Frustum from FrustumLike__Structural to FrustumLike__Structural {}
+#else
 typedef FrustumLike = { var bottom:Plane; var far:Plane; var left:Plane; var near:Plane; var right:Plane; var top:Plane; };
+#end

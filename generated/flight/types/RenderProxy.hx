@@ -7,6 +7,7 @@ import flight._internal._Runtime;
 #if !flight_struct_typedef
 @:noCompletion
 @:allow(flight._Render)
+@:allow(flight.types.RenderProxy2D)
 @:keep
 @:structInit
 class RenderProxy {

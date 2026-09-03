@@ -167,6 +167,22 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain('>{');
   });
 
+  it('keeps the most-derived anonymous field type when flattening duplicate names', () => {
+    const output = emitType({
+      extends: [
+        {
+          extends: [],
+          fields: [{ name: 'value', optional: false, type: { kind: 'primitive', name: 'String' } }],
+          kind: 'anonymous',
+        },
+      ],
+      fields: [{ name: 'value', optional: false, type: { kind: 'primitive', name: 'Float' } }],
+      kind: 'anonymous',
+    });
+
+    expect(output).toBe('{ var value:Float; }');
+  });
+
   it('normalizes pure functions into deterministic executable Haxe', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/math/src/sample.ts',

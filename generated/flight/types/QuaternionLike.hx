@@ -4,4 +4,10 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+private typedef QuaternionLike__Structural = { var x:Float; var y:Float; var z:Float; var w:Float; };
+@:forward(x, y, z, w)
+abstract QuaternionLike(Dynamic) from flight.types.Quaternion from QuaternionLike__Structural to QuaternionLike__Structural {}
+#else
 typedef QuaternionLike = { var x:Float; var y:Float; var z:Float; var w:Float; };
+#end

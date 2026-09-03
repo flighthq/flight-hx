@@ -4,4 +4,24 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._RenderGl)
+@:keep
+@:structInit
+class GlRenderState extends flight.types.RenderState {
+  public var applyBlendMode:Null<GlRenderState->Null<BlendMode>->Void>;
+  public var contextState:GlContextState;
+  public var gl:GlContext;
+  public var pipeline:GlPipeline;
+
+  private function new(allowSmoothing:Bool, backgroundColor:Float, backgroundColorRgba:Array<Float>, backgroundColorString:String, currentClipDepth:Float, displayObjectClipHooks:Null<Scene2DClipHooks>, pixelRatio:Float, renderAlpha:Float, renderBlendMode:Null<BlendMode>, renderTransform2D:Null<Matrix>, sceneGraphSyncPolicy:Scene3DGraphSyncPolicy, roundPixels:Bool, applyBlendMode:Null<GlRenderState->Null<BlendMode>->Void>, contextState:GlContextState, gl:GlContext, pipeline:GlPipeline):Void {
+    super(allowSmoothing, backgroundColor, backgroundColorRgba, backgroundColorString, currentClipDepth, displayObjectClipHooks, pixelRatio, renderAlpha, renderBlendMode, renderTransform2D, sceneGraphSyncPolicy, roundPixels);
+    this.applyBlendMode = applyBlendMode;
+    this.contextState = contextState;
+    this.gl = gl;
+    this.pipeline = pipeline;
+  }
+}
+#else
 typedef GlRenderState = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var allowSmoothing:Bool; var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; var currentClipDepth:Float; var displayObjectClipHooks:Null<Scene2DClipHooks>; var pixelRatio:Float; var renderAlpha:Float; var renderBlendMode:Null<BlendMode>; var renderTransform2D:Null<Matrix>; var sceneGraphSyncPolicy:Scene3DGraphSyncPolicy; var roundPixels:Bool; var applyBlendMode:Null<GlRenderState->Null<BlendMode>->Void>; var contextState:GlContextState; var gl:GlContext; var pipeline:GlPipeline; };
+#end

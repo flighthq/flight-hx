@@ -5,7 +5,23 @@ import Math as HxMath;
 import flight._internal._Runtime;
 
 #if !flight_struct_typedef
+@:allow(flight._Materials)
+@:allow(flight.types.BlinnPhongMaterial)
+@:allow(flight.types.CustomShaderMaterial)
+@:allow(flight.types.DepthMaterial)
+@:allow(flight.types.EmissiveMaterial)
+@:allow(flight.types.ExtendedPbrMaterial)
+@:allow(flight.types.LambertMaterial)
+@:allow(flight.types.MatcapMaterial)
+@:allow(flight.types.NormalMaterial)
+@:allow(flight.types.PhongMaterial)
 @:allow(flight.types.ShadedMaterial)
+@:allow(flight.types.SpecularGlossinessPbrMaterial)
+@:allow(flight.types.StandardPbrMaterial)
+@:allow(flight.types.ToonMaterial)
+@:allow(flight.types.UnlitMaterial)
+@:allow(flight.types.VertexColorMaterial)
+@:allow(flight.types.WireframeMaterial)
 @:keep
 @:structInit
 class SurfaceMaterial<TKind = Dynamic> extends flight.types.Material<TKind> {

@@ -4,4 +4,10 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+private typedef TextureAtlasRegionLike__Structural = { var height:Float; var id:Float; var name:Null<String>; var originalHeight:Null<Float>; var originalWidth:Null<Float>; var pageName:Null<String>; var pivotX:Null<Float>; var pivotY:Null<Float>; var rotated:Bool; var sourceX:Float; var sourceY:Float; var trimmed:Bool; var x:Float; var y:Float; var width:Float; };
+@:forward(height, id, name, originalHeight, originalWidth, pageName, pivotX, pivotY, rotated, sourceX, sourceY, trimmed, x, y, width)
+abstract TextureAtlasRegionLike(Dynamic) from flight.types.TextureAtlasRegion from TextureAtlasRegionLike__Structural to TextureAtlasRegionLike__Structural {}
+#else
 typedef TextureAtlasRegionLike = { var height:Float; var id:Float; var name:Null<String>; var originalHeight:Null<Float>; var originalWidth:Null<Float>; var pageName:Null<String>; var pivotX:Null<Float>; var pivotY:Null<Float>; var rotated:Bool; var sourceX:Float; var sourceY:Float; var trimmed:Bool; var x:Float; var y:Float; var width:Float; };
+#end

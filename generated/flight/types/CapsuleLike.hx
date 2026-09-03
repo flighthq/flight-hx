@@ -4,4 +4,10 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+private typedef CapsuleLike__Structural = { var endX:Float; var endY:Float; var endZ:Float; var radius:Float; var startX:Float; var startY:Float; var startZ:Float; };
+@:forward(endX, endY, endZ, radius, startX, startY, startZ)
+abstract CapsuleLike(Dynamic) from flight.types.Capsule from CapsuleLike__Structural to CapsuleLike__Structural {}
+#else
 typedef CapsuleLike = { var endX:Float; var endY:Float; var endZ:Float; var radius:Float; var startX:Float; var startY:Float; var startZ:Float; };
+#end

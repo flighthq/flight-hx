@@ -4,4 +4,10 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+private typedef Scene3DLightsLike__Structural = { var ambient:Null<AmbientLight>; var directional:Null<DirectionalLight>; @:optional var hemisphere:Null<Array<HemisphereLight>>; @:optional var point:Null<Array<PointLight>>; @:optional var spot:Null<Array<SpotLight>>; };
+@:forward(ambient, directional, hemisphere, point, spot)
+abstract Scene3DLightsLike(Dynamic) from flight.types.Scene3DLights from Scene3DLightsLike__Structural to Scene3DLightsLike__Structural {}
+#else
 typedef Scene3DLightsLike = { var ambient:Null<AmbientLight>; var directional:Null<DirectionalLight>; @:optional var hemisphere:Null<Array<HemisphereLight>>; @:optional var point:Null<Array<PointLight>>; @:optional var spot:Null<Array<SpotLight>>; };
+#end

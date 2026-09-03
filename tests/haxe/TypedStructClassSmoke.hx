@@ -23,8 +23,13 @@ class TypedStructClassSmoke {
     final richText = flight.Text.createRichText();
     final ambientLight = flight.Lighting.createAmbientLight();
     final standardMaterial = flight.Materials.createStandardMaterial();
+    final standardPbrMaterial = flight.Materials.createStandardPbrMaterial();
+    final vertexColorMaterial = flight.Materials.createVertexColorMaterial();
     final shadedMaterial = flight.Shading.createShadedMaterial();
     final matrix4 = flight.Geometry.createMatrix4();
+    final vector3 = flight.Geometry.createVector3(1, 2, 3);
+    final vector3Input:{var max:flight.types.Vector3Like;} = {max: vector3};
+    final meshMaterials:Array<Null<flight.types.Material<Dynamic>>> = [standardPbrMaterial, vertexColorMaterial];
     if (!baseNode.enabled || baseNode.kind != 'ClassSmokeNode' || baseNode.data != null) {
       throw 'base Node class construction lost field values';
     }
@@ -36,6 +41,9 @@ class TypedStructClassSmoke {
     }
     if (!displayObject.enabled || displayObject.x != 0 || matrix4.m.length != 16) {
       throw 'wholesale Entity class construction lost field values';
+    }
+    if (vector3Input.max.z != 3 || meshMaterials.length != 2) {
+      throw 'nominal entities were rejected by structural input seams';
     }
     if (!particleEmitter2D.enabled || particleEmitter2D.x != 0 || !particleEmitter3D.enabled) {
       throw 'derived Node class construction lost field values';
@@ -49,6 +57,10 @@ class TypedStructClassSmoke {
     final richTextNode:flight.types.Node2D = richText;
     final lightBase:flight.types.Light = ambientLight;
     final standardMaterialBase:flight.types.Material = standardMaterial;
+    final standardPbrSurface:flight.types.SurfaceMaterial = standardPbrMaterial;
+    final standardPbrBase:flight.types.Material<Dynamic> = standardPbrMaterial;
+    final vertexColorSurface:flight.types.SurfaceMaterial = vertexColorMaterial;
+    final vertexColorBase:flight.types.Material<Dynamic> = vertexColorMaterial;
     final shadedSurface:flight.types.SurfaceMaterial = shadedMaterial;
     final shadedMaterialBase:flight.types.Material = shadedMaterial;
     if (!Std.isOfType(camera, flight.types.Camera2D)) {
@@ -77,6 +89,10 @@ class TypedStructClassSmoke {
       !Std.isOfType(richText, flight.types.Node2D) ||
       !Std.isOfType(ambientLight, flight.types.Light) ||
       !Std.isOfType(standardMaterial, flight.types.Material) ||
+      !Std.isOfType(standardPbrMaterial, flight.types.SurfaceMaterial) ||
+      !Std.isOfType(standardPbrMaterial, flight.types.Material) ||
+      !Std.isOfType(vertexColorMaterial, flight.types.SurfaceMaterial) ||
+      !Std.isOfType(vertexColorMaterial, flight.types.Material) ||
       !Std.isOfType(shadedMaterial, flight.types.SurfaceMaterial) ||
       !Std.isOfType(shadedMaterial, flight.types.Material)
     ) {
@@ -87,6 +103,12 @@ class TypedStructClassSmoke {
     }
     assertOpenLightDescriptorClass(ambientLight);
     #end
+  }
+
+  static function acceptRenderState(_:flight.types.RenderState):Void {}
+
+  static function typecheckGlRenderStateInheritance(state:flight.types.GlRenderState):Void {
+    acceptRenderState(state);
   }
 
   #if !flight_struct_typedef

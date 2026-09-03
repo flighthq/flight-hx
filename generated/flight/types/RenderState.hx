@@ -6,6 +6,10 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._Render)
+@:allow(flight.types.CanvasRenderState)
+@:allow(flight.types.DomRenderState)
+@:allow(flight.types.GlRenderState)
+@:allow(flight.types.WgpuRenderState)
 @:keep
 @:structInit
 class RenderState {

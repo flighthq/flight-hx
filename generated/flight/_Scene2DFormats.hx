@@ -3374,7 +3374,7 @@ class _Scene2DFormats {
     var name:String = cast _Runtime.UNDEFINED;
     name = (cast _Scene2DFormats.readRiveText__riveScene2D(({ final __callArgument1468:Dynamic = object; __callArgument1468; }), (cast _Scene2DFormats.RIVE_NAME__riveScene2D : Float), (cast '' : String)) : String);
     if ((cast _Runtime.strictEquals(object.typeKey, _Scene2DFormats.RIVE_TEXT_TYPE_KEY__riveScene2D) : Bool)) {
-      var label:RichText = (cast createRiveRichText(({ final __callArgument1470:Dynamic = artboard; __callArgument1470; }), (cast index : Float), ({ final __callArgument1471:Dynamic = fontNames; __callArgument1471; }), ({ final __callArgument1472:Dynamic = diagnostics; __callArgument1472; })) : RichText);
+      var label:RichText = (cast createRiveRichText(({ final __callArgument1470:Dynamic = artboard; __callArgument1470; }), (cast index : Float), ({ final __callArgument1471:Dynamic = fontNames; __callArgument1471; }), ({ final __callArgument1472:Dynamic = diagnostics; __callArgument1472; }), function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : DisplayObject); }) #end)) : RichText);
       (label.name = cast (name : Null<String>));
       return cast label;
     }
@@ -3386,7 +3386,7 @@ class _Scene2DFormats {
       markRiveNestedArtboard(({ final __callArgument1480:Dynamic = node; __callArgument1480; }), (cast (cast _Scene2DFormats.readRiveNumber__riveScene2D(({ final __callArgument1481:Dynamic = object; __callArgument1481; }), (cast _Scene2DFormats.RIVE_NESTED_ARTBOARD_ID__riveScene2D : Float), (cast -1.0 : Float)) : Float) : Float));
       return cast node;
     }
-    if ((cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast _Scene2DFormats.RIVE_SHAPE_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool)) { return cast (cast createShape((cast { name: name } : Dynamic)) : Shape); }
+    if ((cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast _Scene2DFormats.RIVE_SHAPE_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool)) { return cast (cast createShape((cast { name: name } : Dynamic), function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : DisplayObject); }) #end)) : Shape); }
     if ((cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast _Scene2DFormats.RIVE_NSLICED_NODE_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool)) {
       reportImportDiagnostic(({ final __callArgument1486:Dynamic = diagnostics; __callArgument1486; }), ({ final __callArgument1487:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument1487; }), (cast 'rive.nine-slice-substituted' : String), (cast 'createRiveDisplayNode' : String), ({ final __callArgument1488:Dynamic = { substitutedAs: 'container', typeKey: object.typeKey }; __callArgument1488; }));
       return cast (cast createDisplayObject((cast { name: name } : Dynamic)) : DisplayObject);
@@ -3589,7 +3589,7 @@ class _Scene2DFormats {
     var texture:Texture2D = cast _Runtime.UNDEFINED;
     var sprite:Sprite = cast _Runtime.UNDEFINED;
     texture = (cast createTexture((cast { dimension: '2d', source: null } : Dynamic)) : Texture2D);
-    sprite = (cast createSprite((cast { data: { texture: texture }, name: name } : Dynamic)) : Sprite);
+    sprite = (cast createSprite((cast { data: { texture: texture }, name: name } : Dynamic), function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : DisplayObject); }) #end)) : Sprite);
     ((cast _Scene2DFormats._imageTextures__riveScene2DDocument : flight._internal._WeakMap<Node2D, Texture>).set((cast sprite), (cast texture)));
     ((cast _Scene2DFormats._imageAssetIndices__riveScene2DDocument : flight._internal._WeakMap<Node2D, Float>).set((cast sprite), (cast assetIndex)));
     return cast sprite;
@@ -4952,7 +4952,8 @@ class _Scene2DFormats {
 
   public static final RIVE_TRANSITION_EXIT_TIME__riveStateMachine:Float = 160.0;
 
-  public static function createRiveRichText(artboard:RiveArtboardGraph, index:Float, fontNames:Array<String>, ?diagnostics:Array<ImportDiagnostic>):RichText {
+  public static function createRiveRichText(artboard:RiveArtboardGraph, index:Float, fontNames:Array<String>, ?diagnostics:Array<ImportDiagnostic>, ?__entityAllocator:Void->Dynamic):RichText {
+    if (__entityAllocator == null) __entityAllocator = cast (function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : RichText); }) #end) : Dynamic);
     var source:RiveCoreObject = cast _Runtime.UNDEFINED;
     var runs:Array<Float> = cast _Runtime.UNDEFINED;
     var align:Float = cast _Runtime.UNDEFINED;

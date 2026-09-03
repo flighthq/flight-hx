@@ -4,4 +4,32 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Materials)
+@:keep
+@:structInit
+class BlinnPhongMaterial extends flight.types.SurfaceMaterial<Dynamic> {
+  public var alphaMap:Null<Texture>;
+  public var diffuse:Float;
+  public var diffuseMap:Null<Texture>;
+  public var normalMap:Null<Texture>;
+  public var normalScale:Float;
+  public var shininess:Float;
+  public var specular:Float;
+  public var specularMap:Null<Texture>;
+
+  private function new(kind:Dynamic, name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, alphaMap:Null<Texture>, diffuse:Float, diffuseMap:Null<Texture>, normalMap:Null<Texture>, normalScale:Float, shininess:Float, specular:Float, specularMap:Null<Texture>):Void {
+    super(kind, name, alphaCutoff, alphaMode, blendMode, doubleSided);
+    this.alphaMap = alphaMap;
+    this.diffuse = diffuse;
+    this.diffuseMap = diffuseMap;
+    this.normalMap = normalMap;
+    this.normalScale = normalScale;
+    this.shininess = shininess;
+    this.specular = specular;
+    this.specularMap = specularMap;
+  }
+}
+#else
 typedef BlinnPhongMaterial = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Dynamic; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var blendMode:BlendMode; var doubleSided:Bool; var alphaMap:Null<Texture>; var diffuse:Float; var diffuseMap:Null<Texture>; var normalMap:Null<Texture>; var normalScale:Float; var shininess:Float; var specular:Float; var specularMap:Null<Texture>; };
+#end

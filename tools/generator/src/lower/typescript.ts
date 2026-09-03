@@ -67,6 +67,10 @@ interface ObjectMethodArityContext {
 type ObjectMethodArityContexts = ReadonlyMap<ts.Symbol, ObjectMethodArityContext>;
 
 const objectMethodArityContextCache = new WeakMap<ts.Program, ObjectMethodArityContexts>();
+const promotedEntityFactoryCache = new WeakMap<
+  ts.Program,
+  WeakMap<TypedStructRegistry, ReadonlySet<ts.FunctionDeclaration>>
+>();
 
 function originalSymbolAtLocation(node: ts.Node, checker: ts.TypeChecker): ts.Symbol | undefined {
   const symbol = checker.getSymbolAtLocation(node);
@@ -415,6 +419,7 @@ export function lowerTypeScriptSource(
     checkerTypeCache: new Map(),
     preserveExpressionTypes: options.expressionTypes ?? true,
     preserveInferredTypes: options.inferredTypes ?? true,
+    program: options.program,
     canvasBindingNames,
     canvasElementBindingNames,
     classThis: false,
@@ -500,6 +505,7 @@ export function lowerTypeScriptSource(
           name: statement.name.text,
           origin: origin(statement, context),
           sourceExtends: lowerTypeAliasSourceExtends(statement.type, context),
+          sourceEntityWithoutRuntimeTarget: entityWithoutRuntimeTarget(statement.type, context),
           type:
             lowerConcreteClosedMappedAlias(statement, context) ??
             lowerConcreteEntityIntersectionAlias(statement, context) ??
@@ -662,6 +668,14 @@ function lowerTypeAliasSourceExtends(node: ts.TypeNode, context: LoweringContext
     ];
   });
   return parents.length > 0 ? parents : undefined;
+}
+
+function entityWithoutRuntimeTarget(node: ts.TypeNode, context: LoweringContext): IrType | undefined {
+  if (!ts.isTypeReferenceNode(node) || node.typeArguments?.length !== 1) return undefined;
+  const checker = context.checker;
+  const symbol = checker ? originalSymbolAtLocation(node.typeName, checker) : undefined;
+  if ((symbol?.getName() ?? node.typeName.getText(context.sourceFile)) !== 'EntityWithoutRuntime') return undefined;
+  return lowerType(node.typeArguments[0]!, context);
 }
 
 function collectPlatformBindingNames(
@@ -1157,6 +1171,7 @@ interface LoweringContext {
   checkerTypeCache: Map<ts.Type, IrType | null>;
   preserveExpressionTypes: boolean;
   preserveInferredTypes: boolean;
+  program?: ts.Program | undefined;
   canvasBindingNames: ReadonlySet<string>;
   canvasElementBindingNames: ReadonlySet<string>;
   classThis: boolean;
@@ -1341,6 +1356,7 @@ function lowerFunction(
   try {
     const loweredParameters = lowerParameterList(node.parameters, context);
     const nodeAllocator = nodeAllocatorParameter(node, context);
+    const factoryAllocator = nodeAllocator ? undefined : promotedEntityFactoryAllocatorParameter(node, context);
     return {
       async: hasModifier(node, ts.SyntaxKind.AsyncKeyword),
       body: bodyOwnedByPatch ? [] : [...loweredParameters.prefix, ...lowerStatementList(node.body.statements, context)],
@@ -1348,7 +1364,11 @@ function lowerFunction(
       kind: 'function',
       name: node.name.text,
       origin: origin(node, context),
-      parameters: [...loweredParameters.parameters, ...(nodeAllocator ? [nodeAllocator] : [])],
+      parameters: [
+        ...loweredParameters.parameters,
+        ...(nodeAllocator ? [nodeAllocator] : []),
+        ...(factoryAllocator ? [factoryAllocator] : []),
+      ],
       returns:
         (node.type ? lowerType(node.type, context) : inferredReturnType(node, context)) ??
         (hasModifier(node, ts.SyntaxKind.AsyncKeyword)
@@ -1386,6 +1406,95 @@ function nodeAllocatorParameter(node: ts.FunctionDeclaration, context: LoweringC
     rest: false,
     type: { kind: 'function', parameters: [], returns: { kind: 'dynamic' } },
   };
+}
+
+function promotedEntityFactoryAllocatorParameter(
+  node: ts.FunctionDeclaration,
+  context: LoweringContext,
+): IrParameter | undefined {
+  if (!promotedEntityFactoryDeclarations(context).has(node)) return undefined;
+  const signature = context.checker?.getSignatureFromDeclaration(node);
+  const returnType = signature && context.checker?.getReturnTypeOfSignature(signature);
+  const construction = returnType && context.typedStructs?.resolveFactoryIdentityConstruction(returnType);
+  if (!construction) {
+    throw new Error(`promoted Entity factory ${node.name?.text ?? '<anonymous>'} has no closed return layout`);
+  }
+  return {
+    initializer: emptyEntityAllocator({ ...construction, factoryAllocator: true }),
+    name: '__entityAllocator',
+    optional: true,
+    rest: false,
+    type: {
+      kind: 'function',
+      parameters: [],
+      returns: { kind: 'dynamic', reason: 'nominal-factory-allocator' },
+    },
+  };
+}
+
+function promotedEntityFactoryDeclarations(context: LoweringContext): ReadonlySet<ts.FunctionDeclaration> {
+  const { checker, program, typedStructs } = context;
+  if (!checker || !program || !typedStructs) return new Set();
+  let byRegistry = promotedEntityFactoryCache.get(program);
+  if (!byRegistry) {
+    byRegistry = new WeakMap();
+    promotedEntityFactoryCache.set(program, byRegistry);
+  }
+  const cached = byRegistry.get(typedStructs);
+  if (cached) return cached;
+
+  const promoted = new Set<ts.FunctionDeclaration>();
+  const visit = (node: ts.Node): void => {
+    if (ts.isCallExpression(node)) {
+      const symbol = originalSymbolAtLocation(node.expression, checker);
+      const callee = symbol?.valueDeclaration ?? symbol?.declarations?.[0];
+      const owner = ts.findAncestor(node.parent, (ancestor): ancestor is ts.FunctionDeclaration =>
+        ts.isFunctionDeclaration(ancestor),
+      );
+      if (
+        callee &&
+        ts.isFunctionDeclaration(callee) &&
+        callee.body &&
+        callee.name &&
+        /^create[A-Z]/u.test(callee.name.text) &&
+        !flightNodeFactoryDeclarationKind(callee) &&
+        owner
+      ) {
+        const calleeSignature = checker.getSignatureFromDeclaration(callee);
+        const ownerSignature = checker.getSignatureFromDeclaration(owner);
+        const calleeReturn = calleeSignature && checker.getReturnTypeOfSignature(calleeSignature);
+        const ownerReturn = ownerSignature && checker.getReturnTypeOfSignature(ownerSignature);
+        const calleeIdentity = calleeReturn && typedStructs.resolveIdentity(calleeReturn);
+        const ownerIdentity = ownerReturn && typedStructs.resolveIdentity(ownerReturn);
+        const destinations = entityFactoryDestinationCandidates(node, checker).flatMap((candidate) => {
+          const identity = typedStructs.resolveIdentity(candidate.type);
+          return identity ? [identity] : [];
+        });
+        if (
+          calleeIdentity &&
+          ownerIdentity &&
+          calleeIdentity.declarationKind === 'interface' &&
+          ownerIdentity.declarationKind === 'interface' &&
+          calleeIdentity.id !== ownerIdentity.id &&
+          destinations.some((candidate) => candidate.id === ownerIdentity.id) &&
+          calleeReturn &&
+          ownerReturn &&
+          entityFactoryTypeHasRuntimeMarker(calleeReturn, checker) &&
+          entityFactoryTypeHasRuntimeMarker(ownerReturn, checker) &&
+          typedStructs.resolveFactoryIdentityConstruction(calleeReturn) &&
+          typedStructs.resolveFactoryIdentityConstruction(ownerReturn)
+        ) {
+          promoted.add(callee);
+        }
+      }
+    }
+    ts.forEachChild(node, visit);
+  };
+  for (const source of program.getSourceFiles()) {
+    if (!source.isDeclarationFile) visit(source);
+  }
+  byRegistry.set(typedStructs, promoted);
+  return promoted;
 }
 
 function lowerFunctionOverload(node: ts.FunctionDeclaration, context: LoweringContext): IrFunctionOverload {
@@ -3949,7 +4058,10 @@ function emptyEntityAllocator(construction: IrCppStructInitConstruction): IrExpr
     },
     kind: 'function',
     parameters: [],
-    returns: { kind: 'dynamic' },
+    returns: {
+      kind: 'dynamic',
+      ...(construction.factoryAllocator ? { reason: 'nominal-factory-allocator' as const } : {}),
+    },
   };
 }
 
@@ -4234,17 +4346,22 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
           )
         : undefined;
     const cppStructInit = contextualCppStructInit ?? cppStructInitEntityFactoryConstruction(node, context);
+    const objectAllocator = isDirectNodeAllocationObject(node)
+      ? '__nodeAllocator'
+      : isDirectPromotedEntityFactoryAllocationObject(node, context)
+        ? '__entityAllocator'
+        : undefined;
     const thisCapture = node.properties.some(
       (property) => ts.isMethodDeclaration(property) && containsLexicallyOwnedThis(property),
     )
       ? freshThisCapture(context)
       : undefined;
     return {
-      ...(isDirectNodeAllocationObject(node)
+      ...(objectAllocator
         ? {
             allocator: {
               arguments: [],
-              callee: { kind: 'identifier', name: '__nodeAllocator' },
+              callee: { kind: 'identifier', name: objectAllocator },
               direct: true,
               kind: 'call',
               typeArguments: [],
@@ -4447,12 +4564,15 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
     const nativeSymbolKey = nativeUniqueSymbolKeyForCall(node);
     const nodeFactoryKind = flightNodeFactoryCallKind(node, context.checker);
     const nodeAllocator = nodeFactoryKind ? nodeAllocatorForCall(node, nodeFactoryKind, context) : undefined;
+    const factoryAllocator = nodeAllocator ? undefined : promotedEntityFactoryAllocatorForCall(node, context);
     return {
       arguments: nativeSymbolKey
         ? [...loweredArguments, { kind: 'literal', value: nativeSymbolKey }]
         : nodeAllocator
           ? [...loweredArguments, nodeAllocator]
-          : loweredArguments,
+          : factoryAllocator
+            ? [...loweredArguments, factoryAllocator]
+            : loweredArguments,
       callee,
       ...(syntheticOmittedEntityArgument === undefined && checkedCall?.inferenceCasts.some(Boolean)
         ? { inferenceCastArguments: checkedCall.inferenceCasts }
@@ -4697,6 +4817,54 @@ function nodeAllocatorForCall(
   return emptyEntityAllocator({ ...construction, nodeAllocator: true });
 }
 
+function promotedEntityFactoryAllocatorForCall(
+  node: ts.CallExpression,
+  context: LoweringContext,
+): IrExpression | undefined {
+  const { checker, typedStructs } = context;
+  if (!checker || !typedStructs) return undefined;
+  const symbol = originalSymbolAtLocation(node.expression, checker);
+  const declaration = symbol?.valueDeclaration ?? symbol?.declarations?.[0];
+  if (
+    !declaration ||
+    !ts.isFunctionDeclaration(declaration) ||
+    !promotedEntityFactoryDeclarations(context).has(declaration)
+  ) {
+    return undefined;
+  }
+  const calleeSignature = checker.getSignatureFromDeclaration(declaration);
+  const calleeReturn = calleeSignature && checker.getReturnTypeOfSignature(calleeSignature);
+  const calleeIdentity = calleeReturn && typedStructs.resolveIdentity(calleeReturn);
+  const destination = entityFactoryDestinationCandidates(node, checker)
+    .map((candidate) => ({
+      construction: typedStructs.resolveFactoryIdentityConstruction(candidate.type),
+      identity: typedStructs.resolveIdentity(candidate.type),
+      type: candidate.type,
+    }))
+    .find(
+      (candidate) =>
+        candidate.construction !== undefined &&
+        candidate.identity !== undefined &&
+        candidate.identity.declarationKind === 'interface' &&
+        entityFactoryTypeHasRuntimeMarker(candidate.type, checker) &&
+        candidate.identity.id !== calleeIdentity?.id,
+    );
+  if (!destination?.construction || !destination.identity) return undefined;
+
+  const owner = ts.findAncestor(node.parent, (ancestor): ancestor is ts.FunctionDeclaration =>
+    ts.isFunctionDeclaration(ancestor),
+  );
+  if (owner && promotedEntityFactoryDeclarations(context).has(owner)) {
+    const ownerSignature = checker.getSignatureFromDeclaration(owner);
+    const ownerReturn = ownerSignature && checker.getReturnTypeOfSignature(ownerSignature);
+    const ownerIdentity = ownerReturn && typedStructs.resolveIdentity(ownerReturn);
+    if (ownerIdentity?.id === destination.identity.id) {
+      return { kind: 'identifier', name: '__entityAllocator' };
+    }
+  }
+  return emptyEntityAllocator({ ...destination.construction, factoryAllocator: true });
+}
+
 function unresolvedNodeAllocator(node: ts.CallExpression, kind: FlightNodeFactoryKind, reason: string): Error {
   const source = node.getSourceFile();
   const position = source.getLineAndCharacterOfPosition(node.getStart(source));
@@ -4721,6 +4889,18 @@ function isDirectNodeAllocationObject(node: ts.ObjectLiteralExpression): boolean
       (property) => 'name' in property && property.name !== undefined && ts.isComputedPropertyName(property.name),
     )
   );
+}
+
+function isDirectPromotedEntityFactoryAllocationObject(
+  node: ts.ObjectLiteralExpression,
+  context: LoweringContext,
+): boolean {
+  const checker = context.checker;
+  if (!checker || !createEntityCallForObjectLiteral(node, checker)) return false;
+  const owner = ts.findAncestor(node.parent, (ancestor): ancestor is ts.FunctionDeclaration =>
+    ts.isFunctionDeclaration(ancestor),
+  );
+  return owner !== undefined && promotedEntityFactoryDeclarations(context).has(owner);
 }
 
 function entityCloneSpreadSource(node: ts.ObjectLiteralExpression): ts.Expression | undefined {

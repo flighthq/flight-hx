@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Materials)
+@:keep
+@:structInit
+class ExtendedPbrMaterial extends flight.types.SurfaceMaterial<String> {
+  public var extensions:Array<PbrExtension>;
+  public var standard:StandardPbrMaterialProperties;
+
+  private function new(kind:String, name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, extensions:Array<PbrExtension>, standard:StandardPbrMaterialProperties):Void {
+    super(kind, name, alphaCutoff, alphaMode, blendMode, doubleSided);
+    this.extensions = extensions;
+    this.standard = standard;
+  }
+}
+#else
 typedef ExtendedPbrMaterial = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var blendMode:BlendMode; var doubleSided:Bool; var extensions:Array<PbrExtension>; var standard:StandardPbrMaterialProperties; };
+#end

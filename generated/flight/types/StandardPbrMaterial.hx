@@ -4,4 +4,42 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Materials)
+@:keep
+@:structInit
+class StandardPbrMaterial extends flight.types.SurfaceMaterial<Dynamic> {
+  public var alphaMap:Null<Texture>;
+  public var baseColor:Float;
+  public var baseColorMap:Null<Texture>;
+  public var emissive:Float;
+  public var emissiveMap:Null<Texture>;
+  public var emissiveStrength:Float;
+  public var metallic:Float;
+  public var metallicRoughnessMap:Null<Texture>;
+  public var normalMap:Null<Texture>;
+  public var normalScale:Float;
+  public var occlusionMap:Null<Texture>;
+  public var occlusionStrength:Float;
+  public var roughness:Float;
+
+  private function new(kind:Dynamic, name:Null<String>, alphaCutoff:Float, alphaMode:MaterialAlphaMode, blendMode:BlendMode, doubleSided:Bool, alphaMap:Null<Texture>, baseColor:Float, baseColorMap:Null<Texture>, emissive:Float, emissiveMap:Null<Texture>, emissiveStrength:Float, metallic:Float, metallicRoughnessMap:Null<Texture>, normalMap:Null<Texture>, normalScale:Float, occlusionMap:Null<Texture>, occlusionStrength:Float, roughness:Float):Void {
+    super(kind, name, alphaCutoff, alphaMode, blendMode, doubleSided);
+    this.alphaMap = alphaMap;
+    this.baseColor = baseColor;
+    this.baseColorMap = baseColorMap;
+    this.emissive = emissive;
+    this.emissiveMap = emissiveMap;
+    this.emissiveStrength = emissiveStrength;
+    this.metallic = metallic;
+    this.metallicRoughnessMap = metallicRoughnessMap;
+    this.normalMap = normalMap;
+    this.normalScale = normalScale;
+    this.occlusionMap = occlusionMap;
+    this.occlusionStrength = occlusionStrength;
+    this.roughness = roughness;
+  }
+}
+#else
 typedef StandardPbrMaterial = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Dynamic; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var blendMode:BlendMode; var doubleSided:Bool; var alphaMap:Null<Texture>; var baseColor:Float; var baseColorMap:Null<Texture>; var emissive:Float; var emissiveMap:Null<Texture>; var emissiveStrength:Float; var metallic:Float; var metallicRoughnessMap:Null<Texture>; var normalMap:Null<Texture>; var normalScale:Float; var occlusionMap:Null<Texture>; var occlusionStrength:Float; var roughness:Float; };
+#end

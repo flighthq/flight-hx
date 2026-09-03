@@ -15,7 +15,11 @@ class DynamicObject {
   // Native Haxe classes cannot own fields that were not declared at compile
   // time. Preserve JavaScript's object-expando behavior in an identity sidecar
   // so open Entity records can still use nominal classes on hxcpp.
+  #if cpp
+  static final objectFields:haxe.ds.WeakMap<{}, Dynamic> = new haxe.ds.WeakMap();
+  #else
   static final objectFields:_IdentityMap<Dynamic> = new _IdentityMap();
+  #end
   // JavaScript functions are objects and can own fields. Native Haxe closure
   // values cannot, so retain fields assigned to them behind the same identity.
   static final callableTargets:Array<Dynamic> = [];
@@ -90,7 +94,7 @@ class DynamicObject {
   public static function keys(source:Dynamic):Array<String> {
     final result = Reflect.fields(source);
     #if !js
-    final extra = objectFields.get(source);
+    final extra = attachedFields(source);
     if (extra != null) {
       for (name in Reflect.fields(extra)) if (result.indexOf(name) < 0) result.push(name);
     }
@@ -124,7 +128,7 @@ class DynamicObject {
     #if js
     return js.Syntax.code('delete {0}[{1}]', target, name);
     #else
-    final extra = objectFields.get(target);
+    final extra = attachedFields(target);
     if (extra != null && Reflect.hasField(extra, name)) return Reflect.deleteField(extra, name);
     final callableIndex = callableIndex(target);
     if (callableIndex >= 0 && Reflect.hasField(callableFields[callableIndex], name)) {
@@ -138,7 +142,7 @@ class DynamicObject {
     #if js
     return false;
     #else
-    final extra = objectFields.get(source);
+    final extra = attachedFields(source);
     return (extra != null && Reflect.hasField(extra, name)) || hasCallableField(source, name);
     #end
   }
@@ -147,7 +151,7 @@ class DynamicObject {
     #if js
     return null;
     #else
-    final extra = objectFields.get(source);
+    final extra = attachedFields(source);
     return extra != null && Reflect.hasField(extra, name) ? Reflect.field(extra, name) : callableField(source, name);
     #end
   }
@@ -238,6 +242,22 @@ class DynamicObject {
   }
 
   #if !js
+  static inline function attachedFields(source:Dynamic):Dynamic {
+    #if cpp
+    return source == null ? null : objectFields.get(cast source);
+    #else
+    return objectFields.get(source);
+    #end
+  }
+
+  static inline function attachFields(target:Dynamic, fields:Dynamic):Void {
+    #if cpp
+    objectFields.set(cast target, fields);
+    #else
+    objectFields.set(target, fields);
+    #end
+  }
+
   static function ownField(source:Dynamic, name:String):Dynamic {
     return hasAttachedField(source, name) ? attachedField(source, name) : Reflect.field(source, name);
   }
@@ -246,10 +266,10 @@ class DynamicObject {
     if (!Reflect.isFunction(target)) {
       final targetClass = Type.getClass(target);
       if (targetClass != null && !hasInstanceField(target, name)) {
-        var extra = objectFields.get(target);
+        var extra = attachedFields(target);
         if (extra == null) {
           extra = {};
-          objectFields.set(target, extra);
+          attachFields(target, extra);
         }
         Reflect.setField(extra, name, value);
         return;

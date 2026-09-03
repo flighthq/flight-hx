@@ -67,8 +67,8 @@ class Scene2D {
     return cast null;
   }
 
-  public static function createSprite(?obj:PartialNode<Sprite>):Sprite {
-    return cast Facade_Scene2D_flight__Scene2D.createSprite(obj);
+  public static function createSprite(?obj:PartialNode<Sprite>, ?__entityAllocator:Void->Dynamic):Sprite {
+    return cast Facade_Scene2D_flight__Scene2D.createSprite(obj, __entityAllocator);
     return cast null;
   }
 

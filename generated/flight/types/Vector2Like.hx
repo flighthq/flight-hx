@@ -4,4 +4,10 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+private typedef Vector2Like__Structural = { var x:Float; var y:Float; };
+@:forward(x, y)
+abstract Vector2Like(Dynamic) from flight.types.Vector2 from Vector2Like__Structural to Vector2Like__Structural {}
+#else
 typedef Vector2Like = { var x:Float; var y:Float; };
+#end

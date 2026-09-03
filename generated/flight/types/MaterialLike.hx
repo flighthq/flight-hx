@@ -4,4 +4,10 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+private typedef MaterialLike__Structural = { var kind:Kind; @:optional var name:Null<String>; };
+@:forward(kind, name)
+abstract MaterialLike(Dynamic) from flight.types.Material from MaterialLike__Structural to MaterialLike__Structural {}
+#else
 typedef MaterialLike = { var kind:Kind; @:optional var name:Null<String>; };
+#end

@@ -679,6 +679,24 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
       );
       return lines;
     }
+    if (declaration.cppStructInitLikeTarget) {
+      if (declaration.type.kind !== 'anonymous') {
+        throw new Error(`nominal Like alias is not anonymous: ${declaration.name}`);
+      }
+      const structuralName = `${safeName(declaration.name)}__Structural`;
+      const forwardedFields = flattenAnonymousType(declaration.type).fields.map((field) => typeFieldName(field.name));
+      return [
+        '#if !flight_struct_typedef',
+        ...completionMetadata,
+        `private typedef ${structuralName}${generics} = ${emitType(declaration.type)};`,
+        `@:forward(${forwardedFields.join(', ')})`,
+        `${modifier}abstract ${safeName(declaration.name)}${generics}(Dynamic) from ${emitType(declaration.cppStructInitLikeTarget)} from ${structuralName}${generics} to ${structuralName}${generics} {}`,
+        '#else',
+        ...completionMetadata,
+        `${modifier}typedef ${safeName(declaration.name)}${generics} = ${emitType(declaration.type)};`,
+        '#end',
+      ];
+    }
     return [
       ...completionMetadata,
       `${modifier}typedef ${safeName(declaration.name)}${generics} = ${emitType(declaration.type)};`,
@@ -4189,7 +4207,9 @@ export function emitType(type: IrType): string {
     case 'array':
       return `Array<${emitType(type.element)}>`;
     case 'dynamic':
-      return type.reason && type.reason !== 'checker-known-unrepresentable' ? 'flight._internal._Any' : 'Dynamic';
+      return type.reason && !['checker-known-unrepresentable', 'nominal-factory-allocator'].includes(type.reason)
+        ? 'flight._internal._Any'
+        : 'Dynamic';
     case 'function':
       return `${
         type.parameters.length === 0

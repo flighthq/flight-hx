@@ -4,4 +4,30 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Scene2DCanvas)
+@:keep
+@:structInit
+class CanvasRenderState extends flight.types.RenderState {
+  public var applyBlendMode:Null<CanvasRenderState->Null<BlendMode>->Void>;
+  public var canvasCssFilterResolver:Null<CanvasRenderState->RenderProxy2D->Null<String>>;
+  public var canvas:flight._internal.dom.HTMLCanvasElement;
+  public var context:flight._internal.dom.CanvasRenderingContext2D;
+  public var contextAttributes:flight._internal.dom.CanvasRenderingContext2DSettings;
+  public var pipeline:CanvasPipeline;
+  public var surface:CanvasRenderSurface;
+
+  private function new(allowSmoothing:Bool, backgroundColor:Float, backgroundColorRgba:Array<Float>, backgroundColorString:String, currentClipDepth:Float, displayObjectClipHooks:Null<Scene2DClipHooks>, pixelRatio:Float, renderAlpha:Float, renderBlendMode:Null<BlendMode>, renderTransform2D:Null<Matrix>, sceneGraphSyncPolicy:Scene3DGraphSyncPolicy, roundPixels:Bool, applyBlendMode:Null<CanvasRenderState->Null<BlendMode>->Void>, canvasCssFilterResolver:Null<CanvasRenderState->RenderProxy2D->Null<String>>, canvas:flight._internal.dom.HTMLCanvasElement, context:flight._internal.dom.CanvasRenderingContext2D, contextAttributes:flight._internal.dom.CanvasRenderingContext2DSettings, pipeline:CanvasPipeline, surface:CanvasRenderSurface):Void {
+    super(allowSmoothing, backgroundColor, backgroundColorRgba, backgroundColorString, currentClipDepth, displayObjectClipHooks, pixelRatio, renderAlpha, renderBlendMode, renderTransform2D, sceneGraphSyncPolicy, roundPixels);
+    this.applyBlendMode = applyBlendMode;
+    this.canvasCssFilterResolver = canvasCssFilterResolver;
+    this.canvas = canvas;
+    this.context = context;
+    this.contextAttributes = contextAttributes;
+    this.pipeline = pipeline;
+    this.surface = surface;
+  }
+}
+#else
 typedef CanvasRenderState = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var allowSmoothing:Bool; var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; var currentClipDepth:Float; var displayObjectClipHooks:Null<Scene2DClipHooks>; var pixelRatio:Float; var renderAlpha:Float; var renderBlendMode:Null<BlendMode>; var renderTransform2D:Null<Matrix>; var sceneGraphSyncPolicy:Scene3DGraphSyncPolicy; var roundPixels:Bool; var applyBlendMode:Null<CanvasRenderState->Null<BlendMode>->Void>; var canvasCssFilterResolver:Null<CanvasRenderState->RenderProxy2D->Null<String>>; var canvas:flight._internal.dom.HTMLCanvasElement; var context:flight._internal.dom.CanvasRenderingContext2D; var contextAttributes:flight._internal.dom.CanvasRenderingContext2DSettings; var pipeline:CanvasPipeline; var surface:CanvasRenderSurface; };
+#end

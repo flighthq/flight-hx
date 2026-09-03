@@ -204,8 +204,8 @@ class Shape {
     return cast null;
   }
 
-  public static function createShape(?obj:PartialNode<flight.types.Shape>):flight.types.Shape {
-    return cast Facade_Shape_flight__Shape.createShape(obj);
+  public static function createShape(?obj:PartialNode<flight.types.Shape>, ?__entityAllocator:Void->Dynamic):flight.types.Shape {
+    return cast Facade_Shape_flight__Shape.createShape(obj, __entityAllocator);
     return cast null;
   }
 

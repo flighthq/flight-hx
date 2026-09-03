@@ -4,4 +4,10 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+private typedef SamplerLike__Structural = { var anisotropy:Float; var magFilter:TextureFilter; var minFilter:TextureFilter; var mipmaps:Bool; var wrapU:TextureWrap; var wrapV:TextureWrap; };
+@:forward(anisotropy, magFilter, minFilter, mipmaps, wrapU, wrapV)
+abstract SamplerLike(Dynamic) from flight.types.Sampler from SamplerLike__Structural to SamplerLike__Structural {}
+#else
 typedef SamplerLike = { var anisotropy:Float; var magFilter:TextureFilter; var minFilter:TextureFilter; var mipmaps:Bool; var wrapU:TextureWrap; var wrapV:TextureWrap; };
+#end

@@ -99,6 +99,7 @@ import flight.types.BillboardRuntime;
 import flight.types.Camera3D;
 import flight.types.DirectionalLight;
 import flight.types.Entity;
+import flight.types.EntityRuntime;
 import flight.types.FrustumLike;
 import flight.types.HasAppearance;
 import flight.types.HasAppearanceRuntime;

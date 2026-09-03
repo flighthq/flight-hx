@@ -26,6 +26,7 @@ export type IrDynamicReason =
   | 'source-symbol'
   | 'source-undefined'
   | 'source-unknown'
+  | 'nominal-factory-allocator'
   | 'standard-toolkit-boundary';
 
 export interface IrTypeField {
@@ -63,6 +64,7 @@ export interface IrHostTypeBinding {
 }
 
 export interface IrCppStructInitConstruction {
+  factoryAllocator?: true | undefined;
   fieldNames: string[];
   missingFieldNames?: string[] | undefined;
   nativeOnly?: true | undefined;
@@ -348,6 +350,7 @@ export interface IrTypeDeclaration {
   cppStructInitOwnFieldNames?: string[] | undefined;
   cppStructInitConstructorAllowModules?: string[] | undefined;
   cppStructInitNativeOnly?: true | undefined;
+  cppStructInitLikeTarget?: IrType | undefined;
   cppStructInitSchemaId?: string | undefined;
   exported: boolean;
   kind: 'type';
@@ -360,6 +363,8 @@ export interface IrTypeDeclaration {
   packagePrivate?: boolean;
   /** Direct TypeScript interface heritage or named intersection constituents, retained before structural flattening. */
   sourceExtends?: IrType[] | undefined;
+  /** Concrete Entity removed by an EntityWithoutRuntime alias before nominal activation is known. */
+  sourceEntityWithoutRuntimeTarget?: IrType | undefined;
   type: IrType;
   typeParameters: string[];
 }

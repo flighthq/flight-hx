@@ -498,8 +498,8 @@ function markCppStructInitTypes(
     );
   }
   const entitySchemaIds = new Set(entityFactoryClosure.schemas.map((schema) => schema.schemaId));
-  const nodeSchemaIds = nodeAllocatorSchemaIds(modules);
-  const allowlist = new Set([...cppStructInitTypedStructIds, ...entitySchemaIds, ...nodeSchemaIds]);
+  const allocatorSchemaIds = factoryAllocatorSchemaIds(modules);
+  const allowlist = new Set([...cppStructInitTypedStructIds, ...entitySchemaIds, ...allocatorSchemaIds]);
   const candidatesByDeclaration = new Map(
     registry.report.candidates.map((candidate) => [
       `${candidate.definingPackageName}:${candidate.source}#${candidate.name}`,
@@ -762,13 +762,73 @@ export function markCppStructInitInheritance(
       haxeType: modulePath(baseOwner),
     };
   }
+  for (const declaration of typeOwners.keys()) {
+    const targetType = declaration.sourceEntityWithoutRuntimeTarget;
+    if (!targetType || targetType.kind !== 'named') continue;
+    const target = typesByName.get(targetType.name.split('.').at(-1)!);
+    if (
+      !target ||
+      !classTypes.has(target) ||
+      target.type.kind !== 'anonymous' ||
+      declaration.type.kind !== 'anonymous'
+    ) {
+      continue;
+    }
+    const targetOwner = typeOwners.get(target);
+    if (!targetOwner) throw new Error(`nominal Like target has no module: ${target.name}`);
+    const targetFields = new Set(
+      target.type.fields.filter((field) => field.name !== '__EntityRuntimeKey').map((field) => field.name),
+    );
+    const likeFields = new Set(declaration.type.fields.map((field) => field.name));
+    if (targetFields.size !== likeFields.size || [...targetFields].some((field) => !likeFields.has(field))) {
+      throw new Error(`EntityWithoutRuntime alias ${declaration.name} does not match nominal target ${target.name}`);
+    }
+    declaration.cppStructInitLikeTarget = {
+      arguments: targetType.arguments,
+      kind: 'named',
+      name: modulePath(targetOwner),
+    };
+  }
+  // Haxe anonymous structures cannot use a class as a `>Parent` extension.
+  // Preserve TypeScript intersections that add local fields to an activated
+  // entity by expanding that nominal parent's public record layout inline.
+  const visitedValues = new WeakSet<object>();
+  const flattenNominalStructuralExtends = (value: unknown): void => {
+    if (!value || typeof value !== 'object' || visitedValues.has(value)) return;
+    visitedValues.add(value);
+    if (Array.isArray(value)) {
+      value.forEach(flattenNominalStructuralExtends);
+      return;
+    }
+    const record = value as Record<string, unknown>;
+    if (record.kind === 'anonymous' && Array.isArray(record.fields) && Array.isArray(record.extends)) {
+      const type = record as unknown as Extract<IrType, { kind: 'anonymous' }>;
+      const inheritedFields: IrTypeField[] = [];
+      type.extends = type.extends.filter((parent) => {
+        if (parent.kind !== 'named') return true;
+        const target = typesByName.get(parent.name.split('.').at(-1)!);
+        if (!target || !classTypes.has(target) || target.type.kind !== 'anonymous') return true;
+        if (parent.arguments.length > 0) {
+          throw new Error(`generic nominal class ${target.name} cannot extend an anonymous structure`);
+        }
+        inheritedFields.push(...target.type.fields);
+        return false;
+      });
+      type.fields = [...inheritedFields, ...type.fields];
+    }
+    Object.values(record).forEach(flattenNominalStructuralExtends);
+  };
+  modules.forEach(flattenNominalStructuralExtends);
   // Heritage has served its purpose once the nominal class spine is recorded.
   // Keeping the source-only graph in emission IR would make import/toolkit audits
   // treat erased TypeScript utility constituents as generated Haxe dependencies.
-  for (const declaration of typeOwners.keys()) declaration.sourceExtends = undefined;
+  for (const declaration of typeOwners.keys()) {
+    declaration.sourceExtends = undefined;
+    declaration.sourceEntityWithoutRuntimeTarget = undefined;
+  }
 }
 
-function nodeAllocatorSchemaIds(modules: IrModule[]): Set<string> {
+function factoryAllocatorSchemaIds(modules: IrModule[]): Set<string> {
   const ids = new Set<string>();
   const seen = new WeakSet<object>();
   const visit = (value: unknown): void => {
@@ -779,8 +839,13 @@ function nodeAllocatorSchemaIds(modules: IrModule[]): Set<string> {
       return;
     }
     const record = value as Record<string, unknown>;
-    const construction = record.cppStructInit as { nodeAllocator?: unknown; schemaId?: unknown } | undefined;
-    if (construction?.nodeAllocator === true && typeof construction.schemaId === 'string') {
+    const construction = record.cppStructInit as
+      | { factoryAllocator?: unknown; nodeAllocator?: unknown; schemaId?: unknown }
+      | undefined;
+    if (
+      (construction?.nodeAllocator === true || construction?.factoryAllocator === true) &&
+      typeof construction.schemaId === 'string'
+    ) {
       ids.add(construction.schemaId);
     }
     Object.values(record).forEach(visit);

@@ -33,6 +33,7 @@ import flight._Types.Node3DTraitsKey;
 import flight.types.Camera3D;
 import flight.types.Camera3DOptions;
 import flight.types.Entity;
+import flight.types.EntityRuntime;
 import flight.types.FlightDocument;
 import flight.types.FlightDocumentFieldSchema;
 import flight.types.FlightDocumentFieldValidator;

@@ -4,4 +4,10 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+private typedef RectangleLike__Structural = { var height:Float; var width:Float; var x:Float; var y:Float; };
+@:forward(height, width, x, y)
+abstract RectangleLike(Dynamic) from flight.types.Rectangle from RectangleLike__Structural to RectangleLike__Structural {}
+#else
 typedef RectangleLike = { var height:Float; var width:Float; var x:Float; var y:Float; };
+#end

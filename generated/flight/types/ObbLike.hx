@@ -4,4 +4,10 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+private typedef ObbLike__Structural = { var centerX:Float; var centerY:Float; var centerZ:Float; var halfExtentX:Float; var halfExtentY:Float; var halfExtentZ:Float; var orientationW:Float; var orientationX:Float; var orientationY:Float; var orientationZ:Float; };
+@:forward(centerX, centerY, centerZ, halfExtentX, halfExtentY, halfExtentZ, orientationW, orientationX, orientationY, orientationZ)
+abstract ObbLike(Dynamic) from flight.types.Obb from ObbLike__Structural to ObbLike__Structural {}
+#else
 typedef ObbLike = { var centerX:Float; var centerY:Float; var centerZ:Float; var halfExtentX:Float; var halfExtentY:Float; var halfExtentZ:Float; var orientationW:Float; var orientationX:Float; var orientationY:Float; var orientationZ:Float; };
+#end
