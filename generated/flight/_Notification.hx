@@ -60,6 +60,86 @@ typedef NotificationAttach__notification<TArgs> = (TArgs->Void)->flight._interna
 
 typedef NotificationSubscriptionRuntime__notification = { var attachment:Null<NotificationEventAttachment>; var disposeCompleted:Bool; var disposed:Bool; var generation:Float; var pending:Null<flight._internal._Promise<NotificationEventBackendAttachOutcome>>; };
 
+#if !flight_struct_typedef
+@:allow(flight._Notification)
+@:structInit
+private class EntityShapeL157C41__notification {
+  public var onNotificationAction:Signal<Notification->String->Void>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(onNotificationAction:Signal<Notification->String->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onNotificationAction = onNotificationAction;
+  }
+}
+#else
+private typedef EntityShapeL157C41__notification = { var onNotificationAction:Signal<Notification->String->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Notification)
+@:structInit
+private class EntityShapeL163C41__notification {
+  public var onNotificationClick:Signal<Notification->Void>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(onNotificationClick:Signal<Notification->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onNotificationClick = onNotificationClick;
+  }
+}
+#else
+private typedef EntityShapeL163C41__notification = { var onNotificationClick:Signal<Notification->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Notification)
+@:structInit
+private class EntityShapeL169C41__notification {
+  public var onNotificationDismiss:Signal<Notification->Void>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(onNotificationDismiss:Signal<Notification->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onNotificationDismiss = onNotificationDismiss;
+  }
+}
+#else
+private typedef EntityShapeL169C41__notification = { var onNotificationDismiss:Signal<Notification->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Notification)
+@:structInit
+private class EntityShapeL175C41__notification {
+  public var onNotificationReceived:Signal<Notification->Void>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(onNotificationReceived:Signal<Notification->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onNotificationReceived = onNotificationReceived;
+  }
+}
+#else
+private typedef EntityShapeL175C41__notification = { var onNotificationReceived:Signal<Notification->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Notification)
+@:structInit
+private class EntityShapeL181C41__notification {
+  public var onNotificationReply:Signal<Notification->String->String->Void>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(onNotificationReply:Signal<Notification->String->String->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onNotificationReply = onNotificationReply;
+  }
+}
+#else
+private typedef EntityShapeL181C41__notification = { var onNotificationReply:Signal<Notification->String->String->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
 @:noCompletion
 class _Notification {
   public static function attachNotificationActionSubscription(host:HasNotificationAction, subscription:NotificationActionSubscription):flight._internal._Promise<NotificationSubscriptionAttachOutcome> {
@@ -222,27 +302,27 @@ class _Notification {
   }
 
   public static function createNotificationActionSubscription():NotificationActionSubscription {
-    return cast (cast (cast _Notification.createNotificationSubscription__notification : { var onNotificationAction:Signal<Notification->String->Void>; }->NotificationActionSubscription)(({ final __callArgument68:Dynamic = { onNotificationAction: (cast (cast createSignal : Void->Signal<Notification->String->Void>)() : Signal<Notification->String->Void>) }; __callArgument68; })) : NotificationActionSubscription);
+    return cast (cast (cast _Notification.createNotificationSubscription__notification : { var onNotificationAction:Signal<Notification->String->Void>; }->NotificationActionSubscription)(({ final __callArgument68:Dynamic = ({ onNotificationAction: (cast (cast createSignal : Void->Signal<Notification->String->Void>)() : Signal<Notification->String->Void>) } : EntityShapeL157C41__notification); __callArgument68; })) : NotificationActionSubscription);
     return cast null;
   }
 
   public static function createNotificationClickSubscription():NotificationClickSubscription {
-    return cast (cast (cast _Notification.createNotificationSubscription__notification : { var onNotificationClick:Signal<Notification->Void>; }->NotificationClickSubscription)(({ final __callArgument70:Dynamic = { onNotificationClick: (cast (cast createSignal : Void->Signal<Notification->Void>)() : Signal<Notification->Void>) }; __callArgument70; })) : NotificationClickSubscription);
+    return cast (cast (cast _Notification.createNotificationSubscription__notification : { var onNotificationClick:Signal<Notification->Void>; }->NotificationClickSubscription)(({ final __callArgument70:Dynamic = ({ onNotificationClick: (cast (cast createSignal : Void->Signal<Notification->Void>)() : Signal<Notification->Void>) } : EntityShapeL163C41__notification); __callArgument70; })) : NotificationClickSubscription);
     return cast null;
   }
 
   public static function createNotificationDismissSubscription():NotificationDismissSubscription {
-    return cast (cast (cast _Notification.createNotificationSubscription__notification : { var onNotificationDismiss:Signal<Notification->Void>; }->NotificationDismissSubscription)(({ final __callArgument72:Dynamic = { onNotificationDismiss: (cast (cast createSignal : Void->Signal<Notification->Void>)() : Signal<Notification->Void>) }; __callArgument72; })) : NotificationDismissSubscription);
+    return cast (cast (cast _Notification.createNotificationSubscription__notification : { var onNotificationDismiss:Signal<Notification->Void>; }->NotificationDismissSubscription)(({ final __callArgument72:Dynamic = ({ onNotificationDismiss: (cast (cast createSignal : Void->Signal<Notification->Void>)() : Signal<Notification->Void>) } : EntityShapeL169C41__notification); __callArgument72; })) : NotificationDismissSubscription);
     return cast null;
   }
 
   public static function createNotificationReceivedSubscription():NotificationReceivedSubscription {
-    return cast (cast (cast _Notification.createNotificationSubscription__notification : { var onNotificationReceived:Signal<Notification->Void>; }->NotificationReceivedSubscription)(({ final __callArgument74:Dynamic = { onNotificationReceived: (cast (cast createSignal : Void->Signal<Notification->Void>)() : Signal<Notification->Void>) }; __callArgument74; })) : NotificationReceivedSubscription);
+    return cast (cast (cast _Notification.createNotificationSubscription__notification : { var onNotificationReceived:Signal<Notification->Void>; }->NotificationReceivedSubscription)(({ final __callArgument74:Dynamic = ({ onNotificationReceived: (cast (cast createSignal : Void->Signal<Notification->Void>)() : Signal<Notification->Void>) } : EntityShapeL175C41__notification); __callArgument74; })) : NotificationReceivedSubscription);
     return cast null;
   }
 
   public static function createNotificationReplySubscription():NotificationReplySubscription {
-    return cast (cast (cast _Notification.createNotificationSubscription__notification : { var onNotificationReply:Signal<Notification->String->String->Void>; }->NotificationReplySubscription)(({ final __callArgument76:Dynamic = { onNotificationReply: (cast (cast createSignal : Void->Signal<Notification->String->String->Void>)() : Signal<Notification->String->String->Void>) }; __callArgument76; })) : NotificationReplySubscription);
+    return cast (cast (cast _Notification.createNotificationSubscription__notification : { var onNotificationReply:Signal<Notification->String->String->Void>; }->NotificationReplySubscription)(({ final __callArgument76:Dynamic = ({ onNotificationReply: (cast (cast createSignal : Void->Signal<Notification->String->String->Void>)() : Signal<Notification->String->String->Void>) } : EntityShapeL181C41__notification); __callArgument76; })) : NotificationReplySubscription);
     return cast null;
   }
 

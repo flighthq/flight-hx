@@ -29,7 +29,7 @@ typedef Bvh3D__bvh3D = { var margin:Float; var root:Float; var minX:Array<Float>
 #if !flight_struct_typedef
 @:allow(flight._Spatial)
 @:structInit
-private class EntityShapeL42C10__bvh3D {
+private class EntityShapeL42C23__bvh3D {
   public var clearSpatialIndex:Void->Void;
   public var explainSpatialIndexing:Float->SpatialIndexingExplanation;
   public var insertSpatialObject:Float->SpatialAabb3D->Bool;
@@ -55,7 +55,7 @@ private class EntityShapeL42C10__bvh3D {
   }
 }
 #else
-private typedef EntityShapeL42C10__bvh3D = { var clearSpatialIndex:Void->Void; var explainSpatialIndexing:Float->SpatialIndexingExplanation; var insertSpatialObject:Float->SpatialAabb3D->Bool; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialPoint:Float->Float->Float->Array<Float>->Void; var querySpatialRay:Float->Float->Float->Float->Float->Float->Array<Float>->Void; var querySpatialRegion:SpatialAabb3D->Array<Float>->Void; var removeSpatialObject:Float->Void; var updateSpatialObject:Float->SpatialAabb3D->Bool; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL42C23__bvh3D = { var clearSpatialIndex:Void->Void; var explainSpatialIndexing:Float->SpatialIndexingExplanation; var insertSpatialObject:Float->SpatialAabb3D->Bool; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialPoint:Float->Float->Float->Array<Float>->Void; var querySpatialRay:Float->Float->Float->Float->Float->Float->Array<Float>->Void; var querySpatialRegion:SpatialAabb3D->Array<Float>->Void; var removeSpatialObject:Float->Void; var updateSpatialObject:Float->SpatialAabb3D->Bool; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef GridCell__uniformGrid = { var cx:Float; var cy:Float; var ids:flight._internal._Set<SpatialObjectId>; };
@@ -65,7 +65,7 @@ typedef UniformGrid__uniformGrid = { var cellSize:Float; var cells:flight._inter
 #if !flight_struct_typedef
 @:allow(flight._Spatial)
 @:structInit
-private class EntityShapeL61C10__uniformGrid {
+private class EntityShapeL61C23__uniformGrid {
   public var insertSpatialObject:Float->SpatialAabb2D->Bool;
   public var updateSpatialObject:Float->SpatialAabb2D->Bool;
   public var removeSpatialObject:Float->Void;
@@ -91,7 +91,7 @@ private class EntityShapeL61C10__uniformGrid {
   }
 }
 #else
-private typedef EntityShapeL61C10__uniformGrid = { var insertSpatialObject:Float->SpatialAabb2D->Bool; var updateSpatialObject:Float->SpatialAabb2D->Bool; var removeSpatialObject:Float->Void; var clearSpatialIndex:Void->Void; var explainSpatialIndexing:Float->SpatialIndexingExplanation; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialRegion:SpatialAabb2D->Array<Float>->Void; var querySpatialPoint:Float->Float->Array<Float>->Void; var querySpatialRay:Float->Float->Float->Float->Array<Float>->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL61C23__uniformGrid = { var insertSpatialObject:Float->SpatialAabb2D->Bool; var updateSpatialObject:Float->SpatialAabb2D->Bool; var removeSpatialObject:Float->Void; var clearSpatialIndex:Void->Void; var explainSpatialIndexing:Float->SpatialIndexingExplanation; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialRegion:SpatialAabb2D->Array<Float>->Void; var querySpatialPoint:Float->Float->Array<Float>->Void; var querySpatialRay:Float->Float->Float->Float->Array<Float>->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef GridCell3D__uniformGrid3D = { var cx:Float; var cy:Float; var cz:Float; var ids:flight._internal._Set<SpatialObjectId>; };
@@ -101,7 +101,7 @@ typedef UniformGrid3D__uniformGrid3D = { var cellSize:Float; var cells:flight._i
 #if !flight_struct_typedef
 @:allow(flight._Spatial)
 @:structInit
-private class EntityShapeL48C10__uniformGrid3D {
+private class EntityShapeL48C23__uniformGrid3D {
   public var insertSpatialObject:Float->SpatialAabb3D->Bool;
   public var updateSpatialObject:Float->SpatialAabb3D->Bool;
   public var removeSpatialObject:Float->Void;
@@ -127,7 +127,7 @@ private class EntityShapeL48C10__uniformGrid3D {
   }
 }
 #else
-private typedef EntityShapeL48C10__uniformGrid3D = { var insertSpatialObject:Float->SpatialAabb3D->Bool; var updateSpatialObject:Float->SpatialAabb3D->Bool; var removeSpatialObject:Float->Void; var clearSpatialIndex:Void->Void; var explainSpatialIndexing:Float->SpatialIndexingExplanation; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialRegion:SpatialAabb3D->Array<Float>->Void; var querySpatialPoint:Float->Float->Float->Array<Float>->Void; var querySpatialRay:Float->Float->Float->Float->Float->Float->Array<Float>->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL48C23__uniformGrid3D = { var insertSpatialObject:Float->SpatialAabb3D->Bool; var updateSpatialObject:Float->SpatialAabb3D->Bool; var removeSpatialObject:Float->Void; var clearSpatialIndex:Void->Void; var explainSpatialIndexing:Float->SpatialIndexingExplanation; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialRegion:SpatialAabb3D->Array<Float>->Void; var querySpatialPoint:Float->Float->Float->Array<Float>->Void; var querySpatialRay:Float->Float->Float->Float->Float->Float->Array<Float>->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 @:noCompletion
@@ -148,7 +148,7 @@ class _Spatial {
       if ((cast wasMissing : Bool)) { _Spatial.reportBvh3DIndexing__bvh3D((cast tree : Dynamic), (cast id : Float), (cast (cast _Spatial.explainBvh3D__bvh3D((cast tree : Dynamic), (cast id : Float)) : SpatialIndexingExplanation) : SpatialIndexingExplanation).mode, ({ final __callArgument52:Dynamic = 'update'; __callArgument52; }), ({ final __callArgument53:Dynamic = 'missing-id'; __callArgument53; })); }
       return cast inserted;
       return cast _Runtime.UNDEFINED;
-    } } : EntityShapeL42C10__bvh3D); __callArgument56; })) : EntityShapeL42C10__bvh3D);
+    } } : EntityShapeL42C23__bvh3D); __callArgument56; })) : EntityShapeL42C23__bvh3D);
     return cast null;
   }
 
@@ -843,7 +843,7 @@ class _Spatial {
       _Spatial._queryGridPoint__uniformGrid((cast grid : Dynamic), (cast x : Float), (cast y : Float), ({ final __callArgument206:Dynamic = out; __callArgument206; }));
     }, querySpatialRay: function(x:Float, y:Float, dx:Float, dy:Float, out:Array<Float>):Void {
       _Spatial._queryGridRay__uniformGrid((cast grid : Dynamic), (cast x : Float), (cast y : Float), (cast dx : Float), (cast dy : Float), ({ final __callArgument208:Dynamic = out; __callArgument208; }));
-    } } : EntityShapeL61C10__uniformGrid); __callArgument210; })) : EntityShapeL61C10__uniformGrid);
+    } } : EntityShapeL61C23__uniformGrid); __callArgument210; })) : EntityShapeL61C23__uniformGrid);
     return cast null;
   }
 
@@ -1345,7 +1345,7 @@ class _Spatial {
       _Spatial._queryGrid3DPoint__uniformGrid3D((cast grid : Dynamic), (cast x : Float), (cast y : Float), (cast z : Float), ({ final __callArgument386:Dynamic = out; __callArgument386; }));
     }, querySpatialRay: function(x:Float, y:Float, z:Float, dx:Float, dy:Float, dz:Float, out:Array<Float>):Void {
       _Spatial._queryGrid3DRay__uniformGrid3D((cast grid : Dynamic), (cast x : Float), (cast y : Float), (cast z : Float), (cast dx : Float), (cast dy : Float), (cast dz : Float), ({ final __callArgument388:Dynamic = out; __callArgument388; }));
-    } } : EntityShapeL48C10__uniformGrid3D); __callArgument390; })) : EntityShapeL48C10__uniformGrid3D);
+    } } : EntityShapeL48C23__uniformGrid3D); __callArgument390; })) : EntityShapeL48C23__uniformGrid3D);
     return cast null;
   }
 

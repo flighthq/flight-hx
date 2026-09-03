@@ -435,6 +435,14 @@ class _Runtime {
     #end
   }
 
+  /** Clone an Entity's data while retaining its generated nominal layout. */
+  public static function cloneEntityShape<T>(source:T):T {
+    final sourceClass = Type.getClass(source);
+    final output:Dynamic = sourceClass == null ? {} : Type.createEmptyInstance(sourceClass);
+    for (field in Reflect.fields(source)) Reflect.setField(output, field, Reflect.field(source, field));
+    return cast output;
+  }
+
   public static function createArray<T>(length:Dynamic):Array<T> {
     final output:Array<T> = [];
     output.resize(Std.int(length));

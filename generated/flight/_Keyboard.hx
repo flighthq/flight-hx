@@ -34,7 +34,7 @@ import flight.types.SoftKeyboardVisibilityResult;
 #if !flight_struct_typedef
 @:allow(flight._Keyboard)
 @:structInit
-private class EntityShapeL51C10__keyboard {
+private class EntityShapeL51C23__keyboard {
   public var onShow:Signal<Float->Void>;
   public var onHide:Signal<Void->Void>;
   public var onResize:Signal<Float->Void>;
@@ -48,7 +48,7 @@ private class EntityShapeL51C10__keyboard {
   }
 }
 #else
-private typedef EntityShapeL51C10__keyboard = { var onShow:Signal<Float->Void>; var onHide:Signal<Void->Void>; var onResize:Signal<Float->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL51C23__keyboard = { var onShow:Signal<Float->Void>; var onHide:Signal<Void->Void>; var onResize:Signal<Float->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 @:noCompletion
@@ -103,7 +103,7 @@ class _Keyboard {
   }
 
   public static function createSoftKeyboard():{ >SoftKeyboard, >Entity, } {
-    return cast (cast createEntity((cast ({ onShow: (cast createSignal() : Signal<Float->Void>), onHide: (cast createSignal() : Signal<Void->Void>), onResize: (cast createSignal() : Signal<Float->Void>) } : EntityShapeL51C10__keyboard) : Dynamic)) : EntityShapeL51C10__keyboard);
+    return cast (cast createEntity((cast ({ onShow: (cast createSignal() : Signal<Float->Void>), onHide: (cast createSignal() : Signal<Void->Void>), onResize: (cast createSignal() : Signal<Float->Void>) } : EntityShapeL51C23__keyboard) : Dynamic)) : EntityShapeL51C23__keyboard);
     return cast null;
   }
 

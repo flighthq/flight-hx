@@ -3721,11 +3721,11 @@ function cppStructInitEntityFactoryConstruction(
     );
     return namedIdentity && !parameterizedDestination
       ? undefined
-      : syntheticEntityFactoryConstruction(node, call, constructionFields, shape, context);
+      : syntheticEntityFactoryConstruction(node, constructionFields, shape, context);
   }
   if (shape.hasUnsupported || !constructionFields) return undefined;
   if (constructionFields.some((field) => !binding.fieldNames.includes(field))) {
-    return syntheticEntityFactoryConstruction(node, call, constructionFields, shape, context);
+    return syntheticEntityFactoryConstruction(node, constructionFields, shape, context);
   }
   const missingFieldNames = binding.fieldNames.filter((field) => !constructionFields.includes(field));
   return missingFieldNames.length > 0 ? { ...binding, missingFieldNames } : binding;
@@ -3772,7 +3772,6 @@ function entityFactoryVariableStorageType(
 
 function syntheticEntityFactoryConstruction(
   node: ts.ObjectLiteralExpression,
-  call: ts.CallExpression,
   constructionFields: string[] | undefined,
   shape: ReturnType<typeof entityFactoryObjectShape>,
   context: LoweringContext,
@@ -3812,17 +3811,17 @@ function syntheticEntityFactoryConstruction(
       type: eraseLocalTypeParameters(lowered, typeParameterNames),
     });
   }
-  return addSyntheticEntityFactoryDeclaration(call, fields, context, computedTypes.size > 0);
+  return addSyntheticEntityFactoryDeclaration(node, fields, context, computedTypes.size > 0);
 }
 
 function addSyntheticEntityFactoryDeclaration(
-  call: ts.CallExpression,
+  allocation: ts.Node,
   fields: IrTypeField[],
   context: LoweringContext,
   nativeOnly = false,
 ): IrCppStructInitConstruction {
-  const name = entityFactorySyntheticClassName(call);
-  const site = origin(call, context);
+  const name = entityFactorySyntheticClassName(allocation);
+  const site = origin(allocation, context);
   const schemaId = `synthetic-entity:${site.source}:${String(site.line)}:${String(site.column)}`;
   if (!context.syntheticEntityDeclarations.some((declaration) => declaration.cppStructInitSchemaId === schemaId)) {
     context.syntheticEntityDeclarations.push({
@@ -4030,6 +4029,16 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
     return { elements: node.elements.map((element) => lowerExpression(element, context)), kind: 'array' };
   }
   if (ts.isObjectLiteralExpression(node)) {
+    const entityCloneSource = entityCloneSpreadSource(node);
+    if (entityCloneSource) {
+      return {
+        arguments: [lowerExpression(entityCloneSource, context)],
+        callee: { kind: 'identifier', name: '_Runtime.cloneEntityShape' },
+        direct: true,
+        kind: 'call',
+        typeArguments: [],
+      };
+    }
     const contextualCppStructInit =
       context.checker && context.typedStructs
         ? context.typedStructs.resolveCppStructInitConstruction(
@@ -4400,6 +4409,16 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
     }
   }
   return unsupported(node, context, `expression ${ts.SyntaxKind[node.kind] ?? node.kind}`);
+}
+
+function entityCloneSpreadSource(node: ts.ObjectLiteralExpression): ts.Expression | undefined {
+  if (node.properties.length !== 1 || !ts.isSpreadAssignment(node.properties[0]!)) return undefined;
+  const normalizedSource = node.getSourceFile().fileName.split(path.sep).join('/');
+  if (!normalizedSource.endsWith('/upstream/packages/entity/src/clone.ts')) return undefined;
+  const owner = ts.findAncestor(node.parent, (ancestor): ancestor is ts.FunctionDeclaration =>
+    ts.isFunctionDeclaration(ancestor),
+  );
+  return owner?.name?.text === 'cloneEntity' ? node.properties[0].expression : undefined;
 }
 
 function symbolIteratorPresenceProbe(node: ts.BinaryExpression, context: LoweringContext): ts.Expression | undefined {

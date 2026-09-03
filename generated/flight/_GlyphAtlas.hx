@@ -33,7 +33,7 @@ import flight.types.TextureSource;
 #if !flight_struct_typedef
 @:allow(flight._GlyphAtlas)
 @:structInit
-private class EntityShapeL12C10__glyphRasterizerBackend {
+private class EntityShapeL12C23__glyphRasterizerBackend {
   public var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -43,7 +43,7 @@ private class EntityShapeL12C10__glyphRasterizerBackend {
   }
 }
 #else
-private typedef EntityShapeL12C10__glyphRasterizerBackend = { var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL12C23__glyphRasterizerBackend = { var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 @:noCompletion
@@ -386,7 +386,7 @@ class _GlyphAtlas {
       _Runtime.fill(pixels, 255.0, 0, null, 1);
       return cast { advance: _Runtime.addNumbers(width, HxMath.max(1.0, HxMath.round((size * 0.1)))), bearingX: 0.0, bearingY: height, height: height, pixels: pixels, width: width };
       return cast _Runtime.UNDEFINED;
-    } } : EntityShapeL12C10__glyphRasterizerBackend) : Dynamic)) : EntityShapeL12C10__glyphRasterizerBackend);
+    } } : EntityShapeL12C23__glyphRasterizerBackend) : Dynamic)) : EntityShapeL12C23__glyphRasterizerBackend);
     return cast null;
   }
 

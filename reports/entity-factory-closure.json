@@ -8016,13 +8016,10 @@
         "fields": [],
         "kind": "object"
       },
-      "blockers": [
-        "generic-entity-destination",
-        "spread-construction"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "generic-entity",
+        "kind": "local-entity",
         "route": "contextual",
         "type": "Type"
       },
@@ -8031,9 +8028,11 @@
         "name": "cloneEntity"
       },
       "line": 12,
-      "normalizations": [],
+      "normalizations": [
+        "runtime-class-clone"
+      ],
       "source": "upstream/packages/entity/src/clone.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -15409,14 +15408,13 @@
         "fields": [],
         "kind": "other"
       },
-      "blockers": [
-        "generic-entity-destination",
-        "non-object-construction"
-      ],
+      "blockers": [],
       "column": 24,
       "destination": {
-        "kind": "generic-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/midi/src/midiSubscription.ts:131:24",
+        "schemaName": "EntityShapeL131C24",
         "type": "Subscription"
       },
       "factory": {
@@ -15424,9 +15422,12 @@
         "name": "createMidiSubscription"
       },
       "line": 131,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class",
+        "forwarded-construction"
+      ],
       "source": "upstream/packages/midi/src/midiSubscription.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -15516,14 +15517,13 @@
         "fields": [],
         "kind": "other"
       },
-      "blockers": [
-        "generic-entity-destination",
-        "non-object-construction"
-      ],
+      "blockers": [],
       "column": 24,
       "destination": {
-        "kind": "generic-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/notification/src/notification.ts:314:24",
+        "schemaName": "EntityShapeL314C24",
         "type": "TSubscription"
       },
       "factory": {
@@ -15531,9 +15531,12 @@
         "name": "createNotificationSubscription"
       },
       "line": 314,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class",
+        "forwarded-construction"
+      ],
       "source": "upstream/packages/notification/src/notification.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -16345,14 +16348,13 @@
         "fields": [],
         "kind": "other"
       },
-      "blockers": [
-        "non-object-construction",
-        "structural-entity-destination"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "structural-entity",
+        "kind": "local-entity",
         "route": "contextual",
+        "schemaId": "synthetic-entity:upstream/packages/scene2d-wgpu/src/wgpuRendererData.ts:15:10",
+        "schemaName": "EntityShapeL15C10",
         "type": "T & RendererData"
       },
       "factory": {
@@ -16360,9 +16362,12 @@
         "name": "createWgpuRendererData"
       },
       "line": 15,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class",
+        "forwarded-construction"
+      ],
       "source": "upstream/packages/scene2d-wgpu/src/wgpuRendererData.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -17602,18 +17607,18 @@
   ],
   "summary": {
     "bareEntityCalls": 0,
-    "blockedEntityCalls": 4,
+    "blockedEntityCalls": 0,
     "calls": 368,
     "exactEntityCalls": 178,
     "exactEntitySchemas": 143,
     "exactNonEntityCalls": 17,
-    "genericEntityCalls": 3,
-    "localEntityCalls": 169,
+    "genericEntityCalls": 0,
+    "localEntityCalls": 173,
     "normalizedFieldOrderCalls": 24,
     "normalizedMissingFieldCalls": 9,
     "normalizedSpreadProjectionCalls": 17,
-    "readyEntityCalls": 347,
-    "structuralEntityCalls": 1,
+    "readyEntityCalls": 351,
+    "structuralEntityCalls": 0,
     "unresolvedCalls": 0
   },
   "upstreamCommit": "98a7a58a934f55555a561a308cc23c1363c45652"

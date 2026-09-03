@@ -61,6 +61,54 @@ typedef MidiAttach__midiSubscription<Arguments> = (Arguments->Void)->flight._int
 
 typedef MidiSubscriptionRuntime__midiSubscription = { var attachment:Null<MidiEventAttachment>; var attaching:Null<flight._internal._Promise<MidiSubscriptionAttachOutcome>>; var disposeCompleted:Bool; var disposed:Bool; var generation:Float; var ownerSubscriptions:Null<flight._internal._Set<Entity>>; };
 
+#if !flight_struct_typedef
+@:allow(flight._Midi)
+@:structInit
+private class EntityShapeL68C33__midiSubscription {
+  public var onMidiAccessStateChange:Signal<MidiPort->Void>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(onMidiAccessStateChange:Signal<MidiPort->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onMidiAccessStateChange = onMidiAccessStateChange;
+  }
+}
+#else
+private typedef EntityShapeL68C33__midiSubscription = { var onMidiAccessStateChange:Signal<MidiPort->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Midi)
+@:structInit
+private class EntityShapeL72C33__midiSubscription {
+  public var onMidiInputMessage:Signal<MidiInputMessage->Void>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(onMidiInputMessage:Signal<MidiInputMessage->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onMidiInputMessage = onMidiInputMessage;
+  }
+}
+#else
+private typedef EntityShapeL72C33__midiSubscription = { var onMidiInputMessage:Signal<MidiInputMessage->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Midi)
+@:structInit
+private class EntityShapeL76C33__midiSubscription {
+  public var onMidiPortStateChange:Signal<MidiPort->Void>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(onMidiPortStateChange:Signal<MidiPort->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onMidiPortStateChange = onMidiPortStateChange;
+  }
+}
+#else
+private typedef EntityShapeL76C33__midiSubscription = { var onMidiPortStateChange:Signal<MidiPort->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
 @:noCompletion
 class _Midi {
   @:allow(flight)
@@ -749,17 +797,17 @@ class _Midi {
   }
 
   public static function createMidiAccessStateSubscription():MidiAccessStateSubscription {
-    return cast (cast (cast _Midi.createMidiSubscription__midiSubscription : { var onMidiAccessStateChange:Signal<MidiPort->Void>; }->MidiAccessStateSubscription)(({ final __callArgument179:Dynamic = { onMidiAccessStateChange: (cast (cast createSignal : Void->Signal<MidiPort->Void>)() : Signal<MidiPort->Void>) }; __callArgument179; })) : MidiAccessStateSubscription);
+    return cast (cast (cast _Midi.createMidiSubscription__midiSubscription : { var onMidiAccessStateChange:Signal<MidiPort->Void>; }->MidiAccessStateSubscription)(({ final __callArgument179:Dynamic = ({ onMidiAccessStateChange: (cast (cast createSignal : Void->Signal<MidiPort->Void>)() : Signal<MidiPort->Void>) } : EntityShapeL68C33__midiSubscription); __callArgument179; })) : MidiAccessStateSubscription);
     return cast null;
   }
 
   public static function createMidiInputMessageSubscription():MidiInputMessageSubscription {
-    return cast (cast _Midi.createMidiSubscription__midiSubscription((cast { onMidiInputMessage: (cast createSignal() : Signal<MidiInputMessage->Void>) } : Dynamic)) : MidiInputMessageSubscription);
+    return cast (cast _Midi.createMidiSubscription__midiSubscription((cast ({ onMidiInputMessage: (cast createSignal() : Signal<MidiInputMessage->Void>) } : EntityShapeL72C33__midiSubscription) : Dynamic)) : MidiInputMessageSubscription);
     return cast null;
   }
 
   public static function createMidiPortStateSubscription():MidiPortStateSubscription {
-    return cast (cast (cast _Midi.createMidiSubscription__midiSubscription : { var onMidiPortStateChange:Signal<MidiPort->Void>; }->MidiPortStateSubscription)(({ final __callArgument181:Dynamic = { onMidiPortStateChange: (cast (cast createSignal : Void->Signal<MidiPort->Void>)() : Signal<MidiPort->Void>) }; __callArgument181; })) : MidiPortStateSubscription);
+    return cast (cast (cast _Midi.createMidiSubscription__midiSubscription : { var onMidiPortStateChange:Signal<MidiPort->Void>; }->MidiPortStateSubscription)(({ final __callArgument181:Dynamic = ({ onMidiPortStateChange: (cast (cast createSignal : Void->Signal<MidiPort->Void>)() : Signal<MidiPort->Void>) } : EntityShapeL76C33__midiSubscription); __callArgument181; })) : MidiPortStateSubscription);
     return cast null;
   }
 

@@ -280,7 +280,7 @@ typedef GlRichTextData__glRichText = { >RendererData, var surface:Null<Raster2DS
 #if !flight_struct_typedef
 @:allow(flight._Scene2DGl)
 @:structInit
-private class EntityShapeL43C10__glRichText {
+private class EntityShapeL43C23__glRichText {
   public var surface:flight._internal._Any;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -290,7 +290,7 @@ private class EntityShapeL43C10__glRichText {
   }
 }
 #else
-private typedef EntityShapeL43C10__glRichText = { var surface:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL43C23__glRichText = { var surface:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef GlScale9ShapeData__glScale9Shape = { >RendererData, var lastH:Float; var lastScaleX:Float; var lastScaleY:Float; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var surface:Null<Raster2DSurface>; };
@@ -298,7 +298,7 @@ typedef GlScale9ShapeData__glScale9Shape = { >RendererData, var lastH:Float; var
 #if !flight_struct_typedef
 @:allow(flight._Scene2DGl)
 @:structInit
-private class EntityShapeL50C10__glScale9Shape {
+private class EntityShapeL50C23__glScale9Shape {
   public var lastH:Float;
   public var lastScaleX:Float;
   public var lastScaleY:Float;
@@ -320,13 +320,13 @@ private class EntityShapeL50C10__glScale9Shape {
   }
 }
 #else
-private typedef EntityShapeL50C10__glScale9Shape = { var lastH:Float; var lastScaleX:Float; var lastScaleY:Float; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var surface:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL50C23__glScale9Shape = { var lastH:Float; var lastScaleX:Float; var lastScaleY:Float; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var surface:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._Scene2DGl)
 @:structInit
-private class EntityShapeL28C10__glShapeData {
+private class EntityShapeL28C23__glShapeData {
   public var surface:flight._internal._Any;
   public var lastContentId:Float;
   public var lastPixelRatio:Float;
@@ -348,7 +348,7 @@ private class EntityShapeL28C10__glShapeData {
   }
 }
 #else
-private typedef EntityShapeL28C10__glShapeData = { var surface:flight._internal._Any; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL28C23__glShapeData = { var surface:flight._internal._Any; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef GlTextLabelData__glTextLabel = { >RendererData, var surface:Null<Raster2DSurface>; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; };
@@ -356,7 +356,7 @@ typedef GlTextLabelData__glTextLabel = { >RendererData, var surface:Null<Raster2
 #if !flight_struct_typedef
 @:allow(flight._Scene2DGl)
 @:structInit
-private class EntityShapeL50C10__glTextLabel {
+private class EntityShapeL50C23__glTextLabel {
   public var surface:flight._internal._Any;
   public var lastContentId:Float;
   public var lastPixelRatio:Float;
@@ -374,7 +374,7 @@ private class EntityShapeL50C10__glTextLabel {
   }
 }
 #else
-private typedef EntityShapeL50C10__glTextLabel = { var surface:flight._internal._Any; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL50C23__glTextLabel = { var surface:flight._internal._Any; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef GlVelocityProgram__glVelocity = { var program:flight._internal.dom.WebGLProgram; var quadBuffer:flight._internal.dom.WebGLBuffer; var locCorner:Float; var locClipRect:flight._internal.dom.WebGLUniformLocation; var locVelocity:flight._internal.dom.WebGLUniformLocation; };
@@ -2457,7 +2457,7 @@ class _Scene2DGl {
   @:allow(flight)
   @:keep
   private static function createGlRichTextData(_state:GlRenderState, _source:Renderable):RendererData {
-    return cast (cast createEntity(({ final __callArgument817:Dynamic = ({ surface: null } : EntityShapeL43C10__glRichText); __callArgument817; })) : EntityShapeL43C10__glRichText);
+    return cast (cast createEntity(({ final __callArgument817:Dynamic = ({ surface: null } : EntityShapeL43C23__glRichText); __callArgument817; })) : EntityShapeL43C23__glRichText);
     return cast null;
   }
 
@@ -2696,7 +2696,7 @@ class _Scene2DGl {
   @:allow(flight)
   @:keep
   private static function createGlScale9ShapeData(_state:GlRenderState, _source:Renderable):Null<RendererData> {
-    return cast (cast createEntity(({ final __callArgument881:Dynamic = ({ lastH: 0.0, lastScaleX: -1.0, lastScaleY: -1.0, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, surface: null } : EntityShapeL50C10__glScale9Shape); __callArgument881; })) : EntityShapeL50C10__glScale9Shape);
+    return cast (cast createEntity(({ final __callArgument881:Dynamic = ({ lastH: 0.0, lastScaleX: -1.0, lastScaleY: -1.0, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, surface: null } : EntityShapeL50C23__glScale9Shape); __callArgument881; })) : EntityShapeL50C23__glScale9Shape);
     return cast null;
   }
 
@@ -2855,7 +2855,7 @@ class _Scene2DGl {
   @:allow(flight)
   @:keep
   private static function createGlShapeData(_state:GlRenderState, _source:Renderable):Null<RendererData> {
-    return cast (cast createEntity(({ final __callArgument965:Dynamic = ({ surface: null, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, lastH: 0.0, meshVersion: -1.0, meshes: null } : EntityShapeL28C10__glShapeData); __callArgument965; })) : EntityShapeL28C10__glShapeData);
+    return cast (cast createEntity(({ final __callArgument965:Dynamic = ({ surface: null, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, lastH: 0.0, meshVersion: -1.0, meshes: null } : EntityShapeL28C23__glShapeData); __callArgument965; })) : EntityShapeL28C23__glShapeData);
     return cast null;
   }
 
@@ -3129,7 +3129,7 @@ class _Scene2DGl {
   }
 
   public static function createGlTextLabelData__glTextLabel(_state:GlRenderState, _source:Renderable):RendererData {
-    return cast (cast createEntity(({ final __callArgument1076:Dynamic = ({ surface: null, lastContentId: -1.0, lastPixelRatio: 0.0, logW: 0.0, logH: 0.0 } : EntityShapeL50C10__glTextLabel); __callArgument1076; })) : EntityShapeL50C10__glTextLabel);
+    return cast (cast createEntity(({ final __callArgument1076:Dynamic = ({ surface: null, lastContentId: -1.0, lastPixelRatio: 0.0, logW: 0.0, logH: 0.0 } : EntityShapeL50C23__glTextLabel); __callArgument1076; })) : EntityShapeL50C23__glTextLabel);
     return cast null;
   }
 

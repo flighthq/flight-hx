@@ -9,15 +9,15 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | Production createEntity calls | 368 |
 | Exact concrete Entity calls | 178 |
 | Exact concrete Entity schemas | 143 |
-| Constructor-ready Entity calls | 347 |
-| Blocked Entity calls | 4 |
+| Constructor-ready Entity calls | 351 |
+| Blocked Entity calls | 0 |
 | Bare Entity calls | 0 |
-| Generic Entity calls | 3 |
-| Private local Entity classes | 169 |
+| Generic Entity calls | 0 |
+| Private local Entity classes | 173 |
 | Field-order-normalized calls | 24 |
 | Missing-field-initialized calls | 9 |
 | Spread-projected calls | 17 |
-| Structural Entity calls | 1 |
+| Structural Entity calls | 0 |
 | Exact non-Entity calls | 17 |
 | Unresolved calls | 0 |
 
@@ -208,7 +208,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/camera/src/camera.ts:20:10` | `createCamera3D` | `@flighthq/types:interface#Camera3D` | `contextual` | `object` | 6 | ready | — | — |
 | `upstream/packages/connectivity/src/connectivity.ts:50:10` | `createConnectivity` | `@flighthq/types:interface#Connectivity` | `contextual` | `object` | 5 | ready | — | — |
 | `upstream/packages/dialog/src/fileDialog.ts:26:18` | `createFileDialogHandle` | `@flighthq/types:interface#FileDialogHandle` | `contextual` | `object` | 3 | ready | — | — |
-| `upstream/packages/entity/src/clone.ts:12:10` | `cloneEntity` | `generic-entity` | `contextual` | `object` | 0 | blocked | — | `generic-entity-destination`, `spread-construction` |
+| `upstream/packages/entity/src/clone.ts:12:10` | `cloneEntity` | `local-entity` | `contextual` | `object` | 0 | ready | `runtime-class-clone` | — |
 | `upstream/packages/entity/src/host.ts:8:10` | `createHost` | `synthetic-entity:upstream/packages/entity/src/host.ts:8:10` | `contextual` | `object` | 26 | ready | `synthetic-class`, `spread-projection` | — |
 | `upstream/packages/font/src/font.ts:5:10` | `createFont` | `@flighthq/types:interface#Font` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/font/src/glyphOutlineSource.ts:21:10` | `createGlyphRasterizerBackendFromGlyphOutlineSource` | `synthetic-entity:upstream/packages/font/src/glyphOutlineSource.ts:21:10` | `contextual` | `object` | 2 | ready | `synthetic-class` | — |
@@ -467,11 +467,11 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/midi/src/midiAccess.ts:21:18` | `createMidiAccessResource` | `@flighthq/types:interface#MidiAccess` | `returned-variable` | `object` | 0 | ready | — | — |
 | `upstream/packages/midi/src/midiPort.ts:52:16` | `createMidiInputPortResource` | `@flighthq/types:interface#MidiInputPort` | `returned-variable` | `object` | 1 | ready | `spread-projection` | — |
 | `upstream/packages/midi/src/midiPort.ts:61:16` | `createMidiOutputPortResource` | `@flighthq/types:interface#MidiOutputPort` | `returned-variable` | `object` | 1 | ready | `spread-projection` | — |
-| `upstream/packages/midi/src/midiSubscription.ts:131:24` | `createMidiSubscription` | `generic-entity` | `contextual` | `other` | 0 | blocked | — | `generic-entity-destination`, `non-object-construction` |
+| `upstream/packages/midi/src/midiSubscription.ts:131:24` | `createMidiSubscription` | `synthetic-entity:upstream/packages/midi/src/midiSubscription.ts:131:24` | `contextual` | `other` | 0 | ready | `synthetic-class`, `forwarded-construction` | — |
 | `upstream/packages/node/src/viewport.ts:8:10` | `createViewport` | `@flighthq/types:interface#Viewport` | `contextual` | `object` | 5 | ready | — | — |
 | `upstream/packages/notification/src/notification.ts:188:10` | `createNotificationResource` | `@flighthq/types:interface#Notification` | `contextual` | `object` | 3 | ready | — | — |
 | `upstream/packages/notification/src/notification.ts:197:10` | `createScheduledNotificationResource` | `@flighthq/types:interface#ScheduledNotification` | `contextual` | `object` | 3 | ready | — | — |
-| `upstream/packages/notification/src/notification.ts:314:24` | `createNotificationSubscription` | `generic-entity` | `contextual` | `other` | 0 | blocked | — | `generic-entity-destination`, `non-object-construction` |
+| `upstream/packages/notification/src/notification.ts:314:24` | `createNotificationSubscription` | `synthetic-entity:upstream/packages/notification/src/notification.ts:314:24` | `contextual` | `other` | 0 | ready | `synthetic-class`, `forwarded-construction` | — |
 | `upstream/packages/picking/src/pickScene3D.ts:36:10` | `createScene3DHit` | `@flighthq/types:interface#Scene3DHit` | `contextual` | `object` | 12 | ready | — | — |
 | `upstream/packages/power/src/power.ts:108:10` | `createPower` | `@flighthq/types:interface#Power` | `contextual` | `object` | 9 | ready | — | — |
 | `upstream/packages/protocol/src/protocol.ts:24:10` | `createProtocolHandler` | `@flighthq/types:interface#ProtocolHandler` | `contextual` | `object` | 1 | ready | — | — |
@@ -499,7 +499,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/scene2d-gl/src/glShapeData.ts:28:10` | `createGlShapeData` | `synthetic-entity:upstream/packages/scene2d-gl/src/glShapeData.ts:28:10` | `contextual` | `object` | 7 | ready | `synthetic-class` | — |
 | `upstream/packages/scene2d-gl/src/glTextLabel.ts:50:10` | `createGlTextLabelData` | `synthetic-entity:upstream/packages/scene2d-gl/src/glTextLabel.ts:50:10` | `contextual` | `object` | 5 | ready | `synthetic-class` | — |
 | `upstream/packages/scene2d-resources/src/scene2DDocumentImporterRegistry.ts:26:10` | `createScene2DDocumentImporterRegistry` | `@flighthq/types:interface#Scene2DDocumentImporterRegistry` | `contextual` | `object` | 1 | ready | — | — |
-| `upstream/packages/scene2d-wgpu/src/wgpuRendererData.ts:15:10` | `createWgpuRendererData` | `structural-entity` | `contextual` | `other` | 0 | blocked | — | `non-object-construction`, `structural-entity-destination` |
+| `upstream/packages/scene2d-wgpu/src/wgpuRendererData.ts:15:10` | `createWgpuRendererData` | `synthetic-entity:upstream/packages/scene2d-wgpu/src/wgpuRendererData.ts:15:10` | `contextual` | `other` | 0 | ready | `synthetic-class`, `forwarded-construction` | — |
 | `upstream/packages/scene2d/src/scene2d.ts:18:19` | `createScene2D` | `@flighthq/types:interface#Scene2D` | `contextual` | `object` | 6 | ready | — | — |
 | `upstream/packages/scene2d/src/sprite.ts:48:10` | `createSpriteRendererData` | `synthetic-entity:upstream/packages/scene2d/src/sprite.ts:48:10` | `contextual` | `object` | 2 | ready | `synthetic-class` | — |
 | `upstream/packages/scene3d-resources/src/sceneMaterialTextureRegistry.ts:17:10` | `createScene3DMaterialTextureRegistry` | `@flighthq/types:interface#Scene3DMaterialTextureRegistry` | `contextual` | `object` | 2 | ready | — | — |

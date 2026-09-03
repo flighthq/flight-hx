@@ -26,7 +26,7 @@ import flight.types.RectangleLike;
 #if !flight_struct_typedef
 @:allow(flight._Font)
 @:structInit
-private class EntityShapeL21C10__glyphOutlineSource {
+private class EntityShapeL21C23__glyphOutlineSource {
   public var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>;
   public var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
@@ -38,7 +38,7 @@ private class EntityShapeL21C10__glyphOutlineSource {
   }
 }
 #else
-private typedef EntityShapeL21C10__glyphOutlineSource = { var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL21C23__glyphOutlineSource = { var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 @:noCompletion
@@ -338,7 +338,7 @@ class _Font {
     }, rasterize: function(codePoint:Float, options:GlyphRasterizeOptions):Null<GlyphRasterizedBitmap> {
       return cast (cast _Font.rasterizeGlyphOutlineSource__glyphOutlineSource(({ final __callArgument45:Dynamic = source; __callArgument45; }), (cast codePoint : Float), ({ final __callArgument46:Dynamic = options; __callArgument46; })) : Null<GlyphRasterizedBitmap>);
       return cast _Runtime.UNDEFINED;
-    } } : EntityShapeL21C10__glyphOutlineSource); __callArgument49; })) : EntityShapeL21C10__glyphOutlineSource);
+    } } : EntityShapeL21C23__glyphOutlineSource); __callArgument49; })) : EntityShapeL21C23__glyphOutlineSource);
     return cast null;
   }
 

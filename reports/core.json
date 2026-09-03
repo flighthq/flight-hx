@@ -1146,7 +1146,7 @@
       "module": "flight._Encoding"
     },
     {
-      "declarations": 26,
+      "declarations": 25,
       "diagnostics": [],
       "module": "flight._Entity"
     },
@@ -1316,7 +1316,7 @@
       "module": "flight._Mesh"
     },
     {
-      "declarations": 59,
+      "declarations": 62,
       "diagnostics": [],
       "module": "flight._Midi"
     },
@@ -1341,7 +1341,7 @@
       "module": "flight._Node"
     },
     {
-      "declarations": 46,
+      "declarations": 51,
       "diagnostics": [],
       "module": "flight._Notification"
     },
@@ -1491,7 +1491,7 @@
       "module": "flight._Scene2DResources"
     },
     {
-      "declarations": 216,
+      "declarations": 220,
       "diagnostics": [],
       "module": "flight._Scene2DWgpu"
     },
@@ -19858,11 +19858,11 @@
         "byReason": {
           "source-unknown": 10,
           "standard-toolkit-boundary": 4,
-          "unclassified": 3
+          "unclassified": 2
         },
         "module": "flight._Entity",
         "source": "upstream/packages/entity/src/clone.ts",
-        "total": 17
+        "total": 16
       },
       {
         "byReason": {
@@ -22111,11 +22111,12 @@
       {
         "byReason": {
           "source-unknown": 4,
-          "standard-toolkit-boundary": 15
+          "standard-toolkit-boundary": 15,
+          "unclassified": 3
         },
         "module": "flight._Midi",
         "source": "upstream/packages/midi/src/midiSubscription.ts",
-        "total": 19
+        "total": 22
       },
       {
         "byReason": {
@@ -22221,11 +22222,12 @@
       {
         "byReason": {
           "source-unknown": 2,
-          "standard-toolkit-boundary": 16
+          "standard-toolkit-boundary": 16,
+          "unclassified": 5
         },
         "module": "flight._Notification",
         "source": "upstream/packages/notification/src/notification.ts",
-        "total": 18
+        "total": 23
       },
       {
         "byReason": {
@@ -24933,37 +24935,39 @@
       {
         "byReason": {
           "external-toolkit-boundary": 1,
-          "source-null": 4,
+          "source-null": 5,
           "source-undefined": 1,
           "standard-toolkit-boundary": 46,
-          "unclassified": 3
+          "unclassified": 4
         },
         "module": "flight._Scene2DWgpu",
         "source": "upstream/packages/scene2d-wgpu/src/wgpuRichText.ts",
-        "total": 55
+        "total": 57
       },
       {
         "byReason": {
           "external-toolkit-boundary": 1,
-          "source-null": 4,
+          "source-null": 5,
           "source-undefined": 1,
-          "standard-toolkit-boundary": 13
+          "standard-toolkit-boundary": 13,
+          "unclassified": 1
         },
         "module": "flight._Scene2DWgpu",
         "source": "upstream/packages/scene2d-wgpu/src/wgpuScale9Shape.ts",
-        "total": 19
+        "total": 21
       },
       {
         "byReason": {
           "external-toolkit-boundary": 5,
-          "source-never": 32,
-          "source-null": 8,
+          "source-never": 40,
+          "source-null": 10,
           "source-undefined": 5,
-          "standard-toolkit-boundary": 2
+          "standard-toolkit-boundary": 2,
+          "unclassified": 1
         },
         "module": "flight._Scene2DWgpu",
         "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeData.ts",
-        "total": 52
+        "total": 63
       },
       {
         "byReason": {
@@ -25003,13 +25007,14 @@
       {
         "byReason": {
           "external-toolkit-boundary": 1,
-          "source-null": 4,
+          "source-null": 5,
           "source-undefined": 1,
-          "standard-toolkit-boundary": 23
+          "standard-toolkit-boundary": 23,
+          "unclassified": 1
         },
         "module": "flight._Scene2DWgpu",
         "source": "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts",
-        "total": 29
+        "total": 31
       },
       {
         "byReason": {
@@ -29861,16 +29866,16 @@
       "byReason": {
         "external-toolkit-boundary": 609,
         "source-any": 1294,
-        "source-never": 186,
-        "source-null": 272,
+        "source-never": 194,
+        "source-null": 277,
         "source-undefined": 551,
         "source-unknown": 4743,
         "standard-toolkit-boundary": 22029,
-        "unclassified": 783
+        "unclassified": 794
       },
       "checkerKnownUnrepresentable": 0,
       "modules": 1470,
-      "total": 30467
+      "total": 30491
     }
   }
 }

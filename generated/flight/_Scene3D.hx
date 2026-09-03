@@ -158,7 +158,7 @@ import flight.types.Vector3Like;
 #if !flight_struct_typedef
 @:allow(flight._Scene3D)
 @:structInit
-private class EntityShapeL109C22__sceneDocument {
+private class EntityShapeL109C35__sceneDocument {
   public var inverseBindMatrices:flight._internal._Float32Array;
   public var jointMatrices:flight._internal._Float32Array;
   public var joints:Array<Node3D>;
@@ -176,7 +176,7 @@ private class EntityShapeL109C22__sceneDocument {
   }
 }
 #else
-private typedef EntityShapeL109C22__sceneDocument = { var inverseBindMatrices:flight._internal._Float32Array; var jointMatrices:flight._internal._Float32Array; var joints:Array<Node3D>; var names:Null<Array<String>>; var normalMatrices:flight._internal._Float32Array; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL109C35__sceneDocument = { var inverseBindMatrices:flight._internal._Float32Array; var jointMatrices:flight._internal._Float32Array; var joints:Array<Node3D>; var names:Null<Array<String>>; var normalMatrices:flight._internal._Float32Array; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 @:noCompletion
@@ -729,7 +729,7 @@ class _Scene3D {
           j++;
         }
       }
-      skeleton = (cast createEntity(({ final __callArgument143:Dynamic = ({ inverseBindMatrices: inverseBindMatrices, jointMatrices: new flight._internal._Float32Array(_Runtime.multiplyNumbers(_Runtime.field(joints, 'length'), 16.0)), joints: joints, names: ((cast _Runtime.callProperty(names, 'some', cast ([function(name:String, __unused2:Float, __unused3:Array<String>):Bool return ((cast _Runtime.field(name, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>)) : Bool) ? (cast names : Dynamic) : (cast null : Dynamic)), normalMatrices: new flight._internal._Float32Array(_Runtime.multiplyNumbers(_Runtime.field(joints, 'length'), 12.0)) } : EntityShapeL109C22__sceneDocument); __callArgument143; })) : EntityShapeL109C22__sceneDocument);
+      skeleton = (cast createEntity(({ final __callArgument143:Dynamic = ({ inverseBindMatrices: inverseBindMatrices, jointMatrices: new flight._internal._Float32Array(_Runtime.multiplyNumbers(_Runtime.field(joints, 'length'), 16.0)), joints: joints, names: ((cast _Runtime.callProperty(names, 'some', cast ([function(name:String, __unused2:Float, __unused3:Array<String>):Bool return ((cast _Runtime.field(name, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>)) : Bool) ? (cast names : Dynamic) : (cast null : Dynamic)), normalMatrices: new flight._internal._Float32Array(_Runtime.multiplyNumbers(_Runtime.field(joints, 'length'), 12.0)) } : EntityShapeL109C35__sceneDocument); __callArgument143; })) : EntityShapeL109C35__sceneDocument);
       return cast { skeleton: skeleton, skeletonRoot: null };
       return cast _Runtime.UNDEFINED;
     }, _Runtime.UNDEFINED));

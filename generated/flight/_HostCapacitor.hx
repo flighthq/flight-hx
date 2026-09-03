@@ -174,7 +174,7 @@ import flight.types.StatusBarVisibilityBackend;
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
 @:structInit
-private class EntityShapeL38C15__capacitorApp {
+private class EntityShapeL38C28__capacitorApp {
   public var subscribe:(Void->Void)->(Void->Void);
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -184,13 +184,13 @@ private class EntityShapeL38C15__capacitorApp {
   }
 }
 #else
-private typedef EntityShapeL38C15__capacitorApp = { var subscribe:(Void->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL38C28__capacitorApp = { var subscribe:(Void->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
 @:structInit
-private class EntityShapeL46C11__capacitorApp {
+private class EntityShapeL46C24__capacitorApp {
   public var getName:Void->String;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -200,13 +200,13 @@ private class EntityShapeL46C11__capacitorApp {
   }
 }
 #else
-private typedef EntityShapeL46C11__capacitorApp = { var getName:Void->String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL46C24__capacitorApp = { var getName:Void->String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
 @:structInit
-private class EntityShapeL47C14__capacitorApp {
+private class EntityShapeL47C27__capacitorApp {
   public var getVersion:Void->String;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -216,13 +216,13 @@ private class EntityShapeL47C14__capacitorApp {
   }
 }
 #else
-private typedef EntityShapeL47C14__capacitorApp = { var getVersion:Void->String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL47C27__capacitorApp = { var getVersion:Void->String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
 @:structInit
-private class EntityShapeL50C10__capacitorApp {
+private class EntityShapeL50C23__capacitorApp {
   public var hide:{ >Entity, var hideApp:Void->flight._internal._Any; };
   public var quit:{ >Entity, var quit:Void->flight._internal._Any; };
   public var name:AppNameBackend;
@@ -240,13 +240,13 @@ private class EntityShapeL50C10__capacitorApp {
   }
 }
 #else
-private typedef EntityShapeL50C10__capacitorApp = { var hide:{ >Entity, var hideApp:Void->flight._internal._Any; }; var quit:{ >Entity, var quit:Void->flight._internal._Any; }; var name:AppNameBackend; var version:AppVersionBackend; var activate:AppActivateBackend; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL50C23__capacitorApp = { var hide:{ >Entity, var hideApp:Void->flight._internal._Any; }; var quit:{ >Entity, var quit:Void->flight._internal._Any; }; var name:AppNameBackend; var version:AppVersionBackend; var activate:AppActivateBackend; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
 @:structInit
-private class EntityShapeL52C11__capacitorApp {
+private class EntityShapeL52C24__capacitorApp {
   public var hideApp:Void->flight._internal._Any;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -256,13 +256,13 @@ private class EntityShapeL52C11__capacitorApp {
   }
 }
 #else
-private typedef EntityShapeL52C11__capacitorApp = { var hideApp:Void->flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL52C24__capacitorApp = { var hideApp:Void->flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
 @:structInit
-private class EntityShapeL53C11__capacitorApp {
+private class EntityShapeL53C24__capacitorApp {
   public var quit:Void->flight._internal._Any;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -272,7 +272,7 @@ private class EntityShapeL53C11__capacitorApp {
   }
 }
 #else
-private typedef EntityShapeL53C11__capacitorApp = { var quit:Void->flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL53C24__capacitorApp = { var quit:Void->flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef CapacitorClipboardBackend__capacitorClipboard = { >ClipboardImageBackend, >ClipboardTextBackend, };
@@ -280,7 +280,7 @@ typedef CapacitorClipboardBackend__capacitorClipboard = { >ClipboardImageBackend
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
 @:structInit
-private class EntityShapeL15C10__capacitorClipboard {
+private class EntityShapeL15C23__capacitorClipboard {
   public var readText:Void->flight._internal._Promise<String>;
   public var writeText:String->flight._internal._Promise<Bool>;
   public var hasText:Void->flight._internal._Promise<Bool>;
@@ -302,7 +302,7 @@ private class EntityShapeL15C10__capacitorClipboard {
   }
 }
 #else
-private typedef EntityShapeL15C10__capacitorClipboard = { var readText:Void->flight._internal._Promise<String>; var writeText:String->flight._internal._Promise<Bool>; var hasText:Void->flight._internal._Promise<Bool>; var readImage:Void->flight._internal._Promise<String>; var writeImage:String->flight._internal._Promise<Bool>; var hasImage:Void->flight._internal._Promise<Bool>; var clear:Void->flight._internal._Promise<Bool>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL15C23__capacitorClipboard = { var readText:Void->flight._internal._Promise<String>; var writeText:String->flight._internal._Promise<Bool>; var hasText:Void->flight._internal._Promise<Bool>; var readImage:Void->flight._internal._Promise<String>; var writeImage:String->flight._internal._Promise<Bool>; var hasImage:Void->flight._internal._Promise<Bool>; var clear:Void->flight._internal._Promise<Bool>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef CapacitorConnectivityBackend__capacitorConnectivity = { >ConnectivityStatusBackend, >ConnectivityChangeBackend, };
@@ -310,7 +310,7 @@ typedef CapacitorConnectivityBackend__capacitorConnectivity = { >ConnectivitySta
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
 @:structInit
-private class EntityShapeL70C10__capacitorConnectivity {
+private class EntityShapeL70C23__capacitorConnectivity {
   public var destroy:Void->Void;
   public var getStatus:ConnectivityStatus->ConnectivityStatus;
   public var subscribe:(Void->Void)->Null<Void->Void>;
@@ -324,13 +324,13 @@ private class EntityShapeL70C10__capacitorConnectivity {
   }
 }
 #else
-private typedef EntityShapeL70C10__capacitorConnectivity = { var destroy:Void->Void; var getStatus:ConnectivityStatus->ConnectivityStatus; var subscribe:(Void->Void)->Null<Void->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL70C23__capacitorConnectivity = { var destroy:Void->Void; var getStatus:ConnectivityStatus->ConnectivityStatus; var subscribe:(Void->Void)->Null<Void->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
 @:structInit
-private class EntityShapeL42C10__capacitorDevice {
+private class EntityShapeL42C23__capacitorDevice {
   public var getCapabilities:DeviceCapabilities->DeviceCapabilities;
   public var getDisplayMetrics:DeviceDisplayMetrics->DeviceDisplayMetrics;
   public var getId:Void->String;
@@ -348,13 +348,13 @@ private class EntityShapeL42C10__capacitorDevice {
   }
 }
 #else
-private typedef EntityShapeL42C10__capacitorDevice = { var getCapabilities:DeviceCapabilities->DeviceCapabilities; var getDisplayMetrics:DeviceDisplayMetrics->DeviceDisplayMetrics; var getId:Void->String; var getInfo:DeviceInfo->DeviceInfo; var getSafeAreaInsets:SafeAreaInsets->SafeAreaInsets; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL42C23__capacitorDevice = { var getCapabilities:DeviceCapabilities->DeviceCapabilities; var getDisplayMetrics:DeviceDisplayMetrics->DeviceDisplayMetrics; var getId:Void->String; var getInfo:DeviceInfo->DeviceInfo; var getSafeAreaInsets:SafeAreaInsets->SafeAreaInsets; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
 @:structInit
-private class EntityShapeL8C10__capacitorDialog {
+private class EntityShapeL8C23__capacitorDialog {
   public var message:MessageDialogOptions->flight._internal._Promise<{ var buttonIndex:Float; var cancelled:Bool; var checkboxChecked:Bool; }>;
   public var confirm:MessageDialogOptions->flight._internal._Promise<Bool>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
@@ -366,13 +366,13 @@ private class EntityShapeL8C10__capacitorDialog {
   }
 }
 #else
-private typedef EntityShapeL8C10__capacitorDialog = { var message:MessageDialogOptions->flight._internal._Promise<{ var buttonIndex:Float; var cancelled:Bool; var checkboxChecked:Bool; }>; var confirm:MessageDialogOptions->flight._internal._Promise<Bool>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL8C23__capacitorDialog = { var message:MessageDialogOptions->flight._internal._Promise<{ var buttonIndex:Float; var cancelled:Bool; var checkboxChecked:Bool; }>; var confirm:MessageDialogOptions->flight._internal._Promise<Bool>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
 @:structInit
-private class EntityShapeL31C10__capacitorDialog {
+private class EntityShapeL31C23__capacitorDialog {
   public var prompt:PromptDialogOptions->flight._internal._Promise<Null<String>>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -382,13 +382,13 @@ private class EntityShapeL31C10__capacitorDialog {
   }
 }
 #else
-private typedef EntityShapeL31C10__capacitorDialog = { var prompt:PromptDialogOptions->flight._internal._Promise<Null<String>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL31C23__capacitorDialog = { var prompt:PromptDialogOptions->flight._internal._Promise<Null<String>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
 @:structInit
-private class EntityShapeL14C10__capacitorFileSystem {
+private class EntityShapeL14C23__capacitorFileSystem {
   public var readTextFile:String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Null<String>>;
   public var writeTextFile:String->String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>;
   public var readBinaryFile:String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Null<flight._internal._UInt8Array>>;
@@ -424,13 +424,13 @@ private class EntityShapeL14C10__capacitorFileSystem {
   }
 }
 #else
-private typedef EntityShapeL14C10__capacitorFileSystem = { var readTextFile:String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Null<String>>; var writeTextFile:String->String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>; var readBinaryFile:String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Null<flight._internal._UInt8Array>>; var writeBinaryFile:String->flight._internal._UInt8Array->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>; var fileExists:String->flight._internal._Promise<Bool>; var directoryExists:String->flight._internal._Promise<Bool>; var removeFile:String->flight._internal._Promise<Bool>; var removeDirectory:String->Null<Bool>->flight._internal._Promise<Bool>; var makeDirectory:String->flight._internal._Promise<Bool>; var readDirectory:String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Array<FileEntry>>; var statFile:String->flight._internal._Promise<Null<FileStat>>; var rename:String->String->flight._internal._Promise<Bool>; var copy:String->String->flight._internal._Promise<Bool>; var appendTextFile:String->String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL14C23__capacitorFileSystem = { var readTextFile:String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Null<String>>; var writeTextFile:String->String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>; var readBinaryFile:String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Null<flight._internal._UInt8Array>>; var writeBinaryFile:String->flight._internal._UInt8Array->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>; var fileExists:String->flight._internal._Promise<Bool>; var directoryExists:String->flight._internal._Promise<Bool>; var removeFile:String->flight._internal._Promise<Bool>; var removeDirectory:String->Null<Bool>->flight._internal._Promise<Bool>; var makeDirectory:String->flight._internal._Promise<Bool>; var readDirectory:String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Array<FileEntry>>; var statFile:String->flight._internal._Promise<Null<FileStat>>; var rename:String->String->flight._internal._Promise<Bool>; var copy:String->String->flight._internal._Promise<Bool>; var appendTextFile:String->String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
 @:structInit
-private class EntityShapeL24C10__capacitorGeolocation {
+private class EntityShapeL24C23__capacitorGeolocation {
   public var getCurrentPosition:GeolocationRequestOptions->flight._internal._Promise<Null<GeoPosition>>;
   public var getCurrentPositionResult:GeolocationRequestOptions->flight._internal._Promise<GeoPositionResult>;
   public var isAvailable:Void->Bool;
@@ -450,7 +450,7 @@ private class EntityShapeL24C10__capacitorGeolocation {
   }
 }
 #else
-private typedef EntityShapeL24C10__capacitorGeolocation = { var getCurrentPosition:GeolocationRequestOptions->flight._internal._Promise<Null<GeoPosition>>; var getCurrentPositionResult:GeolocationRequestOptions->flight._internal._Promise<GeoPositionResult>; var isAvailable:Void->Bool; var watchPosition:(GeoPosition->Void)->GeolocationRequestOptions->Null<GeolocationErrorReason->Void>->Float; var clearWatch:Float->Void; var promptForAccess:Void->flight._internal._Promise<{ var reason:String; }>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL24C23__capacitorGeolocation = { var getCurrentPosition:GeolocationRequestOptions->flight._internal._Promise<Null<GeoPosition>>; var getCurrentPositionResult:GeolocationRequestOptions->flight._internal._Promise<GeoPositionResult>; var isAvailable:Void->Bool; var watchPosition:(GeoPosition->Void)->GeolocationRequestOptions->Null<GeolocationErrorReason->Void>->Float; var clearWatch:Float->Void; var promptForAccess:Void->flight._internal._Promise<{ var reason:String; }>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef OmitRuntime__capacitorKeyboard<T> = flight._internal._Omit<T, Dynamic>;
@@ -458,7 +458,7 @@ typedef OmitRuntime__capacitorKeyboard<T> = flight._internal._Omit<T, Dynamic>;
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
 @:structInit
-private class EntityShapeL32C10__capacitorKeyboard {
+private class EntityShapeL32C23__capacitorKeyboard {
   public var setAccessoryBarVisible:Bool->flight._internal._Promise<SoftKeyboardSetterResult>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -468,13 +468,13 @@ private class EntityShapeL32C10__capacitorKeyboard {
   }
 }
 #else
-private typedef EntityShapeL32C10__capacitorKeyboard = { var setAccessoryBarVisible:Bool->flight._internal._Promise<SoftKeyboardSetterResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL32C23__capacitorKeyboard = { var setAccessoryBarVisible:Bool->flight._internal._Promise<SoftKeyboardSetterResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
 @:structInit
-private class EntityShapeL46C10__capacitorKeyboard {
+private class EntityShapeL46C23__capacitorKeyboard {
   public var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -484,13 +484,13 @@ private class EntityShapeL46C10__capacitorKeyboard {
   }
 }
 #else
-private typedef EntityShapeL46C10__capacitorKeyboard = { var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL46C23__capacitorKeyboard = { var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
 @:structInit
-private class EntityShapeL83C10__capacitorKeyboard {
+private class EntityShapeL83C23__capacitorKeyboard {
   public var getInfo:SoftKeyboardInfo->SoftKeyboardInfo;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -500,13 +500,13 @@ private class EntityShapeL83C10__capacitorKeyboard {
   }
 }
 #else
-private typedef EntityShapeL83C10__capacitorKeyboard = { var getInfo:SoftKeyboardInfo->SoftKeyboardInfo; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL83C23__capacitorKeyboard = { var getInfo:SoftKeyboardInfo->SoftKeyboardInfo; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
 @:structInit
-private class EntityShapeL98C10__capacitorKeyboard {
+private class EntityShapeL98C23__capacitorKeyboard {
   public var setResizeMode:String->flight._internal._Promise<SoftKeyboardSetterResult>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -516,13 +516,13 @@ private class EntityShapeL98C10__capacitorKeyboard {
   }
 }
 #else
-private typedef EntityShapeL98C10__capacitorKeyboard = { var setResizeMode:String->flight._internal._Promise<SoftKeyboardSetterResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL98C23__capacitorKeyboard = { var setResizeMode:String->flight._internal._Promise<SoftKeyboardSetterResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
 @:structInit
-private class EntityShapeL113C10__capacitorKeyboard {
+private class EntityShapeL113C23__capacitorKeyboard {
   public var setScrollAssistEnabled:Bool->flight._internal._Promise<SoftKeyboardSetterResult>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -532,13 +532,13 @@ private class EntityShapeL113C10__capacitorKeyboard {
   }
 }
 #else
-private typedef EntityShapeL113C10__capacitorKeyboard = { var setScrollAssistEnabled:Bool->flight._internal._Promise<SoftKeyboardSetterResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL113C23__capacitorKeyboard = { var setScrollAssistEnabled:Bool->flight._internal._Promise<SoftKeyboardSetterResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
 @:structInit
-private class EntityShapeL126C10__capacitorKeyboard {
+private class EntityShapeL126C23__capacitorKeyboard {
   public var setStyle:String->flight._internal._Promise<SoftKeyboardSetterResult>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -548,13 +548,13 @@ private class EntityShapeL126C10__capacitorKeyboard {
   }
 }
 #else
-private typedef EntityShapeL126C10__capacitorKeyboard = { var setStyle:String->flight._internal._Promise<SoftKeyboardSetterResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL126C23__capacitorKeyboard = { var setStyle:String->flight._internal._Promise<SoftKeyboardSetterResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
 @:structInit
-private class EntityShapeL141C10__capacitorKeyboard {
+private class EntityShapeL141C23__capacitorKeyboard {
   public var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>;
   public var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
@@ -566,13 +566,13 @@ private class EntityShapeL141C10__capacitorKeyboard {
   }
 }
 #else
-private typedef EntityShapeL141C10__capacitorKeyboard = { var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL141C23__capacitorKeyboard = { var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
 @:structInit
-private class EntityShapeL10C11__capacitorProtocol {
+private class EntityShapeL10C24__capacitorProtocol {
   public var subscribe:(String->Void)->(Void->Void);
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -582,7 +582,7 @@ private class EntityShapeL10C11__capacitorProtocol {
   }
 }
 #else
-private typedef EntityShapeL10C11__capacitorProtocol = { var subscribe:(String->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL10C24__capacitorProtocol = { var subscribe:(String->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef CapacitorHost__capacitorRegister<Profile> = flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<Host, HasClipboardImage>, HasClipboardText>, HasConnectivityChange>, HasConnectivityStatus>, HasDialogMessage>, HasDialogPrompt>, HasInputHaptics>, HasNotificationAction>, HasNotificationClick>, HasNotificationDelivery>, HasNotificationLifecycle>, HasNotificationPermission>, HasNotificationScheduling>, HasSoftKeyboardAccessoryBar>, HasSoftKeyboardChange>, HasSoftKeyboardInfo>, HasSoftKeyboardResizeModeWrite>, HasSoftKeyboardScrollAssist>, HasSoftKeyboardStyle>, HasSoftKeyboardVisibility>, HasStorageFileSystem>, HasUiStatusBarColor>, HasUiStatusBarInfo>, HasUiStatusBarOverlays>, HasUiStatusBarStyle>, HasUiStatusBarVisibility>, { var app:CapacitorAppCapabilitiesFor<Profile>; var protocol:CapacitorProtocolCapabilities; var share:{ var content:CapacitorShareContentBackend; }; }>;
@@ -590,7 +590,7 @@ typedef CapacitorHost__capacitorRegister<Profile> = flight._internal._Intersecti
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
 @:structInit
-private class EntityShapeL103C10__capacitorRegister {
+private class EntityShapeL103C23__capacitorRegister {
   public var accessibility:{  };
   public var app:CapacitorAppCapabilitiesFor<flight._internal._Any>;
   public var clipboard:{ var image:CapacitorClipboardBackend__capacitorClipboard; var text:CapacitorClipboardBackend__capacitorClipboard; };
@@ -650,13 +650,13 @@ private class EntityShapeL103C10__capacitorRegister {
   }
 }
 #else
-private typedef EntityShapeL103C10__capacitorRegister = { var accessibility:{  }; var app:CapacitorAppCapabilitiesFor<flight._internal._Any>; var clipboard:{ var image:CapacitorClipboardBackend__capacitorClipboard; var text:CapacitorClipboardBackend__capacitorClipboard; }; var connectivity:{ var change:CapacitorConnectivityBackend__capacitorConnectivity; var status:CapacitorConnectivityBackend__capacitorConnectivity; }; var dialog:{ var message:{ >MessageDialogBackend, >Entity, }; var prompt:{ >PromptDialogBackend, >Entity, }; }; var graphics:{  }; var input:{ var haptics:HapticsBackend; var softKeyboardAccessoryBar:{ >SoftKeyboardAccessoryBarBackend, >Entity, }; var softKeyboardChange:{ >SoftKeyboardChangeBackend, >Entity, }; var softKeyboardInfo:{ >SoftKeyboardInfoBackend, >Entity, }; var softKeyboardResizeModeWrite:{ >SoftKeyboardResizeModeWriteBackend, >Entity, }; var softKeyboardScrollAssist:{ >SoftKeyboardScrollAssistBackend, >Entity, }; var softKeyboardStyle:{ >SoftKeyboardStyleBackend, >Entity, }; var softKeyboardVisibility:{ >SoftKeyboardVisibilityBackend, >Entity, }; }; var ipc:{  }; var media:{  }; var menu:{  }; var midi:{  }; var net:{  }; var power:{  }; var protocol:CapacitorProtocolCapabilities; var notification:CapacitorNotificationCapabilities; var shortcut:{  }; var screen:{  }; var share:{ var content:CapacitorShareContentBackend; }; var shell:{  }; var storage:{ var fileSystem:{ >FileSystemBasicBackend, >Entity, }; }; var system:{ var device:{ >DeviceBackend, >Entity, }; }; var text:{  }; var tray:{  }; var ui:{ var statusBarColor:{ >Entity, >StatusBarColorBackend, >StatusBarInfoBackend, >StatusBarOverlaysBackend, >StatusBarStyleBackend, >StatusBarVisibilityBackend, }; var statusBarInfo:{ >Entity, >StatusBarColorBackend, >StatusBarInfoBackend, >StatusBarOverlaysBackend, >StatusBarStyleBackend, >StatusBarVisibilityBackend, }; var statusBarOverlays:{ >Entity, >StatusBarColorBackend, >StatusBarInfoBackend, >StatusBarOverlaysBackend, >StatusBarStyleBackend, >StatusBarVisibilityBackend, }; var statusBarStyle:{ >Entity, >StatusBarColorBackend, >StatusBarInfoBackend, >StatusBarOverlaysBackend, >StatusBarStyleBackend, >StatusBarVisibilityBackend, }; var statusBarVisibility:{ >Entity, >StatusBarColorBackend, >StatusBarInfoBackend, >StatusBarOverlaysBackend, >StatusBarStyleBackend, >StatusBarVisibilityBackend, }; }; var updater:{  }; var window:{  }; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL103C23__capacitorRegister = { var accessibility:{  }; var app:CapacitorAppCapabilitiesFor<flight._internal._Any>; var clipboard:{ var image:CapacitorClipboardBackend__capacitorClipboard; var text:CapacitorClipboardBackend__capacitorClipboard; }; var connectivity:{ var change:CapacitorConnectivityBackend__capacitorConnectivity; var status:CapacitorConnectivityBackend__capacitorConnectivity; }; var dialog:{ var message:{ >MessageDialogBackend, >Entity, }; var prompt:{ >PromptDialogBackend, >Entity, }; }; var graphics:{  }; var input:{ var haptics:HapticsBackend; var softKeyboardAccessoryBar:{ >SoftKeyboardAccessoryBarBackend, >Entity, }; var softKeyboardChange:{ >SoftKeyboardChangeBackend, >Entity, }; var softKeyboardInfo:{ >SoftKeyboardInfoBackend, >Entity, }; var softKeyboardResizeModeWrite:{ >SoftKeyboardResizeModeWriteBackend, >Entity, }; var softKeyboardScrollAssist:{ >SoftKeyboardScrollAssistBackend, >Entity, }; var softKeyboardStyle:{ >SoftKeyboardStyleBackend, >Entity, }; var softKeyboardVisibility:{ >SoftKeyboardVisibilityBackend, >Entity, }; }; var ipc:{  }; var media:{  }; var menu:{  }; var midi:{  }; var net:{  }; var power:{  }; var protocol:CapacitorProtocolCapabilities; var notification:CapacitorNotificationCapabilities; var shortcut:{  }; var screen:{  }; var share:{ var content:CapacitorShareContentBackend; }; var shell:{  }; var storage:{ var fileSystem:{ >FileSystemBasicBackend, >Entity, }; }; var system:{ var device:{ >DeviceBackend, >Entity, }; }; var text:{  }; var tray:{  }; var ui:{ var statusBarColor:{ >Entity, >StatusBarColorBackend, >StatusBarInfoBackend, >StatusBarOverlaysBackend, >StatusBarStyleBackend, >StatusBarVisibilityBackend, }; var statusBarInfo:{ >Entity, >StatusBarColorBackend, >StatusBarInfoBackend, >StatusBarOverlaysBackend, >StatusBarStyleBackend, >StatusBarVisibilityBackend, }; var statusBarOverlays:{ >Entity, >StatusBarColorBackend, >StatusBarInfoBackend, >StatusBarOverlaysBackend, >StatusBarStyleBackend, >StatusBarVisibilityBackend, }; var statusBarStyle:{ >Entity, >StatusBarColorBackend, >StatusBarInfoBackend, >StatusBarOverlaysBackend, >StatusBarStyleBackend, >StatusBarVisibilityBackend, }; var statusBarVisibility:{ >Entity, >StatusBarColorBackend, >StatusBarInfoBackend, >StatusBarOverlaysBackend, >StatusBarStyleBackend, >StatusBarVisibilityBackend, }; }; var updater:{  }; var window:{  }; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostCapacitor)
 @:structInit
-private class EntityShapeL40C10__capacitorStatusBar {
+private class EntityShapeL40C23__capacitorStatusBar {
   public var getInfo:StatusBarInfo->StatusBarInfo;
   public var setBackgroundColor:Float->Void;
   public var setOverlaysContent:Bool->Void;
@@ -674,7 +674,7 @@ private class EntityShapeL40C10__capacitorStatusBar {
   }
 }
 #else
-private typedef EntityShapeL40C10__capacitorStatusBar = { var getInfo:StatusBarInfo->StatusBarInfo; var setBackgroundColor:Float->Void; var setOverlaysContent:Bool->Void; var setStyle:StatusBarStyle->Void; var setVisible:Bool->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL40C23__capacitorStatusBar = { var getInfo:StatusBarInfo->StatusBarInfo; var setBackgroundColor:Float->Void; var setOverlaysContent:Bool->Void; var setStyle:StatusBarStyle->Void; var setVisible:Bool->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 @:noCompletion
@@ -697,17 +697,17 @@ class _HostCapacitor {
     }));
     common = (cast createEntity((cast ({ activate: (cast createEntity(({ final __callArgument18:Dynamic = ({ subscribe: function(listener:Void->Void):Void->Void return (cast _HostCapacitor.toCapacitorUnsubscribe__capacitorApp((cast capacitor.app : CapacitorAppPlugin).addListener((cast 'appStateChange' : String), ({ final __callArgument16:Dynamic = function(state:{ var isActive:Bool; }):Void {
       if ((cast (cast state : { var isActive:Bool; }).isActive : Bool)) { listener(); }
-    }; __callArgument16; }))) : Void->Void) } : EntityShapeL38C15__capacitorApp); __callArgument18; })) : EntityShapeL38C15__capacitorApp), name: (cast createEntity(({ final __callArgument24:Dynamic = ({ getName: function():String return name } : EntityShapeL46C11__capacitorApp); __callArgument24; })) : EntityShapeL46C11__capacitorApp), version: (cast createEntity(({ final __callArgument26:Dynamic = ({ getVersion: function():String return version } : EntityShapeL47C14__capacitorApp); __callArgument26; })) : EntityShapeL47C14__capacitorApp) } : CapacitorCommonAppCapabilities) : Dynamic)) : CapacitorCommonAppCapabilities);
+    }; __callArgument16; }))) : Void->Void) } : EntityShapeL38C28__capacitorApp); __callArgument18; })) : EntityShapeL38C28__capacitorApp), name: (cast createEntity(({ final __callArgument24:Dynamic = ({ getName: function():String return name } : EntityShapeL46C24__capacitorApp); __callArgument24; })) : EntityShapeL46C24__capacitorApp), version: (cast createEntity(({ final __callArgument26:Dynamic = ({ getVersion: function():String return version } : EntityShapeL47C27__capacitorApp); __callArgument26; })) : EntityShapeL47C27__capacitorApp) } : CapacitorCommonAppCapabilities) : Dynamic)) : CapacitorCommonAppCapabilities);
     if ((cast _Runtime.strictEquals(profile, 'ios') : Bool)) { return cast common; }
     return cast (cast createEntity((cast (#if flight_struct_typedef _Runtime.mergeObjects([common, { hide: (cast createEntity(({ final __callArgument56:Dynamic = ({ hideApp: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast capacitor.app : CapacitorAppPlugin).minimizeApp(), function(__unused1:flight._internal._Any):Void {
 
-    })) } : EntityShapeL52C11__capacitorApp); __callArgument56; })) : EntityShapeL52C11__capacitorApp) }, { quit: (cast createEntity(({ final __callArgument58:Dynamic = ({ quit: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast capacitor.app : CapacitorAppPlugin).exitApp(), function(__unused2:flight._internal._Any):Void {
+    })) } : EntityShapeL52C24__capacitorApp); __callArgument56; })) : EntityShapeL52C24__capacitorApp) }, { quit: (cast createEntity(({ final __callArgument58:Dynamic = ({ quit: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast capacitor.app : CapacitorAppPlugin).exitApp(), function(__unused2:flight._internal._Any):Void {
 
-    })) } : EntityShapeL53C11__capacitorApp); __callArgument58; })) : EntityShapeL53C11__capacitorApp) }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([common, { hide: (cast createEntity(({ final __callArgument56:Dynamic = ({ hideApp: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast capacitor.app : CapacitorAppPlugin).minimizeApp(), function(__unused1:flight._internal._Any):Void {
+    })) } : EntityShapeL53C24__capacitorApp); __callArgument58; })) : EntityShapeL53C24__capacitorApp) }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([common, { hide: (cast createEntity(({ final __callArgument56:Dynamic = ({ hideApp: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast capacitor.app : CapacitorAppPlugin).minimizeApp(), function(__unused1:flight._internal._Any):Void {
 
-    })) } : EntityShapeL52C11__capacitorApp); __callArgument56; })) : EntityShapeL52C11__capacitorApp) }, { quit: (cast createEntity(({ final __callArgument58:Dynamic = ({ quit: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast capacitor.app : CapacitorAppPlugin).exitApp(), function(__unused2:flight._internal._Any):Void {
+    })) } : EntityShapeL52C24__capacitorApp); __callArgument56; })) : EntityShapeL52C24__capacitorApp) }, { quit: (cast createEntity(({ final __callArgument58:Dynamic = ({ quit: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast capacitor.app : CapacitorAppPlugin).exitApp(), function(__unused2:flight._internal._Any):Void {
 
-    })) } : EntityShapeL53C11__capacitorApp); __callArgument58; })) : EntityShapeL53C11__capacitorApp) }]); ({ hide: _Runtime.field(__structInitSource, 'hide'), quit: _Runtime.field(__structInitSource, 'quit'), name: _Runtime.field(__structInitSource, 'name'), version: _Runtime.field(__structInitSource, 'version'), activate: _Runtime.field(__structInitSource, 'activate') } : EntityShapeL50C10__capacitorApp); }) #end) : Dynamic)) : EntityShapeL50C10__capacitorApp);
+    })) } : EntityShapeL53C24__capacitorApp); __callArgument58; })) : EntityShapeL53C24__capacitorApp) }]); ({ hide: _Runtime.field(__structInitSource, 'hide'), quit: _Runtime.field(__structInitSource, 'quit'), name: _Runtime.field(__structInitSource, 'name'), version: _Runtime.field(__structInitSource, 'version'), activate: _Runtime.field(__structInitSource, 'activate') } : EntityShapeL50C23__capacitorApp); }) #end) : Dynamic)) : EntityShapeL50C23__capacitorApp);
     return cast null;
   }
 
@@ -864,7 +864,7 @@ class _HostCapacitor {
           });
         })
       );
-    } } : EntityShapeL15C10__capacitorClipboard); __callArgument84; })) : EntityShapeL15C10__capacitorClipboard);
+    } } : EntityShapeL15C23__capacitorClipboard); __callArgument84; })) : EntityShapeL15C23__capacitorClipboard);
     return cast null;
   }
 
@@ -941,7 +941,7 @@ class _HostCapacitor {
         ((cast subscribers : flight._internal._Set<Void->Void>).delete_(listener));
       };
       return cast _Runtime.UNDEFINED;
-    } } : EntityShapeL70C10__capacitorConnectivity); __callArgument138; })) : EntityShapeL70C10__capacitorConnectivity);
+    } } : EntityShapeL70C23__capacitorConnectivity); __callArgument138; })) : EntityShapeL70C23__capacitorConnectivity);
     return cast null;
   }
 
@@ -1042,7 +1042,7 @@ class _HostCapacitor {
       (out.left = cast (0.0 : Float));
       return cast out;
       return cast _Runtime.UNDEFINED;
-    } } : EntityShapeL42C10__capacitorDevice); __callArgument170; })) : EntityShapeL42C10__capacitorDevice);
+    } } : EntityShapeL42C23__capacitorDevice); __callArgument170; })) : EntityShapeL42C23__capacitorDevice);
     return cast null;
   }
 
@@ -1095,7 +1095,7 @@ class _HostCapacitor {
           });
         })
       );
-    } } : EntityShapeL8C10__capacitorDialog) : Dynamic)) : EntityShapeL8C10__capacitorDialog);
+    } } : EntityShapeL8C23__capacitorDialog) : Dynamic)) : EntityShapeL8C23__capacitorDialog);
     return cast null;
   }
 
@@ -1122,7 +1122,7 @@ class _HostCapacitor {
           });
         })
       );
-    } } : EntityShapeL31C10__capacitorDialog) : Dynamic)) : EntityShapeL31C10__capacitorDialog);
+    } } : EntityShapeL31C23__capacitorDialog) : Dynamic)) : EntityShapeL31C23__capacitorDialog);
     return cast null;
   }
 
@@ -1394,7 +1394,7 @@ class _HostCapacitor {
           });
         })
       );
-    } } : EntityShapeL14C10__capacitorFileSystem); __callArgument328; })) : EntityShapeL14C10__capacitorFileSystem);
+    } } : EntityShapeL14C23__capacitorFileSystem); __callArgument328; })) : EntityShapeL14C23__capacitorFileSystem);
     return cast null;
   }
 
@@ -1558,7 +1558,7 @@ class _HostCapacitor {
           });
         })
       );
-    } } : EntityShapeL24C10__capacitorGeolocation) : Dynamic)) : EntityShapeL24C10__capacitorGeolocation);
+    } } : EntityShapeL24C23__capacitorGeolocation) : Dynamic)) : EntityShapeL24C23__capacitorGeolocation);
     return cast null;
   }
 
@@ -1643,7 +1643,7 @@ class _HostCapacitor {
           });
         })
       );
-    } } : EntityShapeL32C10__capacitorKeyboard); __callArgument683; })) : EntityShapeL32C10__capacitorKeyboard);
+    } } : EntityShapeL32C23__capacitorKeyboard); __callArgument683; })) : EntityShapeL32C23__capacitorKeyboard);
     return cast null;
   }
 
@@ -1680,7 +1680,7 @@ class _HostCapacitor {
           });
         })
       );
-    } } : EntityShapeL46C10__capacitorKeyboard); __callArgument697; })) : EntityShapeL46C10__capacitorKeyboard);
+    } } : EntityShapeL46C23__capacitorKeyboard); __callArgument697; })) : EntityShapeL46C23__capacitorKeyboard);
     return cast null;
   }
 
@@ -1711,7 +1711,7 @@ class _HostCapacitor {
       (out.width = cast (0.0 : Float));
       return cast out;
       return cast _Runtime.UNDEFINED;
-    } } : EntityShapeL83C10__capacitorKeyboard); __callArgument711; })) : EntityShapeL83C10__capacitorKeyboard);
+    } } : EntityShapeL83C23__capacitorKeyboard); __callArgument711; })) : EntityShapeL83C23__capacitorKeyboard);
     return cast null;
   }
 
@@ -1734,7 +1734,7 @@ class _HostCapacitor {
           });
         })
       );
-    } } : EntityShapeL98C10__capacitorKeyboard); __callArgument717; })) : EntityShapeL98C10__capacitorKeyboard);
+    } } : EntityShapeL98C23__capacitorKeyboard); __callArgument717; })) : EntityShapeL98C23__capacitorKeyboard);
     return cast null;
   }
 
@@ -1757,7 +1757,7 @@ class _HostCapacitor {
           });
         })
       );
-    } } : EntityShapeL113C10__capacitorKeyboard); __callArgument727; })) : EntityShapeL113C10__capacitorKeyboard);
+    } } : EntityShapeL113C23__capacitorKeyboard); __callArgument727; })) : EntityShapeL113C23__capacitorKeyboard);
     return cast null;
   }
 
@@ -1780,7 +1780,7 @@ class _HostCapacitor {
           });
         })
       );
-    } } : EntityShapeL126C10__capacitorKeyboard); __callArgument737; })) : EntityShapeL126C10__capacitorKeyboard);
+    } } : EntityShapeL126C23__capacitorKeyboard); __callArgument737; })) : EntityShapeL126C23__capacitorKeyboard);
     return cast null;
   }
 
@@ -1821,7 +1821,7 @@ class _HostCapacitor {
           });
         })
       );
-    } } : EntityShapeL141C10__capacitorKeyboard); __callArgument747; })) : EntityShapeL141C10__capacitorKeyboard);
+    } } : EntityShapeL141C23__capacitorKeyboard); __callArgument747; })) : EntityShapeL141C23__capacitorKeyboard);
     return cast null;
   }
 
@@ -2356,7 +2356,7 @@ class _HostCapacitor {
     return cast (cast createEntity((cast ({ open: (cast createEntity(({ final __callArgument995:Dynamic = ({ subscribe: function(listener:String->Void):Void->Void {
       return cast (cast _HostCapacitor.toCapacitorUnsubscribe__capacitorProtocol((cast capacitor.app : CapacitorAppPlugin).addListener((cast 'appUrlOpen' : String), ({ final __callArgument993:Dynamic = function(event:{ var url:String; }):Void { listener((cast (cast event : { var url:String; }).url : String)); }; __callArgument993; }))) : Void->Void);
       return cast _Runtime.UNDEFINED;
-    } } : EntityShapeL10C11__capacitorProtocol); __callArgument995; })) : EntityShapeL10C11__capacitorProtocol) } : CapacitorProtocolCapabilities) : Dynamic)) : CapacitorProtocolCapabilities);
+    } } : EntityShapeL10C24__capacitorProtocol); __callArgument995; })) : EntityShapeL10C24__capacitorProtocol) } : CapacitorProtocolCapabilities) : Dynamic)) : CapacitorProtocolCapabilities);
     return cast null;
   }
 
@@ -2391,7 +2391,7 @@ class _HostCapacitor {
     clipboard = (cast createCapacitorClipboardBackend(({ final __callArgument1023:Dynamic = capacitor; __callArgument1023; })) : CapacitorClipboardBackend__capacitorClipboard);
     connectivity = (cast createCapacitorConnectivityBackend(({ final __callArgument1025:Dynamic = capacitor; __callArgument1025; })) : CapacitorConnectivityBackend__capacitorConnectivity);
     statusBar = (cast createCapacitorStatusBarBackend(({ final __callArgument1027:Dynamic = capacitor; __callArgument1027; })) : { >Entity, >StatusBarColorBackend, >StatusBarInfoBackend, >StatusBarOverlaysBackend, >StatusBarStyleBackend, >StatusBarVisibilityBackend, });
-    return cast (cast createEntity((cast ({ accessibility: {  }, app: app, clipboard: { image: clipboard, text: clipboard }, connectivity: { change: connectivity, status: connectivity }, dialog: { message: (cast createCapacitorMessageDialogBackend(({ final __callArgument1059:Dynamic = capacitor; __callArgument1059; })) : { >MessageDialogBackend, >Entity, }), prompt: (cast createCapacitorPromptDialogBackend(({ final __callArgument1061:Dynamic = capacitor; __callArgument1061; })) : { >PromptDialogBackend, >Entity, }) }, graphics: {  }, input: { haptics: (cast createCapacitorHapticsBackend(({ final __callArgument1063:Dynamic = capacitor; __callArgument1063; })) : HapticsBackend), softKeyboardAccessoryBar: (cast createCapacitorSoftKeyboardAccessoryBarBackend(({ final __callArgument1065:Dynamic = capacitor; __callArgument1065; })) : { >SoftKeyboardAccessoryBarBackend, >Entity, }), softKeyboardChange: (cast createCapacitorSoftKeyboardChangeBackend(({ final __callArgument1067:Dynamic = capacitor; __callArgument1067; })) : { >SoftKeyboardChangeBackend, >Entity, }), softKeyboardInfo: (cast createCapacitorSoftKeyboardInfoBackend(({ final __callArgument1069:Dynamic = capacitor; __callArgument1069; })) : { >SoftKeyboardInfoBackend, >Entity, }), softKeyboardResizeModeWrite: (cast createCapacitorSoftKeyboardResizeModeWriteBackend(({ final __callArgument1071:Dynamic = capacitor; __callArgument1071; })) : { >SoftKeyboardResizeModeWriteBackend, >Entity, }), softKeyboardScrollAssist: (cast createCapacitorSoftKeyboardScrollAssistBackend(({ final __callArgument1073:Dynamic = capacitor; __callArgument1073; })) : { >SoftKeyboardScrollAssistBackend, >Entity, }), softKeyboardStyle: (cast createCapacitorSoftKeyboardStyleBackend(({ final __callArgument1075:Dynamic = capacitor; __callArgument1075; })) : { >SoftKeyboardStyleBackend, >Entity, }), softKeyboardVisibility: (cast createCapacitorSoftKeyboardVisibilityBackend(({ final __callArgument1077:Dynamic = capacitor; __callArgument1077; })) : { >SoftKeyboardVisibilityBackend, >Entity, }) }, ipc: {  }, media: {  }, menu: {  }, midi: {  }, net: {  }, power: {  }, protocol: (cast createCapacitorProtocolCapabilities(({ final __callArgument1079:Dynamic = capacitor; __callArgument1079; })) : CapacitorProtocolCapabilities), notification: (cast createCapacitorNotificationCapabilities(({ final __callArgument1081:Dynamic = capacitor; __callArgument1081; })) : CapacitorNotificationCapabilities), shortcut: {  }, screen: {  }, share: { content: (cast createCapacitorShareContentBackend(({ final __callArgument1083:Dynamic = capacitor; __callArgument1083; })) : CapacitorShareContentBackend) }, shell: {  }, storage: { fileSystem: (cast createCapacitorFileSystemBackend(({ final __callArgument1085:Dynamic = capacitor; __callArgument1085; })) : { >FileSystemBasicBackend, >Entity, }) }, system: { device: (cast createCapacitorDeviceBackend(({ final __callArgument1087:Dynamic = capacitor; __callArgument1087; })) : { >DeviceBackend, >Entity, }) }, text: {  }, tray: {  }, ui: { statusBarColor: statusBar, statusBarInfo: statusBar, statusBarOverlays: statusBar, statusBarStyle: statusBar, statusBarVisibility: statusBar }, updater: {  }, window: {  } } : EntityShapeL103C10__capacitorRegister) : Dynamic)) : EntityShapeL103C10__capacitorRegister);
+    return cast (cast createEntity((cast ({ accessibility: {  }, app: app, clipboard: { image: clipboard, text: clipboard }, connectivity: { change: connectivity, status: connectivity }, dialog: { message: (cast createCapacitorMessageDialogBackend(({ final __callArgument1059:Dynamic = capacitor; __callArgument1059; })) : { >MessageDialogBackend, >Entity, }), prompt: (cast createCapacitorPromptDialogBackend(({ final __callArgument1061:Dynamic = capacitor; __callArgument1061; })) : { >PromptDialogBackend, >Entity, }) }, graphics: {  }, input: { haptics: (cast createCapacitorHapticsBackend(({ final __callArgument1063:Dynamic = capacitor; __callArgument1063; })) : HapticsBackend), softKeyboardAccessoryBar: (cast createCapacitorSoftKeyboardAccessoryBarBackend(({ final __callArgument1065:Dynamic = capacitor; __callArgument1065; })) : { >SoftKeyboardAccessoryBarBackend, >Entity, }), softKeyboardChange: (cast createCapacitorSoftKeyboardChangeBackend(({ final __callArgument1067:Dynamic = capacitor; __callArgument1067; })) : { >SoftKeyboardChangeBackend, >Entity, }), softKeyboardInfo: (cast createCapacitorSoftKeyboardInfoBackend(({ final __callArgument1069:Dynamic = capacitor; __callArgument1069; })) : { >SoftKeyboardInfoBackend, >Entity, }), softKeyboardResizeModeWrite: (cast createCapacitorSoftKeyboardResizeModeWriteBackend(({ final __callArgument1071:Dynamic = capacitor; __callArgument1071; })) : { >SoftKeyboardResizeModeWriteBackend, >Entity, }), softKeyboardScrollAssist: (cast createCapacitorSoftKeyboardScrollAssistBackend(({ final __callArgument1073:Dynamic = capacitor; __callArgument1073; })) : { >SoftKeyboardScrollAssistBackend, >Entity, }), softKeyboardStyle: (cast createCapacitorSoftKeyboardStyleBackend(({ final __callArgument1075:Dynamic = capacitor; __callArgument1075; })) : { >SoftKeyboardStyleBackend, >Entity, }), softKeyboardVisibility: (cast createCapacitorSoftKeyboardVisibilityBackend(({ final __callArgument1077:Dynamic = capacitor; __callArgument1077; })) : { >SoftKeyboardVisibilityBackend, >Entity, }) }, ipc: {  }, media: {  }, menu: {  }, midi: {  }, net: {  }, power: {  }, protocol: (cast createCapacitorProtocolCapabilities(({ final __callArgument1079:Dynamic = capacitor; __callArgument1079; })) : CapacitorProtocolCapabilities), notification: (cast createCapacitorNotificationCapabilities(({ final __callArgument1081:Dynamic = capacitor; __callArgument1081; })) : CapacitorNotificationCapabilities), shortcut: {  }, screen: {  }, share: { content: (cast createCapacitorShareContentBackend(({ final __callArgument1083:Dynamic = capacitor; __callArgument1083; })) : CapacitorShareContentBackend) }, shell: {  }, storage: { fileSystem: (cast createCapacitorFileSystemBackend(({ final __callArgument1085:Dynamic = capacitor; __callArgument1085; })) : { >FileSystemBasicBackend, >Entity, }) }, system: { device: (cast createCapacitorDeviceBackend(({ final __callArgument1087:Dynamic = capacitor; __callArgument1087; })) : { >DeviceBackend, >Entity, }) }, text: {  }, tray: {  }, ui: { statusBarColor: statusBar, statusBarInfo: statusBar, statusBarOverlays: statusBar, statusBarStyle: statusBar, statusBarVisibility: statusBar }, updater: {  }, window: {  } } : EntityShapeL103C23__capacitorRegister) : Dynamic)) : EntityShapeL103C23__capacitorRegister);
     return cast null;
   }
 
@@ -2508,7 +2508,7 @@ class _HostCapacitor {
       }); } else { flight._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).hide(), function(__unused5:flight._internal._Any):Void {
 
       }); }
-    } } : EntityShapeL40C10__capacitorStatusBar); __callArgument1229; })) : EntityShapeL40C10__capacitorStatusBar);
+    } } : EntityShapeL40C23__capacitorStatusBar); __callArgument1229; })) : EntityShapeL40C23__capacitorStatusBar);
     return cast null;
   }
 

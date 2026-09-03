@@ -345,7 +345,7 @@ typedef WebAppCapabilities__webApp = flight._internal._Intersection2<Entity, fli
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL8C10__webApp {
+private class EntityShapeL8C23__webApp {
   public var badge:{ >Entity, var setBadgeCount:Float->flight._internal._Promise<Bool>; };
   public var focus:{ >Entity, var focus:Void->Void; };
   public var locale:{ >Entity, var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<flight._internal._Any>; var getSystemLocale:Void->String; };
@@ -367,13 +367,13 @@ private class EntityShapeL8C10__webApp {
   }
 }
 #else
-private typedef EntityShapeL8C10__webApp = { var badge:{ >Entity, var setBadgeCount:Float->flight._internal._Promise<Bool>; }; var focus:{ >Entity, var focus:Void->Void; }; var locale:{ >Entity, var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<flight._internal._Any>; var getSystemLocale:Void->String; }; var name:{ >Entity, var getName:Void->String; }; var quit:{ >Entity, var quit:Void->Void; }; var ready:{ >Entity, var subscribe:(Void->Void)->(Void->Void); }; var relaunch:{ >Entity, var relaunch:Void->Void; }; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL8C23__webApp = { var badge:{ >Entity, var setBadgeCount:Float->flight._internal._Promise<Bool>; }; var focus:{ >Entity, var focus:Void->Void; }; var locale:{ >Entity, var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<flight._internal._Any>; var getSystemLocale:Void->String; }; var name:{ >Entity, var getName:Void->String; }; var quit:{ >Entity, var quit:Void->Void; }; var ready:{ >Entity, var subscribe:(Void->Void)->(Void->Void); }; var relaunch:{ >Entity, var relaunch:Void->Void; }; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL9C12__webApp {
+private class EntityShapeL9C25__webApp {
   public var setBadgeCount:Float->flight._internal._Promise<Bool>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -383,13 +383,13 @@ private class EntityShapeL9C12__webApp {
   }
 }
 #else
-private typedef EntityShapeL9C12__webApp = { var setBadgeCount:Float->flight._internal._Promise<Bool>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL9C25__webApp = { var setBadgeCount:Float->flight._internal._Promise<Bool>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL21C12__webApp {
+private class EntityShapeL21C25__webApp {
   public var focus:Void->Void;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -399,13 +399,13 @@ private class EntityShapeL21C12__webApp {
   }
 }
 #else
-private typedef EntityShapeL21C12__webApp = { var focus:Void->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL21C25__webApp = { var focus:Void->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL28C13__webApp {
+private class EntityShapeL28C26__webApp {
   public var getLocale:Void->String;
   public var getPreferredSystemLanguages:Void->Array<flight._internal._Any>;
   public var getSystemLocale:Void->String;
@@ -419,13 +419,13 @@ private class EntityShapeL28C13__webApp {
   }
 }
 #else
-private typedef EntityShapeL28C13__webApp = { var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<flight._internal._Any>; var getSystemLocale:Void->String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL28C26__webApp = { var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<flight._internal._Any>; var getSystemLocale:Void->String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL43C11__webApp {
+private class EntityShapeL43C24__webApp {
   public var getName:Void->String;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -435,13 +435,13 @@ private class EntityShapeL43C11__webApp {
   }
 }
 #else
-private typedef EntityShapeL43C11__webApp = { var getName:Void->String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL43C24__webApp = { var getName:Void->String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL48C11__webApp {
+private class EntityShapeL48C24__webApp {
   public var quit:Void->Void;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -451,13 +451,13 @@ private class EntityShapeL48C11__webApp {
   }
 }
 #else
-private typedef EntityShapeL48C11__webApp = { var quit:Void->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL48C24__webApp = { var quit:Void->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL55C12__webApp {
+private class EntityShapeL55C25__webApp {
   public var subscribe:(Void->Void)->(Void->Void);
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -467,13 +467,13 @@ private class EntityShapeL55C12__webApp {
   }
 }
 #else
-private typedef EntityShapeL55C12__webApp = { var subscribe:(Void->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL55C25__webApp = { var subscribe:(Void->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL70C15__webApp {
+private class EntityShapeL70C28__webApp {
   public var relaunch:Void->Void;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -483,13 +483,13 @@ private class EntityShapeL70C15__webApp {
   }
 }
 #else
-private typedef EntityShapeL70C15__webApp = { var relaunch:Void->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL70C28__webApp = { var relaunch:Void->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL7C10__webBitmapReadback {
+private class EntityShapeL7C23__webBitmapReadback {
   public var readBitmap:flight._internal._Any->Float->Float->BitmapReadbackMode->flight._internal._Union2<{ var bitmap:flight._internal._Any; var reason:String; }, { var bitmap:Bitmap; var reason:String; }>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -499,7 +499,7 @@ private class EntityShapeL7C10__webBitmapReadback {
   }
 }
 #else
-private typedef EntityShapeL7C10__webBitmapReadback = { var readBitmap:flight._internal._Any->Float->Float->BitmapReadbackMode->flight._internal._Union2<{ var bitmap:flight._internal._Any; var reason:String; }, { var bitmap:Bitmap; var reason:String; }>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL7C23__webBitmapReadback = { var readBitmap:flight._internal._Any->Float->Float->BitmapReadbackMode->flight._internal._Union2<{ var bitmap:flight._internal._Any; var reason:String; }, { var bitmap:Bitmap; var reason:String; }>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef WebClipboardBackend__webClipboard = flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<ClipboardFormatsBackend, ClipboardImageBackend>, ClipboardTextBackend>, flight._internal._Required<{ @:optional var subscribe:Null<(Void->Void)->Void>; @:optional var unsubscribe:Null<(Void->Void)->Void>; }>>;
@@ -507,7 +507,7 @@ typedef WebClipboardBackend__webClipboard = flight._internal._Intersection2<flig
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL113C10__webClipboard {
+private class EntityShapeL113C23__webClipboard {
   public var readFormat:String->flight._internal._Promise<String>;
   public var writeFormat:String->String->flight._internal._Promise<Bool>;
   public var hasFormat:String->flight._internal._Promise<Bool>;
@@ -553,7 +553,7 @@ private class EntityShapeL113C10__webClipboard {
   }
 }
 #else
-private typedef EntityShapeL113C10__webClipboard = { var readFormat:String->flight._internal._Promise<String>; var writeFormat:String->String->flight._internal._Promise<Bool>; var hasFormat:String->flight._internal._Promise<Bool>; var getFormats:Void->flight._internal._Promise<Array<String>>; var writeItems:Array<ClipboardWriteItem>->flight._internal._Promise<Bool>; var readItems:Array<String>->flight._internal._Promise<flight._internal._Record<String, String>>; var readText:Void->flight._internal._Promise<String>; var writeText:String->flight._internal._Promise<Bool>; var readHtml:Void->flight._internal._Promise<String>; var writeHtml:String->flight._internal._Promise<Bool>; var hasText:Void->flight._internal._Promise<Bool>; var readImage:Void->flight._internal._Promise<String>; var writeImage:String->flight._internal._Promise<Bool>; var hasImage:Void->flight._internal._Promise<Bool>; var readRTF:Void->flight._internal._Promise<String>; var writeRTF:String->flight._internal._Promise<Bool>; var clear:Void->flight._internal._Promise<Bool>; var subscribe:(Void->Void)->Void; var unsubscribe:(Void->Void)->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL113C23__webClipboard = { var readFormat:String->flight._internal._Promise<String>; var writeFormat:String->String->flight._internal._Promise<Bool>; var hasFormat:String->flight._internal._Promise<Bool>; var getFormats:Void->flight._internal._Promise<Array<String>>; var writeItems:Array<ClipboardWriteItem>->flight._internal._Promise<Bool>; var readItems:Array<String>->flight._internal._Promise<flight._internal._Record<String, String>>; var readText:Void->flight._internal._Promise<String>; var writeText:String->flight._internal._Promise<Bool>; var readHtml:Void->flight._internal._Promise<String>; var writeHtml:String->flight._internal._Promise<Bool>; var hasText:Void->flight._internal._Promise<Bool>; var readImage:Void->flight._internal._Promise<String>; var writeImage:String->flight._internal._Promise<Bool>; var hasImage:Void->flight._internal._Promise<Bool>; var readRTF:Void->flight._internal._Promise<String>; var writeRTF:String->flight._internal._Promise<Bool>; var clear:Void->flight._internal._Promise<Bool>; var subscribe:(Void->Void)->Void; var unsubscribe:(Void->Void)->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef WebConnectivityBackend__webConnectivity = { >ConnectivityStatusBackend, >ConnectivityChangeBackend, >ConnectivityReachabilityBackend, };
@@ -563,7 +563,7 @@ typedef WebConnectivityConnection__webConnectivity = { @:optional var type:Strin
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL17C10__webConnectivity {
+private class EntityShapeL17C23__webConnectivity {
   public var destroy:Void->Void;
   public var detectReachability:ConnectivityReachabilityOptions->ConnectivityReachability->flight._internal._Promise<ConnectivityReachability>;
   public var getStatus:ConnectivityStatus->ConnectivityStatus;
@@ -579,13 +579,13 @@ private class EntityShapeL17C10__webConnectivity {
   }
 }
 #else
-private typedef EntityShapeL17C10__webConnectivity = { var destroy:Void->Void; var detectReachability:ConnectivityReachabilityOptions->ConnectivityReachability->flight._internal._Promise<ConnectivityReachability>; var getStatus:ConnectivityStatus->ConnectivityStatus; var subscribe:(Void->Void)->Null<Void->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL17C23__webConnectivity = { var destroy:Void->Void; var detectReachability:ConnectivityReachabilityOptions->ConnectivityReachability->flight._internal._Promise<ConnectivityReachability>; var getStatus:ConnectivityStatus->ConnectivityStatus; var subscribe:(Void->Void)->Null<Void->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL5C10__webCursor {
+private class EntityShapeL5C23__webCursor {
   public var setCursor:Null<flight._internal._Union2<String, flight._internal._Intersection2<String, flight._internal._Record<flight._internal._Any, flight._internal._Any>>>>->Void;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -595,7 +595,7 @@ private class EntityShapeL5C10__webCursor {
   }
 }
 #else
-private typedef EntityShapeL5C10__webCursor = { var setCursor:Null<flight._internal._Union2<String, flight._internal._Intersection2<String, flight._internal._Record<flight._internal._Any, flight._internal._Any>>>>->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL5C23__webCursor = { var setCursor:Null<flight._internal._Union2<String, flight._internal._Intersection2<String, flight._internal._Record<flight._internal._Any, flight._internal._Any>>>>->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef FileSystemFileHandle__webDialog = { var kind:String; var name:String; var createWritable:Void->flight._internal._Promise<FileSystemWritableFileStream__webDialog>; var getFile:Void->flight._internal._Promise<flight._internal.dom.File>; };
@@ -617,7 +617,7 @@ typedef WindowWithFileSystemAccess__webDialog = { @:optional var showDirectoryPi
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL20C46__webDialog {
+private class EntityShapeL20C59__webDialog {
   public var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -627,13 +627,13 @@ private class EntityShapeL20C46__webDialog {
   }
 }
 #else
-private typedef EntityShapeL20C46__webDialog = { var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL20C59__webDialog = { var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL24C41__webDialog {
+private class EntityShapeL24C54__webDialog {
   public var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -643,13 +643,13 @@ private class EntityShapeL24C41__webDialog {
   }
 }
 #else
-private typedef EntityShapeL24C41__webDialog = { var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL24C54__webDialog = { var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL28C41__webDialog {
+private class EntityShapeL28C54__webDialog {
   public var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -659,13 +659,13 @@ private class EntityShapeL28C41__webDialog {
   }
 }
 #else
-private typedef EntityShapeL28C41__webDialog = { var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL28C54__webDialog = { var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL6C10__webFontLoading {
+private class EntityShapeL6C23__webFontLoading {
   public var addFontFace:flight._internal.dom.FontFace->Void;
   public var checkFontFace:String->Bool;
   public var loadFontFaces:String->flight._internal._Promise<Array<flight._internal.dom.FontFace>>;
@@ -681,13 +681,13 @@ private class EntityShapeL6C10__webFontLoading {
   }
 }
 #else
-private typedef EntityShapeL6C10__webFontLoading = { var addFontFace:flight._internal.dom.FontFace->Void; var checkFontFace:String->Bool; var loadFontFaces:String->flight._internal._Promise<Array<flight._internal.dom.FontFace>>; var whenReady:Void->flight._internal._Promise<flight._internal._Nothing>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL6C23__webFontLoading = { var addFontFace:flight._internal.dom.FontFace->Void; var checkFontFace:String->Bool; var loadFontFaces:String->flight._internal._Promise<Array<flight._internal.dom.FontFace>>; var whenReady:Void->flight._internal._Promise<flight._internal._Nothing>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL12C10__webGlyphRasterizer {
+private class EntityShapeL12C23__webGlyphRasterizer {
   public var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>;
   public var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
@@ -699,7 +699,7 @@ private class EntityShapeL12C10__webGlyphRasterizer {
   }
 }
 #else
-private typedef EntityShapeL12C10__webGlyphRasterizer = { var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL12C23__webGlyphRasterizer = { var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef OmitRuntime__webKeyboard<T> = flight._internal._Omit<T, Dynamic>;
@@ -711,7 +711,7 @@ typedef WebKeyboardGeometry__webKeyboard = { var height:Float; var width:Float; 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL16C10__webKeyboard {
+private class EntityShapeL16C23__webKeyboard {
   public var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -721,13 +721,13 @@ private class EntityShapeL16C10__webKeyboard {
   }
 }
 #else
-private typedef EntityShapeL16C10__webKeyboard = { var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL16C23__webKeyboard = { var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL39C10__webKeyboard {
+private class EntityShapeL39C23__webKeyboard {
   public var getInfo:SoftKeyboardInfo->SoftKeyboardInfo;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -737,13 +737,13 @@ private class EntityShapeL39C10__webKeyboard {
   }
 }
 #else
-private typedef EntityShapeL39C10__webKeyboard = { var getInfo:SoftKeyboardInfo->SoftKeyboardInfo; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL39C23__webKeyboard = { var getInfo:SoftKeyboardInfo->SoftKeyboardInfo; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL53C10__webKeyboard {
+private class EntityShapeL53C23__webKeyboard {
   public var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>;
   public var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
@@ -755,7 +755,7 @@ private class EntityShapeL53C10__webKeyboard {
   }
 }
 #else
-private typedef EntityShapeL53C10__webKeyboard = { var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL53C23__webKeyboard = { var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef IsAny__webMediasession<T> = flight._internal._Conditional<Float, T, Bool, Bool>;
@@ -775,7 +775,7 @@ typedef WebMidiProfileApi__webMidi = { @:optional var permissions:flight._intern
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL111C18__webMidi {
+private class EntityShapeL111C31__webMidi {
   public var requestAccess:Void->flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -785,13 +785,13 @@ private class EntityShapeL111C18__webMidi {
   }
 }
 #else
-private typedef EntityShapeL111C18__webMidi = { var requestAccess:Void->flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL111C31__webMidi = { var requestAccess:Void->flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL121C34__webMidi {
+private class EntityShapeL121C47__webMidi {
   public var access:{ >Entity, var requestAccess:Void->flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>>; };
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -801,13 +801,13 @@ private class EntityShapeL121C34__webMidi {
   }
 }
 #else
-private typedef EntityShapeL121C34__webMidi = { var access:{ >Entity, var requestAccess:Void->flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>>; }; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL121C47__webMidi = { var access:{ >Entity, var requestAccess:Void->flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>>; }; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL122C22__webMidi {
+private class EntityShapeL122C35__webMidi {
   public var getPermission:Void->flight._internal._Promise<PermissionQueryOutcome>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -817,13 +817,13 @@ private class EntityShapeL122C22__webMidi {
   }
 }
 #else
-private typedef EntityShapeL122C22__webMidi = { var getPermission:Void->flight._internal._Promise<PermissionQueryOutcome>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL122C35__webMidi = { var getPermission:Void->flight._internal._Promise<PermissionQueryOutcome>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL125C10__webMidi {
+private class EntityShapeL125C23__webMidi {
   public var access:{ >Entity, var requestAccess:Void->flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>>; };
   public var permission:{ >Entity, var getPermission:Void->flight._internal._Promise<PermissionQueryOutcome>; };
   public var __symbol__EntityRuntime:Null<Dynamic>;
@@ -835,13 +835,13 @@ private class EntityShapeL125C10__webMidi {
   }
 }
 #else
-private typedef EntityShapeL125C10__webMidi = { var access:{ >Entity, var requestAccess:Void->flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>>; }; var permission:{ >Entity, var getPermission:Void->flight._internal._Promise<PermissionQueryOutcome>; }; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL125C23__webMidi = { var access:{ >Entity, var requestAccess:Void->flight._internal._Promise<flight._internal._Union2<{ var access:MidiAccess; var reason:String; }, { var reason:String; @:optional var access:flight._internal._Any; }>>; }; var permission:{ >Entity, var getPermission:Void->flight._internal._Promise<PermissionQueryOutcome>; }; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL140C28__webMidi {
+private class EntityShapeL140C41__webMidi {
   public var release:Void->flight._internal._Promise<{ var reason:String; }>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -851,7 +851,7 @@ private class EntityShapeL140C28__webMidi {
   }
 }
 #else
-private typedef EntityShapeL140C28__webMidi = { var release:Void->flight._internal._Promise<{ var reason:String; }>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL140C41__webMidi = { var release:Void->flight._internal._Promise<{ var reason:String; }>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef WebBatteryManager__webPower = { var chargingTime:Float; var dischargingTime:Float; var level:Float; var charging:Bool; @:optional var addEventListener:String->(Void->Void)->Void; @:optional var removeEventListener:String->(Void->Void)->Void; };
@@ -863,7 +863,7 @@ typedef WebWakeLockSentinel__webPower = { @:optional var addEventListener:String
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL181C37__webPower {
+private class EntityShapeL181C50__webPower {
   public var keepAwake:PowerKeepAwakeBackend;
   public var suspension:PowerSuspensionBackend;
   public var change:PowerChangeBackend;
@@ -879,7 +879,7 @@ private class EntityShapeL181C37__webPower {
   }
 }
 #else
-private typedef EntityShapeL181C37__webPower = { var keepAwake:PowerKeepAwakeBackend; var suspension:PowerSuspensionBackend; var change:PowerChangeBackend; var status:PowerStatusBackend; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL181C50__webPower = { var keepAwake:PowerKeepAwakeBackend; var suspension:PowerSuspensionBackend; var change:PowerChangeBackend; var status:PowerStatusBackend; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef WebProtocolCapabilities__webProtocol = flight._internal._Intersection2<Entity, flight._internal._Required<{ @:optional var launch:Null<ProtocolLaunchBackend>; @:optional var registration:Null<ProtocolRegistrationBackend>; }>>;
@@ -887,7 +887,7 @@ typedef WebProtocolCapabilities__webProtocol = flight._internal._Intersection2<E
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL8C10__webProtocol {
+private class EntityShapeL8C23__webProtocol {
   public var launch:{ >Entity, var getLaunchUrl:Void->Null<String>; };
   public var registration:{ >Entity, var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; };
   public var __symbol__EntityRuntime:Null<Dynamic>;
@@ -899,13 +899,13 @@ private class EntityShapeL8C10__webProtocol {
   }
 }
 #else
-private typedef EntityShapeL8C10__webProtocol = { var launch:{ >Entity, var getLaunchUrl:Void->Null<String>; }; var registration:{ >Entity, var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; }; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL8C23__webProtocol = { var launch:{ >Entity, var getLaunchUrl:Void->Null<String>; }; var registration:{ >Entity, var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; }; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL9C13__webProtocol {
+private class EntityShapeL9C26__webProtocol {
   public var getLaunchUrl:Void->Null<String>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -915,13 +915,13 @@ private class EntityShapeL9C13__webProtocol {
   }
 }
 #else
-private typedef EntityShapeL9C13__webProtocol = { var getLaunchUrl:Void->Null<String>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL9C26__webProtocol = { var getLaunchUrl:Void->Null<String>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL20C19__webProtocol {
+private class EntityShapeL20C32__webProtocol {
   public var getRegisteredSchemes:Void->Array<String>;
   public var register:String->Bool;
   public var __symbol__EntityRuntime:Null<Dynamic>;
@@ -933,7 +933,7 @@ private class EntityShapeL20C19__webProtocol {
   }
 }
 #else
-private typedef EntityShapeL20C19__webProtocol = { var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL20C32__webProtocol = { var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef DetailedScreen__webScreen = { var availHeight:Float; var availLeft:Float; var availTop:Float; var availWidth:Float; var colorDepth:Float; var devicePixelRatio:Float; var height:Float; @:optional var isInternal:Bool; @:optional var isPrimary:Bool; var label:String; var left:Float; var pixelDepth:Float; @:optional var refreshRate:Float; var top:Float; var width:Float; };
@@ -947,7 +947,7 @@ typedef OrientationLike__webScreen = { @:optional var angle:Float; @:optional va
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL178C17__webScreen {
+private class EntityShapeL178C30__webScreen {
   public var destroy:Void->Void;
   public var getCursorPosition:{ var x:Float; var y:Float; }->{ var x:Float; var y:Float; };
   public var getPrimaryScreen:ScreenInfo->ScreenInfo;
@@ -963,13 +963,13 @@ private class EntityShapeL178C17__webScreen {
   }
 }
 #else
-private typedef EntityShapeL178C17__webScreen = { var destroy:Void->Void; var getCursorPosition:{ var x:Float; var y:Float; }->{ var x:Float; var y:Float; }; var getPrimaryScreen:ScreenInfo->ScreenInfo; var getScreens:Array<ScreenInfo>->Array<ScreenInfo>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL178C30__webScreen = { var destroy:Void->Void; var getCursorPosition:{ var x:Float; var y:Float; }->{ var x:Float; var y:Float; }; var getPrimaryScreen:ScreenInfo->ScreenInfo; var getScreens:Array<ScreenInfo>->Array<ScreenInfo>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL221C18__webScreen {
+private class EntityShapeL221C31__webScreen {
   public var subscribe:(ScreenChangeEvent->Void)->(Void->Void);
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -979,13 +979,13 @@ private class EntityShapeL221C18__webScreen {
   }
 }
 #else
-private typedef EntityShapeL221C18__webScreen = { var subscribe:(ScreenChangeEvent->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL221C31__webScreen = { var subscribe:(ScreenChangeEvent->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL242C26__webScreen {
+private class EntityShapeL242C39__webScreen {
   public var queryPermission:Void->flight._internal._Promise<ScreenPermissionState>;
   public var request:Void->flight._internal._Promise<Bool>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
@@ -997,13 +997,13 @@ private class EntityShapeL242C26__webScreen {
   }
 }
 #else
-private typedef EntityShapeL242C26__webScreen = { var queryPermission:Void->flight._internal._Promise<ScreenPermissionState>; var request:Void->flight._internal._Promise<Bool>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL242C39__webScreen = { var queryPermission:Void->flight._internal._Promise<ScreenPermissionState>; var request:Void->flight._internal._Promise<Bool>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL272C28__webScreen {
+private class EntityShapeL272C41__webScreen {
   public var subscribe:(ScreenPermissionState->Void)->(Void->Void);
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -1013,7 +1013,7 @@ private class EntityShapeL272C28__webScreen {
   }
 }
 #else
-private typedef EntityShapeL272C28__webScreen = { var subscribe:(ScreenPermissionState->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL272C41__webScreen = { var subscribe:(ScreenPermissionState->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef WebServiceWorkerNotificationDispatch__webServiceWorkerNotification = { var action:Notification->String->Void; var click:Notification->Void; var dismiss:Notification->Void; };
@@ -1023,7 +1023,7 @@ typedef WebStorageBackend__webStorage = { >StorageBackend, >StorageChangeBackend
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL20C34__webStorage {
+private class EntityShapeL20C47__webStorage {
   public var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>;
   public var destroy:Void->Void;
   public var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>;
@@ -1045,13 +1045,13 @@ private class EntityShapeL20C34__webStorage {
   }
 }
 #else
-private typedef EntityShapeL20C34__webStorage = { var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>; var destroy:Void->Void; var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>; var subscribe:(StorageChange->Void)->Null<Void->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL20C47__webStorage = { var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>; var destroy:Void->Void; var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>; var subscribe:(StorageChange->Void)->Null<Void->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL14C30__webStoragePersistence {
+private class EntityShapeL14C43__webStoragePersistence {
   public var requestPersistence:Void->flight._internal._Promise<StoragePersistenceResult>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -1061,13 +1061,13 @@ private class EntityShapeL14C30__webStoragePersistence {
   }
 }
 #else
-private typedef EntityShapeL14C30__webStoragePersistence = { var requestPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL14C43__webStoragePersistence = { var requestPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostWeb)
 @:structInit
-private class EntityShapeL36C19__webStoragePersistence {
+private class EntityShapeL36C32__webStoragePersistence {
   public var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -1077,7 +1077,7 @@ private class EntityShapeL36C19__webStoragePersistence {
   }
 }
 #else
-private typedef EntityShapeL36C19__webStoragePersistence = { var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL36C32__webStoragePersistence = { var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef WebWindowBackend__webWindow = flight._internal._Intersection2<WindowBackend, flight._internal._Required<{ @:optional var attach:Null<ApplicationWindow->flight._internal._Any->WindowAttachmentOwnership->Bool>; @:optional var open:Null<ApplicationWindow->WindowOptions->Bool>; @:optional var close:Null<ApplicationWindow->Void>; @:optional var subscribeClose:Null<(Void->Bool)->(Void->Void)->(Void->Void)>; @:optional var subscribeMove:Null<(Float->Float->Void)->(Void->Void)>; @:optional var subscribeOrientation:Null<(Void->Void)->(Void->Void)>; @:optional var subscribeResize:Null<WindowResizeTargetHandle->(Float->Float->Float->Void)->(Void->Void)>; @:optional var subscribeVisibility:Null<(Bool->Void)->(Void->Void)>; }>>;
@@ -1377,12 +1377,12 @@ class _HostWeb {
           });
         })
       );
-    } } : EntityShapeL9C12__webApp); __callArgument154; })) : EntityShapeL9C12__webApp), focus: (cast (cast createEntity : Null<{ var focus:Void->Void; }>->{ >Entity, var focus:Void->Void; })(({ final __callArgument162:Dynamic = ({ focus: function():Void {
+    } } : EntityShapeL9C25__webApp); __callArgument154; })) : EntityShapeL9C25__webApp), focus: (cast (cast createEntity : Null<{ var focus:Void->Void; }>->{ >Entity, var focus:Void->Void; })(({ final __callArgument162:Dynamic = ({ focus: function():Void {
       try {
         flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'focus', cast ([] : Array<Dynamic>));
       } catch (__error:Dynamic) {
       }
-    } } : EntityShapeL21C12__webApp); __callArgument162; })) : EntityShapeL21C12__webApp), locale: (cast (cast createEntity : Null<{ var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<flight._internal._Any>; var getSystemLocale:Void->String; }>->{ >Entity, var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<flight._internal._Any>; var getSystemLocale:Void->String; })(({ final __callArgument164:Dynamic = ({ getLocale: function():String {
+    } } : EntityShapeL21C25__webApp); __callArgument162; })) : EntityShapeL21C25__webApp), locale: (cast (cast createEntity : Null<{ var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<flight._internal._Any>; var getSystemLocale:Void->String; }>->{ >Entity, var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<flight._internal._Any>; var getSystemLocale:Void->String; })(({ final __callArgument164:Dynamic = ({ getLocale: function():String {
       return cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) ? (cast '' : Dynamic) : (cast _Runtime.coalesce(flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'language'), function():Dynamic return cast '') : Dynamic));
       return cast _Runtime.UNDEFINED;
     }, getPreferredSystemLanguages: function():Array<flight._internal._Any> {
@@ -1395,15 +1395,15 @@ class _HostWeb {
         return cast '';
       }
       return cast _Runtime.UNDEFINED;
-    } } : EntityShapeL28C13__webApp); __callArgument164; })) : EntityShapeL28C13__webApp), name: (cast (cast createEntity : Null<{ var getName:Void->String; }>->{ >Entity, var getName:Void->String; })(({ final __callArgument166:Dynamic = ({ getName: function():String {
+    } } : EntityShapeL28C26__webApp); __callArgument164; })) : EntityShapeL28C26__webApp), name: (cast (cast createEntity : Null<{ var getName:Void->String; }>->{ >Entity, var getName:Void->String; })(({ final __callArgument166:Dynamic = ({ getName: function():String {
       return cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) ? (cast '' : Dynamic) : (cast flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'title') : Dynamic));
       return cast _Runtime.UNDEFINED;
-    } } : EntityShapeL43C11__webApp); __callArgument166; })) : EntityShapeL43C11__webApp), quit: (cast (cast createEntity : Null<{ var quit:Void->Void; }>->{ >Entity, var quit:Void->Void; })(({ final __callArgument168:Dynamic = ({ quit: function():Void {
+    } } : EntityShapeL43C24__webApp); __callArgument166; })) : EntityShapeL43C24__webApp), quit: (cast (cast createEntity : Null<{ var quit:Void->Void; }>->{ >Entity, var quit:Void->Void; })(({ final __callArgument168:Dynamic = ({ quit: function():Void {
       try {
         flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'close', cast ([] : Array<Dynamic>));
       } catch (__error:Dynamic) {
       }
-    } } : EntityShapeL48C11__webApp); __callArgument168; })) : EntityShapeL48C11__webApp), ready: (cast (cast createEntity : Null<{ var subscribe:(Void->Void)->(Void->Void); }>->{ >Entity, var subscribe:(Void->Void)->(Void->Void); })(({ final __callArgument170:Dynamic = ({ subscribe: function(listener:Void->Void):Void->Void {
+    } } : EntityShapeL48C24__webApp); __callArgument168; })) : EntityShapeL48C24__webApp), ready: (cast (cast createEntity : Null<{ var subscribe:(Void->Void)->(Void->Void); }>->{ >Entity, var subscribe:(Void->Void)->(Void->Void); })(({ final __callArgument170:Dynamic = ({ subscribe: function(listener:Void->Void):Void->Void {
       var active:Bool = cast _Runtime.UNDEFINED;
       if ((cast ((cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) && (cast _Runtime.strictEquals((cast flight._internal.backend.DomDocumentBackend.value() : flight._internal.dom.Document).readyState, 'loading') : Bool)) : Bool)) {
         flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'addEventListener', cast (['DOMContentLoaded', listener, { once: true }] : Array<Dynamic>));
@@ -1417,12 +1417,12 @@ class _HostWeb {
         (active = cast (false : Dynamic));
       };
       return cast _Runtime.UNDEFINED;
-    } } : EntityShapeL55C12__webApp); __callArgument170; })) : EntityShapeL55C12__webApp), relaunch: (cast (cast createEntity : Null<{ var relaunch:Void->Void; }>->{ >Entity, var relaunch:Void->Void; })(({ final __callArgument172:Dynamic = ({ relaunch: function():Void {
+    } } : EntityShapeL55C25__webApp); __callArgument170; })) : EntityShapeL55C25__webApp), relaunch: (cast (cast createEntity : Null<{ var relaunch:Void->Void; }>->{ >Entity, var relaunch:Void->Void; })(({ final __callArgument172:Dynamic = ({ relaunch: function():Void {
       try {
         (cast flight._internal._HostValueLut.get('location') : flight._internal.dom.Location).reload();
       } catch (__error:Dynamic) {
       }
-    } } : EntityShapeL70C15__webApp); __callArgument172; })) : EntityShapeL70C15__webApp) } : EntityShapeL8C10__webApp); __callArgument174; })) : EntityShapeL8C10__webApp);
+    } } : EntityShapeL70C28__webApp); __callArgument172; })) : EntityShapeL70C28__webApp) } : EntityShapeL8C23__webApp); __callArgument174; })) : EntityShapeL8C23__webApp);
     return cast null;
   }
 
@@ -1566,7 +1566,7 @@ class _HostWeb {
       bitmap = (cast (cast createEntity : Null<{ var alphaType:String; var gamut:String; var data:flight._internal._Any; var format:String; var height:Float; var kind:String; var version:Float; var width:Float; }>->{ >Entity, var alphaType:String; var gamut:String; var data:flight._internal._Any; var format:String; var height:Float; var kind:String; var version:Float; var width:Float; })(({ final __callArgument235:Dynamic = (#if flight_struct_typedef { alphaType: 'straight', gamut: (cast raw.colorSpace : String), data: raw.data, format: 'rgba8unorm', height: raw.height, kind: BitmapTextureSourceKind, version: 0.0, width: raw.width } #else ({ final __structInitField0:Dynamic = 'straight'; final __structInitField1:Dynamic = (cast raw.colorSpace : String); final __structInitField2:Dynamic = raw.data; final __structInitField3:Dynamic = 'rgba8unorm'; final __structInitField4:Dynamic = raw.height; final __structInitField5:Dynamic = BitmapTextureSourceKind; final __structInitField6:Dynamic = 0.0; final __structInitField7:Dynamic = raw.width; ({ alphaType: __structInitField0, data: __structInitField2, format: __structInitField3, gamut: __structInitField1, height: __structInitField4, kind: __structInitField5, version: __structInitField6, width: __structInitField7 } : Bitmap); }) #end); __callArgument235; })) : Bitmap);
       return cast { bitmap: bitmap, reason: 'ok' };
       return cast _Runtime.UNDEFINED;
-    } } : EntityShapeL7C10__webBitmapReadback) : Dynamic)) : EntityShapeL7C10__webBitmapReadback);
+    } } : EntityShapeL7C23__webBitmapReadback) : Dynamic)) : EntityShapeL7C23__webBitmapReadback);
     return cast null;
   }
 
@@ -2090,7 +2090,7 @@ class _HostWeb {
     }, unsubscribe: function(callback:Void->Void):Void {
       if ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) || (cast !(cast flight._internal.backend.DomWindowBackend.hasField(flight._internal.backend.DomWindowBackend.value(), 'onclipboardchange') : Bool) : Bool)) : Bool)) { return; }
       flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast ([(cast 'clipboardchange' : String), (cast callback : flight._internal.dom.EventListener)] : Array<Dynamic>));
-    } } : EntityShapeL113C10__webClipboard) : Dynamic)) : EntityShapeL113C10__webClipboard);
+    } } : EntityShapeL113C23__webClipboard) : Dynamic)) : EntityShapeL113C23__webClipboard);
     return cast _Runtime.UNDEFINED;
   });
 
@@ -2250,7 +2250,7 @@ class _HostWeb {
       ((cast releases : flight._internal._Set<Void->Void>).add(release));
       return cast release;
       return cast _Runtime.UNDEFINED;
-    } } : EntityShapeL17C10__webConnectivity) : Dynamic)) : EntityShapeL17C10__webConnectivity);
+    } } : EntityShapeL17C23__webConnectivity) : Dynamic)) : EntityShapeL17C23__webConnectivity);
     return cast null;
   }
 
@@ -2319,7 +2319,7 @@ class _HostWeb {
   public static function createWebCursorBackend(element:flight._internal.dom.HTMLElement):{ >CursorBackend, >Entity, } {
     return cast (cast (cast createEntity : Null<{ var setCursor:Null<flight._internal._Union2<String, flight._internal._Intersection2<String, flight._internal._Record<flight._internal._Any, flight._internal._Any>>>>->Void; }>->{ >Entity, var setCursor:Null<flight._internal._Union2<String, flight._internal._Intersection2<String, flight._internal._Record<flight._internal._Any, flight._internal._Any>>>>->Void; })(({ final __callArgument458:Dynamic = ({ setCursor: function(cursor:Null<Cursor>):Void {
       ((cast element.style : flight._internal.dom.CSSStyleDeclaration).cursor = _Runtime.coalesce(cursor, function():Dynamic return cast ''));
-    } } : EntityShapeL5C10__webCursor); __callArgument458; })) : EntityShapeL5C10__webCursor);
+    } } : EntityShapeL5C23__webCursor); __callArgument458; })) : EntityShapeL5C23__webCursor);
     return cast null;
   }
 
@@ -2453,7 +2453,7 @@ class _HostWeb {
 
   public static var _safeAreaInsets__webDevice:Null<SafeAreaInsets> = _Runtime.explicitNull();
 
-  public static final webDirectoryOpenDialogBackend:{ >Entity, var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>; } = (cast createEntity(({ final __callArgument467:Dynamic = ({ open: _HostWeb.openDirectory__webDialog } : EntityShapeL20C46__webDialog); __callArgument467; })) : EntityShapeL20C46__webDialog);
+  public static final webDirectoryOpenDialogBackend:{ >Entity, var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>; } = (cast createEntity(({ final __callArgument467:Dynamic = ({ open: _HostWeb.openDirectory__webDialog } : EntityShapeL20C59__webDialog); __callArgument467; })) : EntityShapeL20C59__webDialog);
 
   public static function detectColorGamut__webDevice():String {
     if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('matchMedia'), 'undefined') : Bool)) { return cast ''; }
@@ -2499,9 +2499,9 @@ class _HostWeb {
     return cast null;
   }
 
-  public static final webFileOpenDialogBackend:{ >Entity, var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; } = (cast createEntity(({ final __callArgument469:Dynamic = ({ open: _HostWeb.openFile__webDialog } : EntityShapeL24C41__webDialog); __callArgument469; })) : EntityShapeL24C41__webDialog);
+  public static final webFileOpenDialogBackend:{ >Entity, var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; } = (cast createEntity(({ final __callArgument469:Dynamic = ({ open: _HostWeb.openFile__webDialog } : EntityShapeL24C54__webDialog); __callArgument469; })) : EntityShapeL24C54__webDialog);
 
-  public static final webFileSaveDialogBackend:{ >Entity, var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; } = (cast createEntity(({ final __callArgument471:Dynamic = ({ save: _HostWeb.saveFile__webDialog } : EntityShapeL28C41__webDialog); __callArgument471; })) : EntityShapeL28C41__webDialog);
+  public static final webFileSaveDialogBackend:{ >Entity, var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; } = (cast createEntity(({ final __callArgument471:Dynamic = ({ save: _HostWeb.saveFile__webDialog } : EntityShapeL28C54__webDialog); __callArgument471; })) : EntityShapeL28C54__webDialog);
 
   public static final webDialogHost:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<Host, HasDialogDirectoryOpen>, HasDialogFileOpen>, HasDialogFileSave>, HasDialogMessage>, HasDialogPrompt> = (cast createHost((cast { dialog: { directoryOpen: webDirectoryOpenDialogBackend, fileOpen: webFileOpenDialogBackend, fileSave: webFileSaveDialogBackend, message: webMessageDialogBackend, prompt: webPromptDialogBackend } } : Dynamic)) : flight._internal._Intersection2<Host, { var dialog:{ var directoryOpen:{ >Entity, var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>; }; var fileOpen:{ >Entity, var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; }; var fileSave:{ >Entity, var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; }; var message:MessageDialogBackend; var prompt:PromptDialogBackend; }; }>);
 
@@ -4297,7 +4297,7 @@ class _HostWeb {
           return flight._internal._Async.resolve(_Runtime.UNDEFINED);
         });
       }));
-    } } : EntityShapeL6C10__webFontLoading); __callArgument880; })) : EntityShapeL6C10__webFontLoading);
+    } } : EntityShapeL6C23__webFontLoading); __callArgument880; })) : EntityShapeL6C23__webFontLoading);
     return cast null;
   }
 
@@ -4430,7 +4430,7 @@ class _HostWeb {
       observeGlyphRasterizerHostResult((cast 'rasterize' : String), (cast true : Bool));
       return cast (cast _HostWeb._rasterizeGlyphOnContext__webGlyphRasterizer(({ final __callArgument910:Dynamic = context; __callArgument910; }), (cast codepoint : Float), ({ final __callArgument911:Dynamic = options; __callArgument911; })) : Null<GlyphRasterizedBitmap>);
       return cast _Runtime.UNDEFINED;
-    } } : EntityShapeL12C10__webGlyphRasterizer); __callArgument914; })) : EntityShapeL12C10__webGlyphRasterizer);
+    } } : EntityShapeL12C23__webGlyphRasterizer); __callArgument914; })) : EntityShapeL12C23__webGlyphRasterizer);
     return cast null;
   }
 
@@ -4934,7 +4934,7 @@ class _HostWeb {
         } };
         return cast null;
       }));
-    } } : EntityShapeL16C10__webKeyboard); __callArgument1047; })) : EntityShapeL16C10__webKeyboard);
+    } } : EntityShapeL16C23__webKeyboard); __callArgument1047; })) : EntityShapeL16C23__webKeyboard);
     return cast null;
   }
 
@@ -4949,7 +4949,7 @@ class _HostWeb {
       (out.width = cast ((cast geo : WebKeyboardGeometry__webKeyboard).width : Float));
       return cast out;
       return cast _Runtime.UNDEFINED;
-    } } : EntityShapeL39C10__webKeyboard); __callArgument1053; })) : EntityShapeL39C10__webKeyboard);
+    } } : EntityShapeL39C23__webKeyboard); __callArgument1053; })) : EntityShapeL39C23__webKeyboard);
     return cast null;
   }
 
@@ -4972,7 +4972,7 @@ class _HostWeb {
         return cast 'ok';
         return cast null;
       }));
-    } } : EntityShapeL53C10__webKeyboard); __callArgument1055; })) : EntityShapeL53C10__webKeyboard);
+    } } : EntityShapeL53C23__webKeyboard); __callArgument1055; })) : EntityShapeL53C23__webKeyboard);
     return cast null;
   }
 
@@ -5694,10 +5694,10 @@ class _HostWeb {
           });
         })
       );
-    } } : EntityShapeL111C18__webMidi); __callArgument1293; })) : EntityShapeL111C18__webMidi);
-    if ((cast !(cast includePermission : Bool) : Bool)) { return cast (cast createEntity((cast ({ access: access } : EntityShapeL121C34__webMidi) : Dynamic)) : EntityShapeL121C34__webMidi); }
-    permission = (cast createEntity(({ final __callArgument1301:Dynamic = ({ getPermission: function():flight._internal._Promise<PermissionQueryOutcome> return (cast _HostWeb.queryWebMidiPermission__webMidi(_Runtime.field(api, 'permissions')) : flight._internal._Promise<PermissionQueryOutcome>) } : EntityShapeL122C22__webMidi); __callArgument1301; })) : EntityShapeL122C22__webMidi);
-    return cast (cast createEntity((cast ({ access: access, permission: permission } : EntityShapeL125C10__webMidi) : Dynamic)) : EntityShapeL125C10__webMidi);
+    } } : EntityShapeL111C31__webMidi); __callArgument1293; })) : EntityShapeL111C31__webMidi);
+    if ((cast !(cast includePermission : Bool) : Bool)) { return cast (cast createEntity((cast ({ access: access } : EntityShapeL121C47__webMidi) : Dynamic)) : EntityShapeL121C47__webMidi); }
+    permission = (cast createEntity(({ final __callArgument1301:Dynamic = ({ getPermission: function():flight._internal._Promise<PermissionQueryOutcome> return (cast _HostWeb.queryWebMidiPermission__webMidi(_Runtime.field(api, 'permissions')) : flight._internal._Promise<PermissionQueryOutcome>) } : EntityShapeL122C35__webMidi); __callArgument1301; })) : EntityShapeL122C35__webMidi);
+    return cast (cast createEntity((cast ({ access: access, permission: permission } : EntityShapeL125C23__webMidi) : Dynamic)) : EntityShapeL125C23__webMidi);
     return cast null;
   }
 
@@ -5725,7 +5725,7 @@ class _HostWeb {
         }
         return cast null;
       }));
-    } } : EntityShapeL140C28__webMidi); __callArgument1303; })) : EntityShapeL140C28__webMidi);
+    } } : EntityShapeL140C41__webMidi); __callArgument1303; })) : EntityShapeL140C41__webMidi);
     attachment = attachmentEntity;
     return cast flight._internal._Async.resolve({ attachment: attachment, reason: 'ok' });
     return cast null;
@@ -6438,7 +6438,7 @@ class _HostWeb {
     return cast null;
   }
 
-  public static final webPowerCapabilities:{ >Entity, var keepAwake:PowerKeepAwakeBackend; var suspension:PowerSuspensionBackend; var change:PowerChangeBackend; var status:PowerStatusBackend; } = (cast createEntity(({ final __callArgument1523:Dynamic = (#if flight_struct_typedef _Runtime.mergeObjects([(cast createWebPowerReadings() : { var change:PowerChangeBackend; var status:PowerStatusBackend; }), { keepAwake: webPowerKeepAwakeBackend }, { suspension: webPowerSuspensionBackend }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([(cast createWebPowerReadings() : { var change:PowerChangeBackend; var status:PowerStatusBackend; }), { keepAwake: webPowerKeepAwakeBackend }, { suspension: webPowerSuspensionBackend }]); ({ keepAwake: _Runtime.field(__structInitSource, 'keepAwake'), suspension: _Runtime.field(__structInitSource, 'suspension'), change: _Runtime.field(__structInitSource, 'change'), status: _Runtime.field(__structInitSource, 'status') } : EntityShapeL181C37__webPower); }) #end); __callArgument1523; })) : EntityShapeL181C37__webPower);
+  public static final webPowerCapabilities:{ >Entity, var keepAwake:PowerKeepAwakeBackend; var suspension:PowerSuspensionBackend; var change:PowerChangeBackend; var status:PowerStatusBackend; } = (cast createEntity(({ final __callArgument1523:Dynamic = (#if flight_struct_typedef _Runtime.mergeObjects([(cast createWebPowerReadings() : { var change:PowerChangeBackend; var status:PowerStatusBackend; }), { keepAwake: webPowerKeepAwakeBackend }, { suspension: webPowerSuspensionBackend }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([(cast createWebPowerReadings() : { var change:PowerChangeBackend; var status:PowerStatusBackend; }), { keepAwake: webPowerKeepAwakeBackend }, { suspension: webPowerSuspensionBackend }]); ({ keepAwake: _Runtime.field(__structInitSource, 'keepAwake'), suspension: _Runtime.field(__structInitSource, 'suspension'), change: _Runtime.field(__structInitSource, 'change'), status: _Runtime.field(__structInitSource, 'status') } : EntityShapeL181C50__webPower); }) #end); __callArgument1523; })) : EntityShapeL181C50__webPower);
 
   public static var _wakeLockSentinel__webPower:Null<WebWakeLockSentinel__webPower> = _Runtime.explicitNull();
 
@@ -6607,7 +6607,7 @@ class _HostWeb {
         return cast null;
       }
       return cast _Runtime.UNDEFINED;
-    } } : EntityShapeL9C13__webProtocol); __callArgument1540; })) : EntityShapeL9C13__webProtocol), registration: (cast (cast createEntity : Null<{ var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; }>->{ >Entity, var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; })(({ final __callArgument1542:Dynamic = ({ getRegisteredSchemes: function():Array<String> {
+    } } : EntityShapeL9C26__webProtocol); __callArgument1540; })) : EntityShapeL9C26__webProtocol), registration: (cast (cast createEntity : Null<{ var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; }>->{ >Entity, var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; })(({ final __callArgument1542:Dynamic = ({ getRegisteredSchemes: function():Array<String> {
       return cast _Runtime.slice(registeredSchemes, 0, null);
       return cast _Runtime.UNDEFINED;
     }, register: function(scheme:String):Bool {
@@ -6621,7 +6621,7 @@ class _HostWeb {
         return cast false;
       }
       return cast _Runtime.UNDEFINED;
-    } } : EntityShapeL20C19__webProtocol); __callArgument1542; })) : EntityShapeL20C19__webProtocol) } : EntityShapeL8C10__webProtocol); __callArgument1544; })) : EntityShapeL8C10__webProtocol);
+    } } : EntityShapeL20C32__webProtocol); __callArgument1542; })) : EntityShapeL20C32__webProtocol) } : EntityShapeL8C23__webProtocol); __callArgument1544; })) : EntityShapeL8C23__webProtocol);
     return cast null;
   }
 
@@ -6800,7 +6800,7 @@ class _HostWeb {
       }
       return cast (cast fillCurrent(({ final __callArgument1598:Dynamic = out; __callArgument1598; })) : ScreenInfo);
       return cast _Runtime.UNDEFINED;
-    }, getScreens: enumerate } : EntityShapeL178C17__webScreen); __callArgument1600; })) : EntityShapeL178C17__webScreen);
+    }, getScreens: enumerate } : EntityShapeL178C30__webScreen); __callArgument1600; })) : EntityShapeL178C30__webScreen);
     change = (cast createEntity(({ final __callArgument1642:Dynamic = ({ subscribe: function(listener:ScreenChangeEvent->Void):Void->Void {
       var subscription:DisplaySubscription__webScreen = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast function():Void {
@@ -6818,7 +6818,7 @@ class _HostWeb {
         ((cast subscriptions : flight._internal._Set<DisplaySubscription__webScreen>).delete_(subscription));
       };
       return cast _Runtime.UNDEFINED;
-    } } : EntityShapeL221C18__webScreen); __callArgument1642; })) : EntityShapeL221C18__webScreen);
+    } } : EntityShapeL221C31__webScreen); __callArgument1642; })) : EntityShapeL221C31__webScreen);
     detailsBackend = (cast createEntity(({ final __callArgument1682:Dynamic = ({ queryPermission: function():flight._internal._Promise<ScreenPermissionState> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
@@ -6896,7 +6896,7 @@ class _HostWeb {
           });
         })
       );
-    } } : EntityShapeL242C26__webScreen); __callArgument1682; })) : EntityShapeL242C26__webScreen);
+    } } : EntityShapeL242C39__webScreen); __callArgument1682; })) : EntityShapeL242C39__webScreen);
     permissionChange = (cast createEntity(({ final __callArgument1704:Dynamic = ({ subscribe: function(listener:ScreenPermissionState->Void):Void->Void {
       var cancelled:Bool = cast _Runtime.UNDEFINED;
       var status:Null<flight._internal.dom.PermissionStatus> = cast _Runtime.UNDEFINED;
@@ -6919,7 +6919,7 @@ class _HostWeb {
         ({ final __hostTypeCall1703 = status; __hostTypeCall1703 == null ? _Runtime.UNDEFINED : __hostTypeCall1703.removeEventListener('change', handle); });
       };
       return cast _Runtime.UNDEFINED;
-    } } : EntityShapeL272C28__webScreen); __callArgument1704; })) : EntityShapeL272C28__webScreen);
+    } } : EntityShapeL272C41__webScreen); __callArgument1704; })) : EntityShapeL272C41__webScreen);
     return cast { change: change, details: detailsBackend, permissionChange: permissionChange, query: query };
     return cast null;
   }
@@ -7599,7 +7599,7 @@ class _HostWeb {
     ((cast _HostWeb.releases__webStorage : flight._internal._Set<Void->Void>).add(release));
     return cast release;
     return cast _Runtime.UNDEFINED;
-  } } : EntityShapeL20C34__webStorage) : Dynamic)) : EntityShapeL20C34__webStorage);
+  } } : EntityShapeL20C47__webStorage) : Dynamic)) : EntityShapeL20C47__webStorage);
 
   public static final webStoragePersistenceCapabilities__webStorageHost:WebWindowStoragePersistenceCapabilities = (cast createWebWindowStoragePersistenceCapabilities(({ final __callArgument2030:Dynamic = { getPermissionState: function():flight._internal._Promise<PermissionState> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
@@ -7682,7 +7682,7 @@ class _HostWeb {
           });
         });
       }));
-    } } : EntityShapeL14C30__webStoragePersistence); __callArgument2045; })) : EntityShapeL14C30__webStoragePersistence);
+    } } : EntityShapeL14C43__webStoragePersistence); __callArgument2045; })) : EntityShapeL14C43__webStoragePersistence);
     capabilities = (cast createEntity((cast ({ persistenceQuery: (cast _HostWeb.createPersistenceQueryBackend__webStoragePersistence(({ final __callArgument2061:Dynamic = api; __callArgument2061; })) : { >Entity, var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; }), persistenceRequest: persistenceRequest } : WebWindowStoragePersistenceCapabilities) : Dynamic)) : WebWindowStoragePersistenceCapabilities);
     return cast capabilities;
     return cast null;
@@ -7709,7 +7709,7 @@ class _HostWeb {
           });
         });
       }));
-    } } : EntityShapeL36C19__webStoragePersistence); __callArgument2087; })) : EntityShapeL36C19__webStoragePersistence);
+    } } : EntityShapeL36C32__webStoragePersistence); __callArgument2087; })) : EntityShapeL36C32__webStoragePersistence);
     return cast backend;
     return cast null;
   }

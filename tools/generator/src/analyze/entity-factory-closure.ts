@@ -6,6 +6,7 @@ import type { TypedStructRegistry, TypedStructSchemaAudit } from './typed-struct
 import {
   entityFactoryDestinationCandidates,
   entityFactoryExpandedObjectFields,
+  entityFactoryForwardedParameter,
   entityFactoryObjectLiteral,
   entityFactoryObjectShape,
   entityFactoryResolvedObjectFields,
@@ -40,7 +41,9 @@ export type EntityFactoryBlocker =
 export type EntityFactoryNormalization =
   | 'computed-symbol-key'
   | 'field-order'
+  | 'forwarded-construction'
   | 'missing-field-initialization'
+  | 'runtime-class-clone'
   | 'spread-projection'
   | 'synthetic-class';
 
@@ -108,7 +111,7 @@ export function auditEntityFactoryClosure(
   const sites: EntityFactoryClosureSite[] = [];
   const visit = (node: ts.Node): void => {
     if (ts.isCallExpression(node) && isFlightCreateEntityCall(node, checker)) {
-      sites.push(auditFactorySite(workspaceDirectory, node, checker, registry, entityType));
+      sites.push(auditFactorySite(workspaceDirectory, node, checker, program, registry, entityType));
     }
     ts.forEachChild(node, visit);
   };
@@ -166,6 +169,7 @@ function auditFactorySite(
   workspaceDirectory: string,
   call: ts.CallExpression,
   checker: ts.TypeChecker,
+  program: ts.Program,
   registry: TypedStructRegistry,
   entityType: ts.Type,
 ): EntityFactoryClosureSite {
@@ -206,6 +210,11 @@ function auditFactorySite(
     schema !== undefined &&
     constructionFields?.some((field) => !schema.fields.some((schemaField) => schemaField.name === field));
   const parameterizedDestination = exact ? isParameterizedEntityFactoryType(exact.type, checker) : false;
+  const forwardedAllocations = entityFactoryForwardedParameter(call, checker)
+    ? forwardedEntityFactoryAllocations(call, checker, program, registry.excludedPackageDirectories)
+    : undefined;
+  const localForwardedConstruction = forwardedAllocations !== undefined && forwardedAllocations.length > 0;
+  const runtimeCloneConstruction = isRuntimeClassClone(call, object, shape);
   const localObjectConstruction =
     object !== undefined &&
     shape !== undefined &&
@@ -219,7 +228,8 @@ function auditFactorySite(
     (destinationKind === 'structural-entity' ||
       destinationKind === 'unresolved' ||
       (destinationKind === 'exact-entity' && parameterizedDestination));
-  const localEntityConstruction = localObjectConstruction || localOmittedConstruction;
+  const localEntityConstruction =
+    localObjectConstruction || localOmittedConstruction || localForwardedConstruction || runtimeCloneConstruction;
   if (localEntityConstruction) destinationKind = 'local-entity';
   const blockers: EntityFactoryBlocker[] = [];
   const normalizations: EntityFactoryNormalization[] = [];
@@ -227,7 +237,9 @@ function auditFactorySite(
   else if (destinationKind === 'generic-entity') blockers.push('generic-entity-destination');
   else if (destinationKind === 'structural-entity') blockers.push('structural-entity-destination');
   else if (destinationKind === 'unresolved') blockers.push('unresolved-destination');
-  else if (destinationKind === 'local-entity') normalizations.push('synthetic-class');
+  else if (destinationKind === 'local-entity' && !runtimeCloneConstruction) normalizations.push('synthetic-class');
+  if (localForwardedConstruction) normalizations.push('forwarded-construction');
+  if (runtimeCloneConstruction) normalizations.push('runtime-class-clone');
   if (parameterizedDestination && !localEntityConstruction) blockers.push('parameterized-destination');
   let argument: EntityFactoryClosureSite['argument'];
   if (object && shape && constructionFields) {
@@ -249,7 +261,10 @@ function auditFactorySite(
         )) ||
         destinationKind === 'local-entity');
     if (shape.hasSpread) {
-      if (exactSpreadProjection) normalizations.push('spread-projection');
+      if (runtimeCloneConstruction) {
+        // The source runtime class supplies the generic layout; the clone helper
+        // copies its fields before the upstream code resets EntityRuntimeKey.
+      } else if (exactSpreadProjection) normalizations.push('spread-projection');
       else blockers.push('spread-construction');
     }
     if (schema && !localEntityConstruction) {
@@ -258,6 +273,8 @@ function auditFactorySite(
   } else if (call.arguments.length === 0) {
     argument = { fields: [], kind: 'omitted' };
     if (!localOmittedConstruction) blockers.push('omitted-construction');
+  } else if (localForwardedConstruction) {
+    argument = { fields: [], kind: 'other' };
   } else {
     argument = { fields: [], kind: 'other' };
     blockers.push('non-object-construction');
@@ -279,7 +296,7 @@ function auditFactorySite(
     destination: {
       kind: destinationKind,
       ...(exact ? { route: exact.route } : destinationCandidates[0] ? { route: destinationCandidates[0].route } : {}),
-      ...(localEntityConstruction
+      ...(localEntityConstruction && !runtimeCloneConstruction
         ? {
             schemaId: syntheticEntitySchemaId(workspaceDirectory, call),
             schemaName: entityFactorySyntheticClassName(call),
@@ -300,6 +317,80 @@ function auditFactorySite(
     source: path.relative(workspaceDirectory, source.fileName).split(path.sep).join('/'),
     status,
   };
+}
+
+function isRuntimeClassClone(
+  call: ts.CallExpression,
+  object: ts.ObjectLiteralExpression | undefined,
+  shape: ReturnType<typeof entityFactoryObjectShape> | undefined,
+): boolean {
+  if (!object || !shape?.hasSpread || object.properties.length !== 1 || !ts.isSpreadAssignment(object.properties[0]!)) {
+    return false;
+  }
+  const normalizedSource = call.getSourceFile().fileName.split(path.sep).join('/');
+  return (
+    normalizedSource.endsWith('/upstream/packages/entity/src/clone.ts') && enclosingFactoryName(call) === 'cloneEntity'
+  );
+}
+
+function forwardedEntityFactoryAllocations(
+  call: ts.CallExpression,
+  checker: ts.TypeChecker,
+  program: ts.Program,
+  excludedDirectories: ReadonlySet<string>,
+): ts.ObjectLiteralExpression[] | undefined {
+  const parameter = entityFactoryForwardedParameter(call, checker);
+  const owner = parameter?.parent;
+  if (!parameter || !owner || !ts.isFunctionLike(owner) || !owner.name) return undefined;
+  const parameterIndex = owner.parameters.indexOf(parameter);
+  let ownerSymbol = checker.getSymbolAtLocation(owner.name);
+  if (ownerSymbol && (ownerSymbol.flags & ts.SymbolFlags.Alias) !== 0)
+    ownerSymbol = checker.getAliasedSymbol(ownerSymbol);
+  const allocations: ts.ObjectLiteralExpression[] = [];
+  let invalid = false;
+  const visit = (node: ts.Node): void => {
+    if (invalid) return;
+    if (ts.isCallExpression(node)) {
+      let symbol = checker.getSymbolAtLocation(node.expression);
+      if (symbol && (symbol.flags & ts.SymbolFlags.Alias) !== 0) symbol = checker.getAliasedSymbol(symbol);
+      if (symbol === ownerSymbol) {
+        const argument = node.arguments[parameterIndex];
+        const unwrapped = argument && unwrapFactoryArgument(argument);
+        if (!unwrapped || !ts.isObjectLiteralExpression(unwrapped)) {
+          invalid = true;
+          return;
+        }
+        const shape = entityFactoryObjectShape(unwrapped);
+        const fields = shape.hasSpread
+          ? entityFactoryExpandedObjectFields(unwrapped, checker)
+          : entityFactoryResolvedObjectFields(unwrapped, checker);
+        if (!fields || shape.hasUnsupported) {
+          invalid = true;
+          return;
+        }
+        allocations.push(unwrapped);
+      }
+    }
+    ts.forEachChild(node, visit);
+  };
+  for (const source of program.getSourceFiles()) {
+    if (sourceScope(source, excludedDirectories) === 'production') visit(source);
+  }
+  return invalid ? undefined : allocations;
+}
+
+function unwrapFactoryArgument(expression: ts.Expression): ts.Expression {
+  let current = expression;
+  while (
+    ts.isParenthesizedExpression(current) ||
+    ts.isAsExpression(current) ||
+    ts.isTypeAssertionExpression(current) ||
+    ts.isSatisfiesExpression(current) ||
+    ts.isNonNullExpression(current)
+  ) {
+    current = current.expression;
+  }
+  return current;
 }
 
 function addFieldFindings(

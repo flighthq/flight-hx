@@ -50,7 +50,7 @@ typedef ResolveImageBitmapComposition__imageResourceReference = EmbeddedImageRes
 #if !flight_struct_typedef
 @:allow(flight._Image)
 @:structInit
-private class EntityShapeL73C10__imageResourceReference {
+private class EntityShapeL63C48__imageResourceReference {
   public var alphaType:AlphaType;
   public var data:flight._internal._UInt8ClampedArray;
   public var format:String;
@@ -74,7 +74,7 @@ private class EntityShapeL73C10__imageResourceReference {
   }
 }
 #else
-private typedef EntityShapeL73C10__imageResourceReference = { var alphaType:AlphaType; var data:flight._internal._UInt8ClampedArray; var format:String; var gamut:String; var height:Float; var kind:String; var version:Float; var width:Float; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL63C48__imageResourceReference = { var alphaType:AlphaType; var data:flight._internal._UInt8ClampedArray; var format:String; var gamut:String; var height:Float; var kind:String; var version:Float; var width:Float; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 @:noCompletion
@@ -423,7 +423,7 @@ class _Image {
               __flowBranch65 = flight._internal._Async.flowNormal();
             }
             return flight._internal._Async.continueFlow(__flowBranch65, function():Dynamic {
-              bitmap = ({ alphaType: ref.alphaType, data: new flight._internal._UInt8ClampedArray((cast decoded : DecodedImage).data), format: 'rgba8unorm', gamut: 'srgb', height: (cast decoded : DecodedImage).height, kind: BitmapTextureSourceKind, version: 0.0, width: (cast decoded : DecodedImage).width } : EntityShapeL73C10__imageResourceReference);
+              bitmap = ({ alphaType: ref.alphaType, data: new flight._internal._UInt8ClampedArray((cast decoded : DecodedImage).data), format: 'rgba8unorm', gamut: 'srgb', height: (cast decoded : DecodedImage).height, kind: BitmapTextureSourceKind, version: 0.0, width: (cast decoded : DecodedImage).width } : EntityShapeL63C48__imageResourceReference);
               return flight._internal._Async.flowReturn((cast createEntity((cast bitmap : Dynamic)) : { >Entity, var data:flight._internal._UInt8ClampedArray; var format:PixelFormat; var height:Float; var width:Float; var kind:String; var version:Float; var alphaType:AlphaType; var gamut:String; }));
             });
           });

@@ -53,6 +53,11 @@ export function createEntityCallForObjectLiteral(
         : undefined
       : undefined;
   if (direct) return direct;
+  const forwarded =
+    ts.isCallExpression(parent) && parent.arguments.includes(current as ts.Expression)
+      ? forwardedCreateEntityCall(parent, parent.arguments.indexOf(current as ts.Expression), checker)
+      : undefined;
+  if (forwarded) return forwarded;
   const indexed = entityFactoryCallByObject(node.getSourceFile(), checker).get(node);
   return indexed || undefined;
 }
@@ -81,11 +86,70 @@ function entityFactoryCallByObject(
         calls.set(object, calls.has(object) ? false : candidate);
       }
     }
+    if (ts.isCallExpression(candidate)) {
+      candidate.arguments.forEach((argument, index) => {
+        const forwarded = forwardedCreateEntityCall(candidate, index, checker);
+        if (!forwarded) return;
+        const object = objectLiteralArgument(argument, checker);
+        if (object) calls.set(object, calls.has(object) ? false : forwarded);
+      });
+    }
     ts.forEachChild(candidate, visit);
   };
   visit(source);
   bySource.set(source, calls);
   return calls;
+}
+
+function objectLiteralArgument(
+  expression: ts.Expression,
+  checker: ts.TypeChecker,
+): ts.ObjectLiteralExpression | undefined {
+  const argument = unwrapEntityFactoryExpression(expression);
+  if (ts.isObjectLiteralExpression(argument)) return argument;
+  if (!ts.isIdentifier(argument)) return undefined;
+  const declaration = checker.getSymbolAtLocation(argument)?.valueDeclaration;
+  if (!declaration || !ts.isVariableDeclaration(declaration) || !declaration.initializer) return undefined;
+  const initializer = unwrapEntityFactoryExpression(declaration.initializer);
+  return ts.isObjectLiteralExpression(initializer) ? initializer : undefined;
+}
+
+export function entityFactoryForwardedParameter(
+  call: ts.CallExpression,
+  checker: ts.TypeChecker,
+): ts.ParameterDeclaration | undefined {
+  if (call.arguments.length !== 1 || !ts.isIdentifier(unwrapEntityFactoryExpression(call.arguments[0]!))) {
+    return undefined;
+  }
+  const argument = unwrapEntityFactoryExpression(call.arguments[0]!);
+  const declaration = checker.getSymbolAtLocation(argument)?.valueDeclaration;
+  return declaration && ts.isParameter(declaration) ? declaration : undefined;
+}
+
+export function forwardedCreateEntityCall(
+  call: ts.CallExpression,
+  argumentIndex: number,
+  checker: ts.TypeChecker,
+): ts.CallExpression | undefined {
+  let symbol = checker.getSymbolAtLocation(call.expression);
+  if (symbol && (symbol.flags & ts.SymbolFlags.Alias) !== 0) symbol = checker.getAliasedSymbol(symbol);
+  const declaration = symbol?.valueDeclaration ?? symbol?.declarations?.[0];
+  if (!declaration || !ts.isFunctionDeclaration(declaration) || !declaration.body) return undefined;
+  const parameter = declaration.parameters[argumentIndex];
+  if (!parameter || !ts.isIdentifier(parameter.name)) return undefined;
+  const parameterSymbol = checker.getSymbolAtLocation(parameter.name);
+  const matches: ts.CallExpression[] = [];
+  const visit = (node: ts.Node): void => {
+    if (ts.isCallExpression(node) && isFlightCreateEntityCall(node, checker)) {
+      const forwarded = entityFactoryForwardedParameter(node, checker);
+      const forwardedSymbol =
+        forwarded && ts.isIdentifier(forwarded.name) ? checker.getSymbolAtLocation(forwarded.name) : undefined;
+      if (forwardedSymbol === parameterSymbol) matches.push(node);
+    }
+    ts.forEachChild(node, visit);
+  };
+  visit(declaration.body);
+  return matches.length === 1 ? matches[0] : undefined;
 }
 
 export function entityFactoryObjectLiteral(
@@ -217,9 +281,9 @@ export function entityFactoryExpandedObjectFields(
     .filter((name) => !name.startsWith('__@EntityRuntimeKey@'));
 }
 
-export function entityFactorySyntheticClassName(call: ts.CallExpression): string {
-  const source = call.getSourceFile();
-  const position = source.getLineAndCharacterOfPosition(call.getStart(source));
+export function entityFactorySyntheticClassName(node: ts.Node): string {
+  const source = node.getSourceFile();
+  const position = source.getLineAndCharacterOfPosition(node.getStart(source));
   return `EntityShapeL${String(position.line + 1)}C${String(position.character + 1)}`;
 }
 

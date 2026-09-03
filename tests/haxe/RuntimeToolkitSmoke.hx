@@ -150,6 +150,13 @@ class RuntimeToolkitSmoke {
     if (flight._internal.DynamicObject.getPrototypeOf(new RuntimePrototypeFixture()) == objectPrototype) {
       throw 'portable class prototype collapsed to Object.prototype';
     }
+    final entitySource = new RuntimeEntityCloneFixture(7);
+    entitySource.__symbol__EntityRuntime = {binding: 'source'};
+    final entityClone = _Runtime.cloneEntityShape(entitySource);
+    if (entityClone == entitySource || !Std.isOfType(entityClone, RuntimeEntityCloneFixture) || entityClone.value != 7) {
+      throw 'portable Entity class clone failed';
+    }
+    if (entityClone.__symbol__EntityRuntime.binding != 'source') throw 'portable Entity clone omitted a field';
 
     final identityKey:Array<Dynamic> = [];
     final weakMap = _Runtime.construct(_HostValueLut.get('WeakMap'), []);
@@ -181,4 +188,14 @@ class RuntimeToolkitSmoke {
 
 private class RuntimePrototypeFixture {
   public function new() {}
+}
+
+private class RuntimeEntityCloneFixture {
+  public var __symbol__EntityRuntime:Dynamic;
+  public var value:Int;
+
+  public function new(value:Int) {
+    this.__symbol__EntityRuntime = null;
+    this.value = value;
+  }
 }

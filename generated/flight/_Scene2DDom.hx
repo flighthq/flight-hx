@@ -161,7 +161,7 @@ typedef DomRichTextData__domRichText = { >RendererData, var div:Null<flight._int
 #if !flight_struct_typedef
 @:allow(flight._Scene2DDom)
 @:structInit
-private class EntityShapeL38C10__domRichText {
+private class EntityShapeL38C23__domRichText {
   public var div:flight._internal._Any;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -171,7 +171,7 @@ private class EntityShapeL38C10__domRichText {
   }
 }
 #else
-private typedef EntityShapeL38C10__domRichText = { var div:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL38C23__domRichText = { var div:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef DomScale9ShapeData__domScale9Shape = { >RendererData, var canvas:Null<flight._internal.dom.HTMLCanvasElement>; var context:Null<flight._internal.dom.CanvasRenderingContext2D>; };
@@ -179,7 +179,7 @@ typedef DomScale9ShapeData__domScale9Shape = { >RendererData, var canvas:Null<fl
 #if !flight_struct_typedef
 @:allow(flight._Scene2DDom)
 @:structInit
-private class EntityShapeL31C10__domScale9Shape {
+private class EntityShapeL31C23__domScale9Shape {
   public var canvas:flight._internal._Any;
   public var context:flight._internal._Any;
   public var __symbol__EntityRuntime:Null<Dynamic>;
@@ -191,7 +191,7 @@ private class EntityShapeL31C10__domScale9Shape {
   }
 }
 #else
-private typedef EntityShapeL31C10__domScale9Shape = { var canvas:flight._internal._Any; var context:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL31C23__domScale9Shape = { var canvas:flight._internal._Any; var context:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef DomShapeData__domShape = { >RendererData, var canvas:Null<flight._internal.dom.HTMLCanvasElement>; var context:Null<flight._internal.dom.CanvasRenderingContext2D>; };
@@ -199,7 +199,7 @@ typedef DomShapeData__domShape = { >RendererData, var canvas:Null<flight._intern
 #if !flight_struct_typedef
 @:allow(flight._Scene2DDom)
 @:structInit
-private class EntityShapeL25C10__domShape {
+private class EntityShapeL25C23__domShape {
   public var canvas:flight._internal._Any;
   public var context:flight._internal._Any;
   public var __symbol__EntityRuntime:Null<Dynamic>;
@@ -211,7 +211,7 @@ private class EntityShapeL25C10__domShape {
   }
 }
 #else
-private typedef EntityShapeL25C10__domShape = { var canvas:flight._internal._Any; var context:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL25C23__domShape = { var canvas:flight._internal._Any; var context:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef DomSpriteData__domSprite = { >RendererData, var canvas:Null<flight._internal.dom.HTMLCanvasElement>; var context:Null<flight._internal.dom.CanvasRenderingContext2D>; var image:Null<flight._internal.dom.HTMLImageElement>; var video:Null<flight._internal.dom.HTMLVideoElement>; };
@@ -223,7 +223,7 @@ typedef DomTextData__domTextLabel = { >RendererData, var div:Null<flight._intern
 #if !flight_struct_typedef
 @:allow(flight._Scene2DDom)
 @:structInit
-private class EntityShapeL26C10__domTextLabel {
+private class EntityShapeL26C23__domTextLabel {
   public var div:flight._internal._Any;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -233,7 +233,7 @@ private class EntityShapeL26C10__domTextLabel {
   }
 }
 #else
-private typedef EntityShapeL26C10__domTextLabel = { var div:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL26C23__domTextLabel = { var div:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 @:noCompletion
@@ -1017,7 +1017,7 @@ class _Scene2DDom {
   }
 
   public static function createDomRichTextData__domRichText(_state:RenderState, _source:Renderable):DomRichTextData__domRichText {
-    return cast (cast createEntity(({ final __callArgument158:Dynamic = ({ div: null } : EntityShapeL38C10__domRichText); __callArgument158; })) : EntityShapeL38C10__domRichText);
+    return cast (cast createEntity(({ final __callArgument158:Dynamic = ({ div: null } : EntityShapeL38C23__domRichText); __callArgument158; })) : EntityShapeL38C23__domRichText);
     return cast null;
   }
 
@@ -1283,7 +1283,7 @@ class _Scene2DDom {
   @:allow(flight)
   @:keep
   private static function createDomScale9ShapeData(_state:RenderState, _source:Renderable):DomScale9ShapeData__domScale9Shape {
-    return cast (cast createEntity(({ final __callArgument226:Dynamic = ({ canvas: null, context: null } : EntityShapeL31C10__domScale9Shape); __callArgument226; })) : EntityShapeL31C10__domScale9Shape);
+    return cast (cast createEntity(({ final __callArgument226:Dynamic = ({ canvas: null, context: null } : EntityShapeL31C23__domScale9Shape); __callArgument226; })) : EntityShapeL31C23__domScale9Shape);
     return cast null;
   }
 
@@ -1362,7 +1362,7 @@ class _Scene2DDom {
   }
 
   public static function createDomShapeData__domShape(_state:RenderState, _source:Renderable):DomShapeData__domShape {
-    return cast (cast createEntity(({ final __callArgument266:Dynamic = ({ canvas: null, context: null } : EntityShapeL25C10__domShape); __callArgument266; })) : EntityShapeL25C10__domShape);
+    return cast (cast createEntity(({ final __callArgument266:Dynamic = ({ canvas: null, context: null } : EntityShapeL25C23__domShape); __callArgument266; })) : EntityShapeL25C23__domShape);
     return cast null;
   }
 
@@ -1635,7 +1635,7 @@ class _Scene2DDom {
   public static final selectionRectangles__domTextInput:Array<TextSelectionRectangle> = (cast cast ([] : Array<Dynamic>));
 
   public static function createDomTextData__domTextLabel(_state:RenderState, _source:Renderable):DomTextData__domTextLabel {
-    return cast (cast createEntity(({ final __callArgument410:Dynamic = ({ div: null } : EntityShapeL26C10__domTextLabel); __callArgument410; })) : EntityShapeL26C10__domTextLabel);
+    return cast (cast createEntity(({ final __callArgument410:Dynamic = ({ div: null } : EntityShapeL26C23__domTextLabel); __callArgument410; })) : EntityShapeL26C23__domTextLabel);
     return cast null;
   }
 

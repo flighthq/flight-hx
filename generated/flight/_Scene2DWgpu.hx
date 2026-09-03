@@ -264,9 +264,107 @@ typedef Mutable__wgpuRenderStats<T> = flight._internal._Mapped<flight._internal.
 
 typedef WgpuRichTextData__wgpuRichText = { >RendererData, var surface:Null<Raster2DSurface>; };
 
+#if !flight_struct_typedef
+@:allow(flight._Scene2DWgpu)
+@:structInit
+private class EntityShapeL43C33__wgpuRichText {
+  public var surface:flight._internal._Any;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(surface:flight._internal._Any):Void {
+    this.__symbol__EntityRuntime = null;
+    this.surface = surface;
+  }
+}
+#else
+private typedef EntityShapeL43C33__wgpuRichText = { var surface:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
 typedef WgpuScale9ShapeData__wgpuScale9Shape = { >RendererData, var lastH:Float; var lastScaleX:Float; var lastScaleY:Float; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var surface:Null<Raster2DSurface>; };
 
+#if !flight_struct_typedef
+@:allow(flight._Scene2DWgpu)
+@:structInit
+private class EntityShapeL49C33__wgpuScale9Shape {
+  public var lastH:Float;
+  public var lastScaleX:Float;
+  public var lastScaleY:Float;
+  public var lastContentId:Float;
+  public var lastPixelRatio:Float;
+  public var lastW:Float;
+  public var surface:flight._internal._Any;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(lastH:Float, lastScaleX:Float, lastScaleY:Float, lastContentId:Float, lastPixelRatio:Float, lastW:Float, surface:flight._internal._Any):Void {
+    this.__symbol__EntityRuntime = null;
+    this.lastH = lastH;
+    this.lastScaleX = lastScaleX;
+    this.lastScaleY = lastScaleY;
+    this.lastContentId = lastContentId;
+    this.lastPixelRatio = lastPixelRatio;
+    this.lastW = lastW;
+    this.surface = surface;
+  }
+}
+#else
+private typedef EntityShapeL49C33__wgpuScale9Shape = { var lastH:Float; var lastScaleX:Float; var lastScaleY:Float; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var surface:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Scene2DWgpu)
+@:structInit
+private class EntityShapeL29C33__wgpuShapeData {
+  public var surface:flight._internal._Any;
+  public var lastContentId:Float;
+  public var lastPixelRatio:Float;
+  public var lastW:Float;
+  public var lastH:Float;
+  public var meshVersion:Float;
+  public var meshes:flight._internal._Any;
+  public var meshBuffers:{ var vertexBuffers:Array<flight._internal._Any>; var vertexCapacities:Array<flight._internal._Any>; var indexBuffers:Array<flight._internal._Any>; var indexCapacities:Array<flight._internal._Any>; var uniformBuffers:Array<flight._internal._Any>; var bindGroups:Array<flight._internal._Any>; var colorScaleBiasUniformBuffers:Array<flight._internal._Any>; var colorScaleBiasBindGroups:Array<flight._internal._Any>; };
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(surface:flight._internal._Any, lastContentId:Float, lastPixelRatio:Float, lastW:Float, lastH:Float, meshVersion:Float, meshes:flight._internal._Any, meshBuffers:{ var vertexBuffers:Array<flight._internal._Any>; var vertexCapacities:Array<flight._internal._Any>; var indexBuffers:Array<flight._internal._Any>; var indexCapacities:Array<flight._internal._Any>; var uniformBuffers:Array<flight._internal._Any>; var bindGroups:Array<flight._internal._Any>; var colorScaleBiasUniformBuffers:Array<flight._internal._Any>; var colorScaleBiasBindGroups:Array<flight._internal._Any>; }):Void {
+    this.__symbol__EntityRuntime = null;
+    this.surface = surface;
+    this.lastContentId = lastContentId;
+    this.lastPixelRatio = lastPixelRatio;
+    this.lastW = lastW;
+    this.lastH = lastH;
+    this.meshVersion = meshVersion;
+    this.meshes = meshes;
+    this.meshBuffers = meshBuffers;
+  }
+}
+#else
+private typedef EntityShapeL29C33__wgpuShapeData = { var surface:flight._internal._Any; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:flight._internal._Any; var meshBuffers:{ var vertexBuffers:Array<flight._internal._Any>; var vertexCapacities:Array<flight._internal._Any>; var indexBuffers:Array<flight._internal._Any>; var indexCapacities:Array<flight._internal._Any>; var uniformBuffers:Array<flight._internal._Any>; var bindGroups:Array<flight._internal._Any>; var colorScaleBiasUniformBuffers:Array<flight._internal._Any>; var colorScaleBiasBindGroups:Array<flight._internal._Any>; }; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
 typedef WgpuTextLabelData__wgpuTextLabel = { >RendererData, var surface:Null<Raster2DSurface>; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; };
+
+#if !flight_struct_typedef
+@:allow(flight._Scene2DWgpu)
+@:structInit
+private class EntityShapeL46C33__wgpuTextLabel {
+  public var surface:flight._internal._Any;
+  public var lastContentId:Float;
+  public var lastPixelRatio:Float;
+  public var logW:Float;
+  public var logH:Float;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(surface:flight._internal._Any, lastContentId:Float, lastPixelRatio:Float, logW:Float, logH:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.surface = surface;
+    this.lastContentId = lastContentId;
+    this.lastPixelRatio = lastPixelRatio;
+    this.logW = logW;
+    this.logH = logH;
+  }
+}
+#else
+private typedef EntityShapeL46C33__wgpuTextLabel = { var surface:flight._internal._Any; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
 
 typedef WgpuVelocityPipeline__wgpuVelocity = { var pipeline:flight._internal.dom.GPURenderPipeline; var uniformBuffer:flight._internal.dom.GPUBuffer; var bindGroup:flight._internal.dom.GPUBindGroup; var cursor:Float; var scratch:flight._internal._Float32Array; };
 
@@ -2361,7 +2459,7 @@ class _Scene2DWgpu {
   @:allow(flight)
   @:keep
   private static function createWgpuRichTextData(_state:RenderState, _source:Renderable):RendererData {
-    return cast (cast (cast createWgpuRendererData : { var surface:flight._internal._Any; }->{ >RendererData, var surface:flight._internal._Any; })(({ final __callArgument831:Dynamic = { surface: null }; __callArgument831; })) : { >RendererData, var surface:flight._internal._Any; });
+    return cast (cast (cast createWgpuRendererData : { var surface:flight._internal._Any; }->{ >RendererData, var surface:flight._internal._Any; })(({ final __callArgument831:Dynamic = ({ surface: null } : EntityShapeL43C33__wgpuRichText); __callArgument831; })) : { >RendererData, var surface:flight._internal._Any; });
     return cast null;
   }
 
@@ -2611,7 +2709,7 @@ class _Scene2DWgpu {
   @:allow(flight)
   @:keep
   private static function createWgpuScale9ShapeData(_state:RenderState, _source:Renderable):RendererData {
-    return cast (cast (cast createWgpuRendererData : { var lastH:Float; var lastScaleX:Float; var lastScaleY:Float; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var surface:flight._internal._Any; }->{ >RendererData, var lastH:Float; var lastScaleX:Float; var lastScaleY:Float; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var surface:flight._internal._Any; })(({ final __callArgument897:Dynamic = { lastH: 0.0, lastScaleX: -1.0, lastScaleY: -1.0, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, surface: null }; __callArgument897; })) : { >RendererData, var lastH:Float; var lastScaleX:Float; var lastScaleY:Float; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var surface:flight._internal._Any; });
+    return cast (cast (cast createWgpuRendererData : { var lastH:Float; var lastScaleX:Float; var lastScaleY:Float; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var surface:flight._internal._Any; }->{ >RendererData, var lastH:Float; var lastScaleX:Float; var lastScaleY:Float; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var surface:flight._internal._Any; })(({ final __callArgument897:Dynamic = ({ lastH: 0.0, lastScaleX: -1.0, lastScaleY: -1.0, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, surface: null } : EntityShapeL49C33__wgpuScale9Shape); __callArgument897; })) : { >RendererData, var lastH:Float; var lastScaleX:Float; var lastScaleY:Float; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var surface:flight._internal._Any; });
     return cast null;
   }
 
@@ -2763,7 +2861,7 @@ class _Scene2DWgpu {
   @:allow(flight)
   @:keep
   private static function createWgpuShapeData(_state:RenderState, _source:Renderable):RendererData {
-    return cast (cast (cast createWgpuRendererData : { var surface:flight._internal._Any; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:flight._internal._Any; var meshBuffers:{ var vertexBuffers:Array<flight._internal._Any>; var vertexCapacities:Array<flight._internal._Any>; var indexBuffers:Array<flight._internal._Any>; var indexCapacities:Array<flight._internal._Any>; var uniformBuffers:Array<flight._internal._Any>; var bindGroups:Array<flight._internal._Any>; var colorScaleBiasUniformBuffers:Array<flight._internal._Any>; var colorScaleBiasBindGroups:Array<flight._internal._Any>; }; }->{ >RendererData, var surface:flight._internal._Any; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:flight._internal._Any; var meshBuffers:{ var vertexBuffers:Array<flight._internal._Any>; var vertexCapacities:Array<flight._internal._Any>; var indexBuffers:Array<flight._internal._Any>; var indexCapacities:Array<flight._internal._Any>; var uniformBuffers:Array<flight._internal._Any>; var bindGroups:Array<flight._internal._Any>; var colorScaleBiasUniformBuffers:Array<flight._internal._Any>; var colorScaleBiasBindGroups:Array<flight._internal._Any>; }; })(({ final __callArgument961:Dynamic = { surface: null, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, lastH: 0.0, meshVersion: -1.0, meshes: null, meshBuffers: { vertexBuffers: cast ([] : Array<Dynamic>), vertexCapacities: cast ([] : Array<Dynamic>), indexBuffers: cast ([] : Array<Dynamic>), indexCapacities: cast ([] : Array<Dynamic>), uniformBuffers: cast ([] : Array<Dynamic>), bindGroups: cast ([] : Array<Dynamic>), colorScaleBiasUniformBuffers: cast ([] : Array<Dynamic>), colorScaleBiasBindGroups: cast ([] : Array<Dynamic>) } }; __callArgument961; })) : { >RendererData, var surface:flight._internal._Any; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:flight._internal._Any; var meshBuffers:{ var vertexBuffers:Array<flight._internal._Any>; var vertexCapacities:Array<flight._internal._Any>; var indexBuffers:Array<flight._internal._Any>; var indexCapacities:Array<flight._internal._Any>; var uniformBuffers:Array<flight._internal._Any>; var bindGroups:Array<flight._internal._Any>; var colorScaleBiasUniformBuffers:Array<flight._internal._Any>; var colorScaleBiasBindGroups:Array<flight._internal._Any>; }; });
+    return cast (cast (cast createWgpuRendererData : { var surface:flight._internal._Any; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:flight._internal._Any; var meshBuffers:{ var vertexBuffers:Array<flight._internal._Any>; var vertexCapacities:Array<flight._internal._Any>; var indexBuffers:Array<flight._internal._Any>; var indexCapacities:Array<flight._internal._Any>; var uniformBuffers:Array<flight._internal._Any>; var bindGroups:Array<flight._internal._Any>; var colorScaleBiasUniformBuffers:Array<flight._internal._Any>; var colorScaleBiasBindGroups:Array<flight._internal._Any>; }; }->{ >RendererData, var surface:flight._internal._Any; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:flight._internal._Any; var meshBuffers:{ var vertexBuffers:Array<flight._internal._Any>; var vertexCapacities:Array<flight._internal._Any>; var indexBuffers:Array<flight._internal._Any>; var indexCapacities:Array<flight._internal._Any>; var uniformBuffers:Array<flight._internal._Any>; var bindGroups:Array<flight._internal._Any>; var colorScaleBiasUniformBuffers:Array<flight._internal._Any>; var colorScaleBiasBindGroups:Array<flight._internal._Any>; }; })(({ final __callArgument961:Dynamic = ({ surface: null, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, lastH: 0.0, meshVersion: -1.0, meshes: null, meshBuffers: { vertexBuffers: cast ([] : Array<Dynamic>), vertexCapacities: cast ([] : Array<Dynamic>), indexBuffers: cast ([] : Array<Dynamic>), indexCapacities: cast ([] : Array<Dynamic>), uniformBuffers: cast ([] : Array<Dynamic>), bindGroups: cast ([] : Array<Dynamic>), colorScaleBiasUniformBuffers: cast ([] : Array<Dynamic>), colorScaleBiasBindGroups: cast ([] : Array<Dynamic>) } } : EntityShapeL29C33__wgpuShapeData); __callArgument961; })) : { >RendererData, var surface:flight._internal._Any; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:flight._internal._Any; var meshBuffers:{ var vertexBuffers:Array<flight._internal._Any>; var vertexCapacities:Array<flight._internal._Any>; var indexBuffers:Array<flight._internal._Any>; var indexCapacities:Array<flight._internal._Any>; var uniformBuffers:Array<flight._internal._Any>; var bindGroups:Array<flight._internal._Any>; var colorScaleBiasUniformBuffers:Array<flight._internal._Any>; var colorScaleBiasBindGroups:Array<flight._internal._Any>; }; });
     return cast null;
   }
 
@@ -3148,7 +3246,7 @@ class _Scene2DWgpu {
   public static final defaultWgpuTextLabelRenderer:Scene2DRenderer = (cast { format: BatchFormat.Quad, createData: _Scene2DWgpu.createWgpuTextLabelData__wgpuTextLabel, destroyData: _Scene2DWgpu.destroyWgpuTextLabelData__wgpuTextLabel, submit: drawWgpuTextLabel });
 
   public static function createWgpuTextLabelData__wgpuTextLabel(_state:RenderState, _source:Renderable):RendererData {
-    return cast (cast (cast createWgpuRendererData : { var surface:flight._internal._Any; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; }->{ >RendererData, var surface:flight._internal._Any; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; })(({ final __callArgument1121:Dynamic = { surface: null, lastContentId: -1.0, lastPixelRatio: 0.0, logW: 0.0, logH: 0.0 }; __callArgument1121; })) : { >RendererData, var surface:flight._internal._Any; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; });
+    return cast (cast (cast createWgpuRendererData : { var surface:flight._internal._Any; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; }->{ >RendererData, var surface:flight._internal._Any; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; })(({ final __callArgument1121:Dynamic = ({ surface: null, lastContentId: -1.0, lastPixelRatio: 0.0, logW: 0.0, logH: 0.0 } : EntityShapeL46C33__wgpuTextLabel); __callArgument1121; })) : { >RendererData, var surface:flight._internal._Any; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; });
     return cast null;
   }
 

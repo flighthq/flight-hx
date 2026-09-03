@@ -130,7 +130,7 @@ import flight.types.WindowOptions;
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
 @:structInit
-private class EntityShapeL21C13__tauriApp {
+private class EntityShapeL21C26__tauriApp {
   public var getLocale:Void->String;
   public var getPreferredSystemLanguages:Void->Array<String>;
   public var getSystemLocale:Void->String;
@@ -144,13 +144,13 @@ private class EntityShapeL21C13__tauriApp {
   }
 }
 #else
-private typedef EntityShapeL21C13__tauriApp = { var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<String>; var getSystemLocale:Void->String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL21C26__tauriApp = { var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<String>; var getSystemLocale:Void->String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
 @:structInit
-private class EntityShapeL26C11__tauriApp {
+private class EntityShapeL26C24__tauriApp {
   public var getName:Void->String;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -160,13 +160,13 @@ private class EntityShapeL26C11__tauriApp {
   }
 }
 #else
-private typedef EntityShapeL26C11__tauriApp = { var getName:Void->String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL26C24__tauriApp = { var getName:Void->String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
 @:structInit
-private class EntityShapeL27C11__tauriApp {
+private class EntityShapeL27C24__tauriApp {
   public var hideApp:Void->flight._internal._Any;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -176,13 +176,13 @@ private class EntityShapeL27C11__tauriApp {
   }
 }
 #else
-private typedef EntityShapeL27C11__tauriApp = { var hideApp:Void->flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL27C24__tauriApp = { var hideApp:Void->flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
 @:structInit
-private class EntityShapeL28C11__tauriApp {
+private class EntityShapeL28C24__tauriApp {
   public var quit:Void->flight._internal._Any;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -192,13 +192,13 @@ private class EntityShapeL28C11__tauriApp {
   }
 }
 #else
-private typedef EntityShapeL28C11__tauriApp = { var quit:Void->flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL28C24__tauriApp = { var quit:Void->flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
 @:structInit
-private class EntityShapeL29C15__tauriApp {
+private class EntityShapeL29C28__tauriApp {
   public var relaunch:Void->flight._internal._Any;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -208,13 +208,13 @@ private class EntityShapeL29C15__tauriApp {
   }
 }
 #else
-private typedef EntityShapeL29C15__tauriApp = { var relaunch:Void->flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL29C28__tauriApp = { var relaunch:Void->flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
 @:structInit
-private class EntityShapeL30C11__tauriApp {
+private class EntityShapeL30C24__tauriApp {
   public var showApp:Void->flight._internal._Any;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -224,13 +224,13 @@ private class EntityShapeL30C11__tauriApp {
   }
 }
 #else
-private typedef EntityShapeL30C11__tauriApp = { var showApp:Void->flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL30C24__tauriApp = { var showApp:Void->flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
 @:structInit
-private class EntityShapeL31C14__tauriApp {
+private class EntityShapeL31C27__tauriApp {
   public var getVersion:Void->String;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -240,13 +240,13 @@ private class EntityShapeL31C14__tauriApp {
   }
 }
 #else
-private typedef EntityShapeL31C14__tauriApp = { var getVersion:Void->String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL31C27__tauriApp = { var getVersion:Void->String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
 @:structInit
-private class EntityShapeL20C10__tauriDialog {
+private class EntityShapeL20C23__tauriDialog {
   public var open:Null<OpenDirectoryDialogOptions>->flight._internal._Promise<DirectoryOpenDialogResult>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -256,13 +256,13 @@ private class EntityShapeL20C10__tauriDialog {
   }
 }
 #else
-private typedef EntityShapeL20C10__tauriDialog = { var open:Null<OpenDirectoryDialogOptions>->flight._internal._Promise<DirectoryOpenDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL20C23__tauriDialog = { var open:Null<OpenDirectoryDialogOptions>->flight._internal._Promise<DirectoryOpenDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
 @:structInit
-private class EntityShapeL43C10__tauriDialog {
+private class EntityShapeL43C23__tauriDialog {
   public var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -272,13 +272,13 @@ private class EntityShapeL43C10__tauriDialog {
   }
 }
 #else
-private typedef EntityShapeL43C10__tauriDialog = { var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL43C23__tauriDialog = { var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
 @:structInit
-private class EntityShapeL70C10__tauriDialog {
+private class EntityShapeL70C23__tauriDialog {
   public var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -288,7 +288,7 @@ private class EntityShapeL70C10__tauriDialog {
   }
 }
 #else
-private typedef EntityShapeL70C10__tauriDialog = { var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL70C23__tauriDialog = { var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef TauriHost__tauriRegister<Profile> = flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<Host, { var app:TauriAppCapabilities; var tray:TauriTrayCapabilitiesFor<Profile>; }>, HasClipboardText>, HasDialogDirectoryOpen>, HasDialogFileOpen>, HasDialogFileSave>, HasDialogMessage>, HasMenuApplication>, HasMenuPopup>, HasMenuSelect>, HasNotificationDelivery>, HasNotificationLifecycle>, HasNotificationPermission>, HasShellExternal>, HasShellPathOpen>, HasShellPathReveal>, HasShortcutQuery>, HasShortcutTrigger>, HasWindowAttach>, HasWindowOpen>;
@@ -296,7 +296,7 @@ typedef TauriHost__tauriRegister<Profile> = flight._internal._Intersection2<flig
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
 @:structInit
-private class EntityShapeL96C10__tauriRegister {
+private class EntityShapeL96C23__tauriRegister {
   public var accessibility:{  };
   public var app:TauriAppCapabilities;
   public var clipboard:{ var text:ClipboardTextBackend; };
@@ -356,7 +356,7 @@ private class EntityShapeL96C10__tauriRegister {
   }
 }
 #else
-private typedef EntityShapeL96C10__tauriRegister = { var accessibility:{  }; var app:TauriAppCapabilities; var clipboard:{ var text:ClipboardTextBackend; }; var connectivity:{  }; var dialog:{ var directoryOpen:{ >DirectoryOpenDialogBackend, >Entity, }; var fileOpen:{ >FileOpenDialogBackend, >Entity, }; var fileSave:{ >FileSaveDialogBackend, >Entity, }; var message:MessageDialogBackend; }; var graphics:{  }; var input:{  }; var ipc:{  }; var media:{  }; var menu:{ var application:MenuApplicationBackend; var popup:MenuPopupBackend; var select:MenuSelectBackend; }; var midi:{  }; var net:{  }; var power:{  }; var protocol:{  }; var notification:TauriNotificationCapabilities; var shortcut:{ var query:ShortcutQueryBackend; var trigger:ShortcutTriggerBackend; }; var screen:{  }; var share:{  }; var shell:HostShellCapabilities; var storage:{  }; var system:{ var platform:PlatformBackend; }; var text:{  }; var tray:TauriTrayCapabilitiesFor<flight._internal._Any>; var ui:{  }; var updater:{  }; var window:WindowBackend; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL96C23__tauriRegister = { var accessibility:{  }; var app:TauriAppCapabilities; var clipboard:{ var text:ClipboardTextBackend; }; var connectivity:{  }; var dialog:{ var directoryOpen:{ >DirectoryOpenDialogBackend, >Entity, }; var fileOpen:{ >FileOpenDialogBackend, >Entity, }; var fileSave:{ >FileSaveDialogBackend, >Entity, }; var message:MessageDialogBackend; }; var graphics:{  }; var input:{  }; var ipc:{  }; var media:{  }; var menu:{ var application:MenuApplicationBackend; var popup:MenuPopupBackend; var select:MenuSelectBackend; }; var midi:{  }; var net:{  }; var power:{  }; var protocol:{  }; var notification:TauriNotificationCapabilities; var shortcut:{ var query:ShortcutQueryBackend; var trigger:ShortcutTriggerBackend; }; var screen:{  }; var share:{  }; var shell:HostShellCapabilities; var storage:{  }; var system:{ var platform:PlatformBackend; }; var text:{  }; var tray:TauriTrayCapabilitiesFor<flight._internal._Any>; var ui:{  }; var updater:{  }; var window:WindowBackend; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
@@ -378,7 +378,7 @@ typedef TrayRecord__tauriTray = { var destroying:Bool; var icon:TauriTrayIcon; v
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
 @:structInit
-private class EntityShapeL39C21__tauriTray {
+private class EntityShapeL39C34__tauriTray {
   public var create:TrayIcon->TrayIconOptions->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
   public var destroy:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var failures:flight._internal._Any; }, { var failures:Array<{ @:optional var error:flight._internal._Any; var step:String; }>; var outcome:String; }>>;
   public var isDestroyed:TrayIcon->Bool;
@@ -394,13 +394,13 @@ private class EntityShapeL39C21__tauriTray {
   }
 }
 #else
-private typedef EntityShapeL39C21__tauriTray = { var create:TrayIcon->TrayIconOptions->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; var destroy:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var failures:flight._internal._Any; }, { var failures:Array<{ @:optional var error:flight._internal._Any; var step:String; }>; var outcome:String; }>>; var isDestroyed:TrayIcon->Bool; var list:Void->Array<TrayIcon>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL39C34__tauriTray = { var create:TrayIcon->TrayIconOptions->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; var destroy:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var failures:flight._internal._Any; }, { var failures:Array<{ @:optional var error:flight._internal._Any; var step:String; }>; var outcome:String; }>>; var isDestroyed:TrayIcon->Bool; var list:Void->Array<TrayIcon>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
 @:structInit
-private class EntityShapeL112C17__tauriTray {
+private class EntityShapeL112C30__tauriTray {
   public var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -410,13 +410,13 @@ private class EntityShapeL112C17__tauriTray {
   }
 }
 #else
-private typedef EntityShapeL112C17__tauriTray = { var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL112C30__tauriTray = { var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
 @:structInit
-private class EntityShapeL118C16__tauriTray {
+private class EntityShapeL118C29__tauriTray {
   public var set:TrayIcon->Array<MenuItemTemplate>->flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<{ var error:flight._internal._Any; var outcome:String; }, { var outcome:String; @:optional var error:flight._internal._Any; }>, { var error:flight._internal._Any; var outcome:String; }>, { var error:Array<flight._internal._Any>; var outcome:String; }>>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -426,13 +426,13 @@ private class EntityShapeL118C16__tauriTray {
   }
 }
 #else
-private typedef EntityShapeL118C16__tauriTray = { var set:TrayIcon->Array<MenuItemTemplate>->flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<{ var error:flight._internal._Any; var outcome:String; }, { var outcome:String; @:optional var error:flight._internal._Any; }>, { var error:flight._internal._Any; var outcome:String; }>, { var error:Array<flight._internal._Any>; var outcome:String; }>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL118C29__tauriTray = { var set:TrayIcon->Array<MenuItemTemplate>->flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<{ var error:flight._internal._Any; var outcome:String; }, { var outcome:String; @:optional var error:flight._internal._Any; }>, { var error:flight._internal._Any; var outcome:String; }>, { var error:Array<flight._internal._Any>; var outcome:String; }>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
 @:structInit
-private class EntityShapeL187C26__tauriTray {
+private class EntityShapeL187C39__tauriTray {
   public var getSignal:TrayIcon->Null<Signal<TrayMenuSelectionEvent->Void>>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -442,13 +442,13 @@ private class EntityShapeL187C26__tauriTray {
   }
 }
 #else
-private typedef EntityShapeL187C26__tauriTray = { var getSignal:TrayIcon->Null<Signal<TrayMenuSelectionEvent->Void>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL187C39__tauriTray = { var getSignal:TrayIcon->Null<Signal<TrayMenuSelectionEvent->Void>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
 @:structInit
-private class EntityShapeL192C17__tauriTray {
+private class EntityShapeL192C30__tauriTray {
   public var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var title:flight._internal._Any; }, { var outcome:String; var title:String; }>>;
   public var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
@@ -460,13 +460,13 @@ private class EntityShapeL192C17__tauriTray {
   }
 }
 #else
-private typedef EntityShapeL192C17__tauriTray = { var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var title:flight._internal._Any; }, { var outcome:String; var title:String; }>>; var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL192C30__tauriTray = { var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var title:flight._internal._Any; }, { var outcome:String; var title:String; }>>; var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
 @:structInit
-private class EntityShapeL208C29__tauriTray {
+private class EntityShapeL208C42__tauriTray {
   public var getSignal:TrayIcon->Null<Signal<TrayInteractionEvent->Void>>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -476,13 +476,13 @@ private class EntityShapeL208C29__tauriTray {
   }
 }
 #else
-private typedef EntityShapeL208C29__tauriTray = { var getSignal:TrayIcon->Null<Signal<TrayInteractionEvent->Void>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL208C42__tauriTray = { var getSignal:TrayIcon->Null<Signal<TrayInteractionEvent->Void>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
 @:structInit
-private class EntityShapeL211C19__tauriTray {
+private class EntityShapeL211C32__tauriTray {
   public var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var tooltip:flight._internal._Any; }, { var outcome:String; var tooltip:String; }>>;
   public var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
@@ -494,13 +494,13 @@ private class EntityShapeL211C19__tauriTray {
   }
 }
 #else
-private typedef EntityShapeL211C19__tauriTray = { var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var tooltip:flight._internal._Any; }, { var outcome:String; var tooltip:String; }>>; var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL211C32__tauriTray = { var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var tooltip:flight._internal._Any; }, { var outcome:String; var tooltip:String; }>>; var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostTauri)
 @:structInit
-private class EntityShapeL233C20__tauriTray {
+private class EntityShapeL233C33__tauriTray {
   public var set:TrayIcon->Bool->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -510,7 +510,7 @@ private class EntityShapeL233C20__tauriTray {
   }
 }
 #else
-private typedef EntityShapeL233C20__tauriTray = { var set:TrayIcon->Bool->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL233C33__tauriTray = { var set:TrayIcon->Bool->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef TauriWindowRecord__tauriWindow = { var cleanup:Array<TauriUnlisten>; var detached:Bool; var handle:TauriWindow; var ownership:WindowAttachmentOwnership; };
@@ -533,23 +533,23 @@ class _HostTauri {
     _Runtime.voidValue(flight._internal._Async.recover(_Runtime.callProperty((cast tauri.os : TauriOsModule).locale(), 'then', cast ([function(value:Null<String>):String return (locale = cast (_Runtime.coalesce(value, function():Dynamic return cast '') : Dynamic))] : Array<Dynamic>)), function(__unused2:flight._internal._Any):Void {
 
     }));
-    return cast (cast createEntity((cast (#if flight_struct_typedef { locale: (cast createEntity(({ final __callArgument0:Dynamic = ({ getLocale: function():String return locale, getPreferredSystemLanguages: function():Array<String> return ((cast _Runtime.strictEquals(locale, '') : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([locale] : Array<Dynamic>) : Dynamic)), getSystemLocale: function():String return locale } : EntityShapeL21C13__tauriApp); __callArgument0; })) : EntityShapeL21C13__tauriApp), name: (cast createEntity(({ final __callArgument2:Dynamic = ({ getName: function():String return name } : EntityShapeL26C11__tauriApp); __callArgument2; })) : EntityShapeL26C11__tauriApp), hide: (cast createEntity(({ final __callArgument4:Dynamic = ({ hideApp: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.app : TauriAppModule).hide(), function(__unused3:flight._internal._Any):Void {
+    return cast (cast createEntity((cast (#if flight_struct_typedef { locale: (cast createEntity(({ final __callArgument0:Dynamic = ({ getLocale: function():String return locale, getPreferredSystemLanguages: function():Array<String> return ((cast _Runtime.strictEquals(locale, '') : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([locale] : Array<Dynamic>) : Dynamic)), getSystemLocale: function():String return locale } : EntityShapeL21C26__tauriApp); __callArgument0; })) : EntityShapeL21C26__tauriApp), name: (cast createEntity(({ final __callArgument2:Dynamic = ({ getName: function():String return name } : EntityShapeL26C24__tauriApp); __callArgument2; })) : EntityShapeL26C24__tauriApp), hide: (cast createEntity(({ final __callArgument4:Dynamic = ({ hideApp: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.app : TauriAppModule).hide(), function(__unused3:flight._internal._Any):Void {
 
-    })) } : EntityShapeL27C11__tauriApp); __callArgument4; })) : EntityShapeL27C11__tauriApp), quit: (cast createEntity(({ final __callArgument10:Dynamic = ({ quit: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.process : TauriProcessPlugin).exit(({ final __callArgument9:Dynamic = 0.0; __callArgument9; })), function(__unused4:flight._internal._Any):Void {
+    })) } : EntityShapeL27C24__tauriApp); __callArgument4; })) : EntityShapeL27C24__tauriApp), quit: (cast createEntity(({ final __callArgument10:Dynamic = ({ quit: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.process : TauriProcessPlugin).exit(({ final __callArgument9:Dynamic = 0.0; __callArgument9; })), function(__unused4:flight._internal._Any):Void {
 
-    })) } : EntityShapeL28C11__tauriApp); __callArgument10; })) : EntityShapeL28C11__tauriApp), relaunch: (cast createEntity(({ final __callArgument16:Dynamic = ({ relaunch: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.process : TauriProcessPlugin).relaunch(), function(__unused5:flight._internal._Any):Void {
+    })) } : EntityShapeL28C24__tauriApp); __callArgument10; })) : EntityShapeL28C24__tauriApp), relaunch: (cast createEntity(({ final __callArgument16:Dynamic = ({ relaunch: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.process : TauriProcessPlugin).relaunch(), function(__unused5:flight._internal._Any):Void {
 
-    })) } : EntityShapeL29C15__tauriApp); __callArgument16; })) : EntityShapeL29C15__tauriApp), show: (cast createEntity(({ final __callArgument18:Dynamic = ({ showApp: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.app : TauriAppModule).show(), function(__unused6:flight._internal._Any):Void {
+    })) } : EntityShapeL29C28__tauriApp); __callArgument16; })) : EntityShapeL29C28__tauriApp), show: (cast createEntity(({ final __callArgument18:Dynamic = ({ showApp: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.app : TauriAppModule).show(), function(__unused6:flight._internal._Any):Void {
 
-    })) } : EntityShapeL30C11__tauriApp); __callArgument18; })) : EntityShapeL30C11__tauriApp), version: (cast createEntity(({ final __callArgument20:Dynamic = ({ getVersion: function():String return version } : EntityShapeL31C14__tauriApp); __callArgument20; })) : EntityShapeL31C14__tauriApp) } #else ({ final __structInitField0:Dynamic = (cast createEntity(({ final __callArgument22:Dynamic = ({ getLocale: function():String return locale, getPreferredSystemLanguages: function():Array<String> return ((cast _Runtime.strictEquals(locale, '') : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([locale] : Array<Dynamic>) : Dynamic)), getSystemLocale: function():String return locale } : EntityShapeL21C13__tauriApp); __callArgument22; })) : EntityShapeL21C13__tauriApp); final __structInitField1:Dynamic = (cast createEntity(({ final __callArgument24:Dynamic = ({ getName: function():String return name } : EntityShapeL26C11__tauriApp); __callArgument24; })) : EntityShapeL26C11__tauriApp); final __structInitField2:Dynamic = (cast createEntity(({ final __callArgument26:Dynamic = ({ hideApp: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.app : TauriAppModule).hide(), function(__unused3:flight._internal._Any):Void {
+    })) } : EntityShapeL30C24__tauriApp); __callArgument18; })) : EntityShapeL30C24__tauriApp), version: (cast createEntity(({ final __callArgument20:Dynamic = ({ getVersion: function():String return version } : EntityShapeL31C27__tauriApp); __callArgument20; })) : EntityShapeL31C27__tauriApp) } #else ({ final __structInitField0:Dynamic = (cast createEntity(({ final __callArgument22:Dynamic = ({ getLocale: function():String return locale, getPreferredSystemLanguages: function():Array<String> return ((cast _Runtime.strictEquals(locale, '') : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([locale] : Array<Dynamic>) : Dynamic)), getSystemLocale: function():String return locale } : EntityShapeL21C26__tauriApp); __callArgument22; })) : EntityShapeL21C26__tauriApp); final __structInitField1:Dynamic = (cast createEntity(({ final __callArgument24:Dynamic = ({ getName: function():String return name } : EntityShapeL26C24__tauriApp); __callArgument24; })) : EntityShapeL26C24__tauriApp); final __structInitField2:Dynamic = (cast createEntity(({ final __callArgument26:Dynamic = ({ hideApp: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.app : TauriAppModule).hide(), function(__unused3:flight._internal._Any):Void {
 
-    })) } : EntityShapeL27C11__tauriApp); __callArgument26; })) : EntityShapeL27C11__tauriApp); final __structInitField3:Dynamic = (cast createEntity(({ final __callArgument32:Dynamic = ({ quit: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.process : TauriProcessPlugin).exit(({ final __callArgument31:Dynamic = 0.0; __callArgument31; })), function(__unused4:flight._internal._Any):Void {
+    })) } : EntityShapeL27C24__tauriApp); __callArgument26; })) : EntityShapeL27C24__tauriApp); final __structInitField3:Dynamic = (cast createEntity(({ final __callArgument32:Dynamic = ({ quit: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.process : TauriProcessPlugin).exit(({ final __callArgument31:Dynamic = 0.0; __callArgument31; })), function(__unused4:flight._internal._Any):Void {
 
-    })) } : EntityShapeL28C11__tauriApp); __callArgument32; })) : EntityShapeL28C11__tauriApp); final __structInitField4:Dynamic = (cast createEntity(({ final __callArgument38:Dynamic = ({ relaunch: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.process : TauriProcessPlugin).relaunch(), function(__unused5:flight._internal._Any):Void {
+    })) } : EntityShapeL28C24__tauriApp); __callArgument32; })) : EntityShapeL28C24__tauriApp); final __structInitField4:Dynamic = (cast createEntity(({ final __callArgument38:Dynamic = ({ relaunch: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.process : TauriProcessPlugin).relaunch(), function(__unused5:flight._internal._Any):Void {
 
-    })) } : EntityShapeL29C15__tauriApp); __callArgument38; })) : EntityShapeL29C15__tauriApp); final __structInitField5:Dynamic = (cast createEntity(({ final __callArgument40:Dynamic = ({ showApp: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.app : TauriAppModule).show(), function(__unused6:flight._internal._Any):Void {
+    })) } : EntityShapeL29C28__tauriApp); __callArgument38; })) : EntityShapeL29C28__tauriApp); final __structInitField5:Dynamic = (cast createEntity(({ final __callArgument40:Dynamic = ({ showApp: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.app : TauriAppModule).show(), function(__unused6:flight._internal._Any):Void {
 
-    })) } : EntityShapeL30C11__tauriApp); __callArgument40; })) : EntityShapeL30C11__tauriApp); final __structInitField6:Dynamic = (cast createEntity(({ final __callArgument42:Dynamic = ({ getVersion: function():String return version } : EntityShapeL31C14__tauriApp); __callArgument42; })) : EntityShapeL31C14__tauriApp); ({ hide: __structInitField2, locale: __structInitField0, name: __structInitField1, quit: __structInitField3, relaunch: __structInitField4, show: __structInitField5, version: __structInitField6 } : TauriAppCapabilities); }) #end) : Dynamic)) : TauriAppCapabilities);
+    })) } : EntityShapeL30C24__tauriApp); __callArgument40; })) : EntityShapeL30C24__tauriApp); final __structInitField6:Dynamic = (cast createEntity(({ final __callArgument42:Dynamic = ({ getVersion: function():String return version } : EntityShapeL31C27__tauriApp); __callArgument42; })) : EntityShapeL31C27__tauriApp); ({ hide: __structInitField2, locale: __structInitField0, name: __structInitField1, quit: __structInitField3, relaunch: __structInitField4, show: __structInitField5, version: __structInitField6 } : TauriAppCapabilities); }) #end) : Dynamic)) : TauriAppCapabilities);
     return cast null;
   }
 
@@ -768,7 +768,7 @@ class _HostTauri {
           });
         })
       );
-    } } : EntityShapeL20C10__tauriDialog) : Dynamic)) : EntityShapeL20C10__tauriDialog);
+    } } : EntityShapeL20C23__tauriDialog) : Dynamic)) : EntityShapeL20C23__tauriDialog);
     return cast null;
   }
 
@@ -838,7 +838,7 @@ class _HostTauri {
           });
         })
       );
-    } } : EntityShapeL43C10__tauriDialog) : Dynamic)) : EntityShapeL43C10__tauriDialog);
+    } } : EntityShapeL43C23__tauriDialog) : Dynamic)) : EntityShapeL43C23__tauriDialog);
     return cast null;
   }
 
@@ -904,7 +904,7 @@ class _HostTauri {
           });
         })
       );
-    } } : EntityShapeL70C10__tauriDialog) : Dynamic)) : EntityShapeL70C10__tauriDialog);
+    } } : EntityShapeL70C23__tauriDialog) : Dynamic)) : EntityShapeL70C23__tauriDialog);
     return cast null;
   }
 
@@ -1294,7 +1294,7 @@ class _HostTauri {
     menu = (cast createTauriMenuBackends(({ final __callArgument496:Dynamic = tauri; __callArgument496; })) : { var application:MenuApplicationBackend; var popup:MenuPopupBackend; var select:MenuSelectBackend; });
     shell = (cast makeTauriShellCapabilities(({ final __callArgument498:Dynamic = tauri; __callArgument498; })) : HostShellCapabilities);
     window = (cast createTauriWindowBackend(({ final __callArgument500:Dynamic = tauri; __callArgument500; })) : WindowBackend);
-    return cast (cast createEntity((cast ({ accessibility: {  }, app: app, clipboard: { text: clipboard }, connectivity: {  }, dialog: dialog, graphics: {  }, input: {  }, ipc: {  }, media: {  }, menu: menu, midi: {  }, net: {  }, power: {  }, protocol: {  }, notification: notification, shortcut: { query: query, trigger: trigger }, screen: {  }, share: {  }, shell: shell, storage: {  }, system: { platform: (cast createTauriPlatformBackend(({ final __callArgument506:Dynamic = tauri; __callArgument506; })) : PlatformBackend) }, text: {  }, tray: (cast createTauriTrayCapabilities(({ final __callArgument508:Dynamic = tauri; __callArgument508; }), (cast profile : Dynamic)) : TauriTrayCapabilitiesFor<Profile>), ui: {  }, updater: {  }, window: window } : EntityShapeL96C10__tauriRegister) : Dynamic)) : EntityShapeL96C10__tauriRegister);
+    return cast (cast createEntity((cast ({ accessibility: {  }, app: app, clipboard: { text: clipboard }, connectivity: {  }, dialog: dialog, graphics: {  }, input: {  }, ipc: {  }, media: {  }, menu: menu, midi: {  }, net: {  }, power: {  }, protocol: {  }, notification: notification, shortcut: { query: query, trigger: trigger }, screen: {  }, share: {  }, shell: shell, storage: {  }, system: { platform: (cast createTauriPlatformBackend(({ final __callArgument506:Dynamic = tauri; __callArgument506; })) : PlatformBackend) }, text: {  }, tray: (cast createTauriTrayCapabilities(({ final __callArgument508:Dynamic = tauri; __callArgument508; }), (cast profile : Dynamic)) : TauriTrayCapabilitiesFor<Profile>), ui: {  }, updater: {  }, window: window } : EntityShapeL96C23__tauriRegister) : Dynamic)) : EntityShapeL96C23__tauriRegister);
     return cast null;
   }
 
@@ -1722,7 +1722,7 @@ class _HostTauri {
       tray = flight._internal._StaticIndex.readArray(__parameter3, 0.0);
       return cast tray;
       return cast _Runtime.UNDEFINED;
-    }, _Runtime.UNDEFINED)) } : EntityShapeL39C21__tauriTray); __callArgument623; })) : EntityShapeL39C21__tauriTray);
+    }, _Runtime.UNDEFINED)) } : EntityShapeL39C34__tauriTray); __callArgument623; })) : EntityShapeL39C34__tauriTray);
     image = (cast createEntity(({ final __callArgument675:Dynamic = ({ set: function(tray:TrayIcon, icon:String):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         return flight._internal._Async.resolve((cast _HostTauri.update__tauriTray((cast records : Dynamic), ({ final __callArgument671:Dynamic = tray; __callArgument671; }), (cast 'image-update-failed' : String), (cast function(record:TrayRecord__tauriTray):flight._internal._Promise<flight._internal._Nothing> {
@@ -1731,7 +1731,7 @@ class _HostTauri {
           }));
         } : Dynamic)) : flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>));
       }));
-    } } : EntityShapeL112C17__tauriTray); __callArgument675; })) : EntityShapeL112C17__tauriTray);
+    } } : EntityShapeL112C30__tauriTray); __callArgument675; })) : EntityShapeL112C30__tauriTray);
     menu = (cast createEntity(({ final __callArgument735:Dynamic = ({ set: function(tray:TrayIcon, items:Array<MenuItemTemplate>):flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<{ var error:flight._internal._Any; var outcome:String; }, { var outcome:String; @:optional var error:flight._internal._Any; }>, { var error:flight._internal._Any; var outcome:String; }>, { var error:Array<flight._internal._Any>; var outcome:String; }>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
@@ -1851,8 +1851,8 @@ class _HostTauri {
           });
         })
       );
-    } } : EntityShapeL118C16__tauriTray); __callArgument735; })) : EntityShapeL118C16__tauriTray);
-    common = (cast { image: image, lifecycle: lifecycle, menu: menu, menuSelectionEvents: (cast createEntity(({ final __callArgument793:Dynamic = ({ getSignal: function(tray:TrayIcon):Null<Signal<TrayMenuSelectionEvent->Void>> return _Runtime.coalesce(({ final __structural792 = (cast _HostTauri.activeRecord__tauriTray((cast records : Dynamic), ({ final __callArgument790:Dynamic = tray; __callArgument790; })) : Null<TrayRecord__tauriTray>); __structural792 == null ? _Runtime.UNDEFINED : (cast __structural792 : { var menuSelectionEvents:Signal<TrayMenuSelectionEvent->Void>; }).menuSelectionEvents; }), function():Dynamic return cast null) } : EntityShapeL187C26__tauriTray); __callArgument793; })) : EntityShapeL187C26__tauriTray) });
+    } } : EntityShapeL118C29__tauriTray); __callArgument735; })) : EntityShapeL118C29__tauriTray);
+    common = (cast { image: image, lifecycle: lifecycle, menu: menu, menuSelectionEvents: (cast createEntity(({ final __callArgument793:Dynamic = ({ getSignal: function(tray:TrayIcon):Null<Signal<TrayMenuSelectionEvent->Void>> return _Runtime.coalesce(({ final __structural792 = (cast _HostTauri.activeRecord__tauriTray((cast records : Dynamic), ({ final __callArgument790:Dynamic = tray; __callArgument790; })) : Null<TrayRecord__tauriTray>); __structural792 == null ? _Runtime.UNDEFINED : (cast __structural792 : { var menuSelectionEvents:Signal<TrayMenuSelectionEvent->Void>; }).menuSelectionEvents; }), function():Dynamic return cast null) } : EntityShapeL187C39__tauriTray); __callArgument793; })) : EntityShapeL187C39__tauriTray) });
     title = (cast createEntity(({ final __callArgument817:Dynamic = ({ get: function(tray:TrayIcon):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var title:flight._internal._Any; }, { var outcome:String; var title:String; }>> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var record:Null<TrayRecord__tauriTray> = cast _Runtime.UNDEFINED;
@@ -1884,9 +1884,9 @@ class _HostTauri {
           });
         })
       );
-    } } : EntityShapeL192C17__tauriTray); __callArgument817; })) : EntityShapeL192C17__tauriTray);
+    } } : EntityShapeL192C30__tauriTray); __callArgument817; })) : EntityShapeL192C30__tauriTray);
     if ((cast _Runtime.strictEquals(profile, 'linux') : Bool)) { return cast (cast (cast _Runtime.mergeObjects([common, { title: title }]) : flight._internal._Any) : TauriTrayCapabilitiesFor<Profile>); }
-    interactionEvents = (cast createEntity(({ final __callArgument841:Dynamic = ({ getSignal: function(tray:TrayIcon):Null<Signal<TrayInteractionEvent->Void>> return _Runtime.coalesce(({ final __structural840 = (cast _HostTauri.activeRecord__tauriTray((cast records : Dynamic), ({ final __callArgument838:Dynamic = tray; __callArgument838; })) : Null<TrayRecord__tauriTray>); __structural840 == null ? _Runtime.UNDEFINED : (cast __structural840 : { var interactionEvents:Signal<TrayInteractionEvent->Void>; }).interactionEvents; }), function():Dynamic return cast null) } : EntityShapeL208C29__tauriTray); __callArgument841; })) : EntityShapeL208C29__tauriTray);
+    interactionEvents = (cast createEntity(({ final __callArgument841:Dynamic = ({ getSignal: function(tray:TrayIcon):Null<Signal<TrayInteractionEvent->Void>> return _Runtime.coalesce(({ final __structural840 = (cast _HostTauri.activeRecord__tauriTray((cast records : Dynamic), ({ final __callArgument838:Dynamic = tray; __callArgument838; })) : Null<TrayRecord__tauriTray>); __structural840 == null ? _Runtime.UNDEFINED : (cast __structural840 : { var interactionEvents:Signal<TrayInteractionEvent->Void>; }).interactionEvents; }), function():Dynamic return cast null) } : EntityShapeL208C42__tauriTray); __callArgument841; })) : EntityShapeL208C42__tauriTray);
     tooltip = (cast createEntity(({ final __callArgument865:Dynamic = ({ get: function(tray:TrayIcon):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var tooltip:flight._internal._Any; }, { var outcome:String; var tooltip:String; }>> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var record:Null<TrayRecord__tauriTray> = cast _Runtime.UNDEFINED;
@@ -1918,7 +1918,7 @@ class _HostTauri {
           });
         })
       );
-    } } : EntityShapeL211C19__tauriTray); __callArgument865; })) : EntityShapeL211C19__tauriTray);
+    } } : EntityShapeL211C32__tauriTray); __callArgument865; })) : EntityShapeL211C32__tauriTray);
     if ((cast _Runtime.strictEquals(profile, 'windows') : Bool)) {
       return cast (cast (cast _Runtime.mergeObjects([common, { interactionEvents: interactionEvents }, { tooltip: tooltip }]) : flight._internal._Any) : TauriTrayCapabilitiesFor<Profile>);
     }
@@ -1930,7 +1930,7 @@ class _HostTauri {
           }));
         } : Dynamic)) : flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>));
       }));
-    } } : EntityShapeL233C20__tauriTray); __callArgument887; })) : EntityShapeL233C20__tauriTray) }, { title: title }, { tooltip: tooltip }]) : flight._internal._Any) : TauriTrayCapabilitiesFor<Profile>);
+    } } : EntityShapeL233C33__tauriTray); __callArgument887; })) : EntityShapeL233C33__tauriTray) }, { title: title }, { tooltip: tooltip }]) : flight._internal._Any) : TauriTrayCapabilitiesFor<Profile>);
     return cast null;
   }
 

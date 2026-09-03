@@ -4391,13 +4391,19 @@ describe('typed struct analysis', () => {
         export function createComputedProvider(): { run(): number; [RuntimeKey]: number } & Entity {
           return createEntity({ run() { return 3; }, [RuntimeKey]: 4 });
         }
+        function createWrapped<T extends Entity>(fields: Omit<T, keyof Entity>): T {
+          return createEntity(fields) as T;
+        }
+        export function createWrappedProvider(): { start(): number } & Entity {
+          return createWrapped({ start() { return 5; } });
+        }
       `,
       candidate,
     );
     const synthetics = result.lowered.declarations.filter(
       (declaration) => declaration.kind === 'type' && declaration.name.startsWith('EntityShapeL'),
     );
-    expect(synthetics).toHaveLength(4);
+    expect(synthetics).toHaveLength(5);
     const synthetic = synthetics[0];
     if (!synthetic || synthetic.kind !== 'type') throw new Error('Expected synthetic Entity class');
     const fixtureModule = {
@@ -4420,6 +4426,9 @@ describe('typed struct analysis', () => {
     expect(output).toContain('#if (!flight_struct_typedef && !js)');
     expect(output).toMatch(
       /#if \(flight_struct_typedef \|\| js\) _Runtime\.objectFromPairs\(\[[\s\S]*RuntimeKey[\s\S]*#else \(\{ run:/u,
+    );
+    expect(output).toMatch(
+      /function createWrappedProvider[\s\S]*\{ start: function\(\):Float[\s\S]*: EntityShapeL24C32/u,
     );
   });
 
@@ -4628,18 +4637,18 @@ describe('typed struct analysis', () => {
     expect(registry.resolveIdentity(renderTextureReturn)?.name).toBe('RenderTexture');
     expect(entityFactories.summary).toEqual({
       bareEntityCalls: 0,
-      blockedEntityCalls: 4,
+      blockedEntityCalls: 0,
       calls: 368,
       exactEntityCalls: 178,
       exactEntitySchemas: 143,
       exactNonEntityCalls: 17,
-      genericEntityCalls: 3,
-      localEntityCalls: 169,
+      genericEntityCalls: 0,
+      localEntityCalls: 173,
       normalizedFieldOrderCalls: 24,
       normalizedMissingFieldCalls: 9,
       normalizedSpreadProjectionCalls: 17,
-      readyEntityCalls: 347,
-      structuralEntityCalls: 1,
+      readyEntityCalls: 351,
+      structuralEntityCalls: 0,
       unresolvedCalls: 0,
     });
     expect(entityFactories.sites.find((site) => site.factory.name === 'createMatrix4')).toMatchObject({
@@ -4661,10 +4670,19 @@ describe('typed struct analysis', () => {
     });
     expect(entityFactories.sites.find((site) => site.factory.name === 'cloneEntity')).toMatchObject({
       argument: { kind: 'object' },
-      blockers: ['generic-entity-destination', 'spread-construction'],
-      destination: { kind: 'generic-entity' },
-      status: 'blocked',
+      blockers: [],
+      destination: { kind: 'local-entity' },
+      normalizations: ['runtime-class-clone'],
+      status: 'ready',
     });
+    for (const factory of ['createMidiSubscription', 'createNotificationSubscription', 'createWgpuRendererData']) {
+      expect(entityFactories.sites.find((site) => site.factory.name === factory)).toMatchObject({
+        blockers: [],
+        destination: { kind: 'local-entity' },
+        normalizations: ['synthetic-class', 'forwarded-construction'],
+        status: 'ready',
+      });
+    }
     expect(entityFactories.sites.find((site) => site.factory.name === 'createHost')).toMatchObject({
       blockers: [],
       destination: { kind: 'local-entity', schemaName: 'EntityShapeL8C10' },
