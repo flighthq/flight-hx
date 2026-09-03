@@ -964,11 +964,11 @@ class _Runtime {
     return removed;
   }
 
-  public static function symbol(?description:String):Dynamic {
+  public static function symbol(?description:String, ?nativeKey:String):Dynamic {
     #if js
     return js.Syntax.code('Symbol({0})', description);
     #else
-    return { description: description };
+    return nativeKey == null ? { description: description } : nativeKey;
     #end
   }
 

@@ -1709,11 +1709,11 @@ class _SceneDocument {
     return cast null;
   }
 
-  public static final INVALID_FLIGHT_DOCUMENT_VALUE__flightDocumentText:flight._internal._Symbol = _Runtime.symbol('invalid-flight-document-value');
+  public static final INVALID_FLIGHT_DOCUMENT_VALUE__flightDocumentText:flight._internal._Symbol = _Runtime.symbol('invalid-flight-document-value', '__symbol__33fd51e5b366fb24eada');
 
-  public static final INVALID_LAYOUT_STYLE__flightDocumentText:flight._internal._Symbol = _Runtime.symbol('invalid-layout-style');
+  public static final INVALID_LAYOUT_STYLE__flightDocumentText:flight._internal._Symbol = _Runtime.symbol('invalid-layout-style', '__symbol__4afe09ba66f087d5e0ce');
 
-  public static final INVALID_OPTIONAL_INDEX__flightDocumentText:flight._internal._Symbol = _Runtime.symbol('invalid-flight-document-optional-index');
+  public static final INVALID_OPTIONAL_INDEX__flightDocumentText:flight._internal._Symbol = _Runtime.symbol('invalid-flight-document-optional-index', '__symbol__98af9ab64c7f6d887280');
 
   public static final CAMERA_KEYS__flightDocumentText:Array<String> = (cast cast (['far', 'name', 'near', 'node', 'projection', 'transform'] : Array<Dynamic>));
 
@@ -2837,7 +2837,7 @@ class _SceneDocument {
     return cast null;
   }
 
-  public static final PARSE_FAILURE__sceneDocumentYamlSubset:flight._internal._Symbol = _Runtime.symbol('scene-document-yaml-subset-parse-failure');
+  public static final PARSE_FAILURE__sceneDocumentYamlSubset:flight._internal._Symbol = _Runtime.symbol('scene-document-yaml-subset-parse-failure', '__symbol__7bb7a31dae86adb77ed0');
 
   public static function parseSceneDocumentYamlSubset(source:String):SceneDocumentYamlSubsetResult__sceneDocumentYamlSubset {
     var lexed:SceneDocumentYamlSubsetLexResult__sceneDocumentYamlSubset = cast _Runtime.UNDEFINED;

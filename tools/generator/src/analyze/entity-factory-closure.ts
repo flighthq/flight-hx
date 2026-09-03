@@ -8,6 +8,7 @@ import {
   entityFactoryExpandedObjectFields,
   entityFactoryObjectLiteral,
   entityFactoryObjectShape,
+  entityFactoryResolvedObjectFields,
   entityFactorySyntheticClassName,
   isParameterizedEntityFactoryType,
   isFlightCreateEntityCall,
@@ -37,6 +38,7 @@ export type EntityFactoryBlocker =
   | 'unsupported-object-member';
 
 export type EntityFactoryNormalization =
+  | 'computed-symbol-key'
   | 'field-order'
   | 'missing-field-initialization'
   | 'spread-projection'
@@ -197,7 +199,9 @@ function auditFactorySite(
   const object = entityFactoryObjectLiteral(call, checker);
   const shape = object ? entityFactoryObjectShape(object) : undefined;
   const expandedFields = object && shape?.hasSpread ? entityFactoryExpandedObjectFields(object, checker) : undefined;
-  const constructionFields = object && shape ? (expandedFields ?? shape.fields) : undefined;
+  const resolvedFields =
+    object && shape && !shape.hasSpread ? entityFactoryResolvedObjectFields(object, checker) : undefined;
+  const constructionFields = object && shape ? (expandedFields ?? resolvedFields) : undefined;
   const fieldsOutsideNamedSchema =
     schema !== undefined &&
     constructionFields?.some((field) => !schema.fields.some((schemaField) => schemaField.name === field));
@@ -206,7 +210,6 @@ function auditFactorySite(
     object !== undefined &&
     shape !== undefined &&
     constructionFields !== undefined &&
-    !shape.hasComputed &&
     !shape.hasUnsupported &&
     (schema === undefined ||
       (destinationKind === 'exact-entity' && (fieldsOutsideNamedSchema === true || parameterizedDestination))) &&
@@ -229,11 +232,14 @@ function auditFactorySite(
   let argument: EntityFactoryClosureSite['argument'];
   if (object && shape && constructionFields) {
     argument = { fields: shape.fields, kind: 'object' };
-    if (shape.hasComputed) blockers.push('computed-construction');
+    if (shape.hasComputed) {
+      if (resolvedFields) normalizations.push('computed-symbol-key');
+      else blockers.push('computed-construction');
+    }
     if (shape.hasUnsupported) blockers.push('unsupported-object-member');
     const exactSpreadProjection =
       shape.hasSpread &&
-      !shape.hasComputed &&
+      (!shape.hasComputed || resolvedFields !== undefined) &&
       !shape.hasUnsupported &&
       ((destinationKind === 'exact-entity' &&
         schema !== undefined &&

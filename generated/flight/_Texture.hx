@@ -358,12 +358,12 @@ class _Texture {
   }
 
   public static function createSampler(?opts:{ @:optional var anisotropy:Null<Float>; @:optional var magFilter:Null<TextureFilter>; @:optional var minFilter:Null<TextureFilter>; @:optional var mipmaps:Null<Bool>; @:optional var wrapU:Null<TextureWrap>; @:optional var wrapV:Null<TextureWrap>; }):Sampler {
-    return cast (cast createEntity((cast ({ anisotropy: _Runtime.coalesce(({ final __structural18 = opts; __structural18 == null ? _Runtime.UNDEFINED : (cast __structural18 : { @:optional var anisotropy:Null<Float>; }).anisotropy; }), function():Dynamic return cast 1.0), magFilter: _Runtime.coalesce(({ final __structural19 = opts; __structural19 == null ? _Runtime.UNDEFINED : (cast __structural19 : { @:optional var magFilter:Null<String>; }).magFilter; }), function():Dynamic return cast 'linear'), minFilter: _Runtime.coalesce(({ final __structural20 = opts; __structural20 == null ? _Runtime.UNDEFINED : (cast __structural20 : { @:optional var minFilter:Null<String>; }).minFilter; }), function():Dynamic return cast 'linear-mipmap-linear'), mipmaps: _Runtime.coalesce(({ final __structural21 = opts; __structural21 == null ? _Runtime.UNDEFINED : (cast __structural21 : { @:optional var mipmaps:Null<Bool>; }).mipmaps; }), function():Dynamic return cast true), wrapU: _Runtime.coalesce(({ final __structural22 = opts; __structural22 == null ? _Runtime.UNDEFINED : (cast __structural22 : { @:optional var wrapU:Null<String>; }).wrapU; }), function():Dynamic return cast 'clamp-to-edge'), wrapV: _Runtime.coalesce(({ final __structural23 = opts; __structural23 == null ? _Runtime.UNDEFINED : (cast __structural23 : { @:optional var wrapV:Null<String>; }).wrapV; }), function():Dynamic return cast 'clamp-to-edge') } : Sampler) : Dynamic)) : Sampler);
+    return cast (cast createEntity((cast ({ anisotropy: _Runtime.coalesce(({ final __structural24 = opts; __structural24 == null ? _Runtime.UNDEFINED : (cast __structural24 : { @:optional var anisotropy:Null<Float>; }).anisotropy; }), function():Dynamic return cast 1.0), magFilter: _Runtime.coalesce(({ final __structural25 = opts; __structural25 == null ? _Runtime.UNDEFINED : (cast __structural25 : { @:optional var magFilter:Null<String>; }).magFilter; }), function():Dynamic return cast 'linear'), minFilter: _Runtime.coalesce(({ final __structural26 = opts; __structural26 == null ? _Runtime.UNDEFINED : (cast __structural26 : { @:optional var minFilter:Null<String>; }).minFilter; }), function():Dynamic return cast 'linear-mipmap-linear'), mipmaps: _Runtime.coalesce(({ final __structural27 = opts; __structural27 == null ? _Runtime.UNDEFINED : (cast __structural27 : { @:optional var mipmaps:Null<Bool>; }).mipmaps; }), function():Dynamic return cast true), wrapU: _Runtime.coalesce(({ final __structural28 = opts; __structural28 == null ? _Runtime.UNDEFINED : (cast __structural28 : { @:optional var wrapU:Null<String>; }).wrapU; }), function():Dynamic return cast 'clamp-to-edge'), wrapV: _Runtime.coalesce(({ final __structural29 = opts; __structural29 == null ? _Runtime.UNDEFINED : (cast __structural29 : { @:optional var wrapV:Null<String>; }).wrapV; }), function():Dynamic return cast 'clamp-to-edge') } : Sampler) : Dynamic)) : Sampler);
     return cast null;
   }
 
   public static function createTilingSampler():Sampler {
-    return cast (cast createSampler(({ final __callArgument30:Dynamic = { wrapU: 'repeat', wrapV: 'repeat' }; __callArgument30; })) : Sampler);
+    return cast (cast createSampler(({ final __callArgument42:Dynamic = { wrapU: 'repeat', wrapV: 'repeat' }; __callArgument42; })) : Sampler);
     return cast null;
   }
 
@@ -388,7 +388,7 @@ class _Texture {
 
   public static function cloneTexture(source:TextureLike):Texture {
     var common:{ var colorSpace:TextureColorSpace; var flipX:Bool; var flipY:Bool; var sampler:Sampler; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var version:Float; } = cast _Runtime.UNDEFINED;
-    common = (cast { colorSpace: (cast source : { var colorSpace:TextureColorSpace; }).colorSpace, flipX: (cast source : { var flipX:Bool; }).flipX, flipY: (cast source : { var flipY:Bool; }).flipY, sampler: (cast cloneSampler(({ final __callArgument32:Dynamic = (cast source : { var sampler:Sampler; }).sampler; __callArgument32; })) : Sampler), uvOffset: (cast cloneVector2(({ final __callArgument34:Dynamic = (cast source : { var uvOffset:Vector2; }).uvOffset; __callArgument34; })) : Vector2), uvRotation: (cast source : { var uvRotation:Float; }).uvRotation, uvScale: (cast cloneVector2(({ final __callArgument36:Dynamic = (cast source : { var uvScale:Vector2; }).uvScale; __callArgument36; })) : Vector2), version: _Runtime.unsignedShiftRight(_Runtime.toInt32((cast source : { var version:Float; }).version), 0) });
+    common = (cast { colorSpace: (cast source : { var colorSpace:TextureColorSpace; }).colorSpace, flipX: (cast source : { var flipX:Bool; }).flipX, flipY: (cast source : { var flipY:Bool; }).flipY, sampler: (cast cloneSampler(({ final __callArgument44:Dynamic = (cast source : { var sampler:Sampler; }).sampler; __callArgument44; })) : Sampler), uvOffset: (cast cloneVector2(({ final __callArgument46:Dynamic = (cast source : { var uvOffset:Vector2; }).uvOffset; __callArgument46; })) : Vector2), uvRotation: (cast source : { var uvRotation:Float; }).uvRotation, uvScale: (cast cloneVector2(({ final __callArgument48:Dynamic = (cast source : { var uvScale:Vector2; }).uvScale; __callArgument48; })) : Vector2), version: _Runtime.unsignedShiftRight(_Runtime.toInt32((cast source : { var version:Float; }).version), 0) });
     {
       var __switchValue = (cast source : { var dimension:String; }).dimension;
       if (__switchValue == '2d') {
@@ -419,9 +419,9 @@ class _Texture {
     flipY = (cast source : { var flipY:Bool; }).flipY;
     uvRotation = (cast source : { var uvRotation:Float; }).uvRotation;
     version = _Runtime.unsignedShiftRight(_Runtime.toInt32((cast source : { var version:Float; }).version), 0);
-    copySampler(({ final __callArgument38:Dynamic = (cast out : { var sampler:Sampler; }).sampler; __callArgument38; }), ({ final __callArgument39:Dynamic = (cast source : { var sampler:Sampler; }).sampler; __callArgument39; }));
-    copyVector2(({ final __callArgument42:Dynamic = (cast out : { var uvOffset:Vector2; }).uvOffset; __callArgument42; }), ({ final __callArgument43:Dynamic = (cast source : { var uvOffset:Vector2; }).uvOffset; __callArgument43; }));
-    copyVector2(({ final __callArgument46:Dynamic = (cast out : { var uvScale:Vector2; }).uvScale; __callArgument46; }), ({ final __callArgument47:Dynamic = (cast source : { var uvScale:Vector2; }).uvScale; __callArgument47; }));
+    copySampler(({ final __callArgument50:Dynamic = (cast out : { var sampler:Sampler; }).sampler; __callArgument50; }), ({ final __callArgument51:Dynamic = (cast source : { var sampler:Sampler; }).sampler; __callArgument51; }));
+    copyVector2(({ final __callArgument54:Dynamic = (cast out : { var uvOffset:Vector2; }).uvOffset; __callArgument54; }), ({ final __callArgument55:Dynamic = (cast source : { var uvOffset:Vector2; }).uvOffset; __callArgument55; }));
+    copyVector2(({ final __callArgument58:Dynamic = (cast out : { var uvScale:Vector2; }).uvScale; __callArgument58; }), ({ final __callArgument59:Dynamic = (cast source : { var uvScale:Vector2; }).uvScale; __callArgument59; }));
     ((cast out : { var colorSpace:TextureColorSpace; }).colorSpace = colorSpace);
     ((cast out : { var flipX:Bool; }).flipX = flipX);
     ((cast out : { var flipY:Bool; }).flipY = flipY);
@@ -457,7 +457,7 @@ class _Texture {
     var texture:Texture = cast _Runtime.UNDEFINED;
     common = (cast _Texture.createCommonTextureFields__texture((cast opts : Dynamic)) : { var colorSpace:TextureColorSpace; var flipX:Bool; var flipY:Bool; var sampler:Sampler; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var version:Float; });
     {
-      var __switchValue = ({ final __structural50 = opts; __structural50 == null ? _Runtime.UNDEFINED : (cast __structural50 : { @:optional var dimension:Null<String>; }).dimension; });
+      var __switchValue = ({ final __structural62 = opts; __structural62 == null ? _Runtime.UNDEFINED : (cast __structural62 : { @:optional var dimension:Null<String>; }).dimension; });
       if (__switchValue == '2d-array') {
         (texture = cast ((cast (cast createEntity((cast (#if flight_struct_typedef _Runtime.mergeObjects([common, { dimension: '2d-array' }, { sources: _Runtime.coalesce(_Runtime.callOptionalProperty((cast opts : { @:optional var sources:Null<Array<Null<TextureSource>>>; @:optional var version:Null<Float>; @:optional var colorSpace:Null<String>; @:optional var sampler:Null<Sampler>; @:optional var flipX:Null<Bool>; @:optional var flipY:Null<Bool>; @:optional var uvOffset:Null<Vector2>; @:optional var uvRotation:Null<Float>; @:optional var uvScale:Null<Vector2>; var dimension:String; @:optional var resource:Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }).sources, 'slice', cast ([] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>)) }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([common, { dimension: '2d-array' }, { sources: _Runtime.coalesce(_Runtime.callOptionalProperty((cast opts : { @:optional var sources:Null<Array<Null<TextureSource>>>; @:optional var version:Null<Float>; @:optional var colorSpace:Null<String>; @:optional var sampler:Null<Sampler>; @:optional var flipX:Null<Bool>; @:optional var flipY:Null<Bool>; @:optional var uvOffset:Null<Vector2>; @:optional var uvRotation:Null<Float>; @:optional var uvScale:Null<Vector2>; var dimension:String; @:optional var resource:Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }).sources, 'slice', cast ([] : Array<Dynamic>)), function():Dynamic return cast cast ([] : Array<Dynamic>)) }]); ({ dimension: _Runtime.field(__structInitSource, 'dimension'), sources: _Runtime.field(__structInitSource, 'sources'), colorSpace: _Runtime.field(__structInitSource, 'colorSpace'), flipX: _Runtime.field(__structInitSource, 'flipX'), flipY: _Runtime.field(__structInitSource, 'flipY'), sampler: _Runtime.field(__structInitSource, 'sampler'), uvOffset: _Runtime.field(__structInitSource, 'uvOffset'), uvRotation: _Runtime.field(__structInitSource, 'uvRotation'), uvScale: _Runtime.field(__structInitSource, 'uvScale'), version: _Runtime.field(__structInitSource, 'version') } : EntityShapeL119C17__texture); }) #end) : Dynamic)) : EntityShapeL119C17__texture) : flight._internal._Extract<Texture, { var dimension:String; }>) : Dynamic));
       }
@@ -471,15 +471,15 @@ class _Texture {
         return cast (cast createTexture2D((cast (cast opts : Null<CreateTexture2DOptions>) : Dynamic)) : Texture2D);
       }
     }
-    _Texture.attachTextureToResource__texture(({ final __callArgument51:Dynamic = texture; __callArgument51; }), (cast ({ final __structural52 = opts; __structural52 == null ? _Runtime.UNDEFINED : (cast __structural52 : { @:optional var resource:Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }).resource; }) : Dynamic));
+    _Texture.attachTextureToResource__texture(({ final __callArgument63:Dynamic = texture; __callArgument63; }), (cast ({ final __structural64 = opts; __structural64 == null ? _Runtime.UNDEFINED : (cast __structural64 : { @:optional var resource:Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }).resource; }) : Dynamic));
     return cast texture;
     return cast null;
   }
 
   public static function createTexture2D(?opts:CreateTexture2DOptions):Texture2D {
     var texture:Texture2D = cast _Runtime.UNDEFINED;
-    texture = (cast (cast createEntity((cast (#if flight_struct_typedef _Runtime.mergeObjects([(cast _Texture.createCommonTextureFields__texture((cast opts : Dynamic)) : { var colorSpace:TextureColorSpace; var flipX:Bool; var flipY:Bool; var sampler:Sampler; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var version:Float; }), { dimension: '2d' }, { source: _Runtime.coalesce(({ final __structural55 = opts; __structural55 == null ? _Runtime.UNDEFINED : (cast __structural55 : { @:optional var source:Null<TextureSource>; }).source; }), function():Dynamic return cast null) }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([(cast _Texture.createCommonTextureFields__texture((cast opts : Dynamic)) : { var colorSpace:TextureColorSpace; var flipX:Bool; var flipY:Bool; var sampler:Sampler; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var version:Float; }), { dimension: '2d' }, { source: _Runtime.coalesce(({ final __structural55 = opts; __structural55 == null ? _Runtime.UNDEFINED : (cast __structural55 : { @:optional var source:Null<TextureSource>; }).source; }), function():Dynamic return cast null) }]); ({ colorSpace: _Runtime.field(__structInitSource, 'colorSpace'), dimension: _Runtime.field(__structInitSource, 'dimension'), flipX: _Runtime.field(__structInitSource, 'flipX'), flipY: _Runtime.field(__structInitSource, 'flipY'), sampler: _Runtime.field(__structInitSource, 'sampler'), source: _Runtime.field(__structInitSource, 'source'), uvOffset: _Runtime.field(__structInitSource, 'uvOffset'), uvRotation: _Runtime.field(__structInitSource, 'uvRotation'), uvScale: _Runtime.field(__structInitSource, 'uvScale'), version: _Runtime.field(__structInitSource, 'version') } : Texture2D); }) #end) : Dynamic)) : Texture2D) : Texture2D);
-    _Texture.attachTextureToResource__texture(({ final __callArgument57:Dynamic = texture; __callArgument57; }), (cast ({ final __structural58 = opts; __structural58 == null ? _Runtime.UNDEFINED : (cast __structural58 : { @:optional var resource:Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }).resource; }) : Dynamic));
+    texture = (cast (cast createEntity((cast (#if flight_struct_typedef _Runtime.mergeObjects([(cast _Texture.createCommonTextureFields__texture((cast opts : Dynamic)) : { var colorSpace:TextureColorSpace; var flipX:Bool; var flipY:Bool; var sampler:Sampler; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var version:Float; }), { dimension: '2d' }, { source: _Runtime.coalesce(({ final __structural67 = opts; __structural67 == null ? _Runtime.UNDEFINED : (cast __structural67 : { @:optional var source:Null<TextureSource>; }).source; }), function():Dynamic return cast null) }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([(cast _Texture.createCommonTextureFields__texture((cast opts : Dynamic)) : { var colorSpace:TextureColorSpace; var flipX:Bool; var flipY:Bool; var sampler:Sampler; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var version:Float; }), { dimension: '2d' }, { source: _Runtime.coalesce(({ final __structural67 = opts; __structural67 == null ? _Runtime.UNDEFINED : (cast __structural67 : { @:optional var source:Null<TextureSource>; }).source; }), function():Dynamic return cast null) }]); ({ colorSpace: _Runtime.field(__structInitSource, 'colorSpace'), dimension: _Runtime.field(__structInitSource, 'dimension'), flipX: _Runtime.field(__structInitSource, 'flipX'), flipY: _Runtime.field(__structInitSource, 'flipY'), sampler: _Runtime.field(__structInitSource, 'sampler'), source: _Runtime.field(__structInitSource, 'source'), uvOffset: _Runtime.field(__structInitSource, 'uvOffset'), uvRotation: _Runtime.field(__structInitSource, 'uvRotation'), uvScale: _Runtime.field(__structInitSource, 'uvScale'), version: _Runtime.field(__structInitSource, 'version') } : Texture2D); }) #end) : Dynamic)) : Texture2D) : Texture2D);
+    _Texture.attachTextureToResource__texture(({ final __callArgument69:Dynamic = texture; __callArgument69; }), (cast ({ final __structural70 = opts; __structural70 == null ? _Runtime.UNDEFINED : (cast __structural70 : { @:optional var resource:Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>; }).resource; }) : Dynamic));
     return cast texture;
     return cast null;
   }
@@ -487,27 +487,27 @@ class _Texture {
   public static function equalsTexture(a:Null<TextureLike>, b:Null<TextureLike>):Bool {
     if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
-    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals((cast a : { var colorSpace:TextureColorSpace; }).colorSpace, (cast b : { var colorSpace:TextureColorSpace; }).colorSpace) : Bool) && (cast _Runtime.strictEquals((cast a : { var flipX:Bool; }).flipX, (cast b : { var flipX:Bool; }).flipX) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var flipY:Bool; }).flipY, (cast b : { var flipY:Bool; }).flipY) : Bool)) : Bool) && (cast (cast _Texture.equalsTextureContent__texture(({ final __callArgument61:Dynamic = a; __callArgument61; }), ({ final __callArgument62:Dynamic = b; __callArgument62; })) : Bool) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var uvRotation:Float; }).uvRotation, (cast b : { var uvRotation:Float; }).uvRotation) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast (cast a : { var uvOffset:Vector2; }).uvOffset : { var x:Float; }).x, (cast (cast b : { var uvOffset:Vector2; }).uvOffset : { var x:Float; }).x) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast (cast a : { var uvOffset:Vector2; }).uvOffset : { var y:Float; }).y, (cast (cast b : { var uvOffset:Vector2; }).uvOffset : { var y:Float; }).y) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast (cast a : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x, (cast (cast b : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast (cast a : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y, (cast (cast b : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var version:Float; }).version, (cast b : { var version:Float; }).version) : Bool)), function():Dynamic return cast (cast equalsSampler((cast (cast a : { var sampler:Sampler; }).sampler : Dynamic), (cast (cast b : { var sampler:Sampler; }).sampler : Dynamic)) : Bool));
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals((cast a : { var colorSpace:TextureColorSpace; }).colorSpace, (cast b : { var colorSpace:TextureColorSpace; }).colorSpace) : Bool) && (cast _Runtime.strictEquals((cast a : { var flipX:Bool; }).flipX, (cast b : { var flipX:Bool; }).flipX) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var flipY:Bool; }).flipY, (cast b : { var flipY:Bool; }).flipY) : Bool)) : Bool) && (cast (cast _Texture.equalsTextureContent__texture(({ final __callArgument73:Dynamic = a; __callArgument73; }), ({ final __callArgument74:Dynamic = b; __callArgument74; })) : Bool) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var uvRotation:Float; }).uvRotation, (cast b : { var uvRotation:Float; }).uvRotation) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast (cast a : { var uvOffset:Vector2; }).uvOffset : { var x:Float; }).x, (cast (cast b : { var uvOffset:Vector2; }).uvOffset : { var x:Float; }).x) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast (cast a : { var uvOffset:Vector2; }).uvOffset : { var y:Float; }).y, (cast (cast b : { var uvOffset:Vector2; }).uvOffset : { var y:Float; }).y) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast (cast a : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x, (cast (cast b : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast (cast a : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y, (cast (cast b : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var version:Float; }).version, (cast b : { var version:Float; }).version) : Bool)), function():Dynamic return cast (cast equalsSampler((cast (cast a : { var sampler:Sampler; }).sampler : Dynamic), (cast (cast b : { var sampler:Sampler; }).sampler : Dynamic)) : Bool));
     return cast null;
   }
 
   public static function getTextureHeight(texture:TextureLike):Float {
-    return cast _Runtime.coalesce(({ final __typedStruct67 = (cast _Texture.getFirstTextureSource__texture(({ final __callArgument65:Dynamic = texture; __callArgument65; })) : Null<TextureSource>); __typedStruct67 == null ? _Runtime.UNDEFINED : (cast __typedStruct67 : { var height:Float; }).height; }), function():Dynamic return cast -1.0);
+    return cast _Runtime.coalesce(({ final __typedStruct79 = (cast _Texture.getFirstTextureSource__texture(({ final __callArgument77:Dynamic = texture; __callArgument77; })) : Null<TextureSource>); __typedStruct79 == null ? _Runtime.UNDEFINED : (cast __typedStruct79 : { var height:Float; }).height; }), function():Dynamic return cast -1.0);
     return cast null;
   }
 
   public static function getTextureInverseUvMatrix(out:Matrix3Like, texture:TextureLike):Void {
-    getTextureUvMatrix(({ final __callArgument68:Dynamic = out; __callArgument68; }), ({ final __callArgument69:Dynamic = texture; __callArgument69; }));
-    (cast inverseMatrix3(({ final __callArgument72:Dynamic = out; __callArgument72; }), ({ final __callArgument73:Dynamic = out; __callArgument73; })) : Bool);
+    getTextureUvMatrix(({ final __callArgument80:Dynamic = out; __callArgument80; }), ({ final __callArgument81:Dynamic = texture; __callArgument81; }));
+    (cast inverseMatrix3(({ final __callArgument84:Dynamic = out; __callArgument84; }), ({ final __callArgument85:Dynamic = out; __callArgument85; })) : Bool);
   }
 
   public static function getTextureSource(texture:TextureLike):Null<TextureSource> {
-    return cast (cast _Texture.getFirstTextureSource__texture(({ final __callArgument76:Dynamic = texture; __callArgument76; })) : Null<TextureSource>);
+    return cast (cast _Texture.getFirstTextureSource__texture(({ final __callArgument88:Dynamic = texture; __callArgument88; })) : Null<TextureSource>);
     return cast null;
   }
 
   public static function getTextureSourceKind(texture:TextureLike):Null<TextureSourceKind> {
-    return cast _Runtime.coalesce(({ final __typedStruct80 = (cast _Texture.getFirstTextureSource__texture(({ final __callArgument78:Dynamic = texture; __callArgument78; })) : Null<TextureSource>); __typedStruct80 == null ? _Runtime.UNDEFINED : (cast __typedStruct80 : { var kind:String; }).kind; }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __typedStruct92 = (cast _Texture.getFirstTextureSource__texture(({ final __callArgument90:Dynamic = texture; __callArgument90; })) : Null<TextureSource>); __typedStruct92 == null ? _Runtime.UNDEFINED : (cast __typedStruct92 : { var kind:String; }).kind; }), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -548,12 +548,12 @@ class _Texture {
   }
 
   public static function getTextureWidth(texture:TextureLike):Float {
-    return cast _Runtime.coalesce(({ final __typedStruct83 = (cast _Texture.getFirstTextureSource__texture(({ final __callArgument81:Dynamic = texture; __callArgument81; })) : Null<TextureSource>); __typedStruct83 == null ? _Runtime.UNDEFINED : (cast __typedStruct83 : { var width:Float; }).width; }), function():Dynamic return cast -1.0);
+    return cast _Runtime.coalesce(({ final __typedStruct95 = (cast _Texture.getFirstTextureSource__texture(({ final __callArgument93:Dynamic = texture; __callArgument93; })) : Null<TextureSource>); __typedStruct95 == null ? _Runtime.UNDEFINED : (cast __typedStruct95 : { var width:Float; }).width; }), function():Dynamic return cast -1.0);
     return cast null;
   }
 
   public static function hasTextureSource(texture:TextureLike):Bool {
-    return cast !_Runtime.strictEquals((cast getTextureSourceKind(({ final __callArgument84:Dynamic = texture; __callArgument84; })) : Null<String>), null);
+    return cast !_Runtime.strictEquals((cast getTextureSourceKind(({ final __callArgument96:Dynamic = texture; __callArgument96; })) : Null<String>), null);
     return cast null;
   }
 
@@ -563,7 +563,7 @@ class _Texture {
   }
 
   public static function isTextureReady(texture:TextureLike):Bool {
-    return cast (cast hasTextureSource(({ final __callArgument86:Dynamic = texture; __callArgument86; })) : Bool);
+    return cast (cast hasTextureSource(({ final __callArgument98:Dynamic = texture; __callArgument98; })) : Bool);
     return cast null;
   }
 
@@ -606,8 +606,8 @@ class _Texture {
   public static function setTextureUvFromPixelRect(texture:TextureLike, x:Float, y:Float, width:Float, height:Float):Void {
     var textureWidth:Float = cast _Runtime.UNDEFINED;
     var textureHeight:Float = cast _Runtime.UNDEFINED;
-    textureWidth = (cast getTextureWidth(({ final __callArgument88:Dynamic = texture; __callArgument88; })) : Float);
-    textureHeight = (cast getTextureHeight(({ final __callArgument90:Dynamic = texture; __callArgument90; })) : Float);
+    textureWidth = (cast getTextureWidth(({ final __callArgument100:Dynamic = texture; __callArgument100; })) : Float);
+    textureHeight = (cast getTextureHeight(({ final __callArgument102:Dynamic = texture; __callArgument102; })) : Float);
     if ((cast ((cast ((cast textureWidth : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast textureHeight : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
       ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var x:Float; }).x = cast (0.0 : Float));
       ((cast (cast texture : { var uvOffset:Vector2; }).uvOffset : { var y:Float; }).y = cast (0.0 : Float));
@@ -659,16 +659,16 @@ class _Texture {
   }
 
   public static function createCommonTextureFields__texture(?opts:CreateTextureOptions):{ var colorSpace:TextureColorSpace; var flipX:Bool; var flipY:Bool; var sampler:Sampler; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var version:Float; } {
-    return cast { colorSpace: _Runtime.coalesce(({ final __structural92 = opts; __structural92 == null ? _Runtime.UNDEFINED : (cast __structural92 : { @:optional var colorSpace:Null<String>; }).colorSpace; }), function():Dynamic return cast 'srgb'), flipX: _Runtime.coalesce(({ final __structural93 = opts; __structural93 == null ? _Runtime.UNDEFINED : (cast __structural93 : { @:optional var flipX:Null<Bool>; }).flipX; }), function():Dynamic return cast false), flipY: _Runtime.coalesce(({ final __structural94 = opts; __structural94 == null ? _Runtime.UNDEFINED : (cast __structural94 : { @:optional var flipY:Null<Bool>; }).flipY; }), function():Dynamic return cast false), sampler: _Runtime.select(({ final __structural95 = opts; __structural95 == null ? _Runtime.UNDEFINED : (cast __structural95 : { @:optional var sampler:Null<Sampler>; }).sampler; }), function():Dynamic return cast (cast cloneSampler(({ final __callArgument96:Dynamic = (cast opts : { @:optional var sampler:Null<Sampler>; }).sampler; __callArgument96; })) : Sampler), function():Dynamic return cast (cast (#if js _Runtime.callValue(createSampler, cast ([] : Array<Dynamic>)) #else createSampler(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Sampler)), uvOffset: _Runtime.select(({ final __structural98 = opts; __structural98 == null ? _Runtime.UNDEFINED : (cast __structural98 : { @:optional var uvOffset:Null<Vector2>; }).uvOffset; }), function():Dynamic return cast (cast cloneVector2(({ final __callArgument99:Dynamic = (cast opts : { @:optional var uvOffset:Null<Vector2>; }).uvOffset; __callArgument99; })) : Vector2), function():Dynamic return cast (cast createVector2(({ final __callArgument101:Dynamic = 0.0; __callArgument101; }), ({ final __callArgument102:Dynamic = 0.0; __callArgument102; })) : Vector2)), uvRotation: _Runtime.coalesce(({ final __structural105 = opts; __structural105 == null ? _Runtime.UNDEFINED : (cast __structural105 : { @:optional var uvRotation:Null<Float>; }).uvRotation; }), function():Dynamic return cast 0.0), uvScale: _Runtime.select(({ final __structural106 = opts; __structural106 == null ? _Runtime.UNDEFINED : (cast __structural106 : { @:optional var uvScale:Null<Vector2>; }).uvScale; }), function():Dynamic return cast (cast cloneVector2(({ final __callArgument107:Dynamic = (cast opts : { @:optional var uvScale:Null<Vector2>; }).uvScale; __callArgument107; })) : Vector2), function():Dynamic return cast (cast createVector2(({ final __callArgument109:Dynamic = 1.0; __callArgument109; }), ({ final __callArgument110:Dynamic = 1.0; __callArgument110; })) : Vector2)), version: _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.coalesce(({ final __structural113 = opts; __structural113 == null ? _Runtime.UNDEFINED : (cast __structural113 : { @:optional var version:Null<Float>; }).version; }), function():Dynamic return cast 0.0)), 0) };
+    return cast { colorSpace: _Runtime.coalesce(({ final __structural104 = opts; __structural104 == null ? _Runtime.UNDEFINED : (cast __structural104 : { @:optional var colorSpace:Null<String>; }).colorSpace; }), function():Dynamic return cast 'srgb'), flipX: _Runtime.coalesce(({ final __structural105 = opts; __structural105 == null ? _Runtime.UNDEFINED : (cast __structural105 : { @:optional var flipX:Null<Bool>; }).flipX; }), function():Dynamic return cast false), flipY: _Runtime.coalesce(({ final __structural106 = opts; __structural106 == null ? _Runtime.UNDEFINED : (cast __structural106 : { @:optional var flipY:Null<Bool>; }).flipY; }), function():Dynamic return cast false), sampler: _Runtime.select(({ final __structural107 = opts; __structural107 == null ? _Runtime.UNDEFINED : (cast __structural107 : { @:optional var sampler:Null<Sampler>; }).sampler; }), function():Dynamic return cast (cast cloneSampler(({ final __callArgument108:Dynamic = (cast opts : { @:optional var sampler:Null<Sampler>; }).sampler; __callArgument108; })) : Sampler), function():Dynamic return cast (cast (#if js _Runtime.callValue(createSampler, cast ([] : Array<Dynamic>)) #else createSampler(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Sampler)), uvOffset: _Runtime.select(({ final __structural110 = opts; __structural110 == null ? _Runtime.UNDEFINED : (cast __structural110 : { @:optional var uvOffset:Null<Vector2>; }).uvOffset; }), function():Dynamic return cast (cast cloneVector2(({ final __callArgument111:Dynamic = (cast opts : { @:optional var uvOffset:Null<Vector2>; }).uvOffset; __callArgument111; })) : Vector2), function():Dynamic return cast (cast createVector2(({ final __callArgument113:Dynamic = 0.0; __callArgument113; }), ({ final __callArgument114:Dynamic = 0.0; __callArgument114; })) : Vector2)), uvRotation: _Runtime.coalesce(({ final __structural117 = opts; __structural117 == null ? _Runtime.UNDEFINED : (cast __structural117 : { @:optional var uvRotation:Null<Float>; }).uvRotation; }), function():Dynamic return cast 0.0), uvScale: _Runtime.select(({ final __structural118 = opts; __structural118 == null ? _Runtime.UNDEFINED : (cast __structural118 : { @:optional var uvScale:Null<Vector2>; }).uvScale; }), function():Dynamic return cast (cast cloneVector2(({ final __callArgument119:Dynamic = (cast opts : { @:optional var uvScale:Null<Vector2>; }).uvScale; __callArgument119; })) : Vector2), function():Dynamic return cast (cast createVector2(({ final __callArgument121:Dynamic = 1.0; __callArgument121; }), ({ final __callArgument122:Dynamic = 1.0; __callArgument122; })) : Vector2)), version: _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.coalesce(({ final __structural125 = opts; __structural125 == null ? _Runtime.UNDEFINED : (cast __structural125 : { @:optional var version:Null<Float>; }).version; }), function():Dynamic return cast 0.0)), 0) };
     return cast null;
   }
 
   public static function attachTextureToResource__texture(texture:Texture, resource:Null<ImageResourceReference>):Void {
-    if ((cast !_Runtime.looseEquals(resource, null) : Bool)) { _Runtime.callProperty(({ final __nullishOwner118 = resource; final __nullishValue119:Null<Array<Texture>> = cast (cast __nullishOwner118 : { @:optional var textures:Null<Array<Texture>>; }).textures; __nullishValue119 == null ? ((cast __nullishOwner118 : { @:optional var textures:Null<Array<Texture>>; }).textures = (cast cast ([] : Array<Dynamic>) : Null<Array<Texture>>)) : (cast __nullishValue119 : Null<Array<Texture>>); }), 'push', cast ([texture] : Array<Dynamic>)); }
+    if ((cast !_Runtime.looseEquals(resource, null) : Bool)) { _Runtime.callProperty(({ final __nullishOwner130 = resource; final __nullishValue131:Null<Array<Texture>> = cast (cast __nullishOwner130 : { @:optional var textures:Null<Array<Texture>>; }).textures; __nullishValue131 == null ? ((cast __nullishOwner130 : { @:optional var textures:Null<Array<Texture>>; }).textures = (cast cast ([] : Array<Dynamic>) : Null<Array<Texture>>)) : (cast __nullishValue131 : Null<Array<Texture>>); }), 'push', cast ([texture] : Array<Dynamic>)); }
   }
 
   public static function getTextureSampleColorSpace(source:TextureColorSpace, working:RenderTargetColorSpace):TextureColorSpace {
-    return cast ((cast (cast shouldDecodeTextureOnSample(({ final __callArgument120:Dynamic = source; __callArgument120; }), ({ final __callArgument121:Dynamic = working; __callArgument121; })) : Bool) : Bool) ? (cast 'srgb' : Dynamic) : (cast 'linear' : Dynamic));
+    return cast ((cast (cast shouldDecodeTextureOnSample(({ final __callArgument132:Dynamic = source; __callArgument132; }), ({ final __callArgument133:Dynamic = working; __callArgument133; })) : Bool) : Bool) ? (cast 'srgb' : Dynamic) : (cast 'linear' : Dynamic));
     return cast null;
   }
 
@@ -678,15 +678,15 @@ class _Texture {
   }
 
   public static function shouldPremultiplyTextureOnUpload(source:TextureColorSpace, working:RenderTargetColorSpace):Bool {
-    return cast !(cast (cast shouldDecodeTextureOnSample(({ final __callArgument124:Dynamic = source; __callArgument124; }), ({ final __callArgument125:Dynamic = working; __callArgument125; })) : Bool) : Bool);
+    return cast !(cast (cast shouldDecodeTextureOnSample(({ final __callArgument136:Dynamic = source; __callArgument136; }), ({ final __callArgument137:Dynamic = working; __callArgument137; })) : Bool) : Bool);
     return cast null;
   }
 
   public static function advanceVideoTexture(texture:TextureLike):Float {
     var image:Null<Image> = cast _Runtime.UNDEFINED;
-    image = (cast _Texture.getVideoImage__videoTexture(({ final __callArgument128:Dynamic = texture; __callArgument128; })) : Null<Image>);
+    image = (cast _Texture.getVideoImage__videoTexture(({ final __callArgument140:Dynamic = texture; __callArgument140; })) : Null<Image>);
     if ((cast _Runtime.looseEquals(image, null) : Bool)) { return cast (cast texture : { var version:Float; }).version; }
-    _Texture.updateVideoImageSize__videoTexture(({ final __callArgument130:Dynamic = image; __callArgument130; }));
+    _Texture.updateVideoImageSize__videoTexture(({ final __callArgument142:Dynamic = image; __callArgument142; }));
     ((cast image : Image).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast image : Image).version + 1.0)), 0));
     ((cast texture : { var version:Float; }).version = (cast image : Image).version);
     return cast (cast texture : { var version:Float; }).version;
@@ -694,18 +694,18 @@ class _Texture {
   }
 
   public static function cloneVideoTexture(source:TextureLike):Texture {
-    return cast (cast cloneTexture(({ final __callArgument132:Dynamic = source; __callArgument132; })) : Texture);
+    return cast (cast cloneTexture(({ final __callArgument144:Dynamic = source; __callArgument144; })) : Texture);
     return cast null;
   }
 
   public static function copyVideoTexture(out:TextureLike, source:TextureLike):Void {
-    copyTexture(({ final __callArgument134:Dynamic = out; __callArgument134; }), ({ final __callArgument135:Dynamic = source; __callArgument135; }));
+    copyTexture(({ final __callArgument146:Dynamic = out; __callArgument146; }), ({ final __callArgument147:Dynamic = source; __callArgument147; }));
   }
 
   public static function createVideoTexture(source:VideoResource, ?opts:flight._internal._Partial<TextureLike>):Texture2D {
     var image:Null<Image> = cast _Runtime.UNDEFINED;
-    image = (cast _Texture.createVideoImageResource__videoTexture(({ final __callArgument138:Dynamic = source; __callArgument138; })) : Null<Image>);
-    return cast (cast createTexture((cast _Runtime.mergeObjects([opts, { dimension: '2d' }, { source: image }, { version: _Runtime.coalesce(({ final __structural140 = image; __structural140 == null ? _Runtime.UNDEFINED : (cast __structural140 : { var version:Float; }).version; }), function():Dynamic return cast _Texture.INITIAL_VIDEO_VERSION__videoTexture) }]) : Dynamic)) : Texture2D);
+    image = (cast _Texture.createVideoImageResource__videoTexture(({ final __callArgument150:Dynamic = source; __callArgument150; })) : Null<Image>);
+    return cast (cast createTexture((cast _Runtime.mergeObjects([opts, { dimension: '2d' }, { source: image }, { version: _Runtime.coalesce(({ final __structural152 = image; __structural152 == null ? _Runtime.UNDEFINED : (cast __structural152 : { var version:Float; }).version; }), function():Dynamic return cast _Texture.INITIAL_VIDEO_VERSION__videoTexture) }]) : Dynamic)) : Texture2D);
     return cast null;
   }
 
@@ -716,58 +716,58 @@ class _Texture {
 
   public static function getVideoTextureHeight(texture:TextureLike):Float {
     var element:Null<flight._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
-    element = (cast _Texture.getVideoElement__videoTexture(({ final __callArgument142:Dynamic = texture; __callArgument142; })) : Null<flight._internal.dom.HTMLVideoElement>);
+    element = (cast _Texture.getVideoElement__videoTexture(({ final __callArgument154:Dynamic = texture; __callArgument154; })) : Null<flight._internal.dom.HTMLVideoElement>);
     return cast ((cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast (cast element : flight._internal.dom.HTMLVideoElement).videoHeight : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (cast element : flight._internal.dom.HTMLVideoElement).videoHeight : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
 
   public static function getVideoTextureInverseUvMatrix(out:Matrix3Like, texture:TextureLike):Void {
-    getVideoTextureUvMatrix(({ final __callArgument144:Dynamic = out; __callArgument144; }), ({ final __callArgument145:Dynamic = texture; __callArgument145; }));
-    (cast inverseMatrix3(({ final __callArgument148:Dynamic = out; __callArgument148; }), ({ final __callArgument149:Dynamic = out; __callArgument149; })) : Bool);
+    getVideoTextureUvMatrix(({ final __callArgument156:Dynamic = out; __callArgument156; }), ({ final __callArgument157:Dynamic = texture; __callArgument157; }));
+    (cast inverseMatrix3(({ final __callArgument160:Dynamic = out; __callArgument160; }), ({ final __callArgument161:Dynamic = out; __callArgument161; })) : Bool);
   }
 
   public static function getVideoTextureUvMatrix(out:Matrix3Like, texture:TextureLike):Void {
-    getTextureUvMatrix(({ final __callArgument152:Dynamic = out; __callArgument152; }), ({ final __callArgument153:Dynamic = texture; __callArgument153; }));
+    getTextureUvMatrix(({ final __callArgument164:Dynamic = out; __callArgument164; }), ({ final __callArgument165:Dynamic = texture; __callArgument165; }));
   }
 
   public static function getVideoTextureWidth(texture:TextureLike):Float {
     var element:Null<flight._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
-    element = (cast _Texture.getVideoElement__videoTexture(({ final __callArgument156:Dynamic = texture; __callArgument156; })) : Null<flight._internal.dom.HTMLVideoElement>);
+    element = (cast _Texture.getVideoElement__videoTexture(({ final __callArgument168:Dynamic = texture; __callArgument168; })) : Null<flight._internal.dom.HTMLVideoElement>);
     return cast ((cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast (cast element : flight._internal.dom.HTMLVideoElement).videoWidth : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (cast element : flight._internal.dom.HTMLVideoElement).videoWidth : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
 
   public static function isVideoTextureFrameReady(texture:TextureLike):Bool {
     var element:Null<flight._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
-    element = (cast _Texture.getVideoElement__videoTexture(({ final __callArgument158:Dynamic = texture; __callArgument158; })) : Null<flight._internal.dom.HTMLVideoElement>);
+    element = (cast _Texture.getVideoElement__videoTexture(({ final __callArgument170:Dynamic = texture; __callArgument170; })) : Null<flight._internal.dom.HTMLVideoElement>);
     return cast _Runtime.andValue(((cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast (cast element : flight._internal.dom.HTMLVideoElement).readyState : Float) >= (cast _Texture.HAVE_CURRENT_DATA__videoTexture : Float)) : Bool)) : Bool) && (cast ((cast (cast element : flight._internal.dom.HTMLVideoElement).videoWidth : Float) > (cast 0.0 : Float)) : Bool)), function():Dynamic return cast ((cast (cast element : flight._internal.dom.HTMLVideoElement).videoHeight : Float) > (cast 0.0 : Float)));
     return cast null;
   }
 
   public static function resetVideoTextureFrame(texture:TextureLike):Void {
     var image:Null<Image> = cast _Runtime.UNDEFINED;
-    image = (cast _Texture.getVideoImage__videoTexture(({ final __callArgument160:Dynamic = texture; __callArgument160; })) : Null<Image>);
+    image = (cast _Texture.getVideoImage__videoTexture(({ final __callArgument172:Dynamic = texture; __callArgument172; })) : Null<Image>);
     if ((cast !_Runtime.looseEquals(image, null) : Bool)) { ((cast image : Image).version = _Texture.INITIAL_VIDEO_VERSION__videoTexture); }
     ((cast texture : { var version:Float; }).version = _Texture.INITIAL_VIDEO_VERSION__videoTexture);
   }
 
   public static function setVideoTextureSource(texture:TextureLike, source:VideoResource):Void {
     if ((cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) { _Runtime.throwValue(_Runtime.error('setVideoTextureSource requires a Texture2D')); }
-    ((cast texture : { var version:Float; var dimension:String; var source:Null<TextureSource>; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).source = (cast _Texture.createVideoImageResource__videoTexture(({ final __callArgument162:Dynamic = source; __callArgument162; })) : Null<Image>));
+    ((cast texture : { var version:Float; var dimension:String; var source:Null<TextureSource>; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).source = (cast _Texture.createVideoImageResource__videoTexture(({ final __callArgument174:Dynamic = source; __callArgument174; })) : Null<Image>));
     ((cast texture : { var version:Float; var dimension:String; var source:Null<TextureSource>; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).version = _Texture.INITIAL_VIDEO_VERSION__videoTexture);
   }
 
   public static function createVideoImageResource__videoTexture(source:VideoResource):Null<Image> {
     var image:Image = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(source.element, null) : Bool)) { return cast null; }
-    image = (cast (cast createEntity(({ final __callArgument164:Dynamic = ({ final __structInitField0:Dynamic = 0.0; final __structInitField1:Dynamic = 'straight'; final __structInitField2:Dynamic = 'srgb'; final __structInitField3:Dynamic = ImageTextureSourceKind; final __structInitField4:Dynamic = source.element; final __structInitField5:Dynamic = _Texture.INITIAL_VIDEO_VERSION__videoTexture; final __structInitField6:Dynamic = 0.0; ({ alphaType: __structInitField1, gamut: __structInitField2, height: __structInitField0, kind: __structInitField3, source: __structInitField4, version: __structInitField5, width: __structInitField6 } : Image); }); __callArgument164; })) : Image) : Image);
-    _Texture.updateVideoImageSize__videoTexture(({ final __callArgument166:Dynamic = image; __callArgument166; }));
+    image = (cast (cast createEntity(({ final __callArgument176:Dynamic = (#if flight_struct_typedef { height: 0.0, alphaType: 'straight', gamut: 'srgb', kind: ImageTextureSourceKind, source: source.element, version: _Texture.INITIAL_VIDEO_VERSION__videoTexture, width: 0.0 } #else ({ final __structInitField0:Dynamic = 0.0; final __structInitField1:Dynamic = 'straight'; final __structInitField2:Dynamic = 'srgb'; final __structInitField3:Dynamic = ImageTextureSourceKind; final __structInitField4:Dynamic = source.element; final __structInitField5:Dynamic = _Texture.INITIAL_VIDEO_VERSION__videoTexture; final __structInitField6:Dynamic = 0.0; ({ alphaType: __structInitField1, gamut: __structInitField2, height: __structInitField0, kind: __structInitField3, source: __structInitField4, version: __structInitField5, width: __structInitField6 } : Image); }) #end); __callArgument176; })) : Image) : Image);
+    _Texture.updateVideoImageSize__videoTexture(({ final __callArgument178:Dynamic = image; __callArgument178; }));
     return cast image;
     return cast null;
   }
 
   public static function getVideoElement__videoTexture(texture:TextureLike):Null<flight._internal.dom.HTMLVideoElement> {
-    return cast _Runtime.coalesce((cast ({ final __structural170 = (cast _Texture.getVideoImage__videoTexture(({ final __callArgument168:Dynamic = texture; __callArgument168; })) : Null<Image>); __structural170 == null ? _Runtime.UNDEFINED : (cast __structural170 : { var source:flight._internal._Any; }).source; }) : Null<flight._internal.dom.HTMLVideoElement>), function():Dynamic return cast null);
+    return cast _Runtime.coalesce((cast ({ final __structural182 = (cast _Texture.getVideoImage__videoTexture(({ final __callArgument180:Dynamic = texture; __callArgument180; })) : Null<Image>); __structural182 == null ? _Runtime.UNDEFINED : (cast __structural182 : { var source:flight._internal._Any; }).source; }) : Null<flight._internal.dom.HTMLVideoElement>), function():Dynamic return cast null);
     return cast null;
   }
 

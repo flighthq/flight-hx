@@ -7,13 +7,13 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | Metric | Count |
 | --- | ---: |
 | Production createEntity calls | 368 |
-| Exact concrete Entity calls | 179 |
-| Exact concrete Entity schemas | 144 |
-| Constructor-ready Entity calls | 346 |
-| Blocked Entity calls | 5 |
+| Exact concrete Entity calls | 178 |
+| Exact concrete Entity schemas | 143 |
+| Constructor-ready Entity calls | 347 |
+| Blocked Entity calls | 4 |
 | Bare Entity calls | 0 |
 | Generic Entity calls | 3 |
-| Private local Entity classes | 168 |
+| Private local Entity classes | 169 |
 | Field-order-normalized calls | 24 |
 | Missing-field-initialized calls | 9 |
 | Spread-projected calls | 17 |
@@ -116,7 +116,6 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `@flighthq/types:interface#Scene3DHit` | 1 | 1 | 0 | `createScene3DHit` |
 | `@flighthq/types:interface#Scene3DLights` | 1 | 1 | 0 | `createScene3DLights` |
 | `@flighthq/types:interface#Scene3DMaterialTextureRegistry` | 1 | 1 | 0 | `createScene3DMaterialTextureRegistry` |
-| `@flighthq/types:interface#Scene3DResourceResolver` | 1 | 0 | 1 | `createScene3DResourceResolver` |
 | `@flighthq/types:interface#Scene3DResourceSignals` | 1 | 1 | 0 | `createScene3DResourceSignals` |
 | `@flighthq/types:interface#ScheduledNotification` | 1 | 1 | 0 | `createScheduledNotificationResource` |
 | `@flighthq/types:interface#ScreenInfo` | 2 | 2 | 0 | `createScreenInfo`, `emptyScreenInfo` |
@@ -504,7 +503,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/scene2d/src/scene2d.ts:18:19` | `createScene2D` | `@flighthq/types:interface#Scene2D` | `contextual` | `object` | 6 | ready | — | — |
 | `upstream/packages/scene2d/src/sprite.ts:48:10` | `createSpriteRendererData` | `synthetic-entity:upstream/packages/scene2d/src/sprite.ts:48:10` | `contextual` | `object` | 2 | ready | `synthetic-class` | — |
 | `upstream/packages/scene3d-resources/src/sceneMaterialTextureRegistry.ts:17:10` | `createScene3DMaterialTextureRegistry` | `@flighthq/types:interface#Scene3DMaterialTextureRegistry` | `contextual` | `object` | 2 | ready | — | — |
-| `upstream/packages/scene3d-resources/src/sceneResourceResolver.ts:42:10` | `createScene3DResourceResolver` | `@flighthq/types:interface#Scene3DResourceResolver` | `contextual` | `object` | 2 | blocked | — | `computed-construction` |
+| `upstream/packages/scene3d-resources/src/sceneResourceResolver.ts:42:10` | `createScene3DResourceResolver` | `synthetic-entity:upstream/packages/scene3d-resources/src/sceneResourceResolver.ts:42:10` | `contextual` | `object` | 2 | ready | `synthetic-class`, `computed-symbol-key` | — |
 | `upstream/packages/scene3d-resources/src/sceneResourceSignals.ts:8:10` | `createScene3DResourceSignals` | `@flighthq/types:interface#Scene3DResourceSignals` | `contextual` | `object` | 2 | ready | — | — |
 | `upstream/packages/scene3d/src/scene.ts:14:10` | `createScene3D` | `@flighthq/types:interface#Scene3D` | `contextual` | `object` | 4 | ready | — | — |
 | `upstream/packages/scene3d/src/sceneDocument.ts:109:22` | `<anonymous>` | `synthetic-entity:upstream/packages/scene3d/src/sceneDocument.ts:109:22` | `variable` | `object` | 5 | ready | `synthetic-class` | — |

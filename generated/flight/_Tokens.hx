@@ -218,7 +218,7 @@ class _Tokens {
     return cast null;
   }
 
-  public static final INVALID_FLIGHT_DOCUMENT_TOKEN_VALUE:flight._internal._Symbol = _Runtime.symbol('invalid-flight-document-token-value');
+  public static final INVALID_FLIGHT_DOCUMENT_TOKEN_VALUE:flight._internal._Symbol = _Runtime.symbol('invalid-flight-document-token-value', '__symbol__661f88a602da19a5a7c9');
 
   public static final FLIGHT_DOCUMENT_TOKEN_KEY_PATTERN__flightDocumentTokenReference:flight._internal._Any = _Runtime.regexp('^[A-Za-z_][A-Za-z0-9_.-]*$$', '');
 

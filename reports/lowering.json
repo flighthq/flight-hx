@@ -3667,7 +3667,7 @@
     "packages": 159,
     "staticEmission": {
       "booleanAndExpressions": 2827,
-      "booleanConditionalExpressions": 3568,
+      "booleanConditionalExpressions": 3569,
       "booleanOrExpressions": 3470,
       "booleanTruthinessUses": 17717,
       "destructuringEscapes": {
@@ -3819,7 +3819,7 @@
           "writes": 402
         }
       },
-      "numericRelations": 7898,
+      "numericRelations": 7899,
       "syntheticArrayReads": {
         "highArityArguments": 27,
         "iterationBindings": 205

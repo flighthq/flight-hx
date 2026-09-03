@@ -636,7 +636,7 @@ class _QuadBatch {
 
   public static final defaultMethods__quadBatch:flight._internal._Partial<MethodsOf<QuadBatchRuntime>> = (cast { computeLocalBoundsRectangle: _QuadBatch.copyLocalBoundsRectangle__quadBatch });
 
-  public static final quadBatchSignalsSlot__quadBatch:flight._internal._Symbol = _Runtime.symbol('quadBatchSignals');
+  public static final quadBatchSignalsSlot__quadBatch:flight._internal._Symbol = _Runtime.symbol('quadBatchSignals', '__symbol__8b7834ea772c5dbc396f');
 
   public static final quadTransformStride__quadBatch:{ var vector2:Float; var matrix3x2:Float; } = (cast { vector2: 2.0, matrix3x2: 6.0 });
 

@@ -65,6 +65,7 @@ export interface IrHostTypeBinding {
 export interface IrCppStructInitConstruction {
   fieldNames: string[];
   missingFieldNames?: string[] | undefined;
+  nativeOnly?: true | undefined;
   schemaHaxeType: string;
   schemaId: string;
   schemaName: string;
@@ -231,7 +232,7 @@ export type IrExpression = IrExpressionNode & {
 };
 
 export type IrObjectMember =
-  | { key: IrExpression; kind: 'computedProperty'; value: IrExpression }
+  | { key: IrExpression; kind: 'computedProperty'; nativeName?: string | undefined; value: IrExpression }
   | { kind: 'property'; name: string; value: IrExpression }
   | { kind: 'spread'; expression: IrExpression };
 
@@ -327,6 +328,7 @@ export interface IrVariableDeclaration extends IrVariable {
 
 export interface IrTypeDeclaration {
   cppStructInitConstructorAllowModules?: string[] | undefined;
+  cppStructInitNativeOnly?: true | undefined;
   cppStructInitSchemaId?: string | undefined;
   exported: boolean;
   kind: 'type';

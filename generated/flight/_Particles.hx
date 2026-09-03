@@ -788,7 +788,7 @@ class _Particles {
     return cast null;
   }
 
-  public static final signalsSlot__particleEmitterSignals:flight._internal._Symbol = _Runtime.symbol('particleEmitterSignals');
+  public static final signalsSlot__particleEmitterSignals:flight._internal._Symbol = _Runtime.symbol('particleEmitterSignals', '__symbol__e1bdeafdd78a0affc390');
 
   @:allow(flight)
   @:keep

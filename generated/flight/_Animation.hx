@@ -699,7 +699,7 @@ class _Animation {
   }
 
   public static function createAnimationLayer__animationLayerStack(channelCount:Float, blendTree:Null<AnimationBlendTree>, stateMachine:Null<AnimationStateMachine>, ?options:AnimationLayerOptions):AnimationLayer {
-    return cast (cast createEntity(({ final __callArgument195:Dynamic = ({ additive: _Runtime.coalesce(({ final __structural191 = options; __structural191 == null ? _Runtime.UNDEFINED : (cast __structural191 : { @:optional var additive:Null<Bool>; }).additive; }), function():Dynamic return cast false), blendTree: blendTree, channelIndices: (cast _Animation.copyAnimationLayerChannelIndices__animationLayerStack(({ final __structural192 = options; __structural192 == null ? _Runtime.UNDEFINED : (cast __structural192 : { @:optional var channelIndices:Null<Array<Float>>; }).channelIndices; }), (cast channelCount : Float)) : Null<Array<Float>>), stateMachine: stateMachine, weight: _Runtime.coalesce(({ final __structural194 = options; __structural194 == null ? _Runtime.UNDEFINED : (cast __structural194 : { @:optional var weight:Null<Float>; }).weight; }), function():Dynamic return cast 1.0) } : AnimationLayer); __callArgument195; })) : AnimationLayer);
+    return cast (cast createEntity(({ final __callArgument199:Dynamic = ({ additive: _Runtime.coalesce(({ final __structural195 = options; __structural195 == null ? _Runtime.UNDEFINED : (cast __structural195 : { @:optional var additive:Null<Bool>; }).additive; }), function():Dynamic return cast false), blendTree: blendTree, channelIndices: (cast _Animation.copyAnimationLayerChannelIndices__animationLayerStack(({ final __structural196 = options; __structural196 == null ? _Runtime.UNDEFINED : (cast __structural196 : { @:optional var channelIndices:Null<Array<Float>>; }).channelIndices; }), (cast channelCount : Float)) : Null<Array<Float>>), stateMachine: stateMachine, weight: _Runtime.coalesce(({ final __structural198 = options; __structural198 == null ? _Runtime.UNDEFINED : (cast __structural198 : { @:optional var weight:Null<Float>; }).weight; }), function():Dynamic return cast 1.0) } : AnimationLayer); __callArgument199; })) : AnimationLayer);
     return cast null;
   }
 
@@ -725,13 +725,13 @@ class _Animation {
   }
 
   public static function getAnimationLayerChannels__animationLayerStack(layer:AnimationLayer):Array<{ var channel:AnimationChannel; }> {
-    return cast _Runtime.coalesce(({ final __typedStruct201 = layer.blendTree; __typedStruct201 == null ? _Runtime.UNDEFINED : (cast __typedStruct201 : { var channels:Array<AnimationBlendTreeChannel>; }).channels; }), function():Dynamic return cast (cast layer.stateMachine : { var channels:Array<AnimationStateMachineChannel>; }).channels);
+    return cast _Runtime.coalesce(({ final __typedStruct209 = layer.blendTree; __typedStruct209 == null ? _Runtime.UNDEFINED : (cast __typedStruct209 : { var channels:Array<AnimationBlendTreeChannel>; }).channels; }), function():Dynamic return cast (cast layer.stateMachine : { var channels:Array<AnimationStateMachineChannel>; }).channels);
     return cast null;
   }
 
   public static function sampleAnimationLayer__animationLayerStack(out:flight._internal._Union2<Array<Float>, flight._internal._Float32Array>, layer:AnimationLayer, channelIndex:Float):Bool {
-    if ((cast !_Runtime.strictEquals(layer.blendTree, null) : Bool)) { return cast (cast sampleAnimationBlendTreeChannel(({ final __callArgument202:Dynamic = out; __callArgument202; }), layer.blendTree, (cast channelIndex : Float)) : Bool); }
-    return cast (cast sampleAnimationStateMachineChannel(({ final __callArgument204:Dynamic = out; __callArgument204; }), ({ final __callArgument205:Dynamic = layer.stateMachine; __callArgument205; }), (cast channelIndex : Float)) : Bool);
+    if ((cast !_Runtime.strictEquals(layer.blendTree, null) : Bool)) { return cast (cast sampleAnimationBlendTreeChannel(({ final __callArgument210:Dynamic = out; __callArgument210; }), layer.blendTree, (cast channelIndex : Float)) : Bool); }
+    return cast (cast sampleAnimationStateMachineChannel(({ final __callArgument212:Dynamic = out; __callArgument212; }), ({ final __callArgument213:Dynamic = layer.stateMachine; __callArgument213; }), (cast channelIndex : Float)) : Bool);
     return cast null;
   }
 
@@ -765,17 +765,17 @@ class _Animation {
     time = (player.time + (dt * player.speed));
     if ((cast !(cast player.loop : Bool) : Bool)) {
       if ((cast ((cast time : Float) >= (cast duration : Float)) : Bool)) {
-        (#if js _Runtime.callValue(_Animation.emitAnimationPlayerEvents__animationPlayer, cast ([({ final __callArgument209:Dynamic = player; __callArgument209; }), (cast fromTime : Float), (cast duration : Float)] : Array<Dynamic>)) #else _Animation.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument208:Dynamic = player; __callArgument208; }), (cast fromTime : Float), (cast duration : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+        (#if js _Runtime.callValue(_Animation.emitAnimationPlayerEvents__animationPlayer, cast ([({ final __callArgument217:Dynamic = player; __callArgument217; }), (cast fromTime : Float), (cast duration : Float)] : Array<Dynamic>)) #else _Animation.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument216:Dynamic = player; __callArgument216; }), (cast fromTime : Float), (cast duration : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
         (player.time = cast (duration : Float));
         (player.playing = cast (false : Bool));
-        _Animation.emitAnimationPlayerFinished__animationPlayer(({ final __callArgument210:Dynamic = player; __callArgument210; }));
+        _Animation.emitAnimationPlayerFinished__animationPlayer(({ final __callArgument218:Dynamic = player; __callArgument218; }));
       } else { if ((cast ((cast time : Float) < (cast 0.0 : Float)) : Bool)) {
-        (#if js _Runtime.callValue(_Animation.emitAnimationPlayerEvents__animationPlayer, cast ([({ final __callArgument213:Dynamic = player; __callArgument213; }), (cast fromTime : Float), (cast 0.0 : Float)] : Array<Dynamic>)) #else _Animation.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument212:Dynamic = player; __callArgument212; }), (cast fromTime : Float), (cast 0.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+        (#if js _Runtime.callValue(_Animation.emitAnimationPlayerEvents__animationPlayer, cast ([({ final __callArgument221:Dynamic = player; __callArgument221; }), (cast fromTime : Float), (cast 0.0 : Float)] : Array<Dynamic>)) #else _Animation.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument220:Dynamic = player; __callArgument220; }), (cast fromTime : Float), (cast 0.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
         (player.time = cast (0.0 : Float));
         (player.playing = cast (false : Bool));
-        _Animation.emitAnimationPlayerFinished__animationPlayer(({ final __callArgument214:Dynamic = player; __callArgument214; }));
+        _Animation.emitAnimationPlayerFinished__animationPlayer(({ final __callArgument222:Dynamic = player; __callArgument222; }));
       } else {
-        (#if js _Runtime.callValue(_Animation.emitAnimationPlayerEvents__animationPlayer, cast ([({ final __callArgument217:Dynamic = player; __callArgument217; }), (cast fromTime : Float), (cast time : Float)] : Array<Dynamic>)) #else _Animation.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument216:Dynamic = player; __callArgument216; }), (cast fromTime : Float), (cast time : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+        (#if js _Runtime.callValue(_Animation.emitAnimationPlayerEvents__animationPlayer, cast ([({ final __callArgument225:Dynamic = player; __callArgument225; }), (cast fromTime : Float), (cast time : Float)] : Array<Dynamic>)) #else _Animation.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument224:Dynamic = player; __callArgument224; }), (cast fromTime : Float), (cast time : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
         (player.time = cast (time : Float));
       } }
       return;
@@ -787,9 +787,9 @@ class _Animation {
       {
         while (true) {
           if ((cast ((cast time : Float) > (cast duration : Float)) : Bool)) {
-            _Animation.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument218:Dynamic = player; __callArgument218; }), (cast segmentStart : Float), (cast duration : Float), (cast includeSegmentStart : Bool));
-            if ((cast !(cast (cast _Animation.consumeAnimationPlayerLoop__animationPlayer(({ final __callArgument220:Dynamic = player; __callArgument220; })) : Bool) : Bool) : Bool)) {
-              _Animation.finishAnimationPlayerAt__animationPlayer(({ final __callArgument222:Dynamic = player; __callArgument222; }), (cast duration : Float));
+            _Animation.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument226:Dynamic = player; __callArgument226; }), (cast segmentStart : Float), (cast duration : Float), (cast includeSegmentStart : Bool));
+            if ((cast !(cast (cast _Animation.consumeAnimationPlayerLoop__animationPlayer(({ final __callArgument228:Dynamic = player; __callArgument228; })) : Bool) : Bool) : Bool)) {
+              _Animation.finishAnimationPlayerAt__animationPlayer(({ final __callArgument230:Dynamic = player; __callArgument230; }), (cast duration : Float));
               return;
             }
             (time = cast (((2.0 * duration) - time) : Dynamic));
@@ -798,9 +798,9 @@ class _Animation {
             (includeSegmentStart = cast (false : Dynamic));
             (looped = cast (true : Dynamic));
           } else { if ((cast ((cast time : Float) < (cast 0.0 : Float)) : Bool)) {
-            _Animation.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument224:Dynamic = player; __callArgument224; }), (cast segmentStart : Float), (cast 0.0 : Float), (cast includeSegmentStart : Bool));
-            if ((cast !(cast (cast _Animation.consumeAnimationPlayerLoop__animationPlayer(({ final __callArgument226:Dynamic = player; __callArgument226; })) : Bool) : Bool) : Bool)) {
-              _Animation.finishAnimationPlayerAt__animationPlayer(({ final __callArgument228:Dynamic = player; __callArgument228; }), (cast 0.0 : Float));
+            _Animation.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument232:Dynamic = player; __callArgument232; }), (cast segmentStart : Float), (cast 0.0 : Float), (cast includeSegmentStart : Bool));
+            if ((cast !(cast (cast _Animation.consumeAnimationPlayerLoop__animationPlayer(({ final __callArgument234:Dynamic = player; __callArgument234; })) : Bool) : Bool) : Bool)) {
+              _Animation.finishAnimationPlayerAt__animationPlayer(({ final __callArgument236:Dynamic = player; __callArgument236; }), (cast 0.0 : Float));
               return;
             }
             (time = cast (-time : Dynamic));
@@ -813,12 +813,12 @@ class _Animation {
           } }
         }
       }
-      _Animation.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument230:Dynamic = player; __callArgument230; }), (cast segmentStart : Float), (cast time : Float), (cast includeSegmentStart : Bool));
+      _Animation.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument238:Dynamic = player; __callArgument238; }), (cast segmentStart : Float), (cast time : Float), (cast includeSegmentStart : Bool));
     } else {
       while ((cast ((cast time : Float) >= (cast duration : Float)) : Bool)) {
-        _Animation.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument232:Dynamic = player; __callArgument232; }), (cast segmentStart : Float), (cast duration : Float), (cast includeSegmentStart : Bool));
-        if ((cast !(cast (cast _Animation.consumeAnimationPlayerLoop__animationPlayer(({ final __callArgument234:Dynamic = player; __callArgument234; })) : Bool) : Bool) : Bool)) {
-          _Animation.finishAnimationPlayerAt__animationPlayer(({ final __callArgument236:Dynamic = player; __callArgument236; }), (cast duration : Float));
+        _Animation.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument240:Dynamic = player; __callArgument240; }), (cast segmentStart : Float), (cast duration : Float), (cast includeSegmentStart : Bool));
+        if ((cast !(cast (cast _Animation.consumeAnimationPlayerLoop__animationPlayer(({ final __callArgument242:Dynamic = player; __callArgument242; })) : Bool) : Bool) : Bool)) {
+          _Animation.finishAnimationPlayerAt__animationPlayer(({ final __callArgument244:Dynamic = player; __callArgument244; }), (cast duration : Float));
           return;
         }
         (time = cast ((time - duration) : Dynamic));
@@ -827,9 +827,9 @@ class _Animation {
         (looped = cast (true : Dynamic));
       }
       while ((cast ((cast time : Float) < (cast 0.0 : Float)) : Bool)) {
-        _Animation.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument238:Dynamic = player; __callArgument238; }), (cast segmentStart : Float), (cast 0.0 : Float), (cast includeSegmentStart : Bool));
-        if ((cast !(cast (cast _Animation.consumeAnimationPlayerLoop__animationPlayer(({ final __callArgument240:Dynamic = player; __callArgument240; })) : Bool) : Bool) : Bool)) {
-          _Animation.finishAnimationPlayerAt__animationPlayer(({ final __callArgument242:Dynamic = player; __callArgument242; }), (cast 0.0 : Float));
+        _Animation.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument246:Dynamic = player; __callArgument246; }), (cast segmentStart : Float), (cast 0.0 : Float), (cast includeSegmentStart : Bool));
+        if ((cast !(cast (cast _Animation.consumeAnimationPlayerLoop__animationPlayer(({ final __callArgument248:Dynamic = player; __callArgument248; })) : Bool) : Bool) : Bool)) {
+          _Animation.finishAnimationPlayerAt__animationPlayer(({ final __callArgument250:Dynamic = player; __callArgument250; }), (cast 0.0 : Float));
           return;
         }
         (time = cast ((time + duration) : Dynamic));
@@ -837,19 +837,19 @@ class _Animation {
         (includeSegmentStart = cast (true : Dynamic));
         (looped = cast (true : Dynamic));
       }
-      _Animation.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument244:Dynamic = player; __callArgument244; }), (cast segmentStart : Float), (cast time : Float), (cast includeSegmentStart : Bool));
+      _Animation.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument252:Dynamic = player; __callArgument252; }), (cast segmentStart : Float), (cast time : Float), (cast includeSegmentStart : Bool));
     }
     (player.time = cast (time : Float));
-    if ((cast looped : Bool)) { _Animation.emitAnimationPlayerLooped__animationPlayer(({ final __callArgument246:Dynamic = player; __callArgument246; })); }
+    if ((cast looped : Bool)) { _Animation.emitAnimationPlayerLooped__animationPlayer(({ final __callArgument254:Dynamic = player; __callArgument254; })); }
   }
 
   public static function cloneAnimationPlayer(player:AnimationPlayer):AnimationPlayer {
-    return cast (cast createEntity(({ final __callArgument248:Dynamic = ({ clip: player.clip, loop: player.loop, loopMode: player.loopMode, onEvent: null, onFinished: null, onLooped: null, playing: player.playing, repeatCount: player.repeatCount, speed: player.speed, time: player.time } : AnimationPlayer); __callArgument248; })) : AnimationPlayer);
+    return cast (cast createEntity(({ final __callArgument256:Dynamic = ({ clip: player.clip, loop: player.loop, loopMode: player.loopMode, onEvent: null, onFinished: null, onLooped: null, playing: player.playing, repeatCount: player.repeatCount, speed: player.speed, time: player.time } : AnimationPlayer); __callArgument256; })) : AnimationPlayer);
     return cast null;
   }
 
   public static function createAnimationPlayer(clip:AnimationClip, ?opts:{ @:optional var loop:Bool; @:optional var loopMode:AnimationLoopMode; @:optional var playing:Bool; @:optional var repeatCount:Float; @:optional var speed:Float; @:optional var time:Float; }):AnimationPlayer {
-    return cast (cast createEntity(({ final __callArgument256:Dynamic = ({ clip: clip, loop: _Runtime.coalesce(({ final __structural250 = opts; __structural250 == null ? _Runtime.UNDEFINED : (cast __structural250 : { @:optional var loop:Null<Bool>; }).loop; }), function():Dynamic return cast true), loopMode: _Runtime.coalesce(({ final __structural251 = opts; __structural251 == null ? _Runtime.UNDEFINED : (cast __structural251 : { @:optional var loopMode:Null<String>; }).loopMode; }), function():Dynamic return cast AnimationLoopModeRepeat), onEvent: null, onFinished: null, onLooped: null, playing: _Runtime.coalesce(({ final __structural252 = opts; __structural252 == null ? _Runtime.UNDEFINED : (cast __structural252 : { @:optional var playing:Null<Bool>; }).playing; }), function():Dynamic return cast true), repeatCount: _Runtime.coalesce(({ final __structural253 = opts; __structural253 == null ? _Runtime.UNDEFINED : (cast __structural253 : { @:optional var repeatCount:Null<Float>; }).repeatCount; }), function():Dynamic return cast -1.0), speed: _Runtime.coalesce(({ final __structural254 = opts; __structural254 == null ? _Runtime.UNDEFINED : (cast __structural254 : { @:optional var speed:Null<Float>; }).speed; }), function():Dynamic return cast 1.0), time: _Runtime.coalesce(({ final __structural255 = opts; __structural255 == null ? _Runtime.UNDEFINED : (cast __structural255 : { @:optional var time:Null<Float>; }).time; }), function():Dynamic return cast 0.0) } : AnimationPlayer); __callArgument256; })) : AnimationPlayer);
+    return cast (cast createEntity(({ final __callArgument270:Dynamic = ({ clip: clip, loop: _Runtime.coalesce(({ final __structural264 = opts; __structural264 == null ? _Runtime.UNDEFINED : (cast __structural264 : { @:optional var loop:Null<Bool>; }).loop; }), function():Dynamic return cast true), loopMode: _Runtime.coalesce(({ final __structural265 = opts; __structural265 == null ? _Runtime.UNDEFINED : (cast __structural265 : { @:optional var loopMode:Null<String>; }).loopMode; }), function():Dynamic return cast AnimationLoopModeRepeat), onEvent: null, onFinished: null, onLooped: null, playing: _Runtime.coalesce(({ final __structural266 = opts; __structural266 == null ? _Runtime.UNDEFINED : (cast __structural266 : { @:optional var playing:Null<Bool>; }).playing; }), function():Dynamic return cast true), repeatCount: _Runtime.coalesce(({ final __structural267 = opts; __structural267 == null ? _Runtime.UNDEFINED : (cast __structural267 : { @:optional var repeatCount:Null<Float>; }).repeatCount; }), function():Dynamic return cast -1.0), speed: _Runtime.coalesce(({ final __structural268 = opts; __structural268 == null ? _Runtime.UNDEFINED : (cast __structural268 : { @:optional var speed:Null<Float>; }).speed; }), function():Dynamic return cast 1.0), time: _Runtime.coalesce(({ final __structural269 = opts; __structural269 == null ? _Runtime.UNDEFINED : (cast __structural269 : { @:optional var time:Null<Float>; }).time; }), function():Dynamic return cast 0.0) } : AnimationPlayer); __callArgument270; })) : AnimationPlayer);
     return cast null;
   }
 
@@ -936,7 +936,7 @@ class _Animation {
   public static function finishAnimationPlayerAt__animationPlayer(player:AnimationPlayer, time:Float):Void {
     (player.time = cast (time : Float));
     (player.playing = cast (false : Bool));
-    _Animation.emitAnimationPlayerFinished__animationPlayer(({ final __callArgument268:Dynamic = player; __callArgument268; }));
+    _Animation.emitAnimationPlayerFinished__animationPlayer(({ final __callArgument288:Dynamic = player; __callArgument288; }));
   }
 
   public static function createAnimationRootMotionExtractor(clip:AnimationClip, channelIndex:Float):AnimationRootMotionExtractor {
@@ -952,9 +952,9 @@ class _Animation {
       _Runtime.throwValue(_Runtime.typeError('AnimationRootMotionExtractor quaternion channel must have four components.'));
     }
     extractor = (cast createEntity((cast ({ channel: channel, channelIndex: channelIndex, clip: clip, cycleDelta: new flight._internal._Float32Array(width), fromMotion: new flight._internal._Float32Array(width), fromSample: new flight._internal._Float32Array(width), powerScratch: new flight._internal._Float32Array(width), startSample: new flight._internal._Float32Array(width), toMotion: new flight._internal._Float32Array(width), toSample: new flight._internal._Float32Array(width) } : AnimationRootMotionExtractor) : Dynamic)) : AnimationRootMotionExtractor);
-    sampleAnimationTrack(({ final __callArgument270:Dynamic = (cast extractor : { var startSample:flight._internal._Float32Array; }).startSample; __callArgument270; }), channel.track, (cast 0.0 : Float));
-    sampleAnimationTrack(({ final __callArgument272:Dynamic = (cast extractor : { var toSample:flight._internal._Float32Array; }).toSample; __callArgument272; }), channel.track, (cast clip.duration : Float));
-    _Animation.writeAnimationRootMotionDelta__animationRootMotion(({ final __callArgument274:Dynamic = (cast extractor : { var cycleDelta:flight._internal._Float32Array; }).cycleDelta; __callArgument274; }), ({ final __callArgument275:Dynamic = (cast extractor : { var startSample:flight._internal._Float32Array; }).startSample; __callArgument275; }), ({ final __callArgument276:Dynamic = (cast extractor : { var toSample:flight._internal._Float32Array; }).toSample; __callArgument276; }), (cast (cast channel.track : { var quaternion:Bool; }).quaternion : Bool));
+    sampleAnimationTrack(({ final __callArgument290:Dynamic = (cast extractor : { var startSample:flight._internal._Float32Array; }).startSample; __callArgument290; }), channel.track, (cast 0.0 : Float));
+    sampleAnimationTrack(({ final __callArgument292:Dynamic = (cast extractor : { var toSample:flight._internal._Float32Array; }).toSample; __callArgument292; }), channel.track, (cast clip.duration : Float));
+    _Animation.writeAnimationRootMotionDelta__animationRootMotion(({ final __callArgument294:Dynamic = (cast extractor : { var cycleDelta:flight._internal._Float32Array; }).cycleDelta; __callArgument294; }), ({ final __callArgument295:Dynamic = (cast extractor : { var startSample:flight._internal._Float32Array; }).startSample; __callArgument295; }), ({ final __callArgument296:Dynamic = (cast extractor : { var toSample:flight._internal._Float32Array; }).toSample; __callArgument296; }), (cast (cast channel.track : { var quaternion:Bool; }).quaternion : Bool));
     return cast extractor;
     return cast null;
   }
@@ -966,9 +966,9 @@ class _Animation {
     }
     components = (cast (cast extractor.channel : { var track:AnimationTrack; }).track : { var components:Float; }).components;
     if ((cast ((cast (cast out : { var length:Float; }).length : Float) < (cast components : Float)) : Bool)) { return cast false; }
-    _Animation.writeAnimationRootMotionAt__animationRootMotion(extractor.fromMotion, ({ final __callArgument280:Dynamic = extractor; __callArgument280; }), (cast startTime : Float), extractor.fromSample);
-    _Animation.writeAnimationRootMotionAt__animationRootMotion(extractor.toMotion, ({ final __callArgument282:Dynamic = extractor; __callArgument282; }), (cast endTime : Float), extractor.toSample);
-    _Animation.writeAnimationRootMotionDelta__animationRootMotion(({ final __callArgument284:Dynamic = out; __callArgument284; }), ({ final __callArgument285:Dynamic = extractor.fromMotion; __callArgument285; }), ({ final __callArgument286:Dynamic = extractor.toMotion; __callArgument286; }), (cast (cast (cast extractor.channel : { var track:AnimationTrack; }).track : { var quaternion:Bool; }).quaternion : Bool));
+    _Animation.writeAnimationRootMotionAt__animationRootMotion(extractor.fromMotion, ({ final __callArgument300:Dynamic = extractor; __callArgument300; }), (cast startTime : Float), extractor.fromSample);
+    _Animation.writeAnimationRootMotionAt__animationRootMotion(extractor.toMotion, ({ final __callArgument302:Dynamic = extractor; __callArgument302; }), (cast endTime : Float), extractor.toSample);
+    _Animation.writeAnimationRootMotionDelta__animationRootMotion(({ final __callArgument304:Dynamic = out; __callArgument304; }), ({ final __callArgument305:Dynamic = extractor.fromMotion; __callArgument305; }), ({ final __callArgument306:Dynamic = extractor.toMotion; __callArgument306; }), (cast (cast (cast extractor.channel : { var track:AnimationTrack; }).track : { var quaternion:Bool; }).quaternion : Bool));
     return cast true;
     return cast null;
   }
@@ -990,7 +990,7 @@ class _Animation {
     by = _Runtime.getIndex(b, 1.0);
     bz = _Runtime.getIndex(b, 2.0);
     bw = _Runtime.getIndex(b, 3.0);
-    _Animation.writeNormalizedAnimationRootMotionQuaternion__animationRootMotion(({ final __callArgument290:Dynamic = out; __callArgument290; }), (cast ((((aw * bx) + (ax * bw)) + (ay * bz)) - (az * by)) : Float), (cast ((((aw * by) - (ax * bz)) + (ay * bw)) + (az * bx)) : Float), (cast ((((aw * bz) + (ax * by)) - (ay * bx)) + (az * bw)) : Float), (cast ((((aw * bw) - (ax * bx)) - (ay * by)) - (az * bz)) : Float));
+    _Animation.writeNormalizedAnimationRootMotionQuaternion__animationRootMotion(({ final __callArgument310:Dynamic = out; __callArgument310; }), (cast ((((aw * bx) + (ax * bw)) + (ay * bz)) - (az * by)) : Float), (cast ((((aw * by) - (ax * bz)) + (ay * bw)) + (az * bx)) : Float), (cast ((((aw * bz) + (ax * by)) - (ay * bx)) + (az * bw)) : Float), (cast ((((aw * bw) - (ax * bx)) - (ay * by)) - (az * bz)) : Float));
   }
 
   public static function writeAnimationRootMotionAt__animationRootMotion(out:flight._internal._Float32Array, extractor:AnimationRootMotionExtractor, time:Float, sample:flight._internal._Float32Array):Void {
@@ -1001,16 +1001,16 @@ class _Animation {
     duration = (cast extractor.clip : { var duration:Float; }).duration;
     track = (cast extractor.channel : { var track:AnimationTrack; }).track;
     if ((cast !(cast _Runtime.compare(duration, 0.0, '>') : Bool) : Bool)) {
-      _Animation.writeAnimationRootMotionIdentity__animationRootMotion(({ final __callArgument292:Dynamic = out; __callArgument292; }), (cast track.components : Float), (cast track.quaternion : Bool));
+      _Animation.writeAnimationRootMotionIdentity__animationRootMotion(({ final __callArgument312:Dynamic = out; __callArgument312; }), (cast track.components : Float), (cast track.quaternion : Bool));
       return;
     }
     cycle = HxMath.floor((time / duration));
     localTime = (time - (cycle * duration));
-    sampleAnimationTrack(({ final __callArgument294:Dynamic = sample; __callArgument294; }), ({ final __callArgument295:Dynamic = track; __callArgument295; }), (cast localTime : Float));
+    sampleAnimationTrack(({ final __callArgument314:Dynamic = sample; __callArgument314; }), ({ final __callArgument315:Dynamic = track; __callArgument315; }), (cast localTime : Float));
     if ((cast track.quaternion : Bool)) {
-      _Animation.writeAnimationRootMotionQuaternionPower__animationRootMotion(({ final __callArgument298:Dynamic = out; __callArgument298; }), ({ final __callArgument299:Dynamic = extractor; __callArgument299; }), (cast cycle : Float));
-      _Animation.writeAnimationRootMotionDelta__animationRootMotion(({ final __callArgument302:Dynamic = extractor.powerScratch; __callArgument302; }), ({ final __callArgument303:Dynamic = extractor.startSample; __callArgument303; }), ({ final __callArgument304:Dynamic = sample; __callArgument304; }), (cast true : Bool));
-      _Animation.multiplyAnimationRootMotionQuaternion__animationRootMotion(({ final __callArgument308:Dynamic = out; __callArgument308; }), ({ final __callArgument309:Dynamic = out; __callArgument309; }), ({ final __callArgument310:Dynamic = extractor.powerScratch; __callArgument310; }));
+      _Animation.writeAnimationRootMotionQuaternionPower__animationRootMotion(({ final __callArgument318:Dynamic = out; __callArgument318; }), ({ final __callArgument319:Dynamic = extractor; __callArgument319; }), (cast cycle : Float));
+      _Animation.writeAnimationRootMotionDelta__animationRootMotion(({ final __callArgument322:Dynamic = extractor.powerScratch; __callArgument322; }), ({ final __callArgument323:Dynamic = extractor.startSample; __callArgument323; }), ({ final __callArgument324:Dynamic = sample; __callArgument324; }), (cast true : Bool));
+      _Animation.multiplyAnimationRootMotionQuaternion__animationRootMotion(({ final __callArgument328:Dynamic = out; __callArgument328; }), ({ final __callArgument329:Dynamic = out; __callArgument329; }), ({ final __callArgument330:Dynamic = extractor.powerScratch; __callArgument330; }));
       return;
     }
     {
@@ -1034,7 +1034,7 @@ class _Animation {
       }
       return;
     }
-    _Animation.writeNormalizedAnimationRootMotionQuaternion__animationRootMotion(({ final __callArgument314:Dynamic = out; __callArgument314; }), (cast (((_Runtime.multiplyNumbers(_Runtime.getIndex(from, 3.0), _Runtime.getIndex(to, 0.0)) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 0.0), _Runtime.getIndex(to, 3.0))) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 1.0), _Runtime.getIndex(to, 2.0))) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 2.0), _Runtime.getIndex(to, 1.0))) : Float), (cast (((_Runtime.multiplyNumbers(_Runtime.getIndex(from, 3.0), _Runtime.getIndex(to, 1.0)) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 0.0), _Runtime.getIndex(to, 2.0))) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 1.0), _Runtime.getIndex(to, 3.0))) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 2.0), _Runtime.getIndex(to, 0.0))) : Float), (cast (((_Runtime.multiplyNumbers(_Runtime.getIndex(from, 3.0), _Runtime.getIndex(to, 2.0)) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 0.0), _Runtime.getIndex(to, 1.0))) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 1.0), _Runtime.getIndex(to, 0.0))) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 2.0), _Runtime.getIndex(to, 3.0))) : Float), (cast (((_Runtime.multiplyNumbers(_Runtime.getIndex(from, 3.0), _Runtime.getIndex(to, 3.0)) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 0.0), _Runtime.getIndex(to, 0.0))) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 1.0), _Runtime.getIndex(to, 1.0))) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 2.0), _Runtime.getIndex(to, 2.0))) : Float));
+    _Animation.writeNormalizedAnimationRootMotionQuaternion__animationRootMotion(({ final __callArgument334:Dynamic = out; __callArgument334; }), (cast (((_Runtime.multiplyNumbers(_Runtime.getIndex(from, 3.0), _Runtime.getIndex(to, 0.0)) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 0.0), _Runtime.getIndex(to, 3.0))) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 1.0), _Runtime.getIndex(to, 2.0))) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 2.0), _Runtime.getIndex(to, 1.0))) : Float), (cast (((_Runtime.multiplyNumbers(_Runtime.getIndex(from, 3.0), _Runtime.getIndex(to, 1.0)) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 0.0), _Runtime.getIndex(to, 2.0))) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 1.0), _Runtime.getIndex(to, 3.0))) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 2.0), _Runtime.getIndex(to, 0.0))) : Float), (cast (((_Runtime.multiplyNumbers(_Runtime.getIndex(from, 3.0), _Runtime.getIndex(to, 2.0)) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 0.0), _Runtime.getIndex(to, 1.0))) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 1.0), _Runtime.getIndex(to, 0.0))) - _Runtime.multiplyNumbers(_Runtime.getIndex(from, 2.0), _Runtime.getIndex(to, 3.0))) : Float), (cast (((_Runtime.multiplyNumbers(_Runtime.getIndex(from, 3.0), _Runtime.getIndex(to, 3.0)) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 0.0), _Runtime.getIndex(to, 0.0))) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 1.0), _Runtime.getIndex(to, 1.0))) + _Runtime.multiplyNumbers(_Runtime.getIndex(from, 2.0), _Runtime.getIndex(to, 2.0))) : Float));
   }
 
   public static function writeAnimationRootMotionIdentity__animationRootMotion(out:flight._internal._Union2<Array<Float>, flight._internal._Float32Array>, components:Float, quaternion:Bool):Void {
@@ -1053,7 +1053,7 @@ class _Animation {
   public static function writeAnimationRootMotionQuaternionPower__animationRootMotion(out:flight._internal._Float32Array, extractor:AnimationRootMotionExtractor, exponent:Float):Void {
     var base:flight._internal._Float32Array = cast _Runtime.UNDEFINED;
     var remaining:Float = cast _Runtime.UNDEFINED;
-    _Animation.writeAnimationRootMotionIdentity__animationRootMotion(({ final __callArgument316:Dynamic = out; __callArgument316; }), (cast 4.0 : Float), (cast true : Bool));
+    _Animation.writeAnimationRootMotionIdentity__animationRootMotion(({ final __callArgument336:Dynamic = out; __callArgument336; }), (cast 4.0 : Float), (cast true : Bool));
     if ((cast _Runtime.strictEquals(exponent, 0.0) : Bool)) { return; }
     base = extractor.powerScratch;
     if ((cast ((cast exponent : Float) > (cast 0.0 : Float)) : Bool)) {
@@ -1066,9 +1066,9 @@ class _Animation {
     }
     remaining = HxMath.abs(exponent);
     while ((cast ((cast remaining : Float) > (cast 0.0 : Float)) : Bool)) {
-      if ((cast _Runtime.strictEquals(_Runtime.fmod(remaining, 2.0), 1.0) : Bool)) { _Animation.multiplyAnimationRootMotionQuaternion__animationRootMotion(({ final __callArgument318:Dynamic = out; __callArgument318; }), ({ final __callArgument319:Dynamic = out; __callArgument319; }), ({ final __callArgument320:Dynamic = base; __callArgument320; })); }
+      if ((cast _Runtime.strictEquals(_Runtime.fmod(remaining, 2.0), 1.0) : Bool)) { _Animation.multiplyAnimationRootMotionQuaternion__animationRootMotion(({ final __callArgument338:Dynamic = out; __callArgument338; }), ({ final __callArgument339:Dynamic = out; __callArgument339; }), ({ final __callArgument340:Dynamic = base; __callArgument340; })); }
       (remaining = cast (HxMath.floor((remaining / 2.0)) : Dynamic));
-      if ((cast ((cast remaining : Float) > (cast 0.0 : Float)) : Bool)) { _Animation.multiplyAnimationRootMotionQuaternion__animationRootMotion(({ final __callArgument324:Dynamic = base; __callArgument324; }), ({ final __callArgument325:Dynamic = base; __callArgument325; }), ({ final __callArgument326:Dynamic = base; __callArgument326; })); }
+      if ((cast ((cast remaining : Float) > (cast 0.0 : Float)) : Bool)) { _Animation.multiplyAnimationRootMotionQuaternion__animationRootMotion(({ final __callArgument344:Dynamic = base; __callArgument344; }), ({ final __callArgument345:Dynamic = base; __callArgument345; }), ({ final __callArgument346:Dynamic = base; __callArgument346; })); }
     }
   }
 
@@ -1077,7 +1077,7 @@ class _Animation {
     var inverseLength:Float = cast _Runtime.UNDEFINED;
     length = _Runtime.hypot(x, y, z, w);
     if ((cast !(cast _Runtime.compare(length, 0.0, '>') : Bool) : Bool)) {
-      _Animation.writeAnimationRootMotionIdentity__animationRootMotion(({ final __callArgument330:Dynamic = out; __callArgument330; }), (cast 4.0 : Float), (cast true : Bool));
+      _Animation.writeAnimationRootMotionIdentity__animationRootMotion(({ final __callArgument350:Dynamic = out; __callArgument350; }), (cast 4.0 : Float), (cast true : Bool));
       return;
     }
     inverseLength = (1.0 / length);
@@ -1091,7 +1091,7 @@ class _Animation {
     var advanced:Array<AnimationPlayer> = cast _Runtime.UNDEFINED;
     advanced = machine.advanceScratch;
     _Runtime.setLength(advanced, 0.0);
-    advanceAnimationStateMachineWithScratch(({ final __callArgument332:Dynamic = machine; __callArgument332; }), (cast dt : Float), (cast advanced : Dynamic));
+    advanceAnimationStateMachineWithScratch(({ final __callArgument352:Dynamic = machine; __callArgument352; }), (cast dt : Float), (cast advanced : Dynamic));
   }
 
   public static function createAnimationStateMachine(states:Array<AnimationStateMachineState>, initialState:flight._internal._Union2<String, Float> = 0.0):AnimationStateMachine {
@@ -1116,17 +1116,17 @@ class _Animation {
     if ((cast ((cast ((cast !(cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isInteger', cast ([initialStateIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast initialStateIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast initialStateIndex : Float) >= (cast _Runtime.field(copiedStates, 'length') : Float)) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.rangeError('AnimationStateMachine initial state "' + Std.string(Std.string(initialState)) + '" does not exist.'));
     }
-    channels = (cast _Animation.createAnimationStateMachineChannels__animationStateMachine(({ final __callArgument334:Dynamic = copiedStates; __callArgument334; })) : Array<AnimationStateMachineChannel>);
+    channels = (cast _Animation.createAnimationStateMachineChannels__animationStateMachine(({ final __callArgument354:Dynamic = copiedStates; __callArgument354; })) : Array<AnimationStateMachineChannel>);
     sampleWidth = 0.0;
     for (entry in _Runtime.iterable(channels)) {
       (sampleWidth = cast (HxMath.max(sampleWidth, (cast (cast entry.channel : { var track:AnimationTrack; }).track : { var components:Float; }).components) : Dynamic));
     }
-    return cast (cast createEntity(({ final __callArgument338:Dynamic = ({ advanceScratch: cast ([] : Array<Dynamic>), channels: channels, currentStateIndex: initialStateIndex, fromSample: new flight._internal._Float32Array(sampleWidth), states: copiedStates, toSample: new flight._internal._Float32Array(sampleWidth), transitionCurve: _Animation.linearAnimationStateMachineCurve__animationStateMachine, transitionDuration: 0.0, transitionElapsed: 0.0, transitionFromStateIndex: null, transitionToStateIndex: null, transitionWeight: 0.0 } : AnimationStateMachine); __callArgument338; })) : AnimationStateMachine);
+    return cast (cast createEntity(({ final __callArgument358:Dynamic = ({ advanceScratch: cast ([] : Array<Dynamic>), channels: channels, currentStateIndex: initialStateIndex, fromSample: new flight._internal._Float32Array(sampleWidth), states: copiedStates, toSample: new flight._internal._Float32Array(sampleWidth), transitionCurve: _Animation.linearAnimationStateMachineCurve__animationStateMachine, transitionDuration: 0.0, transitionElapsed: 0.0, transitionFromStateIndex: null, transitionToStateIndex: null, transitionWeight: 0.0 } : AnimationStateMachine); __callArgument358; })) : AnimationStateMachine);
     return cast null;
   }
 
   public static function createAnimationStateMachineState(name:String, blendTree:AnimationBlendTree):AnimationStateMachineState {
-    return cast (cast createEntity(({ final __callArgument340:Dynamic = ({ blendTree: blendTree, name: name } : AnimationStateMachineState); __callArgument340; })) : AnimationStateMachineState);
+    return cast (cast createEntity(({ final __callArgument360:Dynamic = ({ blendTree: blendTree, name: name } : AnimationStateMachineState); __callArgument360; })) : AnimationStateMachineState);
     return cast null;
   }
 
@@ -1144,7 +1144,7 @@ class _Animation {
     {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(machine.channels, 'length') : Float)) : Bool)) {
-        if ((cast (cast sampleAnimationStateMachineChannel(({ final __callArgument342:Dynamic = out; __callArgument342; }), ({ final __callArgument343:Dynamic = machine; __callArgument343; }), (cast index : Float)) : Bool) : Bool)) { visit(({ final __callArgument346:Dynamic = out; __callArgument346; }), (cast flight._internal._StaticIndex.readArray(machine.channels, index) : { var channel:AnimationChannel; }).channel, (cast index : Float)); }
+        if ((cast (cast sampleAnimationStateMachineChannel(({ final __callArgument362:Dynamic = out; __callArgument362; }), ({ final __callArgument363:Dynamic = machine; __callArgument363; }), (cast index : Float)) : Bool) : Bool)) { visit(({ final __callArgument366:Dynamic = out; __callArgument366; }), (cast flight._internal._StaticIndex.readArray(machine.channels, index) : { var channel:AnimationChannel; }).channel, (cast index : Float)); }
         index++;
       }
     }
@@ -1163,16 +1163,16 @@ class _Animation {
     toStateIndex = machine.transitionToStateIndex;
     if ((cast _Runtime.strictEquals(toStateIndex, null) : Bool)) {
       var currentChannelIndex:Null<Float> = flight._internal._StaticIndex.readArray(entry.stateChannelIndices, machine.currentStateIndex);
-      return cast _Runtime.andValue(!_Runtime.strictEquals(currentChannelIndex, null), function():Dynamic return cast (cast sampleAnimationBlendTreeChannel(({ final __callArgument348:Dynamic = out; __callArgument348; }), (cast flight._internal._StaticIndex.readArray(machine.states, machine.currentStateIndex) : { var blendTree:AnimationBlendTree; }).blendTree, (cast currentChannelIndex : Float)) : Bool));
+      return cast _Runtime.andValue(!_Runtime.strictEquals(currentChannelIndex, null), function():Dynamic return cast (cast sampleAnimationBlendTreeChannel(({ final __callArgument368:Dynamic = out; __callArgument368; }), (cast flight._internal._StaticIndex.readArray(machine.states, machine.currentStateIndex) : { var blendTree:AnimationBlendTree; }).blendTree, (cast currentChannelIndex : Float)) : Bool));
     }
     fromStateIndex = machine.transitionFromStateIndex;
     fromChannelIndex = flight._internal._StaticIndex.readArray(entry.stateChannelIndices, fromStateIndex);
     toChannelIndex = flight._internal._StaticIndex.readArray(entry.stateChannelIndices, toStateIndex);
-    hasFrom = ((cast !_Runtime.strictEquals(fromChannelIndex, null) : Bool) && (cast (cast sampleAnimationBlendTreeChannel(({ final __callArgument350:Dynamic = machine.fromSample; __callArgument350; }), (cast flight._internal._StaticIndex.readArray(machine.states, fromStateIndex) : { var blendTree:AnimationBlendTree; }).blendTree, (cast fromChannelIndex : Float)) : Bool) : Bool));
-    hasTo = ((cast !_Runtime.strictEquals(toChannelIndex, null) : Bool) && (cast (cast sampleAnimationBlendTreeChannel(({ final __callArgument352:Dynamic = machine.toSample; __callArgument352; }), (cast flight._internal._StaticIndex.readArray(machine.states, toStateIndex) : { var blendTree:AnimationBlendTree; }).blendTree, (cast toChannelIndex : Float)) : Bool) : Bool));
+    hasFrom = ((cast !_Runtime.strictEquals(fromChannelIndex, null) : Bool) && (cast (cast sampleAnimationBlendTreeChannel(({ final __callArgument370:Dynamic = machine.fromSample; __callArgument370; }), (cast flight._internal._StaticIndex.readArray(machine.states, fromStateIndex) : { var blendTree:AnimationBlendTree; }).blendTree, (cast fromChannelIndex : Float)) : Bool) : Bool));
+    hasTo = ((cast !_Runtime.strictEquals(toChannelIndex, null) : Bool) && (cast (cast sampleAnimationBlendTreeChannel(({ final __callArgument372:Dynamic = machine.toSample; __callArgument372; }), (cast flight._internal._StaticIndex.readArray(machine.states, toStateIndex) : { var blendTree:AnimationBlendTree; }).blendTree, (cast toChannelIndex : Float)) : Bool) : Bool));
     if ((cast ((cast !(cast hasFrom : Bool) : Bool) && (cast !(cast hasTo : Bool) : Bool)) : Bool)) { return cast false; }
     if ((cast ((cast hasFrom : Bool) && (cast hasTo : Bool)) : Bool)) {
-      blendAnimationSamples(({ final __callArgument354:Dynamic = out; __callArgument354; }), ({ final __callArgument355:Dynamic = machine.fromSample; __callArgument355; }), ({ final __callArgument356:Dynamic = machine.toSample; __callArgument356; }), (cast machine.transitionWeight : Float), (cast (cast (cast entry.channel : { var track:AnimationTrack; }).track : { var quaternion:Bool; }).quaternion : Bool));
+      blendAnimationSamples(({ final __callArgument374:Dynamic = out; __callArgument374; }), ({ final __callArgument375:Dynamic = machine.fromSample; __callArgument375; }), ({ final __callArgument376:Dynamic = machine.toSample; __callArgument376; }), (cast machine.transitionWeight : Float), (cast (cast (cast entry.channel : { var track:AnimationTrack; }).track : { var quaternion:Bool; }).quaternion : Bool));
     } else {
       var source:flight._internal._Float32Array = ((cast hasFrom : Bool) ? (cast machine.fromSample : Dynamic) : (cast machine.toSample : Dynamic));
       var width:Float = HxMath.min(HxMath.min((cast out : { var length:Float; }).length, (cast (cast entry.channel : { var track:AnimationTrack; }).track : { var components:Float; }).components), _Runtime.field(source, 'length'));
@@ -1192,7 +1192,7 @@ class _Animation {
     if (curve == null) curve = cast (_Animation.linearAnimationStateMachineCurve__animationStateMachine : Dynamic);
     var toStateIndex:Float = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(machine.transitionToStateIndex, null) : Bool)) { return cast false; }
-    toStateIndex = (cast _Animation.findAnimationStateMachineStateIndex__animationStateMachine(machine.states, ({ final __callArgument360:Dynamic = toState; __callArgument360; })) : Float);
+    toStateIndex = (cast _Animation.findAnimationStateMachineStateIndex__animationStateMachine(machine.states, ({ final __callArgument380:Dynamic = toState; __callArgument380; })) : Float);
     if ((cast ((cast ((cast toStateIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast _Runtime.strictEquals(toStateIndex, machine.currentStateIndex) : Bool)) : Bool)) { return cast false; }
     (machine.transitionCurve = cast (curve : EasingFunction));
     (machine.transitionDuration = cast (HxMath.max(0.0, duration) : Float));
@@ -1238,7 +1238,7 @@ class _Animation {
               continue;
             }
             var existing:AnimationStateMachineChannel = flight._internal._StaticIndex.readArray(channels, existingIndex);
-            _Animation.assertCompatibleAnimationStateMachineChannels__animationStateMachine(existing.channel, ({ final __callArgument362:Dynamic = channel; __callArgument362; }));
+            _Animation.assertCompatibleAnimationStateMachineChannels__animationStateMachine(existing.channel, ({ final __callArgument382:Dynamic = channel; __callArgument382; }));
             flight._internal._StaticIndex.writeArray((cast existing.stateChannelIndices : Array<Null<Float>>), stateIndex, stateChannelIndex);
             stateChannelIndex++;
           }
@@ -1278,10 +1278,10 @@ class _Animation {
 
   public static function advanceAnimationStateMachineWithScratch(machine:AnimationStateMachine, dt:Float, advanced:Array<AnimationPlayer>):Void {
     var toIndex:Null<Float> = cast _Runtime.UNDEFINED;
-    advanceAnimationPlayers((cast (cast flight._internal._StaticIndex.readArray(machine.states, machine.currentStateIndex) : { var blendTree:AnimationBlendTree; }).blendTree : { var players:Array<AnimationPlayer>; }).players, (cast dt : Float), ({ final __callArgument364:Dynamic = advanced; __callArgument364; }));
+    advanceAnimationPlayers((cast (cast flight._internal._StaticIndex.readArray(machine.states, machine.currentStateIndex) : { var blendTree:AnimationBlendTree; }).blendTree : { var players:Array<AnimationPlayer>; }).players, (cast dt : Float), ({ final __callArgument384:Dynamic = advanced; __callArgument384; }));
     toIndex = machine.transitionToStateIndex;
     if ((cast _Runtime.strictEquals(toIndex, null) : Bool)) { return; }
-    advanceAnimationPlayers((cast (cast flight._internal._StaticIndex.readArray(machine.states, toIndex) : { var blendTree:AnimationBlendTree; }).blendTree : { var players:Array<AnimationPlayer>; }).players, (cast dt : Float), ({ final __callArgument366:Dynamic = advanced; __callArgument366; }));
+    advanceAnimationPlayers((cast (cast flight._internal._StaticIndex.readArray(machine.states, toIndex) : { var blendTree:AnimationBlendTree; }).blendTree : { var players:Array<AnimationPlayer>; }).players, (cast dt : Float), ({ final __callArgument386:Dynamic = advanced; __callArgument386; }));
     (machine.transitionElapsed += dt);
     (machine.transitionWeight = cast ((machine.transitionCurve)((cast (cast _Animation.getLinearAnimationStateMachineTransitionWeight__animationStateMachineAdvance((cast machine.transitionElapsed : Float), (cast machine.transitionDuration : Float)) : Float) : Float)) : Float));
     if ((cast ((cast ((cast machine.transitionDuration : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast machine.transitionElapsed : Float) >= (cast machine.transitionDuration : Float)) : Bool)) : Bool)) {
@@ -1340,11 +1340,11 @@ class _Animation {
       return;
     }
     if ((cast ((cast _Runtime.strictEquals(count, 1.0) : Bool) || (cast ((cast t : Float) <= (cast _Runtime.getIndex(times, 0.0) : Float)) : Bool)) : Bool)) {
-      _Animation.copyKeyframeValue__animationTrack(({ final __callArgument368:Dynamic = out; __callArgument368; }), ({ final __callArgument369:Dynamic = track; __callArgument369; }), (cast 0.0 : Float));
+      _Animation.copyKeyframeValue__animationTrack(({ final __callArgument388:Dynamic = out; __callArgument388; }), ({ final __callArgument389:Dynamic = track; __callArgument389; }), (cast 0.0 : Float));
       return;
     }
     if ((cast ((cast t : Float) >= (cast _Runtime.getIndex(times, (count - 1.0)) : Float)) : Bool)) {
-      _Animation.copyKeyframeValue__animationTrack(({ final __callArgument372:Dynamic = out; __callArgument372; }), ({ final __callArgument373:Dynamic = track; __callArgument373; }), (cast (count - 1.0) : Float));
+      _Animation.copyKeyframeValue__animationTrack(({ final __callArgument392:Dynamic = out; __callArgument392; }), ({ final __callArgument393:Dynamic = track; __callArgument393; }), (cast (count - 1.0) : Float));
       return;
     }
     lo = 0.0;
@@ -1360,17 +1360,17 @@ class _Animation {
     easing = _Runtime.coalesce(_Runtime.optionalIndex(track.segmentEasings, i), function():Dynamic return cast track.easing);
     if ((cast !_Runtime.strictEquals(easing, null) : Bool)) { (alpha = cast ((cast easing((cast alpha : Float)) : Float) : Dynamic)); }
     if ((cast _Runtime.strictEquals(track.interpolation, 'Step') : Bool)) {
-      _Animation.copyKeyframeValue__animationTrack(({ final __callArgument376:Dynamic = out; __callArgument376; }), ({ final __callArgument377:Dynamic = track; __callArgument377; }), (cast i : Float));
+      _Animation.copyKeyframeValue__animationTrack(({ final __callArgument396:Dynamic = out; __callArgument396; }), ({ final __callArgument397:Dynamic = track; __callArgument397; }), (cast i : Float));
       return;
     }
     if ((cast _Runtime.strictEquals(track.interpolation, 'Cubic') : Bool)) {
-      _Animation.sampleCubicSegment__animationTrack(({ final __callArgument380:Dynamic = out; __callArgument380; }), ({ final __callArgument381:Dynamic = track; __callArgument381; }), (cast i : Float), (cast alpha : Float), (cast dt : Float));
+      _Animation.sampleCubicSegment__animationTrack(({ final __callArgument400:Dynamic = out; __callArgument400; }), ({ final __callArgument401:Dynamic = track; __callArgument401; }), (cast i : Float), (cast alpha : Float), (cast dt : Float));
       return;
     }
-    oi = (cast _Animation.keyframeValueOffset__animationTrack(({ final __callArgument384:Dynamic = track; __callArgument384; }), (cast i : Float)) : Float);
-    oj = (cast _Animation.keyframeValueOffset__animationTrack(({ final __callArgument386:Dynamic = track; __callArgument386; }), (cast (i + 1.0) : Float)) : Float);
+    oi = (cast _Animation.keyframeValueOffset__animationTrack(({ final __callArgument404:Dynamic = track; __callArgument404; }), (cast i : Float)) : Float);
+    oj = (cast _Animation.keyframeValueOffset__animationTrack(({ final __callArgument406:Dynamic = track; __callArgument406; }), (cast (i + 1.0) : Float)) : Float);
     if ((cast ((cast track.quaternion : Bool) && (cast _Runtime.strictEquals(components, 4.0) : Bool)) : Bool)) {
-      _Animation.slerpFlatQuaternion__animationTrack(({ final __callArgument388:Dynamic = out; __callArgument388; }), ({ final __callArgument389:Dynamic = values; __callArgument389; }), (cast oi : Float), (cast oj : Float), (cast alpha : Float));
+      _Animation.slerpFlatQuaternion__animationTrack(({ final __callArgument408:Dynamic = out; __callArgument408; }), ({ final __callArgument409:Dynamic = values; __callArgument409; }), (cast oi : Float), (cast oj : Float), (cast alpha : Float));
       return;
     }
     {
@@ -1396,7 +1396,7 @@ class _Animation {
     components = __destructure1.components;
     times = __destructure1.times;
     count = _Runtime.field(times, 'length');
-    stride = (cast _Animation.keyframeStride__animationTrack(({ final __callArgument392:Dynamic = track; __callArgument392; })) : Float);
+    stride = (cast _Animation.keyframeStride__animationTrack(({ final __callArgument412:Dynamic = track; __callArgument412; })) : Float);
     outTimes = (cast cast ([] : Array<Dynamic>));
     outValues = (cast cast ([] : Array<Dynamic>));
     sourceKeyframes = (cast cast ([] : Array<Dynamic>));
@@ -1444,7 +1444,7 @@ class _Animation {
         k++;
       }
     }
-    expected = (count * (cast _Animation.keyframeStride__animationTrack(({ final __callArgument394:Dynamic = track; __callArgument394; })) : Float));
+    expected = (count * (cast _Animation.keyframeStride__animationTrack(({ final __callArgument414:Dynamic = track; __callArgument414; })) : Float));
     if ((cast !_Runtime.strictEquals(_Runtime.field(values, 'length'), expected) : Bool)) {
       _Runtime.callProperty(diagnostics, 'push', cast ([{ code: 'valuesLengthMismatch', index: null, message: 'values.length (' + Std.string(_Runtime.field(values, 'length')) + ') must equal keyCount * componentsPerKeyframe (' + Std.string(expected) + ').' }] : Array<Dynamic>));
     }
@@ -1473,7 +1473,7 @@ class _Animation {
 
   public static function copyKeyframeValue__animationTrack(out:flight._internal._Union2<Array<Float>, flight._internal._Float32Array>, track:AnimationTrack, k:Float):Void {
     var off:Float = cast _Runtime.UNDEFINED;
-    off = (cast _Animation.keyframeValueOffset__animationTrack(({ final __callArgument396:Dynamic = track; __callArgument396; }), (cast k : Float)) : Float);
+    off = (cast _Animation.keyframeValueOffset__animationTrack(({ final __callArgument416:Dynamic = track; __callArgument416; }), (cast k : Float)) : Float);
     {
       var c:Float = 0.0;
       while ((cast ((cast c : Float) < (cast track.components : Float)) : Bool)) {
@@ -1490,7 +1490,7 @@ class _Animation {
 
   public static function keyframeValueOffset__animationTrack(track:AnimationTrack, k:Float):Float {
     var stride:Float = cast _Runtime.UNDEFINED;
-    stride = (cast _Animation.keyframeStride__animationTrack(({ final __callArgument398:Dynamic = track; __callArgument398; })) : Float);
+    stride = (cast _Animation.keyframeStride__animationTrack(({ final __callArgument418:Dynamic = track; __callArgument418; })) : Float);
     return cast ((cast _Runtime.strictEquals(track.interpolation, 'Cubic') : Bool) ? (cast ((k * stride) + track.components) : Dynamic) : (cast (k * stride) : Dynamic));
     return cast null;
   }
@@ -1551,7 +1551,7 @@ class _Animation {
         c++;
       }
     }
-    if ((cast ((cast track.quaternion : Bool) && (cast _Runtime.strictEquals(components, 4.0) : Bool)) : Bool)) { _Animation.normalizeFlatQuaternion__animationTrack(({ final __callArgument400:Dynamic = out; __callArgument400; })); }
+    if ((cast ((cast track.quaternion : Bool) && (cast _Runtime.strictEquals(components, 4.0) : Bool)) : Bool)) { _Animation.normalizeFlatQuaternion__animationTrack(({ final __callArgument420:Dynamic = out; __callArgument420; })); }
   }
 
   public static function slerpFlatQuaternion__animationTrack(out:flight._internal._Union2<Array<Float>, flight._internal._Float32Array>, values:flight._internal._ArrayLike<Float>, oa:Float, ob:Float, alpha:Float):Void {

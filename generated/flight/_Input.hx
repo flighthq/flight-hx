@@ -828,17 +828,17 @@ class _Input {
 
   public static var _hostInputIngressBackend__inputManager:Null<InputIngressBackend> = _Runtime.explicitNull();
 
-  public static final kGamepadInput__inputManager:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'));
+  public static final kGamepadInput__inputManager:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'), '__symbol__32311c70fe38283a7f05');
 
-  public static final kKeyboardInput__inputManager:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'));
+  public static final kKeyboardInput__inputManager:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'), '__symbol__b2a0e13476ff51e7bb2a');
 
-  public static final kPointerInput__inputManager:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'));
+  public static final kPointerInput__inputManager:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'), '__symbol__40bae3909f5fb2616563');
 
-  public static final kRelativePointerInput__inputManager:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'));
+  public static final kRelativePointerInput__inputManager:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'), '__symbol__143593f56a283545daa8');
 
-  public static final kTextInput__inputManager:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'));
+  public static final kTextInput__inputManager:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'), '__symbol__c9f2f8e0f162da5dd8ba');
 
-  public static final kWheelInput__inputManager:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'));
+  public static final kWheelInput__inputManager:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'), '__symbol__a027ceaac8bbbfb46e42');
 
   public static final _inputBindings__inputManager:flight._internal._WeakMap<InputManager, flight._internal._Map<flight._internal._Object, flight._internal._Map<flight._internal._Symbol, Void->Void>>> = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
 

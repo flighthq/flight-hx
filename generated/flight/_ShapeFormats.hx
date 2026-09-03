@@ -259,9 +259,9 @@ class _ShapeFormats {
     return cast null;
   }
 
-  public static final MALFORMED_ARG__shapeJson:flight._internal._Symbol = _Runtime.symbol('shapeFormats.malformedArg');
+  public static final MALFORMED_ARG__shapeJson:flight._internal._Symbol = _Runtime.symbol('shapeFormats.malformedArg', '__symbol__3b36282e78709bf961aa');
 
-  public static final DROP_COMMAND__shapeJson:flight._internal._Symbol = _Runtime.symbol('shapeFormats.dropCommand');
+  public static final DROP_COMMAND__shapeJson:flight._internal._Symbol = _Runtime.symbol('shapeFormats.dropCommand', '__symbol__8345311261d6f140eb03');
 
   public static final SHAPE_JSON_FORMAT__shapeJson:Float = 3.0;
 

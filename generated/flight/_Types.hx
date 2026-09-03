@@ -449,11 +449,11 @@ class _Types {
 
   public static final NodeKind:String = 'Node';
 
-  public static final NullScene3D:flight._internal._Symbol = _Runtime.symbol('NullScene3D');
+  public static final NullScene3D:flight._internal._Symbol = _Runtime.symbol('NullScene3D', '__symbol__6003e3231de09139a07c');
 
   public static final DisplayObjectKind:String = 'DisplayObject';
 
-  public static final Node2DTraitsKey:flight._internal._Symbol = _Runtime.symbol('Node2DTraits');
+  public static final Node2DTraitsKey:flight._internal._Symbol = _Runtime.symbol('Node2DTraits', '__symbol__7c790d8123e6da584ff2');
 
   public static final Node2DAnimationPathAlpha:String = 'Alpha';
 
@@ -487,7 +487,7 @@ class _Types {
 
   public static final Node3DKind:String = 'Node3D';
 
-  public static final Node3DTraitsKey:flight._internal._Symbol = _Runtime.symbol('Node3DTraits');
+  public static final Node3DTraitsKey:flight._internal._Symbol = _Runtime.symbol('Node3DTraits', '__symbol__e8fd71b65d1b9a17edcf');
 
   public static var NodeInteractiveStateBindingBrand__NodeInteractiveStateBinding:flight._internal._Symbol;
 
@@ -589,7 +589,7 @@ class _Types {
 
   public static final SCENE_LIGHT_BLOCK_FLOATS:Float = (SCENE_LIGHT_HEMISPHERE_OFFSET + (SCENE_LIGHT_HEMISPHERE_STRIDE * MAX_FORWARD_LIGHTS));
 
-  public static final Scene3DResourceResolverRuntimeKey:flight._internal._Symbol = _Runtime.symbol('Scene3DResourceResolverRuntime');
+  public static final Scene3DResourceResolverRuntimeKey:flight._internal._Symbol = _Runtime.symbol('Scene3DResourceResolverRuntime', '__symbol__823d0845a4177b8034ca');
 
   public static final SceneCoverageValue:{ var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; } = (cast { FallbackRemediable: 'FallbackRemediable', FallbackUnavailable: 'FallbackUnavailable', Satisfied: 'Satisfied', Unavailable: 'Unavailable', Unregistered: 'Unregistered' });
 

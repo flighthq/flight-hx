@@ -13,10 +13,10 @@
 | Proven Boolean logical expressions | 6325 |
 | Proven numeric relations | 7911 |
 | Direct Boolean truthiness uses | 17717 |
-| Direct Boolean conditional expressions | 3568 |
+| Direct Boolean conditional expressions | 3569 |
 | Direct Boolean `&&` expressions | 2827 |
 | Direct Boolean `\|\|` expressions | 3470 |
-| Direct numeric relations | 7898 |
+| Direct numeric relations | 7899 |
 | Proven indexed expressions | 13567 |
 | Proven indexed reads | 9232 |
 | Proven indexed writes | 4482 |

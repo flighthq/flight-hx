@@ -604,8 +604,11 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
       const fields = declaration.type.fields;
       const entityRuntimeField = fields.find((field) => field.name === '__EntityRuntimeKey' && field.optional);
       const constructorFields = fields.filter((field) => field !== entityRuntimeField);
+      const classCondition = declaration.cppStructInitNativeOnly
+        ? '#if (!flight_struct_typedef && !js)'
+        : '#if !flight_struct_typedef';
       const lines = [
-        '#if !flight_struct_typedef',
+        classCondition,
         ...completionMetadata,
         ...(declaration.cppStructInitConstructorAllowModules ?? []).map((owner) => `@:allow(${owner})`),
         '@:structInit',
@@ -2832,6 +2835,9 @@ function emitExpression(expression: IrExpression): string {
       return `new ${emitExpression(expression.callee)}(${expression.arguments.map(emitExpression).join(', ')})`;
     case 'object':
       if (expression.cppStructInit) {
+        const typedefCondition = expression.cppStructInit.nativeOnly
+          ? '(flight_struct_typedef || js)'
+          : 'flight_struct_typedef';
         if (expression.properties.some((property) => property.kind === 'spread')) {
           const source = '__structInitSource';
           const merged = `_Runtime.mergeObjects([${expression.properties
@@ -2848,14 +2854,24 @@ function emitExpression(expression: IrExpression): string {
             .join(', ')} }`;
           return emitObjectThisCapture(
             expression,
-            `(#if flight_struct_typedef ${merged} #else ({ final ${source}:Dynamic = ${merged}; (${value} : ${expression.cppStructInit.schemaHaxeType}); }) #end)`,
+            `(#if ${typedefCondition} ${merged} #else ({ final ${source}:Dynamic = ${merged}; (${value} : ${expression.cppStructInit.schemaHaxeType}); }) #end)`,
           );
         }
-        const namedProperties = expression.properties.filter(
-          (property): property is Extract<(typeof expression.properties)[number], { kind: 'property' }> =>
-            property.kind === 'property',
-        );
-        const actualFields = namedProperties.map((property) => property.name);
+        type ConstructionProperty =
+          | (Extract<(typeof expression.properties)[number], { kind: 'property' }> & { constructionName: string })
+          | (Extract<(typeof expression.properties)[number], { kind: 'computedProperty' }> & {
+              constructionName: string;
+            });
+        const constructionProperties: ConstructionProperty[] = [];
+        for (const property of expression.properties) {
+          if (property.kind === 'property') {
+            constructionProperties.push({ ...property, constructionName: property.name });
+          }
+          if (property.kind === 'computedProperty' && property.nativeName) {
+            constructionProperties.push({ ...property, constructionName: property.nativeName });
+          }
+        }
+        const actualFields = constructionProperties.map((property) => property.constructionName);
         if (
           actualFields.some((field) => !expression.cppStructInit!.fieldNames.includes(field)) ||
           expression.cppStructInit.fieldNames.some(
@@ -2866,22 +2882,33 @@ function emitExpression(expression: IrExpression): string {
             `cpp @:structInit construction field mismatch for ${expression.cppStructInit.schemaId}: expected ${expression.cppStructInit.fieldNames.join(', ')}, received ${actualFields.join(', ')}`,
           );
         }
+        const sourceValue = expression.properties.some((property) => property.kind === 'computedProperty')
+          ? `_Runtime.objectFromPairs([${expression.properties
+              .map((property) =>
+                property.kind === 'computedProperty'
+                  ? `{ key: ${emitExpression(property.key)}, value: ${emitExpression(property.value)} }`
+                  : property.kind === 'property'
+                    ? `{ key: ${quote(property.name)}, value: ${emitExpression(property.value)} }`
+                    : '',
+              )
+              .filter(Boolean)
+              .join(', ')}])`
+          : `{ ${constructionProperties
+              .map((property) => `${safeName(property.constructionName)}: ${emitExpression(property.value)}`)
+              .join(', ')} }`;
         if (expression.cppStructInit.missingFieldNames?.length) {
           const temporaryByField = new Map<string, string>();
-          const evaluations = namedProperties.map((property, index) => {
+          const evaluations = constructionProperties.map((property, index) => {
             const temporary = `__structInitField${String(index)}`;
-            temporaryByField.set(property.name, temporary);
+            temporaryByField.set(property.constructionName, temporary);
             return `final ${temporary}:Dynamic = ${emitExpression(property.value)};`;
           });
-          const sourceValue = `{ ${namedProperties
-            .map((property) => `${safeName(property.name)}: ${emitExpression(property.value)}`)
-            .join(', ')} }`;
           const classValue = `{ ${expression.cppStructInit.fieldNames
             .map((field) => `${safeName(field)}: ${temporaryByField.get(field) ?? 'cast _Runtime.UNDEFINED'}`)
             .join(', ')} }`;
           return emitObjectThisCapture(
             expression,
-            `(#if flight_struct_typedef ${sourceValue} #else ({ ${evaluations.join(' ')} (${classValue} : ${expression.cppStructInit.schemaHaxeType}); }) #end)`,
+            `(#if ${typedefCondition} ${sourceValue} #else ({ ${evaluations.join(' ')} (${classValue} : ${expression.cppStructInit.schemaHaxeType}); }) #end)`,
           );
         }
         const sourceOrderMatches = actualFields.every(
@@ -2889,9 +2916,9 @@ function emitExpression(expression: IrExpression): string {
         );
         if (!sourceOrderMatches) {
           const temporaryByField = new Map<string, string>();
-          const evaluations = namedProperties.map((property, index) => {
+          const evaluations = constructionProperties.map((property, index) => {
             const temporary = `__structInitField${String(index)}`;
-            temporaryByField.set(property.name, temporary);
+            temporaryByField.set(property.constructionName, temporary);
             return `final ${temporary}:Dynamic = ${emitExpression(property.value)};`;
           });
           const value = `{ ${expression.cppStructInit.fieldNames
@@ -2899,13 +2926,18 @@ function emitExpression(expression: IrExpression): string {
             .join(', ')} }`;
           return emitObjectThisCapture(
             expression,
-            `({ ${evaluations.join(' ')} (${value} : ${expression.cppStructInit.schemaHaxeType}); })`,
+            `(#if ${typedefCondition} ${sourceValue} #else ({ ${evaluations.join(' ')} (${value} : ${expression.cppStructInit.schemaHaxeType}); }) #end)`,
           );
         }
-        const value = `{ ${namedProperties
-          .map((property) => `${safeName(property.name)}: ${emitExpression(property.value)}`)
+        const value = `{ ${constructionProperties
+          .map((property) => `${safeName(property.constructionName)}: ${emitExpression(property.value)}`)
           .join(', ')} }`;
-        return emitObjectThisCapture(expression, `(${value} : ${expression.cppStructInit.schemaHaxeType})`);
+        return emitObjectThisCapture(
+          expression,
+          expression.properties.some((property) => property.kind === 'computedProperty')
+            ? `(#if ${typedefCondition} ${sourceValue} #else (${value} : ${expression.cppStructInit.schemaHaxeType}) #end)`
+            : `(${value} : ${expression.cppStructInit.schemaHaxeType})`,
+        );
       }
       if (expression.properties.some((property) => property.kind === 'spread')) {
         const value = `_Runtime.mergeObjects([${expression.properties

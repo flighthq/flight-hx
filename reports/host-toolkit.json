@@ -11,7 +11,7 @@
     "moduleValueKeys": 0,
     "portableGlobalValueKeys": 35,
     "typeUses": 9085,
-    "valueUses": 2124
+    "valueUses": 2126
   },
   "types": [
     {
@@ -4810,7 +4810,7 @@
         "generated/flight/_Tween.hx"
       ],
       "provider": "src/flight/_internal/_HostValueLut.hx",
-      "uses": 372
+      "uses": 374
     },
     {
       "coverage": "js-only",

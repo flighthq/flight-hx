@@ -4387,13 +4387,17 @@ describe('typed struct analysis', () => {
         export function createToken(): Entity {
           return createEntity();
         }
+        const RuntimeKey: unique symbol = Symbol('Runtime');
+        export function createComputedProvider(): { run(): number; [RuntimeKey]: number } & Entity {
+          return createEntity({ run() { return 3; }, [RuntimeKey]: 4 });
+        }
       `,
       candidate,
     );
     const synthetics = result.lowered.declarations.filter(
       (declaration) => declaration.kind === 'type' && declaration.name.startsWith('EntityShapeL'),
     );
-    expect(synthetics).toHaveLength(3);
+    expect(synthetics).toHaveLength(4);
     const synthetic = synthetics[0];
     if (!synthetic || synthetic.kind !== 'type') throw new Error('Expected synthetic Entity class');
     const fixtureModule = {
@@ -4412,6 +4416,11 @@ describe('typed struct analysis', () => {
     expect(output).toContain('private function new(run:Void->Float):Void');
     expect(output).toContain('private function new():Void');
     expect(output).toMatch(/\(\{ run: function\(\):Float \{[\s\S]*\} \} : EntityShapeL\d+C\d+\)/u);
+    expect(output).toMatch(/_Runtime\.symbol\('Runtime', '__symbol__[0-9a-f]{20}'\)/u);
+    expect(output).toContain('#if (!flight_struct_typedef && !js)');
+    expect(output).toMatch(
+      /#if \(flight_struct_typedef \|\| js\) _Runtime\.objectFromPairs\(\[[\s\S]*RuntimeKey[\s\S]*#else \(\{ run:/u,
+    );
   });
 
   it('censuses class migration flows and observability by canonical schema', () => {
@@ -4619,17 +4628,17 @@ describe('typed struct analysis', () => {
     expect(registry.resolveIdentity(renderTextureReturn)?.name).toBe('RenderTexture');
     expect(entityFactories.summary).toEqual({
       bareEntityCalls: 0,
-      blockedEntityCalls: 5,
+      blockedEntityCalls: 4,
       calls: 368,
-      exactEntityCalls: 179,
-      exactEntitySchemas: 144,
+      exactEntityCalls: 178,
+      exactEntitySchemas: 143,
       exactNonEntityCalls: 17,
       genericEntityCalls: 3,
-      localEntityCalls: 168,
+      localEntityCalls: 169,
       normalizedFieldOrderCalls: 24,
       normalizedMissingFieldCalls: 9,
       normalizedSpreadProjectionCalls: 17,
-      readyEntityCalls: 346,
+      readyEntityCalls: 347,
       structuralEntityCalls: 1,
       unresolvedCalls: 0,
     });
@@ -4642,6 +4651,12 @@ describe('typed struct analysis', () => {
       blockers: [],
       destination: { kind: 'exact-entity', schemaName: 'Rectangle' },
       normalizations: ['field-order'],
+      status: 'ready',
+    });
+    expect(entityFactories.sites.find((site) => site.factory.name === 'createScene3DResourceResolver')).toMatchObject({
+      blockers: [],
+      destination: { kind: 'local-entity', schemaName: 'EntityShapeL42C10' },
+      normalizations: ['synthetic-class', 'computed-symbol-key'],
       status: 'ready',
     });
     expect(entityFactories.sites.find((site) => site.factory.name === 'cloneEntity')).toMatchObject({

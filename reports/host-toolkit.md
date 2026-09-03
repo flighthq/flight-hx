@@ -14,7 +14,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | JavaScript-only global value keys | 35 |
 | Module value keys | 0 |
 | Type uses | 9085 |
-| Value uses | 2124 |
+| Value uses | 2126 |
 | Missing toolkit entries | 0 |
 
 ## Types
@@ -303,7 +303,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `global:KeyboardEvent` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 5 |
 | `global:localStorage` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 4 |
 | `global:location` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 7 |
-| `global:Map` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 372 |
+| `global:Map` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 374 |
 | `global:matchMedia` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 6 |
 | `global:MediaMetadata` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 2 |
 | `global:navigator` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 29 |

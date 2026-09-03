@@ -296,5 +296,5 @@ class _Tilemap {
 
   public static final defaultMethods__tilemap:flight._internal._Partial<MethodsOf<TilemapRuntime>> = (cast { computeLocalBoundsRectangle: computeTilemapLocalBoundsRectangle });
 
-  public static final tilemapSignalsSlot__tilemap:flight._internal._Symbol = _Runtime.symbol('tilemapSignals');
+  public static final tilemapSignalsSlot__tilemap:flight._internal._Symbol = _Runtime.symbol('tilemapSignals', '__symbol__ecde9f5029fab912fd01');
 }

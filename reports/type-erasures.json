@@ -8492,13 +8492,14 @@
     },
     {
       "byReason": {
-        "source-any": 8,
-        "source-null": 1,
-        "standard-toolkit-boundary": 5
+        "source-any": 12,
+        "source-null": 2,
+        "standard-toolkit-boundary": 5,
+        "unclassified": 1
       },
       "module": "flight._Scene3DResources",
       "source": "upstream/packages/scene3d-resources/src/sceneResourceResolver.ts",
-      "total": 14
+      "total": 20
     },
     {
       "byReason": {
@@ -12547,16 +12548,16 @@
   "summary": {
     "byReason": {
       "external-toolkit-boundary": 609,
-      "source-any": 1290,
+      "source-any": 1294,
       "source-never": 186,
-      "source-null": 271,
+      "source-null": 272,
       "source-undefined": 551,
       "source-unknown": 4743,
       "standard-toolkit-boundary": 22029,
-      "unclassified": 782
+      "unclassified": 783
     },
     "checkerKnownUnrepresentable": 0,
     "modules": 1470,
-    "total": 30461
+    "total": 30467
   }
 }

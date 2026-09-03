@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 import ts from 'typescript';
 
@@ -143,6 +144,59 @@ export function entityFactoryObjectShape(node: ts.ObjectLiteralExpression): Enti
   return { fields, hasComputed, hasSpread, hasUnsupported };
 }
 
+/**
+ * Give a source `Symbol()` allocation a stable, collision-resistant field name on
+ * native targets. JavaScript continues to use the actual Symbol value; native
+ * object access already lowers through string-keyed reflection.
+ */
+export function nativeUniqueSymbolKeyForCall(node: ts.CallExpression): string | undefined {
+  if (!ts.isIdentifier(node.expression) || node.expression.text !== 'Symbol') return undefined;
+  const source = node.getSourceFile();
+  const normalized = source.fileName.split(path.sep).join('/');
+  const upstream = normalized.lastIndexOf('/upstream/');
+  const identity = upstream >= 0 ? normalized.slice(upstream + 1) : normalized;
+  const position = source.getLineAndCharacterOfPosition(node.getStart(source));
+  const digest = createHash('sha256')
+    .update(`${identity}:${String(position.line + 1)}:${String(position.character + 1)}`)
+    .digest('hex')
+    .slice(0, 20);
+  return `__symbol__${digest}`;
+}
+
+export function nativeUniqueSymbolKeyForExpression(node: ts.Expression, checker: ts.TypeChecker): string | undefined {
+  let symbol = checker.getSymbolAtLocation(node);
+  const seen = new Set<ts.Symbol>();
+  while (symbol && (symbol.flags & ts.SymbolFlags.Alias) !== 0 && !seen.has(symbol)) {
+    seen.add(symbol);
+    symbol = checker.getAliasedSymbol(symbol);
+  }
+  const declaration = symbol?.valueDeclaration ?? symbol?.declarations?.[0];
+  if (!declaration || !ts.isVariableDeclaration(declaration) || !declaration.initializer) return undefined;
+  const initializer = unwrapEntityFactoryExpression(declaration.initializer);
+  return ts.isCallExpression(initializer) ? nativeUniqueSymbolKeyForCall(initializer) : undefined;
+}
+
+export function entityFactoryResolvedObjectFields(
+  node: ts.ObjectLiteralExpression,
+  checker: ts.TypeChecker,
+): string[] | undefined {
+  const fields: string[] = [];
+  for (const property of node.properties) {
+    if (ts.isSpreadAssignment(property)) continue;
+    if (!('name' in property) || property.name === undefined) return undefined;
+    if (ts.isComputedPropertyName(property.name)) {
+      const nativeName = nativeUniqueSymbolKeyForExpression(property.name.expression, checker);
+      if (!nativeName) return undefined;
+      fields.push(nativeName);
+      continue;
+    }
+    const name = staticPropertyName(property.name);
+    if (name === undefined) return undefined;
+    fields.push(name);
+  }
+  return fields;
+}
+
 export function entityFactoryExpandedObjectFields(
   node: ts.ObjectLiteralExpression,
   checker: ts.TypeChecker,
@@ -152,7 +206,14 @@ export function entityFactoryExpandedObjectFields(
   if (checker.getIndexTypeOfType(type, ts.IndexKind.String)) return undefined;
   return checker
     .getPropertiesOfType(type)
-    .map((property) => property.getName())
+    .map((property) => {
+      const computed = property.declarations
+        ?.map((declaration) => (declaration as ts.NamedDeclaration).name)
+        .find((name): name is ts.ComputedPropertyName => name !== undefined && ts.isComputedPropertyName(name));
+      return computed
+        ? (nativeUniqueSymbolKeyForExpression(computed.expression, checker) ?? property.getName())
+        : property.getName();
+    })
     .filter((name) => !name.startsWith('__@EntityRuntimeKey@'));
 }
 

@@ -9,9 +9,12 @@ import {
   entityFactoryExpandedObjectFields,
   entityFactoryObjectLiteral,
   entityFactoryObjectShape,
+  entityFactoryResolvedObjectFields,
   entityFactorySyntheticClassName,
   isParameterizedEntityFactoryType,
   isFlightCreateEntityCall,
+  nativeUniqueSymbolKeyForCall,
+  nativeUniqueSymbolKeyForExpression,
 } from '../analyze/entity-factory-call.ts';
 import {
   hostTypeIdentity,
@@ -3709,7 +3712,9 @@ function cppStructInitEntityFactoryConstruction(
         .find((candidate) => candidate !== undefined)
     : undefined;
   const shape = entityFactoryObjectShape(node);
-  const constructionFields = shape.hasSpread ? entityFactoryExpandedObjectFields(node, checker) : shape.fields;
+  const constructionFields = shape.hasSpread
+    ? entityFactoryExpandedObjectFields(node, checker)
+    : entityFactoryResolvedObjectFields(node, checker);
   if (!binding) {
     const parameterizedDestination = destinationCandidates.some((candidate) =>
       isParameterizedEntityFactoryType(candidate.type, checker),
@@ -3718,7 +3723,7 @@ function cppStructInitEntityFactoryConstruction(
       ? undefined
       : syntheticEntityFactoryConstruction(node, call, constructionFields, shape, context);
   }
-  if (shape.hasComputed || shape.hasUnsupported || !constructionFields) return undefined;
+  if (shape.hasUnsupported || !constructionFields) return undefined;
   if (constructionFields.some((field) => !binding.fieldNames.includes(field))) {
     return syntheticEntityFactoryConstruction(node, call, constructionFields, shape, context);
   }
@@ -3752,8 +3757,10 @@ function entityFactoryVariableStorageType(
   const object = entityFactoryObjectLiteral(initializer, checker);
   if (!object) return undefined;
   const shape = entityFactoryObjectShape(object);
-  const constructionFields = shape.hasSpread ? entityFactoryExpandedObjectFields(object, checker) : shape.fields;
-  if (!constructionFields || shape.hasComputed || shape.hasUnsupported) return undefined;
+  const constructionFields = shape.hasSpread
+    ? entityFactoryExpandedObjectFields(object, checker)
+    : entityFactoryResolvedObjectFields(object, checker);
+  if (!constructionFields || shape.hasUnsupported) return undefined;
   const binding = entityFactoryDestinationCandidates(initializer, checker)
     .map((candidate) => registry.resolveFactoryIdentityConstruction(candidate.type))
     .find(
@@ -3771,14 +3778,30 @@ function syntheticEntityFactoryConstruction(
   context: LoweringContext,
 ): IrCppStructInitConstruction | undefined {
   const checker = context.checker;
-  if (!checker || !constructionFields || shape.hasComputed || shape.hasUnsupported) return undefined;
+  if (!checker || !constructionFields || shape.hasUnsupported) return undefined;
   const objectType = checker.getTypeAtLocation(node);
   const typeParameterNames = enclosingTypeParameterNames(node);
+  const computedTypes = new Map<string, ts.Type>();
+  for (const property of node.properties) {
+    if (
+      (ts.isPropertyAssignment(property) || ts.isMethodDeclaration(property)) &&
+      ts.isComputedPropertyName(property.name)
+    ) {
+      const nativeName = nativeUniqueSymbolKeyForExpression(property.name.expression, checker);
+      if (!nativeName) return undefined;
+      computedTypes.set(
+        nativeName,
+        ts.isPropertyAssignment(property)
+          ? checker.getTypeAtLocation(property.initializer)
+          : checker.getTypeAtLocation(property),
+      );
+    }
+  }
   const fields: IrTypeField[] = [];
   for (const name of constructionFields) {
     const property = checker.getPropertyOfType(objectType, name);
-    if (!property) return undefined;
-    const checkerType = checker.getTypeOfSymbolAtLocation(property, node);
+    const checkerType = computedTypes.get(name) ?? (property && checker.getTypeOfSymbolAtLocation(property, node));
+    if (!checkerType) return undefined;
     const lowered = lowerCheckerType(checkerType, node, context, new Set()) ?? {
       kind: 'dynamic' as const,
       reason: 'checker-known-unrepresentable' as const,
@@ -3789,13 +3812,14 @@ function syntheticEntityFactoryConstruction(
       type: eraseLocalTypeParameters(lowered, typeParameterNames),
     });
   }
-  return addSyntheticEntityFactoryDeclaration(call, fields, context);
+  return addSyntheticEntityFactoryDeclaration(call, fields, context, computedTypes.size > 0);
 }
 
 function addSyntheticEntityFactoryDeclaration(
   call: ts.CallExpression,
   fields: IrTypeField[],
   context: LoweringContext,
+  nativeOnly = false,
 ): IrCppStructInitConstruction {
   const name = entityFactorySyntheticClassName(call);
   const site = origin(call, context);
@@ -3803,6 +3827,7 @@ function addSyntheticEntityFactoryDeclaration(
   if (!context.syntheticEntityDeclarations.some((declaration) => declaration.cppStructInitSchemaId === schemaId)) {
     context.syntheticEntityDeclarations.push({
       cppStructInitSchemaId: schemaId,
+      ...(nativeOnly ? { cppStructInitNativeOnly: true } : {}),
       exported: false,
       kind: 'type',
       name,
@@ -3825,6 +3850,7 @@ function addSyntheticEntityFactoryDeclaration(
   }
   return {
     fieldNames: fields.map((field) => field.name),
+    ...(nativeOnly ? { nativeOnly: true } : {}),
     schemaHaxeType: name,
     schemaId,
     schemaName: name,
@@ -4036,6 +4062,9 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
             return {
               key: lowerExpression(property.name.expression, context),
               kind: 'computedProperty' as const,
+              nativeName: context.checker
+                ? nativeUniqueSymbolKeyForExpression(property.name.expression, context.checker)
+                : undefined,
               value,
             };
           }
@@ -4068,6 +4097,9 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
             return {
               key: lowerExpression(property.name.expression, context),
               kind: 'computedProperty' as const,
+              nativeName: context.checker
+                ? nativeUniqueSymbolKeyForExpression(property.name.expression, context.checker)
+                : undefined,
               value,
             };
           }
@@ -4200,11 +4232,15 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
       generatedClassCall || ((direct || adaptTypedPropertyCall) && checkerCallIsTyped(node.expression, context))
         ? directCallArguments(node, context)
         : undefined;
+    const loweredArguments =
+      syntheticOmittedEntityArgument !== undefined
+        ? [syntheticOmittedEntityArgument]
+        : (checkedCall?.arguments ?? node.arguments.map((argument) => lowerExpression(argument, context)));
+    const nativeSymbolKey = nativeUniqueSymbolKeyForCall(node);
     return {
-      arguments:
-        syntheticOmittedEntityArgument !== undefined
-          ? [syntheticOmittedEntityArgument]
-          : (checkedCall?.arguments ?? node.arguments.map((argument) => lowerExpression(argument, context))),
+      arguments: nativeSymbolKey
+        ? [...loweredArguments, { kind: 'literal', value: nativeSymbolKey }]
+        : loweredArguments,
       callee,
       ...(syntheticOmittedEntityArgument === undefined && checkedCall?.inferenceCasts.some(Boolean)
         ? { inferenceCastArguments: checkedCall.inferenceCasts }

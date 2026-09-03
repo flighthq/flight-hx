@@ -105,11 +105,11 @@ class _Application {
 
   public static final DEFAULT_MAX_UPDATES_PER_FRAME__application:Float = 5.0;
 
-  public static final kExit__application:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'));
+  public static final kExit__application:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'), '__symbol__ad36cbe0f1d8451d3735');
 
-  public static final kLoop__application:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'));
+  public static final kLoop__application:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'), '__symbol__703c6d04d37469dffe4e');
 
-  public static final kPaused__application:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'));
+  public static final kPaused__application:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'), '__symbol__b0f789f399dad3580efd');
 
   public static function attachApplicationExit(host:HasAppExitSubscription, app:Application):Void {
     var observers:flight._internal._Map<flight._internal._Symbol, Void->Void> = cast _Runtime.UNDEFINED;
@@ -130,7 +130,7 @@ class _Application {
     var onActivate:Void->Void = cast _Runtime.UNDEFINED;
     kLifecycle = ((cast _Application._lifecycleKeys__application : flight._internal._WeakMap<ApplicationWindow, flight._internal._Symbol>).get(win));
     if ((cast _Runtime.strictEquals(kLifecycle, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (kLifecycle = cast (_Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED')) : Dynamic));
+      (kLifecycle = cast (_Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'), '__symbol__790b94596c3054e1888c') : Dynamic));
       ((cast _Application._lifecycleKeys__application : flight._internal._WeakMap<ApplicationWindow, flight._internal._Symbol>).set(win, (cast kLifecycle)));
     }
     observers = (cast _Application.getApplicationObservers__application(({ final __callArgument4:Dynamic = app; __callArgument4; })) : flight._internal._Map<flight._internal._Symbol, Void->Void>);
@@ -516,25 +516,25 @@ class _Application {
     return cast null;
   }
 
-  public static final kClose__window:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'));
+  public static final kClose__window:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'), '__symbol__6d4d492bf900d61333e7');
 
-  public static final kDropFile__window:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'));
+  public static final kDropFile__window:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'), '__symbol__186db93147f732c08c84');
 
-  public static final kFocus__window:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'));
+  public static final kFocus__window:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'), '__symbol__7935d8b2c19ed6c2bc7c');
 
-  public static final kFullscreen__window:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'));
+  public static final kFullscreen__window:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'), '__symbol__5d51efa487ac979535fa');
 
-  public static final kMove__window:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'));
+  public static final kMove__window:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'), '__symbol__927a53eed206fdf86d8a');
 
-  public static final kOrientation__window:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'));
+  public static final kOrientation__window:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'), '__symbol__84043306d3bfc88abfdb');
 
-  public static final kRenderContext__window:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'));
+  public static final kRenderContext__window:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'), '__symbol__99ca56a92547cce187db');
 
-  public static final kRenderState__window:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'));
+  public static final kRenderState__window:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'), '__symbol__5890f99a72e81bf8ba80');
 
-  public static final kResize__window:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'));
+  public static final kResize__window:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'), '__symbol__e76283cbc4406c8122e6');
 
-  public static final kVisibility__window:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'));
+  public static final kVisibility__window:flight._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'), '__symbol__3ea4b9533e724b730e35');
 
   public static function attachWindow(host:HasWindowAttach, win:ApplicationWindow, handle:NativeWindowHandle, ownership:WindowAttachmentOwnership):Bool {
     var backend:WindowBackend = cast _Runtime.UNDEFINED;
@@ -678,7 +678,7 @@ class _Application {
   }
 
   public static function createApplicationWindow():ApplicationWindow {
-    return cast (cast createEntity((cast ({ final __structInitField0:Dynamic = false; final __structInitField1:Dynamic = 1.0; final __structInitField2:Dynamic = false; final __structInitField3:Dynamic = false; final __structInitField4:Dynamic = 0.0; final __structInitField5:Dynamic = ''; final __structInitField6:Dynamic = -1.0; final __structInitField7:Dynamic = false; final __structInitField8:Dynamic = -1.0; final __structInitField9:Dynamic = 0.0; final __structInitField10:Dynamic = false; final __structInitField11:Dynamic = 0.0; final __structInitField12:Dynamic = 1.0; final __structInitField13:Dynamic = true; final __structInitField14:Dynamic = false; final __structInitField15:Dynamic = ''; final __structInitField16:Dynamic = true; final __structInitField17:Dynamic = 0.0; final __structInitField18:Dynamic = 0.0; final __structInitField19:Dynamic = 0.0; final __structInitField20:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField21:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField22:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField23:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField24:Dynamic = (cast createSignal() : Signal<String->Void>); final __structInitField25:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField26:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField27:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField28:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField29:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField30:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField31:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField32:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField33:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField34:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField35:Dynamic = (cast createSignal() : Signal<Void->Void>); ({ alwaysOnTop: __structInitField0, devicePixelRatio: __structInitField1, focused: __structInitField2, fullscreen: __structInitField3, height: __structInitField4, icon: __structInitField5, maxHeight: __structInitField6, maximized: __structInitField7, maxWidth: __structInitField8, minHeight: __structInitField9, minimized: __structInitField10, minWidth: __structInitField11, onActivate: __structInitField20, onClose: __structInitField21, onCloseRequest: __structInitField22, onDeactivate: __structInitField23, onDropFile: __structInitField24, onFocusIn: __structInitField25, onFocusOut: __structInitField26, onFullscreenChanged: __structInitField27, onMaximize: __structInitField28, onMinimize: __structInitField29, onMove: __structInitField30, onOrientationChanged: __structInitField31, onRenderContextLost: __structInitField32, onRenderContextRestored: __structInitField33, onResize: __structInitField34, onRestore: __structInitField35, opacity: __structInitField12, resizable: __structInitField13, skipTaskbar: __structInitField14, title: __structInitField15, visible: __structInitField16, width: __structInitField17, x: __structInitField18, y: __structInitField19 } : ApplicationWindow); }) : Dynamic)) : ApplicationWindow);
+    return cast (cast createEntity((cast (#if flight_struct_typedef { alwaysOnTop: false, devicePixelRatio: 1.0, focused: false, fullscreen: false, height: 0.0, icon: '', maxHeight: -1.0, maximized: false, maxWidth: -1.0, minHeight: 0.0, minimized: false, minWidth: 0.0, opacity: 1.0, resizable: true, skipTaskbar: false, title: '', visible: true, width: 0.0, x: 0.0, y: 0.0, onActivate: (cast createSignal() : Signal<Void->Void>), onClose: (cast createSignal() : Signal<Void->Void>), onCloseRequest: (cast createSignal() : Signal<Void->Void>), onDeactivate: (cast createSignal() : Signal<Void->Void>), onDropFile: (cast createSignal() : Signal<String->Void>), onFocusIn: (cast createSignal() : Signal<Void->Void>), onFocusOut: (cast createSignal() : Signal<Void->Void>), onFullscreenChanged: (cast createSignal() : Signal<Void->Void>), onMaximize: (cast createSignal() : Signal<Void->Void>), onMinimize: (cast createSignal() : Signal<Void->Void>), onMove: (cast createSignal() : Signal<Void->Void>), onOrientationChanged: (cast createSignal() : Signal<Void->Void>), onRenderContextLost: (cast createSignal() : Signal<Void->Void>), onRenderContextRestored: (cast createSignal() : Signal<Void->Void>), onResize: (cast createSignal() : Signal<Void->Void>), onRestore: (cast createSignal() : Signal<Void->Void>) } #else ({ final __structInitField0:Dynamic = false; final __structInitField1:Dynamic = 1.0; final __structInitField2:Dynamic = false; final __structInitField3:Dynamic = false; final __structInitField4:Dynamic = 0.0; final __structInitField5:Dynamic = ''; final __structInitField6:Dynamic = -1.0; final __structInitField7:Dynamic = false; final __structInitField8:Dynamic = -1.0; final __structInitField9:Dynamic = 0.0; final __structInitField10:Dynamic = false; final __structInitField11:Dynamic = 0.0; final __structInitField12:Dynamic = 1.0; final __structInitField13:Dynamic = true; final __structInitField14:Dynamic = false; final __structInitField15:Dynamic = ''; final __structInitField16:Dynamic = true; final __structInitField17:Dynamic = 0.0; final __structInitField18:Dynamic = 0.0; final __structInitField19:Dynamic = 0.0; final __structInitField20:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField21:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField22:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField23:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField24:Dynamic = (cast createSignal() : Signal<String->Void>); final __structInitField25:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField26:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField27:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField28:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField29:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField30:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField31:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField32:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField33:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField34:Dynamic = (cast createSignal() : Signal<Void->Void>); final __structInitField35:Dynamic = (cast createSignal() : Signal<Void->Void>); ({ alwaysOnTop: __structInitField0, devicePixelRatio: __structInitField1, focused: __structInitField2, fullscreen: __structInitField3, height: __structInitField4, icon: __structInitField5, maxHeight: __structInitField6, maximized: __structInitField7, maxWidth: __structInitField8, minHeight: __structInitField9, minimized: __structInitField10, minWidth: __structInitField11, onActivate: __structInitField20, onClose: __structInitField21, onCloseRequest: __structInitField22, onDeactivate: __structInitField23, onDropFile: __structInitField24, onFocusIn: __structInitField25, onFocusOut: __structInitField26, onFullscreenChanged: __structInitField27, onMaximize: __structInitField28, onMinimize: __structInitField29, onMove: __structInitField30, onOrientationChanged: __structInitField31, onRenderContextLost: __structInitField32, onRenderContextRestored: __structInitField33, onResize: __structInitField34, onRestore: __structInitField35, opacity: __structInitField12, resizable: __structInitField13, skipTaskbar: __structInitField14, title: __structInitField15, visible: __structInitField16, width: __structInitField17, x: __structInitField18, y: __structInitField19 } : ApplicationWindow); }) #end) : Dynamic)) : ApplicationWindow);
     return cast null;
   }
 

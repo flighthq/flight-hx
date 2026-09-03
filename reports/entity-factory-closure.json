@@ -4417,45 +4417,6 @@
       ]
     },
     {
-      "blockedCalls": 1,
-      "factories": [
-        "createScene3DResourceResolver"
-      ],
-      "readyCalls": 0,
-      "schemaId": "@flighthq/types:interface#Scene3DResourceResolver",
-      "schemaName": "Scene3DResourceResolver",
-      "sites": [
-        {
-          "argument": {
-            "fields": [
-              "fetch",
-              "registry"
-            ],
-            "kind": "object"
-          },
-          "blockers": [
-            "computed-construction"
-          ],
-          "column": 10,
-          "destination": {
-            "kind": "exact-entity",
-            "route": "contextual",
-            "schemaId": "@flighthq/types:interface#Scene3DResourceResolver",
-            "schemaName": "Scene3DResourceResolver",
-            "type": "Scene3DResourceResolver"
-          },
-          "factory": {
-            "canonicalForSchema": true,
-            "name": "createScene3DResourceResolver"
-          },
-          "line": 42,
-          "normalizations": [],
-          "source": "upstream/packages/scene3d-resources/src/sceneResourceResolver.ts",
-          "status": "blocked"
-        }
-      ]
-    },
-    {
       "blockedCalls": 0,
       "factories": [
         "createScene3DResourceSignals"
@@ -16495,25 +16456,26 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "computed-construction"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
-        "kind": "exact-entity",
+        "kind": "local-entity",
         "route": "contextual",
-        "schemaId": "@flighthq/types:interface#Scene3DResourceResolver",
-        "schemaName": "Scene3DResourceResolver",
+        "schemaId": "synthetic-entity:upstream/packages/scene3d-resources/src/sceneResourceResolver.ts:42:10",
+        "schemaName": "EntityShapeL42C10",
         "type": "Scene3DResourceResolver"
       },
       "factory": {
-        "canonicalForSchema": true,
+        "canonicalForSchema": false,
         "name": "createScene3DResourceResolver"
       },
       "line": 42,
-      "normalizations": [],
+      "normalizations": [
+        "synthetic-class",
+        "computed-symbol-key"
+      ],
       "source": "upstream/packages/scene3d-resources/src/sceneResourceResolver.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -17640,17 +17602,17 @@
   ],
   "summary": {
     "bareEntityCalls": 0,
-    "blockedEntityCalls": 5,
+    "blockedEntityCalls": 4,
     "calls": 368,
-    "exactEntityCalls": 179,
-    "exactEntitySchemas": 144,
+    "exactEntityCalls": 178,
+    "exactEntitySchemas": 143,
     "exactNonEntityCalls": 17,
     "genericEntityCalls": 3,
-    "localEntityCalls": 168,
+    "localEntityCalls": 169,
     "normalizedFieldOrderCalls": 24,
     "normalizedMissingFieldCalls": 9,
     "normalizedSpreadProjectionCalls": 17,
-    "readyEntityCalls": 346,
+    "readyEntityCalls": 347,
     "structuralEntityCalls": 1,
     "unresolvedCalls": 0
   },
