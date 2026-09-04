@@ -281,17 +281,16 @@ typedef GlRichTextData__glRichText = { @:optional var __symbol__EntityRuntime:Nu
 @:allow(flight._Scene2DGl)
 @:keep
 @:structInit
-private class EntityShapeL43C23__glRichText {
+private class EntityShapeL43C23__glRichText extends flight.types.RendererData<Null<Dynamic>> {
   public var surface:flight._internal._Any;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
 
-  private function new(surface:flight._internal._Any):Void {
-    this.__symbol__EntityRuntime = null;
+  private function new(surface:flight._internal._Any, ?__EntityRuntimeKey:Null<Dynamic>):Void {
+    super();
     this.surface = surface;
   }
 }
 #else
-private typedef EntityShapeL43C23__glRichText = { var surface:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL43C23__glRichText = { @:optional var __symbol__EntityRuntime:Null<Dynamic>; var surface:flight._internal._Any; };
 #end
 
 typedef GlScale9ShapeData__glScale9Shape = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var lastH:Float; var lastScaleX:Float; var lastScaleY:Float; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var surface:Null<Raster2DSurface>; };
@@ -300,7 +299,7 @@ typedef GlScale9ShapeData__glScale9Shape = { @:optional var __symbol__EntityRunt
 @:allow(flight._Scene2DGl)
 @:keep
 @:structInit
-private class EntityShapeL50C23__glScale9Shape {
+private class EntityShapeL50C23__glScale9Shape extends flight.types.RendererData<Null<Dynamic>> {
   public var lastH:Float;
   public var lastScaleX:Float;
   public var lastScaleY:Float;
@@ -308,10 +307,9 @@ private class EntityShapeL50C23__glScale9Shape {
   public var lastPixelRatio:Float;
   public var lastW:Float;
   public var surface:flight._internal._Any;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
 
-  private function new(lastH:Float, lastScaleX:Float, lastScaleY:Float, lastContentId:Float, lastPixelRatio:Float, lastW:Float, surface:flight._internal._Any):Void {
-    this.__symbol__EntityRuntime = null;
+  private function new(lastH:Float, lastScaleX:Float, lastScaleY:Float, lastContentId:Float, lastPixelRatio:Float, lastW:Float, surface:flight._internal._Any, ?__EntityRuntimeKey:Null<Dynamic>):Void {
+    super();
     this.lastH = lastH;
     this.lastScaleX = lastScaleX;
     this.lastScaleY = lastScaleY;
@@ -322,14 +320,14 @@ private class EntityShapeL50C23__glScale9Shape {
   }
 }
 #else
-private typedef EntityShapeL50C23__glScale9Shape = { var lastH:Float; var lastScaleX:Float; var lastScaleY:Float; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var surface:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL50C23__glScale9Shape = { @:optional var __symbol__EntityRuntime:Null<Dynamic>; var lastH:Float; var lastScaleX:Float; var lastScaleY:Float; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var surface:flight._internal._Any; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._Scene2DGl)
 @:keep
 @:structInit
-private class EntityShapeL28C23__glShapeData {
+private class EntityShapeL28C23__glShapeData extends flight.types.RendererData<Null<Dynamic>> {
   public var surface:flight._internal._Any;
   public var lastContentId:Float;
   public var lastPixelRatio:Float;
@@ -337,10 +335,9 @@ private class EntityShapeL28C23__glShapeData {
   public var lastH:Float;
   public var meshVersion:Float;
   public var meshes:flight._internal._Any;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
 
-  private function new(surface:flight._internal._Any, lastContentId:Float, lastPixelRatio:Float, lastW:Float, lastH:Float, meshVersion:Float, meshes:flight._internal._Any):Void {
-    this.__symbol__EntityRuntime = null;
+  private function new(surface:flight._internal._Any, lastContentId:Float, lastPixelRatio:Float, lastW:Float, lastH:Float, meshVersion:Float, meshes:flight._internal._Any, ?__EntityRuntimeKey:Null<Dynamic>):Void {
+    super();
     this.surface = surface;
     this.lastContentId = lastContentId;
     this.lastPixelRatio = lastPixelRatio;
@@ -351,7 +348,7 @@ private class EntityShapeL28C23__glShapeData {
   }
 }
 #else
-private typedef EntityShapeL28C23__glShapeData = { var surface:flight._internal._Any; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL28C23__glShapeData = { @:optional var __symbol__EntityRuntime:Null<Dynamic>; var surface:flight._internal._Any; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:flight._internal._Any; };
 #end
 
 typedef GlTextLabelData__glTextLabel = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var surface:Null<Raster2DSurface>; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; };
@@ -360,16 +357,15 @@ typedef GlTextLabelData__glTextLabel = { @:optional var __symbol__EntityRuntime:
 @:allow(flight._Scene2DGl)
 @:keep
 @:structInit
-private class EntityShapeL50C23__glTextLabel {
+private class EntityShapeL50C23__glTextLabel extends flight.types.RendererData<Null<Dynamic>> {
   public var surface:flight._internal._Any;
   public var lastContentId:Float;
   public var lastPixelRatio:Float;
   public var logW:Float;
   public var logH:Float;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
 
-  private function new(surface:flight._internal._Any, lastContentId:Float, lastPixelRatio:Float, logW:Float, logH:Float):Void {
-    this.__symbol__EntityRuntime = null;
+  private function new(surface:flight._internal._Any, lastContentId:Float, lastPixelRatio:Float, logW:Float, logH:Float, ?__EntityRuntimeKey:Null<Dynamic>):Void {
+    super();
     this.surface = surface;
     this.lastContentId = lastContentId;
     this.lastPixelRatio = lastPixelRatio;
@@ -378,7 +374,7 @@ private class EntityShapeL50C23__glTextLabel {
   }
 }
 #else
-private typedef EntityShapeL50C23__glTextLabel = { var surface:flight._internal._Any; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL50C23__glTextLabel = { @:optional var __symbol__EntityRuntime:Null<Dynamic>; var surface:flight._internal._Any; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; };
 #end
 
 typedef GlVelocityProgram__glVelocity = { var program:flight._internal.dom.WebGLProgram; var quadBuffer:flight._internal.dom.WebGLBuffer; var locCorner:Float; var locClipRect:flight._internal.dom.WebGLUniformLocation; var locVelocity:flight._internal.dom.WebGLUniformLocation; };

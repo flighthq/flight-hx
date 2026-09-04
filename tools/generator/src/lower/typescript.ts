@@ -4113,6 +4113,62 @@ function emptyEntityAllocator(construction: IrCppStructInitConstruction): IrExpr
   };
 }
 
+// A materialized entity built from an inline `createEntity({...})` is used as (returned/assigned to) a
+// concrete entity type such as RendererData. On the class representation the result is *cast* to that
+// type, and hxcpp returns null when casting between unrelated classes (JS erases the cast), so the
+// materialized value silently becomes null — e.g. a GL renderer's createData returning null, which
+// makes nothing draw. Resolve the destination entity base here and record it as the synthetic class's
+// parent so it emits `extends <Base>` and the native cast is a real upcast. Only pick a base whose
+// EVERY field the synthetic actually has (including any branded runtime-key field), so the emitted
+// subclass can supply every inherited field; a base carrying a runtime key the synthetic lacks (e.g. a
+// *WithRuntime brand) is not a valid parent and is skipped.
+function syntheticEntityBaseType(
+  allocation: ts.Node,
+  syntheticName: string,
+  fieldNames: ReadonlySet<string>,
+  context: LoweringContext,
+): IrType | undefined {
+  const checker = context.checker;
+  const registry = context.typedStructs;
+  if (!checker || !registry) return undefined;
+  const call = ts.isCallExpression(allocation)
+    ? allocation
+    : ts.isObjectLiteralExpression(allocation)
+      ? createEntityCallForObjectLiteral(allocation, checker)
+      : undefined;
+  if (!call) return undefined;
+  const base = entityFactoryDestinationCandidates(call, checker)
+    .flatMap((candidate) => {
+      // A createData returning `RendererData | null` presents its destination as a nullable union;
+      // strip the null so the concrete entity base resolves.
+      const type = checker.getNonNullableType(candidate.type);
+      // A discriminated-union entity (e.g. `Texture = Texture2D | ... | ...`) resolves to a single
+      // identity but its Haxe form is a union, not a structure. A subclass can neither `extends` it on
+      // the class path (the emitter's cppStructInitBase already rejects it) nor structurally extend it
+      // as `{ >Base }` on the typedef path (`Can only extend structures`). Only a plain single-structure
+      // entity is a valid parent, so skip a union destination entirely.
+      if (type.isUnion()) return [];
+      const resolved = registry.resolveFactoryIdentityConstruction(type);
+      return resolved ? [{ binding: resolved, type }] : [];
+    })
+    .find(
+      ({ binding, type }) =>
+        binding.schemaName !== 'Entity' &&
+        binding.schemaHaxeType !== syntheticName &&
+        binding.fieldNames.every((field) => fieldNames.has(field)) &&
+        // Reject a base that carries a BRANDED runtime key (a *WithRuntime variant); the plain
+        // synthetic only has the generic `__@EntityRuntimeKey@` marker, so it cannot supply that
+        // inherited field and could not extend it.
+        !checker
+          .getPropertiesOfType(type)
+          .some((property) => {
+            const propertyName = property.getName();
+            return propertyName.startsWith('__@') && !propertyName.startsWith('__@EntityRuntimeKey@');
+          }),
+    );
+  return base ? { arguments: [], kind: 'named', name: base.binding.schemaHaxeType } : undefined;
+}
+
 function addSyntheticEntityFactoryDeclaration(
   allocation: ts.Node,
   fields: IrTypeField[],
@@ -4123,6 +4179,12 @@ function addSyntheticEntityFactoryDeclaration(
   const site = origin(allocation, context);
   const schemaId = `synthetic-entity:${site.source}:${String(site.line)}:${String(site.column)}`;
   if (!context.syntheticEntityDeclarations.some((declaration) => declaration.cppStructInitSchemaId === schemaId)) {
+    const base = syntheticEntityBaseType(
+      allocation,
+      name,
+      new Set([...fields.map((field) => field.name), '__EntityRuntimeKey']),
+      context,
+    );
     context.syntheticEntityDeclarations.push({
       cppStructInitSchemaId: schemaId,
       ...(nativeOnly ? { cppStructInitNativeOnly: true } : {}),
@@ -4131,8 +4193,9 @@ function addSyntheticEntityFactoryDeclaration(
       name,
       origin: site,
       packagePrivate: true,
+      ...(base ? { sourceExtends: [base] } : {}),
       type: {
-        extends: [],
+        extends: base ? [base] : [],
         fields: [
           ...fields,
           {

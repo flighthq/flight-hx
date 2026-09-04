@@ -8,7 +8,7 @@ import flight._internal._Runtime;
 @:allow(flight._Scene2D)
 @:keep
 @:structInit
-class SpriteIdentityRendererData extends flight.types.RendererData {
+class SpriteIdentityRendererData extends flight.types.RendererData<Null<EntityRuntime>> {
   public var textureIdentity:Null<Texture>;
   public var textureVersion:Float;
 

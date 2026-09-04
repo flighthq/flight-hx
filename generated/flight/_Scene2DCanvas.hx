@@ -261,17 +261,16 @@ typedef CanvasTextLabelData__canvasTextLabel = { @:optional var __symbol__Entity
 @:allow(flight._Scene2DCanvas)
 @:keep
 @:structInit
-private class EntityShapeL25C23__canvasTextLabel {
+private class EntityShapeL25C23__canvasTextLabel extends flight.types.RendererData<Null<Dynamic>> {
   public var lastContentId:Float;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
 
-  private function new(lastContentId:Float):Void {
-    this.__symbol__EntityRuntime = null;
+  private function new(lastContentId:Float, ?__EntityRuntimeKey:Null<Dynamic>):Void {
+    super();
     this.lastContentId = lastContentId;
   }
 }
 #else
-private typedef EntityShapeL25C23__canvasTextLabel = { var lastContentId:Float; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL25C23__canvasTextLabel = { @:optional var __symbol__EntityRuntime:Null<Dynamic>; var lastContentId:Float; };
 #end
 
 @:noCompletion
