@@ -3,7 +3,7 @@ import { definePatches } from '../src/patch/apply.ts';
 export default definePatches([
   {
     expect: {
-      astHash: 'sha256:8bc3d74ced8427811d249dc4de6728f09afd84ead12470693ea66ea2e75ef998',
+      astHash: 'sha256:3ce775b0696548bce396bc8cf635a7de2dec5248a7b4966dfe22bec26a295226',
       kind: 'function',
     },
     fragment: 'tools/generator/patches/bodies/materials/cloneMaterial.hx',
@@ -31,38 +31,6 @@ export default definePatches([
       export: 'createGlContextFromCanvasElement',
       package: '@flighthq/render-gl',
       source: 'upstream/packages/render-gl/src/glContext.ts',
-    },
-  },
-  {
-    expect: {
-      astHash: 'sha256:8f338bafdcbe00d549a1c7dde5ccd4b8f9ced16d370fb2ef500efd6e5e5efbd1',
-      kind: 'function',
-    },
-    fragment: 'tools/generator/patches/bodies/host-web/createWebRaster2DSurfaceProvider.hx',
-    id: 'host-web.create-raster-2d-surface-provider.live-dimensions',
-    operation: 'replaceBody',
-    reason:
-      'Portable Haxe anonymous structures cannot preserve TypeScript object-literal accessors, so the web provider materializes live canvas dimension descriptors explicitly.',
-    target: {
-      export: 'createWebRaster2DSurfaceProvider',
-      package: '@flighthq/host-web',
-      source: 'upstream/packages/host-web/src/webRaster2DSurface.ts',
-    },
-  },
-  {
-    expect: {
-      astHash: 'sha256:e8e8ec56ac0d693d53dc93ebf38f390809e722b38285fd85aff1e9c1d5c98d77',
-      kind: 'function',
-    },
-    fragment: 'tools/generator/patches/bodies/entity/createEntity.hx',
-    id: 'entity.create-entity.portable-runtime-slot',
-    operation: 'replaceBody',
-    reason:
-      'Haxe cannot assign an empty structural literal to an optional unconstrained generic without an explicit cast.',
-    target: {
-      export: 'createEntity',
-      package: '@flighthq/entity',
-      source: 'upstream/packages/entity/src/entity.ts',
     },
   },
   {

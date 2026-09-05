@@ -597,6 +597,14 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
   if (declaration.kind === 'type') {
     const generics = declaration.typeParameters.length > 0 ? `<${declaration.typeParameters.join(', ')}>` : '';
     const modifier = declaration.packagePrivate ? 'private ' : '';
+    if (declaration.facetAliasTarget) {
+      // A pure facet of a nominal entity aliases directly to its base so facet values stay assignable to
+      // the base class; the phantom marker carried no runtime data.
+      return [
+        ...completionMetadata,
+        `${modifier}typedef ${safeName(declaration.name)}${generics} = ${emitType(declaration.facetAliasTarget)};`,
+      ];
+    }
     if (declaration.cppStructInitSchemaId) {
       if (declaration.type.kind !== 'anonymous') {
         throw new Error(`cpp @:structInit declaration is not anonymous: ${declaration.cppStructInitSchemaId}`);
@@ -636,11 +644,12 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
         ? ` extends ${declaration.cppStructInitBase.haxeType}${baseArguments}`
         : '';
       const hasUnsafeFieldName = fields.some((field) => safeName(field.name) !== field.name);
-      const classCondition = hasUnsafeFieldName
-        ? '#if (!flight_struct_typedef || js)'
-        : declaration.cppStructInitNativeOnly
-          ? '#if (!flight_struct_typedef && !js)'
-          : '#if !flight_struct_typedef';
+      const classCondition =
+        hasUnsafeFieldName || declaration.cppStructInitJsClass
+          ? '#if (!flight_struct_typedef || js)'
+          : declaration.cppStructInitNativeOnly
+            ? '#if (!flight_struct_typedef && !js)'
+            : '#if !flight_struct_typedef';
       const lines = [
         classCondition,
         ...completionMetadata,
@@ -2926,6 +2935,13 @@ function emitExpression(expression: IrExpression): string {
           expression.cppStructInit.nativeOnly || hasUnsafeFieldName
             ? '(flight_struct_typedef || js)'
             : 'flight_struct_typedef';
+        // An allocateEntity<T>() opening must carry the EntityRuntimeKey symbol slot on the structural
+        // typedef representation (the nominal class sets it in its constructor). Without it, upstream
+        // `EntityRuntimeKey in value` checks fail on the js oracle.
+        const tagEntityRuntime = (structural: string): string =>
+          expression.cppStructInit!.entityRuntime
+            ? `({ final __entityRuntimeSlot:Dynamic = ${structural}; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; })`
+            : structural;
         if (expression.properties.some((property) => property.kind === 'spread')) {
           const source = '__structInitSource';
           const merged = `_Runtime.mergeObjects([${expression.properties
@@ -3000,7 +3016,7 @@ function emitExpression(expression: IrExpression): string {
             .join(', ')} }`;
           return emitObjectThisCapture(
             expression,
-            `(#if ${typedefCondition} ${sourceValue} #else ({ ${evaluations.join(' ')} (${classValue} : ${expression.cppStructInit.schemaHaxeType}); }) #end)`,
+            `(#if ${typedefCondition} ${tagEntityRuntime(sourceValue)} #else ({ ${evaluations.join(' ')} (${classValue} : ${expression.cppStructInit.schemaHaxeType}); }) #end)`,
           );
         }
         const sourceOrderMatches = actualFields.every(
@@ -4300,7 +4316,7 @@ function splitLines(value: string): string[] {
   return value.split(/\r\n?|\n/gu);
 }
 
-function safeName(name: string): string {
+export function safeName(name: string): string {
   let normalized = '';
   for (const character of name) {
     normalized += /[A-Za-z0-9_]/u.test(character)

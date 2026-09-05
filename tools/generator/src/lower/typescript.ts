@@ -12,7 +12,9 @@ import {
   entityFactoryResolvedObjectFields,
   entityFactorySyntheticClassName,
   isParameterizedEntityFactoryType,
+  isFlightAllocateEntityCall,
   isFlightCreateEntityCall,
+  isFlightFinishEntityCall,
   nativeUniqueSymbolKeyForCall,
   nativeUniqueSymbolKeyForExpression,
 } from '../analyze/entity-factory-call.ts';
@@ -1046,12 +1048,18 @@ function structuralReceiverType(node: ts.PropertyAccessExpression, context: Lowe
   }
   const fieldShape = (): IrType | undefined => {
     const declaration = property?.valueDeclaration ?? property?.declarations?.[0] ?? node;
-    const fieldType = lowerCheckerType(
-      checker.getTypeOfSymbolAtLocation(property, declaration),
-      node,
-      context,
-      new Set(),
-    );
+    const memberType = checker.getTypeOfSymbolAtLocation(property, declaration);
+    const fieldType = lowerCheckerType(memberType, node, context, new Set());
+    // A method whose overload set does not reduce to a single Haxe function type lowers to an empty
+    // anonymous `{}`, which cannot be called. Rather than cast the receiver to a struct carrying an
+    // uncallable member, bail so the access falls back to the portable runtime property path.
+    if (
+      fieldType?.kind === 'anonymous' &&
+      fieldType.fields.length === 0 &&
+      checker.getSignaturesOfType(checker.getNonNullableType(memberType), ts.SignatureKind.Call).length > 0
+    ) {
+      return undefined;
+    }
     return fieldType
       ? {
           extends: [],
@@ -2403,10 +2411,124 @@ function sourceDefinedPrivateTypeName(symbol: ts.Symbol | undefined, context: Lo
   );
   if (declarationPackageDirectory !== currentPackageDirectory) return undefined;
   const name = symbol?.getName();
-  const suffix = path
-    .basename(declaration.getSourceFile().fileName)
+  const suffix = normalizedBasename(declaration.getSourceFile().fileName);
+  return name && suffix ? `${name}__${suffix}` : undefined;
+}
+
+/**
+ * The deterministic per-source suffix that package modules append to a merged
+ * private (or non-canonical duplicate export) declaration. Cross-file
+ * references must reproduce it byte-for-byte so they land on the renamed
+ * declaration; keep this identical to namespacePrivateDeclarations and
+ * namespaceExportedDuplicateDeclarations.
+ */
+function normalizedBasename(fileName: string): string {
+  return path
+    .basename(fileName)
     .replace(/\.tsx?$/u, '')
     .replace(/[^A-Za-z0-9]/gu, '_');
+}
+
+/**
+ * The barrel-canonical source file for each exported value name of an upstream
+ * package, memoized per program. A package's public barrel (`src/contract.ts`,
+ * or `src/index.ts` when it is absent) binds each public name to exactly one
+ * source declaration through an explicit `export { name } from './file'` that
+ * shadows the `export *` wildcards. That winning declaration keeps the plain
+ * Haxe name when the package's files merge into one module, while every
+ * same-named export from another file is renamed by its source basename.
+ * Computing this map walks a whole module's exports, so it is cached: the inner
+ * map is packageDirectory -> (export name -> canonical source file name).
+ */
+const barrelCanonicalExportSources = new WeakMap<ts.Program, Map<string, Map<string, string>>>();
+
+function packageBarrelCanonicalExportSources(
+  packageDirectory: string,
+  context: LoweringContext,
+): Map<string, string> {
+  const program = context.program;
+  const checker = context.checker;
+  if (!program || !checker) return new Map();
+  let byPackage = barrelCanonicalExportSources.get(program);
+  if (!byPackage) {
+    byPackage = new Map();
+    barrelCanonicalExportSources.set(program, byPackage);
+  }
+  const cached = byPackage.get(packageDirectory);
+  if (cached) return cached;
+  const canonicalSources = new Map<string, string>();
+  const packageSource = path.join(context.workspaceDirectory, 'upstream', 'packages', packageDirectory, 'src');
+  const barrel =
+    program.getSourceFile(path.join(packageSource, 'contract.ts')) ??
+    program.getSourceFile(path.join(packageSource, 'index.ts'));
+  const moduleSymbol = barrel ? checker.getSymbolAtLocation(barrel) : undefined;
+  if (moduleSymbol) {
+    for (const exportSymbol of checker.getExportsOfModule(moduleSymbol)) {
+      const resolved =
+        (exportSymbol.flags & ts.SymbolFlags.Alias) !== 0 ? checker.getAliasedSymbol(exportSymbol) : exportSymbol;
+      const declaration = resolved.valueDeclaration ?? resolved.declarations?.[0];
+      if (declaration && !declaration.getSourceFile().isDeclarationFile && isExportedValueDeclaration(declaration)) {
+        // Key by the resolved declaration name (not the possibly-renamed public
+        // export name) so it matches the identity a reference resolves to.
+        canonicalSources.set(resolved.getName(), declaration.getSourceFile().fileName);
+      }
+    }
+  }
+  byPackage.set(packageDirectory, canonicalSources);
+  return canonicalSources;
+}
+
+/** An exported `function` or `const`/`let`/`var` declaration in an upstream source file. */
+function isExportedValueDeclaration(declaration: ts.Declaration): boolean {
+  if (ts.isFunctionDeclaration(declaration)) return hasModifier(declaration, ts.SyntaxKind.ExportKeyword);
+  if (ts.isVariableDeclaration(declaration)) {
+    const statement = declaration.parent.parent;
+    return ts.isVariableStatement(statement) && hasModifier(statement, ts.SyntaxKind.ExportKeyword);
+  }
+  return false;
+}
+
+/**
+ * The value-reference analog of sourceDefinedPrivateTypeName for exported
+ * duplicates. When two source files of a package each export a function or
+ * const of the same name, the merged package module keeps the barrel-canonical
+ * export under its plain name and renames every other same-named export by its
+ * source basename (see namespaceExportedDuplicateDeclarations in emit/core).
+ * A reference in a third file that imports the non-canonical ("loser") export
+ * would otherwise emit the plain name and silently bind to the canonical
+ * winner, so resolve it to the same `name__<basename>` the merge produced.
+ * Returns undefined for the canonical winner, types, locals, and any reference
+ * outside the declaration's own package.
+ */
+function sourceDefinedDuplicateExportName(
+  symbol: ts.Symbol | undefined,
+  context: LoweringContext,
+): string | undefined {
+  const checker = context.checker;
+  if (!symbol || !checker) return undefined;
+  const currentPackageDirectory = upstreamPackageSourceDirectory(context.sourceFile, context.workspaceDirectory);
+  if (!currentPackageDirectory) return undefined;
+  const resolved = (symbol.flags & ts.SymbolFlags.Alias) !== 0 ? checker.getAliasedSymbol(symbol) : symbol;
+  const declaration = resolved.valueDeclaration ?? resolved.declarations?.[0];
+  if (!declaration) return undefined;
+  const declarationSource = declaration.getSourceFile();
+  // Only a differently-sourced, non-declaration exported value in the same
+  // package can be a renamed duplicate; a same-file reference is already
+  // rewritten by the post-pass, and everything else keeps its plain name.
+  if (
+    declarationSource === context.sourceFile ||
+    declarationSource.isDeclarationFile ||
+    !isExportedValueDeclaration(declaration) ||
+    upstreamPackageSourceDirectory(declarationSource, context.workspaceDirectory) !== currentPackageDirectory
+  ) {
+    return undefined;
+  }
+  const name = resolved.getName();
+  const canonicalSource = packageBarrelCanonicalExportSources(currentPackageDirectory, context).get(name);
+  // No public binding for the name, or this declaration IS the canonical
+  // winner: keep the plain name so the public API and JS bridge stay intact.
+  if (!canonicalSource || canonicalSource === declarationSource.fileName) return undefined;
+  const suffix = normalizedBasename(declarationSource.fileName);
   return name && suffix ? `${name}__${suffix}` : undefined;
 }
 
@@ -4100,7 +4222,7 @@ function emptyEntityAllocator(construction: IrCppStructInitConstruction): IrExpr
     async: false,
     body: [],
     expression: {
-      cppStructInit: { ...construction, missingFieldNames: construction.fieldNames },
+      cppStructInit: { ...construction, entityRuntime: true, missingFieldNames: construction.fieldNames },
       kind: 'object',
       properties: [],
     },
@@ -4227,8 +4349,10 @@ function syntheticOmittedEntityFactoryArgument(
     !checker ||
     call.arguments.length !== 0 ||
     !ts.isIdentifier(call.expression) ||
-    call.expression.text !== 'createEntity' ||
-    !isFlightCreateEntityCall(call, checker)
+    !(
+      (call.expression.text === 'createEntity' && isFlightCreateEntityCall(call, checker)) ||
+      (call.expression.text === 'allocateEntity' && isFlightAllocateEntityCall(call, checker))
+    )
   ) {
     return undefined;
   }
@@ -4245,7 +4369,7 @@ function syntheticOmittedEntityFactoryArgument(
     const construction = registry?.resolveFactoryIdentityConstruction(destination.type);
     if (!construction) return undefined;
     return {
-      cppStructInit: { ...construction, missingFieldNames: construction.fieldNames },
+      cppStructInit: { ...construction, entityRuntime: true, missingFieldNames: construction.fieldNames },
       kind: 'object',
       properties: [],
     };
@@ -4280,7 +4404,10 @@ function syntheticOmittedEntityFactoryArgument(
   }
   const construction = addSyntheticEntityFactoryDeclaration(call, fields, context);
   return {
-    cppStructInit: fields.length > 0 ? { ...construction, missingFieldNames: construction.fieldNames } : construction,
+    cppStructInit:
+      fields.length > 0
+        ? { ...construction, entityRuntime: true, missingFieldNames: construction.fieldNames }
+        : { ...construction, entityRuntime: true },
     kind: 'object',
     properties: [],
   };
@@ -4657,6 +4784,38 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
     };
   }
   if (ts.isCallExpression(node)) {
+    if (context.checker) {
+      // `allocateEntity<T>()` opens an empty entity of T that the caller then fills field-by-field; lower
+      // it directly to a nominal construction of T (a fully-defaulted @:structInit) so the imperative
+      // `out.field = …` assignments that follow are ordinary typed field writes on a real T. When T is not
+      // a constructible named entity (bare Entity, an open generic) the synthesis returns undefined and we
+      // fall through to the emitted `allocateEntity` runtime helper.
+      if (isFlightAllocateEntityCall(node, context.checker)) {
+        // Inside a promoted entity factory (one a `create<Sub>` wrapper calls to obtain a differently
+        // typed result, e.g. createSurfaceMaterial -> createMaterial), the caller supplies the concrete
+        // allocation through the injected `__entityAllocator` parameter. Allocate through it so the value
+        // is the concrete subclass; otherwise the wrapper's `as Sub` upcast would be a base instance that
+        // nulls on hxcpp. When no allocator is in scope it defaults to this factory's own layout.
+        const promotedFactory = ts.findAncestor(node.parent, (ancestor): ancestor is ts.FunctionDeclaration =>
+          ts.isFunctionDeclaration(ancestor),
+        );
+        if (promotedFactory && promotedEntityFactoryDeclarations(context).has(promotedFactory)) {
+          return {
+            arguments: [],
+            callee: { kind: 'identifier', name: '__entityAllocator' },
+            kind: 'call',
+            optional: false,
+            typeArguments: [],
+          };
+        }
+        const construction = syntheticOmittedEntityFactoryArgument(node, context);
+        if (construction) return construction;
+      } else if (isFlightFinishEntityCall(node, context.checker) && node.arguments.length === 1) {
+        // `finishEntity(out)` only re-narrows the construction back to the entity type; the value is
+        // already the fully-built entity, so lower it to its argument.
+        return lowerExpression(node.arguments[0]!, context);
+      }
+    }
     const syntheticOmittedEntityArgument = syntheticOmittedEntityFactoryArgument(node, context);
     const variadic = variadicCallConvention(node, context);
     const callee = lowerExpression(node.expression, context);
@@ -5486,6 +5645,13 @@ function lowerIdentifier(node: ts.Identifier, context: LoweringContext, locallyB
       kind: 'call',
       typeArguments: [],
     };
+  }
+  // A cross-file reference to a non-canonical duplicate export must target the
+  // basename-suffixed name the package merge produced, not the plain name that
+  // now belongs to the barrel-canonical winner.
+  if (!locallyBound) {
+    const duplicateExportName = sourceDefinedDuplicateExportName(context.checker?.getSymbolAtLocation(node), context);
+    if (duplicateExportName) return { kind: 'identifier', name: duplicateExportName };
   }
   return { kind: 'identifier', name };
 }

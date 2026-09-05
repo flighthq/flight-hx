@@ -174,6 +174,7 @@ const webGl2Calls = [
   'disable',
   'disableVertexAttribArray',
   'drawArrays',
+  'drawArraysInstanced',
   'drawBuffers',
   'drawElements',
   'drawElementsInstanced',

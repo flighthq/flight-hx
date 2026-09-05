@@ -611,6 +611,13 @@ class WebGl2Backend {
     #if flight_gl_trace debugAfterDraw(gl); #end
   }
 
+  public static inline function drawArraysInstanced(gl:GlContext, mode:Float, first:Float, count:Float,
+      instanceCount:Float):Void {
+    #if flight_gl_trace glTrace('drawArraysInstanced(mode=' + Std.int(mode) + ', first=' + Std.int(first) + ', count=' + Std.int(count) + ', instances=' + Std.int(instanceCount) + ')'); #end
+    gl.drawArraysInstanced(Std.int(mode), Std.int(first), Std.int(count), Std.int(instanceCount));
+    #if flight_gl_trace debugAfterDraw(gl); #end
+  }
+
   public static inline function drawBuffers(gl:GlContext, buffers:GlIntList):Void {
     #if (lime && !js)
     gl.drawBuffers(nativeInts(buffers));

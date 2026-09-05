@@ -12,6 +12,7 @@ import {
   entityFactoryResolvedObjectFields,
   entityFactorySyntheticClassName,
   isParameterizedEntityFactoryType,
+  isFlightAllocateEntityCall,
   isFlightCreateEntityCall,
   type EntityFactoryDestinationRoute,
 } from './entity-factory-call.ts';
@@ -39,6 +40,7 @@ export type EntityFactoryBlocker =
   | 'unsupported-object-member';
 
 export type EntityFactoryNormalization =
+  | 'allocated-construction'
   | 'computed-symbol-key'
   | 'field-order'
   | 'forwarded-construction'
@@ -110,7 +112,10 @@ export function auditEntityFactoryClosure(
   const entityType = locateEntityType(workspaceDirectory, program, checker);
   const sites: EntityFactoryClosureSite[] = [];
   const visit = (node: ts.Node): void => {
-    if (ts.isCallExpression(node) && isFlightCreateEntityCall(node, checker)) {
+    if (
+      ts.isCallExpression(node) &&
+      (isFlightCreateEntityCall(node, checker) || isFlightAllocateEntityCall(node, checker))
+    ) {
       sites.push(auditFactorySite(workspaceDirectory, node, checker, program, registry, entityType));
     }
     ts.forEachChild(node, visit);
@@ -210,6 +215,13 @@ function auditFactorySite(
     schema !== undefined &&
     constructionFields?.some((field) => !schema.fields.some((schemaField) => schemaField.name === field));
   const parameterizedDestination = exact ? isParameterizedEntityFactoryType(exact.type, checker) : false;
+  // `allocateEntity<T>()` names its schema through the type argument and returns an empty entity the
+  // caller fills field-by-field (inline or via an `initialize<Name>` helper); the empty call itself is
+  // a complete, ready allocation of T. When T is an exact named entity we keep that named schema (no
+  // synthetic class, no missing-argument blocker) — the imperative assignments are ordinary field
+  // writes downstream.
+  const isAllocation = isFlightAllocateEntityCall(call, checker);
+  const allocatedNamedConstruction = isAllocation && destinationKind === 'exact-entity' && !parameterizedDestination;
   const forwardedAllocations = entityFactoryForwardedParameter(call, checker)
     ? forwardedEntityFactoryAllocations(call, checker, program, registry.excludedPackageDirectories)
     : undefined;
@@ -272,7 +284,8 @@ function auditFactorySite(
     }
   } else if (call.arguments.length === 0) {
     argument = { fields: [], kind: 'omitted' };
-    if (!localOmittedConstruction) blockers.push('omitted-construction');
+    if (allocatedNamedConstruction) normalizations.push('allocated-construction');
+    else if (!localOmittedConstruction) blockers.push('omitted-construction');
   } else if (localForwardedConstruction) {
     argument = { fields: [], kind: 'other' };
   } else {

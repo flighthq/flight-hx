@@ -43,7 +43,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free WebGL render-state runtime',
   },
   {
-    declarationFingerprint: 'sha256:aebdf41761931dac048956317e71e4924db4e1d756cdb71350a0c3395cbc6e8b',
+    declarationFingerprint: 'sha256:c5630e3d27bc0faafff7b2f4742b0a3b886fef05d8c9bde51f5152051677ef48',
     id: '@flighthq/types:interface#CanvasRenderTarget',
     purpose: 'reviewed escape-free Canvas render target',
   },
@@ -63,17 +63,17 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free render-target descriptor',
   },
   {
-    declarationFingerprint: 'sha256:e8e718c9a2fc110b9f33f3d8af52a03c9cd022c91939c2ac4a89d8bbec43bf81',
+    declarationFingerprint: 'sha256:168fe01f9241950b5e7585727fd71b520c5c1d6dd02d47a4900535b973dfae87',
     id: '@flighthq/types:interface#WgpuRenderTarget',
     purpose: 'reviewed escape-free WebGPU render target',
   },
   {
-    declarationFingerprint: 'sha256:25a70f58982f05188d38a15abf985c669e653dddf4bebfad31755210bff86a5b',
+    declarationFingerprint: 'sha256:6e7eab8abfe4dd89b536307fee94cb0b4537d1c56ac67eadd4af3676475bc85f',
     id: '@flighthq/types:interface#TextLayoutGroup',
     purpose: 'reviewed escape-free text-layout group',
   },
   {
-    declarationFingerprint: 'sha256:0775b68e5d326626f79c05fb51f2b81d734453706da315289b1c8772c0062d88',
+    declarationFingerprint: 'sha256:5789a9f4e46e1d43c6d18e8d1e328ea00b0fa66b89757a1cb1754d82fa29d0d2',
     id: '@flighthq/types:interface#TextLayoutResult',
     purpose: 'reviewed escape-free text-layout result',
   },
@@ -88,12 +88,12 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free rich text',
   },
   {
-    declarationFingerprint: 'sha256:048d186739d8bfe34b14f636cd57fb89116b401bab1347c3742749f04b2838be',
+    declarationFingerprint: 'sha256:aefd4a983837ab9d4e653c9420359d8b99bbe9515d957a61e992a37b984c3279',
     id: '@flighthq/types:interface#RichTextContent',
     purpose: 'reviewed escape-free rich-text content',
   },
   {
-    declarationFingerprint: 'sha256:55ee81118f0e45a43a3c48b30232417b99732ab1105927547fb55f44cdfe6c00',
+    declarationFingerprint: 'sha256:236b2fd4d6856107a2069c4ff6886ac4cacbb9fb3855f81847cc53c4c60d8848',
     id: '@flighthq/types:interface#Physics2DWorld',
     purpose: 'reviewed escape-free physics world',
   },
@@ -108,12 +108,12 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free physics solver config',
   },
   {
-    declarationFingerprint: 'sha256:c4157b990247a1cf3e358e8ddae5bef9ee4b2d0acebc1f3630e6e3594369951c',
+    declarationFingerprint: 'sha256:d0186c99555851176022cab14aaa2093cffb83868cf66f67eed39ae0f86e92c6',
     id: '@flighthq/types:interface#Physics2DCollider',
     purpose: 'reviewed escape-free physics collider',
   },
   {
-    declarationFingerprint: 'sha256:f73b90fe6168b429bc413bda84ebe794b96c7345e5da4ab65264c4241d9995b2',
+    declarationFingerprint: 'sha256:239d5bd7a469f5e125c3709c41dda9dcc4f4e4718b97e84a85e23e33f731c1fb',
     id: '@flighthq/types:interface#ClipRegion',
     purpose: 'reviewed escape-free clip region',
   },
@@ -133,7 +133,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free WebGPU render-effect context',
   },
   {
-    declarationFingerprint: 'sha256:22fd14cbeff906498e6edbd2d1b4bacab27556b1e3e49e1216933d2785fec45d',
+    declarationFingerprint: 'sha256:766487f4b88cf4ef058d9d7f258254278fd7e834f4a1014100b216e6deae2157',
     id: '@flighthq/types:interface#GlScene3DRuntime',
     purpose: 'reviewed escape-free WebGL scene runtime',
   },
@@ -173,7 +173,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free animation track',
   },
   {
-    declarationFingerprint: 'sha256:6903b4fa8a509237f7ff329abd18f797ff86f22fe5115266aa530240bdad1859',
+    declarationFingerprint: 'sha256:b1af3648a4eef16a13d6f1c355b1e6551dae8ea818df48f304ec7f5b865094d8',
     id: '@flighthq/types:interface#Tween',
     purpose: 'reviewed escape-free tween state',
   },
@@ -188,7 +188,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free animation player',
   },
   {
-    declarationFingerprint: 'sha256:aaf49d1e409fd3c60824a648cf8edd8e53ad11411923a0b5ab74c34be4da89a6',
+    declarationFingerprint: 'sha256:a6a870efc5bdcb320b8dcaea5b90e2f01c986c1c2936690ab25698da1d7af86d',
     id: '@flighthq/types:interface#Timeline',
     purpose: 'reviewed escape-free timeline state',
   },
@@ -213,7 +213,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free Rive file asset',
   },
   {
-    declarationFingerprint: 'sha256:c4246370c176d4205f5e869630515aeaf9affbf5d1a594c50a0c8d82e0d371d0',
+    declarationFingerprint: 'sha256:4cd52ff4547df9122d019730085b2e9817cd95b330d8e981ae520fa71ac94905',
     id: '@flighthq/types:interface#RiveDocumentImportResult',
     purpose: 'reviewed escape-free Rive document import result',
   },
@@ -288,7 +288,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free resolved render-target descriptor',
   },
   {
-    declarationFingerprint: 'sha256:23b508e780cb7961f22f26d996610340b3542df2d5804c493ad65292e48a3e68',
+    declarationFingerprint: 'sha256:c4dbef54b6ad0af0072c9da2484d31cf8b695886342a63e4d8618f66d0b67037',
     id: '@flighthq/types:interface#Scene3DRenderProxy',
     purpose: 'reviewed escape-free Scene3D render proxy',
   },
@@ -298,7 +298,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free 2D velocity',
   },
   {
-    declarationFingerprint: 'sha256:c0ed0a556d84d92379c5ceea6f10db4b92255b6633ea4e34a9d102483f40da61',
+    declarationFingerprint: 'sha256:d8ec258c3f3033bce4be662a07dd0e7fdc32947335548208c1deb55840fdcc78',
     id: '@flighthq/types:interface#CollisionTimeOfImpact2D',
     purpose: 'reviewed escape-free 2D collision time of impact after dimension-explicit upstream rename',
   },
@@ -308,12 +308,12 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free physics mass data',
   },
   {
-    declarationFingerprint: 'sha256:d6aeed28d689880b86690274be5bf1bbae4e6925518f467b381c0a3fb848ba57',
+    declarationFingerprint: 'sha256:55c6f79c3d878818184d3dfeb3bbc3ed998a45f145fd182d104f938d8d2979c8',
     id: '@flighthq/types:interface#CollisionManifold2D',
     purpose: 'reviewed escape-free 2D collision manifold after dimension-explicit upstream rename',
   },
   {
-    declarationFingerprint: 'sha256:70433e9e6573de517e1e3ff1ea8550a8fbcd0d69578f822f81a548ac128a2cc3',
+    declarationFingerprint: 'sha256:f76464b3cbaad52f5cbcb2d8b62d3b406fb9fcac8cfd8d1c387bacb8d66ca70a',
     id: '@flighthq/types:interface#CollisionContactManifold2D',
     purpose: 'reviewed escape-free 2D collision contact manifold after dimension-explicit upstream rename',
   },
@@ -383,7 +383,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free statechart',
   },
   {
-    declarationFingerprint: 'sha256:99282de81a9db1f080a9e203455b3ae137163ab87e2b608b70d3defc5949fa86',
+    declarationFingerprint: 'sha256:86ff4cb0adb201facc7612e2967fe38cbc1873166e0807794a5ad2ef17ad6f5f',
     id: '@flighthq/types:interface#StatechartInstance',
     purpose: 'reviewed escape-free statechart instance',
   },
@@ -423,7 +423,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free Scene3D hit',
   },
   {
-    declarationFingerprint: 'sha256:7e697ecfffc8e5104e3e0bc9d2257c08f1f4b162258e53df6c4201f24ee96223',
+    declarationFingerprint: 'sha256:2b2630c592008840f21d370cb5f93b87666a4a49b97dbea57762d3d1dc9936e8',
     id: '@flighthq/types:interface#CollisionRaycastHit2D',
     purpose: 'reviewed escape-free 2D collision raycast hit after dimension-explicit upstream rename',
   },
@@ -493,7 +493,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free morph-shape data',
   },
   {
-    declarationFingerprint: 'sha256:a10acf0108d1714db25e5cd6fb3fd0b81964716afd987ef044dd1fcd2333e459',
+    declarationFingerprint: 'sha256:7dc238829a005a696caf2b6e7edf267a0f4c42da821a3bf8f1186c1f16e1a328',
     id: '@flighthq/types:interface#GlMeshProgram',
     purpose: 'reviewed escape-free WebGL mesh program',
   },
@@ -558,12 +558,12 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free Canvas render-state runtime',
   },
   {
-    declarationFingerprint: 'sha256:ea1b2223d50df5b640545106804895714d12cb99a7838ab014ed2e3816d701a9',
+    declarationFingerprint: 'sha256:5dd6e8f973bbce054d8368d6911977ab70c4f5cc4aa87226848292df6af0aa12',
     id: '@flighthq/types:interface#GlRenderEffectPipeline',
     purpose: 'reviewed escape-free WebGL render-effect pipeline',
   },
   {
-    declarationFingerprint: 'sha256:a7039648e61c44e19af4213680f60efe61ad6452ffc0b16c420927d0116c0349',
+    declarationFingerprint: 'sha256:05550f7c026b006a4d12b9f4bf56fea7b682a25b0301c56b0493553b5c45e968',
     id: '@flighthq/types:interface#WgpuRenderEffectPipeline',
     purpose: 'reviewed escape-free WebGPU render-effect pipeline',
   },
@@ -618,12 +618,12 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free vertex-displacement modifier options',
   },
   {
-    declarationFingerprint: 'sha256:a54f58b205d53b959529e62ab802c89eab67ac85849468b97f99d2f06f71e5aa',
+    declarationFingerprint: 'sha256:3e2d5adb1179ecef188ac895b40fe2a1ef43d671d8351caf555587214dd3d6fb',
     id: '@flighthq/types:interface#InteractionManager',
     purpose: 'reviewed escape-free interaction manager',
   },
   {
-    declarationFingerprint: 'sha256:216dce6f67c2e578771f19028b5b6df661f640ecf89609634c0f5537d28f30e7',
+    declarationFingerprint: 'sha256:ddc084173b8ba19cfd8f9bacf5886d9ff11f051c2235ca69f738c511a4f29c32',
     id: '@flighthq/types:interface#InputState',
     purpose: 'reviewed escape-free input state',
   },
@@ -633,7 +633,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free pointer event data',
   },
   {
-    declarationFingerprint: 'sha256:c1566a9ef3f76a0a5845445ebb0ad24f240f195794ca401aff5832dc9ead917b',
+    declarationFingerprint: 'sha256:0d3b0562ca146e304734a44b21fee812fe6f54e26cc771ceb965f78d65d21bbf',
     id: '@flighthq/types:interface#NodeInteractionState',
     purpose: 'reviewed escape-free node interaction state',
   },
@@ -733,7 +733,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free socket runtime',
   },
   {
-    declarationFingerprint: 'sha256:ac6d71dd26dbaa9e99b676efee5645d01bc94b02da6199e93c5b674e43b77e92',
+    declarationFingerprint: 'sha256:34d9610273d6d5549f5251139cd3fa36c98c0cf3fe8ba346c354fe0eab3168b9',
     id: '@flighthq/types:interface#NodeOrderList',
     purpose: 'reviewed escape-free node order list',
   },
@@ -743,7 +743,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free packable rectangle',
   },
   {
-    declarationFingerprint: 'sha256:e6e95909db1bea0affe3369897e0632ad4f455db8211a678d4d881f01d456a9b',
+    declarationFingerprint: 'sha256:41bdc4f7aeb55168967ac6f037eafca8390201b47a79799e3c6658bc9fc38dd4',
     id: '@flighthq/types:interface#Clock',
     purpose: 'reviewed escape-free clock',
   },
@@ -783,7 +783,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free layout node',
   },
   {
-    declarationFingerprint: 'sha256:6221bdcad721b47767821e41a9d71f9e1d6766b425ec20a430f0ee643b761ab6',
+    declarationFingerprint: 'sha256:2af6758cfa60b955886a7f364bb7484c612b67817354432b5d3109781f144dea',
     id: '@flighthq/types:interface#Scene3DKindUsage',
     purpose: 'reviewed escape-free Scene3D kind usage',
   },
@@ -803,7 +803,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free WebGL lit program',
   },
   {
-    declarationFingerprint: 'sha256:7990b91753d362be27f86906395a45a7c19aae3b4001e7681dc88f6e8ca61d39',
+    declarationFingerprint: 'sha256:e6f051fb888f447dd64cfaafb7468f80001882c62493612c9cc9a6b9c57dc111',
     id: '@flighthq/types:interface#LayoutState',
     purpose: 'reviewed escape-free layout state',
   },
@@ -888,7 +888,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free spatial-indexing notice',
   },
   {
-    declarationFingerprint: 'sha256:7e7d78288f957c8b5498a6e851712cd492da91353a70049a43a65b9d5abf86ed',
+    declarationFingerprint: 'sha256:7876e650c536ec6dff8ebacf154832629bd706eab3a5ec13b303a59dda2d6ae2',
     id: '@flighthq/types:interface#Scene3DRenderList',
     purpose: 'reviewed escape-free Scene3D render list',
   },
@@ -898,7 +898,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free Scene2D kind usage',
   },
   {
-    declarationFingerprint: 'sha256:9ed90b466cc7a1b9394a8de4672a9f73333fe5c5379a26853f9d55533c9c0c5d',
+    declarationFingerprint: 'sha256:f948037e710792e688e6ceae9840880dadd57af89ad93dc943ed6ddf8c4eba89',
     id: '@flighthq/types:interface#MotionPath',
     purpose: 'reviewed escape-free motion path',
   },
@@ -933,7 +933,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free animation root-motion extractor',
   },
   {
-    declarationFingerprint: 'sha256:bccbdac026b10fed057b1fa96baa3cd24ad093dbb672ca4714c9f87985872894',
+    declarationFingerprint: 'sha256:394020aeb0da3c4fcffdbccca6e4114a8ac1f918c4bb2acf29ae07a3ac99198d',
     id: '@flighthq/types:interface#CanvasRenderTexturePool',
     purpose: 'reviewed escape-free Canvas render-texture pool',
   },
@@ -1018,12 +1018,12 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free animation blend tree',
   },
   {
-    declarationFingerprint: 'sha256:8a2e66fa93ab54d34cd36ee7491780879d7f4f726c841200a9a168247ce7152c',
+    declarationFingerprint: 'sha256:01a9fdb104258e3f918c030e9129a4c3fdaa07a6dac0d7072e6c735ad483cedc',
     id: '@flighthq/types:interface#WgpuRenderTexturePool',
     purpose: 'reviewed escape-free WebGPU render-texture pool',
   },
   {
-    declarationFingerprint: 'sha256:31cadf0a506da69f7c8df86f6b91bb4f048c2669d118cde2ce59c15187c99e12',
+    declarationFingerprint: 'sha256:dcbc93773033dd38eff6c4ac22f76ba91f386e33cf40389a8b39243e3b20b96a',
     id: '@flighthq/types:interface#GlRenderTexturePool',
     purpose: 'reviewed escape-free WebGL render-texture pool',
   },
@@ -1143,17 +1143,17 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free stroke style',
   },
   {
-    declarationFingerprint: 'sha256:b86755aef7f21cdbdf6fe0f9b1b5da2c48bbf6395e26a4466d9c7d69a153cfe6',
+    declarationFingerprint: 'sha256:b43a5f2c4f7428074ac562490a35971b7813aa6a07efddd3737c18408863589f',
     id: '@flighthq/types:interface#Socket',
     purpose: 'reviewed escape-free socket',
   },
   {
-    declarationFingerprint: 'sha256:1f8b276b48280ac169c1a2fd693088116385bea498fd8d80746091ed5a42729a',
+    declarationFingerprint: 'sha256:4b17372a5e6b8994b6dc3bee23221e0ee7e5466ed82fa8fb0087ef9dec634392',
     id: '@flighthq/types:interface#Physics2DDebugGeometry',
     purpose: 'reviewed escape-free physics debug geometry',
   },
   {
-    declarationFingerprint: 'sha256:796da4037514e9798f33666107ab84b3e7a4d1656e87ad4354d2508e6a10dd38',
+    declarationFingerprint: 'sha256:c07a872fe8a06c910ab923122fb0a349dd03e8d7616d851eeb38ca5d119f39b8',
     id: '@flighthq/types:interface#Modifier',
     purpose: 'reviewed escape-free modifier',
   },
@@ -1173,7 +1173,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free skeleton IK constraint',
   },
   {
-    declarationFingerprint: 'sha256:dcd5f590b1f242ab29d2afd97181bbc6e1cfeb173ca544ef716f2f321130ebd8',
+    declarationFingerprint: 'sha256:b00d0333872cd15ed1cb2e6d719f2d9a14b22a13e052de8b8f422459f73a4501',
     id: '@flighthq/types:interface#Physics2DRayResult',
     purpose: 'reviewed escape-free physics ray result',
   },
@@ -1208,7 +1208,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free flex item style',
   },
   {
-    declarationFingerprint: 'sha256:50b5f1e7cf212f956951395d3caf98ac9fefcaaf982b3bc77b182c1b6ae2ecde',
+    declarationFingerprint: 'sha256:d4bac82063fb9a3dfa0a1af279fdb09953c661b3f2aed5b2a408b2e4b189f281',
     id: '@flighthq/types:interface#BitmapFingerprint',
     purpose: 'reviewed escape-free bitmap fingerprint',
   },
@@ -1228,7 +1228,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free WebGPU shape mesh',
   },
   {
-    declarationFingerprint: 'sha256:b4d8b046bbaf156d910380ce47f8e5eb9bdcdfac78735a793394fc189153168d',
+    declarationFingerprint: 'sha256:fc319bd277c70f57ac702aa364f56b3f047e28e81cb18674ec1b5717c3331cf4',
     id: '@flighthq/types:interface#WgpuScene3DDrawEntry',
     purpose: 'reviewed escape-free WebGPU Scene3D draw entry',
   },
@@ -1238,7 +1238,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free vignette effect',
   },
   {
-    declarationFingerprint: 'sha256:f0f92129b058ee5f05cd9b1720f2d60db4a348e6e4db086f74a9ceb8718520af',
+    declarationFingerprint: 'sha256:93d25824dac3b29bdc86bd86c9e144bf31a3d8b53c78fd2adc64deb0645fcc30',
     id: '@flighthq/types:interface#CanvasRenderEffectPipeline',
     purpose: 'reviewed escape-free Canvas render-effect pipeline',
   },
@@ -1248,7 +1248,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free color-adjustment runtime',
   },
   {
-    declarationFingerprint: 'sha256:19afb18fb092b624bbd1cde411781b148a4786e8dc14bc25d8305755907b3f0c',
+    declarationFingerprint: 'sha256:30dbf16e6756a05ad333cf73cde94cf0b87d7498ae71458132ab4782c6468158',
     id: '@flighthq/types:interface#GlScene3DDrawEntry',
     purpose: 'reviewed escape-free WebGL Scene3D draw entry',
   },
@@ -1363,12 +1363,12 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free Scene3D forward-light selection',
   },
   {
-    declarationFingerprint: 'sha256:7236ded9f6ca6035d9481d6c2aca631ca977acd544e75373b5665c2db7fd3722',
+    declarationFingerprint: 'sha256:62693288d503d2f2b6e0f6a330fade8ce2b6baf6dc4fbae0009bac29f055e13a',
     id: '@flighthq/types:interface#CanvasRenderTargetPool',
     purpose: 'reviewed escape-free Canvas render-target pool',
   },
   {
-    declarationFingerprint: 'sha256:0d473d81ac14313acf8701b87b9845ba0b6598bffce370c9661c9a3a0d756df9',
+    declarationFingerprint: 'sha256:4dc3547a45887c59b7522b59d12e1dc7a7553f01961d7a3b391b39c411752e68',
     id: '@flighthq/types:interface#ColorLutCache',
     purpose: 'reviewed escape-free color LUT cache',
   },
@@ -1438,12 +1438,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free WebGPU texture-source entry',
   },
   {
-    declarationFingerprint: 'sha256:0def27f503d792f5c38b473b5e9fbcfc235b9945fc28b8b0a2b972ab472f6d4c',
-    id: '@flighthq/types:type#WgpuEffectPipeline',
-    purpose: 'reviewed escape-free WebGPU effect pipeline',
-  },
-  {
-    declarationFingerprint: 'sha256:5457497ed09b0fa23e64aa05dce5b60933f498139db0fc6470ba4f0e29804d8d',
+    declarationFingerprint: 'sha256:b7fd093aaba2e92afc0df308e8f97d44fa6f1d242170336e48f948d624265016',
     id: '@flighthq/types:interface#WgpuMeshPipeline',
     purpose: 'reviewed escape-free WebGPU mesh pipeline',
   },
@@ -1488,17 +1483,17 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free text-input history entry',
   },
   {
-    declarationFingerprint: 'sha256:9243635aa70272176f5cfbfa387824f2d148defb705b2d56775c35a40101d7bd',
+    declarationFingerprint: 'sha256:a230758fbdbe4fc4081de9ab81e8e05653c961c3be5685b605441c32c0790a51',
     id: '@flighthq/types:interface#FocusManager',
     purpose: 'reviewed escape-free focus manager',
   },
   {
-    declarationFingerprint: 'sha256:6d058addff5ee1865dc3b94841d6a732b6c5a31f6b9474f0cb5900253ceebf44',
+    declarationFingerprint: 'sha256:0069c132d9b6c6a4c2078cde8a6e5fb91ab3d8ae1f452d1ec1ec180a4954e244',
     id: '@flighthq/types:interface#SelectableRichTextManager',
     purpose: 'reviewed escape-free selectable rich-text manager',
   },
   {
-    declarationFingerprint: 'sha256:8cc504b6ffd314ebe6b2ee4b1fbaffd18de06d27d0633a503699869b5d8a3656',
+    declarationFingerprint: 'sha256:5fd7cb49cbce2003ceae81caef4dc847c4ac81db4b65c26297096f2c2acbc24d',
     id: '@flighthq/types:interface#TextInputManager',
     purpose: 'reviewed escape-free text-input manager',
   },
@@ -1653,7 +1648,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free wireframe material',
   },
   {
-    declarationFingerprint: 'sha256:3e145f4a7645c5e37bb6f4d5be12c006ea332396a6f233562d12006faa6dd9e0',
+    declarationFingerprint: 'sha256:43f66c5b0fec624fccfe29c2f5f05724818d664c8881c75ec0aa5d82cbffe8bf',
     id: '@flighthq/types:interface#FlowStack',
     purpose: 'reviewed escape-free flow stack',
   },
@@ -1678,7 +1673,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free timeline signals',
   },
   {
-    declarationFingerprint: 'sha256:705d00847da60afc2542ab08050acc46b9574d8b5be35d87aab6a6f3d9bfd8cb',
+    declarationFingerprint: 'sha256:97fa5de5d18a0cc73cdecd77bfb53c56a79a4a5a8e51b13fb37604554e4e3e1b',
     id: '@flighthq/types:interface#VelocityField',
     purpose: 'reviewed escape-free velocity field',
   },
@@ -1688,7 +1683,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free external-texture options',
   },
   {
-    declarationFingerprint: 'sha256:3ff8f98c70e258e788235d2d468ab190af55513ae4c7692f0bbf58b1b1de6803',
+    declarationFingerprint: 'sha256:227422be1bd51c4064a929d2fa7aa7008279dba22a6419e8ebfb4543acbd323e',
     id: '@flighthq/types:interface#RenderQueue',
     purpose: 'reviewed escape-free render queue',
   },
@@ -1698,7 +1693,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free quad-batch runtime',
   },
   {
-    declarationFingerprint: 'sha256:4f76b48f7affac57f2a933d877fbd5978b70bb09d2915f551425a9ce8ce1ac69',
+    declarationFingerprint: 'sha256:f772b0e0ead048cb41982200c3dad3009775086a8ef058f604930aff3685a4ee',
     id: '@flighthq/types:interface#Raster2DSurface',
     purpose: 'reviewed escape-free backend-neutral raster surface',
   },
@@ -1768,7 +1763,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free morph-shape path binding',
   },
   {
-    declarationFingerprint: 'sha256:fe1394427e35042ec6cc108bd2924960765e205372f08ad78f79be2edf26d287',
+    declarationFingerprint: 'sha256:5ef252e0c38383fef387f975ffd3679e0089b692a2e4d6c5743b1fba62b61754',
     id: '@flighthq/types:interface#MorphShapeAnimationTarget',
     purpose: 'reviewed escape-free morph-shape animation target',
   },
@@ -1778,12 +1773,12 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free SWF morph-shape paths',
   },
   {
-    declarationFingerprint: 'sha256:e5725966d9ef05f5946cb352fed09496a74c30c0931384dfe860330c0b994b4f',
+    declarationFingerprint: 'sha256:6aac46424c61a4f3a9fbaa82edffb975babcc12407c879a47a6d54ef8c446fa4',
     id: '@flighthq/types:interface#Physics3DWorld',
     purpose: 'reviewed escape-free Physics3D world',
   },
   {
-    declarationFingerprint: 'sha256:280e588114daf5dcd9e2597b4995772ffbf8cb4fecc34588b8f09d93669e2ca3',
+    declarationFingerprint: 'sha256:e8caf481441f38979b55e024587a3729058baa1601a900a19c191de260abe09a',
     id: '@flighthq/types:interface#Physics3DMassData',
     purpose: 'reviewed escape-free Physics3D mass data',
   },
@@ -1798,12 +1793,12 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free Physics3D slider joint',
   },
   {
-    declarationFingerprint: 'sha256:6d07842a2d670fb1682fd93b1839bfaa4fe0a59f9deb40eaf02e28f44c143c85',
+    declarationFingerprint: 'sha256:2320ca19f4344a49edcc752793f316c709f0e3c71e706c514052877b99ba92b4',
     id: '@flighthq/types:interface#Physics3DContactConstraint',
     purpose: 'reviewed escape-free Physics3D contact constraint',
   },
   {
-    declarationFingerprint: 'sha256:262ba078e6dc17f030e8b05484f7767f17eec8b6912054f110ba8e1c96ebc41a',
+    declarationFingerprint: 'sha256:8506838ab8060e0507427e1e0f7026b0c9667e2436cc4955ee7b15709ad12ce7',
     id: '@flighthq/types:interface#Physics3DContactConstraintPoint',
     purpose: 'reviewed escape-free Physics3D contact-constraint point',
   },
@@ -1863,7 +1858,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free scene coverage catalog registration',
   },
   {
-    declarationFingerprint: 'sha256:892e19dcdb6b8738da74754dfde8302f697b0f2a80e50e7ae89f82ca40b46abf',
+    declarationFingerprint: 'sha256:262dd110c3da256cc3b379a4e27a5cffb39cba900d50e9b04af9f65e4f687609',
     id: '@flighthq/types:interface#RegistryCatalog',
     purpose: 'reviewed escape-free registry catalog',
   },
@@ -1898,17 +1893,17 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free Physics3D sequential-impulse config',
   },
   {
-    declarationFingerprint: 'sha256:12a0644da563b2ee03d54d165a4f82450dc0c2c3f0b91efcf202796d89a86966',
+    declarationFingerprint: 'sha256:1799b5b55cf2756ac41cce2764df0e01e7c830c62edf31bd35865c070171bd5c',
     id: '@flighthq/types:interface#Physics3DAbiBodyBuffer',
     purpose: 'reviewed escape-free Physics3D ABI body buffer',
   },
   {
-    declarationFingerprint: 'sha256:344bf545e06f4e1231e04047048a038aa36ce6c322e2dcb7a7952c66f10b1476',
+    declarationFingerprint: 'sha256:d0b3a1f3da907b07f9659ede088f6325bc54693623ab241f0853ea421edecbf4',
     id: '@flighthq/types:interface#Physics3DAbiCommandBuffer',
     purpose: 'reviewed escape-free Physics3D ABI command buffer',
   },
   {
-    declarationFingerprint: 'sha256:8c8cfb7227ae63c538fd07f3e9812decc564d7e6a15be244c2e15578ebd43c4e',
+    declarationFingerprint: 'sha256:c6db38779fbb13c76e063635d469b9f96d98fa2608e43e7fb67307553f96f97c',
     id: '@flighthq/types:interface#Physics3DAbiContactBuffer',
     purpose: 'reviewed escape-free Physics3D ABI contact buffer',
   },
@@ -1918,17 +1913,17 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free Physics3D ABI contact hooks',
   },
   {
-    declarationFingerprint: 'sha256:e232874df593acd78d53e3976d1775517dc020564d8ee4cb42d2c27e4b4c4c36',
+    declarationFingerprint: 'sha256:96a1d22e37ef013d3c6dcb38547990d4ebd3878986a3f6311cacc11f33dad81b',
     id: '@flighthq/types:interface#Physics3DAbiExecutionResult',
     purpose: 'reviewed escape-free Physics3D ABI execution result',
   },
   {
-    declarationFingerprint: 'sha256:fd9990b1ea1d2d95da9a48ffe73617a18a78364b58f571f88d9e86bbaa225d61',
+    declarationFingerprint: 'sha256:f1f6e80e54e076566cba9628e5ca3d6e4e24156a364ced7ae4a2bd4c1d799e28',
     id: '@flighthq/types:interface#Physics3DAbiJointBuffer',
     purpose: 'reviewed escape-free Physics3D ABI joint buffer',
   },
   {
-    declarationFingerprint: 'sha256:821df23149ae8b3765a926b09e971b64583f169a123723d6d18539453b27ec00',
+    declarationFingerprint: 'sha256:42a6467ee59dd773445e10845df24bb60a73867bbfea2913782c8696a6881bdf',
     id: '@flighthq/types:interface#Physics3DAbiQueryBuffer',
     purpose: 'reviewed escape-free Physics3D ABI query buffer',
   },

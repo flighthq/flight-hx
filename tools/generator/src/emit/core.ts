@@ -39,6 +39,7 @@ import { sdkFacadeFunctionExtras, type FacadeFunctionExtra } from './facade-extr
 import {
   emitHaxeModule,
   resetStaticLoweringEmissionCounts,
+  safeName,
   setSelfShadowTypeModules,
   setShadowedTypeNames,
   staticLoweringEmissionCounts,
@@ -220,6 +221,13 @@ export function generateCoreModules(
     for (const source of item.lowered.sources) {
       source.declarations = source.declarations.filter((declaration) => retainedDeclarations.has(declaration));
     }
+  }
+  // Before each package's sources are merged into one implementation module, disambiguate exported
+  // free functions/values that collide across files in the same package (see the helper). Runs on
+  // the retained set so patched-out declarations are ignored, and mutates the shared declaration
+  // objects the sources also reference, so the rename reaches the merge below.
+  for (const item of loweredPackages) {
+    namespaceExportedDuplicateDeclarations(item.lowered, inventoryByName.get(item.packageName));
   }
   const modules = loweredPackages.flatMap((item) =>
     item.lowered.sources.flatMap((source) => buildSourceModules(item.packageName, source, workspaceDirectory)),
@@ -727,6 +735,58 @@ export function markCppStructInitInheritance(
       usedNames.add(name);
       return [{ fieldName: field.name, name, type: field.type }];
     });
+  }
+
+  // A field with an unsafe Haxe name (e.g. `operator`) forces its class to be emitted as a real class
+  // even on the js oracle build (a typedef cannot carry the `@:native` rename). Its base and siblings in
+  // the nominal hierarchy must then also be real classes on js, or an `extends` would target a typedef.
+  // Propagate the requirement across each connected hierarchy component (rooted at its topmost base).
+  const nominalRoot = (declaration: Extract<IrDeclaration, { kind: 'type' }>) => {
+    let current = declaration;
+    for (let base = baseByType.get(current); base; base = baseByType.get(current)) current = base;
+    return current;
+  };
+  const jsClassRoots = new Set<Extract<IrDeclaration, { kind: 'type' }>>();
+  for (const declaration of classTypes) {
+    if (
+      declaration.type.kind === 'anonymous' &&
+      declaration.type.fields.some((field) => safeName(field.name) !== field.name)
+    ) {
+      jsClassRoots.add(nominalRoot(declaration));
+    }
+  }
+  for (const declaration of classTypes) {
+    if (jsClassRoots.has(nominalRoot(declaration))) declaration.cppStructInitJsClass = true;
+  }
+
+  // A pure facet type extends an activated nominal entity and adds only phantom symbol-keyed markers
+  // (e.g. `TrayWithImage extends TrayIcon { [TrayImageFacetKey]: true }`), carrying no runtime data. Left
+  // as a structural typedef it is not assignable to its now-nominal base class; emit it instead as a plain
+  // alias to that base so facet-typed values interoperate with the base entity. A facet that adds any real
+  // (non-`__`-prefixed) data field is not collapsed.
+  for (const declaration of typeOwners.keys()) {
+    if (
+      classTypes.has(declaration) ||
+      declaration.type.kind !== 'anonymous' ||
+      declaration.typeParameters.length > 0 ||
+      (declaration.sourceExtends ?? []).length !== 1
+    ) {
+      continue;
+    }
+    const parents = namedParents(declaration);
+    const base = parents.length === 1 ? parents[0] : undefined;
+    if (!base || !classTypes.has(base) || base.type.kind !== 'anonymous') continue;
+    const baseFields = new Map(base.type.fields.map((field) => [field.name, field]));
+    // A field is genuinely "own" if the base lacks it OR the type refines it (same name, different
+    // type — e.g. RenderTexture narrows Texture2D.source from TextureSource to RenderTarget). A pure
+    // facet only adds phantom `__`-prefixed markers; any real or refined field disqualifies aliasing.
+    const ownFields = declaration.type.fields.filter((field) => {
+      const baseField = baseFields.get(field.name);
+      return !baseField || JSON.stringify(baseField.type) !== JSON.stringify(field.type);
+    });
+    if (ownFields.every((field) => field.name.startsWith('__'))) {
+      declaration.facetAliasTarget = declaration.sourceExtends![0];
+    }
   }
 
   for (const declaration of classTypes) {
@@ -3002,12 +3062,22 @@ function lowerFiles(
   return { declarations, diagnostics, hostTypes, sources };
 }
 
+// Normalized source-file basename used as the disambiguation suffix (`initializeBitmap` ->
+// `initializeBitmap__bitmapChannel`): drop the directory and `.ts`/`.tsx`, then reduce to a legal
+// Haxe identifier fragment. Shared so private and exported cross-file disambiguation agree byte for
+// byte on the suffix they produce.
+function normalizedSourceBasename(source: string): string {
+  return (
+    source
+      .split('/')
+      .at(-1)
+      ?.replace(/\.tsx?$/u, '')
+      .replace(/[^A-Za-z0-9]/gu, '_') ?? ''
+  );
+}
+
 function namespacePrivateDeclarations(declarations: IrDeclaration[]): void {
-  const suffix = declarations[0]?.origin.source
-    .split('/')
-    .at(-1)
-    ?.replace(/\.tsx?$/u, '')
-    .replace(/[^A-Za-z0-9]/gu, '_');
+  const suffix = declarations[0] ? normalizedSourceBasename(declarations[0].origin.source) : '';
   if (!suffix) return;
   const valueNames = new Map(
     declarations
@@ -3023,6 +3093,28 @@ function namespacePrivateDeclarations(declarations: IrDeclaration[]): void {
       )
       .map((declaration) => [declaration.name, `${declaration.name}__${suffix}`]),
   );
+  if (valueNames.size === 0 && typeNames.size === 0) return;
+  // Rename each private declaration's own name; the shared walker rewrites references to it below.
+  for (const declaration of declarations) {
+    if (!declaration.exported) {
+      const declarationNames = declaration.kind === 'type' ? typeNames : valueNames;
+      declaration.name = declarationNames.get(declaration.name) ?? declaration.name;
+    }
+  }
+  rewriteDeclarationReferences(declarations, valueNames, typeNames);
+}
+
+// Rewrites value-identifier references (via `valueNames`) and named-type references (via
+// `typeNames`) throughout the given declaration subtrees, shadow-guarding local bindings so a
+// parameter or local sharing a renamed name is left alone. Shared by the private
+// (namespacePrivateDeclarations) and exported (namespaceExportedDuplicateDeclarations) cross-file
+// disambiguation passes. It never touches a declaration's own `name` — callers rename declarations
+// themselves and pass the resulting maps here so references catch up.
+function rewriteDeclarationReferences(
+  declarations: ReadonlyArray<IrDeclaration>,
+  valueNames: ReadonlyMap<string, string>,
+  typeNames: ReadonlyMap<string, string>,
+): void {
   if (valueNames.size === 0 && typeNames.size === 0) return;
   let boundNames = new Set<string>();
   const collectBindings = (value: unknown): void => {
@@ -3249,10 +3341,6 @@ function namespacePrivateDeclarations(declarations: IrDeclaration[]): void {
     } else if (declaration.kind === 'variable' && declaration.initializer) {
       collectBindings(declaration.initializer);
     }
-    if (!declaration.exported) {
-      const declarationNames = declaration.kind === 'type' ? typeNames : valueNames;
-      declaration.name = declarationNames.get(declaration.name) ?? declaration.name;
-    }
     switch (declaration.kind) {
       case 'class':
         if (declaration.extends) type(declaration.extends);
@@ -3300,6 +3388,92 @@ function namespacePrivateDeclarations(declarations: IrDeclaration[]): void {
         type(declaration.type);
         break;
     }
+  }
+}
+
+// A package merges every source file's exported free functions/values into one Haxe implementation
+// module. Two different files in the same package can each `export function` with the same name
+// (e.g. `initializeBitmap` in bitmap.ts and bitmapChannel.ts); merged, both emit the plain name and
+// collide as a Haxe "Duplicate class field declaration". namespacePrivateDeclarations only
+// disambiguates NON-exported cross-file names, so exported collisions survive to the emitter. This
+// pass keeps the canonical, barrel-bound export on its plain name — that is the public, globally
+// searchable identifier the JS bridge and public facade resolve to, and it must not move — and
+// suffixes every other same-named exported declaration with `__<sourceBasename>`. References are
+// rewritten only inside the loser's own source file, because the duplicate implementations are
+// file-local and their callers live in that same file (the same assumption namespacePrivate-
+// Declarations makes). Idempotent: once a loser carries the suffix its name no longer groups with
+// the winner, so a re-run sees no duplicate and renames nothing.
+function namespaceExportedDuplicateDeclarations(
+  lowered: { declarations: IrDeclaration[] },
+  inventory: PackageInventory | undefined,
+): void {
+  // Value and type namespaces are independent (a value and a like-named type may legitimately
+  // coexist), so partition before grouping by emitted name.
+  const space = (declaration: IrDeclaration): 'type' | 'value' =>
+    declaration.kind === 'class' || declaration.kind === 'enum' || declaration.kind === 'type' ? 'type' : 'value';
+  const rootLane = inventory?.exportLanes.find((lane) => lane.entry === '.');
+  const laneExports = inventory?.exportLanes.flatMap((lane) => lane.exports) ?? [];
+  const publicSourceBasenames = new Set(laneExports.map((record) => path.basename(record.source)));
+  // True when a lane's runtime export binds to exactly this declaration's upstream identity.
+  const bindsDeclaration = (declaration: IrDeclaration, exports: ReadonlyArray<ExportRecord>): boolean =>
+    exports.some((record) => {
+      if (!record.runtime) return false;
+      const binding = runtimeExportBinding(record);
+      return binding.source === declaration.origin.source && binding.fingerprint === declaration.origin.fingerprint;
+    });
+  const groups = new Map<string, IrDeclaration[]>();
+  for (const declaration of lowered.declarations) {
+    if (!declaration.exported) continue;
+    const key = `${space(declaration)}:${declaration.name}`;
+    const group = groups.get(key) ?? [];
+    group.push(declaration);
+    groups.set(key, group);
+  }
+  // Batch renames per source file so each affected file's declarations are walked exactly once.
+  const renamesBySource = new Map<
+    string,
+    { source: string; type: Map<string, string>; value: Map<string, string> }
+  >();
+  for (const group of groups.values()) {
+    const distinctSources = new Set(group.map((declaration) => declaration.origin.source));
+    if (group.length < 2 || distinctSources.size < 2) continue;
+    // Deterministic order so winner selection and suffixing are reproducible across runs.
+    const ordered = [...group].sort((a, b) => a.origin.source.localeCompare(b.origin.source));
+    // Winner = the export the public barrel resolves to, else any lane; it keeps the plain name.
+    let winner = ordered.find((declaration) => bindsDeclaration(declaration, rootLane?.exports ?? []));
+    if (!winner) {
+      for (const lane of inventory?.exportLanes ?? []) {
+        winner = ordered.find((declaration) => bindsDeclaration(declaration, lane.exports));
+        if (winner) break;
+      }
+    }
+    // No lane binding (or a tie): prefer a source on a public lane, then the smallest source path.
+    winner ??= [...ordered].sort((a, b) => {
+      const aPublic = publicSourceBasenames.has(path.basename(a.origin.source));
+      const bPublic = publicSourceBasenames.has(path.basename(b.origin.source));
+      if (aPublic !== bPublic) return aPublic ? -1 : 1;
+      return a.origin.source.localeCompare(b.origin.source);
+    })[0];
+    for (const loser of ordered) {
+      if (loser === winner) continue;
+      const suffixed = `${loser.name}__${normalizedSourceBasename(loser.origin.source)}`;
+      const entry = renamesBySource.get(loser.origin.source) ?? {
+        source: loser.origin.source,
+        type: new Map<string, string>(),
+        value: new Map<string, string>(),
+      };
+      (space(loser) === 'type' ? entry.type : entry.value).set(loser.name, suffixed);
+      renamesBySource.set(loser.origin.source, entry);
+      loser.name = suffixed;
+    }
+  }
+  // Rewrite references file-locally: only the loser's own source declarations are walked, leaving
+  // the winner's file (holding the plain public name) and every other file untouched.
+  for (const entry of renamesBySource.values()) {
+    const fileDeclarations = lowered.declarations.filter(
+      (declaration) => declaration.origin.source === entry.source,
+    );
+    rewriteDeclarationReferences(fileDeclarations, entry.value, entry.type);
   }
 }
 

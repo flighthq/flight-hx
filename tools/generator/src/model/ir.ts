@@ -64,6 +64,10 @@ export interface IrHostTypeBinding {
 }
 
 export interface IrCppStructInitConstruction {
+  // Set for an allocateEntity<T>() opening: on the structural typedef representation the empty allocation
+  // must still carry the EntityRuntimeKey symbol slot (upstream's `out[EntityRuntimeKey] = undefined`),
+  // or `EntityRuntimeKey in value` checks fail. The nominal class path sets it in the constructor instead.
+  entityRuntime?: true | undefined;
   factoryAllocator?: true | undefined;
   fieldNames: string[];
   missingFieldNames?: string[] | undefined;
@@ -351,8 +355,17 @@ export interface IrTypeDeclaration {
   cppStructInitOwnFieldNames?: string[] | undefined;
   cppStructInitConstructorAllowModules?: string[] | undefined;
   cppStructInitNativeOnly?: true | undefined;
+  // Set when this class (or any class sharing its nominal hierarchy) carries a field whose Haxe name is
+  // unsafe (e.g. `operator`), forcing a real class — never a typedef — even on the js oracle build so the
+  // `@:native` rename survives and cross-class `extends` stays consistent across the whole chain.
+  cppStructInitJsClass?: true | undefined;
   cppStructInitLikeTarget?: IrType | undefined;
   cppStructInitSchemaId?: string | undefined;
+  // Set when a type is a pure facet of an activated nominal entity — it extends that entity and adds only
+  // phantom symbol-keyed markers (e.g. `TrayWithImage extends TrayIcon { [FacetKey]: true }`). Such a
+  // refinement carries no runtime data, so it is emitted as a plain alias to its entity base instead of a
+  // structural typedef, keeping facet values assignable to the nominal base class.
+  facetAliasTarget?: IrType | undefined;
   exported: boolean;
   kind: 'type';
   name: string;

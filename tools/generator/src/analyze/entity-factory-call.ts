@@ -30,13 +30,35 @@ const entityFactoryCallsByObject = new WeakMap<
   WeakMap<ts.SourceFile, WeakMap<ts.ObjectLiteralExpression, ts.CallExpression | false>>
 >();
 
-export function isFlightCreateEntityCall(node: ts.CallExpression, checker: ts.TypeChecker): boolean {
+// True when `node` calls the named export of the upstream entity construction module
+// (upstream/packages/entity/src/entity.ts). Flight's entity construction vocabulary lives entirely in
+// that one module: historically `createEntity`, and after the allocate/initialize/finish migration
+// `allocateEntity` and `finishEntity`.
+function isFlightEntityModuleCall(node: ts.CallExpression, checker: ts.TypeChecker, exportName: string): boolean {
   let symbol = checker.getSymbolAtLocation(node.expression);
   if (symbol && (symbol.flags & ts.SymbolFlags.Alias) !== 0) symbol = checker.getAliasedSymbol(symbol);
-  if (symbol?.getName() !== 'createEntity') return false;
+  if (symbol?.getName() !== exportName) return false;
   const declaration = symbol.valueDeclaration ?? symbol.declarations?.[0];
   const source = declaration?.getSourceFile().fileName.split(path.sep).join('/');
   return source?.endsWith('/upstream/packages/entity/src/entity.ts') === true;
+}
+
+// `allocateEntity<T>()` is the current entity construction site: it names the target schema T through
+// its type argument and returns an empty EntityConstruction<T> that the caller fills field-by-field
+// (inline or via an `initialize<Name>` helper) before `finishEntity` casts it back to T. It is treated
+// as an entity construction whose destination is that type argument.
+export function isFlightAllocateEntityCall(node: ts.CallExpression, checker: ts.TypeChecker): boolean {
+  return isFlightEntityModuleCall(node, checker, 'allocateEntity');
+}
+
+// `finishEntity(out)` closes an EntityConstruction, casting it back to the entity type. It carries no
+// construction shape of its own; the value it wraps is already the fully-built entity.
+export function isFlightFinishEntityCall(node: ts.CallExpression, checker: ts.TypeChecker): boolean {
+  return isFlightEntityModuleCall(node, checker, 'finishEntity');
+}
+
+export function isFlightCreateEntityCall(node: ts.CallExpression, checker: ts.TypeChecker): boolean {
+  return isFlightEntityModuleCall(node, checker, 'createEntity');
 }
 
 export function createEntityCallForObjectLiteral(
