@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._RenderWgpu)
+@:allow(flight._Scene2DWgpu)
 @:keep
 @:structInit
 class WgpuRenderRegistries {

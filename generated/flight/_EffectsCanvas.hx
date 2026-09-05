@@ -1286,7 +1286,7 @@ class _EffectsCanvas {
   @:keep
   private static function initializeCanvasRenderEffectPipeline(out:EntityConstruction<CanvasRenderEffectPipeline>, state:CanvasRenderState, ?options:RenderEffectPipelineOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
-    _Runtime.setField(out, 'options', _Runtime.mergeObjects([options]));
+    _Runtime.setField(out, 'options', (#if flight_struct_typedef _Runtime.mergeObjects([options]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([options]); ({ depth: _Runtime.field(__structInitSource, 'depth'), format: _Runtime.field(__structInitSource, 'format'), sampleCount: _Runtime.field(__structInitSource, 'sampleCount') } : RenderEffectPipelineOptions); }) #end));
     _Runtime.setField(out, 'sceneTarget', null);
     _Runtime.setField(out, 'pool', (cast createCanvasRenderTargetPool((cast (cast state : CanvasRenderState).surface : CanvasRenderSurface).creator) : CanvasRenderTargetPool));
     _Runtime.setField(out, 'lutCache', (cast createColorLutCache() : ColorLutCache));

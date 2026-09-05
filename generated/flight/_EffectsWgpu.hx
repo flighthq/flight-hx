@@ -2804,7 +2804,7 @@ class _EffectsWgpu {
     if ((cast !_Runtime.strictEquals(requestedSampleCount, appliedSampleCount) : Bool)) {
       _Runtime.callOptionalValue(((cast _EffectsWgpu._sampleCountGuards__wgpuRenderEffectPipeline : flight._internal._WeakMap<WgpuRenderState, WgpuRenderEffectPipelineSampleCountGuard>).get((cast state))), cast ([state, requestedSampleCount, appliedSampleCount] : Array<Dynamic>));
     }
-    _Runtime.setField(out, 'options', _Runtime.mergeObjects([options, { sampleCount: appliedSampleCount }]));
+    _Runtime.setField(out, 'options', (#if flight_struct_typedef _Runtime.mergeObjects([options, { sampleCount: appliedSampleCount }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([options, { sampleCount: appliedSampleCount }]); ({ depth: _Runtime.field(__structInitSource, 'depth'), format: _Runtime.field(__structInitSource, 'format'), sampleCount: _Runtime.field(__structInitSource, 'sampleCount') } : RenderEffectPipelineOptions); }) #end));
     _Runtime.setField(out, 'sceneTarget', null);
     _Runtime.setField(out, 'pool', (cast createWgpuRenderTargetPool() : WgpuRenderTargetPool));
     _Runtime.setField(out, 'lutCache', (cast createColorLutCache() : ColorLutCache));

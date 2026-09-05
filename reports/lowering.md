@@ -13,7 +13,7 @@
 | Proven Boolean logical expressions | 6369 |
 | Proven numeric relations | 7966 |
 | Direct Boolean truthiness uses | 17798 |
-| Direct Boolean conditional expressions | 3591 |
+| Direct Boolean conditional expressions | 3593 |
 | Direct Boolean `&&` expressions | 2849 |
 | Direct Boolean `\|\|` expressions | 3495 |
 | Direct numeric relations | 7956 |
@@ -21,7 +21,7 @@
 | Proven indexed reads | 9285 |
 | Proven indexed writes | 4508 |
 | Parked width-sensitive mixed indexed writes | 19 |
-| Direct indexed reads | 9789 |
+| Direct indexed reads | 9866 |
 | Direct indexed writes | 4503 |
 | Guarded in-bounds async-flow for-of Array reads | 21 |
 | Guarded in-bounds async-flow for-in key reads | 0 |
@@ -37,7 +37,7 @@
 
 | Indexed receiver | Proven expressions | Proven reads | Proven writes | Direct reads | Direct writes |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| `Array` | 7746 | 6337 | 1473 | 6841 | 1473 |
+| `Array` | 7746 | 6337 | 1473 | 6918 | 1473 |
 | `ArrayOrFloat32Array` | 58 | 13 | 45 | 15 | 45 |
 | `Float32Array` | 3876 | 1805 | 2143 | 1805 | 2143 |
 | `Float64Array` | 396 | 178 | 228 | 178 | 228 |

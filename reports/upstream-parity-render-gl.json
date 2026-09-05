@@ -1,12 +1,12 @@
 {
-  "completedAt": "2026-09-05T07:26:26.935Z",
+  "completedAt": "2026-09-05T15:06:08.217Z",
   "failedPackages": 0,
   "fixedSinceReview": 0,
   "infrastructureFailures": 0,
   "jobs": 3,
   "packages": [
     {
-      "durationMs": 67106,
+      "durationMs": 65621,
       "exitCode": 0,
       "isolationRecovered": false,
       "package": "render-gl",
@@ -15,8 +15,8 @@
       "summary": "453 passed (453)",
       "testFiles": 32,
       "review": {
-        "baselineReport": "reports/upstream-parity.json",
-        "reviewedAt": "2026-08-21T03:43:35.613Z",
+        "baselineReport": "reports/upstream-parity-render-gl.json",
+        "reviewedAt": "2026-09-05T07:26:26.935Z",
         "status": "passed",
         "unreviewedFailures": 0
       }
@@ -25,7 +25,7 @@
   "reviewedFailures": 0,
   "schemaVersion": 2,
   "selectedPackage": "render-gl",
-  "startedAt": "2026-09-05T07:25:19.222Z",
+  "startedAt": "2026-09-05T15:05:01.894Z",
   "strict": false,
   "unreviewedFailures": 0
 }

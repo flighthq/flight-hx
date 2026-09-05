@@ -129,12 +129,12 @@ class _Dialog {
   }
 
   public static function showErrorDialog(host:HasDialogMessage, options:MessageDialogOptions):flight._internal._Promise<MessageDialogResult> {
-    return cast (cast (cast (cast host : HasDialogMessage).dialog : { var message:MessageDialogBackend; }).message : MessageDialogBackend).message(({ final __callArgument9:Dynamic = _Runtime.mergeObjects([options, { kind: 'error' }]); __callArgument9; }));
+    return cast (cast (cast (cast host : HasDialogMessage).dialog : { var message:MessageDialogBackend; }).message : MessageDialogBackend).message(({ final __callArgument9:Dynamic = (#if flight_struct_typedef _Runtime.mergeObjects([options, { kind: 'error' }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([options, { kind: 'error' }]); ({ buttons: _Runtime.field(__structInitSource, 'buttons'), cancelId: _Runtime.field(__structInitSource, 'cancelId'), checkboxChecked: _Runtime.field(__structInitSource, 'checkboxChecked'), checkboxLabel: _Runtime.field(__structInitSource, 'checkboxLabel'), defaultId: _Runtime.field(__structInitSource, 'defaultId'), detail: _Runtime.field(__structInitSource, 'detail'), kind: _Runtime.field(__structInitSource, 'kind'), message: _Runtime.field(__structInitSource, 'message'), parentWindow: _Runtime.field(__structInitSource, 'parentWindow'), signal: _Runtime.field(__structInitSource, 'signal'), title: _Runtime.field(__structInitSource, 'title') } : MessageDialogOptions); }) #end); __callArgument9; }));
     return cast null;
   }
 
   public static function showInfoDialog(host:HasDialogMessage, options:MessageDialogOptions):flight._internal._Promise<MessageDialogResult> {
-    return cast (cast (cast (cast host : HasDialogMessage).dialog : { var message:MessageDialogBackend; }).message : MessageDialogBackend).message(({ final __callArgument10:Dynamic = _Runtime.mergeObjects([options, { kind: 'info' }]); __callArgument10; }));
+    return cast (cast (cast (cast host : HasDialogMessage).dialog : { var message:MessageDialogBackend; }).message : MessageDialogBackend).message(({ final __callArgument10:Dynamic = (#if flight_struct_typedef _Runtime.mergeObjects([options, { kind: 'info' }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([options, { kind: 'info' }]); ({ buttons: _Runtime.field(__structInitSource, 'buttons'), cancelId: _Runtime.field(__structInitSource, 'cancelId'), checkboxChecked: _Runtime.field(__structInitSource, 'checkboxChecked'), checkboxLabel: _Runtime.field(__structInitSource, 'checkboxLabel'), defaultId: _Runtime.field(__structInitSource, 'defaultId'), detail: _Runtime.field(__structInitSource, 'detail'), kind: _Runtime.field(__structInitSource, 'kind'), message: _Runtime.field(__structInitSource, 'message'), parentWindow: _Runtime.field(__structInitSource, 'parentWindow'), signal: _Runtime.field(__structInitSource, 'signal'), title: _Runtime.field(__structInitSource, 'title') } : MessageDialogOptions); }) #end); __callArgument10; }));
     return cast null;
   }
 
@@ -149,7 +149,7 @@ class _Dialog {
   }
 
   public static function showWarningDialog(host:HasDialogMessage, options:MessageDialogOptions):flight._internal._Promise<MessageDialogResult> {
-    return cast (cast (cast (cast host : HasDialogMessage).dialog : { var message:MessageDialogBackend; }).message : MessageDialogBackend).message(({ final __callArgument13:Dynamic = _Runtime.mergeObjects([options, { kind: 'warning' }]); __callArgument13; }));
+    return cast (cast (cast (cast host : HasDialogMessage).dialog : { var message:MessageDialogBackend; }).message : MessageDialogBackend).message(({ final __callArgument13:Dynamic = (#if flight_struct_typedef _Runtime.mergeObjects([options, { kind: 'warning' }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([options, { kind: 'warning' }]); ({ buttons: _Runtime.field(__structInitSource, 'buttons'), cancelId: _Runtime.field(__structInitSource, 'cancelId'), checkboxChecked: _Runtime.field(__structInitSource, 'checkboxChecked'), checkboxLabel: _Runtime.field(__structInitSource, 'checkboxLabel'), defaultId: _Runtime.field(__structInitSource, 'defaultId'), detail: _Runtime.field(__structInitSource, 'detail'), kind: _Runtime.field(__structInitSource, 'kind'), message: _Runtime.field(__structInitSource, 'message'), parentWindow: _Runtime.field(__structInitSource, 'parentWindow'), signal: _Runtime.field(__structInitSource, 'signal'), title: _Runtime.field(__structInitSource, 'title') } : MessageDialogOptions); }) #end); __callArgument13; }));
     return cast null;
   }
 

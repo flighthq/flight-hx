@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._RenderGl)
+@:allow(flight._Scene2DGl)
 @:keep
 @:structInit
 class GlRenderRegistries {

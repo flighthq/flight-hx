@@ -3667,7 +3667,7 @@
     "packages": 159,
     "staticEmission": {
       "booleanAndExpressions": 2849,
-      "booleanConditionalExpressions": 3591,
+      "booleanConditionalExpressions": 3593,
       "booleanOrExpressions": 3495,
       "booleanTruthinessUses": 17798,
       "destructuringEscapes": {
@@ -3766,12 +3766,12 @@
         "asyncFlowForOfValues": 21
       },
       "indexedAccesses": {
-        "reads": 9789,
+        "reads": 9866,
         "writes": 4503
       },
       "indexedReceivers": {
         "Array": {
-          "reads": 6841,
+          "reads": 6918,
           "writes": 1473
         },
         "ArrayOrFloat32Array": {
