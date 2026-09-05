@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuRenderEffectContext = { var state:WgpuRenderState; var source:WgpuRenderTarget; var dest:WgpuRenderTarget; var pool:WgpuRenderTargetPool; var sceneDepthTexture:Null<flight._internal.dom.GPUTexture>; var sceneVelocityTexture:Null<flight._internal.dom.GPUTexture>; };
+typedef WgpuRenderEffectContext = { var state:WgpuRenderState; var source:WgpuRenderTarget; var dest:WgpuRenderTarget; var pool:WgpuRenderTargetPool; var sceneDepthTexture(default, never):Null<flight._internal.dom.GPUTexture>; var sceneVelocityTexture(default, never):Null<flight._internal.dom.GPUTexture>; };

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SpatialIndexingNotice = { var cellSize:Float; var id:SpatialObjectId; var mode:SpatialIndexingMode; var operation:SpatialIndexingOperation; var wouldOccupyBucketCount:Float; var reason:Null<SpatialIndexingReason>; };
+typedef SpatialIndexingNotice = { var cellSize:Float; var id:SpatialObjectId; var mode:SpatialIndexingMode; var operation:SpatialIndexingOperation; var wouldOccupyBucketCount:Float; var reason(default, never):Null<SpatialIndexingReason>; };

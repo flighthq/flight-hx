@@ -13,6 +13,7 @@ export const drawWgpuMeshSubset = api.drawWgpuMeshSubset;
 export const ensureWgpuFrameBindGroup = api.ensureWgpuFrameBindGroup;
 export const ensureWgpuIblSampleBindGroup = api.ensureWgpuIblSampleBindGroup;
 export const ensureWgpuIblSampleLayout = api.ensureWgpuIblSampleLayout;
+export const ensureWgpuInstanceBuffer = api.ensureWgpuInstanceBuffer;
 export const ensureWgpuMaterialBinding = api.ensureWgpuMaterialBinding;
 export const ensureWgpuPbrSampleBindGroup = api.ensureWgpuPbrSampleBindGroup;
 export const ensureWgpuPbrSampleLayout = api.ensureWgpuPbrSampleLayout;

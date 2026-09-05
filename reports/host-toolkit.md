@@ -1,6 +1,6 @@
 # Host Toolkit Dependency Audit
 
-Upstream commit: `419e5c925b366b5053ed7711ce371eee89dc31e7`
+Upstream commit: `32a089f1342d08547fc2359dfd5e8fe9f7e3c12e`
 
 Generated code owns checker-known source types and stable lookup keys. Maintained source owns the declarations, target values, and adapters behind those keys. Generation fails when a referenced key has no declared toolkit provider; Dynamic compatibility declarations remain visible as toolkit debt rather than changing the generated type or member expression.
 
@@ -13,7 +13,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | Portable global value keys | 35 |
 | JavaScript-only global value keys | 37 |
 | Module value keys | 0 |
-| Type uses | 9240 |
+| Type uses | 9242 |
 | Value uses | 2134 |
 | Missing toolkit entries | 0 |
 
@@ -99,7 +99,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:GPUBlendFactor` | `host` | `flight._internal.dom.GPUBlendFactor` | `src/flight/_internal/dom/GPUBlendFactor.hx` | `dynamic-stub` | 2 |
 | `host:GPUBlendOperation` | `host` | `flight._internal.dom.GPUBlendOperation` | `src/flight/_internal/dom/GPUBlendOperation.hx` | `dynamic-stub` | 1 |
 | `host:GPUBlendState` | `host` | `flight._internal.dom.GPUBlendState` | `src/flight/_internal/dom/GPUBlendState.hx` | `dynamic-stub` | 69 |
-| `host:GPUBuffer` | `host` | `flight._internal.dom.GPUBuffer` | `src/flight/_internal/dom/GPUBuffer.hx` | `dynamic-stub` | 311 |
+| `host:GPUBuffer` | `host` | `flight._internal.dom.GPUBuffer` | `src/flight/_internal/dom/GPUBuffer.hx` | `dynamic-stub` | 312 |
 | `host:GPUBufferBinding` | `host` | `flight._internal.dom.GPUBufferBinding` | `src/flight/_internal/dom/GPUBufferBinding.hx` | `dynamic-stub` | 11 |
 | `host:GPUBufferDescriptor` | `host` | `flight._internal.dom.GPUBufferDescriptor` | `src/flight/_internal/dom/GPUBufferDescriptor.hx` | `typed` | 8 |
 | `host:GPUBufferUsage` | `host` | `flight._internal.dom.GPUBufferUsage` | `src/flight/_internal/dom/GPUBufferUsage.hx` | `dynamic-stub` | 73 |
@@ -131,7 +131,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:GPUPowerPreference` | `host` | `flight._internal.dom.GPUPowerPreference` | `src/flight/_internal/dom/GPUPowerPreference.hx` | `dynamic-stub` | 1 |
 | `host:GPUPrimitiveTopology` | `host` | `flight._internal.dom.GPUPrimitiveTopology` | `src/flight/_internal/dom/GPUPrimitiveTopology.hx` | `dynamic-stub` | 2 |
 | `host:GPUQueue` | `host` | `flight._internal.dom.GPUQueue` | `src/flight/_internal/dom/GPUQueue.hx` | `dynamic-stub` | 89 |
-| `host:GPURenderPassEncoder` | `host` | `flight._internal.dom.GPURenderPassEncoder` | `src/flight/_internal/dom/GPURenderPassEncoder.hx` | `dynamic-stub` | 277 |
+| `host:GPURenderPassEncoder` | `host` | `flight._internal.dom.GPURenderPassEncoder` | `src/flight/_internal/dom/GPURenderPassEncoder.hx` | `dynamic-stub` | 278 |
 | `host:GPURenderPipeline` | `host` | `flight._internal.dom.GPURenderPipeline` | `src/flight/_internal/dom/GPURenderPipeline.hx` | `dynamic-stub` | 113 |
 | `host:GPURenderPipelineDescriptor` | `host` | `flight._internal.dom.GPURenderPipelineDescriptor` | `src/flight/_internal/dom/GPURenderPipelineDescriptor.hx` | `dynamic-stub` | 8 |
 | `host:GPUSampler` | `host` | `flight._internal.dom.GPUSampler` | `src/flight/_internal/dom/GPUSampler.hx` | `dynamic-stub` | 236 |

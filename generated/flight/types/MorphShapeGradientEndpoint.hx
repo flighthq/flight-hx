@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MorphShapeGradientEndpoint = { var alphas:Array<Float>; var colors:Array<Float>; @:optional var focalPointRatio:Float; @:optional var matrix:Null<Matrix>; var ratios:Array<Float>; };
+typedef MorphShapeGradientEndpoint = { var alphas:Array<Float>; var colors:Array<Float>; @:optional var focalPointRatio:Float; @:optional var matrix(default, never):Null<Matrix>; var ratios:Array<Float>; };

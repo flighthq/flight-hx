@@ -2611,7 +2611,7 @@ class _Scene3DWgpu {
     (cast pass : flight._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, upload.vertexBuffer);
     hasInstances = ((cast ((cast ((cast !_Runtime.strictEquals(proxy.instanceMatrices, null) : Bool) && (cast !_Runtime.strictEquals(proxy.instanceMatrices, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) && (cast !_Runtime.strictEquals(proxy.instanceCount, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) && (cast ((cast proxy.instanceCount : Float) > (cast 0.0 : Float)) : Bool));
     instanceCount = ((cast hasInstances : Bool) ? (cast proxy.instanceCount : Dynamic) : (cast 1.0 : Dynamic));
-    (cast pass : flight._internal.dom.GPURenderPassEncoder).setVertexBuffer(1.0, (cast _Scene3DWgpu.ensureWgpuInstanceBuffer__wgpuMeshPipeline(({ final __callArgument1222:Dynamic = state; __callArgument1222; }), ((cast hasInstances : Bool) ? (cast proxy.instanceMatrices : Dynamic) : (cast null : Dynamic)), (cast instanceCount : Float)) : flight._internal.dom.GPUBuffer));
+    (cast pass : flight._internal.dom.GPURenderPassEncoder).setVertexBuffer(1.0, (cast ensureWgpuInstanceBuffer(({ final __callArgument1222:Dynamic = state; __callArgument1222; }), ((cast hasInstances : Bool) ? (cast proxy.instanceMatrices : Dynamic) : (cast null : Dynamic)), (cast instanceCount : Float)) : flight._internal.dom.GPUBuffer));
     if ((cast _Runtime.strictEquals(upload.indexBuffer, null) : Bool)) {
       (cast pass : flight._internal.dom.GPURenderPassEncoder).draw(subset.indexCount, instanceCount, subset.indexOffset, 0.0);
     } else {
@@ -2646,24 +2646,6 @@ class _Scene3DWgpu {
 
   public static final FRAME_POINT_OFFSET__wgpuMeshPipeline:Float = 48.0;
 
-  public static function ensureWgpuInstanceBuffer__wgpuMeshPipeline(state:WgpuRenderState, matrices:Null<flight._internal._Float32Array>, instanceCount:Float):flight._internal.dom.GPUBuffer {
-    var source:flight._internal._Float32Array = cast _Runtime.UNDEFINED;
-    var required:Float = cast _Runtime.UNDEFINED;
-    var cached:Null<{ var buffer:flight._internal.dom.GPUBuffer; var capacity:Float; }> = cast _Runtime.UNDEFINED;
-    source = ((cast ((cast !_Runtime.strictEquals(matrices, null) : Bool) && (cast !_Runtime.strictEquals(matrices, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast matrices : Dynamic) : (cast _Scene3DWgpu.identityInstance__wgpuMeshPipeline : Dynamic));
-    required = _Runtime.multiplyNumbers(HxMath.max(1.0, instanceCount), 64.0);
-    cached = ((cast _Scene3DWgpu.instanceBuffers__wgpuMeshPipeline : flight._internal._WeakMap<WgpuRenderState, { var buffer:flight._internal.dom.GPUBuffer; var capacity:Float; }>).get((cast state)));
-    if ((cast ((cast _Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast (cast cached : { var buffer:flight._internal.dom.GPUBuffer; var capacity:Float; }).capacity : Float) < (cast required : Float)) : Bool)) : Bool)) {
-      ({ final __hostTypeCall1231 = ({ final __structural1230 = cached; __structural1230 == null ? _Runtime.UNDEFINED : (cast __structural1230 : { var buffer:flight._internal.dom.GPUBuffer; }).buffer; }); __hostTypeCall1231 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall1231 : flight._internal.dom.GPUBuffer).destroy(); });
-      var capacity:Float = HxMath.max(required, (64.0 * 64.0));
-      (cached = cast ({ buffer: flight._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBuffer', cast ([{ size: capacity, usage: (_Runtime.toInt32(flight._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'VERTEX')) | _Runtime.toInt32(flight._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>)), capacity: capacity } : Dynamic));
-      ((cast _Scene3DWgpu.instanceBuffers__wgpuMeshPipeline : flight._internal._WeakMap<WgpuRenderState, { var buffer:flight._internal.dom.GPUBuffer; var capacity:Float; }>).set((cast state), (cast cached)));
-    }
-    flight._internal.backend.WebGpuQueueBackend.call(flight._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([(cast cached : { var buffer:flight._internal.dom.GPUBuffer; var capacity:Float; }).buffer, 0.0, _Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), required] : Array<Dynamic>));
-    return cast (cast cached : { var buffer:flight._internal.dom.GPUBuffer; var capacity:Float; }).buffer;
-    return cast null;
-  }
-
   @:allow(flight)
   @:keep
   private static function ensureWgpuIblSampleBindGroup(state:WgpuRenderState):flight._internal.dom.GPUBindGroup {
@@ -2674,7 +2656,7 @@ class _Scene3DWgpu {
     var irradianceView:flight._internal.dom.GPUTextureView = cast _Runtime.UNDEFINED;
     var prefilteredView:flight._internal.dom.GPUTextureView = cast _Runtime.UNDEFINED;
     var brdfView:flight._internal.dom.GPUTextureView = cast _Runtime.UNDEFINED;
-    scene = (cast getWgpuScene3DRuntime(({ final __callArgument1232:Dynamic = state; __callArgument1232; })) : WgpuScene3DRuntime);
+    scene = (cast getWgpuScene3DRuntime(({ final __callArgument1228:Dynamic = state; __callArgument1228; })) : WgpuScene3DRuntime);
     device = (cast state : WgpuRenderState).device;
     if ((cast _Runtime.strictEquals(scene.iblUniformBuffer, null) : Bool)) {
       (scene.iblUniformBuffer = cast (flight._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: _Scene3DWgpu.IBL_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline, usage: (_Runtime.toInt32(flight._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | _Runtime.toInt32(flight._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>)) : Null<flight._internal.dom.GPUBuffer>));
@@ -2705,7 +2687,7 @@ class _Scene3DWgpu {
     prefilteredView = ((cast !_Runtime.strictEquals(ibl, null) : Bool) ? (cast (cast ibl : { var prefilteredCubeView:flight._internal.dom.GPUTextureView; }).prefilteredCubeView : Dynamic) : (cast scene.iblDummyCubeView : Dynamic));
     brdfView = ((cast !_Runtime.strictEquals(ibl, null) : Bool) ? (cast (cast ibl : { var brdfLutView:flight._internal.dom.GPUTextureView; }).brdfLutView : Dynamic) : (cast scene.iblDummyLutView : Dynamic));
     if ((cast ((cast _Runtime.strictEquals(scene.iblSampleBindGroup, null) : Bool) || (cast !_Runtime.strictEquals(scene.iblSampleCubeView, irradianceView) : Bool)) : Bool)) {
-      (scene.iblSampleBindGroup = cast (flight._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: (cast ensureWgpuIblSampleLayout(({ final __callArgument1234:Dynamic = state; __callArgument1234; })) : flight._internal.dom.GPUBindGroupLayout), entries: cast ([{ binding: 0.0, resource: { buffer: scene.iblUniformBuffer } }, { binding: 1.0, resource: irradianceView }, { binding: 2.0, resource: prefilteredView }, { binding: 3.0, resource: brdfView }, { binding: 4.0, resource: scene.iblSampler }] : Array<Dynamic>) }] : Array<Dynamic>)) : Null<flight._internal.dom.GPUBindGroup>));
+      (scene.iblSampleBindGroup = cast (flight._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: (cast ensureWgpuIblSampleLayout(({ final __callArgument1230:Dynamic = state; __callArgument1230; })) : flight._internal.dom.GPUBindGroupLayout), entries: cast ([{ binding: 0.0, resource: { buffer: scene.iblUniformBuffer } }, { binding: 1.0, resource: irradianceView }, { binding: 2.0, resource: prefilteredView }, { binding: 3.0, resource: brdfView }, { binding: 4.0, resource: scene.iblSampler }] : Array<Dynamic>) }] : Array<Dynamic>)) : Null<flight._internal.dom.GPUBindGroup>));
       (scene.iblSampleCubeView = cast (irradianceView : Null<flight._internal.dom.GPUTextureView>));
     }
     return cast scene.iblSampleBindGroup;
@@ -2716,11 +2698,31 @@ class _Scene3DWgpu {
   @:keep
   private static function ensureWgpuIblSampleLayout(state:WgpuRenderState):flight._internal.dom.GPUBindGroupLayout {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
-    scene = (cast getWgpuScene3DRuntime(({ final __callArgument1236:Dynamic = state; __callArgument1236; })) : WgpuScene3DRuntime);
+    scene = (cast getWgpuScene3DRuntime(({ final __callArgument1232:Dynamic = state; __callArgument1232; })) : WgpuScene3DRuntime);
     if ((cast _Runtime.strictEquals(scene.iblSampleLayout, null) : Bool)) {
       (scene.iblSampleLayout = cast (flight._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flight._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), buffer: { type: 'uniform' } }, { binding: 1.0, visibility: flight._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), texture: { sampleType: 'float', viewDimension: 'cube' } }, { binding: 2.0, visibility: flight._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), texture: { sampleType: 'float', viewDimension: 'cube' } }, { binding: 3.0, visibility: flight._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), texture: { sampleType: 'float' } }, { binding: 4.0, visibility: flight._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), sampler: { type: 'filtering' } }] : Array<Dynamic>) }] : Array<Dynamic>)) : Null<flight._internal.dom.GPUBindGroupLayout>));
     }
     return cast scene.iblSampleLayout;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function ensureWgpuInstanceBuffer(state:WgpuRenderState, matrices:Null<flight._internal._Float32Array>, instanceCount:Float):flight._internal.dom.GPUBuffer {
+    var source:flight._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var required:Float = cast _Runtime.UNDEFINED;
+    var cached:Null<{ var buffer:flight._internal.dom.GPUBuffer; var capacity:Float; }> = cast _Runtime.UNDEFINED;
+    source = ((cast ((cast !_Runtime.strictEquals(matrices, null) : Bool) && (cast !_Runtime.strictEquals(matrices, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast matrices : Dynamic) : (cast _Scene3DWgpu.identityInstance__wgpuMeshPipeline : Dynamic));
+    required = _Runtime.multiplyNumbers(HxMath.max(1.0, instanceCount), 64.0);
+    cached = ((cast _Scene3DWgpu.instanceBuffers__wgpuMeshPipeline : flight._internal._WeakMap<WgpuRenderState, { var buffer:flight._internal.dom.GPUBuffer; var capacity:Float; }>).get((cast state)));
+    if ((cast ((cast _Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast (cast cached : { var buffer:flight._internal.dom.GPUBuffer; var capacity:Float; }).capacity : Float) < (cast required : Float)) : Bool)) : Bool)) {
+      ({ final __hostTypeCall1237 = ({ final __structural1236 = cached; __structural1236 == null ? _Runtime.UNDEFINED : (cast __structural1236 : { var buffer:flight._internal.dom.GPUBuffer; }).buffer; }); __hostTypeCall1237 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall1237 : flight._internal.dom.GPUBuffer).destroy(); });
+      var capacity:Float = HxMath.max(required, (64.0 * 64.0));
+      (cached = cast ({ buffer: flight._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBuffer', cast ([{ size: capacity, usage: (_Runtime.toInt32(flight._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'VERTEX')) | _Runtime.toInt32(flight._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>)), capacity: capacity } : Dynamic));
+      ((cast _Scene3DWgpu.instanceBuffers__wgpuMeshPipeline : flight._internal._WeakMap<WgpuRenderState, { var buffer:flight._internal.dom.GPUBuffer; var capacity:Float; }>).set((cast state), (cast cached)));
+    }
+    flight._internal.backend.WebGpuQueueBackend.call(flight._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([(cast cached : { var buffer:flight._internal.dom.GPUBuffer; var capacity:Float; }).buffer, 0.0, _Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), required] : Array<Dynamic>));
+    return cast (cast cached : { var buffer:flight._internal.dom.GPUBuffer; var capacity:Float; }).buffer;
     return cast null;
   }
 
@@ -5274,12 +5276,13 @@ class _Scene3DWgpu {
     flight._internal._StaticIndex.writeUint32ArrayTyped((cast _Scene3DWgpu._dynamicOffsets__wireframeWgpuMeshMaterialRenderer : flight._internal._UInt32Array), (cast 0.0 : Float), (cast scene.pendingDrawOffset : Float));
     (cast pass : flight._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, drawBindGroup, _Scene3DWgpu._dynamicOffsets__wireframeWgpuMeshMaterialRenderer);
     (cast pass : flight._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, (cast upload : WgpuWireframeUpload).vertexBuffer);
+    (cast pass : flight._internal.dom.GPURenderPassEncoder).setVertexBuffer(1.0, (cast ensureWgpuInstanceBuffer(({ final __callArgument2031:Dynamic = state; __callArgument2031; }), ({ final __callArgument2032:Dynamic = null; __callArgument2032; }), (cast 1.0 : Float)) : flight._internal.dom.GPUBuffer));
     (cast pass : flight._internal.dom.GPURenderPassEncoder).setIndexBuffer((cast upload : WgpuWireframeUpload).lineIndexBuffer, (cast upload : WgpuWireframeUpload).indexFormat);
     (cast pass : flight._internal.dom.GPURenderPassEncoder).drawIndexed((subset.indexCount * 2.0), 1.0, (subset.indexOffset * 2.0), 0.0, 0.0);
   } });
 
   public static function registerWgpuWireframeMaterial(state:WgpuRenderState):Void {
-    registerWgpuMeshMaterialRenderer(({ final __callArgument2031:Dynamic = state; __callArgument2031; }), (cast WireframeMaterialKind : String), ({ final __callArgument2032:Dynamic = wireframeWgpuMeshMaterialRenderer; __callArgument2032; }));
+    registerWgpuMeshMaterialRenderer(({ final __callArgument2035:Dynamic = state; __callArgument2035; }), (cast WireframeMaterialKind : String), ({ final __callArgument2036:Dynamic = wireframeWgpuMeshMaterialRenderer; __callArgument2036; }));
   }
 
   public static final _scratch__wireframeWgpuMeshMaterialRenderer:LinearColor = (cast cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));

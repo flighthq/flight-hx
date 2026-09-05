@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef PermissionQueryOutcome = flight._internal._Union2<flight._internal._Union2<{ var reason:String; var state:PermissionState; }, { var reason:String; var state:Null<PermissionState>; }>, { var reason:PermissionQueryFailureReason; }>;
+typedef PermissionQueryOutcome = flight._internal._Union2<flight._internal._Union2<{ var reason:String; var state:PermissionState; }, { var reason:String; var state(default, never):Null<PermissionState>; }>, { var reason:PermissionQueryFailureReason; }>;

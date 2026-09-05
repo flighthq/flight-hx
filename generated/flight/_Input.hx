@@ -928,7 +928,7 @@ class _Input {
   public static function getWebInputOwnerDocumentTarget__inputManager(source:InputIngressSource):Null<flight._internal.dom.EventTarget> {
     var ownerDocument:Null<flight._internal._Object> = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.hasField(source, 'ownerDocument') : Bool) : Bool)) { return cast null; }
-    ownerDocument = (cast (cast source : { @:optional var ownerDocument:Null<flight._internal._Object>; }) : { @:optional var ownerDocument:Null<flight._internal._Object>; }).ownerDocument;
+    ownerDocument = (cast (cast source : { @:optional var ownerDocument(default, never):Null<flight._internal._Object>; }) : { @:optional var ownerDocument:Null<flight._internal._Object>; }).ownerDocument;
     return cast ((cast ((cast _Runtime.strictEquals(ownerDocument, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(ownerDocument, null) : Bool)) : Bool) ? (cast null : Dynamic) : (cast (cast _Input.getWebInputEventTarget__inputManager(({ final __callArgument253:Dynamic = ownerDocument; __callArgument253; })) : Null<flight._internal.dom.EventTarget>) : Dynamic));
     return cast null;
   }

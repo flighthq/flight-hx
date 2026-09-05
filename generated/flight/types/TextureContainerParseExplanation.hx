@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TextureContainerParseExplanation = { var container:Null<TextureContainerKind>; var reason:TextureContainerParseFailureReason; };
+typedef TextureContainerParseExplanation = { var container(default, never):Null<TextureContainerKind>; var reason:TextureContainerParseFailureReason; };

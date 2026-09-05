@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ShapeBoundsCommand<K> = { var key:K; var fillBounds:Null<ShapeBoundsCommandHandler>; var strokeBounds:Null<ShapeBoundsCommandHandler>; };
+typedef ShapeBoundsCommand<K> = { var key:K; var fillBounds(default, never):Null<ShapeBoundsCommandHandler>; var strokeBounds(default, never):Null<ShapeBoundsCommandHandler>; };

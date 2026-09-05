@@ -1,6 +1,6 @@
 {
   "contractSurface": {
-    "noCompletionDeclarations": 40,
+    "noCompletionDeclarations": 39,
     "omittedModules": [
       {
         "module": "flight._Abc",
@@ -958,7 +958,7 @@
       }
     ],
     "protectedDeclarationIdentities": 1875,
-    "restrictedMemberDeclarations": 1835
+    "restrictedMemberDeclarations": 1836
   },
   "excludedPackages": [
     {
@@ -26507,12 +26507,12 @@
       },
       {
         "byReason": {
-          "external-toolkit-boundary": 5,
-          "source-undefined": 5
+          "external-toolkit-boundary": 6,
+          "source-undefined": 6
         },
         "module": "flight._Scene3DWgpu",
         "source": "upstream/packages/scene3d-wgpu/src/wireframeWgpuMeshMaterialRenderer.ts",
-        "total": 10
+        "total": 12
       },
       {
         "byReason": {
@@ -30421,19 +30421,19 @@
     "schemaVersion": 1,
     "summary": {
       "byReason": {
-        "external-toolkit-boundary": 621,
+        "external-toolkit-boundary": 622,
         "nominal-factory-allocator": 44,
         "source-any": 1271,
         "source-never": 168,
         "source-null": 153,
-        "source-undefined": 331,
+        "source-undefined": 332,
         "source-unknown": 4838,
         "standard-toolkit-boundary": 22180,
         "unclassified": 771
       },
       "checkerKnownUnrepresentable": 0,
       "modules": 1513,
-      "total": 30377
+      "total": 30379
     }
   }
 }

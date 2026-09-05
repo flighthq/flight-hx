@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlRenderEffectContext = { var state:GlRenderState; var source:GlRenderTarget; var dest:GlRenderTarget; var pool:GlRenderTargetPool; var sceneDepthTexture:Null<flight._internal.dom.WebGLTexture>; var sceneVelocityTexture:Null<flight._internal.dom.WebGLTexture>; };
+typedef GlRenderEffectContext = { var state:GlRenderState; var source:GlRenderTarget; var dest:GlRenderTarget; var pool:GlRenderTargetPool; var sceneDepthTexture(default, never):Null<flight._internal.dom.WebGLTexture>; var sceneVelocityTexture(default, never):Null<flight._internal.dom.WebGLTexture>; };

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlBoundShader = { var locations:Null<GlShaderLocations>; var program:flight._internal.dom.WebGLProgram; };
+typedef GlBoundShader = { var locations(default, never):Null<GlShaderLocations>; var program:flight._internal.dom.WebGLProgram; };

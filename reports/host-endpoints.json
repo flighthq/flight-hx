@@ -22085,7 +22085,7 @@
         },
         {
           "column": 32,
-          "line": 300,
+          "line": 276,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
@@ -22294,7 +22294,7 @@
         },
         {
           "column": 29,
-          "line": 322,
+          "line": 298,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
@@ -22462,13 +22462,13 @@
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
-          "column": 15,
+          "column": 30,
           "line": 228,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
-          "column": 30,
-          "line": 252,
+          "column": 15,
+          "line": 323,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
@@ -22904,7 +22904,7 @@
         },
         {
           "column": 24,
-          "line": 259,
+          "line": 235,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
@@ -23227,12 +23227,12 @@
         },
         {
           "column": 33,
-          "line": 268,
+          "line": 244,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 32,
-          "line": 274,
+          "line": 250,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
@@ -23577,12 +23577,12 @@
         },
         {
           "column": 3,
-          "line": 236,
+          "line": 270,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 3,
-          "line": 294,
+          "line": 331,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
@@ -23926,12 +23926,12 @@
         },
         {
           "column": 3,
-          "line": 236,
+          "line": 270,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 3,
-          "line": 294,
+          "line": 331,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
@@ -24087,5 +24087,5 @@
     "reads": 1090,
     "writes": 231
   },
-  "upstreamCommit": "419e5c925b366b5053ed7711ce371eee89dc31e7"
+  "upstreamCommit": "32a089f1342d08547fc2359dfd5e8fe9f7e3c12e"
 }

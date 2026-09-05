@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CollisionTestExplanation3D = { var kind:Null<CollisionShapeKind3D>; var overlapping:Bool; var shapeIndex:Null<Float>; var status:CollisionTestStatus; };
+typedef CollisionTestExplanation3D = { var kind(default, never):Null<CollisionShapeKind3D>; var overlapping:Bool; var shapeIndex:Null<Float>; var status:CollisionTestStatus; };

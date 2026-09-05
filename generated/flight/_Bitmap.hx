@@ -56,9 +56,9 @@ import flight.types.ThresholdOperation;
 
 typedef BitmapComparisonSource__bitmapCompare = { var width:Float; var height:Float; var data:flight._internal._ArrayLike<Float>; };
 
-typedef BitmapEncodeResolution__bitmapEncode = flight._internal._Union2<{ var backend:flight._internal._IndexedAccess<flight._internal._IndexedAccess<HasGraphicsBitmapEncode, String>, String>; var format:ImageFormat; var reason:Dynamic; }, { var backend:Null<flight._internal._IndexedAccess<flight._internal._IndexedAccess<HasGraphicsBitmapEncode, String>, String>>; var format:ImageFormat; var reason:flight._internal._IndexedAccess<BitmapEncodeFailureExplanation, String>; }>;
+typedef BitmapEncodeResolution__bitmapEncode = flight._internal._Union2<{ var backend:flight._internal._IndexedAccess<flight._internal._IndexedAccess<HasGraphicsBitmapEncode, String>, String>; var format:ImageFormat; var reason:Dynamic; }, { var backend(default, never):Null<flight._internal._IndexedAccess<flight._internal._IndexedAccess<HasGraphicsBitmapEncode, String>, String>>; var format:ImageFormat; var reason:flight._internal._IndexedAccess<BitmapEncodeFailureExplanation, String>; }>;
 
-typedef BitmapReadbackResolution__bitmapReadbackResolver = { var bitmap:Null<Bitmap>; var reason:BitmapReadbackBlockReason; };
+typedef BitmapReadbackResolution__bitmapReadbackResolver = { var bitmap(default, never):Null<Bitmap>; var reason:BitmapReadbackBlockReason; };
 
 typedef BitmapInnerEffectOptions__bitmapShadow = { >BitmapShadowBlurOptions, @:optional var intensity:Float; };
 

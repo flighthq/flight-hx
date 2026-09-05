@@ -1,6 +1,6 @@
 # Typed Struct Class Feasibility Audit
 
-Upstream commit: `419e5c925b366b5053ed7711ce371eee89dc31e7`
+Upstream commit: `32a089f1342d08547fc2359dfd5e8fe9f7e3c12e`
 
 This is a construction, structural-flow, and observability census. It does not enable class emission.
 
@@ -22,7 +22,7 @@ This is a construction, structural-flow, and observability census. It does not e
 | Production JSON serializations | 6 |
 | Production object rests | 0 |
 | Production object spreads | 126 |
-| Exported input signature references | 12872 |
+| Exported input signature references | 12873 |
 | Exported output signature references | 2447 |
 | Vitest oracle observations | 398 |
 | Mechanically compatible schemas | 1712 |
@@ -2132,7 +2132,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#WgpuRenderEffectRegistration` | 0 | 2 | 1 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#WgpuRenderOptions` | 0 | 8 | 8 | 0 | 6 | 5 | 1 | 0 | 5 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 6 | 0 | 21 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | `object-spread`, `optional-omission` |
 | `@flighthq/types:interface#WgpuRenderRegistries` | 0 | 20 | 7 | 0 | 2 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 2 | 0 | 0 | no | `object-literal-spread` | `object-spread` |
-| `@flighthq/types:interface#WgpuRenderState` | 0 | 18 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 20 | 0 | 0 | 0 | 0 | 0 | 0 | 383 | 3 | 3 | 2 | no | `cross-schema-transfer` | `prototype-observation` |
+| `@flighthq/types:interface#WgpuRenderState` | 0 | 18 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 20 | 0 | 0 | 0 | 0 | 0 | 0 | 384 | 3 | 3 | 2 | no | `cross-schema-transfer` | `prototype-observation` |
 | `@flighthq/types:interface#WgpuRenderStateRuntime` | 0 | 109 | 25 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#WgpuRenderStats` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | no | `anonymous-structural-transfer` | — |
 | `@flighthq/types:interface#WgpuRenderSurfaceProvider` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 0 | 0 | yes | — | — |

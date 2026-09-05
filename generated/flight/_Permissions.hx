@@ -27,7 +27,7 @@ typedef NotificationPermissionQueryProjectionOutcome__permission = flight._inter
 
 typedef NotificationPermissionRequestProjectionOutcome__permission = { var reason:String; };
 
-typedef PermissionQueryOrigins__permission = { var midi:Null<MidiPermissionProjectionBackend__permission>; var notification:Null<NotificationPermissionProjectionBackend__permission>; var persistence:Null<StoragePersistenceQueryBackend>; var web:Null<WebPermissionQueryOrigin__permission>; };
+typedef PermissionQueryOrigins__permission = { var midi(default, never):Null<MidiPermissionProjectionBackend__permission>; var notification(default, never):Null<NotificationPermissionProjectionBackend__permission>; var persistence(default, never):Null<StoragePersistenceQueryBackend>; var web(default, never):Null<WebPermissionQueryOrigin__permission>; };
 
 typedef MidiPermissionProjectionBackend__permission = { var getPermission:Void->flight._internal._Promise<PermissionQueryOutcome>; };
 

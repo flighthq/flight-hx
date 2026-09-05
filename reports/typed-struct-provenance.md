@@ -1,6 +1,6 @@
 # Typed Struct Provenance Audit
 
-Upstream commit: `419e5c925b366b5053ed7711ce371eee89dc31e7`
+Upstream commit: `32a089f1342d08547fc2359dfd5e8fe9f7e3c12e`
 
 This reporting-only audit tests nominal-identity closure for the clean required-field set. It does not enable class emission. Bridge exposure is reported separately and is not itself a closure blocker.
 

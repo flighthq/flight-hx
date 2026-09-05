@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics3DAbiContactHooks = { var buffer:Physics3DAbiContactBuffer; var preSolve:Null<Physics3DAbiContactHook>; var postSolve:Null<Physics3DAbiContactHook>; };
+typedef Physics3DAbiContactHooks = { var buffer:Physics3DAbiContactBuffer; var preSolve(default, never):Null<Physics3DAbiContactHook>; var postSolve(default, never):Null<Physics3DAbiContactHook>; };

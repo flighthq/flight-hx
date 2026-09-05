@@ -5,4 +5,4 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Types.CreateTextureVariantOptions__CreateTextureOptions;
 
-typedef CreateTextureOptions = flight._internal._Intersection2<CreateTextureVariantOptions__CreateTextureOptions<TextureLike>, { @:optional var resource:Null<ImageResourceReference>; }>;
+typedef CreateTextureOptions = flight._internal._Intersection2<CreateTextureVariantOptions__CreateTextureOptions<TextureLike>, { @:optional var resource(default, never):Null<ImageResourceReference>; }>;

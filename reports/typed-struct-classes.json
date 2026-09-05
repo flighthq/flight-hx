@@ -127971,7 +127971,7 @@
         {
           "column": 30,
           "kind": "cross-schema-transfer",
-          "line": 53,
+          "line": 58,
           "relatedSchemaIds": [
             "@flighthq/types:interface#WgpuWireframePipeline"
           ],
@@ -129125,7 +129125,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 383,
+        "inputSignatures": 384,
         "outputSignatures": 3
       },
       "construction": {
@@ -131730,7 +131730,7 @@
         {
           "column": 23,
           "kind": "cross-schema-transfer",
-          "line": 40,
+          "line": 45,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Material"
           ],
@@ -131740,7 +131740,7 @@
         {
           "column": 27,
           "kind": "optional-omission",
-          "line": 91,
+          "line": 97,
           "scope": "production",
           "source": "upstream/packages/scene3d-wgpu/src/wireframeWgpuMeshMaterialRenderer.ts"
         }
@@ -140583,7 +140583,7 @@
   ],
   "summary": {
     "anonymousStructuralTransfers": 238,
-    "bridgeInputSignatures": 12872,
+    "bridgeInputSignatures": 12873,
     "bridgeOutputSignatures": 2447,
     "crossSchemaTransfers": 2432,
     "directAccesses": 26255,
@@ -140605,5 +140605,5 @@
     "schemas": 2225,
     "testObjectLiterals": 6822
   },
-  "upstreamCommit": "419e5c925b366b5053ed7711ce371eee89dc31e7"
+  "upstreamCommit": "32a089f1342d08547fc2359dfd5e8fe9f7e3c12e"
 }

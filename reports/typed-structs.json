@@ -13542,7 +13542,7 @@
         {
           "name": "data",
           "optional": false,
-          "readonly": false,
+          "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeData | null"
@@ -29451,7 +29451,7 @@
         {
           "name": "data",
           "optional": false,
-          "readonly": false,
+          "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeData | null"
@@ -44531,7 +44531,7 @@
         {
           "name": "data",
           "optional": false,
-          "readonly": false,
+          "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeData | null"
@@ -46522,7 +46522,7 @@
         {
           "name": "data",
           "optional": false,
-          "readonly": false,
+          "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeData | null"
@@ -46608,7 +46608,7 @@
         {
           "name": "data",
           "optional": false,
-          "readonly": false,
+          "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeData | null"
@@ -62904,7 +62904,7 @@
         {
           "name": "data",
           "optional": false,
-          "readonly": false,
+          "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeData | null"
@@ -84155,7 +84155,7 @@
         {
           "name": "data",
           "optional": false,
-          "readonly": false,
+          "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeData | null"
@@ -94243,7 +94243,7 @@
         {
           "name": "data",
           "optional": false,
-          "readonly": false,
+          "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "(NodeData & Node2DData) | null"
@@ -231867,7 +231867,7 @@
         {
           "name": "data",
           "optional": false,
-          "readonly": false,
+          "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeData | null"
@@ -253590,7 +253590,7 @@
         {
           "name": "data",
           "optional": false,
-          "readonly": false,
+          "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeData | null"
@@ -253666,7 +253666,7 @@
         {
           "name": "data",
           "optional": false,
-          "readonly": false,
+          "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeData | null"
@@ -266187,7 +266187,7 @@
         {
           "name": "data",
           "optional": false,
-          "readonly": false,
+          "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeData | null"
@@ -278330,7 +278330,7 @@
         {
           "name": "data",
           "optional": false,
-          "readonly": false,
+          "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeData | null"
@@ -289832,7 +289832,7 @@
         {
           "name": "data",
           "optional": false,
-          "readonly": false,
+          "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeData | null"
@@ -300553,7 +300553,7 @@
         {
           "name": "data",
           "optional": false,
-          "readonly": false,
+          "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeData | null"
@@ -320486,7 +320486,7 @@
         {
           "name": "data",
           "optional": false,
-          "readonly": false,
+          "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeData | null"
@@ -321475,7 +321475,7 @@
         {
           "name": "data",
           "optional": false,
-          "readonly": false,
+          "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "(NodeData & Node2DData) | null"
@@ -324383,7 +324383,7 @@
         {
           "name": "data",
           "optional": false,
-          "readonly": false,
+          "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeData | null"
@@ -325452,7 +325452,7 @@
         {
           "name": "data",
           "optional": false,
-          "readonly": false,
+          "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeData | null"
@@ -328112,7 +328112,7 @@
         {
           "name": "data",
           "optional": false,
-          "readonly": false,
+          "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeData | null"
@@ -329269,7 +329269,7 @@
         "reads": 0,
         "writes": 0
       },
-      "declarationFingerprint": "sha256:38f920314f6e0716d2c3896881e9117164a3e94a87f00fff6e36f9f5d69e1d0c",
+      "declarationFingerprint": "sha256:e925cc9b949ca27d86cf67ebe15a604403a2f21570dfb9694fbc3a42273d5f11",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
@@ -329284,7 +329284,7 @@
         {
           "name": "data",
           "optional": false,
-          "readonly": false,
+          "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeData | null"
@@ -474779,7 +474779,7 @@
         {
           "name": "data",
           "optional": false,
-          "readonly": false,
+          "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeData | null"
@@ -544648,7 +544648,7 @@
         {
           "name": "data",
           "optional": false,
-          "readonly": false,
+          "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeData | null"
@@ -545281,7 +545281,7 @@
         {
           "name": "data",
           "optional": false,
-          "readonly": false,
+          "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeData | null"
@@ -591620,5 +591620,5 @@
     "pendingAccesses": 14929,
     "reflectiveSurvivors": 401
   },
-  "upstreamCommit": "419e5c925b366b5053ed7711ce371eee89dc31e7"
+  "upstreamCommit": "32a089f1342d08547fc2359dfd5e8fe9f7e3c12e"
 }

@@ -1,18 +1,31 @@
 {
-  "completedAt": "2026-07-22T11:53:47.370Z",
+  "completedAt": "2026-09-05T06:15:39.342Z",
   "failedPackages": 0,
+  "fixedSinceReview": 0,
+  "infrastructureFailures": 0,
+  "jobs": 3,
   "packages": [
     {
-      "durationMs": 6891,
+      "durationMs": 57740,
       "exitCode": 0,
+      "isolationRecovered": false,
       "package": "node",
       "signal": null,
       "status": "passed",
-      "summary": "311 passed (311)",
-      "testFiles": 15
+      "summary": "453 passed (453)",
+      "testFiles": 19,
+      "review": {
+        "baselineReport": "reports/upstream-parity.json",
+        "reviewedAt": "2026-08-21T03:43:35.613Z",
+        "status": "passed",
+        "unreviewedFailures": 0
+      }
     }
   ],
-  "schemaVersion": 1,
+  "reviewedFailures": 0,
+  "schemaVersion": 2,
   "selectedPackage": "node",
-  "startedAt": "2026-07-22T11:53:40.478Z"
+  "startedAt": "2026-09-05T06:14:41.182Z",
+  "strict": false,
+  "unreviewedFailures": 0
 }

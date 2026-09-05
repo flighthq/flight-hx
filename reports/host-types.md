@@ -1,17 +1,17 @@
 # Host Type Census
 
-Upstream commit: `419e5c925b366b5053ed7711ce371eee89dc31e7`
+Upstream commit: `32a089f1342d08547fc2359dfd5e8fe9f7e3c12e`
 
 Host identities are derived from the TypeScript checker and their ambient declaration origins. Every emitted identity maps mechanically to `flight._internal.dom.<SameTypeName>`; this census is descriptive, not an eligibility list.
 
 | Metric | Count |
 | --- | ---: |
 | Host types | 239 |
-| Type references | 6122 |
-| Member accesses | 3117 |
+| Type references | 6123 |
+| Member accesses | 3118 |
 | Reads | 1147 |
 | Writes | 430 |
-| Calls | 1540 |
+| Calls | 1541 |
 
 | Host type | Ambient declarations | Type refs | Arities | Members | Reads | Writes | Calls |
 | --- | --- | ---: | --- | ---: | ---: | ---: | ---: |
@@ -83,7 +83,7 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | `GPUBlendFactor` | `node_modules/@webgpu/types/dist/index.d.ts` | 2 | 0 | 0 | 0 | 0 | 0 |
 | `GPUBlendOperation` | `node_modules/@webgpu/types/dist/index.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
 | `GPUBlendState` | `node_modules/@webgpu/types/dist/index.d.ts` | 69 | 0 | 0 | 0 | 0 | 0 |
-| `GPUBuffer` | `node_modules/@webgpu/types/dist/index.d.ts` | 284 | 0 | 7 | 3 | 0 | 24 |
+| `GPUBuffer` | `node_modules/@webgpu/types/dist/index.d.ts` | 285 | 0 | 7 | 3 | 0 | 24 |
 | `GPUBufferBinding` | `node_modules/@webgpu/types/dist/index.d.ts` | 11 | 0 | 0 | 0 | 0 | 0 |
 | `GPUBufferDescriptor` | `node_modules/@webgpu/types/dist/index.d.ts` | 6 | 0 | 2 | 2 | 0 | 0 |
 | `GPUBufferUsage` | `node_modules/@webgpu/types/dist/index.d.ts` | 0 | 0 | 6 | 73 | 0 | 0 |
@@ -115,7 +115,7 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | `GPUPowerPreference` | `node_modules/@webgpu/types/dist/index.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
 | `GPUPrimitiveTopology` | `node_modules/@webgpu/types/dist/index.d.ts` | 2 | 0 | 0 | 0 | 0 | 0 |
 | `GPUQueue` | `node_modules/@webgpu/types/dist/index.d.ts` | 37 | 0 | 4 | 0 | 0 | 52 |
-| `GPURenderPassEncoder` | `node_modules/@webgpu/types/dist/index.d.ts` | 115 | 0 | 10 | 0 | 0 | 162 |
+| `GPURenderPassEncoder` | `node_modules/@webgpu/types/dist/index.d.ts` | 115 | 0 | 10 | 0 | 0 | 163 |
 | `GPURenderPipeline` | `node_modules/@webgpu/types/dist/index.d.ts` | 113 | 0 | 0 | 0 | 0 | 0 |
 | `GPURenderPipelineDescriptor` | `node_modules/@webgpu/types/dist/index.d.ts` | 8 | 0 | 0 | 0 | 0 | 0 |
 | `GPUSampler` | `node_modules/@webgpu/types/dist/index.d.ts` | 236 | 0 | 0 | 0 | 0 | 0 |

@@ -1,19 +1,31 @@
 {
-  "completedAt": "2026-08-02T22:45:02.259Z",
+  "completedAt": "2026-09-05T06:16:54.671Z",
   "failedPackages": 0,
-  "jobs": 12,
+  "fixedSinceReview": 0,
+  "infrastructureFailures": 0,
+  "jobs": 3,
   "packages": [
     {
-      "durationMs": 156026,
+      "durationMs": 58618,
       "exitCode": 0,
+      "isolationRecovered": false,
       "package": "particleemitter",
       "signal": null,
       "status": "passed",
-      "summary": "194 passed (194)",
-      "testFiles": 12
+      "summary": "202 passed (202)",
+      "testFiles": 12,
+      "review": {
+        "baselineReport": "reports/upstream-parity.json",
+        "reviewedAt": "2026-08-21T03:43:35.613Z",
+        "status": "passed",
+        "unreviewedFailures": 0
+      }
     }
   ],
-  "schemaVersion": 1,
+  "reviewedFailures": 0,
+  "schemaVersion": 2,
   "selectedPackage": "particleemitter",
-  "startedAt": "2026-08-02T22:42:26.231Z"
+  "startedAt": "2026-09-05T06:15:55.587Z",
+  "strict": false,
+  "unreviewedFailures": 0
 }

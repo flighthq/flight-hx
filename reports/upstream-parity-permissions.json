@@ -1,19 +1,19 @@
 {
-  "completedAt": "2026-09-05T06:13:33.205Z",
+  "completedAt": "2026-09-05T06:12:25.505Z",
   "failedPackages": 0,
   "fixedSinceReview": 0,
   "infrastructureFailures": 0,
   "jobs": 3,
   "packages": [
     {
-      "durationMs": 66964,
+      "durationMs": 41888,
       "exitCode": 0,
       "isolationRecovered": false,
-      "package": "swf",
+      "package": "permissions",
       "signal": null,
       "status": "passed",
-      "summary": "249 passed (249)",
-      "testFiles": 12,
+      "summary": "50 passed (50)",
+      "testFiles": 5,
       "review": {
         "baselineReport": "reports/upstream-parity.json",
         "reviewedAt": "2026-08-21T03:43:35.613Z",
@@ -24,8 +24,8 @@
   ],
   "reviewedFailures": 0,
   "schemaVersion": 2,
-  "selectedPackage": "swf",
-  "startedAt": "2026-09-05T06:12:25.779Z",
+  "selectedPackage": "permissions",
+  "startedAt": "2026-09-05T06:11:42.930Z",
   "strict": false,
   "unreviewedFailures": 0
 }

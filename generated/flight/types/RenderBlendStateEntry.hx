@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef RenderBlendStateEntry = { var alpha:Float; var blendMode:Null<BlendMode>; };
+typedef RenderBlendStateEntry = { var alpha:Float; var blendMode(default, never):Null<BlendMode>; };

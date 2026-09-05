@@ -10,7 +10,7 @@
     "missingEntries": 0,
     "moduleValueKeys": 0,
     "portableGlobalValueKeys": 35,
-    "typeUses": 9240,
+    "typeUses": 9242,
     "valueUses": 2134
   },
   "types": [
@@ -1322,7 +1322,7 @@
         "upstream/packages/types/src/WgpuWireframePipeline.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUBuffer.hx",
-      "uses": 311
+      "uses": 312
     },
     {
       "coverage": "dynamic-stub",
@@ -1918,7 +1918,7 @@
         "upstream/packages/types/src/WgpuRenderState.ts"
       ],
       "provider": "src/flight/_internal/dom/GPURenderPassEncoder.hx",
-      "uses": 277
+      "uses": 278
     },
     {
       "coverage": "dynamic-stub",
@@ -4360,7 +4360,7 @@
       "uses": 6
     }
   ],
-  "upstreamCommit": "419e5c925b366b5053ed7711ce371eee89dc31e7",
+  "upstreamCommit": "32a089f1342d08547fc2359dfd5e8fe9f7e3c12e",
   "values": [
     {
       "coverage": "portable",

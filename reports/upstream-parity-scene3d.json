@@ -1,19 +1,19 @@
 {
-  "completedAt": "2026-09-05T06:13:33.205Z",
+  "completedAt": "2026-09-05T06:18:27.398Z",
   "failedPackages": 0,
   "fixedSinceReview": 0,
   "infrastructureFailures": 0,
   "jobs": 3,
   "packages": [
     {
-      "durationMs": 66964,
+      "durationMs": 74284,
       "exitCode": 0,
       "isolationRecovered": false,
-      "package": "swf",
+      "package": "scene3d",
       "signal": null,
       "status": "passed",
-      "summary": "249 passed (249)",
-      "testFiles": 12,
+      "summary": "189 passed (189)",
+      "testFiles": 19,
       "review": {
         "baselineReport": "reports/upstream-parity.json",
         "reviewedAt": "2026-08-21T03:43:35.613Z",
@@ -24,8 +24,8 @@
   ],
   "reviewedFailures": 0,
   "schemaVersion": 2,
-  "selectedPackage": "swf",
-  "startedAt": "2026-09-05T06:12:25.779Z",
+  "selectedPackage": "scene3d",
+  "startedAt": "2026-09-05T06:17:12.511Z",
   "strict": false,
   "unreviewedFailures": 0
 }

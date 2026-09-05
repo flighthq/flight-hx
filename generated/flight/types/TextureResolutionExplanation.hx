@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TextureResolutionExplanation = { var kind:Null<TextureSourceKind>; var status:TextureResolutionStatus; };
+typedef TextureResolutionExplanation = { var kind(default, never):Null<TextureSourceKind>; var status:TextureResolutionStatus; };

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef StoragePersistenceResult = { var outcome:String; var permissionState:Null<PermissionState>; };
+typedef StoragePersistenceResult = { var outcome:String; var permissionState(default, never):Null<PermissionState>; };

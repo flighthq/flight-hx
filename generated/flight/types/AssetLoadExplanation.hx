@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AssetLoadExplanation = { var id:String; var refCount:Float; var status:String; var type:Null<AssetType>; };
+typedef AssetLoadExplanation = { var id:String; var refCount:Float; var status:String; var type(default, never):Null<AssetType>; };

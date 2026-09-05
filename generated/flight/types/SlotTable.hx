@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SlotTable<T> = { var onMiss:RegistryMissPolicy; var registry:RegistryId; var entry:Null<RegistryTableEntry<T>>; var shape:String; };
+typedef SlotTable<T> = { var onMiss:RegistryMissPolicy; var registry:RegistryId; var entry(default, never):Null<RegistryTableEntry<T>>; var shape:String; };

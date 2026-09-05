@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef RenderBatchKey = { var blend:Null<BlendMode>; var format:BatchFormat; var material:Null<Material>; var rendererKind:Kind; var texture:Null<flight._internal._Object>; };
+typedef RenderBatchKey = { var blend(default, never):Null<BlendMode>; var format:BatchFormat; var material(default, never):Null<Material>; var rendererKind:Kind; var texture(default, never):Null<flight._internal._Object>; };

@@ -1,10 +1,10 @@
 {
   "schemaVersion": 2,
   "summary": {
-    "calls": 1540,
-    "memberAccesses": 3117,
+    "calls": 1541,
+    "memberAccesses": 3118,
     "reads": 1147,
-    "typeReferences": 6122,
+    "typeReferences": 6123,
     "types": 239,
     "writes": 430
   },
@@ -16968,7 +16968,7 @@
           {
             "arity": 0,
             "column": 71,
-            "line": 247,
+            "line": 223,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
           },
           {
@@ -17268,25 +17268,25 @@
           {
             "arity": 0,
             "column": 16,
-            "line": 45,
+            "line": 50,
             "source": "upstream/packages/scene3d-wgpu/src/wireframeWgpuMeshMaterialRenderer.ts"
           },
           {
             "arity": 0,
             "column": 15,
-            "line": 47,
+            "line": 52,
             "source": "upstream/packages/scene3d-wgpu/src/wireframeWgpuMeshMaterialRenderer.ts"
           },
           {
             "arity": 0,
             "column": 7,
-            "line": 47,
+            "line": 52,
             "source": "upstream/packages/scene3d-wgpu/src/wireframeWgpuMeshMaterialRenderer.ts"
           },
           {
             "arity": 0,
             "column": 27,
-            "line": 69,
+            "line": 74,
             "source": "upstream/packages/scene3d-wgpu/src/wireframeWgpuMeshMaterialRenderer.ts"
           },
           {
@@ -18623,25 +18623,25 @@
           {
             "arity": 0,
             "column": 55,
-            "line": 300,
+            "line": 276,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
           },
           {
             "arity": 0,
             "column": 15,
-            "line": 301,
+            "line": 277,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
           },
           {
             "arity": 0,
             "column": 68,
-            "line": 319,
+            "line": 295,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
           },
           {
             "arity": 0,
             "column": 7,
-            "line": 321,
+            "line": 297,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
           },
           {
@@ -19950,7 +19950,7 @@
             },
             {
               "column": 5,
-              "line": 225,
+              "line": 320,
               "operation": "call",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
@@ -20103,7 +20103,7 @@
         "arities": [
           0
         ],
-        "count": 284,
+        "count": 285,
         "locations": [
           {
             "arity": 0,
@@ -21055,62 +21055,62 @@
           },
           {
             "arity": 0,
-            "column": 4,
-            "line": 220,
-            "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
-          },
-          {
-            "arity": 0,
-            "column": 7,
-            "line": 223,
-            "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
-          },
-          {
-            "arity": 0,
-            "column": 31,
-            "line": 224,
-            "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
-          },
-          {
-            "arity": 0,
-            "column": 5,
-            "line": 225,
-            "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
-          },
-          {
-            "arity": 0,
-            "column": 14,
-            "line": 227,
-            "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
-          },
-          {
-            "arity": 0,
-            "column": 5,
-            "line": 227,
-            "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
-          },
-          {
-            "arity": 0,
             "column": 55,
-            "line": 300,
+            "line": 276,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
           },
           {
             "arity": 0,
             "column": 16,
-            "line": 302,
+            "line": 278,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
           },
           {
             "arity": 0,
             "column": 33,
-            "line": 303,
+            "line": 279,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
           },
           {
             "arity": 0,
             "column": 9,
-            "line": 303,
+            "line": 279,
+            "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
+          },
+          {
+            "arity": 0,
+            "column": 4,
+            "line": 315,
+            "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
+          },
+          {
+            "arity": 0,
+            "column": 7,
+            "line": 318,
+            "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
+          },
+          {
+            "arity": 0,
+            "column": 31,
+            "line": 319,
+            "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
+          },
+          {
+            "arity": 0,
+            "column": 5,
+            "line": 320,
+            "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
+          },
+          {
+            "arity": 0,
+            "column": 14,
+            "line": 322,
+            "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
+          },
+          {
+            "arity": 0,
+            "column": 5,
+            "line": 322,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
           },
           {
@@ -21680,7 +21680,13 @@
           {
             "arity": 0,
             "column": 29,
-            "line": 73,
+            "line": 78,
+            "source": "upstream/packages/scene3d-wgpu/src/wireframeWgpuMeshMaterialRenderer.ts"
+          },
+          {
+            "arity": 0,
+            "column": 29,
+            "line": 79,
             "source": "upstream/packages/scene3d-wgpu/src/wireframeWgpuMeshMaterialRenderer.ts"
           },
           {
@@ -22108,14 +22114,14 @@
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
             {
-              "column": 40,
+              "column": 39,
               "line": 230,
               "operation": "read",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
             {
-              "column": 39,
-              "line": 254,
+              "column": 40,
+              "line": 325,
               "operation": "read",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
@@ -22363,7 +22369,7 @@
             },
             {
               "column": 14,
-              "line": 254,
+              "line": 230,
               "operation": "read",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
@@ -22449,7 +22455,7 @@
             },
             {
               "column": 16,
-              "line": 230,
+              "line": 325,
               "operation": "read",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
@@ -23583,7 +23589,7 @@
             },
             {
               "column": 32,
-              "line": 300,
+              "line": 276,
               "operation": "call",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
@@ -23825,7 +23831,7 @@
             },
             {
               "column": 29,
-              "line": 322,
+              "line": 298,
               "operation": "call",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
@@ -24024,14 +24030,14 @@
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
             {
-              "column": 15,
+              "column": 30,
               "line": 228,
               "operation": "call",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
             {
-              "column": 30,
-              "line": 252,
+              "column": 15,
+              "line": 323,
               "operation": "call",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
@@ -24513,7 +24519,7 @@
             },
             {
               "column": 24,
-              "line": 259,
+              "line": 235,
               "operation": "call",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
@@ -24883,13 +24889,13 @@
             },
             {
               "column": 33,
-              "line": 268,
+              "line": 244,
               "operation": "call",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
             {
               "column": 32,
-              "line": 274,
+              "line": 250,
               "operation": "call",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
@@ -25265,13 +25271,13 @@
             },
             {
               "column": 3,
-              "line": 236,
+              "line": 270,
               "operation": "read",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
             {
               "column": 3,
-              "line": 294,
+              "line": 331,
               "operation": "read",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
@@ -27453,13 +27459,13 @@
             },
             {
               "column": 3,
-              "line": 236,
+              "line": 270,
               "operation": "call",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
             {
               "column": 3,
-              "line": 294,
+              "line": 331,
               "operation": "call",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
@@ -27787,7 +27793,7 @@
           {
             "arity": 0,
             "column": 3,
-            "line": 236,
+            "line": 270,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
           },
           {
@@ -28025,7 +28031,7 @@
             },
             {
               "column": 5,
-              "line": 77,
+              "line": 83,
               "operation": "call",
               "source": "upstream/packages/scene3d-wgpu/src/wireframeWgpuMeshMaterialRenderer.ts"
             }
@@ -28551,13 +28557,13 @@
             },
             {
               "column": 5,
-              "line": 54,
+              "line": 59,
               "operation": "call",
               "source": "upstream/packages/scene3d-wgpu/src/wireframeWgpuMeshMaterialRenderer.ts"
             },
             {
               "column": 5,
-              "line": 72,
+              "line": 77,
               "operation": "call",
               "source": "upstream/packages/scene3d-wgpu/src/wireframeWgpuMeshMaterialRenderer.ts"
             }
@@ -28595,7 +28601,7 @@
             },
             {
               "column": 5,
-              "line": 74,
+              "line": 80,
               "operation": "call",
               "source": "upstream/packages/scene3d-wgpu/src/wireframeWgpuMeshMaterialRenderer.ts"
             }
@@ -28803,7 +28809,7 @@
           "writes": 0
         },
         {
-          "calls": 9,
+          "calls": 10,
           "locations": [
             {
               "column": 5,
@@ -28855,7 +28861,13 @@
             },
             {
               "column": 5,
-              "line": 73,
+              "line": 78,
+              "operation": "call",
+              "source": "upstream/packages/scene3d-wgpu/src/wireframeWgpuMeshMaterialRenderer.ts"
+            },
+            {
+              "column": 5,
+              "line": 79,
               "operation": "call",
               "source": "upstream/packages/scene3d-wgpu/src/wireframeWgpuMeshMaterialRenderer.ts"
             }
@@ -29597,13 +29609,13 @@
           {
             "arity": 0,
             "column": 11,
-            "line": 37,
+            "line": 42,
             "source": "upstream/packages/scene3d-wgpu/src/wireframeWgpuMeshMaterialRenderer.ts"
           },
           {
             "arity": 0,
             "column": 5,
-            "line": 54,
+            "line": 59,
             "source": "upstream/packages/scene3d-wgpu/src/wireframeWgpuMeshMaterialRenderer.ts"
           },
           {
@@ -31316,25 +31328,25 @@
           {
             "arity": 0,
             "column": 7,
-            "line": 257,
+            "line": 233,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
           },
           {
             "arity": 0,
             "column": 55,
-            "line": 300,
+            "line": 276,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
           },
           {
             "arity": 0,
             "column": 16,
-            "line": 302,
+            "line": 278,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
           },
           {
             "arity": 0,
             "column": 9,
-            "line": 307,
+            "line": 283,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
           },
           {
@@ -33119,31 +33131,31 @@
             },
             {
               "column": 35,
-              "line": 324,
+              "line": 300,
               "operation": "read",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
             {
               "column": 35,
-              "line": 325,
+              "line": 301,
               "operation": "read",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
             {
               "column": 35,
-              "line": 326,
+              "line": 302,
               "operation": "read",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
             {
               "column": 35,
-              "line": 327,
+              "line": 303,
               "operation": "read",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
             {
               "column": 35,
-              "line": 328,
+              "line": 304,
               "operation": "read",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
@@ -34222,13 +34234,13 @@
             },
             {
               "column": 30,
-              "line": 273,
+              "line": 249,
               "operation": "call",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
             {
               "column": 29,
-              "line": 279,
+              "line": 255,
               "operation": "call",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
@@ -35246,13 +35258,13 @@
           {
             "arity": 0,
             "column": 33,
-            "line": 268,
+            "line": 244,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
           },
           {
             "arity": 0,
             "column": 5,
-            "line": 268,
+            "line": 244,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
           },
           {
@@ -36115,13 +36127,13 @@
             },
             {
               "column": 48,
-              "line": 271,
+              "line": 247,
               "operation": "read",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
             {
               "column": 48,
-              "line": 277,
+              "line": 253,
               "operation": "read",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
@@ -36421,13 +36433,13 @@
             },
             {
               "column": 14,
-              "line": 271,
+              "line": 247,
               "operation": "read",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
             {
               "column": 14,
-              "line": 277,
+              "line": 253,
               "operation": "read",
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
@@ -37585,37 +37597,37 @@
           {
             "arity": 0,
             "column": 7,
-            "line": 265,
+            "line": 241,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
           },
           {
             "arity": 0,
             "column": 55,
-            "line": 300,
+            "line": 276,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
           },
           {
             "arity": 0,
             "column": 16,
-            "line": 302,
+            "line": 278,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
           },
           {
             "arity": 0,
             "column": 9,
-            "line": 304,
+            "line": 280,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
           },
           {
             "arity": 0,
             "column": 9,
-            "line": 305,
+            "line": 281,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
           },
           {
             "arity": 0,
             "column": 9,
-            "line": 306,
+            "line": 282,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
           },
           {
@@ -65196,5 +65208,5 @@
       }
     }
   ],
-  "upstreamCommit": "419e5c925b366b5053ed7711ce371eee89dc31e7"
+  "upstreamCommit": "32a089f1342d08547fc2359dfd5e8fe9f7e3c12e"
 }

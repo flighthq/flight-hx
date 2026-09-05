@@ -5,4 +5,4 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Types.EntityRuntimeKey;
 
-typedef Node<Traits> = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<NodeRuntime<Traits>>; };
+typedef Node<Traits> = { var data(default, never):Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<NodeRuntime<Traits>>; };

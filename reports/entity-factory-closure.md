@@ -1,6 +1,6 @@
 # Entity Factory Closure Audit
 
-Upstream commit: `419e5c925b366b5053ed7711ce371eee89dc31e7`
+Upstream commit: `32a089f1342d08547fc2359dfd5e8fe9f7e3c12e`
 
 This audit inventories exact calls to Flight's production `createEntity` helper. A ready site has either a declared concrete Entity identity or a closed local object shape that receives a private generated identity, plus a constructible field set. Source-order differences are normalized after preserving initializer evaluation order. It reports closure prerequisites; it does not activate named-schema class emission.
 

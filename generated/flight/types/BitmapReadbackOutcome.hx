@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef BitmapReadbackOutcome = { var bitmap:Null<Bitmap>; var reason:BitmapReadbackBackendReason; };
+typedef BitmapReadbackOutcome = { var bitmap(default, never):Null<Bitmap>; var reason:BitmapReadbackBackendReason; };

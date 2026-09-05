@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MorphShapeGradientPaintBinding = { var commandIndex:Float; var commandKey:String; var endAlphas:Array<Float>; var endColors:Array<Float>; var endFocalPointRatio:Float; var endMatrix:Null<Matrix>; var endRatios:Array<Float>; var kind:String; var startAlphas:Array<Float>; var startColors:Array<Float>; var startFocalPointRatio:Float; var startMatrix:Null<Matrix>; var startRatios:Array<Float>; };
+typedef MorphShapeGradientPaintBinding = { var commandIndex:Float; var commandKey:String; var endAlphas:Array<Float>; var endColors:Array<Float>; var endFocalPointRatio:Float; var endMatrix(default, never):Null<Matrix>; var endRatios:Array<Float>; var kind:String; var startAlphas:Array<Float>; var startColors:Array<Float>; var startFocalPointRatio:Float; var startMatrix(default, never):Null<Matrix>; var startRatios:Array<Float>; };

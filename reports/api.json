@@ -75433,6 +75433,13 @@
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
             {
+              "fingerprint": "sha256:353093cb7d045e7f798d235bea78169f154ab7aaa36f03dc92ab511651ca96f5",
+              "kind": "function",
+              "name": "ensureWgpuInstanceBuffer",
+              "runtime": true,
+              "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
+            },
+            {
               "fingerprint": "sha256:8b63173b6874f870639e5a614e94bc6c62b00f026e04cd02bc52c6d470c0f1e0",
               "kind": "function",
               "name": "ensureWgpuMatcapPipeline",
@@ -76140,7 +76147,7 @@
               "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
             },
             {
-              "fingerprint": "sha256:97fefc7150c79ece43813cc5f61bdb82251eead4b5546d390ea973fb6a2f6395",
+              "fingerprint": "sha256:af84f374c2f9c780d50aff8efcba41f8d255db906a0cc6779c4bc43fbc6d61c1",
               "kind": "variable",
               "name": "wireframeWgpuMeshMaterialRenderer",
               "runtime": true,
@@ -101795,6 +101802,13 @@
               "source": "upstream/packages/types/src/GlContext.ts"
             },
             {
+              "fingerprint": "sha256:b0b1d098985496c657d4cc37c03c7de23d3837a68292947dae6946581677d202",
+              "kind": "interface",
+              "name": "GlContextState",
+              "runtime": false,
+              "source": "upstream/packages/types/src/GlContextState.ts"
+            },
+            {
               "fingerprint": "sha256:d44bdbaf028fa6d61ad79836714bd34e5ec888b7bfcbc4f5da00507b149c6e24",
               "kind": "type",
               "name": "GlCullFaceKind",
@@ -110672,7 +110686,7 @@
               "source": "upstream/packages/types/src/NodeSignals.ts"
             },
             {
-              "fingerprint": "sha256:38f920314f6e0716d2c3896881e9117164a3e94a87f00fff6e36f9f5d69e1d0c",
+              "fingerprint": "sha256:e925cc9b949ca27d86cf67ebe15a604403a2f21570dfb9694fbc3a42273d5f11",
               "kind": "interface",
               "name": "NodeTraits",
               "runtime": false,
@@ -160440,6 +160454,13 @@
               "source": "upstream/packages/types/src/GlContext.ts"
             },
             {
+              "fingerprint": "sha256:b0b1d098985496c657d4cc37c03c7de23d3837a68292947dae6946581677d202",
+              "kind": "interface",
+              "name": "GlContextState",
+              "runtime": false,
+              "source": "upstream/packages/types/src/GlContextState.ts"
+            },
+            {
               "fingerprint": "sha256:d44bdbaf028fa6d61ad79836714bd34e5ec888b7bfcbc4f5da00507b149c6e24",
               "kind": "type",
               "name": "GlCullFaceKind",
@@ -169107,7 +169128,7 @@
               "source": "upstream/packages/types/src/NodeSignals.ts"
             },
             {
-              "fingerprint": "sha256:38f920314f6e0716d2c3896881e9117164a3e94a87f00fff6e36f9f5d69e1d0c",
+              "fingerprint": "sha256:e925cc9b949ca27d86cf67ebe15a604403a2f21570dfb9694fbc3a42273d5f11",
               "kind": "interface",
               "name": "NodeTraits",
               "runtime": false,
@@ -197793,6 +197814,13 @@
               "source": "upstream/packages/types/src/GlContext.ts"
             },
             {
+              "fingerprint": "sha256:b0b1d098985496c657d4cc37c03c7de23d3837a68292947dae6946581677d202",
+              "kind": "interface",
+              "name": "GlContextState",
+              "runtime": false,
+              "source": "upstream/packages/types/src/GlContextState.ts"
+            },
+            {
               "fingerprint": "sha256:d44bdbaf028fa6d61ad79836714bd34e5ec888b7bfcbc4f5da00507b149c6e24",
               "kind": "type",
               "name": "GlCullFaceKind",
@@ -204283,7 +204311,7 @@
               "source": "upstream/packages/types/src/NodeSignals.ts"
             },
             {
-              "fingerprint": "sha256:38f920314f6e0716d2c3896881e9117164a3e94a87f00fff6e36f9f5d69e1d0c",
+              "fingerprint": "sha256:e925cc9b949ca27d86cf67ebe15a604403a2f21570dfb9694fbc3a42273d5f11",
               "kind": "interface",
               "name": "NodeTraits",
               "runtime": false,
@@ -267686,6 +267714,13 @@
               "source": "upstream/packages/types/src/GlContext.ts"
             },
             {
+              "fingerprint": "sha256:b0b1d098985496c657d4cc37c03c7de23d3837a68292947dae6946581677d202",
+              "kind": "interface",
+              "name": "GlContextState",
+              "runtime": false,
+              "source": "upstream/packages/types/src/GlContextState.ts"
+            },
+            {
               "fingerprint": "sha256:d44bdbaf028fa6d61ad79836714bd34e5ec888b7bfcbc4f5da00507b149c6e24",
               "kind": "type",
               "name": "GlCullFaceKind",
@@ -273406,7 +273441,7 @@
               "source": "upstream/packages/types/src/NodeSignals.ts"
             },
             {
-              "fingerprint": "sha256:38f920314f6e0716d2c3896881e9117164a3e94a87f00fff6e36f9f5d69e1d0c",
+              "fingerprint": "sha256:e925cc9b949ca27d86cf67ebe15a604403a2f21570dfb9694fbc3a42273d5f11",
               "kind": "interface",
               "name": "NodeTraits",
               "runtime": false,
@@ -296059,7 +296094,7 @@
               "source": "upstream/packages/types/src/NodeSignals.ts"
             },
             {
-              "fingerprint": "sha256:38f920314f6e0716d2c3896881e9117164a3e94a87f00fff6e36f9f5d69e1d0c",
+              "fingerprint": "sha256:e925cc9b949ca27d86cf67ebe15a604403a2f21570dfb9694fbc3a42273d5f11",
               "kind": "interface",
               "name": "NodeTraits",
               "runtime": false,
@@ -308359,5 +308394,5 @@
     }
   ],
   "schemaVersion": 3,
-  "upstreamCommit": "419e5c925b366b5053ed7711ce371eee89dc31e7"
+  "upstreamCommit": "32a089f1342d08547fc2359dfd5e8fe9f7e3c12e"
 }

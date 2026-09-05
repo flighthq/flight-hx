@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CommandDispatchExplanation = { var missingKind:Null<Kind>; var resolved:Bool; };
+typedef CommandDispatchExplanation = { var missingKind(default, never):Null<Kind>; var resolved:Bool; };
