@@ -4484,6 +4484,42 @@ describe('typed struct analysis', () => {
     expect(output).toContain(': RegistriesFixture);');
   });
 
+  it('reconstructs a spread passed to a Readonly<> nominal-entity construction parameter', () => {
+    // `createGlPipeline(registries: Readonly<GlRenderRegistries>)` is called with a
+    // spread object. The contextual type is the mapped type `Readonly<T>`, whose symbol
+    // is not T's, so the nominal identity must be recovered by unwrapping the wrapper —
+    // otherwise the merged anonymous object is coerced to the nominal class parameter and
+    // becomes null on hxcpp.
+    const candidate: TypedStructCandidate = {
+      emission: 'audit-only',
+      name: 'RegistriesFixture',
+      packageName: '@flighthq/types',
+      purpose: 'audit-only entity readonly-param spread fixture',
+      source: 'upstream/packages/types/src/RegistriesFixture.ts',
+    };
+    const result = lowerFixture(
+      `
+        export interface RegistriesFixture { renderers: number; strokeTessellator: number; }
+        export function consume(registries: Readonly<RegistriesFixture>): void { void registries; }
+        export function build(source: RegistriesFixture): void {
+          consume({ ...source });
+        }
+      `,
+      candidate,
+    );
+    const output = emitHaxeModule({
+      declarations: result.lowered.declarations,
+      haxePackage: 'flight.types',
+      imports: [],
+      name: 'RegistriesFixture',
+      packageName: '@flighthq/types',
+    });
+    expect(result.lowered.diagnostics).toEqual([]);
+    // The Readonly<> parameter is unwrapped, so the argument reconstructs the class.
+    expect(output).toContain('final __structInitSource:Dynamic = _Runtime.mergeObjects([source]);');
+    expect(output).toContain(': RegistriesFixture);');
+  });
+
   it('keeps sparse typedef construction while initializing the nominal layout', () => {
     const candidate: TypedStructCandidate = {
       emission: 'direct',

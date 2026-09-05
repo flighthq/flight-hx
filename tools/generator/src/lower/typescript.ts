@@ -4044,6 +4044,16 @@ function checkerTypesHaveConflictingProperties(types: readonly ts.Type[], checke
   return false;
 }
 
+function unwrapReadonlyConstructionTarget(type: ts.Type): ts.Type {
+  // `Readonly<T>` (a homomorphic mapped type used on construction parameters such as
+  // createGlPipeline(registries: Readonly<GlRenderRegistries>)) resolves to a mapped type
+  // carrying the `Readonly` alias symbol rather than T's nominal identity. Unwrap the
+  // single type argument so a nominal entity construction target stays recoverable.
+  return type.aliasSymbol?.name === 'Readonly' && type.aliasTypeArguments?.length === 1
+    ? type.aliasTypeArguments[0]!
+    : type;
+}
+
 function cppStructInitEntityFactoryConstruction(
   node: ts.ObjectLiteralExpression,
   context: LoweringContext,
@@ -4566,25 +4576,30 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
         ? context.typedStructs.resolveCppStructInitConstruction(contextualConstructionType)
         : undefined;
     // A spread whose contextual type is a nominal-identity entity class — e.g.
-    // `{ ...pipeline.registries }` typed as the @:structInit class GlRenderRegistries —
-    // has no `direct` typed-struct construction, so without this it lowers to a bare
-    // `_Runtime.mergeObjects(...)` that the surrounding code casts to the class. On
-    // hxcpp, casting a merged anonymous object to a nominal class yields null (the
-    // same class of regression as fc5a360f). Fall back to the nominal-identity
-    // construction so the spread emitter rebuilds a real instance on the nominal
-    // path while still emitting the plain merge on the structural/js path.
+    // `{ ...pipeline.registries }` typed as the @:structInit class GlRenderRegistries,
+    // or `createGlPipeline({ ...createEmptyGlRegistries(), … })` where the parameter is
+    // `Readonly<GlRenderRegistries>` — has no `direct` typed-struct construction, so
+    // without this it lowers to a bare `_Runtime.mergeObjects(...)` that the surrounding
+    // code casts (or passes) to the nominal class. On hxcpp, coercing a merged anonymous
+    // object to a nominal class yields null (the same class of regression as fc5a360f).
+    // Fall back to the nominal-identity construction so the spread emitter rebuilds a
+    // real instance on the nominal path while still emitting the plain merge on the
+    // structural/js path. `Readonly<T>` construction parameters resolve to a mapped type
+    // that carries the wrapper's identity, not T's, so unwrap the single type argument
+    // before resolving. A union alias (e.g. CollisionColliderShape3D = A | B) resolves to
+    // a schema carrying only the common discriminant, so reconstructing from it would drop
+    // member fields — and a union is a structural typedef that never suffers the null cast
+    // anyway; only a concrete (non-union) nominal entity needs the reconstruction.
+    const spreadConstructionTarget =
+      contextualConstructionType && node.properties.some((property) => ts.isSpreadAssignment(property))
+        ? unwrapReadonlyConstructionTarget(contextualConstructionType)
+        : undefined;
     const spreadEntityConstruction =
       !contextualCppStructInit &&
       context.typedStructs &&
-      contextualConstructionType &&
-      // A union alias (e.g. CollisionColliderShape3D = A | B) resolves to a schema
-      // carrying only the common discriminant, so reconstructing from it would drop
-      // the member fields — and a union is a structural typedef that never suffers
-      // the nominal-class null cast anyway. Only a concrete (non-union) nominal
-      // entity needs the reconstruction.
-      !contextualConstructionType.isUnion() &&
-      node.properties.some((property) => ts.isSpreadAssignment(property))
-        ? context.typedStructs.resolveFactoryIdentityConstruction(contextualConstructionType)
+      spreadConstructionTarget &&
+      !spreadConstructionTarget.isUnion()
+        ? context.typedStructs.resolveFactoryIdentityConstruction(spreadConstructionTarget)
         : undefined;
     const cppStructInit =
       contextualCppStructInit ?? spreadEntityConstruction ?? cppStructInitEntityFactoryConstruction(node, context);
