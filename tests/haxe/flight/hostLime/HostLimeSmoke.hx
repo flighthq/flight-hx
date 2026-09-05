@@ -53,6 +53,9 @@ class HostLimeSmoke {
     assert(host.screen.query != null, 'composed host screen query');
     assert(host.window != null, 'composed host window');
     assert(host.input.haptics != null, 'composed host haptics');
+    assert(host.input.ingress != null, 'composed host input ingress');
+    assert(host.graphics.image != null, 'composed host image');
+    assert(host.media.audioDevice != null, 'composed host audio device');
     assert(host.system.platform != null, 'composed host platform');
     assert(HostLime.createLimeHost(application) == host, 'host composition is cached per application');
   }
@@ -139,11 +142,11 @@ class HostLimeSmoke {
   }
 
   static function testGlyphRasterizer(application:Application):Void {
-    final enabled = HostLime.enableHostLimeGlyphRasterizer(application);
+    final host = HostLime.createLimeHost(application);
     #if (js || lime_cairo)
-    assert(enabled, 'glyph rasterizer enabled when a raster surface exists');
+    assert(host.text.glyphRasterizer != null, 'glyph rasterizer composed when a raster surface exists');
     #else
-    assert(!enabled, 'glyph rasterizer remains uninstalled without Cairo');
+    assert(host.text.glyphRasterizer == null, 'glyph rasterizer omitted without Cairo');
     #end
   }
 
@@ -206,12 +209,12 @@ class HostLimeSmoke {
     sys.FileSystem.createDirectory(root);
     final backend = LimeFileSystem.createLimeFileSystemBackend();
     final bytes = new _UInt8Array(haxe.io.Bytes.ofHex('00017fff'));
-    assert(awaitValue(backend.writeBinaryFile(root + '/bytes.bin', bytes)) == true, 'write Flight UInt8Array');
-    final read:_UInt8Array = cast awaitValue(backend.readBinaryFile(root + '/bytes.bin'));
+    assert(awaitValue(backend.writeBinaryFile(root + '/bytes.bin', bytes, null)) == true, 'write Flight UInt8Array');
+    final read:_UInt8Array = cast awaitValue(backend.readBinaryFile(root + '/bytes.bin', null));
     assert(read != null && read.length == 4 && read[2] == 127 && read[3] == 255, 'read Flight UInt8Array');
-    assert(awaitValue(backend.writeTextFile(root + '/atomic.txt', 'old')) == true, 'seed atomic file');
-    assert(awaitValue(backend.writeFileAtomic(root + '/atomic.txt', 'new')) == true, 'atomic replace');
-    assert(awaitValue(backend.readTextFile(root + '/atomic.txt')) == 'new', 'atomic replacement contents');
+    assert(awaitValue(backend.writeTextFile(root + '/atomic.txt', 'old', null)) == true, 'seed atomic file');
+    assert(awaitValue(backend.writeFileAtomic(root + '/atomic.txt', 'new', null)) == true, 'atomic replace');
+    assert(awaitValue(backend.readTextFile(root + '/atomic.txt', null)) == 'new', 'atomic replacement contents');
     removeTree(root);
   }
 

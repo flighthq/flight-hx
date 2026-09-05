@@ -42,7 +42,6 @@ private class LimeNativeGlyphRasterizer {
     final ascent:Float = _Runtime.field(metrics, 'fontBoundingBoxAscent');
     final descent:Float = _Runtime.field(metrics, 'fontBoundingBoxDescent');
     final available = ascent > 0 && descent >= 0;
-    flight._GlyphAtlas.observeGlyphRasterizerHostResult('measureMetrics', available);
     return available ? {ascent: ascent, descent: descent, lineGap: 0} : null;
   }
 
@@ -61,7 +60,6 @@ private class LimeNativeGlyphRasterizer {
     final width = Std.int(HxMath.max(0, HxMath.ceil(left + right))) + guard * 2;
     final height = Std.int(HxMath.max(0, HxMath.ceil(ascent + descent))) + guard * 2;
     if (width <= guard * 2 || height <= guard * 2) {
-      flight._GlyphAtlas.observeGlyphRasterizerHostResult('rasterize', true);
       return null;
     }
 
@@ -75,7 +73,6 @@ private class LimeNativeGlyphRasterizer {
     context.fillText(text, guard + left, guard + ascent);
     final image:Dynamic = context.getImageData(0, 0, width, height);
     final pixels = new _UInt8ClampedArray(_Runtime.field(image, 'data'));
-    flight._GlyphAtlas.observeGlyphRasterizerHostResult('rasterize', true);
     return {
       advance: advance,
       bearingX: -left,

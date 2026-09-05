@@ -12,7 +12,7 @@
 // REVIEW: reconcile key/modifier/touch mapping against LimeInput's exact logic.
 package flight.hostLime;
 
-#if (lime && flight_host_develop)
+#if lime
 import flight.types.InputIngressBackend;
 import flight.types.InputIngressSink;
 import lime.ui.Window;

@@ -10,7 +10,7 @@
 // duration mapping and PCM->AudioBuffer conversion exactly.
 package flight.hostLime;
 
-#if (lime && flight_host_develop)
+#if lime
 import lime.media.AudioBuffer;
 import lime.media.AudioSource;
 

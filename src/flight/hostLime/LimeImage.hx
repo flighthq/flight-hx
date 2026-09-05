@@ -9,7 +9,10 @@ import flight.types.ImageBackend;
 class LimeImage {
   public static function createLimeImageBackend():ImageBackend {
     #if js
-    return flight._Image.createWebImageBackend();
+    // createWebImageBackend() is typed `ImageBackend & Entity`; the extra Entity
+    // runtime slot keeps the intersection shape from implicitly unifying to bare
+    // ImageBackend, so cast (matching the native branch below).
+    return cast flight.HostWeb.createWebImageBackend();
     #else
     return cast {
       loadImageFromUrl: function(url:String, _crossOrigin:Null<String>, signal:Null<AbortSignal>):_Promise<flight.types.ImageResource> {

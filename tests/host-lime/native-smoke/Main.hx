@@ -33,9 +33,8 @@ class Main extends Application {
         default: false;
       }, 'Lime window uses a hardware GL context');
 
-      // The window capability is now composed into a Host and passed explicitly
-      // to Flight's window functions rather than installed globally.
-      HostLime.enableHostLime(this);
+      // Every capability is composed into a Host and passed explicitly to
+      // Flight's functions rather than installed globally.
       host = HostLime.createLimeHost(this);
 
       attachedWindow = flight.Application.createApplicationWindow();

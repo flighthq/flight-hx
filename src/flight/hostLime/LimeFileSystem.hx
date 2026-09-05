@@ -23,19 +23,19 @@ class LimeFileSystem {
   /** Allocation entry point, Flight-style: `createLimeFileSystemBackend()`. */
   public static function createLimeFileSystemBackend():flight.types.FileSystemHostBackend {
     return cast {
-      readTextFile: function(path:String):_Promise<Dynamic> {
+      readTextFile: function(path:String, _signal:Dynamic):_Promise<Dynamic> {
         return done(try File.getContent(path) catch (_:Dynamic) null);
       },
-      writeTextFile: function(path:String, data:String):_Promise<Dynamic> {
+      writeTextFile: function(path:String, data:String, _signal:Dynamic):_Promise<Dynamic> {
         return done(try {
           File.saveContent(path, data);
           true;
         } catch (_:Dynamic) false);
       },
-      readBinaryFile: function(path:String):_Promise<Dynamic> {
+      readBinaryFile: function(path:String, _signal:Dynamic):_Promise<Dynamic> {
         return done(try (new _UInt8Array(File.getBytes(path)) : Dynamic) catch (_:Dynamic) null);
       },
-      readBinaryFileRange: function(path:String, offset:Float, length:Float):_Promise<Dynamic> {
+      readBinaryFileRange: function(path:String, offset:Float, length:Float, _signal:Dynamic):_Promise<Dynamic> {
         return done(try {
           final bytes = File.getBytes(path);
           final from = Std.int(offset);
@@ -46,13 +46,13 @@ class LimeFileSystem {
           }
         } catch (_:Dynamic) null);
       },
-      writeBinaryFile: function(path:String, data:Dynamic):_Promise<Dynamic> {
+      writeBinaryFile: function(path:String, data:Dynamic, _signal:Dynamic):_Promise<Dynamic> {
         return done(try {
           File.saveBytes(path, viewToBytes(data));
           true;
         } catch (_:Dynamic) false);
       },
-      writeFileAtomic: function(path:String, data:Dynamic):_Promise<Dynamic> {
+      writeFileAtomic: function(path:String, data:Dynamic, _signal:Dynamic):_Promise<Dynamic> {
         return done(writeAtomic(path, data));
       },
       fileExists: function(path:String):_Promise<Dynamic> {
@@ -79,7 +79,7 @@ class LimeFileSystem {
           true;
         } catch (_:Dynamic) false);
       },
-      readDirectory: function(path:String):_Promise<Dynamic> {
+      readDirectory: function(path:String, _signal:Dynamic):_Promise<Dynamic> {
         return done(try listEntries(path) catch (_:Dynamic) ([] : Array<Dynamic>));
       },
       readDirectoryRecursive: function(path:String, options:Dynamic):_Promise<Dynamic> {
@@ -114,7 +114,7 @@ class LimeFileSystem {
           true;
         } catch (_:Dynamic) false);
       },
-      appendTextFile: function(path:String, data:String):_Promise<Dynamic> {
+      appendTextFile: function(path:String, data:String, _signal:Dynamic):_Promise<Dynamic> {
         return done(try {
           final output = File.append(path, false);
           output.writeString(data);
@@ -123,8 +123,8 @@ class LimeFileSystem {
         } catch (_:Dynamic) false);
       },
       // No native stream emulation yet; null is the contract's unsupported value.
-      openFileReadStream: function(_path:String):_Promise<Dynamic> return done(null),
-      openFileWriteStream: function(_path:String):_Promise<Dynamic> return done(null),
+      openFileReadStream: function(_path:String, _signal:Dynamic):_Promise<Dynamic> return done(null),
+      openFileWriteStream: function(_path:String, _signal:Dynamic):_Promise<Dynamic> return done(null),
       // sys exposes no symlink or permission APIs; report unsupported per contract.
       createFileSymlink: function(_target:String, _linkPath:String):_Promise<Dynamic> return done(false),
       readFileSymlink: function(_path:String):_Promise<Dynamic> return done(null),
