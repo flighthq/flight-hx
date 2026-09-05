@@ -184,6 +184,7 @@ private class ClayGlContext {
   public inline function createVertexArray():Dynamic throw "hostClay: GL.createVertexArray requires the native (linc_opengl) GL backend; not available on clay_web.";
   public inline function deleteVertexArray(a0:Dynamic):Dynamic throw "hostClay: GL.deleteVertexArray requires the native (linc_opengl) GL backend; not available on clay_web.";
   public inline function drawBuffers(a0:Dynamic):Dynamic throw "hostClay: GL.drawBuffers requires the native (linc_opengl) GL backend; not available on clay_web.";
+  public inline function drawArraysInstanced(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic):Dynamic throw "hostClay: GL.drawArraysInstanced requires the native (linc_opengl) GL backend; not available on clay_web.";
   public inline function drawElementsInstanced(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic, a4:Dynamic):Dynamic throw "hostClay: GL.drawElementsInstanced requires the native (linc_opengl) GL backend; not available on clay_web.";
   public inline function vertexAttribDivisor(a0:Dynamic, a1:Dynamic):Dynamic throw "hostClay: GL.vertexAttribDivisor requires the native (linc_opengl) GL backend; not available on clay_web.";
 #else
@@ -191,6 +192,7 @@ private class ClayGlContext {
   public inline function createVertexArray():Dynamic return cast GL.createVertexArray();
   public inline function deleteVertexArray(a0:Dynamic):Void GL.deleteVertexArray(cast a0);
   public inline function drawBuffers(a0:Dynamic):Void GL.drawBuffers(cast a0);
+  public inline function drawArraysInstanced(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic):Void GL.drawArraysInstanced(cast a0, cast a1, cast a2, cast a3);
   public inline function drawElementsInstanced(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic, a4:Dynamic):Void GL.drawElementsInstanced(cast a0, cast a1, cast a2, cast a3, cast a4);
   public inline function vertexAttribDivisor(a0:Dynamic, a1:Dynamic):Void GL.vertexAttribDivisor(cast a0, cast a1);
 #end
