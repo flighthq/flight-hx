@@ -1171,7 +1171,7 @@ class _Swf {
         (reference = cast ((cast (#if js _Runtime.callValue(createEmbeddedImageResourceReference, cast ([(cast image : SwfImagePayload__swfDocument).bytes, ({ final __callArgument298:Dynamic = (cast image : SwfImagePayload__swfDocument).mimeType; __callArgument298; })] : Array<Dynamic>)) #else createEmbeddedImageResourceReference((cast image : SwfImagePayload__swfDocument).bytes, ({ final __callArgument297:Dynamic = (cast image : SwfImagePayload__swfDocument).mimeType; __callArgument297; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : EmbeddedImageResourceReference) : Dynamic));
         ((cast references : flight._internal._Map<Float, EmbeddedImageResourceReference>).set((cast characterId), (cast reference)));
       }
-      _Runtime.callProperty(payloads, 'push', cast ([_Runtime.mergeObjects([source, { reference: reference }])] : Array<Dynamic>));
+      _Runtime.callProperty(payloads, 'push', cast ([(#if flight_struct_typedef _Runtime.mergeObjects([source, { reference: reference }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([source, { reference: reference }]); ({ characterId: _Runtime.field(__structInitSource, 'characterId'), compressedAlphaBytes: _Runtime.field(__structInitSource, 'compressedAlphaBytes'), deblockingParameterRaw: _Runtime.field(__structInitSource, 'deblockingParameterRaw'), height: _Runtime.field(__structInitSource, 'height'), reference: _Runtime.field(__structInitSource, 'reference'), width: _Runtime.field(__structInitSource, 'width') } : SwfJpegAlphaPayload); }) #end)] : Array<Dynamic>));
     }
     return cast payloads;
     return cast null;

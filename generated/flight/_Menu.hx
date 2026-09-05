@@ -78,7 +78,7 @@ class _Menu {
 
   public static function cloneMenuTemplate(template:MenuItemTemplate):MenuItemTemplate {
     var clone:MenuItemTemplate = cast _Runtime.UNDEFINED;
-    clone = (cast _Runtime.mergeObjects([template]));
+    clone = (cast (#if flight_struct_typedef _Runtime.mergeObjects([template]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([template]); ({ accelerator: _Runtime.field(__structInitSource, 'accelerator'), checked: _Runtime.field(__structInitSource, 'checked'), enabled: _Runtime.field(__structInitSource, 'enabled'), id: _Runtime.field(__structInitSource, 'id'), label: _Runtime.field(__structInitSource, 'label'), role: _Runtime.field(__structInitSource, 'role'), sublabel: _Runtime.field(__structInitSource, 'sublabel'), submenu: _Runtime.field(__structInitSource, 'submenu'), toolTip: _Runtime.field(__structInitSource, 'toolTip'), type: _Runtime.field(__structInitSource, 'type'), visible: _Runtime.field(__structInitSource, 'visible') } : MenuItemTemplate); }) #end));
     if ((cast !_Runtime.strictEquals(template.submenu, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (clone.submenu = cast ((cast _Runtime.mapArray((cast template.submenu : Array<MenuItemTemplate>), cloneMenuTemplate, _Runtime.UNDEFINED)) : Null<Array<MenuItemTemplate>>));
     }
@@ -96,7 +96,7 @@ class _Menu {
 
   public static function createMenuItemTemplate(?template:{ @:optional var id:Null<String>; @:optional var label:Null<String>; @:optional var type:Null<MenuItemType>; @:optional var role:Null<MenuItemRole>; @:optional var accelerator:Null<String>; @:optional var enabled:Null<Bool>; @:optional var checked:Null<Bool>; @:optional var visible:Null<Bool>; @:optional var sublabel:Null<String>; @:optional var toolTip:Null<String>; @:optional var submenu:Null<Array<MenuItemTemplate>>; }):NonEntityCreateResult<MenuItemTemplate, String> {
     var item:MenuItemTemplate = cast _Runtime.UNDEFINED;
-    item = (cast _Runtime.mergeObjects([{ type: 'normal' }, { enabled: true }, template]));
+    item = (cast (#if flight_struct_typedef _Runtime.mergeObjects([{ type: 'normal' }, { enabled: true }, template]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([{ type: 'normal' }, { enabled: true }, template]); ({ accelerator: _Runtime.field(__structInitSource, 'accelerator'), checked: _Runtime.field(__structInitSource, 'checked'), enabled: _Runtime.field(__structInitSource, 'enabled'), id: _Runtime.field(__structInitSource, 'id'), label: _Runtime.field(__structInitSource, 'label'), role: _Runtime.field(__structInitSource, 'role'), sublabel: _Runtime.field(__structInitSource, 'sublabel'), submenu: _Runtime.field(__structInitSource, 'submenu'), toolTip: _Runtime.field(__structInitSource, 'toolTip'), type: _Runtime.field(__structInitSource, 'type'), visible: _Runtime.field(__structInitSource, 'visible') } : MenuItemTemplate); }) #end));
     if ((cast !_Runtime.strictEquals(item.submenu, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (item.submenu = cast ((cast _Runtime.mapArray((cast item.submenu : Array<MenuItemTemplate>), function(child:MenuItemTemplate, __unused0:Float, __unused1:Array<MenuItemTemplate>):MenuItemTemplate return (cast createMenuItemTemplate(({ final __callArgument8:Dynamic = child; __callArgument8; })) : MenuItemTemplate), _Runtime.UNDEFINED)) : Null<Array<MenuItemTemplate>>));
     }

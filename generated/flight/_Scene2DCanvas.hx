@@ -1192,7 +1192,7 @@ class _Scene2DCanvas {
   private static function createCanvasRenderStateRuntime(pipeline:CanvasPipeline, canvasTextureResolvers:CanvasTextureResolvers):CanvasRenderStateRuntime {
     var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast createRenderStateRuntime() : CanvasRenderStateRuntime);
-    (runtime.registries = cast (_Runtime.mergeObjects([_Runtime.field(pipeline, 'registries')]) : CanvasRenderRegistries));
+    (runtime.registries = cast ((#if flight_struct_typedef _Runtime.mergeObjects([_Runtime.field(pipeline, 'registries')]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([_Runtime.field(pipeline, 'registries')]); ({ blendModeApplication: _Runtime.field(__structInitSource, 'blendModeApplication'), canvasShapeCommands: _Runtime.field(__structInitSource, 'canvasShapeCommands'), colorAdjustments: _Runtime.field(__structInitSource, 'colorAdjustments'), colorAdjustmentUnsupportedGuard: _Runtime.field(__structInitSource, 'colorAdjustmentUnsupportedGuard'), effectPaddingResolvers: _Runtime.field(__structInitSource, 'effectPaddingResolvers'), materialRenderers: _Runtime.field(__structInitSource, 'materialRenderers'), renderEffects: _Runtime.field(__structInitSource, 'renderEffects'), renderers: _Runtime.field(__structInitSource, 'renderers'), renderRootGuard: _Runtime.field(__structInitSource, 'renderRootGuard'), strokeTessellator: _Runtime.field(__structInitSource, 'strokeTessellator') } : CanvasRenderRegistries); }) #end) : CanvasRenderRegistries));
     (runtime.canvasTextureResolvers = cast (canvasTextureResolvers : CanvasTextureResolvers));
     (runtime.teardowns = cast (cast ([] : Array<Dynamic>) : Array<CanvasRenderState->Void>));
     return cast runtime;

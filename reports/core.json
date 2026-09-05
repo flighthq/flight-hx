@@ -17338,10 +17338,10 @@
   ],
   "schemaVersion": 7,
   "staticLowering": {
-    "booleanAndExpressions": 2848,
-    "booleanConditionalExpressions": 3568,
-    "booleanOrExpressions": 3492,
-    "booleanTruthinessUses": 17779,
+    "booleanAndExpressions": 2849,
+    "booleanConditionalExpressions": 3591,
+    "booleanOrExpressions": 3495,
+    "booleanTruthinessUses": 17798,
     "destructuringEscapes": {
       "regexp-result-array": {
         "assignment": 0,
@@ -17438,12 +17438,12 @@
       "asyncFlowForOfValues": 21
     },
     "indexedAccesses": {
-      "reads": 9773,
+      "reads": 9789,
       "writes": 4503
     },
     "indexedReceivers": {
       "Array": {
-        "reads": 6825,
+        "reads": 6841,
         "writes": 1473
       },
       "ArrayOrFloat32Array": {
@@ -17491,7 +17491,7 @@
         "writes": 402
       }
     },
-    "numericRelations": 7953,
+    "numericRelations": 7956,
     "syntheticArrayReads": {
       "highArityArguments": 27,
       "iterationBindings": 205

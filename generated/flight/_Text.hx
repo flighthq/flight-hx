@@ -191,7 +191,7 @@ class _Text {
   }
 
   public static function patchNativeTextStyle(source:NativeText, patch:{ @:optional var align:Null<TextFormatAlign>; @:optional var bold:Null<Bool>; @:optional var color:Null<Float>; @:optional var font:Null<String>; @:optional var italic:Null<Bool>; @:optional var leading:Null<Float>; @:optional var size:Null<Float>; }):Void {
-    ((cast source.data : { var style:NativeTextStyle; }).style = cast (_Runtime.mergeObjects([(cast source.data : { var style:NativeTextStyle; }).style, patch]) : NativeTextStyle));
+    ((cast source.data : { var style:NativeTextStyle; }).style = cast ((#if flight_struct_typedef _Runtime.mergeObjects([(cast source.data : { var style:NativeTextStyle; }).style, patch]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([(cast source.data : { var style:NativeTextStyle; }).style, patch]); ({ align: _Runtime.field(__structInitSource, 'align'), bold: _Runtime.field(__structInitSource, 'bold'), color: _Runtime.field(__structInitSource, 'color'), font: _Runtime.field(__structInitSource, 'font'), italic: _Runtime.field(__structInitSource, 'italic'), leading: _Runtime.field(__structInitSource, 'leading'), size: _Runtime.field(__structInitSource, 'size') } : NativeTextStyle); }) #end) : NativeTextStyle));
     invalidateNodeLocalContent((cast source : Dynamic));
     invalidateNodeLocalBounds((cast source : Dynamic));
   }
@@ -418,7 +418,7 @@ class _Text {
     var merged:TextFormat = cast _Runtime.UNDEFINED;
     var keys:Array<String> = cast _Runtime.UNDEFINED;
     data = source.data;
-    merged = (cast _Runtime.mergeObjects([data.defaultTextFormat]));
+    merged = (cast (#if flight_struct_typedef _Runtime.mergeObjects([data.defaultTextFormat]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([data.defaultTextFormat]); ({ align: _Runtime.field(__structInitSource, 'align'), blockIndent: _Runtime.field(__structInitSource, 'blockIndent'), bold: _Runtime.field(__structInitSource, 'bold'), bullet: _Runtime.field(__structInitSource, 'bullet'), color: _Runtime.field(__structInitSource, 'color'), font: _Runtime.field(__structInitSource, 'font'), indent: _Runtime.field(__structInitSource, 'indent'), italic: _Runtime.field(__structInitSource, 'italic'), kerning: _Runtime.field(__structInitSource, 'kerning'), leading: _Runtime.field(__structInitSource, 'leading'), leftMargin: _Runtime.field(__structInitSource, 'leftMargin'), letterSpacing: _Runtime.field(__structInitSource, 'letterSpacing'), listMarker: _Runtime.field(__structInitSource, 'listMarker'), rightMargin: _Runtime.field(__structInitSource, 'rightMargin'), size: _Runtime.field(__structInitSource, 'size'), strikethrough: _Runtime.field(__structInitSource, 'strikethrough'), tabStops: _Runtime.field(__structInitSource, 'tabStops'), target: _Runtime.field(__structInitSource, 'target'), underline: _Runtime.field(__structInitSource, 'underline'), url: _Runtime.field(__structInitSource, 'url'), variations: _Runtime.field(__structInitSource, 'variations') } : TextFormat); }) #end));
     for (range in _Runtime.iterable(data.textFormatRanges)) {
       if ((cast ((cast ((cast index : Float) >= (cast (cast range : TextFormatRange).start : Float)) : Bool) && (cast ((cast index : Float) < (cast (cast range : TextFormatRange).end : Float)) : Bool)) : Bool)) {
         (merged = cast ((cast mergeTextFormat(({ final __callArgument102:Dynamic = merged; __callArgument102; }), (cast range : TextFormatRange).format) : TextFormat) : Dynamic));

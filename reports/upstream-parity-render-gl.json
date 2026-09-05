@@ -1,19 +1,31 @@
 {
-  "completedAt": "2026-08-21T00:14:31.487Z",
+  "completedAt": "2026-09-05T07:26:26.935Z",
   "failedPackages": 0,
-  "jobs": 12,
+  "fixedSinceReview": 0,
+  "infrastructureFailures": 0,
+  "jobs": 3,
   "packages": [
     {
-      "durationMs": 1262495,
+      "durationMs": 67106,
       "exitCode": 0,
+      "isolationRecovered": false,
       "package": "render-gl",
       "signal": null,
       "status": "passed",
-      "summary": "373 passed (373)",
-      "testFiles": 29
+      "summary": "453 passed (453)",
+      "testFiles": 32,
+      "review": {
+        "baselineReport": "reports/upstream-parity.json",
+        "reviewedAt": "2026-08-21T03:43:35.613Z",
+        "status": "passed",
+        "unreviewedFailures": 0
+      }
     }
   ],
-  "schemaVersion": 1,
+  "reviewedFailures": 0,
+  "schemaVersion": 2,
   "selectedPackage": "render-gl",
-  "startedAt": "2026-08-20T23:53:29.040Z"
+  "startedAt": "2026-09-05T07:25:19.222Z",
+  "strict": false,
+  "unreviewedFailures": 0
 }

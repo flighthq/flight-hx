@@ -1720,7 +1720,7 @@ class _Interaction {
       }
       if ((cast !(cast (cast (cast extension : InteractiveExtension__nodeInteractiveStateBinding).runtime : NodeInteractiveStateExtensionRuntime).apply(({ final __callArgument519:Dynamic = fields; __callArgument519; }), (cast runtime : InteractiveStateRuntime__nodeInteractiveStateBinding).transition) : Bool) : Bool)) { return cast false; }
     }
-    ((cast runtime : InteractiveStateRuntime__nodeInteractiveStateBinding).flags = _Runtime.mergeObjects([flags]));
+    ((cast runtime : InteractiveStateRuntime__nodeInteractiveStateBinding).flags = (#if flight_struct_typedef _Runtime.mergeObjects([flags]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([flags]); ({ disabled: _Runtime.field(__structInitSource, 'disabled'), hovered: _Runtime.field(__structInitSource, 'hovered'), pressed: _Runtime.field(__structInitSource, 'pressed') } : NodeInteractiveStateFlags); }) #end));
     return cast true;
     return cast null;
   }

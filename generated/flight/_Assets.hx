@@ -313,7 +313,7 @@ class _Assets {
   public static function copyAssetDescriptor__assetLibrary(descriptor:AssetDescriptor):AssetDescriptor {
     var groups:Null<Array<String>> = cast _Runtime.UNDEFINED;
     groups = descriptor.groups;
-    return cast _Runtime.mergeObjects([{ id: descriptor.id }, { type: descriptor.type }, { url: descriptor.url }, ((cast _Runtime.strictEquals(groups, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast {  } : Dynamic) : (cast { groups: _Runtime.concatArrays([_Runtime.toArray(_Runtime.construct(flight._internal._HostValueLut.get('Set'), [groups]))]) } : Dynamic))]);
+    return (#if flight_struct_typedef _Runtime.mergeObjects([{ id: descriptor.id }, { type: descriptor.type }, { url: descriptor.url }, ((cast _Runtime.strictEquals(groups, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast {  } : Dynamic) : (cast { groups: _Runtime.concatArrays([_Runtime.toArray(_Runtime.construct(flight._internal._HostValueLut.get('Set'), [groups]))]) } : Dynamic))]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([{ id: descriptor.id }, { type: descriptor.type }, { url: descriptor.url }, ((cast _Runtime.strictEquals(groups, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast {  } : Dynamic) : (cast { groups: _Runtime.concatArrays([_Runtime.toArray(_Runtime.construct(flight._internal._HostValueLut.get('Set'), [groups]))]) } : Dynamic))]); ({ groups: _Runtime.field(__structInitSource, 'groups'), id: _Runtime.field(__structInitSource, 'id'), type: _Runtime.field(__structInitSource, 'type'), url: _Runtime.field(__structInitSource, 'url') } : AssetDescriptor); }) #end);
     return cast null;
   }
 

@@ -1,12 +1,12 @@
 {
-  "completedAt": "2026-09-05T06:17:12.178Z",
+  "completedAt": "2026-09-05T07:27:51.807Z",
   "failedPackages": 0,
   "fixedSinceReview": 0,
   "infrastructureFailures": 0,
   "jobs": 3,
   "packages": [
     {
-      "durationMs": 16671,
+      "durationMs": 17234,
       "exitCode": 0,
       "isolationRecovered": false,
       "package": "particles",
@@ -15,8 +15,8 @@
       "summary": "124 passed (124)",
       "testFiles": 11,
       "review": {
-        "baselineReport": "reports/upstream-parity.json",
-        "reviewedAt": "2026-08-21T03:43:35.613Z",
+        "baselineReport": "reports/upstream-parity-particles.json",
+        "reviewedAt": "2026-09-05T06:17:12.178Z",
         "status": "passed",
         "unreviewedFailures": 0
       }
@@ -25,7 +25,7 @@
   "reviewedFailures": 0,
   "schemaVersion": 2,
   "selectedPackage": "particles",
-  "startedAt": "2026-09-05T06:16:54.884Z",
+  "startedAt": "2026-09-05T07:27:34.038Z",
   "strict": false,
   "unreviewedFailures": 0
 }
