@@ -18,6 +18,7 @@ export const getVector4DistanceSquared = api.getVector4DistanceSquared;
 export const getVector4Dot = api.getVector4Dot;
 export const getVector4Length = api.getVector4Length;
 export const getVector4LengthSquared = api.getVector4LengthSquared;
+export const initializeVector4 = api.initializeVector4;
 export const interpolateVector4 = api.interpolateVector4;
 export const maxVector4 = api.maxVector4;
 export const minVector4 = api.minVector4;

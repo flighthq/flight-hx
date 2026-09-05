@@ -5,6 +5,8 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight.Types.EntityRuntimeKey;
 import flight.Types.MovieClipKind;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Log.logOnce;
 import flight._Node.addNodeChild;
 import flight._Node.invalidateNodeLocalTransform;
@@ -29,6 +31,8 @@ import flight._Timeline.stopTimeline;
 import flight._Timeline.updateTimeline;
 import flight._Types.EntityRuntimeKey;
 import flight._Types.MovieClipKind;
+import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.EntityRuntime;
 import flight.types.FrameScript;
 import flight.types.LogLevel;
@@ -56,6 +60,7 @@ import flight.types.TextureColorSpace;
 import flight.types.TextureSource;
 import flight.types.TextureSourceCubeFaces;
 import flight.types.Timeline;
+import flight.types.TimelineCue;
 import flight.types.TimelineLabel;
 import flight.types.TimelineSignals;
 import flight.types.TimelineSource;
@@ -92,14 +97,17 @@ class _MovieClip {
   }
 
   public static function createMovieClip(?obj:PartialNode<MovieClip>):MovieClip {
-    return cast (cast createNode2D((cast MovieClipKind : String), (cast obj : Dynamic), (cast createMovieClipData : Dynamic), (cast function(__unused0:Dynamic):MovieClipRuntime return createMovieClipRuntime() : Dynamic), function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : MovieClip); }) #end)) : MovieClip);
+    return cast (cast createNode2D((cast MovieClipKind : String), (cast obj : Dynamic), (cast createMovieClipData : Dynamic), (cast function(__unused0:Dynamic):MovieClipRuntime return createMovieClipRuntime() : Dynamic), function():Dynamic return (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : MovieClip); }) #end)) : MovieClip);
     return cast null;
   }
 
   @:allow(flight)
   @:keep
-  private static function createMovieClipData(?data:{ @:optional var timeline:Null<Timeline>; }):MovieClipData {
-    return cast { timeline: _Runtime.coalesce(({ final __structural8 = data; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var timeline:Null<Timeline>; }).timeline; }), function():Dynamic return cast null) };
+  private static function createMovieClipData(?data:{ @:optional var timeline:Null<Timeline>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):MovieClipData {
+    var out:EntityConstruction<MovieClipData> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ timeline: cast _Runtime.UNDEFINED } : MovieClipData); }) #end));
+    initializeMovieClipData(({ final __callArgument8:Dynamic = out; __callArgument8; }), (cast data : Dynamic));
+    return cast out;
     return cast null;
   }
 
@@ -133,7 +141,7 @@ class _MovieClip {
   }
 
   public static function getMovieClipCurrentFrame(clip:MovieClip):Float {
-    return cast _Runtime.coalesce(({ final __typedStruct9 = (cast (cast clip : MovieClip).data : { var timeline:Null<Timeline>; }).timeline; __typedStruct9 == null ? _Runtime.UNDEFINED : (cast __typedStruct9 : { var currentFrame:Float; }).currentFrame; }), function():Dynamic return cast 1.0);
+    return cast _Runtime.coalesce(({ final __typedStruct10 = (cast (cast clip : MovieClip).data : { var timeline:Null<Timeline>; }).timeline; __typedStruct10 == null ? _Runtime.UNDEFINED : (cast __typedStruct10 : { var currentFrame:Float; }).currentFrame; }), function():Dynamic return cast 1.0);
     return cast null;
   }
 
@@ -145,14 +153,14 @@ class _MovieClip {
 
   public static function getMovieClipFrameScript(clip:MovieClip, frame:flight._internal._Union2<Float, String>):Null<FrameScript> {
     if ((cast _Runtime.strictEquals((cast (cast clip : MovieClip).data : { var timeline:Null<Timeline>; }).timeline, null) : Bool)) { return cast null; }
-    return cast (cast getTimelineFrameScript((cast (cast clip : MovieClip).data : { var timeline:Null<Timeline>; }).timeline, ({ final __callArgument10:Dynamic = frame; __callArgument10; })) : Null<FrameScript>);
+    return cast (cast getTimelineFrameScript((cast (cast clip : MovieClip).data : { var timeline:Null<Timeline>; }).timeline, ({ final __callArgument11:Dynamic = frame; __callArgument11; })) : Null<FrameScript>);
     return cast null;
   }
 
   @:allow(flight)
   @:keep
   private static function getMovieClipRuntime(source:MovieClip):MovieClipRuntime {
-    return cast (cast getNode2DRuntime(({ final __callArgument12:Dynamic = source; __callArgument12; })) : MovieClipRuntime);
+    return cast (cast getNode2DRuntime(({ final __callArgument13:Dynamic = source; __callArgument13; })) : MovieClipRuntime);
     return cast null;
   }
 
@@ -164,22 +172,28 @@ class _MovieClip {
   }
 
   public static function getMovieClipTotalFrames(clip:MovieClip):Float {
-    return cast _Runtime.coalesce(({ final __structural15 = ({ final __typedStruct14 = (cast (cast clip : MovieClip).data : { var timeline:Null<Timeline>; }).timeline; __typedStruct14 == null ? _Runtime.UNDEFINED : (cast __typedStruct14 : { var source:Null<TimelineSource>; }).source; }); __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : { var totalFrames:Float; }).totalFrames; }), function():Dynamic return cast 1.0);
+    return cast _Runtime.coalesce(({ final __structural16 = ({ final __typedStruct15 = (cast (cast clip : MovieClip).data : { var timeline:Null<Timeline>; }).timeline; __typedStruct15 == null ? _Runtime.UNDEFINED : (cast __typedStruct15 : { var source:Null<TimelineSource>; }).source; }); __structural16 == null ? _Runtime.UNDEFINED : (cast __structural16 : { var totalFrames:Float; }).totalFrames; }), function():Dynamic return cast 1.0);
     return cast null;
   }
 
   public static function gotoAndPlayMovieClip(clip:MovieClip, frame:flight._internal._Union2<Float, String>):Void {
     if ((cast _Runtime.strictEquals((cast (cast clip : MovieClip).data : { var timeline:Null<Timeline>; }).timeline, null) : Bool)) { return; }
-    gotoAndPlayTimeline((cast (cast clip : MovieClip).data : { var timeline:Null<Timeline>; }).timeline, ({ final __callArgument16:Dynamic = frame; __callArgument16; }));
+    gotoAndPlayTimeline((cast (cast clip : MovieClip).data : { var timeline:Null<Timeline>; }).timeline, ({ final __callArgument17:Dynamic = frame; __callArgument17; }));
   }
 
   public static function gotoAndStopMovieClip(clip:MovieClip, frame:flight._internal._Union2<Float, String>):Void {
     if ((cast _Runtime.strictEquals((cast (cast clip : MovieClip).data : { var timeline:Null<Timeline>; }).timeline, null) : Bool)) { return; }
-    gotoAndStopTimeline((cast (cast clip : MovieClip).data : { var timeline:Null<Timeline>; }).timeline, ({ final __callArgument18:Dynamic = frame; __callArgument18; }));
+    gotoAndStopTimeline((cast (cast clip : MovieClip).data : { var timeline:Null<Timeline>; }).timeline, ({ final __callArgument19:Dynamic = frame; __callArgument19; }));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeMovieClipData(out:EntityConstruction<MovieClipData>, ?data:{ @:optional var timeline:Null<Timeline>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):Void {
+    _Runtime.setField(out, 'timeline', _Runtime.coalesce(({ final __structural21 = data; __structural21 == null ? _Runtime.UNDEFINED : (cast __structural21 : { @:optional var timeline:Null<Timeline>; }).timeline; }), function():Dynamic return cast null));
   }
 
   public static function isMovieClipPlaying(clip:MovieClip):Bool {
-    return cast _Runtime.coalesce(({ final __typedStruct20 = (cast (cast clip : MovieClip).data : { var timeline:Null<Timeline>; }).timeline; __typedStruct20 == null ? _Runtime.UNDEFINED : (cast __typedStruct20 : { var isPlaying:Bool; }).isPlaying; }), function():Dynamic return cast false);
+    return cast _Runtime.coalesce(({ final __typedStruct22 = (cast (cast clip : MovieClip).data : { var timeline:Null<Timeline>; }).timeline; __typedStruct22 == null ? _Runtime.UNDEFINED : (cast __typedStruct22 : { var isPlaying:Bool; }).isPlaying; }), function():Dynamic return cast false);
     return cast null;
   }
 
@@ -200,7 +214,7 @@ class _MovieClip {
 
   public static function removeMovieClipFrameScript(clip:MovieClip, frame:flight._internal._Union2<Float, String>):Void {
     if ((cast _Runtime.strictEquals((cast (cast clip : MovieClip).data : { var timeline:Null<Timeline>; }).timeline, null) : Bool)) { return; }
-    removeTimelineFrameScript((cast (cast clip : MovieClip).data : { var timeline:Null<Timeline>; }).timeline, ({ final __callArgument21:Dynamic = frame; __callArgument21; }));
+    removeTimelineFrameScript((cast (cast clip : MovieClip).data : { var timeline:Null<Timeline>; }).timeline, ({ final __callArgument23:Dynamic = frame; __callArgument23; }));
   }
 
   public static function setMovieClipSource(clip:MovieClip, source:TimelineSource):Void {
@@ -209,7 +223,7 @@ class _MovieClip {
     (timeline.source = cast (source : Null<TimelineSource>));
     (timeline.target = cast (cast clip : Dynamic));
     ((cast (cast clip : MovieClip).data : { var timeline:Null<Timeline>; }).timeline = cast (timeline : Null<Timeline>));
-    gotoAndStopTimeline(({ final __callArgument23:Dynamic = timeline; __callArgument23; }), ({ final __callArgument24:Dynamic = timeline.currentFrame; __callArgument24; }));
+    gotoAndStopTimeline(({ final __callArgument25:Dynamic = timeline; __callArgument25; }), ({ final __callArgument26:Dynamic = timeline.currentFrame; __callArgument26; }));
   }
 
   public static function stopMovieClip(clip:MovieClip):Void {
@@ -222,15 +236,34 @@ class _MovieClip {
     (cast updateTimeline((cast (cast clip : MovieClip).data : { var timeline:Null<Timeline>; }).timeline, (cast deltaTime : Float)) : Bool);
   }
 
-  public static function createSpritesheetTimelineSource(spritesheet:Spritesheet, animation:SpritesheetAnimation):TimelineSource {
+  public static function createSpritesheetTimelineSource(spritesheet:Spritesheet, animation:SpritesheetAnimation):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var totalFrames:Float; var labels:Array<TimelineLabel>; var cues:Array<TimelineCue>; var frameRate:Null<Float>; var constructFrame:Node2D->Float->Void; } {
+    var out:EntityConstruction<TimelineSource> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ constructFrame: cast _Runtime.UNDEFINED, cues: cast _Runtime.UNDEFINED, frameRate: cast _Runtime.UNDEFINED, labels: cast _Runtime.UNDEFINED, totalFrames: cast _Runtime.UNDEFINED } : TimelineSource); }) #end));
+    initializeSpritesheetTimelineSource(({ final __callArgument29:Dynamic = out; __callArgument29; }), ({ final __callArgument30:Dynamic = spritesheet; __callArgument30; }), ({ final __callArgument31:Dynamic = animation; __callArgument31; }));
+    return cast out;
+    return cast null;
+  }
+
+  public static function explainSpritesheetTimelineSource(animation:SpritesheetAnimation):SpritesheetTimelineSourceExplanation {
+    return cast { directionMaterialized: true, unsupportedFields: ((cast _Runtime.strictEquals(animation.frameDurations, null) : Bool) ? (cast _MovieClip.REPEAT_COUNT_UNSUPPORTED__spritesheetTimelineSource : Dynamic) : (cast _MovieClip.FRAME_DURATIONS_AND_REPEAT_COUNT_UNSUPPORTED__spritesheetTimelineSource : Dynamic)) };
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeSpritesheetTimelineSource(out:EntityConstruction<TimelineSource>, spritesheet:Spritesheet, animation:SpritesheetAnimation):Void {
     var bitmaps:flight._internal._WeakMap<Node2D, Sprite> = cast _Runtime.UNDEFINED;
     var frames:Array<Float> = cast _Runtime.UNDEFINED;
     bitmaps = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
-    frames = (cast _MovieClip.materializeSpritesheetTimelineFrames__spritesheetTimelineSource(({ final __callArgument27:Dynamic = animation; __callArgument27; })) : Array<Float>);
+    frames = (cast _MovieClip.materializeSpritesheetTimelineFrames__spritesheetTimelineSource(({ final __callArgument35:Dynamic = animation; __callArgument35; })) : Array<Float>);
     if ((cast !_Runtime.strictEquals(_MovieClip._spritesheetTimelineSourceGuard__spritesheetTimelineSource, null) : Bool)) {
-      (cast _MovieClip._spritesheetTimelineSourceGuard__spritesheetTimelineSource : SpritesheetAnimation->SpritesheetTimelineSourceExplanation->Void)(({ final __callArgument29:Dynamic = animation; __callArgument29; }), (cast explainSpritesheetTimelineSource(({ final __callArgument30:Dynamic = animation; __callArgument30; })) : SpritesheetTimelineSourceExplanation));
+      (cast _MovieClip._spritesheetTimelineSourceGuard__spritesheetTimelineSource : SpritesheetAnimation->SpritesheetTimelineSourceExplanation->Void)(({ final __callArgument37:Dynamic = animation; __callArgument37; }), (cast explainSpritesheetTimelineSource(({ final __callArgument38:Dynamic = animation; __callArgument38; })) : SpritesheetTimelineSourceExplanation));
     }
-    return cast { totalFrames: _Runtime.field(frames, 'length'), labels: cast ([] : Array<Dynamic>), cues: cast ([] : Array<Dynamic>), frameRate: (1000.0 / animation.frameDuration), constructFrame: function(target:Node2D, frame:Float):Void {
+    _Runtime.setField(out, 'totalFrames', _Runtime.field(frames, 'length'));
+    _Runtime.setField(out, 'labels', cast ([] : Array<Dynamic>));
+    _Runtime.setField(out, 'cues', cast ([] : Array<Dynamic>));
+    _Runtime.setField(out, 'frameRate', (1000.0 / animation.frameDuration));
+    ((cast out : { var constructFrame:Node2D->Float->Void; }).constructFrame = (cast function(target:Node2D, frame:Float):Void {
       var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
       var bitmap:Null<Sprite> = cast _Runtime.UNDEFINED;
       var sheetFrame:SpritesheetFrame = cast _Runtime.UNDEFINED;
@@ -244,17 +277,11 @@ class _MovieClip {
       }
       sheetFrame = flight._internal._StaticIndex.readArray(spritesheet.frames, flight._internal._StaticIndex.readFloatArrayTyped((cast frames : Array<Float>), (cast (frame - 1.0) : Float)));
       if ((cast _Runtime.strictEquals(sheetFrame, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-      ((cast (cast bitmap : { var data:SpriteData; }).data : { var texture:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).texture = cast (cast (cast getTextureAtlasRegionTexture(({ final __callArgument35:Dynamic = atlas; __callArgument35; }), (cast sheetFrame.id : Float)) : Null<Texture2D>) : Dynamic));
+      ((cast (cast bitmap : { var data:SpriteData; }).data : { var texture:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_11889:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_11889:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_11889:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).texture = cast (cast (cast getTextureAtlasRegionTexture(({ final __callArgument43:Dynamic = atlas; __callArgument43; }), (cast sheetFrame.id : Float)) : Null<Texture2D>) : Dynamic));
       ((cast bitmap : { var x:Float; }).x = cast ((sheetFrame.offsetX - animation.originX) : Float));
       ((cast bitmap : { var y:Float; }).y = cast ((sheetFrame.offsetY - animation.originY) : Float));
       invalidateNodeLocalTransform((cast bitmap : Dynamic));
-    } };
-    return cast null;
-  }
-
-  public static function explainSpritesheetTimelineSource(animation:SpritesheetAnimation):SpritesheetTimelineSourceExplanation {
-    return cast { directionMaterialized: true, unsupportedFields: ((cast _Runtime.strictEquals(animation.frameDurations, null) : Bool) ? (cast _MovieClip.REPEAT_COUNT_UNSUPPORTED__spritesheetTimelineSource : Dynamic) : (cast _MovieClip.FRAME_DURATIONS_AND_REPEAT_COUNT_UNSUPPORTED__spritesheetTimelineSource : Dynamic)) };
-    return cast null;
+    }));
   }
 
   @:allow(flight)

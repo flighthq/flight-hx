@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:keep
+@:structInit
+class AppOpenFileBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var subscribe:(String->Void)->(Void->Void);
+
+  private function new(subscribe:(String->Void)->(Void->Void)):Void {
+    this.__symbol__EntityRuntime = null;
+    this.subscribe = subscribe;
+  }
+}
+#else
 typedef AppOpenFileBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var subscribe:(String->Void)->(Void->Void); };
+#end

@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SsrEffect = { var kind:String; @:optional var maxDistance:Float; @:optional var resolution:Float; @:optional var steps:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class SsrEffect extends flight.types.RenderEffect<String> {
+  public var maxDistance:Null<Float>;
+  public var resolution:Null<Float>;
+  public var steps:Null<Float>;
+
+  private function new(kind:String, ?maxDistance:Null<Float>, ?resolution:Null<Float>, ?steps:Null<Float>):Void {
+    super(kind);
+    this.maxDistance = maxDistance;
+    this.resolution = resolution;
+    this.steps = steps;
+  }
+}
+#else
+typedef SsrEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var maxDistance:Float; @:optional var resolution:Float; @:optional var steps:Float; };
+#end

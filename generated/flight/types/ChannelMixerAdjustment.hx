@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ChannelMixerAdjustment = { var kind:String; var colorMatrix:Array<Float>; var matrix:Array<Float>; };
+#if !flight_struct_typedef
+@:allow(flight._Adjustments)
+@:keep
+@:structInit
+class ChannelMixerAdjustment extends flight.types.ColorMatrixAdjustment<String> {
+  public var matrix:Array<Float>;
+
+  private function new(kind:String, colorMatrix:Array<Float>, matrix:Array<Float>):Void {
+    super(kind, colorMatrix);
+    this.matrix = matrix;
+  }
+}
+#else
+typedef ChannelMixerAdjustment = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var colorMatrix:Array<Float>; var matrix:Array<Float>; };
+#end

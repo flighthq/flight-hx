@@ -6,11 +6,12 @@ import flight._internal._Runtime;
 
 #if !flight_struct_typedef
 @:allow(flight._Scene2D)
+@:allow(flight.types.Scale9Sprite)
 @:keep
 @:structInit
-class Sprite extends flight.types.Node2D<SpriteData> {
+class Sprite<TData = Dynamic> extends flight.types.Node2D<TData> {
 
-  private function new(data:SpriteData, enabled:Bool, kind:Kind, name:Null<String>, alpha:Float, visible:Bool, blendMode:Null<BlendMode>, clip:Null<ClipRegion>, material:Null<Material>, materialData:Null<MaterialData>, pivotX:Float, pivotY:Float, rotation:Float, scaleX:Float, scaleY:Float, skewX:Float, skewY:Float, x:Float, y:Float):Void {
+  private function new(data:TData, enabled:Bool, kind:Kind, name:Null<String>, alpha:Float, visible:Bool, blendMode:Null<BlendMode>, clip:Null<ClipRegion>, material:Null<Material>, materialData:Null<MaterialData>, pivotX:Float, pivotY:Float, rotation:Float, scaleX:Float, scaleY:Float, skewX:Float, skewY:Float, x:Float, y:Float):Void {
     super(data, enabled, kind, name, alpha, visible, blendMode, clip, material, materialData, pivotX, pivotY, rotation, scaleX, scaleY, skewX, skewY, x, y);
   }
 }

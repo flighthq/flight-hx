@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createRiveSkeleton2D = api.createRiveSkeleton2D;
+export const initializeRiveSkeleton2DImport = api.initializeRiveSkeleton2DImport;

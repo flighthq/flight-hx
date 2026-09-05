@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWebServiceWorkerNotificationCapabilities = api.createWebServiceWorkerNotificationCapabilities;
+export const initializeWebServiceWorkerNotificationCapabilities = api.initializeWebServiceWorkerNotificationCapabilities;
 export const notifyWebServiceWorkerNotificationEvent = api.notifyWebServiceWorkerNotificationEvent;

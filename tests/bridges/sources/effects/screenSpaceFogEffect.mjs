@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createScreenSpaceFogEffect = api.createScreenSpaceFogEffect;
+export const initializeScreenSpaceFogEffect = api.initializeScreenSpaceFogEffect;

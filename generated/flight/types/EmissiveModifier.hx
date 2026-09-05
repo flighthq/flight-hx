@@ -4,4 +4,26 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef EmissiveModifier = { var kind:String; var slot:String; var color:Float; var strength:Float; @:optional var mask:Texture; @:optional var facing:EmissiveModifierFacing; @:optional var facingSoftness:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Shading)
+@:keep
+@:structInit
+class EmissiveModifier extends flight.types.Modifier<String, String> {
+  public var color:Float;
+  public var strength:Float;
+  public var mask:Null<Texture>;
+  public var facing:Null<EmissiveModifierFacing>;
+  public var facingSoftness:Null<Float>;
+
+  private function new(kind:String, slot:String, color:Float, strength:Float, ?mask:Null<Texture>, ?facing:Null<EmissiveModifierFacing>, ?facingSoftness:Null<Float>):Void {
+    super(kind, slot);
+    this.color = color;
+    this.strength = strength;
+    this.mask = mask;
+    this.facing = facing;
+    this.facingSoftness = facingSoftness;
+  }
+}
+#else
+typedef EmissiveModifier = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var slot:String; var color:Float; var strength:Float; @:optional var mask:Texture; @:optional var facing:EmissiveModifierFacing; @:optional var facingSoftness:Float; };
+#end

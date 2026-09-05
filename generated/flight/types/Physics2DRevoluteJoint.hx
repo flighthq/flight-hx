@@ -4,4 +4,38 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics2DRevoluteJoint = { var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var breakForce:Float; var breakTorque:Float; var enableMotor:Bool; var motorSpeed:Float; var maxMotorTorque:Float; var motorImpulse:Float; var enableLimit:Bool; var lowerAngle:Float; var upperAngle:Float; var referenceAngle:Float; var enableLimitSpring:Bool; var limitFrequencyHz:Float; var limitDampingRatio:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Physics2D)
+@:keep
+@:structInit
+class Physics2DRevoluteJoint extends flight.types.Physics2DJoint {
+  public var enableMotor:Bool;
+  public var motorSpeed:Float;
+  public var maxMotorTorque:Float;
+  public var motorImpulse:Float;
+  public var enableLimit:Bool;
+  public var lowerAngle:Float;
+  public var upperAngle:Float;
+  public var referenceAngle:Float;
+  public var enableLimitSpring:Bool;
+  public var limitFrequencyHz:Float;
+  public var limitDampingRatio:Float;
+
+  private function new(kind:Physics2DJointKind, bodyA:Float, bodyB:Float, localAnchorAX:Float, localAnchorAY:Float, localAnchorBX:Float, localAnchorBY:Float, collideConnected:Bool, impulse0:Float, impulse1:Float, impulse2:Float, rAX:Float, rAY:Float, rBX:Float, rBY:Float, breakForce:Float, breakTorque:Float, enableMotor:Bool, motorSpeed:Float, maxMotorTorque:Float, motorImpulse:Float, enableLimit:Bool, lowerAngle:Float, upperAngle:Float, referenceAngle:Float, enableLimitSpring:Bool, limitFrequencyHz:Float, limitDampingRatio:Float):Void {
+    super(kind, bodyA, bodyB, localAnchorAX, localAnchorAY, localAnchorBX, localAnchorBY, collideConnected, impulse0, impulse1, impulse2, rAX, rAY, rBX, rBY, breakForce, breakTorque);
+    this.enableMotor = enableMotor;
+    this.motorSpeed = motorSpeed;
+    this.maxMotorTorque = maxMotorTorque;
+    this.motorImpulse = motorImpulse;
+    this.enableLimit = enableLimit;
+    this.lowerAngle = lowerAngle;
+    this.upperAngle = upperAngle;
+    this.referenceAngle = referenceAngle;
+    this.enableLimitSpring = enableLimitSpring;
+    this.limitFrequencyHz = limitFrequencyHz;
+    this.limitDampingRatio = limitDampingRatio;
+  }
+}
+#else
+typedef Physics2DRevoluteJoint = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var breakForce:Float; var breakTorque:Float; var enableMotor:Bool; var motorSpeed:Float; var maxMotorTorque:Float; var motorImpulse:Float; var enableLimit:Bool; var lowerAngle:Float; var upperAngle:Float; var referenceAngle:Float; var enableLimitSpring:Bool; var limitFrequencyHz:Float; var limitDampingRatio:Float; };
+#end

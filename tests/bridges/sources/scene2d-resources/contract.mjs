@@ -11,3 +11,6 @@ export * from './scene2DDocument.mjs';
 export * from './scene2DDocumentImporterRegistry.mjs';
 export * from './scene2DDocumentSource.mjs';
 export * from './scene2DSlotReference.mjs';
+export { initializeScene2DDocument } from './scene2DDocument.mjs';
+export { initializeScene2DDocumentImporterRegistry } from './scene2DDocumentImporterRegistry.mjs';
+export { initializeScene2DSlotReference } from './scene2DDocument.mjs';

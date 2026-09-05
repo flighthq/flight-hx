@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class PowerStatusBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var getStatus:PowerStatus->PowerStatus;
+
+  private function new(getStatus:PowerStatus->PowerStatus):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getStatus = getStatus;
+  }
+}
+#else
 typedef PowerStatusBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getStatus:PowerStatus->PowerStatus; };
+#end

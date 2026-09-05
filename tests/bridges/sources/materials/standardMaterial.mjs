@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createStandardMaterial = api.createStandardMaterial;
+export const initializeStandardMaterial = api.initializeStandardMaterial;

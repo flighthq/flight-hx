@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FullscreenTargetHandle = { var __brand:String; };
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class FullscreenTargetHandle {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var __brand:String;
+
+  private function new(__brand:String):Void {
+    this.__symbol__EntityRuntime = null;
+    this.__brand = __brand;
+  }
+}
+#else
+typedef FullscreenTargetHandle = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var __brand:String; };
+#end

@@ -9,6 +9,7 @@ export const cloneOrbitCameraController = api.cloneOrbitCameraController;
 export const copyOrbitCameraController = api.copyOrbitCameraController;
 export const createOrbitCameraController = api.createOrbitCameraController;
 export const dollyOrbitCameraController = api.dollyOrbitCameraController;
+export const initializeOrbitCameraController = api.initializeOrbitCameraController;
 export const panOrbitCameraController = api.panOrbitCameraController;
 export const panOrbitCameraControllerInViewPlane = api.panOrbitCameraControllerInViewPlane;
 export const resetOrbitCameraController = api.resetOrbitCameraController;

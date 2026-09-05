@@ -6,3 +6,11 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWebAppCapabilities = api.createWebAppCapabilities;
+export const initializeWebAppBadgeBackend = api.initializeWebAppBadgeBackend;
+export const initializeWebAppCapabilities = api.initializeWebAppCapabilities;
+export const initializeWebAppFocusBackend = api.initializeWebAppFocusBackend;
+export const initializeWebAppLocaleBackend = api.initializeWebAppLocaleBackend;
+export const initializeWebAppNameBackend = api.initializeWebAppNameBackend;
+export const initializeWebAppQuitBackend = api.initializeWebAppQuitBackend;
+export const initializeWebAppReadyBackend = api.initializeWebAppReadyBackend;
+export const initializeWebAppRelaunchBackend = api.initializeWebAppRelaunchBackend;

@@ -6,3 +6,6 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createElectronScreenCapabilities = api.createElectronScreenCapabilities;
+export const initializeEmptyScreenInfo = api.initializeEmptyScreenInfo;
+export const initializeScreenChangeBackend = api.initializeScreenChangeBackend;
+export const initializeScreenQueryBackend = api.initializeScreenQueryBackend;

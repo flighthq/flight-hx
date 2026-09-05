@@ -7,6 +7,7 @@ __syncDependencies();
 
 export const createObb = api.createObb;
 export const getClosestPointOnObb = api.getClosestPointOnObb;
+export const initializeObb = api.initializeObb;
 export const intersectRay3DObb = api.intersectRay3DObb;
 export const isObbIntersectingAabb = api.isObbIntersectingAabb;
 export const isObbIntersectingObb = api.isObbIntersectingObb;

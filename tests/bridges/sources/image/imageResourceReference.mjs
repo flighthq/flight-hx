@@ -11,5 +11,7 @@ export const createImageResourceFailure = api.createImageResourceFailure;
 export const disableImageBitmapComposition = api.disableImageBitmapComposition;
 export const enableImageBitmapComposition = api.enableImageBitmapComposition;
 export const explainImageResourceReferenceResolution = api.explainImageResourceReferenceResolution;
+export const initializeEmbeddedImageResourceReference = api.initializeEmbeddedImageResourceReference;
+export const initializeExternalImageResourceReference = api.initializeExternalImageResourceReference;
 export const resetFailedImageResourceReference = api.resetFailedImageResourceReference;
 export const resolveImageResourceReference = api.resolveImageResourceReference;

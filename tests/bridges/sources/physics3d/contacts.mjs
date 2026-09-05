@@ -7,3 +7,5 @@ __syncDependencies();
 
 export const createPhysics3DContact = api.createPhysics3DContact;
 export const createPhysics3DContactPoint = api.createPhysics3DContactPoint;
+export const initializePhysics3DContact = api.initializePhysics3DContact;
+export const initializePhysics3DContactPoint = api.initializePhysics3DContactPoint;

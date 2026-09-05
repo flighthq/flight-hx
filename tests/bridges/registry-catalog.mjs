@@ -5,5 +5,6 @@ export const BUILT_IN_REGISTRY_CATALOG_ENTRIES = compiled.flight.RegistryCatalog
 export const createRegistryCatalog = compiled.flight.RegistryCatalog.createRegistryCatalog;
 export const findRegistryCatalogEntries = compiled.flight.RegistryCatalog.findRegistryCatalogEntries;
 export const getRegistryCatalogEntries = compiled.flight.RegistryCatalog.getRegistryCatalogEntries;
+export const initializeRegistryCatalog = compiled.flight.RegistryCatalog.initializeRegistryCatalog;
 export const registerRegistryCatalogEntry = compiled.flight.RegistryCatalog.registerRegistryCatalogEntry;
 export const unregisterRegistryCatalogEntry = compiled.flight.RegistryCatalog.unregisterRegistryCatalogEntry;

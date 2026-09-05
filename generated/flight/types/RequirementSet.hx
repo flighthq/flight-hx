@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef RequirementSet = { var covers:Array<RequirementFacet>; var requirements:Array<Requirement>; };
+#if !flight_struct_typedef
+@:allow(flight._Requirements)
+@:keep
+@:structInit
+class RequirementSet {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var covers:Array<RequirementFacet>;
+  public var requirements:Array<Requirement>;
+
+  private function new(covers:Array<RequirementFacet>, requirements:Array<Requirement>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.covers = covers;
+    this.requirements = requirements;
+  }
+}
+#else
+typedef RequirementSet = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var covers:Array<RequirementFacet>; var requirements:Array<Requirement>; };
+#end

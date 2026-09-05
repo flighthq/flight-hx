@@ -4,4 +4,27 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef LottieDocumentImportResult = { var advancedBlends:Array<LottieAdvancedBlend>; var clip:AnimationClip; var duration:Float; var frameRate:Float; var root:DisplayObject; };
+#if !flight_struct_typedef
+@:allow(flight._Scene2DFormats)
+@:keep
+@:structInit
+class LottieDocumentImportResult {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var advancedBlends:Array<LottieAdvancedBlend>;
+  public var clip:AnimationClip;
+  public var duration:Float;
+  public var frameRate:Float;
+  public var root:DisplayObject;
+
+  private function new(advancedBlends:Array<LottieAdvancedBlend>, clip:AnimationClip, duration:Float, frameRate:Float, root:DisplayObject):Void {
+    this.__symbol__EntityRuntime = null;
+    this.advancedBlends = advancedBlends;
+    this.clip = clip;
+    this.duration = duration;
+    this.frameRate = frameRate;
+    this.root = root;
+  }
+}
+#else
+typedef LottieDocumentImportResult = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var advancedBlends:Array<LottieAdvancedBlend>; var clip:AnimationClip; var duration:Float; var frameRate:Float; var root:DisplayObject; };
+#end

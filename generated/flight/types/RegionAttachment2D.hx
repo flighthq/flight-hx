@@ -4,4 +4,30 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef RegionAttachment2D = { var kind:String; @:optional var name:Null<String>; var height:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var width:Float; var x:Float; var y:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Skeleton2DFormats)
+@:keep
+@:structInit
+class RegionAttachment2D extends flight.types.Attachment2D {
+  public var height:Float;
+  public var rotation:Float;
+  public var scaleX:Float;
+  public var scaleY:Float;
+  public var width:Float;
+  public var x:Float;
+  public var y:Float;
+
+  private function new(kind:String, ?name:Null<String>, height:Float, rotation:Float, scaleX:Float, scaleY:Float, width:Float, x:Float, y:Float):Void {
+    super(kind, name);
+    this.height = height;
+    this.rotation = rotation;
+    this.scaleX = scaleX;
+    this.scaleY = scaleY;
+    this.width = width;
+    this.x = x;
+    this.y = y;
+  }
+}
+#else
+typedef RegionAttachment2D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var name:Null<String>; var height:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var width:Float; var x:Float; var y:Float; };
+#end

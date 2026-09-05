@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createElectronStorageBackend = api.createElectronStorageBackend;
+export const initializeElectronStorageBackend = api.initializeElectronStorageBackend;

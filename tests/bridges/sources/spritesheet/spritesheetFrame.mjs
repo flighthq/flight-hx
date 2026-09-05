@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createSpritesheetFrame = api.createSpritesheetFrame;
+export const initializeSpritesheetFrame = api.initializeSpritesheetFrame;

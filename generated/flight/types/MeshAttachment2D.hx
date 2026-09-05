@@ -4,4 +4,26 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MeshAttachment2D = { var kind:String; @:optional var name:Null<String>; @:optional var skin:Null<Skin2D>; var triangles:flight._internal._UInt16Array; var uvs:flight._internal._Float32Array; var vertexCount:Float; @:optional var vertices:Null<flight._internal._Float32Array>; };
+#if !flight_struct_typedef
+@:allow(flight._Skeleton2DFormats)
+@:keep
+@:structInit
+class MeshAttachment2D extends flight.types.Attachment2D {
+  public var skin:Null<Skin2D>;
+  public var triangles:flight._internal._UInt16Array;
+  public var uvs:flight._internal._Float32Array;
+  public var vertexCount:Float;
+  public var vertices:Null<flight._internal._Float32Array>;
+
+  private function new(kind:String, ?name:Null<String>, ?skin:Null<Skin2D>, triangles:flight._internal._UInt16Array, uvs:flight._internal._Float32Array, vertexCount:Float, ?vertices:Null<flight._internal._Float32Array>):Void {
+    super(kind, name);
+    this.skin = skin;
+    this.triangles = triangles;
+    this.uvs = uvs;
+    this.vertexCount = vertexCount;
+    this.vertices = vertices;
+  }
+}
+#else
+typedef MeshAttachment2D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var name:Null<String>; @:optional var skin:Null<Skin2D>; var triangles:flight._internal._UInt16Array; var uvs:flight._internal._Float32Array; var vertexCount:Float; @:optional var vertices:Null<flight._internal._Float32Array>; };
+#end

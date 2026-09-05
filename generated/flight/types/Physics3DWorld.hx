@@ -4,4 +4,81 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics3DWorld = { var version:Float; var bodies:Array<RigidBody3D>; var bodyByIndex:flight._internal._Map<Float, RigidBody3D>; var index:SpatialIndexBackend3D; var contacts:Array<Physics3DContact>; var joints:Array<Physics3DJoint>; var jointSolvers:flight._internal._Map<Physics3DJointKind, Physics3DJointSolver>; var jointCollisionSuppressions:flight._internal._Map<Float, flight._internal._Map<Float, Float>>; var events:Physics3DContactEvents; var jointEvents:Physics3DJointEvents; var contactHooks:Physics3DContactHooks; var solver:Physics3DSequentialImpulseState; var config:Physics3DSolverConfig; var islandParents:flight._internal._Map<Float, Float>; var islandSleepTimers:flight._internal._Map<Float, Float>; var solveIslandByRoot:flight._internal._Map<Float, Float>; var solveIslandRoots:Array<Float>; var solveIslandBodyStarts:Array<Float>; var solveIslandBodyCounts:Array<Float>; var solveIslandContactStarts:Array<Float>; var solveIslandContactCounts:Array<Float>; var solveIslandJointStarts:Array<Float>; var solveIslandJointCounts:Array<Float>; var solveIslandBodyIndices:Array<Float>; var solveIslandContactIndices:Array<Float>; var solveIslandJointIndices:Array<Float>; var solveIslandCursors:Array<Float>; var gravityX:Float; var gravityY:Float; var gravityZ:Float; var previousTimestep:Float; var nextBodyIndex:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Physics3D)
+@:keep
+@:structInit
+class Physics3DWorld {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var version:Float;
+  public var bodies:Array<RigidBody3D>;
+  public var bodyByIndex:flight._internal._Map<Float, RigidBody3D>;
+  public var index:SpatialIndexBackend3D;
+  public var contacts:Array<Physics3DContact>;
+  public var joints:Array<Physics3DJoint>;
+  public var jointSolvers:flight._internal._Map<Physics3DJointKind, Physics3DJointSolver>;
+  public var jointCollisionSuppressions:flight._internal._Map<Float, flight._internal._Map<Float, Float>>;
+  public var events:Physics3DContactEvents;
+  public var jointEvents:Physics3DJointEvents;
+  public var contactHooks:Physics3DContactHooks;
+  public var solver:Physics3DSequentialImpulseState;
+  public var config:Physics3DSolverConfig;
+  public var islandParents:flight._internal._Map<Float, Float>;
+  public var islandSleepTimers:flight._internal._Map<Float, Float>;
+  public var solveIslandByRoot:flight._internal._Map<Float, Float>;
+  public var solveIslandRoots:Array<Float>;
+  public var solveIslandBodyStarts:Array<Float>;
+  public var solveIslandBodyCounts:Array<Float>;
+  public var solveIslandContactStarts:Array<Float>;
+  public var solveIslandContactCounts:Array<Float>;
+  public var solveIslandJointStarts:Array<Float>;
+  public var solveIslandJointCounts:Array<Float>;
+  public var solveIslandBodyIndices:Array<Float>;
+  public var solveIslandContactIndices:Array<Float>;
+  public var solveIslandJointIndices:Array<Float>;
+  public var solveIslandCursors:Array<Float>;
+  public var gravityX:Float;
+  public var gravityY:Float;
+  public var gravityZ:Float;
+  public var previousTimestep:Float;
+  public var nextBodyIndex:Float;
+
+  private function new(version:Float, bodies:Array<RigidBody3D>, bodyByIndex:flight._internal._Map<Float, RigidBody3D>, index:SpatialIndexBackend3D, contacts:Array<Physics3DContact>, joints:Array<Physics3DJoint>, jointSolvers:flight._internal._Map<Physics3DJointKind, Physics3DJointSolver>, jointCollisionSuppressions:flight._internal._Map<Float, flight._internal._Map<Float, Float>>, events:Physics3DContactEvents, jointEvents:Physics3DJointEvents, contactHooks:Physics3DContactHooks, solver:Physics3DSequentialImpulseState, config:Physics3DSolverConfig, islandParents:flight._internal._Map<Float, Float>, islandSleepTimers:flight._internal._Map<Float, Float>, solveIslandByRoot:flight._internal._Map<Float, Float>, solveIslandRoots:Array<Float>, solveIslandBodyStarts:Array<Float>, solveIslandBodyCounts:Array<Float>, solveIslandContactStarts:Array<Float>, solveIslandContactCounts:Array<Float>, solveIslandJointStarts:Array<Float>, solveIslandJointCounts:Array<Float>, solveIslandBodyIndices:Array<Float>, solveIslandContactIndices:Array<Float>, solveIslandJointIndices:Array<Float>, solveIslandCursors:Array<Float>, gravityX:Float, gravityY:Float, gravityZ:Float, previousTimestep:Float, nextBodyIndex:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.version = version;
+    this.bodies = bodies;
+    this.bodyByIndex = bodyByIndex;
+    this.index = index;
+    this.contacts = contacts;
+    this.joints = joints;
+    this.jointSolvers = jointSolvers;
+    this.jointCollisionSuppressions = jointCollisionSuppressions;
+    this.events = events;
+    this.jointEvents = jointEvents;
+    this.contactHooks = contactHooks;
+    this.solver = solver;
+    this.config = config;
+    this.islandParents = islandParents;
+    this.islandSleepTimers = islandSleepTimers;
+    this.solveIslandByRoot = solveIslandByRoot;
+    this.solveIslandRoots = solveIslandRoots;
+    this.solveIslandBodyStarts = solveIslandBodyStarts;
+    this.solveIslandBodyCounts = solveIslandBodyCounts;
+    this.solveIslandContactStarts = solveIslandContactStarts;
+    this.solveIslandContactCounts = solveIslandContactCounts;
+    this.solveIslandJointStarts = solveIslandJointStarts;
+    this.solveIslandJointCounts = solveIslandJointCounts;
+    this.solveIslandBodyIndices = solveIslandBodyIndices;
+    this.solveIslandContactIndices = solveIslandContactIndices;
+    this.solveIslandJointIndices = solveIslandJointIndices;
+    this.solveIslandCursors = solveIslandCursors;
+    this.gravityX = gravityX;
+    this.gravityY = gravityY;
+    this.gravityZ = gravityZ;
+    this.previousTimestep = previousTimestep;
+    this.nextBodyIndex = nextBodyIndex;
+  }
+}
+#else
+typedef Physics3DWorld = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var version:Float; var bodies:Array<RigidBody3D>; var bodyByIndex:flight._internal._Map<Float, RigidBody3D>; var index:SpatialIndexBackend3D; var contacts:Array<Physics3DContact>; var joints:Array<Physics3DJoint>; var jointSolvers:flight._internal._Map<Physics3DJointKind, Physics3DJointSolver>; var jointCollisionSuppressions:flight._internal._Map<Float, flight._internal._Map<Float, Float>>; var events:Physics3DContactEvents; var jointEvents:Physics3DJointEvents; var contactHooks:Physics3DContactHooks; var solver:Physics3DSequentialImpulseState; var config:Physics3DSolverConfig; var islandParents:flight._internal._Map<Float, Float>; var islandSleepTimers:flight._internal._Map<Float, Float>; var solveIslandByRoot:flight._internal._Map<Float, Float>; var solveIslandRoots:Array<Float>; var solveIslandBodyStarts:Array<Float>; var solveIslandBodyCounts:Array<Float>; var solveIslandContactStarts:Array<Float>; var solveIslandContactCounts:Array<Float>; var solveIslandJointStarts:Array<Float>; var solveIslandJointCounts:Array<Float>; var solveIslandBodyIndices:Array<Float>; var solveIslandContactIndices:Array<Float>; var solveIslandJointIndices:Array<Float>; var solveIslandCursors:Array<Float>; var gravityX:Float; var gravityY:Float; var gravityZ:Float; var previousTimestep:Float; var nextBodyIndex:Float; };
+#end

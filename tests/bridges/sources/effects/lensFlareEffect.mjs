@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createLensFlareEffect = api.createLensFlareEffect;
+export const initializeLensFlareEffect = api.initializeLensFlareEffect;

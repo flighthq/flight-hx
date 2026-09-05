@@ -4,4 +4,23 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TilemapSignals = { var onCleared:Signal<Void->Void>; var onTileChanged:Signal<Float->Float->Float->Void>; var onTilesChanged:Signal<Float->Float->Float->Float->Void>; };
+#if !flight_struct_typedef
+@:allow(flight._Tilemap)
+@:keep
+@:structInit
+class TilemapSignals {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onCleared:Signal<Void->Void>;
+  public var onTileChanged:Signal<Float->Float->Float->Void>;
+  public var onTilesChanged:Signal<Float->Float->Float->Float->Void>;
+
+  private function new(onCleared:Signal<Void->Void>, onTileChanged:Signal<Float->Float->Float->Void>, onTilesChanged:Signal<Float->Float->Float->Float->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onCleared = onCleared;
+    this.onTileChanged = onTileChanged;
+    this.onTilesChanged = onTilesChanged;
+  }
+}
+#else
+typedef TilemapSignals = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onCleared:Signal<Void->Void>; var onTileChanged:Signal<Float->Float->Float->Void>; var onTilesChanged:Signal<Float->Float->Float->Float->Void>; };
+#end

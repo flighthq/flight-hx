@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Skeleton2DPathConstraint = { var kind:String; var mix:Float; var boneIndices:Array<Float>; var mixRotate:Float; var mixX:Float; var mixY:Float; var position:Float; var positionMode:Skeleton2DPathPositionMode; var rotateMode:Skeleton2DPathRotateMode; var spacing:Float; var spacingMode:Skeleton2DPathSpacingMode; var targetSlotIndex:Float; };
+typedef Skeleton2DPathConstraint = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var mix:Float; var boneIndices:Array<Float>; var mixRotate:Float; var mixX:Float; var mixY:Float; var position:Float; var positionMode:Skeleton2DPathPositionMode; var rotateMode:Skeleton2DPathRotateMode; var spacing:Float; var spacingMode:Skeleton2DPathSpacingMode; var targetSlotIndex:Float; };

@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createReferencePhysics3DAbi = api.createReferencePhysics3DAbi;
+export const initializeReferencePhysics3DAbi = api.initializeReferencePhysics3DAbi;

@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createTaaEffect = api.createTaaEffect;
+export const initializeTaaEffect = api.initializeTaaEffect;

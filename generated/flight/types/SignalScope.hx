@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SignalScope = { var connections:Array<SignalConnection<Array<flight._internal._Any>->Void>>; };
+#if !flight_struct_typedef
+@:allow(flight._Signals)
+@:keep
+@:structInit
+class SignalScope {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var connections:Array<SignalConnection<Array<flight._internal._Any>->Void>>;
+
+  private function new(connections:Array<SignalConnection<Array<flight._internal._Any>->Void>>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.connections = connections;
+  }
+}
+#else
+typedef SignalScope = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var connections:Array<SignalConnection<Array<flight._internal._Any>->Void>>; };
+#end

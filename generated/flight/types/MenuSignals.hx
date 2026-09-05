@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MenuSignals = { var onContextMenuClose:Signal<Void->Void>; var onContextMenuOpen:Signal<Void->Void>; };
+#if !flight_struct_typedef
+@:allow(flight._Menu)
+@:keep
+@:structInit
+class MenuSignals {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onContextMenuClose:Signal<Void->Void>;
+  public var onContextMenuOpen:Signal<Void->Void>;
+
+  private function new(onContextMenuClose:Signal<Void->Void>, onContextMenuOpen:Signal<Void->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onContextMenuClose = onContextMenuClose;
+    this.onContextMenuOpen = onContextMenuOpen;
+  }
+}
+#else
+typedef MenuSignals = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onContextMenuClose:Signal<Void->Void>; var onContextMenuOpen:Signal<Void->Void>; };
+#end

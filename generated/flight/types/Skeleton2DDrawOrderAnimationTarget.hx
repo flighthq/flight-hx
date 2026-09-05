@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Skeleton2DDrawOrderAnimationTarget<Traits> = { var kind:Skeleton2DAnimationTargetKind; var nodes:Array<Null<Node<Traits>>>; var orderList:NodeOrderList<Traits>; };
+typedef Skeleton2DDrawOrderAnimationTarget<Traits> = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Skeleton2DAnimationTargetKind; var nodes:Array<Null<Node<Traits>>>; var orderList:NodeOrderList<Traits>; };

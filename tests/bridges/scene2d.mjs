@@ -8,6 +8,7 @@ export const computeSpriteLocalBoundsRectangle = compiled.flight.Scene2D.compute
 export const createDisplayObject = compiled.flight.Scene2D.createDisplayObject;
 export const createHtmlView = compiled.flight.Scene2D.createHtmlView;
 export const createNode2D = compiled.flight.Scene2D.createNode2D;
+export const createScale9Sprite = compiled.flight.Scene2D.createScale9Sprite;
 export const createScene2D = compiled.flight.Scene2D.createScene2D;
 export const createScene2DKindUsage = compiled.flight.Scene2D.createScene2DKindUsage;
 export const createSprite = compiled.flight.Scene2D.createSprite;

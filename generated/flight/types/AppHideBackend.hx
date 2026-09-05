@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostCapacitor)
+@:allow(flight._HostElectron)
+@:allow(flight._HostTauri)
+@:keep
+@:structInit
+class AppHideBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var hideApp:Void->Void;
+
+  private function new(hideApp:Void->Void):Void {
+    this.__symbol__EntityRuntime = null;
+    this.hideApp = hideApp;
+  }
+}
+#else
 typedef AppHideBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var hideApp:Void->Void; };
+#end

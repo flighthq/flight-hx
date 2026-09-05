@@ -7,6 +7,7 @@ import flight._internal._Runtime;
 #if !flight_struct_typedef
 @:noCompletion
 @:allow(flight._HostCapacitor)
+@:allow(flight.types.CapacitorAndroidAppCapabilities)
 @:keep
 @:structInit
 class CapacitorCommonAppCapabilities {

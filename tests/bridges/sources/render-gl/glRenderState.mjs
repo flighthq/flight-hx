@@ -14,6 +14,7 @@ export const getGlColorAdjustmentMaterialFeature = api.getGlColorAdjustmentMater
 export const getGlColorAdjustmentMaterialFeatureGuard = api.getGlColorAdjustmentMaterialFeatureGuard;
 export const getGlContextRuntime = api.getGlContextRuntime;
 export const getGlRenderStateRuntime = api.getGlRenderStateRuntime;
+export const initializeGlContextState = api.initializeGlContextState;
 export const invalidateGlRenderStateCache = api.invalidateGlRenderStateCache;
 export const registerGlContextTeardown = api.registerGlContextTeardown;
 export const registerGlRenderStateTeardown = api.registerGlRenderStateTeardown;

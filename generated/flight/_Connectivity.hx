@@ -3,7 +3,8 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Signals.clearSignal;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
@@ -15,7 +16,7 @@ import flight.types.ConnectivityReachabilityBackend;
 import flight.types.ConnectivityReachabilityOptions;
 import flight.types.ConnectivityStatus;
 import flight.types.ConnectivityStatusBackend;
-import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.HasConnectivityChange;
 import flight.types.HasConnectivityReachability;
 import flight.types.HasConnectivityStatus;
@@ -60,7 +61,10 @@ class _Connectivity {
   }
 
   public static function createConnectivity():Connectivity {
-    return cast (cast createEntity((cast ({ onChange: (cast (cast createSignal() : Signal<ConnectivityStatus->Void>) : Dynamic), onConnectionTypeChange: (cast (cast createSignal() : Signal<ConnectivityConnectionType->Void>) : Dynamic), onMeteredChange: (cast (cast createSignal() : Signal<Bool->Void>) : Dynamic), onOffline: (cast (cast createSignal() : Signal<Void->Void>) : Dynamic), onOnline: (cast (cast createSignal() : Signal<Void->Void>) : Dynamic) } : Connectivity) : Dynamic)) : Connectivity);
+    var out:EntityConstruction<Connectivity> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ onChange: cast _Runtime.UNDEFINED, onConnectionTypeChange: cast _Runtime.UNDEFINED, onMeteredChange: cast _Runtime.UNDEFINED, onOffline: cast _Runtime.UNDEFINED, onOnline: cast _Runtime.UNDEFINED } : Connectivity); }) #end));
+    initializeConnectivity(({ final __callArgument3:Dynamic = out; __callArgument3; }));
+    return cast out;
     return cast null;
   }
 
@@ -77,12 +81,12 @@ class _Connectivity {
   }
 
   public static function detectConnectivityReachability(host:HasConnectivityReachability, options:ConnectivityReachabilityOptions, out:ConnectivityReachability):flight._internal._Promise<ConnectivityReachability> {
-    return cast (cast (cast (cast host : HasConnectivityReachability).connectivity : { var reachability:ConnectivityReachabilityBackend; }).reachability : ConnectivityReachabilityBackend).detectReachability(({ final __callArgument3:Dynamic = options; __callArgument3; }), ({ final __callArgument4:Dynamic = out; __callArgument4; }));
+    return cast (cast (cast (cast host : HasConnectivityReachability).connectivity : { var reachability:ConnectivityReachabilityBackend; }).reachability : ConnectivityReachabilityBackend).detectReachability(({ final __callArgument5:Dynamic = options; __callArgument5; }), ({ final __callArgument6:Dynamic = out; __callArgument6; }));
     return cast null;
   }
 
   public static function disposeConnectivity(connectivity:Connectivity):Void {
-    detachConnectivity(({ final __callArgument5:Dynamic = connectivity; __callArgument5; }));
+    detachConnectivity(({ final __callArgument7:Dynamic = connectivity; __callArgument7; }));
     clearSignal((cast connectivity.onChange : Dynamic));
     clearSignal((cast connectivity.onConnectionTypeChange : Dynamic));
     clearSignal((cast connectivity.onMeteredChange : Dynamic));
@@ -96,13 +100,23 @@ class _Connectivity {
   }
 
   public static function getConnectivityStatus(host:HasConnectivityStatus, out:ConnectivityStatus):ConnectivityStatus {
-    return cast (cast (cast (cast host : HasConnectivityStatus).connectivity : { var status:ConnectivityStatusBackend; }).status : ConnectivityStatusBackend).getStatus(({ final __callArgument7:Dynamic = out; __callArgument7; }));
+    return cast (cast (cast (cast host : HasConnectivityStatus).connectivity : { var status:ConnectivityStatusBackend; }).status : ConnectivityStatusBackend).getStatus(({ final __callArgument9:Dynamic = out; __callArgument9; }));
     return cast null;
   }
 
   public static function hasConnectivityStatusChanged(a:ConnectivityStatus, b:ConnectivityStatus):Bool {
     return cast _Runtime.orValue(((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(a.online, b.online) : Bool) || (cast !_Runtime.strictEquals(a.type, b.type) : Bool)) : Bool) || (cast !_Runtime.strictEquals(a.downlink, b.downlink) : Bool)) : Bool) || (cast !_Runtime.strictEquals(a.downlinkMax, b.downlinkMax) : Bool)) : Bool) || (cast !_Runtime.strictEquals(a.effectiveType, b.effectiveType) : Bool)) : Bool) || (cast !_Runtime.strictEquals(a.rtt, b.rtt) : Bool)) : Bool) || (cast !_Runtime.strictEquals(a.saveData, b.saveData) : Bool)), function():Dynamic return cast !_Runtime.strictEquals(a.metered, b.metered));
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeConnectivity(out:EntityConstruction<Connectivity>):Void {
+    _Runtime.setField(out, 'onChange', (cast createSignal() : Signal<ConnectivityStatus->Void>));
+    _Runtime.setField(out, 'onConnectionTypeChange', (cast createSignal() : Signal<ConnectivityConnectionType->Void>));
+    _Runtime.setField(out, 'onMeteredChange', (cast createSignal() : Signal<Bool->Void>));
+    _Runtime.setField(out, 'onOffline', (cast createSignal() : Signal<Void->Void>));
+    _Runtime.setField(out, 'onOnline', (cast createSignal() : Signal<Void->Void>));
   }
 
   public static function isConnectivityMetered(host:HasConnectivityStatus):Bool {

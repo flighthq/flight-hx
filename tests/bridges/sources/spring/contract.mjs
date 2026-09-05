@@ -7,3 +7,8 @@ export * from './spring.mjs';
 export * from './spring2D.mjs';
 export * from './spring3D.mjs';
 export * from './springConfig.mjs';
+export { initializeSpring } from './spring.mjs';
+export { initializeSpring2D } from './spring2D.mjs';
+export { initializeSpring3D } from './spring3D.mjs';
+export { initializeSpringConfig } from './springConfig.mjs';
+export { initializeSpringConfigFromPhysical } from './springConfig.mjs';

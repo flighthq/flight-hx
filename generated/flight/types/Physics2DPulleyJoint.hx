@@ -4,4 +4,28 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics2DPulleyJoint = { var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var breakForce:Float; var breakTorque:Float; var groundAnchorAX:Float; var groundAnchorAY:Float; var groundAnchorBX:Float; var groundAnchorBY:Float; var ratio:Float; var constant:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Physics2D)
+@:keep
+@:structInit
+class Physics2DPulleyJoint extends flight.types.Physics2DJoint {
+  public var groundAnchorAX:Float;
+  public var groundAnchorAY:Float;
+  public var groundAnchorBX:Float;
+  public var groundAnchorBY:Float;
+  public var ratio:Float;
+  public var constant:Float;
+
+  private function new(kind:Physics2DJointKind, bodyA:Float, bodyB:Float, localAnchorAX:Float, localAnchorAY:Float, localAnchorBX:Float, localAnchorBY:Float, collideConnected:Bool, impulse0:Float, impulse1:Float, impulse2:Float, rAX:Float, rAY:Float, rBX:Float, rBY:Float, breakForce:Float, breakTorque:Float, groundAnchorAX:Float, groundAnchorAY:Float, groundAnchorBX:Float, groundAnchorBY:Float, ratio:Float, constant:Float):Void {
+    super(kind, bodyA, bodyB, localAnchorAX, localAnchorAY, localAnchorBX, localAnchorBY, collideConnected, impulse0, impulse1, impulse2, rAX, rAY, rBX, rBY, breakForce, breakTorque);
+    this.groundAnchorAX = groundAnchorAX;
+    this.groundAnchorAY = groundAnchorAY;
+    this.groundAnchorBX = groundAnchorBX;
+    this.groundAnchorBY = groundAnchorBY;
+    this.ratio = ratio;
+    this.constant = constant;
+  }
+}
+#else
+typedef Physics2DPulleyJoint = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var breakForce:Float; var breakTorque:Float; var groundAnchorAX:Float; var groundAnchorAY:Float; var groundAnchorBX:Float; var groundAnchorBY:Float; var ratio:Float; var constant:Float; };
+#end

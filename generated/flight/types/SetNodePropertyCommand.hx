@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SetNodePropertyCommand = { var kind:Kind; var label:String; var entries:Array<CommandPropertyEntry>; var mergeWindow:Float; var time:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Command)
+@:keep
+@:structInit
+class SetNodePropertyCommand extends flight.types.Command {
+  public var entries:Array<CommandPropertyEntry>;
+  public var mergeWindow:Float;
+  public var time:Float;
+
+  private function new(kind:Kind, label:String, entries:Array<CommandPropertyEntry>, mergeWindow:Float, time:Float):Void {
+    super(kind, label);
+    this.entries = entries;
+    this.mergeWindow = mergeWindow;
+    this.time = time;
+  }
+}
+#else
+typedef SetNodePropertyCommand = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Kind; var label:String; var entries:Array<CommandPropertyEntry>; var mergeWindow:Float; var time:Float; };
+#end

@@ -8,3 +8,4 @@ __syncDependencies();
 export const defaultDomMorphShapeRenderer = api.defaultDomMorphShapeRenderer;
 export const defaultDomShapeRenderer = api.defaultDomShapeRenderer;
 export const drawDomShape = api.drawDomShape;
+export const initializeDomShapeData = api.initializeDomShapeData;

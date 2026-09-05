@@ -4,4 +4,25 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics3DDebugGeometry = { var lines:Array<Physics3DDebugLine>; var lineCount:Float; var spheres:Array<Physics3DDebugSphere>; var sphereCount:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Physics3D)
+@:keep
+@:structInit
+class Physics3DDebugGeometry {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var lines:Array<Physics3DDebugLine>;
+  public var lineCount:Float;
+  public var spheres:Array<Physics3DDebugSphere>;
+  public var sphereCount:Float;
+
+  private function new(lines:Array<Physics3DDebugLine>, lineCount:Float, spheres:Array<Physics3DDebugSphere>, sphereCount:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.lines = lines;
+    this.lineCount = lineCount;
+    this.spheres = spheres;
+    this.sphereCount = sphereCount;
+  }
+}
+#else
+typedef Physics3DDebugGeometry = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var lines:Array<Physics3DDebugLine>; var lineCount:Float; var spheres:Array<Physics3DDebugSphere>; var sphereCount:Float; };
+#end

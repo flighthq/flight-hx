@@ -5,5 +5,4 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebAudioDevice = api.enableHostWebAudioDevice;
-export const resetHostWebAudioDeviceForTest = api.resetHostWebAudioDeviceForTest;
+export const webAudioDeviceBackend = api.webAudioDeviceBackend;

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuOffscreenRenderStateResult = flight._internal._Union2<{ var reason:String; var info:flight._internal.dom.GPUDeviceLostInfo; }, { var reason:String; var state:WgpuRenderState; }>;
+typedef WgpuOffscreenRenderStateResult = flight._internal._Intersection2<Entity, flight._internal._Union2<{ var reason:String; var info:flight._internal.dom.GPUDeviceLostInfo; }, { var reason:String; var state:WgpuRenderState; }>>;

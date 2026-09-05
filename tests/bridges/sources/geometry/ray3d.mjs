@@ -9,6 +9,7 @@ export const createRay3D = api.createRay3D;
 export const getClosestPointBetweenRay3Ds = api.getClosestPointBetweenRay3Ds;
 export const getClosestPointOnRay3D = api.getClosestPointOnRay3D;
 export const getRay3DPointAt = api.getRay3DPointAt;
+export const initializeRay3D = api.initializeRay3D;
 export const intersectRay3DAabb = api.intersectRay3DAabb;
 export const intersectRay3DPlane = api.intersectRay3DPlane;
 export const intersectRay3DSphere = api.intersectRay3DSphere;

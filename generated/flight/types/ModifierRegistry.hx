@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ModifierRegistry = { var definitions:flight._internal._Map<ModifierKind, ModifierDefinition>; };
+#if !flight_struct_typedef
+@:allow(flight._Shading)
+@:keep
+@:structInit
+class ModifierRegistry {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var definitions:flight._internal._Map<ModifierKind, ModifierDefinition>;
+
+  private function new(definitions:flight._internal._Map<ModifierKind, ModifierDefinition>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.definitions = definitions;
+  }
+}
+#else
+typedef ModifierRegistry = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var definitions:flight._internal._Map<ModifierKind, ModifierDefinition>; };
+#end

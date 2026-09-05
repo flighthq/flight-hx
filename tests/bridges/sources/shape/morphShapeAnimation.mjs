@@ -8,3 +8,4 @@ __syncDependencies();
 export const applyAnimationClipToMorphShape = api.applyAnimationClipToMorphShape;
 export const applyMorphShapeAnimationSample = api.applyMorphShapeAnimationSample;
 export const createMorphShapeAnimationTarget = api.createMorphShapeAnimationTarget;
+export const initializeMorphShapeAnimationTarget = api.initializeMorphShapeAnimationTarget;

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Physics3DAbi as Facade_Physics3DAbi_flight__Physics3DAbi;
 import flight.types.CollisionBuiltInShape3D;
+import flight.types.EntityConstruction;
 import flight.types.Physics3DAbi;
 import flight.types.Physics3DAbiBodyBuffer;
 import flight.types.Physics3DAbiCommandBuffer;
@@ -93,6 +94,30 @@ class Physics3DAbi {
   public static function getPhysics3DAbiWorldStatus(abi:flight.types.Physics3DAbi, world:Physics3DAbiWorldHandle):Physics3DAbiWorldStatus {
     return cast Facade_Physics3DAbi_flight__Physics3DAbi.getPhysics3DAbiWorldStatus(abi, world);
     return cast null;
+  }
+
+  public static function initializePhysics3DAbiBodyBuffer(out:EntityConstruction<Physics3DAbiBodyBuffer>, capacity:Float):Void {
+    Facade_Physics3DAbi_flight__Physics3DAbi.initializePhysics3DAbiBodyBuffer(out, capacity);
+  }
+
+  public static function initializePhysics3DAbiContactBuffer(out:EntityConstruction<Physics3DAbiContactBuffer>, contactCapacity:Float, pointCapacity:Float):Void {
+    Facade_Physics3DAbi_flight__Physics3DAbi.initializePhysics3DAbiContactBuffer(out, contactCapacity, pointCapacity);
+  }
+
+  public static function initializePhysics3DAbiExecutionResult(out:EntityConstruction<Physics3DAbiExecutionResult>):Void {
+    Facade_Physics3DAbi_flight__Physics3DAbi.initializePhysics3DAbiExecutionResult(out);
+  }
+
+  public static function initializePhysics3DAbiJointBuffer(out:EntityConstruction<Physics3DAbiJointBuffer>, capacity:Float):Void {
+    Facade_Physics3DAbi_flight__Physics3DAbi.initializePhysics3DAbiJointBuffer(out, capacity);
+  }
+
+  public static function initializePhysics3DAbiQueryBuffer(out:EntityConstruction<Physics3DAbiQueryBuffer>, capacity:Float):Void {
+    Facade_Physics3DAbi_flight__Physics3DAbi.initializePhysics3DAbiQueryBuffer(out, capacity);
+  }
+
+  public static function initializeReferencePhysics3DAbi(out:EntityConstruction<flight.types.Physics3DAbi>):Void {
+    Facade_Physics3DAbi_flight__Physics3DAbi.initializeReferencePhysics3DAbi(out);
   }
 
   public static final Physics3DAbiBodyFlag:{ var TypeMask:Float; var FixedRotation:Float; var Bullet:Float; var Sleeping:Float; var SleepEnabled:Float; } = Facade_Physics3DAbi_flight__Physics3DAbi.Physics3DAbiBodyFlag;

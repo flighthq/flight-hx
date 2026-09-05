@@ -4,4 +4,23 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TextFieldSignals = { var onTextFieldChange:Signal<TextFieldChangeEvent->Void>; var onTextFieldLink:Signal<TextFieldLinkEvent->Void>; var onTextFieldScroll:Signal<TextFieldScrollEvent->Void>; };
+#if !flight_struct_typedef
+@:allow(flight._Text)
+@:keep
+@:structInit
+class TextFieldSignals {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onTextFieldChange:Signal<TextFieldChangeEvent->Void>;
+  public var onTextFieldLink:Signal<TextFieldLinkEvent->Void>;
+  public var onTextFieldScroll:Signal<TextFieldScrollEvent->Void>;
+
+  private function new(onTextFieldChange:Signal<TextFieldChangeEvent->Void>, onTextFieldLink:Signal<TextFieldLinkEvent->Void>, onTextFieldScroll:Signal<TextFieldScrollEvent->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onTextFieldChange = onTextFieldChange;
+    this.onTextFieldLink = onTextFieldLink;
+    this.onTextFieldScroll = onTextFieldScroll;
+  }
+}
+#else
+typedef TextFieldSignals = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onTextFieldChange:Signal<TextFieldChangeEvent->Void>; var onTextFieldLink:Signal<TextFieldLinkEvent->Void>; var onTextFieldScroll:Signal<TextFieldScrollEvent->Void>; };
+#end

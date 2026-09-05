@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef VelocityField = { var samples:flight._internal._WeakMap<flight._internal._Object, VelocitySample>; var frameId:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Velocity)
+@:keep
+@:structInit
+class VelocityField {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var samples:flight._internal._WeakMap<flight._internal._Object, VelocitySample>;
+  public var frameId:Float;
+
+  private function new(samples:flight._internal._WeakMap<flight._internal._Object, VelocitySample>, frameId:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.samples = samples;
+    this.frameId = frameId;
+  }
+}
+#else
+typedef VelocityField = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var samples:flight._internal._WeakMap<flight._internal._Object, VelocitySample>; var frameId:Float; };
+#end

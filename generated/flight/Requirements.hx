@@ -4,6 +4,7 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Requirements as Facade_Requirements_flight__Requirements;
+import flight.types.EntityConstruction;
 import flight.types.Kind;
 import flight.types.Requirement;
 import flight.types.RequirementFacet;
@@ -23,6 +24,10 @@ class Requirements {
   public static function diffRequirementSets(requirements:RequirementSet, baseline:RequirementSet):RequirementSet {
     return cast Facade_Requirements_flight__Requirements.diffRequirementSets(requirements, baseline);
     return cast null;
+  }
+
+  public static function initializeRequirementSet(out:EntityConstruction<RequirementSet>, covers:Array<RequirementFacet>, requirements:Array<Requirement>):Void {
+    Facade_Requirements_flight__Requirements.initializeRequirementSet(out, covers, requirements);
   }
 
   public static function mergeRequirementSets(requirementSets:Array<RequirementSet>):RequirementSet {

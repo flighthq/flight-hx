@@ -3,9 +3,13 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Log.logOnce;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
+import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.HasNetSocket;
 import flight.types.LogLevel;
 import flight.types.Signal;
@@ -24,6 +28,25 @@ import flight.types.SocketSendFailureExplanation;
 import flight.types.SocketSignals;
 import flight.types.TcpSocketConnection;
 import flight.types.TcpSocketOptions;
+
+#if !flight_struct_typedef
+@:allow(flight._Socket)
+@:keep
+@:structInit
+private class EntityShapeL71C15__socket {
+  public var openSocket:SocketOptions->SocketEventSink->Null<SocketConnection>;
+  public var openTcpSocket:Null<TcpSocketOptions->Null<TcpSocketConnection>>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(openSocket:SocketOptions->SocketEventSink->Null<SocketConnection>, openTcpSocket:Null<TcpSocketOptions->Null<TcpSocketConnection>>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.openSocket = openSocket;
+    this.openTcpSocket = openTcpSocket;
+  }
+}
+#else
+private typedef EntityShapeL71C15__socket = { var openSocket:SocketOptions->SocketEventSink->Null<SocketConnection>; var openTcpSocket:Null<TcpSocketOptions->Null<TcpSocketConnection>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
 
 @:noCompletion
 class _Socket {
@@ -85,10 +108,12 @@ class _Socket {
 
   public static function createSocket(host:HasNetSocket, options:SocketOptions):Socket {
     var runtime:SocketRuntime = cast _Runtime.UNDEFINED;
-    var socket:Socket = cast _Runtime.UNDEFINED;
+    var socket:EntityConstruction<Socket> = cast _Runtime.UNDEFINED;
     var backend:SocketBackend = cast _Runtime.UNDEFINED;
     runtime = (cast { connection: null, signals: null, readyState: 'connecting', delivering: true, disposed: false });
-    socket = (cast { url: _Runtime.field(options, 'url'), runtime: runtime });
+    socket = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ runtime: cast _Runtime.UNDEFINED, url: cast _Runtime.UNDEFINED } : Socket); }) #end));
+    _Runtime.setField(socket, 'url', _Runtime.field(options, 'url'));
+    _Runtime.setField(socket, 'runtime', runtime);
     backend = (cast (cast host : HasNetSocket).net : { var socket:SocketBackend; }).socket;
     (runtime.connection = cast (((cast _Runtime.strictEquals(backend, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast null : Dynamic) : (cast (cast backend : SocketBackend).openSocket(({ final __callArgument8:Dynamic = options; __callArgument8; }), (cast _Socket.makeSocketEventSink__socket(({ final __callArgument9:Dynamic = runtime; __callArgument9; })) : SocketEventSink)) : Dynamic)) : Null<SocketConnection>));
     if ((cast _Runtime.strictEquals(runtime.connection, null) : Bool)) { _Runtime.callOptionalValue(_Socket._guard__socket, cast ([{ operation: 'createSocket', reason: 'no-connection', socket: socket }] : Array<Dynamic>)); }
@@ -98,8 +123,59 @@ class _Socket {
 
   @:allow(flight)
   @:keep
-  private static function createWebSocketBackend():SocketBackend {
-    return cast { openSocket: function(options:SocketOptions, events:SocketEventSink):Null<SocketConnection> {
+  private static function createWebSocketBackend():{ >SocketBackend, >Entity, } {
+    var out:EntityConstruction<{ >SocketBackend, >Entity, }> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ openSocket: cast _Runtime.UNDEFINED, openTcpSocket: cast _Runtime.UNDEFINED } : EntityShapeL71C15__socket); }) #end));
+    initializeWebSocketBackend(({ final __callArgument11:Dynamic = out; __callArgument11; }));
+    return cast out;
+    return cast null;
+  }
+
+  public static function detachSocket(socket:Socket):Void {
+    ((cast socket.runtime : { var delivering:Bool; }).delivering = cast (false : Bool));
+  }
+
+  public static function disposeSocket(socket:Socket):Void {
+    var runtime:SocketRuntime = cast _Runtime.UNDEFINED;
+    if ((cast (cast socket.runtime : { var disposed:Bool; }).disposed : Bool)) { return; }
+    (#if js _Runtime.callValue(closeSocket, cast ([({ final __callArgument14:Dynamic = socket; __callArgument14; })] : Array<Dynamic>)) #else closeSocket(({ final __callArgument13:Dynamic = socket; __callArgument13; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    detachSocket(({ final __callArgument15:Dynamic = socket; __callArgument15; }));
+    runtime = socket.runtime;
+    (runtime.connection = cast (null : Null<SocketConnection>));
+    (runtime.signals = cast (null : Null<SocketSignals>));
+    (runtime.readyState = cast ('closed' : SocketReadyState));
+    (runtime.disposed = cast (true : Bool));
+  }
+
+  public static function enableSocketSignals(socket:Socket):SocketSignals {
+    var runtime:SocketRuntime = cast _Runtime.UNDEFINED;
+    runtime = socket.runtime;
+    if ((cast runtime.disposed : Bool)) { _Runtime.callOptionalValue(_Socket._guard__socket, cast ([{ operation: 'enableSocketSignals', reason: 'disposed', socket: socket }] : Array<Dynamic>)); }
+    if ((cast _Runtime.strictEquals(runtime.signals, null) : Bool)) {
+      (runtime.signals = cast (_Runtime.callValue(function():SocketSignals {
+        var out:EntityConstruction<SocketSignals> = cast _Runtime.UNDEFINED;
+        out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ onSocketClose: cast _Runtime.UNDEFINED, onSocketError: cast _Runtime.UNDEFINED, onSocketMessage: cast _Runtime.UNDEFINED, onSocketOpen: cast _Runtime.UNDEFINED } : SocketSignals); }) #end));
+        _Runtime.setField(out, 'onSocketOpen', (cast createSignal() : Signal<Void->Void>));
+        _Runtime.setField(out, 'onSocketMessage', (cast createSignal() : Signal<SocketMessage->Void>));
+        _Runtime.setField(out, 'onSocketClose', (cast createSignal() : Signal<SocketCloseInfo->Void>));
+        _Runtime.setField(out, 'onSocketError', (cast createSignal() : Signal<Void->Void>));
+        return cast out;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>)) : Null<SocketSignals>));
+    }
+    return cast runtime.signals;
+    return cast null;
+  }
+
+  public static function getSocketReadyState(socket:Socket):SocketReadyState {
+    return cast (cast socket.runtime : { var readyState:SocketReadyState; }).readyState;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeWebSocketBackend(out:EntityConstruction<{ >SocketBackend, >Entity, }>):Void {
+    ((cast out : { var openSocket:SocketOptions->SocketEventSink->Null<SocketConnection>; }).openSocket = (cast function(options:SocketOptions, events:SocketEventSink):Null<SocketConnection> {
       var ws:flight._internal.dom.WebSocket = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('WebSocket'), 'undefined') : Bool)) { return cast null; }
       ws = ((cast !_Runtime.strictEquals(_Runtime.field(options, 'protocols'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.construct(flight._internal._HostValueLut.get('WebSocket'), [_Runtime.field(options, 'url'), (cast _Runtime.field(options, 'protocols') : Array<String>)]) : Dynamic) : (cast _Runtime.construct(flight._internal._HostValueLut.get('WebSocket'), [_Runtime.field(options, 'url')]) : Dynamic));
@@ -117,44 +193,11 @@ class _Socket {
         (cast ws : flight._internal.dom.WebSocket).close(code, reason);
       } };
       return cast _Runtime.UNDEFINED;
-    } };
-    return cast null;
-  }
-
-  public static function detachSocket(socket:Socket):Void {
-    ((cast socket.runtime : { var delivering:Bool; }).delivering = cast (false : Bool));
-  }
-
-  public static function disposeSocket(socket:Socket):Void {
-    var runtime:SocketRuntime = cast _Runtime.UNDEFINED;
-    if ((cast (cast socket.runtime : { var disposed:Bool; }).disposed : Bool)) { return; }
-    (#if js _Runtime.callValue(closeSocket, cast ([({ final __callArgument12:Dynamic = socket; __callArgument12; })] : Array<Dynamic>)) #else closeSocket(({ final __callArgument11:Dynamic = socket; __callArgument11; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    detachSocket(({ final __callArgument13:Dynamic = socket; __callArgument13; }));
-    runtime = socket.runtime;
-    (runtime.connection = cast (null : Null<SocketConnection>));
-    (runtime.signals = cast (null : Null<SocketSignals>));
-    (runtime.readyState = cast ('closed' : SocketReadyState));
-    (runtime.disposed = cast (true : Bool));
-  }
-
-  public static function enableSocketSignals(socket:Socket):SocketSignals {
-    var runtime:SocketRuntime = cast _Runtime.UNDEFINED;
-    runtime = socket.runtime;
-    if ((cast runtime.disposed : Bool)) { _Runtime.callOptionalValue(_Socket._guard__socket, cast ([{ operation: 'enableSocketSignals', reason: 'disposed', socket: socket }] : Array<Dynamic>)); }
-    if ((cast _Runtime.strictEquals(runtime.signals, null) : Bool)) {
-      (runtime.signals = cast ({ onSocketOpen: (cast createSignal() : Signal<Void->Void>), onSocketMessage: (cast createSignal() : Signal<SocketMessage->Void>), onSocketClose: (cast createSignal() : Signal<SocketCloseInfo->Void>), onSocketError: (cast createSignal() : Signal<Void->Void>) } : Null<SocketSignals>));
-    }
-    return cast runtime.signals;
-    return cast null;
-  }
-
-  public static function getSocketReadyState(socket:Socket):SocketReadyState {
-    return cast (cast socket.runtime : { var readyState:SocketReadyState; }).readyState;
-    return cast null;
+    }));
   }
 
   public static function openTcpSocket(host:HasNetSocket, options:TcpSocketOptions):Null<TcpSocketConnection> {
-    return cast _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural15 = (cast (cast host : HasNetSocket).net : { var socket:SocketBackend; }).socket; __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : SocketBackend).openTcpSocket; }), cast ([options] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural17 = (cast (cast host : HasNetSocket).net : { var socket:SocketBackend; }).socket; __structural17 == null ? _Runtime.UNDEFINED : (cast __structural17 : SocketBackend).openTcpSocket; }), cast ([options] : Array<Dynamic>)), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -166,7 +209,7 @@ class _Socket {
       return cast false;
     }
     if ((cast ((cast !_Runtime.strictEquals(runtime.readyState, 'open') : Bool) || (cast _Runtime.strictEquals(runtime.connection, null) : Bool)) : Bool)) { return cast false; }
-    return cast (cast runtime.connection : SocketConnection).sendSocketFrame(({ final __callArgument16:Dynamic = data; __callArgument16; }));
+    return cast (cast runtime.connection : SocketConnection).sendSocketFrame(({ final __callArgument18:Dynamic = data; __callArgument18; }));
     return cast null;
   }
 

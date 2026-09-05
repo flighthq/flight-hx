@@ -10,6 +10,8 @@ import flight.Types.CompositeCommandKind;
 import flight.Types.RemoveNodeChildCommandKind;
 import flight.Types.ReorderNodeChildCommandKind;
 import flight.Types.SetNodePropertyCommandKind;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Node.addNodeChildAt;
 import flight._Node.getNodeChildCount;
 import flight._Node.getNodeChildIndex;
@@ -30,10 +32,14 @@ import flight._Types.SetNodePropertyCommandKind;
 import flight.types.AddNodeChildCommand;
 import flight.types.Command;
 import flight.types.CommandBinding;
+import flight.types.CommandBindingTable;
 import flight.types.CommandDispatchExplanation;
 import flight.types.CommandHistory;
 import flight.types.CommandPropertyEntry;
 import flight.types.CompositeCommand;
+import flight.types.Entity;
+import flight.types.EntityConstruction;
+import flight.types.EntityRuntime;
 import flight.types.KeyedTable;
 import flight.types.Kind;
 import flight.types.NodeAny;
@@ -46,35 +52,96 @@ import flight.types.Signal;
 class _Command {
   public static function createAddNodeChildCommand(label:String, parent:NodeAny, child:NodeAny, ?index:Float):AddNodeChildCommand {
     if (index == null) index = cast (-1.0 : Dynamic);
-    return cast { child: child, index: index, kind: AddNodeChildCommandKind, label: label, parent: parent };
+    var out:EntityConstruction<AddNodeChildCommand> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ child: cast _Runtime.UNDEFINED, index: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, label: cast _Runtime.UNDEFINED, parent: cast _Runtime.UNDEFINED } : AddNodeChildCommand); }) #end));
+    initializeAddNodeChildCommand(({ final __callArgument0:Dynamic = out; __callArgument0; }), (cast label : String), ({ final __callArgument1:Dynamic = parent; __callArgument1; }), ({ final __callArgument2:Dynamic = child; __callArgument2; }), (cast index : Float));
+    return cast out;
     return cast null;
   }
 
   public static function createCompositeCommand(label:String, children:Array<Command>):CompositeCommand {
-    return cast { children: _Runtime.concatArrays([_Runtime.toArray(children)]), kind: CompositeCommandKind, label: label };
+    var out:EntityConstruction<CompositeCommand> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ children: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, label: cast _Runtime.UNDEFINED } : CompositeCommand); }) #end));
+    initializeCompositeCommand(({ final __callArgument6:Dynamic = out; __callArgument6; }), (cast label : String), ({ final __callArgument7:Dynamic = children; __callArgument7; }));
+    return cast out;
     return cast null;
   }
 
   public static function createRemoveNodeChildCommand(label:String, parent:NodeAny, child:NodeAny):RemoveNodeChildCommand {
-    return cast { child: child, index: (cast getNodeChildIndex((cast parent : Dynamic), (cast child : Dynamic)) : Float), kind: RemoveNodeChildCommandKind, label: label, parent: parent };
+    var out:EntityConstruction<RemoveNodeChildCommand> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ child: cast _Runtime.UNDEFINED, index: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, label: cast _Runtime.UNDEFINED, parent: cast _Runtime.UNDEFINED } : RemoveNodeChildCommand); }) #end));
+    initializeRemoveNodeChildCommand(({ final __callArgument10:Dynamic = out; __callArgument10; }), (cast label : String), ({ final __callArgument11:Dynamic = parent; __callArgument11; }), ({ final __callArgument12:Dynamic = child; __callArgument12; }));
+    return cast out;
     return cast null;
   }
 
   public static function createReorderNodeChildCommand(label:String, parent:NodeAny, child:NodeAny, toIndex:Float):ReorderNodeChildCommand {
-    return cast { child: child, fromIndex: (cast getNodeChildIndex((cast parent : Dynamic), (cast child : Dynamic)) : Float), kind: ReorderNodeChildCommandKind, label: label, parent: parent, toIndex: toIndex };
+    var out:EntityConstruction<ReorderNodeChildCommand> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ child: cast _Runtime.UNDEFINED, fromIndex: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, label: cast _Runtime.UNDEFINED, parent: cast _Runtime.UNDEFINED, toIndex: cast _Runtime.UNDEFINED } : ReorderNodeChildCommand); }) #end));
+    initializeReorderNodeChildCommand(({ final __callArgument16:Dynamic = out; __callArgument16; }), (cast label : String), ({ final __callArgument17:Dynamic = parent; __callArgument17; }), ({ final __callArgument18:Dynamic = child; __callArgument18; }), (cast toIndex : Float));
+    return cast out;
     return cast null;
   }
 
   public static function createSetNodePropertyCommand(label:String, target:NodeAny, property:String, value:flight._internal._Any, mergeWindow:Float = 0.0, time:Float = 0.0):SetNodePropertyCommand {
-    return cast { entries: cast ([{ after: value, before: _Command.readNodeProperty__command(({ final __callArgument0:Dynamic = target; __callArgument0; }), (cast property : String)), property: property, target: target }] : Array<Dynamic>), kind: SetNodePropertyCommandKind, label: label, mergeWindow: mergeWindow, time: time };
+    var out:EntityConstruction<SetNodePropertyCommand> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ entries: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, label: cast _Runtime.UNDEFINED, mergeWindow: cast _Runtime.UNDEFINED, time: cast _Runtime.UNDEFINED } : SetNodePropertyCommand); }) #end));
+    _Command.initializeSetNodePropertyCommand__command(({ final __callArgument22:Dynamic = out; __callArgument22; }), (cast label : String), ({ final __callArgument23:Dynamic = target; __callArgument23; }), (cast property : String), (cast value : flight._internal._Any), (cast mergeWindow : Float), (cast time : Float));
+    return cast out;
     return cast null;
   }
 
   public static function createSetNodePropertyCommandBatch(label:String, entries:Array<{ var property:String; var target:NodeAny; var value:flight._internal._Any; }>, mergeWindow:Float = 0.0, time:Float = 0.0):SetNodePropertyCommand {
     var captured:Array<CommandPropertyEntry> = cast _Runtime.UNDEFINED;
+    var out:EntityConstruction<SetNodePropertyCommand> = cast _Runtime.UNDEFINED;
     captured = (cast _Runtime.mapArray((cast entries : Array<{ var property:String; var target:NodeAny; var value:flight._internal._Any; }>), function(entry:{ var property:String; var target:NodeAny; var value:flight._internal._Any; }, __unused0:Float, __unused1:Array<{ var property:String; var target:NodeAny; var value:flight._internal._Any; }>):{ var after:flight._internal._Any; var before:flight._internal._Any; var property:String; var target:NodeAny; } return { after: (cast entry : { var property:String; var target:NodeAny; var value:flight._internal._Any; }).value, before: _Command.readNodeProperty__command((cast entry : { var property:String; var target:NodeAny; var value:flight._internal._Any; }).target, (cast (cast entry : { var property:String; var target:NodeAny; var value:flight._internal._Any; }).property : String)), property: (cast entry : { var property:String; var target:NodeAny; var value:flight._internal._Any; }).property, target: (cast entry : { var property:String; var target:NodeAny; var value:flight._internal._Any; }).target }, _Runtime.UNDEFINED));
-    return cast { entries: captured, kind: SetNodePropertyCommandKind, label: label, mergeWindow: mergeWindow, time: time };
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ entries: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, label: cast _Runtime.UNDEFINED, mergeWindow: cast _Runtime.UNDEFINED, time: cast _Runtime.UNDEFINED } : SetNodePropertyCommand); }) #end));
+    _Runtime.setField(out, 'entries', captured);
+    _Runtime.setField(out, 'kind', SetNodePropertyCommandKind);
+    _Runtime.setField(out, 'label', label);
+    _Runtime.setField(out, 'mergeWindow', mergeWindow);
+    _Runtime.setField(out, 'time', time);
+    return cast out;
     return cast null;
+  }
+
+  public static function initializeAddNodeChildCommand(out:EntityConstruction<AddNodeChildCommand>, label:String, parent:NodeAny, child:NodeAny, index:Float):Void {
+    _Runtime.setField(out, 'child', child);
+    _Runtime.setField(out, 'index', index);
+    _Runtime.setField(out, 'kind', AddNodeChildCommandKind);
+    _Runtime.setField(out, 'label', label);
+    _Runtime.setField(out, 'parent', parent);
+  }
+
+  public static function initializeCompositeCommand(out:EntityConstruction<CompositeCommand>, label:String, children:Array<Command>):Void {
+    _Runtime.setField(out, 'children', _Runtime.concatArrays([_Runtime.toArray(children)]));
+    _Runtime.setField(out, 'kind', CompositeCommandKind);
+    _Runtime.setField(out, 'label', label);
+  }
+
+  public static function initializeRemoveNodeChildCommand(out:EntityConstruction<RemoveNodeChildCommand>, label:String, parent:NodeAny, child:NodeAny):Void {
+    _Runtime.setField(out, 'child', child);
+    _Runtime.setField(out, 'index', (cast getNodeChildIndex((cast parent : Dynamic), (cast child : Dynamic)) : Float));
+    _Runtime.setField(out, 'kind', RemoveNodeChildCommandKind);
+    _Runtime.setField(out, 'label', label);
+    _Runtime.setField(out, 'parent', parent);
+  }
+
+  public static function initializeReorderNodeChildCommand(out:EntityConstruction<ReorderNodeChildCommand>, label:String, parent:NodeAny, child:NodeAny, toIndex:Float):Void {
+    _Runtime.setField(out, 'child', child);
+    _Runtime.setField(out, 'fromIndex', (cast getNodeChildIndex((cast parent : Dynamic), (cast child : Dynamic)) : Float));
+    _Runtime.setField(out, 'kind', ReorderNodeChildCommandKind);
+    _Runtime.setField(out, 'label', label);
+    _Runtime.setField(out, 'parent', parent);
+    _Runtime.setField(out, 'toIndex', toIndex);
+  }
+
+  public static function initializeSetNodePropertyCommand__command(out:EntityConstruction<SetNodePropertyCommand>, label:String, target:NodeAny, property:String, value:flight._internal._Any, mergeWindow:Float, time:Float):Void {
+    _Runtime.setField(out, 'entries', cast ([{ after: value, before: _Command.readNodeProperty__command(({ final __callArgument26:Dynamic = target; __callArgument26; }), (cast property : String)), property: property, target: target }] : Array<Dynamic>));
+    _Runtime.setField(out, 'kind', SetNodePropertyCommandKind);
+    _Runtime.setField(out, 'label', label);
+    _Runtime.setField(out, 'mergeWindow', mergeWindow);
+    _Runtime.setField(out, 'time', time);
   }
 
   public static function readNodeProperty__command(target:NodeAny, property:String):flight._internal._Any {
@@ -82,8 +149,8 @@ class _Command {
     return cast null;
   }
 
-  public static function createCommandBindingTable():KeyedTable<CommandBinding> {
-    return cast (cast (cast createKeyedTable : String->String->KeyedTable<CommandBinding>)((cast CommandBindingRegistryId : String), (cast CommandBindingMissPolicy : String)) : KeyedTable<CommandBinding>);
+  public static function createCommandBindingTable():CommandBindingTable {
+    return cast (cast createKeyedTable((cast CommandBindingRegistryId : String), (cast CommandBindingMissPolicy : String)) : { >KeyedTable<CommandBinding>, >Entity, });
     return cast null;
   }
 
@@ -93,20 +160,28 @@ class _Command {
   }
 
   public static function hasCommandBinding(history:CommandHistory, kind:Kind):Bool {
-    return cast !_Runtime.strictEquals((cast getCommandBinding(({ final __callArgument2:Dynamic = history; __callArgument2; }), (cast kind : String)) : Null<CommandBinding>), null);
+    return cast !_Runtime.strictEquals((cast getCommandBinding(({ final __callArgument28:Dynamic = history; __callArgument28; }), (cast kind : String)) : Null<CommandBinding>), null);
     return cast null;
   }
 
+  public static function initializeSetNodePropertyCommand(out:EntityConstruction<SetNodePropertyCommand>, entries:flight._internal._IndexedAccess<SetNodePropertyCommand, String>, kind:Kind, label:String, mergeWindow:Float, time:Float):Void {
+    _Runtime.setField(out, 'entries', entries);
+    _Runtime.setField(out, 'kind', kind);
+    _Runtime.setField(out, 'label', label);
+    _Runtime.setField(out, 'mergeWindow', mergeWindow);
+    _Runtime.setField(out, 'time', time);
+  }
+
   public static function registerCommandBinding(history:CommandHistory, kind:Kind, binding:CommandBinding):Void {
-    ((cast history : CommandHistory).bindings = (cast (cast withRegistryTableEntry : KeyedTable<CommandBinding>->String->CommandBinding->KeyedTable<CommandBinding>)((cast history : CommandHistory).bindings, (cast kind : String), ({ final __callArgument4:Dynamic = binding; __callArgument4; })) : KeyedTable<CommandBinding>));
+    ((cast history : CommandHistory).bindings = (cast withRegistryTableEntry((cast (cast history : CommandHistory).bindings : Dynamic), (cast kind : String), ({ final __callArgument30:Dynamic = binding; __callArgument30; })) : { >KeyedTable<CommandBinding>, >Entity, }));
   }
 
   public static function registerDefaultCommandBindings(history:CommandHistory):Void {
-    registerCommandBinding(({ final __callArgument6:Dynamic = history; __callArgument6; }), (cast AddNodeChildCommandKind : String), ({ final __callArgument7:Dynamic = _Command.addNodeChildCommandBinding__commandBinding; __callArgument7; }));
-    registerCommandBinding(({ final __callArgument10:Dynamic = history; __callArgument10; }), (cast CompositeCommandKind : String), (cast _Command.compositeCommandBinding__commandBinding(({ final __callArgument11:Dynamic = history; __callArgument11; })) : CommandBinding));
-    registerCommandBinding(({ final __callArgument16:Dynamic = history; __callArgument16; }), (cast RemoveNodeChildCommandKind : String), ({ final __callArgument17:Dynamic = _Command.removeNodeChildCommandBinding__commandBinding; __callArgument17; }));
-    registerCommandBinding(({ final __callArgument20:Dynamic = history; __callArgument20; }), (cast ReorderNodeChildCommandKind : String), ({ final __callArgument21:Dynamic = _Command.reorderNodeChildCommandBinding__commandBinding; __callArgument21; }));
-    registerCommandBinding(({ final __callArgument24:Dynamic = history; __callArgument24; }), (cast SetNodePropertyCommandKind : String), ({ final __callArgument25:Dynamic = _Command.setNodePropertyCommandBinding__commandBinding; __callArgument25; }));
+    registerCommandBinding(({ final __callArgument32:Dynamic = history; __callArgument32; }), (cast AddNodeChildCommandKind : String), ({ final __callArgument33:Dynamic = _Command.addNodeChildCommandBinding__commandBinding; __callArgument33; }));
+    registerCommandBinding(({ final __callArgument36:Dynamic = history; __callArgument36; }), (cast CompositeCommandKind : String), (cast _Command.compositeCommandBinding__commandBinding(({ final __callArgument37:Dynamic = history; __callArgument37; })) : CommandBinding));
+    registerCommandBinding(({ final __callArgument42:Dynamic = history; __callArgument42; }), (cast RemoveNodeChildCommandKind : String), ({ final __callArgument43:Dynamic = _Command.removeNodeChildCommandBinding__commandBinding; __callArgument43; }));
+    registerCommandBinding(({ final __callArgument46:Dynamic = history; __callArgument46; }), (cast ReorderNodeChildCommandKind : String), ({ final __callArgument47:Dynamic = _Command.reorderNodeChildCommandBinding__commandBinding; __callArgument47; }));
+    registerCommandBinding(({ final __callArgument50:Dynamic = history; __callArgument50; }), (cast SetNodePropertyCommandKind : String), ({ final __callArgument51:Dynamic = _Command.setNodePropertyCommandBinding__commandBinding; __callArgument51; }));
   }
 
   public static final addNodeChildCommandBinding__commandBinding:CommandBinding = (cast { execute: function(command:Command):Void {
@@ -126,7 +201,7 @@ class _Command {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-          ({ final __optionalOwner33 = (cast getCommandBinding(({ final __callArgument34:Dynamic = history; __callArgument34; }), (cast (cast flight._internal._StaticIndex.readArray(children, i) : Command).kind : String)) : Null<CommandBinding>); if (__optionalOwner33 != null) { final __optionalCall32 = (cast __optionalOwner33 : { var execute:Command->Void; }).execute; if (__optionalCall32 != null) __optionalCall32(flight._internal._StaticIndex.readArray(children, i)); } });
+          ({ final __optionalOwner59 = (cast getCommandBinding(({ final __callArgument60:Dynamic = history; __callArgument60; }), (cast (cast flight._internal._StaticIndex.readArray(children, i) : Command).kind : String)) : Null<CommandBinding>); if (__optionalOwner59 != null) { final __optionalCall58 = (cast __optionalOwner59 : { var execute:Command->Void; }).execute; if (__optionalCall58 != null) __optionalCall58(flight._internal._StaticIndex.readArray(children, i)); } });
           i++;
         }
       }
@@ -136,7 +211,7 @@ class _Command {
       {
         var i:Float = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
         while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-          ({ final __optionalOwner41 = (cast getCommandBinding(({ final __callArgument42:Dynamic = history; __callArgument42; }), (cast (cast flight._internal._StaticIndex.readArray(children, i) : Command).kind : String)) : Null<CommandBinding>); if (__optionalOwner41 != null) { final __optionalCall40 = (cast __optionalOwner41 : { var undo:Command->Void; }).undo; if (__optionalCall40 != null) __optionalCall40(flight._internal._StaticIndex.readArray(children, i)); } });
+          ({ final __optionalOwner67 = (cast getCommandBinding(({ final __callArgument68:Dynamic = history; __callArgument68; }), (cast (cast flight._internal._StaticIndex.readArray(children, i) : Command).kind : String)) : Null<CommandBinding>); if (__optionalOwner67 != null) { final __optionalCall66 = (cast __optionalOwner67 : { var undo:Command->Void; }).undo; if (__optionalCall66 != null) __optionalCall66(flight._internal._StaticIndex.readArray(children, i)); } });
           i--;
         }
       }
@@ -177,6 +252,7 @@ class _Command {
   }, merge: function(previous:Command, next:Command):Null<SetNodePropertyCommand> {
     var a:SetNodePropertyCommand = cast _Runtime.UNDEFINED;
     var b:SetNodePropertyCommand = cast _Runtime.UNDEFINED;
+    var out:EntityConstruction<SetNodePropertyCommand> = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(_Runtime.field(previous, 'kind'), _Runtime.field(next, 'kind')) : Bool)) { return cast null; }
     a = (cast previous : SetNodePropertyCommand);
     b = (cast next : SetNodePropertyCommand);
@@ -191,7 +267,9 @@ class _Command {
         i++;
       }
     }
-    return cast (cast { entries: (cast _Runtime.mapArray((cast _Runtime.field(a, 'entries') : Array<CommandPropertyEntry>), function(entry:CommandPropertyEntry, i:Float, __unused0:Array<CommandPropertyEntry>):{ var after:flight._internal._Any; var before:flight._internal._Any; var property:String; var target:NodeAny; } return { after: (cast flight._internal._StaticIndex.readArray(_Runtime.field(b, 'entries'), i) : CommandPropertyEntry).after, before: (cast entry : CommandPropertyEntry).before, property: (cast entry : CommandPropertyEntry).property, target: (cast entry : CommandPropertyEntry).target }, _Runtime.UNDEFINED)), kind: _Runtime.field(a, 'kind'), label: _Runtime.field(b, 'label'), mergeWindow: _Runtime.field(b, 'mergeWindow'), time: _Runtime.field(b, 'time') } : SetNodePropertyCommand);
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ entries: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, label: cast _Runtime.UNDEFINED, mergeWindow: cast _Runtime.UNDEFINED, time: cast _Runtime.UNDEFINED } : SetNodePropertyCommand); }) #end));
+    initializeSetNodePropertyCommand(({ final __callArgument70:Dynamic = out; __callArgument70; }), (cast (cast _Runtime.mapArray((cast _Runtime.field(a, 'entries') : Array<CommandPropertyEntry>), function(entry:CommandPropertyEntry, i:Float, __unused0:Array<CommandPropertyEntry>):{ var after:flight._internal._Any; var before:flight._internal._Any; var property:String; var target:NodeAny; } return { after: (cast flight._internal._StaticIndex.readArray(_Runtime.field(b, 'entries'), i) : CommandPropertyEntry).after, before: (cast entry : CommandPropertyEntry).before, property: (cast entry : CommandPropertyEntry).property, target: (cast entry : CommandPropertyEntry).target }, _Runtime.UNDEFINED)) : Dynamic), (cast _Runtime.field(a, 'kind') : String), (cast _Runtime.field(b, 'label') : String), (cast _Runtime.field(b, 'mergeWindow') : Float), (cast _Runtime.field(b, 'time') : Float));
+    return cast out;
     return cast _Runtime.UNDEFINED;
   }, undo: function(command:Command):Void {
     var entries:Array<CommandPropertyEntry> = cast _Runtime.UNDEFINED;
@@ -233,11 +311,14 @@ class _Command {
     ((cast history : CommandHistory).transactionDepth = 0.0);
     ((cast history : CommandHistory).transactionIndex = 0.0);
     ((cast history : CommandHistory).transactionLabel = null);
-    notifyCommandHistoryChanged(({ final __callArgument44:Dynamic = history; __callArgument44; }));
+    notifyCommandHistoryChanged(({ final __callArgument72:Dynamic = history; __callArgument72; }));
   }
 
   public static function createCommandHistory(maxSize:Float = 0.0):CommandHistory {
-    return cast { bindings: (cast createCommandBindingTable() : KeyedTable<CommandBinding>), entries: cast ([] : Array<Dynamic>), index: 0.0, maxSize: maxSize, onChange: null, transactionDepth: 0.0, transactionIndex: 0.0, transactionLabel: null };
+    var out:EntityConstruction<CommandHistory> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ bindings: cast _Runtime.UNDEFINED, entries: cast _Runtime.UNDEFINED, index: cast _Runtime.UNDEFINED, maxSize: cast _Runtime.UNDEFINED, onChange: cast _Runtime.UNDEFINED, transactionDepth: cast _Runtime.UNDEFINED, transactionIndex: cast _Runtime.UNDEFINED, transactionLabel: cast _Runtime.UNDEFINED } : CommandHistory); }) #end));
+    initializeCommandHistory(({ final __callArgument74:Dynamic = out; __callArgument74; }), (cast maxSize : Float));
+    return cast out;
     return cast null;
   }
 
@@ -245,24 +326,24 @@ class _Command {
     var binding:Null<CommandBinding> = cast _Runtime.UNDEFINED;
     var previous:Null<Command> = cast _Runtime.UNDEFINED;
     var mergeable:Bool = cast _Runtime.UNDEFINED;
-    binding = (cast getCommandBinding(({ final __callArgument46:Dynamic = history; __callArgument46; }), (cast (cast command : Command).kind : String)) : Null<CommandBinding>);
+    binding = (cast getCommandBinding(({ final __callArgument76:Dynamic = history; __callArgument76; }), (cast (cast command : Command).kind : String)) : Null<CommandBinding>);
     if ((cast _Runtime.strictEquals(binding, null) : Bool)) { return cast false; }
-    (cast binding : CommandBinding).execute(({ final __callArgument48:Dynamic = command; __callArgument48; }));
+    (cast binding : CommandBinding).execute(({ final __callArgument78:Dynamic = command; __callArgument78; }));
     if ((cast ((cast (cast history : CommandHistory).index : Float) < (cast _Runtime.field((cast history : CommandHistory).entries, 'length') : Float)) : Bool)) { _Runtime.setLength((cast history : CommandHistory).entries, (cast history : CommandHistory).index); }
     previous = ((cast ((cast (cast history : CommandHistory).index : Float) > (cast 0.0 : Float)) : Bool) ? (cast flight._internal._StaticIndex.readArray((cast history : CommandHistory).entries, ((cast history : CommandHistory).index - 1.0)) : Dynamic) : (cast null : Dynamic));
     mergeable = ((cast ((cast _Runtime.strictEquals((cast history : CommandHistory).transactionDepth, 0.0) : Bool) && (cast !_Runtime.strictEquals(previous, null) : Bool)) : Bool) && (cast ((cast (cast history : CommandHistory).index : Float) > (cast (cast history : CommandHistory).transactionIndex : Float)) : Bool));
     if ((cast ((cast mergeable : Bool) && (cast !_Runtime.strictEquals((cast binding : CommandBinding).merge, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-      var merged:Null<Command> = (cast binding : CommandBinding).merge(({ final __callArgument49:Dynamic = previous; __callArgument49; }), ({ final __callArgument50:Dynamic = command; __callArgument50; }));
+      var merged:Null<Command> = (cast binding : CommandBinding).merge(({ final __callArgument79:Dynamic = previous; __callArgument79; }), ({ final __callArgument80:Dynamic = command; __callArgument80; }));
       if ((cast !_Runtime.strictEquals(merged, null) : Bool)) {
         flight._internal._StaticIndex.writeArray((cast history : CommandHistory).entries, ((cast history : CommandHistory).index - 1.0), merged);
-        notifyCommandHistoryChanged(({ final __callArgument51:Dynamic = history; __callArgument51; }));
+        notifyCommandHistoryChanged(({ final __callArgument81:Dynamic = history; __callArgument81; }));
         return cast true;
       }
     }
     _Runtime.callProperty((cast history : CommandHistory).entries, 'push', cast ([command] : Array<Dynamic>));
     (cast history : CommandHistory).index++;
-    _Command.trimCommandHistory__commandHistory(({ final __callArgument53:Dynamic = history; __callArgument53; }));
-    notifyCommandHistoryChanged(({ final __callArgument55:Dynamic = history; __callArgument55; }));
+    _Command.trimCommandHistory__commandHistory(({ final __callArgument83:Dynamic = history; __callArgument83; }));
+    notifyCommandHistoryChanged(({ final __callArgument85:Dynamic = history; __callArgument85; }));
     return cast true;
     return cast null;
   }
@@ -278,13 +359,24 @@ class _Command {
   }
 
   public static function getCommandHistoryRedoLabel(history:CommandHistory):Null<String> {
-    return cast ((cast (cast canRedoCommand(({ final __callArgument57:Dynamic = history; __callArgument57; })) : Bool) : Bool) ? (cast (cast flight._internal._StaticIndex.readArray(_Runtime.field(history, 'entries'), _Runtime.field(history, 'index')) : Command).label : Dynamic) : (cast null : Dynamic));
+    return cast ((cast (cast canRedoCommand(({ final __callArgument87:Dynamic = history; __callArgument87; })) : Bool) : Bool) ? (cast (cast flight._internal._StaticIndex.readArray(_Runtime.field(history, 'entries'), _Runtime.field(history, 'index')) : Command).label : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function getCommandHistoryUndoLabel(history:CommandHistory):Null<String> {
-    return cast ((cast (cast canUndoCommand(({ final __callArgument59:Dynamic = history; __callArgument59; })) : Bool) : Bool) ? (cast (cast flight._internal._StaticIndex.readArray(_Runtime.field(history, 'entries'), _Runtime.subtractNumbers(_Runtime.field(history, 'index'), 1.0)) : Command).label : Dynamic) : (cast null : Dynamic));
+    return cast ((cast (cast canUndoCommand(({ final __callArgument89:Dynamic = history; __callArgument89; })) : Bool) : Bool) ? (cast (cast flight._internal._StaticIndex.readArray(_Runtime.field(history, 'entries'), _Runtime.subtractNumbers(_Runtime.field(history, 'index'), 1.0)) : Command).label : Dynamic) : (cast null : Dynamic));
     return cast null;
+  }
+
+  public static function initializeCommandHistory(out:EntityConstruction<CommandHistory>, maxSize:Float = 0.0):Void {
+    _Runtime.setField(out, 'bindings', (cast createCommandBindingTable() : CommandBindingTable));
+    _Runtime.setField(out, 'entries', cast ([] : Array<Dynamic>));
+    _Runtime.setField(out, 'index', 0.0);
+    _Runtime.setField(out, 'maxSize', maxSize);
+    _Runtime.setField(out, 'onChange', null);
+    _Runtime.setField(out, 'transactionDepth', 0.0);
+    _Runtime.setField(out, 'transactionIndex', 0.0);
+    _Runtime.setField(out, 'transactionLabel', null);
   }
 
   public static function notifyCommandHistoryChanged(history:CommandHistory):Void {
@@ -294,13 +386,13 @@ class _Command {
   public static function redoCommand(history:CommandHistory):Bool {
     var command:Command = cast _Runtime.UNDEFINED;
     var binding:Null<CommandBinding> = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast canRedoCommand(({ final __callArgument61:Dynamic = history; __callArgument61; })) : Bool) : Bool) : Bool)) { return cast false; }
+    if ((cast !(cast (cast canRedoCommand(({ final __callArgument91:Dynamic = history; __callArgument91; })) : Bool) : Bool) : Bool)) { return cast false; }
     command = flight._internal._StaticIndex.readArray((cast history : CommandHistory).entries, (cast history : CommandHistory).index);
-    binding = (cast getCommandBinding(({ final __callArgument63:Dynamic = history; __callArgument63; }), (cast (cast command : Command).kind : String)) : Null<CommandBinding>);
+    binding = (cast getCommandBinding(({ final __callArgument93:Dynamic = history; __callArgument93; }), (cast (cast command : Command).kind : String)) : Null<CommandBinding>);
     if ((cast _Runtime.strictEquals(binding, null) : Bool)) { return cast false; }
-    (cast binding : CommandBinding).execute(({ final __callArgument65:Dynamic = command; __callArgument65; }));
+    (cast binding : CommandBinding).execute(({ final __callArgument95:Dynamic = command; __callArgument95; }));
     (cast history : CommandHistory).index++;
-    notifyCommandHistoryChanged(({ final __callArgument66:Dynamic = history; __callArgument66; }));
+    notifyCommandHistoryChanged(({ final __callArgument96:Dynamic = history; __callArgument96; }));
     return cast true;
     return cast null;
   }
@@ -308,13 +400,13 @@ class _Command {
   public static function undoCommand(history:CommandHistory):Bool {
     var command:Command = cast _Runtime.UNDEFINED;
     var binding:Null<CommandBinding> = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast canUndoCommand(({ final __callArgument68:Dynamic = history; __callArgument68; })) : Bool) : Bool) : Bool)) { return cast false; }
+    if ((cast !(cast (cast canUndoCommand(({ final __callArgument98:Dynamic = history; __callArgument98; })) : Bool) : Bool) : Bool)) { return cast false; }
     command = flight._internal._StaticIndex.readArray((cast history : CommandHistory).entries, ((cast history : CommandHistory).index - 1.0));
-    binding = (cast getCommandBinding(({ final __callArgument70:Dynamic = history; __callArgument70; }), (cast (cast command : Command).kind : String)) : Null<CommandBinding>);
+    binding = (cast getCommandBinding(({ final __callArgument100:Dynamic = history; __callArgument100; }), (cast (cast command : Command).kind : String)) : Null<CommandBinding>);
     if ((cast _Runtime.strictEquals(binding, null) : Bool)) { return cast false; }
-    (cast binding : CommandBinding).undo(({ final __callArgument72:Dynamic = command; __callArgument72; }));
+    (cast binding : CommandBinding).undo(({ final __callArgument102:Dynamic = command; __callArgument102; }));
     (cast history : CommandHistory).index--;
-    notifyCommandHistoryChanged(({ final __callArgument73:Dynamic = history; __callArgument73; }));
+    notifyCommandHistoryChanged(({ final __callArgument103:Dynamic = history; __callArgument103; }));
     return cast true;
     return cast null;
   }
@@ -347,7 +439,7 @@ class _Command {
       var i:Float = _Runtime.subtractNumbers(_Runtime.field((cast history : CommandHistory).entries, 'length'), 1.0);
       while ((cast ((cast i : Float) >= (cast start : Float)) : Bool)) {
         var command:Command = flight._internal._StaticIndex.readArray((cast history : CommandHistory).entries, i);
-        ({ final __optionalOwner81 = (cast getCommandBinding(({ final __callArgument82:Dynamic = history; __callArgument82; }), (cast (cast command : Command).kind : String)) : Null<CommandBinding>); if (__optionalOwner81 != null) { final __optionalCall80 = (cast __optionalOwner81 : { var undo:Command->Void; }).undo; if (__optionalCall80 != null) __optionalCall80(({ final __callArgument79:Dynamic = command; __callArgument79; })); } });
+        ({ final __optionalOwner111 = (cast getCommandBinding(({ final __callArgument112:Dynamic = history; __callArgument112; }), (cast (cast command : Command).kind : String)) : Null<CommandBinding>); if (__optionalOwner111 != null) { final __optionalCall110 = (cast __optionalOwner111 : { var undo:Command->Void; }).undo; if (__optionalCall110 != null) __optionalCall110(({ final __callArgument109:Dynamic = command; __callArgument109; })); } });
         i--;
       }
     }
@@ -355,7 +447,7 @@ class _Command {
     ((cast history : CommandHistory).index = start);
     ((cast history : CommandHistory).transactionDepth = 0.0);
     ((cast history : CommandHistory).transactionLabel = null);
-    notifyCommandHistoryChanged(({ final __callArgument84:Dynamic = history; __callArgument84; }));
+    notifyCommandHistoryChanged(({ final __callArgument114:Dynamic = history; __callArgument114; }));
     return cast true;
     return cast null;
   }
@@ -383,7 +475,7 @@ class _Command {
     _Runtime.setLength((cast history : CommandHistory).entries, start);
     _Runtime.callProperty((cast history : CommandHistory).entries, 'push', cast ([((cast _Runtime.strictEquals(_Runtime.field(collected, 'length'), 1.0) : Bool) ? (cast flight._internal._StaticIndex.readArray(collected, 0.0) : Dynamic) : (cast (cast createCompositeCommand((cast label : String), (cast collected : Dynamic)) : CompositeCommand) : Dynamic))] : Array<Dynamic>));
     ((cast history : CommandHistory).index = (start + 1.0));
-    notifyCommandHistoryChanged(({ final __callArgument86:Dynamic = history; __callArgument86; }));
+    notifyCommandHistoryChanged(({ final __callArgument116:Dynamic = history; __callArgument116; }));
     return cast true;
     return cast null;
   }
@@ -395,20 +487,20 @@ class _Command {
 
   public static function explainCommandDispatch(history:CommandHistory, command:Command):CommandDispatchExplanation {
     var missingKind:Null<String> = cast _Runtime.UNDEFINED;
-    missingKind = (cast _Command.findMissingCommandKind__explainCommandDispatch(({ final __callArgument88:Dynamic = history; __callArgument88; }), ({ final __callArgument89:Dynamic = command; __callArgument89; })) : Null<String>);
+    missingKind = (cast _Command.findMissingCommandKind__explainCommandDispatch(({ final __callArgument118:Dynamic = history; __callArgument118; }), ({ final __callArgument119:Dynamic = command; __callArgument119; })) : Null<String>);
     return cast { missingKind: missingKind, resolved: _Runtime.strictEquals(missingKind, null) };
     return cast null;
   }
 
   public static function findMissingCommandKind__explainCommandDispatch(history:CommandHistory, command:Command):Null<String> {
     var children:Null<Array<Command>> = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals((cast getCommandBinding(({ final __callArgument92:Dynamic = history; __callArgument92; }), (cast _Runtime.field(command, 'kind') : String)) : Null<CommandBinding>), null) : Bool)) { return cast _Runtime.field(command, 'kind'); }
-    children = (cast (cast command : { @:optional var children:Null<Array<Command>>; @:optional var kind:Null<Kind>; @:optional var label:Null<String>; }) : { @:optional var children:Null<Array<Command>>; @:optional var kind:Null<String>; @:optional var label:Null<String>; }).children;
+    if ((cast _Runtime.strictEquals((cast getCommandBinding(({ final __callArgument122:Dynamic = history; __callArgument122; }), (cast _Runtime.field(command, 'kind') : String)) : Null<CommandBinding>), null) : Bool)) { return cast _Runtime.field(command, 'kind'); }
+    children = (cast (cast command : { @:optional var children:Null<Array<Command>>; @:optional var kind:Null<Kind>; @:optional var label:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }) : { @:optional var children:Null<Array<Command>>; @:optional var kind:Null<String>; @:optional var label:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }).children;
     if ((cast _Runtime.strictEquals(children, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-        var missing:Null<String> = (cast _Command.findMissingCommandKind__explainCommandDispatch(({ final __callArgument94:Dynamic = history; __callArgument94; }), flight._internal._StaticIndex.readArray(children, i)) : Null<String>);
+        var missing:Null<String> = (cast _Command.findMissingCommandKind__explainCommandDispatch(({ final __callArgument124:Dynamic = history; __callArgument124; }), flight._internal._StaticIndex.readArray(children, i)) : Null<String>);
         if ((cast !_Runtime.strictEquals(missing, null) : Bool)) { return cast missing; }
         i++;
       }

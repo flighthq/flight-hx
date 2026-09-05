@@ -7,5 +7,6 @@ __syncDependencies();
 
 export const cloneDirectionalLight = api.cloneDirectionalLight;
 export const createDirectionalLight = api.createDirectionalLight;
+export const initializeDirectionalLight = api.initializeDirectionalLight;
 export const setDirectionalLightDirection = api.setDirectionalLightDirection;
 export const setDirectionalLightTarget = api.setDirectionalLightTarget;

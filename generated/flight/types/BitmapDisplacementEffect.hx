@@ -4,4 +4,28 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef BitmapDisplacementEffect = { var kind:String; var map:Null<Texture2D>; @:optional var componentX:ImageChannel; @:optional var componentY:ImageChannel; @:optional var scaleX:Float; @:optional var scaleY:Float; @:optional var edgeMode:BitmapDisplacementEffectEdgeMode; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class BitmapDisplacementEffect extends flight.types.RenderEffect<String> {
+  public var map:Null<Texture2D>;
+  public var componentX:Null<ImageChannel>;
+  public var componentY:Null<ImageChannel>;
+  public var scaleX:Null<Float>;
+  public var scaleY:Null<Float>;
+  public var edgeMode:Null<BitmapDisplacementEffectEdgeMode>;
+
+  private function new(kind:String, map:Null<Texture2D>, ?componentX:Null<ImageChannel>, ?componentY:Null<ImageChannel>, ?scaleX:Null<Float>, ?scaleY:Null<Float>, ?edgeMode:Null<BitmapDisplacementEffectEdgeMode>):Void {
+    super(kind);
+    this.map = map;
+    this.componentX = componentX;
+    this.componentY = componentY;
+    this.scaleX = scaleX;
+    this.scaleY = scaleY;
+    this.edgeMode = edgeMode;
+  }
+}
+#else
+typedef BitmapDisplacementEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var map:Null<Texture2D>; @:optional var componentX:ImageChannel; @:optional var componentY:ImageChannel; @:optional var scaleX:Float; @:optional var scaleY:Float; @:optional var edgeMode:BitmapDisplacementEffectEdgeMode; };
+#end

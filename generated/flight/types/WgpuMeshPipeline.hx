@@ -4,4 +4,36 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuMeshPipeline = { var hasIblGroup:Bool; var hasPbrSampleGroup:Bool; var hasShadowGroup:Bool; var materialBindGroupLayout:flight._internal.dom.GPUBindGroupLayout; var pipeline:flight._internal.dom.GPURenderPipeline; var skinned:Bool; };
+#if !flight_struct_typedef
+@:allow(flight._Scene3DWgpu)
+@:allow(flight.types.WgpuClassicPipeline)
+@:allow(flight.types.WgpuDebugPipeline)
+@:allow(flight.types.WgpuMatcapPipeline)
+@:allow(flight.types.WgpuPbrPipeline)
+@:allow(flight.types.WgpuToonPipeline)
+@:allow(flight.types.WgpuUnlitPipeline)
+@:allow(flight.types.WgpuWireframePipeline)
+@:keep
+@:structInit
+class WgpuMeshPipeline {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var hasIblGroup:Bool;
+  public var hasPbrSampleGroup:Bool;
+  public var hasShadowGroup:Bool;
+  public var materialBindGroupLayout:flight._internal.dom.GPUBindGroupLayout;
+  public var pipeline:flight._internal.dom.GPURenderPipeline;
+  public var skinned:Bool;
+
+  private function new(hasIblGroup:Bool, hasPbrSampleGroup:Bool, hasShadowGroup:Bool, materialBindGroupLayout:flight._internal.dom.GPUBindGroupLayout, pipeline:flight._internal.dom.GPURenderPipeline, skinned:Bool):Void {
+    this.__symbol__EntityRuntime = null;
+    this.hasIblGroup = hasIblGroup;
+    this.hasPbrSampleGroup = hasPbrSampleGroup;
+    this.hasShadowGroup = hasShadowGroup;
+    this.materialBindGroupLayout = materialBindGroupLayout;
+    this.pipeline = pipeline;
+    this.skinned = skinned;
+  }
+}
+#else
+typedef WgpuMeshPipeline = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var hasIblGroup:Bool; var hasPbrSampleGroup:Bool; var hasShadowGroup:Bool; var materialBindGroupLayout:flight._internal.dom.GPUBindGroupLayout; var pipeline:flight._internal.dom.GPURenderPipeline; var skinned:Bool; };
+#end

@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostCapacitor)
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class SoftKeyboardVisibilityBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>;
+  public var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>;
+
+  private function new(show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>, hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.show = show;
+    this.hide = hide;
+  }
+}
+#else
 typedef SoftKeyboardVisibilityBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; };
+#end

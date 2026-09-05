@@ -4,4 +4,38 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GradientBevelEffect = { var kind:String; var alphas:Array<Float>; @:optional var angle:Float; @:optional var bevelType:String; @:optional var blurX:Float; @:optional var blurY:Float; var colors:Array<Float>; @:optional var distance:Float; @:optional var quality:Float; var ratios:Array<Float>; @:optional var sourceMode:EffectSourceMode; @:optional var strength:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class GradientBevelEffect extends flight.types.RenderEffect<String> {
+  public var alphas:Array<Float>;
+  public var angle:Null<Float>;
+  public var bevelType:Null<String>;
+  public var blurX:Null<Float>;
+  public var blurY:Null<Float>;
+  public var colors:Array<Float>;
+  public var distance:Null<Float>;
+  public var quality:Null<Float>;
+  public var ratios:Array<Float>;
+  public var sourceMode:Null<EffectSourceMode>;
+  public var strength:Null<Float>;
+
+  private function new(kind:String, alphas:Array<Float>, ?angle:Null<Float>, ?bevelType:Null<String>, ?blurX:Null<Float>, ?blurY:Null<Float>, colors:Array<Float>, ?distance:Null<Float>, ?quality:Null<Float>, ratios:Array<Float>, ?sourceMode:Null<EffectSourceMode>, ?strength:Null<Float>):Void {
+    super(kind);
+    this.alphas = alphas;
+    this.angle = angle;
+    this.bevelType = bevelType;
+    this.blurX = blurX;
+    this.blurY = blurY;
+    this.colors = colors;
+    this.distance = distance;
+    this.quality = quality;
+    this.ratios = ratios;
+    this.sourceMode = sourceMode;
+    this.strength = strength;
+  }
+}
+#else
+typedef GradientBevelEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var alphas:Array<Float>; @:optional var angle:Float; @:optional var bevelType:String; @:optional var blurX:Float; @:optional var blurY:Float; var colors:Array<Float>; @:optional var distance:Float; @:optional var quality:Float; var ratios:Array<Float>; @:optional var sourceMode:EffectSourceMode; @:optional var strength:Float; };
+#end

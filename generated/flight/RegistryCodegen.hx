@@ -4,13 +4,19 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._RegistryCodegen as Facade_RegistryCodegen_flight__RegistryCodegen;
+import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.RegistryCatalog;
 import flight.types.RegistryCodegenPlan;
 import flight.types.RequirementSet;
 
 class RegistryCodegen {
-  public static function createRegistryCodegenPlan(catalog:RegistryCatalog, requirements:RequirementSet, backend:String):RegistryCodegenPlan {
+  public static function createRegistryCodegenPlan(catalog:RegistryCatalog, requirements:RequirementSet, backend:String):{ >RegistryCodegenPlan, >Entity, } {
     return cast Facade_RegistryCodegen_flight__RegistryCodegen.createRegistryCodegenPlan(catalog, requirements, backend);
     return cast null;
+  }
+
+  public static function initializeRegistryCodegenPlan(out:EntityConstruction<{ >RegistryCodegenPlan, >Entity, }>, catalog:RegistryCatalog, requirements:RequirementSet, backend:String):Void {
+    Facade_RegistryCodegen_flight__RegistryCodegen.initializeRegistryCodegenPlan(out, catalog, requirements, backend);
   }
 }

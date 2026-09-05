@@ -4,3 +4,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './lifecycle.mjs';
+export { initializeAppLifecycle } from './lifecycle.mjs';
+export { initializeWebLifecycleBackend } from './lifecycle.mjs';

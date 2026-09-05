@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createPanniniProjectionEffect = api.createPanniniProjectionEffect;
+export const initializePanniniProjectionEffect = api.initializePanniniProjectionEffect;

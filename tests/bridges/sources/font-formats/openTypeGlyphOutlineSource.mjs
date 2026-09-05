@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const createGlyphOutlineSourceFromOpenTypeFont = api.createGlyphOutlineSourceFromOpenTypeFont;
 export const explainOpenTypeFont = api.explainOpenTypeFont;
+export const initializeGlyphOutlineSourceFromOpenTypeFont = api.initializeGlyphOutlineSourceFromOpenTypeFont;

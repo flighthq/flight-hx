@@ -4,5 +4,23 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
 @:noCompletion
-typedef RenderQueue = { var entries:Array<RenderQueueEntry>; var entryCount:Float; };
+@:allow(flight._Render)
+@:keep
+@:structInit
+class RenderQueue {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var entries:Array<RenderQueueEntry>;
+  public var entryCount:Float;
+
+  private function new(entries:Array<RenderQueueEntry>, entryCount:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.entries = entries;
+    this.entryCount = entryCount;
+  }
+}
+#else
+@:noCompletion
+typedef RenderQueue = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var entries:Array<RenderQueueEntry>; var entryCount:Float; };
+#end

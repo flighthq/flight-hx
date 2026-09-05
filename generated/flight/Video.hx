@@ -4,16 +4,14 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Video as Facade_Video_flight__Video;
-import flight.types.BackendExplanation;
-import flight.types.BackendOperationExplanation;
-import flight.types.VideoCapabilityOperation;
+import flight.types.VideoCapabilityBackend;
 import flight.types.VideoResource;
 import flight.types.VideoResourceLoadOptions;
 import flight.types.VideoResourceUrl;
 
 class Video {
-  public static function canPlayVideoType(mimeType:String):Bool {
-    return cast Facade_Video_flight__Video.canPlayVideoType(mimeType);
+  public static function canPlayVideoType(backend:VideoCapabilityBackend, mimeType:String):Bool {
+    return cast Facade_Video_flight__Video.canPlayVideoType(backend, mimeType);
     return cast null;
   }
 
@@ -22,8 +20,8 @@ class Video {
     return cast null;
   }
 
-  public static function createVideoResourceFromMediaStream(stream:flight._internal.dom.MediaStream):Null<VideoResource> {
-    return cast Facade_Video_flight__Video.createVideoResourceFromMediaStream(stream);
+  public static function createVideoResourceFromMediaStream(backend:VideoCapabilityBackend, stream:flight._internal.dom.MediaStream):Null<VideoResource> {
+    return cast Facade_Video_flight__Video.createVideoResourceFromMediaStream(backend, stream);
     return cast null;
   }
 
@@ -40,16 +38,6 @@ class Video {
     Facade_Video_flight__Video.disposeVideoResource(resource);
   }
 
-  public static function explainVideoCapabilityBackend():BackendExplanation {
-    return cast Facade_Video_flight__Video.explainVideoCapabilityBackend();
-    return cast null;
-  }
-
-  public static function explainVideoCapabilityOperation(operation:VideoCapabilityOperation):BackendOperationExplanation {
-    return cast Facade_Video_flight__Video.explainVideoCapabilityOperation(operation);
-    return cast null;
-  }
-
   public static function getVideoResourceDuration(resource:VideoResource):Float {
     return cast Facade_Video_flight__Video.getVideoResourceDuration(resource);
     return cast null;
@@ -62,11 +50,6 @@ class Video {
 
   public static function getVideoResourceWidth(resource:VideoResource):Float {
     return cast Facade_Video_flight__Video.getVideoResourceWidth(resource);
-    return cast null;
-  }
-
-  public static function hasVideoCapabilityOperation(operation:VideoCapabilityOperation):Bool {
-    return cast Facade_Video_flight__Video.hasVideoCapabilityOperation(operation);
     return cast null;
   }
 
@@ -90,23 +73,23 @@ class Video {
     return cast null;
   }
 
-  public static function loadVideoResourceFromBlob(blob:flight._internal.dom.Blob, ?options:VideoResourceLoadOptions, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<VideoResource> {
-    return cast Facade_Video_flight__Video.loadVideoResourceFromBlob(blob, options, signal);
+  public static function loadVideoResourceFromBlob(backend:VideoCapabilityBackend, blob:flight._internal.dom.Blob, ?options:VideoResourceLoadOptions, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<VideoResource> {
+    return cast Facade_Video_flight__Video.loadVideoResourceFromBlob(backend, blob, options, signal);
     return cast null;
   }
 
-  public static function loadVideoResourceFromUrl(url:String, ?options:VideoResourceLoadOptions, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<VideoResource> {
-    return cast Facade_Video_flight__Video.loadVideoResourceFromUrl(url, options, signal);
+  public static function loadVideoResourceFromUrl(backend:VideoCapabilityBackend, url:String, ?options:VideoResourceLoadOptions, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<VideoResource> {
+    return cast Facade_Video_flight__Video.loadVideoResourceFromUrl(backend, url, options, signal);
     return cast null;
   }
 
-  public static function loadVideoResourceFromUrls(sources:Array<VideoResourceUrl>, ?options:VideoResourceLoadOptions, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<VideoResource> {
-    return cast Facade_Video_flight__Video.loadVideoResourceFromUrls(sources, options, signal);
+  public static function loadVideoResourceFromUrls(backend:VideoCapabilityBackend, sources:Array<VideoResourceUrl>, ?options:VideoResourceLoadOptions, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<VideoResource> {
+    return cast Facade_Video_flight__Video.loadVideoResourceFromUrls(backend, sources, options, signal);
     return cast null;
   }
 
-  public static function selectVideoResourceUrl(sources:Array<VideoResourceUrl>):Null<VideoResourceUrl> {
-    return cast Facade_Video_flight__Video.selectVideoResourceUrl(sources);
+  public static function selectVideoResourceUrl(backend:VideoCapabilityBackend, sources:Array<VideoResourceUrl>):Null<VideoResourceUrl> {
+    return cast Facade_Video_flight__Video.selectVideoResourceUrl(backend, sources);
     return cast null;
   }
 }

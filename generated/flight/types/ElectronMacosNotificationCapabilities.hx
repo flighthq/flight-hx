@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:keep
+@:structInit
+class ElectronMacosNotificationCapabilities extends flight.types.ElectronNotificationCapabilities {
+  public var action:NotificationActionBackend;
+  public var reply:NotificationReplyBackend;
+
+  private function new(click:NotificationClickBackend, close:NotificationCloseBackend, delivery:NotificationDeliveryBackend, dismiss:NotificationDismissBackend, lifecycle:NotificationLifecycleBackend, received:NotificationReceivedBackend, action:NotificationActionBackend, reply:NotificationReplyBackend):Void {
+    super(click, close, delivery, dismiss, lifecycle, received);
+    this.action = action;
+    this.reply = reply;
+  }
+}
+#else
 typedef ElectronMacosNotificationCapabilities = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var click:NotificationClickBackend; var close:NotificationCloseBackend; var delivery:NotificationDeliveryBackend; var dismiss:NotificationDismissBackend; var lifecycle:NotificationLifecycleBackend; var received:NotificationReceivedBackend; var action:NotificationActionBackend; var reply:NotificationReplyBackend; };
+#end

@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class MidiEventAttachment {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var release:Void->flight._internal._Promise<MidiEventReleaseOutcome>;
+
+  private function new(release:Void->flight._internal._Promise<MidiEventReleaseOutcome>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.release = release;
+  }
+}
+#else
 typedef MidiEventAttachment = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var release:Void->flight._internal._Promise<MidiEventReleaseOutcome>; };
+#end

@@ -4,13 +4,17 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._MovieClip as Facade_MovieClip_flight__MovieClip;
+import flight.types.Entity;
+import flight.types.EntityRuntime;
 import flight.types.FrameScript;
 import flight.types.MovieClip;
 import flight.types.MovieClipSignals;
+import flight.types.Node2D;
 import flight.types.PartialNode;
 import flight.types.Spritesheet;
 import flight.types.SpritesheetAnimation;
 import flight.types.SpritesheetTimelineSourceExplanation;
+import flight.types.TimelineCue;
 import flight.types.TimelineLabel;
 import flight.types.TimelineSource;
 
@@ -29,7 +33,7 @@ class MovieClip {
     return cast null;
   }
 
-  public static function createSpritesheetTimelineSource(spritesheet:Spritesheet, animation:SpritesheetAnimation):TimelineSource {
+  public static function createSpritesheetTimelineSource(spritesheet:Spritesheet, animation:SpritesheetAnimation):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var totalFrames:Float; var labels:Array<TimelineLabel>; var cues:Array<TimelineCue>; var frameRate:Null<Float>; var constructFrame:Node2D->Float->Void; } {
     return cast Facade_MovieClip_flight__MovieClip.createSpritesheetTimelineSource(spritesheet, animation);
     return cast null;
   }

@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createElectronPlatformBackend = api.createElectronPlatformBackend;
+export const initializeElectronPlatformBackend = api.initializeElectronPlatformBackend;

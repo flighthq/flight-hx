@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SketchEffect = { var kind:String; @:optional var strength:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class SketchEffect extends flight.types.RenderEffect<String> {
+  public var strength:Null<Float>;
+
+  private function new(kind:String, ?strength:Null<Float>):Void {
+    super(kind);
+    this.strength = strength;
+  }
+}
+#else
+typedef SketchEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var strength:Float; };
+#end

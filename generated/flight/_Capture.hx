@@ -12,10 +12,11 @@ import flight.types.CaptureBaselineProvenance;
 import flight.types.CaptureBaselineProvenanceField;
 import flight.types.CaptureCheckResult;
 import flight.types.CaptureColumnBaseline;
+import flight.types.NonEntityCreateResult;
 
 @:noCompletion
 class _Capture {
-  public static function createCaptureBaseline():CaptureBaseline {
+  public static function createCaptureBaseline():NonEntityCreateResult<CaptureBaseline, String> {
     return cast {  };
     return cast null;
   }

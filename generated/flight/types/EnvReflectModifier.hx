@@ -4,4 +4,24 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef EnvReflectModifier = { var kind:String; var slot:String; var tint:Float; @:optional var intensity:Float; @:optional var fresnelBias:Float; @:optional var roughness:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Shading)
+@:keep
+@:structInit
+class EnvReflectModifier extends flight.types.Modifier<String, String> {
+  public var tint:Float;
+  public var intensity:Null<Float>;
+  public var fresnelBias:Null<Float>;
+  public var roughness:Null<Float>;
+
+  private function new(kind:String, slot:String, tint:Float, ?intensity:Null<Float>, ?fresnelBias:Null<Float>, ?roughness:Null<Float>):Void {
+    super(kind, slot);
+    this.tint = tint;
+    this.intensity = intensity;
+    this.fresnelBias = fresnelBias;
+    this.roughness = roughness;
+  }
+}
+#else
+typedef EnvReflectModifier = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var slot:String; var tint:Float; @:optional var intensity:Float; @:optional var fresnelBias:Float; @:optional var roughness:Float; };
+#end

@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createCollisionDistance3D = api.createCollisionDistance3D;
+export const initializeCollisionDistance3D = api.initializeCollisionDistance3D;
 export const writeCollisionDistance3D = api.writeCollisionDistance3D;

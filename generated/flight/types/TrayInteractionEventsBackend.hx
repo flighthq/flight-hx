@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:allow(flight._HostTauri)
+@:keep
+@:structInit
+class TrayInteractionEventsBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var getSignal:TrayIcon->Null<Signal<TrayInteractionEvent->Void>>;
+
+  private function new(getSignal:TrayIcon->Null<Signal<TrayInteractionEvent->Void>>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getSignal = getSignal;
+  }
+}
+#else
 typedef TrayInteractionEventsBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getSignal:TrayIcon->Null<Signal<TrayInteractionEvent->Void>>; };
+#end

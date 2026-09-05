@@ -4,4 +4,23 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TextMetrics = { var width:Float; var height:Float; var numLines:Float; };
+#if !flight_struct_typedef
+@:allow(flight._TextLayout)
+@:keep
+@:structInit
+class TextMetrics {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var width:Float;
+  public var height:Float;
+  public var numLines:Float;
+
+  private function new(width:Float, height:Float, numLines:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.width = width;
+    this.height = height;
+    this.numLines = numLines;
+  }
+}
+#else
+typedef TextMetrics = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var width:Float; var height:Float; var numLines:Float; };
+#end

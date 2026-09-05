@@ -8,5 +8,6 @@ __syncDependencies();
 export const acquireWgpuRenderTexture = api.acquireWgpuRenderTexture;
 export const createWgpuRenderTexturePool = api.createWgpuRenderTexturePool;
 export const destroyWgpuRenderTexturePool = api.destroyWgpuRenderTexturePool;
+export const initializeWgpuRenderTexturePool = api.initializeWgpuRenderTexturePool;
 export const releaseWgpuRenderTexture = api.releaseWgpuRenderTexture;
 export const withWgpuRenderTextures = api.withWgpuRenderTextures;

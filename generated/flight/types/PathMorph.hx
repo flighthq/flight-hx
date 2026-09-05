@@ -4,4 +4,25 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef PathMorph = { var commands:Array<Float>; var endData:Array<Float>; var startData:Array<Float>; var winding:PathWinding; };
+#if !flight_struct_typedef
+@:allow(flight._Path)
+@:keep
+@:structInit
+class PathMorph {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var commands:Array<Float>;
+  public var endData:Array<Float>;
+  public var startData:Array<Float>;
+  public var winding:PathWinding;
+
+  private function new(commands:Array<Float>, endData:Array<Float>, startData:Array<Float>, winding:PathWinding):Void {
+    this.__symbol__EntityRuntime = null;
+    this.commands = commands;
+    this.endData = endData;
+    this.startData = startData;
+    this.winding = winding;
+  }
+}
+#else
+typedef PathMorph = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var commands:Array<Float>; var endData:Array<Float>; var startData:Array<Float>; var winding:PathWinding; };
+#end

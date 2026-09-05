@@ -4,4 +4,25 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Node2DData = {  };
+#if !flight_struct_typedef
+@:allow(flight.types.BitmapTextData)
+@:allow(flight.types.HtmlViewData)
+@:allow(flight.types.MovieClipData)
+@:allow(flight.types.NativeTextData)
+@:allow(flight.types.ParticleEmitterData)
+@:allow(flight.types.QuadBatchData)
+@:allow(flight.types.ShapeData)
+@:allow(flight.types.SpriteData)
+@:allow(flight.types.TextLabelData)
+@:allow(flight.types.TilemapData)
+@:keep
+@:structInit
+class Node2DData extends flight.types.NodeData {
+
+  private function new():Void {
+    super();
+  }
+}
+#else
+typedef Node2DData = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; };
+#end

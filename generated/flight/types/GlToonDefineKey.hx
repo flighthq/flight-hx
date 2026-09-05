@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlToonDefineKey = { var alphaMaskEnabled:Bool; var hasBaseColorMap:Bool; var hasRamp:Bool; @:optional var hasSkin:Bool; var hasUvTransform:Bool; };
+typedef GlToonDefineKey = { var alphaMaskEnabled:Bool; var hasBaseColorMap:Bool; @:optional var hasInstances:Bool; var hasRamp:Bool; @:optional var hasSkin:Bool; var hasUvTransform:Bool; };

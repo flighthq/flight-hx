@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef HueSaturationAdjustment = { var kind:String; var transform:ColorTransformFunction; @:optional var hue:Float; @:optional var saturation:Float; @:optional var lightness:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Adjustments)
+@:keep
+@:structInit
+class HueSaturationAdjustment extends flight.types.ColorLutAdjustment<String> {
+  public var hue:Null<Float>;
+  public var saturation:Null<Float>;
+  public var lightness:Null<Float>;
+
+  private function new(kind:String, transform:ColorTransformFunction, ?hue:Null<Float>, ?saturation:Null<Float>, ?lightness:Null<Float>):Void {
+    super(kind, transform);
+    this.hue = hue;
+    this.saturation = saturation;
+    this.lightness = lightness;
+  }
+}
+#else
+typedef HueSaturationAdjustment = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var transform:ColorTransformFunction; @:optional var hue:Float; @:optional var saturation:Float; @:optional var lightness:Float; };
+#end

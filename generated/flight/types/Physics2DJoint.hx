@@ -4,4 +4,59 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics2DJoint = { var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var breakForce:Float; var breakTorque:Float; };
+#if !flight_struct_typedef
+@:allow(flight.types.Physics2DDistanceJoint)
+@:allow(flight.types.Physics2DGearJoint)
+@:allow(flight.types.Physics2DMouseJoint)
+@:allow(flight.types.Physics2DPrismaticJoint)
+@:allow(flight.types.Physics2DPulleyJoint)
+@:allow(flight.types.Physics2DRevoluteJoint)
+@:allow(flight.types.Physics2DRopeJoint)
+@:allow(flight.types.Physics2DWeldJoint)
+@:allow(flight.types.Physics2DWheelJoint)
+@:keep
+@:structInit
+class Physics2DJoint {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var kind:Physics2DJointKind;
+  public var bodyA:Float;
+  public var bodyB:Float;
+  public var localAnchorAX:Float;
+  public var localAnchorAY:Float;
+  public var localAnchorBX:Float;
+  public var localAnchorBY:Float;
+  public var collideConnected:Bool;
+  public var impulse0:Float;
+  public var impulse1:Float;
+  public var impulse2:Float;
+  public var rAX:Float;
+  public var rAY:Float;
+  public var rBX:Float;
+  public var rBY:Float;
+  public var breakForce:Float;
+  public var breakTorque:Float;
+
+  private function new(kind:Physics2DJointKind, bodyA:Float, bodyB:Float, localAnchorAX:Float, localAnchorAY:Float, localAnchorBX:Float, localAnchorBY:Float, collideConnected:Bool, impulse0:Float, impulse1:Float, impulse2:Float, rAX:Float, rAY:Float, rBX:Float, rBY:Float, breakForce:Float, breakTorque:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.kind = kind;
+    this.bodyA = bodyA;
+    this.bodyB = bodyB;
+    this.localAnchorAX = localAnchorAX;
+    this.localAnchorAY = localAnchorAY;
+    this.localAnchorBX = localAnchorBX;
+    this.localAnchorBY = localAnchorBY;
+    this.collideConnected = collideConnected;
+    this.impulse0 = impulse0;
+    this.impulse1 = impulse1;
+    this.impulse2 = impulse2;
+    this.rAX = rAX;
+    this.rAY = rAY;
+    this.rBX = rBX;
+    this.rBY = rBY;
+    this.breakForce = breakForce;
+    this.breakTorque = breakTorque;
+  }
+}
+#else
+typedef Physics2DJoint = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var breakForce:Float; var breakTorque:Float; };
+#end

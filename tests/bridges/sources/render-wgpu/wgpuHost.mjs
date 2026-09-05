@@ -7,6 +7,7 @@ __syncDependencies();
 
 export const createWebWgpuHostBackend = api.createWebWgpuHostBackend;
 export const getWgpuHostBackend = api.getWgpuHostBackend;
+export const initializeWebWgpuHostBackend = api.initializeWebWgpuHostBackend;
 export const installWgpuHostBackend = api.installWgpuHostBackend;
 export const resetWgpuHostBackendForTest = api.resetWgpuHostBackendForTest;
 export const setWgpuHostBackend = api.setWgpuHostBackend;

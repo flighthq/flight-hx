@@ -4,4 +4,28 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef BitmapTextData = { var align:BitmapTextAlign; var glyphSource:Null<GlyphSource>; var letterSpacing:Float; var lineHeight:Float; var text:String; var wrapWidth:Null<Float>; };
+#if !flight_struct_typedef
+@:allow(flight._BitmapText)
+@:keep
+@:structInit
+class BitmapTextData extends flight.types.Node2DData {
+  public var align:BitmapTextAlign;
+  public var glyphSource:Null<GlyphSource>;
+  public var letterSpacing:Float;
+  public var lineHeight:Float;
+  public var text:String;
+  public var wrapWidth:Null<Float>;
+
+  private function new(align:BitmapTextAlign, glyphSource:Null<GlyphSource>, letterSpacing:Float, lineHeight:Float, text:String, wrapWidth:Null<Float>):Void {
+    super();
+    this.align = align;
+    this.glyphSource = glyphSource;
+    this.letterSpacing = letterSpacing;
+    this.lineHeight = lineHeight;
+    this.text = text;
+    this.wrapWidth = wrapWidth;
+  }
+}
+#else
+typedef BitmapTextData = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var align:BitmapTextAlign; var glyphSource:Null<GlyphSource>; var letterSpacing:Float; var lineHeight:Float; var text:String; var wrapWidth:Null<Float>; };
+#end

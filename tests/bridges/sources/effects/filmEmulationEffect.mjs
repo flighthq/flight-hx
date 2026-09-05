@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createFilmEmulationEffect = api.createFilmEmulationEffect;
+export const initializeFilmEmulationEffect = api.initializeFilmEmulationEffect;

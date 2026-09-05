@@ -16,5 +16,6 @@ export const getGlyphExtentsBatch = api.getGlyphExtentsBatch;
 export const getGlyphExtentsInto = api.getGlyphExtentsInto;
 export const getGlyphIndexForCodePoint = api.getGlyphIndexForCodePoint;
 export const getGlyphName = api.getGlyphName;
+export const initializeShapedRun = api.initializeShapedRun;
 export const shapeTextRun = api.shapeTextRun;
 export const shapeTextRunInto = api.shapeTextRunInto;

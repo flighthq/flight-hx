@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuScene3DDrawEntry = { var alpha:Float; var colorMatrix:Null<flight._internal._Object>; var colorScaleBias:Null<flight._internal._Object>; var depth:Float; var lightBlock:flight._internal._Object; var material:flight._internal._Object; var mesh:flight._internal._Object; var renderer:flight._internal._Object; var subset:flight._internal._Object; var worldMatrix:flight._internal._Object; };
+typedef WgpuScene3DDrawEntry = { var alpha:Float; var colorMatrix:Null<flight._internal._Object>; var colorScaleBias:Null<flight._internal._Object>; var depth:Float; var lightBlock:flight._internal._Object; var material:flight._internal._Object; var mesh:flight._internal._Object; var renderer:flight._internal._Object; var sortKey:Float; var subset:flight._internal._Object; var worldMatrix:flight._internal._Object; };

@@ -4,4 +4,23 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MarkupTagRegistry = { @:optional var classResolver:MarkupClassResolver; @:optional var colorResolver:MarkupColorResolver; var handlers:flight._internal._Map<String, MarkupTagHandler>; };
+#if !flight_struct_typedef
+@:allow(flight._TextMarkup)
+@:keep
+@:structInit
+class MarkupTagRegistry {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var classResolver:Null<MarkupClassResolver>;
+  public var colorResolver:Null<MarkupColorResolver>;
+  public var handlers:flight._internal._Map<String, MarkupTagHandler>;
+
+  private function new(?classResolver:Null<MarkupClassResolver>, ?colorResolver:Null<MarkupColorResolver>, handlers:flight._internal._Map<String, MarkupTagHandler>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.classResolver = classResolver;
+    this.colorResolver = colorResolver;
+    this.handlers = handlers;
+  }
+}
+#else
+typedef MarkupTagRegistry = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var classResolver:MarkupClassResolver; @:optional var colorResolver:MarkupColorResolver; var handlers:flight._internal._Map<String, MarkupTagHandler>; };
+#end

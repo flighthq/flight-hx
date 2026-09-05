@@ -9,5 +9,6 @@ export const acquireCanvasTextureResolverSurface = api.acquireCanvasTextureResol
 export const connectCanvasTextureResolverMisses = api.connectCanvasTextureResolverMisses;
 export const createCanvasTextureResolvers = api.createCanvasTextureResolvers;
 export const destroyCanvasTextureResolvers = api.destroyCanvasTextureResolvers;
+export const initializeCanvasTextureResolvers = api.initializeCanvasTextureResolvers;
 export const registerCanvasTextureResolver = api.registerCanvasTextureResolver;
 export const resolveCanvasTexture = api.resolveCanvasTexture;

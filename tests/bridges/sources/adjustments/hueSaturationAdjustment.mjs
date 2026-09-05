@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createHueSaturationAdjustment = api.createHueSaturationAdjustment;
+export const initializeHueSaturationAdjustment = api.initializeHueSaturationAdjustment;

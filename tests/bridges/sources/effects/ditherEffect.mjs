@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createDitherEffect = api.createDitherEffect;
+export const initializeDitherEffect = api.initializeDitherEffect;

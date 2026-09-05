@@ -3,13 +3,16 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
-import flight.types.BackendExplanation;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
+import flight.types.EntityConstruction;
 import flight.types.GeoPosition;
 import flight.types.GeoPositionResult;
 import flight.types.GeolocationAccessOutcome;
 import flight.types.GeolocationBackend;
 import flight.types.GeolocationErrorReason;
 import flight.types.GeolocationRequestOptions;
+import flight.types.HasSystemGeolocation;
 import flight.types.Host;
 import flight.types.HostSystemCapabilities;
 
@@ -17,19 +20,56 @@ typedef GlobalGeolocationPosition__geolocation = flight._internal.dom.Geolocatio
 
 @:noCompletion
 class _Geolocation {
-  public static function clearGeolocationWatch(id:Float):Void {
-    (cast (cast getGeolocationBackend() : GeolocationBackend) : GeolocationBackend).clearWatch((cast id : Float));
+  public static function clearGeolocationWatch(host:HasSystemGeolocation, id:Float):Void {
+    (cast (cast _Runtime.field(host, 'system') : { var geolocation:GeolocationBackend; }).geolocation : GeolocationBackend).clearWatch((cast id : Float));
   }
 
   public static function createGeoPosition():GeoPosition {
-    return cast { accuracy: 0.0, altitude: 0.0, altitudeAccuracy: 0.0, floorLevel: 0.0, heading: 0.0, latitude: 0.0, longitude: 0.0, speed: 0.0, timestamp: 0.0 };
+    var out:EntityConstruction<GeoPosition> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ accuracy: cast _Runtime.UNDEFINED, altitude: cast _Runtime.UNDEFINED, altitudeAccuracy: cast _Runtime.UNDEFINED, floorLevel: cast _Runtime.UNDEFINED, heading: cast _Runtime.UNDEFINED, latitude: cast _Runtime.UNDEFINED, longitude: cast _Runtime.UNDEFINED, speed: cast _Runtime.UNDEFINED, timestamp: cast _Runtime.UNDEFINED } : GeoPosition); }) #end));
+    initializeGeoPosition(({ final __callArgument0:Dynamic = out; __callArgument0; }));
+    return cast out;
     return cast null;
   }
 
   @:allow(flight)
   @:keep
   private static function createWebGeolocationBackend():GeolocationBackend {
-    return cast { clearWatch: function(id:Float):Void {
+    var out:EntityConstruction<GeolocationBackend> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ clearWatch: cast _Runtime.UNDEFINED, getCurrentPosition: cast _Runtime.UNDEFINED, getCurrentPositionResult: cast _Runtime.UNDEFINED, isAvailable: cast _Runtime.UNDEFINED, promptForAccess: cast _Runtime.UNDEFINED, watchPosition: cast _Runtime.UNDEFINED } : GeolocationBackend); }) #end));
+    initializeWebGeolocationBackend(({ final __callArgument2:Dynamic = out; __callArgument2; }));
+    return cast out;
+    return cast null;
+  }
+
+  public static function getCurrentGeoPosition(host:HasSystemGeolocation, ?options:GeolocationRequestOptions):flight._internal._Promise<Null<GeoPosition>> {
+    return cast (cast (cast _Runtime.field(host, 'system') : { var geolocation:GeolocationBackend; }).geolocation : GeolocationBackend).getCurrentPosition(({ final __callArgument4:Dynamic = _Runtime.coalesce(options, function():Dynamic return cast _Geolocation._emptyOptions__geolocation); __callArgument4; }));
+    return cast null;
+  }
+
+  public static function getCurrentGeoPositionResult(host:HasSystemGeolocation, ?options:GeolocationRequestOptions):flight._internal._Promise<GeoPositionResult> {
+    return cast (cast (cast _Runtime.field(host, 'system') : { var geolocation:GeolocationBackend; }).geolocation : GeolocationBackend).getCurrentPositionResult(({ final __callArgument5:Dynamic = _Runtime.coalesce(options, function():Dynamic return cast _Geolocation._emptyOptions__geolocation); __callArgument5; }));
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeGeoPosition(out:EntityConstruction<GeoPosition>):Void {
+    _Runtime.setField(out, 'accuracy', 0.0);
+    _Runtime.setField(out, 'altitude', 0.0);
+    _Runtime.setField(out, 'altitudeAccuracy', 0.0);
+    _Runtime.setField(out, 'floorLevel', 0.0);
+    _Runtime.setField(out, 'heading', 0.0);
+    _Runtime.setField(out, 'latitude', 0.0);
+    _Runtime.setField(out, 'longitude', 0.0);
+    _Runtime.setField(out, 'speed', 0.0);
+    _Runtime.setField(out, 'timestamp', 0.0);
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeWebGeolocationBackend(out:EntityConstruction<GeolocationBackend>):Void {
+    ((cast out : { var clearWatch:Float->Void; }).clearWatch = (cast function(id:Float):Void {
       var geo:Null<flight._internal.dom.Geolocation> = cast _Runtime.UNDEFINED;
       geo = (cast _Geolocation.getWebGeolocation__geolocation() : Null<flight._internal.dom.Geolocation>);
       if ((cast ((cast _Runtime.strictEquals(geo, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast geo : flight._internal.dom.Geolocation).clearWatch), 'function') : Bool)) : Bool)) { return; }
@@ -37,22 +77,24 @@ class _Geolocation {
         (cast geo : flight._internal.dom.Geolocation).clearWatch(id);
       } catch (__error:Dynamic) {
       }
-    }, getCurrentPosition: function(options:GeolocationRequestOptions):flight._internal._Promise<Null<GeoPosition>> {
+    }));
+    ((cast out : { var getCurrentPosition:GeolocationRequestOptions->flight._internal._Promise<Null<GeoPosition>>; }).getCurrentPosition = (cast function(options:GeolocationRequestOptions):flight._internal._Promise<Null<GeoPosition>> {
       return cast flight._internal._Async.create(function(resolve:flight._internal._Any, __unused0:flight._internal._Any):Void {
         var geo:Null<flight._internal.dom.Geolocation> = cast _Runtime.UNDEFINED;
         geo = (cast _Geolocation.getWebGeolocation__geolocation() : Null<flight._internal.dom.Geolocation>);
         if ((cast ((cast _Runtime.strictEquals(geo, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast geo : flight._internal.dom.Geolocation).getCurrentPosition), 'function') : Bool)) : Bool)) {
-          resolve(({ final __callArgument0:Dynamic = null; __callArgument0; }));
+          resolve(({ final __callArgument6:Dynamic = null; __callArgument6; }));
           return;
         }
         try {
-          (cast geo : flight._internal.dom.Geolocation).getCurrentPosition(function(position:flight._internal.dom.GeolocationPosition):Void { resolve(({ final __callArgument4:Dynamic = (cast _Geolocation.mapWebPosition__geolocation(({ final __callArgument2:Dynamic = position; __callArgument2; })) : GeoPosition); __callArgument4; })); }, function(__unused1:flight._internal.dom.GeolocationPositionError):Void { resolve(({ final __callArgument8:Dynamic = null; __callArgument8; })); }, (cast _Geolocation.toPositionOptions__geolocation(({ final __callArgument10:Dynamic = options; __callArgument10; })) : flight._internal.dom.PositionOptions));
+          (cast geo : flight._internal.dom.Geolocation).getCurrentPosition(function(position:flight._internal.dom.GeolocationPosition):Void { resolve(({ final __callArgument10:Dynamic = (cast _Geolocation.mapWebPosition__geolocation(({ final __callArgument8:Dynamic = position; __callArgument8; })) : GeoPosition); __callArgument10; })); }, function(__unused1:flight._internal.dom.GeolocationPositionError):Void { resolve(({ final __callArgument14:Dynamic = null; __callArgument14; })); }, (cast _Geolocation.toPositionOptions__geolocation(({ final __callArgument16:Dynamic = options; __callArgument16; })) : flight._internal.dom.PositionOptions));
         } catch (__error:Dynamic) {
-          resolve(({ final __callArgument12:Dynamic = null; __callArgument12; }));
+          resolve(({ final __callArgument18:Dynamic = null; __callArgument18; }));
         }
       });
       return cast _Runtime.UNDEFINED;
-    }, getCurrentPositionResult: function(options:GeolocationRequestOptions):flight._internal._Promise<GeoPositionResult> {
+    }));
+    ((cast out : { var getCurrentPositionResult:GeolocationRequestOptions->flight._internal._Promise<GeoPositionResult>; }).getCurrentPositionResult = (cast function(options:GeolocationRequestOptions):flight._internal._Promise<GeoPositionResult> {
       return cast flight._internal._Async.create(function(resolve:flight._internal._Any, __unused2:flight._internal._Any):Void {
         var geo:Null<flight._internal.dom.Geolocation> = cast _Runtime.UNDEFINED;
         geo = (cast _Geolocation.getWebGeolocation__geolocation() : Null<flight._internal.dom.Geolocation>);
@@ -61,17 +103,19 @@ class _Geolocation {
           return;
         }
         try {
-          (cast geo : flight._internal.dom.Geolocation).getCurrentPosition(function(position:flight._internal.dom.GeolocationPosition):Void { resolve((cast { position: (cast _Geolocation.mapWebPosition__geolocation(({ final __callArgument14:Dynamic = position; __callArgument14; })) : GeoPosition), reason: null } : flight._internal._Any)); }, function(error:flight._internal.dom.GeolocationPositionError):Void { resolve((cast { position: null, reason: (cast _Geolocation.mapWebPositionError__geolocation(({ final __callArgument18:Dynamic = error; __callArgument18; })) : GeolocationErrorReason) } : flight._internal._Any)); }, (cast _Geolocation.toPositionOptions__geolocation(({ final __callArgument22:Dynamic = options; __callArgument22; })) : flight._internal.dom.PositionOptions));
+          (cast geo : flight._internal.dom.Geolocation).getCurrentPosition(function(position:flight._internal.dom.GeolocationPosition):Void { resolve((cast { position: (cast _Geolocation.mapWebPosition__geolocation(({ final __callArgument20:Dynamic = position; __callArgument20; })) : GeoPosition), reason: null } : flight._internal._Any)); }, function(error:flight._internal.dom.GeolocationPositionError):Void { resolve((cast { position: null, reason: (cast _Geolocation.mapWebPositionError__geolocation(({ final __callArgument24:Dynamic = error; __callArgument24; })) : GeolocationErrorReason) } : flight._internal._Any)); }, (cast _Geolocation.toPositionOptions__geolocation(({ final __callArgument28:Dynamic = options; __callArgument28; })) : flight._internal.dom.PositionOptions));
         } catch (__error:Dynamic) {
           resolve((cast { position: null, reason: 'unavailable' } : flight._internal._Any));
         }
       });
       return cast _Runtime.UNDEFINED;
-    }, isAvailable: function():Bool {
+    }));
+    ((cast out : { var isAvailable:Void->Bool; }).isAvailable = (cast function():Bool {
       if ((cast ((cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'isSecureContext'), false) : Bool)) : Bool)) { return cast false; }
       return cast !_Runtime.strictEquals((cast _Geolocation.getWebGeolocation__geolocation() : Null<flight._internal.dom.Geolocation>), null);
       return cast _Runtime.UNDEFINED;
-    }, promptForAccess: function():flight._internal._Promise<GeolocationAccessOutcome> {
+    }));
+    ((cast out : { var promptForAccess:Void->flight._internal._Promise<GeolocationAccessOutcome>; }).promptForAccess = (cast function():flight._internal._Promise<GeolocationAccessOutcome> {
       return cast flight._internal._Async.create(function(resolve:flight._internal._Any, __unused3:flight._internal._Any):Void {
         var geo:Null<flight._internal.dom.Geolocation> = cast _Runtime.UNDEFINED;
         geo = (cast _Geolocation.getWebGeolocation__geolocation() : Null<flight._internal.dom.Geolocation>);
@@ -80,125 +124,39 @@ class _Geolocation {
           return;
         }
         try {
-          (cast geo : flight._internal.dom.Geolocation).getCurrentPosition(function(__unused4:flight._internal.dom.GeolocationPosition):Void { resolve((cast { reason: 'granted' } : flight._internal._Any)); }, function(error:flight._internal.dom.GeolocationPositionError):Void { resolve((cast { reason: (cast _Geolocation.mapWebAccessError__geolocation(({ final __callArgument24:Dynamic = error; __callArgument24; })) : String) } : flight._internal._Any)); });
+          (cast geo : flight._internal.dom.Geolocation).getCurrentPosition(function(__unused4:flight._internal.dom.GeolocationPosition):Void { resolve((cast { reason: 'granted' } : flight._internal._Any)); }, function(error:flight._internal.dom.GeolocationPositionError):Void { resolve((cast { reason: (cast _Geolocation.mapWebAccessError__geolocation(({ final __callArgument30:Dynamic = error; __callArgument30; })) : String) } : flight._internal._Any)); });
         } catch (__error:Dynamic) {
           resolve((cast { reason: 'operation-failed' } : flight._internal._Any));
         }
       });
       return cast _Runtime.UNDEFINED;
-    }, watchPosition: function(listener:GeoPosition->Void, options:GeolocationRequestOptions, onError:Null<GeolocationErrorReason->Void>):Float {
+    }));
+    ((cast out : { var watchPosition:(GeoPosition->Void)->GeolocationRequestOptions->Null<GeolocationErrorReason->Void>->Float; }).watchPosition = (cast function(listener:GeoPosition->Void, options:GeolocationRequestOptions, onError:Null<GeolocationErrorReason->Void>):Float {
       var geo:Null<flight._internal.dom.Geolocation> = cast _Runtime.UNDEFINED;
       geo = (cast _Geolocation.getWebGeolocation__geolocation() : Null<flight._internal.dom.Geolocation>);
       if ((cast ((cast _Runtime.strictEquals(geo, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast geo : flight._internal.dom.Geolocation).watchPosition), 'function') : Bool)) : Bool)) { return cast -1.0; }
       try {
-        return cast (cast geo : flight._internal.dom.Geolocation).watchPosition(function(position:flight._internal.dom.GeolocationPosition):Void { listener((cast _Geolocation.mapWebPosition__geolocation(({ final __callArgument28:Dynamic = position; __callArgument28; })) : GeoPosition)); }, ((cast !_Runtime.strictEquals(onError, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast function(error:flight._internal.dom.GeolocationPositionError):Void { onError((cast _Geolocation.mapWebPositionError__geolocation(({ final __callArgument32:Dynamic = error; __callArgument32; })) : GeolocationErrorReason)); } : Dynamic) : (cast function(__unused5:flight._internal.dom.GeolocationPositionError):Void {
+        return cast (cast geo : flight._internal.dom.Geolocation).watchPosition(function(position:flight._internal.dom.GeolocationPosition):Void { listener((cast _Geolocation.mapWebPosition__geolocation(({ final __callArgument34:Dynamic = position; __callArgument34; })) : GeoPosition)); }, ((cast !_Runtime.strictEquals(onError, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast function(error:flight._internal.dom.GeolocationPositionError):Void { onError((cast _Geolocation.mapWebPositionError__geolocation(({ final __callArgument38:Dynamic = error; __callArgument38; })) : GeolocationErrorReason)); } : Dynamic) : (cast function(__unused5:flight._internal.dom.GeolocationPositionError):Void {
 
-        } : Dynamic)), (cast _Geolocation.toPositionOptions__geolocation(({ final __callArgument36:Dynamic = options; __callArgument36; })) : flight._internal.dom.PositionOptions));
+        } : Dynamic)), (cast _Geolocation.toPositionOptions__geolocation(({ final __callArgument42:Dynamic = options; __callArgument42; })) : flight._internal.dom.PositionOptions));
       } catch (__error:Dynamic) {
         return cast -1.0;
       }
       return cast _Runtime.UNDEFINED;
-    } };
+    }));
+  }
+
+  public static function isGeolocationAvailable(host:HasSystemGeolocation):Bool {
+    return cast (cast (cast _Runtime.field(host, 'system') : { var geolocation:GeolocationBackend; }).geolocation : GeolocationBackend).isAvailable();
     return cast null;
   }
 
-  public static function explainGeolocationBackend():BackendExplanation {
-    if ((cast !_Runtime.strictEquals(_Geolocation._custom__geolocation, null) : Bool)) {
-      return cast { conflict: _Geolocation._hostConflict__geolocation, layer: 'custom', operation: null, viability: 'unobserved' };
-    }
-    if ((cast !_Runtime.strictEquals(_Geolocation._host__geolocation, null) : Bool)) {
-      return cast { conflict: _Geolocation._hostConflict__geolocation, layer: 'host', operation: ((cast !_Runtime.strictEquals(_Geolocation._hostObservation__geolocation, null) : Bool) ? (cast (cast _Geolocation._hostObservation__geolocation : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(_Geolocation._hostObservation__geolocation, null) : Bool) ? (cast (cast _Geolocation._hostObservation__geolocation : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
-    }
-    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
+  public static function watchGeolocationPosition(host:HasSystemGeolocation, handler:GeoPosition->Void, ?options:GeolocationRequestOptions, ?onError:GeolocationErrorReason->Void):Float {
+    return cast (cast (cast _Runtime.field(host, 'system') : { var geolocation:GeolocationBackend; }).geolocation : GeolocationBackend).watchPosition(({ final __callArgument44:Dynamic = handler; __callArgument44; }), ({ final __callArgument45:Dynamic = _Runtime.coalesce(options, function():Dynamic return cast _Geolocation._emptyOptions__geolocation); __callArgument45; }), ({ final __callArgument46:Dynamic = onError; __callArgument46; }));
     return cast null;
   }
-
-  public static function getCurrentGeoPosition(?options:GeolocationRequestOptions):flight._internal._Promise<Null<GeoPosition>> {
-    return cast (cast (cast getGeolocationBackend() : GeolocationBackend) : GeolocationBackend).getCurrentPosition(({ final __callArgument38:Dynamic = _Runtime.coalesce(options, function():Dynamic return cast _Geolocation._emptyOptions__geolocation); __callArgument38; }));
-    return cast null;
-  }
-
-  public static function getCurrentGeoPositionResult(?options:GeolocationRequestOptions):flight._internal._Promise<GeoPositionResult> {
-    return cast (cast (cast getGeolocationBackend() : GeolocationBackend) : GeolocationBackend).getCurrentPositionResult(({ final __callArgument39:Dynamic = _Runtime.coalesce(options, function():Dynamic return cast _Geolocation._emptyOptions__geolocation); __callArgument39; }));
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function getGeolocationBackend():GeolocationBackend {
-    return cast _Runtime.coalesce(_Runtime.coalesce(_Geolocation._custom__geolocation, function():Dynamic return cast _Geolocation._host__geolocation), function():Dynamic return cast _Geolocation._sentinel__geolocation);
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function installGeolocationHostBackend(backend:GeolocationBackend):Void {
-    if ((cast !_Runtime.strictEquals(_Geolocation._host__geolocation, null) : Bool)) {
-      if ((cast !_Runtime.strictEquals(_Geolocation._host__geolocation, backend) : Bool)) { (_Geolocation._hostConflict__geolocation = cast (true : Dynamic)); }
-      return;
-    }
-    (_Geolocation._host__geolocation = cast (backend : Dynamic));
-  }
-
-  public static function isGeolocationAvailable():Bool {
-    return cast (cast (cast getGeolocationBackend() : GeolocationBackend) : GeolocationBackend).isAvailable();
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function observeGeolocationHostResult(operation:String, succeeded:Bool):Void {
-    (_Geolocation._hostObservation__geolocation = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function resetGeolocationBackendForTest():Void {
-    (_Geolocation._custom__geolocation = cast (null : Dynamic));
-    (_Geolocation._host__geolocation = cast (null : Dynamic));
-    (_Geolocation._hostConflict__geolocation = cast (false : Dynamic));
-    (_Geolocation._hostObservation__geolocation = cast (null : Dynamic));
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function setGeolocationBackend(backend:Null<GeolocationBackend>):Void {
-    (_Geolocation._custom__geolocation = cast (backend : Dynamic));
-  }
-
-  public static function watchGeolocationPosition(handler:GeoPosition->Void, ?options:GeolocationRequestOptions, ?onError:GeolocationErrorReason->Void):Float {
-    return cast (cast (cast getGeolocationBackend() : GeolocationBackend) : GeolocationBackend).watchPosition(({ final __callArgument40:Dynamic = handler; __callArgument40; }), ({ final __callArgument41:Dynamic = _Runtime.coalesce(options, function():Dynamic return cast _Geolocation._emptyOptions__geolocation); __callArgument41; }), ({ final __callArgument42:Dynamic = onError; __callArgument42; }));
-    return cast null;
-  }
-
-  public static var _custom__geolocation:Null<GeolocationBackend> = _Runtime.explicitNull();
-
-  public static var _host__geolocation:Null<GeolocationBackend> = _Runtime.explicitNull();
-
-  public static var _hostConflict__geolocation:Bool = false;
-
-  public static var _hostObservation__geolocation:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
 
   public static final _emptyOptions__geolocation:GeolocationRequestOptions = (cast {  });
-
-  public static final _sentinel__geolocation:GeolocationBackend = (cast { clearWatch: function(id:Float):Void {
-
-  }, getCurrentPosition: function(options:GeolocationRequestOptions):flight._internal._Promise<Null<GeoPosition>> {
-    return cast flight._internal._Async.resolve(null);
-    return cast _Runtime.UNDEFINED;
-  }, getCurrentPositionResult: function(options:GeolocationRequestOptions):flight._internal._Promise<GeoPositionResult> {
-    return cast flight._internal._Async.resolve({ position: null, reason: 'unavailable' });
-    return cast _Runtime.UNDEFINED;
-  }, isAvailable: function():Bool {
-    return cast false;
-    return cast _Runtime.UNDEFINED;
-  }, promptForAccess: function():flight._internal._Promise<GeolocationAccessOutcome> {
-    return cast flight._internal._Async.resolve({ reason: 'runtime-unavailable' });
-    return cast _Runtime.UNDEFINED;
-  }, watchPosition: function(listener:GeoPosition->Void, options:GeolocationRequestOptions, ?onError:GeolocationErrorReason->Void):Float {
-    return cast -1.0;
-    return cast _Runtime.UNDEFINED;
-  } });
 
   public static function getWebGeolocation__geolocation():Null<flight._internal.dom.Geolocation> {
     if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool)) { return cast null; }
@@ -208,8 +166,19 @@ class _Geolocation {
 
   public static function mapWebPosition__geolocation(position:flight._internal.dom.GeolocationPosition):GeoPosition {
     var coords:flight._internal.dom.GeolocationCoordinates = cast _Runtime.UNDEFINED;
+    var out:EntityConstruction<GeoPosition> = cast _Runtime.UNDEFINED;
     coords = _Runtime.field(position, 'coords');
-    return cast { accuracy: (cast coords : flight._internal.dom.GeolocationCoordinates).accuracy, altitude: _Runtime.coalesce((cast coords : flight._internal.dom.GeolocationCoordinates).altitude, function():Dynamic return cast 0.0), altitudeAccuracy: _Runtime.coalesce((cast coords : flight._internal.dom.GeolocationCoordinates).altitudeAccuracy, function():Dynamic return cast 0.0), floorLevel: _Runtime.coalesce((cast (cast coords : { @:optional var floorLevel:Float; }) : { @:optional var floorLevel:Null<Float>; }).floorLevel, function():Dynamic return cast 0.0), heading: _Runtime.coalesce((cast coords : flight._internal.dom.GeolocationCoordinates).heading, function():Dynamic return cast 0.0), latitude: (cast coords : flight._internal.dom.GeolocationCoordinates).latitude, longitude: (cast coords : flight._internal.dom.GeolocationCoordinates).longitude, speed: _Runtime.coalesce((cast coords : flight._internal.dom.GeolocationCoordinates).speed, function():Dynamic return cast 0.0), timestamp: _Runtime.field(position, 'timestamp') };
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ accuracy: cast _Runtime.UNDEFINED, altitude: cast _Runtime.UNDEFINED, altitudeAccuracy: cast _Runtime.UNDEFINED, floorLevel: cast _Runtime.UNDEFINED, heading: cast _Runtime.UNDEFINED, latitude: cast _Runtime.UNDEFINED, longitude: cast _Runtime.UNDEFINED, speed: cast _Runtime.UNDEFINED, timestamp: cast _Runtime.UNDEFINED } : GeoPosition); }) #end));
+    _Runtime.setField(out, 'accuracy', (cast coords : flight._internal.dom.GeolocationCoordinates).accuracy);
+    _Runtime.setField(out, 'altitude', _Runtime.coalesce((cast coords : flight._internal.dom.GeolocationCoordinates).altitude, function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'altitudeAccuracy', _Runtime.coalesce((cast coords : flight._internal.dom.GeolocationCoordinates).altitudeAccuracy, function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'floorLevel', _Runtime.coalesce((cast (cast coords : { @:optional var floorLevel:Float; }) : { @:optional var floorLevel:Null<Float>; }).floorLevel, function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'heading', _Runtime.coalesce((cast coords : flight._internal.dom.GeolocationCoordinates).heading, function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'latitude', (cast coords : flight._internal.dom.GeolocationCoordinates).latitude);
+    _Runtime.setField(out, 'longitude', (cast coords : flight._internal.dom.GeolocationCoordinates).longitude);
+    _Runtime.setField(out, 'speed', _Runtime.coalesce((cast coords : flight._internal.dom.GeolocationCoordinates).speed, function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'timestamp', _Runtime.field(position, 'timestamp'));
+    return cast out;
     return cast null;
   }
 
@@ -254,19 +223,19 @@ class _Geolocation {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var backend:Null<GeolocationBackend> = cast _Runtime.UNDEFINED;
-        backend = ({ final __structural44 = _Runtime.field(host, 'system'); __structural44 == null ? _Runtime.UNDEFINED : (cast __structural44 : HostSystemCapabilities).geolocation; });
-        var __flowBranch45:Dynamic;
+        backend = ({ final __structural48 = _Runtime.field(host, 'system'); __structural48 == null ? _Runtime.UNDEFINED : (cast __structural48 : HostSystemCapabilities).geolocation; });
+        var __flowBranch49:Dynamic;
         if ((cast ((cast _Runtime.strictEquals(backend, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast backend : GeolocationBackend).promptForAccess), 'function') : Bool)) : Bool)) {
-          __flowBranch45 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch49 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn({ reason: 'runtime-unavailable' });
           });
         } else {
-          __flowBranch45 = flight._internal._Async.flowNormal();
+          __flowBranch49 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch45, function():Dynamic {
+        return flight._internal._Async.continueFlow(__flowBranch49, function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.flatMap((cast backend : GeolocationBackend).promptForAccess(), function(__awaitValue46:Dynamic):Dynamic {
-              return flight._internal._Async.flowReturn(__awaitValue46);
+            return flight._internal._Async.flatMap((cast backend : GeolocationBackend).promptForAccess(), function(__awaitValue50:Dynamic):Dynamic {
+              return flight._internal._Async.flowReturn(__awaitValue50);
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;

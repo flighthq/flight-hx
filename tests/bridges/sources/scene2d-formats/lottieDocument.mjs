@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const applyAnimationClipToLottieDocument = api.applyAnimationClipToLottieDocument;
 export const createScene2DFromLottieDocument = api.createScene2DFromLottieDocument;
+export const initializeLottieDocumentImportResult = api.initializeLottieDocumentImportResult;

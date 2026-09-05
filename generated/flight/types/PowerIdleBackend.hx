@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:keep
+@:structInit
+class PowerIdleBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var getIdleState:Float->PowerIdleState;
+  public var getIdleTimeSeconds:Void->Float;
+
+  private function new(getIdleState:Float->PowerIdleState, getIdleTimeSeconds:Void->Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getIdleState = getIdleState;
+    this.getIdleTimeSeconds = getIdleTimeSeconds;
+  }
+}
+#else
 typedef PowerIdleBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getIdleState:Float->PowerIdleState; var getIdleTimeSeconds:Void->Float; };
+#end

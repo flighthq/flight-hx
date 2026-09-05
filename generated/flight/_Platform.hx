@@ -3,8 +3,12 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
+import flight.types.EntityConstruction;
 import flight.types.HasSystemPlatform;
 import flight.types.PlatformBackend;
+import flight.types.PlatformEndianness;
 import flight.types.PlatformEngine;
 import flight.types.PlatformInfo;
 import flight.types.PlatformKind;
@@ -40,67 +44,89 @@ class _Platform {
   @:allow(flight)
   @:keep
   private static function createPlatformInfo():PlatformInfo {
-    return cast { arch: '', distro: '', distroVersion: '', endianness: 'unknown', engine: 'unknown', engineVersion: '', isTouch: false, kind: 'unknown', locale: '', name: 'unknown', osBuild: '', pointerWidth: -1.0, runtime: 'unknown', version: '' };
+    var out:EntityConstruction<PlatformInfo> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ arch: cast _Runtime.UNDEFINED, distro: cast _Runtime.UNDEFINED, distroVersion: cast _Runtime.UNDEFINED, endianness: cast _Runtime.UNDEFINED, engine: cast _Runtime.UNDEFINED, engineVersion: cast _Runtime.UNDEFINED, isTouch: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, locale: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, osBuild: cast _Runtime.UNDEFINED, pointerWidth: cast _Runtime.UNDEFINED, runtime: cast _Runtime.UNDEFINED, version: cast _Runtime.UNDEFINED } : PlatformInfo); }) #end));
+    initializePlatformInfo(({ final __callArgument0:Dynamic = out; __callArgument0; }));
+    return cast out;
     return cast null;
   }
 
   public static function getPlatformEngine(host:HasSystemPlatform):PlatformEngine {
-    return cast (cast (cast getPlatformInfo(({ final __callArgument0:Dynamic = host; __callArgument0; }), ({ final __callArgument1:Dynamic = _Platform._scratch__platform; __callArgument1; })) : PlatformInfo) : { var engine:PlatformEngine; }).engine;
+    return cast (cast (cast getPlatformInfo(({ final __callArgument2:Dynamic = host; __callArgument2; }), ({ final __callArgument3:Dynamic = _Platform._scratch__platform; __callArgument3; })) : PlatformInfo) : { var engine:PlatformEngine; }).engine;
     return cast null;
   }
 
   public static function getPlatformInfo(host:HasSystemPlatform, out:PlatformInfo):PlatformInfo {
-    return cast (cast (cast (cast host : HasSystemPlatform).system : { var platform:PlatformBackend; }).platform : PlatformBackend).getInfo(({ final __callArgument4:Dynamic = out; __callArgument4; }));
+    return cast (cast (cast (cast host : HasSystemPlatform).system : { var platform:PlatformBackend; }).platform : PlatformBackend).getInfo(({ final __callArgument6:Dynamic = out; __callArgument6; }));
     return cast null;
   }
 
   public static function getPlatformKind(host:HasSystemPlatform):PlatformKind {
-    return cast (cast (cast getPlatformInfo(({ final __callArgument5:Dynamic = host; __callArgument5; }), ({ final __callArgument6:Dynamic = _Platform._scratch__platform; __callArgument6; })) : PlatformInfo) : { var kind:PlatformKind; }).kind;
+    return cast (cast (cast getPlatformInfo(({ final __callArgument7:Dynamic = host; __callArgument7; }), ({ final __callArgument8:Dynamic = _Platform._scratch__platform; __callArgument8; })) : PlatformInfo) : { var kind:PlatformKind; }).kind;
     return cast null;
   }
 
   public static function getPlatformName(host:HasSystemPlatform):PlatformName {
-    return cast (cast (cast getPlatformInfo(({ final __callArgument9:Dynamic = host; __callArgument9; }), ({ final __callArgument10:Dynamic = _Platform._scratch__platform; __callArgument10; })) : PlatformInfo) : { var name:PlatformName; }).name;
+    return cast (cast (cast getPlatformInfo(({ final __callArgument11:Dynamic = host; __callArgument11; }), ({ final __callArgument12:Dynamic = _Platform._scratch__platform; __callArgument12; })) : PlatformInfo) : { var name:PlatformName; }).name;
     return cast null;
   }
 
   public static function getPlatformRuntime(host:HasSystemPlatform):PlatformRuntime {
-    return cast (cast (cast getPlatformInfo(({ final __callArgument13:Dynamic = host; __callArgument13; }), ({ final __callArgument14:Dynamic = _Platform._scratch__platform; __callArgument14; })) : PlatformInfo) : { var runtime:PlatformRuntime; }).runtime;
+    return cast (cast (cast getPlatformInfo(({ final __callArgument15:Dynamic = host; __callArgument15; }), ({ final __callArgument16:Dynamic = _Platform._scratch__platform; __callArgument16; })) : PlatformInfo) : { var runtime:PlatformRuntime; }).runtime;
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializePlatformInfo(out:EntityConstruction<PlatformInfo>):Void {
+    _Runtime.setField(out, 'arch', '');
+    _Runtime.setField(out, 'distro', '');
+    _Runtime.setField(out, 'distroVersion', '');
+    _Runtime.setField(out, 'endianness', 'unknown');
+    _Runtime.setField(out, 'engine', 'unknown');
+    _Runtime.setField(out, 'engineVersion', '');
+    _Runtime.setField(out, 'isTouch', false);
+    _Runtime.setField(out, 'kind', 'unknown');
+    _Runtime.setField(out, 'locale', '');
+    _Runtime.setField(out, 'name', 'unknown');
+    _Runtime.setField(out, 'osBuild', '');
+    _Runtime.setField(out, 'pointerWidth', -1.0);
+    _Runtime.setField(out, 'runtime', 'unknown');
+    _Runtime.setField(out, 'version', '');
+  }
+
   public static function isPlatformDesktop(host:HasSystemPlatform):Bool {
-    return cast _Runtime.strictEquals((cast getPlatformKind(({ final __callArgument17:Dynamic = host; __callArgument17; })) : PlatformKind), 'desktop');
+    return cast _Runtime.strictEquals((cast getPlatformKind(({ final __callArgument19:Dynamic = host; __callArgument19; })) : PlatformKind), 'desktop');
     return cast null;
   }
 
   public static function isPlatformMobile(host:HasSystemPlatform):Bool {
-    return cast _Runtime.strictEquals((cast getPlatformKind(({ final __callArgument19:Dynamic = host; __callArgument19; })) : PlatformKind), 'mobile');
+    return cast _Runtime.strictEquals((cast getPlatformKind(({ final __callArgument21:Dynamic = host; __callArgument21; })) : PlatformKind), 'mobile');
     return cast null;
   }
 
   public static function isPlatformNative(host:HasSystemPlatform):Bool {
     var runtime:PlatformRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getPlatformRuntime(({ final __callArgument21:Dynamic = host; __callArgument21; })) : PlatformRuntime);
+    runtime = (cast getPlatformRuntime(({ final __callArgument23:Dynamic = host; __callArgument23; })) : PlatformRuntime);
     return cast ((cast !_Runtime.strictEquals(runtime, 'web') : Bool) && (cast !_Runtime.strictEquals(runtime, 'unknown') : Bool));
     return cast null;
   }
 
   public static function isPlatformTouch(host:HasSystemPlatform):Bool {
-    return cast (cast (cast getPlatformInfo(({ final __callArgument23:Dynamic = host; __callArgument23; }), ({ final __callArgument24:Dynamic = _Platform._scratch__platform; __callArgument24; })) : PlatformInfo) : { var isTouch:Bool; }).isTouch;
+    return cast (cast (cast getPlatformInfo(({ final __callArgument25:Dynamic = host; __callArgument25; }), ({ final __callArgument26:Dynamic = _Platform._scratch__platform; __callArgument26; })) : PlatformInfo) : { var isTouch:Bool; }).isTouch;
     return cast null;
   }
 
   public static function isPlatformVersionAtLeast(host:HasSystemPlatform, minimum:String):Bool {
     var version:String = cast _Runtime.UNDEFINED;
-    version = (cast (cast getPlatformInfo(({ final __callArgument27:Dynamic = host; __callArgument27; }), ({ final __callArgument28:Dynamic = _Platform._scratch__platform; __callArgument28; })) : PlatformInfo) : { var version:String; }).version;
+    version = (cast (cast getPlatformInfo(({ final __callArgument29:Dynamic = host; __callArgument29; }), ({ final __callArgument30:Dynamic = _Platform._scratch__platform; __callArgument30; })) : PlatformInfo) : { var version:String; }).version;
     if ((cast _Runtime.strictEquals(version, '') : Bool)) { return cast false; }
     return cast ((cast (cast comparePlatformVersions((cast version : String), (cast minimum : String)) : Float) : Float) >= (cast 0.0 : Float));
     return cast null;
   }
 
   public static function isPlatformWeb(host:HasSystemPlatform):Bool {
-    return cast _Runtime.strictEquals((cast getPlatformKind(({ final __callArgument31:Dynamic = host; __callArgument31; })) : PlatformKind), 'web');
+    return cast _Runtime.strictEquals((cast getPlatformKind(({ final __callArgument33:Dynamic = host; __callArgument33; })) : PlatformKind), 'web');
     return cast null;
   }
 

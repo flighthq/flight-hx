@@ -13,6 +13,7 @@ export const createTextLabelRuntime = api.createTextLabelRuntime;
 export const getTextLabelFormat = api.getTextLabelFormat;
 export const getTextLabelRuntime = api.getTextLabelRuntime;
 export const getTextLabelString = api.getTextLabelString;
+export const initializeTextLabelData = api.initializeTextLabelData;
 export const setTextLabelAutoSize = api.setTextLabelAutoSize;
 export const setTextLabelFormat = api.setTextLabelFormat;
 export const setTextLabelHeight = api.setTextLabelHeight;

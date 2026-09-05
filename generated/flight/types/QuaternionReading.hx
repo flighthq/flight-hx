@@ -4,4 +4,31 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef QuaternionReading = { var accuracy:SensorAccuracy; var interval:Float; var timestamp:Float; var w:Float; var x:Float; var y:Float; var z:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Sensors)
+@:keep
+@:structInit
+class QuaternionReading {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var accuracy:SensorAccuracy;
+  public var interval:Float;
+  public var timestamp:Float;
+  public var w:Float;
+  public var x:Float;
+  public var y:Float;
+  public var z:Float;
+
+  private function new(accuracy:SensorAccuracy, interval:Float, timestamp:Float, w:Float, x:Float, y:Float, z:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.accuracy = accuracy;
+    this.interval = interval;
+    this.timestamp = timestamp;
+    this.w = w;
+    this.x = x;
+    this.y = y;
+    this.z = z;
+  }
+}
+#else
+typedef QuaternionReading = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var accuracy:SensorAccuracy; var interval:Float; var timestamp:Float; var w:Float; var x:Float; var y:Float; var z:Float; };
+#end

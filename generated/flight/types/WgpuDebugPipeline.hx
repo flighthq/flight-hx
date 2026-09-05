@@ -4,4 +4,16 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuDebugPipeline = { var hasIblGroup:Bool; var hasPbrSampleGroup:Bool; var hasShadowGroup:Bool; var materialBindGroupLayout:flight._internal.dom.GPUBindGroupLayout; var pipeline:flight._internal.dom.GPURenderPipeline; var skinned:Bool; };
+#if !flight_struct_typedef
+@:allow(flight._Scene3DWgpu)
+@:keep
+@:structInit
+class WgpuDebugPipeline extends flight.types.WgpuMeshPipeline {
+
+  private function new(hasIblGroup:Bool, hasPbrSampleGroup:Bool, hasShadowGroup:Bool, materialBindGroupLayout:flight._internal.dom.GPUBindGroupLayout, pipeline:flight._internal.dom.GPURenderPipeline, skinned:Bool):Void {
+    super(hasIblGroup, hasPbrSampleGroup, hasShadowGroup, materialBindGroupLayout, pipeline, skinned);
+  }
+}
+#else
+typedef WgpuDebugPipeline = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var hasIblGroup:Bool; var hasPbrSampleGroup:Bool; var hasShadowGroup:Bool; var materialBindGroupLayout:flight._internal.dom.GPUBindGroupLayout; var pipeline:flight._internal.dom.GPURenderPipeline; var skinned:Bool; };
+#end

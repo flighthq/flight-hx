@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ExposureAdjustment = { var kind:String; var colorMatrix:Array<Float>; @:optional var exposure:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Adjustments)
+@:keep
+@:structInit
+class ExposureAdjustment extends flight.types.ColorMatrixAdjustment<String> {
+  public var exposure:Null<Float>;
+
+  private function new(kind:String, colorMatrix:Array<Float>, ?exposure:Null<Float>):Void {
+    super(kind, colorMatrix);
+    this.exposure = exposure;
+  }
+}
+#else
+typedef ExposureAdjustment = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var colorMatrix:Array<Float>; @:optional var exposure:Float; };
+#end

@@ -8,3 +8,4 @@ __syncDependencies();
 export const composeMatrix4FromTransform3D = api.composeMatrix4FromTransform3D;
 export const createTransform3D = api.createTransform3D;
 export const decomposeMatrix4ToTransform3D = api.decomposeMatrix4ToTransform3D;
+export const initializeTransform3D = api.initializeTransform3D;

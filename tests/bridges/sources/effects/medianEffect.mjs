@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const createMedianEffect = api.createMedianEffect;
 export const getMedianEffectPadding = api.getMedianEffectPadding;
+export const initializeMedianEffect = api.initializeMedianEffect;
 export const registerMedianEffectPaddingResolver = api.registerMedianEffectPaddingResolver;

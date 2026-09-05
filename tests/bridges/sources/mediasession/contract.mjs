@@ -4,3 +4,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './mediasession.mjs';
+export { initializeMediaSessionActionSignal } from './mediasession.mjs';

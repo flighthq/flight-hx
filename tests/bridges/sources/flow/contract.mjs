@@ -4,3 +4,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './flow.mjs';
+export { initializeFlowStack } from './flow.mjs';

@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createGlyphSourceFromBitmapFont = api.createGlyphSourceFromBitmapFont;
+export const initializeGlyphSourceFromBitmapFont = api.initializeGlyphSourceFromBitmapFont;

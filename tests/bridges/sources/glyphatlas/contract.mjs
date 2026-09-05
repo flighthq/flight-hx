@@ -11,3 +11,5 @@ export * from './glyphAtlasEntry.mjs';
 export * from './glyphAtlasMetrics.mjs';
 export * from './glyphRasterizerBackend.mjs';
 export * from './glyphSource.mjs';
+export { initializeGlyphAtlas } from './glyphAtlas.mjs';
+export { initializeGlyphSourceFromGlyphAtlas } from './glyphSource.mjs';

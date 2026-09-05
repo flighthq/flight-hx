@@ -25,6 +25,7 @@ export const equalsMatrix4 = api.equalsMatrix4;
 export const getMatrix4Determinant = api.getMatrix4Determinant;
 export const getMatrix4Element = api.getMatrix4Element;
 export const getMatrix4Position = api.getMatrix4Position;
+export const initializeMatrix4 = api.initializeMatrix4;
 export const interpolateMatrix4 = api.interpolateMatrix4;
 export const inverseMatrix4 = api.inverseMatrix4;
 export const isAffineMatrix4 = api.isAffineMatrix4;

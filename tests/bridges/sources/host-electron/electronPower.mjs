@@ -6,3 +6,12 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createElectronPowerBackends = api.createElectronPowerBackends;
+export const initializeElectronPowerCapabilities = api.initializeElectronPowerCapabilities;
+export const initializePowerBatteryHealthBackend = api.initializePowerBatteryHealthBackend;
+export const initializePowerChangeBackend = api.initializePowerChangeBackend;
+export const initializePowerIdleBackend = api.initializePowerIdleBackend;
+export const initializePowerKeepAwakeBackend = api.initializePowerKeepAwakeBackend;
+export const initializePowerSessionLockBackend = api.initializePowerSessionLockBackend;
+export const initializePowerStatusBackend = api.initializePowerStatusBackend;
+export const initializePowerSuspensionBackend = api.initializePowerSuspensionBackend;
+export const initializePowerThermalBackend = api.initializePowerThermalBackend;

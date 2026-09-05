@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlSkinPaletteTexture = { var jointCapacity:Float; var texture:flight._internal.dom.WebGLTexture; };
+#if !flight_struct_typedef
+@:allow(flight._RenderGl)
+@:keep
+@:structInit
+class GlSkinPaletteTexture {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var jointCapacity:Float;
+  public var texture:flight._internal.dom.WebGLTexture;
+
+  private function new(jointCapacity:Float, texture:flight._internal.dom.WebGLTexture):Void {
+    this.__symbol__EntityRuntime = null;
+    this.jointCapacity = jointCapacity;
+    this.texture = texture;
+  }
+}
+#else
+typedef GlSkinPaletteTexture = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var jointCapacity:Float; var texture:flight._internal.dom.WebGLTexture; };
+#end

@@ -7,5 +7,6 @@ __syncDependencies();
 
 export const createSkeleton2DDrawOrderAnimationTarget = api.createSkeleton2DDrawOrderAnimationTarget;
 export const createSkeleton2DDrawOrderChannel = api.createSkeleton2DDrawOrderChannel;
+export const initializeSkeleton2DDrawOrderAnimationTarget = api.initializeSkeleton2DDrawOrderAnimationTarget;
 export const registerSkeleton2DDrawOrderAnimationBinder = api.registerSkeleton2DDrawOrderAnimationBinder;
 export const unregisterSkeleton2DDrawOrderAnimationBinder = api.unregisterSkeleton2DDrawOrderAnimationBinder;

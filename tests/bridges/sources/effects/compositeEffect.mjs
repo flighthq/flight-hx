@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createCompositeEffect = api.createCompositeEffect;
+export const initializeCompositeEffect = api.initializeCompositeEffect;

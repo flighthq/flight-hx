@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createGrayscaleAdjustment = api.createGrayscaleAdjustment;
+export const initializeGrayscaleAdjustment = api.initializeGrayscaleAdjustment;

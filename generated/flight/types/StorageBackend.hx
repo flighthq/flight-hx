@@ -4,4 +4,27 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:keep
+@:structInit
+class StorageBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var clear:Void->StorageClearResult;
+  public var getItem:String->StorageGetItemResult;
+  public var keys:Void->StorageKeysResult;
+  public var removeItem:String->StorageRemoveItemResult;
+  public var setItem:String->String->StorageSetItemResult;
+
+  private function new(clear:Void->StorageClearResult, getItem:String->StorageGetItemResult, keys:Void->StorageKeysResult, removeItem:String->StorageRemoveItemResult, setItem:String->String->StorageSetItemResult):Void {
+    this.__symbol__EntityRuntime = null;
+    this.clear = clear;
+    this.getItem = getItem;
+    this.keys = keys;
+    this.removeItem = removeItem;
+    this.setItem = setItem;
+  }
+}
+#else
 typedef StorageBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var clear:Void->StorageClearResult; var getItem:String->StorageGetItemResult; var keys:Void->StorageKeysResult; var removeItem:String->StorageRemoveItemResult; var setItem:String->String->StorageSetItemResult; };
+#end

@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FlowStack = { var states:Array<FlowState>; };
+#if !flight_struct_typedef
+@:allow(flight._Flow)
+@:keep
+@:structInit
+class FlowStack {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var states:Array<FlowState>;
+
+  private function new(states:Array<FlowState>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.states = states;
+  }
+}
+#else
+typedef FlowStack = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var states:Array<FlowState>; };
+#end

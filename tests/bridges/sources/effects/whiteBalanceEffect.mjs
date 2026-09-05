@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWhiteBalanceEffect = api.createWhiteBalanceEffect;
+export const initializeWhiteBalanceEffect = api.initializeWhiteBalanceEffect;

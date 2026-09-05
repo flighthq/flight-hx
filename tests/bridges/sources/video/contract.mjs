@@ -6,3 +6,4 @@ __syncDependencies();
 export * from './videoFormat.mjs';
 export * from './videoResource.mjs';
 export * from './videoResourceFrom.mjs';
+export { initializeVideoResource } from './videoResource.mjs';

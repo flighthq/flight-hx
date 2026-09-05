@@ -8,3 +8,4 @@ __syncDependencies();
 export const captureBitmapFromImageResource = api.captureBitmapFromImageResource;
 export const createBitmapFromCanvas = api.createBitmapFromCanvas;
 export const createBitmapFromImageSource = api.createBitmapFromImageSource;
+export const initializeBitmapFromCanvas = api.initializeBitmapFromCanvas;

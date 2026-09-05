@@ -16,7 +16,8 @@ import flight.Types.PointLightKind;
 import flight.Types.SpotLightKind;
 import flight.Types.UnitlessLightUnit;
 import flight._Color.getColorLuminance;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Geometry.cloneVector3;
 import flight._Geometry.createVector3;
 import flight._Geometry.normalizeVector3;
@@ -40,7 +41,7 @@ import flight.types.AreaLightOptions;
 import flight.types.BoundingSphereLike;
 import flight.types.DirectionalLight;
 import flight.types.DirectionalLightOptions;
-import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.EntityRuntime;
 import flight.types.Environment;
 import flight.types.EnvironmentOptions;
@@ -74,26 +75,87 @@ class _Lighting {
   }
 
   public static function createAmbientLight(?options:AmbientLightOptions):AmbientLight {
-    return cast (cast createEntity((cast ({ color: (cast _Runtime.coalesce(({ final __structural6 = options; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var color:Null<Float>; }).color; }), function():Dynamic return cast 4294967295.0) : Dynamic), enabled: (cast _Runtime.coalesce(({ final __structural7 = options; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var enabled:Null<Bool>; }).enabled; }), function():Dynamic return cast true) : Dynamic), intensity: (cast _Runtime.coalesce(({ final __structural8 = options; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var intensity:Null<Float>; }).intensity; }), function():Dynamic return cast 1.0) : Dynamic), intensityUnit: (cast _Runtime.coalesce(({ final __structural9 = options; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { @:optional var intensityUnit:Null<String>; }).intensityUnit; }), function():Dynamic return cast UnitlessLightUnit) : Dynamic), kind: (cast AmbientLightKind : Dynamic) } : AmbientLight) : Dynamic)) : AmbientLight);
+    var out:EntityConstruction<AmbientLight> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ color: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, intensity: cast _Runtime.UNDEFINED, intensityUnit: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED } : AmbientLight); }) #end));
+    initializeAmbientLight(({ final __callArgument2:Dynamic = out; __callArgument2; }), ({ final __callArgument3:Dynamic = options; __callArgument3; }));
+    return cast out;
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeAmbientLight(out:EntityConstruction<AmbientLight>, ?options:AmbientLightOptions):Void {
+    _Runtime.setField(out, 'color', _Runtime.coalesce(({ final __structural6 = options; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var color:Null<Float>; }).color; }), function():Dynamic return cast 4294967295.0));
+    _Runtime.setField(out, 'enabled', _Runtime.coalesce(({ final __structural7 = options; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var enabled:Null<Bool>; }).enabled; }), function():Dynamic return cast true));
+    _Runtime.setField(out, 'intensity', _Runtime.coalesce(({ final __structural8 = options; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var intensity:Null<Float>; }).intensity; }), function():Dynamic return cast 1.0));
+    _Runtime.setField(out, 'intensityUnit', _Runtime.coalesce(({ final __structural9 = options; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { @:optional var intensityUnit:Null<String>; }).intensityUnit; }), function():Dynamic return cast UnitlessLightUnit));
+    _Runtime.setField(out, 'kind', AmbientLightKind);
+  }
+
   public static function cloneAreaLight(source:AreaLight):AreaLight {
-    return cast (cast createEntity((cast ({ castsShadow: (cast source.castsShadow : Dynamic), color: (cast source.color : Dynamic), decay: (cast source.decay : Dynamic), direction: (cast (cast cloneVector3(({ final __callArgument26:Dynamic = source.direction; __callArgument26; })) : Vector3) : Dynamic), enabled: (cast source.enabled : Dynamic), intensity: (cast source.intensity : Dynamic), intensityUnit: (cast source.intensityUnit : Dynamic), kind: (cast AreaLightKind : Dynamic), normalBias: (cast source.normalBias : Dynamic), pcfRadius: (cast source.pcfRadius : Dynamic), position: (cast (cast cloneVector3(({ final __callArgument28:Dynamic = source.position; __callArgument28; })) : Vector3) : Dynamic), range: (cast source.range : Dynamic), right: (cast (cast cloneVector3(({ final __callArgument30:Dynamic = source.right; __callArgument30; })) : Vector3) : Dynamic), shadowBias: (cast source.shadowBias : Dynamic), shadowFar: (cast source.shadowFar : Dynamic), shadowMapSize: (cast source.shadowMapSize : Dynamic), shadowNear: (cast source.shadowNear : Dynamic), shadowStrength: (cast source.shadowStrength : Dynamic), up: (cast (cast cloneVector3(({ final __callArgument32:Dynamic = source.up; __callArgument32; })) : Vector3) : Dynamic) } : AreaLight) : Dynamic)) : AreaLight);
+    var out:EntityConstruction<AreaLight> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ castsShadow: cast _Runtime.UNDEFINED, color: cast _Runtime.UNDEFINED, decay: cast _Runtime.UNDEFINED, direction: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, intensity: cast _Runtime.UNDEFINED, intensityUnit: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, normalBias: cast _Runtime.UNDEFINED, pcfRadius: cast _Runtime.UNDEFINED, position: cast _Runtime.UNDEFINED, range: cast _Runtime.UNDEFINED, right: cast _Runtime.UNDEFINED, shadowBias: cast _Runtime.UNDEFINED, shadowFar: cast _Runtime.UNDEFINED, shadowMapSize: cast _Runtime.UNDEFINED, shadowNear: cast _Runtime.UNDEFINED, shadowStrength: cast _Runtime.UNDEFINED, up: cast _Runtime.UNDEFINED } : AreaLight); }) #end));
+    _Runtime.setField(out, 'castsShadow', source.castsShadow);
+    _Runtime.setField(out, 'color', source.color);
+    _Runtime.setField(out, 'decay', source.decay);
+    _Runtime.setField(out, 'direction', (cast cloneVector3(({ final __callArgument10:Dynamic = source.direction; __callArgument10; })) : Vector3));
+    _Runtime.setField(out, 'enabled', source.enabled);
+    _Runtime.setField(out, 'intensity', source.intensity);
+    _Runtime.setField(out, 'intensityUnit', source.intensityUnit);
+    _Runtime.setField(out, 'kind', AreaLightKind);
+    _Runtime.setField(out, 'normalBias', source.normalBias);
+    _Runtime.setField(out, 'pcfRadius', source.pcfRadius);
+    _Runtime.setField(out, 'position', (cast cloneVector3(({ final __callArgument12:Dynamic = source.position; __callArgument12; })) : Vector3));
+    _Runtime.setField(out, 'range', source.range);
+    _Runtime.setField(out, 'right', (cast cloneVector3(({ final __callArgument14:Dynamic = source.right; __callArgument14; })) : Vector3));
+    _Runtime.setField(out, 'shadowBias', source.shadowBias);
+    _Runtime.setField(out, 'shadowFar', source.shadowFar);
+    _Runtime.setField(out, 'shadowMapSize', source.shadowMapSize);
+    _Runtime.setField(out, 'shadowNear', source.shadowNear);
+    _Runtime.setField(out, 'shadowStrength', source.shadowStrength);
+    _Runtime.setField(out, 'up', (cast cloneVector3(({ final __callArgument16:Dynamic = source.up; __callArgument16; })) : Vector3));
+    return cast out;
     return cast null;
   }
 
   public static function createAreaLight(?options:AreaLightOptions):AreaLight {
+    var out:EntityConstruction<AreaLight> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ castsShadow: cast _Runtime.UNDEFINED, color: cast _Runtime.UNDEFINED, decay: cast _Runtime.UNDEFINED, direction: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, intensity: cast _Runtime.UNDEFINED, intensityUnit: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, normalBias: cast _Runtime.UNDEFINED, pcfRadius: cast _Runtime.UNDEFINED, position: cast _Runtime.UNDEFINED, range: cast _Runtime.UNDEFINED, right: cast _Runtime.UNDEFINED, shadowBias: cast _Runtime.UNDEFINED, shadowFar: cast _Runtime.UNDEFINED, shadowMapSize: cast _Runtime.UNDEFINED, shadowNear: cast _Runtime.UNDEFINED, shadowStrength: cast _Runtime.UNDEFINED, up: cast _Runtime.UNDEFINED } : AreaLight); }) #end));
+    initializeAreaLight(({ final __callArgument18:Dynamic = out; __callArgument18; }), ({ final __callArgument19:Dynamic = options; __callArgument19; }));
+    return cast out;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeAreaLight(out:EntityConstruction<AreaLight>, ?options:AreaLightOptions):Void {
     var position:Null<Vector3Like> = cast _Runtime.UNDEFINED;
     var direction:Null<Vector3Like> = cast _Runtime.UNDEFINED;
     var right:Null<Vector3Like> = cast _Runtime.UNDEFINED;
     var up:Null<Vector3Like> = cast _Runtime.UNDEFINED;
-    position = ({ final __typedStruct50 = options; __typedStruct50 == null ? _Runtime.UNDEFINED : __typedStruct50.position; });
-    direction = ({ final __typedStruct51 = options; __typedStruct51 == null ? _Runtime.UNDEFINED : __typedStruct51.direction; });
-    right = ({ final __typedStruct52 = options; __typedStruct52 == null ? _Runtime.UNDEFINED : __typedStruct52.right; });
-    up = ({ final __typedStruct53 = options; __typedStruct53 == null ? _Runtime.UNDEFINED : __typedStruct53.up; });
-    return cast (cast createEntity((cast ({ castsShadow: (cast _Runtime.coalesce(({ final __typedStruct100 = options; __typedStruct100 == null ? _Runtime.UNDEFINED : __typedStruct100.castsShadow; }), function():Dynamic return cast false) : Dynamic), color: (cast _Runtime.coalesce(({ final __typedStruct101 = options; __typedStruct101 == null ? _Runtime.UNDEFINED : __typedStruct101.color; }), function():Dynamic return cast 4294967295.0) : Dynamic), decay: (cast _Runtime.coalesce(({ final __typedStruct102 = options; __typedStruct102 == null ? _Runtime.UNDEFINED : __typedStruct102.decay; }), function():Dynamic return cast 2.0) : Dynamic), direction: (cast _Runtime.select(direction, function():Dynamic return cast (cast cloneVector3(({ final __callArgument103:Dynamic = direction; __callArgument103; })) : Vector3), function():Dynamic return cast (cast createVector3(({ final __callArgument105:Dynamic = 0.0; __callArgument105; }), ({ final __callArgument106:Dynamic = -1.0; __callArgument106; }), ({ final __callArgument107:Dynamic = 0.0; __callArgument107; })) : Vector3)) : Dynamic), enabled: (cast _Runtime.coalesce(({ final __typedStruct111 = options; __typedStruct111 == null ? _Runtime.UNDEFINED : __typedStruct111.enabled; }), function():Dynamic return cast true) : Dynamic), intensity: (cast _Runtime.coalesce(({ final __typedStruct112 = options; __typedStruct112 == null ? _Runtime.UNDEFINED : __typedStruct112.intensity; }), function():Dynamic return cast 1.0) : Dynamic), intensityUnit: (cast _Runtime.coalesce(({ final __typedStruct113 = options; __typedStruct113 == null ? _Runtime.UNDEFINED : __typedStruct113.intensityUnit; }), function():Dynamic return cast UnitlessLightUnit) : Dynamic), kind: (cast AreaLightKind : Dynamic), normalBias: (cast _Runtime.coalesce(({ final __typedStruct114 = options; __typedStruct114 == null ? _Runtime.UNDEFINED : __typedStruct114.normalBias; }), function():Dynamic return cast 0.0) : Dynamic), pcfRadius: (cast _Runtime.coalesce(({ final __typedStruct115 = options; __typedStruct115 == null ? _Runtime.UNDEFINED : __typedStruct115.pcfRadius; }), function():Dynamic return cast 0.0) : Dynamic), position: (cast _Runtime.select(position, function():Dynamic return cast (cast cloneVector3(({ final __callArgument116:Dynamic = position; __callArgument116; })) : Vector3), function():Dynamic return cast (cast createVector3(({ final __callArgument118:Dynamic = 0.0; __callArgument118; }), ({ final __callArgument119:Dynamic = 0.0; __callArgument119; }), ({ final __callArgument120:Dynamic = 0.0; __callArgument120; })) : Vector3)) : Dynamic), range: (cast _Runtime.coalesce(({ final __typedStruct124 = options; __typedStruct124 == null ? _Runtime.UNDEFINED : __typedStruct124.range; }), function():Dynamic return cast -1.0) : Dynamic), right: (cast _Runtime.select(right, function():Dynamic return cast (cast cloneVector3(({ final __callArgument125:Dynamic = right; __callArgument125; })) : Vector3), function():Dynamic return cast (cast createVector3(({ final __callArgument127:Dynamic = 1.0; __callArgument127; }), ({ final __callArgument128:Dynamic = 0.0; __callArgument128; }), ({ final __callArgument129:Dynamic = 0.0; __callArgument129; })) : Vector3)) : Dynamic), shadowBias: (cast _Runtime.coalesce(({ final __typedStruct133 = options; __typedStruct133 == null ? _Runtime.UNDEFINED : __typedStruct133.shadowBias; }), function():Dynamic return cast 0.0) : Dynamic), shadowFar: (cast _Runtime.coalesce(({ final __typedStruct134 = options; __typedStruct134 == null ? _Runtime.UNDEFINED : __typedStruct134.shadowFar; }), function():Dynamic return cast 500.0) : Dynamic), shadowMapSize: (cast _Runtime.coalesce(({ final __typedStruct135 = options; __typedStruct135 == null ? _Runtime.UNDEFINED : __typedStruct135.shadowMapSize; }), function():Dynamic return cast 1024.0) : Dynamic), shadowNear: (cast _Runtime.coalesce(({ final __typedStruct136 = options; __typedStruct136 == null ? _Runtime.UNDEFINED : __typedStruct136.shadowNear; }), function():Dynamic return cast 0.5) : Dynamic), shadowStrength: (cast _Runtime.coalesce(({ final __typedStruct137 = options; __typedStruct137 == null ? _Runtime.UNDEFINED : __typedStruct137.shadowStrength; }), function():Dynamic return cast 1.0) : Dynamic), up: (cast _Runtime.select(up, function():Dynamic return cast (cast cloneVector3(({ final __callArgument138:Dynamic = up; __callArgument138; })) : Vector3), function():Dynamic return cast (cast createVector3(({ final __callArgument140:Dynamic = 0.0; __callArgument140; }), ({ final __callArgument141:Dynamic = 0.0; __callArgument141; }), ({ final __callArgument142:Dynamic = 1.0; __callArgument142; })) : Vector3)) : Dynamic) } : AreaLight) : Dynamic)) : AreaLight);
-    return cast null;
+    position = ({ final __typedStruct22 = options; __typedStruct22 == null ? _Runtime.UNDEFINED : __typedStruct22.position; });
+    direction = ({ final __typedStruct23 = options; __typedStruct23 == null ? _Runtime.UNDEFINED : __typedStruct23.direction; });
+    right = ({ final __typedStruct24 = options; __typedStruct24 == null ? _Runtime.UNDEFINED : __typedStruct24.right; });
+    up = ({ final __typedStruct25 = options; __typedStruct25 == null ? _Runtime.UNDEFINED : __typedStruct25.up; });
+    _Runtime.setField(out, 'castsShadow', _Runtime.coalesce(({ final __typedStruct26 = options; __typedStruct26 == null ? _Runtime.UNDEFINED : __typedStruct26.castsShadow; }), function():Dynamic return cast false));
+    _Runtime.setField(out, 'color', _Runtime.coalesce(({ final __typedStruct27 = options; __typedStruct27 == null ? _Runtime.UNDEFINED : __typedStruct27.color; }), function():Dynamic return cast 4294967295.0));
+    _Runtime.setField(out, 'decay', _Runtime.coalesce(({ final __typedStruct28 = options; __typedStruct28 == null ? _Runtime.UNDEFINED : __typedStruct28.decay; }), function():Dynamic return cast 2.0));
+    _Runtime.setField(out, 'direction', _Runtime.select(direction, function():Dynamic return cast (cast cloneVector3(({ final __callArgument29:Dynamic = direction; __callArgument29; })) : Vector3), function():Dynamic return cast (cast createVector3(({ final __callArgument31:Dynamic = 0.0; __callArgument31; }), ({ final __callArgument32:Dynamic = -1.0; __callArgument32; }), ({ final __callArgument33:Dynamic = 0.0; __callArgument33; })) : Vector3)));
+    _Runtime.setField(out, 'enabled', _Runtime.coalesce(({ final __typedStruct37 = options; __typedStruct37 == null ? _Runtime.UNDEFINED : __typedStruct37.enabled; }), function():Dynamic return cast true));
+    _Runtime.setField(out, 'intensity', _Runtime.coalesce(({ final __typedStruct38 = options; __typedStruct38 == null ? _Runtime.UNDEFINED : __typedStruct38.intensity; }), function():Dynamic return cast 1.0));
+    _Runtime.setField(out, 'intensityUnit', _Runtime.coalesce(({ final __typedStruct39 = options; __typedStruct39 == null ? _Runtime.UNDEFINED : __typedStruct39.intensityUnit; }), function():Dynamic return cast UnitlessLightUnit));
+    _Runtime.setField(out, 'kind', AreaLightKind);
+    _Runtime.setField(out, 'normalBias', _Runtime.coalesce(({ final __typedStruct40 = options; __typedStruct40 == null ? _Runtime.UNDEFINED : __typedStruct40.normalBias; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'pcfRadius', _Runtime.coalesce(({ final __typedStruct41 = options; __typedStruct41 == null ? _Runtime.UNDEFINED : __typedStruct41.pcfRadius; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'position', _Runtime.select(position, function():Dynamic return cast (cast cloneVector3(({ final __callArgument42:Dynamic = position; __callArgument42; })) : Vector3), function():Dynamic return cast (cast createVector3(({ final __callArgument44:Dynamic = 0.0; __callArgument44; }), ({ final __callArgument45:Dynamic = 0.0; __callArgument45; }), ({ final __callArgument46:Dynamic = 0.0; __callArgument46; })) : Vector3)));
+    _Runtime.setField(out, 'range', _Runtime.coalesce(({ final __typedStruct50 = options; __typedStruct50 == null ? _Runtime.UNDEFINED : __typedStruct50.range; }), function():Dynamic return cast -1.0));
+    _Runtime.setField(out, 'right', _Runtime.select(right, function():Dynamic return cast (cast cloneVector3(({ final __callArgument51:Dynamic = right; __callArgument51; })) : Vector3), function():Dynamic return cast (cast createVector3(({ final __callArgument53:Dynamic = 1.0; __callArgument53; }), ({ final __callArgument54:Dynamic = 0.0; __callArgument54; }), ({ final __callArgument55:Dynamic = 0.0; __callArgument55; })) : Vector3)));
+    _Runtime.setField(out, 'shadowBias', _Runtime.coalesce(({ final __typedStruct59 = options; __typedStruct59 == null ? _Runtime.UNDEFINED : __typedStruct59.shadowBias; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'shadowFar', _Runtime.coalesce(({ final __typedStruct60 = options; __typedStruct60 == null ? _Runtime.UNDEFINED : __typedStruct60.shadowFar; }), function():Dynamic return cast 500.0));
+    _Runtime.setField(out, 'shadowMapSize', _Runtime.coalesce(({ final __typedStruct61 = options; __typedStruct61 == null ? _Runtime.UNDEFINED : __typedStruct61.shadowMapSize; }), function():Dynamic return cast 1024.0));
+    _Runtime.setField(out, 'shadowNear', _Runtime.coalesce(({ final __typedStruct62 = options; __typedStruct62 == null ? _Runtime.UNDEFINED : __typedStruct62.shadowNear; }), function():Dynamic return cast 0.5));
+    _Runtime.setField(out, 'shadowStrength', _Runtime.coalesce(({ final __typedStruct63 = options; __typedStruct63 == null ? _Runtime.UNDEFINED : __typedStruct63.shadowStrength; }), function():Dynamic return cast 1.0));
+    _Runtime.setField(out, 'up', _Runtime.select(up, function():Dynamic return cast (cast cloneVector3(({ final __callArgument64:Dynamic = up; __callArgument64; })) : Vector3), function():Dynamic return cast (cast createVector3(({ final __callArgument66:Dynamic = 0.0; __callArgument66; }), ({ final __callArgument67:Dynamic = 0.0; __callArgument67; }), ({ final __callArgument68:Dynamic = 1.0; __callArgument68; })) : Vector3)));
   }
 
   public static function setAreaLightOrientation(out:AreaLight, direction:Vector3Like, right:Vector3Like, up:Vector3Like):Void {
@@ -108,35 +170,75 @@ class _Lighting {
     existingRightLen = HxMath.sqrt(((((cast out.right : { var x:Float; }).x * (cast out.right : { var x:Float; }).x) + ((cast out.right : { var y:Float; }).y * (cast out.right : { var y:Float; }).y)) + ((cast out.right : { var z:Float; }).z * (cast out.right : { var z:Float; }).z)));
     existingUpLen = HxMath.sqrt(((((cast out.up : { var x:Float; }).x * (cast out.up : { var x:Float; }).x) + ((cast out.up : { var y:Float; }).y * (cast out.up : { var y:Float; }).y)) + ((cast out.up : { var z:Float; }).z * (cast out.up : { var z:Float; }).z)));
     if ((cast ((cast dirLen : Float) > (cast 0.0 : Float)) : Bool)) {
-      (cast normalizeVector3(({ final __callArgument238:Dynamic = out.direction; __callArgument238; }), ({ final __callArgument239:Dynamic = direction; __callArgument239; })) : Float);
+      (cast normalizeVector3(({ final __callArgument72:Dynamic = out.direction; __callArgument72; }), ({ final __callArgument73:Dynamic = direction; __callArgument73; })) : Float);
     }
     if ((cast ((cast rightLen : Float) > (cast 0.0 : Float)) : Bool)) {
-      setVector3(({ final __callArgument242:Dynamic = out.right; __callArgument242; }), (cast (right.x / rightLen) : Float), (cast (right.y / rightLen) : Float), (cast (right.z / rightLen) : Float));
+      setVector3(({ final __callArgument76:Dynamic = out.right; __callArgument76; }), (cast (right.x / rightLen) : Float), (cast (right.y / rightLen) : Float), (cast (right.z / rightLen) : Float));
       if ((cast ((cast existingRightLen : Float) > (cast 0.0 : Float)) : Bool)) {
-        setVector3(({ final __callArgument244:Dynamic = out.right; __callArgument244; }), (cast ((cast out.right : { var x:Float; }).x * existingRightLen) : Float), (cast ((cast out.right : { var y:Float; }).y * existingRightLen) : Float), (cast ((cast out.right : { var z:Float; }).z * existingRightLen) : Float));
+        setVector3(({ final __callArgument78:Dynamic = out.right; __callArgument78; }), (cast ((cast out.right : { var x:Float; }).x * existingRightLen) : Float), (cast ((cast out.right : { var y:Float; }).y * existingRightLen) : Float), (cast ((cast out.right : { var z:Float; }).z * existingRightLen) : Float));
       }
     }
     if ((cast ((cast upLen : Float) > (cast 0.0 : Float)) : Bool)) {
-      setVector3(({ final __callArgument246:Dynamic = out.up; __callArgument246; }), (cast (up.x / upLen) : Float), (cast (up.y / upLen) : Float), (cast (up.z / upLen) : Float));
+      setVector3(({ final __callArgument80:Dynamic = out.up; __callArgument80; }), (cast (up.x / upLen) : Float), (cast (up.y / upLen) : Float), (cast (up.z / upLen) : Float));
       if ((cast ((cast existingUpLen : Float) > (cast 0.0 : Float)) : Bool)) {
-        setVector3(({ final __callArgument248:Dynamic = out.up; __callArgument248; }), (cast ((cast out.up : { var x:Float; }).x * existingUpLen) : Float), (cast ((cast out.up : { var y:Float; }).y * existingUpLen) : Float), (cast ((cast out.up : { var z:Float; }).z * existingUpLen) : Float));
+        setVector3(({ final __callArgument82:Dynamic = out.up; __callArgument82; }), (cast ((cast out.up : { var x:Float; }).x * existingUpLen) : Float), (cast ((cast out.up : { var y:Float; }).y * existingUpLen) : Float), (cast ((cast out.up : { var z:Float; }).z * existingUpLen) : Float));
       }
     }
   }
 
   public static function cloneDirectionalLight(source:DirectionalLight):DirectionalLight {
-    return cast (cast createEntity((cast ({ cascadeCount: (cast source.cascadeCount : Dynamic), cascadeSplits: (cast _Runtime.slice(source.cascadeSplits, 0, null) : Dynamic), castsShadow: (cast source.castsShadow : Dynamic), color: (cast source.color : Dynamic), direction: (cast (cast cloneVector3(({ final __callArgument252:Dynamic = source.direction; __callArgument252; })) : Vector3) : Dynamic), enabled: (cast source.enabled : Dynamic), intensity: (cast source.intensity : Dynamic), intensityUnit: (cast source.intensityUnit : Dynamic), kind: (cast DirectionalLightKind : Dynamic), normalBias: (cast source.normalBias : Dynamic), pcfRadius: (cast source.pcfRadius : Dynamic), shadowBias: (cast source.shadowBias : Dynamic), shadowFar: (cast source.shadowFar : Dynamic), shadowMapSize: (cast source.shadowMapSize : Dynamic), shadowNear: (cast source.shadowNear : Dynamic), shadowStrength: (cast source.shadowStrength : Dynamic) } : DirectionalLight) : Dynamic)) : DirectionalLight);
+    var out:EntityConstruction<DirectionalLight> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ cascadeCount: cast _Runtime.UNDEFINED, cascadeSplits: cast _Runtime.UNDEFINED, castsShadow: cast _Runtime.UNDEFINED, color: cast _Runtime.UNDEFINED, direction: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, intensity: cast _Runtime.UNDEFINED, intensityUnit: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, normalBias: cast _Runtime.UNDEFINED, pcfRadius: cast _Runtime.UNDEFINED, shadowBias: cast _Runtime.UNDEFINED, shadowFar: cast _Runtime.UNDEFINED, shadowMapSize: cast _Runtime.UNDEFINED, shadowNear: cast _Runtime.UNDEFINED, shadowStrength: cast _Runtime.UNDEFINED } : DirectionalLight); }) #end));
+    _Runtime.setField(out, 'cascadeCount', source.cascadeCount);
+    _Runtime.setField(out, 'cascadeSplits', _Runtime.slice(source.cascadeSplits, 0, null));
+    _Runtime.setField(out, 'castsShadow', source.castsShadow);
+    _Runtime.setField(out, 'color', source.color);
+    _Runtime.setField(out, 'direction', (cast cloneVector3(({ final __callArgument84:Dynamic = source.direction; __callArgument84; })) : Vector3));
+    _Runtime.setField(out, 'enabled', source.enabled);
+    _Runtime.setField(out, 'intensity', source.intensity);
+    _Runtime.setField(out, 'intensityUnit', source.intensityUnit);
+    _Runtime.setField(out, 'kind', DirectionalLightKind);
+    _Runtime.setField(out, 'normalBias', source.normalBias);
+    _Runtime.setField(out, 'pcfRadius', source.pcfRadius);
+    _Runtime.setField(out, 'shadowBias', source.shadowBias);
+    _Runtime.setField(out, 'shadowFar', source.shadowFar);
+    _Runtime.setField(out, 'shadowMapSize', source.shadowMapSize);
+    _Runtime.setField(out, 'shadowNear', source.shadowNear);
+    _Runtime.setField(out, 'shadowStrength', source.shadowStrength);
+    return cast out;
     return cast null;
   }
 
   public static function createDirectionalLight(?options:DirectionalLightOptions):DirectionalLight {
-    var direction:Null<Vector3Like> = cast _Runtime.UNDEFINED;
-    var light:DirectionalLight = cast _Runtime.UNDEFINED;
-    direction = ({ final __typedStruct258 = options; __typedStruct258 == null ? _Runtime.UNDEFINED : __typedStruct258.direction; });
-    light = (cast createEntity((cast ({ cascadeCount: (cast _Runtime.coalesce(({ final __typedStruct280 = options; __typedStruct280 == null ? _Runtime.UNDEFINED : __typedStruct280.cascadeCount; }), function():Dynamic return cast 1.0) : Dynamic), cascadeSplits: (cast _Runtime.coalesce(_Runtime.callOptionalProperty(({ final __typedStruct282 = options; __typedStruct282 == null ? _Runtime.UNDEFINED : __typedStruct282.cascadeSplits; }), 'slice', cast ([] : Array<Dynamic>)), function():Dynamic return cast cast ([1.0] : Array<Dynamic>)) : Dynamic), castsShadow: (cast _Runtime.coalesce(({ final __typedStruct283 = options; __typedStruct283 == null ? _Runtime.UNDEFINED : __typedStruct283.castsShadow; }), function():Dynamic return cast false) : Dynamic), color: (cast _Runtime.coalesce(({ final __typedStruct284 = options; __typedStruct284 == null ? _Runtime.UNDEFINED : __typedStruct284.color; }), function():Dynamic return cast 4294967295.0) : Dynamic), direction: (cast (cast createVector3(({ final __callArgument285:Dynamic = 0.0; __callArgument285; }), ({ final __callArgument286:Dynamic = -1.0; __callArgument286; }), ({ final __callArgument287:Dynamic = 0.0; __callArgument287; })) : Vector3) : Dynamic), enabled: (cast _Runtime.coalesce(({ final __typedStruct291 = options; __typedStruct291 == null ? _Runtime.UNDEFINED : __typedStruct291.enabled; }), function():Dynamic return cast true) : Dynamic), intensity: (cast _Runtime.coalesce(({ final __typedStruct292 = options; __typedStruct292 == null ? _Runtime.UNDEFINED : __typedStruct292.intensity; }), function():Dynamic return cast 1.0) : Dynamic), intensityUnit: (cast _Runtime.coalesce(({ final __typedStruct293 = options; __typedStruct293 == null ? _Runtime.UNDEFINED : __typedStruct293.intensityUnit; }), function():Dynamic return cast UnitlessLightUnit) : Dynamic), kind: (cast DirectionalLightKind : Dynamic), normalBias: (cast _Runtime.coalesce(({ final __typedStruct294 = options; __typedStruct294 == null ? _Runtime.UNDEFINED : __typedStruct294.normalBias; }), function():Dynamic return cast 0.0) : Dynamic), pcfRadius: (cast _Runtime.coalesce(({ final __typedStruct295 = options; __typedStruct295 == null ? _Runtime.UNDEFINED : __typedStruct295.pcfRadius; }), function():Dynamic return cast 0.0) : Dynamic), shadowBias: (cast _Runtime.coalesce(({ final __typedStruct296 = options; __typedStruct296 == null ? _Runtime.UNDEFINED : __typedStruct296.shadowBias; }), function():Dynamic return cast 0.0) : Dynamic), shadowFar: (cast _Runtime.coalesce(({ final __typedStruct297 = options; __typedStruct297 == null ? _Runtime.UNDEFINED : __typedStruct297.shadowFar; }), function():Dynamic return cast 500.0) : Dynamic), shadowMapSize: (cast _Runtime.coalesce(({ final __typedStruct298 = options; __typedStruct298 == null ? _Runtime.UNDEFINED : __typedStruct298.shadowMapSize; }), function():Dynamic return cast 1024.0) : Dynamic), shadowNear: (cast _Runtime.coalesce(({ final __typedStruct299 = options; __typedStruct299 == null ? _Runtime.UNDEFINED : __typedStruct299.shadowNear; }), function():Dynamic return cast 0.5) : Dynamic), shadowStrength: (cast _Runtime.coalesce(({ final __typedStruct300 = options; __typedStruct300 == null ? _Runtime.UNDEFINED : __typedStruct300.shadowStrength; }), function():Dynamic return cast 1.0) : Dynamic) } : DirectionalLight) : Dynamic)) : DirectionalLight);
-    if (_Runtime.truthy(direction)) { setDirectionalLightDirection(({ final __callArgument343:Dynamic = light; __callArgument343; }), (cast (cast direction : { var x:Float; }).x : Float), (cast (cast direction : { var y:Float; }).y : Float), (cast (cast direction : { var z:Float; }).z : Float)); }
+    var light:EntityConstruction<DirectionalLight> = cast _Runtime.UNDEFINED;
+    light = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ cascadeCount: cast _Runtime.UNDEFINED, cascadeSplits: cast _Runtime.UNDEFINED, castsShadow: cast _Runtime.UNDEFINED, color: cast _Runtime.UNDEFINED, direction: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, intensity: cast _Runtime.UNDEFINED, intensityUnit: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, normalBias: cast _Runtime.UNDEFINED, pcfRadius: cast _Runtime.UNDEFINED, shadowBias: cast _Runtime.UNDEFINED, shadowFar: cast _Runtime.UNDEFINED, shadowMapSize: cast _Runtime.UNDEFINED, shadowNear: cast _Runtime.UNDEFINED, shadowStrength: cast _Runtime.UNDEFINED } : DirectionalLight); }) #end));
+    initializeDirectionalLight(({ final __callArgument86:Dynamic = light; __callArgument86; }), ({ final __callArgument87:Dynamic = options; __callArgument87; }));
     return cast light;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeDirectionalLight(light:EntityConstruction<DirectionalLight>, ?options:DirectionalLightOptions):Void {
+    var direction:Null<Vector3Like> = cast _Runtime.UNDEFINED;
+    direction = ({ final __typedStruct90 = options; __typedStruct90 == null ? _Runtime.UNDEFINED : __typedStruct90.direction; });
+    _Runtime.setField(light, 'cascadeCount', _Runtime.coalesce(({ final __typedStruct91 = options; __typedStruct91 == null ? _Runtime.UNDEFINED : __typedStruct91.cascadeCount; }), function():Dynamic return cast 1.0));
+    _Runtime.setField(light, 'cascadeSplits', _Runtime.coalesce(_Runtime.callOptionalProperty(({ final __typedStruct93 = options; __typedStruct93 == null ? _Runtime.UNDEFINED : __typedStruct93.cascadeSplits; }), 'slice', cast ([] : Array<Dynamic>)), function():Dynamic return cast cast ([1.0] : Array<Dynamic>)));
+    _Runtime.setField(light, 'castsShadow', _Runtime.coalesce(({ final __typedStruct94 = options; __typedStruct94 == null ? _Runtime.UNDEFINED : __typedStruct94.castsShadow; }), function():Dynamic return cast false));
+    _Runtime.setField(light, 'color', _Runtime.coalesce(({ final __typedStruct95 = options; __typedStruct95 == null ? _Runtime.UNDEFINED : __typedStruct95.color; }), function():Dynamic return cast 4294967295.0));
+    _Runtime.setField(light, 'direction', (cast createVector3(({ final __callArgument96:Dynamic = 0.0; __callArgument96; }), ({ final __callArgument97:Dynamic = -1.0; __callArgument97; }), ({ final __callArgument98:Dynamic = 0.0; __callArgument98; })) : Vector3));
+    _Runtime.setField(light, 'enabled', _Runtime.coalesce(({ final __typedStruct102 = options; __typedStruct102 == null ? _Runtime.UNDEFINED : __typedStruct102.enabled; }), function():Dynamic return cast true));
+    _Runtime.setField(light, 'intensity', _Runtime.coalesce(({ final __typedStruct103 = options; __typedStruct103 == null ? _Runtime.UNDEFINED : __typedStruct103.intensity; }), function():Dynamic return cast 1.0));
+    _Runtime.setField(light, 'intensityUnit', _Runtime.coalesce(({ final __typedStruct104 = options; __typedStruct104 == null ? _Runtime.UNDEFINED : __typedStruct104.intensityUnit; }), function():Dynamic return cast UnitlessLightUnit));
+    _Runtime.setField(light, 'kind', DirectionalLightKind);
+    _Runtime.setField(light, 'normalBias', _Runtime.coalesce(({ final __typedStruct105 = options; __typedStruct105 == null ? _Runtime.UNDEFINED : __typedStruct105.normalBias; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(light, 'pcfRadius', _Runtime.coalesce(({ final __typedStruct106 = options; __typedStruct106 == null ? _Runtime.UNDEFINED : __typedStruct106.pcfRadius; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(light, 'shadowBias', _Runtime.coalesce(({ final __typedStruct107 = options; __typedStruct107 == null ? _Runtime.UNDEFINED : __typedStruct107.shadowBias; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(light, 'shadowFar', _Runtime.coalesce(({ final __typedStruct108 = options; __typedStruct108 == null ? _Runtime.UNDEFINED : __typedStruct108.shadowFar; }), function():Dynamic return cast 500.0));
+    _Runtime.setField(light, 'shadowMapSize', _Runtime.coalesce(({ final __typedStruct109 = options; __typedStruct109 == null ? _Runtime.UNDEFINED : __typedStruct109.shadowMapSize; }), function():Dynamic return cast 1024.0));
+    _Runtime.setField(light, 'shadowNear', _Runtime.coalesce(({ final __typedStruct110 = options; __typedStruct110 == null ? _Runtime.UNDEFINED : __typedStruct110.shadowNear; }), function():Dynamic return cast 0.5));
+    _Runtime.setField(light, 'shadowStrength', _Runtime.coalesce(({ final __typedStruct111 = options; __typedStruct111 == null ? _Runtime.UNDEFINED : __typedStruct111.shadowStrength; }), function():Dynamic return cast 1.0));
+    if (_Runtime.truthy(direction)) { setDirectionalLightDirection(({ final __callArgument112:Dynamic = light; __callArgument112; }), (cast (cast direction : { var x:Float; }).x : Float), (cast (cast direction : { var y:Float; }).y : Float), (cast (cast direction : { var z:Float; }).z : Float)); }
   }
 
   public static function setDirectionalLightDirection(out:DirectionalLight, x:Float, y:Float, z:Float):Void {
@@ -149,7 +251,7 @@ class _Lighting {
     lz = z;
     len = HxMath.sqrt((((lx * lx) + (ly * ly)) + (lz * lz)));
     if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
-      setVector3(({ final __callArgument345:Dynamic = out.direction; __callArgument345; }), (cast (lx / len) : Float), (cast (ly / len) : Float), (cast (lz / len) : Float));
+      setVector3(({ final __callArgument114:Dynamic = out.direction; __callArgument114; }), (cast (lx / len) : Float), (cast (ly / len) : Float), (cast (lz / len) : Float));
     }
   }
 
@@ -163,28 +265,54 @@ class _Lighting {
     dz = (toZ - fromZ);
     len = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
     if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
-      setVector3(({ final __callArgument347:Dynamic = out.direction; __callArgument347; }), (cast (dx / len) : Float), (cast (dy / len) : Float), (cast (dz / len) : Float));
+      setVector3(({ final __callArgument116:Dynamic = out.direction; __callArgument116; }), (cast (dx / len) : Float), (cast (dy / len) : Float), (cast (dz / len) : Float));
     }
   }
 
   public static function cloneEnvironment(source:Environment):Environment {
-    return cast (cast createEnvironment(({ final __callArgument349:Dynamic = { enabled: _Runtime.field(source, 'enabled'), environment: _Runtime.field(source, 'environment'), intensity: _Runtime.field(source, 'intensity') }; __callArgument349; })) : Environment);
+    return cast (cast createEnvironment(({ final __callArgument118:Dynamic = { enabled: _Runtime.field(source, 'enabled'), environment: _Runtime.field(source, 'environment'), intensity: _Runtime.field(source, 'intensity') }; __callArgument118; })) : Environment);
     return cast null;
   }
 
   public static function createEnvironment(?options:EnvironmentOptions):Environment {
-    return cast (cast createEntity((cast ({ enabled: (cast _Runtime.coalesce(({ final __structural354 = options; __structural354 == null ? _Runtime.UNDEFINED : (cast __structural354 : { @:optional var enabled:Null<Bool>; }).enabled; }), function():Dynamic return cast true) : Dynamic), environment: (cast _Runtime.coalesce(({ final __structural355 = options; __structural355 == null ? _Runtime.UNDEFINED : (cast __structural355 : { @:optional var environment:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).environment; }), function():Dynamic return cast null) : Dynamic), intensity: (cast _Runtime.coalesce(({ final __structural356 = options; __structural356 == null ? _Runtime.UNDEFINED : (cast __structural356 : { @:optional var intensity:Null<Float>; }).intensity; }), function():Dynamic return cast 1.0) : Dynamic), kind: (cast EnvironmentKind : Dynamic) } : Environment) : Dynamic)) : Environment);
+    var out:EntityConstruction<Environment> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ enabled: cast _Runtime.UNDEFINED, environment: cast _Runtime.UNDEFINED, intensity: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED } : Environment); }) #end));
+    initializeEnvironment(({ final __callArgument120:Dynamic = out; __callArgument120; }), ({ final __callArgument121:Dynamic = options; __callArgument121; }));
+    return cast out;
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeEnvironment(out:EntityConstruction<Environment>, ?options:EnvironmentOptions):Void {
+    _Runtime.setField(out, 'enabled', _Runtime.coalesce(({ final __structural124 = options; __structural124 == null ? _Runtime.UNDEFINED : (cast __structural124 : { @:optional var enabled:Null<Bool>; }).enabled; }), function():Dynamic return cast true));
+    _Runtime.setField(out, 'environment', _Runtime.coalesce(({ final __structural125 = options; __structural125 == null ? _Runtime.UNDEFINED : (cast __structural125 : { @:optional var environment:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_11889:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_11889:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_11889:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).environment; }), function():Dynamic return cast null));
+    _Runtime.setField(out, 'intensity', _Runtime.coalesce(({ final __structural126 = options; __structural126 == null ? _Runtime.UNDEFINED : (cast __structural126 : { @:optional var intensity:Null<Float>; }).intensity; }), function():Dynamic return cast 1.0));
+    _Runtime.setField(out, 'kind', EnvironmentKind);
+  }
+
   public static function cloneHemisphereLight(source:HemisphereLight):HemisphereLight {
-    return cast (cast createHemisphereLight(({ final __callArgument363:Dynamic = { enabled: _Runtime.field(source, 'enabled'), groundColor: _Runtime.field(source, 'groundColor'), intensity: _Runtime.field(source, 'intensity'), intensityUnit: _Runtime.field(source, 'intensityUnit'), skyColor: _Runtime.field(source, 'skyColor') }; __callArgument363; })) : HemisphereLight);
+    return cast (cast createHemisphereLight(({ final __callArgument127:Dynamic = { enabled: _Runtime.field(source, 'enabled'), groundColor: _Runtime.field(source, 'groundColor'), intensity: _Runtime.field(source, 'intensity'), intensityUnit: _Runtime.field(source, 'intensityUnit'), skyColor: _Runtime.field(source, 'skyColor') }; __callArgument127; })) : HemisphereLight);
     return cast null;
   }
 
   public static function createHemisphereLight(?options:HemisphereLightOptions):HemisphereLight {
-    return cast (cast createEntity((cast ({ enabled: (cast _Runtime.coalesce(({ final __structural370 = options; __structural370 == null ? _Runtime.UNDEFINED : (cast __structural370 : { @:optional var enabled:Null<Bool>; }).enabled; }), function():Dynamic return cast true) : Dynamic), groundColor: (cast _Runtime.coalesce(({ final __structural371 = options; __structural371 == null ? _Runtime.UNDEFINED : (cast __structural371 : { @:optional var groundColor:Null<Float>; }).groundColor; }), function():Dynamic return cast 4294967295.0) : Dynamic), intensity: (cast _Runtime.coalesce(({ final __structural372 = options; __structural372 == null ? _Runtime.UNDEFINED : (cast __structural372 : { @:optional var intensity:Null<Float>; }).intensity; }), function():Dynamic return cast 1.0) : Dynamic), intensityUnit: (cast _Runtime.coalesce(({ final __structural373 = options; __structural373 == null ? _Runtime.UNDEFINED : (cast __structural373 : { @:optional var intensityUnit:Null<String>; }).intensityUnit; }), function():Dynamic return cast UnitlessLightUnit) : Dynamic), kind: (cast HemisphereLightKind : Dynamic), skyColor: (cast _Runtime.coalesce(({ final __structural374 = options; __structural374 == null ? _Runtime.UNDEFINED : (cast __structural374 : { @:optional var skyColor:Null<Float>; }).skyColor; }), function():Dynamic return cast 4294967295.0) : Dynamic) } : HemisphereLight) : Dynamic)) : HemisphereLight);
+    var out:EntityConstruction<HemisphereLight> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ enabled: cast _Runtime.UNDEFINED, groundColor: cast _Runtime.UNDEFINED, intensity: cast _Runtime.UNDEFINED, intensityUnit: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, skyColor: cast _Runtime.UNDEFINED } : HemisphereLight); }) #end));
+    initializeHemisphereLight(({ final __callArgument129:Dynamic = out; __callArgument129; }), ({ final __callArgument130:Dynamic = options; __callArgument130; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeHemisphereLight(out:EntityConstruction<HemisphereLight>, ?options:HemisphereLightOptions):Void {
+    _Runtime.setField(out, 'enabled', _Runtime.coalesce(({ final __structural133 = options; __structural133 == null ? _Runtime.UNDEFINED : (cast __structural133 : { @:optional var enabled:Null<Bool>; }).enabled; }), function():Dynamic return cast true));
+    _Runtime.setField(out, 'groundColor', _Runtime.coalesce(({ final __structural134 = options; __structural134 == null ? _Runtime.UNDEFINED : (cast __structural134 : { @:optional var groundColor:Null<Float>; }).groundColor; }), function():Dynamic return cast 4294967295.0));
+    _Runtime.setField(out, 'intensity', _Runtime.coalesce(({ final __structural135 = options; __structural135 == null ? _Runtime.UNDEFINED : (cast __structural135 : { @:optional var intensity:Null<Float>; }).intensity; }), function():Dynamic return cast 1.0));
+    _Runtime.setField(out, 'intensityUnit', _Runtime.coalesce(({ final __structural136 = options; __structural136 == null ? _Runtime.UNDEFINED : (cast __structural136 : { @:optional var intensityUnit:Null<String>; }).intensityUnit; }), function():Dynamic return cast UnitlessLightUnit));
+    _Runtime.setField(out, 'kind', HemisphereLightKind);
+    _Runtime.setField(out, 'skyColor', _Runtime.coalesce(({ final __structural137 = options; __structural137 == null ? _Runtime.UNDEFINED : (cast __structural137 : { @:optional var skyColor:Null<Float>; }).skyColor; }), function():Dynamic return cast 4294967295.0));
   }
 
   public static function getLightContributionAtBoundingSphere(light:flight._internal._Union2<PointLight, SpotLight>, bounds:BoundingSphereLike):Float {
@@ -197,7 +325,7 @@ class _Lighting {
     var window:Float = cast _Runtime.UNDEFINED;
     var attenuation:Float = cast _Runtime.UNDEFINED;
     var contribution:Float = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast (cast _Lighting.isLightEnabled__lightAnalysis(({ final __callArgument385:Dynamic = light; __callArgument385; })) : Bool) : Bool) : Bool) || (cast ((cast bounds.radius : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast 0.0; }
+    if ((cast ((cast !(cast (cast _Lighting.isLightEnabled__lightAnalysis(({ final __callArgument138:Dynamic = light; __callArgument138; })) : Bool) : Bool) : Bool) || (cast ((cast bounds.radius : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast 0.0; }
     centerDx = ((cast bounds.center : { var x:Float; }).x - (cast (cast light : { var position:Vector3; }).position : { var x:Float; }).x);
     centerDy = ((cast bounds.center : { var y:Float; }).y - (cast (cast light : { var position:Vector3; }).position : { var y:Float; }).y);
     centerDz = ((cast bounds.center : { var z:Float; }).z - (cast (cast light : { var position:Vector3; }).position : { var z:Float; }).z);
@@ -211,7 +339,7 @@ class _Lighting {
       (window = cast ((windowed * windowed) : Dynamic));
     }
     attenuation = HxMath.pow(HxMath.max(distance, 0.01), (cast light : { var decay:Float; }).decay);
-    contribution = (((cast getLightLuminance(({ final __callArgument387:Dynamic = light; __callArgument387; })) : Float) * window) / attenuation);
+    contribution = (((cast getLightLuminance(({ final __callArgument140:Dynamic = light; __callArgument140; })) : Float) * window) / attenuation);
     if ((cast _Runtime.strictEquals((cast light : { var kind:String; }).kind, SpotLightKind) : Bool)) {
       var spot:SpotLight = (cast light : SpotLight);
       var directionLength:Float = _Runtime.hypot((cast _Runtime.field(spot, 'direction') : { var x:Float; }).x, (cast _Runtime.field(spot, 'direction') : { var y:Float; }).y, (cast _Runtime.field(spot, 'direction') : { var z:Float; }).z);
@@ -226,7 +354,7 @@ class _Lighting {
 
   public static function getLightInfluenceBounds(out:BoundingSphereLike, light:Light):Void {
     var kind:String = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast _Lighting.isLightEnabled__lightAnalysis(({ final __callArgument389:Dynamic = light; __callArgument389; })) : Bool) : Bool) : Bool)) {
+    if ((cast !(cast (cast _Lighting.isLightEnabled__lightAnalysis(({ final __callArgument142:Dynamic = light; __callArgument142; })) : Bool) : Bool) : Bool)) {
       ((cast out.center : { var x:Float; }).x = cast (0.0 : Float));
       ((cast out.center : { var y:Float; }).y = cast (0.0 : Float));
       ((cast out.center : { var z:Float; }).z = cast (0.0 : Float));
@@ -264,7 +392,7 @@ class _Lighting {
   }
 
   public static function getLightLuminance(light:Light):Float {
-    if ((cast !(cast (cast _Lighting.isLightEnabled__lightAnalysis(({ final __callArgument391:Dynamic = light; __callArgument391; })) : Bool) : Bool) : Bool)) { return cast 0.0; }
+    if ((cast !(cast (cast _Lighting.isLightEnabled__lightAnalysis(({ final __callArgument144:Dynamic = light; __callArgument144; })) : Bool) : Bool) : Bool)) { return cast 0.0; }
     {
       var __switchValue = _Runtime.field(light, 'kind');
       if (__switchValue == AmbientLightKind) {
@@ -322,7 +450,7 @@ class _Lighting {
     var dz:Float = cast _Runtime.UNDEFINED;
     var distSq:Float = cast _Runtime.UNDEFINED;
     var radSum:Float = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast _Lighting.isLightEnabled__lightAnalysis(({ final __callArgument393:Dynamic = light; __callArgument393; })) : Bool) : Bool) : Bool)) { return cast false; }
+    if ((cast !(cast (cast _Lighting.isLightEnabled__lightAnalysis(({ final __callArgument146:Dynamic = light; __callArgument146; })) : Bool) : Bool) : Bool)) { return cast false; }
     kind = _Runtime.field(light, 'kind');
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(kind, AmbientLightKind) : Bool) || (cast _Runtime.strictEquals(kind, HemisphereLightKind) : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, EnvironmentKind) : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, DirectionalLightKind) : Bool)) : Bool)) {
       return cast true;
@@ -342,7 +470,7 @@ class _Lighting {
 
   public static function isLightCastingShadow(light:Light):Bool {
     var kind:String = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast _Lighting.isLightEnabled__lightAnalysis(({ final __callArgument395:Dynamic = light; __callArgument395; })) : Bool) : Bool) : Bool)) { return cast false; }
+    if ((cast !(cast (cast _Lighting.isLightEnabled__lightAnalysis(({ final __callArgument148:Dynamic = light; __callArgument148; })) : Bool) : Bool) : Bool)) { return cast false; }
     kind = _Runtime.field(light, 'kind');
     if ((cast ((cast ((cast _Runtime.strictEquals(kind, AmbientLightKind) : Bool) || (cast _Runtime.strictEquals(kind, HemisphereLightKind) : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, EnvironmentKind) : Bool)) : Bool)) {
       return cast false;
@@ -370,7 +498,7 @@ class _Lighting {
   }
 
   public static function convertLightIntensity(fromUnit:LightUnit, toUnit:LightUnit, value:Float):Float {
-    return cast _Runtime.divideNumbers((cast getLightLinearIntensity(({ final __callArgument397:Dynamic = fromUnit; __callArgument397; }), (cast value : Float)) : Float), _Runtime.getIndex(_Lighting.LINEAR_PER_UNIT__lightIntensity, toUnit));
+    return cast _Runtime.divideNumbers((cast getLightLinearIntensity(({ final __callArgument150:Dynamic = fromUnit; __callArgument150; }), (cast value : Float)) : Float), _Runtime.getIndex(_Lighting.LINEAR_PER_UNIT__lightIntensity, toUnit));
     return cast null;
   }
 
@@ -384,15 +512,57 @@ class _Lighting {
   public static final LINEAR_PER_UNIT__lightIntensity:flight._internal._Record<LightUnit, Float> = (cast _Runtime.objectFromPairs([{ key: CandelaLightUnit, value: (1.0 / _Lighting.REFERENCE_PHOTOMETRIC_LEVEL__lightIntensity) }, { key: LumenLightUnit, value: (1.0 / ((_Lighting.REFERENCE_PHOTOMETRIC_LEVEL__lightIntensity * 4.0) * HxMath.PI)) }, { key: LuxLightUnit, value: (1.0 / _Lighting.REFERENCE_PHOTOMETRIC_LEVEL__lightIntensity) }, { key: UnitlessLightUnit, value: 1.0 }]));
 
   public static function clonePointLight(source:PointLight):PointLight {
-    return cast (cast createEntity((cast ({ castsShadow: (cast _Runtime.field(source, 'castsShadow') : Dynamic), color: (cast _Runtime.field(source, 'color') : Dynamic), decay: (cast _Runtime.field(source, 'decay') : Dynamic), enabled: (cast _Runtime.field(source, 'enabled') : Dynamic), intensity: (cast _Runtime.field(source, 'intensity') : Dynamic), intensityUnit: (cast _Runtime.field(source, 'intensityUnit') : Dynamic), kind: (cast PointLightKind : Dynamic), normalBias: (cast _Runtime.field(source, 'normalBias') : Dynamic), pcfRadius: (cast _Runtime.field(source, 'pcfRadius') : Dynamic), position: (cast (cast cloneVector3(({ final __callArgument401:Dynamic = _Runtime.field(source, 'position'); __callArgument401; })) : Vector3) : Dynamic), range: (cast _Runtime.field(source, 'range') : Dynamic), shadowBias: (cast _Runtime.field(source, 'shadowBias') : Dynamic), shadowFar: (cast _Runtime.field(source, 'shadowFar') : Dynamic), shadowMapSize: (cast _Runtime.field(source, 'shadowMapSize') : Dynamic), shadowNear: (cast _Runtime.field(source, 'shadowNear') : Dynamic), shadowStrength: (cast _Runtime.field(source, 'shadowStrength') : Dynamic) } : PointLight) : Dynamic)) : PointLight);
+    var out:EntityConstruction<PointLight> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ castsShadow: cast _Runtime.UNDEFINED, color: cast _Runtime.UNDEFINED, decay: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, intensity: cast _Runtime.UNDEFINED, intensityUnit: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, normalBias: cast _Runtime.UNDEFINED, pcfRadius: cast _Runtime.UNDEFINED, position: cast _Runtime.UNDEFINED, range: cast _Runtime.UNDEFINED, shadowBias: cast _Runtime.UNDEFINED, shadowFar: cast _Runtime.UNDEFINED, shadowMapSize: cast _Runtime.UNDEFINED, shadowNear: cast _Runtime.UNDEFINED, shadowStrength: cast _Runtime.UNDEFINED } : PointLight); }) #end));
+    _Runtime.setField(out, 'castsShadow', _Runtime.field(source, 'castsShadow'));
+    _Runtime.setField(out, 'color', _Runtime.field(source, 'color'));
+    _Runtime.setField(out, 'decay', _Runtime.field(source, 'decay'));
+    _Runtime.setField(out, 'enabled', _Runtime.field(source, 'enabled'));
+    _Runtime.setField(out, 'intensity', _Runtime.field(source, 'intensity'));
+    _Runtime.setField(out, 'intensityUnit', _Runtime.field(source, 'intensityUnit'));
+    _Runtime.setField(out, 'kind', PointLightKind);
+    _Runtime.setField(out, 'normalBias', _Runtime.field(source, 'normalBias'));
+    _Runtime.setField(out, 'pcfRadius', _Runtime.field(source, 'pcfRadius'));
+    _Runtime.setField(out, 'position', (cast cloneVector3(({ final __callArgument152:Dynamic = _Runtime.field(source, 'position'); __callArgument152; })) : Vector3));
+    _Runtime.setField(out, 'range', _Runtime.field(source, 'range'));
+    _Runtime.setField(out, 'shadowBias', _Runtime.field(source, 'shadowBias'));
+    _Runtime.setField(out, 'shadowFar', _Runtime.field(source, 'shadowFar'));
+    _Runtime.setField(out, 'shadowMapSize', _Runtime.field(source, 'shadowMapSize'));
+    _Runtime.setField(out, 'shadowNear', _Runtime.field(source, 'shadowNear'));
+    _Runtime.setField(out, 'shadowStrength', _Runtime.field(source, 'shadowStrength'));
+    return cast out;
     return cast null;
   }
 
   public static function createPointLight(?options:PointLightOptions):PointLight {
-    var position:Null<Vector3Like> = cast _Runtime.UNDEFINED;
-    position = ({ final __typedStruct407 = options; __typedStruct407 == null ? _Runtime.UNDEFINED : __typedStruct407.position; });
-    return cast (cast createEntity((cast ({ castsShadow: (cast _Runtime.coalesce(({ final __typedStruct430 = options; __typedStruct430 == null ? _Runtime.UNDEFINED : __typedStruct430.castsShadow; }), function():Dynamic return cast false) : Dynamic), color: (cast _Runtime.coalesce(({ final __typedStruct431 = options; __typedStruct431 == null ? _Runtime.UNDEFINED : __typedStruct431.color; }), function():Dynamic return cast 4294967295.0) : Dynamic), decay: (cast _Runtime.coalesce(({ final __typedStruct432 = options; __typedStruct432 == null ? _Runtime.UNDEFINED : __typedStruct432.decay; }), function():Dynamic return cast 2.0) : Dynamic), enabled: (cast _Runtime.coalesce(({ final __typedStruct433 = options; __typedStruct433 == null ? _Runtime.UNDEFINED : __typedStruct433.enabled; }), function():Dynamic return cast true) : Dynamic), intensity: (cast _Runtime.coalesce(({ final __typedStruct434 = options; __typedStruct434 == null ? _Runtime.UNDEFINED : __typedStruct434.intensity; }), function():Dynamic return cast 1.0) : Dynamic), intensityUnit: (cast _Runtime.coalesce(({ final __typedStruct435 = options; __typedStruct435 == null ? _Runtime.UNDEFINED : __typedStruct435.intensityUnit; }), function():Dynamic return cast UnitlessLightUnit) : Dynamic), kind: (cast PointLightKind : Dynamic), normalBias: (cast _Runtime.coalesce(({ final __typedStruct436 = options; __typedStruct436 == null ? _Runtime.UNDEFINED : __typedStruct436.normalBias; }), function():Dynamic return cast 0.0) : Dynamic), pcfRadius: (cast _Runtime.coalesce(({ final __typedStruct437 = options; __typedStruct437 == null ? _Runtime.UNDEFINED : __typedStruct437.pcfRadius; }), function():Dynamic return cast 0.0) : Dynamic), position: (cast _Runtime.select(position, function():Dynamic return cast (cast cloneVector3(({ final __callArgument438:Dynamic = position; __callArgument438; })) : Vector3), function():Dynamic return cast (cast createVector3(({ final __callArgument440:Dynamic = 0.0; __callArgument440; }), ({ final __callArgument441:Dynamic = 0.0; __callArgument441; }), ({ final __callArgument442:Dynamic = 0.0; __callArgument442; })) : Vector3)) : Dynamic), range: (cast _Runtime.coalesce(({ final __typedStruct446 = options; __typedStruct446 == null ? _Runtime.UNDEFINED : __typedStruct446.range; }), function():Dynamic return cast -1.0) : Dynamic), shadowBias: (cast _Runtime.coalesce(({ final __typedStruct447 = options; __typedStruct447 == null ? _Runtime.UNDEFINED : __typedStruct447.shadowBias; }), function():Dynamic return cast 0.0) : Dynamic), shadowFar: (cast _Runtime.coalesce(({ final __typedStruct448 = options; __typedStruct448 == null ? _Runtime.UNDEFINED : __typedStruct448.shadowFar; }), function():Dynamic return cast 500.0) : Dynamic), shadowMapSize: (cast _Runtime.coalesce(({ final __typedStruct449 = options; __typedStruct449 == null ? _Runtime.UNDEFINED : __typedStruct449.shadowMapSize; }), function():Dynamic return cast 1024.0) : Dynamic), shadowNear: (cast _Runtime.coalesce(({ final __typedStruct450 = options; __typedStruct450 == null ? _Runtime.UNDEFINED : __typedStruct450.shadowNear; }), function():Dynamic return cast 0.5) : Dynamic), shadowStrength: (cast _Runtime.coalesce(({ final __typedStruct451 = options; __typedStruct451 == null ? _Runtime.UNDEFINED : __typedStruct451.shadowStrength; }), function():Dynamic return cast 1.0) : Dynamic) } : PointLight) : Dynamic)) : PointLight);
+    var out:EntityConstruction<PointLight> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ castsShadow: cast _Runtime.UNDEFINED, color: cast _Runtime.UNDEFINED, decay: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, intensity: cast _Runtime.UNDEFINED, intensityUnit: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, normalBias: cast _Runtime.UNDEFINED, pcfRadius: cast _Runtime.UNDEFINED, position: cast _Runtime.UNDEFINED, range: cast _Runtime.UNDEFINED, shadowBias: cast _Runtime.UNDEFINED, shadowFar: cast _Runtime.UNDEFINED, shadowMapSize: cast _Runtime.UNDEFINED, shadowNear: cast _Runtime.UNDEFINED, shadowStrength: cast _Runtime.UNDEFINED } : PointLight); }) #end));
+    initializePointLight(({ final __callArgument154:Dynamic = out; __callArgument154; }), ({ final __callArgument155:Dynamic = options; __callArgument155; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializePointLight(out:EntityConstruction<PointLight>, ?options:PointLightOptions):Void {
+    var position:Null<Vector3Like> = cast _Runtime.UNDEFINED;
+    position = ({ final __typedStruct158 = options; __typedStruct158 == null ? _Runtime.UNDEFINED : __typedStruct158.position; });
+    _Runtime.setField(out, 'castsShadow', _Runtime.coalesce(({ final __typedStruct159 = options; __typedStruct159 == null ? _Runtime.UNDEFINED : __typedStruct159.castsShadow; }), function():Dynamic return cast false));
+    _Runtime.setField(out, 'color', _Runtime.coalesce(({ final __typedStruct160 = options; __typedStruct160 == null ? _Runtime.UNDEFINED : __typedStruct160.color; }), function():Dynamic return cast 4294967295.0));
+    _Runtime.setField(out, 'decay', _Runtime.coalesce(({ final __typedStruct161 = options; __typedStruct161 == null ? _Runtime.UNDEFINED : __typedStruct161.decay; }), function():Dynamic return cast 2.0));
+    _Runtime.setField(out, 'enabled', _Runtime.coalesce(({ final __typedStruct162 = options; __typedStruct162 == null ? _Runtime.UNDEFINED : __typedStruct162.enabled; }), function():Dynamic return cast true));
+    _Runtime.setField(out, 'intensity', _Runtime.coalesce(({ final __typedStruct163 = options; __typedStruct163 == null ? _Runtime.UNDEFINED : __typedStruct163.intensity; }), function():Dynamic return cast 1.0));
+    _Runtime.setField(out, 'intensityUnit', _Runtime.coalesce(({ final __typedStruct164 = options; __typedStruct164 == null ? _Runtime.UNDEFINED : __typedStruct164.intensityUnit; }), function():Dynamic return cast UnitlessLightUnit));
+    _Runtime.setField(out, 'kind', PointLightKind);
+    _Runtime.setField(out, 'normalBias', _Runtime.coalesce(({ final __typedStruct165 = options; __typedStruct165 == null ? _Runtime.UNDEFINED : __typedStruct165.normalBias; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'pcfRadius', _Runtime.coalesce(({ final __typedStruct166 = options; __typedStruct166 == null ? _Runtime.UNDEFINED : __typedStruct166.pcfRadius; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'position', _Runtime.select(position, function():Dynamic return cast (cast cloneVector3(({ final __callArgument167:Dynamic = position; __callArgument167; })) : Vector3), function():Dynamic return cast (cast createVector3(({ final __callArgument169:Dynamic = 0.0; __callArgument169; }), ({ final __callArgument170:Dynamic = 0.0; __callArgument170; }), ({ final __callArgument171:Dynamic = 0.0; __callArgument171; })) : Vector3)));
+    _Runtime.setField(out, 'range', _Runtime.coalesce(({ final __typedStruct175 = options; __typedStruct175 == null ? _Runtime.UNDEFINED : __typedStruct175.range; }), function():Dynamic return cast -1.0));
+    _Runtime.setField(out, 'shadowBias', _Runtime.coalesce(({ final __typedStruct176 = options; __typedStruct176 == null ? _Runtime.UNDEFINED : __typedStruct176.shadowBias; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'shadowFar', _Runtime.coalesce(({ final __typedStruct177 = options; __typedStruct177 == null ? _Runtime.UNDEFINED : __typedStruct177.shadowFar; }), function():Dynamic return cast 500.0));
+    _Runtime.setField(out, 'shadowMapSize', _Runtime.coalesce(({ final __typedStruct178 = options; __typedStruct178 == null ? _Runtime.UNDEFINED : __typedStruct178.shadowMapSize; }), function():Dynamic return cast 1024.0));
+    _Runtime.setField(out, 'shadowNear', _Runtime.coalesce(({ final __typedStruct179 = options; __typedStruct179 == null ? _Runtime.UNDEFINED : __typedStruct179.shadowNear; }), function():Dynamic return cast 0.5));
+    _Runtime.setField(out, 'shadowStrength', _Runtime.coalesce(({ final __typedStruct180 = options; __typedStruct180 == null ? _Runtime.UNDEFINED : __typedStruct180.shadowStrength; }), function():Dynamic return cast 1.0));
   }
 
   public static function selectScene3DForwardLights(out:Scene3DForwardLightSelection, lights:Scene3DLightsLike, bounds:BoundingSphereLike):Void {
@@ -405,8 +575,8 @@ class _Lighting {
     var outIndices:Array<Float> = cast _Runtime.UNDEFINED;
     points = _Runtime.field(lights, 'point');
     spots = _Runtime.field(lights, 'spot');
-    pointCount = (cast _Lighting.selectStrongestLights__sceneForwardLights(({ final __callArgument496:Dynamic = points; __callArgument496; }), ({ final __callArgument497:Dynamic = bounds; __callArgument497; }), ({ final __callArgument498:Dynamic = _Lighting.scratchSelectedPointLights__sceneForwardLights; __callArgument498; }), ({ final __callArgument499:Dynamic = _Lighting.scratchSelectedPointIndices__sceneForwardLights; __callArgument499; }), ({ final __callArgument500:Dynamic = _Lighting.scratchSelectedPointScores__sceneForwardLights; __callArgument500; })) : Float);
-    spotCount = (cast _Lighting.selectStrongestLights__sceneForwardLights(({ final __callArgument506:Dynamic = spots; __callArgument506; }), ({ final __callArgument507:Dynamic = bounds; __callArgument507; }), ({ final __callArgument508:Dynamic = _Lighting.scratchSelectedSpotLights__sceneForwardLights; __callArgument508; }), ({ final __callArgument509:Dynamic = _Lighting.scratchSelectedSpotIndices__sceneForwardLights; __callArgument509; }), ({ final __callArgument510:Dynamic = _Lighting.scratchSelectedSpotScores__sceneForwardLights; __callArgument510; })) : Float);
+    pointCount = (cast _Lighting.selectStrongestLights__sceneForwardLights(({ final __callArgument181:Dynamic = points; __callArgument181; }), ({ final __callArgument182:Dynamic = bounds; __callArgument182; }), ({ final __callArgument183:Dynamic = _Lighting.scratchSelectedPointLights__sceneForwardLights; __callArgument183; }), ({ final __callArgument184:Dynamic = _Lighting.scratchSelectedPointIndices__sceneForwardLights; __callArgument184; }), ({ final __callArgument185:Dynamic = _Lighting.scratchSelectedPointScores__sceneForwardLights; __callArgument185; })) : Float);
+    spotCount = (cast _Lighting.selectStrongestLights__sceneForwardLights(({ final __callArgument191:Dynamic = spots; __callArgument191; }), ({ final __callArgument192:Dynamic = bounds; __callArgument192; }), ({ final __callArgument193:Dynamic = _Lighting.scratchSelectedSpotLights__sceneForwardLights; __callArgument193; }), ({ final __callArgument194:Dynamic = _Lighting.scratchSelectedSpotIndices__sceneForwardLights; __callArgument194; }), ({ final __callArgument195:Dynamic = _Lighting.scratchSelectedSpotScores__sceneForwardLights; __callArgument195; })) : Float);
     outPoints = out.point;
     outSpots = out.spot;
     outIndices = out.indices;
@@ -439,7 +609,7 @@ class _Lighting {
       var inputIndex:Float = 0.0;
       while ((cast ((cast inputIndex : Float) < (cast _Runtime.field(lights, 'length') : Float)) : Bool)) {
         var light:flight._internal._Union2<PointLight, SpotLight> = flight._internal._StaticIndex.readArray(lights, inputIndex);
-        var score:Float = (cast getLightContributionAtBoundingSphere(({ final __callArgument516:Dynamic = light; __callArgument516; }), ({ final __callArgument517:Dynamic = bounds; __callArgument517; })) : Float);
+        var score:Float = (cast getLightContributionAtBoundingSphere(({ final __callArgument201:Dynamic = light; __callArgument201; }), ({ final __callArgument202:Dynamic = bounds; __callArgument202; })) : Float);
         if ((cast !(cast _Runtime.compare(score, 0.0, '>') : Bool) : Bool)) { inputIndex++; continue; }
         var insertAt:Float = selectedCount;
         while ((cast ((cast insertAt : Float) > (cast 0.0 : Float)) : Bool)) {
@@ -483,24 +653,54 @@ class _Lighting {
   public static final scratchSelectedSpotScores__sceneForwardLights:flight._internal._Float64Array = new flight._internal._Float64Array(MAX_FORWARD_LIGHTS);
 
   public static function createScene3DLights(?options:{ @:optional var ambient:Null<AmbientLight>; @:optional var directional:Null<DirectionalLight>; @:optional var hemisphere:Null<Array<HemisphereLight>>; @:optional var point:Null<Array<PointLight>>; @:optional var spot:Null<Array<SpotLight>>; }):Scene3DLights {
-    return cast (cast createEntity((cast ({ ambient: (cast _Runtime.coalesce(({ final __structural525 = options; __structural525 == null ? _Runtime.UNDEFINED : (cast __structural525 : { @:optional var ambient:Null<AmbientLight>; }).ambient; }), function():Dynamic return cast null) : Dynamic), directional: (cast _Runtime.coalesce(({ final __structural526 = options; __structural526 == null ? _Runtime.UNDEFINED : (cast __structural526 : { @:optional var directional:Null<DirectionalLight>; }).directional; }), function():Dynamic return cast null) : Dynamic), hemisphere: (cast _Runtime.coalesce(({ final __structural527 = options; __structural527 == null ? _Runtime.UNDEFINED : (cast __structural527 : { @:optional var hemisphere:Null<Array<HemisphereLight>>; }).hemisphere; }), function():Dynamic return cast cast ([] : Array<Dynamic>)) : Dynamic), point: (cast _Runtime.coalesce(({ final __structural528 = options; __structural528 == null ? _Runtime.UNDEFINED : (cast __structural528 : { @:optional var point:Null<Array<PointLight>>; }).point; }), function():Dynamic return cast cast ([] : Array<Dynamic>)) : Dynamic), spot: (cast _Runtime.coalesce(({ final __structural529 = options; __structural529 == null ? _Runtime.UNDEFINED : (cast __structural529 : { @:optional var spot:Null<Array<SpotLight>>; }).spot; }), function():Dynamic return cast cast ([] : Array<Dynamic>)) : Dynamic) } : Scene3DLights) : Dynamic)) : Scene3DLights);
+    var out:EntityConstruction<Scene3DLights> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ ambient: cast _Runtime.UNDEFINED, directional: cast _Runtime.UNDEFINED, hemisphere: cast _Runtime.UNDEFINED, point: cast _Runtime.UNDEFINED, spot: cast _Runtime.UNDEFINED } : Scene3DLights); }) #end));
+    initializeScene3DLights(({ final __callArgument205:Dynamic = out; __callArgument205; }), (cast options : Dynamic));
+    return cast out;
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeScene3DLights(out:EntityConstruction<Scene3DLights>, ?options:{ @:optional var ambient:Null<AmbientLight>; @:optional var directional:Null<DirectionalLight>; @:optional var hemisphere:Null<Array<HemisphereLight>>; @:optional var point:Null<Array<PointLight>>; @:optional var spot:Null<Array<SpotLight>>; }):Void {
+    _Runtime.setField(out, 'ambient', _Runtime.coalesce(({ final __structural207 = options; __structural207 == null ? _Runtime.UNDEFINED : (cast __structural207 : { @:optional var ambient:Null<AmbientLight>; }).ambient; }), function():Dynamic return cast null));
+    _Runtime.setField(out, 'directional', _Runtime.coalesce(({ final __structural208 = options; __structural208 == null ? _Runtime.UNDEFINED : (cast __structural208 : { @:optional var directional:Null<DirectionalLight>; }).directional; }), function():Dynamic return cast null));
+    _Runtime.setField(out, 'hemisphere', _Runtime.coalesce(({ final __structural209 = options; __structural209 == null ? _Runtime.UNDEFINED : (cast __structural209 : { @:optional var hemisphere:Null<Array<HemisphereLight>>; }).hemisphere; }), function():Dynamic return cast cast ([] : Array<Dynamic>)));
+    _Runtime.setField(out, 'point', _Runtime.coalesce(({ final __structural210 = options; __structural210 == null ? _Runtime.UNDEFINED : (cast __structural210 : { @:optional var point:Null<Array<PointLight>>; }).point; }), function():Dynamic return cast cast ([] : Array<Dynamic>)));
+    _Runtime.setField(out, 'spot', _Runtime.coalesce(({ final __structural211 = options; __structural211 == null ? _Runtime.UNDEFINED : (cast __structural211 : { @:optional var spot:Null<Array<SpotLight>>; }).spot; }), function():Dynamic return cast cast ([] : Array<Dynamic>)));
+  }
+
   public static function cloneSpotLight(source:SpotLight):SpotLight {
-    return cast (cast createEntity((cast ({ castsShadow: (cast _Runtime.field(source, 'castsShadow') : Dynamic), color: (cast _Runtime.field(source, 'color') : Dynamic), decay: (cast _Runtime.field(source, 'decay') : Dynamic), direction: (cast (cast cloneVector3(({ final __callArgument544:Dynamic = _Runtime.field(source, 'direction'); __callArgument544; })) : Vector3) : Dynamic), enabled: (cast _Runtime.field(source, 'enabled') : Dynamic), innerConeCos: (cast _Runtime.field(source, 'innerConeCos') : Dynamic), intensity: (cast _Runtime.field(source, 'intensity') : Dynamic), intensityUnit: (cast _Runtime.field(source, 'intensityUnit') : Dynamic), kind: (cast SpotLightKind : Dynamic), normalBias: (cast _Runtime.field(source, 'normalBias') : Dynamic), outerConeCos: (cast _Runtime.field(source, 'outerConeCos') : Dynamic), pcfRadius: (cast _Runtime.field(source, 'pcfRadius') : Dynamic), position: (cast (cast cloneVector3(({ final __callArgument546:Dynamic = _Runtime.field(source, 'position'); __callArgument546; })) : Vector3) : Dynamic), range: (cast _Runtime.field(source, 'range') : Dynamic), shadowBias: (cast _Runtime.field(source, 'shadowBias') : Dynamic), shadowFar: (cast _Runtime.field(source, 'shadowFar') : Dynamic), shadowMapSize: (cast _Runtime.field(source, 'shadowMapSize') : Dynamic), shadowNear: (cast _Runtime.field(source, 'shadowNear') : Dynamic), shadowStrength: (cast _Runtime.field(source, 'shadowStrength') : Dynamic), spotBlend: (cast _Runtime.field(source, 'spotBlend') : Dynamic) } : SpotLight) : Dynamic)) : SpotLight);
+    var out:EntityConstruction<SpotLight> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ castsShadow: cast _Runtime.UNDEFINED, color: cast _Runtime.UNDEFINED, decay: cast _Runtime.UNDEFINED, direction: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, innerConeCos: cast _Runtime.UNDEFINED, intensity: cast _Runtime.UNDEFINED, intensityUnit: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, normalBias: cast _Runtime.UNDEFINED, outerConeCos: cast _Runtime.UNDEFINED, pcfRadius: cast _Runtime.UNDEFINED, position: cast _Runtime.UNDEFINED, range: cast _Runtime.UNDEFINED, shadowBias: cast _Runtime.UNDEFINED, shadowFar: cast _Runtime.UNDEFINED, shadowMapSize: cast _Runtime.UNDEFINED, shadowNear: cast _Runtime.UNDEFINED, shadowStrength: cast _Runtime.UNDEFINED, spotBlend: cast _Runtime.UNDEFINED } : SpotLight); }) #end));
+    _Runtime.setField(out, 'castsShadow', _Runtime.field(source, 'castsShadow'));
+    _Runtime.setField(out, 'color', _Runtime.field(source, 'color'));
+    _Runtime.setField(out, 'decay', _Runtime.field(source, 'decay'));
+    _Runtime.setField(out, 'direction', (cast cloneVector3(({ final __callArgument212:Dynamic = _Runtime.field(source, 'direction'); __callArgument212; })) : Vector3));
+    _Runtime.setField(out, 'enabled', _Runtime.field(source, 'enabled'));
+    _Runtime.setField(out, 'innerConeCos', _Runtime.field(source, 'innerConeCos'));
+    _Runtime.setField(out, 'intensity', _Runtime.field(source, 'intensity'));
+    _Runtime.setField(out, 'intensityUnit', _Runtime.field(source, 'intensityUnit'));
+    _Runtime.setField(out, 'kind', SpotLightKind);
+    _Runtime.setField(out, 'normalBias', _Runtime.field(source, 'normalBias'));
+    _Runtime.setField(out, 'outerConeCos', _Runtime.field(source, 'outerConeCos'));
+    _Runtime.setField(out, 'pcfRadius', _Runtime.field(source, 'pcfRadius'));
+    _Runtime.setField(out, 'position', (cast cloneVector3(({ final __callArgument214:Dynamic = _Runtime.field(source, 'position'); __callArgument214; })) : Vector3));
+    _Runtime.setField(out, 'range', _Runtime.field(source, 'range'));
+    _Runtime.setField(out, 'shadowBias', _Runtime.field(source, 'shadowBias'));
+    _Runtime.setField(out, 'shadowFar', _Runtime.field(source, 'shadowFar'));
+    _Runtime.setField(out, 'shadowMapSize', _Runtime.field(source, 'shadowMapSize'));
+    _Runtime.setField(out, 'shadowNear', _Runtime.field(source, 'shadowNear'));
+    _Runtime.setField(out, 'shadowStrength', _Runtime.field(source, 'shadowStrength'));
+    _Runtime.setField(out, 'spotBlend', _Runtime.field(source, 'spotBlend'));
+    return cast out;
     return cast null;
   }
 
   public static function createSpotLight(?options:SpotLightOptions):SpotLight {
-    var position:Null<Vector3Like> = cast _Runtime.UNDEFINED;
-    var direction:Null<Vector3Like> = cast _Runtime.UNDEFINED;
-    var light:SpotLight = cast _Runtime.UNDEFINED;
-    position = ({ final __typedStruct556 = options; __typedStruct556 == null ? _Runtime.UNDEFINED : __typedStruct556.position; });
-    direction = ({ final __typedStruct557 = options; __typedStruct557 == null ? _Runtime.UNDEFINED : __typedStruct557.direction; });
-    light = (cast createEntity((cast ({ castsShadow: (cast _Runtime.coalesce(({ final __typedStruct588 = options; __typedStruct588 == null ? _Runtime.UNDEFINED : __typedStruct588.castsShadow; }), function():Dynamic return cast false) : Dynamic), color: (cast _Runtime.coalesce(({ final __typedStruct589 = options; __typedStruct589 == null ? _Runtime.UNDEFINED : __typedStruct589.color; }), function():Dynamic return cast 4294967295.0) : Dynamic), decay: (cast _Runtime.coalesce(({ final __typedStruct590 = options; __typedStruct590 == null ? _Runtime.UNDEFINED : __typedStruct590.decay; }), function():Dynamic return cast 2.0) : Dynamic), direction: (cast _Runtime.select(direction, function():Dynamic return cast (cast cloneVector3(({ final __callArgument591:Dynamic = direction; __callArgument591; })) : Vector3), function():Dynamic return cast (cast createVector3(({ final __callArgument593:Dynamic = 0.0; __callArgument593; }), ({ final __callArgument594:Dynamic = -1.0; __callArgument594; }), ({ final __callArgument595:Dynamic = 0.0; __callArgument595; })) : Vector3)) : Dynamic), enabled: (cast _Runtime.coalesce(({ final __typedStruct599 = options; __typedStruct599 == null ? _Runtime.UNDEFINED : __typedStruct599.enabled; }), function():Dynamic return cast true) : Dynamic), innerConeCos: (cast 1.0 : Dynamic), intensity: (cast _Runtime.coalesce(({ final __typedStruct600 = options; __typedStruct600 == null ? _Runtime.UNDEFINED : __typedStruct600.intensity; }), function():Dynamic return cast 1.0) : Dynamic), intensityUnit: (cast _Runtime.coalesce(({ final __typedStruct601 = options; __typedStruct601 == null ? _Runtime.UNDEFINED : __typedStruct601.intensityUnit; }), function():Dynamic return cast UnitlessLightUnit) : Dynamic), kind: (cast SpotLightKind : Dynamic), normalBias: (cast _Runtime.coalesce(({ final __typedStruct602 = options; __typedStruct602 == null ? _Runtime.UNDEFINED : __typedStruct602.normalBias; }), function():Dynamic return cast 0.0) : Dynamic), outerConeCos: (cast 1.0 : Dynamic), pcfRadius: (cast _Runtime.coalesce(({ final __typedStruct603 = options; __typedStruct603 == null ? _Runtime.UNDEFINED : __typedStruct603.pcfRadius; }), function():Dynamic return cast 0.0) : Dynamic), position: (cast _Runtime.select(position, function():Dynamic return cast (cast cloneVector3(({ final __callArgument604:Dynamic = position; __callArgument604; })) : Vector3), function():Dynamic return cast (cast createVector3(({ final __callArgument606:Dynamic = 0.0; __callArgument606; }), ({ final __callArgument607:Dynamic = 0.0; __callArgument607; }), ({ final __callArgument608:Dynamic = 0.0; __callArgument608; })) : Vector3)) : Dynamic), range: (cast _Runtime.coalesce(({ final __typedStruct612 = options; __typedStruct612 == null ? _Runtime.UNDEFINED : __typedStruct612.range; }), function():Dynamic return cast -1.0) : Dynamic), shadowBias: (cast _Runtime.coalesce(({ final __typedStruct613 = options; __typedStruct613 == null ? _Runtime.UNDEFINED : __typedStruct613.shadowBias; }), function():Dynamic return cast 0.0) : Dynamic), shadowFar: (cast _Runtime.coalesce(({ final __typedStruct614 = options; __typedStruct614 == null ? _Runtime.UNDEFINED : __typedStruct614.shadowFar; }), function():Dynamic return cast 500.0) : Dynamic), shadowMapSize: (cast _Runtime.coalesce(({ final __typedStruct615 = options; __typedStruct615 == null ? _Runtime.UNDEFINED : __typedStruct615.shadowMapSize; }), function():Dynamic return cast 1024.0) : Dynamic), shadowNear: (cast _Runtime.coalesce(({ final __typedStruct616 = options; __typedStruct616 == null ? _Runtime.UNDEFINED : __typedStruct616.shadowNear; }), function():Dynamic return cast 0.5) : Dynamic), shadowStrength: (cast _Runtime.coalesce(({ final __typedStruct617 = options; __typedStruct617 == null ? _Runtime.UNDEFINED : __typedStruct617.shadowStrength; }), function():Dynamic return cast 1.0) : Dynamic), spotBlend: (cast 0.0 : Dynamic) } : SpotLight) : Dynamic)) : SpotLight);
-    setSpotLightCone(({ final __callArgument678:Dynamic = light; __callArgument678; }), (cast _Runtime.coalesce(({ final __typedStruct679 = options; __typedStruct679 == null ? _Runtime.UNDEFINED : __typedStruct679.innerConeDegrees; }), function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(({ final __typedStruct680 = options; __typedStruct680 == null ? _Runtime.UNDEFINED : __typedStruct680.outerConeDegrees; }), function():Dynamic return cast 45.0) : Float));
-    setSpotLightBlend(({ final __callArgument684:Dynamic = light; __callArgument684; }), (cast _Runtime.coalesce(({ final __typedStruct685 = options; __typedStruct685 == null ? _Runtime.UNDEFINED : __typedStruct685.spotBlend; }), function():Dynamic return cast 0.0) : Float));
+    var light:EntityConstruction<SpotLight> = cast _Runtime.UNDEFINED;
+    light = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ castsShadow: cast _Runtime.UNDEFINED, color: cast _Runtime.UNDEFINED, decay: cast _Runtime.UNDEFINED, direction: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, innerConeCos: cast _Runtime.UNDEFINED, intensity: cast _Runtime.UNDEFINED, intensityUnit: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, normalBias: cast _Runtime.UNDEFINED, outerConeCos: cast _Runtime.UNDEFINED, pcfRadius: cast _Runtime.UNDEFINED, position: cast _Runtime.UNDEFINED, range: cast _Runtime.UNDEFINED, shadowBias: cast _Runtime.UNDEFINED, shadowFar: cast _Runtime.UNDEFINED, shadowMapSize: cast _Runtime.UNDEFINED, shadowNear: cast _Runtime.UNDEFINED, shadowStrength: cast _Runtime.UNDEFINED, spotBlend: cast _Runtime.UNDEFINED } : SpotLight); }) #end));
+    initializeSpotLight(({ final __callArgument216:Dynamic = light; __callArgument216; }), ({ final __callArgument217:Dynamic = options; __callArgument217; }));
     return cast light;
     return cast null;
   }
@@ -508,6 +708,37 @@ class _Lighting {
   public static function getSpotLightConeDegrees(out:SpotLightConeAngles, source:SpotLight):Void {
     ((cast out : SpotLightConeAngles).innerDegrees = (_Runtime.multiplyNumbers(HxMath.acos(_Runtime.field(source, 'innerConeCos')), 180.0) / HxMath.PI));
     ((cast out : SpotLightConeAngles).outerDegrees = (_Runtime.multiplyNumbers(HxMath.acos(_Runtime.field(source, 'outerConeCos')), 180.0) / HxMath.PI));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeSpotLight(light:EntityConstruction<SpotLight>, ?options:SpotLightOptions):Void {
+    var position:Null<Vector3Like> = cast _Runtime.UNDEFINED;
+    var direction:Null<Vector3Like> = cast _Runtime.UNDEFINED;
+    position = ({ final __typedStruct220 = options; __typedStruct220 == null ? _Runtime.UNDEFINED : __typedStruct220.position; });
+    direction = ({ final __typedStruct221 = options; __typedStruct221 == null ? _Runtime.UNDEFINED : __typedStruct221.direction; });
+    _Runtime.setField(light, 'castsShadow', _Runtime.coalesce(({ final __typedStruct222 = options; __typedStruct222 == null ? _Runtime.UNDEFINED : __typedStruct222.castsShadow; }), function():Dynamic return cast false));
+    _Runtime.setField(light, 'color', _Runtime.coalesce(({ final __typedStruct223 = options; __typedStruct223 == null ? _Runtime.UNDEFINED : __typedStruct223.color; }), function():Dynamic return cast 4294967295.0));
+    _Runtime.setField(light, 'decay', _Runtime.coalesce(({ final __typedStruct224 = options; __typedStruct224 == null ? _Runtime.UNDEFINED : __typedStruct224.decay; }), function():Dynamic return cast 2.0));
+    _Runtime.setField(light, 'direction', _Runtime.select(direction, function():Dynamic return cast (cast cloneVector3(({ final __callArgument225:Dynamic = direction; __callArgument225; })) : Vector3), function():Dynamic return cast (cast createVector3(({ final __callArgument227:Dynamic = 0.0; __callArgument227; }), ({ final __callArgument228:Dynamic = -1.0; __callArgument228; }), ({ final __callArgument229:Dynamic = 0.0; __callArgument229; })) : Vector3)));
+    _Runtime.setField(light, 'enabled', _Runtime.coalesce(({ final __typedStruct233 = options; __typedStruct233 == null ? _Runtime.UNDEFINED : __typedStruct233.enabled; }), function():Dynamic return cast true));
+    _Runtime.setField(light, 'innerConeCos', 1.0);
+    _Runtime.setField(light, 'intensity', _Runtime.coalesce(({ final __typedStruct234 = options; __typedStruct234 == null ? _Runtime.UNDEFINED : __typedStruct234.intensity; }), function():Dynamic return cast 1.0));
+    _Runtime.setField(light, 'intensityUnit', _Runtime.coalesce(({ final __typedStruct235 = options; __typedStruct235 == null ? _Runtime.UNDEFINED : __typedStruct235.intensityUnit; }), function():Dynamic return cast UnitlessLightUnit));
+    _Runtime.setField(light, 'kind', SpotLightKind);
+    _Runtime.setField(light, 'normalBias', _Runtime.coalesce(({ final __typedStruct236 = options; __typedStruct236 == null ? _Runtime.UNDEFINED : __typedStruct236.normalBias; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(light, 'outerConeCos', 1.0);
+    _Runtime.setField(light, 'pcfRadius', _Runtime.coalesce(({ final __typedStruct237 = options; __typedStruct237 == null ? _Runtime.UNDEFINED : __typedStruct237.pcfRadius; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(light, 'position', _Runtime.select(position, function():Dynamic return cast (cast cloneVector3(({ final __callArgument238:Dynamic = position; __callArgument238; })) : Vector3), function():Dynamic return cast (cast createVector3(({ final __callArgument240:Dynamic = 0.0; __callArgument240; }), ({ final __callArgument241:Dynamic = 0.0; __callArgument241; }), ({ final __callArgument242:Dynamic = 0.0; __callArgument242; })) : Vector3)));
+    _Runtime.setField(light, 'range', _Runtime.coalesce(({ final __typedStruct246 = options; __typedStruct246 == null ? _Runtime.UNDEFINED : __typedStruct246.range; }), function():Dynamic return cast -1.0));
+    _Runtime.setField(light, 'shadowBias', _Runtime.coalesce(({ final __typedStruct247 = options; __typedStruct247 == null ? _Runtime.UNDEFINED : __typedStruct247.shadowBias; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(light, 'shadowFar', _Runtime.coalesce(({ final __typedStruct248 = options; __typedStruct248 == null ? _Runtime.UNDEFINED : __typedStruct248.shadowFar; }), function():Dynamic return cast 500.0));
+    _Runtime.setField(light, 'shadowMapSize', _Runtime.coalesce(({ final __typedStruct249 = options; __typedStruct249 == null ? _Runtime.UNDEFINED : __typedStruct249.shadowMapSize; }), function():Dynamic return cast 1024.0));
+    _Runtime.setField(light, 'shadowNear', _Runtime.coalesce(({ final __typedStruct250 = options; __typedStruct250 == null ? _Runtime.UNDEFINED : __typedStruct250.shadowNear; }), function():Dynamic return cast 0.5));
+    _Runtime.setField(light, 'shadowStrength', _Runtime.coalesce(({ final __typedStruct251 = options; __typedStruct251 == null ? _Runtime.UNDEFINED : __typedStruct251.shadowStrength; }), function():Dynamic return cast 1.0));
+    _Runtime.setField(light, 'spotBlend', 0.0);
+    setSpotLightCone(({ final __callArgument252:Dynamic = light; __callArgument252; }), (cast _Runtime.coalesce(({ final __typedStruct253 = options; __typedStruct253 == null ? _Runtime.UNDEFINED : __typedStruct253.innerConeDegrees; }), function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(({ final __typedStruct254 = options; __typedStruct254 == null ? _Runtime.UNDEFINED : __typedStruct254.outerConeDegrees; }), function():Dynamic return cast 45.0) : Float));
+    setSpotLightBlend(({ final __callArgument258:Dynamic = light; __callArgument258; }), (cast _Runtime.coalesce(({ final __typedStruct259 = options; __typedStruct259 == null ? _Runtime.UNDEFINED : __typedStruct259.spotBlend; }), function():Dynamic return cast 0.0) : Float));
   }
 
   public static function setSpotLightBlend(out:SpotLight, blend:Float):Void {
@@ -529,7 +760,7 @@ class _Lighting {
     lz = z;
     len = HxMath.sqrt((((lx * lx) + (ly * ly)) + (lz * lz)));
     if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
-      setVector3(({ final __callArgument688:Dynamic = (cast out : SpotLight).direction; __callArgument688; }), (cast (lx / len) : Float), (cast (ly / len) : Float), (cast (lz / len) : Float));
+      setVector3(({ final __callArgument262:Dynamic = (cast out : SpotLight).direction; __callArgument262; }), (cast (lx / len) : Float), (cast (ly / len) : Float), (cast (lz / len) : Float));
     }
   }
 
@@ -549,7 +780,7 @@ class _Lighting {
     dz = (targetZ - pz);
     len = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
     if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
-      setVector3(({ final __callArgument690:Dynamic = (cast out : SpotLight).direction; __callArgument690; }), (cast (dx / len) : Float), (cast (dy / len) : Float), (cast (dz / len) : Float));
+      setVector3(({ final __callArgument264:Dynamic = (cast out : SpotLight).direction; __callArgument264; }), (cast (dx / len) : Float), (cast (dy / len) : Float), (cast (dz / len) : Float));
     }
   }
 }

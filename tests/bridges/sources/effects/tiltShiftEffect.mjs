@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const createTiltShiftEffect = api.createTiltShiftEffect;
 export const getTiltShiftEffectPadding = api.getTiltShiftEffectPadding;
+export const initializeTiltShiftEffect = api.initializeTiltShiftEffect;
 export const registerTiltShiftEffectPaddingResolver = api.registerTiltShiftEffectPaddingResolver;

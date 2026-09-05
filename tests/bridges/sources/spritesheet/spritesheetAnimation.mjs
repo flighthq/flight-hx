@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const createSpritesheetAnimation = api.createSpritesheetAnimation;
 export const createSpritesheetAnimationFromFrameNames = api.createSpritesheetAnimationFromFrameNames;
+export const initializeSpritesheetAnimation = api.initializeSpritesheetAnimation;

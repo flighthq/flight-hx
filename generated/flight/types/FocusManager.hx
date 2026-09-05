@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FocusManager<N> = { var focused:Null<N>; var root:N; var wrap:Bool; };
+typedef FocusManager<N> = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var focused:Null<N>; var root:N; var wrap:Bool; };

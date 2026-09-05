@@ -5,7 +5,9 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Physics2D as Facade_Physics2D_flight__Physics2D;
 import flight.types.CollisionBuiltInShape2D;
+import flight.types.Entity;
 import flight.types.Node2D;
+import flight.types.NonEntityCreateResult;
 import flight.types.Physics2DCollider;
 import flight.types.Physics2DCollisionExplanation;
 import flight.types.Physics2DCollisionFilter;
@@ -106,7 +108,7 @@ class Physics2D {
     return cast null;
   }
 
-  public static function createPhysics2DColliderWorldShape(local:CollisionBuiltInShape2D):CollisionBuiltInShape2D {
+  public static function createPhysics2DColliderWorldShape(local:CollisionBuiltInShape2D):flight._internal._Intersection2<CollisionBuiltInShape2D, Entity> {
     return cast Facade_Physics2D_flight__Physics2D.createPhysics2DColliderWorldShape(local);
     return cast null;
   }
@@ -146,7 +148,7 @@ class Physics2D {
     return cast null;
   }
 
-  public static function createPhysics2DQueryFilter():Physics2DQueryFilter {
+  public static function createPhysics2DQueryFilter():NonEntityCreateResult<Physics2DQueryFilter, String> {
     return cast Facade_Physics2D_flight__Physics2D.createPhysics2DQueryFilter();
     return cast null;
   }
@@ -176,7 +178,7 @@ class Physics2D {
     return cast null;
   }
 
-  public static function createPhysics2DSolverConfig():Physics2DSolverConfig {
+  public static function createPhysics2DSolverConfig():NonEntityCreateResult<Physics2DSolverConfig, String> {
     return cast Facade_Physics2D_flight__Physics2D.createPhysics2DSolverConfig();
     return cast null;
   }

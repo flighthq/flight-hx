@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createScanlinesEffect = api.createScanlinesEffect;
+export const initializeScanlinesEffect = api.initializeScanlinesEffect;

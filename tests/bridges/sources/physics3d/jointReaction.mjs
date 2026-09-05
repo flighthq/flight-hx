@@ -10,4 +10,5 @@ export const clearPhysics3DJointReaction = api.clearPhysics3DJointReaction;
 export const createPhysics3DJointReaction = api.createPhysics3DJointReaction;
 export const getPhysics3DJointReactionForce = api.getPhysics3DJointReactionForce;
 export const getPhysics3DJointReactionTorque = api.getPhysics3DJointReactionTorque;
+export const initializePhysics3DJointReaction = api.initializePhysics3DJointReaction;
 export const writePhysics3DJointReaction = api.writePhysics3DJointReaction;

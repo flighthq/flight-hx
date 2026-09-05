@@ -4,4 +4,24 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ScreenSpaceFogEffect = { var kind:String; @:optional var color:Float; @:optional var near:Float; @:optional var far:Float; @:optional var density:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class ScreenSpaceFogEffect extends flight.types.RenderEffect<String> {
+  public var color:Null<Float>;
+  public var near:Null<Float>;
+  public var far:Null<Float>;
+  public var density:Null<Float>;
+
+  private function new(kind:String, ?color:Null<Float>, ?near:Null<Float>, ?far:Null<Float>, ?density:Null<Float>):Void {
+    super(kind);
+    this.color = color;
+    this.near = near;
+    this.far = far;
+    this.density = density;
+  }
+}
+#else
+typedef ScreenSpaceFogEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var color:Float; @:optional var near:Float; @:optional var far:Float; @:optional var density:Float; };
+#end

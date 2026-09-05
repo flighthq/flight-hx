@@ -36,6 +36,7 @@ export * from './glRasterShapeRenderer.mjs';
 export * from './glRichText.mjs';
 export * from './glScale9Mapper.mjs';
 export * from './glScale9Shape.mjs';
+export * from './glScale9Sprite.mjs';
 export * from './glShape.mjs';
 export * from './glShapeData.mjs';
 export * from './glShapeMesh.mjs';
@@ -63,4 +64,7 @@ export { defaultCanvasLineTo as defaultGlLineTo } from '@flighthq/scene2d-canvas
 export { defaultCanvasMoveTo as defaultGlMoveTo } from '@flighthq/scene2d-canvas/contract';
 export { defaultCanvasShapeCommands as defaultGlShapeCommands } from '@flighthq/scene2d-canvas/contract';
 export { defaultCanvasTextureShapeCommands as defaultGlTextureShapeCommands } from '@flighthq/scene2d-canvas/contract';
+export { initializeGlRichTextData } from './glRichText.mjs';
+export { initializeGlScale9ShapeData } from './glScale9Shape.mjs';
+export { initializeGlShapeData } from './glShapeData.mjs';
 export { registerCanvasShapeCommands as registerGlShapeCommands } from '@flighthq/scene2d-canvas/contract';

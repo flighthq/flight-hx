@@ -4,4 +4,24 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MessageDialogBackend = { var confirm:MessageDialogOptions->flight._internal._Promise<Bool>; var message:MessageDialogOptions->flight._internal._Promise<MessageDialogResult>; };
+#if !flight_struct_typedef
+@:allow(flight._Dialog)
+@:allow(flight._HostCapacitor)
+@:allow(flight._HostElectron)
+@:allow(flight._HostTauri)
+@:keep
+@:structInit
+class MessageDialogBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var confirm:MessageDialogOptions->flight._internal._Promise<Bool>;
+  public var message:MessageDialogOptions->flight._internal._Promise<MessageDialogResult>;
+
+  private function new(confirm:MessageDialogOptions->flight._internal._Promise<Bool>, message:MessageDialogOptions->flight._internal._Promise<MessageDialogResult>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.confirm = confirm;
+    this.message = message;
+  }
+}
+#else
+typedef MessageDialogBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var confirm:MessageDialogOptions->flight._internal._Promise<Bool>; var message:MessageDialogOptions->flight._internal._Promise<MessageDialogResult>; };
+#end

@@ -15,8 +15,8 @@ class WgpuRenderState extends flight.types.RenderState {
   public var format:flight._internal.dom.GPUTextureFormat;
   public var pipeline:WgpuPipeline;
 
-  private function new(allowSmoothing:Bool, backgroundColor:Float, backgroundColorRgba:Array<Float>, backgroundColorString:String, currentClipDepth:Float, displayObjectClipHooks:Null<Scene2DClipHooks>, pixelRatio:Float, renderAlpha:Float, renderBlendMode:Null<BlendMode>, renderTransform2D:Null<Matrix>, sceneGraphSyncPolicy:Scene3DGraphSyncPolicy, roundPixels:Bool, applyBlendMode:Null<WgpuRenderState->Null<BlendMode>->Void>, deviceState:WgpuDeviceState, device:flight._internal.dom.GPUDevice, format:flight._internal.dom.GPUTextureFormat, pipeline:WgpuPipeline):Void {
-    super(allowSmoothing, backgroundColor, backgroundColorRgba, backgroundColorString, currentClipDepth, displayObjectClipHooks, pixelRatio, renderAlpha, renderBlendMode, renderTransform2D, sceneGraphSyncPolicy, roundPixels);
+  private function new(allowSmoothing:Bool, backgroundColor:Float, backgroundColorRgba:Array<Float>, backgroundColorString:String, currentClipDepth:Float, displayObjectClipHooks:Null<Scene2DClipHooks>, pixelRatio:Float, raster2DSurfaceProvider:Null<Raster2DSurfaceProvider>, renderAlpha:Float, renderBlendMode:Null<BlendMode>, renderTransform2D:Null<Matrix>, sceneGraphSyncPolicy:Scene3DGraphSyncPolicy, roundPixels:Bool, applyBlendMode:Null<WgpuRenderState->Null<BlendMode>->Void>, deviceState:WgpuDeviceState, device:flight._internal.dom.GPUDevice, format:flight._internal.dom.GPUTextureFormat, pipeline:WgpuPipeline):Void {
+    super(allowSmoothing, backgroundColor, backgroundColorRgba, backgroundColorString, currentClipDepth, displayObjectClipHooks, pixelRatio, raster2DSurfaceProvider, renderAlpha, renderBlendMode, renderTransform2D, sceneGraphSyncPolicy, roundPixels);
     this.applyBlendMode = applyBlendMode;
     this.deviceState = deviceState;
     this.device = device;
@@ -25,5 +25,5 @@ class WgpuRenderState extends flight.types.RenderState {
   }
 }
 #else
-typedef WgpuRenderState = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var allowSmoothing:Bool; var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; var currentClipDepth:Float; var displayObjectClipHooks:Null<Scene2DClipHooks>; var pixelRatio:Float; var renderAlpha:Float; var renderBlendMode:Null<BlendMode>; var renderTransform2D:Null<Matrix>; var sceneGraphSyncPolicy:Scene3DGraphSyncPolicy; var roundPixels:Bool; var applyBlendMode:Null<WgpuRenderState->Null<BlendMode>->Void>; var deviceState:WgpuDeviceState; var device:flight._internal.dom.GPUDevice; var format:flight._internal.dom.GPUTextureFormat; var pipeline:WgpuPipeline; };
+typedef WgpuRenderState = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var allowSmoothing:Bool; var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; var currentClipDepth:Float; var displayObjectClipHooks:Null<Scene2DClipHooks>; var pixelRatio:Float; var raster2DSurfaceProvider:Null<Raster2DSurfaceProvider>; var renderAlpha:Float; var renderBlendMode:Null<BlendMode>; var renderTransform2D:Null<Matrix>; var sceneGraphSyncPolicy:Scene3DGraphSyncPolicy; var roundPixels:Bool; var applyBlendMode:Null<WgpuRenderState->Null<BlendMode>->Void>; var deviceState:WgpuDeviceState; var device:flight._internal.dom.GPUDevice; var format:flight._internal.dom.GPUTextureFormat; var pipeline:WgpuPipeline; };
 #end

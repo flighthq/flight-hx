@@ -4,4 +4,24 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef VignetteEffect = { var kind:String; @:optional var intensity:Float; @:optional var radius:Float; @:optional var softness:Float; @:optional var color:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class VignetteEffect extends flight.types.RenderEffect<String> {
+  public var intensity:Null<Float>;
+  public var radius:Null<Float>;
+  public var softness:Null<Float>;
+  public var color:Null<Float>;
+
+  private function new(kind:String, ?intensity:Null<Float>, ?radius:Null<Float>, ?softness:Null<Float>, ?color:Null<Float>):Void {
+    super(kind);
+    this.intensity = intensity;
+    this.radius = radius;
+    this.softness = softness;
+    this.color = color;
+  }
+}
+#else
+typedef VignetteEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var intensity:Float; @:optional var radius:Float; @:optional var softness:Float; @:optional var color:Float; };
+#end

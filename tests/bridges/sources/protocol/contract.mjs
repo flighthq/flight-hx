@@ -4,3 +4,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './protocol.mjs';
+export { initializeProtocolHandler } from './protocol.mjs';

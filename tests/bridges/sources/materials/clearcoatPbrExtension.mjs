@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createClearcoatPbrExtension = api.createClearcoatPbrExtension;
+export const initializeClearcoatPbrExtension = api.initializeClearcoatPbrExtension;
 export const isValidClearcoatPbrExtension = api.isValidClearcoatPbrExtension;

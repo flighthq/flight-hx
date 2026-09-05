@@ -9,4 +9,5 @@ export const createMidiAccessResource = api.createMidiAccessResource;
 export const disposeMidiAccess = api.disposeMidiAccess;
 export const getMidiAccessInputPorts = api.getMidiAccessInputPorts;
 export const getMidiAccessOutputPorts = api.getMidiAccessOutputPorts;
+export const initializeMidiAccessResource = api.initializeMidiAccessResource;
 export const requestMidiAccess = api.requestMidiAccess;

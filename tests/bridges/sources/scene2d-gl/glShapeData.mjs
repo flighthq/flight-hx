@@ -9,4 +9,5 @@ export const acquireGlShapeRasterSurface = api.acquireGlShapeRasterSurface;
 export const createGlShapeData = api.createGlShapeData;
 export const destroyGlShapeData = api.destroyGlShapeData;
 export const getGlShapeData = api.getGlShapeData;
+export const initializeGlShapeData = api.initializeGlShapeData;
 export const toGlShapeRendererData = api.toGlShapeRendererData;

@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createExposureAdjustment = api.createExposureAdjustment;
+export const initializeExposureAdjustment = api.initializeExposureAdjustment;

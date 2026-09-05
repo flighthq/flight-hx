@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 import flight._HostCapacitor as Facade_HostCapacitor_flight__HostCapacitor;
 import flight._HostCapacitor.CapacitorClipboardBackend__capacitorClipboard;
 import flight._HostCapacitor.CapacitorConnectivityBackend__capacitorConnectivity;
+import flight._HostCapacitor.CapacitorStatusBarBackend__capacitorStatusBar;
 import flight.types.CapacitorAndroidAppCapabilities;
 import flight.types.CapacitorApi;
 import flight.types.CapacitorAppCapabilitiesFor;
@@ -15,20 +16,37 @@ import flight.types.CapacitorNotificationCapabilities;
 import flight.types.CapacitorProtocolCapabilities;
 import flight.types.CapacitorShareContentBackend;
 import flight.types.DeviceBackend;
+import flight.types.DeviceCapabilities;
+import flight.types.DeviceDisplayMetrics;
+import flight.types.DeviceInfo;
 import flight.types.Entity;
+import flight.types.EntityConstruction;
+import flight.types.EntityRuntime;
 import flight.types.FileSystemBasicBackend;
+import flight.types.GeoPosition;
+import flight.types.GeoPositionResult;
+import flight.types.GeolocationAccessOutcome;
 import flight.types.GeolocationBackend;
+import flight.types.GeolocationErrorReason;
+import flight.types.GeolocationRequestOptions;
 import flight.types.HapticsBackend;
 import flight.types.MessageDialogBackend;
 import flight.types.MobileOsProfile;
 import flight.types.PromptDialogBackend;
+import flight.types.SafeAreaInsets;
 import flight.types.SoftKeyboardAccessoryBarBackend;
 import flight.types.SoftKeyboardChangeBackend;
+import flight.types.SoftKeyboardChangeSubscription;
+import flight.types.SoftKeyboardInfo;
 import flight.types.SoftKeyboardInfoBackend;
+import flight.types.SoftKeyboardResizeMode;
 import flight.types.SoftKeyboardResizeModeWriteBackend;
 import flight.types.SoftKeyboardScrollAssistBackend;
+import flight.types.SoftKeyboardSetterResult;
 import flight.types.SoftKeyboardStyleBackend;
+import flight.types.SoftKeyboardStyleKind;
 import flight.types.SoftKeyboardVisibilityBackend;
+import flight.types.SoftKeyboardVisibilityResult;
 import flight.types.StatusBarColorBackend;
 import flight.types.StatusBarInfoBackend;
 import flight.types.StatusBarOverlaysBackend;
@@ -60,7 +78,7 @@ class HostCapacitor {
     return cast null;
   }
 
-  public static function createCapacitorDeviceBackend(capacitor:CapacitorApi):{ >DeviceBackend, >Entity, } {
+  public static function createCapacitorDeviceBackend(capacitor:CapacitorApi):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getCapabilities:DeviceCapabilities->DeviceCapabilities; var getDisplayMetrics:DeviceDisplayMetrics->DeviceDisplayMetrics; var getId:Void->String; var getInfo:DeviceInfo->DeviceInfo; var getSafeAreaInsets:SafeAreaInsets->SafeAreaInsets; @:optional var refresh:Void->Void; } {
     return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorDeviceBackend(capacitor);
     return cast null;
   }
@@ -70,7 +88,7 @@ class HostCapacitor {
     return cast null;
   }
 
-  public static function createCapacitorGeolocationBackend(capacitor:CapacitorApi):{ >GeolocationBackend, >Entity, } {
+  public static function createCapacitorGeolocationBackend(capacitor:CapacitorApi):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getCurrentPosition:GeolocationRequestOptions->flight._internal._Promise<Null<GeoPosition>>; var getCurrentPositionResult:GeolocationRequestOptions->flight._internal._Promise<GeoPositionResult>; var isAvailable:Void->Bool; var watchPosition:(GeoPosition->Void)->GeolocationRequestOptions->(GeolocationErrorReason->Void)->Float; var clearWatch:Float->Void; var promptForAccess:Void->flight._internal._Promise<GeolocationAccessOutcome>; } {
     return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorGeolocationBackend(capacitor);
     return cast null;
   }
@@ -80,7 +98,7 @@ class HostCapacitor {
     return cast null;
   }
 
-  public static function createCapacitorMessageDialogBackend(capacitor:CapacitorApi):{ >MessageDialogBackend, >Entity, } {
+  public static function createCapacitorMessageDialogBackend(capacitor:CapacitorApi):MessageDialogBackend {
     return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorMessageDialogBackend(capacitor);
     return cast null;
   }
@@ -90,7 +108,7 @@ class HostCapacitor {
     return cast null;
   }
 
-  public static function createCapacitorPromptDialogBackend(capacitor:CapacitorApi):{ >PromptDialogBackend, >Entity, } {
+  public static function createCapacitorPromptDialogBackend(capacitor:CapacitorApi):PromptDialogBackend {
     return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorPromptDialogBackend(capacitor);
     return cast null;
   }
@@ -105,37 +123,37 @@ class HostCapacitor {
     return cast null;
   }
 
-  public static function createCapacitorSoftKeyboardAccessoryBarBackend(capacitor:CapacitorApi):{ >SoftKeyboardAccessoryBarBackend, >Entity, } {
+  public static function createCapacitorSoftKeyboardAccessoryBarBackend(capacitor:CapacitorApi):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var setAccessoryBarVisible:Bool->flight._internal._Promise<SoftKeyboardSetterResult>; } {
     return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorSoftKeyboardAccessoryBarBackend(capacitor);
     return cast null;
   }
 
-  public static function createCapacitorSoftKeyboardChangeBackend(capacitor:CapacitorApi):{ >SoftKeyboardChangeBackend, >Entity, } {
+  public static function createCapacitorSoftKeyboardChangeBackend(capacitor:CapacitorApi):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>; } {
     return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorSoftKeyboardChangeBackend(capacitor);
     return cast null;
   }
 
-  public static function createCapacitorSoftKeyboardInfoBackend(capacitor:CapacitorApi):{ >SoftKeyboardInfoBackend, >Entity, } {
+  public static function createCapacitorSoftKeyboardInfoBackend(capacitor:CapacitorApi):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getInfo:SoftKeyboardInfo->SoftKeyboardInfo; } {
     return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorSoftKeyboardInfoBackend(capacitor);
     return cast null;
   }
 
-  public static function createCapacitorSoftKeyboardResizeModeWriteBackend(capacitor:CapacitorApi):{ >SoftKeyboardResizeModeWriteBackend, >Entity, } {
+  public static function createCapacitorSoftKeyboardResizeModeWriteBackend(capacitor:CapacitorApi):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var setResizeMode:SoftKeyboardResizeMode->flight._internal._Promise<SoftKeyboardSetterResult>; } {
     return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorSoftKeyboardResizeModeWriteBackend(capacitor);
     return cast null;
   }
 
-  public static function createCapacitorSoftKeyboardScrollAssistBackend(capacitor:CapacitorApi):{ >SoftKeyboardScrollAssistBackend, >Entity, } {
+  public static function createCapacitorSoftKeyboardScrollAssistBackend(capacitor:CapacitorApi):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var setScrollAssistEnabled:Bool->flight._internal._Promise<SoftKeyboardSetterResult>; } {
     return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorSoftKeyboardScrollAssistBackend(capacitor);
     return cast null;
   }
 
-  public static function createCapacitorSoftKeyboardStyleBackend(capacitor:CapacitorApi):{ >SoftKeyboardStyleBackend, >Entity, } {
+  public static function createCapacitorSoftKeyboardStyleBackend(capacitor:CapacitorApi):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var setStyle:SoftKeyboardStyleKind->flight._internal._Promise<SoftKeyboardSetterResult>; } {
     return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorSoftKeyboardStyleBackend(capacitor);
     return cast null;
   }
 
-  public static function createCapacitorSoftKeyboardVisibilityBackend(capacitor:CapacitorApi):{ >SoftKeyboardVisibilityBackend, >Entity, } {
+  public static function createCapacitorSoftKeyboardVisibilityBackend(capacitor:CapacitorApi):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; } {
     return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorSoftKeyboardVisibilityBackend(capacitor);
     return cast null;
   }
@@ -143,6 +161,94 @@ class HostCapacitor {
   public static function createCapacitorStatusBarBackend(capacitor:CapacitorApi):{ >Entity, >StatusBarColorBackend, >StatusBarInfoBackend, >StatusBarOverlaysBackend, >StatusBarStyleBackend, >StatusBarVisibilityBackend, } {
     return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorStatusBarBackend(capacitor);
     return cast null;
+  }
+
+  public static function initializeCapacitorAndroidAppCapabilities(out:EntityConstruction<CapacitorAndroidAppCapabilities>, common:CapacitorCommonAppCapabilities, capacitor:CapacitorApi):Void {
+    Facade_HostCapacitor_flight__HostCapacitor.initializeCapacitorAndroidAppCapabilities(out, common, capacitor);
+  }
+
+  public static function initializeCapacitorClipboardBackend(out:EntityConstruction<CapacitorClipboardBackend__capacitorClipboard>, clipboard:flight._internal._IndexedAccess<CapacitorApi, String>):Void {
+    Facade_HostCapacitor_flight__HostCapacitor.initializeCapacitorClipboardBackend(out, clipboard);
+  }
+
+  public static function initializeCapacitorCommonAppCapabilities(out:EntityConstruction<CapacitorCommonAppCapabilities>, capacitor:CapacitorApi):Void {
+    Facade_HostCapacitor_flight__HostCapacitor.initializeCapacitorCommonAppCapabilities(out, capacitor);
+  }
+
+  public static function initializeCapacitorConnectivityBackend(out:EntityConstruction<CapacitorConnectivityBackend__capacitorConnectivity>, capacitor:CapacitorApi):Void {
+    Facade_HostCapacitor_flight__HostCapacitor.initializeCapacitorConnectivityBackend(out, capacitor);
+  }
+
+  public static function initializeCapacitorDeviceBackend(out:EntityConstruction<DeviceBackend>, capacitor:CapacitorApi):Void {
+    Facade_HostCapacitor_flight__HostCapacitor.initializeCapacitorDeviceBackend(out, capacitor);
+  }
+
+  public static function initializeCapacitorFileSystemBackend(out:EntityConstruction<{ >FileSystemBasicBackend, >Entity, }>, capacitor:CapacitorApi):Void {
+    Facade_HostCapacitor_flight__HostCapacitor.initializeCapacitorFileSystemBackend(out, capacitor);
+  }
+
+  public static function initializeCapacitorGeolocationBackend(out:EntityConstruction<GeolocationBackend>, capacitor:CapacitorApi):Void {
+    Facade_HostCapacitor_flight__HostCapacitor.initializeCapacitorGeolocationBackend(out, capacitor);
+  }
+
+  public static function initializeCapacitorHapticsBackend(out:EntityConstruction<HapticsBackend>, capacitor:CapacitorApi):Void {
+    Facade_HostCapacitor_flight__HostCapacitor.initializeCapacitorHapticsBackend(out, capacitor);
+  }
+
+  public static function initializeCapacitorHost<Profile:MobileOsProfile>(out:EntityConstruction<CapacitorHost<Profile>>, capacitor:CapacitorApi, profile:Profile):Void {
+    Facade_HostCapacitor_flight__HostCapacitor.initializeCapacitorHost(out, capacitor, profile);
+  }
+
+  public static function initializeCapacitorMessageDialogBackend(out:EntityConstruction<MessageDialogBackend>, capacitor:CapacitorApi):Void {
+    Facade_HostCapacitor_flight__HostCapacitor.initializeCapacitorMessageDialogBackend(out, capacitor);
+  }
+
+  public static function initializeCapacitorNotificationCapabilities(out:EntityConstruction<CapacitorNotificationCapabilities>, capacitor:CapacitorApi):Void {
+    Facade_HostCapacitor_flight__HostCapacitor.initializeCapacitorNotificationCapabilities(out, capacitor);
+  }
+
+  public static function initializeCapacitorPromptDialogBackend(out:EntityConstruction<PromptDialogBackend>, capacitor:CapacitorApi):Void {
+    Facade_HostCapacitor_flight__HostCapacitor.initializeCapacitorPromptDialogBackend(out, capacitor);
+  }
+
+  public static function initializeCapacitorProtocolCapabilities(out:EntityConstruction<CapacitorProtocolCapabilities>, capacitor:CapacitorApi):Void {
+    Facade_HostCapacitor_flight__HostCapacitor.initializeCapacitorProtocolCapabilities(out, capacitor);
+  }
+
+  public static function initializeCapacitorShareContentBackend(out:EntityConstruction<CapacitorShareContentBackend>, capacitor:CapacitorApi):Void {
+    Facade_HostCapacitor_flight__HostCapacitor.initializeCapacitorShareContentBackend(out, capacitor);
+  }
+
+  public static function initializeCapacitorSoftKeyboardAccessoryBarBackend(out:EntityConstruction<SoftKeyboardAccessoryBarBackend>, keyboard:flight._internal._IndexedAccess<CapacitorApi, String>):Void {
+    Facade_HostCapacitor_flight__HostCapacitor.initializeCapacitorSoftKeyboardAccessoryBarBackend(out, keyboard);
+  }
+
+  public static function initializeCapacitorSoftKeyboardChangeBackend(out:EntityConstruction<SoftKeyboardChangeBackend>, keyboard:flight._internal._IndexedAccess<CapacitorApi, String>):Void {
+    Facade_HostCapacitor_flight__HostCapacitor.initializeCapacitorSoftKeyboardChangeBackend(out, keyboard);
+  }
+
+  public static function initializeCapacitorSoftKeyboardInfoBackend(out:EntityConstruction<SoftKeyboardInfoBackend>, keyboard:flight._internal._IndexedAccess<CapacitorApi, String>):Void {
+    Facade_HostCapacitor_flight__HostCapacitor.initializeCapacitorSoftKeyboardInfoBackend(out, keyboard);
+  }
+
+  public static function initializeCapacitorSoftKeyboardResizeModeWriteBackend(out:EntityConstruction<SoftKeyboardResizeModeWriteBackend>, keyboard:flight._internal._IndexedAccess<CapacitorApi, String>):Void {
+    Facade_HostCapacitor_flight__HostCapacitor.initializeCapacitorSoftKeyboardResizeModeWriteBackend(out, keyboard);
+  }
+
+  public static function initializeCapacitorSoftKeyboardScrollAssistBackend(out:EntityConstruction<SoftKeyboardScrollAssistBackend>, keyboard:flight._internal._IndexedAccess<CapacitorApi, String>):Void {
+    Facade_HostCapacitor_flight__HostCapacitor.initializeCapacitorSoftKeyboardScrollAssistBackend(out, keyboard);
+  }
+
+  public static function initializeCapacitorSoftKeyboardStyleBackend(out:EntityConstruction<SoftKeyboardStyleBackend>, keyboard:flight._internal._IndexedAccess<CapacitorApi, String>):Void {
+    Facade_HostCapacitor_flight__HostCapacitor.initializeCapacitorSoftKeyboardStyleBackend(out, keyboard);
+  }
+
+  public static function initializeCapacitorSoftKeyboardVisibilityBackend(out:EntityConstruction<SoftKeyboardVisibilityBackend>, keyboard:flight._internal._IndexedAccess<CapacitorApi, String>):Void {
+    Facade_HostCapacitor_flight__HostCapacitor.initializeCapacitorSoftKeyboardVisibilityBackend(out, keyboard);
+  }
+
+  public static function initializeCapacitorStatusBarBackend(out:EntityConstruction<CapacitorStatusBarBackend__capacitorStatusBar>, capacitor:CapacitorApi):Void {
+    Facade_HostCapacitor_flight__HostCapacitor.initializeCapacitorStatusBarBackend(out, capacitor);
   }
 
   public static function registerCapacitorBackends<Profile:MobileOsProfile>(capacitor:CapacitorApi, profile:Profile):CapacitorHost<Profile> {

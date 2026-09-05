@@ -37,6 +37,7 @@ export const flashWindowFrame = api.flashWindowFrame;
 export const focusWindow = api.focusWindow;
 export const getWindowBounds = api.getWindowBounds;
 export const hideWindow = api.hideWindow;
+export const initializeApplicationWindow = api.initializeApplicationWindow;
 export const lockApplicationPointer = api.lockApplicationPointer;
 export const maximizeWindow = api.maximizeWindow;
 export const minimizeWindow = api.minimizeWindow;

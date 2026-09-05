@@ -4,4 +4,39 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics3DContactPoint = { var x:Float; var y:Float; var z:Float; var depth:Float; var featureId:Float; var rAX:Float; var rAY:Float; var rAZ:Float; var rBX:Float; var rBY:Float; var rBZ:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Physics3D)
+@:keep
+@:structInit
+class Physics3DContactPoint {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var x:Float;
+  public var y:Float;
+  public var z:Float;
+  public var depth:Float;
+  public var featureId:Float;
+  public var rAX:Float;
+  public var rAY:Float;
+  public var rAZ:Float;
+  public var rBX:Float;
+  public var rBY:Float;
+  public var rBZ:Float;
+
+  private function new(x:Float, y:Float, z:Float, depth:Float, featureId:Float, rAX:Float, rAY:Float, rAZ:Float, rBX:Float, rBY:Float, rBZ:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.x = x;
+    this.y = y;
+    this.z = z;
+    this.depth = depth;
+    this.featureId = featureId;
+    this.rAX = rAX;
+    this.rAY = rAY;
+    this.rAZ = rAZ;
+    this.rBX = rBX;
+    this.rBY = rBY;
+    this.rBZ = rBZ;
+  }
+}
+#else
+typedef Physics3DContactPoint = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var x:Float; var y:Float; var z:Float; var depth:Float; var featureId:Float; var rAX:Float; var rAY:Float; var rAZ:Float; var rBX:Float; var rBY:Float; var rBZ:Float; };
+#end

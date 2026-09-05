@@ -19,6 +19,7 @@ export const getMovieClipSignals = api.getMovieClipSignals;
 export const getMovieClipTotalFrames = api.getMovieClipTotalFrames;
 export const gotoAndPlayMovieClip = api.gotoAndPlayMovieClip;
 export const gotoAndStopMovieClip = api.gotoAndStopMovieClip;
+export const initializeMovieClipData = api.initializeMovieClipData;
 export const isMovieClipPlaying = api.isMovieClipPlaying;
 export const nextFrameMovieClip = api.nextFrameMovieClip;
 export const playMovieClip = api.playMovieClip;

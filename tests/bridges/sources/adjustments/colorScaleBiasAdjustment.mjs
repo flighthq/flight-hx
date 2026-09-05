@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createColorScaleBiasAdjustment = api.createColorScaleBiasAdjustment;
+export const initializeColorScaleBiasAdjustment = api.initializeColorScaleBiasAdjustment;

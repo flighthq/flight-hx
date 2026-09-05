@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SpriteData = { var texture:Null<Texture>; };
+#if !flight_struct_typedef
+@:allow(flight._Scene2D)
+@:allow(flight.types.Scale9SpriteData)
+@:keep
+@:structInit
+class SpriteData extends flight.types.Node2DData {
+  public var texture:Null<Texture>;
+
+  private function new(texture:Null<Texture>):Void {
+    super();
+    this.texture = texture;
+  }
+}
+#else
+typedef SpriteData = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var texture:Null<Texture>; };
+#end

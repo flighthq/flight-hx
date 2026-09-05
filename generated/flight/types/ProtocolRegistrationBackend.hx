@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class ProtocolRegistrationBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var getRegisteredSchemes:Void->Array<String>;
+  public var register:String->Bool;
+
+  private function new(getRegisteredSchemes:Void->Array<String>, register:String->Bool):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getRegisteredSchemes = getRegisteredSchemes;
+    this.register = register;
+  }
+}
+#else
 typedef ProtocolRegistrationBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; };
+#end

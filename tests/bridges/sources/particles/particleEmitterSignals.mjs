@@ -8,3 +8,4 @@ __syncDependencies();
 export const createParticleEmitterSignals = api.createParticleEmitterSignals;
 export const enableParticleEmitterSignals = api.enableParticleEmitterSignals;
 export const getParticleEmitterSignals = api.getParticleEmitterSignals;
+export const initializeParticleEmitterSignals = api.initializeParticleEmitterSignals;

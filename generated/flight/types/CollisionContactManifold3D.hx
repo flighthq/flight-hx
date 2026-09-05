@@ -4,4 +4,29 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CollisionContactManifold3D = { var overlapping:Bool; var normalX:Float; var normalY:Float; var normalZ:Float; var pointCount:Float; var points:Array<CollisionContactPoint3D>; };
+#if !flight_struct_typedef
+@:allow(flight._Collision)
+@:keep
+@:structInit
+class CollisionContactManifold3D {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var overlapping:Bool;
+  public var normalX:Float;
+  public var normalY:Float;
+  public var normalZ:Float;
+  public var pointCount:Float;
+  public var points:Array<CollisionContactPoint3D>;
+
+  private function new(overlapping:Bool, normalX:Float, normalY:Float, normalZ:Float, pointCount:Float, points:Array<CollisionContactPoint3D>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.overlapping = overlapping;
+    this.normalX = normalX;
+    this.normalY = normalY;
+    this.normalZ = normalZ;
+    this.pointCount = pointCount;
+    this.points = points;
+  }
+}
+#else
+typedef CollisionContactManifold3D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var overlapping:Bool; var normalX:Float; var normalY:Float; var normalZ:Float; var pointCount:Float; var points:Array<CollisionContactPoint3D>; };
+#end

@@ -4,4 +4,24 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ReorderNodeChildCommand = { var kind:Kind; var label:String; var child:NodeAny; var fromIndex:Float; var parent:NodeAny; var toIndex:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Command)
+@:keep
+@:structInit
+class ReorderNodeChildCommand extends flight.types.Command {
+  public var child:NodeAny;
+  public var fromIndex:Float;
+  public var parent:NodeAny;
+  public var toIndex:Float;
+
+  private function new(kind:Kind, label:String, child:NodeAny, fromIndex:Float, parent:NodeAny, toIndex:Float):Void {
+    super(kind, label);
+    this.child = child;
+    this.fromIndex = fromIndex;
+    this.parent = parent;
+    this.toIndex = toIndex;
+  }
+}
+#else
+typedef ReorderNodeChildCommand = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Kind; var label:String; var child:NodeAny; var fromIndex:Float; var parent:NodeAny; var toIndex:Float; };
+#end

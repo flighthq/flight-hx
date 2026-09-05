@@ -3,7 +3,8 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Geometry.copyMatrix4;
 import flight._Geometry.createAabb;
 import flight._Geometry.createMatrix3;
@@ -24,7 +25,7 @@ import flight._Node.getNodeRuntime;
 import flight._Node.getNodeWorldMatrix4;
 import flight.types.Aabb;
 import flight.types.AabbLike;
-import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.LogLevel;
 import flight.types.Matrix3;
 import flight.types.Matrix3Like;
@@ -280,8 +281,9 @@ class _Skeleton3D {
   }
 
   public static function cloneSkeleton3D(skeleton:Skeleton3D):Skeleton3D {
-    var clone:Skeleton3D = cast _Runtime.UNDEFINED;
-    clone = (cast createEntity(({ final __callArgument24:Dynamic = ({ inverseBindMatrices: (cast new flight._internal._Float32Array(skeleton.inverseBindMatrices) : Dynamic), jointMatrices: (cast new flight._internal._Float32Array(skeleton.jointMatrices) : Dynamic), joints: (cast _Runtime.slice(skeleton.joints, 0, null) : Dynamic), names: (cast ((cast _Runtime.strictEquals(skeleton.names, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast _Runtime.strictEquals(skeleton.names, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.slice(skeleton.names, 0, null) : Dynamic)) : Dynamic)) : Dynamic), normalMatrices: (cast new flight._internal._Float32Array(skeleton.normalMatrices) : Dynamic) } : Skeleton3D); __callArgument24; })) : Skeleton3D);
+    var clone:EntityConstruction<Skeleton3D> = cast _Runtime.UNDEFINED;
+    clone = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ inverseBindMatrices: cast _Runtime.UNDEFINED, jointMatrices: cast _Runtime.UNDEFINED, joints: cast _Runtime.UNDEFINED, names: cast _Runtime.UNDEFINED, normalMatrices: cast _Runtime.UNDEFINED } : Skeleton3D); }) #end));
+    initializeSkeleton3D(({ final __callArgument24:Dynamic = clone; __callArgument24; }), new flight._internal._Float32Array(skeleton.inverseBindMatrices), new flight._internal._Float32Array(skeleton.jointMatrices), _Runtime.slice(skeleton.joints, 0, null), ((cast _Runtime.strictEquals(skeleton.names, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast _Runtime.strictEquals(skeleton.names, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.slice(skeleton.names, 0, null) : Dynamic)) : Dynamic)), new flight._internal._Float32Array(skeleton.normalMatrices));
     return cast clone;
     return cast null;
   }
@@ -290,6 +292,7 @@ class _Skeleton3D {
     var sourceJoints:Array<Node3D> = cast _Runtime.UNDEFINED;
     var joints:Array<Node3D> = cast _Runtime.UNDEFINED;
     var clonesBySource:flight._internal._Map<Node3D, Node3D> = cast _Runtime.UNDEFINED;
+    var out:EntityConstruction<Skeleton3D> = cast _Runtime.UNDEFINED;
     sourceJoints = skeleton.joints;
     joints = _Runtime.createArray(_Runtime.field(sourceJoints, 'length'));
     clonesBySource = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
@@ -313,7 +316,9 @@ class _Skeleton3D {
         i++;
       }
     }
-    return cast (cast createEntity(({ final __callArgument28:Dynamic = ({ inverseBindMatrices: (cast new flight._internal._Float32Array(skeleton.inverseBindMatrices) : Dynamic), jointMatrices: (cast new flight._internal._Float32Array(skeleton.jointMatrices) : Dynamic), joints: (cast joints : Dynamic), names: (cast ((cast _Runtime.strictEquals(skeleton.names, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast _Runtime.strictEquals(skeleton.names, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.slice(skeleton.names, 0, null) : Dynamic)) : Dynamic)) : Dynamic), normalMatrices: (cast new flight._internal._Float32Array(skeleton.normalMatrices) : Dynamic) } : Skeleton3D); __callArgument28; })) : Skeleton3D);
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ inverseBindMatrices: cast _Runtime.UNDEFINED, jointMatrices: cast _Runtime.UNDEFINED, joints: cast _Runtime.UNDEFINED, names: cast _Runtime.UNDEFINED, normalMatrices: cast _Runtime.UNDEFINED } : Skeleton3D); }) #end));
+    initializeSkeleton3D(({ final __callArgument28:Dynamic = out; __callArgument28; }), new flight._internal._Float32Array(skeleton.inverseBindMatrices), new flight._internal._Float32Array(skeleton.jointMatrices), ({ final __callArgument29:Dynamic = joints; __callArgument29; }), ((cast _Runtime.strictEquals(skeleton.names, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast _Runtime.strictEquals(skeleton.names, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.slice(skeleton.names, 0, null) : Dynamic)) : Dynamic)), new flight._internal._Float32Array(skeleton.normalMatrices));
+    return cast out;
     return cast null;
   }
 
@@ -339,9 +344,9 @@ class _Skeleton3D {
             i++;
           }
         }
-        multiplyMatrix4(({ final __callArgument30:Dynamic = _Skeleton3D._result__skeleton3d; __callArgument30; }), (cast getNodeWorldMatrix4((cast flight._internal._StaticIndex.readArray(joints, j) : Dynamic)) : Matrix4Like), ({ final __callArgument31:Dynamic = _Skeleton3D._invBind__skeleton3d; __callArgument31; }));
+        multiplyMatrix4(({ final __callArgument32:Dynamic = _Skeleton3D._result__skeleton3d; __callArgument32; }), (cast getNodeWorldMatrix4((cast flight._internal._StaticIndex.readArray(joints, j) : Dynamic)) : Matrix4Like), ({ final __callArgument33:Dynamic = _Skeleton3D._invBind__skeleton3d; __callArgument33; }));
         (cast jointMatrices : flight._internal._Float32Array).set(_Skeleton3D._result__skeleton3d.m, Std.int(base));
-        setMatrix3NormalFromMatrix4(({ final __callArgument34:Dynamic = _Skeleton3D._normal__skeleton3d; __callArgument34; }), ({ final __callArgument35:Dynamic = _Skeleton3D._result__skeleton3d; __callArgument35; }));
+        setMatrix3NormalFromMatrix4(({ final __callArgument36:Dynamic = _Skeleton3D._normal__skeleton3d; __callArgument36; }), ({ final __callArgument37:Dynamic = _Skeleton3D._result__skeleton3d; __callArgument37; }));
         var n:Float = (j * 12.0);
         var m:flight._internal._Float32Array = _Skeleton3D._normal__skeleton3d.m;
         {
@@ -361,10 +366,11 @@ class _Skeleton3D {
 
   public static function createSkeleton3D(joints:Array<Node3D>, ?inverseBindMatrices:flight._internal._Float32Array, ?names:Null<Array<String>>):Skeleton3D {
     var count:Float = cast _Runtime.UNDEFINED;
-    var skeleton:Skeleton3D = cast _Runtime.UNDEFINED;
+    var skeleton:EntityConstruction<Skeleton3D> = cast _Runtime.UNDEFINED;
     count = _Runtime.field(joints, 'length');
-    skeleton = (cast createEntity(({ final __callArgument38:Dynamic = ({ inverseBindMatrices: (cast _Runtime.coalesce(inverseBindMatrices, function():Dynamic return cast new flight._internal._Float32Array((count * 16.0))) : Dynamic), jointMatrices: (cast new flight._internal._Float32Array((count * 16.0)) : Dynamic), joints: (cast joints : Dynamic), names: (cast _Runtime.coalesce(names, function():Dynamic return cast null) : Dynamic), normalMatrices: (cast new flight._internal._Float32Array((count * 12.0)) : Dynamic) } : Skeleton3D); __callArgument38; })) : Skeleton3D);
-    if ((cast _Runtime.strictEquals(inverseBindMatrices, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { setSkeleton3DBindPose(({ final __callArgument40:Dynamic = skeleton; __callArgument40; })); }
+    skeleton = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ inverseBindMatrices: cast _Runtime.UNDEFINED, jointMatrices: cast _Runtime.UNDEFINED, joints: cast _Runtime.UNDEFINED, names: cast _Runtime.UNDEFINED, normalMatrices: cast _Runtime.UNDEFINED } : Skeleton3D); }) #end));
+    initializeSkeleton3D(({ final __callArgument40:Dynamic = skeleton; __callArgument40; }), ({ final __callArgument41:Dynamic = _Runtime.coalesce(inverseBindMatrices, function():Dynamic return cast new flight._internal._Float32Array((count * 16.0))); __callArgument41; }), new flight._internal._Float32Array((count * 16.0)), ({ final __callArgument42:Dynamic = joints; __callArgument42; }), ({ final __callArgument43:Dynamic = _Runtime.coalesce(names, function():Dynamic return cast null); __callArgument43; }), new flight._internal._Float32Array((count * 12.0)));
+    if ((cast _Runtime.strictEquals(inverseBindMatrices, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { setSkeleton3DBindPose(({ final __callArgument48:Dynamic = skeleton; __callArgument48; })); }
     return cast skeleton;
     return cast null;
   }
@@ -418,14 +424,24 @@ class _Skeleton3D {
     __destructure2 = skeleton;
     joints = __destructure2.joints;
     if ((cast ((cast ((cast jointIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast jointIndex : Float) >= (cast _Runtime.field(joints, 'length') : Float)) : Bool)) : Bool)) { return cast false; }
-    copyMatrix4(({ final __callArgument42:Dynamic = out; __callArgument42; }), (cast getNodeWorldMatrix4((cast flight._internal._StaticIndex.readArray(joints, jointIndex) : Dynamic)) : Matrix4Like));
+    copyMatrix4(({ final __callArgument50:Dynamic = out; __callArgument50; }), (cast getNodeWorldMatrix4((cast flight._internal._StaticIndex.readArray(joints, jointIndex) : Dynamic)) : Matrix4Like));
     return cast true;
     return cast null;
   }
 
   public static function getSkeleton3DJointWorldMatrixByName(out:Matrix4Like, skeleton:Skeleton3D, name:String):Bool {
-    return cast (cast getSkeleton3DJointWorldMatrix(({ final __callArgument44:Dynamic = out; __callArgument44; }), ({ final __callArgument45:Dynamic = skeleton; __callArgument45; }), (cast (cast getSkeleton3DJointIndexByName(({ final __callArgument46:Dynamic = skeleton; __callArgument46; }), (cast name : String)) : Float) : Float)) : Bool);
+    return cast (cast getSkeleton3DJointWorldMatrix(({ final __callArgument52:Dynamic = out; __callArgument52; }), ({ final __callArgument53:Dynamic = skeleton; __callArgument53; }), (cast (cast getSkeleton3DJointIndexByName(({ final __callArgument54:Dynamic = skeleton; __callArgument54; }), (cast name : String)) : Float) : Float)) : Bool);
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeSkeleton3D(out:EntityConstruction<Skeleton3D>, inverseBindMatrices:flight._internal._Float32Array, jointMatrices:flight._internal._Float32Array, joints:Array<Node3D>, names:flight._internal._IndexedAccess<Skeleton3D, String>, normalMatrices:flight._internal._Float32Array):Void {
+    _Runtime.setField(out, 'inverseBindMatrices', inverseBindMatrices);
+    _Runtime.setField(out, 'jointMatrices', jointMatrices);
+    _Runtime.setField(out, 'joints', joints);
+    _Runtime.setField(out, 'names', names);
+    _Runtime.setField(out, 'normalMatrices', normalMatrices);
   }
 
   public static function setSkeleton3DBindPose(skeleton:Skeleton3D):Void {
@@ -438,10 +454,10 @@ class _Skeleton3D {
     {
       var j:Float = 0.0;
       while ((cast ((cast j : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
-        if ((cast (cast inverseMatrix4(({ final __callArgument52:Dynamic = _Skeleton3D._result__skeleton3d; __callArgument52; }), (cast getNodeWorldMatrix4((cast flight._internal._StaticIndex.readArray(joints, j) : Dynamic)) : Matrix4Like)) : Bool) : Bool)) {
+        if ((cast (cast inverseMatrix4(({ final __callArgument60:Dynamic = _Skeleton3D._result__skeleton3d; __callArgument60; }), (cast getNodeWorldMatrix4((cast flight._internal._StaticIndex.readArray(joints, j) : Dynamic)) : Matrix4Like)) : Bool) : Bool)) {
           (cast inverseBindMatrices : flight._internal._Float32Array).set(_Skeleton3D._result__skeleton3d.m, Std.int((j * 16.0)));
         } else {
-          setMatrix4Identity(({ final __callArgument54:Dynamic = _Skeleton3D._result__skeleton3d; __callArgument54; }));
+          setMatrix4Identity(({ final __callArgument62:Dynamic = _Skeleton3D._result__skeleton3d; __callArgument62; }));
           (cast inverseBindMatrices : flight._internal._Float32Array).set(_Skeleton3D._result__skeleton3d.m, Std.int((j * 16.0)));
           _Runtime.callOptionalValue(_Skeleton3D.skeleton3DBindPoseGuard__skeleton3d, cast ([skeleton, j] : Array<Dynamic>));
         }
@@ -497,11 +513,11 @@ class _Skeleton3D {
     vertices = __destructure0.vertices;
     floatsPerVertex = (layout.stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), floatsPerVertex)) | 0) : Dynamic) : (cast 0.0 : Dynamic));
-    positionOffset = (cast _Skeleton3D.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument56:Dynamic = layout; __callArgument56; }), (cast 'position' : String)) : Float);
-    normalOffset = (cast _Skeleton3D.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument58:Dynamic = layout; __callArgument58; }), (cast 'normal' : String)) : Float);
+    positionOffset = (cast _Skeleton3D.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument64:Dynamic = layout; __callArgument64; }), (cast 'position' : String)) : Float);
+    normalOffset = (cast _Skeleton3D.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument66:Dynamic = layout; __callArgument66; }), (cast 'normal' : String)) : Float);
     positions = new flight._internal._Float32Array((vertexCount * 3.0));
     normals = new flight._internal._Float32Array((vertexCount * 3.0));
-    tangentOffset = (cast _Skeleton3D.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument60:Dynamic = layout; __callArgument60; }), (cast 'tangent' : String)) : Float);
+    tangentOffset = (cast _Skeleton3D.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument68:Dynamic = layout; __callArgument68; }), (cast 'tangent' : String)) : Float);
     tangents = new flight._internal._Float32Array(((cast ((cast tangentOffset : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (vertexCount * 4.0) : Dynamic) : (cast 0.0 : Dynamic)));
     joints = new flight._internal._Float32Array((vertexCount * 4.0));
     weights = new flight._internal._Float32Array((vertexCount * 4.0));
@@ -529,13 +545,13 @@ class _Skeleton3D {
           flight._internal._StaticIndex.writeFloat32ArrayTyped((cast tangents : flight._internal._Float32Array), (cast (w + 2.0) : Float), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast vertices : flight._internal._Float32Array), (cast ((base + tangentOffset) + 2.0) : Float)) : Float));
           flight._internal._StaticIndex.writeFloat32ArrayTyped((cast tangents : flight._internal._Float32Array), (cast (w + 3.0) : Float), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast vertices : flight._internal._Float32Array), (cast ((base + tangentOffset) + 3.0) : Float)) : Float));
         }
-        if ((cast (cast getMeshGeometryVertexJoints0(({ final __callArgument62:Dynamic = joint; __callArgument62; }), ({ final __callArgument63:Dynamic = geometry; __callArgument63; }), (cast v : Float)) : Bool) : Bool)) {
+        if ((cast (cast getMeshGeometryVertexJoints0(({ final __callArgument70:Dynamic = joint; __callArgument70; }), ({ final __callArgument71:Dynamic = geometry; __callArgument71; }), (cast v : Float)) : Bool) : Bool)) {
           flight._internal._StaticIndex.writeFloat32ArrayTyped((cast joints : flight._internal._Float32Array), (cast w : Float), (cast (cast joint : { var w:Float; var x:Float; var y:Float; var z:Float; }).x : Float));
           flight._internal._StaticIndex.writeFloat32ArrayTyped((cast joints : flight._internal._Float32Array), (cast (w + 1.0) : Float), (cast (cast joint : { var w:Float; var x:Float; var y:Float; var z:Float; }).y : Float));
           flight._internal._StaticIndex.writeFloat32ArrayTyped((cast joints : flight._internal._Float32Array), (cast (w + 2.0) : Float), (cast (cast joint : { var w:Float; var x:Float; var y:Float; var z:Float; }).z : Float));
           flight._internal._StaticIndex.writeFloat32ArrayTyped((cast joints : flight._internal._Float32Array), (cast (w + 3.0) : Float), (cast (cast joint : { var w:Float; var x:Float; var y:Float; var z:Float; }).w : Float));
         }
-        if ((cast (cast getMeshGeometryVertexWeights0(({ final __callArgument66:Dynamic = weight; __callArgument66; }), ({ final __callArgument67:Dynamic = geometry; __callArgument67; }), (cast v : Float)) : Bool) : Bool)) {
+        if ((cast (cast getMeshGeometryVertexWeights0(({ final __callArgument74:Dynamic = weight; __callArgument74; }), ({ final __callArgument75:Dynamic = geometry; __callArgument75; }), (cast v : Float)) : Bool) : Bool)) {
           flight._internal._StaticIndex.writeFloat32ArrayTyped((cast weights : flight._internal._Float32Array), (cast w : Float), (cast (cast weight : { var w:Float; var x:Float; var y:Float; var z:Float; }).x : Float));
           flight._internal._StaticIndex.writeFloat32ArrayTyped((cast weights : flight._internal._Float32Array), (cast (w + 1.0) : Float), (cast (cast weight : { var w:Float; var x:Float; var y:Float; var z:Float; }).y : Float));
           flight._internal._StaticIndex.writeFloat32ArrayTyped((cast weights : flight._internal._Float32Array), (cast (w + 2.0) : Float), (cast (cast weight : { var w:Float; var x:Float; var y:Float; var z:Float; }).z : Float));
@@ -561,15 +577,15 @@ class _Skeleton3D {
     var skinnedPositions:flight._internal._Float32Array = cast _Runtime.UNDEFINED;
     var skinnedTangents:flight._internal._Float32Array = cast _Runtime.UNDEFINED;
     var vertexCount:Float = cast _Runtime.UNDEFINED;
-    skinVertices(bindPose.skinnedPositions, bindPose.skinnedNormals, bindPose.positions, bindPose.normals, ({ final __callArgument70:Dynamic = bindPose.joints; __callArgument70; }), bindPose.weights, skeleton.jointMatrices, skeleton.normalMatrices);
-    skinTangents(bindPose.skinnedTangents, bindPose.tangents, ({ final __callArgument72:Dynamic = bindPose.joints; __callArgument72; }), bindPose.weights, skeleton.jointMatrices);
+    skinVertices(bindPose.skinnedPositions, bindPose.skinnedNormals, bindPose.positions, bindPose.normals, ({ final __callArgument78:Dynamic = bindPose.joints; __callArgument78; }), bindPose.weights, skeleton.jointMatrices, skeleton.normalMatrices);
+    skinTangents(bindPose.skinnedTangents, bindPose.tangents, ({ final __callArgument80:Dynamic = bindPose.joints; __callArgument80; }), bindPose.weights, skeleton.jointMatrices);
     __destructure1 = geometry;
     layout = __destructure1.layout;
     vertices = __destructure1.vertices;
     floatsPerVertex = (layout.stride / 4.0);
-    positionOffset = (cast _Skeleton3D.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument74:Dynamic = layout; __callArgument74; }), (cast 'position' : String)) : Float);
-    normalOffset = (cast _Skeleton3D.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument76:Dynamic = layout; __callArgument76; }), (cast 'normal' : String)) : Float);
-    tangentOffset = ((cast ((cast _Runtime.field(bindPose.tangents, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast _Skeleton3D.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument78:Dynamic = layout; __callArgument78; }), (cast 'tangent' : String)) : Float) : Dynamic) : (cast -1.0 : Dynamic));
+    positionOffset = (cast _Skeleton3D.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument82:Dynamic = layout; __callArgument82; }), (cast 'position' : String)) : Float);
+    normalOffset = (cast _Skeleton3D.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument84:Dynamic = layout; __callArgument84; }), (cast 'normal' : String)) : Float);
+    tangentOffset = ((cast ((cast _Runtime.field(bindPose.tangents, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast _Skeleton3D.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument86:Dynamic = layout; __callArgument86; }), (cast 'tangent' : String)) : Float) : Dynamic) : (cast -1.0 : Dynamic));
     __destructure2 = bindPose;
     skinnedNormals = __destructure2.skinnedNormals;
     skinnedPositions = __destructure2.skinnedPositions;
@@ -616,8 +632,8 @@ class _Skeleton3D {
     vertices = __destructure3.vertices;
     floatsPerVertex = (layout.stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.min((_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), floatsPerVertex)) | 0), _Runtime.divideNumbers(_Runtime.field(bindPose.positions, 'length'), 3.0)) : Dynamic) : (cast 0.0 : Dynamic));
-    positionOffset = (cast _Skeleton3D.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument80:Dynamic = layout; __callArgument80; }), (cast 'position' : String)) : Float);
-    normalOffset = (cast _Skeleton3D.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument82:Dynamic = layout; __callArgument82; }), (cast 'normal' : String)) : Float);
+    positionOffset = (cast _Skeleton3D.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument88:Dynamic = layout; __callArgument88; }), (cast 'position' : String)) : Float);
+    normalOffset = (cast _Skeleton3D.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument90:Dynamic = layout; __callArgument90; }), (cast 'normal' : String)) : Float);
     {
       var v:Float = 0.0;
       while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
@@ -757,8 +773,8 @@ class _Skeleton3D {
   }
 
   public static function updateMeshDeformation(mesh:Mesh):Void {
-    updateMeshMorph(({ final __callArgument84:Dynamic = mesh; __callArgument84; }));
-    updateMeshSkin(({ final __callArgument86:Dynamic = mesh; __callArgument86; }));
+    updateMeshMorph(({ final __callArgument92:Dynamic = mesh; __callArgument92; }));
+    updateMeshSkin(({ final __callArgument94:Dynamic = mesh; __callArgument94; }));
   }
 
   public static function updateMeshSkin(mesh:Mesh):Void {
@@ -769,13 +785,13 @@ class _Skeleton3D {
     if ((cast _Runtime.looseEquals(skin, null) : Bool)) { return; }
     computeSkeleton3DJointMatrices((cast skin : { var skeleton:Skeleton3D; }).skeleton);
     geometry = mesh.geometry;
-    bindPose = (cast getMeshGeometrySkinBindPose(({ final __callArgument88:Dynamic = geometry; __callArgument88; })) : Null<MeshSkinBindPose>);
+    bindPose = (cast getMeshGeometrySkinBindPose(({ final __callArgument96:Dynamic = geometry; __callArgument96; })) : Null<MeshSkinBindPose>);
     if ((cast _Runtime.strictEquals(bindPose, null) : Bool)) {
-      (bindPose = cast ((cast captureMeshSkinBindPose(({ final __callArgument90:Dynamic = geometry; __callArgument90; })) : MeshSkinBindPose) : Dynamic));
-      setMeshGeometrySkinBindPose(({ final __callArgument92:Dynamic = geometry; __callArgument92; }), (cast bindPose : Dynamic));
+      (bindPose = cast ((cast captureMeshSkinBindPose(({ final __callArgument98:Dynamic = geometry; __callArgument98; })) : MeshSkinBindPose) : Dynamic));
+      setMeshGeometrySkinBindPose(({ final __callArgument100:Dynamic = geometry; __callArgument100; }), (cast bindPose : Dynamic));
     } else { if ((cast !_Runtime.looseEquals(mesh.morph, null) : Bool)) {
-      updateMeshSkinBindPoseDeformInput(({ final __callArgument94:Dynamic = bindPose; __callArgument94; }), ({ final __callArgument95:Dynamic = geometry; __callArgument95; }));
+      updateMeshSkinBindPoseDeformInput(({ final __callArgument102:Dynamic = bindPose; __callArgument102; }), ({ final __callArgument103:Dynamic = geometry; __callArgument103; }));
     } }
-    skinMeshGeometry(({ final __callArgument98:Dynamic = geometry; __callArgument98; }), (cast skin : { var skeleton:Skeleton3D; }).skeleton, ({ final __callArgument99:Dynamic = bindPose; __callArgument99; }));
+    skinMeshGeometry(({ final __callArgument106:Dynamic = geometry; __callArgument106; }), (cast skin : { var skeleton:Skeleton3D; }).skeleton, ({ final __callArgument107:Dynamic = bindPose; __callArgument107; }));
   }
 }

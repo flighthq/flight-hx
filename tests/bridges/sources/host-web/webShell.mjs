@@ -5,4 +5,5 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const initializeWebShellExternalBackend = api.initializeWebShellExternalBackend;
 export const webShellExternalBackend = api.webShellExternalBackend;

@@ -4,6 +4,7 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._TextShaper as Facade_TextShaper_flight__TextShaper;
+import flight.types.Entity;
 import flight.types.FontMetrics;
 import flight.types.GlyphExtents;
 import flight.types.HasTextShaper;
@@ -30,7 +31,7 @@ class TextShaper {
     Facade_TextShaper_flight__TextShaper.clearTextShaperCache(cache);
   }
 
-  public static function createShapedRun():ShapedRun {
+  public static function createShapedRun():{ >ShapedRun, >Entity, } {
     return cast Facade_TextShaper_flight__TextShaper.createShapedRun();
     return cast null;
   }

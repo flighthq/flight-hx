@@ -4,4 +4,42 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FlightDocumentRefusalExplanation = { var actual:Null<Float>; var column:Null<Float>; var kind:Null<Kind>; var limit:Null<Float>; var line:Null<Float>; var mode:Null<String>; var offset:Null<Float>; var path:String; var reason:FlightDocumentRefusalReason; var resourceKey:Null<String>; var tokenKey:Null<String>; var version:Null<Float>; };
+#if !flight_struct_typedef
+@:allow(flight._SceneDocument)
+@:allow(flight._Tokens)
+@:keep
+@:structInit
+class FlightDocumentRefusalExplanation {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var actual:Null<Float>;
+  public var column:Null<Float>;
+  public var kind:Null<Kind>;
+  public var limit:Null<Float>;
+  public var line:Null<Float>;
+  public var mode:Null<String>;
+  public var offset:Null<Float>;
+  public var path:String;
+  public var reason:FlightDocumentRefusalReason;
+  public var resourceKey:Null<String>;
+  public var tokenKey:Null<String>;
+  public var version:Null<Float>;
+
+  private function new(actual:Null<Float>, column:Null<Float>, kind:Null<Kind>, limit:Null<Float>, line:Null<Float>, mode:Null<String>, offset:Null<Float>, path:String, reason:FlightDocumentRefusalReason, resourceKey:Null<String>, tokenKey:Null<String>, version:Null<Float>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.actual = actual;
+    this.column = column;
+    this.kind = kind;
+    this.limit = limit;
+    this.line = line;
+    this.mode = mode;
+    this.offset = offset;
+    this.path = path;
+    this.reason = reason;
+    this.resourceKey = resourceKey;
+    this.tokenKey = tokenKey;
+    this.version = version;
+  }
+}
+#else
+typedef FlightDocumentRefusalExplanation = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var actual:Null<Float>; var column:Null<Float>; var kind:Null<Kind>; var limit:Null<Float>; var line:Null<Float>; var mode:Null<String>; var offset:Null<Float>; var path:String; var reason:FlightDocumentRefusalReason; var resourceKey:Null<String>; var tokenKey:Null<String>; var version:Null<Float>; };
+#end

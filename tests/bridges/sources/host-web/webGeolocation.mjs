@@ -5,5 +5,4 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebGeolocation = api.enableHostWebGeolocation;
-export const resetHostWebGeolocationForTest = api.resetHostWebGeolocationForTest;
+export const webGeolocationBackend = api.webGeolocationBackend;

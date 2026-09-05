@@ -10,6 +10,7 @@ export const createWgpuPipelineLayout = api.createWgpuPipelineLayout;
 export const getActiveWgpuPipeline = api.getActiveWgpuPipeline;
 export const getWgpuBlendState = api.getWgpuBlendState;
 export const getWgpuPipeline = api.getWgpuPipeline;
+export const initializeWgpuBindGroupLayouts = api.initializeWgpuBindGroupLayouts;
 export const setWgpuMatrixFromTransform = api.setWgpuMatrixFromTransform;
 export const UNIFORM_BYTE_SIZE = api.UNIFORM_BYTE_SIZE;
 export const writeWgpuMatrixOnlyUniforms = api.writeWgpuMatrixOnlyUniforms;

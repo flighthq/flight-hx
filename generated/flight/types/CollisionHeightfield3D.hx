@@ -4,4 +4,45 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CollisionHeightfield3D = { var kind:String; var columns:Float; var rows:Float; var heights:Array<Float>; var cellSizeX:Float; var cellSizeZ:Float; var version:Float; var x:Float; var y:Float; var z:Float; var rotationX:Float; var rotationY:Float; var rotationZ:Float; var rotationW:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Collision)
+@:keep
+@:structInit
+class CollisionHeightfield3D {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var kind:String;
+  public var columns:Float;
+  public var rows:Float;
+  public var heights:Array<Float>;
+  public var cellSizeX:Float;
+  public var cellSizeZ:Float;
+  public var version:Float;
+  public var x:Float;
+  public var y:Float;
+  public var z:Float;
+  public var rotationX:Float;
+  public var rotationY:Float;
+  public var rotationZ:Float;
+  public var rotationW:Float;
+
+  private function new(kind:String, columns:Float, rows:Float, heights:Array<Float>, cellSizeX:Float, cellSizeZ:Float, version:Float, x:Float, y:Float, z:Float, rotationX:Float, rotationY:Float, rotationZ:Float, rotationW:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.kind = kind;
+    this.columns = columns;
+    this.rows = rows;
+    this.heights = heights;
+    this.cellSizeX = cellSizeX;
+    this.cellSizeZ = cellSizeZ;
+    this.version = version;
+    this.x = x;
+    this.y = y;
+    this.z = z;
+    this.rotationX = rotationX;
+    this.rotationY = rotationY;
+    this.rotationZ = rotationZ;
+    this.rotationW = rotationW;
+  }
+}
+#else
+typedef CollisionHeightfield3D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var columns:Float; var rows:Float; var heights:Array<Float>; var cellSizeX:Float; var cellSizeZ:Float; var version:Float; var x:Float; var y:Float; var z:Float; var rotationX:Float; var rotationY:Float; var rotationZ:Float; var rotationW:Float; };
+#end

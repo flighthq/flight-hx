@@ -4,4 +4,41 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TextLayoutGroup = { var ascent:Float; var descent:Float; var endIndex:Float; var format:TextFormat; var height:Float; var leading:Float; var lineIndex:Float; var offsetX:Float; var offsetY:Float; var positions:Array<Float>; var startIndex:Float; var width:Float; };
+#if !flight_struct_typedef
+@:allow(flight._TextLayout)
+@:keep
+@:structInit
+class TextLayoutGroup {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var ascent:Float;
+  public var descent:Float;
+  public var endIndex:Float;
+  public var format:TextFormat;
+  public var height:Float;
+  public var leading:Float;
+  public var lineIndex:Float;
+  public var offsetX:Float;
+  public var offsetY:Float;
+  public var positions:Array<Float>;
+  public var startIndex:Float;
+  public var width:Float;
+
+  private function new(ascent:Float, descent:Float, endIndex:Float, format:TextFormat, height:Float, leading:Float, lineIndex:Float, offsetX:Float, offsetY:Float, positions:Array<Float>, startIndex:Float, width:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.ascent = ascent;
+    this.descent = descent;
+    this.endIndex = endIndex;
+    this.format = format;
+    this.height = height;
+    this.leading = leading;
+    this.lineIndex = lineIndex;
+    this.offsetX = offsetX;
+    this.offsetY = offsetY;
+    this.positions = positions;
+    this.startIndex = startIndex;
+    this.width = width;
+  }
+}
+#else
+typedef TextLayoutGroup = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var ascent:Float; var descent:Float; var endIndex:Float; var format:TextFormat; var height:Float; var leading:Float; var lineIndex:Float; var offsetX:Float; var offsetY:Float; var positions:Array<Float>; var startIndex:Float; var width:Float; };
+#end

@@ -3,9 +3,11 @@
 function __syncDependencies() {}
 __syncDependencies();
 
-export * from './audioBackend.mjs';
 export * from './audioDecoderRegistry.mjs';
 export * from './audioFormat.mjs';
 export * from './audioResource.mjs';
 export * from './audioResourceFrom.mjs';
 export * from './audioResourceReference.mjs';
+export { initializeAudioResource } from './audioResource.mjs';
+export { initializeEmbeddedAudioResourceReference } from './audioResourceReference.mjs';
+export { initializeExternalAudioResourceReference } from './audioResourceReference.mjs';

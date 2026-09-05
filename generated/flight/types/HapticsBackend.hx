@@ -4,4 +4,38 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef HapticsBackend = { var cancel:Void->Bool; var capabilities:HapticsCapabilities->HapticsCapabilities; var impact:HapticImpactStyle->Float->Bool; var isSupported:Void->Bool; var notification:HapticNotificationType->Bool; @:optional var prepare:Void->Void; var selection:Void->Bool; var vibrate:Float->Bool; var vibratePattern:Array<Float>->Bool; @:optional var vibrateWaveform:Array<Float>->Array<Float>->Float->Bool; };
+#if !flight_struct_typedef
+@:allow(flight._HostCapacitor)
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class HapticsBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var cancel:Void->Bool;
+  public var capabilities:HapticsCapabilities->HapticsCapabilities;
+  public var impact:HapticImpactStyle->Float->Bool;
+  public var isSupported:Void->Bool;
+  public var notification:HapticNotificationType->Bool;
+  public var prepare:Null<Void->Void>;
+  public var selection:Void->Bool;
+  public var vibrate:Float->Bool;
+  public var vibratePattern:Array<Float>->Bool;
+  public var vibrateWaveform:Null<Array<Float>->Array<Float>->Float->Bool>;
+
+  private function new(cancel:Void->Bool, capabilities:HapticsCapabilities->HapticsCapabilities, impact:HapticImpactStyle->Float->Bool, isSupported:Void->Bool, notification:HapticNotificationType->Bool, ?prepare:Null<Void->Void>, selection:Void->Bool, vibrate:Float->Bool, vibratePattern:Array<Float>->Bool, ?vibrateWaveform:Null<Array<Float>->Array<Float>->Float->Bool>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.cancel = cancel;
+    this.capabilities = capabilities;
+    this.impact = impact;
+    this.isSupported = isSupported;
+    this.notification = notification;
+    this.prepare = prepare;
+    this.selection = selection;
+    this.vibrate = vibrate;
+    this.vibratePattern = vibratePattern;
+    this.vibrateWaveform = vibrateWaveform;
+  }
+}
+#else
+typedef HapticsBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var cancel:Void->Bool; var capabilities:HapticsCapabilities->HapticsCapabilities; var impact:HapticImpactStyle->Float->Bool; var isSupported:Void->Bool; var notification:HapticNotificationType->Bool; @:optional var prepare:Void->Void; var selection:Void->Bool; var vibrate:Float->Bool; var vibratePattern:Array<Float>->Bool; @:optional var vibrateWaveform:Array<Float>->Array<Float>->Float->Bool; };
+#end

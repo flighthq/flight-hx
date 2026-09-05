@@ -3,12 +3,13 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Path.createPath;
 import flight._Path.flattenPath;
 import flight._Path.getPathBounds;
-import flight.types.BackendExplanation;
 import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.FontLoadingBackend;
 import flight.types.FontResource;
 import flight.types.FontUrl;
@@ -26,37 +27,37 @@ import flight.types.RectangleLike;
 @:allow(flight._Font)
 @:keep
 @:structInit
-private class EntityShapeL21C23__glyphOutlineSource {
-  public var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>;
+private class EntityShapeL17C15__glyphOutlineSource {
   public var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>;
+  public var measureMetrics:Null<GlyphRasterizeOptions->Null<GlyphMetrics>>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
-  private function new(measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>, rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>):Void {
+  private function new(rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>, measureMetrics:Null<GlyphRasterizeOptions->Null<GlyphMetrics>>):Void {
     this.__symbol__EntityRuntime = null;
-    this.measureMetrics = measureMetrics;
     this.rasterize = rasterize;
+    this.measureMetrics = measureMetrics;
   }
 }
 #else
-private typedef EntityShapeL21C23__glyphOutlineSource = { var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL17C15__glyphOutlineSource = { var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; var measureMetrics:Null<GlyphRasterizeOptions->Null<GlyphMetrics>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 @:noCompletion
 class _Font {
-  public static function _loadFontFaceFromBytes(family:String, bytes:flight._internal._UInt8Array):flight._internal._Promise<flight._internal.dom.FontFace> {
+  public static function _loadFontFaceFromBytes(backend:FontLoadingBackend, family:String, bytes:flight._internal._UInt8Array):flight._internal._Promise<flight._internal.dom.FontFace> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
       var source:haxe.io.Bytes = cast _Runtime.UNDEFINED;
       source = _Runtime.slice((cast _Runtime.field(bytes, 'buffer') : haxe.io.Bytes), _Runtime.field(bytes, 'byteOffset'), _Runtime.addNumbers(_Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')));
-      return flight._internal._Async.resolve((cast _Font.loadAndRegisterFontFace___fontFaceLoad((cast family : String), ({ final __callArgument2:Dynamic = source; __callArgument2; })) : flight._internal._Promise<flight._internal.dom.FontFace>));
+      return flight._internal._Async.resolve((cast _Font.loadAndRegisterFontFace___fontFaceLoad(({ final __callArgument4:Dynamic = backend; __callArgument4; }), (cast family : String), ({ final __callArgument5:Dynamic = source; __callArgument5; })) : flight._internal._Promise<flight._internal.dom.FontFace>));
     }));
   }
 
-  public static function _loadFontFaceFromUrl(family:String, url:String):flight._internal._Promise<flight._internal.dom.FontFace> {
-    return cast (cast _Font.loadAndRegisterFontFace___fontFaceLoad((cast family : String), ({ final __callArgument4:Dynamic = 'url(' + Std.string(url) + ')'; __callArgument4; })) : flight._internal._Promise<flight._internal.dom.FontFace>);
+  public static function _loadFontFaceFromUrl(backend:FontLoadingBackend, family:String, url:String):flight._internal._Promise<flight._internal.dom.FontFace> {
+    return cast (cast _Font.loadAndRegisterFontFace___fontFaceLoad(({ final __callArgument8:Dynamic = backend; __callArgument8; }), (cast family : String), ({ final __callArgument9:Dynamic = 'url(' + Std.string(url) + ')'; __callArgument9; })) : flight._internal._Promise<flight._internal.dom.FontFace>);
     return cast null;
   }
 
-  public static function _loadFontFaceFromUrls(family:String, sources:Array<FontUrl>):flight._internal._Promise<flight._internal.dom.FontFace> {
+  public static function _loadFontFaceFromUrls(backend:FontLoadingBackend, family:String, sources:Array<FontUrl>):flight._internal._Promise<flight._internal.dom.FontFace> {
     var source:String = cast _Runtime.UNDEFINED;
     source = _Runtime.join((cast _Runtime.mapArray((cast sources : Array<FontUrl>), function(__parameter0:FontUrl, __unused1:Float, __unused2:Array<FontUrl>):String {
       var url:String = cast _Runtime.UNDEFINED;
@@ -68,22 +69,22 @@ class _Font {
       return cast ((cast !_Runtime.strictEquals(resolvedFormat, null) : Bool) ? (cast 'url(' + Std.string(url) + ') format(\'' + Std.string(resolvedFormat) + '\')' : Dynamic) : (cast 'url(' + Std.string(url) + ')' : Dynamic));
       return cast _Runtime.UNDEFINED;
     }, _Runtime.UNDEFINED)), ', ');
-    return cast (cast _Font.loadAndRegisterFontFace___fontFaceLoad((cast family : String), ({ final __callArgument6:Dynamic = source; __callArgument6; })) : flight._internal._Promise<flight._internal.dom.FontFace>);
+    return cast (cast _Font.loadAndRegisterFontFace___fontFaceLoad(({ final __callArgument12:Dynamic = backend; __callArgument12; }), (cast family : String), ({ final __callArgument13:Dynamic = source; __callArgument13; })) : flight._internal._Promise<flight._internal.dom.FontFace>);
     return cast null;
   }
 
-  public static function _loadFontFacesFromName(family:String):flight._internal._Promise<Array<flight._internal.dom.FontFace>> {
-    return cast (cast (cast getFontLoadingBackend() : FontLoadingBackend) : FontLoadingBackend).loadFontFaces((cast (cast (#if js _Runtime.callValue(getFontShorthand, cast ([(cast family : String)] : Array<Dynamic>)) #else getFontShorthand((cast family : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : String) : String));
+  public static function _loadFontFacesFromName(backend:FontLoadingBackend, family:String):flight._internal._Promise<Array<flight._internal.dom.FontFace>> {
+    return cast _Runtime.callProperty(backend, 'loadFontFaces', cast ([(cast (#if js _Runtime.callValue(getFontShorthand, cast ([(cast family : String)] : Array<Dynamic>)) #else getFontShorthand((cast family : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : String)] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function loadAndRegisterFontFace___fontFaceLoad(family:String, source:flight._internal._Union2<String, haxe.io.Bytes>):flight._internal._Promise<flight._internal.dom.FontFace> {
+  public static function loadAndRegisterFontFace___fontFaceLoad(backend:FontLoadingBackend, family:String, source:flight._internal._Union2<String, haxe.io.Bytes>):flight._internal._Promise<flight._internal.dom.FontFace> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
       var face:flight._internal.dom.FontFace = cast _Runtime.UNDEFINED;
       face = _Runtime.construct(flight._internal._HostValueLut.get('FontFace'), [family, source]);
-      return flight._internal._Async.flatMap((cast face : flight._internal.dom.FontFace).load(), function(__awaitValue9:Dynamic):Dynamic {
-        __awaitValue9;
-        (cast (cast getFontLoadingBackend() : FontLoadingBackend) : FontLoadingBackend).addFontFace(({ final __callArgument10:Dynamic = face; __callArgument10; }));
+      return flight._internal._Async.flatMap((cast face : flight._internal.dom.FontFace).load(), function(__awaitValue16:Dynamic):Dynamic {
+        __awaitValue16;
+        _Runtime.callProperty(backend, 'addFontFace', cast ([face] : Array<Dynamic>));
         return flight._internal._Async.resolve(face);
       });
     }));
@@ -133,108 +134,48 @@ class _Font {
     return cast null;
   }
 
-  @:allow(flight)
-  @:keep
-  private static function explainFontLoadingBackend():BackendExplanation {
-    if ((cast !_Runtime.strictEquals(_Font._custom__fontLoading, null) : Bool)) {
-      return cast { conflict: _Font._hostConflict__fontLoading, layer: 'custom', operation: null, viability: 'unobserved' };
-    }
-    if ((cast !_Runtime.strictEquals(_Font._host__fontLoading, null) : Bool)) {
-      return cast { conflict: _Font._hostConflict__fontLoading, layer: 'host', operation: null, viability: 'unobserved' };
-    }
-    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function getFontLoadingBackend():FontLoadingBackend {
-    return cast _Runtime.coalesce(_Runtime.coalesce(_Font._custom__fontLoading, function():Dynamic return cast _Font._host__fontLoading), function():Dynamic return cast _Font._sentinel__fontLoading);
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function hasFontLoadingHostBackend():Bool {
-    return cast !_Runtime.strictEquals(_Font._host__fontLoading, null);
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function installFontLoadingHostBackend(backend:FontLoadingBackend):Void {
-    if ((cast !_Runtime.strictEquals(_Font._host__fontLoading, null) : Bool)) {
-      if ((cast !_Runtime.strictEquals(_Font._host__fontLoading, backend) : Bool)) { (_Font._hostConflict__fontLoading = cast (true : Dynamic)); }
-      return;
-    }
-    (_Font._host__fontLoading = cast (backend : Dynamic));
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function resetFontLoadingBackendForTest():Void {
-    (_Font._custom__fontLoading = cast (null : Dynamic));
-    (_Font._host__fontLoading = cast (null : Dynamic));
-    (_Font._hostConflict__fontLoading = cast (false : Dynamic));
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function setFontLoadingBackend(backend:Null<FontLoadingBackend>):Void {
-    (_Font._custom__fontLoading = cast (backend : Dynamic));
-  }
-
-  public static var _custom__fontLoading:Null<FontLoadingBackend> = _Runtime.explicitNull();
-
-  public static var _host__fontLoading:Null<FontLoadingBackend> = _Runtime.explicitNull();
-
-  public static var _hostConflict__fontLoading:Bool = false;
-
-  public static final _sentinel__fontLoading:FontLoadingBackend = (cast { addFontFace: function(face:flight._internal.dom.FontFace):Void {
-
-  }, checkFontFace: function(shorthand:String):Bool {
-    return cast false;
-    return cast _Runtime.UNDEFINED;
-  }, loadFontFaces: function(shorthand:String):flight._internal._Promise<Array<flight._internal.dom.FontFace>> {
-    return cast flight._internal._Async.resolve(cast ([] : Array<Dynamic>));
-    return cast _Runtime.UNDEFINED;
-  }, whenReady: function():flight._internal._Promise<flight._internal._Nothing> {
-    return cast flight._internal._Async.resolve();
-    return cast _Runtime.UNDEFINED;
-  } });
-
   public static function createFontResource(family:String):FontResource {
-    return cast (cast createEntity(({ final __callArgument11:Dynamic = (#if flight_struct_typedef { family: family, face: null } #else ({ final __structInitField0:Dynamic = family; final __structInitField1:Dynamic = null; ({ face: __structInitField1, family: __structInitField0 } : FontResource); }) #end); __callArgument11; })) : FontResource);
+    var out:EntityConstruction<FontResource> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ face: cast _Runtime.UNDEFINED, family: cast _Runtime.UNDEFINED } : FontResource); }) #end));
+    initializeFontResource(({ final __callArgument17:Dynamic = out; __callArgument17; }), (cast family : String));
+    return cast out;
     return cast null;
   }
 
-  public static function loadFontResourceFromBytes(out:FontResource, bytes:flight._internal._UInt8Array):flight._internal._Promise<FontResource> {
+  @:allow(flight)
+  @:keep
+  private static function initializeFontResource(out:EntityConstruction<FontResource>, family:String):Void {
+    _Runtime.setField(out, 'family', family);
+    _Runtime.setField(out, 'face', null);
+  }
+
+  public static function loadFontResourceFromBytes(backend:FontLoadingBackend, out:FontResource, bytes:flight._internal._UInt8Array):flight._internal._Promise<FontResource> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
       var face:flight._internal.dom.FontFace = cast _Runtime.UNDEFINED;
-      return flight._internal._Async.flatMap((cast _loadFontFaceFromBytes((cast out.family : String), ({ final __callArgument16:Dynamic = bytes; __callArgument16; })) : flight._internal._Promise<flight._internal.dom.FontFace>), function(__awaitValue15:Dynamic):Dynamic {
-        face = __awaitValue15;
+      return flight._internal._Async.flatMap((cast _loadFontFaceFromBytes(({ final __callArgument24:Dynamic = backend; __callArgument24; }), (cast out.family : String), ({ final __callArgument25:Dynamic = bytes; __callArgument25; })) : flight._internal._Promise<flight._internal.dom.FontFace>), function(__awaitValue23:Dynamic):Dynamic {
+        face = __awaitValue23;
         (out.face = cast (face : Null<flight._internal.dom.FontFace>));
         return flight._internal._Async.resolve(out);
       });
     }));
   }
 
-  public static function loadFontResourceFromName(out:FontResource):flight._internal._Promise<FontResource> {
+  public static function loadFontResourceFromName(backend:FontLoadingBackend, out:FontResource):flight._internal._Promise<FontResource> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var faces:Array<flight._internal.dom.FontFace> = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast _loadFontFacesFromName((cast out.family : String)) : flight._internal._Promise<Array<flight._internal.dom.FontFace>>), function(__awaitValue18:Dynamic):Dynamic {
-          faces = __awaitValue18;
-          var __flowBranch19:Dynamic;
+        return flight._internal._Async.flatMap((cast _loadFontFacesFromName(({ final __callArgument32:Dynamic = backend; __callArgument32; }), (cast out.family : String)) : flight._internal._Promise<Array<flight._internal.dom.FontFace>>), function(__awaitValue30:Dynamic):Dynamic {
+          faces = __awaitValue30;
+          var __flowBranch31:Dynamic;
           if ((cast ((cast _Runtime.field(faces, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-            __flowBranch19 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch31 = flight._internal._Async.protect(function():Dynamic {
               (out.face = cast (flight._internal._StaticIndex.readArray(faces, 0.0) : Null<flight._internal.dom.FontFace>));
               return flight._internal._Async.flowNormal();
             });
           } else {
-            __flowBranch19 = flight._internal._Async.flowNormal();
+            __flowBranch31 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch19, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch31, function():Dynamic {
             return flight._internal._Async.flowReturn(out);
           });
         });
@@ -242,22 +183,22 @@ class _Font {
     );
   }
 
-  public static function loadFontResourceFromUrl(out:FontResource, url:String):flight._internal._Promise<FontResource> {
+  public static function loadFontResourceFromUrl(backend:FontLoadingBackend, out:FontResource, url:String):flight._internal._Promise<FontResource> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
       var face:flight._internal.dom.FontFace = cast _Runtime.UNDEFINED;
-      return flight._internal._Async.flatMap((cast _loadFontFaceFromUrl((cast out.family : String), (cast url : String)) : flight._internal._Promise<flight._internal.dom.FontFace>), function(__awaitValue20:Dynamic):Dynamic {
-        face = __awaitValue20;
+      return flight._internal._Async.flatMap((cast _loadFontFaceFromUrl(({ final __callArgument37:Dynamic = backend; __callArgument37; }), (cast out.family : String), (cast url : String)) : flight._internal._Promise<flight._internal.dom.FontFace>), function(__awaitValue36:Dynamic):Dynamic {
+        face = __awaitValue36;
         (out.face = cast (face : Null<flight._internal.dom.FontFace>));
         return flight._internal._Async.resolve(out);
       });
     }));
   }
 
-  public static function loadFontResourceFromUrls(out:FontResource, sources:Array<FontUrl>):flight._internal._Promise<FontResource> {
+  public static function loadFontResourceFromUrls(backend:FontLoadingBackend, out:FontResource, sources:Array<FontUrl>):flight._internal._Promise<FontResource> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
       var face:flight._internal.dom.FontFace = cast _Runtime.UNDEFINED;
-      return flight._internal._Async.flatMap((cast _loadFontFaceFromUrls((cast out.family : String), ({ final __callArgument24:Dynamic = sources; __callArgument24; })) : flight._internal._Promise<flight._internal.dom.FontFace>), function(__awaitValue23:Dynamic):Dynamic {
-        face = __awaitValue23;
+      return flight._internal._Async.flatMap((cast _loadFontFaceFromUrls(({ final __callArgument44:Dynamic = backend; __callArgument44; }), (cast out.family : String), ({ final __callArgument45:Dynamic = sources; __callArgument45; })) : flight._internal._Promise<flight._internal.dom.FontFace>), function(__awaitValue43:Dynamic):Dynamic {
+        face = __awaitValue43;
         (out.face = cast (face : Null<flight._internal.dom.FontFace>));
         return flight._internal._Async.resolve(out);
       });
@@ -271,22 +212,32 @@ class _Font {
     return cast null;
   }
 
-  public static function isFontLoaded(family:String, ?style:String):Bool {
-    return cast (cast (cast getFontLoadingBackend() : FontLoadingBackend) : FontLoadingBackend).checkFontFace((cast (cast getFontShorthand((cast family : String), ({ final __callArgument26:Dynamic = style; __callArgument26; })) : String) : String));
+  public static function isFontLoaded(backend:FontLoadingBackend, family:String, ?style:String):Bool {
+    return cast _Runtime.callProperty(backend, 'checkFontFace', cast ([(cast getFontShorthand((cast family : String), ({ final __callArgument48:Dynamic = style; __callArgument48; })) : String)] : Array<Dynamic>));
     return cast null;
   }
 
-  public static function whenFontsReady():flight._internal._Promise<flight._internal._Nothing> {
+  public static function whenFontsReady(backend:FontLoadingBackend):flight._internal._Promise<flight._internal._Nothing> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      return flight._internal._Async.flatMap((cast (cast getFontLoadingBackend() : FontLoadingBackend) : FontLoadingBackend).whenReady(), function(__awaitValue28:Dynamic):Dynamic {
-        __awaitValue28;
+      return flight._internal._Async.flatMap(_Runtime.callProperty(backend, 'whenReady', cast ([] : Array<Dynamic>)), function(__awaitValue50:Dynamic):Dynamic {
+        __awaitValue50;
         return flight._internal._Async.resolve(_Runtime.UNDEFINED);
       });
     }));
   }
 
   public static function createGlyphRasterizerBackendFromGlyphOutlineSource(source:GlyphOutlineSource):{ >GlyphRasterizerBackend, >Entity, } {
-    return cast (cast (cast createEntity : Null<{ var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; }>->{ >Entity, var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; })(({ final __callArgument37:Dynamic = ({ measureMetrics: (cast function(options:GlyphRasterizeOptions):Null<GlyphMetrics> {
+    var out:EntityConstruction<{ >GlyphRasterizerBackend, >Entity, }> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ rasterize: cast _Runtime.UNDEFINED, measureMetrics: cast _Runtime.UNDEFINED } : EntityShapeL17C15__glyphOutlineSource); }) #end));
+    initializeGlyphRasterizerBackendFromGlyphOutlineSource(({ final __callArgument51:Dynamic = out; __callArgument51; }), ({ final __callArgument52:Dynamic = source; __callArgument52; }));
+    return cast out;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeGlyphRasterizerBackendFromGlyphOutlineSource(out:EntityConstruction<{ >GlyphRasterizerBackend, >Entity, }>, source:GlyphOutlineSource):Void {
+    ((cast out : { @:optional var measureMetrics:Null<GlyphRasterizeOptions->Null<GlyphMetrics>>; }).measureMetrics = (cast function(options:GlyphRasterizeOptions):Null<GlyphMetrics> {
       var metrics:GlyphOutlineMetrics = cast _Runtime.UNDEFINED;
       var scale:Null<Float> = cast _Runtime.UNDEFINED;
       metrics = (cast source : GlyphOutlineSource).getGlyphOutlineMetrics();
@@ -294,11 +245,11 @@ class _Font {
       if ((cast _Runtime.strictEquals(scale, null) : Bool)) { return cast null; }
       return cast { ascent: _Runtime.multiplyNumbers(_Runtime.field(metrics, 'ascent'), scale), descent: _Runtime.multiplyNumbers(_Runtime.field(metrics, 'descent'), scale), lineGap: _Runtime.multiplyNumbers(_Runtime.field(metrics, 'lineGap'), scale) };
       return cast _Runtime.UNDEFINED;
-    } : Dynamic), rasterize: (cast function(codePoint:Float, options:GlyphRasterizeOptions):Null<GlyphRasterizedBitmap> {
-      return cast (cast _Font.rasterizeGlyphOutlineSource__glyphOutlineSource(({ final __callArgument33:Dynamic = source; __callArgument33; }), (cast codePoint : Float), ({ final __callArgument34:Dynamic = options; __callArgument34; })) : Null<GlyphRasterizedBitmap>);
+    }));
+    ((cast out : { var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; }).rasterize = (cast function(codePoint:Float, options:GlyphRasterizeOptions):Null<GlyphRasterizedBitmap> {
+      return cast (cast _Font.rasterizeGlyphOutlineSource__glyphOutlineSource(({ final __callArgument55:Dynamic = source; __callArgument55; }), (cast codePoint : Float), ({ final __callArgument56:Dynamic = options; __callArgument56; })) : Null<GlyphRasterizedBitmap>);
       return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL21C23__glyphOutlineSource); __callArgument37; })) : EntityShapeL21C23__glyphOutlineSource);
-    return cast null;
+    }));
   }
 
   public static function rasterizeGlyphOutlineSource__glyphOutlineSource(source:GlyphOutlineSource, codePoint:Float, options:GlyphRasterizeOptions):Null<GlyphRasterizedBitmap> {
@@ -322,11 +273,11 @@ class _Font {
     scale = (cast _Font.resolveGlyphOutlineScale__glyphOutlineSource((cast _Runtime.field(metrics, 'unitsPerEm') : Float), (cast options.fontSize : Float)) : Null<Float>);
     if ((cast _Runtime.strictEquals(scale, null) : Bool)) { return cast null; }
     path = (cast (#if js _Runtime.callValue(createPath, cast ([] : Array<Dynamic>)) #else createPath(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Path);
-    if ((cast !(cast (cast source : GlyphOutlineSource).getGlyphOutline(({ final __callArgument47:Dynamic = path; __callArgument47; }), (cast glyphIndex : Float)) : Bool) : Bool)) { return cast null; }
+    if ((cast !(cast (cast source : GlyphOutlineSource).getGlyphOutline(({ final __callArgument59:Dynamic = path; __callArgument59; }), (cast glyphIndex : Float)) : Bool) : Bool)) { return cast null; }
     advance = _Runtime.multiplyNumbers((cast source : GlyphOutlineSource).getGlyphOutlineAdvance((cast glyphIndex : Float)), scale);
     if ((cast !(cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isFinite', cast ([advance] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
     bounds = (cast { height: 0.0, width: 0.0, x: 0.0, y: 0.0 });
-    if ((cast ((cast ((cast !(cast (cast getPathBounds(({ final __callArgument48:Dynamic = path; __callArgument48; }), ({ final __callArgument49:Dynamic = bounds; __callArgument49; })) : Bool) : Bool) : Bool) || (cast _Runtime.strictEquals(bounds.width, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(bounds.height, 0.0) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast !(cast (cast getPathBounds(({ final __callArgument60:Dynamic = path; __callArgument60; }), ({ final __callArgument61:Dynamic = bounds; __callArgument61; })) : Bool) : Bool) : Bool) || (cast _Runtime.strictEquals(bounds.width, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(bounds.height, 0.0) : Bool)) : Bool)) {
       return cast { advance: advance, bearingX: 0.0, bearingY: 0.0, height: 0.0, pixels: new flight._internal._UInt8ClampedArray(), width: 0.0 };
     }
     left = _Runtime.subtractNumbers(HxMath.floor((bounds.x * scale)), _Font.RASTER_GUARD__glyphOutlineSource);
@@ -336,7 +287,7 @@ class _Font {
     width = (right - left);
     height = (bottom - top);
     if ((cast ((cast ((cast width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
-    contours = (cast flattenPath(({ final __callArgument52:Dynamic = path; __callArgument52; }), (cast (0.25 / scale) : Float)) : Array<Array<Float>>);
+    contours = (cast flattenPath(({ final __callArgument64:Dynamic = path; __callArgument64; }), (cast (0.25 / scale) : Float)) : Array<Array<Float>>);
     pixels = new flight._internal._UInt8ClampedArray(((width * height) * 4.0));
     {
       var pixelY:Float = 0.0;
@@ -353,7 +304,7 @@ class _Font {
                   var sampleX:Float = 0.0;
                   while ((cast ((cast sampleX : Float) < (cast _Font.RASTER_SAMPLE_AXIS__glyphOutlineSource : Float)) : Bool)) {
                     var x:Float = (((left + pixelX) + ((sampleX + 0.5) / _Font.RASTER_SAMPLE_AXIS__glyphOutlineSource)) / scale);
-                    if ((cast (cast _Font.containsFlattenedGlyphOutlinePoint__glyphOutlineSource(({ final __callArgument54:Dynamic = contours; __callArgument54; }), (cast (cast path : Path).winding : String), (cast x : Float), (cast y : Float)) : Bool) : Bool)) { covered++; }
+                    if ((cast (cast _Font.containsFlattenedGlyphOutlinePoint__glyphOutlineSource(({ final __callArgument66:Dynamic = contours; __callArgument66; }), (cast (cast path : Path).winding : String), (cast x : Float), (cast y : Float)) : Bool) : Bool)) { covered++; }
                     sampleX++;
                   }
                 }

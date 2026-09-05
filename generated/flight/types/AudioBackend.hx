@@ -4,5 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
 @:noCompletion
-typedef AudioBackend = { var canPlayType:String->Bool; };
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class AudioBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var canPlayType:String->Bool;
+
+  private function new(canPlayType:String->Bool):Void {
+    this.__symbol__EntityRuntime = null;
+    this.canPlayType = canPlayType;
+  }
+}
+#else
+@:noCompletion
+typedef AudioBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var canPlayType:String->Bool; };
+#end

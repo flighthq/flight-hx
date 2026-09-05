@@ -4,4 +4,45 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics2DAbi = { var version:Float; var capabilities:Float; var createWorld:Void->Physics2DAbiWorldHandle; var destroyWorld:Physics2DAbiWorldHandle->Bool; var getWorldStatus:Physics2DAbiWorldHandle->Physics2DAbiWorldStatus; var execute:Physics2DAbiWorldHandle->Physics2DAbiCommandBuffer->Physics2DAbiExecutionResult->Bool; var step:Physics2DAbiWorldHandle->Float->Null<Physics2DAbiContactHooks>->Physics2DAbiStepStatus; var readBodies:Physics2DAbiWorldHandle->Null<flight._internal._UInt32Array>->Physics2DAbiBodyBuffer->Bool; var readContacts:Physics2DAbiWorldHandle->Physics2DAbiContactSelection->Physics2DAbiContactBuffer->Bool; var readJoints:Physics2DAbiWorldHandle->Physics2DAbiJointBuffer->Bool; var queryPoint:Physics2DAbiWorldHandle->Float->Float->Null<Physics2DQueryFilter>->Physics2DAbiQueryBuffer->Bool; var queryRay:Physics2DAbiWorldHandle->Float->Float->Float->Float->Float->Bool->Null<Physics2DQueryFilter>->Physics2DAbiQueryBuffer->Bool; var queryRegion:Physics2DAbiWorldHandle->SpatialAabb2D->Null<Physics2DQueryFilter>->Physics2DAbiQueryBuffer->Bool; var queryShapeCast:Physics2DAbiWorldHandle->CollisionBuiltInShape2D->Float->Float->Float->Null<Physics2DQueryFilter>->Physics2DAbiQueryBuffer->Bool; };
+#if !flight_struct_typedef
+@:allow(flight._Physics2DAbi)
+@:keep
+@:structInit
+class Physics2DAbi {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var version:Float;
+  public var capabilities:Float;
+  public var createWorld:Void->Physics2DAbiWorldHandle;
+  public var destroyWorld:Physics2DAbiWorldHandle->Bool;
+  public var getWorldStatus:Physics2DAbiWorldHandle->Physics2DAbiWorldStatus;
+  public var execute:Physics2DAbiWorldHandle->Physics2DAbiCommandBuffer->Physics2DAbiExecutionResult->Bool;
+  public var step:Physics2DAbiWorldHandle->Float->Null<Physics2DAbiContactHooks>->Physics2DAbiStepStatus;
+  public var readBodies:Physics2DAbiWorldHandle->Null<flight._internal._UInt32Array>->Physics2DAbiBodyBuffer->Bool;
+  public var readContacts:Physics2DAbiWorldHandle->Physics2DAbiContactSelection->Physics2DAbiContactBuffer->Bool;
+  public var readJoints:Physics2DAbiWorldHandle->Physics2DAbiJointBuffer->Bool;
+  public var queryPoint:Physics2DAbiWorldHandle->Float->Float->Null<Physics2DQueryFilter>->Physics2DAbiQueryBuffer->Bool;
+  public var queryRay:Physics2DAbiWorldHandle->Float->Float->Float->Float->Float->Bool->Null<Physics2DQueryFilter>->Physics2DAbiQueryBuffer->Bool;
+  public var queryRegion:Physics2DAbiWorldHandle->SpatialAabb2D->Null<Physics2DQueryFilter>->Physics2DAbiQueryBuffer->Bool;
+  public var queryShapeCast:Physics2DAbiWorldHandle->CollisionBuiltInShape2D->Float->Float->Float->Null<Physics2DQueryFilter>->Physics2DAbiQueryBuffer->Bool;
+
+  private function new(version:Float, capabilities:Float, createWorld:Void->Physics2DAbiWorldHandle, destroyWorld:Physics2DAbiWorldHandle->Bool, getWorldStatus:Physics2DAbiWorldHandle->Physics2DAbiWorldStatus, execute:Physics2DAbiWorldHandle->Physics2DAbiCommandBuffer->Physics2DAbiExecutionResult->Bool, step:Physics2DAbiWorldHandle->Float->Null<Physics2DAbiContactHooks>->Physics2DAbiStepStatus, readBodies:Physics2DAbiWorldHandle->Null<flight._internal._UInt32Array>->Physics2DAbiBodyBuffer->Bool, readContacts:Physics2DAbiWorldHandle->Physics2DAbiContactSelection->Physics2DAbiContactBuffer->Bool, readJoints:Physics2DAbiWorldHandle->Physics2DAbiJointBuffer->Bool, queryPoint:Physics2DAbiWorldHandle->Float->Float->Null<Physics2DQueryFilter>->Physics2DAbiQueryBuffer->Bool, queryRay:Physics2DAbiWorldHandle->Float->Float->Float->Float->Float->Bool->Null<Physics2DQueryFilter>->Physics2DAbiQueryBuffer->Bool, queryRegion:Physics2DAbiWorldHandle->SpatialAabb2D->Null<Physics2DQueryFilter>->Physics2DAbiQueryBuffer->Bool, queryShapeCast:Physics2DAbiWorldHandle->CollisionBuiltInShape2D->Float->Float->Float->Null<Physics2DQueryFilter>->Physics2DAbiQueryBuffer->Bool):Void {
+    this.__symbol__EntityRuntime = null;
+    this.version = version;
+    this.capabilities = capabilities;
+    this.createWorld = createWorld;
+    this.destroyWorld = destroyWorld;
+    this.getWorldStatus = getWorldStatus;
+    this.execute = execute;
+    this.step = step;
+    this.readBodies = readBodies;
+    this.readContacts = readContacts;
+    this.readJoints = readJoints;
+    this.queryPoint = queryPoint;
+    this.queryRay = queryRay;
+    this.queryRegion = queryRegion;
+    this.queryShapeCast = queryShapeCast;
+  }
+}
+#else
+typedef Physics2DAbi = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var version:Float; var capabilities:Float; var createWorld:Void->Physics2DAbiWorldHandle; var destroyWorld:Physics2DAbiWorldHandle->Bool; var getWorldStatus:Physics2DAbiWorldHandle->Physics2DAbiWorldStatus; var execute:Physics2DAbiWorldHandle->Physics2DAbiCommandBuffer->Physics2DAbiExecutionResult->Bool; var step:Physics2DAbiWorldHandle->Float->Null<Physics2DAbiContactHooks>->Physics2DAbiStepStatus; var readBodies:Physics2DAbiWorldHandle->Null<flight._internal._UInt32Array>->Physics2DAbiBodyBuffer->Bool; var readContacts:Physics2DAbiWorldHandle->Physics2DAbiContactSelection->Physics2DAbiContactBuffer->Bool; var readJoints:Physics2DAbiWorldHandle->Physics2DAbiJointBuffer->Bool; var queryPoint:Physics2DAbiWorldHandle->Float->Float->Null<Physics2DQueryFilter>->Physics2DAbiQueryBuffer->Bool; var queryRay:Physics2DAbiWorldHandle->Float->Float->Float->Float->Float->Bool->Null<Physics2DQueryFilter>->Physics2DAbiQueryBuffer->Bool; var queryRegion:Physics2DAbiWorldHandle->SpatialAabb2D->Null<Physics2DQueryFilter>->Physics2DAbiQueryBuffer->Bool; var queryShapeCast:Physics2DAbiWorldHandle->CollisionBuiltInShape2D->Float->Float->Float->Null<Physics2DQueryFilter>->Physics2DAbiQueryBuffer->Bool; };
+#end

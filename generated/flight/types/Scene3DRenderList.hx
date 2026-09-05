@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Scene3DRenderList = { var lights:Scene3DLightBlock; var meshCount:Float; var viewProjection:Matrix4; var visibleMeshes:Array<Mesh>; };
+typedef Scene3DRenderList = { var instancedMeshCount:Float; var lights:Scene3DLightBlock; var meshCount:Float; var viewProjection:Matrix4; var visibleInstancedMeshes:Array<InstancedMesh>; var visibleMeshes:Array<Mesh>; };

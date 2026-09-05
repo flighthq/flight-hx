@@ -14,4 +14,5 @@ export const getAudioResourceChannelData = api.getAudioResourceChannelData;
 export const getAudioResourceDuration = api.getAudioResourceDuration;
 export const getAudioResourceSampleRate = api.getAudioResourceSampleRate;
 export const hasAudioResourceBuffer = api.hasAudioResourceBuffer;
+export const initializeAudioResource = api.initializeAudioResource;
 export const isAudioResourceEmpty = api.isAudioResourceEmpty;

@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:keep
+@:structInit
+class PowerSessionLockBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var subscribeLock:(Void->Void)->(Void->Void);
+  public var subscribeUnlock:(Void->Void)->(Void->Void);
+
+  private function new(subscribeLock:(Void->Void)->(Void->Void), subscribeUnlock:(Void->Void)->(Void->Void)):Void {
+    this.__symbol__EntityRuntime = null;
+    this.subscribeLock = subscribeLock;
+    this.subscribeUnlock = subscribeUnlock;
+  }
+}
+#else
 typedef PowerSessionLockBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var subscribeLock:(Void->Void)->(Void->Void); var subscribeUnlock:(Void->Void)->(Void->Void); };
+#end

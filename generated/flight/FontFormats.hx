@@ -4,12 +4,13 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._FontFormats as Facade_FontFormats_flight__FontFormats;
+import flight.types.Entity;
 import flight.types.GlyphOutlineSource;
 import flight.types.ImportDiagnostic;
 import flight.types.OpenTypeFontExplanation;
 
 class FontFormats {
-  public static function createGlyphOutlineSourceFromOpenTypeFont(source:flight._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Null<GlyphOutlineSource> {
+  public static function createGlyphOutlineSourceFromOpenTypeFont(source:flight._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Null<{ >GlyphOutlineSource, >Entity, }> {
     return cast Facade_FontFormats_flight__FontFormats.createGlyphOutlineSourceFromOpenTypeFont(source, diagnostics);
     return cast null;
   }

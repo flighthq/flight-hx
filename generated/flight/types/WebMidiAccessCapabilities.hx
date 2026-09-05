@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class WebMidiAccessCapabilities {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var access:MidiAccessBackend;
+
+  private function new(access:MidiAccessBackend):Void {
+    this.__symbol__EntityRuntime = null;
+    this.access = access;
+  }
+}
+#else
 typedef WebMidiAccessCapabilities = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var access:MidiAccessBackend; };
+#end

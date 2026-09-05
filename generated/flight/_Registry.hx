@@ -3,7 +3,11 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Types.RegistryEntryStateValue;
+import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.KeyedTable;
 import flight.types.Kind;
 import flight.types.OrdinalTable;
@@ -14,12 +18,199 @@ import flight.types.RegistryTable;
 import flight.types.RegistryTableEntry;
 import flight.types.SlotTable;
 
+#if !flight_struct_typedef
+@:allow(flight._Registry)
+@:keep
+@:structInit
+private class EntityShapeL56C17__registryTable {
+  public var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:flight._internal._Any; }>>;
+  public var shape:String;
+  public var onMiss:String;
+  public var registry:String;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:flight._internal._Any; }>>, shape:String, onMiss:String, registry:String):Void {
+    this.__symbol__EntityRuntime = null;
+    this.entry = entry;
+    this.shape = shape;
+    this.onMiss = onMiss;
+    this.registry = registry;
+  }
+}
+#else
+private typedef EntityShapeL56C17__registryTable = { var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:flight._internal._Any; }>>; var shape:String; var onMiss:String; var registry:String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Registry)
+@:keep
+@:structInit
+private class EntityShapeL84C15__registryTable {
+  public var entries:flight._internal._Map<String, RegistryTableEntry<flight._internal._Any>>;
+  public var shape:String;
+  public var onMiss:String;
+  public var registry:String;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(entries:flight._internal._Map<String, RegistryTableEntry<flight._internal._Any>>, shape:String, onMiss:String, registry:String):Void {
+    this.__symbol__EntityRuntime = null;
+    this.entries = entries;
+    this.shape = shape;
+    this.onMiss = onMiss;
+    this.registry = registry;
+  }
+}
+#else
+private typedef EntityShapeL84C15__registryTable = { var entries:flight._internal._Map<String, RegistryTableEntry<flight._internal._Any>>; var shape:String; var onMiss:String; var registry:String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Registry)
+@:keep
+@:structInit
+private class EntityShapeL93C15__registryTable {
+  public var entries:flight._internal._Map<String, RegistryTableEntry<flight._internal._Any>>;
+  public var shape:String;
+  public var onMiss:String;
+  public var registry:String;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(entries:flight._internal._Map<String, RegistryTableEntry<flight._internal._Any>>, shape:String, onMiss:String, registry:String):Void {
+    this.__symbol__EntityRuntime = null;
+    this.entries = entries;
+    this.shape = shape;
+    this.onMiss = onMiss;
+    this.registry = registry;
+  }
+}
+#else
+private typedef EntityShapeL93C15__registryTable = { var entries:flight._internal._Map<String, RegistryTableEntry<flight._internal._Any>>; var shape:String; var onMiss:String; var registry:String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Registry)
+@:keep
+@:structInit
+private class EntityShapeL103C15__registryTable {
+  public var entries:Array<Null<flight._internal._Any>>;
+  public var shape:String;
+  public var vocabulary:Array<String>;
+  public var onMiss:String;
+  public var registry:String;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(entries:Array<Null<flight._internal._Any>>, shape:String, vocabulary:Array<String>, onMiss:String, registry:String):Void {
+    this.__symbol__EntityRuntime = null;
+    this.entries = entries;
+    this.shape = shape;
+    this.vocabulary = vocabulary;
+    this.onMiss = onMiss;
+    this.registry = registry;
+  }
+}
+#else
+private typedef EntityShapeL103C15__registryTable = { var entries:Array<Null<flight._internal._Any>>; var shape:String; var vocabulary:Array<String>; var onMiss:String; var registry:String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Registry)
+@:keep
+@:structInit
+private class EntityShapeL109C15__registryTable {
+  public var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:flight._internal._Any; }>>;
+  public var shape:String;
+  public var onMiss:String;
+  public var registry:String;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:flight._internal._Any; }>>, shape:String, onMiss:String, registry:String):Void {
+    this.__symbol__EntityRuntime = null;
+    this.entry = entry;
+    this.shape = shape;
+    this.onMiss = onMiss;
+    this.registry = registry;
+  }
+}
+#else
+private typedef EntityShapeL109C15__registryTable = { var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:flight._internal._Any; }>>; var shape:String; var onMiss:String; var registry:String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Registry)
+@:keep
+@:structInit
+private class EntityShapeL206C15__registryTable {
+  public var entries:flight._internal._Map<String, RegistryTableEntry<flight._internal._Any>>;
+  public var shape:String;
+  public var onMiss:String;
+  public var registry:String;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(entries:flight._internal._Map<String, RegistryTableEntry<flight._internal._Any>>, shape:String, onMiss:String, registry:String):Void {
+    this.__symbol__EntityRuntime = null;
+    this.entries = entries;
+    this.shape = shape;
+    this.onMiss = onMiss;
+    this.registry = registry;
+  }
+}
+#else
+private typedef EntityShapeL206C15__registryTable = { var entries:flight._internal._Map<String, RegistryTableEntry<flight._internal._Any>>; var shape:String; var onMiss:String; var registry:String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Registry)
+@:keep
+@:structInit
+private class EntityShapeL220C15__registryTable {
+  public var entries:flight._internal._Map<String, RegistryTableEntry<flight._internal._Any>>;
+  public var shape:String;
+  public var onMiss:String;
+  public var registry:String;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(entries:flight._internal._Map<String, RegistryTableEntry<flight._internal._Any>>, shape:String, onMiss:String, registry:String):Void {
+    this.__symbol__EntityRuntime = null;
+    this.entries = entries;
+    this.shape = shape;
+    this.onMiss = onMiss;
+    this.registry = registry;
+  }
+}
+#else
+private typedef EntityShapeL220C15__registryTable = { var entries:flight._internal._Map<String, RegistryTableEntry<flight._internal._Any>>; var shape:String; var onMiss:String; var registry:String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Registry)
+@:keep
+@:structInit
+private class EntityShapeL238C15__registryTable {
+  public var entries:flight._internal._Map<String, RegistryTableEntry<flight._internal._Any>>;
+  public var shape:String;
+  public var onMiss:String;
+  public var registry:String;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(entries:flight._internal._Map<String, RegistryTableEntry<flight._internal._Any>>, shape:String, onMiss:String, registry:String):Void {
+    this.__symbol__EntityRuntime = null;
+    this.entries = entries;
+    this.shape = shape;
+    this.onMiss = onMiss;
+    this.registry = registry;
+  }
+}
+#else
+private typedef EntityShapeL238C15__registryTable = { var entries:flight._internal._Map<String, RegistryTableEntry<flight._internal._Any>>; var shape:String; var onMiss:String; var registry:String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
 @:noCompletion
 class _Registry {
-  public static function concatRegistryTable<T>(base:flight._internal._Union2<KeyedTable<T>, SlotTable<T>>, overlay:flight._internal._Union2<KeyedTable<T>, SlotTable<T>>):flight._internal._Union2<KeyedTable<T>, SlotTable<T>> {
+  public static function concatRegistryTable<T>(base:flight._internal._Union2<KeyedTable<T>, SlotTable<T>>, overlay:flight._internal._Union2<KeyedTable<T>, SlotTable<T>>):flight._internal._Union2<{ >KeyedTable<T>, >Entity, }, { >SlotTable<T>, >Entity, }> {
     var baseKeyed:KeyedTable<T> = cast _Runtime.UNDEFINED;
     var overlayKeyed:KeyedTable<T> = cast _Runtime.UNDEFINED;
     var entries:flight._internal._Map<String, RegistryTableEntry<T>> = cast _Runtime.UNDEFINED;
+    var out:EntityConstruction<flight._internal._Intersection2<KeyedTable<T>, Entity>> = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals((cast base : { var shape:String; }).shape, (cast overlay : { var shape:String; }).shape) : Bool)) {
       _Runtime.throwValue(_Runtime.error('concatRegistryTable: cannot compose a \'' + Std.string((cast base : { var shape:String; }).shape) + '\' table with a \'' + Std.string((cast overlay : { var shape:String; }).shape) + '\' table'));
     }
@@ -31,7 +222,13 @@ class _Registry {
     }
     if ((cast _Runtime.strictEquals((cast base : { var shape:String; }).shape, 'slot') : Bool)) {
       var overlaySlot:SlotTable<T> = (cast overlay : SlotTable<T>);
-      return cast { entry: _Runtime.coalesce(_Runtime.field(overlaySlot, 'entry'), function():Dynamic return cast _Runtime.field(base, 'entry')), onMiss: _Runtime.field(base, 'onMiss'), registry: _Runtime.field(base, 'registry'), shape: 'slot' };
+      var out:EntityConstruction<flight._internal._Intersection2<SlotTable<T>, Entity>> = cast _Runtime.UNDEFINED;
+      out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ entry: cast _Runtime.UNDEFINED, shape: cast _Runtime.UNDEFINED, onMiss: cast _Runtime.UNDEFINED, registry: cast _Runtime.UNDEFINED } : EntityShapeL56C17__registryTable); }) #end));
+      _Runtime.setField(out, 'entry', _Runtime.coalesce(_Runtime.field(overlaySlot, 'entry'), function():Dynamic return cast _Runtime.field(base, 'entry')));
+      _Runtime.setField(out, 'onMiss', _Runtime.field(base, 'onMiss'));
+      _Runtime.setField(out, 'registry', _Runtime.field(base, 'registry'));
+      _Runtime.setField(out, 'shape', 'slot');
+      return cast out;
     }
     baseKeyed = (cast base : KeyedTable<T>);
     overlayKeyed = (cast overlay : KeyedTable<T>);
@@ -55,22 +252,36 @@ class _Registry {
         }
       }
     }
-    return cast { entries: entries, onMiss: _Runtime.field(baseKeyed, 'onMiss'), registry: _Runtime.field(baseKeyed, 'registry'), shape: 'keyed' };
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ entries: cast _Runtime.UNDEFINED, shape: cast _Runtime.UNDEFINED, onMiss: cast _Runtime.UNDEFINED, registry: cast _Runtime.UNDEFINED } : EntityShapeL84C15__registryTable); }) #end));
+    _Runtime.setField(out, 'entries', entries);
+    _Runtime.setField(out, 'onMiss', _Runtime.field(baseKeyed, 'onMiss'));
+    _Runtime.setField(out, 'registry', _Runtime.field(baseKeyed, 'registry'));
+    _Runtime.setField(out, 'shape', 'keyed');
+    return cast out;
     return cast null;
   }
 
-  public static function createKeyedTable<T>(registry:RegistryId, onMiss:RegistryMissPolicy):KeyedTable<T> {
-    return cast { entries: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), onMiss: onMiss, registry: registry, shape: 'keyed' };
+  public static function createKeyedTable<T>(registry:RegistryId, onMiss:RegistryMissPolicy):{ >KeyedTable<T>, >Entity, } {
+    var out:EntityConstruction<flight._internal._Intersection2<KeyedTable<T>, Entity>> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ entries: cast _Runtime.UNDEFINED, shape: cast _Runtime.UNDEFINED, onMiss: cast _Runtime.UNDEFINED, registry: cast _Runtime.UNDEFINED } : EntityShapeL93C15__registryTable); }) #end));
+    initializeKeyedTable((cast out : Dynamic), (cast registry : String), (cast onMiss : String));
+    return cast out;
     return cast null;
   }
 
-  public static function createOrdinalTable<T>(registry:RegistryId, onMiss:RegistryMissPolicy, vocabulary:Array<Kind>):OrdinalTable<T> {
-    return cast { entries: (cast _Runtime.mapArray((cast vocabulary : Array<String>), function(__unused1:String, __unused2:Float, __unused3:Array<String>):flight._internal._Any return null, _Runtime.UNDEFINED)), onMiss: onMiss, registry: registry, shape: 'ordinal', vocabulary: vocabulary };
+  public static function createOrdinalTable<T>(registry:RegistryId, onMiss:RegistryMissPolicy, vocabulary:Array<Kind>):{ >OrdinalTable<T>, >Entity, } {
+    var out:EntityConstruction<flight._internal._Intersection2<OrdinalTable<T>, Entity>> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ entries: cast _Runtime.UNDEFINED, shape: cast _Runtime.UNDEFINED, vocabulary: cast _Runtime.UNDEFINED, onMiss: cast _Runtime.UNDEFINED, registry: cast _Runtime.UNDEFINED } : EntityShapeL103C15__registryTable); }) #end));
+    initializeOrdinalTable((cast out : Dynamic), (cast registry : String), (cast onMiss : String), ({ final __callArgument2:Dynamic = vocabulary; __callArgument2; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createSlotTable<T>(registry:RegistryId, onMiss:RegistryMissPolicy):SlotTable<T> {
-    return cast { entry: null, onMiss: onMiss, registry: registry, shape: 'slot' };
+  public static function createSlotTable<T>(registry:RegistryId, onMiss:RegistryMissPolicy):{ >SlotTable<T>, >Entity, } {
+    var out:EntityConstruction<flight._internal._Intersection2<SlotTable<T>, Entity>> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ entry: cast _Runtime.UNDEFINED, shape: cast _Runtime.UNDEFINED, onMiss: cast _Runtime.UNDEFINED, registry: cast _Runtime.UNDEFINED } : EntityShapeL109C15__registryTable); }) #end));
+    initializeSlotTable((cast out : Dynamic), (cast registry : String), (cast onMiss : String));
+    return cast out;
     return cast null;
   }
 
@@ -91,9 +302,9 @@ class _Registry {
   public static function getRegistryTableKeys(out:Array<Kind>, table:RegistryTable<flight._internal._Any>):Void {
     _Runtime.setLength(out, 0.0);
     if ((cast _Runtime.strictEquals((cast table : { var shape:String; }).shape, 'keyed') : Bool)) {
-      for (__iteration4 in _Runtime.iterable(_Runtime.field(table, 'entries'))) {
-        var key:String = flight._internal._StaticIndex.readArray(__iteration4, 0.0);
-        var entry:RegistryTableEntry<flight._internal._Any> = flight._internal._StaticIndex.readArray(__iteration4, 1.0);
+      for (__iteration1 in _Runtime.iterable(_Runtime.field(table, 'entries'))) {
+        var key:String = flight._internal._StaticIndex.readArray(__iteration1, 0.0);
+        var entry:RegistryTableEntry<flight._internal._Any> = flight._internal._StaticIndex.readArray(__iteration1, 1.0);
         if ((cast _Runtime.strictEquals((cast entry : { var state:String; }).state, (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) { _Runtime.callProperty(out, 'push', cast ([key] : Array<Dynamic>)); }
       }
     } else { if ((cast _Runtime.strictEquals((cast table : { var shape:String; }).shape, 'slot') : Bool)) {
@@ -112,32 +323,78 @@ class _Registry {
 
   public static function hasRegistryTableEntry(table:RegistryTable<flight._internal._Any>, key:Kind):Bool {
     var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:flight._internal._Any; }>> = cast _Runtime.UNDEFINED;
-    entry = (cast (cast _Registry.getRegistryTableEntryState__registryTable : RegistryTable<flight._internal._Any>->String->Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:flight._internal._Any; }>>)(({ final __callArgument4:Dynamic = table; __callArgument4; }), (cast key : String)) : Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:flight._internal._Any; }>>);
+    entry = (cast (cast _Registry.getRegistryTableEntryState__registryTable : RegistryTable<flight._internal._Any>->String->Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:flight._internal._Any; }>>)(({ final __callArgument6:Dynamic = table; __callArgument6; }), (cast key : String)) : Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:flight._internal._Any; }>>);
     return cast ((cast !_Runtime.strictEquals(entry, null) : Bool) && (cast _Runtime.strictEquals((cast entry : { var state:String; }).state, (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool));
     return cast null;
   }
 
-  public static function withoutRegistryTableEntry<T>(table:KeyedTable<T>, key:Kind):KeyedTable<T> {
+  @:allow(flight)
+  @:keep
+  private static function initializeKeyedTable<T>(out:EntityConstruction<{ >KeyedTable<T>, >Entity, }>, registry:RegistryId, onMiss:RegistryMissPolicy):Void {
+    _Runtime.setField(out, 'entries', _Runtime.construct(flight._internal._HostValueLut.get('Map'), []));
+    _Runtime.setField(out, 'onMiss', onMiss);
+    _Runtime.setField(out, 'registry', registry);
+    _Runtime.setField(out, 'shape', 'keyed');
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeOrdinalTable<T>(out:EntityConstruction<{ >OrdinalTable<T>, >Entity, }>, registry:RegistryId, onMiss:RegistryMissPolicy, vocabulary:Array<Kind>):Void {
+    _Runtime.setField(out, 'entries', (cast _Runtime.mapArray((cast vocabulary : Array<String>), function(__unused2:String, __unused3:Float, __unused4:Array<String>):flight._internal._Any return null, _Runtime.UNDEFINED)));
+    _Runtime.setField(out, 'onMiss', onMiss);
+    _Runtime.setField(out, 'registry', registry);
+    _Runtime.setField(out, 'shape', 'ordinal');
+    _Runtime.setField(out, 'vocabulary', vocabulary);
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeSlotTable<T>(out:EntityConstruction<{ >SlotTable<T>, >Entity, }>, registry:RegistryId, onMiss:RegistryMissPolicy):Void {
+    _Runtime.setField(out, 'entry', null);
+    _Runtime.setField(out, 'onMiss', onMiss);
+    _Runtime.setField(out, 'registry', registry);
+    _Runtime.setField(out, 'shape', 'slot');
+  }
+
+  public static function withoutRegistryTableEntry<T>(table:KeyedTable<T>, key:Kind):{ >KeyedTable<T>, >Entity, } {
     var entries:flight._internal._Map<String, RegistryTableEntry<T>> = cast _Runtime.UNDEFINED;
+    var out:EntityConstruction<flight._internal._Intersection2<KeyedTable<T>, Entity>> = cast _Runtime.UNDEFINED;
     entries = _Runtime.construct(flight._internal._HostValueLut.get('Map'), [_Runtime.field(table, 'entries')]);
     ((cast entries : flight._internal._Map<String, RegistryTableEntry<T>>).delete_((cast key)));
-    return cast { entries: entries, onMiss: _Runtime.field(table, 'onMiss'), registry: _Runtime.field(table, 'registry'), shape: 'keyed' };
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ entries: cast _Runtime.UNDEFINED, shape: cast _Runtime.UNDEFINED, onMiss: cast _Runtime.UNDEFINED, registry: cast _Runtime.UNDEFINED } : EntityShapeL206C15__registryTable); }) #end));
+    _Runtime.setField(out, 'entries', entries);
+    _Runtime.setField(out, 'onMiss', _Runtime.field(table, 'onMiss'));
+    _Runtime.setField(out, 'registry', _Runtime.field(table, 'registry'));
+    _Runtime.setField(out, 'shape', 'keyed');
+    return cast out;
     return cast null;
   }
 
-  public static function withRegistryTableEntry<T>(table:KeyedTable<T>, key:Kind, value:T):KeyedTable<T> {
+  public static function withRegistryTableEntry<T>(table:KeyedTable<T>, key:Kind, value:T):{ >KeyedTable<T>, >Entity, } {
     var entries:flight._internal._Map<String, RegistryTableEntry<T>> = cast _Runtime.UNDEFINED;
+    var out:EntityConstruction<flight._internal._Intersection2<KeyedTable<T>, Entity>> = cast _Runtime.UNDEFINED;
     entries = _Runtime.construct(flight._internal._HostValueLut.get('Map'), [_Runtime.field(table, 'entries')]);
     ((cast entries : flight._internal._Map<String, RegistryTableEntry<T>>).set((cast key), (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: value })));
-    return cast { entries: entries, onMiss: _Runtime.field(table, 'onMiss'), registry: _Runtime.field(table, 'registry'), shape: 'keyed' };
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ entries: cast _Runtime.UNDEFINED, shape: cast _Runtime.UNDEFINED, onMiss: cast _Runtime.UNDEFINED, registry: cast _Runtime.UNDEFINED } : EntityShapeL220C15__registryTable); }) #end));
+    _Runtime.setField(out, 'entries', entries);
+    _Runtime.setField(out, 'onMiss', _Runtime.field(table, 'onMiss'));
+    _Runtime.setField(out, 'registry', _Runtime.field(table, 'registry'));
+    _Runtime.setField(out, 'shape', 'keyed');
+    return cast out;
     return cast null;
   }
 
-  public static function withRegistryTableTombstone<T>(table:KeyedTable<T>, key:Kind):KeyedTable<T> {
+  public static function withRegistryTableTombstone<T>(table:KeyedTable<T>, key:Kind):{ >KeyedTable<T>, >Entity, } {
     var entries:flight._internal._Map<String, RegistryTableEntry<T>> = cast _Runtime.UNDEFINED;
+    var out:EntityConstruction<flight._internal._Intersection2<KeyedTable<T>, Entity>> = cast _Runtime.UNDEFINED;
     entries = _Runtime.construct(flight._internal._HostValueLut.get('Map'), [_Runtime.field(table, 'entries')]);
     ((cast entries : flight._internal._Map<String, RegistryTableEntry<T>>).set((cast key), (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Tombstoned })));
-    return cast { entries: entries, onMiss: _Runtime.field(table, 'onMiss'), registry: _Runtime.field(table, 'registry'), shape: 'keyed' };
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ entries: cast _Runtime.UNDEFINED, shape: cast _Runtime.UNDEFINED, onMiss: cast _Runtime.UNDEFINED, registry: cast _Runtime.UNDEFINED } : EntityShapeL238C15__registryTable); }) #end));
+    _Runtime.setField(out, 'entries', entries);
+    _Runtime.setField(out, 'onMiss', _Runtime.field(table, 'onMiss'));
+    _Runtime.setField(out, 'registry', _Runtime.field(table, 'registry'));
+    _Runtime.setField(out, 'shape', 'keyed');
+    return cast out;
     return cast null;
   }
 

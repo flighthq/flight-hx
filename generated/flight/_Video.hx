@@ -3,21 +3,19 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
-import flight._Entity.createEntity;
-import flight.types.BackendExplanation;
-import flight.types.BackendOperationExplanation;
-import flight.types.Entity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
+import flight.types.EntityConstruction;
 import flight.types.VideoCapabilityBackend;
-import flight.types.VideoCapabilityOperation;
 import flight.types.VideoResource;
 import flight.types.VideoResourceLoadOptions;
 import flight.types.VideoResourceUrl;
 
 @:noCompletion
 class _Video {
-  public static function canPlayVideoType(mimeType:String):Bool {
+  public static function canPlayVideoType(backend:VideoCapabilityBackend, mimeType:String):Bool {
     if ((cast _Runtime.strictEquals(mimeType, '') : Bool)) { return cast false; }
-    return cast (cast _Video.probeSelectedBackend__videoFormat((cast getVideoCapabilityBackend() : VideoCapabilityBackend), (cast mimeType : String)) : Bool);
+    return cast (cast _Video.probeSelectedBackend__videoFormat(({ final __callArgument0:Dynamic = backend; __callArgument0; }), (cast mimeType : String)) : Bool);
     return cast null;
   }
 
@@ -29,47 +27,6 @@ class _Video {
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(flight._internal._StaticIndex.readUint8ArrayTyped((cast b : flight._internal._UInt8Array), (cast 0.0 : Float)), 26.0) : Bool) && (cast _Runtime.strictEquals(flight._internal._StaticIndex.readUint8ArrayTyped((cast b : flight._internal._UInt8Array), (cast 1.0 : Float)), 69.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flight._internal._StaticIndex.readUint8ArrayTyped((cast b : flight._internal._UInt8Array), (cast 2.0 : Float)), 223.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flight._internal._StaticIndex.readUint8ArrayTyped((cast b : flight._internal._UInt8Array), (cast 3.0 : Float)), 163.0) : Bool)) : Bool)) { return cast 'video/webm'; }
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(flight._internal._StaticIndex.readUint8ArrayTyped((cast b : flight._internal._UInt8Array), (cast 0.0 : Float)), 79.0) : Bool) && (cast _Runtime.strictEquals(flight._internal._StaticIndex.readUint8ArrayTyped((cast b : flight._internal._UInt8Array), (cast 1.0 : Float)), 103.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flight._internal._StaticIndex.readUint8ArrayTyped((cast b : flight._internal._UInt8Array), (cast 2.0 : Float)), 103.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flight._internal._StaticIndex.readUint8ArrayTyped((cast b : flight._internal._UInt8Array), (cast 3.0 : Float)), 83.0) : Bool)) : Bool)) { return cast 'video/ogg'; }
     return cast null;
-    return cast null;
-  }
-
-  public static function explainVideoCapabilityBackend():BackendExplanation {
-    if ((cast !_Runtime.strictEquals(_Video._custom__videoFormat, null) : Bool)) {
-      return cast { conflict: _Video._hostConflict__videoFormat, layer: 'custom', operation: null, viability: 'unobserved' };
-    }
-    if ((cast !_Runtime.strictEquals(_Video._host__videoFormat, null) : Bool)) {
-      return cast { conflict: _Video._hostConflict__videoFormat, layer: 'host', operation: ((cast !_Runtime.strictEquals(_Video._hostObservation__videoFormat, null) : Bool) ? (cast (cast _Video._hostObservation__videoFormat : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(_Video._hostObservation__videoFormat, null) : Bool) ? (cast (cast _Video._hostObservation__videoFormat : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
-    }
-    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
-    return cast null;
-  }
-
-  public static function explainVideoCapabilityOperation(operation:VideoCapabilityOperation):BackendOperationExplanation {
-    if ((cast !_Runtime.strictEquals(_Video._custom__videoFormat, null) : Bool)) {
-      return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Video._custom__videoFormat, operation)), 'function') : Bool) ? (cast { implemented: true, layer: 'custom', operation: operation } : Dynamic) : (cast { implemented: false, layer: 'none', operation: operation } : Dynamic));
-    }
-    if ((cast !_Runtime.strictEquals(_Video._host__videoFormat, null) : Bool)) {
-      return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Video._host__videoFormat, operation)), 'function') : Bool) ? (cast { implemented: true, layer: 'host', operation: operation } : Dynamic) : (cast { implemented: false, layer: 'none', operation: operation } : Dynamic));
-    }
-    return cast { implemented: false, layer: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Video._sentinel__videoFormat, operation)), 'function') : Bool) ? (cast 'sentinel' : Dynamic) : (cast 'none' : Dynamic)), operation: operation };
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function getVideoCapabilityBackend():VideoCapabilityBackend {
-    return cast _Runtime.coalesce(_Runtime.coalesce(_Video._custom__videoFormat, function():Dynamic return cast _Video._host__videoFormat), function():Dynamic return cast _Video._sentinel__videoFormat);
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function hasVideoCapabilityHostBackend():Bool {
-    return cast !_Runtime.strictEquals(_Video._host__videoFormat, null);
-    return cast null;
-  }
-
-  public static function hasVideoCapabilityOperation(operation:VideoCapabilityOperation):Bool {
-    return cast (cast (cast explainVideoCapabilityOperation((cast operation : String)) : BackendOperationExplanation) : BackendOperationExplanation).implemented;
     return cast null;
   }
 
@@ -109,78 +66,31 @@ class _Video {
     return cast null;
   }
 
-  @:allow(flight)
-  @:keep
-  private static function installVideoCapabilityHostBackend(backend:VideoCapabilityBackend):Void {
-    if ((cast !_Runtime.strictEquals(_Video._host__videoFormat, null) : Bool)) {
-      if ((cast !_Runtime.strictEquals(_Video._host__videoFormat, backend) : Bool)) { (_Video._hostConflict__videoFormat = cast (true : Dynamic)); }
-      return;
-    }
-    (_Video._host__videoFormat = cast (backend : Dynamic));
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function observeVideoCapabilityHostResult(operation:VideoCapabilityOperation, succeeded:Bool):Void {
-    (_Video._hostObservation__videoFormat = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function resetVideoCapabilityBackendForTest():Void {
-    (_Video._custom__videoFormat = cast (null : Dynamic));
-    (_Video._host__videoFormat = cast (null : Dynamic));
-    (_Video._hostConflict__videoFormat = cast (false : Dynamic));
-    (_Video._hostObservation__videoFormat = cast (null : Dynamic));
-  }
-
-  public static function selectVideoResourceUrl(sources:Array<VideoResourceUrl>):Null<VideoResourceUrl> {
-    var backend:Null<VideoCapabilityBackend> = cast _Runtime.UNDEFINED;
-    backend = null;
+  public static function selectVideoResourceUrl(backend:VideoCapabilityBackend, sources:Array<VideoResourceUrl>):Null<VideoResourceUrl> {
     for (source in _Runtime.iterable(sources)) {
       var mimeType:String = _Runtime.coalesce(_Runtime.coalesce(source.type, function():Dynamic return cast (cast inferVideoMimeType((cast source.url : String)) : Null<String>)), function():Dynamic return cast '');
       if ((cast _Runtime.strictEquals(mimeType, '') : Bool)) { continue; }
-      (backend ??= (cast getVideoCapabilityBackend() : VideoCapabilityBackend));
-      if ((cast (cast _Video.probeSelectedBackend__videoFormat(({ final __callArgument2:Dynamic = backend; __callArgument2; }), (cast mimeType : String)) : Bool) : Bool)) { return cast source; }
+      if ((cast (cast _Video.probeSelectedBackend__videoFormat(({ final __callArgument4:Dynamic = backend; __callArgument4; }), (cast mimeType : String)) : Bool) : Bool)) { return cast source; }
     }
     return cast null;
     return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function setVideoCapabilityBackend(backend:Null<VideoCapabilityBackend>):Void {
-    (_Video._custom__videoFormat = cast (backend : Dynamic));
   }
 
   public static function probeSelectedBackend__videoFormat(backend:VideoCapabilityBackend, mimeType:String):Bool {
     if ((cast _Runtime.strictEquals(mimeType, '') : Bool)) { return cast false; }
     try {
-      return cast _Runtime.strictEquals((cast backend : VideoCapabilityBackend).canPlayType((cast mimeType : String)), true);
+      return cast _Runtime.strictEquals(_Runtime.callProperty(backend, 'canPlayType', cast ([mimeType] : Array<Dynamic>)), true);
     } catch (__error:Dynamic) {
       return cast false;
     }
     return cast null;
   }
 
-  public static final _sentinel__videoFormat:VideoCapabilityBackend = (cast { canPlayType: function(mimeType:String):Bool {
-    return cast false;
-    return cast _Runtime.UNDEFINED;
-  }, createVideoElement: function():flight._internal._Any {
-    return cast null;
-    return cast _Runtime.UNDEFINED;
-  } });
-
-  public static var _custom__videoFormat:Null<VideoCapabilityBackend> = _Runtime.explicitNull();
-
-  public static var _host__videoFormat:Null<VideoCapabilityBackend> = _Runtime.explicitNull();
-
-  public static var _hostConflict__videoFormat:Bool = false;
-
-  public static var _hostObservation__videoFormat:Null<{ var operation:VideoCapabilityOperation; var viability:String; }> = _Runtime.explicitNull();
-
   public static function createVideoResource(?element:flight._internal.dom.HTMLVideoElement, ?objectUrl:String, ?ownsElement:Bool):VideoResource {
-    return cast (cast createEntity(({ final __callArgument4:Dynamic = ({ element: (cast _Runtime.coalesce(element, function():Dynamic return cast null) : Dynamic), objectUrl: (cast _Runtime.coalesce(objectUrl, function():Dynamic return cast null) : Dynamic), ownsElement: (cast _Runtime.coalesce(ownsElement, function():Dynamic return cast false) : Dynamic) } : VideoResource); __callArgument4; })) : VideoResource);
+    var out:EntityConstruction<VideoResource> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ element: cast _Runtime.UNDEFINED, objectUrl: cast _Runtime.UNDEFINED, ownsElement: cast _Runtime.UNDEFINED } : VideoResource); }) #end));
+    initializeVideoResource(({ final __callArgument6:Dynamic = out; __callArgument6; }), ({ final __callArgument7:Dynamic = element; __callArgument7; }), ({ final __callArgument8:Dynamic = objectUrl; __callArgument8; }), ({ final __callArgument9:Dynamic = ownsElement; __callArgument9; }));
+    return cast out;
     return cast null;
   }
 
@@ -243,6 +153,14 @@ class _Video {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeVideoResource(out:EntityConstruction<VideoResource>, ?element:flight._internal.dom.HTMLVideoElement, ?objectUrl:String, ?ownsElement:Bool):Void {
+    _Runtime.setField(out, 'element', _Runtime.coalesce(element, function():Dynamic return cast null));
+    _Runtime.setField(out, 'objectUrl', _Runtime.coalesce(objectUrl, function():Dynamic return cast null));
+    _Runtime.setField(out, 'ownsElement', _Runtime.coalesce(ownsElement, function():Dynamic return cast false));
+  }
+
   public static function isVideoResourceEmpty(resource:VideoResource):Bool {
     var element:Null<flight._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
     element = (cast resource.element : Null<flight._internal.dom.HTMLVideoElement>);
@@ -259,24 +177,24 @@ class _Video {
 
   public static final HAVE_CURRENT_DATA__videoResource:Float = 2.0;
 
-  public static function createVideoResourceFromMediaStream(stream:flight._internal.dom.MediaStream):Null<VideoResource> {
+  public static function createVideoResourceFromMediaStream(backend:VideoCapabilityBackend, stream:flight._internal.dom.MediaStream):Null<VideoResource> {
     var element:Null<flight._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
-    element = (cast _Runtime.coalesce(_Runtime.callOptionalValue((cast (cast getVideoCapabilityBackend() : VideoCapabilityBackend) : VideoCapabilityBackend).createVideoElement, cast ([] : Array<Dynamic>)), function():Dynamic return cast null) : Null<flight._internal.dom.HTMLVideoElement>);
+    element = (cast _Runtime.coalesce(_Runtime.callOptionalProperty(backend, 'createVideoElement', cast ([] : Array<Dynamic>)), function():Dynamic return cast null) : Null<flight._internal.dom.HTMLVideoElement>);
     if ((cast _Runtime.strictEquals(element, null) : Bool)) { return cast null; }
     ((cast element : flight._internal.dom.HTMLVideoElement).srcObject = stream);
-    return cast (cast createVideoResource(({ final __callArgument6:Dynamic = element; __callArgument6; }), ({ final __callArgument7:Dynamic = _Runtime.field(_Runtime, 'UNDEFINED'); __callArgument7; }), ({ final __callArgument8:Dynamic = true; __callArgument8; })) : VideoResource);
+    return cast (cast createVideoResource(({ final __callArgument14:Dynamic = element; __callArgument14; }), ({ final __callArgument15:Dynamic = _Runtime.field(_Runtime, 'UNDEFINED'); __callArgument15; }), ({ final __callArgument16:Dynamic = true; __callArgument16; })) : VideoResource);
     return cast null;
   }
 
-  public static function loadVideoResourceFromBlob(blob:flight._internal.dom.Blob, ?options:VideoResourceLoadOptions, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<VideoResource> {
+  public static function loadVideoResourceFromBlob(backend:VideoCapabilityBackend, blob:flight._internal.dom.Blob, ?options:VideoResourceLoadOptions, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<VideoResource> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var url:String = cast _Runtime.UNDEFINED;
         var resource:VideoResource = cast _Runtime.UNDEFINED;
         url = _Runtime.callProperty(flight._internal._HostValueLut.get('URL'), 'createObjectURL', cast ([blob] : Array<Dynamic>));
         return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-          return flight._internal._Async.flatMap((cast loadVideoResourceFromUrl((cast url : String), ({ final __callArgument17:Dynamic = options; __callArgument17; }), ({ final __callArgument18:Dynamic = signal; __callArgument18; })) : flight._internal._Promise<VideoResource>), function(__awaitValue16:Dynamic):Dynamic {
-            (resource = cast (__awaitValue16 : Dynamic));
+          return flight._internal._Async.flatMap((cast loadVideoResourceFromUrl(({ final __callArgument27:Dynamic = backend; __callArgument27; }), (cast url : String), ({ final __callArgument28:Dynamic = options; __callArgument28; }), ({ final __callArgument29:Dynamic = signal; __callArgument29; })) : flight._internal._Promise<VideoResource>), function(__awaitValue26:Dynamic):Dynamic {
+            (resource = cast (__awaitValue26 : Dynamic));
             return flight._internal._Async.flowNormal();
           });
         }), function(__caughtError:Dynamic):Dynamic {
@@ -293,10 +211,10 @@ class _Video {
     );
   }
 
-  public static function loadVideoResourceFromUrl(url:String, ?options:VideoResourceLoadOptions, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<VideoResource> {
+  public static function loadVideoResourceFromUrl(backend:VideoCapabilityBackend, url:String, ?options:VideoResourceLoadOptions, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<VideoResource> {
     var element:Null<flight._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
-    if (_Runtime.truthy(({ final __hostType21 = signal; __hostType21 == null ? _Runtime.UNDEFINED : __hostType21.aborted; }))) { return cast flight._internal._Async.reject(signal.reason); }
-    element = (cast _Runtime.coalesce(_Runtime.callOptionalValue((cast (cast getVideoCapabilityBackend() : VideoCapabilityBackend) : VideoCapabilityBackend).createVideoElement, cast ([] : Array<Dynamic>)), function():Dynamic return cast null) : Null<flight._internal.dom.HTMLVideoElement>);
+    if (_Runtime.truthy(({ final __hostType33 = signal; __hostType33 == null ? _Runtime.UNDEFINED : __hostType33.aborted; }))) { return cast flight._internal._Async.reject(signal.reason); }
+    element = (cast _Runtime.coalesce(_Runtime.callOptionalProperty(backend, 'createVideoElement', cast ([] : Array<Dynamic>)), function():Dynamic return cast null) : Null<flight._internal.dom.HTMLVideoElement>);
     if ((cast _Runtime.strictEquals(element, null) : Bool)) { return cast flight._internal._Async.reject(_Runtime.error('No video element backend available')); }
     return cast flight._internal._Async.create(function(resolve:flight._internal._Any, reject:flight._internal._Any):Void {
       var readyEvent:String = cast _Runtime.UNDEFINED;
@@ -304,23 +222,23 @@ class _Video {
       var onError:Void->Void = cast _Runtime.UNDEFINED;
       var onAbort:Void->Void = cast _Runtime.UNDEFINED;
       var cleanup:Void->Void = cast _Runtime.UNDEFINED;
-      ((cast element : flight._internal.dom.HTMLVideoElement).preload = (cast _Runtime.coalesce(({ final __typedStruct22 = options; __typedStruct22 == null ? _Runtime.UNDEFINED : __typedStruct22.preload; }), function():Dynamic return cast 'auto') : flight._internal._IndexedAccess<flight._internal.dom.HTMLMediaElement, String>));
-      if ((cast !_Runtime.strictEquals(({ final __typedStruct23 = options; __typedStruct23 == null ? _Runtime.UNDEFINED : __typedStruct23.crossOrigin; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast element : flight._internal.dom.HTMLVideoElement).crossOrigin = options.crossOrigin); }
-      if ((cast !_Runtime.strictEquals(({ final __typedStruct24 = options; __typedStruct24 == null ? _Runtime.UNDEFINED : __typedStruct24.muted; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast element : flight._internal.dom.HTMLVideoElement).muted = options.muted); }
-      if ((cast !_Runtime.strictEquals(({ final __typedStruct25 = options; __typedStruct25 == null ? _Runtime.UNDEFINED : __typedStruct25.playsInline; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast element : flight._internal.dom.HTMLVideoElement).playsInline = options.playsInline); }
-      readyEvent = (cast _Video.readinessEventName__videoResourceFrom(({ final __typedStruct26 = options; __typedStruct26 == null ? _Runtime.UNDEFINED : __typedStruct26.readiness; })) : String);
+      ((cast element : flight._internal.dom.HTMLVideoElement).preload = (cast _Runtime.coalesce(({ final __typedStruct34 = options; __typedStruct34 == null ? _Runtime.UNDEFINED : __typedStruct34.preload; }), function():Dynamic return cast 'auto') : flight._internal._IndexedAccess<flight._internal.dom.HTMLMediaElement, String>));
+      if ((cast !_Runtime.strictEquals(({ final __typedStruct35 = options; __typedStruct35 == null ? _Runtime.UNDEFINED : __typedStruct35.crossOrigin; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast element : flight._internal.dom.HTMLVideoElement).crossOrigin = options.crossOrigin); }
+      if ((cast !_Runtime.strictEquals(({ final __typedStruct36 = options; __typedStruct36 == null ? _Runtime.UNDEFINED : __typedStruct36.muted; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast element : flight._internal.dom.HTMLVideoElement).muted = options.muted); }
+      if ((cast !_Runtime.strictEquals(({ final __typedStruct37 = options; __typedStruct37 == null ? _Runtime.UNDEFINED : __typedStruct37.playsInline; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast element : flight._internal.dom.HTMLVideoElement).playsInline = options.playsInline); }
+      readyEvent = (cast _Video.readinessEventName__videoResourceFrom(({ final __typedStruct38 = options; __typedStruct38 == null ? _Runtime.UNDEFINED : __typedStruct38.readiness; })) : String);
       onReady = (cast function():Void {
         cleanup();
-        resolve((cast (cast createVideoResource(({ final __callArgument28:Dynamic = element; __callArgument28; }), ({ final __callArgument29:Dynamic = _Runtime.field(_Runtime, 'UNDEFINED'); __callArgument29; }), ({ final __callArgument30:Dynamic = true; __callArgument30; })) : VideoResource) : flight._internal._Any));
+        resolve((cast (cast createVideoResource(({ final __callArgument40:Dynamic = element; __callArgument40; }), ({ final __callArgument41:Dynamic = _Runtime.field(_Runtime, 'UNDEFINED'); __callArgument41; }), ({ final __callArgument42:Dynamic = true; __callArgument42; })) : VideoResource) : flight._internal._Any));
       });
       onError = (cast function():Void {
         cleanup();
-        disposeVideoResource((cast (#if js _Runtime.callValue(createVideoResource, cast ([({ final __callArgument41:Dynamic = element; __callArgument41; })] : Array<Dynamic>)) #else createVideoResource(({ final __callArgument40:Dynamic = element; __callArgument40; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : VideoResource));
+        disposeVideoResource((cast (#if js _Runtime.callValue(createVideoResource, cast ([({ final __callArgument53:Dynamic = element; __callArgument53; })] : Array<Dynamic>)) #else createVideoResource(({ final __callArgument52:Dynamic = element; __callArgument52; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : VideoResource));
         reject((cast _Runtime.error('Failed to load video: ' + Std.string(url) + '') : flight._internal._Any));
       });
       onAbort = (cast function():Void {
         cleanup();
-        disposeVideoResource((cast (#if js _Runtime.callValue(createVideoResource, cast ([({ final __callArgument45:Dynamic = element; __callArgument45; })] : Array<Dynamic>)) #else createVideoResource(({ final __callArgument44:Dynamic = element; __callArgument44; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : VideoResource));
+        disposeVideoResource((cast (#if js _Runtime.callValue(createVideoResource, cast ([({ final __callArgument57:Dynamic = element; __callArgument57; })] : Array<Dynamic>)) #else createVideoResource(({ final __callArgument56:Dynamic = element; __callArgument56; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : VideoResource));
         reject((cast signal.reason : flight._internal._Any));
       });
       cleanup = (cast function():Void {
@@ -336,11 +254,11 @@ class _Video {
     return cast null;
   }
 
-  public static function loadVideoResourceFromUrls(sources:Array<VideoResourceUrl>, ?options:VideoResourceLoadOptions, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<VideoResource> {
+  public static function loadVideoResourceFromUrls(backend:VideoCapabilityBackend, sources:Array<VideoResourceUrl>, ?options:VideoResourceLoadOptions, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<VideoResource> {
     var selected:Null<VideoResourceUrl> = cast _Runtime.UNDEFINED;
-    selected = (cast selectVideoResourceUrl(({ final __callArgument48:Dynamic = sources; __callArgument48; })) : Null<VideoResourceUrl>);
+    selected = (cast selectVideoResourceUrl(({ final __callArgument60:Dynamic = backend; __callArgument60; }), ({ final __callArgument61:Dynamic = sources; __callArgument61; })) : Null<VideoResourceUrl>);
     if ((cast _Runtime.strictEquals(selected, null) : Bool)) { return cast flight._internal._Async.resolve((cast (#if js _Runtime.callValue(createVideoResource, cast ([] : Array<Dynamic>)) #else createVideoResource(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : VideoResource)); }
-    return cast (cast loadVideoResourceFromUrl((cast (cast selected : { var url:String; }).url : String), ({ final __callArgument50:Dynamic = options; __callArgument50; }), ({ final __callArgument51:Dynamic = signal; __callArgument51; })) : flight._internal._Promise<VideoResource>);
+    return cast (cast loadVideoResourceFromUrl(({ final __callArgument64:Dynamic = backend; __callArgument64; }), (cast (cast selected : { var url:String; }).url : String), ({ final __callArgument65:Dynamic = options; __callArgument65; }), ({ final __callArgument66:Dynamic = signal; __callArgument66; })) : flight._internal._Promise<VideoResource>);
     return cast null;
   }
 

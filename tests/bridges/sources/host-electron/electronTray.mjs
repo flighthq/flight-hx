@@ -6,3 +6,18 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createElectronTrayCapabilities = api.createElectronTrayCapabilities;
+export const initializeTrayBalloonBackend = api.initializeTrayBalloonBackend;
+export const initializeTrayBalloonEventsBackend = api.initializeTrayBalloonEventsBackend;
+export const initializeTrayBoundsBackend = api.initializeTrayBoundsBackend;
+export const initializeTrayDoubleClickPolicyBackend = api.initializeTrayDoubleClickPolicyBackend;
+export const initializeTrayDropEventsBackend = api.initializeTrayDropEventsBackend;
+export const initializeTrayImageBackend = api.initializeTrayImageBackend;
+export const initializeTrayInteractionEventsBackend = api.initializeTrayInteractionEventsBackend;
+export const initializeTrayLifecycleBackend = api.initializeTrayLifecycleBackend;
+export const initializeTrayMenuBackend = api.initializeTrayMenuBackend;
+export const initializeTrayMenuSelectionEventsBackend = api.initializeTrayMenuSelectionEventsBackend;
+export const initializeTrayPopupMenuBackend = api.initializeTrayPopupMenuBackend;
+export const initializeTrayPressedImageBackend = api.initializeTrayPressedImageBackend;
+export const initializeTrayTemplateImageBackend = api.initializeTrayTemplateImageBackend;
+export const initializeTrayTitleBackend = api.initializeTrayTitleBackend;
+export const initializeTrayTooltipBackend = api.initializeTrayTooltipBackend;

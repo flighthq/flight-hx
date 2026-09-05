@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const createParticleObjectsState = api.createParticleObjectsState;
 export const ensureParticleObjectsStateCapacity = api.ensureParticleObjectsStateCapacity;
+export const initializeParticleObjectsState = api.initializeParticleObjectsState;

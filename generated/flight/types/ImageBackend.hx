@@ -5,4 +5,21 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Types.ImageTextureSourceKind;
 
-typedef ImageBackend = { @:optional var createImageFromBitmap:Bitmap->ImageResource; var loadImageFromUrl:String->String->flight._internal.dom.AbortSignal->flight._internal._Promise<ImageResource>; };
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class ImageBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var createImageFromBitmap:Null<Bitmap->ImageResource>;
+  public var loadImageFromUrl:String->String->flight._internal.dom.AbortSignal->flight._internal._Promise<ImageResource>;
+
+  private function new(?createImageFromBitmap:Null<Bitmap->ImageResource>, loadImageFromUrl:String->String->flight._internal.dom.AbortSignal->flight._internal._Promise<ImageResource>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.createImageFromBitmap = createImageFromBitmap;
+    this.loadImageFromUrl = loadImageFromUrl;
+  }
+}
+#else
+typedef ImageBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var createImageFromBitmap:Bitmap->ImageResource; var loadImageFromUrl:String->String->flight._internal.dom.AbortSignal->flight._internal._Promise<ImageResource>; };
+#end

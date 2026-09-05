@@ -8,5 +8,6 @@ __syncDependencies();
 export const acquireCanvasRenderTexture = api.acquireCanvasRenderTexture;
 export const createCanvasRenderTexturePool = api.createCanvasRenderTexturePool;
 export const destroyCanvasRenderTexturePool = api.destroyCanvasRenderTexturePool;
+export const initializeCanvasRenderTexturePool = api.initializeCanvasRenderTexturePool;
 export const releaseCanvasRenderTexture = api.releaseCanvasRenderTexture;
 export const withCanvasRenderTextures = api.withCanvasRenderTextures;

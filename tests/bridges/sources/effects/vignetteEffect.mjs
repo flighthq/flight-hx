@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createVignetteEffect = api.createVignetteEffect;
+export const initializeVignetteEffect = api.initializeVignetteEffect;

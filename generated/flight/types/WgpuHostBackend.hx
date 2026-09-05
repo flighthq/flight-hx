@@ -4,4 +4,23 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuHostBackend = { var acquire:flight._internal.dom.HTMLCanvasElement->WgpuHostAcquisitionOptions->flight._internal._Promise<WgpuHostAcquisition>; var isSupported:Void->Bool; var release:WgpuHostAcquisition->Void; };
+#if !flight_struct_typedef
+@:allow(flight._RenderWgpu)
+@:keep
+@:structInit
+class WgpuHostBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var acquire:flight._internal.dom.HTMLCanvasElement->WgpuHostAcquisitionOptions->flight._internal._Promise<WgpuHostAcquisition>;
+  public var isSupported:Void->Bool;
+  public var release:WgpuHostAcquisition->Void;
+
+  private function new(acquire:flight._internal.dom.HTMLCanvasElement->WgpuHostAcquisitionOptions->flight._internal._Promise<WgpuHostAcquisition>, isSupported:Void->Bool, release:WgpuHostAcquisition->Void):Void {
+    this.__symbol__EntityRuntime = null;
+    this.acquire = acquire;
+    this.isSupported = isSupported;
+    this.release = release;
+  }
+}
+#else
+typedef WgpuHostBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var acquire:flight._internal.dom.HTMLCanvasElement->WgpuHostAcquisitionOptions->flight._internal._Promise<WgpuHostAcquisition>; var isSupported:Void->Bool; var release:WgpuHostAcquisition->Void; };
+#end

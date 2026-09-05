@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createToonModifier = api.createToonModifier;
+export const initializeToonModifier = api.initializeToonModifier;

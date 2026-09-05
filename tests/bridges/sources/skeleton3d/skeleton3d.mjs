@@ -14,6 +14,7 @@ export const equalsSkeleton3D = api.equalsSkeleton3D;
 export const getSkeleton3DJointIndexByName = api.getSkeleton3DJointIndexByName;
 export const getSkeleton3DJointWorldMatrix = api.getSkeleton3DJointWorldMatrix;
 export const getSkeleton3DJointWorldMatrixByName = api.getSkeleton3DJointWorldMatrixByName;
+export const initializeSkeleton3D = api.initializeSkeleton3D;
 export const setSkeleton3DBindPose = api.setSkeleton3DBindPose;
 export const setSkeleton3DBindPoseGuard = api.setSkeleton3DBindPoseGuard;
 export const validateSkeleton3D = api.validateSkeleton3D;

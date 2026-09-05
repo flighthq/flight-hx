@@ -4,3 +4,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './motionPath.mjs';
+export { initializeMotionPath } from './motionPath.mjs';

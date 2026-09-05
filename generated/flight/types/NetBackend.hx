@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef NetBackend = { var sendNetRequest:NetRequest->NetRequestOptions->flight._internal._Promise<NetResponse>; };
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class NetBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var sendNetRequest:NetRequest->NetRequestOptions->flight._internal._Promise<NetResponse>;
+
+  private function new(sendNetRequest:NetRequest->NetRequestOptions->flight._internal._Promise<NetResponse>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.sendNetRequest = sendNetRequest;
+  }
+}
+#else
+typedef NetBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var sendNetRequest:NetRequest->NetRequestOptions->flight._internal._Promise<NetResponse>; };
+#end

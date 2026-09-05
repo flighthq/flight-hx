@@ -6,5 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWebFontLoadingBackend = api.createWebFontLoadingBackend;
-export const enableHostWebFontLoading = api.enableHostWebFontLoading;
-export const resetHostWebFontLoadingForTest = api.resetHostWebFontLoadingForTest;
+export const initializeWebFontLoadingBackend = api.initializeWebFontLoadingBackend;
+export const webFontLoadingBackend = api.webFontLoadingBackend;

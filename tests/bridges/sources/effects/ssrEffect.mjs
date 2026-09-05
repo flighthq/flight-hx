@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createSsrEffect = api.createSsrEffect;
+export const initializeSsrEffect = api.initializeSsrEffect;

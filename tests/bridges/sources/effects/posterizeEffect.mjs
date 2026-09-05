@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createPosterizeEffect = api.createPosterizeEffect;
+export const initializePosterizeEffect = api.initializePosterizeEffect;

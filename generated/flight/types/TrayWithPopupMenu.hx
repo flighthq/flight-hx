@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TrayWithPopupMenu = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var __TrayPopupMenuFacetKey:Bool; };
+typedef TrayWithPopupMenu = TrayIcon;

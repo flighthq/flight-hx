@@ -4,4 +4,56 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics3DConeTwistJoint = { var kind:Physics3DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorAZ:Float; var localAnchorBX:Float; var localAnchorBY:Float; var localAnchorBZ:Float; var collideConnected:Bool; var breakForce:Float; var breakTorque:Float; var broken:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var impulse3:Float; var impulse4:Float; var impulse5:Float; var rAX:Float; var rAY:Float; var rAZ:Float; var rBX:Float; var rBY:Float; var rBZ:Float; var localRotationAX:Float; var localRotationAY:Float; var localRotationAZ:Float; var localRotationAW:Float; var localRotationBX:Float; var localRotationBY:Float; var localRotationBZ:Float; var localRotationBW:Float; var enableSwingLimit:Bool; var swingLimitY:Float; var swingLimitZ:Float; var enableTwistLimit:Bool; var lowerTwistAngle:Float; var upperTwistAngle:Float; var enableLimitSpring:Bool; var limitFrequencyHz:Float; var limitDampingRatio:Float; var swingLimitImpulse:Float; var lowerTwistImpulse:Float; var upperTwistImpulse:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Physics3D)
+@:keep
+@:structInit
+class Physics3DConeTwistJoint extends flight.types.Physics3DJoint {
+  public var localRotationAX:Float;
+  public var localRotationAY:Float;
+  public var localRotationAZ:Float;
+  public var localRotationAW:Float;
+  public var localRotationBX:Float;
+  public var localRotationBY:Float;
+  public var localRotationBZ:Float;
+  public var localRotationBW:Float;
+  public var enableSwingLimit:Bool;
+  public var swingLimitY:Float;
+  public var swingLimitZ:Float;
+  public var enableTwistLimit:Bool;
+  public var lowerTwistAngle:Float;
+  public var upperTwistAngle:Float;
+  public var enableLimitSpring:Bool;
+  public var limitFrequencyHz:Float;
+  public var limitDampingRatio:Float;
+  public var swingLimitImpulse:Float;
+  public var lowerTwistImpulse:Float;
+  public var upperTwistImpulse:Float;
+
+  private function new(kind:Physics3DJointKind, bodyA:Float, bodyB:Float, localAnchorAX:Float, localAnchorAY:Float, localAnchorAZ:Float, localAnchorBX:Float, localAnchorBY:Float, localAnchorBZ:Float, collideConnected:Bool, breakForce:Float, breakTorque:Float, broken:Bool, impulse0:Float, impulse1:Float, impulse2:Float, impulse3:Float, impulse4:Float, impulse5:Float, rAX:Float, rAY:Float, rAZ:Float, rBX:Float, rBY:Float, rBZ:Float, localRotationAX:Float, localRotationAY:Float, localRotationAZ:Float, localRotationAW:Float, localRotationBX:Float, localRotationBY:Float, localRotationBZ:Float, localRotationBW:Float, enableSwingLimit:Bool, swingLimitY:Float, swingLimitZ:Float, enableTwistLimit:Bool, lowerTwistAngle:Float, upperTwistAngle:Float, enableLimitSpring:Bool, limitFrequencyHz:Float, limitDampingRatio:Float, swingLimitImpulse:Float, lowerTwistImpulse:Float, upperTwistImpulse:Float):Void {
+    super(kind, bodyA, bodyB, localAnchorAX, localAnchorAY, localAnchorAZ, localAnchorBX, localAnchorBY, localAnchorBZ, collideConnected, breakForce, breakTorque, broken, impulse0, impulse1, impulse2, impulse3, impulse4, impulse5, rAX, rAY, rAZ, rBX, rBY, rBZ);
+    this.localRotationAX = localRotationAX;
+    this.localRotationAY = localRotationAY;
+    this.localRotationAZ = localRotationAZ;
+    this.localRotationAW = localRotationAW;
+    this.localRotationBX = localRotationBX;
+    this.localRotationBY = localRotationBY;
+    this.localRotationBZ = localRotationBZ;
+    this.localRotationBW = localRotationBW;
+    this.enableSwingLimit = enableSwingLimit;
+    this.swingLimitY = swingLimitY;
+    this.swingLimitZ = swingLimitZ;
+    this.enableTwistLimit = enableTwistLimit;
+    this.lowerTwistAngle = lowerTwistAngle;
+    this.upperTwistAngle = upperTwistAngle;
+    this.enableLimitSpring = enableLimitSpring;
+    this.limitFrequencyHz = limitFrequencyHz;
+    this.limitDampingRatio = limitDampingRatio;
+    this.swingLimitImpulse = swingLimitImpulse;
+    this.lowerTwistImpulse = lowerTwistImpulse;
+    this.upperTwistImpulse = upperTwistImpulse;
+  }
+}
+#else
+typedef Physics3DConeTwistJoint = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Physics3DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorAZ:Float; var localAnchorBX:Float; var localAnchorBY:Float; var localAnchorBZ:Float; var collideConnected:Bool; var breakForce:Float; var breakTorque:Float; var broken:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var impulse3:Float; var impulse4:Float; var impulse5:Float; var rAX:Float; var rAY:Float; var rAZ:Float; var rBX:Float; var rBY:Float; var rBZ:Float; var localRotationAX:Float; var localRotationAY:Float; var localRotationAZ:Float; var localRotationAW:Float; var localRotationBX:Float; var localRotationBY:Float; var localRotationBZ:Float; var localRotationBW:Float; var enableSwingLimit:Bool; var swingLimitY:Float; var swingLimitZ:Float; var enableTwistLimit:Bool; var lowerTwistAngle:Float; var upperTwistAngle:Float; var enableLimitSpring:Bool; var limitFrequencyHz:Float; var limitDampingRatio:Float; var swingLimitImpulse:Float; var lowerTwistImpulse:Float; var upperTwistImpulse:Float; };
+#end

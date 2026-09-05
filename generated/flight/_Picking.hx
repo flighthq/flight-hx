@@ -4,7 +4,8 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Camera.getCamera3DScreenToWorldRay;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Geometry.createAabb;
 import flight._Geometry.createMatrix4;
 import flight._Geometry.createRay3D;
@@ -29,7 +30,7 @@ import flight._Scene3D.isMesh;
 import flight.types.Aabb;
 import flight.types.AabbLike;
 import flight.types.Camera3D;
-import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.Material;
 import flight.types.Matrix4;
 import flight.types.Matrix4Like;
@@ -55,8 +56,28 @@ import flight.types.Vector3Like;
 @:noCompletion
 class _Picking {
   public static function createScene3DHit():Scene3DHit {
-    return cast (cast createEntity(({ final __callArgument0:Dynamic = ({ distance: (cast 0.0 : Dynamic), node: (cast null : Dynamic), normalX: (cast 0.0 : Dynamic), normalY: (cast 0.0 : Dynamic), normalZ: (cast 0.0 : Dynamic), pointX: (cast 0.0 : Dynamic), pointY: (cast 0.0 : Dynamic), pointZ: (cast 0.0 : Dynamic), triangleIndex: (cast -1.0 : Dynamic), u: (cast 0.0 : Dynamic), v: (cast 0.0 : Dynamic), w: (cast 0.0 : Dynamic) } : Scene3DHit); __callArgument0; })) : Scene3DHit);
+    var out:EntityConstruction<Scene3DHit> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ distance: cast _Runtime.UNDEFINED, node: cast _Runtime.UNDEFINED, normalX: cast _Runtime.UNDEFINED, normalY: cast _Runtime.UNDEFINED, normalZ: cast _Runtime.UNDEFINED, pointX: cast _Runtime.UNDEFINED, pointY: cast _Runtime.UNDEFINED, pointZ: cast _Runtime.UNDEFINED, triangleIndex: cast _Runtime.UNDEFINED, u: cast _Runtime.UNDEFINED, v: cast _Runtime.UNDEFINED, w: cast _Runtime.UNDEFINED } : Scene3DHit); }) #end));
+    initializeScene3DHit(({ final __callArgument0:Dynamic = out; __callArgument0; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeScene3DHit(out:EntityConstruction<Scene3DHit>):Void {
+    _Runtime.setField(out, 'distance', 0.0);
+    _Runtime.setField(out, 'node', null);
+    _Runtime.setField(out, 'normalX', 0.0);
+    _Runtime.setField(out, 'normalY', 0.0);
+    _Runtime.setField(out, 'normalZ', 0.0);
+    _Runtime.setField(out, 'pointX', 0.0);
+    _Runtime.setField(out, 'pointY', 0.0);
+    _Runtime.setField(out, 'pointZ', 0.0);
+    _Runtime.setField(out, 'triangleIndex', -1.0);
+    _Runtime.setField(out, 'u', 0.0);
+    _Runtime.setField(out, 'v', 0.0);
+    _Runtime.setField(out, 'w', 0.0);
   }
 
   public static function pickScene3D(scene:Node3D, camera:Camera3D, screenX:Float, screenY:Float, out:Scene3DHit, ?options:Scene3DPickOptions):Null<Scene3DHit> {

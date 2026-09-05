@@ -3,11 +3,13 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Signals.clearSignal;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
 import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.HasNotificationAction;
 import flight.types.HasNotificationActiveList;
 import flight.types.HasNotificationClick;
@@ -64,85 +66,15 @@ typedef NotificationSubscriptionRuntime__notification = { var attachment:Null<No
 @:allow(flight._Notification)
 @:keep
 @:structInit
-private class EntityShapeL157C41__notification {
-  public var onNotificationAction:Signal<Notification->String->Void>;
+private class EntityShapeL341C24__notification {
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
-  private function new(onNotificationAction:Signal<Notification->String->Void>):Void {
+  private function new():Void {
     this.__symbol__EntityRuntime = null;
-    this.onNotificationAction = onNotificationAction;
   }
 }
 #else
-private typedef EntityShapeL157C41__notification = { var onNotificationAction:Signal<Notification->String->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._Notification)
-@:keep
-@:structInit
-private class EntityShapeL163C41__notification {
-  public var onNotificationClick:Signal<Notification->Void>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(onNotificationClick:Signal<Notification->Void>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.onNotificationClick = onNotificationClick;
-  }
-}
-#else
-private typedef EntityShapeL163C41__notification = { var onNotificationClick:Signal<Notification->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._Notification)
-@:keep
-@:structInit
-private class EntityShapeL169C41__notification {
-  public var onNotificationDismiss:Signal<Notification->Void>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(onNotificationDismiss:Signal<Notification->Void>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.onNotificationDismiss = onNotificationDismiss;
-  }
-}
-#else
-private typedef EntityShapeL169C41__notification = { var onNotificationDismiss:Signal<Notification->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._Notification)
-@:keep
-@:structInit
-private class EntityShapeL175C41__notification {
-  public var onNotificationReceived:Signal<Notification->Void>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(onNotificationReceived:Signal<Notification->Void>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.onNotificationReceived = onNotificationReceived;
-  }
-}
-#else
-private typedef EntityShapeL175C41__notification = { var onNotificationReceived:Signal<Notification->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._Notification)
-@:keep
-@:structInit
-private class EntityShapeL181C41__notification {
-  public var onNotificationReply:Signal<Notification->String->String->Void>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(onNotificationReply:Signal<Notification->String->String->Void>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.onNotificationReply = onNotificationReply;
-  }
-}
-#else
-private typedef EntityShapeL181C41__notification = { var onNotificationReply:Signal<Notification->String->String->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL341C24__notification = { @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 @:noCompletion
@@ -307,41 +239,47 @@ class _Notification {
   }
 
   public static function createNotificationActionSubscription():NotificationActionSubscription {
-    return cast (cast (cast _Notification.createNotificationSubscription__notification : { var onNotificationAction:Signal<Notification->String->Void>; }->NotificationActionSubscription)(({ final __callArgument68:Dynamic = ({ onNotificationAction: (cast (cast (cast createSignal : Void->Signal<Notification->String->Void>)() : Signal<Notification->String->Void>) : Dynamic) } : EntityShapeL157C41__notification); __callArgument68; })) : NotificationActionSubscription);
+    return cast (cast (cast _Notification.createNotificationSubscription__notification : { var onNotificationAction:Signal<Notification->String->Void>; }->NotificationActionSubscription)(({ final __callArgument68:Dynamic = { onNotificationAction: (cast (cast createSignal : Void->Signal<Notification->String->Void>)() : Signal<Notification->String->Void>) }; __callArgument68; })) : NotificationActionSubscription);
     return cast null;
   }
 
   public static function createNotificationClickSubscription():NotificationClickSubscription {
-    return cast (cast (cast _Notification.createNotificationSubscription__notification : { var onNotificationClick:Signal<Notification->Void>; }->NotificationClickSubscription)(({ final __callArgument70:Dynamic = ({ onNotificationClick: (cast (cast (cast createSignal : Void->Signal<Notification->Void>)() : Signal<Notification->Void>) : Dynamic) } : EntityShapeL163C41__notification); __callArgument70; })) : NotificationClickSubscription);
+    return cast (cast (cast _Notification.createNotificationSubscription__notification : { var onNotificationClick:Signal<Notification->Void>; }->NotificationClickSubscription)(({ final __callArgument70:Dynamic = { onNotificationClick: (cast (cast createSignal : Void->Signal<Notification->Void>)() : Signal<Notification->Void>) }; __callArgument70; })) : NotificationClickSubscription);
     return cast null;
   }
 
   public static function createNotificationDismissSubscription():NotificationDismissSubscription {
-    return cast (cast (cast _Notification.createNotificationSubscription__notification : { var onNotificationDismiss:Signal<Notification->Void>; }->NotificationDismissSubscription)(({ final __callArgument72:Dynamic = ({ onNotificationDismiss: (cast (cast (cast createSignal : Void->Signal<Notification->Void>)() : Signal<Notification->Void>) : Dynamic) } : EntityShapeL169C41__notification); __callArgument72; })) : NotificationDismissSubscription);
+    return cast (cast (cast _Notification.createNotificationSubscription__notification : { var onNotificationDismiss:Signal<Notification->Void>; }->NotificationDismissSubscription)(({ final __callArgument72:Dynamic = { onNotificationDismiss: (cast (cast createSignal : Void->Signal<Notification->Void>)() : Signal<Notification->Void>) }; __callArgument72; })) : NotificationDismissSubscription);
     return cast null;
   }
 
   public static function createNotificationReceivedSubscription():NotificationReceivedSubscription {
-    return cast (cast (cast _Notification.createNotificationSubscription__notification : { var onNotificationReceived:Signal<Notification->Void>; }->NotificationReceivedSubscription)(({ final __callArgument74:Dynamic = ({ onNotificationReceived: (cast (cast (cast createSignal : Void->Signal<Notification->Void>)() : Signal<Notification->Void>) : Dynamic) } : EntityShapeL175C41__notification); __callArgument74; })) : NotificationReceivedSubscription);
+    return cast (cast (cast _Notification.createNotificationSubscription__notification : { var onNotificationReceived:Signal<Notification->Void>; }->NotificationReceivedSubscription)(({ final __callArgument74:Dynamic = { onNotificationReceived: (cast (cast createSignal : Void->Signal<Notification->Void>)() : Signal<Notification->Void>) }; __callArgument74; })) : NotificationReceivedSubscription);
     return cast null;
   }
 
   public static function createNotificationReplySubscription():NotificationReplySubscription {
-    return cast (cast (cast _Notification.createNotificationSubscription__notification : { var onNotificationReply:Signal<Notification->String->String->Void>; }->NotificationReplySubscription)(({ final __callArgument76:Dynamic = ({ onNotificationReply: (cast (cast (cast createSignal : Void->Signal<Notification->String->String->Void>)() : Signal<Notification->String->String->Void>) : Dynamic) } : EntityShapeL181C41__notification); __callArgument76; })) : NotificationReplySubscription);
+    return cast (cast (cast _Notification.createNotificationSubscription__notification : { var onNotificationReply:Signal<Notification->String->String->Void>; }->NotificationReplySubscription)(({ final __callArgument76:Dynamic = { onNotificationReply: (cast (cast createSignal : Void->Signal<Notification->String->String->Void>)() : Signal<Notification->String->String->Void>) }; __callArgument76; })) : NotificationReplySubscription);
     return cast null;
   }
 
   @:allow(flight)
   @:keep
   private static function createNotificationResource(id:String, title:String, tag:String = ''):Notification {
-    return cast (cast (cast createEntity : Null<{ var id:String; var tag:String; var title:String; }>->{ >Entity, var id:String; var tag:String; var title:String; })(({ final __callArgument78:Dynamic = ({ id: (cast id : Dynamic), tag: (cast tag : Dynamic), title: (cast title : Dynamic) } : Notification); __callArgument78; })) : Notification);
+    var out:EntityConstruction<Notification> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ id: cast _Runtime.UNDEFINED, tag: cast _Runtime.UNDEFINED, title: cast _Runtime.UNDEFINED } : Notification); }) #end));
+    initializeNotificationResource(({ final __callArgument78:Dynamic = out; __callArgument78; }), (cast id : String), (cast title : String), (cast tag : String));
+    return cast out;
     return cast null;
   }
 
   @:allow(flight)
   @:keep
   private static function createScheduledNotificationResource(id:String, request:NotificationRequest, schedule:NotificationSchedule):ScheduledNotification {
-    return cast (cast (cast createEntity : Null<{ var id:String; var request:NotificationRequest; var schedule:NotificationSchedule; }>->{ >Entity, var id:String; var request:NotificationRequest; var schedule:NotificationSchedule; })(({ final __callArgument80:Dynamic = ({ id: (cast id : Dynamic), request: (cast request : Dynamic), schedule: (cast schedule : Dynamic) } : ScheduledNotification); __callArgument80; })) : ScheduledNotification);
+    var out:EntityConstruction<ScheduledNotification> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ id: cast _Runtime.UNDEFINED, request: cast _Runtime.UNDEFINED, schedule: cast _Runtime.UNDEFINED } : ScheduledNotification); }) #end));
+    initializeScheduledNotificationResource(({ final __callArgument80:Dynamic = out; __callArgument80; }), (cast id : String), ({ final __callArgument81:Dynamic = request; __callArgument81; }), ({ final __callArgument82:Dynamic = schedule; __callArgument82; }));
+    return cast out;
     return cast null;
   }
 
@@ -351,57 +289,57 @@ class _Notification {
   }
 
   public static function detachNotificationActionSubscription(subscription:NotificationActionSubscription):flight._internal._Promise<NotificationSubscriptionDetachOutcome> {
-    return cast (cast _Notification.detachNotificationSubscription__notification(({ final __callArgument82:Dynamic = subscription; __callArgument82; })) : flight._internal._Promise<NotificationSubscriptionDetachOutcome>);
-    return cast null;
-  }
-
-  public static function detachNotificationClickSubscription(subscription:NotificationClickSubscription):flight._internal._Promise<NotificationSubscriptionDetachOutcome> {
-    return cast (cast _Notification.detachNotificationSubscription__notification(({ final __callArgument84:Dynamic = subscription; __callArgument84; })) : flight._internal._Promise<NotificationSubscriptionDetachOutcome>);
-    return cast null;
-  }
-
-  public static function detachNotificationDismissSubscription(subscription:NotificationDismissSubscription):flight._internal._Promise<NotificationSubscriptionDetachOutcome> {
     return cast (cast _Notification.detachNotificationSubscription__notification(({ final __callArgument86:Dynamic = subscription; __callArgument86; })) : flight._internal._Promise<NotificationSubscriptionDetachOutcome>);
     return cast null;
   }
 
-  public static function detachNotificationReceivedSubscription(subscription:NotificationReceivedSubscription):flight._internal._Promise<NotificationSubscriptionDetachOutcome> {
+  public static function detachNotificationClickSubscription(subscription:NotificationClickSubscription):flight._internal._Promise<NotificationSubscriptionDetachOutcome> {
     return cast (cast _Notification.detachNotificationSubscription__notification(({ final __callArgument88:Dynamic = subscription; __callArgument88; })) : flight._internal._Promise<NotificationSubscriptionDetachOutcome>);
     return cast null;
   }
 
-  public static function detachNotificationReplySubscription(subscription:NotificationReplySubscription):flight._internal._Promise<NotificationSubscriptionDetachOutcome> {
+  public static function detachNotificationDismissSubscription(subscription:NotificationDismissSubscription):flight._internal._Promise<NotificationSubscriptionDetachOutcome> {
     return cast (cast _Notification.detachNotificationSubscription__notification(({ final __callArgument90:Dynamic = subscription; __callArgument90; })) : flight._internal._Promise<NotificationSubscriptionDetachOutcome>);
+    return cast null;
+  }
+
+  public static function detachNotificationReceivedSubscription(subscription:NotificationReceivedSubscription):flight._internal._Promise<NotificationSubscriptionDetachOutcome> {
+    return cast (cast _Notification.detachNotificationSubscription__notification(({ final __callArgument92:Dynamic = subscription; __callArgument92; })) : flight._internal._Promise<NotificationSubscriptionDetachOutcome>);
+    return cast null;
+  }
+
+  public static function detachNotificationReplySubscription(subscription:NotificationReplySubscription):flight._internal._Promise<NotificationSubscriptionDetachOutcome> {
+    return cast (cast _Notification.detachNotificationSubscription__notification(({ final __callArgument94:Dynamic = subscription; __callArgument94; })) : flight._internal._Promise<NotificationSubscriptionDetachOutcome>);
     return cast null;
   }
 
   public static function disposeNotificationActionSubscription(subscription:NotificationActionSubscription):flight._internal._Promise<NotificationSubscriptionDisposeOutcome> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      return flight._internal._Async.resolve((cast (cast _Notification.disposeNotificationSubscription__notification : Entity->Signal<Array<flight._internal._Union2<Notification, String>>->Void>->flight._internal._Promise<NotificationSubscriptionDisposeOutcome>)(({ final __callArgument96:Dynamic = subscription; __callArgument96; }), ({ final __callArgument97:Dynamic = (cast subscription : NotificationActionSubscription).onNotificationAction; __callArgument97; })) : flight._internal._Promise<NotificationSubscriptionDisposeOutcome>));
+      return flight._internal._Async.resolve((cast (cast _Notification.disposeNotificationSubscription__notification : Entity->Signal<Array<flight._internal._Union2<Notification, String>>->Void>->flight._internal._Promise<NotificationSubscriptionDisposeOutcome>)(({ final __callArgument100:Dynamic = subscription; __callArgument100; }), ({ final __callArgument101:Dynamic = (cast subscription : NotificationActionSubscription).onNotificationAction; __callArgument101; })) : flight._internal._Promise<NotificationSubscriptionDisposeOutcome>));
     }));
   }
 
   public static function disposeNotificationClickSubscription(subscription:NotificationClickSubscription):flight._internal._Promise<NotificationSubscriptionDisposeOutcome> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      return flight._internal._Async.resolve((cast (cast _Notification.disposeNotificationSubscription__notification : Entity->Signal<Array<Notification>->Void>->flight._internal._Promise<NotificationSubscriptionDisposeOutcome>)(({ final __callArgument104:Dynamic = subscription; __callArgument104; }), ({ final __callArgument105:Dynamic = (cast subscription : NotificationClickSubscription).onNotificationClick; __callArgument105; })) : flight._internal._Promise<NotificationSubscriptionDisposeOutcome>));
+      return flight._internal._Async.resolve((cast (cast _Notification.disposeNotificationSubscription__notification : Entity->Signal<Array<Notification>->Void>->flight._internal._Promise<NotificationSubscriptionDisposeOutcome>)(({ final __callArgument108:Dynamic = subscription; __callArgument108; }), ({ final __callArgument109:Dynamic = (cast subscription : NotificationClickSubscription).onNotificationClick; __callArgument109; })) : flight._internal._Promise<NotificationSubscriptionDisposeOutcome>));
     }));
   }
 
   public static function disposeNotificationDismissSubscription(subscription:NotificationDismissSubscription):flight._internal._Promise<NotificationSubscriptionDisposeOutcome> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      return flight._internal._Async.resolve((cast (cast _Notification.disposeNotificationSubscription__notification : Entity->Signal<Array<Notification>->Void>->flight._internal._Promise<NotificationSubscriptionDisposeOutcome>)(({ final __callArgument112:Dynamic = subscription; __callArgument112; }), ({ final __callArgument113:Dynamic = (cast subscription : NotificationDismissSubscription).onNotificationDismiss; __callArgument113; })) : flight._internal._Promise<NotificationSubscriptionDisposeOutcome>));
+      return flight._internal._Async.resolve((cast (cast _Notification.disposeNotificationSubscription__notification : Entity->Signal<Array<Notification>->Void>->flight._internal._Promise<NotificationSubscriptionDisposeOutcome>)(({ final __callArgument116:Dynamic = subscription; __callArgument116; }), ({ final __callArgument117:Dynamic = (cast subscription : NotificationDismissSubscription).onNotificationDismiss; __callArgument117; })) : flight._internal._Promise<NotificationSubscriptionDisposeOutcome>));
     }));
   }
 
   public static function disposeNotificationReceivedSubscription(subscription:NotificationReceivedSubscription):flight._internal._Promise<NotificationSubscriptionDisposeOutcome> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      return flight._internal._Async.resolve((cast (cast _Notification.disposeNotificationSubscription__notification : Entity->Signal<Array<Notification>->Void>->flight._internal._Promise<NotificationSubscriptionDisposeOutcome>)(({ final __callArgument120:Dynamic = subscription; __callArgument120; }), ({ final __callArgument121:Dynamic = (cast subscription : NotificationReceivedSubscription).onNotificationReceived; __callArgument121; })) : flight._internal._Promise<NotificationSubscriptionDisposeOutcome>));
+      return flight._internal._Async.resolve((cast (cast _Notification.disposeNotificationSubscription__notification : Entity->Signal<Array<Notification>->Void>->flight._internal._Promise<NotificationSubscriptionDisposeOutcome>)(({ final __callArgument124:Dynamic = subscription; __callArgument124; }), ({ final __callArgument125:Dynamic = (cast subscription : NotificationReceivedSubscription).onNotificationReceived; __callArgument125; })) : flight._internal._Promise<NotificationSubscriptionDisposeOutcome>));
     }));
   }
 
   public static function disposeNotificationReplySubscription(subscription:NotificationReplySubscription):flight._internal._Promise<NotificationSubscriptionDisposeOutcome> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      return flight._internal._Async.resolve((cast (cast _Notification.disposeNotificationSubscription__notification : Entity->Signal<Array<flight._internal._Union2<Notification, String>>->Void>->flight._internal._Promise<NotificationSubscriptionDisposeOutcome>)(({ final __callArgument128:Dynamic = subscription; __callArgument128; }), ({ final __callArgument129:Dynamic = (cast subscription : NotificationReplySubscription).onNotificationReply; __callArgument129; })) : flight._internal._Promise<NotificationSubscriptionDisposeOutcome>));
+      return flight._internal._Async.resolve((cast (cast _Notification.disposeNotificationSubscription__notification : Entity->Signal<Array<flight._internal._Union2<Notification, String>>->Void>->flight._internal._Promise<NotificationSubscriptionDisposeOutcome>)(({ final __callArgument132:Dynamic = subscription; __callArgument132; }), ({ final __callArgument133:Dynamic = (cast subscription : NotificationReplySubscription).onNotificationReply; __callArgument133; })) : flight._internal._Promise<NotificationSubscriptionDisposeOutcome>));
     }));
   }
 
@@ -420,24 +358,42 @@ class _Notification {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeNotificationResource(out:EntityConstruction<Notification>, id:String, title:String, tag:String = ''):Void {
+    _Runtime.setField(out, 'id', id);
+    _Runtime.setField(out, 'tag', tag);
+    _Runtime.setField(out, 'title', title);
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeScheduledNotificationResource(out:EntityConstruction<ScheduledNotification>, id:String, request:NotificationRequest, schedule:NotificationSchedule):Void {
+    _Runtime.setField(out, 'id', id);
+    _Runtime.setField(out, 'request', request);
+    _Runtime.setField(out, 'schedule', schedule);
+  }
+
   public static function requestNotificationPermission(host:HasNotificationPermission):flight._internal._Promise<NotificationPermissionRequestOutcome> {
     return cast (cast (cast (cast host : HasNotificationPermission).notification : { var permission:NotificationPermissionBackend; }).permission : NotificationPermissionBackend).requestPermission();
     return cast null;
   }
 
   public static function scheduleNotification(host:HasNotificationScheduling, request:NotificationRequest, schedule:NotificationSchedule):flight._internal._Promise<NotificationScheduleOutcome> {
-    return cast (cast (cast (cast host : HasNotificationScheduling).notification : { var scheduling:NotificationSchedulingBackend; }).scheduling : NotificationSchedulingBackend).scheduleNotification(({ final __callArgument132:Dynamic = request; __callArgument132; }), ({ final __callArgument133:Dynamic = schedule; __callArgument133; }));
+    return cast (cast (cast (cast host : HasNotificationScheduling).notification : { var scheduling:NotificationSchedulingBackend; }).scheduling : NotificationSchedulingBackend).scheduleNotification(({ final __callArgument136:Dynamic = request; __callArgument136; }), ({ final __callArgument137:Dynamic = schedule; __callArgument137; }));
     return cast null;
   }
 
   public static function showNotification(host:HasNotificationDelivery, request:NotificationRequest):flight._internal._Promise<NotificationDeliveryOutcome> {
-    return cast (cast (cast (cast host : HasNotificationDelivery).notification : { var delivery:NotificationDeliveryBackend; }).delivery : NotificationDeliveryBackend).notify(({ final __callArgument134:Dynamic = request; __callArgument134; }));
+    return cast (cast (cast (cast host : HasNotificationDelivery).notification : { var delivery:NotificationDeliveryBackend; }).delivery : NotificationDeliveryBackend).notify(({ final __callArgument138:Dynamic = request; __callArgument138; }));
     return cast null;
   }
 
   public static function createNotificationSubscription__notification<TSubscription:Entity>(fields:flight._internal._Omit<TSubscription, flight._internal._Symbol>):TSubscription {
-    var subscription:TSubscription = cast _Runtime.UNDEFINED;
-    subscription = (cast (cast createEntity : Null<flight._internal._Any>->Entity)(({ final __callArgument135:Dynamic = fields; __callArgument135; })) : TSubscription);
+    var subscription:EntityConstruction<TSubscription> = cast _Runtime.UNDEFINED;
+    subscription = (cast ({  } : EntityShapeL341C24__notification));
+    flight._internal.DynamicObject.assign(subscription, fields);
+    subscription;
     ((cast _Notification._notificationSubscriptions__notification : flight._internal._WeakMap<Entity, NotificationSubscriptionRuntime__notification>).set((cast subscription), (cast { attachment: null, disposeCompleted: false, disposed: false, generation: 0.0, pending: null })));
     return cast subscription;
     return cast null;
@@ -452,26 +408,26 @@ class _Notification {
         var pending:flight._internal._Promise<NotificationEventBackendAttachOutcome> = cast _Runtime.UNDEFINED;
         var outcome:NotificationEventBackendAttachOutcome = cast _Runtime.UNDEFINED;
         runtime = ((cast _Notification._notificationSubscriptions__notification : flight._internal._WeakMap<Entity, NotificationSubscriptionRuntime__notification>).get((cast subscription)));
-        var __flowBranch139:Dynamic;
+        var __flowBranch141:Dynamic;
         if ((cast ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast (cast runtime : NotificationSubscriptionRuntime__notification).disposed : Bool)) : Bool)) {
-          __flowBranch139 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch141 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn({ attachFailed: true, reason: 'operation-failed', releaseFailed: false });
           });
         } else {
-          __flowBranch139 = flight._internal._Async.flowNormal();
+          __flowBranch141 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch139, function():Dynamic {
-          return flight._internal._Async.flatMap((cast _Notification.detachNotificationSubscription__notification(({ final __callArgument147:Dynamic = subscription; __callArgument147; })) : flight._internal._Promise<NotificationSubscriptionDetachOutcome>), function(__awaitValue140:Dynamic):Dynamic {
-            detached = __awaitValue140;
-            var __flowBranch141:Dynamic;
+        return flight._internal._Async.continueFlow(__flowBranch141, function():Dynamic {
+          return flight._internal._Async.flatMap((cast _Notification.detachNotificationSubscription__notification(({ final __callArgument149:Dynamic = subscription; __callArgument149; })) : flight._internal._Promise<NotificationSubscriptionDetachOutcome>), function(__awaitValue142:Dynamic):Dynamic {
+            detached = __awaitValue142;
+            var __flowBranch143:Dynamic;
             if ((cast _Runtime.strictEquals((cast detached : { var reason:String; }).reason, 'operation-failed') : Bool)) {
-              __flowBranch141 = flight._internal._Async.protect(function():Dynamic {
+              __flowBranch143 = flight._internal._Async.protect(function():Dynamic {
                 return flight._internal._Async.flowReturn({ attachFailed: false, reason: 'operation-failed', releaseFailed: true });
               });
             } else {
-              __flowBranch141 = flight._internal._Async.flowNormal();
+              __flowBranch143 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch141, function():Dynamic {
+            return flight._internal._Async.continueFlow(__flowBranch143, function():Dynamic {
               generation = ++(cast runtime : NotificationSubscriptionRuntime__notification).generation;
               return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
                 (pending = cast ((cast attach((cast listener : Dynamic)) : flight._internal._Promise<NotificationEventBackendAttachOutcome>) : Dynamic));
@@ -484,8 +440,8 @@ class _Notification {
               }), function():Dynamic {
                 ((cast runtime : NotificationSubscriptionRuntime__notification).pending = pending);
                 return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-                  return flight._internal._Async.flatMap(pending, function(__awaitValue142:Dynamic):Dynamic {
-                    (outcome = cast (__awaitValue142 : Dynamic));
+                  return flight._internal._Async.flatMap(pending, function(__awaitValue144:Dynamic):Dynamic {
+                    (outcome = cast (__awaitValue144 : Dynamic));
                     return flight._internal._Async.flowNormal();
                   });
                 }), function(__caughtError:Dynamic):Dynamic {
@@ -495,38 +451,38 @@ class _Notification {
                     return flight._internal._Async.flowNormal();
                   });
                 }), function():Dynamic {
-                  var __flowBranch143:Dynamic;
+                  var __flowBranch145:Dynamic;
                   if ((cast _Runtime.strictEquals((cast runtime : NotificationSubscriptionRuntime__notification).pending, pending) : Bool)) {
-                    __flowBranch143 = flight._internal._Async.protect(function():Dynamic {
+                    __flowBranch145 = flight._internal._Async.protect(function():Dynamic {
                       ((cast runtime : NotificationSubscriptionRuntime__notification).pending = null);
                       return flight._internal._Async.flowNormal();
                     });
                   } else {
-                    __flowBranch143 = flight._internal._Async.flowNormal();
+                    __flowBranch145 = flight._internal._Async.flowNormal();
                   }
-                  return flight._internal._Async.continueFlow(__flowBranch143, function():Dynamic {
-                    var __flowBranch144:Dynamic;
+                  return flight._internal._Async.continueFlow(__flowBranch145, function():Dynamic {
+                    var __flowBranch146:Dynamic;
                     if ((cast _Runtime.strictEquals((cast outcome : { var reason:String; }).reason, 'operation-failed') : Bool)) {
-                      __flowBranch144 = flight._internal._Async.protect(function():Dynamic {
+                      __flowBranch146 = flight._internal._Async.protect(function():Dynamic {
                         return flight._internal._Async.flowReturn({ attachFailed: true, reason: 'operation-failed', releaseFailed: (cast outcome : { var reason:String; var releaseFailed:Bool; }).releaseFailed });
                       });
                     } else {
-                      __flowBranch144 = flight._internal._Async.flowNormal();
+                      __flowBranch146 = flight._internal._Async.flowNormal();
                     }
-                    return flight._internal._Async.continueFlow(__flowBranch144, function():Dynamic {
-                      var __flowBranch145:Dynamic;
+                    return flight._internal._Async.continueFlow(__flowBranch146, function():Dynamic {
+                      var __flowBranch147:Dynamic;
                       if ((cast ((cast (cast runtime : NotificationSubscriptionRuntime__notification).disposed : Bool) || (cast !_Runtime.strictEquals((cast runtime : NotificationSubscriptionRuntime__notification).generation, generation) : Bool)) : Bool)) {
-                        __flowBranch145 = flight._internal._Async.protect(function():Dynamic {
+                        __flowBranch147 = flight._internal._Async.protect(function():Dynamic {
                           var release:NotificationEventReleaseOutcome = cast _Runtime.UNDEFINED;
-                          return flight._internal._Async.flatMap((cast _Notification.releaseNotificationAttachment__notification((cast outcome : { var attachment:NotificationEventAttachment; var reason:String; }).attachment) : flight._internal._Promise<NotificationEventReleaseOutcome>), function(__awaitValue146:Dynamic):Dynamic {
-                            release = __awaitValue146;
+                          return flight._internal._Async.flatMap((cast _Notification.releaseNotificationAttachment__notification((cast outcome : { var attachment:NotificationEventAttachment; var reason:String; }).attachment) : flight._internal._Promise<NotificationEventReleaseOutcome>), function(__awaitValue148:Dynamic):Dynamic {
+                            release = __awaitValue148;
                             return flight._internal._Async.flowReturn(((cast _Runtime.strictEquals((cast release : NotificationEventReleaseOutcome).reason, 'ok') : Bool) ? (cast { reason: 'ok' } : Dynamic) : (cast { attachFailed: false, reason: 'operation-failed', releaseFailed: true } : Dynamic)));
                           });
                         });
                       } else {
-                        __flowBranch145 = flight._internal._Async.flowNormal();
+                        __flowBranch147 = flight._internal._Async.flowNormal();
                       }
-                      return flight._internal._Async.continueFlow(__flowBranch145, function():Dynamic {
+                      return flight._internal._Async.continueFlow(__flowBranch147, function():Dynamic {
                         ((cast runtime : NotificationSubscriptionRuntime__notification).attachment = (cast outcome : { var attachment:NotificationEventAttachment; var reason:String; }).attachment);
                         return flight._internal._Async.flowReturn({ reason: 'ok' });
                       });
@@ -548,27 +504,27 @@ class _Notification {
         var attachment:NotificationEventAttachment = cast _Runtime.UNDEFINED;
         var outcome:NotificationEventReleaseOutcome = cast _Runtime.UNDEFINED;
         runtime = ((cast _Notification._notificationSubscriptions__notification : flight._internal._WeakMap<Entity, NotificationSubscriptionRuntime__notification>).get((cast subscription)));
-        var __flowBranch151:Dynamic;
+        var __flowBranch153:Dynamic;
         if ((cast ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals((cast runtime : NotificationSubscriptionRuntime__notification).attachment, null) : Bool)) : Bool)) {
-          __flowBranch151 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch153 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn({ reason: 'not-attached' });
           });
         } else {
-          __flowBranch151 = flight._internal._Async.flowNormal();
+          __flowBranch153 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch151, function():Dynamic {
+        return flight._internal._Async.continueFlow(__flowBranch153, function():Dynamic {
           attachment = (cast runtime : NotificationSubscriptionRuntime__notification).attachment;
-          return flight._internal._Async.flatMap((cast _Notification.releaseNotificationAttachment__notification(({ final __callArgument154:Dynamic = attachment; __callArgument154; })) : flight._internal._Promise<NotificationEventReleaseOutcome>), function(__awaitValue152:Dynamic):Dynamic {
-            outcome = __awaitValue152;
-            var __flowBranch153:Dynamic;
+          return flight._internal._Async.flatMap((cast _Notification.releaseNotificationAttachment__notification(({ final __callArgument156:Dynamic = attachment; __callArgument156; })) : flight._internal._Promise<NotificationEventReleaseOutcome>), function(__awaitValue154:Dynamic):Dynamic {
+            outcome = __awaitValue154;
+            var __flowBranch155:Dynamic;
             if ((cast _Runtime.strictEquals((cast outcome : NotificationEventReleaseOutcome).reason, 'operation-failed') : Bool)) {
-              __flowBranch153 = flight._internal._Async.protect(function():Dynamic {
+              __flowBranch155 = flight._internal._Async.protect(function():Dynamic {
                 return flight._internal._Async.flowReturn({ reason: 'operation-failed', releaseFailed: true });
               });
             } else {
-              __flowBranch153 = flight._internal._Async.flowNormal();
+              __flowBranch155 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch153, function():Dynamic {
+            return flight._internal._Async.continueFlow(__flowBranch155, function():Dynamic {
               ((cast runtime : NotificationSubscriptionRuntime__notification).attachment = null);
               return flight._internal._Async.flowReturn({ reason: 'ok' });
             });
@@ -586,26 +542,26 @@ class _Notification {
         var releaseFailed:Bool = cast _Runtime.UNDEFINED;
         var detached:NotificationSubscriptionDetachOutcome = cast _Runtime.UNDEFINED;
         runtime = ((cast _Notification._notificationSubscriptions__notification : flight._internal._WeakMap<Entity, NotificationSubscriptionRuntime__notification>).get((cast subscription)));
-        var __flowBranch158:Dynamic;
+        var __flowBranch160:Dynamic;
         if ((cast ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast (cast runtime : NotificationSubscriptionRuntime__notification).disposeCompleted : Bool)) : Bool)) {
-          __flowBranch158 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch160 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn({ reason: 'already-disposed' });
           });
         } else {
-          __flowBranch158 = flight._internal._Async.flowNormal();
+          __flowBranch160 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch158, function():Dynamic {
+        return flight._internal._Async.continueFlow(__flowBranch160, function():Dynamic {
           ((cast runtime : NotificationSubscriptionRuntime__notification).disposed = true);
           (cast runtime : NotificationSubscriptionRuntime__notification).generation++;
           attachFailed = false;
           releaseFailed = false;
-          var __flowBranch159:Dynamic;
+          var __flowBranch161:Dynamic;
           if ((cast !_Runtime.strictEquals((cast runtime : NotificationSubscriptionRuntime__notification).pending, null) : Bool)) {
-            __flowBranch159 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch161 = flight._internal._Async.protect(function():Dynamic {
               var outcome:NotificationEventBackendAttachOutcome = cast _Runtime.UNDEFINED;
               return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-                return flight._internal._Async.flatMap((cast runtime : NotificationSubscriptionRuntime__notification).pending, function(__awaitValue160:Dynamic):Dynamic {
-                  (outcome = cast (__awaitValue160 : Dynamic));
+                return flight._internal._Async.flatMap((cast runtime : NotificationSubscriptionRuntime__notification).pending, function(__awaitValue162:Dynamic):Dynamic {
+                  (outcome = cast (__awaitValue162 : Dynamic));
                   return flight._internal._Async.flowNormal();
                 });
               }), function(__caughtError:Dynamic):Dynamic {
@@ -615,47 +571,47 @@ class _Notification {
                   return flight._internal._Async.flowNormal();
                 });
               }), function():Dynamic {
-                var __flowBranch161:Dynamic;
+                var __flowBranch163:Dynamic;
                 if ((cast _Runtime.strictEquals((cast outcome : { var reason:String; }).reason, 'operation-failed') : Bool)) {
-                  __flowBranch161 = flight._internal._Async.protect(function():Dynamic {
+                  __flowBranch163 = flight._internal._Async.protect(function():Dynamic {
                     (attachFailed = cast (true : Dynamic));
                     (releaseFailed = cast ((cast outcome : { var reason:String; var releaseFailed:Bool; }).releaseFailed : Dynamic));
                     return flight._internal._Async.flowNormal();
                   });
                 } else {
-                  __flowBranch161 = flight._internal._Async.flowNormal();
+                  __flowBranch163 = flight._internal._Async.flowNormal();
                 }
-                return flight._internal._Async.continueFlow(__flowBranch161, function():Dynamic {
+                return flight._internal._Async.continueFlow(__flowBranch163, function():Dynamic {
                   return flight._internal._Async.flowNormal();
                 });
               });
             });
           } else {
-            __flowBranch159 = flight._internal._Async.flowNormal();
+            __flowBranch161 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch159, function():Dynamic {
-            return flight._internal._Async.flatMap((cast _Notification.detachNotificationSubscription__notification(({ final __callArgument165:Dynamic = subscription; __callArgument165; })) : flight._internal._Promise<NotificationSubscriptionDetachOutcome>), function(__awaitValue162:Dynamic):Dynamic {
-              detached = __awaitValue162;
-              var __flowBranch163:Dynamic;
+          return flight._internal._Async.continueFlow(__flowBranch161, function():Dynamic {
+            return flight._internal._Async.flatMap((cast _Notification.detachNotificationSubscription__notification(({ final __callArgument167:Dynamic = subscription; __callArgument167; })) : flight._internal._Promise<NotificationSubscriptionDetachOutcome>), function(__awaitValue164:Dynamic):Dynamic {
+              detached = __awaitValue164;
+              var __flowBranch165:Dynamic;
               if ((cast _Runtime.strictEquals((cast detached : { var reason:String; }).reason, 'operation-failed') : Bool)) {
-                __flowBranch163 = flight._internal._Async.protect(function():Dynamic {
+                __flowBranch165 = flight._internal._Async.protect(function():Dynamic {
                   (releaseFailed = cast (true : Dynamic));
                   return flight._internal._Async.flowNormal();
                 });
               } else {
-                __flowBranch163 = flight._internal._Async.flowNormal();
+                __flowBranch165 = flight._internal._Async.flowNormal();
               }
-              return flight._internal._Async.continueFlow(__flowBranch163, function():Dynamic {
+              return flight._internal._Async.continueFlow(__flowBranch165, function():Dynamic {
                 clearSignal((cast signal : Dynamic));
-                var __flowBranch164:Dynamic;
+                var __flowBranch166:Dynamic;
                 if ((cast ((cast attachFailed : Bool) || (cast releaseFailed : Bool)) : Bool)) {
-                  __flowBranch164 = flight._internal._Async.protect(function():Dynamic {
+                  __flowBranch166 = flight._internal._Async.protect(function():Dynamic {
                     return flight._internal._Async.flowReturn({ attachFailed: attachFailed, reason: 'operation-failed', releaseFailed: releaseFailed });
                   });
                 } else {
-                  __flowBranch164 = flight._internal._Async.flowNormal();
+                  __flowBranch166 = flight._internal._Async.flowNormal();
                 }
-                return flight._internal._Async.continueFlow(__flowBranch164, function():Dynamic {
+                return flight._internal._Async.continueFlow(__flowBranch166, function():Dynamic {
                   ((cast runtime : NotificationSubscriptionRuntime__notification).disposeCompleted = true);
                   return flight._internal._Async.flowReturn({ reason: 'ok' });
                 });
@@ -671,8 +627,8 @@ class _Notification {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-          return flight._internal._Async.flatMap((cast attachment : NotificationEventAttachment).release(), function(__awaitValue167:Dynamic):Dynamic {
-            return flight._internal._Async.flowReturn(__awaitValue167);
+          return flight._internal._Async.flatMap((cast attachment : NotificationEventAttachment).release(), function(__awaitValue169:Dynamic):Dynamic {
+            return flight._internal._Async.flowReturn(__awaitValue169);
           });
         }), function(__caughtError:Dynamic):Dynamic {
           var __error:Dynamic = __caughtError;

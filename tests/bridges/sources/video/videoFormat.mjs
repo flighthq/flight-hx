@@ -7,14 +7,5 @@ __syncDependencies();
 
 export const canPlayVideoType = api.canPlayVideoType;
 export const detectVideoMimeType = api.detectVideoMimeType;
-export const explainVideoCapabilityBackend = api.explainVideoCapabilityBackend;
-export const explainVideoCapabilityOperation = api.explainVideoCapabilityOperation;
-export const getVideoCapabilityBackend = api.getVideoCapabilityBackend;
-export const hasVideoCapabilityHostBackend = api.hasVideoCapabilityHostBackend;
-export const hasVideoCapabilityOperation = api.hasVideoCapabilityOperation;
 export const inferVideoMimeType = api.inferVideoMimeType;
-export const installVideoCapabilityHostBackend = api.installVideoCapabilityHostBackend;
-export const observeVideoCapabilityHostResult = api.observeVideoCapabilityHostResult;
-export const resetVideoCapabilityBackendForTest = api.resetVideoCapabilityBackendForTest;
 export const selectVideoResourceUrl = api.selectVideoResourceUrl;
-export const setVideoCapabilityBackend = api.setVideoCapabilityBackend;

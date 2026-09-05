@@ -10,5 +10,6 @@ export const createGlobalShortcut = api.createGlobalShortcut;
 export const destroyShortcutTrigger = api.destroyShortcutTrigger;
 export const detachGlobalShortcut = api.detachGlobalShortcut;
 export const disposeGlobalShortcut = api.disposeGlobalShortcut;
+export const initializeGlobalShortcut = api.initializeGlobalShortcut;
 export const queryGlobalShortcutConflict = api.queryGlobalShortcutConflict;
 export const queryGlobalShortcutRegistration = api.queryGlobalShortcutRegistration;

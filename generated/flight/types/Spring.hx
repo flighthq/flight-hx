@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Spring = { var value:Float; var velocity:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Spring)
+@:keep
+@:structInit
+class Spring {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var value:Float;
+  public var velocity:Float;
+
+  private function new(value:Float, velocity:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.value = value;
+    this.velocity = velocity;
+  }
+}
+#else
+typedef Spring = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var value:Float; var velocity:Float; };
+#end

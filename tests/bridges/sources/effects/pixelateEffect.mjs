@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createPixelateEffect = api.createPixelateEffect;
+export const initializePixelateEffect = api.initializePixelateEffect;

@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef RiveDocumentImportResult = { var artboards:Array<RiveArtboardImport>; var assets:Array<RiveFileAsset>; };
+#if !flight_struct_typedef
+@:allow(flight._Scene2DFormats)
+@:keep
+@:structInit
+class RiveDocumentImportResult {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var artboards:Array<RiveArtboardImport>;
+  public var assets:Array<RiveFileAsset>;
+
+  private function new(artboards:Array<RiveArtboardImport>, assets:Array<RiveFileAsset>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.artboards = artboards;
+    this.assets = assets;
+  }
+}
+#else
+typedef RiveDocumentImportResult = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var artboards:Array<RiveArtboardImport>; var assets:Array<RiveFileAsset>; };
+#end

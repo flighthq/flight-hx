@@ -8,4 +8,5 @@ __syncDependencies();
 export const defaultDomRichTextRenderer = api.defaultDomRichTextRenderer;
 export const drawDomRichText = api.drawDomRichText;
 export const drawDomRichTextMask = api.drawDomRichTextMask;
+export const initializeDomRichTextData = api.initializeDomRichTextData;
 export const registerDomTextInputOverlay = api.registerDomTextInputOverlay;

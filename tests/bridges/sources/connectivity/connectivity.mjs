@@ -14,5 +14,6 @@ export const disposeConnectivity = api.disposeConnectivity;
 export const getConnectivityOnline = api.getConnectivityOnline;
 export const getConnectivityStatus = api.getConnectivityStatus;
 export const hasConnectivityStatusChanged = api.hasConnectivityStatusChanged;
+export const initializeConnectivity = api.initializeConnectivity;
 export const isConnectivityMetered = api.isConnectivityMetered;
 export const isConnectivitySaveDataEnabled = api.isConnectivitySaveDataEnabled;

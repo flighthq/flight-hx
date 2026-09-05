@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlPbrDefineKey = { var alphaMaskEnabled:Bool; var hasAlphaMap:Bool; var hasBaseColorMap:Bool; @:optional var hasColorAdjustment:Bool; @:optional var hasColorMatrix:Bool; var hasEmissiveMap:Bool; var hasMetallicRoughnessMap:Bool; var hasNormalMap:Bool; var hasOcclusionMap:Bool; @:optional var hasSkin:Bool; var hasUvTransform:Bool; };
+typedef GlPbrDefineKey = { var alphaMaskEnabled:Bool; var hasAlphaMap:Bool; var hasBaseColorMap:Bool; @:optional var hasColorAdjustment:Bool; @:optional var hasColorMatrix:Bool; var hasEmissiveMap:Bool; @:optional var hasInstances:Bool; var hasMetallicRoughnessMap:Bool; var hasNormalMap:Bool; var hasOcclusionMap:Bool; @:optional var hasSkin:Bool; var hasUvTransform:Bool; };

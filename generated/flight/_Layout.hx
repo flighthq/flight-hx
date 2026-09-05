@@ -6,12 +6,15 @@ import flight._internal._Runtime;
 import flight.Types.AnchorLayoutKind;
 import flight.Types.FlexLayoutKind;
 import flight.Types.GridLayoutKind;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Types.AnchorLayoutKind;
 import flight._Types.FlexLayoutKind;
 import flight._Types.GridLayoutKind;
 import flight._Types.LayoutResolutionFailureKindValue;
 import flight._Types.LayoutResolutionFailureKindValue as Failure;
 import flight.types.AnchorLayoutItemStyle;
+import flight.types.EntityConstruction;
 import flight.types.FlexLayoutAlign;
 import flight.types.FlexLayoutContainerStyle;
 import flight.types.FlexLayoutDirection;
@@ -690,8 +693,24 @@ class _Layout {
   }
 
   public static function createLayoutState():LayoutState {
-    return cast { guard: null, lastFailureActualLength: 0.0, lastFailureKind: null, lastFailureNodeIndex: -1.0, lastFailureParentIndex: -1.0, lastFailureRequiredLength: 0.0, lastFailureResolverKind: null, resolvers: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []) };
+    var out:EntityConstruction<LayoutState> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ guard: cast _Runtime.UNDEFINED, lastFailureActualLength: cast _Runtime.UNDEFINED, lastFailureKind: cast _Runtime.UNDEFINED, lastFailureNodeIndex: cast _Runtime.UNDEFINED, lastFailureParentIndex: cast _Runtime.UNDEFINED, lastFailureRequiredLength: cast _Runtime.UNDEFINED, lastFailureResolverKind: cast _Runtime.UNDEFINED, resolvers: cast _Runtime.UNDEFINED } : LayoutState); }) #end));
+    initializeLayoutState(({ final __callArgument137:Dynamic = out; __callArgument137; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeLayoutState(out:EntityConstruction<LayoutState>):Void {
+    ((cast out : { var guard:Null<LayoutResolutionGuard>; }).guard = null);
+    _Runtime.setField(out, 'lastFailureActualLength', 0.0);
+    _Runtime.setField(out, 'lastFailureKind', null);
+    _Runtime.setField(out, 'lastFailureNodeIndex', -1.0);
+    _Runtime.setField(out, 'lastFailureParentIndex', -1.0);
+    _Runtime.setField(out, 'lastFailureRequiredLength', 0.0);
+    _Runtime.setField(out, 'lastFailureResolverKind', null);
+    _Runtime.setField(out, 'resolvers', _Runtime.construct(flight._internal._HostValueLut.get('Map'), []));
   }
 
   public static function registerLayoutResolver(state:LayoutState, kind:String, resolver:Null<LayoutResolver>):Void {
@@ -708,13 +727,13 @@ class _Layout {
     if ((cast ((cast ((cast nodeIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast nodeIndex : Float) >= (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) : Bool)) { return cast null; }
     node = flight._internal._StaticIndex.readArray(nodes, nodeIndex);
     if ((cast ((cast ((cast node.parentIndex : Float) < (cast -1.0 : Float)) : Bool) || (cast ((cast node.parentIndex : Float) >= (cast nodeIndex : Float)) : Bool)) : Bool)) {
-      return cast (cast _Layout.explanation__resolveLayoutTree(({ final __callArgument137:Dynamic = (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidHierarchy; __callArgument137; }), (cast nodeIndex : Float), (cast node.parentIndex : Float), ({ final __callArgument138:Dynamic = node.kind; __callArgument138; })) : LayoutResolutionExplanation);
+      return cast (cast _Layout.explanation__resolveLayoutTree(({ final __callArgument139:Dynamic = (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidHierarchy; __callArgument139; }), (cast nodeIndex : Float), (cast node.parentIndex : Float), ({ final __callArgument140:Dynamic = node.kind; __callArgument140; })) : LayoutResolutionExplanation);
     }
     {
       var i:Float = (nodeIndex + 1.0);
       while ((cast ((cast i : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) {
         if ((cast ((cast _Runtime.strictEquals((cast flight._internal._StaticIndex.readArray(nodes, i) : { var parentIndex:Float; }).parentIndex, nodeIndex) : Bool) && (cast !(cast ((cast state.resolvers : flight._internal._Map<String, LayoutResolver>).has((cast node.kind))) : Bool) : Bool)) : Bool)) {
-          return cast (cast _Layout.explanation__resolveLayoutTree(({ final __callArgument141:Dynamic = (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).UnregisteredKind; __callArgument141; }), (cast nodeIndex : Float), (cast -1.0 : Float), ({ final __callArgument142:Dynamic = node.kind; __callArgument142; })) : LayoutResolutionExplanation);
+          return cast (cast _Layout.explanation__resolveLayoutTree(({ final __callArgument143:Dynamic = (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).UnregisteredKind; __callArgument143; }), (cast nodeIndex : Float), (cast -1.0 : Float), ({ final __callArgument144:Dynamic = node.kind; __callArgument144; })) : LayoutResolutionExplanation);
         }
         i++;
       }
@@ -729,15 +748,15 @@ class _Layout {
     var requiredIntrinsicLength:Float = cast _Runtime.UNDEFINED;
     var rootWidth:Float = cast _Runtime.UNDEFINED;
     var rootHeight:Float = cast _Runtime.UNDEFINED;
-    _Layout.clearLayoutFailure__resolveLayoutTree(({ final __callArgument145:Dynamic = state; __callArgument145; }));
+    _Layout.clearLayoutFailure__resolveLayoutTree(({ final __callArgument147:Dynamic = state; __callArgument147; }));
     nodes = tree.nodes;
     requiredOutLength = _Runtime.multiplyNumbers(_Runtime.field(nodes, 'length'), 4.0);
     if ((cast ((cast _Runtime.field(out, 'length') : Float) < (cast requiredOutLength : Float)) : Bool)) {
-      return cast (cast _Layout.failLayoutResolution__resolveLayoutTree(({ final __callArgument147:Dynamic = state; __callArgument147; }), ({ final __callArgument148:Dynamic = tree; __callArgument148; }), ({ final __callArgument149:Dynamic = (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).OutputTooSmall; __callArgument149; }), (cast -1.0 : Float), (cast -1.0 : Float), (cast requiredOutLength : Float), (cast _Runtime.field(out, 'length') : Float), ({ final __callArgument150:Dynamic = null; __callArgument150; })) : Bool);
+      return cast (cast _Layout.failLayoutResolution__resolveLayoutTree(({ final __callArgument149:Dynamic = state; __callArgument149; }), ({ final __callArgument150:Dynamic = tree; __callArgument150; }), ({ final __callArgument151:Dynamic = (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).OutputTooSmall; __callArgument151; }), (cast -1.0 : Float), (cast -1.0 : Float), (cast requiredOutLength : Float), (cast _Runtime.field(out, 'length') : Float), ({ final __callArgument152:Dynamic = null; __callArgument152; })) : Bool);
     }
     requiredIntrinsicLength = _Runtime.multiplyNumbers(_Runtime.field(nodes, 'length'), 2.0);
     if ((cast ((cast _Runtime.field(intrinsicSizes, 'length') : Float) < (cast requiredIntrinsicLength : Float)) : Bool)) {
-      return cast (cast _Layout.failLayoutResolution__resolveLayoutTree(({ final __callArgument155:Dynamic = state; __callArgument155; }), ({ final __callArgument156:Dynamic = tree; __callArgument156; }), ({ final __callArgument157:Dynamic = (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).IntrinsicSizesTooSmall; __callArgument157; }), (cast -1.0 : Float), (cast -1.0 : Float), (cast requiredIntrinsicLength : Float), (cast _Runtime.field(intrinsicSizes, 'length') : Float), ({ final __callArgument158:Dynamic = null; __callArgument158; })) : Bool);
+      return cast (cast _Layout.failLayoutResolution__resolveLayoutTree(({ final __callArgument157:Dynamic = state; __callArgument157; }), ({ final __callArgument158:Dynamic = tree; __callArgument158; }), ({ final __callArgument159:Dynamic = (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).IntrinsicSizesTooSmall; __callArgument159; }), (cast -1.0 : Float), (cast -1.0 : Float), (cast requiredIntrinsicLength : Float), (cast _Runtime.field(intrinsicSizes, 'length') : Float), ({ final __callArgument160:Dynamic = null; __callArgument160; })) : Bool);
     }
     rootWidth = (cast _Layout.finiteSize__resolveLayoutTree((cast availableWidth : Float)) : Float);
     rootHeight = (cast _Layout.finiteSize__resolveLayoutTree((cast availableHeight : Float)) : Float);
@@ -747,7 +766,7 @@ class _Layout {
         var node:LayoutNode<flight._internal._Object, flight._internal._Object> = flight._internal._StaticIndex.readArray(nodes, i);
         var parentIndex:Float = node.parentIndex;
         if ((cast ((cast ((cast parentIndex : Float) < (cast -1.0 : Float)) : Bool) || (cast ((cast parentIndex : Float) >= (cast i : Float)) : Bool)) : Bool)) {
-          return cast (cast _Layout.failLayoutResolution__resolveLayoutTree(({ final __callArgument163:Dynamic = state; __callArgument163; }), ({ final __callArgument164:Dynamic = tree; __callArgument164; }), ({ final __callArgument165:Dynamic = (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidHierarchy; __callArgument165; }), (cast i : Float), (cast parentIndex : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument166:Dynamic = node.kind; __callArgument166; })) : Bool);
+          return cast (cast _Layout.failLayoutResolution__resolveLayoutTree(({ final __callArgument165:Dynamic = state; __callArgument165; }), ({ final __callArgument166:Dynamic = tree; __callArgument166; }), ({ final __callArgument167:Dynamic = (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidHierarchy; __callArgument167; }), (cast i : Float), (cast parentIndex : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument168:Dynamic = node.kind; __callArgument168; })) : Bool);
         }
         var offset:Float = (i * 4.0);
         if ((cast _Runtime.strictEquals(parentIndex, -1.0) : Bool)) {
@@ -761,12 +780,12 @@ class _Layout {
         var parentKind:String = (cast flight._internal._StaticIndex.readArray(nodes, parentIndex) : { var kind:String; }).kind;
         var resolver:Null<LayoutResolver> = ((cast state.resolvers : flight._internal._Map<String, LayoutResolver>).get((cast parentKind)));
         if ((cast _Runtime.strictEquals(resolver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          return cast (cast _Layout.failLayoutResolution__resolveLayoutTree(({ final __callArgument171:Dynamic = state; __callArgument171; }), ({ final __callArgument172:Dynamic = tree; __callArgument172; }), ({ final __callArgument173:Dynamic = (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).UnregisteredKind; __callArgument173; }), (cast parentIndex : Float), (cast -1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument174:Dynamic = parentKind; __callArgument174; })) : Bool);
+          return cast (cast _Layout.failLayoutResolution__resolveLayoutTree(({ final __callArgument173:Dynamic = state; __callArgument173; }), ({ final __callArgument174:Dynamic = tree; __callArgument174; }), ({ final __callArgument175:Dynamic = (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).UnregisteredKind; __callArgument175; }), (cast parentIndex : Float), (cast -1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument176:Dynamic = parentKind; __callArgument176; })) : Bool);
         }
-        var failure:Null<String> = (cast resolver(({ final __callArgument179:Dynamic = out; __callArgument179; }), ({ final __callArgument180:Dynamic = tree; __callArgument180; }), ({ final __callArgument181:Dynamic = intrinsicSizes; __callArgument181; }), (cast parentIndex : Float), (cast i : Float)) : Null<String>);
+        var failure:Null<String> = (cast resolver(({ final __callArgument181:Dynamic = out; __callArgument181; }), ({ final __callArgument182:Dynamic = tree; __callArgument182; }), ({ final __callArgument183:Dynamic = intrinsicSizes; __callArgument183; }), (cast parentIndex : Float), (cast i : Float)) : Null<String>);
         if ((cast !_Runtime.strictEquals(failure, null) : Bool)) {
           var failureNodeIndex:Float = ((cast _Runtime.strictEquals(failure, (cast Failure : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidContainerStyle) : Bool) ? (cast parentIndex : Dynamic) : (cast i : Dynamic));
-          return cast (cast _Layout.failLayoutResolution__resolveLayoutTree(({ final __callArgument185:Dynamic = state; __callArgument185; }), ({ final __callArgument186:Dynamic = tree; __callArgument186; }), ({ final __callArgument187:Dynamic = failure; __callArgument187; }), (cast failureNodeIndex : Float), (cast parentIndex : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument188:Dynamic = parentKind; __callArgument188; })) : Bool);
+          return cast (cast _Layout.failLayoutResolution__resolveLayoutTree(({ final __callArgument187:Dynamic = state; __callArgument187; }), ({ final __callArgument188:Dynamic = tree; __callArgument188; }), ({ final __callArgument189:Dynamic = failure; __callArgument189; }), (cast failureNodeIndex : Float), (cast parentIndex : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument190:Dynamic = parentKind; __callArgument190; })) : Bool);
         }
         i++;
       }
@@ -796,7 +815,7 @@ class _Layout {
     (state.lastFailureParentIndex = cast (parentIndex : Float));
     (state.lastFailureRequiredLength = cast (requiredLength : Float));
     (state.lastFailureResolverKind = cast (resolverKind : Null<String>));
-    if ((cast !_Runtime.strictEquals(state.guard, null) : Bool)) { (state.guard)((cast explainLayoutResolution(({ final __callArgument193:Dynamic = state; __callArgument193; }), ({ final __callArgument194:Dynamic = tree; __callArgument194; }), (cast nodeIndex : Float)) : LayoutResolutionExplanation)); }
+    if ((cast !_Runtime.strictEquals(state.guard, null) : Bool)) { (state.guard)((cast explainLayoutResolution(({ final __callArgument195:Dynamic = state; __callArgument195; }), ({ final __callArgument196:Dynamic = tree; __callArgument196; }), (cast nodeIndex : Float)) : LayoutResolutionExplanation)); }
     return cast false;
     return cast null;
   }

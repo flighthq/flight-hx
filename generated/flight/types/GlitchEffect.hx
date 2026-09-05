@@ -4,4 +4,24 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlitchEffect = { var kind:String; @:optional var intensity:Float; @:optional var blockSize:Float; @:optional var colorShift:Float; @:optional var seed:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class GlitchEffect extends flight.types.RenderEffect<String> {
+  public var intensity:Null<Float>;
+  public var blockSize:Null<Float>;
+  public var colorShift:Null<Float>;
+  public var seed:Null<Float>;
+
+  private function new(kind:String, ?intensity:Null<Float>, ?blockSize:Null<Float>, ?colorShift:Null<Float>, ?seed:Null<Float>):Void {
+    super(kind);
+    this.intensity = intensity;
+    this.blockSize = blockSize;
+    this.colorShift = colorShift;
+    this.seed = seed;
+  }
+}
+#else
+typedef GlitchEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var intensity:Float; @:optional var blockSize:Float; @:optional var colorShift:Float; @:optional var seed:Float; };
+#end

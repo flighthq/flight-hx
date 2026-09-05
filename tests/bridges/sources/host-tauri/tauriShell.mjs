@@ -5,4 +5,7 @@ const api = compiled.flight._HostTauri;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const initializeTauriShellExternalBackend = api.initializeTauriShellExternalBackend;
+export const initializeTauriShellPathOpenBackend = api.initializeTauriShellPathOpenBackend;
+export const initializeTauriShellPathRevealBackend = api.initializeTauriShellPathRevealBackend;
 export const makeTauriShellCapabilities = api.makeTauriShellCapabilities;

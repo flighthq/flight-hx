@@ -13,3 +13,4 @@ export * from './stepParticleEmitter2D.mjs';
 export * from './stepParticleEmitter3D.mjs';
 export * from './updateParticleEmitter2D.mjs';
 export * from './updateParticleEmitter3D.mjs';
+export { initializeParticleEmitterData } from './particleEmitter.mjs';

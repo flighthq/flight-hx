@@ -4,4 +4,23 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:keep
+@:structInit
+class AppSingleInstanceBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var hasSingleInstanceLock:Void->Bool;
+  public var releaseSingleInstanceLock:Void->Void;
+  public var requestSingleInstanceLock:Void->Bool;
+
+  private function new(hasSingleInstanceLock:Void->Bool, releaseSingleInstanceLock:Void->Void, requestSingleInstanceLock:Void->Bool):Void {
+    this.__symbol__EntityRuntime = null;
+    this.hasSingleInstanceLock = hasSingleInstanceLock;
+    this.releaseSingleInstanceLock = releaseSingleInstanceLock;
+    this.requestSingleInstanceLock = requestSingleInstanceLock;
+  }
+}
+#else
 typedef AppSingleInstanceBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var hasSingleInstanceLock:Void->Bool; var releaseSingleInstanceLock:Void->Void; var requestSingleInstanceLock:Void->Bool; };
+#end

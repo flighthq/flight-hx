@@ -4,3 +4,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './power.mjs';
+export { initializePower } from './power.mjs';

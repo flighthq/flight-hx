@@ -3,7 +3,10 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Types.RequirementFacetValue as Facet;
+import flight.types.EntityConstruction;
 import flight.types.Kind;
 import flight.types.Requirement;
 import flight.types.RequirementFacet;
@@ -25,7 +28,10 @@ class _Requirements {
   }
 
   public static function createRequirementSet(covers:Array<RequirementFacet>, requirements:Array<Requirement>):RequirementSet {
-    return cast { covers: (cast _Requirements.distinctSorted__requirementSet(({ final __callArgument6:Dynamic = covers; __callArgument6; })) : Array<RequirementFacet>), requirements: (cast _Requirements.distinctSortedRequirements__requirementSet(({ final __callArgument8:Dynamic = requirements; __callArgument8; })) : Array<Requirement>) };
+    var out:EntityConstruction<RequirementSet> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ covers: cast _Runtime.UNDEFINED, requirements: cast _Runtime.UNDEFINED } : RequirementSet); }) #end));
+    initializeRequirementSet(({ final __callArgument6:Dynamic = out; __callArgument6; }), ({ final __callArgument7:Dynamic = covers; __callArgument7; }), ({ final __callArgument8:Dynamic = requirements; __callArgument8; }));
+    return cast out;
     return cast null;
   }
 
@@ -34,21 +40,26 @@ class _Requirements {
     var baselineKeys:flight._internal._Set<String> = cast _Runtime.UNDEFINED;
     covers = (cast _Requirements.intersectSorted__requirementSet(_Runtime.field(requirements, 'covers'), _Runtime.field(baseline, 'covers')) : Array<RequirementFacet>);
     baselineKeys = _Runtime.construct(flight._internal._HostValueLut.get('Set'), [(cast _Runtime.mapArray((cast _Runtime.field(baseline, 'requirements') : Array<Requirement>), function(requirement:Requirement, __unused0:Float, __unused1:Array<Requirement>):String return (cast _Requirements.requirementIdentity__requirementSet(requirement.facet, (cast requirement.key : String)) : String), _Runtime.UNDEFINED))]);
-    return cast (cast createRequirementSet(({ final __callArgument10:Dynamic = covers; __callArgument10; }), (cast _Runtime.filterArray((cast _Runtime.field(requirements, 'requirements') : Array<Requirement>), function(requirement:Requirement, __unused2:Float, __unused3:Array<Requirement>):Bool return ((cast _Runtime.includes(covers, requirement.facet) : Bool) && (cast !(cast ((cast baselineKeys : flight._internal._Set<String>).has((cast (cast _Requirements.requirementIdentity__requirementSet(requirement.facet, (cast requirement.key : String)) : String)))) : Bool) : Bool)), _Runtime.UNDEFINED))) : RequirementSet);
+    return cast (cast createRequirementSet(({ final __callArgument12:Dynamic = covers; __callArgument12; }), (cast _Runtime.filterArray((cast _Runtime.field(requirements, 'requirements') : Array<Requirement>), function(requirement:Requirement, __unused2:Float, __unused3:Array<Requirement>):Bool return ((cast _Runtime.includes(covers, requirement.facet) : Bool) && (cast !(cast ((cast baselineKeys : flight._internal._Set<String>).has((cast (cast _Requirements.requirementIdentity__requirementSet(requirement.facet, (cast requirement.key : String)) : String)))) : Bool) : Bool)), _Runtime.UNDEFINED))) : RequirementSet);
     return cast null;
+  }
+
+  public static function initializeRequirementSet(out:EntityConstruction<RequirementSet>, covers:Array<RequirementFacet>, requirements:Array<Requirement>):Void {
+    _Runtime.setField(out, 'covers', (cast _Requirements.distinctSorted__requirementSet(({ final __callArgument14:Dynamic = covers; __callArgument14; })) : Array<RequirementFacet>));
+    _Runtime.setField(out, 'requirements', (cast _Requirements.distinctSortedRequirements__requirementSet(({ final __callArgument16:Dynamic = requirements; __callArgument16; })) : Array<Requirement>));
   }
 
   public static function mergeRequirementSets(requirementSets:Array<RequirementSet>):RequirementSet {
     var covers:Array<RequirementFacet> = cast _Runtime.UNDEFINED;
     var requirements:Array<Requirement> = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(_Runtime.field(requirementSets, 'length'), 0.0) : Bool)) { return cast (cast createRequirementSet(({ final __callArgument12:Dynamic = cast ([] : Array<Dynamic>); __callArgument12; }), ({ final __callArgument13:Dynamic = cast ([] : Array<Dynamic>); __callArgument13; })) : RequirementSet); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(requirementSets, 'length'), 0.0) : Bool)) { return cast (cast createRequirementSet(({ final __callArgument18:Dynamic = cast ([] : Array<Dynamic>); __callArgument18; }), ({ final __callArgument19:Dynamic = cast ([] : Array<Dynamic>); __callArgument19; })) : RequirementSet); }
     covers = (cast _Requirements.distinctSorted__requirementSet(_Runtime.field(flight._internal._StaticIndex.readArray(requirementSets, 0.0), 'covers')) : Array<RequirementFacet>);
     requirements = (cast cast ([] : Array<Dynamic>));
     for (requirementSet in _Runtime.iterable(requirementSets)) {
-      (covers = cast ((cast _Requirements.intersectSorted__requirementSet(({ final __callArgument18:Dynamic = covers; __callArgument18; }), _Runtime.field(requirementSet, 'covers')) : Array<RequirementFacet>) : Dynamic));
+      (covers = cast ((cast _Requirements.intersectSorted__requirementSet(({ final __callArgument24:Dynamic = covers; __callArgument24; }), _Runtime.field(requirementSet, 'covers')) : Array<RequirementFacet>) : Dynamic));
       _Runtime.callProperty(requirements, 'push', _Runtime.concatArrays([_Runtime.toArray(_Runtime.field(requirementSet, 'requirements'))]));
     }
-    return cast (cast createRequirementSet(({ final __callArgument20:Dynamic = covers; __callArgument20; }), ({ final __callArgument21:Dynamic = requirements; __callArgument21; })) : RequirementSet);
+    return cast (cast createRequirementSet(({ final __callArgument26:Dynamic = covers; __callArgument26; }), ({ final __callArgument27:Dynamic = requirements; __callArgument27; })) : RequirementSet);
     return cast null;
   }
 

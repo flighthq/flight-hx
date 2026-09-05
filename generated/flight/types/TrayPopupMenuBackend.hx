@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:keep
+@:structInit
+class TrayPopupMenuBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var popup:TrayIcon->Vector2Like->flight._internal._Promise<TrayPopupMenuResult>;
+
+  private function new(popup:TrayIcon->Vector2Like->flight._internal._Promise<TrayPopupMenuResult>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.popup = popup;
+  }
+}
+#else
 typedef TrayPopupMenuBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var popup:TrayIcon->Vector2Like->flight._internal._Promise<TrayPopupMenuResult>; };
+#end

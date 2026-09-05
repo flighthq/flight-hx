@@ -7,5 +7,6 @@ __syncDependencies();
 
 export const createScene2DDocumentFromBytes = api.createScene2DDocumentFromBytes;
 export const createScene2DDocumentImporterRegistry = api.createScene2DDocumentImporterRegistry;
+export const initializeScene2DDocumentImporterRegistry = api.initializeScene2DDocumentImporterRegistry;
 export const registerScene2DDocumentImporter = api.registerScene2DDocumentImporter;
 export const unregisterScene2DDocumentImporter = api.unregisterScene2DDocumentImporter;

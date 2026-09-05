@@ -12,5 +12,6 @@ export const destroyWgpuRenderTarget = api.destroyWgpuRenderTarget;
 export const drawWgpuRenderTargetResult = api.drawWgpuRenderTargetResult;
 export const endWgpuRenderPass = api.endWgpuRenderPass;
 export const getWgpuRenderTargetSupersampleScale = api.getWgpuRenderTargetSupersampleScale;
+export const initializeWgpuRenderTarget = api.initializeWgpuRenderTarget;
 export const resizeWgpuRenderTarget = api.resizeWgpuRenderTarget;
 export const setWgpuRenderTransform2D = api.setWgpuRenderTransform2D;

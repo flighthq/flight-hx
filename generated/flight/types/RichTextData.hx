@@ -4,4 +4,46 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef RichTextData = { var autoSize:TextAutoSize; var height:Float; var text:String; var textFormat:TextFormat; var verticalAlign:TextVerticalAlign; var width:Float; var background:Bool; var backgroundColor:Float; var border:Bool; var borderColor:Float; var condenseWhite:Bool; var defaultTextFormat:TextFormat; var maxChars:Float; var mouseWheelEnabled:Bool; var multiline:Bool; var scrollH:Float; var scrollV:Float; var selectable:Bool; var textColor:Float; var textFormatRanges:Array<TextFormatRange>; var wordWrap:Bool; };
+#if !flight_struct_typedef
+@:allow(flight._Text)
+@:keep
+@:structInit
+class RichTextData extends flight.types.TextLabelData {
+  public var background:Bool;
+  public var backgroundColor:Float;
+  public var border:Bool;
+  public var borderColor:Float;
+  public var condenseWhite:Bool;
+  public var defaultTextFormat:TextFormat;
+  public var maxChars:Float;
+  public var mouseWheelEnabled:Bool;
+  public var multiline:Bool;
+  public var scrollH:Float;
+  public var scrollV:Float;
+  public var selectable:Bool;
+  public var textColor:Float;
+  public var textFormatRanges:Array<TextFormatRange>;
+  public var wordWrap:Bool;
+
+  private function new(autoSize:TextAutoSize, height:Float, text:String, textFormat:TextFormat, verticalAlign:TextVerticalAlign, width:Float, background:Bool, backgroundColor:Float, border:Bool, borderColor:Float, condenseWhite:Bool, defaultTextFormat:TextFormat, maxChars:Float, mouseWheelEnabled:Bool, multiline:Bool, scrollH:Float, scrollV:Float, selectable:Bool, textColor:Float, textFormatRanges:Array<TextFormatRange>, wordWrap:Bool):Void {
+    super(autoSize, height, text, textFormat, verticalAlign, width);
+    this.background = background;
+    this.backgroundColor = backgroundColor;
+    this.border = border;
+    this.borderColor = borderColor;
+    this.condenseWhite = condenseWhite;
+    this.defaultTextFormat = defaultTextFormat;
+    this.maxChars = maxChars;
+    this.mouseWheelEnabled = mouseWheelEnabled;
+    this.multiline = multiline;
+    this.scrollH = scrollH;
+    this.scrollV = scrollV;
+    this.selectable = selectable;
+    this.textColor = textColor;
+    this.textFormatRanges = textFormatRanges;
+    this.wordWrap = wordWrap;
+  }
+}
+#else
+typedef RichTextData = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var autoSize:TextAutoSize; var height:Float; var text:String; var textFormat:TextFormat; var verticalAlign:TextVerticalAlign; var width:Float; var background:Bool; var backgroundColor:Float; var border:Bool; var borderColor:Float; var condenseWhite:Bool; var defaultTextFormat:TextFormat; var maxChars:Float; var mouseWheelEnabled:Bool; var multiline:Bool; var scrollH:Float; var scrollV:Float; var selectable:Bool; var textColor:Float; var textFormatRanges:Array<TextFormatRange>; var wordWrap:Bool; };
+#end

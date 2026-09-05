@@ -4,4 +4,25 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SocketSignals = { var onSocketOpen:Signal<Void->Void>; var onSocketMessage:Signal<SocketMessage->Void>; var onSocketClose:Signal<SocketCloseInfo->Void>; var onSocketError:Signal<Void->Void>; };
+#if !flight_struct_typedef
+@:allow(flight._Socket)
+@:keep
+@:structInit
+class SocketSignals {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onSocketOpen:Signal<Void->Void>;
+  public var onSocketMessage:Signal<SocketMessage->Void>;
+  public var onSocketClose:Signal<SocketCloseInfo->Void>;
+  public var onSocketError:Signal<Void->Void>;
+
+  private function new(onSocketOpen:Signal<Void->Void>, onSocketMessage:Signal<SocketMessage->Void>, onSocketClose:Signal<SocketCloseInfo->Void>, onSocketError:Signal<Void->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onSocketOpen = onSocketOpen;
+    this.onSocketMessage = onSocketMessage;
+    this.onSocketClose = onSocketClose;
+    this.onSocketError = onSocketError;
+  }
+}
+#else
+typedef SocketSignals = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onSocketOpen:Signal<Void->Void>; var onSocketMessage:Signal<SocketMessage->Void>; var onSocketClose:Signal<SocketCloseInfo->Void>; var onSocketError:Signal<Void->Void>; };
+#end

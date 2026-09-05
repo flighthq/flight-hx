@@ -11,6 +11,7 @@ export const createPlane = api.createPlane;
 export const getClosestPointOnPlane = api.getClosestPointOnPlane;
 export const getPlaneCoplanarPoint = api.getPlaneCoplanarPoint;
 export const getPlaneSignedDistanceToPoint = api.getPlaneSignedDistanceToPoint;
+export const initializePlane = api.initializePlane;
 export const normalizePlane = api.normalizePlane;
 export const projectVector3OntoPlane = api.projectVector3OntoPlane;
 export const setPlane = api.setPlane;

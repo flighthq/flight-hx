@@ -4,4 +4,30 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GodRaysEffect = { var kind:String; @:optional var centerX:Float; @:optional var centerY:Float; @:optional var density:Float; @:optional var decay:Float; @:optional var weight:Float; @:optional var exposure:Float; @:optional var samples:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class GodRaysEffect extends flight.types.RenderEffect<String> {
+  public var centerX:Null<Float>;
+  public var centerY:Null<Float>;
+  public var density:Null<Float>;
+  public var decay:Null<Float>;
+  public var weight:Null<Float>;
+  public var exposure:Null<Float>;
+  public var samples:Null<Float>;
+
+  private function new(kind:String, ?centerX:Null<Float>, ?centerY:Null<Float>, ?density:Null<Float>, ?decay:Null<Float>, ?weight:Null<Float>, ?exposure:Null<Float>, ?samples:Null<Float>):Void {
+    super(kind);
+    this.centerX = centerX;
+    this.centerY = centerY;
+    this.density = density;
+    this.decay = decay;
+    this.weight = weight;
+    this.exposure = exposure;
+    this.samples = samples;
+  }
+}
+#else
+typedef GodRaysEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var centerX:Float; @:optional var centerY:Float; @:optional var density:Float; @:optional var decay:Float; @:optional var weight:Float; @:optional var exposure:Float; @:optional var samples:Float; };
+#end

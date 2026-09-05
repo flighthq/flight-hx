@@ -4,4 +4,23 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:keep
+@:structInit
+class AppPathBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var getAppDirectoryPath:AppPathKind->String;
+  public var getAppPath:Void->String;
+  public var getExecutablePath:Void->String;
+
+  private function new(getAppDirectoryPath:AppPathKind->String, getAppPath:Void->String, getExecutablePath:Void->String):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getAppDirectoryPath = getAppDirectoryPath;
+    this.getAppPath = getAppPath;
+    this.getExecutablePath = getExecutablePath;
+  }
+}
+#else
 typedef AppPathBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getAppDirectoryPath:AppPathKind->String; var getAppPath:Void->String; var getExecutablePath:Void->String; };
+#end

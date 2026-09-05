@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef BitmapFingerprint = { var gridSize:Float; var cells:flight._internal._UInt8Array; };
+#if !flight_struct_typedef
+@:allow(flight._Bitmap)
+@:keep
+@:structInit
+class BitmapFingerprint {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var gridSize:Float;
+  public var cells:flight._internal._UInt8Array;
+
+  private function new(gridSize:Float, cells:flight._internal._UInt8Array):Void {
+    this.__symbol__EntityRuntime = null;
+    this.gridSize = gridSize;
+    this.cells = cells;
+  }
+}
+#else
+typedef BitmapFingerprint = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var gridSize:Float; var cells:flight._internal._UInt8Array; };
+#end

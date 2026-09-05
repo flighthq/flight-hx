@@ -3,7 +3,12 @@
 function __syncDependencies() {}
 __syncDependencies();
 
-export * from './imageBackend.mjs';
 export * from './imageResource.mjs';
 export * from './imageResourceFrom.mjs';
 export * from './imageResourceReference.mjs';
+export { initializeCompressedImageResource } from './imageResource.mjs';
+export { initializeEmbeddedImageResourceReference } from './imageResourceReference.mjs';
+export { initializeExternalImageResourceReference } from './imageResourceReference.mjs';
+export { initializeImageResourceFromCanvas } from './imageResourceFrom.mjs';
+export { initializeImageResourceFromImageBitmap } from './imageResourceFrom.mjs';
+export { initializeImageResourceFromImageElement } from './imageResourceFrom.mjs';

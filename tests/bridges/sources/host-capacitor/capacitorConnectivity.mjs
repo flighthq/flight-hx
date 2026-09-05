@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createCapacitorConnectivityBackend = api.createCapacitorConnectivityBackend;
+export const initializeCapacitorConnectivityBackend = api.initializeCapacitorConnectivityBackend;

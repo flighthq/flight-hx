@@ -42,6 +42,8 @@ export { getTextInputSelectionText } from './textInputEditing.mjs';
 export { getTextInputState } from './textInput.mjs';
 export { handleTextInputKeyboard } from './textInputEditing.mjs';
 export { hasTextInput } from './textInput.mjs';
+export { initializeSelectableRichTextManager } from './selectableRichTextManager.mjs';
+export { initializeTextInputManager } from './textInputManager.mjs';
 export { insertTextInput } from './textInputEditing.mjs';
 export { moveTextInputCaret } from './textInputEditing.mjs';
 export { moveTextInputCaretByWord } from './textInputEditing.mjs';

@@ -4,3 +4,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './registryCodegen.mjs';
+export { initializeRegistryCodegenPlan } from './registryCodegen.mjs';

@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createCapacitorStatusBarBackend = api.createCapacitorStatusBarBackend;
+export const initializeCapacitorStatusBarBackend = api.initializeCapacitorStatusBarBackend;

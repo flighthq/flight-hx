@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createTextLayoutGroup = api.createTextLayoutGroup;
+export const initializeTextLayoutGroup = api.initializeTextLayoutGroup;

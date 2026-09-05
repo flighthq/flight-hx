@@ -4,4 +4,23 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FlightDocumentScene2DMaterialization = { var interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node2D>>; var layoutBindings:Array<FlightDocumentLayoutBinding<Node2D>>; var scene:Scene2D; };
+#if !flight_struct_typedef
+@:allow(flight._SceneDocument)
+@:keep
+@:structInit
+class FlightDocumentScene2DMaterialization {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node2D>>;
+  public var layoutBindings:Array<FlightDocumentLayoutBinding<Node2D>>;
+  public var scene:Scene2D;
+
+  private function new(interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node2D>>, layoutBindings:Array<FlightDocumentLayoutBinding<Node2D>>, scene:Scene2D):Void {
+    this.__symbol__EntityRuntime = null;
+    this.interactiveStateBindings = interactiveStateBindings;
+    this.layoutBindings = layoutBindings;
+    this.scene = scene;
+  }
+}
+#else
+typedef FlightDocumentScene2DMaterialization = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node2D>>; var layoutBindings:Array<FlightDocumentLayoutBinding<Node2D>>; var scene:Scene2D; };
+#end

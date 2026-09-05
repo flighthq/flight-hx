@@ -10,3 +10,4 @@ export * from './tweenManager.mjs';
 export * from './tweenProgress.mjs';
 export * from './tweenStagger.mjs';
 export * from './updateTweens.mjs';
+export { initializeTweenManager } from './tweenManager.mjs';

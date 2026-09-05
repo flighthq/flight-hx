@@ -8,11 +8,13 @@ import flight.types.BitmapFont;
 import flight.types.BitmapFontData;
 import flight.types.BitmapFontGlyphExplanation;
 import flight.types.BitmapFontSummary;
+import flight.types.Entity;
+import flight.types.EntityRuntime;
 import flight.types.GlyphAtlas;
 import flight.types.GlyphEntry;
 import flight.types.GlyphMetrics;
-import flight.types.GlyphSource;
 import flight.types.TextureAtlas;
+import flight.types.TextureSource;
 
 class BitmapFont {
   public static function createBitmapFont(data:BitmapFontData):flight.types.BitmapFont {
@@ -25,7 +27,7 @@ class BitmapFont {
     return cast null;
   }
 
-  public static function createGlyphSourceFromBitmapFont(font:flight.types.BitmapFont):GlyphSource {
+  public static function createGlyphSourceFromBitmapFont(font:flight.types.BitmapFont):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getGlyphAtlasImage:Float->Null<TextureSource>; var getGlyphEntry:Float->Null<GlyphEntry>; var getGlyphKerning:Float->Float->Float; var getGlyphLayoutVersion:Void->Float; var getGlyphMetrics:Void->GlyphMetrics; } {
     return cast Facade_BitmapFont_flight__BitmapFont.createGlyphSourceFromBitmapFont(font);
     return cast null;
   }

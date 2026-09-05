@@ -9,3 +9,4 @@ export * from './offsetPath.mjs';
 export * from './pathBooleanBackend.mjs';
 export * from './simplifyPath.mjs';
 export * from './unionAllPaths.mjs';
+export { initializeMartinezPathBooleanBackend } from './martinezKernel.mjs';

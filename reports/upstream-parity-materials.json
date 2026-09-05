@@ -1,19 +1,31 @@
 {
-  "completedAt": "2026-08-03T04:33:06.909Z",
+  "completedAt": "2026-09-05T03:41:13.414Z",
   "failedPackages": 0,
-  "jobs": 12,
+  "fixedSinceReview": 0,
+  "infrastructureFailures": 0,
+  "jobs": 3,
   "packages": [
     {
-      "durationMs": 504190,
+      "durationMs": 47162,
       "exitCode": 0,
+      "isolationRecovered": false,
       "package": "materials",
       "signal": null,
       "status": "passed",
-      "summary": "161 passed (161)",
-      "testFiles": 20
+      "summary": "173 passed (173)",
+      "testFiles": 20,
+      "review": {
+        "baselineReport": "reports/upstream-parity.json",
+        "reviewedAt": "2026-08-21T03:43:35.613Z",
+        "status": "passed",
+        "unreviewedFailures": 0
+      }
     }
   ],
-  "schemaVersion": 1,
+  "reviewedFailures": 0,
+  "schemaVersion": 2,
   "selectedPackage": "materials",
-  "startedAt": "2026-08-03T04:24:42.717Z"
+  "startedAt": "2026-09-05T03:40:25.596Z",
+  "strict": false,
+  "unreviewedFailures": 0
 }

@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const createDirectionalBlurEffect = api.createDirectionalBlurEffect;
 export const getDirectionalBlurEffectPadding = api.getDirectionalBlurEffectPadding;
+export const initializeDirectionalBlurEffect = api.initializeDirectionalBlurEffect;
 export const registerDirectionalBlurEffectPaddingResolver = api.registerDirectionalBlurEffectPaddingResolver;

@@ -12,4 +12,6 @@ export const enableScene2DSignals = api.enableScene2DSignals;
 export const getScene2DRoot = api.getScene2DRoot;
 export const getScene2DRuntime = api.getScene2DRuntime;
 export const getScene2DSignals = api.getScene2DSignals;
+export const initializeScene2D = api.initializeScene2D;
+export const initializeScene2DSignals = api.initializeScene2DSignals;
 export const setScene2DSize = api.setScene2DSize;

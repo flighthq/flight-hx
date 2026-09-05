@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const createTextMetrics = api.createTextMetrics;
 export const getTextMetrics = api.getTextMetrics;
+export const initializeTextMetrics = api.initializeTextMetrics;

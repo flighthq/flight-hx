@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const createBevelEffect = api.createBevelEffect;
 export const getBevelEffectPadding = api.getBevelEffectPadding;
+export const initializeBevelEffect = api.initializeBevelEffect;
 export const registerBevelEffectPaddingResolver = api.registerBevelEffectPaddingResolver;

@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createCapacitorGeolocationBackend = api.createCapacitorGeolocationBackend;
+export const initializeCapacitorGeolocationBackend = api.initializeCapacitorGeolocationBackend;

@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TintMaterialData = { var tint:Float; };
+#if !flight_struct_typedef
+@:allow(flight._QuadBatch)
+@:allow(flight._Tilemap)
+@:keep
+@:structInit
+class TintMaterialData extends flight.types.MaterialData {
+  public var tint:Float;
+
+  private function new(tint:Float):Void {
+    super();
+    this.tint = tint;
+  }
+}
+#else
+typedef TintMaterialData = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var tint:Float; };
+#end

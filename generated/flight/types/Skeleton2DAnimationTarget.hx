@@ -4,4 +4,23 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Skeleton2DAnimationTarget = { var boneIndex:Float; var kind:Skeleton2DAnimationTargetKind; var path:Skeleton2DAnimationPath; };
+#if !flight_struct_typedef
+@:allow(flight._Skeleton2D)
+@:keep
+@:structInit
+class Skeleton2DAnimationTarget {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var boneIndex:Float;
+  public var kind:Skeleton2DAnimationTargetKind;
+  public var path:Skeleton2DAnimationPath;
+
+  private function new(boneIndex:Float, kind:Skeleton2DAnimationTargetKind, path:Skeleton2DAnimationPath):Void {
+    this.__symbol__EntityRuntime = null;
+    this.boneIndex = boneIndex;
+    this.kind = kind;
+    this.path = path;
+  }
+}
+#else
+typedef Skeleton2DAnimationTarget = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var boneIndex:Float; var kind:Skeleton2DAnimationTargetKind; var path:Skeleton2DAnimationPath; };
+#end

@@ -5,3 +5,4 @@ __syncDependencies();
 
 export * from './pickScene3D.mjs';
 export * from './sceneHitAttributes.mjs';
+export { initializeScene3DHit } from './pickScene3D.mjs';

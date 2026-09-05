@@ -8,3 +8,4 @@ __syncDependencies();
 export const createCanvasPipeline = api.createCanvasPipeline;
 export const createEmptyCanvasRegistries = api.createEmptyCanvasRegistries;
 export const getCanvasPipelineRegistries = api.getCanvasPipelineRegistries;
+export const initializeEmptyCanvasRegistries = api.initializeEmptyCanvasRegistries;

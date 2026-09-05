@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const createScene2DKindUsage = api.createScene2DKindUsage;
 export const getScene2DKindUsage = api.getScene2DKindUsage;
+export const initializeScene2DKindUsage = api.initializeScene2DKindUsage;

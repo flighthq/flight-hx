@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Scale9ShapeData = { var commands:Array<ShapeCommandToken>; var scale9Grid:RectangleLike; };
+#if !flight_struct_typedef
+@:allow(flight._Shape)
+@:keep
+@:structInit
+class Scale9ShapeData extends flight.types.ShapeData {
+  public var scale9Grid:RectangleLike;
+
+  private function new(commands:Array<ShapeCommandToken>, scale9Grid:RectangleLike):Void {
+    super(commands);
+    this.scale9Grid = scale9Grid;
+  }
+}
+#else
+typedef Scale9ShapeData = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var commands:Array<ShapeCommandToken>; var scale9Grid:RectangleLike; };
+#end

@@ -4,4 +4,35 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics3DContactConstraint = { var contact:Float; var tangent0X:Float; var tangent0Y:Float; var tangent0Z:Float; var tangent1X:Float; var tangent1Y:Float; var tangent1Z:Float; var pointCount:Float; var points:Array<Physics3DContactConstraintPoint>; };
+#if !flight_struct_typedef
+@:allow(flight._Physics3D)
+@:keep
+@:structInit
+class Physics3DContactConstraint {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var contact:Float;
+  public var tangent0X:Float;
+  public var tangent0Y:Float;
+  public var tangent0Z:Float;
+  public var tangent1X:Float;
+  public var tangent1Y:Float;
+  public var tangent1Z:Float;
+  public var pointCount:Float;
+  public var points:Array<Physics3DContactConstraintPoint>;
+
+  private function new(contact:Float, tangent0X:Float, tangent0Y:Float, tangent0Z:Float, tangent1X:Float, tangent1Y:Float, tangent1Z:Float, pointCount:Float, points:Array<Physics3DContactConstraintPoint>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.contact = contact;
+    this.tangent0X = tangent0X;
+    this.tangent0Y = tangent0Y;
+    this.tangent0Z = tangent0Z;
+    this.tangent1X = tangent1X;
+    this.tangent1Y = tangent1Y;
+    this.tangent1Z = tangent1Z;
+    this.pointCount = pointCount;
+    this.points = points;
+  }
+}
+#else
+typedef Physics3DContactConstraint = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var contact:Float; var tangent0X:Float; var tangent0Y:Float; var tangent0Z:Float; var tangent1X:Float; var tangent1Y:Float; var tangent1Z:Float; var pointCount:Float; var points:Array<Physics3DContactConstraintPoint>; };
+#end

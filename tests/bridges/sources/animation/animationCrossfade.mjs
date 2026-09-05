@@ -7,5 +7,6 @@ __syncDependencies();
 
 export const advanceAnimationCrossfade = api.advanceAnimationCrossfade;
 export const createAnimationCrossfade = api.createAnimationCrossfade;
+export const initializeAnimationCrossfade = api.initializeAnimationCrossfade;
 export const isAnimationCrossfadeComplete = api.isAnimationCrossfadeComplete;
 export const sampleAnimationCrossfade = api.sampleAnimationCrossfade;

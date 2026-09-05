@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const createWgpuRendererData = api.createWgpuRendererData;
 export const getWgpuRendererData = api.getWgpuRendererData;
+export const initializeWgpuRendererData = api.initializeWgpuRendererData;

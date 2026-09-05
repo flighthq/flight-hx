@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Skin2D = { var influenceCounts:flight._internal._UInt16Array; var influences:flight._internal._Float32Array; };
+#if !flight_struct_typedef
+@:allow(flight._Skeleton2D)
+@:keep
+@:structInit
+class Skin2D {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var influenceCounts:flight._internal._UInt16Array;
+  public var influences:flight._internal._Float32Array;
+
+  private function new(influenceCounts:flight._internal._UInt16Array, influences:flight._internal._Float32Array):Void {
+    this.__symbol__EntityRuntime = null;
+    this.influenceCounts = influenceCounts;
+    this.influences = influences;
+  }
+}
+#else
+typedef Skin2D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var influenceCounts:flight._internal._UInt16Array; var influences:flight._internal._Float32Array; };
+#end

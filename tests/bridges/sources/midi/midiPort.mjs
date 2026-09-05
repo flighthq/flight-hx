@@ -11,5 +11,7 @@ export const createMidiOutputPortResource = api.createMidiOutputPortResource;
 export const disposeMidiPort = api.disposeMidiPort;
 export const getMidiPortConnection = api.getMidiPortConnection;
 export const getMidiPortState = api.getMidiPortState;
+export const initializeMidiInputPortResource = api.initializeMidiInputPortResource;
+export const initializeMidiOutputPortResource = api.initializeMidiOutputPortResource;
 export const openMidiPort = api.openMidiPort;
 export const sendMidiMessage = api.sendMidiMessage;

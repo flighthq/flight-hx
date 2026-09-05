@@ -9,3 +9,7 @@ export const createElectronDirectoryOpenDialogBackend = api.createElectronDirect
 export const createElectronFileOpenDialogBackend = api.createElectronFileOpenDialogBackend;
 export const createElectronFileSaveDialogBackend = api.createElectronFileSaveDialogBackend;
 export const createElectronMessageDialogBackend = api.createElectronMessageDialogBackend;
+export const initializeElectronDirectoryOpenDialogBackend = api.initializeElectronDirectoryOpenDialogBackend;
+export const initializeElectronFileOpenDialogBackend = api.initializeElectronFileOpenDialogBackend;
+export const initializeElectronFileSaveDialogBackend = api.initializeElectronFileSaveDialogBackend;
+export const initializeElectronMessageDialogBackend = api.initializeElectronMessageDialogBackend;

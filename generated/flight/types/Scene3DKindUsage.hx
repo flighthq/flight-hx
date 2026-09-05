@@ -4,4 +4,27 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Scene3DKindUsage = { var materialKinds:Array<Kind>; var modifierKinds:Array<Kind>; var nodeKinds:Array<Kind>; var resourceMimeTypes:Array<String>; var textureSourceKinds:Array<TextureSourceKind>; };
+#if !flight_struct_typedef
+@:allow(flight._Scene3D)
+@:keep
+@:structInit
+class Scene3DKindUsage {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var materialKinds:Array<Kind>;
+  public var modifierKinds:Array<Kind>;
+  public var nodeKinds:Array<Kind>;
+  public var resourceMimeTypes:Array<String>;
+  public var textureSourceKinds:Array<TextureSourceKind>;
+
+  private function new(materialKinds:Array<Kind>, modifierKinds:Array<Kind>, nodeKinds:Array<Kind>, resourceMimeTypes:Array<String>, textureSourceKinds:Array<TextureSourceKind>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.materialKinds = materialKinds;
+    this.modifierKinds = modifierKinds;
+    this.nodeKinds = nodeKinds;
+    this.resourceMimeTypes = resourceMimeTypes;
+    this.textureSourceKinds = textureSourceKinds;
+  }
+}
+#else
+typedef Scene3DKindUsage = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var materialKinds:Array<Kind>; var modifierKinds:Array<Kind>; var nodeKinds:Array<Kind>; var resourceMimeTypes:Array<String>; var textureSourceKinds:Array<TextureSourceKind>; };
+#end

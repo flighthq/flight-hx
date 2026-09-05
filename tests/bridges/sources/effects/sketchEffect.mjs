@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createSketchEffect = api.createSketchEffect;
+export const initializeSketchEffect = api.initializeSketchEffect;

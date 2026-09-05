@@ -5,4 +5,5 @@ const api = compiled.flight._HostElectron;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const initializeElectronHost = api.initializeElectronHost;
 export const registerElectronBackends = api.registerElectronBackends;

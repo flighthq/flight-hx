@@ -4,4 +4,28 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef InstancedMesh = { @:optional var __symbol__EntityRuntime:Null<NodeRuntime<Node3DTraits>>; var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; var alpha:Float; var visible:Bool; var position:Vector3; var rotation:Quaternion; var scale:Vector3; var geometry:MeshGeometry; var instanceColors:Null<flight._internal._UInt32Array>; var instanceCount:Float; var instanceMatrices:Array<Matrix4>; var materials:Array<Null<Material>>; };
+#if !flight_struct_typedef
+@:allow(flight._Scene3D)
+@:keep
+@:structInit
+class InstancedMesh extends flight.types.Node3D<Null<NodeData>> {
+  public var geometry:MeshGeometry;
+  public var instanceColors:Null<flight._internal._UInt32Array>;
+  public var instanceCount:Float;
+  public var instanceMatrices:Array<Matrix4>;
+  public var materials:Array<Null<Material>>;
+  public var version:Float;
+
+  private function new(data:Null<NodeData>, enabled:Bool, kind:Kind, name:Null<String>, alpha:Float, visible:Bool, position:Vector3, rotation:Quaternion, scale:Vector3, geometry:MeshGeometry, instanceColors:Null<flight._internal._UInt32Array>, instanceCount:Float, instanceMatrices:Array<Matrix4>, materials:Array<Null<Material>>, version:Float):Void {
+    super(data, enabled, kind, name, alpha, visible, position, rotation, scale);
+    this.geometry = geometry;
+    this.instanceColors = instanceColors;
+    this.instanceCount = instanceCount;
+    this.instanceMatrices = instanceMatrices;
+    this.materials = materials;
+    this.version = version;
+  }
+}
+#else
+typedef InstancedMesh = { @:optional var __symbol__EntityRuntime:Null<NodeRuntime<Node3DTraits>>; var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; var alpha:Float; var visible:Bool; var position:Vector3; var rotation:Quaternion; var scale:Vector3; var geometry:MeshGeometry; var instanceColors:Null<flight._internal._UInt32Array>; var instanceCount:Float; var instanceMatrices:Array<Matrix4>; var materials:Array<Null<Material>>; var version:Float; };
+#end

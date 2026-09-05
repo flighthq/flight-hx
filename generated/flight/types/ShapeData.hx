@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ShapeData = { var commands:Array<ShapeCommandToken>; };
+#if !flight_struct_typedef
+@:allow(flight._Shape)
+@:allow(flight.types.MorphShapeData)
+@:allow(flight.types.Scale9ShapeData)
+@:keep
+@:structInit
+class ShapeData extends flight.types.Node2DData {
+  public var commands:Array<ShapeCommandToken>;
+
+  private function new(commands:Array<ShapeCommandToken>):Void {
+    super();
+    this.commands = commands;
+  }
+}
+#else
+typedef ShapeData = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var commands:Array<ShapeCommandToken>; };
+#end

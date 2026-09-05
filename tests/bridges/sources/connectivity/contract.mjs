@@ -4,3 +4,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './connectivity.mjs';
+export { initializeConnectivity } from './connectivity.mjs';

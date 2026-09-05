@@ -6,15 +6,18 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const beginGlMeshDraw = api.beginGlMeshDraw;
+export const bindGlInstancePalette = api.bindGlInstancePalette;
 export const bindGlMeshSkinPalette = api.bindGlMeshSkinPalette;
 export const bindGlUvTransform = api.bindGlUvTransform;
 export const compileGlProgram = api.compileGlProgram;
 export const destroyGlMeshProgram = api.destroyGlMeshProgram;
 export const drawGlMeshSubset = api.drawGlMeshSubset;
 export const ensureGlScene3DProgram = api.ensureGlScene3DProgram;
+export const GL_INSTANCE_VERTEX_DECLARATIONS_GLSL = api.GL_INSTANCE_VERTEX_DECLARATIONS_GLSL;
 export const GL_SKIN_VERTEX_DECLARATIONS_GLSL = api.GL_SKIN_VERTEX_DECLARATIONS_GLSL;
 export const GL_UV_TRANSFORM_VERTEX_GLSL = api.GL_UV_TRANSFORM_VERTEX_GLSL;
 export const hasGlUvTransform = api.hasGlUvTransform;
+export const INSTANCE_PALETTE_TEXTURE_UNIT = api.INSTANCE_PALETTE_TEXTURE_UNIT;
 export const setGlMeshCameraPosition = api.setGlMeshCameraPosition;
 export const setGlMeshViewProjection = api.setGlMeshViewProjection;
 export const SKIN_NORMAL_PALETTE_TEXTURE_UNIT = api.SKIN_NORMAL_PALETTE_TEXTURE_UNIT;

@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef OutlineEffect = { var kind:String; @:optional var threshold:Float; @:optional var thickness:Float; @:optional var color:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class OutlineEffect extends flight.types.RenderEffect<String> {
+  public var threshold:Null<Float>;
+  public var thickness:Null<Float>;
+  public var color:Null<Float>;
+
+  private function new(kind:String, ?threshold:Null<Float>, ?thickness:Null<Float>, ?color:Null<Float>):Void {
+    super(kind);
+    this.threshold = threshold;
+    this.thickness = thickness;
+    this.color = color;
+  }
+}
+#else
+typedef OutlineEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var threshold:Float; @:optional var thickness:Float; @:optional var color:Float; };
+#end

@@ -4,3 +4,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './timeline.mjs';
+export { initializeTimeline } from './timeline.mjs';
+export { initializeTimelineSource } from './timeline.mjs';

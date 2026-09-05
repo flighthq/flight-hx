@@ -24,3 +24,6 @@ export { appendMorphShapeLineGradientStyle } from './morphShapePaint.mjs';
 export { appendMorphShapeLineStyle } from './morphShapePaint.mjs';
 export { appendMorphShapeLineTextureStyle } from './morphShapePaint.mjs';
 export { explainMorphShapeGradientEndpoints } from './explainMorphShapeGradientEndpoints.mjs';
+export { initializeMorphShapeAnimationTarget } from './morphShapeAnimation.mjs';
+export { initializeScale9ShapeData } from './scale9Shape.mjs';
+export { initializeShapeData } from './shape.mjs';

@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TextSegmenterBackend = { var segment:String->TextSegmentGranularity->String->Array<TextSegment>; };
+#if !flight_struct_typedef
+@:allow(flight._TextSegment)
+@:keep
+@:structInit
+class TextSegmenterBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var segment:String->TextSegmentGranularity->String->Array<TextSegment>;
+
+  private function new(segment:String->TextSegmentGranularity->String->Array<TextSegment>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.segment = segment;
+  }
+}
+#else
+typedef TextSegmenterBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var segment:String->TextSegmentGranularity->String->Array<TextSegment>; };
+#end

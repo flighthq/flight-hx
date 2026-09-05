@@ -4,4 +4,65 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlRenderRegistries = { @:optional var canvasShapeCommands:KeyedTable<CanvasShapeCommand<String>>; @:optional var colorAdjustments:SlotTable<RenderState->RenderProxy->RenderProxy->Void>; @:optional var colorAdjustmentUnsupportedGuard:SlotTable<ColorAdjustmentUnsupportedGuard>; @:optional var effectPaddingResolvers:KeyedTable<RenderEffectPaddingResolver>; var renderers:KeyedTable<Renderer>; @:optional var renderRootGuard:SlotTable<RenderRootGuard>; var strokeTessellator:SlotTable<StrokeTessellator>; var blendRealizations:KeyedTable<GlBlendRealization>; @:optional var colorAdjustmentFeature:SlotTable<GlColorAdjustmentMaterialFeature>; @:optional var colorAdjustmentFeatureGuard:SlotTable<GlColorAdjustmentMaterialFeatureGuard>; var compressedTextureDecoder:SlotTable<GlCompressedTextureDecoder>; var compressedTextureUpload:SlotTable<GlCompressedTextureUploader>; var customEffectShaders:KeyedTable<String>; var customMaterialShaders:KeyedTable<GlCustomMaterialShaderSource>; var materialRenderers:KeyedTable<GlMaterialRenderer>; var meshMaterialRenderers:KeyedTable<GlMeshMaterialRenderer>; var modifierSnippets:KeyedTable<GlModifierSnippet>; var modifierSnippetRevision:Float; var pbrExtensions:KeyedTable<GlPbrExtensionRegistration>; var pbrExtensionRevision:Float; var renderEffects:KeyedTable<GlRenderEffectRegistration>; var shapeRasterizer:SlotTable<ShapeRasterizer>; var textureResolvers:KeyedTable<GlTextureResolver>; var velocityWriters:KeyedTable<GlVelocityWriter>; };
+#if !flight_struct_typedef
+@:allow(flight._RenderGl)
+@:keep
+@:structInit
+class GlRenderRegistries {
+  public var canvasShapeCommands:Null<KeyedTable<CanvasShapeCommand<String>>>;
+  public var colorAdjustments:Null<SlotTable<RenderState->RenderProxy->RenderProxy->Void>>;
+  public var colorAdjustmentUnsupportedGuard:Null<SlotTable<ColorAdjustmentUnsupportedGuard>>;
+  public var effectPaddingResolvers:Null<KeyedTable<RenderEffectPaddingResolver>>;
+  public var renderers:KeyedTable<Renderer>;
+  public var renderRootGuard:Null<SlotTable<RenderRootGuard>>;
+  public var strokeTessellator:SlotTable<StrokeTessellator>;
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var blendRealizations:KeyedTable<GlBlendRealization>;
+  public var colorAdjustmentFeature:Null<SlotTable<GlColorAdjustmentMaterialFeature>>;
+  public var colorAdjustmentFeatureGuard:Null<SlotTable<GlColorAdjustmentMaterialFeatureGuard>>;
+  public var compressedTextureDecoder:SlotTable<GlCompressedTextureDecoder>;
+  public var compressedTextureUpload:SlotTable<GlCompressedTextureUploader>;
+  public var customEffectShaders:KeyedTable<String>;
+  public var customMaterialShaders:KeyedTable<GlCustomMaterialShaderSource>;
+  public var materialRenderers:KeyedTable<GlMaterialRenderer>;
+  public var meshMaterialRenderers:KeyedTable<GlMeshMaterialRenderer>;
+  public var modifierSnippets:KeyedTable<GlModifierSnippet>;
+  public var modifierSnippetRevision:Float;
+  public var pbrExtensions:KeyedTable<GlPbrExtensionRegistration>;
+  public var pbrExtensionRevision:Float;
+  public var renderEffects:KeyedTable<GlRenderEffectRegistration>;
+  public var shapeRasterizer:SlotTable<ShapeRasterizer>;
+  public var textureResolvers:KeyedTable<GlTextureResolver>;
+  public var velocityWriters:KeyedTable<GlVelocityWriter>;
+
+  private function new(?canvasShapeCommands:Null<KeyedTable<CanvasShapeCommand<String>>>, ?colorAdjustments:Null<SlotTable<RenderState->RenderProxy->RenderProxy->Void>>, ?colorAdjustmentUnsupportedGuard:Null<SlotTable<ColorAdjustmentUnsupportedGuard>>, ?effectPaddingResolvers:Null<KeyedTable<RenderEffectPaddingResolver>>, renderers:KeyedTable<Renderer>, ?renderRootGuard:Null<SlotTable<RenderRootGuard>>, strokeTessellator:SlotTable<StrokeTessellator>, blendRealizations:KeyedTable<GlBlendRealization>, ?colorAdjustmentFeature:Null<SlotTable<GlColorAdjustmentMaterialFeature>>, ?colorAdjustmentFeatureGuard:Null<SlotTable<GlColorAdjustmentMaterialFeatureGuard>>, compressedTextureDecoder:SlotTable<GlCompressedTextureDecoder>, compressedTextureUpload:SlotTable<GlCompressedTextureUploader>, customEffectShaders:KeyedTable<String>, customMaterialShaders:KeyedTable<GlCustomMaterialShaderSource>, materialRenderers:KeyedTable<GlMaterialRenderer>, meshMaterialRenderers:KeyedTable<GlMeshMaterialRenderer>, modifierSnippets:KeyedTable<GlModifierSnippet>, modifierSnippetRevision:Float, pbrExtensions:KeyedTable<GlPbrExtensionRegistration>, pbrExtensionRevision:Float, renderEffects:KeyedTable<GlRenderEffectRegistration>, shapeRasterizer:SlotTable<ShapeRasterizer>, textureResolvers:KeyedTable<GlTextureResolver>, velocityWriters:KeyedTable<GlVelocityWriter>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.canvasShapeCommands = canvasShapeCommands;
+    this.colorAdjustments = colorAdjustments;
+    this.colorAdjustmentUnsupportedGuard = colorAdjustmentUnsupportedGuard;
+    this.effectPaddingResolvers = effectPaddingResolvers;
+    this.renderers = renderers;
+    this.renderRootGuard = renderRootGuard;
+    this.strokeTessellator = strokeTessellator;
+    this.blendRealizations = blendRealizations;
+    this.colorAdjustmentFeature = colorAdjustmentFeature;
+    this.colorAdjustmentFeatureGuard = colorAdjustmentFeatureGuard;
+    this.compressedTextureDecoder = compressedTextureDecoder;
+    this.compressedTextureUpload = compressedTextureUpload;
+    this.customEffectShaders = customEffectShaders;
+    this.customMaterialShaders = customMaterialShaders;
+    this.materialRenderers = materialRenderers;
+    this.meshMaterialRenderers = meshMaterialRenderers;
+    this.modifierSnippets = modifierSnippets;
+    this.modifierSnippetRevision = modifierSnippetRevision;
+    this.pbrExtensions = pbrExtensions;
+    this.pbrExtensionRevision = pbrExtensionRevision;
+    this.renderEffects = renderEffects;
+    this.shapeRasterizer = shapeRasterizer;
+    this.textureResolvers = textureResolvers;
+    this.velocityWriters = velocityWriters;
+  }
+}
+#else
+typedef GlRenderRegistries = { @:optional var canvasShapeCommands:KeyedTable<CanvasShapeCommand<String>>; @:optional var colorAdjustments:SlotTable<RenderState->RenderProxy->RenderProxy->Void>; @:optional var colorAdjustmentUnsupportedGuard:SlotTable<ColorAdjustmentUnsupportedGuard>; @:optional var effectPaddingResolvers:KeyedTable<RenderEffectPaddingResolver>; var renderers:KeyedTable<Renderer>; @:optional var renderRootGuard:SlotTable<RenderRootGuard>; var strokeTessellator:SlotTable<StrokeTessellator>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var blendRealizations:KeyedTable<GlBlendRealization>; @:optional var colorAdjustmentFeature:SlotTable<GlColorAdjustmentMaterialFeature>; @:optional var colorAdjustmentFeatureGuard:SlotTable<GlColorAdjustmentMaterialFeatureGuard>; var compressedTextureDecoder:SlotTable<GlCompressedTextureDecoder>; var compressedTextureUpload:SlotTable<GlCompressedTextureUploader>; var customEffectShaders:KeyedTable<String>; var customMaterialShaders:KeyedTable<GlCustomMaterialShaderSource>; var materialRenderers:KeyedTable<GlMaterialRenderer>; var meshMaterialRenderers:KeyedTable<GlMeshMaterialRenderer>; var modifierSnippets:KeyedTable<GlModifierSnippet>; var modifierSnippetRevision:Float; var pbrExtensions:KeyedTable<GlPbrExtensionRegistration>; var pbrExtensionRevision:Float; var renderEffects:KeyedTable<GlRenderEffectRegistration>; var shapeRasterizer:SlotTable<ShapeRasterizer>; var textureResolvers:KeyedTable<GlTextureResolver>; var velocityWriters:KeyedTable<GlVelocityWriter>; };
+#end

@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const createTweenManager = api.createTweenManager;
 export const defaultManager = api.defaultManager;
+export const initializeTweenManager = api.initializeTweenManager;

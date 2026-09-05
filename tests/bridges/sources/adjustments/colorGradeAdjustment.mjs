@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createColorGradeAdjustment = api.createColorGradeAdjustment;
+export const initializeColorGradeAdjustment = api.initializeColorGradeAdjustment;

@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createFxaaEffect = api.createFxaaEffect;
+export const initializeFxaaEffect = api.initializeFxaaEffect;

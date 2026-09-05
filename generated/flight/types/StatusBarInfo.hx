@@ -4,4 +4,27 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef StatusBarInfo = { var color:Float; var height:Float; var overlaysContent:Bool; var style:StatusBarStyle; var visible:Bool; };
+#if !flight_struct_typedef
+@:allow(flight._StatusBar)
+@:keep
+@:structInit
+class StatusBarInfo {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var color:Float;
+  public var height:Float;
+  public var overlaysContent:Bool;
+  public var style:StatusBarStyle;
+  public var visible:Bool;
+
+  private function new(color:Float, height:Float, overlaysContent:Bool, style:StatusBarStyle, visible:Bool):Void {
+    this.__symbol__EntityRuntime = null;
+    this.color = color;
+    this.height = height;
+    this.overlaysContent = overlaysContent;
+    this.style = style;
+    this.visible = visible;
+  }
+}
+#else
+typedef StatusBarInfo = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var color:Float; var height:Float; var overlaysContent:Bool; var style:StatusBarStyle; var visible:Bool; };
+#end

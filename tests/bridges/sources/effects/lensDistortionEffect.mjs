@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createLensDistortionEffect = api.createLensDistortionEffect;
+export const initializeLensDistortionEffect = api.initializeLensDistortionEffect;

@@ -8,5 +8,6 @@ __syncDependencies();
 export const createCommandBindingTable = api.createCommandBindingTable;
 export const getCommandBinding = api.getCommandBinding;
 export const hasCommandBinding = api.hasCommandBinding;
+export const initializeSetNodePropertyCommand = api.initializeSetNodePropertyCommand;
 export const registerCommandBinding = api.registerCommandBinding;
 export const registerDefaultCommandBindings = api.registerDefaultCommandBindings;

@@ -71,6 +71,7 @@ import flight.types.Node2D;
 import flight.types.Node2DTraits;
 import flight.types.NodeAny;
 import flight.types.NodeOf;
+import flight.types.NonEntityCreateResult;
 import flight.types.PointerEventData;
 import flight.types.Rectangle;
 import flight.types.RectangleLike;
@@ -804,7 +805,7 @@ class _Gizmo {
 
   public static final yAxisColor__gizmoState:Float = 6732650.0;
 
-  public static function createNode2DGizmoFeatures():GizmoNode2DFeatures<Node2D> {
+  public static function createNode2DGizmoFeatures():NonEntityCreateResult<GizmoNode2DFeatures<Node2D>, String> {
     return cast { getWorldBoundsRectangle: _Gizmo.getNode2DGizmoWorldBoundsRectangle__node2dGizmoFeatures, getWorldOrigin: _Gizmo.getNode2DGizmoWorldOrigin__node2dGizmoFeatures, getWorldRotation: _Gizmo.getNode2DGizmoWorldRotation__node2dGizmoFeatures };
     return cast null;
   }

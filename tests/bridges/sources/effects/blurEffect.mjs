@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const createBlurEffect = api.createBlurEffect;
 export const getBlurEffectPadding = api.getBlurEffectPadding;
+export const initializeBlurEffect = api.initializeBlurEffect;
 export const registerBlurEffectPaddingResolver = api.registerBlurEffectPaddingResolver;

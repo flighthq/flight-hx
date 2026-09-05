@@ -7,6 +7,9 @@ import flight._internal._Runtime;
 #if !flight_struct_typedef
 @:noCompletion
 @:allow(flight._HostElectron)
+@:allow(flight.types.ElectronLinuxAppCapabilities)
+@:allow(flight.types.ElectronMacosAppCapabilities)
+@:allow(flight.types.ElectronWindowsAppCapabilities)
 @:keep
 @:structInit
 class ElectronCommonAppCapabilities {

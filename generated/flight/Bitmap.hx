@@ -7,8 +7,6 @@ import flight._Bitmap as Facade_Bitmap_flight__Bitmap;
 import flight._Bitmap.BitmapComparisonSource__bitmapCompare;
 import flight._Types as Facade_Bitmap_flight__Types;
 import flight.types.AlphaType;
-import flight.types.BackendExplanation;
-import flight.types.BackendOperationExplanation;
 import flight.types.Bitmap;
 import flight.types.BitmapBevelOptions;
 import flight.types.BitmapBoxBlurOptions;
@@ -18,7 +16,6 @@ import flight.types.BitmapDisplacementMapOptions;
 import flight.types.BitmapDropShadowOptions;
 import flight.types.BitmapEdgeMode;
 import flight.types.BitmapEncodeFailureExplanation;
-import flight.types.BitmapEncodeOperation;
 import flight.types.BitmapFingerprint;
 import flight.types.BitmapGlowOptions;
 import flight.types.BitmapGradientBevelOptions;
@@ -34,9 +31,12 @@ import flight.types.BitmapResizeOptions;
 import flight.types.BitmapSharpenOptions;
 import flight.types.ColorScaleBiasLike;
 import flight.types.GradientSpread;
+import flight.types.HasGraphicsBitmapEncode;
+import flight.types.HasGraphicsBitmapReadback;
 import flight.types.ImageChannel;
 import flight.types.ImageFormat;
 import flight.types.ImageResource;
+import flight.types.NonEntityCreateResult;
 import flight.types.PixelOrder;
 import flight.types.RectangleLike;
 import flight.types.ThresholdOperation;
@@ -129,8 +129,8 @@ class Bitmap {
     Facade_Bitmap_flight__Bitmap.buildBitmapSepiaColorMatrix(out);
   }
 
-  public static function captureBitmapFromImageResource(resource:ImageResource):Null<flight.types.Bitmap> {
-    return cast Facade_Bitmap_flight__Bitmap.captureBitmapFromImageResource(resource);
+  public static function captureBitmapFromImageResource(host:HasGraphicsBitmapReadback, resource:ImageResource):Null<flight.types.Bitmap> {
+    return cast Facade_Bitmap_flight__Bitmap.captureBitmapFromImageResource(host, resource);
     return cast null;
   }
 
@@ -208,12 +208,12 @@ class Bitmap {
     return cast null;
   }
 
-  public static function createBitmapFromImageSource(source:flight._internal.dom.CanvasImageSource, width:Float, height:Float):Null<flight.types.Bitmap> {
-    return cast Facade_Bitmap_flight__Bitmap.createBitmapFromImageSource(source, width, height);
+  public static function createBitmapFromImageSource(host:HasGraphicsBitmapReadback, source:flight._internal.dom.CanvasImageSource, width:Float, height:Float):Null<flight.types.Bitmap> {
+    return cast Facade_Bitmap_flight__Bitmap.createBitmapFromImageSource(host, source, width, height);
     return cast null;
   }
 
-  public static function createBitmapRegion(bitmap:flight.types.Bitmap, ?x:Float, ?y:Float, ?width:Float, ?height:Float):BitmapRegion {
+  public static function createBitmapRegion(bitmap:flight.types.Bitmap, ?x:Float, ?y:Float, ?width:Float, ?height:Float):NonEntityCreateResult<BitmapRegion, String> {
     return cast Facade_Bitmap_flight__Bitmap.createBitmapRegion(bitmap, x, y, width, height);
     return cast null;
   }
@@ -244,8 +244,8 @@ class Bitmap {
     Facade_Bitmap_flight__Bitmap.dropShadowBitmap(out, scratch, source, options);
   }
 
-  public static function encodeBitmap(source:flight.types.Bitmap, ?format:ImageFormat, ?quality:Float):Null<flight._internal._UInt8Array> {
-    return cast Facade_Bitmap_flight__Bitmap.encodeBitmap(source, format, quality);
+  public static function encodeBitmap(host:HasGraphicsBitmapEncode, source:flight.types.Bitmap, ?format:ImageFormat, ?quality:Float):Null<flight._internal._UInt8Array> {
+    return cast Facade_Bitmap_flight__Bitmap.encodeBitmap(host, source, format, quality);
     return cast null;
   }
 
@@ -257,23 +257,13 @@ class Bitmap {
     Facade_Bitmap_flight__Bitmap.erodeBitmap(out, source, radius);
   }
 
-  public static function explainBitmapEncodeBackend():BackendExplanation {
-    return cast Facade_Bitmap_flight__Bitmap.explainBitmapEncodeBackend();
+  public static function explainBitmapEncodeFailure(host:HasGraphicsBitmapEncode, format:ImageFormat):Null<BitmapEncodeFailureExplanation> {
+    return cast Facade_Bitmap_flight__Bitmap.explainBitmapEncodeFailure(host, format);
     return cast null;
   }
 
-  public static function explainBitmapEncodeFailure(format:ImageFormat):Null<BitmapEncodeFailureExplanation> {
-    return cast Facade_Bitmap_flight__Bitmap.explainBitmapEncodeFailure(format);
-    return cast null;
-  }
-
-  public static function explainBitmapEncodeOperation(operation:BitmapEncodeOperation):BackendOperationExplanation {
-    return cast Facade_Bitmap_flight__Bitmap.explainBitmapEncodeOperation(operation);
-    return cast null;
-  }
-
-  public static function explainBitmapReadback(source:flight._internal.dom.CanvasImageSource, width:Float, height:Float):BitmapReadbackExplanation {
-    return cast Facade_Bitmap_flight__Bitmap.explainBitmapReadback(source, width, height);
+  public static function explainBitmapReadback(host:HasGraphicsBitmapReadback, source:flight._internal.dom.CanvasImageSource, width:Float, height:Float):BitmapReadbackExplanation {
+    return cast Facade_Bitmap_flight__Bitmap.explainBitmapReadback(host, source, width, height);
     return cast null;
   }
 
@@ -385,11 +375,6 @@ class Bitmap {
 
   public static function gradientGlowBitmap(out:flight._internal._UInt8ClampedArray, scratch:flight._internal._UInt8ClampedArray, source:BitmapRegion, ramp:flight._internal._UInt8ClampedArray, ?options:BitmapGradientGlowOptions):Void {
     Facade_Bitmap_flight__Bitmap.gradientGlowBitmap(out, scratch, source, ramp, options);
-  }
-
-  public static function hasBitmapEncodeOperation(operation:BitmapEncodeOperation):Bool {
-    return cast Facade_Bitmap_flight__Bitmap.hasBitmapEncodeOperation(operation);
-    return cast null;
   }
 
   public static final ImageChannel:{ var Red:Float; var Green:Float; var Blue:Float; var Alpha:Float; } = Facade_Bitmap_flight__Types.ImageChannelValue;

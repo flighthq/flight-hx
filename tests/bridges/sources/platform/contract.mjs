@@ -4,3 +4,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './platform.mjs';
+export { initializePlatformInfo } from './platform.mjs';

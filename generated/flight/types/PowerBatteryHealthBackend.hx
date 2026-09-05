@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:keep
+@:structInit
+class PowerBatteryHealthBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var getBatteryHealth:PowerBatteryHealth->PowerBatteryHealth;
+
+  private function new(getBatteryHealth:PowerBatteryHealth->PowerBatteryHealth):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getBatteryHealth = getBatteryHealth;
+  }
+}
+#else
 typedef PowerBatteryHealthBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getBatteryHealth:PowerBatteryHealth->PowerBatteryHealth; };
+#end

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef HapticsOperation = String;
+typedef HapticsOperation = flight._internal._Union2<flight._internal._Symbol, String>;

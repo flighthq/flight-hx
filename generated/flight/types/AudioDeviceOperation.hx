@@ -5,4 +5,4 @@ import Math as HxMath;
 import flight._internal._Runtime;
 
 @:noCompletion
-typedef AudioDeviceOperation = String;
+typedef AudioDeviceOperation = flight._internal._Exclude<flight._internal._Union2<flight._internal._Symbol, String>, flight._internal._Symbol>;

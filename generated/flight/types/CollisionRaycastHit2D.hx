@@ -4,4 +4,27 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CollisionRaycastHit2D = { var fraction:Float; var x:Float; var y:Float; var normalX:Float; var normalY:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Collision)
+@:keep
+@:structInit
+class CollisionRaycastHit2D {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var fraction:Float;
+  public var x:Float;
+  public var y:Float;
+  public var normalX:Float;
+  public var normalY:Float;
+
+  private function new(fraction:Float, x:Float, y:Float, normalX:Float, normalY:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.fraction = fraction;
+    this.x = x;
+    this.y = y;
+    this.normalX = normalX;
+    this.normalY = normalY;
+  }
+}
+#else
+typedef CollisionRaycastHit2D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var fraction:Float; var x:Float; var y:Float; var normalX:Float; var normalY:Float; };
+#end

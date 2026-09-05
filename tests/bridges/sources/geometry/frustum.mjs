@@ -7,6 +7,7 @@ __syncDependencies();
 
 export const createFrustum = api.createFrustum;
 export const getFrustumCorners = api.getFrustumCorners;
+export const initializeFrustum = api.initializeFrustum;
 export const isFrustumContainingPoint = api.isFrustumContainingPoint;
 export const isFrustumIntersectingAabb = api.isFrustumIntersectingAabb;
 export const isFrustumIntersectingObb = api.isFrustumIntersectingObb;

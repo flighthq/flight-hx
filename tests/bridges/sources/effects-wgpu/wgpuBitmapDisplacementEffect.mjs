@@ -23,6 +23,10 @@ export const BITMAP_DISPLACEMENT_FRAGMENT_WGSL = api.BITMAP_DISPLACEMENT_FRAGMEN
 const __bridgeImplementation_defaultWgpuBitmapDisplacementEffectRunner = api.defaultWgpuBitmapDisplacementEffectRunner;
 export function defaultWgpuBitmapDisplacementEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultWgpuBitmapDisplacementEffectRunner(...args); }
 api.defaultWgpuBitmapDisplacementEffectRunner = defaultWgpuBitmapDisplacementEffectRunner;
+const __bridgeImplementation_initializeWgpuEffectPipeline__wgpuBitmapDisplacementEffect = api.initializeWgpuEffectPipeline__wgpuBitmapDisplacementEffect;
+export function initializeWgpuEffectPipeline__wgpuBitmapDisplacementEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_initializeWgpuEffectPipeline__wgpuBitmapDisplacementEffect(...args); return result; }
+api.initializeWgpuEffectPipeline__wgpuBitmapDisplacementEffect = initializeWgpuEffectPipeline__wgpuBitmapDisplacementEffect;
+compiled.flight.EffectsWgpu.initializeWgpuEffectPipeline__wgpuBitmapDisplacementEffect = initializeWgpuEffectPipeline__wgpuBitmapDisplacementEffect;
 const __bridgeImplementation_isWgpuBitmapDisplacementEffectResolvable = api.isWgpuBitmapDisplacementEffectResolvable;
 export function isWgpuBitmapDisplacementEffectResolvable(...args) { __syncDependencies(); const result = __bridgeImplementation_isWgpuBitmapDisplacementEffectResolvable(...args); return result; }
 api.isWgpuBitmapDisplacementEffectResolvable = isWgpuBitmapDisplacementEffectResolvable;

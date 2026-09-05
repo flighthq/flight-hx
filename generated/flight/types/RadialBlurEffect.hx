@@ -4,4 +4,24 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef RadialBlurEffect = { var kind:String; @:optional var centerX:Float; @:optional var centerY:Float; @:optional var strength:Float; @:optional var samples:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class RadialBlurEffect extends flight.types.RenderEffect<String> {
+  public var centerX:Null<Float>;
+  public var centerY:Null<Float>;
+  public var strength:Null<Float>;
+  public var samples:Null<Float>;
+
+  private function new(kind:String, ?centerX:Null<Float>, ?centerY:Null<Float>, ?strength:Null<Float>, ?samples:Null<Float>):Void {
+    super(kind);
+    this.centerX = centerX;
+    this.centerY = centerY;
+    this.strength = strength;
+    this.samples = samples;
+  }
+}
+#else
+typedef RadialBlurEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var centerX:Float; @:optional var centerY:Float; @:optional var strength:Float; @:optional var samples:Float; };
+#end

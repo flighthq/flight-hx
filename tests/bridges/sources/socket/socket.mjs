@@ -13,6 +13,7 @@ export const detachSocket = api.detachSocket;
 export const disposeSocket = api.disposeSocket;
 export const enableSocketSignals = api.enableSocketSignals;
 export const getSocketReadyState = api.getSocketReadyState;
+export const initializeWebSocketBackend = api.initializeWebSocketBackend;
 export const openTcpSocket = api.openTcpSocket;
 export const sendSocketMessage = api.sendSocketMessage;
 export const setSocketGuard = api.setSocketGuard;

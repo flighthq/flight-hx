@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MovieClipData = { var timeline:Null<Timeline>; };
+#if !flight_struct_typedef
+@:allow(flight._MovieClip)
+@:keep
+@:structInit
+class MovieClipData extends flight.types.Node2DData {
+  public var timeline:Null<Timeline>;
+
+  private function new(timeline:Null<Timeline>):Void {
+    super();
+    this.timeline = timeline;
+  }
+}
+#else
+typedef MovieClipData = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var timeline:Null<Timeline>; };
+#end

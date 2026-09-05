@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Scene3DResources)
+@:keep
+@:structInit
+class Scene3DResourceResolverWithRuntime extends flight.types.Scene3DResourceResolver {
+  public var __Scene3DResourceResolverRuntimeKey:Null<Scene3DResourceResolverRuntime>;
+
+  private function new(fetch:ImageResourceFetch, registry:Scene3DMaterialTextureRegistry, ?__Scene3DResourceResolverRuntimeKey:Null<Scene3DResourceResolverRuntime>):Void {
+    super(fetch, registry);
+    this.__Scene3DResourceResolverRuntimeKey = __Scene3DResourceResolverRuntimeKey;
+  }
+}
+#else
 typedef Scene3DResourceResolverWithRuntime = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var fetch:ImageResourceFetch; var registry:Scene3DMaterialTextureRegistry; @:optional var __Scene3DResourceResolverRuntimeKey:Scene3DResourceResolverRuntime; };
+#end

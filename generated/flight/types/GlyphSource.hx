@@ -4,4 +4,28 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlyphSource = { var getGlyphAtlasImage:Float->Null<TextureSource>; var getGlyphEntry:Float->Null<GlyphEntry>; var getGlyphKerning:Float->Float->Float; var getGlyphLayoutVersion:Void->Float; var getGlyphMetrics:Void->GlyphMetrics; };
+#if !flight_struct_typedef
+@:allow(flight._BitmapFont)
+@:allow(flight._GlyphAtlas)
+@:keep
+@:structInit
+class GlyphSource {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var getGlyphAtlasImage:Float->Null<TextureSource>;
+  public var getGlyphEntry:Float->Null<GlyphEntry>;
+  public var getGlyphKerning:Float->Float->Float;
+  public var getGlyphLayoutVersion:Void->Float;
+  public var getGlyphMetrics:Void->GlyphMetrics;
+
+  private function new(getGlyphAtlasImage:Float->Null<TextureSource>, getGlyphEntry:Float->Null<GlyphEntry>, getGlyphKerning:Float->Float->Float, getGlyphLayoutVersion:Void->Float, getGlyphMetrics:Void->GlyphMetrics):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getGlyphAtlasImage = getGlyphAtlasImage;
+    this.getGlyphEntry = getGlyphEntry;
+    this.getGlyphKerning = getGlyphKerning;
+    this.getGlyphLayoutVersion = getGlyphLayoutVersion;
+    this.getGlyphMetrics = getGlyphMetrics;
+  }
+}
+#else
+typedef GlyphSource = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getGlyphAtlasImage:Float->Null<TextureSource>; var getGlyphEntry:Float->Null<GlyphEntry>; var getGlyphKerning:Float->Float->Float; var getGlyphLayoutVersion:Void->Float; var getGlyphMetrics:Void->GlyphMetrics; };
+#end

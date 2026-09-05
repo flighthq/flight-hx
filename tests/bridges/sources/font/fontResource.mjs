@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createFontResource = api.createFontResource;
+export const initializeFontResource = api.initializeFontResource;

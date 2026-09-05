@@ -89,6 +89,11 @@ class Skeleton2D {
     return cast null;
   }
 
+  public static function createSkin2D(influenceCounts:flight._internal._UInt16Array, influences:flight._internal._Float32Array):Skin2D {
+    return cast Facade_Skeleton2D_flight__Skeleton2D.createSkin2D(influenceCounts, influences);
+    return cast null;
+  }
+
   public static function deformSkeleton2DMeshAttachment(out:flight._internal._Float32Array, attachment:MeshAttachment2D, skeleton:flight.types.Skeleton2D, boneIndex:Float, ?deform:Null<flight._internal._Float32Array>):Void {
     Facade_Skeleton2D_flight__Skeleton2D.deformSkeleton2DMeshAttachment(out, attachment, skeleton, boneIndex, deform);
   }

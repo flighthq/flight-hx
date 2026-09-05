@@ -8,4 +8,5 @@ __syncDependencies();
 export const clearTextShaperCache = api.clearTextShaperCache;
 export const createTextShaperCache = api.createTextShaperCache;
 export const disposeTextShaperCache = api.disposeTextShaperCache;
+export const initializeTextShaperCache = api.initializeTextShaperCache;
 export const shapeTextRunCached = api.shapeTextRunCached;

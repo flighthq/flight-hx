@@ -20,3 +20,4 @@ export const appendPathRectangle = api.appendPathRectangle;
 export const appendPathRoundRectangle = api.appendPathRoundRectangle;
 export const createPath = api.createPath;
 export const getPathLastPoint = api.getPathLastPoint;
+export const initializePath = api.initializePath;

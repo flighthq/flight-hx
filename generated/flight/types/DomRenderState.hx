@@ -13,13 +13,13 @@ class DomRenderState extends flight.types.RenderState {
   public var domCssFilterResolver:Null<RenderProxy2D->Null<String>>;
   public var element:flight._internal.dom.HTMLElement;
 
-  private function new(allowSmoothing:Bool, backgroundColor:Float, backgroundColorRgba:Array<Float>, backgroundColorString:String, currentClipDepth:Float, displayObjectClipHooks:Null<Scene2DClipHooks>, pixelRatio:Float, renderAlpha:Float, renderBlendMode:Null<BlendMode>, renderTransform2D:Null<Matrix>, sceneGraphSyncPolicy:Scene3DGraphSyncPolicy, roundPixels:Bool, applyBlendMode:Null<flight._internal.dom.HTMLElement->Null<BlendMode>->Void>, domCssFilterResolver:Null<RenderProxy2D->Null<String>>, element:flight._internal.dom.HTMLElement):Void {
-    super(allowSmoothing, backgroundColor, backgroundColorRgba, backgroundColorString, currentClipDepth, displayObjectClipHooks, pixelRatio, renderAlpha, renderBlendMode, renderTransform2D, sceneGraphSyncPolicy, roundPixels);
+  private function new(allowSmoothing:Bool, backgroundColor:Float, backgroundColorRgba:Array<Float>, backgroundColorString:String, currentClipDepth:Float, displayObjectClipHooks:Null<Scene2DClipHooks>, pixelRatio:Float, raster2DSurfaceProvider:Null<Raster2DSurfaceProvider>, renderAlpha:Float, renderBlendMode:Null<BlendMode>, renderTransform2D:Null<Matrix>, sceneGraphSyncPolicy:Scene3DGraphSyncPolicy, roundPixels:Bool, applyBlendMode:Null<flight._internal.dom.HTMLElement->Null<BlendMode>->Void>, domCssFilterResolver:Null<RenderProxy2D->Null<String>>, element:flight._internal.dom.HTMLElement):Void {
+    super(allowSmoothing, backgroundColor, backgroundColorRgba, backgroundColorString, currentClipDepth, displayObjectClipHooks, pixelRatio, raster2DSurfaceProvider, renderAlpha, renderBlendMode, renderTransform2D, sceneGraphSyncPolicy, roundPixels);
     this.applyBlendMode = applyBlendMode;
     this.domCssFilterResolver = domCssFilterResolver;
     this.element = element;
   }
 }
 #else
-typedef DomRenderState = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var allowSmoothing:Bool; var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; var currentClipDepth:Float; var displayObjectClipHooks:Null<Scene2DClipHooks>; var pixelRatio:Float; var renderAlpha:Float; var renderBlendMode:Null<BlendMode>; var renderTransform2D:Null<Matrix>; var sceneGraphSyncPolicy:Scene3DGraphSyncPolicy; var roundPixels:Bool; var applyBlendMode:Null<flight._internal.dom.HTMLElement->Null<BlendMode>->Void>; var domCssFilterResolver:Null<RenderProxy2D->Null<String>>; var element:flight._internal.dom.HTMLElement; };
+typedef DomRenderState = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var allowSmoothing:Bool; var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; var currentClipDepth:Float; var displayObjectClipHooks:Null<Scene2DClipHooks>; var pixelRatio:Float; var raster2DSurfaceProvider:Null<Raster2DSurfaceProvider>; var renderAlpha:Float; var renderBlendMode:Null<BlendMode>; var renderTransform2D:Null<Matrix>; var sceneGraphSyncPolicy:Scene3DGraphSyncPolicy; var roundPixels:Bool; var applyBlendMode:Null<flight._internal.dom.HTMLElement->Null<BlendMode>->Void>; var domCssFilterResolver:Null<RenderProxy2D->Null<String>>; var element:flight._internal.dom.HTMLElement; };
 #end

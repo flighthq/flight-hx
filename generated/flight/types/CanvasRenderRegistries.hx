@@ -4,4 +4,37 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CanvasRenderRegistries = { @:optional var canvasShapeCommands:KeyedTable<CanvasShapeCommand<String>>; @:optional var colorAdjustments:SlotTable<RenderState->RenderProxy->RenderProxy->Void>; @:optional var colorAdjustmentUnsupportedGuard:SlotTable<ColorAdjustmentUnsupportedGuard>; @:optional var effectPaddingResolvers:KeyedTable<RenderEffectPaddingResolver>; var renderers:KeyedTable<Renderer>; @:optional var renderRootGuard:SlotTable<RenderRootGuard>; var strokeTessellator:SlotTable<StrokeTessellator>; @:optional var blendModeApplication:Null<CanvasRenderState->Null<BlendMode>->Void>; @:optional var materialRenderers:KeyedTable<CanvasMaterialRenderer>; var renderEffects:KeyedTable<CanvasRenderEffectRunner>; };
+#if !flight_struct_typedef
+@:allow(flight._Scene2DCanvas)
+@:keep
+@:structInit
+class CanvasRenderRegistries {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var canvasShapeCommands:Null<KeyedTable<CanvasShapeCommand<String>>>;
+  public var colorAdjustments:Null<SlotTable<RenderState->RenderProxy->RenderProxy->Void>>;
+  public var colorAdjustmentUnsupportedGuard:Null<SlotTable<ColorAdjustmentUnsupportedGuard>>;
+  public var effectPaddingResolvers:Null<KeyedTable<RenderEffectPaddingResolver>>;
+  public var renderers:KeyedTable<Renderer>;
+  public var renderRootGuard:Null<SlotTable<RenderRootGuard>>;
+  public var strokeTessellator:SlotTable<StrokeTessellator>;
+  public var blendModeApplication:Null<CanvasRenderState->Null<BlendMode>->Void>;
+  public var materialRenderers:Null<KeyedTable<CanvasMaterialRenderer>>;
+  public var renderEffects:KeyedTable<CanvasRenderEffectRunner>;
+
+  private function new(?canvasShapeCommands:Null<KeyedTable<CanvasShapeCommand<String>>>, ?colorAdjustments:Null<SlotTable<RenderState->RenderProxy->RenderProxy->Void>>, ?colorAdjustmentUnsupportedGuard:Null<SlotTable<ColorAdjustmentUnsupportedGuard>>, ?effectPaddingResolvers:Null<KeyedTable<RenderEffectPaddingResolver>>, renderers:KeyedTable<Renderer>, ?renderRootGuard:Null<SlotTable<RenderRootGuard>>, strokeTessellator:SlotTable<StrokeTessellator>, ?blendModeApplication:Null<CanvasRenderState->Null<BlendMode>->Void>, ?materialRenderers:Null<KeyedTable<CanvasMaterialRenderer>>, renderEffects:KeyedTable<CanvasRenderEffectRunner>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.canvasShapeCommands = canvasShapeCommands;
+    this.colorAdjustments = colorAdjustments;
+    this.colorAdjustmentUnsupportedGuard = colorAdjustmentUnsupportedGuard;
+    this.effectPaddingResolvers = effectPaddingResolvers;
+    this.renderers = renderers;
+    this.renderRootGuard = renderRootGuard;
+    this.strokeTessellator = strokeTessellator;
+    this.blendModeApplication = blendModeApplication;
+    this.materialRenderers = materialRenderers;
+    this.renderEffects = renderEffects;
+  }
+}
+#else
+typedef CanvasRenderRegistries = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var canvasShapeCommands:KeyedTable<CanvasShapeCommand<String>>; @:optional var colorAdjustments:SlotTable<RenderState->RenderProxy->RenderProxy->Void>; @:optional var colorAdjustmentUnsupportedGuard:SlotTable<ColorAdjustmentUnsupportedGuard>; @:optional var effectPaddingResolvers:KeyedTable<RenderEffectPaddingResolver>; var renderers:KeyedTable<Renderer>; @:optional var renderRootGuard:SlotTable<RenderRootGuard>; var strokeTessellator:SlotTable<StrokeTessellator>; @:optional var blendModeApplication:Null<CanvasRenderState->Null<BlendMode>->Void>; @:optional var materialRenderers:KeyedTable<CanvasMaterialRenderer>; var renderEffects:KeyedTable<CanvasRenderEffectRunner>; };
+#end

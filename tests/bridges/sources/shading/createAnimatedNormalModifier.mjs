@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createAnimatedNormalModifier = api.createAnimatedNormalModifier;
+export const initializeAnimatedNormalModifier = api.initializeAnimatedNormalModifier;

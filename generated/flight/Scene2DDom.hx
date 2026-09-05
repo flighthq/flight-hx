@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 import flight._Scene2DDom as Facade_Scene2DDom_flight__Scene2DDom;
 import flight.types.DomRenderState;
 import flight.types.DomTextureResolver;
+import flight.types.HasGraphicsImage;
 import flight.types.Node2D;
 import flight.types.RenderState;
 import flight.types.Scene2DRenderer;
@@ -30,6 +31,8 @@ class Scene2DDom {
   public static final defaultDomRichTextRenderer:Scene2DRenderer = Facade_Scene2DDom_flight__Scene2DDom.defaultDomRichTextRenderer;
 
   public static final defaultDomScale9ShapeRenderer:Scene2DRenderer = Facade_Scene2DDom_flight__Scene2DDom.defaultDomScale9ShapeRenderer;
+
+  public static final defaultDomScale9SpriteRenderer:Scene2DRenderer = Facade_Scene2DDom_flight__Scene2DDom.defaultDomScale9SpriteRenderer;
 
   public static final defaultDomShapeRenderer:Scene2DRenderer = Facade_Scene2DDom_flight__Scene2DDom.defaultDomShapeRenderer;
 
@@ -71,8 +74,8 @@ class Scene2DDom {
     return cast null;
   }
 
-  public static function registerDomBitmapTextureResolver(state:DomRenderState):Void {
-    Facade_Scene2DDom_flight__Scene2DDom.registerDomBitmapTextureResolver(state);
+  public static function registerDomBitmapTextureResolver(host:HasGraphicsImage, state:DomRenderState):Void {
+    Facade_Scene2DDom_flight__Scene2DDom.registerDomBitmapTextureResolver(host, state);
   }
 
   public static function registerDomImageTextureResolver(state:DomRenderState):Void {

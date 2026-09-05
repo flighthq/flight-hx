@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostCapacitor)
+@:allow(flight._HostElectron)
+@:allow(flight._HostTauri)
+@:keep
+@:structInit
+class AppVersionBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var getVersion:Void->String;
+
+  private function new(getVersion:Void->String):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getVersion = getVersion;
+  }
+}
+#else
 typedef AppVersionBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getVersion:Void->String; };
+#end

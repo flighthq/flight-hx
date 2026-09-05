@@ -10,6 +10,7 @@ export const declareGlRenderTargetColorSpace = api.declareGlRenderTargetColorSpa
 export const destroyGlRenderTarget = api.destroyGlRenderTarget;
 export const drawGlRenderTargetResult = api.drawGlRenderTargetResult;
 export const explainGlRenderTarget = api.explainGlRenderTarget;
+export const initializeGlRenderTarget = api.initializeGlRenderTarget;
 export const isGlRenderTargetFormatSupported = api.isGlRenderTargetFormatSupported;
 export const resizeGlRenderTarget = api.resizeGlRenderTarget;
 export const resolveGlRenderTarget = api.resolveGlRenderTarget;

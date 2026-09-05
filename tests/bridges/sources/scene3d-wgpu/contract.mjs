@@ -47,3 +47,4 @@ export * from './wgpuUnlitPrelude.mjs';
 export * from './wgpuWireframePrelude.mjs';
 export * from './wgpuWireframeUpload.mjs';
 export * from './wireframeWgpuMeshMaterialRenderer.mjs';
+export { initializeWgpuMeshPipeline } from './wgpuMeshPipeline.mjs';

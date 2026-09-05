@@ -4,4 +4,26 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics2DMouseJoint = { var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var breakForce:Float; var breakTorque:Float; var targetX:Float; var targetY:Float; var maxForce:Float; var frequencyHz:Float; var dampingRatio:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Physics2D)
+@:keep
+@:structInit
+class Physics2DMouseJoint extends flight.types.Physics2DJoint {
+  public var targetX:Float;
+  public var targetY:Float;
+  public var maxForce:Float;
+  public var frequencyHz:Float;
+  public var dampingRatio:Float;
+
+  private function new(kind:Physics2DJointKind, bodyA:Float, bodyB:Float, localAnchorAX:Float, localAnchorAY:Float, localAnchorBX:Float, localAnchorBY:Float, collideConnected:Bool, impulse0:Float, impulse1:Float, impulse2:Float, rAX:Float, rAY:Float, rBX:Float, rBY:Float, breakForce:Float, breakTorque:Float, targetX:Float, targetY:Float, maxForce:Float, frequencyHz:Float, dampingRatio:Float):Void {
+    super(kind, bodyA, bodyB, localAnchorAX, localAnchorAY, localAnchorBX, localAnchorBY, collideConnected, impulse0, impulse1, impulse2, rAX, rAY, rBX, rBY, breakForce, breakTorque);
+    this.targetX = targetX;
+    this.targetY = targetY;
+    this.maxForce = maxForce;
+    this.frequencyHz = frequencyHz;
+    this.dampingRatio = dampingRatio;
+  }
+}
+#else
+typedef Physics2DMouseJoint = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var breakForce:Float; var breakTorque:Float; var targetX:Float; var targetY:Float; var maxForce:Float; var frequencyHz:Float; var dampingRatio:Float; };
+#end

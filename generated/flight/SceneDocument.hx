@@ -4,6 +4,7 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._SceneDocument as Facade_SceneDocument_flight__SceneDocument;
+import flight.types.Entity;
 import flight.types.FlightDocument;
 import flight.types.FlightDocumentInteractiveStateBinding;
 import flight.types.FlightDocumentLayoutBinding;
@@ -24,12 +25,12 @@ import flight.types.Scene3DDocumentCamera;
 import flight.types.Scene3DDocumentLight;
 
 class SceneDocument {
-  public static function createFlightDocumentFromScene2D(source:Scene2D, schemas:FlightDocumentSchemaRegistry, ?interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node2D>>, ?layoutBindings:Array<FlightDocumentLayoutBinding<Node2D>>):FlightDocumentScene2D {
+  public static function createFlightDocumentFromScene2D(source:Scene2D, schemas:FlightDocumentSchemaRegistry, ?interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node2D>>, ?layoutBindings:Array<FlightDocumentLayoutBinding<Node2D>>):{ >FlightDocumentScene2D, >Entity, } {
     return cast Facade_SceneDocument_flight__SceneDocument.createFlightDocumentFromScene2D(source, schemas, interactiveStateBindings, layoutBindings);
     return cast null;
   }
 
-  public static function createFlightDocumentFromScene3D(source:Scene3D, cameras:Array<Scene3DDocumentCamera>, lights:Array<Scene3DDocumentLight>, schemas:FlightDocumentSchemaRegistry, ?interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node3D>>, ?layoutBindings:Array<FlightDocumentLayoutBinding<Node3D>>):FlightDocumentScene3D {
+  public static function createFlightDocumentFromScene3D(source:Scene3D, cameras:Array<Scene3DDocumentCamera>, lights:Array<Scene3DDocumentLight>, schemas:FlightDocumentSchemaRegistry, ?interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node3D>>, ?layoutBindings:Array<FlightDocumentLayoutBinding<Node3D>>):{ >FlightDocumentScene3D, >Entity, } {
     return cast Facade_SceneDocument_flight__SceneDocument.createFlightDocumentFromScene3D(source, cameras, lights, schemas, interactiveStateBindings, layoutBindings);
     return cast null;
   }

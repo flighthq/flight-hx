@@ -5,6 +5,8 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight.Types.ClipboardFormatHtml;
 import flight.Types.ClipboardFormatRtf;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
 import flight._Types.ClipboardFormatHtml;
@@ -16,6 +18,7 @@ import flight.types.ClipboardImageBackend;
 import flight.types.ClipboardTextBackend;
 import flight.types.ClipboardWatch;
 import flight.types.ClipboardWriteItem;
+import flight.types.EntityConstruction;
 import flight.types.HasClipboardBookmark;
 import flight.types.HasClipboardChange;
 import flight.types.HasClipboardFormats;
@@ -41,7 +44,10 @@ class _Clipboard {
   }
 
   public static function createClipboardWatch():ClipboardWatch {
-    return cast { onChange: (cast createSignal() : Signal<Void->Void>) };
+    var out:EntityConstruction<ClipboardWatch> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ onChange: cast _Runtime.UNDEFINED } : ClipboardWatch); }) #end));
+    initializeClipboardWatch(({ final __callArgument2:Dynamic = out; __callArgument2; }));
+    return cast out;
     return cast null;
   }
 
@@ -55,7 +61,7 @@ class _Clipboard {
   }
 
   public static function disposeClipboardWatch(watch:ClipboardWatch):Void {
-    detachClipboardWatch(({ final __callArgument2:Dynamic = watch; __callArgument2; }));
+    detachClipboardWatch(({ final __callArgument4:Dynamic = watch; __callArgument4; }));
   }
 
   public static function getClipboardFormats(host:HasClipboardFormats):flight._internal._Promise<Array<String>> {
@@ -65,8 +71,8 @@ class _Clipboard {
 
   public static function hasClipboardBookmark(host:HasClipboardBookmark):flight._internal._Promise<Bool> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      return flight._internal._Async.flatMap((cast (cast (cast host : HasClipboardBookmark).clipboard : { var bookmark:ClipboardBookmarkBackend; }).bookmark : ClipboardBookmarkBackend).readBookmark(), function(__awaitValue4:Dynamic):Dynamic {
-        return flight._internal._Async.resolve(!_Runtime.strictEquals(__awaitValue4, null));
+      return flight._internal._Async.flatMap((cast (cast (cast host : HasClipboardBookmark).clipboard : { var bookmark:ClipboardBookmarkBackend; }).bookmark : ClipboardBookmarkBackend).readBookmark(), function(__awaitValue6:Dynamic):Dynamic {
+        return flight._internal._Async.resolve(!_Runtime.strictEquals(__awaitValue6, null));
       });
     }));
   }
@@ -96,8 +102,14 @@ class _Clipboard {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeClipboardWatch(out:EntityConstruction<ClipboardWatch>):Void {
+    _Runtime.setField(out, 'onChange', (cast createSignal() : Signal<Void->Void>));
+  }
+
   public static function readClipboard(host:HasClipboardFormats, formats:Array<String>):flight._internal._Promise<flight._internal._Record<String, String>> {
-    return cast (cast (cast (cast host : HasClipboardFormats).clipboard : { var formats:ClipboardFormatsBackend; }).formats : ClipboardFormatsBackend).readItems(({ final __callArgument5:Dynamic = formats; __callArgument5; }));
+    return cast (cast (cast (cast host : HasClipboardFormats).clipboard : { var formats:ClipboardFormatsBackend; }).formats : ClipboardFormatsBackend).readItems(({ final __callArgument7:Dynamic = formats; __callArgument7; }));
     return cast null;
   }
 
@@ -132,7 +144,7 @@ class _Clipboard {
   }
 
   public static function writeClipboard(host:HasClipboardFormats, items:Array<ClipboardWriteItem>):flight._internal._Promise<Bool> {
-    return cast (cast (cast (cast host : HasClipboardFormats).clipboard : { var formats:ClipboardFormatsBackend; }).formats : ClipboardFormatsBackend).writeItems(({ final __callArgument6:Dynamic = items; __callArgument6; }));
+    return cast (cast (cast (cast host : HasClipboardFormats).clipboard : { var formats:ClipboardFormatsBackend; }).formats : ClipboardFormatsBackend).writeItems(({ final __callArgument8:Dynamic = items; __callArgument8; }));
     return cast null;
   }
 

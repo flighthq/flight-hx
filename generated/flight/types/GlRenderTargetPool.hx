@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlRenderTargetPool = { var free:Array<GlRenderTarget>; };
+#if !flight_struct_typedef
+@:allow(flight._RenderGl)
+@:keep
+@:structInit
+class GlRenderTargetPool {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var free:Array<GlRenderTarget>;
+
+  private function new(free:Array<GlRenderTarget>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.free = free;
+  }
+}
+#else
+typedef GlRenderTargetPool = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var free:Array<GlRenderTarget>; };
+#end

@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AddNodeChildCommand = { var kind:Kind; var label:String; var child:NodeAny; var index:Float; var parent:NodeAny; };
+#if !flight_struct_typedef
+@:allow(flight._Command)
+@:keep
+@:structInit
+class AddNodeChildCommand extends flight.types.Command {
+  public var child:NodeAny;
+  public var index:Float;
+  public var parent:NodeAny;
+
+  private function new(kind:Kind, label:String, child:NodeAny, index:Float, parent:NodeAny):Void {
+    super(kind, label);
+    this.child = child;
+    this.index = index;
+    this.parent = parent;
+  }
+}
+#else
+typedef AddNodeChildCommand = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Kind; var label:String; var child:NodeAny; var index:Float; var parent:NodeAny; };
+#end

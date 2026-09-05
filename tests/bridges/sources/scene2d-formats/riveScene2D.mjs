@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createScene2DFromRiveDocument = api.createScene2DFromRiveDocument;
+export const initializeRiveDocumentImportResult = api.initializeRiveDocumentImportResult;

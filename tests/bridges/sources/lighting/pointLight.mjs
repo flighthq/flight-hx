@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const clonePointLight = api.clonePointLight;
 export const createPointLight = api.createPointLight;
+export const initializePointLight = api.initializePointLight;

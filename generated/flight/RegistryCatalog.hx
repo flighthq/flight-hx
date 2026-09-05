@@ -4,6 +4,7 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._RegistryCatalog as Facade_RegistryCatalog_flight__RegistryCatalog;
+import flight.types.EntityConstruction;
 import flight.types.Kind;
 import flight.types.RegistryCatalog;
 import flight.types.RegistryCatalogEntry;
@@ -25,6 +26,10 @@ class RegistryCatalog {
   public static function getRegistryCatalogEntries(catalog:flight.types.RegistryCatalog):Array<RegistryCatalogEntry> {
     return cast Facade_RegistryCatalog_flight__RegistryCatalog.getRegistryCatalogEntries(catalog);
     return cast null;
+  }
+
+  public static function initializeRegistryCatalog(out:EntityConstruction<flight.types.RegistryCatalog>, ?entries:Array<RegistryCatalogEntry>):Void {
+    Facade_RegistryCatalog_flight__RegistryCatalog.initializeRegistryCatalog(out, entries);
   }
 
   public static function registerRegistryCatalogEntry(catalog:flight.types.RegistryCatalog, entry:RegistryCatalogEntry):Void {

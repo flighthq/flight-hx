@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef InputManager = { var onGamepadAxisMove:Signal<InputGamepadAxisData->Void>; var onGamepadButtonDown:Signal<InputGamepadButtonData->Void>; var onGamepadButtonUp:Signal<InputGamepadButtonData->Void>; var onGamepadConnect:Signal<InputGamepadConnectData->Void>; var onGamepadDisconnect:Signal<InputGamepadConnectData->Void>; var onKeyDown:Signal<InputKeyboardData->Void>; var onKeyUp:Signal<InputKeyboardData->Void>; var onPointerCancel:Signal<InputPointerData->Void>; var onPointerDown:Signal<InputPointerData->Void>; var onPointerMove:Signal<InputPointerData->Void>; var onPointerMoveRelative:Signal<InputPointerData->Void>; var onPointerUp:Signal<InputPointerData->Void>; var onTextEdit:Signal<InputTextData->Void>; var onTextInput:Signal<InputTextData->Void>; var onWheel:Signal<InputPointerData->Void>; var enabled:Bool; };
+#if !flight_struct_typedef
+@:allow(flight._Input)
+@:keep
+@:structInit
+class InputManager extends flight.types.InputSignals {
+  public var enabled:Bool;
+
+  private function new(onGamepadAxisMove:Signal<InputGamepadAxisData->Void>, onGamepadButtonDown:Signal<InputGamepadButtonData->Void>, onGamepadButtonUp:Signal<InputGamepadButtonData->Void>, onGamepadConnect:Signal<InputGamepadConnectData->Void>, onGamepadDisconnect:Signal<InputGamepadConnectData->Void>, onKeyDown:Signal<InputKeyboardData->Void>, onKeyUp:Signal<InputKeyboardData->Void>, onPointerCancel:Signal<InputPointerData->Void>, onPointerDown:Signal<InputPointerData->Void>, onPointerMove:Signal<InputPointerData->Void>, onPointerMoveRelative:Signal<InputPointerData->Void>, onPointerUp:Signal<InputPointerData->Void>, onTextEdit:Signal<InputTextData->Void>, onTextInput:Signal<InputTextData->Void>, onWheel:Signal<InputPointerData->Void>, enabled:Bool):Void {
+    super(onGamepadAxisMove, onGamepadButtonDown, onGamepadButtonUp, onGamepadConnect, onGamepadDisconnect, onKeyDown, onKeyUp, onPointerCancel, onPointerDown, onPointerMove, onPointerMoveRelative, onPointerUp, onTextEdit, onTextInput, onWheel);
+    this.enabled = enabled;
+  }
+}
+#else
+typedef InputManager = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onGamepadAxisMove:Signal<InputGamepadAxisData->Void>; var onGamepadButtonDown:Signal<InputGamepadButtonData->Void>; var onGamepadButtonUp:Signal<InputGamepadButtonData->Void>; var onGamepadConnect:Signal<InputGamepadConnectData->Void>; var onGamepadDisconnect:Signal<InputGamepadConnectData->Void>; var onKeyDown:Signal<InputKeyboardData->Void>; var onKeyUp:Signal<InputKeyboardData->Void>; var onPointerCancel:Signal<InputPointerData->Void>; var onPointerDown:Signal<InputPointerData->Void>; var onPointerMove:Signal<InputPointerData->Void>; var onPointerMoveRelative:Signal<InputPointerData->Void>; var onPointerUp:Signal<InputPointerData->Void>; var onTextEdit:Signal<InputTextData->Void>; var onTextInput:Signal<InputTextData->Void>; var onWheel:Signal<InputPointerData->Void>; var enabled:Bool; };
+#end

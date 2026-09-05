@@ -4,4 +4,23 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ParticleEmitterSignals = { var onParticleSpawn:Signal<Float->Float->Float->Float->Float->Float->Void>; var onParticleDeath:Signal<Float->Float->Float->Void>; var onEmitterComplete:Signal<Void->Void>; };
+#if !flight_struct_typedef
+@:allow(flight._Particles)
+@:keep
+@:structInit
+class ParticleEmitterSignals {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onParticleSpawn:Signal<Float->Float->Float->Float->Float->Float->Void>;
+  public var onParticleDeath:Signal<Float->Float->Float->Void>;
+  public var onEmitterComplete:Signal<Void->Void>;
+
+  private function new(onParticleSpawn:Signal<Float->Float->Float->Float->Float->Float->Void>, onParticleDeath:Signal<Float->Float->Float->Void>, onEmitterComplete:Signal<Void->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onParticleSpawn = onParticleSpawn;
+    this.onParticleDeath = onParticleDeath;
+    this.onEmitterComplete = onEmitterComplete;
+  }
+}
+#else
+typedef ParticleEmitterSignals = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onParticleSpawn:Signal<Float->Float->Float->Float->Float->Float->Void>; var onParticleDeath:Signal<Float->Float->Float->Void>; var onEmitterComplete:Signal<Void->Void>; };
+#end

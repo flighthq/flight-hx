@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Socket = { var url:String; var runtime:SocketRuntime; };
+#if !flight_struct_typedef
+@:allow(flight._Socket)
+@:keep
+@:structInit
+class Socket {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var url:String;
+  public var runtime:SocketRuntime;
+
+  private function new(url:String, runtime:SocketRuntime):Void {
+    this.__symbol__EntityRuntime = null;
+    this.url = url;
+    this.runtime = runtime;
+  }
+}
+#else
+typedef Socket = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var url:String; var runtime:SocketRuntime; };
+#end

@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const createRiveImageSprite = api.createRiveImageSprite;
 export const createScene2DDocumentFromRiveDocument = api.createScene2DDocumentFromRiveDocument;
+export const initializeRiveScene2DDocumentResult = api.initializeRiveScene2DDocumentResult;
 export const markRiveNestedArtboard = api.markRiveNestedArtboard;

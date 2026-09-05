@@ -172,6 +172,7 @@ export const RiveFieldType = compiled.flight.Types.RiveFieldType;
 export const RiveWeightedPointKind = compiled.flight.Types.RiveWeightedPointKind;
 export const SamplerKind = compiled.flight.Types.SamplerKind;
 export const Scale9ShapeKind = compiled.flight.Types.Scale9ShapeKind;
+export const Scale9SpriteKind = compiled.flight.Types.Scale9SpriteKind;
 export const SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET = compiled.flight.Types.SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET;
 export const SCENE_LIGHT_BLOCK_FLOATS = compiled.flight.Types.SCENE_LIGHT_BLOCK_FLOATS;
 export const SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET = compiled.flight.Types.SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET;

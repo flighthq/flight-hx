@@ -8,3 +8,4 @@ __syncDependencies();
 export const createWgpuFullscreenPipeline = api.createWgpuFullscreenPipeline;
 export const destroyWgpuFullscreenPipeline = api.destroyWgpuFullscreenPipeline;
 export const drawWgpuFullscreenPass = api.drawWgpuFullscreenPass;
+export const initializeWgpuFullscreenPipeline = api.initializeWgpuFullscreenPipeline;

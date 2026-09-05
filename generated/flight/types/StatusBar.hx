@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef StatusBar = { var onChange:Signal<StatusBarInfo->Void>; };
+#if !flight_struct_typedef
+@:allow(flight._StatusBar)
+@:keep
+@:structInit
+class StatusBar {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onChange:Signal<StatusBarInfo->Void>;
+
+  private function new(onChange:Signal<StatusBarInfo->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onChange = onChange;
+  }
+}
+#else
+typedef StatusBar = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onChange:Signal<StatusBarInfo->Void>; };
+#end

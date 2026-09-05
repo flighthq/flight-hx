@@ -4,4 +4,29 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlRenderEffectPipeline = { var options:RenderEffectPipelineOptions; var sceneTarget:Null<GlRenderTarget>; var pool:GlRenderTargetPool; var lutCache:ColorLutCache; var lutTexture:GlColorLutTextureCache; var velocityTexture:Null<flight._internal.dom.WebGLTexture>; };
+#if !flight_struct_typedef
+@:allow(flight._EffectsGl)
+@:keep
+@:structInit
+class GlRenderEffectPipeline {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var options:RenderEffectPipelineOptions;
+  public var sceneTarget:Null<GlRenderTarget>;
+  public var pool:GlRenderTargetPool;
+  public var lutCache:ColorLutCache;
+  public var lutTexture:GlColorLutTextureCache;
+  public var velocityTexture:Null<flight._internal.dom.WebGLTexture>;
+
+  private function new(options:RenderEffectPipelineOptions, sceneTarget:Null<GlRenderTarget>, pool:GlRenderTargetPool, lutCache:ColorLutCache, lutTexture:GlColorLutTextureCache, velocityTexture:Null<flight._internal.dom.WebGLTexture>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.options = options;
+    this.sceneTarget = sceneTarget;
+    this.pool = pool;
+    this.lutCache = lutCache;
+    this.lutTexture = lutTexture;
+    this.velocityTexture = velocityTexture;
+  }
+}
+#else
+typedef GlRenderEffectPipeline = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var options:RenderEffectPipelineOptions; var sceneTarget:Null<GlRenderTarget>; var pool:GlRenderTargetPool; var lutCache:ColorLutCache; var lutTexture:GlColorLutTextureCache; var velocityTexture:Null<flight._internal.dom.WebGLTexture>; };
+#end

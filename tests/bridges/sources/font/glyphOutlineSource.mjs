@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createGlyphRasterizerBackendFromGlyphOutlineSource = api.createGlyphRasterizerBackendFromGlyphOutlineSource;
+export const initializeGlyphRasterizerBackendFromGlyphOutlineSource = api.initializeGlyphRasterizerBackendFromGlyphOutlineSource;

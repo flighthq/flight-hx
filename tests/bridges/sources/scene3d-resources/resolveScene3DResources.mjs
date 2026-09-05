@@ -8,6 +8,10 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
+const __bridgeImplementation_initializeImageResourceFailure = api.initializeImageResourceFailure;
+export function initializeImageResourceFailure(...args) { __syncDependencies(); const result = __bridgeImplementation_initializeImageResourceFailure(...args); return result; }
+api.initializeImageResourceFailure = initializeImageResourceFailure;
+compiled.flight.Scene3DResources.initializeImageResourceFailure = initializeImageResourceFailure;
 const __bridgeImplementation_resolveOneScene3DResourceTexture = api.resolveOneScene3DResourceTexture;
 export function resolveOneScene3DResourceTexture(...args) { __syncDependencies(); const result = __bridgeImplementation_resolveOneScene3DResourceTexture(...args); return result; }
 api.resolveOneScene3DResourceTexture = resolveOneScene3DResourceTexture;

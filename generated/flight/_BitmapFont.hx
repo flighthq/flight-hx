@@ -3,6 +3,8 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Log.logOnce;
 import flight._Texture.createTexture;
 import flight._TextureAtlas.createTextureAtlas;
@@ -10,11 +12,15 @@ import flight._TextureAtlas.getTextureAtlasByteSize;
 import flight.types.Bitmap;
 import flight.types.BitmapFont;
 import flight.types.BitmapFontData;
+import flight.types.BitmapFontEncoding;
 import flight.types.BitmapFontGlyphData;
 import flight.types.BitmapFontGlyphExplanation;
 import flight.types.BitmapFontKerningData;
 import flight.types.BitmapFontKerningPair;
 import flight.types.BitmapFontSummary;
+import flight.types.Entity;
+import flight.types.EntityConstruction;
+import flight.types.EntityRuntime;
 import flight.types.GlyphAtlas;
 import flight.types.GlyphAtlasRuntime;
 import flight.types.GlyphEntry;
@@ -28,22 +34,10 @@ import flight.types.TextureSource;
 @:noCompletion
 class _BitmapFont {
   public static function createBitmapFont(data:BitmapFontData):BitmapFont {
-    var pageCount:Float = cast _Runtime.UNDEFINED;
-    var glyphs:flight._internal._Map<Float, GlyphEntry> = cast _Runtime.UNDEFINED;
-    var kerning:flight._internal._Map<Float, Float> = cast _Runtime.UNDEFINED;
-    pageCount = _Runtime.field(data.pages, 'length');
-    glyphs = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
-    for (glyph in _Runtime.iterable(data.glyphs)) {
-      var page:Float = _Runtime.coalesce(glyph.page, function():Dynamic return cast 0.0);
-      ((cast glyphs : flight._internal._Map<Float, GlyphEntry>).set((cast glyph.codepoint), (cast { advance: glyph.advance, bearingX: glyph.bearingX, bearingY: glyph.bearingY, height: glyph.height, page: (cast _BitmapFont.resolveBitmapFontGlyphPage__bitmapFont((cast glyph.codepoint : Float), (cast page : Float), (cast pageCount : Float)) : Float), width: glyph.width, x: glyph.x, y: glyph.y })));
-    }
-    kerning = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
-    if ((cast !_Runtime.strictEquals(data.kerning, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      for (pair in _Runtime.iterable(data.kerning)) {
-        ((cast kerning : flight._internal._Map<Float, Float>).set((cast (cast packBitmapFontKerningKey((cast pair.left : Float), (cast pair.right : Float)) : Float)), (cast pair.amount)));
-      }
-    }
-    return cast { encoding: _Runtime.coalesce(data.encoding, function():Dynamic return cast 'raster'), glyphs: glyphs, kerning: kerning, metrics: { ascent: (cast data.metrics : { var ascent:Float; }).ascent, descent: (cast data.metrics : { var descent:Float; }).descent, lineGap: (cast data.metrics : { var lineGap:Float; }).lineGap }, pages: _Runtime.slice(data.pages, 0, null) };
+    var out:EntityConstruction<BitmapFont> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ encoding: cast _Runtime.UNDEFINED, glyphs: cast _Runtime.UNDEFINED, kerning: cast _Runtime.UNDEFINED, metrics: cast _Runtime.UNDEFINED, pages: cast _Runtime.UNDEFINED } : BitmapFont); }) #end));
+    initializeBitmapFont(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = data; __callArgument1; }));
+    return cast out;
     return cast null;
   }
 
@@ -75,6 +69,31 @@ class _BitmapFont {
   public static function hasBitmapFontGlyph(font:BitmapFont, codepoint:Float):Bool {
     return cast ((cast font.glyphs : flight._internal._Map<Float, GlyphEntry>).has((cast codepoint)));
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeBitmapFont(out:EntityConstruction<BitmapFont>, data:BitmapFontData):Void {
+    var pageCount:Float = cast _Runtime.UNDEFINED;
+    var glyphs:flight._internal._Map<Float, GlyphEntry> = cast _Runtime.UNDEFINED;
+    var kerning:flight._internal._Map<Float, Float> = cast _Runtime.UNDEFINED;
+    pageCount = _Runtime.field(data.pages, 'length');
+    glyphs = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
+    for (glyph in _Runtime.iterable(data.glyphs)) {
+      var page:Float = _Runtime.coalesce(glyph.page, function():Dynamic return cast 0.0);
+      ((cast glyphs : flight._internal._Map<Float, GlyphEntry>).set((cast glyph.codepoint), (cast { advance: glyph.advance, bearingX: glyph.bearingX, bearingY: glyph.bearingY, height: glyph.height, page: (cast _BitmapFont.resolveBitmapFontGlyphPage__bitmapFont((cast glyph.codepoint : Float), (cast page : Float), (cast pageCount : Float)) : Float), width: glyph.width, x: glyph.x, y: glyph.y })));
+    }
+    kerning = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
+    if ((cast !_Runtime.strictEquals(data.kerning, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      for (pair in _Runtime.iterable(data.kerning)) {
+        ((cast kerning : flight._internal._Map<Float, Float>).set((cast (cast packBitmapFontKerningKey((cast pair.left : Float), (cast pair.right : Float)) : Float)), (cast pair.amount)));
+      }
+    }
+    _Runtime.setField(out, 'encoding', _Runtime.coalesce(data.encoding, function():Dynamic return cast 'raster'));
+    _Runtime.setField(out, 'glyphs', glyphs);
+    _Runtime.setField(out, 'kerning', kerning);
+    _Runtime.setField(out, 'metrics', { ascent: (cast data.metrics : { var ascent:Float; }).ascent, descent: (cast data.metrics : { var descent:Float; }).descent, lineGap: (cast data.metrics : { var lineGap:Float; }).lineGap });
+    _Runtime.setField(out, 'pages', _Runtime.slice(data.pages, 0, null));
   }
 
   @:allow(flight)
@@ -122,45 +141,58 @@ class _BitmapFont {
       _Runtime.callProperty(glyphs, 'push', cast ([{ advance: entry.advance, bearingX: entry.bearingX, bearingY: entry.bearingY, codepoint: codepoint, height: entry.height, page: 0.0, width: entry.width, x: entry.x, y: entry.y }] : Array<Dynamic>));
     }
     page = (cast createTextureAtlas((cast { texture: (cast createTexture((cast { source: runtime.bitmap } : Dynamic)) : Texture2D) } : Dynamic)) : TextureAtlas);
-    return cast (cast createBitmapFont(({ final __callArgument6:Dynamic = { glyphs: glyphs, metrics: _Runtime.mergeObjects([runtime.metrics]), pages: cast ([page] : Array<Dynamic>) }; __callArgument6; })) : BitmapFont);
+    return cast (cast createBitmapFont(({ final __callArgument10:Dynamic = { glyphs: glyphs, metrics: _Runtime.mergeObjects([runtime.metrics]), pages: cast ([page] : Array<Dynamic>) }; __callArgument10; })) : BitmapFont);
     return cast null;
   }
 
-  public static function createGlyphSourceFromBitmapFont(font:BitmapFont):GlyphSource {
-    return cast { getGlyphAtlasImage: function(page:Null<Float> = 0.0):Null<TextureSource> {
+  public static function createGlyphSourceFromBitmapFont(font:BitmapFont):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getGlyphAtlasImage:Float->Null<TextureSource>; var getGlyphEntry:Float->Null<GlyphEntry>; var getGlyphKerning:Float->Float->Float; var getGlyphLayoutVersion:Void->Float; var getGlyphMetrics:Void->GlyphMetrics; } {
+    var out:EntityConstruction<GlyphSource> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ getGlyphAtlasImage: cast _Runtime.UNDEFINED, getGlyphEntry: cast _Runtime.UNDEFINED, getGlyphKerning: cast _Runtime.UNDEFINED, getGlyphLayoutVersion: cast _Runtime.UNDEFINED, getGlyphMetrics: cast _Runtime.UNDEFINED } : GlyphSource); }) #end));
+    initializeGlyphSourceFromBitmapFont(({ final __callArgument12:Dynamic = out; __callArgument12; }), ({ final __callArgument13:Dynamic = font; __callArgument13; }));
+    return cast out;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeGlyphSourceFromBitmapFont(out:EntityConstruction<GlyphSource>, font:BitmapFont):Void {
+    ((cast out : { var getGlyphAtlasImage:Null<Float>->Null<TextureSource>; }).getGlyphAtlasImage = (cast function(page:Null<Float> = 0.0):Null<TextureSource> {
       var texture:Null<Texture2D> = cast _Runtime.UNDEFINED;
-      texture = ({ final __typedStruct8 = flight._internal._StaticIndex.readArray(font.pages, page); __typedStruct8 == null ? _Runtime.UNDEFINED : (cast __typedStruct8 : { var texture:Null<Texture2D>; }).texture; });
-      return cast ((cast _Runtime.strictEquals(({ final __structural9 = texture; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { var dimension:String; }).dimension; }), '2d') : Bool) ? (cast (cast texture : Texture2D).source : Dynamic) : (cast null : Dynamic));
+      texture = ({ final __typedStruct16 = flight._internal._StaticIndex.readArray(font.pages, page); __typedStruct16 == null ? _Runtime.UNDEFINED : (cast __typedStruct16 : { var texture:Null<Texture2D>; }).texture; });
+      return cast ((cast _Runtime.strictEquals(({ final __structural17 = texture; __structural17 == null ? _Runtime.UNDEFINED : (cast __structural17 : { var dimension:String; }).dimension; }), '2d') : Bool) ? (cast (cast texture : Texture2D).source : Dynamic) : (cast null : Dynamic));
       return cast _Runtime.UNDEFINED;
-    }, getGlyphEntry: function(codepoint:Float):Null<GlyphEntry> {
-      return cast (cast getBitmapFontGlyph(({ final __callArgument10:Dynamic = font; __callArgument10; }), (cast codepoint : Float)) : Null<GlyphEntry>);
+    }));
+    ((cast out : { var getGlyphEntry:Float->Null<GlyphEntry>; }).getGlyphEntry = (cast function(codepoint:Float):Null<GlyphEntry> {
+      return cast (cast getBitmapFontGlyph(({ final __callArgument18:Dynamic = font; __callArgument18; }), (cast codepoint : Float)) : Null<GlyphEntry>);
       return cast _Runtime.UNDEFINED;
-    }, getGlyphKerning: function(left:Float, right:Float):Float {
-      return cast (cast getBitmapFontKerning(({ final __callArgument12:Dynamic = font; __callArgument12; }), (cast left : Float), (cast right : Float)) : Float);
+    }));
+    ((cast out : { var getGlyphKerning:Float->Float->Float; }).getGlyphKerning = (cast function(left:Float, right:Float):Float {
+      return cast (cast getBitmapFontKerning(({ final __callArgument20:Dynamic = font; __callArgument20; }), (cast left : Float), (cast right : Float)) : Float);
       return cast _Runtime.UNDEFINED;
-    }, getGlyphLayoutVersion: function():Float {
+    }));
+    ((cast out : { var getGlyphLayoutVersion:Void->Float; }).getGlyphLayoutVersion = (cast function():Float {
       return cast 0.0;
       return cast _Runtime.UNDEFINED;
-    }, getGlyphMetrics: function():GlyphMetrics {
-      return cast (cast getBitmapFontMetrics(({ final __callArgument14:Dynamic = font; __callArgument14; })) : GlyphMetrics);
+    }));
+    ((cast out : { var getGlyphMetrics:Void->GlyphMetrics; }).getGlyphMetrics = (cast function():GlyphMetrics {
+      return cast (cast getBitmapFontMetrics(({ final __callArgument22:Dynamic = font; __callArgument22; })) : GlyphMetrics);
       return cast _Runtime.UNDEFINED;
-    } };
-    return cast null;
+    }));
   }
 
   public static function disableBitmapFontGuards():Void {
-    setBitmapFontGuard(({ final __callArgument16:Dynamic = null; __callArgument16; }));
+    setBitmapFontGuard(({ final __callArgument24:Dynamic = null; __callArgument24; }));
   }
 
   public static function enableBitmapFontGuards():Void {
-    setBitmapFontGuard(({ final __callArgument18:Dynamic = _BitmapFont.warnOnBitmapFontRepair__enableBitmapFontGuards; __callArgument18; }));
+    setBitmapFontGuard(({ final __callArgument26:Dynamic = _BitmapFont.warnOnBitmapFontRepair__enableBitmapFontGuards; __callArgument26; }));
   }
 
   public static function warnOnBitmapFontRepair__enableBitmapFontGuards(reason:String, codepoint:Float, page:Float):Void {
     var printable:String = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(reason, 'page-out-of-range') : Bool)) { return; }
     printable = 'U+' + Std.string(_Runtime.padStart(_Runtime.callProperty(_Runtime.numberToString(codepoint, 16.0), 'toUpperCase', cast ([] : Array<Dynamic>)), 4.0, '0')) + '';
-    (cast logOnce((cast 'bitmapfont:page-out-of-range' : String), ({ final __callArgument20:Dynamic = LogLevel.Warn; __callArgument20; }), (cast { message: (('createBitmapFont: ' + Std.string(printable) + ' names page ' + Std.string(page) + ', which this font does not have, so it was ' + 'placed on page 0 and will sample whatever occupies those coordinates there. The font data is ') + 'wrong, not the atlas — check the page index the exporter wrote.') } : Dynamic), ({ final __callArgument21:Dynamic = 'bitmapfont'; __callArgument21; })) : Bool);
+    (cast logOnce((cast 'bitmapfont:page-out-of-range' : String), ({ final __callArgument28:Dynamic = LogLevel.Warn; __callArgument28; }), (cast { message: (('createBitmapFont: ' + Std.string(printable) + ' names page ' + Std.string(page) + ', which this font does not have, so it was ' + 'placed on page 0 and will sample whatever occupies those coordinates there. The font data is ') + 'wrong, not the atlas — check the page index the exporter wrote.') } : Dynamic), ({ final __callArgument29:Dynamic = 'bitmapfont'; __callArgument29; })) : Bool);
   }
 
   public static function explainBitmapFontGlyph(font:BitmapFont, codepoint:Float):BitmapFontGlyphExplanation {
@@ -185,7 +217,7 @@ class _BitmapFont {
     var maxCodepoint:Float = cast _Runtime.UNDEFINED;
     byteSize = 0.0;
     for (page in _Runtime.iterable(font.pages)) {
-      (byteSize = cast ((byteSize + (cast getTextureAtlasByteSize(({ final __callArgument26:Dynamic = page; __callArgument26; })) : Float)) : Dynamic));
+      (byteSize = cast ((byteSize + (cast getTextureAtlasByteSize(({ final __callArgument34:Dynamic = page; __callArgument34; })) : Float)) : Dynamic));
     }
     minCodepoint = -1.0;
     maxCodepoint = -1.0;

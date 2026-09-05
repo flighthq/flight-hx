@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:keep
+@:structInit
+class AppLoginItemBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var getLoginItem:Void->AppLoginItem;
+  public var setLoginItem:AppLoginItemLike->Void;
+
+  private function new(getLoginItem:Void->AppLoginItem, setLoginItem:AppLoginItemLike->Void):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getLoginItem = getLoginItem;
+    this.setLoginItem = setLoginItem;
+  }
+}
+#else
 typedef AppLoginItemBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getLoginItem:Void->AppLoginItem; var setLoginItem:AppLoginItemLike->Void; };
+#end

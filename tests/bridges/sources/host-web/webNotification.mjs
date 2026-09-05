@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWebPageNotificationCapabilities = api.createWebPageNotificationCapabilities;
+export const initializeWebPageNotificationCapabilities = api.initializeWebPageNotificationCapabilities;

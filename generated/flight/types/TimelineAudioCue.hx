@@ -4,4 +4,32 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TimelineAudioCue = { var frame:Float; var kind:String; var duration:Null<Float>; var gain:Float; var envelope:Array<TimelineAudioEnvelopePoint>; var loops:Float; var offset:Float; var resource:AudioResource; var skipIfPlaying:Bool; var stop:Bool; };
+#if !flight_struct_typedef
+@:allow(flight._Swf)
+@:keep
+@:structInit
+class TimelineAudioCue extends flight.types.TimelineCue {
+  public var duration:Null<Float>;
+  public var gain:Float;
+  public var envelope:Array<TimelineAudioEnvelopePoint>;
+  public var loops:Float;
+  public var offset:Float;
+  public var resource:AudioResource;
+  public var skipIfPlaying:Bool;
+  public var stop:Bool;
+
+  private function new(frame:Float, kind:String, duration:Null<Float>, gain:Float, envelope:Array<TimelineAudioEnvelopePoint>, loops:Float, offset:Float, resource:AudioResource, skipIfPlaying:Bool, stop:Bool):Void {
+    super(frame, kind);
+    this.duration = duration;
+    this.gain = gain;
+    this.envelope = envelope;
+    this.loops = loops;
+    this.offset = offset;
+    this.resource = resource;
+    this.skipIfPlaying = skipIfPlaying;
+    this.stop = stop;
+  }
+}
+#else
+typedef TimelineAudioCue = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var frame:Float; var kind:String; var duration:Null<Float>; var gain:Float; var envelope:Array<TimelineAudioEnvelopePoint>; var loops:Float; var offset:Float; var resource:AudioResource; var skipIfPlaying:Bool; var stop:Bool; };
+#end

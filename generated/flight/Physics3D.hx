@@ -7,6 +7,7 @@ import flight._Physics3D as Facade_Physics3D_flight__Physics3D;
 import flight.types.CollisionBuiltInShape3D;
 import flight.types.CollisionColliderShape3D;
 import flight.types.Node3D;
+import flight.types.NonEntityCreateResult;
 import flight.types.Physics3DBallAndSocketJoint;
 import flight.types.Physics3DBallAndSocketJointOptions;
 import flight.types.Physics3DBodyType;
@@ -202,7 +203,7 @@ class Physics3D {
     return cast null;
   }
 
-  public static function createPhysics3DQueryFilter():Physics3DQueryFilter {
+  public static function createPhysics3DQueryFilter():NonEntityCreateResult<Physics3DQueryFilter, String> {
     return cast Facade_Physics3D_flight__Physics3D.createPhysics3DQueryFilter();
     return cast null;
   }
@@ -217,7 +218,7 @@ class Physics3D {
     return cast null;
   }
 
-  public static function createPhysics3DSequentialImpulseConfig():Physics3DSequentialImpulseConfig {
+  public static function createPhysics3DSequentialImpulseConfig():NonEntityCreateResult<Physics3DSequentialImpulseConfig, String> {
     return cast Facade_Physics3D_flight__Physics3D.createPhysics3DSequentialImpulseConfig();
     return cast null;
   }
@@ -232,7 +233,7 @@ class Physics3D {
     return cast null;
   }
 
-  public static function createPhysics3DSolverConfig():Physics3DSolverConfig {
+  public static function createPhysics3DSolverConfig():NonEntityCreateResult<Physics3DSolverConfig, String> {
     return cast Facade_Physics3D_flight__Physics3D.createPhysics3DSolverConfig();
     return cast null;
   }

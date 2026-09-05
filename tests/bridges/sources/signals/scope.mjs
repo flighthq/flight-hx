@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const createSignalScope = api.createSignalScope;
 export const disconnectSignalScope = api.disconnectSignalScope;
+export const initializeSignalScope = api.initializeSignalScope;

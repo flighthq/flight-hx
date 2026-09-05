@@ -6,5 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWebGlyphRasterizerBackend = api.createWebGlyphRasterizerBackend;
-export const enableHostWebGlyphRasterizer = api.enableHostWebGlyphRasterizer;
-export const resetHostWebGlyphRasterizerForTest = api.resetHostWebGlyphRasterizerForTest;
+export const initializeWebGlyphRasterizerBackend = api.initializeWebGlyphRasterizerBackend;
+export const webGlyphRasterizerBackend = api.webGlyphRasterizerBackend;

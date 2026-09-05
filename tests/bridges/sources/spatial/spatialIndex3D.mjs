@@ -7,6 +7,7 @@ __syncDependencies();
 
 export const clearSpatialIndex3D = api.clearSpatialIndex3D;
 export const createSpatialIndex3D = api.createSpatialIndex3D;
+export const initializeSpatialIndex3D = api.initializeSpatialIndex3D;
 export const insertSpatialObject3D = api.insertSpatialObject3D;
 export const querySpatialFrustum3D = api.querySpatialFrustum3D;
 export const querySpatialPairs3D = api.querySpatialPairs3D;

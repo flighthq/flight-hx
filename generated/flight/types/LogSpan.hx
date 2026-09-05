@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef LogSpan = { var name:String; var fields:flight._internal._Record<String, flight._internal._Any>; var channel:Null<String>; };
+typedef LogSpan = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var name:String; var fields:flight._internal._Record<String, flight._internal._Any>; var channel:Null<String>; };

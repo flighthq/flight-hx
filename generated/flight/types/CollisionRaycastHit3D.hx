@@ -4,4 +4,31 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CollisionRaycastHit3D = { var fraction:Float; var x:Float; var y:Float; var z:Float; var normalX:Float; var normalY:Float; var normalZ:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Collision)
+@:keep
+@:structInit
+class CollisionRaycastHit3D {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var fraction:Float;
+  public var x:Float;
+  public var y:Float;
+  public var z:Float;
+  public var normalX:Float;
+  public var normalY:Float;
+  public var normalZ:Float;
+
+  private function new(fraction:Float, x:Float, y:Float, z:Float, normalX:Float, normalY:Float, normalZ:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.fraction = fraction;
+    this.x = x;
+    this.y = y;
+    this.z = z;
+    this.normalX = normalX;
+    this.normalY = normalY;
+    this.normalZ = normalZ;
+  }
+}
+#else
+typedef CollisionRaycastHit3D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var fraction:Float; var x:Float; var y:Float; var z:Float; var normalX:Float; var normalY:Float; var normalZ:Float; };
+#end

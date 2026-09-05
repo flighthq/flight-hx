@@ -4,5 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:noCompletion
+@:allow(flight._HostCapacitor)
+@:keep
+@:structInit
+class CapacitorAndroidAppCapabilities extends flight.types.CapacitorCommonAppCapabilities {
+  public var hide:AppHideBackend;
+  public var quit:AppQuitBackend;
+
+  private function new(name:AppNameBackend, version:AppVersionBackend, activate:AppActivateBackend, hide:AppHideBackend, quit:AppQuitBackend):Void {
+    super(name, version, activate);
+    this.hide = hide;
+    this.quit = quit;
+  }
+}
+#else
 @:noCompletion
 typedef CapacitorAndroidAppCapabilities = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var name:AppNameBackend; var version:AppVersionBackend; var activate:AppActivateBackend; var hide:AppHideBackend; var quit:AppQuitBackend; };
+#end

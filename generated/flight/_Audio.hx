@@ -3,7 +3,8 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Net.sendNetRequest;
 import flight._Types.AudioResourceFailureKindValue;
 import flight._Types.AudioResourceReferenceKindValue;
@@ -18,10 +19,11 @@ import flight.types.AudioResourceReference;
 import flight.types.AudioResourceReferenceKind;
 import flight.types.AudioResourceReferenceResolutionExplanation;
 import flight.types.AudioResourceUrl;
-import flight.types.BackendExplanation;
 import flight.types.EmbeddedAudioResourceReference;
-import flight.types.Entity;
+import flight.types.EntityConstruction;
+import flight.types.EntityRuntime;
 import flight.types.ExternalAudioResourceReference;
+import flight.types.HasMediaAudioCodec;
 import flight.types.HasNetHttp;
 import flight.types.NetRequest;
 import flight.types.NetResponse;
@@ -29,80 +31,6 @@ import flight.types.ResourceResolutionState;
 
 @:noCompletion
 class _Audio {
-  @:allow(flight)
-  @:keep
-  private static function createWebAudioBackend():AudioBackend {
-    return cast { canPlayType: function(mimeType:String):Bool {
-      return cast !_Runtime.strictEquals((cast _Runtime.construct(flight._internal._HostValueLut.get('Audio'), []) : flight._internal.dom.HTMLAudioElement).canPlayType(mimeType), '');
-      return cast _Runtime.UNDEFINED;
-    } };
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function explainAudioBackend():BackendExplanation {
-    if ((cast !_Runtime.strictEquals(_Audio._custom__audioBackend, null) : Bool)) {
-      return cast { conflict: _Audio._hostConflict__audioBackend, layer: 'custom', operation: null, viability: 'unobserved' };
-    }
-    if ((cast !_Runtime.strictEquals(_Audio._host__audioBackend, null) : Bool)) {
-      return cast { conflict: _Audio._hostConflict__audioBackend, layer: 'host', operation: ((cast !_Runtime.strictEquals(_Audio._hostObservation__audioBackend, null) : Bool) ? (cast (cast _Audio._hostObservation__audioBackend : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(_Audio._hostObservation__audioBackend, null) : Bool) ? (cast (cast _Audio._hostObservation__audioBackend : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
-    }
-    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function getAudioBackend():AudioBackend {
-    return cast _Runtime.coalesce(_Runtime.coalesce(_Audio._custom__audioBackend, function():Dynamic return cast _Audio._host__audioBackend), function():Dynamic return cast _Audio._sentinel__audioBackend);
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function installAudioHostBackend(backend:AudioBackend):Void {
-    if ((cast !_Runtime.strictEquals(_Audio._host__audioBackend, null) : Bool)) {
-      if ((cast !_Runtime.strictEquals(_Audio._host__audioBackend, backend) : Bool)) { (_Audio._hostConflict__audioBackend = cast (true : Dynamic)); }
-      return;
-    }
-    (_Audio._host__audioBackend = cast (backend : Dynamic));
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function observeAudioHostResult(operation:String, succeeded:Bool):Void {
-    (_Audio._hostObservation__audioBackend = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function resetAudioBackendForTest():Void {
-    (_Audio._custom__audioBackend = cast (null : Dynamic));
-    (_Audio._host__audioBackend = cast (null : Dynamic));
-    (_Audio._hostConflict__audioBackend = cast (false : Dynamic));
-    (_Audio._hostObservation__audioBackend = cast (null : Dynamic));
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function setAudioBackend(backend:Null<AudioBackend>):Void {
-    (_Audio._custom__audioBackend = cast (backend : Dynamic));
-  }
-
-  public static var _custom__audioBackend:Null<AudioBackend> = _Runtime.explicitNull();
-
-  public static var _host__audioBackend:Null<AudioBackend> = _Runtime.explicitNull();
-
-  public static var _hostConflict__audioBackend:Bool = false;
-
-  public static var _hostObservation__audioBackend:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
-
-  public static final _sentinel__audioBackend:AudioBackend = (cast { canPlayType: function(_mimeType:String):Bool {
-    return cast false;
-    return cast _Runtime.UNDEFINED;
-  } });
-
   public static function getAudioDecoder(mimeType:String):Null<AudioDecoder> {
     return cast _Runtime.coalesce(((cast _Audio.decoders__audioDecoderRegistry : flight._internal._Map<String, AudioDecoder>).get((cast (cast getAudioMimeTypeEssence((cast mimeType : String)) : String)))), function():Dynamic return cast null);
     return cast null;
@@ -128,9 +56,9 @@ class _Audio {
 
   public static final decoders__audioDecoderRegistry:flight._internal._Map<String, AudioDecoder> = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
 
-  public static function canPlayAudioType(mimeType:String):Bool {
+  public static function canPlayAudioType(host:HasMediaAudioCodec, mimeType:String):Bool {
     if ((cast _Runtime.strictEquals(mimeType, '') : Bool)) { return cast false; }
-    return cast (cast (cast getAudioBackend() : AudioBackend) : AudioBackend).canPlayType((cast mimeType : String));
+    return cast (cast (cast _Runtime.field(host, 'media') : { var audioCodec:AudioBackend; }).audioCodec : AudioBackend).canPlayType((cast mimeType : String));
     return cast null;
   }
 
@@ -219,12 +147,18 @@ class _Audio {
   }
 
   public static function cloneAudioResource(resource:AudioResource):AudioResource {
-    return cast (cast createEntity(({ final __callArgument0:Dynamic = ({ buffer: (cast resource.buffer : Dynamic) } : AudioResource); __callArgument0; })) : AudioResource);
+    var out:EntityConstruction<AudioResource> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ buffer: cast _Runtime.UNDEFINED } : AudioResource); }) #end));
+    _Runtime.setField(out, 'buffer', resource.buffer);
+    return cast out;
     return cast null;
   }
 
   public static function createAudioResource(?buffer:flight._internal.dom.AudioBuffer):AudioResource {
-    return cast (cast createEntity(({ final __callArgument2:Dynamic = ({ buffer: (cast _Runtime.coalesce(buffer, function():Dynamic return cast null) : Dynamic) } : AudioResource); __callArgument2; })) : AudioResource);
+    var out:EntityConstruction<AudioResource> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ buffer: cast _Runtime.UNDEFINED } : AudioResource); }) #end));
+    initializeAudioResource(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = buffer; __callArgument1; }));
+    return cast out;
     return cast null;
   }
 
@@ -265,6 +199,12 @@ class _Audio {
   public static function hasAudioResourceBuffer(resource:AudioResource):Bool {
     return cast !_Runtime.strictEquals(resource.buffer, null);
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeAudioResource(out:EntityConstruction<AudioResource>, ?buffer:flight._internal.dom.AudioBuffer):Void {
+    _Runtime.setField(out, 'buffer', _Runtime.coalesce(buffer, function():Dynamic return cast null));
   }
 
   public static function isAudioResourceEmpty(resource:AudioResource):Bool {
@@ -365,37 +305,50 @@ class _Audio {
     );
   }
 
-  public static function loadAudioResourceFromUrls(host:HasNetHttp, context:flight._internal.dom.AudioContext, sources:Array<AudioResourceUrl>, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<AudioResource> {
+  public static function loadAudioResourceFromUrls(host:{ >HasNetHttp, >HasMediaAudioCodec, }, context:flight._internal.dom.AudioContext, sources:Array<AudioResourceUrl>, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<AudioResource> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
       var selected:Null<String> = cast _Runtime.UNDEFINED;
-      selected = (cast selectAudioResourceUrl(({ final __callArgument59:Dynamic = sources; __callArgument59; })) : Null<String>);
+      selected = (cast selectAudioResourceUrl(({ final __callArgument59:Dynamic = host; __callArgument59; }), ({ final __callArgument60:Dynamic = sources; __callArgument60; })) : Null<String>);
       if ((cast _Runtime.strictEquals(selected, null) : Bool)) { return cast (cast (#if js _Runtime.callValue(createAudioResource, cast ([] : Array<Dynamic>)) #else createAudioResource(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : AudioResource); }
-      return cast (cast loadAudioResourceFromUrl(({ final __callArgument61:Dynamic = host; __callArgument61; }), ({ final __callArgument62:Dynamic = context; __callArgument62; }), (cast selected : String), ({ final __callArgument63:Dynamic = signal; __callArgument63; })) : flight._internal._Promise<AudioResource>);
+      return cast (cast loadAudioResourceFromUrl(({ final __callArgument63:Dynamic = host; __callArgument63; }), ({ final __callArgument64:Dynamic = context; __callArgument64; }), (cast selected : String), ({ final __callArgument65:Dynamic = signal; __callArgument65; })) : flight._internal._Promise<AudioResource>);
       return cast null;
     }));
   }
 
-  public static function selectAudioResourceUrl(sources:Array<AudioResourceUrl>):Null<String> {
+  public static function selectAudioResourceUrl(host:HasMediaAudioCodec, sources:Array<AudioResourceUrl>):Null<String> {
     for (source in _Runtime.iterable(sources)) {
       var type:String = _Runtime.coalesce(_Runtime.coalesce(source.type, function():Dynamic return cast (cast inferAudioMimeType((cast source.url : String)) : Null<String>)), function():Dynamic return cast '');
-      if ((cast (cast canPlayAudioType((cast type : String)) : Bool) : Bool)) { return cast source.url; }
+      if ((cast (cast canPlayAudioType(({ final __callArgument71:Dynamic = host; __callArgument71; }), (cast type : String)) : Bool) : Bool)) { return cast source.url; }
     }
     return cast null;
     return cast null;
   }
 
   public static function createAudioResourceFailure(cause:flight._internal._Any):AudioResourceFailure {
+    var out:EntityConstruction<AudioResourceFailure> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.isError(cause) : Bool)) {
-      return cast { kind: (cast AudioResourceFailureKindValue : { var Error:String; var Unavailable:String; }).Error, message: _Runtime.field(cause, 'message'), name: _Runtime.field(cause, 'name') };
+      var out:EntityConstruction<AudioResourceFailure> = cast _Runtime.UNDEFINED;
+      out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ kind: cast _Runtime.UNDEFINED, message: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED } : AudioResourceFailure); }) #end));
+      _Runtime.setField(out, 'kind', (cast AudioResourceFailureKindValue : { var Error:String; var Unavailable:String; }).Error);
+      _Runtime.setField(out, 'message', _Runtime.field(cause, 'message'));
+      _Runtime.setField(out, 'name', _Runtime.field(cause, 'name'));
+      return cast out;
     }
-    return cast { kind: (cast AudioResourceFailureKindValue : { var Error:String; var Unavailable:String; }).Error, message: Std.string(cause), name: null };
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ kind: cast _Runtime.UNDEFINED, message: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED } : AudioResourceFailure); }) #end));
+    _Runtime.setField(out, 'kind', (cast AudioResourceFailureKindValue : { var Error:String; var Unavailable:String; }).Error);
+    _Runtime.setField(out, 'message', Std.string(cause));
+    _Runtime.setField(out, 'name', null);
+    return cast out;
     return cast null;
   }
 
   public static function createEmbeddedAudioResourceReference(bytes:flight._internal._UInt8Array, ?mimeType:Null<String>, ?name:Null<String>):EmbeddedAudioResourceReference {
     if (mimeType == null) mimeType = cast (null : Dynamic);
     if (name == null) name = cast (null : Dynamic);
-    return cast { bytes: bytes, failure: null, kind: (cast AudioResourceReferenceKindValue : { var Embedded:String; var External:String; }).Embedded, mimeType: mimeType, name: name, resource: (cast (#if js _Runtime.callValue(createAudioResource, cast ([] : Array<Dynamic>)) #else createAudioResource(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : AudioResource), state: (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Unresolved };
+    var out:EntityConstruction<EmbeddedAudioResourceReference> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ bytes: cast _Runtime.UNDEFINED, failure: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, mimeType: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, resource: cast _Runtime.UNDEFINED, state: cast _Runtime.UNDEFINED } : EmbeddedAudioResourceReference); }) #end));
+    initializeEmbeddedAudioResourceReference(({ final __callArgument73:Dynamic = out; __callArgument73; }), ({ final __callArgument74:Dynamic = bytes; __callArgument74; }), ({ final __callArgument75:Dynamic = mimeType; __callArgument75; }), ({ final __callArgument76:Dynamic = name; __callArgument76; }));
+    return cast out;
     return cast null;
   }
 
@@ -403,7 +356,10 @@ class _Audio {
     if (basePath == null) basePath = cast (null : Dynamic);
     if (mimeType == null) mimeType = cast (null : Dynamic);
     if (name == null) name = cast (null : Dynamic);
-    return cast { basePath: basePath, failure: null, kind: (cast AudioResourceReferenceKindValue : { var Embedded:String; var External:String; }).External, mimeType: mimeType, name: name, resource: (cast (#if js _Runtime.callValue(createAudioResource, cast ([] : Array<Dynamic>)) #else createAudioResource(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : AudioResource), state: (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Unresolved, uri: uri };
+    var out:EntityConstruction<ExternalAudioResourceReference> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ basePath: cast _Runtime.UNDEFINED, failure: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, mimeType: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, resource: cast _Runtime.UNDEFINED, state: cast _Runtime.UNDEFINED, uri: cast _Runtime.UNDEFINED } : ExternalAudioResourceReference); }) #end));
+    initializeExternalAudioResourceReference(({ final __callArgument81:Dynamic = out; __callArgument81; }), (cast uri : String), ({ final __callArgument82:Dynamic = basePath; __callArgument82; }), ({ final __callArgument83:Dynamic = mimeType; __callArgument83; }), ({ final __callArgument84:Dynamic = name; __callArgument84; }));
+    return cast out;
     return cast null;
   }
 
@@ -424,6 +380,36 @@ class _Audio {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeEmbeddedAudioResourceReference(out:EntityConstruction<EmbeddedAudioResourceReference>, bytes:flight._internal._UInt8Array, ?mimeType:Null<String>, ?name:Null<String>):Void {
+    if (mimeType == null) mimeType = cast (null : Dynamic);
+    if (name == null) name = cast (null : Dynamic);
+    _Runtime.setField(out, 'bytes', bytes);
+    _Runtime.setField(out, 'failure', null);
+    _Runtime.setField(out, 'kind', (cast AudioResourceReferenceKindValue : { var Embedded:String; var External:String; }).Embedded);
+    _Runtime.setField(out, 'mimeType', mimeType);
+    _Runtime.setField(out, 'name', name);
+    _Runtime.setField(out, 'resource', (cast (#if js _Runtime.callValue(createAudioResource, cast ([] : Array<Dynamic>)) #else createAudioResource(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : AudioResource));
+    _Runtime.setField(out, 'state', (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Unresolved);
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeExternalAudioResourceReference(out:EntityConstruction<ExternalAudioResourceReference>, uri:String, ?basePath:Null<String>, ?mimeType:Null<String>, ?name:Null<String>):Void {
+    if (basePath == null) basePath = cast (null : Dynamic);
+    if (mimeType == null) mimeType = cast (null : Dynamic);
+    if (name == null) name = cast (null : Dynamic);
+    _Runtime.setField(out, 'basePath', basePath);
+    _Runtime.setField(out, 'failure', null);
+    _Runtime.setField(out, 'kind', (cast AudioResourceReferenceKindValue : { var Embedded:String; var External:String; }).External);
+    _Runtime.setField(out, 'mimeType', mimeType);
+    _Runtime.setField(out, 'name', name);
+    _Runtime.setField(out, 'resource', (cast (#if js _Runtime.callValue(createAudioResource, cast ([] : Array<Dynamic>)) #else createAudioResource(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : AudioResource));
+    _Runtime.setField(out, 'state', (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Unresolved);
+    _Runtime.setField(out, 'uri', uri);
+  }
+
   public static function resetFailedAudioResourceReference(ref:AudioResourceReference):Bool {
     if ((cast !_Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed) : Bool)) { return cast false; }
     ((cast ref : { var failure:Null<AudioResourceFailure>; }).failure = null);
@@ -440,38 +426,54 @@ class _Audio {
         return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
           var decoded:Null<AudioResource> = cast _Runtime.UNDEFINED;
           if ((cast _Runtime.strictEquals((cast ref : { var kind:String; }).kind, (cast AudioResourceReferenceKindValue : { var Embedded:String; var External:String; }).Embedded) : Bool)) {
-            return flight._internal._Async.flatMap((cast _Audio.decodeAudioResourceBytes__audioResourceReference(({ final __callArgument81:Dynamic = ref; __callArgument81; }), ({ final __callArgument82:Dynamic = context; __callArgument82; }), ({ final __callArgument83:Dynamic = signal; __callArgument83; })) : flight._internal._Promise<Null<AudioResource>>), function(__awaitValue79:Dynamic):Dynamic {
-              decoded = __awaitValue79;
-              var __flowBranch80:Dynamic;
+            return flight._internal._Async.flatMap((cast _Audio.decodeAudioResourceBytes__audioResourceReference(({ final __callArgument101:Dynamic = ref; __callArgument101; }), ({ final __callArgument102:Dynamic = context; __callArgument102; }), ({ final __callArgument103:Dynamic = signal; __callArgument103; })) : flight._internal._Promise<Null<AudioResource>>), function(__awaitValue99:Dynamic):Dynamic {
+              decoded = __awaitValue99;
+              var __flowBranch100:Dynamic;
               if ((cast ((cast _Runtime.strictEquals(decoded, null) : Bool) || (cast _Runtime.strictEquals((cast decoded : { var buffer:Null<flight._internal.dom.AudioBuffer>; }).buffer, null) : Bool)) : Bool)) {
-                __flowBranch80 = flight._internal._Async.protect(function():Dynamic {
-                  ((cast ref : { var failure:Null<AudioResourceFailure>; }).failure = { kind: (cast AudioResourceFailureKindValue : { var Error:String; var Unavailable:String; }).Unavailable, message: 'Audio resource unavailable', name: null });
+                __flowBranch100 = flight._internal._Async.protect(function():Dynamic {
+                  ((cast ref : { var failure:Null<AudioResourceFailure>; }).failure = _Runtime.callValue(function():AudioResourceFailure {
+                    var out:EntityConstruction<AudioResourceFailure> = cast _Runtime.UNDEFINED;
+                    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ kind: cast _Runtime.UNDEFINED, message: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED } : AudioResourceFailure); }) #end));
+                    _Runtime.setField(out, 'kind', (cast AudioResourceFailureKindValue : { var Error:String; var Unavailable:String; }).Unavailable);
+                    _Runtime.setField(out, 'message', 'Audio resource unavailable');
+                    _Runtime.setField(out, 'name', null);
+                    return cast out;
+                    return cast _Runtime.UNDEFINED;
+                  }, cast ([] : Array<Dynamic>)));
                   ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed);
                   return flight._internal._Async.flowReturn(null);
                 });
               } else {
-                __flowBranch80 = flight._internal._Async.flowNormal();
+                __flowBranch100 = flight._internal._Async.flowNormal();
               }
-              return flight._internal._Async.continueFlow(__flowBranch80, function():Dynamic {
+              return flight._internal._Async.continueFlow(__flowBranch100, function():Dynamic {
                 ((cast (cast ref : { var resource:AudioResource; }).resource : { var buffer:Null<flight._internal.dom.AudioBuffer>; }).buffer = cast ((cast decoded : { var buffer:Null<flight._internal.dom.AudioBuffer>; }).buffer : Null<flight._internal.dom.AudioBuffer>));
                 ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved);
                 return flight._internal._Async.flowReturn((cast ref : { var resource:AudioResource; }).resource);
               });
             });
           } else {
-            return flight._internal._Async.flatMap((cast fetch(({ final __callArgument89:Dynamic = ref; __callArgument89; }), ({ final __callArgument90:Dynamic = signal; __callArgument90; })) : flight._internal._Promise<Null<AudioResource>>), function(__awaitValue87:Dynamic):Dynamic {
-              decoded = __awaitValue87;
-              var __flowBranch88:Dynamic;
+            return flight._internal._Async.flatMap((cast fetch(({ final __callArgument109:Dynamic = ref; __callArgument109; }), ({ final __callArgument110:Dynamic = signal; __callArgument110; })) : flight._internal._Promise<Null<AudioResource>>), function(__awaitValue107:Dynamic):Dynamic {
+              decoded = __awaitValue107;
+              var __flowBranch108:Dynamic;
               if ((cast ((cast _Runtime.strictEquals(decoded, null) : Bool) || (cast _Runtime.strictEquals((cast decoded : { var buffer:Null<flight._internal.dom.AudioBuffer>; }).buffer, null) : Bool)) : Bool)) {
-                __flowBranch88 = flight._internal._Async.protect(function():Dynamic {
-                  ((cast ref : { var failure:Null<AudioResourceFailure>; }).failure = { kind: (cast AudioResourceFailureKindValue : { var Error:String; var Unavailable:String; }).Unavailable, message: 'Audio resource unavailable', name: null });
+                __flowBranch108 = flight._internal._Async.protect(function():Dynamic {
+                  ((cast ref : { var failure:Null<AudioResourceFailure>; }).failure = _Runtime.callValue(function():AudioResourceFailure {
+                    var out:EntityConstruction<AudioResourceFailure> = cast _Runtime.UNDEFINED;
+                    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ kind: cast _Runtime.UNDEFINED, message: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED } : AudioResourceFailure); }) #end));
+                    _Runtime.setField(out, 'kind', (cast AudioResourceFailureKindValue : { var Error:String; var Unavailable:String; }).Unavailable);
+                    _Runtime.setField(out, 'message', 'Audio resource unavailable');
+                    _Runtime.setField(out, 'name', null);
+                    return cast out;
+                    return cast _Runtime.UNDEFINED;
+                  }, cast ([] : Array<Dynamic>)));
                   ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed);
                   return flight._internal._Async.flowReturn(null);
                 });
               } else {
-                __flowBranch88 = flight._internal._Async.flowNormal();
+                __flowBranch108 = flight._internal._Async.flowNormal();
               }
-              return flight._internal._Async.continueFlow(__flowBranch88, function():Dynamic {
+              return flight._internal._Async.continueFlow(__flowBranch108, function():Dynamic {
                 ((cast (cast ref : { var resource:AudioResource; }).resource : { var buffer:Null<flight._internal.dom.AudioBuffer>; }).buffer = cast ((cast decoded : { var buffer:Null<flight._internal.dom.AudioBuffer>; }).buffer : Null<flight._internal.dom.AudioBuffer>));
                 ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved);
                 return flight._internal._Async.flowReturn((cast ref : { var resource:AudioResource; }).resource);
@@ -481,16 +483,16 @@ class _Audio {
         }), function(__caughtError:Dynamic):Dynamic {
           var cause:Dynamic = __caughtError;
           return flight._internal._Async.protect(function():Dynamic {
-            var __flowBranch93:Dynamic;
+            var __flowBranch113:Dynamic;
             if ((cast signal.aborted : Bool)) {
-              __flowBranch93 = flight._internal._Async.protect(function():Dynamic {
+              __flowBranch113 = flight._internal._Async.protect(function():Dynamic {
                 ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Unresolved);
                 return flight._internal._Async.reject(cause);
               });
             } else {
-              __flowBranch93 = flight._internal._Async.flowNormal();
+              __flowBranch113 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch93, function():Dynamic {
+            return flight._internal._Async.continueFlow(__flowBranch113, function():Dynamic {
               ((cast ref : { var failure:Null<AudioResourceFailure>; }).failure = (cast createAudioResourceFailure((cast cause : flight._internal._Any)) : AudioResourceFailure));
               ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed);
               return flight._internal._Async.flowReturn(null);
@@ -507,9 +509,9 @@ class _Audio {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
       var decoder:Null<AudioDecoder> = cast _Runtime.UNDEFINED;
       decoder = ((cast _Runtime.strictEquals(_Runtime.field(ref, 'mimeType'), null) : Bool) ? (cast null : Dynamic) : (cast (cast getAudioDecoder((cast _Runtime.field(ref, 'mimeType') : String)) : Null<AudioDecoder>) : Dynamic));
-      if ((cast !_Runtime.strictEquals(decoder, null) : Bool)) { return cast (cast decoder(_Runtime.field(ref, 'bytes'), (cast (cast _Runtime.field(ref, 'mimeType') : String) : String), ({ final __callArgument94:Dynamic = signal; __callArgument94; })) : flight._internal._Promise<Null<AudioResource>>); }
+      if ((cast !_Runtime.strictEquals(decoder, null) : Bool)) { return cast (cast decoder(_Runtime.field(ref, 'bytes'), (cast (cast _Runtime.field(ref, 'mimeType') : String) : String), ({ final __callArgument114:Dynamic = signal; __callArgument114; })) : flight._internal._Promise<Null<AudioResource>>); }
       if ((cast _Runtime.strictEquals(context, null) : Bool)) { return cast null; }
-      return cast (cast loadAudioResourceFromBytes(({ final __callArgument96:Dynamic = context; __callArgument96; }), _Runtime.field(ref, 'bytes'), ({ final __callArgument97:Dynamic = _Runtime.coalesce(_Runtime.field(ref, 'mimeType'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')); __callArgument97; }), ({ final __callArgument98:Dynamic = signal; __callArgument98; })) : flight._internal._Promise<AudioResource>);
+      return cast (cast loadAudioResourceFromBytes(({ final __callArgument116:Dynamic = context; __callArgument116; }), _Runtime.field(ref, 'bytes'), ({ final __callArgument117:Dynamic = _Runtime.coalesce(_Runtime.field(ref, 'mimeType'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')); __callArgument117; }), ({ final __callArgument118:Dynamic = signal; __callArgument118; })) : flight._internal._Promise<AudioResource>);
       return cast null;
     }));
   }

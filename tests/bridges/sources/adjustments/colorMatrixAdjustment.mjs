@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const createColorMatrixAdjustment = api.createColorMatrixAdjustment;
 export const getAdjustmentColorMatrix = api.getAdjustmentColorMatrix;
+export const initializeColorMatrixAdjustment = api.initializeColorMatrixAdjustment;
 export const isColorMatrixAdjustment = api.isColorMatrixAdjustment;

@@ -4,4 +4,33 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics3DContactConstraintPoint = { var featureId:Float; var normalImpulse:Float; var tangentImpulse0:Float; var tangentImpulse1:Float; var normalMass:Float; var tangentMass0:Float; var tangentMass1:Float; var bias:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Physics3D)
+@:keep
+@:structInit
+class Physics3DContactConstraintPoint {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var featureId:Float;
+  public var normalImpulse:Float;
+  public var tangentImpulse0:Float;
+  public var tangentImpulse1:Float;
+  public var normalMass:Float;
+  public var tangentMass0:Float;
+  public var tangentMass1:Float;
+  public var bias:Float;
+
+  private function new(featureId:Float, normalImpulse:Float, tangentImpulse0:Float, tangentImpulse1:Float, normalMass:Float, tangentMass0:Float, tangentMass1:Float, bias:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.featureId = featureId;
+    this.normalImpulse = normalImpulse;
+    this.tangentImpulse0 = tangentImpulse0;
+    this.tangentImpulse1 = tangentImpulse1;
+    this.normalMass = normalMass;
+    this.tangentMass0 = tangentMass0;
+    this.tangentMass1 = tangentMass1;
+    this.bias = bias;
+  }
+}
+#else
+typedef Physics3DContactConstraintPoint = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var featureId:Float; var normalImpulse:Float; var tangentImpulse0:Float; var tangentImpulse1:Float; var normalMass:Float; var tangentMass0:Float; var tangentMass1:Float; var bias:Float; };
+#end

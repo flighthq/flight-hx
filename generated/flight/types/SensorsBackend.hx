@@ -4,4 +4,59 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SensorsBackend = { var getPermissionState:String->flight._internal._Promise<SensorsPermissionState>; var isAmbientLightSupported:Void->Bool; var isBarometerSupported:Void->Bool; var isGravitySupported:Void->Bool; var isGyroscopeSupported:Void->Bool; var isLinearAccelerationSupported:Void->Bool; var isMagnetometerSupported:Void->Bool; var isMotionSupported:Void->Bool; var isOrientationSupported:Void->Bool; var isProximitySupported:Void->Bool; var requestPermission:Void->flight._internal._Promise<Bool>; var subscribeAbsoluteOrientation:(OrientationReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeAmbientLight:(AmbientLightReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeBarometer:(PressureReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeGravity:(MotionReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeLinearAcceleration:(MotionReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeMagnetometer:(MotionReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeMotion:(MotionReading->RotationRateReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeOrientation:(OrientationReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeProximity:(ProximityReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeQuaternion:(QuaternionReading->Void)->SensorSubscribeOptions->(Void->Void); };
+#if !flight_struct_typedef
+@:allow(flight._Sensors)
+@:keep
+@:structInit
+class SensorsBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var getPermissionState:String->flight._internal._Promise<SensorsPermissionState>;
+  public var isAmbientLightSupported:Void->Bool;
+  public var isBarometerSupported:Void->Bool;
+  public var isGravitySupported:Void->Bool;
+  public var isGyroscopeSupported:Void->Bool;
+  public var isLinearAccelerationSupported:Void->Bool;
+  public var isMagnetometerSupported:Void->Bool;
+  public var isMotionSupported:Void->Bool;
+  public var isOrientationSupported:Void->Bool;
+  public var isProximitySupported:Void->Bool;
+  public var requestPermission:Void->flight._internal._Promise<Bool>;
+  public var subscribeAbsoluteOrientation:(OrientationReading->Void)->SensorSubscribeOptions->(Void->Void);
+  public var subscribeAmbientLight:(AmbientLightReading->Void)->SensorSubscribeOptions->(Void->Void);
+  public var subscribeBarometer:(PressureReading->Void)->SensorSubscribeOptions->(Void->Void);
+  public var subscribeGravity:(MotionReading->Void)->SensorSubscribeOptions->(Void->Void);
+  public var subscribeLinearAcceleration:(MotionReading->Void)->SensorSubscribeOptions->(Void->Void);
+  public var subscribeMagnetometer:(MotionReading->Void)->SensorSubscribeOptions->(Void->Void);
+  public var subscribeMotion:(MotionReading->RotationRateReading->Void)->SensorSubscribeOptions->(Void->Void);
+  public var subscribeOrientation:(OrientationReading->Void)->SensorSubscribeOptions->(Void->Void);
+  public var subscribeProximity:(ProximityReading->Void)->SensorSubscribeOptions->(Void->Void);
+  public var subscribeQuaternion:(QuaternionReading->Void)->SensorSubscribeOptions->(Void->Void);
+
+  private function new(getPermissionState:String->flight._internal._Promise<SensorsPermissionState>, isAmbientLightSupported:Void->Bool, isBarometerSupported:Void->Bool, isGravitySupported:Void->Bool, isGyroscopeSupported:Void->Bool, isLinearAccelerationSupported:Void->Bool, isMagnetometerSupported:Void->Bool, isMotionSupported:Void->Bool, isOrientationSupported:Void->Bool, isProximitySupported:Void->Bool, requestPermission:Void->flight._internal._Promise<Bool>, subscribeAbsoluteOrientation:(OrientationReading->Void)->SensorSubscribeOptions->(Void->Void), subscribeAmbientLight:(AmbientLightReading->Void)->SensorSubscribeOptions->(Void->Void), subscribeBarometer:(PressureReading->Void)->SensorSubscribeOptions->(Void->Void), subscribeGravity:(MotionReading->Void)->SensorSubscribeOptions->(Void->Void), subscribeLinearAcceleration:(MotionReading->Void)->SensorSubscribeOptions->(Void->Void), subscribeMagnetometer:(MotionReading->Void)->SensorSubscribeOptions->(Void->Void), subscribeMotion:(MotionReading->RotationRateReading->Void)->SensorSubscribeOptions->(Void->Void), subscribeOrientation:(OrientationReading->Void)->SensorSubscribeOptions->(Void->Void), subscribeProximity:(ProximityReading->Void)->SensorSubscribeOptions->(Void->Void), subscribeQuaternion:(QuaternionReading->Void)->SensorSubscribeOptions->(Void->Void)):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getPermissionState = getPermissionState;
+    this.isAmbientLightSupported = isAmbientLightSupported;
+    this.isBarometerSupported = isBarometerSupported;
+    this.isGravitySupported = isGravitySupported;
+    this.isGyroscopeSupported = isGyroscopeSupported;
+    this.isLinearAccelerationSupported = isLinearAccelerationSupported;
+    this.isMagnetometerSupported = isMagnetometerSupported;
+    this.isMotionSupported = isMotionSupported;
+    this.isOrientationSupported = isOrientationSupported;
+    this.isProximitySupported = isProximitySupported;
+    this.requestPermission = requestPermission;
+    this.subscribeAbsoluteOrientation = subscribeAbsoluteOrientation;
+    this.subscribeAmbientLight = subscribeAmbientLight;
+    this.subscribeBarometer = subscribeBarometer;
+    this.subscribeGravity = subscribeGravity;
+    this.subscribeLinearAcceleration = subscribeLinearAcceleration;
+    this.subscribeMagnetometer = subscribeMagnetometer;
+    this.subscribeMotion = subscribeMotion;
+    this.subscribeOrientation = subscribeOrientation;
+    this.subscribeProximity = subscribeProximity;
+    this.subscribeQuaternion = subscribeQuaternion;
+  }
+}
+#else
+typedef SensorsBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getPermissionState:String->flight._internal._Promise<SensorsPermissionState>; var isAmbientLightSupported:Void->Bool; var isBarometerSupported:Void->Bool; var isGravitySupported:Void->Bool; var isGyroscopeSupported:Void->Bool; var isLinearAccelerationSupported:Void->Bool; var isMagnetometerSupported:Void->Bool; var isMotionSupported:Void->Bool; var isOrientationSupported:Void->Bool; var isProximitySupported:Void->Bool; var requestPermission:Void->flight._internal._Promise<Bool>; var subscribeAbsoluteOrientation:(OrientationReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeAmbientLight:(AmbientLightReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeBarometer:(PressureReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeGravity:(MotionReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeLinearAcceleration:(MotionReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeMagnetometer:(MotionReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeMotion:(MotionReading->RotationRateReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeOrientation:(OrientationReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeProximity:(ProximityReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeQuaternion:(QuaternionReading->Void)->SensorSubscribeOptions->(Void->Void); };
+#end

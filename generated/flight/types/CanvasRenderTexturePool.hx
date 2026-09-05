@@ -4,4 +4,27 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CanvasRenderTexturePool = { var destroyed:Bool; var effectTargets:CanvasRenderTargetPool; var free:Array<RenderTexture>; var leased:flight._internal._Set<RenderTexture>; var owner:Null<CanvasRenderState>; };
+#if !flight_struct_typedef
+@:allow(flight._Scene2DCanvas)
+@:keep
+@:structInit
+class CanvasRenderTexturePool {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var destroyed:Bool;
+  public var effectTargets:CanvasRenderTargetPool;
+  public var free:Array<RenderTexture>;
+  public var leased:flight._internal._Set<RenderTexture>;
+  public var owner:Null<CanvasRenderState>;
+
+  private function new(destroyed:Bool, effectTargets:CanvasRenderTargetPool, free:Array<RenderTexture>, leased:flight._internal._Set<RenderTexture>, owner:Null<CanvasRenderState>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.destroyed = destroyed;
+    this.effectTargets = effectTargets;
+    this.free = free;
+    this.leased = leased;
+    this.owner = owner;
+  }
+}
+#else
+typedef CanvasRenderTexturePool = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var destroyed:Bool; var effectTargets:CanvasRenderTargetPool; var free:Array<RenderTexture>; var leased:flight._internal._Set<RenderTexture>; var owner:Null<CanvasRenderState>; };
+#end

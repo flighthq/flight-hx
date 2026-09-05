@@ -4,4 +4,26 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FogModifier = { var kind:String; var slot:String; var color:Float; @:optional var mode:FogModifierMode; @:optional var near:Float; @:optional var far:Float; @:optional var density:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Shading)
+@:keep
+@:structInit
+class FogModifier extends flight.types.Modifier<String, String> {
+  public var color:Float;
+  public var mode:Null<FogModifierMode>;
+  public var near:Null<Float>;
+  public var far:Null<Float>;
+  public var density:Null<Float>;
+
+  private function new(kind:String, slot:String, color:Float, ?mode:Null<FogModifierMode>, ?near:Null<Float>, ?far:Null<Float>, ?density:Null<Float>):Void {
+    super(kind, slot);
+    this.color = color;
+    this.mode = mode;
+    this.near = near;
+    this.far = far;
+    this.density = density;
+  }
+}
+#else
+typedef FogModifier = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var slot:String; var color:Float; @:optional var mode:FogModifierMode; @:optional var near:Float; @:optional var far:Float; @:optional var density:Float; };
+#end

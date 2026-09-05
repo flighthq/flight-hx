@@ -3,12 +3,15 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Geometry.copyMatrix;
 import flight._Geometry.createMatrix;
 import flight._Node.ensureNodeWorldMatrix;
 import flight._Node.getNodeChildAt;
 import flight._Node.getNodeChildCount;
 import flight._Node.getNodeWorldMatrix;
+import flight.types.EntityConstruction;
 import flight.types.Matrix;
 import flight.types.MatrixLike;
 import flight.types.NodeOf;
@@ -113,7 +116,10 @@ class _Velocity {
   }
 
   public static function createVelocityField():VelocityField {
-    return cast { samples: _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []), frameId: 0.0 };
+    var out:EntityConstruction<VelocityField> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ frameId: cast _Runtime.UNDEFINED, samples: cast _Runtime.UNDEFINED } : VelocityField); }) #end));
+    initializeVelocityField(({ final __callArgument16:Dynamic = out; __callArgument16; }));
+    return cast out;
     return cast null;
   }
 
@@ -191,6 +197,11 @@ class _Velocity {
     return cast null;
   }
 
+  public static function initializeVelocityField(out:EntityConstruction<VelocityField>):Void {
+    _Runtime.setField(out, 'frameId', 0.0);
+    _Runtime.setField(out, 'samples', _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []));
+  }
+
   public static function isVelocityZero(velocity:Velocity2D, ?epsilon:Float):Bool {
     var e:Float = cast _Runtime.UNDEFINED;
     e = _Runtime.coalesce(epsilon, function():Dynamic return cast 0.0);
@@ -256,7 +267,7 @@ class _Velocity {
   }
 
   public static function suppressVelocity(field:VelocityField, source:flight._internal._Object):Void {
-    contributeVelocity(({ final __callArgument16:Dynamic = field; __callArgument16; }), ({ final __callArgument17:Dynamic = source; __callArgument17; }), (cast 0.0 : Float), (cast 0.0 : Float));
+    contributeVelocity(({ final __callArgument18:Dynamic = field; __callArgument18; }), ({ final __callArgument19:Dynamic = source; __callArgument19; }), (cast 0.0 : Float), (cast 0.0 : Float));
   }
 
   public static function zeroVelocity(out:Velocity2D):Velocity2D {

@@ -14,6 +14,7 @@ import flight.types.FocusManager;
 import flight.types.FocusManagerOptions;
 import flight.types.FocusNavigationInput;
 import flight.types.FocusNavigationOptions;
+import flight.types.HasGraphicsBitmapReadback;
 import flight.types.HitArea;
 import flight.types.HitTestFunction;
 import flight.types.HitTestPreciseFunction;
@@ -333,8 +334,8 @@ class Interaction {
     Facade_Interaction_flight__Interaction.registerShapeHitTest();
   }
 
-  public static function registerSpriteHitTest(?alphaThreshold:Float):Void {
-    Facade_Interaction_flight__Interaction.registerSpriteHitTest(alphaThreshold);
+  public static function registerSpriteHitTest(host:HasGraphicsBitmapReadback, ?alphaThreshold:Float):Void {
+    Facade_Interaction_flight__Interaction.registerSpriteHitTest(host, alphaThreshold);
   }
 
   public static function registerTextHitTest():Void {

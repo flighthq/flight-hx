@@ -10,3 +10,4 @@ export const deriveGlyphMetricsFromFontSize = api.deriveGlyphMetricsFromFontSize
 export const disposeGlyphAtlas = api.disposeGlyphAtlas;
 export const getGlyphAtlasBitmap = api.getGlyphAtlasBitmap;
 export const getGlyphAtlasLayoutVersion = api.getGlyphAtlasLayoutVersion;
+export const initializeGlyphAtlas = api.initializeGlyphAtlas;

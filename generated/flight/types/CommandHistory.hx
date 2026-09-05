@@ -4,4 +4,33 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CommandHistory = { var bindings:KeyedTable<CommandBinding>; var entries:Array<Command>; var index:Float; var maxSize:Float; var onChange:Null<Signal<Void->Void>>; var transactionDepth:Float; var transactionIndex:Float; var transactionLabel:Null<String>; };
+#if !flight_struct_typedef
+@:allow(flight._Command)
+@:keep
+@:structInit
+class CommandHistory {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var bindings:CommandBindingTable;
+  public var entries:Array<Command>;
+  public var index:Float;
+  public var maxSize:Float;
+  public var onChange:Null<Signal<Void->Void>>;
+  public var transactionDepth:Float;
+  public var transactionIndex:Float;
+  public var transactionLabel:Null<String>;
+
+  private function new(bindings:CommandBindingTable, entries:Array<Command>, index:Float, maxSize:Float, onChange:Null<Signal<Void->Void>>, transactionDepth:Float, transactionIndex:Float, transactionLabel:Null<String>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.bindings = bindings;
+    this.entries = entries;
+    this.index = index;
+    this.maxSize = maxSize;
+    this.onChange = onChange;
+    this.transactionDepth = transactionDepth;
+    this.transactionIndex = transactionIndex;
+    this.transactionLabel = transactionLabel;
+  }
+}
+#else
+typedef CommandHistory = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var bindings:CommandBindingTable; var entries:Array<Command>; var index:Float; var maxSize:Float; var onChange:Null<Signal<Void->Void>>; var transactionDepth:Float; var transactionIndex:Float; var transactionLabel:Null<String>; };
+#end

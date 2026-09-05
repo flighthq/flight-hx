@@ -18,6 +18,7 @@ export const getParticleEmitter2DParticleAlpha = api.getParticleEmitter2DParticl
 export const getParticleEmitter2DParticleId = api.getParticleEmitter2DParticleId;
 export const getParticleEmitter2DParticleVelocity = api.getParticleEmitter2DParticleVelocity;
 export const getParticleEmitter2DRuntime = api.getParticleEmitter2DRuntime;
+export const initializeParticleEmitterData = api.initializeParticleEmitterData;
 export const PARTICLE_EMITTER_DELETED_ID = api.PARTICLE_EMITTER_DELETED_ID;
 export const removeParticleEmitter2DParticle = api.removeParticleEmitter2DParticle;
 export const reserveParticleEmitter2D = api.reserveParticleEmitter2D;

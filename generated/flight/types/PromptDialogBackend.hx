@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef PromptDialogBackend = { var prompt:PromptDialogOptions->flight._internal._Promise<Null<String>>; };
+#if !flight_struct_typedef
+@:allow(flight._Dialog)
+@:allow(flight._HostCapacitor)
+@:keep
+@:structInit
+class PromptDialogBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var prompt:PromptDialogOptions->flight._internal._Promise<Null<String>>;
+
+  private function new(prompt:PromptDialogOptions->flight._internal._Promise<Null<String>>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.prompt = prompt;
+  }
+}
+#else
+typedef PromptDialogBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var prompt:PromptDialogOptions->flight._internal._Promise<Null<String>>; };
+#end

@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FlightDocumentTokenResolverRegistry = { var resolvers:KeyedTable<FlightDocumentTokenResolver>; };
+#if !flight_struct_typedef
+@:allow(flight._Tokens)
+@:keep
+@:structInit
+class FlightDocumentTokenResolverRegistry {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var resolvers:KeyedTable<FlightDocumentTokenResolver>;
+
+  private function new(resolvers:KeyedTable<FlightDocumentTokenResolver>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.resolvers = resolvers;
+  }
+}
+#else
+typedef FlightDocumentTokenResolverRegistry = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var resolvers:KeyedTable<FlightDocumentTokenResolver>; };
+#end

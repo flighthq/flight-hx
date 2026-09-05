@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createVolumetricLightEffect = api.createVolumetricLightEffect;
+export const initializeVolumetricLightEffect = api.initializeVolumetricLightEffect;

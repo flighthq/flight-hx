@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef BlendEffect = { var kind:String; var mode:AdvancedBlendMode; @:optional var backdropKey:String; @:optional var opacity:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class BlendEffect extends flight.types.RenderEffect<String> {
+  public var mode:AdvancedBlendMode;
+  public var backdropKey:Null<String>;
+  public var opacity:Null<Float>;
+
+  private function new(kind:String, mode:AdvancedBlendMode, ?backdropKey:Null<String>, ?opacity:Null<Float>):Void {
+    super(kind);
+    this.mode = mode;
+    this.backdropKey = backdropKey;
+    this.opacity = opacity;
+  }
+}
+#else
+typedef BlendEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var mode:AdvancedBlendMode; @:optional var backdropKey:String; @:optional var opacity:Float; };
+#end

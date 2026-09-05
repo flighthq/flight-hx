@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createTauriAppCapabilities = api.createTauriAppCapabilities;
+export const initializeTauriAppCapabilities = api.initializeTauriAppCapabilities;

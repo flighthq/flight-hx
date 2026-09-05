@@ -3,6 +3,9 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
+import flight.types.EntityConstruction;
 import flight.types.Signal;
 import flight.types.SignalConnectOptions;
 import flight.types.SignalConnection;
@@ -10,6 +13,25 @@ import flight.types.SignalData;
 import flight.types.SignalScope;
 import flight.types.SignalThrottleOptions;
 import flight.types.SignalTrackedConnectOptions;
+
+#if !flight_struct_typedef
+@:allow(flight._Signals)
+@:keep
+@:structInit
+private class EntityShapeL9C15__signal {
+  public var data:Null<SignalData<flight._internal._Any>>;
+  public var emit:flight._internal._Any;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(data:Null<SignalData<flight._internal._Any>>, emit:flight._internal._Any):Void {
+    this.__symbol__EntityRuntime = null;
+    this.data = data;
+    this.emit = emit;
+  }
+}
+#else
+private typedef EntityShapeL9C15__signal = { var data:Null<SignalData<flight._internal._Any>>; var emit:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
 
 @:noCompletion
 class _Signals {
@@ -137,7 +159,10 @@ class _Signals {
   }
 
   public static function createSignalScope():SignalScope {
-    return cast { connections: cast ([] : Array<Dynamic>) };
+    var out:EntityConstruction<SignalScope> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ connections: cast _Runtime.UNDEFINED } : SignalScope); }) #end));
+    initializeSignalScope(({ final __callArgument7:Dynamic = out; __callArgument7; }));
+    return cast out;
     return cast null;
   }
 
@@ -157,9 +182,25 @@ class _Signals {
     }
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeSignalScope(out:EntityConstruction<SignalScope>):Void {
+    _Runtime.setField(out, 'connections', cast ([] : Array<Dynamic>));
+  }
+
   public static function createSignal<T>():Signal<T> {
-    return cast { emit: (cast (cast nullSignalEmit : flight._internal._Any) : T), data: null };
+    var out:EntityConstruction<Signal<T>> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ data: cast _Runtime.UNDEFINED, emit: cast _Runtime.UNDEFINED } : EntityShapeL9C15__signal); }) #end));
+    initializeSignal((cast out : Dynamic));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeSignal<T>(out:EntityConstruction<Signal<T>>):Void {
+    ((cast out : { var emit:T; }).emit = (cast (cast nullSignalEmit : flight._internal._Any) : T));
+    _Runtime.setField(out, 'data', null);
   }
 
   public static function clearSignal<T>(signal:Signal<T>):Void {
@@ -171,8 +212,8 @@ class _Signals {
     var priority:Float = cast _Runtime.UNDEFINED;
     var repeat:Bool = cast _Runtime.UNDEFINED;
     var data:SignalData<T> = cast _Runtime.UNDEFINED;
-    priority = _Runtime.coalesce(({ final __structural7 = options; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var priority:Null<Float>; }).priority; }), function():Dynamic return cast 0.0);
-    repeat = !(cast _Runtime.coalesce(({ final __structural8 = options; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var once:Null<Bool>; }).once; }), function():Dynamic return cast false) : Bool);
+    priority = _Runtime.coalesce(({ final __structural9 = options; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { @:optional var priority:Null<Float>; }).priority; }), function():Dynamic return cast 0.0);
+    repeat = !(cast _Runtime.coalesce(({ final __structural10 = options; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { @:optional var once:Null<Bool>; }).once; }), function():Dynamic return cast false) : Bool);
     _Signals.initSignal__slot((cast signal : Dynamic));
     data = signal.data;
     {
@@ -314,8 +355,8 @@ class _Signals {
         (elapsed = cast (_Runtime.fmod(elapsed, period) : Dynamic));
       }
     });
-    (#if js _Runtime.callValue(connectSignal, cast ([({ final __callArgument11:Dynamic = source; __callArgument11; }), ({ final __callArgument12:Dynamic = handler; __callArgument12; })] : Array<Dynamic>)) #else connectSignal(({ final __callArgument9:Dynamic = source; __callArgument9; }), ({ final __callArgument10:Dynamic = handler; __callArgument10; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    return cast function():Void { (cast disconnectSignal : Signal<Float->Void>->(Float->Void)->Void)(({ final __callArgument13:Dynamic = source; __callArgument13; }), ({ final __callArgument14:Dynamic = handler; __callArgument14; })); };
+    (#if js _Runtime.callValue(connectSignal, cast ([({ final __callArgument13:Dynamic = source; __callArgument13; }), ({ final __callArgument14:Dynamic = handler; __callArgument14; })] : Array<Dynamic>)) #else connectSignal(({ final __callArgument11:Dynamic = source; __callArgument11; }), ({ final __callArgument12:Dynamic = handler; __callArgument12; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    return cast function():Void { (cast disconnectSignal : Signal<Float->Void>->(Float->Void)->Void)(({ final __callArgument15:Dynamic = source; __callArgument15; }), ({ final __callArgument16:Dynamic = handler; __callArgument16; })); };
     return cast null;
   }
 
@@ -327,8 +368,8 @@ class _Signals {
     var leadingFired:Bool = cast _Runtime.UNDEFINED;
     var clearTimer:Void->Void = cast _Runtime.UNDEFINED;
     var handler:T = cast _Runtime.UNDEFINED;
-    leading = _Runtime.coalesce(({ final __typedStruct17 = options; __typedStruct17 == null ? _Runtime.UNDEFINED : __typedStruct17.leading; }), function():Dynamic return cast false);
-    trailing = _Runtime.coalesce(({ final __typedStruct18 = options; __typedStruct18 == null ? _Runtime.UNDEFINED : __typedStruct18.trailing; }), function():Dynamic return cast true);
+    leading = _Runtime.coalesce(({ final __typedStruct19 = options; __typedStruct19 == null ? _Runtime.UNDEFINED : __typedStruct19.leading; }), function():Dynamic return cast false);
+    trailing = _Runtime.coalesce(({ final __typedStruct20 = options; __typedStruct20 == null ? _Runtime.UNDEFINED : __typedStruct20.trailing; }), function():Dynamic return cast true);
     timer = null;
     lastArgs = null;
     leadingFired = false;
@@ -371,8 +412,8 @@ class _Signals {
     var clearTrailing:Void->Void = cast _Runtime.UNDEFINED;
     var scheduleTrailing:Float->Void = cast _Runtime.UNDEFINED;
     var handler:T = cast _Runtime.UNDEFINED;
-    leading = _Runtime.coalesce(({ final __typedStruct19 = options; __typedStruct19 == null ? _Runtime.UNDEFINED : __typedStruct19.leading; }), function():Dynamic return cast true);
-    trailing = _Runtime.coalesce(({ final __typedStruct20 = options; __typedStruct20 == null ? _Runtime.UNDEFINED : __typedStruct20.trailing; }), function():Dynamic return cast true);
+    leading = _Runtime.coalesce(({ final __typedStruct21 = options; __typedStruct21 == null ? _Runtime.UNDEFINED : __typedStruct21.leading; }), function():Dynamic return cast true);
+    trailing = _Runtime.coalesce(({ final __typedStruct22 = options; __typedStruct22 == null ? _Runtime.UNDEFINED : __typedStruct22.trailing; }), function():Dynamic return cast true);
     lastFiredAt = -HxMath.POSITIVE_INFINITY;
     trailingTimer = null;
     lastArgs = null;

@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 import flight._TextureAtlas as Facade_TextureAtlas_flight__TextureAtlas;
 import flight.types.EntityRuntime;
 import flight.types.GridSliceOptions;
+import flight.types.HasGraphicsImage;
 import flight.types.ImageResource;
 import flight.types.RectangleLike;
 import flight.types.Texture2D;
@@ -157,23 +158,23 @@ class TextureAtlas {
     return cast null;
   }
 
-  public static function loadTextureAtlasFromBase64(base64:String, mimeType:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<flight.types.TextureAtlas> {
-    return cast Facade_TextureAtlas_flight__TextureAtlas.loadTextureAtlasFromBase64(base64, mimeType, signal);
+  public static function loadTextureAtlasFromBase64(host:HasGraphicsImage, base64:String, mimeType:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<flight.types.TextureAtlas> {
+    return cast Facade_TextureAtlas_flight__TextureAtlas.loadTextureAtlasFromBase64(host, base64, mimeType, signal);
     return cast null;
   }
 
-  public static function loadTextureAtlasFromBlob(blob:flight._internal.dom.Blob, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<flight.types.TextureAtlas> {
-    return cast Facade_TextureAtlas_flight__TextureAtlas.loadTextureAtlasFromBlob(blob, signal);
+  public static function loadTextureAtlasFromBlob(host:HasGraphicsImage, blob:flight._internal.dom.Blob, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<flight.types.TextureAtlas> {
+    return cast Facade_TextureAtlas_flight__TextureAtlas.loadTextureAtlasFromBlob(host, blob, signal);
     return cast null;
   }
 
-  public static function loadTextureAtlasFromBytes(bytes:flight._internal._UInt8Array, ?mimeType:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<flight.types.TextureAtlas> {
-    return cast Facade_TextureAtlas_flight__TextureAtlas.loadTextureAtlasFromBytes(bytes, mimeType, signal);
+  public static function loadTextureAtlasFromBytes(host:HasGraphicsImage, bytes:flight._internal._UInt8Array, ?mimeType:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<flight.types.TextureAtlas> {
+    return cast Facade_TextureAtlas_flight__TextureAtlas.loadTextureAtlasFromBytes(host, bytes, mimeType, signal);
     return cast null;
   }
 
-  public static function loadTextureAtlasFromUrl(url:String, ?crossOrigin:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<flight.types.TextureAtlas> {
-    return cast Facade_TextureAtlas_flight__TextureAtlas.loadTextureAtlasFromUrl(url, crossOrigin, signal);
+  public static function loadTextureAtlasFromUrl(host:HasGraphicsImage, url:String, ?crossOrigin:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<flight.types.TextureAtlas> {
+    return cast Facade_TextureAtlas_flight__TextureAtlas.loadTextureAtlasFromUrl(host, url, crossOrigin, signal);
     return cast null;
   }
 

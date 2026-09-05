@@ -8,4 +8,5 @@ __syncDependencies();
 export const acquireWgpuRenderTarget = api.acquireWgpuRenderTarget;
 export const createWgpuRenderTargetPool = api.createWgpuRenderTargetPool;
 export const destroyWgpuRenderTargetPool = api.destroyWgpuRenderTargetPool;
+export const initializeWgpuRenderTargetPool = api.initializeWgpuRenderTargetPool;
 export const releaseWgpuRenderTarget = api.releaseWgpuRenderTarget;

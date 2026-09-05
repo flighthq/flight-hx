@@ -3,11 +3,14 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Path.appendPathClose;
 import flight._Path.appendPathLineTo;
 import flight._Path.appendPathMoveTo;
 import flight._Path.createPath;
 import flight._Path.flattenPath;
+import flight.types.EntityConstruction;
 import flight.types.Path;
 import flight.types.PathBooleanBackend;
 import flight.types.PathBooleanContour;
@@ -236,11 +239,20 @@ class _PathBoolean {
   @:allow(flight)
   @:keep
   private static function createMartinezPathBooleanBackend():PathBooleanBackend {
-    return cast { computePathBoolean: function(subject:Array<PathBooleanContour>, clip:Array<PathBooleanContour>, operation:PathBooleanOperation, fillRule:PathBooleanFillRule):Array<PathBooleanContour> {
-      return cast (cast _PathBoolean.computeMartinezBoolean__martinezKernel(({ final __callArgument67:Dynamic = subject; __callArgument67; }), ({ final __callArgument68:Dynamic = clip; __callArgument68; }), ({ final __callArgument69:Dynamic = operation; __callArgument69; }), ({ final __callArgument70:Dynamic = fillRule; __callArgument70; })) : Array<PathBooleanContour>);
-      return cast _Runtime.UNDEFINED;
-    } };
+    var out:EntityConstruction<PathBooleanBackend> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ computePathBoolean: cast _Runtime.UNDEFINED } : PathBooleanBackend); }) #end));
+    initializeMartinezPathBooleanBackend(({ final __callArgument67:Dynamic = out; __callArgument67; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeMartinezPathBooleanBackend(out:EntityConstruction<PathBooleanBackend>):Void {
+    ((cast out : { var computePathBoolean:Array<PathBooleanContour>->Array<PathBooleanContour>->PathBooleanOperation->PathBooleanFillRule->Array<PathBooleanContour>; }).computePathBoolean = (cast function(subject:Array<PathBooleanContour>, clip:Array<PathBooleanContour>, operation:PathBooleanOperation, fillRule:PathBooleanFillRule):Array<PathBooleanContour> {
+      return cast (cast _PathBoolean.computeMartinezBoolean__martinezKernel(({ final __callArgument69:Dynamic = subject; __callArgument69; }), ({ final __callArgument70:Dynamic = clip; __callArgument70; }), ({ final __callArgument71:Dynamic = operation; __callArgument71; }), ({ final __callArgument72:Dynamic = fillRule; __callArgument72; })) : Array<PathBooleanContour>);
+      return cast _Runtime.UNDEFINED;
+    }));
   }
 
   public static final VERTEX_SNAP_RELATIVE__martinezKernel:Float = 1e-9;
@@ -258,13 +270,13 @@ class _PathBoolean {
     var unique:Array<UniqueSegment__martinezKernel> = cast _Runtime.UNDEFINED;
     var kept:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     (_PathBoolean.nextEventId__martinezKernel = cast (0.0 : Dynamic));
-    (_PathBoolean.vertexSnap__martinezKernel = cast ((cast _PathBoolean.computeVertexSnap__martinezKernel(({ final __callArgument75:Dynamic = subject; __callArgument75; }), ({ final __callArgument76:Dynamic = clip; __callArgument76; })) : Float) : Dynamic));
-    segments = (cast _PathBoolean.buildArrangement__martinezKernel(({ final __callArgument79:Dynamic = subject; __callArgument79; }), ({ final __callArgument80:Dynamic = clip; __callArgument80; })) : Array<ArrangementSegment__martinezKernel>);
+    (_PathBoolean.vertexSnap__martinezKernel = cast ((cast _PathBoolean.computeVertexSnap__martinezKernel(({ final __callArgument77:Dynamic = subject; __callArgument77; }), ({ final __callArgument78:Dynamic = clip; __callArgument78; })) : Float) : Dynamic));
+    segments = (cast _PathBoolean.buildArrangement__martinezKernel(({ final __callArgument81:Dynamic = subject; __callArgument81; }), ({ final __callArgument82:Dynamic = clip; __callArgument82; })) : Array<ArrangementSegment__martinezKernel>);
     if ((cast _Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     unique = (cast _PathBoolean.mergeCoincidentSegments__martinezKernel((cast segments : Dynamic)) : Array<UniqueSegment__martinezKernel>);
-    kept = (cast _PathBoolean.classifySegments__martinezKernel((cast unique : Dynamic), ({ final __callArgument83:Dynamic = operation; __callArgument83; }), ({ final __callArgument84:Dynamic = fillRule; __callArgument84; })) : Array<Array<Float>>);
+    kept = (cast _PathBoolean.classifySegments__martinezKernel((cast unique : Dynamic), ({ final __callArgument85:Dynamic = operation; __callArgument85; }), ({ final __callArgument86:Dynamic = fillRule; __callArgument86; })) : Array<Array<Float>>);
     if ((cast _Runtime.strictEquals(_Runtime.field(kept, 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
-    return cast (cast _PathBoolean.traceRings__martinezKernel(({ final __callArgument87:Dynamic = kept; __callArgument87; })) : Array<PathBooleanContour>);
+    return cast (cast _PathBoolean.traceRings__martinezKernel(({ final __callArgument89:Dynamic = kept; __callArgument89; })) : Array<PathBooleanContour>);
     return cast null;
   }
 
@@ -273,8 +285,8 @@ class _PathBoolean {
     var status:Array<SweepEvent__martinezKernel> = cast _Runtime.UNDEFINED;
     var segments:Array<ArrangementSegment__martinezKernel> = cast _Runtime.UNDEFINED;
     heap = new EventHeap__martinezKernel();
-    _PathBoolean.fillQueue__martinezKernel(({ final __callArgument89:Dynamic = subject; __callArgument89; }), (cast true : Bool), (cast heap : Dynamic));
-    _PathBoolean.fillQueue__martinezKernel(({ final __callArgument91:Dynamic = clip; __callArgument91; }), (cast false : Bool), (cast heap : Dynamic));
+    _PathBoolean.fillQueue__martinezKernel(({ final __callArgument91:Dynamic = subject; __callArgument91; }), (cast true : Bool), (cast heap : Dynamic));
+    _PathBoolean.fillQueue__martinezKernel(({ final __callArgument93:Dynamic = clip; __callArgument93; }), (cast false : Bool), (cast heap : Dynamic));
     status = (cast cast ([] : Array<Dynamic>));
     segments = (cast cast ([] : Array<Dynamic>));
     while ((cast !(cast (cast heap : EventHeap__martinezKernel).isEmpty() : Bool) : Bool)) {
@@ -605,12 +617,12 @@ class _PathBoolean {
       var eps:Float = (len * 0.0001);
       var nlx:Float = ((-dy / len) * eps);
       var nly:Float = ((dx / len) * eps);
-      var leftInSubject:Bool = (cast _PathBoolean.isInside__martinezKernel((cast (cast _PathBoolean.windingAt__martinezKernel((cast unique : Dynamic), (cast (mx + nlx) : Float), (cast (my + nly) : Float), (cast true : Bool)) : Float) : Float), ({ final __callArgument99:Dynamic = fillRule; __callArgument99; })) : Bool);
-      var leftInClip:Bool = (cast _PathBoolean.isInside__martinezKernel((cast (cast _PathBoolean.windingAt__martinezKernel((cast unique : Dynamic), (cast (mx + nlx) : Float), (cast (my + nly) : Float), (cast false : Bool)) : Float) : Float), ({ final __callArgument101:Dynamic = fillRule; __callArgument101; })) : Bool);
-      var rightInSubject:Bool = (cast _PathBoolean.isInside__martinezKernel((cast (cast _PathBoolean.windingAt__martinezKernel((cast unique : Dynamic), (cast (mx - nlx) : Float), (cast (my - nly) : Float), (cast true : Bool)) : Float) : Float), ({ final __callArgument103:Dynamic = fillRule; __callArgument103; })) : Bool);
-      var rightInClip:Bool = (cast _PathBoolean.isInside__martinezKernel((cast (cast _PathBoolean.windingAt__martinezKernel((cast unique : Dynamic), (cast (mx - nlx) : Float), (cast (my - nly) : Float), (cast false : Bool)) : Float) : Float), ({ final __callArgument105:Dynamic = fillRule; __callArgument105; })) : Bool);
-      var filledLeft:Bool = (cast _PathBoolean.combine__martinezKernel(({ final __callArgument107:Dynamic = operation; __callArgument107; }), (cast leftInSubject : Bool), (cast leftInClip : Bool)) : Bool);
-      var filledRight:Bool = (cast _PathBoolean.combine__martinezKernel(({ final __callArgument109:Dynamic = operation; __callArgument109; }), (cast rightInSubject : Bool), (cast rightInClip : Bool)) : Bool);
+      var leftInSubject:Bool = (cast _PathBoolean.isInside__martinezKernel((cast (cast _PathBoolean.windingAt__martinezKernel((cast unique : Dynamic), (cast (mx + nlx) : Float), (cast (my + nly) : Float), (cast true : Bool)) : Float) : Float), ({ final __callArgument101:Dynamic = fillRule; __callArgument101; })) : Bool);
+      var leftInClip:Bool = (cast _PathBoolean.isInside__martinezKernel((cast (cast _PathBoolean.windingAt__martinezKernel((cast unique : Dynamic), (cast (mx + nlx) : Float), (cast (my + nly) : Float), (cast false : Bool)) : Float) : Float), ({ final __callArgument103:Dynamic = fillRule; __callArgument103; })) : Bool);
+      var rightInSubject:Bool = (cast _PathBoolean.isInside__martinezKernel((cast (cast _PathBoolean.windingAt__martinezKernel((cast unique : Dynamic), (cast (mx - nlx) : Float), (cast (my - nly) : Float), (cast true : Bool)) : Float) : Float), ({ final __callArgument105:Dynamic = fillRule; __callArgument105; })) : Bool);
+      var rightInClip:Bool = (cast _PathBoolean.isInside__martinezKernel((cast (cast _PathBoolean.windingAt__martinezKernel((cast unique : Dynamic), (cast (mx - nlx) : Float), (cast (my - nly) : Float), (cast false : Bool)) : Float) : Float), ({ final __callArgument107:Dynamic = fillRule; __callArgument107; })) : Bool);
+      var filledLeft:Bool = (cast _PathBoolean.combine__martinezKernel(({ final __callArgument109:Dynamic = operation; __callArgument109; }), (cast leftInSubject : Bool), (cast leftInClip : Bool)) : Bool);
+      var filledRight:Bool = (cast _PathBoolean.combine__martinezKernel(({ final __callArgument111:Dynamic = operation; __callArgument111; }), (cast rightInSubject : Bool), (cast rightInClip : Bool)) : Bool);
       if ((cast _Runtime.strictEquals(filledLeft, filledRight) : Bool)) { continue; }
       if ((cast filledLeft : Bool)) { _Runtime.callProperty(kept, 'push', cast ([cast ([(cast seg : UniqueSegment__martinezKernel).ax, (cast seg : UniqueSegment__martinezKernel).ay, (cast seg : UniqueSegment__martinezKernel).bx, (cast seg : UniqueSegment__martinezKernel).by] : Array<Dynamic>)] : Array<Dynamic>)); } else { _Runtime.callProperty(kept, 'push', cast ([cast ([(cast seg : UniqueSegment__martinezKernel).bx, (cast seg : UniqueSegment__martinezKernel).by, (cast seg : UniqueSegment__martinezKernel).ax, (cast seg : UniqueSegment__martinezKernel).ay] : Array<Dynamic>)] : Array<Dynamic>)); }
     }
@@ -737,35 +749,35 @@ class _PathBoolean {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var pointEpsSq:Float = cast _Runtime.UNDEFINED;
     var rawRings:Array<Array<Float>> = cast _Runtime.UNDEFINED;
-    join = _Runtime.coalesce(({ final __typedStruct119 = options; __typedStruct119 == null ? _Runtime.UNDEFINED : __typedStruct119.join; }), function():Dynamic return cast 'miter');
-    end = _Runtime.coalesce(({ final __typedStruct120 = options; __typedStruct120 == null ? _Runtime.UNDEFINED : __typedStruct120.end; }), function():Dynamic return cast 'butt');
-    miterLimit = _Runtime.coalesce(({ final __typedStruct121 = options; __typedStruct121 == null ? _Runtime.UNDEFINED : __typedStruct121.miterLimit; }), function():Dynamic return cast _PathBoolean.DEFAULT_MITER_LIMIT__offsetPath);
-    arcTolerance = _Runtime.coalesce(({ final __typedStruct122 = options; __typedStruct122 == null ? _Runtime.UNDEFINED : __typedStruct122.arcTolerance; }), function():Dynamic return cast _PathBoolean.DEFAULT_ARC_TOLERANCE__offsetPath);
-    contours = (cast flattenPath(({ final __callArgument123:Dynamic = path; __callArgument123; }), #if js (cast ({ final __typedStruct124 = options; __typedStruct124 == null ? _Runtime.UNDEFINED : __typedStruct124.tolerance; }) : Float) #else (cast ({ final __typedStruct124 = options; __typedStruct124 == null ? _Runtime.UNDEFINED : __typedStruct124.tolerance; }) : Null<Float>) #end) : Array<Array<Float>>);
-    pointEpsSq = HxMath.pow((cast _PathBoolean.getContourPointEps__offsetPath(({ final __callArgument127:Dynamic = contours; __callArgument127; })) : Float), 2.0);
+    join = _Runtime.coalesce(({ final __typedStruct121 = options; __typedStruct121 == null ? _Runtime.UNDEFINED : __typedStruct121.join; }), function():Dynamic return cast 'miter');
+    end = _Runtime.coalesce(({ final __typedStruct122 = options; __typedStruct122 == null ? _Runtime.UNDEFINED : __typedStruct122.end; }), function():Dynamic return cast 'butt');
+    miterLimit = _Runtime.coalesce(({ final __typedStruct123 = options; __typedStruct123 == null ? _Runtime.UNDEFINED : __typedStruct123.miterLimit; }), function():Dynamic return cast _PathBoolean.DEFAULT_MITER_LIMIT__offsetPath);
+    arcTolerance = _Runtime.coalesce(({ final __typedStruct124 = options; __typedStruct124 == null ? _Runtime.UNDEFINED : __typedStruct124.arcTolerance; }), function():Dynamic return cast _PathBoolean.DEFAULT_ARC_TOLERANCE__offsetPath);
+    contours = (cast flattenPath(({ final __callArgument125:Dynamic = path; __callArgument125; }), #if js (cast ({ final __typedStruct126 = options; __typedStruct126 == null ? _Runtime.UNDEFINED : __typedStruct126.tolerance; }) : Float) #else (cast ({ final __typedStruct126 = options; __typedStruct126 == null ? _Runtime.UNDEFINED : __typedStruct126.tolerance; }) : Null<Float>) #end) : Array<Array<Float>>);
+    pointEpsSq = HxMath.pow((cast _PathBoolean.getContourPointEps__offsetPath(({ final __callArgument129:Dynamic = contours; __callArgument129; })) : Float), 2.0);
     rawRings = (cast cast ([] : Array<Dynamic>));
     for (contour in _Runtime.iterable(contours)) {
-      var closed:Bool = (cast _PathBoolean.isClosedContour__offsetPath(({ final __callArgument131:Dynamic = contour; __callArgument131; }), (cast pointEpsSq : Float)) : Bool);
-      var vertices:Array<Float> = (cast _PathBoolean.getCleanContourVertices__offsetPath(({ final __callArgument133:Dynamic = contour; __callArgument133; }), (cast closed : Bool), (cast pointEpsSq : Float)) : Array<Float>);
+      var closed:Bool = (cast _PathBoolean.isClosedContour__offsetPath(({ final __callArgument133:Dynamic = contour; __callArgument133; }), (cast pointEpsSq : Float)) : Bool);
+      var vertices:Array<Float> = (cast _PathBoolean.getCleanContourVertices__offsetPath(({ final __callArgument135:Dynamic = contour; __callArgument135; }), (cast closed : Bool), (cast pointEpsSq : Float)) : Array<Float>);
       if ((cast closed : Bool)) {
         if ((cast ((cast _Runtime.field(vertices, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { continue; }
-        var orientation:Float = (cast _PathBoolean.getRingOrientationSign__offsetPath(({ final __callArgument135:Dynamic = vertices; __callArgument135; })) : Float);
-        var ring:Array<Float> = (cast _PathBoolean.buildOffsetRing__offsetPath(({ final __callArgument137:Dynamic = vertices; __callArgument137; }), (cast (delta * orientation) : Float), ({ final __callArgument138:Dynamic = _PathBoolean.NO_CAPS__offsetPath; __callArgument138; }), ({ final __callArgument139:Dynamic = join; __callArgument139; }), ({ final __callArgument140:Dynamic = end; __callArgument140; }), (cast miterLimit : Float), (cast arcTolerance : Float)) : Array<Float>);
+        var orientation:Float = (cast _PathBoolean.getRingOrientationSign__offsetPath(({ final __callArgument137:Dynamic = vertices; __callArgument137; })) : Float);
+        var ring:Array<Float> = (cast _PathBoolean.buildOffsetRing__offsetPath(({ final __callArgument139:Dynamic = vertices; __callArgument139; }), (cast (delta * orientation) : Float), ({ final __callArgument140:Dynamic = _PathBoolean.NO_CAPS__offsetPath; __callArgument140; }), ({ final __callArgument141:Dynamic = join; __callArgument141; }), ({ final __callArgument142:Dynamic = end; __callArgument142; }), (cast miterLimit : Float), (cast arcTolerance : Float)) : Array<Float>);
         if ((cast ((cast _Runtime.field(ring, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { continue; }
-        var offsetArea:Float = (cast _PathBoolean.getRingSignedArea__offsetPath(({ final __callArgument145:Dynamic = ring; __callArgument145; })) : Float);
+        var offsetArea:Float = (cast _PathBoolean.getRingSignedArea__offsetPath(({ final __callArgument147:Dynamic = ring; __callArgument147; })) : Float);
         var inverted:Bool = !_Runtime.strictEquals(_Runtime.sign(offsetArea), orientation);
-        var notReduced:Bool = ((cast ((cast delta : Float) < (cast 0.0 : Float)) : Bool) && (cast ((cast HxMath.abs(offsetArea) : Float) >= (cast HxMath.abs((cast _PathBoolean.getRingSignedArea__offsetPath(({ final __callArgument147:Dynamic = vertices; __callArgument147; })) : Float)) : Float)) : Bool));
+        var notReduced:Bool = ((cast ((cast delta : Float) < (cast 0.0 : Float)) : Bool) && (cast ((cast HxMath.abs(offsetArea) : Float) >= (cast HxMath.abs((cast _PathBoolean.getRingSignedArea__offsetPath(({ final __callArgument149:Dynamic = vertices; __callArgument149; })) : Float)) : Float)) : Bool));
         if ((cast ((cast inverted : Bool) || (cast notReduced : Bool)) : Bool)) { continue; }
-        _Runtime.callProperty(rawRings, 'push', cast ([((cast ((cast offsetArea : Float) < (cast 0.0 : Float)) : Bool) ? (cast (cast _PathBoolean.reverseVertexLoop__offsetPath(({ final __callArgument149:Dynamic = ring; __callArgument149; })) : Array<Float>) : Dynamic) : (cast ring : Dynamic))] : Array<Dynamic>));
+        _Runtime.callProperty(rawRings, 'push', cast ([((cast ((cast offsetArea : Float) < (cast 0.0 : Float)) : Bool) ? (cast (cast _PathBoolean.reverseVertexLoop__offsetPath(({ final __callArgument151:Dynamic = ring; __callArgument151; })) : Array<Float>) : Dynamic) : (cast ring : Dynamic))] : Array<Dynamic>));
       } else {
         if ((cast ((cast _Runtime.field(vertices, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { continue; }
         var caps:flight._internal._Set<Float> = _Runtime.construct(flight._internal._HostValueLut.get('Set'), [cast ([0.0, (_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), 2.0) - 1.0)] : Array<Dynamic>)]);
-        var loop:Array<Float> = (cast _PathBoolean.getOpenContourLoop__offsetPath(({ final __callArgument151:Dynamic = vertices; __callArgument151; })) : Array<Float>);
-        var ring:Array<Float> = (cast _PathBoolean.buildOffsetRing__offsetPath(({ final __callArgument153:Dynamic = loop; __callArgument153; }), (cast HxMath.abs(delta) : Float), ({ final __callArgument154:Dynamic = caps; __callArgument154; }), ({ final __callArgument155:Dynamic = join; __callArgument155; }), ({ final __callArgument156:Dynamic = end; __callArgument156; }), (cast miterLimit : Float), (cast arcTolerance : Float)) : Array<Float>);
-        if ((cast ((cast _Runtime.field(ring, 'length') : Float) >= (cast 6.0 : Float)) : Bool)) { _Runtime.callProperty(rawRings, 'push', cast ([((cast ((cast (cast _PathBoolean.getRingSignedArea__offsetPath(({ final __callArgument161:Dynamic = ring; __callArgument161; })) : Float) : Float) < (cast 0.0 : Float)) : Bool) ? (cast (cast _PathBoolean.reverseVertexLoop__offsetPath(({ final __callArgument163:Dynamic = ring; __callArgument163; })) : Array<Float>) : Dynamic) : (cast ring : Dynamic))] : Array<Dynamic>)); }
+        var loop:Array<Float> = (cast _PathBoolean.getOpenContourLoop__offsetPath(({ final __callArgument153:Dynamic = vertices; __callArgument153; })) : Array<Float>);
+        var ring:Array<Float> = (cast _PathBoolean.buildOffsetRing__offsetPath(({ final __callArgument155:Dynamic = loop; __callArgument155; }), (cast HxMath.abs(delta) : Float), ({ final __callArgument156:Dynamic = caps; __callArgument156; }), ({ final __callArgument157:Dynamic = join; __callArgument157; }), ({ final __callArgument158:Dynamic = end; __callArgument158; }), (cast miterLimit : Float), (cast arcTolerance : Float)) : Array<Float>);
+        if ((cast ((cast _Runtime.field(ring, 'length') : Float) >= (cast 6.0 : Float)) : Bool)) { _Runtime.callProperty(rawRings, 'push', cast ([((cast ((cast (cast _PathBoolean.getRingSignedArea__offsetPath(({ final __callArgument163:Dynamic = ring; __callArgument163; })) : Float) : Float) < (cast 0.0 : Float)) : Bool) ? (cast (cast _PathBoolean.reverseVertexLoop__offsetPath(({ final __callArgument165:Dynamic = ring; __callArgument165; })) : Array<Float>) : Dynamic) : (cast ring : Dynamic))] : Array<Dynamic>)); }
       }
     }
-    return cast (cast resolvePathRegions((cast rawRings : Dynamic), ({ final __callArgument165:Dynamic = 'positive'; __callArgument165; })) : Path);
+    return cast (cast resolvePathRegions((cast rawRings : Dynamic), ({ final __callArgument167:Dynamic = 'positive'; __callArgument167; })) : Path);
     return cast null;
   }
 
@@ -808,9 +820,9 @@ class _PathBoolean {
         var thisStartX:Float = (vx + (signedDelta * flight._internal._StaticIndex.readFloatArrayTyped((cast normalX : Array<Float>), (cast k : Float))));
         var thisStartY:Float = (vy + (signedDelta * flight._internal._StaticIndex.readFloatArrayTyped((cast normalY : Array<Float>), (cast k : Float))));
         if ((cast ((cast capIndices : flight._internal._Set<Float>).has((cast k))) : Bool)) {
-          _PathBoolean.emitOffsetEndCap__offsetPath(({ final __callArgument167:Dynamic = ring; __callArgument167; }), (cast vx : Float), (cast vy : Float), (cast previousEndX : Float), (cast previousEndY : Float), (cast thisStartX : Float), (cast thisStartY : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast previous : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast previous : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast k : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast k : Float)) : Float), (cast HxMath.abs(signedDelta) : Float), ({ final __callArgument168:Dynamic = end; __callArgument168; }), (cast arcTolerance : Float));
+          _PathBoolean.emitOffsetEndCap__offsetPath(({ final __callArgument169:Dynamic = ring; __callArgument169; }), (cast vx : Float), (cast vy : Float), (cast previousEndX : Float), (cast previousEndY : Float), (cast thisStartX : Float), (cast thisStartY : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast previous : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast previous : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast k : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast k : Float)) : Float), (cast HxMath.abs(signedDelta) : Float), ({ final __callArgument170:Dynamic = end; __callArgument170; }), (cast arcTolerance : Float));
         } else {
-          _PathBoolean.emitOffsetJoin__offsetPath(({ final __callArgument171:Dynamic = ring; __callArgument171; }), (cast vx : Float), (cast vy : Float), (cast previousEndX : Float), (cast previousEndY : Float), (cast thisStartX : Float), (cast thisStartY : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast previous : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast previous : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast k : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast k : Float)) : Float), (cast signedDelta : Float), ({ final __callArgument172:Dynamic = join; __callArgument172; }), (cast miterLimit : Float), (cast arcTolerance : Float));
+          _PathBoolean.emitOffsetJoin__offsetPath(({ final __callArgument173:Dynamic = ring; __callArgument173; }), (cast vx : Float), (cast vy : Float), (cast previousEndX : Float), (cast previousEndY : Float), (cast thisStartX : Float), (cast thisStartY : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast previous : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast previous : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast k : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast k : Float)) : Float), (cast signedDelta : Float), ({ final __callArgument174:Dynamic = join; __callArgument174; }), (cast miterLimit : Float), (cast arcTolerance : Float));
         }
         k++;
       }
@@ -829,7 +841,7 @@ class _PathBoolean {
       var midX:Float = HxMath.cos((startAngle + _PathBoolean.HALF_PI__offsetPath));
       var midY:Float = HxMath.sin((startAngle + _PathBoolean.HALF_PI__offsetPath));
       var sweep:Float = _Runtime.multiplyNumbers(((cast ((cast ((midX * previousDirX) + (midY * previousDirY)) : Float) >= (cast 0.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast -1.0 : Dynamic)), HxMath.PI);
-      _PathBoolean.pushOffsetArc__offsetPath(({ final __callArgument175:Dynamic = ring; __callArgument175; }), (cast vx : Float), (cast vy : Float), (cast radius : Float), (cast startAngle : Float), (cast sweep : Float), (cast arcTolerance : Float));
+      _PathBoolean.pushOffsetArc__offsetPath(({ final __callArgument177:Dynamic = ring; __callArgument177; }), (cast vx : Float), (cast vy : Float), (cast radius : Float), (cast startAngle : Float), (cast sweep : Float), (cast arcTolerance : Float));
     } }
     _Runtime.pushMany(ring, cast ([thisStartX, thisStartY] : Array<Dynamic>));
   }
@@ -862,7 +874,7 @@ class _PathBoolean {
         var radius:Float = HxMath.abs(signedDelta);
         var startAngle:Float = HxMath.atan2((previousEndY - vy), (previousEndX - vx));
         var endAngle:Float = HxMath.atan2((thisStartY - vy), (thisStartX - vx));
-        _PathBoolean.pushOffsetArc__offsetPath(({ final __callArgument177:Dynamic = ring; __callArgument177; }), (cast vx : Float), (cast vy : Float), (cast radius : Float), (cast startAngle : Float), (cast (cast _PathBoolean.getShortSweep__offsetPath((cast startAngle : Float), (cast endAngle : Float)) : Float) : Float), (cast arcTolerance : Float));
+        _PathBoolean.pushOffsetArc__offsetPath(({ final __callArgument179:Dynamic = ring; __callArgument179; }), (cast vx : Float), (cast vy : Float), (cast radius : Float), (cast startAngle : Float), (cast (cast _PathBoolean.getShortSweep__offsetPath((cast startAngle : Float), (cast endAngle : Float)) : Float) : Float), (cast arcTolerance : Float));
       } } }
     }
     _Runtime.pushMany(ring, cast ([thisStartX, thisStartY] : Array<Dynamic>));
@@ -941,7 +953,7 @@ class _PathBoolean {
 
   public static function getRingOrientationSign__offsetPath(vertices:Array<Float>):Float {
     var sign:Float = cast _Runtime.UNDEFINED;
-    sign = _Runtime.sign((cast _PathBoolean.getRingSignedArea__offsetPath(({ final __callArgument181:Dynamic = vertices; __callArgument181; })) : Float));
+    sign = _Runtime.sign((cast _PathBoolean.getRingSignedArea__offsetPath(({ final __callArgument183:Dynamic = vertices; __callArgument183; })) : Float));
     return cast ((cast _Runtime.strictEquals(sign, 0.0) : Bool) ? (cast 1.0 : Dynamic) : (cast sign : Dynamic));
     return cast null;
   }
@@ -1061,20 +1073,20 @@ class _PathBoolean {
   public static function resolvePathRegions(rings:Array<PathBooleanContour>, fillRule:PathBooleanFillRule):Path {
     var path:Path = cast _Runtime.UNDEFINED;
     var resolved:Array<PathBooleanContour> = cast _Runtime.UNDEFINED;
-    path = (cast createPath(({ final __callArgument183:Dynamic = 'nonZero'; __callArgument183; })) : Path);
+    path = (cast createPath(({ final __callArgument185:Dynamic = 'nonZero'; __callArgument185; })) : Path);
     if ((cast _Runtime.strictEquals(_Runtime.field(rings, 'length'), 0.0) : Bool)) { return cast path; }
-    resolved = (cast (cast getPathBooleanBackend() : PathBooleanBackend) : PathBooleanBackend).computePathBoolean(({ final __callArgument185:Dynamic = rings; __callArgument185; }), ({ final __callArgument186:Dynamic = _PathBoolean.EMPTY_CONTOURS__resolvePathRegions; __callArgument186; }), ({ final __callArgument187:Dynamic = 'union'; __callArgument187; }), ({ final __callArgument188:Dynamic = fillRule; __callArgument188; }));
+    resolved = (cast (cast getPathBooleanBackend() : PathBooleanBackend) : PathBooleanBackend).computePathBoolean(({ final __callArgument187:Dynamic = rings; __callArgument187; }), ({ final __callArgument188:Dynamic = _PathBoolean.EMPTY_CONTOURS__resolvePathRegions; __callArgument188; }), ({ final __callArgument189:Dynamic = 'union'; __callArgument189; }), ({ final __callArgument190:Dynamic = fillRule; __callArgument190; }));
     for (ring in _Runtime.iterable(resolved)) {
       if ((cast ((cast _Runtime.field(ring, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { continue; }
-      appendPathMoveTo(({ final __callArgument191:Dynamic = path; __callArgument191; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 0.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 1.0 : Float)) : Float));
+      appendPathMoveTo(({ final __callArgument193:Dynamic = path; __callArgument193; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 0.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 1.0 : Float)) : Float));
       {
         var i:Float = 2.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(ring, 'length') : Float)) : Bool)) {
-          appendPathLineTo(({ final __callArgument193:Dynamic = path; __callArgument193; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast i : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast (i + 1.0) : Float)) : Float));
+          appendPathLineTo(({ final __callArgument195:Dynamic = path; __callArgument195; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast i : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast (i + 1.0) : Float)) : Float));
           (i = cast ((i + 2.0) : Dynamic));
         }
       }
-      appendPathClose(({ final __callArgument195:Dynamic = path; __callArgument195; }));
+      appendPathClose(({ final __callArgument197:Dynamic = path; __callArgument197; }));
     }
     return cast path;
     return cast null;
@@ -1085,9 +1097,9 @@ class _PathBoolean {
   public static function simplifyPath(path:Path, ?options:PathBooleanOptions):Path {
     var fillRule:PathWinding = cast _Runtime.UNDEFINED;
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
-    fillRule = _Runtime.coalesce(({ final __typedStruct197 = options; __typedStruct197 == null ? _Runtime.UNDEFINED : __typedStruct197.fillRule; }), function():Dynamic return cast 'nonZero');
-    contours = (cast flattenPath(({ final __callArgument198:Dynamic = path; __callArgument198; }), #if js (cast ({ final __typedStruct199 = options; __typedStruct199 == null ? _Runtime.UNDEFINED : __typedStruct199.tolerance; }) : Float) #else (cast ({ final __typedStruct199 = options; __typedStruct199 == null ? _Runtime.UNDEFINED : __typedStruct199.tolerance; }) : Null<Float>) #end) : Array<Array<Float>>);
-    return cast (cast resolvePathRegions((cast contours : Dynamic), ({ final __callArgument202:Dynamic = fillRule; __callArgument202; })) : Path);
+    fillRule = _Runtime.coalesce(({ final __typedStruct199 = options; __typedStruct199 == null ? _Runtime.UNDEFINED : __typedStruct199.fillRule; }), function():Dynamic return cast 'nonZero');
+    contours = (cast flattenPath(({ final __callArgument200:Dynamic = path; __callArgument200; }), #if js (cast ({ final __typedStruct201 = options; __typedStruct201 == null ? _Runtime.UNDEFINED : __typedStruct201.tolerance; }) : Float) #else (cast ({ final __typedStruct201 = options; __typedStruct201 == null ? _Runtime.UNDEFINED : __typedStruct201.tolerance; }) : Null<Float>) #end) : Array<Array<Float>>);
+    return cast (cast resolvePathRegions((cast contours : Dynamic), ({ final __callArgument204:Dynamic = fillRule; __callArgument204; })) : Path);
     return cast null;
   }
 
@@ -1096,29 +1108,29 @@ class _PathBoolean {
     var contours:Array<PathBooleanContour> = cast _Runtime.UNDEFINED;
     var result:Array<PathBooleanContour> = cast _Runtime.UNDEFINED;
     var path:Path = cast _Runtime.UNDEFINED;
-    fillRule = _Runtime.coalesce(({ final __typedStruct204 = options; __typedStruct204 == null ? _Runtime.UNDEFINED : __typedStruct204.fillRule; }), function():Dynamic return cast 'nonZero');
+    fillRule = _Runtime.coalesce(({ final __typedStruct206 = options; __typedStruct206 == null ? _Runtime.UNDEFINED : __typedStruct206.fillRule; }), function():Dynamic return cast 'nonZero');
     contours = (cast cast ([] : Array<Dynamic>));
     for (path in _Runtime.iterable(paths)) {
-      for (contour in _Runtime.iterable((cast flattenPath(({ final __callArgument209:Dynamic = path; __callArgument209; }), #if js (cast ({ final __typedStruct210 = options; __typedStruct210 == null ? _Runtime.UNDEFINED : __typedStruct210.tolerance; }) : Float) #else (cast ({ final __typedStruct210 = options; __typedStruct210 == null ? _Runtime.UNDEFINED : __typedStruct210.tolerance; }) : Null<Float>) #end) : Array<Array<Float>>))) {
+      for (contour in _Runtime.iterable((cast flattenPath(({ final __callArgument211:Dynamic = path; __callArgument211; }), #if js (cast ({ final __typedStruct212 = options; __typedStruct212 == null ? _Runtime.UNDEFINED : __typedStruct212.tolerance; }) : Float) #else (cast ({ final __typedStruct212 = options; __typedStruct212 == null ? _Runtime.UNDEFINED : __typedStruct212.tolerance; }) : Null<Float>) #end) : Array<Array<Float>>))) {
         _Runtime.callProperty(contours, 'push', cast ([contour] : Array<Dynamic>));
       }
     }
-    result = ((cast _Runtime.strictEquals(_Runtime.field(contours, 'length'), 0.0) : Bool) ? (cast _PathBoolean.EMPTY_CONTOURS__unionAllPaths : Dynamic) : (cast (cast (cast getPathBooleanBackend() : PathBooleanBackend) : PathBooleanBackend).computePathBoolean(({ final __callArgument213:Dynamic = contours; __callArgument213; }), ({ final __callArgument214:Dynamic = _PathBoolean.EMPTY_CONTOURS__unionAllPaths; __callArgument214; }), ({ final __callArgument215:Dynamic = 'union'; __callArgument215; }), ({ final __callArgument216:Dynamic = fillRule; __callArgument216; })) : Dynamic));
-    path = _Runtime.coalesce(out, function():Dynamic return cast (cast createPath(({ final __callArgument217:Dynamic = 'nonZero'; __callArgument217; })) : Path));
+    result = ((cast _Runtime.strictEquals(_Runtime.field(contours, 'length'), 0.0) : Bool) ? (cast _PathBoolean.EMPTY_CONTOURS__unionAllPaths : Dynamic) : (cast (cast (cast getPathBooleanBackend() : PathBooleanBackend) : PathBooleanBackend).computePathBoolean(({ final __callArgument215:Dynamic = contours; __callArgument215; }), ({ final __callArgument216:Dynamic = _PathBoolean.EMPTY_CONTOURS__unionAllPaths; __callArgument216; }), ({ final __callArgument217:Dynamic = 'union'; __callArgument217; }), ({ final __callArgument218:Dynamic = fillRule; __callArgument218; })) : Dynamic));
+    path = _Runtime.coalesce(out, function():Dynamic return cast (cast createPath(({ final __callArgument219:Dynamic = 'nonZero'; __callArgument219; })) : Path));
     _Runtime.setLength((cast path : Path).commands, 0.0);
     _Runtime.setLength((cast path : Path).data, 0.0);
     ((cast path : Path).winding = 'nonZero');
     for (ring in _Runtime.iterable(result)) {
       if ((cast ((cast _Runtime.field(ring, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { continue; }
-      appendPathMoveTo(({ final __callArgument221:Dynamic = path; __callArgument221; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 0.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 1.0 : Float)) : Float));
+      appendPathMoveTo(({ final __callArgument223:Dynamic = path; __callArgument223; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 0.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 1.0 : Float)) : Float));
       {
         var i:Float = 2.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(ring, 'length') : Float)) : Bool)) {
-          appendPathLineTo(({ final __callArgument223:Dynamic = path; __callArgument223; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast i : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast (i + 1.0) : Float)) : Float));
+          appendPathLineTo(({ final __callArgument225:Dynamic = path; __callArgument225; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast i : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast (i + 1.0) : Float)) : Float));
           (i = cast ((i + 2.0) : Dynamic));
         }
       }
-      appendPathClose(({ final __callArgument225:Dynamic = path; __callArgument225; }));
+      appendPathClose(({ final __callArgument227:Dynamic = path; __callArgument227; }));
     }
     return cast path;
     return cast null;

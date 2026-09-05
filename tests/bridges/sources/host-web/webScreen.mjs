@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWebScreenCapabilities = api.createWebScreenCapabilities;
+export const initializeWebScreenCapabilities = api.initializeWebScreenCapabilities;
 export const webScreenCapabilities = api.webScreenCapabilities;

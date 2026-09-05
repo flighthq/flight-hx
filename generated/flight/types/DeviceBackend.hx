@@ -4,4 +4,30 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef DeviceBackend = { var getCapabilities:DeviceCapabilities->DeviceCapabilities; var getDisplayMetrics:DeviceDisplayMetrics->DeviceDisplayMetrics; var getId:Void->String; var getInfo:DeviceInfo->DeviceInfo; var getSafeAreaInsets:SafeAreaInsets->SafeAreaInsets; @:optional var refresh:Void->Void; };
+#if !flight_struct_typedef
+@:allow(flight._HostCapacitor)
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class DeviceBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var getCapabilities:DeviceCapabilities->DeviceCapabilities;
+  public var getDisplayMetrics:DeviceDisplayMetrics->DeviceDisplayMetrics;
+  public var getId:Void->String;
+  public var getInfo:DeviceInfo->DeviceInfo;
+  public var getSafeAreaInsets:SafeAreaInsets->SafeAreaInsets;
+  public var refresh:Null<Void->Void>;
+
+  private function new(getCapabilities:DeviceCapabilities->DeviceCapabilities, getDisplayMetrics:DeviceDisplayMetrics->DeviceDisplayMetrics, getId:Void->String, getInfo:DeviceInfo->DeviceInfo, getSafeAreaInsets:SafeAreaInsets->SafeAreaInsets, ?refresh:Null<Void->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getCapabilities = getCapabilities;
+    this.getDisplayMetrics = getDisplayMetrics;
+    this.getId = getId;
+    this.getInfo = getInfo;
+    this.getSafeAreaInsets = getSafeAreaInsets;
+    this.refresh = refresh;
+  }
+}
+#else
+typedef DeviceBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getCapabilities:DeviceCapabilities->DeviceCapabilities; var getDisplayMetrics:DeviceDisplayMetrics->DeviceDisplayMetrics; var getId:Void->String; var getInfo:DeviceInfo->DeviceInfo; var getSafeAreaInsets:SafeAreaInsets->SafeAreaInsets; @:optional var refresh:Void->Void; };
+#end

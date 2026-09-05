@@ -8,3 +8,6 @@ __syncDependencies();
 export const createSpritesheetAnimationData = api.createSpritesheetAnimationData;
 export const createSpritesheetData = api.createSpritesheetData;
 export const createSpritesheetFrameData = api.createSpritesheetFrameData;
+export const initializeSpritesheetAnimationData = api.initializeSpritesheetAnimationData;
+export const initializeSpritesheetData = api.initializeSpritesheetData;
+export const initializeSpritesheetFrameData = api.initializeSpritesheetFrameData;

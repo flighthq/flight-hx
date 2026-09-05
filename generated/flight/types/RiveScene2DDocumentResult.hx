@@ -4,4 +4,25 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef RiveScene2DDocumentResult = { var imageResources:Array<ImageResourceReference>; var imported:RiveDocumentImportResult; var root:DisplayObject; var slots:Array<Scene2DSlotReference>; };
+#if !flight_struct_typedef
+@:allow(flight._Scene2DFormats)
+@:keep
+@:structInit
+class RiveScene2DDocumentResult {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var imageResources:Array<ImageResourceReference>;
+  public var imported:RiveDocumentImportResult;
+  public var root:DisplayObject;
+  public var slots:Array<Scene2DSlotReference>;
+
+  private function new(imageResources:Array<ImageResourceReference>, imported:RiveDocumentImportResult, root:DisplayObject, slots:Array<Scene2DSlotReference>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.imageResources = imageResources;
+    this.imported = imported;
+    this.root = root;
+    this.slots = slots;
+  }
+}
+#else
+typedef RiveScene2DDocumentResult = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var imageResources:Array<ImageResourceReference>; var imported:RiveDocumentImportResult; var root:DisplayObject; var slots:Array<Scene2DSlotReference>; };
+#end

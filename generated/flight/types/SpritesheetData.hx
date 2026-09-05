@@ -4,4 +4,29 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SpritesheetData = { var animations:Array<SpritesheetAnimationData>; var frames:Array<SpritesheetFrameData>; var imageFile:String; var imageHeight:Float; var imageWidth:Float; var scale:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Spritesheet)
+@:keep
+@:structInit
+class SpritesheetData {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var animations:Array<SpritesheetAnimationData>;
+  public var frames:Array<SpritesheetFrameData>;
+  public var imageFile:String;
+  public var imageHeight:Float;
+  public var imageWidth:Float;
+  public var scale:Float;
+
+  private function new(animations:Array<SpritesheetAnimationData>, frames:Array<SpritesheetFrameData>, imageFile:String, imageHeight:Float, imageWidth:Float, scale:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.animations = animations;
+    this.frames = frames;
+    this.imageFile = imageFile;
+    this.imageHeight = imageHeight;
+    this.imageWidth = imageWidth;
+    this.scale = scale;
+  }
+}
+#else
+typedef SpritesheetData = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var animations:Array<SpritesheetAnimationData>; var frames:Array<SpritesheetFrameData>; var imageFile:String; var imageHeight:Float; var imageWidth:Float; var scale:Float; };
+#end

@@ -4,4 +4,24 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef RimModifier = { var kind:String; var slot:String; var color:Float; @:optional var power:Float; @:optional var intensity:Float; @:optional var bias:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Shading)
+@:keep
+@:structInit
+class RimModifier extends flight.types.Modifier<String, String> {
+  public var color:Float;
+  public var power:Null<Float>;
+  public var intensity:Null<Float>;
+  public var bias:Null<Float>;
+
+  private function new(kind:String, slot:String, color:Float, ?power:Null<Float>, ?intensity:Null<Float>, ?bias:Null<Float>):Void {
+    super(kind, slot);
+    this.color = color;
+    this.power = power;
+    this.intensity = intensity;
+    this.bias = bias;
+  }
+}
+#else
+typedef RimModifier = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var slot:String; var color:Float; @:optional var power:Float; @:optional var intensity:Float; @:optional var bias:Float; };
+#end

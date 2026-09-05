@@ -4,3 +4,8 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './inputManager.mjs';
+export { initializeInputKeyRepeatTimer } from './inputManager.mjs';
+export { initializeInputManager } from './inputManager.mjs';
+export { initializeInputSignals } from './inputManager.mjs';
+export { initializeInputState } from './inputManager.mjs';
+export { initializeWebInputIngressBackend } from './inputManager.mjs';

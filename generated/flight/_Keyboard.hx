@@ -3,10 +3,12 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
 import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.HasSoftKeyboardAccessoryBar;
 import flight.types.HasSoftKeyboardChange;
 import flight.types.HasSoftKeyboardInfo;
@@ -35,7 +37,7 @@ import flight.types.SoftKeyboardVisibilityResult;
 @:allow(flight._Keyboard)
 @:keep
 @:structInit
-private class EntityShapeL51C23__keyboard {
+private class EntityShapeL52C15__keyboard {
   public var onShow:Signal<Float->Void>;
   public var onHide:Signal<Void->Void>;
   public var onResize:Signal<Float->Void>;
@@ -49,7 +51,7 @@ private class EntityShapeL51C23__keyboard {
   }
 }
 #else
-private typedef EntityShapeL51C23__keyboard = { var onShow:Signal<Float->Void>; var onHide:Signal<Void->Void>; var onResize:Signal<Float->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL52C15__keyboard = { var onShow:Signal<Float->Void>; var onHide:Signal<Void->Void>; var onResize:Signal<Float->Void>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 @:noCompletion
@@ -104,7 +106,10 @@ class _Keyboard {
   }
 
   public static function createSoftKeyboard():{ >SoftKeyboard, >Entity, } {
-    return cast (cast createEntity((cast ({ onShow: (cast (cast createSignal() : Signal<Float->Void>) : Dynamic), onHide: (cast (cast createSignal() : Signal<Void->Void>) : Dynamic), onResize: (cast (cast createSignal() : Signal<Float->Void>) : Dynamic) } : EntityShapeL51C23__keyboard) : Dynamic)) : EntityShapeL51C23__keyboard);
+    var out:EntityConstruction<{ >SoftKeyboard, >Entity, }> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ onShow: cast _Runtime.UNDEFINED, onHide: cast _Runtime.UNDEFINED, onResize: cast _Runtime.UNDEFINED } : EntityShapeL52C15__keyboard); }) #end));
+    initializeSoftKeyboard(({ final __callArgument12:Dynamic = out; __callArgument12; }));
+    return cast out;
     return cast null;
   }
 
@@ -118,16 +123,16 @@ class _Keyboard {
   }
 
   public static function disposeSoftKeyboard(keyboard:SoftKeyboard):Void {
-    detachSoftKeyboard(({ final __callArgument12:Dynamic = keyboard; __callArgument12; }));
+    detachSoftKeyboard(({ final __callArgument14:Dynamic = keyboard; __callArgument14; }));
   }
 
   public static function getSoftKeyboardHeight(host:HasSoftKeyboardInfo):Float {
-    return cast (cast (cast (cast (cast host : HasSoftKeyboardInfo).input : { var softKeyboardInfo:SoftKeyboardInfoBackend; }).softKeyboardInfo : SoftKeyboardInfoBackend).getInfo(({ final __callArgument14:Dynamic = _Keyboard._scratch__keyboard; __callArgument14; })) : { var height:Float; }).height;
+    return cast (cast (cast (cast (cast host : HasSoftKeyboardInfo).input : { var softKeyboardInfo:SoftKeyboardInfoBackend; }).softKeyboardInfo : SoftKeyboardInfoBackend).getInfo(({ final __callArgument16:Dynamic = _Keyboard._scratch__keyboard; __callArgument16; })) : { var height:Float; }).height;
     return cast null;
   }
 
   public static function getSoftKeyboardInfo(host:HasSoftKeyboardInfo, out:SoftKeyboardInfo):SoftKeyboardInfo {
-    return cast (cast (cast (cast host : HasSoftKeyboardInfo).input : { var softKeyboardInfo:SoftKeyboardInfoBackend; }).softKeyboardInfo : SoftKeyboardInfoBackend).getInfo(({ final __callArgument15:Dynamic = out; __callArgument15; }));
+    return cast (cast (cast (cast host : HasSoftKeyboardInfo).input : { var softKeyboardInfo:SoftKeyboardInfoBackend; }).softKeyboardInfo : SoftKeyboardInfoBackend).getInfo(({ final __callArgument17:Dynamic = out; __callArgument17; }));
     return cast null;
   }
 
@@ -136,8 +141,16 @@ class _Keyboard {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeSoftKeyboard(out:EntityConstruction<{ >SoftKeyboard, >Entity, }>):Void {
+    _Runtime.setField(out, 'onHide', (cast createSignal() : Signal<Void->Void>));
+    _Runtime.setField(out, 'onResize', (cast createSignal() : Signal<Float->Void>));
+    _Runtime.setField(out, 'onShow', (cast createSignal() : Signal<Float->Void>));
+  }
+
   public static function isSoftKeyboardVisible(host:HasSoftKeyboardInfo):Bool {
-    return cast (cast (cast (cast (cast host : HasSoftKeyboardInfo).input : { var softKeyboardInfo:SoftKeyboardInfoBackend; }).softKeyboardInfo : SoftKeyboardInfoBackend).getInfo(({ final __callArgument16:Dynamic = _Keyboard._scratch__keyboard; __callArgument16; })) : { var visible:Bool; }).visible;
+    return cast (cast (cast (cast (cast host : HasSoftKeyboardInfo).input : { var softKeyboardInfo:SoftKeyboardInfoBackend; }).softKeyboardInfo : SoftKeyboardInfoBackend).getInfo(({ final __callArgument18:Dynamic = _Keyboard._scratch__keyboard; __callArgument18; })) : { var visible:Bool; }).visible;
     return cast null;
   }
 

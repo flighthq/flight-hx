@@ -4,4 +4,31 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef EmbeddedAudioResourceReference = { var failure:Null<AudioResourceFailure>; var mimeType:Null<String>; var name:Null<String>; var resource:AudioResource; var state:ResourceResolutionState; var kind:String; var bytes:flight._internal._UInt8Array; };
+#if !flight_struct_typedef
+@:allow(flight._Audio)
+@:keep
+@:structInit
+class EmbeddedAudioResourceReference {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var failure:Null<AudioResourceFailure>;
+  public var mimeType:Null<String>;
+  public var name:Null<String>;
+  public var resource:AudioResource;
+  public var state:ResourceResolutionState;
+  public var kind:String;
+  public var bytes:flight._internal._UInt8Array;
+
+  private function new(failure:Null<AudioResourceFailure>, mimeType:Null<String>, name:Null<String>, resource:AudioResource, state:ResourceResolutionState, kind:String, bytes:flight._internal._UInt8Array):Void {
+    this.__symbol__EntityRuntime = null;
+    this.failure = failure;
+    this.mimeType = mimeType;
+    this.name = name;
+    this.resource = resource;
+    this.state = state;
+    this.kind = kind;
+    this.bytes = bytes;
+  }
+}
+#else
+typedef EmbeddedAudioResourceReference = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var failure:Null<AudioResourceFailure>; var mimeType:Null<String>; var name:Null<String>; var resource:AudioResource; var state:ResourceResolutionState; var kind:String; var bytes:flight._internal._UInt8Array; };
+#end

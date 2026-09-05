@@ -11,6 +11,7 @@ export const createAudioMixer = api.createAudioMixer;
 export const destroyAudioMixer = api.destroyAudioMixer;
 export const fadeAudioBusGain = api.fadeAudioBusGain;
 export const getAudioMixerActiveChannels = api.getAudioMixerActiveChannels;
+export const initializeAudioBus = api.initializeAudioBus;
 export const pauseAllAudioMixerChannels = api.pauseAllAudioMixerChannels;
 export const resumeAllAudioMixerChannels = api.resumeAllAudioMixerChannels;
 export const routeAudioChannelToMixerBus = api.routeAudioChannelToMixerBus;

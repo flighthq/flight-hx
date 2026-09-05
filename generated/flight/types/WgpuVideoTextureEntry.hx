@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuVideoTextureEntry = { var mipLevelCount:Float; @:optional var straightAlpha:Bool; var texture:flight._internal.dom.GPUTexture; var view:flight._internal.dom.GPUTextureView; var bindings:WgpuTextureBindings; var sampler:flight._internal.dom.GPUSampler; var height:Float; var uploadedVersion:Float; var width:Float; };
+#if !flight_struct_typedef
+@:allow(flight._RenderWgpu)
+@:keep
+@:structInit
+class WgpuVideoTextureEntry extends flight.types.WgpuTextureEntry {
+  public var height:Float;
+  public var uploadedVersion:Float;
+  public var width:Float;
+
+  private function new(mipLevelCount:Float, ?straightAlpha:Null<Bool>, texture:flight._internal.dom.GPUTexture, view:flight._internal.dom.GPUTextureView, bindings:WgpuTextureBindings, sampler:flight._internal.dom.GPUSampler, height:Float, uploadedVersion:Float, width:Float):Void {
+    super(mipLevelCount, straightAlpha, texture, view, bindings, sampler);
+    this.height = height;
+    this.uploadedVersion = uploadedVersion;
+    this.width = width;
+  }
+}
+#else
+typedef WgpuVideoTextureEntry = { var mipLevelCount:Float; @:optional var straightAlpha:Bool; var texture:flight._internal.dom.GPUTexture; var view:flight._internal.dom.GPUTextureView; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var bindings:WgpuTextureBindings; var sampler:flight._internal.dom.GPUSampler; var height:Float; var uploadedVersion:Float; var width:Float; };
+#end

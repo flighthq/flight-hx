@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const createViewport = api.createViewport;
 export const getViewportAspect = api.getViewportAspect;
+export const initializeViewport = api.initializeViewport;

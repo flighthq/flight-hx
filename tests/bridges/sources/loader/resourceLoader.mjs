@@ -13,6 +13,7 @@ export const getResourceLoadBytes = api.getResourceLoadBytes;
 export const getResourceLoadCounts = api.getResourceLoadCounts;
 export const getResourceLoadItemStatus = api.getResourceLoadItemStatus;
 export const getResourceLoadProgress = api.getResourceLoadProgress;
+export const initializeResourceLoader = api.initializeResourceLoader;
 export const pauseResourceLoad = api.pauseResourceLoad;
 export const queueResourceLoad = api.queueResourceLoad;
 export const resetResourceLoader = api.resetResourceLoader;

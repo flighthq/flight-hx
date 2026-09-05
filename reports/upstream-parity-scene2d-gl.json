@@ -1,19 +1,31 @@
 {
-  "completedAt": "2026-08-20T19:31:17.224Z",
+  "completedAt": "2026-09-05T04:15:21.368Z",
   "failedPackages": 0,
-  "jobs": 12,
+  "fixedSinceReview": 0,
+  "infrastructureFailures": 0,
+  "jobs": 3,
   "packages": [
     {
-      "durationMs": 823031,
+      "durationMs": 106110,
       "exitCode": 0,
+      "isolationRecovered": false,
       "package": "scene2d-gl",
       "signal": null,
       "status": "passed",
-      "summary": "220 passed (220)",
-      "testFiles": 28
+      "summary": "254 passed (254)",
+      "testFiles": 30,
+      "review": {
+        "baselineReport": "reports/upstream-parity.json",
+        "reviewedAt": "2026-08-21T03:43:35.613Z",
+        "status": "passed",
+        "unreviewedFailures": 0
+      }
     }
   ],
-  "schemaVersion": 1,
+  "reviewedFailures": 0,
+  "schemaVersion": 2,
   "selectedPackage": "scene2d-gl",
-  "startedAt": "2026-08-20T19:17:34.190Z"
+  "startedAt": "2026-09-05T04:13:34.720Z",
+  "strict": false,
+  "unreviewedFailures": 0
 }

@@ -6,5 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWebRaster2DSurfaceProvider = api.createWebRaster2DSurfaceProvider;
-export const enableHostWebRaster2DSurface = api.enableHostWebRaster2DSurface;
-export const resetHostWebRaster2DSurfaceForTest = api.resetHostWebRaster2DSurfaceForTest;
+export const initializeWebRaster2DSurfaceProvider = api.initializeWebRaster2DSurfaceProvider;
+export const webRaster2DSurfaceProvider = api.webRaster2DSurfaceProvider;

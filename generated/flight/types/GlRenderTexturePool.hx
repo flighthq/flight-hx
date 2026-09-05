@@ -4,4 +4,27 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlRenderTexturePool = { var context:Null<GlContext>; var destroyed:Bool; var effectTargets:GlRenderTargetPool; var free:Array<RenderTexture>; var leased:flight._internal._Set<RenderTexture>; };
+#if !flight_struct_typedef
+@:allow(flight._RenderGl)
+@:keep
+@:structInit
+class GlRenderTexturePool {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var context:Null<GlContext>;
+  public var destroyed:Bool;
+  public var effectTargets:GlRenderTargetPool;
+  public var free:Array<RenderTexture>;
+  public var leased:flight._internal._Set<RenderTexture>;
+
+  private function new(context:Null<GlContext>, destroyed:Bool, effectTargets:GlRenderTargetPool, free:Array<RenderTexture>, leased:flight._internal._Set<RenderTexture>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.context = context;
+    this.destroyed = destroyed;
+    this.effectTargets = effectTargets;
+    this.free = free;
+    this.leased = leased;
+  }
+}
+#else
+typedef GlRenderTexturePool = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var context:Null<GlContext>; var destroyed:Bool; var effectTargets:GlRenderTargetPool; var free:Array<RenderTexture>; var leased:flight._internal._Set<RenderTexture>; };
+#end

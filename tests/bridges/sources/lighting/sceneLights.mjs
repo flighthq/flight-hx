@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createScene3DLights = api.createScene3DLights;
+export const initializeScene3DLights = api.initializeScene3DLights;

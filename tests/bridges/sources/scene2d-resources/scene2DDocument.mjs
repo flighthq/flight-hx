@@ -7,3 +7,5 @@ __syncDependencies();
 
 export const createScene2DDocument = api.createScene2DDocument;
 export const createScene2DSlotReference = api.createScene2DSlotReference;
+export const initializeScene2DDocument = api.initializeScene2DDocument;
+export const initializeScene2DSlotReference = api.initializeScene2DSlotReference;

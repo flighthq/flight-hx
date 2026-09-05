@@ -4,4 +4,29 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuRenderEffectPipeline = { var options:RenderEffectPipelineOptions; var sceneTarget:Null<WgpuRenderTarget>; var pool:WgpuRenderTargetPool; var lutCache:ColorLutCache; var lutTexture:WgpuColorLutTextureCache; var velocityTexture:Null<flight._internal.dom.GPUTexture>; };
+#if !flight_struct_typedef
+@:allow(flight._EffectsWgpu)
+@:keep
+@:structInit
+class WgpuRenderEffectPipeline {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var options:RenderEffectPipelineOptions;
+  public var sceneTarget:Null<WgpuRenderTarget>;
+  public var pool:WgpuRenderTargetPool;
+  public var lutCache:ColorLutCache;
+  public var lutTexture:WgpuColorLutTextureCache;
+  public var velocityTexture:Null<flight._internal.dom.GPUTexture>;
+
+  private function new(options:RenderEffectPipelineOptions, sceneTarget:Null<WgpuRenderTarget>, pool:WgpuRenderTargetPool, lutCache:ColorLutCache, lutTexture:WgpuColorLutTextureCache, velocityTexture:Null<flight._internal.dom.GPUTexture>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.options = options;
+    this.sceneTarget = sceneTarget;
+    this.pool = pool;
+    this.lutCache = lutCache;
+    this.lutTexture = lutTexture;
+    this.velocityTexture = velocityTexture;
+  }
+}
+#else
+typedef WgpuRenderEffectPipeline = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var options:RenderEffectPipelineOptions; var sceneTarget:Null<WgpuRenderTarget>; var pool:WgpuRenderTargetPool; var lutCache:ColorLutCache; var lutTexture:WgpuColorLutTextureCache; var velocityTexture:Null<flight._internal.dom.GPUTexture>; };
+#end

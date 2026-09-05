@@ -22,6 +22,7 @@ import flight.types.LambertMaterial;
 import flight.types.MatcapMaterial;
 import flight.types.Material;
 import flight.types.MaterialAlphaMode;
+import flight.types.NonEntityCreateResult;
 import flight.types.NormalMaterial;
 import flight.types.PbrExtension;
 import flight.types.PbrUvSet;
@@ -229,7 +230,7 @@ class Materials {
     return cast null;
   }
 
-  public static function createStandardPbrMaterialProperties(?opts:{ @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterialProperties {
+  public static function createStandardPbrMaterialProperties(?opts:{ @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):NonEntityCreateResult<StandardPbrMaterialProperties, String> {
     return cast Facade_Materials_flight__Materials.createStandardPbrMaterialProperties(opts);
     return cast null;
   }

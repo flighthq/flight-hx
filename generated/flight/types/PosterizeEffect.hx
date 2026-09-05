@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef PosterizeEffect = { var kind:String; @:optional var levels:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class PosterizeEffect extends flight.types.RenderEffect<String> {
+  public var levels:Null<Float>;
+
+  private function new(kind:String, ?levels:Null<Float>):Void {
+    super(kind);
+    this.levels = levels;
+  }
+}
+#else
+typedef PosterizeEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var levels:Float; };
+#end

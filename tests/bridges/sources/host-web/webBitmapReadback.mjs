@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWebBitmapReadbackBackend = api.createWebBitmapReadbackBackend;
-export const enableHostWebBitmapReadback = api.enableHostWebBitmapReadback;
+export const initializeWebBitmapReadbackBackend = api.initializeWebBitmapReadbackBackend;
+export const webBitmapReadbackBackend = api.webBitmapReadbackBackend;

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef PathAttachment2D = { var kind:String; @:optional var name:Null<String>; var commands:Array<Float>; var pointCount:Float; @:optional var skin:Null<Skin2D>; @:optional var vertices:Null<flight._internal._Float32Array>; var winding:PathWinding; };
+typedef PathAttachment2D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var name:Null<String>; var commands:Array<Float>; var pointCount:Float; @:optional var skin:Null<Skin2D>; @:optional var vertices:Null<flight._internal._Float32Array>; var winding:PathWinding; };

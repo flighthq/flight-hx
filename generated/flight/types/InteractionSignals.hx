@@ -4,4 +4,53 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef InteractionSignals = { var onClick:Signal<PointerEventData->Void>; var onContextMenu:Signal<PointerEventData->Void>; var onDoubleClick:Signal<PointerEventData->Void>; var onFocusIn:Signal<FocusEventData->Void>; var onFocusOut:Signal<FocusEventData->Void>; var onKeyDown:Signal<KeyboardEventData->Void>; var onKeyUp:Signal<KeyboardEventData->Void>; var onPointerCancel:Signal<PointerEventData->Void>; var onPointerDoubleClick:Signal<PointerEventData->Void>; var onPointerDown:Signal<PointerEventData->Void>; var onPointerMove:Signal<PointerEventData->Void>; var onPointerOut:Signal<PointerEventData->Void>; var onPointerOver:Signal<PointerEventData->Void>; var onPointerRollOut:Signal<PointerEventData->Void>; var onPointerRollOver:Signal<PointerEventData->Void>; var onPointerUp:Signal<PointerEventData->Void>; var onReleaseOutside:Signal<PointerEventData->Void>; var onWheel:Signal<PointerEventData->Void>; };
+#if !flight_struct_typedef
+@:allow(flight._Interaction)
+@:keep
+@:structInit
+class InteractionSignals {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onClick:Signal<PointerEventData->Void>;
+  public var onContextMenu:Signal<PointerEventData->Void>;
+  public var onDoubleClick:Signal<PointerEventData->Void>;
+  public var onFocusIn:Signal<FocusEventData->Void>;
+  public var onFocusOut:Signal<FocusEventData->Void>;
+  public var onKeyDown:Signal<KeyboardEventData->Void>;
+  public var onKeyUp:Signal<KeyboardEventData->Void>;
+  public var onPointerCancel:Signal<PointerEventData->Void>;
+  public var onPointerDoubleClick:Signal<PointerEventData->Void>;
+  public var onPointerDown:Signal<PointerEventData->Void>;
+  public var onPointerMove:Signal<PointerEventData->Void>;
+  public var onPointerOut:Signal<PointerEventData->Void>;
+  public var onPointerOver:Signal<PointerEventData->Void>;
+  public var onPointerRollOut:Signal<PointerEventData->Void>;
+  public var onPointerRollOver:Signal<PointerEventData->Void>;
+  public var onPointerUp:Signal<PointerEventData->Void>;
+  public var onReleaseOutside:Signal<PointerEventData->Void>;
+  public var onWheel:Signal<PointerEventData->Void>;
+
+  private function new(onClick:Signal<PointerEventData->Void>, onContextMenu:Signal<PointerEventData->Void>, onDoubleClick:Signal<PointerEventData->Void>, onFocusIn:Signal<FocusEventData->Void>, onFocusOut:Signal<FocusEventData->Void>, onKeyDown:Signal<KeyboardEventData->Void>, onKeyUp:Signal<KeyboardEventData->Void>, onPointerCancel:Signal<PointerEventData->Void>, onPointerDoubleClick:Signal<PointerEventData->Void>, onPointerDown:Signal<PointerEventData->Void>, onPointerMove:Signal<PointerEventData->Void>, onPointerOut:Signal<PointerEventData->Void>, onPointerOver:Signal<PointerEventData->Void>, onPointerRollOut:Signal<PointerEventData->Void>, onPointerRollOver:Signal<PointerEventData->Void>, onPointerUp:Signal<PointerEventData->Void>, onReleaseOutside:Signal<PointerEventData->Void>, onWheel:Signal<PointerEventData->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onClick = onClick;
+    this.onContextMenu = onContextMenu;
+    this.onDoubleClick = onDoubleClick;
+    this.onFocusIn = onFocusIn;
+    this.onFocusOut = onFocusOut;
+    this.onKeyDown = onKeyDown;
+    this.onKeyUp = onKeyUp;
+    this.onPointerCancel = onPointerCancel;
+    this.onPointerDoubleClick = onPointerDoubleClick;
+    this.onPointerDown = onPointerDown;
+    this.onPointerMove = onPointerMove;
+    this.onPointerOut = onPointerOut;
+    this.onPointerOver = onPointerOver;
+    this.onPointerRollOut = onPointerRollOut;
+    this.onPointerRollOver = onPointerRollOver;
+    this.onPointerUp = onPointerUp;
+    this.onReleaseOutside = onReleaseOutside;
+    this.onWheel = onWheel;
+  }
+}
+#else
+typedef InteractionSignals = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onClick:Signal<PointerEventData->Void>; var onContextMenu:Signal<PointerEventData->Void>; var onDoubleClick:Signal<PointerEventData->Void>; var onFocusIn:Signal<FocusEventData->Void>; var onFocusOut:Signal<FocusEventData->Void>; var onKeyDown:Signal<KeyboardEventData->Void>; var onKeyUp:Signal<KeyboardEventData->Void>; var onPointerCancel:Signal<PointerEventData->Void>; var onPointerDoubleClick:Signal<PointerEventData->Void>; var onPointerDown:Signal<PointerEventData->Void>; var onPointerMove:Signal<PointerEventData->Void>; var onPointerOut:Signal<PointerEventData->Void>; var onPointerOver:Signal<PointerEventData->Void>; var onPointerRollOut:Signal<PointerEventData->Void>; var onPointerRollOver:Signal<PointerEventData->Void>; var onPointerUp:Signal<PointerEventData->Void>; var onReleaseOutside:Signal<PointerEventData->Void>; var onWheel:Signal<PointerEventData->Void>; };
+#end

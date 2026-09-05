@@ -18,6 +18,7 @@ export const getTextureUvMatrix = api.getTextureUvMatrix;
 export const getTextureWidth = api.getTextureWidth;
 export const hasTextureSource = api.hasTextureSource;
 export const hasTextureUvTransform = api.hasTextureUvTransform;
+export const initializeTexture2D = api.initializeTexture2D;
 export const isTextureReady = api.isTextureReady;
 export const resetTextureUvTransform = api.resetTextureUvTransform;
 export const setTextureFlip = api.setTextureFlip;

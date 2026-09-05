@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CustomShaderEffect = { var kind:String; var shaderKey:String; @:optional var uniforms:flight._internal._Record<String, flight._internal._Union2<Float, Array<Float>>>; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class CustomShaderEffect extends flight.types.RenderEffect<String> {
+  public var shaderKey:String;
+  public var uniforms:Null<flight._internal._Record<String, flight._internal._Union2<Float, Array<Float>>>>;
+
+  private function new(kind:String, shaderKey:String, ?uniforms:Null<flight._internal._Record<String, flight._internal._Union2<Float, Array<Float>>>>):Void {
+    super(kind);
+    this.shaderKey = shaderKey;
+    this.uniforms = uniforms;
+  }
+}
+#else
+typedef CustomShaderEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var shaderKey:String; @:optional var uniforms:flight._internal._Record<String, flight._internal._Union2<Float, Array<Float>>>; };
+#end

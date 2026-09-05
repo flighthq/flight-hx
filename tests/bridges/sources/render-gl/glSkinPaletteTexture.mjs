@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const createGlSkinPaletteTexture = api.createGlSkinPaletteTexture;
 export const destroyGlSkinPaletteTexture = api.destroyGlSkinPaletteTexture;
+export const initializeGlSkinPaletteTexture = api.initializeGlSkinPaletteTexture;
 export const uploadGlSkinPaletteTexture = api.uploadGlSkinPaletteTexture;

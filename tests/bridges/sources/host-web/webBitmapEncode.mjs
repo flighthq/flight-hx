@@ -5,4 +5,6 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebBitmapEncode = api.enableHostWebBitmapEncode;
+export const createWebBitmapEncodeBackend = api.createWebBitmapEncodeBackend;
+export const initializeWebBitmapEncodeBackend = api.initializeWebBitmapEncodeBackend;
+export const webBitmapEncodeBackend = api.webBitmapEncodeBackend;

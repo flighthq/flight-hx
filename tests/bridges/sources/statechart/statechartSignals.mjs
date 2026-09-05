@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const enableStatechartSignals = api.enableStatechartSignals;
 export const getStatechartSignals = api.getStatechartSignals;
+export const initializeStatechartSignals = api.initializeStatechartSignals;

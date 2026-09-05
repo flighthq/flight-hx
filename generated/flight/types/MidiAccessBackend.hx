@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class MidiAccessBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var requestAccess:Void->flight._internal._Promise<MidiAccessRequestOutcome>;
+
+  private function new(requestAccess:Void->flight._internal._Promise<MidiAccessRequestOutcome>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.requestAccess = requestAccess;
+  }
+}
+#else
 typedef MidiAccessBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var requestAccess:Void->flight._internal._Promise<MidiAccessRequestOutcome>; };
+#end

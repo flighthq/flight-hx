@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createLookupTableGradeAdjustment = api.createLookupTableGradeAdjustment;
+export const initializeLookupTableGradeAdjustment = api.initializeLookupTableGradeAdjustment;

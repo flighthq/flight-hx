@@ -5,6 +5,8 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight.Types.ParticleEmitter2DKind;
 import flight.Types.ParticleEmitter3DKind;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Geometry.copyRectangle;
 import flight._Geometry.createRectangle;
 import flight._Geometry.reserveFloat32Array;
@@ -29,6 +31,8 @@ import flight._Scene3D.getNode3DRuntime;
 import flight._Types.ParticleEmitter2DKind;
 import flight._Types.ParticleEmitter3DKind;
 import flight.types.AabbLike;
+import flight.types.EntityConstruction;
+import flight.types.EntityRuntime;
 import flight.types.Matrix;
 import flight.types.Matrix4Like;
 import flight.types.MethodsOf;
@@ -653,7 +657,7 @@ class _ParticleEmitter {
   }
 
   public static function createParticleEmitter2D(?obj:PartialNode<ParticleEmitter2D>):ParticleEmitter2D {
-    return cast (cast createNode2D((cast ParticleEmitter2DKind : String), ({ final __callArgument86:Dynamic = obj; __callArgument86; }), (cast createParticleEmitterData : Dynamic), (cast function(__unused1:Dynamic):ParticleEmitter2DRuntime return createParticleEmitter2DRuntime() : Dynamic), function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : ParticleEmitter2D); }) #end)) : ParticleEmitter2D);
+    return cast (cast createNode2D((cast ParticleEmitter2DKind : String), ({ final __callArgument86:Dynamic = obj; __callArgument86; }), (cast createParticleEmitterData : Dynamic), (cast function(__unused1:Dynamic):ParticleEmitter2DRuntime return createParticleEmitter2DRuntime() : Dynamic), function():Dynamic return (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : ParticleEmitter2D); }) #end)) : ParticleEmitter2D);
     return cast null;
   }
 
@@ -669,8 +673,11 @@ class _ParticleEmitter {
 
   @:allow(flight)
   @:keep
-  private static function createParticleEmitterData(?data:{ @:optional var alphas:Null<flight._internal._Float32Array>; @:optional var atlas:Null<TextureAtlas>; @:optional var colors:Null<flight._internal._Float32Array>; @:optional var ids:Null<flight._internal._UInt16Array>; @:optional var particleCount:Null<Float>; @:optional var positionsZ:Null<flight._internal._Float32Array>; @:optional var transforms:Null<flight._internal._Float32Array>; @:optional var velocities:Null<flight._internal._Float32Array>; @:optional var worldSpace:Null<Bool>; }):ParticleEmitterData {
-    return cast { alphas: _Runtime.coalesce(({ final __structural88 = data; __structural88 == null ? _Runtime.UNDEFINED : (cast __structural88 : { @:optional var alphas:Null<flight._internal._Float32Array>; }).alphas; }), function():Dynamic return cast new flight._internal._Float32Array()), atlas: _Runtime.coalesce(({ final __structural89 = data; __structural89 == null ? _Runtime.UNDEFINED : (cast __structural89 : { @:optional var atlas:Null<TextureAtlas>; }).atlas; }), function():Dynamic return cast null), colors: _Runtime.coalesce(({ final __structural90 = data; __structural90 == null ? _Runtime.UNDEFINED : (cast __structural90 : { @:optional var colors:Null<flight._internal._Float32Array>; }).colors; }), function():Dynamic return cast new flight._internal._Float32Array()), ids: _Runtime.coalesce(({ final __structural91 = data; __structural91 == null ? _Runtime.UNDEFINED : (cast __structural91 : { @:optional var ids:Null<flight._internal._UInt16Array>; }).ids; }), function():Dynamic return cast new flight._internal._UInt16Array()), particleCount: _Runtime.coalesce(({ final __structural92 = data; __structural92 == null ? _Runtime.UNDEFINED : (cast __structural92 : { @:optional var particleCount:Null<Float>; }).particleCount; }), function():Dynamic return cast 0.0), positionsZ: _Runtime.coalesce(({ final __structural93 = data; __structural93 == null ? _Runtime.UNDEFINED : (cast __structural93 : { @:optional var positionsZ:Null<flight._internal._Float32Array>; }).positionsZ; }), function():Dynamic return cast new flight._internal._Float32Array()), transforms: _Runtime.coalesce(({ final __structural94 = data; __structural94 == null ? _Runtime.UNDEFINED : (cast __structural94 : { @:optional var transforms:Null<flight._internal._Float32Array>; }).transforms; }), function():Dynamic return cast new flight._internal._Float32Array()), velocities: _Runtime.coalesce(({ final __structural95 = data; __structural95 == null ? _Runtime.UNDEFINED : (cast __structural95 : { @:optional var velocities:Null<flight._internal._Float32Array>; }).velocities; }), function():Dynamic return cast new flight._internal._Float32Array()), worldSpace: _Runtime.coalesce(({ final __structural96 = data; __structural96 == null ? _Runtime.UNDEFINED : (cast __structural96 : { @:optional var worldSpace:Null<Bool>; }).worldSpace; }), function():Dynamic return cast false) };
+  private static function createParticleEmitterData(?data:{ @:optional var alphas:Null<flight._internal._Float32Array>; @:optional var atlas:Null<TextureAtlas>; @:optional var colors:Null<flight._internal._Float32Array>; @:optional var ids:Null<flight._internal._UInt16Array>; @:optional var particleCount:Null<Float>; @:optional var positionsZ:Null<flight._internal._Float32Array>; @:optional var transforms:Null<flight._internal._Float32Array>; @:optional var velocities:Null<flight._internal._Float32Array>; @:optional var worldSpace:Null<Bool>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):ParticleEmitterData {
+    var out:EntityConstruction<ParticleEmitterData> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ alphas: cast _Runtime.UNDEFINED, atlas: cast _Runtime.UNDEFINED, colors: cast _Runtime.UNDEFINED, ids: cast _Runtime.UNDEFINED, particleCount: cast _Runtime.UNDEFINED, positionsZ: cast _Runtime.UNDEFINED, transforms: cast _Runtime.UNDEFINED, velocities: cast _Runtime.UNDEFINED, worldSpace: cast _Runtime.UNDEFINED } : ParticleEmitterData); }) #end));
+    initializeParticleEmitterData(({ final __callArgument88:Dynamic = out; __callArgument88; }), (cast data : Dynamic));
+    return cast out;
     return cast null;
   }
 
@@ -708,8 +715,22 @@ class _ParticleEmitter {
   @:allow(flight)
   @:keep
   private static function getParticleEmitter2DRuntime(source:ParticleEmitter2D):ParticleEmitter2DRuntime {
-    return cast (cast getNode2DRuntime(({ final __callArgument97:Dynamic = source; __callArgument97; })) : ParticleEmitter2DRuntime);
+    return cast (cast getNode2DRuntime(({ final __callArgument90:Dynamic = source; __callArgument90; })) : ParticleEmitter2DRuntime);
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeParticleEmitterData(out:EntityConstruction<ParticleEmitterData>, ?data:{ @:optional var alphas:Null<flight._internal._Float32Array>; @:optional var atlas:Null<TextureAtlas>; @:optional var colors:Null<flight._internal._Float32Array>; @:optional var ids:Null<flight._internal._UInt16Array>; @:optional var particleCount:Null<Float>; @:optional var positionsZ:Null<flight._internal._Float32Array>; @:optional var transforms:Null<flight._internal._Float32Array>; @:optional var velocities:Null<flight._internal._Float32Array>; @:optional var worldSpace:Null<Bool>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):Void {
+    _Runtime.setField(out, 'alphas', _Runtime.coalesce(({ final __structural92 = data; __structural92 == null ? _Runtime.UNDEFINED : (cast __structural92 : { @:optional var alphas:Null<flight._internal._Float32Array>; }).alphas; }), function():Dynamic return cast new flight._internal._Float32Array()));
+    _Runtime.setField(out, 'atlas', _Runtime.coalesce(({ final __structural93 = data; __structural93 == null ? _Runtime.UNDEFINED : (cast __structural93 : { @:optional var atlas:Null<TextureAtlas>; }).atlas; }), function():Dynamic return cast null));
+    _Runtime.setField(out, 'colors', _Runtime.coalesce(({ final __structural94 = data; __structural94 == null ? _Runtime.UNDEFINED : (cast __structural94 : { @:optional var colors:Null<flight._internal._Float32Array>; }).colors; }), function():Dynamic return cast new flight._internal._Float32Array()));
+    _Runtime.setField(out, 'ids', _Runtime.coalesce(({ final __structural95 = data; __structural95 == null ? _Runtime.UNDEFINED : (cast __structural95 : { @:optional var ids:Null<flight._internal._UInt16Array>; }).ids; }), function():Dynamic return cast new flight._internal._UInt16Array()));
+    _Runtime.setField(out, 'particleCount', _Runtime.coalesce(({ final __structural96 = data; __structural96 == null ? _Runtime.UNDEFINED : (cast __structural96 : { @:optional var particleCount:Null<Float>; }).particleCount; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'positionsZ', _Runtime.coalesce(({ final __structural97 = data; __structural97 == null ? _Runtime.UNDEFINED : (cast __structural97 : { @:optional var positionsZ:Null<flight._internal._Float32Array>; }).positionsZ; }), function():Dynamic return cast new flight._internal._Float32Array()));
+    _Runtime.setField(out, 'transforms', _Runtime.coalesce(({ final __structural98 = data; __structural98 == null ? _Runtime.UNDEFINED : (cast __structural98 : { @:optional var transforms:Null<flight._internal._Float32Array>; }).transforms; }), function():Dynamic return cast new flight._internal._Float32Array()));
+    _Runtime.setField(out, 'velocities', _Runtime.coalesce(({ final __structural99 = data; __structural99 == null ? _Runtime.UNDEFINED : (cast __structural99 : { @:optional var velocities:Null<flight._internal._Float32Array>; }).velocities; }), function():Dynamic return cast new flight._internal._Float32Array()));
+    _Runtime.setField(out, 'worldSpace', _Runtime.coalesce(({ final __structural100 = data; __structural100 == null ? _Runtime.UNDEFINED : (cast __structural100 : { @:optional var worldSpace:Null<Bool>; }).worldSpace; }), function():Dynamic return cast false));
   }
 
   public static function removeParticleEmitter2DParticle(target:ParticleEmitter2D, index:Float):Void {
@@ -743,7 +764,7 @@ class _ParticleEmitter {
 
   public static function reserveParticleEmitter2D(target:ParticleEmitter2D, capacity:Float):Void {
     var data:ParticleEmitterData = cast _Runtime.UNDEFINED;
-    if ((cast ((cast (cast getParticleEmitter2DCapacity(({ final __callArgument99:Dynamic = target; __callArgument99; })) : Float) : Float) >= (cast capacity : Float)) : Bool)) { return; }
+    if ((cast ((cast (cast getParticleEmitter2DCapacity(({ final __callArgument101:Dynamic = target; __callArgument101; })) : Float) : Float) >= (cast capacity : Float)) : Bool)) { return; }
     data = target.data;
     (data.alphas = cast ((cast reserveFloat32Array(data.alphas, (cast capacity : Float)) : flight._internal._Float32Array) : flight._internal._Float32Array));
     (data.colors = cast ((cast reserveFloat32Array(data.colors, (cast (capacity * 3.0) : Float)) : flight._internal._Float32Array) : flight._internal._Float32Array));
@@ -755,9 +776,9 @@ class _ParticleEmitter {
 
   public static function setParticleEmitter2DLocalBoundsRectangle(target:ParticleEmitter2D, rect:Rectangle):Void {
     var runtime:ParticleEmitter2DRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getNode2DRuntime(({ final __callArgument101:Dynamic = target; __callArgument101; })) : ParticleEmitter2DRuntime);
+    runtime = (cast getNode2DRuntime(({ final __callArgument103:Dynamic = target; __callArgument103; })) : ParticleEmitter2DRuntime);
     if ((cast _Runtime.strictEquals(runtime.localBoundsRectangle, null) : Bool)) { (runtime.localBoundsRectangle = cast ((cast (#if js _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>)) #else createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Rectangle) : Null<Rectangle>)); }
-    copyRectangle(({ final __callArgument103:Dynamic = runtime.localBoundsRectangle; __callArgument103; }), ({ final __callArgument104:Dynamic = rect; __callArgument104; }));
+    copyRectangle(({ final __callArgument105:Dynamic = runtime.localBoundsRectangle; __callArgument105; }), ({ final __callArgument106:Dynamic = rect; __callArgument106; }));
     invalidateNodeLocalBounds((cast target : Dynamic));
   }
 
@@ -816,9 +837,9 @@ class _ParticleEmitter {
     var vt:Float = cast _Runtime.UNDEFINED;
     index = (cast target.data : { var particleCount:Float; }).particleCount;
     needed = (index + 1.0);
-    if ((cast ((cast (cast getParticleEmitter3DCapacity(({ final __callArgument107:Dynamic = target; __callArgument107; })) : Float) : Float) < (cast needed : Float)) : Bool)) {
+    if ((cast ((cast (cast getParticleEmitter3DCapacity(({ final __callArgument109:Dynamic = target; __callArgument109; })) : Float) : Float) < (cast needed : Float)) : Bool)) {
       var newCapacity:Float = HxMath.max(needed, _Runtime.orValue(((cast target.data : { var particleCount:Float; }).particleCount * 2.0), function():Dynamic return cast 8.0));
-      reserveParticleEmitter3D(({ final __callArgument109:Dynamic = target; __callArgument109; }), (cast newCapacity : Float));
+      reserveParticleEmitter3D(({ final __callArgument111:Dynamic = target; __callArgument111; }), (cast newCapacity : Float));
     }
     ((cast target.data : { var particleCount:Float; }).particleCount = cast (needed : Float));
     flight._internal._StaticIndex.writeUint16ArrayTyped((cast (cast target.data : { var ids:flight._internal._UInt16Array; }).ids : flight._internal._UInt16Array), (cast index : Float), (cast id : Float));
@@ -848,7 +869,7 @@ class _ParticleEmitter {
   public static function cloneParticleEmitter3D(source:ParticleEmitter3D):ParticleEmitter3D {
     var src:ParticleEmitterData = cast _Runtime.UNDEFINED;
     src = source.data;
-    return cast (cast createParticleEmitter3D(({ final __callArgument111:Dynamic = { blendMode: source.blendMode, data: { alphas: _Runtime.slice(src.alphas, 0, null), atlas: src.atlas, colors: _Runtime.slice(src.colors, 0, null), ids: _Runtime.slice(src.ids, 0, null), particleCount: src.particleCount, positionsZ: _Runtime.slice(src.positionsZ, 0, null), transforms: _Runtime.slice(src.transforms, 0, null), velocities: _Runtime.slice(src.velocities, 0, null), worldSpace: src.worldSpace } }; __callArgument111; })) : ParticleEmitter3D);
+    return cast (cast createParticleEmitter3D(({ final __callArgument113:Dynamic = { blendMode: source.blendMode, data: { alphas: _Runtime.slice(src.alphas, 0, null), atlas: src.atlas, colors: _Runtime.slice(src.colors, 0, null), ids: _Runtime.slice(src.ids, 0, null), particleCount: src.particleCount, positionsZ: _Runtime.slice(src.positionsZ, 0, null), transforms: _Runtime.slice(src.transforms, 0, null), velocities: _Runtime.slice(src.velocities, 0, null), worldSpace: src.worldSpace } }; __callArgument113; })) : ParticleEmitter3D);
     return cast null;
   }
 
@@ -948,9 +969,9 @@ class _ParticleEmitter {
 
   public static function createParticleEmitter3D(?obj:PartialNode<ParticleEmitter3D>):ParticleEmitter3D {
     var node:ParticleEmitter3D = cast _Runtime.UNDEFINED;
-    node = (cast (cast createNode3D((cast ParticleEmitter3DKind : String), ({ final __callArgument113:Dynamic = obj; __callArgument113; }), function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, position: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scale: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED } : ParticleEmitter3D); }) #end)) : flight._internal._Any) : ParticleEmitter3D);
-    _Runtime.setField(node, 'data', (cast createParticleEmitterData((cast (cast ({ final __structural115 = obj; __structural115 == null ? _Runtime.UNDEFINED : (cast __structural115 : { @:optional var data:Null<{ @:optional var alphas:Null<flight._internal._Float32Array>; @:optional var atlas:Null<TextureAtlas>; @:optional var colors:Null<flight._internal._Float32Array>; @:optional var ids:Null<flight._internal._UInt16Array>; @:optional var particleCount:Null<Float>; @:optional var positionsZ:Null<flight._internal._Float32Array>; @:optional var transforms:Null<flight._internal._Float32Array>; @:optional var velocities:Null<flight._internal._Float32Array>; @:optional var worldSpace:Null<Bool>; }>; }).data; }) : Null<{ @:optional var alphas:Null<flight._internal._Float32Array>; @:optional var atlas:Null<TextureAtlas>; @:optional var colors:Null<flight._internal._Float32Array>; @:optional var ids:Null<flight._internal._UInt16Array>; @:optional var particleCount:Null<Float>; @:optional var positionsZ:Null<flight._internal._Float32Array>; @:optional var transforms:Null<flight._internal._Float32Array>; @:optional var velocities:Null<flight._internal._Float32Array>; @:optional var worldSpace:Null<Bool>; }>) : Dynamic)) : ParticleEmitterData));
-    _Runtime.setField(node, 'blendMode', _Runtime.coalesce(({ final __structural117 = obj; __structural117 == null ? _Runtime.UNDEFINED : (cast __structural117 : { @:optional var blendMode:Null<String>; }).blendMode; }), function():Dynamic return cast 'normal'));
+    node = (cast (cast createNode3D((cast ParticleEmitter3DKind : String), ({ final __callArgument115:Dynamic = obj; __callArgument115; }), function():Dynamic return (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, position: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scale: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED } : ParticleEmitter3D); }) #end)) : flight._internal._Any) : ParticleEmitter3D);
+    _Runtime.setField(node, 'data', (cast createParticleEmitterData((cast (cast ({ final __structural117 = obj; __structural117 == null ? _Runtime.UNDEFINED : (cast __structural117 : { @:optional var data:Null<{ @:optional var alphas:Null<flight._internal._Float32Array>; @:optional var atlas:Null<TextureAtlas>; @:optional var colors:Null<flight._internal._Float32Array>; @:optional var ids:Null<flight._internal._UInt16Array>; @:optional var particleCount:Null<Float>; @:optional var positionsZ:Null<flight._internal._Float32Array>; @:optional var transforms:Null<flight._internal._Float32Array>; @:optional var velocities:Null<flight._internal._Float32Array>; @:optional var worldSpace:Null<Bool>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }>; }).data; }) : Null<{ @:optional var alphas:Null<flight._internal._Float32Array>; @:optional var atlas:Null<TextureAtlas>; @:optional var colors:Null<flight._internal._Float32Array>; @:optional var ids:Null<flight._internal._UInt16Array>; @:optional var particleCount:Null<Float>; @:optional var positionsZ:Null<flight._internal._Float32Array>; @:optional var transforms:Null<flight._internal._Float32Array>; @:optional var velocities:Null<flight._internal._Float32Array>; @:optional var worldSpace:Null<Bool>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }>) : Dynamic)) : ParticleEmitterData));
+    _Runtime.setField(node, 'blendMode', _Runtime.coalesce(({ final __structural119 = obj; __structural119 == null ? _Runtime.UNDEFINED : (cast __structural119 : { @:optional var blendMode:Null<String>; }).blendMode; }), function():Dynamic return cast 'normal'));
     return cast node;
     return cast null;
   }
@@ -1035,7 +1056,7 @@ class _ParticleEmitter {
 
   public static function reserveParticleEmitter3D(target:ParticleEmitter3D, capacity:Float):Void {
     var data:ParticleEmitterData = cast _Runtime.UNDEFINED;
-    if ((cast ((cast (cast getParticleEmitter3DCapacity(({ final __callArgument118:Dynamic = target; __callArgument118; })) : Float) : Float) >= (cast capacity : Float)) : Bool)) { return; }
+    if ((cast ((cast (cast getParticleEmitter3DCapacity(({ final __callArgument120:Dynamic = target; __callArgument120; })) : Float) : Float) >= (cast capacity : Float)) : Bool)) { return; }
     data = target.data;
     (data.alphas = cast ((cast reserveFloat32Array(data.alphas, (cast capacity : Float)) : flight._internal._Float32Array) : flight._internal._Float32Array));
     (data.colors = cast ((cast reserveFloat32Array(data.colors, (cast (capacity * _ParticleEmitter.PARTICLE_COLOR_STRIDE__particleEmitter3D) : Float)) : flight._internal._Float32Array) : flight._internal._Float32Array));
@@ -1088,7 +1109,7 @@ class _ParticleEmitter {
     var transforms:flight._internal._Float32Array = cast _Runtime.UNDEFINED;
     var positionsZ:flight._internal._Float32Array = cast _Runtime.UNDEFINED;
     count = (cast source.data : { var particleCount:Float; }).particleCount;
-    if ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isInteger', cast ([count] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast count : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast getParticleEmitter3DCapacity(({ final __callArgument120:Dynamic = source; __callArgument120; })) : Float) : Float) < (cast count : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(outIndices, 'length') : Float) < (cast count : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(outViewDepths, 'length') : Float) < (cast count : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isInteger', cast ([count] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast count : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast getParticleEmitter3DCapacity(({ final __callArgument122:Dynamic = source; __callArgument122; })) : Float) : Float) < (cast count : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(outIndices, 'length') : Float) < (cast count : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(outViewDepths, 'length') : Float) < (cast count : Float)) : Bool)) : Bool)) {
       return cast false;
     }
     matrix = positionToView.m;
@@ -1109,7 +1130,7 @@ class _ParticleEmitter {
     {
       var start:Float = ((_Runtime.toInt32(count) >> 1) - 1.0);
       while ((cast ((cast start : Float) >= (cast 0.0 : Float)) : Bool)) {
-        _ParticleEmitter.siftParticleDepthMaxHeap__particleEmitter3D(({ final __callArgument122:Dynamic = outIndices; __callArgument122; }), ({ final __callArgument123:Dynamic = outViewDepths; __callArgument123; }), (cast start : Float), (cast count : Float));
+        _ParticleEmitter.siftParticleDepthMaxHeap__particleEmitter3D(({ final __callArgument124:Dynamic = outIndices; __callArgument124; }), ({ final __callArgument125:Dynamic = outViewDepths; __callArgument125; }), (cast start : Float), (cast count : Float));
         start--;
       }
     }
@@ -1119,7 +1140,7 @@ class _ParticleEmitter {
         var first:Float = flight._internal._StaticIndex.readUint32ArrayTyped((cast outIndices : flight._internal._UInt32Array), (cast 0.0 : Float));
         flight._internal._StaticIndex.writeUint32ArrayTyped((cast outIndices : flight._internal._UInt32Array), (cast 0.0 : Float), (cast flight._internal._StaticIndex.readUint32ArrayTyped((cast outIndices : flight._internal._UInt32Array), (cast end : Float)) : Float));
         flight._internal._StaticIndex.writeUint32ArrayTyped((cast outIndices : flight._internal._UInt32Array), (cast end : Float), (cast first : Float));
-        _ParticleEmitter.siftParticleDepthMaxHeap__particleEmitter3D(({ final __callArgument126:Dynamic = outIndices; __callArgument126; }), ({ final __callArgument127:Dynamic = outViewDepths; __callArgument127; }), (cast 0.0 : Float), (cast end : Float));
+        _ParticleEmitter.siftParticleDepthMaxHeap__particleEmitter3D(({ final __callArgument128:Dynamic = outIndices; __callArgument128; }), ({ final __callArgument129:Dynamic = outViewDepths; __callArgument129; }), (cast 0.0 : Float), (cast end : Float));
         end--;
       }
     }
@@ -1142,8 +1163,8 @@ class _ParticleEmitter {
       if ((cast ((cast left : Float) >= (cast length : Float)) : Bool)) { return; }
       var right:Float = (left + 1.0);
       var greater:Float = left;
-      if ((cast ((cast ((cast right : Float) < (cast length : Float)) : Bool) && (cast (cast _ParticleEmitter.isParticleDepthGreater__particleEmitter3D((cast flight._internal._StaticIndex.readUint32ArrayTyped((cast indices : flight._internal._UInt32Array), (cast right : Float)) : Float), (cast flight._internal._StaticIndex.readUint32ArrayTyped((cast indices : flight._internal._UInt32Array), (cast left : Float)) : Float), ({ final __callArgument130:Dynamic = depths; __callArgument130; })) : Bool) : Bool)) : Bool)) { (greater = cast (right : Dynamic)); }
-      if ((cast !(cast (cast _ParticleEmitter.isParticleDepthGreater__particleEmitter3D((cast flight._internal._StaticIndex.readUint32ArrayTyped((cast indices : flight._internal._UInt32Array), (cast greater : Float)) : Float), (cast flight._internal._StaticIndex.readUint32ArrayTyped((cast indices : flight._internal._UInt32Array), (cast root : Float)) : Float), ({ final __callArgument132:Dynamic = depths; __callArgument132; })) : Bool) : Bool) : Bool)) { return; }
+      if ((cast ((cast ((cast right : Float) < (cast length : Float)) : Bool) && (cast (cast _ParticleEmitter.isParticleDepthGreater__particleEmitter3D((cast flight._internal._StaticIndex.readUint32ArrayTyped((cast indices : flight._internal._UInt32Array), (cast right : Float)) : Float), (cast flight._internal._StaticIndex.readUint32ArrayTyped((cast indices : flight._internal._UInt32Array), (cast left : Float)) : Float), ({ final __callArgument132:Dynamic = depths; __callArgument132; })) : Bool) : Bool)) : Bool)) { (greater = cast (right : Dynamic)); }
+      if ((cast !(cast (cast _ParticleEmitter.isParticleDepthGreater__particleEmitter3D((cast flight._internal._StaticIndex.readUint32ArrayTyped((cast indices : flight._internal._UInt32Array), (cast greater : Float)) : Float), (cast flight._internal._StaticIndex.readUint32ArrayTyped((cast indices : flight._internal._UInt32Array), (cast root : Float)) : Float), ({ final __callArgument134:Dynamic = depths; __callArgument134; })) : Bool) : Bool) : Bool)) { return; }
       var swap:Float = flight._internal._StaticIndex.readUint32ArrayTyped((cast indices : flight._internal._UInt32Array), (cast root : Float));
       flight._internal._StaticIndex.writeUint32ArrayTyped((cast indices : flight._internal._UInt32Array), (cast root : Float), (cast flight._internal._StaticIndex.readUint32ArrayTyped((cast indices : flight._internal._UInt32Array), (cast greater : Float)) : Float));
       flight._internal._StaticIndex.writeUint32ArrayTyped((cast indices : flight._internal._UInt32Array), (cast greater : Float), (cast swap : Float));
@@ -1159,7 +1180,7 @@ class _ParticleEmitter {
     elapsed = 0.0;
     while ((cast ((cast elapsed : Float) < (cast duration : Float)) : Bool)) {
       var deltaTime:Float = HxMath.min(step, (duration - elapsed));
-      updateParticleEmitter2D(({ final __callArgument134:Dynamic = emitter; __callArgument134; }), ({ final __callArgument135:Dynamic = state; __callArgument135; }), ({ final __callArgument136:Dynamic = config; __callArgument136; }), (cast deltaTime : Float), ({ final __callArgument137:Dynamic = callbacks; __callArgument137; }));
+      updateParticleEmitter2D(({ final __callArgument136:Dynamic = emitter; __callArgument136; }), ({ final __callArgument137:Dynamic = state; __callArgument137; }), ({ final __callArgument138:Dynamic = config; __callArgument138; }), (cast deltaTime : Float), ({ final __callArgument139:Dynamic = callbacks; __callArgument139; }));
       (elapsed = cast ((elapsed + deltaTime) : Dynamic));
     }
   }
@@ -1172,18 +1193,18 @@ class _ParticleEmitter {
     elapsed = 0.0;
     while ((cast ((cast elapsed : Float) < (cast duration : Float)) : Bool)) {
       var deltaTime:Float = HxMath.min(step, (duration - elapsed));
-      updateParticleEmitter3D(({ final __callArgument142:Dynamic = emitter; __callArgument142; }), ({ final __callArgument143:Dynamic = state; __callArgument143; }), ({ final __callArgument144:Dynamic = config; __callArgument144; }), (cast deltaTime : Float), ({ final __callArgument145:Dynamic = callbacks; __callArgument145; }));
+      updateParticleEmitter3D(({ final __callArgument144:Dynamic = emitter; __callArgument144; }), ({ final __callArgument145:Dynamic = state; __callArgument145; }), ({ final __callArgument146:Dynamic = config; __callArgument146; }), (cast deltaTime : Float), ({ final __callArgument147:Dynamic = callbacks; __callArgument147; }));
       (elapsed = cast ((elapsed + deltaTime) : Dynamic));
     }
   }
 
   public static function stepParticleEmitter2D(emitter:ParticleEmitter2D, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?callbacks:ParticleEmitterCallbacks):Void {
     if ((cast ((cast !_Runtime.looseEquals(forces, null) : Bool) && (cast ((cast _Runtime.field(forces, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      applyParticleForces(({ final __callArgument150:Dynamic = emitter; __callArgument150; }), ({ final __callArgument151:Dynamic = state; __callArgument151; }), ({ final __callArgument152:Dynamic = forces; __callArgument152; }), (cast deltaTime : Float));
+      applyParticleForces(({ final __callArgument152:Dynamic = emitter; __callArgument152; }), ({ final __callArgument153:Dynamic = state; __callArgument153; }), ({ final __callArgument154:Dynamic = forces; __callArgument154; }), (cast deltaTime : Float));
     }
-    updateParticleEmitter2D(({ final __callArgument156:Dynamic = emitter; __callArgument156; }), ({ final __callArgument157:Dynamic = state; __callArgument157; }), ({ final __callArgument158:Dynamic = config; __callArgument158; }), (cast deltaTime : Float), ({ final __callArgument159:Dynamic = callbacks; __callArgument159; }));
+    updateParticleEmitter2D(({ final __callArgument158:Dynamic = emitter; __callArgument158; }), ({ final __callArgument159:Dynamic = state; __callArgument159; }), ({ final __callArgument160:Dynamic = config; __callArgument160; }), (cast deltaTime : Float), ({ final __callArgument161:Dynamic = callbacks; __callArgument161; }));
     if ((cast ((cast !_Runtime.looseEquals(colliders, null) : Bool) && (cast ((cast _Runtime.field(colliders, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      applyParticleCollisions(({ final __callArgument164:Dynamic = emitter; __callArgument164; }), ({ final __callArgument165:Dynamic = state; __callArgument165; }), ({ final __callArgument166:Dynamic = colliders; __callArgument166; }));
+      applyParticleCollisions(({ final __callArgument166:Dynamic = emitter; __callArgument166; }), ({ final __callArgument167:Dynamic = state; __callArgument167; }), ({ final __callArgument168:Dynamic = colliders; __callArgument168; }));
     }
   }
 
@@ -1191,11 +1212,11 @@ class _ParticleEmitter {
     var asEmitter:ParticleEmitter2D = cast _Runtime.UNDEFINED;
     asEmitter = (cast (cast emitter : flight._internal._Any) : ParticleEmitter2D);
     if ((cast ((cast !_Runtime.looseEquals(forces, null) : Bool) && (cast ((cast _Runtime.field(forces, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      applyParticleForces(({ final __callArgument170:Dynamic = asEmitter; __callArgument170; }), ({ final __callArgument171:Dynamic = state; __callArgument171; }), ({ final __callArgument172:Dynamic = forces; __callArgument172; }), (cast deltaTime : Float));
+      applyParticleForces(({ final __callArgument172:Dynamic = asEmitter; __callArgument172; }), ({ final __callArgument173:Dynamic = state; __callArgument173; }), ({ final __callArgument174:Dynamic = forces; __callArgument174; }), (cast deltaTime : Float));
     }
-    updateParticleEmitter3D(({ final __callArgument176:Dynamic = emitter; __callArgument176; }), ({ final __callArgument177:Dynamic = state; __callArgument177; }), ({ final __callArgument178:Dynamic = config; __callArgument178; }), (cast deltaTime : Float), ({ final __callArgument179:Dynamic = callbacks; __callArgument179; }));
+    updateParticleEmitter3D(({ final __callArgument178:Dynamic = emitter; __callArgument178; }), ({ final __callArgument179:Dynamic = state; __callArgument179; }), ({ final __callArgument180:Dynamic = config; __callArgument180; }), (cast deltaTime : Float), ({ final __callArgument181:Dynamic = callbacks; __callArgument181; }));
     if ((cast ((cast !_Runtime.looseEquals(colliders, null) : Bool) && (cast ((cast _Runtime.field(colliders, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      applyParticleCollisions(({ final __callArgument184:Dynamic = asEmitter; __callArgument184; }), ({ final __callArgument185:Dynamic = state; __callArgument185; }), ({ final __callArgument186:Dynamic = colliders; __callArgument186; }));
+      applyParticleCollisions(({ final __callArgument186:Dynamic = asEmitter; __callArgument186; }), ({ final __callArgument187:Dynamic = state; __callArgument187; }), ({ final __callArgument188:Dynamic = colliders; __callArgument188; }));
     }
   }
 
@@ -1300,21 +1321,21 @@ class _ParticleEmitter {
     hasColorWork = ((cast hasColorCurve : Bool) || (cast hasColorGradient : Bool));
     hasRotationSpeed = ((cast !_Runtime.strictEquals(config.rotationSpeedMin, 0.0) : Bool) || (cast !_Runtime.strictEquals(config.rotationSpeedMax, 0.0) : Bool));
     hasFlipbook = ((cast config.frameCount : Float) > (cast 1.0 : Float));
-    onDeath = ({ final __structural190 = callbacks; __structural190 == null ? _Runtime.UNDEFINED : (cast __structural190 : { @:optional var onDeath:Null<Float->Float->Float->Void>; }).onDeath; });
-    onSpawn = ({ final __structural191 = callbacks; __structural191 == null ? _Runtime.UNDEFINED : (cast __structural191 : { @:optional var onSpawn:Null<Float->Float->Float->Void>; }).onSpawn; });
-    signals = (cast getParticleEmitterSignals(({ final __callArgument192:Dynamic = state; __callArgument192; })) : Null<ParticleEmitterSignals>);
+    onDeath = ({ final __structural192 = callbacks; __structural192 == null ? _Runtime.UNDEFINED : (cast __structural192 : { @:optional var onDeath:Null<Float->Float->Float->Void>; }).onDeath; });
+    onSpawn = ({ final __structural193 = callbacks; __structural193 == null ? _Runtime.UNDEFINED : (cast __structural193 : { @:optional var onSpawn:Null<Float->Float->Float->Void>; }).onSpawn; });
+    signals = (cast getParticleEmitterSignals(({ final __callArgument194:Dynamic = state; __callArgument194; })) : Null<ParticleEmitterSignals>);
     liveCount = data.particleCount;
     i = 0.0;
     while ((cast ((cast i : Float) < (cast liveCount : Float)) : Bool)) {
       var lt:Float = (i * 2.0);
-      ({ var __indexedObject194:flight._internal._Float32Array = lifetimes; var __indexedKey195:Float = lt; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject194 : flight._internal._Float32Array), (cast __indexedKey195 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject194 : flight._internal._Float32Array), (cast __indexedKey195 : Float)) + deltaTime) : Float)); });
+      ({ var __indexedObject196:flight._internal._Float32Array = lifetimes; var __indexedKey197:Float = lt; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject196 : flight._internal._Float32Array), (cast __indexedKey197 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject196 : flight._internal._Float32Array), (cast __indexedKey197 : Float)) + deltaTime) : Float)); });
       if ((cast ((cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast lifetimes : flight._internal._Float32Array), (cast lt : Float)) : Float) >= (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast lifetimes : flight._internal._Float32Array), (cast (lt + 1.0) : Float)) : Float)) : Bool)) {
         if ((cast ((cast !_Runtime.strictEquals(onDeath, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(signals, null) : Bool)) : Bool)) {
           var tt:Float = (i * _ParticleEmitter.PARTICLE_TRANSFORM_STRIDE__updateParticleEmitter2D);
           var dx:Float = flight._internal._StaticIndex.readFloat32ArrayTyped((cast data.transforms : flight._internal._Float32Array), (cast tt : Float));
           var dy:Float = flight._internal._StaticIndex.readFloat32ArrayTyped((cast data.transforms : flight._internal._Float32Array), (cast (tt + 1.0) : Float));
           _Runtime.callOptionalValue(onDeath, cast ([dx, dy, 0.0] : Array<Dynamic>));
-          ({ final __optionalOwner199 = ({ final __typedStruct200 = signals; __typedStruct200 == null ? _Runtime.UNDEFINED : (cast __typedStruct200 : { var onParticleDeath:Signal<Float->Float->Float->Void>; }).onParticleDeath; }); if (__optionalOwner199 != null) { final __optionalCall198 = (cast __optionalOwner199 : { var emit:Float->Float->Float->Void; }).emit; if (__optionalCall198 != null) __optionalCall198((cast dx : Float), (cast dy : Float), (cast 0.0 : Float)); } });
+          ({ final __optionalOwner201 = ({ final __typedStruct202 = signals; __typedStruct202 == null ? _Runtime.UNDEFINED : (cast __typedStruct202 : { var onParticleDeath:Signal<Float->Float->Float->Void>; }).onParticleDeath; }); if (__optionalOwner201 != null) { final __optionalCall200 = (cast __optionalOwner201 : { var emit:Float->Float->Float->Void; }).emit; if (__optionalCall200 != null) __optionalCall200((cast dx : Float), (cast dy : Float), (cast 0.0 : Float)); } });
         }
         liveCount--;
         if ((cast ((cast i : Float) < (cast liveCount : Float)) : Bool)) {
@@ -1354,19 +1375,19 @@ class _ParticleEmitter {
         continue;
       }
       var vt:Float = (i * PARTICLE_VELOCITY_STRIDE);
-      ({ var __indexedObject201:flight._internal._Float32Array = velocities; var __indexedKey202:Float = vt; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject201 : flight._internal._Float32Array), (cast __indexedKey202 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject201 : flight._internal._Float32Array), (cast __indexedKey202 : Float)) + gx) : Float)); });
-      ({ var __indexedObject203:flight._internal._Float32Array = velocities; var __indexedKey204:Float = (vt + 1.0); flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject203 : flight._internal._Float32Array), (cast __indexedKey204 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject203 : flight._internal._Float32Array), (cast __indexedKey204 : Float)) + gy) : Float)); });
-      ({ var __indexedObject205:flight._internal._Float32Array = velocities; var __indexedKey206:Float = (vt + 2.0); flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject205 : flight._internal._Float32Array), (cast __indexedKey206 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject205 : flight._internal._Float32Array), (cast __indexedKey206 : Float)) + gz) : Float)); });
+      ({ var __indexedObject203:flight._internal._Float32Array = velocities; var __indexedKey204:Float = vt; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject203 : flight._internal._Float32Array), (cast __indexedKey204 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject203 : flight._internal._Float32Array), (cast __indexedKey204 : Float)) + gx) : Float)); });
+      ({ var __indexedObject205:flight._internal._Float32Array = velocities; var __indexedKey206:Float = (vt + 1.0); flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject205 : flight._internal._Float32Array), (cast __indexedKey206 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject205 : flight._internal._Float32Array), (cast __indexedKey206 : Float)) + gy) : Float)); });
+      ({ var __indexedObject207:flight._internal._Float32Array = velocities; var __indexedKey208:Float = (vt + 2.0); flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject207 : flight._internal._Float32Array), (cast __indexedKey208 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject207 : flight._internal._Float32Array), (cast __indexedKey208 : Float)) + gz) : Float)); });
       var tt:Float = (i * _ParticleEmitter.PARTICLE_TRANSFORM_STRIDE__updateParticleEmitter2D);
-      ({ var __indexedObject207:flight._internal._Float32Array = data.transforms; var __indexedKey208:Float = tt; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject207 : flight._internal._Float32Array), (cast __indexedKey208 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject207 : flight._internal._Float32Array), (cast __indexedKey208 : Float)) + (flight._internal._StaticIndex.readFloat32ArrayTyped((cast velocities : flight._internal._Float32Array), (cast vt : Float)) * deltaTime)) : Float)); });
-      ({ var __indexedObject209:flight._internal._Float32Array = data.transforms; var __indexedKey210:Float = (tt + 1.0); flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject209 : flight._internal._Float32Array), (cast __indexedKey210 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject209 : flight._internal._Float32Array), (cast __indexedKey210 : Float)) + (flight._internal._StaticIndex.readFloat32ArrayTyped((cast velocities : flight._internal._Float32Array), (cast (vt + 1.0) : Float)) * deltaTime)) : Float)); });
-      ({ var __indexedObject211:flight._internal._Float32Array = positionsZ; var __indexedKey212:Float = i; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject211 : flight._internal._Float32Array), (cast __indexedKey212 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject211 : flight._internal._Float32Array), (cast __indexedKey212 : Float)) + (flight._internal._StaticIndex.readFloat32ArrayTyped((cast velocities : flight._internal._Float32Array), (cast (vt + 2.0) : Float)) * deltaTime)) : Float)); });
+      ({ var __indexedObject209:flight._internal._Float32Array = data.transforms; var __indexedKey210:Float = tt; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject209 : flight._internal._Float32Array), (cast __indexedKey210 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject209 : flight._internal._Float32Array), (cast __indexedKey210 : Float)) + (flight._internal._StaticIndex.readFloat32ArrayTyped((cast velocities : flight._internal._Float32Array), (cast vt : Float)) * deltaTime)) : Float)); });
+      ({ var __indexedObject211:flight._internal._Float32Array = data.transforms; var __indexedKey212:Float = (tt + 1.0); flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject211 : flight._internal._Float32Array), (cast __indexedKey212 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject211 : flight._internal._Float32Array), (cast __indexedKey212 : Float)) + (flight._internal._StaticIndex.readFloat32ArrayTyped((cast velocities : flight._internal._Float32Array), (cast (vt + 1.0) : Float)) * deltaTime)) : Float)); });
+      ({ var __indexedObject213:flight._internal._Float32Array = positionsZ; var __indexedKey214:Float = i; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject213 : flight._internal._Float32Array), (cast __indexedKey214 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject213 : flight._internal._Float32Array), (cast __indexedKey214 : Float)) + (flight._internal._StaticIndex.readFloat32ArrayTyped((cast velocities : flight._internal._Float32Array), (cast (vt + 2.0) : Float)) * deltaTime)) : Float)); });
       var lifeFraction:Float = (flight._internal._StaticIndex.readFloat32ArrayTyped((cast lifetimes : flight._internal._Float32Array), (cast lt : Float)) / flight._internal._StaticIndex.readFloat32ArrayTyped((cast lifetimes : flight._internal._Float32Array), (cast (lt + 1.0) : Float)));
-      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.alphas : flight._internal._Float32Array), (cast i : Float), (cast ((cast hasAlphaCurve : Bool) ? (cast (cast sampleParticleCurve(({ final __callArgument213:Dynamic = alphaCurve; __callArgument213; }), (cast lifeFraction : Float)) : Float) : Dynamic) : (cast (config.alphaStart + ((config.alphaEnd - config.alphaStart) * lifeFraction)) : Dynamic)) : Float));
+      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.alphas : flight._internal._Float32Array), (cast i : Float), (cast ((cast hasAlphaCurve : Bool) ? (cast (cast sampleParticleCurve(({ final __callArgument215:Dynamic = alphaCurve; __callArgument215; }), (cast lifeFraction : Float)) : Float) : Dynamic) : (cast (config.alphaStart + ((config.alphaEnd - config.alphaStart) * lifeFraction)) : Dynamic)) : Float));
       if ((cast hasColorWork : Bool)) {
         var ct:Float = (i * 3.0);
         if ((cast hasColorCurve : Bool)) {
-          sampleParticleColorCurve(({ final __callArgument215:Dynamic = data.colors; __callArgument215; }), (cast ct : Float), ({ final __callArgument216:Dynamic = colorCurve; __callArgument216; }), (cast lifeFraction : Float));
+          sampleParticleColorCurve(({ final __callArgument217:Dynamic = data.colors; __callArgument217; }), (cast ct : Float), ({ final __callArgument218:Dynamic = colorCurve; __callArgument218; }), (cast lifeFraction : Float));
         } else { if ((cast hasColorVariance : Bool)) {
           flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.colors : flight._internal._Float32Array), (cast ct : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast state.colorBirth : flight._internal._Float32Array), (cast ct : Float)) + ((flight._internal._StaticIndex.readFloat32ArrayTyped((cast state.colorDeath : flight._internal._Float32Array), (cast ct : Float)) - flight._internal._StaticIndex.readFloat32ArrayTyped((cast state.colorBirth : flight._internal._Float32Array), (cast ct : Float))) * lifeFraction)) : Float));
           flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.colors : flight._internal._Float32Array), (cast (ct + 1.0) : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast state.colorBirth : flight._internal._Float32Array), (cast (ct + 1.0) : Float)) + ((flight._internal._StaticIndex.readFloat32ArrayTyped((cast state.colorDeath : flight._internal._Float32Array), (cast (ct + 1.0) : Float)) - flight._internal._StaticIndex.readFloat32ArrayTyped((cast state.colorBirth : flight._internal._Float32Array), (cast (ct + 1.0) : Float))) * lifeFraction)) : Float));
@@ -1378,11 +1399,11 @@ class _ParticleEmitter {
         } }
       }
       if ((cast hasScaleAnim : Bool)) {
-        var scaleFactor:Float = ((cast hasScaleCurve : Bool) ? (cast (cast sampleParticleCurve(({ final __callArgument219:Dynamic = scaleCurve; __callArgument219; }), (cast lifeFraction : Float)) : Float) : Dynamic) : (cast (1.0 + ((config.scaleEnd - 1.0) * lifeFraction)) : Dynamic));
+        var scaleFactor:Float = ((cast hasScaleCurve : Bool) ? (cast (cast sampleParticleCurve(({ final __callArgument221:Dynamic = scaleCurve; __callArgument221; }), (cast lifeFraction : Float)) : Float) : Dynamic) : (cast (1.0 + ((config.scaleEnd - 1.0) * lifeFraction)) : Dynamic));
         flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flight._internal._Float32Array), (cast (tt + 3.0) : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast scales : flight._internal._Float32Array), (cast i : Float)) * scaleFactor) : Float));
       }
       if ((cast hasRotationSpeed : Bool)) {
-        ({ var __indexedObject221:flight._internal._Float32Array = data.transforms; var __indexedKey222:Float = (tt + 2.0); flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject221 : flight._internal._Float32Array), (cast __indexedKey222 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject221 : flight._internal._Float32Array), (cast __indexedKey222 : Float)) + (flight._internal._StaticIndex.readFloat32ArrayTyped((cast rotationSpeeds : flight._internal._Float32Array), (cast i : Float)) * deltaTime)) : Float)); });
+        ({ var __indexedObject223:flight._internal._Float32Array = data.transforms; var __indexedKey224:Float = (tt + 2.0); flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject223 : flight._internal._Float32Array), (cast __indexedKey224 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject223 : flight._internal._Float32Array), (cast __indexedKey224 : Float)) + (flight._internal._StaticIndex.readFloat32ArrayTyped((cast rotationSpeeds : flight._internal._Float32Array), (cast i : Float)) * deltaTime)) : Float)); });
       }
       if ((cast hasFlipbook : Bool)) {
         var frame:Float = _Runtime.fmod(HxMath.floor((flight._internal._StaticIndex.readFloat32ArrayTyped((cast lifetimes : flight._internal._Float32Array), (cast lt : Float)) * config.frameRate)), config.frameCount);
@@ -1391,7 +1412,7 @@ class _ParticleEmitter {
       i++;
     }
     (data.particleCount = cast (liveCount : Float));
-    emitting = (cast _ParticleEmitter.isEmitting__updateParticleEmitter2D(({ final __callArgument223:Dynamic = config; __callArgument223; }), (cast state.emitterAge : Float)) : Bool);
+    emitting = (cast _ParticleEmitter.isEmitting__updateParticleEmitter2D(({ final __callArgument225:Dynamic = config; __callArgument225; }), (cast state.emitterAge : Float)) : Bool);
     if ((cast ((cast ((cast config.duration : Float) > (cast 0.0 : Float)) : Bool) && (cast !(cast config.loop : Bool) : Bool)) : Bool)) { (state.emitterAge += deltaTime); }
     (state.spawnAccumulator += ((cast emitting : Bool) ? (cast (config.spawnRate * deltaTime) : Dynamic) : (cast 0.0 : Dynamic)));
     toSpawn = HxMath.floor(state.spawnAccumulator);
@@ -1407,8 +1428,8 @@ class _ParticleEmitter {
     if ((cast ((cast toSpawn : Float) > (cast maxNew : Float)) : Bool)) { (toSpawn = cast (maxNew : Dynamic)); }
     if ((cast ((cast toSpawn : Float) > (cast 0.0 : Float)) : Bool)) {
       var newCount:Float = (liveCount + toSpawn);
-      reserveParticleEmitter2D(({ final __callArgument225:Dynamic = emitter; __callArgument225; }), (cast newCount : Float));
-      ensureParticleEmitterStateCapacity(({ final __callArgument227:Dynamic = state; __callArgument227; }), (cast newCount : Float), (cast hasColorVariance : Bool));
+      reserveParticleEmitter2D(({ final __callArgument227:Dynamic = emitter; __callArgument227; }), (cast newCount : Float));
+      ensureParticleEmitterStateCapacity(({ final __callArgument229:Dynamic = state; __callArgument229; }), (cast newCount : Float), (cast hasColorVariance : Bool));
       var baseAngle:Float = HxMath.atan2(config.directionY, config.directionX);
       var regionRange:Float = (config.regionIdMax - config.regionIdMin);
       var regionIdMin:Float = config.regionIdMin;
@@ -1498,7 +1519,7 @@ class _ParticleEmitter {
             (vx = cast (_Runtime.multiplyNumbers(HxMath.cos(angle), speed) : Dynamic));
             (vy = cast (_Runtime.multiplyNumbers(HxMath.sin(angle), speed) : Dynamic));
             (vz = cast (0.0 : Dynamic));
-            writeParticleSpawnOffset(({ final __callArgument229:Dynamic = _ParticleEmitter.PARTICLE_SPAWN_OFFSET__updateParticleEmitter2D; __callArgument229; }), (cast 0.0 : Float), ({ final __callArgument230:Dynamic = config; __callArgument230; }), state.random);
+            writeParticleSpawnOffset(({ final __callArgument231:Dynamic = _ParticleEmitter.PARTICLE_SPAWN_OFFSET__updateParticleEmitter2D; __callArgument231; }), (cast 0.0 : Float), ({ final __callArgument232:Dynamic = config; __callArgument232; }), state.random);
             (spawnX = cast (flight._internal._StaticIndex.readFloatArrayTyped((cast _ParticleEmitter.PARTICLE_SPAWN_OFFSET__updateParticleEmitter2D : Array<Float>), (cast 0.0 : Float)) : Dynamic));
             (spawnY = cast (flight._internal._StaticIndex.readFloatArrayTyped((cast _ParticleEmitter.PARTICLE_SPAWN_OFFSET__updateParticleEmitter2D : Array<Float>), (cast 1.0 : Float)) : Dynamic));
           } }
@@ -1531,12 +1552,12 @@ class _ParticleEmitter {
           flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flight._internal._Float32Array), (cast (tt + 1.0) : Float), (cast spawnY : Float));
           var spawnAngle:Float = ((cast ((cast _Runtime.strictEquals(shape, 'sphere') : Bool) || (cast _Runtime.strictEquals(shape, 'cone3d') : Bool)) : Bool) ? (cast baseAngle : Dynamic) : (cast (baseAngle + ((_Runtime.subtractNumbers((state.random)(), 0.5) * 2.0) * config.spread)) : Dynamic));
           flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flight._internal._Float32Array), (cast (tt + 2.0) : Float), (cast ((cast ((cast ((cast _Runtime.strictEquals(shape, 'sphere') : Bool) || (cast _Runtime.strictEquals(shape, 'cone3d') : Bool)) : Bool) || (cast _Runtime.strictEquals(shape, 'box') : Bool)) : Bool) ? (cast HxMath.atan2(vy, vx) : Dynamic) : (cast spawnAngle : Dynamic)) : Float));
-          flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flight._internal._Float32Array), (cast (tt + 3.0) : Float), (cast ((cast hasScaleCurve : Bool) ? (cast (spawnScale * (cast sampleParticleCurve(({ final __callArgument233:Dynamic = scaleCurve; __callArgument233; }), (cast 0.0 : Float)) : Float)) : Dynamic) : (cast spawnScale : Dynamic)) : Float));
+          flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flight._internal._Float32Array), (cast (tt + 3.0) : Float), (cast ((cast hasScaleCurve : Bool) ? (cast (spawnScale * (cast sampleParticleCurve(({ final __callArgument235:Dynamic = scaleCurve; __callArgument235; }), (cast 0.0 : Float)) : Float)) : Dynamic) : (cast spawnScale : Dynamic)) : Float));
           flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.positionsZ : flight._internal._Float32Array), (cast idx : Float), (cast spawnZ : Float));
-          flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.alphas : flight._internal._Float32Array), (cast idx : Float), (cast ((cast hasAlphaCurve : Bool) ? (cast (cast sampleParticleCurve(({ final __callArgument235:Dynamic = alphaCurve; __callArgument235; }), (cast 0.0 : Float)) : Float) : Dynamic) : (cast config.alphaStart : Dynamic)) : Float));
+          flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.alphas : flight._internal._Float32Array), (cast idx : Float), (cast ((cast hasAlphaCurve : Bool) ? (cast (cast sampleParticleCurve(({ final __callArgument237:Dynamic = alphaCurve; __callArgument237; }), (cast 0.0 : Float)) : Float) : Dynamic) : (cast config.alphaStart : Dynamic)) : Float));
           var ct:Float = (idx * 3.0);
           if ((cast hasColorCurve : Bool)) {
-            sampleParticleColorCurve(({ final __callArgument237:Dynamic = data.colors; __callArgument237; }), (cast ct : Float), ({ final __callArgument238:Dynamic = colorCurve; __callArgument238; }), (cast 0.0 : Float));
+            sampleParticleColorCurve(({ final __callArgument239:Dynamic = data.colors; __callArgument239; }), (cast ct : Float), ({ final __callArgument240:Dynamic = colorCurve; __callArgument240; }), (cast 0.0 : Float));
           } else { if ((cast hasColorVariance : Bool)) {
             var r0:Float = (cast _ParticleEmitter.clamp01__updateParticleEmitter2D((cast (colorStartR + ((_Runtime.subtractNumbers((state.random)(), 0.5) * 2.0) * config.colorStartVarianceR)) : Float)) : Float);
             var g0:Float = (cast _ParticleEmitter.clamp01__updateParticleEmitter2D((cast (colorStartG + ((_Runtime.subtractNumbers((state.random)(), 0.5) * 2.0) * config.colorStartVarianceG)) : Float)) : Float);
@@ -1584,7 +1605,7 @@ class _ParticleEmitter {
         }
       }
     }
-    if ((cast ((cast !_Runtime.strictEquals(signals, null) : Bool) && (cast (cast isParticleEmitter2DComplete(({ final __callArgument241:Dynamic = emitter; __callArgument241; }), ({ final __callArgument242:Dynamic = state; __callArgument242; }), ({ final __callArgument243:Dynamic = config; __callArgument243; })) : Bool) : Bool)) : Bool)) {
+    if ((cast ((cast !_Runtime.strictEquals(signals, null) : Bool) && (cast (cast isParticleEmitter2DComplete(({ final __callArgument243:Dynamic = emitter; __callArgument243; }), ({ final __callArgument244:Dynamic = state; __callArgument244; }), ({ final __callArgument245:Dynamic = config; __callArgument245; })) : Bool) : Bool)) : Bool)) {
       ((cast (cast signals : { var onEmitterComplete:Signal<Void->Void>; }).onEmitterComplete : { var emit:Void->Void; }).emit)();
     }
     invalidateNodeLocalBounds((cast emitter : Dynamic));
@@ -1747,14 +1768,14 @@ class _ParticleEmitter {
     hasColorWork = ((cast hasColorCurve : Bool) || (cast hasColorGradient : Bool));
     hasRotationSpeed = ((cast !_Runtime.strictEquals(config.rotationSpeedMin, 0.0) : Bool) || (cast !_Runtime.strictEquals(config.rotationSpeedMax, 0.0) : Bool));
     hasFlipbook = ((cast config.frameCount : Float) > (cast 1.0 : Float));
-    signals = (cast getParticleEmitterSignals(({ final __callArgument247:Dynamic = state; __callArgument247; })) : Null<ParticleEmitterSignals>);
-    onDeath = ({ final __structural249 = callbacks; __structural249 == null ? _Runtime.UNDEFINED : (cast __structural249 : { @:optional var onDeath:Null<Float->Float->Float->Void>; }).onDeath; });
-    onSpawn = ({ final __structural250 = callbacks; __structural250 == null ? _Runtime.UNDEFINED : (cast __structural250 : { @:optional var onSpawn:Null<Float->Float->Float->Void>; }).onSpawn; });
+    signals = (cast getParticleEmitterSignals(({ final __callArgument249:Dynamic = state; __callArgument249; })) : Null<ParticleEmitterSignals>);
+    onDeath = ({ final __structural251 = callbacks; __structural251 == null ? _Runtime.UNDEFINED : (cast __structural251 : { @:optional var onDeath:Null<Float->Float->Float->Void>; }).onDeath; });
+    onSpawn = ({ final __structural252 = callbacks; __structural252 == null ? _Runtime.UNDEFINED : (cast __structural252 : { @:optional var onSpawn:Null<Float->Float->Float->Void>; }).onSpawn; });
     liveCount = data.particleCount;
     i = 0.0;
     while ((cast ((cast i : Float) < (cast liveCount : Float)) : Bool)) {
       var lt:Float = (i * 2.0);
-      ({ var __indexedObject251:flight._internal._Float32Array = lifetimes; var __indexedKey252:Float = lt; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject251 : flight._internal._Float32Array), (cast __indexedKey252 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject251 : flight._internal._Float32Array), (cast __indexedKey252 : Float)) + deltaTime) : Float)); });
+      ({ var __indexedObject253:flight._internal._Float32Array = lifetimes; var __indexedKey254:Float = lt; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject253 : flight._internal._Float32Array), (cast __indexedKey254 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject253 : flight._internal._Float32Array), (cast __indexedKey254 : Float)) + deltaTime) : Float)); });
       if ((cast ((cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast lifetimes : flight._internal._Float32Array), (cast lt : Float)) : Float) >= (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast lifetimes : flight._internal._Float32Array), (cast (lt + 1.0) : Float)) : Float)) : Bool)) {
         if ((cast ((cast !_Runtime.strictEquals(onDeath, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(signals, null) : Bool)) : Bool)) {
           var tt:Float = (i * _ParticleEmitter.PARTICLE_TRANSFORM_STRIDE__updateParticleEmitter3D);
@@ -1762,7 +1783,7 @@ class _ParticleEmitter {
           var dy:Float = flight._internal._StaticIndex.readFloat32ArrayTyped((cast data.transforms : flight._internal._Float32Array), (cast (tt + 1.0) : Float));
           var dz:Float = flight._internal._StaticIndex.readFloat32ArrayTyped((cast positionsZ : flight._internal._Float32Array), (cast i : Float));
           _Runtime.callOptionalValue(onDeath, cast ([dx, dy, dz] : Array<Dynamic>));
-          ({ final __optionalOwner256 = ({ final __typedStruct257 = signals; __typedStruct257 == null ? _Runtime.UNDEFINED : (cast __typedStruct257 : { var onParticleDeath:Signal<Float->Float->Float->Void>; }).onParticleDeath; }); if (__optionalOwner256 != null) { final __optionalCall255 = (cast __optionalOwner256 : { var emit:Float->Float->Float->Void; }).emit; if (__optionalCall255 != null) __optionalCall255((cast dx : Float), (cast dy : Float), (cast dz : Float)); } });
+          ({ final __optionalOwner258 = ({ final __typedStruct259 = signals; __typedStruct259 == null ? _Runtime.UNDEFINED : (cast __typedStruct259 : { var onParticleDeath:Signal<Float->Float->Float->Void>; }).onParticleDeath; }); if (__optionalOwner258 != null) { final __optionalCall257 = (cast __optionalOwner258 : { var emit:Float->Float->Float->Void; }).emit; if (__optionalCall257 != null) __optionalCall257((cast dx : Float), (cast dy : Float), (cast dz : Float)); } });
         }
         liveCount--;
         if ((cast ((cast i : Float) < (cast liveCount : Float)) : Bool)) {
@@ -1802,19 +1823,19 @@ class _ParticleEmitter {
         continue;
       }
       var vt:Float = (i * PARTICLE_VELOCITY_STRIDE);
-      ({ var __indexedObject258:flight._internal._Float32Array = velocities; var __indexedKey259:Float = vt; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject258 : flight._internal._Float32Array), (cast __indexedKey259 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject258 : flight._internal._Float32Array), (cast __indexedKey259 : Float)) + gx) : Float)); });
-      ({ var __indexedObject260:flight._internal._Float32Array = velocities; var __indexedKey261:Float = (vt + 1.0); flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject260 : flight._internal._Float32Array), (cast __indexedKey261 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject260 : flight._internal._Float32Array), (cast __indexedKey261 : Float)) + gy) : Float)); });
-      ({ var __indexedObject262:flight._internal._Float32Array = velocities; var __indexedKey263:Float = (vt + 2.0); flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject262 : flight._internal._Float32Array), (cast __indexedKey263 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject262 : flight._internal._Float32Array), (cast __indexedKey263 : Float)) + gz) : Float)); });
+      ({ var __indexedObject260:flight._internal._Float32Array = velocities; var __indexedKey261:Float = vt; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject260 : flight._internal._Float32Array), (cast __indexedKey261 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject260 : flight._internal._Float32Array), (cast __indexedKey261 : Float)) + gx) : Float)); });
+      ({ var __indexedObject262:flight._internal._Float32Array = velocities; var __indexedKey263:Float = (vt + 1.0); flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject262 : flight._internal._Float32Array), (cast __indexedKey263 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject262 : flight._internal._Float32Array), (cast __indexedKey263 : Float)) + gy) : Float)); });
+      ({ var __indexedObject264:flight._internal._Float32Array = velocities; var __indexedKey265:Float = (vt + 2.0); flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject264 : flight._internal._Float32Array), (cast __indexedKey265 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject264 : flight._internal._Float32Array), (cast __indexedKey265 : Float)) + gz) : Float)); });
       var tt:Float = (i * _ParticleEmitter.PARTICLE_TRANSFORM_STRIDE__updateParticleEmitter3D);
-      ({ var __indexedObject264:flight._internal._Float32Array = data.transforms; var __indexedKey265:Float = tt; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject264 : flight._internal._Float32Array), (cast __indexedKey265 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject264 : flight._internal._Float32Array), (cast __indexedKey265 : Float)) + (flight._internal._StaticIndex.readFloat32ArrayTyped((cast velocities : flight._internal._Float32Array), (cast vt : Float)) * deltaTime)) : Float)); });
-      ({ var __indexedObject266:flight._internal._Float32Array = data.transforms; var __indexedKey267:Float = (tt + 1.0); flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject266 : flight._internal._Float32Array), (cast __indexedKey267 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject266 : flight._internal._Float32Array), (cast __indexedKey267 : Float)) + (flight._internal._StaticIndex.readFloat32ArrayTyped((cast velocities : flight._internal._Float32Array), (cast (vt + 1.0) : Float)) * deltaTime)) : Float)); });
-      ({ var __indexedObject268:flight._internal._Float32Array = positionsZ; var __indexedKey269:Float = i; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject268 : flight._internal._Float32Array), (cast __indexedKey269 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject268 : flight._internal._Float32Array), (cast __indexedKey269 : Float)) + (flight._internal._StaticIndex.readFloat32ArrayTyped((cast velocities : flight._internal._Float32Array), (cast (vt + 2.0) : Float)) * deltaTime)) : Float)); });
+      ({ var __indexedObject266:flight._internal._Float32Array = data.transforms; var __indexedKey267:Float = tt; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject266 : flight._internal._Float32Array), (cast __indexedKey267 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject266 : flight._internal._Float32Array), (cast __indexedKey267 : Float)) + (flight._internal._StaticIndex.readFloat32ArrayTyped((cast velocities : flight._internal._Float32Array), (cast vt : Float)) * deltaTime)) : Float)); });
+      ({ var __indexedObject268:flight._internal._Float32Array = data.transforms; var __indexedKey269:Float = (tt + 1.0); flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject268 : flight._internal._Float32Array), (cast __indexedKey269 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject268 : flight._internal._Float32Array), (cast __indexedKey269 : Float)) + (flight._internal._StaticIndex.readFloat32ArrayTyped((cast velocities : flight._internal._Float32Array), (cast (vt + 1.0) : Float)) * deltaTime)) : Float)); });
+      ({ var __indexedObject270:flight._internal._Float32Array = positionsZ; var __indexedKey271:Float = i; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject270 : flight._internal._Float32Array), (cast __indexedKey271 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject270 : flight._internal._Float32Array), (cast __indexedKey271 : Float)) + (flight._internal._StaticIndex.readFloat32ArrayTyped((cast velocities : flight._internal._Float32Array), (cast (vt + 2.0) : Float)) * deltaTime)) : Float)); });
       var lifeFraction:Float = (flight._internal._StaticIndex.readFloat32ArrayTyped((cast lifetimes : flight._internal._Float32Array), (cast lt : Float)) / flight._internal._StaticIndex.readFloat32ArrayTyped((cast lifetimes : flight._internal._Float32Array), (cast (lt + 1.0) : Float)));
-      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.alphas : flight._internal._Float32Array), (cast i : Float), (cast ((cast hasAlphaCurve : Bool) ? (cast (cast sampleParticleCurve(({ final __callArgument270:Dynamic = alphaCurve; __callArgument270; }), (cast lifeFraction : Float)) : Float) : Dynamic) : (cast (config.alphaStart + ((config.alphaEnd - config.alphaStart) * lifeFraction)) : Dynamic)) : Float));
+      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.alphas : flight._internal._Float32Array), (cast i : Float), (cast ((cast hasAlphaCurve : Bool) ? (cast (cast sampleParticleCurve(({ final __callArgument272:Dynamic = alphaCurve; __callArgument272; }), (cast lifeFraction : Float)) : Float) : Dynamic) : (cast (config.alphaStart + ((config.alphaEnd - config.alphaStart) * lifeFraction)) : Dynamic)) : Float));
       if ((cast hasColorWork : Bool)) {
         var ct:Float = (i * 3.0);
         if ((cast hasColorCurve : Bool)) {
-          sampleParticleColorCurve(({ final __callArgument272:Dynamic = data.colors; __callArgument272; }), (cast ct : Float), ({ final __callArgument273:Dynamic = colorCurve; __callArgument273; }), (cast lifeFraction : Float));
+          sampleParticleColorCurve(({ final __callArgument274:Dynamic = data.colors; __callArgument274; }), (cast ct : Float), ({ final __callArgument275:Dynamic = colorCurve; __callArgument275; }), (cast lifeFraction : Float));
         } else { if ((cast hasColorVariance : Bool)) {
           flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.colors : flight._internal._Float32Array), (cast ct : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast state.colorBirth : flight._internal._Float32Array), (cast ct : Float)) + ((flight._internal._StaticIndex.readFloat32ArrayTyped((cast state.colorDeath : flight._internal._Float32Array), (cast ct : Float)) - flight._internal._StaticIndex.readFloat32ArrayTyped((cast state.colorBirth : flight._internal._Float32Array), (cast ct : Float))) * lifeFraction)) : Float));
           flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.colors : flight._internal._Float32Array), (cast (ct + 1.0) : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast state.colorBirth : flight._internal._Float32Array), (cast (ct + 1.0) : Float)) + ((flight._internal._StaticIndex.readFloat32ArrayTyped((cast state.colorDeath : flight._internal._Float32Array), (cast (ct + 1.0) : Float)) - flight._internal._StaticIndex.readFloat32ArrayTyped((cast state.colorBirth : flight._internal._Float32Array), (cast (ct + 1.0) : Float))) * lifeFraction)) : Float));
@@ -1826,11 +1847,11 @@ class _ParticleEmitter {
         } }
       }
       if ((cast hasScaleAnim : Bool)) {
-        var scaleFactor:Float = ((cast hasScaleCurve : Bool) ? (cast (cast sampleParticleCurve(({ final __callArgument276:Dynamic = scaleCurve; __callArgument276; }), (cast lifeFraction : Float)) : Float) : Dynamic) : (cast (1.0 + ((config.scaleEnd - 1.0) * lifeFraction)) : Dynamic));
+        var scaleFactor:Float = ((cast hasScaleCurve : Bool) ? (cast (cast sampleParticleCurve(({ final __callArgument278:Dynamic = scaleCurve; __callArgument278; }), (cast lifeFraction : Float)) : Float) : Dynamic) : (cast (1.0 + ((config.scaleEnd - 1.0) * lifeFraction)) : Dynamic));
         flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flight._internal._Float32Array), (cast (tt + 3.0) : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast scales : flight._internal._Float32Array), (cast i : Float)) * scaleFactor) : Float));
       }
       if ((cast hasRotationSpeed : Bool)) {
-        ({ var __indexedObject278:flight._internal._Float32Array = data.transforms; var __indexedKey279:Float = (tt + 2.0); flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject278 : flight._internal._Float32Array), (cast __indexedKey279 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject278 : flight._internal._Float32Array), (cast __indexedKey279 : Float)) + (flight._internal._StaticIndex.readFloat32ArrayTyped((cast rotationSpeeds : flight._internal._Float32Array), (cast i : Float)) * deltaTime)) : Float)); });
+        ({ var __indexedObject280:flight._internal._Float32Array = data.transforms; var __indexedKey281:Float = (tt + 2.0); flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject280 : flight._internal._Float32Array), (cast __indexedKey281 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject280 : flight._internal._Float32Array), (cast __indexedKey281 : Float)) + (flight._internal._StaticIndex.readFloat32ArrayTyped((cast rotationSpeeds : flight._internal._Float32Array), (cast i : Float)) * deltaTime)) : Float)); });
       }
       if ((cast hasFlipbook : Bool)) {
         var frame:Float = _Runtime.fmod(HxMath.floor((flight._internal._StaticIndex.readFloat32ArrayTyped((cast lifetimes : flight._internal._Float32Array), (cast lt : Float)) * config.frameRate)), config.frameCount);
@@ -1839,7 +1860,7 @@ class _ParticleEmitter {
       i++;
     }
     (data.particleCount = cast (liveCount : Float));
-    emitting = (cast _ParticleEmitter.isEmitting__updateParticleEmitter3D(({ final __callArgument280:Dynamic = config; __callArgument280; }), (cast state.emitterAge : Float)) : Bool);
+    emitting = (cast _ParticleEmitter.isEmitting__updateParticleEmitter3D(({ final __callArgument282:Dynamic = config; __callArgument282; }), (cast state.emitterAge : Float)) : Bool);
     if ((cast ((cast ((cast config.duration : Float) > (cast 0.0 : Float)) : Bool) && (cast !(cast config.loop : Bool) : Bool)) : Bool)) { (state.emitterAge += deltaTime); }
     (state.spawnAccumulator += ((cast emitting : Bool) ? (cast (config.spawnRate * deltaTime) : Dynamic) : (cast 0.0 : Dynamic)));
     toSpawn = HxMath.floor(state.spawnAccumulator);
@@ -1855,8 +1876,8 @@ class _ParticleEmitter {
     if ((cast ((cast toSpawn : Float) > (cast maxNew : Float)) : Bool)) { (toSpawn = cast (maxNew : Dynamic)); }
     if ((cast ((cast toSpawn : Float) > (cast 0.0 : Float)) : Bool)) {
       var newCount:Float = (liveCount + toSpawn);
-      reserveParticleEmitter3D(({ final __callArgument282:Dynamic = emitter; __callArgument282; }), (cast newCount : Float));
-      ensureParticleEmitterStateCapacity(({ final __callArgument284:Dynamic = state; __callArgument284; }), (cast newCount : Float), (cast hasColorVariance : Bool));
+      reserveParticleEmitter3D(({ final __callArgument284:Dynamic = emitter; __callArgument284; }), (cast newCount : Float));
+      ensureParticleEmitterStateCapacity(({ final __callArgument286:Dynamic = state; __callArgument286; }), (cast newCount : Float), (cast hasColorVariance : Bool));
       var baseAngle:Float = HxMath.atan2(config.directionY, config.directionX);
       var regionRange:Float = (config.regionIdMax - config.regionIdMin);
       var regionIdMin:Float = config.regionIdMin;
@@ -1947,7 +1968,7 @@ class _ParticleEmitter {
             (vx = cast (_Runtime.multiplyNumbers(HxMath.cos(angle), speed) : Dynamic));
             (vy = cast (_Runtime.multiplyNumbers(HxMath.sin(angle), speed) : Dynamic));
             (vz = cast (0.0 : Dynamic));
-            writeParticleSpawnOffset(({ final __callArgument286:Dynamic = _ParticleEmitter.PARTICLE_SPAWN_OFFSET__updateParticleEmitter3D; __callArgument286; }), (cast 0.0 : Float), ({ final __callArgument287:Dynamic = config; __callArgument287; }), state.random);
+            writeParticleSpawnOffset(({ final __callArgument288:Dynamic = _ParticleEmitter.PARTICLE_SPAWN_OFFSET__updateParticleEmitter3D; __callArgument288; }), (cast 0.0 : Float), ({ final __callArgument289:Dynamic = config; __callArgument289; }), state.random);
             (spawnX = cast (flight._internal._StaticIndex.readFloatArrayTyped((cast _ParticleEmitter.PARTICLE_SPAWN_OFFSET__updateParticleEmitter3D : Array<Float>), (cast 0.0 : Float)) : Dynamic));
             (spawnY = cast (flight._internal._StaticIndex.readFloatArrayTyped((cast _ParticleEmitter.PARTICLE_SPAWN_OFFSET__updateParticleEmitter3D : Array<Float>), (cast 1.0 : Float)) : Dynamic));
           } }
@@ -1985,12 +2006,12 @@ class _ParticleEmitter {
           flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flight._internal._Float32Array), (cast tt : Float), (cast spawnX : Float));
           flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flight._internal._Float32Array), (cast (tt + 1.0) : Float), (cast spawnY : Float));
           flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flight._internal._Float32Array), (cast (tt + 2.0) : Float), (cast ((cast ((cast ((cast _Runtime.strictEquals(shape, 'sphere') : Bool) || (cast _Runtime.strictEquals(shape, 'cone3d') : Bool)) : Bool) || (cast _Runtime.strictEquals(shape, 'box') : Bool)) : Bool) ? (cast HxMath.atan2(vy, vx) : Dynamic) : (cast (baseAngle + ((_Runtime.subtractNumbers((state.random)(), 0.5) * 2.0) * config.spread)) : Dynamic)) : Float));
-          flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flight._internal._Float32Array), (cast (tt + 3.0) : Float), (cast ((cast hasScaleCurve : Bool) ? (cast (spawnScale * (cast sampleParticleCurve(({ final __callArgument290:Dynamic = scaleCurve; __callArgument290; }), (cast 0.0 : Float)) : Float)) : Dynamic) : (cast spawnScale : Dynamic)) : Float));
+          flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.transforms : flight._internal._Float32Array), (cast (tt + 3.0) : Float), (cast ((cast hasScaleCurve : Bool) ? (cast (spawnScale * (cast sampleParticleCurve(({ final __callArgument292:Dynamic = scaleCurve; __callArgument292; }), (cast 0.0 : Float)) : Float)) : Dynamic) : (cast spawnScale : Dynamic)) : Float));
           flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.positionsZ : flight._internal._Float32Array), (cast idx : Float), (cast spawnZ : Float));
-          flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.alphas : flight._internal._Float32Array), (cast idx : Float), (cast ((cast hasAlphaCurve : Bool) ? (cast (cast sampleParticleCurve(({ final __callArgument292:Dynamic = alphaCurve; __callArgument292; }), (cast 0.0 : Float)) : Float) : Dynamic) : (cast config.alphaStart : Dynamic)) : Float));
+          flight._internal._StaticIndex.writeFloat32ArrayTyped((cast data.alphas : flight._internal._Float32Array), (cast idx : Float), (cast ((cast hasAlphaCurve : Bool) ? (cast (cast sampleParticleCurve(({ final __callArgument294:Dynamic = alphaCurve; __callArgument294; }), (cast 0.0 : Float)) : Float) : Dynamic) : (cast config.alphaStart : Dynamic)) : Float));
           var ct:Float = (idx * 3.0);
           if ((cast hasColorCurve : Bool)) {
-            sampleParticleColorCurve(({ final __callArgument294:Dynamic = data.colors; __callArgument294; }), (cast ct : Float), ({ final __callArgument295:Dynamic = colorCurve; __callArgument295; }), (cast 0.0 : Float));
+            sampleParticleColorCurve(({ final __callArgument296:Dynamic = data.colors; __callArgument296; }), (cast ct : Float), ({ final __callArgument297:Dynamic = colorCurve; __callArgument297; }), (cast 0.0 : Float));
           } else { if ((cast hasColorVariance : Bool)) {
             var r0:Float = (cast _ParticleEmitter.clamp01__updateParticleEmitter3D((cast (colorStartR + ((_Runtime.subtractNumbers((state.random)(), 0.5) * 2.0) * config.colorStartVarianceR)) : Float)) : Float);
             var g0:Float = (cast _ParticleEmitter.clamp01__updateParticleEmitter3D((cast (colorStartG + ((_Runtime.subtractNumbers((state.random)(), 0.5) * 2.0) * config.colorStartVarianceG)) : Float)) : Float);
@@ -2036,7 +2057,7 @@ class _ParticleEmitter {
         }
       }
     }
-    if ((cast ((cast !_Runtime.strictEquals(signals, null) : Bool) && (cast (cast isParticleEmitter3DComplete(({ final __callArgument298:Dynamic = emitter; __callArgument298; }), ({ final __callArgument299:Dynamic = state; __callArgument299; }), ({ final __callArgument300:Dynamic = config; __callArgument300; })) : Bool) : Bool)) : Bool)) {
+    if ((cast ((cast !_Runtime.strictEquals(signals, null) : Bool) && (cast (cast isParticleEmitter3DComplete(({ final __callArgument300:Dynamic = emitter; __callArgument300; }), ({ final __callArgument301:Dynamic = state; __callArgument301; }), ({ final __callArgument302:Dynamic = config; __callArgument302; })) : Bool) : Bool)) : Bool)) {
       ((cast (cast signals : { var onEmitterComplete:Signal<Void->Void>; }).onEmitterComplete : { var emit:Void->Void; }).emit)();
     }
   }

@@ -4,5 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-@:noCompletion
-typedef VideoCapabilityOperation = String;
+typedef NonEntityCreateResult<Type, Kind> = flight._internal._Conditional<Kind, String, Type, flight._internal._Any>;

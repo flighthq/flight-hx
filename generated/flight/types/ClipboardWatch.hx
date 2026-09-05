@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ClipboardWatch = { var onChange:Signal<Void->Void>; };
+#if !flight_struct_typedef
+@:allow(flight._Clipboard)
+@:keep
+@:structInit
+class ClipboardWatch {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onChange:Signal<Void->Void>;
+
+  private function new(onChange:Signal<Void->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onChange = onChange;
+  }
+}
+#else
+typedef ClipboardWatch = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onChange:Signal<Void->Void>; };
+#end

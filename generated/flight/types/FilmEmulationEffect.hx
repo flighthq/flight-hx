@@ -4,4 +4,24 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FilmEmulationEffect = { var kind:String; @:optional var gateWeave:Float; @:optional var grainIntensity:Float; @:optional var halationRadius:Float; @:optional var halationStrength:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class FilmEmulationEffect extends flight.types.RenderEffect<String> {
+  public var gateWeave:Null<Float>;
+  public var grainIntensity:Null<Float>;
+  public var halationRadius:Null<Float>;
+  public var halationStrength:Null<Float>;
+
+  private function new(kind:String, ?gateWeave:Null<Float>, ?grainIntensity:Null<Float>, ?halationRadius:Null<Float>, ?halationStrength:Null<Float>):Void {
+    super(kind);
+    this.gateWeave = gateWeave;
+    this.grainIntensity = grainIntensity;
+    this.halationRadius = halationRadius;
+    this.halationStrength = halationStrength;
+  }
+}
+#else
+typedef FilmEmulationEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var gateWeave:Float; @:optional var grainIntensity:Float; @:optional var halationRadius:Float; @:optional var halationStrength:Float; };
+#end

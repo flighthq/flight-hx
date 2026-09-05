@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostCapacitor)
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class SoftKeyboardChangeBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>;
+
+  private function new(subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.subscribe = subscribe;
+  }
+}
+#else
 typedef SoftKeyboardChangeBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>; };
+#end

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Tween<T> = { var complete:Bool; var delay:Float; var duration:Float; var ease:EasingFunction; var elapsed:Float; var initialized:Bool; var onComplete:Signal<Void->Void>; var onRepeat:Signal<Void->Void>; var onUpdate:Signal<Void->Void>; var onYoyo:Signal<Void->Void>; var paused:Bool; var properties:Array<TweenPropertyDetail>; var propertyMap:NumericProps<T>; var reflect:Bool; var repeat:Float; var reverse:Bool; var smartRotation:Bool; var snapping:Bool; var target:T; };
+typedef Tween<T> = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var complete:Bool; var delay:Float; var duration:Float; var ease:EasingFunction; var elapsed:Float; var initialized:Bool; var onComplete:Signal<Void->Void>; var onRepeat:Signal<Void->Void>; var onUpdate:Signal<Void->Void>; var onYoyo:Signal<Void->Void>; var paused:Bool; var properties:Array<TweenPropertyDetail>; var propertyMap:NumericProps<T>; var reflect:Bool; var repeat:Float; var reverse:Bool; var smartRotation:Bool; var snapping:Bool; var target:T; };

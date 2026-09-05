@@ -6,3 +6,4 @@ __syncDependencies();
 export * from './enableSocketGuards.mjs';
 export * from './explainSocketSendFailure.mjs';
 export * from './socket.mjs';
+export { initializeWebSocketBackend } from './socket.mjs';

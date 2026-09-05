@@ -17,6 +17,7 @@ export const hasClipboardHtml = api.hasClipboardHtml;
 export const hasClipboardImage = api.hasClipboardImage;
 export const hasClipboardRTF = api.hasClipboardRTF;
 export const hasClipboardText = api.hasClipboardText;
+export const initializeClipboardWatch = api.initializeClipboardWatch;
 export const readClipboard = api.readClipboard;
 export const readClipboardBookmark = api.readClipboardBookmark;
 export const readClipboardFormat = api.readClipboardFormat;

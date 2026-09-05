@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createCollisionRaycastHit2D = api.createCollisionRaycastHit2D;
+export const initializeCollisionRaycastHit2D = api.initializeCollisionRaycastHit2D;
 export const raycastCollisionShape2D = api.raycastCollisionShape2D;

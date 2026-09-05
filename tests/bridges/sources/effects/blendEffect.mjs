@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createBlendEffect = api.createBlendEffect;
+export const initializeBlendEffect = api.initializeBlendEffect;

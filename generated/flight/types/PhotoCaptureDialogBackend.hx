@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class PhotoCaptureDialogBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var capture:CapturePhotoDialogOptions->flight._internal._Promise<PhotoCaptureDialogResult>;
+
+  private function new(capture:CapturePhotoDialogOptions->flight._internal._Promise<PhotoCaptureDialogResult>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.capture = capture;
+  }
+}
+#else
 typedef PhotoCaptureDialogBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var capture:CapturePhotoDialogOptions->flight._internal._Promise<PhotoCaptureDialogResult>; };
+#end

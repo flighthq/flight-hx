@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlDebugDefineKey = { var hasNormalMap:Bool; @:optional var hasSkin:Bool; var mode:String; };
+typedef GlDebugDefineKey = { @:optional var hasInstances:Bool; var hasNormalMap:Bool; @:optional var hasSkin:Bool; var mode:String; };

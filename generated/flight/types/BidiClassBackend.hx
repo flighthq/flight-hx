@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef BidiClassBackend = { var getBidiClass:Float->BidiClass; };
+#if !flight_struct_typedef
+@:allow(flight._TextBidi)
+@:keep
+@:structInit
+class BidiClassBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var getBidiClass:Float->BidiClass;
+
+  private function new(getBidiClass:Float->BidiClass):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getBidiClass = getBidiClass;
+  }
+}
+#else
+typedef BidiClassBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getBidiClass:Float->BidiClass; };
+#end

@@ -13,6 +13,7 @@ export const disposeNodeOrderList = api.disposeNodeOrderList;
 export const forEachNodeOrderListEntry = api.forEachNodeOrderListEntry;
 export const getNodeOrderListEntrySortKey = api.getNodeOrderListEntrySortKey;
 export const hasNodeOrderListEntry = api.hasNodeOrderListEntry;
+export const initializeNodeOrderList = api.initializeNodeOrderList;
 export const removeNodeOrderListEntry = api.removeNodeOrderListEntry;
 export const setNodeOrderListEntry = api.setNodeOrderListEntry;
 export const setNodeOrderListEntryAbove = api.setNodeOrderListEntryAbove;

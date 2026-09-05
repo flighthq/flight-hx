@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FxaaEffect = { var kind:String; @:optional var edgeThreshold:Float; @:optional var subpixel:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class FxaaEffect extends flight.types.RenderEffect<String> {
+  public var edgeThreshold:Null<Float>;
+  public var subpixel:Null<Float>;
+
+  private function new(kind:String, ?edgeThreshold:Null<Float>, ?subpixel:Null<Float>):Void {
+    super(kind);
+    this.edgeThreshold = edgeThreshold;
+    this.subpixel = subpixel;
+  }
+}
+#else
+typedef FxaaEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var edgeThreshold:Float; @:optional var subpixel:Float; };
+#end

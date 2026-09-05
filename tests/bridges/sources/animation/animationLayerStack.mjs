@@ -9,6 +9,7 @@ export const advanceAnimationLayerStack = api.advanceAnimationLayerStack;
 export const createAnimationBlendTreeLayer = api.createAnimationBlendTreeLayer;
 export const createAnimationLayerStack = api.createAnimationLayerStack;
 export const createAnimationStateMachineLayer = api.createAnimationStateMachineLayer;
+export const initializeAnimationLayerStack = api.initializeAnimationLayerStack;
 export const sampleAnimationLayerStack = api.sampleAnimationLayerStack;
 export const sampleAnimationLayerStackChannel = api.sampleAnimationLayerStackChannel;
 export const setAnimationLayerWeight = api.setAnimationLayerWeight;

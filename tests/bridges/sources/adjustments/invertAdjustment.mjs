@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createInvertAdjustment = api.createInvertAdjustment;
+export const initializeInvertAdjustment = api.initializeInvertAdjustment;

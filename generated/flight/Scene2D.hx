@@ -7,6 +7,7 @@ import flight._Scene2D as Facade_Scene2D_flight__Scene2D;
 import flight.types.AnimationClip;
 import flight.types.ClipRegion;
 import flight.types.DisplayObject;
+import flight.types.Entity;
 import flight.types.HtmlView;
 import flight.types.Kind;
 import flight.types.Node;
@@ -17,6 +18,8 @@ import flight.types.Node2DRuntimeFactory;
 import flight.types.NodeAny;
 import flight.types.PartialNode;
 import flight.types.Rectangle;
+import flight.types.RectangleLike;
+import flight.types.Scale9Sprite;
 import flight.types.Scene2D;
 import flight.types.Scene2DKindUsage;
 import flight.types.Scene2DSignals;
@@ -57,12 +60,17 @@ class Scene2D {
     return cast null;
   }
 
+  public static function createScale9Sprite(scale9Grid:RectangleLike, ?obj:PartialNode<Scale9Sprite>):Scale9Sprite {
+    return cast Facade_Scene2D_flight__Scene2D.createScale9Sprite(scale9Grid, obj);
+    return cast null;
+  }
+
   public static function createScene2D(?obj:flight._internal._Partial<{ var align:ViewportAlign; var color:Null<Float>; var scaleMode:ViewportScaleMode; var scene2dHeight:Float; var scene2dWidth:Float; }>):flight.types.Scene2D {
     return cast Facade_Scene2D_flight__Scene2D.createScene2D(obj);
     return cast null;
   }
 
-  public static function createScene2DKindUsage():Scene2DKindUsage {
+  public static function createScene2DKindUsage():{ >Scene2DKindUsage, >Entity, } {
     return cast Facade_Scene2D_flight__Scene2D.createScene2DKindUsage();
     return cast null;
   }

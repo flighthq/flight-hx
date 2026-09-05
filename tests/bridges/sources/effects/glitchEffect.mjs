@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const createGlitchEffect = api.createGlitchEffect;
 export const getGlitchEffectPadding = api.getGlitchEffectPadding;
+export const initializeGlitchEffect = api.initializeGlitchEffect;
 export const registerGlitchEffectPaddingResolver = api.registerGlitchEffectPaddingResolver;

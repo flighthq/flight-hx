@@ -18,6 +18,7 @@ export const getPowerStatus = api.getPowerStatus;
 export const getPowerSystemIdleState = api.getPowerSystemIdleState;
 export const getPowerSystemIdleTime = api.getPowerSystemIdleTime;
 export const getPowerThermalState = api.getPowerThermalState;
+export const initializePower = api.initializePower;
 export const isPowerKeepAwakeActive = api.isPowerKeepAwakeActive;
 export const makePowerBatteryHealth = api.makePowerBatteryHealth;
 export const makePowerStatus = api.makePowerStatus;

@@ -40,6 +40,7 @@ export * from './wgpuRendererData.mjs';
 export * from './wgpuRichText.mjs';
 export * from './wgpuScale9Mapper.mjs';
 export * from './wgpuScale9Shape.mjs';
+export * from './wgpuScale9Sprite.mjs';
 export * from './wgpuShape.mjs';
 export * from './wgpuShapeData.mjs';
 export * from './wgpuShapeMesh.mjs';
@@ -66,4 +67,5 @@ export { defaultCanvasLineTo as defaultWgpuLineTo } from '@flighthq/scene2d-canv
 export { defaultCanvasMoveTo as defaultWgpuMoveTo } from '@flighthq/scene2d-canvas/contract';
 export { defaultCanvasShapeCommands as defaultWgpuShapeCommands } from '@flighthq/scene2d-canvas/contract';
 export { defaultCanvasTextureShapeCommands as defaultWgpuTextureShapeCommands } from '@flighthq/scene2d-canvas/contract';
+export { initializeWgpuRendererData } from './wgpuRendererData.mjs';
 export { registerCanvasShapeCommands as registerWgpuShapeCommands } from '@flighthq/scene2d-canvas/contract';

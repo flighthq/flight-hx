@@ -4,4 +4,23 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Scene2DSignals = { var onFullscreenChanged:Signal<Void->Void>; var onOrientationChanged:Signal<Void->Void>; var onResize:Signal<Void->Void>; };
+#if !flight_struct_typedef
+@:allow(flight._Scene2D)
+@:keep
+@:structInit
+class Scene2DSignals {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onFullscreenChanged:Signal<Void->Void>;
+  public var onOrientationChanged:Signal<Void->Void>;
+  public var onResize:Signal<Void->Void>;
+
+  private function new(onFullscreenChanged:Signal<Void->Void>, onOrientationChanged:Signal<Void->Void>, onResize:Signal<Void->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onFullscreenChanged = onFullscreenChanged;
+    this.onOrientationChanged = onOrientationChanged;
+    this.onResize = onResize;
+  }
+}
+#else
+typedef Scene2DSignals = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onFullscreenChanged:Signal<Void->Void>; var onOrientationChanged:Signal<Void->Void>; var onResize:Signal<Void->Void>; };
+#end

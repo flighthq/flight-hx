@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const createParticleEmitterState = api.createParticleEmitterState;
 export const ensureParticleEmitterStateCapacity = api.ensureParticleEmitterStateCapacity;
+export const initializeParticleEmitterState = api.initializeParticleEmitterState;
 export const PARTICLE_VELOCITY_STRIDE = api.PARTICLE_VELOCITY_STRIDE;

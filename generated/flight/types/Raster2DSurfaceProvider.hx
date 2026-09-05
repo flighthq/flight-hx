@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Raster2DSurfaceProvider = { var createRaster2DSurface:Float->Float->Null<Raster2DSurface>; var destroyRaster2DSurface:Raster2DSurface->Void; };
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class Raster2DSurfaceProvider {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var createRaster2DSurface:Float->Float->Null<Raster2DSurface>;
+  public var destroyRaster2DSurface:Raster2DSurface->Void;
+
+  private function new(createRaster2DSurface:Float->Float->Null<Raster2DSurface>, destroyRaster2DSurface:Raster2DSurface->Void):Void {
+    this.__symbol__EntityRuntime = null;
+    this.createRaster2DSurface = createRaster2DSurface;
+    this.destroyRaster2DSurface = destroyRaster2DSurface;
+  }
+}
+#else
+typedef Raster2DSurfaceProvider = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var createRaster2DSurface:Float->Float->Null<Raster2DSurface>; var destroyRaster2DSurface:Raster2DSurface->Void; };
+#end

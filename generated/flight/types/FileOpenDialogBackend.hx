@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:allow(flight._HostTauri)
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class FileOpenDialogBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>;
+
+  private function new(open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.open = open;
+  }
+}
+#else
 typedef FileOpenDialogBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; };
+#end

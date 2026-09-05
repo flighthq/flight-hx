@@ -4,4 +4,24 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AutoExposureEffect = { var kind:String; @:optional var adaptationSpeed:Float; @:optional var exposureCompensation:Float; @:optional var maxExposure:Float; @:optional var minExposure:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class AutoExposureEffect extends flight.types.RenderEffect<String> {
+  public var adaptationSpeed:Null<Float>;
+  public var exposureCompensation:Null<Float>;
+  public var maxExposure:Null<Float>;
+  public var minExposure:Null<Float>;
+
+  private function new(kind:String, ?adaptationSpeed:Null<Float>, ?exposureCompensation:Null<Float>, ?maxExposure:Null<Float>, ?minExposure:Null<Float>):Void {
+    super(kind);
+    this.adaptationSpeed = adaptationSpeed;
+    this.exposureCompensation = exposureCompensation;
+    this.maxExposure = maxExposure;
+    this.minExposure = minExposure;
+  }
+}
+#else
+typedef AutoExposureEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var adaptationSpeed:Float; @:optional var exposureCompensation:Float; @:optional var maxExposure:Float; @:optional var minExposure:Float; };
+#end

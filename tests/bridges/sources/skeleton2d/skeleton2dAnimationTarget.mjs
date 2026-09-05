@@ -10,5 +10,7 @@ export const createSkeleton2DSlotAnimationTarget = api.createSkeleton2DSlotAnima
 export const findSkeleton2DStepKeyframe = api.findSkeleton2DStepKeyframe;
 export const getSkeleton2DAnimationTargetBinder = api.getSkeleton2DAnimationTargetBinder;
 export const getSkeleton2DAnimationTargetBinderKinds = api.getSkeleton2DAnimationTargetBinderKinds;
+export const initializeSkeleton2DBoneAnimationTarget = api.initializeSkeleton2DBoneAnimationTarget;
+export const initializeSkeleton2DSlotAnimationTarget = api.initializeSkeleton2DSlotAnimationTarget;
 export const registerSkeleton2DAnimationTargetBinder = api.registerSkeleton2DAnimationTargetBinder;
 export const unregisterSkeleton2DAnimationTargetBinder = api.unregisterSkeleton2DAnimationTargetBinder;

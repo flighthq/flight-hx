@@ -10,4 +10,5 @@ export const computeBloomIntensity = api.computeBloomIntensity;
 export const computeBloomThreshold = api.computeBloomThreshold;
 export const createBloomEffect = api.createBloomEffect;
 export const getBloomEffectPadding = api.getBloomEffectPadding;
+export const initializeBloomEffect = api.initializeBloomEffect;
 export const registerBloomEffectPaddingResolver = api.registerBloomEffectPaddingResolver;

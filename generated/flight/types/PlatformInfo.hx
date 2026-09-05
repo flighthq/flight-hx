@@ -4,4 +4,45 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef PlatformInfo = { var name:PlatformName; var kind:PlatformKind; var version:String; var arch:String; var locale:String; var isTouch:Bool; var runtime:PlatformRuntime; var engine:PlatformEngine; var engineVersion:String; var endianness:PlatformEndianness; var pointerWidth:Float; var osBuild:String; var distro:String; var distroVersion:String; };
+#if !flight_struct_typedef
+@:allow(flight._Platform)
+@:keep
+@:structInit
+class PlatformInfo {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var name:PlatformName;
+  public var kind:PlatformKind;
+  public var version:String;
+  public var arch:String;
+  public var locale:String;
+  public var isTouch:Bool;
+  public var runtime:PlatformRuntime;
+  public var engine:PlatformEngine;
+  public var engineVersion:String;
+  public var endianness:PlatformEndianness;
+  public var pointerWidth:Float;
+  public var osBuild:String;
+  public var distro:String;
+  public var distroVersion:String;
+
+  private function new(name:PlatformName, kind:PlatformKind, version:String, arch:String, locale:String, isTouch:Bool, runtime:PlatformRuntime, engine:PlatformEngine, engineVersion:String, endianness:PlatformEndianness, pointerWidth:Float, osBuild:String, distro:String, distroVersion:String):Void {
+    this.__symbol__EntityRuntime = null;
+    this.name = name;
+    this.kind = kind;
+    this.version = version;
+    this.arch = arch;
+    this.locale = locale;
+    this.isTouch = isTouch;
+    this.runtime = runtime;
+    this.engine = engine;
+    this.engineVersion = engineVersion;
+    this.endianness = endianness;
+    this.pointerWidth = pointerWidth;
+    this.osBuild = osBuild;
+    this.distro = distro;
+    this.distroVersion = distroVersion;
+  }
+}
+#else
+typedef PlatformInfo = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var name:PlatformName; var kind:PlatformKind; var version:String; var arch:String; var locale:String; var isTouch:Bool; var runtime:PlatformRuntime; var engine:PlatformEngine; var engineVersion:String; var endianness:PlatformEndianness; var pointerWidth:Float; var osBuild:String; var distro:String; var distroVersion:String; };
+#end

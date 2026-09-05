@@ -12,3 +12,4 @@ export const checkUnregisteredNodeKinds = api.checkUnregisteredNodeKinds;
 export const checkUnregisteredNodeKindsFromRaw = api.checkUnregisteredNodeKindsFromRaw;
 export const createDocumentRefusal = api.createDocumentRefusal;
 export const createSceneRefusal = api.createSceneRefusal;
+export const initializeDocumentRefusal = api.initializeDocumentRefusal;

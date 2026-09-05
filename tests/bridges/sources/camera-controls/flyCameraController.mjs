@@ -8,6 +8,7 @@ __syncDependencies();
 export const cloneFlyCameraController = api.cloneFlyCameraController;
 export const copyFlyCameraController = api.copyFlyCameraController;
 export const createFlyCameraController = api.createFlyCameraController;
+export const initializeFlyCameraController = api.initializeFlyCameraController;
 export const lookFlyCameraController = api.lookFlyCameraController;
 export const moveFlyCameraController = api.moveFlyCameraController;
 export const resetFlyCameraController = api.resetFlyCameraController;

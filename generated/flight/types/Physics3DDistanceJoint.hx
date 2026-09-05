@@ -4,4 +4,34 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics3DDistanceJoint = { var kind:Physics3DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorAZ:Float; var localAnchorBX:Float; var localAnchorBY:Float; var localAnchorBZ:Float; var collideConnected:Bool; var breakForce:Float; var breakTorque:Float; var broken:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var impulse3:Float; var impulse4:Float; var impulse5:Float; var rAX:Float; var rAY:Float; var rAZ:Float; var rBX:Float; var rBY:Float; var rBZ:Float; var length:Float; var enableSpring:Bool; var frequencyHz:Float; var dampingRatio:Float; var enableLimit:Bool; var minLength:Float; var maxLength:Float; var lowerLimitImpulse:Float; var upperLimitImpulse:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Physics3D)
+@:keep
+@:structInit
+class Physics3DDistanceJoint extends flight.types.Physics3DJoint {
+  public var length:Float;
+  public var enableSpring:Bool;
+  public var frequencyHz:Float;
+  public var dampingRatio:Float;
+  public var enableLimit:Bool;
+  public var minLength:Float;
+  public var maxLength:Float;
+  public var lowerLimitImpulse:Float;
+  public var upperLimitImpulse:Float;
+
+  private function new(kind:Physics3DJointKind, bodyA:Float, bodyB:Float, localAnchorAX:Float, localAnchorAY:Float, localAnchorAZ:Float, localAnchorBX:Float, localAnchorBY:Float, localAnchorBZ:Float, collideConnected:Bool, breakForce:Float, breakTorque:Float, broken:Bool, impulse0:Float, impulse1:Float, impulse2:Float, impulse3:Float, impulse4:Float, impulse5:Float, rAX:Float, rAY:Float, rAZ:Float, rBX:Float, rBY:Float, rBZ:Float, length:Float, enableSpring:Bool, frequencyHz:Float, dampingRatio:Float, enableLimit:Bool, minLength:Float, maxLength:Float, lowerLimitImpulse:Float, upperLimitImpulse:Float):Void {
+    super(kind, bodyA, bodyB, localAnchorAX, localAnchorAY, localAnchorAZ, localAnchorBX, localAnchorBY, localAnchorBZ, collideConnected, breakForce, breakTorque, broken, impulse0, impulse1, impulse2, impulse3, impulse4, impulse5, rAX, rAY, rAZ, rBX, rBY, rBZ);
+    this.length = length;
+    this.enableSpring = enableSpring;
+    this.frequencyHz = frequencyHz;
+    this.dampingRatio = dampingRatio;
+    this.enableLimit = enableLimit;
+    this.minLength = minLength;
+    this.maxLength = maxLength;
+    this.lowerLimitImpulse = lowerLimitImpulse;
+    this.upperLimitImpulse = upperLimitImpulse;
+  }
+}
+#else
+typedef Physics3DDistanceJoint = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Physics3DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorAZ:Float; var localAnchorBX:Float; var localAnchorBY:Float; var localAnchorBZ:Float; var collideConnected:Bool; var breakForce:Float; var breakTorque:Float; var broken:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var impulse3:Float; var impulse4:Float; var impulse5:Float; var rAX:Float; var rAY:Float; var rAZ:Float; var rBX:Float; var rBY:Float; var rBZ:Float; var length:Float; var enableSpring:Bool; var frequencyHz:Float; var dampingRatio:Float; var enableLimit:Bool; var minLength:Float; var maxLength:Float; var lowerLimitImpulse:Float; var upperLimitImpulse:Float; };
+#end

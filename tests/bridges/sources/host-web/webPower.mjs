@@ -6,6 +6,10 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWebPowerReadings = api.createWebPowerReadings;
+export const initializeWebPowerCapabilities = api.initializeWebPowerCapabilities;
+export const initializeWebPowerKeepAwakeBackend = api.initializeWebPowerKeepAwakeBackend;
+export const initializeWebPowerReadings = api.initializeWebPowerReadings;
+export const initializeWebPowerSuspensionBackend = api.initializeWebPowerSuspensionBackend;
 export const webPowerCapabilities = api.webPowerCapabilities;
 export const webPowerKeepAwakeBackend = api.webPowerKeepAwakeBackend;
 export const webPowerSuspensionBackend = api.webPowerSuspensionBackend;

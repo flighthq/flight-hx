@@ -7,9 +7,3 @@ __syncDependencies();
 
 export const createRaster2DSurface = api.createRaster2DSurface;
 export const destroyRaster2DSurface = api.destroyRaster2DSurface;
-export const explainRaster2DSurfaceProvider = api.explainRaster2DSurfaceProvider;
-export const getRaster2DSurfaceProvider = api.getRaster2DSurfaceProvider;
-export const hasRaster2DSurfaceHostProvider = api.hasRaster2DSurfaceHostProvider;
-export const installRaster2DSurfaceHostProvider = api.installRaster2DSurfaceHostProvider;
-export const resetRaster2DSurfaceProviderForTest = api.resetRaster2DSurfaceProviderForTest;
-export const setRaster2DSurfaceProvider = api.setRaster2DSurfaceProvider;

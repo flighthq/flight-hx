@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:keep
+@:structInit
+class TrayBalloonEventsBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var getSignal:TrayIcon->Null<Signal<TrayBalloonEvent->Void>>;
+
+  private function new(getSignal:TrayIcon->Null<Signal<TrayBalloonEvent->Void>>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getSignal = getSignal;
+  }
+}
+#else
 typedef TrayBalloonEventsBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getSignal:TrayIcon->Null<Signal<TrayBalloonEvent->Void>>; };
+#end

@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SharpenEffect = { var kind:String; @:optional var amount:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class SharpenEffect extends flight.types.RenderEffect<String> {
+  public var amount:Null<Float>;
+
+  private function new(kind:String, ?amount:Null<Float>):Void {
+    super(kind);
+    this.amount = amount;
+  }
+}
+#else
+typedef SharpenEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var amount:Float; };
+#end

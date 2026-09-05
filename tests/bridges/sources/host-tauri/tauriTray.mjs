@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createTauriTrayCapabilities = api.createTauriTrayCapabilities;
+export const initializeTauriTrayCapabilities = api.initializeTauriTrayCapabilities;

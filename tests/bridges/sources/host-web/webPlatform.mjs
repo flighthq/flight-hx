@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWebPlatformBackend = api.createWebPlatformBackend;
+export const initializeWebPlatformBackend = api.initializeWebPlatformBackend;
 export const webPlatformBackend = api.webPlatformBackend;

@@ -3,6 +3,9 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
+import flight.types.EntityConstruction;
 import flight.types.FlowStack;
 import flight.types.FlowState;
 
@@ -22,7 +25,10 @@ class _Flow {
   }
 
   public static function createFlowStack():FlowStack {
-    return cast { states: cast ([] : Array<Dynamic>) };
+    var out:EntityConstruction<FlowStack> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ states: cast _Runtime.UNDEFINED } : FlowStack); }) #end));
+    initializeFlowStack(({ final __callArgument1:Dynamic = out; __callArgument1; }));
+    return cast out;
     return cast null;
   }
 
@@ -61,6 +67,12 @@ class _Flow {
     }
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeFlowStack(out:EntityConstruction<FlowStack>):Void {
+    _Runtime.setField(out, 'states', cast ([] : Array<Dynamic>));
+  }
+
   public static function popFlowState(stack:FlowStack):Null<FlowState> {
     var states:Array<FlowState> = cast _Runtime.UNDEFINED;
     var popped:FlowState = cast _Runtime.UNDEFINED;
@@ -70,9 +82,9 @@ class _Flow {
       return cast null;
     }
     popped = (cast _Runtime.callProperty(states, 'pop', cast ([] : Array<Dynamic>)) : FlowState);
-    ({ final __optionalCall1 = popped.onExit; if (__optionalCall1 != null) __optionalCall1(); });
+    ({ final __optionalCall3 = popped.onExit; if (__optionalCall3 != null) __optionalCall3(); });
     revealed = ((cast ((cast _Runtime.field(states, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flight._internal._StaticIndex.readArray(states, _Runtime.subtractNumbers(_Runtime.field(states, 'length'), 1.0)) : Dynamic) : (cast null : Dynamic));
-    ({ final __optionalOwner3 = revealed; if (__optionalOwner3 != null) { final __optionalCall2 = (cast __optionalOwner3 : { @:optional var onResume:Null<Void->Void>; }).onResume; if (__optionalCall2 != null) __optionalCall2(); } });
+    ({ final __optionalOwner5 = revealed; if (__optionalOwner5 != null) { final __optionalCall4 = (cast __optionalOwner5 : { @:optional var onResume:Null<Void->Void>; }).onResume; if (__optionalCall4 != null) __optionalCall4(); } });
     return cast popped;
     return cast null;
   }
@@ -82,9 +94,9 @@ class _Flow {
     var previousTop:Null<FlowState> = cast _Runtime.UNDEFINED;
     states = stack.states;
     previousTop = ((cast ((cast _Runtime.field(states, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flight._internal._StaticIndex.readArray(states, _Runtime.subtractNumbers(_Runtime.field(states, 'length'), 1.0)) : Dynamic) : (cast null : Dynamic));
-    ({ final __optionalOwner5 = previousTop; if (__optionalOwner5 != null) { final __optionalCall4 = (cast __optionalOwner5 : { @:optional var onPause:Null<Void->Void>; }).onPause; if (__optionalCall4 != null) __optionalCall4(); } });
+    ({ final __optionalOwner7 = previousTop; if (__optionalOwner7 != null) { final __optionalCall6 = (cast __optionalOwner7 : { @:optional var onPause:Null<Void->Void>; }).onPause; if (__optionalCall6 != null) __optionalCall6(); } });
     _Runtime.callProperty(states, 'push', cast ([state] : Array<Dynamic>));
-    ({ final __optionalCall6 = state.onEnter; if (__optionalCall6 != null) __optionalCall6(); });
+    ({ final __optionalCall8 = state.onEnter; if (__optionalCall8 != null) __optionalCall8(); });
   }
 
   public static function replaceFlowState(stack:FlowStack, state:FlowState):Void {
@@ -92,10 +104,10 @@ class _Flow {
     states = stack.states;
     if ((cast ((cast _Runtime.field(states, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       var previousTop:FlowState = (cast _Runtime.callProperty(states, 'pop', cast ([] : Array<Dynamic>)) : FlowState);
-      ({ final __optionalCall7 = previousTop.onExit; if (__optionalCall7 != null) __optionalCall7(); });
+      ({ final __optionalCall9 = previousTop.onExit; if (__optionalCall9 != null) __optionalCall9(); });
     }
     _Runtime.callProperty(states, 'push', cast ([state] : Array<Dynamic>));
-    ({ final __optionalCall8 = state.onEnter; if (__optionalCall8 != null) __optionalCall8(); });
+    ({ final __optionalCall10 = state.onEnter; if (__optionalCall10 != null) __optionalCall10(); });
   }
 
   public static function updateFlowStack(stack:FlowStack, deltaTime:Float):Void {
@@ -106,10 +118,10 @@ class _Flow {
     if ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool)) {
       return;
     }
-    ({ final __optionalCall9 = (cast flight._internal._StaticIndex.readArray(states, index) : { @:optional var onUpdate:Null<Float->Void>; }).onUpdate; if (__optionalCall9 != null) __optionalCall9((cast deltaTime : Float)); });
+    ({ final __optionalCall11 = (cast flight._internal._StaticIndex.readArray(states, index) : { @:optional var onUpdate:Null<Float->Void>; }).onUpdate; if (__optionalCall11 != null) __optionalCall11((cast deltaTime : Float)); });
     while (_Runtime.truthy(_Runtime.andValue(((cast index : Float) > (cast 0.0 : Float)), function():Dynamic return cast (cast flight._internal._StaticIndex.readArray(states, index) : { @:optional var updateBelow:Null<Bool>; }).updateBelow))) {
       index--;
-      ({ final __optionalCall10 = (cast flight._internal._StaticIndex.readArray(states, index) : { @:optional var onUpdate:Null<Float->Void>; }).onUpdate; if (__optionalCall10 != null) __optionalCall10((cast deltaTime : Float)); });
+      ({ final __optionalCall12 = (cast flight._internal._StaticIndex.readArray(states, index) : { @:optional var onUpdate:Null<Float->Void>; }).onUpdate; if (__optionalCall12 != null) __optionalCall12((cast deltaTime : Float)); });
     }
   }
 }

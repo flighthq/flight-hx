@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Skeleton2DConstraint = { var kind:Skeleton2DConstraintKind; var mix:Float; };
+typedef Skeleton2DConstraint = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Skeleton2DConstraintKind; var mix:Float; };

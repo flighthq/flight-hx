@@ -13,3 +13,4 @@ export const dispatchSelectableRichTextPointerMove = api.dispatchSelectableRichT
 export const dispatchSelectableRichTextWheel = api.dispatchSelectableRichTextWheel;
 export const focusSelectableRichText = api.focusSelectableRichText;
 export const getSelectableRichTextSelectionText = api.getSelectableRichTextSelectionText;
+export const initializeSelectableRichTextManager = api.initializeSelectableRichTextManager;

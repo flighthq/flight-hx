@@ -14,6 +14,7 @@ export const computeSkeleton2DWorldTransforms = compiled.flight.Skeleton2D.compu
 export const createSkeleton2D = compiled.flight.Skeleton2D.createSkeleton2D;
 export const createSkeleton2DBoneAnimationTarget = compiled.flight.Skeleton2D.createSkeleton2DBoneAnimationTarget;
 export const createSkeleton2DSlotAnimationTarget = compiled.flight.Skeleton2D.createSkeleton2DSlotAnimationTarget;
+export const createSkin2D = compiled.flight.Skeleton2D.createSkin2D;
 export const deformSkeleton2DMeshAttachment = compiled.flight.Skeleton2D.deformSkeleton2DMeshAttachment;
 export const deformSkeleton2DPathAttachment = compiled.flight.Skeleton2D.deformSkeleton2DPathAttachment;
 export const disposeSkeleton2D = compiled.flight.Skeleton2D.disposeSkeleton2D;

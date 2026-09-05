@@ -29,3 +29,4 @@ export * from './tessellatePath.mjs';
 export * from './tessellatePathTyped.mjs';
 export * from './tessellateStrokePath.mjs';
 export * from './transformPath.mjs';
+export { initializePath } from './path.mjs';

@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef LensDirtEffect = { var kind:String; @:optional var intensity:Float; @:optional var threshold:Float; @:optional var seed:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class LensDirtEffect extends flight.types.RenderEffect<String> {
+  public var intensity:Null<Float>;
+  public var threshold:Null<Float>;
+  public var seed:Null<Float>;
+
+  private function new(kind:String, ?intensity:Null<Float>, ?threshold:Null<Float>, ?seed:Null<Float>):Void {
+    super(kind);
+    this.intensity = intensity;
+    this.threshold = threshold;
+    this.seed = seed;
+  }
+}
+#else
+typedef LensDirtEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var intensity:Float; @:optional var threshold:Float; @:optional var seed:Float; };
+#end

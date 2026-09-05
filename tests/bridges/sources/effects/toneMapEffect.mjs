@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createToneMapEffect = api.createToneMapEffect;
+export const initializeToneMapEffect = api.initializeToneMapEffect;

@@ -8,3 +8,4 @@ __syncDependencies();
 export const acquireCanvasRenderSurface = api.acquireCanvasRenderSurface;
 export const createCanvasRenderSurface = api.createCanvasRenderSurface;
 export const destroyCanvasRenderSurface = api.destroyCanvasRenderSurface;
+export const initializeCanvasRenderSurface = api.initializeCanvasRenderSurface;

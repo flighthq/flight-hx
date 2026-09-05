@@ -7,6 +7,7 @@ __syncDependencies();
 
 export const createFileDialogHandle = api.createFileDialogHandle;
 export const getFileDialogHandleOperations = api.getFileDialogHandleOperations;
+export const initializeFileDialogHandle = api.initializeFileDialogHandle;
 export const showOpenDirectoryDialog = api.showOpenDirectoryDialog;
 export const showOpenFileDialog = api.showOpenFileDialog;
 export const showSaveFileDialog = api.showSaveFileDialog;

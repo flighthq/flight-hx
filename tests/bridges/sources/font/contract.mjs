@@ -4,9 +4,10 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './fontFormat.mjs';
-export * from './fontLoading.mjs';
 export * from './fontResource.mjs';
 export * from './fontResourceFrom.mjs';
 export * from './fontShorthand.mjs';
 export * from './fontStatus.mjs';
 export * from './glyphOutlineSource.mjs';
+export { initializeFontResource } from './fontResource.mjs';
+export { initializeGlyphRasterizerBackendFromGlyphOutlineSource } from './glyphOutlineSource.mjs';

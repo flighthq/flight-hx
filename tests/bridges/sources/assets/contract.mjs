@@ -6,3 +6,4 @@ __syncDependencies();
 export * from './assetLibrary.mjs';
 export * from './enableAssetGuards.mjs';
 export * from './explainAssetLoad.mjs';
+export { initializeAssetLibrary } from './assetLibrary.mjs';

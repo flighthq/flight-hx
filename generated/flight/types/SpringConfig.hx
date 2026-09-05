@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SpringConfig = { var dampingRatio:Float; var frequency:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Spring)
+@:keep
+@:structInit
+class SpringConfig {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var dampingRatio:Float;
+  public var frequency:Float;
+
+  private function new(dampingRatio:Float, frequency:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.dampingRatio = dampingRatio;
+    this.frequency = frequency;
+  }
+}
+#else
+typedef SpringConfig = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var dampingRatio:Float; var frequency:Float; };
+#end

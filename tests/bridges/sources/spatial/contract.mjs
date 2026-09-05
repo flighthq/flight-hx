@@ -12,3 +12,7 @@ export * from './spatialIndex3D.mjs';
 export * from './spatialIndexingGuard.mjs';
 export * from './uniformGrid.mjs';
 export * from './uniformGrid3D.mjs';
+export { initializeBvhSpatialBackend3D } from './bvh3D.mjs';
+export { initializeSpatialIndex2D } from './spatialIndex.mjs';
+export { initializeSpatialIndex3D } from './spatialIndex3D.mjs';
+export { initializeUniformGridSpatialBackend3D } from './uniformGrid3D.mjs';

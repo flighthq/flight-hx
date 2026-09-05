@@ -11,8 +11,10 @@ import flight.types.Billboard;
 import flight.types.BillboardMode;
 import flight.types.Camera3D;
 import flight.types.FrustumLike;
+import flight.types.InstancedMesh;
 import flight.types.Kind;
 import flight.types.Material;
+import flight.types.Matrix4;
 import flight.types.Matrix4Like;
 import flight.types.Mesh;
 import flight.types.MeshDeformer;
@@ -49,6 +51,11 @@ class Scene3D {
 
   public static function createBillboard(geometry:MeshGeometry, materials:Array<Null<Material>>, ?mode:BillboardMode, ?kind:Kind, ?obj:flight._internal._Partial<{ var enabled:Bool; var name:Null<String>; }>):Billboard {
     return cast Facade_Scene3D_flight__Scene3D.createBillboard(geometry, materials, mode, kind, obj);
+    return cast null;
+  }
+
+  public static function createInstancedMesh(geometry:MeshGeometry, materials:Array<Null<Material>>, ?capacity:Float, ?kind:Kind):InstancedMesh {
+    return cast Facade_Scene3D_flight__Scene3D.createInstancedMesh(geometry, materials, capacity, kind);
     return cast null;
   }
 
@@ -121,6 +128,16 @@ class Scene3D {
     return cast null;
   }
 
+  public static function getInstancedMeshInstanceColor(source:InstancedMesh, index:Float):Float {
+    return cast Facade_Scene3D_flight__Scene3D.getInstancedMeshInstanceColor(source, index);
+    return cast null;
+  }
+
+  public static function getInstancedMeshInstanceMatrix(out:Matrix4, source:InstancedMesh, index:Float):Matrix4 {
+    return cast Facade_Scene3D_flight__Scene3D.getInstancedMeshInstanceMatrix(out, source, index);
+    return cast null;
+  }
+
   public static function getMeshDeformer(source:Mesh):MeshDeformer {
     return cast Facade_Scene3D_flight__Scene3D.getMeshDeformer(source);
     return cast null;
@@ -153,8 +170,19 @@ class Scene3D {
     Facade_Scene3D_flight__Scene3D.getScene3DMaterials(root, out);
   }
 
+  public static final InstancedMeshKind:String = Facade_Scene3D_flight__Types.InstancedMeshKind;
+
+  public static function invalidateInstancedMesh(target:InstancedMesh):Void {
+    Facade_Scene3D_flight__Scene3D.invalidateInstancedMesh(target);
+  }
+
   public static function isBillboard(source:Node3D):Bool {
     return cast Facade_Scene3D_flight__Scene3D.isBillboard(source);
+    return cast null;
+  }
+
+  public static function isInstancedMesh(source:flight._internal._Any):Bool {
+    return cast Facade_Scene3D_flight__Scene3D.isInstancedMesh(source);
     return cast null;
   }
 
@@ -179,6 +207,18 @@ class Scene3D {
 
   public static function prepareScene3DMorph(scene:NodeAny):Void {
     Facade_Scene3D_flight__Scene3D.prepareScene3DMorph(scene);
+  }
+
+  public static function setInstancedMeshInstanceColor(target:InstancedMesh, index:Float, color:Float):Void {
+    Facade_Scene3D_flight__Scene3D.setInstancedMeshInstanceColor(target, index, color);
+  }
+
+  public static function setInstancedMeshInstanceCount(target:InstancedMesh, count:Float):Void {
+    Facade_Scene3D_flight__Scene3D.setInstancedMeshInstanceCount(target, count);
+  }
+
+  public static function setInstancedMeshInstanceMatrix(target:InstancedMesh, index:Float, matrix:Matrix4):Void {
+    Facade_Scene3D_flight__Scene3D.setInstancedMeshInstanceMatrix(target, index, matrix);
   }
 
   public static function setNode3DAlpha(source:Node3D, alpha:Float):Void {

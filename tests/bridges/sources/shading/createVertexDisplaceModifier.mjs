@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createVertexDisplaceModifier = api.createVertexDisplaceModifier;
+export const initializeVertexDisplaceModifier = api.initializeVertexDisplaceModifier;

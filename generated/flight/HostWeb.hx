@@ -9,6 +9,7 @@ import flight._HostWeb.WebAppCapabilities__webApp;
 import flight._HostWeb.WebClipboardBackend__webClipboard;
 import flight._HostWeb.WebConnectivityBackend__webConnectivity;
 import flight._HostWeb.WebProtocolCapabilities__webProtocol;
+import flight._HostWeb.WebStorageBackend__webStorage;
 import flight._HostWeb.WebWindowBackend__webWindow;
 import flight.types.AccessibilityBackend;
 import flight.types.AppBadgeBackend;
@@ -20,10 +21,12 @@ import flight.types.AppReadyBackend;
 import flight.types.AppRelaunchBackend;
 import flight.types.ApplicationExitBackend;
 import flight.types.ApplicationVisibilityBackend;
+import flight.types.AudioBackend;
+import flight.types.AudioDeviceBackend;
+import flight.types.Bitmap;
+import flight.types.BitmapEncodeBackend;
 import flight.types.BitmapReadbackBackend;
 import flight.types.CanvasRenderSurfaceCreator;
-import flight.types.CapturePhotoDialogOptions;
-import flight.types.CaptureVideoDialogOptions;
 import flight.types.ClipboardFormatsBackend;
 import flight.types.ClipboardImageBackend;
 import flight.types.ClipboardTextBackend;
@@ -33,18 +36,17 @@ import flight.types.ConnectivityStatusBackend;
 import flight.types.CursorBackend;
 import flight.types.DeviceBackend;
 import flight.types.DirectoryOpenDialogBackend;
-import flight.types.DirectoryOpenDialogResult;
 import flight.types.Entity;
 import flight.types.EntityRuntime;
 import flight.types.FileOpenDialogBackend;
-import flight.types.FileOpenDialogResult;
 import flight.types.FileSaveDialogBackend;
-import flight.types.FileSaveDialogResult;
 import flight.types.FileSystemHostBackend;
 import flight.types.FontLoadingBackend;
 import flight.types.FullscreenBackend;
 import flight.types.FullscreenTargetHandle;
+import flight.types.GeolocationBackend;
 import flight.types.GlRenderSurfaceProvider;
+import flight.types.GlyphRasterizerBackend;
 import flight.types.HapticsBackend;
 import flight.types.HasAccessibilityProvider;
 import flight.types.HasClipboardChange;
@@ -62,6 +64,9 @@ import flight.types.HasDialogMessage;
 import flight.types.HasDialogPhotoCapture;
 import flight.types.HasDialogPrompt;
 import flight.types.HasDialogVideoCapture;
+import flight.types.HasGraphicsBitmapEncode;
+import flight.types.HasGraphicsBitmapReadback;
+import flight.types.HasGraphicsImage;
 import flight.types.HasGraphicsRenderContextSubscription;
 import flight.types.HasGraphicsRenderSurface;
 import flight.types.HasInputDropFileSubscription;
@@ -86,16 +91,14 @@ import flight.types.HostGraphicsCapabilities;
 import flight.types.HostInputCapabilities;
 import flight.types.HostMenuCapabilities;
 import flight.types.HostNetCapabilities;
-import flight.types.HostScreenCapabilities;
 import flight.types.HostShareCapabilities;
 import flight.types.HostShellCapabilities;
+import flight.types.ImageBackend;
 import flight.types.ImageOpenDialogBackend;
-import flight.types.ImageOpenDialogResult;
+import flight.types.ImageResource;
 import flight.types.InputDropFileBackend;
 import flight.types.InputFocusBackend;
 import flight.types.InputPointerLockBackend;
-import flight.types.InputPointerLockExitOutcome;
-import flight.types.InputPointerLockRequestOutcome;
 import flight.types.InputTargetBackend;
 import flight.types.InputTargetHandle;
 import flight.types.LifecycleBackend;
@@ -106,40 +109,34 @@ import flight.types.MenuHighlightBackend;
 import flight.types.MenuPopupBackend;
 import flight.types.MessageDialogBackend;
 import flight.types.NetBackend;
-import flight.types.OpenDirectoryDialogOptions;
-import flight.types.OpenFileDialogOptions;
-import flight.types.OpenImageDialogOptions;
 import flight.types.PhotoCaptureDialogBackend;
-import flight.types.PhotoCaptureDialogResult;
 import flight.types.PlatformBackend;
 import flight.types.PromptDialogBackend;
 import flight.types.Raster2DSurfaceProvider;
 import flight.types.RenderContextBackend;
 import flight.types.RenderSurfaceBackend;
-import flight.types.SaveFileDialogOptions;
 import flight.types.SensorsBackend;
 import flight.types.ShareContentBackend;
 import flight.types.ShareFilesBackend;
 import flight.types.ShellExternalBackend;
 import flight.types.SocketBackend;
 import flight.types.SoftKeyboardChangeBackend;
+import flight.types.SoftKeyboardChangeSubscription;
+import flight.types.SoftKeyboardInfo;
 import flight.types.SoftKeyboardInfoBackend;
 import flight.types.SoftKeyboardVisibilityBackend;
+import flight.types.SoftKeyboardVisibilityResult;
 import flight.types.StatusBarColorBackend;
-import flight.types.StorageChange;
-import flight.types.StorageClearFailureReason;
-import flight.types.StorageGetItemFailureReason;
 import flight.types.StoragePersistenceQueryBackend;
 import flight.types.StoragePersistenceRequestBackend;
-import flight.types.StorageRemoveItemFailureReason;
-import flight.types.StorageSetItemFailureReason;
+import flight.types.VideoCapabilityBackend;
 import flight.types.VideoCaptureDialogBackend;
-import flight.types.VideoCaptureDialogResult;
 import flight.types.WebMidiAccessCapabilities;
 import flight.types.WebMidiPermissionAccessCapabilities;
 import flight.types.WebPageNotificationApi;
 import flight.types.WebPageNotificationCapabilities;
 import flight.types.WebPowerCapabilities;
+import flight.types.WebScreenCapabilities;
 import flight.types.WebServiceWorkerNotificationApi;
 import flight.types.WebServiceWorkerNotificationCapabilities;
 import flight.types.WebServiceWorkerNotificationEvent;
@@ -158,6 +155,11 @@ class HostWeb {
 
   public static function createWebAppCapabilities():WebAppCapabilities__webApp {
     return cast Facade_HostWeb_flight__HostWeb.createWebAppCapabilities();
+    return cast null;
+  }
+
+  public static function createWebBitmapEncodeBackend():{ >BitmapEncodeBackend, >Entity, } {
+    return cast Facade_HostWeb_flight__HostWeb.createWebBitmapEncodeBackend();
     return cast null;
   }
 
@@ -198,6 +200,16 @@ class HostWeb {
 
   public static function createWebGlRenderSurfaceProvider():GlRenderSurfaceProvider {
     return cast Facade_HostWeb_flight__HostWeb.createWebGlRenderSurfaceProvider();
+    return cast null;
+  }
+
+  public static function createWebGlyphRasterizerBackend():{ >GlyphRasterizerBackend, >Entity, } {
+    return cast Facade_HostWeb_flight__HostWeb.createWebGlyphRasterizerBackend();
+    return cast null;
+  }
+
+  public static function createWebImageBackend():{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var createImageFromBitmap:Bitmap->ImageResource; var loadImageFromUrl:String->String->flight._internal.dom.AbortSignal->flight._internal._Promise<ImageResource>; } {
+    return cast Facade_HostWeb_flight__HostWeb.createWebImageBackend();
     return cast null;
   }
 
@@ -251,7 +263,7 @@ class HostWeb {
     return cast null;
   }
 
-  public static function createWebScreenCapabilities():flight._internal._Required<HostScreenCapabilities> {
+  public static function createWebScreenCapabilities():WebScreenCapabilities {
     return cast Facade_HostWeb_flight__HostWeb.createWebScreenCapabilities();
     return cast null;
   }
@@ -261,18 +273,23 @@ class HostWeb {
     return cast null;
   }
 
-  public static function createWebSoftKeyboardChangeBackend():{ >SoftKeyboardChangeBackend, >Entity, } {
+  public static function createWebSoftKeyboardChangeBackend():{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var subscribe:(Void->Void)->flight._internal._Promise<SoftKeyboardChangeSubscription>; } {
     return cast Facade_HostWeb_flight__HostWeb.createWebSoftKeyboardChangeBackend();
     return cast null;
   }
 
-  public static function createWebSoftKeyboardInfoBackend():{ >SoftKeyboardInfoBackend, >Entity, } {
+  public static function createWebSoftKeyboardInfoBackend():{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getInfo:SoftKeyboardInfo->SoftKeyboardInfo; } {
     return cast Facade_HostWeb_flight__HostWeb.createWebSoftKeyboardInfoBackend();
     return cast null;
   }
 
-  public static function createWebSoftKeyboardVisibilityBackend():{ >SoftKeyboardVisibilityBackend, >Entity, } {
+  public static function createWebSoftKeyboardVisibilityBackend():{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var show:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; var hide:Void->flight._internal._Promise<SoftKeyboardVisibilityResult>; } {
     return cast Facade_HostWeb_flight__HostWeb.createWebSoftKeyboardVisibilityBackend();
+    return cast null;
+  }
+
+  public static function createWebVideoCapabilityBackend():{ >VideoCapabilityBackend, >Entity, } {
+    return cast Facade_HostWeb_flight__HostWeb.createWebVideoCapabilityBackend();
     return cast null;
   }
 
@@ -296,52 +313,8 @@ class HostWeb {
     return cast null;
   }
 
-  public static function enableHostWeb():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWeb();
-  }
-
-  public static function enableHostWebAudio():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebAudio();
-  }
-
-  public static function enableHostWebAudioDevice():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebAudioDevice();
-  }
-
-  public static function enableHostWebBitmapEncode():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebBitmapEncode();
-  }
-
-  public static function enableHostWebBitmapReadback():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebBitmapReadback();
-  }
-
-  public static function enableHostWebFontLoading():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebFontLoading();
-  }
-
-  public static function enableHostWebGeolocation():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebGeolocation();
-  }
-
   public static function enableHostWebGlRenderSurface():Void {
     Facade_HostWeb_flight__HostWeb.enableHostWebGlRenderSurface();
-  }
-
-  public static function enableHostWebGlyphRasterizer():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebGlyphRasterizer();
-  }
-
-  public static function enableHostWebImage():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebImage();
-  }
-
-  public static function enableHostWebRaster2DSurface():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebRaster2DSurface();
-  }
-
-  public static function enableHostWebVideoCapability():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebVideoCapability();
   }
 
   public static function enableHostWebWgpuRenderSurface():Void {
@@ -361,11 +334,19 @@ class HostWeb {
 
   public static final webAccessibilityHost:flight._internal._Intersection2<Host, HasAccessibilityProvider> = Facade_HostWeb_flight__HostWeb.webAccessibilityHost;
 
-  public static final webAppHost:flight._internal._Intersection2<Host, { var app:{ var exit:ApplicationExitBackend; var loop:LoopBackend; var visibility:ApplicationVisibilityBackend; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var name:AppNameBackend; var ready:AppReadyBackend; var focus:AppFocusBackend; var badge:AppBadgeBackend; var quit:AppQuitBackend; var locale:AppLocaleBackend; var relaunch:AppRelaunchBackend; }; }> = Facade_HostWeb_flight__HostWeb.webAppHost;
+  public static final webAppHost:flight._internal._Intersection2<Host, { var app:{ var exit:ApplicationExitBackend; var loop:LoopBackend; var visibility:ApplicationVisibilityBackend; var ___u40_EntityRuntimeKey_u40_11889:Null<EntityRuntime>; var name:AppNameBackend; var ready:AppReadyBackend; var focus:AppFocusBackend; var quit:AppQuitBackend; var badge:AppBadgeBackend; var locale:AppLocaleBackend; var relaunch:AppRelaunchBackend; }; }> = Facade_HostWeb_flight__HostWeb.webAppHost;
 
   public static final webApplicationExitBackend:ApplicationExitBackend = Facade_HostWeb_flight__HostWeb.webApplicationExitBackend;
 
   public static final webApplicationVisibilityBackend:ApplicationVisibilityBackend = Facade_HostWeb_flight__HostWeb.webApplicationVisibilityBackend;
+
+  public static final webAudioBackend:AudioBackend = Facade_HostWeb_flight__HostWeb.webAudioBackend;
+
+  public static final webAudioDeviceBackend:AudioDeviceBackend = Facade_HostWeb_flight__HostWeb.webAudioDeviceBackend;
+
+  public static final webBitmapEncodeBackend:{ >BitmapEncodeBackend, >Entity, } = Facade_HostWeb_flight__HostWeb.webBitmapEncodeBackend;
+
+  public static final webBitmapReadbackBackend:{ >BitmapReadbackBackend, >Entity, } = Facade_HostWeb_flight__HostWeb.webBitmapReadbackBackend;
 
   public static final webCanvasRenderSurfaceCreator:CanvasRenderSurfaceCreator = Facade_HostWeb_flight__HostWeb.webCanvasRenderSurfaceCreator;
 
@@ -381,35 +362,43 @@ class HostWeb {
 
   public static final webDialogHost:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<Host, HasDialogDirectoryOpen>, HasDialogFileOpen>, HasDialogFileSave>, HasDialogImageOpen>, HasDialogMessage>, HasDialogPhotoCapture>, HasDialogPrompt>, HasDialogVideoCapture> = Facade_HostWeb_flight__HostWeb.webDialogHost;
 
-  public static final webDirectoryOpenDialogBackend:{ >Entity, var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>; } = Facade_HostWeb_flight__HostWeb.webDirectoryOpenDialogBackend;
+  public static final webDirectoryOpenDialogBackend:DirectoryOpenDialogBackend = Facade_HostWeb_flight__HostWeb.webDirectoryOpenDialogBackend;
 
-  public static final webFileOpenDialogBackend:{ >Entity, var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; } = Facade_HostWeb_flight__HostWeb.webFileOpenDialogBackend;
+  public static final webFileOpenDialogBackend:FileOpenDialogBackend = Facade_HostWeb_flight__HostWeb.webFileOpenDialogBackend;
 
-  public static final webFileSaveDialogBackend:{ >Entity, var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; } = Facade_HostWeb_flight__HostWeb.webFileSaveDialogBackend;
+  public static final webFileSaveDialogBackend:FileSaveDialogBackend = Facade_HostWeb_flight__HostWeb.webFileSaveDialogBackend;
 
   public static final webFileSystemBackend:FileSystemHostBackend = Facade_HostWeb_flight__HostWeb.webFileSystemBackend;
 
+  public static final webFontLoadingBackend:{ >FontLoadingBackend, >Entity, } = Facade_HostWeb_flight__HostWeb.webFontLoadingBackend;
+
   public static final webFullscreenBackend:flight._internal._Intersection2<FullscreenBackend, flight._internal._Required<{ @:optional var subscribe:Null<(Bool->Void)->Void>; @:optional var unsubscribe:Null<(Bool->Void)->Void>; }>> = Facade_HostWeb_flight__HostWeb.webFullscreenBackend;
 
-  public static final webGraphicsHost:flight._internal._Intersection2<flight._internal._Intersection2<Host, HasGraphicsRenderContextSubscription>, HasGraphicsRenderSurface> = Facade_HostWeb_flight__HostWeb.webGraphicsHost;
+  public static final webGeolocationBackend:GeolocationBackend = Facade_HostWeb_flight__HostWeb.webGeolocationBackend;
+
+  public static final webGlyphRasterizerBackend:{ >GlyphRasterizerBackend, >Entity, } = Facade_HostWeb_flight__HostWeb.webGlyphRasterizerBackend;
+
+  public static final webGraphicsHost:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<Host, HasGraphicsBitmapEncode>, HasGraphicsBitmapReadback>, HasGraphicsImage>, HasGraphicsRenderContextSubscription>, HasGraphicsRenderSurface> = Facade_HostWeb_flight__HostWeb.webGraphicsHost;
 
   public static final webHapticsBackend:HapticsBackend = Facade_HostWeb_flight__HostWeb.webHapticsBackend;
 
-  public static final webHost:flight._internal._Intersection2<Host, { var accessibility:flight._internal._Intersection2<HostAccessibilityCapabilities, { var provider:AccessibilityBackend; }>; var app:{ var exit:ApplicationExitBackend; var loop:LoopBackend; var visibility:ApplicationVisibilityBackend; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var name:AppNameBackend; var ready:AppReadyBackend; var focus:AppFocusBackend; var badge:AppBadgeBackend; var quit:AppQuitBackend; var locale:AppLocaleBackend; var relaunch:AppRelaunchBackend; }; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var change:flight._internal._Any; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostConnectivityCapabilities, { var change:ConnectivityChangeBackend; }>, { var reachability:ConnectivityReachabilityBackend; }>, { var status:ConnectivityStatusBackend; }>; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var imageOpen:ImageOpenDialogBackend; }>, { var message:MessageDialogBackend; }>, { var photoCapture:PhotoCaptureDialogBackend; }>, { var prompt:PromptDialogBackend; }>, { var videoCapture:VideoCaptureDialogBackend; }>; var graphics:flight._internal._Intersection2<flight._internal._Intersection2<HostGraphicsCapabilities, { var renderContext:RenderContextBackend; }>, { var renderSurface:RenderSurfaceBackend; }>; var input:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostInputCapabilities, { var dropFile:InputDropFileBackend; }>, { var focus:InputFocusBackend; }>, { var haptics:HapticsBackend; }>, { var pointerLock:InputPointerLockBackend; }>, { var target:InputTargetBackend; }>, { var softKeyboardChange:SoftKeyboardChangeBackend; }>, { var softKeyboardInfo:SoftKeyboardInfoBackend; }>, { var softKeyboardVisibility:SoftKeyboardVisibilityBackend; }>; var ipc:{  }; var media:{ var session:MediaSessionBackend; var sessionAction:MediaSessionActionBackend; }; var menu:flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var highlight:MenuHighlightBackend; }>, { var popup:MenuPopupBackend; }>; var midi:{  }; var net:flight._internal._Intersection2<HostNetCapabilities, { var http:NetBackend; var socket:SocketBackend; }>; var power:WebPowerCapabilities; var protocol:WebProtocolCapabilities__webProtocol; var notification:{  }; var screen:flight._internal._Any; var share:flight._internal._Intersection2<flight._internal._Intersection2<HostShareCapabilities, { var content:ShareContentBackend; }>, { var files:ShareFilesBackend; }>; var shell:flight._internal._Intersection2<HostShellCapabilities, { var external:ShellExternalBackend; }>; var shortcut:{  }; var storage:{ var change:{ >Entity, var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>; var destroy:Void->Void; var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>; var subscribe:(StorageChange->Void)->Null<Void->Void>; }; var fileSystem:FileSystemHostBackend; var local:{ >Entity, var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>; var destroy:Void->Void; var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>; var subscribe:(StorageChange->Void)->Null<Void->Void>; }; var persistenceQuery:StoragePersistenceQueryBackend; var persistenceRequest:StoragePersistenceRequestBackend; }; var system:{ var device:DeviceBackend; var lifecycle:LifecycleBackend; var platform:PlatformBackend; var sensors:SensorsBackend; }; var text:{  }; var tray:{  }; var ui:{ var fullscreen:FullscreenBackend; var statusBarColor:StatusBarColorBackend; }; var updater:{  }; var window:WebWindowBackend__webWindow; }> = Facade_HostWeb_flight__HostWeb.webHost;
+  public static final webHost:flight._internal._Intersection2<Host, { var accessibility:flight._internal._Intersection2<HostAccessibilityCapabilities, { var provider:AccessibilityBackend; }>; var app:{ var exit:ApplicationExitBackend; var loop:LoopBackend; var visibility:ApplicationVisibilityBackend; var ___u40_EntityRuntimeKey_u40_11889:Null<EntityRuntime>; var name:AppNameBackend; var ready:AppReadyBackend; var focus:AppFocusBackend; var quit:AppQuitBackend; var badge:AppBadgeBackend; var locale:AppLocaleBackend; var relaunch:AppRelaunchBackend; }; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var change:flight._internal._Any; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostConnectivityCapabilities, { var change:ConnectivityChangeBackend; }>, { var reachability:ConnectivityReachabilityBackend; }>, { var status:ConnectivityStatusBackend; }>; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var imageOpen:ImageOpenDialogBackend; }>, { var message:MessageDialogBackend; }>, { var photoCapture:PhotoCaptureDialogBackend; }>, { var prompt:PromptDialogBackend; }>, { var videoCapture:VideoCaptureDialogBackend; }>; var graphics:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostGraphicsCapabilities, { var bitmapEncode:BitmapEncodeBackend; }>, { var bitmapReadback:BitmapReadbackBackend; }>, { var image:ImageBackend; }>, { var renderContext:RenderContextBackend; }>, { var renderSurface:RenderSurfaceBackend; }>; var input:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostInputCapabilities, { var dropFile:InputDropFileBackend; }>, { var focus:InputFocusBackend; }>, { var haptics:HapticsBackend; }>, { var pointerLock:InputPointerLockBackend; }>, { var target:InputTargetBackend; }>, { var softKeyboardChange:SoftKeyboardChangeBackend; }>, { var softKeyboardInfo:SoftKeyboardInfoBackend; }>, { var softKeyboardVisibility:SoftKeyboardVisibilityBackend; }>; var ipc:{  }; var media:{ var audioCodec:AudioBackend; var session:MediaSessionBackend; var sessionAction:MediaSessionActionBackend; }; var menu:flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var highlight:MenuHighlightBackend; }>, { var popup:MenuPopupBackend; }>; var midi:{  }; var net:flight._internal._Intersection2<HostNetCapabilities, { var http:NetBackend; var socket:SocketBackend; }>; var power:WebPowerCapabilities; var protocol:WebProtocolCapabilities__webProtocol; var notification:{  }; var screen:WebScreenCapabilities; var share:flight._internal._Intersection2<flight._internal._Intersection2<HostShareCapabilities, { var content:ShareContentBackend; }>, { var files:ShareFilesBackend; }>; var shell:flight._internal._Intersection2<HostShellCapabilities, { var external:ShellExternalBackend; }>; var shortcut:{  }; var storage:{ var change:WebStorageBackend__webStorage; var fileSystem:FileSystemHostBackend; var local:WebStorageBackend__webStorage; var persistenceQuery:StoragePersistenceQueryBackend; var persistenceRequest:StoragePersistenceRequestBackend; }; var system:{ var device:DeviceBackend; var geolocation:GeolocationBackend; var lifecycle:LifecycleBackend; var platform:PlatformBackend; var sensors:SensorsBackend; }; var text:{  }; var tray:{  }; var ui:{ var fullscreen:FullscreenBackend; var statusBarColor:StatusBarColorBackend; }; var updater:{  }; var window:WebWindowBackend__webWindow; }> = Facade_HostWeb_flight__HostWeb.webHost;
 
   public static final webHostNet:flight._internal._Intersection2<Host, { var net:{ var http:NetBackend; var socket:SocketBackend; }; }> = Facade_HostWeb_flight__HostWeb.webHostNet;
 
-  public static final webImageOpenDialogBackend:{ >Entity, var open:OpenImageDialogOptions->flight._internal._Promise<ImageOpenDialogResult>; } = Facade_HostWeb_flight__HostWeb.webImageOpenDialogBackend;
+  public static final webImageBackend:{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var createImageFromBitmap:Bitmap->ImageResource; var loadImageFromUrl:String->String->flight._internal.dom.AbortSignal->flight._internal._Promise<ImageResource>; } = Facade_HostWeb_flight__HostWeb.webImageBackend;
 
-  public static final webInputDropFileBackend:{ >Entity, var subscribe:InputTargetHandle->(String->Void)->(Void->Void); } = Facade_HostWeb_flight__HostWeb.webInputDropFileBackend;
+  public static final webImageOpenDialogBackend:ImageOpenDialogBackend = Facade_HostWeb_flight__HostWeb.webImageOpenDialogBackend;
 
-  public static final webInputFocusBackend:{ >Entity, var subscribe:InputTargetHandle->(Void->Void)->(Void->Void)->(Void->Void); } = Facade_HostWeb_flight__HostWeb.webInputFocusBackend;
+  public static final webInputDropFileBackend:InputDropFileBackend = Facade_HostWeb_flight__HostWeb.webInputDropFileBackend;
+
+  public static final webInputFocusBackend:InputFocusBackend = Facade_HostWeb_flight__HostWeb.webInputFocusBackend;
 
   public static final webInputHost:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<Host, HasInputDropFileSubscription>, HasInputFocusSubscription>, HasInputHaptics>, HasInputPointerLock>, HasInputTargetPreparation>, HasSoftKeyboardChange>, HasSoftKeyboardInfo>, HasSoftKeyboardVisibility> = Facade_HostWeb_flight__HostWeb.webInputHost;
 
-  public static final webInputPointerLockBackend:{ >Entity, var exit:Void->flight._internal._Promise<InputPointerLockExitOutcome>; var request:InputTargetHandle->flight._internal._Promise<InputPointerLockRequestOutcome>; } = Facade_HostWeb_flight__HostWeb.webInputPointerLockBackend;
+  public static final webInputPointerLockBackend:InputPointerLockBackend = Facade_HostWeb_flight__HostWeb.webInputPointerLockBackend;
 
-  public static final webInputTargetBackend:{ >Entity, var prepare:InputTargetHandle->Void; } = Facade_HostWeb_flight__HostWeb.webInputTargetBackend;
+  public static final webInputTargetBackend:InputTargetBackend = Facade_HostWeb_flight__HostWeb.webInputTargetBackend;
 
   public static final webLoopBackend:LoopBackend = Facade_HostWeb_flight__HostWeb.webLoopBackend;
 
@@ -429,7 +418,7 @@ class HostWeb {
 
   public static final webNetBackend:NetBackend = Facade_HostWeb_flight__HostWeb.webNetBackend;
 
-  public static final webPhotoCaptureDialogBackend:{ >Entity, var capture:CapturePhotoDialogOptions->flight._internal._Promise<PhotoCaptureDialogResult>; } = Facade_HostWeb_flight__HostWeb.webPhotoCaptureDialogBackend;
+  public static final webPhotoCaptureDialogBackend:PhotoCaptureDialogBackend = Facade_HostWeb_flight__HostWeb.webPhotoCaptureDialogBackend;
 
   public static final webPlatformBackend:PlatformBackend = Facade_HostWeb_flight__HostWeb.webPlatformBackend;
 
@@ -441,13 +430,15 @@ class HostWeb {
 
   public static final webProtocolHost:flight._internal._Intersection2<Host, { var protocol:WebProtocolCapabilities__webProtocol; }> = Facade_HostWeb_flight__HostWeb.webProtocolHost;
 
-  public static final webRenderContextBackend:{ >Entity, var subscribe:InputTargetHandle->(Void->Void)->(Void->Void)->(Void->Void); } = Facade_HostWeb_flight__HostWeb.webRenderContextBackend;
+  public static final webRaster2DSurfaceProvider:Raster2DSurfaceProvider = Facade_HostWeb_flight__HostWeb.webRaster2DSurfaceProvider;
 
-  public static final webRenderSurfaceBackend:{ >Entity, var resize:InputTargetHandle->Float->Float->Void; } = Facade_HostWeb_flight__HostWeb.webRenderSurfaceBackend;
+  public static final webRenderContextBackend:RenderContextBackend = Facade_HostWeb_flight__HostWeb.webRenderContextBackend;
 
-  public static final webScreenCapabilities:flight._internal._Any = Facade_HostWeb_flight__HostWeb.webScreenCapabilities;
+  public static final webRenderSurfaceBackend:RenderSurfaceBackend = Facade_HostWeb_flight__HostWeb.webRenderSurfaceBackend;
 
-  public static final webScreenHost:flight._internal._Intersection2<Host, { var screen:flight._internal._Any; }> = Facade_HostWeb_flight__HostWeb.webScreenHost;
+  public static final webScreenCapabilities:WebScreenCapabilities = Facade_HostWeb_flight__HostWeb.webScreenCapabilities;
+
+  public static final webScreenHost:flight._internal._Intersection2<Host, { var screen:WebScreenCapabilities; }> = Facade_HostWeb_flight__HostWeb.webScreenHost;
 
   public static final webShareContentBackend:ShareContentBackend = Facade_HostWeb_flight__HostWeb.webShareContentBackend;
 
@@ -463,15 +454,17 @@ class HostWeb {
 
   public static final webStatusBarColorBackend:StatusBarColorBackend = Facade_HostWeb_flight__HostWeb.webStatusBarColorBackend;
 
-  public static final webStorageBackend:{ >Entity, var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>; var destroy:Void->Void; var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>; var subscribe:(StorageChange->Void)->Null<Void->Void>; } = Facade_HostWeb_flight__HostWeb.webStorageBackend;
+  public static final webStorageBackend:WebStorageBackend__webStorage = Facade_HostWeb_flight__HostWeb.webStorageBackend;
 
-  public static final webStorageHost:flight._internal._Intersection2<Host, { var storage:{ var change:{ >Entity, var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>; var destroy:Void->Void; var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>; var subscribe:(StorageChange->Void)->Null<Void->Void>; }; var fileSystem:FileSystemHostBackend; var local:{ >Entity, var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>; var destroy:Void->Void; var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>; var subscribe:(StorageChange->Void)->Null<Void->Void>; }; var persistenceQuery:StoragePersistenceQueryBackend; var persistenceRequest:StoragePersistenceRequestBackend; }; }> = Facade_HostWeb_flight__HostWeb.webStorageHost;
+  public static final webStorageHost:flight._internal._Intersection2<Host, { var storage:{ var change:WebStorageBackend__webStorage; var fileSystem:FileSystemHostBackend; var local:WebStorageBackend__webStorage; var persistenceQuery:StoragePersistenceQueryBackend; var persistenceRequest:StoragePersistenceRequestBackend; }; }> = Facade_HostWeb_flight__HostWeb.webStorageHost;
 
   public static final webSystemHost:flight._internal._Intersection2<Host, { var system:{ var device:DeviceBackend; var lifecycle:LifecycleBackend; var platform:PlatformBackend; var sensors:SensorsBackend; }; }> = Facade_HostWeb_flight__HostWeb.webSystemHost;
 
   public static final webUiHost:flight._internal._Intersection2<Host, { var ui:{ var fullscreen:FullscreenBackend; var statusBarColor:StatusBarColorBackend; }; }> = Facade_HostWeb_flight__HostWeb.webUiHost;
 
-  public static final webVideoCaptureDialogBackend:{ >Entity, var capture:CaptureVideoDialogOptions->flight._internal._Promise<VideoCaptureDialogResult>; } = Facade_HostWeb_flight__HostWeb.webVideoCaptureDialogBackend;
+  public static final webVideoCapabilityBackend:{ >VideoCapabilityBackend, >Entity, } = Facade_HostWeb_flight__HostWeb.webVideoCapabilityBackend;
+
+  public static final webVideoCaptureDialogBackend:VideoCaptureDialogBackend = Facade_HostWeb_flight__HostWeb.webVideoCaptureDialogBackend;
 
   public static final webWindowBackend:WebWindowBackend__webWindow = Facade_HostWeb_flight__HostWeb.webWindowBackend;
 

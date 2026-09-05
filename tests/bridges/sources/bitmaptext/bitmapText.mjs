@@ -11,6 +11,7 @@ export const createBitmapTextData = api.createBitmapTextData;
 export const createBitmapTextRuntime = api.createBitmapTextRuntime;
 export const getBitmapTextBounds = api.getBitmapTextBounds;
 export const getBitmapTextPages = api.getBitmapTextPages;
+export const initializeBitmapTextData = api.initializeBitmapTextData;
 export const isBitmapTextGlyphLayoutStale = api.isBitmapTextGlyphLayoutStale;
 export const reserveBitmapText = api.reserveBitmapText;
 export const setBitmapTextAlign = api.setBitmapTextAlign;

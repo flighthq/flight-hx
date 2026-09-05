@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef HtmlViewData = { var element:Null<flight._internal.dom.HTMLElement>; var height:Float; var width:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Scene2D)
+@:keep
+@:structInit
+class HtmlViewData extends flight.types.Node2DData {
+  public var element:Null<flight._internal.dom.HTMLElement>;
+  public var height:Float;
+  public var width:Float;
+
+  private function new(element:Null<flight._internal.dom.HTMLElement>, height:Float, width:Float):Void {
+    super();
+    this.element = element;
+    this.height = height;
+    this.width = width;
+  }
+}
+#else
+typedef HtmlViewData = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var element:Null<flight._internal.dom.HTMLElement>; var height:Float; var width:Float; };
+#end

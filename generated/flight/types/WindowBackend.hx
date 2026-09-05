@@ -4,4 +4,85 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WindowBackend = { @:optional var attach:ApplicationWindow->NativeWindowHandle->WindowAttachmentOwnership->Bool; @:optional var open:ApplicationWindow->WindowOptions->Bool; @:optional var close:ApplicationWindow->Void; @:optional var setTitle:ApplicationWindow->String->Void; @:optional var setPosition:ApplicationWindow->Float->Float->Void; @:optional var setSize:ApplicationWindow->Float->Float->Void; @:optional var getBounds:ApplicationWindow->WindowBounds->WindowBounds; @:optional var minimize:ApplicationWindow->Void; @:optional var maximize:ApplicationWindow->Void; @:optional var restore:ApplicationWindow->Void; @:optional var focus:ApplicationWindow->Void; @:optional var show:ApplicationWindow->Void; @:optional var hide:ApplicationWindow->Void; @:optional var center:ApplicationWindow->Void; @:optional var setResizable:ApplicationWindow->Bool->Void; @:optional var setAlwaysOnTop:ApplicationWindow->Bool->Void; @:optional var setMinimumSize:ApplicationWindow->Float->Float->Void; @:optional var setMaximumSize:ApplicationWindow->Float->Float->Void; @:optional var setFullscreen:ApplicationWindow->Bool->Void; @:optional var setIcon:ApplicationWindow->String->Void; @:optional var setOpacity:ApplicationWindow->Float->Void; @:optional var setSkipTaskbar:ApplicationWindow->Bool->Void; @:optional var setMenuBarVisible:ApplicationWindow->Bool->Void; @:optional var setParent:ApplicationWindow->Null<ApplicationWindow>->Void; @:optional var setProgress:ApplicationWindow->Float->Void; @:optional var requestAttention:ApplicationWindow->Bool->Void; @:optional var setContentProtection:ApplicationWindow->Bool->Void; @:optional var flashWindowFrame:ApplicationWindow->Void; @:optional var setHasShadow:ApplicationWindow->Bool->Void; @:optional var subscribeClose:(Void->Bool)->(Void->Void)->(Void->Void); @:optional var subscribeMove:(Float->Float->Void)->(Void->Void); @:optional var subscribeOrientation:(Void->Void)->(Void->Void); @:optional var subscribeResize:WindowResizeTargetHandle->(Float->Float->Float->Void)->(Void->Void); @:optional var subscribeVisibility:(Bool->Void)->(Void->Void); };
+#if !flight_struct_typedef
+@:allow(flight._HostCapacitor)
+@:keep
+@:structInit
+class WindowBackend<TRuntime = Dynamic, TAttach = Dynamic, TOpen = Dynamic, TClose = Dynamic, TSetTitle = Dynamic, TSetPosition = Dynamic, TSetSize = Dynamic, TGetBounds = Dynamic, TMinimize = Dynamic, TMaximize = Dynamic, TRestore = Dynamic, TFocus = Dynamic, TShow = Dynamic, THide = Dynamic, TCenter = Dynamic, TSetResizable = Dynamic, TSetAlwaysOnTop = Dynamic, TSetMinimumSize = Dynamic, TSetMaximumSize = Dynamic, TSetFullscreen = Dynamic, TSetIcon = Dynamic, TSetOpacity = Dynamic, TSetSkipTaskbar = Dynamic, TSetMenuBarVisible = Dynamic, TSetParent = Dynamic, TSetProgress = Dynamic, TRequestAttention = Dynamic, TSetContentProtection = Dynamic, TFlashWindowFrame = Dynamic, TSetHasShadow = Dynamic, TSubscribeClose = Dynamic, TSubscribeMove = Dynamic, TSubscribeOrientation = Dynamic, TSubscribeResize = Dynamic, TSubscribeVisibility = Dynamic> {
+  public var __symbol__EntityRuntime:TRuntime;
+  public var attach:Null<TAttach>;
+  public var open:Null<TOpen>;
+  public var close:Null<TClose>;
+  public var setTitle:Null<TSetTitle>;
+  public var setPosition:Null<TSetPosition>;
+  public var setSize:Null<TSetSize>;
+  public var getBounds:Null<TGetBounds>;
+  public var minimize:Null<TMinimize>;
+  public var maximize:Null<TMaximize>;
+  public var restore:Null<TRestore>;
+  public var focus:Null<TFocus>;
+  public var show:Null<TShow>;
+  public var hide:Null<THide>;
+  public var center:Null<TCenter>;
+  public var setResizable:Null<TSetResizable>;
+  public var setAlwaysOnTop:Null<TSetAlwaysOnTop>;
+  public var setMinimumSize:Null<TSetMinimumSize>;
+  public var setMaximumSize:Null<TSetMaximumSize>;
+  public var setFullscreen:Null<TSetFullscreen>;
+  public var setIcon:Null<TSetIcon>;
+  public var setOpacity:Null<TSetOpacity>;
+  public var setSkipTaskbar:Null<TSetSkipTaskbar>;
+  public var setMenuBarVisible:Null<TSetMenuBarVisible>;
+  public var setParent:Null<TSetParent>;
+  public var setProgress:Null<TSetProgress>;
+  public var requestAttention:Null<TRequestAttention>;
+  public var setContentProtection:Null<TSetContentProtection>;
+  public var flashWindowFrame:Null<TFlashWindowFrame>;
+  public var setHasShadow:Null<TSetHasShadow>;
+  public var subscribeClose:Null<TSubscribeClose>;
+  public var subscribeMove:Null<TSubscribeMove>;
+  public var subscribeOrientation:Null<TSubscribeOrientation>;
+  public var subscribeResize:Null<TSubscribeResize>;
+  public var subscribeVisibility:Null<TSubscribeVisibility>;
+
+  private function new(?attach:Null<TAttach>, ?open:Null<TOpen>, ?close:Null<TClose>, ?setTitle:Null<TSetTitle>, ?setPosition:Null<TSetPosition>, ?setSize:Null<TSetSize>, ?getBounds:Null<TGetBounds>, ?minimize:Null<TMinimize>, ?maximize:Null<TMaximize>, ?restore:Null<TRestore>, ?focus:Null<TFocus>, ?show:Null<TShow>, ?hide:Null<THide>, ?center:Null<TCenter>, ?setResizable:Null<TSetResizable>, ?setAlwaysOnTop:Null<TSetAlwaysOnTop>, ?setMinimumSize:Null<TSetMinimumSize>, ?setMaximumSize:Null<TSetMaximumSize>, ?setFullscreen:Null<TSetFullscreen>, ?setIcon:Null<TSetIcon>, ?setOpacity:Null<TSetOpacity>, ?setSkipTaskbar:Null<TSetSkipTaskbar>, ?setMenuBarVisible:Null<TSetMenuBarVisible>, ?setParent:Null<TSetParent>, ?setProgress:Null<TSetProgress>, ?requestAttention:Null<TRequestAttention>, ?setContentProtection:Null<TSetContentProtection>, ?flashWindowFrame:Null<TFlashWindowFrame>, ?setHasShadow:Null<TSetHasShadow>, ?subscribeClose:Null<TSubscribeClose>, ?subscribeMove:Null<TSubscribeMove>, ?subscribeOrientation:Null<TSubscribeOrientation>, ?subscribeResize:Null<TSubscribeResize>, ?subscribeVisibility:Null<TSubscribeVisibility>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.attach = attach;
+    this.open = open;
+    this.close = close;
+    this.setTitle = setTitle;
+    this.setPosition = setPosition;
+    this.setSize = setSize;
+    this.getBounds = getBounds;
+    this.minimize = minimize;
+    this.maximize = maximize;
+    this.restore = restore;
+    this.focus = focus;
+    this.show = show;
+    this.hide = hide;
+    this.center = center;
+    this.setResizable = setResizable;
+    this.setAlwaysOnTop = setAlwaysOnTop;
+    this.setMinimumSize = setMinimumSize;
+    this.setMaximumSize = setMaximumSize;
+    this.setFullscreen = setFullscreen;
+    this.setIcon = setIcon;
+    this.setOpacity = setOpacity;
+    this.setSkipTaskbar = setSkipTaskbar;
+    this.setMenuBarVisible = setMenuBarVisible;
+    this.setParent = setParent;
+    this.setProgress = setProgress;
+    this.requestAttention = requestAttention;
+    this.setContentProtection = setContentProtection;
+    this.flashWindowFrame = flashWindowFrame;
+    this.setHasShadow = setHasShadow;
+    this.subscribeClose = subscribeClose;
+    this.subscribeMove = subscribeMove;
+    this.subscribeOrientation = subscribeOrientation;
+    this.subscribeResize = subscribeResize;
+    this.subscribeVisibility = subscribeVisibility;
+  }
+}
+#else
+typedef WindowBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var attach:ApplicationWindow->NativeWindowHandle->WindowAttachmentOwnership->Bool; @:optional var open:ApplicationWindow->WindowOptions->Bool; @:optional var close:ApplicationWindow->Void; @:optional var setTitle:ApplicationWindow->String->Void; @:optional var setPosition:ApplicationWindow->Float->Float->Void; @:optional var setSize:ApplicationWindow->Float->Float->Void; @:optional var getBounds:ApplicationWindow->WindowBounds->WindowBounds; @:optional var minimize:ApplicationWindow->Void; @:optional var maximize:ApplicationWindow->Void; @:optional var restore:ApplicationWindow->Void; @:optional var focus:ApplicationWindow->Void; @:optional var show:ApplicationWindow->Void; @:optional var hide:ApplicationWindow->Void; @:optional var center:ApplicationWindow->Void; @:optional var setResizable:ApplicationWindow->Bool->Void; @:optional var setAlwaysOnTop:ApplicationWindow->Bool->Void; @:optional var setMinimumSize:ApplicationWindow->Float->Float->Void; @:optional var setMaximumSize:ApplicationWindow->Float->Float->Void; @:optional var setFullscreen:ApplicationWindow->Bool->Void; @:optional var setIcon:ApplicationWindow->String->Void; @:optional var setOpacity:ApplicationWindow->Float->Void; @:optional var setSkipTaskbar:ApplicationWindow->Bool->Void; @:optional var setMenuBarVisible:ApplicationWindow->Bool->Void; @:optional var setParent:ApplicationWindow->Null<ApplicationWindow>->Void; @:optional var setProgress:ApplicationWindow->Float->Void; @:optional var requestAttention:ApplicationWindow->Bool->Void; @:optional var setContentProtection:ApplicationWindow->Bool->Void; @:optional var flashWindowFrame:ApplicationWindow->Void; @:optional var setHasShadow:ApplicationWindow->Bool->Void; @:optional var subscribeClose:(Void->Bool)->(Void->Void)->(Void->Void); @:optional var subscribeMove:(Float->Float->Void)->(Void->Void); @:optional var subscribeOrientation:(Void->Void)->(Void->Void); @:optional var subscribeResize:WindowResizeTargetHandle->(Float->Float->Float->Void)->(Void->Void); @:optional var subscribeVisibility:(Bool->Void)->(Void->Void); };
+#end

@@ -14,4 +14,5 @@ export const createShapeRuntime = api.createShapeRuntime;
 export const getShapeBounds = api.getShapeBounds;
 export const getShapeCommandCount = api.getShapeCommandCount;
 export const getShapeRuntime = api.getShapeRuntime;
+export const initializeShapeData = api.initializeShapeData;
 export const isShapeEmpty = api.isShapeEmpty;

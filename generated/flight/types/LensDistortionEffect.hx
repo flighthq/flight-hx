@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef LensDistortionEffect = { var kind:String; @:optional var amount:Float; @:optional var scale:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class LensDistortionEffect extends flight.types.RenderEffect<String> {
+  public var amount:Null<Float>;
+  public var scale:Null<Float>;
+
+  private function new(kind:String, ?amount:Null<Float>, ?scale:Null<Float>):Void {
+    super(kind);
+    this.amount = amount;
+    this.scale = scale;
+  }
+}
+#else
+typedef LensDistortionEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var amount:Float; @:optional var scale:Float; };
+#end

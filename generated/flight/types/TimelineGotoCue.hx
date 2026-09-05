@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TimelineGotoCue = { var frame:Float; var kind:String; var targetFrame:Null<Float>; var targetLabel:Null<String>; };
+typedef TimelineGotoCue = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var frame:Float; var kind:String; var targetFrame:Null<Float>; var targetLabel:Null<String>; };

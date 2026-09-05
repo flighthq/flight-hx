@@ -4,4 +4,27 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CollisionManifold3D = { var overlapping:Bool; var normalX:Float; var normalY:Float; var normalZ:Float; var depth:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Collision)
+@:keep
+@:structInit
+class CollisionManifold3D {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var overlapping:Bool;
+  public var normalX:Float;
+  public var normalY:Float;
+  public var normalZ:Float;
+  public var depth:Float;
+
+  private function new(overlapping:Bool, normalX:Float, normalY:Float, normalZ:Float, depth:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.overlapping = overlapping;
+    this.normalX = normalX;
+    this.normalY = normalY;
+    this.normalZ = normalZ;
+    this.depth = depth;
+  }
+}
+#else
+typedef CollisionManifold3D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var overlapping:Bool; var normalX:Float; var normalY:Float; var normalZ:Float; var depth:Float; };
+#end

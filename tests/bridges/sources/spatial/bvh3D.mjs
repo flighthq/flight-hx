@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createBvhSpatialBackend3D = api.createBvhSpatialBackend3D;
+export const initializeBvhSpatialBackend3D = api.initializeBvhSpatialBackend3D;

@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FilmGrainEffect = { var kind:String; @:optional var intensity:Float; @:optional var size:Float; @:optional var seed:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class FilmGrainEffect extends flight.types.RenderEffect<String> {
+  public var intensity:Null<Float>;
+  public var size:Null<Float>;
+  public var seed:Null<Float>;
+
+  private function new(kind:String, ?intensity:Null<Float>, ?size:Null<Float>, ?seed:Null<Float>):Void {
+    super(kind);
+    this.intensity = intensity;
+    this.size = size;
+    this.seed = seed;
+  }
+}
+#else
+typedef FilmGrainEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var intensity:Float; @:optional var size:Float; @:optional var seed:Float; };
+#end

@@ -3,12 +3,13 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Signals.clearSignal;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
 import flight._Signals.hasSignalSlots;
-import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.HasStorageChange;
 import flight.types.HasStorageLocal;
 import flight.types.HasStoragePersistenceQuery;
@@ -94,7 +95,10 @@ class _Storage {
   }
 
   public static function createStorageSignals():StorageSignals {
-    return cast (cast createEntity((cast ({ onChange: (cast (cast createSignal() : Signal<StorageChange->Void>) : Dynamic) } : StorageSignals) : Dynamic)) : StorageSignals);
+    var out:EntityConstruction<StorageSignals> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ onChange: cast _Runtime.UNDEFINED } : StorageSignals); }) #end));
+    initializeStorageSignals(({ final __callArgument10:Dynamic = out; __callArgument10; }));
+    return cast out;
     return cast null;
   }
 
@@ -111,12 +115,12 @@ class _Storage {
   }
 
   public static function disposeStorage(signals:StorageSignals):Void {
-    detachStorage(({ final __callArgument10:Dynamic = signals; __callArgument10; }));
+    detachStorage(({ final __callArgument12:Dynamic = signals; __callArgument12; }));
     clearSignal((cast signals.onChange : Dynamic));
   }
 
   public static function getNamespacedStorageByteSize(host:HasStorageLocal, namespace:StorageNamespace):StorageByteSizeResult {
-    return cast (cast _Storage.getStorageByteSizeForPrefix__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, ({ final __callArgument12:Dynamic = (namespace.prefix + '.'); __callArgument12; })) : StorageByteSizeResult);
+    return cast (cast _Storage.getStorageByteSizeForPrefix__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, ({ final __callArgument14:Dynamic = (namespace.prefix + '.'); __callArgument14; })) : StorageByteSizeResult);
     return cast null;
   }
 
@@ -124,7 +128,7 @@ class _Storage {
     var prefix:String = cast _Runtime.UNDEFINED;
     var result:StorageEntriesResult = cast _Runtime.UNDEFINED;
     prefix = (namespace.prefix + '.');
-    result = (cast _Storage.getStorageEntriesForPrefix__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, ({ final __callArgument14:Dynamic = prefix; __callArgument14; })) : StorageEntriesResult);
+    result = (cast _Storage.getStorageEntriesForPrefix__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, ({ final __callArgument16:Dynamic = prefix; __callArgument16; })) : StorageEntriesResult);
     if ((cast !_Runtime.strictEquals((cast result : { var reason:String; }).reason, 'ok') : Bool)) { return cast result; }
     return cast { failedKey: null, reason: 'ok', value: (cast _Runtime.mapArray((cast (cast result : { var failedKey:flight._internal._Any; var reason:String; var value:Array<Array<String>>; }).value : Array<Array<String>>), function(__parameter0:Array<String>, __unused1:Float, __unused2:Array<Array<String>>):Array<String> {
       var key:String = cast _Runtime.UNDEFINED;
@@ -138,12 +142,12 @@ class _Storage {
   }
 
   public static function getNamespacedStorageItem(host:HasStorageLocal, namespace:StorageNamespace, key:String):StorageGetItemResult {
-    return cast (cast (cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local : StorageBackend).getItem((cast (cast _Storage.namespacedKey__storage(({ final __callArgument16:Dynamic = namespace; __callArgument16; }), (cast key : String)) : String) : String));
+    return cast (cast (cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local : StorageBackend).getItem((cast (cast _Storage.namespacedKey__storage(({ final __callArgument18:Dynamic = namespace; __callArgument18; }), (cast key : String)) : String) : String));
     return cast null;
   }
 
   public static function getNamespacedStorageItemPresence(host:HasStorageLocal, namespace:StorageNamespace, key:String):StoragePresenceResult {
-    return cast (cast getStorageItemPresence(({ final __callArgument18:Dynamic = host; __callArgument18; }), (cast (cast _Storage.namespacedKey__storage(({ final __callArgument19:Dynamic = namespace; __callArgument19; }), (cast key : String)) : String) : String)) : StoragePresenceResult);
+    return cast (cast getStorageItemPresence(({ final __callArgument20:Dynamic = host; __callArgument20; }), (cast (cast _Storage.namespacedKey__storage(({ final __callArgument21:Dynamic = namespace; __callArgument21; }), (cast key : String)) : String) : String)) : StoragePresenceResult);
     return cast null;
   }
 
@@ -180,12 +184,12 @@ class _Storage {
   }
 
   public static function getStorageByteSize(host:HasStorageLocal):StorageByteSizeResult {
-    return cast (cast _Storage.getStorageByteSizeForPrefix__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, ({ final __callArgument24:Dynamic = null; __callArgument24; })) : StorageByteSizeResult);
+    return cast (cast _Storage.getStorageByteSizeForPrefix__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, ({ final __callArgument26:Dynamic = null; __callArgument26; })) : StorageByteSizeResult);
     return cast null;
   }
 
   public static function getStorageEntries(host:HasStorageLocal):StorageEntriesResult {
-    return cast (cast _Storage.getStorageEntriesForPrefix__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, ({ final __callArgument26:Dynamic = null; __callArgument26; })) : StorageEntriesResult);
+    return cast (cast _Storage.getStorageEntriesForPrefix__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, ({ final __callArgument28:Dynamic = null; __callArgument28; })) : StorageEntriesResult);
     return cast null;
   }
 
@@ -283,6 +287,12 @@ class _Storage {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeStorageSignals(out:EntityConstruction<StorageSignals>):Void {
+    _Runtime.setField(out, 'onChange', (cast createSignal() : Signal<StorageChange->Void>));
+  }
+
   public static function migrateStorage(host:HasStorageLocal, namespace:Null<StorageNamespace>, migrations:Array<StorageMigration>, ?signals:Null<StorageSignals>):StorageMigrationResult {
     if (signals == null) signals = cast (null : Dynamic);
     var sorted:Array<StorageMigration> = cast _Runtime.UNDEFINED;
@@ -290,8 +300,8 @@ class _Storage {
     var storedVersion:StorageGetItemResult = cast _Runtime.UNDEFINED;
     var checkpoint:Float = cast _Runtime.UNDEFINED;
     var initialCheckpoint:Float = cast _Runtime.UNDEFINED;
-    sorted = (cast _Storage.validateStorageMigrations__storage(({ final __callArgument30:Dynamic = migrations; __callArgument30; })) : Array<StorageMigration>);
-    versionKey = ((cast _Runtime.strictEquals(namespace, null) : Bool) ? (cast '__flight_storage_version' : Dynamic) : (cast (cast _Storage.namespacedKey__storage(({ final __callArgument32:Dynamic = namespace; __callArgument32; }), (cast '__flight_storage_version' : String)) : String) : Dynamic));
+    sorted = (cast _Storage.validateStorageMigrations__storage(({ final __callArgument32:Dynamic = migrations; __callArgument32; })) : Array<StorageMigration>);
+    versionKey = ((cast _Runtime.strictEquals(namespace, null) : Bool) ? (cast '__flight_storage_version' : Dynamic) : (cast (cast _Storage.namespacedKey__storage(({ final __callArgument34:Dynamic = namespace; __callArgument34; }), (cast '__flight_storage_version' : String)) : String) : Dynamic));
     storedVersion = (cast (cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local : StorageBackend).getItem((cast versionKey : String));
     if ((cast !_Runtime.strictEquals((cast storedVersion : { var reason:String; }).reason, 'ok') : Bool)) {
       return cast { failedVersion: null, reason: (cast storedVersion : { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }).reason, stage: 'read-version', version: null };
@@ -307,8 +317,8 @@ class _Storage {
     initialCheckpoint = checkpoint;
     for (migration in _Runtime.iterable(sorted)) {
       if ((cast ((cast migration.version : Float) <= (cast initialCheckpoint : Float)) : Bool)) { continue; }
-      _Runtime.callProperty(migration, 'migrate', cast ([_Runtime.coalesce(({ final __typedStruct36 = namespace; __typedStruct36 == null ? _Runtime.UNDEFINED : (cast __typedStruct36 : { var prefix:String; }).prefix; }), function():Dynamic return cast null)] : Array<Dynamic>));
-      var stored:StorageSetItemResult = (cast _Storage.setStorageItemOnBackend__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, (cast versionKey : String), (cast Std.string(migration.version) : String), ({ final __callArgument37:Dynamic = signals; __callArgument37; })) : StorageSetItemResult);
+      _Runtime.callProperty(migration, 'migrate', cast ([_Runtime.coalesce(({ final __typedStruct38 = namespace; __typedStruct38 == null ? _Runtime.UNDEFINED : (cast __typedStruct38 : { var prefix:String; }).prefix; }), function():Dynamic return cast null)] : Array<Dynamic>));
+      var stored:StorageSetItemResult = (cast _Storage.setStorageItemOnBackend__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, (cast versionKey : String), (cast Std.string(migration.version) : String), ({ final __callArgument39:Dynamic = signals; __callArgument39; })) : StorageSetItemResult);
       if ((cast !_Runtime.strictEquals((cast stored : { var reason:String; }).reason, 'ok') : Bool)) {
         return cast { failedVersion: migration.version, reason: (cast stored : { var reason:StorageSetItemFailureReason; }).reason, stage: 'checkpoint', version: checkpoint };
       }
@@ -320,13 +330,13 @@ class _Storage {
 
   public static function removeNamespacedStorageItem(host:HasStorageLocal, namespace:StorageNamespace, key:String, ?signals:Null<StorageSignals>):StorageRemoveItemResult {
     if (signals == null) signals = cast (null : Dynamic);
-    return cast (cast _Storage.removeStorageItemFromBackend__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, (cast (cast _Storage.namespacedKey__storage(({ final __callArgument39:Dynamic = namespace; __callArgument39; }), (cast key : String)) : String) : String), ({ final __callArgument41:Dynamic = signals; __callArgument41; })) : StorageRemoveItemResult);
+    return cast (cast _Storage.removeStorageItemFromBackend__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, (cast (cast _Storage.namespacedKey__storage(({ final __callArgument41:Dynamic = namespace; __callArgument41; }), (cast key : String)) : String) : String), ({ final __callArgument43:Dynamic = signals; __callArgument43; })) : StorageRemoveItemResult);
     return cast null;
   }
 
   public static function removeStorageItem(host:HasStorageLocal, key:String, ?signals:Null<StorageSignals>):StorageRemoveItemResult {
     if (signals == null) signals = cast (null : Dynamic);
-    return cast (cast _Storage.removeStorageItemFromBackend__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, (cast key : String), ({ final __callArgument45:Dynamic = signals; __callArgument45; })) : StorageRemoveItemResult);
+    return cast (cast _Storage.removeStorageItemFromBackend__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, (cast key : String), ({ final __callArgument47:Dynamic = signals; __callArgument47; })) : StorageRemoveItemResult);
     return cast null;
   }
 
@@ -335,7 +345,7 @@ class _Storage {
     var completed:Float = cast _Runtime.UNDEFINED;
     completed = 0.0;
     for (key in _Runtime.iterable(keys)) {
-      var result:StorageRemoveItemResult = (cast _Storage.removeStorageItemFromBackend__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, (cast key : String), ({ final __callArgument49:Dynamic = signals; __callArgument49; })) : StorageRemoveItemResult);
+      var result:StorageRemoveItemResult = (cast _Storage.removeStorageItemFromBackend__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, (cast key : String), ({ final __callArgument51:Dynamic = signals; __callArgument51; })) : StorageRemoveItemResult);
       if ((cast !_Runtime.strictEquals((cast result : { var reason:String; }).reason, 'ok') : Bool)) { return cast { completed: completed, failedKey: key, reason: (cast result : { var reason:StorageRemoveItemFailureReason; }).reason }; }
       completed++;
     }
@@ -345,19 +355,19 @@ class _Storage {
 
   public static function setNamespacedStorageItem(host:HasStorageLocal, namespace:StorageNamespace, key:String, value:String, ?signals:Null<StorageSignals>):StorageSetItemResult {
     if (signals == null) signals = cast (null : Dynamic);
-    return cast (cast _Storage.setStorageItemOnBackend__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, (cast (cast _Storage.namespacedKey__storage(({ final __callArgument51:Dynamic = namespace; __callArgument51; }), (cast key : String)) : String) : String), (cast value : String), ({ final __callArgument53:Dynamic = signals; __callArgument53; })) : StorageSetItemResult);
+    return cast (cast _Storage.setStorageItemOnBackend__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, (cast (cast _Storage.namespacedKey__storage(({ final __callArgument53:Dynamic = namespace; __callArgument53; }), (cast key : String)) : String) : String), (cast value : String), ({ final __callArgument55:Dynamic = signals; __callArgument55; })) : StorageSetItemResult);
     return cast null;
   }
 
   public static function setStorageBoolean(host:HasStorageLocal, key:String, value:Bool, ?signals:Null<StorageSignals>):StorageSetItemResult {
     if (signals == null) signals = cast (null : Dynamic);
-    return cast (cast _Storage.setStorageItemOnBackend__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, (cast key : String), (cast ((cast value : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic)) : String), ({ final __callArgument57:Dynamic = signals; __callArgument57; })) : StorageSetItemResult);
+    return cast (cast _Storage.setStorageItemOnBackend__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, (cast key : String), (cast ((cast value : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic)) : String), ({ final __callArgument59:Dynamic = signals; __callArgument59; })) : StorageSetItemResult);
     return cast null;
   }
 
   public static function setStorageItem(host:HasStorageLocal, key:String, value:String, ?signals:Null<StorageSignals>):StorageSetItemResult {
     if (signals == null) signals = cast (null : Dynamic);
-    return cast (cast _Storage.setStorageItemOnBackend__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, (cast key : String), (cast value : String), ({ final __callArgument59:Dynamic = signals; __callArgument59; })) : StorageSetItemResult);
+    return cast (cast _Storage.setStorageItemOnBackend__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, (cast key : String), (cast value : String), ({ final __callArgument61:Dynamic = signals; __callArgument61; })) : StorageSetItemResult);
     return cast null;
   }
 
@@ -366,7 +376,7 @@ class _Storage {
     var completed:Float = cast _Runtime.UNDEFINED;
     completed = 0.0;
     for (key in _Runtime.iterable(flight._internal.DynamicObject.keys(record))) {
-      var result:StorageSetItemResult = (cast _Storage.setStorageItemOnBackend__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, (cast key : String), (cast _Runtime.getIndex(record, key) : String), ({ final __callArgument63:Dynamic = signals; __callArgument63; })) : StorageSetItemResult);
+      var result:StorageSetItemResult = (cast _Storage.setStorageItemOnBackend__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, (cast key : String), (cast _Runtime.getIndex(record, key) : String), ({ final __callArgument65:Dynamic = signals; __callArgument65; })) : StorageSetItemResult);
       if ((cast !_Runtime.strictEquals((cast result : { var reason:String; }).reason, 'ok') : Bool)) { return cast { completed: completed, failedKey: key, reason: (cast result : { var reason:StorageSetItemFailureReason; }).reason }; }
       completed++;
     }
@@ -383,14 +393,14 @@ class _Storage {
       return cast { reason: 'serialization-failed' };
     }
     if ((cast _Runtime.strictEquals(raw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { reason: 'serialization-failed' }; }
-    return cast (cast _Storage.setStorageItemOnBackend__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, (cast key : String), (cast raw : String), ({ final __callArgument65:Dynamic = signals; __callArgument65; })) : StorageSetItemResult);
+    return cast (cast _Storage.setStorageItemOnBackend__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, (cast key : String), (cast raw : String), ({ final __callArgument67:Dynamic = signals; __callArgument67; })) : StorageSetItemResult);
     return cast null;
   }
 
   public static function setStorageNumber(host:HasStorageLocal, key:String, value:Float, ?signals:Null<StorageSignals>):StorageSetItemResult {
     if (signals == null) signals = cast (null : Dynamic);
     if ((cast !(cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('setStorageNumber value must be finite')); }
-    return cast (cast _Storage.setStorageItemOnBackend__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, (cast key : String), (cast Std.string(value) : String), ({ final __callArgument67:Dynamic = signals; __callArgument67; })) : StorageSetItemResult);
+    return cast (cast _Storage.setStorageItemOnBackend__storage((cast (cast host : HasStorageLocal).storage : { var local:StorageBackend; }).local, (cast key : String), (cast Std.string(value) : String), ({ final __callArgument69:Dynamic = signals; __callArgument69; })) : StorageSetItemResult);
     return cast null;
   }
 
@@ -435,10 +445,10 @@ class _Storage {
     var active:Bool = cast _Runtime.UNDEFINED;
     var oldValue:Null<flight._internal._Union2<{ var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }, { var reason:String; var value:Null<String>; }>> = cast _Runtime.UNDEFINED;
     var result:StorageRemoveItemResult = cast _Runtime.UNDEFINED;
-    active = (cast _Storage.storageSignalsActive__storage(({ final __callArgument73:Dynamic = signals; __callArgument73; })) : Bool);
+    active = (cast _Storage.storageSignalsActive__storage(({ final __callArgument75:Dynamic = signals; __callArgument75; })) : Bool);
     oldValue = ((cast active : Bool) ? (cast (cast backend : StorageBackend).getItem((cast key : String)) : Dynamic) : (cast null : Dynamic));
     result = (cast backend : StorageBackend).removeItem((cast key : String));
-    if ((cast ((cast ((cast ((cast _Runtime.strictEquals((cast result : { var reason:String; }).reason, 'ok') : Bool) && (cast active : Bool)) : Bool) && (cast _Runtime.strictEquals(({ final __structural75 = oldValue; __structural75 == null ? _Runtime.UNDEFINED : (cast __structural75 : { var reason:String; }).reason; }), 'ok') : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast oldValue : { var reason:String; var value:Null<String>; }).value, null) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals((cast result : { var reason:String; }).reason, 'ok') : Bool) && (cast active : Bool)) : Bool) && (cast _Runtime.strictEquals(({ final __structural77 = oldValue; __structural77 == null ? _Runtime.UNDEFINED : (cast __structural77 : { var reason:String; }).reason; }), 'ok') : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast oldValue : { var reason:String; var value:Null<String>; }).value, null) : Bool)) : Bool)) {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : { var onChange:Signal<StorageChange->Void>; }).onChange], [{ key: key, newValue: null, oldValue: (cast oldValue : { var reason:String; var value:Null<String>; }).value }]]), 1);
     }
     return cast result;
@@ -449,10 +459,10 @@ class _Storage {
     var active:Bool = cast _Runtime.UNDEFINED;
     var oldValue:Null<flight._internal._Union2<{ var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }, { var reason:String; var value:Null<String>; }>> = cast _Runtime.UNDEFINED;
     var result:StorageSetItemResult = cast _Runtime.UNDEFINED;
-    active = (cast _Storage.storageSignalsActive__storage(({ final __callArgument76:Dynamic = signals; __callArgument76; })) : Bool);
+    active = (cast _Storage.storageSignalsActive__storage(({ final __callArgument78:Dynamic = signals; __callArgument78; })) : Bool);
     oldValue = ((cast active : Bool) ? (cast (cast backend : StorageBackend).getItem((cast key : String)) : Dynamic) : (cast null : Dynamic));
     result = (cast backend : StorageBackend).setItem((cast key : String), (cast value : String));
-    if ((cast ((cast ((cast ((cast _Runtime.strictEquals((cast result : { var reason:String; }).reason, 'ok') : Bool) && (cast active : Bool)) : Bool) && (cast _Runtime.strictEquals(({ final __structural78 = oldValue; __structural78 == null ? _Runtime.UNDEFINED : (cast __structural78 : { var reason:String; }).reason; }), 'ok') : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast oldValue : { var reason:String; var value:Null<String>; }).value, value) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals((cast result : { var reason:String; }).reason, 'ok') : Bool) && (cast active : Bool)) : Bool) && (cast _Runtime.strictEquals(({ final __structural80 = oldValue; __structural80 == null ? _Runtime.UNDEFINED : (cast __structural80 : { var reason:String; }).reason; }), 'ok') : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast oldValue : { var reason:String; var value:Null<String>; }).value, value) : Bool)) : Bool)) {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : { var onChange:Signal<StorageChange->Void>; }).onChange], [{ key: key, newValue: value, oldValue: (cast oldValue : { var reason:String; var value:Null<String>; }).value }]]), 1);
     }
     return cast result;

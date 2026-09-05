@@ -6,3 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createCapacitorAppCapabilities = api.createCapacitorAppCapabilities;
+export const initializeCapacitorAndroidAppCapabilities = api.initializeCapacitorAndroidAppCapabilities;
+export const initializeCapacitorCommonAppCapabilities = api.initializeCapacitorCommonAppCapabilities;

@@ -4,4 +4,40 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef BevelEffect = { var kind:String; @:optional var angle:Float; @:optional var bevelType:String; @:optional var blurX:Float; @:optional var blurY:Float; @:optional var distance:Float; @:optional var highlightAlpha:Float; @:optional var highlightColor:Float; @:optional var quality:Float; @:optional var shadowAlpha:Float; @:optional var shadowColor:Float; @:optional var sourceMode:EffectSourceMode; @:optional var strength:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class BevelEffect extends flight.types.RenderEffect<String> {
+  public var angle:Null<Float>;
+  public var bevelType:Null<String>;
+  public var blurX:Null<Float>;
+  public var blurY:Null<Float>;
+  public var distance:Null<Float>;
+  public var highlightAlpha:Null<Float>;
+  public var highlightColor:Null<Float>;
+  public var quality:Null<Float>;
+  public var shadowAlpha:Null<Float>;
+  public var shadowColor:Null<Float>;
+  public var sourceMode:Null<EffectSourceMode>;
+  public var strength:Null<Float>;
+
+  private function new(kind:String, ?angle:Null<Float>, ?bevelType:Null<String>, ?blurX:Null<Float>, ?blurY:Null<Float>, ?distance:Null<Float>, ?highlightAlpha:Null<Float>, ?highlightColor:Null<Float>, ?quality:Null<Float>, ?shadowAlpha:Null<Float>, ?shadowColor:Null<Float>, ?sourceMode:Null<EffectSourceMode>, ?strength:Null<Float>):Void {
+    super(kind);
+    this.angle = angle;
+    this.bevelType = bevelType;
+    this.blurX = blurX;
+    this.blurY = blurY;
+    this.distance = distance;
+    this.highlightAlpha = highlightAlpha;
+    this.highlightColor = highlightColor;
+    this.quality = quality;
+    this.shadowAlpha = shadowAlpha;
+    this.shadowColor = shadowColor;
+    this.sourceMode = sourceMode;
+    this.strength = strength;
+  }
+}
+#else
+typedef BevelEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var angle:Float; @:optional var bevelType:String; @:optional var blurX:Float; @:optional var blurY:Float; @:optional var distance:Float; @:optional var highlightAlpha:Float; @:optional var highlightColor:Float; @:optional var quality:Float; @:optional var shadowAlpha:Float; @:optional var shadowColor:Float; @:optional var sourceMode:EffectSourceMode; @:optional var strength:Float; };
+#end

@@ -4,4 +4,48 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef InputSignals = { var onGamepadAxisMove:Signal<InputGamepadAxisData->Void>; var onGamepadButtonDown:Signal<InputGamepadButtonData->Void>; var onGamepadButtonUp:Signal<InputGamepadButtonData->Void>; var onGamepadConnect:Signal<InputGamepadConnectData->Void>; var onGamepadDisconnect:Signal<InputGamepadConnectData->Void>; var onKeyDown:Signal<InputKeyboardData->Void>; var onKeyUp:Signal<InputKeyboardData->Void>; var onPointerCancel:Signal<InputPointerData->Void>; var onPointerDown:Signal<InputPointerData->Void>; var onPointerMove:Signal<InputPointerData->Void>; var onPointerMoveRelative:Signal<InputPointerData->Void>; var onPointerUp:Signal<InputPointerData->Void>; var onTextEdit:Signal<InputTextData->Void>; var onTextInput:Signal<InputTextData->Void>; var onWheel:Signal<InputPointerData->Void>; };
+#if !flight_struct_typedef
+@:allow(flight._Input)
+@:allow(flight.types.InputManager)
+@:keep
+@:structInit
+class InputSignals {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onGamepadAxisMove:Signal<InputGamepadAxisData->Void>;
+  public var onGamepadButtonDown:Signal<InputGamepadButtonData->Void>;
+  public var onGamepadButtonUp:Signal<InputGamepadButtonData->Void>;
+  public var onGamepadConnect:Signal<InputGamepadConnectData->Void>;
+  public var onGamepadDisconnect:Signal<InputGamepadConnectData->Void>;
+  public var onKeyDown:Signal<InputKeyboardData->Void>;
+  public var onKeyUp:Signal<InputKeyboardData->Void>;
+  public var onPointerCancel:Signal<InputPointerData->Void>;
+  public var onPointerDown:Signal<InputPointerData->Void>;
+  public var onPointerMove:Signal<InputPointerData->Void>;
+  public var onPointerMoveRelative:Signal<InputPointerData->Void>;
+  public var onPointerUp:Signal<InputPointerData->Void>;
+  public var onTextEdit:Signal<InputTextData->Void>;
+  public var onTextInput:Signal<InputTextData->Void>;
+  public var onWheel:Signal<InputPointerData->Void>;
+
+  private function new(onGamepadAxisMove:Signal<InputGamepadAxisData->Void>, onGamepadButtonDown:Signal<InputGamepadButtonData->Void>, onGamepadButtonUp:Signal<InputGamepadButtonData->Void>, onGamepadConnect:Signal<InputGamepadConnectData->Void>, onGamepadDisconnect:Signal<InputGamepadConnectData->Void>, onKeyDown:Signal<InputKeyboardData->Void>, onKeyUp:Signal<InputKeyboardData->Void>, onPointerCancel:Signal<InputPointerData->Void>, onPointerDown:Signal<InputPointerData->Void>, onPointerMove:Signal<InputPointerData->Void>, onPointerMoveRelative:Signal<InputPointerData->Void>, onPointerUp:Signal<InputPointerData->Void>, onTextEdit:Signal<InputTextData->Void>, onTextInput:Signal<InputTextData->Void>, onWheel:Signal<InputPointerData->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onGamepadAxisMove = onGamepadAxisMove;
+    this.onGamepadButtonDown = onGamepadButtonDown;
+    this.onGamepadButtonUp = onGamepadButtonUp;
+    this.onGamepadConnect = onGamepadConnect;
+    this.onGamepadDisconnect = onGamepadDisconnect;
+    this.onKeyDown = onKeyDown;
+    this.onKeyUp = onKeyUp;
+    this.onPointerCancel = onPointerCancel;
+    this.onPointerDown = onPointerDown;
+    this.onPointerMove = onPointerMove;
+    this.onPointerMoveRelative = onPointerMoveRelative;
+    this.onPointerUp = onPointerUp;
+    this.onTextEdit = onTextEdit;
+    this.onTextInput = onTextInput;
+    this.onWheel = onWheel;
+  }
+}
+#else
+typedef InputSignals = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onGamepadAxisMove:Signal<InputGamepadAxisData->Void>; var onGamepadButtonDown:Signal<InputGamepadButtonData->Void>; var onGamepadButtonUp:Signal<InputGamepadButtonData->Void>; var onGamepadConnect:Signal<InputGamepadConnectData->Void>; var onGamepadDisconnect:Signal<InputGamepadConnectData->Void>; var onKeyDown:Signal<InputKeyboardData->Void>; var onKeyUp:Signal<InputKeyboardData->Void>; var onPointerCancel:Signal<InputPointerData->Void>; var onPointerDown:Signal<InputPointerData->Void>; var onPointerMove:Signal<InputPointerData->Void>; var onPointerMoveRelative:Signal<InputPointerData->Void>; var onPointerUp:Signal<InputPointerData->Void>; var onTextEdit:Signal<InputTextData->Void>; var onTextInput:Signal<InputTextData->Void>; var onWheel:Signal<InputPointerData->Void>; };
+#end

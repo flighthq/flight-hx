@@ -4,4 +4,29 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ResourceLoader = { var onCancel:Signal<Void->Void>; var onComplete:Signal<Array<ResourceLoadReport>->Void>; var onError:Signal<flight._internal._Any->String->Void>; var onPause:Signal<Void->Void>; var onProgress:Signal<Float->Void>; var onResume:Signal<Void->Void>; };
+#if !flight_struct_typedef
+@:allow(flight._Loader)
+@:keep
+@:structInit
+class ResourceLoader<TRuntime = Dynamic> {
+  public var __symbol__EntityRuntime:TRuntime;
+  public var onCancel:Signal<Void->Void>;
+  public var onComplete:Signal<Array<ResourceLoadReport>->Void>;
+  public var onError:Signal<flight._internal._Any->String->Void>;
+  public var onPause:Signal<Void->Void>;
+  public var onProgress:Signal<Float->Void>;
+  public var onResume:Signal<Void->Void>;
+
+  private function new(onCancel:Signal<Void->Void>, onComplete:Signal<Array<ResourceLoadReport>->Void>, onError:Signal<flight._internal._Any->String->Void>, onPause:Signal<Void->Void>, onProgress:Signal<Float->Void>, onResume:Signal<Void->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onCancel = onCancel;
+    this.onComplete = onComplete;
+    this.onError = onError;
+    this.onPause = onPause;
+    this.onProgress = onProgress;
+    this.onResume = onResume;
+  }
+}
+#else
+typedef ResourceLoader = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onCancel:Signal<Void->Void>; var onComplete:Signal<Array<ResourceLoadReport>->Void>; var onError:Signal<flight._internal._Any->String->Void>; var onPause:Signal<Void->Void>; var onProgress:Signal<Float->Void>; var onResume:Signal<Void->Void>; };
+#end

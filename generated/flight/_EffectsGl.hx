@@ -16,6 +16,9 @@ import flight._Effects.computeBloomBlurRadius;
 import flight._Effects.computeBloomIntensity;
 import flight._Effects.computeBloomThreshold;
 import flight._Effects.computeBoxBlurPassRadius;
+import flight._Effects.createSsaoEffect;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Log.logOnce;
 import flight._Registry.withRegistryTableEntry;
 import flight._RenderGl.acquireGlRenderTarget;
@@ -65,6 +68,8 @@ import flight.types.DisplacementEffect;
 import flight.types.DitherEffect;
 import flight.types.DropShadowEffect;
 import flight.types.EffectSourceMode;
+import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.FilmGrainEffect;
 import flight.types.FxaaEffect;
 import flight.types.GlColorLutTextureCache;
@@ -799,7 +804,7 @@ class _EffectsGl {
   @:allow(flight)
   @:keep
   private static function applyContactShadowsEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ContactShadowsEffect):Void {
-    applySsaoEffectToGl(({ final __callArgument625:Dynamic = state; __callArgument625; }), ({ final __callArgument626:Dynamic = source; __callArgument626; }), ({ final __callArgument627:Dynamic = dest; __callArgument627; }), ({ final __callArgument628:Dynamic = { kind: 'SsaoEffect', intensity: _Runtime.coalesce(_Runtime.field(effect, 'opacity'), function():Dynamic return cast 0.6), radius: _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 0.5), samples: _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0) }; __callArgument628; }));
+    applySsaoEffectToGl(({ final __callArgument625:Dynamic = state; __callArgument625; }), ({ final __callArgument626:Dynamic = source; __callArgument626; }), ({ final __callArgument627:Dynamic = dest; __callArgument627; }), (cast createSsaoEffect(({ final __callArgument628:Dynamic = { intensity: _Runtime.coalesce(_Runtime.field(effect, 'opacity'), function():Dynamic return cast 0.6), radius: _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 0.5), samples: _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0) }; __callArgument628; })) : SsaoEffect));
   }
 
   public static final defaultGlContactShadowsEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
@@ -807,7 +812,7 @@ class _EffectsGl {
   });
 
   public static function registerGlContactShadowsEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument635:Dynamic = state; __callArgument635; }), (cast 'ContactShadowsEffect' : String), ({ final __callArgument636:Dynamic = defaultGlContactShadowsEffectRunner; __callArgument636; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument633:Dynamic = state; __callArgument633; }), (cast 'ContactShadowsEffect' : String), ({ final __callArgument634:Dynamic = defaultGlContactShadowsEffectRunner; __callArgument634; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument637:Dynamic = state; __callArgument637; }), (cast 'ContactShadowsEffect' : String), ({ final __callArgument638:Dynamic = defaultGlContactShadowsEffectRunner; __callArgument638; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument635:Dynamic = state; __callArgument635; }), (cast 'ContactShadowsEffect' : String), ({ final __callArgument636:Dynamic = defaultGlContactShadowsEffectRunner; __callArgument636; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   @:allow(flight)
@@ -839,7 +844,7 @@ class _EffectsGl {
     clampEdge = _Runtime.coalesce(effect.clamp, function():Dynamic return cast true);
     preserveAlpha = _Runtime.coalesce(effect.preserveAlpha, function():Dynamic return cast true);
     edgeColor = _Runtime.coalesce(effect.color, function():Dynamic return cast 0.0);
-    divisor = _Runtime.coalesce(effect.divisor, function():Dynamic return cast (cast _EffectsGl.getAutoDivisor__glConvolutionEffect(({ final __callArgument637:Dynamic = matrix; __callArgument637; }), (cast (matrixX * matrixY) : Float)) : Float));
+    divisor = _Runtime.coalesce(effect.divisor, function():Dynamic return cast (cast _EffectsGl.getAutoDivisor__glConvolutionEffect(({ final __callArgument639:Dynamic = matrix; __callArgument639; }), (cast (matrixX * matrixY) : Float)) : Float));
     matrixData = new flight._internal._Float32Array(MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE);
     {
       var i:Float = 0.0;
@@ -848,8 +853,8 @@ class _EffectsGl {
         i++;
       }
     }
-    program = (cast getGlEffectProgram(({ final __callArgument639:Dynamic = state; __callArgument639; }), (cast 'stylization.convolution' : String), (cast _EffectsGl.CONVOLUTION_FRAGMENT_SRC__glConvolutionEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument641:Dynamic = state; __callArgument641; }), ({ final __callArgument642:Dynamic = program; __callArgument642; }), ({ final __callArgument643:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument643; }), ({ final __callArgument644:Dynamic = dest; __callArgument644; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument641:Dynamic = state; __callArgument641; }), (cast 'stylization.convolution' : String), (cast _EffectsGl.CONVOLUTION_FRAGMENT_SRC__glConvolutionEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument643:Dynamic = state; __callArgument643; }), ({ final __callArgument644:Dynamic = program; __callArgument644; }), ({ final __callArgument645:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument645; }), ({ final __callArgument646:Dynamic = dest; __callArgument646; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform2f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_texelSize'), (1.0 / source.width), (1.0 / source.height));
       flight._internal.backend.WebGl2Backend.uniform1fv(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_matrix[0]'), matrixData, _Runtime.field(_Runtime, 'UNDEFINED'), _Runtime.field(_Runtime, 'UNDEFINED'));
       flight._internal.backend.WebGl2Backend.uniform1i(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_matrixX'), matrixX);
@@ -858,7 +863,7 @@ class _EffectsGl {
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_bias'), bias);
       flight._internal.backend.WebGl2Backend.uniform1i(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_clamp'), ((cast clampEdge : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
       flight._internal.backend.WebGl2Backend.uniform1i(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_preserveAlpha'), ((cast preserveAlpha : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
-      unpackColorRgba(({ final __callArgument645:Dynamic = _EffectsGl.scratchEdgeColor__glConvolutionEffect; __callArgument645; }), (cast edgeColor : Float));
+      unpackColorRgba(({ final __callArgument647:Dynamic = _EffectsGl.scratchEdgeColor__glConvolutionEffect; __callArgument647; }), (cast edgeColor : Float));
       flight._internal.backend.WebGl2Backend.uniform4f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_edgeColor'), flight._internal._StaticIndex.readFloatArrayTyped((cast _EffectsGl.scratchEdgeColor__glConvolutionEffect : Array<Float>), (cast 0.0 : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast _EffectsGl.scratchEdgeColor__glConvolutionEffect : Array<Float>), (cast 1.0 : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast _EffectsGl.scratchEdgeColor__glConvolutionEffect : Array<Float>), (cast 2.0 : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast _EffectsGl.scratchEdgeColor__glConvolutionEffect : Array<Float>), (cast 3.0 : Float)));
     } : Dynamic));
   }
@@ -868,7 +873,7 @@ class _EffectsGl {
   });
 
   public static function registerGlConvolutionEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument655:Dynamic = state; __callArgument655; }), (cast 'ConvolutionEffect' : String), ({ final __callArgument656:Dynamic = defaultGlConvolutionEffectRunner; __callArgument656; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument653:Dynamic = state; __callArgument653; }), (cast 'ConvolutionEffect' : String), ({ final __callArgument654:Dynamic = defaultGlConvolutionEffectRunner; __callArgument654; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument657:Dynamic = state; __callArgument657; }), (cast 'ConvolutionEffect' : String), ({ final __callArgument658:Dynamic = defaultGlConvolutionEffectRunner; __callArgument658; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument655:Dynamic = state; __callArgument655; }), (cast 'ConvolutionEffect' : String), ({ final __callArgument656:Dynamic = defaultGlConvolutionEffectRunner; __callArgument656; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static function getAutoDivisor__glConvolutionEffect(matrix:Array<Float>, length:Float):Float {
@@ -901,8 +906,8 @@ class _EffectsGl {
     scanlineIntensity = _Runtime.coalesce(effect.scanlineIntensity, function():Dynamic return cast 0.3);
     vignette = _Runtime.coalesce(effect.vignette, function():Dynamic return cast 0.3);
     aberration = _Runtime.coalesce(effect.aberration, function():Dynamic return cast 0.005);
-    program = (cast getGlEffectProgram(({ final __callArgument657:Dynamic = state; __callArgument657; }), (cast 'stylization.crt' : String), (cast _EffectsGl.CRT_FRAGMENT_SRC__glCrtEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument659:Dynamic = state; __callArgument659; }), ({ final __callArgument660:Dynamic = program; __callArgument660; }), ({ final __callArgument661:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument661; }), ({ final __callArgument662:Dynamic = dest; __callArgument662; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument659:Dynamic = state; __callArgument659; }), (cast 'stylization.crt' : String), (cast _EffectsGl.CRT_FRAGMENT_SRC__glCrtEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument661:Dynamic = state; __callArgument661; }), ({ final __callArgument662:Dynamic = program; __callArgument662; }), ({ final __callArgument663:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument663; }), ({ final __callArgument664:Dynamic = dest; __callArgument664; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_curvature'), curvature);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_scanlineIntensity'), scanlineIntensity);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_vignette'), vignette);
@@ -916,7 +921,7 @@ class _EffectsGl {
   });
 
   public static function registerGlCrtEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument669:Dynamic = state; __callArgument669; }), (cast 'CrtEffect' : String), ({ final __callArgument670:Dynamic = defaultGlCrtEffectRunner; __callArgument670; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument667:Dynamic = state; __callArgument667; }), (cast 'CrtEffect' : String), ({ final __callArgument668:Dynamic = defaultGlCrtEffectRunner; __callArgument668; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument671:Dynamic = state; __callArgument671; }), (cast 'CrtEffect' : String), ({ final __callArgument672:Dynamic = defaultGlCrtEffectRunner; __callArgument672; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument669:Dynamic = state; __callArgument669; }), (cast 'CrtEffect' : String), ({ final __callArgument670:Dynamic = defaultGlCrtEffectRunner; __callArgument670; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final CRT_FRAGMENT_SRC__glCrtEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_curvature;\nuniform float u_scanlineIntensity;\nuniform float u_vignette;\nuniform float u_aberration;\nuniform vec2 u_resolution;\nout vec4 o_color;\nvec2 barrel(vec2 uv) {\n  vec2 c = uv * 2.0 - 1.0;\n  c += c * u_curvature * dot(c, c);\n  return c * 0.5 + 0.5;\n}\nvoid main() {\n  vec2 uv = barrel(v_texCoord);\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {\n    o_color = vec4(0.0, 0.0, 0.0, 1.0);\n    return;\n  }\n  vec2 off = vec2(u_aberration, 0.0);\n  float r = texture(u_texture0, uv + off).r;\n  float g = texture(u_texture0, uv).g;\n  float b = texture(u_texture0, uv - off).b;\n  float a = texture(u_texture0, uv).a;\n  vec3 col = vec3(r, g, b);\n  // Scanlines are counted DOWN the image so a given line falls on the same row on either backend; a\n  // render target is bottom-left, so the row is measured from the far edge first.\n  float line = sin((1.0 - uv.y) * u_resolution.y * 3.14159265) * 0.5 + 0.5;\n  col *= 1.0 - u_scanlineIntensity * (1.0 - line);\n  vec2 vc = uv * 2.0 - 1.0;\n  col *= 1.0 - u_vignette * dot(vc, vc);\n  o_color = vec4(col, a);\n}';
@@ -927,18 +932,18 @@ class _EffectsGl {
     var fragmentSource:Null<String> = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     var uniforms:Null<flight._internal._Record<String, flight._internal._Union2<Float, Array<Float>>>> = cast _Runtime.UNDEFINED;
-    fragmentSource = (cast getGlCustomShaderSource(({ final __callArgument671:Dynamic = state; __callArgument671; }), (cast _Runtime.field(effect, 'shaderKey') : String)) : Null<String>);
+    fragmentSource = (cast getGlCustomShaderSource(({ final __callArgument673:Dynamic = state; __callArgument673; }), (cast _Runtime.field(effect, 'shaderKey') : String)) : Null<String>);
     if ((cast _Runtime.strictEquals(fragmentSource, null) : Bool)) {
-      var passthrough:GlFullscreenProgram = (cast getGlEffectProgram(({ final __callArgument673:Dynamic = state; __callArgument673; }), (cast 'custom.passthrough' : String), (cast _EffectsGl.PASSTHROUGH_FRAGMENT_SRC__glCustomShaderEffect : String)) : GlFullscreenProgram);
-      drawGlFullscreenPass(({ final __callArgument675:Dynamic = state; __callArgument675; }), ({ final __callArgument676:Dynamic = passthrough; __callArgument676; }), ({ final __callArgument677:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument677; }), ({ final __callArgument678:Dynamic = dest; __callArgument678; }), (cast function(__unused0:GlContext, __unused1:GlFullscreenProgram):Void { _EffectsGl.NO_UNIFORMS__glCustomShaderEffect(); } : Dynamic));
+      var passthrough:GlFullscreenProgram = (cast getGlEffectProgram(({ final __callArgument675:Dynamic = state; __callArgument675; }), (cast 'custom.passthrough' : String), (cast _EffectsGl.PASSTHROUGH_FRAGMENT_SRC__glCustomShaderEffect : String)) : GlFullscreenProgram);
+      drawGlFullscreenPass(({ final __callArgument677:Dynamic = state; __callArgument677; }), ({ final __callArgument678:Dynamic = passthrough; __callArgument678; }), ({ final __callArgument679:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument679; }), ({ final __callArgument680:Dynamic = dest; __callArgument680; }), (cast function(__unused0:GlContext, __unused1:GlFullscreenProgram):Void { _EffectsGl.NO_UNIFORMS__glCustomShaderEffect(); } : Dynamic));
       return;
     }
-    program = (cast getGlEffectProgram(({ final __callArgument683:Dynamic = state; __callArgument683; }), (cast ('custom.' + _Runtime.field(effect, 'shaderKey')) : String), (cast fragmentSource : String)) : GlFullscreenProgram);
+    program = (cast getGlEffectProgram(({ final __callArgument685:Dynamic = state; __callArgument685; }), (cast ('custom.' + _Runtime.field(effect, 'shaderKey')) : String), (cast fragmentSource : String)) : GlFullscreenProgram);
     uniforms = _Runtime.field(effect, 'uniforms');
-    drawGlFullscreenPass(({ final __callArgument685:Dynamic = state; __callArgument685; }), ({ final __callArgument686:Dynamic = program; __callArgument686; }), ({ final __callArgument687:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument687; }), ({ final __callArgument688:Dynamic = dest; __callArgument688; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    drawGlFullscreenPass(({ final __callArgument687:Dynamic = state; __callArgument687; }), ({ final __callArgument688:Dynamic = program; __callArgument688; }), ({ final __callArgument689:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument689; }), ({ final __callArgument690:Dynamic = dest; __callArgument690; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       if ((cast _Runtime.strictEquals(uniforms, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       for (name in _Runtime.iterable(flight._internal.DynamicObject.keys(uniforms))) {
-        var location:Null<flight._internal.dom.WebGLUniformLocation> = (cast getGlEffectUniformLocation(({ final __callArgument691:Dynamic = state; __callArgument691; }), ({ final __callArgument692:Dynamic = p; __callArgument692; }), (cast name : String)) : Null<flight._internal.dom.WebGLUniformLocation>);
+        var location:Null<flight._internal.dom.WebGLUniformLocation> = (cast getGlEffectUniformLocation(({ final __callArgument693:Dynamic = state; __callArgument693; }), ({ final __callArgument694:Dynamic = p; __callArgument694; }), (cast name : String)) : Null<flight._internal.dom.WebGLUniformLocation>);
         if ((cast _Runtime.strictEquals(location, null) : Bool)) { continue; }
         var value:flight._internal._Union2<Float, Array<Float>> = _Runtime.getIndex(uniforms, name);
         if ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'number') : Bool)) {
@@ -973,31 +978,31 @@ class _EffectsGl {
 
   public static function getGlCustomShaderSource(state:GlRenderState, shaderKey:String):Null<String> {
     var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:String; }>> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument707:Dynamic = state; __callArgument707; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).customEffectShaders : KeyedTable<String>).entries : flight._internal._Map<String, RegistryTableEntry<String>>).get((cast shaderKey)));
-    return cast ((cast _Runtime.strictEquals(({ final __structural709 = entry; __structural709 == null ? _Runtime.UNDEFINED : (cast __structural709 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:String; }).value : Dynamic) : (cast null : Dynamic));
+    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument709:Dynamic = state; __callArgument709; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).customEffectShaders : KeyedTable<String>).entries : flight._internal._Map<String, RegistryTableEntry<String>>).get((cast shaderKey)));
+    return cast ((cast _Runtime.strictEquals(({ final __structural711 = entry; __structural711 == null ? _Runtime.UNDEFINED : (cast __structural711 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:String; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   @:allow(flight)
   @:keep
   private static function isGlCustomShaderEffectResolvable(state:GlRenderState, effect:RenderEffect):Bool {
-    return cast !_Runtime.strictEquals((cast getGlCustomShaderSource(({ final __callArgument710:Dynamic = state; __callArgument710; }), (cast _Runtime.field((cast effect : CustomShaderEffect), 'shaderKey') : String)) : Null<String>), null);
+    return cast !_Runtime.strictEquals((cast getGlCustomShaderSource(({ final __callArgument712:Dynamic = state; __callArgument712; }), (cast _Runtime.field((cast effect : CustomShaderEffect), 'shaderKey') : String)) : Null<String>), null);
     return cast null;
   }
 
   public static function registerGlCustomShaderEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument712:Dynamic = state; __callArgument712; }), (cast 'CustomShaderEffect' : String), ({ final __callArgument713:Dynamic = defaultGlCustomShaderEffectRunner; __callArgument713; }), (cast isGlCustomShaderEffectResolvable : Dynamic));
+    registerGlRenderEffect(({ final __callArgument714:Dynamic = state; __callArgument714; }), (cast 'CustomShaderEffect' : String), ({ final __callArgument715:Dynamic = defaultGlCustomShaderEffectRunner; __callArgument715; }), (cast isGlCustomShaderEffectResolvable : Dynamic));
   }
 
   public static function registerGlCustomShaderSource(state:GlRenderState, shaderKey:String, fragmentSource:String):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var previousSource:Null<String> = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument716:Dynamic = state; __callArgument716; })) : GlRenderStateRuntime);
-    previousSource = (cast getGlCustomShaderSource(({ final __callArgument718:Dynamic = state; __callArgument718; }), (cast shaderKey : String)) : Null<String>);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument718:Dynamic = state; __callArgument718; })) : GlRenderStateRuntime);
+    previousSource = (cast getGlCustomShaderSource(({ final __callArgument720:Dynamic = state; __callArgument720; }), (cast shaderKey : String)) : Null<String>);
     if ((cast ((cast !_Runtime.strictEquals(previousSource, null) : Bool) && (cast !_Runtime.strictEquals(previousSource, fragmentSource) : Bool)) : Bool)) {
       _Runtime.callOptionalValue(((cast _EffectsGl._sourceGuards__glCustomShaderEffect : flight._internal._WeakMap<GlRenderState, GlCustomShaderSourceGuard>).get((cast state))), cast ([state, shaderKey, previousSource, fragmentSource] : Array<Dynamic>));
     }
-    ((cast runtime.registries : GlRenderRegistries).customEffectShaders = (cast withRegistryTableEntry((cast (cast runtime.registries : GlRenderRegistries).customEffectShaders : Dynamic), (cast shaderKey : String), (cast fragmentSource : String)) : KeyedTable<String>));
+    ((cast runtime.registries : GlRenderRegistries).customEffectShaders = (cast withRegistryTableEntry((cast (cast runtime.registries : GlRenderRegistries).customEffectShaders : Dynamic), (cast shaderKey : String), (cast fragmentSource : String)) : { >KeyedTable<String>, >Entity, }));
   }
 
   @:allow(flight)
@@ -1024,8 +1029,8 @@ class _EffectsGl {
     angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(effect.angle, function():Dynamic return cast 0.0), HxMath.PI) / 180.0);
     length = _Runtime.coalesce(effect.length, function():Dynamic return cast 8.0);
     samples = _Runtime.coalesce(effect.samples, function():Dynamic return cast 16.0);
-    program = (cast getGlEffectProgram(({ final __callArgument720:Dynamic = state; __callArgument720; }), (cast 'directionalBlur' : String), (cast _EffectsGl.DIRECTIONAL_BLUR_FRAGMENT_SRC__glDirectionalBlurEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument722:Dynamic = state; __callArgument722; }), ({ final __callArgument723:Dynamic = program; __callArgument723; }), ({ final __callArgument724:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument724; }), ({ final __callArgument725:Dynamic = dest; __callArgument725; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument722:Dynamic = state; __callArgument722; }), (cast 'directionalBlur' : String), (cast _EffectsGl.DIRECTIONAL_BLUR_FRAGMENT_SRC__glDirectionalBlurEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument724:Dynamic = state; __callArgument724; }), ({ final __callArgument725:Dynamic = program; __callArgument725; }), ({ final __callArgument726:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument726; }), ({ final __callArgument727:Dynamic = dest; __callArgument727; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_angle'), angle);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_length'), length);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_samples'), samples);
@@ -1038,7 +1043,7 @@ class _EffectsGl {
   });
 
   public static function registerGlDirectionalBlurEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument732:Dynamic = state; __callArgument732; }), (cast 'DirectionalBlurEffect' : String), ({ final __callArgument733:Dynamic = defaultGlDirectionalBlurEffectRunner; __callArgument733; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument730:Dynamic = state; __callArgument730; }), (cast 'DirectionalBlurEffect' : String), ({ final __callArgument731:Dynamic = defaultGlDirectionalBlurEffectRunner; __callArgument731; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument734:Dynamic = state; __callArgument734; }), (cast 'DirectionalBlurEffect' : String), ({ final __callArgument735:Dynamic = defaultGlDirectionalBlurEffectRunner; __callArgument735; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument732:Dynamic = state; __callArgument732; }), (cast 'DirectionalBlurEffect' : String), ({ final __callArgument733:Dynamic = defaultGlDirectionalBlurEffectRunner; __callArgument733; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final DIRECTIONAL_BLUR_FRAGMENT_SRC__glDirectionalBlurEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_angle;\nuniform float u_length;\nuniform float u_samples;\nuniform vec2 u_resolution;\nout vec4 o_color;\nconst int SAMPLES = 16;\nvoid main() {\n  // Negate sin to convert screen-space-Y-down angle to GL UV-Y-up direction.\n  vec2 dir = vec2(cos(u_angle), -sin(u_angle)) * (u_length / u_resolution);\n  float count = min(u_samples, 16.0);\n  vec4 sum = vec4(0.0);\n  float taken = 0.0;\n  for (int i = 0; i < SAMPLES; i++) {\n    if (float(i) >= count) break;\n    float t = count > 1.0 ? (float(i) / (count - 1.0)) - 0.5 : 0.0;\n    vec2 uv = v_texCoord + dir * t;\n    sum += texture(u_texture0, uv);\n    taken += 1.0;\n  }\n  o_color = sum / max(taken, 1.0);\n}';
@@ -1053,8 +1058,8 @@ class _EffectsGl {
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 8.0);
     frequency = _Runtime.coalesce(_Runtime.field(effect, 'frequency'), function():Dynamic return cast 12.0);
     seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
-    program = (cast getGlEffectProgram(({ final __callArgument734:Dynamic = state; __callArgument734; }), (cast 'lens.displacement' : String), (cast _EffectsGl.DISPLACEMENT_FRAGMENT_SRC__glDisplacementEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument736:Dynamic = state; __callArgument736; }), ({ final __callArgument737:Dynamic = program; __callArgument737; }), ({ final __callArgument738:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument738; }), ({ final __callArgument739:Dynamic = dest; __callArgument739; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument736:Dynamic = state; __callArgument736; }), (cast 'lens.displacement' : String), (cast _EffectsGl.DISPLACEMENT_FRAGMENT_SRC__glDisplacementEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument738:Dynamic = state; __callArgument738; }), ({ final __callArgument739:Dynamic = program; __callArgument739; }), ({ final __callArgument740:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument740; }), ({ final __callArgument741:Dynamic = dest; __callArgument741; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_frequency'), frequency);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_seed'), seed);
@@ -1067,7 +1072,7 @@ class _EffectsGl {
   });
 
   public static function registerGlDisplacementEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument746:Dynamic = state; __callArgument746; }), (cast 'DisplacementEffect' : String), ({ final __callArgument747:Dynamic = defaultGlDisplacementEffectRunner; __callArgument747; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument744:Dynamic = state; __callArgument744; }), (cast 'DisplacementEffect' : String), ({ final __callArgument745:Dynamic = defaultGlDisplacementEffectRunner; __callArgument745; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument748:Dynamic = state; __callArgument748; }), (cast 'DisplacementEffect' : String), ({ final __callArgument749:Dynamic = defaultGlDisplacementEffectRunner; __callArgument749; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument746:Dynamic = state; __callArgument746; }), (cast 'DisplacementEffect' : String), ({ final __callArgument747:Dynamic = defaultGlDisplacementEffectRunner; __callArgument747; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final DISPLACEMENT_FRAGMENT_SRC__glDisplacementEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_intensity;\nuniform float u_frequency;\nuniform float u_seed;\nuniform vec2 u_resolution;\nout vec4 o_color;\nvoid main() {\n  float f = u_frequency;\n  // The warp is defined in IMAGE space, which is what makes the same seed produce the same picture on\n  // a bottom-left-origin target as on a top-left one. Two separate conversions are needed and they are\n  // easy to mistake for one: the sine PHASE reads an image-space row, and the vertical offset is then\n  // negated on the way back out, because moving down the image is moving down this target\'s y.\n  float imageY = 1.0 - v_texCoord.y;\n  vec2 warp = vec2(\n    sin(imageY * f + u_seed) + sin(imageY * f * 2.3 + u_seed * 1.7) * 0.5,\n    cos(v_texCoord.x * f * 0.8 + u_seed * 1.3)\n  );\n  vec2 offset = warp * (u_intensity / u_resolution);\n  vec2 displaced = vec2(v_texCoord.x + offset.x, v_texCoord.y - offset.y);\n  o_color = texture(u_texture0, displaced);\n}';
@@ -1078,8 +1083,8 @@ class _EffectsGl {
     var levels:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     levels = _Runtime.coalesce(_Runtime.field(effect, 'levels'), function():Dynamic return cast 4.0);
-    program = (cast getGlEffectProgram(({ final __callArgument748:Dynamic = state; __callArgument748; }), (cast 'stylization.dither' : String), (cast _EffectsGl.DITHER_FRAGMENT_SRC__glDitherEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument750:Dynamic = state; __callArgument750; }), ({ final __callArgument751:Dynamic = program; __callArgument751; }), ({ final __callArgument752:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument752; }), ({ final __callArgument753:Dynamic = dest; __callArgument753; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument750:Dynamic = state; __callArgument750; }), (cast 'stylization.dither' : String), (cast _EffectsGl.DITHER_FRAGMENT_SRC__glDitherEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument752:Dynamic = state; __callArgument752; }), ({ final __callArgument753:Dynamic = program; __callArgument753; }), ({ final __callArgument754:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument754; }), ({ final __callArgument755:Dynamic = dest; __callArgument755; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_levels'), HxMath.max(2.0, levels));
       flight._internal.backend.WebGl2Backend.uniform2f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), source.width, source.height);
     } : Dynamic));
@@ -1090,7 +1095,7 @@ class _EffectsGl {
   });
 
   public static function registerGlDitherEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument760:Dynamic = state; __callArgument760; }), (cast 'DitherEffect' : String), ({ final __callArgument761:Dynamic = defaultGlDitherEffectRunner; __callArgument761; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument758:Dynamic = state; __callArgument758; }), (cast 'DitherEffect' : String), ({ final __callArgument759:Dynamic = defaultGlDitherEffectRunner; __callArgument759; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument762:Dynamic = state; __callArgument762; }), (cast 'DitherEffect' : String), ({ final __callArgument763:Dynamic = defaultGlDitherEffectRunner; __callArgument763; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument760:Dynamic = state; __callArgument760; }), (cast 'DitherEffect' : String), ({ final __callArgument761:Dynamic = defaultGlDitherEffectRunner; __callArgument761; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final DITHER_FRAGMENT_SRC__glDitherEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_levels;\nuniform vec2 u_resolution;\nout vec4 o_color;\nfloat bayer(ivec2 p) {\n  int x = p.x & 3;\n  int y = p.y & 3;\n  int m[16] = int[16](0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5);\n  return float(m[y * 4 + x]) / 16.0;\n}\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  ivec2 px = ivec2(v_texCoord * u_resolution);\n  float t = bayer(px) - 0.5;\n  float steps = u_levels - 1.0;\n  vec3 q = floor(c.rgb * steps + 0.5 + t) / steps;\n  o_color = vec4(clamp(q, 0.0, 1.0), c.a);\n}';
@@ -1120,9 +1125,9 @@ class _EffectsGl {
     var blurred:GlRenderTarget = cast _Runtime.UNDEFINED;
     var blurTemp:GlRenderTarget = cast _Runtime.UNDEFINED;
     descriptor = (cast { width: source.width, height: source.height, format: source.format });
-    s0 = (cast acquireGlRenderTarget(({ final __callArgument762:Dynamic = state; __callArgument762; }), ({ final __callArgument763:Dynamic = pool; __callArgument763; }), ({ final __callArgument764:Dynamic = descriptor; __callArgument764; })) : GlRenderTarget);
-    s1 = (cast acquireGlRenderTarget(({ final __callArgument768:Dynamic = state; __callArgument768; }), ({ final __callArgument769:Dynamic = pool; __callArgument769; }), ({ final __callArgument770:Dynamic = descriptor; __callArgument770; })) : GlRenderTarget);
-    s2 = (cast acquireGlRenderTarget(({ final __callArgument774:Dynamic = state; __callArgument774; }), ({ final __callArgument775:Dynamic = pool; __callArgument775; }), ({ final __callArgument776:Dynamic = descriptor; __callArgument776; })) : GlRenderTarget);
+    s0 = (cast acquireGlRenderTarget(({ final __callArgument764:Dynamic = state; __callArgument764; }), ({ final __callArgument765:Dynamic = pool; __callArgument765; }), ({ final __callArgument766:Dynamic = descriptor; __callArgument766; })) : GlRenderTarget);
+    s1 = (cast acquireGlRenderTarget(({ final __callArgument770:Dynamic = state; __callArgument770; }), ({ final __callArgument771:Dynamic = pool; __callArgument771; }), ({ final __callArgument772:Dynamic = descriptor; __callArgument772; })) : GlRenderTarget);
+    s2 = (cast acquireGlRenderTarget(({ final __callArgument776:Dynamic = state; __callArgument776; }), ({ final __callArgument777:Dynamic = pool; __callArgument777; }), ({ final __callArgument778:Dynamic = descriptor; __callArgument778; })) : GlRenderTarget);
     src = (cast source : GlRenderTarget);
     dst = (cast dest : GlRenderTarget);
     angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(effect.angle, function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
@@ -1140,24 +1145,24 @@ class _EffectsGl {
     mask = flight._internal._StaticIndex.readArray(__destructure0, 0.0);
     blurred = flight._internal._StaticIndex.readArray(__destructure0, 1.0);
     blurTemp = flight._internal._StaticIndex.readArray(__destructure0, 2.0);
-    applyGlEffectTintPass(({ final __callArgument780:Dynamic = state; __callArgument780; }), ({ final __callArgument781:Dynamic = src; __callArgument781; }), ({ final __callArgument782:Dynamic = mask; __callArgument782; }), (cast color : Float), (cast alpha : Float), (cast tintStrength : Float));
-    applyGlEffectBoxBlur(({ final __callArgument786:Dynamic = state; __callArgument786; }), ({ final __callArgument787:Dynamic = mask; __callArgument787; }), ({ final __callArgument788:Dynamic = blurred; __callArgument788; }), ({ final __callArgument789:Dynamic = blurTemp; __callArgument789; }), ({ final __callArgument790:Dynamic = { blurX: _Runtime.coalesce(effect.blurX, function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(effect.blurY, function():Dynamic return cast 4.0), passes: quality }; __callArgument790; }));
-    clearGlRenderTarget(({ final __callArgument796:Dynamic = state; __callArgument796; }), ({ final __callArgument797:Dynamic = dst; __callArgument797; }));
+    applyGlEffectTintPass(({ final __callArgument782:Dynamic = state; __callArgument782; }), ({ final __callArgument783:Dynamic = src; __callArgument783; }), ({ final __callArgument784:Dynamic = mask; __callArgument784; }), (cast color : Float), (cast alpha : Float), (cast tintStrength : Float));
+    applyGlEffectBoxBlur(({ final __callArgument788:Dynamic = state; __callArgument788; }), ({ final __callArgument789:Dynamic = mask; __callArgument789; }), ({ final __callArgument790:Dynamic = blurred; __callArgument790; }), ({ final __callArgument791:Dynamic = blurTemp; __callArgument791; }), ({ final __callArgument792:Dynamic = { blurX: _Runtime.coalesce(effect.blurX, function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(effect.blurY, function():Dynamic return cast 4.0), passes: quality }; __callArgument792; }));
+    clearGlRenderTarget(({ final __callArgument798:Dynamic = state; __callArgument798; }), ({ final __callArgument799:Dynamic = dst; __callArgument799; }));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast shadowPasses : Float)) : Bool)) {
-        applyGlEffectBlitOffsetPass(({ final __callArgument800:Dynamic = state; __callArgument800; }), ({ final __callArgument801:Dynamic = blurred; __callArgument801; }), ({ final __callArgument802:Dynamic = dst; __callArgument802; }), (cast dx : Float), (cast dy : Float));
+        applyGlEffectBlitOffsetPass(({ final __callArgument802:Dynamic = state; __callArgument802; }), ({ final __callArgument803:Dynamic = blurred; __callArgument803; }), ({ final __callArgument804:Dynamic = dst; __callArgument804; }), (cast dx : Float), (cast dy : Float));
         i++;
       }
     }
     if ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool)) {
-      applyGlEffectErasePass(({ final __callArgument806:Dynamic = state; __callArgument806; }), ({ final __callArgument807:Dynamic = src; __callArgument807; }), ({ final __callArgument808:Dynamic = dst; __callArgument808; }));
+      applyGlEffectErasePass(({ final __callArgument808:Dynamic = state; __callArgument808; }), ({ final __callArgument809:Dynamic = src; __callArgument809; }), ({ final __callArgument810:Dynamic = dst; __callArgument810; }));
     } else { if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
-      applyGlEffectBlitPass(({ final __callArgument812:Dynamic = state; __callArgument812; }), ({ final __callArgument813:Dynamic = src; __callArgument813; }), ({ final __callArgument814:Dynamic = dst; __callArgument814; }));
+      applyGlEffectBlitPass(({ final __callArgument814:Dynamic = state; __callArgument814; }), ({ final __callArgument815:Dynamic = src; __callArgument815; }), ({ final __callArgument816:Dynamic = dst; __callArgument816; }));
     } }
-    releaseGlRenderTarget(({ final __callArgument818:Dynamic = pool; __callArgument818; }), ({ final __callArgument819:Dynamic = s0; __callArgument819; }));
-    releaseGlRenderTarget(({ final __callArgument822:Dynamic = pool; __callArgument822; }), ({ final __callArgument823:Dynamic = s1; __callArgument823; }));
-    releaseGlRenderTarget(({ final __callArgument826:Dynamic = pool; __callArgument826; }), ({ final __callArgument827:Dynamic = s2; __callArgument827; }));
+    releaseGlRenderTarget(({ final __callArgument820:Dynamic = pool; __callArgument820; }), ({ final __callArgument821:Dynamic = s0; __callArgument821; }));
+    releaseGlRenderTarget(({ final __callArgument824:Dynamic = pool; __callArgument824; }), ({ final __callArgument825:Dynamic = s1; __callArgument825; }));
+    releaseGlRenderTarget(({ final __callArgument828:Dynamic = pool; __callArgument828; }), ({ final __callArgument829:Dynamic = s2; __callArgument829; }));
   }
 
   public static final defaultGlDropShadowEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
@@ -1165,7 +1170,7 @@ class _EffectsGl {
   });
 
   public static function registerGlDropShadowEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument832:Dynamic = state; __callArgument832; }), (cast 'DropShadowEffect' : String), ({ final __callArgument833:Dynamic = defaultGlDropShadowEffectRunner; __callArgument833; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument830:Dynamic = state; __callArgument830; }), (cast 'DropShadowEffect' : String), ({ final __callArgument831:Dynamic = defaultGlDropShadowEffectRunner; __callArgument831; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument834:Dynamic = state; __callArgument834; }), (cast 'DropShadowEffect' : String), ({ final __callArgument835:Dynamic = defaultGlDropShadowEffectRunner; __callArgument835; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument832:Dynamic = state; __callArgument832; }), (cast 'DropShadowEffect' : String), ({ final __callArgument833:Dynamic = defaultGlDropShadowEffectRunner; __callArgument833; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final BLIT_OFFSET_FRAGMENT_SRC__glEffectBlitShader:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform vec2 u_offset;\nout vec4 fragColor;\nvoid main() {\n  vec2 uv = v_texCoord + u_offset;\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {\n    fragColor = vec4(0.0);\n    return;\n  }\n  fragColor = texture(u_texture, uv);\n}';
@@ -1184,30 +1189,30 @@ class _EffectsGl {
   @:keep
   private static function applyGlEffectBlitOffsetPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, dx:Float, dy:Float):Void {
     var loc:BlitOffsetShaderLocations__glEffectBlitShader = cast _Runtime.UNDEFINED;
-    loc = (cast _EffectsGl.getGlBlitOffsetShader__glEffectBlitShader(({ final __callArgument834:Dynamic = state; __callArgument834; })) : BlitOffsetShaderLocations__glEffectBlitShader);
-    drawGlFullscreenPass(({ final __callArgument836:Dynamic = state; __callArgument836; }), ({ final __callArgument837:Dynamic = loc; __callArgument837; }), ({ final __callArgument838:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument838; }), ({ final __callArgument839:Dynamic = dest; __callArgument839; }), ({ final __callArgument840:Dynamic = function(__unused1:GlContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:GlContext, __unused0:GlFullscreenProgram):Void {
+    loc = (cast _EffectsGl.getGlBlitOffsetShader__glEffectBlitShader(({ final __callArgument836:Dynamic = state; __callArgument836; })) : BlitOffsetShaderLocations__glEffectBlitShader);
+    drawGlFullscreenPass(({ final __callArgument838:Dynamic = state; __callArgument838; }), ({ final __callArgument839:Dynamic = loc; __callArgument839; }), ({ final __callArgument840:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument840; }), ({ final __callArgument841:Dynamic = dest; __callArgument841; }), ({ final __callArgument842:Dynamic = function(__unused1:GlContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:GlContext, __unused0:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform2f(gl, (cast loc : { var locOffset:flight._internal.dom.WebGLUniformLocation; }).locOffset, (-dx / source.width), (dy / source.height));
-    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument840; }));
+    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument842; }));
   }
 
   @:allow(flight)
   @:keep
   private static function applyGlEffectBlitPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:GlFullscreenProgram = cast _Runtime.UNDEFINED;
-    loc = (cast _EffectsGl.getGlBlitShader__glEffectBlitShader(({ final __callArgument846:Dynamic = state; __callArgument846; })) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument848:Dynamic = state; __callArgument848; }), ({ final __callArgument849:Dynamic = loc; __callArgument849; }), ({ final __callArgument850:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument850; }), ({ final __callArgument851:Dynamic = dest; __callArgument851; }), ({ final __callArgument852:Dynamic = function(__unused5:GlContext, __unused6:GlFullscreenProgram):Void { _Runtime.callValue(function(__unused3:GlContext, __unused4:GlFullscreenProgram):Void {
+    loc = (cast _EffectsGl.getGlBlitShader__glEffectBlitShader(({ final __callArgument848:Dynamic = state; __callArgument848; })) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument850:Dynamic = state; __callArgument850; }), ({ final __callArgument851:Dynamic = loc; __callArgument851; }), ({ final __callArgument852:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument852; }), ({ final __callArgument853:Dynamic = dest; __callArgument853; }), ({ final __callArgument854:Dynamic = function(__unused5:GlContext, __unused6:GlFullscreenProgram):Void { _Runtime.callValue(function(__unused3:GlContext, __unused4:GlFullscreenProgram):Void {
 
-    }, cast ([] : Array<Dynamic>)); }; __callArgument852; }));
+    }, cast ([] : Array<Dynamic>)); }; __callArgument854; }));
   }
 
   @:allow(flight)
   @:keep
   private static function applyGlEffectErasePass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:GlFullscreenProgram = cast _Runtime.UNDEFINED;
-    loc = (cast _EffectsGl.getGlEraseShader__glEffectBlitShader(({ final __callArgument858:Dynamic = state; __callArgument858; })) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument860:Dynamic = state; __callArgument860; }), ({ final __callArgument861:Dynamic = loc; __callArgument861; }), ({ final __callArgument862:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument862; }), ({ final __callArgument863:Dynamic = dest; __callArgument863; }), ({ final __callArgument864:Dynamic = function(__unused8:GlContext, __unused9:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:GlContext, __unused7:GlFullscreenProgram):Void {
+    loc = (cast _EffectsGl.getGlEraseShader__glEffectBlitShader(({ final __callArgument860:Dynamic = state; __callArgument860; })) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument862:Dynamic = state; __callArgument862; }), ({ final __callArgument863:Dynamic = loc; __callArgument863; }), ({ final __callArgument864:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument864; }), ({ final __callArgument865:Dynamic = dest; __callArgument865; }), ({ final __callArgument866:Dynamic = function(__unused8:GlContext, __unused9:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:GlContext, __unused7:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.blendFunc(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'ZERO', flight._internal.backend.WebGl2Backend.ZERO), flight._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE_MINUS_SRC_ALPHA', flight._internal.backend.WebGl2Backend.ONE_MINUS_SRC_ALPHA));
-    }, cast ([__unused8] : Array<Dynamic>)); }; __callArgument864; }));
+    }, cast ([__unused8] : Array<Dynamic>)); }; __callArgument866; }));
   }
 
   public static function getGlBlitOffsetShader__glEffectBlitShader(state:GlRenderState):BlitOffsetShaderLocations__glEffectBlitShader {
@@ -1215,7 +1220,7 @@ class _EffectsGl {
     loc = ((cast _EffectsGl.blitOffsetShaders__glEffectBlitShader : flight._internal._WeakMap<GlContext, BlitOffsetShaderLocations__glEffectBlitShader>).get((cast (cast state : GlRenderState).gl)));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:GlContext = (cast state : GlRenderState).gl;
-      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument870:Dynamic = gl; __callArgument870; }), (cast _EffectsGl.BLIT_OFFSET_FRAGMENT_SRC__glEffectBlitShader : String)) : GlFullscreenProgram);
+      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument872:Dynamic = gl; __callArgument872; }), (cast _EffectsGl.BLIT_OFFSET_FRAGMENT_SRC__glEffectBlitShader : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base, { locOffset: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_offset') }]) : Dynamic));
       ((cast _EffectsGl.blitOffsetShaders__glEffectBlitShader : flight._internal._WeakMap<GlContext, BlitOffsetShaderLocations__glEffectBlitShader>).set((cast (cast state : GlRenderState).gl), (cast loc)));
     }
@@ -1228,7 +1233,7 @@ class _EffectsGl {
     loc = ((cast _EffectsGl.blitShaders__glEffectBlitShader : flight._internal._WeakMap<GlContext, GlFullscreenProgram>).get((cast (cast state : GlRenderState).gl)));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:GlContext = (cast state : GlRenderState).gl;
-      (loc = cast ((cast compileGlFullscreenProgram(({ final __callArgument872:Dynamic = gl; __callArgument872; }), (cast _EffectsGl.BLIT_FRAGMENT_SRC__glEffectBlitShader : String)) : GlFullscreenProgram) : Dynamic));
+      (loc = cast ((cast compileGlFullscreenProgram(({ final __callArgument874:Dynamic = gl; __callArgument874; }), (cast _EffectsGl.BLIT_FRAGMENT_SRC__glEffectBlitShader : String)) : GlFullscreenProgram) : Dynamic));
       ((cast _EffectsGl.blitShaders__glEffectBlitShader : flight._internal._WeakMap<GlContext, GlFullscreenProgram>).set((cast (cast state : GlRenderState).gl), (cast loc)));
     }
     return cast loc;
@@ -1240,7 +1245,7 @@ class _EffectsGl {
     loc = ((cast _EffectsGl.eraseShaders__glEffectBlitShader : flight._internal._WeakMap<GlContext, GlFullscreenProgram>).get((cast (cast state : GlRenderState).gl)));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:GlContext = (cast state : GlRenderState).gl;
-      (loc = cast ((cast compileGlFullscreenProgram(({ final __callArgument874:Dynamic = gl; __callArgument874; }), (cast _EffectsGl.ERASE_FRAGMENT_SRC__glEffectBlitShader : String)) : GlFullscreenProgram) : Dynamic));
+      (loc = cast ((cast compileGlFullscreenProgram(({ final __callArgument876:Dynamic = gl; __callArgument876; }), (cast _EffectsGl.ERASE_FRAGMENT_SRC__glEffectBlitShader : String)) : GlFullscreenProgram) : Dynamic));
       ((cast _EffectsGl.eraseShaders__glEffectBlitShader : flight._internal._WeakMap<GlContext, GlFullscreenProgram>).set((cast (cast state : GlRenderState).gl), (cast loc)));
     }
     return cast loc;
@@ -1265,7 +1270,7 @@ class _EffectsGl {
     blurX = _Runtime.coalesce((cast options : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var passes:Null<Float>; @:optional var edgeColor:Null<Array<Float>>; }).blurX, function():Dynamic return cast 4.0);
     blurY = _Runtime.coalesce((cast options : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var passes:Null<Float>; @:optional var edgeColor:Null<Array<Float>>; }).blurY, function():Dynamic return cast 4.0);
     edgeColor = (cast options : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var passes:Null<Float>; @:optional var edgeColor:Null<Array<Float>>; }).edgeColor;
-    loc = (cast _EffectsGl.getBoxBlurShader__glEffectBoxBlur(({ final __callArgument876:Dynamic = state; __callArgument876; })) : BoxBlurShaderLocations__glEffectBoxBlur);
+    loc = (cast _EffectsGl.getBoxBlurShader__glEffectBoxBlur(({ final __callArgument878:Dynamic = state; __callArgument878; })) : BoxBlurShaderLocations__glEffectBoxBlur);
     read = source;
     write = temp;
     {
@@ -1273,13 +1278,13 @@ class _EffectsGl {
       while ((cast ((cast pass : Float) < (cast passes : Float)) : Bool)) {
         var radiusX:Float = (cast computeBoxBlurPassRadius((cast blurX : Float), (cast passes : Float), (cast pass : Float)) : Float);
         if ((cast ((cast radiusX : Float) > (cast 0.0 : Float)) : Bool)) {
-          _EffectsGl.applyBoxBlurPass__glEffectBoxBlur(({ final __callArgument878:Dynamic = state; __callArgument878; }), ({ final __callArgument879:Dynamic = read; __callArgument879; }), ({ final __callArgument880:Dynamic = write; __callArgument880; }), (cast loc : Dynamic), (cast radiusX : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast edgeColor : Dynamic));
+          _EffectsGl.applyBoxBlurPass__glEffectBoxBlur(({ final __callArgument880:Dynamic = state; __callArgument880; }), ({ final __callArgument881:Dynamic = read; __callArgument881; }), ({ final __callArgument882:Dynamic = write; __callArgument882; }), (cast loc : Dynamic), (cast radiusX : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast edgeColor : Dynamic));
           (read = cast (write : Dynamic));
           (write = cast (((cast _Runtime.strictEquals(write, temp) : Bool) ? (cast dest : Dynamic) : (cast temp : Dynamic)) : Dynamic));
         }
         var radiusY:Float = (cast computeBoxBlurPassRadius((cast blurY : Float), (cast passes : Float), (cast pass : Float)) : Float);
         if ((cast ((cast radiusY : Float) > (cast 0.0 : Float)) : Bool)) {
-          _EffectsGl.applyBoxBlurPass__glEffectBoxBlur(({ final __callArgument884:Dynamic = state; __callArgument884; }), ({ final __callArgument885:Dynamic = read; __callArgument885; }), ({ final __callArgument886:Dynamic = write; __callArgument886; }), (cast loc : Dynamic), (cast radiusY : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast edgeColor : Dynamic));
+          _EffectsGl.applyBoxBlurPass__glEffectBoxBlur(({ final __callArgument886:Dynamic = state; __callArgument886; }), ({ final __callArgument887:Dynamic = read; __callArgument887; }), ({ final __callArgument888:Dynamic = write; __callArgument888; }), (cast loc : Dynamic), (cast radiusY : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast edgeColor : Dynamic));
           (read = cast (write : Dynamic));
           (write = cast (((cast _Runtime.strictEquals(write, temp) : Bool) ? (cast dest : Dynamic) : (cast temp : Dynamic)) : Dynamic));
         }
@@ -1287,25 +1292,25 @@ class _EffectsGl {
       }
     }
     if ((cast !_Runtime.strictEquals(read, dest) : Bool)) {
-      _EffectsGl.applyBlurBlit__glEffectBoxBlur(({ final __callArgument890:Dynamic = state; __callArgument890; }), ({ final __callArgument891:Dynamic = read; __callArgument891; }), ({ final __callArgument892:Dynamic = dest; __callArgument892; }));
+      _EffectsGl.applyBlurBlit__glEffectBoxBlur(({ final __callArgument892:Dynamic = state; __callArgument892; }), ({ final __callArgument893:Dynamic = read; __callArgument893; }), ({ final __callArgument894:Dynamic = dest; __callArgument894; }));
     }
   }
 
   public static function applyBlurBlit__glEffectBoxBlur(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:BoxBlurShaderLocations__glEffectBoxBlur = cast _Runtime.UNDEFINED;
-    loc = (cast _EffectsGl.getBoxBlurShader__glEffectBoxBlur(({ final __callArgument896:Dynamic = state; __callArgument896; })) : BoxBlurShaderLocations__glEffectBoxBlur);
-    drawGlFullscreenPass(({ final __callArgument898:Dynamic = state; __callArgument898; }), ({ final __callArgument899:Dynamic = loc; __callArgument899; }), ({ final __callArgument900:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument900; }), ({ final __callArgument901:Dynamic = dest; __callArgument901; }), ({ final __callArgument902:Dynamic = function(__unused1:GlContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:GlContext, __unused0:GlFullscreenProgram):Void {
+    loc = (cast _EffectsGl.getBoxBlurShader__glEffectBoxBlur(({ final __callArgument898:Dynamic = state; __callArgument898; })) : BoxBlurShaderLocations__glEffectBoxBlur);
+    drawGlFullscreenPass(({ final __callArgument900:Dynamic = state; __callArgument900; }), ({ final __callArgument901:Dynamic = loc; __callArgument901; }), ({ final __callArgument902:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument902; }), ({ final __callArgument903:Dynamic = dest; __callArgument903; }), ({ final __callArgument904:Dynamic = function(__unused1:GlContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:GlContext, __unused0:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform2f(gl, (cast loc : { var locTexelSize:flight._internal.dom.WebGLUniformLocation; }).locTexelSize, 0.0, 0.0);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, (cast loc : { var locRadius:flight._internal.dom.WebGLUniformLocation; }).locRadius, 0.0);
       flight._internal.backend.WebGl2Backend.uniform2f(gl, (cast loc : { var locDirection:flight._internal.dom.WebGLUniformLocation; }).locDirection, 0.0, 0.0);
       flight._internal.backend.WebGl2Backend.uniform4f(gl, (cast loc : { var locEdgeColor:flight._internal.dom.WebGLUniformLocation; }).locEdgeColor, 0.0, 0.0, 0.0, 0.0);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, (cast loc : { var locUseEdgeColor:flight._internal.dom.WebGLUniformLocation; }).locUseEdgeColor, 0.0);
       flight._internal.backend.WebGl2Backend.blendFunc(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flight._internal.backend.WebGl2Backend.ONE), flight._internal.backend.WebGl2Backend.contextConstant(gl, 'ZERO', flight._internal.backend.WebGl2Backend.ZERO));
-    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument902; }));
+    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument904; }));
   }
 
   public static function applyBoxBlurPass__glEffectBoxBlur(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, loc:BoxBlurShaderLocations__glEffectBoxBlur, radius:Float, dirX:Float, dirY:Float, edgeColor:Null<BoxBlurEdgeColor__glEffectBoxBlur>):Void {
-    drawGlFullscreenPass(({ final __callArgument908:Dynamic = state; __callArgument908; }), ({ final __callArgument909:Dynamic = loc; __callArgument909; }), ({ final __callArgument910:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument910; }), ({ final __callArgument911:Dynamic = dest; __callArgument911; }), ({ final __callArgument912:Dynamic = function(__unused4:GlContext, __unused5:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:GlContext, __unused3:GlFullscreenProgram):Void {
+    drawGlFullscreenPass(({ final __callArgument910:Dynamic = state; __callArgument910; }), ({ final __callArgument911:Dynamic = loc; __callArgument911; }), ({ final __callArgument912:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument912; }), ({ final __callArgument913:Dynamic = dest; __callArgument913; }), ({ final __callArgument914:Dynamic = function(__unused4:GlContext, __unused5:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:GlContext, __unused3:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform2f(gl, (cast loc : { var locTexelSize:flight._internal.dom.WebGLUniformLocation; }).locTexelSize, (1.0 / source.width), (1.0 / source.height));
       flight._internal.backend.WebGl2Backend.uniform1f(gl, (cast loc : { var locRadius:flight._internal.dom.WebGLUniformLocation; }).locRadius, radius);
       flight._internal.backend.WebGl2Backend.uniform2f(gl, (cast loc : { var locDirection:flight._internal.dom.WebGLUniformLocation; }).locDirection, dirX, dirY);
@@ -1317,7 +1322,7 @@ class _EffectsGl {
         flight._internal.backend.WebGl2Backend.uniform1f(gl, (cast loc : { var locUseEdgeColor:flight._internal.dom.WebGLUniformLocation; }).locUseEdgeColor, 1.0);
       }
       flight._internal.backend.WebGl2Backend.blendFunc(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flight._internal.backend.WebGl2Backend.ONE), flight._internal.backend.WebGl2Backend.contextConstant(gl, 'ZERO', flight._internal.backend.WebGl2Backend.ZERO));
-    }, cast ([__unused4] : Array<Dynamic>)); }; __callArgument912; }));
+    }, cast ([__unused4] : Array<Dynamic>)); }; __callArgument914; }));
   }
 
   public static function getBoxBlurShader__glEffectBoxBlur(state:GlRenderState):BoxBlurShaderLocations__glEffectBoxBlur {
@@ -1325,7 +1330,7 @@ class _EffectsGl {
     loc = ((cast _EffectsGl.boxBlurShaders__glEffectBoxBlur : flight._internal._WeakMap<GlContext, BoxBlurShaderLocations__glEffectBoxBlur>).get((cast (cast state : GlRenderState).gl)));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:GlContext = (cast state : GlRenderState).gl;
-      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument918:Dynamic = gl; __callArgument918; }), (cast _EffectsGl.BOX_BLUR_FRAGMENT_SRC__glEffectBoxBlur : String)) : GlFullscreenProgram);
+      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument920:Dynamic = gl; __callArgument920; }), (cast _EffectsGl.BOX_BLUR_FRAGMENT_SRC__glEffectBoxBlur : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base, { locTexelSize: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_texelSize') }, { locRadius: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_radius') }, { locDirection: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_direction') }, { locEdgeColor: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_edgeColor') }, { locUseEdgeColor: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_useEdgeColor') }]) : Dynamic));
       ((cast _EffectsGl.boxBlurShaders__glEffectBoxBlur : flight._internal._WeakMap<GlContext, BoxBlurShaderLocations__glEffectBoxBlur>).set((cast (cast state : GlRenderState).gl), (cast loc)));
     }
@@ -1338,7 +1343,7 @@ class _EffectsGl {
   private static function createGlEffectGradientRampTexture(gl:GlContext, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):flight._internal.dom.WebGLTexture {
     var data:flight._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     var texture:flight._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
-    data = (cast _EffectsGl.buildRampData__glEffectGradientRamp(({ final __callArgument920:Dynamic = colors; __callArgument920; }), ({ final __callArgument921:Dynamic = alphas; __callArgument921; }), ({ final __callArgument922:Dynamic = ratios; __callArgument922; })) : flight._internal._UInt8ClampedArray);
+    data = (cast _EffectsGl.buildRampData__glEffectGradientRamp(({ final __callArgument922:Dynamic = colors; __callArgument922; }), ({ final __callArgument923:Dynamic = alphas; __callArgument923; }), ({ final __callArgument924:Dynamic = ratios; __callArgument924; })) : flight._internal._UInt8ClampedArray);
     texture = flight._internal.backend.WebGl2Backend.createTexture(gl);
     flight._internal.backend.WebGl2Backend.bindTexture(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flight._internal.backend.WebGl2Backend.TEXTURE_2D), texture);
     flight._internal.backend.WebGl2Backend.texImage2D(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flight._internal.backend.WebGl2Backend.TEXTURE_2D), 0.0, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA8', flight._internal.backend.WebGl2Backend.RGBA8), 256.0, 1.0, 0.0, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flight._internal.backend.WebGl2Backend.RGBA), flight._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_BYTE', flight._internal.backend.WebGl2Backend.UNSIGNED_BYTE), data);
@@ -1460,28 +1465,28 @@ class _EffectsGl {
   @:keep
   private static function applyGlEffectInvertTintPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, color:Float, alpha:Float, strength:Float):Void {
     var loc:TintShaderLocations__glEffectTintShader = cast _Runtime.UNDEFINED;
-    loc = (cast _EffectsGl.getGlInvertTintShader__glEffectTintShader(({ final __callArgument926:Dynamic = state; __callArgument926; })) : TintShaderLocations__glEffectTintShader);
-    drawGlFullscreenPass(({ final __callArgument928:Dynamic = state; __callArgument928; }), ({ final __callArgument929:Dynamic = loc; __callArgument929; }), ({ final __callArgument930:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument930; }), ({ final __callArgument931:Dynamic = dest; __callArgument931; }), ({ final __callArgument934:Dynamic = function(__unused1:GlContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:GlContext, __unused0:GlFullscreenProgram):Void {
-      unpackColorRgba(({ final __callArgument932:Dynamic = _EffectsGl.scratchTint__glEffectTintShader; __callArgument932; }), (cast color : Float));
+    loc = (cast _EffectsGl.getGlInvertTintShader__glEffectTintShader(({ final __callArgument928:Dynamic = state; __callArgument928; })) : TintShaderLocations__glEffectTintShader);
+    drawGlFullscreenPass(({ final __callArgument930:Dynamic = state; __callArgument930; }), ({ final __callArgument931:Dynamic = loc; __callArgument931; }), ({ final __callArgument932:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument932; }), ({ final __callArgument933:Dynamic = dest; __callArgument933; }), ({ final __callArgument936:Dynamic = function(__unused1:GlContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:GlContext, __unused0:GlFullscreenProgram):Void {
+      unpackColorRgba(({ final __callArgument934:Dynamic = _EffectsGl.scratchTint__glEffectTintShader; __callArgument934; }), (cast color : Float));
       flight._internal.backend.WebGl2Backend.uniform3f(gl, (cast loc : { var locColor:flight._internal.dom.WebGLUniformLocation; }).locColor, flight._internal._StaticIndex.readFloatArrayTyped((cast _EffectsGl.scratchTint__glEffectTintShader : Array<Float>), (cast 0.0 : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast _EffectsGl.scratchTint__glEffectTintShader : Array<Float>), (cast 1.0 : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast _EffectsGl.scratchTint__glEffectTintShader : Array<Float>), (cast 2.0 : Float)));
       flight._internal.backend.WebGl2Backend.uniform1f(gl, (cast loc : { var locAlpha:flight._internal.dom.WebGLUniformLocation; }).locAlpha, (alpha * flight._internal._StaticIndex.readFloatArrayTyped((cast _EffectsGl.scratchTint__glEffectTintShader : Array<Float>), (cast 3.0 : Float))));
       flight._internal.backend.WebGl2Backend.uniform1f(gl, (cast loc : { var locStrength:flight._internal.dom.WebGLUniformLocation; }).locStrength, strength);
       flight._internal.backend.WebGl2Backend.blendFunc(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flight._internal.backend.WebGl2Backend.ONE), flight._internal.backend.WebGl2Backend.contextConstant(gl, 'ZERO', flight._internal.backend.WebGl2Backend.ZERO));
-    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument934; }));
+    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument936; }));
   }
 
   @:allow(flight)
   @:keep
   private static function applyGlEffectTintPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, color:Float, alpha:Float, strength:Float):Void {
     var loc:TintShaderLocations__glEffectTintShader = cast _Runtime.UNDEFINED;
-    loc = (cast _EffectsGl.getGlTintShader__glEffectTintShader(({ final __callArgument942:Dynamic = state; __callArgument942; })) : TintShaderLocations__glEffectTintShader);
-    drawGlFullscreenPass(({ final __callArgument944:Dynamic = state; __callArgument944; }), ({ final __callArgument945:Dynamic = loc; __callArgument945; }), ({ final __callArgument946:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument946; }), ({ final __callArgument947:Dynamic = dest; __callArgument947; }), ({ final __callArgument950:Dynamic = function(__unused4:GlContext, __unused5:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:GlContext, __unused3:GlFullscreenProgram):Void {
-      unpackColorRgba(({ final __callArgument948:Dynamic = _EffectsGl.scratchTint__glEffectTintShader; __callArgument948; }), (cast color : Float));
+    loc = (cast _EffectsGl.getGlTintShader__glEffectTintShader(({ final __callArgument944:Dynamic = state; __callArgument944; })) : TintShaderLocations__glEffectTintShader);
+    drawGlFullscreenPass(({ final __callArgument946:Dynamic = state; __callArgument946; }), ({ final __callArgument947:Dynamic = loc; __callArgument947; }), ({ final __callArgument948:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument948; }), ({ final __callArgument949:Dynamic = dest; __callArgument949; }), ({ final __callArgument952:Dynamic = function(__unused4:GlContext, __unused5:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:GlContext, __unused3:GlFullscreenProgram):Void {
+      unpackColorRgba(({ final __callArgument950:Dynamic = _EffectsGl.scratchTint__glEffectTintShader; __callArgument950; }), (cast color : Float));
       flight._internal.backend.WebGl2Backend.uniform3f(gl, (cast loc : { var locColor:flight._internal.dom.WebGLUniformLocation; }).locColor, flight._internal._StaticIndex.readFloatArrayTyped((cast _EffectsGl.scratchTint__glEffectTintShader : Array<Float>), (cast 0.0 : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast _EffectsGl.scratchTint__glEffectTintShader : Array<Float>), (cast 1.0 : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast _EffectsGl.scratchTint__glEffectTintShader : Array<Float>), (cast 2.0 : Float)));
       flight._internal.backend.WebGl2Backend.uniform1f(gl, (cast loc : { var locAlpha:flight._internal.dom.WebGLUniformLocation; }).locAlpha, (alpha * flight._internal._StaticIndex.readFloatArrayTyped((cast _EffectsGl.scratchTint__glEffectTintShader : Array<Float>), (cast 3.0 : Float))));
       flight._internal.backend.WebGl2Backend.uniform1f(gl, (cast loc : { var locStrength:flight._internal.dom.WebGLUniformLocation; }).locStrength, strength);
       flight._internal.backend.WebGl2Backend.blendFunc(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flight._internal.backend.WebGl2Backend.ONE), flight._internal.backend.WebGl2Backend.contextConstant(gl, 'ZERO', flight._internal.backend.WebGl2Backend.ZERO));
-    }, cast ([__unused4] : Array<Dynamic>)); }; __callArgument950; }));
+    }, cast ([__unused4] : Array<Dynamic>)); }; __callArgument952; }));
   }
 
   public static function getGlInvertTintShader__glEffectTintShader(state:GlRenderState):TintShaderLocations__glEffectTintShader {
@@ -1489,7 +1494,7 @@ class _EffectsGl {
     loc = ((cast _EffectsGl.invertTintShaders__glEffectTintShader : flight._internal._WeakMap<GlContext, TintShaderLocations__glEffectTintShader>).get((cast (cast state : GlRenderState).gl)));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:GlContext = (cast state : GlRenderState).gl;
-      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument958:Dynamic = gl; __callArgument958; }), (cast _EffectsGl.INVERT_TINT_FRAGMENT_SRC__glEffectTintShader : String)) : GlFullscreenProgram);
+      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument960:Dynamic = gl; __callArgument960; }), (cast _EffectsGl.INVERT_TINT_FRAGMENT_SRC__glEffectTintShader : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base, { locColor: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_color') }, { locAlpha: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_alpha') }, { locStrength: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_strength') }]) : Dynamic));
       ((cast _EffectsGl.invertTintShaders__glEffectTintShader : flight._internal._WeakMap<GlContext, TintShaderLocations__glEffectTintShader>).set((cast (cast state : GlRenderState).gl), (cast loc)));
     }
@@ -1502,7 +1507,7 @@ class _EffectsGl {
     loc = ((cast _EffectsGl.tintShaders__glEffectTintShader : flight._internal._WeakMap<GlContext, TintShaderLocations__glEffectTintShader>).get((cast (cast state : GlRenderState).gl)));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:GlContext = (cast state : GlRenderState).gl;
-      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument960:Dynamic = gl; __callArgument960; }), (cast _EffectsGl.TINT_FRAGMENT_SRC__glEffectTintShader : String)) : GlFullscreenProgram);
+      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument962:Dynamic = gl; __callArgument962; }), (cast _EffectsGl.TINT_FRAGMENT_SRC__glEffectTintShader : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base, { locColor: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_color') }, { locAlpha: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_alpha') }, { locStrength: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_strength') }]) : Dynamic));
       ((cast _EffectsGl.tintShaders__glEffectTintShader : flight._internal._WeakMap<GlContext, TintShaderLocations__glEffectTintShader>).set((cast (cast state : GlRenderState).gl), (cast loc)));
     }
@@ -1522,8 +1527,8 @@ class _EffectsGl {
     intensity = _Runtime.coalesce(effect.intensity, function():Dynamic return cast 0.1);
     size = _Runtime.coalesce(effect.size, function():Dynamic return cast 1.0);
     seed = _Runtime.coalesce(effect.seed, function():Dynamic return cast 0.0);
-    program = (cast getGlEffectProgram(({ final __callArgument962:Dynamic = state; __callArgument962; }), (cast 'stylization.filmGrain' : String), (cast _EffectsGl.FILM_GRAIN_FRAGMENT_SRC__glFilmGrainEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument964:Dynamic = state; __callArgument964; }), ({ final __callArgument965:Dynamic = program; __callArgument965; }), ({ final __callArgument966:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument966; }), ({ final __callArgument967:Dynamic = dest; __callArgument967; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument964:Dynamic = state; __callArgument964; }), (cast 'stylization.filmGrain' : String), (cast _EffectsGl.FILM_GRAIN_FRAGMENT_SRC__glFilmGrainEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument966:Dynamic = state; __callArgument966; }), ({ final __callArgument967:Dynamic = program; __callArgument967; }), ({ final __callArgument968:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument968; }), ({ final __callArgument969:Dynamic = dest; __callArgument969; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_size'), HxMath.max(0.0001, size));
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_seed'), seed);
@@ -1535,7 +1540,7 @@ class _EffectsGl {
   });
 
   public static function registerGlFilmGrainEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument974:Dynamic = state; __callArgument974; }), (cast 'FilmGrainEffect' : String), ({ final __callArgument975:Dynamic = defaultGlFilmGrainEffectRunner; __callArgument975; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument972:Dynamic = state; __callArgument972; }), (cast 'FilmGrainEffect' : String), ({ final __callArgument973:Dynamic = defaultGlFilmGrainEffectRunner; __callArgument973; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument976:Dynamic = state; __callArgument976; }), (cast 'FilmGrainEffect' : String), ({ final __callArgument977:Dynamic = defaultGlFilmGrainEffectRunner; __callArgument977; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument974:Dynamic = state; __callArgument974; }), (cast 'FilmGrainEffect' : String), ({ final __callArgument975:Dynamic = defaultGlFilmGrainEffectRunner; __callArgument975; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final FILM_GRAIN_FRAGMENT_SRC__glFilmGrainEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_intensity;\nuniform float u_size;\nuniform float u_seed;\nout vec4 o_color;\nfloat hash(vec2 p) {\n  p = floor(p / u_size);\n  return fract(sin(dot(p, vec2(127.1, 311.7)) + u_seed) * 43758.5453123);\n}\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float n = hash(v_texCoord * 1024.0) - 0.5;\n  o_color = vec4(c.rgb + n * u_intensity, c.a);\n}';
@@ -1546,8 +1551,8 @@ class _EffectsGl {
     var edgeThreshold:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     edgeThreshold = _Runtime.coalesce(_Runtime.field(effect, 'edgeThreshold'), function():Dynamic return cast 0.0312);
-    program = (cast getGlEffectProgram(({ final __callArgument976:Dynamic = state; __callArgument976; }), (cast 'antialiasing.fxaa' : String), (cast _EffectsGl.FXAA_FRAGMENT_SRC__glFxaaEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument978:Dynamic = state; __callArgument978; }), ({ final __callArgument979:Dynamic = program; __callArgument979; }), ({ final __callArgument980:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument980; }), ({ final __callArgument981:Dynamic = dest; __callArgument981; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument978:Dynamic = state; __callArgument978; }), (cast 'antialiasing.fxaa' : String), (cast _EffectsGl.FXAA_FRAGMENT_SRC__glFxaaEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument980:Dynamic = state; __callArgument980; }), ({ final __callArgument981:Dynamic = program; __callArgument981; }), ({ final __callArgument982:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument982; }), ({ final __callArgument983:Dynamic = dest; __callArgument983; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform2f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), source.width, source.height);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_edgeThreshold'), edgeThreshold);
     } : Dynamic));
@@ -1558,7 +1563,7 @@ class _EffectsGl {
   });
 
   public static function registerGlFxaaEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument988:Dynamic = state; __callArgument988; }), (cast 'FxaaEffect' : String), ({ final __callArgument989:Dynamic = defaultGlFxaaEffectRunner; __callArgument989; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument986:Dynamic = state; __callArgument986; }), (cast 'FxaaEffect' : String), ({ final __callArgument987:Dynamic = defaultGlFxaaEffectRunner; __callArgument987; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument990:Dynamic = state; __callArgument990; }), (cast 'FxaaEffect' : String), ({ final __callArgument991:Dynamic = defaultGlFxaaEffectRunner; __callArgument991; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument988:Dynamic = state; __callArgument988; }), (cast 'FxaaEffect' : String), ({ final __callArgument989:Dynamic = defaultGlFxaaEffectRunner; __callArgument989; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final FXAA_FRAGMENT_SRC__glFxaaEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform vec2 u_resolution;\nuniform float u_edgeThreshold;\nout vec4 o_color;\nfloat luma(vec3 c) {\n  return dot(c, vec3(0.299, 0.587, 0.114));\n}\nvoid main() {\n  vec2 texel = 1.0 / u_resolution;\n  vec3 rgbM = texture(u_texture0, v_texCoord).rgb;\n  vec3 rgbNW = texture(u_texture0, v_texCoord + vec2(-1.0, -1.0) * texel).rgb;\n  vec3 rgbNE = texture(u_texture0, v_texCoord + vec2(1.0, -1.0) * texel).rgb;\n  vec3 rgbSW = texture(u_texture0, v_texCoord + vec2(-1.0, 1.0) * texel).rgb;\n  vec3 rgbSE = texture(u_texture0, v_texCoord + vec2(1.0, 1.0) * texel).rgb;\n  float lumaM = luma(rgbM);\n  float lumaNW = luma(rgbNW);\n  float lumaNE = luma(rgbNE);\n  float lumaSW = luma(rgbSW);\n  float lumaSE = luma(rgbSE);\n  float lumaMin = min(lumaM, min(min(lumaNW, lumaNE), min(lumaSW, lumaSE)));\n  float lumaMax = max(lumaM, max(max(lumaNW, lumaNE), max(lumaSW, lumaSE)));\n  float range = lumaMax - lumaMin;\n  if (range < max(u_edgeThreshold, lumaMax * 0.125)) {\n    o_color = vec4(rgbM, texture(u_texture0, v_texCoord).a);\n    return;\n  }\n  vec2 dir;\n  dir.x = -((lumaNW + lumaNE) - (lumaSW + lumaSE));\n  dir.y = ((lumaNW + lumaSW) - (lumaNE + lumaSE));\n  float dirReduce = max((lumaNW + lumaNE + lumaSW + lumaSE) * 0.03125, 0.0078125);\n  float rcpDirMin = 1.0 / (min(abs(dir.x), abs(dir.y)) + dirReduce);\n  dir = clamp(dir * rcpDirMin, vec2(-8.0), vec2(8.0)) * texel;\n  vec3 rgbA = 0.5 * (\n    texture(u_texture0, v_texCoord + dir * (1.0 / 3.0 - 0.5)).rgb +\n    texture(u_texture0, v_texCoord + dir * (2.0 / 3.0 - 0.5)).rgb);\n  vec3 rgbB = rgbA * 0.5 + 0.25 * (\n    texture(u_texture0, v_texCoord + dir * -0.5).rgb +\n    texture(u_texture0, v_texCoord + dir * 0.5).rgb);\n  float lumaB = luma(rgbB);\n  vec3 result = (lumaB < lumaMin || lumaB > lumaMax) ? rgbA : rgbB;\n  o_color = vec4(result, texture(u_texture0, v_texCoord).a);\n}';
@@ -1575,8 +1580,8 @@ class _EffectsGl {
     blockSize = _Runtime.coalesce(effect.blockSize, function():Dynamic return cast 24.0);
     colorShift = _Runtime.coalesce(effect.colorShift, function():Dynamic return cast 8.0);
     seed = _Runtime.coalesce(effect.seed, function():Dynamic return cast 0.0);
-    program = (cast getGlEffectProgram(({ final __callArgument990:Dynamic = state; __callArgument990; }), (cast 'stylization.glitch' : String), (cast _EffectsGl.GLITCH_FRAGMENT_SRC__glGlitchEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument992:Dynamic = state; __callArgument992; }), ({ final __callArgument993:Dynamic = program; __callArgument993; }), ({ final __callArgument994:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument994; }), ({ final __callArgument995:Dynamic = dest; __callArgument995; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument992:Dynamic = state; __callArgument992; }), (cast 'stylization.glitch' : String), (cast _EffectsGl.GLITCH_FRAGMENT_SRC__glGlitchEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument994:Dynamic = state; __callArgument994; }), ({ final __callArgument995:Dynamic = program; __callArgument995; }), ({ final __callArgument996:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument996; }), ({ final __callArgument997:Dynamic = dest; __callArgument997; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_blockSize'), blockSize);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_colorShift'), colorShift);
@@ -1590,7 +1595,7 @@ class _EffectsGl {
   });
 
   public static function registerGlGlitchEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1002:Dynamic = state; __callArgument1002; }), (cast 'GlitchEffect' : String), ({ final __callArgument1003:Dynamic = defaultGlGlitchEffectRunner; __callArgument1003; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1000:Dynamic = state; __callArgument1000; }), (cast 'GlitchEffect' : String), ({ final __callArgument1001:Dynamic = defaultGlGlitchEffectRunner; __callArgument1001; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1004:Dynamic = state; __callArgument1004; }), (cast 'GlitchEffect' : String), ({ final __callArgument1005:Dynamic = defaultGlGlitchEffectRunner; __callArgument1005; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1002:Dynamic = state; __callArgument1002; }), (cast 'GlitchEffect' : String), ({ final __callArgument1003:Dynamic = defaultGlGlitchEffectRunner; __callArgument1003; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final GLITCH_FRAGMENT_SRC__glGlitchEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_intensity;\nuniform float u_blockSize;\nuniform float u_colorShift;\nuniform float u_seed;\nuniform vec2 u_resolution;\nout vec4 o_color;\nfloat ghash(float n) { return fract(sin(n) * 43758.5453123); }\nvoid main() {\n  float blockSize = max(2.0, u_blockSize);\n  // Blocks are numbered down the image, so the tear and corruption of a given band land where the\n  // author placed them. A render target is bottom-left origin, so the image-space row is measured\n  // from the far edge; numbering straight from v_texCoord.y would run the bands the other way up.\n  // Only the block INDEX converts — sampling below stays in the target\'s own coordinates.\n  float block = floor((1.0 - v_texCoord.y) * u_resolution.y / blockSize);\n  float r = ghash(block + u_seed * 7.0);\n  float tear = step(1.0 - u_intensity * 0.6, r);\n  float shiftPx = (ghash(block * 1.7 + u_seed) - 0.5) * 2.0 * tear * u_intensity * 40.0;\n  vec2 baseUv = vec2(v_texCoord.x + shiftPx / u_resolution.x, v_texCoord.y);\n  float cs = (u_colorShift * (0.4 + tear)) / u_resolution.x;\n  float rC = texture(u_texture0, vec2(baseUv.x + cs, baseUv.y)).r;\n  float gC = texture(u_texture0, baseUv).g;\n  float bC = texture(u_texture0, vec2(baseUv.x - cs, baseUv.y)).b;\n  float a = texture(u_texture0, baseUv).a;\n  vec3 col = vec3(rC, gC, bC);\n  float corrupt = step(0.985 - u_intensity * 0.04, ghash(block * 3.3 + u_seed * 2.0));\n  col = mix(col, vec3(1.0), corrupt * 0.6);\n  o_color = vec4(col, a);\n}';
@@ -1613,8 +1618,8 @@ class _EffectsGl {
     weight = _Runtime.coalesce(effect.weight, function():Dynamic return cast 0.4);
     exposure = _Runtime.coalesce(effect.exposure, function():Dynamic return cast 0.6);
     samples = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(effect.samples, function():Dynamic return cast 64.0)));
-    program = (cast getGlEffectProgram(({ final __callArgument1004:Dynamic = state; __callArgument1004; }), (cast 'atmospheric.godRays.' + Std.string(samples) + '' : String), (cast (cast _EffectsGl.buildGodRaysFragment__glGodRaysEffect((cast samples : Float)) : String) : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1006:Dynamic = state; __callArgument1006; }), ({ final __callArgument1007:Dynamic = program; __callArgument1007; }), ({ final __callArgument1008:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1008; }), ({ final __callArgument1009:Dynamic = dest; __callArgument1009; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument1006:Dynamic = state; __callArgument1006; }), (cast 'atmospheric.godRays.' + Std.string(samples) + '' : String), (cast (cast _EffectsGl.buildGodRaysFragment__glGodRaysEffect((cast samples : Float)) : String) : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1008:Dynamic = state; __callArgument1008; }), ({ final __callArgument1009:Dynamic = program; __callArgument1009; }), ({ final __callArgument1010:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1010; }), ({ final __callArgument1011:Dynamic = dest; __callArgument1011; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform2f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_lightPosition'), centerX, centerY);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_density'), density);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_decay'), decay);
@@ -1628,7 +1633,7 @@ class _EffectsGl {
   });
 
   public static function registerGlGodRaysEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1016:Dynamic = state; __callArgument1016; }), (cast 'GodRaysEffect' : String), ({ final __callArgument1017:Dynamic = defaultGlGodRaysEffectRunner; __callArgument1017; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1014:Dynamic = state; __callArgument1014; }), (cast 'GodRaysEffect' : String), ({ final __callArgument1015:Dynamic = defaultGlGodRaysEffectRunner; __callArgument1015; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1018:Dynamic = state; __callArgument1018; }), (cast 'GodRaysEffect' : String), ({ final __callArgument1019:Dynamic = defaultGlGodRaysEffectRunner; __callArgument1019; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1016:Dynamic = state; __callArgument1016; }), (cast 'GodRaysEffect' : String), ({ final __callArgument1017:Dynamic = defaultGlGodRaysEffectRunner; __callArgument1017; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static function buildGodRaysFragment__glGodRaysEffect(samples:Float):String {
@@ -1667,9 +1672,9 @@ class _EffectsGl {
     var dy:Float = cast _Runtime.UNDEFINED;
     var ramp:flight._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
     descriptor = (cast { width: source.width, height: source.height, format: source.format });
-    s0 = (cast acquireGlRenderTarget(({ final __callArgument1018:Dynamic = state; __callArgument1018; }), ({ final __callArgument1019:Dynamic = pool; __callArgument1019; }), ({ final __callArgument1020:Dynamic = descriptor; __callArgument1020; })) : GlRenderTarget);
-    s1 = (cast acquireGlRenderTarget(({ final __callArgument1024:Dynamic = state; __callArgument1024; }), ({ final __callArgument1025:Dynamic = pool; __callArgument1025; }), ({ final __callArgument1026:Dynamic = descriptor; __callArgument1026; })) : GlRenderTarget);
-    s2 = (cast acquireGlRenderTarget(({ final __callArgument1030:Dynamic = state; __callArgument1030; }), ({ final __callArgument1031:Dynamic = pool; __callArgument1031; }), ({ final __callArgument1032:Dynamic = descriptor; __callArgument1032; })) : GlRenderTarget);
+    s0 = (cast acquireGlRenderTarget(({ final __callArgument1020:Dynamic = state; __callArgument1020; }), ({ final __callArgument1021:Dynamic = pool; __callArgument1021; }), ({ final __callArgument1022:Dynamic = descriptor; __callArgument1022; })) : GlRenderTarget);
+    s1 = (cast acquireGlRenderTarget(({ final __callArgument1026:Dynamic = state; __callArgument1026; }), ({ final __callArgument1027:Dynamic = pool; __callArgument1027; }), ({ final __callArgument1028:Dynamic = descriptor; __callArgument1028; })) : GlRenderTarget);
+    s2 = (cast acquireGlRenderTarget(({ final __callArgument1032:Dynamic = state; __callArgument1032; }), ({ final __callArgument1033:Dynamic = pool; __callArgument1033; }), ({ final __callArgument1034:Dynamic = descriptor; __callArgument1034; })) : GlRenderTarget);
     src = (cast source : GlRenderTarget);
     dst = (cast dest : GlRenderTarget);
     angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(effect.angle, function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
@@ -1678,25 +1683,25 @@ class _EffectsGl {
     strength = _Runtime.coalesce(effect.strength, function():Dynamic return cast 1.0);
     sourceMode = _Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw');
     gl = (cast state : GlRenderState).gl;
-    applyGlEffectTintPass(({ final __callArgument1036:Dynamic = state; __callArgument1036; }), ({ final __callArgument1037:Dynamic = src; __callArgument1037; }), ({ final __callArgument1038:Dynamic = s0; __callArgument1038; }), (cast 4294967295.0 : Float), (cast 1.0 : Float), (cast HxMath.min(1.0, strength) : Float));
-    applyGlEffectBoxBlur(({ final __callArgument1042:Dynamic = state; __callArgument1042; }), ({ final __callArgument1043:Dynamic = s0; __callArgument1043; }), ({ final __callArgument1044:Dynamic = s1; __callArgument1044; }), ({ final __callArgument1045:Dynamic = s2; __callArgument1045; }), ({ final __callArgument1046:Dynamic = { blurX: _Runtime.coalesce(effect.blurX, function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(effect.blurY, function():Dynamic return cast 4.0), passes: quality }; __callArgument1046; }));
+    applyGlEffectTintPass(({ final __callArgument1038:Dynamic = state; __callArgument1038; }), ({ final __callArgument1039:Dynamic = src; __callArgument1039; }), ({ final __callArgument1040:Dynamic = s0; __callArgument1040; }), (cast 4294967295.0 : Float), (cast 1.0 : Float), (cast HxMath.min(1.0, strength) : Float));
+    applyGlEffectBoxBlur(({ final __callArgument1044:Dynamic = state; __callArgument1044; }), ({ final __callArgument1045:Dynamic = s0; __callArgument1045; }), ({ final __callArgument1046:Dynamic = s1; __callArgument1046; }), ({ final __callArgument1047:Dynamic = s2; __callArgument1047; }), ({ final __callArgument1048:Dynamic = { blurX: _Runtime.coalesce(effect.blurX, function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(effect.blurY, function():Dynamic return cast 4.0), passes: quality }; __callArgument1048; }));
     dx = _Runtime.multiplyNumbers(HxMath.cos(angle), distance);
     dy = _Runtime.multiplyNumbers(HxMath.sin(angle), distance);
-    _EffectsGl.applyBevelEncodePass__glGradientBevelEffect(({ final __callArgument1052:Dynamic = state; __callArgument1052; }), ({ final __callArgument1053:Dynamic = s1; __callArgument1053; }), ({ final __callArgument1054:Dynamic = s0; __callArgument1054; }), (cast (dx / s1.width) : Float), (cast (-dy / s1.height) : Float));
-    ramp = (cast createGlEffectGradientRampTexture(({ final __callArgument1058:Dynamic = gl; __callArgument1058; }), effect.colors, effect.alphas, effect.ratios) : flight._internal.dom.WebGLTexture);
-    _EffectsGl.applyBevelApplyPass__glGradientBevelEffect(({ final __callArgument1060:Dynamic = state; __callArgument1060; }), ({ final __callArgument1061:Dynamic = s0; __callArgument1061; }), ({ final __callArgument1062:Dynamic = ramp; __callArgument1062; }), ({ final __callArgument1063:Dynamic = src; __callArgument1063; }), ({ final __callArgument1064:Dynamic = s1; __callArgument1064; }));
+    _EffectsGl.applyBevelEncodePass__glGradientBevelEffect(({ final __callArgument1054:Dynamic = state; __callArgument1054; }), ({ final __callArgument1055:Dynamic = s1; __callArgument1055; }), ({ final __callArgument1056:Dynamic = s0; __callArgument1056; }), (cast (dx / s1.width) : Float), (cast (-dy / s1.height) : Float));
+    ramp = (cast createGlEffectGradientRampTexture(({ final __callArgument1060:Dynamic = gl; __callArgument1060; }), effect.colors, effect.alphas, effect.ratios) : flight._internal.dom.WebGLTexture);
+    _EffectsGl.applyBevelApplyPass__glGradientBevelEffect(({ final __callArgument1062:Dynamic = state; __callArgument1062; }), ({ final __callArgument1063:Dynamic = s0; __callArgument1063; }), ({ final __callArgument1064:Dynamic = ramp; __callArgument1064; }), ({ final __callArgument1065:Dynamic = src; __callArgument1065; }), ({ final __callArgument1066:Dynamic = s1; __callArgument1066; }));
     flight._internal.backend.WebGl2Backend.deleteTexture(gl, ramp);
-    clearGlRenderTarget(({ final __callArgument1070:Dynamic = state; __callArgument1070; }), ({ final __callArgument1071:Dynamic = dst; __callArgument1071; }));
+    clearGlRenderTarget(({ final __callArgument1072:Dynamic = state; __callArgument1072; }), ({ final __callArgument1073:Dynamic = dst; __callArgument1073; }));
     if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
-      applyGlEffectBlitPass(({ final __callArgument1074:Dynamic = state; __callArgument1074; }), ({ final __callArgument1075:Dynamic = src; __callArgument1075; }), ({ final __callArgument1076:Dynamic = dst; __callArgument1076; }));
+      applyGlEffectBlitPass(({ final __callArgument1076:Dynamic = state; __callArgument1076; }), ({ final __callArgument1077:Dynamic = src; __callArgument1077; }), ({ final __callArgument1078:Dynamic = dst; __callArgument1078; }));
     }
-    applyGlEffectBlitPass(({ final __callArgument1080:Dynamic = state; __callArgument1080; }), ({ final __callArgument1081:Dynamic = s1; __callArgument1081; }), ({ final __callArgument1082:Dynamic = dst; __callArgument1082; }));
+    applyGlEffectBlitPass(({ final __callArgument1082:Dynamic = state; __callArgument1082; }), ({ final __callArgument1083:Dynamic = s1; __callArgument1083; }), ({ final __callArgument1084:Dynamic = dst; __callArgument1084; }));
     if ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool)) {
-      applyGlEffectErasePass(({ final __callArgument1086:Dynamic = state; __callArgument1086; }), ({ final __callArgument1087:Dynamic = src; __callArgument1087; }), ({ final __callArgument1088:Dynamic = dst; __callArgument1088; }));
+      applyGlEffectErasePass(({ final __callArgument1088:Dynamic = state; __callArgument1088; }), ({ final __callArgument1089:Dynamic = src; __callArgument1089; }), ({ final __callArgument1090:Dynamic = dst; __callArgument1090; }));
     }
-    releaseGlRenderTarget(({ final __callArgument1092:Dynamic = pool; __callArgument1092; }), ({ final __callArgument1093:Dynamic = s0; __callArgument1093; }));
-    releaseGlRenderTarget(({ final __callArgument1096:Dynamic = pool; __callArgument1096; }), ({ final __callArgument1097:Dynamic = s1; __callArgument1097; }));
-    releaseGlRenderTarget(({ final __callArgument1100:Dynamic = pool; __callArgument1100; }), ({ final __callArgument1101:Dynamic = s2; __callArgument1101; }));
+    releaseGlRenderTarget(({ final __callArgument1094:Dynamic = pool; __callArgument1094; }), ({ final __callArgument1095:Dynamic = s0; __callArgument1095; }));
+    releaseGlRenderTarget(({ final __callArgument1098:Dynamic = pool; __callArgument1098; }), ({ final __callArgument1099:Dynamic = s1; __callArgument1099; }));
+    releaseGlRenderTarget(({ final __callArgument1102:Dynamic = pool; __callArgument1102; }), ({ final __callArgument1103:Dynamic = s2; __callArgument1103; }));
   }
 
   public static final defaultGlGradientBevelEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
@@ -1704,13 +1709,13 @@ class _EffectsGl {
   });
 
   public static function registerGlGradientBevelEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1106:Dynamic = state; __callArgument1106; }), (cast 'GradientBevelEffect' : String), ({ final __callArgument1107:Dynamic = defaultGlGradientBevelEffectRunner; __callArgument1107; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1104:Dynamic = state; __callArgument1104; }), (cast 'GradientBevelEffect' : String), ({ final __callArgument1105:Dynamic = defaultGlGradientBevelEffectRunner; __callArgument1105; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1108:Dynamic = state; __callArgument1108; }), (cast 'GradientBevelEffect' : String), ({ final __callArgument1109:Dynamic = defaultGlGradientBevelEffectRunner; __callArgument1109; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1106:Dynamic = state; __callArgument1106; }), (cast 'GradientBevelEffect' : String), ({ final __callArgument1107:Dynamic = defaultGlGradientBevelEffectRunner; __callArgument1107; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static function applyBevelApplyPass__glGradientBevelEffect(state:GlRenderState, encoded:GlRenderTarget, ramp:flight._internal.dom.WebGLTexture, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:BevelApplyLocations__glGradientBevelEffect = cast _Runtime.UNDEFINED;
-    loc = (cast _EffectsGl.getApplyShader__glGradientBevelEffect(({ final __callArgument1108:Dynamic = state; __callArgument1108; })) : BevelApplyLocations__glGradientBevelEffect);
-    drawGlFullscreenPass(({ final __callArgument1110:Dynamic = state; __callArgument1110; }), ({ final __callArgument1111:Dynamic = loc; __callArgument1111; }), ({ final __callArgument1112:Dynamic = cast ([encoded.texture] : Array<Dynamic>); __callArgument1112; }), ({ final __callArgument1113:Dynamic = dest; __callArgument1113; }), ({ final __callArgument1114:Dynamic = function(__unused1:GlContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:GlContext, __unused0:GlFullscreenProgram):Void {
+    loc = (cast _EffectsGl.getApplyShader__glGradientBevelEffect(({ final __callArgument1110:Dynamic = state; __callArgument1110; })) : BevelApplyLocations__glGradientBevelEffect);
+    drawGlFullscreenPass(({ final __callArgument1112:Dynamic = state; __callArgument1112; }), ({ final __callArgument1113:Dynamic = loc; __callArgument1113; }), ({ final __callArgument1114:Dynamic = cast ([encoded.texture] : Array<Dynamic>); __callArgument1114; }), ({ final __callArgument1115:Dynamic = dest; __callArgument1115; }), ({ final __callArgument1116:Dynamic = function(__unused1:GlContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:GlContext, __unused0:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.activeTexture(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE1', flight._internal.backend.WebGl2Backend.TEXTURE1));
       flight._internal.backend.WebGl2Backend.bindTexture(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flight._internal.backend.WebGl2Backend.TEXTURE_2D), ramp);
       flight._internal.backend.WebGl2Backend.uniform1i(gl, (cast loc : { var locRamp:flight._internal.dom.WebGLUniformLocation; }).locRamp, 1.0);
@@ -1719,16 +1724,16 @@ class _EffectsGl {
       flight._internal.backend.WebGl2Backend.uniform1i(gl, (cast loc : { var locSource:flight._internal.dom.WebGLUniformLocation; }).locSource, 2.0);
       flight._internal.backend.WebGl2Backend.activeTexture(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flight._internal.backend.WebGl2Backend.TEXTURE0));
       flight._internal.backend.WebGl2Backend.blendFunc(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flight._internal.backend.WebGl2Backend.ONE), flight._internal.backend.WebGl2Backend.contextConstant(gl, 'ZERO', flight._internal.backend.WebGl2Backend.ZERO));
-    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument1114; }));
+    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument1116; }));
   }
 
   public static function applyBevelEncodePass__glGradientBevelEffect(state:GlRenderState, blurred:GlRenderTarget, dest:GlRenderTarget, dx:Float, dy:Float):Void {
     var loc:BevelEncodeLocations__glGradientBevelEffect = cast _Runtime.UNDEFINED;
-    loc = (cast _EffectsGl.getEncodeShader__glGradientBevelEffect(({ final __callArgument1120:Dynamic = state; __callArgument1120; })) : BevelEncodeLocations__glGradientBevelEffect);
-    drawGlFullscreenPass(({ final __callArgument1122:Dynamic = state; __callArgument1122; }), ({ final __callArgument1123:Dynamic = loc; __callArgument1123; }), ({ final __callArgument1124:Dynamic = cast ([blurred.texture] : Array<Dynamic>); __callArgument1124; }), ({ final __callArgument1125:Dynamic = dest; __callArgument1125; }), ({ final __callArgument1126:Dynamic = function(__unused4:GlContext, __unused5:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:GlContext, __unused3:GlFullscreenProgram):Void {
+    loc = (cast _EffectsGl.getEncodeShader__glGradientBevelEffect(({ final __callArgument1122:Dynamic = state; __callArgument1122; })) : BevelEncodeLocations__glGradientBevelEffect);
+    drawGlFullscreenPass(({ final __callArgument1124:Dynamic = state; __callArgument1124; }), ({ final __callArgument1125:Dynamic = loc; __callArgument1125; }), ({ final __callArgument1126:Dynamic = cast ([blurred.texture] : Array<Dynamic>); __callArgument1126; }), ({ final __callArgument1127:Dynamic = dest; __callArgument1127; }), ({ final __callArgument1128:Dynamic = function(__unused4:GlContext, __unused5:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:GlContext, __unused3:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform2f(gl, (cast loc : { var locOffset:flight._internal.dom.WebGLUniformLocation; }).locOffset, dx, dy);
       flight._internal.backend.WebGl2Backend.blendFunc(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flight._internal.backend.WebGl2Backend.ONE), flight._internal.backend.WebGl2Backend.contextConstant(gl, 'ZERO', flight._internal.backend.WebGl2Backend.ZERO));
-    }, cast ([__unused4] : Array<Dynamic>)); }; __callArgument1126; }));
+    }, cast ([__unused4] : Array<Dynamic>)); }; __callArgument1128; }));
   }
 
   public static function getApplyShader__glGradientBevelEffect(state:GlRenderState):BevelApplyLocations__glGradientBevelEffect {
@@ -1736,7 +1741,7 @@ class _EffectsGl {
     loc = ((cast _EffectsGl.applyShaders__glGradientBevelEffect : flight._internal._WeakMap<GlContext, BevelApplyLocations__glGradientBevelEffect>).get((cast (cast state : GlRenderState).gl)));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:GlContext = (cast state : GlRenderState).gl;
-      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument1132:Dynamic = gl; __callArgument1132; }), (cast _EffectsGl.BEVEL_APPLY_FRAGMENT_SRC__glGradientBevelEffect : String)) : GlFullscreenProgram);
+      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument1134:Dynamic = gl; __callArgument1134; }), (cast _EffectsGl.BEVEL_APPLY_FRAGMENT_SRC__glGradientBevelEffect : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base, { locRamp: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_ramp') }, { locSource: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_source') }]) : Dynamic));
       ((cast _EffectsGl.applyShaders__glGradientBevelEffect : flight._internal._WeakMap<GlContext, BevelApplyLocations__glGradientBevelEffect>).set((cast (cast state : GlRenderState).gl), (cast loc)));
     }
@@ -1749,7 +1754,7 @@ class _EffectsGl {
     loc = ((cast _EffectsGl.encodeShaders__glGradientBevelEffect : flight._internal._WeakMap<GlContext, BevelEncodeLocations__glGradientBevelEffect>).get((cast (cast state : GlRenderState).gl)));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:GlContext = (cast state : GlRenderState).gl;
-      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument1134:Dynamic = gl; __callArgument1134; }), (cast _EffectsGl.BEVEL_ENCODE_FRAGMENT_SRC__glGradientBevelEffect : String)) : GlFullscreenProgram);
+      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument1136:Dynamic = gl; __callArgument1136; }), (cast _EffectsGl.BEVEL_ENCODE_FRAGMENT_SRC__glGradientBevelEffect : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base, { locOffset: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_offset') }]) : Dynamic));
       ((cast _EffectsGl.encodeShaders__glGradientBevelEffect : flight._internal._WeakMap<GlContext, BevelEncodeLocations__glGradientBevelEffect>).set((cast (cast state : GlRenderState).gl), (cast loc)));
     }
@@ -1776,30 +1781,30 @@ class _EffectsGl {
     var gl:GlContext = cast _Runtime.UNDEFINED;
     var ramp:flight._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
     descriptor = (cast { width: source.width, height: source.height, format: source.format });
-    s0 = (cast acquireGlRenderTarget(({ final __callArgument1136:Dynamic = state; __callArgument1136; }), ({ final __callArgument1137:Dynamic = pool; __callArgument1137; }), ({ final __callArgument1138:Dynamic = descriptor; __callArgument1138; })) : GlRenderTarget);
-    s1 = (cast acquireGlRenderTarget(({ final __callArgument1142:Dynamic = state; __callArgument1142; }), ({ final __callArgument1143:Dynamic = pool; __callArgument1143; }), ({ final __callArgument1144:Dynamic = descriptor; __callArgument1144; })) : GlRenderTarget);
-    s2 = (cast acquireGlRenderTarget(({ final __callArgument1148:Dynamic = state; __callArgument1148; }), ({ final __callArgument1149:Dynamic = pool; __callArgument1149; }), ({ final __callArgument1150:Dynamic = descriptor; __callArgument1150; })) : GlRenderTarget);
+    s0 = (cast acquireGlRenderTarget(({ final __callArgument1138:Dynamic = state; __callArgument1138; }), ({ final __callArgument1139:Dynamic = pool; __callArgument1139; }), ({ final __callArgument1140:Dynamic = descriptor; __callArgument1140; })) : GlRenderTarget);
+    s1 = (cast acquireGlRenderTarget(({ final __callArgument1144:Dynamic = state; __callArgument1144; }), ({ final __callArgument1145:Dynamic = pool; __callArgument1145; }), ({ final __callArgument1146:Dynamic = descriptor; __callArgument1146; })) : GlRenderTarget);
+    s2 = (cast acquireGlRenderTarget(({ final __callArgument1150:Dynamic = state; __callArgument1150; }), ({ final __callArgument1151:Dynamic = pool; __callArgument1151; }), ({ final __callArgument1152:Dynamic = descriptor; __callArgument1152; })) : GlRenderTarget);
     src = (cast source : GlRenderTarget);
     dst = (cast dest : GlRenderTarget);
     quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(effect.quality, function():Dynamic return cast 1.0)));
     strength = _Runtime.coalesce(effect.strength, function():Dynamic return cast 1.0);
     sourceMode = _Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw');
     gl = (cast state : GlRenderState).gl;
-    applyGlEffectTintPass(({ final __callArgument1154:Dynamic = state; __callArgument1154; }), ({ final __callArgument1155:Dynamic = src; __callArgument1155; }), ({ final __callArgument1156:Dynamic = s0; __callArgument1156; }), (cast 4294967295.0 : Float), (cast 1.0 : Float), (cast HxMath.min(1.0, strength) : Float));
-    applyGlEffectBoxBlur(({ final __callArgument1160:Dynamic = state; __callArgument1160; }), ({ final __callArgument1161:Dynamic = s0; __callArgument1161; }), ({ final __callArgument1162:Dynamic = s1; __callArgument1162; }), ({ final __callArgument1163:Dynamic = s2; __callArgument1163; }), ({ final __callArgument1164:Dynamic = { blurX: _Runtime.coalesce(effect.blurX, function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(effect.blurY, function():Dynamic return cast 6.0), passes: quality }; __callArgument1164; }));
-    ramp = (cast createGlEffectGradientRampTexture(({ final __callArgument1170:Dynamic = gl; __callArgument1170; }), effect.colors, effect.alphas, effect.ratios) : flight._internal.dom.WebGLTexture);
-    _EffectsGl.applyGradientLookupPass__glGradientGlowEffect(({ final __callArgument1172:Dynamic = state; __callArgument1172; }), ({ final __callArgument1173:Dynamic = s1; __callArgument1173; }), ({ final __callArgument1174:Dynamic = ramp; __callArgument1174; }), ({ final __callArgument1175:Dynamic = s0; __callArgument1175; }));
+    applyGlEffectTintPass(({ final __callArgument1156:Dynamic = state; __callArgument1156; }), ({ final __callArgument1157:Dynamic = src; __callArgument1157; }), ({ final __callArgument1158:Dynamic = s0; __callArgument1158; }), (cast 4294967295.0 : Float), (cast 1.0 : Float), (cast HxMath.min(1.0, strength) : Float));
+    applyGlEffectBoxBlur(({ final __callArgument1162:Dynamic = state; __callArgument1162; }), ({ final __callArgument1163:Dynamic = s0; __callArgument1163; }), ({ final __callArgument1164:Dynamic = s1; __callArgument1164; }), ({ final __callArgument1165:Dynamic = s2; __callArgument1165; }), ({ final __callArgument1166:Dynamic = { blurX: _Runtime.coalesce(effect.blurX, function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(effect.blurY, function():Dynamic return cast 6.0), passes: quality }; __callArgument1166; }));
+    ramp = (cast createGlEffectGradientRampTexture(({ final __callArgument1172:Dynamic = gl; __callArgument1172; }), effect.colors, effect.alphas, effect.ratios) : flight._internal.dom.WebGLTexture);
+    _EffectsGl.applyGradientLookupPass__glGradientGlowEffect(({ final __callArgument1174:Dynamic = state; __callArgument1174; }), ({ final __callArgument1175:Dynamic = s1; __callArgument1175; }), ({ final __callArgument1176:Dynamic = ramp; __callArgument1176; }), ({ final __callArgument1177:Dynamic = s0; __callArgument1177; }));
     flight._internal.backend.WebGl2Backend.deleteTexture(gl, ramp);
-    clearGlRenderTarget(({ final __callArgument1180:Dynamic = state; __callArgument1180; }), ({ final __callArgument1181:Dynamic = dst; __callArgument1181; }));
-    applyGlEffectBlitPass(({ final __callArgument1184:Dynamic = state; __callArgument1184; }), ({ final __callArgument1185:Dynamic = s0; __callArgument1185; }), ({ final __callArgument1186:Dynamic = dst; __callArgument1186; }));
+    clearGlRenderTarget(({ final __callArgument1182:Dynamic = state; __callArgument1182; }), ({ final __callArgument1183:Dynamic = dst; __callArgument1183; }));
+    applyGlEffectBlitPass(({ final __callArgument1186:Dynamic = state; __callArgument1186; }), ({ final __callArgument1187:Dynamic = s0; __callArgument1187; }), ({ final __callArgument1188:Dynamic = dst; __callArgument1188; }));
     if ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool)) {
-      applyGlEffectErasePass(({ final __callArgument1190:Dynamic = state; __callArgument1190; }), ({ final __callArgument1191:Dynamic = src; __callArgument1191; }), ({ final __callArgument1192:Dynamic = dst; __callArgument1192; }));
+      applyGlEffectErasePass(({ final __callArgument1192:Dynamic = state; __callArgument1192; }), ({ final __callArgument1193:Dynamic = src; __callArgument1193; }), ({ final __callArgument1194:Dynamic = dst; __callArgument1194; }));
     } else { if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
-      applyGlEffectBlitPass(({ final __callArgument1196:Dynamic = state; __callArgument1196; }), ({ final __callArgument1197:Dynamic = src; __callArgument1197; }), ({ final __callArgument1198:Dynamic = dst; __callArgument1198; }));
+      applyGlEffectBlitPass(({ final __callArgument1198:Dynamic = state; __callArgument1198; }), ({ final __callArgument1199:Dynamic = src; __callArgument1199; }), ({ final __callArgument1200:Dynamic = dst; __callArgument1200; }));
     } }
-    releaseGlRenderTarget(({ final __callArgument1202:Dynamic = pool; __callArgument1202; }), ({ final __callArgument1203:Dynamic = s0; __callArgument1203; }));
-    releaseGlRenderTarget(({ final __callArgument1206:Dynamic = pool; __callArgument1206; }), ({ final __callArgument1207:Dynamic = s1; __callArgument1207; }));
-    releaseGlRenderTarget(({ final __callArgument1210:Dynamic = pool; __callArgument1210; }), ({ final __callArgument1211:Dynamic = s2; __callArgument1211; }));
+    releaseGlRenderTarget(({ final __callArgument1204:Dynamic = pool; __callArgument1204; }), ({ final __callArgument1205:Dynamic = s0; __callArgument1205; }));
+    releaseGlRenderTarget(({ final __callArgument1208:Dynamic = pool; __callArgument1208; }), ({ final __callArgument1209:Dynamic = s1; __callArgument1209; }));
+    releaseGlRenderTarget(({ final __callArgument1212:Dynamic = pool; __callArgument1212; }), ({ final __callArgument1213:Dynamic = s2; __callArgument1213; }));
   }
 
   public static final defaultGlGradientGlowEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
@@ -1807,19 +1812,19 @@ class _EffectsGl {
   });
 
   public static function registerGlGradientGlowEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1216:Dynamic = state; __callArgument1216; }), (cast 'GradientGlowEffect' : String), ({ final __callArgument1217:Dynamic = defaultGlGradientGlowEffectRunner; __callArgument1217; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1214:Dynamic = state; __callArgument1214; }), (cast 'GradientGlowEffect' : String), ({ final __callArgument1215:Dynamic = defaultGlGradientGlowEffectRunner; __callArgument1215; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1218:Dynamic = state; __callArgument1218; }), (cast 'GradientGlowEffect' : String), ({ final __callArgument1219:Dynamic = defaultGlGradientGlowEffectRunner; __callArgument1219; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1216:Dynamic = state; __callArgument1216; }), (cast 'GradientGlowEffect' : String), ({ final __callArgument1217:Dynamic = defaultGlGradientGlowEffectRunner; __callArgument1217; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static function applyGradientLookupPass__glGradientGlowEffect(state:GlRenderState, blurred:GlRenderTarget, ramp:flight._internal.dom.WebGLTexture, dest:GlRenderTarget):Void {
     var loc:GradientLookupLocations__glGradientGlowEffect = cast _Runtime.UNDEFINED;
-    loc = (cast _EffectsGl.getLookupShader__glGradientGlowEffect(({ final __callArgument1218:Dynamic = state; __callArgument1218; })) : GradientLookupLocations__glGradientGlowEffect);
-    drawGlFullscreenPass(({ final __callArgument1220:Dynamic = state; __callArgument1220; }), ({ final __callArgument1221:Dynamic = loc; __callArgument1221; }), ({ final __callArgument1222:Dynamic = cast ([blurred.texture] : Array<Dynamic>); __callArgument1222; }), ({ final __callArgument1223:Dynamic = dest; __callArgument1223; }), ({ final __callArgument1224:Dynamic = function(__unused1:GlContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:GlContext, __unused0:GlFullscreenProgram):Void {
+    loc = (cast _EffectsGl.getLookupShader__glGradientGlowEffect(({ final __callArgument1220:Dynamic = state; __callArgument1220; })) : GradientLookupLocations__glGradientGlowEffect);
+    drawGlFullscreenPass(({ final __callArgument1222:Dynamic = state; __callArgument1222; }), ({ final __callArgument1223:Dynamic = loc; __callArgument1223; }), ({ final __callArgument1224:Dynamic = cast ([blurred.texture] : Array<Dynamic>); __callArgument1224; }), ({ final __callArgument1225:Dynamic = dest; __callArgument1225; }), ({ final __callArgument1226:Dynamic = function(__unused1:GlContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:GlContext, __unused0:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.activeTexture(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE1', flight._internal.backend.WebGl2Backend.TEXTURE1));
       flight._internal.backend.WebGl2Backend.bindTexture(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flight._internal.backend.WebGl2Backend.TEXTURE_2D), ramp);
       flight._internal.backend.WebGl2Backend.uniform1i(gl, (cast loc : { var locRamp:flight._internal.dom.WebGLUniformLocation; }).locRamp, 1.0);
       flight._internal.backend.WebGl2Backend.activeTexture(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flight._internal.backend.WebGl2Backend.TEXTURE0));
       flight._internal.backend.WebGl2Backend.blendFunc(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flight._internal.backend.WebGl2Backend.ONE), flight._internal.backend.WebGl2Backend.contextConstant(gl, 'ZERO', flight._internal.backend.WebGl2Backend.ZERO));
-    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument1224; }));
+    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument1226; }));
   }
 
   public static function getLookupShader__glGradientGlowEffect(state:GlRenderState):GradientLookupLocations__glGradientGlowEffect {
@@ -1827,7 +1832,7 @@ class _EffectsGl {
     loc = ((cast _EffectsGl.lookupShaders__glGradientGlowEffect : flight._internal._WeakMap<GlContext, GradientLookupLocations__glGradientGlowEffect>).get((cast (cast state : GlRenderState).gl)));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:GlContext = (cast state : GlRenderState).gl;
-      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument1230:Dynamic = gl; __callArgument1230; }), (cast _EffectsGl.GRADIENT_LOOKUP_FRAGMENT_SRC__glGradientGlowEffect : String)) : GlFullscreenProgram);
+      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument1232:Dynamic = gl; __callArgument1232; }), (cast _EffectsGl.GRADIENT_LOOKUP_FRAGMENT_SRC__glGradientGlowEffect : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base, { locRamp: flight._internal.backend.WebGl2Backend.getUniformLocation(gl, (cast base : GlFullscreenProgram).program, 'u_ramp') }]) : Dynamic));
       ((cast _EffectsGl.lookupShaders__glGradientGlowEffect : flight._internal._WeakMap<GlContext, GradientLookupLocations__glGradientGlowEffect>).set((cast (cast state : GlRenderState).gl), (cast loc)));
     }
@@ -1843,8 +1848,8 @@ class _EffectsGl {
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     scale = _Runtime.coalesce(_Runtime.field(effect, 'scale'), function():Dynamic return cast 6.0);
     angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 22.92), HxMath.PI) / 180.0);
-    program = (cast getGlEffectProgram(({ final __callArgument1232:Dynamic = state; __callArgument1232; }), (cast 'stylization.halftone' : String), (cast _EffectsGl.HALFTONE_FRAGMENT_SRC__glHalftoneEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1234:Dynamic = state; __callArgument1234; }), ({ final __callArgument1235:Dynamic = program; __callArgument1235; }), ({ final __callArgument1236:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1236; }), ({ final __callArgument1237:Dynamic = dest; __callArgument1237; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument1234:Dynamic = state; __callArgument1234; }), (cast 'stylization.halftone' : String), (cast _EffectsGl.HALFTONE_FRAGMENT_SRC__glHalftoneEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1236:Dynamic = state; __callArgument1236; }), ({ final __callArgument1237:Dynamic = program; __callArgument1237; }), ({ final __callArgument1238:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1238; }), ({ final __callArgument1239:Dynamic = dest; __callArgument1239; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_scale'), HxMath.max(1.0, scale));
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_angle'), angle);
       flight._internal.backend.WebGl2Backend.uniform2f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), source.width, source.height);
@@ -1856,7 +1861,7 @@ class _EffectsGl {
   });
 
   public static function registerGlHalftoneEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1244:Dynamic = state; __callArgument1244; }), (cast 'HalftoneEffect' : String), ({ final __callArgument1245:Dynamic = defaultGlHalftoneEffectRunner; __callArgument1245; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1242:Dynamic = state; __callArgument1242; }), (cast 'HalftoneEffect' : String), ({ final __callArgument1243:Dynamic = defaultGlHalftoneEffectRunner; __callArgument1243; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1246:Dynamic = state; __callArgument1246; }), (cast 'HalftoneEffect' : String), ({ final __callArgument1247:Dynamic = defaultGlHalftoneEffectRunner; __callArgument1247; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1244:Dynamic = state; __callArgument1244; }), (cast 'HalftoneEffect' : String), ({ final __callArgument1245:Dynamic = defaultGlHalftoneEffectRunner; __callArgument1245; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final HALFTONE_FRAGMENT_SRC__glHalftoneEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_scale;\nuniform float u_angle;\nuniform vec2 u_resolution;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float lum = dot(c.rgb, vec3(0.2126, 0.7152, 0.0722));\n  vec2 p = v_texCoord * u_resolution;\n  float s = sin(u_angle), co = cos(u_angle);\n  vec2 rp = vec2(p.x * co - p.y * s, p.x * s + p.y * co);\n  vec2 cell = mod(rp, u_scale) - u_scale * 0.5;\n  float dist = length(cell) / (u_scale * 0.5);\n  float radius = sqrt(1.0 - lum);\n  float dot1 = step(dist, radius);\n  o_color = vec4(c.rgb * dot1, c.a);\n}';
@@ -1880,9 +1885,9 @@ class _EffectsGl {
     var quality:Float = cast _Runtime.UNDEFINED;
     var sourceMode:InnerEffectSourceMode = cast _Runtime.UNDEFINED;
     descriptor = (cast { width: source.width, height: source.height, format: source.format });
-    s0 = (cast acquireGlRenderTarget(({ final __callArgument1246:Dynamic = state; __callArgument1246; }), ({ final __callArgument1247:Dynamic = pool; __callArgument1247; }), ({ final __callArgument1248:Dynamic = descriptor; __callArgument1248; })) : GlRenderTarget);
-    s1 = (cast acquireGlRenderTarget(({ final __callArgument1252:Dynamic = state; __callArgument1252; }), ({ final __callArgument1253:Dynamic = pool; __callArgument1253; }), ({ final __callArgument1254:Dynamic = descriptor; __callArgument1254; })) : GlRenderTarget);
-    s2 = (cast acquireGlRenderTarget(({ final __callArgument1258:Dynamic = state; __callArgument1258; }), ({ final __callArgument1259:Dynamic = pool; __callArgument1259; }), ({ final __callArgument1260:Dynamic = descriptor; __callArgument1260; })) : GlRenderTarget);
+    s0 = (cast acquireGlRenderTarget(({ final __callArgument1248:Dynamic = state; __callArgument1248; }), ({ final __callArgument1249:Dynamic = pool; __callArgument1249; }), ({ final __callArgument1250:Dynamic = descriptor; __callArgument1250; })) : GlRenderTarget);
+    s1 = (cast acquireGlRenderTarget(({ final __callArgument1254:Dynamic = state; __callArgument1254; }), ({ final __callArgument1255:Dynamic = pool; __callArgument1255; }), ({ final __callArgument1256:Dynamic = descriptor; __callArgument1256; })) : GlRenderTarget);
+    s2 = (cast acquireGlRenderTarget(({ final __callArgument1260:Dynamic = state; __callArgument1260; }), ({ final __callArgument1261:Dynamic = pool; __callArgument1261; }), ({ final __callArgument1262:Dynamic = descriptor; __callArgument1262; })) : GlRenderTarget);
     src = (cast source : GlRenderTarget);
     dst = (cast dest : GlRenderTarget);
     color = _Runtime.coalesce(effect.color, function():Dynamic return cast 4278190335.0);
@@ -1890,18 +1895,18 @@ class _EffectsGl {
     strength = _Runtime.coalesce(effect.strength, function():Dynamic return cast 1.0);
     quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(effect.quality, function():Dynamic return cast 1.0)));
     sourceMode = _Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw');
-    applyGlEffectInvertTintPass(({ final __callArgument1264:Dynamic = state; __callArgument1264; }), ({ final __callArgument1265:Dynamic = src; __callArgument1265; }), ({ final __callArgument1266:Dynamic = s0; __callArgument1266; }), (cast color : Float), (cast alpha : Float), (cast strength : Float));
-    applyGlEffectBoxBlur(({ final __callArgument1270:Dynamic = state; __callArgument1270; }), ({ final __callArgument1271:Dynamic = s0; __callArgument1271; }), ({ final __callArgument1272:Dynamic = s1; __callArgument1272; }), ({ final __callArgument1273:Dynamic = s2; __callArgument1273; }), ({ final __callArgument1274:Dynamic = { blurX: _Runtime.coalesce(effect.blurX, function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(effect.blurY, function():Dynamic return cast 6.0), edgeColor: (cast _EffectsGl.getInvertTintEdgeColor__glInnerGlowEffect((cast color : Float), (cast alpha : Float), (cast strength : Float)) : Array<Float>), passes: quality }; __callArgument1274; }));
-    clearGlRenderTarget(({ final __callArgument1280:Dynamic = state; __callArgument1280; }), ({ final __callArgument1281:Dynamic = s0; __callArgument1281; }));
-    _EffectsGl.applyGlInnerClipPass__glInnerGlowEffect(({ final __callArgument1284:Dynamic = state; __callArgument1284; }), ({ final __callArgument1285:Dynamic = s1; __callArgument1285; }), ({ final __callArgument1286:Dynamic = src; __callArgument1286; }), ({ final __callArgument1287:Dynamic = s0; __callArgument1287; }));
-    clearGlRenderTarget(({ final __callArgument1292:Dynamic = state; __callArgument1292; }), ({ final __callArgument1293:Dynamic = dst; __callArgument1293; }));
+    applyGlEffectInvertTintPass(({ final __callArgument1266:Dynamic = state; __callArgument1266; }), ({ final __callArgument1267:Dynamic = src; __callArgument1267; }), ({ final __callArgument1268:Dynamic = s0; __callArgument1268; }), (cast color : Float), (cast alpha : Float), (cast strength : Float));
+    applyGlEffectBoxBlur(({ final __callArgument1272:Dynamic = state; __callArgument1272; }), ({ final __callArgument1273:Dynamic = s0; __callArgument1273; }), ({ final __callArgument1274:Dynamic = s1; __callArgument1274; }), ({ final __callArgument1275:Dynamic = s2; __callArgument1275; }), ({ final __callArgument1276:Dynamic = { blurX: _Runtime.coalesce(effect.blurX, function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(effect.blurY, function():Dynamic return cast 6.0), edgeColor: (cast _EffectsGl.getInvertTintEdgeColor__glInnerGlowEffect((cast color : Float), (cast alpha : Float), (cast strength : Float)) : Array<Float>), passes: quality }; __callArgument1276; }));
+    clearGlRenderTarget(({ final __callArgument1282:Dynamic = state; __callArgument1282; }), ({ final __callArgument1283:Dynamic = s0; __callArgument1283; }));
+    _EffectsGl.applyGlInnerClipPass__glInnerGlowEffect(({ final __callArgument1286:Dynamic = state; __callArgument1286; }), ({ final __callArgument1287:Dynamic = s1; __callArgument1287; }), ({ final __callArgument1288:Dynamic = src; __callArgument1288; }), ({ final __callArgument1289:Dynamic = s0; __callArgument1289; }));
+    clearGlRenderTarget(({ final __callArgument1294:Dynamic = state; __callArgument1294; }), ({ final __callArgument1295:Dynamic = dst; __callArgument1295; }));
     if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
-      applyGlEffectBlitPass(({ final __callArgument1296:Dynamic = state; __callArgument1296; }), ({ final __callArgument1297:Dynamic = src; __callArgument1297; }), ({ final __callArgument1298:Dynamic = dst; __callArgument1298; }));
+      applyGlEffectBlitPass(({ final __callArgument1298:Dynamic = state; __callArgument1298; }), ({ final __callArgument1299:Dynamic = src; __callArgument1299; }), ({ final __callArgument1300:Dynamic = dst; __callArgument1300; }));
     }
-    applyGlEffectBlitPass(({ final __callArgument1302:Dynamic = state; __callArgument1302; }), ({ final __callArgument1303:Dynamic = s0; __callArgument1303; }), ({ final __callArgument1304:Dynamic = dst; __callArgument1304; }));
-    releaseGlRenderTarget(({ final __callArgument1308:Dynamic = pool; __callArgument1308; }), ({ final __callArgument1309:Dynamic = s0; __callArgument1309; }));
-    releaseGlRenderTarget(({ final __callArgument1312:Dynamic = pool; __callArgument1312; }), ({ final __callArgument1313:Dynamic = s1; __callArgument1313; }));
-    releaseGlRenderTarget(({ final __callArgument1316:Dynamic = pool; __callArgument1316; }), ({ final __callArgument1317:Dynamic = s2; __callArgument1317; }));
+    applyGlEffectBlitPass(({ final __callArgument1304:Dynamic = state; __callArgument1304; }), ({ final __callArgument1305:Dynamic = s0; __callArgument1305; }), ({ final __callArgument1306:Dynamic = dst; __callArgument1306; }));
+    releaseGlRenderTarget(({ final __callArgument1310:Dynamic = pool; __callArgument1310; }), ({ final __callArgument1311:Dynamic = s0; __callArgument1311; }));
+    releaseGlRenderTarget(({ final __callArgument1314:Dynamic = pool; __callArgument1314; }), ({ final __callArgument1315:Dynamic = s1; __callArgument1315; }));
+    releaseGlRenderTarget(({ final __callArgument1318:Dynamic = pool; __callArgument1318; }), ({ final __callArgument1319:Dynamic = s2; __callArgument1319; }));
   }
 
   public static final defaultGlInnerGlowEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
@@ -1909,15 +1914,15 @@ class _EffectsGl {
   });
 
   public static function registerGlInnerGlowEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1322:Dynamic = state; __callArgument1322; }), (cast 'InnerGlowEffect' : String), ({ final __callArgument1323:Dynamic = defaultGlInnerGlowEffectRunner; __callArgument1323; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1320:Dynamic = state; __callArgument1320; }), (cast 'InnerGlowEffect' : String), ({ final __callArgument1321:Dynamic = defaultGlInnerGlowEffectRunner; __callArgument1321; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1324:Dynamic = state; __callArgument1324; }), (cast 'InnerGlowEffect' : String), ({ final __callArgument1325:Dynamic = defaultGlInnerGlowEffectRunner; __callArgument1325; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1322:Dynamic = state; __callArgument1322; }), (cast 'InnerGlowEffect' : String), ({ final __callArgument1323:Dynamic = defaultGlInnerGlowEffectRunner; __callArgument1323; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static function applyGlInnerClipPass__glInnerGlowEffect(state:GlRenderState, glow:GlRenderTarget, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:GlFullscreenProgram = cast _Runtime.UNDEFINED;
-    loc = (cast _EffectsGl.getClipShader__glInnerGlowEffect(({ final __callArgument1324:Dynamic = state; __callArgument1324; })) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1326:Dynamic = state; __callArgument1326; }), ({ final __callArgument1327:Dynamic = loc; __callArgument1327; }), ({ final __callArgument1328:Dynamic = cast ([glow.texture, source.texture] : Array<Dynamic>); __callArgument1328; }), ({ final __callArgument1329:Dynamic = dest; __callArgument1329; }), ({ final __callArgument1330:Dynamic = function(__unused1:GlContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:GlContext, __unused0:GlFullscreenProgram):Void {
+    loc = (cast _EffectsGl.getClipShader__glInnerGlowEffect(({ final __callArgument1326:Dynamic = state; __callArgument1326; })) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1328:Dynamic = state; __callArgument1328; }), ({ final __callArgument1329:Dynamic = loc; __callArgument1329; }), ({ final __callArgument1330:Dynamic = cast ([glow.texture, source.texture] : Array<Dynamic>); __callArgument1330; }), ({ final __callArgument1331:Dynamic = dest; __callArgument1331; }), ({ final __callArgument1332:Dynamic = function(__unused1:GlContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:GlContext, __unused0:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.blendFunc(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flight._internal.backend.WebGl2Backend.ONE), flight._internal.backend.WebGl2Backend.contextConstant(gl, 'ZERO', flight._internal.backend.WebGl2Backend.ZERO));
-    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument1330; }));
+    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument1332; }));
   }
 
   public static function getClipShader__glInnerGlowEffect(state:GlRenderState):InnerClipLocations__glInnerGlowEffect {
@@ -1925,7 +1930,7 @@ class _EffectsGl {
     loc = ((cast _EffectsGl.clipShaders__glInnerGlowEffect : flight._internal._WeakMap<GlContext, GlFullscreenProgram>).get((cast (cast state : GlRenderState).gl)));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:GlContext = (cast state : GlRenderState).gl;
-      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument1336:Dynamic = gl; __callArgument1336; }), (cast _EffectsGl.INNER_CLIP_FRAGMENT_SRC__glInnerGlowEffect : String)) : GlFullscreenProgram);
+      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument1338:Dynamic = gl; __callArgument1338; }), (cast _EffectsGl.INNER_CLIP_FRAGMENT_SRC__glInnerGlowEffect : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base]) : Dynamic));
       ((cast _EffectsGl.clipShaders__glInnerGlowEffect : flight._internal._WeakMap<GlContext, GlFullscreenProgram>).set((cast (cast state : GlRenderState).gl), (cast loc)));
     }
@@ -1935,7 +1940,7 @@ class _EffectsGl {
 
   public static function getInvertTintEdgeColor__glInnerGlowEffect(color:Float, alpha:Float, strength:Float):Array<Float> {
     var edgeAlpha:Float = cast _Runtime.UNDEFINED;
-    unpackColorRgba(({ final __callArgument1338:Dynamic = _EffectsGl.scratchEdge__glInnerGlowEffect; __callArgument1338; }), (cast color : Float));
+    unpackColorRgba(({ final __callArgument1340:Dynamic = _EffectsGl.scratchEdge__glInnerGlowEffect; __callArgument1340; }), (cast color : Float));
     edgeAlpha = HxMath.min(1.0, ((alpha * flight._internal._StaticIndex.readFloatArrayTyped((cast _EffectsGl.scratchEdge__glInnerGlowEffect : Array<Float>), (cast 3.0 : Float))) * strength));
     return cast cast ([(flight._internal._StaticIndex.readFloatArrayTyped((cast _EffectsGl.scratchEdge__glInnerGlowEffect : Array<Float>), (cast 0.0 : Float)) * edgeAlpha), (flight._internal._StaticIndex.readFloatArrayTyped((cast _EffectsGl.scratchEdge__glInnerGlowEffect : Array<Float>), (cast 1.0 : Float)) * edgeAlpha), (flight._internal._StaticIndex.readFloatArrayTyped((cast _EffectsGl.scratchEdge__glInnerGlowEffect : Array<Float>), (cast 2.0 : Float)) * edgeAlpha), edgeAlpha] : Array<Dynamic>);
     return cast null;
@@ -1966,9 +1971,9 @@ class _EffectsGl {
     var quality:Float = cast _Runtime.UNDEFINED;
     var sourceMode:InnerEffectSourceMode = cast _Runtime.UNDEFINED;
     descriptor = (cast { width: source.width, height: source.height, format: source.format });
-    s0 = (cast acquireGlRenderTarget(({ final __callArgument1340:Dynamic = state; __callArgument1340; }), ({ final __callArgument1341:Dynamic = pool; __callArgument1341; }), ({ final __callArgument1342:Dynamic = descriptor; __callArgument1342; })) : GlRenderTarget);
-    s1 = (cast acquireGlRenderTarget(({ final __callArgument1346:Dynamic = state; __callArgument1346; }), ({ final __callArgument1347:Dynamic = pool; __callArgument1347; }), ({ final __callArgument1348:Dynamic = descriptor; __callArgument1348; })) : GlRenderTarget);
-    s2 = (cast acquireGlRenderTarget(({ final __callArgument1352:Dynamic = state; __callArgument1352; }), ({ final __callArgument1353:Dynamic = pool; __callArgument1353; }), ({ final __callArgument1354:Dynamic = descriptor; __callArgument1354; })) : GlRenderTarget);
+    s0 = (cast acquireGlRenderTarget(({ final __callArgument1342:Dynamic = state; __callArgument1342; }), ({ final __callArgument1343:Dynamic = pool; __callArgument1343; }), ({ final __callArgument1344:Dynamic = descriptor; __callArgument1344; })) : GlRenderTarget);
+    s1 = (cast acquireGlRenderTarget(({ final __callArgument1348:Dynamic = state; __callArgument1348; }), ({ final __callArgument1349:Dynamic = pool; __callArgument1349; }), ({ final __callArgument1350:Dynamic = descriptor; __callArgument1350; })) : GlRenderTarget);
+    s2 = (cast acquireGlRenderTarget(({ final __callArgument1354:Dynamic = state; __callArgument1354; }), ({ final __callArgument1355:Dynamic = pool; __callArgument1355; }), ({ final __callArgument1356:Dynamic = descriptor; __callArgument1356; })) : GlRenderTarget);
     src = (cast source : GlRenderTarget);
     dst = (cast dest : GlRenderTarget);
     angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(effect.angle, function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
@@ -1980,20 +1985,20 @@ class _EffectsGl {
     strength = _Runtime.coalesce(effect.strength, function():Dynamic return cast 1.0);
     quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(effect.quality, function():Dynamic return cast 1.0)));
     sourceMode = _Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw');
-    applyGlEffectInvertTintPass(({ final __callArgument1358:Dynamic = state; __callArgument1358; }), ({ final __callArgument1359:Dynamic = src; __callArgument1359; }), ({ final __callArgument1360:Dynamic = s0; __callArgument1360; }), (cast color : Float), (cast alpha : Float), (cast strength : Float));
-    applyGlEffectBoxBlur(({ final __callArgument1364:Dynamic = state; __callArgument1364; }), ({ final __callArgument1365:Dynamic = s0; __callArgument1365; }), ({ final __callArgument1366:Dynamic = s1; __callArgument1366; }), ({ final __callArgument1367:Dynamic = s2; __callArgument1367; }), ({ final __callArgument1368:Dynamic = { blurX: _Runtime.coalesce(effect.blurX, function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(effect.blurY, function():Dynamic return cast 4.0), edgeColor: (cast _EffectsGl.getInvertTintEdgeColor__glInnerShadowEffect((cast color : Float), (cast alpha : Float), (cast strength : Float)) : Array<Float>), passes: quality }; __callArgument1368; }));
-    clearGlRenderTarget(({ final __callArgument1374:Dynamic = state; __callArgument1374; }), ({ final __callArgument1375:Dynamic = s0; __callArgument1375; }));
-    applyGlEffectBlitOffsetPass(({ final __callArgument1378:Dynamic = state; __callArgument1378; }), ({ final __callArgument1379:Dynamic = s1; __callArgument1379; }), ({ final __callArgument1380:Dynamic = s0; __callArgument1380; }), (cast dx : Float), (cast dy : Float));
-    clearGlRenderTarget(({ final __callArgument1384:Dynamic = state; __callArgument1384; }), ({ final __callArgument1385:Dynamic = s1; __callArgument1385; }));
-    _EffectsGl.applyGlInnerClipPass__glInnerShadowEffect(({ final __callArgument1388:Dynamic = state; __callArgument1388; }), ({ final __callArgument1389:Dynamic = s0; __callArgument1389; }), ({ final __callArgument1390:Dynamic = src; __callArgument1390; }), ({ final __callArgument1391:Dynamic = s1; __callArgument1391; }));
-    clearGlRenderTarget(({ final __callArgument1396:Dynamic = state; __callArgument1396; }), ({ final __callArgument1397:Dynamic = dst; __callArgument1397; }));
+    applyGlEffectInvertTintPass(({ final __callArgument1360:Dynamic = state; __callArgument1360; }), ({ final __callArgument1361:Dynamic = src; __callArgument1361; }), ({ final __callArgument1362:Dynamic = s0; __callArgument1362; }), (cast color : Float), (cast alpha : Float), (cast strength : Float));
+    applyGlEffectBoxBlur(({ final __callArgument1366:Dynamic = state; __callArgument1366; }), ({ final __callArgument1367:Dynamic = s0; __callArgument1367; }), ({ final __callArgument1368:Dynamic = s1; __callArgument1368; }), ({ final __callArgument1369:Dynamic = s2; __callArgument1369; }), ({ final __callArgument1370:Dynamic = { blurX: _Runtime.coalesce(effect.blurX, function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(effect.blurY, function():Dynamic return cast 4.0), edgeColor: (cast _EffectsGl.getInvertTintEdgeColor__glInnerShadowEffect((cast color : Float), (cast alpha : Float), (cast strength : Float)) : Array<Float>), passes: quality }; __callArgument1370; }));
+    clearGlRenderTarget(({ final __callArgument1376:Dynamic = state; __callArgument1376; }), ({ final __callArgument1377:Dynamic = s0; __callArgument1377; }));
+    applyGlEffectBlitOffsetPass(({ final __callArgument1380:Dynamic = state; __callArgument1380; }), ({ final __callArgument1381:Dynamic = s1; __callArgument1381; }), ({ final __callArgument1382:Dynamic = s0; __callArgument1382; }), (cast dx : Float), (cast dy : Float));
+    clearGlRenderTarget(({ final __callArgument1386:Dynamic = state; __callArgument1386; }), ({ final __callArgument1387:Dynamic = s1; __callArgument1387; }));
+    _EffectsGl.applyGlInnerClipPass__glInnerShadowEffect(({ final __callArgument1390:Dynamic = state; __callArgument1390; }), ({ final __callArgument1391:Dynamic = s0; __callArgument1391; }), ({ final __callArgument1392:Dynamic = src; __callArgument1392; }), ({ final __callArgument1393:Dynamic = s1; __callArgument1393; }));
+    clearGlRenderTarget(({ final __callArgument1398:Dynamic = state; __callArgument1398; }), ({ final __callArgument1399:Dynamic = dst; __callArgument1399; }));
     if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
-      applyGlEffectBlitPass(({ final __callArgument1400:Dynamic = state; __callArgument1400; }), ({ final __callArgument1401:Dynamic = src; __callArgument1401; }), ({ final __callArgument1402:Dynamic = dst; __callArgument1402; }));
+      applyGlEffectBlitPass(({ final __callArgument1402:Dynamic = state; __callArgument1402; }), ({ final __callArgument1403:Dynamic = src; __callArgument1403; }), ({ final __callArgument1404:Dynamic = dst; __callArgument1404; }));
     }
-    applyGlEffectBlitPass(({ final __callArgument1406:Dynamic = state; __callArgument1406; }), ({ final __callArgument1407:Dynamic = s1; __callArgument1407; }), ({ final __callArgument1408:Dynamic = dst; __callArgument1408; }));
-    releaseGlRenderTarget(({ final __callArgument1412:Dynamic = pool; __callArgument1412; }), ({ final __callArgument1413:Dynamic = s0; __callArgument1413; }));
-    releaseGlRenderTarget(({ final __callArgument1416:Dynamic = pool; __callArgument1416; }), ({ final __callArgument1417:Dynamic = s1; __callArgument1417; }));
-    releaseGlRenderTarget(({ final __callArgument1420:Dynamic = pool; __callArgument1420; }), ({ final __callArgument1421:Dynamic = s2; __callArgument1421; }));
+    applyGlEffectBlitPass(({ final __callArgument1408:Dynamic = state; __callArgument1408; }), ({ final __callArgument1409:Dynamic = s1; __callArgument1409; }), ({ final __callArgument1410:Dynamic = dst; __callArgument1410; }));
+    releaseGlRenderTarget(({ final __callArgument1414:Dynamic = pool; __callArgument1414; }), ({ final __callArgument1415:Dynamic = s0; __callArgument1415; }));
+    releaseGlRenderTarget(({ final __callArgument1418:Dynamic = pool; __callArgument1418; }), ({ final __callArgument1419:Dynamic = s1; __callArgument1419; }));
+    releaseGlRenderTarget(({ final __callArgument1422:Dynamic = pool; __callArgument1422; }), ({ final __callArgument1423:Dynamic = s2; __callArgument1423; }));
   }
 
   public static final defaultGlInnerShadowEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
@@ -2001,15 +2006,15 @@ class _EffectsGl {
   });
 
   public static function registerGlInnerShadowEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1426:Dynamic = state; __callArgument1426; }), (cast 'InnerShadowEffect' : String), ({ final __callArgument1427:Dynamic = defaultGlInnerShadowEffectRunner; __callArgument1427; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1424:Dynamic = state; __callArgument1424; }), (cast 'InnerShadowEffect' : String), ({ final __callArgument1425:Dynamic = defaultGlInnerShadowEffectRunner; __callArgument1425; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1428:Dynamic = state; __callArgument1428; }), (cast 'InnerShadowEffect' : String), ({ final __callArgument1429:Dynamic = defaultGlInnerShadowEffectRunner; __callArgument1429; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1426:Dynamic = state; __callArgument1426; }), (cast 'InnerShadowEffect' : String), ({ final __callArgument1427:Dynamic = defaultGlInnerShadowEffectRunner; __callArgument1427; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static function applyGlInnerClipPass__glInnerShadowEffect(state:GlRenderState, shadow:GlRenderTarget, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:GlFullscreenProgram = cast _Runtime.UNDEFINED;
-    loc = (cast _EffectsGl.getClipShader__glInnerShadowEffect(({ final __callArgument1428:Dynamic = state; __callArgument1428; })) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1430:Dynamic = state; __callArgument1430; }), ({ final __callArgument1431:Dynamic = loc; __callArgument1431; }), ({ final __callArgument1432:Dynamic = cast ([shadow.texture, source.texture] : Array<Dynamic>); __callArgument1432; }), ({ final __callArgument1433:Dynamic = dest; __callArgument1433; }), ({ final __callArgument1434:Dynamic = function(__unused1:GlContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:GlContext, __unused0:GlFullscreenProgram):Void {
+    loc = (cast _EffectsGl.getClipShader__glInnerShadowEffect(({ final __callArgument1430:Dynamic = state; __callArgument1430; })) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1432:Dynamic = state; __callArgument1432; }), ({ final __callArgument1433:Dynamic = loc; __callArgument1433; }), ({ final __callArgument1434:Dynamic = cast ([shadow.texture, source.texture] : Array<Dynamic>); __callArgument1434; }), ({ final __callArgument1435:Dynamic = dest; __callArgument1435; }), ({ final __callArgument1436:Dynamic = function(__unused1:GlContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:GlContext, __unused0:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.blendFunc(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flight._internal.backend.WebGl2Backend.ONE), flight._internal.backend.WebGl2Backend.contextConstant(gl, 'ZERO', flight._internal.backend.WebGl2Backend.ZERO));
-    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument1434; }));
+    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument1436; }));
   }
 
   public static function getClipShader__glInnerShadowEffect(state:GlRenderState):InnerClipLocations__glInnerShadowEffect {
@@ -2017,7 +2022,7 @@ class _EffectsGl {
     loc = ((cast _EffectsGl.clipShaders__glInnerShadowEffect : flight._internal._WeakMap<GlContext, GlFullscreenProgram>).get((cast (cast state : GlRenderState).gl)));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:GlContext = (cast state : GlRenderState).gl;
-      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument1440:Dynamic = gl; __callArgument1440; }), (cast _EffectsGl.INNER_CLIP_FRAGMENT_SRC__glInnerShadowEffect : String)) : GlFullscreenProgram);
+      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument1442:Dynamic = gl; __callArgument1442; }), (cast _EffectsGl.INNER_CLIP_FRAGMENT_SRC__glInnerShadowEffect : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base]) : Dynamic));
       ((cast _EffectsGl.clipShaders__glInnerShadowEffect : flight._internal._WeakMap<GlContext, GlFullscreenProgram>).set((cast (cast state : GlRenderState).gl), (cast loc)));
     }
@@ -2027,7 +2032,7 @@ class _EffectsGl {
 
   public static function getInvertTintEdgeColor__glInnerShadowEffect(color:Float, alpha:Float, strength:Float):Array<Float> {
     var edgeAlpha:Float = cast _Runtime.UNDEFINED;
-    unpackColorRgba(({ final __callArgument1442:Dynamic = _EffectsGl.scratchEdge__glInnerShadowEffect; __callArgument1442; }), (cast color : Float));
+    unpackColorRgba(({ final __callArgument1444:Dynamic = _EffectsGl.scratchEdge__glInnerShadowEffect; __callArgument1444; }), (cast color : Float));
     edgeAlpha = HxMath.min(1.0, ((alpha * flight._internal._StaticIndex.readFloatArrayTyped((cast _EffectsGl.scratchEdge__glInnerShadowEffect : Array<Float>), (cast 3.0 : Float))) * strength));
     return cast cast ([(flight._internal._StaticIndex.readFloatArrayTyped((cast _EffectsGl.scratchEdge__glInnerShadowEffect : Array<Float>), (cast 0.0 : Float)) * edgeAlpha), (flight._internal._StaticIndex.readFloatArrayTyped((cast _EffectsGl.scratchEdge__glInnerShadowEffect : Array<Float>), (cast 1.0 : Float)) * edgeAlpha), (flight._internal._StaticIndex.readFloatArrayTyped((cast _EffectsGl.scratchEdge__glInnerShadowEffect : Array<Float>), (cast 2.0 : Float)) * edgeAlpha), edgeAlpha] : Array<Dynamic>);
     return cast null;
@@ -2041,8 +2046,8 @@ class _EffectsGl {
     var radius:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     radius = _Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 3.0);
-    program = (cast getGlEffectProgram(({ final __callArgument1444:Dynamic = state; __callArgument1444; }), (cast 'stylization.kuwahara' : String), (cast _EffectsGl.KUWAHARA_FRAGMENT_SRC__glKuwaharaEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1446:Dynamic = state; __callArgument1446; }), ({ final __callArgument1447:Dynamic = program; __callArgument1447; }), ({ final __callArgument1448:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1448; }), ({ final __callArgument1449:Dynamic = dest; __callArgument1449; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument1446:Dynamic = state; __callArgument1446; }), (cast 'stylization.kuwahara' : String), (cast _EffectsGl.KUWAHARA_FRAGMENT_SRC__glKuwaharaEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1448:Dynamic = state; __callArgument1448; }), ({ final __callArgument1449:Dynamic = program; __callArgument1449; }), ({ final __callArgument1450:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1450; }), ({ final __callArgument1451:Dynamic = dest; __callArgument1451; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_radius'), HxMath.max(1.0, radius));
       flight._internal.backend.WebGl2Backend.uniform2f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), source.width, source.height);
     } : Dynamic));
@@ -2053,7 +2058,7 @@ class _EffectsGl {
   });
 
   public static function registerGlKuwaharaEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1456:Dynamic = state; __callArgument1456; }), (cast 'KuwaharaEffect' : String), ({ final __callArgument1457:Dynamic = defaultGlKuwaharaEffectRunner; __callArgument1457; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1454:Dynamic = state; __callArgument1454; }), (cast 'KuwaharaEffect' : String), ({ final __callArgument1455:Dynamic = defaultGlKuwaharaEffectRunner; __callArgument1455; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1458:Dynamic = state; __callArgument1458; }), (cast 'KuwaharaEffect' : String), ({ final __callArgument1459:Dynamic = defaultGlKuwaharaEffectRunner; __callArgument1459; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1456:Dynamic = state; __callArgument1456; }), (cast 'KuwaharaEffect' : String), ({ final __callArgument1457:Dynamic = defaultGlKuwaharaEffectRunner; __callArgument1457; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final KUWAHARA_FRAGMENT_SRC__glKuwaharaEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_radius;\nuniform vec2 u_resolution;\nout vec4 o_color;\nconst int R = 4;\nvoid main() {\n  vec2 texel = 1.0 / u_resolution;\n  int r = int(min(float(R), u_radius));\n  vec3 means[4];\n  float vars[4];\n  for (int q = 0; q < 4; q++) {\n    int ox = (q & 1) == 0 ? -r : 0;\n    int oy = (q & 2) == 0 ? 0 : -r;\n    vec3 sum = vec3(0.0);\n    vec3 sumSq = vec3(0.0);\n    float n = 0.0;\n    for (int y = 0; y <= R; y++) {\n      for (int x = 0; x <= R; x++) {\n        if (x > r || y > r) continue;\n        vec2 off = vec2(float(ox + x), float(oy + y)) * texel;\n        vec3 col = texture(u_texture0, v_texCoord + off).rgb;\n        sum += col;\n        sumSq += col * col;\n        n += 1.0;\n      }\n    }\n    vec3 mean = sum / n;\n    means[q] = mean;\n    vec3 v = sumSq / n - mean * mean;\n    vars[q] = v.r + v.g + v.b;\n  }\n  float minVar = vars[0];\n  vec3 result = means[0];\n  float tiedCount = 1.0;\n  for (int q = 1; q < 4; q++) {\n    if (vars[q] < minVar) {\n      minVar = vars[q];\n      result = means[q];\n      tiedCount = 1.0;\n    } else if (vars[q] == minVar) {\n      result += means[q];\n      tiedCount += 1.0;\n    }\n  }\n  result /= tiedCount;\n  o_color = vec4(result, texture(u_texture0, v_texCoord).a);\n}';
@@ -2074,22 +2079,22 @@ class _EffectsGl {
     threshold = _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.55);
     seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
     descriptor = (cast { width: source.width, height: source.height, format: source.format });
-    bright = (cast acquireGlRenderTarget(({ final __callArgument1458:Dynamic = state; __callArgument1458; }), ({ final __callArgument1459:Dynamic = pool; __callArgument1459; }), ({ final __callArgument1460:Dynamic = descriptor; __callArgument1460; })) : GlRenderTarget);
-    blurred = (cast acquireGlRenderTarget(({ final __callArgument1464:Dynamic = state; __callArgument1464; }), ({ final __callArgument1465:Dynamic = pool; __callArgument1465; }), ({ final __callArgument1466:Dynamic = descriptor; __callArgument1466; })) : GlRenderTarget);
-    temp = (cast acquireGlRenderTarget(({ final __callArgument1470:Dynamic = state; __callArgument1470; }), ({ final __callArgument1471:Dynamic = pool; __callArgument1471; }), ({ final __callArgument1472:Dynamic = descriptor; __callArgument1472; })) : GlRenderTarget);
-    brightProgram = (cast getGlEffectProgram(({ final __callArgument1476:Dynamic = state; __callArgument1476; }), (cast 'lens.lensDirt.bright' : String), (cast _EffectsGl.LENS_DIRT_BRIGHT_FRAGMENT_SRC__glLensDirtEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1478:Dynamic = state; __callArgument1478; }), ({ final __callArgument1479:Dynamic = brightProgram; __callArgument1479; }), ({ final __callArgument1480:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1480; }), ({ final __callArgument1481:Dynamic = bright; __callArgument1481; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    bright = (cast acquireGlRenderTarget(({ final __callArgument1460:Dynamic = state; __callArgument1460; }), ({ final __callArgument1461:Dynamic = pool; __callArgument1461; }), ({ final __callArgument1462:Dynamic = descriptor; __callArgument1462; })) : GlRenderTarget);
+    blurred = (cast acquireGlRenderTarget(({ final __callArgument1466:Dynamic = state; __callArgument1466; }), ({ final __callArgument1467:Dynamic = pool; __callArgument1467; }), ({ final __callArgument1468:Dynamic = descriptor; __callArgument1468; })) : GlRenderTarget);
+    temp = (cast acquireGlRenderTarget(({ final __callArgument1472:Dynamic = state; __callArgument1472; }), ({ final __callArgument1473:Dynamic = pool; __callArgument1473; }), ({ final __callArgument1474:Dynamic = descriptor; __callArgument1474; })) : GlRenderTarget);
+    brightProgram = (cast getGlEffectProgram(({ final __callArgument1478:Dynamic = state; __callArgument1478; }), (cast 'lens.lensDirt.bright' : String), (cast _EffectsGl.LENS_DIRT_BRIGHT_FRAGMENT_SRC__glLensDirtEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1480:Dynamic = state; __callArgument1480; }), ({ final __callArgument1481:Dynamic = brightProgram; __callArgument1481; }), ({ final __callArgument1482:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1482; }), ({ final __callArgument1483:Dynamic = bright; __callArgument1483; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_threshold'), threshold);
     } : Dynamic));
-    applyGaussianBlurToGl(({ final __callArgument1486:Dynamic = state; __callArgument1486; }), ({ final __callArgument1487:Dynamic = bright; __callArgument1487; }), ({ final __callArgument1488:Dynamic = blurred; __callArgument1488; }), ({ final __callArgument1489:Dynamic = temp; __callArgument1489; }), ({ final __callArgument1490:Dynamic = { blurX: _EffectsGl.LENS_DIRT_BLUR_SIGMA__glLensDirtEffect, blurY: _EffectsGl.LENS_DIRT_BLUR_SIGMA__glLensDirtEffect }; __callArgument1490; }));
-    compositeProgram = (cast getGlEffectProgram(({ final __callArgument1496:Dynamic = state; __callArgument1496; }), (cast 'lens.lensDirt.composite' : String), (cast _EffectsGl.LENS_DIRT_COMPOSITE_FRAGMENT_SRC__glLensDirtEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1498:Dynamic = state; __callArgument1498; }), ({ final __callArgument1499:Dynamic = compositeProgram; __callArgument1499; }), ({ final __callArgument1500:Dynamic = cast ([source.texture, blurred.texture] : Array<Dynamic>); __callArgument1500; }), ({ final __callArgument1501:Dynamic = dest; __callArgument1501; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    applyGaussianBlurToGl(({ final __callArgument1488:Dynamic = state; __callArgument1488; }), ({ final __callArgument1489:Dynamic = bright; __callArgument1489; }), ({ final __callArgument1490:Dynamic = blurred; __callArgument1490; }), ({ final __callArgument1491:Dynamic = temp; __callArgument1491; }), ({ final __callArgument1492:Dynamic = { blurX: _EffectsGl.LENS_DIRT_BLUR_SIGMA__glLensDirtEffect, blurY: _EffectsGl.LENS_DIRT_BLUR_SIGMA__glLensDirtEffect }; __callArgument1492; }));
+    compositeProgram = (cast getGlEffectProgram(({ final __callArgument1498:Dynamic = state; __callArgument1498; }), (cast 'lens.lensDirt.composite' : String), (cast _EffectsGl.LENS_DIRT_COMPOSITE_FRAGMENT_SRC__glLensDirtEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1500:Dynamic = state; __callArgument1500; }), ({ final __callArgument1501:Dynamic = compositeProgram; __callArgument1501; }), ({ final __callArgument1502:Dynamic = cast ([source.texture, blurred.texture] : Array<Dynamic>); __callArgument1502; }), ({ final __callArgument1503:Dynamic = dest; __callArgument1503; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_seed'), seed);
     } : Dynamic));
-    releaseGlRenderTarget(({ final __callArgument1506:Dynamic = pool; __callArgument1506; }), ({ final __callArgument1507:Dynamic = bright; __callArgument1507; }));
-    releaseGlRenderTarget(({ final __callArgument1510:Dynamic = pool; __callArgument1510; }), ({ final __callArgument1511:Dynamic = blurred; __callArgument1511; }));
-    releaseGlRenderTarget(({ final __callArgument1514:Dynamic = pool; __callArgument1514; }), ({ final __callArgument1515:Dynamic = temp; __callArgument1515; }));
+    releaseGlRenderTarget(({ final __callArgument1508:Dynamic = pool; __callArgument1508; }), ({ final __callArgument1509:Dynamic = bright; __callArgument1509; }));
+    releaseGlRenderTarget(({ final __callArgument1512:Dynamic = pool; __callArgument1512; }), ({ final __callArgument1513:Dynamic = blurred; __callArgument1513; }));
+    releaseGlRenderTarget(({ final __callArgument1516:Dynamic = pool; __callArgument1516; }), ({ final __callArgument1517:Dynamic = temp; __callArgument1517; }));
   }
 
   public static final defaultGlLensDirtEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
@@ -2097,7 +2102,7 @@ class _EffectsGl {
   });
 
   public static function registerGlLensDirtEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1520:Dynamic = state; __callArgument1520; }), (cast 'LensDirtEffect' : String), ({ final __callArgument1521:Dynamic = defaultGlLensDirtEffectRunner; __callArgument1521; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1518:Dynamic = state; __callArgument1518; }), (cast 'LensDirtEffect' : String), ({ final __callArgument1519:Dynamic = defaultGlLensDirtEffectRunner; __callArgument1519; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1522:Dynamic = state; __callArgument1522; }), (cast 'LensDirtEffect' : String), ({ final __callArgument1523:Dynamic = defaultGlLensDirtEffectRunner; __callArgument1523; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1520:Dynamic = state; __callArgument1520; }), (cast 'LensDirtEffect' : String), ({ final __callArgument1521:Dynamic = defaultGlLensDirtEffectRunner; __callArgument1521; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final LENS_DIRT_BRIGHT_FRAGMENT_SRC__glLensDirtEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_threshold;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float lum = dot(c.rgb, vec3(0.299, 0.587, 0.114));\n  float bright = max(0.0, lum - u_threshold);\n  o_color = vec4(c.rgb * (bright / max(lum, 0.00001)), c.a);\n}';
@@ -2114,8 +2119,8 @@ class _EffectsGl {
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     amount = _Runtime.coalesce(_Runtime.field(effect, 'amount'), function():Dynamic return cast 0.2);
     scale = _Runtime.coalesce(_Runtime.field(effect, 'scale'), function():Dynamic return cast 1.0);
-    program = (cast getGlEffectProgram(({ final __callArgument1522:Dynamic = state; __callArgument1522; }), (cast 'lens.lensDistortion' : String), (cast _EffectsGl.LENS_DISTORTION_FRAGMENT_SRC__glLensDistortionEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1524:Dynamic = state; __callArgument1524; }), ({ final __callArgument1525:Dynamic = program; __callArgument1525; }), ({ final __callArgument1526:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1526; }), ({ final __callArgument1527:Dynamic = dest; __callArgument1527; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument1524:Dynamic = state; __callArgument1524; }), (cast 'lens.lensDistortion' : String), (cast _EffectsGl.LENS_DISTORTION_FRAGMENT_SRC__glLensDistortionEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1526:Dynamic = state; __callArgument1526; }), ({ final __callArgument1527:Dynamic = program; __callArgument1527; }), ({ final __callArgument1528:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1528; }), ({ final __callArgument1529:Dynamic = dest; __callArgument1529; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_amount'), amount);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_scale'), scale);
     } : Dynamic));
@@ -2126,7 +2131,7 @@ class _EffectsGl {
   });
 
   public static function registerGlLensDistortionEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1534:Dynamic = state; __callArgument1534; }), (cast 'LensDistortionEffect' : String), ({ final __callArgument1535:Dynamic = defaultGlLensDistortionEffectRunner; __callArgument1535; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1532:Dynamic = state; __callArgument1532; }), (cast 'LensDistortionEffect' : String), ({ final __callArgument1533:Dynamic = defaultGlLensDistortionEffectRunner; __callArgument1533; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1536:Dynamic = state; __callArgument1536; }), (cast 'LensDistortionEffect' : String), ({ final __callArgument1537:Dynamic = defaultGlLensDistortionEffectRunner; __callArgument1537; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1534:Dynamic = state; __callArgument1534; }), (cast 'LensDistortionEffect' : String), ({ final __callArgument1535:Dynamic = defaultGlLensDistortionEffectRunner; __callArgument1535; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final LENS_DISTORTION_FRAGMENT_SRC__glLensDistortionEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_amount;\nuniform float u_scale;\nout vec4 o_color;\nvoid main() {\n  vec2 centered = (v_texCoord - 0.5) / u_scale;\n  float r2 = dot(centered, centered);\n  vec2 distorted = centered * (1.0 + u_amount * r2) + 0.5;\n  if (distorted.x < 0.0 || distorted.x > 1.0 || distorted.y < 0.0 || distorted.y > 1.0) {\n    o_color = vec4(0.0, 0.0, 0.0, 1.0);\n  } else {\n    o_color = texture(u_texture0, distorted);\n  }\n}';
@@ -2143,8 +2148,8 @@ class _EffectsGl {
     intensity = _Runtime.coalesce(effect.intensity, function():Dynamic return cast 1.0);
     ghosts = _Runtime.coalesce(effect.ghosts, function():Dynamic return cast 4.0);
     halo = _Runtime.coalesce(effect.halo, function():Dynamic return cast 0.5);
-    program = (cast getGlEffectProgram(({ final __callArgument1536:Dynamic = state; __callArgument1536; }), (cast 'lens.lensFlare' : String), (cast _EffectsGl.LENS_FLARE_FRAGMENT_SRC__glLensFlareEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1538:Dynamic = state; __callArgument1538; }), ({ final __callArgument1539:Dynamic = program; __callArgument1539; }), ({ final __callArgument1540:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1540; }), ({ final __callArgument1541:Dynamic = dest; __callArgument1541; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument1538:Dynamic = state; __callArgument1538; }), (cast 'lens.lensFlare' : String), (cast _EffectsGl.LENS_FLARE_FRAGMENT_SRC__glLensFlareEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1540:Dynamic = state; __callArgument1540; }), ({ final __callArgument1541:Dynamic = program; __callArgument1541; }), ({ final __callArgument1542:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1542; }), ({ final __callArgument1543:Dynamic = dest; __callArgument1543; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_threshold'), threshold);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_ghosts'), ghosts);
@@ -2157,7 +2162,7 @@ class _EffectsGl {
   });
 
   public static function registerGlLensFlareEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1548:Dynamic = state; __callArgument1548; }), (cast 'LensFlareEffect' : String), ({ final __callArgument1549:Dynamic = defaultGlLensFlareEffectRunner; __callArgument1549; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1546:Dynamic = state; __callArgument1546; }), (cast 'LensFlareEffect' : String), ({ final __callArgument1547:Dynamic = defaultGlLensFlareEffectRunner; __callArgument1547; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1550:Dynamic = state; __callArgument1550; }), (cast 'LensFlareEffect' : String), ({ final __callArgument1551:Dynamic = defaultGlLensFlareEffectRunner; __callArgument1551; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1548:Dynamic = state; __callArgument1548; }), (cast 'LensFlareEffect' : String), ({ final __callArgument1549:Dynamic = defaultGlLensFlareEffectRunner; __callArgument1549; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final LENS_FLARE_FRAGMENT_SRC__glLensFlareEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_threshold;\nuniform float u_intensity;\nuniform float u_ghosts;\nuniform float u_halo;\nout vec4 o_color;\nvec3 brightPass(vec2 uv) {\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) return vec3(0.0);\n  vec3 c = texture(u_texture0, uv).rgb;\n  float l = dot(c, vec3(0.2126, 0.7152, 0.0722));\n  return c * max(0.0, l - u_threshold);\n}\nvoid main() {\n  vec4 scene = texture(u_texture0, v_texCoord);\n  // Single-pass approximation of a flare: walk ghost samples along the vector toward the optical\n  // center and add a halo ring, all from the bright pass of the scene itself (no separate buffer).\n  vec2 toCenter = (vec2(0.5) - v_texCoord);\n  vec3 flare = vec3(0.0);\n  int count = int(clamp(u_ghosts, 0.0, 8.0));\n  for (int i = 0; i < 8; i++) {\n    if (i >= count) break;\n    float t = (float(i) + 1.0) / (float(count) + 1.0);\n    vec2 uv = v_texCoord + toCenter * (2.0 * t);\n    flare += brightPass(uv);\n  }\n  // Negate epsilon Y: GL UV Y-up vs WGPU UV Y-down. The epsilon is a divide-by-zero guard for\n  // normalize(); its Y must match the screen-space convention to avoid a direction flip at center.\n  vec2 haloDir = normalize(toCenter + vec2(1e-5, -1e-5));\n  flare += brightPass(v_texCoord + haloDir * u_halo) * u_halo;\n  o_color = vec4(scene.rgb + flare * u_intensity, scene.a);\n}';
@@ -2174,8 +2179,8 @@ class _EffectsGl {
     var radius:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     radius = HxMath.min(MAX_MEDIAN_EFFECT_GL_RADIUS, HxMath.max(0.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 1.0))));
-    program = (cast getGlEffectProgram(({ final __callArgument1550:Dynamic = state; __callArgument1550; }), (cast 'stylization.median' : String), (cast _EffectsGl.MEDIAN_FRAGMENT_SRC__glMedianEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1552:Dynamic = state; __callArgument1552; }), ({ final __callArgument1553:Dynamic = program; __callArgument1553; }), ({ final __callArgument1554:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1554; }), ({ final __callArgument1555:Dynamic = dest; __callArgument1555; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument1552:Dynamic = state; __callArgument1552; }), (cast 'stylization.median' : String), (cast _EffectsGl.MEDIAN_FRAGMENT_SRC__glMedianEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1554:Dynamic = state; __callArgument1554; }), ({ final __callArgument1555:Dynamic = program; __callArgument1555; }), ({ final __callArgument1556:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1556; }), ({ final __callArgument1557:Dynamic = dest; __callArgument1557; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform2f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_texelSize'), (1.0 / source.width), (1.0 / source.height));
       flight._internal.backend.WebGl2Backend.uniform1i(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_radius'), radius);
     } : Dynamic));
@@ -2186,7 +2191,7 @@ class _EffectsGl {
   });
 
   public static function registerGlMedianEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1562:Dynamic = state; __callArgument1562; }), (cast 'MedianEffect' : String), ({ final __callArgument1563:Dynamic = defaultGlMedianEffectRunner; __callArgument1563; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1560:Dynamic = state; __callArgument1560; }), (cast 'MedianEffect' : String), ({ final __callArgument1561:Dynamic = defaultGlMedianEffectRunner; __callArgument1561; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1564:Dynamic = state; __callArgument1564; }), (cast 'MedianEffect' : String), ({ final __callArgument1565:Dynamic = defaultGlMedianEffectRunner; __callArgument1565; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1562:Dynamic = state; __callArgument1562; }), (cast 'MedianEffect' : String), ({ final __callArgument1563:Dynamic = defaultGlMedianEffectRunner; __callArgument1563; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final MEDIAN_FRAGMENT_SRC__glMedianEffect:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform vec2 u_texelSize;\nuniform int u_radius;\nout vec4 fragColor;\n\nconst int MAX_S = ' + Std.string(_EffectsGl.MAX_SAMPLES__glMedianEffect) + ';\n\nvoid sortFloat(inout float arr[MAX_S], int n) {\n  for (int i = 1; i < n; i++) {\n    float key = arr[i];\n    int j = i - 1;\n    while (j >= 0 && arr[j] > key) {\n      arr[j + 1] = arr[j];\n      j--;\n    }\n    arr[j + 1] = key;\n  }\n}\n\nvoid main() {\n  int r = clamp(u_radius, 0, ' + Std.string(MAX_MEDIAN_EFFECT_GL_RADIUS) + ');\n  if (r == 0) {\n    fragColor = texture(u_texture0, v_texCoord);\n    return;\n  }\n  int n = (2 * r + 1) * (2 * r + 1);\n  float rv[MAX_S];\n  float gv[MAX_S];\n  float bv[MAX_S];\n  float av[MAX_S];\n  int count = 0;\n  for (int dy = -' + Std.string(MAX_MEDIAN_EFFECT_GL_RADIUS) + '; dy <= ' + Std.string(MAX_MEDIAN_EFFECT_GL_RADIUS) + '; dy++) {\n    for (int dx = -' + Std.string(MAX_MEDIAN_EFFECT_GL_RADIUS) + '; dx <= ' + Std.string(MAX_MEDIAN_EFFECT_GL_RADIUS) + '; dx++) {\n      if (abs(dy) <= r && abs(dx) <= r) {\n        vec4 s = texture(u_texture0, v_texCoord + vec2(float(dx), float(dy)) * u_texelSize);\n        rv[count] = s.r;\n        gv[count] = s.g;\n        bv[count] = s.b;\n        av[count] = s.a;\n        count++;\n      }\n    }\n  }\n  sortFloat(rv, n);\n  sortFloat(gv, n);\n  sortFloat(bv, n);\n  sortFloat(av, n);\n  int mid = n / 2;\n  fragColor = vec4(rv[mid], gv[mid], bv[mid], av[mid]);\n}';
@@ -2200,9 +2205,9 @@ class _EffectsGl {
     var inputs:Array<flight._internal.dom.WebGLTexture> = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
     samples = _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0);
-    program = (cast getGlEffectProgram(({ final __callArgument1564:Dynamic = state; __callArgument1564; }), (cast 'motionBlur' : String), (cast _EffectsGl.MOTION_BLUR_FRAGMENT_SRC__glMotionBlurEffect : String)) : GlFullscreenProgram);
+    program = (cast getGlEffectProgram(({ final __callArgument1566:Dynamic = state; __callArgument1566; }), (cast 'motionBlur' : String), (cast _EffectsGl.MOTION_BLUR_FRAGMENT_SRC__glMotionBlurEffect : String)) : GlFullscreenProgram);
     inputs = _Runtime.select(velocityTexture, function():Dynamic return cast cast ([source.texture, velocityTexture] : Array<Dynamic>), function():Dynamic return cast cast ([source.texture] : Array<Dynamic>));
-    drawGlFullscreenPass(({ final __callArgument1566:Dynamic = state; __callArgument1566; }), ({ final __callArgument1567:Dynamic = program; __callArgument1567; }), ({ final __callArgument1568:Dynamic = inputs; __callArgument1568; }), ({ final __callArgument1569:Dynamic = dest; __callArgument1569; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    drawGlFullscreenPass(({ final __callArgument1568:Dynamic = state; __callArgument1568; }), ({ final __callArgument1569:Dynamic = program; __callArgument1569; }), ({ final __callArgument1570:Dynamic = inputs; __callArgument1570; }), ({ final __callArgument1571:Dynamic = dest; __callArgument1571; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_samples'), samples);
       flight._internal.backend.WebGl2Backend.uniform2f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), source.width, source.height);
@@ -2215,7 +2220,7 @@ class _EffectsGl {
   });
 
   public static function registerGlMotionBlurEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1576:Dynamic = state; __callArgument1576; }), (cast 'MotionBlurEffect' : String), ({ final __callArgument1577:Dynamic = defaultGlMotionBlurEffectRunner; __callArgument1577; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1574:Dynamic = state; __callArgument1574; }), (cast 'MotionBlurEffect' : String), ({ final __callArgument1575:Dynamic = defaultGlMotionBlurEffectRunner; __callArgument1575; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1578:Dynamic = state; __callArgument1578; }), (cast 'MotionBlurEffect' : String), ({ final __callArgument1579:Dynamic = defaultGlMotionBlurEffectRunner; __callArgument1579; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1576:Dynamic = state; __callArgument1576; }), (cast 'MotionBlurEffect' : String), ({ final __callArgument1577:Dynamic = defaultGlMotionBlurEffectRunner; __callArgument1577; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final MOTION_BLUR_FRAGMENT_SRC__glMotionBlurEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nuniform float u_intensity;\nuniform float u_samples;\nuniform vec2 u_resolution;\nuniform float u_hasVelocity;\nout vec4 o_color;\nconst int SAMPLES = 16;\nvoid main() {\n  vec4 base = texture(u_texture0, v_texCoord);\n  if (u_hasVelocity < 0.5) {\n    // Sentinel path: no velocity buffer written — passthrough copy.\n    o_color = base;\n    return;\n  }\n  // Velocity decode: rgba16f buffer stores screen-space velocity in pixels in the RG channels (Y-down).\n  // The fullscreen pass UV is bottom-left origin (v increases upward), so the Y component is negated to\n  // convert from screen-space-down to UV-space-up before scaling by intensity.\n  vec2 velocityPixels = texture(u_texture1, v_texCoord).rg;\n  vec2 smear = vec2(velocityPixels.x, -velocityPixels.y) / u_resolution * u_intensity;\n  float count = min(u_samples, 16.0);\n  vec4 sum = vec4(0.0);\n  float taken = 0.0;\n  for (int i = 0; i < SAMPLES; i++) {\n    if (float(i) >= count) break;\n    // Center the taps on the fragment: t in [-0.5, 0.5] spreads the accumulation along the motion vector.\n    float t = count > 1.0 ? (float(i) / (count - 1.0)) - 0.5 : 0.0;\n    vec2 uv = v_texCoord + smear * t;\n    sum += texture(u_texture0, uv);\n    taken += 1.0;\n  }\n  o_color = sum / max(taken, 1.0);\n}';
@@ -2241,9 +2246,9 @@ class _EffectsGl {
     var blurred:GlRenderTarget = cast _Runtime.UNDEFINED;
     var blurTemp:GlRenderTarget = cast _Runtime.UNDEFINED;
     descriptor = (cast { width: source.width, height: source.height, format: source.format });
-    s0 = (cast acquireGlRenderTarget(({ final __callArgument1578:Dynamic = state; __callArgument1578; }), ({ final __callArgument1579:Dynamic = pool; __callArgument1579; }), ({ final __callArgument1580:Dynamic = descriptor; __callArgument1580; })) : GlRenderTarget);
-    s1 = (cast acquireGlRenderTarget(({ final __callArgument1584:Dynamic = state; __callArgument1584; }), ({ final __callArgument1585:Dynamic = pool; __callArgument1585; }), ({ final __callArgument1586:Dynamic = descriptor; __callArgument1586; })) : GlRenderTarget);
-    s2 = (cast acquireGlRenderTarget(({ final __callArgument1590:Dynamic = state; __callArgument1590; }), ({ final __callArgument1591:Dynamic = pool; __callArgument1591; }), ({ final __callArgument1592:Dynamic = descriptor; __callArgument1592; })) : GlRenderTarget);
+    s0 = (cast acquireGlRenderTarget(({ final __callArgument1580:Dynamic = state; __callArgument1580; }), ({ final __callArgument1581:Dynamic = pool; __callArgument1581; }), ({ final __callArgument1582:Dynamic = descriptor; __callArgument1582; })) : GlRenderTarget);
+    s1 = (cast acquireGlRenderTarget(({ final __callArgument1586:Dynamic = state; __callArgument1586; }), ({ final __callArgument1587:Dynamic = pool; __callArgument1587; }), ({ final __callArgument1588:Dynamic = descriptor; __callArgument1588; })) : GlRenderTarget);
+    s2 = (cast acquireGlRenderTarget(({ final __callArgument1592:Dynamic = state; __callArgument1592; }), ({ final __callArgument1593:Dynamic = pool; __callArgument1593; }), ({ final __callArgument1594:Dynamic = descriptor; __callArgument1594; })) : GlRenderTarget);
     src = (cast source : GlRenderTarget);
     dst = (cast dest : GlRenderTarget);
     color = _Runtime.coalesce(effect.color, function():Dynamic return cast 4278190335.0);
@@ -2257,24 +2262,24 @@ class _EffectsGl {
     mask = flight._internal._StaticIndex.readArray(__destructure0, 0.0);
     blurred = flight._internal._StaticIndex.readArray(__destructure0, 1.0);
     blurTemp = flight._internal._StaticIndex.readArray(__destructure0, 2.0);
-    applyGlEffectTintPass(({ final __callArgument1596:Dynamic = state; __callArgument1596; }), ({ final __callArgument1597:Dynamic = src; __callArgument1597; }), ({ final __callArgument1598:Dynamic = mask; __callArgument1598; }), (cast color : Float), (cast alpha : Float), (cast tintStrength : Float));
-    applyGlEffectBoxBlur(({ final __callArgument1602:Dynamic = state; __callArgument1602; }), ({ final __callArgument1603:Dynamic = mask; __callArgument1603; }), ({ final __callArgument1604:Dynamic = blurred; __callArgument1604; }), ({ final __callArgument1605:Dynamic = blurTemp; __callArgument1605; }), ({ final __callArgument1606:Dynamic = { blurX: _Runtime.coalesce(effect.blurX, function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(effect.blurY, function():Dynamic return cast 6.0), passes: quality }; __callArgument1606; }));
-    clearGlRenderTarget(({ final __callArgument1612:Dynamic = state; __callArgument1612; }), ({ final __callArgument1613:Dynamic = dst; __callArgument1613; }));
+    applyGlEffectTintPass(({ final __callArgument1598:Dynamic = state; __callArgument1598; }), ({ final __callArgument1599:Dynamic = src; __callArgument1599; }), ({ final __callArgument1600:Dynamic = mask; __callArgument1600; }), (cast color : Float), (cast alpha : Float), (cast tintStrength : Float));
+    applyGlEffectBoxBlur(({ final __callArgument1604:Dynamic = state; __callArgument1604; }), ({ final __callArgument1605:Dynamic = mask; __callArgument1605; }), ({ final __callArgument1606:Dynamic = blurred; __callArgument1606; }), ({ final __callArgument1607:Dynamic = blurTemp; __callArgument1607; }), ({ final __callArgument1608:Dynamic = { blurX: _Runtime.coalesce(effect.blurX, function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(effect.blurY, function():Dynamic return cast 6.0), passes: quality }; __callArgument1608; }));
+    clearGlRenderTarget(({ final __callArgument1614:Dynamic = state; __callArgument1614; }), ({ final __callArgument1615:Dynamic = dst; __callArgument1615; }));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast glowPasses : Float)) : Bool)) {
-        applyGlEffectBlitPass(({ final __callArgument1616:Dynamic = state; __callArgument1616; }), ({ final __callArgument1617:Dynamic = blurred; __callArgument1617; }), ({ final __callArgument1618:Dynamic = dst; __callArgument1618; }));
+        applyGlEffectBlitPass(({ final __callArgument1618:Dynamic = state; __callArgument1618; }), ({ final __callArgument1619:Dynamic = blurred; __callArgument1619; }), ({ final __callArgument1620:Dynamic = dst; __callArgument1620; }));
         i++;
       }
     }
     if ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool)) {
-      applyGlEffectErasePass(({ final __callArgument1622:Dynamic = state; __callArgument1622; }), ({ final __callArgument1623:Dynamic = src; __callArgument1623; }), ({ final __callArgument1624:Dynamic = dst; __callArgument1624; }));
+      applyGlEffectErasePass(({ final __callArgument1624:Dynamic = state; __callArgument1624; }), ({ final __callArgument1625:Dynamic = src; __callArgument1625; }), ({ final __callArgument1626:Dynamic = dst; __callArgument1626; }));
     } else { if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
-      applyGlEffectBlitPass(({ final __callArgument1628:Dynamic = state; __callArgument1628; }), ({ final __callArgument1629:Dynamic = src; __callArgument1629; }), ({ final __callArgument1630:Dynamic = dst; __callArgument1630; }));
+      applyGlEffectBlitPass(({ final __callArgument1630:Dynamic = state; __callArgument1630; }), ({ final __callArgument1631:Dynamic = src; __callArgument1631; }), ({ final __callArgument1632:Dynamic = dst; __callArgument1632; }));
     } }
-    releaseGlRenderTarget(({ final __callArgument1634:Dynamic = pool; __callArgument1634; }), ({ final __callArgument1635:Dynamic = s0; __callArgument1635; }));
-    releaseGlRenderTarget(({ final __callArgument1638:Dynamic = pool; __callArgument1638; }), ({ final __callArgument1639:Dynamic = s1; __callArgument1639; }));
-    releaseGlRenderTarget(({ final __callArgument1642:Dynamic = pool; __callArgument1642; }), ({ final __callArgument1643:Dynamic = s2; __callArgument1643; }));
+    releaseGlRenderTarget(({ final __callArgument1636:Dynamic = pool; __callArgument1636; }), ({ final __callArgument1637:Dynamic = s0; __callArgument1637; }));
+    releaseGlRenderTarget(({ final __callArgument1640:Dynamic = pool; __callArgument1640; }), ({ final __callArgument1641:Dynamic = s1; __callArgument1641; }));
+    releaseGlRenderTarget(({ final __callArgument1644:Dynamic = pool; __callArgument1644; }), ({ final __callArgument1645:Dynamic = s2; __callArgument1645; }));
   }
 
   public static final defaultGlOuterGlowEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
@@ -2282,7 +2287,7 @@ class _EffectsGl {
   });
 
   public static function registerGlOuterGlowEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1648:Dynamic = state; __callArgument1648; }), (cast 'OuterGlowEffect' : String), ({ final __callArgument1649:Dynamic = defaultGlOuterGlowEffectRunner; __callArgument1649; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1646:Dynamic = state; __callArgument1646; }), (cast 'OuterGlowEffect' : String), ({ final __callArgument1647:Dynamic = defaultGlOuterGlowEffectRunner; __callArgument1647; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1650:Dynamic = state; __callArgument1650; }), (cast 'OuterGlowEffect' : String), ({ final __callArgument1651:Dynamic = defaultGlOuterGlowEffectRunner; __callArgument1651; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1648:Dynamic = state; __callArgument1648; }), (cast 'OuterGlowEffect' : String), ({ final __callArgument1649:Dynamic = defaultGlOuterGlowEffectRunner; __callArgument1649; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   @:allow(flight)
@@ -2295,8 +2300,8 @@ class _EffectsGl {
     threshold = _Runtime.coalesce(effect.threshold, function():Dynamic return cast 0.2);
     thickness = _Runtime.coalesce(effect.thickness, function():Dynamic return cast 1.0);
     color = _Runtime.coalesce(effect.color, function():Dynamic return cast 255.0);
-    program = (cast getGlEffectProgram(({ final __callArgument1650:Dynamic = state; __callArgument1650; }), (cast 'stylization.outline' : String), (cast _EffectsGl.OUTLINE_FRAGMENT_SRC__glOutlineEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1652:Dynamic = state; __callArgument1652; }), ({ final __callArgument1653:Dynamic = program; __callArgument1653; }), ({ final __callArgument1654:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1654; }), ({ final __callArgument1655:Dynamic = dest; __callArgument1655; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument1652:Dynamic = state; __callArgument1652; }), (cast 'stylization.outline' : String), (cast _EffectsGl.OUTLINE_FRAGMENT_SRC__glOutlineEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1654:Dynamic = state; __callArgument1654; }), ({ final __callArgument1655:Dynamic = program; __callArgument1655; }), ({ final __callArgument1656:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1656; }), ({ final __callArgument1657:Dynamic = dest; __callArgument1657; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_threshold'), threshold);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_thickness'), thickness);
       flight._internal.backend.WebGl2Backend.uniform4f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_color'), ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255) / 255.0), ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255) / 255.0), ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255) / 255.0), ((_Runtime.toInt32(color) & 255) / 255.0));
@@ -2309,7 +2314,7 @@ class _EffectsGl {
   });
 
   public static function registerGlOutlineEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1662:Dynamic = state; __callArgument1662; }), (cast 'OutlineEffect' : String), ({ final __callArgument1663:Dynamic = defaultGlOutlineEffectRunner; __callArgument1663; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1660:Dynamic = state; __callArgument1660; }), (cast 'OutlineEffect' : String), ({ final __callArgument1661:Dynamic = defaultGlOutlineEffectRunner; __callArgument1661; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1664:Dynamic = state; __callArgument1664; }), (cast 'OutlineEffect' : String), ({ final __callArgument1665:Dynamic = defaultGlOutlineEffectRunner; __callArgument1665; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1662:Dynamic = state; __callArgument1662; }), (cast 'OutlineEffect' : String), ({ final __callArgument1663:Dynamic = defaultGlOutlineEffectRunner; __callArgument1663; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final OUTLINE_FRAGMENT_SRC__glOutlineEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_threshold;\nuniform float u_thickness;\nuniform vec4 u_color;\nuniform vec2 u_resolution;\nout vec4 o_color;\nfloat lum(vec2 uv) {\n  return dot(texture(u_texture0, uv).rgb, vec3(0.2126, 0.7152, 0.0722));\n}\nvoid main() {\n  vec2 texel = u_thickness / u_resolution;\n  float tl = lum(v_texCoord + texel * vec2(-1.0, -1.0));\n  float t = lum(v_texCoord + texel * vec2(0.0, -1.0));\n  float tr = lum(v_texCoord + texel * vec2(1.0, -1.0));\n  float l = lum(v_texCoord + texel * vec2(-1.0, 0.0));\n  float rr = lum(v_texCoord + texel * vec2(1.0, 0.0));\n  float bl = lum(v_texCoord + texel * vec2(-1.0, 1.0));\n  float b = lum(v_texCoord + texel * vec2(0.0, 1.0));\n  float br = lum(v_texCoord + texel * vec2(1.0, 1.0));\n  float gx = -tl - 2.0 * l - bl + tr + 2.0 * rr + br;\n  float gy = -tl - 2.0 * t - tr + bl + 2.0 * b + br;\n  float edge = sqrt(gx * gx + gy * gy);\n  vec4 c = texture(u_texture0, v_texCoord);\n  float k = step(u_threshold, edge);\n  o_color = mix(c, u_color, k * u_color.a);\n}';
@@ -2320,8 +2325,8 @@ class _EffectsGl {
     var size:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     size = _Runtime.coalesce(_Runtime.field(effect, 'size'), function():Dynamic return cast 8.0);
-    program = (cast getGlEffectProgram(({ final __callArgument1664:Dynamic = state; __callArgument1664; }), (cast 'stylization.pixelate' : String), (cast _EffectsGl.PIXELATE_FRAGMENT_SRC__glPixelateEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1666:Dynamic = state; __callArgument1666; }), ({ final __callArgument1667:Dynamic = program; __callArgument1667; }), ({ final __callArgument1668:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1668; }), ({ final __callArgument1669:Dynamic = dest; __callArgument1669; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument1666:Dynamic = state; __callArgument1666; }), (cast 'stylization.pixelate' : String), (cast _EffectsGl.PIXELATE_FRAGMENT_SRC__glPixelateEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1668:Dynamic = state; __callArgument1668; }), ({ final __callArgument1669:Dynamic = program; __callArgument1669; }), ({ final __callArgument1670:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1670; }), ({ final __callArgument1671:Dynamic = dest; __callArgument1671; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_size'), HxMath.max(1.0, size));
       flight._internal.backend.WebGl2Backend.uniform2f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), source.width, source.height);
     } : Dynamic));
@@ -2332,7 +2337,7 @@ class _EffectsGl {
   });
 
   public static function registerGlPixelateEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1676:Dynamic = state; __callArgument1676; }), (cast 'PixelateEffect' : String), ({ final __callArgument1677:Dynamic = defaultGlPixelateEffectRunner; __callArgument1677; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1674:Dynamic = state; __callArgument1674; }), (cast 'PixelateEffect' : String), ({ final __callArgument1675:Dynamic = defaultGlPixelateEffectRunner; __callArgument1675; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1678:Dynamic = state; __callArgument1678; }), (cast 'PixelateEffect' : String), ({ final __callArgument1679:Dynamic = defaultGlPixelateEffectRunner; __callArgument1679; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1676:Dynamic = state; __callArgument1676; }), (cast 'PixelateEffect' : String), ({ final __callArgument1677:Dynamic = defaultGlPixelateEffectRunner; __callArgument1677; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final PIXELATE_FRAGMENT_SRC__glPixelateEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_size;\nuniform vec2 u_resolution;\nout vec4 o_color;\nvoid main() {\n  vec2 blocks = u_resolution / u_size;\n  vec2 uv = (floor(v_texCoord * blocks) + 0.5) / blocks;\n  o_color = texture(u_texture0, uv);\n}';
@@ -2343,8 +2348,8 @@ class _EffectsGl {
     var levels:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     levels = HxMath.max(2.0, _Runtime.coalesce(_Runtime.field(effect, 'levels'), function():Dynamic return cast 8.0));
-    program = (cast getGlEffectProgram(({ final __callArgument1678:Dynamic = state; __callArgument1678; }), (cast 'colorGrade.posterize' : String), (cast _EffectsGl.POSTERIZE_FRAGMENT_SRC__glPosterizeEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1680:Dynamic = state; __callArgument1680; }), ({ final __callArgument1681:Dynamic = program; __callArgument1681; }), ({ final __callArgument1682:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1682; }), ({ final __callArgument1683:Dynamic = dest; __callArgument1683; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument1680:Dynamic = state; __callArgument1680; }), (cast 'colorGrade.posterize' : String), (cast _EffectsGl.POSTERIZE_FRAGMENT_SRC__glPosterizeEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1682:Dynamic = state; __callArgument1682; }), ({ final __callArgument1683:Dynamic = program; __callArgument1683; }), ({ final __callArgument1684:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1684; }), ({ final __callArgument1685:Dynamic = dest; __callArgument1685; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_levels'), levels);
     } : Dynamic));
   }
@@ -2354,7 +2359,7 @@ class _EffectsGl {
   });
 
   public static function registerGlPosterizeEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1690:Dynamic = state; __callArgument1690; }), (cast 'PosterizeEffect' : String), ({ final __callArgument1691:Dynamic = defaultGlPosterizeEffectRunner; __callArgument1691; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1688:Dynamic = state; __callArgument1688; }), (cast 'PosterizeEffect' : String), ({ final __callArgument1689:Dynamic = defaultGlPosterizeEffectRunner; __callArgument1689; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1692:Dynamic = state; __callArgument1692; }), (cast 'PosterizeEffect' : String), ({ final __callArgument1693:Dynamic = defaultGlPosterizeEffectRunner; __callArgument1693; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1690:Dynamic = state; __callArgument1690; }), (cast 'PosterizeEffect' : String), ({ final __callArgument1691:Dynamic = defaultGlPosterizeEffectRunner; __callArgument1691; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final POSTERIZE_FRAGMENT_SRC__glPosterizeEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_levels;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  vec3 rgb = floor(c.rgb * u_levels) / (u_levels - 1.0);\n  o_color = vec4(clamp(rgb, 0.0, 1.0), c.a);\n}';
@@ -2371,8 +2376,8 @@ class _EffectsGl {
     centerY = _Runtime.subtractNumbers(1.0, _Runtime.coalesce(effect.centerY, function():Dynamic return cast 0.5));
     strength = _Runtime.coalesce(effect.strength, function():Dynamic return cast 0.2);
     samples = _Runtime.coalesce(effect.samples, function():Dynamic return cast 16.0);
-    program = (cast getGlEffectProgram(({ final __callArgument1692:Dynamic = state; __callArgument1692; }), (cast 'radialBlur' : String), (cast _EffectsGl.RADIAL_BLUR_FRAGMENT_SRC__glRadialBlurEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1694:Dynamic = state; __callArgument1694; }), ({ final __callArgument1695:Dynamic = program; __callArgument1695; }), ({ final __callArgument1696:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1696; }), ({ final __callArgument1697:Dynamic = dest; __callArgument1697; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument1694:Dynamic = state; __callArgument1694; }), (cast 'radialBlur' : String), (cast _EffectsGl.RADIAL_BLUR_FRAGMENT_SRC__glRadialBlurEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1696:Dynamic = state; __callArgument1696; }), ({ final __callArgument1697:Dynamic = program; __callArgument1697; }), ({ final __callArgument1698:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1698; }), ({ final __callArgument1699:Dynamic = dest; __callArgument1699; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform2f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_center'), centerX, centerY);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_strength'), strength);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_samples'), samples);
@@ -2384,7 +2389,7 @@ class _EffectsGl {
   });
 
   public static function registerGlRadialBlurEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1704:Dynamic = state; __callArgument1704; }), (cast 'RadialBlurEffect' : String), ({ final __callArgument1705:Dynamic = defaultGlRadialBlurEffectRunner; __callArgument1705; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1702:Dynamic = state; __callArgument1702; }), (cast 'RadialBlurEffect' : String), ({ final __callArgument1703:Dynamic = defaultGlRadialBlurEffectRunner; __callArgument1703; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1706:Dynamic = state; __callArgument1706; }), (cast 'RadialBlurEffect' : String), ({ final __callArgument1707:Dynamic = defaultGlRadialBlurEffectRunner; __callArgument1707; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1704:Dynamic = state; __callArgument1704; }), (cast 'RadialBlurEffect' : String), ({ final __callArgument1705:Dynamic = defaultGlRadialBlurEffectRunner; __callArgument1705; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final RADIAL_BLUR_FRAGMENT_SRC__glRadialBlurEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform vec2 u_center;\nuniform float u_strength;\nuniform float u_samples;\nout vec4 o_color;\nconst int SAMPLES = 16;\nvoid main() {\n  vec2 toCenter = u_center - v_texCoord;\n  float count = min(u_samples, 16.0);\n  vec4 sum = vec4(0.0);\n  float taken = 0.0;\n  for (int i = 0; i < SAMPLES; i++) {\n    if (float(i) >= count) break;\n    float t = count > 1.0 ? float(i) / (count - 1.0) : 0.0;\n    vec2 uv = v_texCoord + toCenter * (t * u_strength);\n    sum += texture(u_texture0, uv);\n    taken += 1.0;\n  }\n  o_color = sum / max(taken, 1.0);\n}';
@@ -2403,17 +2408,20 @@ class _EffectsGl {
     format = _Runtime.field(__destructure0, 'format');
     depth = _Runtime.field(__destructure0, 'depth');
     if ((cast _Runtime.strictEquals(pipeline.sceneTarget, null) : Bool)) {
-      (pipeline.sceneTarget = cast ((cast createGlRenderTarget(({ final __callArgument1706:Dynamic = state; __callArgument1706; }), ({ final __callArgument1707:Dynamic = { width: w, height: h, sampleCount: sampleCount, format: format, depth: depth, colorSpace: colorSpace }; __callArgument1707; })) : GlRenderTarget) : Null<GlRenderTarget>));
+      (pipeline.sceneTarget = cast ((cast createGlRenderTarget(({ final __callArgument1708:Dynamic = state; __callArgument1708; }), ({ final __callArgument1709:Dynamic = { width: w, height: h, sampleCount: sampleCount, format: format, depth: depth, colorSpace: colorSpace }; __callArgument1709; })) : GlRenderTarget) : Null<GlRenderTarget>));
     } else {
-      resizeGlRenderTarget(({ final __callArgument1710:Dynamic = state; __callArgument1710; }), pipeline.sceneTarget, (cast w : Float), (cast h : Float));
+      resizeGlRenderTarget(({ final __callArgument1712:Dynamic = state; __callArgument1712; }), pipeline.sceneTarget, (cast w : Float), (cast h : Float));
     }
     ((cast pipeline.sceneTarget : { var colorSpace:RenderTargetColorSpace; }).colorSpace = cast (colorSpace : RenderTargetColorSpace));
-    (#if js _Runtime.callValue(beginGlRenderPass, cast ([({ final __callArgument1713:Dynamic = state; __callArgument1713; }), pipeline.sceneTarget, (cast { preserveColor: true, preserveDepth: true } : Dynamic)] : Array<Dynamic>)) #else beginGlRenderPass(({ final __callArgument1712:Dynamic = state; __callArgument1712; }), pipeline.sceneTarget, (cast { preserveColor: true, preserveDepth: true } : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(beginGlRenderPass, cast ([({ final __callArgument1715:Dynamic = state; __callArgument1715; }), pipeline.sceneTarget, (cast { preserveColor: true, preserveDepth: true } : Dynamic)] : Array<Dynamic>)) #else beginGlRenderPass(({ final __callArgument1714:Dynamic = state; __callArgument1714; }), pipeline.sceneTarget, (cast { preserveColor: true, preserveDepth: true } : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static function createGlRenderEffectPipeline(_state:GlRenderState, ?options:RenderEffectPipelineOptions):GlRenderEffectPipeline {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast { options: _Runtime.mergeObjects([options]), sceneTarget: null, pool: (cast createGlRenderTargetPool() : GlRenderTargetPool), lutCache: (cast createColorLutCache() : ColorLutCache), lutTexture: { texture: null, lut: null }, velocityTexture: null };
+    var out:EntityConstruction<GlRenderEffectPipeline> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ lutCache: cast _Runtime.UNDEFINED, lutTexture: cast _Runtime.UNDEFINED, options: cast _Runtime.UNDEFINED, pool: cast _Runtime.UNDEFINED, sceneTarget: cast _Runtime.UNDEFINED, velocityTexture: cast _Runtime.UNDEFINED } : GlRenderEffectPipeline); }) #end));
+    initializeGlRenderEffectPipeline(({ final __callArgument1716:Dynamic = out; __callArgument1716; }), ({ final __callArgument1717:Dynamic = _state; __callArgument1717; }), ({ final __callArgument1718:Dynamic = options; __callArgument1718; }));
+    return cast out;
     return cast null;
   }
 
@@ -2421,10 +2429,10 @@ class _EffectsGl {
   @:keep
   private static function destroyGlRenderEffectPipeline(state:GlRenderState, pipeline:GlRenderEffectPipeline):Void {
     if (_Runtime.truthy(pipeline.sceneTarget)) {
-      destroyGlRenderTarget(({ final __callArgument1714:Dynamic = state; __callArgument1714; }), pipeline.sceneTarget);
+      destroyGlRenderTarget(({ final __callArgument1722:Dynamic = state; __callArgument1722; }), pipeline.sceneTarget);
       (pipeline.sceneTarget = cast (null : Null<GlRenderTarget>));
     }
-    destroyGlRenderTargetPool(({ final __callArgument1716:Dynamic = state; __callArgument1716; }), pipeline.pool);
+    destroyGlRenderTargetPool(({ final __callArgument1724:Dynamic = state; __callArgument1724; }), pipeline.pool);
     if ((cast !_Runtime.strictEquals((cast pipeline.lutTexture : { var texture:Null<flight._internal.dom.WebGLTexture>; }).texture, null) : Bool)) {
       flight._internal.backend.WebGl2Backend.deleteTexture((cast state : GlRenderState).gl, (cast pipeline.lutTexture : { var texture:Null<flight._internal.dom.WebGLTexture>; }).texture);
       ((cast pipeline.lutTexture : { var texture:Null<flight._internal.dom.WebGLTexture>; }).texture = cast (null : Null<flight._internal.dom.WebGLTexture>));
@@ -2446,7 +2454,7 @@ class _EffectsGl {
     var flushAdjustments:Void->Void = cast _Runtime.UNDEFINED;
     scene = pipeline.sceneTarget;
     if ((cast _Runtime.strictEquals(scene, null) : Bool)) { return; }
-    endGlRenderPass(({ final __callArgument1718:Dynamic = state; __callArgument1718; }));
+    endGlRenderPass(({ final __callArgument1726:Dynamic = state; __callArgument1726; }));
     format = _Runtime.coalesce(_Runtime.field(pipeline.options, 'format'), function():Dynamic return cast 'rgba8');
     descriptor = (cast { width: (cast scene : { var width:Float; }).width, height: (cast scene : { var height:Float; }).height, format: format, colorSpace: (cast scene : { var colorSpace:RenderTargetColorSpace; }).colorSpace });
     source = scene;
@@ -2454,49 +2462,61 @@ class _EffectsGl {
     scratchB = null;
     pending = (cast cast ([] : Array<Dynamic>));
     ensureScratch = (cast function():Void {
-      if ((cast _Runtime.strictEquals(scratchA, null) : Bool)) { (scratchA = cast ((cast acquireGlRenderTarget(({ final __callArgument1720:Dynamic = state; __callArgument1720; }), pipeline.pool, ({ final __callArgument1721:Dynamic = descriptor; __callArgument1721; })) : GlRenderTarget) : Dynamic)); }
-      if ((cast _Runtime.strictEquals(scratchB, null) : Bool)) { (scratchB = cast ((cast acquireGlRenderTarget(({ final __callArgument1724:Dynamic = state; __callArgument1724; }), pipeline.pool, ({ final __callArgument1725:Dynamic = descriptor; __callArgument1725; })) : GlRenderTarget) : Dynamic)); }
+      if ((cast _Runtime.strictEquals(scratchA, null) : Bool)) { (scratchA = cast ((cast acquireGlRenderTarget(({ final __callArgument1728:Dynamic = state; __callArgument1728; }), pipeline.pool, ({ final __callArgument1729:Dynamic = descriptor; __callArgument1729; })) : GlRenderTarget) : Dynamic)); }
+      if ((cast _Runtime.strictEquals(scratchB, null) : Bool)) { (scratchB = cast ((cast acquireGlRenderTarget(({ final __callArgument1732:Dynamic = state; __callArgument1732; }), pipeline.pool, ({ final __callArgument1733:Dynamic = descriptor; __callArgument1733; })) : GlRenderTarget) : Dynamic)); }
     });
     flushAdjustments = (cast function():Void {
       var dest:GlRenderTarget = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(_Runtime.field(pending, 'length'), 0.0) : Bool)) { return; }
       ensureScratch();
       dest = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
-      clearGlRenderTarget(({ final __callArgument1728:Dynamic = state; __callArgument1728; }), ({ final __callArgument1729:Dynamic = dest; __callArgument1729; }));
+      clearGlRenderTarget(({ final __callArgument1736:Dynamic = state; __callArgument1736; }), ({ final __callArgument1737:Dynamic = dest; __callArgument1737; }));
       if ((cast _Runtime.callProperty(pending, 'some', cast ([isColorLutAdjustment] : Array<Dynamic>)) : Bool)) {
-        applyColorLutPassToGl(({ final __callArgument1732:Dynamic = state; __callArgument1732; }), ({ final __callArgument1733:Dynamic = source; __callArgument1733; }), ({ final __callArgument1734:Dynamic = dest; __callArgument1734; }), (cast (#if js _Runtime.callValue(bakeColorLutForRun, cast ([pipeline.lutCache, ({ final __callArgument1736:Dynamic = pending; __callArgument1736; })] : Array<Dynamic>)) #else bakeColorLutForRun(pipeline.lutCache, ({ final __callArgument1735:Dynamic = pending; __callArgument1735; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : ColorLut), pipeline.lutTexture);
+        applyColorLutPassToGl(({ final __callArgument1740:Dynamic = state; __callArgument1740; }), ({ final __callArgument1741:Dynamic = source; __callArgument1741; }), ({ final __callArgument1742:Dynamic = dest; __callArgument1742; }), (cast (#if js _Runtime.callValue(bakeColorLutForRun, cast ([pipeline.lutCache, ({ final __callArgument1744:Dynamic = pending; __callArgument1744; })] : Array<Dynamic>)) #else bakeColorLutForRun(pipeline.lutCache, ({ final __callArgument1743:Dynamic = pending; __callArgument1743; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : ColorLut), pipeline.lutTexture);
       } else {
         var matrices:Array<Array<Float>> = (cast cast ([] : Array<Dynamic>));
         for (op in _Runtime.iterable(pending)) {
-          var matrix:Null<Array<Float>> = (cast getAdjustmentColorMatrix(({ final __callArgument1744:Dynamic = op; __callArgument1744; })) : Null<Array<Float>>);
+          var matrix:Null<Array<Float>> = (cast getAdjustmentColorMatrix(({ final __callArgument1752:Dynamic = op; __callArgument1752; })) : Null<Array<Float>>);
           if ((cast !_Runtime.strictEquals(matrix, null) : Bool)) { _Runtime.callProperty(matrices, 'push', cast ([matrix] : Array<Dynamic>)); }
         }
-        applyColorMatrixPassToGl(({ final __callArgument1746:Dynamic = state; __callArgument1746; }), ({ final __callArgument1747:Dynamic = source; __callArgument1747; }), ({ final __callArgument1748:Dynamic = dest; __callArgument1748; }), (cast fuseColorMatrices(({ final __callArgument1749:Dynamic = matrices; __callArgument1749; })) : Array<Float>));
+        applyColorMatrixPassToGl(({ final __callArgument1754:Dynamic = state; __callArgument1754; }), ({ final __callArgument1755:Dynamic = source; __callArgument1755; }), ({ final __callArgument1756:Dynamic = dest; __callArgument1756; }), (cast fuseColorMatrices(({ final __callArgument1757:Dynamic = matrices; __callArgument1757; })) : Array<Float>));
       }
       (source = cast (dest : Dynamic));
       (pending = cast (cast ([] : Array<Dynamic>) : Dynamic));
     });
     for (operation in _Runtime.iterable(operations)) {
-      if ((cast ((cast !_Runtime.strictEquals((cast getAdjustmentColorMatrix(({ final __callArgument1758:Dynamic = operation; __callArgument1758; })) : Null<Array<Float>>), null) : Bool) || (cast (cast isColorLutAdjustment(({ final __callArgument1760:Dynamic = operation; __callArgument1760; })) : Bool) : Bool)) : Bool)) {
+      if ((cast ((cast !_Runtime.strictEquals((cast getAdjustmentColorMatrix(({ final __callArgument1766:Dynamic = operation; __callArgument1766; })) : Null<Array<Float>>), null) : Bool) || (cast (cast isColorLutAdjustment(({ final __callArgument1768:Dynamic = operation; __callArgument1768; })) : Bool) : Bool)) : Bool)) {
         _Runtime.callProperty(pending, 'push', cast ([(cast operation : Adjustment)] : Array<Dynamic>));
         continue;
       }
-      var runner:Null<GlRenderEffectRunner> = (cast getGlRenderEffectRunner(({ final __callArgument1762:Dynamic = state; __callArgument1762; }), (cast (cast operation : { var kind:String; }).kind : String)) : Null<GlRenderEffectRunner>);
+      var runner:Null<GlRenderEffectRunner> = (cast getGlRenderEffectRunner(({ final __callArgument1770:Dynamic = state; __callArgument1770; }), (cast (cast operation : { var kind:String; }).kind : String)) : Null<GlRenderEffectRunner>);
       if ((cast _Runtime.strictEquals(runner, null) : Bool)) {
-        _EffectsGl.reportGlRenderEffectPipelineSkip__glRenderEffectPipeline(({ final __callArgument1764:Dynamic = state; __callArgument1764; }), (cast (cast operation : { var kind:String; }).kind : String));
+        _EffectsGl.reportGlRenderEffectPipelineSkip__glRenderEffectPipeline(({ final __callArgument1772:Dynamic = state; __callArgument1772; }), (cast (cast operation : { var kind:String; }).kind : String));
         continue;
       }
       flushAdjustments();
       ensureScratch();
       var dest:GlRenderTarget = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
-      clearGlRenderTarget(({ final __callArgument1766:Dynamic = state; __callArgument1766; }), ({ final __callArgument1767:Dynamic = dest; __callArgument1767; }));
-      runner(({ final __callArgument1770:Dynamic = { state: state, source: source, dest: dest, pool: pipeline.pool, sceneDepthTexture: (cast scene : { var depthTexture:Null<flight._internal.dom.WebGLTexture>; }).depthTexture, sceneVelocityTexture: pipeline.velocityTexture }; __callArgument1770; }), ({ final __callArgument1771:Dynamic = operation; __callArgument1771; }));
+      clearGlRenderTarget(({ final __callArgument1774:Dynamic = state; __callArgument1774; }), ({ final __callArgument1775:Dynamic = dest; __callArgument1775; }));
+      runner(({ final __callArgument1778:Dynamic = { state: state, source: source, dest: dest, pool: pipeline.pool, sceneDepthTexture: (cast scene : { var depthTexture:Null<flight._internal.dom.WebGLTexture>; }).depthTexture, sceneVelocityTexture: pipeline.velocityTexture }; __callArgument1778; }), (cast operation : RenderEffect));
       (source = cast (dest : Dynamic));
     }
     flushAdjustments();
-    _EffectsGl.presentGlRenderEffectResult__glRenderEffectPipeline(({ final __callArgument1774:Dynamic = state; __callArgument1774; }), ({ final __callArgument1775:Dynamic = source; __callArgument1775; }));
-    if ((cast !_Runtime.strictEquals(scratchA, null) : Bool)) { releaseGlRenderTarget(pipeline.pool, ({ final __callArgument1778:Dynamic = scratchA; __callArgument1778; })); }
-    if ((cast !_Runtime.strictEquals(scratchB, null) : Bool)) { releaseGlRenderTarget(pipeline.pool, ({ final __callArgument1780:Dynamic = scratchB; __callArgument1780; })); }
+    _EffectsGl.presentGlRenderEffectResult__glRenderEffectPipeline(({ final __callArgument1780:Dynamic = state; __callArgument1780; }), ({ final __callArgument1781:Dynamic = source; __callArgument1781; }));
+    if ((cast !_Runtime.strictEquals(scratchA, null) : Bool)) { releaseGlRenderTarget(pipeline.pool, ({ final __callArgument1784:Dynamic = scratchA; __callArgument1784; })); }
+    if ((cast !_Runtime.strictEquals(scratchB, null) : Bool)) { releaseGlRenderTarget(pipeline.pool, ({ final __callArgument1786:Dynamic = scratchB; __callArgument1786; })); }
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeGlRenderEffectPipeline(out:EntityConstruction<GlRenderEffectPipeline>, _state:GlRenderState, ?options:RenderEffectPipelineOptions):Void {
+    if (options == null) options = cast ({  } : Dynamic);
+    _Runtime.setField(out, 'options', _Runtime.mergeObjects([options]));
+    _Runtime.setField(out, 'sceneTarget', null);
+    _Runtime.setField(out, 'pool', (cast createGlRenderTargetPool() : GlRenderTargetPool));
+    _Runtime.setField(out, 'lutCache', (cast createColorLutCache() : ColorLutCache));
+    _Runtime.setField(out, 'lutTexture', { texture: null, lut: null });
+    _Runtime.setField(out, 'velocityTexture', null);
   }
 
   @:allow(flight)
@@ -2512,11 +2532,11 @@ class _EffectsGl {
   public static function presentGlRenderEffectResult__glRenderEffectPipeline(state:GlRenderState, source:GlRenderTarget):Void {
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(source.colorSpace, 'linear') : Bool)) {
-      drawGlLinearToSrgbPass(({ final __callArgument1782:Dynamic = state; __callArgument1782; }), ({ final __callArgument1783:Dynamic = source; __callArgument1783; }), ({ final __callArgument1784:Dynamic = null; __callArgument1784; }));
+      drawGlLinearToSrgbPass(({ final __callArgument1788:Dynamic = state; __callArgument1788; }), ({ final __callArgument1789:Dynamic = source; __callArgument1789; }), ({ final __callArgument1790:Dynamic = null; __callArgument1790; }));
       return;
     }
-    program = (cast getGlEffectProgram(({ final __callArgument1788:Dynamic = state; __callArgument1788; }), (cast 'effect.present' : String), (cast _EffectsGl.PRESENT_FRAGMENT_SRC__glRenderEffectPipeline : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1790:Dynamic = state; __callArgument1790; }), ({ final __callArgument1791:Dynamic = program; __callArgument1791; }), ({ final __callArgument1792:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1792; }), ({ final __callArgument1793:Dynamic = null; __callArgument1793; }), (cast function(__unused3:GlContext, __unused4:GlFullscreenProgram):Void { _Runtime.callValue(function(__unused1:GlContext, __unused2:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument1794:Dynamic = state; __callArgument1794; }), (cast 'effect.present' : String), (cast _EffectsGl.PRESENT_FRAGMENT_SRC__glRenderEffectPipeline : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1796:Dynamic = state; __callArgument1796; }), ({ final __callArgument1797:Dynamic = program; __callArgument1797; }), ({ final __callArgument1798:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1798; }), ({ final __callArgument1799:Dynamic = null; __callArgument1799; }), (cast function(__unused3:GlContext, __unused4:GlFullscreenProgram):Void { _Runtime.callValue(function(__unused1:GlContext, __unused2:GlFullscreenProgram):Void {
 
     }, cast ([] : Array<Dynamic>)); } : Dynamic));
   }
@@ -2533,15 +2553,15 @@ class _EffectsGl {
   @:keep
   private static function getGlRenderEffectRunner(state:GlRenderState, kind:String):Null<GlRenderEffectRunner> {
     var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:GlRenderEffectRegistration; }>> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument1800:Dynamic = state; __callArgument1800; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).renderEffects : KeyedTable<GlRenderEffectRegistration>).entries : flight._internal._Map<String, RegistryTableEntry<GlRenderEffectRegistration>>).get((cast kind)));
-    return cast ((cast _Runtime.strictEquals(({ final __structural1802 = entry; __structural1802 == null ? _Runtime.UNDEFINED : (cast __structural1802 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast (cast entry : { var state:String; var value:GlRenderEffectRegistration; }).value : GlRenderEffectRegistration).runner : Dynamic) : (cast null : Dynamic));
+    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument1806:Dynamic = state; __callArgument1806; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).renderEffects : KeyedTable<GlRenderEffectRegistration>).entries : flight._internal._Map<String, RegistryTableEntry<GlRenderEffectRegistration>>).get((cast kind)));
+    return cast ((cast _Runtime.strictEquals(({ final __structural1808 = entry; __structural1808 == null ? _Runtime.UNDEFINED : (cast __structural1808 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast (cast entry : { var state:String; var value:GlRenderEffectRegistration; }).value : GlRenderEffectRegistration).runner : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   @:allow(flight)
   @:keep
   private static function hasGlRenderEffectRunner(state:GlRenderState, kind:String):Bool {
-    return cast _Runtime.strictEquals(({ final __structural1807 = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument1805:Dynamic = state; __callArgument1805; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).renderEffects : KeyedTable<GlRenderEffectRegistration>).entries : flight._internal._Map<String, RegistryTableEntry<GlRenderEffectRegistration>>).get((cast kind))); __structural1807 == null ? _Runtime.UNDEFINED : (cast __structural1807 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
+    return cast _Runtime.strictEquals(({ final __structural1813 = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument1811:Dynamic = state; __callArgument1811; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).renderEffects : KeyedTable<GlRenderEffectRegistration>).entries : flight._internal._Map<String, RegistryTableEntry<GlRenderEffectRegistration>>).get((cast kind))); __structural1813 == null ? _Runtime.UNDEFINED : (cast __structural1813 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
     return cast null;
   }
 
@@ -2549,16 +2569,16 @@ class _EffectsGl {
   @:keep
   private static function isGlRenderEffectResolvable(state:GlRenderState, effect:RenderEffect):Bool {
     var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:GlRenderEffectRegistration; }>> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument1810:Dynamic = state; __callArgument1810; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).renderEffects : KeyedTable<GlRenderEffectRegistration>).entries : flight._internal._Map<String, RegistryTableEntry<GlRenderEffectRegistration>>).get((cast _Runtime.field(effect, 'kind'))));
-    if ((cast !_Runtime.strictEquals(({ final __structural1812 = entry; __structural1812 == null ? _Runtime.UNDEFINED : (cast __structural1812 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) { return cast false; }
-    return cast ((cast _Runtime.strictEquals((cast (cast entry : { var state:String; var value:GlRenderEffectRegistration; }).value : GlRenderEffectRegistration).isResolvable, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast (cast (cast entry : { var state:String; var value:GlRenderEffectRegistration; }).value : GlRenderEffectRegistration).isResolvable(({ final __callArgument1813:Dynamic = state; __callArgument1813; }), ({ final __callArgument1814:Dynamic = effect; __callArgument1814; })) : Bool));
+    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument1816:Dynamic = state; __callArgument1816; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).renderEffects : KeyedTable<GlRenderEffectRegistration>).entries : flight._internal._Map<String, RegistryTableEntry<GlRenderEffectRegistration>>).get((cast _Runtime.field(effect, 'kind'))));
+    if ((cast !_Runtime.strictEquals(({ final __structural1818 = entry; __structural1818 == null ? _Runtime.UNDEFINED : (cast __structural1818 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) { return cast false; }
+    return cast ((cast _Runtime.strictEquals((cast (cast entry : { var state:String; var value:GlRenderEffectRegistration; }).value : GlRenderEffectRegistration).isResolvable, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast (cast (cast entry : { var state:String; var value:GlRenderEffectRegistration; }).value : GlRenderEffectRegistration).isResolvable(({ final __callArgument1819:Dynamic = state; __callArgument1819; }), ({ final __callArgument1820:Dynamic = effect; __callArgument1820; })) : Bool));
     return cast null;
   }
 
   public static function registerGlRenderEffect(state:GlRenderState, kind:String, runner:GlRenderEffectRunner, ?isResolvable:GlRenderEffectResolver):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument1815:Dynamic = state; __callArgument1815; })) : GlRenderStateRuntime);
-    ((cast runtime.registries : GlRenderRegistries).renderEffects = (cast withRegistryTableEntry((cast (cast runtime.registries : GlRenderRegistries).renderEffects : Dynamic), (cast kind : String), ({ final __callArgument1817:Dynamic = { isResolvable: isResolvable, runner: runner }; __callArgument1817; })) : KeyedTable<GlRenderEffectRegistration>));
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument1821:Dynamic = state; __callArgument1821; })) : GlRenderStateRuntime);
+    ((cast runtime.registries : GlRenderRegistries).renderEffects = (cast withRegistryTableEntry((cast (cast runtime.registries : GlRenderRegistries).renderEffects : Dynamic), (cast kind : String), ({ final __callArgument1823:Dynamic = { isResolvable: isResolvable, runner: runner }; __callArgument1823; })) : { >KeyedTable<GlRenderEffectRegistration>, >Entity, }));
   }
 
   public static function applyGlRenderEffectsToRenderTexture(state:GlRenderState, pool:GlRenderTexturePool, source:RenderTexture, dest:RenderTexture, scratch:RenderTexture, effects:Array<RenderEffect>):Bool {
@@ -2567,17 +2587,17 @@ class _EffectsGl {
     if ((cast ((cast ((cast _Runtime.strictEquals(source, dest) : Bool) || (cast _Runtime.strictEquals(source, scratch) : Bool)) : Bool) || (cast _Runtime.strictEquals(dest, scratch) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('applyGlRenderEffectsToRenderTexture: source, destination, and scratch must be distinct'));
     }
-    sourceTarget = (cast getGlRenderTextureTarget(({ final __callArgument1819:Dynamic = state; __callArgument1819; }), ({ final __callArgument1820:Dynamic = source; __callArgument1820; })) : Null<GlRenderTarget>);
+    sourceTarget = (cast getGlRenderTextureTarget(({ final __callArgument1825:Dynamic = state; __callArgument1825; }), ({ final __callArgument1826:Dynamic = source; __callArgument1826; })) : Null<GlRenderTarget>);
     operations = (cast _Runtime.flatMapArray((cast effects : Array<RenderEffect>), function(effect:RenderEffect, __unused0:Float, __unused1:Array<RenderEffect>):flight._internal._Union2<{ var effect:RenderEffect; var runner:GlRenderEffectRunner; }, Array<{ var effect:RenderEffect; var runner:GlRenderEffectRunner; }>> {
       var runner:Null<GlRenderEffectRunner> = cast _Runtime.UNDEFINED;
-      runner = (cast getGlRenderEffectRunner(({ final __callArgument1823:Dynamic = state; __callArgument1823; }), (cast _Runtime.field(effect, 'kind') : String)) : Null<GlRenderEffectRunner>);
+      runner = (cast getGlRenderEffectRunner(({ final __callArgument1829:Dynamic = state; __callArgument1829; }), (cast _Runtime.field(effect, 'kind') : String)) : Null<GlRenderEffectRunner>);
       return cast ((cast _Runtime.strictEquals(runner, null) : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([{ effect: effect, runner: runner }] : Array<Dynamic>) : Dynamic));
       return cast _Runtime.UNDEFINED;
     }, _Runtime.UNDEFINED));
-    _EffectsGl.reportGlRenderEffectApplication__glRenderTextureEffect(({ final __callArgument1825:Dynamic = state; __callArgument1825; }), (cast explainGlRenderEffectApplication(({ final __callArgument1826:Dynamic = state; __callArgument1826; }), ({ final __callArgument1827:Dynamic = effects; __callArgument1827; }), (cast !_Runtime.strictEquals(sourceTarget, null) : Bool), (cast _Runtime.strictEquals((cast (cast explainGlRenderTexture(({ final __callArgument1828:Dynamic = state; __callArgument1828; }), ({ final __callArgument1829:Dynamic = dest; __callArgument1829; })) : GlRenderTextureExplanation) : GlRenderTextureExplanation).status, 'ready') : Bool)) : GlRenderEffectApplicationExplanation));
+    _EffectsGl.reportGlRenderEffectApplication__glRenderTextureEffect(({ final __callArgument1831:Dynamic = state; __callArgument1831; }), (cast explainGlRenderEffectApplication(({ final __callArgument1832:Dynamic = state; __callArgument1832; }), ({ final __callArgument1833:Dynamic = effects; __callArgument1833; }), (cast !_Runtime.strictEquals(sourceTarget, null) : Bool), (cast _Runtime.strictEquals((cast (cast explainGlRenderTexture(({ final __callArgument1834:Dynamic = state; __callArgument1834; }), ({ final __callArgument1835:Dynamic = dest; __callArgument1835; })) : GlRenderTextureExplanation) : GlRenderTextureExplanation).status, 'ready') : Bool)) : GlRenderEffectApplicationExplanation));
     if ((cast _Runtime.strictEquals(sourceTarget, null) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals(_Runtime.field(operations, 'length'), 0.0) : Bool)) { return cast false; }
-    (cast withGlRenderState : GlRenderState->(Void->Void)->Void)(({ final __callArgument1851:Dynamic = state; __callArgument1851; }), ({ final __callArgument1862:Dynamic = function():Void {
+    (cast withGlRenderState : GlRenderState->(Void->Void)->Void)(({ final __callArgument1857:Dynamic = state; __callArgument1857; }), ({ final __callArgument1868:Dynamic = function():Void {
       var current:GlRenderTarget = cast _Runtime.UNDEFINED;
       current = sourceTarget;
       {
@@ -2586,14 +2606,14 @@ class _EffectsGl {
           var operation:{ var effect:RenderEffect; var runner:GlRenderEffectRunner; } = flight._internal._StaticIndex.readArray(operations, index);
           var remaining:Float = _Runtime.subtractNumbers(_Runtime.field(operations, 'length'), index);
           var output:RenderTexture = ((cast _Runtime.strictEquals(_Runtime.fmod(remaining, 2.0), 1.0) : Bool) ? (cast dest : Dynamic) : (cast scratch : Dynamic));
-          writeGlRenderTextureTarget(({ final __callArgument1852:Dynamic = state; __callArgument1852; }), ({ final __callArgument1853:Dynamic = output; __callArgument1853; }), (cast function(target:GlRenderTarget):Void {
-            (cast operation : { var effect:RenderEffect; var runner:GlRenderEffectRunner; }).runner(({ final __callArgument1854:Dynamic = { state: state, source: current, dest: target, pool: pool.effectTargets, sceneDepthTexture: null, sceneVelocityTexture: null }; __callArgument1854; }), (cast operation : { var effect:RenderEffect; var runner:GlRenderEffectRunner; }).effect);
+          writeGlRenderTextureTarget(({ final __callArgument1858:Dynamic = state; __callArgument1858; }), ({ final __callArgument1859:Dynamic = output; __callArgument1859; }), (cast function(target:GlRenderTarget):Void {
+            (cast operation : { var effect:RenderEffect; var runner:GlRenderEffectRunner; }).runner(({ final __callArgument1860:Dynamic = { state: state, source: current, dest: target, pool: pool.effectTargets, sceneDepthTexture: null, sceneVelocityTexture: null }; __callArgument1860; }), (cast operation : { var effect:RenderEffect; var runner:GlRenderEffectRunner; }).effect);
           } : Dynamic));
-          (current = cast ((cast getGlRenderTextureTarget(({ final __callArgument1858:Dynamic = state; __callArgument1858; }), ({ final __callArgument1859:Dynamic = output; __callArgument1859; })) : Null<GlRenderTarget>) : Dynamic));
+          (current = cast ((cast getGlRenderTextureTarget(({ final __callArgument1864:Dynamic = state; __callArgument1864; }), ({ final __callArgument1865:Dynamic = output; __callArgument1865; })) : Null<GlRenderTarget>) : Dynamic));
           index++;
         }
       }
-    }; __callArgument1862; }));
+    }; __callArgument1868; }));
     return cast true;
     return cast null;
   }
@@ -2620,7 +2640,7 @@ class _EffectsGl {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(effects, 'length') : Float)) : Bool)) {
         var effect:RenderEffect = flight._internal._StaticIndex.readArray(effects, index);
-        if ((cast _Runtime.strictEquals((cast getGlRenderEffectRunner(({ final __callArgument1875:Dynamic = state; __callArgument1875; }), (cast _Runtime.field(effect, 'kind') : String)) : Null<GlRenderEffectRunner>), null) : Bool)) { _Runtime.callProperty(unregisteredKinds, 'push', cast ([_Runtime.field(effect, 'kind')] : Array<Dynamic>)); } else { if ((cast !(cast (cast isGlRenderEffectResolvable(({ final __callArgument1877:Dynamic = state; __callArgument1877; }), ({ final __callArgument1878:Dynamic = effect; __callArgument1878; })) : Bool) : Bool) : Bool)) { _Runtime.callProperty(unresolvedIndexes, 'push', cast ([index] : Array<Dynamic>)); } }
+        if ((cast _Runtime.strictEquals((cast getGlRenderEffectRunner(({ final __callArgument1881:Dynamic = state; __callArgument1881; }), (cast _Runtime.field(effect, 'kind') : String)) : Null<GlRenderEffectRunner>), null) : Bool)) { _Runtime.callProperty(unregisteredKinds, 'push', cast ([_Runtime.field(effect, 'kind')] : Array<Dynamic>)); } else { if ((cast !(cast (cast isGlRenderEffectResolvable(({ final __callArgument1883:Dynamic = state; __callArgument1883; }), ({ final __callArgument1884:Dynamic = effect; __callArgument1884; })) : Bool) : Bool) : Bool)) { _Runtime.callProperty(unresolvedIndexes, 'push', cast ([index] : Array<Dynamic>)); } }
         index++;
       }
     }
@@ -2651,8 +2671,8 @@ class _EffectsGl {
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     count = _Runtime.coalesce(_Runtime.field(effect, 'count'), function():Dynamic return cast 240.0);
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.3);
-    program = (cast getGlEffectProgram(({ final __callArgument1881:Dynamic = state; __callArgument1881; }), (cast 'stylization.scanlines' : String), (cast _EffectsGl.SCANLINES_FRAGMENT_SRC__glScanlinesEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1883:Dynamic = state; __callArgument1883; }), ({ final __callArgument1884:Dynamic = program; __callArgument1884; }), ({ final __callArgument1885:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1885; }), ({ final __callArgument1886:Dynamic = dest; __callArgument1886; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument1887:Dynamic = state; __callArgument1887; }), (cast 'stylization.scanlines' : String), (cast _EffectsGl.SCANLINES_FRAGMENT_SRC__glScanlinesEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1889:Dynamic = state; __callArgument1889; }), ({ final __callArgument1890:Dynamic = program; __callArgument1890; }), ({ final __callArgument1891:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1891; }), ({ final __callArgument1892:Dynamic = dest; __callArgument1892; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_count'), count);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
     } : Dynamic));
@@ -2663,7 +2683,7 @@ class _EffectsGl {
   });
 
   public static function registerGlScanlinesEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1893:Dynamic = state; __callArgument1893; }), (cast 'ScanlinesEffect' : String), ({ final __callArgument1894:Dynamic = defaultGlScanlinesEffectRunner; __callArgument1894; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1891:Dynamic = state; __callArgument1891; }), (cast 'ScanlinesEffect' : String), ({ final __callArgument1892:Dynamic = defaultGlScanlinesEffectRunner; __callArgument1892; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1899:Dynamic = state; __callArgument1899; }), (cast 'ScanlinesEffect' : String), ({ final __callArgument1900:Dynamic = defaultGlScanlinesEffectRunner; __callArgument1900; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1897:Dynamic = state; __callArgument1897; }), (cast 'ScanlinesEffect' : String), ({ final __callArgument1898:Dynamic = defaultGlScanlinesEffectRunner; __callArgument1898; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final SCANLINES_FRAGMENT_SRC__glScanlinesEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_count;\nuniform float u_intensity;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  // Counted down the image so a given line index falls on the same row whichever origin the target\n  // uses; a render target is bottom-left, so the row has to be measured from the far edge first.\n  float line = sin((1.0 - v_texCoord.y) * u_count * 3.14159265) * 0.5 + 0.5;\n  o_color = vec4(c.rgb * (1.0 - u_intensity * (1.0 - line)), c.a);\n}';
@@ -2687,9 +2707,9 @@ class _EffectsGl {
     density = _Runtime.coalesce(_Runtime.field(effect, 'density'), function():Dynamic return cast 1.0);
     near = _Runtime.coalesce(_Runtime.field(effect, 'near'), function():Dynamic return cast 0.0);
     far = _Runtime.coalesce(_Runtime.field(effect, 'far'), function():Dynamic return cast 1.0);
-    program = (cast getGlEffectProgram(({ final __callArgument1895:Dynamic = state; __callArgument1895; }), (cast 'atmospheric.screenSpaceFog' : String), (cast _EffectsGl.SCREEN_SPACE_FOG_FRAGMENT_SRC__glScreenSpaceFogEffect : String)) : GlFullscreenProgram);
+    program = (cast getGlEffectProgram(({ final __callArgument1901:Dynamic = state; __callArgument1901; }), (cast 'atmospheric.screenSpaceFog' : String), (cast _EffectsGl.SCREEN_SPACE_FOG_FRAGMENT_SRC__glScreenSpaceFogEffect : String)) : GlFullscreenProgram);
     inputs = _Runtime.select(depthTexture, function():Dynamic return cast cast ([source.texture, depthTexture] : Array<Dynamic>), function():Dynamic return cast cast ([source.texture] : Array<Dynamic>));
-    drawGlFullscreenPass(({ final __callArgument1897:Dynamic = state; __callArgument1897; }), ({ final __callArgument1898:Dynamic = program; __callArgument1898; }), ({ final __callArgument1899:Dynamic = inputs; __callArgument1899; }), ({ final __callArgument1900:Dynamic = dest; __callArgument1900; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    drawGlFullscreenPass(({ final __callArgument1903:Dynamic = state; __callArgument1903; }), ({ final __callArgument1904:Dynamic = program; __callArgument1904; }), ({ final __callArgument1905:Dynamic = inputs; __callArgument1905; }), ({ final __callArgument1906:Dynamic = dest; __callArgument1906; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform3f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_fogColor'), r, g, b);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_density'), density);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_near'), near);
@@ -2703,7 +2723,7 @@ class _EffectsGl {
   });
 
   public static function registerGlScreenSpaceFogEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1907:Dynamic = state; __callArgument1907; }), (cast 'ScreenSpaceFogEffect' : String), ({ final __callArgument1908:Dynamic = defaultGlScreenSpaceFogEffectRunner; __callArgument1908; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1905:Dynamic = state; __callArgument1905; }), (cast 'ScreenSpaceFogEffect' : String), ({ final __callArgument1906:Dynamic = defaultGlScreenSpaceFogEffectRunner; __callArgument1906; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1913:Dynamic = state; __callArgument1913; }), (cast 'ScreenSpaceFogEffect' : String), ({ final __callArgument1914:Dynamic = defaultGlScreenSpaceFogEffectRunner; __callArgument1914; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1911:Dynamic = state; __callArgument1911; }), (cast 'ScreenSpaceFogEffect' : String), ({ final __callArgument1912:Dynamic = defaultGlScreenSpaceFogEffectRunner; __callArgument1912; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final SCREEN_SPACE_FOG_FRAGMENT_SRC__glScreenSpaceFogEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nuniform vec3 u_fogColor;\nuniform float u_density;\nuniform float u_near;\nuniform float u_far;\nuniform float u_hasDepth;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float fog;\n  if (u_hasDepth > 0.5) {\n    // Real depth path: window-space depth remapped over [near, far], exponential fog by density.\n    float depth = texture(u_texture1, v_texCoord).r;\n    float d = clamp((depth - u_near) / max(u_far - u_near, 1e-4), 0.0, 1.0);\n    fog = clamp(1.0 - exp(-u_density * d), 0.0, 1.0);\n  } else {\n    // Sentinel path: no depth written (flat 2D scene) — screen-Y gradient as a depth proxy, densest\n    // at the top of the frame where a horizon would be. A render target is bottom-left origin, so\n    // v_texCoord.y already counts upward from the bottom and is the image-space distance from the top;\n    // subtracting it from one would put the fog on the ground instead of the horizon.\n    fog = clamp(v_texCoord.y * u_density, 0.0, 1.0);\n  }\n  o_color = vec4(mix(c.rgb, u_fogColor, fog), c.a);\n}';
@@ -2714,8 +2734,8 @@ class _EffectsGl {
     var amount:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     amount = _Runtime.coalesce(_Runtime.field(effect, 'amount'), function():Dynamic return cast 0.5);
-    program = (cast getGlEffectProgram(({ final __callArgument1909:Dynamic = state; __callArgument1909; }), (cast 'stylization.sharpen' : String), (cast _EffectsGl.SHARPEN_FRAGMENT_SRC__glSharpenEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1911:Dynamic = state; __callArgument1911; }), ({ final __callArgument1912:Dynamic = program; __callArgument1912; }), ({ final __callArgument1913:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1913; }), ({ final __callArgument1914:Dynamic = dest; __callArgument1914; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument1915:Dynamic = state; __callArgument1915; }), (cast 'stylization.sharpen' : String), (cast _EffectsGl.SHARPEN_FRAGMENT_SRC__glSharpenEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1917:Dynamic = state; __callArgument1917; }), ({ final __callArgument1918:Dynamic = program; __callArgument1918; }), ({ final __callArgument1919:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1919; }), ({ final __callArgument1920:Dynamic = dest; __callArgument1920; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_amount'), amount);
       flight._internal.backend.WebGl2Backend.uniform2f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), source.width, source.height);
     } : Dynamic));
@@ -2726,7 +2746,7 @@ class _EffectsGl {
   });
 
   public static function registerGlSharpenEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1921:Dynamic = state; __callArgument1921; }), (cast 'SharpenEffect' : String), ({ final __callArgument1922:Dynamic = defaultGlSharpenEffectRunner; __callArgument1922; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1919:Dynamic = state; __callArgument1919; }), (cast 'SharpenEffect' : String), ({ final __callArgument1920:Dynamic = defaultGlSharpenEffectRunner; __callArgument1920; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1927:Dynamic = state; __callArgument1927; }), (cast 'SharpenEffect' : String), ({ final __callArgument1928:Dynamic = defaultGlSharpenEffectRunner; __callArgument1928; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1925:Dynamic = state; __callArgument1925; }), (cast 'SharpenEffect' : String), ({ final __callArgument1926:Dynamic = defaultGlSharpenEffectRunner; __callArgument1926; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final SHARPEN_FRAGMENT_SRC__glSharpenEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_amount;\nuniform vec2 u_resolution;\nout vec4 o_color;\nvoid main() {\n  vec2 texel = 1.0 / u_resolution;\n  vec3 c = texture(u_texture0, v_texCoord).rgb;\n  vec3 n = texture(u_texture0, v_texCoord + vec2(0.0, -texel.y)).rgb;\n  vec3 s = texture(u_texture0, v_texCoord + vec2(0.0, texel.y)).rgb;\n  vec3 e = texture(u_texture0, v_texCoord + vec2(texel.x, 0.0)).rgb;\n  vec3 w = texture(u_texture0, v_texCoord + vec2(-texel.x, 0.0)).rgb;\n  vec3 high = c * 4.0 - n - s - e - w;\n  float a = texture(u_texture0, v_texCoord).a;\n  o_color = vec4(clamp(c + high * u_amount, 0.0, 1.0), a);\n}';
@@ -2737,8 +2757,8 @@ class _EffectsGl {
     var strength:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
-    program = (cast getGlEffectProgram(({ final __callArgument1923:Dynamic = state; __callArgument1923; }), (cast 'stylization.sketch' : String), (cast _EffectsGl.SKETCH_FRAGMENT_SRC__glSketchEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1925:Dynamic = state; __callArgument1925; }), ({ final __callArgument1926:Dynamic = program; __callArgument1926; }), ({ final __callArgument1927:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1927; }), ({ final __callArgument1928:Dynamic = dest; __callArgument1928; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument1929:Dynamic = state; __callArgument1929; }), (cast 'stylization.sketch' : String), (cast _EffectsGl.SKETCH_FRAGMENT_SRC__glSketchEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1931:Dynamic = state; __callArgument1931; }), ({ final __callArgument1932:Dynamic = program; __callArgument1932; }), ({ final __callArgument1933:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1933; }), ({ final __callArgument1934:Dynamic = dest; __callArgument1934; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_strength'), strength);
       flight._internal.backend.WebGl2Backend.uniform2f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), source.width, source.height);
     } : Dynamic));
@@ -2749,7 +2769,7 @@ class _EffectsGl {
   });
 
   public static function registerGlSketchEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1935:Dynamic = state; __callArgument1935; }), (cast 'SketchEffect' : String), ({ final __callArgument1936:Dynamic = defaultGlSketchEffectRunner; __callArgument1936; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1933:Dynamic = state; __callArgument1933; }), (cast 'SketchEffect' : String), ({ final __callArgument1934:Dynamic = defaultGlSketchEffectRunner; __callArgument1934; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1941:Dynamic = state; __callArgument1941; }), (cast 'SketchEffect' : String), ({ final __callArgument1942:Dynamic = defaultGlSketchEffectRunner; __callArgument1942; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1939:Dynamic = state; __callArgument1939; }), (cast 'SketchEffect' : String), ({ final __callArgument1940:Dynamic = defaultGlSketchEffectRunner; __callArgument1940; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final SKETCH_FRAGMENT_SRC__glSketchEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_strength;\nuniform vec2 u_resolution;\nout vec4 o_color;\nfloat lum(vec2 uv) {\n  return dot(texture(u_texture0, uv).rgb, vec3(0.2126, 0.7152, 0.0722));\n}\nvoid main() {\n  vec2 texel = 1.0 / u_resolution;\n  float tl = lum(v_texCoord + texel * vec2(-1.0, -1.0));\n  float t = lum(v_texCoord + texel * vec2(0.0, -1.0));\n  float tr = lum(v_texCoord + texel * vec2(1.0, -1.0));\n  float l = lum(v_texCoord + texel * vec2(-1.0, 0.0));\n  float rr = lum(v_texCoord + texel * vec2(1.0, 0.0));\n  float bl = lum(v_texCoord + texel * vec2(-1.0, 1.0));\n  float b = lum(v_texCoord + texel * vec2(0.0, 1.0));\n  float br = lum(v_texCoord + texel * vec2(1.0, 1.0));\n  float gx = -tl - 2.0 * l - bl + tr + 2.0 * rr + br;\n  float gy = -tl - 2.0 * t - tr + bl + 2.0 * b + br;\n  float edge = sqrt(gx * gx + gy * gy);\n  float pencil = clamp(1.0 - edge * u_strength, 0.0, 1.0);\n  float a = texture(u_texture0, v_texCoord).a;\n  o_color = vec4(vec3(pencil), a);\n}';
@@ -2760,8 +2780,8 @@ class _EffectsGl {
     var threshold:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     threshold = _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.1);
-    program = (cast getGlEffectProgram(({ final __callArgument1937:Dynamic = state; __callArgument1937; }), (cast 'antialiasing.smaa' : String), (cast _EffectsGl.SMAA_FRAGMENT_SRC__glSmaaEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1939:Dynamic = state; __callArgument1939; }), ({ final __callArgument1940:Dynamic = program; __callArgument1940; }), ({ final __callArgument1941:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1941; }), ({ final __callArgument1942:Dynamic = dest; __callArgument1942; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument1943:Dynamic = state; __callArgument1943; }), (cast 'antialiasing.smaa' : String), (cast _EffectsGl.SMAA_FRAGMENT_SRC__glSmaaEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1945:Dynamic = state; __callArgument1945; }), ({ final __callArgument1946:Dynamic = program; __callArgument1946; }), ({ final __callArgument1947:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1947; }), ({ final __callArgument1948:Dynamic = dest; __callArgument1948; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform2f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), source.width, source.height);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_threshold'), threshold);
     } : Dynamic));
@@ -2772,7 +2792,7 @@ class _EffectsGl {
   });
 
   public static function registerGlSmaaEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1949:Dynamic = state; __callArgument1949; }), (cast 'SmaaEffect' : String), ({ final __callArgument1950:Dynamic = defaultGlSmaaEffectRunner; __callArgument1950; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1947:Dynamic = state; __callArgument1947; }), (cast 'SmaaEffect' : String), ({ final __callArgument1948:Dynamic = defaultGlSmaaEffectRunner; __callArgument1948; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1955:Dynamic = state; __callArgument1955; }), (cast 'SmaaEffect' : String), ({ final __callArgument1956:Dynamic = defaultGlSmaaEffectRunner; __callArgument1956; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1953:Dynamic = state; __callArgument1953; }), (cast 'SmaaEffect' : String), ({ final __callArgument1954:Dynamic = defaultGlSmaaEffectRunner; __callArgument1954; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final SMAA_FRAGMENT_SRC__glSmaaEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform vec2 u_resolution;\nuniform float u_threshold;\nout vec4 o_color;\nfloat luma(vec3 c) {\n  return dot(c, vec3(0.299, 0.587, 0.114));\n}\nvoid main() {\n  vec2 texel = 1.0 / u_resolution;\n  vec4 center = texture(u_texture0, v_texCoord);\n  float lumaC = luma(center.rgb);\n  float lumaL = luma(texture(u_texture0, v_texCoord + vec2(-1.0, 0.0) * texel).rgb);\n  float lumaR = luma(texture(u_texture0, v_texCoord + vec2(1.0, 0.0) * texel).rgb);\n  float lumaT = luma(texture(u_texture0, v_texCoord + vec2(0.0, -1.0) * texel).rgb);\n  float lumaB = luma(texture(u_texture0, v_texCoord + vec2(0.0, 1.0) * texel).rgb);\n  float edge = max(abs(lumaC - lumaL), max(abs(lumaC - lumaR), max(abs(lumaC - lumaT), abs(lumaC - lumaB))));\n  if (edge < u_threshold) {\n    o_color = center;\n    return;\n  }\n  vec3 blurred = (\n    texture(u_texture0, v_texCoord + vec2(-1.0, 0.0) * texel).rgb +\n    texture(u_texture0, v_texCoord + vec2(1.0, 0.0) * texel).rgb +\n    texture(u_texture0, v_texCoord + vec2(0.0, -1.0) * texel).rgb +\n    texture(u_texture0, v_texCoord + vec2(0.0, 1.0) * texel).rgb +\n    center.rgb) / 5.0;\n  o_color = vec4(blurred, center.a);\n}';
@@ -2785,8 +2805,8 @@ class _EffectsGl {
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     radius = _Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 1.0);
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
-    program = (cast getGlEffectProgram(({ final __callArgument1951:Dynamic = state; __callArgument1951; }), (cast 'atmospheric.ssao' : String), (cast _EffectsGl.SSAO_FRAGMENT_SRC__glSsaoEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1953:Dynamic = state; __callArgument1953; }), ({ final __callArgument1954:Dynamic = program; __callArgument1954; }), ({ final __callArgument1955:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1955; }), ({ final __callArgument1956:Dynamic = dest; __callArgument1956; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument1957:Dynamic = state; __callArgument1957; }), (cast 'atmospheric.ssao' : String), (cast _EffectsGl.SSAO_FRAGMENT_SRC__glSsaoEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1959:Dynamic = state; __callArgument1959; }), ({ final __callArgument1960:Dynamic = program; __callArgument1960; }), ({ final __callArgument1961:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1961; }), ({ final __callArgument1962:Dynamic = dest; __callArgument1962; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform2f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), source.width, source.height);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_radius'), radius);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
@@ -2798,7 +2818,7 @@ class _EffectsGl {
   });
 
   public static function registerGlSsaoEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1963:Dynamic = state; __callArgument1963; }), (cast 'SsaoEffect' : String), ({ final __callArgument1964:Dynamic = defaultGlSsaoEffectRunner; __callArgument1964; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1961:Dynamic = state; __callArgument1961; }), (cast 'SsaoEffect' : String), ({ final __callArgument1962:Dynamic = defaultGlSsaoEffectRunner; __callArgument1962; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1969:Dynamic = state; __callArgument1969; }), (cast 'SsaoEffect' : String), ({ final __callArgument1970:Dynamic = defaultGlSsaoEffectRunner; __callArgument1970; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1967:Dynamic = state; __callArgument1967; }), (cast 'SsaoEffect' : String), ({ final __callArgument1968:Dynamic = defaultGlSsaoEffectRunner; __callArgument1968; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final SSAO_FRAGMENT_SRC__glSsaoEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform vec2 u_resolution;\nuniform float u_radius;\nuniform float u_intensity;\nout vec4 o_color;\nfloat luma(vec3 c) {\n  return dot(c, vec3(0.299, 0.587, 0.114));\n}\nvoid main() {\n  vec2 texel = (1.0 / u_resolution) * max(u_radius, 1.0);\n  vec4 center = texture(u_texture0, v_texCoord);\n  float lc = luma(center.rgb);\n  float variation = 0.0;\n  variation += abs(lc - luma(texture(u_texture0, v_texCoord + vec2(-1.0, 0.0) * texel).rgb));\n  variation += abs(lc - luma(texture(u_texture0, v_texCoord + vec2(1.0, 0.0) * texel).rgb));\n  variation += abs(lc - luma(texture(u_texture0, v_texCoord + vec2(0.0, -1.0) * texel).rgb));\n  variation += abs(lc - luma(texture(u_texture0, v_texCoord + vec2(0.0, 1.0) * texel).rgb));\n  variation *= 0.25;\n  float occlusion = clamp(variation * u_intensity, 0.0, 1.0);\n  o_color = vec4(center.rgb * (1.0 - occlusion), center.a);\n}';
@@ -2813,8 +2833,8 @@ class _EffectsGl {
     center = _Runtime.coalesce(effect.center, function():Dynamic return cast 0.5);
     width = _Runtime.coalesce(effect.width, function():Dynamic return cast 0.3);
     blur = _Runtime.coalesce(effect.blur, function():Dynamic return cast 4.0);
-    program = (cast getGlEffectProgram(({ final __callArgument1965:Dynamic = state; __callArgument1965; }), (cast 'lens.tiltShift' : String), (cast _EffectsGl.TILT_SHIFT_FRAGMENT_SRC__glTiltShiftEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1967:Dynamic = state; __callArgument1967; }), ({ final __callArgument1968:Dynamic = program; __callArgument1968; }), ({ final __callArgument1969:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1969; }), ({ final __callArgument1970:Dynamic = dest; __callArgument1970; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument1971:Dynamic = state; __callArgument1971; }), (cast 'lens.tiltShift' : String), (cast _EffectsGl.TILT_SHIFT_FRAGMENT_SRC__glTiltShiftEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1973:Dynamic = state; __callArgument1973; }), ({ final __callArgument1974:Dynamic = program; __callArgument1974; }), ({ final __callArgument1975:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1975; }), ({ final __callArgument1976:Dynamic = dest; __callArgument1976; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_center'), center);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_width'), width);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_blur'), blur);
@@ -2827,7 +2847,7 @@ class _EffectsGl {
   });
 
   public static function registerGlTiltShiftEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1977:Dynamic = state; __callArgument1977; }), (cast 'TiltShiftEffect' : String), ({ final __callArgument1978:Dynamic = defaultGlTiltShiftEffectRunner; __callArgument1978; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1975:Dynamic = state; __callArgument1975; }), (cast 'TiltShiftEffect' : String), ({ final __callArgument1976:Dynamic = defaultGlTiltShiftEffectRunner; __callArgument1976; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1983:Dynamic = state; __callArgument1983; }), (cast 'TiltShiftEffect' : String), ({ final __callArgument1984:Dynamic = defaultGlTiltShiftEffectRunner; __callArgument1984; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1981:Dynamic = state; __callArgument1981; }), (cast 'TiltShiftEffect' : String), ({ final __callArgument1982:Dynamic = defaultGlTiltShiftEffectRunner; __callArgument1982; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final TILT_SHIFT_FRAGMENT_SRC__glTiltShiftEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_center;\nuniform float u_width;\nuniform float u_blur;\nuniform vec2 u_resolution;\nout vec4 o_color;\nvoid main() {\n  vec2 texel = 1.0 / u_resolution;\n  // The focus band sits at u_center measured DOWN the image, so the row is taken from the far edge on\n  // a bottom-left-origin target. At a centred band the two are indistinguishable — abs is symmetric\n  // about 0.5 — which is why an off-centre band is the only way to see this go wrong.\n  float dist = abs((1.0 - v_texCoord.y) - u_center);\n  float edge = u_width * 0.5;\n  float amount = smoothstep(edge, edge + u_width, dist);\n  float radius = amount * u_blur;\n  vec4 sum = vec4(0.0);\n  float total = 0.0;\n  for (int i = -3; i <= 3; i++) {\n    vec2 offset = vec2(0.0, float(i)) * radius * texel;\n    sum += texture(u_texture0, v_texCoord + offset);\n    total += 1.0;\n  }\n  o_color = sum / total;\n}';
@@ -2840,8 +2860,8 @@ class _EffectsGl {
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     operator_ = _Runtime.coalesce(_Runtime.field(effect, 'operator'), function():Dynamic return cast 'aces');
     exposure = _Runtime.coalesce(_Runtime.field(effect, 'exposure'), function():Dynamic return cast 1.0);
-    program = (cast getGlEffectProgram(({ final __callArgument1979:Dynamic = state; __callArgument1979; }), (cast 'toneMap.' + Std.string(operator_) + '' : String), (cast (cast _EffectsGl.buildToneMapFragment__glToneMapEffect((cast operator_ : String)) : String) : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1981:Dynamic = state; __callArgument1981; }), ({ final __callArgument1982:Dynamic = program; __callArgument1982; }), ({ final __callArgument1983:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1983; }), ({ final __callArgument1984:Dynamic = dest; __callArgument1984; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument1985:Dynamic = state; __callArgument1985; }), (cast 'toneMap.' + Std.string(operator_) + '' : String), (cast (cast _EffectsGl.buildToneMapFragment__glToneMapEffect((cast operator_ : String)) : String) : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument1987:Dynamic = state; __callArgument1987; }), ({ final __callArgument1988:Dynamic = program; __callArgument1988; }), ({ final __callArgument1989:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1989; }), ({ final __callArgument1990:Dynamic = dest; __callArgument1990; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_exposure'), exposure);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_white'), _Runtime.coalesce(_Runtime.field(effect, 'white'), function():Dynamic return cast 1.0));
     } : Dynamic));
@@ -2852,7 +2872,7 @@ class _EffectsGl {
   });
 
   public static function registerGlToneMapEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1991:Dynamic = state; __callArgument1991; }), (cast 'ToneMapEffect' : String), ({ final __callArgument1992:Dynamic = defaultGlToneMapEffectRunner; __callArgument1992; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1989:Dynamic = state; __callArgument1989; }), (cast 'ToneMapEffect' : String), ({ final __callArgument1990:Dynamic = defaultGlToneMapEffectRunner; __callArgument1990; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument1997:Dynamic = state; __callArgument1997; }), (cast 'ToneMapEffect' : String), ({ final __callArgument1998:Dynamic = defaultGlToneMapEffectRunner; __callArgument1998; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument1995:Dynamic = state; __callArgument1995; }), (cast 'ToneMapEffect' : String), ({ final __callArgument1996:Dynamic = defaultGlToneMapEffectRunner; __callArgument1996; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static function buildToneMapFragment__glToneMapEffect(operator_:String):String {
@@ -2886,8 +2906,8 @@ class _EffectsGl {
     g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255) / 255.0);
     b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255) / 255.0);
     a = ((_Runtime.toInt32(color) & 255) / 255.0);
-    program = (cast getGlEffectProgram(({ final __callArgument1993:Dynamic = state; __callArgument1993; }), (cast 'lens.vignette' : String), (cast _EffectsGl.VIGNETTE_FRAGMENT_SRC__glVignetteEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1995:Dynamic = state; __callArgument1995; }), ({ final __callArgument1996:Dynamic = program; __callArgument1996; }), ({ final __callArgument1997:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument1997; }), ({ final __callArgument1998:Dynamic = dest; __callArgument1998; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument1999:Dynamic = state; __callArgument1999; }), (cast 'lens.vignette' : String), (cast _EffectsGl.VIGNETTE_FRAGMENT_SRC__glVignetteEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument2001:Dynamic = state; __callArgument2001; }), ({ final __callArgument2002:Dynamic = program; __callArgument2002; }), ({ final __callArgument2003:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument2003; }), ({ final __callArgument2004:Dynamic = dest; __callArgument2004; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_radius'), radius);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_softness'), softness);
@@ -2900,7 +2920,7 @@ class _EffectsGl {
   });
 
   public static function registerGlVignetteEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument2005:Dynamic = state; __callArgument2005; }), (cast 'VignetteEffect' : String), ({ final __callArgument2006:Dynamic = defaultGlVignetteEffectRunner; __callArgument2006; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument2003:Dynamic = state; __callArgument2003; }), (cast 'VignetteEffect' : String), ({ final __callArgument2004:Dynamic = defaultGlVignetteEffectRunner; __callArgument2004; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument2011:Dynamic = state; __callArgument2011; }), (cast 'VignetteEffect' : String), ({ final __callArgument2012:Dynamic = defaultGlVignetteEffectRunner; __callArgument2012; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument2009:Dynamic = state; __callArgument2009; }), (cast 'VignetteEffect' : String), ({ final __callArgument2010:Dynamic = defaultGlVignetteEffectRunner; __callArgument2010; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final VIGNETTE_FRAGMENT_SRC__glVignetteEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_intensity;\nuniform float u_radius;\nuniform float u_softness;\nuniform vec4 u_color;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  vec2 centered = v_texCoord - 0.5;\n  float dist = length(centered) * 1.41421356;\n  float vig = smoothstep(u_radius, u_radius - u_softness, dist);\n  float darken = (1.0 - vig) * u_intensity * u_color.a;\n  o_color = vec4(mix(c.rgb, u_color.rgb, darken), c.a);\n}';
@@ -2913,8 +2933,8 @@ class _EffectsGl {
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     temperature = _Runtime.coalesce(_Runtime.field(effect, 'temperature'), function():Dynamic return cast 0.0);
     tint = _Runtime.coalesce(_Runtime.field(effect, 'tint'), function():Dynamic return cast 0.0);
-    program = (cast getGlEffectProgram(({ final __callArgument2007:Dynamic = state; __callArgument2007; }), (cast 'colorGrade.whiteBalance' : String), (cast _EffectsGl.WHITE_BALANCE_FRAGMENT_SRC__glWhiteBalanceEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument2009:Dynamic = state; __callArgument2009; }), ({ final __callArgument2010:Dynamic = program; __callArgument2010; }), ({ final __callArgument2011:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument2011; }), ({ final __callArgument2012:Dynamic = dest; __callArgument2012; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument2013:Dynamic = state; __callArgument2013; }), (cast 'colorGrade.whiteBalance' : String), (cast _EffectsGl.WHITE_BALANCE_FRAGMENT_SRC__glWhiteBalanceEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument2015:Dynamic = state; __callArgument2015; }), ({ final __callArgument2016:Dynamic = program; __callArgument2016; }), ({ final __callArgument2017:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument2017; }), ({ final __callArgument2018:Dynamic = dest; __callArgument2018; }), (cast function(gl:GlContext, p:GlFullscreenProgram):Void {
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_temperature'), temperature);
       flight._internal.backend.WebGl2Backend.uniform1f(gl, flight._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_tint'), tint);
     } : Dynamic));
@@ -2925,7 +2945,7 @@ class _EffectsGl {
   });
 
   public static function registerGlWhiteBalanceEffect(state:GlRenderState):Void {
-    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument2019:Dynamic = state; __callArgument2019; }), (cast 'WhiteBalanceEffect' : String), ({ final __callArgument2020:Dynamic = defaultGlWhiteBalanceEffectRunner; __callArgument2020; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument2017:Dynamic = state; __callArgument2017; }), (cast 'WhiteBalanceEffect' : String), ({ final __callArgument2018:Dynamic = defaultGlWhiteBalanceEffectRunner; __callArgument2018; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument2025:Dynamic = state; __callArgument2025; }), (cast 'WhiteBalanceEffect' : String), ({ final __callArgument2026:Dynamic = defaultGlWhiteBalanceEffectRunner; __callArgument2026; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument2023:Dynamic = state; __callArgument2023; }), (cast 'WhiteBalanceEffect' : String), ({ final __callArgument2024:Dynamic = defaultGlWhiteBalanceEffectRunner; __callArgument2024; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final WHITE_BALANCE_FRAGMENT_SRC__glWhiteBalanceEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_temperature;\nuniform float u_tint;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  vec3 rgb = c.rgb;\n  rgb.r += u_temperature * 0.5;\n  rgb.b -= u_temperature * 0.5;\n  rgb.g += u_tint * 0.5;\n  o_color = vec4(clamp(rgb, 0.0, 1.0), c.a);\n}';

@@ -4,4 +4,26 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:allow(flight._HostTauri)
+@:keep
+@:structInit
+class TrayLifecycleBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var create:TrayIcon->TrayIconOptions->flight._internal._Promise<TrayCreateProviderResult>;
+  public var destroy:TrayIcon->flight._internal._Promise<TrayDestroyProviderResult>;
+  public var isDestroyed:TrayIcon->Bool;
+  public var list:Void->Array<TrayIcon>;
+
+  private function new(create:TrayIcon->TrayIconOptions->flight._internal._Promise<TrayCreateProviderResult>, destroy:TrayIcon->flight._internal._Promise<TrayDestroyProviderResult>, isDestroyed:TrayIcon->Bool, list:Void->Array<TrayIcon>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.create = create;
+    this.destroy = destroy;
+    this.isDestroyed = isDestroyed;
+    this.list = list;
+  }
+}
+#else
 typedef TrayLifecycleBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var create:TrayIcon->TrayIconOptions->flight._internal._Promise<TrayCreateProviderResult>; var destroy:TrayIcon->flight._internal._Promise<TrayDestroyProviderResult>; var isDestroyed:TrayIcon->Bool; var list:Void->Array<TrayIcon>; };
+#end

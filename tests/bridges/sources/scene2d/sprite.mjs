@@ -12,4 +12,6 @@ export const createSpriteData = api.createSpriteData;
 export const createSpriteRendererData = api.createSpriteRendererData;
 export const createSpriteRuntime = api.createSpriteRuntime;
 export const getSpriteRuntime = api.getSpriteRuntime;
+export const initializeSpriteData = api.initializeSpriteData;
+export const initializeSpriteRendererData = api.initializeSpriteRendererData;
 export const isSpriteRendererDirty = api.isSpriteRendererDirty;

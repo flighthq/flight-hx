@@ -4,4 +4,32 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics2DGearJoint = { var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var breakForce:Float; var breakTorque:Float; var coordinateA:Physics2DGearCoordinateKind; var coordinateB:Physics2DGearCoordinateKind; var axisAX:Float; var axisAY:Float; var axisBX:Float; var axisBY:Float; var ratio:Float; var constant:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Physics2D)
+@:keep
+@:structInit
+class Physics2DGearJoint extends flight.types.Physics2DJoint {
+  public var coordinateA:Physics2DGearCoordinateKind;
+  public var coordinateB:Physics2DGearCoordinateKind;
+  public var axisAX:Float;
+  public var axisAY:Float;
+  public var axisBX:Float;
+  public var axisBY:Float;
+  public var ratio:Float;
+  public var constant:Float;
+
+  private function new(kind:Physics2DJointKind, bodyA:Float, bodyB:Float, localAnchorAX:Float, localAnchorAY:Float, localAnchorBX:Float, localAnchorBY:Float, collideConnected:Bool, impulse0:Float, impulse1:Float, impulse2:Float, rAX:Float, rAY:Float, rBX:Float, rBY:Float, breakForce:Float, breakTorque:Float, coordinateA:Physics2DGearCoordinateKind, coordinateB:Physics2DGearCoordinateKind, axisAX:Float, axisAY:Float, axisBX:Float, axisBY:Float, ratio:Float, constant:Float):Void {
+    super(kind, bodyA, bodyB, localAnchorAX, localAnchorAY, localAnchorBX, localAnchorBY, collideConnected, impulse0, impulse1, impulse2, rAX, rAY, rBX, rBY, breakForce, breakTorque);
+    this.coordinateA = coordinateA;
+    this.coordinateB = coordinateB;
+    this.axisAX = axisAX;
+    this.axisAY = axisAY;
+    this.axisBX = axisBX;
+    this.axisBY = axisBY;
+    this.ratio = ratio;
+    this.constant = constant;
+  }
+}
+#else
+typedef Physics2DGearJoint = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var breakForce:Float; var breakTorque:Float; var coordinateA:Physics2DGearCoordinateKind; var coordinateB:Physics2DGearCoordinateKind; var axisAX:Float; var axisAY:Float; var axisBX:Float; var axisBY:Float; var ratio:Float; var constant:Float; };
+#end

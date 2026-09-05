@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createSsaoEffect = api.createSsaoEffect;
+export const initializeSsaoEffect = api.initializeSsaoEffect;

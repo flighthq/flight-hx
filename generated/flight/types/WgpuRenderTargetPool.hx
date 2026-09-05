@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuRenderTargetPool = { var free:Array<WgpuRenderTarget>; };
+#if !flight_struct_typedef
+@:allow(flight._RenderWgpu)
+@:keep
+@:structInit
+class WgpuRenderTargetPool {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var free:Array<WgpuRenderTarget>;
+
+  private function new(free:Array<WgpuRenderTarget>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.free = free;
+  }
+}
+#else
+typedef WgpuRenderTargetPool = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var free:Array<WgpuRenderTarget>; };
+#end

@@ -4,4 +4,25 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CanvasRenderEffectPipeline = { var options:RenderEffectPipelineOptions; var sceneTarget:Null<CanvasRenderTarget>; var pool:CanvasRenderTargetPool; var lutCache:ColorLutCache; };
+#if !flight_struct_typedef
+@:allow(flight._EffectsCanvas)
+@:keep
+@:structInit
+class CanvasRenderEffectPipeline {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var options:RenderEffectPipelineOptions;
+  public var sceneTarget:Null<CanvasRenderTarget>;
+  public var pool:CanvasRenderTargetPool;
+  public var lutCache:ColorLutCache;
+
+  private function new(options:RenderEffectPipelineOptions, sceneTarget:Null<CanvasRenderTarget>, pool:CanvasRenderTargetPool, lutCache:ColorLutCache):Void {
+    this.__symbol__EntityRuntime = null;
+    this.options = options;
+    this.sceneTarget = sceneTarget;
+    this.pool = pool;
+    this.lutCache = lutCache;
+  }
+}
+#else
+typedef CanvasRenderEffectPipeline = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var options:RenderEffectPipelineOptions; var sceneTarget:Null<CanvasRenderTarget>; var pool:CanvasRenderTargetPool; var lutCache:ColorLutCache; };
+#end

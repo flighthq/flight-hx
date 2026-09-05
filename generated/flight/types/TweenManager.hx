@@ -4,4 +4,23 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TweenManager = { var __brand:String; var defaultEase:EasingFunction; var tweens:flight._internal._Map<flight._internal._Object, Array<Tween<flight._internal._Any>>>; };
+#if !flight_struct_typedef
+@:allow(flight._Tween)
+@:keep
+@:structInit
+class TweenManager {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var __brand:String;
+  public var defaultEase:EasingFunction;
+  public var tweens:flight._internal._Map<flight._internal._Object, Array<Tween<flight._internal._Any>>>;
+
+  private function new(__brand:String, defaultEase:EasingFunction, tweens:flight._internal._Map<flight._internal._Object, Array<Tween<flight._internal._Any>>>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.__brand = __brand;
+    this.defaultEase = defaultEase;
+    this.tweens = tweens;
+  }
+}
+#else
+typedef TweenManager = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var __brand:String; var defaultEase:EasingFunction; var tweens:flight._internal._Map<flight._internal._Object, Array<Tween<flight._internal._Any>>>; };
+#end

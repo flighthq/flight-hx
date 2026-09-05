@@ -17,3 +17,6 @@ export const detachMidiPortStateSubscription = api.detachMidiPortStateSubscripti
 export const disposeMidiAccessStateSubscription = api.disposeMidiAccessStateSubscription;
 export const disposeMidiInputMessageSubscription = api.disposeMidiInputMessageSubscription;
 export const disposeMidiPortStateSubscription = api.disposeMidiPortStateSubscription;
+export const initializeMidiAccessStateSubscription = api.initializeMidiAccessStateSubscription;
+export const initializeMidiInputMessageSubscription = api.initializeMidiInputMessageSubscription;
+export const initializeMidiPortStateSubscription = api.initializeMidiPortStateSubscription;

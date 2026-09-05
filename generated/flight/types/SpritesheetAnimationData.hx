@@ -4,4 +4,33 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SpritesheetAnimationData = { var direction:SpritesheetAnimationDirection; var frameDuration:Float; var frameDurations:Null<Array<Float>>; var frameNames:Array<String>; var repeatCount:Float; var name:String; var originX:Float; var originY:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Spritesheet)
+@:keep
+@:structInit
+class SpritesheetAnimationData {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var direction:SpritesheetAnimationDirection;
+  public var frameDuration:Float;
+  public var frameDurations:Null<Array<Float>>;
+  public var frameNames:Array<String>;
+  public var repeatCount:Float;
+  public var name:String;
+  public var originX:Float;
+  public var originY:Float;
+
+  private function new(direction:SpritesheetAnimationDirection, frameDuration:Float, frameDurations:Null<Array<Float>>, frameNames:Array<String>, repeatCount:Float, name:String, originX:Float, originY:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.direction = direction;
+    this.frameDuration = frameDuration;
+    this.frameDurations = frameDurations;
+    this.frameNames = frameNames;
+    this.repeatCount = repeatCount;
+    this.name = name;
+    this.originX = originX;
+    this.originY = originY;
+  }
+}
+#else
+typedef SpritesheetAnimationData = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var direction:SpritesheetAnimationDirection; var frameDuration:Float; var frameDurations:Null<Array<Float>>; var frameNames:Array<String>; var repeatCount:Float; var name:String; var originX:Float; var originY:Float; };
+#end

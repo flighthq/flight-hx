@@ -10,4 +10,5 @@ export const createHtmlView = api.createHtmlView;
 export const createHtmlViewData = api.createHtmlViewData;
 export const createHtmlViewRuntime = api.createHtmlViewRuntime;
 export const getHtmlViewRuntime = api.getHtmlViewRuntime;
+export const initializeHtmlViewData = api.initializeHtmlViewData;
 export const setHtmlViewSize = api.setHtmlViewSize;

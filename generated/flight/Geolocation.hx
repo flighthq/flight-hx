@@ -4,17 +4,17 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Geolocation as Facade_Geolocation_flight__Geolocation;
-import flight.types.BackendExplanation;
 import flight.types.GeoPosition;
 import flight.types.GeoPositionResult;
 import flight.types.GeolocationAccessOutcome;
 import flight.types.GeolocationErrorReason;
 import flight.types.GeolocationRequestOptions;
+import flight.types.HasSystemGeolocation;
 import flight.types.Host;
 
 class Geolocation {
-  public static function clearGeolocationWatch(id:Float):Void {
-    Facade_Geolocation_flight__Geolocation.clearGeolocationWatch(id);
+  public static function clearGeolocationWatch(host:HasSystemGeolocation, id:Float):Void {
+    Facade_Geolocation_flight__Geolocation.clearGeolocationWatch(host, id);
   }
 
   public static function createGeoPosition():GeoPosition {
@@ -22,23 +22,18 @@ class Geolocation {
     return cast null;
   }
 
-  public static function explainGeolocationBackend():BackendExplanation {
-    return cast Facade_Geolocation_flight__Geolocation.explainGeolocationBackend();
+  public static function getCurrentGeoPosition(host:HasSystemGeolocation, ?options:GeolocationRequestOptions):flight._internal._Promise<Null<GeoPosition>> {
+    return cast Facade_Geolocation_flight__Geolocation.getCurrentGeoPosition(host, options);
     return cast null;
   }
 
-  public static function getCurrentGeoPosition(?options:GeolocationRequestOptions):flight._internal._Promise<Null<GeoPosition>> {
-    return cast Facade_Geolocation_flight__Geolocation.getCurrentGeoPosition(options);
+  public static function getCurrentGeoPositionResult(host:HasSystemGeolocation, ?options:GeolocationRequestOptions):flight._internal._Promise<GeoPositionResult> {
+    return cast Facade_Geolocation_flight__Geolocation.getCurrentGeoPositionResult(host, options);
     return cast null;
   }
 
-  public static function getCurrentGeoPositionResult(?options:GeolocationRequestOptions):flight._internal._Promise<GeoPositionResult> {
-    return cast Facade_Geolocation_flight__Geolocation.getCurrentGeoPositionResult(options);
-    return cast null;
-  }
-
-  public static function isGeolocationAvailable():Bool {
-    return cast Facade_Geolocation_flight__Geolocation.isGeolocationAvailable();
+  public static function isGeolocationAvailable(host:HasSystemGeolocation):Bool {
+    return cast Facade_Geolocation_flight__Geolocation.isGeolocationAvailable(host);
     return cast null;
   }
 
@@ -47,8 +42,8 @@ class Geolocation {
     return cast null;
   }
 
-  public static function watchGeolocationPosition(handler:GeoPosition->Void, ?options:GeolocationRequestOptions, ?onError:GeolocationErrorReason->Void):Float {
-    return cast Facade_Geolocation_flight__Geolocation.watchGeolocationPosition(handler, options, onError);
+  public static function watchGeolocationPosition(host:HasSystemGeolocation, handler:GeoPosition->Void, ?options:GeolocationRequestOptions, ?onError:GeolocationErrorReason->Void):Float {
+    return cast Facade_Geolocation_flight__Geolocation.watchGeolocationPosition(host, handler, options, onError);
     return cast null;
   }
 }

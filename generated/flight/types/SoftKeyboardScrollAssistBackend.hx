@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostCapacitor)
+@:keep
+@:structInit
+class SoftKeyboardScrollAssistBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var setScrollAssistEnabled:Bool->flight._internal._Promise<SoftKeyboardSetterResult>;
+
+  private function new(setScrollAssistEnabled:Bool->flight._internal._Promise<SoftKeyboardSetterResult>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.setScrollAssistEnabled = setScrollAssistEnabled;
+  }
+}
+#else
 typedef SoftKeyboardScrollAssistBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var setScrollAssistEnabled:Bool->flight._internal._Promise<SoftKeyboardSetterResult>; };
+#end

@@ -4,3 +4,11 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './sensors.mjs';
+export { initializeAmbientLightReading } from './sensors.mjs';
+export { initializeMotionReading } from './sensors.mjs';
+export { initializeOrientationReading } from './sensors.mjs';
+export { initializePressureReading } from './sensors.mjs';
+export { initializeProximityReading } from './sensors.mjs';
+export { initializeQuaternionReading } from './sensors.mjs';
+export { initializeRotationRateReading } from './sensors.mjs';
+export { initializeSensors } from './sensors.mjs';

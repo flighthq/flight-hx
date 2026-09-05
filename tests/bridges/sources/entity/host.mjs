@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createHost = api.createHost;
+export const initializeHost = api.initializeHost;

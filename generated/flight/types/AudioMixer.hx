@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AudioMixer = { var masterGain:Float; var masterMuted:Bool; };
+#if !flight_struct_typedef
+@:allow(flight._Media)
+@:keep
+@:structInit
+class AudioMixer {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var masterGain:Float;
+  public var masterMuted:Bool;
+
+  private function new(masterGain:Float, masterMuted:Bool):Void {
+    this.__symbol__EntityRuntime = null;
+    this.masterGain = masterGain;
+    this.masterMuted = masterMuted;
+  }
+}
+#else
+typedef AudioMixer = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var masterGain:Float; var masterMuted:Bool; };
+#end

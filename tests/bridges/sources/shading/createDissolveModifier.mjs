@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createDissolveModifier = api.createDissolveModifier;
+export const initializeDissolveModifier = api.initializeDissolveModifier;

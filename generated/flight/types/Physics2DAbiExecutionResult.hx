@@ -4,4 +4,25 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics2DAbiExecutionResult = { var status:Physics2DAbiExecutionStatus; var commandIndex:Float; var byteOffset:Float; var commandKind:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Physics2DAbi)
+@:keep
+@:structInit
+class Physics2DAbiExecutionResult {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var status:Physics2DAbiExecutionStatus;
+  public var commandIndex:Float;
+  public var byteOffset:Float;
+  public var commandKind:Float;
+
+  private function new(status:Physics2DAbiExecutionStatus, commandIndex:Float, byteOffset:Float, commandKind:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.status = status;
+    this.commandIndex = commandIndex;
+    this.byteOffset = byteOffset;
+    this.commandKind = commandKind;
+  }
+}
+#else
+typedef Physics2DAbiExecutionResult = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var status:Physics2DAbiExecutionStatus; var commandIndex:Float; var byteOffset:Float; var commandKind:Float; };
+#end

@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TextShaperSignals = { var onBackendChanged:Signal<Null<TextShaperBackend>->Void>; };
+#if !flight_struct_typedef
+@:allow(flight._TextShaper)
+@:keep
+@:structInit
+class TextShaperSignals {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onBackendChanged:Signal<Null<TextShaperBackend>->Void>;
+
+  private function new(onBackendChanged:Signal<Null<TextShaperBackend>->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onBackendChanged = onBackendChanged;
+  }
+}
+#else
+typedef TextShaperSignals = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onBackendChanged:Signal<Null<TextShaperBackend>->Void>; };
+#end

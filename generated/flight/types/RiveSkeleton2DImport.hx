@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef RiveSkeleton2DImport = { var boneIndices:Array<Float>; var skeleton:Skeleton2D; };
+#if !flight_struct_typedef
+@:allow(flight._Scene2DFormats)
+@:keep
+@:structInit
+class RiveSkeleton2DImport {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var boneIndices:Array<Float>;
+  public var skeleton:Skeleton2D;
+
+  private function new(boneIndices:Array<Float>, skeleton:Skeleton2D):Void {
+    this.__symbol__EntityRuntime = null;
+    this.boneIndices = boneIndices;
+    this.skeleton = skeleton;
+  }
+}
+#else
+typedef RiveSkeleton2DImport = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var boneIndices:Array<Float>; var skeleton:Skeleton2D; };
+#end

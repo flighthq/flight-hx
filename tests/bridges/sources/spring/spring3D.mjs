@@ -7,6 +7,7 @@ __syncDependencies();
 
 export const applySpringImpulse3D = api.applySpringImpulse3D;
 export const createSpring3D = api.createSpring3D;
+export const initializeSpring3D = api.initializeSpring3D;
 export const isSpring3DSettled = api.isSpring3DSettled;
 export const resetSpring3D = api.resetSpring3D;
 export const updateSpring3D = api.updateSpring3D;

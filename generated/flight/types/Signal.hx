@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Signal<T> = { var data:Null<SignalData<T>>; var emit:T; };
+typedef Signal<T> = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var data:Null<SignalData<T>>; var emit:T; };

@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const createWebDeviceBackend = api.createWebDeviceBackend;
 export const enableWebSafeAreaInsets = api.enableWebSafeAreaInsets;
+export const initializeWebDeviceBackend = api.initializeWebDeviceBackend;
 export const webDeviceBackend = api.webDeviceBackend;

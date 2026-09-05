@@ -4,4 +4,30 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TilemapData = { var atlas:Null<TextureAtlas>; var columns:Float; var rows:Float; var tileHeight:Float; var tileWidth:Float; var tiles:flight._internal._Int16Array; var materialData:Null<Array<Null<MaterialData>>>; };
+#if !flight_struct_typedef
+@:allow(flight._Tilemap)
+@:keep
+@:structInit
+class TilemapData extends flight.types.Node2DData {
+  public var atlas:Null<TextureAtlas>;
+  public var columns:Float;
+  public var rows:Float;
+  public var tileHeight:Float;
+  public var tileWidth:Float;
+  public var tiles:flight._internal._Int16Array;
+  public var materialData:Null<Array<Null<MaterialData>>>;
+
+  private function new(atlas:Null<TextureAtlas>, columns:Float, rows:Float, tileHeight:Float, tileWidth:Float, tiles:flight._internal._Int16Array, materialData:Null<Array<Null<MaterialData>>>):Void {
+    super();
+    this.atlas = atlas;
+    this.columns = columns;
+    this.rows = rows;
+    this.tileHeight = tileHeight;
+    this.tileWidth = tileWidth;
+    this.tiles = tiles;
+    this.materialData = materialData;
+  }
+}
+#else
+typedef TilemapData = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var atlas:Null<TextureAtlas>; var columns:Float; var rows:Float; var tileHeight:Float; var tileWidth:Float; var tiles:flight._internal._Int16Array; var materialData:Null<Array<Null<MaterialData>>>; };
+#end

@@ -14,3 +14,4 @@ export const dispatchTextInputPointerDown = api.dispatchTextInputPointerDown;
 export const dispatchTextInputPointerMove = api.dispatchTextInputPointerMove;
 export const dispatchTextInputWheel = api.dispatchTextInputWheel;
 export const focusTextInput = api.focusTextInput;
+export const initializeTextInputManager = api.initializeTextInputManager;

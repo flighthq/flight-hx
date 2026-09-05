@@ -4,4 +4,25 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuEffectPipeline = { var pipeline:flight._internal.dom.GPURenderPipeline; var blendMode:WgpuEffectBlendMode; @:optional var compileForFormat:flight._internal.dom.GPUTextureFormat->flight._internal.dom.GPURenderPipeline; @:optional var variants:flight._internal._Map<flight._internal.dom.GPUTextureFormat, flight._internal.dom.GPURenderPipeline>; };
+#if !flight_struct_typedef
+@:allow(flight._EffectsWgpu)
+@:keep
+@:structInit
+class WgpuEffectPipeline {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var pipeline:flight._internal.dom.GPURenderPipeline;
+  public var blendMode:WgpuEffectBlendMode;
+  public var compileForFormat:Null<flight._internal.dom.GPUTextureFormat->flight._internal.dom.GPURenderPipeline>;
+  public var variants:Null<flight._internal._Map<flight._internal.dom.GPUTextureFormat, flight._internal.dom.GPURenderPipeline>>;
+
+  private function new(pipeline:flight._internal.dom.GPURenderPipeline, blendMode:WgpuEffectBlendMode, ?compileForFormat:Null<flight._internal.dom.GPUTextureFormat->flight._internal.dom.GPURenderPipeline>, ?variants:Null<flight._internal._Map<flight._internal.dom.GPUTextureFormat, flight._internal.dom.GPURenderPipeline>>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.pipeline = pipeline;
+    this.blendMode = blendMode;
+    this.compileForFormat = compileForFormat;
+    this.variants = variants;
+  }
+}
+#else
+typedef WgpuEffectPipeline = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var pipeline:flight._internal.dom.GPURenderPipeline; var blendMode:WgpuEffectBlendMode; @:optional var compileForFormat:Null<flight._internal.dom.GPUTextureFormat->flight._internal.dom.GPURenderPipeline>; @:optional var variants:Null<flight._internal._Map<flight._internal.dom.GPUTextureFormat, flight._internal.dom.GPURenderPipeline>>; };
+#end

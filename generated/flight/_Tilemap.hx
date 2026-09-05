@@ -4,11 +4,15 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight.Types.TilemapKind;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Scene2D.createNode2D;
 import flight._Scene2D.createNode2DRuntime;
 import flight._Scene2D.getNode2DRuntime;
 import flight._Signals.createSignal;
 import flight._Types.TilemapKind;
+import flight.types.EntityConstruction;
+import flight.types.EntityRuntime;
 import flight.types.MaterialData;
 import flight.types.MethodsOf;
 import flight.types.Node;
@@ -21,6 +25,7 @@ import flight.types.Tilemap;
 import flight.types.TilemapData;
 import flight.types.TilemapRuntime;
 import flight.types.TilemapSignals;
+import flight.types.TintMaterialData;
 import flight.types.Vector2Like;
 
 typedef TilemapWithSignals__tilemap = { @:optional var __tilemapSignalsSlot:TilemapSignals; };
@@ -63,18 +68,17 @@ class _Tilemap {
   }
 
   public static function createTilemap(?obj:PartialNode<Tilemap>):Tilemap {
-    return cast (cast createNode2D((cast TilemapKind : String), (cast obj : Dynamic), (cast createTilemapData : Dynamic), (cast function(__unused1:Dynamic):TilemapRuntime return createTilemapRuntime() : Dynamic), function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : Tilemap); }) #end)) : Tilemap);
+    return cast (cast createNode2D((cast TilemapKind : String), (cast obj : Dynamic), (cast createTilemapData : Dynamic), (cast function(__unused1:Dynamic):TilemapRuntime return createTilemapRuntime() : Dynamic), function():Dynamic return (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : Tilemap); }) #end)) : Tilemap);
     return cast null;
   }
 
   @:allow(flight)
   @:keep
-  private static function createTilemapData(?data:{ @:optional var atlas:Null<TextureAtlas>; @:optional var columns:Null<Float>; @:optional var rows:Null<Float>; @:optional var tileHeight:Null<Float>; @:optional var tileWidth:Null<Float>; @:optional var tiles:Null<flight._internal._Int16Array>; @:optional var materialData:Null<Array<Null<MaterialData>>>; }):TilemapData {
-    var columns:Float = cast _Runtime.UNDEFINED;
-    var rows:Float = cast _Runtime.UNDEFINED;
-    columns = _Runtime.coalesce(({ final __structural4 = data; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var columns:Null<Float>; }).columns; }), function():Dynamic return cast 0.0);
-    rows = _Runtime.coalesce(({ final __structural5 = data; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var rows:Null<Float>; }).rows; }), function():Dynamic return cast 0.0);
-    return cast { atlas: _Runtime.coalesce(({ final __structural6 = data; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var atlas:Null<TextureAtlas>; }).atlas; }), function():Dynamic return cast null), columns: columns, materialData: _Runtime.coalesce(({ final __structural7 = data; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var materialData:Null<Array<Null<flight._internal._Object>>>; }).materialData; }), function():Dynamic return cast null), rows: rows, tileHeight: _Runtime.coalesce(({ final __structural8 = data; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var tileHeight:Null<Float>; }).tileHeight; }), function():Dynamic return cast 0.0), tileWidth: _Runtime.coalesce(({ final __structural9 = data; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { @:optional var tileWidth:Null<Float>; }).tileWidth; }), function():Dynamic return cast 0.0), tiles: _Runtime.coalesce(({ final __structural10 = data; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { @:optional var tiles:Null<flight._internal._Int16Array>; }).tiles; }), function():Dynamic return cast _Runtime.fill(new flight._internal._Int16Array((columns * rows)), -1.0, 0, null, 1)) };
+  private static function createTilemapData(?data:{ @:optional var atlas:Null<TextureAtlas>; @:optional var columns:Null<Float>; @:optional var rows:Null<Float>; @:optional var tileHeight:Null<Float>; @:optional var tileWidth:Null<Float>; @:optional var tiles:Null<flight._internal._Int16Array>; @:optional var materialData:Null<Array<Null<MaterialData>>>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):TilemapData {
+    var out:EntityConstruction<TilemapData> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ atlas: cast _Runtime.UNDEFINED, columns: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, rows: cast _Runtime.UNDEFINED, tileHeight: cast _Runtime.UNDEFINED, tiles: cast _Runtime.UNDEFINED, tileWidth: cast _Runtime.UNDEFINED } : TilemapData); }) #end));
+    initializeTilemapData(({ final __callArgument4:Dynamic = out; __callArgument4; }), (cast data : Dynamic));
+    return cast out;
     return cast null;
   }
 
@@ -88,7 +92,10 @@ class _Tilemap {
   @:allow(flight)
   @:keep
   private static function createTilemapSignals():TilemapSignals {
-    return cast { onCleared: (cast createSignal() : Signal<Void->Void>), onTileChanged: (cast createSignal() : Signal<Float->Float->Float->Void>), onTilesChanged: (cast createSignal() : Signal<Float->Float->Float->Float->Void>) };
+    var out:EntityConstruction<TilemapSignals> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ onCleared: cast _Runtime.UNDEFINED, onTileChanged: cast _Runtime.UNDEFINED, onTilesChanged: cast _Runtime.UNDEFINED } : TilemapSignals); }) #end));
+    initializeTilemapSignals(({ final __callArgument6:Dynamic = out; __callArgument6; }));
+    return cast out;
     return cast null;
   }
 
@@ -123,8 +130,8 @@ class _Tilemap {
   public static function getTilemapColumnRowAtPoint(out:Vector2Like, source:Tilemap, x:Float, y:Float):Bool {
     var col:Float = cast _Runtime.UNDEFINED;
     var row:Float = cast _Runtime.UNDEFINED;
-    col = (cast getTilemapColumnAtX(({ final __callArgument11:Dynamic = source; __callArgument11; }), (cast x : Float)) : Float);
-    row = (cast getTilemapRowAtY(({ final __callArgument13:Dynamic = source; __callArgument13; }), (cast y : Float)) : Float);
+    col = (cast getTilemapColumnAtX(({ final __callArgument8:Dynamic = source; __callArgument8; }), (cast x : Float)) : Float);
+    row = (cast getTilemapRowAtY(({ final __callArgument10:Dynamic = source; __callArgument10; }), (cast y : Float)) : Float);
     if ((cast ((cast ((cast col : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast row : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }
     (out.x = cast (col : Float));
     (out.y = cast (row : Float));
@@ -152,7 +159,7 @@ class _Tilemap {
   @:allow(flight)
   @:keep
   private static function getTilemapRuntime(source:Tilemap):TilemapRuntime {
-    return cast (cast getNode2DRuntime(({ final __callArgument15:Dynamic = source; __callArgument15; })) : TilemapRuntime);
+    return cast (cast getNode2DRuntime(({ final __callArgument12:Dynamic = source; __callArgument12; })) : TilemapRuntime);
     return cast null;
   }
 
@@ -176,17 +183,17 @@ class _Tilemap {
   }
 
   public static function getTilemapTileAtPoint(source:Tilemap, point:Vector2Like):Float {
-    return cast (cast getTilemapTileAtPointXY(({ final __callArgument17:Dynamic = source; __callArgument17; }), (cast point.x : Float), (cast point.y : Float)) : Float);
+    return cast (cast getTilemapTileAtPointXY(({ final __callArgument14:Dynamic = source; __callArgument14; }), (cast point.x : Float), (cast point.y : Float)) : Float);
     return cast null;
   }
 
   public static function getTilemapTileAtPointXY(source:Tilemap, x:Float, y:Float):Float {
     var col:Float = cast _Runtime.UNDEFINED;
     var row:Float = cast _Runtime.UNDEFINED;
-    col = (cast getTilemapColumnAtX(({ final __callArgument19:Dynamic = source; __callArgument19; }), (cast x : Float)) : Float);
-    row = (cast getTilemapRowAtY(({ final __callArgument21:Dynamic = source; __callArgument21; }), (cast y : Float)) : Float);
+    col = (cast getTilemapColumnAtX(({ final __callArgument16:Dynamic = source; __callArgument16; }), (cast x : Float)) : Float);
+    row = (cast getTilemapRowAtY(({ final __callArgument18:Dynamic = source; __callArgument18; }), (cast y : Float)) : Float);
     if ((cast ((cast ((cast col : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast row : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast -1.0; }
-    return cast (cast getTilemapTile(({ final __callArgument23:Dynamic = source; __callArgument23; }), (cast col : Float), (cast row : Float)) : Float);
+    return cast (cast getTilemapTile(({ final __callArgument20:Dynamic = source; __callArgument20; }), (cast col : Float), (cast row : Float)) : Float);
     return cast null;
   }
 
@@ -210,6 +217,30 @@ class _Tilemap {
     (out.height = cast (tileHeight : Float));
     return cast true;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeTilemapData(out:EntityConstruction<TilemapData>, ?data:{ @:optional var atlas:Null<TextureAtlas>; @:optional var columns:Null<Float>; @:optional var rows:Null<Float>; @:optional var tileHeight:Null<Float>; @:optional var tileWidth:Null<Float>; @:optional var tiles:Null<flight._internal._Int16Array>; @:optional var materialData:Null<Array<Null<MaterialData>>>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):Void {
+    var columns:Float = cast _Runtime.UNDEFINED;
+    var rows:Float = cast _Runtime.UNDEFINED;
+    columns = _Runtime.coalesce(({ final __structural22 = data; __structural22 == null ? _Runtime.UNDEFINED : (cast __structural22 : { @:optional var columns:Null<Float>; }).columns; }), function():Dynamic return cast 0.0);
+    rows = _Runtime.coalesce(({ final __structural23 = data; __structural23 == null ? _Runtime.UNDEFINED : (cast __structural23 : { @:optional var rows:Null<Float>; }).rows; }), function():Dynamic return cast 0.0);
+    _Runtime.setField(out, 'atlas', _Runtime.coalesce(({ final __structural24 = data; __structural24 == null ? _Runtime.UNDEFINED : (cast __structural24 : { @:optional var atlas:Null<TextureAtlas>; }).atlas; }), function():Dynamic return cast null));
+    _Runtime.setField(out, 'columns', columns);
+    _Runtime.setField(out, 'materialData', _Runtime.coalesce(({ final __structural25 = data; __structural25 == null ? _Runtime.UNDEFINED : (cast __structural25 : { @:optional var materialData:Null<Array<Null<MaterialData>>>; }).materialData; }), function():Dynamic return cast null));
+    _Runtime.setField(out, 'rows', rows);
+    _Runtime.setField(out, 'tileHeight', _Runtime.coalesce(({ final __structural26 = data; __structural26 == null ? _Runtime.UNDEFINED : (cast __structural26 : { @:optional var tileHeight:Null<Float>; }).tileHeight; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'tileWidth', _Runtime.coalesce(({ final __structural27 = data; __structural27 == null ? _Runtime.UNDEFINED : (cast __structural27 : { @:optional var tileWidth:Null<Float>; }).tileWidth; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'tiles', _Runtime.coalesce(({ final __structural28 = data; __structural28 == null ? _Runtime.UNDEFINED : (cast __structural28 : { @:optional var tiles:Null<flight._internal._Int16Array>; }).tiles; }), function():Dynamic return cast _Runtime.fill(new flight._internal._Int16Array((columns * rows)), -1.0, 0, null, 1)));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeTilemapSignals(out:EntityConstruction<TilemapSignals>):Void {
+    _Runtime.setField(out, 'onCleared', (cast createSignal() : Signal<Void->Void>));
+    _Runtime.setField(out, 'onTileChanged', (cast createSignal() : Signal<Float->Float->Float->Void>));
+    _Runtime.setField(out, 'onTilesChanged', (cast createSignal() : Signal<Float->Float->Float->Float->Void>));
   }
 
   public static function resizeTilemap(tilemap:Tilemap, columns:Float, rows:Float):Void {
@@ -251,7 +282,7 @@ class _Tilemap {
     tiles = __destructure6.tiles;
     if ((cast ((cast ((cast ((cast ((cast column : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast column : Float) >= (cast columns : Float)) : Bool)) : Bool) || (cast ((cast row : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast row : Float) >= (cast rows : Float)) : Bool)) : Bool)) { return; }
     flight._internal._StaticIndex.writeInt16ArrayTyped((cast tiles : flight._internal._Int16Array), (cast ((row * columns) + column) : Float), (cast id : Float));
-    signals = (cast getTilemapSignals(({ final __callArgument25:Dynamic = tilemap; __callArgument25; })) : Null<TilemapSignals>);
+    signals = (cast getTilemapSignals(({ final __callArgument29:Dynamic = tilemap; __callArgument29; })) : Null<TilemapSignals>);
     if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { ((cast (cast signals : TilemapSignals).onTileChanged : { var emit:Float->Float->Float->Void; }).emit)((cast column : Float), (cast row : Float), (cast id : Float)); }
   }
 
@@ -282,7 +313,7 @@ class _Tilemap {
         r++;
       }
     }
-    signals = (cast getTilemapSignals(({ final __callArgument27:Dynamic = tilemap; __callArgument27; })) : Null<TilemapSignals>);
+    signals = (cast getTilemapSignals(({ final __callArgument31:Dynamic = tilemap; __callArgument31; })) : Null<TilemapSignals>);
     if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { ((cast (cast signals : TilemapSignals).onTilesChanged : { var emit:Float->Float->Float->Float->Void; }).emit)((cast offsetColumn : Float), (cast offsetRow : Float), (cast width : Float), (cast height : Float)); }
   }
 
@@ -290,11 +321,17 @@ class _Tilemap {
     var data:TilemapData = cast _Runtime.UNDEFINED;
     data = tilemap.data;
     if ((cast ((cast ((cast ((cast ((cast column : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast column : Float) >= (cast data.columns : Float)) : Bool)) : Bool) || (cast ((cast row : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast row : Float) >= (cast data.rows : Float)) : Bool)) : Bool)) { return; }
-    if ((cast _Runtime.strictEquals(data.materialData, null) : Bool)) { (data.materialData = cast (_Runtime.fill(_Runtime.createArray((data.columns * data.rows)), null, 0, null, 1) : Null<Array<Null<flight._internal._Object>>>)); }
-    flight._internal._StaticIndex.writeArray(data.materialData, ((row * data.columns) + column), { tint: _Runtime.unsignedShiftRight(_Runtime.toInt32(rgba), 0) });
+    if ((cast _Runtime.strictEquals(data.materialData, null) : Bool)) { (data.materialData = cast (_Runtime.fill(_Runtime.createArray((data.columns * data.rows)), null, 0, null, 1) : Null<Array<Null<MaterialData>>>)); }
+    flight._internal._StaticIndex.writeArray(data.materialData, ((row * data.columns) + column), _Runtime.callValue(function():TintMaterialData {
+      var out:EntityConstruction<TintMaterialData> = cast _Runtime.UNDEFINED;
+      out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ tint: cast _Runtime.UNDEFINED } : TintMaterialData); }) #end));
+      _Runtime.setField(out, 'tint', _Runtime.unsignedShiftRight(_Runtime.toInt32(rgba), 0));
+      return cast out;
+      return cast _Runtime.UNDEFINED;
+    }, cast ([] : Array<Dynamic>)));
   }
 
   public static final defaultMethods__tilemap:flight._internal._Partial<MethodsOf<TilemapRuntime>> = (cast { computeLocalBoundsRectangle: computeTilemapLocalBoundsRectangle });
 
-  public static final tilemapSignalsSlot__tilemap:flight._internal._Symbol = _Runtime.symbol('tilemapSignals', '__symbol__ecde9f5029fab912fd01');
+  public static final tilemapSignalsSlot__tilemap:flight._internal._Symbol = _Runtime.symbol('tilemapSignals', '__symbol__78a0af44441a0d592d13');
 }

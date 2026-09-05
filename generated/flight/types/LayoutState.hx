@@ -4,4 +4,33 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef LayoutState = { var guard:Null<LayoutResolutionGuard>; var lastFailureActualLength:Float; var lastFailureKind:Null<LayoutResolutionFailureKind>; var lastFailureNodeIndex:Float; var lastFailureParentIndex:Float; var lastFailureRequiredLength:Float; var lastFailureResolverKind:Null<String>; var resolvers:flight._internal._Map<String, LayoutResolver>; };
+#if !flight_struct_typedef
+@:allow(flight._Layout)
+@:keep
+@:structInit
+class LayoutState {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var guard:Null<LayoutResolutionGuard>;
+  public var lastFailureActualLength:Float;
+  public var lastFailureKind:Null<LayoutResolutionFailureKind>;
+  public var lastFailureNodeIndex:Float;
+  public var lastFailureParentIndex:Float;
+  public var lastFailureRequiredLength:Float;
+  public var lastFailureResolverKind:Null<String>;
+  public var resolvers:flight._internal._Map<String, LayoutResolver>;
+
+  private function new(guard:Null<LayoutResolutionGuard>, lastFailureActualLength:Float, lastFailureKind:Null<LayoutResolutionFailureKind>, lastFailureNodeIndex:Float, lastFailureParentIndex:Float, lastFailureRequiredLength:Float, lastFailureResolverKind:Null<String>, resolvers:flight._internal._Map<String, LayoutResolver>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.guard = guard;
+    this.lastFailureActualLength = lastFailureActualLength;
+    this.lastFailureKind = lastFailureKind;
+    this.lastFailureNodeIndex = lastFailureNodeIndex;
+    this.lastFailureParentIndex = lastFailureParentIndex;
+    this.lastFailureRequiredLength = lastFailureRequiredLength;
+    this.lastFailureResolverKind = lastFailureResolverKind;
+    this.resolvers = resolvers;
+  }
+}
+#else
+typedef LayoutState = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var guard:Null<LayoutResolutionGuard>; var lastFailureActualLength:Float; var lastFailureKind:Null<LayoutResolutionFailureKind>; var lastFailureNodeIndex:Float; var lastFailureParentIndex:Float; var lastFailureRequiredLength:Float; var lastFailureResolverKind:Null<String>; var resolvers:flight._internal._Map<String, LayoutResolver>; };
+#end

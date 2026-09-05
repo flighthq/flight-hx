@@ -13,11 +13,12 @@ import flight.types.AudioResourceReferenceResolutionExplanation;
 import flight.types.AudioResourceUrl;
 import flight.types.EmbeddedAudioResourceReference;
 import flight.types.ExternalAudioResourceReference;
+import flight.types.HasMediaAudioCodec;
 import flight.types.HasNetHttp;
 
 class Audio {
-  public static function canPlayAudioType(mimeType:String):Bool {
-    return cast Facade_Audio_flight__Audio.canPlayAudioType(mimeType);
+  public static function canPlayAudioType(host:HasMediaAudioCodec, mimeType:String):Bool {
+    return cast Facade_Audio_flight__Audio.canPlayAudioType(host, mimeType);
     return cast null;
   }
 
@@ -155,7 +156,7 @@ class Audio {
     return cast null;
   }
 
-  public static function loadAudioResourceFromUrls(host:HasNetHttp, context:flight._internal.dom.AudioContext, sources:Array<AudioResourceUrl>, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<AudioResource> {
+  public static function loadAudioResourceFromUrls(host:{ >HasNetHttp, >HasMediaAudioCodec, }, context:flight._internal.dom.AudioContext, sources:Array<AudioResourceUrl>, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<AudioResource> {
     return cast Facade_Audio_flight__Audio.loadAudioResourceFromUrls(host, context, sources, signal);
     return cast null;
   }
@@ -174,8 +175,8 @@ class Audio {
     return cast null;
   }
 
-  public static function selectAudioResourceUrl(sources:Array<AudioResourceUrl>):Null<String> {
-    return cast Facade_Audio_flight__Audio.selectAudioResourceUrl(sources);
+  public static function selectAudioResourceUrl(host:HasMediaAudioCodec, sources:Array<AudioResourceUrl>):Null<String> {
+    return cast Facade_Audio_flight__Audio.selectAudioResourceUrl(host, sources);
     return cast null;
   }
 

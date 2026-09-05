@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createFilmGrainEffect = api.createFilmGrainEffect;
+export const initializeFilmGrainEffect = api.initializeFilmGrainEffect;

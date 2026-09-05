@@ -9,3 +9,4 @@ export const clearRichTextContent = api.clearRichTextContent;
 export const computeRichTextContent = api.computeRichTextContent;
 export const createRichTextContent = api.createRichTextContent;
 export const getRichTextContent = api.getRichTextContent;
+export const initializeRichTextContent = api.initializeRichTextContent;

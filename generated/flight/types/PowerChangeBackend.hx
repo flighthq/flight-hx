@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class PowerChangeBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var subscribe:(Void->Void)->(Void->Void);
+
+  private function new(subscribe:(Void->Void)->(Void->Void)):Void {
+    this.__symbol__EntityRuntime = null;
+    this.subscribe = subscribe;
+  }
+}
+#else
 typedef PowerChangeBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var subscribe:(Void->Void)->(Void->Void); };
+#end

@@ -6,14 +6,7 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWebAudioDeviceBackend = api.createWebAudioDeviceBackend;
-export const explainAudioDeviceBackend = api.explainAudioDeviceBackend;
-export const explainAudioDeviceOperation = api.explainAudioDeviceOperation;
-export const getAudioDeviceBackend = api.getAudioDeviceBackend;
 export const getAudioSourceBufferSourceNode = api.getAudioSourceBufferSourceNode;
 export const getAudioSourceGainNode = api.getAudioSourceGainNode;
-export const hasAudioDeviceOperation = api.hasAudioDeviceOperation;
 export const hasAudioDeviceWebNodeAccess = api.hasAudioDeviceWebNodeAccess;
-export const installAudioDeviceHostBackend = api.installAudioDeviceHostBackend;
-export const observeAudioDeviceHostResult = api.observeAudioDeviceHostResult;
-export const resetAudioDeviceBackendForTest = api.resetAudioDeviceBackendForTest;
-export const setAudioDeviceBackend = api.setAudioDeviceBackend;
+export const initializeWebAudioDeviceBackend = api.initializeWebAudioDeviceBackend;

@@ -4,4 +4,23 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SwfDocumentImport = { var appearances:Array<SwfNodeAppearance>; var document:Scene2DDocument; var jpegAlphaPayloads:Array<SwfJpegAlphaPayload>; };
+#if !flight_struct_typedef
+@:allow(flight._Swf)
+@:keep
+@:structInit
+class SwfDocumentImport {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var appearances:Array<SwfNodeAppearance>;
+  public var document:Scene2DDocument;
+  public var jpegAlphaPayloads:Array<SwfJpegAlphaPayload>;
+
+  private function new(appearances:Array<SwfNodeAppearance>, document:Scene2DDocument, jpegAlphaPayloads:Array<SwfJpegAlphaPayload>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.appearances = appearances;
+    this.document = document;
+    this.jpegAlphaPayloads = jpegAlphaPayloads;
+  }
+}
+#else
+typedef SwfDocumentImport = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var appearances:Array<SwfNodeAppearance>; var document:Scene2DDocument; var jpegAlphaPayloads:Array<SwfJpegAlphaPayload>; };
+#end

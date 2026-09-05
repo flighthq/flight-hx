@@ -8,3 +8,4 @@ __syncDependencies();
 export const createTextureAtlas = api.createTextureAtlas;
 export const disposeTextureAtlas = api.disposeTextureAtlas;
 export const getTextureAtlasByteSize = api.getTextureAtlasByteSize;
+export const initializeTextureAtlas = api.initializeTextureAtlas;

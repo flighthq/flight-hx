@@ -8,6 +8,7 @@ __syncDependencies();
 export const createCamera3D = api.createCamera3D;
 export const getCamera3DInverseViewProjectionMatrix4 = api.getCamera3DInverseViewProjectionMatrix4;
 export const getCamera3DViewProjectionMatrix4 = api.getCamera3DViewProjectionMatrix4;
+export const initializeCamera3D = api.initializeCamera3D;
 export const setCamera3DAspect = api.setCamera3DAspect;
 export const setCamera3DJitter = api.setCamera3DJitter;
 export const setCamera3DViewGuard = api.setCamera3DViewGuard;

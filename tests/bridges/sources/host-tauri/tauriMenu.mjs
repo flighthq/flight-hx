@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createTauriMenuBackends = api.createTauriMenuBackends;
+export const initializeTauriMenuBackends = api.initializeTauriMenuBackends;

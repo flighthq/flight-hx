@@ -4,4 +4,31 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Clock = { var scale:Float; var paused:Bool; var deltaTime:Float; var elapsed:Float; var parent:Null<flight.types.Clock>; var children:Array<flight.types.Clock>; var onTick:Null<Signal<Float->Void>>; };
+#if !flight_struct_typedef
+@:allow(flight._Clock)
+@:keep
+@:structInit
+class Clock {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var scale:Float;
+  public var paused:Bool;
+  public var deltaTime:Float;
+  public var elapsed:Float;
+  public var parent:Null<flight.types.Clock>;
+  public var children:Array<flight.types.Clock>;
+  public var onTick:Null<Signal<Float->Void>>;
+
+  private function new(scale:Float, paused:Bool, deltaTime:Float, elapsed:Float, parent:Null<flight.types.Clock>, children:Array<flight.types.Clock>, onTick:Null<Signal<Float->Void>>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.scale = scale;
+    this.paused = paused;
+    this.deltaTime = deltaTime;
+    this.elapsed = elapsed;
+    this.parent = parent;
+    this.children = children;
+    this.onTick = onTick;
+  }
+}
+#else
+typedef Clock = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var scale:Float; var paused:Bool; var deltaTime:Float; var elapsed:Float; var parent:Null<flight.types.Clock>; var children:Array<flight.types.Clock>; var onTick:Null<Signal<Float->Void>>; };
+#end

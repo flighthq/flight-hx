@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef DisplacementEffect = { var kind:String; @:optional var intensity:Float; @:optional var frequency:Float; @:optional var seed:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class DisplacementEffect extends flight.types.RenderEffect<String> {
+  public var intensity:Null<Float>;
+  public var frequency:Null<Float>;
+  public var seed:Null<Float>;
+
+  private function new(kind:String, ?intensity:Null<Float>, ?frequency:Null<Float>, ?seed:Null<Float>):Void {
+    super(kind);
+    this.intensity = intensity;
+    this.frequency = frequency;
+    this.seed = seed;
+  }
+}
+#else
+typedef DisplacementEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var intensity:Float; @:optional var frequency:Float; @:optional var seed:Float; };
+#end

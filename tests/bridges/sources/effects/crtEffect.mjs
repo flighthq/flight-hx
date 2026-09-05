@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createCrtEffect = api.createCrtEffect;
+export const initializeCrtEffect = api.initializeCrtEffect;

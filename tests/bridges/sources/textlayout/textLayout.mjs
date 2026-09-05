@@ -7,5 +7,6 @@ __syncDependencies();
 
 export const computeTextLayout = api.computeTextLayout;
 export const createTextLayoutResult = api.createTextLayoutResult;
+export const initializeTextLayoutResult = api.initializeTextLayoutResult;
 export const isTextLayoutTruncated = api.isTextLayoutTruncated;
 export const TEXT_LAYOUT_GUTTER = api.TEXT_LAYOUT_GUTTER;

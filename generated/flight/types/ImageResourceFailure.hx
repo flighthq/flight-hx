@@ -4,4 +4,24 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ImageResourceFailure = { var kind:ImageResourceFailureKind; var message:String; var name:Null<String>; };
+#if !flight_struct_typedef
+@:allow(flight._Image)
+@:allow(flight._Scene3DResources)
+@:keep
+@:structInit
+class ImageResourceFailure {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var kind:ImageResourceFailureKind;
+  public var message:String;
+  public var name:Null<String>;
+
+  private function new(kind:ImageResourceFailureKind, message:String, name:Null<String>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.kind = kind;
+    this.message = message;
+    this.name = name;
+  }
+}
+#else
+typedef ImageResourceFailure = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:ImageResourceFailureKind; var message:String; var name:Null<String>; };
+#end

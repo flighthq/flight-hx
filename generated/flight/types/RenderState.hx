@@ -21,13 +21,14 @@ class RenderState {
   public var currentClipDepth:Float;
   public var displayObjectClipHooks:Null<Scene2DClipHooks>;
   public var pixelRatio:Float;
+  public var raster2DSurfaceProvider:Null<Raster2DSurfaceProvider>;
   public var renderAlpha:Float;
   public var renderBlendMode:Null<BlendMode>;
   public var renderTransform2D:Null<Matrix>;
   public var sceneGraphSyncPolicy:Scene3DGraphSyncPolicy;
   public var roundPixels:Bool;
 
-  private function new(allowSmoothing:Bool, backgroundColor:Float, backgroundColorRgba:Array<Float>, backgroundColorString:String, currentClipDepth:Float, displayObjectClipHooks:Null<Scene2DClipHooks>, pixelRatio:Float, renderAlpha:Float, renderBlendMode:Null<BlendMode>, renderTransform2D:Null<Matrix>, sceneGraphSyncPolicy:Scene3DGraphSyncPolicy, roundPixels:Bool):Void {
+  private function new(allowSmoothing:Bool, backgroundColor:Float, backgroundColorRgba:Array<Float>, backgroundColorString:String, currentClipDepth:Float, displayObjectClipHooks:Null<Scene2DClipHooks>, pixelRatio:Float, raster2DSurfaceProvider:Null<Raster2DSurfaceProvider>, renderAlpha:Float, renderBlendMode:Null<BlendMode>, renderTransform2D:Null<Matrix>, sceneGraphSyncPolicy:Scene3DGraphSyncPolicy, roundPixels:Bool):Void {
     this.__symbol__EntityRuntime = null;
     this.allowSmoothing = allowSmoothing;
     this.backgroundColor = backgroundColor;
@@ -36,6 +37,7 @@ class RenderState {
     this.currentClipDepth = currentClipDepth;
     this.displayObjectClipHooks = displayObjectClipHooks;
     this.pixelRatio = pixelRatio;
+    this.raster2DSurfaceProvider = raster2DSurfaceProvider;
     this.renderAlpha = renderAlpha;
     this.renderBlendMode = renderBlendMode;
     this.renderTransform2D = renderTransform2D;
@@ -44,5 +46,5 @@ class RenderState {
   }
 }
 #else
-typedef RenderState = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var allowSmoothing:Bool; var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; var currentClipDepth:Float; var displayObjectClipHooks:Null<Scene2DClipHooks>; var pixelRatio:Float; var renderAlpha:Float; var renderBlendMode:Null<BlendMode>; var renderTransform2D:Null<Matrix>; var sceneGraphSyncPolicy:Scene3DGraphSyncPolicy; var roundPixels:Bool; };
+typedef RenderState = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var allowSmoothing:Bool; var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; var currentClipDepth:Float; var displayObjectClipHooks:Null<Scene2DClipHooks>; var pixelRatio:Float; var raster2DSurfaceProvider:Null<Raster2DSurfaceProvider>; var renderAlpha:Float; var renderBlendMode:Null<BlendMode>; var renderTransform2D:Null<Matrix>; var sceneGraphSyncPolicy:Scene3DGraphSyncPolicy; var roundPixels:Bool; };
 #end

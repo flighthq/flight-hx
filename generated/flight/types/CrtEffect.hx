@@ -4,4 +4,24 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CrtEffect = { var kind:String; @:optional var curvature:Float; @:optional var scanlineIntensity:Float; @:optional var vignette:Float; @:optional var aberration:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class CrtEffect extends flight.types.RenderEffect<String> {
+  public var curvature:Null<Float>;
+  public var scanlineIntensity:Null<Float>;
+  public var vignette:Null<Float>;
+  public var aberration:Null<Float>;
+
+  private function new(kind:String, ?curvature:Null<Float>, ?scanlineIntensity:Null<Float>, ?vignette:Null<Float>, ?aberration:Null<Float>):Void {
+    super(kind);
+    this.curvature = curvature;
+    this.scanlineIntensity = scanlineIntensity;
+    this.vignette = vignette;
+    this.aberration = aberration;
+  }
+}
+#else
+typedef CrtEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var curvature:Float; @:optional var scanlineIntensity:Float; @:optional var vignette:Float; @:optional var aberration:Float; };
+#end

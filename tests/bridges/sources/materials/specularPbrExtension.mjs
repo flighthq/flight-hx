@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createSpecularPbrExtension = api.createSpecularPbrExtension;
+export const initializeSpecularPbrExtension = api.initializeSpecularPbrExtension;
 export const isValidSpecularPbrExtension = api.isValidSpecularPbrExtension;

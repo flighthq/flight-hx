@@ -7,3 +7,5 @@ __syncDependencies();
 
 export const createCapacitorMessageDialogBackend = api.createCapacitorMessageDialogBackend;
 export const createCapacitorPromptDialogBackend = api.createCapacitorPromptDialogBackend;
+export const initializeCapacitorMessageDialogBackend = api.initializeCapacitorMessageDialogBackend;
+export const initializeCapacitorPromptDialogBackend = api.initializeCapacitorPromptDialogBackend;

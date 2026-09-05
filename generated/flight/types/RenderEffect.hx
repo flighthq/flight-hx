@@ -4,4 +4,72 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef RenderEffect = { var kind:Kind; };
+#if (!flight_struct_typedef || js)
+@:allow(flight.types.AutoExposureEffect)
+@:allow(flight.types.BarrelDistortionEffect)
+@:allow(flight.types.BevelEffect)
+@:allow(flight.types.BitmapDisplacementEffect)
+@:allow(flight.types.BlendEffect)
+@:allow(flight.types.BloomEffect)
+@:allow(flight.types.BlurEffect)
+@:allow(flight.types.BokehDepthOfFieldEffect)
+@:allow(flight.types.CameraMotionBlurEffect)
+@:allow(flight.types.ChromaticAberrationEffect)
+@:allow(flight.types.CompositeEffect)
+@:allow(flight.types.ContactShadowsEffect)
+@:allow(flight.types.ConvolutionEffect)
+@:allow(flight.types.CrtEffect)
+@:allow(flight.types.CustomShaderEffect)
+@:allow(flight.types.DirectionalBlurEffect)
+@:allow(flight.types.DisplacementEffect)
+@:allow(flight.types.DitherEffect)
+@:allow(flight.types.DropShadowEffect)
+@:allow(flight.types.FilmEmulationEffect)
+@:allow(flight.types.FilmGrainEffect)
+@:allow(flight.types.FxaaEffect)
+@:allow(flight.types.GlitchEffect)
+@:allow(flight.types.GodRaysEffect)
+@:allow(flight.types.GradientBevelEffect)
+@:allow(flight.types.GradientGlowEffect)
+@:allow(flight.types.HalftoneEffect)
+@:allow(flight.types.InnerGlowEffect)
+@:allow(flight.types.InnerShadowEffect)
+@:allow(flight.types.KuwaharaEffect)
+@:allow(flight.types.LensDirtEffect)
+@:allow(flight.types.LensDistortionEffect)
+@:allow(flight.types.LensFlareEffect)
+@:allow(flight.types.MedianEffect)
+@:allow(flight.types.MotionBlurEffect)
+@:allow(flight.types.OuterGlowEffect)
+@:allow(flight.types.OutlineEffect)
+@:allow(flight.types.PanniniProjectionEffect)
+@:allow(flight.types.PixelateEffect)
+@:allow(flight.types.PosterizeEffect)
+@:allow(flight.types.RadialBlurEffect)
+@:allow(flight.types.ScanlinesEffect)
+@:allow(flight.types.ScreenSpaceFogEffect)
+@:allow(flight.types.SharpenEffect)
+@:allow(flight.types.SketchEffect)
+@:allow(flight.types.SmaaEffect)
+@:allow(flight.types.SsaoEffect)
+@:allow(flight.types.SsrEffect)
+@:allow(flight.types.TaaEffect)
+@:allow(flight.types.TiltShiftEffect)
+@:allow(flight.types.ToneMapEffect)
+@:allow(flight.types.VignetteEffect)
+@:allow(flight.types.VolumetricLightEffect)
+@:allow(flight.types.WhiteBalanceEffect)
+@:keep
+@:structInit
+class RenderEffect<TKind = Dynamic> {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var kind:TKind;
+
+  private function new(kind:TKind):Void {
+    this.__symbol__EntityRuntime = null;
+    this.kind = kind;
+  }
+}
+#else
+typedef RenderEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Kind; };
+#end

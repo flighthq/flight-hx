@@ -4,4 +4,25 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AudioBus = { var gain:Float; var muted:Bool; var name:String; var pan:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Media)
+@:keep
+@:structInit
+class AudioBus {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var gain:Float;
+  public var muted:Bool;
+  public var name:String;
+  public var pan:Float;
+
+  private function new(gain:Float, muted:Bool, name:String, pan:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.gain = gain;
+    this.muted = muted;
+    this.name = name;
+    this.pan = pan;
+  }
+}
+#else
+typedef AudioBus = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var gain:Float; var muted:Bool; var name:String; var pan:Float; };
+#end

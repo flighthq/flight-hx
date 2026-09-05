@@ -4,7 +4,8 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight.Types.EntityRuntimeKey;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Log.logOnce;
 import flight._Math.RAD_TO_DEG;
 import flight._Types.EntityRuntimeKey;
@@ -14,7 +15,7 @@ import flight.types.BoundingSphere;
 import flight.types.BoundingSphereLike;
 import flight.types.Capsule;
 import flight.types.CapsuleLike;
-import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.EntityRuntime;
 import flight.types.EulerOrder;
 import flight.types.Frustum;
@@ -89,9 +90,12 @@ class _Geometry {
   public static function createAabb(?minX:Float, ?minY:Float, ?minZ:Float, ?maxX:Float, ?maxY:Float, ?maxZ:Float):Aabb {
     var min:Vector3 = cast _Runtime.UNDEFINED;
     var max:Vector3 = cast _Runtime.UNDEFINED;
+    var out:EntityConstruction<Aabb> = cast _Runtime.UNDEFINED;
     min = (cast createVector3(({ final __callArgument12:Dynamic = _Runtime.coalesce(minX, function():Dynamic return cast HxMath.POSITIVE_INFINITY); __callArgument12; }), ({ final __callArgument13:Dynamic = _Runtime.coalesce(minY, function():Dynamic return cast HxMath.POSITIVE_INFINITY); __callArgument13; }), ({ final __callArgument14:Dynamic = _Runtime.coalesce(minZ, function():Dynamic return cast HxMath.POSITIVE_INFINITY); __callArgument14; })) : Vector3);
     max = (cast createVector3(({ final __callArgument18:Dynamic = _Runtime.coalesce(maxX, function():Dynamic return cast HxMath.NEGATIVE_INFINITY); __callArgument18; }), ({ final __callArgument19:Dynamic = _Runtime.coalesce(maxY, function():Dynamic return cast HxMath.NEGATIVE_INFINITY); __callArgument19; }), ({ final __callArgument20:Dynamic = _Runtime.coalesce(maxZ, function():Dynamic return cast HxMath.NEGATIVE_INFINITY); __callArgument20; })) : Vector3);
-    return cast (cast createEntity((cast ({ max: (cast max : Dynamic), min: (cast min : Dynamic) } : Aabb) : Dynamic)) : Aabb);
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ max: cast _Runtime.UNDEFINED, min: cast _Runtime.UNDEFINED } : Aabb); }) #end));
+    initializeAabb(({ final __callArgument24:Dynamic = out; __callArgument24; }), ({ final __callArgument25:Dynamic = min; __callArgument25; }), ({ final __callArgument26:Dynamic = max; __callArgument26; }));
+    return cast out;
     return cast null;
   }
 
@@ -218,6 +222,13 @@ class _Geometry {
     (out.x = cast (HxMath.min(HxMath.max(px, minX), maxX) : Float));
     (out.y = cast (HxMath.min(HxMath.max(py, minY), maxY) : Float));
     (out.z = cast (HxMath.min(HxMath.max(pz, minZ), maxZ) : Float));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeAabb(out:EntityConstruction<Aabb>, min:Vector3, max:Vector3):Void {
+    _Runtime.setField(out, 'min', min);
+    _Runtime.setField(out, 'max', max);
   }
 
   public static function intersectAabb(out:AabbLike, a:AabbLike, b:AabbLike):Void {
@@ -404,7 +415,7 @@ class _Geometry {
   }
 
   public static function cloneBoundingSphere(source:BoundingSphereLike):BoundingSphere {
-    return cast (cast createBoundingSphere(({ final __callArgument24:Dynamic = (cast source.center : { var x:Float; }).x; __callArgument24; }), ({ final __callArgument25:Dynamic = (cast source.center : { var y:Float; }).y; __callArgument25; }), ({ final __callArgument26:Dynamic = (cast source.center : { var z:Float; }).z; __callArgument26; }), ({ final __callArgument27:Dynamic = source.radius; __callArgument27; })) : BoundingSphere);
+    return cast (cast createBoundingSphere(({ final __callArgument30:Dynamic = (cast source.center : { var x:Float; }).x; __callArgument30; }), ({ final __callArgument31:Dynamic = (cast source.center : { var y:Float; }).y; __callArgument31; }), ({ final __callArgument32:Dynamic = (cast source.center : { var z:Float; }).z; __callArgument32; }), ({ final __callArgument33:Dynamic = source.radius; __callArgument33; })) : BoundingSphere);
     return cast null;
   }
 
@@ -429,8 +440,11 @@ class _Geometry {
 
   public static function createBoundingSphere(?centerX:Float, ?centerY:Float, ?centerZ:Float, ?radius:Float):BoundingSphere {
     var center:Vector3 = cast _Runtime.UNDEFINED;
-    center = (cast createVector3(({ final __callArgument32:Dynamic = _Runtime.coalesce(centerX, function():Dynamic return cast 0.0); __callArgument32; }), ({ final __callArgument33:Dynamic = _Runtime.coalesce(centerY, function():Dynamic return cast 0.0); __callArgument33; }), ({ final __callArgument34:Dynamic = _Runtime.coalesce(centerZ, function():Dynamic return cast 0.0); __callArgument34; })) : Vector3);
-    return cast (cast createEntity((cast ({ center: (cast center : Dynamic), radius: (cast _Runtime.coalesce(radius, function():Dynamic return cast -1.0) : Dynamic) } : BoundingSphere) : Dynamic)) : BoundingSphere);
+    var out:EntityConstruction<BoundingSphere> = cast _Runtime.UNDEFINED;
+    center = (cast createVector3(({ final __callArgument38:Dynamic = _Runtime.coalesce(centerX, function():Dynamic return cast 0.0); __callArgument38; }), ({ final __callArgument39:Dynamic = _Runtime.coalesce(centerY, function():Dynamic return cast 0.0); __callArgument39; }), ({ final __callArgument40:Dynamic = _Runtime.coalesce(centerZ, function():Dynamic return cast 0.0); __callArgument40; })) : Vector3);
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ center: cast _Runtime.UNDEFINED, radius: cast _Runtime.UNDEFINED } : BoundingSphere); }) #end));
+    initializeBoundingSphere(({ final __callArgument44:Dynamic = out; __callArgument44; }), ({ final __callArgument45:Dynamic = center; __callArgument45; }), (cast _Runtime.coalesce(radius, function():Dynamic return cast -1.0) : Float));
+    return cast out;
     return cast null;
   }
 
@@ -468,6 +482,13 @@ class _Geometry {
     (out.x = cast ((cx + (dx * scale)) : Float));
     (out.y = cast ((cy + (dy * scale)) : Float));
     (out.z = cast ((cz + (dz * scale)) : Float));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeBoundingSphere(out:EntityConstruction<BoundingSphere>, center:Vector3, radius:Float):Void {
+    _Runtime.setField(out, 'center', center);
+    _Runtime.setField(out, 'radius', radius);
   }
 
   public static function isBoundingSphereIntersectingBoundingSphere(a:BoundingSphereLike, b:BoundingSphereLike):Bool {
@@ -626,7 +647,10 @@ class _Geometry {
   }
 
   public static function createCapsule(startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):Capsule {
-    return cast (cast createEntity(({ final __callArgument38:Dynamic = ({ endX: (cast endX : Dynamic), endY: (cast endY : Dynamic), endZ: (cast endZ : Dynamic), radius: (cast radius : Dynamic), startX: (cast startX : Dynamic), startY: (cast startY : Dynamic), startZ: (cast startZ : Dynamic) } : Capsule); __callArgument38; })) : Capsule);
+    var out:EntityConstruction<Capsule> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ endX: cast _Runtime.UNDEFINED, endY: cast _Runtime.UNDEFINED, endZ: cast _Runtime.UNDEFINED, radius: cast _Runtime.UNDEFINED, startX: cast _Runtime.UNDEFINED, startY: cast _Runtime.UNDEFINED, startZ: cast _Runtime.UNDEFINED } : Capsule); }) #end));
+    initializeCapsule(({ final __callArgument48:Dynamic = out; __callArgument48; }), (cast startX : Float), (cast startY : Float), (cast startZ : Float), (cast endX : Float), (cast endY : Float), (cast endZ : Float), (cast radius : Float));
+    return cast out;
     return cast null;
   }
 
@@ -694,6 +718,18 @@ class _Geometry {
       (out.y = cast ((closestY + (dy * inv)) : Float));
       (out.z = cast ((closestZ + (dz * inv)) : Float));
     }
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeCapsule(out:EntityConstruction<Capsule>, startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):Void {
+    _Runtime.setField(out, 'startX', startX);
+    _Runtime.setField(out, 'startY', startY);
+    _Runtime.setField(out, 'startZ', startZ);
+    _Runtime.setField(out, 'endX', endX);
+    _Runtime.setField(out, 'endY', endY);
+    _Runtime.setField(out, 'endZ', endZ);
+    _Runtime.setField(out, 'radius', radius);
   }
 
   public static function intersectRay3DCapsule(ray:Ray3DLike, capsule:CapsuleLike):Float {
@@ -1069,13 +1105,16 @@ class _Geometry {
   public static function warnOnDoubleRelease__enableGeometryPoolGuards(releaseFunction:GeometryPoolReleaseFunction__enableGeometryPoolGuards):Void {
     var acquireFunctions:String = cast _Runtime.UNDEFINED;
     acquireFunctions = _Runtime.getIndex(_Geometry.acquireFunctionsByReleaseFunction__enableGeometryPoolGuards, releaseFunction);
-    (cast logOnce((cast 'geometry:double-release:' + Std.string(releaseFunction) + '' : String), ({ final __callArgument40:Dynamic = LogLevel.Warn; __callArgument40; }), (cast { message: '' + Std.string(releaseFunction) + ': this value is already in its pool, so it is being released twice. Two later matching acquire calls will hand back the same object and unrelated owners will alias each other. Every ' + Std.string(acquireFunctions) + ' call pairs with exactly one ' + Std.string(releaseFunction) + ' call, and the value must not be used after release.' } : Dynamic), ({ final __callArgument41:Dynamic = 'geometry'; __callArgument41; })) : Bool);
+    (cast logOnce((cast 'geometry:double-release:' + Std.string(releaseFunction) + '' : String), ({ final __callArgument50:Dynamic = LogLevel.Warn; __callArgument50; }), (cast { message: '' + Std.string(releaseFunction) + ': this value is already in its pool, so it is being released twice. Two later matching acquire calls will hand back the same object and unrelated owners will alias each other. Every ' + Std.string(acquireFunctions) + ' call pairs with exactly one ' + Std.string(releaseFunction) + ' call, and the value must not be used after release.' } : Dynamic), ({ final __callArgument51:Dynamic = 'geometry'; __callArgument51; })) : Bool);
   }
 
   public static final acquireFunctionsByReleaseFunction__enableGeometryPoolGuards:flight._internal._Record<GeometryPoolReleaseFunction__enableGeometryPoolGuards, String> = (cast { releaseMatrix: 'acquireMatrix or acquireIdentityMatrix', releaseMatrix3: 'acquireMatrix3 or acquireIdentityMatrix3', releaseMatrix4: 'acquireMatrix4 or acquireIdentityMatrix4', releaseQuaternion: 'acquireQuaternion or acquireIdentityQuaternion', releaseRectangle: 'acquireRectangle or acquireEmptyRectangle', releaseVector2: 'acquireVector2 or acquireEmptyVector2', releaseVector3: 'acquireVector3 or acquireEmptyVector3', releaseVector4: 'acquireVector4 or acquireEmptyVector4' });
 
   public static function createFrustum():Frustum {
-    return cast (cast createEntity((cast ({ bottom: (cast (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane) : Dynamic), far: (cast (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane) : Dynamic), left: (cast (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane) : Dynamic), near: (cast (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane) : Dynamic), right: (cast (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane) : Dynamic), top: (cast (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane) : Dynamic) } : Frustum) : Dynamic)) : Frustum);
+    var out:EntityConstruction<Frustum> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ bottom: cast _Runtime.UNDEFINED, far: cast _Runtime.UNDEFINED, left: cast _Runtime.UNDEFINED, near: cast _Runtime.UNDEFINED, right: cast _Runtime.UNDEFINED, top: cast _Runtime.UNDEFINED } : Frustum); }) #end));
+    initializeFrustum(({ final __callArgument54:Dynamic = out; __callArgument54; }), (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane), (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane), (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane), (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane), (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane), (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane));
+    return cast out;
     return cast null;
   }
 
@@ -1107,14 +1146,25 @@ class _Geometry {
     }
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeFrustum(out:EntityConstruction<Frustum>, bottom:Plane, far:Plane, left:Plane, near:Plane, right:Plane, top:Plane):Void {
+    _Runtime.setField(out, 'bottom', bottom);
+    _Runtime.setField(out, 'far', far);
+    _Runtime.setField(out, 'left', left);
+    _Runtime.setField(out, 'near', near);
+    _Runtime.setField(out, 'right', right);
+    _Runtime.setField(out, 'top', top);
+  }
+
   public static function isFrustumContainingPoint(frustum:FrustumLike, point:Vector3Like):Bool {
-    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast (cast _Geometry.__planeSignedDistance__frustum(({ final __callArgument44:Dynamic = frustum.left; __callArgument44; }), ({ final __callArgument45:Dynamic = point; __callArgument45; })) : Float) : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast (cast _Geometry.__planeSignedDistance__frustum(({ final __callArgument48:Dynamic = frustum.right; __callArgument48; }), ({ final __callArgument49:Dynamic = point; __callArgument49; })) : Float) : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast (cast _Geometry.__planeSignedDistance__frustum(({ final __callArgument52:Dynamic = frustum.bottom; __callArgument52; }), ({ final __callArgument53:Dynamic = point; __callArgument53; })) : Float) : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast (cast _Geometry.__planeSignedDistance__frustum(({ final __callArgument56:Dynamic = frustum.top; __callArgument56; }), ({ final __callArgument57:Dynamic = point; __callArgument57; })) : Float) : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast (cast _Geometry.__planeSignedDistance__frustum(({ final __callArgument60:Dynamic = frustum.near; __callArgument60; }), ({ final __callArgument61:Dynamic = point; __callArgument61; })) : Float) : Float) >= (cast 0.0 : Float)) : Bool)), function():Dynamic return cast ((cast (cast _Geometry.__planeSignedDistance__frustum(({ final __callArgument64:Dynamic = frustum.far; __callArgument64; }), ({ final __callArgument65:Dynamic = point; __callArgument65; })) : Float) : Float) >= (cast 0.0 : Float)));
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast (cast _Geometry.__planeSignedDistance__frustum(({ final __callArgument56:Dynamic = frustum.left; __callArgument56; }), ({ final __callArgument57:Dynamic = point; __callArgument57; })) : Float) : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast (cast _Geometry.__planeSignedDistance__frustum(({ final __callArgument60:Dynamic = frustum.right; __callArgument60; }), ({ final __callArgument61:Dynamic = point; __callArgument61; })) : Float) : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast (cast _Geometry.__planeSignedDistance__frustum(({ final __callArgument64:Dynamic = frustum.bottom; __callArgument64; }), ({ final __callArgument65:Dynamic = point; __callArgument65; })) : Float) : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast (cast _Geometry.__planeSignedDistance__frustum(({ final __callArgument68:Dynamic = frustum.top; __callArgument68; }), ({ final __callArgument69:Dynamic = point; __callArgument69; })) : Float) : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast (cast _Geometry.__planeSignedDistance__frustum(({ final __callArgument72:Dynamic = frustum.near; __callArgument72; }), ({ final __callArgument73:Dynamic = point; __callArgument73; })) : Float) : Float) >= (cast 0.0 : Float)) : Bool)), function():Dynamic return cast ((cast (cast _Geometry.__planeSignedDistance__frustum(({ final __callArgument76:Dynamic = frustum.far; __callArgument76; }), ({ final __callArgument77:Dynamic = point; __callArgument77; })) : Float) : Float) >= (cast 0.0 : Float)));
     return cast null;
   }
 
   public static function isFrustumIntersectingAabb(frustum:FrustumLike, aabb:AabbLike):Bool {
     if ((cast ((cast ((cast ((cast (cast aabb.min : { var x:Float; }).x : Float) > (cast (cast aabb.max : { var x:Float; }).x : Float)) : Bool) || (cast ((cast (cast aabb.min : { var y:Float; }).y : Float) > (cast (cast aabb.max : { var y:Float; }).y : Float)) : Bool)) : Bool) || (cast ((cast (cast aabb.min : { var z:Float; }).z : Float) > (cast (cast aabb.max : { var z:Float; }).z : Float)) : Bool)) : Bool)) { return cast false; }
-    return cast _Runtime.andValue(((cast ((cast ((cast ((cast (cast _Geometry.__planeIntersectsAabb__frustum(({ final __callArgument68:Dynamic = frustum.left; __callArgument68; }), ({ final __callArgument69:Dynamic = aabb; __callArgument69; })) : Bool) : Bool) && (cast (cast _Geometry.__planeIntersectsAabb__frustum(({ final __callArgument72:Dynamic = frustum.right; __callArgument72; }), ({ final __callArgument73:Dynamic = aabb; __callArgument73; })) : Bool) : Bool)) : Bool) && (cast (cast _Geometry.__planeIntersectsAabb__frustum(({ final __callArgument76:Dynamic = frustum.bottom; __callArgument76; }), ({ final __callArgument77:Dynamic = aabb; __callArgument77; })) : Bool) : Bool)) : Bool) && (cast (cast _Geometry.__planeIntersectsAabb__frustum(({ final __callArgument80:Dynamic = frustum.top; __callArgument80; }), ({ final __callArgument81:Dynamic = aabb; __callArgument81; })) : Bool) : Bool)) : Bool) && (cast (cast _Geometry.__planeIntersectsAabb__frustum(({ final __callArgument84:Dynamic = frustum.near; __callArgument84; }), ({ final __callArgument85:Dynamic = aabb; __callArgument85; })) : Bool) : Bool)), function():Dynamic return cast (cast _Geometry.__planeIntersectsAabb__frustum(({ final __callArgument88:Dynamic = frustum.far; __callArgument88; }), ({ final __callArgument89:Dynamic = aabb; __callArgument89; })) : Bool));
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast (cast _Geometry.__planeIntersectsAabb__frustum(({ final __callArgument80:Dynamic = frustum.left; __callArgument80; }), ({ final __callArgument81:Dynamic = aabb; __callArgument81; })) : Bool) : Bool) && (cast (cast _Geometry.__planeIntersectsAabb__frustum(({ final __callArgument84:Dynamic = frustum.right; __callArgument84; }), ({ final __callArgument85:Dynamic = aabb; __callArgument85; })) : Bool) : Bool)) : Bool) && (cast (cast _Geometry.__planeIntersectsAabb__frustum(({ final __callArgument88:Dynamic = frustum.bottom; __callArgument88; }), ({ final __callArgument89:Dynamic = aabb; __callArgument89; })) : Bool) : Bool)) : Bool) && (cast (cast _Geometry.__planeIntersectsAabb__frustum(({ final __callArgument92:Dynamic = frustum.top; __callArgument92; }), ({ final __callArgument93:Dynamic = aabb; __callArgument93; })) : Bool) : Bool)) : Bool) && (cast (cast _Geometry.__planeIntersectsAabb__frustum(({ final __callArgument96:Dynamic = frustum.near; __callArgument96; }), ({ final __callArgument97:Dynamic = aabb; __callArgument97; })) : Bool) : Bool)), function():Dynamic return cast (cast _Geometry.__planeIntersectsAabb__frustum(({ final __callArgument100:Dynamic = frustum.far; __callArgument100; }), ({ final __callArgument101:Dynamic = aabb; __callArgument101; })) : Bool));
     return cast null;
   }
 
@@ -1163,7 +1213,7 @@ class _Geometry {
     ax2 = (2.0 * (xz + wy));
     ay2 = (2.0 * (yz - wx));
     az2 = (1.0 - (2.0 * (xx + yy)));
-    return cast _Runtime.andValue(((cast ((cast ((cast ((cast (cast _Geometry.__planeIntersectsObb__frustum(({ final __callArgument92:Dynamic = frustum.left; __callArgument92; }), ({ final __callArgument93:Dynamic = obb; __callArgument93; }), (cast ax0 : Float), (cast ay0 : Float), (cast az0 : Float), (cast ax1 : Float), (cast ay1 : Float), (cast az1 : Float), (cast ax2 : Float), (cast ay2 : Float), (cast az2 : Float)) : Bool) : Bool) && (cast (cast _Geometry.__planeIntersectsObb__frustum(({ final __callArgument96:Dynamic = frustum.right; __callArgument96; }), ({ final __callArgument97:Dynamic = obb; __callArgument97; }), (cast ax0 : Float), (cast ay0 : Float), (cast az0 : Float), (cast ax1 : Float), (cast ay1 : Float), (cast az1 : Float), (cast ax2 : Float), (cast ay2 : Float), (cast az2 : Float)) : Bool) : Bool)) : Bool) && (cast (cast _Geometry.__planeIntersectsObb__frustum(({ final __callArgument100:Dynamic = frustum.bottom; __callArgument100; }), ({ final __callArgument101:Dynamic = obb; __callArgument101; }), (cast ax0 : Float), (cast ay0 : Float), (cast az0 : Float), (cast ax1 : Float), (cast ay1 : Float), (cast az1 : Float), (cast ax2 : Float), (cast ay2 : Float), (cast az2 : Float)) : Bool) : Bool)) : Bool) && (cast (cast _Geometry.__planeIntersectsObb__frustum(({ final __callArgument104:Dynamic = frustum.top; __callArgument104; }), ({ final __callArgument105:Dynamic = obb; __callArgument105; }), (cast ax0 : Float), (cast ay0 : Float), (cast az0 : Float), (cast ax1 : Float), (cast ay1 : Float), (cast az1 : Float), (cast ax2 : Float), (cast ay2 : Float), (cast az2 : Float)) : Bool) : Bool)) : Bool) && (cast (cast _Geometry.__planeIntersectsObb__frustum(({ final __callArgument108:Dynamic = frustum.near; __callArgument108; }), ({ final __callArgument109:Dynamic = obb; __callArgument109; }), (cast ax0 : Float), (cast ay0 : Float), (cast az0 : Float), (cast ax1 : Float), (cast ay1 : Float), (cast az1 : Float), (cast ax2 : Float), (cast ay2 : Float), (cast az2 : Float)) : Bool) : Bool)), function():Dynamic return cast (cast _Geometry.__planeIntersectsObb__frustum(({ final __callArgument112:Dynamic = frustum.far; __callArgument112; }), ({ final __callArgument113:Dynamic = obb; __callArgument113; }), (cast ax0 : Float), (cast ay0 : Float), (cast az0 : Float), (cast ax1 : Float), (cast ay1 : Float), (cast az1 : Float), (cast ax2 : Float), (cast ay2 : Float), (cast az2 : Float)) : Bool));
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast (cast _Geometry.__planeIntersectsObb__frustum(({ final __callArgument104:Dynamic = frustum.left; __callArgument104; }), ({ final __callArgument105:Dynamic = obb; __callArgument105; }), (cast ax0 : Float), (cast ay0 : Float), (cast az0 : Float), (cast ax1 : Float), (cast ay1 : Float), (cast az1 : Float), (cast ax2 : Float), (cast ay2 : Float), (cast az2 : Float)) : Bool) : Bool) && (cast (cast _Geometry.__planeIntersectsObb__frustum(({ final __callArgument108:Dynamic = frustum.right; __callArgument108; }), ({ final __callArgument109:Dynamic = obb; __callArgument109; }), (cast ax0 : Float), (cast ay0 : Float), (cast az0 : Float), (cast ax1 : Float), (cast ay1 : Float), (cast az1 : Float), (cast ax2 : Float), (cast ay2 : Float), (cast az2 : Float)) : Bool) : Bool)) : Bool) && (cast (cast _Geometry.__planeIntersectsObb__frustum(({ final __callArgument112:Dynamic = frustum.bottom; __callArgument112; }), ({ final __callArgument113:Dynamic = obb; __callArgument113; }), (cast ax0 : Float), (cast ay0 : Float), (cast az0 : Float), (cast ax1 : Float), (cast ay1 : Float), (cast az1 : Float), (cast ax2 : Float), (cast ay2 : Float), (cast az2 : Float)) : Bool) : Bool)) : Bool) && (cast (cast _Geometry.__planeIntersectsObb__frustum(({ final __callArgument116:Dynamic = frustum.top; __callArgument116; }), ({ final __callArgument117:Dynamic = obb; __callArgument117; }), (cast ax0 : Float), (cast ay0 : Float), (cast az0 : Float), (cast ax1 : Float), (cast ay1 : Float), (cast az1 : Float), (cast ax2 : Float), (cast ay2 : Float), (cast az2 : Float)) : Bool) : Bool)) : Bool) && (cast (cast _Geometry.__planeIntersectsObb__frustum(({ final __callArgument120:Dynamic = frustum.near; __callArgument120; }), ({ final __callArgument121:Dynamic = obb; __callArgument121; }), (cast ax0 : Float), (cast ay0 : Float), (cast az0 : Float), (cast ax1 : Float), (cast ay1 : Float), (cast az1 : Float), (cast ax2 : Float), (cast ay2 : Float), (cast az2 : Float)) : Bool) : Bool)), function():Dynamic return cast (cast _Geometry.__planeIntersectsObb__frustum(({ final __callArgument124:Dynamic = frustum.far; __callArgument124; }), ({ final __callArgument125:Dynamic = obb; __callArgument125; }), (cast ax0 : Float), (cast ay0 : Float), (cast az0 : Float), (cast ax1 : Float), (cast ay1 : Float), (cast az1 : Float), (cast ax2 : Float), (cast ay2 : Float), (cast az2 : Float)) : Bool));
     return cast null;
   }
 
@@ -1171,7 +1221,7 @@ class _Geometry {
     var r:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast sphere.radius : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
     r = sphere.radius;
-    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast (cast _Geometry.__planeSignedDistance__frustum(({ final __callArgument116:Dynamic = frustum.left; __callArgument116; }), ({ final __callArgument117:Dynamic = sphere.center; __callArgument117; })) : Float) : Float) >= (cast -r : Float)) : Bool) && (cast ((cast (cast _Geometry.__planeSignedDistance__frustum(({ final __callArgument120:Dynamic = frustum.right; __callArgument120; }), ({ final __callArgument121:Dynamic = sphere.center; __callArgument121; })) : Float) : Float) >= (cast -r : Float)) : Bool)) : Bool) && (cast ((cast (cast _Geometry.__planeSignedDistance__frustum(({ final __callArgument124:Dynamic = frustum.bottom; __callArgument124; }), ({ final __callArgument125:Dynamic = sphere.center; __callArgument125; })) : Float) : Float) >= (cast -r : Float)) : Bool)) : Bool) && (cast ((cast (cast _Geometry.__planeSignedDistance__frustum(({ final __callArgument128:Dynamic = frustum.top; __callArgument128; }), ({ final __callArgument129:Dynamic = sphere.center; __callArgument129; })) : Float) : Float) >= (cast -r : Float)) : Bool)) : Bool) && (cast ((cast (cast _Geometry.__planeSignedDistance__frustum(({ final __callArgument132:Dynamic = frustum.near; __callArgument132; }), ({ final __callArgument133:Dynamic = sphere.center; __callArgument133; })) : Float) : Float) >= (cast -r : Float)) : Bool)), function():Dynamic return cast ((cast (cast _Geometry.__planeSignedDistance__frustum(({ final __callArgument136:Dynamic = frustum.far; __callArgument136; }), ({ final __callArgument137:Dynamic = sphere.center; __callArgument137; })) : Float) : Float) >= (cast -r : Float)));
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast (cast _Geometry.__planeSignedDistance__frustum(({ final __callArgument128:Dynamic = frustum.left; __callArgument128; }), ({ final __callArgument129:Dynamic = sphere.center; __callArgument129; })) : Float) : Float) >= (cast -r : Float)) : Bool) && (cast ((cast (cast _Geometry.__planeSignedDistance__frustum(({ final __callArgument132:Dynamic = frustum.right; __callArgument132; }), ({ final __callArgument133:Dynamic = sphere.center; __callArgument133; })) : Float) : Float) >= (cast -r : Float)) : Bool)) : Bool) && (cast ((cast (cast _Geometry.__planeSignedDistance__frustum(({ final __callArgument136:Dynamic = frustum.bottom; __callArgument136; }), ({ final __callArgument137:Dynamic = sphere.center; __callArgument137; })) : Float) : Float) >= (cast -r : Float)) : Bool)) : Bool) && (cast ((cast (cast _Geometry.__planeSignedDistance__frustum(({ final __callArgument140:Dynamic = frustum.top; __callArgument140; }), ({ final __callArgument141:Dynamic = sphere.center; __callArgument141; })) : Float) : Float) >= (cast -r : Float)) : Bool)) : Bool) && (cast ((cast (cast _Geometry.__planeSignedDistance__frustum(({ final __callArgument144:Dynamic = frustum.near; __callArgument144; }), ({ final __callArgument145:Dynamic = sphere.center; __callArgument145; })) : Float) : Float) >= (cast -r : Float)) : Bool)), function():Dynamic return cast ((cast (cast _Geometry.__planeSignedDistance__frustum(({ final __callArgument148:Dynamic = frustum.far; __callArgument148; }), ({ final __callArgument149:Dynamic = sphere.center; __callArgument149; })) : Float) : Float) >= (cast -r : Float)));
     return cast null;
   }
 
@@ -1210,12 +1260,12 @@ class _Geometry {
     r31 = flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 7.0 : Float));
     r32 = flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 11.0 : Float));
     r33 = flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 15.0 : Float));
-    _Geometry.__setPlane__frustum(({ final __callArgument140:Dynamic = out.left; __callArgument140; }), (cast (r30 + r00) : Float), (cast (r31 + r01) : Float), (cast (r32 + r02) : Float), (cast (r33 + r03) : Float));
-    _Geometry.__setPlane__frustum(({ final __callArgument142:Dynamic = out.right; __callArgument142; }), (cast (r30 - r00) : Float), (cast (r31 - r01) : Float), (cast (r32 - r02) : Float), (cast (r33 - r03) : Float));
-    _Geometry.__setPlane__frustum(({ final __callArgument144:Dynamic = out.bottom; __callArgument144; }), (cast (r30 + r10) : Float), (cast (r31 + r11) : Float), (cast (r32 + r12) : Float), (cast (r33 + r13) : Float));
-    _Geometry.__setPlane__frustum(({ final __callArgument146:Dynamic = out.top; __callArgument146; }), (cast (r30 - r10) : Float), (cast (r31 - r11) : Float), (cast (r32 - r12) : Float), (cast (r33 - r13) : Float));
-    _Geometry.__setPlane__frustum(({ final __callArgument148:Dynamic = out.near; __callArgument148; }), (cast (r30 + r20) : Float), (cast (r31 + r21) : Float), (cast (r32 + r22) : Float), (cast (r33 + r23) : Float));
-    _Geometry.__setPlane__frustum(({ final __callArgument150:Dynamic = out.far; __callArgument150; }), (cast (r30 - r20) : Float), (cast (r31 - r21) : Float), (cast (r32 - r22) : Float), (cast (r33 - r23) : Float));
+    _Geometry.__setPlane__frustum(({ final __callArgument152:Dynamic = out.left; __callArgument152; }), (cast (r30 + r00) : Float), (cast (r31 + r01) : Float), (cast (r32 + r02) : Float), (cast (r33 + r03) : Float));
+    _Geometry.__setPlane__frustum(({ final __callArgument154:Dynamic = out.right; __callArgument154; }), (cast (r30 - r00) : Float), (cast (r31 - r01) : Float), (cast (r32 - r02) : Float), (cast (r33 - r03) : Float));
+    _Geometry.__setPlane__frustum(({ final __callArgument156:Dynamic = out.bottom; __callArgument156; }), (cast (r30 + r10) : Float), (cast (r31 + r11) : Float), (cast (r32 + r12) : Float), (cast (r33 + r13) : Float));
+    _Geometry.__setPlane__frustum(({ final __callArgument158:Dynamic = out.top; __callArgument158; }), (cast (r30 - r10) : Float), (cast (r31 - r11) : Float), (cast (r32 - r12) : Float), (cast (r33 - r13) : Float));
+    _Geometry.__setPlane__frustum(({ final __callArgument160:Dynamic = out.near; __callArgument160; }), (cast (r30 + r20) : Float), (cast (r31 + r21) : Float), (cast (r32 + r22) : Float), (cast (r33 + r23) : Float));
+    _Geometry.__setPlane__frustum(({ final __callArgument162:Dynamic = out.far; __callArgument162; }), (cast (r30 - r20) : Float), (cast (r31 - r21) : Float), (cast (r32 - r22) : Float), (cast (r33 - r23) : Float));
   }
 
   public static function __planeIntersectsAabb__frustum(plane:PlaneLike, aabb:AabbLike):Bool {
@@ -1269,7 +1319,7 @@ class _Geometry {
   public static function cloneMatrix(source:MatrixLike):Matrix {
     var m:Matrix = cast _Runtime.UNDEFINED;
     m = (cast (#if js _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) #else createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix);
-    copyMatrix(({ final __callArgument152:Dynamic = m; __callArgument152; }), ({ final __callArgument153:Dynamic = source; __callArgument153; }));
+    copyMatrix(({ final __callArgument164:Dynamic = m; __callArgument164; }), ({ final __callArgument165:Dynamic = source; __callArgument165; }));
     return cast m;
     return cast null;
   }
@@ -1289,7 +1339,7 @@ class _Geometry {
     d = __destructure0.d;
     tx = __destructure0.tx;
     ty = __destructure0.ty;
-    setMatrix(({ final __callArgument156:Dynamic = out; __callArgument156; }), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast tx : Float), (cast ty : Float));
+    setMatrix(({ final __callArgument168:Dynamic = out; __callArgument168; }), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast tx : Float), (cast ty : Float));
   }
 
   public static function copyMatrixColumnFromVector3(out:MatrixLike, column:Float, source:Vector3Like):Void {
@@ -1435,20 +1485,23 @@ class _Geometry {
   public static function createGradientTransformMatrix(width:Float, height:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):Matrix {
     var out:Matrix = cast _Runtime.UNDEFINED;
     out = (cast (#if js _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) #else createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix);
-    setGradientTransformMatrix(({ final __callArgument158:Dynamic = out; __callArgument158; }), (cast width : Float), (cast height : Float), (cast rotation : Float), (cast tx : Float), (cast ty : Float));
+    setGradientTransformMatrix(({ final __callArgument170:Dynamic = out; __callArgument170; }), (cast width : Float), (cast height : Float), (cast rotation : Float), (cast tx : Float), (cast ty : Float));
     return cast out;
     return cast null;
   }
 
   public static function createMatrix(?a:Float, ?b:Float, ?c:Float, ?d:Float, ?tx:Float, ?ty:Float):Matrix {
-    return cast (cast createEntity(({ final __callArgument160:Dynamic = ({ a: (cast _Runtime.coalesce(a, function():Dynamic return cast 1.0) : Dynamic), b: (cast _Runtime.coalesce(b, function():Dynamic return cast 0.0) : Dynamic), c: (cast _Runtime.coalesce(c, function():Dynamic return cast 0.0) : Dynamic), d: (cast _Runtime.coalesce(d, function():Dynamic return cast 1.0) : Dynamic), tx: (cast _Runtime.coalesce(tx, function():Dynamic return cast 0.0) : Dynamic), ty: (cast _Runtime.coalesce(ty, function():Dynamic return cast 0.0) : Dynamic) } : Matrix); __callArgument160; })) : Matrix);
+    var out:EntityConstruction<Matrix> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ a: cast _Runtime.UNDEFINED, b: cast _Runtime.UNDEFINED, c: cast _Runtime.UNDEFINED, d: cast _Runtime.UNDEFINED, tx: cast _Runtime.UNDEFINED, ty: cast _Runtime.UNDEFINED } : Matrix); }) #end));
+    initializeMatrix(({ final __callArgument172:Dynamic = out; __callArgument172; }), (cast _Runtime.coalesce(a, function():Dynamic return cast 1.0) : Float), (cast _Runtime.coalesce(b, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(c, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(d, function():Dynamic return cast 1.0) : Float), (cast _Runtime.coalesce(tx, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(ty, function():Dynamic return cast 0.0) : Float));
+    return cast out;
     return cast null;
   }
 
   public static function createTransformMatrix(scaleX:Float, scaleY:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):Matrix {
     var out:Matrix = cast _Runtime.UNDEFINED;
     out = (cast (#if js _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) #else createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix);
-    setTransformMatrix(({ final __callArgument162:Dynamic = out; __callArgument162; }), (cast scaleX : Float), (cast scaleY : Float), (cast rotation : Float), (cast tx : Float), (cast ty : Float));
+    setTransformMatrix(({ final __callArgument174:Dynamic = out; __callArgument174; }), (cast scaleX : Float), (cast scaleY : Float), (cast rotation : Float), (cast tx : Float), (cast ty : Float));
     return cast out;
     return cast null;
   }
@@ -1458,6 +1511,17 @@ class _Geometry {
     if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
     return cast _Runtime.andValue(((cast ((cast ((cast _Runtime.orValue(!(cast compareTranslation : Bool), function():Dynamic return cast _Runtime.andValue(_Runtime.strictEquals((cast a : { var tx:Float; }).tx, (cast b : { var tx:Float; }).tx), function():Dynamic return cast _Runtime.strictEquals((cast a : { var ty:Float; }).ty, (cast b : { var ty:Float; }).ty))) : Bool) && (cast _Runtime.strictEquals((cast a : { var a:Float; }).a, (cast b : { var a:Float; }).a) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var b:Float; }).b, (cast b : { var b:Float; }).b) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var c:Float; }).c, (cast b : { var c:Float; }).c) : Bool)), function():Dynamic return cast _Runtime.strictEquals((cast a : { var d:Float; }).d, (cast b : { var d:Float; }).d));
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeMatrix(out:EntityConstruction<Matrix>, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void {
+    _Runtime.setField(out, 'a', a);
+    _Runtime.setField(out, 'b', b);
+    _Runtime.setField(out, 'c', c);
+    _Runtime.setField(out, 'd', d);
+    _Runtime.setField(out, 'tx', tx);
+    _Runtime.setField(out, 'ty', ty);
   }
 
   public static function inverseMatrix(out:MatrixLike, source:MatrixLike):Bool {
@@ -1502,7 +1566,7 @@ class _Geometry {
   }
 
   public static function inverseMatrixTransformPoint(out:Vector2Like, matrix:MatrixLike, point:Vector2Like):Void {
-    inverseMatrixTransformPointXY(({ final __callArgument164:Dynamic = out; __callArgument164; }), ({ final __callArgument165:Dynamic = matrix; __callArgument165; }), (cast point.x : Float), (cast point.y : Float));
+    inverseMatrixTransformPointXY(({ final __callArgument176:Dynamic = out; __callArgument176; }), ({ final __callArgument177:Dynamic = matrix; __callArgument177; }), (cast point.x : Float), (cast point.y : Float));
   }
 
   public static function inverseMatrixTransformPointXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
@@ -1519,7 +1583,7 @@ class _Geometry {
   }
 
   public static function inverseMatrixTransformVector(out:Vector2Like, matrix:MatrixLike, vector:Vector2Like):Void {
-    inverseMatrixTransformVectorXY(({ final __callArgument168:Dynamic = out; __callArgument168; }), ({ final __callArgument169:Dynamic = matrix; __callArgument169; }), (cast vector.x : Float), (cast vector.y : Float));
+    inverseMatrixTransformVectorXY(({ final __callArgument180:Dynamic = out; __callArgument180; }), ({ final __callArgument181:Dynamic = matrix; __callArgument181; }), (cast vector.x : Float), (cast vector.y : Float));
   }
 
   public static function inverseMatrixTransformVectorXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
@@ -1592,11 +1656,11 @@ class _Geometry {
   }
 
   public static function matrixTransformBoundsVector2(out:RectangleLike, matrix:MatrixLike, a:Vector2Like, b:Vector2Like):Void {
-    matrixTransformBounds(({ final __callArgument172:Dynamic = out; __callArgument172; }), ({ final __callArgument173:Dynamic = matrix; __callArgument173; }), (cast a.x : Float), (cast a.y : Float), (cast b.x : Float), (cast b.y : Float));
+    matrixTransformBounds(({ final __callArgument184:Dynamic = out; __callArgument184; }), ({ final __callArgument185:Dynamic = matrix; __callArgument185; }), (cast a.x : Float), (cast a.y : Float), (cast b.x : Float), (cast b.y : Float));
   }
 
   public static function matrixTransformPoint(out:Vector2Like, matrix:MatrixLike, point:Vector2Like):Void {
-    matrixTransformPointXY(({ final __callArgument176:Dynamic = out; __callArgument176; }), ({ final __callArgument177:Dynamic = matrix; __callArgument177; }), (cast point.x : Float), (cast point.y : Float));
+    matrixTransformPointXY(({ final __callArgument188:Dynamic = out; __callArgument188; }), ({ final __callArgument189:Dynamic = matrix; __callArgument189; }), (cast point.x : Float), (cast point.y : Float));
   }
 
   public static function matrixTransformPointXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
@@ -1605,11 +1669,11 @@ class _Geometry {
   }
 
   public static function matrixTransformRectangle(out:RectangleLike, matrix:MatrixLike, source:RectangleLike):Void {
-    matrixTransformBounds(({ final __callArgument180:Dynamic = out; __callArgument180; }), ({ final __callArgument181:Dynamic = matrix; __callArgument181; }), (cast source.x : Float), (cast source.y : Float), (cast (source.x + source.width) : Float), (cast (source.y + source.height) : Float));
+    matrixTransformBounds(({ final __callArgument192:Dynamic = out; __callArgument192; }), ({ final __callArgument193:Dynamic = matrix; __callArgument193; }), (cast source.x : Float), (cast source.y : Float), (cast (source.x + source.width) : Float), (cast (source.y + source.height) : Float));
   }
 
   public static function matrixTransformVector(out:Vector2Like, matrix:MatrixLike, vector:Vector2Like):Void {
-    matrixTransformVectorXY(({ final __callArgument184:Dynamic = out; __callArgument184; }), ({ final __callArgument185:Dynamic = matrix; __callArgument185; }), (cast vector.x : Float), (cast vector.y : Float));
+    matrixTransformVectorXY(({ final __callArgument196:Dynamic = out; __callArgument196; }), ({ final __callArgument197:Dynamic = matrix; __callArgument197; }), (cast vector.x : Float), (cast vector.y : Float));
   }
 
   public static function matrixTransformVectorXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
@@ -1745,7 +1809,7 @@ class _Geometry {
   public static function setMatrixFromMatrix3(out:MatrixLike, source:Matrix3Like):Void {
     var m:flight._internal._Float32Array = cast _Runtime.UNDEFINED;
     m = source.m;
-    setMatrix(({ final __callArgument188:Dynamic = out; __callArgument188; }), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 0.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 3.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 1.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 4.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 6.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 7.0 : Float)) : Float));
+    setMatrix(({ final __callArgument200:Dynamic = out; __callArgument200; }), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 0.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 3.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 1.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 4.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 6.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 7.0 : Float)) : Float));
   }
 
   public static function setMatrixFromMatrix4(out:MatrixLike, source:Matrix4Like):Void {
@@ -1760,7 +1824,7 @@ class _Geometry {
   }
 
   public static function setMatrixIdentity(out:MatrixLike):Void {
-    setMatrix(({ final __callArgument190:Dynamic = out; __callArgument190; }), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float));
+    setMatrix(({ final __callArgument202:Dynamic = out; __callArgument202; }), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float));
   }
 
   public static function setTransformMatrix(out:MatrixLike, scaleX:Float, scaleY:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):Void {
@@ -1796,11 +1860,11 @@ class _Geometry {
     d = __destructure6.d;
     tx = __destructure6.tx;
     ty = __destructure6.ty;
-    setMatrix(({ final __callArgument192:Dynamic = out; __callArgument192; }), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast (tx + dx) : Float), (cast (ty + dy) : Float));
+    setMatrix(({ final __callArgument204:Dynamic = out; __callArgument204; }), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast (tx + dx) : Float), (cast (ty + dy) : Float));
   }
 
   public static function translateMatrixByVector(out:MatrixLike, matrix:MatrixLike, vector:Vector2Like):Void {
-    translateMatrixByVectorXY(({ final __callArgument194:Dynamic = out; __callArgument194; }), ({ final __callArgument195:Dynamic = matrix; __callArgument195; }), (cast vector.x : Float), (cast vector.y : Float));
+    translateMatrixByVectorXY(({ final __callArgument206:Dynamic = out; __callArgument206; }), ({ final __callArgument207:Dynamic = matrix; __callArgument207; }), (cast vector.x : Float), (cast vector.y : Float));
   }
 
   public static function translateMatrixByVectorXY(out:MatrixLike, source:MatrixLike, x:Float, y:Float):Void {
@@ -1818,7 +1882,7 @@ class _Geometry {
     d = __destructure7.d;
     tx = __destructure7.tx;
     ty = __destructure7.ty;
-    setMatrix(({ final __callArgument198:Dynamic = out; __callArgument198; }), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast ((tx + (a * x)) + (c * y)) : Float), (cast ((ty + (b * x)) + (d * y)) : Float));
+    setMatrix(({ final __callArgument210:Dynamic = out; __callArgument210; }), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast ((tx + (a * x)) + (c * y)) : Float), (cast ((ty + (b * x)) + (d * y)) : Float));
   }
 
   public static function writeMatrixToFloat32Array(out:flight._internal._Float32Array, offset:Float, source:MatrixLike):Void {
@@ -1833,7 +1897,7 @@ class _Geometry {
   public static function cloneMatrix3(source:Matrix3Like):Matrix3 {
     var m:Matrix3 = cast _Runtime.UNDEFINED;
     m = (cast (#if js _Runtime.callValue(createMatrix3, cast ([] : Array<Dynamic>)) #else createMatrix3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix3);
-    copyMatrix3(({ final __callArgument200:Dynamic = m; __callArgument200; }), ({ final __callArgument201:Dynamic = source; __callArgument201; }));
+    copyMatrix3(({ final __callArgument212:Dynamic = m; __callArgument212; }), ({ final __callArgument213:Dynamic = source; __callArgument213; }));
     return cast m;
     return cast null;
   }
@@ -1930,9 +1994,8 @@ class _Geometry {
 
   public static function createMatrix3(?m00:Float, ?m01:Float, ?m02:Float, ?m10:Float, ?m11:Float, ?m12:Float, ?m20:Float, ?m21:Float, ?m22:Float):Matrix3 {
     var m:flight._internal._Float32Array = cast _Runtime.UNDEFINED;
-    var out:Matrix3 = cast _Runtime.UNDEFINED;
+    var out:EntityConstruction<Matrix3> = cast _Runtime.UNDEFINED;
     m = new flight._internal._Float32Array(_Geometry.__identity__matrix3);
-    out = (cast createEntity(({ final __callArgument204:Dynamic = ({ m: (cast m : Dynamic) } : Matrix3); __callArgument204; })) : Matrix3);
     if ((cast !_Runtime.strictEquals(m00, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 0.0 : Float), (cast m00 : Float)); }
     if ((cast !_Runtime.strictEquals(m01, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 3.0 : Float), (cast m01 : Float)); }
     if ((cast !_Runtime.strictEquals(m02, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 6.0 : Float), (cast m02 : Float)); }
@@ -1942,6 +2005,8 @@ class _Geometry {
     if ((cast !_Runtime.strictEquals(m20, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 2.0 : Float), (cast m20 : Float)); }
     if ((cast !_Runtime.strictEquals(m21, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 5.0 : Float), (cast m21 : Float)); }
     if ((cast !_Runtime.strictEquals(m22, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 8.0 : Float), (cast m22 : Float)); }
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ m: cast _Runtime.UNDEFINED } : Matrix3); }) #end));
+    initializeMatrix3(({ final __callArgument216:Dynamic = out; __callArgument216; }), ({ final __callArgument217:Dynamic = m; __callArgument217; }));
     return cast out;
     return cast null;
   }
@@ -1972,6 +2037,12 @@ class _Geometry {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeMatrix3(out:EntityConstruction<Matrix3>, m:flight._internal._Float32Array):Void {
+    _Runtime.setField(out, 'm', m);
+  }
+
   public static function inverseMatrix3(out:Matrix3Like, source:Matrix3Like):Bool {
     var _out:flight._internal._Float32Array = cast _Runtime.UNDEFINED;
     var _in:flight._internal._Float32Array = cast _Runtime.UNDEFINED;
@@ -1997,7 +2068,7 @@ class _Geometry {
     a02 = flight._internal._StaticIndex.readFloat32ArrayTyped((cast _in : flight._internal._Float32Array), (cast 6.0 : Float));
     a12 = flight._internal._StaticIndex.readFloat32ArrayTyped((cast _in : flight._internal._Float32Array), (cast 7.0 : Float));
     a22 = flight._internal._StaticIndex.readFloat32ArrayTyped((cast _in : flight._internal._Float32Array), (cast 8.0 : Float));
-    if ((cast (cast isAffineMatrix3(({ final __callArgument206:Dynamic = source; __callArgument206; })) : Bool) : Bool)) {
+    if ((cast (cast isAffineMatrix3(({ final __callArgument220:Dynamic = source; __callArgument220; })) : Bool) : Bool)) {
       var det:Float = ((a00 * a11) - (a01 * a10));
       if ((cast _Runtime.strictEquals(det, 0.0) : Bool)) {
         _Runtime.fill(_out, HxMath.NaN, 0, null, 1);
@@ -2086,7 +2157,7 @@ class _Geometry {
     b02 = flight._internal._StaticIndex.readFloat32ArrayTyped((cast _b : flight._internal._Float32Array), (cast 6.0 : Float));
     b12 = flight._internal._StaticIndex.readFloat32ArrayTyped((cast _b : flight._internal._Float32Array), (cast 7.0 : Float));
     b22 = flight._internal._StaticIndex.readFloat32ArrayTyped((cast _b : flight._internal._Float32Array), (cast 8.0 : Float));
-    if ((cast ((cast (cast isAffineMatrix3(({ final __callArgument208:Dynamic = a; __callArgument208; })) : Bool) : Bool) && (cast (cast isAffineMatrix3(({ final __callArgument210:Dynamic = b; __callArgument210; })) : Bool) : Bool)) : Bool)) {
+    if ((cast ((cast (cast isAffineMatrix3(({ final __callArgument222:Dynamic = a; __callArgument222; })) : Bool) : Bool) && (cast (cast isAffineMatrix3(({ final __callArgument224:Dynamic = b; __callArgument224; })) : Bool) : Bool)) : Bool)) {
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flight._internal._Float32Array), (cast 0.0 : Float), (cast ((a00 * b00) + (a01 * b10)) : Float));
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flight._internal._Float32Array), (cast 1.0 : Float), (cast ((a10 * b00) + (a11 * b10)) : Float));
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flight._internal._Float32Array), (cast 2.0 : Float), (cast 0.0 : Float));
@@ -2248,10 +2319,10 @@ class _Geometry {
   public static function setMatrix3NormalFromMatrix4(out:Matrix3Like, source:Matrix4Like):Void {
     var scratch:Matrix3 = cast _Runtime.UNDEFINED;
     scratch = (cast acquireMatrix3() : Matrix3);
-    setMatrix3FromMatrix4(({ final __callArgument212:Dynamic = scratch; __callArgument212; }), ({ final __callArgument213:Dynamic = source; __callArgument213; }));
-    (cast inverseMatrix3(({ final __callArgument216:Dynamic = scratch; __callArgument216; }), ({ final __callArgument217:Dynamic = scratch; __callArgument217; })) : Bool);
-    transposeMatrix3(({ final __callArgument220:Dynamic = out; __callArgument220; }), ({ final __callArgument221:Dynamic = scratch; __callArgument221; }));
-    releaseMatrix3(({ final __callArgument224:Dynamic = scratch; __callArgument224; }));
+    setMatrix3FromMatrix4(({ final __callArgument226:Dynamic = scratch; __callArgument226; }), ({ final __callArgument227:Dynamic = source; __callArgument227; }));
+    (cast inverseMatrix3(({ final __callArgument230:Dynamic = scratch; __callArgument230; }), ({ final __callArgument231:Dynamic = scratch; __callArgument231; })) : Bool);
+    transposeMatrix3(({ final __callArgument234:Dynamic = out; __callArgument234; }), ({ final __callArgument235:Dynamic = scratch; __callArgument235; }));
+    releaseMatrix3(({ final __callArgument238:Dynamic = scratch; __callArgument238; }));
   }
 
   public static function translateMatrix3(out:Matrix3Like, source:Matrix3Like, tx:Float, ty:Float):Void {
@@ -2333,7 +2404,7 @@ class _Geometry {
   public static function acquireIdentityMatrix3():Matrix3 {
     var m:Matrix3 = cast _Runtime.UNDEFINED;
     m = (cast acquireMatrix3() : Matrix3);
-    setMatrix3Identity(({ final __callArgument226:Dynamic = m; __callArgument226; }));
+    setMatrix3Identity(({ final __callArgument240:Dynamic = m; __callArgument240; }));
     return cast m;
     return cast null;
   }
@@ -2363,34 +2434,34 @@ class _Geometry {
   public static final pool__matrix3Pool:Array<Matrix3> = (cast cast ([] : Array<Dynamic>));
 
   public static function appendMatrix4(out:Matrix4Like, source:Matrix4Like, other:Matrix4Like):Void {
-    multiplyMatrix4(({ final __callArgument228:Dynamic = out; __callArgument228; }), ({ final __callArgument229:Dynamic = other; __callArgument229; }), ({ final __callArgument230:Dynamic = source; __callArgument230; }));
+    multiplyMatrix4(({ final __callArgument242:Dynamic = out; __callArgument242; }), ({ final __callArgument243:Dynamic = other; __callArgument243; }), ({ final __callArgument244:Dynamic = source; __callArgument244; }));
   }
 
   public static function appendRotationMatrix4(out:Matrix4Like, source:Matrix4Like, radians:Float, axis:Vector4Like, ?pivotPoint:Vector4Like):Void {
     var m:Matrix4 = cast _Runtime.UNDEFINED;
     m = (cast acquireIdentityMatrix4() : Matrix4);
-    _Geometry.__getAxisRotation__matrix4(({ final __callArgument234:Dynamic = m; __callArgument234; }), (cast _Runtime.field(axis, 'x') : Float), (cast _Runtime.field(axis, 'y') : Float), (cast _Runtime.field(axis, 'z') : Float), (cast radians : Float));
+    _Geometry.__getAxisRotation__matrix4(({ final __callArgument248:Dynamic = m; __callArgument248; }), (cast _Runtime.field(axis, 'x') : Float), (cast _Runtime.field(axis, 'y') : Float), (cast _Runtime.field(axis, 'z') : Float), (cast radians : Float));
     if ((cast !_Runtime.strictEquals(pivotPoint, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var p:Vector4Like = pivotPoint;
       var t1:Matrix4 = (cast acquireIdentityMatrix4() : Matrix4);
       var t2:Matrix4 = (cast acquireIdentityMatrix4() : Matrix4);
-      appendTranslationMatrix4(({ final __callArgument236:Dynamic = t1; __callArgument236; }), ({ final __callArgument237:Dynamic = t1; __callArgument237; }), (cast -_Runtime.field(p, 'x') : Float), (cast -_Runtime.field(p, 'y') : Float), (cast -_Runtime.field(p, 'z') : Float));
-      appendTranslationMatrix4(({ final __callArgument240:Dynamic = t2; __callArgument240; }), ({ final __callArgument241:Dynamic = t2; __callArgument241; }), (cast _Runtime.field(p, 'x') : Float), (cast _Runtime.field(p, 'y') : Float), (cast _Runtime.field(p, 'z') : Float));
-      multiplyMatrix4(({ final __callArgument244:Dynamic = m; __callArgument244; }), ({ final __callArgument245:Dynamic = m; __callArgument245; }), ({ final __callArgument246:Dynamic = t1; __callArgument246; }));
-      multiplyMatrix4(({ final __callArgument250:Dynamic = m; __callArgument250; }), ({ final __callArgument251:Dynamic = t2; __callArgument251; }), ({ final __callArgument252:Dynamic = m; __callArgument252; }));
-      releaseMatrix4(({ final __callArgument256:Dynamic = t1; __callArgument256; }));
-      releaseMatrix4(({ final __callArgument258:Dynamic = t2; __callArgument258; }));
+      appendTranslationMatrix4(({ final __callArgument250:Dynamic = t1; __callArgument250; }), ({ final __callArgument251:Dynamic = t1; __callArgument251; }), (cast -_Runtime.field(p, 'x') : Float), (cast -_Runtime.field(p, 'y') : Float), (cast -_Runtime.field(p, 'z') : Float));
+      appendTranslationMatrix4(({ final __callArgument254:Dynamic = t2; __callArgument254; }), ({ final __callArgument255:Dynamic = t2; __callArgument255; }), (cast _Runtime.field(p, 'x') : Float), (cast _Runtime.field(p, 'y') : Float), (cast _Runtime.field(p, 'z') : Float));
+      multiplyMatrix4(({ final __callArgument258:Dynamic = m; __callArgument258; }), ({ final __callArgument259:Dynamic = m; __callArgument259; }), ({ final __callArgument260:Dynamic = t1; __callArgument260; }));
+      multiplyMatrix4(({ final __callArgument264:Dynamic = m; __callArgument264; }), ({ final __callArgument265:Dynamic = t2; __callArgument265; }), ({ final __callArgument266:Dynamic = m; __callArgument266; }));
+      releaseMatrix4(({ final __callArgument270:Dynamic = t1; __callArgument270; }));
+      releaseMatrix4(({ final __callArgument272:Dynamic = t2; __callArgument272; }));
     }
-    appendMatrix4(({ final __callArgument260:Dynamic = out; __callArgument260; }), ({ final __callArgument261:Dynamic = source; __callArgument261; }), ({ final __callArgument262:Dynamic = m; __callArgument262; }));
-    releaseMatrix4(({ final __callArgument266:Dynamic = m; __callArgument266; }));
+    appendMatrix4(({ final __callArgument274:Dynamic = out; __callArgument274; }), ({ final __callArgument275:Dynamic = source; __callArgument275; }), ({ final __callArgument276:Dynamic = m; __callArgument276; }));
+    releaseMatrix4(({ final __callArgument280:Dynamic = m; __callArgument280; }));
   }
 
   public static function appendScaleMatrix4(out:Matrix4Like, source:Matrix4Like, xScale:Float, yScale:Float, zScale:Float):Void {
     var m:Matrix4 = cast _Runtime.UNDEFINED;
     m = (cast acquireMatrix4() : Matrix4);
-    setMatrix4(({ final __callArgument268:Dynamic = m; __callArgument268; }), (cast xScale : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast yScale : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast zScale : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float));
-    appendMatrix4(({ final __callArgument270:Dynamic = out; __callArgument270; }), ({ final __callArgument271:Dynamic = source; __callArgument271; }), ({ final __callArgument272:Dynamic = m; __callArgument272; }));
-    releaseMatrix4(({ final __callArgument276:Dynamic = m; __callArgument276; }));
+    setMatrix4(({ final __callArgument282:Dynamic = m; __callArgument282; }), (cast xScale : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast yScale : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast zScale : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float));
+    appendMatrix4(({ final __callArgument284:Dynamic = out; __callArgument284; }), ({ final __callArgument285:Dynamic = source; __callArgument285; }), ({ final __callArgument286:Dynamic = m; __callArgument286; }));
+    releaseMatrix4(({ final __callArgument290:Dynamic = m; __callArgument290; }));
   }
 
   public static function appendTranslationMatrix4(out:Matrix4Like, source:Matrix4Like, x:Float, y:Float, z:Float):Void {
@@ -2407,7 +2478,7 @@ class _Geometry {
   public static function cloneMatrix4(source:Matrix4Like):Matrix4 {
     var m:Matrix4 = cast _Runtime.UNDEFINED;
     m = (cast (#if js _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) #else createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix4);
-    copyMatrix4(({ final __callArgument278:Dynamic = m; __callArgument278; }), ({ final __callArgument279:Dynamic = source; __callArgument279; }));
+    copyMatrix4(({ final __callArgument292:Dynamic = m; __callArgument292; }), ({ final __callArgument293:Dynamic = source; __callArgument293; }));
     return cast m;
     return cast null;
   }
@@ -2617,9 +2688,8 @@ class _Geometry {
 
   public static function createMatrix4(?m00:Float, ?m01:Float, ?m02:Float, ?m03:Float, ?m10:Float, ?m11:Float, ?m12:Float, ?m13:Float, ?m20:Float, ?m21:Float, ?m22:Float, ?m23:Float, ?m30:Float, ?m31:Float, ?m32:Float, ?m33:Float):Matrix4 {
     var m:flight._internal._Float32Array = cast _Runtime.UNDEFINED;
-    var out:Matrix4 = cast _Runtime.UNDEFINED;
+    var out:EntityConstruction<Matrix4> = cast _Runtime.UNDEFINED;
     m = new flight._internal._Float32Array(_Geometry.__identity__matrix4);
-    out = (cast createEntity(({ final __callArgument282:Dynamic = ({ m: (cast m : Dynamic) } : Matrix4); __callArgument282; })) : Matrix4);
     if ((cast !_Runtime.strictEquals(m00, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 0.0 : Float), (cast m00 : Float)); }
     if ((cast !_Runtime.strictEquals(m01, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 1.0 : Float), (cast m01 : Float)); }
     if ((cast !_Runtime.strictEquals(m02, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 2.0 : Float), (cast m02 : Float)); }
@@ -2636,6 +2706,8 @@ class _Geometry {
     if ((cast !_Runtime.strictEquals(m31, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 13.0 : Float), (cast m31 : Float)); }
     if ((cast !_Runtime.strictEquals(m32, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 14.0 : Float), (cast m32 : Float)); }
     if ((cast !_Runtime.strictEquals(m33, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 15.0 : Float), (cast m33 : Float)); }
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ m: cast _Runtime.UNDEFINED } : Matrix4); }) #end));
+    initializeMatrix4(({ final __callArgument296:Dynamic = out; __callArgument296; }), ({ final __callArgument297:Dynamic = m; __callArgument297; }));
     return cast out;
     return cast null;
   }
@@ -2643,7 +2715,7 @@ class _Geometry {
   public static function createMatrix4From2D(a:Float, b:Float, c:Float, d:Float, ?tx:Float, ?ty:Float):Matrix4 {
     var out:Matrix4 = cast _Runtime.UNDEFINED;
     out = (cast (#if js _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) #else createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix4);
-    setMatrix4From2D(({ final __callArgument284:Dynamic = out; __callArgument284; }), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), ({ final __callArgument285:Dynamic = tx; __callArgument285; }), ({ final __callArgument286:Dynamic = ty; __callArgument286; }));
+    setMatrix4From2D(({ final __callArgument300:Dynamic = out; __callArgument300; }), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), ({ final __callArgument301:Dynamic = tx; __callArgument301; }), ({ final __callArgument302:Dynamic = ty; __callArgument302; }));
     return cast out;
     return cast null;
   }
@@ -2651,7 +2723,7 @@ class _Geometry {
   public static function createOrthographicMatrix4(left:Float, right:Float, bottom:Float, top:Float, zNear:Float, zFar:Float):Matrix4 {
     var out:Matrix4 = cast _Runtime.UNDEFINED;
     out = (cast (#if js _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) #else createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix4);
-    setOrthographicMatrix4(({ final __callArgument290:Dynamic = out; __callArgument290; }), (cast left : Float), (cast right : Float), (cast bottom : Float), (cast top : Float), (cast zNear : Float), (cast zFar : Float));
+    setOrthographicMatrix4(({ final __callArgument306:Dynamic = out; __callArgument306; }), (cast left : Float), (cast right : Float), (cast bottom : Float), (cast top : Float), (cast zNear : Float), (cast zFar : Float));
     return cast out;
     return cast null;
   }
@@ -2659,7 +2731,7 @@ class _Geometry {
   public static function createPerspectiveMatrix4(tanHalfFovY:Float, aspect:Float, zNear:Float, zFar:Float):Matrix4 {
     var out:Matrix4 = cast _Runtime.UNDEFINED;
     out = (cast (#if js _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) #else createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix4);
-    setPerspectiveMatrix4(({ final __callArgument292:Dynamic = out; __callArgument292; }), (cast tanHalfFovY : Float), (cast aspect : Float), (cast zNear : Float), (cast zFar : Float));
+    setPerspectiveMatrix4(({ final __callArgument308:Dynamic = out; __callArgument308; }), (cast tanHalfFovY : Float), (cast aspect : Float), (cast zNear : Float), (cast zFar : Float));
     return cast out;
     return cast null;
   }
@@ -2793,6 +2865,12 @@ class _Geometry {
     (out.z = cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flight._internal._Float32Array), (cast 14.0 : Float)) : Float));
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeMatrix4(out:EntityConstruction<Matrix4>, m:flight._internal._Float32Array):Void {
+    _Runtime.setField(out, 'm', m);
+  }
+
   public static function interpolateMatrix4(out:Matrix4Like, a:Matrix4Like, b:Matrix4Like, t:Float):Void {
     var _out:flight._internal._Float32Array = cast _Runtime.UNDEFINED;
     var _a:flight._internal._Float32Array = cast _Runtime.UNDEFINED;
@@ -2833,7 +2911,7 @@ class _Geometry {
     var m44:Float = cast _Runtime.UNDEFINED;
     _out = out.m;
     _source = source.m;
-    d = (cast getMatrix4Determinant(({ final __callArgument294:Dynamic = source; __callArgument294; })) : Float);
+    d = (cast getMatrix4Determinant(({ final __callArgument310:Dynamic = source; __callArgument310; })) : Float);
     EPS = 0.000001;
     invertable = ((cast HxMath.abs(d) : Float) > (cast EPS : Float));
     if ((cast !(cast invertable : Bool) : Bool)) {
@@ -3024,50 +3102,50 @@ class _Geometry {
   }
 
   public static function prependMatrix4(out:Matrix4Like, source:Matrix4Like, other:Matrix4Like):Void {
-    multiplyMatrix4(({ final __callArgument296:Dynamic = out; __callArgument296; }), ({ final __callArgument297:Dynamic = source; __callArgument297; }), ({ final __callArgument298:Dynamic = other; __callArgument298; }));
+    multiplyMatrix4(({ final __callArgument312:Dynamic = out; __callArgument312; }), ({ final __callArgument313:Dynamic = source; __callArgument313; }), ({ final __callArgument314:Dynamic = other; __callArgument314; }));
   }
 
   public static function prependRotationMatrix4(out:Matrix4Like, source:Matrix4Like, radians:Float, axis:Vector4Like, ?pivotPoint:Vector4Like):Void {
     var m:Matrix4 = cast _Runtime.UNDEFINED;
     m = (cast acquireIdentityMatrix4() : Matrix4);
-    _Geometry.__getAxisRotation__matrix4(({ final __callArgument302:Dynamic = m; __callArgument302; }), (cast _Runtime.field(axis, 'x') : Float), (cast _Runtime.field(axis, 'y') : Float), (cast _Runtime.field(axis, 'z') : Float), (cast radians : Float));
+    _Geometry.__getAxisRotation__matrix4(({ final __callArgument318:Dynamic = m; __callArgument318; }), (cast _Runtime.field(axis, 'x') : Float), (cast _Runtime.field(axis, 'y') : Float), (cast _Runtime.field(axis, 'z') : Float), (cast radians : Float));
     if ((cast !_Runtime.strictEquals(pivotPoint, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var p:Vector4Like = pivotPoint;
       var t1:Matrix4 = (cast acquireIdentityMatrix4() : Matrix4);
       var t2:Matrix4 = (cast acquireIdentityMatrix4() : Matrix4);
-      appendTranslationMatrix4(({ final __callArgument304:Dynamic = t1; __callArgument304; }), ({ final __callArgument305:Dynamic = t1; __callArgument305; }), (cast -_Runtime.field(p, 'x') : Float), (cast -_Runtime.field(p, 'y') : Float), (cast -_Runtime.field(p, 'z') : Float));
-      appendTranslationMatrix4(({ final __callArgument308:Dynamic = t2; __callArgument308; }), ({ final __callArgument309:Dynamic = t2; __callArgument309; }), (cast _Runtime.field(p, 'x') : Float), (cast _Runtime.field(p, 'y') : Float), (cast _Runtime.field(p, 'z') : Float));
-      multiplyMatrix4(({ final __callArgument312:Dynamic = m; __callArgument312; }), ({ final __callArgument313:Dynamic = m; __callArgument313; }), ({ final __callArgument314:Dynamic = t1; __callArgument314; }));
-      multiplyMatrix4(({ final __callArgument318:Dynamic = m; __callArgument318; }), ({ final __callArgument319:Dynamic = t2; __callArgument319; }), ({ final __callArgument320:Dynamic = m; __callArgument320; }));
-      releaseMatrix4(({ final __callArgument324:Dynamic = t1; __callArgument324; }));
-      releaseMatrix4(({ final __callArgument326:Dynamic = t2; __callArgument326; }));
+      appendTranslationMatrix4(({ final __callArgument320:Dynamic = t1; __callArgument320; }), ({ final __callArgument321:Dynamic = t1; __callArgument321; }), (cast -_Runtime.field(p, 'x') : Float), (cast -_Runtime.field(p, 'y') : Float), (cast -_Runtime.field(p, 'z') : Float));
+      appendTranslationMatrix4(({ final __callArgument324:Dynamic = t2; __callArgument324; }), ({ final __callArgument325:Dynamic = t2; __callArgument325; }), (cast _Runtime.field(p, 'x') : Float), (cast _Runtime.field(p, 'y') : Float), (cast _Runtime.field(p, 'z') : Float));
+      multiplyMatrix4(({ final __callArgument328:Dynamic = m; __callArgument328; }), ({ final __callArgument329:Dynamic = m; __callArgument329; }), ({ final __callArgument330:Dynamic = t1; __callArgument330; }));
+      multiplyMatrix4(({ final __callArgument334:Dynamic = m; __callArgument334; }), ({ final __callArgument335:Dynamic = t2; __callArgument335; }), ({ final __callArgument336:Dynamic = m; __callArgument336; }));
+      releaseMatrix4(({ final __callArgument340:Dynamic = t1; __callArgument340; }));
+      releaseMatrix4(({ final __callArgument342:Dynamic = t2; __callArgument342; }));
     }
-    prependMatrix4(({ final __callArgument328:Dynamic = out; __callArgument328; }), ({ final __callArgument329:Dynamic = source; __callArgument329; }), ({ final __callArgument330:Dynamic = m; __callArgument330; }));
-    releaseMatrix4(({ final __callArgument334:Dynamic = m; __callArgument334; }));
+    prependMatrix4(({ final __callArgument344:Dynamic = out; __callArgument344; }), ({ final __callArgument345:Dynamic = source; __callArgument345; }), ({ final __callArgument346:Dynamic = m; __callArgument346; }));
+    releaseMatrix4(({ final __callArgument350:Dynamic = m; __callArgument350; }));
   }
 
   public static function prependScaleMatrix4(out:Matrix4Like, source:Matrix4Like, xScale:Float, yScale:Float, zScale:Float):Void {
     var m:Matrix4 = cast _Runtime.UNDEFINED;
     m = (cast acquireMatrix4() : Matrix4);
-    setMatrix4(({ final __callArgument336:Dynamic = m; __callArgument336; }), (cast xScale : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast yScale : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast zScale : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float));
-    prependMatrix4(({ final __callArgument338:Dynamic = out; __callArgument338; }), ({ final __callArgument339:Dynamic = source; __callArgument339; }), ({ final __callArgument340:Dynamic = m; __callArgument340; }));
-    releaseMatrix4(({ final __callArgument344:Dynamic = m; __callArgument344; }));
+    setMatrix4(({ final __callArgument352:Dynamic = m; __callArgument352; }), (cast xScale : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast yScale : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast zScale : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float));
+    prependMatrix4(({ final __callArgument354:Dynamic = out; __callArgument354; }), ({ final __callArgument355:Dynamic = source; __callArgument355; }), ({ final __callArgument356:Dynamic = m; __callArgument356; }));
+    releaseMatrix4(({ final __callArgument360:Dynamic = m; __callArgument360; }));
   }
 
   public static function prependTranslationMatrix4(out:Matrix4Like, source:Matrix4Like, x:Float, y:Float, z:Float):Void {
     var m:Matrix4 = cast _Runtime.UNDEFINED;
     m = (cast acquireIdentityMatrix4() : Matrix4);
-    translateMatrix4(({ final __callArgument346:Dynamic = m; __callArgument346; }), ({ final __callArgument347:Dynamic = m; __callArgument347; }), (cast x : Float), (cast y : Float), (cast z : Float));
-    prependMatrix4(({ final __callArgument350:Dynamic = out; __callArgument350; }), ({ final __callArgument351:Dynamic = source; __callArgument351; }), ({ final __callArgument352:Dynamic = m; __callArgument352; }));
-    releaseMatrix4(({ final __callArgument356:Dynamic = m; __callArgument356; }));
+    translateMatrix4(({ final __callArgument362:Dynamic = m; __callArgument362; }), ({ final __callArgument363:Dynamic = m; __callArgument363; }), (cast x : Float), (cast y : Float), (cast z : Float));
+    prependMatrix4(({ final __callArgument366:Dynamic = out; __callArgument366; }), ({ final __callArgument367:Dynamic = source; __callArgument367; }), ({ final __callArgument368:Dynamic = m; __callArgument368; }));
+    releaseMatrix4(({ final __callArgument372:Dynamic = m; __callArgument372; }));
   }
 
   public static function rotateMatrix4(out:Matrix4Like, source:Matrix4Like, axis:Vector3Like, radians:Float):Void {
     var m:Matrix4 = cast _Runtime.UNDEFINED;
     m = (cast acquireIdentityMatrix4() : Matrix4);
-    _Geometry.__getAxisRotation__matrix4(({ final __callArgument358:Dynamic = m; __callArgument358; }), (cast axis.x : Float), (cast axis.y : Float), (cast axis.z : Float), (cast radians : Float));
-    multiplyMatrix4(({ final __callArgument360:Dynamic = out; __callArgument360; }), ({ final __callArgument361:Dynamic = source; __callArgument361; }), ({ final __callArgument362:Dynamic = m; __callArgument362; }));
-    releaseMatrix4(({ final __callArgument366:Dynamic = m; __callArgument366; }));
+    _Geometry.__getAxisRotation__matrix4(({ final __callArgument374:Dynamic = m; __callArgument374; }), (cast axis.x : Float), (cast axis.y : Float), (cast axis.z : Float), (cast radians : Float));
+    multiplyMatrix4(({ final __callArgument376:Dynamic = out; __callArgument376; }), ({ final __callArgument377:Dynamic = source; __callArgument377; }), ({ final __callArgument378:Dynamic = m; __callArgument378; }));
+    releaseMatrix4(({ final __callArgument382:Dynamic = m; __callArgument382; }));
   }
 
   public static function scaleMatrix4(out:Matrix4Like, source:Matrix4Like, sx:Float, sy:Float, sz:Float):Void {
@@ -3146,7 +3224,7 @@ class _Geometry {
   }
 
   public static function setMatrix4FromMatrix(out:Matrix4Like, source:MatrixLike):Void {
-    setMatrix4From2D(({ final __callArgument368:Dynamic = out; __callArgument368; }), (cast source.a : Float), (cast source.b : Float), (cast source.c : Float), (cast source.d : Float), ({ final __callArgument369:Dynamic = source.tx; __callArgument369; }), ({ final __callArgument370:Dynamic = source.ty; __callArgument370; }));
+    setMatrix4From2D(({ final __callArgument384:Dynamic = out; __callArgument384; }), (cast source.a : Float), (cast source.b : Float), (cast source.c : Float), (cast source.d : Float), ({ final __callArgument385:Dynamic = source.tx; __callArgument385; }), ({ final __callArgument386:Dynamic = source.ty; __callArgument386; }));
   }
 
   public static function setMatrix4FromMatrix3(out:Matrix4Like, source:Matrix3Like):Void {
@@ -3154,7 +3232,7 @@ class _Geometry {
     var _source:flight._internal._Float32Array = cast _Runtime.UNDEFINED;
     _out = out.m;
     _source = source.m;
-    setMatrix4From2D(({ final __callArgument374:Dynamic = out; __callArgument374; }), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flight._internal._Float32Array), (cast 0.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flight._internal._Float32Array), (cast 3.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flight._internal._Float32Array), (cast 1.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flight._internal._Float32Array), (cast 4.0 : Float)) : Float), ({ final __callArgument375:Dynamic = flight._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flight._internal._Float32Array), (cast 6.0 : Float)); __callArgument375; }), ({ final __callArgument376:Dynamic = flight._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flight._internal._Float32Array), (cast 7.0 : Float)); __callArgument376; }));
+    setMatrix4From2D(({ final __callArgument390:Dynamic = out; __callArgument390; }), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flight._internal._Float32Array), (cast 0.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flight._internal._Float32Array), (cast 3.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flight._internal._Float32Array), (cast 1.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flight._internal._Float32Array), (cast 4.0 : Float)) : Float), ({ final __callArgument391:Dynamic = flight._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flight._internal._Float32Array), (cast 6.0 : Float)); __callArgument391; }), ({ final __callArgument392:Dynamic = flight._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flight._internal._Float32Array), (cast 7.0 : Float)); __callArgument392; }));
     flight._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flight._internal._Float32Array), (cast 2.0 : Float), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flight._internal._Float32Array), (cast 2.0 : Float)) : Float));
     flight._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flight._internal._Float32Array), (cast 6.0 : Float), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flight._internal._Float32Array), (cast 5.0 : Float)) : Float));
     flight._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flight._internal._Float32Array), (cast 10.0 : Float), (cast flight._internal._StaticIndex.readFloat32ArrayTyped((cast _source : flight._internal._Float32Array), (cast 8.0 : Float)) : Float));
@@ -3214,7 +3292,7 @@ class _Geometry {
   }
 
   public static function setMatrix4Identity(out:Matrix4Like):Void {
-    setMatrix4(({ final __callArgument380:Dynamic = out; __callArgument380; }), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float));
+    setMatrix4(({ final __callArgument396:Dynamic = out; __callArgument396; }), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float));
   }
 
   public static function setMatrix4LookAt(out:Matrix4Like, eye:Vector3Like, target:Vector3Like, up:Vector3Like):Void {
@@ -3368,12 +3446,12 @@ class _Geometry {
 
   public static function transposeMatrix4(out:Matrix4Like, source:Matrix4Like):Void {
     if ((cast !_Runtime.strictEquals(out, source) : Bool)) { (cast out.m : flight._internal._Float32Array).set(source.m); }
-    _Geometry.__swap__matrix4(({ final __callArgument382:Dynamic = out; __callArgument382; }), ({ final __callArgument383:Dynamic = source; __callArgument383; }), (cast 1.0 : Float), (cast 4.0 : Float));
-    _Geometry.__swap__matrix4(({ final __callArgument386:Dynamic = out; __callArgument386; }), ({ final __callArgument387:Dynamic = source; __callArgument387; }), (cast 2.0 : Float), (cast 8.0 : Float));
-    _Geometry.__swap__matrix4(({ final __callArgument390:Dynamic = out; __callArgument390; }), ({ final __callArgument391:Dynamic = source; __callArgument391; }), (cast 3.0 : Float), (cast 12.0 : Float));
-    _Geometry.__swap__matrix4(({ final __callArgument394:Dynamic = out; __callArgument394; }), ({ final __callArgument395:Dynamic = source; __callArgument395; }), (cast 6.0 : Float), (cast 9.0 : Float));
-    _Geometry.__swap__matrix4(({ final __callArgument398:Dynamic = out; __callArgument398; }), ({ final __callArgument399:Dynamic = source; __callArgument399; }), (cast 7.0 : Float), (cast 13.0 : Float));
-    _Geometry.__swap__matrix4(({ final __callArgument402:Dynamic = out; __callArgument402; }), ({ final __callArgument403:Dynamic = source; __callArgument403; }), (cast 11.0 : Float), (cast 14.0 : Float));
+    _Geometry.__swap__matrix4(({ final __callArgument398:Dynamic = out; __callArgument398; }), ({ final __callArgument399:Dynamic = source; __callArgument399; }), (cast 1.0 : Float), (cast 4.0 : Float));
+    _Geometry.__swap__matrix4(({ final __callArgument402:Dynamic = out; __callArgument402; }), ({ final __callArgument403:Dynamic = source; __callArgument403; }), (cast 2.0 : Float), (cast 8.0 : Float));
+    _Geometry.__swap__matrix4(({ final __callArgument406:Dynamic = out; __callArgument406; }), ({ final __callArgument407:Dynamic = source; __callArgument407; }), (cast 3.0 : Float), (cast 12.0 : Float));
+    _Geometry.__swap__matrix4(({ final __callArgument410:Dynamic = out; __callArgument410; }), ({ final __callArgument411:Dynamic = source; __callArgument411; }), (cast 6.0 : Float), (cast 9.0 : Float));
+    _Geometry.__swap__matrix4(({ final __callArgument414:Dynamic = out; __callArgument414; }), ({ final __callArgument415:Dynamic = source; __callArgument415; }), (cast 7.0 : Float), (cast 13.0 : Float));
+    _Geometry.__swap__matrix4(({ final __callArgument418:Dynamic = out; __callArgument418; }), ({ final __callArgument419:Dynamic = source; __callArgument419; }), (cast 11.0 : Float), (cast 14.0 : Float));
   }
 
   public static function writeMatrix4ToFloat32Array(out:flight._internal._Float32Array, offset:Float, source:Matrix4Like):Void {
@@ -3428,7 +3506,7 @@ class _Geometry {
   public static function acquireIdentityMatrix4():Matrix4 {
     var m:Matrix4 = cast _Runtime.UNDEFINED;
     m = (cast acquireMatrix4() : Matrix4);
-    setMatrix4Identity(({ final __callArgument406:Dynamic = m; __callArgument406; }));
+    setMatrix4Identity(({ final __callArgument422:Dynamic = m; __callArgument422; }));
     return cast m;
     return cast null;
   }
@@ -3460,7 +3538,7 @@ class _Geometry {
   public static function acquireIdentityMatrix():Matrix {
     var m:Matrix = cast _Runtime.UNDEFINED;
     m = (cast acquireMatrix() : Matrix);
-    setMatrixIdentity(({ final __callArgument408:Dynamic = m; __callArgument408; }));
+    setMatrixIdentity(({ final __callArgument424:Dynamic = m; __callArgument424; }));
     return cast m;
     return cast null;
   }
@@ -3490,7 +3568,10 @@ class _Geometry {
   public static final pool__matrixPool:Array<Matrix> = (cast cast ([] : Array<Dynamic>));
 
   public static function createObb(centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Obb {
-    return cast (cast createEntity(({ final __callArgument410:Dynamic = ({ centerX: (cast centerX : Dynamic), centerY: (cast centerY : Dynamic), centerZ: (cast centerZ : Dynamic), halfExtentX: (cast halfExtentX : Dynamic), halfExtentY: (cast halfExtentY : Dynamic), halfExtentZ: (cast halfExtentZ : Dynamic), orientationW: (cast orientationW : Dynamic), orientationX: (cast orientationX : Dynamic), orientationY: (cast orientationY : Dynamic), orientationZ: (cast orientationZ : Dynamic) } : Obb); __callArgument410; })) : Obb);
+    var out:EntityConstruction<Obb> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ centerX: cast _Runtime.UNDEFINED, centerY: cast _Runtime.UNDEFINED, centerZ: cast _Runtime.UNDEFINED, halfExtentX: cast _Runtime.UNDEFINED, halfExtentY: cast _Runtime.UNDEFINED, halfExtentZ: cast _Runtime.UNDEFINED, orientationW: cast _Runtime.UNDEFINED, orientationX: cast _Runtime.UNDEFINED, orientationY: cast _Runtime.UNDEFINED, orientationZ: cast _Runtime.UNDEFINED } : Obb); }) #end));
+    initializeObb(({ final __callArgument426:Dynamic = out; __callArgument426; }), (cast centerX : Float), (cast centerY : Float), (cast centerZ : Float), (cast halfExtentX : Float), (cast halfExtentY : Float), (cast halfExtentZ : Float), (cast orientationX : Float), (cast orientationY : Float), (cast orientationZ : Float), (cast orientationW : Float));
+    return cast out;
     return cast null;
   }
 
@@ -3572,6 +3653,21 @@ class _Geometry {
     (out.x = cast ((((cx + (d0 * ax0)) + (d1 * ax1)) + (d2 * ax2)) : Float));
     (out.y = cast ((((cy + (d0 * ay0)) + (d1 * ay1)) + (d2 * ay2)) : Float));
     (out.z = cast ((((cz + (d0 * az0)) + (d1 * az1)) + (d2 * az2)) : Float));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeObb(out:EntityConstruction<Obb>, centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Void {
+    _Runtime.setField(out, 'centerX', centerX);
+    _Runtime.setField(out, 'centerY', centerY);
+    _Runtime.setField(out, 'centerZ', centerZ);
+    _Runtime.setField(out, 'halfExtentX', halfExtentX);
+    _Runtime.setField(out, 'halfExtentY', halfExtentY);
+    _Runtime.setField(out, 'halfExtentZ', halfExtentZ);
+    _Runtime.setField(out, 'orientationX', orientationX);
+    _Runtime.setField(out, 'orientationY', orientationY);
+    _Runtime.setField(out, 'orientationZ', orientationZ);
+    _Runtime.setField(out, 'orientationW', orientationW);
   }
 
   public static function intersectRay3DObb(ray:Ray3DLike, obb:ObbLike):Float {
@@ -4179,7 +4275,7 @@ class _Geometry {
   }
 
   public static function clonePlane(source:PlaneLike):Plane {
-    return cast (cast createPlane(({ final __callArgument412:Dynamic = source.a; __callArgument412; }), ({ final __callArgument413:Dynamic = source.b; __callArgument413; }), ({ final __callArgument414:Dynamic = source.c; __callArgument414; }), ({ final __callArgument415:Dynamic = source.d; __callArgument415; })) : Plane);
+    return cast (cast createPlane(({ final __callArgument428:Dynamic = source.a; __callArgument428; }), ({ final __callArgument429:Dynamic = source.b; __callArgument429; }), ({ final __callArgument430:Dynamic = source.c; __callArgument430; }), ({ final __callArgument431:Dynamic = source.d; __callArgument431; })) : Plane);
     return cast null;
   }
 
@@ -4191,7 +4287,10 @@ class _Geometry {
   }
 
   public static function createPlane(?a:Float, ?b:Float, ?c:Float, ?d:Float):Plane {
-    return cast (cast createEntity(({ final __callArgument420:Dynamic = ({ a: (cast _Runtime.coalesce(a, function():Dynamic return cast 0.0) : Dynamic), b: (cast _Runtime.coalesce(b, function():Dynamic return cast 0.0) : Dynamic), c: (cast _Runtime.coalesce(c, function():Dynamic return cast 0.0) : Dynamic), d: (cast _Runtime.coalesce(d, function():Dynamic return cast 0.0) : Dynamic) } : Plane); __callArgument420; })) : Plane);
+    var out:EntityConstruction<Plane> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ a: cast _Runtime.UNDEFINED, b: cast _Runtime.UNDEFINED, c: cast _Runtime.UNDEFINED, d: cast _Runtime.UNDEFINED } : Plane); }) #end));
+    initializePlane(({ final __callArgument436:Dynamic = out; __callArgument436; }), (cast _Runtime.coalesce(a, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(b, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(c, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(d, function():Dynamic return cast 0.0) : Float));
+    return cast out;
     return cast null;
   }
 
@@ -4218,6 +4317,15 @@ class _Geometry {
   public static function getPlaneSignedDistanceToPoint(plane:PlaneLike, point:Vector3Like):Float {
     return cast ((((plane.a * point.x) + (plane.b * point.y)) + (plane.c * point.z)) + plane.d);
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializePlane(out:EntityConstruction<Plane>, a:Float, b:Float, c:Float, d:Float):Void {
+    _Runtime.setField(out, 'a', a);
+    _Runtime.setField(out, 'b', b);
+    _Runtime.setField(out, 'c', c);
+    _Runtime.setField(out, 'd', d);
   }
 
   public static function normalizePlane(out:PlaneLike, source:PlaneLike):Void {
@@ -4311,7 +4419,7 @@ class _Geometry {
   }
 
   public static function cloneQuaternion(source:QuaternionLike):Quaternion {
-    return cast (cast createQuaternion(({ final __callArgument422:Dynamic = source.x; __callArgument422; }), ({ final __callArgument423:Dynamic = source.y; __callArgument423; }), ({ final __callArgument424:Dynamic = source.z; __callArgument424; }), ({ final __callArgument425:Dynamic = source.w; __callArgument425; })) : Quaternion);
+    return cast (cast createQuaternion(({ final __callArgument438:Dynamic = source.x; __callArgument438; }), ({ final __callArgument439:Dynamic = source.y; __callArgument439; }), ({ final __callArgument440:Dynamic = source.z; __callArgument440; }), ({ final __callArgument441:Dynamic = source.w; __callArgument441; })) : Quaternion);
     return cast null;
   }
 
@@ -4330,7 +4438,10 @@ class _Geometry {
   }
 
   public static function createQuaternion(?x:Float, ?y:Float, ?z:Float, ?w:Float):Quaternion {
-    return cast (cast createEntity(({ final __callArgument430:Dynamic = (#if flight_struct_typedef { x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), z: _Runtime.coalesce(z, function():Dynamic return cast 0.0), w: _Runtime.coalesce(w, function():Dynamic return cast 1.0) } #else ({ final __structInitField0:Dynamic = _Runtime.coalesce(x, function():Dynamic return cast 0.0); final __structInitField1:Dynamic = _Runtime.coalesce(y, function():Dynamic return cast 0.0); final __structInitField2:Dynamic = _Runtime.coalesce(z, function():Dynamic return cast 0.0); final __structInitField3:Dynamic = _Runtime.coalesce(w, function():Dynamic return cast 1.0); ({ w: __structInitField3, x: __structInitField0, y: __structInitField1, z: __structInitField2 } : Quaternion); }) #end); __callArgument430; })) : Quaternion);
+    var out:EntityConstruction<Quaternion> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ w: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED, z: cast _Runtime.UNDEFINED } : Quaternion); }) #end));
+    initializeQuaternion(({ final __callArgument446:Dynamic = out; __callArgument446; }), (cast _Runtime.coalesce(x, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(y, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(z, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(w, function():Dynamic return cast 1.0) : Float));
+    return cast out;
     return cast null;
   }
 
@@ -4343,7 +4454,7 @@ class _Geometry {
 
   public static function getQuaternionAngleBetween(a:QuaternionLike, b:QuaternionLike):Float {
     var dot:Float = cast _Runtime.UNDEFINED;
-    dot = HxMath.abs((cast getQuaternionDot(({ final __callArgument432:Dynamic = a; __callArgument432; }), ({ final __callArgument433:Dynamic = b; __callArgument433; })) : Float));
+    dot = HxMath.abs((cast getQuaternionDot(({ final __callArgument448:Dynamic = a; __callArgument448; }), ({ final __callArgument449:Dynamic = b; __callArgument449; })) : Float));
     return cast _Runtime.multiplyNumbers(2.0, HxMath.acos(HxMath.min(1.0, dot)));
     return cast null;
   }
@@ -4493,6 +4604,15 @@ class _Geometry {
         }
       }
     }
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeQuaternion(out:EntityConstruction<Quaternion>, x:Float, y:Float, z:Float, w:Float):Void {
+    _Runtime.setField(out, 'x', x);
+    _Runtime.setField(out, 'y', y);
+    _Runtime.setField(out, 'z', z);
+    _Runtime.setField(out, 'w', w);
   }
 
   public static function inverseQuaternion(out:QuaternionLike, source:QuaternionLike):Void {
@@ -4739,7 +4859,7 @@ class _Geometry {
     tz = to.z;
     dot = (((fx * tx) + (fy * ty)) + (fz * tz));
     if ((cast ((cast dot : Float) > (cast 0.999999 : Float)) : Bool)) {
-      setQuaternionIdentity(({ final __callArgument436:Dynamic = out; __callArgument436; }));
+      setQuaternionIdentity(({ final __callArgument452:Dynamic = out; __callArgument452; }));
       return;
     }
     if ((cast ((cast dot : Float) < (cast -0.999999 : Float)) : Bool)) {
@@ -4817,7 +4937,7 @@ class _Geometry {
     uy = up.y;
     uz = up.z;
     if ((cast ((cast ((cast _Runtime.strictEquals(fx, 0.0) : Bool) && (cast _Runtime.strictEquals(fy, 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(fz, 0.0) : Bool)) : Bool)) {
-      setQuaternionIdentity(({ final __callArgument438:Dynamic = out; __callArgument438; }));
+      setQuaternionIdentity(({ final __callArgument454:Dynamic = out; __callArgument454; }));
       return;
     }
     rx = ((uy * fz) - (uz * fy));
@@ -4959,7 +5079,14 @@ class _Geometry {
   public static final pool__quaternionPool:Array<Quaternion> = (cast cast ([] : Array<Dynamic>));
 
   public static function createRay3D(?originX:Float, ?originY:Float, ?originZ:Float, ?directionX:Float, ?directionY:Float, ?directionZ:Float):Ray3D {
-    return cast (cast createEntity((cast ({ direction: (cast (cast createVector3(({ final __callArgument452:Dynamic = _Runtime.coalesce(directionX, function():Dynamic return cast 0.0); __callArgument452; }), ({ final __callArgument453:Dynamic = _Runtime.coalesce(directionY, function():Dynamic return cast 0.0); __callArgument453; }), ({ final __callArgument454:Dynamic = _Runtime.coalesce(directionZ, function():Dynamic return cast 1.0); __callArgument454; })) : Vector3) : Dynamic), origin: (cast (cast createVector3(({ final __callArgument458:Dynamic = _Runtime.coalesce(originX, function():Dynamic return cast 0.0); __callArgument458; }), ({ final __callArgument459:Dynamic = _Runtime.coalesce(originY, function():Dynamic return cast 0.0); __callArgument459; }), ({ final __callArgument460:Dynamic = _Runtime.coalesce(originZ, function():Dynamic return cast 0.0); __callArgument460; })) : Vector3) : Dynamic) } : Ray3D) : Dynamic)) : Ray3D);
+    var origin:Vector3 = cast _Runtime.UNDEFINED;
+    var direction:Vector3 = cast _Runtime.UNDEFINED;
+    var out:EntityConstruction<Ray3D> = cast _Runtime.UNDEFINED;
+    origin = (cast createVector3(({ final __callArgument456:Dynamic = _Runtime.coalesce(originX, function():Dynamic return cast 0.0); __callArgument456; }), ({ final __callArgument457:Dynamic = _Runtime.coalesce(originY, function():Dynamic return cast 0.0); __callArgument457; }), ({ final __callArgument458:Dynamic = _Runtime.coalesce(originZ, function():Dynamic return cast 0.0); __callArgument458; })) : Vector3);
+    direction = (cast createVector3(({ final __callArgument462:Dynamic = _Runtime.coalesce(directionX, function():Dynamic return cast 0.0); __callArgument462; }), ({ final __callArgument463:Dynamic = _Runtime.coalesce(directionY, function():Dynamic return cast 0.0); __callArgument463; }), ({ final __callArgument464:Dynamic = _Runtime.coalesce(directionZ, function():Dynamic return cast 1.0); __callArgument464; })) : Vector3);
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ direction: cast _Runtime.UNDEFINED, origin: cast _Runtime.UNDEFINED } : Ray3D); }) #end));
+    initializeRay3D(({ final __callArgument468:Dynamic = out; __callArgument468; }), ({ final __callArgument469:Dynamic = origin; __callArgument469; }), ({ final __callArgument470:Dynamic = direction; __callArgument470; }));
+    return cast out;
     return cast null;
   }
 
@@ -5073,6 +5200,13 @@ class _Geometry {
     (out.x = cast ((ox + (dx * t)) : Float));
     (out.y = cast ((oy + (dy * t)) : Float));
     (out.z = cast ((oz + (dz * t)) : Float));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeRay3D(out:EntityConstruction<Ray3D>, origin:Vector3, direction:Vector3):Void {
+    _Runtime.setField(out, 'origin', origin);
+    _Runtime.setField(out, 'direction', direction);
   }
 
   public static function intersectRay3DAabb(ray:Ray3DLike, aabb:AabbLike):Float {
@@ -5324,7 +5458,7 @@ class _Geometry {
   }
 
   public static function cloneRectangle(source:RectangleLike):Rectangle {
-    return cast (cast createRectangle(({ final __callArgument488:Dynamic = source.x; __callArgument488; }), ({ final __callArgument489:Dynamic = source.y; __callArgument489; }), ({ final __callArgument490:Dynamic = source.width; __callArgument490; }), ({ final __callArgument491:Dynamic = source.height; __callArgument491; })) : Rectangle);
+    return cast (cast createRectangle(({ final __callArgument474:Dynamic = source.x; __callArgument474; }), ({ final __callArgument475:Dynamic = source.y; __callArgument475; }), ({ final __callArgument476:Dynamic = source.width; __callArgument476; }), ({ final __callArgument477:Dynamic = source.height; __callArgument477; })) : Rectangle);
     return cast null;
   }
 
@@ -5333,12 +5467,12 @@ class _Geometry {
     var x1:Float = cast _Runtime.UNDEFINED;
     var y0:Float = cast _Runtime.UNDEFINED;
     var y1:Float = cast _Runtime.UNDEFINED;
-    x0 = HxMath.max((cast getRectangleMinX(({ final __callArgument496:Dynamic = a; __callArgument496; })) : Float), (cast getRectangleMinX(({ final __callArgument498:Dynamic = b; __callArgument498; })) : Float));
-    x1 = HxMath.min((cast getRectangleMaxX(({ final __callArgument500:Dynamic = a; __callArgument500; })) : Float), (cast getRectangleMaxX(({ final __callArgument502:Dynamic = b; __callArgument502; })) : Float));
-    y0 = HxMath.max((cast getRectangleMinY(({ final __callArgument504:Dynamic = a; __callArgument504; })) : Float), (cast getRectangleMinY(({ final __callArgument506:Dynamic = b; __callArgument506; })) : Float));
-    y1 = HxMath.min((cast getRectangleMaxY(({ final __callArgument508:Dynamic = a; __callArgument508; })) : Float), (cast getRectangleMaxY(({ final __callArgument510:Dynamic = b; __callArgument510; })) : Float));
+    x0 = HxMath.max((cast getRectangleMinX(({ final __callArgument482:Dynamic = a; __callArgument482; })) : Float), (cast getRectangleMinX(({ final __callArgument484:Dynamic = b; __callArgument484; })) : Float));
+    x1 = HxMath.min((cast getRectangleMaxX(({ final __callArgument486:Dynamic = a; __callArgument486; })) : Float), (cast getRectangleMaxX(({ final __callArgument488:Dynamic = b; __callArgument488; })) : Float));
+    y0 = HxMath.max((cast getRectangleMinY(({ final __callArgument490:Dynamic = a; __callArgument490; })) : Float), (cast getRectangleMinY(({ final __callArgument492:Dynamic = b; __callArgument492; })) : Float));
+    y1 = HxMath.min((cast getRectangleMaxY(({ final __callArgument494:Dynamic = a; __callArgument494; })) : Float), (cast getRectangleMaxY(({ final __callArgument496:Dynamic = b; __callArgument496; })) : Float));
     if ((cast ((cast ((cast x1 : Float) <= (cast x0 : Float)) : Bool) || (cast ((cast y1 : Float) <= (cast y0 : Float)) : Bool)) : Bool)) {
-      setEmptyRectangle(({ final __callArgument512:Dynamic = out; __callArgument512; }));
+      setEmptyRectangle(({ final __callArgument498:Dynamic = out; __callArgument498; }));
       return;
     }
     (out.x = cast (x0 : Float));
@@ -5348,7 +5482,7 @@ class _Geometry {
   }
 
   public static function containsRectanglePoint(source:RectangleLike, vector:Vector2Like):Bool {
-    return cast (cast containsRectanglePointXY(({ final __callArgument514:Dynamic = source; __callArgument514; }), (cast vector.x : Float), (cast vector.y : Float)) : Bool);
+    return cast (cast containsRectanglePointXY(({ final __callArgument500:Dynamic = source; __callArgument500; }), (cast vector.x : Float), (cast vector.y : Float)) : Bool);
     return cast null;
   }
 
@@ -5381,7 +5515,10 @@ class _Geometry {
   }
 
   public static function createRectangle(?x:Float, ?y:Float, ?width:Float, ?height:Float):Rectangle {
-    return cast (cast createEntity(({ final __callArgument516:Dynamic = (#if flight_struct_typedef { x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), width: _Runtime.coalesce(width, function():Dynamic return cast 0.0), height: _Runtime.coalesce(height, function():Dynamic return cast 0.0) } #else ({ final __structInitField0:Dynamic = _Runtime.coalesce(x, function():Dynamic return cast 0.0); final __structInitField1:Dynamic = _Runtime.coalesce(y, function():Dynamic return cast 0.0); final __structInitField2:Dynamic = _Runtime.coalesce(width, function():Dynamic return cast 0.0); final __structInitField3:Dynamic = _Runtime.coalesce(height, function():Dynamic return cast 0.0); ({ height: __structInitField3, width: __structInitField2, x: __structInitField0, y: __structInitField1 } : Rectangle); }) #end); __callArgument516; })) : Rectangle);
+    var out:EntityConstruction<Rectangle> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ height: cast _Runtime.UNDEFINED, width: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : Rectangle); }) #end));
+    initializeRectangle(({ final __callArgument502:Dynamic = out; __callArgument502; }), (cast _Runtime.coalesce(x, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(y, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(width, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(height, function():Dynamic return cast 0.0) : Float));
+    return cast out;
     return cast null;
   }
 
@@ -5469,8 +5606,8 @@ class _Geometry {
   public static function getRectangleNormalizedBottomRight(out:Vector2Like, source:RectangleLike):Void {
     var x:Float = cast _Runtime.UNDEFINED;
     var y:Float = cast _Runtime.UNDEFINED;
-    x = (cast getRectangleMaxX(({ final __callArgument518:Dynamic = source; __callArgument518; })) : Float);
-    y = (cast getRectangleMaxY(({ final __callArgument520:Dynamic = source; __callArgument520; })) : Float);
+    x = (cast getRectangleMaxX(({ final __callArgument504:Dynamic = source; __callArgument504; })) : Float);
+    y = (cast getRectangleMaxY(({ final __callArgument506:Dynamic = source; __callArgument506; })) : Float);
     (out.x = cast (x : Float));
     (out.y = cast (y : Float));
   }
@@ -5478,8 +5615,8 @@ class _Geometry {
   public static function getRectangleNormalizedTopLeft(out:Vector2Like, source:RectangleLike):Void {
     var x:Float = cast _Runtime.UNDEFINED;
     var y:Float = cast _Runtime.UNDEFINED;
-    x = (cast getRectangleMinX(({ final __callArgument522:Dynamic = source; __callArgument522; })) : Float);
-    y = (cast getRectangleMinY(({ final __callArgument524:Dynamic = source; __callArgument524; })) : Float);
+    x = (cast getRectangleMinX(({ final __callArgument508:Dynamic = source; __callArgument508; })) : Float);
+    y = (cast getRectangleMinY(({ final __callArgument510:Dynamic = source; __callArgument510; })) : Float);
     (out.x = cast (x : Float));
     (out.y = cast (y : Float));
   }
@@ -5527,8 +5664,17 @@ class _Geometry {
     (out.height = cast ((height + (dy * 2.0)) : Float));
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeRectangle(out:EntityConstruction<Rectangle>, x:Float, y:Float, width:Float, height:Float):Void {
+    _Runtime.setField(out, 'x', x);
+    _Runtime.setField(out, 'y', y);
+    _Runtime.setField(out, 'width', width);
+    _Runtime.setField(out, 'height', height);
+  }
+
   public static function intersectsRectangle(a:RectangleLike, b:RectangleLike):Bool {
-    return cast !(cast _Runtime.orValue(((cast ((cast ((cast (cast getRectangleMaxX(({ final __callArgument526:Dynamic = a; __callArgument526; })) : Float) : Float) <= (cast (cast getRectangleMinX(({ final __callArgument528:Dynamic = b; __callArgument528; })) : Float) : Float)) : Bool) || (cast ((cast (cast getRectangleMinX(({ final __callArgument530:Dynamic = a; __callArgument530; })) : Float) : Float) >= (cast (cast getRectangleMaxX(({ final __callArgument532:Dynamic = b; __callArgument532; })) : Float) : Float)) : Bool)) : Bool) || (cast ((cast (cast getRectangleMaxY(({ final __callArgument534:Dynamic = a; __callArgument534; })) : Float) : Float) <= (cast (cast getRectangleMinY(({ final __callArgument536:Dynamic = b; __callArgument536; })) : Float) : Float)) : Bool)), function():Dynamic return cast ((cast (cast getRectangleMinY(({ final __callArgument538:Dynamic = a; __callArgument538; })) : Float) : Float) >= (cast (cast getRectangleMaxY(({ final __callArgument540:Dynamic = b; __callArgument540; })) : Float) : Float))) : Bool);
+    return cast !(cast _Runtime.orValue(((cast ((cast ((cast (cast getRectangleMaxX(({ final __callArgument512:Dynamic = a; __callArgument512; })) : Float) : Float) <= (cast (cast getRectangleMinX(({ final __callArgument514:Dynamic = b; __callArgument514; })) : Float) : Float)) : Bool) || (cast ((cast (cast getRectangleMinX(({ final __callArgument516:Dynamic = a; __callArgument516; })) : Float) : Float) >= (cast (cast getRectangleMaxX(({ final __callArgument518:Dynamic = b; __callArgument518; })) : Float) : Float)) : Bool)) : Bool) || (cast ((cast (cast getRectangleMaxY(({ final __callArgument520:Dynamic = a; __callArgument520; })) : Float) : Float) <= (cast (cast getRectangleMinY(({ final __callArgument522:Dynamic = b; __callArgument522; })) : Float) : Float)) : Bool)), function():Dynamic return cast ((cast (cast getRectangleMinY(({ final __callArgument524:Dynamic = a; __callArgument524; })) : Float) : Float) >= (cast (cast getRectangleMaxY(({ final __callArgument526:Dynamic = b; __callArgument526; })) : Float) : Float))) : Bool);
     return cast null;
   }
 
@@ -5603,10 +5749,10 @@ class _Geometry {
     var maxY:Float = cast _Runtime.UNDEFINED;
     var minX:Float = cast _Runtime.UNDEFINED;
     var minY:Float = cast _Runtime.UNDEFINED;
-    maxX = (cast getRectangleMaxX(({ final __callArgument542:Dynamic = source; __callArgument542; })) : Float);
-    maxY = (cast getRectangleMaxY(({ final __callArgument544:Dynamic = source; __callArgument544; })) : Float);
-    minX = (cast getRectangleMinX(({ final __callArgument546:Dynamic = source; __callArgument546; })) : Float);
-    minY = (cast getRectangleMinY(({ final __callArgument548:Dynamic = source; __callArgument548; })) : Float);
+    maxX = (cast getRectangleMaxX(({ final __callArgument528:Dynamic = source; __callArgument528; })) : Float);
+    maxY = (cast getRectangleMaxY(({ final __callArgument530:Dynamic = source; __callArgument530; })) : Float);
+    minX = (cast getRectangleMinX(({ final __callArgument532:Dynamic = source; __callArgument532; })) : Float);
+    minY = (cast getRectangleMinY(({ final __callArgument534:Dynamic = source; __callArgument534; })) : Float);
     (out.x = cast (minX : Float));
     (out.y = cast (minY : Float));
     (out.width = cast ((maxX - minX) : Float));
@@ -5755,7 +5901,10 @@ class _Geometry {
   public static final pool__rectanglePool:Array<Rectangle> = (cast cast ([] : Array<Dynamic>));
 
   public static function createTransform2D(?x:Float, ?y:Float, ?rotation:Float, ?scaleX:Float, ?scaleY:Float, ?skewX:Float, ?skewY:Float, ?pivotX:Float, ?pivotY:Float):Transform2D {
-    return cast (cast createEntity(({ final __callArgument550:Dynamic = ({ pivotX: (cast _Runtime.coalesce(pivotX, function():Dynamic return cast 0.0) : Dynamic), pivotY: (cast _Runtime.coalesce(pivotY, function():Dynamic return cast 0.0) : Dynamic), rotation: (cast _Runtime.coalesce(rotation, function():Dynamic return cast 0.0) : Dynamic), scaleX: (cast _Runtime.coalesce(scaleX, function():Dynamic return cast 1.0) : Dynamic), scaleY: (cast _Runtime.coalesce(scaleY, function():Dynamic return cast 1.0) : Dynamic), skewX: (cast _Runtime.coalesce(skewX, function():Dynamic return cast 0.0) : Dynamic), skewY: (cast _Runtime.coalesce(skewY, function():Dynamic return cast 0.0) : Dynamic), x: (cast _Runtime.coalesce(x, function():Dynamic return cast 0.0) : Dynamic), y: (cast _Runtime.coalesce(y, function():Dynamic return cast 0.0) : Dynamic) } : Transform2D); __callArgument550; })) : Transform2D);
+    var out:EntityConstruction<Transform2D> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : Transform2D); }) #end));
+    initializeTransform2D(({ final __callArgument536:Dynamic = out; __callArgument536; }), (cast _Runtime.coalesce(x, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(y, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(rotation, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(scaleX, function():Dynamic return cast 1.0) : Float), (cast _Runtime.coalesce(scaleY, function():Dynamic return cast 1.0) : Float), (cast _Runtime.coalesce(skewX, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(skewY, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(pivotX, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(pivotY, function():Dynamic return cast 0.0) : Float));
+    return cast out;
     return cast null;
   }
 
@@ -5795,17 +5944,48 @@ class _Geometry {
     _Runtime.setField(out, 'y', source.ty);
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeTransform2D(out:EntityConstruction<Transform2D>, x:Float, y:Float, rotation:Float, scaleX:Float, scaleY:Float, skewX:Float, skewY:Float, pivotX:Float, pivotY:Float):Void {
+    _Runtime.setField(out, 'x', x);
+    _Runtime.setField(out, 'y', y);
+    _Runtime.setField(out, 'rotation', rotation);
+    _Runtime.setField(out, 'scaleX', scaleX);
+    _Runtime.setField(out, 'scaleY', scaleY);
+    _Runtime.setField(out, 'skewX', skewX);
+    _Runtime.setField(out, 'skewY', skewY);
+    _Runtime.setField(out, 'pivotX', pivotX);
+    _Runtime.setField(out, 'pivotY', pivotY);
+  }
+
   public static function composeMatrix4FromTransform3D(out:Matrix4Like, source:Transform3DLike):Void {
-    composeMatrix4(({ final __callArgument552:Dynamic = out; __callArgument552; }), ({ final __callArgument553:Dynamic = _Runtime.field(source, 'position'); __callArgument553; }), ({ final __callArgument554:Dynamic = _Runtime.field(source, 'rotation'); __callArgument554; }), ({ final __callArgument555:Dynamic = _Runtime.field(source, 'scale'); __callArgument555; }));
+    composeMatrix4(({ final __callArgument538:Dynamic = out; __callArgument538; }), ({ final __callArgument539:Dynamic = _Runtime.field(source, 'position'); __callArgument539; }), ({ final __callArgument540:Dynamic = _Runtime.field(source, 'rotation'); __callArgument540; }), ({ final __callArgument541:Dynamic = _Runtime.field(source, 'scale'); __callArgument541; }));
   }
 
   public static function createTransform3D():Transform3D {
-    return cast (cast createEntity((cast (#if flight_struct_typedef { rotation: (cast (#if js _Runtime.callValue(createQuaternion, cast ([] : Array<Dynamic>)) #else createQuaternion(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Quaternion), scale: (cast createVector3(({ final __callArgument560:Dynamic = 1.0; __callArgument560; }), ({ final __callArgument561:Dynamic = 1.0; __callArgument561; }), ({ final __callArgument562:Dynamic = 1.0; __callArgument562; })) : Vector3), position: (cast (#if js _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>)) #else createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector3) } #else ({ final __structInitField0:Dynamic = (cast (#if js _Runtime.callValue(createQuaternion, cast ([] : Array<Dynamic>)) #else createQuaternion(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Quaternion); final __structInitField1:Dynamic = (cast createVector3(({ final __callArgument566:Dynamic = 1.0; __callArgument566; }), ({ final __callArgument567:Dynamic = 1.0; __callArgument567; }), ({ final __callArgument568:Dynamic = 1.0; __callArgument568; })) : Vector3); final __structInitField2:Dynamic = (cast (#if js _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>)) #else createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector3); ({ position: __structInitField2, rotation: __structInitField0, scale: __structInitField1 } : Transform3D); }) #end) : Dynamic)) : Transform3D);
+    var position:Vector3 = cast _Runtime.UNDEFINED;
+    var rotation:Quaternion = cast _Runtime.UNDEFINED;
+    var scale:Vector3 = cast _Runtime.UNDEFINED;
+    var out:EntityConstruction<Transform3D> = cast _Runtime.UNDEFINED;
+    position = (cast (#if js _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>)) #else createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector3);
+    rotation = (cast (#if js _Runtime.callValue(createQuaternion, cast ([] : Array<Dynamic>)) #else createQuaternion(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Quaternion);
+    scale = (cast createVector3(({ final __callArgument546:Dynamic = 1.0; __callArgument546; }), ({ final __callArgument547:Dynamic = 1.0; __callArgument547; }), ({ final __callArgument548:Dynamic = 1.0; __callArgument548; })) : Vector3);
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ position: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scale: cast _Runtime.UNDEFINED } : Transform3D); }) #end));
+    initializeTransform3D(({ final __callArgument552:Dynamic = out; __callArgument552; }), ({ final __callArgument553:Dynamic = position; __callArgument553; }), ({ final __callArgument554:Dynamic = rotation; __callArgument554; }), ({ final __callArgument555:Dynamic = scale; __callArgument555; }));
+    return cast out;
     return cast null;
   }
 
   public static function decomposeMatrix4ToTransform3D(out:Transform3DLike, m:Matrix4Like):Void {
-    decomposeMatrix4(({ final __callArgument584:Dynamic = _Runtime.field(out, 'position'); __callArgument584; }), ({ final __callArgument585:Dynamic = _Runtime.field(out, 'rotation'); __callArgument585; }), ({ final __callArgument586:Dynamic = _Runtime.field(out, 'scale'); __callArgument586; }), ({ final __callArgument587:Dynamic = m; __callArgument587; }));
+    decomposeMatrix4(({ final __callArgument560:Dynamic = _Runtime.field(out, 'position'); __callArgument560; }), ({ final __callArgument561:Dynamic = _Runtime.field(out, 'rotation'); __callArgument561; }), ({ final __callArgument562:Dynamic = _Runtime.field(out, 'scale'); __callArgument562; }), ({ final __callArgument563:Dynamic = m; __callArgument563; }));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeTransform3D(out:EntityConstruction<Transform3D>, position:Vector3, rotation:Quaternion, scale:Vector3):Void {
+    _Runtime.setField(out, 'position', position);
+    _Runtime.setField(out, 'rotation', rotation);
+    _Runtime.setField(out, 'scale', scale);
   }
 
   public static function reserveFloat32Array(array:flight._internal._Float32Array, capacity:Float):flight._internal._Float32Array {
@@ -5866,7 +6046,7 @@ class _Geometry {
   }
 
   public static function cloneVector2(source:Vector2Like):Vector2 {
-    return cast (cast createVector2(({ final __callArgument592:Dynamic = source.x; __callArgument592; }), ({ final __callArgument593:Dynamic = source.y; __callArgument593; })) : Vector2);
+    return cast (cast createVector2(({ final __callArgument568:Dynamic = source.x; __callArgument568; }), ({ final __callArgument569:Dynamic = source.y; __callArgument569; })) : Vector2);
     return cast null;
   }
 
@@ -5880,14 +6060,17 @@ class _Geometry {
   }
 
   public static function createVector2(?x:Float, ?y:Float):Vector2 {
-    return cast (cast createEntity(({ final __callArgument596:Dynamic = ({ x: (cast _Runtime.coalesce(x, function():Dynamic return cast 0.0) : Dynamic), y: (cast _Runtime.coalesce(y, function():Dynamic return cast 0.0) : Dynamic) } : Vector2); __callArgument596; })) : Vector2);
+    var out:EntityConstruction<Vector2> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : Vector2); }) #end));
+    initializeVector2(({ final __callArgument572:Dynamic = out; __callArgument572; }), (cast _Runtime.coalesce(x, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(y, function():Dynamic return cast 0.0) : Float));
+    return cast out;
     return cast null;
   }
 
   public static function createVector2FromPolar(length:Float, angle:Float):Vector2 {
     var out:Vector2 = cast _Runtime.UNDEFINED;
     out = (cast (#if js _Runtime.callValue(createVector2, cast ([] : Array<Dynamic>)) #else createVector2(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector2);
-    setVector2FromPolar(({ final __callArgument598:Dynamic = out; __callArgument598; }), (cast length : Float), (cast angle : Float));
+    setVector2FromPolar(({ final __callArgument574:Dynamic = out; __callArgument574; }), (cast length : Float), (cast angle : Float));
     return cast out;
     return cast null;
   }
@@ -5926,10 +6109,10 @@ class _Geometry {
     var la:Float = cast _Runtime.UNDEFINED;
     var lb:Float = cast _Runtime.UNDEFINED;
     var _dot:Float = cast _Runtime.UNDEFINED;
-    la = (cast getVector2Length(({ final __callArgument600:Dynamic = a; __callArgument600; })) : Float);
-    lb = (cast getVector2Length(({ final __callArgument602:Dynamic = b; __callArgument602; })) : Float);
+    la = (cast getVector2Length(({ final __callArgument576:Dynamic = a; __callArgument576; })) : Float);
+    lb = (cast getVector2Length(({ final __callArgument578:Dynamic = b; __callArgument578; })) : Float);
     if ((cast ((cast _Runtime.strictEquals(la, 0.0) : Bool) || (cast _Runtime.strictEquals(lb, 0.0) : Bool)) : Bool)) { return cast HxMath.NaN; }
-    _dot = ((cast getVector2Dot(({ final __callArgument604:Dynamic = a; __callArgument604; }), ({ final __callArgument605:Dynamic = b; __callArgument605; })) : Float) / (la * lb));
+    _dot = ((cast getVector2Dot(({ final __callArgument580:Dynamic = a; __callArgument580; }), ({ final __callArgument581:Dynamic = b; __callArgument581; })) : Float) / (la * lb));
     return cast HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, _dot)));
     return cast null;
   }
@@ -5965,6 +6148,13 @@ class _Geometry {
   public static function getVector2LengthSquared(source:Vector2Like):Float {
     return cast (HxMath.pow(source.x, 2.0) + HxMath.pow(source.y, 2.0));
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeVector2(out:EntityConstruction<Vector2>, x:Float, y:Float):Void {
+    _Runtime.setField(out, 'x', x);
+    _Runtime.setField(out, 'y', y);
   }
 
   public static function interpolateVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like, t:Float):Void {
@@ -6152,9 +6342,9 @@ class _Geometry {
     flight._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flight._internal._Float32Array), (cast (offset + 1.0) : Float), (cast source.y : Float));
   }
 
-  public static final VECTOR2_X_AXIS:Vector2 = (cast createVector2(({ final __callArgument608:Dynamic = 1.0; __callArgument608; }), ({ final __callArgument609:Dynamic = 0.0; __callArgument609; })) : Vector2);
+  public static final VECTOR2_X_AXIS:Vector2 = (cast createVector2(({ final __callArgument584:Dynamic = 1.0; __callArgument584; }), ({ final __callArgument585:Dynamic = 0.0; __callArgument585; })) : Vector2);
 
-  public static final VECTOR2_Y_AXIS:Vector2 = (cast createVector2(({ final __callArgument612:Dynamic = 0.0; __callArgument612; }), ({ final __callArgument613:Dynamic = 1.0; __callArgument613; })) : Vector2);
+  public static final VECTOR2_Y_AXIS:Vector2 = (cast createVector2(({ final __callArgument588:Dynamic = 0.0; __callArgument588; }), ({ final __callArgument589:Dynamic = 1.0; __callArgument589; })) : Vector2);
 
   public static function acquireEmptyVector2():Vector2 {
     var v:Vector2 = cast _Runtime.UNDEFINED;
@@ -6226,7 +6416,7 @@ class _Geometry {
   }
 
   public static function cloneVector3(source:Vector3Like):Vector3 {
-    return cast (cast createVector3(({ final __callArgument616:Dynamic = source.x; __callArgument616; }), ({ final __callArgument617:Dynamic = source.y; __callArgument617; }), ({ final __callArgument618:Dynamic = source.z; __callArgument618; })) : Vector3);
+    return cast (cast createVector3(({ final __callArgument592:Dynamic = source.x; __callArgument592; }), ({ final __callArgument593:Dynamic = source.y; __callArgument593; }), ({ final __callArgument594:Dynamic = source.z; __callArgument594; })) : Vector3);
     return cast null;
   }
 
@@ -6243,14 +6433,17 @@ class _Geometry {
   }
 
   public static function createVector3(?x:Float, ?y:Float, ?z:Float):Vector3 {
-    return cast (cast createEntity(({ final __callArgument622:Dynamic = ({ x: (cast _Runtime.coalesce(x, function():Dynamic return cast 0.0) : Dynamic), y: (cast _Runtime.coalesce(y, function():Dynamic return cast 0.0) : Dynamic), z: (cast _Runtime.coalesce(z, function():Dynamic return cast 0.0) : Dynamic) } : Vector3); __callArgument622; })) : Vector3);
+    var out:EntityConstruction<Vector3> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED, z: cast _Runtime.UNDEFINED } : Vector3); }) #end));
+    initializeVector3(({ final __callArgument598:Dynamic = out; __callArgument598; }), (cast _Runtime.coalesce(x, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(y, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(z, function():Dynamic return cast 0.0) : Float));
+    return cast out;
     return cast null;
   }
 
   public static function createVector3FromSpherical(radius:Float, theta:Float, phi:Float):Vector3 {
     var out:Vector3 = cast _Runtime.UNDEFINED;
     out = (cast (#if js _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>)) #else createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector3);
-    setVector3FromSpherical(({ final __callArgument624:Dynamic = out; __callArgument624; }), (cast radius : Float), (cast theta : Float), (cast phi : Float));
+    setVector3FromSpherical(({ final __callArgument600:Dynamic = out; __callArgument600; }), (cast radius : Float), (cast theta : Float), (cast phi : Float));
     return cast out;
     return cast null;
   }
@@ -6295,10 +6488,10 @@ class _Geometry {
     var la:Float = cast _Runtime.UNDEFINED;
     var lb:Float = cast _Runtime.UNDEFINED;
     var _dot:Float = cast _Runtime.UNDEFINED;
-    la = (cast getVector3Length(({ final __callArgument626:Dynamic = a; __callArgument626; })) : Float);
-    lb = (cast getVector3Length(({ final __callArgument628:Dynamic = b; __callArgument628; })) : Float);
+    la = (cast getVector3Length(({ final __callArgument602:Dynamic = a; __callArgument602; })) : Float);
+    lb = (cast getVector3Length(({ final __callArgument604:Dynamic = b; __callArgument604; })) : Float);
     if ((cast ((cast _Runtime.strictEquals(la, 0.0) : Bool) || (cast _Runtime.strictEquals(lb, 0.0) : Bool)) : Bool)) { return cast HxMath.NaN; }
-    _dot = ((cast getVector3Dot(({ final __callArgument630:Dynamic = a; __callArgument630; }), ({ final __callArgument631:Dynamic = b; __callArgument631; })) : Float) / (la * lb));
+    _dot = ((cast getVector3Dot(({ final __callArgument606:Dynamic = a; __callArgument606; }), ({ final __callArgument607:Dynamic = b; __callArgument607; })) : Float) / (la * lb));
     return cast HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, _dot)));
     return cast null;
   }
@@ -6358,6 +6551,14 @@ class _Geometry {
     (out.x = cast (radius : Float));
     (out.y = cast (HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, (y / radius)))) : Float));
     (out.z = cast (HxMath.atan2(z, x) : Float));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeVector3(out:EntityConstruction<Vector3>, x:Float, y:Float, z:Float):Void {
+    _Runtime.setField(out, 'x', x);
+    _Runtime.setField(out, 'y', y);
+    _Runtime.setField(out, 'z', z);
   }
 
   public static function interpolateVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like, t:Float):Void {
@@ -6590,11 +6791,11 @@ class _Geometry {
     flight._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flight._internal._Float32Array), (cast (offset + 2.0) : Float), (cast source.z : Float));
   }
 
-  public static final VECTOR3_X_AXIS:Vector3 = (cast createVector3(({ final __callArgument634:Dynamic = 1.0; __callArgument634; }), ({ final __callArgument635:Dynamic = 0.0; __callArgument635; }), ({ final __callArgument636:Dynamic = 0.0; __callArgument636; })) : Vector3);
+  public static final VECTOR3_X_AXIS:Vector3 = (cast createVector3(({ final __callArgument610:Dynamic = 1.0; __callArgument610; }), ({ final __callArgument611:Dynamic = 0.0; __callArgument611; }), ({ final __callArgument612:Dynamic = 0.0; __callArgument612; })) : Vector3);
 
-  public static final VECTOR3_Y_AXIS:Vector3 = (cast createVector3(({ final __callArgument640:Dynamic = 0.0; __callArgument640; }), ({ final __callArgument641:Dynamic = 1.0; __callArgument641; }), ({ final __callArgument642:Dynamic = 0.0; __callArgument642; })) : Vector3);
+  public static final VECTOR3_Y_AXIS:Vector3 = (cast createVector3(({ final __callArgument616:Dynamic = 0.0; __callArgument616; }), ({ final __callArgument617:Dynamic = 1.0; __callArgument617; }), ({ final __callArgument618:Dynamic = 0.0; __callArgument618; })) : Vector3);
 
-  public static final VECTOR3_Z_AXIS:Vector3 = (cast createVector3(({ final __callArgument646:Dynamic = 0.0; __callArgument646; }), ({ final __callArgument647:Dynamic = 0.0; __callArgument647; }), ({ final __callArgument648:Dynamic = 1.0; __callArgument648; })) : Vector3);
+  public static final VECTOR3_Z_AXIS:Vector3 = (cast createVector3(({ final __callArgument622:Dynamic = 0.0; __callArgument622; }), ({ final __callArgument623:Dynamic = 0.0; __callArgument623; }), ({ final __callArgument624:Dynamic = 1.0; __callArgument624; })) : Vector3);
 
   public static function acquireEmptyVector3():Vector3 {
     var v:Vector3 = cast _Runtime.UNDEFINED;
@@ -6685,7 +6886,7 @@ class _Geometry {
   }
 
   public static function cloneVector4(source:Vector4Like):Vector4 {
-    return cast (cast createVector4(({ final __callArgument652:Dynamic = _Runtime.field(source, 'x'); __callArgument652; }), ({ final __callArgument653:Dynamic = _Runtime.field(source, 'y'); __callArgument653; }), ({ final __callArgument654:Dynamic = _Runtime.field(source, 'z'); __callArgument654; }), ({ final __callArgument655:Dynamic = _Runtime.field(source, 'w'); __callArgument655; })) : Vector4);
+    return cast (cast createVector4(({ final __callArgument628:Dynamic = _Runtime.field(source, 'x'); __callArgument628; }), ({ final __callArgument629:Dynamic = _Runtime.field(source, 'y'); __callArgument629; }), ({ final __callArgument630:Dynamic = _Runtime.field(source, 'z'); __callArgument630; }), ({ final __callArgument631:Dynamic = _Runtime.field(source, 'w'); __callArgument631; })) : Vector4);
     return cast null;
   }
 
@@ -6705,7 +6906,10 @@ class _Geometry {
   }
 
   public static function createVector4(?x:Float, ?y:Float, ?z:Float, ?w:Float):Vector4 {
-    return cast (cast createEntity(({ final __callArgument660:Dynamic = (#if flight_struct_typedef { x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), z: _Runtime.coalesce(z, function():Dynamic return cast 0.0), w: _Runtime.coalesce(w, function():Dynamic return cast 0.0) } #else ({ final __structInitField0:Dynamic = _Runtime.coalesce(x, function():Dynamic return cast 0.0); final __structInitField1:Dynamic = _Runtime.coalesce(y, function():Dynamic return cast 0.0); final __structInitField2:Dynamic = _Runtime.coalesce(z, function():Dynamic return cast 0.0); final __structInitField3:Dynamic = _Runtime.coalesce(w, function():Dynamic return cast 0.0); ({ w: __structInitField3, x: __structInitField0, y: __structInitField1, z: __structInitField2 } : Vector4); }) #end); __callArgument660; })) : Vector4);
+    var out:EntityConstruction<Vector4> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ w: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED, z: cast _Runtime.UNDEFINED } : Vector4); }) #end));
+    initializeVector4(({ final __callArgument636:Dynamic = out; __callArgument636; }), (cast _Runtime.coalesce(x, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(y, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(z, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(w, function():Dynamic return cast 0.0) : Float));
+    return cast out;
     return cast null;
   }
 
@@ -6742,10 +6946,10 @@ class _Geometry {
     var la:Float = cast _Runtime.UNDEFINED;
     var lb:Float = cast _Runtime.UNDEFINED;
     var _dot:Float = cast _Runtime.UNDEFINED;
-    la = (cast getVector4Length(({ final __callArgument662:Dynamic = a; __callArgument662; })) : Float);
-    lb = (cast getVector4Length(({ final __callArgument664:Dynamic = b; __callArgument664; })) : Float);
+    la = (cast getVector4Length(({ final __callArgument638:Dynamic = a; __callArgument638; })) : Float);
+    lb = (cast getVector4Length(({ final __callArgument640:Dynamic = b; __callArgument640; })) : Float);
     if ((cast ((cast _Runtime.strictEquals(la, 0.0) : Bool) || (cast _Runtime.strictEquals(lb, 0.0) : Bool)) : Bool)) { return cast HxMath.NaN; }
-    _dot = ((cast getVector4Dot(({ final __callArgument666:Dynamic = a; __callArgument666; }), ({ final __callArgument667:Dynamic = b; __callArgument667; })) : Float) / (la * lb));
+    _dot = ((cast getVector4Dot(({ final __callArgument642:Dynamic = a; __callArgument642; }), ({ final __callArgument643:Dynamic = b; __callArgument643; })) : Float) / (la * lb));
     return cast HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, _dot)));
     return cast null;
   }
@@ -6789,6 +6993,15 @@ class _Geometry {
   public static function getVector4LengthSquared(source:Vector4Like):Float {
     return cast (((HxMath.pow(_Runtime.field(source, 'x'), 2.0) + HxMath.pow(_Runtime.field(source, 'y'), 2.0)) + HxMath.pow(_Runtime.field(source, 'z'), 2.0)) + HxMath.pow(_Runtime.field(source, 'w'), 2.0));
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeVector4(out:EntityConstruction<Vector4>, x:Float, y:Float, z:Float, w:Float):Void {
+    _Runtime.setField(out, 'x', x);
+    _Runtime.setField(out, 'y', y);
+    _Runtime.setField(out, 'z', z);
+    _Runtime.setField(out, 'w', w);
   }
 
   public static function interpolateVector4(out:Vector4Like, a:Vector4Like, b:Vector4Like, t:Float):Void {
@@ -7047,13 +7260,13 @@ class _Geometry {
     flight._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flight._internal._Float32Array), (cast (offset + 3.0) : Float), (cast _Runtime.field(source, 'w') : Float));
   }
 
-  public static final VECTOR4_W_UNIT:Vector4 = (cast createVector4(({ final __callArgument670:Dynamic = 0.0; __callArgument670; }), ({ final __callArgument671:Dynamic = 0.0; __callArgument671; }), ({ final __callArgument672:Dynamic = 0.0; __callArgument672; }), ({ final __callArgument673:Dynamic = 1.0; __callArgument673; })) : Vector4);
+  public static final VECTOR4_W_UNIT:Vector4 = (cast createVector4(({ final __callArgument646:Dynamic = 0.0; __callArgument646; }), ({ final __callArgument647:Dynamic = 0.0; __callArgument647; }), ({ final __callArgument648:Dynamic = 0.0; __callArgument648; }), ({ final __callArgument649:Dynamic = 1.0; __callArgument649; })) : Vector4);
 
-  public static final VECTOR4_X_AXIS:Vector4 = (cast createVector4(({ final __callArgument678:Dynamic = 1.0; __callArgument678; }), ({ final __callArgument679:Dynamic = 0.0; __callArgument679; }), ({ final __callArgument680:Dynamic = 0.0; __callArgument680; }), ({ final __callArgument681:Dynamic = 0.0; __callArgument681; })) : Vector4);
+  public static final VECTOR4_X_AXIS:Vector4 = (cast createVector4(({ final __callArgument654:Dynamic = 1.0; __callArgument654; }), ({ final __callArgument655:Dynamic = 0.0; __callArgument655; }), ({ final __callArgument656:Dynamic = 0.0; __callArgument656; }), ({ final __callArgument657:Dynamic = 0.0; __callArgument657; })) : Vector4);
 
-  public static final VECTOR4_Y_AXIS:Vector4 = (cast createVector4(({ final __callArgument686:Dynamic = 0.0; __callArgument686; }), ({ final __callArgument687:Dynamic = 1.0; __callArgument687; }), ({ final __callArgument688:Dynamic = 0.0; __callArgument688; }), ({ final __callArgument689:Dynamic = 0.0; __callArgument689; })) : Vector4);
+  public static final VECTOR4_Y_AXIS:Vector4 = (cast createVector4(({ final __callArgument662:Dynamic = 0.0; __callArgument662; }), ({ final __callArgument663:Dynamic = 1.0; __callArgument663; }), ({ final __callArgument664:Dynamic = 0.0; __callArgument664; }), ({ final __callArgument665:Dynamic = 0.0; __callArgument665; })) : Vector4);
 
-  public static final VECTOR4_Z_AXIS:Vector4 = (cast createVector4(({ final __callArgument694:Dynamic = 0.0; __callArgument694; }), ({ final __callArgument695:Dynamic = 0.0; __callArgument695; }), ({ final __callArgument696:Dynamic = 1.0; __callArgument696; }), ({ final __callArgument697:Dynamic = 0.0; __callArgument697; })) : Vector4);
+  public static final VECTOR4_Z_AXIS:Vector4 = (cast createVector4(({ final __callArgument670:Dynamic = 0.0; __callArgument670; }), ({ final __callArgument671:Dynamic = 0.0; __callArgument671; }), ({ final __callArgument672:Dynamic = 1.0; __callArgument672; }), ({ final __callArgument673:Dynamic = 0.0; __callArgument673; })) : Vector4);
 
   public static function acquireEmptyVector4():Vector4 {
     var v:Vector4 = cast _Runtime.UNDEFINED;

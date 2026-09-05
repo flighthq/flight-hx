@@ -8,3 +8,4 @@ __syncDependencies();
 export const createEmptyWgpuRegistries = api.createEmptyWgpuRegistries;
 export const createWgpuPipeline = api.createWgpuPipeline;
 export const getWgpuPipelineRegistries = api.getWgpuPipelineRegistries;
+export const initializeEmptyWgpuRegistries = api.initializeEmptyWgpuRegistries;

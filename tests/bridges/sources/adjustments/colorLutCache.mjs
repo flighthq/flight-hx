@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const bakeColorLutForRun = api.bakeColorLutForRun;
 export const createColorLutCache = api.createColorLutCache;
+export const initializeColorLutCache = api.initializeColorLutCache;

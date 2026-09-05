@@ -8,3 +8,4 @@ __syncDependencies();
 export const cloneSpritesheet = api.cloneSpritesheet;
 export const createSpritesheet = api.createSpritesheet;
 export const getSpritesheetAnimation = api.getSpritesheetAnimation;
+export const initializeSpritesheet = api.initializeSpritesheet;

@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const createDropShadowEffect = api.createDropShadowEffect;
 export const getDropShadowEffectPadding = api.getDropShadowEffectPadding;
+export const initializeDropShadowEffect = api.initializeDropShadowEffect;
 export const registerDropShadowEffectPaddingResolver = api.registerDropShadowEffectPaddingResolver;

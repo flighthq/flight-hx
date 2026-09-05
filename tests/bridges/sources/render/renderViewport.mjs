@@ -7,5 +7,6 @@ __syncDependencies();
 
 export const computeRenderProxyWorldBounds = api.computeRenderProxyWorldBounds;
 export const createRenderViewport2D = api.createRenderViewport2D;
+export const initializeRenderViewport2D = api.initializeRenderViewport2D;
 export const isRenderableInViewport = api.isRenderableInViewport;
 export const isRenderProxyInViewport = api.isRenderProxyInViewport;

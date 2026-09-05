@@ -4,4 +4,30 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef VertexDisplaceModifier = { var kind:String; var slot:String; var source:VertexDisplaceModifierSource; var amplitude:Float; @:optional var axis:Vector3Like; @:optional var map:Texture; @:optional var frequency:Float; @:optional var speed:Float; @:optional var direction:Vector3Like; };
+#if !flight_struct_typedef
+@:allow(flight._Shading)
+@:keep
+@:structInit
+class VertexDisplaceModifier extends flight.types.Modifier<String, String> {
+  public var source:VertexDisplaceModifierSource;
+  public var amplitude:Float;
+  public var axis:Null<Vector3Like>;
+  public var map:Null<Texture>;
+  public var frequency:Null<Float>;
+  public var speed:Null<Float>;
+  public var direction:Null<Vector3Like>;
+
+  private function new(kind:String, slot:String, source:VertexDisplaceModifierSource, amplitude:Float, ?axis:Null<Vector3Like>, ?map:Null<Texture>, ?frequency:Null<Float>, ?speed:Null<Float>, ?direction:Null<Vector3Like>):Void {
+    super(kind, slot);
+    this.source = source;
+    this.amplitude = amplitude;
+    this.axis = axis;
+    this.map = map;
+    this.frequency = frequency;
+    this.speed = speed;
+    this.direction = direction;
+  }
+}
+#else
+typedef VertexDisplaceModifier = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var slot:String; var source:VertexDisplaceModifierSource; var amplitude:Float; @:optional var axis:Vector3Like; @:optional var map:Texture; @:optional var frequency:Float; @:optional var speed:Float; @:optional var direction:Vector3Like; };
+#end

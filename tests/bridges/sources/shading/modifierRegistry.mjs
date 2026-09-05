@@ -6,5 +6,6 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createModifierRegistry = api.createModifierRegistry;
+export const initializeModifierRegistry = api.initializeModifierRegistry;
 export const registerModifier = api.registerModifier;
 export const resolveModifier = api.resolveModifier;

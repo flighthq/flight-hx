@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createSharpenEffect = api.createSharpenEffect;
+export const initializeSharpenEffect = api.initializeSharpenEffect;

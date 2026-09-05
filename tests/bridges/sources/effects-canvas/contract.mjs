@@ -29,3 +29,5 @@ export * from './canvasRenderTextureEffect.mjs';
 export * from './canvasScanlinesEffect.mjs';
 export * from './canvasTiltShiftEffect.mjs';
 export * from './canvasVignetteEffect.mjs';
+export { initializeCanvasRenderEffectPipeline } from './canvasRenderEffectPipeline.mjs';
+export { initializeCanvasRenderTargetPool } from './canvasRenderEffectPipeline.mjs';

@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createPathMorph = api.createPathMorph;
+export const initializePathMorph = api.initializePathMorph;
 export const samplePathMorph = api.samplePathMorph;

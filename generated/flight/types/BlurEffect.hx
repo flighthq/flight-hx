@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef BlurEffect = { var kind:String; @:optional var blurX:Float; @:optional var blurY:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class BlurEffect extends flight.types.RenderEffect<String> {
+  public var blurX:Null<Float>;
+  public var blurY:Null<Float>;
+
+  private function new(kind:String, ?blurX:Null<Float>, ?blurY:Null<Float>):Void {
+    super(kind);
+    this.blurX = blurX;
+    this.blurY = blurY;
+  }
+}
+#else
+typedef BlurEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var blurX:Float; @:optional var blurY:Float; };
+#end

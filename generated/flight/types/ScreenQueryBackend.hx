@@ -4,4 +4,26 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class ScreenQueryBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var destroy:Null<Void->Void>;
+  public var getScreens:Array<ScreenInfo>->Array<ScreenInfo>;
+  public var getPrimaryScreen:ScreenInfo->ScreenInfo;
+  public var getCursorPosition:{ var x:Float; var y:Float; }->{ var x:Float; var y:Float; };
+
+  private function new(?destroy:Null<Void->Void>, getScreens:Array<ScreenInfo>->Array<ScreenInfo>, getPrimaryScreen:ScreenInfo->ScreenInfo, getCursorPosition:{ var x:Float; var y:Float; }->{ var x:Float; var y:Float; }):Void {
+    this.__symbol__EntityRuntime = null;
+    this.destroy = destroy;
+    this.getScreens = getScreens;
+    this.getPrimaryScreen = getPrimaryScreen;
+    this.getCursorPosition = getCursorPosition;
+  }
+}
+#else
 typedef ScreenQueryBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var destroy:Void->Void; var getScreens:Array<ScreenInfo>->Array<ScreenInfo>; var getPrimaryScreen:ScreenInfo->ScreenInfo; var getCursorPosition:{ var x:Float; var y:Float; }->{ var x:Float; var y:Float; }; };
+#end

@@ -4,4 +4,33 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CanvasTextShaperBackend = { @:optional var getCodePointForGlyph:Float->Float; @:optional var getFontMetrics:TextFormat->Null<FontMetrics>; @:optional var getGlyphExtents:Float->Null<GlyphExtents>; @:optional var getGlyphIndexForCodePoint:Float->Float; @:optional var getGlyphName:Float->String; var measureText:TextMeasureFunction; @:optional var shapeRun:String->TextFormat->ShapeRunOptions->ShapedRun; var clearCache:Void->Void; };
+#if !flight_struct_typedef
+@:allow(flight._TextShaperCanvas)
+@:keep
+@:structInit
+class CanvasTextShaperBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var getCodePointForGlyph:Null<Float->Float>;
+  public var getFontMetrics:Null<TextFormat->Null<FontMetrics>>;
+  public var getGlyphExtents:Null<Float->Null<GlyphExtents>>;
+  public var getGlyphIndexForCodePoint:Null<Float->Float>;
+  public var getGlyphName:Null<Float->String>;
+  public var measureText:TextMeasureFunction;
+  public var shapeRun:Null<String->TextFormat->ShapeRunOptions->ShapedRun>;
+  public var clearCache:Void->Void;
+
+  private function new(?getCodePointForGlyph:Null<Float->Float>, ?getFontMetrics:Null<TextFormat->Null<FontMetrics>>, ?getGlyphExtents:Null<Float->Null<GlyphExtents>>, ?getGlyphIndexForCodePoint:Null<Float->Float>, ?getGlyphName:Null<Float->String>, measureText:TextMeasureFunction, ?shapeRun:Null<String->TextFormat->ShapeRunOptions->ShapedRun>, clearCache:Void->Void):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getCodePointForGlyph = getCodePointForGlyph;
+    this.getFontMetrics = getFontMetrics;
+    this.getGlyphExtents = getGlyphExtents;
+    this.getGlyphIndexForCodePoint = getGlyphIndexForCodePoint;
+    this.getGlyphName = getGlyphName;
+    this.measureText = measureText;
+    this.shapeRun = shapeRun;
+    this.clearCache = clearCache;
+  }
+}
+#else
+typedef CanvasTextShaperBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var getCodePointForGlyph:Float->Float; @:optional var getFontMetrics:TextFormat->Null<FontMetrics>; @:optional var getGlyphExtents:Float->Null<GlyphExtents>; @:optional var getGlyphIndexForCodePoint:Float->Float; @:optional var getGlyphName:Float->String; var measureText:TextMeasureFunction; @:optional var shapeRun:String->TextFormat->ShapeRunOptions->ShapedRun; var clearCache:Void->Void; };
+#end

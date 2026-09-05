@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const explainFlightDocumentText = api.explainFlightDocumentText;
 export const formatFlightDocumentText = api.formatFlightDocumentText;
+export const initializeFlightDocumentRefusalExplanation = api.initializeFlightDocumentRefusalExplanation;
 export const parseFlightDocumentText = api.parseFlightDocumentText;

@@ -4,4 +4,39 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics3DShapeCastResult = { var body:Null<RigidBody3D>; var collider:Null<Physics3DCollider>; var colliderIndex:Float; var hit:Bool; var fraction:Float; var x:Float; var y:Float; var z:Float; var normalX:Float; var normalY:Float; var normalZ:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Physics3D)
+@:keep
+@:structInit
+class Physics3DShapeCastResult {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var body:Null<RigidBody3D>;
+  public var collider:Null<Physics3DCollider>;
+  public var colliderIndex:Float;
+  public var hit:Bool;
+  public var fraction:Float;
+  public var x:Float;
+  public var y:Float;
+  public var z:Float;
+  public var normalX:Float;
+  public var normalY:Float;
+  public var normalZ:Float;
+
+  private function new(body:Null<RigidBody3D>, collider:Null<Physics3DCollider>, colliderIndex:Float, hit:Bool, fraction:Float, x:Float, y:Float, z:Float, normalX:Float, normalY:Float, normalZ:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.body = body;
+    this.collider = collider;
+    this.colliderIndex = colliderIndex;
+    this.hit = hit;
+    this.fraction = fraction;
+    this.x = x;
+    this.y = y;
+    this.z = z;
+    this.normalX = normalX;
+    this.normalY = normalY;
+    this.normalZ = normalZ;
+  }
+}
+#else
+typedef Physics3DShapeCastResult = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var body:Null<RigidBody3D>; var collider:Null<Physics3DCollider>; var colliderIndex:Float; var hit:Bool; var fraction:Float; var x:Float; var y:Float; var z:Float; var normalX:Float; var normalY:Float; var normalZ:Float; };
+#end

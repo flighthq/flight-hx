@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:allow(flight._HostTauri)
+@:keep
+@:structInit
+class MenuApplicationBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var destroy:Null<Void->Void>;
+  public var setApplicationMenu:Array<MenuItemTemplate>->Bool;
+
+  private function new(?destroy:Null<Void->Void>, setApplicationMenu:Array<MenuItemTemplate>->Bool):Void {
+    this.__symbol__EntityRuntime = null;
+    this.destroy = destroy;
+    this.setApplicationMenu = setApplicationMenu;
+  }
+}
+#else
 typedef MenuApplicationBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var destroy:Void->Void; var setApplicationMenu:Array<MenuItemTemplate>->Bool; };
+#end

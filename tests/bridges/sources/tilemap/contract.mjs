@@ -4,3 +4,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './tilemap.mjs';
+export { initializeTilemapData } from './tilemap.mjs';
+export { initializeTilemapSignals } from './tilemap.mjs';

@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const createGradientBevelEffect = api.createGradientBevelEffect;
 export const getGradientBevelEffectPadding = api.getGradientBevelEffectPadding;
+export const initializeGradientBevelEffect = api.initializeGradientBevelEffect;
 export const registerGradientBevelEffectPaddingResolver = api.registerGradientBevelEffectPaddingResolver;

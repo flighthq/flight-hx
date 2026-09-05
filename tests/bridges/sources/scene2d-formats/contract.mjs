@@ -15,3 +15,4 @@ export * from './riveScene2DDocument.mjs';
 export * from './riveSkeleton.mjs';
 export * from './riveSkin.mjs';
 export * from './svgDocument.mjs';
+export { initializeRiveObjectGraph } from './riveObjectGraph.mjs';

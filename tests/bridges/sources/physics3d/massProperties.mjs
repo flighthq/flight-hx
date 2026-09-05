@@ -14,5 +14,6 @@ export const computePhysics3DConvexHullMassData = api.computePhysics3DConvexHull
 export const computePhysics3DCylinderMassData = api.computePhysics3DCylinderMassData;
 export const computePhysics3DSphereMassData = api.computePhysics3DSphereMassData;
 export const createPhysics3DMassData = api.createPhysics3DMassData;
+export const initializePhysics3DMassData = api.initializePhysics3DMassData;
 export const setRigidBody3DMassData = api.setRigidBody3DMassData;
 export const updateRigidBody3DMassData = api.updateRigidBody3DMassData;

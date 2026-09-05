@@ -28,6 +28,7 @@ export const getRectangleSize = api.getRectangleSize;
 export const getRectangleTop = api.getRectangleTop;
 export const getRectangleTopLeft = api.getRectangleTopLeft;
 export const inflateRectangle = api.inflateRectangle;
+export const initializeRectangle = api.initializeRectangle;
 export const intersectsRectangle = api.intersectsRectangle;
 export const isEmptyRectangle = api.isEmptyRectangle;
 export const isFlippedXRectangle = api.isFlippedXRectangle;

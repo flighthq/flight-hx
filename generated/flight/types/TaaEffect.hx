@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TaaEffect = { var kind:String; @:optional var feedback:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class TaaEffect extends flight.types.RenderEffect<String> {
+  public var feedback:Null<Float>;
+
+  private function new(kind:String, ?feedback:Null<Float>):Void {
+    super(kind);
+    this.feedback = feedback;
+  }
+}
+#else
+typedef TaaEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var feedback:Float; };
+#end

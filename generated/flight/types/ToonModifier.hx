@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ToonModifier = { var kind:String; var slot:String; var steps:Float; @:optional var smoothness:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Shading)
+@:keep
+@:structInit
+class ToonModifier extends flight.types.Modifier<String, String> {
+  public var steps:Float;
+  public var smoothness:Null<Float>;
+
+  private function new(kind:String, slot:String, steps:Float, ?smoothness:Null<Float>):Void {
+    super(kind, slot);
+    this.steps = steps;
+    this.smoothness = smoothness;
+  }
+}
+#else
+typedef ToonModifier = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var slot:String; var steps:Float; @:optional var smoothness:Float; };
+#end

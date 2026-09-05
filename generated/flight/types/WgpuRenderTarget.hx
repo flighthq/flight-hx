@@ -4,4 +4,43 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuRenderTarget = { var height:Float; var width:Float; var bindings:WgpuTextureBindings; var colorSpace:RenderTargetColorSpace; var depthStencilTexture:flight._internal.dom.GPUTexture; var mipLevelCount:Float; var depthStencilView:flight._internal.dom.GPUTextureView; var format:flight._internal.dom.GPUTextureFormat; var sampleCount:Float; var clearColors:Array<Float>; var clearDepth:Float; var texture:flight._internal.dom.GPUTexture; var view:flight._internal.dom.GPUTextureView; };
+#if !flight_struct_typedef
+@:allow(flight._RenderWgpu)
+@:keep
+@:structInit
+class WgpuRenderTarget {
+  public var height:Float;
+  public var width:Float;
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var bindings:WgpuTextureBindings;
+  public var colorSpace:RenderTargetColorSpace;
+  public var depthStencilTexture:flight._internal.dom.GPUTexture;
+  public var mipLevelCount:Float;
+  public var depthStencilView:flight._internal.dom.GPUTextureView;
+  public var format:flight._internal.dom.GPUTextureFormat;
+  public var sampleCount:Float;
+  public var clearColors:Array<Float>;
+  public var clearDepth:Float;
+  public var texture:flight._internal.dom.GPUTexture;
+  public var view:flight._internal.dom.GPUTextureView;
+
+  private function new(height:Float, width:Float, bindings:WgpuTextureBindings, colorSpace:RenderTargetColorSpace, depthStencilTexture:flight._internal.dom.GPUTexture, mipLevelCount:Float, depthStencilView:flight._internal.dom.GPUTextureView, format:flight._internal.dom.GPUTextureFormat, sampleCount:Float, clearColors:Array<Float>, clearDepth:Float, texture:flight._internal.dom.GPUTexture, view:flight._internal.dom.GPUTextureView):Void {
+    this.__symbol__EntityRuntime = null;
+    this.height = height;
+    this.width = width;
+    this.bindings = bindings;
+    this.colorSpace = colorSpace;
+    this.depthStencilTexture = depthStencilTexture;
+    this.mipLevelCount = mipLevelCount;
+    this.depthStencilView = depthStencilView;
+    this.format = format;
+    this.sampleCount = sampleCount;
+    this.clearColors = clearColors;
+    this.clearDepth = clearDepth;
+    this.texture = texture;
+    this.view = view;
+  }
+}
+#else
+typedef WgpuRenderTarget = { var height:Float; var width:Float; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var bindings:WgpuTextureBindings; var colorSpace:RenderTargetColorSpace; var depthStencilTexture:flight._internal.dom.GPUTexture; var mipLevelCount:Float; var depthStencilView:flight._internal.dom.GPUTextureView; var format:flight._internal.dom.GPUTextureFormat; var sampleCount:Float; var clearColors:Array<Float>; var clearDepth:Float; var texture:flight._internal.dom.GPUTexture; var view:flight._internal.dom.GPUTextureView; };
+#end

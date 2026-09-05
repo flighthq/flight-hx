@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef LogContext = { var channel:Null<String>; var fields:flight._internal._Record<String, flight._internal._Any>; };
+typedef LogContext = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var channel:Null<String>; var fields:flight._internal._Record<String, flight._internal._Any>; };

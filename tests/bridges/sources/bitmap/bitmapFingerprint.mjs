@@ -9,4 +9,5 @@ export const BITMAP_FINGERPRINT_COMPUTATION_ID = api.BITMAP_FINGERPRINT_COMPUTAT
 export const compareBitmapFingerprints = api.compareBitmapFingerprints;
 export const createBitmapFingerprint = api.createBitmapFingerprint;
 export const formatBitmapFingerprint = api.formatBitmapFingerprint;
+export const initializeBitmapFingerprint = api.initializeBitmapFingerprint;
 export const parseBitmapFingerprint = api.parseBitmapFingerprint;

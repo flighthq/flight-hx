@@ -24,6 +24,7 @@ export const getTextureAtlasRegionTexture = api.getTextureAtlasRegionTexture;
 export const getTextureAtlasRegionUv = api.getTextureAtlasRegionUv;
 export const getTextureAtlasRegionUvQuad = api.getTextureAtlasRegionUvQuad;
 export const hasTextureAtlasRegion = api.hasTextureAtlasRegion;
+export const initializeTextureAtlasRegion = api.initializeTextureAtlasRegion;
 export const removeTextureAtlasRegion = api.removeTextureAtlasRegion;
 export const setTextureAtlasRegion = api.setTextureAtlasRegion;
 export const setTextureAtlasRegionTextureGuard = api.setTextureAtlasRegionTextureGuard;

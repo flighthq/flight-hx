@@ -8,4 +8,5 @@ __syncDependencies();
 export const cloneBitmap = api.cloneBitmap;
 export const convertBitmapAlphaType = api.convertBitmapAlphaType;
 export const createBitmap = api.createBitmap;
+export const initializeBitmap = api.initializeBitmap;
 export const invalidateBitmap = api.invalidateBitmap;

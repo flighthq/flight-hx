@@ -4,43 +4,58 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight.Types.DeviceFormFactorUnknown;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Types.DeviceFormFactorUnknown;
 import flight.types.DeviceBackend;
 import flight.types.DeviceCapabilities;
 import flight.types.DeviceDisplayMetrics;
 import flight.types.DeviceInfo;
+import flight.types.EntityConstruction;
 import flight.types.HasSystemDevice;
 import flight.types.SafeAreaInsets;
 
 @:noCompletion
 class _Device {
   public static function createDeviceCapabilities():DeviceCapabilities {
-    return cast { hasKeyboard: false, hasMouse: false, hasStylus: false };
+    var out:EntityConstruction<DeviceCapabilities> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ hasKeyboard: cast _Runtime.UNDEFINED, hasMouse: cast _Runtime.UNDEFINED, hasStylus: cast _Runtime.UNDEFINED } : DeviceCapabilities); }) #end));
+    initializeDeviceCapabilities(({ final __callArgument0:Dynamic = out; __callArgument0; }));
+    return cast out;
     return cast null;
   }
 
   public static function createDeviceDisplayMetrics():DeviceDisplayMetrics {
-    return cast { colorDepth: -1.0, densityDpi: -1.0, logicalHeight: -1.0, logicalWidth: -1.0, physicalHeight: -1.0, physicalWidth: -1.0, pixelRatio: -1.0 };
+    var out:EntityConstruction<DeviceDisplayMetrics> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ colorDepth: cast _Runtime.UNDEFINED, densityDpi: cast _Runtime.UNDEFINED, logicalHeight: cast _Runtime.UNDEFINED, logicalWidth: cast _Runtime.UNDEFINED, physicalHeight: cast _Runtime.UNDEFINED, physicalWidth: cast _Runtime.UNDEFINED, pixelRatio: cast _Runtime.UNDEFINED } : DeviceDisplayMetrics); }) #end));
+    initializeDeviceDisplayMetrics(({ final __callArgument2:Dynamic = out; __callArgument2; }));
+    return cast out;
     return cast null;
   }
 
   public static function createDeviceInfo():DeviceInfo {
-    return cast { arch: '', availableMemory: -1.0, boardName: '', colorGamut: '', cpuCores: -1.0, fontScale: -1.0, formFactor: DeviceFormFactorUnknown, gpuRenderer: '', gpuVendor: '', isHdr: false, isJailbroken: false, isLowEndDevice: false, isRooted: false, isVirtual: false, manufacturer: '', marketingName: '', model: '', osBuild: '', osName: '', osVersion: '', platformString: '', productName: '', supportedAbis: cast ([] : Array<Dynamic>), totalMemory: -1.0, webViewVersion: '' };
+    var out:EntityConstruction<DeviceInfo> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ arch: cast _Runtime.UNDEFINED, availableMemory: cast _Runtime.UNDEFINED, boardName: cast _Runtime.UNDEFINED, colorGamut: cast _Runtime.UNDEFINED, cpuCores: cast _Runtime.UNDEFINED, fontScale: cast _Runtime.UNDEFINED, formFactor: cast _Runtime.UNDEFINED, gpuRenderer: cast _Runtime.UNDEFINED, gpuVendor: cast _Runtime.UNDEFINED, isHdr: cast _Runtime.UNDEFINED, isJailbroken: cast _Runtime.UNDEFINED, isLowEndDevice: cast _Runtime.UNDEFINED, isRooted: cast _Runtime.UNDEFINED, isVirtual: cast _Runtime.UNDEFINED, manufacturer: cast _Runtime.UNDEFINED, marketingName: cast _Runtime.UNDEFINED, model: cast _Runtime.UNDEFINED, osBuild: cast _Runtime.UNDEFINED, osName: cast _Runtime.UNDEFINED, osVersion: cast _Runtime.UNDEFINED, platformString: cast _Runtime.UNDEFINED, productName: cast _Runtime.UNDEFINED, supportedAbis: cast _Runtime.UNDEFINED, totalMemory: cast _Runtime.UNDEFINED, webViewVersion: cast _Runtime.UNDEFINED } : DeviceInfo); }) #end));
+    initializeDeviceInfo(({ final __callArgument4:Dynamic = out; __callArgument4; }));
+    return cast out;
     return cast null;
   }
 
   public static function createSafeAreaInsets():SafeAreaInsets {
-    return cast { bottom: 0.0, left: 0.0, right: 0.0, top: 0.0 };
+    var out:EntityConstruction<SafeAreaInsets> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ bottom: cast _Runtime.UNDEFINED, left: cast _Runtime.UNDEFINED, right: cast _Runtime.UNDEFINED, top: cast _Runtime.UNDEFINED } : SafeAreaInsets); }) #end));
+    initializeSafeAreaInsets(({ final __callArgument6:Dynamic = out; __callArgument6; }));
+    return cast out;
     return cast null;
   }
 
   public static function getDeviceCapabilities(host:HasSystemDevice, out:DeviceCapabilities):DeviceCapabilities {
-    return cast (cast (cast (cast host : HasSystemDevice).system : { var device:DeviceBackend; }).device : DeviceBackend).getCapabilities(({ final __callArgument0:Dynamic = out; __callArgument0; }));
+    return cast (cast (cast (cast host : HasSystemDevice).system : { var device:DeviceBackend; }).device : DeviceBackend).getCapabilities(({ final __callArgument8:Dynamic = out; __callArgument8; }));
     return cast null;
   }
 
   public static function getDeviceDisplayMetrics(host:HasSystemDevice, out:DeviceDisplayMetrics):DeviceDisplayMetrics {
-    return cast (cast (cast (cast host : HasSystemDevice).system : { var device:DeviceBackend; }).device : DeviceBackend).getDisplayMetrics(({ final __callArgument1:Dynamic = out; __callArgument1; }));
+    return cast (cast (cast (cast host : HasSystemDevice).system : { var device:DeviceBackend; }).device : DeviceBackend).getDisplayMetrics(({ final __callArgument9:Dynamic = out; __callArgument9; }));
     return cast null;
   }
 
@@ -50,13 +65,72 @@ class _Device {
   }
 
   public static function getDeviceInfo(host:HasSystemDevice, out:DeviceInfo):DeviceInfo {
-    return cast (cast (cast (cast host : HasSystemDevice).system : { var device:DeviceBackend; }).device : DeviceBackend).getInfo(({ final __callArgument2:Dynamic = out; __callArgument2; }));
+    return cast (cast (cast (cast host : HasSystemDevice).system : { var device:DeviceBackend; }).device : DeviceBackend).getInfo(({ final __callArgument10:Dynamic = out; __callArgument10; }));
     return cast null;
   }
 
   public static function getSafeAreaInsets(host:HasSystemDevice, out:SafeAreaInsets):SafeAreaInsets {
-    return cast (cast (cast (cast host : HasSystemDevice).system : { var device:DeviceBackend; }).device : DeviceBackend).getSafeAreaInsets(({ final __callArgument3:Dynamic = out; __callArgument3; }));
+    return cast (cast (cast (cast host : HasSystemDevice).system : { var device:DeviceBackend; }).device : DeviceBackend).getSafeAreaInsets(({ final __callArgument11:Dynamic = out; __callArgument11; }));
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeDeviceCapabilities(out:EntityConstruction<DeviceCapabilities>):Void {
+    _Runtime.setField(out, 'hasKeyboard', false);
+    _Runtime.setField(out, 'hasMouse', false);
+    _Runtime.setField(out, 'hasStylus', false);
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeDeviceDisplayMetrics(out:EntityConstruction<DeviceDisplayMetrics>):Void {
+    _Runtime.setField(out, 'colorDepth', -1.0);
+    _Runtime.setField(out, 'densityDpi', -1.0);
+    _Runtime.setField(out, 'logicalHeight', -1.0);
+    _Runtime.setField(out, 'logicalWidth', -1.0);
+    _Runtime.setField(out, 'physicalHeight', -1.0);
+    _Runtime.setField(out, 'physicalWidth', -1.0);
+    _Runtime.setField(out, 'pixelRatio', -1.0);
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeDeviceInfo(out:EntityConstruction<DeviceInfo>):Void {
+    _Runtime.setField(out, 'arch', '');
+    _Runtime.setField(out, 'availableMemory', -1.0);
+    _Runtime.setField(out, 'boardName', '');
+    _Runtime.setField(out, 'colorGamut', '');
+    _Runtime.setField(out, 'cpuCores', -1.0);
+    _Runtime.setField(out, 'fontScale', -1.0);
+    _Runtime.setField(out, 'formFactor', DeviceFormFactorUnknown);
+    _Runtime.setField(out, 'gpuRenderer', '');
+    _Runtime.setField(out, 'gpuVendor', '');
+    _Runtime.setField(out, 'isHdr', false);
+    _Runtime.setField(out, 'isJailbroken', false);
+    _Runtime.setField(out, 'isLowEndDevice', false);
+    _Runtime.setField(out, 'isRooted', false);
+    _Runtime.setField(out, 'isVirtual', false);
+    _Runtime.setField(out, 'manufacturer', '');
+    _Runtime.setField(out, 'marketingName', '');
+    _Runtime.setField(out, 'model', '');
+    _Runtime.setField(out, 'osBuild', '');
+    _Runtime.setField(out, 'osName', '');
+    _Runtime.setField(out, 'osVersion', '');
+    _Runtime.setField(out, 'platformString', '');
+    _Runtime.setField(out, 'productName', '');
+    _Runtime.setField(out, 'supportedAbis', cast ([] : Array<Dynamic>));
+    _Runtime.setField(out, 'totalMemory', -1.0);
+    _Runtime.setField(out, 'webViewVersion', '');
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeSafeAreaInsets(out:EntityConstruction<SafeAreaInsets>):Void {
+    _Runtime.setField(out, 'bottom', 0.0);
+    _Runtime.setField(out, 'left', 0.0);
+    _Runtime.setField(out, 'right', 0.0);
+    _Runtime.setField(out, 'top', 0.0);
   }
 
   public static function refreshDeviceInfo(host:HasSystemDevice):Void {

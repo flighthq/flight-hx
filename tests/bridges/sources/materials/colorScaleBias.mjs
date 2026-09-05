@@ -15,6 +15,7 @@ export const equalsColorScaleBiasBiases = api.equalsColorScaleBiasBiases;
 export const equalsColorScaleBiasScales = api.equalsColorScaleBiasScales;
 export const getColorScaleBiasBiasRgb = api.getColorScaleBiasBiasRgb;
 export const getColorScaleBiasBiasRgba = api.getColorScaleBiasBiasRgba;
+export const initializeColorScaleBias = api.initializeColorScaleBias;
 export const invertColorScaleBias = api.invertColorScaleBias;
 export const isIdentityColorScaleBias = api.isIdentityColorScaleBias;
 export const setColorScaleBias = api.setColorScaleBias;

@@ -16,4 +16,5 @@ export { explainFlightDocumentScene3DRefusalFromText } from './sceneDocumentScen
 export { explainFlightDocumentText } from './flightDocumentText.mjs';
 export { formatFlightDocumentText } from './flightDocumentText.mjs';
 export { getFlightDocumentResourceDependencies } from './flightDocumentResourceDependencies.mjs';
+export { initializeDocumentRefusal } from './sceneDocumentRefusal.mjs';
 export { parseFlightDocumentText } from './flightDocumentText.mjs';

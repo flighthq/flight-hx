@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const cloneAreaLight = api.cloneAreaLight;
 export const createAreaLight = api.createAreaLight;
+export const initializeAreaLight = api.initializeAreaLight;
 export const setAreaLightOrientation = api.setAreaLightOrientation;

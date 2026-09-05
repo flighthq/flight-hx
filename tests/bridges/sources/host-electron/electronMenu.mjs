@@ -6,3 +6,7 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createElectronMenuBackends = api.createElectronMenuBackends;
+export const initializeElectronMenuCapabilities = api.initializeElectronMenuCapabilities;
+export const initializeMenuApplicationBackend = api.initializeMenuApplicationBackend;
+export const initializeMenuPopupBackend = api.initializeMenuPopupBackend;
+export const initializeMenuSelectBackend = api.initializeMenuSelectBackend;

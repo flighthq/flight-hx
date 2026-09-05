@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createEnvReflectModifier = api.createEnvReflectModifier;
+export const initializeEnvReflectModifier = api.initializeEnvReflectModifier;

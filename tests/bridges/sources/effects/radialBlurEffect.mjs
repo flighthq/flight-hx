@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createRadialBlurEffect = api.createRadialBlurEffect;
+export const initializeRadialBlurEffect = api.initializeRadialBlurEffect;

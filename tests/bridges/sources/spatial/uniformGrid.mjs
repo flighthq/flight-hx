@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createUniformGridSpatialBackend2D = api.createUniformGridSpatialBackend2D;
+export const initializeUniformGridSpatialBackend2D = api.initializeUniformGridSpatialBackend2D;
 export const MAX_INDEXED_CELLS_PER_OBJECT = api.MAX_INDEXED_CELLS_PER_OBJECT;

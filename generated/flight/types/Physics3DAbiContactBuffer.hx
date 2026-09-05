@@ -4,4 +4,39 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics3DAbiContactBuffer = { var ids:flight._internal._UInt32Array; var flags:flight._internal._UInt32Array; var pointStarts:flight._internal._UInt32Array; var pointCounts:flight._internal._UInt32Array; var values:flight._internal._Float64Array; var pointFeatureIds:flight._internal._UInt32Array; var pointValues:flight._internal._Float64Array; var count:Float; var pointCount:Float; var requiredCount:Float; var requiredPointCount:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Physics3DAbi)
+@:keep
+@:structInit
+class Physics3DAbiContactBuffer {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var ids:flight._internal._UInt32Array;
+  public var flags:flight._internal._UInt32Array;
+  public var pointStarts:flight._internal._UInt32Array;
+  public var pointCounts:flight._internal._UInt32Array;
+  public var values:flight._internal._Float64Array;
+  public var pointFeatureIds:flight._internal._UInt32Array;
+  public var pointValues:flight._internal._Float64Array;
+  public var count:Float;
+  public var pointCount:Float;
+  public var requiredCount:Float;
+  public var requiredPointCount:Float;
+
+  private function new(ids:flight._internal._UInt32Array, flags:flight._internal._UInt32Array, pointStarts:flight._internal._UInt32Array, pointCounts:flight._internal._UInt32Array, values:flight._internal._Float64Array, pointFeatureIds:flight._internal._UInt32Array, pointValues:flight._internal._Float64Array, count:Float, pointCount:Float, requiredCount:Float, requiredPointCount:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.ids = ids;
+    this.flags = flags;
+    this.pointStarts = pointStarts;
+    this.pointCounts = pointCounts;
+    this.values = values;
+    this.pointFeatureIds = pointFeatureIds;
+    this.pointValues = pointValues;
+    this.count = count;
+    this.pointCount = pointCount;
+    this.requiredCount = requiredCount;
+    this.requiredPointCount = requiredPointCount;
+  }
+}
+#else
+typedef Physics3DAbiContactBuffer = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var ids:flight._internal._UInt32Array; var flags:flight._internal._UInt32Array; var pointStarts:flight._internal._UInt32Array; var pointCounts:flight._internal._UInt32Array; var values:flight._internal._Float64Array; var pointFeatureIds:flight._internal._UInt32Array; var pointValues:flight._internal._Float64Array; var count:Float; var pointCount:Float; var requiredCount:Float; var requiredPointCount:Float; };
+#end

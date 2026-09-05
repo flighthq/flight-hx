@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWebAccessibilityBackend = api.createWebAccessibilityBackend;
+export const initializeWebAccessibilityBackend = api.initializeWebAccessibilityBackend;
 export const webAccessibilityBackend = api.webAccessibilityBackend;

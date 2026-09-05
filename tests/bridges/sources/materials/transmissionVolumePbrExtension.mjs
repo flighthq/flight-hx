@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createTransmissionVolumePbrExtension = api.createTransmissionVolumePbrExtension;
+export const initializeTransmissionVolumePbrExtension = api.initializeTransmissionVolumePbrExtension;
 export const isValidTransmissionVolumePbrExtension = api.isValidTransmissionVolumePbrExtension;

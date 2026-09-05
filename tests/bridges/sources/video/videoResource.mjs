@@ -12,5 +12,6 @@ export const getVideoResourceDuration = api.getVideoResourceDuration;
 export const getVideoResourceHeight = api.getVideoResourceHeight;
 export const getVideoResourceWidth = api.getVideoResourceWidth;
 export const hasVideoResourceElement = api.hasVideoResourceElement;
+export const initializeVideoResource = api.initializeVideoResource;
 export const isVideoResourceEmpty = api.isVideoResourceEmpty;
 export const isVideoResourceReady = api.isVideoResourceReady;

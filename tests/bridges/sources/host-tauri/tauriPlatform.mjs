@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createTauriPlatformBackend = api.createTauriPlatformBackend;
+export const initializeTauriPlatformBackend = api.initializeTauriPlatformBackend;

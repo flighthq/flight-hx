@@ -10,3 +10,5 @@ export const createFlightDocumentScene3DMaterialization = api.createFlightDocume
 export const createFlightDocumentScene3DMaterializationFromText = api.createFlightDocumentScene3DMaterializationFromText;
 export const explainFlightDocumentScene3DRefusal = api.explainFlightDocumentScene3DRefusal;
 export const explainFlightDocumentScene3DRefusalFromText = api.explainFlightDocumentScene3DRefusalFromText;
+export const initializeFlightDocumentFromScene3D = api.initializeFlightDocumentFromScene3D;
+export const initializeFlightDocumentScene3DMaterialization = api.initializeFlightDocumentScene3DMaterialization;

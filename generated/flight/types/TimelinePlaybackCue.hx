@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TimelinePlaybackCue = { var frame:Float; var kind:String; };
+typedef TimelinePlaybackCue = TimelineCue;

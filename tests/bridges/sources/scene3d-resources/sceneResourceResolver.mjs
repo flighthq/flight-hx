@@ -20,3 +20,7 @@ const __bridgeImplementation_disposeScene3DResourceResolver = api.disposeScene3D
 export function disposeScene3DResourceResolver(...args) { __syncDependencies(); const result = __bridgeImplementation_disposeScene3DResourceResolver(...args); return result; }
 api.disposeScene3DResourceResolver = disposeScene3DResourceResolver;
 compiled.flight.Scene3DResources.disposeScene3DResourceResolver = disposeScene3DResourceResolver;
+const __bridgeImplementation_initializeScene3DResourceResolver = api.initializeScene3DResourceResolver;
+export function initializeScene3DResourceResolver(...args) { __syncDependencies(); const result = __bridgeImplementation_initializeScene3DResourceResolver(...args); return result; }
+api.initializeScene3DResourceResolver = initializeScene3DResourceResolver;
+compiled.flight.Scene3DResources.initializeScene3DResourceResolver = initializeScene3DResourceResolver;

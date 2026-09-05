@@ -4,4 +4,27 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics3DAbiQueryBuffer = { var bodyIds:flight._internal._UInt32Array; var colliderIds:flight._internal._UInt32Array; var values:flight._internal._Float64Array; var count:Float; var requiredCount:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Physics3DAbi)
+@:keep
+@:structInit
+class Physics3DAbiQueryBuffer {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var bodyIds:flight._internal._UInt32Array;
+  public var colliderIds:flight._internal._UInt32Array;
+  public var values:flight._internal._Float64Array;
+  public var count:Float;
+  public var requiredCount:Float;
+
+  private function new(bodyIds:flight._internal._UInt32Array, colliderIds:flight._internal._UInt32Array, values:flight._internal._Float64Array, count:Float, requiredCount:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.bodyIds = bodyIds;
+    this.colliderIds = colliderIds;
+    this.values = values;
+    this.count = count;
+    this.requiredCount = requiredCount;
+  }
+}
+#else
+typedef Physics3DAbiQueryBuffer = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var bodyIds:flight._internal._UInt32Array; var colliderIds:flight._internal._UInt32Array; var values:flight._internal._Float64Array; var count:Float; var requiredCount:Float; };
+#end

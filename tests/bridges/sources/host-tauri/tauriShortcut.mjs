@@ -7,3 +7,5 @@ __syncDependencies();
 
 export const createTauriShortcutQueryBackend = api.createTauriShortcutQueryBackend;
 export const createTauriShortcutTriggerBackend = api.createTauriShortcutTriggerBackend;
+export const initializeTauriShortcutQueryBackend = api.initializeTauriShortcutQueryBackend;
+export const initializeTauriShortcutTriggerBackend = api.initializeTauriShortcutTriggerBackend;

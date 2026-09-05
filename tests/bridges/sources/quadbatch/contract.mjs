@@ -4,3 +4,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './quadBatch.mjs';
+export { initializeQuadBatchData } from './quadBatch.mjs';
+export { initializeQuadBatchSignals } from './quadBatch.mjs';

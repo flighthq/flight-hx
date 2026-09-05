@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Attachment2D = { var kind:String; @:optional var name:Null<String>; };
+#if !flight_struct_typedef
+@:allow(flight.types.MeshAttachment2D)
+@:allow(flight.types.RegionAttachment2D)
+@:keep
+@:structInit
+class Attachment2D {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var kind:String;
+  public var name:Null<String>;
+
+  private function new(kind:String, ?name:Null<String>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.kind = kind;
+    this.name = name;
+  }
+}
+#else
+typedef Attachment2D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var name:Null<String>; };
+#end

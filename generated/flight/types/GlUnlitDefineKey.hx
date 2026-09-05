@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlUnlitDefineKey = { var alphaMaskEnabled:Bool; var hasColorMap:Bool; @:optional var hasSkin:Bool; var hasUvTransform:Bool; var vertexColor:Bool; };
+typedef GlUnlitDefineKey = { var alphaMaskEnabled:Bool; var hasColorMap:Bool; @:optional var hasInstances:Bool; @:optional var hasSkin:Bool; var hasUvTransform:Bool; var vertexColor:Bool; };

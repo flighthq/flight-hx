@@ -4,4 +4,29 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ProximityReading = { var accuracy:SensorAccuracy; var interval:Float; var timestamp:Float; var distance:Float; var max:Float; var near:Bool; };
+#if !flight_struct_typedef
+@:allow(flight._Sensors)
+@:keep
+@:structInit
+class ProximityReading {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var accuracy:SensorAccuracy;
+  public var interval:Float;
+  public var timestamp:Float;
+  public var distance:Float;
+  public var max:Float;
+  public var near:Bool;
+
+  private function new(accuracy:SensorAccuracy, interval:Float, timestamp:Float, distance:Float, max:Float, near:Bool):Void {
+    this.__symbol__EntityRuntime = null;
+    this.accuracy = accuracy;
+    this.interval = interval;
+    this.timestamp = timestamp;
+    this.distance = distance;
+    this.max = max;
+    this.near = near;
+  }
+}
+#else
+typedef ProximityReading = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var accuracy:SensorAccuracy; var interval:Float; var timestamp:Float; var distance:Float; var max:Float; var near:Bool; };
+#end

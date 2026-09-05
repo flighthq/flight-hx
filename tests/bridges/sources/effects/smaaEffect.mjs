@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createSmaaEffect = api.createSmaaEffect;
+export const initializeSmaaEffect = api.initializeSmaaEffect;

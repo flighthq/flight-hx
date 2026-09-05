@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const defaultDomTextLabelRenderer = api.defaultDomTextLabelRenderer;
 export const drawDomTextLabel = api.drawDomTextLabel;
+export const initializeDomTextData = api.initializeDomTextData;

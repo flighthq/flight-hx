@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWebConnectivityBackend = api.createWebConnectivityBackend;
+export const initializeWebConnectivityBackend = api.initializeWebConnectivityBackend;
 export const webConnectivityBackend = api.webConnectivityBackend;

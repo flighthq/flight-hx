@@ -4,4 +4,31 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ExternalImageResourceReference = { var failure:Null<ImageResourceFailure>; var mimeType:Null<String>; var state:ResourceResolutionState; @:optional var textures:Array<Texture>; var kind:String; var uri:String; var basePath:Null<String>; };
+#if !flight_struct_typedef
+@:allow(flight._Image)
+@:keep
+@:structInit
+class ExternalImageResourceReference {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var failure:Null<ImageResourceFailure>;
+  public var mimeType:Null<String>;
+  public var state:ResourceResolutionState;
+  public var textures:Null<Array<Texture>>;
+  public var kind:String;
+  public var uri:String;
+  public var basePath:Null<String>;
+
+  private function new(failure:Null<ImageResourceFailure>, mimeType:Null<String>, state:ResourceResolutionState, ?textures:Null<Array<Texture>>, kind:String, uri:String, basePath:Null<String>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.failure = failure;
+    this.mimeType = mimeType;
+    this.state = state;
+    this.textures = textures;
+    this.kind = kind;
+    this.uri = uri;
+    this.basePath = basePath;
+  }
+}
+#else
+typedef ExternalImageResourceReference = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var failure:Null<ImageResourceFailure>; var mimeType:Null<String>; var state:ResourceResolutionState; @:optional var textures:Array<Texture>; var kind:String; var uri:String; var basePath:Null<String>; };
+#end

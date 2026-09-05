@@ -14,6 +14,7 @@ export const getNativeTextMeasuredWidth = api.getNativeTextMeasuredWidth;
 export const getNativeTextRuntime = api.getNativeTextRuntime;
 export const getNativeTextString = api.getNativeTextString;
 export const getNativeTextStyle = api.getNativeTextStyle;
+export const initializeNativeTextData = api.initializeNativeTextData;
 export const patchNativeTextStyle = api.patchNativeTextStyle;
 export const setNativeTextAutoSize = api.setNativeTextAutoSize;
 export const setNativeTextHeight = api.setNativeTextHeight;

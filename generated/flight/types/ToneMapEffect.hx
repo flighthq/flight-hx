@@ -4,4 +4,25 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ToneMapEffect = { var kind:String; @:optional var operator_:ToneMapOperator; @:optional var exposure:Float; @:optional var white:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class ToneMapEffect extends flight.types.RenderEffect<String> {
+  #if js
+  @:native('operator')
+  #end
+  public var operator_:Null<ToneMapOperator>;
+  public var exposure:Null<Float>;
+  public var white:Null<Float>;
+
+  private function new(kind:String, ?operator_:Null<ToneMapOperator>, ?exposure:Null<Float>, ?white:Null<Float>):Void {
+    super(kind);
+    this.operator_ = operator_;
+    this.exposure = exposure;
+    this.white = white;
+  }
+}
+#else
+typedef ToneMapEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var operator_:ToneMapOperator; @:optional var exposure:Float; @:optional var white:Float; };
+#end

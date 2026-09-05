@@ -4,10 +4,13 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Easing.easeOutExponential;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Signals.connectSignal;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
 import flight.types.EasingFunction;
+import flight.types.EntityConstruction;
 import flight.types.NumericProps;
 import flight.types.Signal;
 import flight.types.StopTweenOptions;
@@ -19,6 +22,59 @@ import flight.types.TweenPropertyDetail;
 import flight.types.TweenStaggerOptions;
 
 typedef ColorComponents__colorTween = { var b:Float; var g:Float; var r:Float; };
+
+#if !flight_struct_typedef
+@:allow(flight._Tween)
+@:keep
+@:structInit
+private class EntityShapeL85C15__internal {
+  public var complete:Bool;
+  public var delay:Float;
+  public var duration:Float;
+  public var ease:EasingFunction;
+  public var elapsed:Float;
+  public var initialized:Bool;
+  public var onComplete:Signal<Void->Void>;
+  public var onRepeat:Signal<Void->Void>;
+  public var onUpdate:Signal<Void->Void>;
+  public var onYoyo:Signal<Void->Void>;
+  public var paused:Bool;
+  public var properties:Array<TweenPropertyDetail>;
+  public var propertyMap:NumericProps<flight._internal._Any>;
+  public var reflect:Bool;
+  public var repeat:Float;
+  public var reverse:Bool;
+  public var smartRotation:Bool;
+  public var snapping:Bool;
+  public var target:flight._internal._Any;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(complete:Bool, delay:Float, duration:Float, ease:EasingFunction, elapsed:Float, initialized:Bool, onComplete:Signal<Void->Void>, onRepeat:Signal<Void->Void>, onUpdate:Signal<Void->Void>, onYoyo:Signal<Void->Void>, paused:Bool, properties:Array<TweenPropertyDetail>, propertyMap:NumericProps<flight._internal._Any>, reflect:Bool, repeat:Float, reverse:Bool, smartRotation:Bool, snapping:Bool, target:flight._internal._Any):Void {
+    this.__symbol__EntityRuntime = null;
+    this.complete = complete;
+    this.delay = delay;
+    this.duration = duration;
+    this.ease = ease;
+    this.elapsed = elapsed;
+    this.initialized = initialized;
+    this.onComplete = onComplete;
+    this.onRepeat = onRepeat;
+    this.onUpdate = onUpdate;
+    this.onYoyo = onYoyo;
+    this.paused = paused;
+    this.properties = properties;
+    this.propertyMap = propertyMap;
+    this.reflect = reflect;
+    this.repeat = repeat;
+    this.reverse = reverse;
+    this.smartRotation = smartRotation;
+    this.snapping = snapping;
+    this.target = target;
+  }
+}
+#else
+private typedef EntityShapeL85C15__internal = { var complete:Bool; var delay:Float; var duration:Float; var ease:EasingFunction; var elapsed:Float; var initialized:Bool; var onComplete:Signal<Void->Void>; var onRepeat:Signal<Void->Void>; var onUpdate:Signal<Void->Void>; var onYoyo:Signal<Void->Void>; var paused:Bool; var properties:Array<TweenPropertyDetail>; var propertyMap:NumericProps<flight._internal._Any>; var reflect:Bool; var repeat:Float; var reverse:Bool; var smartRotation:Bool; var snapping:Bool; var target:flight._internal._Any; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
 
 @:noCompletion
 class _Tween {
@@ -109,9 +165,30 @@ class _Tween {
   public static function makeTween<T:flight._internal._Object>(target:T, duration:Float, propertyMap:NumericProps<T>, options:Null<TweenOptions>, defaultEase:EasingFunction):Tween<T> {
     var keys:Array<String> = cast _Runtime.UNDEFINED;
     var properties:Array<TweenPropertyDetail> = cast _Runtime.UNDEFINED;
+    var out:EntityConstruction<Tween<T>> = cast _Runtime.UNDEFINED;
     keys = flight._internal.DynamicObject.keys(propertyMap);
     properties = (cast _Runtime.mapArray((cast keys : Array<String>), function(key:String, __unused0:Float, __unused1:Array<String>):{ var change:Float; var key:String; var start:Float; } return { change: 0.0, key: key, start: 0.0 }, _Runtime.UNDEFINED));
-    return cast { complete: false, delay: _Runtime.coalesce(({ final __structural22 = options; __structural22 == null ? _Runtime.UNDEFINED : (cast __structural22 : { @:optional var delay:Null<Float>; }).delay; }), function():Dynamic return cast 0.0), duration: duration, ease: _Runtime.coalesce(({ final __structural23 = options; __structural23 == null ? _Runtime.UNDEFINED : (cast __structural23 : { @:optional var ease:Null<EasingFunction>; }).ease; }), function():Dynamic return cast defaultEase), elapsed: 0.0, initialized: false, onComplete: (cast createSignal() : Signal<Void->Void>), onRepeat: (cast createSignal() : Signal<Void->Void>), onUpdate: (cast createSignal() : Signal<Void->Void>), onYoyo: (cast createSignal() : Signal<Void->Void>), paused: false, properties: properties, propertyMap: propertyMap, reflect: _Runtime.coalesce(({ final __structural24 = options; __structural24 == null ? _Runtime.UNDEFINED : (cast __structural24 : { @:optional var reflect:Null<Bool>; }).reflect; }), function():Dynamic return cast false), repeat: _Runtime.coalesce(({ final __structural25 = options; __structural25 == null ? _Runtime.UNDEFINED : (cast __structural25 : { @:optional var repeat:Null<Float>; }).repeat; }), function():Dynamic return cast 0.0), reverse: _Runtime.coalesce(({ final __structural26 = options; __structural26 == null ? _Runtime.UNDEFINED : (cast __structural26 : { @:optional var reverse:Null<Bool>; }).reverse; }), function():Dynamic return cast false), smartRotation: _Runtime.coalesce(({ final __structural27 = options; __structural27 == null ? _Runtime.UNDEFINED : (cast __structural27 : { @:optional var smartRotation:Null<Bool>; }).smartRotation; }), function():Dynamic return cast false), snapping: _Runtime.coalesce(({ final __structural28 = options; __structural28 == null ? _Runtime.UNDEFINED : (cast __structural28 : { @:optional var snapping:Null<Bool>; }).snapping; }), function():Dynamic return cast false), target: target };
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ complete: cast _Runtime.UNDEFINED, delay: cast _Runtime.UNDEFINED, duration: cast _Runtime.UNDEFINED, ease: cast _Runtime.UNDEFINED, elapsed: cast _Runtime.UNDEFINED, initialized: cast _Runtime.UNDEFINED, onComplete: cast _Runtime.UNDEFINED, onRepeat: cast _Runtime.UNDEFINED, onUpdate: cast _Runtime.UNDEFINED, onYoyo: cast _Runtime.UNDEFINED, paused: cast _Runtime.UNDEFINED, properties: cast _Runtime.UNDEFINED, propertyMap: cast _Runtime.UNDEFINED, reflect: cast _Runtime.UNDEFINED, repeat: cast _Runtime.UNDEFINED, reverse: cast _Runtime.UNDEFINED, smartRotation: cast _Runtime.UNDEFINED, snapping: cast _Runtime.UNDEFINED, target: cast _Runtime.UNDEFINED } : EntityShapeL85C15__internal); }) #end));
+    _Runtime.setField(out, 'complete', false);
+    _Runtime.setField(out, 'delay', _Runtime.coalesce(({ final __structural22 = options; __structural22 == null ? _Runtime.UNDEFINED : (cast __structural22 : { @:optional var delay:Null<Float>; }).delay; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'duration', duration);
+    ((cast out : { var ease:EasingFunction; }).ease = _Runtime.coalesce(({ final __structural23 = options; __structural23 == null ? _Runtime.UNDEFINED : (cast __structural23 : { @:optional var ease:Null<EasingFunction>; }).ease; }), function():Dynamic return cast defaultEase));
+    _Runtime.setField(out, 'elapsed', 0.0);
+    _Runtime.setField(out, 'initialized', false);
+    _Runtime.setField(out, 'onComplete', (cast createSignal() : Signal<Void->Void>));
+    _Runtime.setField(out, 'onRepeat', (cast createSignal() : Signal<Void->Void>));
+    _Runtime.setField(out, 'onUpdate', (cast createSignal() : Signal<Void->Void>));
+    _Runtime.setField(out, 'onYoyo', (cast createSignal() : Signal<Void->Void>));
+    _Runtime.setField(out, 'paused', false);
+    _Runtime.setField(out, 'properties', properties);
+    _Runtime.setField(out, 'propertyMap', propertyMap);
+    _Runtime.setField(out, 'reflect', _Runtime.coalesce(({ final __structural24 = options; __structural24 == null ? _Runtime.UNDEFINED : (cast __structural24 : { @:optional var reflect:Null<Bool>; }).reflect; }), function():Dynamic return cast false));
+    _Runtime.setField(out, 'repeat', _Runtime.coalesce(({ final __structural25 = options; __structural25 == null ? _Runtime.UNDEFINED : (cast __structural25 : { @:optional var repeat:Null<Float>; }).repeat; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'reverse', _Runtime.coalesce(({ final __structural26 = options; __structural26 == null ? _Runtime.UNDEFINED : (cast __structural26 : { @:optional var reverse:Null<Bool>; }).reverse; }), function():Dynamic return cast false));
+    _Runtime.setField(out, 'smartRotation', _Runtime.coalesce(({ final __structural27 = options; __structural27 == null ? _Runtime.UNDEFINED : (cast __structural27 : { @:optional var smartRotation:Null<Bool>; }).smartRotation; }), function():Dynamic return cast false));
+    _Runtime.setField(out, 'snapping', _Runtime.coalesce(({ final __structural28 = options; __structural28 == null ? _Runtime.UNDEFINED : (cast __structural28 : { @:optional var snapping:Null<Bool>; }).snapping; }), function():Dynamic return cast false));
+    _Runtime.setField(out, 'target', target);
+    return cast out;
     return cast null;
   }
 
@@ -292,8 +369,19 @@ class _Tween {
   }
 
   public static function createTweenManager(?options:TweenManagerOptions):TweenManager {
-    return cast { __brand: 'TweenManager', defaultEase: _Runtime.coalesce(({ final __structural93 = options; __structural93 == null ? _Runtime.UNDEFINED : (cast __structural93 : { @:optional var defaultEase:Null<EasingFunction>; }).defaultEase; }), function():Dynamic return cast easeOutExponential), tweens: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []) };
+    var out:EntityConstruction<TweenManager> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ __brand: cast _Runtime.UNDEFINED, defaultEase: cast _Runtime.UNDEFINED, tweens: cast _Runtime.UNDEFINED } : TweenManager); }) #end));
+    initializeTweenManager(({ final __callArgument93:Dynamic = out; __callArgument93; }), ({ final __callArgument94:Dynamic = options; __callArgument94; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeTweenManager(out:EntityConstruction<TweenManager>, ?options:TweenManagerOptions):Void {
+    _Runtime.setField(out, '__brand', 'TweenManager');
+    ((cast out : { var defaultEase:EasingFunction; }).defaultEase = _Runtime.coalesce(({ final __structural97 = options; __structural97 == null ? _Runtime.UNDEFINED : (cast __structural97 : { @:optional var defaultEase:Null<EasingFunction>; }).defaultEase; }), function():Dynamic return cast easeOutExponential));
+    _Runtime.setField(out, 'tweens', _Runtime.construct(flight._internal._HostValueLut.get('Map'), []));
   }
 
   @:allow(flight)
@@ -332,7 +420,7 @@ class _Tween {
     var easedT:Float = cast _Runtime.UNDEFINED;
     var writes:Array<{ var key:String; var value:Float; }> = cast _Runtime.UNDEFINED;
     var target:flight._internal._Record<String, Float> = cast _Runtime.UNDEFINED;
-    if ((cast !(cast tween.initialized : Bool) : Bool)) { (cast initializeTween : Tween<flight._internal._Any>->Void)(({ final __callArgument94:Dynamic = tween; __callArgument94; })); }
+    if ((cast !(cast tween.initialized : Bool) : Bool)) { (cast initializeTween : Tween<flight._internal._Any>->Void)(({ final __callArgument98:Dynamic = tween; __callArgument98; })); }
     maxElapsed = (tween.delay + tween.duration);
     clampedElapsed = HxMath.max(0.0, HxMath.min(timeSeconds, maxElapsed));
     (tween.elapsed = cast (clampedElapsed : Float));
@@ -365,7 +453,7 @@ class _Tween {
     var targetElapsed:Float = cast _Runtime.UNDEFINED;
     clamped = HxMath.max(0.0, HxMath.min(progress, 1.0));
     targetElapsed = (tween.delay + (clamped * tween.duration));
-    seekTween(({ final __callArgument100:Dynamic = tween; __callArgument100; }), (cast targetElapsed : Float));
+    seekTween(({ final __callArgument104:Dynamic = tween; __callArgument104; }), (cast targetElapsed : Float));
   }
 
   public static function createTweenStagger<T:flight._internal._Object>(manager:TweenManager, targets:Array<T>, duration:Float, propertyMap:NumericProps<T>, ?stagger:TweenStaggerOptions, ?options:TweenOptions):Array<Tween<T>> {
@@ -376,17 +464,17 @@ class _Tween {
     var count:Float = cast _Runtime.UNDEFINED;
     var tweens:Array<Tween<T>> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(targets, 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
-    each = _Runtime.coalesce(({ final __structural102 = stagger; __structural102 == null ? _Runtime.UNDEFINED : (cast __structural102 : { @:optional var each:Null<Float>; }).each; }), function():Dynamic return cast 0.1);
-    from = _Runtime.coalesce(({ final __structural103 = stagger; __structural103 == null ? _Runtime.UNDEFINED : (cast __structural103 : { @:optional var from:Null<flight._internal._Union2<Float, String>>; }).from; }), function():Dynamic return cast 'start');
-    staggerEase = ({ final __structural104 = stagger; __structural104 == null ? _Runtime.UNDEFINED : (cast __structural104 : { @:optional var staggerEase:Null<EasingFunction>; }).staggerEase; });
-    baseDelay = _Runtime.coalesce(({ final __structural105 = options; __structural105 == null ? _Runtime.UNDEFINED : (cast __structural105 : { @:optional var delay:Null<Float>; }).delay; }), function():Dynamic return cast 0.0);
+    each = _Runtime.coalesce(({ final __structural106 = stagger; __structural106 == null ? _Runtime.UNDEFINED : (cast __structural106 : { @:optional var each:Null<Float>; }).each; }), function():Dynamic return cast 0.1);
+    from = _Runtime.coalesce(({ final __structural107 = stagger; __structural107 == null ? _Runtime.UNDEFINED : (cast __structural107 : { @:optional var from:Null<flight._internal._Union2<Float, String>>; }).from; }), function():Dynamic return cast 'start');
+    staggerEase = ({ final __structural108 = stagger; __structural108 == null ? _Runtime.UNDEFINED : (cast __structural108 : { @:optional var staggerEase:Null<EasingFunction>; }).staggerEase; });
+    baseDelay = _Runtime.coalesce(({ final __structural109 = options; __structural109 == null ? _Runtime.UNDEFINED : (cast __structural109 : { @:optional var delay:Null<Float>; }).delay; }), function():Dynamic return cast 0.0);
     count = _Runtime.field(targets, 'length');
     tweens = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        var staggerOffset:Float = (cast _Tween.computeStaggerDelay__tweenStagger((cast i : Float), (cast count : Float), (cast each : Float), ({ final __callArgument106:Dynamic = from; __callArgument106; }), ({ final __callArgument107:Dynamic = staggerEase; __callArgument107; })) : Float);
-        var tween:Tween<T> = (cast createTween(({ final __callArgument110:Dynamic = manager; __callArgument110; }), (cast flight._internal._StaticIndex.readArray(targets, i) : Dynamic), (cast duration : Float), (cast propertyMap : Dynamic), ({ final __callArgument111:Dynamic = _Runtime.mergeObjects([options, { delay: (baseDelay + staggerOffset) }]); __callArgument111; })) : Tween<T>);
+        var staggerOffset:Float = (cast _Tween.computeStaggerDelay__tweenStagger((cast i : Float), (cast count : Float), (cast each : Float), ({ final __callArgument110:Dynamic = from; __callArgument110; }), ({ final __callArgument111:Dynamic = staggerEase; __callArgument111; })) : Float);
+        var tween:Tween<T> = (cast createTween(({ final __callArgument114:Dynamic = manager; __callArgument114; }), (cast flight._internal._StaticIndex.readArray(targets, i) : Dynamic), (cast duration : Float), (cast propertyMap : Dynamic), ({ final __callArgument115:Dynamic = _Runtime.mergeObjects([options, { delay: (baseDelay + staggerOffset) }]); __callArgument115; })) : Tween<T>);
         _Runtime.callProperty(tweens, 'push', cast ([tween] : Array<Dynamic>));
         i++;
       }

@@ -11,6 +11,8 @@ function __syncDependencies() {
   compiled.flight._RenderWgpu.releaseWgpuRenderTarget = __dependency0.releaseWgpuRenderTarget;
   compiled.flight._EffectsWgpu.drawWgpuEffectPass = __dependency1.drawWgpuEffectPass;
   compiled.flight._EffectsWgpu.getWgpuEffectPipeline = __dependency2.getWgpuEffectPipeline;
+  compiled.flight._RenderWgpu.getWgpuSampler = __dependency0.getWgpuSampler;
+  compiled.flight._RenderWgpu.resolveWgpuTexture = __dependency0.resolveWgpuTexture;
 }
 __syncDependencies();
 
@@ -30,6 +32,10 @@ const __bridgeImplementation_endWgpuRenderEffectPipeline = api.endWgpuRenderEffe
 export function endWgpuRenderEffectPipeline(...args) { __syncDependencies(); const result = __bridgeImplementation_endWgpuRenderEffectPipeline(...args); return result; }
 api.endWgpuRenderEffectPipeline = endWgpuRenderEffectPipeline;
 compiled.flight.EffectsWgpu.endWgpuRenderEffectPipeline = endWgpuRenderEffectPipeline;
+const __bridgeImplementation_initializeWgpuRenderEffectPipeline = api.initializeWgpuRenderEffectPipeline;
+export function initializeWgpuRenderEffectPipeline(...args) { __syncDependencies(); const result = __bridgeImplementation_initializeWgpuRenderEffectPipeline(...args); return result; }
+api.initializeWgpuRenderEffectPipeline = initializeWgpuRenderEffectPipeline;
+compiled.flight.EffectsWgpu.initializeWgpuRenderEffectPipeline = initializeWgpuRenderEffectPipeline;
 const __bridgeImplementation_setWgpuRenderEffectPipelineSampleCountGuard = api.setWgpuRenderEffectPipelineSampleCountGuard;
 export function setWgpuRenderEffectPipelineSampleCountGuard(...args) { __syncDependencies(); const result = __bridgeImplementation_setWgpuRenderEffectPipelineSampleCountGuard(...args); return result; }
 api.setWgpuRenderEffectPipelineSampleCountGuard = setWgpuRenderEffectPipelineSampleCountGuard;

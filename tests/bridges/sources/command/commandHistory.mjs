@@ -14,6 +14,7 @@ export const getCommandHistoryEntries = api.getCommandHistoryEntries;
 export const getCommandHistoryIndex = api.getCommandHistoryIndex;
 export const getCommandHistoryRedoLabel = api.getCommandHistoryRedoLabel;
 export const getCommandHistoryUndoLabel = api.getCommandHistoryUndoLabel;
+export const initializeCommandHistory = api.initializeCommandHistory;
 export const notifyCommandHistoryChanged = api.notifyCommandHistoryChanged;
 export const redoCommand = api.redoCommand;
 export const undoCommand = api.undoCommand;

@@ -6,14 +6,14 @@ import flight._internal._Runtime;
 import flight._Bitmap.createBitmap;
 import flight._Bitmap.createBitmapRegion;
 import flight._Bitmap.writeBitmapPixels;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Geometry.createRectangle;
 import flight._Log.logOnce;
-import flight.types.BackendExplanation;
-import flight.types.BackendOperationExplanation;
 import flight.types.Bitmap;
 import flight.types.BitmapRegion;
 import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.GlyphAtlas;
 import flight.types.GlyphAtlasEntryExplanation;
 import flight.types.GlyphAtlasOptions;
@@ -24,7 +24,6 @@ import flight.types.GlyphMetrics;
 import flight.types.GlyphRasterizeOptions;
 import flight.types.GlyphRasterizedBitmap;
 import flight.types.GlyphRasterizerBackend;
-import flight.types.GlyphRasterizerOperation;
 import flight.types.GlyphSource;
 import flight.types.LogLevel;
 import flight.types.Rectangle;
@@ -34,17 +33,19 @@ import flight.types.TextureSource;
 @:allow(flight._GlyphAtlas)
 @:keep
 @:structInit
-private class EntityShapeL12C23__glyphRasterizerBackend {
+private class EntityShapeL10C15__glyphRasterizerBackend {
   public var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>;
+  public var measureMetrics:Null<GlyphRasterizeOptions->Null<GlyphMetrics>>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
-  private function new(rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>):Void {
+  private function new(rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>, measureMetrics:Null<GlyphRasterizeOptions->Null<GlyphMetrics>>):Void {
     this.__symbol__EntityRuntime = null;
     this.rasterize = rasterize;
+    this.measureMetrics = measureMetrics;
   }
 }
 #else
-private typedef EntityShapeL12C23__glyphRasterizerBackend = { var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL10C15__glyphRasterizerBackend = { var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; var measureMetrics:Null<GlyphRasterizeOptions->Null<GlyphMetrics>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 @:noCompletion
@@ -109,13 +110,10 @@ class _GlyphAtlas {
   }
 
   public static function createGlyphAtlas(options:GlyphAtlasOptions):GlyphAtlas {
-    var padding:Float = cast _Runtime.UNDEFINED;
-    var rasterizerBackend:GlyphRasterizerBackend = cast _Runtime.UNDEFINED;
-    var rasterizeOptions:GlyphRasterizeOptions = cast _Runtime.UNDEFINED;
-    padding = _Runtime.coalesce(options.padding, function():Dynamic return cast 1.0);
-    rasterizerBackend = _Runtime.coalesce(options.rasterizerBackend, function():Dynamic return cast (cast getGlyphRasterizerBackend() : GlyphRasterizerBackend));
-    rasterizeOptions = (cast _Runtime.mergeObjects([{ fontFamily: options.fontFamily }, { fontSize: options.fontSize }, ((cast !_Runtime.strictEquals(options.fontStyle, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { fontStyle: options.fontStyle } : Dynamic) : (cast {  } : Dynamic)), ((cast !_Runtime.strictEquals(options.fontWeight, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { fontWeight: options.fontWeight } : Dynamic) : (cast {  } : Dynamic))]));
-    return cast { runtime: { bitmaps: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), dirty: false, dirtyMaxX: 0.0, dirtyMaxY: 0.0, dirtyMinX: 0.0, dirtyMinY: 0.0, entries: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), layoutVersion: 0.0, lru: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), maxArea: _Runtime.coalesce(options.maxArea, function():Dynamic return cast 0.0), maxBytes: _Runtime.coalesce(options.maxBytes, function():Dynamic return cast 0.0), maxGlyphs: _Runtime.coalesce(options.maxGlyphs, function():Dynamic return cast 0.0), occupiedArea: 0.0, retainedBytes: 0.0, metrics: (cast _GlyphAtlas._resolveGlyphAtlasMetrics__glyphAtlas(({ final __callArgument20:Dynamic = rasterizerBackend; __callArgument20; }), ({ final __callArgument21:Dynamic = rasterizeOptions; __callArgument21; })) : GlyphMetrics), packBottom: padding, padding: padding, rasterizerBackend: rasterizerBackend, rasterizeOptions: rasterizeOptions, shelves: cast ([] : Array<Dynamic>), bitmap: (cast (#if js _Runtime.callValue(createBitmap, cast ([(cast options.width : Float), (cast options.height : Float)] : Array<Dynamic>)) #else createBitmap((cast options.width : Float), (cast options.height : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Bitmap) } };
+    var out:EntityConstruction<GlyphAtlas> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ runtime: cast _Runtime.UNDEFINED } : GlyphAtlas); }) #end));
+    initializeGlyphAtlas(({ final __callArgument20:Dynamic = out; __callArgument20; }), ({ final __callArgument21:Dynamic = options; __callArgument21; }));
+    return cast out;
     return cast null;
   }
 
@@ -148,6 +146,18 @@ class _GlyphAtlas {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeGlyphAtlas(out:EntityConstruction<GlyphAtlas>, options:GlyphAtlasOptions):Void {
+    var padding:Float = cast _Runtime.UNDEFINED;
+    var rasterizerBackend:GlyphRasterizerBackend = cast _Runtime.UNDEFINED;
+    var rasterizeOptions:GlyphRasterizeOptions = cast _Runtime.UNDEFINED;
+    padding = _Runtime.coalesce(options.padding, function():Dynamic return cast 1.0);
+    rasterizerBackend = options.rasterizerBackend;
+    rasterizeOptions = (cast _Runtime.mergeObjects([{ fontFamily: options.fontFamily }, { fontSize: options.fontSize }, ((cast !_Runtime.strictEquals(options.fontStyle, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { fontStyle: options.fontStyle } : Dynamic) : (cast {  } : Dynamic)), ((cast !_Runtime.strictEquals(options.fontWeight, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { fontWeight: options.fontWeight } : Dynamic) : (cast {  } : Dynamic))]));
+    _Runtime.setField(out, 'runtime', { bitmaps: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), dirty: false, dirtyMaxX: 0.0, dirtyMaxY: 0.0, dirtyMinX: 0.0, dirtyMinY: 0.0, entries: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), layoutVersion: 0.0, lru: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), maxArea: _Runtime.coalesce(options.maxArea, function():Dynamic return cast 0.0), maxBytes: _Runtime.coalesce(options.maxBytes, function():Dynamic return cast 0.0), maxGlyphs: _Runtime.coalesce(options.maxGlyphs, function():Dynamic return cast 0.0), occupiedArea: 0.0, retainedBytes: 0.0, metrics: (cast _GlyphAtlas._resolveGlyphAtlasMetrics__glyphAtlas(({ final __callArgument24:Dynamic = rasterizerBackend; __callArgument24; }), ({ final __callArgument25:Dynamic = rasterizeOptions; __callArgument25; })) : GlyphMetrics), packBottom: padding, padding: padding, rasterizerBackend: rasterizerBackend, rasterizeOptions: rasterizeOptions, shelves: cast ([] : Array<Dynamic>), bitmap: (cast (#if js _Runtime.callValue(createBitmap, cast ([(cast options.width : Float), (cast options.height : Float)] : Array<Dynamic>)) #else createBitmap((cast options.width : Float), (cast options.height : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Bitmap) });
+  }
+
   public static function _resolveGlyphAtlasMetrics__glyphAtlas(backend:GlyphRasterizerBackend, rasterizeOptions:GlyphRasterizeOptions):GlyphMetrics {
     var measured:Null<GlyphMetrics> = cast _Runtime.UNDEFINED;
     measured = _Runtime.coalesce(_Runtime.callOptionalProperty(backend, 'measureMetrics', cast ([rasterizeOptions] : Array<Dynamic>)), function():Dynamic return cast null);
@@ -163,7 +173,7 @@ class _GlyphAtlas {
     var runtime:GlyphAtlasRuntime = cast _Runtime.UNDEFINED;
     runtime = atlas.runtime;
     if ((cast !(cast runtime.dirty : Bool) : Bool)) { return cast null; }
-    return cast (cast createRectangle(({ final __callArgument24:Dynamic = runtime.dirtyMinX; __callArgument24; }), ({ final __callArgument25:Dynamic = runtime.dirtyMinY; __callArgument25; }), ({ final __callArgument26:Dynamic = (runtime.dirtyMaxX - runtime.dirtyMinX); __callArgument26; }), ({ final __callArgument27:Dynamic = (runtime.dirtyMaxY - runtime.dirtyMinY); __callArgument27; })) : Rectangle);
+    return cast (cast createRectangle(({ final __callArgument28:Dynamic = runtime.dirtyMinX; __callArgument28; }), ({ final __callArgument29:Dynamic = runtime.dirtyMinY; __callArgument29; }), ({ final __callArgument30:Dynamic = (runtime.dirtyMaxX - runtime.dirtyMinX); __callArgument30; }), ({ final __callArgument31:Dynamic = (runtime.dirtyMaxY - runtime.dirtyMinY); __callArgument31; })) : Rectangle);
     return cast null;
   }
 
@@ -182,7 +192,7 @@ class _GlyphAtlas {
     runtime = atlas.runtime;
     existing = ((cast runtime.entries : flight._internal._Map<Float, GlyphEntry>).get((cast codepoint)));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _GlyphAtlas._touchGlyphLru__glyphAtlasEntry(({ final __callArgument32:Dynamic = runtime; __callArgument32; }), (cast codepoint : Float));
+      _GlyphAtlas._touchGlyphLru__glyphAtlasEntry(({ final __callArgument36:Dynamic = runtime; __callArgument36; }), (cast codepoint : Float));
       return cast existing;
     }
     bitmap = (cast runtime.rasterizerBackend : GlyphRasterizerBackend).rasterize((cast codepoint : Float), runtime.rasterizeOptions);
@@ -200,20 +210,20 @@ class _GlyphAtlas {
     needsRepack = false;
     incomingBytes = _Runtime.field((cast bitmap : { var pixels:flight._internal._UInt8ClampedArray; }).pixels, 'byteLength');
     incomingArea = ((cast bitmap : { var width:Float; }).width * (cast bitmap : { var height:Float; }).height);
-    while ((cast (cast _GlyphAtlas._isGlyphAtlasOverBudget__glyphAtlasEntry(({ final __callArgument34:Dynamic = runtime; __callArgument34; }), (cast incomingBytes : Float), (cast incomingArea : Float)) : Bool) : Bool)) {
-      if ((cast !(cast (cast _GlyphAtlas._evictLeastRecentlyUsedGlyph__glyphAtlasEntry(({ final __callArgument36:Dynamic = runtime; __callArgument36; })) : Bool) : Bool) : Bool)) { break; }
+    while ((cast (cast _GlyphAtlas._isGlyphAtlasOverBudget__glyphAtlasEntry(({ final __callArgument38:Dynamic = runtime; __callArgument38; }), (cast incomingBytes : Float), (cast incomingArea : Float)) : Bool) : Bool)) {
+      if ((cast !(cast (cast _GlyphAtlas._evictLeastRecentlyUsedGlyph__glyphAtlasEntry(({ final __callArgument40:Dynamic = runtime; __callArgument40; })) : Bool) : Bool) : Bool)) { break; }
       (needsRepack = cast (true : Dynamic));
     }
-    placement = (cast _GlyphAtlas._placeGlyphOnShelf__glyphAtlasEntry(({ final __callArgument38:Dynamic = runtime; __callArgument38; }), (cast (cast bitmap : { var width:Float; }).width : Float), (cast (cast bitmap : { var height:Float; }).height : Float)) : Null<{ var x:Float; var y:Float; }>);
+    placement = (cast _GlyphAtlas._placeGlyphOnShelf__glyphAtlasEntry(({ final __callArgument42:Dynamic = runtime; __callArgument42; }), (cast (cast bitmap : { var width:Float; }).width : Float), (cast (cast bitmap : { var height:Float; }).height : Float)) : Null<{ var x:Float; var y:Float; }>);
     if ((cast ((cast _Runtime.strictEquals(placement, null) : Bool) && (cast needsRepack : Bool)) : Bool)) {
-      _GlyphAtlas._repackGlyphAtlas__glyphAtlasEntry(({ final __callArgument40:Dynamic = runtime; __callArgument40; }));
-      (placement = cast ((cast _GlyphAtlas._placeGlyphOnShelf__glyphAtlasEntry(({ final __callArgument42:Dynamic = runtime; __callArgument42; }), (cast (cast bitmap : { var width:Float; }).width : Float), (cast (cast bitmap : { var height:Float; }).height : Float)) : Null<{ var x:Float; var y:Float; }>) : Dynamic));
+      _GlyphAtlas._repackGlyphAtlas__glyphAtlasEntry(({ final __callArgument44:Dynamic = runtime; __callArgument44; }));
+      (placement = cast ((cast _GlyphAtlas._placeGlyphOnShelf__glyphAtlasEntry(({ final __callArgument46:Dynamic = runtime; __callArgument46; }), (cast (cast bitmap : { var width:Float; }).width : Float), (cast (cast bitmap : { var height:Float; }).height : Float)) : Null<{ var x:Float; var y:Float; }>) : Dynamic));
     }
     while ((cast _Runtime.strictEquals(placement, null) : Bool)) {
       if ((cast _Runtime.strictEquals((cast runtime.entries : flight._internal._Map<Float, GlyphEntry>).size, 0.0) : Bool)) { return cast null; }
-      (cast _GlyphAtlas._evictLeastRecentlyUsedGlyph__glyphAtlasEntry(({ final __callArgument44:Dynamic = runtime; __callArgument44; })) : Bool);
-      _GlyphAtlas._repackGlyphAtlas__glyphAtlasEntry(({ final __callArgument46:Dynamic = runtime; __callArgument46; }));
-      (placement = cast ((cast _GlyphAtlas._placeGlyphOnShelf__glyphAtlasEntry(({ final __callArgument48:Dynamic = runtime; __callArgument48; }), (cast (cast bitmap : { var width:Float; }).width : Float), (cast (cast bitmap : { var height:Float; }).height : Float)) : Null<{ var x:Float; var y:Float; }>) : Dynamic));
+      (cast _GlyphAtlas._evictLeastRecentlyUsedGlyph__glyphAtlasEntry(({ final __callArgument48:Dynamic = runtime; __callArgument48; })) : Bool);
+      _GlyphAtlas._repackGlyphAtlas__glyphAtlasEntry(({ final __callArgument50:Dynamic = runtime; __callArgument50; }));
+      (placement = cast ((cast _GlyphAtlas._placeGlyphOnShelf__glyphAtlasEntry(({ final __callArgument52:Dynamic = runtime; __callArgument52; }), (cast (cast bitmap : { var width:Float; }).width : Float), (cast (cast bitmap : { var height:Float; }).height : Float)) : Null<{ var x:Float; var y:Float; }>) : Dynamic));
     }
     entry = (cast { advance: (cast bitmap : { var advance:Float; }).advance, bearingX: (cast bitmap : { var bearingX:Float; }).bearingX, bearingY: (cast bitmap : { var bearingY:Float; }).bearingY, height: (cast bitmap : { var height:Float; }).height, page: 0.0, width: (cast bitmap : { var width:Float; }).width, x: (cast placement : { var x:Float; var y:Float; }).x, y: (cast placement : { var x:Float; var y:Float; }).y });
     ((cast runtime.entries : flight._internal._Map<Float, GlyphEntry>).set((cast codepoint), (cast entry)));
@@ -221,7 +231,7 @@ class _GlyphAtlas {
     (runtime.retainedBytes += incomingBytes);
     (runtime.occupiedArea += incomingArea);
     ((cast runtime.lru : flight._internal._Map<Float, Bool>).set((cast codepoint), (cast true)));
-    _GlyphAtlas._blitGlyphIntoAtlasBitmap__glyphAtlasEntry(({ final __callArgument50:Dynamic = runtime; __callArgument50; }), ({ final __callArgument51:Dynamic = entry; __callArgument51; }), ({ final __callArgument52:Dynamic = bitmap; __callArgument52; }));
+    _GlyphAtlas._blitGlyphIntoAtlasBitmap__glyphAtlasEntry(({ final __callArgument54:Dynamic = runtime; __callArgument54; }), ({ final __callArgument55:Dynamic = entry; __callArgument55; }), ({ final __callArgument56:Dynamic = bitmap; __callArgument56; }));
     return cast entry;
     return cast null;
   }
@@ -229,8 +239,8 @@ class _GlyphAtlas {
   public static function _blitGlyphIntoAtlasBitmap__glyphAtlasEntry(runtime:GlyphAtlasRuntime, entry:GlyphEntry, bitmap:GlyphRasterizedBitmap):Void {
     var region:BitmapRegion = cast _Runtime.UNDEFINED;
     region = (cast createBitmapRegion(runtime.bitmap, (cast entry.x : Float), (cast entry.y : Float), (cast entry.width : Float), (cast entry.height : Float)) : BitmapRegion);
-    writeBitmapPixels(({ final __callArgument56:Dynamic = region; __callArgument56; }), bitmap.pixels);
-    _GlyphAtlas._markGlyphAtlasDirtyRect__glyphAtlasEntry(({ final __callArgument58:Dynamic = runtime; __callArgument58; }), (cast entry.x : Float), (cast entry.y : Float), (cast entry.width : Float), (cast entry.height : Float));
+    writeBitmapPixels(({ final __callArgument60:Dynamic = region; __callArgument60; }), bitmap.pixels);
+    _GlyphAtlas._markGlyphAtlasDirtyRect__glyphAtlasEntry(({ final __callArgument62:Dynamic = runtime; __callArgument62; }), (cast entry.x : Float), (cast entry.y : Float), (cast entry.width : Float), (cast entry.height : Float));
   }
 
   public static function _evictLeastRecentlyUsedGlyph__glyphAtlasEntry(runtime:GlyphAtlasRuntime):Bool {
@@ -240,7 +250,7 @@ class _GlyphAtlas {
     if ((cast _Runtime.strictEquals((cast oldest : { @:optional var done:Null<Bool>; }).done, true) : Bool)) { return cast false; }
     codepoint = _Runtime.field(oldest, 'value');
     ((cast runtime.lru : flight._internal._Map<Float, Bool>).delete_((cast codepoint)));
-    _GlyphAtlas._releaseGlyphBudget__glyphAtlasEntry(({ final __callArgument60:Dynamic = runtime; __callArgument60; }), (cast codepoint : Float));
+    _GlyphAtlas._releaseGlyphBudget__glyphAtlasEntry(({ final __callArgument64:Dynamic = runtime; __callArgument64; }), (cast codepoint : Float));
     ((cast runtime.entries : flight._internal._Map<Float, GlyphEntry>).delete_((cast codepoint)));
     ((cast runtime.bitmaps : flight._internal._Map<Float, GlyphRasterizedBitmap>).delete_((cast codepoint)));
     return cast true;
@@ -317,10 +327,10 @@ class _GlyphAtlas {
     for (codepoint in _Runtime.iterable(codepoints)) {
       var entry:GlyphEntry = ((cast runtime.entries : flight._internal._Map<Float, GlyphEntry>).get((cast codepoint)));
       var bitmap:GlyphRasterizedBitmap = ((cast runtime.bitmaps : flight._internal._Map<Float, GlyphRasterizedBitmap>).get((cast codepoint)));
-      var placement:Null<{ var x:Float; var y:Float; }> = (cast _GlyphAtlas._placeGlyphOnShelf__glyphAtlasEntry(({ final __callArgument66:Dynamic = runtime; __callArgument66; }), (cast bitmap.width : Float), (cast bitmap.height : Float)) : Null<{ var x:Float; var y:Float; }>);
+      var placement:Null<{ var x:Float; var y:Float; }> = (cast _GlyphAtlas._placeGlyphOnShelf__glyphAtlasEntry(({ final __callArgument70:Dynamic = runtime; __callArgument70; }), (cast bitmap.width : Float), (cast bitmap.height : Float)) : Null<{ var x:Float; var y:Float; }>);
       if ((cast _Runtime.strictEquals(placement, null) : Bool)) {
         _Runtime.callOptionalValue(_GlyphAtlas._entryGuard__glyphAtlasEntry, cast (['repack-dropped', codepoint] : Array<Dynamic>));
-        _GlyphAtlas._releaseGlyphBudget__glyphAtlasEntry(({ final __callArgument68:Dynamic = runtime; __callArgument68; }), (cast codepoint : Float));
+        _GlyphAtlas._releaseGlyphBudget__glyphAtlasEntry(({ final __callArgument72:Dynamic = runtime; __callArgument72; }), (cast codepoint : Float));
         ((cast runtime.entries : flight._internal._Map<Float, GlyphEntry>).delete_((cast codepoint)));
         ((cast runtime.bitmaps : flight._internal._Map<Float, GlyphRasterizedBitmap>).delete_((cast codepoint)));
         ((cast runtime.lru : flight._internal._Map<Float, Bool>).delete_((cast codepoint)));
@@ -329,9 +339,9 @@ class _GlyphAtlas {
       (entry.x = cast ((cast placement : { var x:Float; var y:Float; }).x : Float));
       (entry.y = cast ((cast placement : { var x:Float; var y:Float; }).y : Float));
       var region:BitmapRegion = (cast createBitmapRegion(runtime.bitmap, (cast entry.x : Float), (cast entry.y : Float), (cast entry.width : Float), (cast entry.height : Float)) : BitmapRegion);
-      writeBitmapPixels(({ final __callArgument70:Dynamic = region; __callArgument70; }), bitmap.pixels);
+      writeBitmapPixels(({ final __callArgument74:Dynamic = region; __callArgument74; }), bitmap.pixels);
     }
-    _GlyphAtlas._markGlyphAtlasDirtyRect__glyphAtlasEntry(({ final __callArgument72:Dynamic = runtime; __callArgument72; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast (cast runtime.bitmap : { var width:Float; }).width : Float), (cast (cast runtime.bitmap : { var height:Float; }).height : Float));
+    _GlyphAtlas._markGlyphAtlasDirtyRect__glyphAtlasEntry(({ final __callArgument76:Dynamic = runtime; __callArgument76; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast (cast runtime.bitmap : { var width:Float; }).width : Float), (cast (cast runtime.bitmap : { var height:Float; }).height : Float));
   }
 
   public static function _touchGlyphLru__glyphAtlasEntry(runtime:GlyphAtlasRuntime, codepoint:Float):Void {
@@ -375,7 +385,17 @@ class _GlyphAtlas {
   }
 
   public static function createStubGlyphRasterizerBackend():{ >GlyphRasterizerBackend, >Entity, } {
-    return cast (cast createEntity((cast ({ rasterize: (cast function(_codepoint:Float, options:GlyphRasterizeOptions):Null<GlyphRasterizedBitmap> {
+    var out:EntityConstruction<{ >GlyphRasterizerBackend, >Entity, }> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ rasterize: cast _Runtime.UNDEFINED, measureMetrics: cast _Runtime.UNDEFINED } : EntityShapeL10C15__glyphRasterizerBackend); }) #end));
+    initializeStubGlyphRasterizerBackend(({ final __callArgument78:Dynamic = out; __callArgument78; }));
+    return cast out;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeStubGlyphRasterizerBackend(out:EntityConstruction<{ >GlyphRasterizerBackend, >Entity, }>):Void {
+    ((cast out : { var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; }).rasterize = (cast function(_codepoint:Float, options:GlyphRasterizeOptions):Null<GlyphRasterizedBitmap> {
       var size:Float = cast _Runtime.UNDEFINED;
       var width:Float = cast _Runtime.UNDEFINED;
       var height:Float = cast _Runtime.UNDEFINED;
@@ -387,105 +407,39 @@ class _GlyphAtlas {
       _Runtime.fill(pixels, 255.0, 0, null, 1);
       return cast { advance: _Runtime.addNumbers(width, HxMath.max(1.0, HxMath.round((size * 0.1)))), bearingX: 0.0, bearingY: height, height: height, pixels: pixels, width: width };
       return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL12C23__glyphRasterizerBackend) : Dynamic)) : EntityShapeL12C23__glyphRasterizerBackend);
-    return cast null;
+    }));
   }
-
-  public static function explainGlyphRasterizerBackend():BackendExplanation {
-    if ((cast !_Runtime.strictEquals(_GlyphAtlas._custom__glyphRasterizerBackend, null) : Bool)) {
-      return cast { conflict: _GlyphAtlas._hostConflict__glyphRasterizerBackend, layer: 'custom', operation: null, viability: 'unobserved' };
-    }
-    if ((cast !_Runtime.strictEquals(_GlyphAtlas._host__glyphRasterizerBackend, null) : Bool)) {
-      return cast { conflict: _GlyphAtlas._hostConflict__glyphRasterizerBackend, layer: 'host', operation: ((cast !_Runtime.strictEquals(_GlyphAtlas._hostObservation__glyphRasterizerBackend, null) : Bool) ? (cast (cast _GlyphAtlas._hostObservation__glyphRasterizerBackend : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(_GlyphAtlas._hostObservation__glyphRasterizerBackend, null) : Bool) ? (cast (cast _GlyphAtlas._hostObservation__glyphRasterizerBackend : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
-    }
-    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function explainGlyphRasterizerOperation(operation:GlyphRasterizerOperation):BackendOperationExplanation {
-    if ((cast ((cast !_Runtime.strictEquals(_GlyphAtlas._custom__glyphRasterizerBackend, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_GlyphAtlas._custom__glyphRasterizerBackend, operation)), 'function') : Bool)) : Bool)) {
-      return cast { implemented: true, layer: 'custom', operation: operation };
-    }
-    if ((cast ((cast !_Runtime.strictEquals(_GlyphAtlas._host__glyphRasterizerBackend, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_GlyphAtlas._host__glyphRasterizerBackend, operation)), 'function') : Bool)) : Bool)) {
-      return cast { implemented: true, layer: 'host', operation: operation };
-    }
-    return cast { implemented: false, layer: 'sentinel', operation: operation };
-    return cast null;
-  }
-
-  public static function getGlyphRasterizerBackend():GlyphRasterizerBackend {
-    return cast _Runtime.coalesce(_Runtime.coalesce(_GlyphAtlas._custom__glyphRasterizerBackend, function():Dynamic return cast _GlyphAtlas._host__glyphRasterizerBackend), function():Dynamic return cast _GlyphAtlas._sentinel__glyphRasterizerBackend);
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function hasGlyphRasterizerOperation(operation:GlyphRasterizerOperation):Bool {
-    return cast (cast (cast explainGlyphRasterizerOperation((cast operation : String)) : BackendOperationExplanation) : BackendOperationExplanation).implemented;
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function installGlyphRasterizerHostBackend(backend:GlyphRasterizerBackend):Void {
-    if ((cast !_Runtime.strictEquals(_GlyphAtlas._host__glyphRasterizerBackend, null) : Bool)) {
-      if ((cast !_Runtime.strictEquals(_GlyphAtlas._host__glyphRasterizerBackend, backend) : Bool)) { (_GlyphAtlas._hostConflict__glyphRasterizerBackend = cast (true : Dynamic)); }
-      return;
-    }
-    (_GlyphAtlas._host__glyphRasterizerBackend = cast (backend : Dynamic));
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function observeGlyphRasterizerHostResult(operation:String, succeeded:Bool):Void {
-    (_GlyphAtlas._hostObservation__glyphRasterizerBackend = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function resetGlyphRasterizerBackendForTest():Void {
-    (_GlyphAtlas._custom__glyphRasterizerBackend = cast (null : Dynamic));
-    (_GlyphAtlas._host__glyphRasterizerBackend = cast (null : Dynamic));
-    (_GlyphAtlas._hostConflict__glyphRasterizerBackend = cast (false : Dynamic));
-    (_GlyphAtlas._hostObservation__glyphRasterizerBackend = cast (null : Dynamic));
-  }
-
-  public static function setGlyphRasterizerBackend(backend:Null<GlyphRasterizerBackend>):Void {
-    (_GlyphAtlas._custom__glyphRasterizerBackend = cast (backend : Dynamic));
-  }
-
-  public static var _custom__glyphRasterizerBackend:Null<GlyphRasterizerBackend> = _Runtime.explicitNull();
-
-  public static var _host__glyphRasterizerBackend:Null<GlyphRasterizerBackend> = _Runtime.explicitNull();
-
-  public static var _hostConflict__glyphRasterizerBackend:Bool = false;
-
-  public static var _hostObservation__glyphRasterizerBackend:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
-
-  public static final _sentinel__glyphRasterizerBackend:GlyphRasterizerBackend = (cast { rasterize: function(codepoint:Float, options:GlyphRasterizeOptions):Dynamic {
-    return cast null;
-    return cast _Runtime.UNDEFINED;
-  } });
 
   public static function createGlyphSourceFromGlyphAtlas(atlas:GlyphAtlas):GlyphSource {
-    return cast { getGlyphAtlasImage: function(page:Null<Float> = 0.0):Null<TextureSource> {
-      return cast ((cast _Runtime.strictEquals(page, 0.0) : Bool) ? (cast (cast getGlyphAtlasBitmap(({ final __callArgument74:Dynamic = atlas; __callArgument74; })) : Bitmap) : Dynamic) : (cast null : Dynamic));
-      return cast _Runtime.UNDEFINED;
-    }, getGlyphEntry: function(codepoint:Float):Null<GlyphEntry> {
-      return cast (cast getGlyphAtlasEntry(({ final __callArgument76:Dynamic = atlas; __callArgument76; }), (cast codepoint : Float)) : Null<GlyphEntry>);
-      return cast _Runtime.UNDEFINED;
-    }, getGlyphKerning: function(left:Float, right:Float):Float {
-      return cast (cast getGlyphAtlasKerning(({ final __callArgument78:Dynamic = atlas; __callArgument78; }), (cast left : Float), (cast right : Float)) : Float);
-      return cast _Runtime.UNDEFINED;
-    }, getGlyphLayoutVersion: function():Float {
-      return cast (cast getGlyphAtlasLayoutVersion(({ final __callArgument80:Dynamic = atlas; __callArgument80; })) : Float);
-      return cast _Runtime.UNDEFINED;
-    }, getGlyphMetrics: function():GlyphMetrics {
-      return cast (cast getGlyphAtlasMetrics(({ final __callArgument82:Dynamic = atlas; __callArgument82; })) : GlyphMetrics);
-      return cast _Runtime.UNDEFINED;
-    } };
+    var out:EntityConstruction<GlyphSource> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ getGlyphAtlasImage: cast _Runtime.UNDEFINED, getGlyphEntry: cast _Runtime.UNDEFINED, getGlyphKerning: cast _Runtime.UNDEFINED, getGlyphLayoutVersion: cast _Runtime.UNDEFINED, getGlyphMetrics: cast _Runtime.UNDEFINED } : GlyphSource); }) #end));
+    initializeGlyphSourceFromGlyphAtlas(({ final __callArgument80:Dynamic = out; __callArgument80; }), ({ final __callArgument81:Dynamic = atlas; __callArgument81; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeGlyphSourceFromGlyphAtlas(out:EntityConstruction<GlyphSource>, atlas:GlyphAtlas):Void {
+    ((cast out : { var getGlyphAtlasImage:Null<Float>->Null<TextureSource>; }).getGlyphAtlasImage = (cast function(page:Null<Float> = 0.0):Null<TextureSource> {
+      return cast ((cast _Runtime.strictEquals(page, 0.0) : Bool) ? (cast (cast getGlyphAtlasBitmap(({ final __callArgument84:Dynamic = atlas; __callArgument84; })) : Bitmap) : Dynamic) : (cast null : Dynamic));
+      return cast _Runtime.UNDEFINED;
+    }));
+    ((cast out : { var getGlyphEntry:Float->Null<GlyphEntry>; }).getGlyphEntry = (cast function(codepoint:Float):Null<GlyphEntry> {
+      return cast (cast getGlyphAtlasEntry(({ final __callArgument86:Dynamic = atlas; __callArgument86; }), (cast codepoint : Float)) : Null<GlyphEntry>);
+      return cast _Runtime.UNDEFINED;
+    }));
+    ((cast out : { var getGlyphKerning:Float->Float->Float; }).getGlyphKerning = (cast function(left:Float, right:Float):Float {
+      return cast (cast getGlyphAtlasKerning(({ final __callArgument88:Dynamic = atlas; __callArgument88; }), (cast left : Float), (cast right : Float)) : Float);
+      return cast _Runtime.UNDEFINED;
+    }));
+    ((cast out : { var getGlyphLayoutVersion:Void->Float; }).getGlyphLayoutVersion = (cast function():Float {
+      return cast (cast getGlyphAtlasLayoutVersion(({ final __callArgument90:Dynamic = atlas; __callArgument90; })) : Float);
+      return cast _Runtime.UNDEFINED;
+    }));
+    ((cast out : { var getGlyphMetrics:Void->GlyphMetrics; }).getGlyphMetrics = (cast function():GlyphMetrics {
+      return cast (cast getGlyphAtlasMetrics(({ final __callArgument92:Dynamic = atlas; __callArgument92; })) : GlyphMetrics);
+      return cast _Runtime.UNDEFINED;
+    }));
   }
 }

@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef LookupTableGradeAdjustment = { var kind:String; var transform:ColorTransformFunction; @:optional var lut:ColorLut; @:optional var strength:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Adjustments)
+@:keep
+@:structInit
+class LookupTableGradeAdjustment extends flight.types.ColorLutAdjustment<String> {
+  public var lut:Null<ColorLut>;
+  public var strength:Null<Float>;
+
+  private function new(kind:String, transform:ColorTransformFunction, ?lut:Null<ColorLut>, ?strength:Null<Float>):Void {
+    super(kind, transform);
+    this.lut = lut;
+    this.strength = strength;
+  }
+}
+#else
+typedef LookupTableGradeAdjustment = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var transform:ColorTransformFunction; @:optional var lut:ColorLut; @:optional var strength:Float; };
+#end

@@ -7,5 +7,6 @@ __syncDependencies();
 
 export const applyDomClipRectangles = api.applyDomClipRectangles;
 export const createDomScene2DRectangle = api.createDomScene2DRectangle;
+export const initializeDomScene2DRectangle = api.initializeDomScene2DRectangle;
 export const pushDomClipRectangle = api.pushDomClipRectangle;
 export const setDomClipHooks = api.setDomClipHooks;

@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MenuSelect = { var onMenuItemSelect:Signal<String->Void>; };
+#if !flight_struct_typedef
+@:allow(flight._Menu)
+@:keep
+@:structInit
+class MenuSelect {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onMenuItemSelect:Signal<String->Void>;
+
+  private function new(onMenuItemSelect:Signal<String->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onMenuItemSelect = onMenuItemSelect;
+  }
+}
+#else
+typedef MenuSelect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onMenuItemSelect:Signal<String->Void>; };
+#end

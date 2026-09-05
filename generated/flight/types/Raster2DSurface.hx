@@ -4,4 +4,25 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Raster2DSurface = { var width:Float; var height:Float; var context:flight._internal.dom.CanvasRenderingContext2D; var image:ImageResource; };
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class Raster2DSurface {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var width:Float;
+  public var height:Float;
+  public var context:flight._internal.dom.CanvasRenderingContext2D;
+  public var image:ImageResource;
+
+  private function new(width:Float, height:Float, context:flight._internal.dom.CanvasRenderingContext2D, image:ImageResource):Void {
+    this.__symbol__EntityRuntime = null;
+    this.width = width;
+    this.height = height;
+    this.context = context;
+    this.image = image;
+  }
+}
+#else
+typedef Raster2DSurface = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var width:Float; var height:Float; var context:flight._internal.dom.CanvasRenderingContext2D; var image:ImageResource; };
+#end

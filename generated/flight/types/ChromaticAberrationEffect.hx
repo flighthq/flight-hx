@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ChromaticAberrationEffect = { var kind:String; @:optional var intensity:Float; @:optional var radial:Bool; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class ChromaticAberrationEffect extends flight.types.RenderEffect<String> {
+  public var intensity:Null<Float>;
+  public var radial:Null<Bool>;
+
+  private function new(kind:String, ?intensity:Null<Float>, ?radial:Null<Bool>):Void {
+    super(kind);
+    this.intensity = intensity;
+    this.radial = radial;
+  }
+}
+#else
+typedef ChromaticAberrationEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var intensity:Float; @:optional var radial:Bool; };
+#end

@@ -3,12 +3,13 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Signals.clearSignal;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
 import flight._Signals.hasSignalSlots;
-import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.HasPowerIdle;
 import flight.types.HasPowerKeepAwake;
 import flight.types.HasPowerStatus;
@@ -102,7 +103,10 @@ class _Power {
   }
 
   public static function createPower():Power {
-    return cast (cast createEntity(({ final __callArgument9:Dynamic = ({ onChange: (cast null : Dynamic), onCharging: (cast null : Dynamic), onDischarging: (cast null : Dynamic), onIdleStateChange: (cast null : Dynamic), onLockScreen: (cast null : Dynamic), onResume: (cast null : Dynamic), onSuspend: (cast null : Dynamic), onThermalStateChange: (cast null : Dynamic), onUnlockScreen: (cast null : Dynamic) } : Power); __callArgument9; })) : Power);
+    var out:EntityConstruction<Power> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ onChange: cast _Runtime.UNDEFINED, onCharging: cast _Runtime.UNDEFINED, onDischarging: cast _Runtime.UNDEFINED, onIdleStateChange: cast _Runtime.UNDEFINED, onLockScreen: cast _Runtime.UNDEFINED, onResume: cast _Runtime.UNDEFINED, onSuspend: cast _Runtime.UNDEFINED, onThermalStateChange: cast _Runtime.UNDEFINED, onUnlockScreen: cast _Runtime.UNDEFINED } : Power); }) #end));
+    initializePower(({ final __callArgument9:Dynamic = out; __callArgument9; }));
+    return cast out;
     return cast null;
   }
 
@@ -197,6 +201,20 @@ class _Power {
   public static function getPowerThermalState(host:HasPowerThermal):PowerThermalState {
     return cast (cast (cast (cast host : HasPowerThermal).power : { var thermal:PowerThermalBackend; }).thermal : PowerThermalBackend).getThermalState();
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializePower(out:EntityConstruction<Power>):Void {
+    _Runtime.setField(out, 'onChange', null);
+    _Runtime.setField(out, 'onCharging', null);
+    _Runtime.setField(out, 'onDischarging', null);
+    _Runtime.setField(out, 'onIdleStateChange', null);
+    _Runtime.setField(out, 'onLockScreen', null);
+    _Runtime.setField(out, 'onResume', null);
+    _Runtime.setField(out, 'onSuspend', null);
+    _Runtime.setField(out, 'onThermalStateChange', null);
+    _Runtime.setField(out, 'onUnlockScreen', null);
   }
 
   public static function isPowerKeepAwakeActive(host:HasPowerKeepAwake):Bool {

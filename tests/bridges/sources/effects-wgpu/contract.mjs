@@ -68,3 +68,6 @@ export * from './wgpuTiltShiftEffect.mjs';
 export * from './wgpuToneMapEffect.mjs';
 export * from './wgpuVignetteEffect.mjs';
 export * from './wgpuWhiteBalanceEffect.mjs';
+export { initializeWgpuDualSourceEffectPipeline } from './wgpuEffectPass.mjs';
+export { initializeWgpuEffectPipeline } from './wgpuEffectPass.mjs';
+export { initializeWgpuRenderEffectPipeline } from './wgpuRenderEffectPipeline.mjs';

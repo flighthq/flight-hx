@@ -5,14 +5,12 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Image as Facade_Image_flight__Image;
 import flight.types.AlphaType;
-import flight.types.BackendExplanation;
-import flight.types.BackendOperationExplanation;
 import flight.types.Bitmap;
 import flight.types.CompressedImageData;
 import flight.types.CompressedImageResource;
 import flight.types.EmbeddedImageResourceReference;
 import flight.types.ExternalImageResourceReference;
-import flight.types.ImageBackendOperation;
+import flight.types.HasGraphicsImage;
 import flight.types.ImageResource;
 import flight.types.ImageResourceFailure;
 import flight.types.ImageResourceFetch;
@@ -51,8 +49,8 @@ class Image {
     return cast null;
   }
 
-  public static function createImageResourceFromBitmap(bitmap:Bitmap):Null<ImageResource> {
-    return cast Facade_Image_flight__Image.createImageResourceFromBitmap(bitmap);
+  public static function createImageResourceFromBitmap(host:HasGraphicsImage, bitmap:Bitmap):Null<ImageResource> {
+    return cast Facade_Image_flight__Image.createImageResourceFromBitmap(host, bitmap);
     return cast null;
   }
 
@@ -79,23 +77,8 @@ class Image {
     Facade_Image_flight__Image.enableImageBitmapComposition();
   }
 
-  public static function explainImageBackend():BackendExplanation {
-    return cast Facade_Image_flight__Image.explainImageBackend();
-    return cast null;
-  }
-
-  public static function explainImageOperation(operation:ImageBackendOperation):BackendOperationExplanation {
-    return cast Facade_Image_flight__Image.explainImageOperation(operation);
-    return cast null;
-  }
-
   public static function explainImageResourceReferenceResolution(ref:ImageResourceReference):ImageResourceReferenceResolutionExplanation {
     return cast Facade_Image_flight__Image.explainImageResourceReferenceResolution(ref);
-    return cast null;
-  }
-
-  public static function hasImageOperation(operation:ImageBackendOperation):Bool {
-    return cast Facade_Image_flight__Image.hasImageOperation(operation);
     return cast null;
   }
 
@@ -109,23 +92,23 @@ class Image {
     return cast null;
   }
 
-  public static function loadImageResourceFromBase64(base64:String, mimeType:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<ImageResource> {
-    return cast Facade_Image_flight__Image.loadImageResourceFromBase64(base64, mimeType, signal);
+  public static function loadImageResourceFromBase64(host:HasGraphicsImage, base64:String, mimeType:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<ImageResource> {
+    return cast Facade_Image_flight__Image.loadImageResourceFromBase64(host, base64, mimeType, signal);
     return cast null;
   }
 
-  public static function loadImageResourceFromBlob(blob:flight._internal.dom.Blob, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<ImageResource> {
-    return cast Facade_Image_flight__Image.loadImageResourceFromBlob(blob, signal);
+  public static function loadImageResourceFromBlob(host:HasGraphicsImage, blob:flight._internal.dom.Blob, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<ImageResource> {
+    return cast Facade_Image_flight__Image.loadImageResourceFromBlob(host, blob, signal);
     return cast null;
   }
 
-  public static function loadImageResourceFromBytes(bytes:flight._internal._UInt8Array, ?mimeType:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<ImageResource> {
-    return cast Facade_Image_flight__Image.loadImageResourceFromBytes(bytes, mimeType, signal);
+  public static function loadImageResourceFromBytes(host:HasGraphicsImage, bytes:flight._internal._UInt8Array, ?mimeType:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<ImageResource> {
+    return cast Facade_Image_flight__Image.loadImageResourceFromBytes(host, bytes, mimeType, signal);
     return cast null;
   }
 
-  public static function loadImageResourceFromUrl(url:String, ?crossOrigin:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<ImageResource> {
-    return cast Facade_Image_flight__Image.loadImageResourceFromUrl(url, crossOrigin, signal);
+  public static function loadImageResourceFromUrl(host:HasGraphicsImage, url:String, ?crossOrigin:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<ImageResource> {
+    return cast Facade_Image_flight__Image.loadImageResourceFromUrl(host, url, crossOrigin, signal);
     return cast null;
   }
 

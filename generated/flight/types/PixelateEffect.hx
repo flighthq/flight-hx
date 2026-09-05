@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef PixelateEffect = { var kind:String; @:optional var size:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class PixelateEffect extends flight.types.RenderEffect<String> {
+  public var size:Null<Float>;
+
+  private function new(kind:String, ?size:Null<Float>):Void {
+    super(kind);
+    this.size = size;
+  }
+}
+#else
+typedef PixelateEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var size:Float; };
+#end

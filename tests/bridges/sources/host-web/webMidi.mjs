@@ -7,3 +7,8 @@ __syncDependencies();
 
 export const createWebMidiAccessCapabilities = api.createWebMidiAccessCapabilities;
 export const createWebMidiPermissionAccessCapabilities = api.createWebMidiPermissionAccessCapabilities;
+export const initializeWebMidiAccessBackend = api.initializeWebMidiAccessBackend;
+export const initializeWebMidiAccessCapabilities = api.initializeWebMidiAccessCapabilities;
+export const initializeWebMidiEventAttachment = api.initializeWebMidiEventAttachment;
+export const initializeWebMidiPermissionAccessCapabilities = api.initializeWebMidiPermissionAccessCapabilities;
+export const initializeWebMidiPermissionBackend = api.initializeWebMidiPermissionBackend;

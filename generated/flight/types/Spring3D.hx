@@ -4,4 +4,23 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Spring3D = { var x:Spring; var y:Spring; var z:Spring; };
+#if !flight_struct_typedef
+@:allow(flight._Spring)
+@:keep
+@:structInit
+class Spring3D {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var x:Spring;
+  public var y:Spring;
+  public var z:Spring;
+
+  private function new(x:Spring, y:Spring, z:Spring):Void {
+    this.__symbol__EntityRuntime = null;
+    this.x = x;
+    this.y = y;
+    this.z = z;
+  }
+}
+#else
+typedef Spring3D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var x:Spring; var y:Spring; var z:Spring; };
+#end

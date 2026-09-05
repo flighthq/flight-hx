@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:keep
+@:structInit
+class ProtocolUnregistrationBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var unregister:String->Bool;
+
+  private function new(unregister:String->Bool):Void {
+    this.__symbol__EntityRuntime = null;
+    this.unregister = unregister;
+  }
+}
+#else
 typedef ProtocolUnregistrationBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var unregister:String->Bool; };
+#end

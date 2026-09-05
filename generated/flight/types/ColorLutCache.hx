@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ColorLutCache = { var signature:Null<String>; var lut:Null<ColorLut>; };
+#if !flight_struct_typedef
+@:allow(flight._Adjustments)
+@:keep
+@:structInit
+class ColorLutCache {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var signature:Null<String>;
+  public var lut:Null<ColorLut>;
+
+  private function new(signature:Null<String>, lut:Null<ColorLut>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.signature = signature;
+    this.lut = lut;
+  }
+}
+#else
+typedef ColorLutCache = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var signature:Null<String>; var lut:Null<ColorLut>; };
+#end

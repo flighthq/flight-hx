@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const createFlightDocumentTokenResolverRegistry = api.createFlightDocumentTokenResolverRegistry;
 export const explainFlightDocumentSceneTokenResolution = api.explainFlightDocumentSceneTokenResolution;
+export const initializeFlightDocumentTokenResolverRegistry = api.initializeFlightDocumentTokenResolverRegistry;
 export const resolveFlightDocumentSceneTokens = api.resolveFlightDocumentSceneTokens;

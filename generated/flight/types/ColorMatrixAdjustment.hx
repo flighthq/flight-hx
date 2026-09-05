@@ -4,4 +4,27 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ColorMatrixAdjustment = { var kind:AdjustmentKind; var colorMatrix:Array<Float>; };
+#if !flight_struct_typedef
+@:allow(flight._Adjustments)
+@:allow(flight.types.BrightnessContrastAdjustment)
+@:allow(flight.types.ChannelMixerAdjustment)
+@:allow(flight.types.ColorBlindSimulationAdjustment)
+@:allow(flight.types.ColorScaleBiasAdjustment)
+@:allow(flight.types.ExposureAdjustment)
+@:allow(flight.types.GrayscaleAdjustment)
+@:allow(flight.types.InvertAdjustment)
+@:allow(flight.types.SepiaAdjustment)
+@:allow(flight.types.TintAdjustment)
+@:keep
+@:structInit
+class ColorMatrixAdjustment<TKind = Dynamic> extends flight.types.Adjustment<TKind> {
+  public var colorMatrix:Array<Float>;
+
+  private function new(kind:TKind, colorMatrix:Array<Float>):Void {
+    super(kind);
+    this.colorMatrix = colorMatrix;
+  }
+}
+#else
+typedef ColorMatrixAdjustment = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:AdjustmentKind; var colorMatrix:Array<Float>; };
+#end

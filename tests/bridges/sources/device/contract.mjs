@@ -4,3 +4,7 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './device.mjs';
+export { initializeDeviceCapabilities } from './device.mjs';
+export { initializeDeviceDisplayMetrics } from './device.mjs';
+export { initializeDeviceInfo } from './device.mjs';
+export { initializeSafeAreaInsets } from './device.mjs';

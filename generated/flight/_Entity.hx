@@ -4,10 +4,11 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight.Types.EntityRuntimeKey;
-import flight._Log.logOnce;
 import flight._Types.EntityRuntimeKey;
 import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.EntityRuntime;
+import flight.types.EntityRuntimeWriteExplanation;
 import flight.types.EntityRuntimeWriteGuard;
 import flight.types.EntityRuntimeWriteSlot;
 import flight.types.EntityWithoutRuntime;
@@ -37,43 +38,42 @@ import flight.types.HostTextCapabilities;
 import flight.types.HostTrayCapabilities;
 import flight.types.HostUiCapabilities;
 import flight.types.HostUpdaterCapabilities;
-import flight.types.LogLevel;
 import flight.types.WindowBackend;
 
 #if !flight_struct_typedef
 @:allow(flight._Entity)
 @:keep
 @:structInit
-private class EntityShapeL8C23__host {
-  public var accessibility:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var app:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var clipboard:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var connectivity:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var dialog:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var graphics:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var input:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var ipc:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var media:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var menu:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var midi:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var net:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var notification:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var power:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var protocol:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var screen:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var share:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var shell:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var shortcut:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var storage:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var system:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var text:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var tray:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var ui:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var updater:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
-  public var window:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>;
+private class EntityShapeL8C15__host {
+  public var accessibility:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var app:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var clipboard:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var connectivity:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var dialog:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var graphics:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var input:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var ipc:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var media:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var menu:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var midi:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var net:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var power:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var protocol:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var notification:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var screen:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var share:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var shell:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var shortcut:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var storage:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var system:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var text:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var tray:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var ui:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var updater:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
+  public var window:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
-  private function new(accessibility:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, app:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, clipboard:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, connectivity:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, dialog:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, graphics:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, input:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, ipc:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, media:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, menu:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, midi:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, net:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, notification:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, power:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, protocol:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, screen:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, share:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, shell:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, shortcut:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, storage:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, system:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, text:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, tray:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, ui:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, updater:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>, window:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>):Void {
+  private function new(accessibility:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, app:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, clipboard:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, connectivity:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, dialog:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, graphics:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, input:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, ipc:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, media:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, menu:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, midi:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, net:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, power:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, protocol:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, notification:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, screen:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, share:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, shell:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, shortcut:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, storage:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, system:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, text:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, tray:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, ui:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, updater:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>, window:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>):Void {
     this.__symbol__EntityRuntime = null;
     this.accessibility = accessibility;
     this.app = app;
@@ -87,9 +87,9 @@ private class EntityShapeL8C23__host {
     this.menu = menu;
     this.midi = midi;
     this.net = net;
-    this.notification = notification;
     this.power = power;
     this.protocol = protocol;
+    this.notification = notification;
     this.screen = screen;
     this.share = share;
     this.shell = shell;
@@ -104,7 +104,7 @@ private class EntityShapeL8C23__host {
   }
 }
 #else
-private typedef EntityShapeL8C23__host = { var accessibility:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var app:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var clipboard:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var connectivity:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var dialog:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var graphics:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var input:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var ipc:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var media:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var menu:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var midi:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var net:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var notification:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var power:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var protocol:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var screen:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var share:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var shell:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var shortcut:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var storage:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var system:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var text:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var tray:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var ui:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var updater:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; var window:flight._internal._Intersection2<{  }, flight._internal._IndexedAccess<flight._internal._Any, String>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL8C15__host = { var accessibility:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var app:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var clipboard:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var connectivity:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var dialog:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var graphics:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var input:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var ipc:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var media:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var menu:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var midi:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var net:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var power:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var protocol:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var notification:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var screen:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var share:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var shell:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var shortcut:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var storage:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var system:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var text:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var tray:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var ui:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var updater:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; var window:flight._internal._IndexedAccess<flight._internal._Intersection2<Host, flight._internal._Any>, String>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 @:noCompletion
@@ -153,7 +153,7 @@ class _Entity {
     var copy:flight._internal._Record<flight._internal._Any, flight._internal._Any> = cast _Runtime.UNDEFINED;
     copy = (cast _Runtime.cloneEntityShape(source) : flight._internal._Record<Dynamic, flight._internal._Any>);
     _Runtime.setIndex(copy, EntityRuntimeKey, _Runtime.field(_Runtime, 'UNDEFINED'));
-    return cast (cast createEntity((cast (cast (cast copy : flight._internal._Any) : Type) : Dynamic)) : flight._internal._Intersection2<Type, Entity>);
+    return cast (cast copy : Type);
     return cast null;
   }
 
@@ -171,38 +171,37 @@ class _Entity {
   @:keep
   private static function disableEntityRuntimeGuards():Void {
     setEntityRuntimeGuardMode((cast false : Bool));
-    setEntityRuntimeWriteGuard((cast null : Dynamic));
+    setEntityRuntimeWriteGuard(({ final __callArgument5:Dynamic = null; __callArgument5; }));
   }
 
   @:allow(flight)
   @:keep
-  private static function enableEntityRuntimeGuards():Void {
+  private static function enableEntityRuntimeGuards(report:EntityRuntimeWriteGuard):Void {
     setEntityRuntimeGuardMode((cast true : Bool));
-    setEntityRuntimeWriteGuard((cast _Entity.warnOnDirectWrite__enableEntityRuntimeGuards : Dynamic));
-  }
-
-  public static function warnOnDirectWrite__enableEntityRuntimeGuards(slot:EntityRuntimeWriteSlot):Void {
-    if ((cast _Runtime.strictEquals(slot, 'binding-slot') : Bool)) {
-      (cast logOnce((cast 'entity:direct-binding-write' : String), ({ final __callArgument5:Dynamic = LogLevel.Warn; __callArgument5; }), (cast { message: 'EntityRuntime.binding was written directly. Use attachEntityBinding or detachEntityBinding, which keep the binding and the runtime consistent; the write was allowed but is not tracked.' } : Dynamic), ({ final __callArgument6:Dynamic = 'entity'; __callArgument6; })) : Bool);
-      return;
-    }
-    (cast logOnce((cast 'entity:direct-runtime-write' : String), ({ final __callArgument9:Dynamic = LogLevel.Warn; __callArgument9; }), (cast { message: 'An entity\'s runtime slot was written directly. Use attachEntityBinding, which allocates the slot for you; the write was allowed, but bypassing it is how a runtime ends up on the wrong entity.' } : Dynamic), ({ final __callArgument10:Dynamic = 'entity'; __callArgument10; })) : Bool);
+    setEntityRuntimeWriteGuard(({ final __callArgument7:Dynamic = report; __callArgument7; }));
   }
 
   @:allow(flight)
   @:keep
-  private static function createEntity<Type:flight._internal._Object>(?obj:Type):Type {
-    if (obj == null) obj = cast {};
-    final entity:Type = cast obj;
-    _Runtime.setIndex(entity, EntityRuntimeKey, _Runtime.UNDEFINED);
-    return entity;
+  private static function allocateEntity<Type:Entity>():EntityConstruction<Type> {
+    var out:EntityConstruction<Type> = cast _Runtime.UNDEFINED;
+    out = (cast {  } : EntityConstruction<Type>);
+    _Runtime.setIndex(out, EntityRuntimeKey, _Runtime.field(_Runtime, 'UNDEFINED'));
+    return cast out;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function finishEntity<Type:Entity>(out:EntityConstruction<Type>):Type {
+    return cast (cast out : Type);
     return cast null;
   }
 
   public static function getEntityUid(source:Entity):String {
     var runtime:EntityRuntime = cast _Runtime.UNDEFINED;
     var uid:String = cast _Runtime.UNDEFINED;
-    runtime = (cast _Entity.ensureEntityRuntime__entityUid(({ final __callArgument13:Dynamic = source; __callArgument13; })) : EntityRuntime);
+    runtime = (cast _Entity.ensureEntityRuntime__entityUid(({ final __callArgument9:Dynamic = source; __callArgument9; })) : EntityRuntime);
     if ((cast !_Runtime.strictEquals((cast runtime : EntityRuntime).uid, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast runtime : EntityRuntime).uid; }
     uid = (cast _Entity.generateEntityUid__entityUid() : String);
     ((cast runtime : EntityRuntime).uid = uid);
@@ -212,7 +211,7 @@ class _Entity {
 
   public static function setEntityUid(source:Entity, uid:String):Void {
     var runtime:EntityRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast _Entity.ensureEntityRuntime__entityUid(({ final __callArgument15:Dynamic = source; __callArgument15; })) : EntityRuntime);
+    runtime = (cast _Entity.ensureEntityRuntime__entityUid(({ final __callArgument11:Dynamic = source; __callArgument11; })) : EntityRuntime);
     ((cast runtime : EntityRuntime).uid = uid);
   }
 
@@ -230,6 +229,16 @@ class _Entity {
   }
 
   public static var _nextEntityUidCounter__entityUid:Float = 1.0;
+
+  @:allow(flight)
+  @:keep
+  private static function explainEntityRuntimeWrite(slot:EntityRuntimeWriteSlot):EntityRuntimeWriteExplanation {
+    if ((cast _Runtime.strictEquals(slot, 'binding-slot') : Bool)) {
+      return cast { message: 'EntityRuntime.binding was written directly. The write was allowed but is not tracked, so the binding and the runtime can disagree.', slot: slot, useInstead: cast (['attachEntityBinding', 'detachEntityBinding'] : Array<Dynamic>) };
+    }
+    return cast { message: 'An entity\'s runtime slot was written directly. The write was allowed, but bypassing the helper is how a runtime ends up on the wrong entity.', slot: slot, useInstead: cast (['attachEntityBinding'] : Array<Dynamic>) };
+    return cast null;
+  }
 
   @:allow(flight)
   @:keep
@@ -289,8 +298,42 @@ class _Entity {
   @:keep
   private static function createHost<Capabilities:flight._internal._Partial<{ var accessibility:HostAccessibilityCapabilities; var app:HostAppCapabilities; var clipboard:HostClipboardCapabilities; var connectivity:HostConnectivityCapabilities; var dialog:HostDialogCapabilities; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:HostIpcCapabilities; var media:HostMediaCapabilities; var menu:HostMenuCapabilities; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:HostProtocolCapabilities; var notification:HostNotificationCapabilities; var screen:HostScreenCapabilities; var share:HostShareCapabilities; var shell:HostShellCapabilities; var shortcut:HostShortcutCapabilities; var storage:HostStorageCapabilities; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:HostTrayCapabilities; var ui:HostUiCapabilities; var updater:HostUpdaterCapabilities; var window:WindowBackend; }>>(?capabilities:Capabilities):Capabilities {
     if (capabilities == null) capabilities = cast ((cast {  } : Capabilities) : Dynamic);
-    return cast (cast createEntity((cast (#if flight_struct_typedef _Runtime.mergeObjects([{ accessibility: {  } }, { app: {  } }, { clipboard: {  } }, { connectivity: {  } }, { dialog: {  } }, { graphics: {  } }, { input: {  } }, { ipc: {  } }, { media: {  } }, { menu: {  } }, { midi: {  } }, { net: {  } }, { notification: {  } }, { power: {  } }, { protocol: {  } }, { screen: {  } }, { share: {  } }, { shell: {  } }, { shortcut: {  } }, { storage: {  } }, { system: {  } }, { text: {  } }, { tray: {  } }, { ui: {  } }, { updater: {  } }, { window: {  } }, capabilities]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([{ accessibility: {  } }, { app: {  } }, { clipboard: {  } }, { connectivity: {  } }, { dialog: {  } }, { graphics: {  } }, { input: {  } }, { ipc: {  } }, { media: {  } }, { menu: {  } }, { midi: {  } }, { net: {  } }, { notification: {  } }, { power: {  } }, { protocol: {  } }, { screen: {  } }, { share: {  } }, { shell: {  } }, { shortcut: {  } }, { storage: {  } }, { system: {  } }, { text: {  } }, { tray: {  } }, { ui: {  } }, { updater: {  } }, { window: {  } }, capabilities]); ({ accessibility: _Runtime.field(__structInitSource, 'accessibility'), app: _Runtime.field(__structInitSource, 'app'), clipboard: _Runtime.field(__structInitSource, 'clipboard'), connectivity: _Runtime.field(__structInitSource, 'connectivity'), dialog: _Runtime.field(__structInitSource, 'dialog'), graphics: _Runtime.field(__structInitSource, 'graphics'), input: _Runtime.field(__structInitSource, 'input'), ipc: _Runtime.field(__structInitSource, 'ipc'), media: _Runtime.field(__structInitSource, 'media'), menu: _Runtime.field(__structInitSource, 'menu'), midi: _Runtime.field(__structInitSource, 'midi'), net: _Runtime.field(__structInitSource, 'net'), notification: _Runtime.field(__structInitSource, 'notification'), power: _Runtime.field(__structInitSource, 'power'), protocol: _Runtime.field(__structInitSource, 'protocol'), screen: _Runtime.field(__structInitSource, 'screen'), share: _Runtime.field(__structInitSource, 'share'), shell: _Runtime.field(__structInitSource, 'shell'), shortcut: _Runtime.field(__structInitSource, 'shortcut'), storage: _Runtime.field(__structInitSource, 'storage'), system: _Runtime.field(__structInitSource, 'system'), text: _Runtime.field(__structInitSource, 'text'), tray: _Runtime.field(__structInitSource, 'tray'), ui: _Runtime.field(__structInitSource, 'ui'), updater: _Runtime.field(__structInitSource, 'updater'), window: _Runtime.field(__structInitSource, 'window') } : EntityShapeL8C23__host); }) #end) : Dynamic)) : EntityShapeL8C23__host);
+    var out:EntityConstruction<flight._internal._Intersection2<Host, Capabilities>> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ accessibility: cast _Runtime.UNDEFINED, app: cast _Runtime.UNDEFINED, clipboard: cast _Runtime.UNDEFINED, connectivity: cast _Runtime.UNDEFINED, dialog: cast _Runtime.UNDEFINED, graphics: cast _Runtime.UNDEFINED, input: cast _Runtime.UNDEFINED, ipc: cast _Runtime.UNDEFINED, media: cast _Runtime.UNDEFINED, menu: cast _Runtime.UNDEFINED, midi: cast _Runtime.UNDEFINED, net: cast _Runtime.UNDEFINED, power: cast _Runtime.UNDEFINED, protocol: cast _Runtime.UNDEFINED, notification: cast _Runtime.UNDEFINED, screen: cast _Runtime.UNDEFINED, share: cast _Runtime.UNDEFINED, shell: cast _Runtime.UNDEFINED, shortcut: cast _Runtime.UNDEFINED, storage: cast _Runtime.UNDEFINED, system: cast _Runtime.UNDEFINED, text: cast _Runtime.UNDEFINED, tray: cast _Runtime.UNDEFINED, ui: cast _Runtime.UNDEFINED, updater: cast _Runtime.UNDEFINED, window: cast _Runtime.UNDEFINED } : EntityShapeL8C15__host); }) #end));
+    initializeHost((cast out : Dynamic), (cast capabilities : Dynamic));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeHost<Capabilities:flight._internal._Partial<{ var accessibility:HostAccessibilityCapabilities; var app:HostAppCapabilities; var clipboard:HostClipboardCapabilities; var connectivity:HostConnectivityCapabilities; var dialog:HostDialogCapabilities; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:HostIpcCapabilities; var media:HostMediaCapabilities; var menu:HostMenuCapabilities; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:HostProtocolCapabilities; var notification:HostNotificationCapabilities; var screen:HostScreenCapabilities; var share:HostShareCapabilities; var shell:HostShellCapabilities; var shortcut:HostShortcutCapabilities; var storage:HostStorageCapabilities; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:HostTrayCapabilities; var ui:HostUiCapabilities; var updater:HostUpdaterCapabilities; var window:WindowBackend; }>>(out:EntityConstruction<Capabilities>, capabilities:Capabilities):Void {
+    _Runtime.setField(out, 'accessibility', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'accessibility'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'app', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'app'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'clipboard', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'clipboard'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'connectivity', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'connectivity'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'dialog', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'dialog'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'graphics', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'graphics'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'input', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'input'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'ipc', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'ipc'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'media', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'media'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'menu', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'menu'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'midi', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'midi'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'net', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'net'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'notification', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'notification'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'power', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'power'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'protocol', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'protocol'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'screen', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'screen'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'share', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'share'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'shell', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'shell'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'shortcut', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'shortcut'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'storage', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'storage'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'system', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'system'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'text', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'text'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'tray', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'tray'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'ui', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'ui'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'updater', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'updater'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
+    _Runtime.setField(out, 'window', (cast _Runtime.coalesce(_Runtime.field(capabilities, 'window'), function():Dynamic return cast {  }) : flight._internal._IndexedAccess<Host, String>));
   }
 
   @:allow(flight)

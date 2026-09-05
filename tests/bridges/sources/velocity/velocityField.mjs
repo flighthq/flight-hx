@@ -16,6 +16,7 @@ export const ensureVelocitySample = api.ensureVelocitySample;
 export const explainVelocity = api.explainVelocity;
 export const getVelocity = api.getVelocity;
 export const hasVelocity = api.hasVelocity;
+export const initializeVelocityField = api.initializeVelocityField;
 export const isVelocityZero = api.isVelocityZero;
 export const lengthOfVelocity = api.lengthOfVelocity;
 export const lerpVelocity = api.lerpVelocity;

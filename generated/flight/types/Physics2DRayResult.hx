@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics2DRayResult = { var hits:Array<Physics2DRayHit>; var hitCount:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Physics2D)
+@:keep
+@:structInit
+class Physics2DRayResult {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var hits:Array<Physics2DRayHit>;
+  public var hitCount:Float;
+
+  private function new(hits:Array<Physics2DRayHit>, hitCount:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.hits = hits;
+    this.hitCount = hitCount;
+  }
+}
+#else
+typedef Physics2DRayResult = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var hits:Array<Physics2DRayHit>; var hitCount:Float; };
+#end

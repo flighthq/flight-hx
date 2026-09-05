@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const createOutlineEffect = api.createOutlineEffect;
 export const getOutlineEffectPadding = api.getOutlineEffectPadding;
+export const initializeOutlineEffect = api.initializeOutlineEffect;
 export const registerOutlineEffectPaddingResolver = api.registerOutlineEffectPaddingResolver;

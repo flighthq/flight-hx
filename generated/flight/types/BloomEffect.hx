@@ -4,4 +4,24 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef BloomEffect = { var kind:String; @:optional var threshold:Float; @:optional var intensity:Float; @:optional var radius:Float; @:optional var passes:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class BloomEffect extends flight.types.RenderEffect<String> {
+  public var threshold:Null<Float>;
+  public var intensity:Null<Float>;
+  public var radius:Null<Float>;
+  public var passes:Null<Float>;
+
+  private function new(kind:String, ?threshold:Null<Float>, ?intensity:Null<Float>, ?radius:Null<Float>, ?passes:Null<Float>):Void {
+    super(kind);
+    this.threshold = threshold;
+    this.intensity = intensity;
+    this.radius = radius;
+    this.passes = passes;
+  }
+}
+#else
+typedef BloomEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var threshold:Float; @:optional var intensity:Float; @:optional var radius:Float; @:optional var passes:Float; };
+#end

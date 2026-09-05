@@ -5,3 +5,4 @@ __syncDependencies();
 
 export * from './clock.mjs';
 export * from './clockSignals.mjs';
+export { initializeClock } from './clock.mjs';

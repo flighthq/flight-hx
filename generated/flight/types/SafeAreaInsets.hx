@@ -4,4 +4,26 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SafeAreaInsets = { var top:Float; var right:Float; var bottom:Float; var left:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Device)
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class SafeAreaInsets {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var top:Float;
+  public var right:Float;
+  public var bottom:Float;
+  public var left:Float;
+
+  private function new(top:Float, right:Float, bottom:Float, left:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.top = top;
+    this.right = right;
+    this.bottom = bottom;
+    this.left = left;
+  }
+}
+#else
+typedef SafeAreaInsets = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var top:Float; var right:Float; var bottom:Float; var left:Float; };
+#end

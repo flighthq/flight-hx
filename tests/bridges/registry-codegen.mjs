@@ -2,3 +2,4 @@
 import compiled from '../../build/haxe-js/flight.cjs';
 
 export const createRegistryCodegenPlan = compiled.flight.RegistryCodegen.createRegistryCodegenPlan;
+export const initializeRegistryCodegenPlan = compiled.flight.RegistryCodegen.initializeRegistryCodegenPlan;

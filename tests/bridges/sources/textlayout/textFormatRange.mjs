@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createTextFormatRange = api.createTextFormatRange;
+export const initializeTextFormatRange = api.initializeTextFormatRange;

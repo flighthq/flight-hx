@@ -4,4 +4,35 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef StatechartInstance = { var chart:Statechart; var durationGuard:Null<StatechartDurationGuard>; var inputValues:flight._internal._Float64Array; var regionBlend:flight._internal._Float32Array; var regionDuration:flight._internal._Float64Array; var regionElapsed:flight._internal._Float64Array; var regionStates:flight._internal._Int32Array; var regionTransitions:flight._internal._Int32Array; var signals:Null<StatechartSignals>; };
+#if !flight_struct_typedef
+@:allow(flight._Statechart)
+@:keep
+@:structInit
+class StatechartInstance {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var chart:Statechart;
+  public var durationGuard:Null<StatechartDurationGuard>;
+  public var inputValues:flight._internal._Float64Array;
+  public var regionBlend:flight._internal._Float32Array;
+  public var regionDuration:flight._internal._Float64Array;
+  public var regionElapsed:flight._internal._Float64Array;
+  public var regionStates:flight._internal._Int32Array;
+  public var regionTransitions:flight._internal._Int32Array;
+  public var signals:Null<StatechartSignals>;
+
+  private function new(chart:Statechart, durationGuard:Null<StatechartDurationGuard>, inputValues:flight._internal._Float64Array, regionBlend:flight._internal._Float32Array, regionDuration:flight._internal._Float64Array, regionElapsed:flight._internal._Float64Array, regionStates:flight._internal._Int32Array, regionTransitions:flight._internal._Int32Array, signals:Null<StatechartSignals>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.chart = chart;
+    this.durationGuard = durationGuard;
+    this.inputValues = inputValues;
+    this.regionBlend = regionBlend;
+    this.regionDuration = regionDuration;
+    this.regionElapsed = regionElapsed;
+    this.regionStates = regionStates;
+    this.regionTransitions = regionTransitions;
+    this.signals = signals;
+  }
+}
+#else
+typedef StatechartInstance = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var chart:Statechart; var durationGuard:Null<StatechartDurationGuard>; var inputValues:flight._internal._Float64Array; var regionBlend:flight._internal._Float32Array; var regionDuration:flight._internal._Float64Array; var regionElapsed:flight._internal._Float64Array; var regionStates:flight._internal._Int32Array; var regionTransitions:flight._internal._Int32Array; var signals:Null<StatechartSignals>; };
+#end

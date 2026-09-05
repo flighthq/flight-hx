@@ -11,6 +11,7 @@ export const createSpritesheetPlayer = api.createSpritesheetPlayer;
 export const disposeSpritesheetPlayer = api.disposeSpritesheetPlayer;
 export const getSpritesheetPlayerFrame = api.getSpritesheetPlayerFrame;
 export const getSpritesheetPlayerFrameAt = api.getSpritesheetPlayerFrameAt;
+export const initializeSpritesheetPlayer = api.initializeSpritesheetPlayer;
 export const pauseSpritesheetPlayer = api.pauseSpritesheetPlayer;
 export const playSpritesheetAnimation = api.playSpritesheetAnimation;
 export const queueSpritesheetAnimation = api.queueSpritesheetAnimation;

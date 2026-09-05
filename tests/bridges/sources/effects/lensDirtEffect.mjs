@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createLensDirtEffect = api.createLensDirtEffect;
+export const initializeLensDirtEffect = api.initializeLensDirtEffect;

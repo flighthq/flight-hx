@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class ImageOpenDialogBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var open:OpenImageDialogOptions->flight._internal._Promise<ImageOpenDialogResult>;
+
+  private function new(open:OpenImageDialogOptions->flight._internal._Promise<ImageOpenDialogResult>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.open = open;
+  }
+}
+#else
 typedef ImageOpenDialogBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var open:OpenImageDialogOptions->flight._internal._Promise<ImageOpenDialogResult>; };
+#end

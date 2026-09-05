@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class AppBadgeBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var setBadgeCount:Float->flight._internal._Promise<Bool>;
+
+  private function new(setBadgeCount:Float->flight._internal._Promise<Bool>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.setBadgeCount = setBadgeCount;
+  }
+}
+#else
 typedef AppBadgeBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var setBadgeCount:Float->flight._internal._Promise<Bool>; };
+#end

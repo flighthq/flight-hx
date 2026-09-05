@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createUniformGridSpatialBackend3D = api.createUniformGridSpatialBackend3D;
+export const initializeUniformGridSpatialBackend3D = api.initializeUniformGridSpatialBackend3D;

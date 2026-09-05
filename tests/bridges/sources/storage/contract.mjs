@@ -5,3 +5,4 @@ __syncDependencies();
 
 export * from './storage.mjs';
 export * from './storagePersistence.mjs';
+export { initializeStorageSignals } from './storage.mjs';

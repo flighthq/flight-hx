@@ -8,3 +8,5 @@ export * from './textureAtlas.mjs';
 export * from './textureAtlasFrom.mjs';
 export * from './textureAtlasGrid.mjs';
 export * from './textureAtlasRegion.mjs';
+export { initializeTextureAtlas } from './textureAtlas.mjs';
+export { initializeTextureAtlasRegion } from './textureAtlasRegion.mjs';

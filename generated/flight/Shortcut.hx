@@ -13,6 +13,7 @@ import flight.types.GlobalShortcutDetachOutcome;
 import flight.types.GlobalShortcutQueryOutcome;
 import flight.types.HasShortcutQuery;
 import flight.types.HasShortcutTrigger;
+import flight.types.NonEntityCreateResult;
 import flight.types.ParsedAccelerator;
 import flight.types.PlatformName;
 import flight.types.ShortcutKeyName;
@@ -24,7 +25,7 @@ class Shortcut {
     return cast null;
   }
 
-  public static function createGlobalShortcut(accelerator:String):CreateGlobalShortcutOutcome {
+  public static function createGlobalShortcut(accelerator:String):NonEntityCreateResult<CreateGlobalShortcutOutcome, String> {
     return cast Facade_Shortcut_flight__Shortcut.createGlobalShortcut(accelerator);
     return cast null;
   }

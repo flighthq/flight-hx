@@ -6,7 +6,9 @@ const api = compiled.flight._EffectsWgpu;
 function __syncDependencies() {
   compiled.flight._RenderWgpu.acquireWgpuRenderTarget = __dependency0.acquireWgpuRenderTarget;
   compiled.flight._RenderWgpu.getWgpuRenderStateRuntime = __dependency0.getWgpuRenderStateRuntime;
+  compiled.flight._RenderWgpu.getWgpuSampler = __dependency0.getWgpuSampler;
   compiled.flight._RenderWgpu.releaseWgpuRenderTarget = __dependency0.releaseWgpuRenderTarget;
+  compiled.flight._RenderWgpu.resolveWgpuTexture = __dependency0.resolveWgpuTexture;
 }
 __syncDependencies();
 

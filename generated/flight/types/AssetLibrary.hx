@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AssetLibrary = { var runtime:AssetLibraryRuntime; };
+#if !flight_struct_typedef
+@:allow(flight._Assets)
+@:keep
+@:structInit
+class AssetLibrary {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var runtime:AssetLibraryRuntime;
+
+  private function new(runtime:AssetLibraryRuntime):Void {
+    this.__symbol__EntityRuntime = null;
+    this.runtime = runtime;
+  }
+}
+#else
+typedef AssetLibrary = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var runtime:AssetLibraryRuntime; };
+#end

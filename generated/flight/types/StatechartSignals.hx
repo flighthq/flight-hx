@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef StatechartSignals = { var onStateChange:Signal<Float->Float->Float->Void>; };
+#if !flight_struct_typedef
+@:allow(flight._Statechart)
+@:keep
+@:structInit
+class StatechartSignals {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onStateChange:Signal<Float->Float->Float->Void>;
+
+  private function new(onStateChange:Signal<Float->Float->Float->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onStateChange = onStateChange;
+  }
+}
+#else
+typedef StatechartSignals = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onStateChange:Signal<Float->Float->Float->Void>; };
+#end

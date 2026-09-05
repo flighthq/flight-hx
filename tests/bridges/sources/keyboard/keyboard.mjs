@@ -12,6 +12,7 @@ export const disposeSoftKeyboard = api.disposeSoftKeyboard;
 export const getSoftKeyboardHeight = api.getSoftKeyboardHeight;
 export const getSoftKeyboardInfo = api.getSoftKeyboardInfo;
 export const hideSoftKeyboard = api.hideSoftKeyboard;
+export const initializeSoftKeyboard = api.initializeSoftKeyboard;
 export const isSoftKeyboardVisible = api.isSoftKeyboardVisible;
 export const setSoftKeyboardAccessoryBarVisible = api.setSoftKeyboardAccessoryBarVisible;
 export const setSoftKeyboardResizeMode = api.setSoftKeyboardResizeMode;

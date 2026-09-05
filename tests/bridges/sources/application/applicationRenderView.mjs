@@ -8,4 +8,5 @@ __syncDependencies();
 export const attachApplicationRenderView = api.attachApplicationRenderView;
 export const createApplicationRenderView = api.createApplicationRenderView;
 export const detachApplicationRenderView = api.detachApplicationRenderView;
+export const initializeApplicationRenderView = api.initializeApplicationRenderView;
 export const synchronizeApplicationRenderView = api.synchronizeApplicationRenderView;

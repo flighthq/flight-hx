@@ -4,6 +4,7 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Timeline as Facade_Timeline_flight__Timeline;
+import flight.types.EntityRuntime;
 import flight.types.FrameScript;
 import flight.types.Node2D;
 import flight.types.Timeline;
@@ -23,7 +24,7 @@ class Timeline {
     Facade_Timeline_flight__Timeline.clearTimelineFrameScripts(timeline);
   }
 
-  public static function createTimeline(?obj:{ @:optional var source:Null<TimelineSource>; @:optional var target:Null<Node2D>; @:optional var currentFrame:Null<Float>; @:optional var cueRegistry:Null<TimelineCueRegistry>; @:optional var frameScripts:Null<flight._internal._Map<Float, FrameScript>>; @:optional var isPlaying:Null<Bool>; @:optional var timeElapsed:Null<Float>; @:optional var lastFrameUpdate:Null<Float>; @:optional var playMode:Null<TimelinePlayMode>; @:optional var signals:Null<TimelineSignals>; }):flight.types.Timeline {
+  public static function createTimeline(?obj:{ @:optional var source:Null<TimelineSource>; @:optional var target:Null<Node2D>; @:optional var currentFrame:Null<Float>; @:optional var cueRegistry:Null<TimelineCueRegistry>; @:optional var frameScripts:Null<flight._internal._Map<Float, FrameScript>>; @:optional var isPlaying:Null<Bool>; @:optional var timeElapsed:Null<Float>; @:optional var lastFrameUpdate:Null<Float>; @:optional var playMode:Null<TimelinePlayMode>; @:optional var signals:Null<TimelineSignals>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):flight.types.Timeline {
     return cast Facade_Timeline_flight__Timeline.createTimeline(obj);
     return cast null;
   }

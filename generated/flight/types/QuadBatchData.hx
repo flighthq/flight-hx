@@ -4,4 +4,28 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef QuadBatchData = { var atlas:Null<TextureAtlas>; var ids:flight._internal._UInt16Array; var instanceCount:Float; var materialData:Null<Array<Null<MaterialData>>>; var transforms:flight._internal._Float32Array; var transformType:QuadTransformType; };
+#if !flight_struct_typedef
+@:allow(flight._QuadBatch)
+@:keep
+@:structInit
+class QuadBatchData extends flight.types.Node2DData {
+  public var atlas:Null<TextureAtlas>;
+  public var ids:flight._internal._UInt16Array;
+  public var instanceCount:Float;
+  public var materialData:Null<Array<Null<MaterialData>>>;
+  public var transforms:flight._internal._Float32Array;
+  public var transformType:QuadTransformType;
+
+  private function new(atlas:Null<TextureAtlas>, ids:flight._internal._UInt16Array, instanceCount:Float, materialData:Null<Array<Null<MaterialData>>>, transforms:flight._internal._Float32Array, transformType:QuadTransformType):Void {
+    super();
+    this.atlas = atlas;
+    this.ids = ids;
+    this.instanceCount = instanceCount;
+    this.materialData = materialData;
+    this.transforms = transforms;
+    this.transformType = transformType;
+  }
+}
+#else
+typedef QuadBatchData = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var atlas:Null<TextureAtlas>; var ids:flight._internal._UInt16Array; var instanceCount:Float; var materialData:Null<Array<Null<MaterialData>>>; var transforms:flight._internal._Float32Array; var transformType:QuadTransformType; };
+#end

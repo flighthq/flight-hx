@@ -4,4 +4,121 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ParticleEmitterConfig = { var alphaEnd:Float; var alphaStart:Float; var blendMode:Null<ParticleBlendMode>; var colorEndB:Float; var colorEndG:Float; var colorEndR:Float; var colorEndVarianceB:Float; var colorEndVarianceG:Float; var colorEndVarianceR:Float; var colorStartB:Float; var colorStartG:Float; var colorStartR:Float; var colorStartVarianceB:Float; var colorStartVarianceG:Float; var colorStartVarianceR:Float; var directionX:Float; var directionY:Float; var directionZ:Float; var gravityX:Float; var gravityY:Float; var gravityZ:Float; var emitterConeAngle:Float; var emitterDepth:Float; var emitterHeight:Float; var emitterRadius:Float; var emitterShape:ParticleEmitterShape; var emitterWidth:Float; var burstCount:Float; var burstInterval:Float; var duration:Float; var loop:Bool; var frameCount:Float; var frameRate:Float; var lifetimeMax:Float; var lifetimeMin:Float; var maxParticles:Float; var regionIdMax:Float; var regionIdMin:Float; var scaleEnd:Float; var scaleMax:Float; var scaleMin:Float; var speedMax:Float; var speedMin:Float; var spawnRate:Float; var spread:Float; var rotationSpeedMax:Float; var rotationSpeedMin:Float; var velocityInheritance:Float; var alphaCurve:Null<ParticleCurve>; var colorCurve:Null<ParticleCurve>; var scaleCurve:Null<ParticleCurve>; var worldSpace:Bool; };
+#if !flight_struct_typedef
+@:allow(flight._Particles)
+@:keep
+@:structInit
+class ParticleEmitterConfig {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var alphaEnd:Float;
+  public var alphaStart:Float;
+  public var blendMode:Null<ParticleBlendMode>;
+  public var colorEndB:Float;
+  public var colorEndG:Float;
+  public var colorEndR:Float;
+  public var colorEndVarianceB:Float;
+  public var colorEndVarianceG:Float;
+  public var colorEndVarianceR:Float;
+  public var colorStartB:Float;
+  public var colorStartG:Float;
+  public var colorStartR:Float;
+  public var colorStartVarianceB:Float;
+  public var colorStartVarianceG:Float;
+  public var colorStartVarianceR:Float;
+  public var directionX:Float;
+  public var directionY:Float;
+  public var directionZ:Float;
+  public var gravityX:Float;
+  public var gravityY:Float;
+  public var gravityZ:Float;
+  public var emitterConeAngle:Float;
+  public var emitterDepth:Float;
+  public var emitterHeight:Float;
+  public var emitterRadius:Float;
+  public var emitterShape:ParticleEmitterShape;
+  public var emitterWidth:Float;
+  public var burstCount:Float;
+  public var burstInterval:Float;
+  public var duration:Float;
+  public var loop:Bool;
+  public var frameCount:Float;
+  public var frameRate:Float;
+  public var lifetimeMax:Float;
+  public var lifetimeMin:Float;
+  public var maxParticles:Float;
+  public var regionIdMax:Float;
+  public var regionIdMin:Float;
+  public var scaleEnd:Float;
+  public var scaleMax:Float;
+  public var scaleMin:Float;
+  public var speedMax:Float;
+  public var speedMin:Float;
+  public var spawnRate:Float;
+  public var spread:Float;
+  public var rotationSpeedMax:Float;
+  public var rotationSpeedMin:Float;
+  public var velocityInheritance:Float;
+  public var alphaCurve:Null<ParticleCurve>;
+  public var colorCurve:Null<ParticleCurve>;
+  public var scaleCurve:Null<ParticleCurve>;
+  public var worldSpace:Bool;
+
+  private function new(alphaEnd:Float, alphaStart:Float, blendMode:Null<ParticleBlendMode>, colorEndB:Float, colorEndG:Float, colorEndR:Float, colorEndVarianceB:Float, colorEndVarianceG:Float, colorEndVarianceR:Float, colorStartB:Float, colorStartG:Float, colorStartR:Float, colorStartVarianceB:Float, colorStartVarianceG:Float, colorStartVarianceR:Float, directionX:Float, directionY:Float, directionZ:Float, gravityX:Float, gravityY:Float, gravityZ:Float, emitterConeAngle:Float, emitterDepth:Float, emitterHeight:Float, emitterRadius:Float, emitterShape:ParticleEmitterShape, emitterWidth:Float, burstCount:Float, burstInterval:Float, duration:Float, loop:Bool, frameCount:Float, frameRate:Float, lifetimeMax:Float, lifetimeMin:Float, maxParticles:Float, regionIdMax:Float, regionIdMin:Float, scaleEnd:Float, scaleMax:Float, scaleMin:Float, speedMax:Float, speedMin:Float, spawnRate:Float, spread:Float, rotationSpeedMax:Float, rotationSpeedMin:Float, velocityInheritance:Float, alphaCurve:Null<ParticleCurve>, colorCurve:Null<ParticleCurve>, scaleCurve:Null<ParticleCurve>, worldSpace:Bool):Void {
+    this.__symbol__EntityRuntime = null;
+    this.alphaEnd = alphaEnd;
+    this.alphaStart = alphaStart;
+    this.blendMode = blendMode;
+    this.colorEndB = colorEndB;
+    this.colorEndG = colorEndG;
+    this.colorEndR = colorEndR;
+    this.colorEndVarianceB = colorEndVarianceB;
+    this.colorEndVarianceG = colorEndVarianceG;
+    this.colorEndVarianceR = colorEndVarianceR;
+    this.colorStartB = colorStartB;
+    this.colorStartG = colorStartG;
+    this.colorStartR = colorStartR;
+    this.colorStartVarianceB = colorStartVarianceB;
+    this.colorStartVarianceG = colorStartVarianceG;
+    this.colorStartVarianceR = colorStartVarianceR;
+    this.directionX = directionX;
+    this.directionY = directionY;
+    this.directionZ = directionZ;
+    this.gravityX = gravityX;
+    this.gravityY = gravityY;
+    this.gravityZ = gravityZ;
+    this.emitterConeAngle = emitterConeAngle;
+    this.emitterDepth = emitterDepth;
+    this.emitterHeight = emitterHeight;
+    this.emitterRadius = emitterRadius;
+    this.emitterShape = emitterShape;
+    this.emitterWidth = emitterWidth;
+    this.burstCount = burstCount;
+    this.burstInterval = burstInterval;
+    this.duration = duration;
+    this.loop = loop;
+    this.frameCount = frameCount;
+    this.frameRate = frameRate;
+    this.lifetimeMax = lifetimeMax;
+    this.lifetimeMin = lifetimeMin;
+    this.maxParticles = maxParticles;
+    this.regionIdMax = regionIdMax;
+    this.regionIdMin = regionIdMin;
+    this.scaleEnd = scaleEnd;
+    this.scaleMax = scaleMax;
+    this.scaleMin = scaleMin;
+    this.speedMax = speedMax;
+    this.speedMin = speedMin;
+    this.spawnRate = spawnRate;
+    this.spread = spread;
+    this.rotationSpeedMax = rotationSpeedMax;
+    this.rotationSpeedMin = rotationSpeedMin;
+    this.velocityInheritance = velocityInheritance;
+    this.alphaCurve = alphaCurve;
+    this.colorCurve = colorCurve;
+    this.scaleCurve = scaleCurve;
+    this.worldSpace = worldSpace;
+  }
+}
+#else
+typedef ParticleEmitterConfig = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var alphaEnd:Float; var alphaStart:Float; var blendMode:Null<ParticleBlendMode>; var colorEndB:Float; var colorEndG:Float; var colorEndR:Float; var colorEndVarianceB:Float; var colorEndVarianceG:Float; var colorEndVarianceR:Float; var colorStartB:Float; var colorStartG:Float; var colorStartR:Float; var colorStartVarianceB:Float; var colorStartVarianceG:Float; var colorStartVarianceR:Float; var directionX:Float; var directionY:Float; var directionZ:Float; var gravityX:Float; var gravityY:Float; var gravityZ:Float; var emitterConeAngle:Float; var emitterDepth:Float; var emitterHeight:Float; var emitterRadius:Float; var emitterShape:ParticleEmitterShape; var emitterWidth:Float; var burstCount:Float; var burstInterval:Float; var duration:Float; var loop:Bool; var frameCount:Float; var frameRate:Float; var lifetimeMax:Float; var lifetimeMin:Float; var maxParticles:Float; var regionIdMax:Float; var regionIdMin:Float; var scaleEnd:Float; var scaleMax:Float; var scaleMin:Float; var speedMax:Float; var speedMin:Float; var spawnRate:Float; var spread:Float; var rotationSpeedMax:Float; var rotationSpeedMin:Float; var velocityInheritance:Float; var alphaCurve:Null<ParticleCurve>; var colorCurve:Null<ParticleCurve>; var scaleCurve:Null<ParticleCurve>; var worldSpace:Bool; };
+#end

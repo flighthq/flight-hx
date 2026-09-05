@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef PointAttachment2D = { var kind:String; @:optional var name:Null<String>; var rotation:Float; var x:Float; var y:Float; };
+typedef PointAttachment2D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var name:Null<String>; var rotation:Float; var x:Float; var y:Float; };

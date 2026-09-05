@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createCapacitorHapticsBackend = api.createCapacitorHapticsBackend;
+export const initializeCapacitorHapticsBackend = api.initializeCapacitorHapticsBackend;

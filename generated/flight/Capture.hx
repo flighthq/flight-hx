@@ -7,6 +7,7 @@ import flight._Capture as Facade_Capture_flight__Capture;
 import flight.types.CaptureBaseline;
 import flight.types.CaptureBaselineField;
 import flight.types.CaptureCheckResult;
+import flight.types.NonEntityCreateResult;
 
 class Capture {
   public static final CAPTURE_PARITY_TOLERANCE:Float = Facade_Capture_flight__Capture.CAPTURE_PARITY_TOLERANCE;
@@ -18,7 +19,7 @@ class Capture {
     return cast null;
   }
 
-  public static function createCaptureBaseline():CaptureBaseline {
+  public static function createCaptureBaseline():NonEntityCreateResult<CaptureBaseline, String> {
     return cast Facade_Capture_flight__Capture.createCaptureBaseline();
     return cast null;
   }

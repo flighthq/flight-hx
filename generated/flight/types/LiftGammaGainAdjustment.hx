@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef LiftGammaGainAdjustment = { var kind:String; var transform:ColorTransformFunction; @:optional var lift:Float; @:optional var gamma:Float; @:optional var gain:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Adjustments)
+@:keep
+@:structInit
+class LiftGammaGainAdjustment extends flight.types.ColorLutAdjustment<String> {
+  public var lift:Null<Float>;
+  public var gamma:Null<Float>;
+  public var gain:Null<Float>;
+
+  private function new(kind:String, transform:ColorTransformFunction, ?lift:Null<Float>, ?gamma:Null<Float>, ?gain:Null<Float>):Void {
+    super(kind, transform);
+    this.lift = lift;
+    this.gamma = gamma;
+    this.gain = gain;
+  }
+}
+#else
+typedef LiftGammaGainAdjustment = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var transform:ColorTransformFunction; @:optional var lift:Float; @:optional var gamma:Float; @:optional var gain:Float; };
+#end

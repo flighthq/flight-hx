@@ -10,5 +10,7 @@ export const createEmbeddedAudioResourceReference = api.createEmbeddedAudioResou
 export const createExternalAudioResourceReference = api.createExternalAudioResourceReference;
 export const explainAudioResourceReferenceResolution = api.explainAudioResourceReferenceResolution;
 export const findAudioResourceReferenceByName = api.findAudioResourceReferenceByName;
+export const initializeEmbeddedAudioResourceReference = api.initializeEmbeddedAudioResourceReference;
+export const initializeExternalAudioResourceReference = api.initializeExternalAudioResourceReference;
 export const resetFailedAudioResourceReference = api.resetFailedAudioResourceReference;
 export const resolveAudioResourceReference = api.resolveAudioResourceReference;

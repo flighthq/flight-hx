@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:keep
+@:structInit
+class TrayPressedImageBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var set:TrayIcon->TrayIconSource->flight._internal._Promise<TrayPressedImageUpdateResult>;
+
+  private function new(set:TrayIcon->TrayIconSource->flight._internal._Promise<TrayPressedImageUpdateResult>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.set = set;
+  }
+}
+#else
 typedef TrayPressedImageBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var set:TrayIcon->TrayIconSource->flight._internal._Promise<TrayPressedImageUpdateResult>; };
+#end

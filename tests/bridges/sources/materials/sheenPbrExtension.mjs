@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createSheenPbrExtension = api.createSheenPbrExtension;
+export const initializeSheenPbrExtension = api.initializeSheenPbrExtension;
 export const isValidSheenPbrExtension = api.isValidSheenPbrExtension;

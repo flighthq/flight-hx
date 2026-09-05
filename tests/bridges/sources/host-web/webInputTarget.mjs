@@ -6,6 +6,7 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWebInputTargetHandle = api.createWebInputTargetHandle;
+export const initializeWebInputTargetHandle = api.initializeWebInputTargetHandle;
 export const resetWebInputTargetBackendForTest = api.resetWebInputTargetBackendForTest;
 export const webInputDropFileBackend = api.webInputDropFileBackend;
 export const webInputFocusBackend = api.webInputFocusBackend;

@@ -3,9 +3,12 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Math.TAU;
 import flight._Math.approxEqual;
 import flight._Math.approxZero;
+import flight.types.EntityConstruction;
 import flight.types.Spring;
 import flight.types.Spring2D;
 import flight.types.Spring3D;
@@ -18,8 +21,18 @@ class _Spring {
   }
 
   public static function createSpring(value:Float = 0.0, velocity:Float = 0.0):Spring {
-    return cast { value: value, velocity: velocity };
+    var out:EntityConstruction<Spring> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ value: cast _Runtime.UNDEFINED, velocity: cast _Runtime.UNDEFINED } : Spring); }) #end));
+    initializeSpring(({ final __callArgument0:Dynamic = out; __callArgument0; }), (cast value : Float), (cast velocity : Float));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeSpring(out:EntityConstruction<Spring>, value:Float = 0.0, velocity:Float = 0.0):Void {
+    _Runtime.setField(out, 'value', value);
+    _Runtime.setField(out, 'velocity', velocity);
   }
 
   public static function isSpringSettled(spring:Spring, target:Float, positionEpsilon:Float = 0.001, velocityEpsilon:Float = 0.001):Bool {
@@ -98,7 +111,7 @@ class _Spring {
     halfTurn = (fullTurn * 0.5);
     wrappedDelta = _Runtime.fmod((_Runtime.fmod((target - value), fullTurn) + fullTurn), fullTurn);
     shortestDelta = ((cast ((cast wrappedDelta : Float) > (cast halfTurn : Float)) : Bool) ? (cast (wrappedDelta - fullTurn) : Dynamic) : (cast wrappedDelta : Dynamic));
-    updateSpring(({ final __callArgument0:Dynamic = spring; __callArgument0; }), (cast (value + shortestDelta) : Float), ({ final __callArgument1:Dynamic = config; __callArgument1; }), (cast deltaTime : Float));
+    updateSpring(({ final __callArgument2:Dynamic = spring; __callArgument2; }), (cast (value + shortestDelta) : Float), ({ final __callArgument3:Dynamic = config; __callArgument3; }), (cast deltaTime : Float));
   }
 
   public static final CRITICAL_BAND__spring:Float = 0.0001;
@@ -109,8 +122,18 @@ class _Spring {
   }
 
   public static function createSpring2D(valueX:Float = 0.0, valueY:Float = 0.0, velocityX:Float = 0.0, velocityY:Float = 0.0):Spring2D {
-    return cast { x: (cast createSpring((cast valueX : Float), (cast velocityX : Float)) : Spring), y: (cast createSpring((cast valueY : Float), (cast velocityY : Float)) : Spring) };
+    var out:EntityConstruction<Spring2D> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : Spring2D); }) #end));
+    initializeSpring2D(({ final __callArgument6:Dynamic = out; __callArgument6; }), (cast valueX : Float), (cast valueY : Float), (cast velocityX : Float), (cast velocityY : Float));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeSpring2D(out:EntityConstruction<Spring2D>, valueX:Float = 0.0, valueY:Float = 0.0, velocityX:Float = 0.0, velocityY:Float = 0.0):Void {
+    _Runtime.setField(out, 'x', (cast createSpring((cast valueX : Float), (cast velocityX : Float)) : Spring));
+    _Runtime.setField(out, 'y', (cast createSpring((cast valueY : Float), (cast velocityY : Float)) : Spring));
   }
 
   public static function isSpring2DSettled(spring2D:Spring2D, targetX:Float, targetY:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
@@ -124,8 +147,8 @@ class _Spring {
   }
 
   public static function updateSpring2D(spring2D:Spring2D, targetX:Float, targetY:Float, config:SpringConfig, deltaTime:Float):Void {
-    updateSpring((cast spring2D : Spring2D).x, (cast targetX : Float), ({ final __callArgument4:Dynamic = config; __callArgument4; }), (cast deltaTime : Float));
-    updateSpring((cast spring2D : Spring2D).y, (cast targetY : Float), ({ final __callArgument6:Dynamic = config; __callArgument6; }), (cast deltaTime : Float));
+    updateSpring((cast spring2D : Spring2D).x, (cast targetX : Float), ({ final __callArgument8:Dynamic = config; __callArgument8; }), (cast deltaTime : Float));
+    updateSpring((cast spring2D : Spring2D).y, (cast targetY : Float), ({ final __callArgument10:Dynamic = config; __callArgument10; }), (cast deltaTime : Float));
   }
 
   public static function applySpringImpulse3D(spring3D:Spring3D, velocityX:Float, velocityY:Float, velocityZ:Float):Void {
@@ -135,8 +158,19 @@ class _Spring {
   }
 
   public static function createSpring3D(valueX:Float = 0.0, valueY:Float = 0.0, valueZ:Float = 0.0, velocityX:Float = 0.0, velocityY:Float = 0.0, velocityZ:Float = 0.0):Spring3D {
-    return cast { x: (cast createSpring((cast valueX : Float), (cast velocityX : Float)) : Spring), y: (cast createSpring((cast valueY : Float), (cast velocityY : Float)) : Spring), z: (cast createSpring((cast valueZ : Float), (cast velocityZ : Float)) : Spring) };
+    var out:EntityConstruction<Spring3D> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED, z: cast _Runtime.UNDEFINED } : Spring3D); }) #end));
+    initializeSpring3D(({ final __callArgument12:Dynamic = out; __callArgument12; }), (cast valueX : Float), (cast valueY : Float), (cast valueZ : Float), (cast velocityX : Float), (cast velocityY : Float), (cast velocityZ : Float));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeSpring3D(out:EntityConstruction<Spring3D>, valueX:Float = 0.0, valueY:Float = 0.0, valueZ:Float = 0.0, velocityX:Float = 0.0, velocityY:Float = 0.0, velocityZ:Float = 0.0):Void {
+    _Runtime.setField(out, 'x', (cast createSpring((cast valueX : Float), (cast velocityX : Float)) : Spring));
+    _Runtime.setField(out, 'y', (cast createSpring((cast valueY : Float), (cast velocityY : Float)) : Spring));
+    _Runtime.setField(out, 'z', (cast createSpring((cast valueZ : Float), (cast velocityZ : Float)) : Spring));
   }
 
   public static function isSpring3DSettled(spring3D:Spring3D, targetX:Float, targetY:Float, targetZ:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool {
@@ -151,24 +185,65 @@ class _Spring {
   }
 
   public static function updateSpring3D(spring3D:Spring3D, targetX:Float, targetY:Float, targetZ:Float, config:SpringConfig, deltaTime:Float):Void {
-    updateSpring((cast spring3D : Spring3D).x, (cast targetX : Float), ({ final __callArgument8:Dynamic = config; __callArgument8; }), (cast deltaTime : Float));
-    updateSpring((cast spring3D : Spring3D).y, (cast targetY : Float), ({ final __callArgument10:Dynamic = config; __callArgument10; }), (cast deltaTime : Float));
-    updateSpring((cast spring3D : Spring3D).z, (cast targetZ : Float), ({ final __callArgument12:Dynamic = config; __callArgument12; }), (cast deltaTime : Float));
+    updateSpring((cast spring3D : Spring3D).x, (cast targetX : Float), ({ final __callArgument14:Dynamic = config; __callArgument14; }), (cast deltaTime : Float));
+    updateSpring((cast spring3D : Spring3D).y, (cast targetY : Float), ({ final __callArgument16:Dynamic = config; __callArgument16; }), (cast deltaTime : Float));
+    updateSpring((cast spring3D : Spring3D).z, (cast targetZ : Float), ({ final __callArgument18:Dynamic = config; __callArgument18; }), (cast deltaTime : Float));
   }
 
-  public static final SpringPresetBouncy:SpringConfig = flight._internal.DynamicObject.freeze({ dampingRatio: 0.35, frequency: 2.0 });
+  public static final SpringPresetBouncy:SpringConfig = flight._internal.DynamicObject.freeze(_Runtime.callValue(function():SpringConfig {
+    var out:EntityConstruction<SpringConfig> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ dampingRatio: cast _Runtime.UNDEFINED, frequency: cast _Runtime.UNDEFINED } : SpringConfig); }) #end));
+    _Runtime.setField(out, 'dampingRatio', 0.35);
+    _Runtime.setField(out, 'frequency', 2.0);
+    return cast out;
+    return cast _Runtime.UNDEFINED;
+  }, cast ([] : Array<Dynamic>)));
 
-  public static final SpringPresetGentle:SpringConfig = flight._internal.DynamicObject.freeze({ dampingRatio: 0.8, frequency: 1.5 });
+  public static final SpringPresetGentle:SpringConfig = flight._internal.DynamicObject.freeze(_Runtime.callValue(function():SpringConfig {
+    var out:EntityConstruction<SpringConfig> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ dampingRatio: cast _Runtime.UNDEFINED, frequency: cast _Runtime.UNDEFINED } : SpringConfig); }) #end));
+    _Runtime.setField(out, 'dampingRatio', 0.8);
+    _Runtime.setField(out, 'frequency', 1.5);
+    return cast out;
+    return cast _Runtime.UNDEFINED;
+  }, cast ([] : Array<Dynamic>)));
 
-  public static final SpringPresetStiff:SpringConfig = flight._internal.DynamicObject.freeze({ dampingRatio: 1.0, frequency: 4.0 });
+  public static final SpringPresetStiff:SpringConfig = flight._internal.DynamicObject.freeze(_Runtime.callValue(function():SpringConfig {
+    var out:EntityConstruction<SpringConfig> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ dampingRatio: cast _Runtime.UNDEFINED, frequency: cast _Runtime.UNDEFINED } : SpringConfig); }) #end));
+    _Runtime.setField(out, 'dampingRatio', 1.0);
+    _Runtime.setField(out, 'frequency', 4.0);
+    return cast out;
+    return cast _Runtime.UNDEFINED;
+  }, cast ([] : Array<Dynamic>)));
 
   public static function createSpringConfig(frequency:Float, dampingRatio:Float):SpringConfig {
-    return cast { dampingRatio: dampingRatio, frequency: frequency };
+    var out:EntityConstruction<SpringConfig> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ dampingRatio: cast _Runtime.UNDEFINED, frequency: cast _Runtime.UNDEFINED } : SpringConfig); }) #end));
+    initializeSpringConfig(({ final __callArgument20:Dynamic = out; __callArgument20; }), (cast frequency : Float), (cast dampingRatio : Float));
+    return cast out;
     return cast null;
   }
 
   public static function createSpringConfigFromPhysical(stiffness:Float, damping:Float, mass:Float):SpringConfig {
-    return cast { dampingRatio: (damping / _Runtime.multiplyNumbers(2.0, HxMath.sqrt((stiffness * mass)))), frequency: _Runtime.divideNumbers(HxMath.sqrt((stiffness / mass)), TAU) };
+    var out:EntityConstruction<SpringConfig> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ dampingRatio: cast _Runtime.UNDEFINED, frequency: cast _Runtime.UNDEFINED } : SpringConfig); }) #end));
+    initializeSpringConfigFromPhysical(({ final __callArgument22:Dynamic = out; __callArgument22; }), (cast stiffness : Float), (cast damping : Float), (cast mass : Float));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeSpringConfig(out:EntityConstruction<SpringConfig>, frequency:Float, dampingRatio:Float):Void {
+    _Runtime.setField(out, 'dampingRatio', dampingRatio);
+    _Runtime.setField(out, 'frequency', frequency);
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeSpringConfigFromPhysical(out:EntityConstruction<SpringConfig>, stiffness:Float, damping:Float, mass:Float):Void {
+    _Runtime.setField(out, 'dampingRatio', (damping / _Runtime.multiplyNumbers(2.0, HxMath.sqrt((stiffness * mass)))));
+    _Runtime.setField(out, 'frequency', _Runtime.divideNumbers(HxMath.sqrt((stiffness / mass)), TAU));
   }
 }

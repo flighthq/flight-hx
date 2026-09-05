@@ -4,3 +4,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './statusbar.mjs';
+export { initializeStatusBar } from './statusbar.mjs';
+export { initializeStatusBarInfo } from './statusbar.mjs';

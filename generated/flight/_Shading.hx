@@ -12,7 +12,8 @@ import flight.Types.RimModifierKind;
 import flight.Types.ShadedMaterialKind;
 import flight.Types.ToonModifierKind;
 import flight.Types.VertexDisplaceModifierKind;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Types.AnimatedNormalModifierKind;
 import flight._Types.BlendModeValue;
 import flight._Types.DissolveModifierKind;
@@ -35,6 +36,7 @@ import flight.types.DissolveModifierOptions;
 import flight.types.EmissiveModifier;
 import flight.types.EmissiveModifierFacing;
 import flight.types.EmissiveModifierOptions;
+import flight.types.EntityConstruction;
 import flight.types.EntityRuntime;
 import flight.types.EnvReflectModifier;
 import flight.types.EnvReflectModifierOptions;
@@ -70,76 +72,178 @@ import flight.types.VoxelGrid;
 @:noCompletion
 class _Shading {
   public static function createAnimatedNormalModifier(options:AnimatedNormalModifierOptions):AnimatedNormalModifier {
-    var modifier:AnimatedNormalModifier = cast _Runtime.UNDEFINED;
-    modifier = (cast { kind: AnimatedNormalModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Normal, map: options.map, scroll: options.scroll, strength: _Runtime.coalesce(options.strength, function():Dynamic return cast 1.0) });
-    if ((cast !_Runtime.strictEquals(options.secondaryMap, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (modifier.secondaryMap = cast (options.secondaryMap : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>)); }
-    if ((cast !_Runtime.strictEquals(options.secondaryScroll, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (modifier.secondaryScroll = cast (options.secondaryScroll : Null<Vector2Like>)); }
-    return cast modifier;
+    var out:EntityConstruction<AnimatedNormalModifier> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ kind: cast _Runtime.UNDEFINED, map: cast _Runtime.UNDEFINED, scroll: cast _Runtime.UNDEFINED, secondaryMap: cast _Runtime.UNDEFINED, secondaryScroll: cast _Runtime.UNDEFINED, slot: cast _Runtime.UNDEFINED, strength: cast _Runtime.UNDEFINED } : AnimatedNormalModifier); }) #end));
+    initializeAnimatedNormalModifier(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = options; __callArgument1; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeAnimatedNormalModifier(out:EntityConstruction<AnimatedNormalModifier>, options:AnimatedNormalModifierOptions):Void {
+    (cast initializeModifier : EntityConstruction<AnimatedNormalModifier>->String->String->Void)(({ final __callArgument4:Dynamic = out; __callArgument4; }), (cast AnimatedNormalModifierKind : String), (cast (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Normal : String));
+    _Runtime.setField(out, 'map', options.map);
+    _Runtime.setField(out, 'scroll', options.scroll);
+    _Runtime.setField(out, 'strength', _Runtime.coalesce(options.strength, function():Dynamic return cast 1.0));
+    if ((cast !_Runtime.strictEquals(options.secondaryMap, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(out, 'secondaryMap', options.secondaryMap); }
+    if ((cast !_Runtime.strictEquals(options.secondaryScroll, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(out, 'secondaryScroll', options.secondaryScroll); }
   }
 
   public static function createDissolveModifier(options:DissolveModifierOptions):DissolveModifier {
-    var modifier:DissolveModifier = cast _Runtime.UNDEFINED;
-    modifier = (cast { kind: DissolveModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect, threshold: options.threshold, edgeColor: _Runtime.coalesce(options.edgeColor, function():Dynamic return cast 4284875007.0), edgeWidth: _Runtime.coalesce(options.edgeWidth, function():Dynamic return cast 0.05), scale: _Runtime.coalesce(options.scale, function():Dynamic return cast 8.0) });
-    if ((cast !_Runtime.strictEquals(options.map, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (modifier.map = cast (options.map : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>)); }
-    return cast modifier;
+    var out:EntityConstruction<DissolveModifier> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ edgeColor: cast _Runtime.UNDEFINED, edgeWidth: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, map: cast _Runtime.UNDEFINED, scale: cast _Runtime.UNDEFINED, slot: cast _Runtime.UNDEFINED, threshold: cast _Runtime.UNDEFINED } : DissolveModifier); }) #end));
+    initializeDissolveModifier(({ final __callArgument6:Dynamic = out; __callArgument6; }), ({ final __callArgument7:Dynamic = options; __callArgument7; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeDissolveModifier(out:EntityConstruction<DissolveModifier>, options:DissolveModifierOptions):Void {
+    (cast initializeModifier : EntityConstruction<DissolveModifier>->String->String->Void)(({ final __callArgument10:Dynamic = out; __callArgument10; }), (cast DissolveModifierKind : String), (cast (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect : String));
+    _Runtime.setField(out, 'threshold', options.threshold);
+    _Runtime.setField(out, 'edgeColor', _Runtime.coalesce(options.edgeColor, function():Dynamic return cast 4284875007.0));
+    _Runtime.setField(out, 'edgeWidth', _Runtime.coalesce(options.edgeWidth, function():Dynamic return cast 0.05));
+    _Runtime.setField(out, 'scale', _Runtime.coalesce(options.scale, function():Dynamic return cast 8.0));
+    if ((cast !_Runtime.strictEquals(options.map, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(out, 'map', options.map); }
   }
 
   public static function createEmissiveModifier(options:EmissiveModifierOptions):EmissiveModifier {
-    var modifier:EmissiveModifier = cast _Runtime.UNDEFINED;
-    modifier = (cast { kind: EmissiveModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Emissive, color: options.color, strength: _Runtime.coalesce(options.strength, function():Dynamic return cast 1.0), facing: _Runtime.coalesce(options.facing, function():Dynamic return cast (cast EmissiveModifierFacingValue : { var AwayFromLight:String; var Ignore:String; var TowardLight:String; }).Ignore), facingSoftness: _Runtime.coalesce(options.facingSoftness, function():Dynamic return cast 0.0) });
-    if ((cast !_Runtime.strictEquals(options.mask, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (modifier.mask = cast (options.mask : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>)); }
-    return cast modifier;
+    var out:EntityConstruction<EmissiveModifier> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ color: cast _Runtime.UNDEFINED, facing: cast _Runtime.UNDEFINED, facingSoftness: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, mask: cast _Runtime.UNDEFINED, slot: cast _Runtime.UNDEFINED, strength: cast _Runtime.UNDEFINED } : EmissiveModifier); }) #end));
+    initializeEmissiveModifier(({ final __callArgument12:Dynamic = out; __callArgument12; }), ({ final __callArgument13:Dynamic = options; __callArgument13; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeEmissiveModifier(out:EntityConstruction<EmissiveModifier>, options:EmissiveModifierOptions):Void {
+    (cast initializeModifier : EntityConstruction<EmissiveModifier>->String->String->Void)(({ final __callArgument16:Dynamic = out; __callArgument16; }), (cast EmissiveModifierKind : String), (cast (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Emissive : String));
+    _Runtime.setField(out, 'color', options.color);
+    _Runtime.setField(out, 'strength', _Runtime.coalesce(options.strength, function():Dynamic return cast 1.0));
+    _Runtime.setField(out, 'facing', _Runtime.coalesce(options.facing, function():Dynamic return cast (cast EmissiveModifierFacingValue : { var AwayFromLight:String; var Ignore:String; var TowardLight:String; }).Ignore));
+    _Runtime.setField(out, 'facingSoftness', _Runtime.coalesce(options.facingSoftness, function():Dynamic return cast 0.0));
+    if ((cast !_Runtime.strictEquals(options.mask, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(out, 'mask', options.mask); }
   }
 
   public static function createEnvReflectModifier(?options:EnvReflectModifierOptions):EnvReflectModifier {
-    return cast { kind: EnvReflectModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect, tint: _Runtime.coalesce(({ final __structural0 = options; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var tint:Null<Float>; }).tint; }), function():Dynamic return cast 4294967295.0), intensity: _Runtime.coalesce(({ final __structural1 = options; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var intensity:Null<Float>; }).intensity; }), function():Dynamic return cast 1.0), fresnelBias: _Runtime.coalesce(({ final __structural2 = options; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var fresnelBias:Null<Float>; }).fresnelBias; }), function():Dynamic return cast 0.04), roughness: _Runtime.coalesce(({ final __structural3 = options; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var roughness:Null<Float>; }).roughness; }), function():Dynamic return cast 0.0) };
+    var out:EntityConstruction<EnvReflectModifier> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ fresnelBias: cast _Runtime.UNDEFINED, intensity: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, roughness: cast _Runtime.UNDEFINED, slot: cast _Runtime.UNDEFINED, tint: cast _Runtime.UNDEFINED } : EnvReflectModifier); }) #end));
+    initializeEnvReflectModifier(({ final __callArgument18:Dynamic = out; __callArgument18; }), ({ final __callArgument19:Dynamic = options; __callArgument19; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeEnvReflectModifier(out:EntityConstruction<EnvReflectModifier>, ?options:EnvReflectModifierOptions):Void {
+    (cast initializeModifier : EntityConstruction<EnvReflectModifier>->String->String->Void)(({ final __callArgument22:Dynamic = out; __callArgument22; }), (cast EnvReflectModifierKind : String), (cast (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect : String));
+    _Runtime.setField(out, 'tint', _Runtime.coalesce(({ final __structural24 = options; __structural24 == null ? _Runtime.UNDEFINED : (cast __structural24 : { @:optional var tint:Null<Float>; }).tint; }), function():Dynamic return cast 4294967295.0));
+    _Runtime.setField(out, 'intensity', _Runtime.coalesce(({ final __structural25 = options; __structural25 == null ? _Runtime.UNDEFINED : (cast __structural25 : { @:optional var intensity:Null<Float>; }).intensity; }), function():Dynamic return cast 1.0));
+    _Runtime.setField(out, 'fresnelBias', _Runtime.coalesce(({ final __structural26 = options; __structural26 == null ? _Runtime.UNDEFINED : (cast __structural26 : { @:optional var fresnelBias:Null<Float>; }).fresnelBias; }), function():Dynamic return cast 0.04));
+    _Runtime.setField(out, 'roughness', _Runtime.coalesce(({ final __structural27 = options; __structural27 == null ? _Runtime.UNDEFINED : (cast __structural27 : { @:optional var roughness:Null<Float>; }).roughness; }), function():Dynamic return cast 0.0));
   }
 
   public static function createFogModifier(options:FogModifierOptions):FogModifier {
-    return cast { kind: FogModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect, color: options.color, mode: _Runtime.coalesce(options.mode, function():Dynamic return cast (cast FogModifierModeValue : { var Exponential:String; var Exponential2:String; var Linear:String; }).Linear), near: _Runtime.coalesce(options.near, function():Dynamic return cast 0.0), far: _Runtime.coalesce(options.far, function():Dynamic return cast 1.0), density: _Runtime.coalesce(options.density, function():Dynamic return cast 1.0) };
+    var out:EntityConstruction<FogModifier> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ color: cast _Runtime.UNDEFINED, density: cast _Runtime.UNDEFINED, far: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, mode: cast _Runtime.UNDEFINED, near: cast _Runtime.UNDEFINED, slot: cast _Runtime.UNDEFINED } : FogModifier); }) #end));
+    initializeFogModifier(({ final __callArgument28:Dynamic = out; __callArgument28; }), ({ final __callArgument29:Dynamic = options; __callArgument29; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeFogModifier(out:EntityConstruction<FogModifier>, options:FogModifierOptions):Void {
+    (cast initializeModifier : EntityConstruction<FogModifier>->String->String->Void)(({ final __callArgument32:Dynamic = out; __callArgument32; }), (cast FogModifierKind : String), (cast (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect : String));
+    _Runtime.setField(out, 'color', options.color);
+    _Runtime.setField(out, 'mode', _Runtime.coalesce(options.mode, function():Dynamic return cast (cast FogModifierModeValue : { var Exponential:String; var Exponential2:String; var Linear:String; }).Linear));
+    _Runtime.setField(out, 'near', _Runtime.coalesce(options.near, function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'far', _Runtime.coalesce(options.far, function():Dynamic return cast 1.0));
+    _Runtime.setField(out, 'density', _Runtime.coalesce(options.density, function():Dynamic return cast 1.0));
   }
 
   public static function createRimModifier(options:RimModifierOptions):RimModifier {
-    return cast { kind: RimModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect, color: _Runtime.field(options, 'color'), power: _Runtime.coalesce(_Runtime.field(options, 'power'), function():Dynamic return cast 3.0), intensity: _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0), bias: _Runtime.coalesce(_Runtime.field(options, 'bias'), function():Dynamic return cast 0.0) };
+    var out:EntityConstruction<RimModifier> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ bias: cast _Runtime.UNDEFINED, color: cast _Runtime.UNDEFINED, intensity: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, power: cast _Runtime.UNDEFINED, slot: cast _Runtime.UNDEFINED } : RimModifier); }) #end));
+    initializeRimModifier(({ final __callArgument34:Dynamic = out; __callArgument34; }), ({ final __callArgument35:Dynamic = options; __callArgument35; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeRimModifier(out:EntityConstruction<RimModifier>, options:RimModifierOptions):Void {
+    (cast initializeModifier : EntityConstruction<RimModifier>->String->String->Void)(({ final __callArgument38:Dynamic = out; __callArgument38; }), (cast RimModifierKind : String), (cast (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect : String));
+    _Runtime.setField(out, 'color', _Runtime.field(options, 'color'));
+    _Runtime.setField(out, 'power', _Runtime.coalesce(_Runtime.field(options, 'power'), function():Dynamic return cast 3.0));
+    _Runtime.setField(out, 'intensity', _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0));
+    _Runtime.setField(out, 'bias', _Runtime.coalesce(_Runtime.field(options, 'bias'), function():Dynamic return cast 0.0));
   }
 
   public static function createShadedMaterial(?options:ShadedMaterialOptions):ShadedMaterial {
-    var material:ShadedMaterial = cast _Runtime.UNDEFINED;
-    material = (cast (cast createEntity(({ final __callArgument4:Dynamic = (#if flight_struct_typedef { kind: ShadedMaterialKind } #else ({ final __structInitField0:Dynamic = ShadedMaterialKind; ({ alphaCutoff: cast _Runtime.UNDEFINED, alphaMode: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, diffuse: cast _Runtime.UNDEFINED, diffuseMap: cast _Runtime.UNDEFINED, doubleSided: cast _Runtime.UNDEFINED, kind: __structInitField0, modifiers: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, normalMap: cast _Runtime.UNDEFINED, normalScale: cast _Runtime.UNDEFINED, shininess: cast _Runtime.UNDEFINED, specular: cast _Runtime.UNDEFINED, specularMap: cast _Runtime.UNDEFINED } : ShadedMaterial); }) #end); __callArgument4; })) : ShadedMaterial) : ShadedMaterial);
-    (material.alphaCutoff = cast (_Runtime.coalesce(({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.alphaCutoff; }), function():Dynamic return cast 0.5) : Float));
-    (material.alphaMode = cast (_Runtime.coalesce(({ final __typedStruct7 = options; __typedStruct7 == null ? _Runtime.UNDEFINED : __typedStruct7.alphaMode; }), function():Dynamic return cast 'opaque') : MaterialAlphaMode));
-    (material.blendMode = cast (_Runtime.coalesce(({ final __typedStruct8 = options; __typedStruct8 == null ? _Runtime.UNDEFINED : __typedStruct8.blendMode; }), function():Dynamic return cast (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Normal) : String));
-    (material.diffuse = cast (_Runtime.coalesce(({ final __typedStruct9 = options; __typedStruct9 == null ? _Runtime.UNDEFINED : __typedStruct9.diffuse; }), function():Dynamic return cast 4294967295.0) : Float));
-    (material.diffuseMap = cast (_Runtime.coalesce(({ final __typedStruct10 = options; __typedStruct10 == null ? _Runtime.UNDEFINED : __typedStruct10.diffuseMap; }), function():Dynamic return cast null) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>));
-    (material.doubleSided = cast (_Runtime.coalesce(({ final __typedStruct11 = options; __typedStruct11 == null ? _Runtime.UNDEFINED : __typedStruct11.doubleSided; }), function():Dynamic return cast false) : Bool));
-    (material.modifiers = cast (_Runtime.coalesce(({ final __typedStruct12 = options; __typedStruct12 == null ? _Runtime.UNDEFINED : __typedStruct12.modifiers; }), function():Dynamic return cast cast ([] : Array<Dynamic>)) : Array<Modifier>));
-    (material.normalMap = cast (_Runtime.coalesce(({ final __typedStruct13 = options; __typedStruct13 == null ? _Runtime.UNDEFINED : __typedStruct13.normalMap; }), function():Dynamic return cast null) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>));
-    (material.normalScale = cast (_Runtime.coalesce(({ final __typedStruct14 = options; __typedStruct14 == null ? _Runtime.UNDEFINED : __typedStruct14.normalScale; }), function():Dynamic return cast 1.0) : Float));
-    (material.shininess = cast (_Runtime.coalesce(({ final __typedStruct15 = options; __typedStruct15 == null ? _Runtime.UNDEFINED : __typedStruct15.shininess; }), function():Dynamic return cast 32.0) : Float));
-    (material.specular = cast (_Runtime.coalesce(({ final __typedStruct16 = options; __typedStruct16 == null ? _Runtime.UNDEFINED : __typedStruct16.specular; }), function():Dynamic return cast 4294967295.0) : Float));
-    (material.specularMap = cast (_Runtime.coalesce(({ final __typedStruct17 = options; __typedStruct17 == null ? _Runtime.UNDEFINED : __typedStruct17.specularMap; }), function():Dynamic return cast null) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>));
-    return cast material;
+    var out:EntityConstruction<ShadedMaterial> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ alphaCutoff: cast _Runtime.UNDEFINED, alphaMode: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, diffuse: cast _Runtime.UNDEFINED, diffuseMap: cast _Runtime.UNDEFINED, doubleSided: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, modifiers: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, normalMap: cast _Runtime.UNDEFINED, normalScale: cast _Runtime.UNDEFINED, shininess: cast _Runtime.UNDEFINED, specular: cast _Runtime.UNDEFINED, specularMap: cast _Runtime.UNDEFINED } : ShadedMaterial); }) #end));
+    initializeShadedMaterial(({ final __callArgument40:Dynamic = out; __callArgument40; }), ({ final __callArgument41:Dynamic = _Runtime.coalesce(options, function():Dynamic return cast {  }); __callArgument41; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeShadedMaterial(out:EntityConstruction<ShadedMaterial>, options:ShadedMaterialOptions):Void {
+    _Runtime.setField(out, 'kind', ShadedMaterialKind);
+    _Runtime.setField(out, 'alphaCutoff', _Runtime.coalesce(options.alphaCutoff, function():Dynamic return cast 0.5));
+    _Runtime.setField(out, 'alphaMode', _Runtime.coalesce(options.alphaMode, function():Dynamic return cast 'opaque'));
+    _Runtime.setField(out, 'blendMode', _Runtime.coalesce(options.blendMode, function():Dynamic return cast (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Normal));
+    _Runtime.setField(out, 'diffuse', _Runtime.coalesce(options.diffuse, function():Dynamic return cast 4294967295.0));
+    _Runtime.setField(out, 'diffuseMap', _Runtime.coalesce(options.diffuseMap, function():Dynamic return cast null));
+    _Runtime.setField(out, 'doubleSided', _Runtime.coalesce(options.doubleSided, function():Dynamic return cast false));
+    _Runtime.setField(out, 'modifiers', _Runtime.coalesce(options.modifiers, function():Dynamic return cast cast ([] : Array<Dynamic>)));
+    _Runtime.setField(out, 'normalMap', _Runtime.coalesce(options.normalMap, function():Dynamic return cast null));
+    _Runtime.setField(out, 'normalScale', _Runtime.coalesce(options.normalScale, function():Dynamic return cast 1.0));
+    _Runtime.setField(out, 'shininess', _Runtime.coalesce(options.shininess, function():Dynamic return cast 32.0));
+    _Runtime.setField(out, 'specular', _Runtime.coalesce(options.specular, function():Dynamic return cast 4294967295.0));
+    _Runtime.setField(out, 'specularMap', _Runtime.coalesce(options.specularMap, function():Dynamic return cast null));
   }
 
   public static function createToonModifier(options:ToonModifierOptions):ToonModifier {
-    return cast { kind: ToonModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect, steps: _Runtime.field(options, 'steps'), smoothness: _Runtime.coalesce(_Runtime.field(options, 'smoothness'), function():Dynamic return cast 0.0) };
+    var out:EntityConstruction<ToonModifier> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ kind: cast _Runtime.UNDEFINED, slot: cast _Runtime.UNDEFINED, smoothness: cast _Runtime.UNDEFINED, steps: cast _Runtime.UNDEFINED } : ToonModifier); }) #end));
+    initializeToonModifier(({ final __callArgument44:Dynamic = out; __callArgument44; }), ({ final __callArgument45:Dynamic = options; __callArgument45; }));
+    return cast out;
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeToonModifier(out:EntityConstruction<ToonModifier>, options:ToonModifierOptions):Void {
+    (cast initializeModifier : EntityConstruction<ToonModifier>->String->String->Void)(({ final __callArgument48:Dynamic = out; __callArgument48; }), (cast ToonModifierKind : String), (cast (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect : String));
+    _Runtime.setField(out, 'steps', _Runtime.field(options, 'steps'));
+    _Runtime.setField(out, 'smoothness', _Runtime.coalesce(_Runtime.field(options, 'smoothness'), function():Dynamic return cast 0.0));
+  }
+
   public static function createVertexDisplaceModifier(options:VertexDisplaceModifierOptions):VertexDisplaceModifier {
-    var modifier:VertexDisplaceModifier = cast _Runtime.UNDEFINED;
-    modifier = (cast { kind: VertexDisplaceModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Vertex, source: options.source, amplitude: options.amplitude, frequency: _Runtime.coalesce(options.frequency, function():Dynamic return cast 1.0), speed: _Runtime.coalesce(options.speed, function():Dynamic return cast 1.0), direction: _Runtime.coalesce(options.direction, function():Dynamic return cast _Shading.DEFAULT_DIRECTION__createVertexDisplaceModifier) });
-    if ((cast !_Runtime.strictEquals(options.axis, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (modifier.axis = cast (options.axis : Null<Vector3Like>)); }
-    if ((cast !_Runtime.strictEquals(options.map, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (modifier.map = cast (options.map : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>)); }
-    return cast modifier;
+    var out:EntityConstruction<VertexDisplaceModifier> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ amplitude: cast _Runtime.UNDEFINED, axis: cast _Runtime.UNDEFINED, direction: cast _Runtime.UNDEFINED, frequency: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, map: cast _Runtime.UNDEFINED, slot: cast _Runtime.UNDEFINED, source: cast _Runtime.UNDEFINED, speed: cast _Runtime.UNDEFINED } : VertexDisplaceModifier); }) #end));
+    initializeVertexDisplaceModifier(({ final __callArgument50:Dynamic = out; __callArgument50; }), ({ final __callArgument51:Dynamic = options; __callArgument51; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeVertexDisplaceModifier(out:EntityConstruction<VertexDisplaceModifier>, options:VertexDisplaceModifierOptions):Void {
+    (cast initializeModifier : EntityConstruction<VertexDisplaceModifier>->String->String->Void)(({ final __callArgument54:Dynamic = out; __callArgument54; }), (cast VertexDisplaceModifierKind : String), (cast (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Vertex : String));
+    _Runtime.setField(out, 'source', options.source);
+    _Runtime.setField(out, 'amplitude', options.amplitude);
+    _Runtime.setField(out, 'frequency', _Runtime.coalesce(options.frequency, function():Dynamic return cast 1.0));
+    _Runtime.setField(out, 'speed', _Runtime.coalesce(options.speed, function():Dynamic return cast 1.0));
+    _Runtime.setField(out, 'direction', _Runtime.coalesce(options.direction, function():Dynamic return cast _Shading.DEFAULT_DIRECTION__createVertexDisplaceModifier));
+    if ((cast !_Runtime.strictEquals(options.axis, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(out, 'axis', options.axis); }
+    if ((cast !_Runtime.strictEquals(options.map, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.setField(out, 'map', options.map); }
   }
 
   public static final DEFAULT_DIRECTION__createVertexDisplaceModifier:Vector3Like = (cast { x: 1.0, y: 0.0, z: 0.0 });
@@ -147,10 +251,10 @@ class _Shading {
   public static function getModifierDefineKey(stack:Array<Modifier>, ?registry:ModifierRegistry):String {
     var ordered:Array<Modifier> = cast _Runtime.UNDEFINED;
     var key:String = cast _Runtime.UNDEFINED;
-    ordered = (cast orderModifierStack(({ final __callArgument18:Dynamic = stack; __callArgument18; })) : Array<Modifier>);
+    ordered = (cast orderModifierStack(({ final __callArgument56:Dynamic = stack; __callArgument56; })) : Array<Modifier>);
     key = '';
     for (modifier in _Runtime.iterable(ordered)) {
-      var signature:String = (cast _Shading.getDefineSignature__getModifierDefineKey(({ final __callArgument22:Dynamic = modifier; __callArgument22; }), ({ final __callArgument23:Dynamic = registry; __callArgument23; })) : String);
+      var signature:String = (cast _Shading.getDefineSignature__getModifierDefineKey(({ final __callArgument60:Dynamic = modifier; __callArgument60; }), ({ final __callArgument61:Dynamic = registry; __callArgument61; })) : String);
       var token:String = ((cast ((cast _Runtime.field(signature, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast '' + Std.string(modifier.kind) + ':' + Std.string(signature) + '' : Dynamic) : (cast modifier.kind : Dynamic));
       (key = cast (((cast ((cast _Runtime.field(key, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast '' + Std.string(key) + '+' + Std.string(token) + '' : Dynamic) : (cast token : Dynamic)) : Dynamic));
     }
@@ -161,9 +265,9 @@ class _Shading {
   public static function getDefineSignature__getModifierDefineKey(modifier:Modifier, ?registry:ModifierRegistry):String {
     var definition:Null<ModifierDefinition> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(registry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast ''; }
-    definition = (cast resolveModifier(({ final __callArgument26:Dynamic = registry; __callArgument26; }), (cast modifier.kind : String)) : Null<ModifierDefinition>);
+    definition = (cast resolveModifier(({ final __callArgument64:Dynamic = registry; __callArgument64; }), (cast modifier.kind : String)) : Null<ModifierDefinition>);
     if ((cast ((cast _Runtime.strictEquals(definition, null) : Bool) || (cast _Runtime.strictEquals((cast definition : ModifierDefinition).getDefineSignature, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast ''; }
-    return cast (cast definition : ModifierDefinition).getDefineSignature(({ final __callArgument28:Dynamic = modifier; __callArgument28; }));
+    return cast (cast definition : ModifierDefinition).getDefineSignature(({ final __callArgument66:Dynamic = modifier; __callArgument66; }));
     return cast null;
   }
 
@@ -171,7 +275,7 @@ class _Shading {
     var unregistered:Array<ModifierKind> = cast _Runtime.UNDEFINED;
     unregistered = (cast cast ([] : Array<Dynamic>));
     for (modifier in _Runtime.iterable(stack)) {
-      if ((cast !_Runtime.strictEquals((cast resolveModifier(({ final __callArgument31:Dynamic = registry; __callArgument31; }), (cast modifier.kind : String)) : Null<ModifierDefinition>), null) : Bool)) { continue; }
+      if ((cast !_Runtime.strictEquals((cast resolveModifier(({ final __callArgument69:Dynamic = registry; __callArgument69; }), (cast modifier.kind : String)) : Null<ModifierDefinition>), null) : Bool)) { continue; }
       if ((cast _Runtime.includes(unregistered, modifier.kind) : Bool)) { continue; }
       _Runtime.callProperty(unregistered, 'push', cast ([modifier.kind] : Array<Dynamic>));
     }
@@ -187,13 +291,29 @@ class _Shading {
   public static final BUILT_IN_SLOTS__isBuiltInModifierSlot:flight._internal._Set<String> = _Runtime.construct(flight._internal._HostValueLut.get('Set'), [cast ([(cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Diffuse, (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect, (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Emissive, (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Normal, (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Specular, (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Vertex] : Array<Dynamic>)]);
 
   public static function isModifierStackValid(registry:ModifierRegistry, stack:Array<Modifier>):Bool {
-    return cast _Runtime.strictEquals(_Runtime.field((cast getUnregisteredModifierKinds(({ final __callArgument33:Dynamic = registry; __callArgument33; }), ({ final __callArgument34:Dynamic = stack; __callArgument34; })) : Array<String>), 'length'), 0.0);
+    return cast _Runtime.strictEquals(_Runtime.field((cast getUnregisteredModifierKinds(({ final __callArgument71:Dynamic = registry; __callArgument71; }), ({ final __callArgument72:Dynamic = stack; __callArgument72; })) : Array<String>), 'length'), 0.0);
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeModifier<T:Modifier>(out:EntityConstruction<T>, kind:ModifierKind, slot:ModifierSlot):Void {
+    _Runtime.setField(out, 'kind', kind);
+    _Runtime.setField(out, 'slot', slot);
+  }
+
   public static function createModifierRegistry():ModifierRegistry {
-    return cast { definitions: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []) };
+    var out:EntityConstruction<ModifierRegistry> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ definitions: cast _Runtime.UNDEFINED } : ModifierRegistry); }) #end));
+    initializeModifierRegistry(({ final __callArgument75:Dynamic = out; __callArgument75; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeModifierRegistry(out:EntityConstruction<ModifierRegistry>):Void {
+    _Runtime.setField(out, 'definitions', _Runtime.construct(flight._internal._HostValueLut.get('Map'), []));
   }
 
   public static function registerModifier(registry:ModifierRegistry, definition:ModifierDefinition):Void {
@@ -263,14 +383,14 @@ class _Shading {
   } });
 
   public static function registerBuiltInModifiers(registry:ModifierRegistry):Void {
-    registerModifier(({ final __callArgument37:Dynamic = registry; __callArgument37; }), ({ final __callArgument38:Dynamic = animatedNormalModifierDefinition; __callArgument38; }));
-    registerModifier(({ final __callArgument41:Dynamic = registry; __callArgument41; }), ({ final __callArgument42:Dynamic = dissolveModifierDefinition; __callArgument42; }));
-    registerModifier(({ final __callArgument45:Dynamic = registry; __callArgument45; }), ({ final __callArgument46:Dynamic = emissiveModifierDefinition; __callArgument46; }));
-    registerModifier(({ final __callArgument49:Dynamic = registry; __callArgument49; }), ({ final __callArgument50:Dynamic = envReflectModifierDefinition; __callArgument50; }));
-    registerModifier(({ final __callArgument53:Dynamic = registry; __callArgument53; }), ({ final __callArgument54:Dynamic = fogModifierDefinition; __callArgument54; }));
-    registerModifier(({ final __callArgument57:Dynamic = registry; __callArgument57; }), ({ final __callArgument58:Dynamic = rimModifierDefinition; __callArgument58; }));
-    registerModifier(({ final __callArgument61:Dynamic = registry; __callArgument61; }), ({ final __callArgument62:Dynamic = toonModifierDefinition; __callArgument62; }));
-    registerModifier(({ final __callArgument65:Dynamic = registry; __callArgument65; }), ({ final __callArgument66:Dynamic = vertexDisplaceModifierDefinition; __callArgument66; }));
+    registerModifier(({ final __callArgument77:Dynamic = registry; __callArgument77; }), ({ final __callArgument78:Dynamic = animatedNormalModifierDefinition; __callArgument78; }));
+    registerModifier(({ final __callArgument81:Dynamic = registry; __callArgument81; }), ({ final __callArgument82:Dynamic = dissolveModifierDefinition; __callArgument82; }));
+    registerModifier(({ final __callArgument85:Dynamic = registry; __callArgument85; }), ({ final __callArgument86:Dynamic = emissiveModifierDefinition; __callArgument86; }));
+    registerModifier(({ final __callArgument89:Dynamic = registry; __callArgument89; }), ({ final __callArgument90:Dynamic = envReflectModifierDefinition; __callArgument90; }));
+    registerModifier(({ final __callArgument93:Dynamic = registry; __callArgument93; }), ({ final __callArgument94:Dynamic = fogModifierDefinition; __callArgument94; }));
+    registerModifier(({ final __callArgument97:Dynamic = registry; __callArgument97; }), ({ final __callArgument98:Dynamic = rimModifierDefinition; __callArgument98; }));
+    registerModifier(({ final __callArgument101:Dynamic = registry; __callArgument101; }), ({ final __callArgument102:Dynamic = toonModifierDefinition; __callArgument102; }));
+    registerModifier(({ final __callArgument105:Dynamic = registry; __callArgument105; }), ({ final __callArgument106:Dynamic = vertexDisplaceModifierDefinition; __callArgument106; }));
   }
 
   public static final rimModifierDefinition:ModifierDefinition = (cast { kind: RimModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect });

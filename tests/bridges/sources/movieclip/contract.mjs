@@ -6,3 +6,5 @@ __syncDependencies();
 export * from './enableMovieClipGuards.mjs';
 export * from './movieClip.mjs';
 export * from './spritesheetTimelineSource.mjs';
+export { initializeMovieClipData } from './movieClip.mjs';
+export { initializeSpritesheetTimelineSource } from './spritesheetTimelineSource.mjs';

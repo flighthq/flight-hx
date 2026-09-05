@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const cloneAmbientLight = api.cloneAmbientLight;
 export const createAmbientLight = api.createAmbientLight;
+export const initializeAmbientLight = api.initializeAmbientLight;

@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createBarrelDistortionEffect = api.createBarrelDistortionEffect;
+export const initializeBarrelDistortionEffect = api.initializeBarrelDistortionEffect;

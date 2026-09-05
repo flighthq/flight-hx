@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef InputKeyRepeatTimer = { var start:(Void->Void)->Void; var stop:Void->Void; };
+#if !flight_struct_typedef
+@:allow(flight._Input)
+@:keep
+@:structInit
+class InputKeyRepeatTimer {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var start:(Void->Void)->Void;
+  public var stop:Void->Void;
+
+  private function new(start:(Void->Void)->Void, stop:Void->Void):Void {
+    this.__symbol__EntityRuntime = null;
+    this.start = start;
+    this.stop = stop;
+  }
+}
+#else
+typedef InputKeyRepeatTimer = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var start:(Void->Void)->Void; var stop:Void->Void; };
+#end

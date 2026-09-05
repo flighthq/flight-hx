@@ -11,6 +11,7 @@ export const disposeRenderProxy = api.disposeRenderProxy;
 export const disposeScene2DRender = api.disposeScene2DRender;
 export const getOrCreateRenderProxy2D = api.getOrCreateRenderProxy2D;
 export const getRenderProxy2D = api.getRenderProxy2D;
+export const initializeRenderProxy = api.initializeRenderProxy;
 export const installRenderAdaptHook = api.installRenderAdaptHook;
 export const isRenderProxyDirty = api.isRenderProxyDirty;
 export const isRenderProxyVisible = api.isRenderProxyVisible;

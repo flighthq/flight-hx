@@ -8,10 +8,10 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-const __bridgeImplementation_fetchWebImageResource = api.fetchWebImageResource;
-export function fetchWebImageResource(...args) { __syncDependencies(); const result = __bridgeImplementation_fetchWebImageResource(...args); return result; }
-api.fetchWebImageResource = fetchWebImageResource;
-compiled.flight.Scene3DResources.fetchWebImageResource = fetchWebImageResource;
+const __bridgeImplementation_createWebImageResourceFetch = api.createWebImageResourceFetch;
+export function createWebImageResourceFetch(...args) { __syncDependencies(); const result = __bridgeImplementation_createWebImageResourceFetch(...args); return result; }
+api.createWebImageResourceFetch = createWebImageResourceFetch;
+compiled.flight.Scene3DResources.createWebImageResourceFetch = createWebImageResourceFetch;
 const __bridgeImplementation_resolveImageResourceUri = api.resolveImageResourceUri;
 export function resolveImageResourceUri(...args) { __syncDependencies(); const result = __bridgeImplementation_resolveImageResourceUri(...args); return result; }
 api.resolveImageResourceUri = resolveImageResourceUri;

@@ -3,12 +3,13 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Signals.clearSignal;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
 import flight._TextureAtlas.createTextureAtlasFromGrid;
-import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.EntityRuntime;
 import flight.types.GridSliceOptions;
 import flight.types.Signal;
@@ -28,13 +29,21 @@ import flight.types.TextureAtlasRegion;
 class _Spritesheet {
   public static function cloneSpritesheet(spritesheet:Spritesheet):Spritesheet {
     var frames:Array<SpritesheetFrame> = cast _Runtime.UNDEFINED;
-    frames = (cast _Runtime.mapArray((cast spritesheet.frames : Array<SpritesheetFrame>), function(f:SpritesheetFrame, __unused0:Float, __unused1:Array<SpritesheetFrame>):SpritesheetFrame return (cast createSpritesheetFrame(({ final __callArgument0:Dynamic = { id: f.id, offsetX: f.offsetX, offsetY: f.offsetY, pivotX: f.pivotX, pivotY: f.pivotY, rotated: f.rotated }; __callArgument0; })) : SpritesheetFrame), _Runtime.UNDEFINED));
-    return cast (cast createEntity((cast (#if flight_struct_typedef { atlas: spritesheet.atlas, animations: _Runtime.mergeObjects([spritesheet.animations]), frames: frames } #else ({ final __structInitField0:Dynamic = spritesheet.atlas; final __structInitField1:Dynamic = _Runtime.mergeObjects([spritesheet.animations]); final __structInitField2:Dynamic = frames; ({ animations: __structInitField1, atlas: __structInitField0, frames: __structInitField2 } : Spritesheet); }) #end) : Dynamic)) : Spritesheet);
+    var out:EntityConstruction<Spritesheet> = cast _Runtime.UNDEFINED;
+    frames = (cast _Runtime.mapArray((cast spritesheet.frames : Array<SpritesheetFrame>), function(f:SpritesheetFrame, __unused0:Float, __unused1:Array<SpritesheetFrame>):SpritesheetFrame return (cast createSpritesheetFrame((cast { id: f.id, offsetX: f.offsetX, offsetY: f.offsetY, pivotX: f.pivotX, pivotY: f.pivotY, rotated: f.rotated } : Dynamic)) : SpritesheetFrame), _Runtime.UNDEFINED));
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ animations: cast _Runtime.UNDEFINED, atlas: cast _Runtime.UNDEFINED, frames: cast _Runtime.UNDEFINED } : Spritesheet); }) #end));
+    _Runtime.setField(out, 'atlas', spritesheet.atlas);
+    _Runtime.setField(out, 'animations', _Runtime.mergeObjects([spritesheet.animations]));
+    _Runtime.setField(out, 'frames', frames);
+    return cast out;
     return cast null;
   }
 
   public static function createSpritesheet(?obj:{ @:optional var atlas:Null<TextureAtlas>; @:optional var animations:Null<flight._internal._Record<String, SpritesheetAnimation>>; @:optional var frames:Null<Array<SpritesheetFrame>>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):Spritesheet {
-    return cast (cast createEntity((cast (#if flight_struct_typedef { atlas: _Runtime.coalesce(({ final __structural2 = obj; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var atlas:Null<TextureAtlas>; }).atlas; }), function():Dynamic return cast null), animations: _Runtime.coalesce(({ final __structural3 = obj; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var animations:Null<flight._internal._Record<String, SpritesheetAnimation>>; }).animations; }), function():Dynamic return cast {  }), frames: _Runtime.coalesce(({ final __structural4 = obj; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var frames:Null<Array<SpritesheetFrame>>; }).frames; }), function():Dynamic return cast cast ([] : Array<Dynamic>)) } #else ({ final __structInitField0:Dynamic = _Runtime.coalesce(({ final __structural5 = obj; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var atlas:Null<TextureAtlas>; }).atlas; }), function():Dynamic return cast null); final __structInitField1:Dynamic = _Runtime.coalesce(({ final __structural6 = obj; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var animations:Null<flight._internal._Record<String, SpritesheetAnimation>>; }).animations; }), function():Dynamic return cast {  }); final __structInitField2:Dynamic = _Runtime.coalesce(({ final __structural7 = obj; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var frames:Null<Array<SpritesheetFrame>>; }).frames; }), function():Dynamic return cast cast ([] : Array<Dynamic>)); ({ animations: __structInitField1, atlas: __structInitField0, frames: __structInitField2 } : Spritesheet); }) #end) : Dynamic)) : Spritesheet);
+    var out:EntityConstruction<Spritesheet> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ animations: cast _Runtime.UNDEFINED, atlas: cast _Runtime.UNDEFINED, frames: cast _Runtime.UNDEFINED } : Spritesheet); }) #end));
+    initializeSpritesheet(({ final __callArgument0:Dynamic = out; __callArgument0; }), (cast obj : Dynamic));
+    return cast out;
     return cast null;
   }
 
@@ -43,8 +52,19 @@ class _Spritesheet {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeSpritesheet(out:EntityConstruction<Spritesheet>, ?obj:{ @:optional var atlas:Null<TextureAtlas>; @:optional var animations:Null<flight._internal._Record<String, SpritesheetAnimation>>; @:optional var frames:Null<Array<SpritesheetFrame>>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):Void {
+    _Runtime.setField(out, 'atlas', _Runtime.coalesce(({ final __structural2 = obj; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var atlas:Null<TextureAtlas>; }).atlas; }), function():Dynamic return cast null));
+    _Runtime.setField(out, 'animations', _Runtime.coalesce(({ final __structural3 = obj; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var animations:Null<flight._internal._Record<String, SpritesheetAnimation>>; }).animations; }), function():Dynamic return cast {  }));
+    _Runtime.setField(out, 'frames', _Runtime.coalesce(({ final __structural4 = obj; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var frames:Null<Array<SpritesheetFrame>>; }).frames; }), function():Dynamic return cast cast ([] : Array<Dynamic>)));
+  }
+
   public static function createSpritesheetAnimation(?obj:{ @:optional var frames:Null<Array<Float>>; @:optional var frameDuration:Null<Float>; @:optional var frameDurations:Null<Array<Float>>; @:optional var direction:Null<SpritesheetAnimationDirection>; @:optional var repeatCount:Null<Float>; @:optional var originX:Null<Float>; @:optional var originY:Null<Float>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):SpritesheetAnimation {
-    return cast (cast createEntity((cast ({ direction: (cast _Runtime.coalesce(({ final __structural21 = obj; __structural21 == null ? _Runtime.UNDEFINED : (cast __structural21 : { @:optional var direction:Null<String>; }).direction; }), function():Dynamic return cast 'forward') : Dynamic), frameDuration: (cast _Runtime.coalesce(({ final __structural22 = obj; __structural22 == null ? _Runtime.UNDEFINED : (cast __structural22 : { @:optional var frameDuration:Null<Float>; }).frameDuration; }), function():Dynamic return cast 0.0) : Dynamic), frameDurations: (cast _Runtime.coalesce(({ final __structural23 = obj; __structural23 == null ? _Runtime.UNDEFINED : (cast __structural23 : { @:optional var frameDurations:Null<Array<Float>>; }).frameDurations; }), function():Dynamic return cast null) : Dynamic), frames: (cast _Runtime.coalesce(({ final __structural24 = obj; __structural24 == null ? _Runtime.UNDEFINED : (cast __structural24 : { @:optional var frames:Null<Array<Float>>; }).frames; }), function():Dynamic return cast cast ([] : Array<Dynamic>)) : Dynamic), originX: (cast _Runtime.coalesce(({ final __structural25 = obj; __structural25 == null ? _Runtime.UNDEFINED : (cast __structural25 : { @:optional var originX:Null<Float>; }).originX; }), function():Dynamic return cast 0.0) : Dynamic), originY: (cast _Runtime.coalesce(({ final __structural26 = obj; __structural26 == null ? _Runtime.UNDEFINED : (cast __structural26 : { @:optional var originY:Null<Float>; }).originY; }), function():Dynamic return cast 0.0) : Dynamic), repeatCount: (cast _Runtime.coalesce(({ final __structural27 = obj; __structural27 == null ? _Runtime.UNDEFINED : (cast __structural27 : { @:optional var repeatCount:Null<Float>; }).repeatCount; }), function():Dynamic return cast 0.0) : Dynamic) } : SpritesheetAnimation) : Dynamic)) : SpritesheetAnimation);
+    var out:EntityConstruction<SpritesheetAnimation> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ direction: cast _Runtime.UNDEFINED, frameDuration: cast _Runtime.UNDEFINED, frameDurations: cast _Runtime.UNDEFINED, frames: cast _Runtime.UNDEFINED, originX: cast _Runtime.UNDEFINED, originY: cast _Runtime.UNDEFINED, repeatCount: cast _Runtime.UNDEFINED } : SpritesheetAnimation); }) #end));
+    initializeSpritesheetAnimation(({ final __callArgument5:Dynamic = out; __callArgument5; }), (cast obj : Dynamic));
+    return cast out;
     return cast null;
   }
 
@@ -74,28 +94,104 @@ class _Spritesheet {
       }
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(matchedIndices, 'length'), 0.0) : Bool)) { return cast null; }
-    return cast (cast createSpritesheetAnimation((cast { direction: ({ final __structural42 = options; __structural42 == null ? _Runtime.UNDEFINED : (cast __structural42 : { @:optional var direction:Null<String>; }).direction; }), frameDuration: ({ final __structural43 = options; __structural43 == null ? _Runtime.UNDEFINED : (cast __structural43 : { @:optional var frameDuration:Null<Float>; }).frameDuration; }), frameDurations: ({ final __structural44 = options; __structural44 == null ? _Runtime.UNDEFINED : (cast __structural44 : { @:optional var frameDurations:Null<Array<Float>>; }).frameDurations; }), frames: matchedIndices, originX: ({ final __structural45 = options; __structural45 == null ? _Runtime.UNDEFINED : (cast __structural45 : { @:optional var originX:Null<Float>; }).originX; }), originY: ({ final __structural46 = options; __structural46 == null ? _Runtime.UNDEFINED : (cast __structural46 : { @:optional var originY:Null<Float>; }).originY; }), repeatCount: ({ final __structural47 = options; __structural47 == null ? _Runtime.UNDEFINED : (cast __structural47 : { @:optional var repeatCount:Null<Float>; }).repeatCount; }) } : Dynamic)) : SpritesheetAnimation);
+    return cast (cast createSpritesheetAnimation((cast { direction: ({ final __structural7 = options; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var direction:Null<String>; }).direction; }), frameDuration: ({ final __structural8 = options; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var frameDuration:Null<Float>; }).frameDuration; }), frameDurations: ({ final __structural9 = options; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { @:optional var frameDurations:Null<Array<Float>>; }).frameDurations; }), frames: matchedIndices, originX: ({ final __structural10 = options; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { @:optional var originX:Null<Float>; }).originX; }), originY: ({ final __structural11 = options; __structural11 == null ? _Runtime.UNDEFINED : (cast __structural11 : { @:optional var originY:Null<Float>; }).originY; }), repeatCount: ({ final __structural12 = options; __structural12 == null ? _Runtime.UNDEFINED : (cast __structural12 : { @:optional var repeatCount:Null<Float>; }).repeatCount; }) } : Dynamic)) : SpritesheetAnimation);
     return cast null;
   }
 
-  public static function createSpritesheetAnimationData(?obj:{ @:optional var direction:Null<SpritesheetAnimationDirection>; @:optional var frameDuration:Null<Float>; @:optional var frameDurations:Null<Array<Float>>; @:optional var frameNames:Null<Array<String>>; @:optional var repeatCount:Null<Float>; @:optional var name:Null<String>; @:optional var originX:Null<Float>; @:optional var originY:Null<Float>; }):SpritesheetAnimationData {
-    return cast { direction: _Runtime.coalesce(({ final __structural54 = obj; __structural54 == null ? _Runtime.UNDEFINED : (cast __structural54 : { @:optional var direction:Null<String>; }).direction; }), function():Dynamic return cast 'forward'), frameDuration: _Runtime.coalesce(({ final __structural55 = obj; __structural55 == null ? _Runtime.UNDEFINED : (cast __structural55 : { @:optional var frameDuration:Null<Float>; }).frameDuration; }), function():Dynamic return cast 100.0), frameDurations: _Runtime.coalesce(({ final __structural56 = obj; __structural56 == null ? _Runtime.UNDEFINED : (cast __structural56 : { @:optional var frameDurations:Null<Array<Float>>; }).frameDurations; }), function():Dynamic return cast null), frameNames: _Runtime.coalesce(({ final __structural57 = obj; __structural57 == null ? _Runtime.UNDEFINED : (cast __structural57 : { @:optional var frameNames:Null<Array<String>>; }).frameNames; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), name: _Runtime.coalesce(({ final __structural58 = obj; __structural58 == null ? _Runtime.UNDEFINED : (cast __structural58 : { @:optional var name:Null<String>; }).name; }), function():Dynamic return cast ''), originX: _Runtime.coalesce(({ final __structural59 = obj; __structural59 == null ? _Runtime.UNDEFINED : (cast __structural59 : { @:optional var originX:Null<Float>; }).originX; }), function():Dynamic return cast 0.0), originY: _Runtime.coalesce(({ final __structural60 = obj; __structural60 == null ? _Runtime.UNDEFINED : (cast __structural60 : { @:optional var originY:Null<Float>; }).originY; }), function():Dynamic return cast 0.0), repeatCount: _Runtime.coalesce(({ final __structural61 = obj; __structural61 == null ? _Runtime.UNDEFINED : (cast __structural61 : { @:optional var repeatCount:Null<Float>; }).repeatCount; }), function():Dynamic return cast -1.0) };
+  @:allow(flight)
+  @:keep
+  private static function initializeSpritesheetAnimation(out:EntityConstruction<SpritesheetAnimation>, ?obj:{ @:optional var frames:Null<Array<Float>>; @:optional var frameDuration:Null<Float>; @:optional var frameDurations:Null<Array<Float>>; @:optional var direction:Null<SpritesheetAnimationDirection>; @:optional var repeatCount:Null<Float>; @:optional var originX:Null<Float>; @:optional var originY:Null<Float>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):Void {
+    _Runtime.setField(out, 'direction', _Runtime.coalesce(({ final __structural19 = obj; __structural19 == null ? _Runtime.UNDEFINED : (cast __structural19 : { @:optional var direction:Null<String>; }).direction; }), function():Dynamic return cast 'forward'));
+    _Runtime.setField(out, 'frameDuration', _Runtime.coalesce(({ final __structural20 = obj; __structural20 == null ? _Runtime.UNDEFINED : (cast __structural20 : { @:optional var frameDuration:Null<Float>; }).frameDuration; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'frameDurations', _Runtime.coalesce(({ final __structural21 = obj; __structural21 == null ? _Runtime.UNDEFINED : (cast __structural21 : { @:optional var frameDurations:Null<Array<Float>>; }).frameDurations; }), function():Dynamic return cast null));
+    _Runtime.setField(out, 'frames', _Runtime.coalesce(({ final __structural22 = obj; __structural22 == null ? _Runtime.UNDEFINED : (cast __structural22 : { @:optional var frames:Null<Array<Float>>; }).frames; }), function():Dynamic return cast cast ([] : Array<Dynamic>)));
+    _Runtime.setField(out, 'originX', _Runtime.coalesce(({ final __structural23 = obj; __structural23 == null ? _Runtime.UNDEFINED : (cast __structural23 : { @:optional var originX:Null<Float>; }).originX; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'originY', _Runtime.coalesce(({ final __structural24 = obj; __structural24 == null ? _Runtime.UNDEFINED : (cast __structural24 : { @:optional var originY:Null<Float>; }).originY; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'repeatCount', _Runtime.coalesce(({ final __structural25 = obj; __structural25 == null ? _Runtime.UNDEFINED : (cast __structural25 : { @:optional var repeatCount:Null<Float>; }).repeatCount; }), function():Dynamic return cast 0.0));
+  }
+
+  public static function createSpritesheetAnimationData(?obj:{ @:optional var direction:Null<SpritesheetAnimationDirection>; @:optional var frameDuration:Null<Float>; @:optional var frameDurations:Null<Array<Float>>; @:optional var frameNames:Null<Array<String>>; @:optional var repeatCount:Null<Float>; @:optional var name:Null<String>; @:optional var originX:Null<Float>; @:optional var originY:Null<Float>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):SpritesheetAnimationData {
+    var out:EntityConstruction<SpritesheetAnimationData> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ direction: cast _Runtime.UNDEFINED, frameDuration: cast _Runtime.UNDEFINED, frameDurations: cast _Runtime.UNDEFINED, frameNames: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, originX: cast _Runtime.UNDEFINED, originY: cast _Runtime.UNDEFINED, repeatCount: cast _Runtime.UNDEFINED } : SpritesheetAnimationData); }) #end));
+    initializeSpritesheetAnimationData(({ final __callArgument26:Dynamic = out; __callArgument26; }), (cast obj : Dynamic));
+    return cast out;
     return cast null;
   }
 
-  public static function createSpritesheetData(?obj:{ @:optional var animations:Null<Array<SpritesheetAnimationData>>; @:optional var frames:Null<Array<SpritesheetFrameData>>; @:optional var imageFile:Null<String>; @:optional var imageHeight:Null<Float>; @:optional var imageWidth:Null<Float>; @:optional var scale:Null<Float>; }):SpritesheetData {
-    return cast { animations: _Runtime.coalesce(({ final __structural62 = obj; __structural62 == null ? _Runtime.UNDEFINED : (cast __structural62 : { @:optional var animations:Null<Array<SpritesheetAnimationData>>; }).animations; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), frames: _Runtime.coalesce(({ final __structural63 = obj; __structural63 == null ? _Runtime.UNDEFINED : (cast __structural63 : { @:optional var frames:Null<Array<SpritesheetFrameData>>; }).frames; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), imageFile: _Runtime.coalesce(({ final __structural64 = obj; __structural64 == null ? _Runtime.UNDEFINED : (cast __structural64 : { @:optional var imageFile:Null<String>; }).imageFile; }), function():Dynamic return cast ''), imageHeight: _Runtime.coalesce(({ final __structural65 = obj; __structural65 == null ? _Runtime.UNDEFINED : (cast __structural65 : { @:optional var imageHeight:Null<Float>; }).imageHeight; }), function():Dynamic return cast 0.0), imageWidth: _Runtime.coalesce(({ final __structural66 = obj; __structural66 == null ? _Runtime.UNDEFINED : (cast __structural66 : { @:optional var imageWidth:Null<Float>; }).imageWidth; }), function():Dynamic return cast 0.0), scale: _Runtime.coalesce(({ final __structural67 = obj; __structural67 == null ? _Runtime.UNDEFINED : (cast __structural67 : { @:optional var scale:Null<Float>; }).scale; }), function():Dynamic return cast 1.0) };
+  public static function createSpritesheetData(?obj:{ @:optional var animations:Null<Array<SpritesheetAnimationData>>; @:optional var frames:Null<Array<SpritesheetFrameData>>; @:optional var imageFile:Null<String>; @:optional var imageHeight:Null<Float>; @:optional var imageWidth:Null<Float>; @:optional var scale:Null<Float>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):SpritesheetData {
+    var out:EntityConstruction<SpritesheetData> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ animations: cast _Runtime.UNDEFINED, frames: cast _Runtime.UNDEFINED, imageFile: cast _Runtime.UNDEFINED, imageHeight: cast _Runtime.UNDEFINED, imageWidth: cast _Runtime.UNDEFINED, scale: cast _Runtime.UNDEFINED } : SpritesheetData); }) #end));
+    initializeSpritesheetData(({ final __callArgument28:Dynamic = out; __callArgument28; }), (cast obj : Dynamic));
+    return cast out;
     return cast null;
   }
 
-  public static function createSpritesheetFrameData(?obj:{ @:optional var height:Null<Float>; @:optional var name:Null<String>; @:optional var offsetX:Null<Float>; @:optional var offsetY:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var rotated:Null<Bool>; @:optional var sourceHeight:Null<Float>; @:optional var sourceWidth:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; }):SpritesheetFrameData {
-    return cast { height: _Runtime.coalesce(({ final __structural68 = obj; __structural68 == null ? _Runtime.UNDEFINED : (cast __structural68 : { @:optional var height:Null<Float>; }).height; }), function():Dynamic return cast 0.0), name: _Runtime.coalesce(({ final __structural69 = obj; __structural69 == null ? _Runtime.UNDEFINED : (cast __structural69 : { @:optional var name:Null<String>; }).name; }), function():Dynamic return cast ''), offsetX: _Runtime.coalesce(({ final __structural70 = obj; __structural70 == null ? _Runtime.UNDEFINED : (cast __structural70 : { @:optional var offsetX:Null<Float>; }).offsetX; }), function():Dynamic return cast 0.0), offsetY: _Runtime.coalesce(({ final __structural71 = obj; __structural71 == null ? _Runtime.UNDEFINED : (cast __structural71 : { @:optional var offsetY:Null<Float>; }).offsetY; }), function():Dynamic return cast 0.0), pivotX: _Runtime.coalesce(({ final __structural72 = obj; __structural72 == null ? _Runtime.UNDEFINED : (cast __structural72 : { @:optional var pivotX:Null<Float>; }).pivotX; }), function():Dynamic return cast null), pivotY: _Runtime.coalesce(({ final __structural73 = obj; __structural73 == null ? _Runtime.UNDEFINED : (cast __structural73 : { @:optional var pivotY:Null<Float>; }).pivotY; }), function():Dynamic return cast null), rotated: _Runtime.coalesce(({ final __structural74 = obj; __structural74 == null ? _Runtime.UNDEFINED : (cast __structural74 : { @:optional var rotated:Null<Bool>; }).rotated; }), function():Dynamic return cast false), sourceHeight: _Runtime.coalesce(({ final __structural75 = obj; __structural75 == null ? _Runtime.UNDEFINED : (cast __structural75 : { @:optional var sourceHeight:Null<Float>; }).sourceHeight; }), function():Dynamic return cast 0.0), sourceWidth: _Runtime.coalesce(({ final __structural76 = obj; __structural76 == null ? _Runtime.UNDEFINED : (cast __structural76 : { @:optional var sourceWidth:Null<Float>; }).sourceWidth; }), function():Dynamic return cast 0.0), width: _Runtime.coalesce(({ final __structural77 = obj; __structural77 == null ? _Runtime.UNDEFINED : (cast __structural77 : { @:optional var width:Null<Float>; }).width; }), function():Dynamic return cast 0.0), x: _Runtime.coalesce(({ final __structural78 = obj; __structural78 == null ? _Runtime.UNDEFINED : (cast __structural78 : { @:optional var x:Null<Float>; }).x; }), function():Dynamic return cast 0.0), y: _Runtime.coalesce(({ final __structural79 = obj; __structural79 == null ? _Runtime.UNDEFINED : (cast __structural79 : { @:optional var y:Null<Float>; }).y; }), function():Dynamic return cast 0.0) };
+  public static function createSpritesheetFrameData(?obj:{ @:optional var height:Null<Float>; @:optional var name:Null<String>; @:optional var offsetX:Null<Float>; @:optional var offsetY:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var rotated:Null<Bool>; @:optional var sourceHeight:Null<Float>; @:optional var sourceWidth:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):SpritesheetFrameData {
+    var out:EntityConstruction<SpritesheetFrameData> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ height: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, offsetX: cast _Runtime.UNDEFINED, offsetY: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotated: cast _Runtime.UNDEFINED, sourceHeight: cast _Runtime.UNDEFINED, sourceWidth: cast _Runtime.UNDEFINED, width: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : SpritesheetFrameData); }) #end));
+    initializeSpritesheetFrameData(({ final __callArgument30:Dynamic = out; __callArgument30; }), (cast obj : Dynamic));
+    return cast out;
     return cast null;
   }
 
-  public static function createSpritesheetFrame(?obj:{ @:optional var id:Null<Float>; @:optional var offsetX:Null<Float>; @:optional var offsetY:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var rotated:Null<Bool>; }):SpritesheetFrame {
-    return cast { id: _Runtime.coalesce(({ final __structural80 = obj; __structural80 == null ? _Runtime.UNDEFINED : (cast __structural80 : { @:optional var id:Null<Float>; }).id; }), function():Dynamic return cast 0.0), offsetX: _Runtime.coalesce(({ final __structural81 = obj; __structural81 == null ? _Runtime.UNDEFINED : (cast __structural81 : { @:optional var offsetX:Null<Float>; }).offsetX; }), function():Dynamic return cast 0.0), offsetY: _Runtime.coalesce(({ final __structural82 = obj; __structural82 == null ? _Runtime.UNDEFINED : (cast __structural82 : { @:optional var offsetY:Null<Float>; }).offsetY; }), function():Dynamic return cast 0.0), pivotX: _Runtime.coalesce(({ final __structural83 = obj; __structural83 == null ? _Runtime.UNDEFINED : (cast __structural83 : { @:optional var pivotX:Null<Float>; }).pivotX; }), function():Dynamic return cast null), pivotY: _Runtime.coalesce(({ final __structural84 = obj; __structural84 == null ? _Runtime.UNDEFINED : (cast __structural84 : { @:optional var pivotY:Null<Float>; }).pivotY; }), function():Dynamic return cast null), rotated: _Runtime.coalesce(({ final __structural85 = obj; __structural85 == null ? _Runtime.UNDEFINED : (cast __structural85 : { @:optional var rotated:Null<Bool>; }).rotated; }), function():Dynamic return cast false) };
+  @:allow(flight)
+  @:keep
+  private static function initializeSpritesheetAnimationData(out:EntityConstruction<SpritesheetAnimationData>, ?obj:{ @:optional var direction:Null<SpritesheetAnimationDirection>; @:optional var frameDuration:Null<Float>; @:optional var frameDurations:Null<Array<Float>>; @:optional var frameNames:Null<Array<String>>; @:optional var repeatCount:Null<Float>; @:optional var name:Null<String>; @:optional var originX:Null<Float>; @:optional var originY:Null<Float>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):Void {
+    _Runtime.setField(out, 'direction', _Runtime.coalesce(({ final __structural32 = obj; __structural32 == null ? _Runtime.UNDEFINED : (cast __structural32 : { @:optional var direction:Null<String>; }).direction; }), function():Dynamic return cast 'forward'));
+    _Runtime.setField(out, 'frameDuration', _Runtime.coalesce(({ final __structural33 = obj; __structural33 == null ? _Runtime.UNDEFINED : (cast __structural33 : { @:optional var frameDuration:Null<Float>; }).frameDuration; }), function():Dynamic return cast 100.0));
+    _Runtime.setField(out, 'frameDurations', _Runtime.coalesce(({ final __structural34 = obj; __structural34 == null ? _Runtime.UNDEFINED : (cast __structural34 : { @:optional var frameDurations:Null<Array<Float>>; }).frameDurations; }), function():Dynamic return cast null));
+    _Runtime.setField(out, 'frameNames', _Runtime.coalesce(({ final __structural35 = obj; __structural35 == null ? _Runtime.UNDEFINED : (cast __structural35 : { @:optional var frameNames:Null<Array<String>>; }).frameNames; }), function():Dynamic return cast cast ([] : Array<Dynamic>)));
+    _Runtime.setField(out, 'name', _Runtime.coalesce(({ final __structural36 = obj; __structural36 == null ? _Runtime.UNDEFINED : (cast __structural36 : { @:optional var name:Null<String>; }).name; }), function():Dynamic return cast ''));
+    _Runtime.setField(out, 'originX', _Runtime.coalesce(({ final __structural37 = obj; __structural37 == null ? _Runtime.UNDEFINED : (cast __structural37 : { @:optional var originX:Null<Float>; }).originX; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'originY', _Runtime.coalesce(({ final __structural38 = obj; __structural38 == null ? _Runtime.UNDEFINED : (cast __structural38 : { @:optional var originY:Null<Float>; }).originY; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'repeatCount', _Runtime.coalesce(({ final __structural39 = obj; __structural39 == null ? _Runtime.UNDEFINED : (cast __structural39 : { @:optional var repeatCount:Null<Float>; }).repeatCount; }), function():Dynamic return cast -1.0));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeSpritesheetData(out:EntityConstruction<SpritesheetData>, ?obj:{ @:optional var animations:Null<Array<SpritesheetAnimationData>>; @:optional var frames:Null<Array<SpritesheetFrameData>>; @:optional var imageFile:Null<String>; @:optional var imageHeight:Null<Float>; @:optional var imageWidth:Null<Float>; @:optional var scale:Null<Float>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):Void {
+    _Runtime.setField(out, 'animations', _Runtime.coalesce(({ final __structural40 = obj; __structural40 == null ? _Runtime.UNDEFINED : (cast __structural40 : { @:optional var animations:Null<Array<SpritesheetAnimationData>>; }).animations; }), function():Dynamic return cast cast ([] : Array<Dynamic>)));
+    _Runtime.setField(out, 'frames', _Runtime.coalesce(({ final __structural41 = obj; __structural41 == null ? _Runtime.UNDEFINED : (cast __structural41 : { @:optional var frames:Null<Array<SpritesheetFrameData>>; }).frames; }), function():Dynamic return cast cast ([] : Array<Dynamic>)));
+    _Runtime.setField(out, 'imageFile', _Runtime.coalesce(({ final __structural42 = obj; __structural42 == null ? _Runtime.UNDEFINED : (cast __structural42 : { @:optional var imageFile:Null<String>; }).imageFile; }), function():Dynamic return cast ''));
+    _Runtime.setField(out, 'imageHeight', _Runtime.coalesce(({ final __structural43 = obj; __structural43 == null ? _Runtime.UNDEFINED : (cast __structural43 : { @:optional var imageHeight:Null<Float>; }).imageHeight; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'imageWidth', _Runtime.coalesce(({ final __structural44 = obj; __structural44 == null ? _Runtime.UNDEFINED : (cast __structural44 : { @:optional var imageWidth:Null<Float>; }).imageWidth; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'scale', _Runtime.coalesce(({ final __structural45 = obj; __structural45 == null ? _Runtime.UNDEFINED : (cast __structural45 : { @:optional var scale:Null<Float>; }).scale; }), function():Dynamic return cast 1.0));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeSpritesheetFrameData(out:EntityConstruction<SpritesheetFrameData>, ?obj:{ @:optional var height:Null<Float>; @:optional var name:Null<String>; @:optional var offsetX:Null<Float>; @:optional var offsetY:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var rotated:Null<Bool>; @:optional var sourceHeight:Null<Float>; @:optional var sourceWidth:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):Void {
+    _Runtime.setField(out, 'height', _Runtime.coalesce(({ final __structural46 = obj; __structural46 == null ? _Runtime.UNDEFINED : (cast __structural46 : { @:optional var height:Null<Float>; }).height; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'name', _Runtime.coalesce(({ final __structural47 = obj; __structural47 == null ? _Runtime.UNDEFINED : (cast __structural47 : { @:optional var name:Null<String>; }).name; }), function():Dynamic return cast ''));
+    _Runtime.setField(out, 'offsetX', _Runtime.coalesce(({ final __structural48 = obj; __structural48 == null ? _Runtime.UNDEFINED : (cast __structural48 : { @:optional var offsetX:Null<Float>; }).offsetX; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'offsetY', _Runtime.coalesce(({ final __structural49 = obj; __structural49 == null ? _Runtime.UNDEFINED : (cast __structural49 : { @:optional var offsetY:Null<Float>; }).offsetY; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'pivotX', _Runtime.coalesce(({ final __structural50 = obj; __structural50 == null ? _Runtime.UNDEFINED : (cast __structural50 : { @:optional var pivotX:Null<Float>; }).pivotX; }), function():Dynamic return cast null));
+    _Runtime.setField(out, 'pivotY', _Runtime.coalesce(({ final __structural51 = obj; __structural51 == null ? _Runtime.UNDEFINED : (cast __structural51 : { @:optional var pivotY:Null<Float>; }).pivotY; }), function():Dynamic return cast null));
+    _Runtime.setField(out, 'rotated', _Runtime.coalesce(({ final __structural52 = obj; __structural52 == null ? _Runtime.UNDEFINED : (cast __structural52 : { @:optional var rotated:Null<Bool>; }).rotated; }), function():Dynamic return cast false));
+    _Runtime.setField(out, 'sourceHeight', _Runtime.coalesce(({ final __structural53 = obj; __structural53 == null ? _Runtime.UNDEFINED : (cast __structural53 : { @:optional var sourceHeight:Null<Float>; }).sourceHeight; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'sourceWidth', _Runtime.coalesce(({ final __structural54 = obj; __structural54 == null ? _Runtime.UNDEFINED : (cast __structural54 : { @:optional var sourceWidth:Null<Float>; }).sourceWidth; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'width', _Runtime.coalesce(({ final __structural55 = obj; __structural55 == null ? _Runtime.UNDEFINED : (cast __structural55 : { @:optional var width:Null<Float>; }).width; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'x', _Runtime.coalesce(({ final __structural56 = obj; __structural56 == null ? _Runtime.UNDEFINED : (cast __structural56 : { @:optional var x:Null<Float>; }).x; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'y', _Runtime.coalesce(({ final __structural57 = obj; __structural57 == null ? _Runtime.UNDEFINED : (cast __structural57 : { @:optional var y:Null<Float>; }).y; }), function():Dynamic return cast 0.0));
+  }
+
+  public static function createSpritesheetFrame(?obj:{ @:optional var id:Null<Float>; @:optional var offsetX:Null<Float>; @:optional var offsetY:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var rotated:Null<Bool>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):SpritesheetFrame {
+    var out:EntityConstruction<SpritesheetFrame> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ id: cast _Runtime.UNDEFINED, offsetX: cast _Runtime.UNDEFINED, offsetY: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotated: cast _Runtime.UNDEFINED } : SpritesheetFrame); }) #end));
+    initializeSpritesheetFrame(({ final __callArgument58:Dynamic = out; __callArgument58; }), (cast obj : Dynamic));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeSpritesheetFrame(out:EntityConstruction<SpritesheetFrame>, ?obj:{ @:optional var id:Null<Float>; @:optional var offsetX:Null<Float>; @:optional var offsetY:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var rotated:Null<Bool>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):Void {
+    _Runtime.setField(out, 'id', _Runtime.coalesce(({ final __structural60 = obj; __structural60 == null ? _Runtime.UNDEFINED : (cast __structural60 : { @:optional var id:Null<Float>; }).id; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'offsetX', _Runtime.coalesce(({ final __structural61 = obj; __structural61 == null ? _Runtime.UNDEFINED : (cast __structural61 : { @:optional var offsetX:Null<Float>; }).offsetX; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'offsetY', _Runtime.coalesce(({ final __structural62 = obj; __structural62 == null ? _Runtime.UNDEFINED : (cast __structural62 : { @:optional var offsetY:Null<Float>; }).offsetY; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'pivotX', _Runtime.coalesce(({ final __structural63 = obj; __structural63 == null ? _Runtime.UNDEFINED : (cast __structural63 : { @:optional var pivotX:Null<Float>; }).pivotX; }), function():Dynamic return cast null));
+    _Runtime.setField(out, 'pivotY', _Runtime.coalesce(({ final __structural64 = obj; __structural64 == null ? _Runtime.UNDEFINED : (cast __structural64 : { @:optional var pivotY:Null<Float>; }).pivotY; }), function():Dynamic return cast null));
+    _Runtime.setField(out, 'rotated', _Runtime.coalesce(({ final __structural65 = obj; __structural65 == null ? _Runtime.UNDEFINED : (cast __structural65 : { @:optional var rotated:Null<Bool>; }).rotated; }), function():Dynamic return cast false));
   }
 
   public static function createSpritesheetFromData(data:SpritesheetData, atlas:TextureAtlas):Spritesheet {
@@ -112,7 +208,7 @@ class _Spritesheet {
     frames = (cast _Runtime.mapArray((cast data.frames : Array<SpritesheetFrameData>), function(fd:SpritesheetFrameData, index:Float, __unused0:Array<SpritesheetFrameData>):SpritesheetFrame {
       var regionId:Float = cast _Runtime.UNDEFINED;
       regionId = ((cast !_Runtime.strictEquals(fd.name, '') : Bool) ? (cast _Runtime.coalesce(((cast nameToRegionId : flight._internal._Map<String, Float>).get((cast fd.name))), function():Dynamic return cast index) : Dynamic) : (cast index : Dynamic));
-      return cast (cast createSpritesheetFrame(({ final __callArgument88:Dynamic = { id: regionId, offsetX: fd.offsetX, offsetY: fd.offsetY, pivotX: fd.pivotX, pivotY: fd.pivotY, rotated: fd.rotated }; __callArgument88; })) : SpritesheetFrame);
+      return cast (cast createSpritesheetFrame((cast { id: regionId, offsetX: fd.offsetX, offsetY: fd.offsetY, pivotX: fd.pivotX, pivotY: fd.pivotY, rotated: fd.rotated } : Dynamic)) : SpritesheetFrame);
       return cast _Runtime.UNDEFINED;
     }, _Runtime.UNDEFINED));
     frameNameToIndex = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
@@ -138,8 +234,8 @@ class _Spritesheet {
   public static function createSpritesheetFromGrid(options:GridSliceOptions):Spritesheet {
     var atlas:TextureAtlas = cast _Runtime.UNDEFINED;
     var frames:Array<SpritesheetFrame> = cast _Runtime.UNDEFINED;
-    atlas = (cast (#if js _Runtime.callValue(createTextureAtlasFromGrid, cast ([({ final __callArgument93:Dynamic = options; __callArgument93; })] : Array<Dynamic>)) #else createTextureAtlasFromGrid(({ final __callArgument92:Dynamic = options; __callArgument92; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : TextureAtlas);
-    frames = (cast _Runtime.mapArray((cast atlas.regions : Array<TextureAtlasRegion>), function(region:TextureAtlasRegion, __unused5:Float, __unused6:Array<TextureAtlasRegion>):SpritesheetFrame return (cast createSpritesheetFrame(({ final __callArgument94:Dynamic = { id: region.id }; __callArgument94; })) : SpritesheetFrame), _Runtime.UNDEFINED));
+    atlas = (cast (#if js _Runtime.callValue(createTextureAtlasFromGrid, cast ([({ final __callArgument71:Dynamic = options; __callArgument71; })] : Array<Dynamic>)) #else createTextureAtlasFromGrid(({ final __callArgument70:Dynamic = options; __callArgument70; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : TextureAtlas);
+    frames = (cast _Runtime.mapArray((cast atlas.regions : Array<TextureAtlasRegion>), function(region:TextureAtlasRegion, __unused5:Float, __unused6:Array<TextureAtlasRegion>):SpritesheetFrame return (cast createSpritesheetFrame((cast { id: region.id } : Dynamic)) : SpritesheetFrame), _Runtime.UNDEFINED));
     return cast (cast createSpritesheet((cast { atlas: atlas, frames: frames } : Dynamic)) : Spritesheet);
     return cast null;
   }
@@ -161,12 +257,26 @@ class _Spritesheet {
   }
 
   public static function cloneSpritesheetPlayer(player:SpritesheetPlayer):SpritesheetPlayer {
-    return cast { animation: player.animation, complete: player.complete, elapsed: player.elapsed, frameIndex: player.frameIndex, onComplete: (cast createSignal() : Signal<Void->Void>), onLoop: (cast createSignal() : Signal<Void->Void>), paused: player.paused, queue: _Runtime.concatArrays([_Runtime.toArray(player.queue)]), speed: player.speed };
+    var out:EntityConstruction<SpritesheetPlayer> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ animation: cast _Runtime.UNDEFINED, complete: cast _Runtime.UNDEFINED, elapsed: cast _Runtime.UNDEFINED, frameIndex: cast _Runtime.UNDEFINED, onComplete: cast _Runtime.UNDEFINED, onLoop: cast _Runtime.UNDEFINED, paused: cast _Runtime.UNDEFINED, queue: cast _Runtime.UNDEFINED, speed: cast _Runtime.UNDEFINED } : SpritesheetPlayer); }) #end));
+    _Runtime.setField(out, 'animation', player.animation);
+    _Runtime.setField(out, 'complete', player.complete);
+    _Runtime.setField(out, 'elapsed', player.elapsed);
+    _Runtime.setField(out, 'frameIndex', player.frameIndex);
+    _Runtime.setField(out, 'onComplete', (cast createSignal() : Signal<Void->Void>));
+    _Runtime.setField(out, 'onLoop', (cast createSignal() : Signal<Void->Void>));
+    _Runtime.setField(out, 'paused', player.paused);
+    _Runtime.setField(out, 'queue', _Runtime.concatArrays([_Runtime.toArray(player.queue)]));
+    _Runtime.setField(out, 'speed', player.speed);
+    return cast out;
     return cast null;
   }
 
-  public static function createSpritesheetPlayer(?obj:{ @:optional var animation:Null<SpritesheetAnimation>; @:optional var complete:Null<Bool>; @:optional var elapsed:Null<Float>; @:optional var paused:Null<Bool>; @:optional var speed:Null<Float>; @:optional var frameIndex:Null<Float>; @:optional var onComplete:Null<Signal<Void->Void>>; @:optional var onLoop:Null<Signal<Void->Void>>; @:optional var queue:Null<Array<SpritesheetAnimation>>; }):SpritesheetPlayer {
-    return cast { animation: _Runtime.coalesce(({ final __structural96 = obj; __structural96 == null ? _Runtime.UNDEFINED : (cast __structural96 : { @:optional var animation:Null<SpritesheetAnimation>; }).animation; }), function():Dynamic return cast null), complete: _Runtime.coalesce(({ final __structural97 = obj; __structural97 == null ? _Runtime.UNDEFINED : (cast __structural97 : { @:optional var complete:Null<Bool>; }).complete; }), function():Dynamic return cast true), elapsed: _Runtime.coalesce(({ final __structural98 = obj; __structural98 == null ? _Runtime.UNDEFINED : (cast __structural98 : { @:optional var elapsed:Null<Float>; }).elapsed; }), function():Dynamic return cast 0.0), frameIndex: _Runtime.coalesce(({ final __structural99 = obj; __structural99 == null ? _Runtime.UNDEFINED : (cast __structural99 : { @:optional var frameIndex:Null<Float>; }).frameIndex; }), function():Dynamic return cast 0.0), onComplete: _Runtime.coalesce(({ final __structural100 = obj; __structural100 == null ? _Runtime.UNDEFINED : (cast __structural100 : { @:optional var onComplete:Null<Signal<Void->Void>>; }).onComplete; }), function():Dynamic return cast (cast createSignal() : Signal<Void->Void>)), onLoop: _Runtime.coalesce(({ final __structural101 = obj; __structural101 == null ? _Runtime.UNDEFINED : (cast __structural101 : { @:optional var onLoop:Null<Signal<Void->Void>>; }).onLoop; }), function():Dynamic return cast (cast createSignal() : Signal<Void->Void>)), paused: _Runtime.coalesce(({ final __structural102 = obj; __structural102 == null ? _Runtime.UNDEFINED : (cast __structural102 : { @:optional var paused:Null<Bool>; }).paused; }), function():Dynamic return cast false), queue: _Runtime.coalesce(({ final __structural103 = obj; __structural103 == null ? _Runtime.UNDEFINED : (cast __structural103 : { @:optional var queue:Null<Array<SpritesheetAnimation>>; }).queue; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), speed: _Runtime.coalesce(({ final __structural104 = obj; __structural104 == null ? _Runtime.UNDEFINED : (cast __structural104 : { @:optional var speed:Null<Float>; }).speed; }), function():Dynamic return cast 1.0) };
+  public static function createSpritesheetPlayer(?obj:{ @:optional var animation:Null<SpritesheetAnimation>; @:optional var complete:Null<Bool>; @:optional var elapsed:Null<Float>; @:optional var paused:Null<Bool>; @:optional var speed:Null<Float>; @:optional var frameIndex:Null<Float>; @:optional var onComplete:Null<Signal<Void->Void>>; @:optional var onLoop:Null<Signal<Void->Void>>; @:optional var queue:Null<Array<SpritesheetAnimation>>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):SpritesheetPlayer {
+    var out:EntityConstruction<SpritesheetPlayer> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ animation: cast _Runtime.UNDEFINED, complete: cast _Runtime.UNDEFINED, elapsed: cast _Runtime.UNDEFINED, frameIndex: cast _Runtime.UNDEFINED, onComplete: cast _Runtime.UNDEFINED, onLoop: cast _Runtime.UNDEFINED, paused: cast _Runtime.UNDEFINED, queue: cast _Runtime.UNDEFINED, speed: cast _Runtime.UNDEFINED } : SpritesheetPlayer); }) #end));
+    initializeSpritesheetPlayer(({ final __callArgument72:Dynamic = out; __callArgument72; }), (cast obj : Dynamic));
+    return cast out;
     return cast null;
   }
 
@@ -208,6 +318,20 @@ class _Spritesheet {
     spriteFrameIndex = flight._internal._StaticIndex.readFloatArrayTyped((cast animation.frames : Array<Float>), (cast targetIndex : Float));
     return cast _Runtime.coalesce(flight._internal._StaticIndex.readArray(spritesheet.frames, spriteFrameIndex), function():Dynamic return cast null);
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeSpritesheetPlayer(out:EntityConstruction<SpritesheetPlayer>, ?obj:{ @:optional var animation:Null<SpritesheetAnimation>; @:optional var complete:Null<Bool>; @:optional var elapsed:Null<Float>; @:optional var paused:Null<Bool>; @:optional var speed:Null<Float>; @:optional var frameIndex:Null<Float>; @:optional var onComplete:Null<Signal<Void->Void>>; @:optional var onLoop:Null<Signal<Void->Void>>; @:optional var queue:Null<Array<SpritesheetAnimation>>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):Void {
+    _Runtime.setField(out, 'animation', _Runtime.coalesce(({ final __structural74 = obj; __structural74 == null ? _Runtime.UNDEFINED : (cast __structural74 : { @:optional var animation:Null<SpritesheetAnimation>; }).animation; }), function():Dynamic return cast null));
+    _Runtime.setField(out, 'complete', _Runtime.coalesce(({ final __structural75 = obj; __structural75 == null ? _Runtime.UNDEFINED : (cast __structural75 : { @:optional var complete:Null<Bool>; }).complete; }), function():Dynamic return cast true));
+    _Runtime.setField(out, 'elapsed', _Runtime.coalesce(({ final __structural76 = obj; __structural76 == null ? _Runtime.UNDEFINED : (cast __structural76 : { @:optional var elapsed:Null<Float>; }).elapsed; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'frameIndex', _Runtime.coalesce(({ final __structural77 = obj; __structural77 == null ? _Runtime.UNDEFINED : (cast __structural77 : { @:optional var frameIndex:Null<Float>; }).frameIndex; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'onComplete', _Runtime.coalesce(({ final __structural78 = obj; __structural78 == null ? _Runtime.UNDEFINED : (cast __structural78 : { @:optional var onComplete:Null<Signal<Void->Void>>; }).onComplete; }), function():Dynamic return cast (cast createSignal() : Signal<Void->Void>)));
+    _Runtime.setField(out, 'onLoop', _Runtime.coalesce(({ final __structural79 = obj; __structural79 == null ? _Runtime.UNDEFINED : (cast __structural79 : { @:optional var onLoop:Null<Signal<Void->Void>>; }).onLoop; }), function():Dynamic return cast (cast createSignal() : Signal<Void->Void>)));
+    _Runtime.setField(out, 'paused', _Runtime.coalesce(({ final __structural80 = obj; __structural80 == null ? _Runtime.UNDEFINED : (cast __structural80 : { @:optional var paused:Null<Bool>; }).paused; }), function():Dynamic return cast false));
+    _Runtime.setField(out, 'queue', _Runtime.coalesce(({ final __structural81 = obj; __structural81 == null ? _Runtime.UNDEFINED : (cast __structural81 : { @:optional var queue:Null<Array<SpritesheetAnimation>>; }).queue; }), function():Dynamic return cast cast ([] : Array<Dynamic>)));
+    _Runtime.setField(out, 'speed', _Runtime.coalesce(({ final __structural82 = obj; __structural82 == null ? _Runtime.UNDEFINED : (cast __structural82 : { @:optional var speed:Null<Float>; }).speed; }), function():Dynamic return cast 1.0));
   }
 
   public static function pauseSpritesheetPlayer(player:SpritesheetPlayer):Void {
@@ -254,8 +378,8 @@ class _Spritesheet {
     if ((cast ((cast _Runtime.strictEquals(animation, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(animation.frames, 'length'), 0.0) : Bool)) : Bool)) { return; }
     clamped = HxMath.max(0.0, HxMath.min(frameIndex, _Runtime.subtractNumbers(_Runtime.field(animation.frames, 'length'), 1.0)));
     (player.frameIndex = cast (clamped : Float));
-    virtualIndex = (cast _Spritesheet.resolveDisplayIndexToFirstVirtualIndex__spritesheetPlayer(({ final __callArgument105:Dynamic = animation; __callArgument105; }), (cast clamped : Float)) : Float);
-    (player.elapsed = cast ((cast _Spritesheet.resolveVirtualIndexStartTime__spritesheetPlayer(({ final __callArgument107:Dynamic = animation; __callArgument107; }), (cast virtualIndex : Float)) : Float) : Float));
+    virtualIndex = (cast _Spritesheet.resolveDisplayIndexToFirstVirtualIndex__spritesheetPlayer(({ final __callArgument83:Dynamic = animation; __callArgument83; }), (cast clamped : Float)) : Float);
+    (player.elapsed = cast ((cast _Spritesheet.resolveVirtualIndexStartTime__spritesheetPlayer(({ final __callArgument85:Dynamic = animation; __callArgument85; }), (cast virtualIndex : Float)) : Float) : Float));
   }
 
   public static function seekSpritesheetPlayerToTime(player:SpritesheetPlayer, time:Float):Void {
@@ -265,9 +389,9 @@ class _Spritesheet {
     __destructure3 = player;
     animation = __destructure3.animation;
     if ((cast ((cast _Runtime.strictEquals(animation, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(animation.frames, 'length'), 0.0) : Bool)) : Bool)) { return; }
-    totalTime = (cast _Spritesheet.resolveAnimationTotalTime__spritesheetPlayer(({ final __callArgument109:Dynamic = animation; __callArgument109; })) : Float);
+    totalTime = (cast _Spritesheet.resolveAnimationTotalTime__spritesheetPlayer(({ final __callArgument87:Dynamic = animation; __callArgument87; })) : Float);
     (player.elapsed = cast (HxMath.max(0.0, HxMath.min(time, totalTime)) : Float));
-    (player.frameIndex = cast ((cast _Spritesheet.resolveFrameIndexFromElapsed__spritesheetPlayer(({ final __callArgument111:Dynamic = animation; __callArgument111; }), (cast player.elapsed : Float)) : Float) : Float));
+    (player.frameIndex = cast ((cast _Spritesheet.resolveFrameIndexFromElapsed__spritesheetPlayer(({ final __callArgument89:Dynamic = animation; __callArgument89; }), (cast player.elapsed : Float)) : Float) : Float));
   }
 
   public static function stopSpritesheetPlayer(player:SpritesheetPlayer):Void {
@@ -292,7 +416,7 @@ class _Spritesheet {
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(animation, null) : Bool) || (cast player.complete : Bool)) : Bool) || (cast player.paused : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(animation.frames, 'length'), 0.0) : Bool)) : Bool)) { return cast false; }
     __destructure5 = animation;
     repeatCount = __destructure5.repeatCount;
-    totalTime = (cast _Spritesheet.resolveAnimationTotalTime__spritesheetPlayer(({ final __callArgument113:Dynamic = animation; __callArgument113; })) : Float);
+    totalTime = (cast _Spritesheet.resolveAnimationTotalTime__spritesheetPlayer(({ final __callArgument91:Dynamic = animation; __callArgument91; })) : Float);
     prevLoopCount = HxMath.floor((player.elapsed / totalTime));
     (player.elapsed += (deltaTime * player.speed));
     playbackTime = ((cast ((cast repeatCount : Float) < (cast 0.0 : Float)) : Bool) ? (cast HxMath.POSITIVE_INFINITY : Dynamic) : (cast (totalTime * (repeatCount + 1.0)) : Dynamic));
@@ -305,16 +429,16 @@ class _Spritesheet {
         return cast true;
       }
       (player.elapsed = cast (playbackTime : Float));
-      var lastVi:Float = ((cast _Spritesheet.resolveVirtualFrameCount__spritesheetPlayer(({ final __callArgument115:Dynamic = animation; __callArgument115; })) : Float) - 1.0);
-      (player.frameIndex = cast ((cast _Spritesheet.resolveVirtualIndexToDisplayIndex__spritesheetPlayer(({ final __callArgument117:Dynamic = animation; __callArgument117; }), (cast lastVi : Float)) : Float) : Float));
+      var lastVi:Float = ((cast _Spritesheet.resolveVirtualFrameCount__spritesheetPlayer(({ final __callArgument93:Dynamic = animation; __callArgument93; })) : Float) - 1.0);
+      (player.frameIndex = cast ((cast _Spritesheet.resolveVirtualIndexToDisplayIndex__spritesheetPlayer(({ final __callArgument95:Dynamic = animation; __callArgument95; }), (cast lastVi : Float)) : Float) : Float));
       (player.complete = cast (true : Bool));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[player.onComplete]]), 1);
       return cast true;
     }
     if ((cast ((cast HxMath.floor((player.elapsed / totalTime)) : Float) > (cast prevLoopCount : Float)) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[player.onLoop]]), 1); }
     timeInLoop = _Runtime.fmod(player.elapsed, totalTime);
-    vi = (cast _Spritesheet.resolveVirtualIndexFromTime__spritesheetPlayer(({ final __callArgument119:Dynamic = animation; __callArgument119; }), (cast timeInLoop : Float)) : Float);
-    (player.frameIndex = cast ((cast _Spritesheet.resolveVirtualIndexToDisplayIndex__spritesheetPlayer(({ final __callArgument121:Dynamic = animation; __callArgument121; }), (cast vi : Float)) : Float) : Float));
+    vi = (cast _Spritesheet.resolveVirtualIndexFromTime__spritesheetPlayer(({ final __callArgument97:Dynamic = animation; __callArgument97; }), (cast timeInLoop : Float)) : Float);
+    (player.frameIndex = cast ((cast _Spritesheet.resolveVirtualIndexToDisplayIndex__spritesheetPlayer(({ final __callArgument99:Dynamic = animation; __callArgument99; }), (cast vi : Float)) : Float) : Float));
     return cast true;
     return cast null;
   }
@@ -348,14 +472,14 @@ class _Spritesheet {
     __destructure6 = animation;
     frameDuration = __destructure6.frameDuration;
     frameDurations = __destructure6.frameDurations;
-    virtualCount = (cast _Spritesheet.resolveVirtualFrameCount__spritesheetPlayer(({ final __callArgument123:Dynamic = animation; __callArgument123; })) : Float);
+    virtualCount = (cast _Spritesheet.resolveVirtualFrameCount__spritesheetPlayer(({ final __callArgument101:Dynamic = animation; __callArgument101; })) : Float);
     arr = new flight._internal._Float64Array((virtualCount + 1.0));
     t = 0.0;
     {
       var vi:Float = 0.0;
       while ((cast ((cast vi : Float) < (cast virtualCount : Float)) : Bool)) {
         flight._internal._StaticIndex.writeFloat64ArrayTyped((cast arr : flight._internal._Float64Array), (cast vi : Float), (cast t : Float));
-        var displayIndex:Float = (cast _Spritesheet.resolveVirtualIndexToDisplayIndex__spritesheetPlayer(({ final __callArgument125:Dynamic = animation; __callArgument125; }), (cast vi : Float)) : Float);
+        var displayIndex:Float = (cast _Spritesheet.resolveVirtualIndexToDisplayIndex__spritesheetPlayer(({ final __callArgument103:Dynamic = animation; __callArgument103; }), (cast vi : Float)) : Float);
         (t = cast ((t + _Runtime.coalesce(flight._internal._StaticIndex.readFloatArrayTyped((cast frameDurations : Array<Float>), (cast displayIndex : Float)), function():Dynamic return cast frameDuration)) : Dynamic));
         vi++;
       }
@@ -375,10 +499,10 @@ class _Spritesheet {
     frameDuration = __destructure7.frameDuration;
     frameDurations = __destructure7.frameDurations;
     if ((cast !_Runtime.strictEquals(frameDurations, null) : Bool)) {
-      var arr:flight._internal._Float64Array = (cast _Spritesheet.getCumulativeDurations__spritesheetPlayer(({ final __callArgument127:Dynamic = animation; __callArgument127; })) : flight._internal._Float64Array);
+      var arr:flight._internal._Float64Array = (cast _Spritesheet.getCumulativeDurations__spritesheetPlayer(({ final __callArgument105:Dynamic = animation; __callArgument105; })) : flight._internal._Float64Array);
       return cast flight._internal._StaticIndex.readFloat64ArrayTyped((cast arr : flight._internal._Float64Array), (cast _Runtime.subtractNumbers(_Runtime.field(arr, 'length'), 1.0) : Float));
     }
-    virtualCount = (cast _Spritesheet.resolveVirtualFrameCount__spritesheetPlayer(({ final __callArgument129:Dynamic = animation; __callArgument129; })) : Float);
+    virtualCount = (cast _Spritesheet.resolveVirtualFrameCount__spritesheetPlayer(({ final __callArgument107:Dynamic = animation; __callArgument107; })) : Float);
     return cast _Runtime.orValue((virtualCount * frameDuration), function():Dynamic return cast 1.0);
     return cast null;
   }
@@ -387,10 +511,10 @@ class _Spritesheet {
     var totalTime:Float = cast _Runtime.UNDEFINED;
     var timeInLoop:Float = cast _Runtime.UNDEFINED;
     var vi:Float = cast _Runtime.UNDEFINED;
-    totalTime = (cast _Spritesheet.resolveAnimationTotalTime__spritesheetPlayer(({ final __callArgument131:Dynamic = animation; __callArgument131; })) : Float);
+    totalTime = (cast _Spritesheet.resolveAnimationTotalTime__spritesheetPlayer(({ final __callArgument109:Dynamic = animation; __callArgument109; })) : Float);
     timeInLoop = _Runtime.fmod(elapsed, totalTime);
-    vi = (cast _Spritesheet.resolveVirtualIndexFromTime__spritesheetPlayer(({ final __callArgument133:Dynamic = animation; __callArgument133; }), (cast timeInLoop : Float)) : Float);
-    return cast (cast _Spritesheet.resolveVirtualIndexToDisplayIndex__spritesheetPlayer(({ final __callArgument135:Dynamic = animation; __callArgument135; }), (cast vi : Float)) : Float);
+    vi = (cast _Spritesheet.resolveVirtualIndexFromTime__spritesheetPlayer(({ final __callArgument111:Dynamic = animation; __callArgument111; }), (cast timeInLoop : Float)) : Float);
+    return cast (cast _Spritesheet.resolveVirtualIndexToDisplayIndex__spritesheetPlayer(({ final __callArgument113:Dynamic = animation; __callArgument113; }), (cast vi : Float)) : Float);
     return cast null;
   }
 
@@ -412,9 +536,9 @@ class _Spritesheet {
     __destructure8 = animation;
     frameDuration = __destructure8.frameDuration;
     frameDurations = __destructure8.frameDurations;
-    virtualCount = (cast _Spritesheet.resolveVirtualFrameCount__spritesheetPlayer(({ final __callArgument137:Dynamic = animation; __callArgument137; })) : Float);
+    virtualCount = (cast _Spritesheet.resolveVirtualFrameCount__spritesheetPlayer(({ final __callArgument115:Dynamic = animation; __callArgument115; })) : Float);
     if ((cast !_Runtime.strictEquals(frameDurations, null) : Bool)) {
-      var arr:flight._internal._Float64Array = (cast _Spritesheet.getCumulativeDurations__spritesheetPlayer(({ final __callArgument139:Dynamic = animation; __callArgument139; })) : flight._internal._Float64Array);
+      var arr:flight._internal._Float64Array = (cast _Spritesheet.getCumulativeDurations__spritesheetPlayer(({ final __callArgument117:Dynamic = animation; __callArgument117; })) : flight._internal._Float64Array);
       var lo:Float = 0.0;
       var hi:Float = (virtualCount - 1.0);
       while ((cast ((cast lo : Float) < (cast hi : Float)) : Bool)) {
@@ -439,7 +563,7 @@ class _Spritesheet {
     frameDuration = __destructure9.frameDuration;
     frameDurations = __destructure9.frameDurations;
     if ((cast !_Runtime.strictEquals(frameDurations, null) : Bool)) {
-      var arr:flight._internal._Float64Array = (cast _Spritesheet.getCumulativeDurations__spritesheetPlayer(({ final __callArgument141:Dynamic = animation; __callArgument141; })) : flight._internal._Float64Array);
+      var arr:flight._internal._Float64Array = (cast _Spritesheet.getCumulativeDurations__spritesheetPlayer(({ final __callArgument119:Dynamic = animation; __callArgument119; })) : flight._internal._Float64Array);
       return cast flight._internal._StaticIndex.readFloat64ArrayTyped((cast arr : flight._internal._Float64Array), (cast virtualIndex : Float));
     }
     return cast (virtualIndex * frameDuration);

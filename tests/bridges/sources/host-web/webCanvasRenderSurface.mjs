@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWebCanvasRenderSurfaceCreator = api.createWebCanvasRenderSurfaceCreator;
+export const initializeWebCanvasRenderSurfaceCreator = api.initializeWebCanvasRenderSurfaceCreator;
 export const webCanvasRenderSurfaceCreator = api.webCanvasRenderSurfaceCreator;

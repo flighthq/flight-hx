@@ -8,6 +8,7 @@ __syncDependencies();
 export const cloneSpotLight = api.cloneSpotLight;
 export const createSpotLight = api.createSpotLight;
 export const getSpotLightConeDegrees = api.getSpotLightConeDegrees;
+export const initializeSpotLight = api.initializeSpotLight;
 export const setSpotLightBlend = api.setSpotLightBlend;
 export const setSpotLightCone = api.setSpotLightCone;
 export const setSpotLightDirection = api.setSpotLightDirection;

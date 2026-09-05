@@ -44,3 +44,6 @@ export * from './specularPbrScene3DMaterialTextures.mjs';
 export * from './threeDsLoad.mjs';
 export * from './transmissionVolumePbrScene3DMaterialTextures.mjs';
 export * from './wrappedDiffusePbrScene3DMaterialTextures.mjs';
+export { initializeScene3DMaterialTextureRegistry } from './sceneMaterialTextureRegistry.mjs';
+export { initializeScene3DResourceResolver } from './sceneResourceResolver.mjs';
+export { initializeScene3DResourceSignals } from './sceneResourceSignals.mjs';

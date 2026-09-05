@@ -10,3 +10,4 @@ export const createRenderStateRuntime = api.createRenderStateRuntime;
 export const destroyRenderState = api.destroyRenderState;
 export const getColorAdjustmentUnsupportedGuard = api.getColorAdjustmentUnsupportedGuard;
 export const getRenderStateRuntime = api.getRenderStateRuntime;
+export const initializeRenderState = api.initializeRenderState;

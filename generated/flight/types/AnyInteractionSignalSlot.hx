@@ -3,5 +3,6 @@ package flight.types;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight._Types.EntityRuntimeKey;
 
 typedef AnyInteractionSignalSlot = flight._internal._Union2<flight._internal._Union2<PointerEventData, KeyboardEventData>, FocusEventData>->Void;

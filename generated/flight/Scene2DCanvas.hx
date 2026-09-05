@@ -15,9 +15,11 @@ import flight.types.CanvasRenderTexturePool;
 import flight.types.CanvasShapeCommand;
 import flight.types.CanvasTextureResolver;
 import flight.types.CanvasTextureResolvers;
+import flight.types.HasGraphicsImage;
 import flight.types.KeyedTable;
 import flight.types.Matrix;
 import flight.types.Node2D;
+import flight.types.NonEntityCreateResult;
 import flight.types.RenderCache;
 import flight.types.RenderCacheRefreshOptions;
 import flight.types.RenderState;
@@ -94,7 +96,7 @@ class Scene2DCanvas {
     return cast null;
   }
 
-  public static function createCanvasShapeRasterizer(resolvers:CanvasTextureResolvers):ShapeRasterizer {
+  public static function createCanvasShapeRasterizer(resolvers:CanvasTextureResolvers):NonEntityCreateResult<ShapeRasterizer, String> {
     return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.createCanvasShapeRasterizer(resolvers);
     return cast null;
   }
@@ -235,8 +237,8 @@ class Scene2DCanvas {
     return cast null;
   }
 
-  public static function registerCanvasBitmapTextureResolver(resolvers:CanvasTextureResolvers):Void {
-    Facade_Scene2DCanvas_flight__Scene2DCanvas.registerCanvasBitmapTextureResolver(resolvers);
+  public static function registerCanvasBitmapTextureResolver(host:HasGraphicsImage, resolvers:CanvasTextureResolvers):Void {
+    Facade_Scene2DCanvas_flight__Scene2DCanvas.registerCanvasBitmapTextureResolver(host, resolvers);
   }
 
   public static function registerCanvasImageTextureResolver(resolvers:CanvasTextureResolvers):Void {

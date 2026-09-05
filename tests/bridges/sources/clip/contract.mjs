@@ -5,3 +5,6 @@ __syncDependencies();
 
 export * from './clipRegion.mjs';
 export * from './enableClipGuards.mjs';
+export { initializeClipRegionFromContours } from './clipRegion.mjs';
+export { initializeClipRegionFromPath } from './clipRegion.mjs';
+export { initializeClipRegionFromRectangle } from './clipRegion.mjs';

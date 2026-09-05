@@ -8,3 +8,7 @@ export * from './flyCameraController.mjs';
 export * from './follow.mjs';
 export * from './framing.mjs';
 export * from './orbitCameraController.mjs';
+export { initializeCameraShake } from './cameraShake.mjs';
+export { initializeCameraShakeOffset } from './cameraShake.mjs';
+export { initializeFlyCameraController } from './flyCameraController.mjs';
+export { initializeOrbitCameraController } from './orbitCameraController.mjs';

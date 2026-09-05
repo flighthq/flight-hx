@@ -4,4 +4,26 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MorphShapeData = { var commands:Array<ShapeCommandToken>; var morph:PathMorph; var path:Path; var paintBindings:Array<MorphShapePaintBinding>; var pathBindings:Array<MorphShapePathBinding>; var progress:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Shape)
+@:keep
+@:structInit
+class MorphShapeData extends flight.types.ShapeData {
+  public var morph:PathMorph;
+  public var path:Path;
+  public var paintBindings:Array<MorphShapePaintBinding>;
+  public var pathBindings:Array<MorphShapePathBinding>;
+  public var progress:Float;
+
+  private function new(commands:Array<ShapeCommandToken>, morph:PathMorph, path:Path, paintBindings:Array<MorphShapePaintBinding>, pathBindings:Array<MorphShapePathBinding>, progress:Float):Void {
+    super(commands);
+    this.morph = morph;
+    this.path = path;
+    this.paintBindings = paintBindings;
+    this.pathBindings = pathBindings;
+    this.progress = progress;
+  }
+}
+#else
+typedef MorphShapeData = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var commands:Array<ShapeCommandToken>; var morph:PathMorph; var path:Path; var paintBindings:Array<MorphShapePaintBinding>; var pathBindings:Array<MorphShapePathBinding>; var progress:Float; };
+#end

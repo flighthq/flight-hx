@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const createExternalGlTexture = api.createExternalGlTexture;
 export const disposeExternalGlTexture = api.disposeExternalGlTexture;
+export const initializeExternalGlTextureSource = api.initializeExternalGlTextureSource;

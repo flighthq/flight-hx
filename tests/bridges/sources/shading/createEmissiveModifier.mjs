@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createEmissiveModifier = api.createEmissiveModifier;
+export const initializeEmissiveModifier = api.initializeEmissiveModifier;

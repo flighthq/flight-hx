@@ -70,3 +70,4 @@ export * from './glTiltShiftEffect.mjs';
 export * from './glToneMapEffect.mjs';
 export * from './glVignetteEffect.mjs';
 export * from './glWhiteBalanceEffect.mjs';
+export { initializeGlRenderEffectPipeline } from './glRenderEffectPipeline.mjs';

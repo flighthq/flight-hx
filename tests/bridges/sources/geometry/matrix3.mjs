@@ -15,6 +15,7 @@ export const createMatrix3 = api.createMatrix3;
 export const equalsMatrix3 = api.equalsMatrix3;
 export const getMatrix3Determinant = api.getMatrix3Determinant;
 export const getMatrix3Element = api.getMatrix3Element;
+export const initializeMatrix3 = api.initializeMatrix3;
 export const inverseMatrix3 = api.inverseMatrix3;
 export const isAffineMatrix3 = api.isAffineMatrix3;
 export const multiplyMatrix3 = api.multiplyMatrix3;

@@ -4,4 +4,38 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics3DMassData = { var mass:Float; var inertiaXX:Float; var inertiaYY:Float; var inertiaZZ:Float; var inertiaXY:Float; var inertiaXZ:Float; var inertiaYZ:Float; var centerX:Float; var centerY:Float; var centerZ:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Physics3D)
+@:allow(flight._Physics3DAbi)
+@:keep
+@:structInit
+class Physics3DMassData {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var mass:Float;
+  public var inertiaXX:Float;
+  public var inertiaYY:Float;
+  public var inertiaZZ:Float;
+  public var inertiaXY:Float;
+  public var inertiaXZ:Float;
+  public var inertiaYZ:Float;
+  public var centerX:Float;
+  public var centerY:Float;
+  public var centerZ:Float;
+
+  private function new(mass:Float, inertiaXX:Float, inertiaYY:Float, inertiaZZ:Float, inertiaXY:Float, inertiaXZ:Float, inertiaYZ:Float, centerX:Float, centerY:Float, centerZ:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.mass = mass;
+    this.inertiaXX = inertiaXX;
+    this.inertiaYY = inertiaYY;
+    this.inertiaZZ = inertiaZZ;
+    this.inertiaXY = inertiaXY;
+    this.inertiaXZ = inertiaXZ;
+    this.inertiaYZ = inertiaYZ;
+    this.centerX = centerX;
+    this.centerY = centerY;
+    this.centerZ = centerZ;
+  }
+}
+#else
+typedef Physics3DMassData = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var mass:Float; var inertiaXX:Float; var inertiaYY:Float; var inertiaZZ:Float; var inertiaXY:Float; var inertiaXZ:Float; var inertiaYZ:Float; var centerX:Float; var centerY:Float; var centerZ:Float; };
+#end

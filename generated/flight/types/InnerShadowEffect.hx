@@ -4,4 +4,34 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef InnerShadowEffect = { var kind:String; @:optional var alpha:Float; @:optional var angle:Float; @:optional var blurX:Float; @:optional var blurY:Float; @:optional var color:Float; @:optional var distance:Float; @:optional var quality:Float; @:optional var sourceMode:InnerEffectSourceMode; @:optional var strength:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class InnerShadowEffect extends flight.types.RenderEffect<String> {
+  public var alpha:Null<Float>;
+  public var angle:Null<Float>;
+  public var blurX:Null<Float>;
+  public var blurY:Null<Float>;
+  public var color:Null<Float>;
+  public var distance:Null<Float>;
+  public var quality:Null<Float>;
+  public var sourceMode:Null<InnerEffectSourceMode>;
+  public var strength:Null<Float>;
+
+  private function new(kind:String, ?alpha:Null<Float>, ?angle:Null<Float>, ?blurX:Null<Float>, ?blurY:Null<Float>, ?color:Null<Float>, ?distance:Null<Float>, ?quality:Null<Float>, ?sourceMode:Null<InnerEffectSourceMode>, ?strength:Null<Float>):Void {
+    super(kind);
+    this.alpha = alpha;
+    this.angle = angle;
+    this.blurX = blurX;
+    this.blurY = blurY;
+    this.color = color;
+    this.distance = distance;
+    this.quality = quality;
+    this.sourceMode = sourceMode;
+    this.strength = strength;
+  }
+}
+#else
+typedef InnerShadowEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var alpha:Float; @:optional var angle:Float; @:optional var blurX:Float; @:optional var blurY:Float; @:optional var color:Float; @:optional var distance:Float; @:optional var quality:Float; @:optional var sourceMode:InnerEffectSourceMode; @:optional var strength:Float; };
+#end

@@ -34,6 +34,7 @@ export const getRichTextString = api.getRichTextString;
 export const getRichTextTextHeight = api.getRichTextTextHeight;
 export const getRichTextTextWidth = api.getRichTextTextWidth;
 export const getTextFieldSignals = api.getTextFieldSignals;
+export const initializeTextFieldSignals = api.initializeTextFieldSignals;
 export const insertRichTextString = api.insertRichTextString;
 export const removeRichTextFormatRangesIn = api.removeRichTextFormatRangesIn;
 export const replaceRichTextString = api.replaceRichTextString;

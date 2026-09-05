@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createPhysics3DDebugGeometry = api.createPhysics3DDebugGeometry;
+export const initializePhysics3DDebugGeometry = api.initializePhysics3DDebugGeometry;
 export const writePhysics3DDebugGeometry = api.writePhysics3DDebugGeometry;

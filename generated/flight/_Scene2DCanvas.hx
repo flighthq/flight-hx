@@ -14,13 +14,15 @@ import flight.Types.QuadBatchKind;
 import flight.Types.RenderTargetTextureSourceKind;
 import flight.Types.RichTextKind;
 import flight.Types.Scale9ShapeKind;
+import flight.Types.Scale9SpriteKind;
 import flight.Types.ShapeKind;
 import flight.Types.SpriteKind;
 import flight.Types.TextLabelKind;
 import flight.Types.TilemapKind;
 import flight._Color.computeRgbHexString;
 import flight._Color.computeRgbaCssString;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Geometry.acquireMatrix;
 import flight._Geometry.copyMatrix;
 import flight._Geometry.createMatrix;
@@ -111,6 +113,7 @@ import flight._Types.RenderTargetTextureSourceKind;
 import flight._Types.RequirementFacetValue;
 import flight._Types.RichTextKind;
 import flight._Types.Scale9ShapeKind;
+import flight._Types.Scale9SpriteKind;
 import flight._Types.SceneCoverageValue;
 import flight._Types.ShapeKind;
 import flight._Types.SpriteKind;
@@ -152,8 +155,10 @@ import flight.types.CatalogRegistration;
 import flight.types.ClipRegion;
 import flight.types.CreateRenderTextureOptions;
 import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.EntityRuntime;
 import flight.types.GradientType;
+import flight.types.HasGraphicsImage;
 import flight.types.ImageResource;
 import flight.types.InterpolationMethod;
 import flight.types.KeyedTable;
@@ -165,6 +170,7 @@ import flight.types.Node2D;
 import flight.types.Node2DRuntime;
 import flight.types.Node2DTraits;
 import flight.types.NodeOf;
+import flight.types.NonEntityCreateResult;
 import flight.types.ParticleEmitter2D;
 import flight.types.ParticleEmitterData;
 import flight.types.PathWinding;
@@ -202,6 +208,8 @@ import flight.types.Sampler;
 import flight.types.Scale9Mapper;
 import flight.types.Scale9Shape;
 import flight.types.Scale9ShapeData;
+import flight.types.Scale9Sprite;
+import flight.types.Scale9SpriteData;
 import flight.types.Scene2DClipHooks;
 import flight.types.Scene2DKindUsage;
 import flight.types.Scene2DRenderer;
@@ -251,7 +259,7 @@ import flight.types.TilemapData;
 import flight.types.Vector2;
 import flight.types.VoxelGrid;
 
-typedef CanvasRenderStateWritableHandles__canvasRenderStateHandles = { var applyBlendMode:Null<CanvasRenderState->Null<BlendMode>->Void>; var canvasCssFilterResolver:Null<CanvasRenderState->RenderProxy2D->Null<String>>; var canvas:flight._internal.dom.HTMLCanvasElement; var context:flight._internal.dom.CanvasRenderingContext2D; var contextAttributes:flight._internal.dom.CanvasRenderingContext2DSettings; var pipeline:CanvasPipeline; var surface:CanvasRenderSurface; var allowSmoothing:Bool; var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; var currentClipDepth:Float; var displayObjectClipHooks:Null<Scene2DClipHooks>; var pixelRatio:Float; var renderAlpha:Float; var renderBlendMode:Null<BlendMode>; var renderTransform2D:Null<Matrix>; var sceneGraphSyncPolicy:Scene3DGraphSyncPolicy; var roundPixels:Bool; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; };
+typedef CanvasRenderStateWritableHandles__canvasRenderStateHandles = { var canvas:flight._internal.dom.HTMLCanvasElement; var context:flight._internal.dom.CanvasRenderingContext2D; };
 
 typedef SavedCanvasState__canvasRenderTarget = { var canvas:flight._internal.dom.HTMLCanvasElement; var context:flight._internal.dom.CanvasRenderingContext2D; var renderTransform2D:Null<Matrix>; };
 
@@ -261,16 +269,17 @@ typedef CanvasTextLabelData__canvasTextLabel = { @:optional var __symbol__Entity
 @:allow(flight._Scene2DCanvas)
 @:keep
 @:structInit
-private class EntityShapeL25C23__canvasTextLabel extends flight.types.RendererData<Null<Dynamic>> {
+private class EntityShapeL26C15__canvasTextLabel {
   public var lastContentId:Float;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
 
-  private function new(lastContentId:Float, ?__EntityRuntimeKey:Null<Dynamic>):Void {
-    super();
+  private function new(lastContentId:Float):Void {
+    this.__symbol__EntityRuntime = null;
     this.lastContentId = lastContentId;
   }
 }
 #else
-private typedef EntityShapeL25C23__canvasTextLabel = { @:optional var __symbol__EntityRuntime:Null<Dynamic>; var lastContentId:Float; };
+private typedef EntityShapeL26C15__canvasTextLabel = { var lastContentId:Float; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 @:noCompletion
@@ -338,20 +347,20 @@ class _Scene2DCanvas {
 
   public static final defaultCanvasBitmapTextRenderer:SpriteRenderer = (cast { createData: noopRendererData, submit: drawCanvasSpriteText });
 
-  public static function registerCanvasBitmapTextureResolver(resolvers:CanvasTextureResolvers):Void {
-    registerCanvasTextureResolver(({ final __callArgument14:Dynamic = resolvers; __callArgument14; }), (cast BitmapTextureSourceKind : String), (cast _Scene2DCanvas.resolveCanvasBitmapTexture__canvasBitmapTextureResolver : Dynamic));
+  public static function registerCanvasBitmapTextureResolver(host:HasGraphicsImage, resolvers:CanvasTextureResolvers):Void {
+    registerCanvasTextureResolver(({ final __callArgument14:Dynamic = resolvers; __callArgument14; }), (cast BitmapTextureSourceKind : String), (cast function(r:CanvasTextureResolvers, texture:Texture):Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>> return (cast _Scene2DCanvas.resolveCanvasBitmapTexture__canvasBitmapTextureResolver(({ final __callArgument15:Dynamic = host; __callArgument15; }), ({ final __callArgument16:Dynamic = r; __callArgument16; }), ({ final __callArgument17:Dynamic = texture; __callArgument17; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>) : Dynamic));
   }
 
-  public static function resolveCanvasBitmapTexture__canvasBitmapTextureResolver(resolvers:CanvasTextureResolvers, texture:Texture):Null<flight._internal.dom.CanvasImageSource> {
+  public static function resolveCanvasBitmapTexture__canvasBitmapTextureResolver(host:HasGraphicsImage, resolvers:CanvasTextureResolvers, texture:Texture):Null<flight._internal.dom.CanvasImageSource> {
     var bitmap:Null<Bitmap> = cast _Runtime.UNDEFINED;
     var cache:flight._internal._WeakMap<Bitmap, { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }> = cast _Runtime.UNDEFINED;
     var entry:Null<{ var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }> = cast _Runtime.UNDEFINED;
-    bitmap = (cast getTextureSource(({ final __callArgument16:Dynamic = texture; __callArgument16; })) : Null<Bitmap>);
+    bitmap = (cast getTextureSource(({ final __callArgument28:Dynamic = texture; __callArgument28; })) : Null<Bitmap>);
     if ((cast _Runtime.strictEquals(bitmap, null) : Bool)) { return cast null; }
-    cache = ({ final __nullishOwner18 = resolvers; final __nullishValue19:Null<flight._internal._WeakMap<Bitmap, { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }>> = cast (cast __nullishOwner18 : CanvasTextureResolvers).bitmapElementCache; __nullishValue19 == null ? ((cast __nullishOwner18 : CanvasTextureResolvers).bitmapElementCache = (cast _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []) : Null<flight._internal._WeakMap<Bitmap, { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }>>)) : (cast __nullishValue19 : Null<flight._internal._WeakMap<Bitmap, { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }>>); });
+    cache = ({ final __nullishOwner30 = resolvers; final __nullishValue31:Null<flight._internal._WeakMap<Bitmap, { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }>> = cast (cast __nullishOwner30 : CanvasTextureResolvers).bitmapElementCache; __nullishValue31 == null ? ((cast __nullishOwner30 : CanvasTextureResolvers).bitmapElementCache = (cast _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []) : Null<flight._internal._WeakMap<Bitmap, { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }>>)) : (cast __nullishValue31 : Null<flight._internal._WeakMap<Bitmap, { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }>>); });
     entry = ((cast cache : flight._internal._WeakMap<Bitmap, { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }>).get((cast bitmap)));
     if ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals((cast entry : { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }).version, (cast bitmap : { var version:Float; }).version) : Bool)) : Bool)) {
-      var image:Null<ImageResource> = (cast createImageResourceFromBitmap(({ final __callArgument20:Dynamic = bitmap; __callArgument20; })) : Null<ImageResource>);
+      var image:Null<ImageResource> = (cast createImageResourceFromBitmap(({ final __callArgument32:Dynamic = host; __callArgument32; }), ({ final __callArgument33:Dynamic = bitmap; __callArgument33; })) : Null<ImageResource>);
       if ((cast _Runtime.strictEquals(image, null) : Bool)) { return cast null; }
       (entry = cast ({ element: (cast (cast image : ImageResource).source : flight._internal.dom.HTMLCanvasElement), version: (cast bitmap : { var version:Float; }).version } : Dynamic));
       ((cast cache : flight._internal._WeakMap<Bitmap, { var element:flight._internal.dom.HTMLCanvasElement; var version:Float; }>).set((cast bitmap), (cast entry)));
@@ -386,7 +395,7 @@ class _Scene2DCanvas {
   @:keep
   private static function setCanvasCssFilter(state:CanvasRenderState, node:Node2D, filter:Null<String>):Void {
     var renderProxy:RenderProxy2D = cast _Runtime.UNDEFINED;
-    renderProxy = (cast getOrCreateRenderProxy2D(({ final __callArgument22:Dynamic = state; __callArgument22; }), ({ final __callArgument23:Dynamic = node; __callArgument23; })) : RenderProxy2D);
+    renderProxy = (cast getOrCreateRenderProxy2D(({ final __callArgument36:Dynamic = state; __callArgument36; }), ({ final __callArgument37:Dynamic = node; __callArgument37; })) : RenderProxy2D);
     if ((cast _Runtime.strictEquals(filter, null) : Bool)) {
       ((cast _Scene2DCanvas._cssFilterBindings__canvasCSSFilterBinding : flight._internal._WeakMap<RenderProxy2D, String>).delete_((cast renderProxy)));
       return;
@@ -397,15 +406,15 @@ class _Scene2DCanvas {
   public static function createCanvasCacheState(ownerState:CanvasRenderState, surface:CanvasRenderSurface, pipeline:CanvasPipeline, canvasTextureResolvers:CanvasTextureResolvers, ?options:{ @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<flight._internal.dom.ImageSmoothingQuality>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<Scene3DGraphSyncPolicy>; }):CanvasRenderState {
     if (options == null) options = cast ({  } : Dynamic);
     var cacheState:CanvasRenderState = cast _Runtime.UNDEFINED;
-    cacheState = (cast createCanvasOffscreenRenderState(({ final __callArgument26:Dynamic = surface; __callArgument26; }), ({ final __callArgument27:Dynamic = pipeline; __callArgument27; }), ({ final __callArgument28:Dynamic = canvasTextureResolvers; __callArgument28; }), ({ final __callArgument29:Dynamic = options; __callArgument29; })) : CanvasRenderState);
-    registerCanvasRenderStateTeardown(({ final __callArgument34:Dynamic = ownerState; __callArgument34; }), ({ final __callArgument37:Dynamic = function(__unused1:CanvasRenderState):Void { _Runtime.callValue(function(__unused0:CanvasRenderState):Void { destroyCanvasRenderState(({ final __callArgument35:Dynamic = cacheState; __callArgument35; })); }, cast ([] : Array<Dynamic>)); }; __callArgument37; }));
+    cacheState = (cast createCanvasOffscreenRenderState(({ final __callArgument40:Dynamic = surface; __callArgument40; }), ({ final __callArgument41:Dynamic = pipeline; __callArgument41; }), ({ final __callArgument42:Dynamic = canvasTextureResolvers; __callArgument42; }), ({ final __callArgument43:Dynamic = options; __callArgument43; })) : CanvasRenderState);
+    registerCanvasRenderStateTeardown(({ final __callArgument48:Dynamic = ownerState; __callArgument48; }), ({ final __callArgument51:Dynamic = function(__unused1:CanvasRenderState):Void { _Runtime.callValue(function(__unused0:CanvasRenderState):Void { destroyCanvasRenderState(({ final __callArgument49:Dynamic = cacheState; __callArgument49; })); }, cast ([] : Array<Dynamic>)); }; __callArgument51; }));
     return cast cacheState;
     return cast null;
   }
 
   public static function createCanvasOffscreenRenderState(surface:CanvasRenderSurface, pipeline:CanvasPipeline, canvasTextureResolvers:CanvasTextureResolvers, ?options:{ @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<flight._internal.dom.ImageSmoothingQuality>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<Scene3DGraphSyncPolicy>; }):CanvasRenderState {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast (cast createCanvasRenderState(({ final __callArgument42:Dynamic = surface; __callArgument42; }), ({ final __callArgument43:Dynamic = pipeline; __callArgument43; }), ({ final __callArgument44:Dynamic = canvasTextureResolvers; __callArgument44; }), ({ final __callArgument45:Dynamic = options; __callArgument45; })) : CanvasRenderState);
+    return cast (cast createCanvasRenderState(({ final __callArgument56:Dynamic = surface; __callArgument56; }), ({ final __callArgument57:Dynamic = pipeline; __callArgument57; }), ({ final __callArgument58:Dynamic = canvasTextureResolvers; __callArgument58; }), ({ final __callArgument59:Dynamic = options; __callArgument59; })) : CanvasRenderState);
     return cast null;
   }
 
@@ -414,16 +423,16 @@ class _Scene2DCanvas {
   private static function destroyCanvasRenderCacheTarget(state:CanvasRenderState, cache:RenderCache):Void {
     var targets:flight._internal._Map<RenderCache, CanvasRenderTarget> = cast _Runtime.UNDEFINED;
     var target:Null<CanvasRenderTarget> = cast _Runtime.UNDEFINED;
-    targets = (cast _Scene2DCanvas.getTargets__canvasCache(({ final __callArgument50:Dynamic = state; __callArgument50; })) : flight._internal._Map<RenderCache, CanvasRenderTarget>);
+    targets = (cast _Scene2DCanvas.getTargets__canvasCache(({ final __callArgument64:Dynamic = state; __callArgument64; })) : flight._internal._Map<RenderCache, CanvasRenderTarget>);
     target = ((cast targets : flight._internal._Map<RenderCache, CanvasRenderTarget>).get((cast cache)));
     if ((cast !_Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      destroyCanvasRenderTarget(({ final __callArgument52:Dynamic = target; __callArgument52; }));
+      destroyCanvasRenderTarget(({ final __callArgument66:Dynamic = target; __callArgument66; }));
       ((cast targets : flight._internal._Map<RenderCache, CanvasRenderTarget>).delete_((cast cache)));
     }
   }
 
   public static function enableCanvasRenderCache(state:RenderState):Void {
-    registerRenderCacheRenderer(({ final __callArgument54:Dynamic = state; __callArgument54; }), ({ final __callArgument55:Dynamic = defaultCanvasRenderCacheRenderer; __callArgument55; }));
+    registerRenderCacheRenderer(({ final __callArgument68:Dynamic = state; __callArgument68; }), ({ final __callArgument69:Dynamic = defaultCanvasRenderCacheRenderer; __callArgument69; }));
   }
 
   @:allow(flight)
@@ -431,13 +440,13 @@ class _Scene2DCanvas {
   private static function ensureCanvasRenderCacheTarget(state:CanvasRenderState, cache:RenderCache, width:Float, height:Float):CanvasRenderTarget {
     var targets:flight._internal._Map<RenderCache, CanvasRenderTarget> = cast _Runtime.UNDEFINED;
     var target:Null<CanvasRenderTarget> = cast _Runtime.UNDEFINED;
-    targets = (cast _Scene2DCanvas.getTargets__canvasCache(({ final __callArgument58:Dynamic = state; __callArgument58; })) : flight._internal._Map<RenderCache, CanvasRenderTarget>);
+    targets = (cast _Scene2DCanvas.getTargets__canvasCache(({ final __callArgument72:Dynamic = state; __callArgument72; })) : flight._internal._Map<RenderCache, CanvasRenderTarget>);
     target = ((cast targets : flight._internal._Map<RenderCache, CanvasRenderTarget>).get((cast cache)));
     if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (target = cast ((cast createCanvasRenderTarget((cast (cast state : CanvasRenderState).surface : CanvasRenderSurface).creator, (cast width : Float), (cast height : Float)) : CanvasRenderTarget) : Dynamic));
       ((cast targets : flight._internal._Map<RenderCache, CanvasRenderTarget>).set((cast cache), (cast target)));
     } else {
-      resizeCanvasRenderTarget(({ final __callArgument60:Dynamic = target; __callArgument60; }), (cast width : Float), (cast height : Float));
+      resizeCanvasRenderTarget(({ final __callArgument74:Dynamic = target; __callArgument74; }), (cast width : Float), (cast height : Float));
     }
     return cast target;
     return cast null;
@@ -446,7 +455,7 @@ class _Scene2DCanvas {
   @:allow(flight)
   @:keep
   private static function getCanvasRenderCacheTarget(state:CanvasRenderState, cache:RenderCache):Null<CanvasRenderTarget> {
-    return cast _Runtime.coalesce(({ final __collection62:Dynamic = ((cast _Scene2DCanvas._renderCacheTargets__canvasCache : flight._internal._WeakMap<CanvasRenderState, flight._internal._Map<RenderCache, CanvasRenderTarget>>).get((cast state))); __collection62 == null ? _Runtime.UNDEFINED : ((cast __collection62 : flight._internal._Map<RenderCache, CanvasRenderTarget>).get((cast cache))); }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection76:Dynamic = ((cast _Scene2DCanvas._renderCacheTargets__canvasCache : flight._internal._WeakMap<CanvasRenderState, flight._internal._Map<RenderCache, CanvasRenderTarget>>).get((cast state))); __collection76 == null ? _Runtime.UNDEFINED : ((cast __collection76 : flight._internal._Map<RenderCache, CanvasRenderTarget>).get((cast cache))); }), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -462,27 +471,27 @@ class _Scene2DCanvas {
     var target:CanvasRenderTarget = cast _Runtime.UNDEFINED;
     var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
     var dirty:Bool = cast _Runtime.UNDEFINED;
-    padding = _Runtime.coalesce(({ final __typedStruct63 = options; __typedStruct63 == null ? _Runtime.UNDEFINED : __typedStruct63.padding; }), function():Dynamic return cast 0.0);
-    minWidth = _Runtime.coalesce(({ final __typedStruct64 = options; __typedStruct64 == null ? _Runtime.UNDEFINED : __typedStruct64.minWidth; }), function():Dynamic return cast 1.0);
-    minHeight = _Runtime.coalesce(({ final __typedStruct65 = options; __typedStruct65 == null ? _Runtime.UNDEFINED : __typedStruct65.minHeight; }), function():Dynamic return cast 1.0);
-    computeNodeBoundsRectangle(({ final __callArgument66:Dynamic = _Scene2DCanvas._bounds__canvasCache; __callArgument66; }), (cast source : Dynamic), (cast source : Dynamic));
-    __destructure2 = (cast computeRenderTargetSize(({ final __callArgument68:Dynamic = _Scene2DCanvas._targetSize__canvasCache; __callArgument68; }), ({ final __callArgument69:Dynamic = _Scene2DCanvas._bounds__canvasCache; __callArgument69; }), (cast padding : Dynamic), (cast minWidth : Float), (cast minHeight : Float)) : { var width:Float; var height:Float; });
+    padding = _Runtime.coalesce(({ final __typedStruct77 = options; __typedStruct77 == null ? _Runtime.UNDEFINED : __typedStruct77.padding; }), function():Dynamic return cast 0.0);
+    minWidth = _Runtime.coalesce(({ final __typedStruct78 = options; __typedStruct78 == null ? _Runtime.UNDEFINED : __typedStruct78.minWidth; }), function():Dynamic return cast 1.0);
+    minHeight = _Runtime.coalesce(({ final __typedStruct79 = options; __typedStruct79 == null ? _Runtime.UNDEFINED : __typedStruct79.minHeight; }), function():Dynamic return cast 1.0);
+    computeNodeBoundsRectangle(({ final __callArgument80:Dynamic = _Scene2DCanvas._bounds__canvasCache; __callArgument80; }), (cast source : Dynamic), (cast source : Dynamic));
+    __destructure2 = (cast computeRenderTargetSize(({ final __callArgument82:Dynamic = _Scene2DCanvas._targetSize__canvasCache; __callArgument82; }), ({ final __callArgument83:Dynamic = _Scene2DCanvas._bounds__canvasCache; __callArgument83; }), (cast padding : Dynamic), (cast minWidth : Float), (cast minHeight : Float)) : { var width:Float; var height:Float; });
     width = _Runtime.field(__destructure2, 'width');
     height = _Runtime.field(__destructure2, 'height');
-    existing = (cast getCanvasRenderCacheTarget(({ final __callArgument72:Dynamic = ownerState; __callArgument72; }), ({ final __callArgument73:Dynamic = cache; __callArgument73; })) : Null<CanvasRenderTarget>);
+    existing = (cast getCanvasRenderCacheTarget(({ final __callArgument86:Dynamic = ownerState; __callArgument86; }), ({ final __callArgument87:Dynamic = cache; __callArgument87; })) : Null<CanvasRenderTarget>);
     resized = ((cast ((cast _Runtime.strictEquals(existing, null) : Bool) || (cast !_Runtime.strictEquals((cast existing : { var width:Float; }).width, width) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast existing : { var height:Float; }).height, height) : Bool));
-    target = (cast ensureCanvasRenderCacheTarget(({ final __callArgument76:Dynamic = ownerState; __callArgument76; }), ({ final __callArgument77:Dynamic = cache; __callArgument77; }), (cast width : Float), (cast height : Float)) : CanvasRenderTarget);
-    computeScene2DRenderTargetTransform(({ final __callArgument80:Dynamic = _Scene2DCanvas._renderTransform__canvasCache; __callArgument80; }), ({ final __callArgument81:Dynamic = source; __callArgument81; }), ({ final __callArgument82:Dynamic = _Scene2DCanvas._bounds__canvasCache; __callArgument82; }), (cast padding : Float), (cast padding : Float));
-    computeRenderCacheTransform(({ final __callArgument86:Dynamic = (cast cache : RenderCache).transform; __callArgument86; }), ({ final __callArgument87:Dynamic = _Scene2DCanvas._bounds__canvasCache; __callArgument87; }), (cast padding : Float), (cast padding : Float));
-    runtime = (cast getCanvasRenderStateRuntime(({ final __callArgument90:Dynamic = cacheState; __callArgument90; })) : CanvasRenderStateRuntime);
-    setCanvasRenderStateHandles(({ final __callArgument92:Dynamic = cacheState; __callArgument92; }), target.canvas, target.context);
+    target = (cast ensureCanvasRenderCacheTarget(({ final __callArgument90:Dynamic = ownerState; __callArgument90; }), ({ final __callArgument91:Dynamic = cache; __callArgument91; }), (cast width : Float), (cast height : Float)) : CanvasRenderTarget);
+    computeScene2DRenderTargetTransform(({ final __callArgument94:Dynamic = _Scene2DCanvas._renderTransform__canvasCache; __callArgument94; }), ({ final __callArgument95:Dynamic = source; __callArgument95; }), ({ final __callArgument96:Dynamic = _Scene2DCanvas._bounds__canvasCache; __callArgument96; }), (cast padding : Float), (cast padding : Float));
+    computeRenderCacheTransform(({ final __callArgument100:Dynamic = (cast cache : RenderCache).transform; __callArgument100; }), ({ final __callArgument101:Dynamic = _Scene2DCanvas._bounds__canvasCache; __callArgument101; }), (cast padding : Float), (cast padding : Float));
+    runtime = (cast getCanvasRenderStateRuntime(({ final __callArgument104:Dynamic = cacheState; __callArgument104; })) : CanvasRenderStateRuntime);
+    setCanvasRenderStateHandles(({ final __callArgument106:Dynamic = cacheState; __callArgument106; }), target.canvas, target.context);
     flight._internal.backend.Canvas2dBackend.setField((cast cacheState : CanvasRenderState).context, 'imageSmoothingEnabled', runtime.imageSmoothingEnabled);
     flight._internal.backend.Canvas2dBackend.setField((cast cacheState : CanvasRenderState).context, 'imageSmoothingQuality', runtime.imageSmoothingQuality);
-    setCanvasRenderTransform2D(({ final __callArgument94:Dynamic = cacheState; __callArgument94; }), ({ final __callArgument95:Dynamic = _Scene2DCanvas._renderTransform__canvasCache; __callArgument95; }));
-    dirty = (cast prepareScene2DRender(({ final __callArgument98:Dynamic = cacheState; __callArgument98; }), ({ final __callArgument99:Dynamic = source; __callArgument99; })) : Bool);
+    setCanvasRenderTransform2D(({ final __callArgument108:Dynamic = cacheState; __callArgument108; }), ({ final __callArgument109:Dynamic = _Scene2DCanvas._renderTransform__canvasCache; __callArgument109; }));
+    dirty = (cast prepareScene2DRender(({ final __callArgument112:Dynamic = cacheState; __callArgument112; }), ({ final __callArgument113:Dynamic = source; __callArgument113; })) : Bool);
     if ((cast ((cast dirty : Bool) || (cast resized : Bool)) : Bool)) {
       flight._internal.backend.Canvas2dBackend.call((cast cacheState : CanvasRenderState).context, 'clearRect', cast ([0.0, 0.0, flight._internal.backend.CanvasElementBackend.field(target.canvas, 'width'), flight._internal.backend.CanvasElementBackend.field(target.canvas, 'height')] : Array<Dynamic>));
-      renderCanvasScene2D(({ final __callArgument102:Dynamic = cacheState; __callArgument102; }), ({ final __callArgument103:Dynamic = source; __callArgument103; }));
+      renderCanvasScene2D(({ final __callArgument116:Dynamic = cacheState; __callArgument116; }), ({ final __callArgument117:Dynamic = source; __callArgument117; }));
     }
     return cast ((cast dirty : Bool) || (cast resized : Bool));
     return cast null;
@@ -494,9 +503,9 @@ class _Scene2DCanvas {
     var targets:Null<flight._internal._Map<RenderCache, CanvasRenderTarget>> = cast _Runtime.UNDEFINED;
     var target:Null<CanvasRenderTarget> = cast _Runtime.UNDEFINED;
     targets = ((cast _Scene2DCanvas._renderCacheTargets__canvasCache : flight._internal._WeakMap<CanvasRenderState, flight._internal._Map<RenderCache, CanvasRenderTarget>>).get((cast state)));
-    target = ({ final __collection106:Dynamic = targets; __collection106 == null ? _Runtime.UNDEFINED : ((cast __collection106 : flight._internal._Map<RenderCache, CanvasRenderTarget>).get((cast cache))); });
+    target = ({ final __collection120:Dynamic = targets; __collection120 == null ? _Runtime.UNDEFINED : ((cast __collection120 : flight._internal._Map<RenderCache, CanvasRenderTarget>).get((cast cache))); });
     if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    destroyCanvasRenderTarget(({ final __callArgument107:Dynamic = target; __callArgument107; }));
+    destroyCanvasRenderTarget(({ final __callArgument121:Dynamic = target; __callArgument121; }));
     ((cast targets : flight._internal._Map<Dynamic, Dynamic>).delete_((cast cache)));
   }
 
@@ -504,12 +513,12 @@ class _Scene2DCanvas {
     var cache:Null<RenderCache> = cast _Runtime.UNDEFINED;
     var canvasState:CanvasRenderState = cast _Runtime.UNDEFINED;
     var target:Null<CanvasRenderTarget> = cast _Runtime.UNDEFINED;
-    cache = (cast getRenderProxyCache(({ final __callArgument109:Dynamic = state; __callArgument109; }), (cast renderProxy : RenderProxy2D).source) : Null<RenderCache>);
+    cache = (cast getRenderProxyCache(({ final __callArgument123:Dynamic = state; __callArgument123; }), (cast renderProxy : RenderProxy2D).source) : Null<RenderCache>);
     if ((cast _Runtime.strictEquals(cache, null) : Bool)) { return; }
     canvasState = (cast state : CanvasRenderState);
-    target = ((cast (cast _Scene2DCanvas.getTargets__canvasCache(({ final __callArgument113:Dynamic = canvasState; __callArgument113; })) : flight._internal._Map<RenderCache, CanvasRenderTarget>) : flight._internal._Map<RenderCache, CanvasRenderTarget>).get((cast cache)));
+    target = ((cast (cast _Scene2DCanvas.getTargets__canvasCache(({ final __callArgument127:Dynamic = canvasState; __callArgument127; })) : flight._internal._Map<RenderCache, CanvasRenderTarget>) : flight._internal._Map<RenderCache, CanvasRenderTarget>).get((cast cache)));
     if ((cast _Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    setCanvasTransform(({ final __callArgument115:Dynamic = canvasState; __callArgument115; }), (cast canvasState : CanvasRenderState).context, (cast renderProxy : RenderProxy2D).transform2D);
+    setCanvasTransform(({ final __callArgument129:Dynamic = canvasState; __callArgument129; }), (cast canvasState : CanvasRenderState).context, (cast renderProxy : RenderProxy2D).transform2D);
     flight._internal.backend.Canvas2dBackend.call((cast canvasState : CanvasRenderState).context, 'drawImage', cast ([(cast target : { var canvas:flight._internal.dom.HTMLCanvasElement; }).canvas, 0.0, 0.0] : Array<Dynamic>));
   }
 
@@ -519,7 +528,7 @@ class _Scene2DCanvas {
     if ((cast _Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (targets = cast (_Runtime.construct(flight._internal._HostValueLut.get('Map'), []) : Dynamic));
       ((cast _Scene2DCanvas._renderCacheTargets__canvasCache : flight._internal._WeakMap<CanvasRenderState, flight._internal._Map<RenderCache, CanvasRenderTarget>>).set((cast state), (cast targets)));
-      registerCanvasRenderStateTeardown(({ final __callArgument117:Dynamic = state; __callArgument117; }), ({ final __callArgument118:Dynamic = _Scene2DCanvas.destroyOwnedCanvasRenderCacheTargets__canvasCache; __callArgument118; }));
+      registerCanvasRenderStateTeardown(({ final __callArgument131:Dynamic = state; __callArgument131; }), ({ final __callArgument132:Dynamic = _Scene2DCanvas.destroyOwnedCanvasRenderCacheTargets__canvasCache; __callArgument132; }));
     }
     return cast targets;
     return cast null;
@@ -530,7 +539,7 @@ class _Scene2DCanvas {
     targets = ((cast _Scene2DCanvas._renderCacheTargets__canvasCache : flight._internal._WeakMap<CanvasRenderState, flight._internal._Map<RenderCache, CanvasRenderTarget>>).get((cast state)));
     if ((cast _Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     for (target in _Runtime.iterable(((cast targets : flight._internal._Map<RenderCache, CanvasRenderTarget>).values()))) {
-      destroyCanvasRenderTarget(({ final __callArgument123:Dynamic = target; __callArgument123; }));
+      destroyCanvasRenderTarget(({ final __callArgument137:Dynamic = target; __callArgument137; }));
     }
     ((cast targets : flight._internal._Map<RenderCache, CanvasRenderTarget>).clear());
     ((cast _Scene2DCanvas._renderCacheTargets__canvasCache : flight._internal._WeakMap<CanvasRenderState, flight._internal._Map<RenderCache, CanvasRenderTarget>>).delete_((cast state)));
@@ -556,7 +565,7 @@ class _Scene2DCanvas {
     var s:CanvasRenderState = cast _Runtime.UNDEFINED;
     s = (cast state : CanvasRenderState);
     while ((cast ((cast (cast s : CanvasRenderState).currentClipDepth : Float) > (cast 0.0 : Float)) : Bool)) {
-      popCanvasClipRectangle(({ final __callArgument125:Dynamic = s; __callArgument125; }));
+      popCanvasClipRectangle(({ final __callArgument139:Dynamic = s; __callArgument139; }));
       (cast s : CanvasRenderState).currentClipDepth--;
     }
   }, popClip: function(state:RenderState, data:RenderProxy2D, source:Node2D):Void {
@@ -565,7 +574,7 @@ class _Scene2DCanvas {
     s = (cast state : CanvasRenderState);
     target = _Runtime.subtractNumbers((cast data : RenderProxy2D).clipDepth, ((cast !_Runtime.looseEquals((cast source : { var clip:Null<ClipRegion>; }).clip, null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
     while ((cast ((cast (cast s : CanvasRenderState).currentClipDepth : Float) > (cast target : Float)) : Bool)) {
-      popCanvasClipRectangle(({ final __callArgument127:Dynamic = s; __callArgument127; }));
+      popCanvasClipRectangle(({ final __callArgument141:Dynamic = s; __callArgument141; }));
       (cast s : CanvasRenderState).currentClipDepth--;
     }
   }, pushClip: function(state:RenderState, data:RenderProxy2D, source:Node2D):Void {
@@ -575,9 +584,9 @@ class _Scene2DCanvas {
     clip = (cast source : { var clip:Null<ClipRegion>; }).clip;
     if ((cast _Runtime.strictEquals(clip, null) : Bool)) { return; }
     if ((cast _Runtime.strictEquals((cast clip : { var contours:Null<Array<Array<Float>>>; }).contours, null) : Bool)) {
-      pushCanvasClipRectangle(({ final __callArgument129:Dynamic = s; __callArgument129; }), ({ final __callArgument130:Dynamic = (cast clip : { var rect:Rectangle; }).rect; __callArgument130; }), (cast data : RenderProxy2D).transform2D);
+      pushCanvasClipRectangle(({ final __callArgument143:Dynamic = s; __callArgument143; }), ({ final __callArgument144:Dynamic = (cast clip : { var rect:Rectangle; }).rect; __callArgument144; }), (cast data : RenderProxy2D).transform2D);
     } else {
-      pushCanvasClipContours(({ final __callArgument133:Dynamic = s; __callArgument133; }), (cast clip : { var contours:Null<Array<Array<Float>>>; }).contours, (cast clip : { var winding:PathWinding; }).winding, (cast data : RenderProxy2D).transform2D);
+      pushCanvasClipContours(({ final __callArgument147:Dynamic = s; __callArgument147; }), (cast clip : { var contours:Null<Array<Array<Float>>>; }).contours, (cast clip : { var winding:PathWinding; }).winding, (cast data : RenderProxy2D).transform2D);
     }
     (cast s : CanvasRenderState).currentClipDepth++;
   } });
@@ -592,7 +601,7 @@ class _Scene2DCanvas {
   @:keep
   private static function pushCanvasClipContours(state:CanvasRenderState, contours:Array<Array<Float>>, winding:PathWinding, transform:Matrix):Void {
     flight._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'save', cast ([] : Array<Dynamic>));
-    setCanvasTransform(({ final __callArgument135:Dynamic = state; __callArgument135; }), (cast state : CanvasRenderState).context, ({ final __callArgument136:Dynamic = transform; __callArgument136; }));
+    setCanvasTransform(({ final __callArgument149:Dynamic = state; __callArgument149; }), (cast state : CanvasRenderState).context, ({ final __callArgument150:Dynamic = transform; __callArgument150; }));
     flight._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'beginPath', cast ([] : Array<Dynamic>));
     {
       var c:Float = 0.0;
@@ -618,7 +627,7 @@ class _Scene2DCanvas {
   @:keep
   private static function pushCanvasClipRectangle(state:CanvasRenderState, rect:RectangleLike, transform:Matrix):Void {
     flight._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'save', cast ([] : Array<Dynamic>));
-    setCanvasTransform(({ final __callArgument139:Dynamic = state; __callArgument139; }), (cast state : CanvasRenderState).context, ({ final __callArgument140:Dynamic = transform; __callArgument140; }));
+    setCanvasTransform(({ final __callArgument153:Dynamic = state; __callArgument153; }), (cast state : CanvasRenderState).context, ({ final __callArgument154:Dynamic = transform; __callArgument154; }));
     flight._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'beginPath', cast ([] : Array<Dynamic>));
     flight._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'rect', cast ([rect.x, rect.y, rect.width, rect.height] : Array<Dynamic>));
     flight._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'clip', cast ([] : Array<Dynamic>));
@@ -639,11 +648,11 @@ class _Scene2DCanvas {
   private static function createBitmapPattern(context:flight._internal.dom.CanvasRenderingContext2D, texture:Texture, resolvers:CanvasTextureResolvers, allowSmoothing:Bool = true):Null<flight._internal.dom.CanvasPattern> {
     var source:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>> = cast _Runtime.UNDEFINED;
     var smooth:Bool = cast _Runtime.UNDEFINED;
-    source = (cast resolveCanvasTextureWindowSource(({ final __callArgument143:Dynamic = resolvers; __callArgument143; }), ({ final __callArgument144:Dynamic = texture; __callArgument144; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>);
+    source = (cast resolveCanvasTextureWindowSource(({ final __callArgument157:Dynamic = resolvers; __callArgument157; }), ({ final __callArgument158:Dynamic = texture; __callArgument158; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(source, null) : Bool)) { return cast null; }
     smooth = ((cast allowSmoothing : Bool) && (cast !(cast StringTools.startsWith((cast (cast texture : { var sampler:Sampler; }).sampler : { var magFilter:TextureFilter; }).magFilter, 'nearest') : Bool) : Bool));
-    _Scene2DCanvas.setSmoothing__canvasFillPattern(({ final __callArgument147:Dynamic = context; __callArgument147; }), (cast smooth : Bool));
-    return cast flight._internal.backend.Canvas2dBackend.call(context, 'createPattern', cast ([source, (cast _Scene2DCanvas.getCanvasPatternRepetition__canvasFillPattern(({ final __callArgument149:Dynamic = texture; __callArgument149; })) : String)] : Array<Dynamic>));
+    _Scene2DCanvas.setSmoothing__canvasFillPattern(({ final __callArgument161:Dynamic = context; __callArgument161; }), (cast smooth : Bool));
+    return cast flight._internal.backend.Canvas2dBackend.call(context, 'createPattern', cast ([source, (cast _Scene2DCanvas.getCanvasPatternRepetition__canvasFillPattern(({ final __callArgument163:Dynamic = texture; __callArgument163; })) : String)] : Array<Dynamic>));
     return cast null;
   }
 
@@ -653,9 +662,9 @@ class _Scene2DCanvas {
     var mat:Matrix = cast _Runtime.UNDEFINED;
     mat = _Runtime.coalesce(m, function():Dynamic return cast _Scene2DCanvas.IDENTITY__canvasFillPattern);
     if ((cast _Runtime.strictEquals(gradientType, 'radial') : Bool)) {
-      return cast (cast _Scene2DCanvas.createRadialGradient__canvasFillPattern(({ final __callArgument151:Dynamic = context; __callArgument151; }), ({ final __callArgument152:Dynamic = colors; __callArgument152; }), ({ final __callArgument153:Dynamic = alphas; __callArgument153; }), ({ final __callArgument154:Dynamic = ratios; __callArgument154; }), ({ final __callArgument155:Dynamic = mat; __callArgument155; }), (cast focalPointRatio : Float)) : flight._internal.dom.CanvasGradient);
+      return cast (cast _Scene2DCanvas.createRadialGradient__canvasFillPattern(({ final __callArgument165:Dynamic = context; __callArgument165; }), ({ final __callArgument166:Dynamic = colors; __callArgument166; }), ({ final __callArgument167:Dynamic = alphas; __callArgument167; }), ({ final __callArgument168:Dynamic = ratios; __callArgument168; }), ({ final __callArgument169:Dynamic = mat; __callArgument169; }), (cast focalPointRatio : Float)) : flight._internal.dom.CanvasGradient);
     }
-    return cast (cast _Scene2DCanvas.createLinearGradient__canvasFillPattern(({ final __callArgument161:Dynamic = context; __callArgument161; }), ({ final __callArgument162:Dynamic = resolvers; __callArgument162; }), ({ final __callArgument163:Dynamic = colors; __callArgument163; }), ({ final __callArgument164:Dynamic = alphas; __callArgument164; }), ({ final __callArgument165:Dynamic = ratios; __callArgument165; }), ({ final __callArgument166:Dynamic = mat; __callArgument166; }), ({ final __callArgument167:Dynamic = spreadMethod; __callArgument167; })) : Null<flight._internal._Union2<flight._internal.dom.CanvasGradient, flight._internal.dom.CanvasPattern>>);
+    return cast (cast _Scene2DCanvas.createLinearGradient__canvasFillPattern(({ final __callArgument175:Dynamic = context; __callArgument175; }), ({ final __callArgument176:Dynamic = resolvers; __callArgument176; }), ({ final __callArgument177:Dynamic = colors; __callArgument177; }), ({ final __callArgument178:Dynamic = alphas; __callArgument178; }), ({ final __callArgument179:Dynamic = ratios; __callArgument179; }), ({ final __callArgument180:Dynamic = mat; __callArgument180; }), ({ final __callArgument181:Dynamic = spreadMethod; __callArgument181; })) : Null<flight._internal._Union2<flight._internal.dom.CanvasGradient, flight._internal.dom.CanvasPattern>>);
     return cast null;
   }
 
@@ -693,20 +702,20 @@ class _Scene2DCanvas {
     var radius:Float = cast _Runtime.UNDEFINED;
     var gradient:flight._internal.dom.CanvasGradient = cast _Runtime.UNDEFINED;
     clampedFocal = HxMath.max(-1.0, HxMath.min(1.0, focalPointRatio));
-    __destructure0 = (cast _Scene2DCanvas.tp__canvasFillPattern(({ final __callArgument175:Dynamic = m; __callArgument175; }), (cast (clampedFocal * _Scene2DCanvas.GRADIENT_HALF__canvasFillPattern) : Float), (cast 0.0 : Float)) : Array<Float>);
+    __destructure0 = (cast _Scene2DCanvas.tp__canvasFillPattern(({ final __callArgument189:Dynamic = m; __callArgument189; }), (cast (clampedFocal * _Scene2DCanvas.GRADIENT_HALF__canvasFillPattern) : Float), (cast 0.0 : Float)) : Array<Float>);
     fx = flight._internal._StaticIndex.readArray(__destructure0, 0.0);
     fy = flight._internal._StaticIndex.readArray(__destructure0, 1.0);
-    __destructure1 = (cast _Scene2DCanvas.tp__canvasFillPattern(({ final __callArgument177:Dynamic = m; __callArgument177; }), (cast 0.0 : Float), (cast 0.0 : Float)) : Array<Float>);
+    __destructure1 = (cast _Scene2DCanvas.tp__canvasFillPattern(({ final __callArgument191:Dynamic = m; __callArgument191; }), (cast 0.0 : Float), (cast 0.0 : Float)) : Array<Float>);
     cx = flight._internal._StaticIndex.readArray(__destructure1, 0.0);
     cy = flight._internal._StaticIndex.readArray(__destructure1, 1.0);
-    __destructure2 = (cast _Scene2DCanvas.tp__canvasFillPattern(({ final __callArgument179:Dynamic = m; __callArgument179; }), (cast _Scene2DCanvas.GRADIENT_HALF__canvasFillPattern : Float), (cast 0.0 : Float)) : Array<Float>);
+    __destructure2 = (cast _Scene2DCanvas.tp__canvasFillPattern(({ final __callArgument193:Dynamic = m; __callArgument193; }), (cast _Scene2DCanvas.GRADIENT_HALF__canvasFillPattern : Float), (cast 0.0 : Float)) : Array<Float>);
     ex = flight._internal._StaticIndex.readArray(__destructure2, 0.0);
     ey = flight._internal._StaticIndex.readArray(__destructure2, 1.0);
     dx = (ex - cx);
     dy = (ey - cy);
     radius = HxMath.sqrt(((dx * dx) + (dy * dy)));
     gradient = flight._internal.backend.Canvas2dBackend.call(context, 'createRadialGradient', cast ([fx, fy, 0.0, cx, cy, radius] : Array<Dynamic>));
-    _Scene2DCanvas.addColorStops__canvasFillPattern(({ final __callArgument181:Dynamic = gradient; __callArgument181; }), ({ final __callArgument182:Dynamic = colors; __callArgument182; }), ({ final __callArgument183:Dynamic = alphas; __callArgument183; }), ({ final __callArgument184:Dynamic = ratios; __callArgument184; }));
+    _Scene2DCanvas.addColorStops__canvasFillPattern(({ final __callArgument195:Dynamic = gradient; __callArgument195; }), ({ final __callArgument196:Dynamic = colors; __callArgument196; }), ({ final __callArgument197:Dynamic = alphas; __callArgument197; }), ({ final __callArgument198:Dynamic = ratios; __callArgument198; }));
     return cast gradient;
     return cast null;
   }
@@ -727,27 +736,27 @@ class _Scene2DCanvas {
     var octx:flight._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
     var tiledGradient:flight._internal.dom.CanvasGradient = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(spreadMethod, 'pad') : Bool)) {
-      var __destructure3 = (cast _Scene2DCanvas.tp__canvasFillPattern(({ final __callArgument189:Dynamic = m; __callArgument189; }), (cast -_Scene2DCanvas.GRADIENT_HALF__canvasFillPattern : Float), (cast 0.0 : Float)) : Array<Float>);
+      var __destructure3 = (cast _Scene2DCanvas.tp__canvasFillPattern(({ final __callArgument203:Dynamic = m; __callArgument203; }), (cast -_Scene2DCanvas.GRADIENT_HALF__canvasFillPattern : Float), (cast 0.0 : Float)) : Array<Float>);
       var x1:Float = flight._internal._StaticIndex.readArray(__destructure3, 0.0);
       var y1:Float = flight._internal._StaticIndex.readArray(__destructure3, 1.0);
-      var __destructure4 = (cast _Scene2DCanvas.tp__canvasFillPattern(({ final __callArgument191:Dynamic = m; __callArgument191; }), (cast _Scene2DCanvas.GRADIENT_HALF__canvasFillPattern : Float), (cast 0.0 : Float)) : Array<Float>);
+      var __destructure4 = (cast _Scene2DCanvas.tp__canvasFillPattern(({ final __callArgument205:Dynamic = m; __callArgument205; }), (cast _Scene2DCanvas.GRADIENT_HALF__canvasFillPattern : Float), (cast 0.0 : Float)) : Array<Float>);
       var x2:Float = flight._internal._StaticIndex.readArray(__destructure4, 0.0);
       var y2:Float = flight._internal._StaticIndex.readArray(__destructure4, 1.0);
       var gradient:flight._internal.dom.CanvasGradient = flight._internal.backend.Canvas2dBackend.call(context, 'createLinearGradient', cast ([x1, y1, x2, y2] : Array<Dynamic>));
-      _Scene2DCanvas.addColorStops__canvasFillPattern(({ final __callArgument193:Dynamic = gradient; __callArgument193; }), ({ final __callArgument194:Dynamic = colors; __callArgument194; }), ({ final __callArgument195:Dynamic = alphas; __callArgument195; }), ({ final __callArgument196:Dynamic = ratios; __callArgument196; }));
+      _Scene2DCanvas.addColorStops__canvasFillPattern(({ final __callArgument207:Dynamic = gradient; __callArgument207; }), ({ final __callArgument208:Dynamic = colors; __callArgument208; }), ({ final __callArgument209:Dynamic = alphas; __callArgument209; }), ({ final __callArgument210:Dynamic = ratios; __callArgument210; }));
       return cast gradient;
     }
     STEPS = 25.0;
     step = (1.0 / STEPS);
-    __destructure5 = (cast _Scene2DCanvas.tp__canvasFillPattern(({ final __callArgument201:Dynamic = m; __callArgument201; }), (cast -_Scene2DCanvas.GRADIENT_HALF__canvasFillPattern : Float), (cast 0.0 : Float)) : Array<Float>);
+    __destructure5 = (cast _Scene2DCanvas.tp__canvasFillPattern(({ final __callArgument215:Dynamic = m; __callArgument215; }), (cast -_Scene2DCanvas.GRADIENT_HALF__canvasFillPattern : Float), (cast 0.0 : Float)) : Array<Float>);
     x1 = flight._internal._StaticIndex.readArray(__destructure5, 0.0);
     y1 = flight._internal._StaticIndex.readArray(__destructure5, 1.0);
-    __destructure6 = (cast _Scene2DCanvas.tp__canvasFillPattern(({ final __callArgument203:Dynamic = m; __callArgument203; }), (cast _Scene2DCanvas.GRADIENT_HALF__canvasFillPattern : Float), (cast 0.0 : Float)) : Array<Float>);
+    __destructure6 = (cast _Scene2DCanvas.tp__canvasFillPattern(({ final __callArgument217:Dynamic = m; __callArgument217; }), (cast _Scene2DCanvas.GRADIENT_HALF__canvasFillPattern : Float), (cast 0.0 : Float)) : Array<Float>);
     x2 = flight._internal._StaticIndex.readArray(__destructure6, 0.0);
     y2 = flight._internal._StaticIndex.readArray(__destructure6, 1.0);
     dx = (x2 - x1);
     dy = (y2 - y1);
-    surface = (cast acquireCanvasTextureResolverSurface(({ final __callArgument205:Dynamic = resolvers; __callArgument205; }), ({ final __callArgument206:Dynamic = { height: flight._internal.backend.CanvasElementBackend.field(flight._internal.backend.Canvas2dBackend.field(context, 'canvas'), 'height'), pixelRatio: 1.0, width: flight._internal.backend.CanvasElementBackend.field(flight._internal.backend.Canvas2dBackend.field(context, 'canvas'), 'width') }; __callArgument206; })) : Null<CanvasRenderSurface>);
+    surface = (cast acquireCanvasTextureResolverSurface(({ final __callArgument219:Dynamic = resolvers; __callArgument219; }), ({ final __callArgument220:Dynamic = { height: flight._internal.backend.CanvasElementBackend.field(flight._internal.backend.Canvas2dBackend.field(context, 'canvas'), 'height'), pixelRatio: 1.0, width: flight._internal.backend.CanvasElementBackend.field(flight._internal.backend.Canvas2dBackend.field(context, 'canvas'), 'width') }; __callArgument220; })) : Null<CanvasRenderSurface>);
     if ((cast _Runtime.strictEquals(surface, null) : Bool)) { return cast null; }
     offscreen = (cast surface : CanvasRenderSurface).canvas;
     octx = (cast surface : CanvasRenderSurface).context;
@@ -837,11 +846,11 @@ class _Scene2DCanvas {
   }
 
   public static function registerCanvasImageTextureResolver(resolvers:CanvasTextureResolvers):Void {
-    registerCanvasTextureResolver(({ final __callArgument209:Dynamic = resolvers; __callArgument209; }), (cast ImageTextureSourceKind : String), (cast _Scene2DCanvas.resolveCanvasImageTexture__canvasImageTextureResolver : Dynamic));
+    registerCanvasTextureResolver(({ final __callArgument223:Dynamic = resolvers; __callArgument223; }), (cast ImageTextureSourceKind : String), (cast _Scene2DCanvas.resolveCanvasImageTexture__canvasImageTextureResolver : Dynamic));
   }
 
   public static function resolveCanvasImageTexture__canvasImageTextureResolver(_resolvers:CanvasTextureResolvers, texture:Texture):Null<flight._internal.dom.CanvasImageSource> {
-    return cast _Runtime.coalesce(({ final __structural213 = (cast getTextureSource(({ final __callArgument211:Dynamic = texture; __callArgument211; })) : Null<ImageResource>); __structural213 == null ? _Runtime.UNDEFINED : (cast __structural213 : { var source:flight._internal._Any; }).source; }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __structural227 = (cast getTextureSource(({ final __callArgument225:Dynamic = texture; __callArgument225; })) : Null<ImageResource>); __structural227 == null ? _Runtime.UNDEFINED : (cast __structural227 : { var source:flight._internal._Any; }).source; }), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -852,9 +861,9 @@ class _Scene2DCanvas {
     var drawState:CanvasMaterialState = cast _Runtime.UNDEFINED;
     var context:flight._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(material, null) : Bool)) { return cast false; }
-    renderer = (cast resolveCanvasMaterialRenderer(({ final __callArgument214:Dynamic = state; __callArgument214; }), ({ final __callArgument215:Dynamic = material; __callArgument215; })) : Null<CanvasMaterialRenderer>);
+    renderer = (cast resolveCanvasMaterialRenderer(({ final __callArgument228:Dynamic = state; __callArgument228; }), ({ final __callArgument229:Dynamic = material; __callArgument229; })) : Null<CanvasMaterialRenderer>);
     if ((cast _Runtime.strictEquals(renderer, null) : Bool)) { return cast false; }
-    drawState = (cast renderer : CanvasMaterialRenderer).getState(({ final __callArgument218:Dynamic = material; __callArgument218; }));
+    drawState = (cast renderer : CanvasMaterialRenderer).getState(({ final __callArgument232:Dynamic = material; __callArgument232; }));
     context = (cast state : CanvasRenderState).context;
     flight._internal.backend.Canvas2dBackend.call(context, 'save', cast ([] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals((cast drawState : CanvasMaterialState).composite, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal.backend.Canvas2dBackend.setField(context, 'globalCompositeOperation', (cast drawState : CanvasMaterialState).composite); }
@@ -867,8 +876,8 @@ class _Scene2DCanvas {
   @:keep
   private static function getCanvasMaterialRenderer(state:CanvasRenderState, kind:Kind):Null<CanvasMaterialRenderer> {
     var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:CanvasMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
-    entry = ({ final __collection225:Dynamic = ({ final __structural224 = (cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument222:Dynamic = state; __callArgument222; })) : CanvasRenderStateRuntime) : { var registries:CanvasRenderRegistries; }).registries : CanvasRenderRegistries).materialRenderers; __structural224 == null ? _Runtime.UNDEFINED : (cast __structural224 : { var entries:flight._internal._Map<String, RegistryTableEntry<CanvasMaterialRenderer>>; }).entries; }); __collection225 == null ? _Runtime.UNDEFINED : ((cast __collection225 : flight._internal._Map<String, RegistryTableEntry<CanvasMaterialRenderer>>).get((cast kind))); });
-    return cast ((cast _Runtime.strictEquals(({ final __structural226 = entry; __structural226 == null ? _Runtime.UNDEFINED : (cast __structural226 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:CanvasMaterialRenderer; }).value : Dynamic) : (cast null : Dynamic));
+    entry = ({ final __collection239:Dynamic = ({ final __structural238 = (cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument236:Dynamic = state; __callArgument236; })) : CanvasRenderStateRuntime) : { var registries:CanvasRenderRegistries; }).registries : CanvasRenderRegistries).materialRenderers; __structural238 == null ? _Runtime.UNDEFINED : (cast __structural238 : { var entries:flight._internal._Map<String, RegistryTableEntry<CanvasMaterialRenderer>>; }).entries; }); __collection239 == null ? _Runtime.UNDEFINED : ((cast __collection239 : flight._internal._Map<String, RegistryTableEntry<CanvasMaterialRenderer>>).get((cast kind))); });
+    return cast ((cast _Runtime.strictEquals(({ final __structural240 = entry; __structural240 == null ? _Runtime.UNDEFINED : (cast __structural240 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:CanvasMaterialRenderer; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
@@ -877,9 +886,9 @@ class _Scene2DCanvas {
   private static function registerCanvasMaterialRenderer(state:CanvasRenderState, kind:Kind, renderer:CanvasMaterialRenderer):Void {
     var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
     var table:KeyedTable<CanvasMaterialRenderer> = cast _Runtime.UNDEFINED;
-    runtime = (cast getCanvasRenderStateRuntime(({ final __callArgument227:Dynamic = state; __callArgument227; })) : CanvasRenderStateRuntime);
-    table = _Runtime.coalesce((cast runtime.registries : CanvasRenderRegistries).materialRenderers, function():Dynamic return cast (cast createKeyedTable((cast 'CanvasMaterialRenderer' : String), (cast 'StandardMaterial' : String)) : KeyedTable<CanvasMaterialRenderer>));
-    ((cast runtime.registries : CanvasRenderRegistries).materialRenderers = (cast withRegistryTableEntry((cast table : Dynamic), (cast kind : String), ({ final __callArgument229:Dynamic = renderer; __callArgument229; })) : KeyedTable<CanvasMaterialRenderer>));
+    runtime = (cast getCanvasRenderStateRuntime(({ final __callArgument241:Dynamic = state; __callArgument241; })) : CanvasRenderStateRuntime);
+    table = _Runtime.coalesce((cast runtime.registries : CanvasRenderRegistries).materialRenderers, function():Dynamic return cast (cast createKeyedTable((cast 'CanvasMaterialRenderer' : String), (cast 'StandardMaterial' : String)) : { >KeyedTable<CanvasMaterialRenderer>, >Entity, }));
+    ((cast runtime.registries : CanvasRenderRegistries).materialRenderers = (cast withRegistryTableEntry((cast table : Dynamic), (cast kind : String), ({ final __callArgument243:Dynamic = renderer; __callArgument243; })) : { >KeyedTable<CanvasMaterialRenderer>, >Entity, }));
   }
 
   @:allow(flight)
@@ -887,14 +896,14 @@ class _Scene2DCanvas {
   private static function resolveCanvasMaterialRenderer(state:CanvasRenderState, material:Null<Material>):Null<CanvasMaterialRenderer> {
     var entries:Null<flight._internal._Map<String, RegistryTableEntry<CanvasMaterialRenderer>>> = cast _Runtime.UNDEFINED;
     var fallback:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:CanvasMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
-    entries = ({ final __structural233 = (cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument231:Dynamic = state; __callArgument231; })) : CanvasRenderStateRuntime) : { var registries:CanvasRenderRegistries; }).registries : CanvasRenderRegistries).materialRenderers; __structural233 == null ? _Runtime.UNDEFINED : (cast __structural233 : { var entries:flight._internal._Map<String, RegistryTableEntry<CanvasMaterialRenderer>>; }).entries; });
+    entries = ({ final __structural247 = (cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument245:Dynamic = state; __callArgument245; })) : CanvasRenderStateRuntime) : { var registries:CanvasRenderRegistries; }).registries : CanvasRenderRegistries).materialRenderers; __structural247 == null ? _Runtime.UNDEFINED : (cast __structural247 : { var entries:flight._internal._Map<String, RegistryTableEntry<CanvasMaterialRenderer>>; }).entries; });
     if ((cast _Runtime.strictEquals(entries, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
     if ((cast !_Runtime.strictEquals(material, null) : Bool)) {
       var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:CanvasMaterialRenderer; }>> = ((cast entries : flight._internal._Map<String, RegistryTableEntry<CanvasMaterialRenderer>>).get((cast (cast material : Material).kind)));
-      if ((cast _Runtime.strictEquals(({ final __structural234 = entry; __structural234 == null ? _Runtime.UNDEFINED : (cast __structural234 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) { return cast (cast entry : { var state:String; var value:CanvasMaterialRenderer; }).value; }
+      if ((cast _Runtime.strictEquals(({ final __structural248 = entry; __structural248 == null ? _Runtime.UNDEFINED : (cast __structural248 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) { return cast (cast entry : { var state:String; var value:CanvasMaterialRenderer; }).value; }
     }
     fallback = ((cast entries : flight._internal._Map<String, RegistryTableEntry<CanvasMaterialRenderer>>).get((cast StandardMaterialKindValue)));
-    return cast ((cast _Runtime.strictEquals(({ final __structural235 = fallback; __structural235 == null ? _Runtime.UNDEFINED : (cast __structural235 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast fallback : { var state:String; var value:CanvasMaterialRenderer; }).value : Dynamic) : (cast null : Dynamic));
+    return cast ((cast _Runtime.strictEquals(({ final __structural249 = fallback; __structural249 == null ? _Runtime.UNDEFINED : (cast __structural249 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast fallback : { var state:String; var value:CanvasMaterialRenderer; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
@@ -904,7 +913,7 @@ class _Scene2DCanvas {
   @:keep
   private static function applyCanvasBlendMode(state:CanvasRenderState, value:Null<BlendMode>):Void {
     var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getCanvasRenderStateRuntime(({ final __callArgument236:Dynamic = state; __callArgument236; })) : CanvasRenderStateRuntime);
+    runtime = (cast getCanvasRenderStateRuntime(({ final __callArgument250:Dynamic = state; __callArgument250; })) : CanvasRenderStateRuntime);
     if ((cast _Runtime.strictEquals(value, runtime.currentBlendMode) : Bool)) { return; }
     (runtime.currentBlendMode = cast (value : Null<String>));
     flight._internal.backend.Canvas2dBackend.setField((cast state : CanvasRenderState).context, 'globalCompositeOperation', _Runtime.coalesce(((cast !_Runtime.strictEquals(value, null) : Bool) ? (cast _Runtime.getIndex(_Scene2DCanvas.CANVAS_BLEND_MODE__canvasMaterials, value) : Dynamic) : (cast null : Dynamic)), function():Dynamic return cast 'source-over'));
@@ -927,24 +936,24 @@ class _Scene2DCanvas {
     var tempStack:Array<Renderable> = cast _Runtime.UNDEFINED;
     var clipHooks:Null<Scene2DClipHooks> = cast _Runtime.UNDEFINED;
     var stackLength:Float = cast _Runtime.UNDEFINED;
-    tempStack = (cast (cast getCanvasRenderStateRuntime(({ final __callArgument238:Dynamic = state; __callArgument238; })) : CanvasRenderStateRuntime) : { var tempStack:Array<Renderable>; }).tempStack;
+    tempStack = (cast (cast getCanvasRenderStateRuntime(({ final __callArgument252:Dynamic = state; __callArgument252; })) : CanvasRenderStateRuntime) : { var tempStack:Array<Renderable>; }).tempStack;
     clipHooks = (cast state : CanvasRenderState).displayObjectClipHooks;
     stackLength = 1.0;
     flight._internal._StaticIndex.writeArray(tempStack, 0.0, source);
     while ((cast ((cast stackLength : Float) > (cast 0.0 : Float)) : Bool)) {
       var current:Node2D = (cast flight._internal._StaticIndex.readArray(tempStack, --stackLength) : Node2D);
       if ((cast !(cast (cast current : { var enabled:Bool; }).enabled : Bool) : Bool)) { continue; }
-      var data:Null<RenderProxy2D> = (cast getRenderProxy2D(({ final __callArgument240:Dynamic = state; __callArgument240; }), ({ final __callArgument241:Dynamic = current; __callArgument241; })) : Null<RenderProxy2D>);
+      var data:Null<RenderProxy2D> = (cast getRenderProxy2D(({ final __callArgument254:Dynamic = state; __callArgument254; }), ({ final __callArgument255:Dynamic = current; __callArgument255; })) : Null<RenderProxy2D>);
       if ((cast _Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
-      ({ final __optionalOwner248 = clipHooks; if (__optionalOwner248 != null) { final __optionalCall247 = (cast __optionalOwner248 : { var popClip:RenderState->RenderProxy2D->Node2D->Void; }).popClip; if (__optionalCall247 != null) __optionalCall247(({ final __callArgument244:Dynamic = state; __callArgument244; }), ({ final __callArgument245:Dynamic = data; __callArgument245; }), ({ final __callArgument246:Dynamic = current; __callArgument246; })); } });
-      if ((cast !(cast (cast isRenderProxyVisible(({ final __callArgument249:Dynamic = data; __callArgument249; })) : Bool) : Bool) : Bool)) { continue; }
-      ({ final __optionalOwner255 = clipHooks; if (__optionalOwner255 != null) { final __optionalCall254 = (cast __optionalOwner255 : { var pushClip:RenderState->RenderProxy2D->Node2D->Void; }).pushClip; if (__optionalCall254 != null) __optionalCall254(({ final __callArgument251:Dynamic = state; __callArgument251; }), ({ final __callArgument252:Dynamic = data; __callArgument252; }), ({ final __callArgument253:Dynamic = current; __callArgument253; })); } });
-      var filter:Null<String> = (cast resolveCanvasCssFilter(({ final __callArgument256:Dynamic = state; __callArgument256; }), ({ final __callArgument257:Dynamic = data; __callArgument257; })) : Null<String>);
+      ({ final __optionalOwner262 = clipHooks; if (__optionalOwner262 != null) { final __optionalCall261 = (cast __optionalOwner262 : { var popClip:RenderState->RenderProxy2D->Node2D->Void; }).popClip; if (__optionalCall261 != null) __optionalCall261(({ final __callArgument258:Dynamic = state; __callArgument258; }), ({ final __callArgument259:Dynamic = data; __callArgument259; }), ({ final __callArgument260:Dynamic = current; __callArgument260; })); } });
+      if ((cast !(cast (cast isRenderProxyVisible(({ final __callArgument263:Dynamic = data; __callArgument263; })) : Bool) : Bool) : Bool)) { continue; }
+      ({ final __optionalOwner269 = clipHooks; if (__optionalOwner269 != null) { final __optionalCall268 = (cast __optionalOwner269 : { var pushClip:RenderState->RenderProxy2D->Node2D->Void; }).pushClip; if (__optionalCall268 != null) __optionalCall268(({ final __callArgument265:Dynamic = state; __callArgument265; }), ({ final __callArgument266:Dynamic = data; __callArgument266; }), ({ final __callArgument267:Dynamic = current; __callArgument267; })); } });
+      var filter:Null<String> = (cast resolveCanvasCssFilter(({ final __callArgument270:Dynamic = state; __callArgument270; }), ({ final __callArgument271:Dynamic = data; __callArgument271; })) : Null<String>);
       if ((cast !_Runtime.strictEquals(filter, null) : Bool)) { flight._internal.backend.Canvas2dBackend.setField((cast state : CanvasRenderState).context, 'filter', filter); }
-      if ((cast !_Runtime.strictEquals((cast data : RenderProxy2D).renderer, null) : Bool)) { (cast (cast data : RenderProxy2D).renderer : Renderer).submit(({ final __callArgument260:Dynamic = state; __callArgument260; }), ({ final __callArgument261:Dynamic = data; __callArgument261; })); }
+      if ((cast !_Runtime.strictEquals((cast data : RenderProxy2D).renderer, null) : Bool)) { (cast (cast data : RenderProxy2D).renderer : Renderer).submit(({ final __callArgument274:Dynamic = state; __callArgument274; }), ({ final __callArgument275:Dynamic = data; __callArgument275; })); }
       if ((cast !_Runtime.strictEquals(filter, null) : Bool)) { flight._internal.backend.Canvas2dBackend.setField((cast state : CanvasRenderState).context, 'filter', 'none'); }
       if ((cast (cast data : RenderProxy2D).traverseChildren : Bool)) {
-        var children:Null<Array<NodeOf<Node2DTraits>>> = _Runtime.field((cast getNode2DRuntime(({ final __callArgument262:Dynamic = current; __callArgument262; })) : Node2DRuntime), 'children');
+        var children:Null<Array<NodeOf<Node2DTraits>>> = _Runtime.field((cast getNode2DRuntime(({ final __callArgument276:Dynamic = current; __callArgument276; })) : Node2DRuntime), 'children');
         if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
           {
             var i:Float = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
@@ -956,7 +965,7 @@ class _Scene2DCanvas {
         }
       }
     }
-    ({ final __optionalOwner266 = clipHooks; if (__optionalOwner266 != null) { final __optionalCall265 = (cast __optionalOwner266 : { var finalize:RenderState->Void; }).finalize; if (__optionalCall265 != null) __optionalCall265(({ final __callArgument264:Dynamic = state; __callArgument264; })); } });
+    ({ final __optionalOwner280 = clipHooks; if (__optionalOwner280 != null) { final __optionalCall279 = (cast __optionalOwner280 : { var finalize:RenderState->Void; }).finalize; if (__optionalCall279 != null) __optionalCall279(({ final __callArgument278:Dynamic = state; __callArgument278; })); } });
   }
 
   @:allow(flight)
@@ -984,7 +993,7 @@ class _Scene2DCanvas {
     particleCount = __destructure0.particleCount;
     transforms = __destructure0.transforms;
     if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) : Bool)) { return; }
-    imageSource = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers(({ final __callArgument267:Dynamic = state; __callArgument267; })) : CanvasTextureResolvers), ({ final __callArgument269:Dynamic = atlas.texture; __callArgument269; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>);
+    imageSource = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers(({ final __callArgument281:Dynamic = state; __callArgument281; })) : CanvasTextureResolvers), ({ final __callArgument283:Dynamic = atlas.texture; __callArgument283; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(imageSource, null) : Bool)) { return; }
     regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
@@ -1041,21 +1050,33 @@ class _Scene2DCanvas {
   public static final defaultCanvasParticleEmitter2DRenderer:SpriteRenderer = (cast { createData: noopRendererData, submit: drawCanvasParticleEmitter2D });
 
   public static function createCanvasPipeline(registries:CanvasRenderRegistries):CanvasPipeline {
-    var pipeline:CanvasPipeline = cast _Runtime.UNDEFINED;
-    pipeline = (cast (cast createEntity(({ final __callArgument273:Dynamic = ({ registries: (cast registries : Dynamic) } : CanvasPipeline); __callArgument273; })) : CanvasPipeline) : CanvasPipeline);
+    var pipeline:EntityConstruction<CanvasPipeline> = cast _Runtime.UNDEFINED;
+    pipeline = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ registries: cast _Runtime.UNDEFINED } : CanvasPipeline); }) #end));
+    _Runtime.setField(pipeline, 'registries', registries);
     _Runtime.setIndex(pipeline, EntityRuntimeKey, { binding: null });
     return cast pipeline;
     return cast null;
   }
 
   public static function createEmptyCanvasRegistries():CanvasRenderRegistries {
-    return cast { renderEffects: (cast createKeyedTable((cast 'CanvasRenderEffect' : String), (cast 'Unregistered' : String)) : KeyedTable<CanvasRenderEffectRunner>), renderers: (cast createKeyedTable((cast 'NodeRenderer' : String), (cast 'Unregistered' : String)) : KeyedTable<Renderer>), strokeTessellator: (cast createSlotTable((cast 'StrokeTessellator' : String), (cast 'Rasterize' : String)) : SlotTable<StrokeTessellator>) };
+    var out:EntityConstruction<CanvasRenderRegistries> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ blendModeApplication: cast _Runtime.UNDEFINED, canvasShapeCommands: cast _Runtime.UNDEFINED, colorAdjustments: cast _Runtime.UNDEFINED, colorAdjustmentUnsupportedGuard: cast _Runtime.UNDEFINED, effectPaddingResolvers: cast _Runtime.UNDEFINED, materialRenderers: cast _Runtime.UNDEFINED, renderEffects: cast _Runtime.UNDEFINED, renderers: cast _Runtime.UNDEFINED, renderRootGuard: cast _Runtime.UNDEFINED, strokeTessellator: cast _Runtime.UNDEFINED } : CanvasRenderRegistries); }) #end));
+    initializeEmptyCanvasRegistries(({ final __callArgument287:Dynamic = out; __callArgument287; }));
+    return cast out;
     return cast null;
   }
 
   public static function getCanvasPipelineRegistries(pipeline:CanvasPipeline):CanvasRenderRegistries {
     return cast _Runtime.field(pipeline, 'registries');
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeEmptyCanvasRegistries(out:EntityConstruction<CanvasRenderRegistries>):Void {
+    _Runtime.setField(out, 'renderEffects', (cast createKeyedTable((cast 'CanvasRenderEffect' : String), (cast 'Unregistered' : String)) : { >KeyedTable<CanvasRenderEffectRunner>, >Entity, }));
+    _Runtime.setField(out, 'renderers', (cast createKeyedTable((cast 'NodeRenderer' : String), (cast 'Unregistered' : String)) : { >KeyedTable<Renderer>, >Entity, }));
+    _Runtime.setField(out, 'strokeTessellator', (cast createSlotTable((cast 'StrokeTessellator' : String), (cast 'Rasterize' : String)) : { >SlotTable<StrokeTessellator>, >Entity, }));
   }
 
   @:allow(flight)
@@ -1086,7 +1107,7 @@ class _Scene2DCanvas {
     ids = __destructure0.ids;
     transforms = __destructure0.transforms;
     if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(instanceCount, 0.0) : Bool)) : Bool)) { return; }
-    image = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers(({ final __callArgument275:Dynamic = state; __callArgument275; })) : CanvasTextureResolvers), ({ final __callArgument277:Dynamic = atlas.texture; __callArgument277; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>);
+    image = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers(({ final __callArgument289:Dynamic = state; __callArgument289; })) : CanvasTextureResolvers), ({ final __callArgument291:Dynamic = atlas.texture; __callArgument291; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(image, null) : Bool)) { return; }
     _Runtime.callOptionalValue((cast state : CanvasRenderState).applyBlendMode, cast ([state, (cast quadBatch : RenderProxy2D).blendMode] : Array<Dynamic>));
     context = (cast state : CanvasRenderState).context;
@@ -1101,7 +1122,7 @@ class _Scene2DCanvas {
     if ((cast !(cast smoothing : Bool) : Bool)) {
       flight._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false);
     }
-    restoreMaterial = (cast applyCanvasMaterial(({ final __callArgument281:Dynamic = state; __callArgument281; }), (cast (cast quadBatch : RenderProxy2D).material : Dynamic)) : Bool);
+    restoreMaterial = (cast applyCanvasMaterial(({ final __callArgument295:Dynamic = state; __callArgument295; }), (cast (cast quadBatch : RenderProxy2D).material : Dynamic)) : Bool);
     flight._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([transform.a, transform.b, transform.c, transform.d, transform.tx, transform.ty] : Array<Dynamic>));
     {
       var i:Float = 0.0;
@@ -1119,8 +1140,8 @@ class _Scene2DCanvas {
           var dy:Float = flight._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flight._internal._Float32Array), (cast (offset + 1.0) : Float));
           flight._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([image, region.x, region.y, region.width, region.height, ((cast roundPixels : Bool) ? (cast (_Runtime.toInt32(dx) | 0) : Dynamic) : (cast dx : Dynamic)), ((cast roundPixels : Bool) ? (cast (_Runtime.toInt32(dy) | 0) : Dynamic) : (cast dy : Dynamic)), region.width, region.height] : Array<Dynamic>));
         } else {
-          setMatrixFromFloat32Array(({ final __callArgument283:Dynamic = quadTransform; __callArgument283; }), (cast offset : Float), ({ final __callArgument284:Dynamic = transforms; __callArgument284; }));
-          multiplyMatrix(({ final __callArgument287:Dynamic = quadTransform; __callArgument287; }), ({ final __callArgument288:Dynamic = transform; __callArgument288; }), ({ final __callArgument289:Dynamic = quadTransform; __callArgument289; }));
+          setMatrixFromFloat32Array(({ final __callArgument297:Dynamic = quadTransform; __callArgument297; }), (cast offset : Float), ({ final __callArgument298:Dynamic = transforms; __callArgument298; }));
+          multiplyMatrix(({ final __callArgument301:Dynamic = quadTransform; __callArgument301; }), ({ final __callArgument302:Dynamic = transform; __callArgument302; }), ({ final __callArgument303:Dynamic = quadTransform; __callArgument303; }));
           if ((cast roundPixels : Bool)) {
             (quadTransform.tx = cast (HxMath.round(quadTransform.tx) : Float));
             (quadTransform.ty = cast (HxMath.round(quadTransform.ty) : Float));
@@ -1133,7 +1154,7 @@ class _Scene2DCanvas {
     }
     if ((cast restoreMaterial : Bool)) { flight._internal.backend.Canvas2dBackend.call(context, 'restore', cast ([] : Array<Dynamic>)); }
     flight._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
-    releaseMatrix(({ final __callArgument293:Dynamic = quadTransform; __callArgument293; }));
+    releaseMatrix(({ final __callArgument307:Dynamic = quadTransform; __callArgument307; }));
     if ((cast !(cast smoothing : Bool) : Bool)) {
       flight._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', true);
     }
@@ -1145,8 +1166,8 @@ class _Scene2DCanvas {
     if (options == null) options = cast ({  } : Dynamic);
     var state:CanvasRenderState = cast _Runtime.UNDEFINED;
     var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
-    state = (cast _createRenderState((cast { pixelRatio: _Runtime.coalesce((cast options : { @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<String>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).pixelRatio, function():Dynamic return cast 1.0), renderTransform2D: _Runtime.coalesce((cast options : { @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<String>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).renderTransform, function():Dynamic return cast (cast (#if js _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) #else createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix)), roundPixels: _Runtime.coalesce((cast options : { @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<String>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).roundPixels, function():Dynamic return cast false), sceneGraphSyncPolicy: (cast options : { @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<String>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).sceneGraphSyncPolicy } : Dynamic), function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ allowSmoothing: cast _Runtime.UNDEFINED, applyBlendMode: cast _Runtime.UNDEFINED, backgroundColor: cast _Runtime.UNDEFINED, backgroundColorRgba: cast _Runtime.UNDEFINED, backgroundColorString: cast _Runtime.UNDEFINED, canvas: cast _Runtime.UNDEFINED, canvasCssFilterResolver: cast _Runtime.UNDEFINED, context: cast _Runtime.UNDEFINED, contextAttributes: cast _Runtime.UNDEFINED, currentClipDepth: cast _Runtime.UNDEFINED, displayObjectClipHooks: cast _Runtime.UNDEFINED, pipeline: cast _Runtime.UNDEFINED, pixelRatio: cast _Runtime.UNDEFINED, renderAlpha: cast _Runtime.UNDEFINED, renderBlendMode: cast _Runtime.UNDEFINED, renderTransform2D: cast _Runtime.UNDEFINED, roundPixels: cast _Runtime.UNDEFINED, sceneGraphSyncPolicy: cast _Runtime.UNDEFINED, surface: cast _Runtime.UNDEFINED } : CanvasRenderState); }) #end)) : CanvasRenderState);
-    if ((cast !_Runtime.looseEquals((cast options : { @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<String>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).backgroundColor, null) : Bool)) { setRenderStateBackgroundColor(({ final __callArgument295:Dynamic = state; __callArgument295; }), (cast (cast options : { @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<String>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).backgroundColor : Float)); }
+    state = (cast _createRenderState((cast { pixelRatio: _Runtime.coalesce((cast options : { @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<String>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).pixelRatio, function():Dynamic return cast 1.0), renderTransform2D: _Runtime.coalesce((cast options : { @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<String>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).renderTransform, function():Dynamic return cast (cast (#if js _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) #else createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix)), roundPixels: _Runtime.coalesce((cast options : { @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<String>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).roundPixels, function():Dynamic return cast false), sceneGraphSyncPolicy: (cast options : { @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<String>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).sceneGraphSyncPolicy } : Dynamic), function():Dynamic return (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ allowSmoothing: cast _Runtime.UNDEFINED, applyBlendMode: cast _Runtime.UNDEFINED, backgroundColor: cast _Runtime.UNDEFINED, backgroundColorRgba: cast _Runtime.UNDEFINED, backgroundColorString: cast _Runtime.UNDEFINED, canvas: cast _Runtime.UNDEFINED, canvasCssFilterResolver: cast _Runtime.UNDEFINED, context: cast _Runtime.UNDEFINED, contextAttributes: cast _Runtime.UNDEFINED, currentClipDepth: cast _Runtime.UNDEFINED, displayObjectClipHooks: cast _Runtime.UNDEFINED, pipeline: cast _Runtime.UNDEFINED, pixelRatio: cast _Runtime.UNDEFINED, raster2DSurfaceProvider: cast _Runtime.UNDEFINED, renderAlpha: cast _Runtime.UNDEFINED, renderBlendMode: cast _Runtime.UNDEFINED, renderTransform2D: cast _Runtime.UNDEFINED, roundPixels: cast _Runtime.UNDEFINED, sceneGraphSyncPolicy: cast _Runtime.UNDEFINED, surface: cast _Runtime.UNDEFINED } : CanvasRenderState); }) #end)) : CanvasRenderState);
+    if ((cast !_Runtime.looseEquals((cast options : { @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<String>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).backgroundColor, null) : Bool)) { setRenderStateBackgroundColor(({ final __callArgument309:Dynamic = state; __callArgument309; }), (cast (cast options : { @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<String>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).backgroundColor : Float)); }
     ((cast state : { var applyBlendMode:Null<CanvasRenderState->Null<String>->Void>; }).applyBlendMode = (cast _Runtime.coalesce(_Runtime.field(_Runtime.field(pipeline, 'registries'), 'blendModeApplication'), function():Dynamic return cast null)));
     ((cast state : { var canvasCssFilterResolver:Null<CanvasRenderState->RenderProxy2D->Null<String>>; }).canvasCssFilterResolver = (cast null));
     ((cast (cast state : { var canvas:flight._internal.dom.HTMLCanvasElement; }) : { var canvas:flight._internal.dom.HTMLCanvasElement; }).canvas = (cast surface : CanvasRenderSurface).canvas);
@@ -1154,7 +1175,7 @@ class _Scene2DCanvas {
     ((cast (cast state : { var contextAttributes:flight._internal.dom.CanvasRenderingContext2DSettings; }) : { var contextAttributes:flight._internal.dom.CanvasRenderingContext2DSettings; }).contextAttributes = (cast surface : CanvasRenderSurface).contextAttributes);
     ((cast (cast state : { var pipeline:CanvasPipeline; }) : { var pipeline:CanvasPipeline; }).pipeline = pipeline);
     ((cast (cast state : { var surface:CanvasRenderSurface; }) : { var surface:CanvasRenderSurface; }).surface = surface);
-    runtime = (cast createCanvasRenderStateRuntime(({ final __callArgument297:Dynamic = pipeline; __callArgument297; }), ({ final __callArgument298:Dynamic = canvasTextureResolvers; __callArgument298; })) : CanvasRenderStateRuntime);
+    runtime = (cast createCanvasRenderStateRuntime(({ final __callArgument311:Dynamic = pipeline; __callArgument311; }), ({ final __callArgument312:Dynamic = canvasTextureResolvers; __callArgument312; })) : CanvasRenderStateRuntime);
     _Runtime.setIndex(state, EntityRuntimeKey, runtime);
     ((cast runtime.canvasTextureResolvers : { @:optional var registryMiss:Null<RenderRegistry->String->Void>; }).registryMiss = (cast function(registry:RenderRegistry, kind:String):Void { _Runtime.callOptionalValue(runtime.registryMiss, cast ([registry, kind] : Array<Dynamic>)); }));
     (runtime.currentBlendMode = cast (null : Null<String>));
@@ -1182,12 +1203,12 @@ class _Scene2DCanvas {
     var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Scene2DCanvas._destroyedStates__canvasRenderState : flight._internal._WeakSet<CanvasRenderState>).has((cast state))) : Bool)) { return; }
     ((cast _Scene2DCanvas._destroyedStates__canvasRenderState : flight._internal._WeakSet<CanvasRenderState>).add((cast state)));
-    runtime = (cast getCanvasRenderStateRuntime(({ final __callArgument301:Dynamic = state; __callArgument301; })) : CanvasRenderStateRuntime);
+    runtime = (cast getCanvasRenderStateRuntime(({ final __callArgument315:Dynamic = state; __callArgument315; })) : CanvasRenderStateRuntime);
     for (teardown in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(runtime.teardowns)]))) {
-      teardown(({ final __callArgument305:Dynamic = state; __callArgument305; }));
+      teardown(({ final __callArgument319:Dynamic = state; __callArgument319; }));
     }
     _Runtime.setLength(runtime.teardowns, 0.0);
-    destroyRenderState(({ final __callArgument307:Dynamic = state; __callArgument307; }));
+    destroyRenderState(({ final __callArgument321:Dynamic = state; __callArgument321; }));
     destroyCanvasTextureResolvers(runtime.canvasTextureResolvers);
     destroyCanvasRenderSurface((cast state : CanvasRenderState).surface);
   }
@@ -1200,23 +1221,23 @@ class _Scene2DCanvas {
   }
 
   public static function getCanvasRenderStateTextureResolvers(state:CanvasRenderState):CanvasTextureResolvers {
-    return cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument309:Dynamic = state; __callArgument309; })) : CanvasRenderStateRuntime) : { var canvasTextureResolvers:CanvasTextureResolvers; }).canvasTextureResolvers;
+    return cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument323:Dynamic = state; __callArgument323; })) : CanvasRenderStateRuntime) : { var canvasTextureResolvers:CanvasTextureResolvers; }).canvasTextureResolvers;
     return cast null;
   }
 
   @:allow(flight)
   @:keep
   private static function registerCanvasRenderStateTeardown(state:CanvasRenderState, teardown:CanvasRenderState->Void):Void {
-    _Runtime.callProperty((cast (cast getCanvasRenderStateRuntime(({ final __callArgument315:Dynamic = state; __callArgument315; })) : CanvasRenderStateRuntime) : { var teardowns:Array<CanvasRenderState->Void>; }).teardowns, 'push', cast ([teardown] : Array<Dynamic>));
+    _Runtime.callProperty((cast (cast getCanvasRenderStateRuntime(({ final __callArgument329:Dynamic = state; __callArgument329; })) : CanvasRenderStateRuntime) : { var teardowns:Array<CanvasRenderState->Void>; }).teardowns, 'push', cast ([teardown] : Array<Dynamic>));
   }
 
   public static final _destroyedStates__canvasRenderState:flight._internal._WeakSet<CanvasRenderState> = _Runtime.construct(flight._internal._HostValueLut.get('WeakSet'), []);
 
   public static function setCanvasRenderStateHandles(state:CanvasRenderState, canvas:flight._internal.dom.HTMLCanvasElement, context:flight._internal.dom.CanvasRenderingContext2D):Void {
     var writable:CanvasRenderStateWritableHandles__canvasRenderStateHandles = cast _Runtime.UNDEFINED;
-    writable = (cast state : CanvasRenderStateWritableHandles__canvasRenderStateHandles);
-    ((cast writable : { var canvas:flight._internal.dom.HTMLCanvasElement; }).canvas = canvas);
-    ((cast writable : { var context:flight._internal.dom.CanvasRenderingContext2D; }).context = context);
+    writable = (cast (cast state : flight._internal._Any) : CanvasRenderStateWritableHandles__canvasRenderStateHandles);
+    ((cast writable : CanvasRenderStateWritableHandles__canvasRenderStateHandles).canvas = canvas);
+    ((cast writable : CanvasRenderStateWritableHandles__canvasRenderStateHandles).context = context);
   }
 
   public static function acquireCanvasRenderSurface(creator:CanvasRenderSurfaceCreator, options:CanvasRenderSurfaceOptions):Null<CanvasRenderSurface> {
@@ -1225,7 +1246,7 @@ class _Scene2DCanvas {
     canvas = _Runtime.callProperty(creator, 'createRenderSurface', cast ([_Runtime.field(options, 'width'), _Runtime.field(options, 'height'), _Runtime.field(options, 'pixelRatio')] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(canvas, null) : Bool)) { return cast null; }
     try {
-      (surface = cast ((cast _Scene2DCanvas.finishCanvasRenderSurface__canvasRenderSurface(({ final __callArgument317:Dynamic = creator; __callArgument317; }), ({ final __callArgument318:Dynamic = canvas; __callArgument318; }), ({ final __callArgument319:Dynamic = options; __callArgument319; })) : CanvasRenderSurface) : Dynamic));
+      (surface = cast ((cast _Scene2DCanvas.finishCanvasRenderSurface__canvasRenderSurface(({ final __callArgument331:Dynamic = creator; __callArgument331; }), ({ final __callArgument332:Dynamic = canvas; __callArgument332; }), ({ final __callArgument333:Dynamic = options; __callArgument333; })) : CanvasRenderSurface) : Dynamic));
     } catch (__error:Dynamic) {
       _Runtime.callProperty(creator, 'destroyRenderSurface', cast ([canvas] : Array<Dynamic>));
       return cast null;
@@ -1237,7 +1258,7 @@ class _Scene2DCanvas {
 
   public static function createCanvasRenderSurface(creator:CanvasRenderSurfaceCreator, canvas:flight._internal.dom.HTMLCanvasElement, ?options:{ @:optional var contextAttributes:Null<flight._internal.dom.CanvasRenderingContext2DSettings>; @:optional var height:Null<Float>; @:optional var pixelRatio:Null<Float>; @:optional var width:Null<Float>; }):CanvasRenderSurface {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast (cast _Scene2DCanvas.finishCanvasRenderSurface__canvasRenderSurface(({ final __callArgument323:Dynamic = creator; __callArgument323; }), ({ final __callArgument324:Dynamic = canvas; __callArgument324; }), ({ final __callArgument325:Dynamic = options; __callArgument325; })) : CanvasRenderSurface);
+    return cast (cast _Scene2DCanvas.finishCanvasRenderSurface__canvasRenderSurface(({ final __callArgument337:Dynamic = creator; __callArgument337; }), ({ final __callArgument338:Dynamic = canvas; __callArgument338; }), ({ final __callArgument339:Dynamic = options; __callArgument339; })) : CanvasRenderSurface);
     return cast null;
   }
 
@@ -1249,15 +1270,24 @@ class _Scene2DCanvas {
     _Runtime.callProperty(creator, 'destroyRenderSurface', cast ([(cast surface : CanvasRenderSurface).canvas] : Array<Dynamic>));
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeCanvasRenderSurface(out:EntityConstruction<CanvasRenderSurface>, creator:CanvasRenderSurfaceCreator, canvas:flight._internal.dom.HTMLCanvasElement, context:flight._internal.dom.CanvasRenderingContext2D, options:{ @:optional var contextAttributes:Null<flight._internal.dom.CanvasRenderingContext2DSettings>; @:optional var height:Null<Float>; @:optional var pixelRatio:Null<Float>; @:optional var width:Null<Float>; }):Void {
+    _Runtime.setField(out, 'canvas', canvas);
+    _Runtime.setField(out, 'context', context);
+    _Runtime.setField(out, 'contextAttributes', flight._internal.backend.Canvas2dBackend.call(context, 'getContextAttributes', cast ([] : Array<Dynamic>)));
+    _Runtime.setField(out, 'creator', creator);
+    _Runtime.setField(out, 'options', flight._internal.DynamicObject.freeze({ contextAttributes: (cast options : { @:optional var contextAttributes:Null<flight._internal.dom.CanvasRenderingContext2DSettings>; @:optional var height:Null<Float>; @:optional var pixelRatio:Null<Float>; @:optional var width:Null<Float>; }).contextAttributes, height: _Runtime.coalesce((cast options : { @:optional var contextAttributes:Null<flight._internal.dom.CanvasRenderingContext2DSettings>; @:optional var height:Null<Float>; @:optional var pixelRatio:Null<Float>; @:optional var width:Null<Float>; }).height, function():Dynamic return cast flight._internal.backend.CanvasElementBackend.field(canvas, 'height')), pixelRatio: _Runtime.coalesce((cast options : { @:optional var contextAttributes:Null<flight._internal.dom.CanvasRenderingContext2DSettings>; @:optional var height:Null<Float>; @:optional var pixelRatio:Null<Float>; @:optional var width:Null<Float>; }).pixelRatio, function():Dynamic return cast 1.0), width: _Runtime.coalesce((cast options : { @:optional var contextAttributes:Null<flight._internal.dom.CanvasRenderingContext2DSettings>; @:optional var height:Null<Float>; @:optional var pixelRatio:Null<Float>; @:optional var width:Null<Float>; }).width, function():Dynamic return cast flight._internal.backend.CanvasElementBackend.field(canvas, 'width')) }));
+    _Runtime.setIndex(out, EntityRuntimeKey, { binding: null });
+  }
+
   public static function finishCanvasRenderSurface__canvasRenderSurface(creator:CanvasRenderSurfaceCreator, canvas:flight._internal.dom.HTMLCanvasElement, options:{ @:optional var contextAttributes:Null<flight._internal.dom.CanvasRenderingContext2DSettings>; @:optional var height:Null<Float>; @:optional var pixelRatio:Null<Float>; @:optional var width:Null<Float>; }):CanvasRenderSurface {
-    var requestedContextAttributes:Null<flight._internal.dom.CanvasRenderingContext2DSettings> = cast _Runtime.UNDEFINED;
     var context:Null<flight._internal.dom.CanvasRenderingContext2D> = cast _Runtime.UNDEFINED;
-    var surface:CanvasRenderSurface = cast _Runtime.UNDEFINED;
-    requestedContextAttributes = (cast options : { @:optional var contextAttributes:Null<flight._internal.dom.CanvasRenderingContext2DSettings>; @:optional var height:Null<Float>; @:optional var pixelRatio:Null<Float>; @:optional var width:Null<Float>; }).contextAttributes;
-    context = flight._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d', requestedContextAttributes] : Array<Dynamic>));
+    var surface:EntityConstruction<CanvasRenderSurface> = cast _Runtime.UNDEFINED;
+    context = flight._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d', (cast options : { @:optional var contextAttributes:Null<flight._internal.dom.CanvasRenderingContext2DSettings>; @:optional var height:Null<Float>; @:optional var pixelRatio:Null<Float>; @:optional var width:Null<Float>; }).contextAttributes] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(context, null) : Bool)) { _Runtime.throwValue(_Runtime.error('Failed to get context for canvas.')); }
-    surface = (cast (cast createEntity(({ final __callArgument329:Dynamic = ({ canvas: (cast canvas : Dynamic), context: (cast context : Dynamic), contextAttributes: (cast flight._internal.backend.Canvas2dBackend.call(context, 'getContextAttributes', cast ([] : Array<Dynamic>)) : Dynamic), creator: (cast creator : Dynamic), options: (cast flight._internal.DynamicObject.freeze({ contextAttributes: requestedContextAttributes, height: _Runtime.coalesce((cast options : { @:optional var contextAttributes:Null<flight._internal.dom.CanvasRenderingContext2DSettings>; @:optional var height:Null<Float>; @:optional var pixelRatio:Null<Float>; @:optional var width:Null<Float>; }).height, function():Dynamic return cast flight._internal.backend.CanvasElementBackend.field(canvas, 'height')), pixelRatio: _Runtime.coalesce((cast options : { @:optional var contextAttributes:Null<flight._internal.dom.CanvasRenderingContext2DSettings>; @:optional var height:Null<Float>; @:optional var pixelRatio:Null<Float>; @:optional var width:Null<Float>; }).pixelRatio, function():Dynamic return cast 1.0), width: _Runtime.coalesce((cast options : { @:optional var contextAttributes:Null<flight._internal.dom.CanvasRenderingContext2DSettings>; @:optional var height:Null<Float>; @:optional var pixelRatio:Null<Float>; @:optional var width:Null<Float>; }).width, function():Dynamic return cast flight._internal.backend.CanvasElementBackend.field(canvas, 'width')) }) : Dynamic) } : CanvasRenderSurface); __callArgument329; })) : CanvasRenderSurface) : CanvasRenderSurface);
-    _Runtime.setIndex(surface, EntityRuntimeKey, { binding: null });
+    surface = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ canvas: cast _Runtime.UNDEFINED, context: cast _Runtime.UNDEFINED, contextAttributes: cast _Runtime.UNDEFINED, creator: cast _Runtime.UNDEFINED, options: cast _Runtime.UNDEFINED } : CanvasRenderSurface); }) #end));
+    initializeCanvasRenderSurface(({ final __callArgument343:Dynamic = surface; __callArgument343; }), ({ final __callArgument344:Dynamic = creator; __callArgument344; }), ({ final __callArgument345:Dynamic = canvas; __callArgument345; }), ({ final __callArgument346:Dynamic = context; __callArgument346; }), ({ final __callArgument347:Dynamic = options; __callArgument347; }));
     return cast surface;
     return cast null;
   }
@@ -1273,17 +1303,17 @@ class _Scene2DCanvas {
     var stack:Null<Array<SavedCanvasState__canvasRenderTarget>> = cast _Runtime.UNDEFINED;
     var preserveColor:Null<flight._internal._Union2<Bool, Array<Bool>>> = cast _Runtime.UNDEFINED;
     var preserved:Bool = cast _Runtime.UNDEFINED;
-    runtime = (cast getCanvasRenderStateRuntime(({ final __callArgument331:Dynamic = state; __callArgument331; })) : CanvasRenderStateRuntime);
+    runtime = (cast getCanvasRenderStateRuntime(({ final __callArgument353:Dynamic = state; __callArgument353; })) : CanvasRenderStateRuntime);
     stack = ((cast _Scene2DCanvas._targetStack__canvasRenderTarget : flight._internal._WeakMap<CanvasRenderState, Array<SavedCanvasState__canvasRenderTarget>>).get((cast state)));
     if ((cast _Runtime.strictEquals(stack, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (stack = cast (cast ([] : Array<Dynamic>) : Dynamic));
       ((cast _Scene2DCanvas._targetStack__canvasRenderTarget : flight._internal._WeakMap<CanvasRenderState, Array<SavedCanvasState__canvasRenderTarget>>).set((cast state), (cast stack)));
     }
     _Runtime.callProperty(stack, 'push', cast ([{ canvas: (cast state : CanvasRenderState).canvas, context: (cast state : CanvasRenderState).context, renderTransform2D: (cast state : CanvasRenderState).renderTransform2D }] : Array<Dynamic>));
-    setCanvasRenderStateHandles(({ final __callArgument333:Dynamic = state; __callArgument333; }), target.canvas, target.context);
+    setCanvasRenderStateHandles(({ final __callArgument355:Dynamic = state; __callArgument355; }), target.canvas, target.context);
     flight._internal.backend.Canvas2dBackend.setField((cast state : CanvasRenderState).context, 'imageSmoothingEnabled', runtime.imageSmoothingEnabled);
     flight._internal.backend.Canvas2dBackend.setField((cast state : CanvasRenderState).context, 'imageSmoothingQuality', runtime.imageSmoothingQuality);
-    preserveColor = ({ final __structural335 = preserve; __structural335 == null ? _Runtime.UNDEFINED : (cast __structural335 : { @:optional var preserveColor:Null<flight._internal._Union2<Bool, Array<Bool>>>; }).preserveColor; });
+    preserveColor = ({ final __structural357 = preserve; __structural357 == null ? _Runtime.UNDEFINED : (cast __structural357 : { @:optional var preserveColor:Null<flight._internal._Union2<Bool, Array<Bool>>>; }).preserveColor; });
     preserved = ((cast _Runtime.strictEquals(_Runtime.typeofValue(preserveColor), 'boolean') : Bool) ? (cast preserveColor : Dynamic) : (cast _Runtime.strictEquals(_Runtime.optionalIndex(preserveColor, 0.0), true) : Dynamic));
     if ((cast !(cast preserved : Bool) : Bool)) { flight._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'clearRect', cast ([0.0, 0.0, target.width, target.height] : Array<Dynamic>)); }
   }
@@ -1291,14 +1321,10 @@ class _Scene2DCanvas {
   @:allow(flight)
   @:keep
   private static function createCanvasRenderTarget(creator:CanvasRenderSurfaceCreator, width:Float, height:Float):CanvasRenderTarget {
-    var targetWidth:Float = cast _Runtime.UNDEFINED;
-    var targetHeight:Float = cast _Runtime.UNDEFINED;
-    var surface:Null<CanvasRenderSurface> = cast _Runtime.UNDEFINED;
-    targetWidth = HxMath.max(1.0, HxMath.ceil(width));
-    targetHeight = HxMath.max(1.0, HxMath.ceil(height));
-    surface = (cast acquireCanvasRenderSurface(({ final __callArgument336:Dynamic = creator; __callArgument336; }), ({ final __callArgument337:Dynamic = { height: targetHeight, pixelRatio: 1.0, width: targetWidth }; __callArgument337; })) : Null<CanvasRenderSurface>);
-    if ((cast _Runtime.strictEquals(surface, null) : Bool)) { _Runtime.throwValue(_Runtime.error('Failed to acquire Canvas render target surface.')); }
-    return cast { canvas: (cast surface : CanvasRenderSurface).canvas, context: (cast surface : CanvasRenderSurface).context, height: targetHeight, surface: surface, width: targetWidth };
+    var out:EntityConstruction<CanvasRenderTarget> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ canvas: cast _Runtime.UNDEFINED, context: cast _Runtime.UNDEFINED, height: cast _Runtime.UNDEFINED, surface: cast _Runtime.UNDEFINED, width: cast _Runtime.UNDEFINED } : CanvasRenderTarget); }) #end));
+    initializeCanvasRenderTarget(({ final __callArgument358:Dynamic = out; __callArgument358; }), ({ final __callArgument359:Dynamic = creator; __callArgument359; }), (cast width : Float), (cast height : Float));
+    return cast out;
     return cast null;
   }
 
@@ -1316,8 +1342,25 @@ class _Scene2DCanvas {
     var saved:Null<SavedCanvasState__canvasRenderTarget> = cast _Runtime.UNDEFINED;
     saved = _Runtime.callOptionalProperty(((cast _Scene2DCanvas._targetStack__canvasRenderTarget : flight._internal._WeakMap<CanvasRenderState, Array<SavedCanvasState__canvasRenderTarget>>).get((cast state))), 'pop', cast ([] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(saved, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    setCanvasRenderStateHandles(({ final __callArgument340:Dynamic = state; __callArgument340; }), (cast saved : SavedCanvasState__canvasRenderTarget).canvas, (cast saved : SavedCanvasState__canvasRenderTarget).context);
+    setCanvasRenderStateHandles(({ final __callArgument362:Dynamic = state; __callArgument362; }), (cast saved : SavedCanvasState__canvasRenderTarget).canvas, (cast saved : SavedCanvasState__canvasRenderTarget).context);
     ((cast state : CanvasRenderState).renderTransform2D = (cast saved : SavedCanvasState__canvasRenderTarget).renderTransform2D);
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeCanvasRenderTarget(out:EntityConstruction<CanvasRenderTarget>, creator:CanvasRenderSurfaceCreator, width:Float, height:Float):Void {
+    var targetWidth:Float = cast _Runtime.UNDEFINED;
+    var targetHeight:Float = cast _Runtime.UNDEFINED;
+    var surface:Null<CanvasRenderSurface> = cast _Runtime.UNDEFINED;
+    targetWidth = HxMath.max(1.0, HxMath.ceil(width));
+    targetHeight = HxMath.max(1.0, HxMath.ceil(height));
+    surface = (cast acquireCanvasRenderSurface(({ final __callArgument364:Dynamic = creator; __callArgument364; }), ({ final __callArgument365:Dynamic = { height: targetHeight, pixelRatio: 1.0, width: targetWidth }; __callArgument365; })) : Null<CanvasRenderSurface>);
+    if ((cast _Runtime.strictEquals(surface, null) : Bool)) { _Runtime.throwValue(_Runtime.error('Failed to acquire Canvas render target surface.')); }
+    _Runtime.setField(out, 'canvas', (cast surface : CanvasRenderSurface).canvas);
+    _Runtime.setField(out, 'context', (cast surface : CanvasRenderSurface).context);
+    _Runtime.setField(out, 'height', targetHeight);
+    _Runtime.setField(out, 'surface', surface);
+    _Runtime.setField(out, 'width', targetWidth);
   }
 
   @:allow(flight)
@@ -1332,14 +1375,14 @@ class _Scene2DCanvas {
   public static function setCanvasRenderTransform2D(state:CanvasRenderState, transform:Matrix):Void {
     var next:Matrix = cast _Runtime.UNDEFINED;
     next = (cast (#if js _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) #else createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix);
-    copyMatrix(({ final __callArgument342:Dynamic = next; __callArgument342; }), ({ final __callArgument343:Dynamic = transform; __callArgument343; }));
+    copyMatrix(({ final __callArgument368:Dynamic = next; __callArgument368; }), ({ final __callArgument369:Dynamic = transform; __callArgument369; }));
     ((cast state : CanvasRenderState).renderTransform2D = next);
   }
 
   public static function bindCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture):Null<flight._internal.dom.HTMLCanvasElement> {
     var entry:Null<CanvasRenderTextureEntry> = cast _Runtime.UNDEFINED;
-    entry = (cast _Scene2DCanvas.getEntry__canvasRenderTexture(({ final __callArgument346:Dynamic = state; __callArgument346; }), ({ final __callArgument347:Dynamic = renderTexture; __callArgument347; })) : Null<CanvasRenderTextureEntry>);
-    return cast ((cast _Runtime.strictEquals(({ final __typedStruct350 = entry; __typedStruct350 == null ? _Runtime.UNDEFINED : (cast __typedStruct350 : { var status:CanvasRenderTextureStatus; }).status; }), 'ready') : Bool) ? (cast (cast (cast entry : { var target:CanvasRenderTarget; }).target : { var canvas:flight._internal.dom.HTMLCanvasElement; }).canvas : Dynamic) : (cast null : Dynamic));
+    entry = (cast _Scene2DCanvas.getEntry__canvasRenderTexture(({ final __callArgument372:Dynamic = state; __callArgument372; }), ({ final __callArgument373:Dynamic = renderTexture; __callArgument373; })) : Null<CanvasRenderTextureEntry>);
+    return cast ((cast _Runtime.strictEquals(({ final __typedStruct376 = entry; __typedStruct376 == null ? _Runtime.UNDEFINED : (cast __typedStruct376 : { var status:CanvasRenderTextureStatus; }).status; }), 'ready') : Bool) ? (cast (cast (cast entry : { var target:CanvasRenderTarget; }).target : { var canvas:flight._internal.dom.HTMLCanvasElement; }).canvas : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
@@ -1347,7 +1390,7 @@ class _Scene2DCanvas {
     var targets:Null<flight._internal._Map<RenderTexture, CanvasRenderTextureEntry>> = cast _Runtime.UNDEFINED;
     var entry:Null<CanvasRenderTextureEntry> = cast _Runtime.UNDEFINED;
     targets = ((cast _Scene2DCanvas._targetsByState__canvasRenderTexture : flight._internal._WeakMap<CanvasRenderState, flight._internal._Map<RenderTexture, CanvasRenderTextureEntry>>).get((cast state)));
-    entry = ({ final __collection351:Dynamic = targets; __collection351 == null ? _Runtime.UNDEFINED : ((cast __collection351 : flight._internal._Map<RenderTexture, CanvasRenderTextureEntry>).get((cast renderTexture))); });
+    entry = ({ final __collection377:Dynamic = targets; __collection377 == null ? _Runtime.UNDEFINED : ((cast __collection377 : flight._internal._Map<RenderTexture, CanvasRenderTextureEntry>).get((cast renderTexture))); });
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     destroyCanvasRenderTarget((cast entry : { var target:CanvasRenderTarget; }).target);
     ((cast targets : flight._internal._Map<Dynamic, Dynamic>).delete_((cast renderTexture)));
@@ -1355,8 +1398,8 @@ class _Scene2DCanvas {
 
   public static function explainCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture):CanvasRenderTextureExplanation {
     var entry:Null<CanvasRenderTextureEntry> = cast _Runtime.UNDEFINED;
-    entry = (cast _Scene2DCanvas.getEntry__canvasRenderTexture(({ final __callArgument352:Dynamic = state; __callArgument352; }), ({ final __callArgument353:Dynamic = renderTexture; __callArgument353; })) : Null<CanvasRenderTextureEntry>);
-    return cast { height: _Runtime.coalesce(({ final __typedStruct357 = ({ final __typedStruct356 = entry; __typedStruct356 == null ? _Runtime.UNDEFINED : (cast __typedStruct356 : { var target:CanvasRenderTarget; }).target; }); __typedStruct357 == null ? _Runtime.UNDEFINED : (cast __typedStruct357 : { var height:Float; }).height; }), function():Dynamic return cast (cast renderTexture.source : { var height:Float; }).height), status: _Runtime.coalesce(({ final __typedStruct358 = entry; __typedStruct358 == null ? _Runtime.UNDEFINED : (cast __typedStruct358 : { var status:CanvasRenderTextureStatus; }).status; }), function():Dynamic return cast 'unrendered'), width: _Runtime.coalesce(({ final __typedStruct360 = ({ final __typedStruct359 = entry; __typedStruct359 == null ? _Runtime.UNDEFINED : (cast __typedStruct359 : { var target:CanvasRenderTarget; }).target; }); __typedStruct360 == null ? _Runtime.UNDEFINED : (cast __typedStruct360 : { var width:Float; }).width; }), function():Dynamic return cast (cast renderTexture.source : { var width:Float; }).width) };
+    entry = (cast _Scene2DCanvas.getEntry__canvasRenderTexture(({ final __callArgument378:Dynamic = state; __callArgument378; }), ({ final __callArgument379:Dynamic = renderTexture; __callArgument379; })) : Null<CanvasRenderTextureEntry>);
+    return cast { height: _Runtime.coalesce(({ final __typedStruct383 = ({ final __typedStruct382 = entry; __typedStruct382 == null ? _Runtime.UNDEFINED : (cast __typedStruct382 : { var target:CanvasRenderTarget; }).target; }); __typedStruct383 == null ? _Runtime.UNDEFINED : (cast __typedStruct383 : { var height:Float; }).height; }), function():Dynamic return cast (cast renderTexture.source : { var height:Float; }).height), status: _Runtime.coalesce(({ final __typedStruct384 = entry; __typedStruct384 == null ? _Runtime.UNDEFINED : (cast __typedStruct384 : { var status:CanvasRenderTextureStatus; }).status; }), function():Dynamic return cast 'unrendered'), width: _Runtime.coalesce(({ final __typedStruct386 = ({ final __typedStruct385 = entry; __typedStruct385 == null ? _Runtime.UNDEFINED : (cast __typedStruct385 : { var target:CanvasRenderTarget; }).target; }); __typedStruct386 == null ? _Runtime.UNDEFINED : (cast __typedStruct386 : { var width:Float; }).width; }), function():Dynamic return cast (cast renderTexture.source : { var width:Float; }).width) };
     return cast null;
   }
 
@@ -1364,8 +1407,8 @@ class _Scene2DCanvas {
   @:keep
   private static function getCanvasRenderTextureTarget(state:CanvasRenderState, renderTexture:RenderTexture):Null<CanvasRenderTarget> {
     var entry:Null<CanvasRenderTextureEntry> = cast _Runtime.UNDEFINED;
-    entry = (cast _Scene2DCanvas.getEntry__canvasRenderTexture(({ final __callArgument361:Dynamic = state; __callArgument361; }), ({ final __callArgument362:Dynamic = renderTexture; __callArgument362; })) : Null<CanvasRenderTextureEntry>);
-    return cast ((cast _Runtime.strictEquals(({ final __typedStruct365 = entry; __typedStruct365 == null ? _Runtime.UNDEFINED : (cast __typedStruct365 : { var status:CanvasRenderTextureStatus; }).status; }), 'ready') : Bool) ? (cast (cast entry : { var target:CanvasRenderTarget; }).target : Dynamic) : (cast null : Dynamic));
+    entry = (cast _Scene2DCanvas.getEntry__canvasRenderTexture(({ final __callArgument387:Dynamic = state; __callArgument387; }), ({ final __callArgument388:Dynamic = renderTexture; __callArgument388; })) : Null<CanvasRenderTextureEntry>);
+    return cast ((cast _Runtime.strictEquals(({ final __typedStruct391 = entry; __typedStruct391 == null ? _Runtime.UNDEFINED : (cast __typedStruct391 : { var status:CanvasRenderTextureStatus; }).status; }), 'ready') : Bool) ? (cast (cast entry : { var target:CanvasRenderTarget; }).target : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
@@ -1373,34 +1416,34 @@ class _Scene2DCanvas {
   @:keep
   private static function invalidateCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture, status:String = 'unrendered'):Void {
     var entry:Null<CanvasRenderTextureEntry> = cast _Runtime.UNDEFINED;
-    entry = (cast _Scene2DCanvas.getEntry__canvasRenderTexture(({ final __callArgument366:Dynamic = state; __callArgument366; }), ({ final __callArgument367:Dynamic = renderTexture; __callArgument367; })) : Null<CanvasRenderTextureEntry>);
+    entry = (cast _Scene2DCanvas.getEntry__canvasRenderTexture(({ final __callArgument392:Dynamic = state; __callArgument392; }), ({ final __callArgument393:Dynamic = renderTexture; __callArgument393; })) : Null<CanvasRenderTextureEntry>);
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast entry : { var status:CanvasRenderTextureStatus; }).status = cast (status : CanvasRenderTextureStatus)); }
   }
 
   @:allow(flight)
   @:keep
   private static function isCanvasRenderTextureReady(state:CanvasRenderState, renderTexture:RenderTexture):Bool {
-    return cast _Runtime.strictEquals(({ final __typedStruct374 = (cast _Scene2DCanvas.getEntry__canvasRenderTexture(({ final __callArgument370:Dynamic = state; __callArgument370; }), ({ final __callArgument371:Dynamic = renderTexture; __callArgument371; })) : Null<CanvasRenderTextureEntry>); __typedStruct374 == null ? _Runtime.UNDEFINED : (cast __typedStruct374 : { var status:CanvasRenderTextureStatus; }).status; }), 'ready');
+    return cast _Runtime.strictEquals(({ final __typedStruct400 = (cast _Scene2DCanvas.getEntry__canvasRenderTexture(({ final __callArgument396:Dynamic = state; __callArgument396; }), ({ final __callArgument397:Dynamic = renderTexture; __callArgument397; })) : Null<CanvasRenderTextureEntry>); __typedStruct400 == null ? _Runtime.UNDEFINED : (cast __typedStruct400 : { var status:CanvasRenderTextureStatus; }).status; }), 'ready');
     return cast null;
   }
 
   public static function renderIntoCanvasRenderTexture(ownerState:CanvasRenderState, renderState:CanvasRenderState, renderTexture:RenderTexture, callback:CanvasRenderState->Void):Void {
-    (cast writeCanvasRenderTextureTarget : CanvasRenderState->RenderTexture->(CanvasRenderTarget->Void)->Void)(({ final __callArgument375:Dynamic = ownerState; __callArgument375; }), ({ final __callArgument376:Dynamic = renderTexture; __callArgument376; }), ({ final __callArgument388:Dynamic = function(target:CanvasRenderTarget):Void {
-      (#if js _Runtime.callValue(beginCanvasRenderPass, cast ([({ final __callArgument379:Dynamic = renderState; __callArgument379; }), ({ final __callArgument380:Dynamic = target; __callArgument380; })] : Array<Dynamic>)) #else beginCanvasRenderPass(({ final __callArgument377:Dynamic = renderState; __callArgument377; }), ({ final __callArgument378:Dynamic = target; __callArgument378; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (cast writeCanvasRenderTextureTarget : CanvasRenderState->RenderTexture->(CanvasRenderTarget->Void)->Void)(({ final __callArgument401:Dynamic = ownerState; __callArgument401; }), ({ final __callArgument402:Dynamic = renderTexture; __callArgument402; }), ({ final __callArgument414:Dynamic = function(target:CanvasRenderTarget):Void {
+      (#if js _Runtime.callValue(beginCanvasRenderPass, cast ([({ final __callArgument405:Dynamic = renderState; __callArgument405; }), ({ final __callArgument406:Dynamic = target; __callArgument406; })] : Array<Dynamic>)) #else beginCanvasRenderPass(({ final __callArgument403:Dynamic = renderState; __callArgument403; }), ({ final __callArgument404:Dynamic = target; __callArgument404; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
       try {
         try {
-          callback(({ final __callArgument381:Dynamic = renderState; __callArgument381; }));
+          callback(({ final __callArgument407:Dynamic = renderState; __callArgument407; }));
         } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-      } catch (__finallyError383:Dynamic) {
+      } catch (__finallyError409:Dynamic) {
         {
-          endCanvasRenderPass(({ final __callArgument384:Dynamic = renderState; __callArgument384; }));
+          endCanvasRenderPass(({ final __callArgument410:Dynamic = renderState; __callArgument410; }));
         }
-        _Runtime.throwValue(__finallyError383);
+        _Runtime.throwValue(__finallyError409);
       }
       {
-        endCanvasRenderPass(({ final __callArgument386:Dynamic = renderState; __callArgument386; }));
+        endCanvasRenderPass(({ final __callArgument412:Dynamic = renderState; __callArgument412; }));
       }
-    }; __callArgument388; }));
+    }; __callArgument414; }));
   }
 
   @:allow(flight)
@@ -1409,7 +1452,7 @@ class _Scene2DCanvas {
     var entry:CanvasRenderTextureEntry = cast _Runtime.UNDEFINED;
     var previousStatus:CanvasRenderTextureStatus = cast _Runtime.UNDEFINED;
     var rendered:Bool = cast _Runtime.UNDEFINED;
-    entry = (cast _Scene2DCanvas.ensureEntry__canvasRenderTexture(({ final __callArgument403:Dynamic = state; __callArgument403; }), ({ final __callArgument404:Dynamic = renderTexture; __callArgument404; })) : CanvasRenderTextureEntry);
+    entry = (cast _Scene2DCanvas.ensureEntry__canvasRenderTexture(({ final __callArgument429:Dynamic = state; __callArgument429; }), ({ final __callArgument430:Dynamic = renderTexture; __callArgument430; })) : CanvasRenderTextureEntry);
     previousStatus = entry.status;
     (entry.status = cast ('writing' : CanvasRenderTextureStatus));
     rendered = false;
@@ -1417,19 +1460,19 @@ class _Scene2DCanvas {
       try {
         var result:T = (cast callback(entry.target) : T);
         (rendered = cast (true : Dynamic));
-        var __returnValue407:Dynamic = result;
+        var __returnValue433:Dynamic = result;
         {
           (entry.status = cast (((cast rendered : Bool) ? (cast 'ready' : Dynamic) : (cast ((cast _Runtime.strictEquals(previousStatus, 'writing') : Bool) ? (cast 'writing' : Dynamic) : (cast 'unrendered' : Dynamic)) : Dynamic)) : CanvasRenderTextureStatus));
           if ((cast rendered : Bool)) { (renderTexture.version = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((renderTexture.version + 1.0)), 0) : Float)); }
         }
-        return cast __returnValue407;
+        return cast __returnValue433;
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError408:Dynamic) {
+    } catch (__finallyError434:Dynamic) {
       {
         (entry.status = cast (((cast rendered : Bool) ? (cast 'ready' : Dynamic) : (cast ((cast _Runtime.strictEquals(previousStatus, 'writing') : Bool) ? (cast 'writing' : Dynamic) : (cast 'unrendered' : Dynamic)) : Dynamic)) : CanvasRenderTextureStatus));
         if ((cast rendered : Bool)) { (renderTexture.version = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((renderTexture.version + 1.0)), 0) : Float)); }
       }
-      _Runtime.throwValue(__finallyError408);
+      _Runtime.throwValue(__finallyError434);
     }
     {
       (entry.status = cast (((cast rendered : Bool) ? (cast 'ready' : Dynamic) : (cast ((cast _Runtime.strictEquals(previousStatus, 'writing') : Bool) ? (cast 'writing' : Dynamic) : (cast 'unrendered' : Dynamic)) : Dynamic)) : CanvasRenderTextureStatus));
@@ -1443,7 +1486,7 @@ class _Scene2DCanvas {
     var targets:flight._internal._Map<RenderTexture, CanvasRenderTextureEntry> = cast _Runtime.UNDEFINED;
     var entry:Null<CanvasRenderTextureEntry> = cast _Runtime.UNDEFINED;
     descriptor = renderTexture.source;
-    targets = (cast _Scene2DCanvas.getTargets__canvasRenderTexture(({ final __callArgument409:Dynamic = state; __callArgument409; })) : flight._internal._Map<RenderTexture, CanvasRenderTextureEntry>);
+    targets = (cast _Scene2DCanvas.getTargets__canvasRenderTexture(({ final __callArgument435:Dynamic = state; __callArgument435; })) : flight._internal._Map<RenderTexture, CanvasRenderTextureEntry>);
     entry = ((cast targets : flight._internal._Map<RenderTexture, CanvasRenderTextureEntry>).get((cast renderTexture)));
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (entry = cast ({ status: 'unrendered', target: (cast createCanvasRenderTarget((cast (cast state : CanvasRenderState).surface : CanvasRenderSurface).creator, (cast descriptor.width : Float), (cast descriptor.height : Float)) : CanvasRenderTarget) } : Dynamic));
@@ -1461,14 +1504,14 @@ class _Scene2DCanvas {
     if ((cast _Runtime.strictEquals(targets, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (targets = cast (_Runtime.construct(flight._internal._HostValueLut.get('Map'), []) : Dynamic));
       ((cast _Scene2DCanvas._targetsByState__canvasRenderTexture : flight._internal._WeakMap<CanvasRenderState, flight._internal._Map<RenderTexture, CanvasRenderTextureEntry>>).set((cast state), (cast targets)));
-      registerCanvasRenderStateTeardown(({ final __callArgument411:Dynamic = state; __callArgument411; }), ({ final __callArgument412:Dynamic = _Scene2DCanvas.destroyOwnedCanvasRenderTextures__canvasRenderTexture; __callArgument412; }));
+      registerCanvasRenderStateTeardown(({ final __callArgument437:Dynamic = state; __callArgument437; }), ({ final __callArgument438:Dynamic = _Scene2DCanvas.destroyOwnedCanvasRenderTextures__canvasRenderTexture; __callArgument438; }));
     }
     return cast targets;
     return cast null;
   }
 
   public static function getEntry__canvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture):Null<CanvasRenderTextureEntry> {
-    return cast ({ final __collection415:Dynamic = ((cast _Scene2DCanvas._targetsByState__canvasRenderTexture : flight._internal._WeakMap<CanvasRenderState, flight._internal._Map<RenderTexture, CanvasRenderTextureEntry>>).get((cast state))); __collection415 == null ? _Runtime.UNDEFINED : ((cast __collection415 : flight._internal._Map<RenderTexture, CanvasRenderTextureEntry>).get((cast renderTexture))); });
+    return cast ({ final __collection441:Dynamic = ((cast _Scene2DCanvas._targetsByState__canvasRenderTexture : flight._internal._WeakMap<CanvasRenderState, flight._internal._Map<RenderTexture, CanvasRenderTextureEntry>>).get((cast state))); __collection441 == null ? _Runtime.UNDEFINED : ((cast __collection441 : flight._internal._Map<RenderTexture, CanvasRenderTextureEntry>).get((cast renderTexture))); });
     return cast null;
   }
 
@@ -1487,34 +1530,40 @@ class _Scene2DCanvas {
 
   public static function acquireCanvasRenderTexture(state:CanvasRenderState, pool:CanvasRenderTexturePool, descriptor:RenderTargetDescriptor):RenderTexture {
     var renderTexture:RenderTexture = cast _Runtime.UNDEFINED;
-    _Scene2DCanvas.assertUsablePool__canvasRenderTexturePool(({ final __callArgument418:Dynamic = state; __callArgument418; }), ({ final __callArgument419:Dynamic = pool; __callArgument419; }));
-    renderTexture = _Runtime.coalesce(_Runtime.callProperty(pool.free, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast (cast createRenderTexture(({ final __callArgument422:Dynamic = descriptor; __callArgument422; })) : RenderTexture));
-    _Scene2DCanvas.applyRenderTargetDescriptor__canvasRenderTexturePool(renderTexture.source, ({ final __callArgument424:Dynamic = descriptor; __callArgument424; }));
-    resetTextureUvTransform(({ final __callArgument426:Dynamic = renderTexture; __callArgument426; }));
+    _Scene2DCanvas.assertUsablePool__canvasRenderTexturePool(({ final __callArgument444:Dynamic = state; __callArgument444; }), ({ final __callArgument445:Dynamic = pool; __callArgument445; }));
+    renderTexture = _Runtime.coalesce(_Runtime.callProperty(pool.free, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast (cast createRenderTexture(({ final __callArgument448:Dynamic = descriptor; __callArgument448; })) : RenderTexture));
+    _Scene2DCanvas.applyRenderTargetDescriptor__canvasRenderTexturePool(renderTexture.source, ({ final __callArgument450:Dynamic = descriptor; __callArgument450; }));
+    resetTextureUvTransform(({ final __callArgument452:Dynamic = renderTexture; __callArgument452; }));
     (renderTexture.colorSpace = cast (cast _Runtime.coalesce(descriptor.colorSpace, function():Dynamic return cast 'srgb') : Dynamic));
-    (#if js _Runtime.callValue(invalidateCanvasRenderTexture, cast ([({ final __callArgument430:Dynamic = state; __callArgument430; }), ({ final __callArgument431:Dynamic = renderTexture; __callArgument431; })] : Array<Dynamic>)) #else invalidateCanvasRenderTexture(({ final __callArgument428:Dynamic = state; __callArgument428; }), ({ final __callArgument429:Dynamic = renderTexture; __callArgument429; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(invalidateCanvasRenderTexture, cast ([({ final __callArgument456:Dynamic = state; __callArgument456; }), ({ final __callArgument457:Dynamic = renderTexture; __callArgument457; })] : Array<Dynamic>)) #else invalidateCanvasRenderTexture(({ final __callArgument454:Dynamic = state; __callArgument454; }), ({ final __callArgument455:Dynamic = renderTexture; __callArgument455; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     ((cast pool.leased : flight._internal._Set<RenderTexture>).add((cast renderTexture)));
     return cast renderTexture;
     return cast null;
   }
 
   public static function createCanvasRenderTexturePool(creator:CanvasRenderSurfaceCreator):CanvasRenderTexturePool {
-    return cast { destroyed: false, effectTargets: { creator: creator, free: cast ([] : Array<Dynamic>), inUse: cast ([] : Array<Dynamic>) }, free: cast ([] : Array<Dynamic>), leased: _Runtime.construct(flight._internal._HostValueLut.get('Set'), []), owner: null };
+    var effectTargets:EntityConstruction<CanvasRenderTargetPool> = cast _Runtime.UNDEFINED;
+    var out:EntityConstruction<CanvasRenderTexturePool> = cast _Runtime.UNDEFINED;
+    effectTargets = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ creator: cast _Runtime.UNDEFINED, free: cast _Runtime.UNDEFINED, inUse: cast _Runtime.UNDEFINED } : CanvasRenderTargetPool); }) #end));
+    _Scene2DCanvas.assignCanvasRenderTargetPoolFields__canvasRenderTexturePool(({ final __callArgument458:Dynamic = effectTargets; __callArgument458; }), ({ final __callArgument459:Dynamic = creator; __callArgument459; }));
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ destroyed: cast _Runtime.UNDEFINED, effectTargets: cast _Runtime.UNDEFINED, free: cast _Runtime.UNDEFINED, leased: cast _Runtime.UNDEFINED, owner: cast _Runtime.UNDEFINED } : CanvasRenderTexturePool); }) #end));
+    initializeCanvasRenderTexturePool(({ final __callArgument462:Dynamic = out; __callArgument462; }), effectTargets);
+    return cast out;
     return cast null;
   }
 
   public static function destroyCanvasRenderTexturePool(state:CanvasRenderState, pool:CanvasRenderTexturePool):Void {
     var textures:flight._internal._Set<RenderTexture> = cast _Runtime.UNDEFINED;
     if ((cast pool.destroyed : Bool)) { return; }
-    _Scene2DCanvas.assertPoolOwner__canvasRenderTexturePool(({ final __callArgument432:Dynamic = state; __callArgument432; }), ({ final __callArgument433:Dynamic = pool; __callArgument433; }));
+    _Scene2DCanvas.assertPoolOwner__canvasRenderTexturePool(({ final __callArgument464:Dynamic = state; __callArgument464; }), ({ final __callArgument465:Dynamic = pool; __callArgument465; }));
     textures = _Runtime.construct(flight._internal._HostValueLut.get('Set'), [_Runtime.concatArrays([_Runtime.toArray(pool.free), _Runtime.toArray(pool.leased)])]);
     for (renderTexture in _Runtime.iterable(textures)) {
-      destroyCanvasRenderTexture(({ final __callArgument438:Dynamic = state; __callArgument438; }), ({ final __callArgument439:Dynamic = renderTexture; __callArgument439; }));
+      destroyCanvasRenderTexture(({ final __callArgument470:Dynamic = state; __callArgument470; }), ({ final __callArgument471:Dynamic = renderTexture; __callArgument471; }));
     }
     _Runtime.setLength(pool.free, 0.0);
     ((cast pool.leased : flight._internal._Set<RenderTexture>).clear());
     for (target in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray((cast pool.effectTargets : { var free:Array<CanvasRenderTarget>; }).free), _Runtime.toArray((cast pool.effectTargets : { var inUse:Array<CanvasRenderTarget>; }).inUse)]))) {
-      destroyCanvasRenderTarget(({ final __callArgument444:Dynamic = target; __callArgument444; }));
+      destroyCanvasRenderTarget(({ final __callArgument476:Dynamic = target; __callArgument476; }));
     }
     _Runtime.setLength((cast pool.effectTargets : { var free:Array<CanvasRenderTarget>; }).free, 0.0);
     _Runtime.setLength((cast pool.effectTargets : { var inUse:Array<CanvasRenderTarget>; }).inUse, 0.0);
@@ -1522,12 +1571,28 @@ class _Scene2DCanvas {
     (pool.destroyed = cast (true : Bool));
   }
 
+  public static function assignCanvasRenderTargetPoolFields__canvasRenderTexturePool(out:EntityConstruction<CanvasRenderTargetPool>, creator:CanvasRenderSurfaceCreator):Void {
+    _Runtime.setField(out, 'creator', creator);
+    _Runtime.setField(out, 'free', cast ([] : Array<Dynamic>));
+    _Runtime.setField(out, 'inUse', cast ([] : Array<Dynamic>));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeCanvasRenderTexturePool(out:EntityConstruction<CanvasRenderTexturePool>, effectTargets:CanvasRenderTargetPool):Void {
+    _Runtime.setField(out, 'destroyed', false);
+    _Runtime.setField(out, 'effectTargets', effectTargets);
+    _Runtime.setField(out, 'free', cast ([] : Array<Dynamic>));
+    _Runtime.setField(out, 'leased', _Runtime.construct(flight._internal._HostValueLut.get('Set'), []));
+    _Runtime.setField(out, 'owner', null);
+  }
+
   public static function releaseCanvasRenderTexture(state:CanvasRenderState, pool:CanvasRenderTexturePool, renderTexture:RenderTexture):Void {
-    _Scene2DCanvas.assertUsablePool__canvasRenderTexturePool(({ final __callArgument446:Dynamic = state; __callArgument446; }), ({ final __callArgument447:Dynamic = pool; __callArgument447; }));
+    _Scene2DCanvas.assertUsablePool__canvasRenderTexturePool(({ final __callArgument478:Dynamic = state; __callArgument478; }), ({ final __callArgument479:Dynamic = pool; __callArgument479; }));
     if ((cast !(cast ((cast pool.leased : flight._internal._Set<RenderTexture>).delete_((cast renderTexture))) : Bool) : Bool)) {
       _Runtime.throwValue(_Runtime.error('releaseCanvasRenderTexture: texture is not leased from this pool'));
     }
-    invalidateCanvasRenderTexture(({ final __callArgument450:Dynamic = state; __callArgument450; }), ({ final __callArgument451:Dynamic = renderTexture; __callArgument451; }), (cast 'released' : String));
+    invalidateCanvasRenderTexture(({ final __callArgument482:Dynamic = state; __callArgument482; }), ({ final __callArgument483:Dynamic = renderTexture; __callArgument483; }), (cast 'released' : String));
     _Runtime.callProperty(pool.free, 'push', cast ([renderTexture] : Array<Dynamic>));
   }
 
@@ -1537,40 +1602,40 @@ class _Scene2DCanvas {
     try {
       try {
         for (descriptor in _Runtime.iterable(descriptors)) {
-          _Runtime.callProperty(textures, 'push', cast ([(cast acquireCanvasRenderTexture(({ final __callArgument456:Dynamic = state; __callArgument456; }), ({ final __callArgument457:Dynamic = pool; __callArgument457; }), ({ final __callArgument458:Dynamic = descriptor; __callArgument458; })) : RenderTexture)] : Array<Dynamic>));
+          _Runtime.callProperty(textures, 'push', cast ([(cast acquireCanvasRenderTexture(({ final __callArgument488:Dynamic = state; __callArgument488; }), ({ final __callArgument489:Dynamic = pool; __callArgument489; }), ({ final __callArgument490:Dynamic = descriptor; __callArgument490; })) : RenderTexture)] : Array<Dynamic>));
         }
-        var __returnValue462:Dynamic = (cast callback(({ final __callArgument463:Dynamic = textures; __callArgument463; })) : T);
+        var __returnValue494:Dynamic = (cast callback(({ final __callArgument495:Dynamic = textures; __callArgument495; })) : T);
         {
           {
             var i:Float = _Runtime.subtractNumbers(_Runtime.field(textures, 'length'), 1.0);
             while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
               var texture:RenderTexture = flight._internal._StaticIndex.readArray(textures, i);
-              if ((cast ((cast pool.leased : flight._internal._Set<RenderTexture>).has((cast texture))) : Bool)) { releaseCanvasRenderTexture(({ final __callArgument465:Dynamic = state; __callArgument465; }), ({ final __callArgument466:Dynamic = pool; __callArgument466; }), ({ final __callArgument467:Dynamic = texture; __callArgument467; })); }
+              if ((cast ((cast pool.leased : flight._internal._Set<RenderTexture>).has((cast texture))) : Bool)) { releaseCanvasRenderTexture(({ final __callArgument497:Dynamic = state; __callArgument497; }), ({ final __callArgument498:Dynamic = pool; __callArgument498; }), ({ final __callArgument499:Dynamic = texture; __callArgument499; })); }
               i--;
             }
           }
         }
-        return cast __returnValue462;
+        return cast __returnValue494;
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError471:Dynamic) {
+    } catch (__finallyError503:Dynamic) {
       {
         {
           var i:Float = _Runtime.subtractNumbers(_Runtime.field(textures, 'length'), 1.0);
           while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
             var texture:RenderTexture = flight._internal._StaticIndex.readArray(textures, i);
-            if ((cast ((cast pool.leased : flight._internal._Set<RenderTexture>).has((cast texture))) : Bool)) { releaseCanvasRenderTexture(({ final __callArgument472:Dynamic = state; __callArgument472; }), ({ final __callArgument473:Dynamic = pool; __callArgument473; }), ({ final __callArgument474:Dynamic = texture; __callArgument474; })); }
+            if ((cast ((cast pool.leased : flight._internal._Set<RenderTexture>).has((cast texture))) : Bool)) { releaseCanvasRenderTexture(({ final __callArgument504:Dynamic = state; __callArgument504; }), ({ final __callArgument505:Dynamic = pool; __callArgument505; }), ({ final __callArgument506:Dynamic = texture; __callArgument506; })); }
             i--;
           }
         }
       }
-      _Runtime.throwValue(__finallyError471);
+      _Runtime.throwValue(__finallyError503);
     }
     {
       {
         var i:Float = _Runtime.subtractNumbers(_Runtime.field(textures, 'length'), 1.0);
         while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
           var texture:RenderTexture = flight._internal._StaticIndex.readArray(textures, i);
-          if ((cast ((cast pool.leased : flight._internal._Set<RenderTexture>).has((cast texture))) : Bool)) { releaseCanvasRenderTexture(({ final __callArgument478:Dynamic = state; __callArgument478; }), ({ final __callArgument479:Dynamic = pool; __callArgument479; }), ({ final __callArgument480:Dynamic = texture; __callArgument480; })); }
+          if ((cast ((cast pool.leased : flight._internal._Set<RenderTexture>).has((cast texture))) : Bool)) { releaseCanvasRenderTexture(({ final __callArgument510:Dynamic = state; __callArgument510; }), ({ final __callArgument511:Dynamic = pool; __callArgument511; }), ({ final __callArgument512:Dynamic = texture; __callArgument512; })); }
           i--;
         }
       }
@@ -1594,7 +1659,7 @@ class _Scene2DCanvas {
 
   public static function assertUsablePool__canvasRenderTexturePool(state:CanvasRenderState, pool:CanvasRenderTexturePool):Void {
     if ((cast pool.destroyed : Bool)) { _Runtime.throwValue(_Runtime.error('CanvasRenderTexturePool has been destroyed')); }
-    _Scene2DCanvas.assertPoolOwner__canvasRenderTexturePool(({ final __callArgument484:Dynamic = state; __callArgument484; }), ({ final __callArgument485:Dynamic = pool; __callArgument485; }));
+    _Scene2DCanvas.assertPoolOwner__canvasRenderTexturePool(({ final __callArgument516:Dynamic = state; __callArgument516; }), ({ final __callArgument517:Dynamic = pool; __callArgument517; }));
   }
 
   public static function assertPoolOwner__canvasRenderTexturePool(state:CanvasRenderState, pool:CanvasRenderTexturePool):Void {
@@ -1608,22 +1673,22 @@ class _Scene2DCanvas {
   }
 
   public static function registerCanvasRenderTextureResolver(resolvers:CanvasTextureResolvers, state:CanvasRenderState):Void {
-    registerCanvasTextureResolver(({ final __callArgument488:Dynamic = resolvers; __callArgument488; }), (cast RenderTargetTextureSourceKind : String), (cast function(_resolvers:CanvasTextureResolvers, texture:Texture):Null<flight._internal.dom.HTMLCanvasElement> return (cast bindCanvasRenderTexture(({ final __callArgument489:Dynamic = state; __callArgument489; }), (cast texture : RenderTexture)) : Null<flight._internal.dom.HTMLCanvasElement>) : Dynamic));
+    registerCanvasTextureResolver(({ final __callArgument520:Dynamic = resolvers; __callArgument520; }), (cast RenderTargetTextureSourceKind : String), (cast function(_resolvers:CanvasTextureResolvers, texture:Texture):Null<flight._internal.dom.HTMLCanvasElement> return (cast bindCanvasRenderTexture(({ final __callArgument521:Dynamic = state; __callArgument521; }), (cast texture : RenderTexture)) : Null<flight._internal.dom.HTMLCanvasElement>) : Dynamic));
   }
 
   @:allow(flight)
   @:keep
   private static function drawCanvasRichText(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
-    _Scene2DCanvas.drawCanvasRichTextField__canvasRichText(({ final __callArgument494:Dynamic = state; __callArgument494; }), ({ final __callArgument495:Dynamic = renderProxy; __callArgument495; }));
+    _Scene2DCanvas.drawCanvasRichTextField__canvasRichText(({ final __callArgument526:Dynamic = state; __callArgument526; }), ({ final __callArgument527:Dynamic = renderProxy; __callArgument527; }));
     if ((cast ((cast !_Runtime.strictEquals(_Scene2DCanvas._canvasTextInputOverlay__canvasRichText, null) : Bool) && (cast !_Runtime.strictEquals((cast (cast getRichTextRuntime((cast (cast renderProxy : RenderProxy2D).source : RichText)) : RichTextRuntime) : { var input:Null<TextInputState>; }).input, null) : Bool)) : Bool)) {
-      (cast _Scene2DCanvas._canvasTextInputOverlay__canvasRichText : CanvasRenderState->RenderProxy2D->Void)(({ final __callArgument498:Dynamic = state; __callArgument498; }), ({ final __callArgument499:Dynamic = renderProxy; __callArgument499; }));
+      (cast _Scene2DCanvas._canvasTextInputOverlay__canvasRichText : CanvasRenderState->RenderProxy2D->Void)(({ final __callArgument530:Dynamic = state; __callArgument530; }), ({ final __callArgument531:Dynamic = renderProxy; __callArgument531; }));
     }
   }
 
   @:allow(flight)
   @:keep
   private static function drawCanvasRichTextMask(state:CanvasRenderState, data:RenderProxy2D):Void {
-    drawCanvasScene2D(({ final __callArgument502:Dynamic = state; __callArgument502; }), ({ final __callArgument503:Dynamic = data; __callArgument503; }));
+    drawCanvasScene2D(({ final __callArgument534:Dynamic = state; __callArgument534; }), ({ final __callArgument535:Dynamic = data; __callArgument535; }));
   }
 
   public static function drawCanvasRichTextField__canvasRichText(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
@@ -1642,27 +1707,27 @@ class _Scene2DCanvas {
     var scrollYOffset:Float = cast _Runtime.UNDEFINED;
     var scrollXOffset:Float = cast _Runtime.UNDEFINED;
     var bulletLines:flight._internal._Set<Float> = cast _Runtime.UNDEFINED;
-    drawCanvasScene2D(({ final __callArgument506:Dynamic = state; __callArgument506; }), ({ final __callArgument507:Dynamic = renderProxy; __callArgument507; }));
+    drawCanvasScene2D(({ final __callArgument538:Dynamic = state; __callArgument538; }), ({ final __callArgument539:Dynamic = renderProxy; __callArgument539; }));
     source = (cast (cast renderProxy : RenderProxy2D).source : RichText);
     data = source.data;
     context = (cast state : CanvasRenderState).context;
     _Runtime.callOptionalValue((cast state : CanvasRenderState).applyBlendMode, cast ([state, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
     flight._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast renderProxy : RenderProxy2D).alpha);
-    setCanvasTransform(({ final __callArgument510:Dynamic = state; __callArgument510; }), ({ final __callArgument511:Dynamic = context; __callArgument511; }), (cast renderProxy : RenderProxy2D).transform2D);
-    richTextRuntime = (cast getRichTextRuntime(({ final __callArgument514:Dynamic = source; __callArgument514; })) : RichTextRuntime);
-    content = (cast getRichTextContent(({ final __callArgument516:Dynamic = richTextRuntime; __callArgument516; })) : RichTextContent);
-    computeRichTextContent(({ final __callArgument518:Dynamic = content; __callArgument518; }), ({ final __callArgument519:Dynamic = data; __callArgument519; }), (cast getRichTextPasswordCharacter(({ final __callArgument520:Dynamic = source; __callArgument520; })) : Null<String>));
+    setCanvasTransform(({ final __callArgument542:Dynamic = state; __callArgument542; }), ({ final __callArgument543:Dynamic = context; __callArgument543; }), (cast renderProxy : RenderProxy2D).transform2D);
+    richTextRuntime = (cast getRichTextRuntime(({ final __callArgument546:Dynamic = source; __callArgument546; })) : RichTextRuntime);
+    content = (cast getRichTextContent(({ final __callArgument548:Dynamic = richTextRuntime; __callArgument548; })) : RichTextContent);
+    computeRichTextContent(({ final __callArgument550:Dynamic = content; __callArgument550; }), ({ final __callArgument551:Dynamic = data; __callArgument551; }), (cast getRichTextPasswordCharacter(({ final __callArgument552:Dynamic = source; __callArgument552; })) : Null<String>));
     __destructure0 = content;
     text = __destructure0.text;
     measure = (cast function(t:String, fmt:TextFormat):Float {
-      flight._internal.backend.Canvas2dBackend.setField(context, 'font', (cast computeTextFormatFontString(({ final __callArgument526:Dynamic = fmt; __callArgument526; })) : String));
+      flight._internal.backend.Canvas2dBackend.setField(context, 'font', (cast computeTextFormatFontString(({ final __callArgument558:Dynamic = fmt; __callArgument558; })) : String));
       return cast (cast flight._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([t] : Array<Dynamic>)) : flight._internal.dom.TextMetrics).width;
       return cast _Runtime.UNDEFINED;
     });
     result = (cast getTextLayoutResult((cast richTextRuntime : TextLabelRuntime)) : TextLayoutResult);
-    computeTextLayout(({ final __callArgument528:Dynamic = result; __callArgument528; }), ({ final __callArgument529:Dynamic = { text: text, formatRanges: content.formatRanges, width: data.width, height: data.height, measure: measure, multiline: data.multiline, verticalAlign: ((cast _Runtime.strictEquals(data.autoSize, 'none') : Bool) ? (cast data.verticalAlign : Dynamic) : (cast 'top' : Dynamic)), wordWrap: data.wordWrap }; __callArgument529; }));
-    fieldW = (cast computeTextBoundsWidth((cast data : Dynamic), ({ final __callArgument532:Dynamic = result; __callArgument532; })) : Float);
-    fieldH = (cast computeTextBoundsHeight((cast data : Dynamic), ({ final __callArgument534:Dynamic = result; __callArgument534; })) : Float);
+    computeTextLayout(({ final __callArgument560:Dynamic = result; __callArgument560; }), ({ final __callArgument561:Dynamic = { text: text, formatRanges: content.formatRanges, width: data.width, height: data.height, measure: measure, multiline: data.multiline, verticalAlign: ((cast _Runtime.strictEquals(data.autoSize, 'none') : Bool) ? (cast data.verticalAlign : Dynamic) : (cast 'top' : Dynamic)), wordWrap: data.wordWrap }; __callArgument561; }));
+    fieldW = (cast computeTextBoundsWidth((cast data : Dynamic), ({ final __callArgument564:Dynamic = result; __callArgument564; })) : Float);
+    fieldH = (cast computeTextBoundsHeight((cast data : Dynamic), ({ final __callArgument566:Dynamic = result; __callArgument566; })) : Float);
     if ((cast data.background : Bool)) {
       flight._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', (cast computeRgbHexString((cast data.backgroundColor : Float)) : String));
       flight._internal.backend.Canvas2dBackend.call(context, 'fillRect', cast ([0.0, 0.0, fieldW, fieldH] : Array<Dynamic>));
@@ -1681,7 +1746,7 @@ class _Scene2DCanvas {
     flight._internal.backend.Canvas2dBackend.call(context, 'rect', cast ([0.0, 0.0, fieldW, fieldH] : Array<Dynamic>));
     flight._internal.backend.Canvas2dBackend.call(context, 'clip', cast ([] : Array<Dynamic>));
     if ((cast ((cast (cast source.data : { var selectable:Bool; }).selectable : Bool) && (cast !_Runtime.strictEquals(richTextRuntime.selectionBeginIndex, richTextRuntime.selectionEndIndex) : Bool)) : Bool)) {
-      getRichTextSelectionRectangles(({ final __callArgument536:Dynamic = _Scene2DCanvas._richTextSelectionRectangles__canvasRichText; __callArgument536; }), (cast richTextRuntime.selectionBeginIndex : Float), (cast richTextRuntime.selectionEndIndex : Float), ({ final __callArgument537:Dynamic = result; __callArgument537; }));
+      getRichTextSelectionRectangles(({ final __callArgument568:Dynamic = _Scene2DCanvas._richTextSelectionRectangles__canvasRichText; __callArgument568; }), (cast richTextRuntime.selectionBeginIndex : Float), (cast richTextRuntime.selectionEndIndex : Float), ({ final __callArgument569:Dynamic = result; __callArgument569; }));
       flight._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', _Scene2DCanvas.SELECTION_COLOR__canvasRichText);
       flight._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', HxMath.min(1.0, ((cast renderProxy : RenderProxy2D).alpha * _Scene2DCanvas.SELECTION_ALPHA__canvasRichText)));
       for (rectangle in _Runtime.iterable(_Scene2DCanvas._richTextSelectionRectangles__canvasRichText)) {
@@ -1759,7 +1824,7 @@ class _Scene2DCanvas {
     var gw:Float = cast _Runtime.UNDEFINED;
     var gh:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast scaleX : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast scaleY : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
-    bounds = (cast _Scene2DCanvas.computeCommandsBounds__canvasScale9Mapper(({ final __callArgument544:Dynamic = commands; __callArgument544; })) : Null<{ var width:Float; var height:Float; }>);
+    bounds = (cast _Scene2DCanvas.computeCommandsBounds__canvasScale9Mapper(({ final __callArgument576:Dynamic = commands; __callArgument576; })) : Null<{ var width:Float; var height:Float; }>);
     if ((cast ((cast ((cast _Runtime.strictEquals(bounds, null) : Bool) || (cast ((cast (cast bounds : { var width:Float; var height:Float; }).width : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast bounds : { var width:Float; var height:Float; }).height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
     __destructure0 = bounds;
     bw = _Runtime.field(__destructure0, 'width');
@@ -1905,7 +1970,7 @@ class _Scene2DCanvas {
     var scaleX:Float = cast _Runtime.UNDEFINED;
     var scaleY:Float = cast _Runtime.UNDEFINED;
     var mapper:Null<Scale9Mapper> = cast _Runtime.UNDEFINED;
-    drawCanvasScene2D(({ final __callArgument548:Dynamic = state; __callArgument548; }), ({ final __callArgument549:Dynamic = renderProxy; __callArgument549; }));
+    drawCanvasScene2D(({ final __callArgument580:Dynamic = state; __callArgument580; }), ({ final __callArgument581:Dynamic = renderProxy; __callArgument581; }));
     source = (cast (cast renderProxy : RenderProxy2D).source : Scale9Shape);
     __destructure0 = source.data;
     commands = _Runtime.field(__destructure0, 'commands');
@@ -1917,14 +1982,14 @@ class _Scene2DCanvas {
     __destructure1 = source;
     scaleX = __destructure1.scaleX;
     scaleY = __destructure1.scaleY;
-    mapper = (cast buildScale9Mapper(({ final __callArgument552:Dynamic = commands; __callArgument552; }), ({ final __callArgument553:Dynamic = scale9Grid; __callArgument553; }), (cast scaleX : Float), (cast scaleY : Float)) : Null<Scale9Mapper>);
+    mapper = (cast buildScale9Mapper(({ final __callArgument584:Dynamic = commands; __callArgument584; }), ({ final __callArgument585:Dynamic = scale9Grid; __callArgument585; }), (cast scaleX : Float), (cast scaleY : Float)) : Null<Scale9Mapper>);
     if ((cast _Runtime.strictEquals(mapper, null) : Bool)) {
-      setCanvasTransform(({ final __callArgument556:Dynamic = state; __callArgument556; }), ({ final __callArgument557:Dynamic = context; __callArgument557; }), (cast renderProxy : RenderProxy2D).transform2D);
-      renderCanvasShapeCommands(({ final __callArgument560:Dynamic = context; __callArgument560; }), ({ final __callArgument561:Dynamic = state; __callArgument561; }), ({ final __callArgument562:Dynamic = commands; __callArgument562; }), (cast getCanvasRenderStateTextureResolvers(({ final __callArgument563:Dynamic = state; __callArgument563; })) : CanvasTextureResolvers));
+      setCanvasTransform(({ final __callArgument588:Dynamic = state; __callArgument588; }), ({ final __callArgument589:Dynamic = context; __callArgument589; }), (cast renderProxy : RenderProxy2D).transform2D);
+      renderCanvasShapeCommands(({ final __callArgument592:Dynamic = context; __callArgument592; }), ({ final __callArgument593:Dynamic = state; __callArgument593; }), ({ final __callArgument594:Dynamic = commands; __callArgument594; }), (cast getCanvasRenderStateTextureResolvers(({ final __callArgument595:Dynamic = state; __callArgument595; })) : CanvasTextureResolvers));
     } else {
-      _Scene2DCanvas.applyStrippedTransform__canvasScale9Shape(({ final __callArgument570:Dynamic = state; __callArgument570; }), ({ final __callArgument571:Dynamic = context; __callArgument571; }), ({ final __callArgument572:Dynamic = (cast renderProxy : RenderProxy2D).transform2D; __callArgument572; }), (cast scaleX : Float), (cast scaleY : Float));
-      mapScale9ShapeCommands(({ final __callArgument576:Dynamic = _Scene2DCanvas._remappedCommands__canvasScale9Shape; __callArgument576; }), ({ final __callArgument577:Dynamic = commands; __callArgument577; }), ({ final __callArgument578:Dynamic = mapper; __callArgument578; }));
-      renderCanvasShapeCommands(({ final __callArgument582:Dynamic = context; __callArgument582; }), ({ final __callArgument583:Dynamic = state; __callArgument583; }), ({ final __callArgument584:Dynamic = _Scene2DCanvas._remappedCommands__canvasScale9Shape; __callArgument584; }), (cast getCanvasRenderStateTextureResolvers(({ final __callArgument585:Dynamic = state; __callArgument585; })) : CanvasTextureResolvers));
+      _Scene2DCanvas.applyStrippedTransform__canvasScale9Shape(({ final __callArgument602:Dynamic = state; __callArgument602; }), ({ final __callArgument603:Dynamic = context; __callArgument603; }), ({ final __callArgument604:Dynamic = (cast renderProxy : RenderProxy2D).transform2D; __callArgument604; }), (cast scaleX : Float), (cast scaleY : Float));
+      mapScale9ShapeCommands(({ final __callArgument608:Dynamic = _Scene2DCanvas._remappedCommands__canvasScale9Shape; __callArgument608; }), ({ final __callArgument609:Dynamic = commands; __callArgument609; }), ({ final __callArgument610:Dynamic = mapper; __callArgument610; }));
+      renderCanvasShapeCommands(({ final __callArgument614:Dynamic = context; __callArgument614; }), ({ final __callArgument615:Dynamic = state; __callArgument615; }), ({ final __callArgument616:Dynamic = _Scene2DCanvas._remappedCommands__canvasScale9Shape; __callArgument616; }), (cast getCanvasRenderStateTextureResolvers(({ final __callArgument617:Dynamic = state; __callArgument617; })) : CanvasTextureResolvers));
     }
   }
 
@@ -1948,12 +2013,172 @@ class _Scene2DCanvas {
 
   @:allow(flight)
   @:keep
+  private static function drawCanvasScale9Sprite(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
+    var source:Scale9Sprite = cast _Runtime.UNDEFINED;
+    var texture:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_11889:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_11889:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_11889:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
+    var drawable:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>> = cast _Runtime.UNDEFINED;
+    var textureWidth:Float = cast _Runtime.UNDEFINED;
+    var textureHeight:Float = cast _Runtime.UNDEFINED;
+    var sourceX:Float = cast _Runtime.UNDEFINED;
+    var sourceY:Float = cast _Runtime.UNDEFINED;
+    var sourceWidth:Float = cast _Runtime.UNDEFINED;
+    var sourceHeight:Float = cast _Runtime.UNDEFINED;
+    var context:flight._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
+    var smoothing:Bool = cast _Runtime.UNDEFINED;
+    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var scaleX:Float = cast _Runtime.UNDEFINED;
+    var scaleY:Float = cast _Runtime.UNDEFINED;
+    var sliceCount:Float = cast _Runtime.UNDEFINED;
+    drawCanvasScene2D(({ final __callArgument624:Dynamic = state; __callArgument624; }), ({ final __callArgument625:Dynamic = renderProxy; __callArgument625; }));
+    source = (cast (cast renderProxy : RenderProxy2D).source : Scale9Sprite);
+    texture = (cast (cast source : Scale9Sprite).data : Scale9SpriteData).texture;
+    if ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) : Bool)) { return; }
+    drawable = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers(({ final __callArgument628:Dynamic = state; __callArgument628; })) : CanvasTextureResolvers), ({ final __callArgument630:Dynamic = texture; __callArgument630; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>);
+    if ((cast _Runtime.strictEquals(drawable, null) : Bool)) { return; }
+    textureWidth = (cast getTextureWidth(({ final __callArgument634:Dynamic = texture; __callArgument634; })) : Float);
+    textureHeight = (cast getTextureHeight(({ final __callArgument636:Dynamic = texture; __callArgument636; })) : Float);
+    sourceX = ((cast (cast texture : Texture2D).uvOffset : { var x:Float; }).x * textureWidth);
+    sourceY = ((cast (cast texture : Texture2D).uvOffset : { var y:Float; }).y * textureHeight);
+    sourceWidth = HxMath.abs(((cast (cast texture : Texture2D).uvScale : { var x:Float; }).x * textureWidth));
+    sourceHeight = HxMath.abs(((cast (cast texture : Texture2D).uvScale : { var y:Float; }).y * textureHeight));
+    if ((cast ((cast ((cast sourceWidth : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast sourceHeight : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
+    context = (cast state : CanvasRenderState).context;
+    _Runtime.callOptionalValue((cast state : CanvasRenderState).applyBlendMode, cast ([state, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
+    flight._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast renderProxy : RenderProxy2D).alpha);
+    smoothing = ((cast (cast state : CanvasRenderState).allowSmoothing : Bool) && (cast !(cast StringTools.startsWith((cast (cast texture : Texture2D).sampler : { var magFilter:TextureFilter; }).magFilter, 'nearest') : Bool) : Bool));
+    if ((cast !(cast smoothing : Bool) : Bool)) { flight._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false); }
+    __destructure0 = source;
+    scaleX = _Runtime.field(__destructure0, 'scaleX');
+    scaleY = _Runtime.field(__destructure0, 'scaleY');
+    sliceCount = (cast writeCanvasScale9SpriteSlices(({ final __callArgument638:Dynamic = _Scene2DCanvas._slices__canvasScale9Sprite; __callArgument638; }), (cast sourceWidth : Float), (cast sourceHeight : Float), (cast (cast source : Scale9Sprite).data : Scale9SpriteData).scale9Grid, (cast (sourceWidth * scaleX) : Float), (cast (sourceHeight * scaleY) : Float)) : Float);
+    if ((cast _Runtime.strictEquals(sliceCount, 0.0) : Bool)) {
+      setCanvasTransform(({ final __callArgument640:Dynamic = state; __callArgument640; }), ({ final __callArgument641:Dynamic = context; __callArgument641; }), (cast renderProxy : RenderProxy2D).transform2D);
+      flight._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([drawable, sourceX, sourceY, sourceWidth, sourceHeight, 0.0, 0.0, sourceWidth, sourceHeight] : Array<Dynamic>));
+    } else {
+      _Scene2DCanvas.applyStrippedTransform__canvasScale9Sprite(({ final __callArgument644:Dynamic = state; __callArgument644; }), ({ final __callArgument645:Dynamic = context; __callArgument645; }), ({ final __callArgument646:Dynamic = (cast renderProxy : RenderProxy2D).transform2D; __callArgument646; }), (cast scaleX : Float), (cast scaleY : Float));
+      {
+        var slice:Float = 0.0;
+        while ((cast ((cast slice : Float) < (cast sliceCount : Float)) : Bool)) {
+          var at:Float = (slice * CANVAS_SCALE9_SPRITE_SLICE_STRIDE);
+          flight._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([drawable, (sourceX + flight._internal._StaticIndex.readFloatArrayTyped((cast _Scene2DCanvas._slices__canvasScale9Sprite : Array<Float>), (cast at : Float))), (sourceY + flight._internal._StaticIndex.readFloatArrayTyped((cast _Scene2DCanvas._slices__canvasScale9Sprite : Array<Float>), (cast (at + 1.0) : Float))), flight._internal._StaticIndex.readFloatArrayTyped((cast _Scene2DCanvas._slices__canvasScale9Sprite : Array<Float>), (cast (at + 2.0) : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast _Scene2DCanvas._slices__canvasScale9Sprite : Array<Float>), (cast (at + 3.0) : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast _Scene2DCanvas._slices__canvasScale9Sprite : Array<Float>), (cast (at + 4.0) : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast _Scene2DCanvas._slices__canvasScale9Sprite : Array<Float>), (cast (at + 5.0) : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast _Scene2DCanvas._slices__canvasScale9Sprite : Array<Float>), (cast (at + 6.0) : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast _Scene2DCanvas._slices__canvasScale9Sprite : Array<Float>), (cast (at + 7.0) : Float))] : Array<Dynamic>));
+          slice++;
+        }
+      }
+    }
+    if ((cast !(cast smoothing : Bool) : Bool)) { flight._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', true); }
+  }
+
+  @:allow(flight)
+  @:keep
+  private static final defaultCanvasScale9SpriteRenderer:Scene2DRenderer = (cast { createData: createSpriteRendererData, isDirty: isSpriteRendererDirty, submit: drawCanvasScale9Sprite });
+
+  public static final _slices__canvasScale9Sprite:Array<Float> = (cast cast ([] : Array<Dynamic>));
+
+  public static function applyStrippedTransform__canvasScale9Sprite(state:CanvasRenderState, context:flight._internal.dom.CanvasRenderingContext2D, t:MatrixLike, scaleX:Float, scaleY:Float):Void {
+    var a:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var c:Float = cast _Runtime.UNDEFINED;
+    var d:Float = cast _Runtime.UNDEFINED;
+    a = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (t.a / scaleX) : Dynamic) : (cast t.a : Dynamic));
+    b = ((cast !_Runtime.strictEquals(scaleX, 0.0) : Bool) ? (cast (t.b / scaleX) : Dynamic) : (cast t.b : Dynamic));
+    c = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (t.c / scaleY) : Dynamic) : (cast t.c : Dynamic));
+    d = ((cast !_Runtime.strictEquals(scaleY, 0.0) : Bool) ? (cast (t.d / scaleY) : Dynamic) : (cast t.d : Dynamic));
+    if ((cast (cast state : CanvasRenderState).roundPixels : Bool)) {
+      flight._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([a, b, c, d, _Runtime.fround(t.tx), _Runtime.fround(t.ty)] : Array<Dynamic>));
+    } else {
+      flight._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([a, b, c, d, t.tx, t.ty] : Array<Dynamic>));
+    }
+  }
+
+  @:allow(flight)
+  @:keep
+  private static final CANVAS_SCALE9_SPRITE_SLICE_STRIDE:Float = 8.0;
+
+  @:allow(flight)
+  @:keep
+  private static function writeCanvasScale9SpriteSlices(out:Array<Float>, sourceWidth:Float, sourceHeight:Float, grid:RectangleLike, targetWidth:Float, targetHeight:Float):Float {
+    var columnCount:Float = cast _Runtime.UNDEFINED;
+    var rowCount:Float = cast _Runtime.UNDEFINED;
+    _Runtime.setLength(out, 0.0);
+    if ((cast ((cast ((cast ((cast ((cast sourceWidth : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast sourceHeight : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast targetWidth : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast targetHeight : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast 0.0; }
+    columnCount = (cast _Scene2DCanvas.writeAxisBands__canvasScale9SpriteSlices(({ final __callArgument650:Dynamic = _Scene2DCanvas._columns__canvasScale9SpriteSlices; __callArgument650; }), (cast sourceWidth : Float), (cast grid.x : Float), (cast grid.width : Float), (cast targetWidth : Float)) : Float);
+    rowCount = (cast _Scene2DCanvas.writeAxisBands__canvasScale9SpriteSlices(({ final __callArgument652:Dynamic = _Scene2DCanvas._rows__canvasScale9SpriteSlices; __callArgument652; }), (cast sourceHeight : Float), (cast grid.y : Float), (cast grid.height : Float), (cast targetHeight : Float)) : Float);
+    if ((cast ((cast _Runtime.strictEquals(columnCount, 0.0) : Bool) || (cast _Runtime.strictEquals(rowCount, 0.0) : Bool)) : Bool)) { return cast 0.0; }
+    {
+      var row:Float = 0.0;
+      while ((cast ((cast row : Float) < (cast rowCount : Float)) : Bool)) {
+        var r:Float = (row * _Scene2DCanvas.BAND_STRIDE__canvasScale9SpriteSlices);
+        {
+          var column:Float = 0.0;
+          while ((cast ((cast column : Float) < (cast columnCount : Float)) : Bool)) {
+            var c:Float = (column * _Scene2DCanvas.BAND_STRIDE__canvasScale9SpriteSlices);
+            _Runtime.pushMany(out, cast ([flight._internal._StaticIndex.readFloatArrayTyped((cast _Scene2DCanvas._columns__canvasScale9SpriteSlices : Array<Float>), (cast c : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast _Scene2DCanvas._rows__canvasScale9SpriteSlices : Array<Float>), (cast r : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast _Scene2DCanvas._columns__canvasScale9SpriteSlices : Array<Float>), (cast (c + 1.0) : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast _Scene2DCanvas._rows__canvasScale9SpriteSlices : Array<Float>), (cast (r + 1.0) : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast _Scene2DCanvas._columns__canvasScale9SpriteSlices : Array<Float>), (cast (c + 2.0) : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast _Scene2DCanvas._rows__canvasScale9SpriteSlices : Array<Float>), (cast (r + 2.0) : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast _Scene2DCanvas._columns__canvasScale9SpriteSlices : Array<Float>), (cast (c + 3.0) : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast _Scene2DCanvas._rows__canvasScale9SpriteSlices : Array<Float>), (cast (r + 3.0) : Float))] : Array<Dynamic>));
+            column++;
+          }
+        }
+        row++;
+      }
+    }
+    return cast (columnCount * rowCount);
+    return cast null;
+  }
+
+  public static final BAND_STRIDE__canvasScale9SpriteSlices:Float = 4.0;
+
+  public static final _columns__canvasScale9SpriteSlices:Array<Float> = (cast cast ([] : Array<Dynamic>));
+
+  public static final _rows__canvasScale9SpriteSlices:Array<Float> = (cast cast ([] : Array<Dynamic>));
+
+  public static function writeAxisBands__canvasScale9SpriteSlices(out:Array<Float>, sourceSize:Float, gridStart:Float, gridSize:Float, targetSize:Float):Float {
+    var startSize:Float = cast _Runtime.UNDEFINED;
+    var endSize:Float = cast _Runtime.UNDEFINED;
+    var fixed:Float = cast _Runtime.UNDEFINED;
+    var centre:Float = cast _Runtime.UNDEFINED;
+    var destinationStartSize:Float = cast _Runtime.UNDEFINED;
+    var destinationEndSize:Float = cast _Runtime.UNDEFINED;
+    var destinationCentreSize:Float = cast _Runtime.UNDEFINED;
+    var destinationStart:Float = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
+    var push:Float->Float->Float->Void = cast _Runtime.UNDEFINED;
+    _Runtime.setLength(out, 0.0);
+    if ((cast ((cast ((cast ((cast gridSize : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast gridStart : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (gridStart + gridSize) : Float) > (cast sourceSize : Float)) : Bool)) : Bool)) { return cast 0.0; }
+    startSize = gridStart;
+    endSize = ((sourceSize - gridStart) - gridSize);
+    fixed = (startSize + endSize);
+    centre = (targetSize - fixed);
+    destinationStartSize = startSize;
+    destinationEndSize = endSize;
+    destinationCentreSize = centre;
+    if ((cast ((cast centre : Float) < (cast 0.0 : Float)) : Bool)) {
+      var shrink:Float = ((cast ((cast fixed : Float) > (cast 0.0 : Float)) : Bool) ? (cast (targetSize / fixed) : Dynamic) : (cast 0.0 : Dynamic));
+      (destinationStartSize = cast ((startSize * shrink) : Dynamic));
+      (destinationEndSize = cast ((endSize * shrink) : Dynamic));
+      (destinationCentreSize = cast (0.0 : Dynamic));
+    }
+    destinationStart = 0.0;
+    count = 0.0;
+    push = (cast function(sourceStart:Float, size:Float, destinationSize:Float):Void {
+      if ((cast ((cast size : Float) > (cast 0.0 : Float)) : Bool)) {
+        _Runtime.pushMany(out, cast ([sourceStart, size, destinationStart, destinationSize] : Array<Dynamic>));
+        count++;
+      }
+      (destinationStart = cast ((destinationStart + destinationSize) : Dynamic));
+    });
+    push((cast 0.0 : Float), (cast startSize : Float), (cast destinationStartSize : Float));
+    push((cast gridStart : Float), (cast gridSize : Float), (cast destinationCentreSize : Float));
+    push((cast (gridStart + gridSize) : Float), (cast endSize : Float), (cast destinationEndSize : Float));
+    return cast count;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
   private static function drawCanvasShape(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
     var source:Shape = cast _Runtime.UNDEFINED;
     var __destructure0:ShapeData = cast _Runtime.UNDEFINED;
     var commands:Array<ShapeCommandToken> = cast _Runtime.UNDEFINED;
     var context:flight._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
-    drawCanvasScene2D(({ final __callArgument592:Dynamic = state; __callArgument592; }), ({ final __callArgument593:Dynamic = renderProxy; __callArgument593; }));
+    drawCanvasScene2D(({ final __callArgument654:Dynamic = state; __callArgument654; }), ({ final __callArgument655:Dynamic = renderProxy; __callArgument655; }));
     source = (cast (cast renderProxy : RenderProxy2D).source : Shape);
     __destructure0 = source.data;
     commands = __destructure0.commands;
@@ -1961,8 +2186,8 @@ class _Scene2DCanvas {
     context = (cast state : CanvasRenderState).context;
     _Runtime.callOptionalValue((cast state : CanvasRenderState).applyBlendMode, cast ([state, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
     flight._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast renderProxy : RenderProxy2D).alpha);
-    setCanvasTransform(({ final __callArgument596:Dynamic = state; __callArgument596; }), ({ final __callArgument597:Dynamic = context; __callArgument597; }), (cast renderProxy : RenderProxy2D).transform2D);
-    renderCanvasShapeCommands(({ final __callArgument600:Dynamic = context; __callArgument600; }), ({ final __callArgument601:Dynamic = state; __callArgument601; }), ({ final __callArgument602:Dynamic = commands; __callArgument602; }), (cast getCanvasRenderStateTextureResolvers(({ final __callArgument603:Dynamic = state; __callArgument603; })) : CanvasTextureResolvers));
+    setCanvasTransform(({ final __callArgument658:Dynamic = state; __callArgument658; }), ({ final __callArgument659:Dynamic = context; __callArgument659; }), (cast renderProxy : RenderProxy2D).transform2D);
+    renderCanvasShapeCommands(({ final __callArgument662:Dynamic = context; __callArgument662; }), ({ final __callArgument663:Dynamic = state; __callArgument663; }), ({ final __callArgument664:Dynamic = commands; __callArgument664; }), (cast getCanvasRenderStateTextureResolvers(({ final __callArgument665:Dynamic = state; __callArgument665; })) : CanvasTextureResolvers));
   }
 
   @:allow(flight)
@@ -1970,18 +2195,18 @@ class _Scene2DCanvas {
   private static function renderCanvasShapeCommands(context:flight._internal.dom.CanvasRenderingContext2D, state:RenderState, commands:Array<flight._internal._Any>, resolvers:CanvasTextureResolvers):Void {
     var drawState:CanvasShapeDrawState = cast _Runtime.UNDEFINED;
     var i:Float = cast _Runtime.UNDEFINED;
-    drawState = (cast _Scene2DCanvas.createCanvasShapeDrawState__canvasShape(({ final __callArgument610:Dynamic = context; __callArgument610; }), ({ final __callArgument611:Dynamic = resolvers; __callArgument611; }), (cast (cast state : RenderState).allowSmoothing : Bool)) : CanvasShapeDrawState);
+    drawState = (cast _Scene2DCanvas.createCanvasShapeDrawState__canvasShape(({ final __callArgument672:Dynamic = context; __callArgument672; }), ({ final __callArgument673:Dynamic = resolvers; __callArgument673; }), (cast (cast state : RenderState).allowSmoothing : Bool)) : CanvasShapeDrawState);
     flight._internal.backend.Canvas2dBackend.call(context, 'beginPath', cast ([] : Array<Dynamic>));
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
       var key:String = (cast flight._internal._StaticIndex.readArray(commands, i) : String);
       var argCount:Float = (cast flight._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float);
-      var def:Null<CanvasShapeCommand<String>> = (cast getCanvasShapeCommand(({ final __callArgument614:Dynamic = state; __callArgument614; }), (cast key : String)) : Null<CanvasShapeCommand<String>>);
-      if ((cast !_Runtime.strictEquals(def, null) : Bool)) { (cast def : CanvasShapeCommand<String>).draw(({ final __callArgument616:Dynamic = context; __callArgument616; }), ({ final __callArgument617:Dynamic = drawState; __callArgument617; }), ({ final __callArgument618:Dynamic = commands; __callArgument618; }), (cast (i + 2.0) : Float)); } else { _Runtime.callOptionalValue((cast (cast getRenderStateRuntime(({ final __callArgument623:Dynamic = state; __callArgument623; })) : RenderStateRuntime) : { var registryMiss:Null<flight._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; }).registryMiss, cast ([RenderRegistry.ShapeCommandHandler, key] : Array<Dynamic>)); }
+      var def:Null<CanvasShapeCommand<String>> = (cast getCanvasShapeCommand(({ final __callArgument676:Dynamic = state; __callArgument676; }), (cast key : String)) : Null<CanvasShapeCommand<String>>);
+      if ((cast !_Runtime.strictEquals(def, null) : Bool)) { (cast def : CanvasShapeCommand<String>).draw(({ final __callArgument678:Dynamic = context; __callArgument678; }), ({ final __callArgument679:Dynamic = drawState; __callArgument679; }), ({ final __callArgument680:Dynamic = commands; __callArgument680; }), (cast (i + 2.0) : Float)); } else { _Runtime.callOptionalValue((cast (cast getRenderStateRuntime(({ final __callArgument685:Dynamic = state; __callArgument685; })) : RenderStateRuntime) : { var registryMiss:Null<flight._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; }).registryMiss, cast ([RenderRegistry.ShapeCommandHandler, key] : Array<Dynamic>)); }
       (i = cast ((i + (argCount + 2.0)) : Dynamic));
     }
     if ((cast ((cast drawState.hasPendingPath : Bool) && (cast _Runtime.orValue(drawState.hasFill, function():Dynamic return cast drawState.hasStroke) : Bool)) : Bool)) {
-      _Scene2DCanvas.flushCanvasShapePath__canvasShape(({ final __callArgument625:Dynamic = context; __callArgument625; }), ({ final __callArgument626:Dynamic = drawState; __callArgument626; }));
+      _Scene2DCanvas.flushCanvasShapePath__canvasShape(({ final __callArgument687:Dynamic = context; __callArgument687; }), ({ final __callArgument688:Dynamic = drawState; __callArgument688; }));
     }
   }
 
@@ -1991,7 +2216,7 @@ class _Scene2DCanvas {
 
   public static function createCanvasShapeDrawState__canvasShape(context:flight._internal.dom.CanvasRenderingContext2D, resolvers:CanvasTextureResolvers, allowSmoothing:Bool):CanvasShapeDrawState {
     var state:CanvasShapeDrawState = cast _Runtime.UNDEFINED;
-    state = (cast { allowSmoothing: allowSmoothing, bitmapH: 0.0, bitmapSrc: null, bitmapW: 0.0, canvasTextureResolvers: resolvers, fillMatrix: null, fillMatrixInverse: null, fillStyle: '', hasFill: false, hasPendingPath: false, hasCurrentPoint: false, hasStroke: false, strokeStyle: '', strokeWidth: 1.0, windingRule: 'evenodd', flush: function():Void { _Scene2DCanvas.flushCanvasShapePath__canvasShape(({ final __callArgument629:Dynamic = context; __callArgument629; }), ({ final __callArgument630:Dynamic = state; __callArgument630; })); } });
+    state = (cast { allowSmoothing: allowSmoothing, bitmapH: 0.0, bitmapSrc: null, bitmapW: 0.0, canvasTextureResolvers: resolvers, fillMatrix: null, fillMatrixInverse: null, fillStyle: '', hasFill: false, hasPendingPath: false, hasCurrentPoint: false, hasStroke: false, strokeStyle: '', strokeWidth: 1.0, windingRule: 'evenodd', flush: function():Void { _Scene2DCanvas.flushCanvasShapePath__canvasShape(({ final __callArgument691:Dynamic = context; __callArgument691; }), ({ final __callArgument692:Dynamic = state; __callArgument692; })); } });
     return cast state;
     return cast null;
   }
@@ -2020,13 +2245,13 @@ class _Scene2DCanvas {
   }
 
   public static function canvasShapeCommandTable():KeyedTable<CanvasShapeCommand<String>> {
-    var table:KeyedTable<CanvasShapeCommand<String>> = cast _Runtime.UNDEFINED;
-    table = (cast (cast createKeyedTable : String->String->KeyedTable<CanvasShapeCommand<String>>)((cast 'CanvasShapeCommand' : String), (cast 'Unregistered' : String)) : KeyedTable<CanvasShapeCommand<String>>);
+    var table:{ >KeyedTable<CanvasShapeCommand<String>>, >Entity, } = cast _Runtime.UNDEFINED;
+    table = (cast createKeyedTable((cast 'CanvasShapeCommand' : String), (cast 'Unregistered' : String)) : { >KeyedTable<CanvasShapeCommand<String>>, >Entity, });
     for (command in _Runtime.iterable(defaultCanvasShapeCommands)) {
-      (table = cast ((cast (cast withRegistryTableEntry : KeyedTable<CanvasShapeCommand<flight._internal._Any>>->String->CanvasShapeCommand<flight._internal._Any>->KeyedTable<CanvasShapeCommand<flight._internal._Any>>)(({ final __callArgument635:Dynamic = table; __callArgument635; }), (cast (cast command : CanvasShapeCommand<flight._internal._Any>).key : String), ({ final __callArgument636:Dynamic = command; __callArgument636; })) : KeyedTable<CanvasShapeCommand<flight._internal._Any>>) : Dynamic));
+      (table = cast ((cast withRegistryTableEntry(({ final __callArgument697:Dynamic = table; __callArgument697; }), (cast (cast command : CanvasShapeCommand<flight._internal._Any>).key : String), ({ final __callArgument698:Dynamic = command; __callArgument698; })) : { >KeyedTable<CanvasShapeCommand<flight._internal._Any>>, >Entity, }) : Dynamic));
     }
     for (command in _Runtime.iterable(defaultCanvasTextureShapeCommands)) {
-      (table = cast ((cast (cast withRegistryTableEntry : KeyedTable<CanvasShapeCommand<flight._internal._Any>>->String->CanvasShapeCommand<flight._internal._Any>->KeyedTable<CanvasShapeCommand<flight._internal._Any>>)(({ final __callArgument641:Dynamic = table; __callArgument641; }), (cast (cast command : CanvasShapeCommand<flight._internal._Any>).key : String), ({ final __callArgument642:Dynamic = command; __callArgument642; })) : KeyedTable<CanvasShapeCommand<flight._internal._Any>>) : Dynamic));
+      (table = cast ((cast withRegistryTableEntry(({ final __callArgument703:Dynamic = table; __callArgument703; }), (cast (cast command : CanvasShapeCommand<flight._internal._Any>).key : String), ({ final __callArgument704:Dynamic = command; __callArgument704; })) : { >KeyedTable<CanvasShapeCommand<flight._internal._Any>>, >Entity, }) : Dynamic));
     }
     return cast table;
     return cast null;
@@ -2043,18 +2268,18 @@ class _Scene2DCanvas {
     texture = (cast flight._internal._StaticIndex.readArray(buf, i) : Texture);
     matrix = (cast flight._internal._StaticIndex.readArray(buf, (i + 1.0)) : Null<Matrix>);
     if ((cast ((cast state.hasPendingPath : Bool) && (cast _Runtime.orValue(state.hasFill, function():Dynamic return cast state.hasStroke) : Bool)) : Bool)) { (state.flush)(); }
-    pattern = (cast createBitmapPattern(({ final __callArgument645:Dynamic = context; __callArgument645; }), ({ final __callArgument646:Dynamic = texture; __callArgument646; }), state.canvasTextureResolvers, (cast state.allowSmoothing : Bool)) : Null<flight._internal.dom.CanvasPattern>);
+    pattern = (cast createBitmapPattern(({ final __callArgument707:Dynamic = context; __callArgument707; }), ({ final __callArgument708:Dynamic = texture; __callArgument708; }), state.canvasTextureResolvers, (cast state.allowSmoothing : Bool)) : Null<flight._internal.dom.CanvasPattern>);
     (state.hasFill = cast (!_Runtime.strictEquals(pattern, null) : Bool));
     (state.fillStyle = cast (_Runtime.coalesce(pattern, function():Dynamic return cast '') : flight._internal._Union2<flight._internal._Union2<String, flight._internal.dom.CanvasGradient>, flight._internal.dom.CanvasPattern>));
     (state.fillMatrix = cast (matrix : Null<Matrix>));
-    if ((cast ((cast !_Runtime.strictEquals(matrix, null) : Bool) && (cast (cast inverseMatrix(({ final __callArgument649:Dynamic = _Scene2DCanvas._fillMatrixInverse__canvasShapeCommands; __callArgument649; }), ({ final __callArgument650:Dynamic = matrix; __callArgument650; })) : Bool) : Bool)) : Bool)) {
+    if ((cast ((cast !_Runtime.strictEquals(matrix, null) : Bool) && (cast (cast inverseMatrix(({ final __callArgument711:Dynamic = _Scene2DCanvas._fillMatrixInverse__canvasShapeCommands; __callArgument711; }), ({ final __callArgument712:Dynamic = matrix; __callArgument712; })) : Bool) : Bool)) : Bool)) {
       (state.fillMatrixInverse = cast (_Scene2DCanvas._fillMatrixInverse__canvasShapeCommands : Null<Matrix>));
     } else {
       (state.fillMatrixInverse = cast (null : Null<Matrix>));
     }
-    (state.bitmapSrc = cast ((cast resolveCanvasTextureWindowSource(state.canvasTextureResolvers, ({ final __callArgument653:Dynamic = texture; __callArgument653; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>));
-    (state.bitmapW = cast (HxMath.abs(((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x * (cast getTextureWidth(({ final __callArgument655:Dynamic = texture; __callArgument655; })) : Float))) : Float));
-    (state.bitmapH = cast (HxMath.abs(((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y * (cast getTextureHeight(({ final __callArgument657:Dynamic = texture; __callArgument657; })) : Float))) : Float));
+    (state.bitmapSrc = cast ((cast resolveCanvasTextureWindowSource(state.canvasTextureResolvers, ({ final __callArgument715:Dynamic = texture; __callArgument715; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>));
+    (state.bitmapW = cast (HxMath.abs(((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var x:Float; }).x * (cast getTextureWidth(({ final __callArgument717:Dynamic = texture; __callArgument717; })) : Float))) : Float));
+    (state.bitmapH = cast (HxMath.abs(((cast (cast texture : { var uvScale:Vector2; }).uvScale : { var y:Float; }).y * (cast getTextureHeight(({ final __callArgument719:Dynamic = texture; __callArgument719; })) : Float))) : Float));
   } });
 
   public static final defaultCanvasBeginFill:CanvasShapeCommand<String> = (cast { fillBounds: defaultShapeBoundsFlush, key: 'beginFill', strokeBounds: defaultShapeBoundsFlush, draw: function(_ctx:flight._internal.dom.CanvasRenderingContext2D, state:CanvasShapeDrawState, buf:Array<flight._internal._Any>, i:Float):Void {
@@ -2089,7 +2314,7 @@ class _Scene2DCanvas {
     interpolationMethod = (cast flight._internal._StaticIndex.readArray(buf, (i + 6.0)) : flight._internal._Any);
     focalPointRatio = (cast flight._internal._StaticIndex.readArray(buf, (i + 7.0)) : Float);
     if ((cast ((cast state.hasPendingPath : Bool) && (cast _Runtime.orValue(state.hasFill, function():Dynamic return cast state.hasStroke) : Bool)) : Bool)) { (state.flush)(); }
-    pattern = (cast createGradientPattern(({ final __callArgument659:Dynamic = context; __callArgument659; }), state.canvasTextureResolvers, ({ final __callArgument660:Dynamic = gradientType; __callArgument660; }), ({ final __callArgument661:Dynamic = colors; __callArgument661; }), ({ final __callArgument662:Dynamic = alphas; __callArgument662; }), ({ final __callArgument663:Dynamic = ratios; __callArgument663; }), ({ final __callArgument664:Dynamic = matrix; __callArgument664; }), ({ final __callArgument665:Dynamic = spreadMethod; __callArgument665; }), ({ final __callArgument666:Dynamic = interpolationMethod; __callArgument666; }), (cast focalPointRatio : Float)) : Null<flight._internal._Union2<flight._internal.dom.CanvasGradient, flight._internal.dom.CanvasPattern>>);
+    pattern = (cast createGradientPattern(({ final __callArgument721:Dynamic = context; __callArgument721; }), state.canvasTextureResolvers, ({ final __callArgument722:Dynamic = gradientType; __callArgument722; }), ({ final __callArgument723:Dynamic = colors; __callArgument723; }), ({ final __callArgument724:Dynamic = alphas; __callArgument724; }), ({ final __callArgument725:Dynamic = ratios; __callArgument725; }), ({ final __callArgument726:Dynamic = matrix; __callArgument726; }), ({ final __callArgument727:Dynamic = spreadMethod; __callArgument727; }), ({ final __callArgument728:Dynamic = interpolationMethod; __callArgument728; }), (cast focalPointRatio : Float)) : Null<flight._internal._Union2<flight._internal.dom.CanvasGradient, flight._internal.dom.CanvasPattern>>);
     (state.hasFill = cast (!_Runtime.strictEquals(pattern, null) : Bool));
     (state.fillStyle = cast (_Runtime.coalesce(pattern, function():Dynamic return cast '') : flight._internal._Union2<flight._internal._Union2<String, flight._internal.dom.CanvasGradient>, flight._internal.dom.CanvasPattern>));
     (state.fillMatrix = cast (null : Null<Matrix>));
@@ -2310,7 +2535,7 @@ class _Scene2DCanvas {
     var texture:Texture = cast _Runtime.UNDEFINED;
     var pattern:Null<flight._internal.dom.CanvasPattern> = cast _Runtime.UNDEFINED;
     texture = (cast flight._internal._StaticIndex.readArray(buf, i) : Texture);
-    pattern = (cast createBitmapPattern(({ final __callArgument677:Dynamic = context; __callArgument677; }), ({ final __callArgument678:Dynamic = texture; __callArgument678; }), state.canvasTextureResolvers, (cast state.allowSmoothing : Bool)) : Null<flight._internal.dom.CanvasPattern>);
+    pattern = (cast createBitmapPattern(({ final __callArgument739:Dynamic = context; __callArgument739; }), ({ final __callArgument740:Dynamic = texture; __callArgument740; }), state.canvasTextureResolvers, (cast state.allowSmoothing : Bool)) : Null<flight._internal.dom.CanvasPattern>);
     if ((cast !_Runtime.strictEquals(pattern, null) : Bool)) {
       (state.strokeStyle = cast (pattern : flight._internal._Union2<flight._internal._Union2<String, flight._internal.dom.CanvasGradient>, flight._internal.dom.CanvasPattern>));
       (state.hasStroke = cast (true : Bool));
@@ -2335,7 +2560,7 @@ class _Scene2DCanvas {
     spreadMethod = (cast flight._internal._StaticIndex.readArray(buf, (i + 5.0)) : flight._internal._Any);
     interpolationMethod = (cast flight._internal._StaticIndex.readArray(buf, (i + 6.0)) : flight._internal._Any);
     focalPointRatio = (cast flight._internal._StaticIndex.readArray(buf, (i + 7.0)) : Float);
-    pattern = (cast createGradientPattern(({ final __callArgument681:Dynamic = context; __callArgument681; }), state.canvasTextureResolvers, ({ final __callArgument682:Dynamic = gradientType; __callArgument682; }), ({ final __callArgument683:Dynamic = colors; __callArgument683; }), ({ final __callArgument684:Dynamic = alphas; __callArgument684; }), ({ final __callArgument685:Dynamic = ratios; __callArgument685; }), ({ final __callArgument686:Dynamic = matrix; __callArgument686; }), ({ final __callArgument687:Dynamic = spreadMethod; __callArgument687; }), ({ final __callArgument688:Dynamic = interpolationMethod; __callArgument688; }), (cast focalPointRatio : Float)) : Null<flight._internal._Union2<flight._internal.dom.CanvasGradient, flight._internal.dom.CanvasPattern>>);
+    pattern = (cast createGradientPattern(({ final __callArgument743:Dynamic = context; __callArgument743; }), state.canvasTextureResolvers, ({ final __callArgument744:Dynamic = gradientType; __callArgument744; }), ({ final __callArgument745:Dynamic = colors; __callArgument745; }), ({ final __callArgument746:Dynamic = alphas; __callArgument746; }), ({ final __callArgument747:Dynamic = ratios; __callArgument747; }), ({ final __callArgument748:Dynamic = matrix; __callArgument748; }), ({ final __callArgument749:Dynamic = spreadMethod; __callArgument749; }), ({ final __callArgument750:Dynamic = interpolationMethod; __callArgument750; }), (cast focalPointRatio : Float)) : Null<flight._internal._Union2<flight._internal.dom.CanvasGradient, flight._internal.dom.CanvasPattern>>);
     if ((cast !_Runtime.strictEquals(pattern, null) : Bool)) {
       (state.strokeStyle = cast (pattern : flight._internal._Union2<flight._internal._Union2<String, flight._internal.dom.CanvasGradient>, flight._internal.dom.CanvasPattern>));
       (state.hasStroke = cast (true : Bool));
@@ -2406,9 +2631,9 @@ class _Scene2DCanvas {
     return cast null;
   }
 
-  public static function createCanvasShapeRasterizer(resolvers:CanvasTextureResolvers):ShapeRasterizer {
+  public static function createCanvasShapeRasterizer(resolvers:CanvasTextureResolvers):NonEntityCreateResult<ShapeRasterizer, String> {
     return cast function(context:flight._internal.dom.CanvasRenderingContext2D, commands:Array<ShapeCommandToken>, state:RenderState):Void {
-      renderCanvasShapeCommands(({ final __callArgument697:Dynamic = context; __callArgument697; }), ({ final __callArgument698:Dynamic = state; __callArgument698; }), (cast commands : Array<flight._internal._Any>), ({ final __callArgument699:Dynamic = resolvers; __callArgument699; }));
+      renderCanvasShapeCommands(({ final __callArgument759:Dynamic = context; __callArgument759; }), ({ final __callArgument760:Dynamic = state; __callArgument760; }), (cast commands : Array<flight._internal._Any>), ({ final __callArgument761:Dynamic = resolvers; __callArgument761; }));
     };
     return cast null;
   }
@@ -2417,8 +2642,8 @@ class _Scene2DCanvas {
   @:keep
   private static function getCanvasShapeCommand(state:RenderState, key:String):Null<CanvasShapeCommand<String>> {
     var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:CanvasShapeCommand<String>; }>> = cast _Runtime.UNDEFINED;
-    entry = ({ final __collection709:Dynamic = ({ final __structural708 = (cast (cast (cast getRenderStateRuntime(({ final __callArgument706:Dynamic = state; __callArgument706; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : { @:optional var canvasShapeCommands:Null<KeyedTable<CanvasShapeCommand<String>>>; }).canvasShapeCommands; __structural708 == null ? _Runtime.UNDEFINED : (cast __structural708 : { var entries:flight._internal._Map<String, RegistryTableEntry<CanvasShapeCommand<String>>>; }).entries; }); __collection709 == null ? _Runtime.UNDEFINED : ((cast __collection709 : flight._internal._Map<String, RegistryTableEntry<CanvasShapeCommand<String>>>).get((cast key))); });
-    return cast ((cast _Runtime.strictEquals(({ final __structural710 = entry; __structural710 == null ? _Runtime.UNDEFINED : (cast __structural710 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:CanvasShapeCommand<String>; }).value : Dynamic) : (cast null : Dynamic));
+    entry = ({ final __collection771:Dynamic = ({ final __structural770 = (cast (cast (cast getRenderStateRuntime(({ final __callArgument768:Dynamic = state; __callArgument768; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : { @:optional var canvasShapeCommands:Null<KeyedTable<CanvasShapeCommand<String>>>; }).canvasShapeCommands; __structural770 == null ? _Runtime.UNDEFINED : (cast __structural770 : { var entries:flight._internal._Map<String, RegistryTableEntry<CanvasShapeCommand<String>>>; }).entries; }); __collection771 == null ? _Runtime.UNDEFINED : ((cast __collection771 : flight._internal._Map<String, RegistryTableEntry<CanvasShapeCommand<String>>>).get((cast key))); });
+    return cast ((cast _Runtime.strictEquals(({ final __structural772 = entry; __structural772 == null ? _Runtime.UNDEFINED : (cast __structural772 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:CanvasShapeCommand<String>; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
@@ -2428,21 +2653,21 @@ class _Scene2DCanvas {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var table:KeyedTable<CanvasShapeCommand<String>> = cast _Runtime.UNDEFINED;
     registerShapeBoundsCommand((cast command : Dynamic));
-    runtime = (cast getRenderStateRuntime(({ final __callArgument711:Dynamic = state; __callArgument711; })) : RenderStateRuntime);
-    table = _Runtime.coalesce((cast runtime.registries : { @:optional var canvasShapeCommands:Null<KeyedTable<CanvasShapeCommand<String>>>; }).canvasShapeCommands, function():Dynamic return cast (cast createKeyedTable((cast 'CanvasShapeCommand' : String), (cast 'Unregistered' : String)) : KeyedTable<CanvasShapeCommand<String>>));
-    ((cast runtime.registries : { @:optional var canvasShapeCommands:Null<KeyedTable<CanvasShapeCommand<String>>>; }).canvasShapeCommands = cast ((cast withRegistryTableEntry((cast table : Dynamic), (cast (cast command : CanvasShapeCommand<K>).key : String), ({ final __callArgument713:Dynamic = command; __callArgument713; })) : KeyedTable<CanvasShapeCommand<String>>) : Null<KeyedTable<CanvasShapeCommand<String>>>));
+    runtime = (cast getRenderStateRuntime(({ final __callArgument773:Dynamic = state; __callArgument773; })) : RenderStateRuntime);
+    table = _Runtime.coalesce((cast runtime.registries : { @:optional var canvasShapeCommands:Null<KeyedTable<CanvasShapeCommand<String>>>; }).canvasShapeCommands, function():Dynamic return cast (cast createKeyedTable((cast 'CanvasShapeCommand' : String), (cast 'Unregistered' : String)) : { >KeyedTable<CanvasShapeCommand<String>>, >Entity, }));
+    ((cast runtime.registries : { @:optional var canvasShapeCommands:Null<KeyedTable<CanvasShapeCommand<String>>>; }).canvasShapeCommands = cast ((cast withRegistryTableEntry((cast table : Dynamic), (cast (cast command : CanvasShapeCommand<K>).key : String), ({ final __callArgument775:Dynamic = command; __callArgument775; })) : { >KeyedTable<CanvasShapeCommand<String>>, >Entity, }) : Null<KeyedTable<CanvasShapeCommand<String>>>));
   }
 
   public static function registerCanvasShapeCommands(state:RenderState, commands:Array<CanvasShapeCommand<String>>):Void {
     for (command in _Runtime.iterable(commands)) {
-      (cast registerCanvasShapeCommand : RenderState->CanvasShapeCommand<String>->Void)(({ final __callArgument717:Dynamic = state; __callArgument717; }), ({ final __callArgument718:Dynamic = command; __callArgument718; }));
+      (cast registerCanvasShapeCommand : RenderState->CanvasShapeCommand<String>->Void)(({ final __callArgument779:Dynamic = state; __callArgument779; }), ({ final __callArgument780:Dynamic = command; __callArgument780; }));
     }
   }
 
   @:allow(flight)
   @:keep
   private static function drawCanvasSprite(state:CanvasRenderState, sprite:RenderProxy2D):Void {
-    var texture:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
+    var texture:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_11889:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_11889:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_11889:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
     var drawable:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>> = cast _Runtime.UNDEFINED;
     var textureWidth:Float = cast _Runtime.UNDEFINED;
     var textureHeight:Float = cast _Runtime.UNDEFINED;
@@ -2452,13 +2677,13 @@ class _Scene2DCanvas {
     var sourceHeight:Float = cast _Runtime.UNDEFINED;
     var context:flight._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
     var smoothing:Bool = cast _Runtime.UNDEFINED;
-    drawCanvasScene2D(({ final __callArgument721:Dynamic = state; __callArgument721; }), ({ final __callArgument722:Dynamic = sprite; __callArgument722; }));
-    texture = (cast (cast (cast (cast sprite : RenderProxy2D).source : Sprite) : { var data:SpriteData; }).data : { var texture:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10882:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).texture;
+    drawCanvasScene2D(({ final __callArgument783:Dynamic = state; __callArgument783; }), ({ final __callArgument784:Dynamic = sprite; __callArgument784; }));
+    texture = (cast (cast (cast (cast sprite : RenderProxy2D).source : Sprite) : { var data:SpriteData; }).data : { var texture:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_11889:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_11889:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_11889:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).texture;
     if ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) : Bool)) { return; }
-    drawable = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers(({ final __callArgument725:Dynamic = state; __callArgument725; })) : CanvasTextureResolvers), ({ final __callArgument727:Dynamic = texture; __callArgument727; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>);
+    drawable = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers(({ final __callArgument787:Dynamic = state; __callArgument787; })) : CanvasTextureResolvers), ({ final __callArgument789:Dynamic = texture; __callArgument789; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(drawable, null) : Bool)) { return; }
-    textureWidth = (cast getTextureWidth(({ final __callArgument731:Dynamic = texture; __callArgument731; })) : Float);
-    textureHeight = (cast getTextureHeight(({ final __callArgument733:Dynamic = texture; __callArgument733; })) : Float);
+    textureWidth = (cast getTextureWidth(({ final __callArgument793:Dynamic = texture; __callArgument793; })) : Float);
+    textureHeight = (cast getTextureHeight(({ final __callArgument795:Dynamic = texture; __callArgument795; })) : Float);
     sourceX = ((cast (cast texture : Texture2D).uvOffset : { var x:Float; }).x * textureWidth);
     sourceY = ((cast (cast texture : Texture2D).uvOffset : { var y:Float; }).y * textureHeight);
     sourceWidth = HxMath.abs(((cast (cast texture : Texture2D).uvScale : { var x:Float; }).x * textureWidth));
@@ -2467,7 +2692,7 @@ class _Scene2DCanvas {
     context = (cast state : CanvasRenderState).context;
     _Runtime.callOptionalValue((cast state : CanvasRenderState).applyBlendMode, cast ([state, (cast sprite : RenderProxy2D).blendMode] : Array<Dynamic>));
     flight._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast sprite : RenderProxy2D).alpha);
-    setCanvasTransform(({ final __callArgument735:Dynamic = state; __callArgument735; }), ({ final __callArgument736:Dynamic = context; __callArgument736; }), (cast sprite : RenderProxy2D).transform2D);
+    setCanvasTransform(({ final __callArgument797:Dynamic = state; __callArgument797; }), ({ final __callArgument798:Dynamic = context; __callArgument798; }), (cast sprite : RenderProxy2D).transform2D);
     smoothing = ((cast (cast state : CanvasRenderState).allowSmoothing : Bool) && (cast !(cast StringTools.startsWith((cast (cast texture : Texture2D).sampler : { var magFilter:TextureFilter; }).magFilter, 'nearest') : Bool) : Bool));
     if ((cast !(cast smoothing : Bool) : Bool)) { flight._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false); }
     flight._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([drawable, sourceX, sourceY, sourceWidth, sourceHeight, 0.0, 0.0, sourceWidth, sourceHeight] : Array<Dynamic>));
@@ -2489,22 +2714,22 @@ class _Scene2DCanvas {
     var scrollXOffset:Float = cast _Runtime.UNDEFINED;
     var context:flight._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
     source = (cast (cast renderProxy : RenderProxy2D).source : RichText);
-    input = (cast getTextInputState(({ final __callArgument739:Dynamic = source; __callArgument739; })) : Null<TextInputState>);
+    input = (cast getTextInputState(({ final __callArgument801:Dynamic = source; __callArgument801; })) : Null<TextInputState>);
     if ((cast _Runtime.strictEquals(input, null) : Bool)) { return; }
-    layout = (cast (cast getRichTextRuntime(({ final __callArgument741:Dynamic = source; __callArgument741; })) : RichTextRuntime) : { var textLayout:Null<TextLayoutResult>; }).textLayout;
+    layout = (cast (cast getRichTextRuntime(({ final __callArgument803:Dynamic = source; __callArgument803; })) : RichTextRuntime) : { var textLayout:Null<TextLayoutResult>; }).textLayout;
     if ((cast ((cast _Runtime.andValue(!(cast (cast input : { var focused:Bool; }).focused : Bool), function():Dynamic return cast !(cast (cast input : { var alwaysShowSelection:Bool; }).alwaysShowSelection : Bool)) : Bool) || (cast _Runtime.strictEquals(layout, null) : Bool)) : Bool)) { return; }
-    fieldW = (cast computeTextBoundsWidth((cast source.data : Dynamic), ({ final __callArgument743:Dynamic = layout; __callArgument743; })) : Float);
-    fieldH = (cast computeTextBoundsHeight((cast source.data : Dynamic), ({ final __callArgument745:Dynamic = layout; __callArgument745; })) : Float);
+    fieldW = (cast computeTextBoundsWidth((cast source.data : Dynamic), ({ final __callArgument805:Dynamic = layout; __callArgument805; })) : Float);
+    fieldH = (cast computeTextBoundsHeight((cast source.data : Dynamic), ({ final __callArgument807:Dynamic = layout; __callArgument807; })) : Float);
     firstVisibleLine = ((cast source.data : { var scrollV:Float; }).scrollV - 1.0);
     scrollYOffset = ((cast ((cast firstVisibleLine : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast getRichTextScrollYOffset((cast layout : { var lineHeights:Array<Float>; }).lineHeights, (cast firstVisibleLine : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic));
     scrollXOffset = (cast source.data : { var scrollH:Float; }).scrollH;
     context = (cast state : CanvasRenderState).context;
     flight._internal.backend.Canvas2dBackend.call(context, 'save', cast ([] : Array<Dynamic>));
-    setCanvasTransform(({ final __callArgument747:Dynamic = state; __callArgument747; }), ({ final __callArgument748:Dynamic = context; __callArgument748; }), (cast renderProxy : RenderProxy2D).transform2D);
+    setCanvasTransform(({ final __callArgument809:Dynamic = state; __callArgument809; }), ({ final __callArgument810:Dynamic = context; __callArgument810; }), (cast renderProxy : RenderProxy2D).transform2D);
     flight._internal.backend.Canvas2dBackend.call(context, 'beginPath', cast ([] : Array<Dynamic>));
     flight._internal.backend.Canvas2dBackend.call(context, 'rect', cast ([0.0, 0.0, fieldW, fieldH] : Array<Dynamic>));
     flight._internal.backend.Canvas2dBackend.call(context, 'clip', cast ([] : Array<Dynamic>));
-    getTextInputSelectionRectangles(({ final __callArgument751:Dynamic = _Scene2DCanvas.selectionRectangles__canvasTextInput; __callArgument751; }), ({ final __callArgument752:Dynamic = source; __callArgument752; }), ({ final __callArgument753:Dynamic = layout; __callArgument753; }));
+    getTextInputSelectionRectangles(({ final __callArgument813:Dynamic = _Scene2DCanvas.selectionRectangles__canvasTextInput; __callArgument813; }), ({ final __callArgument814:Dynamic = source; __callArgument814; }), ({ final __callArgument815:Dynamic = layout; __callArgument815; }));
     if ((cast ((cast _Runtime.field(_Scene2DCanvas.selectionRectangles__canvasTextInput, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       flight._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', (cast computeRgbHexString((cast (cast input : { var selectionColor:Float; }).selectionColor : Float)) : String));
       flight._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', HxMath.min(1.0, ((cast renderProxy : RenderProxy2D).alpha * (cast input : { var selectionAlpha:Float; }).selectionAlpha)));
@@ -2512,9 +2737,9 @@ class _Scene2DCanvas {
         flight._internal.backend.Canvas2dBackend.call(context, 'fillRect', cast ([(rect.x - scrollXOffset), (rect.y - scrollYOffset), rect.width, rect.height] : Array<Dynamic>));
       }
     }
-    if ((cast ((cast (cast input : { var focused:Bool; }).focused : Bool) && (cast _Runtime.strictEquals((cast getTextInputSelectionBeginIndex(({ final __callArgument759:Dynamic = source; __callArgument759; })) : Float), (cast getTextInputSelectionEndIndex(({ final __callArgument761:Dynamic = source; __callArgument761; })) : Float)) : Bool)) : Bool)) {
-      if ((cast (cast _Scene2DCanvas.getCaretVisible__canvasTextInput(({ final __callArgument763:Dynamic = source; __callArgument763; }), (cast (cast input : { var focused:Bool; }).focused : Bool)) : Bool) : Bool)) {
-        getTextInputCaretRectangle(({ final __callArgument765:Dynamic = _Scene2DCanvas.caretRectangle__canvasTextInput; __callArgument765; }), ({ final __callArgument766:Dynamic = source; __callArgument766; }), ({ final __callArgument767:Dynamic = layout; __callArgument767; }));
+    if ((cast ((cast (cast input : { var focused:Bool; }).focused : Bool) && (cast _Runtime.strictEquals((cast getTextInputSelectionBeginIndex(({ final __callArgument821:Dynamic = source; __callArgument821; })) : Float), (cast getTextInputSelectionEndIndex(({ final __callArgument823:Dynamic = source; __callArgument823; })) : Float)) : Bool)) : Bool)) {
+      if ((cast (cast _Scene2DCanvas.getCaretVisible__canvasTextInput(({ final __callArgument825:Dynamic = source; __callArgument825; }), (cast (cast input : { var focused:Bool; }).focused : Bool)) : Bool) : Bool)) {
+        getTextInputCaretRectangle(({ final __callArgument827:Dynamic = _Scene2DCanvas.caretRectangle__canvasTextInput; __callArgument827; }), ({ final __callArgument828:Dynamic = source; __callArgument828; }), ({ final __callArgument829:Dynamic = layout; __callArgument829; }));
         flight._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', _Scene2DCanvas.CARET_COLOR__canvasTextInput);
         flight._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast renderProxy : RenderProxy2D).alpha);
         flight._internal.backend.Canvas2dBackend.call(context, 'fillRect', cast ([((cast _Scene2DCanvas.caretRectangle__canvasTextInput : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).x - scrollXOffset), ((cast _Scene2DCanvas.caretRectangle__canvasTextInput : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).y - scrollYOffset), _Scene2DCanvas.CARET_WIDTH__canvasTextInput, (cast _Scene2DCanvas.caretRectangle__canvasTextInput : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).height] : Array<Dynamic>));
@@ -2524,7 +2749,7 @@ class _Scene2DCanvas {
   }
 
   public static function enableCanvasTextInput():Void {
-    registerCanvasTextInputOverlay(({ final __callArgument771:Dynamic = drawCanvasTextInputOverlay; __callArgument771; }));
+    registerCanvasTextInputOverlay(({ final __callArgument833:Dynamic = drawCanvasTextInputOverlay; __callArgument833; }));
   }
 
   public static final CARET_BLINK_MS__canvasTextInput:Float = 530.0;
@@ -2553,7 +2778,10 @@ class _Scene2DCanvas {
   public static final selectionRectangles__canvasTextInput:Array<TextSelectionRectangle> = (cast cast ([] : Array<Dynamic>));
 
   public static function createCanvasTextLabelData__canvasTextLabel(_state:CanvasRenderState, _source:Renderable):RendererData {
-    return cast (cast createEntity(({ final __callArgument773:Dynamic = ({ lastContentId: (cast -1.0 : Dynamic) } : EntityShapeL25C23__canvasTextLabel); __callArgument773; })) : EntityShapeL25C23__canvasTextLabel);
+    var out:EntityConstruction<CanvasTextLabelData__canvasTextLabel> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ lastContentId: cast _Runtime.UNDEFINED } : EntityShapeL26C15__canvasTextLabel); }) #end));
+    initializeCanvasTextLabelData((cast out : Dynamic));
+    return cast out;
     return cast null;
   }
 
@@ -2569,7 +2797,7 @@ class _Scene2DCanvas {
     var textData:Null<CanvasTextLabelData__canvasTextLabel> = cast _Runtime.UNDEFINED;
     var needsLayout:Bool = cast _Runtime.UNDEFINED;
     var result:TextLayoutResult = cast _Runtime.UNDEFINED;
-    drawCanvasScene2D(({ final __callArgument775:Dynamic = state; __callArgument775; }), ({ final __callArgument776:Dynamic = renderProxy; __callArgument776; }));
+    drawCanvasScene2D(({ final __callArgument835:Dynamic = state; __callArgument835; }), ({ final __callArgument836:Dynamic = renderProxy; __callArgument836; }));
     source = (cast (cast renderProxy : RenderProxy2D).source : TextLabel);
     __destructure0 = source.data;
     text = __destructure0.text;
@@ -2578,19 +2806,19 @@ class _Scene2DCanvas {
     context = (cast state : CanvasRenderState).context;
     _Runtime.callOptionalValue((cast state : CanvasRenderState).applyBlendMode, cast ([state, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
     flight._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast renderProxy : RenderProxy2D).alpha);
-    setCanvasTransform(({ final __callArgument779:Dynamic = state; __callArgument779; }), ({ final __callArgument780:Dynamic = context; __callArgument780; }), (cast renderProxy : RenderProxy2D).transform2D);
+    setCanvasTransform(({ final __callArgument839:Dynamic = state; __callArgument839; }), ({ final __callArgument840:Dynamic = context; __callArgument840; }), (cast renderProxy : RenderProxy2D).transform2D);
     version = (cast getNodeLocalContentRevision((cast source : Dynamic)) : Float);
     textData = (cast (cast renderProxy : RenderProxy2D).rendererData : Null<CanvasTextLabelData__canvasTextLabel>);
     needsLayout = ((cast _Runtime.strictEquals(textData, null) : Bool) || (cast !_Runtime.strictEquals(version, (cast textData : CanvasTextLabelData__canvasTextLabel).lastContentId) : Bool));
-    result = (cast getTextLayoutResult((cast getTextLabelRuntime(({ final __callArgument783:Dynamic = source; __callArgument783; })) : TextLabelRuntime)) : TextLayoutResult);
+    result = (cast getTextLayoutResult((cast getTextLabelRuntime(({ final __callArgument843:Dynamic = source; __callArgument843; })) : TextLabelRuntime)) : TextLayoutResult);
     if ((cast needsLayout : Bool)) {
       var measure:String->TextFormat->Float = cast _Runtime.UNDEFINED;
       measure = (cast function(t:String, format:TextFormat):Float {
-        flight._internal.backend.Canvas2dBackend.setField(context, 'font', (cast computeTextFormatFontString(({ final __callArgument787:Dynamic = format; __callArgument787; })) : String));
+        flight._internal.backend.Canvas2dBackend.setField(context, 'font', (cast computeTextFormatFontString(({ final __callArgument847:Dynamic = format; __callArgument847; })) : String));
         return cast (cast flight._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([t] : Array<Dynamic>)) : flight._internal.dom.TextMetrics).width;
         return cast _Runtime.UNDEFINED;
       });
-      computeTextLayout(({ final __callArgument789:Dynamic = result; __callArgument789; }), ({ final __callArgument792:Dynamic = { text: text, formatRanges: cast ([(cast createTextFormatRange(({ final __callArgument790:Dynamic = textFormat; __callArgument790; }), (cast 0.0 : Float), (cast _Runtime.field(text, 'length') : Float)) : TextFormatRange)] : Array<Dynamic>), width: (cast source.data : { var width:Float; }).width, height: (cast source.data : { var height:Float; }).height, measure: measure, verticalAlign: ((cast _Runtime.strictEquals((cast source.data : { var autoSize:TextAutoSize; }).autoSize, 'none') : Bool) ? (cast (cast source.data : { var verticalAlign:TextVerticalAlign; }).verticalAlign : Dynamic) : (cast 'top' : Dynamic)) }; __callArgument792; }));
+      computeTextLayout(({ final __callArgument849:Dynamic = result; __callArgument849; }), ({ final __callArgument852:Dynamic = { text: text, formatRanges: cast ([(cast createTextFormatRange(({ final __callArgument850:Dynamic = textFormat; __callArgument850; }), (cast 0.0 : Float), (cast _Runtime.field(text, 'length') : Float)) : TextFormatRange)] : Array<Dynamic>), width: (cast source.data : { var width:Float; }).width, height: (cast source.data : { var height:Float; }).height, measure: measure, verticalAlign: ((cast _Runtime.strictEquals((cast source.data : { var autoSize:TextAutoSize; }).autoSize, 'none') : Bool) ? (cast (cast source.data : { var verticalAlign:TextVerticalAlign; }).verticalAlign : Dynamic) : (cast 'top' : Dynamic)) }; __callArgument852; }));
       if ((cast !_Runtime.strictEquals(textData, null) : Bool)) { ((cast textData : CanvasTextLabelData__canvasTextLabel).lastContentId = version); }
     }
     flight._internal.backend.Canvas2dBackend.setField(context, 'textBaseline', 'alphabetic');
@@ -2614,15 +2842,21 @@ class _Scene2DCanvas {
     }
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeCanvasTextLabelData(out:EntityConstruction<CanvasTextLabelData__canvasTextLabel>):Void {
+    _Runtime.setField(out, 'lastContentId', -1.0);
+  }
+
   public static final defaultCanvasTextLabelRenderer:Scene2DRenderer = (cast { createData: _Scene2DCanvas.createCanvasTextLabelData__canvasTextLabel, submit: drawCanvasTextLabel });
 
   @:allow(flight)
   @:keep
-  private static function createCanvasTextMeasure(surface:CanvasRenderSurface):TextMeasureFunction {
+  private static function createCanvasTextMeasure(surface:CanvasRenderSurface):NonEntityCreateResult<TextMeasureFunction, String> {
     var context:flight._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
     context = _Runtime.field(surface, 'context');
     return cast function(text:String, format:TextFormat):Float {
-      flight._internal.backend.Canvas2dBackend.setField(context, 'font', (cast computeTextFormatFontString(({ final __callArgument799:Dynamic = format; __callArgument799; })) : String));
+      flight._internal.backend.Canvas2dBackend.setField(context, 'font', (cast computeTextFormatFontString(({ final __callArgument859:Dynamic = format; __callArgument859; })) : String));
       return cast (cast flight._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([text] : Array<Dynamic>)) : flight._internal.dom.TextMetrics).width;
       return cast _Runtime.UNDEFINED;
     };
@@ -2633,23 +2867,22 @@ class _Scene2DCanvas {
   @:keep
   private static function acquireCanvasTextureResolverSurface(resolvers:CanvasTextureResolvers, options:CanvasRenderSurfaceOptions):Null<CanvasRenderSurface> {
     var surface:Null<CanvasRenderSurface> = cast _Runtime.UNDEFINED;
-    surface = (cast acquireCanvasRenderSurface((cast resolvers : CanvasTextureResolvers).surfaceCreator, ({ final __callArgument801:Dynamic = options; __callArgument801; })) : Null<CanvasRenderSurface>);
-    if ((cast !_Runtime.strictEquals(surface, null) : Bool)) { ({ final __collection803:Dynamic = ((cast _Scene2DCanvas._ownedSurfaces__canvasTextureResolver : flight._internal._WeakMap<CanvasTextureResolvers, flight._internal._Set<CanvasRenderSurface>>).get((cast resolvers))); __collection803 == null ? _Runtime.UNDEFINED : ((cast __collection803 : flight._internal._Set<CanvasRenderSurface>).add((cast surface))); }); }
+    surface = (cast acquireCanvasRenderSurface((cast resolvers : CanvasTextureResolvers).surfaceCreator, ({ final __callArgument861:Dynamic = options; __callArgument861; })) : Null<CanvasRenderSurface>);
+    if ((cast !_Runtime.strictEquals(surface, null) : Bool)) { ({ final __collection863:Dynamic = ((cast _Scene2DCanvas._ownedSurfaces__canvasTextureResolver : flight._internal._WeakMap<CanvasTextureResolvers, flight._internal._Set<CanvasRenderSurface>>).get((cast resolvers))); __collection863 == null ? _Runtime.UNDEFINED : ((cast __collection863 : flight._internal._Set<CanvasRenderSurface>).add((cast surface))); }); }
     return cast surface;
     return cast null;
   }
 
   public static function connectCanvasTextureResolverMisses(resolvers:CanvasTextureResolvers, state:RenderState):Void {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getRenderStateRuntime(({ final __callArgument804:Dynamic = state; __callArgument804; })) : RenderStateRuntime);
+    runtime = (cast getRenderStateRuntime(({ final __callArgument864:Dynamic = state; __callArgument864; })) : RenderStateRuntime);
     ((cast resolvers : { @:optional var registryMiss:Null<RenderRegistry->String->Void>; }).registryMiss = (cast function(registry:RenderRegistry, kind:String):Void { _Runtime.callOptionalValue(runtime.registryMiss, cast ([registry, kind] : Array<Dynamic>)); }));
   }
 
   public static function createCanvasTextureResolvers(surfaceCreator:CanvasRenderSurfaceCreator):CanvasTextureResolvers {
-    var resolvers:CanvasTextureResolvers = cast _Runtime.UNDEFINED;
-    resolvers = (cast (cast createEntity(({ final __callArgument806:Dynamic = (#if flight_struct_typedef { registry: null, registryMiss: null, surfaceCreator: surfaceCreator } #else ({ final __structInitField0:Dynamic = null; final __structInitField1:Dynamic = null; final __structInitField2:Dynamic = surfaceCreator; ({ bitmapElementCache: cast _Runtime.UNDEFINED, registry: __structInitField0, registryMiss: __structInitField1, surfaceCreator: __structInitField2, textureWindowElementCache: cast _Runtime.UNDEFINED } : CanvasTextureResolvers); }) #end); __callArgument806; })) : CanvasTextureResolvers) : CanvasTextureResolvers);
-    _Runtime.setIndex(resolvers, EntityRuntimeKey, { binding: null });
-    ((cast _Scene2DCanvas._ownedSurfaces__canvasTextureResolver : flight._internal._WeakMap<CanvasTextureResolvers, flight._internal._Set<CanvasRenderSurface>>).set((cast resolvers), (cast _Runtime.construct(flight._internal._HostValueLut.get('Set'), []))));
+    var resolvers:EntityConstruction<CanvasTextureResolvers> = cast _Runtime.UNDEFINED;
+    resolvers = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ bitmapElementCache: cast _Runtime.UNDEFINED, registry: cast _Runtime.UNDEFINED, registryMiss: cast _Runtime.UNDEFINED, surfaceCreator: cast _Runtime.UNDEFINED, textureWindowElementCache: cast _Runtime.UNDEFINED } : CanvasTextureResolvers); }) #end));
+    initializeCanvasTextureResolvers(({ final __callArgument866:Dynamic = resolvers; __callArgument866; }), ({ final __callArgument867:Dynamic = surfaceCreator; __callArgument867; }));
     return cast resolvers;
     return cast null;
   }
@@ -2660,17 +2893,27 @@ class _Scene2DCanvas {
     if ((cast _Runtime.strictEquals(surfaces, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     ((cast _Scene2DCanvas._ownedSurfaces__canvasTextureResolver : flight._internal._WeakMap<CanvasTextureResolvers, flight._internal._Set<CanvasRenderSurface>>).delete_((cast resolvers)));
     for (surface in _Runtime.iterable(surfaces)) {
-      destroyCanvasRenderSurface(({ final __callArgument810:Dynamic = surface; __callArgument810; }));
+      destroyCanvasRenderSurface(({ final __callArgument872:Dynamic = surface; __callArgument872; }));
     }
     ((cast surfaces : flight._internal._Set<CanvasRenderSurface>).clear());
-    ({ final __collection812:Dynamic = (cast resolvers : CanvasTextureResolvers).registry; __collection812 == null ? _Runtime.UNDEFINED : ((cast __collection812 : flight._internal._Map<String, CanvasTextureResolver>).clear()); });
+    ({ final __collection874:Dynamic = (cast resolvers : CanvasTextureResolvers).registry; __collection874 == null ? _Runtime.UNDEFINED : ((cast __collection874 : flight._internal._Map<String, CanvasTextureResolver>).clear()); });
     ((cast resolvers : CanvasTextureResolvers).registry = null);
     ((cast resolvers : { @:optional var registryMiss:Null<RenderRegistry->String->Void>; }).registryMiss = (cast null));
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeCanvasTextureResolvers(resolvers:EntityConstruction<CanvasTextureResolvers>, surfaceCreator:CanvasRenderSurfaceCreator):Void {
+    _Runtime.setField(resolvers, 'registry', null);
+    ((cast resolvers : { @:optional var registryMiss:Null<RenderRegistry->String->Void>; }).registryMiss = (cast null));
+    _Runtime.setField(resolvers, 'surfaceCreator', surfaceCreator);
+    _Runtime.setIndex(resolvers, EntityRuntimeKey, { binding: null });
+    ((cast _Scene2DCanvas._ownedSurfaces__canvasTextureResolver : flight._internal._WeakMap<CanvasTextureResolvers, flight._internal._Set<CanvasRenderSurface>>).set((cast resolvers), (cast _Runtime.construct(flight._internal._HostValueLut.get('Set'), []))));
+  }
+
   public static function registerCanvasTextureResolver(resolvers:CanvasTextureResolvers, sourceKind:TextureSourceKind, resolver:Null<CanvasTextureResolver>):Void {
     var registry:flight._internal._Map<flight._internal._Any, flight._internal._Any> = cast _Runtime.UNDEFINED;
-    registry = ({ final __nullishOwner813 = resolvers; final __nullishValue814:Null<flight._internal._Map<String, CanvasTextureResolver>> = cast (cast __nullishOwner813 : CanvasTextureResolvers).registry; __nullishValue814 == null ? ((cast __nullishOwner813 : CanvasTextureResolvers).registry = (cast _Runtime.construct(flight._internal._HostValueLut.get('Map'), []) : Null<flight._internal._Map<String, CanvasTextureResolver>>)) : (cast __nullishValue814 : Null<flight._internal._Map<String, CanvasTextureResolver>>); });
+    registry = ({ final __nullishOwner875 = resolvers; final __nullishValue876:Null<flight._internal._Map<String, CanvasTextureResolver>> = cast (cast __nullishOwner875 : CanvasTextureResolvers).registry; __nullishValue876 == null ? ((cast __nullishOwner875 : CanvasTextureResolvers).registry = (cast _Runtime.construct(flight._internal._HostValueLut.get('Map'), []) : Null<flight._internal._Map<String, CanvasTextureResolver>>)) : (cast __nullishValue876 : Null<flight._internal._Map<String, CanvasTextureResolver>>); });
     if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ((cast registry : flight._internal._Map<flight._internal._Any, flight._internal._Any>).delete_((cast sourceKind))); } else { ((cast registry : flight._internal._Map<flight._internal._Any, flight._internal._Any>).set((cast sourceKind), (cast resolver))); }
   }
 
@@ -2680,14 +2923,14 @@ class _Scene2DCanvas {
     var sourceKind:Null<String> = cast _Runtime.UNDEFINED;
     var resolver:Null<CanvasTextureResolver> = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) { return cast null; }
-    sourceKind = (cast getTextureSourceKind(({ final __callArgument815:Dynamic = texture; __callArgument815; })) : Null<String>);
+    sourceKind = (cast getTextureSourceKind(({ final __callArgument877:Dynamic = texture; __callArgument877; })) : Null<String>);
     if ((cast _Runtime.strictEquals(sourceKind, null) : Bool)) { return cast null; }
-    resolver = ({ final __collection817:Dynamic = (cast resolvers : CanvasTextureResolvers).registry; __collection817 == null ? _Runtime.UNDEFINED : ((cast __collection817 : flight._internal._Map<String, CanvasTextureResolver>).get((cast sourceKind))); });
+    resolver = ({ final __collection879:Dynamic = (cast resolvers : CanvasTextureResolvers).registry; __collection879 == null ? _Runtime.UNDEFINED : ((cast __collection879 : flight._internal._Map<String, CanvasTextureResolver>).get((cast sourceKind))); });
     if ((cast _Runtime.strictEquals(resolver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.callOptionalValue((cast resolvers : CanvasTextureResolvers).registryMiss, cast ([RenderRegistry.TextureResolver, sourceKind] : Array<Dynamic>));
       return cast null;
     }
-    return cast (cast resolver(({ final __callArgument818:Dynamic = resolvers; __callArgument818; }), ({ final __callArgument819:Dynamic = texture; __callArgument819; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>);
+    return cast (cast resolver(({ final __callArgument880:Dynamic = resolvers; __callArgument880; }), ({ final __callArgument881:Dynamic = texture; __callArgument881; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>);
     return cast null;
   }
 
@@ -2720,7 +2963,7 @@ class _Scene2DCanvas {
     var flipY:Bool = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) { return cast null; }
     image = _Runtime.field(texture, 'source');
-    source = (cast resolveCanvasTexture(({ final __callArgument822:Dynamic = resolvers; __callArgument822; }), ({ final __callArgument823:Dynamic = texture; __callArgument823; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>);
+    source = (cast resolveCanvasTexture(({ final __callArgument884:Dynamic = resolvers; __callArgument884; }), ({ final __callArgument885:Dynamic = texture; __callArgument885; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(source, null) : Bool)) { return cast null; }
     uvOffsetX = (cast _Runtime.field(texture, 'uvOffset') : { var x:Float; }).x;
     uvOffsetY = (cast _Runtime.field(texture, 'uvOffset') : { var y:Float; }).y;
@@ -2730,18 +2973,18 @@ class _Scene2DCanvas {
     if ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(uvOffsetX, 0.0) : Bool) && (cast _Runtime.strictEquals(uvOffsetY, 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(uvScaleX, 1.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(uvScaleY, 1.0) : Bool)) : Bool) && (cast !(cast _Runtime.field(texture, 'flipX') : Bool) : Bool)) : Bool) && (cast !(cast _Runtime.field(texture, 'flipY') : Bool) : Bool)) : Bool) && (cast _Runtime.strictEquals(uvRotation, 0.0) : Bool)) : Bool)) {
       return cast source;
     }
-    backingWidth = (cast getTextureWidth(({ final __callArgument826:Dynamic = texture; __callArgument826; })) : Float);
-    backingHeight = (cast getTextureHeight(({ final __callArgument828:Dynamic = texture; __callArgument828; })) : Float);
+    backingWidth = (cast getTextureWidth(({ final __callArgument888:Dynamic = texture; __callArgument888; })) : Float);
+    backingHeight = (cast getTextureHeight(({ final __callArgument890:Dynamic = texture; __callArgument890; })) : Float);
     sourceWidth = HxMath.abs((uvScaleX * backingWidth));
     sourceHeight = HxMath.abs((uvScaleY * backingHeight));
     if ((cast ((cast ((cast ((cast ((cast backingWidth : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast backingHeight : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sourceWidth : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast sourceHeight : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
-    imageVersion = _Runtime.coalesce(({ final __typedStruct830 = image; __typedStruct830 == null ? _Runtime.UNDEFINED : (cast __typedStruct830 : { var version:Float; }).version; }), function():Dynamic return cast -1.0);
-    cache = ({ final __nullishOwner831 = resolvers; final __nullishValue832:Null<flight._internal._WeakMap<Texture, { var element:flight._internal.dom.HTMLCanvasElement; var surface:CanvasRenderSurface; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flight._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }>> = cast (cast __nullishOwner831 : CanvasTextureResolvers).textureWindowElementCache; __nullishValue832 == null ? ((cast __nullishOwner831 : CanvasTextureResolvers).textureWindowElementCache = (cast _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []) : Null<flight._internal._WeakMap<Texture, { var element:flight._internal.dom.HTMLCanvasElement; var surface:CanvasRenderSurface; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flight._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }>>)) : (cast __nullishValue832 : Null<flight._internal._WeakMap<Texture, { var element:flight._internal.dom.HTMLCanvasElement; var surface:CanvasRenderSurface; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flight._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }>>); });
-    entry = ({ final __collection833:Dynamic = cache; __collection833 == null ? _Runtime.UNDEFINED : ((cast __collection833 : flight._internal._WeakMap<Texture, { var element:flight._internal.dom.HTMLCanvasElement; var surface:CanvasRenderSurface; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flight._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }>).get((cast texture))); });
+    imageVersion = _Runtime.coalesce(({ final __typedStruct892 = image; __typedStruct892 == null ? _Runtime.UNDEFINED : (cast __typedStruct892 : { var version:Float; }).version; }), function():Dynamic return cast -1.0);
+    cache = ({ final __nullishOwner893 = resolvers; final __nullishValue894:Null<flight._internal._WeakMap<Texture, { var element:flight._internal.dom.HTMLCanvasElement; var surface:CanvasRenderSurface; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flight._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }>> = cast (cast __nullishOwner893 : CanvasTextureResolvers).textureWindowElementCache; __nullishValue894 == null ? ((cast __nullishOwner893 : CanvasTextureResolvers).textureWindowElementCache = (cast _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []) : Null<flight._internal._WeakMap<Texture, { var element:flight._internal.dom.HTMLCanvasElement; var surface:CanvasRenderSurface; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flight._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }>>)) : (cast __nullishValue894 : Null<flight._internal._WeakMap<Texture, { var element:flight._internal.dom.HTMLCanvasElement; var surface:CanvasRenderSurface; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flight._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }>>); });
+    entry = ({ final __collection895:Dynamic = cache; __collection895 == null ? _Runtime.UNDEFINED : ((cast __collection895 : flight._internal._WeakMap<Texture, { var element:flight._internal.dom.HTMLCanvasElement; var surface:CanvasRenderSurface; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flight._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }>).get((cast texture))); });
     if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast entry : { var element:flight._internal.dom.HTMLCanvasElement; var surface:CanvasRenderSurface; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flight._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }).source, source) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast entry : { var element:flight._internal.dom.HTMLCanvasElement; var surface:CanvasRenderSurface; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flight._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }).imageVersion, imageVersion) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast entry : { var element:flight._internal.dom.HTMLCanvasElement; var surface:CanvasRenderSurface; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flight._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }).textureVersion, _Runtime.field(texture, 'version')) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast entry : { var element:flight._internal.dom.HTMLCanvasElement; var surface:CanvasRenderSurface; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flight._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }).uvOffsetX, uvOffsetX) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast entry : { var element:flight._internal.dom.HTMLCanvasElement; var surface:CanvasRenderSurface; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flight._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }).uvOffsetY, uvOffsetY) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast entry : { var element:flight._internal.dom.HTMLCanvasElement; var surface:CanvasRenderSurface; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flight._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }).uvRotation, uvRotation) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast entry : { var element:flight._internal.dom.HTMLCanvasElement; var surface:CanvasRenderSurface; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flight._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }).uvScaleX, uvScaleX) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast entry : { var element:flight._internal.dom.HTMLCanvasElement; var surface:CanvasRenderSurface; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flight._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }).uvScaleY, uvScaleY) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast entry : { var element:flight._internal.dom.HTMLCanvasElement; var surface:CanvasRenderSurface; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flight._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }).flipX, _Runtime.field(texture, 'flipX')) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast entry : { var element:flight._internal.dom.HTMLCanvasElement; var surface:CanvasRenderSurface; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flight._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }).flipY, _Runtime.field(texture, 'flipY')) : Bool)) : Bool)) {
       return cast (cast entry : { var element:flight._internal.dom.HTMLCanvasElement; var surface:CanvasRenderSurface; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flight._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }).element;
     }
-    surface = (cast acquireCanvasTextureResolverSurface(({ final __callArgument834:Dynamic = resolvers; __callArgument834; }), ({ final __callArgument835:Dynamic = { height: HxMath.max(1.0, HxMath.ceil(sourceHeight)), pixelRatio: 1.0, width: HxMath.max(1.0, HxMath.ceil(sourceWidth)) }; __callArgument835; })) : Null<CanvasRenderSurface>);
+    surface = (cast acquireCanvasTextureResolverSurface(({ final __callArgument896:Dynamic = resolvers; __callArgument896; }), ({ final __callArgument897:Dynamic = { height: HxMath.max(1.0, HxMath.ceil(sourceHeight)), pixelRatio: 1.0, width: HxMath.max(1.0, HxMath.ceil(sourceWidth)) }; __callArgument897; })) : Null<CanvasRenderSurface>);
     if ((cast _Runtime.strictEquals(surface, null) : Bool)) { return cast null; }
     __destructure0 = surface;
     element = _Runtime.field(__destructure0, 'canvas');
@@ -2757,7 +3000,7 @@ class _Scene2DCanvas {
     flight._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([source, sourceX, sourceY, sourceWidth, sourceHeight, 0.0, 0.0, flight._internal.backend.CanvasElementBackend.field(element, 'width'), flight._internal.backend.CanvasElementBackend.field(element, 'height')] : Array<Dynamic>));
     flight._internal.backend.Canvas2dBackend.call(context, 'restore', cast ([] : Array<Dynamic>));
     (entry = cast ({ element: element, flipX: _Runtime.field(texture, 'flipX'), flipY: _Runtime.field(texture, 'flipY'), imageVersion: imageVersion, source: source, surface: surface, textureVersion: _Runtime.field(texture, 'version'), uvOffsetX: uvOffsetX, uvOffsetY: uvOffsetY, uvRotation: uvRotation, uvScaleX: uvScaleX, uvScaleY: uvScaleY } : Dynamic));
-    ({ final __collection838:Dynamic = cache; __collection838 == null ? _Runtime.UNDEFINED : ((cast __collection838 : flight._internal._WeakMap<Texture, { var element:flight._internal.dom.HTMLCanvasElement; var surface:CanvasRenderSurface; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flight._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }>).set((cast texture), (cast entry))); });
+    ({ final __collection900:Dynamic = cache; __collection900 == null ? _Runtime.UNDEFINED : ((cast __collection900 : flight._internal._WeakMap<Texture, { var element:flight._internal.dom.HTMLCanvasElement; var surface:CanvasRenderSurface; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flight._internal._Any; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }>).set((cast texture), (cast entry))); });
     return cast element;
     return cast null;
   }
@@ -2790,7 +3033,7 @@ class _Scene2DCanvas {
     tileWidth = __destructure0.tileWidth;
     tiles = __destructure0.tiles;
     if ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool)) { return; }
-    image = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers(({ final __callArgument839:Dynamic = state; __callArgument839; })) : CanvasTextureResolvers), ({ final __callArgument841:Dynamic = atlas.texture; __callArgument841; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>);
+    image = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers(({ final __callArgument901:Dynamic = state; __callArgument901; })) : CanvasTextureResolvers), ({ final __callArgument903:Dynamic = atlas.texture; __callArgument903; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(image, null) : Bool)) { return; }
     if ((cast ((cast _Runtime.strictEquals(columns, 0.0) : Bool) || (cast _Runtime.strictEquals(rows, 0.0) : Bool)) : Bool)) { return; }
     _Runtime.callOptionalValue((cast state : CanvasRenderState).applyBlendMode, cast ([state, (cast tilemapNode : RenderProxy2D).blendMode] : Array<Dynamic>));
@@ -2802,7 +3045,7 @@ class _Scene2DCanvas {
     flight._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast tilemapNode : RenderProxy2D).alpha);
     smoothing = ((cast (cast state : CanvasRenderState).allowSmoothing : Bool) && (cast !(cast StringTools.startsWith((cast (cast atlas.texture : Texture2D).sampler : { var magFilter:TextureFilter; }).magFilter, 'nearest') : Bool) : Bool));
     if ((cast !(cast smoothing : Bool) : Bool)) { flight._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false); }
-    restoreMaterial = (cast applyCanvasMaterial(({ final __callArgument845:Dynamic = state; __callArgument845; }), (cast (cast tilemapNode : RenderProxy2D).material : Dynamic)) : Bool);
+    restoreMaterial = (cast applyCanvasMaterial(({ final __callArgument907:Dynamic = state; __callArgument907; }), (cast (cast tilemapNode : RenderProxy2D).material : Dynamic)) : Bool);
     flight._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([transform.a, transform.b, transform.c, transform.d, transform.tx, transform.ty] : Array<Dynamic>));
     {
       var row:Float = 0.0;
@@ -2843,22 +3086,22 @@ class _Scene2DCanvas {
   @:allow(flight)
   @:keep
   private static function areCanvasTextureResolverGuardsEnabled(state:CanvasRenderState):Bool {
-    return cast (cast areRenderRegistryGuardsEnabled(({ final __callArgument847:Dynamic = state; __callArgument847; })) : Bool);
+    return cast (cast areRenderRegistryGuardsEnabled(({ final __callArgument909:Dynamic = state; __callArgument909; })) : Bool);
     return cast null;
   }
 
   public static function enableCanvasTextureResolverGuards(state:CanvasRenderState):Void {
-    enableRenderRegistryGuards(({ final __callArgument849:Dynamic = state; __callArgument849; }));
+    enableRenderRegistryGuards(({ final __callArgument911:Dynamic = state; __callArgument911; }));
   }
 
   public static function explainCanvasScene2DCoverage(out:Array<SceneCoverageEntry>, state:CanvasRenderState, usage:Scene2DKindUsage, catalog:SceneCoverageCatalog):Void {
-    explainScene2DCoverage(({ final __callArgument851:Dynamic = out; __callArgument851; }), ({ final __callArgument852:Dynamic = state; __callArgument852; }), ({ final __callArgument853:Dynamic = usage; __callArgument853; }), ({ final __callArgument854:Dynamic = catalog; __callArgument854; }));
-    (cast _Scene2DCanvas.collectCanvasScene2DCoverageGaps__explainCanvasScene2DCoverage(({ final __callArgument859:Dynamic = out; __callArgument859; }), ({ final __callArgument860:Dynamic = state; __callArgument860; }), ({ final __callArgument861:Dynamic = usage; __callArgument861; }), (cast false : Bool), ({ final __callArgument862:Dynamic = catalog; __callArgument862; })) : Bool);
+    explainScene2DCoverage(({ final __callArgument913:Dynamic = out; __callArgument913; }), ({ final __callArgument914:Dynamic = state; __callArgument914; }), ({ final __callArgument915:Dynamic = usage; __callArgument915; }), ({ final __callArgument916:Dynamic = catalog; __callArgument916; }));
+    (cast _Scene2DCanvas.collectCanvasScene2DCoverageGaps__explainCanvasScene2DCoverage(({ final __callArgument921:Dynamic = out; __callArgument921; }), ({ final __callArgument922:Dynamic = state; __callArgument922; }), ({ final __callArgument923:Dynamic = usage; __callArgument923; }), (cast false : Bool), ({ final __callArgument924:Dynamic = catalog; __callArgument924; })) : Bool);
   }
 
   public static function hasCanvasScene2DCoverage(state:CanvasRenderState, usage:Scene2DKindUsage):Bool {
-    if ((cast !(cast (cast hasScene2DCoverage(({ final __callArgument867:Dynamic = state; __callArgument867; }), ({ final __callArgument868:Dynamic = usage; __callArgument868; })) : Bool) : Bool) : Bool)) { return cast false; }
-    return cast !(cast (cast _Scene2DCanvas.collectCanvasScene2DCoverageGaps__explainCanvasScene2DCoverage(({ final __callArgument871:Dynamic = null; __callArgument871; }), ({ final __callArgument872:Dynamic = state; __callArgument872; }), ({ final __callArgument873:Dynamic = usage; __callArgument873; }), (cast true : Bool), ({ final __callArgument874:Dynamic = null; __callArgument874; })) : Bool) : Bool);
+    if ((cast !(cast (cast hasScene2DCoverage(({ final __callArgument929:Dynamic = state; __callArgument929; }), ({ final __callArgument930:Dynamic = usage; __callArgument930; })) : Bool) : Bool) : Bool)) { return cast false; }
+    return cast !(cast (cast _Scene2DCanvas.collectCanvasScene2DCoverageGaps__explainCanvasScene2DCoverage(({ final __callArgument933:Dynamic = null; __callArgument933; }), ({ final __callArgument934:Dynamic = state; __callArgument934; }), ({ final __callArgument935:Dynamic = usage; __callArgument935; }), (cast true : Bool), ({ final __callArgument936:Dynamic = null; __callArgument936; })) : Bool) : Bool);
     return cast null;
   }
 
@@ -2869,14 +3112,14 @@ class _Scene2DCanvas {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(usage.materialKinds, 'length') : Float)) : Bool)) {
         var kind:String = flight._internal._StaticIndex.readArray(usage.materialKinds, i);
-        if ((cast !_Runtime.strictEquals((cast getCanvasMaterialRenderer(({ final __callArgument879:Dynamic = state; __callArgument879; }), (cast kind : String)) : Null<CanvasMaterialRenderer>), null) : Bool)) {
+        if ((cast !_Runtime.strictEquals((cast getCanvasMaterialRenderer(({ final __callArgument941:Dynamic = state; __callArgument941; }), (cast kind : String)) : Null<CanvasMaterialRenderer>), null) : Bool)) {
           _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).Satisfied, facet: (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneMaterialKind, kind: kind, registry: RenderRegistry.MaterialRenderer }] : Array<Dynamic>));
           i++;
           continue;
         }
         (found = cast (true : Dynamic));
         if ((cast stopAtFirst : Bool)) { return cast true; }
-        _Runtime.callOptionalProperty(out, 'push', cast ([(cast _Scene2DCanvas.createShortfallEntry__explainCanvasScene2DCoverage(({ final __callArgument881:Dynamic = catalog; __callArgument881; }), (cast true : Bool), ({ final __callArgument882:Dynamic = (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneMaterialKind; __callArgument882; }), (cast kind : String), ({ final __callArgument883:Dynamic = RenderRegistry.MaterialRenderer; __callArgument883; })) : SceneCoverageEntry)] : Array<Dynamic>));
+        _Runtime.callOptionalProperty(out, 'push', cast ([(cast _Scene2DCanvas.createShortfallEntry__explainCanvasScene2DCoverage(({ final __callArgument943:Dynamic = catalog; __callArgument943; }), (cast true : Bool), ({ final __callArgument944:Dynamic = (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneMaterialKind; __callArgument944; }), (cast kind : String), ({ final __callArgument945:Dynamic = RenderRegistry.MaterialRenderer; __callArgument945; })) : SceneCoverageEntry)] : Array<Dynamic>));
         i++;
       }
     }
@@ -2887,7 +3130,7 @@ class _Scene2DCanvas {
   public static function createShortfallEntry__explainCanvasScene2DCoverage(catalog:Null<SceneCoverageCatalog>, fallback:Bool, facet:flight._internal._IndexedAccess<SceneCoverageEntry, String>, kind:Kind, registry:flight._internal._IndexedAccess<SceneCoverageEntry, String>):SceneCoverageEntry {
     var registration:Null<CatalogRegistration> = cast _Runtime.UNDEFINED;
     var base:{ var facet:RequirementFacet; var kind:String; var registry:RenderRegistry; } = cast _Runtime.UNDEFINED;
-    registration = (cast _Scene2DCanvas.findCatalogRegistration__explainCanvasScene2DCoverage(({ final __callArgument887:Dynamic = catalog; __callArgument887; }), (cast kind : String), ({ final __callArgument888:Dynamic = registry; __callArgument888; })) : Null<CatalogRegistration>);
+    registration = (cast _Scene2DCanvas.findCatalogRegistration__explainCanvasScene2DCoverage(({ final __callArgument949:Dynamic = catalog; __callArgument949; }), (cast kind : String), ({ final __callArgument950:Dynamic = registry; __callArgument950; })) : Null<CatalogRegistration>);
     base = (cast { facet: facet, kind: kind, registry: registry });
     if ((cast _Runtime.strictEquals(registration, null) : Bool)) {
       return cast _Runtime.mergeObjects([base, { coverage: ((cast fallback : Bool) ? (cast (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).FallbackUnavailable : Dynamic) : (cast (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).Unavailable : Dynamic)) }]);
@@ -2907,9 +3150,9 @@ class _Scene2DCanvas {
 
   public static function explainCanvasTextureResolution(resolvers:CanvasTextureResolvers, texture:Texture):TextureResolutionExplanation {
     var kind:Null<String> = cast _Runtime.UNDEFINED;
-    kind = (cast getTextureSourceKind(({ final __callArgument893:Dynamic = texture; __callArgument893; })) : Null<String>);
+    kind = (cast getTextureSourceKind(({ final __callArgument955:Dynamic = texture; __callArgument955; })) : Null<String>);
     if ((cast _Runtime.strictEquals(kind, null) : Bool)) { return cast { kind: kind, status: 'missing-kind' }; }
-    return cast { kind: kind, status: ((cast _Runtime.strictEquals(({ final __collection895:Dynamic = _Runtime.field(resolvers, 'registry'); __collection895 == null ? _Runtime.UNDEFINED : ((cast __collection895 : flight._internal._Map<String, CanvasTextureResolver>).has((cast kind))); }), true) : Bool) ? (cast 'registered' : Dynamic) : (cast 'missing-resolver' : Dynamic)) };
+    return cast { kind: kind, status: ((cast _Runtime.strictEquals(({ final __collection957:Dynamic = _Runtime.field(resolvers, 'registry'); __collection957 == null ? _Runtime.UNDEFINED : ((cast __collection957 : flight._internal._Map<String, CanvasTextureResolver>).has((cast kind))); }), true) : Bool) ? (cast 'registered' : Dynamic) : (cast 'missing-resolver' : Dynamic)) };
     return cast null;
   }
 
@@ -2918,21 +3161,22 @@ class _Scene2DCanvas {
     var table:KeyedTable<Renderer> = cast _Runtime.UNDEFINED;
     registries = (cast createEmptyCanvasRegistries() : CanvasRenderRegistries);
     table = (cast registries : CanvasRenderRegistries).renderers;
-    (table = cast ((cast (cast withRegistryTableEntry : KeyedTable<Renderer>->String->Renderer->KeyedTable<Renderer>)(({ final __callArgument896:Dynamic = table; __callArgument896; }), (cast BitmapTextKind : String), ({ final __callArgument897:Dynamic = defaultCanvasBitmapTextRenderer; __callArgument897; })) : KeyedTable<Renderer>) : Dynamic));
-    (table = cast ((cast (cast withRegistryTableEntry : KeyedTable<Renderer>->String->Renderer->KeyedTable<Renderer>)(({ final __callArgument900:Dynamic = table; __callArgument900; }), (cast DisplayObjectKind : String), ({ final __callArgument901:Dynamic = defaultCanvasScene2DRenderer; __callArgument901; })) : KeyedTable<Renderer>) : Dynamic));
-    (table = cast ((cast (cast withRegistryTableEntry : KeyedTable<Renderer>->String->Renderer->KeyedTable<Renderer>)(({ final __callArgument904:Dynamic = table; __callArgument904; }), (cast MorphShapeKind : String), ({ final __callArgument905:Dynamic = defaultCanvasMorphShapeRenderer; __callArgument905; })) : KeyedTable<Renderer>) : Dynamic));
-    (table = cast ((cast (cast withRegistryTableEntry : KeyedTable<Renderer>->String->Renderer->KeyedTable<Renderer>)(({ final __callArgument908:Dynamic = table; __callArgument908; }), (cast ParticleEmitter2DKind : String), ({ final __callArgument909:Dynamic = defaultCanvasParticleEmitter2DRenderer; __callArgument909; })) : KeyedTable<Renderer>) : Dynamic));
-    (table = cast ((cast (cast withRegistryTableEntry : KeyedTable<Renderer>->String->Renderer->KeyedTable<Renderer>)(({ final __callArgument912:Dynamic = table; __callArgument912; }), (cast QuadBatchKind : String), ({ final __callArgument913:Dynamic = defaultCanvasQuadBatchRenderer; __callArgument913; })) : KeyedTable<Renderer>) : Dynamic));
-    (table = cast ((cast (cast withRegistryTableEntry : KeyedTable<Renderer>->String->Renderer->KeyedTable<Renderer>)(({ final __callArgument916:Dynamic = table; __callArgument916; }), (cast RenderCacheKindValue : String), ({ final __callArgument917:Dynamic = defaultCanvasRenderCacheRenderer; __callArgument917; })) : KeyedTable<Renderer>) : Dynamic));
-    (table = cast ((cast (cast withRegistryTableEntry : KeyedTable<Renderer>->String->Renderer->KeyedTable<Renderer>)(({ final __callArgument920:Dynamic = table; __callArgument920; }), (cast RichTextKind : String), ({ final __callArgument921:Dynamic = defaultCanvasRichTextRenderer; __callArgument921; })) : KeyedTable<Renderer>) : Dynamic));
-    (table = cast ((cast (cast withRegistryTableEntry : KeyedTable<Renderer>->String->Renderer->KeyedTable<Renderer>)(({ final __callArgument924:Dynamic = table; __callArgument924; }), (cast Scale9ShapeKind : String), ({ final __callArgument925:Dynamic = defaultCanvasScale9ShapeRenderer; __callArgument925; })) : KeyedTable<Renderer>) : Dynamic));
-    (table = cast ((cast (cast withRegistryTableEntry : KeyedTable<Renderer>->String->Renderer->KeyedTable<Renderer>)(({ final __callArgument928:Dynamic = table; __callArgument928; }), (cast ShapeKind : String), ({ final __callArgument929:Dynamic = defaultCanvasShapeRenderer; __callArgument929; })) : KeyedTable<Renderer>) : Dynamic));
-    (table = cast ((cast (cast withRegistryTableEntry : KeyedTable<Renderer>->String->Renderer->KeyedTable<Renderer>)(({ final __callArgument932:Dynamic = table; __callArgument932; }), (cast SpriteKind : String), ({ final __callArgument933:Dynamic = defaultCanvasSpriteRenderer; __callArgument933; })) : KeyedTable<Renderer>) : Dynamic));
-    (table = cast ((cast (cast withRegistryTableEntry : KeyedTable<Renderer>->String->Renderer->KeyedTable<Renderer>)(({ final __callArgument936:Dynamic = table; __callArgument936; }), (cast TextLabelKind : String), ({ final __callArgument937:Dynamic = defaultCanvasTextLabelRenderer; __callArgument937; })) : KeyedTable<Renderer>) : Dynamic));
-    (table = cast ((cast (cast withRegistryTableEntry : KeyedTable<Renderer>->String->Renderer->KeyedTable<Renderer>)(({ final __callArgument940:Dynamic = table; __callArgument940; }), (cast TilemapKind : String), ({ final __callArgument941:Dynamic = defaultCanvasTilemapRenderer; __callArgument941; })) : KeyedTable<Renderer>) : Dynamic));
+    (table = cast ((cast withRegistryTableEntry(({ final __callArgument958:Dynamic = table; __callArgument958; }), (cast BitmapTextKind : String), ({ final __callArgument959:Dynamic = defaultCanvasBitmapTextRenderer; __callArgument959; })) : { >KeyedTable<Renderer>, >Entity, }) : Dynamic));
+    (table = cast ((cast withRegistryTableEntry(({ final __callArgument962:Dynamic = table; __callArgument962; }), (cast DisplayObjectKind : String), ({ final __callArgument963:Dynamic = defaultCanvasScene2DRenderer; __callArgument963; })) : { >KeyedTable<Renderer>, >Entity, }) : Dynamic));
+    (table = cast ((cast withRegistryTableEntry(({ final __callArgument966:Dynamic = table; __callArgument966; }), (cast MorphShapeKind : String), ({ final __callArgument967:Dynamic = defaultCanvasMorphShapeRenderer; __callArgument967; })) : { >KeyedTable<Renderer>, >Entity, }) : Dynamic));
+    (table = cast ((cast withRegistryTableEntry(({ final __callArgument970:Dynamic = table; __callArgument970; }), (cast ParticleEmitter2DKind : String), ({ final __callArgument971:Dynamic = defaultCanvasParticleEmitter2DRenderer; __callArgument971; })) : { >KeyedTable<Renderer>, >Entity, }) : Dynamic));
+    (table = cast ((cast withRegistryTableEntry(({ final __callArgument974:Dynamic = table; __callArgument974; }), (cast QuadBatchKind : String), ({ final __callArgument975:Dynamic = defaultCanvasQuadBatchRenderer; __callArgument975; })) : { >KeyedTable<Renderer>, >Entity, }) : Dynamic));
+    (table = cast ((cast withRegistryTableEntry(({ final __callArgument978:Dynamic = table; __callArgument978; }), (cast RenderCacheKindValue : String), ({ final __callArgument979:Dynamic = defaultCanvasRenderCacheRenderer; __callArgument979; })) : { >KeyedTable<Renderer>, >Entity, }) : Dynamic));
+    (table = cast ((cast withRegistryTableEntry(({ final __callArgument982:Dynamic = table; __callArgument982; }), (cast RichTextKind : String), ({ final __callArgument983:Dynamic = defaultCanvasRichTextRenderer; __callArgument983; })) : { >KeyedTable<Renderer>, >Entity, }) : Dynamic));
+    (table = cast ((cast withRegistryTableEntry(({ final __callArgument986:Dynamic = table; __callArgument986; }), (cast Scale9ShapeKind : String), ({ final __callArgument987:Dynamic = defaultCanvasScale9ShapeRenderer; __callArgument987; })) : { >KeyedTable<Renderer>, >Entity, }) : Dynamic));
+    (table = cast ((cast withRegistryTableEntry(({ final __callArgument990:Dynamic = table; __callArgument990; }), (cast Scale9SpriteKind : String), ({ final __callArgument991:Dynamic = defaultCanvasScale9SpriteRenderer; __callArgument991; })) : { >KeyedTable<Renderer>, >Entity, }) : Dynamic));
+    (table = cast ((cast withRegistryTableEntry(({ final __callArgument994:Dynamic = table; __callArgument994; }), (cast ShapeKind : String), ({ final __callArgument995:Dynamic = defaultCanvasShapeRenderer; __callArgument995; })) : { >KeyedTable<Renderer>, >Entity, }) : Dynamic));
+    (table = cast ((cast withRegistryTableEntry(({ final __callArgument998:Dynamic = table; __callArgument998; }), (cast SpriteKind : String), ({ final __callArgument999:Dynamic = defaultCanvasSpriteRenderer; __callArgument999; })) : { >KeyedTable<Renderer>, >Entity, }) : Dynamic));
+    (table = cast ((cast withRegistryTableEntry(({ final __callArgument1002:Dynamic = table; __callArgument1002; }), (cast TextLabelKind : String), ({ final __callArgument1003:Dynamic = defaultCanvasTextLabelRenderer; __callArgument1003; })) : { >KeyedTable<Renderer>, >Entity, }) : Dynamic));
+    (table = cast ((cast withRegistryTableEntry(({ final __callArgument1006:Dynamic = table; __callArgument1006; }), (cast TilemapKind : String), ({ final __callArgument1007:Dynamic = defaultCanvasTilemapRenderer; __callArgument1007; })) : { >KeyedTable<Renderer>, >Entity, }) : Dynamic));
     return cast table;
     return cast null;
   }
 
-  public static final scene2dCanvasPipeline:CanvasPipeline = (cast createCanvasPipeline(({ final __callArgument944:Dynamic = _Runtime.mergeObjects([(cast createEmptyCanvasRegistries() : CanvasRenderRegistries), { blendModeApplication: applyCanvasBlendMode }, { canvasShapeCommands: (cast canvasShapeCommandTable() : KeyedTable<CanvasShapeCommand<String>>) }, { renderers: (cast _Scene2DCanvas.buildScene2dCanvasRenderers__scene2dCanvasPipeline() : KeyedTable<Renderer>) }]); __callArgument944; })) : CanvasPipeline);
+  public static final scene2dCanvasPipeline:CanvasPipeline = (cast createCanvasPipeline(({ final __callArgument1010:Dynamic = _Runtime.mergeObjects([(cast createEmptyCanvasRegistries() : CanvasRenderRegistries), { blendModeApplication: applyCanvasBlendMode }, { canvasShapeCommands: (cast canvasShapeCommandTable() : KeyedTable<CanvasShapeCommand<String>>) }, { renderers: (cast _Scene2DCanvas.buildScene2dCanvasRenderers__scene2dCanvasPipeline() : KeyedTable<Renderer>) }]); __callArgument1010; })) : CanvasPipeline);
 }

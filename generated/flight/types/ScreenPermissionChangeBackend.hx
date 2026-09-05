@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class ScreenPermissionChangeBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var subscribe:(ScreenPermissionState->Void)->(Void->Void);
+
+  private function new(subscribe:(ScreenPermissionState->Void)->(Void->Void)):Void {
+    this.__symbol__EntityRuntime = null;
+    this.subscribe = subscribe;
+  }
+}
+#else
 typedef ScreenPermissionChangeBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var subscribe:(ScreenPermissionState->Void)->(Void->Void); };
+#end

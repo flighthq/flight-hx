@@ -7,6 +7,8 @@ import flight.Types.MorphShapeKind;
 import flight.Types.Scale9ShapeKind;
 import flight.Types.ShapeKind;
 import flight._Animation.sampleAnimationClip;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Geometry.cloneMatrix;
 import flight._Geometry.createMatrix;
 import flight._Log.logOnce;
@@ -26,6 +28,7 @@ import flight.types.AnimationChannel;
 import flight.types.AnimationClip;
 import flight.types.BoundsNodeAny;
 import flight.types.CapsStyle;
+import flight.types.EntityConstruction;
 import flight.types.EntityRuntime;
 import flight.types.GradientType;
 import flight.types.InterpolationMethod;
@@ -113,7 +116,7 @@ class _Shape {
     var cap:String = cast _Runtime.UNDEFINED;
     var miterLimit:Float = cast _Runtime.UNDEFINED;
     var halfWidth:Float = cast _Runtime.UNDEFINED;
-    var result:Path = cast _Runtime.UNDEFINED;
+    var result:EntityConstruction<Path> = cast _Runtime.UNDEFINED;
     var subpaths:Array<StrokeSubpath__compactStrokePath> = cast _Runtime.UNDEFINED;
     var dash:Null<Array<Float>> = cast _Runtime.UNDEFINED;
     var dashOffset:Float = cast _Runtime.UNDEFINED;
@@ -122,20 +125,27 @@ class _Shape {
     cap = _Runtime.coalesce(style.cap, function():Dynamic return cast 'butt');
     miterLimit = _Runtime.coalesce(style.miterLimit, function():Dynamic return cast 4.0);
     halfWidth = (width / 2.0);
-    result = (cast { commands: cast ([] : Array<Dynamic>), data: cast ([] : Array<Dynamic>), winding: 'nonZero' });
-    subpaths = (cast _Shape.decodeSubpaths__compactStrokePath(({ final __callArgument0:Dynamic = path; __callArgument0; }), (cast tolerance : Float)) : Array<StrokeSubpath__compactStrokePath>);
+    result = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ commands: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, winding: cast _Runtime.UNDEFINED } : Path); }) #end));
+    _Shape.initializePath__compactStrokePath(({ final __callArgument0:Dynamic = result; __callArgument0; }), (cast cast ([] : Array<Dynamic>) : Array<Float>), (cast cast ([] : Array<Dynamic>) : Array<Float>), ({ final __callArgument1:Dynamic = 'nonZero'; __callArgument1; }));
+    subpaths = (cast _Shape.decodeSubpaths__compactStrokePath(({ final __callArgument4:Dynamic = path; __callArgument4; }), (cast tolerance : Float)) : Array<StrokeSubpath__compactStrokePath>);
     dash = _Runtime.select(_Runtime.andValue(style.dash, function():Dynamic return cast ((cast _Runtime.field(style.dash, 'length') : Float) > (cast 0.0 : Float))), function():Dynamic return cast style.dash, function():Dynamic return cast null);
     dashOffset = _Runtime.coalesce(style.dashOffset, function():Dynamic return cast 0.0);
     for (subpath in _Runtime.iterable(subpaths)) {
       if ((cast ((cast _Runtime.field((cast subpath : StrokeSubpath__compactStrokePath).points, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
-      var segments:Array<DashSegment__compactStrokePath> = _Runtime.select(dash, function():Dynamic return cast (cast _Shape.applyDash__compactStrokePath((cast subpath : StrokeSubpath__compactStrokePath).points, (cast (cast subpath : StrokeSubpath__compactStrokePath).closed : Bool), ({ final __callArgument4:Dynamic = dash; __callArgument4; }), (cast dashOffset : Float)) : Array<DashSegment__compactStrokePath>), function():Dynamic return cast cast ([{ points: (cast subpath : StrokeSubpath__compactStrokePath).points, closed: (cast subpath : StrokeSubpath__compactStrokePath).closed }] : Array<Dynamic>));
+      var segments:Array<DashSegment__compactStrokePath> = _Runtime.select(dash, function():Dynamic return cast (cast _Shape.applyDash__compactStrokePath((cast subpath : StrokeSubpath__compactStrokePath).points, (cast (cast subpath : StrokeSubpath__compactStrokePath).closed : Bool), ({ final __callArgument8:Dynamic = dash; __callArgument8; }), (cast dashOffset : Float)) : Array<DashSegment__compactStrokePath>), function():Dynamic return cast cast ([{ points: (cast subpath : StrokeSubpath__compactStrokePath).points, closed: (cast subpath : StrokeSubpath__compactStrokePath).closed }] : Array<Dynamic>));
       for (seg in _Runtime.iterable(segments)) {
         if ((cast ((cast _Runtime.field((cast seg : DashSegment__compactStrokePath).points, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
-        _Shape.strokeSubpath__compactStrokePath((cast seg : DashSegment__compactStrokePath).points, (cast (cast seg : DashSegment__compactStrokePath).closed : Bool), (cast halfWidth : Float), (cast join : String), (cast cap : String), (cast miterLimit : Float), ({ final __callArgument8:Dynamic = result; __callArgument8; }), (cast tolerance : Float));
+        _Shape.strokeSubpath__compactStrokePath((cast seg : DashSegment__compactStrokePath).points, (cast (cast seg : DashSegment__compactStrokePath).closed : Bool), (cast halfWidth : Float), (cast join : String), (cast cap : String), (cast miterLimit : Float), ({ final __callArgument12:Dynamic = result; __callArgument12; }), (cast tolerance : Float));
       }
     }
     return cast result;
     return cast null;
+  }
+
+  public static function initializePath__compactStrokePath(out:EntityConstruction<Path>, commands:Array<Float>, data:Array<Float>, winding:flight._internal._IndexedAccess<Path, String>):Void {
+    _Runtime.setField(out, 'commands', commands);
+    _Runtime.setField(out, 'data', data);
+    _Runtime.setField(out, 'winding', winding);
   }
 
   public static function addArcPoints__compactStrokePath(cx:Float, cy:Float, r:Float, startAngle:Float, endAngle:Float, ccw:Bool, tolerance:Float, out:Array<Float>):Void {
@@ -186,10 +196,10 @@ class _Shape {
         _Runtime.pushMany(right, cast ([rx, ry] : Array<Dynamic>));
         var startAngle:Float = HxMath.atan2(-ny, -nx);
         var endAngle:Float = HxMath.atan2(ny, nx);
-        _Shape.addArcPoints__compactStrokePath((cast px : Float), (cast py : Float), (cast halfWidth : Float), (cast startAngle : Float), (cast endAngle : Float), (cast false : Bool), (cast tolerance : Float), ({ final __callArgument10:Dynamic = right; __callArgument10; }));
+        _Shape.addArcPoints__compactStrokePath((cast px : Float), (cast py : Float), (cast halfWidth : Float), (cast startAngle : Float), (cast endAngle : Float), (cast false : Bool), (cast tolerance : Float), ({ final __callArgument14:Dynamic = right; __callArgument14; }));
       } else {
         _Runtime.pushMany(left, cast ([lx, ly] : Array<Dynamic>));
-        _Shape.addArcPoints__compactStrokePath((cast px : Float), (cast py : Float), (cast halfWidth : Float), (cast HxMath.atan2(ny, nx) : Float), (cast HxMath.atan2(-ny, -nx) : Float), (cast true : Bool), (cast tolerance : Float), ({ final __callArgument12:Dynamic = left; __callArgument12; }));
+        _Shape.addArcPoints__compactStrokePath((cast px : Float), (cast py : Float), (cast halfWidth : Float), (cast HxMath.atan2(ny, nx) : Float), (cast HxMath.atan2(-ny, -nx) : Float), (cast true : Bool), (cast tolerance : Float), ({ final __callArgument16:Dynamic = left; __callArgument16; }));
         _Runtime.pushMany(right, cast ([rx, ry] : Array<Dynamic>));
       }
     } }
@@ -236,10 +246,10 @@ class _Shape {
       }
     } else { if ((cast _Runtime.strictEquals(join, 'round') : Bool)) {
       _Runtime.pushMany(left, cast ([lx0, ly0] : Array<Dynamic>));
-      _Shape.addArcPoints__compactStrokePath((cast px : Float), (cast py : Float), (cast halfWidth : Float), (cast HxMath.atan2(ny0, nx0) : Float), (cast HxMath.atan2(ny1, nx1) : Float), (cast true : Bool), (cast tolerance : Float), ({ final __callArgument14:Dynamic = left; __callArgument14; }));
+      _Shape.addArcPoints__compactStrokePath((cast px : Float), (cast py : Float), (cast halfWidth : Float), (cast HxMath.atan2(ny0, nx0) : Float), (cast HxMath.atan2(ny1, nx1) : Float), (cast true : Bool), (cast tolerance : Float), ({ final __callArgument18:Dynamic = left; __callArgument18; }));
       _Runtime.pushMany(left, cast ([lx1, ly1] : Array<Dynamic>));
       _Runtime.pushMany(right, cast ([rx0, ry0] : Array<Dynamic>));
-      _Shape.addArcPoints__compactStrokePath((cast px : Float), (cast py : Float), (cast halfWidth : Float), (cast HxMath.atan2(-ny0, -nx0) : Float), (cast HxMath.atan2(-ny1, -nx1) : Float), (cast false : Bool), (cast tolerance : Float), ({ final __callArgument16:Dynamic = right; __callArgument16; }));
+      _Shape.addArcPoints__compactStrokePath((cast px : Float), (cast py : Float), (cast halfWidth : Float), (cast HxMath.atan2(-ny0, -nx0) : Float), (cast HxMath.atan2(-ny1, -nx1) : Float), (cast false : Bool), (cast tolerance : Float), ({ final __callArgument20:Dynamic = right; __callArgument20; }));
       _Runtime.pushMany(right, cast ([rx1, ry1] : Array<Dynamic>));
     } else {
       _Runtime.pushMany(left, cast ([lx0, ly0, lx1, ly1] : Array<Dynamic>));
@@ -485,8 +495,8 @@ class _Shape {
     y123 = ((y12 + y23) / 2.0);
     xm = ((x012 + x123) / 2.0);
     ym = ((y012 + y123) / 2.0);
-    _Shape.flattenCubic__compactStrokePath(({ final __callArgument18:Dynamic = out; __callArgument18; }), (cast x0 : Float), (cast y0 : Float), (cast x01 : Float), (cast y01 : Float), (cast x012 : Float), (cast y012 : Float), (cast xm : Float), (cast ym : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
-    _Shape.flattenCubic__compactStrokePath(({ final __callArgument20:Dynamic = out; __callArgument20; }), (cast xm : Float), (cast ym : Float), (cast x123 : Float), (cast y123 : Float), (cast x23 : Float), (cast y23 : Float), (cast x1 : Float), (cast y1 : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
+    _Shape.flattenCubic__compactStrokePath(({ final __callArgument22:Dynamic = out; __callArgument22; }), (cast x0 : Float), (cast y0 : Float), (cast x01 : Float), (cast y01 : Float), (cast x012 : Float), (cast y012 : Float), (cast xm : Float), (cast ym : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
+    _Shape.flattenCubic__compactStrokePath(({ final __callArgument24:Dynamic = out; __callArgument24; }), (cast xm : Float), (cast ym : Float), (cast x123 : Float), (cast y123 : Float), (cast x23 : Float), (cast y23 : Float), (cast x1 : Float), (cast y1 : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
   }
 
   public static function flattenQuadratic__compactStrokePath(out:Array<Float>, x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, toleranceSq:Float, depth:Float):Void {
@@ -521,8 +531,8 @@ class _Shape {
     y12 = ((cy + y1) / 2.0);
     xm = ((x01 + x12) / 2.0);
     ym = ((y01 + y12) / 2.0);
-    _Shape.flattenQuadratic__compactStrokePath(({ final __callArgument22:Dynamic = out; __callArgument22; }), (cast x0 : Float), (cast y0 : Float), (cast x01 : Float), (cast y01 : Float), (cast xm : Float), (cast ym : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
-    _Shape.flattenQuadratic__compactStrokePath(({ final __callArgument24:Dynamic = out; __callArgument24; }), (cast xm : Float), (cast ym : Float), (cast x12 : Float), (cast y12 : Float), (cast x1 : Float), (cast y1 : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
+    _Shape.flattenQuadratic__compactStrokePath(({ final __callArgument26:Dynamic = out; __callArgument26; }), (cast x0 : Float), (cast y0 : Float), (cast x01 : Float), (cast y01 : Float), (cast xm : Float), (cast ym : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
+    _Shape.flattenQuadratic__compactStrokePath(({ final __callArgument28:Dynamic = out; __callArgument28; }), (cast xm : Float), (cast ym : Float), (cast x12 : Float), (cast y12 : Float), (cast x1 : Float), (cast y1 : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
   }
 
   public static function strokeSubpath__compactStrokePath(pts:Array<Float>, closed:Bool, halfWidth:Float, join:String, cap:String, miterLimit:Float, out:Path, tolerance:Float):Void {
@@ -561,14 +571,14 @@ class _Shape {
           var ny0:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast normals : Array<Float>), (cast ((prev * 2.0) + 1.0) : Float));
           var nx1:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast normals : Array<Float>), (cast (curr * 2.0) : Float));
           var ny1:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast normals : Array<Float>), (cast ((curr * 2.0) + 1.0) : Float));
-          _Shape.addJoin__compactStrokePath((cast flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast (i * 2.0) : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast ((i * 2.0) + 1.0) : Float)) : Float), (cast nx0 : Float), (cast ny0 : Float), (cast nx1 : Float), (cast ny1 : Float), (cast halfWidth : Float), (cast join : String), (cast miterLimit : Float), ({ final __callArgument26:Dynamic = left; __callArgument26; }), ({ final __callArgument27:Dynamic = right; __callArgument27; }), (cast tolerance : Float));
+          _Shape.addJoin__compactStrokePath((cast flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast (i * 2.0) : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast ((i * 2.0) + 1.0) : Float)) : Float), (cast nx0 : Float), (cast ny0 : Float), (cast nx1 : Float), (cast ny1 : Float), (cast halfWidth : Float), (cast join : String), (cast miterLimit : Float), ({ final __callArgument30:Dynamic = left; __callArgument30; }), ({ final __callArgument31:Dynamic = right; __callArgument31; }), (cast tolerance : Float));
           i++;
         }
       }
     } else {
       var sn0x:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast normals : Array<Float>), (cast 0.0 : Float));
       var sn0y:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast normals : Array<Float>), (cast 1.0 : Float));
-      _Shape.addCap__compactStrokePath((cast flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast 0.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast 1.0 : Float)) : Float), (cast sn0x : Float), (cast sn0y : Float), (cast -sn0y : Float), (cast sn0x : Float), (cast halfWidth : Float), (cast cap : String), ({ final __callArgument30:Dynamic = left; __callArgument30; }), ({ final __callArgument31:Dynamic = right; __callArgument31; }), (cast tolerance : Float), (cast true : Bool));
+      _Shape.addCap__compactStrokePath((cast flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast 0.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast 1.0 : Float)) : Float), (cast sn0x : Float), (cast sn0y : Float), (cast -sn0y : Float), (cast sn0x : Float), (cast halfWidth : Float), (cast cap : String), ({ final __callArgument34:Dynamic = left; __callArgument34; }), ({ final __callArgument35:Dynamic = right; __callArgument35; }), (cast tolerance : Float), (cast true : Bool));
       {
         var i:Float = 1.0;
         while ((cast ((cast i : Float) < (cast (n - 1.0) : Float)) : Bool)) {
@@ -576,13 +586,13 @@ class _Shape {
           var ny0:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast normals : Array<Float>), (cast (((i - 1.0) * 2.0) + 1.0) : Float));
           var nx1:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast normals : Array<Float>), (cast (i * 2.0) : Float));
           var ny1:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast normals : Array<Float>), (cast ((i * 2.0) + 1.0) : Float));
-          _Shape.addJoin__compactStrokePath((cast flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast (i * 2.0) : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast ((i * 2.0) + 1.0) : Float)) : Float), (cast nx0 : Float), (cast ny0 : Float), (cast nx1 : Float), (cast ny1 : Float), (cast halfWidth : Float), (cast join : String), (cast miterLimit : Float), ({ final __callArgument34:Dynamic = left; __callArgument34; }), ({ final __callArgument35:Dynamic = right; __callArgument35; }), (cast tolerance : Float));
+          _Shape.addJoin__compactStrokePath((cast flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast (i * 2.0) : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast ((i * 2.0) + 1.0) : Float)) : Float), (cast nx0 : Float), (cast ny0 : Float), (cast nx1 : Float), (cast ny1 : Float), (cast halfWidth : Float), (cast join : String), (cast miterLimit : Float), ({ final __callArgument38:Dynamic = left; __callArgument38; }), ({ final __callArgument39:Dynamic = right; __callArgument39; }), (cast tolerance : Float));
           i++;
         }
       }
       var snLx:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast normals : Array<Float>), (cast ((n - 2.0) * 2.0) : Float));
       var snLy:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast normals : Array<Float>), (cast (((n - 2.0) * 2.0) + 1.0) : Float));
-      _Shape.addCap__compactStrokePath((cast flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast ((n - 1.0) * 2.0) : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast (((n - 1.0) * 2.0) + 1.0) : Float)) : Float), (cast snLx : Float), (cast snLy : Float), (cast snLy : Float), (cast -snLx : Float), (cast halfWidth : Float), (cast cap : String), ({ final __callArgument38:Dynamic = left; __callArgument38; }), ({ final __callArgument39:Dynamic = right; __callArgument39; }), (cast tolerance : Float), (cast false : Bool));
+      _Shape.addCap__compactStrokePath((cast flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast ((n - 1.0) * 2.0) : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast (((n - 1.0) * 2.0) + 1.0) : Float)) : Float), (cast snLx : Float), (cast snLy : Float), (cast snLy : Float), (cast -snLx : Float), (cast halfWidth : Float), (cast cap : String), ({ final __callArgument42:Dynamic = left; __callArgument42; }), ({ final __callArgument43:Dynamic = right; __callArgument43; }), (cast tolerance : Float), (cast false : Bool));
     }
     if ((cast ((cast _Runtime.field(left, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return; }
     _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO] : Array<Dynamic>));
@@ -603,7 +613,7 @@ class _Shape {
         (i = cast ((i - 2.0) : Dynamic));
       }
     }
-    appendPathClose(({ final __callArgument42:Dynamic = out; __callArgument42; }));
+    appendPathClose(({ final __callArgument46:Dynamic = out; __callArgument46; }));
   }
 
   public static final MAX_SUBDIVISION_DEPTH__compactStrokePath:Float = 16.0;
@@ -624,14 +634,14 @@ class _Shape {
   }
 
   public static function warnOnMissingShapeBoundsCommand__enableShapeBoundsGuards(_source:Shape, mode:ShapeBoundsMode, missingCommandKey:String):Void {
-    (cast logOnce((cast 'shape:bounds-command-missing:' + Std.string(mode) + ':' + Std.string(missingCommandKey) + '' : String), ({ final __callArgument44:Dynamic = LogLevel.Warn; __callArgument44; }), (cast { message: 'Shape bounds are incomplete because command \'' + Std.string(missingCommandKey) + '\' has no registered bounds contribution. Register its CanvasShapeCommand with explicit fillBounds and strokeBounds, or call explainShapeBounds(shape, mode) to inspect every missing key.', missingCommandKey: missingCommandKey, mode: mode } : Dynamic), ({ final __callArgument45:Dynamic = 'shape'; __callArgument45; })) : Bool);
+    (cast logOnce((cast 'shape:bounds-command-missing:' + Std.string(mode) + ':' + Std.string(missingCommandKey) + '' : String), ({ final __callArgument48:Dynamic = LogLevel.Warn; __callArgument48; }), (cast { message: 'Shape bounds are incomplete because command \'' + Std.string(missingCommandKey) + '\' has no registered bounds contribution. Register its CanvasShapeCommand with explicit fillBounds and strokeBounds, or call explainShapeBounds(shape, mode) to inspect every missing key.', missingCommandKey: missingCommandKey, mode: mode } : Dynamic), ({ final __callArgument49:Dynamic = 'shape'; __callArgument49; })) : Bool);
   }
 
   public static var _enabled__enableShapeBoundsGuards:Bool = false;
 
   public static function explainMorphShapeGradientEndpoints(start:MorphShapeGradientEndpoint, end:MorphShapeGradientEndpoint):MorphShapeGradientEndpointExplanation {
     var issue:Float = cast _Runtime.UNDEFINED;
-    issue = (cast getMorphShapeGradientEndpointIssue(({ final __callArgument48:Dynamic = start; __callArgument48; }), ({ final __callArgument49:Dynamic = end; __callArgument49; })) : Float);
+    issue = (cast getMorphShapeGradientEndpointIssue(({ final __callArgument52:Dynamic = start; __callArgument52; }), ({ final __callArgument53:Dynamic = end; __callArgument53; })) : Float);
     return cast { endStopCount: _Runtime.field(end.colors, 'length'), reason: (cast _Shape.getReason__explainMorphShapeGradientEndpoints((cast issue : Float)) : MorphShapeGradientEndpointReason), startStopCount: _Runtime.field(start.colors, 'length'), supported: _Runtime.strictEquals(issue, _Shape.GradientEndpointIssueNone__explainMorphShapeGradientEndpoints) };
     return cast null;
   }
@@ -673,9 +683,9 @@ class _Shape {
   public static final GradientEndpointIssueStopCount__explainMorphShapeGradientEndpoints:Float = 4.0;
 
   public static function explainShapeTessellation(commands:Array<ShapeCommandToken>, strokePathTessellationEnabled:Bool = false):ShapeTessellationExplanation {
-    if ((cast (cast hasNonSolidShapeFill(({ final __callArgument52:Dynamic = commands; __callArgument52; })) : Bool) : Bool)) { return cast { blockedBy: 'non-solid-fill', status: 'needs-rasterizer' }; }
-    if ((cast (cast hasNonSolidShapeStroke(({ final __callArgument54:Dynamic = commands; __callArgument54; })) : Bool) : Bool)) { return cast { blockedBy: 'non-solid-stroke', status: 'needs-rasterizer' }; }
-    if ((cast ((cast !(cast strokePathTessellationEnabled : Bool) : Bool) && (cast _Runtime.strictEquals((cast getShapeStrokeOutlineRegions(({ final __callArgument56:Dynamic = commands; __callArgument56; })) : Null<Array<ShapeFillRegion>>), null) : Bool)) : Bool)) {
+    if ((cast (cast hasNonSolidShapeFill(({ final __callArgument56:Dynamic = commands; __callArgument56; })) : Bool) : Bool)) { return cast { blockedBy: 'non-solid-fill', status: 'needs-rasterizer' }; }
+    if ((cast (cast hasNonSolidShapeStroke(({ final __callArgument58:Dynamic = commands; __callArgument58; })) : Bool) : Bool)) { return cast { blockedBy: 'non-solid-stroke', status: 'needs-rasterizer' }; }
+    if ((cast ((cast !(cast strokePathTessellationEnabled : Bool) : Bool) && (cast _Runtime.strictEquals((cast getShapeStrokeOutlineRegions(({ final __callArgument60:Dynamic = commands; __callArgument60; })) : Null<Array<ShapeFillRegion>>), null) : Bool)) : Bool)) {
       return cast { blockedBy: 'stroke-outline', status: 'needs-rasterizer' };
     }
     return cast { blockedBy: 'none', status: 'tessellates' };
@@ -689,33 +699,56 @@ class _Shape {
     binding = _Runtime.find((cast shape.data : { var pathBindings:Array<MorphShapePathBinding>; }).pathBindings, function(candidate:MorphShapePathBinding, __unused0:Float, __unused1:Array<MorphShapePathBinding>):Bool return _Runtime.strictEquals(candidate.morph, morph));
     if ((cast _Runtime.strictEquals(binding, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var path:Path = (cast createPath(_Runtime.field(morph, 'winding')) : Path);
-      samplePathMorph(({ final __callArgument58:Dynamic = path; __callArgument58; }), ({ final __callArgument59:Dynamic = morph; __callArgument59; }), (cast (cast shape.data : { var progress:Float; }).progress : Float));
+      samplePathMorph(({ final __callArgument62:Dynamic = path; __callArgument62; }), ({ final __callArgument63:Dynamic = morph; __callArgument63; }), (cast (cast shape.data : { var progress:Float; }).progress : Float));
       (binding = cast ({ morph: morph, path: path } : Dynamic));
       _Runtime.callProperty((cast shape.data : { var pathBindings:Array<MorphShapePathBinding>; }).pathBindings, 'push', cast ([binding] : Array<Dynamic>));
     }
     path = (cast binding : { var path:Path; }).path;
-    appendShapePath(({ final __callArgument62:Dynamic = shape; __callArgument62; }), (cast path : Path).commands, (cast path : Path).data, (cast path : Path).winding);
+    appendShapePath(({ final __callArgument66:Dynamic = shape; __callArgument66; }), (cast path : Path).commands, (cast path : Path).data, (cast path : Path).winding);
     return cast path;
     return cast null;
   }
 
   public static function createMorphShape(morph:PathMorph, ?obj:PartialNode<MorphShape>):MorphShape {
-    return cast (cast createNode2D((cast MorphShapeKind : String), (cast obj : Dynamic), (cast function(data:Null<{  }>):MorphShapeData return (cast createMorphShapeData(({ final __callArgument64:Dynamic = morph; __callArgument64; }), (cast data : Dynamic)) : MorphShapeData) : Dynamic), (cast function(__unused2:Dynamic):MorphShapeRuntime return createMorphShapeRuntime() : Dynamic), function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : MorphShape); }) #end)) : MorphShape);
+    return cast (cast createNode2D((cast MorphShapeKind : String), (cast obj : Dynamic), (cast function(data:Null<{ @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }>):MorphShapeData return (cast createMorphShapeData(({ final __callArgument68:Dynamic = morph; __callArgument68; }), (cast data : Dynamic)) : MorphShapeData) : Dynamic), (cast function(__unused2:Dynamic):MorphShapeRuntime return createMorphShapeRuntime() : Dynamic), function():Dynamic return (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : MorphShape); }) #end)) : MorphShape);
     return cast null;
   }
 
   @:allow(flight)
   @:keep
-  private static function createMorphShapeData(morph:PathMorph, ?data:{ @:optional var morph:Null<PathMorph>; @:optional var path:Null<Path>; @:optional var paintBindings:Null<Array<MorphShapePaintBinding>>; @:optional var pathBindings:Null<Array<MorphShapePathBinding>>; @:optional var progress:Null<Float>; @:optional var commands:Null<Array<ShapeCommandToken>>; }):MorphShapeData {
+  private static function createMorphShapeData(morph:PathMorph, ?data:{ @:optional var morph:Null<PathMorph>; @:optional var path:Null<Path>; @:optional var paintBindings:Null<Array<MorphShapePaintBinding>>; @:optional var pathBindings:Null<Array<MorphShapePathBinding>>; @:optional var progress:Null<Float>; @:optional var commands:Null<Array<ShapeCommandToken>>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):MorphShapeData {
+    var out:EntityConstruction<MorphShapeData> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ commands: cast _Runtime.UNDEFINED, morph: cast _Runtime.UNDEFINED, paintBindings: cast _Runtime.UNDEFINED, path: cast _Runtime.UNDEFINED, pathBindings: cast _Runtime.UNDEFINED, progress: cast _Runtime.UNDEFINED } : MorphShapeData); }) #end));
+    initializeMorphShapeData(({ final __callArgument72:Dynamic = out; __callArgument72; }), ({ final __callArgument73:Dynamic = morph; __callArgument73; }), (cast data : Dynamic));
+    return cast out;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function createMorphShapeRuntime():MorphShapeRuntime {
+    return cast (cast createShapeRuntime() : MorphShapeRuntime);
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function getMorphShapeRuntime(source:MorphShape):MorphShapeRuntime {
+    return cast (cast getNode2DRuntime(({ final __callArgument76:Dynamic = source; __callArgument76; })) : MorphShapeRuntime);
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeMorphShapeData(out:EntityConstruction<MorphShapeData>, morph:PathMorph, ?data:{ @:optional var morph:Null<PathMorph>; @:optional var path:Null<Path>; @:optional var paintBindings:Null<Array<MorphShapePaintBinding>>; @:optional var pathBindings:Null<Array<MorphShapePathBinding>>; @:optional var progress:Null<Float>; @:optional var commands:Null<Array<ShapeCommandToken>>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):Void {
     var progress:Float = cast _Runtime.UNDEFINED;
     var path:Path = cast _Runtime.UNDEFINED;
     var pathBindings:Array<{ var morph:PathMorph; var path:Path; }> = cast _Runtime.UNDEFINED;
     var inputPathBindings:Array<MorphShapePathBinding> = cast _Runtime.UNDEFINED;
-    var out:MorphShapeData = cast _Runtime.UNDEFINED;
-    progress = _Runtime.coalesce(({ final __structural68 = data; __structural68 == null ? _Runtime.UNDEFINED : (cast __structural68 : { @:optional var progress:Null<Float>; }).progress; }), function():Dynamic return cast 0.0);
-    path = _Runtime.coalesce(({ final __structural69 = data; __structural69 == null ? _Runtime.UNDEFINED : (cast __structural69 : { @:optional var path:Null<Path>; }).path; }), function():Dynamic return cast (cast createPath(_Runtime.field(morph, 'winding')) : Path));
+    progress = _Runtime.coalesce(({ final __structural78 = data; __structural78 == null ? _Runtime.UNDEFINED : (cast __structural78 : { @:optional var progress:Null<Float>; }).progress; }), function():Dynamic return cast 0.0);
+    path = _Runtime.coalesce(({ final __structural79 = data; __structural79 == null ? _Runtime.UNDEFINED : (cast __structural79 : { @:optional var path:Null<Path>; }).path; }), function():Dynamic return cast (cast createPath(_Runtime.field(morph, 'winding')) : Path));
     pathBindings = (cast cast ([{ morph: morph, path: path }] : Array<Dynamic>));
-    inputPathBindings = _Runtime.coalesce(({ final __structural70 = data; __structural70 == null ? _Runtime.UNDEFINED : (cast __structural70 : { @:optional var pathBindings:Null<Array<MorphShapePathBinding>>; }).pathBindings; }), function():Dynamic return cast cast ([] : Array<Dynamic>));
+    inputPathBindings = _Runtime.coalesce(({ final __structural80 = data; __structural80 == null ? _Runtime.UNDEFINED : (cast __structural80 : { @:optional var pathBindings:Null<Array<MorphShapePathBinding>>; }).pathBindings; }), function():Dynamic return cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(inputPathBindings, 'length') : Float)) : Bool)) {
@@ -731,24 +764,14 @@ class _Shape {
         i++;
       }
     }
-    out = (cast { commands: _Runtime.coalesce(({ final __structural71 = data; __structural71 == null ? _Runtime.UNDEFINED : (cast __structural71 : { @:optional var commands:Null<Array<ShapeCommandToken>>; }).commands; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), morph: morph, paintBindings: _Runtime.concatArrays([_Runtime.toArray(_Runtime.coalesce(({ final __structural72 = data; __structural72 == null ? _Runtime.UNDEFINED : (cast __structural72 : { @:optional var paintBindings:Null<Array<MorphShapePaintBinding>>; }).paintBindings; }), function():Dynamic return cast cast ([] : Array<Dynamic>)))]), path: path, pathBindings: pathBindings, progress: progress });
-    sampleMorphShapePaintBindings(({ final __callArgument73:Dynamic = out; __callArgument73; }), (cast progress : Float));
-    return cast out;
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function createMorphShapeRuntime():MorphShapeRuntime {
-    return cast (cast createShapeRuntime() : MorphShapeRuntime);
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function getMorphShapeRuntime(source:MorphShape):MorphShapeRuntime {
-    return cast (cast getNode2DRuntime(({ final __callArgument75:Dynamic = source; __callArgument75; })) : MorphShapeRuntime);
-    return cast null;
+    _Runtime.setField(out, 'commands', _Runtime.coalesce(({ final __structural81 = data; __structural81 == null ? _Runtime.UNDEFINED : (cast __structural81 : { @:optional var commands:Null<Array<ShapeCommandToken>>; }).commands; }), function():Dynamic return cast cast ([] : Array<Dynamic>)));
+    _Runtime.setField(out, 'morph', morph);
+    _Runtime.setField(out, 'paintBindings', _Runtime.concatArrays([_Runtime.toArray(_Runtime.coalesce(({ final __structural82 = data; __structural82 == null ? _Runtime.UNDEFINED : (cast __structural82 : { @:optional var paintBindings:Null<Array<MorphShapePaintBinding>>; }).paintBindings; }), function():Dynamic return cast cast ([] : Array<Dynamic>)))]));
+    _Runtime.setField(out, 'path', path);
+    _Runtime.setField(out, 'pathBindings', pathBindings);
+    _Runtime.setField(out, 'progress', progress);
+    out;
+    sampleMorphShapePaintBindings(({ final __callArgument83:Dynamic = out; __callArgument83; }), (cast progress : Float));
   }
 
   public static function setMorphShapeProgress(shape:MorphShape, progress:Float):Void {
@@ -767,7 +790,7 @@ class _Shape {
   }
 
   public static function applyAnimationClipToMorphShape(clip:AnimationClip, time:Float):Void {
-    sampleAnimationClip(({ final __callArgument77:Dynamic = _Shape.morphShapeAnimationScratch__morphShapeAnimation; __callArgument77; }), ({ final __callArgument78:Dynamic = clip; __callArgument78; }), (cast time : Float), ({ final __callArgument79:Dynamic = function(__unused0:flight._internal._ArrayLike<Float>, __unused1:AnimationChannel, __unused2:Float):Bool return applyMorphShapeAnimationSample(__unused0, __unused1); __callArgument79; }));
+    sampleAnimationClip(({ final __callArgument85:Dynamic = _Shape.morphShapeAnimationScratch__morphShapeAnimation; __callArgument85; }), ({ final __callArgument86:Dynamic = clip; __callArgument86; }), (cast time : Float), ({ final __callArgument87:Dynamic = function(__unused0:flight._internal._ArrayLike<Float>, __unused1:AnimationChannel, __unused2:Float):Bool return applyMorphShapeAnimationSample(__unused0, __unused1); __callArgument87; }));
   }
 
   public static function applyMorphShapeAnimationSample(sampled:flight._internal._ArrayLike<Float>, channel:AnimationChannel):Bool {
@@ -777,14 +800,23 @@ class _Shape {
     if ((cast ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals((cast target : { var shape:MorphShape; }).shape, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast false; }
     shape = (cast (cast target : { var shape:MorphShape; }).shape : Null<MorphShape>);
     if ((cast ((cast ((cast _Runtime.strictEquals(shape, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(shape), 'object') : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast shape : { var kind:String; }).kind, MorphShapeKind) : Bool)) : Bool)) { return cast false; }
-    setMorphShapeProgress(({ final __callArgument83:Dynamic = shape; __callArgument83; }), (cast _Runtime.getIndex(sampled, 0.0) : Float));
+    setMorphShapeProgress(({ final __callArgument91:Dynamic = shape; __callArgument91; }), (cast _Runtime.getIndex(sampled, 0.0) : Float));
     return cast true;
     return cast null;
   }
 
   public static function createMorphShapeAnimationTarget(shape:MorphShape):MorphShapeAnimationTarget {
-    return cast { shape: shape };
+    var out:EntityConstruction<MorphShapeAnimationTarget> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ shape: cast _Runtime.UNDEFINED } : MorphShapeAnimationTarget); }) #end));
+    initializeMorphShapeAnimationTarget(({ final __callArgument93:Dynamic = out; __callArgument93; }), ({ final __callArgument94:Dynamic = shape; __callArgument94; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeMorphShapeAnimationTarget(out:EntityConstruction<MorphShapeAnimationTarget>, shape:MorphShape):Void {
+    _Runtime.setField(out, 'shape', shape);
   }
 
   public static final morphShapeAnimationScratch__morphShapeAnimation:Array<Float> = (cast cast ([0.0] : Array<Dynamic>));
@@ -792,31 +824,31 @@ class _Shape {
   public static function appendMorphShapeBeginFill(shape:MorphShape, start:MorphShapeColorEndpoint, end:MorphShapeColorEndpoint):Void {
     var commandIndex:Float = cast _Runtime.UNDEFINED;
     commandIndex = _Runtime.field((cast shape.data : { var commands:Array<ShapeCommandToken>; }).commands, 'length');
-    appendShapeBeginFill(({ final __callArgument85:Dynamic = shape; __callArgument85; }), (cast start.color : Float), (cast _Runtime.coalesce(start.alpha, function():Dynamic return cast 1.0) : Float));
+    appendShapeBeginFill(({ final __callArgument97:Dynamic = shape; __callArgument97; }), (cast start.color : Float), (cast _Runtime.coalesce(start.alpha, function():Dynamic return cast 1.0) : Float));
     _Runtime.callProperty((cast shape.data : { var paintBindings:Array<MorphShapePaintBinding>; }).paintBindings, 'push', cast ([{ commandIndex: commandIndex, endAlpha: _Runtime.coalesce(end.alpha, function():Dynamic return cast 1.0), endColor: end.color, kind: 'color', startAlpha: _Runtime.coalesce(start.alpha, function():Dynamic return cast 1.0), startColor: start.color }] : Array<Dynamic>));
     _Shape.sampleMorphShapePaintBinding__morphShapePaint(shape.data, flight._internal._StaticIndex.readArray((cast shape.data : { var paintBindings:Array<MorphShapePaintBinding>; }).paintBindings, _Runtime.subtractNumbers(_Runtime.field((cast shape.data : { var paintBindings:Array<MorphShapePaintBinding>; }).paintBindings, 'length'), 1.0)), (cast (cast shape.data : { var progress:Float; }).progress : Float));
   }
 
   public static function appendMorphShapeBeginGradientFill(shape:MorphShape, gradientType:GradientType, start:MorphShapeGradientEndpoint, end:MorphShapeGradientEndpoint, spreadMethod:SpreadMethod = 'pad', interpolationMethod:InterpolationMethod = 'rgb'):Bool {
-    return cast (cast _Shape.appendMorphShapeGradientPaint__morphShapePaint(({ final __callArgument87:Dynamic = shape; __callArgument87; }), (cast 'beginGradientFill' : String), ({ final __callArgument88:Dynamic = gradientType; __callArgument88; }), ({ final __callArgument89:Dynamic = start; __callArgument89; }), ({ final __callArgument90:Dynamic = end; __callArgument90; }), ({ final __callArgument91:Dynamic = spreadMethod; __callArgument91; }), ({ final __callArgument92:Dynamic = interpolationMethod; __callArgument92; })) : Bool);
+    return cast (cast _Shape.appendMorphShapeGradientPaint__morphShapePaint(({ final __callArgument99:Dynamic = shape; __callArgument99; }), (cast 'beginGradientFill' : String), ({ final __callArgument100:Dynamic = gradientType; __callArgument100; }), ({ final __callArgument101:Dynamic = start; __callArgument101; }), ({ final __callArgument102:Dynamic = end; __callArgument102; }), ({ final __callArgument103:Dynamic = spreadMethod; __callArgument103; }), ({ final __callArgument104:Dynamic = interpolationMethod; __callArgument104; })) : Bool);
     return cast null;
   }
 
   public static function appendMorphShapeBeginTextureFill(shape:MorphShape, texture:Texture, ?startMatrix:Null<Matrix>, ?endMatrix:Null<Matrix>):Void {
     if (startMatrix == null) startMatrix = cast (null : Dynamic);
     if (endMatrix == null) endMatrix = cast (startMatrix : Dynamic);
-    _Shape.appendMorphShapeTexturePaint__morphShapePaint(({ final __callArgument99:Dynamic = shape; __callArgument99; }), (cast 'beginTextureFill' : String), ({ final __callArgument100:Dynamic = texture; __callArgument100; }), ({ final __callArgument101:Dynamic = startMatrix; __callArgument101; }), ({ final __callArgument102:Dynamic = endMatrix; __callArgument102; }));
+    _Shape.appendMorphShapeTexturePaint__morphShapePaint(({ final __callArgument111:Dynamic = shape; __callArgument111; }), (cast 'beginTextureFill' : String), ({ final __callArgument112:Dynamic = texture; __callArgument112; }), ({ final __callArgument113:Dynamic = startMatrix; __callArgument113; }), ({ final __callArgument114:Dynamic = endMatrix; __callArgument114; }));
   }
 
   public static function appendMorphShapeLineGradientStyle(shape:MorphShape, gradientType:GradientType, start:MorphShapeGradientEndpoint, end:MorphShapeGradientEndpoint, spreadMethod:SpreadMethod = 'pad', interpolationMethod:InterpolationMethod = 'rgb'):Bool {
-    return cast (cast _Shape.appendMorphShapeGradientPaint__morphShapePaint(({ final __callArgument107:Dynamic = shape; __callArgument107; }), (cast 'lineGradientStyle' : String), ({ final __callArgument108:Dynamic = gradientType; __callArgument108; }), ({ final __callArgument109:Dynamic = start; __callArgument109; }), ({ final __callArgument110:Dynamic = end; __callArgument110; }), ({ final __callArgument111:Dynamic = spreadMethod; __callArgument111; }), ({ final __callArgument112:Dynamic = interpolationMethod; __callArgument112; })) : Bool);
+    return cast (cast _Shape.appendMorphShapeGradientPaint__morphShapePaint(({ final __callArgument119:Dynamic = shape; __callArgument119; }), (cast 'lineGradientStyle' : String), ({ final __callArgument120:Dynamic = gradientType; __callArgument120; }), ({ final __callArgument121:Dynamic = start; __callArgument121; }), ({ final __callArgument122:Dynamic = end; __callArgument122; }), ({ final __callArgument123:Dynamic = spreadMethod; __callArgument123; }), ({ final __callArgument124:Dynamic = interpolationMethod; __callArgument124; })) : Bool);
     return cast null;
   }
 
   public static function appendMorphShapeLineStyle(shape:MorphShape, start:MorphShapeLineEndpoint, end:MorphShapeLineEndpoint, pixelHinting:Bool = false, scaleMode:LineScaleMode = 'normal', caps:CapsStyle = 'none', joints:JointStyle = 'round', miterLimit:Float = 3.0):Void {
     var commandIndex:Float = cast _Runtime.UNDEFINED;
     commandIndex = _Runtime.field((cast shape.data : { var commands:Array<ShapeCommandToken>; }).commands, 'length');
-    appendShapeLineStyle(({ final __callArgument119:Dynamic = shape; __callArgument119; }), (cast start.thickness : Float), (cast start.color : Float), (cast _Runtime.coalesce(start.alpha, function():Dynamic return cast 1.0) : Float), (cast pixelHinting : Bool), ({ final __callArgument120:Dynamic = scaleMode; __callArgument120; }), ({ final __callArgument121:Dynamic = caps; __callArgument121; }), ({ final __callArgument122:Dynamic = joints; __callArgument122; }), (cast miterLimit : Float));
+    appendShapeLineStyle(({ final __callArgument131:Dynamic = shape; __callArgument131; }), (cast start.thickness : Float), (cast start.color : Float), (cast _Runtime.coalesce(start.alpha, function():Dynamic return cast 1.0) : Float), (cast pixelHinting : Bool), ({ final __callArgument132:Dynamic = scaleMode; __callArgument132; }), ({ final __callArgument133:Dynamic = caps; __callArgument133; }), ({ final __callArgument134:Dynamic = joints; __callArgument134; }), (cast miterLimit : Float));
     _Runtime.callProperty((cast shape.data : { var paintBindings:Array<MorphShapePaintBinding>; }).paintBindings, 'push', cast ([{ commandIndex: commandIndex, endAlpha: _Runtime.coalesce(end.alpha, function():Dynamic return cast 1.0), endColor: end.color, endThickness: end.thickness, kind: 'line', startAlpha: _Runtime.coalesce(start.alpha, function():Dynamic return cast 1.0), startColor: start.color, startThickness: start.thickness }] : Array<Dynamic>));
     _Shape.sampleMorphShapePaintBinding__morphShapePaint(shape.data, flight._internal._StaticIndex.readArray((cast shape.data : { var paintBindings:Array<MorphShapePaintBinding>; }).paintBindings, _Runtime.subtractNumbers(_Runtime.field((cast shape.data : { var paintBindings:Array<MorphShapePaintBinding>; }).paintBindings, 'length'), 1.0)), (cast (cast shape.data : { var progress:Float; }).progress : Float));
   }
@@ -824,14 +856,14 @@ class _Shape {
   public static function appendMorphShapeLineTextureStyle(shape:MorphShape, texture:Texture, ?startMatrix:Null<Matrix>, ?endMatrix:Null<Matrix>):Void {
     if (startMatrix == null) startMatrix = cast (null : Dynamic);
     if (endMatrix == null) endMatrix = cast (startMatrix : Dynamic);
-    _Shape.appendMorphShapeTexturePaint__morphShapePaint(({ final __callArgument127:Dynamic = shape; __callArgument127; }), (cast 'lineTextureStyle' : String), ({ final __callArgument128:Dynamic = texture; __callArgument128; }), ({ final __callArgument129:Dynamic = startMatrix; __callArgument129; }), ({ final __callArgument130:Dynamic = endMatrix; __callArgument130; }));
+    _Shape.appendMorphShapeTexturePaint__morphShapePaint(({ final __callArgument139:Dynamic = shape; __callArgument139; }), (cast 'lineTextureStyle' : String), ({ final __callArgument140:Dynamic = texture; __callArgument140; }), ({ final __callArgument141:Dynamic = startMatrix; __callArgument141; }), ({ final __callArgument142:Dynamic = endMatrix; __callArgument142; }));
   }
 
   public static function sampleMorphShapePaintBindings(data:MorphShapeData, progress:Float):Void {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(data.paintBindings, 'length') : Float)) : Bool)) {
-        _Shape.sampleMorphShapePaintBinding__morphShapePaint(({ final __callArgument135:Dynamic = data; __callArgument135; }), flight._internal._StaticIndex.readArray(data.paintBindings, i), (cast progress : Float));
+        _Shape.sampleMorphShapePaintBinding__morphShapePaint(({ final __callArgument147:Dynamic = data; __callArgument147; }), flight._internal._StaticIndex.readArray(data.paintBindings, i), (cast progress : Float));
         i++;
       }
     }
@@ -849,25 +881,25 @@ class _Shape {
     var alphas:Array<Float> = cast _Runtime.UNDEFINED;
     var ratios:Array<Float> = cast _Runtime.UNDEFINED;
     var binding:MorphShapeGradientPaintBinding = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals((cast getMorphShapeGradientEndpointIssue(({ final __callArgument137:Dynamic = start; __callArgument137; }), ({ final __callArgument138:Dynamic = end; __callArgument138; })) : Float), 0.0) : Bool)) { return cast false; }
+    if ((cast !_Runtime.strictEquals((cast getMorphShapeGradientEndpointIssue(({ final __callArgument149:Dynamic = start; __callArgument149; }), ({ final __callArgument150:Dynamic = end; __callArgument150; })) : Float), 0.0) : Bool)) { return cast false; }
     commandIndex = _Runtime.field((cast shape.data : { var commands:Array<ShapeCommandToken>; }).commands, 'length');
     startSource = _Runtime.coalesce(start.matrix, function():Dynamic return cast null);
     endSource = _Runtime.coalesce(end.matrix, function():Dynamic return cast null);
     hasMatrix = ((cast !_Runtime.strictEquals(startSource, null) : Bool) || (cast !_Runtime.strictEquals(endSource, null) : Bool));
-    startMatrix = ((cast hasMatrix : Bool) ? (cast (cast cloneMatrix(({ final __callArgument141:Dynamic = _Runtime.coalesce(startSource, function():Dynamic return cast _Shape.identityMatrix__morphShapePaint); __callArgument141; })) : Matrix) : Dynamic) : (cast null : Dynamic));
-    endMatrix = ((cast hasMatrix : Bool) ? (cast (cast cloneMatrix(({ final __callArgument143:Dynamic = _Runtime.coalesce(endSource, function():Dynamic return cast _Shape.identityMatrix__morphShapePaint); __callArgument143; })) : Matrix) : Dynamic) : (cast null : Dynamic));
-    currentMatrix = (cast _Shape.createSampledMatrix__morphShapePaint(({ final __callArgument145:Dynamic = startMatrix; __callArgument145; }), ({ final __callArgument146:Dynamic = endMatrix; __callArgument146; })) : Null<Matrix>);
+    startMatrix = ((cast hasMatrix : Bool) ? (cast (cast cloneMatrix(({ final __callArgument153:Dynamic = _Runtime.coalesce(startSource, function():Dynamic return cast _Shape.identityMatrix__morphShapePaint); __callArgument153; })) : Matrix) : Dynamic) : (cast null : Dynamic));
+    endMatrix = ((cast hasMatrix : Bool) ? (cast (cast cloneMatrix(({ final __callArgument155:Dynamic = _Runtime.coalesce(endSource, function():Dynamic return cast _Shape.identityMatrix__morphShapePaint); __callArgument155; })) : Matrix) : Dynamic) : (cast null : Dynamic));
+    currentMatrix = (cast _Shape.createSampledMatrix__morphShapePaint(({ final __callArgument157:Dynamic = startMatrix; __callArgument157; }), ({ final __callArgument158:Dynamic = endMatrix; __callArgument158; })) : Null<Matrix>);
     colors = (cast _Runtime.concatArrays([_Runtime.toArray(start.colors)]));
     alphas = (cast _Runtime.concatArrays([_Runtime.toArray(start.alphas)]));
     ratios = (cast _Runtime.concatArrays([_Runtime.toArray(start.ratios)]));
     if ((cast _Runtime.strictEquals(commandKey, 'beginGradientFill') : Bool)) {
-      appendShapeBeginGradientFill(({ final __callArgument149:Dynamic = shape; __callArgument149; }), ({ final __callArgument150:Dynamic = gradientType; __callArgument150; }), ({ final __callArgument151:Dynamic = colors; __callArgument151; }), ({ final __callArgument152:Dynamic = alphas; __callArgument152; }), ({ final __callArgument153:Dynamic = ratios; __callArgument153; }), ({ final __callArgument154:Dynamic = currentMatrix; __callArgument154; }), ({ final __callArgument155:Dynamic = spreadMethod; __callArgument155; }), ({ final __callArgument156:Dynamic = interpolationMethod; __callArgument156; }), (cast _Runtime.coalesce(start.focalPointRatio, function():Dynamic return cast 0.0) : Float));
+      appendShapeBeginGradientFill(({ final __callArgument161:Dynamic = shape; __callArgument161; }), ({ final __callArgument162:Dynamic = gradientType; __callArgument162; }), ({ final __callArgument163:Dynamic = colors; __callArgument163; }), ({ final __callArgument164:Dynamic = alphas; __callArgument164; }), ({ final __callArgument165:Dynamic = ratios; __callArgument165; }), ({ final __callArgument166:Dynamic = currentMatrix; __callArgument166; }), ({ final __callArgument167:Dynamic = spreadMethod; __callArgument167; }), ({ final __callArgument168:Dynamic = interpolationMethod; __callArgument168; }), (cast _Runtime.coalesce(start.focalPointRatio, function():Dynamic return cast 0.0) : Float));
     } else {
-      appendShapeLineGradientStyle(({ final __callArgument165:Dynamic = shape; __callArgument165; }), ({ final __callArgument166:Dynamic = gradientType; __callArgument166; }), ({ final __callArgument167:Dynamic = colors; __callArgument167; }), ({ final __callArgument168:Dynamic = alphas; __callArgument168; }), ({ final __callArgument169:Dynamic = ratios; __callArgument169; }), ({ final __callArgument170:Dynamic = currentMatrix; __callArgument170; }), ({ final __callArgument171:Dynamic = spreadMethod; __callArgument171; }), ({ final __callArgument172:Dynamic = interpolationMethod; __callArgument172; }), (cast _Runtime.coalesce(start.focalPointRatio, function():Dynamic return cast 0.0) : Float));
+      appendShapeLineGradientStyle(({ final __callArgument177:Dynamic = shape; __callArgument177; }), ({ final __callArgument178:Dynamic = gradientType; __callArgument178; }), ({ final __callArgument179:Dynamic = colors; __callArgument179; }), ({ final __callArgument180:Dynamic = alphas; __callArgument180; }), ({ final __callArgument181:Dynamic = ratios; __callArgument181; }), ({ final __callArgument182:Dynamic = currentMatrix; __callArgument182; }), ({ final __callArgument183:Dynamic = spreadMethod; __callArgument183; }), ({ final __callArgument184:Dynamic = interpolationMethod; __callArgument184; }), (cast _Runtime.coalesce(start.focalPointRatio, function():Dynamic return cast 0.0) : Float));
     }
     binding = (cast { commandIndex: commandIndex, commandKey: commandKey, endAlphas: _Runtime.concatArrays([_Runtime.toArray(end.alphas)]), endColors: _Runtime.concatArrays([_Runtime.toArray(end.colors)]), endFocalPointRatio: _Runtime.coalesce(end.focalPointRatio, function():Dynamic return cast 0.0), endMatrix: endMatrix, endRatios: _Runtime.concatArrays([_Runtime.toArray(end.ratios)]), kind: 'gradient', startAlphas: _Runtime.concatArrays([_Runtime.toArray(start.alphas)]), startColors: _Runtime.concatArrays([_Runtime.toArray(start.colors)]), startFocalPointRatio: _Runtime.coalesce(start.focalPointRatio, function():Dynamic return cast 0.0), startMatrix: startMatrix, startRatios: _Runtime.concatArrays([_Runtime.toArray(start.ratios)]) });
     _Runtime.callProperty((cast shape.data : { var paintBindings:Array<MorphShapePaintBinding>; }).paintBindings, 'push', cast ([binding] : Array<Dynamic>));
-    _Shape.sampleMorphShapePaintBinding__morphShapePaint(shape.data, ({ final __callArgument181:Dynamic = binding; __callArgument181; }), (cast (cast shape.data : { var progress:Float; }).progress : Float));
+    _Shape.sampleMorphShapePaintBinding__morphShapePaint(shape.data, ({ final __callArgument193:Dynamic = binding; __callArgument193; }), (cast (cast shape.data : { var progress:Float; }).progress : Float));
     return cast true;
     return cast null;
   }
@@ -879,17 +911,17 @@ class _Shape {
     var currentMatrix:Matrix = cast _Runtime.UNDEFINED;
     var binding:MorphShapePaintBinding = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(startSource, null) : Bool) && (cast _Runtime.strictEquals(endSource, null) : Bool)) : Bool)) {
-      if ((cast _Runtime.strictEquals(commandKey, 'beginTextureFill') : Bool)) { (#if js _Runtime.callValue(appendShapeBeginTextureFill, cast ([({ final __callArgument185:Dynamic = shape; __callArgument185; }), ({ final __callArgument186:Dynamic = texture; __callArgument186; })] : Array<Dynamic>)) #else appendShapeBeginTextureFill(({ final __callArgument183:Dynamic = shape; __callArgument183; }), ({ final __callArgument184:Dynamic = texture; __callArgument184; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end); } else { (#if js _Runtime.callValue(appendShapeLineTextureStyle, cast ([({ final __callArgument189:Dynamic = shape; __callArgument189; }), ({ final __callArgument190:Dynamic = texture; __callArgument190; })] : Array<Dynamic>)) #else appendShapeLineTextureStyle(({ final __callArgument187:Dynamic = shape; __callArgument187; }), ({ final __callArgument188:Dynamic = texture; __callArgument188; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end); }
+      if ((cast _Runtime.strictEquals(commandKey, 'beginTextureFill') : Bool)) { (#if js _Runtime.callValue(appendShapeBeginTextureFill, cast ([({ final __callArgument197:Dynamic = shape; __callArgument197; }), ({ final __callArgument198:Dynamic = texture; __callArgument198; })] : Array<Dynamic>)) #else appendShapeBeginTextureFill(({ final __callArgument195:Dynamic = shape; __callArgument195; }), ({ final __callArgument196:Dynamic = texture; __callArgument196; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end); } else { (#if js _Runtime.callValue(appendShapeLineTextureStyle, cast ([({ final __callArgument201:Dynamic = shape; __callArgument201; }), ({ final __callArgument202:Dynamic = texture; __callArgument202; })] : Array<Dynamic>)) #else appendShapeLineTextureStyle(({ final __callArgument199:Dynamic = shape; __callArgument199; }), ({ final __callArgument200:Dynamic = texture; __callArgument200; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end); }
       return;
     }
     commandIndex = _Runtime.field((cast shape.data : { var commands:Array<ShapeCommandToken>; }).commands, 'length');
-    startMatrix = (cast cloneMatrix(({ final __callArgument191:Dynamic = _Runtime.coalesce(startSource, function():Dynamic return cast _Shape.identityMatrix__morphShapePaint); __callArgument191; })) : Matrix);
-    endMatrix = (cast cloneMatrix(({ final __callArgument193:Dynamic = _Runtime.coalesce(endSource, function():Dynamic return cast _Shape.identityMatrix__morphShapePaint); __callArgument193; })) : Matrix);
-    currentMatrix = (cast _Shape.createSampledMatrix__morphShapePaint(({ final __callArgument195:Dynamic = startMatrix; __callArgument195; }), ({ final __callArgument196:Dynamic = endMatrix; __callArgument196; })) : Null<Matrix>);
-    if ((cast _Runtime.strictEquals(commandKey, 'beginTextureFill') : Bool)) { appendShapeBeginTextureFill(({ final __callArgument199:Dynamic = shape; __callArgument199; }), ({ final __callArgument200:Dynamic = texture; __callArgument200; }), ({ final __callArgument201:Dynamic = currentMatrix; __callArgument201; })); } else { appendShapeLineTextureStyle(({ final __callArgument205:Dynamic = shape; __callArgument205; }), ({ final __callArgument206:Dynamic = texture; __callArgument206; }), ({ final __callArgument207:Dynamic = currentMatrix; __callArgument207; })); }
+    startMatrix = (cast cloneMatrix(({ final __callArgument203:Dynamic = _Runtime.coalesce(startSource, function():Dynamic return cast _Shape.identityMatrix__morphShapePaint); __callArgument203; })) : Matrix);
+    endMatrix = (cast cloneMatrix(({ final __callArgument205:Dynamic = _Runtime.coalesce(endSource, function():Dynamic return cast _Shape.identityMatrix__morphShapePaint); __callArgument205; })) : Matrix);
+    currentMatrix = (cast _Shape.createSampledMatrix__morphShapePaint(({ final __callArgument207:Dynamic = startMatrix; __callArgument207; }), ({ final __callArgument208:Dynamic = endMatrix; __callArgument208; })) : Null<Matrix>);
+    if ((cast _Runtime.strictEquals(commandKey, 'beginTextureFill') : Bool)) { appendShapeBeginTextureFill(({ final __callArgument211:Dynamic = shape; __callArgument211; }), ({ final __callArgument212:Dynamic = texture; __callArgument212; }), ({ final __callArgument213:Dynamic = currentMatrix; __callArgument213; })); } else { appendShapeLineTextureStyle(({ final __callArgument217:Dynamic = shape; __callArgument217; }), ({ final __callArgument218:Dynamic = texture; __callArgument218; }), ({ final __callArgument219:Dynamic = currentMatrix; __callArgument219; })); }
     binding = (cast { commandIndex: commandIndex, commandKey: commandKey, endMatrix: endMatrix, kind: 'texture', startMatrix: startMatrix });
     _Runtime.callProperty((cast shape.data : { var paintBindings:Array<MorphShapePaintBinding>; }).paintBindings, 'push', cast ([binding] : Array<Dynamic>));
-    _Shape.sampleMorphShapePaintBinding__morphShapePaint(shape.data, ({ final __callArgument211:Dynamic = binding; __callArgument211; }), (cast (cast shape.data : { var progress:Float; }).progress : Float));
+    _Shape.sampleMorphShapePaintBinding__morphShapePaint(shape.data, ({ final __callArgument223:Dynamic = binding; __callArgument223; }), (cast (cast shape.data : { var progress:Float; }).progress : Float));
   }
 
   public static function sampleMorphShapePaintBinding__morphShapePaint(data:MorphShapeData, binding:MorphShapePaintBinding, progress:Float):Void {
@@ -933,14 +965,14 @@ class _Shape {
     }
     matrix = (cast flight._internal._StaticIndex.readArray(commands, (i + 6.0)) : Null<Matrix>);
     if ((cast ((cast ((cast !_Runtime.strictEquals(matrix, null) : Bool) && (cast !_Runtime.strictEquals((cast binding : MorphShapeGradientPaintBinding).startMatrix, null) : Bool)) : Bool) && (cast !_Runtime.strictEquals((cast binding : MorphShapeGradientPaintBinding).endMatrix, null) : Bool)) : Bool)) {
-      _Shape.sampleMatrix__morphShapePaint(({ final __callArgument213:Dynamic = matrix; __callArgument213; }), (cast binding : MorphShapeGradientPaintBinding).startMatrix, (cast binding : MorphShapeGradientPaintBinding).endMatrix, (cast progress : Float));
+      _Shape.sampleMatrix__morphShapePaint(({ final __callArgument225:Dynamic = matrix; __callArgument225; }), (cast binding : MorphShapeGradientPaintBinding).startMatrix, (cast binding : MorphShapeGradientPaintBinding).endMatrix, (cast progress : Float));
     }
     flight._internal._StaticIndex.writeArray(commands, (i + 9.0), (cast _Shape.interpolateNumber__morphShapePaint((cast (cast binding : MorphShapeGradientPaintBinding).startFocalPointRatio : Float), (cast (cast binding : MorphShapeGradientPaintBinding).endFocalPointRatio : Float), (cast progress : Float)) : Float));
   }
 
   public static function createSampledMatrix__morphShapePaint(start:Null<Matrix>, end:Null<Matrix>):Null<Matrix> {
     if ((cast ((cast _Runtime.strictEquals(start, null) : Bool) && (cast _Runtime.strictEquals(end, null) : Bool)) : Bool)) { return cast null; }
-    return cast (cast cloneMatrix(({ final __callArgument215:Dynamic = _Runtime.coalesce(start, function():Dynamic return cast _Shape.identityMatrix__morphShapePaint); __callArgument215; })) : Matrix);
+    return cast (cast cloneMatrix(({ final __callArgument227:Dynamic = _Runtime.coalesce(start, function():Dynamic return cast _Shape.identityMatrix__morphShapePaint); __callArgument227; })) : Matrix);
     return cast null;
   }
 
@@ -1000,14 +1032,17 @@ class _Shape {
   }
 
   public static function createScale9Shape(scale9Grid:RectangleLike, ?obj:PartialNode<Scale9Shape>):Scale9Shape {
-    return cast (cast createNode2D((cast Scale9ShapeKind : String), (cast (cast obj : PartialNode<Scale9Shape>) : Dynamic), (cast function(data:Null<{  }>):Scale9ShapeData return (cast createScale9ShapeData(({ final __callArgument217:Dynamic = scale9Grid; __callArgument217; }), (cast data : Dynamic)) : Scale9ShapeData) : Dynamic), (cast function(__unused0:Dynamic):Scale9ShapeRuntime return createScale9ShapeRuntime() : Dynamic), function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : Scale9Shape); }) #end)) : Scale9Shape);
+    return cast (cast createNode2D((cast Scale9ShapeKind : String), (cast (cast obj : PartialNode<Scale9Shape>) : Dynamic), (cast function(data:Null<{ @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }>):Scale9ShapeData return (cast createScale9ShapeData(({ final __callArgument229:Dynamic = scale9Grid; __callArgument229; }), (cast data : Dynamic)) : Scale9ShapeData) : Dynamic), (cast function(__unused0:Dynamic):Scale9ShapeRuntime return createScale9ShapeRuntime() : Dynamic), function():Dynamic return (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : Scale9Shape); }) #end)) : Scale9Shape);
     return cast null;
   }
 
   @:allow(flight)
   @:keep
-  private static function createScale9ShapeData(scale9Grid:RectangleLike, ?data:{ @:optional var scale9Grid:Null<RectangleLike>; @:optional var commands:Null<Array<ShapeCommandToken>>; }):Scale9ShapeData {
-    return cast { commands: _Runtime.coalesce(({ final __structural221 = data; __structural221 == null ? _Runtime.UNDEFINED : (cast __structural221 : { @:optional var commands:Null<Array<ShapeCommandToken>>; }).commands; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), scale9Grid: scale9Grid };
+  private static function createScale9ShapeData(scale9Grid:RectangleLike, ?data:{ @:optional var scale9Grid:Null<RectangleLike>; @:optional var commands:Null<Array<ShapeCommandToken>>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):Scale9ShapeData {
+    var out:EntityConstruction<Scale9ShapeData> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ commands: cast _Runtime.UNDEFINED, scale9Grid: cast _Runtime.UNDEFINED } : Scale9ShapeData); }) #end));
+    initializeScale9ShapeData(({ final __callArgument233:Dynamic = out; __callArgument233; }), ({ final __callArgument234:Dynamic = scale9Grid; __callArgument234; }), (cast data : Dynamic));
+    return cast out;
     return cast null;
   }
 
@@ -1021,8 +1056,15 @@ class _Shape {
   @:allow(flight)
   @:keep
   private static function getScale9ShapeRuntime(source:Scale9Shape):Scale9ShapeRuntime {
-    return cast (cast getNode2DRuntime(({ final __callArgument222:Dynamic = source; __callArgument222; })) : Scale9ShapeRuntime);
+    return cast (cast getNode2DRuntime(({ final __callArgument237:Dynamic = source; __callArgument237; })) : Scale9ShapeRuntime);
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeScale9ShapeData(out:EntityConstruction<Scale9ShapeData>, scale9Grid:RectangleLike, ?data:{ @:optional var scale9Grid:Null<RectangleLike>; @:optional var commands:Null<Array<ShapeCommandToken>>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):Void {
+    _Runtime.setField(out, 'commands', _Runtime.coalesce(({ final __structural239 = data; __structural239 == null ? _Runtime.UNDEFINED : (cast __structural239 : { @:optional var commands:Null<Array<ShapeCommandToken>>; }).commands; }), function():Dynamic return cast cast ([] : Array<Dynamic>)));
+    _Runtime.setField(out, 'scale9Grid', scale9Grid);
   }
 
   public static function mapScale9ShapeCommands(out:Array<ShapeCommandToken>, source:Array<ShapeCommandToken>, mapper:Scale9Mapper):Void {
@@ -1094,7 +1136,7 @@ class _Shape {
           flight._internal._StaticIndex.writeArray(out, (i + 3.0), (cast mapper : Scale9Mapper).mapY((cast (cast flight._internal._StaticIndex.readArray(out, (i + 3.0)) : Float) : Float)));
         }
         else if (__switchValue == 'drawPath') {
-          _Shape.remapPathData__scale9ShapeCommands(({ final __callArgument224:Dynamic = _Shape._remappedPathData__scale9ShapeCommands; __callArgument224; }), (cast flight._internal._StaticIndex.readArray(out, (i + 3.0)) : Array<Float>), (cast flight._internal._StaticIndex.readArray(out, (i + 2.0)) : Array<Float>), ({ final __callArgument225:Dynamic = mapper; __callArgument225; }));
+          _Shape.remapPathData__scale9ShapeCommands(({ final __callArgument240:Dynamic = _Shape._remappedPathData__scale9ShapeCommands; __callArgument240; }), (cast flight._internal._StaticIndex.readArray(out, (i + 3.0)) : Array<Float>), (cast flight._internal._StaticIndex.readArray(out, (i + 2.0)) : Array<Float>), ({ final __callArgument241:Dynamic = mapper; __callArgument241; }));
           flight._internal._StaticIndex.writeArray(out, (i + 3.0), _Shape._remappedPathData__scale9ShapeCommands);
         }
       }
@@ -1159,7 +1201,7 @@ class _Shape {
   }
 
   public static function computeShapeLocalBoundsRectangle(out:Rectangle, source:BoundsNodeAny):Void {
-    (cast getShapeBounds(({ final __callArgument230:Dynamic = out; __callArgument230; }), (cast (cast source : flight._internal._Any) : Shape), ({ final __callArgument231:Dynamic = 'ink'; __callArgument231; })) : Bool);
+    (cast getShapeBounds(({ final __callArgument246:Dynamic = out; __callArgument246; }), (cast (cast source : flight._internal._Any) : Shape), ({ final __callArgument247:Dynamic = 'ink'; __callArgument247; })) : Bool);
   }
 
   public static function copyShapeCommands(out:Shape, source:Shape):Void {
@@ -1182,14 +1224,17 @@ class _Shape {
   }
 
   public static function createShape(?obj:PartialNode<Shape>):Shape {
-    return cast (cast createNode2D((cast ShapeKind : String), (cast obj : Dynamic), (cast createShapeData : Dynamic), (cast function(__unused0:Dynamic):ShapeRuntime return createShapeRuntime() : Dynamic), function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : Shape); }) #end)) : Shape);
+    return cast (cast createNode2D((cast ShapeKind : String), (cast obj : Dynamic), (cast createShapeData : Dynamic), (cast function(__unused0:Dynamic):ShapeRuntime return createShapeRuntime() : Dynamic), function():Dynamic return (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : Shape); }) #end)) : Shape);
     return cast null;
   }
 
   @:allow(flight)
   @:keep
-  private static function createShapeData(?data:{ @:optional var commands:Null<Array<ShapeCommandToken>>; }):ShapeData {
-    return cast { commands: _Runtime.coalesce(({ final __structural234 = data; __structural234 == null ? _Runtime.UNDEFINED : (cast __structural234 : { @:optional var commands:Null<Array<ShapeCommandToken>>; }).commands; }), function():Dynamic return cast cast ([] : Array<Dynamic>)) };
+  private static function createShapeData(?data:{ @:optional var commands:Null<Array<ShapeCommandToken>>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):ShapeData {
+    var out:EntityConstruction<ShapeData> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ commands: cast _Runtime.UNDEFINED } : ShapeData); }) #end));
+    initializeShapeData(({ final __callArgument250:Dynamic = out; __callArgument250; }), (cast data : Dynamic));
+    return cast out;
     return cast null;
   }
 
@@ -1206,8 +1251,8 @@ class _Shape {
   public static function getShapeBounds(out:Rectangle, source:Shape, mode:ShapeBoundsMode = 'ink'):Bool {
     var complete:Bool = cast _Runtime.UNDEFINED;
     var runtime:ShapeRuntime = cast _Runtime.UNDEFINED;
-    complete = (cast computeShapeBoundsRectangle(({ final __callArgument235:Dynamic = out; __callArgument235; }), ({ final __callArgument236:Dynamic = source; __callArgument236; }), ({ final __callArgument237:Dynamic = mode; __callArgument237; })) : Bool);
-    runtime = (cast getNode2DRuntime(({ final __callArgument241:Dynamic = source; __callArgument241; })) : ShapeRuntime);
+    complete = (cast computeShapeBoundsRectangle(({ final __callArgument252:Dynamic = out; __callArgument252; }), ({ final __callArgument253:Dynamic = source; __callArgument253; }), ({ final __callArgument254:Dynamic = mode; __callArgument254; })) : Bool);
+    runtime = (cast getNode2DRuntime(({ final __callArgument258:Dynamic = source; __callArgument258; })) : ShapeRuntime);
     ((cast runtime : ShapeRuntime).shapeBoundsCommandRegistryRevision = (cast getShapeBoundsCommandRegistryRevision() : Float));
     if ((cast !(cast complete : Bool) : Bool)) {
       (out.x = cast (0.0 : Float));
@@ -1238,8 +1283,14 @@ class _Shape {
   @:allow(flight)
   @:keep
   private static function getShapeRuntime(source:Shape):ShapeRuntime {
-    return cast (cast getNode2DRuntime(({ final __callArgument243:Dynamic = source; __callArgument243; })) : ShapeRuntime);
+    return cast (cast getNode2DRuntime(({ final __callArgument260:Dynamic = source; __callArgument260; })) : ShapeRuntime);
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeShapeData(out:EntityConstruction<ShapeData>, ?data:{ @:optional var commands:Null<Array<ShapeCommandToken>>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):Void {
+    _Runtime.setField(out, 'commands', _Runtime.coalesce(({ final __structural262 = data; __structural262 == null ? _Runtime.UNDEFINED : (cast __structural262 : { @:optional var commands:Null<Array<ShapeCommandToken>>; }).commands; }), function():Dynamic return cast cast ([] : Array<Dynamic>)));
   }
 
   public static function isShapeEmpty(source:Shape):Bool {
@@ -1249,7 +1300,7 @@ class _Shape {
 
   public static function isShapeLocalBoundsRectangleValid__shape(source:BoundsNodeAny):Bool {
     var runtime:ShapeRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getNode2DRuntime(({ final __callArgument245:Dynamic = (cast (cast source : flight._internal._Any) : Shape); __callArgument245; })) : ShapeRuntime);
+    runtime = (cast getNode2DRuntime(({ final __callArgument263:Dynamic = (cast (cast source : flight._internal._Any) : Shape); __callArgument263; })) : ShapeRuntime);
     return cast _Runtime.strictEquals((cast runtime : ShapeRuntime).shapeBoundsCommandRegistryRevision, (cast getShapeBoundsCommandRegistryRevision() : Float));
     return cast null;
   }
@@ -1291,7 +1342,7 @@ class _Shape {
     }
     (cast fillContext : ShapeBoundsContext).flushPath();
     if ((cast _Runtime.strictEquals(mode, 'ink') : Bool)) { (cast strokeContext : ShapeBoundsContext).flushPath(); }
-    _Shape.writeShapeBoundsRectangle__shapeBounds(({ final __callArgument247:Dynamic = out; __callArgument247; }), (cast accumulator : Dynamic));
+    _Shape.writeShapeBoundsRectangle__shapeBounds(({ final __callArgument265:Dynamic = out; __callArgument265; }), (cast accumulator : Dynamic));
     return cast complete;
     return cast null;
   }
@@ -1352,7 +1403,7 @@ class _Shape {
   }
 
   public static function createShapeBoundsContext__shapeBounds(state:ShapeBoundsLaneState__shapeBounds):ShapeBoundsContext {
-    return cast { closePath: function():Void { _Shape.closeShapeBoundsPath__shapeBounds((cast state : Dynamic)); }, cubicCurveTo: function(controlX1:Float, controlY1:Float, controlX2:Float, controlY2:Float, anchorX:Float, anchorY:Float):Void { _Shape.cubicShapeBoundsCurveTo__shapeBounds((cast state : Dynamic), (cast controlX1 : Float), (cast controlY1 : Float), (cast controlX2 : Float), (cast controlY2 : Float), (cast anchorX : Float), (cast anchorY : Float)); }, curveTo: function(controlX:Float, controlY:Float, anchorX:Float, anchorY:Float):Void { _Shape.quadraticShapeBoundsCurveTo__shapeBounds((cast state : Dynamic), (cast controlX : Float), (cast controlY : Float), (cast anchorX : Float), (cast anchorY : Float)); }, drawCircle: function(x:Float, y:Float, radius:Float):Void { _Shape.drawShapeBoundsCircle__shapeBounds((cast state : Dynamic), (cast x : Float), (cast y : Float), (cast radius : Float)); }, drawEllipse: function(x:Float, y:Float, width:Float, height:Float):Void { _Shape.drawShapeBoundsEllipse__shapeBounds((cast state : Dynamic), (cast x : Float), (cast y : Float), (cast width : Float), (cast height : Float)); }, drawRectangle: function(x:Float, y:Float, width:Float, height:Float):Void { _Shape.drawShapeBoundsRectangle__shapeBounds((cast state : Dynamic), (cast x : Float), (cast y : Float), (cast width : Float), (cast height : Float)); }, expandPoint: function(x:Float, y:Float):Void { _Shape.expandShapeBoundsPointForLane__shapeBounds((cast state : Dynamic), (cast x : Float), (cast y : Float)); }, flushPath: function():Void { _Shape.flushShapeBoundsPath__shapeBounds((cast state : Dynamic)); }, lineTo: function(x:Float, y:Float):Void { _Shape.lineShapeBoundsTo__shapeBounds((cast state : Dynamic), (cast x : Float), (cast y : Float)); }, moveTo: function(x:Float, y:Float):Void { _Shape.moveShapeBoundsTo__shapeBounds((cast state : Dynamic), (cast x : Float), (cast y : Float)); }, setStrokeStyle: function(width:Float, caps:CapsStyle, joints:JointStyle, miterLimit:Float):Void { _Shape.setShapeBoundsStrokeStyle__shapeBounds((cast state : Dynamic), (cast width : Float), ({ final __callArgument249:Dynamic = caps; __callArgument249; }), ({ final __callArgument250:Dynamic = joints; __callArgument250; }), (cast miterLimit : Float)); } };
+    return cast { closePath: function():Void { _Shape.closeShapeBoundsPath__shapeBounds((cast state : Dynamic)); }, cubicCurveTo: function(controlX1:Float, controlY1:Float, controlX2:Float, controlY2:Float, anchorX:Float, anchorY:Float):Void { _Shape.cubicShapeBoundsCurveTo__shapeBounds((cast state : Dynamic), (cast controlX1 : Float), (cast controlY1 : Float), (cast controlX2 : Float), (cast controlY2 : Float), (cast anchorX : Float), (cast anchorY : Float)); }, curveTo: function(controlX:Float, controlY:Float, anchorX:Float, anchorY:Float):Void { _Shape.quadraticShapeBoundsCurveTo__shapeBounds((cast state : Dynamic), (cast controlX : Float), (cast controlY : Float), (cast anchorX : Float), (cast anchorY : Float)); }, drawCircle: function(x:Float, y:Float, radius:Float):Void { _Shape.drawShapeBoundsCircle__shapeBounds((cast state : Dynamic), (cast x : Float), (cast y : Float), (cast radius : Float)); }, drawEllipse: function(x:Float, y:Float, width:Float, height:Float):Void { _Shape.drawShapeBoundsEllipse__shapeBounds((cast state : Dynamic), (cast x : Float), (cast y : Float), (cast width : Float), (cast height : Float)); }, drawRectangle: function(x:Float, y:Float, width:Float, height:Float):Void { _Shape.drawShapeBoundsRectangle__shapeBounds((cast state : Dynamic), (cast x : Float), (cast y : Float), (cast width : Float), (cast height : Float)); }, expandPoint: function(x:Float, y:Float):Void { _Shape.expandShapeBoundsPointForLane__shapeBounds((cast state : Dynamic), (cast x : Float), (cast y : Float)); }, flushPath: function():Void { _Shape.flushShapeBoundsPath__shapeBounds((cast state : Dynamic)); }, lineTo: function(x:Float, y:Float):Void { _Shape.lineShapeBoundsTo__shapeBounds((cast state : Dynamic), (cast x : Float), (cast y : Float)); }, moveTo: function(x:Float, y:Float):Void { _Shape.moveShapeBoundsTo__shapeBounds((cast state : Dynamic), (cast x : Float), (cast y : Float)); }, setStrokeStyle: function(width:Float, caps:CapsStyle, joints:JointStyle, miterLimit:Float):Void { _Shape.setShapeBoundsStrokeStyle__shapeBounds((cast state : Dynamic), (cast width : Float), ({ final __callArgument267:Dynamic = caps; __callArgument267; }), ({ final __callArgument268:Dynamic = joints; __callArgument268; }), (cast miterLimit : Float)); } };
     return cast null;
   }
 
@@ -1905,7 +1956,7 @@ class _Shape {
     var previous:Null<ShapeBoundsCommand<String>> = cast _Runtime.UNDEFINED;
     previous = ((cast _Shape._commands__shapeBoundsRegistry : flight._internal._Map<String, ShapeBoundsCommand<String>>).get((cast (cast command : ShapeBoundsCommand<K>).key)));
     ((cast _Shape._commands__shapeBoundsRegistry : flight._internal._Map<String, ShapeBoundsCommand<String>>).set((cast (cast command : ShapeBoundsCommand<K>).key), (cast command)));
-    if ((cast ((cast _Runtime.strictEquals(({ final __structural255 = previous; __structural255 == null ? _Runtime.UNDEFINED : (cast __structural255 : { var fillBounds:Null<ShapeBoundsCommandHandler>; }).fillBounds; }), (cast command : ShapeBoundsCommand<K>).fillBounds) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(previous, 'strokeBounds'), (cast command : ShapeBoundsCommand<K>).strokeBounds) : Bool)) : Bool)) { return; }
+    if ((cast ((cast _Runtime.strictEquals(({ final __structural273 = previous; __structural273 == null ? _Runtime.UNDEFINED : (cast __structural273 : { var fillBounds:Null<ShapeBoundsCommandHandler>; }).fillBounds; }), (cast command : ShapeBoundsCommand<K>).fillBounds) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(previous, 'strokeBounds'), (cast command : ShapeBoundsCommand<K>).strokeBounds) : Bool)) : Bool)) { return; }
     _Shape._revision__shapeBoundsRegistry++;
   }
 
@@ -1932,7 +1983,7 @@ class _Shape {
     segmentAngle = (sweep / segmentCount);
     alpha = _Runtime.multiplyNumbers((4.0 / 3.0), HxMath.tan((segmentAngle / 4.0)));
     _Runtime.pushMany(cmds, cast (['moveTo', 2.0, (cx + _Runtime.multiplyNumbers(radius, HxMath.cos(startAngle))), (cy + _Runtime.multiplyNumbers(radius, HxMath.sin(startAngle)))] : Array<Dynamic>));
-    _Shape.pushArcCubics__shapeCommands(({ final __callArgument256:Dynamic = cmds; __callArgument256; }), (cast cx : Float), (cast cy : Float), (cast radius : Float), (cast startAngle : Float), (cast segmentCount : Float), (cast segmentAngle : Float), (cast alpha : Float));
+    _Shape.pushArcCubics__shapeCommands(({ final __callArgument274:Dynamic = cmds; __callArgument274; }), (cast cx : Float), (cast cy : Float), (cast radius : Float), (cast startAngle : Float), (cast segmentCount : Float), (cast segmentAngle : Float), (cast alpha : Float));
     invalidateContent((cast shape : Dynamic));
   }
 
@@ -2041,7 +2092,7 @@ class _Shape {
     segmentCount = HxMath.max(1.0, HxMath.ceil(_Runtime.divideNumbers(HxMath.abs(sweep), (HxMath.PI / 2.0))));
     segmentAngle = (sweep / segmentCount);
     alpha = _Runtime.multiplyNumbers((4.0 / 3.0), HxMath.tan((segmentAngle / 4.0)));
-    _Shape.pushArcCubics__shapeCommands(({ final __callArgument258:Dynamic = cmds; __callArgument258; }), (cast ocx : Float), (cast ocy : Float), (cast radius : Float), (cast startA : Float), (cast segmentCount : Float), (cast segmentAngle : Float), (cast alpha : Float));
+    _Shape.pushArcCubics__shapeCommands(({ final __callArgument276:Dynamic = cmds; __callArgument276; }), (cast ocx : Float), (cast ocy : Float), (cast radius : Float), (cast startA : Float), (cast segmentCount : Float), (cast segmentAngle : Float), (cast alpha : Float));
     invalidateContent((cast shape : Dynamic));
   }
 
@@ -2220,36 +2271,36 @@ class _Shape {
     {
       var __switchValue = name;
       if (__switchValue == 'moveTo') {
-        _Shape.pushVerb__shapeFill(({ final __callArgument260:Dynamic = path; __callArgument260; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float));
+        _Shape.pushVerb__shapeFill(({ final __callArgument278:Dynamic = path; __callArgument278; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float));
       }
       else if (__switchValue == 'lineTo') {
-        _Shape.pushVerb__shapeFill(({ final __callArgument262:Dynamic = path; __callArgument262; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float));
+        _Shape.pushVerb__shapeFill(({ final __callArgument280:Dynamic = path; __callArgument280; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float));
       }
       else if (__switchValue == 'curveTo') {
-        _Shape.pushQuadratic__shapeFill(({ final __callArgument264:Dynamic = path; __callArgument264; }), (cast (cast flight._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float) : Float));
+        _Shape.pushQuadratic__shapeFill(({ final __callArgument282:Dynamic = path; __callArgument282; }), (cast (cast flight._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float) : Float));
       }
       else if (__switchValue == 'cubicCurveTo') {
-        _Shape.pushCubic__shapeFill(({ final __callArgument266:Dynamic = path; __callArgument266; }), (cast (cast flight._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 4.0)) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 5.0)) : Float) : Float));
+        _Shape.pushCubic__shapeFill(({ final __callArgument284:Dynamic = path; __callArgument284; }), (cast (cast flight._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 4.0)) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 5.0)) : Float) : Float));
       }
       else if (__switchValue == 'drawCircle') {
-        _Shape.appendEllipseToPath__shapeFill(({ final __callArgument268:Dynamic = path; __callArgument268; }), (cast (cast flight._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float));
+        _Shape.appendEllipseToPath__shapeFill(({ final __callArgument286:Dynamic = path; __callArgument286; }), (cast (cast flight._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float));
       }
       else if (__switchValue == 'drawEllipse') {
         {
           var w:Float = (cast flight._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float);
           var h:Float = (cast flight._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float);
-          _Shape.appendEllipseToPath__shapeFill(({ final __callArgument270:Dynamic = path; __callArgument270; }), (cast ((cast flight._internal._StaticIndex.readArray(commands, a) : Float) + (w / 2.0)) : Float), (cast ((cast flight._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) + (h / 2.0)) : Float), (cast (w / 2.0) : Float), (cast (h / 2.0) : Float));
+          _Shape.appendEllipseToPath__shapeFill(({ final __callArgument288:Dynamic = path; __callArgument288; }), (cast ((cast flight._internal._StaticIndex.readArray(commands, a) : Float) + (w / 2.0)) : Float), (cast ((cast flight._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) + (h / 2.0)) : Float), (cast (w / 2.0) : Float), (cast (h / 2.0) : Float));
         }
       }
       else if (__switchValue == 'drawRectangle') {
-        _Shape.appendRectangleToPath__shapeFill(({ final __callArgument272:Dynamic = path; __callArgument272; }), (cast (cast flight._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float) : Float));
+        _Shape.appendRectangleToPath__shapeFill(({ final __callArgument290:Dynamic = path; __callArgument290; }), (cast (cast flight._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float) : Float));
       }
       else if (__switchValue == 'drawRoundRectangle') {
-        _Shape.appendRoundRectangleToPath__shapeFill(({ final __callArgument274:Dynamic = path; __callArgument274; }), (cast (cast flight._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float) : Float), (cast ((cast flight._internal._StaticIndex.readArray(commands, (a + 4.0)) : Float) / 2.0) : Float), (cast ((cast flight._internal._StaticIndex.readArray(commands, (a + 5.0)) : Float) / 2.0) : Float));
+        _Shape.appendRoundRectangleToPath__shapeFill(({ final __callArgument292:Dynamic = path; __callArgument292; }), (cast (cast flight._internal._StaticIndex.readArray(commands, a) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 2.0)) : Float) : Float), (cast (cast flight._internal._StaticIndex.readArray(commands, (a + 3.0)) : Float) : Float), (cast ((cast flight._internal._StaticIndex.readArray(commands, (a + 4.0)) : Float) / 2.0) : Float), (cast ((cast flight._internal._StaticIndex.readArray(commands, (a + 5.0)) : Float) / 2.0) : Float));
       }
       else if (__switchValue == 'drawPath') {
         ((cast path : Path).winding = (cast flight._internal._StaticIndex.readArray(commands, (a + 2.0)) : PathWinding));
-        _Shape.appendRawPath__shapeFill(({ final __callArgument276:Dynamic = path; __callArgument276; }), (cast flight._internal._StaticIndex.readArray(commands, a) : Array<Float>), (cast flight._internal._StaticIndex.readArray(commands, (a + 1.0)) : Array<Float>));
+        _Shape.appendRawPath__shapeFill(({ final __callArgument294:Dynamic = path; __callArgument294; }), (cast flight._internal._StaticIndex.readArray(commands, a) : Array<Float>), (cast flight._internal._StaticIndex.readArray(commands, (a + 1.0)) : Array<Float>));
       }
       else  {
       }
@@ -2282,7 +2333,7 @@ class _Shape {
     var alpha:Float = cast _Runtime.UNDEFINED;
     var winding:PathWinding = cast _Runtime.UNDEFINED;
     var i:Float = cast _Runtime.UNDEFINED;
-    if ((cast (cast hasNonSolidShapeFill(({ final __callArgument278:Dynamic = commands; __callArgument278; })) : Bool) : Bool)) { return cast null; }
+    if ((cast (cast hasNonSolidShapeFill(({ final __callArgument296:Dynamic = commands; __callArgument296; })) : Bool) : Bool)) { return cast null; }
     regions = (cast cast ([] : Array<Dynamic>));
     path = null;
     color = 0.0;
@@ -2301,7 +2352,13 @@ class _Shape {
             if ((cast ((cast !_Runtime.strictEquals(path, null) : Bool) && (cast ((cast _Runtime.field((cast path : Path).commands, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.callProperty(regions, 'push', cast ([{ path: path, color: color, alpha: alpha }] : Array<Dynamic>)); }
             (color = cast ((cast flight._internal._StaticIndex.readArray(commands, a) : Float) : Dynamic));
             (alpha = cast ((cast flight._internal._StaticIndex.readArray(commands, (a + 1.0)) : Float) : Dynamic));
-            (path = cast ({ commands: cast ([] : Array<Dynamic>), data: cast ([] : Array<Dynamic>), winding: winding } : Dynamic));
+            (path = cast (_Runtime.callValue(function():Path {
+              var out:EntityConstruction<Path> = cast _Runtime.UNDEFINED;
+              out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ commands: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, winding: cast _Runtime.UNDEFINED } : Path); }) #end));
+              _Shape.initializePath__shapeFill(({ final __callArgument298:Dynamic = out; __callArgument298; }), (cast cast ([] : Array<Dynamic>) : Array<Float>), (cast cast ([] : Array<Dynamic>) : Array<Float>), ({ final __callArgument299:Dynamic = winding; __callArgument299; }));
+              return cast out;
+              return cast _Runtime.UNDEFINED;
+            }, cast ([] : Array<Dynamic>)) : Dynamic));
           }
         }
         else if (__switchValue == 'endFill') {
@@ -2311,7 +2368,7 @@ class _Shape {
           }
         }
         else  {
-          if ((cast !_Runtime.strictEquals(path, null) : Bool)) { appendShapeGeometryCommand(({ final __callArgument280:Dynamic = path; __callArgument280; }), (cast name : String), ({ final __callArgument281:Dynamic = commands; __callArgument281; }), (cast a : Float)); }
+          if ((cast !_Runtime.strictEquals(path, null) : Bool)) { appendShapeGeometryCommand(({ final __callArgument302:Dynamic = path; __callArgument302; }), (cast name : String), ({ final __callArgument303:Dynamic = commands; __callArgument303; }), (cast a : Float)); }
         }
       }
     }
@@ -2350,16 +2407,22 @@ class _Shape {
     return cast null;
   }
 
+  public static function initializePath__shapeFill(out:EntityConstruction<Path>, commands:Array<Float>, data:Array<Float>, winding:flight._internal._IndexedAccess<Path, String>):Void {
+    _Runtime.setField(out, 'commands', commands);
+    _Runtime.setField(out, 'data', data);
+    _Runtime.setField(out, 'winding', winding);
+  }
+
   public static function appendEllipseToPath__shapeFill(path:Path, cx:Float, cy:Float, rx:Float, ry:Float):Void {
     var kx:Float = cast _Runtime.UNDEFINED;
     var ky:Float = cast _Runtime.UNDEFINED;
     kx = (rx * CIRCLE_KAPPA);
     ky = (ry * CIRCLE_KAPPA);
-    _Shape.pushVerb__shapeFill(({ final __callArgument284:Dynamic = path; __callArgument284; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO : Float), (cast (cx + rx) : Float), (cast cy : Float));
-    _Shape.pushCubic__shapeFill(({ final __callArgument286:Dynamic = path; __callArgument286; }), (cast (cx + rx) : Float), (cast (cy + ky) : Float), (cast (cx + kx) : Float), (cast (cy + ry) : Float), (cast cx : Float), (cast (cy + ry) : Float));
-    _Shape.pushCubic__shapeFill(({ final __callArgument288:Dynamic = path; __callArgument288; }), (cast (cx - kx) : Float), (cast (cy + ry) : Float), (cast (cx - rx) : Float), (cast (cy + ky) : Float), (cast (cx - rx) : Float), (cast cy : Float));
-    _Shape.pushCubic__shapeFill(({ final __callArgument290:Dynamic = path; __callArgument290; }), (cast (cx - rx) : Float), (cast (cy - ky) : Float), (cast (cx - kx) : Float), (cast (cy - ry) : Float), (cast cx : Float), (cast (cy - ry) : Float));
-    _Shape.pushCubic__shapeFill(({ final __callArgument292:Dynamic = path; __callArgument292; }), (cast (cx + kx) : Float), (cast (cy - ry) : Float), (cast (cx + rx) : Float), (cast (cy - ky) : Float), (cast (cx + rx) : Float), (cast cy : Float));
+    _Shape.pushVerb__shapeFill(({ final __callArgument306:Dynamic = path; __callArgument306; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO : Float), (cast (cx + rx) : Float), (cast cy : Float));
+    _Shape.pushCubic__shapeFill(({ final __callArgument308:Dynamic = path; __callArgument308; }), (cast (cx + rx) : Float), (cast (cy + ky) : Float), (cast (cx + kx) : Float), (cast (cy + ry) : Float), (cast cx : Float), (cast (cy + ry) : Float));
+    _Shape.pushCubic__shapeFill(({ final __callArgument310:Dynamic = path; __callArgument310; }), (cast (cx - kx) : Float), (cast (cy + ry) : Float), (cast (cx - rx) : Float), (cast (cy + ky) : Float), (cast (cx - rx) : Float), (cast cy : Float));
+    _Shape.pushCubic__shapeFill(({ final __callArgument312:Dynamic = path; __callArgument312; }), (cast (cx - rx) : Float), (cast (cy - ky) : Float), (cast (cx - kx) : Float), (cast (cy - ry) : Float), (cast cx : Float), (cast (cy - ry) : Float));
+    _Shape.pushCubic__shapeFill(({ final __callArgument314:Dynamic = path; __callArgument314; }), (cast (cx + kx) : Float), (cast (cy - ry) : Float), (cast (cx + rx) : Float), (cast (cy - ky) : Float), (cast (cx + rx) : Float), (cast cy : Float));
   }
 
   public static function appendRawPath__shapeFill(path:Path, verbs:Array<Float>, data:Array<Float>):Void {
@@ -2385,11 +2448,11 @@ class _Shape {
   }
 
   public static function appendRectangleToPath__shapeFill(path:Path, x:Float, y:Float, w:Float, h:Float):Void {
-    _Shape.pushVerb__shapeFill(({ final __callArgument294:Dynamic = path; __callArgument294; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO : Float), (cast x : Float), (cast y : Float));
-    _Shape.pushVerb__shapeFill(({ final __callArgument296:Dynamic = path; __callArgument296; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (x + w) : Float), (cast y : Float));
-    _Shape.pushVerb__shapeFill(({ final __callArgument298:Dynamic = path; __callArgument298; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (x + w) : Float), (cast (y + h) : Float));
-    _Shape.pushVerb__shapeFill(({ final __callArgument300:Dynamic = path; __callArgument300; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast x : Float), (cast (y + h) : Float));
-    _Shape.pushVerb__shapeFill(({ final __callArgument302:Dynamic = path; __callArgument302; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast x : Float), (cast y : Float));
+    _Shape.pushVerb__shapeFill(({ final __callArgument316:Dynamic = path; __callArgument316; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO : Float), (cast x : Float), (cast y : Float));
+    _Shape.pushVerb__shapeFill(({ final __callArgument318:Dynamic = path; __callArgument318; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (x + w) : Float), (cast y : Float));
+    _Shape.pushVerb__shapeFill(({ final __callArgument320:Dynamic = path; __callArgument320; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (x + w) : Float), (cast (y + h) : Float));
+    _Shape.pushVerb__shapeFill(({ final __callArgument322:Dynamic = path; __callArgument322; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast x : Float), (cast (y + h) : Float));
+    _Shape.pushVerb__shapeFill(({ final __callArgument324:Dynamic = path; __callArgument324; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast x : Float), (cast y : Float));
   }
 
   public static function appendRoundRectangleToPath__shapeFill(path:Path, x:Float, y:Float, w:Float, h:Float, rx:Float, ry:Float):Void {
@@ -2397,15 +2460,15 @@ class _Shape {
     var bottom:Float = cast _Runtime.UNDEFINED;
     right = (x + w);
     bottom = (y + h);
-    _Shape.pushVerb__shapeFill(({ final __callArgument304:Dynamic = path; __callArgument304; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO : Float), (cast (x + rx) : Float), (cast y : Float));
-    _Shape.pushVerb__shapeFill(({ final __callArgument306:Dynamic = path; __callArgument306; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (right - rx) : Float), (cast y : Float));
-    _Shape.pushQuadratic__shapeFill(({ final __callArgument308:Dynamic = path; __callArgument308; }), (cast right : Float), (cast y : Float), (cast right : Float), (cast (y + ry) : Float));
-    _Shape.pushVerb__shapeFill(({ final __callArgument310:Dynamic = path; __callArgument310; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast right : Float), (cast (bottom - ry) : Float));
-    _Shape.pushQuadratic__shapeFill(({ final __callArgument312:Dynamic = path; __callArgument312; }), (cast right : Float), (cast bottom : Float), (cast (right - rx) : Float), (cast bottom : Float));
-    _Shape.pushVerb__shapeFill(({ final __callArgument314:Dynamic = path; __callArgument314; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (x + rx) : Float), (cast bottom : Float));
-    _Shape.pushQuadratic__shapeFill(({ final __callArgument316:Dynamic = path; __callArgument316; }), (cast x : Float), (cast bottom : Float), (cast x : Float), (cast (bottom - ry) : Float));
-    _Shape.pushVerb__shapeFill(({ final __callArgument318:Dynamic = path; __callArgument318; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast x : Float), (cast (y + ry) : Float));
-    _Shape.pushQuadratic__shapeFill(({ final __callArgument320:Dynamic = path; __callArgument320; }), (cast x : Float), (cast y : Float), (cast (x + rx) : Float), (cast y : Float));
+    _Shape.pushVerb__shapeFill(({ final __callArgument326:Dynamic = path; __callArgument326; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO : Float), (cast (x + rx) : Float), (cast y : Float));
+    _Shape.pushVerb__shapeFill(({ final __callArgument328:Dynamic = path; __callArgument328; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (right - rx) : Float), (cast y : Float));
+    _Shape.pushQuadratic__shapeFill(({ final __callArgument330:Dynamic = path; __callArgument330; }), (cast right : Float), (cast y : Float), (cast right : Float), (cast (y + ry) : Float));
+    _Shape.pushVerb__shapeFill(({ final __callArgument332:Dynamic = path; __callArgument332; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast right : Float), (cast (bottom - ry) : Float));
+    _Shape.pushQuadratic__shapeFill(({ final __callArgument334:Dynamic = path; __callArgument334; }), (cast right : Float), (cast bottom : Float), (cast (right - rx) : Float), (cast bottom : Float));
+    _Shape.pushVerb__shapeFill(({ final __callArgument336:Dynamic = path; __callArgument336; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast (x + rx) : Float), (cast bottom : Float));
+    _Shape.pushQuadratic__shapeFill(({ final __callArgument338:Dynamic = path; __callArgument338; }), (cast x : Float), (cast bottom : Float), (cast x : Float), (cast (bottom - ry) : Float));
+    _Shape.pushVerb__shapeFill(({ final __callArgument340:Dynamic = path; __callArgument340; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO : Float), (cast x : Float), (cast (y + ry) : Float));
+    _Shape.pushQuadratic__shapeFill(({ final __callArgument342:Dynamic = path; __callArgument342; }), (cast x : Float), (cast y : Float), (cast (x + rx) : Float), (cast y : Float));
   }
 
   public static function pushCubic__shapeFill(path:Path, c1x:Float, c1y:Float, c2x:Float, c2y:Float, ax:Float, ay:Float):Void {
@@ -2433,7 +2496,7 @@ class _Shape {
     var penY:Float = cast _Runtime.UNDEFINED;
     var flush:Void->Void = cast _Runtime.UNDEFINED;
     var i:Float = cast _Runtime.UNDEFINED;
-    if ((cast (cast hasNonSolidShapeStroke(({ final __callArgument322:Dynamic = commands; __callArgument322; })) : Bool) : Bool)) { return cast null; }
+    if ((cast (cast hasNonSolidShapeStroke(({ final __callArgument344:Dynamic = commands; __callArgument344; })) : Bool) : Bool)) { return cast null; }
     regions = (cast cast ([] : Array<Dynamic>));
     centerline = null;
     style = null;
@@ -2460,7 +2523,13 @@ class _Shape {
           var caps:String = (cast flight._internal._StaticIndex.readArray(commands, (a + 5.0)) : String);
           var joints:String = (cast flight._internal._StaticIndex.readArray(commands, (a + 6.0)) : String);
           (style = cast ({ width: thickness, cap: ((cast _Runtime.strictEquals(caps, 'none') : Bool) ? (cast 'butt' : Dynamic) : (cast (cast caps : flight._internal._IndexedAccess<StrokeStyle, String>) : Dynamic)), join: (cast joints : flight._internal._IndexedAccess<StrokeStyle, String>), miterLimit: (cast flight._internal._StaticIndex.readArray(commands, (a + 7.0)) : Float) } : Dynamic));
-          (centerline = cast ({ commands: cast ([] : Array<Dynamic>), data: cast ([] : Array<Dynamic>), winding: 'nonZero' } : Dynamic));
+          (centerline = cast (_Runtime.callValue(function():Path {
+            var out:EntityConstruction<Path> = cast _Runtime.UNDEFINED;
+            out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ commands: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, winding: cast _Runtime.UNDEFINED } : Path); }) #end));
+            _Shape.initializePath__shapeStroke(({ final __callArgument346:Dynamic = out; __callArgument346; }), (cast cast ([] : Array<Dynamic>) : Array<Float>), (cast cast ([] : Array<Dynamic>) : Array<Float>), ({ final __callArgument347:Dynamic = 'nonZero'; __callArgument347; }));
+            return cast out;
+            return cast _Runtime.UNDEFINED;
+          }, cast ([] : Array<Dynamic>)) : Dynamic));
         } else {
           (style = cast (null : Dynamic));
           (centerline = cast (null : Dynamic));
@@ -2471,7 +2540,7 @@ class _Shape {
             _Runtime.callProperty((cast centerline : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO] : Array<Dynamic>));
             _Runtime.pushMany((cast centerline : Path).data, cast ([penX, penY] : Array<Dynamic>));
           }
-          appendShapeGeometryCommand(({ final __callArgument324:Dynamic = centerline; __callArgument324; }), (cast name : String), ({ final __callArgument325:Dynamic = commands; __callArgument325; }), (cast a : Float));
+          appendShapeGeometryCommand(({ final __callArgument350:Dynamic = centerline; __callArgument350; }), (cast name : String), ({ final __callArgument351:Dynamic = commands; __callArgument351; }), (cast a : Float));
         }
         if ((cast ((cast _Runtime.strictEquals(name, 'moveTo') : Bool) || (cast _Runtime.strictEquals(name, 'lineTo') : Bool)) : Bool)) {
           (penX = cast ((cast flight._internal._StaticIndex.readArray(commands, a) : Float) : Dynamic));
@@ -2502,6 +2571,12 @@ class _Shape {
     return cast null;
   }
 
+  public static function initializePath__shapeStroke(out:EntityConstruction<Path>, commands:Array<Float>, data:Array<Float>, winding:flight._internal._IndexedAccess<Path, String>):Void {
+    _Runtime.setField(out, 'commands', commands);
+    _Runtime.setField(out, 'data', data);
+    _Runtime.setField(out, 'winding', winding);
+  }
+
   public static function isShapeGeometryCommand__shapeStroke(name:String):Bool {
     return cast _Runtime.orValue(((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(name, 'moveTo') : Bool) || (cast _Runtime.strictEquals(name, 'lineTo') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'curveTo') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'cubicCurveTo') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'drawCircle') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'drawEllipse') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'drawRectangle') : Bool)) : Bool) || (cast _Runtime.strictEquals(name, 'drawRoundRectangle') : Bool)), function():Dynamic return cast _Runtime.strictEquals(name, 'drawPath'));
     return cast null;
@@ -2518,7 +2593,7 @@ class _Shape {
     var deferred:Bool = cast _Runtime.UNDEFINED;
     var flush:Void->Void = cast _Runtime.UNDEFINED;
     var i:Float = cast _Runtime.UNDEFINED;
-    if ((cast (cast _Shape.hasNonSolidShapeStroke__shapeStrokeOutline(({ final __callArgument328:Dynamic = commands; __callArgument328; })) : Bool) : Bool)) { return cast null; }
+    if ((cast (cast _Shape.hasNonSolidShapeStroke__shapeStrokeOutline(({ final __callArgument354:Dynamic = commands; __callArgument354; })) : Bool) : Bool)) { return cast null; }
     regions = (cast cast ([] : Array<Dynamic>));
     centerline = null;
     style = null;
@@ -2530,11 +2605,11 @@ class _Shape {
     flush = (cast function():Void {
       var outline:Path = cast _Runtime.UNDEFINED;
       if ((cast ((cast ((cast _Runtime.strictEquals(style, null) : Bool) || (cast _Runtime.strictEquals(centerline, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field((cast centerline : Path).commands, 'length'), 0.0) : Bool)) : Bool)) { return; }
-      if ((cast (cast _Shape.isCenterlineClosed__shapeStrokeOutline(({ final __callArgument330:Dynamic = centerline; __callArgument330; })) : Bool) : Bool)) {
+      if ((cast (cast _Shape.isCenterlineClosed__shapeStrokeOutline(({ final __callArgument356:Dynamic = centerline; __callArgument356; })) : Bool) : Bool)) {
         (deferred = cast (true : Dynamic));
         return;
       }
-      outline = (cast (#if js _Runtime.callValue(compactStrokePath, cast ([({ final __callArgument334:Dynamic = centerline; __callArgument334; }), ({ final __callArgument335:Dynamic = style; __callArgument335; })] : Array<Dynamic>)) #else compactStrokePath(({ final __callArgument332:Dynamic = centerline; __callArgument332; }), ({ final __callArgument333:Dynamic = style; __callArgument333; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Path);
+      outline = (cast (#if js _Runtime.callValue(compactStrokePath, cast ([({ final __callArgument360:Dynamic = centerline; __callArgument360; }), ({ final __callArgument361:Dynamic = style; __callArgument361; })] : Array<Dynamic>)) #else compactStrokePath(({ final __callArgument358:Dynamic = centerline; __callArgument358; }), ({ final __callArgument359:Dynamic = style; __callArgument359; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Path);
       if ((cast ((cast _Runtime.field((cast outline : Path).commands, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(regions, 'push', cast ([{ path: outline, color: color, alpha: alpha }] : Array<Dynamic>)); }
     });
     i = 0.0;
@@ -2552,7 +2627,13 @@ class _Shape {
           var caps:String = (cast flight._internal._StaticIndex.readArray(commands, (a + 5.0)) : String);
           var joints:String = (cast flight._internal._StaticIndex.readArray(commands, (a + 6.0)) : String);
           (style = cast ({ width: thickness, cap: ((cast _Runtime.strictEquals(caps, 'none') : Bool) ? (cast 'butt' : Dynamic) : (cast (cast caps : flight._internal._IndexedAccess<StrokeStyle, String>) : Dynamic)), join: (cast joints : flight._internal._IndexedAccess<StrokeStyle, String>), miterLimit: (cast flight._internal._StaticIndex.readArray(commands, (a + 7.0)) : Float) } : Dynamic));
-          (centerline = cast ({ commands: cast ([] : Array<Dynamic>), data: cast ([] : Array<Dynamic>), winding: 'nonZero' } : Dynamic));
+          (centerline = cast (_Runtime.callValue(function():Path {
+            var out:EntityConstruction<Path> = cast _Runtime.UNDEFINED;
+            out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ commands: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, winding: cast _Runtime.UNDEFINED } : Path); }) #end));
+            _Shape.initializePath__shapeStrokeOutline(({ final __callArgument362:Dynamic = out; __callArgument362; }), (cast cast ([] : Array<Dynamic>) : Array<Float>), (cast cast ([] : Array<Dynamic>) : Array<Float>), ({ final __callArgument363:Dynamic = 'nonZero'; __callArgument363; }));
+            return cast out;
+            return cast _Runtime.UNDEFINED;
+          }, cast ([] : Array<Dynamic>)) : Dynamic));
         } else {
           (style = cast (null : Dynamic));
           (centerline = cast (null : Dynamic));
@@ -2563,7 +2644,7 @@ class _Shape {
             _Runtime.callProperty((cast centerline : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO] : Array<Dynamic>));
             _Runtime.pushMany((cast centerline : Path).data, cast ([penX, penY] : Array<Dynamic>));
           }
-          appendShapeGeometryCommand(({ final __callArgument336:Dynamic = centerline; __callArgument336; }), (cast name : String), ({ final __callArgument337:Dynamic = commands; __callArgument337; }), (cast a : Float));
+          appendShapeGeometryCommand(({ final __callArgument366:Dynamic = centerline; __callArgument366; }), (cast name : String), ({ final __callArgument367:Dynamic = commands; __callArgument367; }), (cast a : Float));
         }
         if ((cast ((cast _Runtime.strictEquals(name, 'moveTo') : Bool) || (cast _Runtime.strictEquals(name, 'lineTo') : Bool)) : Bool)) {
           (penX = cast ((cast flight._internal._StaticIndex.readArray(commands, a) : Float) : Dynamic));
@@ -2580,6 +2661,12 @@ class _Shape {
     flush();
     return cast ((cast deferred : Bool) ? (cast null : Dynamic) : (cast regions : Dynamic));
     return cast null;
+  }
+
+  public static function initializePath__shapeStrokeOutline(out:EntityConstruction<Path>, commands:Array<Float>, data:Array<Float>, winding:flight._internal._IndexedAccess<Path, String>):Void {
+    _Runtime.setField(out, 'commands', commands);
+    _Runtime.setField(out, 'data', data);
+    _Runtime.setField(out, 'winding', winding);
   }
 
   public static function hasNonSolidShapeStroke__shapeStrokeOutline(commands:Array<ShapeCommandToken>):Bool {

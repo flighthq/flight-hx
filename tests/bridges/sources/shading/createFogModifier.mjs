@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createFogModifier = api.createFogModifier;
+export const initializeFogModifier = api.initializeFogModifier;

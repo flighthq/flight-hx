@@ -4,4 +4,29 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MotionPath = { var direction:Float; var distance:Float; var length:Float; var loopMode:MotionPathLoopMode; var path:Path; var speed:Float; };
+#if !flight_struct_typedef
+@:allow(flight._MotionPath)
+@:keep
+@:structInit
+class MotionPath {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var direction:Float;
+  public var distance:Float;
+  public var length:Float;
+  public var loopMode:MotionPathLoopMode;
+  public var path:Path;
+  public var speed:Float;
+
+  private function new(direction:Float, distance:Float, length:Float, loopMode:MotionPathLoopMode, path:Path, speed:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.direction = direction;
+    this.distance = distance;
+    this.length = length;
+    this.loopMode = loopMode;
+    this.path = path;
+    this.speed = speed;
+  }
+}
+#else
+typedef MotionPath = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var direction:Float; var distance:Float; var length:Float; var loopMode:MotionPathLoopMode; var path:Path; var speed:Float; };
+#end

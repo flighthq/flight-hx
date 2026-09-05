@@ -3,6 +3,7 @@
 function __syncDependencies() {}
 __syncDependencies();
 
+export * from './adjustment.mjs';
 export * from './brightnessContrastAdjustment.mjs';
 export * from './channelMixerAdjustment.mjs';
 export * from './colorAdjustmentResolution.mjs';
@@ -22,3 +23,17 @@ export * from './liftGammaGainAdjustment.mjs';
 export * from './lookupTableGradeAdjustment.mjs';
 export * from './sepiaAdjustment.mjs';
 export * from './tintAdjustment.mjs';
+export { initializeBrightnessContrastAdjustment } from './brightnessContrastAdjustment.mjs';
+export { initializeChannelMixerAdjustment } from './channelMixerAdjustment.mjs';
+export { initializeColorBlindSimulationAdjustment } from './colorBlindSimulationAdjustment.mjs';
+export { initializeColorGradeAdjustment } from './colorGradeAdjustment.mjs';
+export { initializeColorLutCache } from './colorLutCache.mjs';
+export { initializeColorScaleBiasAdjustment } from './colorScaleBiasAdjustment.mjs';
+export { initializeExposureAdjustment } from './exposureAdjustment.mjs';
+export { initializeGrayscaleAdjustment } from './grayscaleAdjustment.mjs';
+export { initializeHueSaturationAdjustment } from './hueSaturationAdjustment.mjs';
+export { initializeInvertAdjustment } from './invertAdjustment.mjs';
+export { initializeLiftGammaGainAdjustment } from './liftGammaGainAdjustment.mjs';
+export { initializeLookupTableGradeAdjustment } from './lookupTableGradeAdjustment.mjs';
+export { initializeSepiaAdjustment } from './sepiaAdjustment.mjs';
+export { initializeTintAdjustment } from './tintAdjustment.mjs';

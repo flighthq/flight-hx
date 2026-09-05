@@ -4,4 +4,24 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CanvasRenderTargetPool = { var creator:CanvasRenderSurfaceCreator; var free:Array<CanvasRenderTarget>; var inUse:Array<CanvasRenderTarget>; };
+#if !flight_struct_typedef
+@:allow(flight._EffectsCanvas)
+@:allow(flight._Scene2DCanvas)
+@:keep
+@:structInit
+class CanvasRenderTargetPool {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var creator:CanvasRenderSurfaceCreator;
+  public var free:Array<CanvasRenderTarget>;
+  public var inUse:Array<CanvasRenderTarget>;
+
+  private function new(creator:CanvasRenderSurfaceCreator, free:Array<CanvasRenderTarget>, inUse:Array<CanvasRenderTarget>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.creator = creator;
+    this.free = free;
+    this.inUse = inUse;
+  }
+}
+#else
+typedef CanvasRenderTargetPool = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var creator:CanvasRenderSurfaceCreator; var free:Array<CanvasRenderTarget>; var inUse:Array<CanvasRenderTarget>; };
+#end

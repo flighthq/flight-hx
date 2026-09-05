@@ -4,5 +4,38 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
 @:noCompletion
-typedef ElectronMacosAppCapabilities = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var name:AppNameBackend; var version:AppVersionBackend; var path:AppPathBackend; var allWindowsClosed:AppAllWindowsClosedBackend; var quitRequest:AppQuitRequestBackend; var ready:AppReadyBackend; var secondInstance:AppSecondInstanceBackend; var focus:AppFocusBackend; var quit:AppQuitBackend; var locale:AppLocaleBackend; var nameWrite:AppNameWriteBackend; var relaunch:AppRelaunchBackend; var singleInstance:AppSingleInstanceBackend; var activate:AppActivateBackend; var openFile:AppOpenFileBackend; var hide:AppHideBackend; var show:AppShowBackend; var badge:AppBadgeBackend; var loginItem:AppLoginItemBackend; var recentDocuments:AppRecentDocumentsBackend; var activationPolicy:AppActivationPolicyBackend; var dock:AppDockBackend; var hiddenQuery:AppVisibilityQueryBackend; };
+@:allow(flight._HostElectron)
+@:keep
+@:structInit
+class ElectronMacosAppCapabilities extends flight.types.ElectronCommonAppCapabilities {
+  public var activate:AppActivateBackend;
+  public var openFile:AppOpenFileBackend;
+  public var hide:AppHideBackend;
+  public var show:AppShowBackend;
+  public var badge:AppBadgeBackend;
+  public var dock:AppDockBackend;
+  public var loginItem:AppLoginItemBackend;
+  public var activationPolicy:AppActivationPolicyBackend;
+  public var hiddenQuery:AppVisibilityQueryBackend;
+  public var recentDocuments:AppRecentDocumentsBackend;
+
+  private function new(name:AppNameBackend, version:AppVersionBackend, path:AppPathBackend, allWindowsClosed:AppAllWindowsClosedBackend, quitRequest:AppQuitRequestBackend, ready:AppReadyBackend, secondInstance:AppSecondInstanceBackend, focus:AppFocusBackend, quit:AppQuitBackend, locale:AppLocaleBackend, nameWrite:AppNameWriteBackend, relaunch:AppRelaunchBackend, singleInstance:AppSingleInstanceBackend, activate:AppActivateBackend, openFile:AppOpenFileBackend, hide:AppHideBackend, show:AppShowBackend, badge:AppBadgeBackend, dock:AppDockBackend, loginItem:AppLoginItemBackend, activationPolicy:AppActivationPolicyBackend, hiddenQuery:AppVisibilityQueryBackend, recentDocuments:AppRecentDocumentsBackend):Void {
+    super(name, version, path, allWindowsClosed, quitRequest, ready, secondInstance, focus, quit, locale, nameWrite, relaunch, singleInstance);
+    this.activate = activate;
+    this.openFile = openFile;
+    this.hide = hide;
+    this.show = show;
+    this.badge = badge;
+    this.dock = dock;
+    this.loginItem = loginItem;
+    this.activationPolicy = activationPolicy;
+    this.hiddenQuery = hiddenQuery;
+    this.recentDocuments = recentDocuments;
+  }
+}
+#else
+@:noCompletion
+typedef ElectronMacosAppCapabilities = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var name:AppNameBackend; var version:AppVersionBackend; var path:AppPathBackend; var allWindowsClosed:AppAllWindowsClosedBackend; var quitRequest:AppQuitRequestBackend; var ready:AppReadyBackend; var secondInstance:AppSecondInstanceBackend; var focus:AppFocusBackend; var quit:AppQuitBackend; var locale:AppLocaleBackend; var nameWrite:AppNameWriteBackend; var relaunch:AppRelaunchBackend; var singleInstance:AppSingleInstanceBackend; var activate:AppActivateBackend; var openFile:AppOpenFileBackend; var hide:AppHideBackend; var show:AppShowBackend; var badge:AppBadgeBackend; var dock:AppDockBackend; var loginItem:AppLoginItemBackend; var activationPolicy:AppActivationPolicyBackend; var hiddenQuery:AppVisibilityQueryBackend; var recentDocuments:AppRecentDocumentsBackend; };
+#end

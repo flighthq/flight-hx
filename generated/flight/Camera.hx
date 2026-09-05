@@ -10,6 +10,7 @@ import flight.types.Camera2D;
 import flight.types.Camera2DOptions;
 import flight.types.Camera3D;
 import flight.types.Camera3DOptions;
+import flight.types.Entity;
 import flight.types.FrustumLike;
 import flight.types.Matrix4Like;
 import flight.types.MatrixLike;
@@ -48,12 +49,12 @@ class Camera {
     return cast null;
   }
 
-  public static function createOrthographicProjection(opts:OrthographicProjectionOptions):OrthographicProjection {
+  public static function createOrthographicProjection(opts:OrthographicProjectionOptions):{ >OrthographicProjection, >Entity, } {
     return cast Facade_Camera_flight__Camera.createOrthographicProjection(opts);
     return cast null;
   }
 
-  public static function createPerspectiveProjection(opts:PerspectiveProjectionOptions):PerspectiveProjection {
+  public static function createPerspectiveProjection(opts:PerspectiveProjectionOptions):{ >PerspectiveProjection, >Entity, } {
     return cast Facade_Camera_flight__Camera.createPerspectiveProjection(opts);
     return cast null;
   }

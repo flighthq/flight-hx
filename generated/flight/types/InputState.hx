@@ -4,4 +4,33 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef InputState = { var axisValues:flight._internal._Map<Float, Float>; var gamepadButtonsDown:flight._internal._Set<Float>; var justPressedGamepadButtons:flight._internal._Set<Float>; var justPressedKeys:flight._internal._Set<Float>; var justReleasedGamepadButtons:flight._internal._Set<Float>; var justReleasedKeys:flight._internal._Set<Float>; var keysDown:flight._internal._Set<Float>; var pointerButtonsDown:flight._internal._Map<Float, Float>; };
+#if !flight_struct_typedef
+@:allow(flight._Input)
+@:keep
+@:structInit
+class InputState {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var axisValues:flight._internal._Map<Float, Float>;
+  public var gamepadButtonsDown:flight._internal._Set<Float>;
+  public var justPressedGamepadButtons:flight._internal._Set<Float>;
+  public var justPressedKeys:flight._internal._Set<Float>;
+  public var justReleasedGamepadButtons:flight._internal._Set<Float>;
+  public var justReleasedKeys:flight._internal._Set<Float>;
+  public var keysDown:flight._internal._Set<Float>;
+  public var pointerButtonsDown:flight._internal._Map<Float, Float>;
+
+  private function new(axisValues:flight._internal._Map<Float, Float>, gamepadButtonsDown:flight._internal._Set<Float>, justPressedGamepadButtons:flight._internal._Set<Float>, justPressedKeys:flight._internal._Set<Float>, justReleasedGamepadButtons:flight._internal._Set<Float>, justReleasedKeys:flight._internal._Set<Float>, keysDown:flight._internal._Set<Float>, pointerButtonsDown:flight._internal._Map<Float, Float>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.axisValues = axisValues;
+    this.gamepadButtonsDown = gamepadButtonsDown;
+    this.justPressedGamepadButtons = justPressedGamepadButtons;
+    this.justPressedKeys = justPressedKeys;
+    this.justReleasedGamepadButtons = justReleasedGamepadButtons;
+    this.justReleasedKeys = justReleasedKeys;
+    this.keysDown = keysDown;
+    this.pointerButtonsDown = pointerButtonsDown;
+  }
+}
+#else
+typedef InputState = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var axisValues:flight._internal._Map<Float, Float>; var gamepadButtonsDown:flight._internal._Set<Float>; var justPressedGamepadButtons:flight._internal._Set<Float>; var justPressedKeys:flight._internal._Set<Float>; var justReleasedGamepadButtons:flight._internal._Set<Float>; var justReleasedKeys:flight._internal._Set<Float>; var keysDown:flight._internal._Set<Float>; var pointerButtonsDown:flight._internal._Map<Float, Float>; };
+#end

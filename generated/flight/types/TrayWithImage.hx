@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TrayWithImage = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var __TrayImageFacetKey:Bool; };
+typedef TrayWithImage = TrayIcon;

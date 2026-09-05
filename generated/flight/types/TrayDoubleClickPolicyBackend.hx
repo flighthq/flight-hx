@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:keep
+@:structInit
+class TrayDoubleClickPolicyBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var setIgnore:TrayIcon->Bool->flight._internal._Promise<TrayDoubleClickPolicyUpdateResult>;
+
+  private function new(setIgnore:TrayIcon->Bool->flight._internal._Promise<TrayDoubleClickPolicyUpdateResult>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.setIgnore = setIgnore;
+  }
+}
+#else
 typedef TrayDoubleClickPolicyBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var setIgnore:TrayIcon->Bool->flight._internal._Promise<TrayDoubleClickPolicyUpdateResult>; };
+#end

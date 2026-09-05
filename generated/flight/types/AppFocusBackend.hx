@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class AppFocusBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var focus:Void->Void;
+
+  private function new(focus:Void->Void):Void {
+    this.__symbol__EntityRuntime = null;
+    this.focus = focus;
+  }
+}
+#else
 typedef AppFocusBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var focus:Void->Void; };
+#end

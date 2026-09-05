@@ -12,6 +12,7 @@ export const fireStatechartTrigger = api.fireStatechartTrigger;
 export const getStatechartInputIndex = api.getStatechartInputIndex;
 export const getStatechartRegionBlend = api.getStatechartRegionBlend;
 export const getStatechartRegionState = api.getStatechartRegionState;
+export const initializeStatechartInstance = api.initializeStatechartInstance;
 export const setStatechartBooleanInput = api.setStatechartBooleanInput;
 export const setStatechartNumberInput = api.setStatechartNumberInput;
 export const setStatechartRegionDuration = api.setStatechartRegionDuration;

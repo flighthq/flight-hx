@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const defaultCanvasTextLabelRenderer = api.defaultCanvasTextLabelRenderer;
 export const drawCanvasTextLabel = api.drawCanvasTextLabel;
+export const initializeCanvasTextLabelData = api.initializeCanvasTextLabelData;

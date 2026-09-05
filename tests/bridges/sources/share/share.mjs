@@ -12,6 +12,7 @@ export const detachShareSignals = api.detachShareSignals;
 export const disposeShareSignals = api.disposeShareSignals;
 export const enableShareSignals = api.enableShareSignals;
 export const hasShareContentFields = api.hasShareContentFields;
+export const initializeShareSignals = api.initializeShareSignals;
 export const shareContent = api.shareContent;
 export const shareContentWithResult = api.shareContentWithResult;
 export const shareFiles = api.shareFiles;

@@ -4,4 +4,27 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics2DAbiBodyBuffer = { var ids:flight._internal._UInt32Array; var flags:flight._internal._UInt32Array; var values:flight._internal._Float64Array; var count:Float; var requiredCount:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Physics2DAbi)
+@:keep
+@:structInit
+class Physics2DAbiBodyBuffer {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var ids:flight._internal._UInt32Array;
+  public var flags:flight._internal._UInt32Array;
+  public var values:flight._internal._Float64Array;
+  public var count:Float;
+  public var requiredCount:Float;
+
+  private function new(ids:flight._internal._UInt32Array, flags:flight._internal._UInt32Array, values:flight._internal._Float64Array, count:Float, requiredCount:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.ids = ids;
+    this.flags = flags;
+    this.values = values;
+    this.count = count;
+    this.requiredCount = requiredCount;
+  }
+}
+#else
+typedef Physics2DAbiBodyBuffer = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var ids:flight._internal._UInt32Array; var flags:flight._internal._UInt32Array; var values:flight._internal._Float64Array; var count:Float; var requiredCount:Float; };
+#end

@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const createBitmapDisplacementEffect = api.createBitmapDisplacementEffect;
 export const getBitmapDisplacementEffectPadding = api.getBitmapDisplacementEffectPadding;
+export const initializeBitmapDisplacementEffect = api.initializeBitmapDisplacementEffect;
 export const registerBitmapDisplacementEffectPaddingResolver = api.registerBitmapDisplacementEffectPaddingResolver;

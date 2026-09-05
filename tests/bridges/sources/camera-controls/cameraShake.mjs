@@ -8,5 +8,7 @@ __syncDependencies();
 export const addCameraShakeTrauma = api.addCameraShakeTrauma;
 export const createCameraShake = api.createCameraShake;
 export const createCameraShakeOffset = api.createCameraShakeOffset;
+export const initializeCameraShake = api.initializeCameraShake;
+export const initializeCameraShakeOffset = api.initializeCameraShakeOffset;
 export const resetCameraShake = api.resetCameraShake;
 export const updateCameraShake = api.updateCameraShake;

@@ -5,3 +5,4 @@ __syncDependencies();
 
 export * from './flightDocumentSceneTokens.mjs';
 export * from './substituteFlightDocumentSceneTokens.mjs';
+export { initializeFlightDocumentTokenResolverRegistry } from './flightDocumentSceneTokens.mjs';

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Group = { @:optional var __symbol__EntityRuntime:Null<NodeRuntime<Node3DTraits>>; var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; var alpha:Float; var visible:Bool; var position:Vector3; var rotation:Quaternion; var scale:Vector3; };
+typedef Group = Node3D;

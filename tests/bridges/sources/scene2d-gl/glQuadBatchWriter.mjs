@@ -10,6 +10,7 @@ export const ensureGlQuadBatchShader = api.ensureGlQuadBatchShader;
 export const flushGlQuadBatchWriter = api.flushGlQuadBatchWriter;
 export const packGlQuadBatchMaterialInstance = api.packGlQuadBatchMaterialInstance;
 export const prepareGlQuadBatchWrite = api.prepareGlQuadBatchWrite;
+export const QUAD_BATCH_INSTANCE_FLOATS = api.QUAD_BATCH_INSTANCE_FLOATS;
 export const QUAD_BATCH_VS = api.QUAD_BATCH_VS;
 export const recordGlQuadBatchColorScaleBias = api.recordGlQuadBatchColorScaleBias;
 export const setGlQuadBatchWorldAndTexture = api.setGlQuadBatchWorldAndTexture;

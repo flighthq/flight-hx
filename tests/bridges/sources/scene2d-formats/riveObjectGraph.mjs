@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createRiveObjectGraph = api.createRiveObjectGraph;
+export const initializeRiveObjectGraph = api.initializeRiveObjectGraph;

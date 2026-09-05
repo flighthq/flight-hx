@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const cloneHemisphereLight = api.cloneHemisphereLight;
 export const createHemisphereLight = api.createHemisphereLight;
+export const initializeHemisphereLight = api.initializeHemisphereLight;

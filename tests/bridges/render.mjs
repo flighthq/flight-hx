@@ -12,7 +12,6 @@ export const enableColorAdjustments = compiled.flight.Render.enableColorAdjustme
 export const enableRenderRegistryGuards = compiled.flight.Render.enableRenderRegistryGuards;
 export const enableRenderRegistrySignals = compiled.flight.Render.enableRenderRegistrySignals;
 export const enableSceneRenderGuards = compiled.flight.Render.enableSceneRenderGuards;
-export const explainRaster2DSurfaceProvider = compiled.flight.Render.explainRaster2DSurfaceProvider;
 export const explainRenderRegistryMisses = compiled.flight.Render.explainRenderRegistryMisses;
 export const packScene3DLightBlock = compiled.flight.Render.packScene3DLightBlock;
 export const prepareScene2DRender = compiled.flight.Render.prepareScene2DRender;

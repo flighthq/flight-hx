@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const explainFlightDocumentSceneTokenSubstitution = api.explainFlightDocumentSceneTokenSubstitution;
+export const initializeFlightDocumentRefusalExplanation = api.initializeFlightDocumentRefusalExplanation;
 export const substituteFlightDocumentSceneTokens = api.substituteFlightDocumentSceneTokens;

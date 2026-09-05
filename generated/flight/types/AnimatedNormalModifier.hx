@@ -4,4 +4,26 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AnimatedNormalModifier = { var kind:String; var slot:String; var map:Null<Texture>; var scroll:Vector2Like; @:optional var strength:Float; @:optional var secondaryMap:Texture; @:optional var secondaryScroll:Vector2Like; };
+#if !flight_struct_typedef
+@:allow(flight._Shading)
+@:keep
+@:structInit
+class AnimatedNormalModifier extends flight.types.Modifier<String, String> {
+  public var map:Null<Texture>;
+  public var scroll:Vector2Like;
+  public var strength:Null<Float>;
+  public var secondaryMap:Null<Texture>;
+  public var secondaryScroll:Null<Vector2Like>;
+
+  private function new(kind:String, slot:String, map:Null<Texture>, scroll:Vector2Like, ?strength:Null<Float>, ?secondaryMap:Null<Texture>, ?secondaryScroll:Null<Vector2Like>):Void {
+    super(kind, slot);
+    this.map = map;
+    this.scroll = scroll;
+    this.strength = strength;
+    this.secondaryMap = secondaryMap;
+    this.secondaryScroll = secondaryScroll;
+  }
+}
+#else
+typedef AnimatedNormalModifier = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var slot:String; var map:Null<Texture>; var scroll:Vector2Like; @:optional var strength:Float; @:optional var secondaryMap:Texture; @:optional var secondaryScroll:Vector2Like; };
+#end

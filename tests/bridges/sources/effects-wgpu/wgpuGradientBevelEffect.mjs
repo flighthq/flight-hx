@@ -19,6 +19,8 @@ function __syncDependencies() {
   compiled.flight._EffectsWgpu.getWgpuEffectPassState = __dependency4.getWgpuEffectPassState;
   compiled.flight._EffectsWgpu.applyWgpuEffectTintPass = __dependency5.applyWgpuEffectTintPass;
   compiled.flight._RenderWgpu.getWgpuRenderStateRuntime = __dependency0.getWgpuRenderStateRuntime;
+  compiled.flight._RenderWgpu.getWgpuSampler = __dependency0.getWgpuSampler;
+  compiled.flight._RenderWgpu.resolveWgpuTexture = __dependency0.resolveWgpuTexture;
 }
 __syncDependencies();
 

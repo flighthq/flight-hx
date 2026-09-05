@@ -3,5 +3,6 @@ package flight.types;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight._Types.EntityRuntimeKey;
 
 typedef InteractionDispatchLayerOptions = { @:optional var priority:Float; };

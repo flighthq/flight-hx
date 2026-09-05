@@ -7,5 +7,7 @@ __syncDependencies();
 
 export const createWebMediaSessionActionBackend = api.createWebMediaSessionActionBackend;
 export const createWebMediaSessionBackend = api.createWebMediaSessionBackend;
+export const initializeWebMediaSessionActionBackend = api.initializeWebMediaSessionActionBackend;
+export const initializeWebMediaSessionBackend = api.initializeWebMediaSessionBackend;
 export const webMediaSessionActionBackend = api.webMediaSessionActionBackend;
 export const webMediaSessionBackend = api.webMediaSessionBackend;

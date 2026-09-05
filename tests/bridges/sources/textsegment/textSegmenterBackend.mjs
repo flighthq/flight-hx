@@ -7,5 +7,6 @@ __syncDependencies();
 
 export const createWebTextSegmenterBackend = api.createWebTextSegmenterBackend;
 export const getTextSegmenterBackend = api.getTextSegmenterBackend;
+export const initializeWebTextSegmenterBackend = api.initializeWebTextSegmenterBackend;
 export const setTextSegmenterBackend = api.setTextSegmenterBackend;
 export const webTextSegmenterBackend = api.webTextSegmenterBackend;

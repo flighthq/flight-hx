@@ -3,12 +3,13 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Entity.stripEntityRuntime;
 import flight._Signals.clearSignal;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
-import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.EntityRuntime;
 import flight.types.HasScreenChange;
 import flight.types.HasScreenDetails;
@@ -50,22 +51,34 @@ class _Screen {
   }
 
   public static function createScreenInfo():ScreenInfo {
-    return cast (cast createEntity(({ final __callArgument5:Dynamic = (#if flight_struct_typedef { id: 0.0, x: 0.0, y: 0.0, width: 0.0, height: 0.0, workWidth: 0.0, workHeight: 0.0, scaleFactor: 1.0, isPrimary: false, rotation: -1.0, orientation: 'Landscape', refreshRate: -1.0, colorDepth: -1.0, pixelDepth: -1.0, physicalWidth: -1.0, physicalHeight: -1.0, isHdr: false, colorSpace: 'srgb', maxLuminance: -1.0, depthPerComponent: -1.0, dpi: -1.0, label: '', internal: false, touchSupport: 'unknown', monochrome: false } #else ({ final __structInitField0:Dynamic = 0.0; final __structInitField1:Dynamic = 0.0; final __structInitField2:Dynamic = 0.0; final __structInitField3:Dynamic = 0.0; final __structInitField4:Dynamic = 0.0; final __structInitField5:Dynamic = 0.0; final __structInitField6:Dynamic = 0.0; final __structInitField7:Dynamic = 1.0; final __structInitField8:Dynamic = false; final __structInitField9:Dynamic = -1.0; final __structInitField10:Dynamic = 'Landscape'; final __structInitField11:Dynamic = -1.0; final __structInitField12:Dynamic = -1.0; final __structInitField13:Dynamic = -1.0; final __structInitField14:Dynamic = -1.0; final __structInitField15:Dynamic = -1.0; final __structInitField16:Dynamic = false; final __structInitField17:Dynamic = 'srgb'; final __structInitField18:Dynamic = -1.0; final __structInitField19:Dynamic = -1.0; final __structInitField20:Dynamic = -1.0; final __structInitField21:Dynamic = ''; final __structInitField22:Dynamic = false; final __structInitField23:Dynamic = 'unknown'; final __structInitField24:Dynamic = false; ({ colorDepth: __structInitField12, colorSpace: __structInitField17, depthPerComponent: __structInitField19, dpi: __structInitField20, height: __structInitField4, id: __structInitField0, internal: __structInitField22, isHdr: __structInitField16, isPrimary: __structInitField8, label: __structInitField21, maxLuminance: __structInitField18, monochrome: __structInitField24, orientation: __structInitField10, physicalHeight: __structInitField15, physicalWidth: __structInitField14, pixelDepth: __structInitField13, refreshRate: __structInitField11, rotation: __structInitField9, scaleFactor: __structInitField7, touchSupport: __structInitField23, width: __structInitField3, workHeight: __structInitField6, workWidth: __structInitField5, x: __structInitField1, y: __structInitField2 } : ScreenInfo); }) #end); __callArgument5; })) : ScreenInfo);
+    var out:EntityConstruction<ScreenInfo> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ colorDepth: cast _Runtime.UNDEFINED, colorSpace: cast _Runtime.UNDEFINED, depthPerComponent: cast _Runtime.UNDEFINED, dpi: cast _Runtime.UNDEFINED, height: cast _Runtime.UNDEFINED, id: cast _Runtime.UNDEFINED, internal: cast _Runtime.UNDEFINED, isHdr: cast _Runtime.UNDEFINED, isPrimary: cast _Runtime.UNDEFINED, label: cast _Runtime.UNDEFINED, maxLuminance: cast _Runtime.UNDEFINED, monochrome: cast _Runtime.UNDEFINED, orientation: cast _Runtime.UNDEFINED, physicalHeight: cast _Runtime.UNDEFINED, physicalWidth: cast _Runtime.UNDEFINED, pixelDepth: cast _Runtime.UNDEFINED, refreshRate: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleFactor: cast _Runtime.UNDEFINED, touchSupport: cast _Runtime.UNDEFINED, width: cast _Runtime.UNDEFINED, workHeight: cast _Runtime.UNDEFINED, workWidth: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : ScreenInfo); }) #end));
+    initializeScreenInfo(({ final __callArgument5:Dynamic = out; __callArgument5; }));
+    return cast out;
     return cast null;
   }
 
   public static function createScreenMode():ScreenMode {
-    return cast (cast createEntity(({ final __callArgument7:Dynamic = (#if flight_struct_typedef { width: 0.0, height: 0.0, refreshRate: -1.0, colorDepth: -1.0, pixelFormat: '' } #else ({ final __structInitField0:Dynamic = 0.0; final __structInitField1:Dynamic = 0.0; final __structInitField2:Dynamic = -1.0; final __structInitField3:Dynamic = -1.0; final __structInitField4:Dynamic = ''; ({ colorDepth: __structInitField3, height: __structInitField1, pixelFormat: __structInitField4, refreshRate: __structInitField2, width: __structInitField0 } : ScreenMode); }) #end); __callArgument7; })) : ScreenMode);
+    var out:EntityConstruction<ScreenMode> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ colorDepth: cast _Runtime.UNDEFINED, height: cast _Runtime.UNDEFINED, pixelFormat: cast _Runtime.UNDEFINED, refreshRate: cast _Runtime.UNDEFINED, width: cast _Runtime.UNDEFINED } : ScreenMode); }) #end));
+    initializeScreenMode(({ final __callArgument7:Dynamic = out; __callArgument7; }));
+    return cast out;
     return cast null;
   }
 
   public static function createScreenPermissionChange():ScreenPermissionChange {
-    return cast (cast createEntity((cast ({ onChange: (cast (cast createSignal() : Signal<ScreenPermissionState->Void>) : Dynamic) } : ScreenPermissionChange) : Dynamic)) : ScreenPermissionChange);
+    var out:EntityConstruction<ScreenPermissionChange> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ onChange: cast _Runtime.UNDEFINED } : ScreenPermissionChange); }) #end));
+    initializeScreenPermissionChange(({ final __callArgument9:Dynamic = out; __callArgument9; }));
+    return cast out;
     return cast null;
   }
 
   public static function createScreenSignals():ScreenSignals {
-    return cast (cast createEntity((cast ({ onScreenAdded: (cast (cast createSignal() : Signal<ScreenInfo->Void>) : Dynamic), onScreenMetricsChanged: (cast (cast createSignal() : Signal<ScreenChangeEvent->Void>) : Dynamic), onScreenRemoved: (cast (cast createSignal() : Signal<ScreenInfo->Void>) : Dynamic) } : ScreenSignals) : Dynamic)) : ScreenSignals);
+    var out:EntityConstruction<ScreenSignals> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ onScreenAdded: cast _Runtime.UNDEFINED, onScreenMetricsChanged: cast _Runtime.UNDEFINED, onScreenRemoved: cast _Runtime.UNDEFINED } : ScreenSignals); }) #end));
+    initializeScreenSignals(({ final __callArgument11:Dynamic = out; __callArgument11; }));
+    return cast out;
     return cast null;
   }
 
@@ -96,19 +109,19 @@ class _Screen {
   }
 
   public static function disposeScreenPermissionChange(permissionChange:ScreenPermissionChange):Void {
-    detachScreenPermissionChange(({ final __callArgument9:Dynamic = permissionChange; __callArgument9; }));
+    detachScreenPermissionChange(({ final __callArgument13:Dynamic = permissionChange; __callArgument13; }));
     clearSignal((cast (cast permissionChange : ScreenPermissionChange).onChange : Dynamic));
   }
 
   public static function disposeScreenSignals(signals:ScreenSignals):Void {
-    detachScreenSignals(({ final __callArgument11:Dynamic = signals; __callArgument11; }));
+    detachScreenSignals(({ final __callArgument15:Dynamic = signals; __callArgument15; }));
     clearSignal((cast signals.onScreenAdded : Dynamic));
     clearSignal((cast signals.onScreenMetricsChanged : Dynamic));
     clearSignal((cast signals.onScreenRemoved : Dynamic));
   }
 
   public static function getPrimaryScreen(host:HasScreenQuery, out:ScreenInfo):ScreenInfo {
-    return cast (cast (cast (cast host : HasScreenQuery).screen : { var query:ScreenQueryBackend; }).query : ScreenQueryBackend).getPrimaryScreen(({ final __callArgument13:Dynamic = out; __callArgument13; }));
+    return cast (cast (cast (cast host : HasScreenQuery).screen : { var query:ScreenQueryBackend; }).query : ScreenQueryBackend).getPrimaryScreen(({ final __callArgument17:Dynamic = out; __callArgument17; }));
     return cast null;
   }
 
@@ -125,10 +138,10 @@ class _Screen {
     var screens:Array<ScreenInfo> = cast _Runtime.UNDEFINED;
     var found:Null<ScreenInfo> = cast _Runtime.UNDEFINED;
     screens = (cast cast ([] : Array<Dynamic>));
-    (cast getScreens(({ final __callArgument14:Dynamic = host; __callArgument14; }), ({ final __callArgument15:Dynamic = screens; __callArgument15; })) : Array<ScreenInfo>);
+    (cast getScreens(({ final __callArgument18:Dynamic = host; __callArgument18; }), ({ final __callArgument19:Dynamic = screens; __callArgument19; })) : Array<ScreenInfo>);
     found = _Runtime.find(screens, function(screen:ScreenInfo, __unused0:Float, __unused1:Array<ScreenInfo>):Bool return _Runtime.strictEquals(screen.id, id));
     if ((cast _Runtime.strictEquals(found, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
-    _Screen.copyScreenInfo__screen(({ final __callArgument18:Dynamic = found; __callArgument18; }), ({ final __callArgument19:Dynamic = out; __callArgument19; }));
+    _Screen.copyScreenInfo__screen(({ final __callArgument22:Dynamic = found; __callArgument22; }), ({ final __callArgument23:Dynamic = out; __callArgument23; }));
     return cast out;
     return cast null;
   }
@@ -138,8 +151,8 @@ class _Screen {
     var best:ScreenInfo = cast _Runtime.UNDEFINED;
     var bestOverlap:Float = cast _Runtime.UNDEFINED;
     screens = (cast cast ([] : Array<Dynamic>));
-    (cast getScreens(({ final __callArgument22:Dynamic = host; __callArgument22; }), ({ final __callArgument23:Dynamic = screens; __callArgument23; })) : Array<ScreenInfo>);
-    if ((cast _Runtime.strictEquals(_Runtime.field(screens, 'length'), 0.0) : Bool)) { return cast (cast _Screen.fillDefaultScreenInfo__screen(({ final __callArgument26:Dynamic = out; __callArgument26; })) : ScreenInfo); }
+    (cast getScreens(({ final __callArgument26:Dynamic = host; __callArgument26; }), ({ final __callArgument27:Dynamic = screens; __callArgument27; })) : Array<ScreenInfo>);
+    if ((cast _Runtime.strictEquals(_Runtime.field(screens, 'length'), 0.0) : Bool)) { return cast (cast _Screen.fillDefaultScreenInfo__screen(({ final __callArgument30:Dynamic = out; __callArgument30; })) : ScreenInfo); }
     best = flight._internal._StaticIndex.readArray(screens, 0.0);
     bestOverlap = -1.0;
     for (screen in _Runtime.iterable(screens)) {
@@ -151,8 +164,8 @@ class _Screen {
         (bestOverlap = cast (overlap : Dynamic));
       }
     }
-    if ((cast ((cast bestOverlap : Float) <= (cast 0.0 : Float)) : Bool)) { return cast (cast getScreenNearestPoint(({ final __callArgument30:Dynamic = host; __callArgument30; }), (cast _Screen.rectCenter__screen(({ final __callArgument31:Dynamic = rect; __callArgument31; })) : Vector2Like), ({ final __callArgument33:Dynamic = out; __callArgument33; })) : ScreenInfo); }
-    _Screen.copyScreenInfo__screen(({ final __callArgument38:Dynamic = best; __callArgument38; }), ({ final __callArgument39:Dynamic = out; __callArgument39; }));
+    if ((cast ((cast bestOverlap : Float) <= (cast 0.0 : Float)) : Bool)) { return cast (cast getScreenNearestPoint(({ final __callArgument34:Dynamic = host; __callArgument34; }), (cast _Screen.rectCenter__screen(({ final __callArgument35:Dynamic = rect; __callArgument35; })) : Vector2Like), ({ final __callArgument37:Dynamic = out; __callArgument37; })) : ScreenInfo); }
+    _Screen.copyScreenInfo__screen(({ final __callArgument42:Dynamic = best; __callArgument42; }), ({ final __callArgument43:Dynamic = out; __callArgument43; }));
     return cast out;
     return cast null;
   }
@@ -168,13 +181,13 @@ class _Screen {
   }
 
   public static function getScreenCursorPosition(host:HasScreenQuery, out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
-    return cast (cast (cast (cast host : HasScreenQuery).screen : { var query:ScreenQueryBackend; }).query : ScreenQueryBackend).getCursorPosition(({ final __callArgument42:Dynamic = out; __callArgument42; }));
+    return cast (cast (cast (cast host : HasScreenQuery).screen : { var query:ScreenQueryBackend; }).query : ScreenQueryBackend).getCursorPosition(({ final __callArgument46:Dynamic = out; __callArgument46; }));
     return cast null;
   }
 
   public static function getScreenCursorScreen(host:HasScreenQuery, out:ScreenInfo):ScreenInfo {
-    (cast getScreenCursorPosition(({ final __callArgument43:Dynamic = host; __callArgument43; }), ({ final __callArgument44:Dynamic = _Screen._scratchPoint__screen; __callArgument44; })) : { var x:Float; var y:Float; });
-    return cast (cast getScreenNearestPoint(({ final __callArgument47:Dynamic = host; __callArgument47; }), ({ final __callArgument48:Dynamic = _Screen._scratchPoint__screen; __callArgument48; }), ({ final __callArgument49:Dynamic = out; __callArgument49; })) : ScreenInfo);
+    (cast getScreenCursorPosition(({ final __callArgument47:Dynamic = host; __callArgument47; }), ({ final __callArgument48:Dynamic = _Screen._scratchPoint__screen; __callArgument48; })) : { var x:Float; var y:Float; });
+    return cast (cast getScreenNearestPoint(({ final __callArgument51:Dynamic = host; __callArgument51; }), ({ final __callArgument52:Dynamic = _Screen._scratchPoint__screen; __callArgument52; }), ({ final __callArgument53:Dynamic = out; __callArgument53; })) : ScreenInfo);
     return cast null;
   }
 
@@ -188,11 +201,11 @@ class _Screen {
     var best:ScreenInfo = cast _Runtime.UNDEFINED;
     var bestDistance:Float = cast _Runtime.UNDEFINED;
     screens = (cast cast ([] : Array<Dynamic>));
-    (cast getScreens(({ final __callArgument53:Dynamic = host; __callArgument53; }), ({ final __callArgument54:Dynamic = screens; __callArgument54; })) : Array<ScreenInfo>);
-    if ((cast _Runtime.strictEquals(_Runtime.field(screens, 'length'), 0.0) : Bool)) { return cast (cast _Screen.fillDefaultScreenInfo__screen(({ final __callArgument57:Dynamic = out; __callArgument57; })) : ScreenInfo); }
+    (cast getScreens(({ final __callArgument57:Dynamic = host; __callArgument57; }), ({ final __callArgument58:Dynamic = screens; __callArgument58; })) : Array<ScreenInfo>);
+    if ((cast _Runtime.strictEquals(_Runtime.field(screens, 'length'), 0.0) : Bool)) { return cast (cast _Screen.fillDefaultScreenInfo__screen(({ final __callArgument61:Dynamic = out; __callArgument61; })) : ScreenInfo); }
     for (screen in _Runtime.iterable(screens)) {
       if ((cast ((cast ((cast ((cast ((cast point.x : Float) >= (cast screen.x : Float)) : Bool) && (cast ((cast point.x : Float) < (cast (screen.x + screen.width) : Float)) : Bool)) : Bool) && (cast ((cast point.y : Float) >= (cast screen.y : Float)) : Bool)) : Bool) && (cast ((cast point.y : Float) < (cast (screen.y + screen.height) : Float)) : Bool)) : Bool)) {
-        _Screen.copyScreenInfo__screen(({ final __callArgument61:Dynamic = screen; __callArgument61; }), ({ final __callArgument62:Dynamic = out; __callArgument62; }));
+        _Screen.copyScreenInfo__screen(({ final __callArgument65:Dynamic = screen; __callArgument65; }), ({ final __callArgument66:Dynamic = out; __callArgument66; }));
         return cast out;
       }
     }
@@ -207,7 +220,7 @@ class _Screen {
         (bestDistance = cast (distance : Dynamic));
       }
     }
-    _Screen.copyScreenInfo__screen(({ final __callArgument67:Dynamic = best; __callArgument67; }), ({ final __callArgument68:Dynamic = out; __callArgument68; }));
+    _Screen.copyScreenInfo__screen(({ final __callArgument71:Dynamic = best; __callArgument71; }), ({ final __callArgument72:Dynamic = out; __callArgument72; }));
     return cast out;
     return cast null;
   }
@@ -216,18 +229,18 @@ class _Screen {
     var screens:Array<ScreenInfo> = cast _Runtime.UNDEFINED;
     var containing:Null<ScreenInfo> = cast _Runtime.UNDEFINED;
     screens = (cast cast ([] : Array<Dynamic>));
-    (cast getScreens(({ final __callArgument71:Dynamic = host; __callArgument71; }), ({ final __callArgument72:Dynamic = screens; __callArgument72; })) : Array<ScreenInfo>);
+    (cast getScreens(({ final __callArgument75:Dynamic = host; __callArgument75; }), ({ final __callArgument76:Dynamic = screens; __callArgument76; })) : Array<ScreenInfo>);
     containing = _Runtime.find(screens, function(screen:ScreenInfo, __unused2:Float, __unused3:Array<ScreenInfo>):Bool return ((cast ((cast ((cast ((cast rect.x : Float) >= (cast screen.x : Float)) : Bool) && (cast ((cast rect.y : Float) >= (cast screen.y : Float)) : Bool)) : Bool) && (cast ((cast (rect.x + rect.width) : Float) <= (cast (screen.x + screen.width) : Float)) : Bool)) : Bool) && (cast ((cast (rect.y + rect.height) : Float) <= (cast (screen.y + screen.height) : Float)) : Bool)));
     if ((cast !_Runtime.strictEquals(containing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Screen.copyScreenInfo__screen(({ final __callArgument75:Dynamic = containing; __callArgument75; }), ({ final __callArgument76:Dynamic = out; __callArgument76; }));
+      _Screen.copyScreenInfo__screen(({ final __callArgument79:Dynamic = containing; __callArgument79; }), ({ final __callArgument80:Dynamic = out; __callArgument80; }));
       return cast out;
     }
-    return cast (cast getScreenNearestPoint(({ final __callArgument79:Dynamic = host; __callArgument79; }), (cast _Screen.rectCenter__screen(({ final __callArgument80:Dynamic = rect; __callArgument80; })) : Vector2Like), ({ final __callArgument82:Dynamic = out; __callArgument82; })) : ScreenInfo);
+    return cast (cast getScreenNearestPoint(({ final __callArgument83:Dynamic = host; __callArgument83; }), (cast _Screen.rectCenter__screen(({ final __callArgument84:Dynamic = rect; __callArgument84; })) : Vector2Like), ({ final __callArgument86:Dynamic = out; __callArgument86; })) : ScreenInfo);
     return cast null;
   }
 
   public static function getScreens(host:HasScreenQuery, out:Array<ScreenInfo>):Array<ScreenInfo> {
-    return cast (cast (cast (cast host : HasScreenQuery).screen : { var query:ScreenQueryBackend; }).query : ScreenQueryBackend).getScreens(({ final __callArgument87:Dynamic = out; __callArgument87; }));
+    return cast (cast (cast (cast host : HasScreenQuery).screen : { var query:ScreenQueryBackend; }).query : ScreenQueryBackend).getScreens(({ final __callArgument91:Dynamic = out; __callArgument91; }));
     return cast null;
   }
 
@@ -238,6 +251,60 @@ class _Screen {
     ((cast out : { var x:Float; var y:Float; var width:Float; var height:Float; }).height = screen.workHeight);
     return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeScreenInfo(out:EntityConstruction<ScreenInfo>):Void {
+    _Runtime.setField(out, 'id', 0.0);
+    _Runtime.setField(out, 'x', 0.0);
+    _Runtime.setField(out, 'y', 0.0);
+    _Runtime.setField(out, 'width', 0.0);
+    _Runtime.setField(out, 'height', 0.0);
+    _Runtime.setField(out, 'workWidth', 0.0);
+    _Runtime.setField(out, 'workHeight', 0.0);
+    _Runtime.setField(out, 'scaleFactor', 1.0);
+    _Runtime.setField(out, 'isPrimary', false);
+    _Runtime.setField(out, 'rotation', -1.0);
+    _Runtime.setField(out, 'orientation', 'Landscape');
+    _Runtime.setField(out, 'refreshRate', -1.0);
+    _Runtime.setField(out, 'colorDepth', -1.0);
+    _Runtime.setField(out, 'pixelDepth', -1.0);
+    _Runtime.setField(out, 'physicalWidth', -1.0);
+    _Runtime.setField(out, 'physicalHeight', -1.0);
+    _Runtime.setField(out, 'isHdr', false);
+    _Runtime.setField(out, 'colorSpace', 'srgb');
+    _Runtime.setField(out, 'maxLuminance', -1.0);
+    _Runtime.setField(out, 'depthPerComponent', -1.0);
+    _Runtime.setField(out, 'dpi', -1.0);
+    _Runtime.setField(out, 'label', '');
+    _Runtime.setField(out, 'internal', false);
+    _Runtime.setField(out, 'touchSupport', 'unknown');
+    _Runtime.setField(out, 'monochrome', false);
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeScreenMode(out:EntityConstruction<ScreenMode>):Void {
+    _Runtime.setField(out, 'width', 0.0);
+    _Runtime.setField(out, 'height', 0.0);
+    _Runtime.setField(out, 'refreshRate', -1.0);
+    _Runtime.setField(out, 'colorDepth', -1.0);
+    _Runtime.setField(out, 'pixelFormat', '');
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeScreenPermissionChange(out:EntityConstruction<ScreenPermissionChange>):Void {
+    _Runtime.setField(out, 'onChange', (cast createSignal() : Signal<ScreenPermissionState->Void>));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeScreenSignals(out:EntityConstruction<ScreenSignals>):Void {
+    _Runtime.setField(out, 'onScreenAdded', (cast createSignal() : Signal<ScreenInfo->Void>));
+    _Runtime.setField(out, 'onScreenMetricsChanged', (cast createSignal() : Signal<ScreenChangeEvent->Void>));
+    _Runtime.setField(out, 'onScreenRemoved', (cast createSignal() : Signal<ScreenInfo->Void>));
   }
 
   public static function requestScreenDetails(host:HasScreenDetails):flight._internal._Promise<Bool> {
@@ -268,11 +335,11 @@ class _Screen {
   public static final _scratchPoint__screen:{ var x:Float; var y:Float; } = (cast { x: 0.0, y: 0.0 });
 
   public static function copyScreenInfo__screen(src:ScreenInfo, dst:ScreenInfo):Void {
-    flight._internal.DynamicObject.assign(dst, (cast stripEntityRuntime(({ final __callArgument88:Dynamic = src; __callArgument88; })) : { var height:Float; var width:Float; var x:Float; var y:Float; var rotation:Float; var colorSpace:ScreenColorSpace; var id:Float; var label:String; var orientation:ScreenOrientation; var scaleFactor:Float; var colorDepth:Float; var internal:Bool; var monochrome:Bool; var touchSupport:String; var isPrimary:Bool; var workWidth:Float; var workHeight:Float; var refreshRate:Float; var pixelDepth:Float; var physicalWidth:Float; var physicalHeight:Float; var isHdr:Bool; var maxLuminance:Float; var depthPerComponent:Float; var dpi:Float; }));
+    flight._internal.DynamicObject.assign(dst, (cast stripEntityRuntime(({ final __callArgument92:Dynamic = src; __callArgument92; })) : { var height:Float; var width:Float; var x:Float; var y:Float; var rotation:Float; var colorSpace:ScreenColorSpace; var id:Float; var label:String; var orientation:ScreenOrientation; var scaleFactor:Float; var colorDepth:Float; var internal:Bool; var monochrome:Bool; var touchSupport:String; var isPrimary:Bool; var workWidth:Float; var workHeight:Float; var refreshRate:Float; var pixelDepth:Float; var physicalWidth:Float; var physicalHeight:Float; var isHdr:Bool; var maxLuminance:Float; var depthPerComponent:Float; var dpi:Float; }));
   }
 
   public static function fillDefaultScreenInfo__screen(out:ScreenInfo):ScreenInfo {
-    _Screen.copyScreenInfo__screen((cast createScreenInfo() : ScreenInfo), ({ final __callArgument90:Dynamic = out; __callArgument90; }));
+    _Screen.copyScreenInfo__screen((cast createScreenInfo() : ScreenInfo), ({ final __callArgument94:Dynamic = out; __callArgument94; }));
     return cast out;
     return cast null;
   }

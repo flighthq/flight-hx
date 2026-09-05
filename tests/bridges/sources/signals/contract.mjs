@@ -10,3 +10,4 @@ export * from './scope.mjs';
 export * from './signal.mjs';
 export * from './slot.mjs';
 export * from './throttle.mjs';
+export { initializeSignalScope } from './scope.mjs';

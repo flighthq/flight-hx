@@ -4,4 +4,39 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CollisionTriangleMesh3D = { var kind:String; var points:Array<Float>; var indices:Array<Float>; var version:Float; var x:Float; var y:Float; var z:Float; var rotationX:Float; var rotationY:Float; var rotationZ:Float; var rotationW:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Collision)
+@:keep
+@:structInit
+class CollisionTriangleMesh3D {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var kind:String;
+  public var points:Array<Float>;
+  public var indices:Array<Float>;
+  public var version:Float;
+  public var x:Float;
+  public var y:Float;
+  public var z:Float;
+  public var rotationX:Float;
+  public var rotationY:Float;
+  public var rotationZ:Float;
+  public var rotationW:Float;
+
+  private function new(kind:String, points:Array<Float>, indices:Array<Float>, version:Float, x:Float, y:Float, z:Float, rotationX:Float, rotationY:Float, rotationZ:Float, rotationW:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.kind = kind;
+    this.points = points;
+    this.indices = indices;
+    this.version = version;
+    this.x = x;
+    this.y = y;
+    this.z = z;
+    this.rotationX = rotationX;
+    this.rotationY = rotationY;
+    this.rotationZ = rotationZ;
+    this.rotationW = rotationW;
+  }
+}
+#else
+typedef CollisionTriangleMesh3D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var points:Array<Float>; var indices:Array<Float>; var version:Float; var x:Float; var y:Float; var z:Float; var rotationX:Float; var rotationY:Float; var rotationZ:Float; var rotationW:Float; };
+#end

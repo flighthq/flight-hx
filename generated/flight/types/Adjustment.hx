@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Adjustment = { var kind:AdjustmentKind; };
+#if !flight_struct_typedef
+@:allow(flight.types.ColorLutAdjustment)
+@:allow(flight.types.ColorMatrixAdjustment)
+@:keep
+@:structInit
+class Adjustment<TKind = Dynamic> {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var kind:TKind;
+
+  private function new(kind:TKind):Void {
+    this.__symbol__EntityRuntime = null;
+    this.kind = kind;
+  }
+}
+#else
+typedef Adjustment = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:AdjustmentKind; };
+#end

@@ -6,3 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createElectronNotificationCapabilities = api.createElectronNotificationCapabilities;
+export const initializeElectronMacosNotificationCapabilities = api.initializeElectronMacosNotificationCapabilities;
+export const initializeElectronNotificationCapabilities = api.initializeElectronNotificationCapabilities;

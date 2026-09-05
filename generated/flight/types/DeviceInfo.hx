@@ -4,4 +4,67 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef DeviceInfo = { var arch:String; var availableMemory:Float; var boardName:String; var colorGamut:String; var cpuCores:Float; var fontScale:Float; var formFactor:DeviceFormFactor; var gpuRenderer:String; var gpuVendor:String; var isHdr:Bool; var isJailbroken:Bool; var isLowEndDevice:Bool; var isRooted:Bool; var isVirtual:Bool; var manufacturer:String; var marketingName:String; var model:String; var osBuild:String; var osName:String; var osVersion:String; var platformString:String; var productName:String; var supportedAbis:Array<String>; var totalMemory:Float; var webViewVersion:String; };
+#if !flight_struct_typedef
+@:allow(flight._Device)
+@:keep
+@:structInit
+class DeviceInfo {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var arch:String;
+  public var availableMemory:Float;
+  public var boardName:String;
+  public var colorGamut:String;
+  public var cpuCores:Float;
+  public var fontScale:Float;
+  public var formFactor:DeviceFormFactor;
+  public var gpuRenderer:String;
+  public var gpuVendor:String;
+  public var isHdr:Bool;
+  public var isJailbroken:Bool;
+  public var isLowEndDevice:Bool;
+  public var isRooted:Bool;
+  public var isVirtual:Bool;
+  public var manufacturer:String;
+  public var marketingName:String;
+  public var model:String;
+  public var osBuild:String;
+  public var osName:String;
+  public var osVersion:String;
+  public var platformString:String;
+  public var productName:String;
+  public var supportedAbis:Array<String>;
+  public var totalMemory:Float;
+  public var webViewVersion:String;
+
+  private function new(arch:String, availableMemory:Float, boardName:String, colorGamut:String, cpuCores:Float, fontScale:Float, formFactor:DeviceFormFactor, gpuRenderer:String, gpuVendor:String, isHdr:Bool, isJailbroken:Bool, isLowEndDevice:Bool, isRooted:Bool, isVirtual:Bool, manufacturer:String, marketingName:String, model:String, osBuild:String, osName:String, osVersion:String, platformString:String, productName:String, supportedAbis:Array<String>, totalMemory:Float, webViewVersion:String):Void {
+    this.__symbol__EntityRuntime = null;
+    this.arch = arch;
+    this.availableMemory = availableMemory;
+    this.boardName = boardName;
+    this.colorGamut = colorGamut;
+    this.cpuCores = cpuCores;
+    this.fontScale = fontScale;
+    this.formFactor = formFactor;
+    this.gpuRenderer = gpuRenderer;
+    this.gpuVendor = gpuVendor;
+    this.isHdr = isHdr;
+    this.isJailbroken = isJailbroken;
+    this.isLowEndDevice = isLowEndDevice;
+    this.isRooted = isRooted;
+    this.isVirtual = isVirtual;
+    this.manufacturer = manufacturer;
+    this.marketingName = marketingName;
+    this.model = model;
+    this.osBuild = osBuild;
+    this.osName = osName;
+    this.osVersion = osVersion;
+    this.platformString = platformString;
+    this.productName = productName;
+    this.supportedAbis = supportedAbis;
+    this.totalMemory = totalMemory;
+    this.webViewVersion = webViewVersion;
+  }
+}
+#else
+typedef DeviceInfo = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var arch:String; var availableMemory:Float; var boardName:String; var colorGamut:String; var cpuCores:Float; var fontScale:Float; var formFactor:DeviceFormFactor; var gpuRenderer:String; var gpuVendor:String; var isHdr:Bool; var isJailbroken:Bool; var isLowEndDevice:Bool; var isRooted:Bool; var isVirtual:Bool; var manufacturer:String; var marketingName:String; var model:String; var osBuild:String; var osName:String; var osVersion:String; var platformString:String; var productName:String; var supportedAbis:Array<String>; var totalMemory:Float; var webViewVersion:String; };
+#end

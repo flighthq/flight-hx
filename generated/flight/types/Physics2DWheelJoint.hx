@@ -4,4 +4,34 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics2DWheelJoint = { var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var breakForce:Float; var breakTorque:Float; var localAxisAX:Float; var localAxisAY:Float; var restTranslation:Float; var frequencyHz:Float; var dampingRatio:Float; var enableMotor:Bool; var motorSpeed:Float; var maxMotorTorque:Float; var motorImpulse:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Physics2D)
+@:keep
+@:structInit
+class Physics2DWheelJoint extends flight.types.Physics2DJoint {
+  public var localAxisAX:Float;
+  public var localAxisAY:Float;
+  public var restTranslation:Float;
+  public var frequencyHz:Float;
+  public var dampingRatio:Float;
+  public var enableMotor:Bool;
+  public var motorSpeed:Float;
+  public var maxMotorTorque:Float;
+  public var motorImpulse:Float;
+
+  private function new(kind:Physics2DJointKind, bodyA:Float, bodyB:Float, localAnchorAX:Float, localAnchorAY:Float, localAnchorBX:Float, localAnchorBY:Float, collideConnected:Bool, impulse0:Float, impulse1:Float, impulse2:Float, rAX:Float, rAY:Float, rBX:Float, rBY:Float, breakForce:Float, breakTorque:Float, localAxisAX:Float, localAxisAY:Float, restTranslation:Float, frequencyHz:Float, dampingRatio:Float, enableMotor:Bool, motorSpeed:Float, maxMotorTorque:Float, motorImpulse:Float):Void {
+    super(kind, bodyA, bodyB, localAnchorAX, localAnchorAY, localAnchorBX, localAnchorBY, collideConnected, impulse0, impulse1, impulse2, rAX, rAY, rBX, rBY, breakForce, breakTorque);
+    this.localAxisAX = localAxisAX;
+    this.localAxisAY = localAxisAY;
+    this.restTranslation = restTranslation;
+    this.frequencyHz = frequencyHz;
+    this.dampingRatio = dampingRatio;
+    this.enableMotor = enableMotor;
+    this.motorSpeed = motorSpeed;
+    this.maxMotorTorque = maxMotorTorque;
+    this.motorImpulse = motorImpulse;
+  }
+}
+#else
+typedef Physics2DWheelJoint = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var breakForce:Float; var breakTorque:Float; var localAxisAX:Float; var localAxisAY:Float; var restTranslation:Float; var frequencyHz:Float; var dampingRatio:Float; var enableMotor:Bool; var motorSpeed:Float; var maxMotorTorque:Float; var motorImpulse:Float; };
+#end

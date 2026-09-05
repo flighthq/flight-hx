@@ -15,6 +15,7 @@ export const equalsSkeleton2D = api.equalsSkeleton2D;
 export const getSkeleton2DBoneIndexByName = api.getSkeleton2DBoneIndexByName;
 export const getSkeleton2DBoneWorldMatrix = api.getSkeleton2DBoneWorldMatrix;
 export const getSkeleton2DSkin = api.getSkeleton2DSkin;
+export const initializeSkeleton2D = api.initializeSkeleton2D;
 export const setSkeleton2DBindPose = api.setSkeleton2DBindPose;
 export const setSkeleton2DSkin = api.setSkeleton2DSkin;
 export const validateSkeleton2D = api.validateSkeleton2D;

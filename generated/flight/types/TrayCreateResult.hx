@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TrayCreateResult<Tray> = flight._internal._Union2<{ var outcome:String; var tray:Tray; }, flight._internal._Exclude<TrayCreateProviderResult, { var outcome:String; }>>;
+typedef TrayCreateResult<Tray> = flight._internal._Union2<{ >Entity, var outcome:String; var tray:Tray; }, flight._internal._Intersection2<Entity, flight._internal._Exclude<TrayCreateProviderResult, { var outcome:String; }>>>;

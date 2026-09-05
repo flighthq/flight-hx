@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createCollisionTimeOfImpact2D = api.createCollisionTimeOfImpact2D;
+export const initializeCollisionTimeOfImpact2D = api.initializeCollisionTimeOfImpact2D;
 export const sweepCollisionShape2D = api.sweepCollisionShape2D;

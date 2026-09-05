@@ -5,4 +5,4 @@ import Math as HxMath;
 import flight._internal._Runtime;
 
 @:noCompletion
-typedef Scene3DRenderProxy = { @:optional var alpha:Float; @:optional var colorScaleBias:Null<ColorScaleBias>; @:optional var colorMatrix:Null<Array<Float>>; @:optional var jointMatrices:Null<flight._internal._Float32Array>; @:optional var normalMatrices:Null<flight._internal._Float32Array>; var material:Material; var normalMatrix:Matrix3; var subset:MeshSubset; var worldMatrix:Matrix4; };
+typedef Scene3DRenderProxy = { @:optional var alpha:Float; @:optional var colorScaleBias:Null<ColorScaleBias>; @:optional var colorMatrix:Null<Array<Float>>; @:optional var instanceCount:Float; @:optional var instanceMatrices:Null<flight._internal._Float32Array>; @:optional var jointMatrices:Null<flight._internal._Float32Array>; @:optional var normalMatrices:Null<flight._internal._Float32Array>; var material:Material; var normalMatrix:Matrix3; var subset:MeshSubset; var worldMatrix:Matrix4; };

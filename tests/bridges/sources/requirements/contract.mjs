@@ -5,3 +5,4 @@ __syncDependencies();
 
 export * from './requirementCollector.mjs';
 export * from './requirementSet.mjs';
+export { initializeRequirementSet } from './requirementSet.mjs';

@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:allow(flight._HostTauri)
+@:keep
+@:structInit
+class TrayImageBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var set:TrayIcon->TrayIconSource->flight._internal._Promise<TrayImageUpdateResult>;
+
+  private function new(set:TrayIcon->TrayIconSource->flight._internal._Promise<TrayImageUpdateResult>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.set = set;
+  }
+}
+#else
 typedef TrayImageBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var set:TrayIcon->TrayIconSource->flight._internal._Promise<TrayImageUpdateResult>; };
+#end

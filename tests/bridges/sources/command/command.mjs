@@ -11,3 +11,7 @@ export const createRemoveNodeChildCommand = api.createRemoveNodeChildCommand;
 export const createReorderNodeChildCommand = api.createReorderNodeChildCommand;
 export const createSetNodePropertyCommand = api.createSetNodePropertyCommand;
 export const createSetNodePropertyCommandBatch = api.createSetNodePropertyCommandBatch;
+export const initializeAddNodeChildCommand = api.initializeAddNodeChildCommand;
+export const initializeCompositeCommand = api.initializeCompositeCommand;
+export const initializeRemoveNodeChildCommand = api.initializeRemoveNodeChildCommand;
+export const initializeReorderNodeChildCommand = api.initializeReorderNodeChildCommand;

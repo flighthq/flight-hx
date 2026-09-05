@@ -4,4 +4,28 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Modifier = { var kind:ModifierKind; var slot:ModifierSlot; };
+#if !flight_struct_typedef
+@:allow(flight.types.AnimatedNormalModifier)
+@:allow(flight.types.DissolveModifier)
+@:allow(flight.types.EmissiveModifier)
+@:allow(flight.types.EnvReflectModifier)
+@:allow(flight.types.FogModifier)
+@:allow(flight.types.RimModifier)
+@:allow(flight.types.ToonModifier)
+@:allow(flight.types.VertexDisplaceModifier)
+@:keep
+@:structInit
+class Modifier<TKind = Dynamic, TSlot = Dynamic> {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var kind:TKind;
+  public var slot:TSlot;
+
+  private function new(kind:TKind, slot:TSlot):Void {
+    this.__symbol__EntityRuntime = null;
+    this.kind = kind;
+    this.slot = slot;
+  }
+}
+#else
+typedef Modifier = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:ModifierKind; var slot:ModifierSlot; };
+#end

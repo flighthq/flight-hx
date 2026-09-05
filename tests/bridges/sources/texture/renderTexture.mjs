@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createRenderTexture = api.createRenderTexture;
+export const initializeRenderTextureTarget = api.initializeRenderTextureTarget;

@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createElectronClipboardBackend = api.createElectronClipboardBackend;
+export const initializeElectronClipboardBackend = api.initializeElectronClipboardBackend;

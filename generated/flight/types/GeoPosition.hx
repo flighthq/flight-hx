@@ -4,4 +4,36 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GeoPosition = { var latitude:Float; var longitude:Float; var accuracy:Float; var altitude:Float; var altitudeAccuracy:Float; var floorLevel:Float; var heading:Float; var speed:Float; var timestamp:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Geolocation)
+@:allow(flight._HostCapacitor)
+@:keep
+@:structInit
+class GeoPosition {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var latitude:Float;
+  public var longitude:Float;
+  public var accuracy:Float;
+  public var altitude:Float;
+  public var altitudeAccuracy:Float;
+  public var floorLevel:Float;
+  public var heading:Float;
+  public var speed:Float;
+  public var timestamp:Float;
+
+  private function new(latitude:Float, longitude:Float, accuracy:Float, altitude:Float, altitudeAccuracy:Float, floorLevel:Float, heading:Float, speed:Float, timestamp:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.latitude = latitude;
+    this.longitude = longitude;
+    this.accuracy = accuracy;
+    this.altitude = altitude;
+    this.altitudeAccuracy = altitudeAccuracy;
+    this.floorLevel = floorLevel;
+    this.heading = heading;
+    this.speed = speed;
+    this.timestamp = timestamp;
+  }
+}
+#else
+typedef GeoPosition = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var latitude:Float; var longitude:Float; var accuracy:Float; var altitude:Float; var altitudeAccuracy:Float; var floorLevel:Float; var heading:Float; var speed:Float; var timestamp:Float; };
+#end

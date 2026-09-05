@@ -4,3 +4,7 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './screen.mjs';
+export { initializeScreenInfo } from './screen.mjs';
+export { initializeScreenMode } from './screen.mjs';
+export { initializeScreenPermissionChange } from './screen.mjs';
+export { initializeScreenSignals } from './screen.mjs';

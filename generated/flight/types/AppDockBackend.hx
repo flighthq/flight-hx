@@ -4,4 +4,29 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:keep
+@:structInit
+class AppDockBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var bounceDock:Void->Float;
+  public var cancelAttention:Float->Void;
+  public var cancelDockBounce:Float->Void;
+  public var requestAttention:Bool->Float;
+  public var setDockBadge:String->Void;
+  public var setDockMenu:Array<MenuItemTemplate>->Void;
+
+  private function new(bounceDock:Void->Float, cancelAttention:Float->Void, cancelDockBounce:Float->Void, requestAttention:Bool->Float, setDockBadge:String->Void, setDockMenu:Array<MenuItemTemplate>->Void):Void {
+    this.__symbol__EntityRuntime = null;
+    this.bounceDock = bounceDock;
+    this.cancelAttention = cancelAttention;
+    this.cancelDockBounce = cancelDockBounce;
+    this.requestAttention = requestAttention;
+    this.setDockBadge = setDockBadge;
+    this.setDockMenu = setDockMenu;
+  }
+}
+#else
 typedef AppDockBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var bounceDock:Void->Float; var cancelAttention:Float->Void; var cancelDockBounce:Float->Void; var requestAttention:Bool->Float; var setDockBadge:String->Void; var setDockMenu:Array<MenuItemTemplate>->Void; };
+#end

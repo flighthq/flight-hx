@@ -7,10 +7,11 @@ import flight._Command as Facade_Command_flight__Command;
 import flight.types.AddNodeChildCommand;
 import flight.types.Command;
 import flight.types.CommandBinding;
+import flight.types.CommandBindingTable;
 import flight.types.CommandDispatchExplanation;
 import flight.types.CommandHistory;
 import flight.types.CompositeCommand;
-import flight.types.KeyedTable;
+import flight.types.EntityConstruction;
 import flight.types.Kind;
 import flight.types.NodeAny;
 import flight.types.RemoveNodeChildCommand;
@@ -47,7 +48,7 @@ class Command {
     return cast null;
   }
 
-  public static function createCommandBindingTable():KeyedTable<CommandBinding> {
+  public static function createCommandBindingTable():CommandBindingTable {
     return cast Facade_Command_flight__Command.createCommandBindingTable();
     return cast null;
   }
@@ -135,6 +136,30 @@ class Command {
   public static function hasCommandBinding(history:CommandHistory, kind:Kind):Bool {
     return cast Facade_Command_flight__Command.hasCommandBinding(history, kind);
     return cast null;
+  }
+
+  public static function initializeAddNodeChildCommand(out:EntityConstruction<AddNodeChildCommand>, label:String, parent:NodeAny, child:NodeAny, index:Float):Void {
+    Facade_Command_flight__Command.initializeAddNodeChildCommand(out, label, parent, child, index);
+  }
+
+  public static function initializeCommandHistory(out:EntityConstruction<CommandHistory>, ?maxSize:Float):Void {
+    Facade_Command_flight__Command.initializeCommandHistory(out, maxSize);
+  }
+
+  public static function initializeCompositeCommand(out:EntityConstruction<CompositeCommand>, label:String, children:Array<flight.types.Command>):Void {
+    Facade_Command_flight__Command.initializeCompositeCommand(out, label, children);
+  }
+
+  public static function initializeRemoveNodeChildCommand(out:EntityConstruction<RemoveNodeChildCommand>, label:String, parent:NodeAny, child:NodeAny):Void {
+    Facade_Command_flight__Command.initializeRemoveNodeChildCommand(out, label, parent, child);
+  }
+
+  public static function initializeReorderNodeChildCommand(out:EntityConstruction<ReorderNodeChildCommand>, label:String, parent:NodeAny, child:NodeAny, toIndex:Float):Void {
+    Facade_Command_flight__Command.initializeReorderNodeChildCommand(out, label, parent, child, toIndex);
+  }
+
+  public static function initializeSetNodePropertyCommand(out:EntityConstruction<SetNodePropertyCommand>, entries:flight._internal._IndexedAccess<SetNodePropertyCommand, String>, kind:Kind, label:String, mergeWindow:Float, time:Float):Void {
+    Facade_Command_flight__Command.initializeSetNodePropertyCommand(out, entries, kind, label, mergeWindow, time);
   }
 
   public static function isCommandTransactionOpen(history:CommandHistory):Bool {

@@ -5,4 +5,10 @@ const api = compiled.flight._HostElectron;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const initializeShellBeepBackend = api.initializeShellBeepBackend;
+export const initializeShellExternalBackend = api.initializeShellExternalBackend;
+export const initializeShellPathOpenBackend = api.initializeShellPathOpenBackend;
+export const initializeShellPathRevealBackend = api.initializeShellPathRevealBackend;
+export const initializeShellShortcutLinkBackend = api.initializeShellShortcutLinkBackend;
+export const initializeShellTrashBackend = api.initializeShellTrashBackend;
 export const makeElectronShellCapabilities = api.makeElectronShellCapabilities;

@@ -4,4 +4,37 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Timeline = { var source:Null<TimelineSource>; var target:Null<Node2D>; var currentFrame:Float; var cueRegistry:Null<TimelineCueRegistry>; var frameScripts:Null<flight._internal._Map<Float, FrameScript>>; var isPlaying:Bool; var timeElapsed:Float; var lastFrameUpdate:Float; var playMode:TimelinePlayMode; var signals:Null<TimelineSignals>; };
+#if !flight_struct_typedef
+@:allow(flight._Timeline)
+@:keep
+@:structInit
+class Timeline {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var source:Null<TimelineSource>;
+  public var target:Null<Node2D>;
+  public var currentFrame:Float;
+  public var cueRegistry:Null<TimelineCueRegistry>;
+  public var frameScripts:Null<flight._internal._Map<Float, FrameScript>>;
+  public var isPlaying:Bool;
+  public var timeElapsed:Float;
+  public var lastFrameUpdate:Float;
+  public var playMode:TimelinePlayMode;
+  public var signals:Null<TimelineSignals>;
+
+  private function new(source:Null<TimelineSource>, target:Null<Node2D>, currentFrame:Float, cueRegistry:Null<TimelineCueRegistry>, frameScripts:Null<flight._internal._Map<Float, FrameScript>>, isPlaying:Bool, timeElapsed:Float, lastFrameUpdate:Float, playMode:TimelinePlayMode, signals:Null<TimelineSignals>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.source = source;
+    this.target = target;
+    this.currentFrame = currentFrame;
+    this.cueRegistry = cueRegistry;
+    this.frameScripts = frameScripts;
+    this.isPlaying = isPlaying;
+    this.timeElapsed = timeElapsed;
+    this.lastFrameUpdate = lastFrameUpdate;
+    this.playMode = playMode;
+    this.signals = signals;
+  }
+}
+#else
+typedef Timeline = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var source:Null<TimelineSource>; var target:Null<Node2D>; var currentFrame:Float; var cueRegistry:Null<TimelineCueRegistry>; var frameScripts:Null<flight._internal._Map<Float, FrameScript>>; var isPlaying:Bool; var timeElapsed:Float; var lastFrameUpdate:Float; var playMode:TimelinePlayMode; var signals:Null<TimelineSignals>; };
+#end

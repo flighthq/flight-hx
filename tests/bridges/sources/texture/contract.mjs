@@ -10,5 +10,6 @@ export * from './texture.mjs';
 export * from './videoTexture.mjs';
 export * from './voxelGrid.mjs';
 export { getTextureSampleColorSpace } from './textureColorSpace.mjs';
+export { initializeSampler } from './sampler.mjs';
 export { shouldDecodeTextureOnSample } from './textureColorSpace.mjs';
 export { shouldPremultiplyTextureOnUpload } from './textureColorSpace.mjs';

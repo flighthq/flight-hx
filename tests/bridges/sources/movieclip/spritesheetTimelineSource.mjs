@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const createSpritesheetTimelineSource = api.createSpritesheetTimelineSource;
 export const explainSpritesheetTimelineSource = api.explainSpritesheetTimelineSource;
+export const initializeSpritesheetTimelineSource = api.initializeSpritesheetTimelineSource;
 export const setSpritesheetTimelineSourceGuard = api.setSpritesheetTimelineSourceGuard;

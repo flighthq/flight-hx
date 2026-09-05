@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createGlyphSourceFromGlyphAtlas = api.createGlyphSourceFromGlyphAtlas;
+export const initializeGlyphSourceFromGlyphAtlas = api.initializeGlyphSourceFromGlyphAtlas;

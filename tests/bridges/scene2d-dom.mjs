@@ -7,6 +7,7 @@ export const defaultDomMorphShapeRenderer = compiled.flight.Scene2DDom.defaultDo
 export const defaultDomNativeTextRenderer = compiled.flight.Scene2DDom.defaultDomNativeTextRenderer;
 export const defaultDomRichTextRenderer = compiled.flight.Scene2DDom.defaultDomRichTextRenderer;
 export const defaultDomScale9ShapeRenderer = compiled.flight.Scene2DDom.defaultDomScale9ShapeRenderer;
+export const defaultDomScale9SpriteRenderer = compiled.flight.Scene2DDom.defaultDomScale9SpriteRenderer;
 export const defaultDomShapeRenderer = compiled.flight.Scene2DDom.defaultDomShapeRenderer;
 export const defaultDomSpriteRenderer = compiled.flight.Scene2DDom.defaultDomSpriteRenderer;
 export const defaultDomTextLabelRenderer = compiled.flight.Scene2DDom.defaultDomTextLabelRenderer;

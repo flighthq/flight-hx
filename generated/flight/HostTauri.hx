@@ -8,12 +8,22 @@ import flight.types.ApplicationWindow;
 import flight.types.ClipboardTextBackend;
 import flight.types.DesktopOsProfile;
 import flight.types.DirectoryOpenDialogBackend;
+import flight.types.DirectoryOpenDialogResult;
 import flight.types.Entity;
+import flight.types.EntityConstruction;
+import flight.types.EntityRuntime;
 import flight.types.FileOpenDialogBackend;
+import flight.types.FileOpenDialogResult;
 import flight.types.FileSaveDialogBackend;
+import flight.types.FileSaveDialogResult;
 import flight.types.HostShellCapabilities;
 import flight.types.MessageDialogBackend;
+import flight.types.MessageDialogOptions;
+import flight.types.MessageDialogResult;
+import flight.types.OpenDirectoryDialogOptions;
+import flight.types.OpenFileDialogOptions;
 import flight.types.PlatformBackend;
+import flight.types.SaveFileDialogOptions;
 import flight.types.ShellExternalBackend;
 import flight.types.ShellPathOpenBackend;
 import flight.types.ShellPathRevealBackend;
@@ -25,6 +35,14 @@ import flight.types.TauriHost;
 import flight.types.TauriMenuCapabilities;
 import flight.types.TauriNotificationCapabilities;
 import flight.types.TauriTrayCapabilitiesFor;
+import flight.types.TrayImageBackend;
+import flight.types.TrayInteractionEventsBackend;
+import flight.types.TrayLifecycleBackend;
+import flight.types.TrayMenuBackend;
+import flight.types.TrayMenuSelectionEventsBackend;
+import flight.types.TrayTemplateImageBackend;
+import flight.types.TrayTitleBackend;
+import flight.types.TrayTooltipBackend;
 import flight.types.WindowAttachmentOwnership;
 import flight.types.WindowBackend;
 import flight.types.WindowOptions;
@@ -40,17 +58,17 @@ class HostTauri {
     return cast null;
   }
 
-  public static function createTauriDirectoryOpenDialogBackend(tauri:TauriApi):{ >DirectoryOpenDialogBackend, >Entity, } {
+  public static function createTauriDirectoryOpenDialogBackend(tauri:TauriApi):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>; } {
     return cast Facade_HostTauri_flight__HostTauri.createTauriDirectoryOpenDialogBackend(tauri);
     return cast null;
   }
 
-  public static function createTauriFileOpenDialogBackend(tauri:TauriApi):{ >FileOpenDialogBackend, >Entity, } {
+  public static function createTauriFileOpenDialogBackend(tauri:TauriApi):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; } {
     return cast Facade_HostTauri_flight__HostTauri.createTauriFileOpenDialogBackend(tauri);
     return cast null;
   }
 
-  public static function createTauriFileSaveDialogBackend(tauri:TauriApi):{ >FileSaveDialogBackend, >Entity, } {
+  public static function createTauriFileSaveDialogBackend(tauri:TauriApi):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; } {
     return cast Facade_HostTauri_flight__HostTauri.createTauriFileSaveDialogBackend(tauri);
     return cast null;
   }
@@ -60,7 +78,7 @@ class HostTauri {
     return cast null;
   }
 
-  public static function createTauriMessageDialogBackend(tauri:TauriApi):MessageDialogBackend {
+  public static function createTauriMessageDialogBackend(tauri:TauriApi):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var confirm:MessageDialogOptions->flight._internal._Promise<Bool>; var message:MessageDialogOptions->flight._internal._Promise<MessageDialogResult>; } {
     return cast Facade_HostTauri_flight__HostTauri.createTauriMessageDialogBackend(tauri);
     return cast null;
   }
@@ -90,9 +108,77 @@ class HostTauri {
     return cast null;
   }
 
-  public static function createTauriWindowBackend(tauri:TauriApi):flight._internal._Intersection2<WindowBackend, flight._internal._Required<{ @:optional var attach:Null<ApplicationWindow->flight._internal._Any->WindowAttachmentOwnership->Bool>; @:optional var open:Null<ApplicationWindow->WindowOptions->Bool>; @:optional var close:Null<ApplicationWindow->Void>; }>> {
+  public static function createTauriWindowBackend(tauri:TauriApi):flight._internal._Intersection2<flight._internal._Intersection2<WindowBackend, flight._internal._Required<{ @:optional var attach:Null<ApplicationWindow->flight._internal._Any->WindowAttachmentOwnership->Bool>; @:optional var open:Null<ApplicationWindow->WindowOptions->Bool>; @:optional var close:Null<ApplicationWindow->Void>; }>>, Entity> {
     return cast Facade_HostTauri_flight__HostTauri.createTauriWindowBackend(tauri);
     return cast null;
+  }
+
+  public static function initializeTauriAppCapabilities(out:EntityConstruction<TauriAppCapabilities>, tauri:TauriApi):Void {
+    Facade_HostTauri_flight__HostTauri.initializeTauriAppCapabilities(out, tauri);
+  }
+
+  public static function initializeTauriClipboardBackend(out:EntityConstruction<ClipboardTextBackend>, clipboard:flight._internal._IndexedAccess<TauriApi, String>):Void {
+    Facade_HostTauri_flight__HostTauri.initializeTauriClipboardBackend(out, clipboard);
+  }
+
+  public static function initializeTauriDirectoryOpenDialogBackend(out:EntityConstruction<DirectoryOpenDialogBackend>, tauri:TauriApi):Void {
+    Facade_HostTauri_flight__HostTauri.initializeTauriDirectoryOpenDialogBackend(out, tauri);
+  }
+
+  public static function initializeTauriFileOpenDialogBackend(out:EntityConstruction<FileOpenDialogBackend>, tauri:TauriApi):Void {
+    Facade_HostTauri_flight__HostTauri.initializeTauriFileOpenDialogBackend(out, tauri);
+  }
+
+  public static function initializeTauriFileSaveDialogBackend(out:EntityConstruction<FileSaveDialogBackend>, tauri:TauriApi):Void {
+    Facade_HostTauri_flight__HostTauri.initializeTauriFileSaveDialogBackend(out, tauri);
+  }
+
+  public static function initializeTauriHost<Profile:DesktopOsProfile>(out:EntityConstruction<TauriHost<Profile>>, tauri:TauriApi, profile:Profile):Void {
+    Facade_HostTauri_flight__HostTauri.initializeTauriHost(out, tauri, profile);
+  }
+
+  public static function initializeTauriMenuBackends(out:EntityConstruction<TauriMenuCapabilities>, tauri:TauriApi):Void {
+    Facade_HostTauri_flight__HostTauri.initializeTauriMenuBackends(out, tauri);
+  }
+
+  public static function initializeTauriMessageDialogBackend(out:EntityConstruction<MessageDialogBackend>, tauri:TauriApi):Void {
+    Facade_HostTauri_flight__HostTauri.initializeTauriMessageDialogBackend(out, tauri);
+  }
+
+  public static function initializeTauriNotificationCapabilities(out:EntityConstruction<TauriNotificationCapabilities>, tauri:TauriApi):Void {
+    Facade_HostTauri_flight__HostTauri.initializeTauriNotificationCapabilities(out, tauri);
+  }
+
+  public static function initializeTauriPlatformBackend(out:EntityConstruction<PlatformBackend>, tauri:TauriApi):Void {
+    Facade_HostTauri_flight__HostTauri.initializeTauriPlatformBackend(out, tauri);
+  }
+
+  public static function initializeTauriShellExternalBackend(out:EntityConstruction<ShellExternalBackend>, opener:flight._internal._IndexedAccess<TauriApi, String>):Void {
+    Facade_HostTauri_flight__HostTauri.initializeTauriShellExternalBackend(out, opener);
+  }
+
+  public static function initializeTauriShellPathOpenBackend(out:EntityConstruction<ShellPathOpenBackend>, opener:flight._internal._IndexedAccess<TauriApi, String>):Void {
+    Facade_HostTauri_flight__HostTauri.initializeTauriShellPathOpenBackend(out, opener);
+  }
+
+  public static function initializeTauriShellPathRevealBackend(out:EntityConstruction<ShellPathRevealBackend>, opener:flight._internal._IndexedAccess<TauriApi, String>):Void {
+    Facade_HostTauri_flight__HostTauri.initializeTauriShellPathRevealBackend(out, opener);
+  }
+
+  public static function initializeTauriShortcutQueryBackend(out:EntityConstruction<ShortcutQueryBackend>, globalShortcut:flight._internal._IndexedAccess<TauriApi, String>):Void {
+    Facade_HostTauri_flight__HostTauri.initializeTauriShortcutQueryBackend(out, globalShortcut);
+  }
+
+  public static function initializeTauriShortcutTriggerBackend(out:EntityConstruction<ShortcutTriggerBackend>, globalShortcut:flight._internal._IndexedAccess<TauriApi, String>):Void {
+    Facade_HostTauri_flight__HostTauri.initializeTauriShortcutTriggerBackend(out, globalShortcut);
+  }
+
+  public static function initializeTauriTrayCapabilities(out:EntityConstruction<Entity>, image:TrayImageBackend, interactionEvents:Null<TrayInteractionEventsBackend>, lifecycle:TrayLifecycleBackend, menu:TrayMenuBackend, menuSelectionEvents:TrayMenuSelectionEventsBackend, templateImage:Null<TrayTemplateImageBackend>, title:Null<TrayTitleBackend>, tooltip:Null<TrayTooltipBackend>):Void {
+    Facade_HostTauri_flight__HostTauri.initializeTauriTrayCapabilities(out, image, interactionEvents, lifecycle, menu, menuSelectionEvents, templateImage, title, tooltip);
+  }
+
+  public static function initializeTauriWindowBackend(out:EntityConstruction<flight._internal._Intersection2<WindowBackend, flight._internal._Required<{ @:optional var attach:Null<ApplicationWindow->flight._internal._Any->WindowAttachmentOwnership->Bool>; @:optional var open:Null<ApplicationWindow->WindowOptions->Bool>; @:optional var close:Null<ApplicationWindow->Void>; }>>>, tauri:TauriApi):Void {
+    Facade_HostTauri_flight__HostTauri.initializeTauriWindowBackend(out, tauri);
   }
 
   public static function makeTauriShellCapabilities(tauri:TauriApi):flight._internal._Intersection2<HostShellCapabilities, flight._internal._Required<{ @:optional var external:Null<ShellExternalBackend>; @:optional var pathOpen:Null<ShellPathOpenBackend>; @:optional var pathReveal:Null<ShellPathRevealBackend>; }>> {

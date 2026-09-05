@@ -12,6 +12,7 @@ export const getAsset = api.getAsset;
 export const getAssetGroupIds = api.getAssetGroupIds;
 export const getAssetIds = api.getAssetIds;
 export const getAssetRefCount = api.getAssetRefCount;
+export const initializeAssetLibrary = api.initializeAssetLibrary;
 export const loadAssetGroup = api.loadAssetGroup;
 export const registerAssetDescriptor = api.registerAssetDescriptor;
 export const registerAssetLoader = api.registerAssetLoader;

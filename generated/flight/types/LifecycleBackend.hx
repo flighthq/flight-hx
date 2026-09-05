@@ -4,4 +4,25 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef LifecycleBackend = { var getState:Void->AppLifecycleState; var subscribe:(Void->Void)->(Void->Void); @:optional var getLaunchKind:Void->AppLaunchKind; @:optional var subscribeMemoryWarning:(AppMemoryPressure->Void)->(Void->Void); };
+#if !flight_struct_typedef
+@:allow(flight._Lifecycle)
+@:keep
+@:structInit
+class LifecycleBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var getState:Void->AppLifecycleState;
+  public var subscribe:(Void->Void)->(Void->Void);
+  public var getLaunchKind:Null<Void->AppLaunchKind>;
+  public var subscribeMemoryWarning:Null<(AppMemoryPressure->Void)->(Void->Void)>;
+
+  private function new(getState:Void->AppLifecycleState, subscribe:(Void->Void)->(Void->Void), ?getLaunchKind:Null<Void->AppLaunchKind>, ?subscribeMemoryWarning:Null<(AppMemoryPressure->Void)->(Void->Void)>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getState = getState;
+    this.subscribe = subscribe;
+    this.getLaunchKind = getLaunchKind;
+    this.subscribeMemoryWarning = subscribeMemoryWarning;
+  }
+}
+#else
+typedef LifecycleBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getState:Void->AppLifecycleState; var subscribe:(Void->Void)->(Void->Void); @:optional var getLaunchKind:Void->AppLaunchKind; @:optional var subscribeMemoryWarning:(AppMemoryPressure->Void)->(Void->Void); };
+#end

@@ -4,6 +4,8 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight.Types.QuadBatchKind;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Geometry.copyRectangle;
 import flight._Geometry.createRectangle;
 import flight._Geometry.reserveFloat32Array;
@@ -14,6 +16,8 @@ import flight._Scene2D.createNode2DRuntime;
 import flight._Scene2D.getNode2DRuntime;
 import flight._Signals.createSignal;
 import flight._Types.QuadBatchKind;
+import flight.types.EntityConstruction;
+import flight.types.EntityRuntime;
 import flight.types.MaterialData;
 import flight.types.MethodsOf;
 import flight.types.Node;
@@ -29,6 +33,7 @@ import flight.types.RectangleLike;
 import flight.types.Signal;
 import flight.types.TextureAtlas;
 import flight.types.TextureAtlasRegion;
+import flight.types.TintMaterialData;
 import flight.types.Vector2Like;
 
 typedef QuadBatchWithSignals__quadBatch = { @:optional var __quadBatchSignalsSlot:QuadBatchSignals; };
@@ -213,14 +218,17 @@ class _QuadBatch {
   }
 
   public static function createQuadBatch(?obj:PartialNode<QuadBatch>):QuadBatch {
-    return cast (cast createNode2D((cast QuadBatchKind : String), (cast obj : Dynamic), (cast createQuadBatchData : Dynamic), (cast function(__unused1:Dynamic):QuadBatchRuntime return createQuadBatchRuntime() : Dynamic), function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : QuadBatch); }) #end)) : QuadBatch);
+    return cast (cast createNode2D((cast QuadBatchKind : String), (cast obj : Dynamic), (cast createQuadBatchData : Dynamic), (cast function(__unused1:Dynamic):QuadBatchRuntime return createQuadBatchRuntime() : Dynamic), function():Dynamic return (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ alpha: cast _Runtime.UNDEFINED, blendMode: cast _Runtime.UNDEFINED, clip: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, material: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pivotX: cast _Runtime.UNDEFINED, pivotY: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED, skewX: cast _Runtime.UNDEFINED, skewY: cast _Runtime.UNDEFINED, visible: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : QuadBatch); }) #end)) : QuadBatch);
     return cast null;
   }
 
   @:allow(flight)
   @:keep
-  private static function createQuadBatchData(?data:{ @:optional var atlas:Null<TextureAtlas>; @:optional var ids:Null<flight._internal._UInt16Array>; @:optional var instanceCount:Null<Float>; @:optional var materialData:Null<Array<Null<MaterialData>>>; @:optional var transforms:Null<flight._internal._Float32Array>; @:optional var transformType:Null<QuadTransformType>; }):QuadBatchData {
-    return cast { atlas: _Runtime.coalesce(({ final __structural14 = data; __structural14 == null ? _Runtime.UNDEFINED : (cast __structural14 : { @:optional var atlas:Null<TextureAtlas>; }).atlas; }), function():Dynamic return cast null), ids: _Runtime.coalesce(({ final __structural15 = data; __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : { @:optional var ids:Null<flight._internal._UInt16Array>; }).ids; }), function():Dynamic return cast new flight._internal._UInt16Array()), instanceCount: _Runtime.coalesce(({ final __structural16 = data; __structural16 == null ? _Runtime.UNDEFINED : (cast __structural16 : { @:optional var instanceCount:Null<Float>; }).instanceCount; }), function():Dynamic return cast 0.0), materialData: _Runtime.coalesce(({ final __structural17 = data; __structural17 == null ? _Runtime.UNDEFINED : (cast __structural17 : { @:optional var materialData:Null<Array<Null<flight._internal._Object>>>; }).materialData; }), function():Dynamic return cast null), transforms: _Runtime.coalesce(({ final __structural18 = data; __structural18 == null ? _Runtime.UNDEFINED : (cast __structural18 : { @:optional var transforms:Null<flight._internal._Float32Array>; }).transforms; }), function():Dynamic return cast new flight._internal._Float32Array()), transformType: _Runtime.coalesce(({ final __structural19 = data; __structural19 == null ? _Runtime.UNDEFINED : (cast __structural19 : { @:optional var transformType:Null<String>; }).transformType; }), function():Dynamic return cast 'vector2') };
+  private static function createQuadBatchData(?data:{ @:optional var atlas:Null<TextureAtlas>; @:optional var ids:Null<flight._internal._UInt16Array>; @:optional var instanceCount:Null<Float>; @:optional var materialData:Null<Array<Null<MaterialData>>>; @:optional var transforms:Null<flight._internal._Float32Array>; @:optional var transformType:Null<QuadTransformType>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):QuadBatchData {
+    var out:EntityConstruction<QuadBatchData> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ atlas: cast _Runtime.UNDEFINED, ids: cast _Runtime.UNDEFINED, instanceCount: cast _Runtime.UNDEFINED, materialData: cast _Runtime.UNDEFINED, transforms: cast _Runtime.UNDEFINED, transformType: cast _Runtime.UNDEFINED } : QuadBatchData); }) #end));
+    initializeQuadBatchData(({ final __callArgument14:Dynamic = out; __callArgument14; }), (cast data : Dynamic));
+    return cast out;
     return cast null;
   }
 
@@ -238,7 +246,10 @@ class _QuadBatch {
   @:allow(flight)
   @:keep
   private static function createQuadBatchSignals():QuadBatchSignals {
-    return cast { onCleared: (cast createSignal() : Signal<Void->Void>), onInstanceAppended: (cast createSignal() : Signal<Float->Void>), onInstanceRemoved: (cast createSignal() : Signal<Float->Float->Void>) };
+    var out:EntityConstruction<QuadBatchSignals> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ onCleared: cast _Runtime.UNDEFINED, onInstanceAppended: cast _Runtime.UNDEFINED, onInstanceRemoved: cast _Runtime.UNDEFINED } : QuadBatchSignals); }) #end));
+    initializeQuadBatchSignals(({ final __callArgument16:Dynamic = out; __callArgument16; }));
+    return cast out;
     return cast null;
   }
 
@@ -292,7 +303,7 @@ class _QuadBatch {
   @:allow(flight)
   @:keep
   private static function getQuadBatchRuntime(source:QuadBatch):QuadBatchRuntime {
-    return cast (cast getNode2DRuntime(({ final __callArgument20:Dynamic = source; __callArgument20; })) : QuadBatchRuntime);
+    return cast (cast getNode2DRuntime(({ final __callArgument18:Dynamic = source; __callArgument18; })) : QuadBatchRuntime);
     return cast null;
   }
 
@@ -307,12 +318,12 @@ class _QuadBatch {
   }
 
   public static function hitTestQuadBatchPoint(source:QuadBatch, point:Vector2Like):Float {
-    return cast (cast hitTestQuadBatchPointXY(({ final __callArgument22:Dynamic = source; __callArgument22; }), (cast point.x : Float), (cast point.y : Float)) : Float);
+    return cast (cast hitTestQuadBatchPointXY(({ final __callArgument20:Dynamic = source; __callArgument20; }), (cast point.x : Float), (cast point.y : Float)) : Float);
     return cast null;
   }
 
   public static function hitTestQuadBatchPointExact(source:QuadBatch, point:Vector2Like):Float {
-    return cast (cast hitTestQuadBatchPointExactXY(({ final __callArgument24:Dynamic = source; __callArgument24; }), (cast point.x : Float), (cast point.y : Float)) : Float);
+    return cast (cast hitTestQuadBatchPointExactXY(({ final __callArgument22:Dynamic = source; __callArgument22; }), (cast point.x : Float), (cast point.y : Float)) : Float);
     return cast null;
   }
 
@@ -450,6 +461,25 @@ class _QuadBatch {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeQuadBatchData(out:EntityConstruction<QuadBatchData>, ?data:{ @:optional var atlas:Null<TextureAtlas>; @:optional var ids:Null<flight._internal._UInt16Array>; @:optional var instanceCount:Null<Float>; @:optional var materialData:Null<Array<Null<MaterialData>>>; @:optional var transforms:Null<flight._internal._Float32Array>; @:optional var transformType:Null<QuadTransformType>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):Void {
+    _Runtime.setField(out, 'atlas', _Runtime.coalesce(({ final __structural24 = data; __structural24 == null ? _Runtime.UNDEFINED : (cast __structural24 : { @:optional var atlas:Null<TextureAtlas>; }).atlas; }), function():Dynamic return cast null));
+    _Runtime.setField(out, 'ids', _Runtime.coalesce(({ final __structural25 = data; __structural25 == null ? _Runtime.UNDEFINED : (cast __structural25 : { @:optional var ids:Null<flight._internal._UInt16Array>; }).ids; }), function():Dynamic return cast new flight._internal._UInt16Array()));
+    _Runtime.setField(out, 'instanceCount', _Runtime.coalesce(({ final __structural26 = data; __structural26 == null ? _Runtime.UNDEFINED : (cast __structural26 : { @:optional var instanceCount:Null<Float>; }).instanceCount; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'materialData', _Runtime.coalesce(({ final __structural27 = data; __structural27 == null ? _Runtime.UNDEFINED : (cast __structural27 : { @:optional var materialData:Null<Array<Null<MaterialData>>>; }).materialData; }), function():Dynamic return cast null));
+    _Runtime.setField(out, 'transforms', _Runtime.coalesce(({ final __structural28 = data; __structural28 == null ? _Runtime.UNDEFINED : (cast __structural28 : { @:optional var transforms:Null<flight._internal._Float32Array>; }).transforms; }), function():Dynamic return cast new flight._internal._Float32Array()));
+    _Runtime.setField(out, 'transformType', _Runtime.coalesce(({ final __structural29 = data; __structural29 == null ? _Runtime.UNDEFINED : (cast __structural29 : { @:optional var transformType:Null<String>; }).transformType; }), function():Dynamic return cast 'vector2'));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeQuadBatchSignals(out:EntityConstruction<QuadBatchSignals>):Void {
+    _Runtime.setField(out, 'onCleared', (cast createSignal() : Signal<Void->Void>));
+    _Runtime.setField(out, 'onInstanceAppended', (cast createSignal() : Signal<Float->Void>));
+    _Runtime.setField(out, 'onInstanceRemoved', (cast createSignal() : Signal<Float->Float->Void>));
+  }
+
   public static function iterateQuadBatchInstances(source:QuadBatch, visitor:Float->Float->flight._internal._Float32Array->Void):Void {
     var __destructure5:QuadBatchData = cast _Runtime.UNDEFINED;
     var ids:flight._internal._UInt16Array = cast _Runtime.UNDEFINED;
@@ -462,7 +492,7 @@ class _QuadBatch {
     instanceCount = __destructure5.instanceCount;
     transforms = __destructure5.transforms;
     transformType = __destructure5.transformType;
-    stride = (cast getQuadBatchTransformStride(({ final __callArgument26:Dynamic = transformType; __callArgument26; })) : Float);
+    stride = (cast getQuadBatchTransformStride(({ final __callArgument30:Dynamic = transformType; __callArgument30; })) : Float);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast instanceCount : Float)) : Bool)) {
@@ -504,14 +534,14 @@ class _QuadBatch {
       }
     }
     (data.instanceCount = cast (last : Float));
-    signals = (cast getQuadBatchSignals(({ final __callArgument28:Dynamic = target; __callArgument28; })) : Null<QuadBatchSignals>);
+    signals = (cast getQuadBatchSignals(({ final __callArgument32:Dynamic = target; __callArgument32; })) : Null<QuadBatchSignals>);
     if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { ((cast (cast signals : QuadBatchSignals).onInstanceRemoved : { var emit:Float->Float->Void; }).emit)((cast index : Float), (cast swapSource : Float)); }
   }
 
   public static function reserveQuadBatch(target:QuadBatch, capacity:Float):Void {
     var currentCapacity:Float = cast _Runtime.UNDEFINED;
     var data:QuadBatchData = cast _Runtime.UNDEFINED;
-    currentCapacity = (cast getQuadBatchCapacity(({ final __callArgument30:Dynamic = target; __callArgument30; })) : Float);
+    currentCapacity = (cast getQuadBatchCapacity(({ final __callArgument34:Dynamic = target; __callArgument34; })) : Float);
     if ((cast ((cast currentCapacity : Float) >= (cast capacity : Float)) : Bool)) { return; }
     data = target.data;
     (data.ids = cast ((cast reserveUint16Array(data.ids, (cast capacity : Float)) : flight._internal._UInt16Array) : flight._internal._UInt16Array));
@@ -526,10 +556,10 @@ class _QuadBatch {
     oldInstanceCount = data.instanceCount;
     (data.instanceCount = cast (instanceCount : Float));
     if ((cast ((cast oldInstanceCount : Float) >= (cast instanceCount : Float)) : Bool)) { return; }
-    capacity = (cast getQuadBatchCapacity(({ final __callArgument32:Dynamic = target; __callArgument32; })) : Float);
+    capacity = (cast getQuadBatchCapacity(({ final __callArgument36:Dynamic = target; __callArgument36; })) : Float);
     if ((cast ((cast capacity : Float) < (cast instanceCount : Float)) : Bool)) {
       var newCapacity:Float = HxMath.max(instanceCount, (capacity * 2.0));
-      reserveQuadBatch(({ final __callArgument34:Dynamic = target; __callArgument34; }), (cast newCapacity : Float));
+      reserveQuadBatch(({ final __callArgument38:Dynamic = target; __callArgument38; }), (cast newCapacity : Float));
     }
   }
 
@@ -582,15 +612,21 @@ class _QuadBatch {
     var data:QuadBatchData = cast _Runtime.UNDEFINED;
     data = target.data;
     if ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast index : Float) >= (cast data.instanceCount : Float)) : Bool)) : Bool)) { return; }
-    if ((cast _Runtime.strictEquals(data.materialData, null) : Bool)) { (data.materialData = cast (_Runtime.fill(_Runtime.createArray(data.instanceCount), null, 0, null, 1) : Null<Array<Null<flight._internal._Object>>>)); }
-    flight._internal._StaticIndex.writeArray(data.materialData, index, { tint: _Runtime.unsignedShiftRight(_Runtime.toInt32(rgba), 0) });
+    if ((cast _Runtime.strictEquals(data.materialData, null) : Bool)) { (data.materialData = cast (_Runtime.fill(_Runtime.createArray(data.instanceCount), null, 0, null, 1) : Null<Array<Null<MaterialData>>>)); }
+    flight._internal._StaticIndex.writeArray(data.materialData, index, _Runtime.callValue(function():TintMaterialData {
+      var out:EntityConstruction<TintMaterialData> = cast _Runtime.UNDEFINED;
+      out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ tint: cast _Runtime.UNDEFINED } : TintMaterialData); }) #end));
+      _Runtime.setField(out, 'tint', _Runtime.unsignedShiftRight(_Runtime.toInt32(rgba), 0));
+      return cast out;
+      return cast _Runtime.UNDEFINED;
+    }, cast ([] : Array<Dynamic>)));
   }
 
   public static function setQuadBatchLocalBoundsRectangle(target:QuadBatch, rect:Rectangle):Void {
     var runtime:QuadBatchRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getNode2DRuntime(({ final __callArgument36:Dynamic = target; __callArgument36; })) : QuadBatchRuntime);
+    runtime = (cast getNode2DRuntime(({ final __callArgument40:Dynamic = target; __callArgument40; })) : QuadBatchRuntime);
     if ((cast _Runtime.strictEquals(runtime.localBoundsRectangle, null) : Bool)) { (runtime.localBoundsRectangle = cast ((cast (#if js _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>)) #else createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Rectangle) : Null<Rectangle>)); }
-    copyRectangle(({ final __callArgument38:Dynamic = runtime.localBoundsRectangle; __callArgument38; }), ({ final __callArgument39:Dynamic = rect; __callArgument39; }));
+    copyRectangle(({ final __callArgument42:Dynamic = runtime.localBoundsRectangle; __callArgument42; }), ({ final __callArgument43:Dynamic = rect; __callArgument43; }));
     invalidateNodeLocalBounds((cast target : Dynamic));
   }
 
@@ -636,7 +672,7 @@ class _QuadBatch {
 
   public static final defaultMethods__quadBatch:flight._internal._Partial<MethodsOf<QuadBatchRuntime>> = (cast { computeLocalBoundsRectangle: _QuadBatch.copyLocalBoundsRectangle__quadBatch });
 
-  public static final quadBatchSignalsSlot__quadBatch:flight._internal._Symbol = _Runtime.symbol('quadBatchSignals', '__symbol__8b7834ea772c5dbc396f');
+  public static final quadBatchSignalsSlot__quadBatch:flight._internal._Symbol = _Runtime.symbol('quadBatchSignals', '__symbol__5859d4a04fad0d89964e');
 
   public static final quadTransformStride__quadBatch:{ var vector2:Float; var matrix3x2:Float; } = (cast { vector2: 2.0, matrix3x2: 6.0 });
 

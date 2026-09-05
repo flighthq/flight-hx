@@ -4,4 +4,29 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TextLabelData = { var autoSize:TextAutoSize; var height:Float; var text:String; var textFormat:TextFormat; var verticalAlign:TextVerticalAlign; var width:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Text)
+@:allow(flight.types.RichTextData)
+@:keep
+@:structInit
+class TextLabelData extends flight.types.Node2DData {
+  public var autoSize:TextAutoSize;
+  public var height:Float;
+  public var text:String;
+  public var textFormat:TextFormat;
+  public var verticalAlign:TextVerticalAlign;
+  public var width:Float;
+
+  private function new(autoSize:TextAutoSize, height:Float, text:String, textFormat:TextFormat, verticalAlign:TextVerticalAlign, width:Float):Void {
+    super();
+    this.autoSize = autoSize;
+    this.height = height;
+    this.text = text;
+    this.textFormat = textFormat;
+    this.verticalAlign = verticalAlign;
+    this.width = width;
+  }
+}
+#else
+typedef TextLabelData = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var autoSize:TextAutoSize; var height:Float; var text:String; var textFormat:TextFormat; var verticalAlign:TextVerticalAlign; var width:Float; };
+#end

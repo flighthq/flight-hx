@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef NodeOrderList<Traits> = { var entryCount:Float; var nodes:Array<Node<Traits>>; var sortKeys:Array<Float>; };
+typedef NodeOrderList<Traits> = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var entryCount:Float; var nodes:Array<Node<Traits>>; var sortKeys:Array<Float>; };

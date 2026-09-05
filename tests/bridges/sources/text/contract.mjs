@@ -10,3 +10,6 @@ export * from './richText.mjs';
 export * from './textFormatFont.mjs';
 export * from './textLabel.mjs';
 export * from './textLabelLayout.mjs';
+export { initializeNativeTextData } from './nativeText.mjs';
+export { initializeTextFieldSignals } from './richText.mjs';
+export { initializeTextLabelData } from './textLabel.mjs';

@@ -4,4 +4,25 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Command = { var kind:Kind; var label:String; };
+#if !flight_struct_typedef
+@:allow(flight.types.AddNodeChildCommand)
+@:allow(flight.types.CompositeCommand)
+@:allow(flight.types.RemoveNodeChildCommand)
+@:allow(flight.types.ReorderNodeChildCommand)
+@:allow(flight.types.SetNodePropertyCommand)
+@:keep
+@:structInit
+class Command {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var kind:Kind;
+  public var label:String;
+
+  private function new(kind:Kind, label:String):Void {
+    this.__symbol__EntityRuntime = null;
+    this.kind = kind;
+    this.label = label;
+  }
+}
+#else
+typedef Command = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Kind; var label:String; };
+#end

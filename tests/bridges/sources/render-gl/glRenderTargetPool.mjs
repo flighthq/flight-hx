@@ -8,4 +8,5 @@ __syncDependencies();
 export const acquireGlRenderTarget = api.acquireGlRenderTarget;
 export const createGlRenderTargetPool = api.createGlRenderTargetPool;
 export const destroyGlRenderTargetPool = api.destroyGlRenderTargetPool;
+export const initializeGlRenderTargetPool = api.initializeGlRenderTargetPool;
 export const releaseGlRenderTarget = api.releaseGlRenderTarget;

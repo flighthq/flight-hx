@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const createRequirementSet = api.createRequirementSet;
 export const diffRequirementSets = api.diffRequirementSets;
+export const initializeRequirementSet = api.initializeRequirementSet;
 export const mergeRequirementSets = api.mergeRequirementSets;

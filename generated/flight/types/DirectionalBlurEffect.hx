@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef DirectionalBlurEffect = { var kind:String; @:optional var angle:Float; @:optional var length:Float; @:optional var samples:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class DirectionalBlurEffect extends flight.types.RenderEffect<String> {
+  public var angle:Null<Float>;
+  public var length:Null<Float>;
+  public var samples:Null<Float>;
+
+  private function new(kind:String, ?angle:Null<Float>, ?length:Null<Float>, ?samples:Null<Float>):Void {
+    super(kind);
+    this.angle = angle;
+    this.length = length;
+    this.samples = samples;
+  }
+}
+#else
+typedef DirectionalBlurEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var angle:Float; @:optional var length:Float; @:optional var samples:Float; };
+#end

@@ -9,5 +9,6 @@ export const beginCanvasRenderPass = api.beginCanvasRenderPass;
 export const createCanvasRenderTarget = api.createCanvasRenderTarget;
 export const destroyCanvasRenderTarget = api.destroyCanvasRenderTarget;
 export const endCanvasRenderPass = api.endCanvasRenderPass;
+export const initializeCanvasRenderTarget = api.initializeCanvasRenderTarget;
 export const resizeCanvasRenderTarget = api.resizeCanvasRenderTarget;
 export const setCanvasRenderTransform2D = api.setCanvasRenderTransform2D;

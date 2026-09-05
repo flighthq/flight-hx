@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef BokehDepthOfFieldEffect = { var kind:String; @:optional var focusDistance:Float; @:optional var focusRange:Float; @:optional var maxBlur:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class BokehDepthOfFieldEffect extends flight.types.RenderEffect<String> {
+  public var focusDistance:Null<Float>;
+  public var focusRange:Null<Float>;
+  public var maxBlur:Null<Float>;
+
+  private function new(kind:String, ?focusDistance:Null<Float>, ?focusRange:Null<Float>, ?maxBlur:Null<Float>):Void {
+    super(kind);
+    this.focusDistance = focusDistance;
+    this.focusRange = focusRange;
+    this.maxBlur = maxBlur;
+  }
+}
+#else
+typedef BokehDepthOfFieldEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var focusDistance:Float; @:optional var focusRange:Float; @:optional var maxBlur:Float; };
+#end

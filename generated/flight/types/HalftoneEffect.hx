@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef HalftoneEffect = { var kind:String; @:optional var scale:Float; @:optional var angle:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class HalftoneEffect extends flight.types.RenderEffect<String> {
+  public var scale:Null<Float>;
+  public var angle:Null<Float>;
+
+  private function new(kind:String, ?scale:Null<Float>, ?angle:Null<Float>):Void {
+    super(kind);
+    this.scale = scale;
+    this.angle = angle;
+  }
+}
+#else
+typedef HalftoneEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var scale:Float; @:optional var angle:Float; };
+#end

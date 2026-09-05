@@ -8,5 +8,6 @@ __syncDependencies();
 export const createRegistryCatalog = api.createRegistryCatalog;
 export const findRegistryCatalogEntries = api.findRegistryCatalogEntries;
 export const getRegistryCatalogEntries = api.getRegistryCatalogEntries;
+export const initializeRegistryCatalog = api.initializeRegistryCatalog;
 export const registerRegistryCatalogEntry = api.registerRegistryCatalogEntry;
 export const unregisterRegistryCatalogEntry = api.unregisterRegistryCatalogEntry;

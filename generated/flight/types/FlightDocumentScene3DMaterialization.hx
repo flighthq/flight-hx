@@ -4,4 +4,27 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FlightDocumentScene3DMaterialization = { var cameras:Array<Camera3D>; var interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node3D>>; var layoutBindings:Array<FlightDocumentLayoutBinding<Node3D>>; var lights:Scene3DLights; var scene:Scene3D; };
+#if !flight_struct_typedef
+@:allow(flight._SceneDocument)
+@:keep
+@:structInit
+class FlightDocumentScene3DMaterialization {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var cameras:Array<Camera3D>;
+  public var interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node3D>>;
+  public var layoutBindings:Array<FlightDocumentLayoutBinding<Node3D>>;
+  public var lights:Scene3DLights;
+  public var scene:Scene3D;
+
+  private function new(cameras:Array<Camera3D>, interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node3D>>, layoutBindings:Array<FlightDocumentLayoutBinding<Node3D>>, lights:Scene3DLights, scene:Scene3D):Void {
+    this.__symbol__EntityRuntime = null;
+    this.cameras = cameras;
+    this.interactiveStateBindings = interactiveStateBindings;
+    this.layoutBindings = layoutBindings;
+    this.lights = lights;
+    this.scene = scene;
+  }
+}
+#else
+typedef FlightDocumentScene3DMaterialization = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var cameras:Array<Camera3D>; var interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node3D>>; var layoutBindings:Array<FlightDocumentLayoutBinding<Node3D>>; var lights:Scene3DLights; var scene:Scene3D; };
+#end

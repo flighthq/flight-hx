@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SpatialIndex2D = { var runtime:SpatialIndexRuntime2D; };
+#if !flight_struct_typedef
+@:allow(flight._Spatial)
+@:keep
+@:structInit
+class SpatialIndex2D {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var runtime:SpatialIndexRuntime2D;
+
+  private function new(runtime:SpatialIndexRuntime2D):Void {
+    this.__symbol__EntityRuntime = null;
+    this.runtime = runtime;
+  }
+}
+#else
+typedef SpatialIndex2D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var runtime:SpatialIndexRuntime2D; };
+#end

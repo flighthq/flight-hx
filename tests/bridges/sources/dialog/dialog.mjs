@@ -5,6 +5,8 @@ const api = compiled.flight._Dialog;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const initializeWebMessageDialogBackend = api.initializeWebMessageDialogBackend;
+export const initializeWebPromptDialogBackend = api.initializeWebPromptDialogBackend;
 export const showConfirmDialog = api.showConfirmDialog;
 export const showErrorBox = api.showErrorBox;
 export const showErrorDialog = api.showErrorDialog;

@@ -12,6 +12,7 @@ export const createMediaSessionActionSignal = api.createMediaSessionActionSignal
 export const destroyMediaSession = api.destroyMediaSession;
 export const detachMediaSessionAction = api.detachMediaSessionAction;
 export const disposeMediaSessionActionSignal = api.disposeMediaSessionActionSignal;
+export const initializeMediaSessionActionSignal = api.initializeMediaSessionActionSignal;
 export const setMediaSessionMetadata = api.setMediaSessionMetadata;
 export const setMediaSessionPlaybackState = api.setMediaSessionPlaybackState;
 export const setMediaSessionPositionState = api.setMediaSessionPositionState;

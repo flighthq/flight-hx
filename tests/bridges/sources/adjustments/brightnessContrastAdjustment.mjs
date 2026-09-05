@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createBrightnessContrastAdjustment = api.createBrightnessContrastAdjustment;
+export const initializeBrightnessContrastAdjustment = api.initializeBrightnessContrastAdjustment;

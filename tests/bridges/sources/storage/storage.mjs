@@ -31,6 +31,7 @@ export const getStorageJSONOr = api.getStorageJSONOr;
 export const getStorageKeys = api.getStorageKeys;
 export const getStorageNumber = api.getStorageNumber;
 export const getStorageNumberOr = api.getStorageNumberOr;
+export const initializeStorageSignals = api.initializeStorageSignals;
 export const migrateStorage = api.migrateStorage;
 export const removeNamespacedStorageItem = api.removeNamespacedStorageItem;
 export const removeStorageItem = api.removeStorageItem;

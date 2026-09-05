@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Skeleton2DIkConstraint = { var kind:String; var mix:Float; var bendPositive:Bool; var boneIndices:Array<Float>; var compress:Bool; var stretch:Bool; var targetBoneIndex:Float; };
+typedef Skeleton2DIkConstraint = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var mix:Float; var bendPositive:Bool; var boneIndices:Array<Float>; var compress:Bool; var stretch:Bool; var targetBoneIndex:Float; };

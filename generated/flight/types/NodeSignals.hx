@@ -4,4 +4,27 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef NodeSignals = { var onChildAdded:Signal<NodeAny->Void>; var onChildRemoved:Signal<NodeAny->Void>; var onChildrenChanged:Signal<Void->Void>; var onChildrenOrderChanged:Signal<Void->Void>; var onParentChanged:Signal<Void->Void>; };
+#if !flight_struct_typedef
+@:allow(flight._Node)
+@:keep
+@:structInit
+class NodeSignals {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onChildAdded:Signal<NodeAny->Void>;
+  public var onChildRemoved:Signal<NodeAny->Void>;
+  public var onChildrenChanged:Signal<Void->Void>;
+  public var onChildrenOrderChanged:Signal<Void->Void>;
+  public var onParentChanged:Signal<Void->Void>;
+
+  private function new(onChildAdded:Signal<NodeAny->Void>, onChildRemoved:Signal<NodeAny->Void>, onChildrenChanged:Signal<Void->Void>, onChildrenOrderChanged:Signal<Void->Void>, onParentChanged:Signal<Void->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onChildAdded = onChildAdded;
+    this.onChildRemoved = onChildRemoved;
+    this.onChildrenChanged = onChildrenChanged;
+    this.onChildrenOrderChanged = onChildrenOrderChanged;
+    this.onParentChanged = onParentChanged;
+  }
+}
+#else
+typedef NodeSignals = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onChildAdded:Signal<NodeAny->Void>; var onChildRemoved:Signal<NodeAny->Void>; var onChildrenChanged:Signal<Void->Void>; var onChildrenOrderChanged:Signal<Void->Void>; var onParentChanged:Signal<Void->Void>; };
+#end

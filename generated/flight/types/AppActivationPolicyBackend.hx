@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:keep
+@:structInit
+class AppActivationPolicyBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var setActivationPolicy:AppActivationPolicy->Void;
+
+  private function new(setActivationPolicy:AppActivationPolicy->Void):Void {
+    this.__symbol__EntityRuntime = null;
+    this.setActivationPolicy = setActivationPolicy;
+  }
+}
+#else
 typedef AppActivationPolicyBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var setActivationPolicy:AppActivationPolicy->Void; };
+#end

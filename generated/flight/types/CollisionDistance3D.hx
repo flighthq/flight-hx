@@ -4,4 +4,39 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CollisionDistance3D = { var distance:Float; var directionX:Float; var directionY:Float; var directionZ:Float; var pointAX:Float; var pointAY:Float; var pointAZ:Float; var pointBX:Float; var pointBY:Float; var pointBZ:Float; var overlapping:Bool; };
+#if !flight_struct_typedef
+@:allow(flight._Collision)
+@:keep
+@:structInit
+class CollisionDistance3D {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var distance:Float;
+  public var directionX:Float;
+  public var directionY:Float;
+  public var directionZ:Float;
+  public var pointAX:Float;
+  public var pointAY:Float;
+  public var pointAZ:Float;
+  public var pointBX:Float;
+  public var pointBY:Float;
+  public var pointBZ:Float;
+  public var overlapping:Bool;
+
+  private function new(distance:Float, directionX:Float, directionY:Float, directionZ:Float, pointAX:Float, pointAY:Float, pointAZ:Float, pointBX:Float, pointBY:Float, pointBZ:Float, overlapping:Bool):Void {
+    this.__symbol__EntityRuntime = null;
+    this.distance = distance;
+    this.directionX = directionX;
+    this.directionY = directionY;
+    this.directionZ = directionZ;
+    this.pointAX = pointAX;
+    this.pointAY = pointAY;
+    this.pointAZ = pointAZ;
+    this.pointBX = pointBX;
+    this.pointBY = pointBY;
+    this.pointBZ = pointBZ;
+    this.overlapping = overlapping;
+  }
+}
+#else
+typedef CollisionDistance3D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var distance:Float; var directionX:Float; var directionY:Float; var directionZ:Float; var pointAX:Float; var pointAY:Float; var pointAZ:Float; var pointBX:Float; var pointBY:Float; var pointBZ:Float; var overlapping:Bool; };
+#end

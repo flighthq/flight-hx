@@ -4,4 +4,29 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CameraShakeOffset = { var rotationX:Float; var rotationY:Float; var rotationZ:Float; var x:Float; var y:Float; var z:Float; };
+#if !flight_struct_typedef
+@:allow(flight._CameraControls)
+@:keep
+@:structInit
+class CameraShakeOffset {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var rotationX:Float;
+  public var rotationY:Float;
+  public var rotationZ:Float;
+  public var x:Float;
+  public var y:Float;
+  public var z:Float;
+
+  private function new(rotationX:Float, rotationY:Float, rotationZ:Float, x:Float, y:Float, z:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.rotationX = rotationX;
+    this.rotationY = rotationY;
+    this.rotationZ = rotationZ;
+    this.x = x;
+    this.y = y;
+    this.z = z;
+  }
+}
+#else
+typedef CameraShakeOffset = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var rotationX:Float; var rotationY:Float; var rotationZ:Float; var x:Float; var y:Float; var z:Float; };
+#end

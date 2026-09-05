@@ -8,8 +8,9 @@ import flight._Adjustments.COLOR_ADJUSTMENT_CHANNEL_MIXING;
 import flight._Adjustments.createTintAdjustment;
 import flight._Adjustments.resolveColorAdjustmentsColorMatrix;
 import flight._Adjustments.resolveColorAdjustmentsColorScaleBias;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
 import flight._Entity.createEntityRuntime;
+import flight._Entity.finishEntity;
 import flight._Entity.getEntityRuntime;
 import flight._Geometry.acquireMatrix;
 import flight._Geometry.acquireMatrix4;
@@ -55,6 +56,7 @@ import flight.types.ClipRegion;
 import flight.types.ColorAdjustmentRuntime;
 import flight.types.ColorScaleBias;
 import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.EntityRuntime;
 import flight.types.HasAppearance;
 import flight.types.HasAppearanceRuntime;
@@ -115,14 +117,14 @@ import flight.types.ViewportScaleMode;
 @:allow(flight._Node)
 @:keep
 @:structInit
-private class EntityShapeL20C1__node {
-  public var data:Null<flight._internal._Object>;
+private class EntityShapeL21C1__node {
+  public var data:Null<NodeData>;
   public var enabled:Bool;
   public var kind:String;
   public var name:Null<String>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
-  private function new(data:Null<flight._internal._Object>, enabled:Bool, kind:String, name:Null<String>):Void {
+  private function new(data:Null<NodeData>, enabled:Bool, kind:String, name:Null<String>):Void {
     this.__symbol__EntityRuntime = null;
     this.data = data;
     this.enabled = enabled;
@@ -131,7 +133,28 @@ private class EntityShapeL20C1__node {
   }
 }
 #else
-private typedef EntityShapeL20C1__node = { var data:Null<flight._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL21C1__node = { var data:Null<NodeData>; var enabled:Bool; var kind:String; var name:Null<String>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Node)
+@:keep
+@:structInit
+private class EntityShapeL126C15__nodeOrderList {
+  public var entryCount:Float;
+  public var nodes:Array<Node<flight._internal._Any>>;
+  public var sortKeys:Array<Float>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(entryCount:Float, nodes:Array<Node<flight._internal._Any>>, sortKeys:Array<Float>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.entryCount = entryCount;
+    this.nodes = nodes;
+    this.sortKeys = sortKeys;
+  }
+}
+#else
+private typedef EntityShapeL126C15__nodeOrderList = { var entryCount:Float; var nodes:Array<Node<flight._internal._Any>>; var sortKeys:Array<Float>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 @:noCompletion
@@ -466,7 +489,7 @@ class _Node {
   @:keep
   private static function initMaterialTrait(target:HasMaterial, ?obj:{ @:optional var material:Null<Material>; @:optional var materialData:Null<MaterialData>; }):Void {
     ((cast target : HasMaterial).material = _Runtime.coalesce(({ final __structural109 = obj; __structural109 == null ? _Runtime.UNDEFINED : (cast __structural109 : { @:optional var material:Null<Material>; }).material; }), function():Dynamic return cast null));
-    ((cast target : HasMaterial).materialData = _Runtime.coalesce(({ final __structural110 = obj; __structural110 == null ? _Runtime.UNDEFINED : (cast __structural110 : { @:optional var materialData:Null<flight._internal._Object>; }).materialData; }), function():Dynamic return cast null));
+    ((cast target : HasMaterial).materialData = _Runtime.coalesce(({ final __structural110 = obj; __structural110 == null ? _Runtime.UNDEFINED : (cast __structural110 : { @:optional var materialData:Null<MaterialData>; }).materialData; }), function():Dynamic return cast null));
   }
 
   @:allow(flight)
@@ -918,11 +941,11 @@ class _Node {
   public static var reparentNodeGuard__hierarchy:Null<Node<Dynamic>->Node<Dynamic>->Void> = _Runtime.explicitNull();
 
   public static function createNode<Traits:flight._internal._Object, Data:NodeData, Runtime:NodeRuntime<Traits>>(nodeKind:Kind, ?obj:PartialNode<Node<Traits>>, ?createData:NodeDataFactory<Data>, ?createNodeRuntimeFactory:NodeRuntimeFactory<Runtime>, ?__nodeAllocator:Void->Dynamic):flight._internal._Intersection2<Node<Traits>, Traits> {
-    if (__nodeAllocator == null) __nodeAllocator = cast (function():Dynamic return (#if flight_struct_typedef {  } #else ({  ({ data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED } : EntityShapeL20C1__node); }) #end) : Dynamic);
+    if (__nodeAllocator == null) __nodeAllocator = cast (function():Dynamic return (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ data: cast _Runtime.UNDEFINED, enabled: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED } : EntityShapeL21C1__node); }) #end) : Dynamic);
     var runtimeFactory:NodeRuntimeFactory<Runtime> = cast _Runtime.UNDEFINED;
     var out:flight._internal._Intersection2<Node<Traits>, Traits> = cast _Runtime.UNDEFINED;
     runtimeFactory = _Runtime.coalesce(createNodeRuntimeFactory, function():Dynamic return cast (cast (cast createNodeRuntime : flight._internal._Any) : NodeRuntimeFactory<Runtime>));
-    out = (cast ({ final __allocatedObject167:Dynamic = __nodeAllocator(); _Runtime.setField(__allocatedObject167, 'data', ((cast !_Runtime.strictEquals(createData, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast createData(({ final __callArgument169:Dynamic = (cast ({ final __structural168 = obj; __structural168 == null ? _Runtime.UNDEFINED : (cast __structural168 : { @:optional var data:Null<flight._internal._Object>; }).data; }) : flight._internal._Partial<Data>); __callArgument169; })) : Data) : Dynamic) : (cast null : Dynamic))); _Runtime.setField(__allocatedObject167, 'name', _Runtime.coalesce(({ final __structural172 = obj; __structural172 == null ? _Runtime.UNDEFINED : (cast __structural172 : { @:optional var name:Null<String>; }).name; }), function():Dynamic return cast null)); _Runtime.setField(__allocatedObject167, 'kind', nodeKind); _Runtime.setIndex(__allocatedObject167, EntityRuntimeKey, (cast (#if js _Runtime.callValue(runtimeFactory, cast ([] : Array<Dynamic>)) #else runtimeFactory(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Runtime)); __allocatedObject167; }) : flight._internal._Intersection2<Node<Traits>, Traits>);
+    out = (cast ({ final __allocatedObject167:Dynamic = __nodeAllocator(); _Runtime.setField(__allocatedObject167, 'data', ((cast !_Runtime.strictEquals(createData, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast createData(({ final __callArgument169:Dynamic = (cast ({ final __structural168 = obj; __structural168 == null ? _Runtime.UNDEFINED : (cast __structural168 : { @:optional var data:Null<{ @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }>; }).data; }) : flight._internal._Partial<Data>); __callArgument169; })) : Data) : Dynamic) : (cast null : Dynamic))); _Runtime.setField(__allocatedObject167, 'name', _Runtime.coalesce(({ final __structural172 = obj; __structural172 == null ? _Runtime.UNDEFINED : (cast __structural172 : { @:optional var name:Null<String>; }).name; }), function():Dynamic return cast null)); _Runtime.setField(__allocatedObject167, 'kind', nodeKind); _Runtime.setIndex(__allocatedObject167, EntityRuntimeKey, (cast (#if js _Runtime.callValue(runtimeFactory, cast ([] : Array<Dynamic>)) #else runtimeFactory(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Runtime)); __allocatedObject167; }) : flight._internal._Intersection2<Node<Traits>, Traits>);
     ((cast out : { var enabled:Bool; }).enabled = _Runtime.coalesce(({ final __structural173 = obj; __structural173 == null ? _Runtime.UNDEFINED : (cast __structural173 : { @:optional var enabled:Null<Bool>; }).enabled; }), function():Dynamic return cast true));
     return cast out;
     return cast null;
@@ -965,7 +988,10 @@ class _Node {
   @:allow(flight)
   @:keep
   private static function createNodeSignals():NodeSignals {
-    return cast { onChildAdded: (cast createSignal() : Signal<NodeAny->Void>), onChildRemoved: (cast createSignal() : Signal<NodeAny->Void>), onChildrenChanged: (cast createSignal() : Signal<Void->Void>), onChildrenOrderChanged: (cast createSignal() : Signal<Void->Void>), onParentChanged: (cast createSignal() : Signal<Void->Void>) };
+    var out:EntityConstruction<NodeSignals> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ onChildAdded: cast _Runtime.UNDEFINED, onChildRemoved: cast _Runtime.UNDEFINED, onChildrenChanged: cast _Runtime.UNDEFINED, onChildrenOrderChanged: cast _Runtime.UNDEFINED, onParentChanged: cast _Runtime.UNDEFINED } : NodeSignals); }) #end));
+    initializeNodeSignals(({ final __callArgument175:Dynamic = out; __callArgument175; }));
+    return cast out;
     return cast null;
   }
 
@@ -982,7 +1008,7 @@ class _Node {
     var children:Null<Array<NodeOf<Traits>>> = cast _Runtime.UNDEFINED;
     var nodeSignals:Null<NodeSignals> = cast _Runtime.UNDEFINED;
     var interactionSignals:Null<InteractionSignals> = cast _Runtime.UNDEFINED;
-    runtime = (cast getEntityRuntime(({ final __callArgument175:Dynamic = target; __callArgument175; })) : NodeRuntime<Traits>);
+    runtime = (cast getEntityRuntime(({ final __callArgument177:Dynamic = target; __callArgument177; })) : NodeRuntime<Traits>);
     parent = (cast runtime : NodeRuntime<Traits>).parent;
     if ((cast !_Runtime.strictEquals(parent, null) : Bool)) {
       (cast removeNodeChild((cast parent : Dynamic), (cast target : Dynamic)) : NodeOf<Traits>);
@@ -1017,21 +1043,31 @@ class _Node {
 
   public static function enableNodeSignals<Traits:flight._internal._Object>(source:Node<Traits>):NodeSignals {
     var runtime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
-    runtime = (cast getEntityRuntime(({ final __callArgument177:Dynamic = source; __callArgument177; })) : NodeRuntime<Traits>);
-    return cast ({ final __nullishOwner179 = runtime; final __nullishValue180:Null<NodeSignals> = cast (cast __nullishOwner179 : NodeRuntime<Traits>).nodeSignals; __nullishValue180 == null ? ((cast __nullishOwner179 : NodeRuntime<Traits>).nodeSignals = (cast (cast createNodeSignals() : NodeSignals) : Null<NodeSignals>)) : (cast __nullishValue180 : Null<NodeSignals>); });
+    runtime = (cast getEntityRuntime(({ final __callArgument179:Dynamic = source; __callArgument179; })) : NodeRuntime<Traits>);
+    return cast ({ final __nullishOwner181 = runtime; final __nullishValue182:Null<NodeSignals> = cast (cast __nullishOwner181 : NodeRuntime<Traits>).nodeSignals; __nullishValue182 == null ? ((cast __nullishOwner181 : NodeRuntime<Traits>).nodeSignals = (cast (cast createNodeSignals() : NodeSignals) : Null<NodeSignals>)) : (cast __nullishValue182 : Null<NodeSignals>); });
     return cast null;
   }
 
   @:allow(flight)
   @:keep
   private static function getNodeRuntime<Traits:flight._internal._Object>(source:Node<Traits>):NodeRuntime<Traits> {
-    return cast (cast getEntityRuntime(({ final __callArgument181:Dynamic = source; __callArgument181; })) : NodeRuntime<Traits>);
+    return cast (cast getEntityRuntime(({ final __callArgument183:Dynamic = source; __callArgument183; })) : NodeRuntime<Traits>);
     return cast null;
   }
 
   public static function getNodeSignals<Traits:flight._internal._Object>(source:Node<Traits>):Null<NodeSignals> {
-    return cast (cast (cast getEntityRuntime(({ final __callArgument183:Dynamic = source; __callArgument183; })) : NodeRuntime<Traits>) : NodeRuntime<Traits>).nodeSignals;
+    return cast (cast (cast getEntityRuntime(({ final __callArgument185:Dynamic = source; __callArgument185; })) : NodeRuntime<Traits>) : NodeRuntime<Traits>).nodeSignals;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeNodeSignals(out:EntityConstruction<NodeSignals>):Void {
+    _Runtime.setField(out, 'onChildAdded', (cast createSignal() : Signal<NodeAny->Void>));
+    _Runtime.setField(out, 'onChildRemoved', (cast createSignal() : Signal<NodeAny->Void>));
+    _Runtime.setField(out, 'onChildrenChanged', (cast createSignal() : Signal<Void->Void>));
+    _Runtime.setField(out, 'onChildrenOrderChanged', (cast createSignal() : Signal<Void->Void>));
+    _Runtime.setField(out, 'onParentChanged', (cast createSignal() : Signal<Void->Void>));
   }
 
   public static function setNodeEnabled<Traits:flight._internal._Object>(target:Node<Traits>, value:Bool):Void {
@@ -1045,7 +1081,7 @@ class _Node {
     runtime = (cast getNodeRuntime((cast source : Dynamic)) : NodeRuntime<Traits>);
     current = (cast runtime : NodeRuntime<Traits>).colorAdjustments;
     ((cast runtime : NodeRuntime<Traits>).colorAdjustments = ((cast _Runtime.strictEquals(current, null) : Bool) ? (cast cast ([adjustment] : Array<Dynamic>) : Dynamic) : (cast _Runtime.concatArrays([_Runtime.toArray(current), [adjustment]]) : Dynamic)));
-    _Node.resolveNodeColorAdjustments__nodeColorAdjustment(({ final __callArgument185:Dynamic = runtime; __callArgument185; }));
+    _Node.resolveNodeColorAdjustments__nodeColorAdjustment(({ final __callArgument187:Dynamic = runtime; __callArgument187; }));
     invalidateNodeAppearance((cast source : Dynamic));
   }
 
@@ -1058,12 +1094,12 @@ class _Node {
     var runtime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
     runtime = (cast getNodeRuntime((cast source : Dynamic)) : NodeRuntime<Traits>);
     ((cast runtime : NodeRuntime<Traits>).colorAdjustments = value);
-    _Node.resolveNodeColorAdjustments__nodeColorAdjustment(({ final __callArgument187:Dynamic = runtime; __callArgument187; }));
+    _Node.resolveNodeColorAdjustments__nodeColorAdjustment(({ final __callArgument189:Dynamic = runtime; __callArgument189; }));
     invalidateNodeAppearance((cast source : Dynamic));
   }
 
   public static function setNodeColorAdjustmentsTint<Traits:flight._internal._Object>(source:Node<Traits>, tint:Float):Void {
-    setNodeColorAdjustments((cast source : Dynamic), ({ final __callArgument189:Dynamic = cast ([(cast createTintAdjustment((cast tint : Float)) : TintAdjustment)] : Array<Dynamic>); __callArgument189; }));
+    setNodeColorAdjustments((cast source : Dynamic), ({ final __callArgument191:Dynamic = cast ([(cast createTintAdjustment((cast tint : Float)) : TintAdjustment)] : Array<Dynamic>); __callArgument191; }));
   }
 
   public static function resolveNodeColorAdjustments__nodeColorAdjustment(runtime:ColorAdjustmentRuntime):Void {
@@ -1078,9 +1114,9 @@ class _Node {
       return;
     }
     out = _Runtime.coalesce(runtime.resolvedColorScaleBias, function():Dynamic return cast (cast (#if js _Runtime.callValue(createColorScaleBias, cast ([] : Array<Dynamic>)) #else createColorScaleBias(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : ColorScaleBias));
-    status = (cast resolveColorAdjustmentsColorScaleBias(({ final __callArgument191:Dynamic = adjustments; __callArgument191; }), ({ final __callArgument192:Dynamic = out; __callArgument192; })) : Float);
+    status = (cast resolveColorAdjustmentsColorScaleBias(({ final __callArgument193:Dynamic = adjustments; __callArgument193; }), ({ final __callArgument194:Dynamic = out; __callArgument194; })) : Float);
     (runtime.resolvedColorScaleBias = cast (out : Null<ColorScaleBias>));
-    (runtime.resolvedColorMatrix = cast (((cast _Runtime.strictEquals(status, COLOR_ADJUSTMENT_CHANNEL_MIXING) : Bool) ? (cast (cast resolveColorAdjustmentsColorMatrix(({ final __callArgument195:Dynamic = adjustments; __callArgument195; })) : Null<Array<Float>>) : Dynamic) : (cast null : Dynamic)) : Null<Array<Float>>));
+    (runtime.resolvedColorMatrix = cast (((cast _Runtime.strictEquals(status, COLOR_ADJUSTMENT_CHANNEL_MIXING) : Bool) ? (cast (cast resolveColorAdjustmentsColorMatrix(({ final __callArgument197:Dynamic = adjustments; __callArgument197; })) : Null<Array<Float>>) : Dynamic) : (cast null : Dynamic)) : Null<Array<Float>>));
     (runtime.colorAdjustmentsUnsupported = cast (((cast _Runtime.strictEquals(status, COLOR_ADJUSTMENT_CHANNEL_MIXING) : Bool) && (cast _Runtime.strictEquals(runtime.resolvedColorMatrix, null) : Bool)) : Bool));
   }
 
@@ -1169,7 +1205,10 @@ class _Node {
   }
 
   public static function createNodeOrderList<Traits:flight._internal._Object>():NodeOrderList<Traits> {
-    return cast { entryCount: 0.0, nodes: cast ([] : Array<Dynamic>), sortKeys: cast ([] : Array<Dynamic>) };
+    var out:EntityConstruction<NodeOrderList<Traits>> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ entryCount: cast _Runtime.UNDEFINED, nodes: cast _Runtime.UNDEFINED, sortKeys: cast _Runtime.UNDEFINED } : EntityShapeL126C15__nodeOrderList); }) #end));
+    initializeNodeOrderList((cast out : Dynamic));
+    return cast out;
     return cast null;
   }
 
@@ -1199,6 +1238,14 @@ class _Node {
   public static function hasNodeOrderListEntry<Traits:flight._internal._Object>(list:NodeOrderList<Traits>, node:Node<Traits>):Bool {
     return cast !_Runtime.strictEquals((cast _Node.findNodeOrderListEntryIndex__nodeOrderList((cast list : Dynamic), (cast node : Dynamic)) : Float), -1.0);
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeNodeOrderList<Traits:flight._internal._Object>(out:EntityConstruction<NodeOrderList<Traits>>):Void {
+    _Runtime.setField(out, 'entryCount', 0.0);
+    _Runtime.setField(out, 'nodes', cast ([] : Array<Dynamic>));
+    _Runtime.setField(out, 'sortKeys', cast ([] : Array<Dynamic>));
   }
 
   public static function removeNodeOrderListEntry<Traits:flight._internal._Object>(list:NodeOrderList<Traits>, node:Node<Traits>):Bool {
@@ -1313,18 +1360,18 @@ class _Node {
   public static final _slots__nodeOrderList:Array<Float> = (cast cast ([] : Array<Dynamic>));
 
   public static function convertNodeVector2GlobalToLocal<Traits:flight._internal._Object>(out:Vector2Like, source:Transform2DNode<Traits>, vector:Vector2Like):Void {
-    inverseMatrixTransformPointXY(({ final __callArgument197:Dynamic = out; __callArgument197; }), ({ final __callArgument198:Dynamic = (cast getNodeWorldMatrix((cast source : Dynamic)) : Matrix); __callArgument198; }), (cast vector.x : Float), (cast vector.y : Float));
+    inverseMatrixTransformPointXY(({ final __callArgument199:Dynamic = out; __callArgument199; }), ({ final __callArgument200:Dynamic = (cast getNodeWorldMatrix((cast source : Dynamic)) : Matrix); __callArgument200; }), (cast vector.x : Float), (cast vector.y : Float));
   }
 
   public static function convertNodeVector2LocalToGlobal<Traits:flight._internal._Object>(out:Vector2Like, source:Transform2DNode<Traits>, vector:Vector2Like):Void {
-    matrixTransformPointXY(({ final __callArgument201:Dynamic = out; __callArgument201; }), ({ final __callArgument202:Dynamic = (cast getNodeWorldMatrix((cast source : Dynamic)) : Matrix); __callArgument202; }), (cast vector.x : Float), (cast vector.y : Float));
+    matrixTransformPointXY(({ final __callArgument203:Dynamic = out; __callArgument203; }), ({ final __callArgument204:Dynamic = (cast getNodeWorldMatrix((cast source : Dynamic)) : Matrix); __callArgument204; }), (cast vector.x : Float), (cast vector.y : Float));
   }
 
   @:allow(flight)
   @:keep
   private static function ensureNodeLocalMatrix<Traits:flight._internal._Object>(target:Transform2DNode<Traits>):Void {
     var runtime:flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime> = cast _Runtime.UNDEFINED;
-    runtime = (cast getEntityRuntime(({ final __callArgument205:Dynamic = target; __callArgument205; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>);
+    runtime = (cast getEntityRuntime(({ final __callArgument207:Dynamic = target; __callArgument207; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>);
     if ((cast !_Runtime.strictEquals((cast runtime : { var localTransformUsingLocalTransformId:Float; }).localTransformUsingLocalTransformId, (cast runtime : { var localTransformId:Float; }).localTransformId) : Bool)) {
       _Node.recomputeLocalTransform2D__nodeTransform2d((cast target : Dynamic), (cast runtime : Dynamic));
     }
@@ -1337,12 +1384,12 @@ class _Node {
     var parent:Transform2DNode<Traits> = cast _Runtime.UNDEFINED;
     var parentRuntime:Null<{ >NodeRuntime<Traits>, >HasTransform2DRuntime, }> = cast _Runtime.UNDEFINED;
     var parentWorldTransformId:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getEntityRuntime(({ final __callArgument207:Dynamic = target; __callArgument207; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>);
+    runtime = (cast getEntityRuntime(({ final __callArgument209:Dynamic = target; __callArgument209; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>);
     parent = (cast (cast runtime : { var parent:Null<NodeOf<Traits>>; }).parent : Transform2DNode<Traits>);
     parentWorldTransformId = 0.0;
     if ((cast !_Runtime.strictEquals(parent, null) : Bool)) {
       ensureNodeWorldMatrix((cast parent : Dynamic));
-      (parentRuntime = cast ((cast getEntityRuntime(({ final __callArgument209:Dynamic = parent; __callArgument209; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>) : Dynamic));
+      (parentRuntime = cast ((cast getEntityRuntime(({ final __callArgument211:Dynamic = parent; __callArgument211; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>) : Dynamic));
       (parentWorldTransformId = cast ((cast parentRuntime : { var worldTransformId:Float; }).worldTransformId : Dynamic));
     }
     if ((cast ((cast !_Runtime.strictEquals((cast runtime : { var worldTransformUsingLocalTransformId:Float; }).worldTransformUsingLocalTransformId, (cast runtime : { var localTransformId:Float; }).localTransformId) : Bool) || (cast !_Runtime.strictEquals((cast runtime : { var worldTransformUsingParentTransformId:Float; }).worldTransformUsingParentTransformId, parentWorldTransformId) : Bool)) : Bool)) {
@@ -1352,7 +1399,7 @@ class _Node {
 
   public static function getNodeLocalMatrix<Traits:flight._internal._Object>(target:Transform2DNode<Traits>):Matrix {
     ensureNodeLocalMatrix((cast target : Dynamic));
-    return cast (cast (cast getEntityRuntime(({ final __callArgument211:Dynamic = target; __callArgument211; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>) : { var localMatrix:Null<Matrix>; }).localMatrix;
+    return cast (cast (cast getEntityRuntime(({ final __callArgument213:Dynamic = target; __callArgument213; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>) : { var localMatrix:Null<Matrix>; }).localMatrix;
     return cast null;
   }
 
@@ -1370,12 +1417,12 @@ class _Node {
 
   public static function getNodeWorldMatrix<Traits:flight._internal._Object>(target:Transform2DNode<Traits>):Matrix {
     ensureNodeWorldMatrix((cast target : Dynamic));
-    return cast (cast (cast getEntityRuntime(({ final __callArgument213:Dynamic = target; __callArgument213; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>) : { var worldMatrix:Null<Matrix>; }).worldMatrix;
+    return cast (cast (cast getEntityRuntime(({ final __callArgument215:Dynamic = target; __callArgument215; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>) : { var worldMatrix:Null<Matrix>; }).worldMatrix;
     return cast null;
   }
 
   public static function setNodeLocalMatrix<Traits:flight._internal._Object>(target:Transform2DNode<Traits>, source:MatrixLike):Void {
-    decomposeMatrixToTransform2D(({ final __callArgument215:Dynamic = target; __callArgument215; }), ({ final __callArgument216:Dynamic = source; __callArgument216; }));
+    decomposeMatrixToTransform2D(({ final __callArgument217:Dynamic = target; __callArgument217; }), ({ final __callArgument218:Dynamic = source; __callArgument218; }));
     invalidateNodeLocalTransform((cast target : Dynamic));
   }
 
@@ -1432,9 +1479,9 @@ class _Node {
     if ((cast _Runtime.strictEquals(runtime.worldMatrix, null) : Bool)) { (runtime.worldMatrix = cast ((cast (#if js _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) #else createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix) : Null<Matrix>)); }
     ensureNodeLocalMatrix((cast target : Dynamic));
     if ((cast !_Runtime.strictEquals(parentRuntime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      multiplyMatrix(({ final __callArgument219:Dynamic = runtime.worldMatrix; __callArgument219; }), ({ final __callArgument220:Dynamic = parentRuntime.worldMatrix; __callArgument220; }), ({ final __callArgument221:Dynamic = runtime.localMatrix; __callArgument221; }));
+      multiplyMatrix(({ final __callArgument221:Dynamic = runtime.worldMatrix; __callArgument221; }), ({ final __callArgument222:Dynamic = parentRuntime.worldMatrix; __callArgument222; }), ({ final __callArgument223:Dynamic = runtime.localMatrix; __callArgument223; }));
     } else {
-      copyMatrix(({ final __callArgument225:Dynamic = runtime.worldMatrix; __callArgument225; }), ({ final __callArgument226:Dynamic = runtime.localMatrix; __callArgument226; }));
+      copyMatrix(({ final __callArgument227:Dynamic = runtime.worldMatrix; __callArgument227; }), ({ final __callArgument228:Dynamic = runtime.localMatrix; __callArgument228; }));
     }
     computeNodeWorldTransformRevision((cast runtime : Dynamic), (cast parentRuntime : Dynamic));
   }
@@ -1442,20 +1489,20 @@ class _Node {
   public static function convertNodeVector3GlobalToLocal<Traits:flight._internal._Object>(out:Vector3Like, source:Transform3DNode<Traits>, point:Vector3Like):Void {
     var inv:Matrix4 = cast _Runtime.UNDEFINED;
     inv = (cast acquireMatrix4() : Matrix4);
-    (cast inverseMatrix4(({ final __callArgument229:Dynamic = inv; __callArgument229; }), (cast getNodeWorldMatrix4((cast source : Dynamic)) : Matrix4Like)) : Bool);
-    matrix4TransformPoint(({ final __callArgument231:Dynamic = out; __callArgument231; }), ({ final __callArgument232:Dynamic = inv; __callArgument232; }), ({ final __callArgument233:Dynamic = point; __callArgument233; }));
-    releaseMatrix4(({ final __callArgument237:Dynamic = inv; __callArgument237; }));
+    (cast inverseMatrix4(({ final __callArgument231:Dynamic = inv; __callArgument231; }), (cast getNodeWorldMatrix4((cast source : Dynamic)) : Matrix4Like)) : Bool);
+    matrix4TransformPoint(({ final __callArgument233:Dynamic = out; __callArgument233; }), ({ final __callArgument234:Dynamic = inv; __callArgument234; }), ({ final __callArgument235:Dynamic = point; __callArgument235; }));
+    releaseMatrix4(({ final __callArgument239:Dynamic = inv; __callArgument239; }));
   }
 
   public static function convertNodeVector3LocalToGlobal<Traits:flight._internal._Object>(out:Vector3Like, source:Transform3DNode<Traits>, point:Vector3Like):Void {
-    matrix4TransformPoint(({ final __callArgument239:Dynamic = out; __callArgument239; }), (cast getNodeWorldMatrix4((cast source : Dynamic)) : Matrix4Like), ({ final __callArgument240:Dynamic = point; __callArgument240; }));
+    matrix4TransformPoint(({ final __callArgument241:Dynamic = out; __callArgument241; }), (cast getNodeWorldMatrix4((cast source : Dynamic)) : Matrix4Like), ({ final __callArgument242:Dynamic = point; __callArgument242; }));
   }
 
   @:allow(flight)
   @:keep
   private static function ensureNodeLocalMatrix4<Traits:flight._internal._Object>(target:Transform3DNode<Traits>):Void {
     var runtime:flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime> = cast _Runtime.UNDEFINED;
-    runtime = (cast getEntityRuntime(({ final __callArgument243:Dynamic = target; __callArgument243; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>);
+    runtime = (cast getEntityRuntime(({ final __callArgument245:Dynamic = target; __callArgument245; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>);
     if ((cast ((cast _Runtime.strictEquals(runtime.localMatrix4, null) : Bool) || (cast !_Runtime.strictEquals((cast runtime : { var localTransformUsingLocalTransformId:Float; }).localTransformUsingLocalTransformId, (cast runtime : { var localTransformId:Float; }).localTransformId) : Bool)) : Bool)) {
       _Node.recomputeLocalTransform3D__nodeTransform3d((cast target : Dynamic), (cast runtime : Dynamic));
     }
@@ -1468,12 +1515,12 @@ class _Node {
     var parent:Null<Transform3DNode<Traits>> = cast _Runtime.UNDEFINED;
     var parentRuntime:Null<{ >NodeRuntime<Traits>, >HasTransform3DRuntime, }> = cast _Runtime.UNDEFINED;
     var parentWorldTransformId:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getEntityRuntime(({ final __callArgument245:Dynamic = target; __callArgument245; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>);
+    runtime = (cast getEntityRuntime(({ final __callArgument247:Dynamic = target; __callArgument247; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>);
     parent = (cast (cast runtime : { var parent:Null<NodeOf<Traits>>; }).parent : Null<Transform3DNode<Traits>>);
     parentWorldTransformId = 0.0;
     if ((cast !_Runtime.strictEquals(parent, null) : Bool)) {
       ensureNodeWorldMatrix4((cast parent : Dynamic));
-      (parentRuntime = cast ((cast getEntityRuntime(({ final __callArgument247:Dynamic = parent; __callArgument247; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>) : Dynamic));
+      (parentRuntime = cast ((cast getEntityRuntime(({ final __callArgument249:Dynamic = parent; __callArgument249; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>) : Dynamic));
       (parentWorldTransformId = cast ((cast parentRuntime : { var worldTransformId:Float; }).worldTransformId : Dynamic));
     }
     if ((cast ((cast !_Runtime.strictEquals((cast runtime : { var worldTransformUsingLocalTransformId:Float; }).worldTransformUsingLocalTransformId, (cast runtime : { var localTransformId:Float; }).localTransformId) : Bool) || (cast !_Runtime.strictEquals((cast runtime : { var worldTransformUsingParentTransformId:Float; }).worldTransformUsingParentTransformId, parentWorldTransformId) : Bool)) : Bool)) {
@@ -1483,42 +1530,42 @@ class _Node {
 
   public static function getNodeLocalMatrix4<Traits:flight._internal._Object>(target:Transform3DNode<Traits>):Matrix4Like {
     ensureNodeLocalMatrix4((cast target : Dynamic));
-    return cast (cast (cast getEntityRuntime(({ final __callArgument249:Dynamic = target; __callArgument249; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>) : { var localMatrix4:Null<Matrix4>; }).localMatrix4;
+    return cast (cast (cast getEntityRuntime(({ final __callArgument251:Dynamic = target; __callArgument251; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>) : { var localMatrix4:Null<Matrix4>; }).localMatrix4;
     return cast null;
   }
 
   public static function getNodeTransform3D<Traits:flight._internal._Object>(out:Transform3DLike, source:Transform3DNode<Traits>):Void {
-    copyVector3(({ final __callArgument251:Dynamic = _Runtime.field(out, 'position'); __callArgument251; }), ({ final __callArgument252:Dynamic = source.position; __callArgument252; }));
-    copyQuaternion(({ final __callArgument255:Dynamic = _Runtime.field(out, 'rotation'); __callArgument255; }), ({ final __callArgument256:Dynamic = source.rotation; __callArgument256; }));
-    copyVector3(({ final __callArgument259:Dynamic = _Runtime.field(out, 'scale'); __callArgument259; }), ({ final __callArgument260:Dynamic = source.scale; __callArgument260; }));
+    copyVector3(({ final __callArgument253:Dynamic = _Runtime.field(out, 'position'); __callArgument253; }), ({ final __callArgument254:Dynamic = source.position; __callArgument254; }));
+    copyQuaternion(({ final __callArgument257:Dynamic = _Runtime.field(out, 'rotation'); __callArgument257; }), ({ final __callArgument258:Dynamic = source.rotation; __callArgument258; }));
+    copyVector3(({ final __callArgument261:Dynamic = _Runtime.field(out, 'scale'); __callArgument261; }), ({ final __callArgument262:Dynamic = source.scale; __callArgument262; }));
   }
 
   public static function getNodeWorldMatrix4<Traits:flight._internal._Object>(target:Transform3DNode<Traits>):Matrix4Like {
     ensureNodeWorldMatrix4((cast target : Dynamic));
-    return cast (cast (cast getEntityRuntime(({ final __callArgument263:Dynamic = target; __callArgument263; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>) : { var worldMatrix4:Null<Matrix4>; }).worldMatrix4;
+    return cast (cast (cast getEntityRuntime(({ final __callArgument265:Dynamic = target; __callArgument265; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>) : { var worldMatrix4:Null<Matrix4>; }).worldMatrix4;
     return cast null;
   }
 
   public static function isNodeLocalMatrix4Detached<Traits:flight._internal._Object>(target:Transform3DNode<Traits>):Bool {
     ensureNodeLocalMatrix4((cast target : Dynamic));
-    return cast (cast (cast getEntityRuntime(({ final __callArgument265:Dynamic = target; __callArgument265; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>) : { var localMatrix4Detached:Bool; }).localMatrix4Detached;
+    return cast (cast (cast getEntityRuntime(({ final __callArgument267:Dynamic = target; __callArgument267; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>) : { var localMatrix4Detached:Bool; }).localMatrix4Detached;
     return cast null;
   }
 
   public static function setNodeLocalMatrix4<Traits:flight._internal._Object>(target:Transform3DNode<Traits>, source:Matrix4Like):Void {
     var runtime:flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime> = cast _Runtime.UNDEFINED;
-    runtime = (cast getEntityRuntime(({ final __callArgument267:Dynamic = target; __callArgument267; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>);
+    runtime = (cast getEntityRuntime(({ final __callArgument269:Dynamic = target; __callArgument269; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>);
     if ((cast _Runtime.strictEquals(runtime.localMatrix4, null) : Bool)) { (runtime.localMatrix4 = cast ((cast (#if js _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) #else createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix4) : Null<Matrix4>)); }
-    copyMatrix4(({ final __callArgument269:Dynamic = runtime.localMatrix4; __callArgument269; }), ({ final __callArgument270:Dynamic = source; __callArgument270; }));
+    copyMatrix4(({ final __callArgument271:Dynamic = runtime.localMatrix4; __callArgument271; }), ({ final __callArgument272:Dynamic = source; __callArgument272; }));
     invalidateNodeLocalTransform((cast target : Dynamic));
     ((cast runtime : { var localTransformUsingLocalTransformId:Float; }).localTransformUsingLocalTransformId = (cast runtime : { var localTransformId:Float; }).localTransformId);
     (runtime.localMatrix4Detached = cast (true : Bool));
   }
 
   public static function setNodeTransform3D<Traits:flight._internal._Object>(target:Transform3DNode<Traits>, source:Transform3DLike):Void {
-    copyVector3(({ final __callArgument273:Dynamic = target.position; __callArgument273; }), ({ final __callArgument274:Dynamic = _Runtime.field(source, 'position'); __callArgument274; }));
-    copyQuaternion(({ final __callArgument277:Dynamic = target.rotation; __callArgument277; }), ({ final __callArgument278:Dynamic = _Runtime.field(source, 'rotation'); __callArgument278; }));
-    copyVector3(({ final __callArgument281:Dynamic = target.scale; __callArgument281; }), ({ final __callArgument282:Dynamic = _Runtime.field(source, 'scale'); __callArgument282; }));
+    copyVector3(({ final __callArgument275:Dynamic = target.position; __callArgument275; }), ({ final __callArgument276:Dynamic = _Runtime.field(source, 'position'); __callArgument276; }));
+    copyQuaternion(({ final __callArgument279:Dynamic = target.rotation; __callArgument279; }), ({ final __callArgument280:Dynamic = _Runtime.field(source, 'rotation'); __callArgument280; }));
+    copyVector3(({ final __callArgument283:Dynamic = target.scale; __callArgument283; }), ({ final __callArgument284:Dynamic = _Runtime.field(source, 'scale'); __callArgument284; }));
     invalidateNodeLocalTransform((cast target : Dynamic));
   }
 
@@ -1526,15 +1573,15 @@ class _Node {
   @:keep
   private static function syncNodeTransform3DFromMatrix4<Traits:flight._internal._Object>(target:Transform3DNode<Traits>):Void {
     var runtime:flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime> = cast _Runtime.UNDEFINED;
-    runtime = (cast getEntityRuntime(({ final __callArgument285:Dynamic = target; __callArgument285; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>);
+    runtime = (cast getEntityRuntime(({ final __callArgument287:Dynamic = target; __callArgument287; })) : flight._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>);
     ensureNodeLocalMatrix4((cast target : Dynamic));
-    decomposeMatrix4(({ final __callArgument287:Dynamic = target.position; __callArgument287; }), ({ final __callArgument288:Dynamic = target.rotation; __callArgument288; }), ({ final __callArgument289:Dynamic = target.scale; __callArgument289; }), ({ final __callArgument290:Dynamic = runtime.localMatrix4; __callArgument290; }));
+    decomposeMatrix4(({ final __callArgument289:Dynamic = target.position; __callArgument289; }), ({ final __callArgument290:Dynamic = target.rotation; __callArgument290; }), ({ final __callArgument291:Dynamic = target.scale; __callArgument291; }), ({ final __callArgument292:Dynamic = runtime.localMatrix4; __callArgument292; }));
     (runtime.localMatrix4Detached = cast (false : Bool));
   }
 
   public static function recomputeLocalTransform3D__nodeTransform3d<Traits:flight._internal._Object>(target:Transform3DNode<Traits>, runtime:{ >NodeRuntime<Traits>, >HasTransform3DRuntime, }):Void {
     if ((cast _Runtime.strictEquals(runtime.localMatrix4, null) : Bool)) { (runtime.localMatrix4 = cast ((cast (#if js _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) #else createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix4) : Null<Matrix4>)); }
-    composeMatrix4(({ final __callArgument295:Dynamic = runtime.localMatrix4; __callArgument295; }), ({ final __callArgument296:Dynamic = target.position; __callArgument296; }), ({ final __callArgument297:Dynamic = target.rotation; __callArgument297; }), ({ final __callArgument298:Dynamic = target.scale; __callArgument298; }));
+    composeMatrix4(({ final __callArgument297:Dynamic = runtime.localMatrix4; __callArgument297; }), ({ final __callArgument298:Dynamic = target.position; __callArgument298; }), ({ final __callArgument299:Dynamic = target.rotation; __callArgument299; }), ({ final __callArgument300:Dynamic = target.scale; __callArgument300; }));
     (runtime.localMatrix4Detached = cast (false : Bool));
     ((cast runtime : { var localTransformUsingLocalTransformId:Float; }).localTransformUsingLocalTransformId = (cast runtime : { var localTransformId:Float; }).localTransformId);
   }
@@ -1545,9 +1592,9 @@ class _Node {
     }
     ensureNodeLocalMatrix4((cast target : Dynamic));
     if ((cast !_Runtime.strictEquals(parentRuntime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      multiplyMatrix4(({ final __callArgument303:Dynamic = runtime.worldMatrix4; __callArgument303; }), ({ final __callArgument304:Dynamic = parentRuntime.worldMatrix4; __callArgument304; }), ({ final __callArgument305:Dynamic = runtime.localMatrix4; __callArgument305; }));
+      multiplyMatrix4(({ final __callArgument305:Dynamic = runtime.worldMatrix4; __callArgument305; }), ({ final __callArgument306:Dynamic = parentRuntime.worldMatrix4; __callArgument306; }), ({ final __callArgument307:Dynamic = runtime.localMatrix4; __callArgument307; }));
     } else {
-      copyMatrix4(({ final __callArgument309:Dynamic = runtime.worldMatrix4; __callArgument309; }), ({ final __callArgument310:Dynamic = runtime.localMatrix4; __callArgument310; }));
+      copyMatrix4(({ final __callArgument311:Dynamic = runtime.worldMatrix4; __callArgument311; }), ({ final __callArgument312:Dynamic = runtime.localMatrix4; __callArgument312; }));
     }
     computeNodeWorldTransformRevision((cast runtime : Dynamic), (cast parentRuntime : Dynamic));
   }
@@ -1713,12 +1760,12 @@ class _Node {
     contentHeight = 0.0;
     if ((cast !_Runtime.strictEquals(_Runtime.field(scene2d, 'root'), null) : Bool)) {
       var runtime:{ @:optional var boundsRectangle:Null<Rectangle>; @:optional var computeLocalBoundsRectangle:Null<Rectangle->BoundsNodeAny->Void>; @:optional var isLocalBoundsRectangleValid:Null<BoundsNodeAny->Bool>; @:optional var localBoundsRectangle:Null<Rectangle>; @:optional var worldBoundsRectangle:Null<Rectangle>; @:optional var binding:Null<flight._internal._Object>; @:optional var uid:Null<String>; } = (cast getNodeRuntime((cast _Runtime.field(scene2d, 'root') : Dynamic)) : { @:optional var boundsRectangle:Null<Rectangle>; @:optional var computeLocalBoundsRectangle:Null<Rectangle->BoundsNodeAny->Void>; @:optional var isLocalBoundsRectangleValid:Null<BoundsNodeAny->Bool>; @:optional var localBoundsRectangle:Null<Rectangle>; @:optional var worldBoundsRectangle:Null<Rectangle>; @:optional var binding:Null<flight._internal._Object>; @:optional var uid:Null<String>; });
-      if ((cast !_Runtime.strictEquals(({ final __structural313 = runtime; __structural313 == null ? _Runtime.UNDEFINED : (cast __structural313 : { @:optional var boundsRectangle:Null<Rectangle>; @:optional var computeLocalBoundsRectangle:Null<Rectangle->BoundsNodeAny->Void>; @:optional var isLocalBoundsRectangleValid:Null<BoundsNodeAny->Bool>; @:optional var localBoundsRectangle:Null<Rectangle>; @:optional var worldBoundsRectangle:Null<Rectangle>; @:optional var binding:Null<flight._internal._Object>; @:optional var uid:Null<String>; }).computeLocalBoundsRectangle; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      if ((cast !_Runtime.strictEquals(({ final __structural315 = runtime; __structural315 == null ? _Runtime.UNDEFINED : (cast __structural315 : { @:optional var boundsRectangle:Null<Rectangle>; @:optional var computeLocalBoundsRectangle:Null<Rectangle->BoundsNodeAny->Void>; @:optional var isLocalBoundsRectangleValid:Null<BoundsNodeAny->Bool>; @:optional var localBoundsRectangle:Null<Rectangle>; @:optional var worldBoundsRectangle:Null<Rectangle>; @:optional var binding:Null<flight._internal._Object>; @:optional var uid:Null<String>; }).computeLocalBoundsRectangle; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         (_Node._tempRectangle__stageFit.x = cast (0.0 : Float));
         (_Node._tempRectangle__stageFit.y = cast (0.0 : Float));
         (_Node._tempRectangle__stageFit.width = cast (0.0 : Float));
         (_Node._tempRectangle__stageFit.height = cast (0.0 : Float));
-        (cast runtime : { @:optional var boundsRectangle:Null<Rectangle>; @:optional var computeLocalBoundsRectangle:Null<Rectangle->BoundsNodeAny->Void>; @:optional var isLocalBoundsRectangleValid:Null<BoundsNodeAny->Bool>; @:optional var localBoundsRectangle:Null<Rectangle>; @:optional var worldBoundsRectangle:Null<Rectangle>; @:optional var binding:Null<flight._internal._Object>; @:optional var uid:Null<String>; }).computeLocalBoundsRectangle(({ final __callArgument314:Dynamic = _Node._tempRectangle__stageFit; __callArgument314; }), (cast _Runtime.field(scene2d, 'root') : BoundsNodeAny));
+        (cast runtime : { @:optional var boundsRectangle:Null<Rectangle>; @:optional var computeLocalBoundsRectangle:Null<Rectangle->BoundsNodeAny->Void>; @:optional var isLocalBoundsRectangleValid:Null<BoundsNodeAny->Bool>; @:optional var localBoundsRectangle:Null<Rectangle>; @:optional var worldBoundsRectangle:Null<Rectangle>; @:optional var binding:Null<flight._internal._Object>; @:optional var uid:Null<String>; }).computeLocalBoundsRectangle(({ final __callArgument316:Dynamic = _Node._tempRectangle__stageFit; __callArgument316; }), (cast _Runtime.field(scene2d, 'root') : BoundsNodeAny));
         (contentX = cast (_Node._tempRectangle__stageFit.x : Dynamic));
         (contentY = cast (_Node._tempRectangle__stageFit.y : Dynamic));
         (contentWidth = cast (_Node._tempRectangle__stageFit.width : Dynamic));
@@ -1876,12 +1923,25 @@ class _Node {
   public static final _emptyChildren__traversal:Array<flight._internal._Any> = (cast cast ([] : Array<Dynamic>));
 
   public static function createViewport(?obj:ViewportLike):Viewport {
-    return cast (cast createEntity(({ final __callArgument325:Dynamic = ({ devicePixelRatio: (cast _Runtime.coalesce(({ final __structural320 = obj; __structural320 == null ? _Runtime.UNDEFINED : (cast __structural320 : { @:optional var devicePixelRatio:Null<Float>; }).devicePixelRatio; }), function():Dynamic return cast 1.0) : Dynamic), height: (cast _Runtime.coalesce(({ final __structural321 = obj; __structural321 == null ? _Runtime.UNDEFINED : (cast __structural321 : { @:optional var height:Null<Float>; }).height; }), function():Dynamic return cast 0.0) : Dynamic), width: (cast _Runtime.coalesce(({ final __structural322 = obj; __structural322 == null ? _Runtime.UNDEFINED : (cast __structural322 : { @:optional var width:Null<Float>; }).width; }), function():Dynamic return cast 0.0) : Dynamic), x: (cast _Runtime.coalesce(({ final __structural323 = obj; __structural323 == null ? _Runtime.UNDEFINED : (cast __structural323 : { @:optional var x:Null<Float>; }).x; }), function():Dynamic return cast 0.0) : Dynamic), y: (cast _Runtime.coalesce(({ final __structural324 = obj; __structural324 == null ? _Runtime.UNDEFINED : (cast __structural324 : { @:optional var y:Null<Float>; }).y; }), function():Dynamic return cast 0.0) : Dynamic) } : Viewport); __callArgument325; })) : Viewport);
+    var out:EntityConstruction<Viewport> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ devicePixelRatio: cast _Runtime.UNDEFINED, height: cast _Runtime.UNDEFINED, width: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : Viewport); }) #end));
+    initializeViewport(({ final __callArgument317:Dynamic = out; __callArgument317; }), (cast obj : Dynamic));
+    return cast out;
     return cast null;
   }
 
   public static function getViewportAspect(viewport:Viewport):Float {
     return cast ((cast !_Runtime.strictEquals(viewport.height, 0.0) : Bool) ? (cast (viewport.width / viewport.height) : Dynamic) : (cast 1.0 : Dynamic));
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeViewport(out:EntityConstruction<Viewport>, ?obj:ViewportLike):Void {
+    _Runtime.setField(out, 'devicePixelRatio', _Runtime.coalesce(({ final __structural319 = obj; __structural319 == null ? _Runtime.UNDEFINED : (cast __structural319 : { @:optional var devicePixelRatio:Null<Float>; }).devicePixelRatio; }), function():Dynamic return cast 1.0));
+    _Runtime.setField(out, 'height', _Runtime.coalesce(({ final __structural320 = obj; __structural320 == null ? _Runtime.UNDEFINED : (cast __structural320 : { @:optional var height:Null<Float>; }).height; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'width', _Runtime.coalesce(({ final __structural321 = obj; __structural321 == null ? _Runtime.UNDEFINED : (cast __structural321 : { @:optional var width:Null<Float>; }).width; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'x', _Runtime.coalesce(({ final __structural322 = obj; __structural322 == null ? _Runtime.UNDEFINED : (cast __structural322 : { @:optional var x:Null<Float>; }).x; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'y', _Runtime.coalesce(({ final __structural323 = obj; __structural323 == null ? _Runtime.UNDEFINED : (cast __structural323 : { @:optional var y:Null<Float>; }).y; }), function():Dynamic return cast 0.0));
   }
 }

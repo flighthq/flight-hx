@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createSepiaAdjustment = api.createSepiaAdjustment;
+export const initializeSepiaAdjustment = api.initializeSepiaAdjustment;

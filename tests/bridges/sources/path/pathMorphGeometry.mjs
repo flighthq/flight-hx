@@ -6,6 +6,7 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const buildPathMorph = api.buildPathMorph;
+export const initializePathMorph__pathMorphGeometry = api.initializePathMorph__pathMorphGeometry;
 export const PathMorphIssueContourClosednessMismatch = api.PathMorphIssueContourClosednessMismatch;
 export const PathMorphIssueContourCountMismatch = api.PathMorphIssueContourCountMismatch;
 export const PathMorphIssueContourOrientationMismatch = api.PathMorphIssueContourOrientationMismatch;

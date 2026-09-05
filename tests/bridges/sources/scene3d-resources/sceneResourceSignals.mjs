@@ -8,3 +8,4 @@ __syncDependencies();
 export const createScene3DResourceSignals = api.createScene3DResourceSignals;
 export const enableScene3DResourceSignals = api.enableScene3DResourceSignals;
 export const getScene3DResourceSignals = api.getScene3DResourceSignals;
+export const initializeScene3DResourceSignals = api.initializeScene3DResourceSignals;

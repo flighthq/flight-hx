@@ -5,13 +5,40 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight._HostElectron as Facade_HostElectron_flight__HostElectron;
 import flight._HostElectron.ElectronClipboardBackend__electronClipboard;
+import flight._HostElectron.TrayRecord__electronTray;
+import flight.types.AppActivateBackend;
+import flight.types.AppActivationPolicyBackend;
+import flight.types.AppAllWindowsClosedBackend;
+import flight.types.AppBadgeBackend;
+import flight.types.AppDockBackend;
+import flight.types.AppFocusBackend;
+import flight.types.AppHideBackend;
+import flight.types.AppLocaleBackend;
+import flight.types.AppLoginItemBackend;
+import flight.types.AppNameBackend;
+import flight.types.AppNameWriteBackend;
+import flight.types.AppOpenFileBackend;
+import flight.types.AppPathBackend;
+import flight.types.AppQuitBackend;
+import flight.types.AppQuitRequestBackend;
+import flight.types.AppReadyBackend;
+import flight.types.AppRecentDocumentsBackend;
+import flight.types.AppRelaunchBackend;
+import flight.types.AppSecondInstanceBackend;
+import flight.types.AppShowBackend;
+import flight.types.AppSingleInstanceBackend;
+import flight.types.AppUserModelIdBackend;
+import flight.types.AppVersionBackend;
+import flight.types.AppVisibilityQueryBackend;
 import flight.types.ApplicationWindow;
 import flight.types.DesktopOsProfile;
 import flight.types.DirectoryOpenDialogBackend;
+import flight.types.DirectoryOpenDialogResult;
 import flight.types.ElectronApi;
 import flight.types.ElectronAppCapabilitiesFor;
 import flight.types.ElectronBackendOptions;
 import flight.types.ElectronBrowserWindow;
+import flight.types.ElectronCommonAppCapabilities;
 import flight.types.ElectronHost;
 import flight.types.ElectronIpcRenderer;
 import flight.types.ElectronIpcTarget;
@@ -26,27 +53,82 @@ import flight.types.ElectronProtocolCapabilities;
 import flight.types.ElectronTrayCapabilitiesFor;
 import flight.types.ElectronWindowsAppCapabilities;
 import flight.types.Entity;
+import flight.types.EntityConstruction;
+import flight.types.EntityRuntime;
+import flight.types.EntityWithoutRuntime;
 import flight.types.FileOpenDialogBackend;
+import flight.types.FileOpenDialogResult;
 import flight.types.FileSaveDialogBackend;
+import flight.types.FileSaveDialogResult;
 import flight.types.HostShellCapabilities;
 import flight.types.IpcHandleBackend;
 import flight.types.IpcInvokeBackend;
 import flight.types.IpcMessageBackend;
 import flight.types.IpcSendBackend;
 import flight.types.IpcTargetedSendBackend;
+import flight.types.MenuApplicationBackend;
+import flight.types.MenuPopupBackend;
+import flight.types.MenuSelectBackend;
 import flight.types.MessageDialogBackend;
+import flight.types.NonEntityCreateResult;
+import flight.types.NotificationClickBackend;
+import flight.types.NotificationCloseBackend;
+import flight.types.NotificationDeliveryBackend;
+import flight.types.NotificationDismissBackend;
+import flight.types.NotificationLifecycleBackend;
+import flight.types.NotificationReceivedBackend;
+import flight.types.OpenDirectoryDialogOptions;
+import flight.types.OpenFileDialogOptions;
 import flight.types.PlatformBackend;
+import flight.types.PlatformInfo;
 import flight.types.PlatformName;
+import flight.types.PowerBatteryHealthBackend;
+import flight.types.PowerChangeBackend;
+import flight.types.PowerIdleBackend;
+import flight.types.PowerKeepAwakeBackend;
+import flight.types.PowerSessionLockBackend;
+import flight.types.PowerStatusBackend;
+import flight.types.PowerSuspensionBackend;
+import flight.types.PowerThermalBackend;
+import flight.types.ProtocolDefaultBackend;
+import flight.types.ProtocolOpenBackend;
+import flight.types.ProtocolRegistrationBackend;
+import flight.types.ProtocolRegistrationQueryBackend;
+import flight.types.ProtocolUnregistrationBackend;
+import flight.types.SaveFileDialogOptions;
 import flight.types.ScreenChangeBackend;
+import flight.types.ScreenInfo;
 import flight.types.ScreenQueryBackend;
 import flight.types.ShellBeepBackend;
 import flight.types.ShellExternalBackend;
 import flight.types.ShellPathOpenBackend;
 import flight.types.ShellPathRevealBackend;
+import flight.types.ShellShortcutLinkBackend;
 import flight.types.ShellTrashBackend;
 import flight.types.ShortcutQueryBackend;
 import flight.types.ShortcutTriggerBackend;
 import flight.types.StorageBackend;
+import flight.types.StorageClearResult;
+import flight.types.StorageGetItemResult;
+import flight.types.StorageKeysResult;
+import flight.types.StorageRemoveItemResult;
+import flight.types.StorageSetItemResult;
+import flight.types.TrayBalloonBackend;
+import flight.types.TrayBalloonEventsBackend;
+import flight.types.TrayBoundsBackend;
+import flight.types.TrayDoubleClickPolicyBackend;
+import flight.types.TrayDropEventsBackend;
+import flight.types.TrayIcon;
+import flight.types.TrayImageBackend;
+import flight.types.TrayInteractionEventsBackend;
+import flight.types.TrayLifecycleBackend;
+import flight.types.TrayMenuBackend;
+import flight.types.TrayMenuSelectionEventsBackend;
+import flight.types.TrayPopupMenuBackend;
+import flight.types.TrayPressedImageBackend;
+import flight.types.TrayTemplateImageBackend;
+import flight.types.TrayTitleBackend;
+import flight.types.TrayTooltipBackend;
 import flight.types.UpdaterCommandBackend;
 import flight.types.WindowAttachmentOwnership;
 import flight.types.WindowBackend;
@@ -68,17 +150,17 @@ class HostElectron {
     return cast null;
   }
 
-  public static function createElectronDirectoryOpenDialogBackend(electron:ElectronApi):{ >DirectoryOpenDialogBackend, >Entity, } {
+  public static function createElectronDirectoryOpenDialogBackend(electron:ElectronApi):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>; } {
     return cast Facade_HostElectron_flight__HostElectron.createElectronDirectoryOpenDialogBackend(electron);
     return cast null;
   }
 
-  public static function createElectronFileOpenDialogBackend(electron:ElectronApi):{ >FileOpenDialogBackend, >Entity, } {
+  public static function createElectronFileOpenDialogBackend(electron:ElectronApi):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; } {
     return cast Facade_HostElectron_flight__HostElectron.createElectronFileOpenDialogBackend(electron);
     return cast null;
   }
 
-  public static function createElectronFileSaveDialogBackend(electron:ElectronApi):{ >FileSaveDialogBackend, >Entity, } {
+  public static function createElectronFileSaveDialogBackend(electron:ElectronApi):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; } {
     return cast Facade_HostElectron_flight__HostElectron.createElectronFileSaveDialogBackend(electron);
     return cast null;
   }
@@ -127,7 +209,7 @@ class HostElectron {
     return cast null;
   }
 
-  public static function createElectronPlatformBackend(electron:ElectronApi):{ >PlatformBackend, >Entity, } {
+  public static function createElectronPlatformBackend(electron:ElectronApi):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getInfo:PlatformInfo->PlatformInfo; } {
     return cast Facade_HostElectron_flight__HostElectron.createElectronPlatformBackend(electron);
     return cast null;
   }
@@ -142,7 +224,7 @@ class HostElectron {
     return cast null;
   }
 
-  public static function createElectronScreenCapabilities(electron:ElectronApi):flight._internal._Required<{ @:optional var change:Null<ScreenChangeBackend>; @:optional var query:Null<ScreenQueryBackend>; }> {
+  public static function createElectronScreenCapabilities(electron:ElectronApi):NonEntityCreateResult<flight._internal._Required<{ @:optional var change:Null<ScreenChangeBackend>; @:optional var query:Null<ScreenQueryBackend>; }>, String> {
     return cast Facade_HostElectron_flight__HostElectron.createElectronScreenCapabilities(electron);
     return cast null;
   }
@@ -157,7 +239,7 @@ class HostElectron {
     return cast null;
   }
 
-  public static function createElectronStorageBackend(electron:ElectronApi, ?fileName:String):{ >StorageBackend, >Entity, } {
+  public static function createElectronStorageBackend(electron:ElectronApi, ?fileName:String):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var clear:Void->StorageClearResult; var getItem:String->StorageGetItemResult; var keys:Void->StorageKeysResult; var removeItem:String->StorageRemoveItemResult; var setItem:String->String->StorageSetItemResult; } {
     return cast Facade_HostElectron_flight__HostElectron.createElectronStorageBackend(electron, fileName);
     return cast null;
   }
@@ -190,6 +272,362 @@ class HostElectron {
   public static function getElectronWindowId(win:ApplicationWindow):Float {
     return cast Facade_HostElectron_flight__HostElectron.getElectronWindowId(win);
     return cast null;
+  }
+
+  public static function initializeAppActivateBackend(out:EntityConstruction<AppActivateBackend>, subscribe:String->(Array<flight._internal._Any>->Void)->(Void->Void)):Void {
+    Facade_HostElectron_flight__HostElectron.initializeAppActivateBackend(out, subscribe);
+  }
+
+  public static function initializeAppActivationPolicyBackend(out:EntityConstruction<AppActivationPolicyBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeAppActivationPolicyBackend(out, app);
+  }
+
+  public static function initializeAppAllWindowsClosedBackend(out:EntityConstruction<AppAllWindowsClosedBackend>, subscribe:String->(Array<flight._internal._Any>->Void)->(Void->Void)):Void {
+    Facade_HostElectron_flight__HostElectron.initializeAppAllWindowsClosedBackend(out, subscribe);
+  }
+
+  public static function initializeAppBadgeBackend(out:EntityConstruction<AppBadgeBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeAppBadgeBackend(out, app);
+  }
+
+  public static function initializeAppDockBackend(out:EntityConstruction<AppDockBackend>, dock:flight._internal._IndexedAccess<flight._internal._IndexedAccess<ElectronApi, String>, String>, electron:ElectronApi):Void {
+    Facade_HostElectron_flight__HostElectron.initializeAppDockBackend(out, dock, electron);
+  }
+
+  public static function initializeAppFocusBackend(out:EntityConstruction<AppFocusBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeAppFocusBackend(out, app);
+  }
+
+  public static function initializeAppHideBackend(out:EntityConstruction<AppHideBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeAppHideBackend(out, app);
+  }
+
+  public static function initializeAppLocaleBackend(out:EntityConstruction<AppLocaleBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeAppLocaleBackend(out, app);
+  }
+
+  public static function initializeAppLoginItemBackend(out:EntityConstruction<AppLoginItemBackend>, electron:ElectronApi):Void {
+    Facade_HostElectron_flight__HostElectron.initializeAppLoginItemBackend(out, electron);
+  }
+
+  public static function initializeAppNameBackend(out:EntityConstruction<AppNameBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeAppNameBackend(out, app);
+  }
+
+  public static function initializeAppNameWriteBackend(out:EntityConstruction<AppNameWriteBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeAppNameWriteBackend(out, app);
+  }
+
+  public static function initializeAppOpenFileBackend(out:EntityConstruction<AppOpenFileBackend>, subscribe:String->(Array<flight._internal._Any>->Void)->(Void->Void)):Void {
+    Facade_HostElectron_flight__HostElectron.initializeAppOpenFileBackend(out, subscribe);
+  }
+
+  public static function initializeAppPathBackend(out:EntityConstruction<AppPathBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeAppPathBackend(out, app);
+  }
+
+  public static function initializeAppQuitBackend(out:EntityConstruction<AppQuitBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeAppQuitBackend(out, app);
+  }
+
+  public static function initializeAppQuitRequestBackend(out:EntityConstruction<AppQuitRequestBackend>, subscribe:String->(Array<flight._internal._Any>->Void)->(Void->Void)):Void {
+    Facade_HostElectron_flight__HostElectron.initializeAppQuitRequestBackend(out, subscribe);
+  }
+
+  public static function initializeAppReadyBackend(out:EntityConstruction<AppReadyBackend>, subscribe:String->(Array<flight._internal._Any>->Void)->(Void->Void)):Void {
+    Facade_HostElectron_flight__HostElectron.initializeAppReadyBackend(out, subscribe);
+  }
+
+  public static function initializeAppRecentDocumentsBackend(out:EntityConstruction<AppRecentDocumentsBackend>, electron:ElectronApi):Void {
+    Facade_HostElectron_flight__HostElectron.initializeAppRecentDocumentsBackend(out, electron);
+  }
+
+  public static function initializeAppRelaunchBackend(out:EntityConstruction<AppRelaunchBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeAppRelaunchBackend(out, app);
+  }
+
+  public static function initializeAppSecondInstanceBackend(out:EntityConstruction<AppSecondInstanceBackend>, subscribe:String->(Array<flight._internal._Any>->Void)->(Void->Void)):Void {
+    Facade_HostElectron_flight__HostElectron.initializeAppSecondInstanceBackend(out, subscribe);
+  }
+
+  public static function initializeAppShowBackend(out:EntityConstruction<AppShowBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeAppShowBackend(out, app);
+  }
+
+  public static function initializeAppSingleInstanceBackend(out:EntityConstruction<AppSingleInstanceBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeAppSingleInstanceBackend(out, app);
+  }
+
+  public static function initializeAppUserModelIdBackend(out:EntityConstruction<AppUserModelIdBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeAppUserModelIdBackend(out, app);
+  }
+
+  public static function initializeAppVersionBackend(out:EntityConstruction<AppVersionBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeAppVersionBackend(out, app);
+  }
+
+  public static function initializeAppVisibilityQueryBackend(out:EntityConstruction<AppVisibilityQueryBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeAppVisibilityQueryBackend(out, app);
+  }
+
+  public static function initializeElectronClipboardBackend(out:EntityConstruction<ElectronClipboardBackend__electronClipboard>, cb:flight._internal._IndexedAccess<ElectronApi, String>, electron:ElectronApi):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronClipboardBackend(out, cb, electron);
+  }
+
+  public static function initializeElectronCommonAppCapabilities(out:EntityConstruction<ElectronCommonAppCapabilities>, allWindowsClosed:AppAllWindowsClosedBackend, focus:AppFocusBackend, locale:AppLocaleBackend, name:AppNameBackend, nameWrite:AppNameWriteBackend, path:AppPathBackend, quit:AppQuitBackend, quitRequest:AppQuitRequestBackend, ready:AppReadyBackend, relaunch:AppRelaunchBackend, secondInstance:AppSecondInstanceBackend, singleInstance:AppSingleInstanceBackend, version:AppVersionBackend):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronCommonAppCapabilities(out, allWindowsClosed, focus, locale, name, nameWrite, path, quit, quitRequest, ready, relaunch, secondInstance, singleInstance, version);
+  }
+
+  public static function initializeElectronDirectoryOpenDialogBackend(out:EntityConstruction<DirectoryOpenDialogBackend>, electron:ElectronApi):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronDirectoryOpenDialogBackend(out, electron);
+  }
+
+  public static function initializeElectronFileOpenDialogBackend(out:EntityConstruction<FileOpenDialogBackend>, electron:ElectronApi):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronFileOpenDialogBackend(out, electron);
+  }
+
+  public static function initializeElectronFileSaveDialogBackend(out:EntityConstruction<FileSaveDialogBackend>, electron:ElectronApi):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronFileSaveDialogBackend(out, electron);
+  }
+
+  public static function initializeElectronHost(out:EntityConstruction<ElectronHost<DesktopOsProfile>>, values:EntityWithoutRuntime<ElectronHost<DesktopOsProfile>>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronHost(out, values);
+  }
+
+  public static function initializeElectronIpcHandleBackend(out:EntityConstruction<IpcHandleBackend>, electron:ElectronApi):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronIpcHandleBackend(out, electron);
+  }
+
+  public static function initializeElectronIpcInvokeBackend(out:EntityConstruction<IpcInvokeBackend>, ipcRenderer:ElectronIpcRenderer):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronIpcInvokeBackend(out, ipcRenderer);
+  }
+
+  public static function initializeElectronIpcMessageBackend(out:EntityConstruction<IpcMessageBackend>, electron:ElectronApi):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronIpcMessageBackend(out, electron);
+  }
+
+  public static function initializeElectronIpcSendBackend(out:EntityConstruction<IpcSendBackend>, ipcRenderer:ElectronIpcRenderer):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronIpcSendBackend(out, ipcRenderer);
+  }
+
+  public static function initializeElectronIpcTargetedSendBackend<Target:ElectronIpcTarget>(out:EntityConstruction<IpcTargetedSendBackend<Target>>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronIpcTargetedSendBackend(out);
+  }
+
+  public static function initializeElectronLinuxAppCapabilities(out:EntityConstruction<ElectronLinuxAppCapabilities>, common:ElectronCommonAppCapabilities, badge:AppBadgeBackend):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronLinuxAppCapabilities(out, common, badge);
+  }
+
+  public static function initializeElectronMacosAppCapabilities(out:EntityConstruction<ElectronMacosAppCapabilities>, common:ElectronCommonAppCapabilities, activate:AppActivateBackend, activationPolicy:AppActivationPolicyBackend, badge:AppBadgeBackend, dock:AppDockBackend, hide:AppHideBackend, hiddenQuery:AppVisibilityQueryBackend, loginItem:AppLoginItemBackend, openFile:AppOpenFileBackend, recentDocuments:AppRecentDocumentsBackend, show:AppShowBackend):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronMacosAppCapabilities(out, common, activate, activationPolicy, badge, dock, hide, hiddenQuery, loginItem, openFile, recentDocuments, show);
+  }
+
+  public static function initializeElectronMacosNotificationCapabilities(out:EntityConstruction<ElectronMacosNotificationCapabilities>, capabilities:{ var click:NotificationClickBackend; var close:NotificationCloseBackend; var delivery:NotificationDeliveryBackend; var dismiss:NotificationDismissBackend; var lifecycle:NotificationLifecycleBackend; var received:NotificationReceivedBackend; }, action:flight._internal._IndexedAccess<ElectronMacosNotificationCapabilities, String>, reply:flight._internal._IndexedAccess<ElectronMacosNotificationCapabilities, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronMacosNotificationCapabilities(out, capabilities, action, reply);
+  }
+
+  public static function initializeElectronMenuCapabilities(out:EntityConstruction<ElectronMenuCapabilities>, application:MenuApplicationBackend, popup:MenuPopupBackend, select:MenuSelectBackend):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronMenuCapabilities(out, application, popup, select);
+  }
+
+  public static function initializeElectronMessageDialogBackend(out:EntityConstruction<MessageDialogBackend>, electron:ElectronApi):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronMessageDialogBackend(out, electron);
+  }
+
+  public static function initializeElectronNotificationCapabilities(out:EntityConstruction<ElectronNotificationCapabilities>, capabilities:{ var click:NotificationClickBackend; var close:NotificationCloseBackend; var delivery:NotificationDeliveryBackend; var dismiss:NotificationDismissBackend; var lifecycle:NotificationLifecycleBackend; var received:NotificationReceivedBackend; }):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronNotificationCapabilities(out, capabilities);
+  }
+
+  public static function initializeElectronPlatformBackend(out:EntityConstruction<PlatformBackend>, electron:ElectronApi):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronPlatformBackend(out, electron);
+  }
+
+  public static function initializeElectronPowerCapabilities(out:EntityConstruction<ElectronPowerCapabilities>, batteryHealth:PowerBatteryHealthBackend, change:PowerChangeBackend, idle:PowerIdleBackend, keepAwake:PowerKeepAwakeBackend, sessionLock:PowerSessionLockBackend, status:PowerStatusBackend, suspension:PowerSuspensionBackend):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronPowerCapabilities(out, batteryHealth, change, idle, keepAwake, sessionLock, status, suspension);
+  }
+
+  public static function initializeElectronProtocolCapabilities(out:EntityConstruction<ElectronProtocolCapabilities>, defaultBackend:ProtocolDefaultBackend, open:ProtocolOpenBackend, registration:ProtocolRegistrationBackend, registrationQuery:ProtocolRegistrationQueryBackend, unregistration:ProtocolUnregistrationBackend):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronProtocolCapabilities(out, defaultBackend, open, registration, registrationQuery, unregistration);
+  }
+
+  public static function initializeElectronShortcutQueryBackend(provider:EntityConstruction<ShortcutQueryBackend>, electron:ElectronApi):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronShortcutQueryBackend(provider, electron);
+  }
+
+  public static function initializeElectronStorageBackend(out:EntityConstruction<StorageBackend>, electron:ElectronApi, ?fileName:String):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronStorageBackend(out, electron, fileName);
+  }
+
+  public static function initializeElectronUpdaterBackend(out:EntityConstruction<UpdaterCommandBackend>, electron:ElectronApi, ?feedUrl:String):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronUpdaterBackend(out, electron, feedUrl);
+  }
+
+  public static function initializeElectronWindowBackend(out:EntityConstruction<flight._internal._Intersection2<WindowBackend, flight._internal._Required<{ @:optional var attach:Null<ApplicationWindow->flight._internal._Any->WindowAttachmentOwnership->Bool>; @:optional var open:Null<ApplicationWindow->WindowOptions->Bool>; @:optional var close:Null<ApplicationWindow->Void>; }>>>, electron:ElectronApi):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronWindowBackend(out, electron);
+  }
+
+  public static function initializeElectronWindowsAppCapabilities(out:EntityConstruction<ElectronWindowsAppCapabilities>, common:ElectronCommonAppCapabilities, loginItem:AppLoginItemBackend, recentDocuments:AppRecentDocumentsBackend, userModelId:AppUserModelIdBackend):Void {
+    Facade_HostElectron_flight__HostElectron.initializeElectronWindowsAppCapabilities(out, common, loginItem, recentDocuments, userModelId);
+  }
+
+  public static function initializeEmptyScreenInfo(out:EntityConstruction<ScreenInfo>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeEmptyScreenInfo(out);
+  }
+
+  public static function initializeMenuApplicationBackend(out:EntityConstruction<MenuApplicationBackend>, electron:ElectronApi, menuState:{ var selectListener:Null<String->Void>; var destroyed:Bool; }):Void {
+    Facade_HostElectron_flight__HostElectron.initializeMenuApplicationBackend(out, electron, menuState);
+  }
+
+  public static function initializeMenuPopupBackend(out:EntityConstruction<MenuPopupBackend>, electron:ElectronApi):Void {
+    Facade_HostElectron_flight__HostElectron.initializeMenuPopupBackend(out, electron);
+  }
+
+  public static function initializeMenuSelectBackend(out:EntityConstruction<MenuSelectBackend>, menuState:{ var selectListener:Null<String->Void>; var destroyed:Bool; }):Void {
+    Facade_HostElectron_flight__HostElectron.initializeMenuSelectBackend(out, menuState);
+  }
+
+  public static function initializePowerBatteryHealthBackend(out:EntityConstruction<PowerBatteryHealthBackend>):Void {
+    Facade_HostElectron_flight__HostElectron.initializePowerBatteryHealthBackend(out);
+  }
+
+  public static function initializePowerChangeBackend(out:EntityConstruction<PowerChangeBackend>, powerMonitor:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializePowerChangeBackend(out, powerMonitor);
+  }
+
+  public static function initializePowerIdleBackend(out:EntityConstruction<PowerIdleBackend>, powerMonitor:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializePowerIdleBackend(out, powerMonitor);
+  }
+
+  public static function initializePowerKeepAwakeBackend(out:EntityConstruction<PowerKeepAwakeBackend>, powerSaveBlocker:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializePowerKeepAwakeBackend(out, powerSaveBlocker);
+  }
+
+  public static function initializePowerSessionLockBackend(out:EntityConstruction<PowerSessionLockBackend>, powerMonitor:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializePowerSessionLockBackend(out, powerMonitor);
+  }
+
+  public static function initializePowerStatusBackend(out:EntityConstruction<PowerStatusBackend>, powerMonitor:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializePowerStatusBackend(out, powerMonitor);
+  }
+
+  public static function initializePowerSuspensionBackend(out:EntityConstruction<PowerSuspensionBackend>, powerMonitor:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializePowerSuspensionBackend(out, powerMonitor);
+  }
+
+  public static function initializePowerThermalBackend(out:EntityConstruction<PowerThermalBackend>, powerMonitor:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializePowerThermalBackend(out, powerMonitor);
+  }
+
+  public static function initializeProtocolDefaultBackend(out:EntityConstruction<ProtocolDefaultBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>, registered:flight._internal._Set<String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeProtocolDefaultBackend(out, app, registered);
+  }
+
+  public static function initializeProtocolOpenBackend(out:EntityConstruction<ProtocolOpenBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeProtocolOpenBackend(out, app);
+  }
+
+  public static function initializeProtocolRegistrationBackend(out:EntityConstruction<ProtocolRegistrationBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>, registered:flight._internal._Set<String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeProtocolRegistrationBackend(out, app, registered);
+  }
+
+  public static function initializeProtocolRegistrationQueryBackend(out:EntityConstruction<ProtocolRegistrationQueryBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeProtocolRegistrationQueryBackend(out, app);
+  }
+
+  public static function initializeProtocolUnregistrationBackend(out:EntityConstruction<ProtocolUnregistrationBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>, registered:flight._internal._Set<String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeProtocolUnregistrationBackend(out, app, registered);
+  }
+
+  public static function initializeScreenChangeBackend(out:EntityConstruction<ScreenChangeBackend>, screen:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeScreenChangeBackend(out, screen);
+  }
+
+  public static function initializeScreenQueryBackend(out:EntityConstruction<ScreenQueryBackend>, screen:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeScreenQueryBackend(out, screen);
+  }
+
+  public static function initializeShellBeepBackend(out:EntityConstruction<ShellBeepBackend>, shell:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeShellBeepBackend(out, shell);
+  }
+
+  public static function initializeShellExternalBackend(out:EntityConstruction<ShellExternalBackend>, shell:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeShellExternalBackend(out, shell);
+  }
+
+  public static function initializeShellPathOpenBackend(out:EntityConstruction<ShellPathOpenBackend>, shell:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeShellPathOpenBackend(out, shell);
+  }
+
+  public static function initializeShellPathRevealBackend(out:EntityConstruction<ShellPathRevealBackend>, shell:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeShellPathRevealBackend(out, shell);
+  }
+
+  public static function initializeShellShortcutLinkBackend(out:EntityConstruction<ShellShortcutLinkBackend>, shell:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeShellShortcutLinkBackend(out, shell);
+  }
+
+  public static function initializeShellTrashBackend(out:EntityConstruction<ShellTrashBackend>, shell:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeShellTrashBackend(out, shell);
+  }
+
+  public static function initializeTrayBalloonBackend(out:EntityConstruction<TrayBalloonBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeTrayBalloonBackend(out, records);
+  }
+
+  public static function initializeTrayBalloonEventsBackend(out:EntityConstruction<TrayBalloonEventsBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeTrayBalloonEventsBackend(out, records);
+  }
+
+  public static function initializeTrayBoundsBackend(out:EntityConstruction<TrayBoundsBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeTrayBoundsBackend(out, records);
+  }
+
+  public static function initializeTrayDoubleClickPolicyBackend(out:EntityConstruction<TrayDoubleClickPolicyBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeTrayDoubleClickPolicyBackend(out, records);
+  }
+
+  public static function initializeTrayDropEventsBackend(out:EntityConstruction<TrayDropEventsBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeTrayDropEventsBackend(out, records);
+  }
+
+  public static function initializeTrayImageBackend(out:EntityConstruction<TrayImageBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>, electron:ElectronApi):Void {
+    Facade_HostElectron_flight__HostElectron.initializeTrayImageBackend(out, records, electron);
+  }
+
+  public static function initializeTrayInteractionEventsBackend(out:EntityConstruction<TrayInteractionEventsBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeTrayInteractionEventsBackend(out, records);
+  }
+
+  public static function initializeTrayLifecycleBackend(out:EntityConstruction<TrayLifecycleBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>, electron:ElectronApi, profile:DesktopOsProfile):Void {
+    Facade_HostElectron_flight__HostElectron.initializeTrayLifecycleBackend(out, records, electron, profile);
+  }
+
+  public static function initializeTrayMenuBackend(out:EntityConstruction<TrayMenuBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>, electron:ElectronApi):Void {
+    Facade_HostElectron_flight__HostElectron.initializeTrayMenuBackend(out, records, electron);
+  }
+
+  public static function initializeTrayMenuSelectionEventsBackend(out:EntityConstruction<TrayMenuSelectionEventsBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeTrayMenuSelectionEventsBackend(out, records);
+  }
+
+  public static function initializeTrayPopupMenuBackend(out:EntityConstruction<TrayPopupMenuBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeTrayPopupMenuBackend(out, records);
+  }
+
+  public static function initializeTrayPressedImageBackend(out:EntityConstruction<TrayPressedImageBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>, electron:ElectronApi):Void {
+    Facade_HostElectron_flight__HostElectron.initializeTrayPressedImageBackend(out, records, electron);
+  }
+
+  public static function initializeTrayTemplateImageBackend(out:EntityConstruction<TrayTemplateImageBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeTrayTemplateImageBackend(out, records);
+  }
+
+  public static function initializeTrayTitleBackend(out:EntityConstruction<TrayTitleBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeTrayTitleBackend(out, records);
+  }
+
+  public static function initializeTrayTooltipBackend(out:EntityConstruction<TrayTooltipBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>):Void {
+    Facade_HostElectron_flight__HostElectron.initializeTrayTooltipBackend(out, records);
   }
 
   public static function makeElectronShellCapabilities(electron:ElectronApi, platform:PlatformName):flight._internal._Intersection2<HostShellCapabilities, flight._internal._Required<{ @:optional var beep:Null<ShellBeepBackend>; @:optional var external:Null<ShellExternalBackend>; @:optional var pathOpen:Null<ShellPathOpenBackend>; @:optional var pathReveal:Null<ShellPathRevealBackend>; @:optional var trash:Null<ShellTrashBackend>; }>> {

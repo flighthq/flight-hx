@@ -11,3 +11,4 @@ export const createLassoSelection = api.createLassoSelection;
 export const endLassoSelection = api.endLassoSelection;
 export const findNodesInLassoSelection = api.findNodesInLassoSelection;
 export const getLassoSelectionPath = api.getLassoSelectionPath;
+export const initializeLassoSelection = api.initializeLassoSelection;

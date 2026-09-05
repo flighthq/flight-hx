@@ -4,4 +4,41 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SpritesheetFrameData = { var height:Float; var name:String; var offsetX:Float; var offsetY:Float; var pivotX:Null<Float>; var pivotY:Null<Float>; var rotated:Bool; var sourceHeight:Float; var sourceWidth:Float; var width:Float; var x:Float; var y:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Spritesheet)
+@:keep
+@:structInit
+class SpritesheetFrameData {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var height:Float;
+  public var name:String;
+  public var offsetX:Float;
+  public var offsetY:Float;
+  public var pivotX:Null<Float>;
+  public var pivotY:Null<Float>;
+  public var rotated:Bool;
+  public var sourceHeight:Float;
+  public var sourceWidth:Float;
+  public var width:Float;
+  public var x:Float;
+  public var y:Float;
+
+  private function new(height:Float, name:String, offsetX:Float, offsetY:Float, pivotX:Null<Float>, pivotY:Null<Float>, rotated:Bool, sourceHeight:Float, sourceWidth:Float, width:Float, x:Float, y:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.height = height;
+    this.name = name;
+    this.offsetX = offsetX;
+    this.offsetY = offsetY;
+    this.pivotX = pivotX;
+    this.pivotY = pivotY;
+    this.rotated = rotated;
+    this.sourceHeight = sourceHeight;
+    this.sourceWidth = sourceWidth;
+    this.width = width;
+    this.x = x;
+    this.y = y;
+  }
+}
+#else
+typedef SpritesheetFrameData = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var height:Float; var name:String; var offsetX:Float; var offsetY:Float; var pivotX:Null<Float>; var pivotY:Null<Float>; var rotated:Bool; var sourceHeight:Float; var sourceWidth:Float; var width:Float; var x:Float; var y:Float; };
+#end

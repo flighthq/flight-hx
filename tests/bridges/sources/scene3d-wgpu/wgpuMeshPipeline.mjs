@@ -24,6 +24,7 @@ export const ensureWgpuShadowSampleBindGroup = api.ensureWgpuShadowSampleBindGro
 export const ensureWgpuShadowSampleLayout = api.ensureWgpuShadowSampleLayout;
 export const getWgpuMaterialSampler = api.getWgpuMaterialSampler;
 export const getWgpuMeshPreludeWgsl = api.getWgpuMeshPreludeWgsl;
+export const initializeWgpuMeshPipeline = api.initializeWgpuMeshPipeline;
 export const isWgpuMaterialBindGroupRebuildNeeded = api.isWgpuMaterialBindGroupRebuildNeeded;
 export const isWgpuTextureReady = api.isWgpuTextureReady;
 export const resolveWgpuMaterialTextureView = api.resolveWgpuMaterialTextureView;

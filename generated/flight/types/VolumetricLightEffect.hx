@@ -4,4 +4,28 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef VolumetricLightEffect = { var kind:String; @:optional var density:Float; @:optional var lightColor:Float; @:optional var lightX:Float; @:optional var lightY:Float; @:optional var samples:Float; @:optional var scattering:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class VolumetricLightEffect extends flight.types.RenderEffect<String> {
+  public var density:Null<Float>;
+  public var lightColor:Null<Float>;
+  public var lightX:Null<Float>;
+  public var lightY:Null<Float>;
+  public var samples:Null<Float>;
+  public var scattering:Null<Float>;
+
+  private function new(kind:String, ?density:Null<Float>, ?lightColor:Null<Float>, ?lightX:Null<Float>, ?lightY:Null<Float>, ?samples:Null<Float>, ?scattering:Null<Float>):Void {
+    super(kind);
+    this.density = density;
+    this.lightColor = lightColor;
+    this.lightX = lightX;
+    this.lightY = lightY;
+    this.samples = samples;
+    this.scattering = scattering;
+  }
+}
+#else
+typedef VolumetricLightEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var density:Float; @:optional var lightColor:Float; @:optional var lightX:Float; @:optional var lightY:Float; @:optional var samples:Float; @:optional var scattering:Float; };
+#end

@@ -21,6 +21,7 @@ export const getVector2DistanceSquared = api.getVector2DistanceSquared;
 export const getVector2Dot = api.getVector2Dot;
 export const getVector2Length = api.getVector2Length;
 export const getVector2LengthSquared = api.getVector2LengthSquared;
+export const initializeVector2 = api.initializeVector2;
 export const interpolateVector2 = api.interpolateVector2;
 export const maxVector2 = api.maxVector2;
 export const minVector2 = api.minVector2;

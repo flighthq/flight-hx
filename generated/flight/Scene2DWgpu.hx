@@ -56,6 +56,8 @@ class Scene2DWgpu {
 
   public static final defaultWgpuScale9ShapeRenderer:Scene2DRenderer = Facade_Scene2DWgpu_flight__Scene2DWgpu.defaultWgpuScale9ShapeRenderer;
 
+  public static final defaultWgpuScale9SpriteRenderer:Scene2DRenderer = Facade_Scene2DWgpu_flight__Scene2DWgpu.defaultWgpuScale9SpriteRenderer;
+
   public static final defaultWgpuScene2DRenderer:Scene2DRenderer = Facade_Scene2DWgpu_flight__Scene2DWgpu.defaultWgpuScene2DRenderer;
 
   public static final defaultWgpuShapeCommands:Array<CanvasShapeCommand<String>> = Facade_Scene2DWgpu_flight__Scene2DCanvas.defaultCanvasShapeCommands;
@@ -69,6 +71,10 @@ class Scene2DWgpu {
   public static final defaultWgpuTextureShapeCommands:Array<CanvasShapeCommand<String>> = Facade_Scene2DWgpu_flight__Scene2DCanvas.defaultCanvasTextureShapeCommands;
 
   public static final defaultWgpuTilemapRenderer:SpriteRenderer = Facade_Scene2DWgpu_flight__Scene2DWgpu.defaultWgpuTilemapRenderer;
+
+  public static function drawWgpuScale9Sprite(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+    Facade_Scene2DWgpu_flight__Scene2DWgpu.drawWgpuScale9Sprite(state, renderProxy);
+  }
 
   public static function drawWgpuSprite(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     Facade_Scene2DWgpu_flight__Scene2DWgpu.drawWgpuSprite(state, renderProxy);

@@ -8,8 +8,8 @@ import flight._internal._Runtime;
 @:allow(flight._RenderGl)
 @:keep
 @:structInit
-class GlRenderTarget<TRuntime = Dynamic> {
-  public var __symbol__EntityRuntime:TRuntime;
+class GlRenderTarget {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
   public var height:Float;
   public var width:Float;
   public var requestedAxes:RenderTargetAxes;

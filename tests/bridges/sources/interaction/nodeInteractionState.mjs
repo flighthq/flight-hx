@@ -11,6 +11,7 @@ export const getNodeCursor = api.getNodeCursor;
 export const getNodeHitArea = api.getNodeHitArea;
 export const getNodeInteractionState = api.getNodeInteractionState;
 export const getNodeTabIndex = api.getNodeTabIndex;
+export const initializeNodeInteractionState = api.initializeNodeInteractionState;
 export const isNodeFocusable = api.isNodeFocusable;
 export const isNodeHitTestEnabled = api.isNodeHitTestEnabled;
 export const isNodePointerDoubleClickEnabled = api.isNodePointerDoubleClickEnabled;

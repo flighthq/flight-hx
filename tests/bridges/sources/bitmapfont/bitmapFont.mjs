@@ -12,6 +12,7 @@ export const getBitmapFontMetrics = api.getBitmapFontMetrics;
 export const getBitmapFontPage = api.getBitmapFontPage;
 export const getBitmapFontPages = api.getBitmapFontPages;
 export const hasBitmapFontGlyph = api.hasBitmapFontGlyph;
+export const initializeBitmapFont = api.initializeBitmapFont;
 export const packBitmapFontKerningKey = api.packBitmapFontKerningKey;
 export const setBitmapFontGuard = api.setBitmapFontGuard;
 export const unpackBitmapFontKerningKey = api.unpackBitmapFontKerningKey;

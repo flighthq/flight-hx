@@ -15,6 +15,7 @@ import flight.types.GizmoSpace;
 import flight.types.GizmoState;
 import flight.types.HierarchyNodeAny;
 import flight.types.Node2D;
+import flight.types.NonEntityCreateResult;
 import flight.types.RectangleLike;
 
 class Gizmo {
@@ -27,7 +28,7 @@ class Gizmo {
     return cast null;
   }
 
-  public static function createNode2DGizmoFeatures():GizmoNode2DFeatures<Node2D> {
+  public static function createNode2DGizmoFeatures():NonEntityCreateResult<GizmoNode2DFeatures<Node2D>, String> {
     return cast Facade_Gizmo_flight__Gizmo.createNode2DGizmoFeatures();
     return cast null;
   }

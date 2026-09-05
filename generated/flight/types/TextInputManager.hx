@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TextInputManager = { var enabled:Bool; var focused:Null<RichText>; };
+#if !flight_struct_typedef
+@:allow(flight._TextInput)
+@:keep
+@:structInit
+class TextInputManager {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var enabled:Bool;
+  public var focused:Null<RichText>;
+
+  private function new(enabled:Bool, focused:Null<RichText>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.enabled = enabled;
+    this.focused = focused;
+  }
+}
+#else
+typedef TextInputManager = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var enabled:Bool; var focused:Null<RichText>; };
+#end

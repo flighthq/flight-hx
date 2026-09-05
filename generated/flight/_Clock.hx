@@ -3,11 +3,14 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Signals.clearSignal;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
 import flight.types.Clock;
 import flight.types.ClockOptions;
+import flight.types.EntityConstruction;
 import flight.types.Signal;
 
 @:noCompletion
@@ -45,13 +48,16 @@ class _Clock {
   }
 
   public static function createClock(?options:ClockOptions):Clock {
-    return cast { scale: _Runtime.coalesce(({ final __structural8 = options; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var scale:Null<Float>; }).scale; }), function():Dynamic return cast 1.0), paused: _Runtime.coalesce(({ final __structural9 = options; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { @:optional var paused:Null<Bool>; }).paused; }), function():Dynamic return cast false), deltaTime: 0.0, elapsed: 0.0, parent: null, children: cast ([] : Array<Dynamic>), onTick: null };
+    var out:EntityConstruction<Clock> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ children: cast _Runtime.UNDEFINED, deltaTime: cast _Runtime.UNDEFINED, elapsed: cast _Runtime.UNDEFINED, onTick: cast _Runtime.UNDEFINED, parent: cast _Runtime.UNDEFINED, paused: cast _Runtime.UNDEFINED, scale: cast _Runtime.UNDEFINED } : Clock); }) #end));
+    initializeClock(({ final __callArgument8:Dynamic = out; __callArgument8; }), ({ final __callArgument9:Dynamic = options; __callArgument9; }));
+    return cast out;
     return cast null;
   }
 
   public static function disposeClock(clock:Clock):Void {
     var children:Array<Clock> = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals(clock.parent, null) : Bool)) { removeClockChild(clock.parent, ({ final __callArgument10:Dynamic = clock; __callArgument10; })); }
+    if ((cast !_Runtime.strictEquals(clock.parent, null) : Bool)) { removeClockChild(clock.parent, ({ final __callArgument12:Dynamic = clock; __callArgument12; })); }
     children = clock.children;
     {
       var i:Float = 0.0;
@@ -80,6 +86,18 @@ class _Clock {
   public static function getClockParent(clock:Clock):Null<Clock> {
     return cast clock.parent;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeClock(out:EntityConstruction<Clock>, ?options:ClockOptions):Void {
+    _Runtime.setField(out, 'scale', _Runtime.coalesce(({ final __structural14 = options; __structural14 == null ? _Runtime.UNDEFINED : (cast __structural14 : { @:optional var scale:Null<Float>; }).scale; }), function():Dynamic return cast 1.0));
+    _Runtime.setField(out, 'paused', _Runtime.coalesce(({ final __structural15 = options; __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : { @:optional var paused:Null<Bool>; }).paused; }), function():Dynamic return cast false));
+    _Runtime.setField(out, 'deltaTime', 0.0);
+    _Runtime.setField(out, 'elapsed', 0.0);
+    _Runtime.setField(out, 'parent', null);
+    _Runtime.setField(out, 'children', cast ([] : Array<Dynamic>));
+    _Runtime.setField(out, 'onTick', null);
   }
 
   public static function isClockEffectivelyPaused(clock:Clock):Bool {

@@ -4,5 +4,7 @@ import compiled from '../../build/haxe-js/flight.cjs';
 export const createFlightDocumentTokenResolverRegistry = compiled.flight.Tokens.createFlightDocumentTokenResolverRegistry;
 export const explainFlightDocumentSceneTokenResolution = compiled.flight.Tokens.explainFlightDocumentSceneTokenResolution;
 export const explainFlightDocumentSceneTokenSubstitution = compiled.flight.Tokens.explainFlightDocumentSceneTokenSubstitution;
+export const initializeFlightDocumentRefusalExplanation = compiled.flight.Tokens.initializeFlightDocumentRefusalExplanation;
+export const initializeFlightDocumentTokenResolverRegistry = compiled.flight.Tokens.initializeFlightDocumentTokenResolverRegistry;
 export const resolveFlightDocumentSceneTokens = compiled.flight.Tokens.resolveFlightDocumentSceneTokens;
 export const substituteFlightDocumentSceneTokens = compiled.flight.Tokens.substituteFlightDocumentSceneTokens;

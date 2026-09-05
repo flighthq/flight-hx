@@ -4,4 +4,42 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics2DPrismaticJoint = { var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var breakForce:Float; var breakTorque:Float; var localAxisAX:Float; var localAxisAY:Float; var referenceAngle:Float; var enableMotor:Bool; var motorSpeed:Float; var maxMotorForce:Float; var motorImpulse:Float; var enableLimit:Bool; var lowerTranslation:Float; var upperTranslation:Float; var enableLimitSpring:Bool; var limitFrequencyHz:Float; var limitDampingRatio:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Physics2D)
+@:keep
+@:structInit
+class Physics2DPrismaticJoint extends flight.types.Physics2DJoint {
+  public var localAxisAX:Float;
+  public var localAxisAY:Float;
+  public var referenceAngle:Float;
+  public var enableMotor:Bool;
+  public var motorSpeed:Float;
+  public var maxMotorForce:Float;
+  public var motorImpulse:Float;
+  public var enableLimit:Bool;
+  public var lowerTranslation:Float;
+  public var upperTranslation:Float;
+  public var enableLimitSpring:Bool;
+  public var limitFrequencyHz:Float;
+  public var limitDampingRatio:Float;
+
+  private function new(kind:Physics2DJointKind, bodyA:Float, bodyB:Float, localAnchorAX:Float, localAnchorAY:Float, localAnchorBX:Float, localAnchorBY:Float, collideConnected:Bool, impulse0:Float, impulse1:Float, impulse2:Float, rAX:Float, rAY:Float, rBX:Float, rBY:Float, breakForce:Float, breakTorque:Float, localAxisAX:Float, localAxisAY:Float, referenceAngle:Float, enableMotor:Bool, motorSpeed:Float, maxMotorForce:Float, motorImpulse:Float, enableLimit:Bool, lowerTranslation:Float, upperTranslation:Float, enableLimitSpring:Bool, limitFrequencyHz:Float, limitDampingRatio:Float):Void {
+    super(kind, bodyA, bodyB, localAnchorAX, localAnchorAY, localAnchorBX, localAnchorBY, collideConnected, impulse0, impulse1, impulse2, rAX, rAY, rBX, rBY, breakForce, breakTorque);
+    this.localAxisAX = localAxisAX;
+    this.localAxisAY = localAxisAY;
+    this.referenceAngle = referenceAngle;
+    this.enableMotor = enableMotor;
+    this.motorSpeed = motorSpeed;
+    this.maxMotorForce = maxMotorForce;
+    this.motorImpulse = motorImpulse;
+    this.enableLimit = enableLimit;
+    this.lowerTranslation = lowerTranslation;
+    this.upperTranslation = upperTranslation;
+    this.enableLimitSpring = enableLimitSpring;
+    this.limitFrequencyHz = limitFrequencyHz;
+    this.limitDampingRatio = limitDampingRatio;
+  }
+}
+#else
+typedef Physics2DPrismaticJoint = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Physics2DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var breakForce:Float; var breakTorque:Float; var localAxisAX:Float; var localAxisAY:Float; var referenceAngle:Float; var enableMotor:Bool; var motorSpeed:Float; var maxMotorForce:Float; var motorImpulse:Float; var enableLimit:Bool; var lowerTranslation:Float; var upperTranslation:Float; var enableLimitSpring:Bool; var limitFrequencyHz:Float; var limitDampingRatio:Float; };
+#end

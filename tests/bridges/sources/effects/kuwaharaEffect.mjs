@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createKuwaharaEffect = api.createKuwaharaEffect;
+export const initializeKuwaharaEffect = api.initializeKuwaharaEffect;

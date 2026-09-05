@@ -3,6 +3,9 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
+import flight.types.EntityConstruction;
 import flight.types.HasTextSegmenter;
 import flight.types.TextSegment;
 import flight.types.TextSegmentGranularity;
@@ -100,7 +103,10 @@ class _TextSegment {
   @:allow(flight)
   @:keep
   private static function createWebTextSegmenterBackend():TextSegmenterBackend {
-    return cast { segment: _TextSegment.segmentWithIntlSegmenter__textSegmenterBackend };
+    var out:EntityConstruction<TextSegmenterBackend> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ segment: cast _Runtime.UNDEFINED } : TextSegmenterBackend); }) #end));
+    initializeWebTextSegmenterBackend(({ final __callArgument60:Dynamic = out; __callArgument60; }));
+    return cast out;
     return cast null;
   }
 
@@ -109,8 +115,14 @@ class _TextSegment {
   @:allow(flight)
   @:keep
   private static function getTextSegmenterBackend(?host:HasTextSegmenter):TextSegmenterBackend {
-    return cast _Runtime.coalesce(_Runtime.coalesce(({ final __structural61 = ({ final __structural60 = host; __structural60 == null ? _Runtime.UNDEFINED : (cast __structural60 : { var text:{ var segmenter:TextSegmenterBackend; }; }).text; }); __structural61 == null ? _Runtime.UNDEFINED : (cast __structural61 : { var segmenter:TextSegmenterBackend; }).segmenter; }), function():Dynamic return cast _TextSegment._backend__textSegmenterBackend), function():Dynamic return cast webTextSegmenterBackend);
+    return cast _Runtime.coalesce(_Runtime.coalesce(({ final __structural63 = ({ final __structural62 = host; __structural62 == null ? _Runtime.UNDEFINED : (cast __structural62 : { var text:{ var segmenter:TextSegmenterBackend; }; }).text; }); __structural63 == null ? _Runtime.UNDEFINED : (cast __structural63 : { var segmenter:TextSegmenterBackend; }).segmenter; }), function():Dynamic return cast _TextSegment._backend__textSegmenterBackend), function():Dynamic return cast webTextSegmenterBackend);
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeWebTextSegmenterBackend(out:EntityConstruction<TextSegmenterBackend>):Void {
+    ((cast out : { var segment:String->TextSegmentGranularity->Null<String>->Array<TextSegment>; }).segment = (cast _TextSegment.segmentWithIntlSegmenter__textSegmenterBackend));
   }
 
   @:allow(flight)
@@ -147,7 +159,7 @@ class _TextSegment {
     var segmenter:Null<flight._internal._Any> = cast _Runtime.UNDEFINED;
     var out:Array<TextSegment> = cast _Runtime.UNDEFINED;
     var isWordGranularity:Bool = cast _Runtime.UNDEFINED;
-    segmenter = (cast _TextSegment.getCachedSegmenter__textSegmenterBackend(({ final __callArgument62:Dynamic = locale; __callArgument62; }), ({ final __callArgument63:Dynamic = granularity; __callArgument63; })) : Null<flight._internal._Any>);
+    segmenter = (cast _TextSegment.getCachedSegmenter__textSegmenterBackend(({ final __callArgument64:Dynamic = locale; __callArgument64; }), ({ final __callArgument65:Dynamic = granularity; __callArgument65; })) : Null<flight._internal._Any>);
     if ((cast _Runtime.strictEquals(segmenter, null) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     out = (cast cast ([] : Array<Dynamic>));
     isWordGranularity = _Runtime.strictEquals(granularity, 'word');

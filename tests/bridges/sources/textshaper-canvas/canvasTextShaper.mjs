@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const clearCanvasTextShaperBackendCache = api.clearCanvasTextShaperBackendCache;
 export const createCanvasTextShaperBackend = api.createCanvasTextShaperBackend;
+export const initializeCanvasTextShaperBackend = api.initializeCanvasTextShaperBackend;

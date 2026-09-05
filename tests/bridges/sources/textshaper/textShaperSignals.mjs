@@ -8,3 +8,4 @@ __syncDependencies();
 export const disposeTextShaperSignals = api.disposeTextShaperSignals;
 export const enableTextShaperSignals = api.enableTextShaperSignals;
 export const getTextShaperSignals = api.getTextShaperSignals;
+export const initializeTextShaperSignals = api.initializeTextShaperSignals;

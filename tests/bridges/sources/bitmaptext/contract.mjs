@@ -6,3 +6,4 @@ __syncDependencies();
 export * from './bitmapText.mjs';
 export * from './enableBitmapTextGuards.mjs';
 export * from './updateBitmapText.mjs';
+export { initializeBitmapTextData } from './bitmapText.mjs';

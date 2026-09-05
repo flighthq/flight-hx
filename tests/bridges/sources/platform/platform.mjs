@@ -12,6 +12,7 @@ export const getPlatformInfo = api.getPlatformInfo;
 export const getPlatformKind = api.getPlatformKind;
 export const getPlatformName = api.getPlatformName;
 export const getPlatformRuntime = api.getPlatformRuntime;
+export const initializePlatformInfo = api.initializePlatformInfo;
 export const isPlatformDesktop = api.isPlatformDesktop;
 export const isPlatformMobile = api.isPlatformMobile;
 export const isPlatformNative = api.isPlatformNative;

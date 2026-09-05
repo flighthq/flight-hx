@@ -4,4 +4,123 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef RigidBody3D = { var index:Float; var type:Physics3DBodyType; var x:Float; var y:Float; var z:Float; var orientationX:Float; var orientationY:Float; var orientationZ:Float; var orientationW:Float; var velocityX:Float; var velocityY:Float; var velocityZ:Float; var angularVelocityX:Float; var angularVelocityY:Float; var angularVelocityZ:Float; var forceX:Float; var forceY:Float; var forceZ:Float; var torqueX:Float; var torqueY:Float; var torqueZ:Float; var mass:Float; var inverseMass:Float; var inertiaXX:Float; var inertiaYY:Float; var inertiaZZ:Float; var inertiaXY:Float; var inertiaXZ:Float; var inertiaYZ:Float; var inverseInertiaXX:Float; var inverseInertiaYY:Float; var inverseInertiaZZ:Float; var inverseInertiaXY:Float; var inverseInertiaXZ:Float; var inverseInertiaYZ:Float; var inverseInertiaWorldXX:Float; var inverseInertiaWorldYY:Float; var inverseInertiaWorldZZ:Float; var inverseInertiaWorldXY:Float; var inverseInertiaWorldXZ:Float; var inverseInertiaWorldYZ:Float; var centerX:Float; var centerY:Float; var centerZ:Float; var linearDamping:Float; var angularDamping:Float; var gravityScale:Float; var fixedRotation:Bool; var bullet:Bool; var sleeping:Bool; var sleepEnabled:Bool; var sleepTimer:Float; var colliders:Array<Physics3DCollider>; };
+#if !flight_struct_typedef
+@:allow(flight._Physics3D)
+@:keep
+@:structInit
+class RigidBody3D {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var index:Float;
+  public var type:Physics3DBodyType;
+  public var x:Float;
+  public var y:Float;
+  public var z:Float;
+  public var orientationX:Float;
+  public var orientationY:Float;
+  public var orientationZ:Float;
+  public var orientationW:Float;
+  public var velocityX:Float;
+  public var velocityY:Float;
+  public var velocityZ:Float;
+  public var angularVelocityX:Float;
+  public var angularVelocityY:Float;
+  public var angularVelocityZ:Float;
+  public var forceX:Float;
+  public var forceY:Float;
+  public var forceZ:Float;
+  public var torqueX:Float;
+  public var torqueY:Float;
+  public var torqueZ:Float;
+  public var mass:Float;
+  public var inverseMass:Float;
+  public var inertiaXX:Float;
+  public var inertiaYY:Float;
+  public var inertiaZZ:Float;
+  public var inertiaXY:Float;
+  public var inertiaXZ:Float;
+  public var inertiaYZ:Float;
+  public var inverseInertiaXX:Float;
+  public var inverseInertiaYY:Float;
+  public var inverseInertiaZZ:Float;
+  public var inverseInertiaXY:Float;
+  public var inverseInertiaXZ:Float;
+  public var inverseInertiaYZ:Float;
+  public var inverseInertiaWorldXX:Float;
+  public var inverseInertiaWorldYY:Float;
+  public var inverseInertiaWorldZZ:Float;
+  public var inverseInertiaWorldXY:Float;
+  public var inverseInertiaWorldXZ:Float;
+  public var inverseInertiaWorldYZ:Float;
+  public var centerX:Float;
+  public var centerY:Float;
+  public var centerZ:Float;
+  public var linearDamping:Float;
+  public var angularDamping:Float;
+  public var gravityScale:Float;
+  public var fixedRotation:Bool;
+  public var bullet:Bool;
+  public var sleeping:Bool;
+  public var sleepEnabled:Bool;
+  public var sleepTimer:Float;
+  public var colliders:Array<Physics3DCollider>;
+
+  private function new(index:Float, type:Physics3DBodyType, x:Float, y:Float, z:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float, velocityX:Float, velocityY:Float, velocityZ:Float, angularVelocityX:Float, angularVelocityY:Float, angularVelocityZ:Float, forceX:Float, forceY:Float, forceZ:Float, torqueX:Float, torqueY:Float, torqueZ:Float, mass:Float, inverseMass:Float, inertiaXX:Float, inertiaYY:Float, inertiaZZ:Float, inertiaXY:Float, inertiaXZ:Float, inertiaYZ:Float, inverseInertiaXX:Float, inverseInertiaYY:Float, inverseInertiaZZ:Float, inverseInertiaXY:Float, inverseInertiaXZ:Float, inverseInertiaYZ:Float, inverseInertiaWorldXX:Float, inverseInertiaWorldYY:Float, inverseInertiaWorldZZ:Float, inverseInertiaWorldXY:Float, inverseInertiaWorldXZ:Float, inverseInertiaWorldYZ:Float, centerX:Float, centerY:Float, centerZ:Float, linearDamping:Float, angularDamping:Float, gravityScale:Float, fixedRotation:Bool, bullet:Bool, sleeping:Bool, sleepEnabled:Bool, sleepTimer:Float, colliders:Array<Physics3DCollider>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.index = index;
+    this.type = type;
+    this.x = x;
+    this.y = y;
+    this.z = z;
+    this.orientationX = orientationX;
+    this.orientationY = orientationY;
+    this.orientationZ = orientationZ;
+    this.orientationW = orientationW;
+    this.velocityX = velocityX;
+    this.velocityY = velocityY;
+    this.velocityZ = velocityZ;
+    this.angularVelocityX = angularVelocityX;
+    this.angularVelocityY = angularVelocityY;
+    this.angularVelocityZ = angularVelocityZ;
+    this.forceX = forceX;
+    this.forceY = forceY;
+    this.forceZ = forceZ;
+    this.torqueX = torqueX;
+    this.torqueY = torqueY;
+    this.torqueZ = torqueZ;
+    this.mass = mass;
+    this.inverseMass = inverseMass;
+    this.inertiaXX = inertiaXX;
+    this.inertiaYY = inertiaYY;
+    this.inertiaZZ = inertiaZZ;
+    this.inertiaXY = inertiaXY;
+    this.inertiaXZ = inertiaXZ;
+    this.inertiaYZ = inertiaYZ;
+    this.inverseInertiaXX = inverseInertiaXX;
+    this.inverseInertiaYY = inverseInertiaYY;
+    this.inverseInertiaZZ = inverseInertiaZZ;
+    this.inverseInertiaXY = inverseInertiaXY;
+    this.inverseInertiaXZ = inverseInertiaXZ;
+    this.inverseInertiaYZ = inverseInertiaYZ;
+    this.inverseInertiaWorldXX = inverseInertiaWorldXX;
+    this.inverseInertiaWorldYY = inverseInertiaWorldYY;
+    this.inverseInertiaWorldZZ = inverseInertiaWorldZZ;
+    this.inverseInertiaWorldXY = inverseInertiaWorldXY;
+    this.inverseInertiaWorldXZ = inverseInertiaWorldXZ;
+    this.inverseInertiaWorldYZ = inverseInertiaWorldYZ;
+    this.centerX = centerX;
+    this.centerY = centerY;
+    this.centerZ = centerZ;
+    this.linearDamping = linearDamping;
+    this.angularDamping = angularDamping;
+    this.gravityScale = gravityScale;
+    this.fixedRotation = fixedRotation;
+    this.bullet = bullet;
+    this.sleeping = sleeping;
+    this.sleepEnabled = sleepEnabled;
+    this.sleepTimer = sleepTimer;
+    this.colliders = colliders;
+  }
+}
+#else
+typedef RigidBody3D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var index:Float; var type:Physics3DBodyType; var x:Float; var y:Float; var z:Float; var orientationX:Float; var orientationY:Float; var orientationZ:Float; var orientationW:Float; var velocityX:Float; var velocityY:Float; var velocityZ:Float; var angularVelocityX:Float; var angularVelocityY:Float; var angularVelocityZ:Float; var forceX:Float; var forceY:Float; var forceZ:Float; var torqueX:Float; var torqueY:Float; var torqueZ:Float; var mass:Float; var inverseMass:Float; var inertiaXX:Float; var inertiaYY:Float; var inertiaZZ:Float; var inertiaXY:Float; var inertiaXZ:Float; var inertiaYZ:Float; var inverseInertiaXX:Float; var inverseInertiaYY:Float; var inverseInertiaZZ:Float; var inverseInertiaXY:Float; var inverseInertiaXZ:Float; var inverseInertiaYZ:Float; var inverseInertiaWorldXX:Float; var inverseInertiaWorldYY:Float; var inverseInertiaWorldZZ:Float; var inverseInertiaWorldXY:Float; var inverseInertiaWorldXZ:Float; var inverseInertiaWorldYZ:Float; var centerX:Float; var centerY:Float; var centerZ:Float; var linearDamping:Float; var angularDamping:Float; var gravityScale:Float; var fixedRotation:Bool; var bullet:Bool; var sleeping:Bool; var sleepEnabled:Bool; var sleepTimer:Float; var colliders:Array<Physics3DCollider>; };
+#end

@@ -4,4 +4,33 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef EmbeddedImageResourceReference = { var failure:Null<ImageResourceFailure>; var mimeType:Null<String>; var state:ResourceResolutionState; @:optional var textures:Array<Texture>; var kind:String; var alphaType:AlphaType; @:optional var bitmapComposition:ImageBitmapComposition; var bytes:flight._internal._UInt8Array; };
+#if !flight_struct_typedef
+@:allow(flight._Image)
+@:keep
+@:structInit
+class EmbeddedImageResourceReference {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var failure:Null<ImageResourceFailure>;
+  public var mimeType:Null<String>;
+  public var state:ResourceResolutionState;
+  public var textures:Null<Array<Texture>>;
+  public var kind:String;
+  public var alphaType:AlphaType;
+  public var bitmapComposition:Null<ImageBitmapComposition>;
+  public var bytes:flight._internal._UInt8Array;
+
+  private function new(failure:Null<ImageResourceFailure>, mimeType:Null<String>, state:ResourceResolutionState, ?textures:Null<Array<Texture>>, kind:String, alphaType:AlphaType, ?bitmapComposition:Null<ImageBitmapComposition>, bytes:flight._internal._UInt8Array):Void {
+    this.__symbol__EntityRuntime = null;
+    this.failure = failure;
+    this.mimeType = mimeType;
+    this.state = state;
+    this.textures = textures;
+    this.kind = kind;
+    this.alphaType = alphaType;
+    this.bitmapComposition = bitmapComposition;
+    this.bytes = bytes;
+  }
+}
+#else
+typedef EmbeddedImageResourceReference = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var failure:Null<ImageResourceFailure>; var mimeType:Null<String>; var state:ResourceResolutionState; @:optional var textures:Array<Texture>; var kind:String; var alphaType:AlphaType; @:optional var bitmapComposition:ImageBitmapComposition; var bytes:flight._internal._UInt8Array; };
+#end

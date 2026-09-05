@@ -8,5 +8,6 @@ __syncDependencies();
 export const acquireGlRenderTexture = api.acquireGlRenderTexture;
 export const createGlRenderTexturePool = api.createGlRenderTexturePool;
 export const destroyGlRenderTexturePool = api.destroyGlRenderTexturePool;
+export const initializeGlRenderTexturePool = api.initializeGlRenderTexturePool;
 export const releaseGlRenderTexture = api.releaseGlRenderTexture;
 export const withGlRenderTextures = api.withGlRenderTextures;

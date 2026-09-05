@@ -4,4 +4,32 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ConvolutionEffect = { var kind:String; var matrix:Array<Float>; var matrixX:Float; var matrixY:Float; @:optional var bias:Float; @:optional var clamp:Bool; @:optional var color:Float; @:optional var divisor:Float; @:optional var preserveAlpha:Bool; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class ConvolutionEffect extends flight.types.RenderEffect<String> {
+  public var matrix:Array<Float>;
+  public var matrixX:Float;
+  public var matrixY:Float;
+  public var bias:Null<Float>;
+  public var clamp:Null<Bool>;
+  public var color:Null<Float>;
+  public var divisor:Null<Float>;
+  public var preserveAlpha:Null<Bool>;
+
+  private function new(kind:String, matrix:Array<Float>, matrixX:Float, matrixY:Float, ?bias:Null<Float>, ?clamp:Null<Bool>, ?color:Null<Float>, ?divisor:Null<Float>, ?preserveAlpha:Null<Bool>):Void {
+    super(kind);
+    this.matrix = matrix;
+    this.matrixX = matrixX;
+    this.matrixY = matrixY;
+    this.bias = bias;
+    this.clamp = clamp;
+    this.color = color;
+    this.divisor = divisor;
+    this.preserveAlpha = preserveAlpha;
+  }
+}
+#else
+typedef ConvolutionEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var matrix:Array<Float>; var matrixX:Float; var matrixY:Float; @:optional var bias:Float; @:optional var clamp:Bool; @:optional var color:Float; @:optional var divisor:Float; @:optional var preserveAlpha:Bool; };
+#end

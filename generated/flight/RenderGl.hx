@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 import flight._RenderGl as Facade_RenderGl_flight__RenderGl;
 import flight.types.BlendMode;
 import flight.types.CreateExternalTextureOptions;
+import flight.types.Entity;
 import flight.types.GlBlendRealization;
 import flight.types.GlCompressedTextureDecoder;
 import flight.types.GlContext;
@@ -295,9 +296,9 @@ class RenderGl {
     Facade_RenderGl_flight__RenderGl.setGlRenderTransform2D(state, transform);
   }
 
-  public static final standardGlBlendRealizations:KeyedTable<GlBlendRealization> = Facade_RenderGl_flight__RenderGl._standardGlBlendRealizations__glDraw;
+  public static final standardGlBlendRealizations:{ >KeyedTable<GlBlendRealization>, >Entity, } = Facade_RenderGl_flight__RenderGl._standardGlBlendRealizations__glDraw;
 
-  public static final standardGlTextureResolvers:KeyedTable<GlRenderState->TextureLike->Bool->TextureColorSpace->Null<GlTextureRealization>> = Facade_RenderGl_flight__RenderGl._standardGlTextureResolvers__glTextureResolver;
+  public static final standardGlTextureResolvers:{ >KeyedTable<GlRenderState->TextureLike->Bool->TextureColorSpace->Null<GlTextureRealization>>, >Entity, } = Facade_RenderGl_flight__RenderGl._standardGlTextureResolvers__glTextureResolver;
 
   public static function uploadGlCompressedTextureContainer(gl:GlContext, container:TextureContainer, payload:flight._internal._UInt8Array, ?decode:GlCompressedTextureDecoder, ?colorSpace:TextureColorSpace):Bool {
     return cast Facade_RenderGl_flight__RenderGl.uploadGlCompressedTextureContainer(gl, container, payload, decode, colorSpace);

@@ -4,4 +4,27 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics3DCollider = { var local:CollisionColliderShape3D; var world:CollisionColliderShape3D; var material:Physics3DMaterial; var filter:Physics3DCollisionFilter; var sensor:Bool; };
+#if !flight_struct_typedef
+@:allow(flight._Physics3D)
+@:keep
+@:structInit
+class Physics3DCollider {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var local:CollisionColliderShape3D;
+  public var world:CollisionColliderShape3D;
+  public var material:Physics3DMaterial;
+  public var filter:Physics3DCollisionFilter;
+  public var sensor:Bool;
+
+  private function new(local:CollisionColliderShape3D, world:CollisionColliderShape3D, material:Physics3DMaterial, filter:Physics3DCollisionFilter, sensor:Bool):Void {
+    this.__symbol__EntityRuntime = null;
+    this.local = local;
+    this.world = world;
+    this.material = material;
+    this.filter = filter;
+    this.sensor = sensor;
+  }
+}
+#else
+typedef Physics3DCollider = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var local:CollisionColliderShape3D; var world:CollisionColliderShape3D; var material:Physics3DMaterial; var filter:Physics3DCollisionFilter; var sensor:Bool; };
+#end

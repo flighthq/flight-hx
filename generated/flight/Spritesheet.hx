@@ -44,7 +44,7 @@ class Spritesheet {
     return cast null;
   }
 
-  public static function createSpritesheetAnimationData(?obj:{ @:optional var direction:Null<SpritesheetAnimationDirection>; @:optional var frameDuration:Null<Float>; @:optional var frameDurations:Null<Array<Float>>; @:optional var frameNames:Null<Array<String>>; @:optional var repeatCount:Null<Float>; @:optional var name:Null<String>; @:optional var originX:Null<Float>; @:optional var originY:Null<Float>; }):SpritesheetAnimationData {
+  public static function createSpritesheetAnimationData(?obj:{ @:optional var direction:Null<SpritesheetAnimationDirection>; @:optional var frameDuration:Null<Float>; @:optional var frameDurations:Null<Array<Float>>; @:optional var frameNames:Null<Array<String>>; @:optional var repeatCount:Null<Float>; @:optional var name:Null<String>; @:optional var originX:Null<Float>; @:optional var originY:Null<Float>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):SpritesheetAnimationData {
     return cast Facade_Spritesheet_flight__Spritesheet.createSpritesheetAnimationData(obj);
     return cast null;
   }
@@ -54,17 +54,17 @@ class Spritesheet {
     return cast null;
   }
 
-  public static function createSpritesheetData(?obj:{ @:optional var animations:Null<Array<SpritesheetAnimationData>>; @:optional var frames:Null<Array<SpritesheetFrameData>>; @:optional var imageFile:Null<String>; @:optional var imageHeight:Null<Float>; @:optional var imageWidth:Null<Float>; @:optional var scale:Null<Float>; }):SpritesheetData {
+  public static function createSpritesheetData(?obj:{ @:optional var animations:Null<Array<SpritesheetAnimationData>>; @:optional var frames:Null<Array<SpritesheetFrameData>>; @:optional var imageFile:Null<String>; @:optional var imageHeight:Null<Float>; @:optional var imageWidth:Null<Float>; @:optional var scale:Null<Float>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):SpritesheetData {
     return cast Facade_Spritesheet_flight__Spritesheet.createSpritesheetData(obj);
     return cast null;
   }
 
-  public static function createSpritesheetFrame(?obj:{ @:optional var id:Null<Float>; @:optional var offsetX:Null<Float>; @:optional var offsetY:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var rotated:Null<Bool>; }):SpritesheetFrame {
+  public static function createSpritesheetFrame(?obj:{ @:optional var id:Null<Float>; @:optional var offsetX:Null<Float>; @:optional var offsetY:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var rotated:Null<Bool>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):SpritesheetFrame {
     return cast Facade_Spritesheet_flight__Spritesheet.createSpritesheetFrame(obj);
     return cast null;
   }
 
-  public static function createSpritesheetFrameData(?obj:{ @:optional var height:Null<Float>; @:optional var name:Null<String>; @:optional var offsetX:Null<Float>; @:optional var offsetY:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var rotated:Null<Bool>; @:optional var sourceHeight:Null<Float>; @:optional var sourceWidth:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; }):SpritesheetFrameData {
+  public static function createSpritesheetFrameData(?obj:{ @:optional var height:Null<Float>; @:optional var name:Null<String>; @:optional var offsetX:Null<Float>; @:optional var offsetY:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var rotated:Null<Bool>; @:optional var sourceHeight:Null<Float>; @:optional var sourceWidth:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):SpritesheetFrameData {
     return cast Facade_Spritesheet_flight__Spritesheet.createSpritesheetFrameData(obj);
     return cast null;
   }
@@ -79,7 +79,7 @@ class Spritesheet {
     return cast null;
   }
 
-  public static function createSpritesheetPlayer(?obj:{ @:optional var animation:Null<SpritesheetAnimation>; @:optional var complete:Null<Bool>; @:optional var elapsed:Null<Float>; @:optional var paused:Null<Bool>; @:optional var speed:Null<Float>; @:optional var frameIndex:Null<Float>; @:optional var onComplete:Null<Signal<Void->Void>>; @:optional var onLoop:Null<Signal<Void->Void>>; @:optional var queue:Null<Array<SpritesheetAnimation>>; }):SpritesheetPlayer {
+  public static function createSpritesheetPlayer(?obj:{ @:optional var animation:Null<SpritesheetAnimation>; @:optional var complete:Null<Bool>; @:optional var elapsed:Null<Float>; @:optional var paused:Null<Bool>; @:optional var speed:Null<Float>; @:optional var frameIndex:Null<Float>; @:optional var onComplete:Null<Signal<Void->Void>>; @:optional var onLoop:Null<Signal<Void->Void>>; @:optional var queue:Null<Array<SpritesheetAnimation>>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):SpritesheetPlayer {
     return cast Facade_Spritesheet_flight__Spritesheet.createSpritesheetPlayer(obj);
     return cast null;
   }

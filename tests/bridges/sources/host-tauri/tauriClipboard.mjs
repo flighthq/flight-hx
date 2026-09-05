@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createTauriClipboardBackend = api.createTauriClipboardBackend;
+export const initializeTauriClipboardBackend = api.initializeTauriClipboardBackend;

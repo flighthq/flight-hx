@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createRegistryCodegenPlan = api.createRegistryCodegenPlan;
+export const initializeRegistryCodegenPlan = api.initializeRegistryCodegenPlan;

@@ -12,6 +12,7 @@ export const createClock = api.createClock;
 export const disposeClock = api.disposeClock;
 export const getClockEffectiveScale = api.getClockEffectiveScale;
 export const getClockParent = api.getClockParent;
+export const initializeClock = api.initializeClock;
 export const isClockEffectivelyPaused = api.isClockEffectivelyPaused;
 export const pauseClock = api.pauseClock;
 export const removeClockChild = api.removeClockChild;

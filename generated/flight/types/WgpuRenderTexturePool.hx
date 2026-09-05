@@ -4,4 +4,27 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuRenderTexturePool = { var device:Null<flight._internal.dom.GPUDevice>; var destroyed:Bool; var effectTargets:WgpuRenderTargetPool; var free:Array<RenderTexture>; var leased:flight._internal._Set<RenderTexture>; };
+#if !flight_struct_typedef
+@:allow(flight._RenderWgpu)
+@:keep
+@:structInit
+class WgpuRenderTexturePool {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var device:Null<flight._internal.dom.GPUDevice>;
+  public var destroyed:Bool;
+  public var effectTargets:WgpuRenderTargetPool;
+  public var free:Array<RenderTexture>;
+  public var leased:flight._internal._Set<RenderTexture>;
+
+  private function new(device:Null<flight._internal.dom.GPUDevice>, destroyed:Bool, effectTargets:WgpuRenderTargetPool, free:Array<RenderTexture>, leased:flight._internal._Set<RenderTexture>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.device = device;
+    this.destroyed = destroyed;
+    this.effectTargets = effectTargets;
+    this.free = free;
+    this.leased = leased;
+  }
+}
+#else
+typedef WgpuRenderTexturePool = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var device:Null<flight._internal.dom.GPUDevice>; var destroyed:Bool; var effectTargets:WgpuRenderTargetPool; var free:Array<RenderTexture>; var leased:flight._internal._Set<RenderTexture>; };
+#end

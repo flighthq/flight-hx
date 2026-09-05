@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ColorLutAdjustment = { var kind:AdjustmentKind; var transform:ColorTransformFunction; };
+#if !flight_struct_typedef
+@:allow(flight.types.ColorGradeAdjustment)
+@:allow(flight.types.HueSaturationAdjustment)
+@:allow(flight.types.LiftGammaGainAdjustment)
+@:allow(flight.types.LookupTableGradeAdjustment)
+@:keep
+@:structInit
+class ColorLutAdjustment<TKind = Dynamic> extends flight.types.Adjustment<TKind> {
+  public var transform:ColorTransformFunction;
+
+  private function new(kind:TKind, transform:ColorTransformFunction):Void {
+    super(kind);
+    this.transform = transform;
+  }
+}
+#else
+typedef ColorLutAdjustment = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:AdjustmentKind; var transform:ColorTransformFunction; };
+#end

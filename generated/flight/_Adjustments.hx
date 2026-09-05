@@ -3,6 +3,9 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
+import flight._Types.EntityRuntimeKey;
 import flight.types.Adjustment;
 import flight.types.AdjustmentKind;
 import flight.types.BrightnessContrastAdjustment;
@@ -18,6 +21,8 @@ import flight.types.ColorScaleBias;
 import flight.types.ColorScaleBiasAdjustment;
 import flight.types.ColorScaleBiasLike;
 import flight.types.ColorTransformFunction;
+import flight.types.EntityConstruction;
+import flight.types.EntityRuntime;
 import flight.types.ExposureAdjustment;
 import flight.types.GrayscaleAdjustment;
 import flight.types.HueSaturationAdjustment;
@@ -29,7 +34,24 @@ import flight.types.TintAdjustment;
 
 @:noCompletion
 class _Adjustments {
+  @:allow(flight)
+  @:keep
+  private static function initializeAdjustment<T:Adjustment>(out:EntityConstruction<T>, kind:AdjustmentKind):Void {
+    _Runtime.setField(out, 'kind', kind);
+  }
+
   public static function createBrightnessContrastAdjustment(?options:{ @:optional var brightness:Null<Float>; @:optional var contrast:Null<Float>; }):BrightnessContrastAdjustment {
+    if (options == null) options = cast ({  } : Dynamic);
+    var out:EntityConstruction<BrightnessContrastAdjustment> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ brightness: cast _Runtime.UNDEFINED, colorMatrix: cast _Runtime.UNDEFINED, contrast: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED } : BrightnessContrastAdjustment); }) #end));
+    initializeBrightnessContrastAdjustment(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = options; __callArgument1; }));
+    return cast out;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeBrightnessContrastAdjustment(out:EntityConstruction<BrightnessContrastAdjustment>, ?options:{ @:optional var brightness:Null<Float>; @:optional var contrast:Null<Float>; }):Void {
     if (options == null) options = cast ({  } : Dynamic);
     var brightness:Float = cast _Runtime.UNDEFINED;
     var contrast:Float = cast _Runtime.UNDEFINED;
@@ -41,23 +63,35 @@ class _Adjustments {
     s = contrast;
     o = ((brightness * contrast) + (0.5 * (1.0 - contrast)));
     colorMatrix = (cast cast ([s, 0.0, 0.0, 0.0, o, 0.0, s, 0.0, 0.0, o, 0.0, 0.0, s, 0.0, o, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
-    return cast _Runtime.mergeObjects([{ kind: 'BrightnessContrastAdjustment' }, options, { colorMatrix: colorMatrix }]);
-    return cast null;
+    (cast initializeColorMatrixAdjustment : EntityConstruction<BrightnessContrastAdjustment>->String->Array<Float>->Void)(({ final __callArgument4:Dynamic = out; __callArgument4; }), (cast 'BrightnessContrastAdjustment' : String), ({ final __callArgument5:Dynamic = colorMatrix; __callArgument5; }));
+    _Runtime.setField(out, 'brightness', brightness);
+    _Runtime.setField(out, 'contrast', contrast);
   }
 
   public static function createChannelMixerAdjustment(?options:{ var matrix:Array<Float>; }):ChannelMixerAdjustment {
+    if (options == null) options = cast ({ matrix: _Adjustments.IDENTITY_CHANNEL_MIXER__channelMixerAdjustment } : Dynamic);
+    var out:EntityConstruction<ChannelMixerAdjustment> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ colorMatrix: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, matrix: cast _Runtime.UNDEFINED } : ChannelMixerAdjustment); }) #end));
+    initializeChannelMixerAdjustment(({ final __callArgument8:Dynamic = out; __callArgument8; }), ({ final __callArgument9:Dynamic = options; __callArgument9; }));
+    return cast out;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeChannelMixerAdjustment(out:EntityConstruction<ChannelMixerAdjustment>, ?options:{ var matrix:Array<Float>; }):Void {
     if (options == null) options = cast ({ matrix: _Adjustments.IDENTITY_CHANNEL_MIXER__channelMixerAdjustment } : Dynamic);
     var matrix:Array<Float> = cast _Runtime.UNDEFINED;
     var m:Float->Float = cast _Runtime.UNDEFINED;
     var colorMatrix:Array<Float> = cast _Runtime.UNDEFINED;
     matrix = _Runtime.coalesce((cast options : { var matrix:Array<Float>; }).matrix, function():Dynamic return cast _Adjustments.IDENTITY_CHANNEL_MIXER__channelMixerAdjustment);
     m = (cast function(i:Float):Float return _Runtime.coalesce(flight._internal._StaticIndex.readFloatArrayTyped((cast matrix : Array<Float>), (cast i : Float)), function():Dynamic return cast flight._internal._StaticIndex.readFloatArrayTyped((cast _Adjustments.IDENTITY_CHANNEL_MIXER__channelMixerAdjustment : Array<Float>), (cast i : Float))));
-    colorMatrix = (cast createChannelMixerColorMatrix(({ final __callArgument0:Dynamic = cast ([(cast m((cast 0.0 : Float)) : Float), (cast m((cast 1.0 : Float)) : Float), (cast m((cast 2.0 : Float)) : Float)] : Array<Dynamic>); __callArgument0; }), ({ final __callArgument1:Dynamic = cast ([(cast m((cast 4.0 : Float)) : Float), (cast m((cast 5.0 : Float)) : Float), (cast m((cast 6.0 : Float)) : Float)] : Array<Dynamic>); __callArgument1; }), ({ final __callArgument2:Dynamic = cast ([(cast m((cast 8.0 : Float)) : Float), (cast m((cast 9.0 : Float)) : Float), (cast m((cast 10.0 : Float)) : Float)] : Array<Dynamic>); __callArgument2; })) : Array<Float>);
+    colorMatrix = (cast createChannelMixerColorMatrix(({ final __callArgument12:Dynamic = cast ([(cast m((cast 0.0 : Float)) : Float), (cast m((cast 1.0 : Float)) : Float), (cast m((cast 2.0 : Float)) : Float)] : Array<Dynamic>); __callArgument12; }), ({ final __callArgument13:Dynamic = cast ([(cast m((cast 4.0 : Float)) : Float), (cast m((cast 5.0 : Float)) : Float), (cast m((cast 6.0 : Float)) : Float)] : Array<Dynamic>); __callArgument13; }), ({ final __callArgument14:Dynamic = cast ([(cast m((cast 8.0 : Float)) : Float), (cast m((cast 9.0 : Float)) : Float), (cast m((cast 10.0 : Float)) : Float)] : Array<Dynamic>); __callArgument14; })) : Array<Float>);
     flight._internal._StaticIndex.writeFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 4.0 : Float), (cast (cast m((cast 3.0 : Float)) : Float) : Float));
     flight._internal._StaticIndex.writeFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 9.0 : Float), (cast (cast m((cast 7.0 : Float)) : Float) : Float));
     flight._internal._StaticIndex.writeFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 14.0 : Float), (cast (cast m((cast 11.0 : Float)) : Float) : Float));
-    return cast _Runtime.mergeObjects([{ kind: 'ChannelMixerAdjustment' }, options, { matrix: matrix }, { colorMatrix: colorMatrix }]);
-    return cast null;
+    (cast initializeColorMatrixAdjustment : EntityConstruction<ChannelMixerAdjustment>->String->Array<Float>->Void)(({ final __callArgument18:Dynamic = out; __callArgument18; }), (cast 'ChannelMixerAdjustment' : String), ({ final __callArgument19:Dynamic = colorMatrix; __callArgument19; }));
+    _Runtime.setField(out, 'matrix', matrix);
   }
 
   public static final IDENTITY_CHANNEL_MIXER__channelMixerAdjustment:Array<Float> = (cast cast ([1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
@@ -80,13 +114,13 @@ class _Adjustments {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(adjustments, 'length') : Float)) : Bool)) {
-        var matrix:Null<Array<Float>> = (cast getAdjustmentColorMatrix(({ final __callArgument6:Dynamic = flight._internal._StaticIndex.readArray(adjustments, i); __callArgument6; })) : Null<Array<Float>>);
+        var matrix:Null<Array<Float>> = (cast getAdjustmentColorMatrix(({ final __callArgument22:Dynamic = flight._internal._StaticIndex.readArray(adjustments, i); __callArgument22; })) : Null<Array<Float>>);
         if ((cast _Runtime.strictEquals(matrix, null) : Bool)) { return cast null; }
         _Runtime.callProperty(matrices, 'push', cast ([matrix] : Array<Dynamic>));
         i++;
       }
     }
-    return cast (cast fuseColorMatrices(({ final __callArgument8:Dynamic = matrices; __callArgument8; })) : Array<Float>);
+    return cast (cast fuseColorMatrices(({ final __callArgument24:Dynamic = matrices; __callArgument24; })) : Array<Float>);
     return cast null;
   }
 
@@ -100,12 +134,12 @@ class _Adjustments {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(adjustments, 'length') : Float)) : Bool)) {
-        var matrix:Null<Array<Float>> = (cast getAdjustmentColorMatrix(({ final __callArgument10:Dynamic = flight._internal._StaticIndex.readArray(adjustments, i); __callArgument10; })) : Null<Array<Float>>);
+        var matrix:Null<Array<Float>> = (cast getAdjustmentColorMatrix(({ final __callArgument26:Dynamic = flight._internal._StaticIndex.readArray(adjustments, i); __callArgument26; })) : Null<Array<Float>>);
         if ((cast _Runtime.strictEquals(matrix, null) : Bool)) { (inlineable = cast (false : Dynamic)); } else { _Runtime.callProperty(matrices, 'push', cast ([matrix] : Array<Dynamic>)); }
         i++;
       }
     }
-    fused = (cast fuseColorMatrices(({ final __callArgument12:Dynamic = matrices; __callArgument12; })) : Array<Float>);
+    fused = (cast fuseColorMatrices(({ final __callArgument28:Dynamic = matrices; __callArgument28; })) : Array<Float>);
     (out.redScale = cast (flight._internal._StaticIndex.readFloatArrayTyped((cast fused : Array<Float>), (cast 0.0 : Float)) : Float));
     (out.greenScale = cast (flight._internal._StaticIndex.readFloatArrayTyped((cast fused : Array<Float>), (cast 6.0 : Float)) : Float));
     (out.blueScale = cast (flight._internal._StaticIndex.readFloatArrayTyped((cast fused : Array<Float>), (cast 12.0 : Float)) : Float));
@@ -114,11 +148,22 @@ class _Adjustments {
     (out.greenBias = cast (flight._internal._StaticIndex.readFloatArrayTyped((cast fused : Array<Float>), (cast 9.0 : Float)) : Float));
     (out.blueBias = cast (flight._internal._StaticIndex.readFloatArrayTyped((cast fused : Array<Float>), (cast 14.0 : Float)) : Float));
     (out.alphaBias = cast (flight._internal._StaticIndex.readFloatArrayTyped((cast fused : Array<Float>), (cast 19.0 : Float)) : Float));
-    return cast ((cast ((cast inlineable : Bool) && (cast (cast isAffineColorMatrix(({ final __callArgument14:Dynamic = fused; __callArgument14; })) : Bool) : Bool)) : Bool) ? (cast COLOR_ADJUSTMENT_AFFINE : Dynamic) : (cast COLOR_ADJUSTMENT_CHANNEL_MIXING : Dynamic));
+    return cast ((cast ((cast inlineable : Bool) && (cast (cast isAffineColorMatrix(({ final __callArgument30:Dynamic = fused; __callArgument30; })) : Bool) : Bool)) : Bool) ? (cast COLOR_ADJUSTMENT_AFFINE : Dynamic) : (cast COLOR_ADJUSTMENT_CHANNEL_MIXING : Dynamic));
     return cast null;
   }
 
   public static function createColorBlindSimulationAdjustment(?options:{ @:optional var type:Null<ColorBlindType>; }):ColorBlindSimulationAdjustment {
+    if (options == null) options = cast ({  } : Dynamic);
+    var out:EntityConstruction<ColorBlindSimulationAdjustment> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ colorMatrix: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, type: cast _Runtime.UNDEFINED } : ColorBlindSimulationAdjustment); }) #end));
+    initializeColorBlindSimulationAdjustment(({ final __callArgument32:Dynamic = out; __callArgument32; }), ({ final __callArgument33:Dynamic = options; __callArgument33; }));
+    return cast out;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeColorBlindSimulationAdjustment(out:EntityConstruction<ColorBlindSimulationAdjustment>, ?options:{ @:optional var type:Null<ColorBlindType>; }):Void {
     if (options == null) options = cast ({  } : Dynamic);
     var type:ColorBlindType = cast _Runtime.UNDEFINED;
     var m:Array<Float> = cast _Runtime.UNDEFINED;
@@ -126,13 +171,24 @@ class _Adjustments {
     type = _Runtime.coalesce((cast options : { @:optional var type:Null<String>; }).type, function():Dynamic return cast 'deuteranopia');
     m = _Runtime.getIndex(_Adjustments.COLOR_BLIND_MATRICES__colorBlindSimulationAdjustment, type);
     colorMatrix = (cast cast ([flight._internal._StaticIndex.readFloatArrayTyped((cast m : Array<Float>), (cast 0.0 : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast m : Array<Float>), (cast 1.0 : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast m : Array<Float>), (cast 2.0 : Float)), 0.0, 0.0, flight._internal._StaticIndex.readFloatArrayTyped((cast m : Array<Float>), (cast 3.0 : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast m : Array<Float>), (cast 4.0 : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast m : Array<Float>), (cast 5.0 : Float)), 0.0, 0.0, flight._internal._StaticIndex.readFloatArrayTyped((cast m : Array<Float>), (cast 6.0 : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast m : Array<Float>), (cast 7.0 : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast m : Array<Float>), (cast 8.0 : Float)), 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
-    return cast _Runtime.mergeObjects([{ kind: 'ColorBlindSimulationAdjustment' }, options, { colorMatrix: colorMatrix }]);
-    return cast null;
+    (cast initializeColorMatrixAdjustment : EntityConstruction<ColorBlindSimulationAdjustment>->String->Array<Float>->Void)(({ final __callArgument36:Dynamic = out; __callArgument36; }), (cast 'ColorBlindSimulationAdjustment' : String), ({ final __callArgument37:Dynamic = colorMatrix; __callArgument37; }));
+    _Runtime.setField(out, 'type', type);
   }
 
   public static final COLOR_BLIND_MATRICES__colorBlindSimulationAdjustment:flight._internal._Record<ColorBlindType, Array<Float>> = (cast { protanopia: cast ([0.567, 0.433, 0.0, 0.558, 0.442, 0.0, 0.0, 0.242, 0.758] : Array<Dynamic>), protanomaly: cast ([0.817, 0.183, 0.0, 0.333, 0.667, 0.0, 0.0, 0.125, 0.875] : Array<Dynamic>), deuteranopia: cast ([0.625, 0.375, 0.0, 0.7, 0.3, 0.0, 0.0, 0.3, 0.7] : Array<Dynamic>), deuteranomaly: cast ([0.8, 0.2, 0.0, 0.258, 0.742, 0.0, 0.0, 0.142, 0.858] : Array<Dynamic>), tritanopia: cast ([0.95, 0.05, 0.0, 0.0, 0.433, 0.567, 0.0, 0.475, 0.525] : Array<Dynamic>), tritanomaly: cast ([0.967, 0.033, 0.0, 0.0, 0.733, 0.267, 0.0, 0.183, 0.817] : Array<Dynamic>), achromatopsia: cast ([0.299, 0.587, 0.114, 0.299, 0.587, 0.114, 0.299, 0.587, 0.114] : Array<Dynamic>), achromatomaly: cast ([0.618, 0.32, 0.062, 0.163, 0.775, 0.062, 0.163, 0.32, 0.516] : Array<Dynamic>) });
 
   public static function createColorGradeAdjustment(?options:{ @:optional var exposure:Null<Float>; @:optional var brightness:Null<Float>; @:optional var contrast:Null<Float>; @:optional var saturation:Null<Float>; @:optional var temperature:Null<Float>; @:optional var tint:Null<Float>; @:optional var lift:Null<Float>; @:optional var gamma:Null<Float>; @:optional var gain:Null<Float>; }):ColorGradeAdjustment {
+    if (options == null) options = cast ({  } : Dynamic);
+    var out:EntityConstruction<ColorGradeAdjustment> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ brightness: cast _Runtime.UNDEFINED, contrast: cast _Runtime.UNDEFINED, exposure: cast _Runtime.UNDEFINED, gain: cast _Runtime.UNDEFINED, gamma: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, lift: cast _Runtime.UNDEFINED, saturation: cast _Runtime.UNDEFINED, temperature: cast _Runtime.UNDEFINED, tint: cast _Runtime.UNDEFINED, transform: cast _Runtime.UNDEFINED } : ColorGradeAdjustment); }) #end));
+    initializeColorGradeAdjustment(({ final __callArgument40:Dynamic = out; __callArgument40; }), ({ final __callArgument41:Dynamic = options; __callArgument41; }));
+    return cast out;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeColorGradeAdjustment(out:EntityConstruction<ColorGradeAdjustment>, ?options:{ @:optional var exposure:Null<Float>; @:optional var brightness:Null<Float>; @:optional var contrast:Null<Float>; @:optional var saturation:Null<Float>; @:optional var temperature:Null<Float>; @:optional var tint:Null<Float>; @:optional var lift:Null<Float>; @:optional var gamma:Null<Float>; @:optional var gain:Null<Float>; }):Void {
     if (options == null) options = cast ({  } : Dynamic);
     var exposure:Float = cast _Runtime.UNDEFINED;
     var brightness:Float = cast _Runtime.UNDEFINED;
@@ -177,8 +233,16 @@ class _Adjustments {
       flight._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast (cast _Adjustments.clamp01__colorGradeAdjustment((cast cg : Float)) : Float) : Float));
       flight._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast (cast _Adjustments.clamp01__colorGradeAdjustment((cast cb : Float)) : Float) : Float));
     };
-    return cast _Runtime.mergeObjects([{ kind: 'ColorGradeAdjustment' }, options, { transform: transform }]);
-    return cast null;
+    (cast initializeColorLutAdjustment : EntityConstruction<ColorGradeAdjustment>->String->ColorTransformFunction->Void)(({ final __callArgument44:Dynamic = out; __callArgument44; }), (cast 'ColorGradeAdjustment' : String), ({ final __callArgument45:Dynamic = transform; __callArgument45; }));
+    _Runtime.setField(out, 'exposure', _Runtime.coalesce((cast options : { @:optional var tint:Null<Float>; @:optional var brightness:Null<Float>; @:optional var contrast:Null<Float>; @:optional var exposure:Null<Float>; @:optional var saturation:Null<Float>; @:optional var temperature:Null<Float>; @:optional var lift:Null<Float>; @:optional var gamma:Null<Float>; @:optional var gain:Null<Float>; }).exposure, function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'brightness', _Runtime.coalesce((cast options : { @:optional var tint:Null<Float>; @:optional var brightness:Null<Float>; @:optional var contrast:Null<Float>; @:optional var exposure:Null<Float>; @:optional var saturation:Null<Float>; @:optional var temperature:Null<Float>; @:optional var lift:Null<Float>; @:optional var gamma:Null<Float>; @:optional var gain:Null<Float>; }).brightness, function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'contrast', _Runtime.coalesce((cast options : { @:optional var tint:Null<Float>; @:optional var brightness:Null<Float>; @:optional var contrast:Null<Float>; @:optional var exposure:Null<Float>; @:optional var saturation:Null<Float>; @:optional var temperature:Null<Float>; @:optional var lift:Null<Float>; @:optional var gamma:Null<Float>; @:optional var gain:Null<Float>; }).contrast, function():Dynamic return cast 1.0));
+    _Runtime.setField(out, 'saturation', _Runtime.coalesce((cast options : { @:optional var tint:Null<Float>; @:optional var brightness:Null<Float>; @:optional var contrast:Null<Float>; @:optional var exposure:Null<Float>; @:optional var saturation:Null<Float>; @:optional var temperature:Null<Float>; @:optional var lift:Null<Float>; @:optional var gamma:Null<Float>; @:optional var gain:Null<Float>; }).saturation, function():Dynamic return cast 1.0));
+    _Runtime.setField(out, 'temperature', _Runtime.coalesce((cast options : { @:optional var tint:Null<Float>; @:optional var brightness:Null<Float>; @:optional var contrast:Null<Float>; @:optional var exposure:Null<Float>; @:optional var saturation:Null<Float>; @:optional var temperature:Null<Float>; @:optional var lift:Null<Float>; @:optional var gamma:Null<Float>; @:optional var gain:Null<Float>; }).temperature, function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'tint', _Runtime.coalesce((cast options : { @:optional var tint:Null<Float>; @:optional var brightness:Null<Float>; @:optional var contrast:Null<Float>; @:optional var exposure:Null<Float>; @:optional var saturation:Null<Float>; @:optional var temperature:Null<Float>; @:optional var lift:Null<Float>; @:optional var gamma:Null<Float>; @:optional var gain:Null<Float>; }).tint, function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'lift', _Runtime.coalesce((cast options : { @:optional var tint:Null<Float>; @:optional var brightness:Null<Float>; @:optional var contrast:Null<Float>; @:optional var exposure:Null<Float>; @:optional var saturation:Null<Float>; @:optional var temperature:Null<Float>; @:optional var lift:Null<Float>; @:optional var gamma:Null<Float>; @:optional var gain:Null<Float>; }).lift, function():Dynamic return cast 255.0));
+    _Runtime.setField(out, 'gamma', _Runtime.coalesce((cast options : { @:optional var tint:Null<Float>; @:optional var brightness:Null<Float>; @:optional var contrast:Null<Float>; @:optional var exposure:Null<Float>; @:optional var saturation:Null<Float>; @:optional var temperature:Null<Float>; @:optional var lift:Null<Float>; @:optional var gamma:Null<Float>; @:optional var gain:Null<Float>; }).gamma, function():Dynamic return cast 2155905279.0));
+    _Runtime.setField(out, 'gain', _Runtime.coalesce((cast options : { @:optional var tint:Null<Float>; @:optional var brightness:Null<Float>; @:optional var contrast:Null<Float>; @:optional var exposure:Null<Float>; @:optional var saturation:Null<Float>; @:optional var temperature:Null<Float>; @:optional var lift:Null<Float>; @:optional var gamma:Null<Float>; @:optional var gain:Null<Float>; }).gain, function():Dynamic return cast 4294967295.0));
   }
 
   public static function clamp01__colorGradeAdjustment(v:Float):Float {
@@ -305,15 +369,22 @@ class _Adjustments {
   public static function getAdjustmentColorTransform(operation:{ var kind:String; }):Null<ColorTransformFunction> {
     var transform:Null<ColorTransformFunction> = cast _Runtime.UNDEFINED;
     var matrix:Null<Array<Float>> = cast _Runtime.UNDEFINED;
-    transform = (cast (cast operation : { @:optional var transform:Null<ColorTransformFunction>; @:optional var kind:Null<AdjustmentKind>; }) : { @:optional var transform:Null<ColorTransformFunction>; @:optional var kind:Null<String>; }).transform;
+    transform = (cast (cast operation : { @:optional var transform:Null<ColorTransformFunction>; @:optional var kind:Null<AdjustmentKind>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }) : { @:optional var transform:Null<ColorTransformFunction>; @:optional var kind:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }).transform;
     if ((cast _Runtime.strictEquals(_Runtime.typeofValue(transform), 'function') : Bool)) { return cast transform; }
-    matrix = (cast getAdjustmentColorMatrix(({ final __callArgument16:Dynamic = operation; __callArgument16; })) : Null<Array<Float>>);
-    return cast ((cast _Runtime.strictEquals(matrix, null) : Bool) ? (cast null : Dynamic) : (cast (cast _Adjustments.colorMatrixTransform__colorLutAdjustment(({ final __callArgument18:Dynamic = matrix; __callArgument18; })) : ColorTransformFunction) : Dynamic));
+    matrix = (cast getAdjustmentColorMatrix(({ final __callArgument48:Dynamic = operation; __callArgument48; })) : Null<Array<Float>>);
+    return cast ((cast _Runtime.strictEquals(matrix, null) : Bool) ? (cast null : Dynamic) : (cast (cast _Adjustments.colorMatrixTransform__colorLutAdjustment(({ final __callArgument50:Dynamic = matrix; __callArgument50; })) : ColorTransformFunction) : Dynamic));
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeColorLutAdjustment<T:ColorLutAdjustment>(out:EntityConstruction<T>, kind:AdjustmentKind, transform:ColorTransformFunction):Void {
+    initializeAdjustment((cast out : Dynamic), (cast kind : String));
+    ((cast out : { var transform:flight._internal._IndexedAccess<T, String>; }).transform = transform);
+  }
+
   public static function isColorLutAdjustment(operation:{ var kind:String; }):Bool {
-    return cast _Runtime.strictEquals(_Runtime.typeofValue((cast (cast operation : { @:optional var transform:Null<ColorTransformFunction>; @:optional var kind:Null<AdjustmentKind>; }) : { @:optional var transform:Null<ColorTransformFunction>; @:optional var kind:Null<String>; }).transform), 'function');
+    return cast _Runtime.strictEquals(_Runtime.typeofValue((cast (cast operation : { @:optional var transform:Null<ColorTransformFunction>; @:optional var kind:Null<AdjustmentKind>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }) : { @:optional var transform:Null<ColorTransformFunction>; @:optional var kind:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }).transform), 'function');
     return cast null;
   }
 
@@ -330,14 +401,14 @@ class _Adjustments {
     var signature:String = cast _Runtime.UNDEFINED;
     var transforms:Array<ColorTransformFunction> = cast _Runtime.UNDEFINED;
     var lut:ColorLut = cast _Runtime.UNDEFINED;
-    signature = (cast _Adjustments.colorLutRunSignature__colorLutCache(({ final __callArgument20:Dynamic = run; __callArgument20; }), (cast size : Float)) : String);
+    signature = (cast _Adjustments.colorLutRunSignature__colorLutCache(({ final __callArgument52:Dynamic = run; __callArgument52; }), (cast size : Float)) : String);
     if ((cast ((cast _Runtime.strictEquals(cache.signature, signature) : Bool) && (cast !_Runtime.strictEquals(cache.lut, null) : Bool)) : Bool)) { return cast cache.lut; }
     transforms = (cast cast ([] : Array<Dynamic>));
     for (operation in _Runtime.iterable(run)) {
-      var transform:Null<ColorTransformFunction> = (cast getAdjustmentColorTransform(({ final __callArgument24:Dynamic = operation; __callArgument24; })) : Null<ColorTransformFunction>);
+      var transform:Null<ColorTransformFunction> = (cast getAdjustmentColorTransform(({ final __callArgument56:Dynamic = operation; __callArgument56; })) : Null<ColorTransformFunction>);
       if ((cast !_Runtime.strictEquals(transform, null) : Bool)) { _Runtime.callProperty(transforms, 'push', cast ([transform] : Array<Dynamic>)); }
     }
-    lut = (cast bakeColorLut(({ final __callArgument26:Dynamic = transforms; __callArgument26; }), (cast size : Float)) : ColorLut);
+    lut = (cast bakeColorLut(({ final __callArgument58:Dynamic = transforms; __callArgument58; }), (cast size : Float)) : ColorLut);
     (cache.signature = cast (signature : Null<String>));
     (cache.lut = cast (lut : Null<ColorLut>));
     return cast lut;
@@ -345,8 +416,18 @@ class _Adjustments {
   }
 
   public static function createColorLutCache():ColorLutCache {
-    return cast { signature: null, lut: null };
+    var out:EntityConstruction<ColorLutCache> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ lut: cast _Runtime.UNDEFINED, signature: cast _Runtime.UNDEFINED } : ColorLutCache); }) #end));
+    initializeColorLutCache(({ final __callArgument60:Dynamic = out; __callArgument60; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeColorLutCache(out:EntityConstruction<ColorLutCache>):Void {
+    _Runtime.setField(out, 'signature', null);
+    _Runtime.setField(out, 'lut', null);
   }
 
   public static function colorLutRunSignature__colorLutCache(run:Array<{ var kind:String; }>, size:Float):String {
@@ -355,22 +436,32 @@ class _Adjustments {
   }
 
   public static function createColorMatrixAdjustment(colorMatrix:Array<Float>):ColorMatrixAdjustment {
+    var out:EntityConstruction<ColorMatrixAdjustment> = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(_Runtime.field(colorMatrix, 'length'), COLOR_MATRIX_LENGTH) : Bool)) {
       _Runtime.throwValue(_Runtime.error('Color matrix must contain ' + Std.string(COLOR_MATRIX_LENGTH) + ' values.'));
     }
-    return cast { kind: 'ColorMatrixAdjustment', colorMatrix: _Runtime.concatArrays([_Runtime.toArray(colorMatrix)]) };
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ colorMatrix: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED } : ColorMatrixAdjustment); }) #end));
+    (cast initializeColorMatrixAdjustment : EntityConstruction<ColorMatrixAdjustment>->String->Array<Float>->Void)(({ final __callArgument62:Dynamic = out; __callArgument62; }), (cast 'ColorMatrixAdjustment' : String), ({ final __callArgument63:Dynamic = _Runtime.concatArrays([_Runtime.toArray(colorMatrix)]); __callArgument63; }));
+    return cast out;
     return cast null;
   }
 
   public static function getAdjustmentColorMatrix(operation:{ var kind:String; }):Null<Array<Float>> {
     var matrix:Null<Array<Float>> = cast _Runtime.UNDEFINED;
-    matrix = (cast (cast operation : { @:optional var colorMatrix:Null<Array<Float>>; @:optional var kind:Null<AdjustmentKind>; }) : { @:optional var colorMatrix:Null<Array<Float>>; @:optional var kind:Null<String>; }).colorMatrix;
+    matrix = (cast (cast operation : { @:optional var colorMatrix:Null<Array<Float>>; @:optional var kind:Null<AdjustmentKind>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }) : { @:optional var colorMatrix:Null<Array<Float>>; @:optional var kind:Null<String>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }).colorMatrix;
     return cast ((cast ((cast _Runtime.isArray(matrix) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(matrix, 'length'), COLOR_MATRIX_LENGTH) : Bool)) : Bool) ? (cast matrix : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeColorMatrixAdjustment<T:ColorMatrixAdjustment>(out:EntityConstruction<T>, kind:AdjustmentKind, colorMatrix:Array<Float>):Void {
+    initializeAdjustment((cast out : Dynamic), (cast kind : String));
+    _Runtime.setField(out, 'colorMatrix', colorMatrix);
+  }
+
   public static function isColorMatrixAdjustment(operation:{ var kind:String; }):Bool {
-    return cast !_Runtime.strictEquals((cast getAdjustmentColorMatrix(({ final __callArgument28:Dynamic = operation; __callArgument28; })) : Null<Array<Float>>), null);
+    return cast !_Runtime.strictEquals((cast getAdjustmentColorMatrix(({ final __callArgument66:Dynamic = operation; __callArgument66; })) : Null<Array<Float>>), null);
     return cast null;
   }
 
@@ -400,7 +491,7 @@ class _Adjustments {
   }
 
   public static function concatColorMatrix(target:Array<Float>, source:Array<Float>):Void {
-    (cast multiplyColorMatrix(({ final __callArgument30:Dynamic = target; __callArgument30; }), ({ final __callArgument31:Dynamic = source; __callArgument31; }), ({ final __callArgument32:Dynamic = target; __callArgument32; })) : Array<Float>);
+    (cast multiplyColorMatrix(({ final __callArgument68:Dynamic = target; __callArgument68; }), ({ final __callArgument69:Dynamic = source; __callArgument69; }), ({ final __callArgument70:Dynamic = target; __callArgument70; })) : Array<Float>);
   }
 
   public static function createBrightnessColorMatrix(amount:Float):Array<Float> {
@@ -584,7 +675,7 @@ class _Adjustments {
     {
       var i:Float = 1.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(matrices, 'length') : Float)) : Bool)) {
-        (cast multiplyColorMatrix(flight._internal._StaticIndex.readArray(matrices, i), ({ final __callArgument36:Dynamic = out; __callArgument36; }), ({ final __callArgument37:Dynamic = out; __callArgument37; })) : Array<Float>);
+        (cast multiplyColorMatrix(flight._internal._StaticIndex.readArray(matrices, i), ({ final __callArgument74:Dynamic = out; __callArgument74; }), ({ final __callArgument75:Dynamic = out; __callArgument75; })) : Array<Float>);
         i++;
       }
     }
@@ -705,23 +796,59 @@ class _Adjustments {
   }
 
   public static function createColorScaleBiasAdjustment(colorScaleBias:ColorScaleBiasLike):ColorScaleBiasAdjustment {
-    var value:{ var alphaScale:Float; var alphaBias:Float; var blueScale:Float; var blueBias:Float; var greenScale:Float; var greenBias:Float; var redScale:Float; var redBias:Float; } = cast _Runtime.UNDEFINED;
-    value = (cast _Runtime.mergeObjects([colorScaleBias]));
-    return cast { kind: 'ColorScaleBiasAdjustment', colorScaleBias: value, colorMatrix: cast ([(cast value : { var alphaScale:Float; var alphaBias:Float; var blueScale:Float; var blueBias:Float; var greenScale:Float; var greenBias:Float; var redScale:Float; var redBias:Float; }).redScale, 0.0, 0.0, 0.0, (cast value : { var alphaScale:Float; var alphaBias:Float; var blueScale:Float; var blueBias:Float; var greenScale:Float; var greenBias:Float; var redScale:Float; var redBias:Float; }).redBias, 0.0, (cast value : { var alphaScale:Float; var alphaBias:Float; var blueScale:Float; var blueBias:Float; var greenScale:Float; var greenBias:Float; var redScale:Float; var redBias:Float; }).greenScale, 0.0, 0.0, (cast value : { var alphaScale:Float; var alphaBias:Float; var blueScale:Float; var blueBias:Float; var greenScale:Float; var greenBias:Float; var redScale:Float; var redBias:Float; }).greenBias, 0.0, 0.0, (cast value : { var alphaScale:Float; var alphaBias:Float; var blueScale:Float; var blueBias:Float; var greenScale:Float; var greenBias:Float; var redScale:Float; var redBias:Float; }).blueScale, 0.0, (cast value : { var alphaScale:Float; var alphaBias:Float; var blueScale:Float; var blueBias:Float; var greenScale:Float; var greenBias:Float; var redScale:Float; var redBias:Float; }).blueBias, 0.0, 0.0, 0.0, (cast value : { var alphaScale:Float; var alphaBias:Float; var blueScale:Float; var blueBias:Float; var greenScale:Float; var greenBias:Float; var redScale:Float; var redBias:Float; }).alphaScale, (cast value : { var alphaScale:Float; var alphaBias:Float; var blueScale:Float; var blueBias:Float; var greenScale:Float; var greenBias:Float; var redScale:Float; var redBias:Float; }).alphaBias] : Array<Dynamic>) };
+    var out:EntityConstruction<ColorScaleBiasAdjustment> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ colorMatrix: cast _Runtime.UNDEFINED, colorScaleBias: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED } : ColorScaleBiasAdjustment); }) #end));
+    initializeColorScaleBiasAdjustment(({ final __callArgument78:Dynamic = out; __callArgument78; }), ({ final __callArgument79:Dynamic = colorScaleBias; __callArgument79; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeColorScaleBiasAdjustment(out:EntityConstruction<ColorScaleBiasAdjustment>, colorScaleBias:ColorScaleBiasLike):Void {
+    var value:{ var alphaScale:Float; var alphaBias:Float; var blueScale:Float; var blueBias:Float; var greenScale:Float; var greenBias:Float; var redScale:Float; var redBias:Float; } = cast _Runtime.UNDEFINED;
+    var colorMatrix:Array<Float> = cast _Runtime.UNDEFINED;
+    value = (cast _Runtime.mergeObjects([colorScaleBias]));
+    colorMatrix = (cast cast ([(cast value : { var alphaScale:Float; var alphaBias:Float; var blueScale:Float; var blueBias:Float; var greenScale:Float; var greenBias:Float; var redScale:Float; var redBias:Float; }).redScale, 0.0, 0.0, 0.0, (cast value : { var alphaScale:Float; var alphaBias:Float; var blueScale:Float; var blueBias:Float; var greenScale:Float; var greenBias:Float; var redScale:Float; var redBias:Float; }).redBias, 0.0, (cast value : { var alphaScale:Float; var alphaBias:Float; var blueScale:Float; var blueBias:Float; var greenScale:Float; var greenBias:Float; var redScale:Float; var redBias:Float; }).greenScale, 0.0, 0.0, (cast value : { var alphaScale:Float; var alphaBias:Float; var blueScale:Float; var blueBias:Float; var greenScale:Float; var greenBias:Float; var redScale:Float; var redBias:Float; }).greenBias, 0.0, 0.0, (cast value : { var alphaScale:Float; var alphaBias:Float; var blueScale:Float; var blueBias:Float; var greenScale:Float; var greenBias:Float; var redScale:Float; var redBias:Float; }).blueScale, 0.0, (cast value : { var alphaScale:Float; var alphaBias:Float; var blueScale:Float; var blueBias:Float; var greenScale:Float; var greenBias:Float; var redScale:Float; var redBias:Float; }).blueBias, 0.0, 0.0, 0.0, (cast value : { var alphaScale:Float; var alphaBias:Float; var blueScale:Float; var blueBias:Float; var greenScale:Float; var greenBias:Float; var redScale:Float; var redBias:Float; }).alphaScale, (cast value : { var alphaScale:Float; var alphaBias:Float; var blueScale:Float; var blueBias:Float; var greenScale:Float; var greenBias:Float; var redScale:Float; var redBias:Float; }).alphaBias] : Array<Dynamic>));
+    (cast initializeColorMatrixAdjustment : EntityConstruction<ColorScaleBiasAdjustment>->String->Array<Float>->Void)(({ final __callArgument82:Dynamic = out; __callArgument82; }), (cast 'ColorScaleBiasAdjustment' : String), ({ final __callArgument83:Dynamic = colorMatrix; __callArgument83; }));
+    _Runtime.setField(out, 'colorScaleBias', value);
   }
 
   public static function createExposureAdjustment(?options:{ @:optional var exposure:Null<Float>; }):ExposureAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
-    var m:Float = cast _Runtime.UNDEFINED;
-    var colorMatrix:Array<Float> = cast _Runtime.UNDEFINED;
-    m = HxMath.pow(2.0, _Runtime.coalesce((cast options : { @:optional var exposure:Null<Float>; }).exposure, function():Dynamic return cast 0.0));
-    colorMatrix = (cast cast ([m, 0.0, 0.0, 0.0, 0.0, 0.0, m, 0.0, 0.0, 0.0, 0.0, 0.0, m, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
-    return cast _Runtime.mergeObjects([{ kind: 'ExposureAdjustment' }, options, { colorMatrix: colorMatrix }]);
+    var out:EntityConstruction<ExposureAdjustment> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ colorMatrix: cast _Runtime.UNDEFINED, exposure: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED } : ExposureAdjustment); }) #end));
+    initializeExposureAdjustment(({ final __callArgument86:Dynamic = out; __callArgument86; }), ({ final __callArgument87:Dynamic = options; __callArgument87; }));
+    return cast out;
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeExposureAdjustment(out:EntityConstruction<ExposureAdjustment>, ?options:{ @:optional var exposure:Null<Float>; }):Void {
+    if (options == null) options = cast ({  } : Dynamic);
+    var exposure:Float = cast _Runtime.UNDEFINED;
+    var m:Float = cast _Runtime.UNDEFINED;
+    var colorMatrix:Array<Float> = cast _Runtime.UNDEFINED;
+    exposure = _Runtime.coalesce((cast options : { @:optional var exposure:Null<Float>; }).exposure, function():Dynamic return cast 0.0);
+    m = HxMath.pow(2.0, exposure);
+    colorMatrix = (cast cast ([m, 0.0, 0.0, 0.0, 0.0, 0.0, m, 0.0, 0.0, 0.0, 0.0, 0.0, m, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
+    (cast initializeColorMatrixAdjustment : EntityConstruction<ExposureAdjustment>->String->Array<Float>->Void)(({ final __callArgument90:Dynamic = out; __callArgument90; }), (cast 'ExposureAdjustment' : String), ({ final __callArgument91:Dynamic = colorMatrix; __callArgument91; }));
+    _Runtime.setField(out, 'exposure', exposure);
+  }
+
   public static function createGrayscaleAdjustment(?options:{ @:optional var intensity:Null<Float>; }):GrayscaleAdjustment {
+    if (options == null) options = cast ({  } : Dynamic);
+    var out:EntityConstruction<GrayscaleAdjustment> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ colorMatrix: cast _Runtime.UNDEFINED, intensity: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED } : GrayscaleAdjustment); }) #end));
+    initializeGrayscaleAdjustment(({ final __callArgument94:Dynamic = out; __callArgument94; }), ({ final __callArgument95:Dynamic = options; __callArgument95; }));
+    return cast out;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeGrayscaleAdjustment(out:EntityConstruction<GrayscaleAdjustment>, ?options:{ @:optional var intensity:Null<Float>; }):Void {
     if (options == null) options = cast ({  } : Dynamic);
     var intensity:Float = cast _Runtime.UNDEFINED;
     var k:Float = cast _Runtime.UNDEFINED;
@@ -737,11 +864,22 @@ class _Adjustments {
     lg = (0.7152 * k);
     lb = (0.0722 * k);
     colorMatrix = (cast cast ([(j + lr), lg, lb, 0.0, 0.0, lr, (j + lg), lb, 0.0, 0.0, lr, lg, (j + lb), 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
-    return cast _Runtime.mergeObjects([{ kind: 'GrayscaleAdjustment' }, options, { colorMatrix: colorMatrix }]);
-    return cast null;
+    (cast initializeColorMatrixAdjustment : EntityConstruction<GrayscaleAdjustment>->String->Array<Float>->Void)(({ final __callArgument98:Dynamic = out; __callArgument98; }), (cast 'GrayscaleAdjustment' : String), ({ final __callArgument99:Dynamic = colorMatrix; __callArgument99; }));
+    _Runtime.setField(out, 'intensity', intensity);
   }
 
   public static function createHueSaturationAdjustment(?options:{ @:optional var hue:Null<Float>; @:optional var saturation:Null<Float>; @:optional var lightness:Null<Float>; }):HueSaturationAdjustment {
+    if (options == null) options = cast ({  } : Dynamic);
+    var out:EntityConstruction<HueSaturationAdjustment> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ hue: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, lightness: cast _Runtime.UNDEFINED, saturation: cast _Runtime.UNDEFINED, transform: cast _Runtime.UNDEFINED } : HueSaturationAdjustment); }) #end));
+    initializeHueSaturationAdjustment(({ final __callArgument102:Dynamic = out; __callArgument102; }), ({ final __callArgument103:Dynamic = options; __callArgument103; }));
+    return cast out;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeHueSaturationAdjustment(out:EntityConstruction<HueSaturationAdjustment>, ?options:{ @:optional var hue:Null<Float>; @:optional var saturation:Null<Float>; @:optional var lightness:Null<Float>; }):Void {
     if (options == null) options = cast ({  } : Dynamic);
     var hue:Float = cast _Runtime.UNDEFINED;
     var saturation:Float = cast _Runtime.UNDEFINED;
@@ -786,8 +924,10 @@ class _Adjustments {
       flight._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast (cast _Adjustments.hue2rgb__hueSaturationAdjustment((cast p : Float), (cast q : Float), (cast h : Float)) : Float) : Float));
       flight._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast (cast _Adjustments.hue2rgb__hueSaturationAdjustment((cast p : Float), (cast q : Float), (cast (h - (1.0 / 3.0)) : Float)) : Float) : Float));
     };
-    return cast _Runtime.mergeObjects([{ kind: 'HueSaturationAdjustment' }, options, { transform: transform }]);
-    return cast null;
+    (cast initializeColorLutAdjustment : EntityConstruction<HueSaturationAdjustment>->String->ColorTransformFunction->Void)(({ final __callArgument106:Dynamic = out; __callArgument106; }), (cast 'HueSaturationAdjustment' : String), ({ final __callArgument107:Dynamic = transform; __callArgument107; }));
+    _Runtime.setField(out, 'hue', _Runtime.coalesce((cast options : { @:optional var saturation:Null<Float>; @:optional var hue:Null<Float>; @:optional var lightness:Null<Float>; }).hue, function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'saturation', _Runtime.coalesce((cast options : { @:optional var saturation:Null<Float>; @:optional var hue:Null<Float>; @:optional var lightness:Null<Float>; }).saturation, function():Dynamic return cast 1.0));
+    _Runtime.setField(out, 'lightness', _Runtime.coalesce((cast options : { @:optional var saturation:Null<Float>; @:optional var hue:Null<Float>; @:optional var lightness:Null<Float>; }).lightness, function():Dynamic return cast 0.0));
   }
 
   public static function clamp01__hueSaturationAdjustment(v:Float):Float {
@@ -814,6 +954,17 @@ class _Adjustments {
 
   public static function createInvertAdjustment(?options:{ @:optional var intensity:Null<Float>; }):InvertAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
+    var out:EntityConstruction<InvertAdjustment> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ colorMatrix: cast _Runtime.UNDEFINED, intensity: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED } : InvertAdjustment); }) #end));
+    initializeInvertAdjustment(({ final __callArgument110:Dynamic = out; __callArgument110; }), ({ final __callArgument111:Dynamic = options; __callArgument111; }));
+    return cast out;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeInvertAdjustment(out:EntityConstruction<InvertAdjustment>, ?options:{ @:optional var intensity:Null<Float>; }):Void {
+    if (options == null) options = cast ({  } : Dynamic);
     var intensity:Float = cast _Runtime.UNDEFINED;
     var s:Float = cast _Runtime.UNDEFINED;
     var o:Float = cast _Runtime.UNDEFINED;
@@ -822,11 +973,22 @@ class _Adjustments {
     s = (1.0 - (2.0 * intensity));
     o = intensity;
     colorMatrix = (cast cast ([s, 0.0, 0.0, 0.0, o, 0.0, s, 0.0, 0.0, o, 0.0, 0.0, s, 0.0, o, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
-    return cast _Runtime.mergeObjects([{ kind: 'InvertAdjustment' }, options, { colorMatrix: colorMatrix }]);
-    return cast null;
+    (cast initializeColorMatrixAdjustment : EntityConstruction<InvertAdjustment>->String->Array<Float>->Void)(({ final __callArgument114:Dynamic = out; __callArgument114; }), (cast 'InvertAdjustment' : String), ({ final __callArgument115:Dynamic = colorMatrix; __callArgument115; }));
+    _Runtime.setField(out, 'intensity', intensity);
   }
 
   public static function createLiftGammaGainAdjustment(?options:{ @:optional var lift:Null<Float>; @:optional var gamma:Null<Float>; @:optional var gain:Null<Float>; }):LiftGammaGainAdjustment {
+    if (options == null) options = cast ({  } : Dynamic);
+    var out:EntityConstruction<LiftGammaGainAdjustment> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ gain: cast _Runtime.UNDEFINED, gamma: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, lift: cast _Runtime.UNDEFINED, transform: cast _Runtime.UNDEFINED } : LiftGammaGainAdjustment); }) #end));
+    initializeLiftGammaGainAdjustment(({ final __callArgument118:Dynamic = out; __callArgument118; }), ({ final __callArgument119:Dynamic = options; __callArgument119; }));
+    return cast out;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeLiftGammaGainAdjustment(out:EntityConstruction<LiftGammaGainAdjustment>, ?options:{ @:optional var lift:Null<Float>; @:optional var gamma:Null<Float>; @:optional var gain:Null<Float>; }):Void {
     if (options == null) options = cast ({  } : Dynamic);
     var lift:Array<Float> = cast _Runtime.UNDEFINED;
     var gammaRaw:Array<Float> = cast _Runtime.UNDEFINED;
@@ -842,8 +1004,10 @@ class _Adjustments {
       flight._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast (cast _Adjustments.clamp01__liftGammaGainAdjustment((cast HxMath.pow(HxMath.max(((g * flight._internal._StaticIndex.readFloatArrayTyped((cast gain : Array<Float>), (cast 1.0 : Float))) + (flight._internal._StaticIndex.readFloatArrayTyped((cast lift : Array<Float>), (cast 1.0 : Float)) * (1.0 - g))), 0.0), flight._internal._StaticIndex.readFloatArrayTyped((cast gammaExp : Array<Float>), (cast 1.0 : Float))) : Float)) : Float) : Float));
       flight._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast (cast _Adjustments.clamp01__liftGammaGainAdjustment((cast HxMath.pow(HxMath.max(((b * flight._internal._StaticIndex.readFloatArrayTyped((cast gain : Array<Float>), (cast 2.0 : Float))) + (flight._internal._StaticIndex.readFloatArrayTyped((cast lift : Array<Float>), (cast 2.0 : Float)) * (1.0 - b))), 0.0), flight._internal._StaticIndex.readFloatArrayTyped((cast gammaExp : Array<Float>), (cast 2.0 : Float))) : Float)) : Float) : Float));
     };
-    return cast _Runtime.mergeObjects([{ kind: 'LiftGammaGainAdjustment' }, options, { transform: transform }]);
-    return cast null;
+    (cast initializeColorLutAdjustment : EntityConstruction<LiftGammaGainAdjustment>->String->ColorTransformFunction->Void)(({ final __callArgument122:Dynamic = out; __callArgument122; }), (cast 'LiftGammaGainAdjustment' : String), ({ final __callArgument123:Dynamic = transform; __callArgument123; }));
+    _Runtime.setField(out, 'lift', _Runtime.coalesce((cast options : { @:optional var lift:Null<Float>; @:optional var gamma:Null<Float>; @:optional var gain:Null<Float>; }).lift, function():Dynamic return cast 255.0));
+    _Runtime.setField(out, 'gamma', _Runtime.coalesce((cast options : { @:optional var lift:Null<Float>; @:optional var gamma:Null<Float>; @:optional var gain:Null<Float>; }).gamma, function():Dynamic return cast 2155905279.0));
+    _Runtime.setField(out, 'gain', _Runtime.coalesce((cast options : { @:optional var lift:Null<Float>; @:optional var gamma:Null<Float>; @:optional var gain:Null<Float>; }).gain, function():Dynamic return cast 4294967295.0));
   }
 
   public static function clamp01__liftGammaGainAdjustment(v:Float):Float {
@@ -858,6 +1022,17 @@ class _Adjustments {
 
   public static function createLookupTableGradeAdjustment(?options:{ @:optional var lut:Null<ColorLut>; @:optional var strength:Null<Float>; }):LookupTableGradeAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
+    var out:EntityConstruction<LookupTableGradeAdjustment> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ kind: cast _Runtime.UNDEFINED, lut: cast _Runtime.UNDEFINED, strength: cast _Runtime.UNDEFINED, transform: cast _Runtime.UNDEFINED } : LookupTableGradeAdjustment); }) #end));
+    initializeLookupTableGradeAdjustment(({ final __callArgument126:Dynamic = out; __callArgument126; }), (cast options : Dynamic));
+    return cast out;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeLookupTableGradeAdjustment(out:EntityConstruction<LookupTableGradeAdjustment>, ?options:{ @:optional var lut:Null<ColorLut>; @:optional var strength:Null<Float>; }):Void {
+    if (options == null) options = cast ({  } : Dynamic);
     var lut:Null<ColorLut> = cast _Runtime.UNDEFINED;
     var strength:Float = cast _Runtime.UNDEFINED;
     var transform:ColorTransformFunction = cast _Runtime.UNDEFINED;
@@ -870,28 +1045,52 @@ class _Adjustments {
         flight._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast b : Float));
         return;
       }
-      sampleColorLut(({ final __callArgument40:Dynamic = lut; __callArgument40; }), ({ final __callArgument41:Dynamic = out; __callArgument41; }), (cast r : Float), (cast g : Float), (cast b : Float));
+      sampleColorLut(({ final __callArgument128:Dynamic = lut; __callArgument128; }), ({ final __callArgument129:Dynamic = out; __callArgument129; }), (cast r : Float), (cast g : Float), (cast b : Float));
       flight._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast (r + ((flight._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float)) - r) * strength)) : Float));
       flight._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast (g + ((flight._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float)) - g) * strength)) : Float));
       flight._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast (b + ((flight._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float)) - b) * strength)) : Float));
     };
-    return cast _Runtime.mergeObjects([{ kind: 'LookupTableGradeAdjustment' }, options, { transform: transform }]);
-    return cast null;
+    (cast initializeColorLutAdjustment : EntityConstruction<LookupTableGradeAdjustment>->String->ColorTransformFunction->Void)(({ final __callArgument132:Dynamic = out; __callArgument132; }), (cast 'LookupTableGradeAdjustment' : String), ({ final __callArgument133:Dynamic = transform; __callArgument133; }));
+    _Runtime.setField(out, 'lut', (cast options : { @:optional var lut:Null<ColorLut>; @:optional var strength:Null<Float>; }).lut);
+    _Runtime.setField(out, 'strength', _Runtime.coalesce((cast options : { @:optional var lut:Null<ColorLut>; @:optional var strength:Null<Float>; }).strength, function():Dynamic return cast 1.0));
   }
 
   public static function createSepiaAdjustment(?options:{ @:optional var intensity:Null<Float>; }):SepiaAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
-    var k:Float = cast _Runtime.UNDEFINED;
-    var j:Float = cast _Runtime.UNDEFINED;
-    var colorMatrix:Array<Float> = cast _Runtime.UNDEFINED;
-    k = _Runtime.coalesce((cast options : { @:optional var intensity:Null<Float>; }).intensity, function():Dynamic return cast 1.0);
-    j = (1.0 - k);
-    colorMatrix = (cast cast ([(j + (0.393 * k)), (0.769 * k), (0.189 * k), 0.0, 0.0, (0.349 * k), (j + (0.686 * k)), (0.168 * k), 0.0, 0.0, (0.272 * k), (0.534 * k), (j + (0.131 * k)), 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
-    return cast _Runtime.mergeObjects([{ kind: 'SepiaAdjustment' }, options, { colorMatrix: colorMatrix }]);
+    var out:EntityConstruction<SepiaAdjustment> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ colorMatrix: cast _Runtime.UNDEFINED, intensity: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED } : SepiaAdjustment); }) #end));
+    initializeSepiaAdjustment(({ final __callArgument136:Dynamic = out; __callArgument136; }), ({ final __callArgument137:Dynamic = options; __callArgument137; }));
+    return cast out;
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeSepiaAdjustment(out:EntityConstruction<SepiaAdjustment>, ?options:{ @:optional var intensity:Null<Float>; }):Void {
+    if (options == null) options = cast ({  } : Dynamic);
+    var intensity:Float = cast _Runtime.UNDEFINED;
+    var k:Float = cast _Runtime.UNDEFINED;
+    var j:Float = cast _Runtime.UNDEFINED;
+    var colorMatrix:Array<Float> = cast _Runtime.UNDEFINED;
+    intensity = _Runtime.coalesce((cast options : { @:optional var intensity:Null<Float>; }).intensity, function():Dynamic return cast 1.0);
+    k = intensity;
+    j = (1.0 - k);
+    colorMatrix = (cast cast ([(j + (0.393 * k)), (0.769 * k), (0.189 * k), 0.0, 0.0, (0.349 * k), (j + (0.686 * k)), (0.168 * k), 0.0, 0.0, (0.272 * k), (0.534 * k), (j + (0.131 * k)), 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
+    (cast initializeColorMatrixAdjustment : EntityConstruction<SepiaAdjustment>->String->Array<Float>->Void)(({ final __callArgument140:Dynamic = out; __callArgument140; }), (cast 'SepiaAdjustment' : String), ({ final __callArgument141:Dynamic = colorMatrix; __callArgument141; }));
+    _Runtime.setField(out, 'intensity', intensity);
+  }
+
   public static function createTintAdjustment(rgba:Float):TintAdjustment {
+    var out:EntityConstruction<TintAdjustment> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ colorMatrix: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED } : TintAdjustment); }) #end));
+    initializeTintAdjustment(({ final __callArgument144:Dynamic = out; __callArgument144; }), (cast rgba : Float));
+    return cast out;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeTintAdjustment(out:EntityConstruction<TintAdjustment>, rgba:Float):Void {
     var redScale:Float = cast _Runtime.UNDEFINED;
     var greenScale:Float = cast _Runtime.UNDEFINED;
     var blueScale:Float = cast _Runtime.UNDEFINED;
@@ -902,7 +1101,6 @@ class _Adjustments {
     blueScale = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(rgba), 8)) & 255) / 255.0);
     alphaScale = ((_Runtime.toInt32(rgba) & 255) / 255.0);
     colorMatrix = (cast cast ([redScale, 0.0, 0.0, 0.0, 0.0, 0.0, greenScale, 0.0, 0.0, 0.0, 0.0, 0.0, blueScale, 0.0, 0.0, 0.0, 0.0, 0.0, alphaScale, 0.0] : Array<Dynamic>));
-    return cast { kind: 'TintAdjustment', colorMatrix: colorMatrix };
-    return cast null;
+    (cast initializeColorMatrixAdjustment : EntityConstruction<TintAdjustment>->String->Array<Float>->Void)(({ final __callArgument146:Dynamic = out; __callArgument146; }), (cast 'TintAdjustment' : String), ({ final __callArgument147:Dynamic = colorMatrix; __callArgument147; }));
   }
 }

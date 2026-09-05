@@ -8,6 +8,7 @@ import flight._Types.BitmapTextureSourceKind;
 #if !flight_struct_typedef
 @:allow(flight._Bitmap)
 @:allow(flight._HostWeb)
+@:allow(flight._Image)
 @:keep
 @:structInit
 class Bitmap extends flight.types.TextureSource<Dynamic> {

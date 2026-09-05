@@ -7,6 +7,7 @@ __syncDependencies();
 
 export const applySpringImpulse = api.applySpringImpulse;
 export const createSpring = api.createSpring;
+export const initializeSpring = api.initializeSpring;
 export const isSpringSettled = api.isSpringSettled;
 export const resetSpring = api.resetSpring;
 export const updateSpring = api.updateSpring;

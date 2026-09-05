@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createPhysics2DJointReaction = api.createPhysics2DJointReaction;
+export const initializePhysics2DJointReaction = api.initializePhysics2DJointReaction;
 export const writePhysics2DJointReaction = api.writePhysics2DJointReaction;

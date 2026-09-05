@@ -4,4 +4,23 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AudioResourceFailure = { var kind:AudioResourceFailureKind; var message:String; var name:Null<String>; };
+#if !flight_struct_typedef
+@:allow(flight._Audio)
+@:keep
+@:structInit
+class AudioResourceFailure {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var kind:AudioResourceFailureKind;
+  public var message:String;
+  public var name:Null<String>;
+
+  private function new(kind:AudioResourceFailureKind, message:String, name:Null<String>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.kind = kind;
+    this.message = message;
+    this.name = name;
+  }
+}
+#else
+typedef AudioResourceFailure = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:AudioResourceFailureKind; var message:String; var name:Null<String>; };
+#end

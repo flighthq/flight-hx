@@ -4,10 +4,10 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Scene3DResources as Facade_Scene3DResources_flight__Scene3DResources;
-import flight.types.ExternalImageResourceReference;
 import flight.types.GltfScene3DDocumentLoadOptions;
+import flight.types.HasGraphicsImage;
 import flight.types.HasNetHttp;
-import flight.types.ImageResource;
+import flight.types.ImageResourceFetch;
 import flight.types.ImageResourceReference;
 import flight.types.LoadScene3DResourcesOptions;
 import flight.types.ObjMaterialLibrary;
@@ -35,13 +35,18 @@ class Scene3DResources {
     return cast null;
   }
 
-  public static function createBuiltInScene3DResourceResolver(?options:Scene3DResourceResolverOptions):Scene3DResourceResolverWithRuntime {
-    return cast Facade_Scene3DResources_flight__Scene3DResources.createBuiltInScene3DResourceResolver(options);
+  public static function createBuiltInScene3DResourceResolver(host:HasGraphicsImage, ?options:Scene3DResourceResolverOptions):Scene3DResourceResolverWithRuntime {
+    return cast Facade_Scene3DResources_flight__Scene3DResources.createBuiltInScene3DResourceResolver(host, options);
     return cast null;
   }
 
-  public static function createScene3DResourceResolver(?options:Scene3DResourceResolverOptions):Scene3DResourceResolverWithRuntime {
-    return cast Facade_Scene3DResources_flight__Scene3DResources.createScene3DResourceResolver(options);
+  public static function createScene3DResourceResolver(host:HasGraphicsImage, ?options:Scene3DResourceResolverOptions):Scene3DResourceResolverWithRuntime {
+    return cast Facade_Scene3DResources_flight__Scene3DResources.createScene3DResourceResolver(host, options);
+    return cast null;
+  }
+
+  public static function createWebImageResourceFetch(host:HasGraphicsImage):ImageResourceFetch {
+    return cast Facade_Scene3DResources_flight__Scene3DResources.createWebImageResourceFetch(host);
     return cast null;
   }
 
@@ -65,11 +70,6 @@ class Scene3DResources {
 
   public static function explainScene3DResourceCoverage(out:Array<SceneCoverageEntry>, resolver:Scene3DResourceResolver, usage:Scene3DKindUsage, catalog:SceneCoverageCatalog):Void {
     Facade_Scene3DResources_flight__Scene3DResources.explainScene3DResourceCoverage(out, resolver, usage, catalog);
-  }
-
-  public static function fetchWebImageResource(ref:ExternalImageResourceReference, signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<ImageResource>> {
-    return cast Facade_Scene3DResources_flight__Scene3DResources.fetchWebImageResource(ref, signal);
-    return cast null;
   }
 
   public static function getScene3DDocumentBasePathFromUrl(url:String):Null<String> {

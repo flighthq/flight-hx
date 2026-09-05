@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createAnisotropyPbrExtension = api.createAnisotropyPbrExtension;
+export const initializeAnisotropyPbrExtension = api.initializeAnisotropyPbrExtension;
 export const isValidAnisotropyPbrExtension = api.isValidAnisotropyPbrExtension;

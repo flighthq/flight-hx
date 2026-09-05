@@ -4,7 +4,9 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Tokens as Facade_Tokens_flight__Tokens;
+import flight.types.EntityConstruction;
 import flight.types.FlightDocumentRefusalExplanation;
+import flight.types.FlightDocumentRefusalReason;
 import flight.types.FlightDocumentScene;
 import flight.types.FlightDocumentTokenResolution;
 import flight.types.FlightDocumentTokenResolverRegistry;
@@ -23,6 +25,14 @@ class Tokens {
   public static function explainFlightDocumentSceneTokenSubstitution(scene:FlightDocumentScene, resolution:FlightDocumentTokenResolution):Null<FlightDocumentRefusalExplanation> {
     return cast Facade_Tokens_flight__Tokens.explainFlightDocumentSceneTokenSubstitution(scene, resolution);
     return cast null;
+  }
+
+  public static function initializeFlightDocumentRefusalExplanation(out:EntityConstruction<FlightDocumentRefusalExplanation>, mode:flight._internal._IndexedAccess<FlightDocumentRefusalExplanation, String>, path:String, reason:FlightDocumentRefusalReason, tokenKey:Null<String>):Void {
+    Facade_Tokens_flight__Tokens.initializeFlightDocumentRefusalExplanation(out, mode, path, reason, tokenKey);
+  }
+
+  public static function initializeFlightDocumentTokenResolverRegistry(out:EntityConstruction<FlightDocumentTokenResolverRegistry>):Void {
+    Facade_Tokens_flight__Tokens.initializeFlightDocumentTokenResolverRegistry(out);
   }
 
   public static function resolveFlightDocumentSceneTokens(scene:FlightDocumentScene, mode:String, ?resolvers:FlightDocumentTokenResolverRegistry):Null<FlightDocumentTokenResolution> {

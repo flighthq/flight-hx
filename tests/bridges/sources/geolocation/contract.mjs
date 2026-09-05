@@ -5,3 +5,5 @@ __syncDependencies();
 
 export * from './geolocation.mjs';
 export * from './geolocationAccess.mjs';
+export { initializeGeoPosition } from './geolocation.mjs';
+export { initializeWebGeolocationBackend } from './geolocation.mjs';

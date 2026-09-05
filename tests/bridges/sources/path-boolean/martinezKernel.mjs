@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createMartinezPathBooleanBackend = api.createMartinezPathBooleanBackend;
+export const initializeMartinezPathBooleanBackend = api.initializeMartinezPathBooleanBackend;

@@ -10,4 +10,7 @@ export const createAnimationChannel = api.createAnimationChannel;
 export const createAnimationClip = api.createAnimationClip;
 export const createAnimationClipEvent = api.createAnimationClipEvent;
 export const getAnimationClipDuration = api.getAnimationClipDuration;
+export const initializeAnimationChannel = api.initializeAnimationChannel;
+export const initializeAnimationClip = api.initializeAnimationClip;
+export const initializeAnimationClipEvent = api.initializeAnimationClipEvent;
 export const sampleAnimationClip = api.sampleAnimationClip;

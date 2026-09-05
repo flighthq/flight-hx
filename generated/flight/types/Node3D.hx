@@ -7,6 +7,7 @@ import flight._internal._Runtime;
 #if !flight_struct_typedef
 @:allow(flight._Scene3D)
 @:allow(flight.types.Billboard)
+@:allow(flight.types.InstancedMesh)
 @:allow(flight.types.Mesh)
 @:allow(flight.types.ParticleEmitter3D)
 @:keep

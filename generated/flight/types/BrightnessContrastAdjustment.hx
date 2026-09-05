@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef BrightnessContrastAdjustment = { var kind:String; var colorMatrix:Array<Float>; @:optional var brightness:Float; @:optional var contrast:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Adjustments)
+@:keep
+@:structInit
+class BrightnessContrastAdjustment extends flight.types.ColorMatrixAdjustment<String> {
+  public var brightness:Null<Float>;
+  public var contrast:Null<Float>;
+
+  private function new(kind:String, colorMatrix:Array<Float>, ?brightness:Null<Float>, ?contrast:Null<Float>):Void {
+    super(kind, colorMatrix);
+    this.brightness = brightness;
+    this.contrast = contrast;
+  }
+}
+#else
+typedef BrightnessContrastAdjustment = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var colorMatrix:Array<Float>; @:optional var brightness:Float; @:optional var contrast:Float; };
+#end

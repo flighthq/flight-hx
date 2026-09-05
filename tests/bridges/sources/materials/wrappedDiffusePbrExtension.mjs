@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWrappedDiffusePbrExtension = api.createWrappedDiffusePbrExtension;
+export const initializeWrappedDiffusePbrExtension = api.initializeWrappedDiffusePbrExtension;
 export const isValidWrappedDiffusePbrExtension = api.isValidWrappedDiffusePbrExtension;

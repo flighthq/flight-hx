@@ -10,6 +10,7 @@ export const createFlowStack = api.createFlowStack;
 export const getActiveFlowState = api.getActiveFlowState;
 export const getFlowStackDepth = api.getFlowStackDepth;
 export const getFlowStackVisibleStates = api.getFlowStackVisibleStates;
+export const initializeFlowStack = api.initializeFlowStack;
 export const popFlowState = api.popFlowState;
 export const pushFlowState = api.pushFlowState;
 export const replaceFlowState = api.replaceFlowState;

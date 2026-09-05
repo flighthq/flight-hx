@@ -4,3 +4,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './app.mjs';
+export { initializeApp } from './app.mjs';

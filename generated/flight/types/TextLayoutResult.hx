@@ -4,4 +4,35 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TextLayoutResult = { var groups:Array<TextLayoutGroup>; var lineAscents:Array<Float>; var lineDescents:Array<Float>; var lineHeights:Array<Float>; var lineLeadings:Array<Float>; var lineWidths:Array<Float>; var numLines:Float; var textHeight:Float; var textWidth:Float; };
+#if !flight_struct_typedef
+@:allow(flight._TextLayout)
+@:keep
+@:structInit
+class TextLayoutResult {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var groups:Array<TextLayoutGroup>;
+  public var lineAscents:Array<Float>;
+  public var lineDescents:Array<Float>;
+  public var lineHeights:Array<Float>;
+  public var lineLeadings:Array<Float>;
+  public var lineWidths:Array<Float>;
+  public var numLines:Float;
+  public var textHeight:Float;
+  public var textWidth:Float;
+
+  private function new(groups:Array<TextLayoutGroup>, lineAscents:Array<Float>, lineDescents:Array<Float>, lineHeights:Array<Float>, lineLeadings:Array<Float>, lineWidths:Array<Float>, numLines:Float, textHeight:Float, textWidth:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.groups = groups;
+    this.lineAscents = lineAscents;
+    this.lineDescents = lineDescents;
+    this.lineHeights = lineHeights;
+    this.lineLeadings = lineLeadings;
+    this.lineWidths = lineWidths;
+    this.numLines = numLines;
+    this.textHeight = textHeight;
+    this.textWidth = textWidth;
+  }
+}
+#else
+typedef TextLayoutResult = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var groups:Array<TextLayoutGroup>; var lineAscents:Array<Float>; var lineDescents:Array<Float>; var lineHeights:Array<Float>; var lineLeadings:Array<Float>; var lineWidths:Array<Float>; var numLines:Float; var textHeight:Float; var textWidth:Float; };
+#end

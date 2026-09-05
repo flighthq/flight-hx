@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const createElectronShortcutQueryBackend = api.createElectronShortcutQueryBackend;
 export const createElectronShortcutTriggerBackend = api.createElectronShortcutTriggerBackend;
+export const initializeElectronShortcutQueryBackend = api.initializeElectronShortcutQueryBackend;

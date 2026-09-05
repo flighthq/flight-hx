@@ -5,6 +5,8 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight.Types.Node2DTraitsKey;
 import flight._Color.lerpColor;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Geometry.copyMatrix;
 import flight._Geometry.copyRectangle;
 import flight._Geometry.createMatrix;
@@ -46,6 +48,9 @@ import flight.types.DisplacementEffect;
 import flight.types.DitherEffect;
 import flight.types.DropShadowEffect;
 import flight.types.EffectSourceMode;
+import flight.types.Entity;
+import flight.types.EntityConstruction;
+import flight.types.EntityWithoutRuntime;
 import flight.types.FilmEmulationEffect;
 import flight.types.FilmGrainEffect;
 import flight.types.FilmicToneMapOptions;
@@ -113,21 +118,48 @@ import flight.types.WhiteBalanceEffect;
 
 @:noCompletion
 class _Effects {
-  public static function createAutoExposureEffect(?options:{ @:optional var adaptationSpeed:Null<Float>; @:optional var exposureCompensation:Null<Float>; @:optional var maxExposure:Null<Float>; @:optional var minExposure:Null<Float>; }):AutoExposureEffect {
+  public static function createAutoExposureEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var adaptationSpeed:Null<Float>; @:optional var exposureCompensation:Null<Float>; @:optional var maxExposure:Null<Float>; @:optional var minExposure:Null<Float>; }, String>):AutoExposureEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'AutoExposureEffect' }, options]);
+    var out:EntityConstruction<AutoExposureEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ adaptationSpeed: cast _Runtime.UNDEFINED, exposureCompensation: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, maxExposure: cast _Runtime.UNDEFINED, minExposure: cast _Runtime.UNDEFINED } : AutoExposureEffect); }) #end));
+    initializeAutoExposureEffect(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = options; __callArgument1; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createBarrelDistortionEffect(?options:{ @:optional var amount:Null<Float>; @:optional var scale:Null<Float>; }):BarrelDistortionEffect {
+  @:allow(flight)
+  @:keep
+  private static function initializeAutoExposureEffect(out:EntityConstruction<AutoExposureEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var adaptationSpeed:Null<Float>; @:optional var exposureCompensation:Null<Float>; @:optional var maxExposure:Null<Float>; @:optional var minExposure:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<AutoExposureEffect>->String->Void)(({ final __callArgument4:Dynamic = out; __callArgument4; }), (cast 'AutoExposureEffect' : String));
+    _Runtime.setField(out, 'adaptationSpeed', (cast options : { @:optional var adaptationSpeed:Null<Float>; @:optional var exposureCompensation:Null<Float>; @:optional var maxExposure:Null<Float>; @:optional var minExposure:Null<Float>; }).adaptationSpeed);
+    _Runtime.setField(out, 'exposureCompensation', (cast options : { @:optional var adaptationSpeed:Null<Float>; @:optional var exposureCompensation:Null<Float>; @:optional var maxExposure:Null<Float>; @:optional var minExposure:Null<Float>; }).exposureCompensation);
+    _Runtime.setField(out, 'maxExposure', (cast options : { @:optional var adaptationSpeed:Null<Float>; @:optional var exposureCompensation:Null<Float>; @:optional var maxExposure:Null<Float>; @:optional var minExposure:Null<Float>; }).maxExposure);
+    _Runtime.setField(out, 'minExposure', (cast options : { @:optional var adaptationSpeed:Null<Float>; @:optional var exposureCompensation:Null<Float>; @:optional var maxExposure:Null<Float>; @:optional var minExposure:Null<Float>; }).minExposure);
+  }
+
+  public static function createBarrelDistortionEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var amount:Null<Float>; @:optional var scale:Null<Float>; }, String>):BarrelDistortionEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'BarrelDistortionEffect' }, options]);
+    var out:EntityConstruction<BarrelDistortionEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ amount: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, scale: cast _Runtime.UNDEFINED } : BarrelDistortionEffect); }) #end));
+    initializeBarrelDistortionEffect(({ final __callArgument6:Dynamic = out; __callArgument6; }), ({ final __callArgument7:Dynamic = options; __callArgument7; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createBevelEffect(?options:{ @:optional var angle:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var highlightAlpha:Null<Float>; @:optional var highlightColor:Null<Float>; @:optional var quality:Null<Float>; @:optional var shadowAlpha:Null<Float>; @:optional var shadowColor:Null<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }):BevelEffect {
+  @:allow(flight)
+  @:keep
+  private static function initializeBarrelDistortionEffect(out:EntityConstruction<BarrelDistortionEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var amount:Null<Float>; @:optional var scale:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<BarrelDistortionEffect>->String->Void)(({ final __callArgument10:Dynamic = out; __callArgument10; }), (cast 'BarrelDistortionEffect' : String));
+    _Runtime.setField(out, 'amount', (cast options : { @:optional var scale:Null<Float>; @:optional var amount:Null<Float>; }).amount);
+    _Runtime.setField(out, 'scale', (cast options : { @:optional var scale:Null<Float>; @:optional var amount:Null<Float>; }).scale);
+  }
+
+  public static function createBevelEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var angle:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var highlightAlpha:Null<Float>; @:optional var highlightColor:Null<Float>; @:optional var quality:Null<Float>; @:optional var shadowAlpha:Null<Float>; @:optional var shadowColor:Null<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }, String>):BevelEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'BevelEffect' }, options]);
+    var out:EntityConstruction<BevelEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ angle: cast _Runtime.UNDEFINED, bevelType: cast _Runtime.UNDEFINED, blurX: cast _Runtime.UNDEFINED, blurY: cast _Runtime.UNDEFINED, distance: cast _Runtime.UNDEFINED, highlightAlpha: cast _Runtime.UNDEFINED, highlightColor: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, quality: cast _Runtime.UNDEFINED, shadowAlpha: cast _Runtime.UNDEFINED, shadowColor: cast _Runtime.UNDEFINED, sourceMode: cast _Runtime.UNDEFINED, strength: cast _Runtime.UNDEFINED } : BevelEffect); }) #end));
+    initializeBevelEffect(({ final __callArgument12:Dynamic = out; __callArgument12; }), ({ final __callArgument13:Dynamic = options; __callArgument13; }));
+    return cast out;
     return cast null;
   }
 
@@ -140,8 +172,26 @@ class _Effects {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeBevelEffect(out:EntityConstruction<BevelEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var angle:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var highlightAlpha:Null<Float>; @:optional var highlightColor:Null<Float>; @:optional var quality:Null<Float>; @:optional var shadowAlpha:Null<Float>; @:optional var shadowColor:Null<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<BevelEffect>->String->Void)(({ final __callArgument16:Dynamic = out; __callArgument16; }), (cast 'BevelEffect' : String));
+    _Runtime.setField(out, 'angle', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var highlightAlpha:Null<Float>; @:optional var highlightColor:Null<Float>; @:optional var quality:Null<Float>; @:optional var shadowAlpha:Null<Float>; @:optional var shadowColor:Null<Float>; @:optional var sourceMode:Null<String>; }).angle);
+    _Runtime.setField(out, 'bevelType', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var highlightAlpha:Null<Float>; @:optional var highlightColor:Null<Float>; @:optional var quality:Null<Float>; @:optional var shadowAlpha:Null<Float>; @:optional var shadowColor:Null<Float>; @:optional var sourceMode:Null<String>; }).bevelType);
+    _Runtime.setField(out, 'blurX', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var highlightAlpha:Null<Float>; @:optional var highlightColor:Null<Float>; @:optional var quality:Null<Float>; @:optional var shadowAlpha:Null<Float>; @:optional var shadowColor:Null<Float>; @:optional var sourceMode:Null<String>; }).blurX);
+    _Runtime.setField(out, 'blurY', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var highlightAlpha:Null<Float>; @:optional var highlightColor:Null<Float>; @:optional var quality:Null<Float>; @:optional var shadowAlpha:Null<Float>; @:optional var shadowColor:Null<Float>; @:optional var sourceMode:Null<String>; }).blurY);
+    _Runtime.setField(out, 'distance', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var highlightAlpha:Null<Float>; @:optional var highlightColor:Null<Float>; @:optional var quality:Null<Float>; @:optional var shadowAlpha:Null<Float>; @:optional var shadowColor:Null<Float>; @:optional var sourceMode:Null<String>; }).distance);
+    _Runtime.setField(out, 'highlightAlpha', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var highlightAlpha:Null<Float>; @:optional var highlightColor:Null<Float>; @:optional var quality:Null<Float>; @:optional var shadowAlpha:Null<Float>; @:optional var shadowColor:Null<Float>; @:optional var sourceMode:Null<String>; }).highlightAlpha);
+    _Runtime.setField(out, 'highlightColor', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var highlightAlpha:Null<Float>; @:optional var highlightColor:Null<Float>; @:optional var quality:Null<Float>; @:optional var shadowAlpha:Null<Float>; @:optional var shadowColor:Null<Float>; @:optional var sourceMode:Null<String>; }).highlightColor);
+    _Runtime.setField(out, 'quality', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var highlightAlpha:Null<Float>; @:optional var highlightColor:Null<Float>; @:optional var quality:Null<Float>; @:optional var shadowAlpha:Null<Float>; @:optional var shadowColor:Null<Float>; @:optional var sourceMode:Null<String>; }).quality);
+    _Runtime.setField(out, 'shadowAlpha', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var highlightAlpha:Null<Float>; @:optional var highlightColor:Null<Float>; @:optional var quality:Null<Float>; @:optional var shadowAlpha:Null<Float>; @:optional var shadowColor:Null<Float>; @:optional var sourceMode:Null<String>; }).shadowAlpha);
+    _Runtime.setField(out, 'shadowColor', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var highlightAlpha:Null<Float>; @:optional var highlightColor:Null<Float>; @:optional var quality:Null<Float>; @:optional var shadowAlpha:Null<Float>; @:optional var shadowColor:Null<Float>; @:optional var sourceMode:Null<String>; }).shadowColor);
+    _Runtime.setField(out, 'sourceMode', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var highlightAlpha:Null<Float>; @:optional var highlightColor:Null<Float>; @:optional var quality:Null<Float>; @:optional var shadowAlpha:Null<Float>; @:optional var shadowColor:Null<Float>; @:optional var sourceMode:Null<String>; }).sourceMode);
+    _Runtime.setField(out, 'strength', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var highlightAlpha:Null<Float>; @:optional var highlightColor:Null<Float>; @:optional var quality:Null<Float>; @:optional var shadowAlpha:Null<Float>; @:optional var shadowColor:Null<Float>; @:optional var sourceMode:Null<String>; }).strength);
+  }
+
   public static function registerBevelEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'BevelEffect' : String), (cast _Effects.resolveBevelEffectPadding__bevelEffect : Dynamic));
+    registerRenderEffectPaddingResolver(({ final __callArgument18:Dynamic = state; __callArgument18; }), (cast 'BevelEffect' : String), (cast _Effects.resolveBevelEffectPadding__bevelEffect : Dynamic));
   }
 
   public static function resolveBevelEffectPadding__bevelEffect(effect:RenderEffect):RenderEffectPadding {
@@ -149,9 +199,12 @@ class _Effects {
     return cast null;
   }
 
-  public static function createBitmapDisplacementEffect(map:Null<Texture2D>, ?options:{ @:optional var componentX:Null<ImageChannel>; @:optional var componentY:Null<ImageChannel>; @:optional var scaleX:Null<Float>; @:optional var scaleY:Null<Float>; @:optional var edgeMode:Null<BitmapDisplacementEffectEdgeMode>; }):BitmapDisplacementEffect {
+  public static function createBitmapDisplacementEffect(map:Null<Texture2D>, ?options:flight._internal._Omit<{ var kind:String; var map:Null<Texture2D>; @:optional var componentX:Null<ImageChannel>; @:optional var componentY:Null<ImageChannel>; @:optional var scaleX:Null<Float>; @:optional var scaleY:Null<Float>; @:optional var edgeMode:Null<BitmapDisplacementEffectEdgeMode>; }, String>):BitmapDisplacementEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'BitmapDisplacementEffect' }, { map: map }, options]);
+    var out:EntityConstruction<BitmapDisplacementEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ componentX: cast _Runtime.UNDEFINED, componentY: cast _Runtime.UNDEFINED, edgeMode: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, map: cast _Runtime.UNDEFINED, scaleX: cast _Runtime.UNDEFINED, scaleY: cast _Runtime.UNDEFINED } : BitmapDisplacementEffect); }) #end));
+    initializeBitmapDisplacementEffect(({ final __callArgument20:Dynamic = out; __callArgument20; }), ({ final __callArgument21:Dynamic = map; __callArgument21; }), ({ final __callArgument22:Dynamic = options; __callArgument22; }));
+    return cast out;
     return cast null;
   }
 
@@ -164,8 +217,20 @@ class _Effects {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeBitmapDisplacementEffect(out:EntityConstruction<BitmapDisplacementEffect>, map:Null<Texture2D>, options:flight._internal._Omit<{ var kind:String; var map:Null<Texture2D>; @:optional var componentX:Null<ImageChannel>; @:optional var componentY:Null<ImageChannel>; @:optional var scaleX:Null<Float>; @:optional var scaleY:Null<Float>; @:optional var edgeMode:Null<BitmapDisplacementEffectEdgeMode>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<BitmapDisplacementEffect>->String->Void)(({ final __callArgument26:Dynamic = out; __callArgument26; }), (cast 'BitmapDisplacementEffect' : String));
+    _Runtime.setField(out, 'map', map);
+    _Runtime.setField(out, 'componentX', (cast options : { @:optional var scaleX:Null<Float>; @:optional var scaleY:Null<Float>; @:optional var componentX:Null<Float>; @:optional var componentY:Null<Float>; @:optional var edgeMode:Null<String>; }).componentX);
+    _Runtime.setField(out, 'componentY', (cast options : { @:optional var scaleX:Null<Float>; @:optional var scaleY:Null<Float>; @:optional var componentX:Null<Float>; @:optional var componentY:Null<Float>; @:optional var edgeMode:Null<String>; }).componentY);
+    _Runtime.setField(out, 'scaleX', (cast options : { @:optional var scaleX:Null<Float>; @:optional var scaleY:Null<Float>; @:optional var componentX:Null<Float>; @:optional var componentY:Null<Float>; @:optional var edgeMode:Null<String>; }).scaleX);
+    _Runtime.setField(out, 'scaleY', (cast options : { @:optional var scaleX:Null<Float>; @:optional var scaleY:Null<Float>; @:optional var componentX:Null<Float>; @:optional var componentY:Null<Float>; @:optional var edgeMode:Null<String>; }).scaleY);
+    _Runtime.setField(out, 'edgeMode', (cast options : { @:optional var scaleX:Null<Float>; @:optional var scaleY:Null<Float>; @:optional var componentX:Null<Float>; @:optional var componentY:Null<Float>; @:optional var edgeMode:Null<String>; }).edgeMode);
+  }
+
   public static function registerBitmapDisplacementEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast 'BitmapDisplacementEffect' : String), (cast _Effects.resolveBitmapDisplacementEffectPadding__bitmapDisplacementEffect : Dynamic));
+    registerRenderEffectPaddingResolver(({ final __callArgument28:Dynamic = state; __callArgument28; }), (cast 'BitmapDisplacementEffect' : String), (cast _Effects.resolveBitmapDisplacementEffectPadding__bitmapDisplacementEffect : Dynamic));
   }
 
   public static function resolveBitmapDisplacementEffectPadding__bitmapDisplacementEffect(effect:RenderEffect):RenderEffectPadding {
@@ -173,10 +238,22 @@ class _Effects {
     return cast null;
   }
 
-  public static function createBlendEffect(mode:AdvancedBlendMode, ?options:{ @:optional var backdropKey:Null<String>; @:optional var opacity:Null<Float>; }):BlendEffect {
+  public static function createBlendEffect(mode:AdvancedBlendMode, ?options:flight._internal._Omit<{ var kind:String; var mode:AdvancedBlendMode; @:optional var backdropKey:Null<String>; @:optional var opacity:Null<Float>; }, String>):BlendEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'BlendEffect' }, { mode: mode }, options]);
+    var out:EntityConstruction<BlendEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ backdropKey: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, mode: cast _Runtime.UNDEFINED, opacity: cast _Runtime.UNDEFINED } : BlendEffect); }) #end));
+    initializeBlendEffect(({ final __callArgument30:Dynamic = out; __callArgument30; }), (cast mode : String), ({ final __callArgument31:Dynamic = options; __callArgument31; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeBlendEffect(out:EntityConstruction<BlendEffect>, mode:AdvancedBlendMode, options:flight._internal._Omit<{ var kind:String; var mode:AdvancedBlendMode; @:optional var backdropKey:Null<String>; @:optional var opacity:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<BlendEffect>->String->Void)(({ final __callArgument34:Dynamic = out; __callArgument34; }), (cast 'BlendEffect' : String));
+    _Runtime.setField(out, 'mode', mode);
+    _Runtime.setField(out, 'backdropKey', (cast options : { @:optional var opacity:Null<Float>; @:optional var backdropKey:Null<String>; }).backdropKey);
+    _Runtime.setField(out, 'opacity', (cast options : { @:optional var opacity:Null<Float>; @:optional var backdropKey:Null<String>; }).opacity);
   }
 
   public static function blendNonSeparableRgb(mode:AdvancedBlendMode, cbR:Float, cbG:Float, cbB:Float, csR:Float, csG:Float, csB:Float, out:flight._internal._Union2<Array<Float>, flight._internal._Float32Array>):Void {
@@ -186,18 +263,18 @@ class _Effects {
     {
       var __switchValue = mode;
       if (__switchValue == (cast AdvancedBlendModeValue : { var Color:String; var ColorBurn:String; var ColorDodge:String; var Darken:String; var Difference:String; var Exclusion:String; var HardLight:String; var Hue:String; var Lighten:String; var Luminosity:String; var Overlay:String; var Saturation:String; var SoftLight:String; }).Hue) {
-        ({ var __destructure4:Dynamic = (cast _Effects.setBlendSaturation__blendModeMath((cast csR : Float), (cast csG : Float), (cast csB : Float), (cast (cast _Effects.blendSaturation__blendModeMath((cast cbR : Float), (cast cbG : Float), (cast cbB : Float)) : Float) : Float)) : Array<Float>); r = cast flight._internal._StaticIndex.readArray(__destructure4, 0); g = cast flight._internal._StaticIndex.readArray(__destructure4, 1); b = cast flight._internal._StaticIndex.readArray(__destructure4, 2); __destructure4; });
-        ({ var __destructure5:Dynamic = (cast _Effects.setBlendLuminosity__blendModeMath((cast r : Float), (cast g : Float), (cast b : Float), (cast (cast _Effects.blendLuminosity__blendModeMath((cast cbR : Float), (cast cbG : Float), (cast cbB : Float)) : Float) : Float)) : Array<Float>); r = cast flight._internal._StaticIndex.readArray(__destructure5, 0); g = cast flight._internal._StaticIndex.readArray(__destructure5, 1); b = cast flight._internal._StaticIndex.readArray(__destructure5, 2); __destructure5; });
+        ({ var __destructure36:Dynamic = (cast _Effects.setBlendSaturation__blendModeMath((cast csR : Float), (cast csG : Float), (cast csB : Float), (cast (cast _Effects.blendSaturation__blendModeMath((cast cbR : Float), (cast cbG : Float), (cast cbB : Float)) : Float) : Float)) : Array<Float>); r = cast flight._internal._StaticIndex.readArray(__destructure36, 0); g = cast flight._internal._StaticIndex.readArray(__destructure36, 1); b = cast flight._internal._StaticIndex.readArray(__destructure36, 2); __destructure36; });
+        ({ var __destructure37:Dynamic = (cast _Effects.setBlendLuminosity__blendModeMath((cast r : Float), (cast g : Float), (cast b : Float), (cast (cast _Effects.blendLuminosity__blendModeMath((cast cbR : Float), (cast cbG : Float), (cast cbB : Float)) : Float) : Float)) : Array<Float>); r = cast flight._internal._StaticIndex.readArray(__destructure37, 0); g = cast flight._internal._StaticIndex.readArray(__destructure37, 1); b = cast flight._internal._StaticIndex.readArray(__destructure37, 2); __destructure37; });
       }
       else if (__switchValue == (cast AdvancedBlendModeValue : { var Color:String; var ColorBurn:String; var ColorDodge:String; var Darken:String; var Difference:String; var Exclusion:String; var HardLight:String; var Hue:String; var Lighten:String; var Luminosity:String; var Overlay:String; var Saturation:String; var SoftLight:String; }).Saturation) {
-        ({ var __destructure6:Dynamic = (cast _Effects.setBlendSaturation__blendModeMath((cast cbR : Float), (cast cbG : Float), (cast cbB : Float), (cast (cast _Effects.blendSaturation__blendModeMath((cast csR : Float), (cast csG : Float), (cast csB : Float)) : Float) : Float)) : Array<Float>); r = cast flight._internal._StaticIndex.readArray(__destructure6, 0); g = cast flight._internal._StaticIndex.readArray(__destructure6, 1); b = cast flight._internal._StaticIndex.readArray(__destructure6, 2); __destructure6; });
-        ({ var __destructure7:Dynamic = (cast _Effects.setBlendLuminosity__blendModeMath((cast r : Float), (cast g : Float), (cast b : Float), (cast (cast _Effects.blendLuminosity__blendModeMath((cast cbR : Float), (cast cbG : Float), (cast cbB : Float)) : Float) : Float)) : Array<Float>); r = cast flight._internal._StaticIndex.readArray(__destructure7, 0); g = cast flight._internal._StaticIndex.readArray(__destructure7, 1); b = cast flight._internal._StaticIndex.readArray(__destructure7, 2); __destructure7; });
+        ({ var __destructure38:Dynamic = (cast _Effects.setBlendSaturation__blendModeMath((cast cbR : Float), (cast cbG : Float), (cast cbB : Float), (cast (cast _Effects.blendSaturation__blendModeMath((cast csR : Float), (cast csG : Float), (cast csB : Float)) : Float) : Float)) : Array<Float>); r = cast flight._internal._StaticIndex.readArray(__destructure38, 0); g = cast flight._internal._StaticIndex.readArray(__destructure38, 1); b = cast flight._internal._StaticIndex.readArray(__destructure38, 2); __destructure38; });
+        ({ var __destructure39:Dynamic = (cast _Effects.setBlendLuminosity__blendModeMath((cast r : Float), (cast g : Float), (cast b : Float), (cast (cast _Effects.blendLuminosity__blendModeMath((cast cbR : Float), (cast cbG : Float), (cast cbB : Float)) : Float) : Float)) : Array<Float>); r = cast flight._internal._StaticIndex.readArray(__destructure39, 0); g = cast flight._internal._StaticIndex.readArray(__destructure39, 1); b = cast flight._internal._StaticIndex.readArray(__destructure39, 2); __destructure39; });
       }
       else if (__switchValue == (cast AdvancedBlendModeValue : { var Color:String; var ColorBurn:String; var ColorDodge:String; var Darken:String; var Difference:String; var Exclusion:String; var HardLight:String; var Hue:String; var Lighten:String; var Luminosity:String; var Overlay:String; var Saturation:String; var SoftLight:String; }).Color) {
-        ({ var __destructure8:Dynamic = (cast _Effects.setBlendLuminosity__blendModeMath((cast csR : Float), (cast csG : Float), (cast csB : Float), (cast (cast _Effects.blendLuminosity__blendModeMath((cast cbR : Float), (cast cbG : Float), (cast cbB : Float)) : Float) : Float)) : Array<Float>); r = cast flight._internal._StaticIndex.readArray(__destructure8, 0); g = cast flight._internal._StaticIndex.readArray(__destructure8, 1); b = cast flight._internal._StaticIndex.readArray(__destructure8, 2); __destructure8; });
+        ({ var __destructure40:Dynamic = (cast _Effects.setBlendLuminosity__blendModeMath((cast csR : Float), (cast csG : Float), (cast csB : Float), (cast (cast _Effects.blendLuminosity__blendModeMath((cast cbR : Float), (cast cbG : Float), (cast cbB : Float)) : Float) : Float)) : Array<Float>); r = cast flight._internal._StaticIndex.readArray(__destructure40, 0); g = cast flight._internal._StaticIndex.readArray(__destructure40, 1); b = cast flight._internal._StaticIndex.readArray(__destructure40, 2); __destructure40; });
       }
       else if (__switchValue == (cast AdvancedBlendModeValue : { var Color:String; var ColorBurn:String; var ColorDodge:String; var Darken:String; var Difference:String; var Exclusion:String; var HardLight:String; var Hue:String; var Lighten:String; var Luminosity:String; var Overlay:String; var Saturation:String; var SoftLight:String; }).Luminosity) {
-        ({ var __destructure9:Dynamic = (cast _Effects.setBlendLuminosity__blendModeMath((cast cbR : Float), (cast cbG : Float), (cast cbB : Float), (cast (cast _Effects.blendLuminosity__blendModeMath((cast csR : Float), (cast csG : Float), (cast csB : Float)) : Float) : Float)) : Array<Float>); r = cast flight._internal._StaticIndex.readArray(__destructure9, 0); g = cast flight._internal._StaticIndex.readArray(__destructure9, 1); b = cast flight._internal._StaticIndex.readArray(__destructure9, 2); __destructure9; });
+        ({ var __destructure41:Dynamic = (cast _Effects.setBlendLuminosity__blendModeMath((cast cbR : Float), (cast cbG : Float), (cast cbB : Float), (cast (cast _Effects.blendLuminosity__blendModeMath((cast csR : Float), (cast csG : Float), (cast csB : Float)) : Float) : Float)) : Array<Float>); r = cast flight._internal._StaticIndex.readArray(__destructure41, 0); g = cast flight._internal._StaticIndex.readArray(__destructure41, 1); b = cast flight._internal._StaticIndex.readArray(__destructure41, 2); __destructure41; });
       }
       else  {
         (r = cast (csR : Dynamic));
@@ -215,7 +292,7 @@ class _Effects {
     var g:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
     if ((cast (cast isNonSeparableBlendMode((cast mode : String)) : Bool) : Bool)) {
-      blendNonSeparableRgb((cast mode : String), (cast cbR : Float), (cast cbG : Float), (cast cbB : Float), (cast csR : Float), (cast csG : Float), (cast csB : Float), ({ final __callArgument10:Dynamic = out; __callArgument10; }));
+      blendNonSeparableRgb((cast mode : String), (cast cbR : Float), (cast cbG : Float), (cast cbB : Float), (cast csR : Float), (cast csG : Float), (cast csB : Float), ({ final __callArgument42:Dynamic = out; __callArgument42; }));
       return;
     }
     r = (cast getSeparableBlendChannel((cast mode : String), (cast cbR : Float), (cast csR : Float)) : Float);
@@ -368,21 +445,34 @@ class _Effects {
     return cast null;
   }
 
-  public static function createBloomEffect(?options:{ @:optional var threshold:Null<Float>; @:optional var intensity:Null<Float>; @:optional var radius:Null<Float>; @:optional var passes:Null<Float>; }):BloomEffect {
+  public static function createBloomEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var threshold:Null<Float>; @:optional var intensity:Null<Float>; @:optional var radius:Null<Float>; @:optional var passes:Null<Float>; }, String>):BloomEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'BloomEffect' }, options]);
+    var out:EntityConstruction<BloomEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ intensity: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, passes: cast _Runtime.UNDEFINED, radius: cast _Runtime.UNDEFINED, threshold: cast _Runtime.UNDEFINED } : BloomEffect); }) #end));
+    initializeBloomEffect(({ final __callArgument44:Dynamic = out; __callArgument44; }), ({ final __callArgument45:Dynamic = options; __callArgument45; }));
+    return cast out;
     return cast null;
   }
 
   public static function getBloomEffectPadding(effect:BloomEffect):RenderEffectPadding {
     var radius:Float = cast _Runtime.UNDEFINED;
-    radius = (cast computeBloomBlurRadius(({ final __callArgument12:Dynamic = effect; __callArgument12; })) : Float);
+    radius = (cast computeBloomBlurRadius(({ final __callArgument48:Dynamic = effect; __callArgument48; })) : Float);
     return cast (cast getGaussianRenderEffectPadding((cast radius : Float), (cast radius : Float)) : RenderEffectPadding);
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeBloomEffect(out:EntityConstruction<BloomEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var threshold:Null<Float>; @:optional var intensity:Null<Float>; @:optional var radius:Null<Float>; @:optional var passes:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<BloomEffect>->String->Void)(({ final __callArgument50:Dynamic = out; __callArgument50; }), (cast 'BloomEffect' : String));
+    _Runtime.setField(out, 'threshold', (cast options : { @:optional var radius:Null<Float>; @:optional var intensity:Null<Float>; @:optional var threshold:Null<Float>; @:optional var passes:Null<Float>; }).threshold);
+    _Runtime.setField(out, 'intensity', (cast options : { @:optional var radius:Null<Float>; @:optional var intensity:Null<Float>; @:optional var threshold:Null<Float>; @:optional var passes:Null<Float>; }).intensity);
+    _Runtime.setField(out, 'radius', (cast options : { @:optional var radius:Null<Float>; @:optional var intensity:Null<Float>; @:optional var threshold:Null<Float>; @:optional var passes:Null<Float>; }).radius);
+    _Runtime.setField(out, 'passes', (cast options : { @:optional var radius:Null<Float>; @:optional var intensity:Null<Float>; @:optional var threshold:Null<Float>; @:optional var passes:Null<Float>; }).passes);
+  }
+
   public static function registerBloomEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver(({ final __callArgument14:Dynamic = state; __callArgument14; }), (cast 'BloomEffect' : String), (cast _Effects.resolveBloomEffectPadding__bloomEffect : Dynamic));
+    registerRenderEffectPaddingResolver(({ final __callArgument52:Dynamic = state; __callArgument52; }), (cast 'BloomEffect' : String), (cast _Effects.resolveBloomEffectPadding__bloomEffect : Dynamic));
   }
 
   public static function resolveBloomEffectPadding__bloomEffect(effect:RenderEffect):RenderEffectPadding {
@@ -404,9 +494,12 @@ class _Effects {
 
   public static final BLUR_DOWNSAMPLE_MAX_SIGMA__blurDownsample:Float = 4.0;
 
-  public static function createBlurEffect(?options:{ @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; }):BlurEffect {
+  public static function createBlurEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; }, String>):BlurEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'BlurEffect' }, options]);
+    var out:EntityConstruction<BlurEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ blurX: cast _Runtime.UNDEFINED, blurY: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED } : BlurEffect); }) #end));
+    initializeBlurEffect(({ final __callArgument54:Dynamic = out; __callArgument54; }), ({ final __callArgument55:Dynamic = options; __callArgument55; }));
+    return cast out;
     return cast null;
   }
 
@@ -415,8 +508,16 @@ class _Effects {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeBlurEffect(out:EntityConstruction<BlurEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<BlurEffect>->String->Void)(({ final __callArgument58:Dynamic = out; __callArgument58; }), (cast 'BlurEffect' : String));
+    _Runtime.setField(out, 'blurX', (cast options : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; }).blurX);
+    _Runtime.setField(out, 'blurY', (cast options : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; }).blurY);
+  }
+
   public static function registerBlurEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver(({ final __callArgument16:Dynamic = state; __callArgument16; }), (cast 'BlurEffect' : String), (cast _Effects.resolveBlurEffectPadding__blurEffect : Dynamic));
+    registerRenderEffectPaddingResolver(({ final __callArgument60:Dynamic = state; __callArgument60; }), (cast 'BlurEffect' : String), (cast _Effects.resolveBlurEffectPadding__blurEffect : Dynamic));
   }
 
   public static function resolveBlurEffectPadding__blurEffect(effect:RenderEffect):RenderEffectPadding {
@@ -424,9 +525,12 @@ class _Effects {
     return cast null;
   }
 
-  public static function createBokehDepthOfFieldEffect(?options:{ @:optional var focusDistance:Null<Float>; @:optional var focusRange:Null<Float>; @:optional var maxBlur:Null<Float>; }):BokehDepthOfFieldEffect {
+  public static function createBokehDepthOfFieldEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var focusDistance:Null<Float>; @:optional var focusRange:Null<Float>; @:optional var maxBlur:Null<Float>; }, String>):BokehDepthOfFieldEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'BokehDepthOfFieldEffect' }, options]);
+    var out:EntityConstruction<BokehDepthOfFieldEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ focusDistance: cast _Runtime.UNDEFINED, focusRange: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, maxBlur: cast _Runtime.UNDEFINED } : BokehDepthOfFieldEffect); }) #end));
+    initializeBokehDepthOfFieldEffect(({ final __callArgument62:Dynamic = out; __callArgument62; }), ({ final __callArgument63:Dynamic = options; __callArgument63; }));
+    return cast out;
     return cast null;
   }
 
@@ -437,8 +541,17 @@ class _Effects {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeBokehDepthOfFieldEffect(out:EntityConstruction<BokehDepthOfFieldEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var focusDistance:Null<Float>; @:optional var focusRange:Null<Float>; @:optional var maxBlur:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<BokehDepthOfFieldEffect>->String->Void)(({ final __callArgument66:Dynamic = out; __callArgument66; }), (cast 'BokehDepthOfFieldEffect' : String));
+    _Runtime.setField(out, 'focusDistance', (cast options : { @:optional var focusDistance:Null<Float>; @:optional var focusRange:Null<Float>; @:optional var maxBlur:Null<Float>; }).focusDistance);
+    _Runtime.setField(out, 'focusRange', (cast options : { @:optional var focusDistance:Null<Float>; @:optional var focusRange:Null<Float>; @:optional var maxBlur:Null<Float>; }).focusRange);
+    _Runtime.setField(out, 'maxBlur', (cast options : { @:optional var focusDistance:Null<Float>; @:optional var focusRange:Null<Float>; @:optional var maxBlur:Null<Float>; }).maxBlur);
+  }
+
   public static function registerBokehDepthOfFieldEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver(({ final __callArgument18:Dynamic = state; __callArgument18; }), (cast 'BokehDepthOfFieldEffect' : String), (cast _Effects.resolveBokehDepthOfFieldEffectPadding__bokehDepthOfFieldEffect : Dynamic));
+    registerRenderEffectPaddingResolver(({ final __callArgument68:Dynamic = state; __callArgument68; }), (cast 'BokehDepthOfFieldEffect' : String), (cast _Effects.resolveBokehDepthOfFieldEffectPadding__bokehDepthOfFieldEffect : Dynamic));
   }
 
   public static function resolveBokehDepthOfFieldEffectPadding__bokehDepthOfFieldEffect(effect:RenderEffect):RenderEffectPadding {
@@ -485,16 +598,38 @@ class _Effects {
     return cast null;
   }
 
-  public static function createCameraMotionBlurEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var samples:Null<Float>; }):CameraMotionBlurEffect {
+  public static function createCameraMotionBlurEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var intensity:Null<Float>; @:optional var samples:Null<Float>; }, String>):CameraMotionBlurEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'CameraMotionBlurEffect' }, options]);
+    var out:EntityConstruction<CameraMotionBlurEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ intensity: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, samples: cast _Runtime.UNDEFINED } : CameraMotionBlurEffect); }) #end));
+    initializeCameraMotionBlurEffect(({ final __callArgument70:Dynamic = out; __callArgument70; }), ({ final __callArgument71:Dynamic = options; __callArgument71; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createChromaticAberrationEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var radial:Null<Bool>; }):ChromaticAberrationEffect {
+  @:allow(flight)
+  @:keep
+  private static function initializeCameraMotionBlurEffect(out:EntityConstruction<CameraMotionBlurEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var intensity:Null<Float>; @:optional var samples:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<CameraMotionBlurEffect>->String->Void)(({ final __callArgument74:Dynamic = out; __callArgument74; }), (cast 'CameraMotionBlurEffect' : String));
+    _Runtime.setField(out, 'intensity', (cast options : { @:optional var samples:Null<Float>; @:optional var intensity:Null<Float>; }).intensity);
+    _Runtime.setField(out, 'samples', (cast options : { @:optional var samples:Null<Float>; @:optional var intensity:Null<Float>; }).samples);
+  }
+
+  public static function createChromaticAberrationEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var intensity:Null<Float>; @:optional var radial:Null<Bool>; }, String>):ChromaticAberrationEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'ChromaticAberrationEffect' }, options]);
+    var out:EntityConstruction<ChromaticAberrationEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ intensity: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, radial: cast _Runtime.UNDEFINED } : ChromaticAberrationEffect); }) #end));
+    initializeChromaticAberrationEffect(({ final __callArgument76:Dynamic = out; __callArgument76; }), ({ final __callArgument77:Dynamic = options; __callArgument77; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeChromaticAberrationEffect(out:EntityConstruction<ChromaticAberrationEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var intensity:Null<Float>; @:optional var radial:Null<Bool>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<ChromaticAberrationEffect>->String->Void)(({ final __callArgument80:Dynamic = out; __callArgument80; }), (cast 'ChromaticAberrationEffect' : String));
+    _Runtime.setField(out, 'intensity', (cast options : { @:optional var intensity:Null<Float>; @:optional var radial:Null<Bool>; }).intensity);
+    _Runtime.setField(out, 'radial', (cast options : { @:optional var intensity:Null<Float>; @:optional var radial:Null<Bool>; }).radial);
   }
 
   public static function computeColorTemperatureRgb(kelvin:Float, out:Array<Float>):Void {
@@ -521,17 +656,28 @@ class _Effects {
     var kelvin:Float = cast _Runtime.UNDEFINED;
     var greenShift:Float = cast _Runtime.UNDEFINED;
     kelvin = (6500.0 - (temperature * 4500.0));
-    computeColorTemperatureRgb((cast kelvin : Float), ({ final __callArgument20:Dynamic = out; __callArgument20; }));
+    computeColorTemperatureRgb((cast kelvin : Float), ({ final __callArgument82:Dynamic = out; __callArgument82; }));
     greenShift = (-tint * 0.1);
     flight._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast HxMath.max(0.0, flight._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float))) : Float));
     flight._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast HxMath.max(0.0, (flight._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float)) + greenShift)) : Float));
     flight._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast HxMath.max(0.0, flight._internal._StaticIndex.readFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float))) : Float));
   }
 
-  public static function createCompositeEffect(operator_:CompositeOperator, ?options:{ @:optional var backdropKey:Null<String>; }):CompositeEffect {
+  public static function createCompositeEffect(operator_:CompositeOperator, ?options:flight._internal._Omit<{ var kind:String; var operator_:CompositeOperator; @:optional var backdropKey:Null<String>; }, String>):CompositeEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'CompositeEffect' }, _Runtime.objectFromPairs([{ key: 'operator', value: operator_ }]), options]);
+    var out:EntityConstruction<CompositeEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if (flight_struct_typedef || js) ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ backdropKey: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, operator_: cast _Runtime.UNDEFINED } : CompositeEffect); }) #end));
+    initializeCompositeEffect(({ final __callArgument84:Dynamic = out; __callArgument84; }), (cast operator_ : String), ({ final __callArgument85:Dynamic = options; __callArgument85; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeCompositeEffect(out:EntityConstruction<CompositeEffect>, operator_:CompositeOperator, options:flight._internal._Omit<{ var kind:String; var operator_:CompositeOperator; @:optional var backdropKey:Null<String>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<CompositeEffect>->String->Void)(({ final __callArgument88:Dynamic = out; __callArgument88; }), (cast 'CompositeEffect' : String));
+    _Runtime.setField(out, 'operator', operator_);
+    _Runtime.setField(out, 'backdropKey', (cast options : { @:optional var backdropKey:Null<String>; }).backdropKey);
   }
 
   public static function getCompositeOperatorFactors(operator_:CompositeOperator, sourceAlpha:Float, backdropAlpha:Float, out:flight._internal._Union2<Array<Float>, flight._internal._Float32Array>):Void {
@@ -592,9 +738,12 @@ class _Effects {
     _Runtime.setIndex(out, 1.0, fb);
   }
 
-  public static function createContactShadowsEffect(?options:{ @:optional var distance:Null<Float>; @:optional var opacity:Null<Float>; @:optional var samples:Null<Float>; @:optional var smoothness:Null<Float>; }):ContactShadowsEffect {
+  public static function createContactShadowsEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var distance:Null<Float>; @:optional var opacity:Null<Float>; @:optional var samples:Null<Float>; @:optional var smoothness:Null<Float>; }, String>):ContactShadowsEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'ContactShadowsEffect' }, options]);
+    var out:EntityConstruction<ContactShadowsEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ distance: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, opacity: cast _Runtime.UNDEFINED, samples: cast _Runtime.UNDEFINED, smoothness: cast _Runtime.UNDEFINED } : ContactShadowsEffect); }) #end));
+    initializeContactShadowsEffect(({ final __callArgument90:Dynamic = out; __callArgument90; }), ({ final __callArgument91:Dynamic = options; __callArgument91; }));
+    return cast out;
     return cast null;
   }
 
@@ -603,8 +752,18 @@ class _Effects {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeContactShadowsEffect(out:EntityConstruction<ContactShadowsEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var distance:Null<Float>; @:optional var opacity:Null<Float>; @:optional var samples:Null<Float>; @:optional var smoothness:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<ContactShadowsEffect>->String->Void)(({ final __callArgument94:Dynamic = out; __callArgument94; }), (cast 'ContactShadowsEffect' : String));
+    _Runtime.setField(out, 'distance', (cast options : { @:optional var samples:Null<Float>; @:optional var opacity:Null<Float>; @:optional var distance:Null<Float>; @:optional var smoothness:Null<Float>; }).distance);
+    _Runtime.setField(out, 'opacity', (cast options : { @:optional var samples:Null<Float>; @:optional var opacity:Null<Float>; @:optional var distance:Null<Float>; @:optional var smoothness:Null<Float>; }).opacity);
+    _Runtime.setField(out, 'samples', (cast options : { @:optional var samples:Null<Float>; @:optional var opacity:Null<Float>; @:optional var distance:Null<Float>; @:optional var smoothness:Null<Float>; }).samples);
+    _Runtime.setField(out, 'smoothness', (cast options : { @:optional var samples:Null<Float>; @:optional var opacity:Null<Float>; @:optional var distance:Null<Float>; @:optional var smoothness:Null<Float>; }).smoothness);
+  }
+
   public static function registerContactShadowsEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver(({ final __callArgument22:Dynamic = state; __callArgument22; }), (cast 'ContactShadowsEffect' : String), (cast _Effects.resolveContactShadowsEffectPadding__contactShadowsEffect : Dynamic));
+    registerRenderEffectPaddingResolver(({ final __callArgument96:Dynamic = state; __callArgument96; }), (cast 'ContactShadowsEffect' : String), (cast _Effects.resolveContactShadowsEffectPadding__contactShadowsEffect : Dynamic));
   }
 
   public static function resolveContactShadowsEffectPadding__contactShadowsEffect(effect:RenderEffect):RenderEffectPadding {
@@ -612,8 +771,11 @@ class _Effects {
     return cast null;
   }
 
-  public static function createConvolutionEffect(options:{ var matrix:Array<Float>; var matrixX:Float; var matrixY:Float; @:optional var bias:Null<Float>; @:optional var clamp:Null<Bool>; @:optional var color:Null<Float>; @:optional var divisor:Null<Float>; @:optional var preserveAlpha:Null<Bool>; }):ConvolutionEffect {
-    return cast _Runtime.mergeObjects([{ kind: 'ConvolutionEffect' }, options]);
+  public static function createConvolutionEffect(options:flight._internal._Omit<{ var kind:String; var matrix:Array<Float>; var matrixX:Float; var matrixY:Float; @:optional var bias:Null<Float>; @:optional var clamp:Null<Bool>; @:optional var color:Null<Float>; @:optional var divisor:Null<Float>; @:optional var preserveAlpha:Null<Bool>; }, String>):ConvolutionEffect {
+    var out:EntityConstruction<ConvolutionEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ bias: cast _Runtime.UNDEFINED, clamp: cast _Runtime.UNDEFINED, color: cast _Runtime.UNDEFINED, divisor: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, matrix: cast _Runtime.UNDEFINED, matrixX: cast _Runtime.UNDEFINED, matrixY: cast _Runtime.UNDEFINED, preserveAlpha: cast _Runtime.UNDEFINED } : ConvolutionEffect); }) #end));
+    initializeConvolutionEffect(({ final __callArgument98:Dynamic = out; __callArgument98; }), ({ final __callArgument99:Dynamic = options; __callArgument99; }));
+    return cast out;
     return cast null;
   }
 
@@ -626,8 +788,22 @@ class _Effects {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeConvolutionEffect(out:EntityConstruction<ConvolutionEffect>, options:flight._internal._Omit<{ var kind:String; var matrix:Array<Float>; var matrixX:Float; var matrixY:Float; @:optional var bias:Null<Float>; @:optional var clamp:Null<Bool>; @:optional var color:Null<Float>; @:optional var divisor:Null<Float>; @:optional var preserveAlpha:Null<Bool>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<ConvolutionEffect>->String->Void)(({ final __callArgument102:Dynamic = out; __callArgument102; }), (cast 'ConvolutionEffect' : String));
+    _Runtime.setField(out, 'matrix', (cast options : { var matrix:Array<Float>; @:optional var color:Null<Float>; var matrixX:Float; var matrixY:Float; @:optional var bias:Null<Float>; @:optional var clamp:Null<Bool>; @:optional var divisor:Null<Float>; @:optional var preserveAlpha:Null<Bool>; }).matrix);
+    _Runtime.setField(out, 'matrixX', (cast options : { var matrix:Array<Float>; @:optional var color:Null<Float>; var matrixX:Float; var matrixY:Float; @:optional var bias:Null<Float>; @:optional var clamp:Null<Bool>; @:optional var divisor:Null<Float>; @:optional var preserveAlpha:Null<Bool>; }).matrixX);
+    _Runtime.setField(out, 'matrixY', (cast options : { var matrix:Array<Float>; @:optional var color:Null<Float>; var matrixX:Float; var matrixY:Float; @:optional var bias:Null<Float>; @:optional var clamp:Null<Bool>; @:optional var divisor:Null<Float>; @:optional var preserveAlpha:Null<Bool>; }).matrixY);
+    _Runtime.setField(out, 'bias', (cast options : { var matrix:Array<Float>; @:optional var color:Null<Float>; var matrixX:Float; var matrixY:Float; @:optional var bias:Null<Float>; @:optional var clamp:Null<Bool>; @:optional var divisor:Null<Float>; @:optional var preserveAlpha:Null<Bool>; }).bias);
+    _Runtime.setField(out, 'clamp', (cast options : { var matrix:Array<Float>; @:optional var color:Null<Float>; var matrixX:Float; var matrixY:Float; @:optional var bias:Null<Float>; @:optional var clamp:Null<Bool>; @:optional var divisor:Null<Float>; @:optional var preserveAlpha:Null<Bool>; }).clamp);
+    _Runtime.setField(out, 'color', (cast options : { var matrix:Array<Float>; @:optional var color:Null<Float>; var matrixX:Float; var matrixY:Float; @:optional var bias:Null<Float>; @:optional var clamp:Null<Bool>; @:optional var divisor:Null<Float>; @:optional var preserveAlpha:Null<Bool>; }).color);
+    _Runtime.setField(out, 'divisor', (cast options : { var matrix:Array<Float>; @:optional var color:Null<Float>; var matrixX:Float; var matrixY:Float; @:optional var bias:Null<Float>; @:optional var clamp:Null<Bool>; @:optional var divisor:Null<Float>; @:optional var preserveAlpha:Null<Bool>; }).divisor);
+    _Runtime.setField(out, 'preserveAlpha', (cast options : { var matrix:Array<Float>; @:optional var color:Null<Float>; var matrixX:Float; var matrixY:Float; @:optional var bias:Null<Float>; @:optional var clamp:Null<Bool>; @:optional var divisor:Null<Float>; @:optional var preserveAlpha:Null<Bool>; }).preserveAlpha);
+  }
+
   public static function registerConvolutionEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver(({ final __callArgument24:Dynamic = state; __callArgument24; }), (cast 'ConvolutionEffect' : String), (cast _Effects.resolveConvolutionEffectPadding__convolutionEffect : Dynamic));
+    registerRenderEffectPaddingResolver(({ final __callArgument104:Dynamic = state; __callArgument104; }), (cast 'ConvolutionEffect' : String), (cast _Effects.resolveConvolutionEffectPadding__convolutionEffect : Dynamic));
   }
 
   public static function resolveConvolutionEffectPadding__convolutionEffect(effect:RenderEffect):RenderEffectPadding {
@@ -635,15 +811,39 @@ class _Effects {
     return cast null;
   }
 
-  public static function createCrtEffect(?options:{ @:optional var curvature:Null<Float>; @:optional var scanlineIntensity:Null<Float>; @:optional var vignette:Null<Float>; @:optional var aberration:Null<Float>; }):CrtEffect {
+  public static function createCrtEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var curvature:Null<Float>; @:optional var scanlineIntensity:Null<Float>; @:optional var vignette:Null<Float>; @:optional var aberration:Null<Float>; }, String>):CrtEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'CrtEffect' }, options]);
+    var out:EntityConstruction<CrtEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ aberration: cast _Runtime.UNDEFINED, curvature: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, scanlineIntensity: cast _Runtime.UNDEFINED, vignette: cast _Runtime.UNDEFINED } : CrtEffect); }) #end));
+    initializeCrtEffect(({ final __callArgument106:Dynamic = out; __callArgument106; }), ({ final __callArgument107:Dynamic = options; __callArgument107; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createCustomShaderEffect(options:{ var shaderKey:String; @:optional var uniforms:Null<flight._internal._Record<String, flight._internal._Union2<Float, Array<Float>>>>; }):CustomShaderEffect {
-    return cast _Runtime.mergeObjects([{ kind: 'CustomShaderEffect' }, options]);
+  @:allow(flight)
+  @:keep
+  private static function initializeCrtEffect(out:EntityConstruction<CrtEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var curvature:Null<Float>; @:optional var scanlineIntensity:Null<Float>; @:optional var vignette:Null<Float>; @:optional var aberration:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<CrtEffect>->String->Void)(({ final __callArgument110:Dynamic = out; __callArgument110; }), (cast 'CrtEffect' : String));
+    _Runtime.setField(out, 'curvature', (cast options : { @:optional var curvature:Null<Float>; @:optional var scanlineIntensity:Null<Float>; @:optional var vignette:Null<Float>; @:optional var aberration:Null<Float>; }).curvature);
+    _Runtime.setField(out, 'scanlineIntensity', (cast options : { @:optional var curvature:Null<Float>; @:optional var scanlineIntensity:Null<Float>; @:optional var vignette:Null<Float>; @:optional var aberration:Null<Float>; }).scanlineIntensity);
+    _Runtime.setField(out, 'vignette', (cast options : { @:optional var curvature:Null<Float>; @:optional var scanlineIntensity:Null<Float>; @:optional var vignette:Null<Float>; @:optional var aberration:Null<Float>; }).vignette);
+    _Runtime.setField(out, 'aberration', (cast options : { @:optional var curvature:Null<Float>; @:optional var scanlineIntensity:Null<Float>; @:optional var vignette:Null<Float>; @:optional var aberration:Null<Float>; }).aberration);
+  }
+
+  public static function createCustomShaderEffect(options:flight._internal._Omit<{ var kind:String; var shaderKey:String; @:optional var uniforms:Null<flight._internal._Record<String, flight._internal._Union2<Float, Array<Float>>>>; }, String>):CustomShaderEffect {
+    var out:EntityConstruction<CustomShaderEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ kind: cast _Runtime.UNDEFINED, shaderKey: cast _Runtime.UNDEFINED, uniforms: cast _Runtime.UNDEFINED } : CustomShaderEffect); }) #end));
+    initializeCustomShaderEffect(({ final __callArgument112:Dynamic = out; __callArgument112; }), ({ final __callArgument113:Dynamic = options; __callArgument113; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeCustomShaderEffect(out:EntityConstruction<CustomShaderEffect>, options:flight._internal._Omit<{ var kind:String; var shaderKey:String; @:optional var uniforms:Null<flight._internal._Record<String, flight._internal._Union2<Float, Array<Float>>>>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<CustomShaderEffect>->String->Void)(({ final __callArgument116:Dynamic = out; __callArgument116; }), (cast 'CustomShaderEffect' : String));
+    _Runtime.setField(out, 'shaderKey', (cast options : { var shaderKey:String; @:optional var uniforms:Null<flight._internal._Record<String, flight._internal._Union2<Float, Array<Float>>>>; }).shaderKey);
+    _Runtime.setField(out, 'uniforms', (cast options : { var shaderKey:String; @:optional var uniforms:Null<flight._internal._Record<String, flight._internal._Union2<Float, Array<Float>>>>; }).uniforms);
   }
 
   public static function computeDepthOfFieldCoc(depth:Float, focusDistance:Float, aperture:Float, focalLength:Float):Float {
@@ -702,9 +902,12 @@ class _Effects {
     return cast null;
   }
 
-  public static function createDirectionalBlurEffect(?options:{ @:optional var angle:Null<Float>; @:optional var length:Null<Float>; @:optional var samples:Null<Float>; }):DirectionalBlurEffect {
+  public static function createDirectionalBlurEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var angle:Null<Float>; @:optional var length:Null<Float>; @:optional var samples:Null<Float>; }, String>):DirectionalBlurEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'DirectionalBlurEffect' }, options]);
+    var out:EntityConstruction<DirectionalBlurEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ angle: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, length: cast _Runtime.UNDEFINED, samples: cast _Runtime.UNDEFINED } : DirectionalBlurEffect); }) #end));
+    initializeDirectionalBlurEffect(({ final __callArgument118:Dynamic = out; __callArgument118; }), ({ final __callArgument119:Dynamic = options; __callArgument119; }));
+    return cast out;
     return cast null;
   }
 
@@ -725,8 +928,17 @@ class _Effects {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeDirectionalBlurEffect(out:EntityConstruction<DirectionalBlurEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var angle:Null<Float>; @:optional var length:Null<Float>; @:optional var samples:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<DirectionalBlurEffect>->String->Void)(({ final __callArgument122:Dynamic = out; __callArgument122; }), (cast 'DirectionalBlurEffect' : String));
+    _Runtime.setField(out, 'angle', (cast options : { @:optional var length:Null<Float>; @:optional var angle:Null<Float>; @:optional var samples:Null<Float>; }).angle);
+    _Runtime.setLength(out, (cast options : { @:optional var length:Null<Float>; @:optional var angle:Null<Float>; @:optional var samples:Null<Float>; }).length);
+    _Runtime.setField(out, 'samples', (cast options : { @:optional var length:Null<Float>; @:optional var angle:Null<Float>; @:optional var samples:Null<Float>; }).samples);
+  }
+
   public static function registerDirectionalBlurEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver(({ final __callArgument26:Dynamic = state; __callArgument26; }), (cast 'DirectionalBlurEffect' : String), (cast _Effects.resolveDirectionalBlurEffectPadding__directionalBlurEffect : Dynamic));
+    registerRenderEffectPaddingResolver(({ final __callArgument124:Dynamic = state; __callArgument124; }), (cast 'DirectionalBlurEffect' : String), (cast _Effects.resolveDirectionalBlurEffectPadding__directionalBlurEffect : Dynamic));
   }
 
   public static function resolveDirectionalBlurEffectPadding__directionalBlurEffect(effect:RenderEffect):RenderEffectPadding {
@@ -734,9 +946,12 @@ class _Effects {
     return cast null;
   }
 
-  public static function createDisplacementEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var frequency:Null<Float>; @:optional var seed:Null<Float>; }):DisplacementEffect {
+  public static function createDisplacementEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var intensity:Null<Float>; @:optional var frequency:Null<Float>; @:optional var seed:Null<Float>; }, String>):DisplacementEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'DisplacementEffect' }, options]);
+    var out:EntityConstruction<DisplacementEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ frequency: cast _Runtime.UNDEFINED, intensity: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, seed: cast _Runtime.UNDEFINED } : DisplacementEffect); }) #end));
+    initializeDisplacementEffect(({ final __callArgument126:Dynamic = out; __callArgument126; }), ({ final __callArgument127:Dynamic = options; __callArgument127; }));
+    return cast out;
     return cast null;
   }
 
@@ -751,8 +966,17 @@ class _Effects {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeDisplacementEffect(out:EntityConstruction<DisplacementEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var intensity:Null<Float>; @:optional var frequency:Null<Float>; @:optional var seed:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<DisplacementEffect>->String->Void)(({ final __callArgument130:Dynamic = out; __callArgument130; }), (cast 'DisplacementEffect' : String));
+    _Runtime.setField(out, 'intensity', (cast options : { @:optional var intensity:Null<Float>; @:optional var frequency:Null<Float>; @:optional var seed:Null<Float>; }).intensity);
+    _Runtime.setField(out, 'frequency', (cast options : { @:optional var intensity:Null<Float>; @:optional var frequency:Null<Float>; @:optional var seed:Null<Float>; }).frequency);
+    _Runtime.setField(out, 'seed', (cast options : { @:optional var intensity:Null<Float>; @:optional var frequency:Null<Float>; @:optional var seed:Null<Float>; }).seed);
+  }
+
   public static function registerDisplacementEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver(({ final __callArgument28:Dynamic = state; __callArgument28; }), (cast 'DisplacementEffect' : String), (cast _Effects.resolveDisplacementEffectPadding__displacementEffect : Dynamic));
+    registerRenderEffectPaddingResolver(({ final __callArgument132:Dynamic = state; __callArgument132; }), (cast 'DisplacementEffect' : String), (cast _Effects.resolveDisplacementEffectPadding__displacementEffect : Dynamic));
   }
 
   public static function resolveDisplacementEffectPadding__displacementEffect(effect:RenderEffect):RenderEffectPadding {
@@ -760,15 +984,28 @@ class _Effects {
     return cast null;
   }
 
-  public static function createDitherEffect(?options:{ @:optional var levels:Null<Float>; }):DitherEffect {
+  public static function createDitherEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var levels:Null<Float>; }, String>):DitherEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'DitherEffect' }, options]);
+    var out:EntityConstruction<DitherEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ kind: cast _Runtime.UNDEFINED, levels: cast _Runtime.UNDEFINED } : DitherEffect); }) #end));
+    initializeDitherEffect(({ final __callArgument134:Dynamic = out; __callArgument134; }), ({ final __callArgument135:Dynamic = options; __callArgument135; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createDropShadowEffect(?options:{ @:optional var alpha:Null<Float>; @:optional var angle:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }):DropShadowEffect {
+  @:allow(flight)
+  @:keep
+  private static function initializeDitherEffect(out:EntityConstruction<DitherEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var levels:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<DitherEffect>->String->Void)(({ final __callArgument138:Dynamic = out; __callArgument138; }), (cast 'DitherEffect' : String));
+    _Runtime.setField(out, 'levels', (cast options : { @:optional var levels:Null<Float>; }).levels);
+  }
+
+  public static function createDropShadowEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var alpha:Null<Float>; @:optional var angle:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }, String>):DropShadowEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'DropShadowEffect' }, options]);
+    var out:EntityConstruction<DropShadowEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ alpha: cast _Runtime.UNDEFINED, angle: cast _Runtime.UNDEFINED, blurX: cast _Runtime.UNDEFINED, blurY: cast _Runtime.UNDEFINED, color: cast _Runtime.UNDEFINED, distance: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, quality: cast _Runtime.UNDEFINED, sourceMode: cast _Runtime.UNDEFINED, strength: cast _Runtime.UNDEFINED } : DropShadowEffect); }) #end));
+    initializeDropShadowEffect(({ final __callArgument140:Dynamic = out; __callArgument140; }), ({ final __callArgument141:Dynamic = options; __callArgument141; }));
+    return cast out;
     return cast null;
   }
 
@@ -781,8 +1018,23 @@ class _Effects {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeDropShadowEffect(out:EntityConstruction<DropShadowEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var alpha:Null<Float>; @:optional var angle:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<DropShadowEffect>->String->Void)(({ final __callArgument144:Dynamic = out; __callArgument144; }), (cast 'DropShadowEffect' : String));
+    _Runtime.setField(out, 'alpha', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).alpha);
+    _Runtime.setField(out, 'angle', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).angle);
+    _Runtime.setField(out, 'blurX', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).blurX);
+    _Runtime.setField(out, 'blurY', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).blurY);
+    _Runtime.setField(out, 'color', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).color);
+    _Runtime.setField(out, 'distance', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).distance);
+    _Runtime.setField(out, 'quality', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).quality);
+    _Runtime.setField(out, 'sourceMode', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).sourceMode);
+    _Runtime.setField(out, 'strength', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).strength);
+  }
+
   public static function registerDropShadowEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver(({ final __callArgument30:Dynamic = state; __callArgument30; }), (cast 'DropShadowEffect' : String), (cast _Effects.resolveDropShadowEffectPadding__dropShadowEffect : Dynamic));
+    registerRenderEffectPaddingResolver(({ final __callArgument146:Dynamic = state; __callArgument146; }), (cast 'DropShadowEffect' : String), (cast _Effects.resolveDropShadowEffectPadding__dropShadowEffect : Dynamic));
   }
 
   public static function resolveDropShadowEffectPadding__dropShadowEffect(effect:RenderEffect):RenderEffectPadding {
@@ -848,22 +1100,58 @@ class _Effects {
     flight._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flight._internal._Float32Array), (cast 17.0 : Float), (cast 1.0 : Float));
   }
 
-  public static function createFilmEmulationEffect(?options:{ @:optional var gateWeave:Null<Float>; @:optional var grainIntensity:Null<Float>; @:optional var halationRadius:Null<Float>; @:optional var halationStrength:Null<Float>; }):FilmEmulationEffect {
+  public static function createFilmEmulationEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var gateWeave:Null<Float>; @:optional var grainIntensity:Null<Float>; @:optional var halationRadius:Null<Float>; @:optional var halationStrength:Null<Float>; }, String>):FilmEmulationEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'FilmEmulationEffect' }, options]);
+    var out:EntityConstruction<FilmEmulationEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ gateWeave: cast _Runtime.UNDEFINED, grainIntensity: cast _Runtime.UNDEFINED, halationRadius: cast _Runtime.UNDEFINED, halationStrength: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED } : FilmEmulationEffect); }) #end));
+    initializeFilmEmulationEffect(({ final __callArgument148:Dynamic = out; __callArgument148; }), ({ final __callArgument149:Dynamic = options; __callArgument149; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createFilmGrainEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var size:Null<Float>; @:optional var seed:Null<Float>; }):FilmGrainEffect {
+  @:allow(flight)
+  @:keep
+  private static function initializeFilmEmulationEffect(out:EntityConstruction<FilmEmulationEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var gateWeave:Null<Float>; @:optional var grainIntensity:Null<Float>; @:optional var halationRadius:Null<Float>; @:optional var halationStrength:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<FilmEmulationEffect>->String->Void)(({ final __callArgument152:Dynamic = out; __callArgument152; }), (cast 'FilmEmulationEffect' : String));
+    _Runtime.setField(out, 'gateWeave', (cast options : { @:optional var gateWeave:Null<Float>; @:optional var grainIntensity:Null<Float>; @:optional var halationRadius:Null<Float>; @:optional var halationStrength:Null<Float>; }).gateWeave);
+    _Runtime.setField(out, 'grainIntensity', (cast options : { @:optional var gateWeave:Null<Float>; @:optional var grainIntensity:Null<Float>; @:optional var halationRadius:Null<Float>; @:optional var halationStrength:Null<Float>; }).grainIntensity);
+    _Runtime.setField(out, 'halationRadius', (cast options : { @:optional var gateWeave:Null<Float>; @:optional var grainIntensity:Null<Float>; @:optional var halationRadius:Null<Float>; @:optional var halationStrength:Null<Float>; }).halationRadius);
+    _Runtime.setField(out, 'halationStrength', (cast options : { @:optional var gateWeave:Null<Float>; @:optional var grainIntensity:Null<Float>; @:optional var halationRadius:Null<Float>; @:optional var halationStrength:Null<Float>; }).halationStrength);
+  }
+
+  public static function createFilmGrainEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var intensity:Null<Float>; @:optional var size:Null<Float>; @:optional var seed:Null<Float>; }, String>):FilmGrainEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'FilmGrainEffect' }, options]);
+    var out:EntityConstruction<FilmGrainEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ intensity: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, seed: cast _Runtime.UNDEFINED, size: cast _Runtime.UNDEFINED } : FilmGrainEffect); }) #end));
+    initializeFilmGrainEffect(({ final __callArgument154:Dynamic = out; __callArgument154; }), ({ final __callArgument155:Dynamic = options; __callArgument155; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createFxaaEffect(?options:{ @:optional var edgeThreshold:Null<Float>; @:optional var subpixel:Null<Float>; }):FxaaEffect {
+  @:allow(flight)
+  @:keep
+  private static function initializeFilmGrainEffect(out:EntityConstruction<FilmGrainEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var intensity:Null<Float>; @:optional var size:Null<Float>; @:optional var seed:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<FilmGrainEffect>->String->Void)(({ final __callArgument158:Dynamic = out; __callArgument158; }), (cast 'FilmGrainEffect' : String));
+    _Runtime.setField(out, 'intensity', (cast options : { @:optional var size:Null<Float>; @:optional var intensity:Null<Float>; @:optional var seed:Null<Float>; }).intensity);
+    _Runtime.setField(out, 'size', (cast options : { @:optional var size:Null<Float>; @:optional var intensity:Null<Float>; @:optional var seed:Null<Float>; }).size);
+    _Runtime.setField(out, 'seed', (cast options : { @:optional var size:Null<Float>; @:optional var intensity:Null<Float>; @:optional var seed:Null<Float>; }).seed);
+  }
+
+  public static function createFxaaEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var edgeThreshold:Null<Float>; @:optional var subpixel:Null<Float>; }, String>):FxaaEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'FxaaEffect' }, options]);
+    var out:EntityConstruction<FxaaEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ edgeThreshold: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, subpixel: cast _Runtime.UNDEFINED } : FxaaEffect); }) #end));
+    initializeFxaaEffect(({ final __callArgument160:Dynamic = out; __callArgument160; }), ({ final __callArgument161:Dynamic = options; __callArgument161; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeFxaaEffect(out:EntityConstruction<FxaaEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var edgeThreshold:Null<Float>; @:optional var subpixel:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<FxaaEffect>->String->Void)(({ final __callArgument164:Dynamic = out; __callArgument164; }), (cast 'FxaaEffect' : String));
+    _Runtime.setField(out, 'edgeThreshold', (cast options : { @:optional var edgeThreshold:Null<Float>; @:optional var subpixel:Null<Float>; }).edgeThreshold);
+    _Runtime.setField(out, 'subpixel', (cast options : { @:optional var edgeThreshold:Null<Float>; @:optional var subpixel:Null<Float>; }).subpixel);
   }
 
   public static function computeGaussianKernelWeights(sigma:Float, out:Array<Float>):Array<Float> {
@@ -895,7 +1183,7 @@ class _Effects {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast size : Float)) : Bool)) {
-        ({ var __indexedObject32:Array<Float> = out; var __indexedKey33:Float = i; flight._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject32 : Array<Float>), (cast __indexedKey33 : Float), (cast (flight._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject32 : Array<Float>), (cast __indexedKey33 : Float)) * inverseSum) : Float)); });
+        ({ var __indexedObject166:Array<Float> = out; var __indexedKey167:Float = i; flight._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject166 : Array<Float>), (cast __indexedKey167 : Float), (cast (flight._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject166 : Array<Float>), (cast __indexedKey167 : Float)) * inverseSum) : Float)); });
         i++;
       }
     }
@@ -949,7 +1237,7 @@ class _Effects {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) <= (cast r : Float)) : Bool)) {
-        ({ var __indexedObject34:flight._internal._Float32Array = out; var __indexedKey35:Float = i; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject34 : flight._internal._Float32Array), (cast __indexedKey35 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject34 : flight._internal._Float32Array), (cast __indexedKey35 : Float)) * invSum) : Float)); });
+        ({ var __indexedObject168:flight._internal._Float32Array = out; var __indexedKey169:Float = i; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject168 : flight._internal._Float32Array), (cast __indexedKey169 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject168 : flight._internal._Float32Array), (cast __indexedKey169 : Float)) * invSum) : Float)); });
         i++;
       }
     }
@@ -957,9 +1245,12 @@ class _Effects {
     return cast null;
   }
 
-  public static function createGlitchEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var blockSize:Null<Float>; @:optional var colorShift:Null<Float>; @:optional var seed:Null<Float>; }):GlitchEffect {
+  public static function createGlitchEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var intensity:Null<Float>; @:optional var blockSize:Null<Float>; @:optional var colorShift:Null<Float>; @:optional var seed:Null<Float>; }, String>):GlitchEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'GlitchEffect' }, options]);
+    var out:EntityConstruction<GlitchEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ blockSize: cast _Runtime.UNDEFINED, colorShift: cast _Runtime.UNDEFINED, intensity: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, seed: cast _Runtime.UNDEFINED } : GlitchEffect); }) #end));
+    initializeGlitchEffect(({ final __callArgument170:Dynamic = out; __callArgument170; }), ({ final __callArgument171:Dynamic = options; __callArgument171; }));
+    return cast out;
     return cast null;
   }
 
@@ -974,8 +1265,18 @@ class _Effects {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeGlitchEffect(out:EntityConstruction<GlitchEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var intensity:Null<Float>; @:optional var blockSize:Null<Float>; @:optional var colorShift:Null<Float>; @:optional var seed:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<GlitchEffect>->String->Void)(({ final __callArgument174:Dynamic = out; __callArgument174; }), (cast 'GlitchEffect' : String));
+    _Runtime.setField(out, 'intensity', (cast options : { @:optional var intensity:Null<Float>; @:optional var seed:Null<Float>; @:optional var blockSize:Null<Float>; @:optional var colorShift:Null<Float>; }).intensity);
+    _Runtime.setField(out, 'blockSize', (cast options : { @:optional var intensity:Null<Float>; @:optional var seed:Null<Float>; @:optional var blockSize:Null<Float>; @:optional var colorShift:Null<Float>; }).blockSize);
+    _Runtime.setField(out, 'colorShift', (cast options : { @:optional var intensity:Null<Float>; @:optional var seed:Null<Float>; @:optional var blockSize:Null<Float>; @:optional var colorShift:Null<Float>; }).colorShift);
+    _Runtime.setField(out, 'seed', (cast options : { @:optional var intensity:Null<Float>; @:optional var seed:Null<Float>; @:optional var blockSize:Null<Float>; @:optional var colorShift:Null<Float>; }).seed);
+  }
+
   public static function registerGlitchEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver(({ final __callArgument36:Dynamic = state; __callArgument36; }), (cast 'GlitchEffect' : String), (cast _Effects.resolveGlitchEffectPadding__glitchEffect : Dynamic));
+    registerRenderEffectPaddingResolver(({ final __callArgument176:Dynamic = state; __callArgument176; }), (cast 'GlitchEffect' : String), (cast _Effects.resolveGlitchEffectPadding__glitchEffect : Dynamic));
   }
 
   public static function resolveGlitchEffectPadding__glitchEffect(effect:RenderEffect):RenderEffectPadding {
@@ -983,10 +1284,26 @@ class _Effects {
     return cast null;
   }
 
-  public static function createGodRaysEffect(?options:{ @:optional var centerX:Null<Float>; @:optional var centerY:Null<Float>; @:optional var density:Null<Float>; @:optional var decay:Null<Float>; @:optional var weight:Null<Float>; @:optional var exposure:Null<Float>; @:optional var samples:Null<Float>; }):GodRaysEffect {
+  public static function createGodRaysEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var centerX:Null<Float>; @:optional var centerY:Null<Float>; @:optional var density:Null<Float>; @:optional var decay:Null<Float>; @:optional var weight:Null<Float>; @:optional var exposure:Null<Float>; @:optional var samples:Null<Float>; }, String>):GodRaysEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'GodRaysEffect' }, options]);
+    var out:EntityConstruction<GodRaysEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ centerX: cast _Runtime.UNDEFINED, centerY: cast _Runtime.UNDEFINED, decay: cast _Runtime.UNDEFINED, density: cast _Runtime.UNDEFINED, exposure: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, samples: cast _Runtime.UNDEFINED, weight: cast _Runtime.UNDEFINED } : GodRaysEffect); }) #end));
+    initializeGodRaysEffect(({ final __callArgument178:Dynamic = out; __callArgument178; }), ({ final __callArgument179:Dynamic = options; __callArgument179; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeGodRaysEffect(out:EntityConstruction<GodRaysEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var centerX:Null<Float>; @:optional var centerY:Null<Float>; @:optional var density:Null<Float>; @:optional var decay:Null<Float>; @:optional var weight:Null<Float>; @:optional var exposure:Null<Float>; @:optional var samples:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<GodRaysEffect>->String->Void)(({ final __callArgument182:Dynamic = out; __callArgument182; }), (cast 'GodRaysEffect' : String));
+    _Runtime.setField(out, 'centerX', (cast options : { @:optional var centerX:Null<Float>; @:optional var centerY:Null<Float>; @:optional var weight:Null<Float>; @:optional var exposure:Null<Float>; @:optional var samples:Null<Float>; @:optional var decay:Null<Float>; @:optional var density:Null<Float>; }).centerX);
+    _Runtime.setField(out, 'centerY', (cast options : { @:optional var centerX:Null<Float>; @:optional var centerY:Null<Float>; @:optional var weight:Null<Float>; @:optional var exposure:Null<Float>; @:optional var samples:Null<Float>; @:optional var decay:Null<Float>; @:optional var density:Null<Float>; }).centerY);
+    _Runtime.setField(out, 'density', (cast options : { @:optional var centerX:Null<Float>; @:optional var centerY:Null<Float>; @:optional var weight:Null<Float>; @:optional var exposure:Null<Float>; @:optional var samples:Null<Float>; @:optional var decay:Null<Float>; @:optional var density:Null<Float>; }).density);
+    _Runtime.setField(out, 'decay', (cast options : { @:optional var centerX:Null<Float>; @:optional var centerY:Null<Float>; @:optional var weight:Null<Float>; @:optional var exposure:Null<Float>; @:optional var samples:Null<Float>; @:optional var decay:Null<Float>; @:optional var density:Null<Float>; }).decay);
+    _Runtime.setField(out, 'weight', (cast options : { @:optional var centerX:Null<Float>; @:optional var centerY:Null<Float>; @:optional var weight:Null<Float>; @:optional var exposure:Null<Float>; @:optional var samples:Null<Float>; @:optional var decay:Null<Float>; @:optional var density:Null<Float>; }).weight);
+    _Runtime.setField(out, 'exposure', (cast options : { @:optional var centerX:Null<Float>; @:optional var centerY:Null<Float>; @:optional var weight:Null<Float>; @:optional var exposure:Null<Float>; @:optional var samples:Null<Float>; @:optional var decay:Null<Float>; @:optional var density:Null<Float>; }).exposure);
+    _Runtime.setField(out, 'samples', (cast options : { @:optional var centerX:Null<Float>; @:optional var centerY:Null<Float>; @:optional var weight:Null<Float>; @:optional var exposure:Null<Float>; @:optional var samples:Null<Float>; @:optional var decay:Null<Float>; @:optional var density:Null<Float>; }).samples);
   }
 
   public static function computeGodRaysAccumulationScale(effect:GodRaysEffect):Float {
@@ -1033,8 +1350,11 @@ class _Effects {
     flight._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast dy : Float));
   }
 
-  public static function createGradientBevelEffect(options:{ var alphas:Array<Float>; @:optional var angle:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; var colors:Array<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; var ratios:Array<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }):GradientBevelEffect {
-    return cast _Runtime.mergeObjects([{ kind: 'GradientBevelEffect' }, options]);
+  public static function createGradientBevelEffect(options:flight._internal._Omit<{ var kind:String; var alphas:Array<Float>; @:optional var angle:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; var colors:Array<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; var ratios:Array<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }, String>):GradientBevelEffect {
+    var out:EntityConstruction<GradientBevelEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ alphas: cast _Runtime.UNDEFINED, angle: cast _Runtime.UNDEFINED, bevelType: cast _Runtime.UNDEFINED, blurX: cast _Runtime.UNDEFINED, blurY: cast _Runtime.UNDEFINED, colors: cast _Runtime.UNDEFINED, distance: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, quality: cast _Runtime.UNDEFINED, ratios: cast _Runtime.UNDEFINED, sourceMode: cast _Runtime.UNDEFINED, strength: cast _Runtime.UNDEFINED } : GradientBevelEffect); }) #end));
+    initializeGradientBevelEffect(({ final __callArgument184:Dynamic = out; __callArgument184; }), ({ final __callArgument185:Dynamic = options; __callArgument185; }));
+    return cast out;
     return cast null;
   }
 
@@ -1047,8 +1367,25 @@ class _Effects {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeGradientBevelEffect(out:EntityConstruction<GradientBevelEffect>, options:flight._internal._Omit<{ var kind:String; var alphas:Array<Float>; @:optional var angle:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; var colors:Array<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; var ratios:Array<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<GradientBevelEffect>->String->Void)(({ final __callArgument188:Dynamic = out; __callArgument188; }), (cast 'GradientBevelEffect' : String));
+    _Runtime.setField(out, 'alphas', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).alphas);
+    _Runtime.setField(out, 'angle', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).angle);
+    _Runtime.setField(out, 'bevelType', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).bevelType);
+    _Runtime.setField(out, 'blurX', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).blurX);
+    _Runtime.setField(out, 'blurY', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).blurY);
+    _Runtime.setField(out, 'colors', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).colors);
+    _Runtime.setField(out, 'distance', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).distance);
+    _Runtime.setField(out, 'quality', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).quality);
+    _Runtime.setField(out, 'ratios', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).ratios);
+    _Runtime.setField(out, 'sourceMode', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).sourceMode);
+    _Runtime.setField(out, 'strength', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).strength);
+  }
+
   public static function registerGradientBevelEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver(({ final __callArgument38:Dynamic = state; __callArgument38; }), (cast 'GradientBevelEffect' : String), (cast _Effects.resolveGradientBevelEffectPadding__gradientBevelEffect : Dynamic));
+    registerRenderEffectPaddingResolver(({ final __callArgument190:Dynamic = state; __callArgument190; }), (cast 'GradientBevelEffect' : String), (cast _Effects.resolveGradientBevelEffectPadding__gradientBevelEffect : Dynamic));
   }
 
   public static function resolveGradientBevelEffectPadding__gradientBevelEffect(effect:RenderEffect):RenderEffectPadding {
@@ -1056,8 +1393,11 @@ class _Effects {
     return cast null;
   }
 
-  public static function createGradientGlowEffect(options:{ var alphas:Array<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; var colors:Array<Float>; @:optional var quality:Null<Float>; var ratios:Array<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }):GradientGlowEffect {
-    return cast _Runtime.mergeObjects([{ kind: 'GradientGlowEffect' }, options]);
+  public static function createGradientGlowEffect(options:flight._internal._Omit<{ var kind:String; var alphas:Array<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; var colors:Array<Float>; @:optional var quality:Null<Float>; var ratios:Array<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }, String>):GradientGlowEffect {
+    var out:EntityConstruction<GradientGlowEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ alphas: cast _Runtime.UNDEFINED, blurX: cast _Runtime.UNDEFINED, blurY: cast _Runtime.UNDEFINED, colors: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, quality: cast _Runtime.UNDEFINED, ratios: cast _Runtime.UNDEFINED, sourceMode: cast _Runtime.UNDEFINED, strength: cast _Runtime.UNDEFINED } : GradientGlowEffect); }) #end));
+    initializeGradientGlowEffect(({ final __callArgument192:Dynamic = out; __callArgument192; }), ({ final __callArgument193:Dynamic = options; __callArgument193; }));
+    return cast out;
     return cast null;
   }
 
@@ -1066,8 +1406,22 @@ class _Effects {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeGradientGlowEffect(out:EntityConstruction<GradientGlowEffect>, options:flight._internal._Omit<{ var kind:String; var alphas:Array<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; var colors:Array<Float>; @:optional var quality:Null<Float>; var ratios:Array<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<GradientGlowEffect>->String->Void)(({ final __callArgument196:Dynamic = out; __callArgument196; }), (cast 'GradientGlowEffect' : String));
+    _Runtime.setField(out, 'alphas', (cast options : { @:optional var strength:Null<Float>; var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).alphas);
+    _Runtime.setField(out, 'blurX', (cast options : { @:optional var strength:Null<Float>; var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).blurX);
+    _Runtime.setField(out, 'blurY', (cast options : { @:optional var strength:Null<Float>; var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).blurY);
+    _Runtime.setField(out, 'colors', (cast options : { @:optional var strength:Null<Float>; var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).colors);
+    _Runtime.setField(out, 'quality', (cast options : { @:optional var strength:Null<Float>; var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).quality);
+    _Runtime.setField(out, 'ratios', (cast options : { @:optional var strength:Null<Float>; var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).ratios);
+    _Runtime.setField(out, 'sourceMode', (cast options : { @:optional var strength:Null<Float>; var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).sourceMode);
+    _Runtime.setField(out, 'strength', (cast options : { @:optional var strength:Null<Float>; var alphas:Array<Float>; var colors:Array<Float>; var ratios:Array<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).strength);
+  }
+
   public static function registerGradientGlowEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver(({ final __callArgument40:Dynamic = state; __callArgument40; }), (cast 'GradientGlowEffect' : String), (cast _Effects.resolveGradientGlowEffectPadding__gradientGlowEffect : Dynamic));
+    registerRenderEffectPaddingResolver(({ final __callArgument198:Dynamic = state; __callArgument198; }), (cast 'GradientGlowEffect' : String), (cast _Effects.resolveGradientGlowEffectPadding__gradientGlowEffect : Dynamic));
   }
 
   public static function resolveGradientGlowEffectPadding__gradientGlowEffect(effect:RenderEffect):RenderEffectPadding {
@@ -1075,15 +1429,29 @@ class _Effects {
     return cast null;
   }
 
-  public static function createHalftoneEffect(?options:{ @:optional var scale:Null<Float>; @:optional var angle:Null<Float>; }):HalftoneEffect {
+  public static function createHalftoneEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var scale:Null<Float>; @:optional var angle:Null<Float>; }, String>):HalftoneEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'HalftoneEffect' }, options]);
+    var out:EntityConstruction<HalftoneEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ angle: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, scale: cast _Runtime.UNDEFINED } : HalftoneEffect); }) #end));
+    initializeHalftoneEffect(({ final __callArgument200:Dynamic = out; __callArgument200; }), ({ final __callArgument201:Dynamic = options; __callArgument201; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createInnerGlowEffect(?options:{ @:optional var alpha:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<InnerEffectSourceMode>; @:optional var strength:Null<Float>; }):InnerGlowEffect {
+  @:allow(flight)
+  @:keep
+  private static function initializeHalftoneEffect(out:EntityConstruction<HalftoneEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var scale:Null<Float>; @:optional var angle:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<HalftoneEffect>->String->Void)(({ final __callArgument204:Dynamic = out; __callArgument204; }), (cast 'HalftoneEffect' : String));
+    _Runtime.setField(out, 'scale', (cast options : { @:optional var scale:Null<Float>; @:optional var angle:Null<Float>; }).scale);
+    _Runtime.setField(out, 'angle', (cast options : { @:optional var scale:Null<Float>; @:optional var angle:Null<Float>; }).angle);
+  }
+
+  public static function createInnerGlowEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var alpha:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<InnerEffectSourceMode>; @:optional var strength:Null<Float>; }, String>):InnerGlowEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'InnerGlowEffect' }, options]);
+    var out:EntityConstruction<InnerGlowEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ alpha: cast _Runtime.UNDEFINED, blurX: cast _Runtime.UNDEFINED, blurY: cast _Runtime.UNDEFINED, color: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, quality: cast _Runtime.UNDEFINED, sourceMode: cast _Runtime.UNDEFINED, strength: cast _Runtime.UNDEFINED } : InnerGlowEffect); }) #end));
+    initializeInnerGlowEffect(({ final __callArgument206:Dynamic = out; __callArgument206; }), ({ final __callArgument207:Dynamic = options; __callArgument207; }));
+    return cast out;
     return cast null;
   }
 
@@ -1092,8 +1460,21 @@ class _Effects {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeInnerGlowEffect(out:EntityConstruction<InnerGlowEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var alpha:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<InnerEffectSourceMode>; @:optional var strength:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<InnerGlowEffect>->String->Void)(({ final __callArgument210:Dynamic = out; __callArgument210; }), (cast 'InnerGlowEffect' : String));
+    _Runtime.setField(out, 'alpha', (cast options : { @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).alpha);
+    _Runtime.setField(out, 'blurX', (cast options : { @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).blurX);
+    _Runtime.setField(out, 'blurY', (cast options : { @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).blurY);
+    _Runtime.setField(out, 'color', (cast options : { @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).color);
+    _Runtime.setField(out, 'quality', (cast options : { @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).quality);
+    _Runtime.setField(out, 'sourceMode', (cast options : { @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).sourceMode);
+    _Runtime.setField(out, 'strength', (cast options : { @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).strength);
+  }
+
   public static function registerInnerGlowEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver(({ final __callArgument42:Dynamic = state; __callArgument42; }), (cast 'InnerGlowEffect' : String), (cast _Effects.resolveInnerGlowEffectPadding__innerGlowEffect : Dynamic));
+    registerRenderEffectPaddingResolver(({ final __callArgument212:Dynamic = state; __callArgument212; }), (cast 'InnerGlowEffect' : String), (cast _Effects.resolveInnerGlowEffectPadding__innerGlowEffect : Dynamic));
   }
 
   public static function resolveInnerGlowEffectPadding__innerGlowEffect(effect:RenderEffect):RenderEffectPadding {
@@ -1101,9 +1482,12 @@ class _Effects {
     return cast null;
   }
 
-  public static function createInnerShadowEffect(?options:{ @:optional var alpha:Null<Float>; @:optional var angle:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<InnerEffectSourceMode>; @:optional var strength:Null<Float>; }):InnerShadowEffect {
+  public static function createInnerShadowEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var alpha:Null<Float>; @:optional var angle:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<InnerEffectSourceMode>; @:optional var strength:Null<Float>; }, String>):InnerShadowEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'InnerShadowEffect' }, options]);
+    var out:EntityConstruction<InnerShadowEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ alpha: cast _Runtime.UNDEFINED, angle: cast _Runtime.UNDEFINED, blurX: cast _Runtime.UNDEFINED, blurY: cast _Runtime.UNDEFINED, color: cast _Runtime.UNDEFINED, distance: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, quality: cast _Runtime.UNDEFINED, sourceMode: cast _Runtime.UNDEFINED, strength: cast _Runtime.UNDEFINED } : InnerShadowEffect); }) #end));
+    initializeInnerShadowEffect(({ final __callArgument214:Dynamic = out; __callArgument214; }), ({ final __callArgument215:Dynamic = options; __callArgument215; }));
+    return cast out;
     return cast null;
   }
 
@@ -1116,8 +1500,23 @@ class _Effects {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeInnerShadowEffect(out:EntityConstruction<InnerShadowEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var alpha:Null<Float>; @:optional var angle:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<InnerEffectSourceMode>; @:optional var strength:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<InnerShadowEffect>->String->Void)(({ final __callArgument218:Dynamic = out; __callArgument218; }), (cast 'InnerShadowEffect' : String));
+    _Runtime.setField(out, 'alpha', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).alpha);
+    _Runtime.setField(out, 'angle', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).angle);
+    _Runtime.setField(out, 'blurX', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).blurX);
+    _Runtime.setField(out, 'blurY', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).blurY);
+    _Runtime.setField(out, 'color', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).color);
+    _Runtime.setField(out, 'distance', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).distance);
+    _Runtime.setField(out, 'quality', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).quality);
+    _Runtime.setField(out, 'sourceMode', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).sourceMode);
+    _Runtime.setField(out, 'strength', (cast options : { @:optional var angle:Null<Float>; @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).strength);
+  }
+
   public static function registerInnerShadowEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver(({ final __callArgument44:Dynamic = state; __callArgument44; }), (cast 'InnerShadowEffect' : String), (cast _Effects.resolveInnerShadowEffectPadding__innerShadowEffect : Dynamic));
+    registerRenderEffectPaddingResolver(({ final __callArgument220:Dynamic = state; __callArgument220; }), (cast 'InnerShadowEffect' : String), (cast _Effects.resolveInnerShadowEffectPadding__innerShadowEffect : Dynamic));
   }
 
   public static function resolveInnerShadowEffectPadding__innerShadowEffect(effect:RenderEffect):RenderEffectPadding {
@@ -1125,10 +1524,20 @@ class _Effects {
     return cast null;
   }
 
-  public static function createKuwaharaEffect(?options:{ @:optional var radius:Null<Float>; }):KuwaharaEffect {
+  public static function createKuwaharaEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var radius:Null<Float>; }, String>):KuwaharaEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'KuwaharaEffect' }, options]);
+    var out:EntityConstruction<KuwaharaEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ kind: cast _Runtime.UNDEFINED, radius: cast _Runtime.UNDEFINED } : KuwaharaEffect); }) #end));
+    initializeKuwaharaEffect(({ final __callArgument222:Dynamic = out; __callArgument222; }), ({ final __callArgument223:Dynamic = options; __callArgument223; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeKuwaharaEffect(out:EntityConstruction<KuwaharaEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var radius:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<KuwaharaEffect>->String->Void)(({ final __callArgument226:Dynamic = out; __callArgument226; }), (cast 'KuwaharaEffect' : String));
+    _Runtime.setField(out, 'radius', (cast options : { @:optional var radius:Null<Float>; }).radius);
   }
 
   public static function computeKuwaharaGaussianWeights(radius:Float, out:flight._internal._Float32Array):Float {
@@ -1162,7 +1571,7 @@ class _Effects {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast (size * size) : Float)) : Bool)) {
-        ({ var __indexedObject46:flight._internal._Float32Array = out; var __indexedKey47:Float = i; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject46 : flight._internal._Float32Array), (cast __indexedKey47 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject46 : flight._internal._Float32Array), (cast __indexedKey47 : Float)) * invSum) : Float)); });
+        ({ var __indexedObject228:flight._internal._Float32Array = out; var __indexedKey229:Float = i; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject228 : flight._internal._Float32Array), (cast __indexedKey229 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject228 : flight._internal._Float32Array), (cast __indexedKey229 : Float)) * invSum) : Float)); });
         i++;
       }
     }
@@ -1203,7 +1612,7 @@ class _Effects {
 
   public static function computeKuwaharaSectorPixelCount(effect:KuwaharaEffect):Float {
     var s:Float = cast _Runtime.UNDEFINED;
-    s = (cast computeKuwaharaSectorSize(({ final __callArgument48:Dynamic = effect; __callArgument48; })) : Float);
+    s = (cast computeKuwaharaSectorSize(({ final __callArgument230:Dynamic = effect; __callArgument230; })) : Float);
     return cast (s * s);
     return cast null;
   }
@@ -1213,22 +1622,58 @@ class _Effects {
     return cast null;
   }
 
-  public static function createLensDirtEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var threshold:Null<Float>; @:optional var seed:Null<Float>; }):LensDirtEffect {
+  public static function createLensDirtEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var intensity:Null<Float>; @:optional var threshold:Null<Float>; @:optional var seed:Null<Float>; }, String>):LensDirtEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'LensDirtEffect' }, options]);
+    var out:EntityConstruction<LensDirtEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ intensity: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, seed: cast _Runtime.UNDEFINED, threshold: cast _Runtime.UNDEFINED } : LensDirtEffect); }) #end));
+    initializeLensDirtEffect(({ final __callArgument232:Dynamic = out; __callArgument232; }), ({ final __callArgument233:Dynamic = options; __callArgument233; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createLensDistortionEffect(?options:{ @:optional var amount:Null<Float>; @:optional var scale:Null<Float>; }):LensDistortionEffect {
+  @:allow(flight)
+  @:keep
+  private static function initializeLensDirtEffect(out:EntityConstruction<LensDirtEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var intensity:Null<Float>; @:optional var threshold:Null<Float>; @:optional var seed:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<LensDirtEffect>->String->Void)(({ final __callArgument236:Dynamic = out; __callArgument236; }), (cast 'LensDirtEffect' : String));
+    _Runtime.setField(out, 'intensity', (cast options : { @:optional var intensity:Null<Float>; @:optional var threshold:Null<Float>; @:optional var seed:Null<Float>; }).intensity);
+    _Runtime.setField(out, 'threshold', (cast options : { @:optional var intensity:Null<Float>; @:optional var threshold:Null<Float>; @:optional var seed:Null<Float>; }).threshold);
+    _Runtime.setField(out, 'seed', (cast options : { @:optional var intensity:Null<Float>; @:optional var threshold:Null<Float>; @:optional var seed:Null<Float>; }).seed);
+  }
+
+  public static function createLensDistortionEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var amount:Null<Float>; @:optional var scale:Null<Float>; }, String>):LensDistortionEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'LensDistortionEffect' }, options]);
+    var out:EntityConstruction<LensDistortionEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ amount: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, scale: cast _Runtime.UNDEFINED } : LensDistortionEffect); }) #end));
+    initializeLensDistortionEffect(({ final __callArgument238:Dynamic = out; __callArgument238; }), ({ final __callArgument239:Dynamic = options; __callArgument239; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createLensFlareEffect(?options:{ @:optional var threshold:Null<Float>; @:optional var intensity:Null<Float>; @:optional var ghosts:Null<Float>; @:optional var halo:Null<Float>; }):LensFlareEffect {
+  @:allow(flight)
+  @:keep
+  private static function initializeLensDistortionEffect(out:EntityConstruction<LensDistortionEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var amount:Null<Float>; @:optional var scale:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<LensDistortionEffect>->String->Void)(({ final __callArgument242:Dynamic = out; __callArgument242; }), (cast 'LensDistortionEffect' : String));
+    _Runtime.setField(out, 'amount', (cast options : { @:optional var scale:Null<Float>; @:optional var amount:Null<Float>; }).amount);
+    _Runtime.setField(out, 'scale', (cast options : { @:optional var scale:Null<Float>; @:optional var amount:Null<Float>; }).scale);
+  }
+
+  public static function createLensFlareEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var threshold:Null<Float>; @:optional var intensity:Null<Float>; @:optional var ghosts:Null<Float>; @:optional var halo:Null<Float>; }, String>):LensFlareEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'LensFlareEffect' }, options]);
+    var out:EntityConstruction<LensFlareEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ ghosts: cast _Runtime.UNDEFINED, halo: cast _Runtime.UNDEFINED, intensity: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, threshold: cast _Runtime.UNDEFINED } : LensFlareEffect); }) #end));
+    initializeLensFlareEffect(({ final __callArgument244:Dynamic = out; __callArgument244; }), ({ final __callArgument245:Dynamic = options; __callArgument245; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeLensFlareEffect(out:EntityConstruction<LensFlareEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var threshold:Null<Float>; @:optional var intensity:Null<Float>; @:optional var ghosts:Null<Float>; @:optional var halo:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<LensFlareEffect>->String->Void)(({ final __callArgument248:Dynamic = out; __callArgument248; }), (cast 'LensFlareEffect' : String));
+    _Runtime.setField(out, 'threshold', (cast options : { @:optional var intensity:Null<Float>; @:optional var threshold:Null<Float>; @:optional var ghosts:Null<Float>; @:optional var halo:Null<Float>; }).threshold);
+    _Runtime.setField(out, 'intensity', (cast options : { @:optional var intensity:Null<Float>; @:optional var threshold:Null<Float>; @:optional var ghosts:Null<Float>; @:optional var halo:Null<Float>; }).intensity);
+    _Runtime.setField(out, 'ghosts', (cast options : { @:optional var intensity:Null<Float>; @:optional var threshold:Null<Float>; @:optional var ghosts:Null<Float>; @:optional var halo:Null<Float>; }).ghosts);
+    _Runtime.setField(out, 'halo', (cast options : { @:optional var intensity:Null<Float>; @:optional var threshold:Null<Float>; @:optional var ghosts:Null<Float>; @:optional var halo:Null<Float>; }).halo);
   }
 
   public static function computeLinearSampledGaussian(sigma:Float, outWeights:Array<Float>, outOffsets:Array<Float>):Array<Float> {
@@ -1237,7 +1682,7 @@ class _Effects {
     var tapCount:Float = cast _Runtime.UNDEFINED;
     size = (cast getGaussianKernelSize((cast sigma : Float)) : Float);
     radius = ((size - 1.0) / 2.0);
-    (cast computeGaussianKernelWeights((cast sigma : Float), ({ final __callArgument50:Dynamic = _Effects.scratchWeights__linearSampledGaussian; __callArgument50; })) : Array<Float>);
+    (cast computeGaussianKernelWeights((cast sigma : Float), ({ final __callArgument250:Dynamic = _Effects.scratchWeights__linearSampledGaussian; __callArgument250; })) : Array<Float>);
     tapCount = (cast getLinearSampledGaussianTapCount((cast sigma : Float)) : Float);
     _Runtime.setLength(outWeights, tapCount);
     _Runtime.setLength(outOffsets, tapCount);
@@ -1270,9 +1715,12 @@ class _Effects {
 
   public static final scratchWeights__linearSampledGaussian:Array<Float> = (cast cast ([] : Array<Dynamic>));
 
-  public static function createMedianEffect(?options:{ @:optional var radius:Null<Float>; }):MedianEffect {
+  public static function createMedianEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var radius:Null<Float>; }, String>):MedianEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'MedianEffect' }, options]);
+    var out:EntityConstruction<MedianEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ kind: cast _Runtime.UNDEFINED, radius: cast _Runtime.UNDEFINED } : MedianEffect); }) #end));
+    initializeMedianEffect(({ final __callArgument252:Dynamic = out; __callArgument252; }), ({ final __callArgument253:Dynamic = options; __callArgument253; }));
+    return cast out;
     return cast null;
   }
 
@@ -1283,8 +1731,15 @@ class _Effects {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeMedianEffect(out:EntityConstruction<MedianEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var radius:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<MedianEffect>->String->Void)(({ final __callArgument256:Dynamic = out; __callArgument256; }), (cast 'MedianEffect' : String));
+    _Runtime.setField(out, 'radius', (cast options : { @:optional var radius:Null<Float>; }).radius);
+  }
+
   public static function registerMedianEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver(({ final __callArgument52:Dynamic = state; __callArgument52; }), (cast 'MedianEffect' : String), (cast _Effects.resolveMedianEffectPadding__medianEffect : Dynamic));
+    registerRenderEffectPaddingResolver(({ final __callArgument258:Dynamic = state; __callArgument258; }), (cast 'MedianEffect' : String), (cast _Effects.resolveMedianEffectPadding__medianEffect : Dynamic));
   }
 
   public static function resolveMedianEffectPadding__medianEffect(effect:RenderEffect):RenderEffectPadding {
@@ -1292,15 +1747,29 @@ class _Effects {
     return cast null;
   }
 
-  public static function createMotionBlurEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var samples:Null<Float>; }):MotionBlurEffect {
+  public static function createMotionBlurEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var intensity:Null<Float>; @:optional var samples:Null<Float>; }, String>):MotionBlurEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'MotionBlurEffect' }, options]);
+    var out:EntityConstruction<MotionBlurEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ intensity: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, samples: cast _Runtime.UNDEFINED } : MotionBlurEffect); }) #end));
+    initializeMotionBlurEffect(({ final __callArgument260:Dynamic = out; __callArgument260; }), ({ final __callArgument261:Dynamic = options; __callArgument261; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createOuterGlowEffect(?options:{ @:optional var alpha:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }):OuterGlowEffect {
+  @:allow(flight)
+  @:keep
+  private static function initializeMotionBlurEffect(out:EntityConstruction<MotionBlurEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var intensity:Null<Float>; @:optional var samples:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<MotionBlurEffect>->String->Void)(({ final __callArgument264:Dynamic = out; __callArgument264; }), (cast 'MotionBlurEffect' : String));
+    _Runtime.setField(out, 'intensity', (cast options : { @:optional var samples:Null<Float>; @:optional var intensity:Null<Float>; }).intensity);
+    _Runtime.setField(out, 'samples', (cast options : { @:optional var samples:Null<Float>; @:optional var intensity:Null<Float>; }).samples);
+  }
+
+  public static function createOuterGlowEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var alpha:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }, String>):OuterGlowEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'OuterGlowEffect' }, options]);
+    var out:EntityConstruction<OuterGlowEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ alpha: cast _Runtime.UNDEFINED, blurX: cast _Runtime.UNDEFINED, blurY: cast _Runtime.UNDEFINED, color: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, quality: cast _Runtime.UNDEFINED, sourceMode: cast _Runtime.UNDEFINED, strength: cast _Runtime.UNDEFINED } : OuterGlowEffect); }) #end));
+    initializeOuterGlowEffect(({ final __callArgument266:Dynamic = out; __callArgument266; }), ({ final __callArgument267:Dynamic = options; __callArgument267; }));
+    return cast out;
     return cast null;
   }
 
@@ -1309,8 +1778,21 @@ class _Effects {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeOuterGlowEffect(out:EntityConstruction<OuterGlowEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var alpha:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<OuterGlowEffect>->String->Void)(({ final __callArgument270:Dynamic = out; __callArgument270; }), (cast 'OuterGlowEffect' : String));
+    _Runtime.setField(out, 'alpha', (cast options : { @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).alpha);
+    _Runtime.setField(out, 'blurX', (cast options : { @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).blurX);
+    _Runtime.setField(out, 'blurY', (cast options : { @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).blurY);
+    _Runtime.setField(out, 'color', (cast options : { @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).color);
+    _Runtime.setField(out, 'quality', (cast options : { @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).quality);
+    _Runtime.setField(out, 'sourceMode', (cast options : { @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).sourceMode);
+    _Runtime.setField(out, 'strength', (cast options : { @:optional var strength:Null<Float>; @:optional var alpha:Null<Float>; @:optional var color:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<String>; }).strength);
+  }
+
   public static function registerOuterGlowEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver(({ final __callArgument54:Dynamic = state; __callArgument54; }), (cast 'OuterGlowEffect' : String), (cast _Effects.resolveOuterGlowEffectPadding__outerGlowEffect : Dynamic));
+    registerRenderEffectPaddingResolver(({ final __callArgument272:Dynamic = state; __callArgument272; }), (cast 'OuterGlowEffect' : String), (cast _Effects.resolveOuterGlowEffectPadding__outerGlowEffect : Dynamic));
   }
 
   public static function resolveOuterGlowEffectPadding__outerGlowEffect(effect:RenderEffect):RenderEffectPadding {
@@ -1318,9 +1800,12 @@ class _Effects {
     return cast null;
   }
 
-  public static function createOutlineEffect(?options:{ @:optional var threshold:Null<Float>; @:optional var thickness:Null<Float>; @:optional var color:Null<Float>; }):OutlineEffect {
+  public static function createOutlineEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var threshold:Null<Float>; @:optional var thickness:Null<Float>; @:optional var color:Null<Float>; }, String>):OutlineEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'OutlineEffect' }, options]);
+    var out:EntityConstruction<OutlineEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ color: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, thickness: cast _Runtime.UNDEFINED, threshold: cast _Runtime.UNDEFINED } : OutlineEffect); }) #end));
+    initializeOutlineEffect(({ final __callArgument274:Dynamic = out; __callArgument274; }), ({ final __callArgument275:Dynamic = options; __callArgument275; }));
+    return cast out;
     return cast null;
   }
 
@@ -1331,8 +1816,17 @@ class _Effects {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeOutlineEffect(out:EntityConstruction<OutlineEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var threshold:Null<Float>; @:optional var thickness:Null<Float>; @:optional var color:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<OutlineEffect>->String->Void)(({ final __callArgument278:Dynamic = out; __callArgument278; }), (cast 'OutlineEffect' : String));
+    _Runtime.setField(out, 'threshold', (cast options : { @:optional var color:Null<Float>; @:optional var threshold:Null<Float>; @:optional var thickness:Null<Float>; }).threshold);
+    _Runtime.setField(out, 'thickness', (cast options : { @:optional var color:Null<Float>; @:optional var threshold:Null<Float>; @:optional var thickness:Null<Float>; }).thickness);
+    _Runtime.setField(out, 'color', (cast options : { @:optional var color:Null<Float>; @:optional var threshold:Null<Float>; @:optional var thickness:Null<Float>; }).color);
+  }
+
   public static function registerOutlineEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver(({ final __callArgument56:Dynamic = state; __callArgument56; }), (cast 'OutlineEffect' : String), (cast _Effects.resolveOutlineEffectPadding__outlineEffect : Dynamic));
+    registerRenderEffectPaddingResolver(({ final __callArgument280:Dynamic = state; __callArgument280; }), (cast 'OutlineEffect' : String), (cast _Effects.resolveOutlineEffectPadding__outlineEffect : Dynamic));
   }
 
   public static function resolveOutlineEffectPadding__outlineEffect(effect:RenderEffect):RenderEffectPadding {
@@ -1340,40 +1834,90 @@ class _Effects {
     return cast null;
   }
 
-  public static function createPanniniProjectionEffect(?options:{ @:optional var compression:Null<Float>; @:optional var crop:Null<Float>; }):PanniniProjectionEffect {
+  public static function createPanniniProjectionEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var compression:Null<Float>; @:optional var crop:Null<Float>; }, String>):PanniniProjectionEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'PanniniProjectionEffect' }, options]);
+    var out:EntityConstruction<PanniniProjectionEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ compression: cast _Runtime.UNDEFINED, crop: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED } : PanniniProjectionEffect); }) #end));
+    initializePanniniProjectionEffect(({ final __callArgument282:Dynamic = out; __callArgument282; }), ({ final __callArgument283:Dynamic = options; __callArgument283; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createPixelateEffect(?options:{ @:optional var size:Null<Float>; }):PixelateEffect {
+  @:allow(flight)
+  @:keep
+  private static function initializePanniniProjectionEffect(out:EntityConstruction<PanniniProjectionEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var compression:Null<Float>; @:optional var crop:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<PanniniProjectionEffect>->String->Void)(({ final __callArgument286:Dynamic = out; __callArgument286; }), (cast 'PanniniProjectionEffect' : String));
+    _Runtime.setField(out, 'compression', (cast options : { @:optional var compression:Null<Float>; @:optional var crop:Null<Float>; }).compression);
+    _Runtime.setField(out, 'crop', (cast options : { @:optional var compression:Null<Float>; @:optional var crop:Null<Float>; }).crop);
+  }
+
+  public static function createPixelateEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var size:Null<Float>; }, String>):PixelateEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'PixelateEffect' }, options]);
+    var out:EntityConstruction<PixelateEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ kind: cast _Runtime.UNDEFINED, size: cast _Runtime.UNDEFINED } : PixelateEffect); }) #end));
+    initializePixelateEffect(({ final __callArgument288:Dynamic = out; __callArgument288; }), ({ final __callArgument289:Dynamic = options; __callArgument289; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createPosterizeEffect(?options:{ @:optional var levels:Null<Float>; }):PosterizeEffect {
+  @:allow(flight)
+  @:keep
+  private static function initializePixelateEffect(out:EntityConstruction<PixelateEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var size:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<PixelateEffect>->String->Void)(({ final __callArgument292:Dynamic = out; __callArgument292; }), (cast 'PixelateEffect' : String));
+    _Runtime.setField(out, 'size', (cast options : { @:optional var size:Null<Float>; }).size);
+  }
+
+  public static function createPosterizeEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var levels:Null<Float>; }, String>):PosterizeEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'PosterizeEffect' }, options]);
+    var out:EntityConstruction<PosterizeEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ kind: cast _Runtime.UNDEFINED, levels: cast _Runtime.UNDEFINED } : PosterizeEffect); }) #end));
+    initializePosterizeEffect(({ final __callArgument294:Dynamic = out; __callArgument294; }), ({ final __callArgument295:Dynamic = options; __callArgument295; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createRadialBlurEffect(?options:{ @:optional var centerX:Null<Float>; @:optional var centerY:Null<Float>; @:optional var strength:Null<Float>; @:optional var samples:Null<Float>; }):RadialBlurEffect {
+  @:allow(flight)
+  @:keep
+  private static function initializePosterizeEffect(out:EntityConstruction<PosterizeEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var levels:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<PosterizeEffect>->String->Void)(({ final __callArgument298:Dynamic = out; __callArgument298; }), (cast 'PosterizeEffect' : String));
+    _Runtime.setField(out, 'levels', (cast options : { @:optional var levels:Null<Float>; }).levels);
+  }
+
+  public static function createRadialBlurEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var centerX:Null<Float>; @:optional var centerY:Null<Float>; @:optional var strength:Null<Float>; @:optional var samples:Null<Float>; }, String>):RadialBlurEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'RadialBlurEffect' }, options]);
+    var out:EntityConstruction<RadialBlurEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ centerX: cast _Runtime.UNDEFINED, centerY: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, samples: cast _Runtime.UNDEFINED, strength: cast _Runtime.UNDEFINED } : RadialBlurEffect); }) #end));
+    initializeRadialBlurEffect(({ final __callArgument300:Dynamic = out; __callArgument300; }), ({ final __callArgument301:Dynamic = options; __callArgument301; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeRadialBlurEffect(out:EntityConstruction<RadialBlurEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var centerX:Null<Float>; @:optional var centerY:Null<Float>; @:optional var strength:Null<Float>; @:optional var samples:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<RadialBlurEffect>->String->Void)(({ final __callArgument304:Dynamic = out; __callArgument304; }), (cast 'RadialBlurEffect' : String));
+    _Runtime.setField(out, 'centerX', (cast options : { @:optional var centerX:Null<Float>; @:optional var centerY:Null<Float>; @:optional var samples:Null<Float>; @:optional var strength:Null<Float>; }).centerX);
+    _Runtime.setField(out, 'centerY', (cast options : { @:optional var centerX:Null<Float>; @:optional var centerY:Null<Float>; @:optional var samples:Null<Float>; @:optional var strength:Null<Float>; }).centerY);
+    _Runtime.setField(out, 'strength', (cast options : { @:optional var centerX:Null<Float>; @:optional var centerY:Null<Float>; @:optional var samples:Null<Float>; @:optional var strength:Null<Float>; }).strength);
+    _Runtime.setField(out, 'samples', (cast options : { @:optional var centerX:Null<Float>; @:optional var centerY:Null<Float>; @:optional var samples:Null<Float>; @:optional var strength:Null<Float>; }).samples);
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeRenderEffect<T:RenderEffect>(out:EntityConstruction<T>, kind:Kind):Void {
+    _Runtime.setField(out, 'kind', kind);
   }
 
   public static function computeRenderEffectCaptureGeometry(out:RenderEffectCaptureGeometry, state:RenderState, source:NodeAny, effects:flight._internal._Union2<RenderEffect, Array<RenderEffect>>):Bool {
     if ((cast !_Runtime.strictEquals(_Runtime.field((cast getNodeRuntime((cast source : Dynamic)) : NodeRuntime<flight._internal._Any>), 'traits'), Node2DTraitsKey) : Bool)) { return cast false; }
-    computeNodeRootLocalBoundsRectangle(({ final __callArgument58:Dynamic = _Effects._bounds__renderEffectCaptureGeometry; __callArgument58; }), (cast (cast source : Node2D) : Dynamic));
-    if ((cast (cast isEmptyRectangle(({ final __callArgument60:Dynamic = _Effects._bounds__renderEffectCaptureGeometry; __callArgument60; })) : Bool) : Bool)) { return cast false; }
-    (cast computeRenderEffectPadding(({ final __callArgument62:Dynamic = state; __callArgument62; }), ({ final __callArgument63:Dynamic = effects; __callArgument63; }), ({ final __callArgument64:Dynamic = _Effects._padding__renderEffectCaptureGeometry; __callArgument64; })) : RenderEffectPadding);
-    (cast (#if js _Runtime.callValue(computeRenderTargetSize, cast ([({ final __callArgument71:Dynamic = _Effects._targetSize__renderEffectCaptureGeometry; __callArgument71; }), ({ final __callArgument72:Dynamic = _Effects._bounds__renderEffectCaptureGeometry; __callArgument72; }), ({ final __callArgument73:Dynamic = _Effects._padding__renderEffectCaptureGeometry; __callArgument73; })] : Array<Dynamic>)) #else computeRenderTargetSize(({ final __callArgument68:Dynamic = _Effects._targetSize__renderEffectCaptureGeometry; __callArgument68; }), ({ final __callArgument69:Dynamic = _Effects._bounds__renderEffectCaptureGeometry; __callArgument69; }), ({ final __callArgument70:Dynamic = _Effects._padding__renderEffectCaptureGeometry; __callArgument70; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : { var width:Float; var height:Float; });
-    computeScene2DRenderTargetTransform(({ final __callArgument74:Dynamic = _Effects._captureTransform__renderEffectCaptureGeometry; __callArgument74; }), (cast source : Node2D), ({ final __callArgument75:Dynamic = _Effects._bounds__renderEffectCaptureGeometry; __callArgument75; }), (cast _Effects._padding__renderEffectCaptureGeometry.left : Float), (cast _Effects._padding__renderEffectCaptureGeometry.top : Float));
-    copyRectangle((cast out : RenderEffectCaptureGeometry).bounds, ({ final __callArgument78:Dynamic = _Effects._bounds__renderEffectCaptureGeometry; __callArgument78; }));
-    _Effects.copyPadding__renderEffectCaptureGeometry((cast out : RenderEffectCaptureGeometry).padding, ({ final __callArgument80:Dynamic = _Effects._padding__renderEffectCaptureGeometry; __callArgument80; }));
-    copyMatrix((cast out : RenderEffectCaptureGeometry).captureTransform, ({ final __callArgument82:Dynamic = _Effects._captureTransform__renderEffectCaptureGeometry; __callArgument82; }));
+    computeNodeRootLocalBoundsRectangle(({ final __callArgument306:Dynamic = _Effects._bounds__renderEffectCaptureGeometry; __callArgument306; }), (cast (cast source : Node2D) : Dynamic));
+    if ((cast (cast isEmptyRectangle(({ final __callArgument308:Dynamic = _Effects._bounds__renderEffectCaptureGeometry; __callArgument308; })) : Bool) : Bool)) { return cast false; }
+    (cast computeRenderEffectPadding(({ final __callArgument310:Dynamic = state; __callArgument310; }), ({ final __callArgument311:Dynamic = effects; __callArgument311; }), ({ final __callArgument312:Dynamic = _Effects._padding__renderEffectCaptureGeometry; __callArgument312; })) : RenderEffectPadding);
+    (cast (#if js _Runtime.callValue(computeRenderTargetSize, cast ([({ final __callArgument319:Dynamic = _Effects._targetSize__renderEffectCaptureGeometry; __callArgument319; }), ({ final __callArgument320:Dynamic = _Effects._bounds__renderEffectCaptureGeometry; __callArgument320; }), ({ final __callArgument321:Dynamic = _Effects._padding__renderEffectCaptureGeometry; __callArgument321; })] : Array<Dynamic>)) #else computeRenderTargetSize(({ final __callArgument316:Dynamic = _Effects._targetSize__renderEffectCaptureGeometry; __callArgument316; }), ({ final __callArgument317:Dynamic = _Effects._bounds__renderEffectCaptureGeometry; __callArgument317; }), ({ final __callArgument318:Dynamic = _Effects._padding__renderEffectCaptureGeometry; __callArgument318; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : { var width:Float; var height:Float; });
+    computeScene2DRenderTargetTransform(({ final __callArgument322:Dynamic = _Effects._captureTransform__renderEffectCaptureGeometry; __callArgument322; }), (cast source : Node2D), ({ final __callArgument323:Dynamic = _Effects._bounds__renderEffectCaptureGeometry; __callArgument323; }), (cast _Effects._padding__renderEffectCaptureGeometry.left : Float), (cast _Effects._padding__renderEffectCaptureGeometry.top : Float));
+    copyRectangle((cast out : RenderEffectCaptureGeometry).bounds, ({ final __callArgument326:Dynamic = _Effects._bounds__renderEffectCaptureGeometry; __callArgument326; }));
+    _Effects.copyPadding__renderEffectCaptureGeometry((cast out : RenderEffectCaptureGeometry).padding, ({ final __callArgument328:Dynamic = _Effects._padding__renderEffectCaptureGeometry; __callArgument328; }));
+    copyMatrix((cast out : RenderEffectCaptureGeometry).captureTransform, ({ final __callArgument330:Dynamic = _Effects._captureTransform__renderEffectCaptureGeometry; __callArgument330; }));
     ((cast out : RenderEffectCaptureGeometry).targetHeight = (cast _Effects._targetSize__renderEffectCaptureGeometry : { var height:Float; var width:Float; }).height);
     ((cast out : RenderEffectCaptureGeometry).targetWidth = (cast _Effects._targetSize__renderEffectCaptureGeometry : { var height:Float; var width:Float; }).width);
     return cast true;
@@ -1512,13 +2056,13 @@ class _Effects {
     var explanation:RenderEffectPaddingExplanation = cast _Runtime.UNDEFINED;
     var emitMiss:Null<flight._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>> = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(out, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Effects.writeRenderEffectPadding__renderEffectPadding(({ final __callArgument98:Dynamic = out; __callArgument98; }), ({ final __callArgument99:Dynamic = state; __callArgument99; }), ({ final __callArgument100:Dynamic = effects; __callArgument100; }), ({ final __callArgument101:Dynamic = null; __callArgument101; }), ({ final __callArgument104:Dynamic = (cast (cast getRenderStateRuntime(({ final __callArgument102:Dynamic = state; __callArgument102; })) : RenderStateRuntime) : { var registryMiss:Null<flight._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; }).registryMiss; __callArgument104; }));
+      _Effects.writeRenderEffectPadding__renderEffectPadding(({ final __callArgument346:Dynamic = out; __callArgument346; }), ({ final __callArgument347:Dynamic = state; __callArgument347; }), ({ final __callArgument348:Dynamic = effects; __callArgument348; }), ({ final __callArgument349:Dynamic = null; __callArgument349; }), ({ final __callArgument352:Dynamic = (cast (cast getRenderStateRuntime(({ final __callArgument350:Dynamic = state; __callArgument350; })) : RenderStateRuntime) : { var registryMiss:Null<flight._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; }).registryMiss; __callArgument352; }));
       return cast out;
     }
     list = ((cast _Runtime.isArray(effects) : Bool) ? (cast effects : Dynamic) : (cast cast ([effects] : Array<Dynamic>) : Dynamic));
-    explanation = (cast explainRenderEffectPadding(({ final __callArgument112:Dynamic = state; __callArgument112; }), ({ final __callArgument113:Dynamic = list; __callArgument113; })) : RenderEffectPaddingExplanation);
-    emitMiss = (cast (cast getRenderStateRuntime(({ final __callArgument116:Dynamic = state; __callArgument116; })) : RenderStateRuntime) : { var registryMiss:Null<flight._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; }).registryMiss;
-    if ((cast !_Runtime.strictEquals(emitMiss, null) : Bool)) { for (kind in _Runtime.iterable((cast explanation : RenderEffectPaddingExplanation).missingKinds)) {   (cast emitMiss : RenderRegistry->String->Void)(({ final __callArgument120:Dynamic = RenderRegistry.EffectPaddingResolver; __callArgument120; }), (cast kind : String)); } }
+    explanation = (cast explainRenderEffectPadding(({ final __callArgument360:Dynamic = state; __callArgument360; }), ({ final __callArgument361:Dynamic = list; __callArgument361; })) : RenderEffectPaddingExplanation);
+    emitMiss = (cast (cast getRenderStateRuntime(({ final __callArgument364:Dynamic = state; __callArgument364; })) : RenderStateRuntime) : { var registryMiss:Null<flight._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; }).registryMiss;
+    if ((cast !_Runtime.strictEquals(emitMiss, null) : Bool)) { for (kind in _Runtime.iterable((cast explanation : RenderEffectPaddingExplanation).missingKinds)) {   (cast emitMiss : RenderRegistry->String->Void)(({ final __callArgument368:Dynamic = RenderRegistry.EffectPaddingResolver; __callArgument368; }), (cast kind : String)); } }
     return cast (cast explanation : RenderEffectPaddingExplanation).padding;
     return cast null;
   }
@@ -1528,7 +2072,7 @@ class _Effects {
     var padding:RenderEffectPadding = cast _Runtime.UNDEFINED;
     missingKinds = (cast cast ([] : Array<Dynamic>));
     padding = (cast { bottom: 0.0, left: 0.0, right: 0.0, top: 0.0 });
-    _Effects.writeRenderEffectPadding__renderEffectPadding(({ final __callArgument122:Dynamic = padding; __callArgument122; }), ({ final __callArgument123:Dynamic = state; __callArgument123; }), ({ final __callArgument124:Dynamic = effects; __callArgument124; }), ({ final __callArgument125:Dynamic = missingKinds; __callArgument125; }), ({ final __callArgument126:Dynamic = null; __callArgument126; }));
+    _Effects.writeRenderEffectPadding__renderEffectPadding(({ final __callArgument370:Dynamic = padding; __callArgument370; }), ({ final __callArgument371:Dynamic = state; __callArgument371; }), ({ final __callArgument372:Dynamic = effects; __callArgument372; }), ({ final __callArgument373:Dynamic = missingKinds; __callArgument373; }), ({ final __callArgument374:Dynamic = null; __callArgument374; }));
     return cast { missingKinds: missingKinds, padding: padding, status: ((cast _Runtime.strictEquals(_Runtime.field(missingKinds, 'length'), 0.0) : Bool) ? (cast 'complete' : Dynamic) : (cast 'missing-resolver' : Dynamic)) };
     return cast null;
   }
@@ -1556,13 +2100,13 @@ class _Effects {
   public static function registerRenderEffectPaddingResolver(state:RenderState, kind:Kind, resolver:Null<RenderEffectPaddingResolver>):Void {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var table:Null<KeyedTable<RenderEffectPaddingResolver>> = cast _Runtime.UNDEFINED;
-    runtime = (cast getRenderStateRuntime(({ final __callArgument132:Dynamic = state; __callArgument132; })) : RenderStateRuntime);
+    runtime = (cast getRenderStateRuntime(({ final __callArgument380:Dynamic = state; __callArgument380; })) : RenderStateRuntime);
     table = (cast runtime.registries : { @:optional var effectPaddingResolvers:Null<KeyedTable<RenderEffectPaddingResolver>>; }).effectPaddingResolvers;
     if ((cast _Runtime.strictEquals(resolver, null) : Bool)) {
-      if ((cast !_Runtime.strictEquals(table, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast runtime.registries : { @:optional var effectPaddingResolvers:Null<KeyedTable<RenderEffectPaddingResolver>>; }).effectPaddingResolvers = cast ((cast withoutRegistryTableEntry((cast table : Dynamic), (cast kind : String)) : KeyedTable<RenderEffectPaddingResolver>) : Null<KeyedTable<RenderEffectPaddingResolver>>)); }
+      if ((cast !_Runtime.strictEquals(table, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast runtime.registries : { @:optional var effectPaddingResolvers:Null<KeyedTable<RenderEffectPaddingResolver>>; }).effectPaddingResolvers = cast ((cast withoutRegistryTableEntry((cast table : Dynamic), (cast kind : String)) : { >KeyedTable<RenderEffectPaddingResolver>, >Entity, }) : Null<KeyedTable<RenderEffectPaddingResolver>>)); }
       return;
     }
-    ((cast runtime.registries : { @:optional var effectPaddingResolvers:Null<KeyedTable<RenderEffectPaddingResolver>>; }).effectPaddingResolvers = cast ((cast withRegistryTableEntry((cast _Runtime.coalesce(table, function():Dynamic return cast (cast createKeyedTable((cast 'RenderEffectPaddingResolver' : String), (cast 'Zero' : String)) : KeyedTable<RenderEffectPaddingResolver>)) : Dynamic), (cast kind : String), ({ final __callArgument134:Dynamic = resolver; __callArgument134; })) : KeyedTable<RenderEffectPaddingResolver>) : Null<KeyedTable<RenderEffectPaddingResolver>>));
+    ((cast runtime.registries : { @:optional var effectPaddingResolvers:Null<KeyedTable<RenderEffectPaddingResolver>>; }).effectPaddingResolvers = cast ((cast withRegistryTableEntry((cast _Runtime.coalesce(table, function():Dynamic return cast (cast createKeyedTable((cast 'RenderEffectPaddingResolver' : String), (cast 'Zero' : String)) : { >KeyedTable<RenderEffectPaddingResolver>, >Entity, })) : Dynamic), (cast kind : String), ({ final __callArgument382:Dynamic = resolver; __callArgument382; })) : { >KeyedTable<RenderEffectPaddingResolver>, >Entity, }) : Null<KeyedTable<RenderEffectPaddingResolver>>));
   }
 
   public static function writeRenderEffectPadding__renderEffectPadding(out:RenderEffectPadding, state:RenderState, effects:flight._internal._Union2<RenderEffect, Array<RenderEffect>>, missingKinds:Null<Array<Kind>>, emitMiss:Null<RenderRegistry->Kind->Void>):Void {
@@ -1575,7 +2119,7 @@ class _Effects {
     var top:Float = cast _Runtime.UNDEFINED;
     list = ((cast _Runtime.isArray(effects) : Bool) ? (cast effects : Dynamic) : (cast null : Dynamic));
     length = ((cast _Runtime.strictEquals(list, null) : Bool) ? (cast 1.0 : Dynamic) : (cast _Runtime.field(list, 'length') : Dynamic));
-    entries = ({ final __structural138 = (cast (cast (cast getRenderStateRuntime(({ final __callArgument136:Dynamic = state; __callArgument136; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : { @:optional var effectPaddingResolvers:Null<KeyedTable<RenderEffectPaddingResolver>>; }).effectPaddingResolvers; __structural138 == null ? _Runtime.UNDEFINED : (cast __structural138 : { var entries:flight._internal._Map<String, RegistryTableEntry<RenderEffectPaddingResolver>>; }).entries; });
+    entries = ({ final __structural386 = (cast (cast (cast getRenderStateRuntime(({ final __callArgument384:Dynamic = state; __callArgument384; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : { @:optional var effectPaddingResolvers:Null<KeyedTable<RenderEffectPaddingResolver>>; }).effectPaddingResolvers; __structural386 == null ? _Runtime.UNDEFINED : (cast __structural386 : { var entries:flight._internal._Map<String, RegistryTableEntry<RenderEffectPaddingResolver>>; }).entries; });
     bottom = 0.0;
     left = 0.0;
     right = 0.0;
@@ -1584,16 +2128,16 @@ class _Effects {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast length : Float)) : Bool)) {
         var effect:RenderEffect = (cast ((cast _Runtime.strictEquals(list, null) : Bool) ? (cast effects : Dynamic) : (cast flight._internal._StaticIndex.readArray(list, index) : Dynamic)) : RenderEffect);
-        var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:RenderEffectPaddingResolver; }>> = ({ final __collection139:Dynamic = entries; __collection139 == null ? _Runtime.UNDEFINED : ((cast __collection139 : flight._internal._Map<String, RegistryTableEntry<RenderEffectPaddingResolver>>).get((cast _Runtime.field(effect, 'kind')))); });
-        if ((cast !_Runtime.strictEquals(({ final __structural140 = entry; __structural140 == null ? _Runtime.UNDEFINED : (cast __structural140 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) {
-          if ((cast !(cast (cast _Effects.hasEarlierKind__renderEffectPadding(({ final __callArgument141:Dynamic = list; __callArgument141; }), (cast index : Float), (cast _Runtime.field(effect, 'kind') : String)) : Bool) : Bool) : Bool)) {
+        var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:RenderEffectPaddingResolver; }>> = ({ final __collection387:Dynamic = entries; __collection387 == null ? _Runtime.UNDEFINED : ((cast __collection387 : flight._internal._Map<String, RegistryTableEntry<RenderEffectPaddingResolver>>).get((cast _Runtime.field(effect, 'kind')))); });
+        if ((cast !_Runtime.strictEquals(({ final __structural388 = entry; __structural388 == null ? _Runtime.UNDEFINED : (cast __structural388 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) {
+          if ((cast !(cast (cast _Effects.hasEarlierKind__renderEffectPadding(({ final __callArgument389:Dynamic = list; __callArgument389; }), (cast index : Float), (cast _Runtime.field(effect, 'kind') : String)) : Bool) : Bool) : Bool)) {
             _Runtime.callOptionalProperty(missingKinds, 'push', cast ([_Runtime.field(effect, 'kind')] : Array<Dynamic>));
             _Runtime.callOptionalValue(emitMiss, cast ([RenderRegistry.EffectPaddingResolver, _Runtime.field(effect, 'kind')] : Array<Dynamic>));
           }
           index++;
           continue;
         }
-        var padding:RenderEffectPadding = (cast entry : { var state:String; var value:RenderEffectPaddingResolver; }).value(({ final __callArgument143:Dynamic = effect; __callArgument143; }));
+        var padding:RenderEffectPadding = (cast entry : { var state:String; var value:RenderEffectPaddingResolver; }).value(({ final __callArgument391:Dynamic = effect; __callArgument391; }));
         (bottom = cast ((bottom + (cast _Effects.sanitizePadding__renderEffectPadding((cast padding.bottom : Float)) : Float)) : Dynamic));
         (left = cast ((left + (cast _Effects.sanitizePadding__renderEffectPadding((cast padding.left : Float)) : Float)) : Dynamic));
         (right = cast ((right + (cast _Effects.sanitizePadding__renderEffectPadding((cast padding.right : Float)) : Float)) : Dynamic));
@@ -1627,7 +2171,7 @@ class _Effects {
 
   public static function validateRenderEffectList(effects:Array<RenderEffect>, available:Array<RenderEffectInput>):Null<RenderEffectInput> {
     for (effect in _Runtime.iterable(effects)) {
-      var required:Array<RenderEffectInput> = (cast getRenderEffectInputs(({ final __callArgument146:Dynamic = effect; __callArgument146; })) : Array<RenderEffectInput>);
+      var required:Array<RenderEffectInput> = (cast getRenderEffectInputs(({ final __callArgument394:Dynamic = effect; __callArgument394; })) : Array<RenderEffectInput>);
       for (input in _Runtime.iterable(required)) {
         if ((cast !(cast _Runtime.includes(available, input) : Bool) : Bool)) {
           return cast input;
@@ -1638,46 +2182,125 @@ class _Effects {
     return cast null;
   }
 
-  public static function createScanlinesEffect(?options:{ @:optional var count:Null<Float>; @:optional var intensity:Null<Float>; }):ScanlinesEffect {
+  public static function createScanlinesEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var count:Null<Float>; @:optional var intensity:Null<Float>; }, String>):ScanlinesEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'ScanlinesEffect' }, options]);
+    var out:EntityConstruction<ScanlinesEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ count: cast _Runtime.UNDEFINED, intensity: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED } : ScanlinesEffect); }) #end));
+    initializeScanlinesEffect(({ final __callArgument398:Dynamic = out; __callArgument398; }), ({ final __callArgument399:Dynamic = options; __callArgument399; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createScreenSpaceFogEffect(?options:{ @:optional var color:Null<Float>; @:optional var near:Null<Float>; @:optional var far:Null<Float>; @:optional var density:Null<Float>; }):ScreenSpaceFogEffect {
+  @:allow(flight)
+  @:keep
+  private static function initializeScanlinesEffect(out:EntityConstruction<ScanlinesEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var count:Null<Float>; @:optional var intensity:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<ScanlinesEffect>->String->Void)(({ final __callArgument402:Dynamic = out; __callArgument402; }), (cast 'ScanlinesEffect' : String));
+    _Runtime.setField(out, 'count', (cast options : { @:optional var count:Null<Float>; @:optional var intensity:Null<Float>; }).count);
+    _Runtime.setField(out, 'intensity', (cast options : { @:optional var count:Null<Float>; @:optional var intensity:Null<Float>; }).intensity);
+  }
+
+  public static function createScreenSpaceFogEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var color:Null<Float>; @:optional var near:Null<Float>; @:optional var far:Null<Float>; @:optional var density:Null<Float>; }, String>):ScreenSpaceFogEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'ScreenSpaceFogEffect' }, options]);
+    var out:EntityConstruction<ScreenSpaceFogEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ color: cast _Runtime.UNDEFINED, density: cast _Runtime.UNDEFINED, far: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, near: cast _Runtime.UNDEFINED } : ScreenSpaceFogEffect); }) #end));
+    initializeScreenSpaceFogEffect(({ final __callArgument404:Dynamic = out; __callArgument404; }), ({ final __callArgument405:Dynamic = options; __callArgument405; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createSharpenEffect(?options:{ @:optional var amount:Null<Float>; }):SharpenEffect {
+  @:allow(flight)
+  @:keep
+  private static function initializeScreenSpaceFogEffect(out:EntityConstruction<ScreenSpaceFogEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var color:Null<Float>; @:optional var near:Null<Float>; @:optional var far:Null<Float>; @:optional var density:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<ScreenSpaceFogEffect>->String->Void)(({ final __callArgument408:Dynamic = out; __callArgument408; }), (cast 'ScreenSpaceFogEffect' : String));
+    _Runtime.setField(out, 'color', (cast options : { @:optional var far:Null<Float>; @:optional var near:Null<Float>; @:optional var color:Null<Float>; @:optional var density:Null<Float>; }).color);
+    _Runtime.setField(out, 'near', (cast options : { @:optional var far:Null<Float>; @:optional var near:Null<Float>; @:optional var color:Null<Float>; @:optional var density:Null<Float>; }).near);
+    _Runtime.setField(out, 'far', (cast options : { @:optional var far:Null<Float>; @:optional var near:Null<Float>; @:optional var color:Null<Float>; @:optional var density:Null<Float>; }).far);
+    _Runtime.setField(out, 'density', (cast options : { @:optional var far:Null<Float>; @:optional var near:Null<Float>; @:optional var color:Null<Float>; @:optional var density:Null<Float>; }).density);
+  }
+
+  public static function createSharpenEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var amount:Null<Float>; }, String>):SharpenEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'SharpenEffect' }, options]);
+    var out:EntityConstruction<SharpenEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ amount: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED } : SharpenEffect); }) #end));
+    initializeSharpenEffect(({ final __callArgument410:Dynamic = out; __callArgument410; }), ({ final __callArgument411:Dynamic = options; __callArgument411; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createSketchEffect(?options:{ @:optional var strength:Null<Float>; }):SketchEffect {
+  @:allow(flight)
+  @:keep
+  private static function initializeSharpenEffect(out:EntityConstruction<SharpenEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var amount:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<SharpenEffect>->String->Void)(({ final __callArgument414:Dynamic = out; __callArgument414; }), (cast 'SharpenEffect' : String));
+    _Runtime.setField(out, 'amount', (cast options : { @:optional var amount:Null<Float>; }).amount);
+  }
+
+  public static function createSketchEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var strength:Null<Float>; }, String>):SketchEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'SketchEffect' }, options]);
+    var out:EntityConstruction<SketchEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ kind: cast _Runtime.UNDEFINED, strength: cast _Runtime.UNDEFINED } : SketchEffect); }) #end));
+    initializeSketchEffect(({ final __callArgument416:Dynamic = out; __callArgument416; }), ({ final __callArgument417:Dynamic = options; __callArgument417; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createSmaaEffect(?options:{ @:optional var threshold:Null<Float>; }):SmaaEffect {
+  @:allow(flight)
+  @:keep
+  private static function initializeSketchEffect(out:EntityConstruction<SketchEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var strength:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<SketchEffect>->String->Void)(({ final __callArgument420:Dynamic = out; __callArgument420; }), (cast 'SketchEffect' : String));
+    _Runtime.setField(out, 'strength', (cast options : { @:optional var strength:Null<Float>; }).strength);
+  }
+
+  public static function createSmaaEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var threshold:Null<Float>; }, String>):SmaaEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'SmaaEffect' }, options]);
+    var out:EntityConstruction<SmaaEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ kind: cast _Runtime.UNDEFINED, threshold: cast _Runtime.UNDEFINED } : SmaaEffect); }) #end));
+    initializeSmaaEffect(({ final __callArgument422:Dynamic = out; __callArgument422; }), ({ final __callArgument423:Dynamic = options; __callArgument423; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createSsaoEffect(?options:{ @:optional var radius:Null<Float>; @:optional var intensity:Null<Float>; @:optional var bias:Null<Float>; @:optional var samples:Null<Float>; }):SsaoEffect {
+  @:allow(flight)
+  @:keep
+  private static function initializeSmaaEffect(out:EntityConstruction<SmaaEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var threshold:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<SmaaEffect>->String->Void)(({ final __callArgument426:Dynamic = out; __callArgument426; }), (cast 'SmaaEffect' : String));
+    _Runtime.setField(out, 'threshold', (cast options : { @:optional var threshold:Null<Float>; }).threshold);
+  }
+
+  public static function createSsaoEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var radius:Null<Float>; @:optional var intensity:Null<Float>; @:optional var bias:Null<Float>; @:optional var samples:Null<Float>; }, String>):SsaoEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'SsaoEffect' }, options]);
+    var out:EntityConstruction<SsaoEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ bias: cast _Runtime.UNDEFINED, intensity: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, radius: cast _Runtime.UNDEFINED, samples: cast _Runtime.UNDEFINED } : SsaoEffect); }) #end));
+    initializeSsaoEffect(({ final __callArgument428:Dynamic = out; __callArgument428; }), ({ final __callArgument429:Dynamic = options; __callArgument429; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createSsrEffect(?options:{ @:optional var maxDistance:Null<Float>; @:optional var resolution:Null<Float>; @:optional var steps:Null<Float>; }):SsrEffect {
+  @:allow(flight)
+  @:keep
+  private static function initializeSsaoEffect(out:EntityConstruction<SsaoEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var radius:Null<Float>; @:optional var intensity:Null<Float>; @:optional var bias:Null<Float>; @:optional var samples:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<SsaoEffect>->String->Void)(({ final __callArgument432:Dynamic = out; __callArgument432; }), (cast 'SsaoEffect' : String));
+    _Runtime.setField(out, 'radius', (cast options : { @:optional var radius:Null<Float>; @:optional var samples:Null<Float>; @:optional var intensity:Null<Float>; @:optional var bias:Null<Float>; }).radius);
+    _Runtime.setField(out, 'intensity', (cast options : { @:optional var radius:Null<Float>; @:optional var samples:Null<Float>; @:optional var intensity:Null<Float>; @:optional var bias:Null<Float>; }).intensity);
+    _Runtime.setField(out, 'bias', (cast options : { @:optional var radius:Null<Float>; @:optional var samples:Null<Float>; @:optional var intensity:Null<Float>; @:optional var bias:Null<Float>; }).bias);
+    _Runtime.setField(out, 'samples', (cast options : { @:optional var radius:Null<Float>; @:optional var samples:Null<Float>; @:optional var intensity:Null<Float>; @:optional var bias:Null<Float>; }).samples);
+  }
+
+  public static function createSsrEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var maxDistance:Null<Float>; @:optional var resolution:Null<Float>; @:optional var steps:Null<Float>; }, String>):SsrEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'SsrEffect' }, options]);
+    var out:EntityConstruction<SsrEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ kind: cast _Runtime.UNDEFINED, maxDistance: cast _Runtime.UNDEFINED, resolution: cast _Runtime.UNDEFINED, steps: cast _Runtime.UNDEFINED } : SsrEffect); }) #end));
+    initializeSsrEffect(({ final __callArgument434:Dynamic = out; __callArgument434; }), ({ final __callArgument435:Dynamic = options; __callArgument435; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeSsrEffect(out:EntityConstruction<SsrEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var maxDistance:Null<Float>; @:optional var resolution:Null<Float>; @:optional var steps:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<SsrEffect>->String->Void)(({ final __callArgument438:Dynamic = out; __callArgument438; }), (cast 'SsrEffect' : String));
+    _Runtime.setField(out, 'maxDistance', (cast options : { @:optional var maxDistance:Null<Float>; @:optional var resolution:Null<Float>; @:optional var steps:Null<Float>; }).maxDistance);
+    _Runtime.setField(out, 'resolution', (cast options : { @:optional var maxDistance:Null<Float>; @:optional var resolution:Null<Float>; @:optional var steps:Null<Float>; }).resolution);
+    _Runtime.setField(out, 'steps', (cast options : { @:optional var maxDistance:Null<Float>; @:optional var resolution:Null<Float>; @:optional var steps:Null<Float>; }).steps);
   }
 
   public static function computeCrtMaskParams(resolution:Float, curvature:Float, out:Array<Float>):Void {
@@ -1754,15 +2377,28 @@ class _Effects {
     return cast null;
   }
 
-  public static function createTaaEffect(?options:{ @:optional var feedback:Null<Float>; }):TaaEffect {
+  public static function createTaaEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var feedback:Null<Float>; }, String>):TaaEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'TaaEffect' }, options]);
+    var out:EntityConstruction<TaaEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ feedback: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED } : TaaEffect); }) #end));
+    initializeTaaEffect(({ final __callArgument440:Dynamic = out; __callArgument440; }), ({ final __callArgument441:Dynamic = options; __callArgument441; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createTiltShiftEffect(?options:{ @:optional var center:Null<Float>; @:optional var width:Null<Float>; @:optional var blur:Null<Float>; }):TiltShiftEffect {
+  @:allow(flight)
+  @:keep
+  private static function initializeTaaEffect(out:EntityConstruction<TaaEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var feedback:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<TaaEffect>->String->Void)(({ final __callArgument444:Dynamic = out; __callArgument444; }), (cast 'TaaEffect' : String));
+    _Runtime.setField(out, 'feedback', (cast options : { @:optional var feedback:Null<Float>; }).feedback);
+  }
+
+  public static function createTiltShiftEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var center:Null<Float>; @:optional var width:Null<Float>; @:optional var blur:Null<Float>; }, String>):TiltShiftEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'TiltShiftEffect' }, options]);
+    var out:EntityConstruction<TiltShiftEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ blur: cast _Runtime.UNDEFINED, center: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, width: cast _Runtime.UNDEFINED } : TiltShiftEffect); }) #end));
+    initializeTiltShiftEffect(({ final __callArgument446:Dynamic = out; __callArgument446; }), ({ final __callArgument447:Dynamic = options; __callArgument447; }));
+    return cast out;
     return cast null;
   }
 
@@ -1773,8 +2409,17 @@ class _Effects {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeTiltShiftEffect(out:EntityConstruction<TiltShiftEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var center:Null<Float>; @:optional var width:Null<Float>; @:optional var blur:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<TiltShiftEffect>->String->Void)(({ final __callArgument450:Dynamic = out; __callArgument450; }), (cast 'TiltShiftEffect' : String));
+    _Runtime.setField(out, 'center', (cast options : { @:optional var width:Null<Float>; @:optional var center:Null<Float>; @:optional var blur:Null<Float>; }).center);
+    _Runtime.setField(out, 'width', (cast options : { @:optional var width:Null<Float>; @:optional var center:Null<Float>; @:optional var blur:Null<Float>; }).width);
+    _Runtime.setField(out, 'blur', (cast options : { @:optional var width:Null<Float>; @:optional var center:Null<Float>; @:optional var blur:Null<Float>; }).blur);
+  }
+
   public static function registerTiltShiftEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver(({ final __callArgument150:Dynamic = state; __callArgument150; }), (cast 'TiltShiftEffect' : String), (cast _Effects.resolveTiltShiftEffectPadding__tiltShiftEffect : Dynamic));
+    registerRenderEffectPaddingResolver(({ final __callArgument452:Dynamic = state; __callArgument452; }), (cast 'TiltShiftEffect' : String), (cast _Effects.resolveTiltShiftEffectPadding__tiltShiftEffect : Dynamic));
   }
 
   public static function resolveTiltShiftEffectPadding__tiltShiftEffect(effect:RenderEffect):RenderEffectPadding {
@@ -1782,10 +2427,22 @@ class _Effects {
     return cast null;
   }
 
-  public static function createToneMapEffect(?options:{ @:optional var operator_:Null<ToneMapOperator>; @:optional var exposure:Null<Float>; @:optional var white:Null<Float>; }):ToneMapEffect {
+  public static function createToneMapEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var operator_:Null<ToneMapOperator>; @:optional var exposure:Null<Float>; @:optional var white:Null<Float>; }, String>):ToneMapEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'ToneMapEffect' }, options]);
+    var out:EntityConstruction<ToneMapEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if (flight_struct_typedef || js) ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ exposure: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, operator_: cast _Runtime.UNDEFINED, white: cast _Runtime.UNDEFINED } : ToneMapEffect); }) #end));
+    initializeToneMapEffect(({ final __callArgument454:Dynamic = out; __callArgument454; }), ({ final __callArgument455:Dynamic = options; __callArgument455; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeToneMapEffect(out:EntityConstruction<ToneMapEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var operator_:Null<ToneMapOperator>; @:optional var exposure:Null<Float>; @:optional var white:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<ToneMapEffect>->String->Void)(({ final __callArgument458:Dynamic = out; __callArgument458; }), (cast 'ToneMapEffect' : String));
+    _Runtime.setField(out, 'operator', _Runtime.field(options, 'operator'));
+    _Runtime.setField(out, 'exposure', (cast options : { @:optional var exposure:Null<Float>; @:optional var operator_:Null<String>; @:optional var white:Null<Float>; }).exposure);
+    _Runtime.setField(out, 'white', (cast options : { @:optional var exposure:Null<Float>; @:optional var operator_:Null<String>; @:optional var white:Null<Float>; }).white);
   }
 
   public static function computeAcesToneMap(x:Float):Float {
@@ -1809,8 +2466,8 @@ class _Effects {
     var val:Float = cast _Runtime.UNDEFINED;
     var log:Float = cast _Runtime.UNDEFINED;
     var normalized:Float = cast _Runtime.UNDEFINED;
-    min_ev = _Runtime.coalesce(({ final __structural152 = options; __structural152 == null ? _Runtime.UNDEFINED : (cast __structural152 : { @:optional var minEv:Null<Float>; }).minEv; }), function():Dynamic return cast -12.47393);
-    max_ev = _Runtime.coalesce(({ final __structural153 = options; __structural153 == null ? _Runtime.UNDEFINED : (cast __structural153 : { @:optional var maxEv:Null<Float>; }).maxEv; }), function():Dynamic return cast 4.026069);
+    min_ev = _Runtime.coalesce(({ final __structural460 = options; __structural460 == null ? _Runtime.UNDEFINED : (cast __structural460 : { @:optional var minEv:Null<Float>; }).minEv; }), function():Dynamic return cast -12.47393);
+    max_ev = _Runtime.coalesce(({ final __structural461 = options; __structural461 == null ? _Runtime.UNDEFINED : (cast __structural461 : { @:optional var maxEv:Null<Float>; }).maxEv; }), function():Dynamic return cast 4.026069);
     val = HxMath.max(1e-10, x);
     log = HxMath.max(min_ev, HxMath.min(max_ev, _Runtime.log2(val)));
     normalized = ((log - min_ev) / (max_ev - min_ev));
@@ -1841,12 +2498,12 @@ class _Effects {
     var T:Float = cast _Runtime.UNDEFINED;
     var L:Float = cast _Runtime.UNDEFINED;
     var S:Float = cast _Runtime.UNDEFINED;
-    maxBrightness = _Runtime.coalesce(({ final __typedStruct154 = options; __typedStruct154 == null ? _Runtime.UNDEFINED : __typedStruct154.maxBrightness; }), function():Dynamic return cast 1.0);
-    contrast = _Runtime.coalesce(({ final __typedStruct155 = options; __typedStruct155 == null ? _Runtime.UNDEFINED : __typedStruct155.contrast; }), function():Dynamic return cast 1.0);
-    linearStart = _Runtime.coalesce(({ final __typedStruct156 = options; __typedStruct156 == null ? _Runtime.UNDEFINED : __typedStruct156.linearStart; }), function():Dynamic return cast 0.22);
-    linearLength = _Runtime.coalesce(({ final __typedStruct157 = options; __typedStruct157 == null ? _Runtime.UNDEFINED : __typedStruct157.linearLength; }), function():Dynamic return cast 0.4);
-    blackTighten = _Runtime.coalesce(({ final __typedStruct158 = options; __typedStruct158 == null ? _Runtime.UNDEFINED : __typedStruct158.blackTighten; }), function():Dynamic return cast 1.33);
-    pedestal = _Runtime.coalesce(({ final __typedStruct159 = options; __typedStruct159 == null ? _Runtime.UNDEFINED : __typedStruct159.pedestal; }), function():Dynamic return cast 0.0);
+    maxBrightness = _Runtime.coalesce(({ final __typedStruct462 = options; __typedStruct462 == null ? _Runtime.UNDEFINED : __typedStruct462.maxBrightness; }), function():Dynamic return cast 1.0);
+    contrast = _Runtime.coalesce(({ final __typedStruct463 = options; __typedStruct463 == null ? _Runtime.UNDEFINED : __typedStruct463.contrast; }), function():Dynamic return cast 1.0);
+    linearStart = _Runtime.coalesce(({ final __typedStruct464 = options; __typedStruct464 == null ? _Runtime.UNDEFINED : __typedStruct464.linearStart; }), function():Dynamic return cast 0.22);
+    linearLength = _Runtime.coalesce(({ final __typedStruct465 = options; __typedStruct465 == null ? _Runtime.UNDEFINED : __typedStruct465.linearLength; }), function():Dynamic return cast 0.4);
+    blackTighten = _Runtime.coalesce(({ final __typedStruct466 = options; __typedStruct466 == null ? _Runtime.UNDEFINED : __typedStruct466.blackTighten; }), function():Dynamic return cast 1.33);
+    pedestal = _Runtime.coalesce(({ final __typedStruct467 = options; __typedStruct467 == null ? _Runtime.UNDEFINED : __typedStruct467.pedestal; }), function():Dynamic return cast 0.0);
     l0 = (((maxBrightness - linearStart) * linearLength) / contrast);
     L0 = (linearStart - (linearStart / contrast));
     L1 = (linearStart + ((1.0 - linearStart) / contrast));
@@ -1931,21 +2588,60 @@ class _Effects {
     return cast null;
   }
 
-  public static function createVignetteEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var radius:Null<Float>; @:optional var softness:Null<Float>; @:optional var color:Null<Float>; }):VignetteEffect {
+  public static function createVignetteEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var intensity:Null<Float>; @:optional var radius:Null<Float>; @:optional var softness:Null<Float>; @:optional var color:Null<Float>; }, String>):VignetteEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'VignetteEffect' }, options]);
+    var out:EntityConstruction<VignetteEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ color: cast _Runtime.UNDEFINED, intensity: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, radius: cast _Runtime.UNDEFINED, softness: cast _Runtime.UNDEFINED } : VignetteEffect); }) #end));
+    initializeVignetteEffect(({ final __callArgument468:Dynamic = out; __callArgument468; }), ({ final __callArgument469:Dynamic = options; __callArgument469; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createVolumetricLightEffect(?options:{ @:optional var density:Null<Float>; @:optional var lightColor:Null<Float>; @:optional var lightX:Null<Float>; @:optional var lightY:Null<Float>; @:optional var samples:Null<Float>; @:optional var scattering:Null<Float>; }):VolumetricLightEffect {
+  @:allow(flight)
+  @:keep
+  private static function initializeVignetteEffect(out:EntityConstruction<VignetteEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var intensity:Null<Float>; @:optional var radius:Null<Float>; @:optional var softness:Null<Float>; @:optional var color:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<VignetteEffect>->String->Void)(({ final __callArgument472:Dynamic = out; __callArgument472; }), (cast 'VignetteEffect' : String));
+    _Runtime.setField(out, 'intensity', (cast options : { @:optional var radius:Null<Float>; @:optional var intensity:Null<Float>; @:optional var color:Null<Float>; @:optional var softness:Null<Float>; }).intensity);
+    _Runtime.setField(out, 'radius', (cast options : { @:optional var radius:Null<Float>; @:optional var intensity:Null<Float>; @:optional var color:Null<Float>; @:optional var softness:Null<Float>; }).radius);
+    _Runtime.setField(out, 'softness', (cast options : { @:optional var radius:Null<Float>; @:optional var intensity:Null<Float>; @:optional var color:Null<Float>; @:optional var softness:Null<Float>; }).softness);
+    _Runtime.setField(out, 'color', (cast options : { @:optional var radius:Null<Float>; @:optional var intensity:Null<Float>; @:optional var color:Null<Float>; @:optional var softness:Null<Float>; }).color);
+  }
+
+  public static function createVolumetricLightEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var density:Null<Float>; @:optional var lightColor:Null<Float>; @:optional var lightX:Null<Float>; @:optional var lightY:Null<Float>; @:optional var samples:Null<Float>; @:optional var scattering:Null<Float>; }, String>):VolumetricLightEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'VolumetricLightEffect' }, options]);
+    var out:EntityConstruction<VolumetricLightEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ density: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, lightColor: cast _Runtime.UNDEFINED, lightX: cast _Runtime.UNDEFINED, lightY: cast _Runtime.UNDEFINED, samples: cast _Runtime.UNDEFINED, scattering: cast _Runtime.UNDEFINED } : VolumetricLightEffect); }) #end));
+    initializeVolumetricLightEffect(({ final __callArgument474:Dynamic = out; __callArgument474; }), ({ final __callArgument475:Dynamic = options; __callArgument475; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createWhiteBalanceEffect(?options:{ @:optional var temperature:Null<Float>; @:optional var tint:Null<Float>; }):WhiteBalanceEffect {
+  @:allow(flight)
+  @:keep
+  private static function initializeVolumetricLightEffect(out:EntityConstruction<VolumetricLightEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var density:Null<Float>; @:optional var lightColor:Null<Float>; @:optional var lightX:Null<Float>; @:optional var lightY:Null<Float>; @:optional var samples:Null<Float>; @:optional var scattering:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<VolumetricLightEffect>->String->Void)(({ final __callArgument478:Dynamic = out; __callArgument478; }), (cast 'VolumetricLightEffect' : String));
+    _Runtime.setField(out, 'density', (cast options : { @:optional var samples:Null<Float>; @:optional var density:Null<Float>; @:optional var lightColor:Null<Float>; @:optional var lightX:Null<Float>; @:optional var lightY:Null<Float>; @:optional var scattering:Null<Float>; }).density);
+    _Runtime.setField(out, 'lightColor', (cast options : { @:optional var samples:Null<Float>; @:optional var density:Null<Float>; @:optional var lightColor:Null<Float>; @:optional var lightX:Null<Float>; @:optional var lightY:Null<Float>; @:optional var scattering:Null<Float>; }).lightColor);
+    _Runtime.setField(out, 'lightX', (cast options : { @:optional var samples:Null<Float>; @:optional var density:Null<Float>; @:optional var lightColor:Null<Float>; @:optional var lightX:Null<Float>; @:optional var lightY:Null<Float>; @:optional var scattering:Null<Float>; }).lightX);
+    _Runtime.setField(out, 'lightY', (cast options : { @:optional var samples:Null<Float>; @:optional var density:Null<Float>; @:optional var lightColor:Null<Float>; @:optional var lightX:Null<Float>; @:optional var lightY:Null<Float>; @:optional var scattering:Null<Float>; }).lightY);
+    _Runtime.setField(out, 'samples', (cast options : { @:optional var samples:Null<Float>; @:optional var density:Null<Float>; @:optional var lightColor:Null<Float>; @:optional var lightX:Null<Float>; @:optional var lightY:Null<Float>; @:optional var scattering:Null<Float>; }).samples);
+    _Runtime.setField(out, 'scattering', (cast options : { @:optional var samples:Null<Float>; @:optional var density:Null<Float>; @:optional var lightColor:Null<Float>; @:optional var lightX:Null<Float>; @:optional var lightY:Null<Float>; @:optional var scattering:Null<Float>; }).scattering);
+  }
+
+  public static function createWhiteBalanceEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var temperature:Null<Float>; @:optional var tint:Null<Float>; }, String>):WhiteBalanceEffect {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast _Runtime.mergeObjects([{ kind: 'WhiteBalanceEffect' }, options]);
+    var out:EntityConstruction<WhiteBalanceEffect> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ kind: cast _Runtime.UNDEFINED, temperature: cast _Runtime.UNDEFINED, tint: cast _Runtime.UNDEFINED } : WhiteBalanceEffect); }) #end));
+    initializeWhiteBalanceEffect(({ final __callArgument480:Dynamic = out; __callArgument480; }), ({ final __callArgument481:Dynamic = options; __callArgument481; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeWhiteBalanceEffect(out:EntityConstruction<WhiteBalanceEffect>, options:flight._internal._Omit<{ var kind:String; @:optional var temperature:Null<Float>; @:optional var tint:Null<Float>; }, String>):Void {
+    (cast initializeRenderEffect : EntityConstruction<WhiteBalanceEffect>->String->Void)(({ final __callArgument484:Dynamic = out; __callArgument484; }), (cast 'WhiteBalanceEffect' : String));
+    _Runtime.setField(out, 'temperature', (cast options : { @:optional var tint:Null<Float>; @:optional var temperature:Null<Float>; }).temperature);
+    _Runtime.setField(out, 'tint', (cast options : { @:optional var tint:Null<Float>; @:optional var temperature:Null<Float>; }).tint);
   }
 }

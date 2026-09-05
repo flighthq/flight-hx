@@ -12,6 +12,7 @@ export const detachProtocolHandler = api.detachProtocolHandler;
 export const disposeProtocolHandler = api.disposeProtocolHandler;
 export const getProtocolLaunchUrl = api.getProtocolLaunchUrl;
 export const getRegisteredProtocolSchemes = api.getRegisteredProtocolSchemes;
+export const initializeProtocolHandler = api.initializeProtocolHandler;
 export const isProtocolSchemeDefault = api.isProtocolSchemeDefault;
 export const isProtocolSchemeRegistered = api.isProtocolSchemeRegistered;
 export const isValidProtocolScheme = api.isValidProtocolScheme;

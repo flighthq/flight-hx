@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Skeleton2DTransformConstraint = { var kind:String; var mix:Float; var boneIndices:Array<Float>; var mixRotate:Float; var mixScaleX:Float; var mixScaleY:Float; var mixShearY:Float; var mixX:Float; var mixY:Float; var offsetRotation:Float; var offsetScaleX:Float; var offsetScaleY:Float; var offsetShearY:Float; var offsetX:Float; var offsetY:Float; var targetBoneIndex:Float; };
+typedef Skeleton2DTransformConstraint = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var mix:Float; var boneIndices:Array<Float>; var mixRotate:Float; var mixScaleX:Float; var mixScaleY:Float; var mixShearY:Float; var mixX:Float; var mixY:Float; var offsetRotation:Float; var offsetScaleX:Float; var offsetScaleY:Float; var offsetShearY:Float; var offsetX:Float; var offsetY:Float; var targetBoneIndex:Float; };

@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TimelineStreamAudioCue = { var frame:Float; var kind:String; var gain:Float; var resource:AudioResource; };
+#if !flight_struct_typedef
+@:allow(flight._Swf)
+@:keep
+@:structInit
+class TimelineStreamAudioCue extends flight.types.TimelineCue {
+  public var gain:Float;
+  public var resource:AudioResource;
+
+  private function new(frame:Float, kind:String, gain:Float, resource:AudioResource):Void {
+    super(frame, kind);
+    this.gain = gain;
+    this.resource = resource;
+  }
+}
+#else
+typedef TimelineStreamAudioCue = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var frame:Float; var kind:String; var gain:Float; var resource:AudioResource; };
+#end

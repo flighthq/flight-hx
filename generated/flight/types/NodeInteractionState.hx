@@ -4,4 +4,29 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef NodeInteractionState = { var hitTestEnabled:Bool; var hitArea:Null<HitArea>; var cursor:Null<Cursor>; var focusable:Bool; var pointerDoubleClickEnabled:Bool; var tabIndex:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Interaction)
+@:keep
+@:structInit
+class NodeInteractionState {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var hitTestEnabled:Bool;
+  public var hitArea:Null<HitArea>;
+  public var cursor:Null<Cursor>;
+  public var focusable:Bool;
+  public var pointerDoubleClickEnabled:Bool;
+  public var tabIndex:Float;
+
+  private function new(hitTestEnabled:Bool, hitArea:Null<HitArea>, cursor:Null<Cursor>, focusable:Bool, pointerDoubleClickEnabled:Bool, tabIndex:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.hitTestEnabled = hitTestEnabled;
+    this.hitArea = hitArea;
+    this.cursor = cursor;
+    this.focusable = focusable;
+    this.pointerDoubleClickEnabled = pointerDoubleClickEnabled;
+    this.tabIndex = tabIndex;
+  }
+}
+#else
+typedef NodeInteractionState = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var hitTestEnabled:Bool; var hitArea:Null<HitArea>; var cursor:Null<Cursor>; var focusable:Bool; var pointerDoubleClickEnabled:Bool; var tabIndex:Float; };
+#end

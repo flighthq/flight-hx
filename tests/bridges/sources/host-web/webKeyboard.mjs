@@ -8,3 +8,6 @@ __syncDependencies();
 export const createWebSoftKeyboardChangeBackend = api.createWebSoftKeyboardChangeBackend;
 export const createWebSoftKeyboardInfoBackend = api.createWebSoftKeyboardInfoBackend;
 export const createWebSoftKeyboardVisibilityBackend = api.createWebSoftKeyboardVisibilityBackend;
+export const initializeWebSoftKeyboardChangeBackend = api.initializeWebSoftKeyboardChangeBackend;
+export const initializeWebSoftKeyboardInfoBackend = api.initializeWebSoftKeyboardInfoBackend;
+export const initializeWebSoftKeyboardVisibilityBackend = api.initializeWebSoftKeyboardVisibilityBackend;

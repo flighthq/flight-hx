@@ -4,4 +4,23 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef QuadBatchSignals = { var onCleared:Signal<Void->Void>; var onInstanceAppended:Signal<Float->Void>; var onInstanceRemoved:Signal<Float->Float->Void>; };
+#if !flight_struct_typedef
+@:allow(flight._QuadBatch)
+@:keep
+@:structInit
+class QuadBatchSignals {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onCleared:Signal<Void->Void>;
+  public var onInstanceAppended:Signal<Float->Void>;
+  public var onInstanceRemoved:Signal<Float->Float->Void>;
+
+  private function new(onCleared:Signal<Void->Void>, onInstanceAppended:Signal<Float->Void>, onInstanceRemoved:Signal<Float->Float->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onCleared = onCleared;
+    this.onInstanceAppended = onInstanceAppended;
+    this.onInstanceRemoved = onInstanceRemoved;
+  }
+}
+#else
+typedef QuadBatchSignals = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onCleared:Signal<Void->Void>; var onInstanceAppended:Signal<Float->Void>; var onInstanceRemoved:Signal<Float->Float->Void>; };
+#end

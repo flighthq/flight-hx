@@ -14,6 +14,7 @@ export const getVideoTextureHeight = api.getVideoTextureHeight;
 export const getVideoTextureInverseUvMatrix = api.getVideoTextureInverseUvMatrix;
 export const getVideoTextureUvMatrix = api.getVideoTextureUvMatrix;
 export const getVideoTextureWidth = api.getVideoTextureWidth;
+export const initializeVideoImageResource = api.initializeVideoImageResource;
 export const isVideoTextureFrameReady = api.isVideoTextureFrameReady;
 export const resetVideoTextureFrame = api.resetVideoTextureFrame;
 export const setVideoTextureSource = api.setVideoTextureSource;

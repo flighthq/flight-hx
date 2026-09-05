@@ -15,6 +15,7 @@ export const createGradientTransformMatrix = api.createGradientTransformMatrix;
 export const createMatrix = api.createMatrix;
 export const createTransformMatrix = api.createTransformMatrix;
 export const equalsMatrix = api.equalsMatrix;
+export const initializeMatrix = api.initializeMatrix;
 export const inverseMatrix = api.inverseMatrix;
 export const inverseMatrixTransformPoint = api.inverseMatrixTransformPoint;
 export const inverseMatrixTransformPointXY = api.inverseMatrixTransformPointXY;

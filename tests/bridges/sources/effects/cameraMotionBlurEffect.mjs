@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createCameraMotionBlurEffect = api.createCameraMotionBlurEffect;
+export const initializeCameraMotionBlurEffect = api.initializeCameraMotionBlurEffect;

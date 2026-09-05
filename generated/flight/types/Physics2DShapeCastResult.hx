@@ -4,4 +4,35 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics2DShapeCastResult = { var body:Null<RigidBody2D>; var collider:Null<Physics2DCollider>; var colliderIndex:Float; var hit:Bool; var fraction:Float; var x:Float; var y:Float; var normalX:Float; var normalY:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Physics2D)
+@:keep
+@:structInit
+class Physics2DShapeCastResult {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var body:Null<RigidBody2D>;
+  public var collider:Null<Physics2DCollider>;
+  public var colliderIndex:Float;
+  public var hit:Bool;
+  public var fraction:Float;
+  public var x:Float;
+  public var y:Float;
+  public var normalX:Float;
+  public var normalY:Float;
+
+  private function new(body:Null<RigidBody2D>, collider:Null<Physics2DCollider>, colliderIndex:Float, hit:Bool, fraction:Float, x:Float, y:Float, normalX:Float, normalY:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.body = body;
+    this.collider = collider;
+    this.colliderIndex = colliderIndex;
+    this.hit = hit;
+    this.fraction = fraction;
+    this.x = x;
+    this.y = y;
+    this.normalX = normalX;
+    this.normalY = normalY;
+  }
+}
+#else
+typedef Physics2DShapeCastResult = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var body:Null<RigidBody2D>; var collider:Null<Physics2DCollider>; var colliderIndex:Float; var hit:Bool; var fraction:Float; var x:Float; var y:Float; var normalX:Float; var normalY:Float; };
+#end

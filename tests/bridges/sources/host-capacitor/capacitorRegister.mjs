@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const capacitorHost = api.capacitorHost;
+export const initializeCapacitorHost = api.initializeCapacitorHost;
 export const registerCapacitorBackends = api.registerCapacitorBackends;

@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlRenderSurfaceProvider = { var createRenderSurface:Float->Float->Float->Null<flight._internal.dom.HTMLCanvasElement>; };
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class GlRenderSurfaceProvider {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var createRenderSurface:Float->Float->Float->Null<flight._internal.dom.HTMLCanvasElement>;
+
+  private function new(createRenderSurface:Float->Float->Float->Null<flight._internal.dom.HTMLCanvasElement>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.createRenderSurface = createRenderSurface;
+  }
+}
+#else
+typedef GlRenderSurfaceProvider = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var createRenderSurface:Float->Float->Float->Null<flight._internal.dom.HTMLCanvasElement>; };
+#end

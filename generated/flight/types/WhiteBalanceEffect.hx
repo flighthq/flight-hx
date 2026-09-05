@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WhiteBalanceEffect = { var kind:String; @:optional var temperature:Float; @:optional var tint:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class WhiteBalanceEffect extends flight.types.RenderEffect<String> {
+  public var temperature:Null<Float>;
+  public var tint:Null<Float>;
+
+  private function new(kind:String, ?temperature:Null<Float>, ?tint:Null<Float>):Void {
+    super(kind);
+    this.temperature = temperature;
+    this.tint = tint;
+  }
+}
+#else
+typedef WhiteBalanceEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var temperature:Float; @:optional var tint:Float; };
+#end

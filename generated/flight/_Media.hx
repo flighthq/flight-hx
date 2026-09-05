@@ -3,6 +3,8 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Log.logOnce;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
@@ -15,14 +17,12 @@ import flight.types.AudioChannel;
 import flight.types.AudioChannelState;
 import flight.types.AudioDeviceBackend;
 import flight.types.AudioDeviceHandle;
-import flight.types.AudioDeviceOperation;
 import flight.types.AudioMixer;
 import flight.types.AudioMixerOptions;
 import flight.types.AudioPlayOptions;
 import flight.types.AudioResource;
 import flight.types.AudioSourceHandle;
-import flight.types.BackendExplanation;
-import flight.types.BackendOperationExplanation;
+import flight.types.EntityConstruction;
 import flight.types.LogLevel;
 import flight.types.MediaChannelSignals;
 import flight.types.Signal;
@@ -31,11 +31,60 @@ import flight.types.VideoChannelState;
 import flight.types.VideoPlayOptions;
 import flight.types.VideoResource;
 
-typedef AudioChannelRuntime__audioChannel = { var bufferHandle:AudioBufferHandle; var destinationNode:Null<flight._internal.dom.AudioNode>; var device:AudioDeviceHandle; var loopsRemaining:Float; var sourceHandle:AudioSourceHandle; var startedAt:Float; };
+typedef AudioChannelRuntime__audioChannel = { var backend:AudioDeviceBackend; var bufferHandle:AudioBufferHandle; var destinationNode:Null<flight._internal.dom.AudioNode>; var device:AudioDeviceHandle; var loopsRemaining:Float; var sourceHandle:AudioSourceHandle; var startedAt:Float; };
 
 typedef AudioDeviceBackendWebExtension__audioDeviceBackend = { >AudioDeviceBackend, var getSourceBufferSourceNode:AudioSourceHandle->Null<flight._internal.dom.AudioBufferSourceNode>; var getSourceGainNode:AudioSourceHandle->Null<flight._internal.dom.GainNode>; };
 
+typedef AudioSourceEntry__audioDeviceBackend = { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var onEnded:Null<Void->Void>; var pannerNode:flight._internal.dom.StereoPannerNode; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; };
+
 typedef IsAny__audioDeviceBackend<T> = flight._internal._Conditional<Float, T, Bool, Bool>;
+
+#if !flight_struct_typedef
+@:allow(flight._Media)
+@:keep
+@:structInit
+private class EntityShapeL20C15__audioDeviceBackend {
+  public var createBuffer:AudioDeviceHandle->Float->Float->Float->Array<flight._internal._Float32Array>->AudioBufferHandle;
+  public var createDevice:Float->AudioDeviceHandle;
+  public var createSource:AudioDeviceHandle->AudioBufferHandle->AudioSourceHandle;
+  public var destroyBuffer:AudioBufferHandle->Void;
+  public var destroyDevice:AudioDeviceHandle->Void;
+  public var destroySource:AudioSourceHandle->Void;
+  public var getDeviceTime:AudioDeviceHandle->Float;
+  public var onSourceEnded:AudioSourceHandle->Null<Void->Void>->Void;
+  public var resumeDevice:AudioDeviceHandle->Void;
+  public var setSourceGain:AudioSourceHandle->Float->Void;
+  public var setSourcePan:AudioSourceHandle->Float->Void;
+  public var setSourcePlaybackRate:AudioSourceHandle->Float->Void;
+  public var startSource:AudioSourceHandle->Float->Float->Void;
+  public var stopSource:AudioSourceHandle->Void;
+  public var getSourceBufferSourceNode:AudioSourceHandle->Null<flight._internal.dom.AudioBufferSourceNode>;
+  public var getSourceGainNode:AudioSourceHandle->Null<flight._internal.dom.GainNode>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(createBuffer:AudioDeviceHandle->Float->Float->Float->Array<flight._internal._Float32Array>->AudioBufferHandle, createDevice:Float->AudioDeviceHandle, createSource:AudioDeviceHandle->AudioBufferHandle->AudioSourceHandle, destroyBuffer:AudioBufferHandle->Void, destroyDevice:AudioDeviceHandle->Void, destroySource:AudioSourceHandle->Void, getDeviceTime:AudioDeviceHandle->Float, onSourceEnded:AudioSourceHandle->Null<Void->Void>->Void, resumeDevice:AudioDeviceHandle->Void, setSourceGain:AudioSourceHandle->Float->Void, setSourcePan:AudioSourceHandle->Float->Void, setSourcePlaybackRate:AudioSourceHandle->Float->Void, startSource:AudioSourceHandle->Float->Float->Void, stopSource:AudioSourceHandle->Void, getSourceBufferSourceNode:AudioSourceHandle->Null<flight._internal.dom.AudioBufferSourceNode>, getSourceGainNode:AudioSourceHandle->Null<flight._internal.dom.GainNode>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.createBuffer = createBuffer;
+    this.createDevice = createDevice;
+    this.createSource = createSource;
+    this.destroyBuffer = destroyBuffer;
+    this.destroyDevice = destroyDevice;
+    this.destroySource = destroySource;
+    this.getDeviceTime = getDeviceTime;
+    this.onSourceEnded = onSourceEnded;
+    this.resumeDevice = resumeDevice;
+    this.setSourceGain = setSourceGain;
+    this.setSourcePan = setSourcePan;
+    this.setSourcePlaybackRate = setSourcePlaybackRate;
+    this.startSource = startSource;
+    this.stopSource = stopSource;
+    this.getSourceBufferSourceNode = getSourceBufferSourceNode;
+    this.getSourceGainNode = getSourceGainNode;
+  }
+}
+#else
+private typedef EntityShapeL20C15__audioDeviceBackend = { var createBuffer:AudioDeviceHandle->Float->Float->Float->Array<flight._internal._Float32Array>->AudioBufferHandle; var createDevice:Float->AudioDeviceHandle; var createSource:AudioDeviceHandle->AudioBufferHandle->AudioSourceHandle; var destroyBuffer:AudioBufferHandle->Void; var destroyDevice:AudioDeviceHandle->Void; var destroySource:AudioSourceHandle->Void; var getDeviceTime:AudioDeviceHandle->Float; var onSourceEnded:AudioSourceHandle->Null<Void->Void>->Void; var resumeDevice:AudioDeviceHandle->Void; var setSourceGain:AudioSourceHandle->Float->Void; var setSourcePan:AudioSourceHandle->Float->Void; var setSourcePlaybackRate:AudioSourceHandle->Float->Void; var startSource:AudioSourceHandle->Float->Float->Void; var stopSource:AudioSourceHandle->Void; var getSourceBufferSourceNode:AudioSourceHandle->Null<flight._internal.dom.AudioBufferSourceNode>; var getSourceGainNode:AudioSourceHandle->Null<flight._internal.dom.GainNode>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
 
 typedef AudioMixerRuntime__audioMixer = { var activeChannels:flight._internal._Set<AudioChannel>; var channelsPausedByMixer:flight._internal._Set<AudioChannel>; var buses:flight._internal._Map<String, AudioBus>; var busGainNodes:flight._internal._Map<AudioBus, flight._internal.dom.GainNode>; var busOutputNodes:flight._internal._Map<AudioBus, flight._internal.dom.StereoPannerNode>; var channelToBus:flight._internal._WeakMap<AudioChannel, AudioBus>; var context:flight._internal.dom.AudioContext; var masterGainNode:flight._internal.dom.GainNode; };
 
@@ -54,7 +103,7 @@ class _Media {
     runtime = ((cast _Media.channelRuntime__audioChannel : flight._internal._WeakMap<AudioChannel, AudioChannelRuntime__audioChannel>).get((cast channel)));
     if ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     ((cast runtime : AudioChannelRuntime__audioChannel).destinationNode = destinationNode);
-    gainNode = (cast getAudioSourceGainNode((cast runtime : AudioChannelRuntime__audioChannel).sourceHandle) : Null<flight._internal.dom.GainNode>);
+    gainNode = (cast getAudioSourceGainNode((cast runtime : AudioChannelRuntime__audioChannel).backend, (cast runtime : AudioChannelRuntime__audioChannel).sourceHandle) : Null<flight._internal.dom.GainNode>);
     if ((cast !_Runtime.strictEquals(gainNode, null) : Bool)) {
       (cast gainNode : flight._internal.dom.GainNode).disconnect();
       (cast gainNode : flight._internal.dom.GainNode).connect(destinationNode);
@@ -67,7 +116,7 @@ class _Media {
     if ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     _Media.destroyActiveSource__audioChannel(({ final __callArgument0:Dynamic = channel; __callArgument0; }));
     if ((cast !_Runtime.strictEquals((cast runtime : AudioChannelRuntime__audioChannel).bufferHandle, _Media.INVALID_BUFFER__audioChannel) : Bool)) {
-      (cast (cast getAudioDeviceBackend() : AudioDeviceBackend) : AudioDeviceBackend).destroyBuffer((cast runtime : AudioChannelRuntime__audioChannel).bufferHandle);
+      _Runtime.callProperty((cast runtime : AudioChannelRuntime__audioChannel).backend, 'destroyBuffer', cast ([(cast runtime : AudioChannelRuntime__audioChannel).bufferHandle] : Array<Dynamic>));
       ((cast runtime : AudioChannelRuntime__audioChannel).bufferHandle = _Media.INVALID_BUFFER__audioChannel);
     }
     (channel.state = cast ('stopped' : AudioChannelState));
@@ -83,14 +132,14 @@ class _Media {
       (channel.gain = cast (targetGain : Float));
       return;
     }
-    gainNode = (cast getAudioSourceGainNode((cast runtime : AudioChannelRuntime__audioChannel).sourceHandle) : Null<flight._internal.dom.GainNode>);
+    gainNode = (cast getAudioSourceGainNode((cast runtime : AudioChannelRuntime__audioChannel).backend, (cast runtime : AudioChannelRuntime__audioChannel).sourceHandle) : Null<flight._internal.dom.GainNode>);
     if ((cast !_Runtime.strictEquals(gainNode, null) : Bool)) {
-      var deviceTime:Float = (cast (cast getAudioDeviceBackend() : AudioDeviceBackend) : AudioDeviceBackend).getDeviceTime((cast runtime : AudioChannelRuntime__audioChannel).device);
+      var deviceTime:Float = _Runtime.callProperty((cast runtime : AudioChannelRuntime__audioChannel).backend, 'getDeviceTime', cast ([(cast runtime : AudioChannelRuntime__audioChannel).device] : Array<Dynamic>));
       (cast (cast gainNode : flight._internal.dom.GainNode).gain : flight._internal.dom.AudioParam).cancelScheduledValues(deviceTime);
       (cast (cast gainNode : flight._internal.dom.GainNode).gain : flight._internal.dom.AudioParam).setValueAtTime((cast (cast gainNode : flight._internal.dom.GainNode).gain : flight._internal.dom.AudioParam).value, deviceTime);
       (cast (cast gainNode : flight._internal.dom.GainNode).gain : flight._internal.dom.AudioParam).linearRampToValueAtTime(targetGain, (deviceTime + (durationMs / 1000.0)));
     } else {
-      (cast (cast getAudioDeviceBackend() : AudioDeviceBackend) : AudioDeviceBackend).setSourceGain((cast runtime : AudioChannelRuntime__audioChannel).sourceHandle, (cast targetGain : Float));
+      _Runtime.callProperty((cast runtime : AudioChannelRuntime__audioChannel).backend, 'setSourceGain', cast ([(cast runtime : AudioChannelRuntime__audioChannel).sourceHandle, targetGain] : Array<Dynamic>));
     }
     (channel.gain = cast (targetGain : Float));
   }
@@ -99,7 +148,7 @@ class _Media {
     var runtime:Null<AudioChannelRuntime__audioChannel> = cast _Runtime.UNDEFINED;
     runtime = ((cast _Media.channelRuntime__audioChannel : flight._internal._WeakMap<AudioChannel, AudioChannelRuntime__audioChannel>).get((cast channel)));
     if ((cast ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(channel.state, 'playing') : Bool)) : Bool)) { return cast channel.currentTime; }
-    return cast HxMath.min((_Runtime.subtractNumbers((cast (cast getAudioDeviceBackend() : AudioDeviceBackend) : AudioDeviceBackend).getDeviceTime((cast runtime : AudioChannelRuntime__audioChannel).device), (cast runtime : AudioChannelRuntime__audioChannel).startedAt) * 1000.0), channel.length);
+    return cast HxMath.min((_Runtime.subtractNumbers(_Runtime.callProperty((cast runtime : AudioChannelRuntime__audioChannel).backend, 'getDeviceTime', cast ([(cast runtime : AudioChannelRuntime__audioChannel).device] : Array<Dynamic>)), (cast runtime : AudioChannelRuntime__audioChannel).startedAt) * 1000.0), channel.length);
     return cast null;
   }
 
@@ -112,7 +161,7 @@ class _Media {
     var runtime:Null<AudioChannelRuntime__audioChannel> = cast _Runtime.UNDEFINED;
     runtime = ((cast _Media.channelRuntime__audioChannel : flight._internal._WeakMap<AudioChannel, AudioChannelRuntime__audioChannel>).get((cast channel)));
     if ((cast ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals((cast runtime : AudioChannelRuntime__audioChannel).sourceHandle, _Media.INVALID_SOURCE__audioChannel) : Bool)) : Bool)) { return cast null; }
-    return cast (cast getAudioSourceBufferSourceNode((cast runtime : AudioChannelRuntime__audioChannel).sourceHandle) : Null<flight._internal.dom.AudioBufferSourceNode>);
+    return cast (cast getAudioSourceBufferSourceNode((cast runtime : AudioChannelRuntime__audioChannel).backend, (cast runtime : AudioChannelRuntime__audioChannel).sourceHandle) : Null<flight._internal.dom.AudioBufferSourceNode>);
     return cast null;
   }
 
@@ -120,20 +169,16 @@ class _Media {
     var runtime:Null<AudioChannelRuntime__audioChannel> = cast _Runtime.UNDEFINED;
     runtime = ((cast _Media.channelRuntime__audioChannel : flight._internal._WeakMap<AudioChannel, AudioChannelRuntime__audioChannel>).get((cast channel)));
     if ((cast ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals((cast runtime : AudioChannelRuntime__audioChannel).sourceHandle, _Media.INVALID_SOURCE__audioChannel) : Bool)) : Bool)) { return cast null; }
-    return cast (cast getAudioSourceGainNode((cast runtime : AudioChannelRuntime__audioChannel).sourceHandle) : Null<flight._internal.dom.GainNode>);
+    return cast (cast getAudioSourceGainNode((cast runtime : AudioChannelRuntime__audioChannel).backend, (cast runtime : AudioChannelRuntime__audioChannel).sourceHandle) : Null<flight._internal.dom.GainNode>);
     return cast null;
   }
 
-  public static function hasAudioChannelFade():Bool {
-    var backend:AudioDeviceBackend = cast _Runtime.UNDEFINED;
-    backend = (cast getAudioDeviceBackend() : AudioDeviceBackend);
+  public static function hasAudioChannelFade(backend:AudioDeviceBackend):Bool {
     return cast _Runtime.hasField(backend, 'getSourceGainNode');
     return cast null;
   }
 
-  public static function hasAudioChannelNodeAccess():Bool {
-    var backend:AudioDeviceBackend = cast _Runtime.UNDEFINED;
-    backend = (cast getAudioDeviceBackend() : AudioDeviceBackend);
+  public static function hasAudioChannelNodeAccess(backend:AudioDeviceBackend):Bool {
     return cast _Runtime.hasField(backend, 'getSourceGainNode');
     return cast null;
   }
@@ -156,15 +201,13 @@ class _Media {
     _Media.emitChannelSignal__audioChannel(({ final __callArgument6:Dynamic = channel; __callArgument6; }), (cast 'onPause' : String));
   }
 
-  public static function playAudioResource(device:AudioDeviceHandle, source:AudioResource, ?options:AudioPlayOptions):Null<AudioChannel> {
-    var backend:AudioDeviceBackend = cast _Runtime.UNDEFINED;
+  public static function playAudioResource(backend:AudioDeviceBackend, device:AudioDeviceHandle, source:AudioResource, ?options:AudioPlayOptions):Null<AudioChannel> {
     var buf:flight._internal.dom.AudioBuffer = cast _Runtime.UNDEFINED;
     var numberOfChannels:Float = cast _Runtime.UNDEFINED;
     var data:Array<flight._internal._Float32Array> = cast _Runtime.UNDEFINED;
     var bufferHandle:AudioBufferHandle = cast _Runtime.UNDEFINED;
     var channel:AudioChannel = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(source.buffer, null) : Bool)) { return cast null; }
-    backend = (cast getAudioDeviceBackend() : AudioDeviceBackend);
     buf = source.buffer;
     numberOfChannels = (cast buf : flight._internal.dom.AudioBuffer).numberOfChannels;
     data = (cast cast ([] : Array<Dynamic>));
@@ -175,26 +218,26 @@ class _Media {
         i++;
       }
     }
-    bufferHandle = (cast backend : AudioDeviceBackend).createBuffer(({ final __callArgument8:Dynamic = device; __callArgument8; }), (cast numberOfChannels : Float), (cast (cast buf : flight._internal.dom.AudioBuffer).length : Float), (cast (cast buf : flight._internal.dom.AudioBuffer).sampleRate : Float), ({ final __callArgument9:Dynamic = data; __callArgument9; }));
-    channel = (cast { currentTime: _Runtime.coalesce(({ final __typedStruct10 = options; __typedStruct10 == null ? _Runtime.UNDEFINED : __typedStruct10.currentTime; }), function():Dynamic return cast 0.0), gain: _Runtime.coalesce(({ final __typedStruct11 = options; __typedStruct11 == null ? _Runtime.UNDEFINED : __typedStruct11.gain; }), function():Dynamic return cast 1.0), length: _Runtime.multiplyNumbers((cast buf : flight._internal.dom.AudioBuffer).duration, 1000.0), loopEnd: 0.0, loops: _Runtime.coalesce(({ final __typedStruct12 = options; __typedStruct12 == null ? _Runtime.UNDEFINED : __typedStruct12.loops; }), function():Dynamic return cast 0.0), loopStart: 0.0, muted: false, pan: 0.0, playbackRate: _Runtime.coalesce(({ final __typedStruct13 = options; __typedStruct13 == null ? _Runtime.UNDEFINED : __typedStruct13.playbackRate; }), function():Dynamic return cast 1.0), source: source, state: 'stopped', onComplete: (cast createSignal() : Signal<Void->Void>) });
-    ((cast _Media.channelRuntime__audioChannel : flight._internal._WeakMap<AudioChannel, AudioChannelRuntime__audioChannel>).set((cast channel), (cast { bufferHandle: bufferHandle, destinationNode: null, device: device, loopsRemaining: channel.loops, sourceHandle: _Media.INVALID_SOURCE__audioChannel, startedAt: 0.0 })));
-    _Media.startAudioChannel__audioChannel(({ final __callArgument14:Dynamic = channel; __callArgument14; }));
-    _Media.emitChannelSignal__audioChannel(({ final __callArgument16:Dynamic = channel; __callArgument16; }), (cast 'onPlay' : String));
+    bufferHandle = _Runtime.callProperty(backend, 'createBuffer', cast ([device, numberOfChannels, (cast buf : flight._internal.dom.AudioBuffer).length, (cast buf : flight._internal.dom.AudioBuffer).sampleRate, data] : Array<Dynamic>));
+    channel = (cast { currentTime: _Runtime.coalesce(({ final __typedStruct8 = options; __typedStruct8 == null ? _Runtime.UNDEFINED : __typedStruct8.currentTime; }), function():Dynamic return cast 0.0), gain: _Runtime.coalesce(({ final __typedStruct9 = options; __typedStruct9 == null ? _Runtime.UNDEFINED : __typedStruct9.gain; }), function():Dynamic return cast 1.0), length: _Runtime.multiplyNumbers((cast buf : flight._internal.dom.AudioBuffer).duration, 1000.0), loopEnd: 0.0, loops: _Runtime.coalesce(({ final __typedStruct10 = options; __typedStruct10 == null ? _Runtime.UNDEFINED : __typedStruct10.loops; }), function():Dynamic return cast 0.0), loopStart: 0.0, muted: false, pan: 0.0, playbackRate: _Runtime.coalesce(({ final __typedStruct11 = options; __typedStruct11 == null ? _Runtime.UNDEFINED : __typedStruct11.playbackRate; }), function():Dynamic return cast 1.0), source: source, state: 'stopped', onComplete: (cast createSignal() : Signal<Void->Void>) });
+    ((cast _Media.channelRuntime__audioChannel : flight._internal._WeakMap<AudioChannel, AudioChannelRuntime__audioChannel>).set((cast channel), (cast { backend: backend, bufferHandle: bufferHandle, destinationNode: null, device: device, loopsRemaining: channel.loops, sourceHandle: _Media.INVALID_SOURCE__audioChannel, startedAt: 0.0 })));
+    _Media.startAudioChannel__audioChannel(({ final __callArgument12:Dynamic = channel; __callArgument12; }));
+    _Media.emitChannelSignal__audioChannel(({ final __callArgument14:Dynamic = channel; __callArgument14; }), (cast 'onPlay' : String));
     return cast channel;
     return cast null;
   }
 
   public static function resumeAudioChannel(channel:AudioChannel):Void {
     if ((cast ((cast _Runtime.strictEquals(channel.state, 'playing') : Bool) || (cast _Runtime.strictEquals((cast channel.source : { var buffer:Null<flight._internal.dom.AudioBuffer>; }).buffer, null) : Bool)) : Bool)) { return; }
-    _Media.startAudioChannel__audioChannel(({ final __callArgument18:Dynamic = channel; __callArgument18; }));
-    _Media.emitChannelSignal__audioChannel(({ final __callArgument20:Dynamic = channel; __callArgument20; }), (cast 'onPlay' : String));
+    _Media.startAudioChannel__audioChannel(({ final __callArgument16:Dynamic = channel; __callArgument16; }));
+    _Media.emitChannelSignal__audioChannel(({ final __callArgument18:Dynamic = channel; __callArgument18; }), (cast 'onPlay' : String));
   }
 
   public static function setAudioChannelCurrentTime(channel:AudioChannel, value:Float):Float {
     (channel.currentTime = cast ((cast _Media.clamp__audioChannel((cast value : Float), (cast 0.0 : Float), (cast channel.length : Float)) : Float) : Float));
     if ((cast _Runtime.strictEquals(channel.state, 'playing') : Bool)) {
-      _Media.destroyActiveSource__audioChannel(({ final __callArgument22:Dynamic = channel; __callArgument22; }));
-      _Media.startAudioChannel__audioChannel(({ final __callArgument24:Dynamic = channel; __callArgument24; }));
+      _Media.destroyActiveSource__audioChannel(({ final __callArgument20:Dynamic = channel; __callArgument20; }));
+      _Media.startAudioChannel__audioChannel(({ final __callArgument22:Dynamic = channel; __callArgument22; }));
     }
     return cast channel.currentTime;
     return cast null;
@@ -205,7 +248,7 @@ class _Media {
     (channel.gain = cast (value : Float));
     runtime = ((cast _Media.channelRuntime__audioChannel : flight._internal._WeakMap<AudioChannel, AudioChannelRuntime__audioChannel>).get((cast channel)));
     if ((cast ((cast ((cast !_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals((cast runtime : AudioChannelRuntime__audioChannel).sourceHandle, _Media.INVALID_SOURCE__audioChannel) : Bool)) : Bool) && (cast !(cast channel.muted : Bool) : Bool)) : Bool)) {
-      (cast (cast getAudioDeviceBackend() : AudioDeviceBackend) : AudioDeviceBackend).setSourceGain((cast runtime : AudioChannelRuntime__audioChannel).sourceHandle, (cast value : Float));
+      _Runtime.callProperty((cast runtime : AudioChannelRuntime__audioChannel).backend, 'setSourceGain', cast ([(cast runtime : AudioChannelRuntime__audioChannel).sourceHandle, value] : Array<Dynamic>));
     }
     return cast channel.gain;
     return cast null;
@@ -228,7 +271,7 @@ class _Media {
     (channel.muted = cast (value : Bool));
     runtime = ((cast _Media.channelRuntime__audioChannel : flight._internal._WeakMap<AudioChannel, AudioChannelRuntime__audioChannel>).get((cast channel)));
     if ((cast ((cast !_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals((cast runtime : AudioChannelRuntime__audioChannel).sourceHandle, _Media.INVALID_SOURCE__audioChannel) : Bool)) : Bool)) {
-      (cast (cast getAudioDeviceBackend() : AudioDeviceBackend) : AudioDeviceBackend).setSourceGain((cast runtime : AudioChannelRuntime__audioChannel).sourceHandle, (cast ((cast value : Bool) ? (cast 0.0 : Dynamic) : (cast channel.gain : Dynamic)) : Float));
+      _Runtime.callProperty((cast runtime : AudioChannelRuntime__audioChannel).backend, 'setSourceGain', cast ([(cast runtime : AudioChannelRuntime__audioChannel).sourceHandle, ((cast value : Bool) ? (cast 0.0 : Dynamic) : (cast channel.gain : Dynamic))] : Array<Dynamic>));
     }
     return cast channel.muted;
     return cast null;
@@ -239,7 +282,7 @@ class _Media {
     (channel.pan = cast ((cast _Media.clamp__audioChannel((cast value : Float), (cast -1.0 : Float), (cast 1.0 : Float)) : Float) : Float));
     runtime = ((cast _Media.channelRuntime__audioChannel : flight._internal._WeakMap<AudioChannel, AudioChannelRuntime__audioChannel>).get((cast channel)));
     if ((cast ((cast !_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals((cast runtime : AudioChannelRuntime__audioChannel).sourceHandle, _Media.INVALID_SOURCE__audioChannel) : Bool)) : Bool)) {
-      (cast (cast getAudioDeviceBackend() : AudioDeviceBackend) : AudioDeviceBackend).setSourcePan((cast runtime : AudioChannelRuntime__audioChannel).sourceHandle, (cast channel.pan : Float));
+      _Runtime.callProperty((cast runtime : AudioChannelRuntime__audioChannel).backend, 'setSourcePan', cast ([(cast runtime : AudioChannelRuntime__audioChannel).sourceHandle, channel.pan] : Array<Dynamic>));
     }
     return cast channel.pan;
     return cast null;
@@ -250,17 +293,17 @@ class _Media {
     (channel.playbackRate = cast (value : Float));
     runtime = ((cast _Media.channelRuntime__audioChannel : flight._internal._WeakMap<AudioChannel, AudioChannelRuntime__audioChannel>).get((cast channel)));
     if ((cast ((cast !_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals((cast runtime : AudioChannelRuntime__audioChannel).sourceHandle, _Media.INVALID_SOURCE__audioChannel) : Bool)) : Bool)) {
-      (cast (cast getAudioDeviceBackend() : AudioDeviceBackend) : AudioDeviceBackend).setSourcePlaybackRate((cast runtime : AudioChannelRuntime__audioChannel).sourceHandle, (cast value : Float));
+      _Runtime.callProperty((cast runtime : AudioChannelRuntime__audioChannel).backend, 'setSourcePlaybackRate', cast ([(cast runtime : AudioChannelRuntime__audioChannel).sourceHandle, value] : Array<Dynamic>));
     }
     return cast channel.playbackRate;
     return cast null;
   }
 
   public static function stopAudioChannel(channel:AudioChannel):Void {
-    _Media.destroyActiveSource__audioChannel(({ final __callArgument26:Dynamic = channel; __callArgument26; }));
+    _Media.destroyActiveSource__audioChannel(({ final __callArgument24:Dynamic = channel; __callArgument24; }));
     (channel.currentTime = cast (0.0 : Float));
     (channel.state = cast ('stopped' : AudioChannelState));
-    _Media.emitChannelSignal__audioChannel(({ final __callArgument28:Dynamic = channel; __callArgument28; }), (cast 'onStop' : String));
+    _Media.emitChannelSignal__audioChannel(({ final __callArgument26:Dynamic = channel; __callArgument26; }), (cast 'onStop' : String));
   }
 
   public static final INVALID_BUFFER__audioChannel:AudioBufferHandle = (cast 0.0 : AudioBufferHandle);
@@ -271,7 +314,7 @@ class _Media {
 
   public static function emitChannelSignal__audioChannel(channel:AudioChannel, name:String):Void {
     var signals:Null<MediaChannelSignals> = cast _Runtime.UNDEFINED;
-    signals = (cast getAudioChannelSignals(({ final __callArgument30:Dynamic = channel; __callArgument30; })) : Null<MediaChannelSignals>);
+    signals = (cast getAudioChannelSignals(({ final __callArgument28:Dynamic = channel; __callArgument28; })) : Null<MediaChannelSignals>);
     if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.getIndex(signals, name)]]), 1); }
   }
 
@@ -287,25 +330,23 @@ class _Media {
     if ((cast !_Runtime.strictEquals((cast runtime : AudioChannelRuntime__audioChannel).loopsRemaining, 0.0) : Bool)) {
       if ((cast ((cast (cast runtime : AudioChannelRuntime__audioChannel).loopsRemaining : Float) > (cast 0.0 : Float)) : Bool)) { (cast runtime : AudioChannelRuntime__audioChannel).loopsRemaining--; }
       (channel.currentTime = cast (0.0 : Float));
-      _Media.emitChannelSignal__audioChannel(({ final __callArgument32:Dynamic = channel; __callArgument32; }), (cast 'onLoop' : String));
-      _Media.startAudioChannel__audioChannel(({ final __callArgument34:Dynamic = channel; __callArgument34; }));
+      _Media.emitChannelSignal__audioChannel(({ final __callArgument30:Dynamic = channel; __callArgument30; }), (cast 'onLoop' : String));
+      _Media.startAudioChannel__audioChannel(({ final __callArgument32:Dynamic = channel; __callArgument32; }));
       return;
     }
     ((cast runtime : AudioChannelRuntime__audioChannel).sourceHandle = _Media.INVALID_SOURCE__audioChannel);
     (channel.currentTime = cast (channel.length : Float));
     (channel.state = cast ('complete' : AudioChannelState));
-    _Media.emitChannelSignal__audioChannel(({ final __callArgument36:Dynamic = channel; __callArgument36; }), (cast 'onComplete' : String));
+    _Media.emitChannelSignal__audioChannel(({ final __callArgument34:Dynamic = channel; __callArgument34; }), (cast 'onComplete' : String));
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[channel.onComplete]]), 1);
   }
 
   public static function destroyActiveSource__audioChannel(channel:AudioChannel):Void {
     var runtime:Null<AudioChannelRuntime__audioChannel> = cast _Runtime.UNDEFINED;
-    var backend:AudioDeviceBackend = cast _Runtime.UNDEFINED;
     runtime = ((cast _Media.channelRuntime__audioChannel : flight._internal._WeakMap<AudioChannel, AudioChannelRuntime__audioChannel>).get((cast channel)));
     if ((cast ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals((cast runtime : AudioChannelRuntime__audioChannel).sourceHandle, _Media.INVALID_SOURCE__audioChannel) : Bool)) : Bool)) { return; }
-    backend = (cast getAudioDeviceBackend() : AudioDeviceBackend);
-    (cast backend : AudioDeviceBackend).onSourceEnded((cast runtime : AudioChannelRuntime__audioChannel).sourceHandle, ({ final __callArgument38:Dynamic = null; __callArgument38; }));
-    (cast backend : AudioDeviceBackend).destroySource((cast runtime : AudioChannelRuntime__audioChannel).sourceHandle);
+    _Runtime.callProperty((cast runtime : AudioChannelRuntime__audioChannel).backend, 'onSourceEnded', cast ([(cast runtime : AudioChannelRuntime__audioChannel).sourceHandle, null] : Array<Dynamic>));
+    _Runtime.callProperty((cast runtime : AudioChannelRuntime__audioChannel).backend, 'destroySource', cast ([(cast runtime : AudioChannelRuntime__audioChannel).sourceHandle] : Array<Dynamic>));
     ((cast runtime : AudioChannelRuntime__audioChannel).sourceHandle = _Media.INVALID_SOURCE__audioChannel);
   }
 
@@ -319,36 +360,37 @@ class _Media {
     var gainNode:Null<flight._internal.dom.GainNode> = cast _Runtime.UNDEFINED;
     runtime = ((cast _Media.channelRuntime__audioChannel : flight._internal._WeakMap<AudioChannel, AudioChannelRuntime__audioChannel>).get((cast channel)));
     if ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    backend = (cast getAudioDeviceBackend() : AudioDeviceBackend);
+    backend = (cast runtime : AudioChannelRuntime__audioChannel).backend;
     hasRegion = ((cast channel.loopEnd : Float) > (cast channel.loopStart : Float));
     regionFloor = ((cast ((cast hasRegion : Bool) && (cast ((cast channel.currentTime : Float) < (cast channel.loopStart : Float)) : Bool)) : Bool) ? (cast channel.loopStart : Dynamic) : (cast channel.currentTime : Dynamic));
     currentTime = (cast _Media.clamp__audioChannel((cast regionFloor : Float), (cast 0.0 : Float), (cast ((cast hasRegion : Bool) ? (cast channel.loopEnd : Dynamic) : (cast channel.length : Dynamic)) : Float)) : Float);
-    sourceHandle = (cast backend : AudioDeviceBackend).createSource((cast runtime : AudioChannelRuntime__audioChannel).device, (cast runtime : AudioChannelRuntime__audioChannel).bufferHandle);
-    (cast backend : AudioDeviceBackend).setSourceGain(({ final __callArgument39:Dynamic = sourceHandle; __callArgument39; }), (cast ((cast channel.muted : Bool) ? (cast 0.0 : Dynamic) : (cast channel.gain : Dynamic)) : Float));
-    (cast backend : AudioDeviceBackend).setSourcePan(({ final __callArgument40:Dynamic = sourceHandle; __callArgument40; }), (cast channel.pan : Float));
-    (cast backend : AudioDeviceBackend).onSourceEnded(({ final __callArgument41:Dynamic = sourceHandle; __callArgument41; }), ({ final __callArgument44:Dynamic = function():Void { _Media.completeAudioChannel__audioChannel(({ final __callArgument42:Dynamic = channel; __callArgument42; })); }; __callArgument44; }));
+    sourceHandle = _Runtime.callProperty(backend, 'createSource', cast ([(cast runtime : AudioChannelRuntime__audioChannel).device, (cast runtime : AudioChannelRuntime__audioChannel).bufferHandle] : Array<Dynamic>));
+    _Runtime.callProperty(backend, 'setSourceGain', cast ([sourceHandle, ((cast channel.muted : Bool) ? (cast 0.0 : Dynamic) : (cast channel.gain : Dynamic))] : Array<Dynamic>));
+    _Runtime.callProperty(backend, 'setSourcePan', cast ([sourceHandle, channel.pan] : Array<Dynamic>));
+    _Runtime.callProperty(backend, 'onSourceEnded', cast ([sourceHandle, function():Void { _Media.completeAudioChannel__audioChannel(({ final __callArgument36:Dynamic = channel; __callArgument36; })); }] : Array<Dynamic>));
     ((cast runtime : AudioChannelRuntime__audioChannel).sourceHandle = sourceHandle);
-    ((cast runtime : AudioChannelRuntime__audioChannel).startedAt = _Runtime.subtractNumbers((cast backend : AudioDeviceBackend).getDeviceTime((cast runtime : AudioChannelRuntime__audioChannel).device), (currentTime / 1000.0)));
+    ((cast runtime : AudioChannelRuntime__audioChannel).startedAt = _Runtime.subtractNumbers(_Runtime.callProperty(backend, 'getDeviceTime', cast ([(cast runtime : AudioChannelRuntime__audioChannel).device] : Array<Dynamic>)), (currentTime / 1000.0)));
     (channel.currentTime = cast (currentTime : Float));
     (channel.state = cast ('playing' : AudioChannelState));
-    (cast backend : AudioDeviceBackend).startSource(({ final __callArgument45:Dynamic = sourceHandle; __callArgument45; }), (cast (currentTime / 1000.0) : Float), (cast ((cast hasRegion : Bool) ? (cast ((channel.loopEnd - currentTime) / 1000.0) : Dynamic) : (cast 0.0 : Dynamic)) : Float));
-    (cast backend : AudioDeviceBackend).setSourcePlaybackRate(({ final __callArgument46:Dynamic = sourceHandle; __callArgument46; }), (cast channel.playbackRate : Float));
-    gainNode = (cast getAudioSourceGainNode(({ final __callArgument47:Dynamic = sourceHandle; __callArgument47; })) : Null<flight._internal.dom.GainNode>);
+    _Runtime.callProperty(backend, 'startSource', cast ([sourceHandle, (currentTime / 1000.0), ((cast hasRegion : Bool) ? (cast ((channel.loopEnd - currentTime) / 1000.0) : Dynamic) : (cast 0.0 : Dynamic))] : Array<Dynamic>));
+    _Runtime.callProperty(backend, 'setSourcePlaybackRate', cast ([sourceHandle, channel.playbackRate] : Array<Dynamic>));
+    gainNode = (cast getAudioSourceGainNode(({ final __callArgument38:Dynamic = backend; __callArgument38; }), ({ final __callArgument39:Dynamic = sourceHandle; __callArgument39; })) : Null<flight._internal.dom.GainNode>);
     if ((cast ((cast !_Runtime.strictEquals(gainNode, null) : Bool) && (cast !_Runtime.strictEquals((cast runtime : AudioChannelRuntime__audioChannel).destinationNode, null) : Bool)) : Bool)) {
       (cast gainNode : flight._internal.dom.GainNode).disconnect();
       (cast gainNode : flight._internal.dom.GainNode).connect((cast runtime : AudioChannelRuntime__audioChannel).destinationNode);
     }
-    (cast backend : AudioDeviceBackend).resumeDevice((cast runtime : AudioChannelRuntime__audioChannel).device);
+    _Runtime.callProperty(backend, 'resumeDevice', cast ([(cast runtime : AudioChannelRuntime__audioChannel).device] : Array<Dynamic>));
   }
 
   @:allow(flight)
   @:keep
-  private static function createWebAudioDeviceBackend():{ >AudioDeviceBackend, >AudioDeviceBackendWebExtension__audioDeviceBackend, } {
+  private static function createWebAudioDeviceBackend():AudioDeviceBackend {
     var handle:Void->Float = cast _Runtime.UNDEFINED;
     var nextHandle:Float = cast _Runtime.UNDEFINED;
     var devices:flight._internal._Map<Float, flight._internal.dom.AudioContext> = cast _Runtime.UNDEFINED;
     var buffers:flight._internal._Map<Float, flight._internal.dom.AudioBuffer> = cast _Runtime.UNDEFINED;
-    var sources:flight._internal._Map<Float, { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }> = cast _Runtime.UNDEFINED;
+    var sources:flight._internal._Map<Float, AudioSourceEntry__audioDeviceBackend> = cast _Runtime.UNDEFINED;
+    var out:EntityConstruction<{ >AudioDeviceBackend, >AudioDeviceBackendWebExtension__audioDeviceBackend, }> = cast _Runtime.UNDEFINED;
     handle = (cast function handle():Float {
       return cast nextHandle++;
       return cast _Runtime.UNDEFINED;
@@ -357,7 +399,37 @@ class _Media {
     devices = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
     buffers = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
     sources = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
-    return cast { createBuffer: function(device:AudioDeviceHandle, channels:Float, length:Float, sampleRate:Float, data:Array<flight._internal._Float32Array>):AudioBufferHandle {
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ createBuffer: cast _Runtime.UNDEFINED, createDevice: cast _Runtime.UNDEFINED, createSource: cast _Runtime.UNDEFINED, destroyBuffer: cast _Runtime.UNDEFINED, destroyDevice: cast _Runtime.UNDEFINED, destroySource: cast _Runtime.UNDEFINED, getDeviceTime: cast _Runtime.UNDEFINED, onSourceEnded: cast _Runtime.UNDEFINED, resumeDevice: cast _Runtime.UNDEFINED, setSourceGain: cast _Runtime.UNDEFINED, setSourcePan: cast _Runtime.UNDEFINED, setSourcePlaybackRate: cast _Runtime.UNDEFINED, startSource: cast _Runtime.UNDEFINED, stopSource: cast _Runtime.UNDEFINED, getSourceBufferSourceNode: cast _Runtime.UNDEFINED, getSourceGainNode: cast _Runtime.UNDEFINED } : EntityShapeL20C15__audioDeviceBackend); }) #end));
+    initializeWebAudioDeviceBackend((cast out : Dynamic), ({ final __callArgument42:Dynamic = devices; __callArgument42; }), ({ final __callArgument43:Dynamic = buffers; __callArgument43; }), (cast sources : Dynamic), ({ final __callArgument44:Dynamic = handle; __callArgument44; }));
+    return cast out;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function getAudioSourceBufferSourceNode(backend:AudioDeviceBackend, source:AudioSourceHandle):Null<flight._internal.dom.AudioBufferSourceNode> {
+    if ((cast (cast _Media.isWebExtendedBackend__audioDeviceBackend(({ final __callArgument48:Dynamic = backend; __callArgument48; })) : Bool) : Bool)) { return cast (cast backend : AudioDeviceBackendWebExtension__audioDeviceBackend).getSourceBufferSourceNode(({ final __callArgument50:Dynamic = source; __callArgument50; })); }
+    return cast null;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function getAudioSourceGainNode(backend:AudioDeviceBackend, source:AudioSourceHandle):Null<flight._internal.dom.GainNode> {
+    if ((cast (cast _Media.isWebExtendedBackend__audioDeviceBackend(({ final __callArgument51:Dynamic = backend; __callArgument51; })) : Bool) : Bool)) { return cast (cast backend : AudioDeviceBackendWebExtension__audioDeviceBackend).getSourceGainNode(({ final __callArgument53:Dynamic = source; __callArgument53; })); }
+    return cast null;
+    return cast null;
+  }
+
+  public static function hasAudioDeviceWebNodeAccess(backend:AudioDeviceBackend):Bool {
+    return cast (cast _Media.isWebExtendedBackend__audioDeviceBackend(({ final __callArgument54:Dynamic = backend; __callArgument54; })) : Bool);
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeWebAudioDeviceBackend(out:EntityConstruction<{ >AudioDeviceBackend, >AudioDeviceBackendWebExtension__audioDeviceBackend, }>, devices:flight._internal._Map<Float, flight._internal.dom.AudioContext>, buffers:flight._internal._Map<Float, flight._internal.dom.AudioBuffer>, sources:flight._internal._Map<Float, AudioSourceEntry__audioDeviceBackend>, handle:Void->Float):Void {
+    ((cast out : { var createBuffer:AudioDeviceHandle->Float->Float->Float->Array<flight._internal._Float32Array>->AudioBufferHandle; }).createBuffer = (cast function(device:AudioDeviceHandle, channels:Float, length:Float, sampleRate:Float, data:Array<flight._internal._Float32Array>):AudioBufferHandle {
       var context:Null<flight._internal.dom.AudioContext> = cast _Runtime.UNDEFINED;
       var audioBuffer:flight._internal.dom.AudioBuffer = cast _Runtime.UNDEFINED;
       var h:AudioBufferHandle = cast _Runtime.UNDEFINED;
@@ -375,7 +447,8 @@ class _Media {
       ((cast buffers : flight._internal._Map<Float, flight._internal.dom.AudioBuffer>).set((cast (cast h : Float)), (cast audioBuffer)));
       return cast h;
       return cast _Runtime.UNDEFINED;
-    }, createDevice: function(sampleRate:Float):AudioDeviceHandle {
+    }));
+    ((cast out : { var createDevice:Float->AudioDeviceHandle; }).createDevice = (cast function(sampleRate:Float):AudioDeviceHandle {
       var context:flight._internal.dom.AudioContext = cast _Runtime.UNDEFINED;
       var h:AudioDeviceHandle = cast _Runtime.UNDEFINED;
       context = _Runtime.construct(flight._internal._HostValueLut.get('AudioContext'), [{ sampleRate: sampleRate }]);
@@ -383,7 +456,8 @@ class _Media {
       ((cast devices : flight._internal._Map<Float, flight._internal.dom.AudioContext>).set((cast (cast h : Float)), (cast context)));
       return cast h;
       return cast _Runtime.UNDEFINED;
-    }, createSource: function(device:AudioDeviceHandle, buffer:AudioBufferHandle):AudioSourceHandle {
+    }));
+    ((cast out : { var createSource:AudioDeviceHandle->AudioBufferHandle->AudioSourceHandle; }).createSource = (cast function(device:AudioDeviceHandle, buffer:AudioBufferHandle):AudioSourceHandle {
       var context:Null<flight._internal.dom.AudioContext> = cast _Runtime.UNDEFINED;
       var audioBuffer:Null<flight._internal.dom.AudioBuffer> = cast _Runtime.UNDEFINED;
       var gainNode:flight._internal.dom.GainNode = cast _Runtime.UNDEFINED;
@@ -397,12 +471,14 @@ class _Media {
       pannerNode = (cast context : flight._internal.dom.AudioContext).createStereoPanner();
       (cast pannerNode : flight._internal.dom.StereoPannerNode).connect(gainNode);
       h = (cast (cast handle() : flight._internal._Any) : AudioSourceHandle);
-      ((cast sources : flight._internal._Map<Float, { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }>).set((cast (cast h : Float)), (cast { buffer: audioBuffer, context: context, gainNode: gainNode, pannerNode: pannerNode, onEnded: null, sourceNode: null, state: 'stopped' })));
+      ((cast sources : flight._internal._Map<Float, AudioSourceEntry__audioDeviceBackend>).set((cast (cast h : Float)), (cast { buffer: audioBuffer, context: context, gainNode: gainNode, pannerNode: pannerNode, onEnded: null, sourceNode: null, state: 'stopped' })));
       return cast h;
       return cast _Runtime.UNDEFINED;
-    }, destroyBuffer: function(buffer:AudioBufferHandle):Void {
+    }));
+    ((cast out : { var destroyBuffer:AudioBufferHandle->Void; }).destroyBuffer = (cast function(buffer:AudioBufferHandle):Void {
       ((cast buffers : flight._internal._Map<Float, flight._internal.dom.AudioBuffer>).delete_((cast (cast buffer : Float))));
-    }, destroyDevice: function(device:AudioDeviceHandle):Void {
+    }));
+    ((cast out : { var destroyDevice:AudioDeviceHandle->Void; }).destroyDevice = (cast function(device:AudioDeviceHandle):Void {
       var context:Null<flight._internal.dom.AudioContext> = cast _Runtime.UNDEFINED;
       context = ((cast devices : flight._internal._Map<Float, flight._internal.dom.AudioContext>).get((cast (cast device : Float))));
       if ((cast _Runtime.strictEquals(context, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -410,237 +486,119 @@ class _Media {
 
       });
       ((cast devices : flight._internal._Map<Float, flight._internal.dom.AudioContext>).delete_((cast (cast device : Float))));
-    }, destroySource: function(source:AudioSourceHandle):Void {
-      var s:Null<{ var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }> = cast _Runtime.UNDEFINED;
-      s = ((cast sources : flight._internal._Map<Float, { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }>).get((cast (cast source : Float))));
+    }));
+    ((cast out : { var destroySource:AudioSourceHandle->Void; }).destroySource = (cast function(source:AudioSourceHandle):Void {
+      var s:Null<AudioSourceEntry__audioDeviceBackend> = cast _Runtime.UNDEFINED;
+      s = ((cast sources : flight._internal._Map<Float, AudioSourceEntry__audioDeviceBackend>).get((cast (cast source : Float))));
       if ((cast _Runtime.strictEquals(s, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       ((cast s : { var onEnded:Null<Void->Void>; }).onEnded = (cast null));
-      if ((cast !_Runtime.strictEquals((cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).sourceNode, null) : Bool)) {
-        ((cast (cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).sourceNode : flight._internal.dom.AudioBufferSourceNode).onended = null);
-        if ((cast _Runtime.strictEquals((cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).state, 'playing') : Bool)) {
+      if ((cast !_Runtime.strictEquals((cast s : AudioSourceEntry__audioDeviceBackend).sourceNode, null) : Bool)) {
+        ((cast (cast s : AudioSourceEntry__audioDeviceBackend).sourceNode : flight._internal.dom.AudioBufferSourceNode).onended = null);
+        if ((cast _Runtime.strictEquals((cast s : AudioSourceEntry__audioDeviceBackend).state, 'playing') : Bool)) {
           try {
-            (cast _Media.assertSyncVoid__audioDeviceBackend : flight._internal._Nothing->Void)(({ (cast (cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).sourceNode : flight._internal.dom.AudioBufferSourceNode).stop(); _Runtime.UNDEFINED; }));
+            (cast _Media.assertSyncVoid__audioDeviceBackend : flight._internal._Nothing->Void)(({ (cast (cast s : AudioSourceEntry__audioDeviceBackend).sourceNode : flight._internal.dom.AudioBufferSourceNode).stop(); _Runtime.UNDEFINED; }));
           } catch (__error:Dynamic) {
           }
         }
-        (cast (cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).sourceNode : flight._internal.dom.AudioBufferSourceNode).disconnect();
+        (cast (cast s : AudioSourceEntry__audioDeviceBackend).sourceNode : flight._internal.dom.AudioBufferSourceNode).disconnect();
       }
-      (cast (cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).pannerNode : flight._internal.dom.StereoPannerNode).disconnect();
-      (cast (cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).gainNode : flight._internal.dom.GainNode).disconnect();
-      ((cast sources : flight._internal._Map<Float, { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }>).delete_((cast (cast source : Float))));
-    }, getDeviceTime: function(device:AudioDeviceHandle):Float {
+      (cast (cast s : AudioSourceEntry__audioDeviceBackend).pannerNode : flight._internal.dom.StereoPannerNode).disconnect();
+      (cast (cast s : AudioSourceEntry__audioDeviceBackend).gainNode : flight._internal.dom.GainNode).disconnect();
+      ((cast sources : flight._internal._Map<Float, AudioSourceEntry__audioDeviceBackend>).delete_((cast (cast source : Float))));
+    }));
+    ((cast out : { var getDeviceTime:AudioDeviceHandle->Float; }).getDeviceTime = (cast function(device:AudioDeviceHandle):Float {
       var context:Null<flight._internal.dom.AudioContext> = cast _Runtime.UNDEFINED;
       context = ((cast devices : flight._internal._Map<Float, flight._internal.dom.AudioContext>).get((cast (cast device : Float))));
       return cast ((cast !_Runtime.strictEquals(context, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast context : flight._internal.dom.AudioContext).currentTime : Dynamic) : (cast 0.0 : Dynamic));
       return cast _Runtime.UNDEFINED;
-    }, onSourceEnded: function(source:AudioSourceHandle, callback:Null<Void->Void>):Void {
-      var s:Null<{ var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }> = cast _Runtime.UNDEFINED;
-      s = ((cast sources : flight._internal._Map<Float, { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }>).get((cast (cast source : Float))));
+    }));
+    ((cast out : { var getSourceBufferSourceNode:AudioSourceHandle->Null<flight._internal.dom.AudioBufferSourceNode>; }).getSourceBufferSourceNode = (cast function(source:AudioSourceHandle):Null<flight._internal.dom.AudioBufferSourceNode> {
+      var s:Null<AudioSourceEntry__audioDeviceBackend> = cast _Runtime.UNDEFINED;
+      s = ((cast sources : flight._internal._Map<Float, AudioSourceEntry__audioDeviceBackend>).get((cast (cast source : Float))));
+      return cast _Runtime.coalesce(({ final __structural56 = s; __structural56 == null ? _Runtime.UNDEFINED : (cast __structural56 : { var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; }).sourceNode; }), function():Dynamic return cast null);
+      return cast _Runtime.UNDEFINED;
+    }));
+    ((cast out : { var getSourceGainNode:AudioSourceHandle->Null<flight._internal.dom.GainNode>; }).getSourceGainNode = (cast function(source:AudioSourceHandle):Null<flight._internal.dom.GainNode> {
+      var s:Null<AudioSourceEntry__audioDeviceBackend> = cast _Runtime.UNDEFINED;
+      s = ((cast sources : flight._internal._Map<Float, AudioSourceEntry__audioDeviceBackend>).get((cast (cast source : Float))));
+      return cast _Runtime.coalesce(({ final __structural57 = s; __structural57 == null ? _Runtime.UNDEFINED : (cast __structural57 : { var gainNode:flight._internal.dom.GainNode; }).gainNode; }), function():Dynamic return cast null);
+      return cast _Runtime.UNDEFINED;
+    }));
+    ((cast out : { var onSourceEnded:AudioSourceHandle->Null<Void->Void>->Void; }).onSourceEnded = (cast function(source:AudioSourceHandle, callback:Null<Void->Void>):Void {
+      var s:Null<AudioSourceEntry__audioDeviceBackend> = cast _Runtime.UNDEFINED;
+      s = ((cast sources : flight._internal._Map<Float, AudioSourceEntry__audioDeviceBackend>).get((cast (cast source : Float))));
       if ((cast _Runtime.strictEquals(s, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       ((cast s : { var onEnded:Null<Void->Void>; }).onEnded = (cast callback));
-    }, resumeDevice: function(device:AudioDeviceHandle):Void {
+    }));
+    ((cast out : { var resumeDevice:AudioDeviceHandle->Void; }).resumeDevice = (cast function(device:AudioDeviceHandle):Void {
       var context:Null<flight._internal.dom.AudioContext> = cast _Runtime.UNDEFINED;
       context = ((cast devices : flight._internal._Map<Float, flight._internal.dom.AudioContext>).get((cast (cast device : Float))));
       if ((cast !_Runtime.strictEquals(context, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal._Async.recover((cast context : flight._internal.dom.AudioContext).resume(), function(__unused1:flight._internal._Any):Void {
 
       }); }
-    }, setSourceGain: function(source:AudioSourceHandle, gain:Float):Void {
-      var s:Null<{ var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }> = cast _Runtime.UNDEFINED;
-      s = ((cast sources : flight._internal._Map<Float, { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }>).get((cast (cast source : Float))));
+    }));
+    ((cast out : { var setSourceGain:AudioSourceHandle->Float->Void; }).setSourceGain = (cast function(source:AudioSourceHandle, gain:Float):Void {
+      var s:Null<AudioSourceEntry__audioDeviceBackend> = cast _Runtime.UNDEFINED;
+      s = ((cast sources : flight._internal._Map<Float, AudioSourceEntry__audioDeviceBackend>).get((cast (cast source : Float))));
       if ((cast _Runtime.strictEquals(s, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-      ((cast (cast (cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).gainNode : flight._internal.dom.GainNode).gain : flight._internal.dom.AudioParam).value = gain);
-    }, setSourcePan: function(source:AudioSourceHandle, pan:Float):Void {
-      var s:Null<{ var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }> = cast _Runtime.UNDEFINED;
-      s = ((cast sources : flight._internal._Map<Float, { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }>).get((cast (cast source : Float))));
+      ((cast (cast (cast s : AudioSourceEntry__audioDeviceBackend).gainNode : flight._internal.dom.GainNode).gain : flight._internal.dom.AudioParam).value = gain);
+    }));
+    ((cast out : { var setSourcePan:AudioSourceHandle->Float->Void; }).setSourcePan = (cast function(source:AudioSourceHandle, pan:Float):Void {
+      var s:Null<AudioSourceEntry__audioDeviceBackend> = cast _Runtime.UNDEFINED;
+      s = ((cast sources : flight._internal._Map<Float, AudioSourceEntry__audioDeviceBackend>).get((cast (cast source : Float))));
       if ((cast _Runtime.strictEquals(s, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-      ((cast (cast (cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).pannerNode : flight._internal.dom.StereoPannerNode).pan : flight._internal.dom.AudioParam).value = pan);
-    }, setSourcePlaybackRate: function(source:AudioSourceHandle, rate:Float):Void {
-      var s:Null<{ var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }> = cast _Runtime.UNDEFINED;
-      s = ((cast sources : flight._internal._Map<Float, { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }>).get((cast (cast source : Float))));
-      if ((cast ((cast _Runtime.strictEquals(s, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals((cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).sourceNode, null) : Bool)) : Bool)) { return; }
-      ((cast (cast (cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).sourceNode : flight._internal.dom.AudioBufferSourceNode).playbackRate : flight._internal.dom.AudioParam).value = rate);
-    }, startSource: function(source:AudioSourceHandle, offset:Float, duration:Float):Void {
-      var s:Null<{ var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }> = cast _Runtime.UNDEFINED;
+      ((cast (cast (cast s : AudioSourceEntry__audioDeviceBackend).pannerNode : flight._internal.dom.StereoPannerNode).pan : flight._internal.dom.AudioParam).value = pan);
+    }));
+    ((cast out : { var setSourcePlaybackRate:AudioSourceHandle->Float->Void; }).setSourcePlaybackRate = (cast function(source:AudioSourceHandle, rate:Float):Void {
+      var s:Null<AudioSourceEntry__audioDeviceBackend> = cast _Runtime.UNDEFINED;
+      s = ((cast sources : flight._internal._Map<Float, AudioSourceEntry__audioDeviceBackend>).get((cast (cast source : Float))));
+      if ((cast ((cast _Runtime.strictEquals(s, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals((cast s : AudioSourceEntry__audioDeviceBackend).sourceNode, null) : Bool)) : Bool)) { return; }
+      ((cast (cast (cast s : AudioSourceEntry__audioDeviceBackend).sourceNode : flight._internal.dom.AudioBufferSourceNode).playbackRate : flight._internal.dom.AudioParam).value = rate);
+    }));
+    ((cast out : { var startSource:AudioSourceHandle->Float->Float->Void; }).startSource = (cast function(source:AudioSourceHandle, offset:Float, duration:Float):Void {
+      var s:Null<AudioSourceEntry__audioDeviceBackend> = cast _Runtime.UNDEFINED;
       var sourceNode:flight._internal.dom.AudioBufferSourceNode = cast _Runtime.UNDEFINED;
-      s = ((cast sources : flight._internal._Map<Float, { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }>).get((cast (cast source : Float))));
+      s = ((cast sources : flight._internal._Map<Float, AudioSourceEntry__audioDeviceBackend>).get((cast (cast source : Float))));
       if ((cast _Runtime.strictEquals(s, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-      if ((cast !_Runtime.strictEquals((cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).sourceNode, null) : Bool)) {
-        ((cast (cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).sourceNode : flight._internal.dom.AudioBufferSourceNode).onended = null);
+      if ((cast !_Runtime.strictEquals((cast s : AudioSourceEntry__audioDeviceBackend).sourceNode, null) : Bool)) {
+        ((cast (cast s : AudioSourceEntry__audioDeviceBackend).sourceNode : flight._internal.dom.AudioBufferSourceNode).onended = null);
         try {
-          (cast (cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).sourceNode : flight._internal.dom.AudioBufferSourceNode).stop();
+          (cast (cast s : AudioSourceEntry__audioDeviceBackend).sourceNode : flight._internal.dom.AudioBufferSourceNode).stop();
         } catch (__error:Dynamic) {
         }
-        (cast (cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).sourceNode : flight._internal.dom.AudioBufferSourceNode).disconnect();
+        (cast (cast s : AudioSourceEntry__audioDeviceBackend).sourceNode : flight._internal.dom.AudioBufferSourceNode).disconnect();
       }
-      sourceNode = (cast (cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).context : flight._internal.dom.AudioContext).createBufferSource();
-      ((cast sourceNode : flight._internal.dom.AudioBufferSourceNode).buffer = (cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).buffer);
-      (cast sourceNode : flight._internal.dom.AudioBufferSourceNode).connect((cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).pannerNode);
+      sourceNode = (cast (cast s : AudioSourceEntry__audioDeviceBackend).context : flight._internal.dom.AudioContext).createBufferSource();
+      ((cast sourceNode : flight._internal.dom.AudioBufferSourceNode).buffer = (cast s : AudioSourceEntry__audioDeviceBackend).buffer);
+      (cast sourceNode : flight._internal.dom.AudioBufferSourceNode).connect((cast s : AudioSourceEntry__audioDeviceBackend).pannerNode);
       ((cast sourceNode : flight._internal.dom.AudioBufferSourceNode).onended = function(__unused3:flight._internal.dom.Event):Void { _Runtime.callValue(function(__unused2:flight._internal.dom.Event):Void {
-        ((cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).state = 'stopped');
-        ((cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).sourceNode = null);
-        if ((cast !_Runtime.strictEquals((cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).onEnded, null) : Bool)) { (cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).onEnded(); }
+        ((cast s : AudioSourceEntry__audioDeviceBackend).state = 'stopped');
+        ((cast s : AudioSourceEntry__audioDeviceBackend).sourceNode = null);
+        if ((cast !_Runtime.strictEquals((cast s : AudioSourceEntry__audioDeviceBackend).onEnded, null) : Bool)) { (cast s : AudioSourceEntry__audioDeviceBackend).onEnded(); }
       }, cast ([] : Array<Dynamic>)); });
-      ((cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).sourceNode = sourceNode);
-      ((cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).state = 'playing');
+      ((cast s : AudioSourceEntry__audioDeviceBackend).sourceNode = sourceNode);
+      ((cast s : AudioSourceEntry__audioDeviceBackend).state = 'playing');
       if ((cast ((cast duration : Float) > (cast 0.0 : Float)) : Bool)) { (cast sourceNode : flight._internal.dom.AudioBufferSourceNode).start(0.0, offset, duration); } else { (cast sourceNode : flight._internal.dom.AudioBufferSourceNode).start(0.0, offset); }
-    }, stopSource: function(source:AudioSourceHandle):Void {
-      var s:Null<{ var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }> = cast _Runtime.UNDEFINED;
-      s = ((cast sources : flight._internal._Map<Float, { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }>).get((cast (cast source : Float))));
-      if ((cast ((cast _Runtime.strictEquals(s, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals((cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).sourceNode, null) : Bool)) : Bool)) { return; }
-      ((cast (cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).sourceNode : flight._internal.dom.AudioBufferSourceNode).onended = null);
+    }));
+    ((cast out : { var stopSource:AudioSourceHandle->Void; }).stopSource = (cast function(source:AudioSourceHandle):Void {
+      var s:Null<AudioSourceEntry__audioDeviceBackend> = cast _Runtime.UNDEFINED;
+      s = ((cast sources : flight._internal._Map<Float, AudioSourceEntry__audioDeviceBackend>).get((cast (cast source : Float))));
+      if ((cast ((cast _Runtime.strictEquals(s, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals((cast s : AudioSourceEntry__audioDeviceBackend).sourceNode, null) : Bool)) : Bool)) { return; }
+      ((cast (cast s : AudioSourceEntry__audioDeviceBackend).sourceNode : flight._internal.dom.AudioBufferSourceNode).onended = null);
       try {
-        (cast (cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).sourceNode : flight._internal.dom.AudioBufferSourceNode).stop();
+        (cast (cast s : AudioSourceEntry__audioDeviceBackend).sourceNode : flight._internal.dom.AudioBufferSourceNode).stop();
       } catch (__error:Dynamic) {
       }
-      (cast (cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).sourceNode : flight._internal.dom.AudioBufferSourceNode).disconnect();
-      ((cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).sourceNode = null);
-      ((cast s : { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }).state = 'stopped');
-    }, getSourceBufferSourceNode: function(source:AudioSourceHandle):Null<flight._internal.dom.AudioBufferSourceNode> {
-      var s:Null<{ var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }> = cast _Runtime.UNDEFINED;
-      s = ((cast sources : flight._internal._Map<Float, { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }>).get((cast (cast source : Float))));
-      return cast _Runtime.coalesce(({ final __structural49 = s; __structural49 == null ? _Runtime.UNDEFINED : (cast __structural49 : { var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; }).sourceNode; }), function():Dynamic return cast null);
-      return cast _Runtime.UNDEFINED;
-    }, getSourceGainNode: function(source:AudioSourceHandle):Null<flight._internal.dom.GainNode> {
-      var s:Null<{ var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }> = cast _Runtime.UNDEFINED;
-      s = ((cast sources : flight._internal._Map<Float, { var buffer:flight._internal.dom.AudioBuffer; var context:flight._internal.dom.AudioContext; var gainNode:flight._internal.dom.GainNode; var pannerNode:flight._internal.dom.StereoPannerNode; var onEnded:Null<Void->Void>; var sourceNode:Null<flight._internal.dom.AudioBufferSourceNode>; var state:String; }>).get((cast (cast source : Float))));
-      return cast _Runtime.coalesce(({ final __structural50 = s; __structural50 == null ? _Runtime.UNDEFINED : (cast __structural50 : { var gainNode:flight._internal.dom.GainNode; }).gainNode; }), function():Dynamic return cast null);
-      return cast _Runtime.UNDEFINED;
-    } };
-    return cast null;
-  }
-
-  public static function explainAudioDeviceBackend():BackendExplanation {
-    if ((cast !_Runtime.strictEquals(_Media._custom__audioDeviceBackend, null) : Bool)) {
-      return cast { conflict: _Media._hostConflict__audioDeviceBackend, layer: 'custom', operation: null, viability: 'unobserved' };
-    }
-    if ((cast !_Runtime.strictEquals(_Media._host__audioDeviceBackend, null) : Bool)) {
-      return cast { conflict: _Media._hostConflict__audioDeviceBackend, layer: 'host', operation: ((cast !_Runtime.strictEquals(_Media._hostObservation__audioDeviceBackend, null) : Bool) ? (cast (cast _Media._hostObservation__audioDeviceBackend : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(_Media._hostObservation__audioDeviceBackend, null) : Bool) ? (cast (cast _Media._hostObservation__audioDeviceBackend : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
-    }
-    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
-    return cast null;
-  }
-
-  public static function explainAudioDeviceOperation(operation:AudioDeviceOperation):BackendOperationExplanation {
-    if ((cast ((cast !_Runtime.strictEquals(_Media._custom__audioDeviceBackend, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Media._custom__audioDeviceBackend, operation)), 'function') : Bool)) : Bool)) {
-      return cast { implemented: true, layer: 'custom', operation: operation };
-    }
-    if ((cast ((cast !_Runtime.strictEquals(_Media._host__audioDeviceBackend, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Media._host__audioDeviceBackend, operation)), 'function') : Bool)) : Bool)) {
-      return cast { implemented: true, layer: 'host', operation: operation };
-    }
-    return cast { implemented: false, layer: 'sentinel', operation: operation };
-    return cast null;
-  }
-
-  public static function getAudioDeviceBackend():AudioDeviceBackend {
-    return cast _Runtime.coalesce(_Runtime.coalesce(_Media._custom__audioDeviceBackend, function():Dynamic return cast _Media._host__audioDeviceBackend), function():Dynamic return cast _Media._sentinel__audioDeviceBackend);
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function getAudioSourceBufferSourceNode(source:AudioSourceHandle):Null<flight._internal.dom.AudioBufferSourceNode> {
-    var backend:AudioDeviceBackend = cast _Runtime.UNDEFINED;
-    backend = _Runtime.coalesce(_Runtime.coalesce(_Media._custom__audioDeviceBackend, function():Dynamic return cast _Media._host__audioDeviceBackend), function():Dynamic return cast _Media._sentinel__audioDeviceBackend);
-    if ((cast (cast _Media.isWebExtendedBackend__audioDeviceBackend(({ final __callArgument51:Dynamic = backend; __callArgument51; })) : Bool) : Bool)) { return cast (cast backend : AudioDeviceBackendWebExtension__audioDeviceBackend).getSourceBufferSourceNode(({ final __callArgument53:Dynamic = source; __callArgument53; })); }
-    return cast null;
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function getAudioSourceGainNode(source:AudioSourceHandle):Null<flight._internal.dom.GainNode> {
-    var backend:AudioDeviceBackend = cast _Runtime.UNDEFINED;
-    backend = _Runtime.coalesce(_Runtime.coalesce(_Media._custom__audioDeviceBackend, function():Dynamic return cast _Media._host__audioDeviceBackend), function():Dynamic return cast _Media._sentinel__audioDeviceBackend);
-    if ((cast (cast _Media.isWebExtendedBackend__audioDeviceBackend(({ final __callArgument54:Dynamic = backend; __callArgument54; })) : Bool) : Bool)) { return cast (cast backend : AudioDeviceBackendWebExtension__audioDeviceBackend).getSourceGainNode(({ final __callArgument56:Dynamic = source; __callArgument56; })); }
-    return cast null;
-    return cast null;
-  }
-
-  public static function hasAudioDeviceOperation(operation:AudioDeviceOperation):Bool {
-    return cast (cast (cast explainAudioDeviceOperation((cast operation : String)) : BackendOperationExplanation) : BackendOperationExplanation).implemented;
-    return cast null;
-  }
-
-  public static function hasAudioDeviceWebNodeAccess():Bool {
-    return cast (cast _Media.isWebExtendedBackend__audioDeviceBackend(({ final __callArgument57:Dynamic = _Runtime.coalesce(_Runtime.coalesce(_Media._custom__audioDeviceBackend, function():Dynamic return cast _Media._host__audioDeviceBackend), function():Dynamic return cast _Media._sentinel__audioDeviceBackend); __callArgument57; })) : Bool);
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function installAudioDeviceHostBackend(backend:AudioDeviceBackend):Void {
-    if ((cast !_Runtime.strictEquals(_Media._host__audioDeviceBackend, null) : Bool)) {
-      if ((cast !_Runtime.strictEquals(_Media._host__audioDeviceBackend, backend) : Bool)) { (_Media._hostConflict__audioDeviceBackend = cast (true : Dynamic)); }
-      return;
-    }
-    (_Media._host__audioDeviceBackend = cast (backend : Dynamic));
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function observeAudioDeviceHostResult(operation:String, succeeded:Bool):Void {
-    (_Media._hostObservation__audioDeviceBackend = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function resetAudioDeviceBackendForTest():Void {
-    (_Media._custom__audioDeviceBackend = cast (null : Dynamic));
-    (_Media._host__audioDeviceBackend = cast (null : Dynamic));
-    (_Media._hostConflict__audioDeviceBackend = cast (false : Dynamic));
-    (_Media._hostObservation__audioDeviceBackend = cast (null : Dynamic));
-  }
-
-  public static function setAudioDeviceBackend(backend:Null<AudioDeviceBackend>):Void {
-    (_Media._custom__audioDeviceBackend = cast (backend : Dynamic));
+      (cast (cast s : AudioSourceEntry__audioDeviceBackend).sourceNode : flight._internal.dom.AudioBufferSourceNode).disconnect();
+      ((cast s : AudioSourceEntry__audioDeviceBackend).sourceNode = null);
+      ((cast s : AudioSourceEntry__audioDeviceBackend).state = 'stopped');
+    }));
   }
 
   public static function isWebExtendedBackend__audioDeviceBackend(backend:AudioDeviceBackend):Bool {
     return cast ((cast _Runtime.hasField(backend, 'getSourceGainNode') : Bool) && (cast _Runtime.hasField(backend, 'getSourceBufferSourceNode') : Bool));
     return cast null;
   }
-
-  public static var _custom__audioDeviceBackend:Null<AudioDeviceBackend> = _Runtime.explicitNull();
-
-  public static var _host__audioDeviceBackend:Null<AudioDeviceBackend> = _Runtime.explicitNull();
-
-  public static var _hostConflict__audioDeviceBackend:Bool = false;
-
-  public static var _hostObservation__audioDeviceBackend:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
-
-  public static final _sentinel__audioDeviceBackend:AudioDeviceBackend = (cast { createBuffer: function(device:AudioDeviceHandle, channels:Float, length:Float, sampleRate:Float, data:Array<flight._internal._Float32Array>):AudioBufferHandle {
-    return cast (cast 0.0 : AudioBufferHandle);
-    return cast _Runtime.UNDEFINED;
-  }, createDevice: function(sampleRate:Float):AudioDeviceHandle {
-    return cast (cast 0.0 : AudioDeviceHandle);
-    return cast _Runtime.UNDEFINED;
-  }, createSource: function(device:AudioDeviceHandle, buffer:AudioBufferHandle):AudioSourceHandle {
-    return cast (cast 0.0 : AudioSourceHandle);
-    return cast _Runtime.UNDEFINED;
-  }, destroyBuffer: function(buffer:AudioBufferHandle):Void {
-
-  }, destroyDevice: function(device:AudioDeviceHandle):Void {
-
-  }, destroySource: function(source:AudioSourceHandle):Void {
-
-  }, getDeviceTime: function(device:AudioDeviceHandle):Float {
-    return cast 0.0;
-    return cast _Runtime.UNDEFINED;
-  }, onSourceEnded: function(source:AudioSourceHandle, callback:Null<Void->Void>):Void {
-
-  }, resumeDevice: function(device:AudioDeviceHandle):Void {
-
-  }, setSourceGain: function(source:AudioSourceHandle, gain:Float):Void {
-
-  }, setSourcePan: function(source:AudioSourceHandle, pan:Float):Void {
-
-  }, setSourcePlaybackRate: function(source:AudioSourceHandle, rate:Float):Void {
-
-  }, startSource: function(source:AudioSourceHandle, offset:Float, duration:Float):Void {
-
-  }, stopSource: function(source:AudioSourceHandle):Void {
-
-  } });
 
   public static function assertSyncVoid__audioDeviceBackend<T>(value:T):Void {
     _Runtime.voidValue(value);
@@ -667,21 +625,26 @@ class _Media {
     ((cast (cast runtime : AudioMixerRuntime__audioMixer).busGainNodes : flight._internal._Map<AudioBus, flight._internal.dom.GainNode>).set((cast bus), (cast gainNode)));
     if ((cast !_Runtime.strictEquals(pannerNode, null) : Bool)) { ((cast (cast runtime : AudioMixerRuntime__audioMixer).busOutputNodes : flight._internal._Map<AudioBus, flight._internal.dom.StereoPannerNode>).set((cast bus), (cast pannerNode))); }
     ((cast (cast runtime : AudioMixerRuntime__audioMixer).buses : flight._internal._Map<String, AudioBus>).set((cast bus.name), (cast bus)));
-    _Media.registerBusInReverseMap__audioMixer(({ final __callArgument59:Dynamic = bus; __callArgument59; }), (cast runtime : Dynamic));
+    _Media.registerBusInReverseMap__audioMixer(({ final __callArgument58:Dynamic = bus; __callArgument58; }), (cast runtime : Dynamic));
   }
 
   public static function createAudioBus(?options:AudioBusOptions):AudioBus {
-    return cast { gain: _Runtime.coalesce(({ final __typedStruct61 = options; __typedStruct61 == null ? _Runtime.UNDEFINED : __typedStruct61.gain; }), function():Dynamic return cast 1.0), muted: _Runtime.coalesce(({ final __typedStruct62 = options; __typedStruct62 == null ? _Runtime.UNDEFINED : __typedStruct62.muted; }), function():Dynamic return cast false), name: _Runtime.coalesce(({ final __typedStruct63 = options; __typedStruct63 == null ? _Runtime.UNDEFINED : __typedStruct63.name; }), function():Dynamic return cast ''), pan: _Runtime.coalesce(({ final __typedStruct64 = options; __typedStruct64 == null ? _Runtime.UNDEFINED : __typedStruct64.pan; }), function():Dynamic return cast 0.0) };
+    var out:EntityConstruction<AudioBus> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ gain: cast _Runtime.UNDEFINED, muted: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, pan: cast _Runtime.UNDEFINED } : AudioBus); }) #end));
+    initializeAudioBus(({ final __callArgument60:Dynamic = out; __callArgument60; }), ({ final __callArgument61:Dynamic = options; __callArgument61; }));
+    return cast out;
     return cast null;
   }
 
   public static function createAudioMixer(context:flight._internal.dom.AudioContext, ?options:AudioMixerOptions):AudioMixer {
     var masterGainNode:flight._internal.dom.GainNode = cast _Runtime.UNDEFINED;
-    var mixer:AudioMixer = cast _Runtime.UNDEFINED;
+    var mixer:EntityConstruction<AudioMixer> = cast _Runtime.UNDEFINED;
     masterGainNode = context.createGain();
-    ((cast (cast masterGainNode : flight._internal.dom.GainNode).gain : flight._internal.dom.AudioParam).value = _Runtime.coalesce(({ final __typedStruct65 = options; __typedStruct65 == null ? _Runtime.UNDEFINED : __typedStruct65.masterGain; }), function():Dynamic return cast 1.0));
+    ((cast (cast masterGainNode : flight._internal.dom.GainNode).gain : flight._internal.dom.AudioParam).value = _Runtime.coalesce(({ final __typedStruct64 = options; __typedStruct64 == null ? _Runtime.UNDEFINED : __typedStruct64.masterGain; }), function():Dynamic return cast 1.0));
     (cast masterGainNode : flight._internal.dom.GainNode).connect(context.destination);
-    mixer = (cast { masterGain: _Runtime.coalesce(({ final __typedStruct66 = options; __typedStruct66 == null ? _Runtime.UNDEFINED : __typedStruct66.masterGain; }), function():Dynamic return cast 1.0), masterMuted: _Runtime.coalesce(({ final __typedStruct67 = options; __typedStruct67 == null ? _Runtime.UNDEFINED : __typedStruct67.masterMuted; }), function():Dynamic return cast false) });
+    mixer = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ masterGain: cast _Runtime.UNDEFINED, masterMuted: cast _Runtime.UNDEFINED } : AudioMixer); }) #end));
+    _Runtime.setField(mixer, 'masterGain', _Runtime.coalesce(({ final __typedStruct65 = options; __typedStruct65 == null ? _Runtime.UNDEFINED : __typedStruct65.masterGain; }), function():Dynamic return cast 1.0));
+    _Runtime.setField(mixer, 'masterMuted', _Runtime.coalesce(({ final __typedStruct66 = options; __typedStruct66 == null ? _Runtime.UNDEFINED : __typedStruct66.masterMuted; }), function():Dynamic return cast false));
     ((cast _Media.mixerRuntimes__audioMixer : flight._internal._WeakMap<AudioMixer, AudioMixerRuntime__audioMixer>).set((cast mixer), (cast { activeChannels: _Runtime.construct(flight._internal._HostValueLut.get('Set'), []), channelsPausedByMixer: _Runtime.construct(flight._internal._HostValueLut.get('Set'), []), buses: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), busGainNodes: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), busOutputNodes: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), channelToBus: _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []), context: context, masterGainNode: masterGainNode })));
     return cast mixer;
     return cast null;
@@ -692,14 +655,14 @@ class _Media {
     runtime = ((cast _Media.mixerRuntimes__audioMixer : flight._internal._WeakMap<AudioMixer, AudioMixerRuntime__audioMixer>).get((cast mixer)));
     if ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     for (channel in _Runtime.iterable((cast runtime : AudioMixerRuntime__audioMixer).activeChannels)) {
-      stopAudioChannel(({ final __callArgument70:Dynamic = channel; __callArgument70; }));
+      stopAudioChannel(({ final __callArgument69:Dynamic = channel; __callArgument69; }));
     }
     ((cast (cast runtime : AudioMixerRuntime__audioMixer).activeChannels : flight._internal._Set<AudioChannel>).clear());
     for (pannerNode in _Runtime.iterable(((cast (cast runtime : AudioMixerRuntime__audioMixer).busOutputNodes : flight._internal._Map<AudioBus, flight._internal.dom.StereoPannerNode>).values()))) {
       (cast pannerNode : flight._internal.dom.StereoPannerNode).disconnect();
     }
     for (bus in _Runtime.iterable(((cast (cast runtime : AudioMixerRuntime__audioMixer).busGainNodes : flight._internal._Map<AudioBus, flight._internal.dom.GainNode>).keys()))) {
-      _Media.unregisterBusFromReverseMap__audioMixer(({ final __callArgument76:Dynamic = bus; __callArgument76; }), (cast runtime : Dynamic));
+      _Media.unregisterBusFromReverseMap__audioMixer(({ final __callArgument75:Dynamic = bus; __callArgument75; }), (cast runtime : Dynamic));
     }
     for (gainNode in _Runtime.iterable(((cast (cast runtime : AudioMixerRuntime__audioMixer).busGainNodes : flight._internal._Map<AudioBus, flight._internal.dom.GainNode>).values()))) {
       (cast gainNode : flight._internal.dom.GainNode).disconnect();
@@ -716,7 +679,7 @@ class _Media {
     var gainNode:Null<flight._internal.dom.GainNode> = cast _Runtime.UNDEFINED;
     var now:Float = cast _Runtime.UNDEFINED;
     runtime = ((cast _Media.mixerRuntimes__audioMixer : flight._internal._WeakMap<AudioMixer, AudioMixerRuntime__audioMixer>).get((cast mixer)));
-    gainNode = ({ final __collection82:Dynamic = ({ final __structural81 = runtime; __structural81 == null ? _Runtime.UNDEFINED : (cast __structural81 : { var busGainNodes:flight._internal._Map<AudioBus, flight._internal.dom.GainNode>; }).busGainNodes; }); __collection82 == null ? _Runtime.UNDEFINED : ((cast __collection82 : flight._internal._Map<AudioBus, flight._internal.dom.GainNode>).get((cast bus))); });
+    gainNode = ({ final __collection81:Dynamic = ({ final __structural80 = runtime; __structural80 == null ? _Runtime.UNDEFINED : (cast __structural80 : { var busGainNodes:flight._internal._Map<AudioBus, flight._internal.dom.GainNode>; }).busGainNodes; }); __collection81 == null ? _Runtime.UNDEFINED : ((cast __collection81 : flight._internal._Map<AudioBus, flight._internal.dom.GainNode>).get((cast bus))); });
     if ((cast _Runtime.strictEquals(gainNode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (bus.gain = cast (targetGain : Float));
       return;
@@ -736,13 +699,22 @@ class _Media {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeAudioBus(out:EntityConstruction<AudioBus>, ?options:AudioBusOptions):Void {
+    _Runtime.setField(out, 'gain', _Runtime.coalesce(({ final __typedStruct82 = options; __typedStruct82 == null ? _Runtime.UNDEFINED : __typedStruct82.gain; }), function():Dynamic return cast 1.0));
+    _Runtime.setField(out, 'muted', _Runtime.coalesce(({ final __typedStruct83 = options; __typedStruct83 == null ? _Runtime.UNDEFINED : __typedStruct83.muted; }), function():Dynamic return cast false));
+    _Runtime.setField(out, 'name', _Runtime.coalesce(({ final __typedStruct84 = options; __typedStruct84 == null ? _Runtime.UNDEFINED : __typedStruct84.name; }), function():Dynamic return cast ''));
+    _Runtime.setField(out, 'pan', _Runtime.coalesce(({ final __typedStruct85 = options; __typedStruct85 == null ? _Runtime.UNDEFINED : __typedStruct85.pan; }), function():Dynamic return cast 0.0));
+  }
+
   public static function pauseAllAudioMixerChannels(mixer:AudioMixer):Void {
     var runtime:Null<AudioMixerRuntime__audioMixer> = cast _Runtime.UNDEFINED;
     runtime = ((cast _Media.mixerRuntimes__audioMixer : flight._internal._WeakMap<AudioMixer, AudioMixerRuntime__audioMixer>).get((cast mixer)));
     if ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     for (channel in _Runtime.iterable((cast runtime : AudioMixerRuntime__audioMixer).activeChannels)) {
       if ((cast !_Runtime.strictEquals(channel.state, 'playing') : Bool)) { continue; }
-      pauseAudioChannel(({ final __callArgument85:Dynamic = channel; __callArgument85; }));
+      pauseAudioChannel(({ final __callArgument88:Dynamic = channel; __callArgument88; }));
       ((cast (cast runtime : AudioMixerRuntime__audioMixer).channelsPausedByMixer : flight._internal._Set<AudioChannel>).add((cast channel)));
     }
   }
@@ -752,7 +724,7 @@ class _Media {
     runtime = ((cast _Media.mixerRuntimes__audioMixer : flight._internal._WeakMap<AudioMixer, AudioMixerRuntime__audioMixer>).get((cast mixer)));
     if ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     for (channel in _Runtime.iterable((cast runtime : AudioMixerRuntime__audioMixer).channelsPausedByMixer)) {
-      if ((cast _Runtime.strictEquals(channel.state, 'paused') : Bool)) { resumeAudioChannel(({ final __callArgument89:Dynamic = channel; __callArgument89; })); }
+      if ((cast _Runtime.strictEquals(channel.state, 'paused') : Bool)) { resumeAudioChannel(({ final __callArgument92:Dynamic = channel; __callArgument92; })); }
     }
     ((cast (cast runtime : AudioMixerRuntime__audioMixer).channelsPausedByMixer : flight._internal._Set<AudioChannel>).clear());
   }
@@ -762,19 +734,19 @@ class _Media {
     var busGainNode:Null<flight._internal.dom.GainNode> = cast _Runtime.UNDEFINED;
     runtime = ((cast _Media.mixerRuntimes__audioMixer : flight._internal._WeakMap<AudioMixer, AudioMixerRuntime__audioMixer>).get((cast mixer)));
     if ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    addAudioBusToMixer(({ final __callArgument91:Dynamic = mixer; __callArgument91; }), ({ final __callArgument92:Dynamic = bus; __callArgument92; }));
+    addAudioBusToMixer(({ final __callArgument94:Dynamic = mixer; __callArgument94; }), ({ final __callArgument95:Dynamic = bus; __callArgument95; }));
     ((cast (cast runtime : AudioMixerRuntime__audioMixer).activeChannels : flight._internal._Set<AudioChannel>).add((cast channel)));
     ((cast (cast runtime : AudioMixerRuntime__audioMixer).channelToBus : flight._internal._WeakMap<AudioChannel, AudioBus>).set((cast channel), (cast bus)));
     busGainNode = ((cast (cast runtime : AudioMixerRuntime__audioMixer).busGainNodes : flight._internal._Map<AudioBus, flight._internal.dom.GainNode>).get((cast bus)));
     if ((cast !_Runtime.strictEquals(busGainNode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      connectAudioChannelToNode(({ final __callArgument95:Dynamic = channel; __callArgument95; }), ({ final __callArgument96:Dynamic = busGainNode; __callArgument96; }));
+      connectAudioChannelToNode(({ final __callArgument98:Dynamic = channel; __callArgument98; }), ({ final __callArgument99:Dynamic = busGainNode; __callArgument99; }));
     }
   }
 
   public static function setAudioBusGain(bus:AudioBus, value:Float):Float {
     (bus.gain = cast (value : Float));
-    _Media.reportUnmixedBus__audioMixer(({ final __callArgument99:Dynamic = bus; __callArgument99; }), ({ final __callArgument100:Dynamic = 'gain'; __callArgument100; }));
-    _Media.updateBusGainNode__audioMixer(({ final __callArgument103:Dynamic = bus; __callArgument103; }));
+    _Media.reportUnmixedBus__audioMixer(({ final __callArgument102:Dynamic = bus; __callArgument102; }), ({ final __callArgument103:Dynamic = 'gain'; __callArgument103; }));
+    _Media.updateBusGainNode__audioMixer(({ final __callArgument106:Dynamic = bus; __callArgument106; }));
     return cast bus.gain;
     return cast null;
   }
@@ -787,16 +759,16 @@ class _Media {
 
   public static function setAudioBusMuted(bus:AudioBus, muted:Bool):Bool {
     (bus.muted = cast (muted : Bool));
-    _Media.reportUnmixedBus__audioMixer(({ final __callArgument105:Dynamic = bus; __callArgument105; }), ({ final __callArgument106:Dynamic = 'mute'; __callArgument106; }));
-    _Media.updateBusGainNode__audioMixer(({ final __callArgument109:Dynamic = bus; __callArgument109; }));
+    _Media.reportUnmixedBus__audioMixer(({ final __callArgument108:Dynamic = bus; __callArgument108; }), ({ final __callArgument109:Dynamic = 'mute'; __callArgument109; }));
+    _Media.updateBusGainNode__audioMixer(({ final __callArgument112:Dynamic = bus; __callArgument112; }));
     return cast bus.muted;
     return cast null;
   }
 
   public static function setAudioBusPan(bus:AudioBus, value:Float):Float {
     (bus.pan = cast ((cast _Media.clamp__audioMixer((cast value : Float), (cast -1.0 : Float), (cast 1.0 : Float)) : Float) : Float));
-    _Media.reportUnmixedBus__audioMixer(({ final __callArgument111:Dynamic = bus; __callArgument111; }), ({ final __callArgument112:Dynamic = 'pan'; __callArgument112; }));
-    _Media.updateBusPannerNode__audioMixer(({ final __callArgument115:Dynamic = bus; __callArgument115; }));
+    _Media.reportUnmixedBus__audioMixer(({ final __callArgument114:Dynamic = bus; __callArgument114; }), ({ final __callArgument115:Dynamic = 'pan'; __callArgument115; }));
+    _Media.updateBusPannerNode__audioMixer(({ final __callArgument118:Dynamic = bus; __callArgument118; }));
     return cast bus.pan;
     return cast null;
   }
@@ -831,7 +803,7 @@ class _Media {
     stopping = (cast _Runtime.concatArrays([_Runtime.toArray((cast runtime : AudioMixerRuntime__audioMixer).activeChannels)]));
     ((cast (cast runtime : AudioMixerRuntime__audioMixer).activeChannels : flight._internal._Set<AudioChannel>).clear());
     for (channel in _Runtime.iterable(stopping)) {
-      stopAudioChannel(({ final __callArgument119:Dynamic = channel; __callArgument119; }));
+      stopAudioChannel(({ final __callArgument122:Dynamic = channel; __callArgument122; }));
     }
     ((cast (cast runtime : AudioMixerRuntime__audioMixer).channelsPausedByMixer : flight._internal._Set<AudioChannel>).clear());
   }
@@ -870,12 +842,12 @@ class _Media {
     ((cast (cast runtime : AudioMixerRuntime__audioMixer).activeChannels : flight._internal._Set<AudioChannel>).delete_((cast channel)));
     ((cast (cast runtime : AudioMixerRuntime__audioMixer).channelsPausedByMixer : flight._internal._Set<AudioChannel>).delete_((cast channel)));
     ((cast (cast runtime : AudioMixerRuntime__audioMixer).channelToBus : flight._internal._WeakMap<AudioChannel, AudioBus>).delete_((cast channel)));
-    connectAudioChannelToNode(({ final __callArgument121:Dynamic = channel; __callArgument121; }), ({ final __callArgument122:Dynamic = (cast (cast runtime : AudioMixerRuntime__audioMixer).context : flight._internal.dom.AudioContext).destination; __callArgument122; }));
+    connectAudioChannelToNode(({ final __callArgument124:Dynamic = channel; __callArgument124; }), ({ final __callArgument125:Dynamic = (cast (cast runtime : AudioMixerRuntime__audioMixer).context : flight._internal.dom.AudioContext).destination; __callArgument125; }));
   }
 
   public static function reportUnmixedBus__audioMixer(bus:AudioBus, operation:AudioBusMixerOperation):Void {
     if ((cast _Runtime.strictEquals(_Media._unmixedBusGuard__audioMixer, null) : Bool)) { return; }
-    if ((cast _Runtime.strictEquals(((cast _Media.busToMixerRuntimes__audioMixer : flight._internal._Map<AudioBus, flight._internal._Set<AudioMixerRuntime__audioMixer>>).get((cast bus))), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast _Media._unmixedBusGuard__audioMixer : AudioBusMixerOperation->AudioBus->Void)(({ final __callArgument125:Dynamic = operation; __callArgument125; }), ({ final __callArgument126:Dynamic = bus; __callArgument126; })); }
+    if ((cast _Runtime.strictEquals(((cast _Media.busToMixerRuntimes__audioMixer : flight._internal._Map<AudioBus, flight._internal._Set<AudioMixerRuntime__audioMixer>>).get((cast bus))), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast _Media._unmixedBusGuard__audioMixer : AudioBusMixerOperation->AudioBus->Void)(({ final __callArgument128:Dynamic = operation; __callArgument128; }), ({ final __callArgument129:Dynamic = bus; __callArgument129; })); }
   }
 
   public static var _unmixedBusGuard__audioMixer:Null<AudioBusMixerGuard> = _Runtime.explicitNull();
@@ -919,16 +891,16 @@ class _Media {
   public static function warnOnUnmixedBus__enableAudioMixerGuards(operation:AudioBusMixerOperation, bus:AudioBus):Void {
     var setter:String = cast _Runtime.UNDEFINED;
     setter = ((cast _Runtime.strictEquals(operation, 'gain') : Bool) ? (cast 'setAudioBusGain' : Dynamic) : (cast ((cast _Runtime.strictEquals(operation, 'mute') : Bool) ? (cast 'setAudioBusMuted' : Dynamic) : (cast 'setAudioBusPan' : Dynamic)) : Dynamic));
-    (cast logOnce((cast 'media:unmixed-bus-' + Std.string(operation) + '' : String), ({ final __callArgument133:Dynamic = LogLevel.Warn; __callArgument133; }), (cast { message: '' + Std.string(setter) + ': bus "' + Std.string(_Runtime.coalesce(bus.name, function():Dynamic return cast 'unnamed')) + '" belongs to no mixer, so the value was stored but reached no audio node and nothing changed audibly. Add the bus with addAudioBusToMixer(mixer, bus) — or route a channel through it with routeAudioChannelToMixerBus — before setting its properties.' } : Dynamic), ({ final __callArgument134:Dynamic = 'media'; __callArgument134; })) : Bool);
+    (cast logOnce((cast 'media:unmixed-bus-' + Std.string(operation) + '' : String), ({ final __callArgument136:Dynamic = LogLevel.Warn; __callArgument136; }), (cast { message: '' + Std.string(setter) + ': bus "' + Std.string(_Runtime.coalesce(bus.name, function():Dynamic return cast 'unnamed')) + '" belongs to no mixer, so the value was stored but reached no audio node and nothing changed audibly. Add the bus with addAudioBusToMixer(mixer, bus) — or route a channel through it with routeAudioChannelToMixerBus — before setting its properties.' } : Dynamic), ({ final __callArgument137:Dynamic = 'media'; __callArgument137; })) : Bool);
   }
 
   public static function enableAudioChannelSignals(channel:AudioChannel):MediaChannelSignals {
-    return cast (cast _Media.enableChannelSignals__mediaChannelSignals(({ final __callArgument137:Dynamic = channel; __callArgument137; })) : MediaChannelSignals);
+    return cast (cast _Media.enableChannelSignals__mediaChannelSignals(({ final __callArgument140:Dynamic = channel; __callArgument140; })) : MediaChannelSignals);
     return cast null;
   }
 
   public static function enableVideoChannelSignals(channel:VideoChannel):MediaChannelSignals {
-    return cast (cast _Media.enableChannelSignals__mediaChannelSignals(({ final __callArgument139:Dynamic = channel; __callArgument139; })) : MediaChannelSignals);
+    return cast (cast _Media.enableChannelSignals__mediaChannelSignals(({ final __callArgument142:Dynamic = channel; __callArgument142; })) : MediaChannelSignals);
     return cast null;
   }
 
@@ -1014,10 +986,10 @@ class _Media {
     if ((cast !_Runtime.strictEquals(channel.state, 'playing') : Bool)) { return; }
     element = (cast _Media.getVideoElement__videoChannel(channel.source) : Null<flight._internal.dom.HTMLVideoElement>);
     if ((cast _Runtime.strictEquals(element, null) : Bool)) { return; }
-    (channel.currentTime = cast ((cast getVideoChannelCurrentTime(({ final __callArgument141:Dynamic = channel; __callArgument141; })) : Float) : Float));
+    (channel.currentTime = cast ((cast getVideoChannelCurrentTime(({ final __callArgument144:Dynamic = channel; __callArgument144; })) : Float) : Float));
     (channel.state = cast ('paused' : VideoChannelState));
     (cast element : flight._internal.dom.HTMLVideoElement).pause();
-    _Media.emitVideoChannelSignal__videoChannel(({ final __callArgument143:Dynamic = channel; __callArgument143; }), (cast 'onPause' : String));
+    _Media.emitVideoChannelSignal__videoChannel(({ final __callArgument146:Dynamic = channel; __callArgument146; }), (cast 'onPause' : String));
   }
 
   public static function playVideoResource(source:VideoResource, ?options:VideoPlayOptions):Null<VideoChannel> {
@@ -1025,14 +997,14 @@ class _Media {
     var runtime:Null<VideoChannelRuntime__videoChannel> = cast _Runtime.UNDEFINED;
     var channel:VideoChannel = cast _Runtime.UNDEFINED;
     var onEnded:Void->Void = cast _Runtime.UNDEFINED;
-    element = (cast _Media.getVideoElement__videoChannel(({ final __callArgument145:Dynamic = source; __callArgument145; })) : Null<flight._internal.dom.HTMLVideoElement>);
+    element = (cast _Media.getVideoElement__videoChannel(({ final __callArgument148:Dynamic = source; __callArgument148; })) : Null<flight._internal.dom.HTMLVideoElement>);
     if ((cast _Runtime.strictEquals(element, null) : Bool)) { return cast null; }
     runtime = ((cast _Media.videoChannelRuntimes__videoChannel : flight._internal._WeakMap<flight._internal.dom.HTMLVideoElement, VideoChannelRuntime__videoChannel>).get((cast element)));
     if ((cast !_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (cast element : flight._internal.dom.HTMLVideoElement).removeEventListener('ended', (cast runtime : VideoChannelRuntime__videoChannel).onEnded);
     }
-    channel = (cast { currentTime: _Runtime.coalesce(({ final __typedStruct147 = options; __typedStruct147 == null ? _Runtime.UNDEFINED : __typedStruct147.currentTime; }), function():Dynamic return cast 0.0), gain: _Runtime.coalesce(({ final __typedStruct148 = options; __typedStruct148 == null ? _Runtime.UNDEFINED : __typedStruct148.gain; }), function():Dynamic return cast 1.0), length: ((cast _Runtime.callValue(flight._internal._HostValueLut.get('isNaN'), cast ([(cast element : flight._internal.dom.HTMLVideoElement).duration] : Array<Dynamic>)) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.multiplyNumbers((cast element : flight._internal.dom.HTMLVideoElement).duration, 1000.0) : Dynamic)), loops: _Runtime.coalesce(({ final __typedStruct149 = options; __typedStruct149 == null ? _Runtime.UNDEFINED : __typedStruct149.loops; }), function():Dynamic return cast 0.0), muted: false, playbackRate: _Runtime.coalesce(({ final __typedStruct150 = options; __typedStruct150 == null ? _Runtime.UNDEFINED : __typedStruct150.playbackRate; }), function():Dynamic return cast 1.0), source: source, state: 'stopped', onComplete: (cast createSignal() : Signal<Void->Void>) });
-    onEnded = (cast function():Void { _Media.completeVideoChannel__videoChannel(({ final __callArgument151:Dynamic = channel; __callArgument151; })); });
+    channel = (cast { currentTime: _Runtime.coalesce(({ final __typedStruct150 = options; __typedStruct150 == null ? _Runtime.UNDEFINED : __typedStruct150.currentTime; }), function():Dynamic return cast 0.0), gain: _Runtime.coalesce(({ final __typedStruct151 = options; __typedStruct151 == null ? _Runtime.UNDEFINED : __typedStruct151.gain; }), function():Dynamic return cast 1.0), length: ((cast _Runtime.callValue(flight._internal._HostValueLut.get('isNaN'), cast ([(cast element : flight._internal.dom.HTMLVideoElement).duration] : Array<Dynamic>)) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.multiplyNumbers((cast element : flight._internal.dom.HTMLVideoElement).duration, 1000.0) : Dynamic)), loops: _Runtime.coalesce(({ final __typedStruct152 = options; __typedStruct152 == null ? _Runtime.UNDEFINED : __typedStruct152.loops; }), function():Dynamic return cast 0.0), muted: false, playbackRate: _Runtime.coalesce(({ final __typedStruct153 = options; __typedStruct153 == null ? _Runtime.UNDEFINED : __typedStruct153.playbackRate; }), function():Dynamic return cast 1.0), source: source, state: 'stopped', onComplete: (cast createSignal() : Signal<Void->Void>) });
+    onEnded = (cast function():Void { _Media.completeVideoChannel__videoChannel(({ final __callArgument154:Dynamic = channel; __callArgument154; })); });
     ((cast _Media.videoChannelRuntimes__videoChannel : flight._internal._WeakMap<flight._internal.dom.HTMLVideoElement, VideoChannelRuntime__videoChannel>).set((cast element), (cast { loopsRemaining: channel.loops, onEnded: onEnded })));
     ((cast _Media.channelElements__videoChannel : flight._internal._WeakMap<VideoChannel, flight._internal.dom.HTMLVideoElement>).set((cast channel), (cast element)));
     ((cast element : flight._internal.dom.HTMLVideoElement).currentTime = (channel.currentTime / 1000.0));
@@ -1040,16 +1012,16 @@ class _Media {
     ((cast element : flight._internal.dom.HTMLVideoElement).playbackRate = channel.playbackRate);
     ((cast element : flight._internal.dom.HTMLVideoElement).loop = false);
     (cast element : flight._internal.dom.HTMLVideoElement).addEventListener('ended', onEnded);
-    _Media.startVideoChannel__videoChannel(({ final __callArgument153:Dynamic = channel; __callArgument153; }));
-    _Media.emitVideoChannelSignal__videoChannel(({ final __callArgument155:Dynamic = channel; __callArgument155; }), (cast 'onPlay' : String));
+    _Media.startVideoChannel__videoChannel(({ final __callArgument156:Dynamic = channel; __callArgument156; }));
+    _Media.emitVideoChannelSignal__videoChannel(({ final __callArgument158:Dynamic = channel; __callArgument158; }), (cast 'onPlay' : String));
     return cast channel;
     return cast null;
   }
 
   public static function resumeVideoChannel(channel:VideoChannel):Void {
     if ((cast ((cast _Runtime.strictEquals(channel.state, 'playing') : Bool) || (cast _Runtime.strictEquals((cast _Media.getVideoElement__videoChannel(channel.source) : Null<flight._internal.dom.HTMLVideoElement>), null) : Bool)) : Bool)) { return; }
-    _Media.startVideoChannel__videoChannel(({ final __callArgument157:Dynamic = channel; __callArgument157; }));
-    _Media.emitVideoChannelSignal__videoChannel(({ final __callArgument159:Dynamic = channel; __callArgument159; }), (cast 'onPlay' : String));
+    _Media.startVideoChannel__videoChannel(({ final __callArgument160:Dynamic = channel; __callArgument160; }));
+    _Media.emitVideoChannelSignal__videoChannel(({ final __callArgument162:Dynamic = channel; __callArgument162; }), (cast 'onPlay' : String));
   }
 
   public static function setVideoChannelCurrentTime(channel:VideoChannel, value:Float):Float {
@@ -1099,7 +1071,7 @@ class _Media {
     }
     (channel.currentTime = cast (0.0 : Float));
     (channel.state = cast ('stopped' : VideoChannelState));
-    _Media.emitVideoChannelSignal__videoChannel(({ final __callArgument161:Dynamic = channel; __callArgument161; }), (cast 'onStop' : String));
+    _Media.emitVideoChannelSignal__videoChannel(({ final __callArgument164:Dynamic = channel; __callArgument164; }), (cast 'onStop' : String));
   }
 
   public static final channelElements__videoChannel:flight._internal._WeakMap<VideoChannel, flight._internal.dom.HTMLVideoElement> = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
@@ -1107,7 +1079,7 @@ class _Media {
   public static final videoChannelRuntimes__videoChannel:flight._internal._WeakMap<flight._internal.dom.HTMLVideoElement, VideoChannelRuntime__videoChannel> = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
 
   public static function getVideoElement__videoChannel(resource:Null<VideoResource>):Null<flight._internal.dom.HTMLVideoElement> {
-    return cast _Runtime.coalesce((cast ({ final __typedStruct163 = resource; __typedStruct163 == null ? _Runtime.UNDEFINED : (cast __typedStruct163 : { var element:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>; }).element; }) : Null<flight._internal.dom.HTMLVideoElement>), function():Dynamic return cast null);
+    return cast _Runtime.coalesce((cast ({ final __typedStruct166 = resource; __typedStruct166 == null ? _Runtime.UNDEFINED : (cast __typedStruct166 : { var element:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal.dom.HTMLVideoElement, flight._internal.dom.HTMLImageElement>, flight._internal.dom.SVGImageElement>, flight._internal.dom.HTMLCanvasElement>, flight._internal.dom.ImageBitmap>, flight._internal.dom.OffscreenCanvas>, flight._internal.dom.VideoFrame>>; }).element; }) : Null<flight._internal.dom.HTMLVideoElement>), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -1125,19 +1097,19 @@ class _Media {
     if ((cast ((cast !_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals((cast runtime : VideoChannelRuntime__videoChannel).loopsRemaining, 0.0) : Bool)) : Bool)) {
       if ((cast ((cast (cast runtime : VideoChannelRuntime__videoChannel).loopsRemaining : Float) > (cast 0.0 : Float)) : Bool)) { (cast runtime : VideoChannelRuntime__videoChannel).loopsRemaining--; }
       (channel.currentTime = cast (0.0 : Float));
-      _Media.emitVideoChannelSignal__videoChannel(({ final __callArgument164:Dynamic = channel; __callArgument164; }), (cast 'onLoop' : String));
-      _Media.startVideoChannel__videoChannel(({ final __callArgument166:Dynamic = channel; __callArgument166; }));
+      _Media.emitVideoChannelSignal__videoChannel(({ final __callArgument167:Dynamic = channel; __callArgument167; }), (cast 'onLoop' : String));
+      _Media.startVideoChannel__videoChannel(({ final __callArgument169:Dynamic = channel; __callArgument169; }));
       return;
     }
     (channel.currentTime = cast (channel.length : Float));
     (channel.state = cast ('complete' : VideoChannelState));
-    _Media.emitVideoChannelSignal__videoChannel(({ final __callArgument168:Dynamic = channel; __callArgument168; }), (cast 'onComplete' : String));
+    _Media.emitVideoChannelSignal__videoChannel(({ final __callArgument171:Dynamic = channel; __callArgument171; }), (cast 'onComplete' : String));
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[channel.onComplete]]), 1);
   }
 
   public static function emitVideoChannelSignal__videoChannel(channel:VideoChannel, name:String):Void {
     var signals:Null<MediaChannelSignals> = cast _Runtime.UNDEFINED;
-    signals = (cast getVideoChannelSignals(({ final __callArgument170:Dynamic = channel; __callArgument170; })) : Null<MediaChannelSignals>);
+    signals = (cast getVideoChannelSignals(({ final __callArgument173:Dynamic = channel; __callArgument173; })) : Null<MediaChannelSignals>);
     if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[_Runtime.getIndex(signals, name)]]), 1); }
   }
 

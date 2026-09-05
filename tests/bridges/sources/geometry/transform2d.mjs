@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const createTransform2D = api.createTransform2D;
 export const decomposeMatrixToTransform2D = api.decomposeMatrixToTransform2D;
+export const initializeTransform2D = api.initializeTransform2D;

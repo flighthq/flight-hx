@@ -4,4 +4,23 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CompositeEffect = { var kind:String; var operator_:CompositeOperator; @:optional var backdropKey:String; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class CompositeEffect extends flight.types.RenderEffect<String> {
+  #if js
+  @:native('operator')
+  #end
+  public var operator_:CompositeOperator;
+  public var backdropKey:Null<String>;
+
+  private function new(kind:String, operator_:CompositeOperator, ?backdropKey:Null<String>):Void {
+    super(kind);
+    this.operator_ = operator_;
+    this.backdropKey = backdropKey;
+  }
+}
+#else
+typedef CompositeEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var operator_:CompositeOperator; @:optional var backdropKey:String; };
+#end

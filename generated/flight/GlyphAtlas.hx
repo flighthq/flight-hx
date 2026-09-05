@@ -4,7 +4,6 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._GlyphAtlas as Facade_GlyphAtlas_flight__GlyphAtlas;
-import flight.types.BackendExplanation;
 import flight.types.Bitmap;
 import flight.types.Entity;
 import flight.types.GlyphAtlas;
@@ -58,11 +57,6 @@ class GlyphAtlas {
     return cast null;
   }
 
-  public static function explainGlyphRasterizerBackend():BackendExplanation {
-    return cast Facade_GlyphAtlas_flight__GlyphAtlas.explainGlyphRasterizerBackend();
-    return cast null;
-  }
-
   public static function getGlyphAtlasBitmap(atlas:flight.types.GlyphAtlas):Bitmap {
     return cast Facade_GlyphAtlas_flight__GlyphAtlas.getGlyphAtlasBitmap(atlas);
     return cast null;
@@ -91,14 +85,5 @@ class GlyphAtlas {
   public static function getGlyphAtlasMetrics(atlas:flight.types.GlyphAtlas):GlyphMetrics {
     return cast Facade_GlyphAtlas_flight__GlyphAtlas.getGlyphAtlasMetrics(atlas);
     return cast null;
-  }
-
-  public static function getGlyphRasterizerBackend():GlyphRasterizerBackend {
-    return cast Facade_GlyphAtlas_flight__GlyphAtlas.getGlyphRasterizerBackend();
-    return cast null;
-  }
-
-  public static function setGlyphRasterizerBackend(backend:Null<GlyphRasterizerBackend>):Void {
-    Facade_GlyphAtlas_flight__GlyphAtlas.setGlyphRasterizerBackend(backend);
   }
 }

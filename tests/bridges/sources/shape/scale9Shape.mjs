@@ -9,3 +9,4 @@ export const createScale9Shape = api.createScale9Shape;
 export const createScale9ShapeData = api.createScale9ShapeData;
 export const createScale9ShapeRuntime = api.createScale9ShapeRuntime;
 export const getScale9ShapeRuntime = api.getScale9ShapeRuntime;
+export const initializeScale9ShapeData = api.initializeScale9ShapeData;

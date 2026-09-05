@@ -4,4 +4,25 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuFullscreenPipeline = { var pipeline:flight._internal.dom.GPURenderPipeline; var pipelineLayout:flight._internal.dom.GPUPipelineLayout; var uniformBindGroupLayout:flight._internal.dom.GPUBindGroupLayout; var textureBindGroupLayouts:Array<flight._internal.dom.GPUBindGroupLayout>; };
+#if !flight_struct_typedef
+@:allow(flight._RenderWgpu)
+@:keep
+@:structInit
+class WgpuFullscreenPipeline {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var pipeline:flight._internal.dom.GPURenderPipeline;
+  public var pipelineLayout:flight._internal.dom.GPUPipelineLayout;
+  public var uniformBindGroupLayout:flight._internal.dom.GPUBindGroupLayout;
+  public var textureBindGroupLayouts:Array<flight._internal.dom.GPUBindGroupLayout>;
+
+  private function new(pipeline:flight._internal.dom.GPURenderPipeline, pipelineLayout:flight._internal.dom.GPUPipelineLayout, uniformBindGroupLayout:flight._internal.dom.GPUBindGroupLayout, textureBindGroupLayouts:Array<flight._internal.dom.GPUBindGroupLayout>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.pipeline = pipeline;
+    this.pipelineLayout = pipelineLayout;
+    this.uniformBindGroupLayout = uniformBindGroupLayout;
+    this.textureBindGroupLayouts = textureBindGroupLayouts;
+  }
+}
+#else
+typedef WgpuFullscreenPipeline = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var pipeline:flight._internal.dom.GPURenderPipeline; var pipelineLayout:flight._internal.dom.GPUPipelineLayout; var uniformBindGroupLayout:flight._internal.dom.GPUBindGroupLayout; var textureBindGroupLayouts:Array<flight._internal.dom.GPUBindGroupLayout>; };
+#end

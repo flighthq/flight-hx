@@ -4,4 +4,27 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef BitmapFont = { var encoding:BitmapFontEncoding; var glyphs:flight._internal._Map<Float, GlyphEntry>; var kerning:flight._internal._Map<Float, Float>; var metrics:GlyphMetrics; var pages:Array<TextureAtlas>; };
+#if !flight_struct_typedef
+@:allow(flight._BitmapFont)
+@:keep
+@:structInit
+class BitmapFont {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var encoding:BitmapFontEncoding;
+  public var glyphs:flight._internal._Map<Float, GlyphEntry>;
+  public var kerning:flight._internal._Map<Float, Float>;
+  public var metrics:GlyphMetrics;
+  public var pages:Array<TextureAtlas>;
+
+  private function new(encoding:BitmapFontEncoding, glyphs:flight._internal._Map<Float, GlyphEntry>, kerning:flight._internal._Map<Float, Float>, metrics:GlyphMetrics, pages:Array<TextureAtlas>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.encoding = encoding;
+    this.glyphs = glyphs;
+    this.kerning = kerning;
+    this.metrics = metrics;
+    this.pages = pages;
+  }
+}
+#else
+typedef BitmapFont = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var encoding:BitmapFontEncoding; var glyphs:flight._internal._Map<Float, GlyphEntry>; var kerning:flight._internal._Map<Float, Float>; var metrics:GlyphMetrics; var pages:Array<TextureAtlas>; };
+#end

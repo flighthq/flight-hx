@@ -17,6 +17,7 @@ export const drawWgpuQuad = api.drawWgpuQuad;
 export const drawWgpuQuadWithTransform = api.drawWgpuQuadWithTransform;
 export const enableWgpuBlendModeSupport = api.enableWgpuBlendModeSupport;
 export const getWgpuRenderProxyColorScaleBias = api.getWgpuRenderProxyColorScaleBias;
+export const initializeWgpuTextureEntry = api.initializeWgpuTextureEntry;
 export const resolveWgpuSmoothingBindGroup = api.resolveWgpuSmoothingBindGroup;
 export const submitWgpuQuadDraw = api.submitWgpuQuadDraw;
 export const updateWgpuTextureEntry = api.updateWgpuTextureEntry;

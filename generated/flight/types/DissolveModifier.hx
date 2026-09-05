@@ -4,4 +4,26 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef DissolveModifier = { var kind:String; var slot:String; var threshold:Float; var edgeColor:Float; @:optional var edgeWidth:Float; @:optional var map:Texture; @:optional var scale:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Shading)
+@:keep
+@:structInit
+class DissolveModifier extends flight.types.Modifier<String, String> {
+  public var threshold:Float;
+  public var edgeColor:Float;
+  public var edgeWidth:Null<Float>;
+  public var map:Null<Texture>;
+  public var scale:Null<Float>;
+
+  private function new(kind:String, slot:String, threshold:Float, edgeColor:Float, ?edgeWidth:Null<Float>, ?map:Null<Texture>, ?scale:Null<Float>):Void {
+    super(kind, slot);
+    this.threshold = threshold;
+    this.edgeColor = edgeColor;
+    this.edgeWidth = edgeWidth;
+    this.map = map;
+    this.scale = scale;
+  }
+}
+#else
+typedef DissolveModifier = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var slot:String; var threshold:Float; var edgeColor:Float; @:optional var edgeWidth:Float; @:optional var map:Texture; @:optional var scale:Float; };
+#end

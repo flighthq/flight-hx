@@ -5,6 +5,12 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const initializeWebDirectoryOpenDialogBackend = api.initializeWebDirectoryOpenDialogBackend;
+export const initializeWebFileOpenDialogBackend = api.initializeWebFileOpenDialogBackend;
+export const initializeWebFileSaveDialogBackend = api.initializeWebFileSaveDialogBackend;
+export const initializeWebImageOpenDialogBackend = api.initializeWebImageOpenDialogBackend;
+export const initializeWebPhotoCaptureDialogBackend = api.initializeWebPhotoCaptureDialogBackend;
+export const initializeWebVideoCaptureDialogBackend = api.initializeWebVideoCaptureDialogBackend;
 export const webDirectoryOpenDialogBackend = api.webDirectoryOpenDialogBackend;
 export const webFileOpenDialogBackend = api.webFileOpenDialogBackend;
 export const webFileSaveDialogBackend = api.webFileSaveDialogBackend;

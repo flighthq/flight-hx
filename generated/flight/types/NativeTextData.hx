@@ -4,4 +4,28 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef NativeTextData = { var autoSize:TextAutoSize; var height:Float; var style:NativeTextStyle; var text:String; var verticalAlign:TextVerticalAlign; var width:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Text)
+@:keep
+@:structInit
+class NativeTextData extends flight.types.Node2DData {
+  public var autoSize:TextAutoSize;
+  public var height:Float;
+  public var style:NativeTextStyle;
+  public var text:String;
+  public var verticalAlign:TextVerticalAlign;
+  public var width:Float;
+
+  private function new(autoSize:TextAutoSize, height:Float, style:NativeTextStyle, text:String, verticalAlign:TextVerticalAlign, width:Float):Void {
+    super();
+    this.autoSize = autoSize;
+    this.height = height;
+    this.style = style;
+    this.text = text;
+    this.verticalAlign = verticalAlign;
+    this.width = width;
+  }
+}
+#else
+typedef NativeTextData = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var autoSize:TextAutoSize; var height:Float; var style:NativeTextStyle; var text:String; var verticalAlign:TextVerticalAlign; var width:Float; };
+#end

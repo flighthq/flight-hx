@@ -6,3 +6,9 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createElectronProtocolCapabilities = api.createElectronProtocolCapabilities;
+export const initializeElectronProtocolCapabilities = api.initializeElectronProtocolCapabilities;
+export const initializeProtocolDefaultBackend = api.initializeProtocolDefaultBackend;
+export const initializeProtocolOpenBackend = api.initializeProtocolOpenBackend;
+export const initializeProtocolRegistrationBackend = api.initializeProtocolRegistrationBackend;
+export const initializeProtocolRegistrationQueryBackend = api.initializeProtocolRegistrationQueryBackend;
+export const initializeProtocolUnregistrationBackend = api.initializeProtocolUnregistrationBackend;

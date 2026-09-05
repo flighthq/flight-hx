@@ -4,4 +4,23 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TextFormatRange = { var end:Float; var format:TextFormat; var start:Float; };
+#if !flight_struct_typedef
+@:allow(flight._TextLayout)
+@:keep
+@:structInit
+class TextFormatRange {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var end:Float;
+  public var format:TextFormat;
+  public var start:Float;
+
+  private function new(end:Float, format:TextFormat, start:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.end = end;
+    this.format = format;
+    this.start = start;
+  }
+}
+#else
+typedef TextFormatRange = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var end:Float; var format:TextFormat; var start:Float; };
+#end

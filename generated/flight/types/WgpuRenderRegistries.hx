@@ -4,4 +4,57 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuRenderRegistries = { @:optional var canvasShapeCommands:KeyedTable<CanvasShapeCommand<String>>; @:optional var colorAdjustments:SlotTable<RenderState->RenderProxy->RenderProxy->Void>; @:optional var colorAdjustmentUnsupportedGuard:SlotTable<ColorAdjustmentUnsupportedGuard>; @:optional var effectPaddingResolvers:KeyedTable<RenderEffectPaddingResolver>; var renderers:KeyedTable<Renderer>; @:optional var renderRootGuard:SlotTable<RenderRootGuard>; var strokeTessellator:SlotTable<StrokeTessellator>; @:optional var colorAdjustmentFeature:SlotTable<WgpuColorAdjustmentMaterialFeature>; @:optional var colorAdjustmentFeatureGuard:SlotTable<WgpuColorAdjustmentMaterialFeatureGuard>; var compressedTextureDecoder:SlotTable<WgpuCompressedTextureDecoder>; var compressedTextureUpload:SlotTable<WgpuCompressedTextureUploader>; var customMaterialShaders:KeyedTable<WgpuCustomMaterialShaderSource>; var materialRenderers:KeyedTable<WgpuMaterialRenderer>; var meshMaterialRenderers:KeyedTable<WgpuMeshMaterialRenderer>; var modifierSnippets:KeyedTable<WgpuModifierSnippet>; var modifierSnippetRevision:Float; var renderEffects:KeyedTable<WgpuRenderEffectRegistration>; var shapeRasterizer:SlotTable<ShapeRasterizer>; var textureResolvers:KeyedTable<WgpuTextureResolver>; var velocityWriters:KeyedTable<WgpuVelocityWriter>; };
+#if !flight_struct_typedef
+@:allow(flight._RenderWgpu)
+@:keep
+@:structInit
+class WgpuRenderRegistries {
+  public var canvasShapeCommands:Null<KeyedTable<CanvasShapeCommand<String>>>;
+  public var colorAdjustments:Null<SlotTable<RenderState->RenderProxy->RenderProxy->Void>>;
+  public var colorAdjustmentUnsupportedGuard:Null<SlotTable<ColorAdjustmentUnsupportedGuard>>;
+  public var effectPaddingResolvers:Null<KeyedTable<RenderEffectPaddingResolver>>;
+  public var renderers:KeyedTable<Renderer>;
+  public var renderRootGuard:Null<SlotTable<RenderRootGuard>>;
+  public var strokeTessellator:SlotTable<StrokeTessellator>;
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var colorAdjustmentFeature:Null<SlotTable<WgpuColorAdjustmentMaterialFeature>>;
+  public var colorAdjustmentFeatureGuard:Null<SlotTable<WgpuColorAdjustmentMaterialFeatureGuard>>;
+  public var compressedTextureDecoder:SlotTable<WgpuCompressedTextureDecoder>;
+  public var compressedTextureUpload:SlotTable<WgpuCompressedTextureUploader>;
+  public var customMaterialShaders:KeyedTable<WgpuCustomMaterialShaderSource>;
+  public var materialRenderers:KeyedTable<WgpuMaterialRenderer>;
+  public var meshMaterialRenderers:KeyedTable<WgpuMeshMaterialRenderer>;
+  public var modifierSnippets:KeyedTable<WgpuModifierSnippet>;
+  public var modifierSnippetRevision:Float;
+  public var renderEffects:KeyedTable<WgpuRenderEffectRegistration>;
+  public var shapeRasterizer:SlotTable<ShapeRasterizer>;
+  public var textureResolvers:KeyedTable<WgpuTextureResolver>;
+  public var velocityWriters:KeyedTable<WgpuVelocityWriter>;
+
+  private function new(?canvasShapeCommands:Null<KeyedTable<CanvasShapeCommand<String>>>, ?colorAdjustments:Null<SlotTable<RenderState->RenderProxy->RenderProxy->Void>>, ?colorAdjustmentUnsupportedGuard:Null<SlotTable<ColorAdjustmentUnsupportedGuard>>, ?effectPaddingResolvers:Null<KeyedTable<RenderEffectPaddingResolver>>, renderers:KeyedTable<Renderer>, ?renderRootGuard:Null<SlotTable<RenderRootGuard>>, strokeTessellator:SlotTable<StrokeTessellator>, ?colorAdjustmentFeature:Null<SlotTable<WgpuColorAdjustmentMaterialFeature>>, ?colorAdjustmentFeatureGuard:Null<SlotTable<WgpuColorAdjustmentMaterialFeatureGuard>>, compressedTextureDecoder:SlotTable<WgpuCompressedTextureDecoder>, compressedTextureUpload:SlotTable<WgpuCompressedTextureUploader>, customMaterialShaders:KeyedTable<WgpuCustomMaterialShaderSource>, materialRenderers:KeyedTable<WgpuMaterialRenderer>, meshMaterialRenderers:KeyedTable<WgpuMeshMaterialRenderer>, modifierSnippets:KeyedTable<WgpuModifierSnippet>, modifierSnippetRevision:Float, renderEffects:KeyedTable<WgpuRenderEffectRegistration>, shapeRasterizer:SlotTable<ShapeRasterizer>, textureResolvers:KeyedTable<WgpuTextureResolver>, velocityWriters:KeyedTable<WgpuVelocityWriter>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.canvasShapeCommands = canvasShapeCommands;
+    this.colorAdjustments = colorAdjustments;
+    this.colorAdjustmentUnsupportedGuard = colorAdjustmentUnsupportedGuard;
+    this.effectPaddingResolvers = effectPaddingResolvers;
+    this.renderers = renderers;
+    this.renderRootGuard = renderRootGuard;
+    this.strokeTessellator = strokeTessellator;
+    this.colorAdjustmentFeature = colorAdjustmentFeature;
+    this.colorAdjustmentFeatureGuard = colorAdjustmentFeatureGuard;
+    this.compressedTextureDecoder = compressedTextureDecoder;
+    this.compressedTextureUpload = compressedTextureUpload;
+    this.customMaterialShaders = customMaterialShaders;
+    this.materialRenderers = materialRenderers;
+    this.meshMaterialRenderers = meshMaterialRenderers;
+    this.modifierSnippets = modifierSnippets;
+    this.modifierSnippetRevision = modifierSnippetRevision;
+    this.renderEffects = renderEffects;
+    this.shapeRasterizer = shapeRasterizer;
+    this.textureResolvers = textureResolvers;
+    this.velocityWriters = velocityWriters;
+  }
+}
+#else
+typedef WgpuRenderRegistries = { @:optional var canvasShapeCommands:KeyedTable<CanvasShapeCommand<String>>; @:optional var colorAdjustments:SlotTable<RenderState->RenderProxy->RenderProxy->Void>; @:optional var colorAdjustmentUnsupportedGuard:SlotTable<ColorAdjustmentUnsupportedGuard>; @:optional var effectPaddingResolvers:KeyedTable<RenderEffectPaddingResolver>; var renderers:KeyedTable<Renderer>; @:optional var renderRootGuard:SlotTable<RenderRootGuard>; var strokeTessellator:SlotTable<StrokeTessellator>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; @:optional var colorAdjustmentFeature:SlotTable<WgpuColorAdjustmentMaterialFeature>; @:optional var colorAdjustmentFeatureGuard:SlotTable<WgpuColorAdjustmentMaterialFeatureGuard>; var compressedTextureDecoder:SlotTable<WgpuCompressedTextureDecoder>; var compressedTextureUpload:SlotTable<WgpuCompressedTextureUploader>; var customMaterialShaders:KeyedTable<WgpuCustomMaterialShaderSource>; var materialRenderers:KeyedTable<WgpuMaterialRenderer>; var meshMaterialRenderers:KeyedTable<WgpuMeshMaterialRenderer>; var modifierSnippets:KeyedTable<WgpuModifierSnippet>; var modifierSnippetRevision:Float; var renderEffects:KeyedTable<WgpuRenderEffectRegistration>; var shapeRasterizer:SlotTable<ShapeRasterizer>; var textureResolvers:KeyedTable<WgpuTextureResolver>; var velocityWriters:KeyedTable<WgpuVelocityWriter>; };
+#end

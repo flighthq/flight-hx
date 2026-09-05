@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const clearCollisionManifold3D = api.clearCollisionManifold3D;
 export const createCollisionManifold3D = api.createCollisionManifold3D;
+export const initializeCollisionManifold3D = api.initializeCollisionManifold3D;

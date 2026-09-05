@@ -4,4 +4,31 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AppLifecycle = { var onStateChange:Signal<AppLifecycleState->Void>; var onResume:Signal<Void->Void>; var onPause:Signal<Void->Void>; var onBackButton:Signal<Void->Void>; var onMemoryWarning:Signal<AppMemoryPressure->Void>; var onSaveState:Signal<flight._internal._Record<String, flight._internal._Any>->Void>; var onRestoreState:Signal<flight._internal._Record<String, flight._internal._Any>->Void>; };
+#if !flight_struct_typedef
+@:allow(flight._Lifecycle)
+@:keep
+@:structInit
+class AppLifecycle {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onStateChange:Signal<AppLifecycleState->Void>;
+  public var onResume:Signal<Void->Void>;
+  public var onPause:Signal<Void->Void>;
+  public var onBackButton:Signal<Void->Void>;
+  public var onMemoryWarning:Signal<AppMemoryPressure->Void>;
+  public var onSaveState:Signal<flight._internal._Record<String, flight._internal._Any>->Void>;
+  public var onRestoreState:Signal<flight._internal._Record<String, flight._internal._Any>->Void>;
+
+  private function new(onStateChange:Signal<AppLifecycleState->Void>, onResume:Signal<Void->Void>, onPause:Signal<Void->Void>, onBackButton:Signal<Void->Void>, onMemoryWarning:Signal<AppMemoryPressure->Void>, onSaveState:Signal<flight._internal._Record<String, flight._internal._Any>->Void>, onRestoreState:Signal<flight._internal._Record<String, flight._internal._Any>->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onStateChange = onStateChange;
+    this.onResume = onResume;
+    this.onPause = onPause;
+    this.onBackButton = onBackButton;
+    this.onMemoryWarning = onMemoryWarning;
+    this.onSaveState = onSaveState;
+    this.onRestoreState = onRestoreState;
+  }
+}
+#else
+typedef AppLifecycle = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onStateChange:Signal<AppLifecycleState->Void>; var onResume:Signal<Void->Void>; var onPause:Signal<Void->Void>; var onBackButton:Signal<Void->Void>; var onMemoryWarning:Signal<AppMemoryPressure->Void>; var onSaveState:Signal<flight._internal._Record<String, flight._internal._Any>->Void>; var onRestoreState:Signal<flight._internal._Record<String, flight._internal._Any>->Void>; };
+#end

@@ -4,4 +4,30 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef OuterGlowEffect = { var kind:String; @:optional var alpha:Float; @:optional var blurX:Float; @:optional var blurY:Float; @:optional var color:Float; @:optional var quality:Float; @:optional var sourceMode:EffectSourceMode; @:optional var strength:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class OuterGlowEffect extends flight.types.RenderEffect<String> {
+  public var alpha:Null<Float>;
+  public var blurX:Null<Float>;
+  public var blurY:Null<Float>;
+  public var color:Null<Float>;
+  public var quality:Null<Float>;
+  public var sourceMode:Null<EffectSourceMode>;
+  public var strength:Null<Float>;
+
+  private function new(kind:String, ?alpha:Null<Float>, ?blurX:Null<Float>, ?blurY:Null<Float>, ?color:Null<Float>, ?quality:Null<Float>, ?sourceMode:Null<EffectSourceMode>, ?strength:Null<Float>):Void {
+    super(kind);
+    this.alpha = alpha;
+    this.blurX = blurX;
+    this.blurY = blurY;
+    this.color = color;
+    this.quality = quality;
+    this.sourceMode = sourceMode;
+    this.strength = strength;
+  }
+}
+#else
+typedef OuterGlowEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var alpha:Float; @:optional var blurX:Float; @:optional var blurY:Float; @:optional var color:Float; @:optional var quality:Float; @:optional var sourceMode:EffectSourceMode; @:optional var strength:Float; };
+#end

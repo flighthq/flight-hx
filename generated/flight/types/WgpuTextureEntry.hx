@@ -4,4 +4,30 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuTextureEntry = { var mipLevelCount:Float; @:optional var straightAlpha:Bool; var texture:flight._internal.dom.GPUTexture; var view:flight._internal.dom.GPUTextureView; var bindings:WgpuTextureBindings; @:optional var sampler:flight._internal.dom.GPUSampler; };
+#if !flight_struct_typedef
+@:allow(flight._RenderWgpu)
+@:allow(flight.types.WgpuVideoTextureEntry)
+@:keep
+@:structInit
+class WgpuTextureEntry {
+  public var mipLevelCount:Float;
+  public var straightAlpha:Null<Bool>;
+  public var texture:flight._internal.dom.GPUTexture;
+  public var view:flight._internal.dom.GPUTextureView;
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var bindings:WgpuTextureBindings;
+  public var sampler:Null<flight._internal.dom.GPUSampler>;
+
+  private function new(mipLevelCount:Float, ?straightAlpha:Null<Bool>, texture:flight._internal.dom.GPUTexture, view:flight._internal.dom.GPUTextureView, bindings:WgpuTextureBindings, ?sampler:Null<flight._internal.dom.GPUSampler>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.mipLevelCount = mipLevelCount;
+    this.straightAlpha = straightAlpha;
+    this.texture = texture;
+    this.view = view;
+    this.bindings = bindings;
+    this.sampler = sampler;
+  }
+}
+#else
+typedef WgpuTextureEntry = { var mipLevelCount:Float; @:optional var straightAlpha:Bool; var texture:flight._internal.dom.GPUTexture; var view:flight._internal.dom.GPUTextureView; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var bindings:WgpuTextureBindings; @:optional var sampler:flight._internal.dom.GPUSampler; };
+#end

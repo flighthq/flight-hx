@@ -8,3 +8,4 @@ __syncDependencies();
 export const createEmptyGlRegistries = api.createEmptyGlRegistries;
 export const createGlPipeline = api.createGlPipeline;
 export const getGlPipelineRegistries = api.getGlPipelineRegistries;
+export const initializeEmptyGlRegistries = api.initializeEmptyGlRegistries;

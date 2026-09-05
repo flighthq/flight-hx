@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MedianEffect = { var kind:String; @:optional var radius:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class MedianEffect extends flight.types.RenderEffect<String> {
+  public var radius:Null<Float>;
+
+  private function new(kind:String, ?radius:Null<Float>):Void {
+    super(kind);
+    this.radius = radius;
+  }
+}
+#else
+typedef MedianEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var radius:Float; };
+#end

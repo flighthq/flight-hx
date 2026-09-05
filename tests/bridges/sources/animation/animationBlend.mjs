@@ -10,4 +10,5 @@ export const addAnimationSample = api.addAnimationSample;
 export const blendAnimationSamples = api.blendAnimationSamples;
 export const createAnimationSampleAccumulator = api.createAnimationSampleAccumulator;
 export const finishAnimationSample = api.finishAnimationSample;
+export const initializeAnimationSampleAccumulator = api.initializeAnimationSampleAccumulator;
 export const resetAnimationSampleAccumulator = api.resetAnimationSampleAccumulator;

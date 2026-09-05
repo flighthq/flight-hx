@@ -4,4 +4,33 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef OrientationReading = { var accuracy:SensorAccuracy; var interval:Float; var timestamp:Float; var alpha:Float; var beta:Float; var gamma:Float; var absolute:Bool; var heading:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Sensors)
+@:keep
+@:structInit
+class OrientationReading {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var accuracy:SensorAccuracy;
+  public var interval:Float;
+  public var timestamp:Float;
+  public var alpha:Float;
+  public var beta:Float;
+  public var gamma:Float;
+  public var absolute:Bool;
+  public var heading:Float;
+
+  private function new(accuracy:SensorAccuracy, interval:Float, timestamp:Float, alpha:Float, beta:Float, gamma:Float, absolute:Bool, heading:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.accuracy = accuracy;
+    this.interval = interval;
+    this.timestamp = timestamp;
+    this.alpha = alpha;
+    this.beta = beta;
+    this.gamma = gamma;
+    this.absolute = absolute;
+    this.heading = heading;
+  }
+}
+#else
+typedef OrientationReading = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var accuracy:SensorAccuracy; var interval:Float; var timestamp:Float; var alpha:Float; var beta:Float; var gamma:Float; var absolute:Bool; var heading:Float; };
+#end

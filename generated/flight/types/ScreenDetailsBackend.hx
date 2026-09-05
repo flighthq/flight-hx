@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class ScreenDetailsBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var queryPermission:Void->flight._internal._Promise<ScreenPermissionState>;
+  public var request:Void->flight._internal._Promise<Bool>;
+
+  private function new(queryPermission:Void->flight._internal._Promise<ScreenPermissionState>, request:Void->flight._internal._Promise<Bool>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.queryPermission = queryPermission;
+    this.request = request;
+  }
+}
+#else
 typedef ScreenDetailsBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var queryPermission:Void->flight._internal._Promise<ScreenPermissionState>; var request:Void->flight._internal._Promise<Bool>; };
+#end

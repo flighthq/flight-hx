@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createRimModifier = api.createRimModifier;
+export const initializeRimModifier = api.initializeRimModifier;

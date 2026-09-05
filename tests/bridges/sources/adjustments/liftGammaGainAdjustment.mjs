@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createLiftGammaGainAdjustment = api.createLiftGammaGainAdjustment;
+export const initializeLiftGammaGainAdjustment = api.initializeLiftGammaGainAdjustment;

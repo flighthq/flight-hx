@@ -13,4 +13,5 @@ export const disposeNode = api.disposeNode;
 export const enableNodeSignals = api.enableNodeSignals;
 export const getNodeRuntime = api.getNodeRuntime;
 export const getNodeSignals = api.getNodeSignals;
+export const initializeNodeSignals = api.initializeNodeSignals;
 export const setNodeEnabled = api.setNodeEnabled;

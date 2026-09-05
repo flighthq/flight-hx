@@ -4,5 +4,6 @@ import compiled from '../../build/haxe-js/flight.cjs';
 export const collectScene2DRequirements = compiled.flight.Requirements.collectScene2DRequirements;
 export const createRequirementSet = compiled.flight.Requirements.createRequirementSet;
 export const diffRequirementSets = compiled.flight.Requirements.diffRequirementSets;
+export const initializeRequirementSet = compiled.flight.Requirements.initializeRequirementSet;
 export const mergeRequirementSets = compiled.flight.Requirements.mergeRequirementSets;
 export const reportRequirement = compiled.flight.Requirements.reportRequirement;

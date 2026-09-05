@@ -4,4 +4,29 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SpritesheetFrame = { var id:Float; var offsetX:Float; var offsetY:Float; var pivotX:Null<Float>; var pivotY:Null<Float>; var rotated:Bool; };
+#if !flight_struct_typedef
+@:allow(flight._Spritesheet)
+@:keep
+@:structInit
+class SpritesheetFrame {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var id:Float;
+  public var offsetX:Float;
+  public var offsetY:Float;
+  public var pivotX:Null<Float>;
+  public var pivotY:Null<Float>;
+  public var rotated:Bool;
+
+  private function new(id:Float, offsetX:Float, offsetY:Float, pivotX:Null<Float>, pivotY:Null<Float>, rotated:Bool):Void {
+    this.__symbol__EntityRuntime = null;
+    this.id = id;
+    this.offsetX = offsetX;
+    this.offsetY = offsetY;
+    this.pivotX = pivotX;
+    this.pivotY = pivotY;
+    this.rotated = rotated;
+  }
+}
+#else
+typedef SpritesheetFrame = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var id:Float; var offsetX:Float; var offsetY:Float; var pivotX:Null<Float>; var pivotY:Null<Float>; var rotated:Bool; };
+#end

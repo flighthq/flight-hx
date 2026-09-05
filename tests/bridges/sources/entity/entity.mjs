@@ -5,4 +5,5 @@ const api = compiled.flight._Entity;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const createEntity = api.createEntity;
+export const allocateEntity = api.allocateEntity;
+export const finishEntity = api.finishEntity;

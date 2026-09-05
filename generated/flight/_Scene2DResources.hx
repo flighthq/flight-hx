@@ -4,7 +4,8 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Audio.resolveAudioResourceReference;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Image.resolveImageResourceReference;
 import flight._Node.addNodeChild;
 import flight._Node.getNodeParent;
@@ -19,7 +20,7 @@ import flight.types.AudioResource;
 import flight.types.AudioResourceFetch;
 import flight.types.AudioResourceReference;
 import flight.types.DisplayObject;
-import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.ExternalAudioResourceReference;
 import flight.types.ExternalImageResourceReference;
 import flight.types.ImageResource;
@@ -299,15 +300,48 @@ class _Scene2DResources {
     if (backgroundColor == null) backgroundColor = cast (null : Dynamic);
     if (imageResources == null) imageResources = cast (cast ([] : Array<Dynamic>) : Dynamic);
     if (audioResources == null) audioResources = cast (cast ([] : Array<Dynamic>) : Dynamic);
-    return cast { audioResources: audioResources, backgroundColor: backgroundColor, imageResources: imageResources, root: root, slots: slots, sourceKind: sourceKind };
+    var out:EntityConstruction<Scene2DDocument> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ audioResources: cast _Runtime.UNDEFINED, backgroundColor: cast _Runtime.UNDEFINED, imageResources: cast _Runtime.UNDEFINED, root: cast _Runtime.UNDEFINED, slots: cast _Runtime.UNDEFINED, sourceKind: cast _Runtime.UNDEFINED } : Scene2DDocument); }) #end));
+    initializeScene2DDocument(({ final __callArgument136:Dynamic = out; __callArgument136; }), ({ final __callArgument137:Dynamic = root; __callArgument137; }), ({ final __callArgument138:Dynamic = slots; __callArgument138; }), ({ final __callArgument139:Dynamic = sourceKind; __callArgument139; }), ({ final __callArgument140:Dynamic = backgroundColor; __callArgument140; }), ({ final __callArgument141:Dynamic = imageResources; __callArgument141; }), ({ final __callArgument142:Dynamic = audioResources; __callArgument142; }));
+    return cast out;
     return cast null;
   }
 
   public static function createScene2DSlotReference(name:String, target:Node2D, ?linkage:Null<String>, required:Bool = true):Scene2DSlotReference {
     if (linkage == null) linkage = cast (null : Dynamic);
-    ((cast target : { var name:Null<String>; }).name = name);
-    return cast { content: null, linkage: linkage, name: name, required: required, target: target };
+    var out:EntityConstruction<Scene2DSlotReference> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ content: cast _Runtime.UNDEFINED, linkage: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, required: cast _Runtime.UNDEFINED, target: cast _Runtime.UNDEFINED } : Scene2DSlotReference); }) #end));
+    initializeScene2DSlotReference(({ final __callArgument150:Dynamic = out; __callArgument150; }), (cast name : String), ({ final __callArgument151:Dynamic = target; __callArgument151; }), ({ final __callArgument152:Dynamic = linkage; __callArgument152; }), (cast required : Bool));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeScene2DDocument(out:EntityConstruction<Scene2DDocument>, root:Node2D, ?slots:Array<Scene2DSlotReference>, ?sourceKind:Null<String>, ?backgroundColor:Null<Float>, ?imageResources:Array<ImageResourceReference>, ?audioResources:Array<AudioResourceReference>):Void {
+    if (slots == null) slots = cast (cast ([] : Array<Dynamic>) : Dynamic);
+    if (sourceKind == null) sourceKind = cast (null : Dynamic);
+    if (backgroundColor == null) backgroundColor = cast (null : Dynamic);
+    if (imageResources == null) imageResources = cast (cast ([] : Array<Dynamic>) : Dynamic);
+    if (audioResources == null) audioResources = cast (cast ([] : Array<Dynamic>) : Dynamic);
+    _Runtime.setField(out, 'audioResources', audioResources);
+    _Runtime.setField(out, 'backgroundColor', backgroundColor);
+    _Runtime.setField(out, 'imageResources', imageResources);
+    _Runtime.setField(out, 'root', root);
+    _Runtime.setField(out, 'slots', slots);
+    _Runtime.setField(out, 'sourceKind', sourceKind);
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeScene2DSlotReference(out:EntityConstruction<Scene2DSlotReference>, name:String, target:Node2D, ?linkage:Null<String>, required:Bool = true):Void {
+    if (linkage == null) linkage = cast (null : Dynamic);
+    ((cast target : { var name:Null<String>; }).name = name);
+    _Runtime.setField(out, 'content', null);
+    _Runtime.setField(out, 'linkage', linkage);
+    _Runtime.setField(out, 'name', name);
+    _Runtime.setField(out, 'required', required);
+    _Runtime.setField(out, 'target', target);
   }
 
   public static function createScene2DDocumentFromBytes(source:flight._internal._UInt8Array, registry:Scene2DDocumentImporterRegistry, ?context:Scene2DDocumentImportContext):Null<Scene2DDocument> {
@@ -316,8 +350,8 @@ class _Scene2DResources {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(registry, 'entries'), 'length') : Float)) : Bool)) {
         var entry:Scene2DDocumentImporterEntry = flight._internal._StaticIndex.readArray(_Runtime.field(registry, 'entries'), i);
-        if ((cast !(cast (cast entry : Scene2DDocumentImporterEntry).matches(({ final __callArgument136:Dynamic = source; __callArgument136; }), ({ final __callArgument137:Dynamic = context; __callArgument137; })) : Bool) : Bool)) { i++; continue; }
-        var document:Null<Scene2DDocument> = (cast entry : Scene2DDocumentImporterEntry).importDocument(({ final __callArgument138:Dynamic = source; __callArgument138; }), ({ final __callArgument139:Dynamic = context; __callArgument139; }));
+        if ((cast !(cast (cast entry : Scene2DDocumentImporterEntry).matches(({ final __callArgument156:Dynamic = source; __callArgument156; }), ({ final __callArgument157:Dynamic = context; __callArgument157; })) : Bool) : Bool)) { i++; continue; }
+        var document:Null<Scene2DDocument> = (cast entry : Scene2DDocumentImporterEntry).importDocument(({ final __callArgument158:Dynamic = source; __callArgument158; }), ({ final __callArgument159:Dynamic = context; __callArgument159; }));
         if ((cast ((cast !_Runtime.strictEquals(document, null) : Bool) && (cast _Runtime.strictEquals((cast document : Scene2DDocument).sourceKind, null) : Bool)) : Bool)) { ((cast document : Scene2DDocument).sourceKind = (cast entry : Scene2DDocumentImporterEntry).kind); }
         return cast document;
         i++;
@@ -328,8 +362,17 @@ class _Scene2DResources {
   }
 
   public static function createScene2DDocumentImporterRegistry():Scene2DDocumentImporterRegistry {
-    return cast (cast createEntity(({ final __callArgument140:Dynamic = ({ entries: (cast cast ([] : Array<Dynamic>) : Dynamic) } : Scene2DDocumentImporterRegistry); __callArgument140; })) : Scene2DDocumentImporterRegistry);
+    var out:EntityConstruction<Scene2DDocumentImporterRegistry> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ entries: cast _Runtime.UNDEFINED } : Scene2DDocumentImporterRegistry); }) #end));
+    initializeScene2DDocumentImporterRegistry(({ final __callArgument160:Dynamic = out; __callArgument160; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeScene2DDocumentImporterRegistry(out:EntityConstruction<Scene2DDocumentImporterRegistry>):Void {
+    _Runtime.setField(out, 'entries', cast ([] : Array<Dynamic>));
   }
 
   public static function registerScene2DDocumentImporter(registry:Scene2DDocumentImporterRegistry, kind:String, matches:Scene2DDocumentImporterMatcher, importDocument:Scene2DDocumentImporter):Void {
@@ -354,19 +397,19 @@ class _Scene2DResources {
       flight._internal._Async.protect(function():Dynamic {
         var signal:flight._internal.dom.AbortSignal = cast _Runtime.UNDEFINED;
         var source:Null<flight._internal._UInt8Array> = cast _Runtime.UNDEFINED;
-        signal = _Runtime.coalesce(({ final __structural155 = options; __structural155 == null ? _Runtime.UNDEFINED : (cast __structural155 : { @:optional var signal:Null<flight._internal.dom.AbortSignal>; }).signal; }), function():Dynamic return cast (cast _Runtime.construct(flight._internal._HostValueLut.get('AbortController'), []) : flight._internal.dom.AbortController).signal);
-        return flight._internal._Async.flatMap((cast fetchDocument((cast url : String), ({ final __callArgument166:Dynamic = signal; __callArgument166; }), (cast _Runtime.coalesce(({ final __structural167 = options; __structural167 == null ? _Runtime.UNDEFINED : (cast __structural167 : { @:optional var progress:Null<Signal<Scene2DDocumentFetchProgress->Void>>; }).progress; }), function():Dynamic return cast null) : Dynamic)) : flight._internal._Promise<Null<flight._internal._UInt8Array>>), function(__awaitValue156:Dynamic):Dynamic {
-          source = __awaitValue156;
-          var __flowBranch157:Dynamic;
+        signal = _Runtime.coalesce(({ final __structural175 = options; __structural175 == null ? _Runtime.UNDEFINED : (cast __structural175 : { @:optional var signal:Null<flight._internal.dom.AbortSignal>; }).signal; }), function():Dynamic return cast (cast _Runtime.construct(flight._internal._HostValueLut.get('AbortController'), []) : flight._internal.dom.AbortController).signal);
+        return flight._internal._Async.flatMap((cast fetchDocument((cast url : String), ({ final __callArgument186:Dynamic = signal; __callArgument186; }), (cast _Runtime.coalesce(({ final __structural187 = options; __structural187 == null ? _Runtime.UNDEFINED : (cast __structural187 : { @:optional var progress:Null<Signal<Scene2DDocumentFetchProgress->Void>>; }).progress; }), function():Dynamic return cast null) : Dynamic)) : flight._internal._Promise<Null<flight._internal._UInt8Array>>), function(__awaitValue176:Dynamic):Dynamic {
+          source = __awaitValue176;
+          var __flowBranch177:Dynamic;
           if ((cast _Runtime.strictEquals(source, null) : Bool)) {
-            __flowBranch157 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch177 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(null);
             });
           } else {
-            __flowBranch157 = flight._internal._Async.flowNormal();
+            __flowBranch177 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch157, function():Dynamic {
-            return flight._internal._Async.flowReturn((cast createScene2DDocumentFromBytes(({ final __callArgument158:Dynamic = source; __callArgument158; }), ({ final __callArgument159:Dynamic = registry; __callArgument159; }), ({ final __callArgument161:Dynamic = { mimeType: _Runtime.coalesce(({ final __structural160 = options; __structural160 == null ? _Runtime.UNDEFINED : (cast __structural160 : { @:optional var mimeType:Null<String>; }).mimeType; }), function():Dynamic return cast null), url: url }; __callArgument161; })) : Null<Scene2DDocument>));
+          return flight._internal._Async.continueFlow(__flowBranch177, function():Dynamic {
+            return flight._internal._Async.flowReturn((cast createScene2DDocumentFromBytes(({ final __callArgument178:Dynamic = source; __callArgument178; }), ({ final __callArgument179:Dynamic = registry; __callArgument179; }), ({ final __callArgument181:Dynamic = { mimeType: _Runtime.coalesce(({ final __structural180 = options; __structural180 == null ? _Runtime.UNDEFINED : (cast __structural180 : { @:optional var mimeType:Null<String>; }).mimeType; }), function():Dynamic return cast null), url: url }; __callArgument181; })) : Null<Scene2DDocument>));
           });
         });
       })

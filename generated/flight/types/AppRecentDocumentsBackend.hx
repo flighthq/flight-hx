@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:keep
+@:structInit
+class AppRecentDocumentsBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var addRecentDocument:String->Void;
+  public var clearRecentDocuments:Void->Void;
+
+  private function new(addRecentDocument:String->Void, clearRecentDocuments:Void->Void):Void {
+    this.__symbol__EntityRuntime = null;
+    this.addRecentDocument = addRecentDocument;
+    this.clearRecentDocuments = clearRecentDocuments;
+  }
+}
+#else
 typedef AppRecentDocumentsBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var addRecentDocument:String->Void; var clearRecentDocuments:Void->Void; };
+#end

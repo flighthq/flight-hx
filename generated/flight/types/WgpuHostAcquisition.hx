@@ -4,4 +4,27 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuHostAcquisition = { var context:flight._internal.dom.GPUCanvasContext; var device:flight._internal.dom.GPUDevice; var format:flight._internal.dom.GPUTextureFormat; var ownership:String; var surface:WgpuPresentationSurface; };
+#if !flight_struct_typedef
+@:allow(flight._RenderWgpu)
+@:keep
+@:structInit
+class WgpuHostAcquisition {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var context:flight._internal.dom.GPUCanvasContext;
+  public var device:flight._internal.dom.GPUDevice;
+  public var format:flight._internal.dom.GPUTextureFormat;
+  public var ownership:String;
+  public var surface:WgpuPresentationSurface;
+
+  private function new(context:flight._internal.dom.GPUCanvasContext, device:flight._internal.dom.GPUDevice, format:flight._internal.dom.GPUTextureFormat, ownership:String, surface:WgpuPresentationSurface):Void {
+    this.__symbol__EntityRuntime = null;
+    this.context = context;
+    this.device = device;
+    this.format = format;
+    this.ownership = ownership;
+    this.surface = surface;
+  }
+}
+#else
+typedef WgpuHostAcquisition = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var context:flight._internal.dom.GPUCanvasContext; var device:flight._internal.dom.GPUDevice; var format:flight._internal.dom.GPUTextureFormat; var ownership:String; var surface:WgpuPresentationSurface; };
+#end

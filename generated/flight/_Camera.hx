@@ -3,7 +3,8 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Geometry.createFrustum;
 import flight._Geometry.createMatrix;
 import flight._Geometry.createMatrix4;
@@ -35,6 +36,7 @@ import flight.types.Camera3D;
 import flight.types.Camera3DOptions;
 import flight.types.Camera3DViewExplanation;
 import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.Frustum;
 import flight.types.FrustumLike;
 import flight.types.LogLevel;
@@ -54,6 +56,48 @@ import flight.types.Vector2;
 import flight.types.Vector2Like;
 import flight.types.Vector3;
 import flight.types.Vector3Like;
+
+#if !flight_struct_typedef
+@:allow(flight._Camera)
+@:keep
+@:structInit
+private class EntityShapeL15C15__projection {
+  public var halfHeight:Float;
+  public var halfWidth:Float;
+  public var kind:String;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(halfHeight:Float, halfWidth:Float, kind:String):Void {
+    this.__symbol__EntityRuntime = null;
+    this.halfHeight = halfHeight;
+    this.halfWidth = halfWidth;
+    this.kind = kind;
+  }
+}
+#else
+private typedef EntityShapeL15C15__projection = { var halfHeight:Float; var halfWidth:Float; var kind:String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
+
+#if !flight_struct_typedef
+@:allow(flight._Camera)
+@:keep
+@:structInit
+private class EntityShapeL23C15__projection {
+  public var aspect:Float;
+  public var fovY:Float;
+  public var kind:String;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(aspect:Float, fovY:Float, kind:String):Void {
+    this.__symbol__EntityRuntime = null;
+    this.aspect = aspect;
+    this.fovY = fovY;
+    this.kind = kind;
+  }
+}
+#else
+private typedef EntityShapeL23C15__projection = { var aspect:Float; var fovY:Float; var kind:String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
 
 @:noCompletion
 class _Camera {
@@ -114,20 +158,34 @@ class _Camera {
   }
 
   public static function createCamera3D(opts:Camera3DOptions):Camera3D {
-    return cast (cast createEntity((cast ({ far: (cast _Runtime.field(opts, 'far') : Dynamic), inverseViewProjection: (cast (cast (#if js _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) #else createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix4) : Dynamic), jitter: (cast (cast createVector2(({ final __callArgument4:Dynamic = 0.0; __callArgument4; }), ({ final __callArgument5:Dynamic = 0.0; __callArgument5; })) : Vector2) : Dynamic), near: (cast _Runtime.field(opts, 'near') : Dynamic), projection: (cast _Runtime.field(opts, 'projection') : Dynamic), view: (cast (cast (#if js _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) #else createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix4) : Dynamic) } : Camera3D) : Dynamic)) : Camera3D);
+    var out:EntityConstruction<Camera3D> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ far: cast _Runtime.UNDEFINED, inverseViewProjection: cast _Runtime.UNDEFINED, jitter: cast _Runtime.UNDEFINED, near: cast _Runtime.UNDEFINED, projection: cast _Runtime.UNDEFINED, view: cast _Runtime.UNDEFINED } : Camera3D); }) #end));
+    initializeCamera3D(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = opts; __callArgument1; }));
+    return cast out;
     return cast null;
   }
 
   public static function getCamera3DInverseViewProjectionMatrix4(out:Matrix4Like, camera:Camera3D, aspect:Float):Bool {
-    getCamera3DViewProjectionMatrix4(({ final __callArgument16:Dynamic = _Camera.__scratchViewProjection__camera; __callArgument16; }), ({ final __callArgument17:Dynamic = camera; __callArgument17; }), (cast aspect : Float));
-    return cast (cast inverseMatrix4(({ final __callArgument20:Dynamic = out; __callArgument20; }), ({ final __callArgument21:Dynamic = _Camera.__scratchViewProjection__camera; __callArgument21; })) : Bool);
+    getCamera3DViewProjectionMatrix4(({ final __callArgument4:Dynamic = _Camera.__scratchViewProjection__camera; __callArgument4; }), ({ final __callArgument5:Dynamic = camera; __callArgument5; }), (cast aspect : Float));
+    return cast (cast inverseMatrix4(({ final __callArgument8:Dynamic = out; __callArgument8; }), ({ final __callArgument9:Dynamic = _Camera.__scratchViewProjection__camera; __callArgument9; })) : Bool);
     return cast null;
   }
 
   public static function getCamera3DViewProjectionMatrix4(out:Matrix4Like, camera:Camera3D, aspect:Float):Void {
-    setProjectionMatrix4(({ final __callArgument24:Dynamic = _Camera.__scratchProjection__camera; __callArgument24; }), camera.projection, (cast aspect : Float), (cast camera.near : Float), (cast camera.far : Float));
-    _Camera.applyCamera3DProjectionJitter__camera(({ final __callArgument26:Dynamic = _Camera.__scratchProjection__camera; __callArgument26; }), (cast (cast camera.jitter : { var x:Float; }).x : Float), (cast (cast camera.jitter : { var y:Float; }).y : Float));
-    multiplyMatrix4(({ final __callArgument28:Dynamic = out; __callArgument28; }), ({ final __callArgument29:Dynamic = _Camera.__scratchProjection__camera; __callArgument29; }), ({ final __callArgument30:Dynamic = camera.view; __callArgument30; }));
+    setProjectionMatrix4(({ final __callArgument12:Dynamic = _Camera.__scratchProjection__camera; __callArgument12; }), camera.projection, (cast aspect : Float), (cast camera.near : Float), (cast camera.far : Float));
+    _Camera.applyCamera3DProjectionJitter__camera(({ final __callArgument14:Dynamic = _Camera.__scratchProjection__camera; __callArgument14; }), (cast (cast camera.jitter : { var x:Float; }).x : Float), (cast (cast camera.jitter : { var y:Float; }).y : Float));
+    multiplyMatrix4(({ final __callArgument16:Dynamic = out; __callArgument16; }), ({ final __callArgument17:Dynamic = _Camera.__scratchProjection__camera; __callArgument17; }), ({ final __callArgument18:Dynamic = camera.view; __callArgument18; }));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeCamera3D(out:EntityConstruction<Camera3D>, opts:Camera3DOptions):Void {
+    _Runtime.setField(out, 'far', _Runtime.field(opts, 'far'));
+    _Runtime.setField(out, 'inverseViewProjection', (cast (#if js _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) #else createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix4));
+    _Runtime.setField(out, 'jitter', (cast createVector2(({ final __callArgument22:Dynamic = 0.0; __callArgument22; }), ({ final __callArgument23:Dynamic = 0.0; __callArgument23; })) : Vector2));
+    _Runtime.setField(out, 'near', _Runtime.field(opts, 'near'));
+    _Runtime.setField(out, 'projection', _Runtime.field(opts, 'projection'));
+    _Runtime.setField(out, 'view', (cast (#if js _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) #else createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix4));
   }
 
   public static function setCamera3DAspect(camera:Camera3D, aspect:Float):Void {
@@ -152,7 +210,7 @@ class _Camera {
   }
 
   public static function setCamera3DViewMatrix4FromLookAt(camera:Camera3D, eye:Vector3Like, target:Vector3Like, up:Vector3Like):Void {
-    setMatrix4LookAt(({ final __callArgument34:Dynamic = camera.view; __callArgument34; }), ({ final __callArgument35:Dynamic = eye; __callArgument35; }), ({ final __callArgument36:Dynamic = target; __callArgument36; }), ({ final __callArgument37:Dynamic = up; __callArgument37; }));
+    setMatrix4LookAt(({ final __callArgument26:Dynamic = camera.view; __callArgument26; }), ({ final __callArgument27:Dynamic = eye; __callArgument27; }), ({ final __callArgument28:Dynamic = target; __callArgument28; }), ({ final __callArgument29:Dynamic = up; __callArgument29; }));
   }
 
   public static function setCamera3DViewMatrix4FromMatrix4(camera:Camera3D, view:Matrix4Like):Void {
@@ -162,7 +220,7 @@ class _Camera {
 
   public static function updateCamera3DInverseViewProjection(camera:Camera3D, aspect:Float):Bool {
     var ok:Bool = cast _Runtime.UNDEFINED;
-    ok = (cast getCamera3DInverseViewProjectionMatrix4(({ final __callArgument42:Dynamic = _Camera.__scratchInverse__camera; __callArgument42; }), ({ final __callArgument43:Dynamic = camera; __callArgument43; }), (cast aspect : Float)) : Bool);
+    ok = (cast getCamera3DInverseViewProjectionMatrix4(({ final __callArgument34:Dynamic = _Camera.__scratchInverse__camera; __callArgument34; }), ({ final __callArgument35:Dynamic = camera; __callArgument35; }), (cast aspect : Float)) : Bool);
     if ((cast ok : Bool)) { (cast (cast camera.inverseViewProjection : { var m:flight._internal._Float32Array; }).m : flight._internal._Float32Array).set(_Camera.__scratchInverse__camera.m); }
     return cast ok;
     return cast null;
@@ -171,14 +229,14 @@ class _Camera {
   public static function applyCamera3DProjectionJitter__camera(out:Matrix4Like, x:Float, y:Float):Void {
     var m:flight._internal._Float32Array = cast _Runtime.UNDEFINED;
     m = out.m;
-    ({ var __indexedObject46:flight._internal._Float32Array = m; var __indexedKey47:Float = 0.0; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject46 : flight._internal._Float32Array), (cast __indexedKey47 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject46 : flight._internal._Float32Array), (cast __indexedKey47 : Float)) + (x * flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 3.0 : Float)))) : Float)); });
-    ({ var __indexedObject48:flight._internal._Float32Array = m; var __indexedKey49:Float = 4.0; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject48 : flight._internal._Float32Array), (cast __indexedKey49 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject48 : flight._internal._Float32Array), (cast __indexedKey49 : Float)) + (x * flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 7.0 : Float)))) : Float)); });
-    ({ var __indexedObject50:flight._internal._Float32Array = m; var __indexedKey51:Float = 8.0; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject50 : flight._internal._Float32Array), (cast __indexedKey51 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject50 : flight._internal._Float32Array), (cast __indexedKey51 : Float)) + (x * flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 11.0 : Float)))) : Float)); });
-    ({ var __indexedObject52:flight._internal._Float32Array = m; var __indexedKey53:Float = 12.0; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject52 : flight._internal._Float32Array), (cast __indexedKey53 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject52 : flight._internal._Float32Array), (cast __indexedKey53 : Float)) + (x * flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 15.0 : Float)))) : Float)); });
-    ({ var __indexedObject54:flight._internal._Float32Array = m; var __indexedKey55:Float = 1.0; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject54 : flight._internal._Float32Array), (cast __indexedKey55 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject54 : flight._internal._Float32Array), (cast __indexedKey55 : Float)) + (y * flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 3.0 : Float)))) : Float)); });
-    ({ var __indexedObject56:flight._internal._Float32Array = m; var __indexedKey57:Float = 5.0; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject56 : flight._internal._Float32Array), (cast __indexedKey57 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject56 : flight._internal._Float32Array), (cast __indexedKey57 : Float)) + (y * flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 7.0 : Float)))) : Float)); });
-    ({ var __indexedObject58:flight._internal._Float32Array = m; var __indexedKey59:Float = 9.0; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject58 : flight._internal._Float32Array), (cast __indexedKey59 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject58 : flight._internal._Float32Array), (cast __indexedKey59 : Float)) + (y * flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 11.0 : Float)))) : Float)); });
-    ({ var __indexedObject60:flight._internal._Float32Array = m; var __indexedKey61:Float = 13.0; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject60 : flight._internal._Float32Array), (cast __indexedKey61 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject60 : flight._internal._Float32Array), (cast __indexedKey61 : Float)) + (y * flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 15.0 : Float)))) : Float)); });
+    ({ var __indexedObject38:flight._internal._Float32Array = m; var __indexedKey39:Float = 0.0; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject38 : flight._internal._Float32Array), (cast __indexedKey39 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject38 : flight._internal._Float32Array), (cast __indexedKey39 : Float)) + (x * flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 3.0 : Float)))) : Float)); });
+    ({ var __indexedObject40:flight._internal._Float32Array = m; var __indexedKey41:Float = 4.0; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject40 : flight._internal._Float32Array), (cast __indexedKey41 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject40 : flight._internal._Float32Array), (cast __indexedKey41 : Float)) + (x * flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 7.0 : Float)))) : Float)); });
+    ({ var __indexedObject42:flight._internal._Float32Array = m; var __indexedKey43:Float = 8.0; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject42 : flight._internal._Float32Array), (cast __indexedKey43 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject42 : flight._internal._Float32Array), (cast __indexedKey43 : Float)) + (x * flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 11.0 : Float)))) : Float)); });
+    ({ var __indexedObject44:flight._internal._Float32Array = m; var __indexedKey45:Float = 12.0; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject44 : flight._internal._Float32Array), (cast __indexedKey45 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject44 : flight._internal._Float32Array), (cast __indexedKey45 : Float)) + (x * flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 15.0 : Float)))) : Float)); });
+    ({ var __indexedObject46:flight._internal._Float32Array = m; var __indexedKey47:Float = 1.0; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject46 : flight._internal._Float32Array), (cast __indexedKey47 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject46 : flight._internal._Float32Array), (cast __indexedKey47 : Float)) + (y * flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 3.0 : Float)))) : Float)); });
+    ({ var __indexedObject48:flight._internal._Float32Array = m; var __indexedKey49:Float = 5.0; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject48 : flight._internal._Float32Array), (cast __indexedKey49 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject48 : flight._internal._Float32Array), (cast __indexedKey49 : Float)) + (y * flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 7.0 : Float)))) : Float)); });
+    ({ var __indexedObject50:flight._internal._Float32Array = m; var __indexedKey51:Float = 9.0; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject50 : flight._internal._Float32Array), (cast __indexedKey51 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject50 : flight._internal._Float32Array), (cast __indexedKey51 : Float)) + (y * flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 11.0 : Float)))) : Float)); });
+    ({ var __indexedObject52:flight._internal._Float32Array = m; var __indexedKey53:Float = 13.0; flight._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject52 : flight._internal._Float32Array), (cast __indexedKey53 : Float), (cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject52 : flight._internal._Float32Array), (cast __indexedKey53 : Float)) + (y * flight._internal._StaticIndex.readFloat32ArrayTyped((cast m : flight._internal._Float32Array), (cast 15.0 : Float)))) : Float)); });
   }
 
   public static final __scratchInverse__camera:Matrix4 = (cast (#if js _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) #else createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix4);
@@ -190,30 +248,44 @@ class _Camera {
   public static var camera3DViewGuard__camera:Null<Camera3D->Void> = _Runtime.explicitNull();
 
   public static function createCamera2D(viewportWidth:Float, viewportHeight:Float, ?options:Camera2DOptions):Camera2D {
-    return ({ rotation: (cast _Runtime.coalesce(({ final __typedStruct66 = options; __typedStruct66 == null ? _Runtime.UNDEFINED : __typedStruct66.rotation; }), function():Dynamic return cast 0.0) : Dynamic), viewportHeight: (cast viewportHeight : Dynamic), viewportWidth: (cast viewportWidth : Dynamic), x: (cast _Runtime.coalesce(({ final __typedStruct67 = options; __typedStruct67 == null ? _Runtime.UNDEFINED : __typedStruct67.x; }), function():Dynamic return cast 0.0) : Dynamic), y: (cast _Runtime.coalesce(({ final __typedStruct68 = options; __typedStruct68 == null ? _Runtime.UNDEFINED : __typedStruct68.y; }), function():Dynamic return cast 0.0) : Dynamic), zoom: (cast _Runtime.coalesce(({ final __typedStruct69 = options; __typedStruct69 == null ? _Runtime.UNDEFINED : __typedStruct69.zoom; }), function():Dynamic return cast 1.0) : Dynamic) } : Camera2D);
+    var out:EntityConstruction<Camera2D> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ rotation: cast _Runtime.UNDEFINED, viewportHeight: cast _Runtime.UNDEFINED, viewportWidth: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED, zoom: cast _Runtime.UNDEFINED } : Camera2D); }) #end));
+    initializeCamera2D(({ final __callArgument54:Dynamic = out; __callArgument54; }), (cast viewportWidth : Float), (cast viewportHeight : Float), ({ final __callArgument55:Dynamic = options; __callArgument55; }));
+    return cast out;
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeCamera2D(out:EntityConstruction<Camera2D>, viewportWidth:Float, viewportHeight:Float, ?options:Camera2DOptions):Void {
+    _Runtime.setField(out, 'rotation', _Runtime.coalesce(({ final __typedStruct58 = options; __typedStruct58 == null ? _Runtime.UNDEFINED : __typedStruct58.rotation; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'viewportHeight', viewportHeight);
+    _Runtime.setField(out, 'viewportWidth', viewportWidth);
+    _Runtime.setField(out, 'x', _Runtime.coalesce(({ final __typedStruct59 = options; __typedStruct59 == null ? _Runtime.UNDEFINED : __typedStruct59.x; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'y', _Runtime.coalesce(({ final __typedStruct60 = options; __typedStruct60 == null ? _Runtime.UNDEFINED : __typedStruct60.y; }), function():Dynamic return cast 0.0));
+    _Runtime.setField(out, 'zoom', _Runtime.coalesce(({ final __typedStruct61 = options; __typedStruct61 == null ? _Runtime.UNDEFINED : __typedStruct61.zoom; }), function():Dynamic return cast 1.0));
+  }
+
   public static function getCamera3DFrustum(out:FrustumLike, camera:Camera3D, aspect:Float):Void {
-    getCamera3DViewProjectionMatrix4(({ final __callArgument70:Dynamic = _Camera.__scratchViewProjection__culling; __callArgument70; }), ({ final __callArgument71:Dynamic = camera; __callArgument71; }), (cast aspect : Float));
-    setFrustumFromMatrix4(({ final __callArgument74:Dynamic = out; __callArgument74; }), ({ final __callArgument75:Dynamic = _Camera.__scratchViewProjection__culling; __callArgument75; }));
+    getCamera3DViewProjectionMatrix4(({ final __callArgument62:Dynamic = _Camera.__scratchViewProjection__culling; __callArgument62; }), ({ final __callArgument63:Dynamic = camera; __callArgument63; }), (cast aspect : Float));
+    setFrustumFromMatrix4(({ final __callArgument66:Dynamic = out; __callArgument66; }), ({ final __callArgument67:Dynamic = _Camera.__scratchViewProjection__culling; __callArgument67; }));
   }
 
   public static function isBoxInCamera3DFrustum(camera:Camera3D, aabb:AabbLike, aspect:Float):Bool {
-    getCamera3DFrustum(({ final __callArgument78:Dynamic = _Camera.__scratchFrustum__culling; __callArgument78; }), ({ final __callArgument79:Dynamic = camera; __callArgument79; }), (cast aspect : Float));
-    return cast (cast isFrustumIntersectingAabb(({ final __callArgument82:Dynamic = _Camera.__scratchFrustum__culling; __callArgument82; }), ({ final __callArgument83:Dynamic = aabb; __callArgument83; })) : Bool);
+    getCamera3DFrustum(({ final __callArgument70:Dynamic = _Camera.__scratchFrustum__culling; __callArgument70; }), ({ final __callArgument71:Dynamic = camera; __callArgument71; }), (cast aspect : Float));
+    return cast (cast isFrustumIntersectingAabb(({ final __callArgument74:Dynamic = _Camera.__scratchFrustum__culling; __callArgument74; }), ({ final __callArgument75:Dynamic = aabb; __callArgument75; })) : Bool);
     return cast null;
   }
 
   public static function isPointInCamera3DFrustum(camera:Camera3D, point:Vector3Like, aspect:Float):Bool {
-    getCamera3DFrustum(({ final __callArgument86:Dynamic = _Camera.__scratchFrustum__culling; __callArgument86; }), ({ final __callArgument87:Dynamic = camera; __callArgument87; }), (cast aspect : Float));
-    return cast (cast isFrustumContainingPoint(({ final __callArgument90:Dynamic = _Camera.__scratchFrustum__culling; __callArgument90; }), ({ final __callArgument91:Dynamic = point; __callArgument91; })) : Bool);
+    getCamera3DFrustum(({ final __callArgument78:Dynamic = _Camera.__scratchFrustum__culling; __callArgument78; }), ({ final __callArgument79:Dynamic = camera; __callArgument79; }), (cast aspect : Float));
+    return cast (cast isFrustumContainingPoint(({ final __callArgument82:Dynamic = _Camera.__scratchFrustum__culling; __callArgument82; }), ({ final __callArgument83:Dynamic = point; __callArgument83; })) : Bool);
     return cast null;
   }
 
   public static function isSphereInCamera3DFrustum(camera:Camera3D, sphere:BoundingSphereLike, aspect:Float):Bool {
-    getCamera3DFrustum(({ final __callArgument94:Dynamic = _Camera.__scratchFrustum__culling; __callArgument94; }), ({ final __callArgument95:Dynamic = camera; __callArgument95; }), (cast aspect : Float));
-    return cast (cast isFrustumIntersectingSphere(({ final __callArgument98:Dynamic = _Camera.__scratchFrustum__culling; __callArgument98; }), ({ final __callArgument99:Dynamic = sphere; __callArgument99; })) : Bool);
+    getCamera3DFrustum(({ final __callArgument86:Dynamic = _Camera.__scratchFrustum__culling; __callArgument86; }), ({ final __callArgument87:Dynamic = camera; __callArgument87; }), (cast aspect : Float));
+    return cast (cast isFrustumIntersectingSphere(({ final __callArgument90:Dynamic = _Camera.__scratchFrustum__culling; __callArgument90; }), ({ final __callArgument91:Dynamic = sphere; __callArgument91; })) : Bool);
     return cast null;
   }
 
@@ -244,7 +316,7 @@ class _Camera {
   }
 
   public static function getCamera3DViewSpaceZ(camera:Camera3D, ndcZ:Float):Float {
-    return cast -(cast getCamera3DLinearDepth(({ final __callArgument102:Dynamic = camera; __callArgument102; }), (cast ndcZ : Float)) : Float);
+    return cast -(cast getCamera3DLinearDepth(({ final __callArgument94:Dynamic = camera; __callArgument94; }), (cast ndcZ : Float)) : Float);
     return cast null;
   }
 
@@ -254,26 +326,26 @@ class _Camera {
   }
 
   public static function disableCameraGuards():Void {
-    setCamera3DViewGuard(({ final __callArgument104:Dynamic = null; __callArgument104; }));
-    setCamera2DVisibleBoundsGuard(({ final __callArgument106:Dynamic = null; __callArgument106; }));
+    setCamera3DViewGuard(({ final __callArgument96:Dynamic = null; __callArgument96; }));
+    setCamera2DVisibleBoundsGuard(({ final __callArgument98:Dynamic = null; __callArgument98; }));
     (_Camera.cameraGuardsEnabled__enableCameraGuards = cast (false : Dynamic));
   }
 
   public static function enableCameraGuards():Void {
-    setCamera3DViewGuard(({ final __callArgument108:Dynamic = _Camera.warnOnNonOrthonormalCamera3DView__enableCameraGuards; __callArgument108; }));
-    setCamera2DVisibleBoundsGuard(({ final __callArgument110:Dynamic = _Camera.warnOnDegenerateCamera2DVisibleBounds__enableCameraGuards; __callArgument110; }));
+    setCamera3DViewGuard(({ final __callArgument100:Dynamic = _Camera.warnOnNonOrthonormalCamera3DView__enableCameraGuards; __callArgument100; }));
+    setCamera2DVisibleBoundsGuard(({ final __callArgument102:Dynamic = _Camera.warnOnDegenerateCamera2DVisibleBounds__enableCameraGuards; __callArgument102; }));
     (_Camera.cameraGuardsEnabled__enableCameraGuards = cast (true : Dynamic));
   }
 
   public static function warnOnDegenerateCamera2DVisibleBounds__enableCameraGuards(camera:Camera2D):Void {
-    (cast (#if js _Runtime.callValue(logOnce, cast ([(cast 'camera:degenerate-visible-bounds:' + Std.string(camera.zoom) + '' : String), ({ final __callArgument113:Dynamic = LogLevel.Warn; __callArgument113; }), (cast { message: 'getCamera2DVisibleBounds: the view matrix has no inverse, so the visible rectangle is unbounded and nothing is culled — a zoom of 0 is the usual cause; set a non-zero zoom.', zoom: camera.zoom } : Dynamic)] : Array<Dynamic>)) #else logOnce((cast 'camera:degenerate-visible-bounds:' + Std.string(camera.zoom) + '' : String), ({ final __callArgument112:Dynamic = LogLevel.Warn; __callArgument112; }), (cast { message: 'getCamera2DVisibleBounds: the view matrix has no inverse, so the visible rectangle is unbounded and nothing is culled — a zoom of 0 is the usual cause; set a non-zero zoom.', zoom: camera.zoom } : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Bool);
+    (cast (#if js _Runtime.callValue(logOnce, cast ([(cast 'camera:degenerate-visible-bounds:' + Std.string(camera.zoom) + '' : String), ({ final __callArgument105:Dynamic = LogLevel.Warn; __callArgument105; }), (cast { message: 'getCamera2DVisibleBounds: the view matrix has no inverse, so the visible rectangle is unbounded and nothing is culled — a zoom of 0 is the usual cause; set a non-zero zoom.', zoom: camera.zoom } : Dynamic)] : Array<Dynamic>)) #else logOnce((cast 'camera:degenerate-visible-bounds:' + Std.string(camera.zoom) + '' : String), ({ final __callArgument104:Dynamic = LogLevel.Warn; __callArgument104; }), (cast { message: 'getCamera2DVisibleBounds: the view matrix has no inverse, so the visible rectangle is unbounded and nothing is culled — a zoom of 0 is the usual cause; set a non-zero zoom.', zoom: camera.zoom } : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Bool);
   }
 
   public static function warnOnNonOrthonormalCamera3DView__enableCameraGuards(camera:Camera3D):Void {
     var explanation:Camera3DViewExplanation = cast _Runtime.UNDEFINED;
-    explanation = (cast explainCamera3DView(({ final __callArgument114:Dynamic = camera; __callArgument114; })) : Camera3DViewExplanation);
+    explanation = (cast explainCamera3DView(({ final __callArgument106:Dynamic = camera; __callArgument106; })) : Camera3DViewExplanation);
     if ((cast (cast explanation : Camera3DViewExplanation).isOrthonormal : Bool)) { return; }
-    (cast (#if js _Runtime.callValue(logOnce, cast ([(cast 'camera:non-orthonormal-view' : String), ({ final __callArgument117:Dynamic = LogLevel.Warn; __callArgument117; }), (cast { message: 'setCamera3DViewMatrix4FromMatrix4: the view matrix is not orthonormal, which its consumers rely on — a scaled matrix is the usual cause. Reflections are fine; scale is not. Call explainCamera3DView(camera) for the measured deviations.', scaleDeviation: (cast explanation : Camera3DViewExplanation).scaleDeviation, shearDeviation: (cast explanation : Camera3DViewExplanation).shearDeviation } : Dynamic)] : Array<Dynamic>)) #else logOnce((cast 'camera:non-orthonormal-view' : String), ({ final __callArgument116:Dynamic = LogLevel.Warn; __callArgument116; }), (cast { message: 'setCamera3DViewMatrix4FromMatrix4: the view matrix is not orthonormal, which its consumers rely on — a scaled matrix is the usual cause. Reflections are fine; scale is not. Call explainCamera3DView(camera) for the measured deviations.', scaleDeviation: (cast explanation : Camera3DViewExplanation).scaleDeviation, shearDeviation: (cast explanation : Camera3DViewExplanation).shearDeviation } : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Bool);
+    (cast (#if js _Runtime.callValue(logOnce, cast ([(cast 'camera:non-orthonormal-view' : String), ({ final __callArgument109:Dynamic = LogLevel.Warn; __callArgument109; }), (cast { message: 'setCamera3DViewMatrix4FromMatrix4: the view matrix is not orthonormal, which its consumers rely on — a scaled matrix is the usual cause. Reflections are fine; scale is not. Call explainCamera3DView(camera) for the measured deviations.', scaleDeviation: (cast explanation : Camera3DViewExplanation).scaleDeviation, shearDeviation: (cast explanation : Camera3DViewExplanation).shearDeviation } : Dynamic)] : Array<Dynamic>)) #else logOnce((cast 'camera:non-orthonormal-view' : String), ({ final __callArgument108:Dynamic = LogLevel.Warn; __callArgument108; }), (cast { message: 'setCamera3DViewMatrix4FromMatrix4: the view matrix is not orthonormal, which its consumers rely on — a scaled matrix is the usual cause. Reflections are fine; scale is not. Call explainCamera3DView(camera) for the measured deviations.', scaleDeviation: (cast explanation : Camera3DViewExplanation).scaleDeviation, shearDeviation: (cast explanation : Camera3DViewExplanation).shearDeviation } : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Bool);
   }
 
   public static var cameraGuardsEnabled__enableCameraGuards:Bool = false;
@@ -311,8 +383,8 @@ class _Camera {
     var m:flight._internal._Float32Array = cast _Runtime.UNDEFINED;
     var ndcCorners:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var results:Array<Array<Float>> = cast _Runtime.UNDEFINED;
-    getCamera3DViewProjectionMatrix4(({ final __callArgument118:Dynamic = _Camera.__scratchViewProjection__frustumCorners; __callArgument118; }), ({ final __callArgument119:Dynamic = camera; __callArgument119; }), (cast aspect : Float));
-    if ((cast !(cast (cast inverseMatrix4(({ final __callArgument122:Dynamic = _Camera.__scratchInverseVP__frustumCorners; __callArgument122; }), ({ final __callArgument123:Dynamic = _Camera.__scratchViewProjection__frustumCorners; __callArgument123; })) : Bool) : Bool) : Bool)) {
+    getCamera3DViewProjectionMatrix4(({ final __callArgument110:Dynamic = _Camera.__scratchViewProjection__frustumCorners; __callArgument110; }), ({ final __callArgument111:Dynamic = camera; __callArgument111; }), (cast aspect : Float));
+    if ((cast !(cast (cast inverseMatrix4(({ final __callArgument114:Dynamic = _Camera.__scratchInverseVP__frustumCorners; __callArgument114; }), ({ final __callArgument115:Dynamic = _Camera.__scratchViewProjection__frustumCorners; __callArgument115; })) : Bool) : Bool) : Bool)) {
       return cast false;
     }
     m = _Camera.__scratchInverseVP__frustumCorners.m;
@@ -360,10 +432,10 @@ class _Camera {
     if ((cast ((cast sphere.radius : Float) < (cast 0.0 : Float)) : Bool)) {
       return cast false;
     }
-    if ((cast !(cast (cast getCamera3DWorldToScreen(({ final __callArgument126:Dynamic = _Camera.__scratchNdc__intersection; __callArgument126; }), ({ final __callArgument127:Dynamic = camera; __callArgument127; }), ({ final __callArgument128:Dynamic = sphere.center; __callArgument128; }), (cast aspect : Float)) : Bool) : Bool) : Bool)) {
+    if ((cast !(cast (cast getCamera3DWorldToScreen(({ final __callArgument118:Dynamic = _Camera.__scratchNdc__intersection; __callArgument118; }), ({ final __callArgument119:Dynamic = camera; __callArgument119; }), ({ final __callArgument120:Dynamic = sphere.center; __callArgument120; }), (cast aspect : Float)) : Bool) : Bool) : Bool)) {
       return cast false;
     }
-    return cast (cast getCamera3DScreenToWorldRay(({ final __callArgument132:Dynamic = out; __callArgument132; }), ({ final __callArgument133:Dynamic = camera; __callArgument133; }), (cast _Camera.__scratchNdc__intersection.x : Float), (cast _Camera.__scratchNdc__intersection.y : Float), (cast aspect : Float)) : Bool);
+    return cast (cast getCamera3DScreenToWorldRay(({ final __callArgument124:Dynamic = out; __callArgument124; }), ({ final __callArgument125:Dynamic = camera; __callArgument125; }), (cast _Camera.__scratchNdc__intersection.x : Float), (cast _Camera.__scratchNdc__intersection.y : Float), (cast aspect : Float)) : Bool);
     return cast null;
   }
 
@@ -408,7 +480,7 @@ class _Camera {
   public static final __scratchNdc__intersection:Vector3Like = (cast { x: 0.0, y: 0.0, z: 0.0 });
 
   public static function getCamera2DParallaxPoint(camera:Camera2D, factor:Float, out:Vector2Like):Void {
-    getCamera2DViewMatrix(({ final __callArgument136:Dynamic = camera; __callArgument136; }), ({ final __callArgument137:Dynamic = _Camera.scratchMatrix__parallax; __callArgument137; }));
+    getCamera2DViewMatrix(({ final __callArgument128:Dynamic = camera; __callArgument128; }), ({ final __callArgument129:Dynamic = _Camera.scratchMatrix__parallax; __callArgument129; }));
     (out.x = cast (((_Camera.scratchMatrix__parallax.tx - (camera.viewportWidth * 0.5)) * factor) : Float));
     (out.y = cast (((_Camera.scratchMatrix__parallax.ty - (camera.viewportHeight * 0.5)) * factor) : Float));
   }
@@ -427,8 +499,8 @@ class _Camera {
     var farY:Float = cast _Runtime.UNDEFINED;
     var farZ:Float = cast _Runtime.UNDEFINED;
     var farW:Float = cast _Runtime.UNDEFINED;
-    getCamera3DViewProjectionMatrix4(({ final __callArgument140:Dynamic = _Camera.__scratchViewProjection__picking; __callArgument140; }), ({ final __callArgument141:Dynamic = camera; __callArgument141; }), (cast aspect : Float));
-    if ((cast !(cast (cast inverseMatrix4(({ final __callArgument144:Dynamic = _Camera.__scratchInverseVP__picking; __callArgument144; }), ({ final __callArgument145:Dynamic = _Camera.__scratchViewProjection__picking; __callArgument145; })) : Bool) : Bool) : Bool)) {
+    getCamera3DViewProjectionMatrix4(({ final __callArgument132:Dynamic = _Camera.__scratchViewProjection__picking; __callArgument132; }), ({ final __callArgument133:Dynamic = camera; __callArgument133; }), (cast aspect : Float));
+    if ((cast !(cast (cast inverseMatrix4(({ final __callArgument136:Dynamic = _Camera.__scratchInverseVP__picking; __callArgument136; }), ({ final __callArgument137:Dynamic = _Camera.__scratchViewProjection__picking; __callArgument137; })) : Bool) : Bool) : Bool)) {
       return cast false;
     }
     m = _Camera.__scratchInverseVP__picking.m;
@@ -460,8 +532,8 @@ class _Camera {
     (_Camera.__scratchFar__picking.x = cast (farX : Float));
     (_Camera.__scratchFar__picking.y = cast (farY : Float));
     (_Camera.__scratchFar__picking.z = cast (farZ : Float));
-    subtractVector3(({ final __callArgument148:Dynamic = _Camera.__scratchDir__picking; __callArgument148; }), ({ final __callArgument149:Dynamic = _Camera.__scratchFar__picking; __callArgument149; }), ({ final __callArgument150:Dynamic = _Camera.__scratchNear__picking; __callArgument150; }));
-    (cast normalizeVector3(({ final __callArgument154:Dynamic = _Camera.__scratchDir__picking; __callArgument154; }), ({ final __callArgument155:Dynamic = _Camera.__scratchDir__picking; __callArgument155; })) : Float);
+    subtractVector3(({ final __callArgument140:Dynamic = _Camera.__scratchDir__picking; __callArgument140; }), ({ final __callArgument141:Dynamic = _Camera.__scratchFar__picking; __callArgument141; }), ({ final __callArgument142:Dynamic = _Camera.__scratchNear__picking; __callArgument142; }));
+    (cast normalizeVector3(({ final __callArgument146:Dynamic = _Camera.__scratchDir__picking; __callArgument146; }), ({ final __callArgument147:Dynamic = _Camera.__scratchDir__picking; __callArgument147; })) : Float);
     ((cast out.origin : { var x:Float; }).x = cast (nearX : Float));
     ((cast out.origin : { var y:Float; }).y = cast (nearY : Float));
     ((cast out.origin : { var z:Float; }).z = cast (nearZ : Float));
@@ -482,7 +554,7 @@ class _Camera {
     var clipZ:Float = cast _Runtime.UNDEFINED;
     var clipW:Float = cast _Runtime.UNDEFINED;
     var invW:Float = cast _Runtime.UNDEFINED;
-    getCamera3DViewProjectionMatrix4(({ final __callArgument158:Dynamic = _Camera.__scratchViewProjection__picking; __callArgument158; }), ({ final __callArgument159:Dynamic = camera; __callArgument159; }), (cast aspect : Float));
+    getCamera3DViewProjectionMatrix4(({ final __callArgument150:Dynamic = _Camera.__scratchViewProjection__picking; __callArgument150; }), ({ final __callArgument151:Dynamic = camera; __callArgument151; }), (cast aspect : Float));
     m = _Camera.__scratchViewProjection__picking.m;
     wx = worldPoint.x;
     wy = worldPoint.y;
@@ -512,19 +584,41 @@ class _Camera {
 
   public static final __scratchDir__picking:Vector3 = (cast (#if js _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>)) #else createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector3);
 
-  public static function createOrthographicProjection(opts:OrthographicProjectionOptions):OrthographicProjection {
-    return cast { halfHeight: _Runtime.field(opts, 'halfHeight'), halfWidth: _Runtime.field(opts, 'halfWidth'), kind: 'orthographic' };
+  public static function createOrthographicProjection(opts:OrthographicProjectionOptions):{ >OrthographicProjection, >Entity, } {
+    var out:EntityConstruction<{ >OrthographicProjection, >Entity, }> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ halfHeight: cast _Runtime.UNDEFINED, halfWidth: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED } : EntityShapeL15C15__projection); }) #end));
+    initializeOrthographicProjection(({ final __callArgument154:Dynamic = out; __callArgument154; }), ({ final __callArgument155:Dynamic = opts; __callArgument155; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createPerspectiveProjection(opts:PerspectiveProjectionOptions):PerspectiveProjection {
-    return cast { aspect: _Runtime.coalesce(_Runtime.field(opts, 'aspect'), function():Dynamic return cast 1.0), fovY: _Runtime.field(opts, 'fovY'), kind: 'perspective' };
+  public static function createPerspectiveProjection(opts:PerspectiveProjectionOptions):{ >PerspectiveProjection, >Entity, } {
+    var out:EntityConstruction<{ >PerspectiveProjection, >Entity, }> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ aspect: cast _Runtime.UNDEFINED, fovY: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED } : EntityShapeL23C15__projection); }) #end));
+    initializePerspectiveProjection(({ final __callArgument158:Dynamic = out; __callArgument158; }), ({ final __callArgument159:Dynamic = opts; __callArgument159; }));
+    return cast out;
     return cast null;
   }
 
   public static function getOrthographicProjectionTexelSize(projection:OrthographicProjection, pixelWidth:Float, pixelHeight:Float):Float {
     return cast HxMath.max(((projection.halfWidth * 2.0) / pixelWidth), ((projection.halfHeight * 2.0) / pixelHeight));
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeOrthographicProjection(out:EntityConstruction<{ >OrthographicProjection, >Entity, }>, opts:OrthographicProjectionOptions):Void {
+    _Runtime.setField(out, 'halfHeight', _Runtime.field(opts, 'halfHeight'));
+    _Runtime.setField(out, 'halfWidth', _Runtime.field(opts, 'halfWidth'));
+    _Runtime.setField(out, 'kind', 'orthographic');
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializePerspectiveProjection(out:EntityConstruction<{ >PerspectiveProjection, >Entity, }>, opts:PerspectiveProjectionOptions):Void {
+    _Runtime.setField(out, 'aspect', _Runtime.coalesce(_Runtime.field(opts, 'aspect'), function():Dynamic return cast 1.0));
+    _Runtime.setField(out, 'fovY', _Runtime.field(opts, 'fovY'));
+    _Runtime.setField(out, 'kind', 'perspective');
   }
 
   public static function isOrthographicProjection(projection:Projection):Bool {
@@ -596,7 +690,7 @@ class _Camera {
     setCamera3DViewMatrix4FromLookAt(({ final __callArgument182:Dynamic = camera; __callArgument182; }), ({ final __callArgument183:Dynamic = _Camera._eye__shadowCamera; __callArgument183; }), ({ final __callArgument184:Dynamic = _Camera._target__shadowCamera; __callArgument184; }), ({ final __callArgument185:Dynamic = up; __callArgument185; }));
     (camera.near = cast (radius : Float));
     (camera.far = cast ((radius * 3.0) : Float));
-    (camera.projection = cast (cast (cast createOrthographicProjection(({ final __callArgument190:Dynamic = { halfHeight: radius, halfWidth: radius }; __callArgument190; })) : OrthographicProjection) : Dynamic));
+    (camera.projection = cast ((cast createOrthographicProjection(({ final __callArgument190:Dynamic = { halfHeight: radius, halfWidth: radius }; __callArgument190; })) : { >OrthographicProjection, >Entity, }) : Projection));
   }
 
   public static function configureDirectionalShadowCamera3DTightFit(camera:Camera3D, lightDirection:Vector3Like, worldBounds:AabbLike, padding:Float = 1.0):Void {
@@ -680,7 +774,7 @@ class _Camera {
     halfDepth = HxMath.max((((maxViewZ - minViewZ) * 0.5) * extentScale), 0.0001);
     (camera.near = cast (HxMath.max((-depthCenter - halfDepth), 0.0001) : Float));
     (camera.far = cast (HxMath.max((-depthCenter + halfDepth), (camera.near + 0.0001)) : Float));
-    (camera.projection = cast (cast (cast createOrthographicProjection(({ final __callArgument198:Dynamic = { halfHeight: HxMath.max((halfHeight * extentScale), 0.0001), halfWidth: HxMath.max((halfWidth * extentScale), 0.0001) }; __callArgument198; })) : OrthographicProjection) : Dynamic));
+    (camera.projection = cast ((cast createOrthographicProjection(({ final __callArgument198:Dynamic = { halfHeight: HxMath.max((halfHeight * extentScale), 0.0001), halfWidth: HxMath.max((halfWidth * extentScale), 0.0001) }; __callArgument198; })) : { >OrthographicProjection, >Entity, }) : Projection));
   }
 
   public static final _eye__shadowCamera:Vector3Like = (cast { x: 0.0, y: 0.0, z: 0.0 });

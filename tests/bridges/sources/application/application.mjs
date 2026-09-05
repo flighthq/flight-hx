@@ -15,6 +15,7 @@ export const forEachApplicationWindow = api.forEachApplicationWindow;
 export const getApplicationFrameRate = api.getApplicationFrameRate;
 export const getApplicationMainWindow = api.getApplicationMainWindow;
 export const getApplicationWindows = api.getApplicationWindows;
+export const initializeApplication = api.initializeApplication;
 export const isApplicationRunning = api.isApplicationRunning;
 export const pauseApplicationLoop = api.pauseApplicationLoop;
 export const registerApplicationWindow = api.registerApplicationWindow;

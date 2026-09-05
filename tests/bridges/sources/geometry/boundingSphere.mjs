@@ -10,6 +10,7 @@ export const containsBoundingSpherePoint = api.containsBoundingSpherePoint;
 export const copyBoundingSphere = api.copyBoundingSphere;
 export const createBoundingSphere = api.createBoundingSphere;
 export const getClosestPointOnBoundingSphere = api.getClosestPointOnBoundingSphere;
+export const initializeBoundingSphere = api.initializeBoundingSphere;
 export const isBoundingSphereIntersectingBoundingSphere = api.isBoundingSphereIntersectingBoundingSphere;
 export const mergeBoundingSphere = api.mergeBoundingSphere;
 export const setBoundingSphere = api.setBoundingSphere;

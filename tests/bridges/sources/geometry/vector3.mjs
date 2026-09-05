@@ -21,6 +21,7 @@ export const getVector3Dot = api.getVector3Dot;
 export const getVector3Length = api.getVector3Length;
 export const getVector3LengthSquared = api.getVector3LengthSquared;
 export const getVector3Spherical = api.getVector3Spherical;
+export const initializeVector3 = api.initializeVector3;
 export const interpolateVector3 = api.interpolateVector3;
 export const maxVector3 = api.maxVector3;
 export const minVector3 = api.minVector3;

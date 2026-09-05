@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createChannelMixerAdjustment = api.createChannelMixerAdjustment;
+export const initializeChannelMixerAdjustment = api.initializeChannelMixerAdjustment;

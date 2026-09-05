@@ -3,11 +3,14 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Math.DEG_TO_RAD;
 import flight._Math.RAD_TO_DEG;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
 import flight.types.AmbientLightReading;
+import flight.types.EntityConstruction;
 import flight.types.HasSystemSensors;
 import flight.types.MotionReading;
 import flight.types.OrientationReading;
@@ -282,113 +285,149 @@ class _Sensors {
   @:allow(flight)
   @:keep
   private static function createAmbientLightReading():AmbientLightReading {
-    return cast { accuracy: 'unknown', illuminance: 0.0, interval: -1.0, timestamp: -1.0 };
+    var out:EntityConstruction<AmbientLightReading> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ accuracy: cast _Runtime.UNDEFINED, illuminance: cast _Runtime.UNDEFINED, interval: cast _Runtime.UNDEFINED, timestamp: cast _Runtime.UNDEFINED } : AmbientLightReading); }) #end));
+    initializeAmbientLightReading(({ final __callArgument12:Dynamic = out; __callArgument12; }));
+    return cast out;
     return cast null;
   }
 
   @:allow(flight)
   @:keep
   private static function createMotionReading():MotionReading {
-    return cast { accuracy: 'unknown', interval: -1.0, timestamp: -1.0, x: 0.0, y: 0.0, z: 0.0 };
+    var out:EntityConstruction<MotionReading> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ accuracy: cast _Runtime.UNDEFINED, interval: cast _Runtime.UNDEFINED, timestamp: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED, z: cast _Runtime.UNDEFINED } : MotionReading); }) #end));
+    initializeMotionReading(({ final __callArgument14:Dynamic = out; __callArgument14; }));
+    return cast out;
     return cast null;
   }
 
   @:allow(flight)
   @:keep
   private static function createOrientationReading():OrientationReading {
-    return cast { absolute: false, accuracy: 'unknown', alpha: 0.0, beta: 0.0, gamma: 0.0, heading: -1.0, interval: -1.0, timestamp: -1.0 };
+    var out:EntityConstruction<OrientationReading> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ absolute: cast _Runtime.UNDEFINED, accuracy: cast _Runtime.UNDEFINED, alpha: cast _Runtime.UNDEFINED, beta: cast _Runtime.UNDEFINED, gamma: cast _Runtime.UNDEFINED, heading: cast _Runtime.UNDEFINED, interval: cast _Runtime.UNDEFINED, timestamp: cast _Runtime.UNDEFINED } : OrientationReading); }) #end));
+    initializeOrientationReading(({ final __callArgument16:Dynamic = out; __callArgument16; }));
+    return cast out;
     return cast null;
   }
 
   @:allow(flight)
   @:keep
   private static function createPressureReading():PressureReading {
-    return cast { accuracy: 'unknown', altitude: -1.0, interval: -1.0, pressure: 0.0, timestamp: -1.0 };
+    var out:EntityConstruction<PressureReading> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ accuracy: cast _Runtime.UNDEFINED, altitude: cast _Runtime.UNDEFINED, interval: cast _Runtime.UNDEFINED, pressure: cast _Runtime.UNDEFINED, timestamp: cast _Runtime.UNDEFINED } : PressureReading); }) #end));
+    initializePressureReading(({ final __callArgument18:Dynamic = out; __callArgument18; }));
+    return cast out;
     return cast null;
   }
 
   @:allow(flight)
   @:keep
   private static function createProximityReading():ProximityReading {
-    return cast { accuracy: 'unknown', distance: -1.0, interval: -1.0, max: -1.0, near: false, timestamp: -1.0 };
+    var out:EntityConstruction<ProximityReading> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ accuracy: cast _Runtime.UNDEFINED, distance: cast _Runtime.UNDEFINED, interval: cast _Runtime.UNDEFINED, max: cast _Runtime.UNDEFINED, near: cast _Runtime.UNDEFINED, timestamp: cast _Runtime.UNDEFINED } : ProximityReading); }) #end));
+    initializeProximityReading(({ final __callArgument20:Dynamic = out; __callArgument20; }));
+    return cast out;
     return cast null;
   }
 
   @:allow(flight)
   @:keep
   private static function createQuaternionReading():QuaternionReading {
-    return cast { accuracy: 'unknown', interval: -1.0, timestamp: -1.0, w: 1.0, x: 0.0, y: 0.0, z: 0.0 };
+    var out:EntityConstruction<QuaternionReading> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ accuracy: cast _Runtime.UNDEFINED, interval: cast _Runtime.UNDEFINED, timestamp: cast _Runtime.UNDEFINED, w: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED, z: cast _Runtime.UNDEFINED } : QuaternionReading); }) #end));
+    initializeQuaternionReading(({ final __callArgument22:Dynamic = out; __callArgument22; }));
+    return cast out;
     return cast null;
   }
 
   @:allow(flight)
   @:keep
   private static function createRotationRateReading():RotationRateReading {
-    return cast { accuracy: 'unknown', alpha: 0.0, beta: 0.0, gamma: 0.0, interval: -1.0, timestamp: -1.0 };
+    var out:EntityConstruction<RotationRateReading> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ accuracy: cast _Runtime.UNDEFINED, alpha: cast _Runtime.UNDEFINED, beta: cast _Runtime.UNDEFINED, gamma: cast _Runtime.UNDEFINED, interval: cast _Runtime.UNDEFINED, timestamp: cast _Runtime.UNDEFINED } : RotationRateReading); }) #end));
+    initializeRotationRateReading(({ final __callArgument24:Dynamic = out; __callArgument24; }));
+    return cast out;
     return cast null;
   }
 
   public static function createSensors():Sensors {
-    return cast { onAbsoluteOrientation: (cast createSignal() : Signal<OrientationReading->Void>), onAccelerometer: (cast createSignal() : Signal<MotionReading->Void>), onAmbientLight: (cast createSignal() : Signal<AmbientLightReading->Void>), onBarometer: (cast createSignal() : Signal<PressureReading->Void>), onGravity: (cast createSignal() : Signal<MotionReading->Void>), onGyroscope: (cast createSignal() : Signal<RotationRateReading->Void>), onLinearAcceleration: (cast createSignal() : Signal<MotionReading->Void>), onMagnetometer: (cast createSignal() : Signal<MotionReading->Void>), onOrientation: (cast createSignal() : Signal<OrientationReading->Void>), onProximity: (cast createSignal() : Signal<ProximityReading->Void>), onQuaternion: (cast createSignal() : Signal<QuaternionReading->Void>) };
+    var out:EntityConstruction<Sensors> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ onAbsoluteOrientation: cast _Runtime.UNDEFINED, onAccelerometer: cast _Runtime.UNDEFINED, onAmbientLight: cast _Runtime.UNDEFINED, onBarometer: cast _Runtime.UNDEFINED, onGravity: cast _Runtime.UNDEFINED, onGyroscope: cast _Runtime.UNDEFINED, onLinearAcceleration: cast _Runtime.UNDEFINED, onMagnetometer: cast _Runtime.UNDEFINED, onOrientation: cast _Runtime.UNDEFINED, onProximity: cast _Runtime.UNDEFINED, onQuaternion: cast _Runtime.UNDEFINED } : Sensors); }) #end));
+    initializeSensors(({ final __callArgument26:Dynamic = out; __callArgument26; }));
+    return cast out;
     return cast null;
   }
 
   @:allow(flight)
   @:keep
   private static function createWebSensorsBackend():SensorsBackend {
-    return cast { getPermissionState: function(?sensor:String):flight._internal._Promise<SensorsPermissionState> {
-      return cast (cast _Sensors.getWebSensorsPermissionState__sensors(({ final __callArgument12:Dynamic = sensor; __callArgument12; })) : flight._internal._Promise<SensorsPermissionState>);
+    var out:EntityConstruction<SensorsBackend> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ getPermissionState: cast _Runtime.UNDEFINED, isAmbientLightSupported: cast _Runtime.UNDEFINED, isBarometerSupported: cast _Runtime.UNDEFINED, isGravitySupported: cast _Runtime.UNDEFINED, isGyroscopeSupported: cast _Runtime.UNDEFINED, isLinearAccelerationSupported: cast _Runtime.UNDEFINED, isMagnetometerSupported: cast _Runtime.UNDEFINED, isMotionSupported: cast _Runtime.UNDEFINED, isOrientationSupported: cast _Runtime.UNDEFINED, isProximitySupported: cast _Runtime.UNDEFINED, requestPermission: cast _Runtime.UNDEFINED, subscribeAbsoluteOrientation: cast _Runtime.UNDEFINED, subscribeAmbientLight: cast _Runtime.UNDEFINED, subscribeBarometer: cast _Runtime.UNDEFINED, subscribeGravity: cast _Runtime.UNDEFINED, subscribeLinearAcceleration: cast _Runtime.UNDEFINED, subscribeMagnetometer: cast _Runtime.UNDEFINED, subscribeMotion: cast _Runtime.UNDEFINED, subscribeOrientation: cast _Runtime.UNDEFINED, subscribeProximity: cast _Runtime.UNDEFINED, subscribeQuaternion: cast _Runtime.UNDEFINED } : SensorsBackend); }) #end));
+    ((cast out : { var getPermissionState:Null<String>->flight._internal._Promise<SensorsPermissionState>; }).getPermissionState = (cast function(?sensor:String):flight._internal._Promise<SensorsPermissionState> {
+      return cast (cast _Sensors.getWebSensorsPermissionState__sensors(({ final __callArgument28:Dynamic = sensor; __callArgument28; })) : flight._internal._Promise<SensorsPermissionState>);
       return cast _Runtime.UNDEFINED;
-    }, isAmbientLightSupported: function():Bool {
+    }));
+    ((cast out : { var isAmbientLightSupported:Void->Bool; }).isAmbientLightSupported = (cast function():Bool {
       return cast !_Runtime.strictEquals((cast _Sensors.getWebGenericSensorConstructor__sensors((cast 'AmbientLightSensor' : String)) : Null<{  }>), null);
       return cast _Runtime.UNDEFINED;
-    }, isBarometerSupported: function():Bool {
+    }));
+    ((cast out : { var isBarometerSupported:Void->Bool; }).isBarometerSupported = (cast function():Bool {
       return cast false;
       return cast _Runtime.UNDEFINED;
-    }, isGravitySupported: function():Bool {
+    }));
+    ((cast out : { var isGravitySupported:Void->Bool; }).isGravitySupported = (cast function():Bool {
       if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast false; }
       return cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('DeviceMotionEvent'), 'undefined');
       return cast _Runtime.UNDEFINED;
-    }, isGyroscopeSupported: function():Bool {
+    }));
+    ((cast out : { var isGyroscopeSupported:Void->Bool; }).isGyroscopeSupported = (cast function():Bool {
       if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast false; }
       return cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('DeviceMotionEvent'), 'undefined');
       return cast _Runtime.UNDEFINED;
-    }, isLinearAccelerationSupported: function():Bool {
+    }));
+    ((cast out : { var isLinearAccelerationSupported:Void->Bool; }).isLinearAccelerationSupported = (cast function():Bool {
       if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast false; }
       return cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('DeviceMotionEvent'), 'undefined');
       return cast _Runtime.UNDEFINED;
-    }, isMagnetometerSupported: function():Bool {
+    }));
+    ((cast out : { var isMagnetometerSupported:Void->Bool; }).isMagnetometerSupported = (cast function():Bool {
       return cast !_Runtime.strictEquals((cast _Sensors.getWebMagnetometerConstructor__sensors() : Null<{  }>), null);
       return cast _Runtime.UNDEFINED;
-    }, isMotionSupported: function():Bool {
+    }));
+    ((cast out : { var isMotionSupported:Void->Bool; }).isMotionSupported = (cast function():Bool {
       if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast false; }
       return cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('DeviceMotionEvent'), 'undefined');
       return cast _Runtime.UNDEFINED;
-    }, isOrientationSupported: function():Bool {
+    }));
+    ((cast out : { var isOrientationSupported:Void->Bool; }).isOrientationSupported = (cast function():Bool {
       if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast false; }
       return cast !_Runtime.strictEquals(_Runtime.typeofValue(_Sensors.DeviceOrientationEvent__sensors), 'undefined');
       return cast _Runtime.UNDEFINED;
-    }, isProximitySupported: function():Bool {
+    }));
+    ((cast out : { var isProximitySupported:Void->Bool; }).isProximitySupported = (cast function():Bool {
       return cast false;
       return cast _Runtime.UNDEFINED;
-    }, requestPermission: function():flight._internal._Promise<Bool> {
+    }));
+    ((cast out : { var requestPermission:Void->flight._internal._Promise<Bool>; }).requestPermission = (cast function():flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var request:Null<Void->flight._internal._Promise<String>> = cast _Runtime.UNDEFINED;
           request = (cast _Sensors.getWebMotionPermissionRequest__sensors() : Null<Void->flight._internal._Promise<String>>);
-          var __flowBranch14:Dynamic;
+          var __flowBranch30:Dynamic;
           if ((cast _Runtime.strictEquals(request, null) : Bool)) {
-            __flowBranch14 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch30 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(true);
             });
           } else {
-            __flowBranch14 = flight._internal._Async.flowNormal();
+            __flowBranch30 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch14, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch30, function():Dynamic {
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
               var state:String = cast _Runtime.UNDEFINED;
-              return flight._internal._Async.flatMap((cast request() : flight._internal._Promise<String>), function(__awaitValue15:Dynamic):Dynamic {
-                state = __awaitValue15;
+              return flight._internal._Async.flatMap((cast request() : flight._internal._Promise<String>), function(__awaitValue31:Dynamic):Dynamic {
+                state = __awaitValue31;
                 return flight._internal._Async.flowReturn(_Runtime.strictEquals(state, 'granted'));
               });
             }), function(__caughtError:Dynamic):Dynamic {
@@ -402,7 +441,8 @@ class _Sensors {
           });
         })
       );
-    }, subscribeAbsoluteOrientation: function(listener:OrientationReading->Void, ?options:SensorSubscribeOptions):Void->Void {
+    }));
+    ((cast out : { var subscribeAbsoluteOrientation:(OrientationReading->Void)->Null<SensorSubscribeOptions>->(Void->Void); }).subscribeAbsoluteOrientation = (cast function(listener:OrientationReading->Void, ?options:SensorSubscribeOptions):Void->Void {
       var ctor:Null<{  }> = cast _Runtime.UNDEFINED;
       var handler:WebDeviceOrientationEvent__sensors->Void = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast function():Void {
@@ -411,7 +451,7 @@ class _Sensors {
       ctor = (cast _Sensors.getWebGenericSensorConstructor__sensors((cast 'AbsoluteOrientationSensor' : String)) : Null<{  }>);
       if ((cast !_Runtime.strictEquals(ctor, null) : Bool)) {
         try {
-          var sensorOptions:Null<{ var frequency:Float; }> = ((cast !_Runtime.strictEquals(({ final __typedStruct16 = options; __typedStruct16 == null ? _Runtime.UNDEFINED : __typedStruct16.frequency; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { frequency: options.frequency } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+          var sensorOptions:Null<{ var frequency:Float; }> = ((cast !_Runtime.strictEquals(({ final __typedStruct32 = options; __typedStruct32 == null ? _Runtime.UNDEFINED : __typedStruct32.frequency; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { frequency: options.frequency } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
           var sensor:WebOrientationSensor__sensors = (cast _Runtime.construct(ctor, [sensorOptions]) : WebOrientationSensor__sensors);
           var handler:Void->Void = cast _Runtime.UNDEFINED;
           handler = (cast function():Void {
@@ -422,16 +462,16 @@ class _Sensors {
               (_Sensors._quaternionReading__sensors.y = cast (_Runtime.coalesce(flight._internal._StaticIndex.readFloatArrayTyped((cast q : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast 0.0) : Float));
               (_Sensors._quaternionReading__sensors.z = cast (_Runtime.coalesce(flight._internal._StaticIndex.readFloatArrayTyped((cast q : Array<Float>), (cast 2.0 : Float)), function():Dynamic return cast 0.0) : Float));
               (_Sensors._quaternionReading__sensors.w = cast (_Runtime.coalesce(flight._internal._StaticIndex.readFloatArrayTyped((cast q : Array<Float>), (cast 3.0 : Float)), function():Dynamic return cast 1.0) : Float));
-              computeEulerFromQuaternion(({ final __callArgument17:Dynamic = _Sensors._absoluteOrientation__sensors; __callArgument17; }), ({ final __callArgument18:Dynamic = _Sensors._quaternionReading__sensors; __callArgument18; }));
+              computeEulerFromQuaternion(({ final __callArgument33:Dynamic = _Sensors._absoluteOrientation__sensors; __callArgument33; }), ({ final __callArgument34:Dynamic = _Sensors._quaternionReading__sensors; __callArgument34; }));
             }
             (_Sensors._absoluteOrientation__sensors.absolute = cast (true : Bool));
             (_Sensors._absoluteOrientation__sensors.heading = cast (-1.0 : Float));
-            listener(({ final __callArgument21:Dynamic = _Sensors._absoluteOrientation__sensors; __callArgument21; }));
+            listener(({ final __callArgument37:Dynamic = _Sensors._absoluteOrientation__sensors; __callArgument37; }));
           });
-          (cast sensor : WebOrientationSensor__sensors).addEventListener((cast 'reading' : String), ({ final __callArgument23:Dynamic = handler; __callArgument23; }));
+          (cast sensor : WebOrientationSensor__sensors).addEventListener((cast 'reading' : String), ({ final __callArgument39:Dynamic = handler; __callArgument39; }));
           (cast sensor : WebOrientationSensor__sensors).start();
           return cast function():Void {
-            (cast sensor : WebOrientationSensor__sensors).removeEventListener((cast 'reading' : String), ({ final __callArgument24:Dynamic = handler; __callArgument24; }));
+            (cast sensor : WebOrientationSensor__sensors).removeEventListener((cast 'reading' : String), ({ final __callArgument40:Dynamic = handler; __callArgument40; }));
             (cast sensor : WebOrientationSensor__sensors).stop();
           };
         } catch (__error:Dynamic) {
@@ -445,33 +485,34 @@ class _Sensors {
         (_Sensors._absoluteOrientation__sensors.heading = cast (-1.0 : Float));
         (_Sensors._absoluteOrientation__sensors.interval = cast (-1.0 : Float));
         (_Sensors._absoluteOrientation__sensors.timestamp = cast (-1.0 : Float));
-        listener(({ final __callArgument25:Dynamic = _Sensors._absoluteOrientation__sensors; __callArgument25; }));
+        listener(({ final __callArgument41:Dynamic = _Sensors._absoluteOrientation__sensors; __callArgument41; }));
       });
       flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['deviceorientationabsolute', (cast handler : flight._internal.dom.EventListener)] : Array<Dynamic>));
       return cast function():Void {
         flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['deviceorientationabsolute', (cast handler : flight._internal.dom.EventListener)] : Array<Dynamic>));
       };
       return cast _Runtime.UNDEFINED;
-    }, subscribeAmbientLight: function(listener:AmbientLightReading->Void, ?options:SensorSubscribeOptions):Void->Void {
+    }));
+    ((cast out : { var subscribeAmbientLight:(AmbientLightReading->Void)->Null<SensorSubscribeOptions>->(Void->Void); }).subscribeAmbientLight = (cast function(listener:AmbientLightReading->Void, ?options:SensorSubscribeOptions):Void->Void {
       var ctor:Null<{  }> = cast _Runtime.UNDEFINED;
       ctor = (cast _Sensors.getWebGenericSensorConstructor__sensors((cast 'AmbientLightSensor' : String)) : Null<{  }>);
       if ((cast _Runtime.strictEquals(ctor, null) : Bool)) { return cast function():Void {
 
       }; }
       try {
-        var sensorOptions:Null<{ var frequency:Float; }> = ((cast !_Runtime.strictEquals(({ final __typedStruct27 = options; __typedStruct27 == null ? _Runtime.UNDEFINED : __typedStruct27.frequency; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { frequency: options.frequency } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+        var sensorOptions:Null<{ var frequency:Float; }> = ((cast !_Runtime.strictEquals(({ final __typedStruct43 = options; __typedStruct43 == null ? _Runtime.UNDEFINED : __typedStruct43.frequency; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { frequency: options.frequency } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
         var sensor:WebAmbientLightSensor__sensors = (cast _Runtime.construct(ctor, [sensorOptions]) : WebAmbientLightSensor__sensors);
         var handler:Void->Void = cast _Runtime.UNDEFINED;
         handler = (cast function():Void {
           (_Sensors._ambientLight__sensors.illuminance = cast (_Runtime.coalesce((cast sensor : WebAmbientLightSensor__sensors).illuminance, function():Dynamic return cast 0.0) : Float));
           (_Sensors._ambientLight__sensors.interval = cast (-1.0 : Float));
           (_Sensors._ambientLight__sensors.timestamp = cast (-1.0 : Float));
-          listener(({ final __callArgument28:Dynamic = _Sensors._ambientLight__sensors; __callArgument28; }));
+          listener(({ final __callArgument44:Dynamic = _Sensors._ambientLight__sensors; __callArgument44; }));
         });
-        (cast sensor : WebAmbientLightSensor__sensors).addEventListener((cast 'reading' : String), ({ final __callArgument30:Dynamic = handler; __callArgument30; }));
+        (cast sensor : WebAmbientLightSensor__sensors).addEventListener((cast 'reading' : String), ({ final __callArgument46:Dynamic = handler; __callArgument46; }));
         (cast sensor : WebAmbientLightSensor__sensors).start();
         return cast function():Void {
-          (cast sensor : WebAmbientLightSensor__sensors).removeEventListener((cast 'reading' : String), ({ final __callArgument31:Dynamic = handler; __callArgument31; }));
+          (cast sensor : WebAmbientLightSensor__sensors).removeEventListener((cast 'reading' : String), ({ final __callArgument47:Dynamic = handler; __callArgument47; }));
           (cast sensor : WebAmbientLightSensor__sensors).stop();
         };
       } catch (__error:Dynamic) {
@@ -480,12 +521,14 @@ class _Sensors {
         };
       }
       return cast _Runtime.UNDEFINED;
-    }, subscribeBarometer: function(_listener:PressureReading->Void, ?_options:SensorSubscribeOptions):Void->Void {
+    }));
+    ((cast out : { var subscribeBarometer:(PressureReading->Void)->Null<SensorSubscribeOptions>->(Void->Void); }).subscribeBarometer = (cast function(_listener:PressureReading->Void, ?_options:SensorSubscribeOptions):Void->Void {
       return cast function():Void {
 
       };
       return cast _Runtime.UNDEFINED;
-    }, subscribeGravity: function(listener:MotionReading->Void, ?_options:SensorSubscribeOptions):Void->Void {
+    }));
+    ((cast out : { var subscribeGravity:(MotionReading->Void)->Null<SensorSubscribeOptions>->(Void->Void); }).subscribeGravity = (cast function(listener:MotionReading->Void, ?_options:SensorSubscribeOptions):Void->Void {
       var handler:WebDeviceMotionEvent__sensors->Void = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast function():Void {
 
@@ -496,19 +539,20 @@ class _Sensors {
         withGravity = (cast event : WebDeviceMotionEvent__sensors).accelerationIncludingGravity;
         linearAccel = (cast event : WebDeviceMotionEvent__sensors).acceleration;
         if ((cast !_Runtime.truthy(withGravity) : Bool)) { return; }
-        (_Sensors._gravity__sensors.x = cast (_Runtime.subtractNumbers(_Runtime.coalesce((cast withGravity : WebMotionVector__sensors).x, function():Dynamic return cast 0.0), _Runtime.coalesce(({ final __structural32 = linearAccel; __structural32 == null ? _Runtime.UNDEFINED : (cast __structural32 : { @:optional var x:Null<Float>; }).x; }), function():Dynamic return cast 0.0)) : Float));
-        (_Sensors._gravity__sensors.y = cast (_Runtime.subtractNumbers(_Runtime.coalesce((cast withGravity : WebMotionVector__sensors).y, function():Dynamic return cast 0.0), _Runtime.coalesce(({ final __structural33 = linearAccel; __structural33 == null ? _Runtime.UNDEFINED : (cast __structural33 : { @:optional var y:Null<Float>; }).y; }), function():Dynamic return cast 0.0)) : Float));
-        (_Sensors._gravity__sensors.z = cast (_Runtime.subtractNumbers(_Runtime.coalesce((cast withGravity : WebMotionVector__sensors).z, function():Dynamic return cast 0.0), _Runtime.coalesce(({ final __structural34 = linearAccel; __structural34 == null ? _Runtime.UNDEFINED : (cast __structural34 : { @:optional var z:Null<Float>; }).z; }), function():Dynamic return cast 0.0)) : Float));
+        (_Sensors._gravity__sensors.x = cast (_Runtime.subtractNumbers(_Runtime.coalesce((cast withGravity : WebMotionVector__sensors).x, function():Dynamic return cast 0.0), _Runtime.coalesce(({ final __structural48 = linearAccel; __structural48 == null ? _Runtime.UNDEFINED : (cast __structural48 : { @:optional var x:Null<Float>; }).x; }), function():Dynamic return cast 0.0)) : Float));
+        (_Sensors._gravity__sensors.y = cast (_Runtime.subtractNumbers(_Runtime.coalesce((cast withGravity : WebMotionVector__sensors).y, function():Dynamic return cast 0.0), _Runtime.coalesce(({ final __structural49 = linearAccel; __structural49 == null ? _Runtime.UNDEFINED : (cast __structural49 : { @:optional var y:Null<Float>; }).y; }), function():Dynamic return cast 0.0)) : Float));
+        (_Sensors._gravity__sensors.z = cast (_Runtime.subtractNumbers(_Runtime.coalesce((cast withGravity : WebMotionVector__sensors).z, function():Dynamic return cast 0.0), _Runtime.coalesce(({ final __structural50 = linearAccel; __structural50 == null ? _Runtime.UNDEFINED : (cast __structural50 : { @:optional var z:Null<Float>; }).z; }), function():Dynamic return cast 0.0)) : Float));
         (_Sensors._gravity__sensors.interval = cast (_Runtime.coalesce((cast event : WebDeviceMotionEvent__sensors).interval, function():Dynamic return cast -1.0) : Float));
         (_Sensors._gravity__sensors.timestamp = cast (-1.0 : Float));
-        listener(({ final __callArgument35:Dynamic = _Sensors._gravity__sensors; __callArgument35; }));
+        listener(({ final __callArgument51:Dynamic = _Sensors._gravity__sensors; __callArgument51; }));
       });
       flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['devicemotion', (cast handler : flight._internal.dom.EventListener)] : Array<Dynamic>));
       return cast function():Void {
         flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['devicemotion', (cast handler : flight._internal.dom.EventListener)] : Array<Dynamic>));
       };
       return cast _Runtime.UNDEFINED;
-    }, subscribeLinearAcceleration: function(listener:MotionReading->Void, ?_options:SensorSubscribeOptions):Void->Void {
+    }));
+    ((cast out : { var subscribeLinearAcceleration:(MotionReading->Void)->Null<SensorSubscribeOptions>->(Void->Void); }).subscribeLinearAcceleration = (cast function(listener:MotionReading->Void, ?_options:SensorSubscribeOptions):Void->Void {
       var handler:WebDeviceMotionEvent__sensors->Void = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast function():Void {
 
@@ -522,21 +566,22 @@ class _Sensors {
         (_Sensors._linearAcceleration__sensors.z = cast (_Runtime.coalesce((cast accel : WebMotionVector__sensors).z, function():Dynamic return cast 0.0) : Float));
         (_Sensors._linearAcceleration__sensors.interval = cast (_Runtime.coalesce((cast event : WebDeviceMotionEvent__sensors).interval, function():Dynamic return cast -1.0) : Float));
         (_Sensors._linearAcceleration__sensors.timestamp = cast (-1.0 : Float));
-        listener(({ final __callArgument37:Dynamic = _Sensors._linearAcceleration__sensors; __callArgument37; }));
+        listener(({ final __callArgument53:Dynamic = _Sensors._linearAcceleration__sensors; __callArgument53; }));
       });
       flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['devicemotion', (cast handler : flight._internal.dom.EventListener)] : Array<Dynamic>));
       return cast function():Void {
         flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['devicemotion', (cast handler : flight._internal.dom.EventListener)] : Array<Dynamic>));
       };
       return cast _Runtime.UNDEFINED;
-    }, subscribeMagnetometer: function(listener:MotionReading->Void, ?options:SensorSubscribeOptions):Void->Void {
+    }));
+    ((cast out : { var subscribeMagnetometer:(MotionReading->Void)->Null<SensorSubscribeOptions>->(Void->Void); }).subscribeMagnetometer = (cast function(listener:MotionReading->Void, ?options:SensorSubscribeOptions):Void->Void {
       var ctor:Null<{  }> = cast _Runtime.UNDEFINED;
       ctor = (cast _Sensors.getWebMagnetometerConstructor__sensors() : Null<{  }>);
       if ((cast _Runtime.strictEquals(ctor, null) : Bool)) { return cast function():Void {
 
       }; }
       try {
-        var sensorOptions:Null<{ var frequency:Float; }> = ((cast !_Runtime.strictEquals(({ final __typedStruct39 = options; __typedStruct39 == null ? _Runtime.UNDEFINED : __typedStruct39.frequency; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { frequency: options.frequency } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+        var sensorOptions:Null<{ var frequency:Float; }> = ((cast !_Runtime.strictEquals(({ final __typedStruct55 = options; __typedStruct55 == null ? _Runtime.UNDEFINED : __typedStruct55.frequency; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { frequency: options.frequency } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
         var sensor:WebMagnetometer__sensors = _Runtime.construct(ctor, [sensorOptions]);
         var handler:Void->Void = cast _Runtime.UNDEFINED;
         handler = (cast function():Void {
@@ -545,12 +590,12 @@ class _Sensors {
           (_Sensors._magnetometer__sensors.z = cast (_Runtime.coalesce((cast sensor : WebMagnetometer__sensors).z, function():Dynamic return cast 0.0) : Float));
           (_Sensors._magnetometer__sensors.interval = cast (-1.0 : Float));
           (_Sensors._magnetometer__sensors.timestamp = cast (-1.0 : Float));
-          listener(({ final __callArgument40:Dynamic = _Sensors._magnetometer__sensors; __callArgument40; }));
+          listener(({ final __callArgument56:Dynamic = _Sensors._magnetometer__sensors; __callArgument56; }));
         });
-        (cast sensor : WebMagnetometer__sensors).addEventListener((cast 'reading' : String), ({ final __callArgument42:Dynamic = handler; __callArgument42; }));
+        (cast sensor : WebMagnetometer__sensors).addEventListener((cast 'reading' : String), ({ final __callArgument58:Dynamic = handler; __callArgument58; }));
         (cast sensor : WebMagnetometer__sensors).start();
         return cast function():Void {
-          (cast sensor : WebMagnetometer__sensors).removeEventListener((cast 'reading' : String), ({ final __callArgument43:Dynamic = handler; __callArgument43; }));
+          (cast sensor : WebMagnetometer__sensors).removeEventListener((cast 'reading' : String), ({ final __callArgument59:Dynamic = handler; __callArgument59; }));
           (cast sensor : WebMagnetometer__sensors).stop();
         };
       } catch (__error:Dynamic) {
@@ -559,7 +604,8 @@ class _Sensors {
         };
       }
       return cast _Runtime.UNDEFINED;
-    }, subscribeMotion: function(listener:MotionReading->RotationRateReading->Void, ?_options:SensorSubscribeOptions):Void->Void {
+    }));
+    ((cast out : { var subscribeMotion:(MotionReading->RotationRateReading->Void)->Null<SensorSubscribeOptions>->(Void->Void); }).subscribeMotion = (cast function(listener:MotionReading->RotationRateReading->Void, ?_options:SensorSubscribeOptions):Void->Void {
       var handler:WebDeviceMotionEvent__sensors->Void = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast function():Void {
 
@@ -568,25 +614,26 @@ class _Sensors {
         var accel:Null<WebMotionVector__sensors> = cast _Runtime.UNDEFINED;
         var rate:Null<WebRotationRate__sensors> = cast _Runtime.UNDEFINED;
         accel = (cast event : WebDeviceMotionEvent__sensors).accelerationIncludingGravity;
-        (_Sensors._motionAcceleration__sensors.x = cast (_Runtime.coalesce(({ final __structural44 = accel; __structural44 == null ? _Runtime.UNDEFINED : (cast __structural44 : { @:optional var x:Null<Float>; }).x; }), function():Dynamic return cast 0.0) : Float));
-        (_Sensors._motionAcceleration__sensors.y = cast (_Runtime.coalesce(({ final __structural45 = accel; __structural45 == null ? _Runtime.UNDEFINED : (cast __structural45 : { @:optional var y:Null<Float>; }).y; }), function():Dynamic return cast 0.0) : Float));
-        (_Sensors._motionAcceleration__sensors.z = cast (_Runtime.coalesce(({ final __structural46 = accel; __structural46 == null ? _Runtime.UNDEFINED : (cast __structural46 : { @:optional var z:Null<Float>; }).z; }), function():Dynamic return cast 0.0) : Float));
+        (_Sensors._motionAcceleration__sensors.x = cast (_Runtime.coalesce(({ final __structural60 = accel; __structural60 == null ? _Runtime.UNDEFINED : (cast __structural60 : { @:optional var x:Null<Float>; }).x; }), function():Dynamic return cast 0.0) : Float));
+        (_Sensors._motionAcceleration__sensors.y = cast (_Runtime.coalesce(({ final __structural61 = accel; __structural61 == null ? _Runtime.UNDEFINED : (cast __structural61 : { @:optional var y:Null<Float>; }).y; }), function():Dynamic return cast 0.0) : Float));
+        (_Sensors._motionAcceleration__sensors.z = cast (_Runtime.coalesce(({ final __structural62 = accel; __structural62 == null ? _Runtime.UNDEFINED : (cast __structural62 : { @:optional var z:Null<Float>; }).z; }), function():Dynamic return cast 0.0) : Float));
         (_Sensors._motionAcceleration__sensors.interval = cast (_Runtime.coalesce((cast event : WebDeviceMotionEvent__sensors).interval, function():Dynamic return cast -1.0) : Float));
         (_Sensors._motionAcceleration__sensors.timestamp = cast (-1.0 : Float));
         rate = (cast event : WebDeviceMotionEvent__sensors).rotationRate;
-        (_Sensors._motionRotationRate__sensors.alpha = cast (_Runtime.coalesce(({ final __structural47 = rate; __structural47 == null ? _Runtime.UNDEFINED : (cast __structural47 : { @:optional var alpha:Null<Float>; }).alpha; }), function():Dynamic return cast 0.0) : Float));
-        (_Sensors._motionRotationRate__sensors.beta = cast (_Runtime.coalesce(({ final __structural48 = rate; __structural48 == null ? _Runtime.UNDEFINED : (cast __structural48 : { @:optional var beta:Null<Float>; }).beta; }), function():Dynamic return cast 0.0) : Float));
-        (_Sensors._motionRotationRate__sensors.gamma = cast (_Runtime.coalesce(({ final __structural49 = rate; __structural49 == null ? _Runtime.UNDEFINED : (cast __structural49 : { @:optional var gamma:Null<Float>; }).gamma; }), function():Dynamic return cast 0.0) : Float));
+        (_Sensors._motionRotationRate__sensors.alpha = cast (_Runtime.coalesce(({ final __structural63 = rate; __structural63 == null ? _Runtime.UNDEFINED : (cast __structural63 : { @:optional var alpha:Null<Float>; }).alpha; }), function():Dynamic return cast 0.0) : Float));
+        (_Sensors._motionRotationRate__sensors.beta = cast (_Runtime.coalesce(({ final __structural64 = rate; __structural64 == null ? _Runtime.UNDEFINED : (cast __structural64 : { @:optional var beta:Null<Float>; }).beta; }), function():Dynamic return cast 0.0) : Float));
+        (_Sensors._motionRotationRate__sensors.gamma = cast (_Runtime.coalesce(({ final __structural65 = rate; __structural65 == null ? _Runtime.UNDEFINED : (cast __structural65 : { @:optional var gamma:Null<Float>; }).gamma; }), function():Dynamic return cast 0.0) : Float));
         (_Sensors._motionRotationRate__sensors.interval = cast (_Runtime.coalesce((cast event : WebDeviceMotionEvent__sensors).interval, function():Dynamic return cast -1.0) : Float));
         (_Sensors._motionRotationRate__sensors.timestamp = cast (-1.0 : Float));
-        listener(({ final __callArgument50:Dynamic = _Sensors._motionAcceleration__sensors; __callArgument50; }), ({ final __callArgument51:Dynamic = _Sensors._motionRotationRate__sensors; __callArgument51; }));
+        listener(({ final __callArgument66:Dynamic = _Sensors._motionAcceleration__sensors; __callArgument66; }), ({ final __callArgument67:Dynamic = _Sensors._motionRotationRate__sensors; __callArgument67; }));
       });
       flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['devicemotion', (cast handler : flight._internal.dom.EventListener)] : Array<Dynamic>));
       return cast function():Void {
         flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['devicemotion', (cast handler : flight._internal.dom.EventListener)] : Array<Dynamic>));
       };
       return cast _Runtime.UNDEFINED;
-    }, subscribeOrientation: function(listener:OrientationReading->Void, ?_options:SensorSubscribeOptions):Void->Void {
+    }));
+    ((cast out : { var subscribeOrientation:(OrientationReading->Void)->Null<SensorSubscribeOptions>->(Void->Void); }).subscribeOrientation = (cast function(listener:OrientationReading->Void, ?_options:SensorSubscribeOptions):Void->Void {
       var handler:WebDeviceOrientationEvent__sensors->Void = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast function():Void {
 
@@ -601,26 +648,28 @@ class _Sensors {
         (_Sensors._orientation__sensors.timestamp = cast (-1.0 : Float));
         heading = (cast (cast event : { @:optional var webkitCompassHeading:Float; }) : { @:optional var webkitCompassHeading:Null<Float>; }).webkitCompassHeading;
         (_Sensors._orientation__sensors.heading = cast (((cast _Runtime.strictEquals(_Runtime.typeofValue(heading), 'number') : Bool) ? (cast heading : Dynamic) : (cast -1.0 : Dynamic)) : Float));
-        listener(({ final __callArgument54:Dynamic = _Sensors._orientation__sensors; __callArgument54; }));
+        listener(({ final __callArgument70:Dynamic = _Sensors._orientation__sensors; __callArgument70; }));
       });
       flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['deviceorientation', (cast handler : flight._internal.dom.EventListener)] : Array<Dynamic>));
       return cast function():Void {
         flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['deviceorientation', (cast handler : flight._internal.dom.EventListener)] : Array<Dynamic>));
       };
       return cast _Runtime.UNDEFINED;
-    }, subscribeProximity: function(_listener:ProximityReading->Void, ?_options:SensorSubscribeOptions):Void->Void {
+    }));
+    ((cast out : { var subscribeProximity:(ProximityReading->Void)->Null<SensorSubscribeOptions>->(Void->Void); }).subscribeProximity = (cast function(_listener:ProximityReading->Void, ?_options:SensorSubscribeOptions):Void->Void {
       return cast function():Void {
 
       };
       return cast _Runtime.UNDEFINED;
-    }, subscribeQuaternion: function(listener:QuaternionReading->Void, ?options:SensorSubscribeOptions):Void->Void {
+    }));
+    ((cast out : { var subscribeQuaternion:(QuaternionReading->Void)->Null<SensorSubscribeOptions>->(Void->Void); }).subscribeQuaternion = (cast function(listener:QuaternionReading->Void, ?options:SensorSubscribeOptions):Void->Void {
       var ctor:Null<{  }> = cast _Runtime.UNDEFINED;
       ctor = (cast _Sensors.getWebGenericSensorConstructor__sensors((cast 'AbsoluteOrientationSensor' : String)) : Null<{  }>);
       if ((cast _Runtime.strictEquals(ctor, null) : Bool)) { return cast function():Void {
 
       }; }
       try {
-        var sensorOptions:Null<{ var frequency:Float; }> = ((cast !_Runtime.strictEquals(({ final __typedStruct56 = options; __typedStruct56 == null ? _Runtime.UNDEFINED : __typedStruct56.frequency; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { frequency: options.frequency } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+        var sensorOptions:Null<{ var frequency:Float; }> = ((cast !_Runtime.strictEquals(({ final __typedStruct72 = options; __typedStruct72 == null ? _Runtime.UNDEFINED : __typedStruct72.frequency; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { frequency: options.frequency } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
         var sensor:WebOrientationSensor__sensors = (cast _Runtime.construct(ctor, [sensorOptions]) : WebOrientationSensor__sensors);
         var handler:Void->Void = cast _Runtime.UNDEFINED;
         handler = (cast function():Void {
@@ -632,12 +681,12 @@ class _Sensors {
           (_Sensors._quaternionReading__sensors.w = cast (_Runtime.coalesce(_Runtime.optionalIndex(q, 3.0), function():Dynamic return cast 1.0) : Float));
           (_Sensors._quaternionReading__sensors.interval = cast (-1.0 : Float));
           (_Sensors._quaternionReading__sensors.timestamp = cast (-1.0 : Float));
-          listener(({ final __callArgument57:Dynamic = _Sensors._quaternionReading__sensors; __callArgument57; }));
+          listener(({ final __callArgument73:Dynamic = _Sensors._quaternionReading__sensors; __callArgument73; }));
         });
-        (cast sensor : WebOrientationSensor__sensors).addEventListener((cast 'reading' : String), ({ final __callArgument59:Dynamic = handler; __callArgument59; }));
+        (cast sensor : WebOrientationSensor__sensors).addEventListener((cast 'reading' : String), ({ final __callArgument75:Dynamic = handler; __callArgument75; }));
         (cast sensor : WebOrientationSensor__sensors).start();
         return cast function():Void {
-          (cast sensor : WebOrientationSensor__sensors).removeEventListener((cast 'reading' : String), ({ final __callArgument60:Dynamic = handler; __callArgument60; }));
+          (cast sensor : WebOrientationSensor__sensors).removeEventListener((cast 'reading' : String), ({ final __callArgument76:Dynamic = handler; __callArgument76; }));
           (cast sensor : WebOrientationSensor__sensors).stop();
         };
       } catch (__error:Dynamic) {
@@ -646,7 +695,8 @@ class _Sensors {
         };
       }
       return cast _Runtime.UNDEFINED;
-    } };
+    }));
+    return cast out;
     return cast null;
   }
 
@@ -660,11 +710,11 @@ class _Sensors {
   }
 
   public static function disposeSensors(sensors:Sensors):Void {
-    detachSensors(({ final __callArgument61:Dynamic = sensors; __callArgument61; }));
+    detachSensors(({ final __callArgument77:Dynamic = sensors; __callArgument77; }));
   }
 
   public static function getSensorsPermissionState(host:HasSystemSensors, ?sensor:String):flight._internal._Promise<SensorsPermissionState> {
-    return cast (cast (cast (cast host : HasSystemSensors).system : { var sensors:SensorsBackend; }).sensors : SensorsBackend).getPermissionState(({ final __callArgument63:Dynamic = sensor; __callArgument63; }));
+    return cast (cast (cast (cast host : HasSystemSensors).system : { var sensors:SensorsBackend; }).sensors : SensorsBackend).getPermissionState(({ final __callArgument79:Dynamic = sensor; __callArgument79; }));
     return cast null;
   }
 
@@ -711,6 +761,99 @@ class _Sensors {
   public static function hasProximitySensor(host:HasSystemSensors):Bool {
     return cast (cast (cast (cast host : HasSystemSensors).system : { var sensors:SensorsBackend; }).sensors : SensorsBackend).isProximitySupported();
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeAmbientLightReading(out:EntityConstruction<AmbientLightReading>):Void {
+    _Runtime.setField(out, 'accuracy', 'unknown');
+    _Runtime.setField(out, 'illuminance', 0.0);
+    _Runtime.setField(out, 'interval', -1.0);
+    _Runtime.setField(out, 'timestamp', -1.0);
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeMotionReading(out:EntityConstruction<MotionReading>):Void {
+    _Runtime.setField(out, 'accuracy', 'unknown');
+    _Runtime.setField(out, 'interval', -1.0);
+    _Runtime.setField(out, 'timestamp', -1.0);
+    _Runtime.setField(out, 'x', 0.0);
+    _Runtime.setField(out, 'y', 0.0);
+    _Runtime.setField(out, 'z', 0.0);
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeOrientationReading(out:EntityConstruction<OrientationReading>):Void {
+    _Runtime.setField(out, 'absolute', false);
+    _Runtime.setField(out, 'accuracy', 'unknown');
+    _Runtime.setField(out, 'alpha', 0.0);
+    _Runtime.setField(out, 'beta', 0.0);
+    _Runtime.setField(out, 'gamma', 0.0);
+    _Runtime.setField(out, 'heading', -1.0);
+    _Runtime.setField(out, 'interval', -1.0);
+    _Runtime.setField(out, 'timestamp', -1.0);
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializePressureReading(out:EntityConstruction<PressureReading>):Void {
+    _Runtime.setField(out, 'accuracy', 'unknown');
+    _Runtime.setField(out, 'altitude', -1.0);
+    _Runtime.setField(out, 'interval', -1.0);
+    _Runtime.setField(out, 'pressure', 0.0);
+    _Runtime.setField(out, 'timestamp', -1.0);
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeProximityReading(out:EntityConstruction<ProximityReading>):Void {
+    _Runtime.setField(out, 'accuracy', 'unknown');
+    _Runtime.setField(out, 'distance', -1.0);
+    _Runtime.setField(out, 'interval', -1.0);
+    _Runtime.setField(out, 'max', -1.0);
+    _Runtime.setField(out, 'near', false);
+    _Runtime.setField(out, 'timestamp', -1.0);
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeQuaternionReading(out:EntityConstruction<QuaternionReading>):Void {
+    _Runtime.setField(out, 'accuracy', 'unknown');
+    _Runtime.setField(out, 'interval', -1.0);
+    _Runtime.setField(out, 'timestamp', -1.0);
+    _Runtime.setField(out, 'w', 1.0);
+    _Runtime.setField(out, 'x', 0.0);
+    _Runtime.setField(out, 'y', 0.0);
+    _Runtime.setField(out, 'z', 0.0);
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeRotationRateReading(out:EntityConstruction<RotationRateReading>):Void {
+    _Runtime.setField(out, 'accuracy', 'unknown');
+    _Runtime.setField(out, 'alpha', 0.0);
+    _Runtime.setField(out, 'beta', 0.0);
+    _Runtime.setField(out, 'gamma', 0.0);
+    _Runtime.setField(out, 'interval', -1.0);
+    _Runtime.setField(out, 'timestamp', -1.0);
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeSensors(out:EntityConstruction<Sensors>):Void {
+    _Runtime.setField(out, 'onAbsoluteOrientation', (cast createSignal() : Signal<OrientationReading->Void>));
+    _Runtime.setField(out, 'onAccelerometer', (cast createSignal() : Signal<MotionReading->Void>));
+    _Runtime.setField(out, 'onAmbientLight', (cast createSignal() : Signal<AmbientLightReading->Void>));
+    _Runtime.setField(out, 'onBarometer', (cast createSignal() : Signal<PressureReading->Void>));
+    _Runtime.setField(out, 'onGravity', (cast createSignal() : Signal<MotionReading->Void>));
+    _Runtime.setField(out, 'onGyroscope', (cast createSignal() : Signal<RotationRateReading->Void>));
+    _Runtime.setField(out, 'onLinearAcceleration', (cast createSignal() : Signal<MotionReading->Void>));
+    _Runtime.setField(out, 'onMagnetometer', (cast createSignal() : Signal<MotionReading->Void>));
+    _Runtime.setField(out, 'onOrientation', (cast createSignal() : Signal<OrientationReading->Void>));
+    _Runtime.setField(out, 'onProximity', (cast createSignal() : Signal<ProximityReading->Void>));
+    _Runtime.setField(out, 'onQuaternion', (cast createSignal() : Signal<QuaternionReading->Void>));
   }
 
   public static function isSensorsSupported(host:HasSystemSensors):Bool {
@@ -764,41 +907,41 @@ class _Sensors {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var permissionName:String = cast _Runtime.UNDEFINED;
-        var __flowBranch64:Dynamic;
+        var __flowBranch80:Dynamic;
         if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) {
-          __flowBranch64 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch80 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn('unsupported');
           });
         } else {
-          __flowBranch64 = flight._internal._Async.flowNormal();
+          __flowBranch80 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch64, function():Dynamic {
+        return flight._internal._Async.continueFlow(__flowBranch80, function():Dynamic {
           permissionName = ((cast _Runtime.strictEquals(sensor, 'orientation') : Bool) ? (cast 'gyroscope' : Dynamic) : (cast ((cast _Runtime.strictEquals(sensor, 'magnetometer') : Bool) ? (cast sensor : Dynamic) : (cast 'accelerometer' : Dynamic)) : Dynamic));
-          var __flowBranch65:Dynamic;
+          var __flowBranch81:Dynamic;
           if (_Runtime.truthy(_Runtime.andValue(!_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('navigator'), 'undefined'), function():Dynamic return cast flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'permissions')))) {
-            __flowBranch65 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch81 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
                 var status:flight._internal.dom.PermissionStatus = cast _Runtime.UNDEFINED;
-                return flight._internal._Async.flatMap((cast flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'permissions') : flight._internal.dom.Permissions).query({ name: (cast permissionName : flight._internal.dom.PermissionName) }), function(__awaitValue66:Dynamic):Dynamic {
-                  status = __awaitValue66;
-                  var __flowBranch67:Dynamic;
+                return flight._internal._Async.flatMap((cast flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'permissions') : flight._internal.dom.Permissions).query({ name: (cast permissionName : flight._internal.dom.PermissionName) }), function(__awaitValue82:Dynamic):Dynamic {
+                  status = __awaitValue82;
+                  var __flowBranch83:Dynamic;
                   if ((cast _Runtime.strictEquals((cast status : flight._internal.dom.PermissionStatus).state, 'granted') : Bool)) {
-                    __flowBranch67 = flight._internal._Async.protect(function():Dynamic {
+                    __flowBranch83 = flight._internal._Async.protect(function():Dynamic {
                       return flight._internal._Async.flowReturn('granted');
                     });
                   } else {
-                    __flowBranch67 = flight._internal._Async.flowNormal();
+                    __flowBranch83 = flight._internal._Async.flowNormal();
                   }
-                  return flight._internal._Async.continueFlow(__flowBranch67, function():Dynamic {
-                    var __flowBranch68:Dynamic;
+                  return flight._internal._Async.continueFlow(__flowBranch83, function():Dynamic {
+                    var __flowBranch84:Dynamic;
                     if ((cast _Runtime.strictEquals((cast status : flight._internal.dom.PermissionStatus).state, 'denied') : Bool)) {
-                      __flowBranch68 = flight._internal._Async.protect(function():Dynamic {
+                      __flowBranch84 = flight._internal._Async.protect(function():Dynamic {
                         return flight._internal._Async.flowReturn('denied');
                       });
                     } else {
-                      __flowBranch68 = flight._internal._Async.flowNormal();
+                      __flowBranch84 = flight._internal._Async.flowNormal();
                     }
-                    return flight._internal._Async.continueFlow(__flowBranch68, function():Dynamic {
+                    return flight._internal._Async.continueFlow(__flowBranch84, function():Dynamic {
                       return flight._internal._Async.flowReturn('prompt');
                     });
                   });
@@ -813,30 +956,30 @@ class _Sensors {
               });
             });
           } else {
-            __flowBranch65 = flight._internal._Async.flowNormal();
+            __flowBranch81 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch65, function():Dynamic {
-            var __flowBranch69:Dynamic;
+          return flight._internal._Async.continueFlow(__flowBranch81, function():Dynamic {
+            var __flowBranch85:Dynamic;
             if ((cast ((cast !_Runtime.strictEquals(sensor, 'magnetometer') : Bool) && (cast !_Runtime.strictEquals(sensor, 'orientation') : Bool)) : Bool)) {
-              __flowBranch69 = flight._internal._Async.protect(function():Dynamic {
+              __flowBranch85 = flight._internal._Async.protect(function():Dynamic {
                 var hasMotion:Bool = cast _Runtime.UNDEFINED;
                 hasMotion = !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('DeviceMotionEvent'), 'undefined');
-                var __flowBranch70:Dynamic;
+                var __flowBranch86:Dynamic;
                 if ((cast !(cast hasMotion : Bool) : Bool)) {
-                  __flowBranch70 = flight._internal._Async.protect(function():Dynamic {
+                  __flowBranch86 = flight._internal._Async.protect(function():Dynamic {
                     return flight._internal._Async.flowReturn('unsupported');
                   });
                 } else {
-                  __flowBranch70 = flight._internal._Async.flowNormal();
+                  __flowBranch86 = flight._internal._Async.flowNormal();
                 }
-                return flight._internal._Async.continueFlow(__flowBranch70, function():Dynamic {
+                return flight._internal._Async.continueFlow(__flowBranch86, function():Dynamic {
                   return flight._internal._Async.flowNormal();
                 });
               });
             } else {
-              __flowBranch69 = flight._internal._Async.flowNormal();
+              __flowBranch85 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch69, function():Dynamic {
+            return flight._internal._Async.continueFlow(__flowBranch85, function():Dynamic {
               return flight._internal._Async.flowReturn('granted');
             });
           });

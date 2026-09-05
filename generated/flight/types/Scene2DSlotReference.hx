@@ -4,4 +4,28 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Scene2DSlotReference = { var content:Null<Node2D>; var linkage:Null<String>; var name:String; var required:Bool; var target:Node2D; };
+#if !flight_struct_typedef
+@:allow(flight._Scene2DFormats)
+@:allow(flight._Scene2DResources)
+@:keep
+@:structInit
+class Scene2DSlotReference {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var content:Null<Node2D>;
+  public var linkage:Null<String>;
+  public var name:String;
+  public var required:Bool;
+  public var target:Node2D;
+
+  private function new(content:Null<Node2D>, linkage:Null<String>, name:String, required:Bool, target:Node2D):Void {
+    this.__symbol__EntityRuntime = null;
+    this.content = content;
+    this.linkage = linkage;
+    this.name = name;
+    this.required = required;
+    this.target = target;
+  }
+}
+#else
+typedef Scene2DSlotReference = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var content:Null<Node2D>; var linkage:Null<String>; var name:String; var required:Bool; var target:Node2D; };
+#end

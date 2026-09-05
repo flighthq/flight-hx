@@ -4,4 +4,37 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ParticleObjectsState = { var burstTimer:Float; var emitterAge:Float; var lifetimes:flight._internal._Float32Array; var prevX:Float; var prevY:Float; var random:RandomSource; var rotationSpeeds:flight._internal._Float32Array; var scales:flight._internal._Float32Array; var spawnAccumulator:Float; var velocities:flight._internal._Float32Array; };
+#if !flight_struct_typedef
+@:allow(flight._Particles)
+@:keep
+@:structInit
+class ParticleObjectsState {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var burstTimer:Float;
+  public var emitterAge:Float;
+  public var lifetimes:flight._internal._Float32Array;
+  public var prevX:Float;
+  public var prevY:Float;
+  public var random:RandomSource;
+  public var rotationSpeeds:flight._internal._Float32Array;
+  public var scales:flight._internal._Float32Array;
+  public var spawnAccumulator:Float;
+  public var velocities:flight._internal._Float32Array;
+
+  private function new(burstTimer:Float, emitterAge:Float, lifetimes:flight._internal._Float32Array, prevX:Float, prevY:Float, random:RandomSource, rotationSpeeds:flight._internal._Float32Array, scales:flight._internal._Float32Array, spawnAccumulator:Float, velocities:flight._internal._Float32Array):Void {
+    this.__symbol__EntityRuntime = null;
+    this.burstTimer = burstTimer;
+    this.emitterAge = emitterAge;
+    this.lifetimes = lifetimes;
+    this.prevX = prevX;
+    this.prevY = prevY;
+    this.random = random;
+    this.rotationSpeeds = rotationSpeeds;
+    this.scales = scales;
+    this.spawnAccumulator = spawnAccumulator;
+    this.velocities = velocities;
+  }
+}
+#else
+typedef ParticleObjectsState = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var burstTimer:Float; var emitterAge:Float; var lifetimes:flight._internal._Float32Array; var prevX:Float; var prevY:Float; var random:RandomSource; var rotationSpeeds:flight._internal._Float32Array; var scales:flight._internal._Float32Array; var spawnAccumulator:Float; var velocities:flight._internal._Float32Array; };
+#end

@@ -235,7 +235,6 @@ import flight.types.AudioChannel;
 import flight.types.AudioDecoder;
 import flight.types.AudioDeviceBackend;
 import flight.types.AudioDeviceHandle;
-import flight.types.AudioDeviceOperation;
 import flight.types.AudioMixer;
 import flight.types.AudioMixerOptions;
 import flight.types.AudioPlayOptions;
@@ -246,8 +245,6 @@ import flight.types.AudioResourceReference;
 import flight.types.AudioResourceReferenceResolutionExplanation;
 import flight.types.AudioResourceUrl;
 import flight.types.AutoExposureEffect;
-import flight.types.BackendExplanation;
-import flight.types.BackendOperationExplanation;
 import flight.types.BarrelDistortionEffect;
 import flight.types.BatchBarrier as Facade_Sdk_flight_types_BatchBarrier_BatchBarrier;
 import flight.types.BatchFormat as Facade_Sdk_flight_types_BatchFormat_BatchFormat;
@@ -269,7 +266,6 @@ import flight.types.BitmapDisplacementMapOptions;
 import flight.types.BitmapDropShadowOptions;
 import flight.types.BitmapEdgeMode;
 import flight.types.BitmapEncodeFailureExplanation;
-import flight.types.BitmapEncodeOperation;
 import flight.types.BitmapFingerprint;
 import flight.types.BitmapFont;
 import flight.types.BitmapFontData;
@@ -403,6 +399,7 @@ import flight.types.ComboBoxControllerOptions;
 import flight.types.ComboBoxControllerSignals;
 import flight.types.Command;
 import flight.types.CommandBinding;
+import flight.types.CommandBindingTable;
 import flight.types.CommandDispatchExplanation;
 import flight.types.CommandHistory;
 import flight.types.CompositeCommand;
@@ -461,6 +458,7 @@ import flight.types.EmissiveMaterial;
 import flight.types.EmissiveModifier;
 import flight.types.EmissiveModifierOptions;
 import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.EntityRuntime;
 import flight.types.EnvReflectModifier;
 import flight.types.EnvReflectModifierOptions;
@@ -493,6 +491,7 @@ import flight.types.FlightDocumentInteractiveStateTransitionDescriptor;
 import flight.types.FlightDocumentInteractiveStates;
 import flight.types.FlightDocumentLayoutBinding;
 import flight.types.FlightDocumentRefusalExplanation;
+import flight.types.FlightDocumentRefusalReason;
 import flight.types.FlightDocumentResourceDescriptor;
 import flight.types.FlightDocumentResourceResolverRegistry;
 import flight.types.FlightDocumentScene;
@@ -515,6 +514,7 @@ import flight.types.FocusNavigationInput;
 import flight.types.FocusNavigationOptions;
 import flight.types.FogModifier;
 import flight.types.FogModifierOptions;
+import flight.types.FontLoadingBackend;
 import flight.types.FontMetrics;
 import flight.types.FontResource;
 import flight.types.FontUrl;
@@ -651,6 +651,9 @@ import flight.types.HasDialogMessage;
 import flight.types.HasDialogPhotoCapture;
 import flight.types.HasDialogPrompt;
 import flight.types.HasDialogVideoCapture;
+import flight.types.HasGraphicsBitmapEncode;
+import flight.types.HasGraphicsBitmapReadback;
+import flight.types.HasGraphicsImage;
 import flight.types.HasGraphicsRenderContextSubscription;
 import flight.types.HasGraphicsRenderSurface;
 import flight.types.HasInputDropFileSubscription;
@@ -663,6 +666,7 @@ import flight.types.HasIpcInvoke;
 import flight.types.HasIpcMessage;
 import flight.types.HasIpcSend;
 import flight.types.HasIpcTargetedSend;
+import flight.types.HasMediaAudioCodec;
 import flight.types.HasMediaSession;
 import flight.types.HasMediaSessionAction;
 import flight.types.HasMenuApplication;
@@ -721,6 +725,7 @@ import flight.types.HasStorageLocal;
 import flight.types.HasStoragePersistenceQuery;
 import flight.types.HasStoragePersistenceRequest;
 import flight.types.HasSystemDevice;
+import flight.types.HasSystemGeolocation;
 import flight.types.HasSystemLifecycle;
 import flight.types.HasSystemPlatform;
 import flight.types.HasSystemSensors;
@@ -756,7 +761,6 @@ import flight.types.HslColor;
 import flight.types.HsvColor;
 import flight.types.HtmlView;
 import flight.types.HueSaturationAdjustment;
-import flight.types.ImageBackendOperation;
 import flight.types.ImageChannel;
 import flight.types.ImageDecodeFailureExplanation;
 import flight.types.ImageDecoder;
@@ -785,6 +789,7 @@ import flight.types.InputPointerLockExitOutcome;
 import flight.types.InputPointerLockRequestOutcome;
 import flight.types.InputState;
 import flight.types.InputTargetHandle;
+import flight.types.InstancedMesh;
 import flight.types.InteractionConnectGuard;
 import flight.types.InteractionDispatchLayer;
 import flight.types.InteractionDispatchLayerOptions;
@@ -954,6 +959,7 @@ import flight.types.NodeOrderListEntryVisitor;
 import flight.types.NodeRuntime;
 import flight.types.NodeRuntimeFactory;
 import flight.types.NodeSignals;
+import flight.types.NonEntityCreateResult;
 import flight.types.NormalMaterial;
 import flight.types.Notification;
 import flight.types.NotificationActionSubscription;
@@ -1182,6 +1188,7 @@ import flight.types.RadioGroupControllerOptions;
 import flight.types.RadioGroupControllerSignals;
 import flight.types.RandomSource;
 import flight.types.Raster2DSurface;
+import flight.types.Raster2DSurfaceProvider;
 import flight.types.RateLimitedLogSink;
 import flight.types.Ray3D;
 import flight.types.Ray3DLike;
@@ -1255,6 +1262,7 @@ import flight.types.SaveFileDialogOptions;
 import flight.types.ScalarRemap;
 import flight.types.Scale9Mapper;
 import flight.types.Scale9Shape;
+import flight.types.Scale9Sprite;
 import flight.types.ScanlinesEffect;
 import flight.types.Scene2D;
 import flight.types.Scene2DAudioResources;
@@ -1680,7 +1688,7 @@ import flight.types.VertexColorMaterial;
 import flight.types.VertexDisplaceModifier;
 import flight.types.VertexDisplaceModifierOptions;
 import flight.types.VertexSemantic;
-import flight.types.VideoCapabilityOperation;
+import flight.types.VideoCapabilityBackend;
 import flight.types.VideoCaptureDialogResult;
 import flight.types.VideoChannel;
 import flight.types.VideoPlayOptions;
@@ -1731,7 +1739,7 @@ import flight.types.WrappedDiffusePbrExtension;
 import flight.types.XmlElement;
 
 class Sdk {
-  public static final __enum_AppearanceFlags:Dynamic = _Runtime.objectFromPairs(cast ([{ key: 'None', value: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.None }, { key: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.None, value: 'None' }, { key: 'Visible', value: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.Visible }, { key: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.Visible, value: 'Visible' }, { key: 'Alpha', value: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.Alpha }, { key: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.Alpha, value: 'Alpha' }, { key: 'BlendMode', value: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.BlendMode }, { key: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.BlendMode, value: 'BlendMode' }, { key: 'Clip', value: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.Clip }, { key: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.Clip, value: 'Clip' }, { key: 'Scale9Grid', value: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.Scale9Grid }, { key: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.Scale9Grid, value: 'Scale9Grid' }, { key: 'Any', value: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.Any }, { key: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.Any, value: 'Any' }, { key: 'any', value: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.any }, { key: 'has', value: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.has }, { key: 'add', value: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.add }, { key: 'remove', value: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.remove }, { key: 'clear', value: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.clear }] : Array<Dynamic>));
+  public static final __enum_AppearanceFlags:Dynamic = _Runtime.objectFromPairs(cast ([{ key: 'None', value: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.None }, { key: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.None, value: 'None' }, { key: 'Visible', value: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.Visible }, { key: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.Visible, value: 'Visible' }, { key: 'Alpha', value: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.Alpha }, { key: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.Alpha, value: 'Alpha' }, { key: 'BlendMode', value: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.BlendMode }, { key: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.BlendMode, value: 'BlendMode' }, { key: 'Clip', value: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.Clip }, { key: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.Clip, value: 'Clip' }, { key: 'Any', value: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.Any }, { key: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.Any, value: 'Any' }, { key: 'any', value: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.any }, { key: 'has', value: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.has }, { key: 'add', value: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.add }, { key: 'remove', value: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.remove }, { key: 'clear', value: Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags.clear }] : Array<Dynamic>));
 
   public static final __enum_BatchBarrier:Dynamic = _Runtime.objectFromPairs(cast ([{ key: 'Capacity', value: Facade_Sdk_flight_types_BatchBarrier_BatchBarrier.Capacity }, { key: Facade_Sdk_flight_types_BatchBarrier_BatchBarrier.Capacity, value: 'Capacity' }, { key: 'Clip', value: Facade_Sdk_flight_types_BatchBarrier_BatchBarrier.Clip }, { key: Facade_Sdk_flight_types_BatchBarrier_BatchBarrier.Clip, value: 'Clip' }, { key: 'Filter', value: Facade_Sdk_flight_types_BatchBarrier_BatchBarrier.Filter }, { key: Facade_Sdk_flight_types_BatchBarrier_BatchBarrier.Filter, value: 'Filter' }, { key: 'RenderTarget', value: Facade_Sdk_flight_types_BatchBarrier_BatchBarrier.RenderTarget }, { key: Facade_Sdk_flight_types_BatchBarrier_BatchBarrier.RenderTarget, value: 'RenderTarget' }] : Array<Dynamic>));
 
@@ -3157,13 +3165,13 @@ class Sdk {
 
   public static final CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT:VertexAttributeLayout = Facade_Sdk_flight__Mesh.CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT;
 
-  public static function canPlayAudioType(mimeType:String):Bool {
-    return cast Facade_Sdk_flight__Audio.canPlayAudioType(mimeType);
+  public static function canPlayAudioType(host:HasMediaAudioCodec, mimeType:String):Bool {
+    return cast Facade_Sdk_flight__Audio.canPlayAudioType(host, mimeType);
     return cast null;
   }
 
-  public static function canPlayVideoType(mimeType:String):Bool {
-    return cast Facade_Sdk_flight__Video.canPlayVideoType(mimeType);
+  public static function canPlayVideoType(backend:VideoCapabilityBackend, mimeType:String):Bool {
+    return cast Facade_Sdk_flight__Video.canPlayVideoType(backend, mimeType);
     return cast null;
   }
 
@@ -3206,8 +3214,8 @@ class Sdk {
 
   public static final CAPTURE_REGRESSION_TOLERANCE:Float = Facade_Sdk_flight__Capture.CAPTURE_REGRESSION_TOLERANCE;
 
-  public static function captureBitmapFromImageResource(resource:ImageResource):Null<Bitmap> {
-    return cast Facade_Sdk_flight__Bitmap.captureBitmapFromImageResource(resource);
+  public static function captureBitmapFromImageResource(host:HasGraphicsBitmapReadback, resource:ImageResource):Null<Bitmap> {
+    return cast Facade_Sdk_flight__Bitmap.captureBitmapFromImageResource(host, resource);
     return cast null;
   }
 
@@ -3342,8 +3350,8 @@ class Sdk {
     Facade_Sdk_flight__Interaction.clearFocus(manager);
   }
 
-  public static function clearGeolocationWatch(id:Float):Void {
-    Facade_Sdk_flight__Geolocation.clearGeolocationWatch(id);
+  public static function clearGeolocationWatch(host:HasSystemGeolocation, id:Float):Void {
+    Facade_Sdk_flight__Geolocation.clearGeolocationWatch(host, id);
   }
 
   public static function clearGlRenderTexture(state:GlRenderState, renderTexture:RenderTexture):Void {
@@ -4541,7 +4549,7 @@ class Sdk {
     Facade_Sdk_flight__Materials.concatColorScaleBias(out, source, other);
   }
 
-  public static function concatRegistryTable<T>(base:flight._internal._Union2<KeyedTable<T>, SlotTable<T>>, overlay:flight._internal._Union2<KeyedTable<T>, SlotTable<T>>):flight._internal._Union2<KeyedTable<T>, SlotTable<T>> {
+  public static function concatRegistryTable<T>(base:flight._internal._Union2<KeyedTable<T>, SlotTable<T>>, overlay:flight._internal._Union2<KeyedTable<T>, SlotTable<T>>):flight._internal._Union2<{ >KeyedTable<T>, >Entity, }, { >SlotTable<T>, >Entity, }> {
     return cast Facade_Sdk_flight__Registry.concatRegistryTable(base, overlay);
     return cast null;
   }
@@ -5042,12 +5050,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createAutoExposureEffect(?options:{ @:optional var adaptationSpeed:Null<Float>; @:optional var exposureCompensation:Null<Float>; @:optional var maxExposure:Null<Float>; @:optional var minExposure:Null<Float>; }):AutoExposureEffect {
+  public static function createAutoExposureEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var adaptationSpeed:Null<Float>; @:optional var exposureCompensation:Null<Float>; @:optional var maxExposure:Null<Float>; @:optional var minExposure:Null<Float>; }, String>):AutoExposureEffect {
     return cast Facade_Sdk_flight__Effects.createAutoExposureEffect(options);
     return cast null;
   }
 
-  public static function createBarrelDistortionEffect(?options:{ @:optional var amount:Null<Float>; @:optional var scale:Null<Float>; }):BarrelDistortionEffect {
+  public static function createBarrelDistortionEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var amount:Null<Float>; @:optional var scale:Null<Float>; }, String>):BarrelDistortionEffect {
     return cast Facade_Sdk_flight__Effects.createBarrelDistortionEffect(options);
     return cast null;
   }
@@ -5057,7 +5065,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createBevelEffect(?options:{ @:optional var angle:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var highlightAlpha:Null<Float>; @:optional var highlightColor:Null<Float>; @:optional var quality:Null<Float>; @:optional var shadowAlpha:Null<Float>; @:optional var shadowColor:Null<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }):BevelEffect {
+  public static function createBevelEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var angle:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var highlightAlpha:Null<Float>; @:optional var highlightColor:Null<Float>; @:optional var quality:Null<Float>; @:optional var shadowAlpha:Null<Float>; @:optional var shadowColor:Null<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }, String>):BevelEffect {
     return cast Facade_Sdk_flight__Effects.createBevelEffect(options);
     return cast null;
   }
@@ -5072,7 +5080,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createBitmapDisplacementEffect(map:Null<Texture2D>, ?options:{ @:optional var componentX:Null<ImageChannel>; @:optional var componentY:Null<ImageChannel>; @:optional var scaleX:Null<Float>; @:optional var scaleY:Null<Float>; @:optional var edgeMode:Null<BitmapDisplacementEffectEdgeMode>; }):BitmapDisplacementEffect {
+  public static function createBitmapDisplacementEffect(map:Null<Texture2D>, ?options:flight._internal._Omit<{ var kind:String; var map:Null<Texture2D>; @:optional var componentX:Null<ImageChannel>; @:optional var componentY:Null<ImageChannel>; @:optional var scaleX:Null<Float>; @:optional var scaleY:Null<Float>; @:optional var edgeMode:Null<BitmapDisplacementEffectEdgeMode>; }, String>):BitmapDisplacementEffect {
     return cast Facade_Sdk_flight__Effects.createBitmapDisplacementEffect(map, options);
     return cast null;
   }
@@ -5097,8 +5105,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function createBitmapFromImageSource(source:flight._internal.dom.CanvasImageSource, width:Float, height:Float):Null<Bitmap> {
-    return cast Facade_Sdk_flight__Bitmap.createBitmapFromImageSource(source, width, height);
+  public static function createBitmapFromImageSource(host:HasGraphicsBitmapReadback, source:flight._internal.dom.CanvasImageSource, width:Float, height:Float):Null<Bitmap> {
+    return cast Facade_Sdk_flight__Bitmap.createBitmapFromImageSource(host, source, width, height);
     return cast null;
   }
 
@@ -5107,7 +5115,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createBitmapRegion(bitmap:Bitmap, ?x:Float, ?y:Float, ?width:Float, ?height:Float):BitmapRegion {
+  public static function createBitmapRegion(bitmap:Bitmap, ?x:Float, ?y:Float, ?width:Float, ?height:Float):NonEntityCreateResult<BitmapRegion, String> {
     return cast Facade_Sdk_flight__Bitmap.createBitmapRegion(bitmap, x, y, width, height);
     return cast null;
   }
@@ -5117,7 +5125,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createBlendEffect(mode:AdvancedBlendMode, ?options:{ @:optional var backdropKey:Null<String>; @:optional var opacity:Null<Float>; }):BlendEffect {
+  public static function createBlendEffect(mode:AdvancedBlendMode, ?options:flight._internal._Omit<{ var kind:String; var mode:AdvancedBlendMode; @:optional var backdropKey:Null<String>; @:optional var opacity:Null<Float>; }, String>):BlendEffect {
     return cast Facade_Sdk_flight__Effects.createBlendEffect(mode, options);
     return cast null;
   }
@@ -5127,17 +5135,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function createBloomEffect(?options:{ @:optional var threshold:Null<Float>; @:optional var intensity:Null<Float>; @:optional var radius:Null<Float>; @:optional var passes:Null<Float>; }):BloomEffect {
+  public static function createBloomEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var threshold:Null<Float>; @:optional var intensity:Null<Float>; @:optional var radius:Null<Float>; @:optional var passes:Null<Float>; }, String>):BloomEffect {
     return cast Facade_Sdk_flight__Effects.createBloomEffect(options);
     return cast null;
   }
 
-  public static function createBlurEffect(?options:{ @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; }):BlurEffect {
+  public static function createBlurEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; }, String>):BlurEffect {
     return cast Facade_Sdk_flight__Effects.createBlurEffect(options);
     return cast null;
   }
 
-  public static function createBokehDepthOfFieldEffect(?options:{ @:optional var focusDistance:Null<Float>; @:optional var focusRange:Null<Float>; @:optional var maxBlur:Null<Float>; }):BokehDepthOfFieldEffect {
+  public static function createBokehDepthOfFieldEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var focusDistance:Null<Float>; @:optional var focusRange:Null<Float>; @:optional var maxBlur:Null<Float>; }, String>):BokehDepthOfFieldEffect {
     return cast Facade_Sdk_flight__Effects.createBokehDepthOfFieldEffect(options);
     return cast null;
   }
@@ -5167,8 +5175,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function createBuiltInScene3DResourceResolver(?options:Scene3DResourceResolverOptions):Scene3DResourceResolverWithRuntime {
-    return cast Facade_Sdk_flight__Scene3DResources.createBuiltInScene3DResourceResolver(options);
+  public static function createBuiltInScene3DResourceResolver(host:HasGraphicsImage, ?options:Scene3DResourceResolverOptions):Scene3DResourceResolverWithRuntime {
+    return cast Facade_Sdk_flight__Scene3DResources.createBuiltInScene3DResourceResolver(host, options);
     return cast null;
   }
 
@@ -5199,7 +5207,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createCameraMotionBlurEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var samples:Null<Float>; }):CameraMotionBlurEffect {
+  public static function createCameraMotionBlurEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var intensity:Null<Float>; @:optional var samples:Null<Float>; }, String>):CameraMotionBlurEffect {
     return cast Facade_Sdk_flight__Effects.createCameraMotionBlurEffect(options);
     return cast null;
   }
@@ -5254,7 +5262,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createCanvasShapeRasterizer(resolvers:CanvasTextureResolvers):ShapeRasterizer {
+  public static function createCanvasShapeRasterizer(resolvers:CanvasTextureResolvers):NonEntityCreateResult<ShapeRasterizer, String> {
     return cast Facade_Sdk_flight__Scene2DCanvas.createCanvasShapeRasterizer(resolvers);
     return cast null;
   }
@@ -5274,7 +5282,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createCaptureBaseline():CaptureBaseline {
+  public static function createCaptureBaseline():NonEntityCreateResult<CaptureBaseline, String> {
     return cast Facade_Sdk_flight__Capture.createCaptureBaseline();
     return cast null;
   }
@@ -5299,7 +5307,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createChromaticAberrationEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var radial:Null<Bool>; }):ChromaticAberrationEffect {
+  public static function createChromaticAberrationEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var intensity:Null<Float>; @:optional var radial:Null<Bool>; }, String>):ChromaticAberrationEffect {
     return cast Facade_Sdk_flight__Effects.createChromaticAberrationEffect(options);
     return cast null;
   }
@@ -5449,7 +5457,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createCommandBindingTable():KeyedTable<CommandBinding> {
+  public static function createCommandBindingTable():CommandBindingTable {
     return cast Facade_Sdk_flight__Command.createCommandBindingTable();
     return cast null;
   }
@@ -5464,7 +5472,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createCompositeEffect(operator_:CompositeOperator, ?options:{ @:optional var backdropKey:Null<String>; }):CompositeEffect {
+  public static function createCompositeEffect(operator_:CompositeOperator, ?options:flight._internal._Omit<{ var kind:String; var operator_:CompositeOperator; @:optional var backdropKey:Null<String>; }, String>):CompositeEffect {
     return cast Facade_Sdk_flight__Effects.createCompositeEffect(operator_, options);
     return cast null;
   }
@@ -5494,7 +5502,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createContactShadowsEffect(?options:{ @:optional var distance:Null<Float>; @:optional var opacity:Null<Float>; @:optional var samples:Null<Float>; @:optional var smoothness:Null<Float>; }):ContactShadowsEffect {
+  public static function createContactShadowsEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var distance:Null<Float>; @:optional var opacity:Null<Float>; @:optional var samples:Null<Float>; @:optional var smoothness:Null<Float>; }, String>):ContactShadowsEffect {
     return cast Facade_Sdk_flight__Effects.createContactShadowsEffect(options);
     return cast null;
   }
@@ -5504,12 +5512,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createConvolutionEffect(options:{ var matrix:Array<Float>; var matrixX:Float; var matrixY:Float; @:optional var bias:Null<Float>; @:optional var clamp:Null<Bool>; @:optional var color:Null<Float>; @:optional var divisor:Null<Float>; @:optional var preserveAlpha:Null<Bool>; }):ConvolutionEffect {
+  public static function createConvolutionEffect(options:flight._internal._Omit<{ var kind:String; var matrix:Array<Float>; var matrixX:Float; var matrixY:Float; @:optional var bias:Null<Float>; @:optional var clamp:Null<Bool>; @:optional var color:Null<Float>; @:optional var divisor:Null<Float>; @:optional var preserveAlpha:Null<Bool>; }, String>):ConvolutionEffect {
     return cast Facade_Sdk_flight__Effects.createConvolutionEffect(options);
     return cast null;
   }
 
-  public static function createCrtEffect(?options:{ @:optional var curvature:Null<Float>; @:optional var scanlineIntensity:Null<Float>; @:optional var vignette:Null<Float>; @:optional var aberration:Null<Float>; }):CrtEffect {
+  public static function createCrtEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var curvature:Null<Float>; @:optional var scanlineIntensity:Null<Float>; @:optional var vignette:Null<Float>; @:optional var aberration:Null<Float>; }, String>):CrtEffect {
     return cast Facade_Sdk_flight__Effects.createCrtEffect(options);
     return cast null;
   }
@@ -5519,7 +5527,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createCustomShaderEffect(options:{ var shaderKey:String; @:optional var uniforms:Null<flight._internal._Record<String, flight._internal._Union2<Float, Array<Float>>>>; }):CustomShaderEffect {
+  public static function createCustomShaderEffect(options:flight._internal._Omit<{ var kind:String; var shaderKey:String; @:optional var uniforms:Null<flight._internal._Record<String, flight._internal._Union2<Float, Array<Float>>>>; }, String>):CustomShaderEffect {
     return cast Facade_Sdk_flight__Effects.createCustomShaderEffect(options);
     return cast null;
   }
@@ -5534,32 +5542,32 @@ class Sdk {
     return cast null;
   }
 
-  public static function createDefaultAppMenuTemplate(appName:String):MenuItemTemplate {
+  public static function createDefaultAppMenuTemplate(appName:String):NonEntityCreateResult<MenuItemTemplate, String> {
     return cast Facade_Sdk_flight__Menu.createDefaultAppMenuTemplate(appName);
     return cast null;
   }
 
-  public static function createDefaultEditMenuTemplate():MenuItemTemplate {
+  public static function createDefaultEditMenuTemplate():NonEntityCreateResult<MenuItemTemplate, String> {
     return cast Facade_Sdk_flight__Menu.createDefaultEditMenuTemplate();
     return cast null;
   }
 
-  public static function createDefaultFileMenuTemplate():MenuItemTemplate {
+  public static function createDefaultFileMenuTemplate():NonEntityCreateResult<MenuItemTemplate, String> {
     return cast Facade_Sdk_flight__Menu.createDefaultFileMenuTemplate();
     return cast null;
   }
 
-  public static function createDefaultHelpMenuTemplate():MenuItemTemplate {
+  public static function createDefaultHelpMenuTemplate():NonEntityCreateResult<MenuItemTemplate, String> {
     return cast Facade_Sdk_flight__Menu.createDefaultHelpMenuTemplate();
     return cast null;
   }
 
-  public static function createDefaultViewMenuTemplate():MenuItemTemplate {
+  public static function createDefaultViewMenuTemplate():NonEntityCreateResult<MenuItemTemplate, String> {
     return cast Facade_Sdk_flight__Menu.createDefaultViewMenuTemplate();
     return cast null;
   }
 
-  public static function createDefaultWindowMenuTemplate():MenuItemTemplate {
+  public static function createDefaultWindowMenuTemplate():NonEntityCreateResult<MenuItemTemplate, String> {
     return cast Facade_Sdk_flight__Menu.createDefaultWindowMenuTemplate();
     return cast null;
   }
@@ -5584,7 +5592,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createDirectionalBlurEffect(?options:{ @:optional var angle:Null<Float>; @:optional var length:Null<Float>; @:optional var samples:Null<Float>; }):DirectionalBlurEffect {
+  public static function createDirectionalBlurEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var angle:Null<Float>; @:optional var length:Null<Float>; @:optional var samples:Null<Float>; }, String>):DirectionalBlurEffect {
     return cast Facade_Sdk_flight__Effects.createDirectionalBlurEffect(options);
     return cast null;
   }
@@ -5594,7 +5602,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createDisplacementEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var frequency:Null<Float>; @:optional var seed:Null<Float>; }):DisplacementEffect {
+  public static function createDisplacementEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var intensity:Null<Float>; @:optional var frequency:Null<Float>; @:optional var seed:Null<Float>; }, String>):DisplacementEffect {
     return cast Facade_Sdk_flight__Effects.createDisplacementEffect(options);
     return cast null;
   }
@@ -5609,7 +5617,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createDitherEffect(?options:{ @:optional var levels:Null<Float>; }):DitherEffect {
+  public static function createDitherEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var levels:Null<Float>; }, String>):DitherEffect {
     return cast Facade_Sdk_flight__Effects.createDitherEffect(options);
     return cast null;
   }
@@ -5624,7 +5632,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createDropShadowEffect(?options:{ @:optional var alpha:Null<Float>; @:optional var angle:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }):DropShadowEffect {
+  public static function createDropShadowEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var alpha:Null<Float>; @:optional var angle:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }, String>):DropShadowEffect {
     return cast Facade_Sdk_flight__Effects.createDropShadowEffect(options);
     return cast null;
   }
@@ -5724,12 +5732,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createFilmEmulationEffect(?options:{ @:optional var gateWeave:Null<Float>; @:optional var grainIntensity:Null<Float>; @:optional var halationRadius:Null<Float>; @:optional var halationStrength:Null<Float>; }):FilmEmulationEffect {
+  public static function createFilmEmulationEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var gateWeave:Null<Float>; @:optional var grainIntensity:Null<Float>; @:optional var halationRadius:Null<Float>; @:optional var halationStrength:Null<Float>; }, String>):FilmEmulationEffect {
     return cast Facade_Sdk_flight__Effects.createFilmEmulationEffect(options);
     return cast null;
   }
 
-  public static function createFilmGrainEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var size:Null<Float>; @:optional var seed:Null<Float>; }):FilmGrainEffect {
+  public static function createFilmGrainEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var intensity:Null<Float>; @:optional var size:Null<Float>; @:optional var seed:Null<Float>; }, String>):FilmGrainEffect {
     return cast Facade_Sdk_flight__Effects.createFilmGrainEffect(options);
     return cast null;
   }
@@ -5739,12 +5747,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createFlightDocumentFromScene2D(source:Scene2D, schemas:FlightDocumentSchemaRegistry, ?interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node2D>>, ?layoutBindings:Array<FlightDocumentLayoutBinding<Node2D>>):FlightDocumentScene2D {
+  public static function createFlightDocumentFromScene2D(source:Scene2D, schemas:FlightDocumentSchemaRegistry, ?interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node2D>>, ?layoutBindings:Array<FlightDocumentLayoutBinding<Node2D>>):{ >FlightDocumentScene2D, >Entity, } {
     return cast Facade_Sdk_flight__SceneDocument.createFlightDocumentFromScene2D(source, schemas, interactiveStateBindings, layoutBindings);
     return cast null;
   }
 
-  public static function createFlightDocumentFromScene3D(source:Scene3D, cameras:Array<Scene3DDocumentCamera>, lights:Array<Scene3DDocumentLight>, schemas:FlightDocumentSchemaRegistry, ?interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node3D>>, ?layoutBindings:Array<FlightDocumentLayoutBinding<Node3D>>):FlightDocumentScene3D {
+  public static function createFlightDocumentFromScene3D(source:Scene3D, cameras:Array<Scene3DDocumentCamera>, lights:Array<Scene3DDocumentLight>, schemas:FlightDocumentSchemaRegistry, ?interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node3D>>, ?layoutBindings:Array<FlightDocumentLayoutBinding<Node3D>>):{ >FlightDocumentScene3D, >Entity, } {
     return cast Facade_Sdk_flight__SceneDocument.createFlightDocumentFromScene3D(source, cameras, lights, schemas, interactiveStateBindings, layoutBindings);
     return cast null;
   }
@@ -5804,7 +5812,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createFxaaEffect(?options:{ @:optional var edgeThreshold:Null<Float>; @:optional var subpixel:Null<Float>; }):FxaaEffect {
+  public static function createFxaaEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var edgeThreshold:Null<Float>; @:optional var subpixel:Null<Float>; }, String>):FxaaEffect {
     return cast Facade_Sdk_flight__Effects.createFxaaEffect(options);
     return cast null;
   }
@@ -5854,12 +5862,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createGlitchEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var blockSize:Null<Float>; @:optional var colorShift:Null<Float>; @:optional var seed:Null<Float>; }):GlitchEffect {
+  public static function createGlitchEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var intensity:Null<Float>; @:optional var blockSize:Null<Float>; @:optional var colorShift:Null<Float>; @:optional var seed:Null<Float>; }, String>):GlitchEffect {
     return cast Facade_Sdk_flight__Effects.createGlitchEffect(options);
     return cast null;
   }
 
-  public static function createGlobalShortcut(accelerator:String):CreateGlobalShortcutOutcome {
+  public static function createGlobalShortcut(accelerator:String):NonEntityCreateResult<CreateGlobalShortcutOutcome, String> {
     return cast Facade_Sdk_flight__Shortcut.createGlobalShortcut(accelerator);
     return cast null;
   }
@@ -5920,7 +5928,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createGlyphOutlineSourceFromOpenTypeFont(source:flight._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Null<GlyphOutlineSource> {
+  public static function createGlyphOutlineSourceFromOpenTypeFont(source:flight._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Null<{ >GlyphOutlineSource, >Entity, }> {
     return cast Facade_Sdk_flight__FontFormats.createGlyphOutlineSourceFromOpenTypeFont(source, diagnostics);
     return cast null;
   }
@@ -5935,7 +5943,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createGlyphSourceFromBitmapFont(font:BitmapFont):GlyphSource {
+  public static function createGlyphSourceFromBitmapFont(font:BitmapFont):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getGlyphAtlasImage:Float->Null<TextureSource>; var getGlyphEntry:Float->Null<GlyphEntry>; var getGlyphKerning:Float->Float->Float; var getGlyphLayoutVersion:Void->Float; var getGlyphMetrics:Void->GlyphMetrics; } {
     return cast Facade_Sdk_flight__BitmapFont.createGlyphSourceFromBitmapFont(font);
     return cast null;
   }
@@ -5945,7 +5953,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createGodRaysEffect(?options:{ @:optional var centerX:Null<Float>; @:optional var centerY:Null<Float>; @:optional var density:Null<Float>; @:optional var decay:Null<Float>; @:optional var weight:Null<Float>; @:optional var exposure:Null<Float>; @:optional var samples:Null<Float>; }):GodRaysEffect {
+  public static function createGodRaysEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var centerX:Null<Float>; @:optional var centerY:Null<Float>; @:optional var density:Null<Float>; @:optional var decay:Null<Float>; @:optional var weight:Null<Float>; @:optional var exposure:Null<Float>; @:optional var samples:Null<Float>; }, String>):GodRaysEffect {
     return cast Facade_Sdk_flight__Effects.createGodRaysEffect(options);
     return cast null;
   }
@@ -5955,12 +5963,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createGradientBevelEffect(options:{ var alphas:Array<Float>; @:optional var angle:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; var colors:Array<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; var ratios:Array<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }):GradientBevelEffect {
+  public static function createGradientBevelEffect(options:flight._internal._Omit<{ var kind:String; var alphas:Array<Float>; @:optional var angle:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; var colors:Array<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; var ratios:Array<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }, String>):GradientBevelEffect {
     return cast Facade_Sdk_flight__Effects.createGradientBevelEffect(options);
     return cast null;
   }
 
-  public static function createGradientGlowEffect(options:{ var alphas:Array<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; var colors:Array<Float>; @:optional var quality:Null<Float>; var ratios:Array<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }):GradientGlowEffect {
+  public static function createGradientGlowEffect(options:flight._internal._Omit<{ var kind:String; var alphas:Array<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; var colors:Array<Float>; @:optional var quality:Null<Float>; var ratios:Array<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }, String>):GradientGlowEffect {
     return cast Facade_Sdk_flight__Effects.createGradientGlowEffect(options);
     return cast null;
   }
@@ -5980,7 +5988,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createHalftoneEffect(?options:{ @:optional var scale:Null<Float>; @:optional var angle:Null<Float>; }):HalftoneEffect {
+  public static function createHalftoneEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var scale:Null<Float>; @:optional var angle:Null<Float>; }, String>):HalftoneEffect {
     return cast Facade_Sdk_flight__Effects.createHalftoneEffect(options);
     return cast null;
   }
@@ -6030,8 +6038,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function createImageResourceFromBitmap(bitmap:Bitmap):Null<ImageResource> {
-    return cast Facade_Sdk_flight__Image.createImageResourceFromBitmap(bitmap);
+  public static function createImageResourceFromBitmap(host:HasGraphicsImage, bitmap:Bitmap):Null<ImageResource> {
+    return cast Facade_Sdk_flight__Image.createImageResourceFromBitmap(host, bitmap);
     return cast null;
   }
 
@@ -6050,12 +6058,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createInnerGlowEffect(?options:{ @:optional var alpha:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<InnerEffectSourceMode>; @:optional var strength:Null<Float>; }):InnerGlowEffect {
+  public static function createInnerGlowEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var alpha:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<InnerEffectSourceMode>; @:optional var strength:Null<Float>; }, String>):InnerGlowEffect {
     return cast Facade_Sdk_flight__Effects.createInnerGlowEffect(options);
     return cast null;
   }
 
-  public static function createInnerShadowEffect(?options:{ @:optional var alpha:Null<Float>; @:optional var angle:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<InnerEffectSourceMode>; @:optional var strength:Null<Float>; }):InnerShadowEffect {
+  public static function createInnerShadowEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var alpha:Null<Float>; @:optional var angle:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<InnerEffectSourceMode>; @:optional var strength:Null<Float>; }, String>):InnerShadowEffect {
     return cast Facade_Sdk_flight__Effects.createInnerShadowEffect(options);
     return cast null;
   }
@@ -6072,6 +6080,11 @@ class Sdk {
 
   public static function createInputState():InputState {
     return cast Facade_Sdk_flight__Input.createInputState();
+    return cast null;
+  }
+
+  public static function createInstancedMesh(geometry:MeshGeometry, materials:Array<Null<Material>>, ?capacity:Float, ?kind:Kind):InstancedMesh {
+    return cast Facade_Sdk_flight__Scene3D.createInstancedMesh(geometry, materials, capacity, kind);
     return cast null;
   }
 
@@ -6100,12 +6113,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createKeyedTable<T>(registry:RegistryId, onMiss:RegistryMissPolicy):KeyedTable<T> {
+  public static function createKeyedTable<T>(registry:RegistryId, onMiss:RegistryMissPolicy):{ >KeyedTable<T>, >Entity, } {
     return cast Facade_Sdk_flight__Registry.createKeyedTable(registry, onMiss);
     return cast null;
   }
 
-  public static function createKuwaharaEffect(?options:{ @:optional var radius:Null<Float>; }):KuwaharaEffect {
+  public static function createKuwaharaEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var radius:Null<Float>; }, String>):KuwaharaEffect {
     return cast Facade_Sdk_flight__Effects.createKuwaharaEffect(options);
     return cast null;
   }
@@ -6125,17 +6138,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function createLensDirtEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var threshold:Null<Float>; @:optional var seed:Null<Float>; }):LensDirtEffect {
+  public static function createLensDirtEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var intensity:Null<Float>; @:optional var threshold:Null<Float>; @:optional var seed:Null<Float>; }, String>):LensDirtEffect {
     return cast Facade_Sdk_flight__Effects.createLensDirtEffect(options);
     return cast null;
   }
 
-  public static function createLensDistortionEffect(?options:{ @:optional var amount:Null<Float>; @:optional var scale:Null<Float>; }):LensDistortionEffect {
+  public static function createLensDistortionEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var amount:Null<Float>; @:optional var scale:Null<Float>; }, String>):LensDistortionEffect {
     return cast Facade_Sdk_flight__Effects.createLensDistortionEffect(options);
     return cast null;
   }
 
-  public static function createLensFlareEffect(?options:{ @:optional var threshold:Null<Float>; @:optional var intensity:Null<Float>; @:optional var ghosts:Null<Float>; @:optional var halo:Null<Float>; }):LensFlareEffect {
+  public static function createLensFlareEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var threshold:Null<Float>; @:optional var intensity:Null<Float>; @:optional var ghosts:Null<Float>; @:optional var halo:Null<Float>; }, String>):LensFlareEffect {
     return cast Facade_Sdk_flight__Effects.createLensFlareEffect(options);
     return cast null;
   }
@@ -6210,7 +6223,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createMedianEffect(?options:{ @:optional var radius:Null<Float>; }):MedianEffect {
+  public static function createMedianEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var radius:Null<Float>; }, String>):MedianEffect {
     return cast Facade_Sdk_flight__Effects.createMedianEffect(options);
     return cast null;
   }
@@ -6230,7 +6243,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createMenuItemTemplate(?template:{ @:optional var id:Null<String>; @:optional var label:Null<String>; @:optional var type:Null<MenuItemType>; @:optional var role:Null<MenuItemRole>; @:optional var accelerator:Null<String>; @:optional var enabled:Null<Bool>; @:optional var checked:Null<Bool>; @:optional var visible:Null<Bool>; @:optional var sublabel:Null<String>; @:optional var toolTip:Null<String>; @:optional var submenu:Null<Array<MenuItemTemplate>>; }):MenuItemTemplate {
+  public static function createMenuItemTemplate(?template:{ @:optional var id:Null<String>; @:optional var label:Null<String>; @:optional var type:Null<MenuItemType>; @:optional var role:Null<MenuItemRole>; @:optional var accelerator:Null<String>; @:optional var enabled:Null<Bool>; @:optional var checked:Null<Bool>; @:optional var visible:Null<Bool>; @:optional var sublabel:Null<String>; @:optional var toolTip:Null<String>; @:optional var submenu:Null<Array<MenuItemTemplate>>; }):NonEntityCreateResult<MenuItemTemplate, String> {
     return cast Facade_Sdk_flight__Menu.createMenuItemTemplate(template);
     return cast null;
   }
@@ -6285,7 +6298,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createMotionBlurEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var samples:Null<Float>; }):MotionBlurEffect {
+  public static function createMotionBlurEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var intensity:Null<Float>; @:optional var samples:Null<Float>; }, String>):MotionBlurEffect {
     return cast Facade_Sdk_flight__Effects.createMotionBlurEffect(options);
     return cast null;
   }
@@ -6315,7 +6328,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createNode2DGizmoFeatures():GizmoNode2DFeatures<Node2D> {
+  public static function createNode2DGizmoFeatures():NonEntityCreateResult<GizmoNode2DFeatures<Node2D>, String> {
     return cast Facade_Sdk_flight__Gizmo.createNode2DGizmoFeatures();
     return cast null;
   }
@@ -6385,7 +6398,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createOrdinalTable<T>(registry:RegistryId, onMiss:RegistryMissPolicy, vocabulary:Array<Kind>):OrdinalTable<T> {
+  public static function createOrdinalTable<T>(registry:RegistryId, onMiss:RegistryMissPolicy, vocabulary:Array<Kind>):{ >OrdinalTable<T>, >Entity, } {
     return cast Facade_Sdk_flight__Registry.createOrdinalTable(registry, onMiss, vocabulary);
     return cast null;
   }
@@ -6395,22 +6408,22 @@ class Sdk {
     return cast null;
   }
 
-  public static function createOrthographicProjection(opts:OrthographicProjectionOptions):OrthographicProjection {
+  public static function createOrthographicProjection(opts:OrthographicProjectionOptions):{ >OrthographicProjection, >Entity, } {
     return cast Facade_Sdk_flight__Camera.createOrthographicProjection(opts);
     return cast null;
   }
 
-  public static function createOuterGlowEffect(?options:{ @:optional var alpha:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }):OuterGlowEffect {
+  public static function createOuterGlowEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var alpha:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }, String>):OuterGlowEffect {
     return cast Facade_Sdk_flight__Effects.createOuterGlowEffect(options);
     return cast null;
   }
 
-  public static function createOutlineEffect(?options:{ @:optional var threshold:Null<Float>; @:optional var thickness:Null<Float>; @:optional var color:Null<Float>; }):OutlineEffect {
+  public static function createOutlineEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var threshold:Null<Float>; @:optional var thickness:Null<Float>; @:optional var color:Null<Float>; }, String>):OutlineEffect {
     return cast Facade_Sdk_flight__Effects.createOutlineEffect(options);
     return cast null;
   }
 
-  public static function createPanniniProjectionEffect(?options:{ @:optional var compression:Null<Float>; @:optional var crop:Null<Float>; }):PanniniProjectionEffect {
+  public static function createPanniniProjectionEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var compression:Null<Float>; @:optional var crop:Null<Float>; }, String>):PanniniProjectionEffect {
     return cast Facade_Sdk_flight__Effects.createPanniniProjectionEffect(options);
     return cast null;
   }
@@ -6425,7 +6438,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createParticleEmitterConfig(?config:{ @:optional var alphaEnd:Null<Float>; @:optional var alphaStart:Null<Float>; @:optional var blendMode:Null<ParticleBlendMode>; @:optional var colorEndB:Null<Float>; @:optional var colorEndG:Null<Float>; @:optional var colorEndR:Null<Float>; @:optional var colorEndVarianceB:Null<Float>; @:optional var colorEndVarianceG:Null<Float>; @:optional var colorEndVarianceR:Null<Float>; @:optional var colorStartB:Null<Float>; @:optional var colorStartG:Null<Float>; @:optional var colorStartR:Null<Float>; @:optional var colorStartVarianceB:Null<Float>; @:optional var colorStartVarianceG:Null<Float>; @:optional var colorStartVarianceR:Null<Float>; @:optional var directionX:Null<Float>; @:optional var directionY:Null<Float>; @:optional var directionZ:Null<Float>; @:optional var gravityX:Null<Float>; @:optional var gravityY:Null<Float>; @:optional var gravityZ:Null<Float>; @:optional var emitterConeAngle:Null<Float>; @:optional var emitterDepth:Null<Float>; @:optional var emitterHeight:Null<Float>; @:optional var emitterRadius:Null<Float>; @:optional var emitterShape:Null<ParticleEmitterShape>; @:optional var emitterWidth:Null<Float>; @:optional var burstCount:Null<Float>; @:optional var burstInterval:Null<Float>; @:optional var duration:Null<Float>; @:optional var loop:Null<Bool>; @:optional var frameCount:Null<Float>; @:optional var frameRate:Null<Float>; @:optional var lifetimeMax:Null<Float>; @:optional var lifetimeMin:Null<Float>; @:optional var maxParticles:Null<Float>; @:optional var regionIdMax:Null<Float>; @:optional var regionIdMin:Null<Float>; @:optional var scaleEnd:Null<Float>; @:optional var scaleMax:Null<Float>; @:optional var scaleMin:Null<Float>; @:optional var speedMax:Null<Float>; @:optional var speedMin:Null<Float>; @:optional var spawnRate:Null<Float>; @:optional var spread:Null<Float>; @:optional var rotationSpeedMax:Null<Float>; @:optional var rotationSpeedMin:Null<Float>; @:optional var velocityInheritance:Null<Float>; @:optional var alphaCurve:Null<ParticleCurve>; @:optional var colorCurve:Null<ParticleCurve>; @:optional var scaleCurve:Null<ParticleCurve>; @:optional var worldSpace:Null<Bool>; }):ParticleEmitterConfig {
+  public static function createParticleEmitterConfig(?config:{ @:optional var alphaEnd:Null<Float>; @:optional var alphaStart:Null<Float>; @:optional var blendMode:Null<ParticleBlendMode>; @:optional var colorEndB:Null<Float>; @:optional var colorEndG:Null<Float>; @:optional var colorEndR:Null<Float>; @:optional var colorEndVarianceB:Null<Float>; @:optional var colorEndVarianceG:Null<Float>; @:optional var colorEndVarianceR:Null<Float>; @:optional var colorStartB:Null<Float>; @:optional var colorStartG:Null<Float>; @:optional var colorStartR:Null<Float>; @:optional var colorStartVarianceB:Null<Float>; @:optional var colorStartVarianceG:Null<Float>; @:optional var colorStartVarianceR:Null<Float>; @:optional var directionX:Null<Float>; @:optional var directionY:Null<Float>; @:optional var directionZ:Null<Float>; @:optional var gravityX:Null<Float>; @:optional var gravityY:Null<Float>; @:optional var gravityZ:Null<Float>; @:optional var emitterConeAngle:Null<Float>; @:optional var emitterDepth:Null<Float>; @:optional var emitterHeight:Null<Float>; @:optional var emitterRadius:Null<Float>; @:optional var emitterShape:Null<ParticleEmitterShape>; @:optional var emitterWidth:Null<Float>; @:optional var burstCount:Null<Float>; @:optional var burstInterval:Null<Float>; @:optional var duration:Null<Float>; @:optional var loop:Null<Bool>; @:optional var frameCount:Null<Float>; @:optional var frameRate:Null<Float>; @:optional var lifetimeMax:Null<Float>; @:optional var lifetimeMin:Null<Float>; @:optional var maxParticles:Null<Float>; @:optional var regionIdMax:Null<Float>; @:optional var regionIdMin:Null<Float>; @:optional var scaleEnd:Null<Float>; @:optional var scaleMax:Null<Float>; @:optional var scaleMin:Null<Float>; @:optional var speedMax:Null<Float>; @:optional var speedMin:Null<Float>; @:optional var spawnRate:Null<Float>; @:optional var spread:Null<Float>; @:optional var rotationSpeedMax:Null<Float>; @:optional var rotationSpeedMin:Null<Float>; @:optional var velocityInheritance:Null<Float>; @:optional var alphaCurve:Null<ParticleCurve>; @:optional var colorCurve:Null<ParticleCurve>; @:optional var scaleCurve:Null<ParticleCurve>; @:optional var worldSpace:Null<Bool>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):ParticleEmitterConfig {
     return cast Facade_Sdk_flight__Particles.createParticleEmitterConfig(config);
     return cast null;
   }
@@ -6455,7 +6468,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createPerspectiveProjection(opts:PerspectiveProjectionOptions):PerspectiveProjection {
+  public static function createPerspectiveProjection(opts:PerspectiveProjectionOptions):{ >PerspectiveProjection, >Entity, } {
     return cast Facade_Sdk_flight__Camera.createPerspectiveProjection(opts);
     return cast null;
   }
@@ -6510,7 +6523,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createPhysics2DColliderWorldShape(local:CollisionBuiltInShape2D):CollisionBuiltInShape2D {
+  public static function createPhysics2DColliderWorldShape(local:CollisionBuiltInShape2D):flight._internal._Intersection2<CollisionBuiltInShape2D, Entity> {
     return cast Facade_Sdk_flight__Physics2D.createPhysics2DColliderWorldShape(local);
     return cast null;
   }
@@ -6550,7 +6563,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createPhysics2DQueryFilter():Physics2DQueryFilter {
+  public static function createPhysics2DQueryFilter():NonEntityCreateResult<Physics2DQueryFilter, String> {
     return cast Facade_Sdk_flight__Physics2D.createPhysics2DQueryFilter();
     return cast null;
   }
@@ -6580,7 +6593,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createPhysics2DSolverConfig():Physics2DSolverConfig {
+  public static function createPhysics2DSolverConfig():NonEntityCreateResult<Physics2DSolverConfig, String> {
     return cast Facade_Sdk_flight__Physics2D.createPhysics2DSolverConfig();
     return cast null;
   }
@@ -6700,7 +6713,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createPhysics3DQueryFilter():Physics3DQueryFilter {
+  public static function createPhysics3DQueryFilter():NonEntityCreateResult<Physics3DQueryFilter, String> {
     return cast Facade_Sdk_flight__Physics3D.createPhysics3DQueryFilter();
     return cast null;
   }
@@ -6715,7 +6728,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createPhysics3DSequentialImpulseConfig():Physics3DSequentialImpulseConfig {
+  public static function createPhysics3DSequentialImpulseConfig():NonEntityCreateResult<Physics3DSequentialImpulseConfig, String> {
     return cast Facade_Sdk_flight__Physics3D.createPhysics3DSequentialImpulseConfig();
     return cast null;
   }
@@ -6730,7 +6743,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createPhysics3DSolverConfig():Physics3DSolverConfig {
+  public static function createPhysics3DSolverConfig():NonEntityCreateResult<Physics3DSolverConfig, String> {
     return cast Facade_Sdk_flight__Physics3D.createPhysics3DSolverConfig();
     return cast null;
   }
@@ -6745,7 +6758,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createPixelateEffect(?options:{ @:optional var size:Null<Float>; }):PixelateEffect {
+  public static function createPixelateEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var size:Null<Float>; }, String>):PixelateEffect {
     return cast Facade_Sdk_flight__Effects.createPixelateEffect(options);
     return cast null;
   }
@@ -6775,7 +6788,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createPosterizeEffect(?options:{ @:optional var levels:Null<Float>; }):PosterizeEffect {
+  public static function createPosterizeEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var levels:Null<Float>; }, String>):PosterizeEffect {
     return cast Facade_Sdk_flight__Effects.createPosterizeEffect(options);
     return cast null;
   }
@@ -6815,7 +6828,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createRadialBlurEffect(?options:{ @:optional var centerX:Null<Float>; @:optional var centerY:Null<Float>; @:optional var strength:Null<Float>; @:optional var samples:Null<Float>; }):RadialBlurEffect {
+  public static function createRadialBlurEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var centerX:Null<Float>; @:optional var centerY:Null<Float>; @:optional var strength:Null<Float>; @:optional var samples:Null<Float>; }, String>):RadialBlurEffect {
     return cast Facade_Sdk_flight__Effects.createRadialBlurEffect(options);
     return cast null;
   }
@@ -6835,8 +6848,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function createRaster2DSurface(width:Float, height:Float):Null<Raster2DSurface> {
-    return cast Facade_Sdk_flight__Render.createRaster2DSurface(width, height);
+  public static function createRaster2DSurface(provider:Raster2DSurfaceProvider, width:Float, height:Float):Null<Raster2DSurface> {
+    return cast Facade_Sdk_flight__Render.createRaster2DSurface(provider, width, height);
     return cast null;
   }
 
@@ -6860,7 +6873,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createRegistryCodegenPlan(catalog:RegistryCatalog, requirements:RequirementSet, backend:String):RegistryCodegenPlan {
+  public static function createRegistryCodegenPlan(catalog:RegistryCatalog, requirements:RequirementSet, backend:String):{ >RegistryCodegenPlan, >Entity, } {
     return cast Facade_Sdk_flight__RegistryCodegen.createRegistryCodegenPlan(catalog, requirements, backend);
     return cast null;
   }
@@ -6960,7 +6973,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createScanlinesEffect(?options:{ @:optional var count:Null<Float>; @:optional var intensity:Null<Float>; }):ScanlinesEffect {
+  public static function createScale9Sprite(scale9Grid:RectangleLike, ?obj:PartialNode<Scale9Sprite>):Scale9Sprite {
+    return cast Facade_Sdk_flight__Scene2D.createScale9Sprite(scale9Grid, obj);
+    return cast null;
+  }
+
+  public static function createScanlinesEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var count:Null<Float>; @:optional var intensity:Null<Float>; }, String>):ScanlinesEffect {
     return cast Facade_Sdk_flight__Effects.createScanlinesEffect(options);
     return cast null;
   }
@@ -7010,7 +7028,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createScene2DKindUsage():Scene2DKindUsage {
+  public static function createScene2DKindUsage():{ >Scene2DKindUsage, >Entity, } {
     return cast Facade_Sdk_flight__Scene2D.createScene2DKindUsage();
     return cast null;
   }
@@ -7090,8 +7108,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function createScene3DResourceResolver(?options:Scene3DResourceResolverOptions):Scene3DResourceResolverWithRuntime {
-    return cast Facade_Sdk_flight__Scene3DResources.createScene3DResourceResolver(options);
+  public static function createScene3DResourceResolver(host:HasGraphicsImage, ?options:Scene3DResourceResolverOptions):Scene3DResourceResolverWithRuntime {
+    return cast Facade_Sdk_flight__Scene3DResources.createScene3DResourceResolver(host, options);
     return cast null;
   }
 
@@ -7130,7 +7148,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createScreenSpaceFogEffect(?options:{ @:optional var color:Null<Float>; @:optional var near:Null<Float>; @:optional var far:Null<Float>; @:optional var density:Null<Float>; }):ScreenSpaceFogEffect {
+  public static function createScreenSpaceFogEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var color:Null<Float>; @:optional var near:Null<Float>; @:optional var far:Null<Float>; @:optional var density:Null<Float>; }, String>):ScreenSpaceFogEffect {
     return cast Facade_Sdk_flight__Effects.createScreenSpaceFogEffect(options);
     return cast null;
   }
@@ -7185,12 +7203,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createShapedRun():ShapedRun {
+  public static function createShapedRun():{ >ShapedRun, >Entity, } {
     return cast Facade_Sdk_flight__TextShaper.createShapedRun();
     return cast null;
   }
 
-  public static function createSharpenEffect(?options:{ @:optional var amount:Null<Float>; }):SharpenEffect {
+  public static function createSharpenEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var amount:Null<Float>; }, String>):SharpenEffect {
     return cast Facade_Sdk_flight__Effects.createSharpenEffect(options);
     return cast null;
   }
@@ -7235,8 +7253,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSketchEffect(?options:{ @:optional var strength:Null<Float>; }):SketchEffect {
+  public static function createSketchEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var strength:Null<Float>; }, String>):SketchEffect {
     return cast Facade_Sdk_flight__Effects.createSketchEffect(options);
+    return cast null;
+  }
+
+  public static function createSkin2D(influenceCounts:flight._internal._UInt16Array, influences:flight._internal._Float32Array):Skin2D {
+    return cast Facade_Sdk_flight__Skeleton2D.createSkin2D(influenceCounts, influences);
     return cast null;
   }
 
@@ -7250,12 +7273,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSlotTable<T>(registry:RegistryId, onMiss:RegistryMissPolicy):SlotTable<T> {
+  public static function createSlotTable<T>(registry:RegistryId, onMiss:RegistryMissPolicy):{ >SlotTable<T>, >Entity, } {
     return cast Facade_Sdk_flight__Registry.createSlotTable(registry, onMiss);
     return cast null;
   }
 
-  public static function createSmaaEffect(?options:{ @:optional var threshold:Null<Float>; }):SmaaEffect {
+  public static function createSmaaEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var threshold:Null<Float>; }, String>):SmaaEffect {
     return cast Facade_Sdk_flight__Effects.createSmaaEffect(options);
     return cast null;
   }
@@ -7345,7 +7368,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSpritesheetAnimationData(?obj:{ @:optional var direction:Null<SpritesheetAnimationDirection>; @:optional var frameDuration:Null<Float>; @:optional var frameDurations:Null<Array<Float>>; @:optional var frameNames:Null<Array<String>>; @:optional var repeatCount:Null<Float>; @:optional var name:Null<String>; @:optional var originX:Null<Float>; @:optional var originY:Null<Float>; }):SpritesheetAnimationData {
+  public static function createSpritesheetAnimationData(?obj:{ @:optional var direction:Null<SpritesheetAnimationDirection>; @:optional var frameDuration:Null<Float>; @:optional var frameDurations:Null<Array<Float>>; @:optional var frameNames:Null<Array<String>>; @:optional var repeatCount:Null<Float>; @:optional var name:Null<String>; @:optional var originX:Null<Float>; @:optional var originY:Null<Float>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):SpritesheetAnimationData {
     return cast Facade_Sdk_flight__Spritesheet.createSpritesheetAnimationData(obj);
     return cast null;
   }
@@ -7355,17 +7378,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSpritesheetData(?obj:{ @:optional var animations:Null<Array<SpritesheetAnimationData>>; @:optional var frames:Null<Array<SpritesheetFrameData>>; @:optional var imageFile:Null<String>; @:optional var imageHeight:Null<Float>; @:optional var imageWidth:Null<Float>; @:optional var scale:Null<Float>; }):SpritesheetData {
+  public static function createSpritesheetData(?obj:{ @:optional var animations:Null<Array<SpritesheetAnimationData>>; @:optional var frames:Null<Array<SpritesheetFrameData>>; @:optional var imageFile:Null<String>; @:optional var imageHeight:Null<Float>; @:optional var imageWidth:Null<Float>; @:optional var scale:Null<Float>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):SpritesheetData {
     return cast Facade_Sdk_flight__Spritesheet.createSpritesheetData(obj);
     return cast null;
   }
 
-  public static function createSpritesheetFrame(?obj:{ @:optional var id:Null<Float>; @:optional var offsetX:Null<Float>; @:optional var offsetY:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var rotated:Null<Bool>; }):SpritesheetFrame {
+  public static function createSpritesheetFrame(?obj:{ @:optional var id:Null<Float>; @:optional var offsetX:Null<Float>; @:optional var offsetY:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var rotated:Null<Bool>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):SpritesheetFrame {
     return cast Facade_Sdk_flight__Spritesheet.createSpritesheetFrame(obj);
     return cast null;
   }
 
-  public static function createSpritesheetFrameData(?obj:{ @:optional var height:Null<Float>; @:optional var name:Null<String>; @:optional var offsetX:Null<Float>; @:optional var offsetY:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var rotated:Null<Bool>; @:optional var sourceHeight:Null<Float>; @:optional var sourceWidth:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; }):SpritesheetFrameData {
+  public static function createSpritesheetFrameData(?obj:{ @:optional var height:Null<Float>; @:optional var name:Null<String>; @:optional var offsetX:Null<Float>; @:optional var offsetY:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var rotated:Null<Bool>; @:optional var sourceHeight:Null<Float>; @:optional var sourceWidth:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):SpritesheetFrameData {
     return cast Facade_Sdk_flight__Spritesheet.createSpritesheetFrameData(obj);
     return cast null;
   }
@@ -7380,22 +7403,22 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSpritesheetPlayer(?obj:{ @:optional var animation:Null<SpritesheetAnimation>; @:optional var complete:Null<Bool>; @:optional var elapsed:Null<Float>; @:optional var paused:Null<Bool>; @:optional var speed:Null<Float>; @:optional var frameIndex:Null<Float>; @:optional var onComplete:Null<Signal<Void->Void>>; @:optional var onLoop:Null<Signal<Void->Void>>; @:optional var queue:Null<Array<SpritesheetAnimation>>; }):SpritesheetPlayer {
+  public static function createSpritesheetPlayer(?obj:{ @:optional var animation:Null<SpritesheetAnimation>; @:optional var complete:Null<Bool>; @:optional var elapsed:Null<Float>; @:optional var paused:Null<Bool>; @:optional var speed:Null<Float>; @:optional var frameIndex:Null<Float>; @:optional var onComplete:Null<Signal<Void->Void>>; @:optional var onLoop:Null<Signal<Void->Void>>; @:optional var queue:Null<Array<SpritesheetAnimation>>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):SpritesheetPlayer {
     return cast Facade_Sdk_flight__Spritesheet.createSpritesheetPlayer(obj);
     return cast null;
   }
 
-  public static function createSpritesheetTimelineSource(spritesheet:Spritesheet, animation:SpritesheetAnimation):TimelineSource {
+  public static function createSpritesheetTimelineSource(spritesheet:Spritesheet, animation:SpritesheetAnimation):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var totalFrames:Float; var labels:Array<TimelineLabel>; var cues:Array<TimelineCue>; var frameRate:Null<Float>; var constructFrame:Node2D->Float->Void; } {
     return cast Facade_Sdk_flight__MovieClip.createSpritesheetTimelineSource(spritesheet, animation);
     return cast null;
   }
 
-  public static function createSsaoEffect(?options:{ @:optional var radius:Null<Float>; @:optional var intensity:Null<Float>; @:optional var bias:Null<Float>; @:optional var samples:Null<Float>; }):SsaoEffect {
+  public static function createSsaoEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var radius:Null<Float>; @:optional var intensity:Null<Float>; @:optional var bias:Null<Float>; @:optional var samples:Null<Float>; }, String>):SsaoEffect {
     return cast Facade_Sdk_flight__Effects.createSsaoEffect(options);
     return cast null;
   }
 
-  public static function createSsrEffect(?options:{ @:optional var maxDistance:Null<Float>; @:optional var resolution:Null<Float>; @:optional var steps:Null<Float>; }):SsrEffect {
+  public static function createSsrEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var maxDistance:Null<Float>; @:optional var resolution:Null<Float>; @:optional var steps:Null<Float>; }, String>):SsrEffect {
     return cast Facade_Sdk_flight__Effects.createSsrEffect(options);
     return cast null;
   }
@@ -7410,7 +7433,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createStandardPbrMaterialProperties(?opts:{ @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterialProperties {
+  public static function createStandardPbrMaterialProperties(?opts:{ @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):NonEntityCreateResult<StandardPbrMaterialProperties, String> {
     return cast Facade_Sdk_flight__Materials.createStandardPbrMaterialProperties(opts);
     return cast null;
   }
@@ -7440,7 +7463,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createTaaEffect(?options:{ @:optional var feedback:Null<Float>; }):TaaEffect {
+  public static function createTaaEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var feedback:Null<Float>; }, String>):TaaEffect {
     return cast Facade_Sdk_flight__Effects.createTaaEffect(options);
     return cast null;
   }
@@ -7554,12 +7577,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createTiltShiftEffect(?options:{ @:optional var center:Null<Float>; @:optional var width:Null<Float>; @:optional var blur:Null<Float>; }):TiltShiftEffect {
+  public static function createTiltShiftEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var center:Null<Float>; @:optional var width:Null<Float>; @:optional var blur:Null<Float>; }, String>):TiltShiftEffect {
     return cast Facade_Sdk_flight__Effects.createTiltShiftEffect(options);
     return cast null;
   }
 
-  public static function createTimeline(?obj:{ @:optional var source:Null<TimelineSource>; @:optional var target:Null<Node2D>; @:optional var currentFrame:Null<Float>; @:optional var cueRegistry:Null<TimelineCueRegistry>; @:optional var frameScripts:Null<flight._internal._Map<Float, FrameScript>>; @:optional var isPlaying:Null<Bool>; @:optional var timeElapsed:Null<Float>; @:optional var lastFrameUpdate:Null<Float>; @:optional var playMode:Null<TimelinePlayMode>; @:optional var signals:Null<TimelineSignals>; }):Timeline {
+  public static function createTimeline(?obj:{ @:optional var source:Null<TimelineSource>; @:optional var target:Null<Node2D>; @:optional var currentFrame:Null<Float>; @:optional var cueRegistry:Null<TimelineCueRegistry>; @:optional var frameScripts:Null<flight._internal._Map<Float, FrameScript>>; @:optional var isPlaying:Null<Bool>; @:optional var timeElapsed:Null<Float>; @:optional var lastFrameUpdate:Null<Float>; @:optional var playMode:Null<TimelinePlayMode>; @:optional var signals:Null<TimelineSignals>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):Timeline {
     return cast Facade_Sdk_flight__Timeline.createTimeline(obj);
     return cast null;
   }
@@ -7579,7 +7602,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createToneMapEffect(?options:{ @:optional var operator_:Null<ToneMapOperator>; @:optional var exposure:Null<Float>; @:optional var white:Null<Float>; }):ToneMapEffect {
+  public static function createToneMapEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var operator_:Null<ToneMapOperator>; @:optional var exposure:Null<Float>; @:optional var white:Null<Float>; }, String>):ToneMapEffect {
     return cast Facade_Sdk_flight__Effects.createToneMapEffect(options);
     return cast null;
   }
@@ -7721,8 +7744,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function createVideoResourceFromMediaStream(stream:flight._internal.dom.MediaStream):Null<VideoResource> {
-    return cast Facade_Sdk_flight__Video.createVideoResourceFromMediaStream(stream);
+  public static function createVideoResourceFromMediaStream(backend:VideoCapabilityBackend, stream:flight._internal.dom.MediaStream):Null<VideoResource> {
+    return cast Facade_Sdk_flight__Video.createVideoResourceFromMediaStream(backend, stream);
     return cast null;
   }
 
@@ -7736,13 +7759,18 @@ class Sdk {
     return cast null;
   }
 
-  public static function createVignetteEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var radius:Null<Float>; @:optional var softness:Null<Float>; @:optional var color:Null<Float>; }):VignetteEffect {
+  public static function createVignetteEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var intensity:Null<Float>; @:optional var radius:Null<Float>; @:optional var softness:Null<Float>; @:optional var color:Null<Float>; }, String>):VignetteEffect {
     return cast Facade_Sdk_flight__Effects.createVignetteEffect(options);
     return cast null;
   }
 
-  public static function createVolumetricLightEffect(?options:{ @:optional var density:Null<Float>; @:optional var lightColor:Null<Float>; @:optional var lightX:Null<Float>; @:optional var lightY:Null<Float>; @:optional var samples:Null<Float>; @:optional var scattering:Null<Float>; }):VolumetricLightEffect {
+  public static function createVolumetricLightEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var density:Null<Float>; @:optional var lightColor:Null<Float>; @:optional var lightX:Null<Float>; @:optional var lightY:Null<Float>; @:optional var samples:Null<Float>; @:optional var scattering:Null<Float>; }, String>):VolumetricLightEffect {
     return cast Facade_Sdk_flight__Effects.createVolumetricLightEffect(options);
+    return cast null;
+  }
+
+  public static function createWebImageResourceFetch(host:HasGraphicsImage):ImageResourceFetch {
+    return cast Facade_Sdk_flight__Scene3DResources.createWebImageResourceFetch(host);
     return cast null;
   }
 
@@ -7813,7 +7841,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createWhiteBalanceEffect(?options:{ @:optional var temperature:Null<Float>; @:optional var tint:Null<Float>; }):WhiteBalanceEffect {
+  public static function createWhiteBalanceEffect(?options:flight._internal._Omit<{ var kind:String; @:optional var temperature:Null<Float>; @:optional var tint:Null<Float>; }, String>):WhiteBalanceEffect {
     return cast Facade_Sdk_flight__Effects.createWhiteBalanceEffect(options);
     return cast null;
   }
@@ -8031,6 +8059,8 @@ class Sdk {
 
   public static final defaultDomScale9ShapeRenderer:Scene2DRenderer = Facade_Sdk_flight__Scene2DDom.defaultDomScale9ShapeRenderer;
 
+  public static final defaultDomScale9SpriteRenderer:Scene2DRenderer = Facade_Sdk_flight__Scene2DDom.defaultDomScale9SpriteRenderer;
+
   public static final defaultDomShapeRenderer:Scene2DRenderer = Facade_Sdk_flight__Scene2DDom.defaultDomShapeRenderer;
 
   public static final defaultDomSpriteRenderer:Scene2DRenderer = Facade_Sdk_flight__Scene2DDom.defaultDomSpriteRenderer;
@@ -8130,6 +8160,8 @@ class Sdk {
   public static final defaultGlRichTextRenderer:Scene2DRenderer = Facade_Sdk_flight__Scene2DGl.defaultGlRichTextRenderer;
 
   public static final defaultGlScale9ShapeRenderer:Scene2DRenderer = Facade_Sdk_flight__Scene2DGl.defaultGlScale9ShapeRenderer;
+
+  public static final defaultGlScale9SpriteRenderer:Scene2DRenderer = Facade_Sdk_flight__Scene2DGl.defaultGlScale9SpriteRenderer;
 
   public static final defaultGlScanlinesEffectRunner:GlRenderEffectRunner = Facade_Sdk_flight__EffectsGl.defaultGlScanlinesEffectRunner;
 
@@ -8256,6 +8288,8 @@ class Sdk {
   public static final defaultWgpuRichTextRenderer:Scene2DRenderer = Facade_Sdk_flight__Scene2DWgpu.defaultWgpuRichTextRenderer;
 
   public static final defaultWgpuScale9ShapeRenderer:Scene2DRenderer = Facade_Sdk_flight__Scene2DWgpu.defaultWgpuScale9ShapeRenderer;
+
+  public static final defaultWgpuScale9SpriteRenderer:Scene2DRenderer = Facade_Sdk_flight__Scene2DWgpu.defaultWgpuScale9SpriteRenderer;
 
   public static final defaultWgpuScanlinesEffectRunner:WgpuRenderEffectRunner = Facade_Sdk_flight__EffectsWgpu.defaultWgpuScanlinesEffectRunner;
 
@@ -9340,6 +9374,10 @@ class Sdk {
     Facade_Sdk_flight__RenderGl.drawGlQuad(state, x0, y0, x1, y1, u0, v0, u1, v1);
   }
 
+  public static function drawGlScale9Sprite(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+    Facade_Sdk_flight__Scene2DGl.drawGlScale9Sprite(state, renderProxy);
+  }
+
   public static function drawGlScene3D(state:GlRenderState, scene:Node3D, camera:Camera3D, lights:Scene3DLightsLike, ?forwardLights:GlScene3DForwardLightList):Void {
     Facade_Sdk_flight__Scene3DGl.drawGlScene3D(state, scene, camera, lights, forwardLights);
   }
@@ -9354,6 +9392,10 @@ class Sdk {
 
   public static function drawWgpuEnvironmentSkybox(state:WgpuRenderState, environment:Environment, camera:Camera3D, aspect:Float):Void {
     Facade_Sdk_flight__Scene3DWgpu.drawWgpuEnvironmentSkybox(state, environment, camera, aspect);
+  }
+
+  public static function drawWgpuScale9Sprite(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+    Facade_Sdk_flight__Scene2DWgpu.drawWgpuScale9Sprite(state, renderProxy);
   }
 
   public static function drawWgpuScene3D(state:WgpuRenderState, scene:Node3D, camera:Camera3D, lights:Scene3DLightsLike, ?forwardLights:WgpuScene3DForwardLightList):Void {
@@ -9934,8 +9976,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function encodeBitmap(source:Bitmap, ?format:ImageFormat, ?quality:Float):Null<flight._internal._UInt8Array> {
-    return cast Facade_Sdk_flight__Bitmap.encodeBitmap(source, format, quality);
+  public static function encodeBitmap(host:HasGraphicsBitmapEncode, source:Bitmap, ?format:ImageFormat, ?quality:Float):Null<flight._internal._UInt8Array> {
+    return cast Facade_Sdk_flight__Bitmap.encodeBitmap(host, source, format, quality);
     return cast null;
   }
 
@@ -10209,33 +10251,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function explainAudioDeviceBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Media.explainAudioDeviceBackend();
-    return cast null;
-  }
-
-  public static function explainAudioDeviceOperation(operation:AudioDeviceOperation):BackendOperationExplanation {
-    return cast Facade_Sdk_flight__Media.explainAudioDeviceOperation(operation);
-    return cast null;
-  }
-
   public static function explainAudioResourceReferenceResolution(ref:AudioResourceReference):AudioResourceReferenceResolutionExplanation {
     return cast Facade_Sdk_flight__Audio.explainAudioResourceReferenceResolution(ref);
     return cast null;
   }
 
-  public static function explainBitmapEncodeBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Bitmap.explainBitmapEncodeBackend();
-    return cast null;
-  }
-
-  public static function explainBitmapEncodeFailure(format:ImageFormat):Null<BitmapEncodeFailureExplanation> {
-    return cast Facade_Sdk_flight__Bitmap.explainBitmapEncodeFailure(format);
-    return cast null;
-  }
-
-  public static function explainBitmapEncodeOperation(operation:BitmapEncodeOperation):BackendOperationExplanation {
-    return cast Facade_Sdk_flight__Bitmap.explainBitmapEncodeOperation(operation);
+  public static function explainBitmapEncodeFailure(host:HasGraphicsBitmapEncode, format:ImageFormat):Null<BitmapEncodeFailureExplanation> {
+    return cast Facade_Sdk_flight__Bitmap.explainBitmapEncodeFailure(host, format);
     return cast null;
   }
 
@@ -10244,8 +10266,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function explainBitmapReadback(source:flight._internal.dom.CanvasImageSource, width:Float, height:Float):BitmapReadbackExplanation {
-    return cast Facade_Sdk_flight__Bitmap.explainBitmapReadback(source, width, height);
+  public static function explainBitmapReadback(host:HasGraphicsBitmapReadback, source:flight._internal.dom.CanvasImageSource, width:Float, height:Float):BitmapReadbackExplanation {
+    return cast Facade_Sdk_flight__Bitmap.explainBitmapReadback(host, source, width, height);
     return cast null;
   }
 
@@ -10318,11 +10340,6 @@ class Sdk {
     return cast null;
   }
 
-  public static function explainGeolocationBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Geolocation.explainGeolocationBackend();
-    return cast null;
-  }
-
   public static function explainGlPbrExtensions(state:GlRenderState, extensions:Array<PbrExtension>):Array<GlPbrExtensionIssue> {
     return cast Facade_Sdk_flight__Scene3DGl.explainGlPbrExtensions(state, extensions);
     return cast null;
@@ -10366,16 +10383,6 @@ class Sdk {
     return cast null;
   }
 
-  public static function explainGlyphRasterizerBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__GlyphAtlas.explainGlyphRasterizerBackend();
-    return cast null;
-  }
-
-  public static function explainImageBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Image.explainImageBackend();
-    return cast null;
-  }
-
   public static function explainImageDecodeFailure(bytes:flight._internal._UInt8Array, ?mimeType:String):Null<ImageDecodeFailureExplanation> {
     return cast Facade_Sdk_flight__ImageCodec.explainImageDecodeFailure(bytes, mimeType);
     return cast null;
@@ -10383,11 +10390,6 @@ class Sdk {
 
   public static function explainImageEncodeFailure(mimeType:String):Null<ImageEncodeFailureExplanation> {
     return cast Facade_Sdk_flight__ImageCodec.explainImageEncodeFailure(mimeType);
-    return cast null;
-  }
-
-  public static function explainImageOperation(operation:ImageBackendOperation):BackendOperationExplanation {
-    return cast Facade_Sdk_flight__Image.explainImageOperation(operation);
     return cast null;
   }
 
@@ -10453,11 +10455,6 @@ class Sdk {
 
   public static function explainPhysics3DStep(world:Physics3DWorld, dt:Float):Physics3DStepExplanation {
     return cast Facade_Sdk_flight__Physics3D.explainPhysics3DStep(world, dt);
-    return cast null;
-  }
-
-  public static function explainRaster2DSurfaceProvider():BackendExplanation {
-    return cast Facade_Sdk_flight__Render.explainRaster2DSurfaceProvider();
     return cast null;
   }
 
@@ -10550,16 +10547,6 @@ class Sdk {
     return cast null;
   }
 
-  public static function explainVideoCapabilityBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Video.explainVideoCapabilityBackend();
-    return cast null;
-  }
-
-  public static function explainVideoCapabilityOperation(operation:VideoCapabilityOperation):BackendOperationExplanation {
-    return cast Facade_Sdk_flight__Video.explainVideoCapabilityOperation(operation);
-    return cast null;
-  }
-
   public static function explainWgpuRenderTexture(state:WgpuRenderState, renderTexture:RenderTexture):WgpuRenderTextureExplanation {
     return cast Facade_Sdk_flight__RenderWgpu.explainWgpuRenderTexture(state, renderTexture);
     return cast null;
@@ -10605,11 +10592,6 @@ class Sdk {
 
   public static function fadeAudioChannelGain(channel:AudioChannel, targetGain:Float, durationMs:Float):Void {
     Facade_Sdk_flight__Media.fadeAudioChannelGain(channel, targetGain, durationMs);
-  }
-
-  public static function fetchWebImageResource(ref:ExternalImageResourceReference, signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<ImageResource>> {
-    return cast Facade_Sdk_flight__Scene3DResources.fetchWebImageResource(ref, signal);
-    return cast null;
   }
 
   public static function fileExists(host:HasStorageFileSystem, path:String):flight._internal._Promise<Bool> {
@@ -11226,11 +11208,6 @@ class Sdk {
     return cast null;
   }
 
-  public static function getAudioDeviceBackend():AudioDeviceBackend {
-    return cast Facade_Sdk_flight__Media.getAudioDeviceBackend();
-    return cast null;
-  }
-
   public static function getAudioMimeTypeEssence(mimeType:String):String {
     return cast Facade_Sdk_flight__Audio.getAudioMimeTypeEssence(mimeType);
     return cast null;
@@ -11712,13 +11689,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function getCurrentGeoPosition(?options:GeolocationRequestOptions):flight._internal._Promise<Null<GeoPosition>> {
-    return cast Facade_Sdk_flight__Geolocation.getCurrentGeoPosition(options);
+  public static function getCurrentGeoPosition(host:HasSystemGeolocation, ?options:GeolocationRequestOptions):flight._internal._Promise<Null<GeoPosition>> {
+    return cast Facade_Sdk_flight__Geolocation.getCurrentGeoPosition(host, options);
     return cast null;
   }
 
-  public static function getCurrentGeoPositionResult(?options:GeolocationRequestOptions):flight._internal._Promise<GeoPositionResult> {
-    return cast Facade_Sdk_flight__Geolocation.getCurrentGeoPositionResult(options);
+  public static function getCurrentGeoPositionResult(host:HasSystemGeolocation, ?options:GeolocationRequestOptions):flight._internal._Promise<GeoPositionResult> {
+    return cast Facade_Sdk_flight__Geolocation.getCurrentGeoPositionResult(host, options);
     return cast null;
   }
 
@@ -11990,11 +11967,6 @@ class Sdk {
     return cast null;
   }
 
-  public static function getGlyphRasterizerBackend():GlyphRasterizerBackend {
-    return cast Facade_Sdk_flight__GlyphAtlas.getGlyphRasterizerBackend();
-    return cast null;
-  }
-
   public static function getGradientBevelEffectPadding(effect:GradientBevelEffect):RenderEffectPadding {
     return cast Facade_Sdk_flight__Effects.getGradientBevelEffectPadding(effect);
     return cast null;
@@ -12057,6 +12029,16 @@ class Sdk {
 
   public static function getInputGamepadAxis(state:InputState, gamepad:Float, axis:Float):Float {
     return cast Facade_Sdk_flight__Input.getInputGamepadAxis(state, gamepad, axis);
+    return cast null;
+  }
+
+  public static function getInstancedMeshInstanceColor(source:InstancedMesh, index:Float):Float {
+    return cast Facade_Sdk_flight__Scene3D.getInstancedMeshInstanceColor(source, index);
+    return cast null;
+  }
+
+  public static function getInstancedMeshInstanceMatrix(out:Matrix4, source:InstancedMesh, index:Float):Matrix4 {
+    return cast Facade_Sdk_flight__Scene3D.getInstancedMeshInstanceMatrix(out, source, index);
     return cast null;
   }
 
@@ -14351,13 +14333,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function hasAudioChannelFade():Bool {
-    return cast Facade_Sdk_flight__Media.hasAudioChannelFade();
+  public static function hasAudioChannelFade(backend:AudioDeviceBackend):Bool {
+    return cast Facade_Sdk_flight__Media.hasAudioChannelFade(backend);
     return cast null;
   }
 
-  public static function hasAudioChannelNodeAccess():Bool {
-    return cast Facade_Sdk_flight__Media.hasAudioChannelNodeAccess();
+  public static function hasAudioChannelNodeAccess(backend:AudioDeviceBackend):Bool {
+    return cast Facade_Sdk_flight__Media.hasAudioChannelNodeAccess(backend);
     return cast null;
   }
 
@@ -14366,13 +14348,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function hasAudioDeviceOperation(operation:AudioDeviceOperation):Bool {
-    return cast Facade_Sdk_flight__Media.hasAudioDeviceOperation(operation);
-    return cast null;
-  }
-
-  public static function hasAudioDeviceWebNodeAccess():Bool {
-    return cast Facade_Sdk_flight__Media.hasAudioDeviceWebNodeAccess();
+  public static function hasAudioDeviceWebNodeAccess(backend:AudioDeviceBackend):Bool {
+    return cast Facade_Sdk_flight__Media.hasAudioDeviceWebNodeAccess(backend);
     return cast null;
   }
 
@@ -14383,11 +14360,6 @@ class Sdk {
 
   public static function hasBarometer(host:HasSystemSensors):Bool {
     return cast Facade_Sdk_flight__Sensors.hasBarometer(host);
-    return cast null;
-  }
-
-  public static function hasBitmapEncodeOperation(operation:BitmapEncodeOperation):Bool {
-    return cast Facade_Sdk_flight__Bitmap.hasBitmapEncodeOperation(operation);
     return cast null;
   }
 
@@ -14501,11 +14473,6 @@ class Sdk {
     return cast null;
   }
 
-  public static function hasImageOperation(operation:ImageBackendOperation):Bool {
-    return cast Facade_Sdk_flight__Image.hasImageOperation(operation);
-    return cast null;
-  }
-
   public static function hasLightInfluenceOnBounds(light:Light, bounds:BoundingSphereLike):Bool {
     return cast Facade_Sdk_flight__Lighting.hasLightInfluenceOnBounds(light, bounds);
     return cast null;
@@ -14608,11 +14575,6 @@ class Sdk {
 
   public static function hasVelocity(field:VelocityField, source:flight._internal._Object):Bool {
     return cast Facade_Sdk_flight__Velocity.hasVelocity(field, source);
-    return cast null;
-  }
-
-  public static function hasVideoCapabilityOperation(operation:VideoCapabilityOperation):Bool {
-    return cast Facade_Sdk_flight__Video.hasVideoCapabilityOperation(operation);
     return cast null;
   }
 
@@ -14766,6 +14728,98 @@ class Sdk {
     Facade_Sdk_flight__Geometry.inflateRectangle(out, source, dx, dy);
   }
 
+  public static function initializeAddNodeChildCommand(out:EntityConstruction<AddNodeChildCommand>, label:String, parent:NodeAny, child:NodeAny, index:Float):Void {
+    Facade_Sdk_flight__Command.initializeAddNodeChildCommand(out, label, parent, child, index);
+  }
+
+  public static function initializeCommandHistory(out:EntityConstruction<CommandHistory>, ?maxSize:Float):Void {
+    Facade_Sdk_flight__Command.initializeCommandHistory(out, maxSize);
+  }
+
+  public static function initializeCompositeCommand(out:EntityConstruction<CompositeCommand>, label:String, children:Array<Command>):Void {
+    Facade_Sdk_flight__Command.initializeCompositeCommand(out, label, children);
+  }
+
+  public static function initializeFlightDocumentRefusalExplanation(out:EntityConstruction<FlightDocumentRefusalExplanation>, mode:flight._internal._IndexedAccess<FlightDocumentRefusalExplanation, String>, path:String, reason:FlightDocumentRefusalReason, tokenKey:Null<String>):Void {
+    Facade_Sdk_flight__Tokens.initializeFlightDocumentRefusalExplanation(out, mode, path, reason, tokenKey);
+  }
+
+  public static function initializeFlightDocumentTokenResolverRegistry(out:EntityConstruction<FlightDocumentTokenResolverRegistry>):Void {
+    Facade_Sdk_flight__Tokens.initializeFlightDocumentTokenResolverRegistry(out);
+  }
+
+  public static function initializePhysics2DAbiBodyBuffer(out:EntityConstruction<Physics2DAbiBodyBuffer>, capacity:Float):Void {
+    Facade_Sdk_flight__Physics2DAbi.initializePhysics2DAbiBodyBuffer(out, capacity);
+  }
+
+  public static function initializePhysics2DAbiContactBuffer(out:EntityConstruction<Physics2DAbiContactBuffer>, contactCapacity:Float, pointCapacity:Float):Void {
+    Facade_Sdk_flight__Physics2DAbi.initializePhysics2DAbiContactBuffer(out, contactCapacity, pointCapacity);
+  }
+
+  public static function initializePhysics2DAbiExecutionResult(out:EntityConstruction<Physics2DAbiExecutionResult>):Void {
+    Facade_Sdk_flight__Physics2DAbi.initializePhysics2DAbiExecutionResult(out);
+  }
+
+  public static function initializePhysics2DAbiJointBuffer(out:EntityConstruction<Physics2DAbiJointBuffer>, capacity:Float):Void {
+    Facade_Sdk_flight__Physics2DAbi.initializePhysics2DAbiJointBuffer(out, capacity);
+  }
+
+  public static function initializePhysics2DAbiQueryBuffer(out:EntityConstruction<Physics2DAbiQueryBuffer>, capacity:Float):Void {
+    Facade_Sdk_flight__Physics2DAbi.initializePhysics2DAbiQueryBuffer(out, capacity);
+  }
+
+  public static function initializePhysics3DAbiBodyBuffer(out:EntityConstruction<Physics3DAbiBodyBuffer>, capacity:Float):Void {
+    Facade_Sdk_flight__Physics3DAbi.initializePhysics3DAbiBodyBuffer(out, capacity);
+  }
+
+  public static function initializePhysics3DAbiContactBuffer(out:EntityConstruction<Physics3DAbiContactBuffer>, contactCapacity:Float, pointCapacity:Float):Void {
+    Facade_Sdk_flight__Physics3DAbi.initializePhysics3DAbiContactBuffer(out, contactCapacity, pointCapacity);
+  }
+
+  public static function initializePhysics3DAbiExecutionResult(out:EntityConstruction<Physics3DAbiExecutionResult>):Void {
+    Facade_Sdk_flight__Physics3DAbi.initializePhysics3DAbiExecutionResult(out);
+  }
+
+  public static function initializePhysics3DAbiJointBuffer(out:EntityConstruction<Physics3DAbiJointBuffer>, capacity:Float):Void {
+    Facade_Sdk_flight__Physics3DAbi.initializePhysics3DAbiJointBuffer(out, capacity);
+  }
+
+  public static function initializePhysics3DAbiQueryBuffer(out:EntityConstruction<Physics3DAbiQueryBuffer>, capacity:Float):Void {
+    Facade_Sdk_flight__Physics3DAbi.initializePhysics3DAbiQueryBuffer(out, capacity);
+  }
+
+  public static function initializeReferencePhysics2DAbi(out:EntityConstruction<Physics2DAbi>):Void {
+    Facade_Sdk_flight__Physics2DAbi.initializeReferencePhysics2DAbi(out);
+  }
+
+  public static function initializeReferencePhysics3DAbi(out:EntityConstruction<Physics3DAbi>):Void {
+    Facade_Sdk_flight__Physics3DAbi.initializeReferencePhysics3DAbi(out);
+  }
+
+  public static function initializeRegistryCatalog(out:EntityConstruction<RegistryCatalog>, ?entries:Array<RegistryCatalogEntry>):Void {
+    Facade_Sdk_flight__RegistryCatalog.initializeRegistryCatalog(out, entries);
+  }
+
+  public static function initializeRegistryCodegenPlan(out:EntityConstruction<{ >RegistryCodegenPlan, >Entity, }>, catalog:RegistryCatalog, requirements:RequirementSet, backend:String):Void {
+    Facade_Sdk_flight__RegistryCodegen.initializeRegistryCodegenPlan(out, catalog, requirements, backend);
+  }
+
+  public static function initializeRemoveNodeChildCommand(out:EntityConstruction<RemoveNodeChildCommand>, label:String, parent:NodeAny, child:NodeAny):Void {
+    Facade_Sdk_flight__Command.initializeRemoveNodeChildCommand(out, label, parent, child);
+  }
+
+  public static function initializeReorderNodeChildCommand(out:EntityConstruction<ReorderNodeChildCommand>, label:String, parent:NodeAny, child:NodeAny, toIndex:Float):Void {
+    Facade_Sdk_flight__Command.initializeReorderNodeChildCommand(out, label, parent, child, toIndex);
+  }
+
+  public static function initializeRequirementSet(out:EntityConstruction<RequirementSet>, covers:Array<RequirementFacet>, requirements:Array<Requirement>):Void {
+    Facade_Sdk_flight__Requirements.initializeRequirementSet(out, covers, requirements);
+  }
+
+  public static function initializeSetNodePropertyCommand(out:EntityConstruction<SetNodePropertyCommand>, entries:flight._internal._IndexedAccess<SetNodePropertyCommand, String>, kind:Kind, label:String, mergeWindow:Float, time:Float):Void {
+    Facade_Sdk_flight__Command.initializeSetNodePropertyCommand(out, entries, kind, label, mergeWindow, time);
+  }
+
   public static function innerGlowBitmap(out:flight._internal._UInt8ClampedArray, scratch:flight._internal._UInt8ClampedArray, source:BitmapRegion, ?options:BitmapInnerGlowOptions):Void {
     Facade_Sdk_flight__Bitmap.innerGlowBitmap(out, scratch, source, options);
   }
@@ -14903,6 +14957,10 @@ class Sdk {
 
   public static function invalidateGlRenderStateCache(state:GlRenderState):Void {
     Facade_Sdk_flight__RenderGl.invalidateGlRenderStateCache(state);
+  }
+
+  public static function invalidateInstancedMesh(target:InstancedMesh):Void {
+    Facade_Sdk_flight__Scene3D.invalidateInstancedMesh(target);
   }
 
   public static function invalidateInteractionCursor<N:NodeAny>(manager:InteractionManager<N>):Void {
@@ -15207,8 +15265,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function isFontLoaded(family:String, ?style:String):Bool {
-    return cast Facade_Sdk_flight__Font.isFontLoaded(family, style);
+  public static function isFontLoaded(backend:FontLoadingBackend, family:String, ?style:String):Bool {
+    return cast Facade_Sdk_flight__Font.isFontLoaded(backend, family, style);
     return cast null;
   }
 
@@ -15232,8 +15290,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function isGeolocationAvailable():Bool {
-    return cast Facade_Sdk_flight__Geolocation.isGeolocationAvailable();
+  public static function isGeolocationAvailable(host:HasSystemGeolocation):Bool {
+    return cast Facade_Sdk_flight__Geolocation.isGeolocationAvailable(host);
     return cast null;
   }
 
@@ -15274,6 +15332,11 @@ class Sdk {
 
   public static function isInputPointerButtonDown(state:InputState, pointerId:Float, button:Float):Bool {
     return cast Facade_Sdk_flight__Input.isInputPointerButtonDown(state, pointerId, button);
+    return cast null;
+  }
+
+  public static function isInstancedMesh(source:flight._internal._Any):Bool {
+    return cast Facade_Sdk_flight__Scene3D.isInstancedMesh(source);
     return cast null;
   }
 
@@ -15777,48 +15840,48 @@ class Sdk {
     return cast null;
   }
 
-  public static function loadAudioResourceFromUrls(host:HasNetHttp, context:flight._internal.dom.AudioContext, sources:Array<AudioResourceUrl>, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<AudioResource> {
+  public static function loadAudioResourceFromUrls(host:{ >HasNetHttp, >HasMediaAudioCodec, }, context:flight._internal.dom.AudioContext, sources:Array<AudioResourceUrl>, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<AudioResource> {
     return cast Facade_Sdk_flight__Audio.loadAudioResourceFromUrls(host, context, sources, signal);
     return cast null;
   }
 
-  public static function loadFontResourceFromBytes(out:FontResource, bytes:flight._internal._UInt8Array):flight._internal._Promise<FontResource> {
-    return cast Facade_Sdk_flight__Font.loadFontResourceFromBytes(out, bytes);
+  public static function loadFontResourceFromBytes(backend:FontLoadingBackend, out:FontResource, bytes:flight._internal._UInt8Array):flight._internal._Promise<FontResource> {
+    return cast Facade_Sdk_flight__Font.loadFontResourceFromBytes(backend, out, bytes);
     return cast null;
   }
 
-  public static function loadFontResourceFromName(out:FontResource):flight._internal._Promise<FontResource> {
-    return cast Facade_Sdk_flight__Font.loadFontResourceFromName(out);
+  public static function loadFontResourceFromName(backend:FontLoadingBackend, out:FontResource):flight._internal._Promise<FontResource> {
+    return cast Facade_Sdk_flight__Font.loadFontResourceFromName(backend, out);
     return cast null;
   }
 
-  public static function loadFontResourceFromUrl(out:FontResource, url:String):flight._internal._Promise<FontResource> {
-    return cast Facade_Sdk_flight__Font.loadFontResourceFromUrl(out, url);
+  public static function loadFontResourceFromUrl(backend:FontLoadingBackend, out:FontResource, url:String):flight._internal._Promise<FontResource> {
+    return cast Facade_Sdk_flight__Font.loadFontResourceFromUrl(backend, out, url);
     return cast null;
   }
 
-  public static function loadFontResourceFromUrls(out:FontResource, sources:Array<FontUrl>):flight._internal._Promise<FontResource> {
-    return cast Facade_Sdk_flight__Font.loadFontResourceFromUrls(out, sources);
+  public static function loadFontResourceFromUrls(backend:FontLoadingBackend, out:FontResource, sources:Array<FontUrl>):flight._internal._Promise<FontResource> {
+    return cast Facade_Sdk_flight__Font.loadFontResourceFromUrls(backend, out, sources);
     return cast null;
   }
 
-  public static function loadImageResourceFromBase64(base64:String, mimeType:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<ImageResource> {
-    return cast Facade_Sdk_flight__Image.loadImageResourceFromBase64(base64, mimeType, signal);
+  public static function loadImageResourceFromBase64(host:HasGraphicsImage, base64:String, mimeType:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<ImageResource> {
+    return cast Facade_Sdk_flight__Image.loadImageResourceFromBase64(host, base64, mimeType, signal);
     return cast null;
   }
 
-  public static function loadImageResourceFromBlob(blob:flight._internal.dom.Blob, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<ImageResource> {
-    return cast Facade_Sdk_flight__Image.loadImageResourceFromBlob(blob, signal);
+  public static function loadImageResourceFromBlob(host:HasGraphicsImage, blob:flight._internal.dom.Blob, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<ImageResource> {
+    return cast Facade_Sdk_flight__Image.loadImageResourceFromBlob(host, blob, signal);
     return cast null;
   }
 
-  public static function loadImageResourceFromBytes(bytes:flight._internal._UInt8Array, ?mimeType:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<ImageResource> {
-    return cast Facade_Sdk_flight__Image.loadImageResourceFromBytes(bytes, mimeType, signal);
+  public static function loadImageResourceFromBytes(host:HasGraphicsImage, bytes:flight._internal._UInt8Array, ?mimeType:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<ImageResource> {
+    return cast Facade_Sdk_flight__Image.loadImageResourceFromBytes(host, bytes, mimeType, signal);
     return cast null;
   }
 
-  public static function loadImageResourceFromUrl(url:String, ?crossOrigin:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<ImageResource> {
-    return cast Facade_Sdk_flight__Image.loadImageResourceFromUrl(url, crossOrigin, signal);
+  public static function loadImageResourceFromUrl(host:HasGraphicsImage, url:String, ?crossOrigin:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<ImageResource> {
+    return cast Facade_Sdk_flight__Image.loadImageResourceFromUrl(host, url, crossOrigin, signal);
     return cast null;
   }
 
@@ -15887,38 +15950,38 @@ class Sdk {
     return cast null;
   }
 
-  public static function loadTextureAtlasFromBase64(base64:String, mimeType:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<TextureAtlas> {
-    return cast Facade_Sdk_flight__TextureAtlas.loadTextureAtlasFromBase64(base64, mimeType, signal);
+  public static function loadTextureAtlasFromBase64(host:HasGraphicsImage, base64:String, mimeType:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<TextureAtlas> {
+    return cast Facade_Sdk_flight__TextureAtlas.loadTextureAtlasFromBase64(host, base64, mimeType, signal);
     return cast null;
   }
 
-  public static function loadTextureAtlasFromBlob(blob:flight._internal.dom.Blob, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<TextureAtlas> {
-    return cast Facade_Sdk_flight__TextureAtlas.loadTextureAtlasFromBlob(blob, signal);
+  public static function loadTextureAtlasFromBlob(host:HasGraphicsImage, blob:flight._internal.dom.Blob, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<TextureAtlas> {
+    return cast Facade_Sdk_flight__TextureAtlas.loadTextureAtlasFromBlob(host, blob, signal);
     return cast null;
   }
 
-  public static function loadTextureAtlasFromBytes(bytes:flight._internal._UInt8Array, ?mimeType:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<TextureAtlas> {
-    return cast Facade_Sdk_flight__TextureAtlas.loadTextureAtlasFromBytes(bytes, mimeType, signal);
+  public static function loadTextureAtlasFromBytes(host:HasGraphicsImage, bytes:flight._internal._UInt8Array, ?mimeType:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<TextureAtlas> {
+    return cast Facade_Sdk_flight__TextureAtlas.loadTextureAtlasFromBytes(host, bytes, mimeType, signal);
     return cast null;
   }
 
-  public static function loadTextureAtlasFromUrl(url:String, ?crossOrigin:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<TextureAtlas> {
-    return cast Facade_Sdk_flight__TextureAtlas.loadTextureAtlasFromUrl(url, crossOrigin, signal);
+  public static function loadTextureAtlasFromUrl(host:HasGraphicsImage, url:String, ?crossOrigin:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<TextureAtlas> {
+    return cast Facade_Sdk_flight__TextureAtlas.loadTextureAtlasFromUrl(host, url, crossOrigin, signal);
     return cast null;
   }
 
-  public static function loadVideoResourceFromBlob(blob:flight._internal.dom.Blob, ?options:VideoResourceLoadOptions, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<VideoResource> {
-    return cast Facade_Sdk_flight__Video.loadVideoResourceFromBlob(blob, options, signal);
+  public static function loadVideoResourceFromBlob(backend:VideoCapabilityBackend, blob:flight._internal.dom.Blob, ?options:VideoResourceLoadOptions, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<VideoResource> {
+    return cast Facade_Sdk_flight__Video.loadVideoResourceFromBlob(backend, blob, options, signal);
     return cast null;
   }
 
-  public static function loadVideoResourceFromUrl(url:String, ?options:VideoResourceLoadOptions, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<VideoResource> {
-    return cast Facade_Sdk_flight__Video.loadVideoResourceFromUrl(url, options, signal);
+  public static function loadVideoResourceFromUrl(backend:VideoCapabilityBackend, url:String, ?options:VideoResourceLoadOptions, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<VideoResource> {
+    return cast Facade_Sdk_flight__Video.loadVideoResourceFromUrl(backend, url, options, signal);
     return cast null;
   }
 
-  public static function loadVideoResourceFromUrls(sources:Array<VideoResourceUrl>, ?options:VideoResourceLoadOptions, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<VideoResource> {
-    return cast Facade_Sdk_flight__Video.loadVideoResourceFromUrls(sources, options, signal);
+  public static function loadVideoResourceFromUrls(backend:VideoCapabilityBackend, sources:Array<VideoResourceUrl>, ?options:VideoResourceLoadOptions, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<VideoResource> {
+    return cast Facade_Sdk_flight__Video.loadVideoResourceFromUrls(backend, sources, options, signal);
     return cast null;
   }
 
@@ -16388,7 +16451,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function normalizeParticleEmitterConfig(?config:{ @:optional var alphaEnd:Null<Float>; @:optional var alphaStart:Null<Float>; @:optional var blendMode:Null<ParticleBlendMode>; @:optional var colorEndB:Null<Float>; @:optional var colorEndG:Null<Float>; @:optional var colorEndR:Null<Float>; @:optional var colorEndVarianceB:Null<Float>; @:optional var colorEndVarianceG:Null<Float>; @:optional var colorEndVarianceR:Null<Float>; @:optional var colorStartB:Null<Float>; @:optional var colorStartG:Null<Float>; @:optional var colorStartR:Null<Float>; @:optional var colorStartVarianceB:Null<Float>; @:optional var colorStartVarianceG:Null<Float>; @:optional var colorStartVarianceR:Null<Float>; @:optional var directionX:Null<Float>; @:optional var directionY:Null<Float>; @:optional var directionZ:Null<Float>; @:optional var gravityX:Null<Float>; @:optional var gravityY:Null<Float>; @:optional var gravityZ:Null<Float>; @:optional var emitterConeAngle:Null<Float>; @:optional var emitterDepth:Null<Float>; @:optional var emitterHeight:Null<Float>; @:optional var emitterRadius:Null<Float>; @:optional var emitterShape:Null<ParticleEmitterShape>; @:optional var emitterWidth:Null<Float>; @:optional var burstCount:Null<Float>; @:optional var burstInterval:Null<Float>; @:optional var duration:Null<Float>; @:optional var loop:Null<Bool>; @:optional var frameCount:Null<Float>; @:optional var frameRate:Null<Float>; @:optional var lifetimeMax:Null<Float>; @:optional var lifetimeMin:Null<Float>; @:optional var maxParticles:Null<Float>; @:optional var regionIdMax:Null<Float>; @:optional var regionIdMin:Null<Float>; @:optional var scaleEnd:Null<Float>; @:optional var scaleMax:Null<Float>; @:optional var scaleMin:Null<Float>; @:optional var speedMax:Null<Float>; @:optional var speedMin:Null<Float>; @:optional var spawnRate:Null<Float>; @:optional var spread:Null<Float>; @:optional var rotationSpeedMax:Null<Float>; @:optional var rotationSpeedMin:Null<Float>; @:optional var velocityInheritance:Null<Float>; @:optional var alphaCurve:Null<ParticleCurve>; @:optional var colorCurve:Null<ParticleCurve>; @:optional var scaleCurve:Null<ParticleCurve>; @:optional var worldSpace:Null<Bool>; }):ParticleEmitterConfig {
+  public static function normalizeParticleEmitterConfig(?config:{ @:optional var alphaEnd:Null<Float>; @:optional var alphaStart:Null<Float>; @:optional var blendMode:Null<ParticleBlendMode>; @:optional var colorEndB:Null<Float>; @:optional var colorEndG:Null<Float>; @:optional var colorEndR:Null<Float>; @:optional var colorEndVarianceB:Null<Float>; @:optional var colorEndVarianceG:Null<Float>; @:optional var colorEndVarianceR:Null<Float>; @:optional var colorStartB:Null<Float>; @:optional var colorStartG:Null<Float>; @:optional var colorStartR:Null<Float>; @:optional var colorStartVarianceB:Null<Float>; @:optional var colorStartVarianceG:Null<Float>; @:optional var colorStartVarianceR:Null<Float>; @:optional var directionX:Null<Float>; @:optional var directionY:Null<Float>; @:optional var directionZ:Null<Float>; @:optional var gravityX:Null<Float>; @:optional var gravityY:Null<Float>; @:optional var gravityZ:Null<Float>; @:optional var emitterConeAngle:Null<Float>; @:optional var emitterDepth:Null<Float>; @:optional var emitterHeight:Null<Float>; @:optional var emitterRadius:Null<Float>; @:optional var emitterShape:Null<ParticleEmitterShape>; @:optional var emitterWidth:Null<Float>; @:optional var burstCount:Null<Float>; @:optional var burstInterval:Null<Float>; @:optional var duration:Null<Float>; @:optional var loop:Null<Bool>; @:optional var frameCount:Null<Float>; @:optional var frameRate:Null<Float>; @:optional var lifetimeMax:Null<Float>; @:optional var lifetimeMin:Null<Float>; @:optional var maxParticles:Null<Float>; @:optional var regionIdMax:Null<Float>; @:optional var regionIdMin:Null<Float>; @:optional var scaleEnd:Null<Float>; @:optional var scaleMax:Null<Float>; @:optional var scaleMin:Null<Float>; @:optional var speedMax:Null<Float>; @:optional var speedMin:Null<Float>; @:optional var spawnRate:Null<Float>; @:optional var spread:Null<Float>; @:optional var rotationSpeedMax:Null<Float>; @:optional var rotationSpeedMin:Null<Float>; @:optional var velocityInheritance:Null<Float>; @:optional var alphaCurve:Null<ParticleCurve>; @:optional var colorCurve:Null<ParticleCurve>; @:optional var scaleCurve:Null<ParticleCurve>; @:optional var worldSpace:Null<Bool>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; }):ParticleEmitterConfig {
     return cast Facade_Sdk_flight__Particles.normalizeParticleEmitterConfig(config);
     return cast null;
   }
@@ -17335,8 +17398,8 @@ class Sdk {
     Facade_Sdk_flight__Animation.playAnimationPlayer(player);
   }
 
-  public static function playAudioResource(device:AudioDeviceHandle, source:AudioResource, ?options:AudioPlayOptions):Null<AudioChannel> {
-    return cast Facade_Sdk_flight__Media.playAudioResource(device, source, options);
+  public static function playAudioResource(backend:AudioDeviceBackend, device:AudioDeviceHandle, source:AudioResource, ?options:AudioPlayOptions):Null<AudioChannel> {
+    return cast Facade_Sdk_flight__Media.playAudioResource(backend, device, source, options);
     return cast null;
   }
 
@@ -18047,8 +18110,8 @@ class Sdk {
     Facade_Sdk_flight__EffectsCanvas.registerCanvasBevelEffect(state);
   }
 
-  public static function registerCanvasBitmapTextureResolver(resolvers:CanvasTextureResolvers):Void {
-    Facade_Sdk_flight__Scene2DCanvas.registerCanvasBitmapTextureResolver(resolvers);
+  public static function registerCanvasBitmapTextureResolver(host:HasGraphicsImage, resolvers:CanvasTextureResolvers):Void {
+    Facade_Sdk_flight__Scene2DCanvas.registerCanvasBitmapTextureResolver(host, resolvers);
   }
 
   public static function registerCanvasBlendEffect(state:CanvasRenderState):Void {
@@ -18207,8 +18270,8 @@ class Sdk {
     Facade_Sdk_flight__Effects.registerDisplacementEffectPaddingResolver(state);
   }
 
-  public static function registerDomBitmapTextureResolver(state:DomRenderState):Void {
-    Facade_Sdk_flight__Scene2DDom.registerDomBitmapTextureResolver(state);
+  public static function registerDomBitmapTextureResolver(host:HasGraphicsImage, state:DomRenderState):Void {
+    Facade_Sdk_flight__Scene2DDom.registerDomBitmapTextureResolver(host, state);
   }
 
   public static function registerDomImageTextureResolver(state:DomRenderState):Void {
@@ -18741,8 +18804,8 @@ class Sdk {
     Facade_Sdk_flight__Skeleton2DFormats.registerSpineSkeletonBinaryParser(version, parser);
   }
 
-  public static function registerSpriteHitTest(?alphaThreshold:Float):Void {
-    Facade_Sdk_flight__Interaction.registerSpriteHitTest(alphaThreshold);
+  public static function registerSpriteHitTest(host:HasGraphicsBitmapReadback, ?alphaThreshold:Float):Void {
+    Facade_Sdk_flight__Interaction.registerSpriteHitTest(host, alphaThreshold);
   }
 
   public static function registerSpritesheetFormat(kind:SpritesheetFormatKind, entry:{ var detect:String->Bool; var parse:String->SpritesheetParseOptions->SpritesheetData; }):Void {
@@ -19935,6 +19998,8 @@ class Sdk {
 
   public static final Scale9ShapeKind:String = Facade_Sdk_flight__Types.Scale9ShapeKind;
 
+  public static final Scale9SpriteKind:String = Facade_Sdk_flight__Types.Scale9SpriteKind;
+
   public static function scaleMatrix(out:MatrixLike, source:MatrixLike, sx:Float, sy:Float):Void {
     Facade_Sdk_flight__Geometry.scaleMatrix(out, source, sx, sy);
   }
@@ -20080,8 +20145,8 @@ class Sdk {
     Facade_Sdk_flight__TextInput.selectAllTextInput(source);
   }
 
-  public static function selectAudioResourceUrl(sources:Array<AudioResourceUrl>):Null<String> {
-    return cast Facade_Sdk_flight__Audio.selectAudioResourceUrl(sources);
+  public static function selectAudioResourceUrl(host:HasMediaAudioCodec, sources:Array<AudioResourceUrl>):Null<String> {
+    return cast Facade_Sdk_flight__Audio.selectAudioResourceUrl(host, sources);
     return cast null;
   }
 
@@ -20112,8 +20177,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function selectVideoResourceUrl(sources:Array<VideoResourceUrl>):Null<VideoResourceUrl> {
-    return cast Facade_Sdk_flight__Video.selectVideoResourceUrl(sources);
+  public static function selectVideoResourceUrl(backend:VideoCapabilityBackend, sources:Array<VideoResourceUrl>):Null<VideoResourceUrl> {
+    return cast Facade_Sdk_flight__Video.selectVideoResourceUrl(backend, sources);
     return cast null;
   }
 
@@ -20334,10 +20399,6 @@ class Sdk {
     return cast null;
   }
 
-  public static function setAudioDeviceBackend(backend:Null<AudioDeviceBackend>):Void {
-    Facade_Sdk_flight__Media.setAudioDeviceBackend(backend);
-  }
-
   public static function setAudioMixerMasterGain(mixer:AudioMixer, value:Float):Float {
     return cast Facade_Sdk_flight__Media.setAudioMixerMasterGain(mixer, value);
     return cast null;
@@ -20556,10 +20617,6 @@ class Sdk {
     Facade_Sdk_flight__Scene3DGl.setGlScene3DTime(state, timeSeconds);
   }
 
-  public static function setGlyphRasterizerBackend(backend:Null<GlyphRasterizerBackend>):Void {
-    Facade_Sdk_flight__GlyphAtlas.setGlyphRasterizerBackend(backend);
-  }
-
   public static function setGradientTransformMatrix(out:MatrixLike, width:Float, height:Float, ?rotation:Float, ?tx:Float, ?ty:Float):Void {
     Facade_Sdk_flight__Geometry.setGradientTransformMatrix(out, width, height, rotation, tx, ty);
   }
@@ -20570,6 +20627,18 @@ class Sdk {
 
   public static function setInputPointerCapture(element:flight._internal.dom.HTMLElement, pointerId:Float):Void {
     Facade_Sdk_flight__Input.setInputPointerCapture(element, pointerId);
+  }
+
+  public static function setInstancedMeshInstanceColor(target:InstancedMesh, index:Float, color:Float):Void {
+    Facade_Sdk_flight__Scene3D.setInstancedMeshInstanceColor(target, index, color);
+  }
+
+  public static function setInstancedMeshInstanceCount(target:InstancedMesh, count:Float):Void {
+    Facade_Sdk_flight__Scene3D.setInstancedMeshInstanceCount(target, count);
+  }
+
+  public static function setInstancedMeshInstanceMatrix(target:InstancedMesh, index:Float, matrix:Matrix4):Void {
+    Facade_Sdk_flight__Scene3D.setInstancedMeshInstanceMatrix(target, index, matrix);
   }
 
   public static function setInteractionConnectGuard(guard:Null<InteractionConnectGuard>):Void {
@@ -21950,9 +22019,9 @@ class Sdk {
     return cast null;
   }
 
-  public static final standardGlBlendRealizations:KeyedTable<GlBlendRealization> = Facade_Sdk_flight__RenderGl._standardGlBlendRealizations__glDraw;
+  public static final standardGlBlendRealizations:{ >KeyedTable<GlBlendRealization>, >Entity, } = Facade_Sdk_flight__RenderGl._standardGlBlendRealizations__glDraw;
 
-  public static final standardGlTextureResolvers:KeyedTable<GlRenderState->TextureLike->Bool->TextureColorSpace->Null<GlTextureRealization>> = Facade_Sdk_flight__RenderGl._standardGlTextureResolvers__glTextureResolver;
+  public static final standardGlTextureResolvers:{ >KeyedTable<GlRenderState->TextureLike->Bool->TextureColorSpace->Null<GlTextureRealization>>, >Entity, } = Facade_Sdk_flight__RenderGl._standardGlTextureResolvers__glTextureResolver;
 
   public static final StandardMaterialKind:String = Facade_Sdk_flight__Types.StandardMaterialKindValue;
 
@@ -23073,8 +23142,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function watchGeolocationPosition(handler:GeoPosition->Void, ?options:GeolocationRequestOptions, ?onError:GeolocationErrorReason->Void):Float {
-    return cast Facade_Sdk_flight__Geolocation.watchGeolocationPosition(handler, options, onError);
+  public static function watchGeolocationPosition(host:HasSystemGeolocation, handler:GeoPosition->Void, ?options:GeolocationRequestOptions, ?onError:GeolocationErrorReason->Void):Float {
+    return cast Facade_Sdk_flight__Geolocation.watchGeolocationPosition(host, handler, options, onError);
     return cast null;
   }
 
@@ -23097,8 +23166,8 @@ class Sdk {
 
   public static final WellKnownMenuItemRole:{ var copy:String; var cut:String; var delete:String; var paste:String; var pasteAndMatchStyle:String; var redo:String; var selectAll:String; var toggleSpellChecker:String; var undo:String; var about:String; var close:String; var front:String; var hide:String; var hideOthers:String; var mergeAllWindows:String; var minimize:String; var moveTabToNewWindow:String; var quit:String; var selectNextTab:String; var selectPreviousTab:String; var toggleTabBar:String; var unhide:String; var zoom:String; var forceReload:String; var reload:String; var resetZoom:String; var toggleDevTools:String; var toggleFullscreen:String; var zoomIn:String; var zoomOut:String; var help:String; var services:String; var startSpeaking:String; var stopSpeaking:String; var clearRecentDocuments:String; var recentDocuments:String; var appMenu:String; var editMenu:String; var fileMenu:String; var helpMenu:String; var shareMenu:String; var viewMenu:String; var windowMenu:String; } = Facade_Sdk_flight__Types.WellKnownMenuItemRole;
 
-  public static function whenFontsReady():flight._internal._Promise<flight._internal._Nothing> {
-    return cast Facade_Sdk_flight__Font.whenFontsReady();
+  public static function whenFontsReady(backend:FontLoadingBackend):flight._internal._Promise<flight._internal._Nothing> {
+    return cast Facade_Sdk_flight__Font.whenFontsReady(backend);
     return cast null;
   }
 
@@ -23121,17 +23190,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function withoutRegistryTableEntry<T>(table:KeyedTable<T>, key:Kind):KeyedTable<T> {
+  public static function withoutRegistryTableEntry<T>(table:KeyedTable<T>, key:Kind):{ >KeyedTable<T>, >Entity, } {
     return cast Facade_Sdk_flight__Registry.withoutRegistryTableEntry(table, key);
     return cast null;
   }
 
-  public static function withRegistryTableEntry<T>(table:KeyedTable<T>, key:Kind, value:T):KeyedTable<T> {
+  public static function withRegistryTableEntry<T>(table:KeyedTable<T>, key:Kind, value:T):{ >KeyedTable<T>, >Entity, } {
     return cast Facade_Sdk_flight__Registry.withRegistryTableEntry(table, key, value);
     return cast null;
   }
 
-  public static function withRegistryTableTombstone<T>(table:KeyedTable<T>, key:Kind):KeyedTable<T> {
+  public static function withRegistryTableTombstone<T>(table:KeyedTable<T>, key:Kind):{ >KeyedTable<T>, >Entity, } {
     return cast Facade_Sdk_flight__Registry.withRegistryTableTombstone(table, key);
     return cast null;
   }

@@ -4,4 +4,30 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Scene2DGl)
+@:keep
+@:structInit
+class GlShapeRendererData extends flight.types.RendererData {
+  public var surface:Null<Raster2DSurface>;
+  public var lastContentId:Float;
+  public var lastPixelRatio:Float;
+  public var lastW:Float;
+  public var lastH:Float;
+  public var meshVersion:Float;
+  public var meshes:Null<Array<GlShapeMesh>>;
+
+  private function new(surface:Null<Raster2DSurface>, lastContentId:Float, lastPixelRatio:Float, lastW:Float, lastH:Float, meshVersion:Float, meshes:Null<Array<GlShapeMesh>>):Void {
+    super();
+    this.surface = surface;
+    this.lastContentId = lastContentId;
+    this.lastPixelRatio = lastPixelRatio;
+    this.lastW = lastW;
+    this.lastH = lastH;
+    this.meshVersion = meshVersion;
+    this.meshes = meshes;
+  }
+}
+#else
 typedef GlShapeRendererData = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var surface:Null<Raster2DSurface>; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:Null<Array<GlShapeMesh>>; };
+#end

@@ -6,3 +6,6 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWebProtocolCapabilities = api.createWebProtocolCapabilities;
+export const initializeWebProtocolCapabilities = api.initializeWebProtocolCapabilities;
+export const initializeWebProtocolLaunchBackend = api.initializeWebProtocolLaunchBackend;
+export const initializeWebProtocolRegistrationBackend = api.initializeWebProtocolRegistrationBackend;

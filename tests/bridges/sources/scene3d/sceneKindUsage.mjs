@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const createScene3DKindUsage = api.createScene3DKindUsage;
 export const getScene3DKindUsage = api.getScene3DKindUsage;
+export const initializeScene3DKindUsage = api.initializeScene3DKindUsage;

@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef PathBooleanBackend = { var computePathBoolean:Array<PathBooleanContour>->Array<PathBooleanContour>->PathBooleanOperation->PathBooleanFillRule->Array<PathBooleanContour>; };
+#if !flight_struct_typedef
+@:allow(flight._PathBoolean)
+@:keep
+@:structInit
+class PathBooleanBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var computePathBoolean:Array<PathBooleanContour>->Array<PathBooleanContour>->PathBooleanOperation->PathBooleanFillRule->Array<PathBooleanContour>;
+
+  private function new(computePathBoolean:Array<PathBooleanContour>->Array<PathBooleanContour>->PathBooleanOperation->PathBooleanFillRule->Array<PathBooleanContour>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.computePathBoolean = computePathBoolean;
+  }
+}
+#else
+typedef PathBooleanBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var computePathBoolean:Array<PathBooleanContour>->Array<PathBooleanContour>->PathBooleanOperation->PathBooleanFillRule->Array<PathBooleanContour>; };
+#end

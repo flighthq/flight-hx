@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createGodRaysEffect = api.createGodRaysEffect;
+export const initializeGodRaysEffect = api.initializeGodRaysEffect;

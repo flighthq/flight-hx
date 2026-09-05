@@ -4,4 +4,29 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics3DJointReaction = { var forceX:Float; var forceY:Float; var forceZ:Float; var torqueX:Float; var torqueY:Float; var torqueZ:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Physics3D)
+@:keep
+@:structInit
+class Physics3DJointReaction {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var forceX:Float;
+  public var forceY:Float;
+  public var forceZ:Float;
+  public var torqueX:Float;
+  public var torqueY:Float;
+  public var torqueZ:Float;
+
+  private function new(forceX:Float, forceY:Float, forceZ:Float, torqueX:Float, torqueY:Float, torqueZ:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.forceX = forceX;
+    this.forceY = forceY;
+    this.forceZ = forceZ;
+    this.torqueX = torqueX;
+    this.torqueY = torqueY;
+    this.torqueZ = torqueZ;
+  }
+}
+#else
+typedef Physics3DJointReaction = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var forceX:Float; var forceY:Float; var forceZ:Float; var torqueX:Float; var torqueY:Float; var torqueZ:Float; };
+#end

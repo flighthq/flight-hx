@@ -9,3 +9,5 @@ export * from './bitmapFontGlyphSource.mjs';
 export * from './enableBitmapFontGuards.mjs';
 export * from './explainBitmapFontGlyph.mjs';
 export * from './summarizeBitmapFont.mjs';
+export { initializeBitmapFont } from './bitmapFont.mjs';
+export { initializeGlyphSourceFromBitmapFont } from './bitmapFontGlyphSource.mjs';

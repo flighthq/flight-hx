@@ -4,11 +4,11 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Render as Facade_Render_flight__Render;
-import flight.types.BackendExplanation;
 import flight.types.Camera3D;
 import flight.types.Kind;
 import flight.types.Node3D;
 import flight.types.Raster2DSurface;
+import flight.types.Raster2DSurfaceProvider;
 import flight.types.RenderCache;
 import flight.types.RenderCacheAdapter;
 import flight.types.RenderRegistryMissExplanation;
@@ -27,8 +27,8 @@ class Render {
     return cast null;
   }
 
-  public static function createRaster2DSurface(width:Float, height:Float):Null<Raster2DSurface> {
-    return cast Facade_Render_flight__Render.createRaster2DSurface(width, height);
+  public static function createRaster2DSurface(provider:Raster2DSurfaceProvider, width:Float, height:Float):Null<Raster2DSurface> {
+    return cast Facade_Render_flight__Render.createRaster2DSurface(provider, width, height);
     return cast null;
   }
 
@@ -68,11 +68,6 @@ class Render {
 
   public static function enableSceneRenderGuards():Void {
     Facade_Render_flight__Render.enableSceneRenderGuards();
-  }
-
-  public static function explainRaster2DSurfaceProvider():BackendExplanation {
-    return cast Facade_Render_flight__Render.explainRaster2DSurfaceProvider();
-    return cast null;
   }
 
   public static function explainRenderRegistryMisses(state:RenderState):RenderRegistryMissExplanation {

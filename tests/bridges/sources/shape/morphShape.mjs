@@ -10,4 +10,5 @@ export const createMorphShape = api.createMorphShape;
 export const createMorphShapeData = api.createMorphShapeData;
 export const createMorphShapeRuntime = api.createMorphShapeRuntime;
 export const getMorphShapeRuntime = api.getMorphShapeRuntime;
+export const initializeMorphShapeData = api.initializeMorphShapeData;
 export const setMorphShapeProgress = api.setMorphShapeProgress;

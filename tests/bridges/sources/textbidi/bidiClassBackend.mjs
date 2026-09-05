@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const createCompactBidiClassBackend = api.createCompactBidiClassBackend;
 export const getBidiClassBackend = api.getBidiClassBackend;
+export const initializeCompactBidiClassBackend = api.initializeCompactBidiClassBackend;
 export const setBidiClassBackend = api.setBidiClassBackend;

@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const cloneEnvironment = api.cloneEnvironment;
 export const createEnvironment = api.createEnvironment;
+export const initializeEnvironment = api.initializeEnvironment;

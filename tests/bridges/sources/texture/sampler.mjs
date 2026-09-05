@@ -13,3 +13,4 @@ export const createPixelArtSampler = api.createPixelArtSampler;
 export const createSampler = api.createSampler;
 export const createTilingSampler = api.createTilingSampler;
 export const equalsSampler = api.equalsSampler;
+export const initializeSampler = api.initializeSampler;

@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createCustomShaderEffect = api.createCustomShaderEffect;
+export const initializeCustomShaderEffect = api.initializeCustomShaderEffect;

@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createIridescencePbrExtension = api.createIridescencePbrExtension;
+export const initializeIridescencePbrExtension = api.initializeIridescencePbrExtension;
 export const isValidIridescencePbrExtension = api.isValidIridescencePbrExtension;

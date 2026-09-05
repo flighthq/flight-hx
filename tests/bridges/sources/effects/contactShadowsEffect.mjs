@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const createContactShadowsEffect = api.createContactShadowsEffect;
 export const getContactShadowsEffectPadding = api.getContactShadowsEffectPadding;
+export const initializeContactShadowsEffect = api.initializeContactShadowsEffect;
 export const registerContactShadowsEffectPaddingResolver = api.registerContactShadowsEffectPaddingResolver;

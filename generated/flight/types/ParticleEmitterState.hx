@@ -9,6 +9,7 @@ import flight._internal._Runtime;
 @:keep
 @:structInit
 class ParticleEmitterState {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
   public var burstTimer:Float;
   public var colorBirth:flight._internal._Float32Array;
   public var colorDeath:flight._internal._Float32Array;
@@ -24,6 +25,7 @@ class ParticleEmitterState {
   public var velocities:flight._internal._Float32Array;
 
   private function new(burstTimer:Float, colorBirth:flight._internal._Float32Array, colorDeath:flight._internal._Float32Array, emitterAge:Float, lifetimes:flight._internal._Float32Array, prevX:Float, prevY:Float, prevZ:Float, random:RandomSource, rotationSpeeds:flight._internal._Float32Array, scales:flight._internal._Float32Array, spawnAccumulator:Float, velocities:flight._internal._Float32Array):Void {
+    this.__symbol__EntityRuntime = null;
     this.burstTimer = burstTimer;
     this.colorBirth = colorBirth;
     this.colorDeath = colorDeath;
@@ -40,5 +42,5 @@ class ParticleEmitterState {
   }
 }
 #else
-typedef ParticleEmitterState = { var burstTimer:Float; var colorBirth:flight._internal._Float32Array; var colorDeath:flight._internal._Float32Array; var emitterAge:Float; var lifetimes:flight._internal._Float32Array; var prevX:Float; var prevY:Float; var prevZ:Float; var random:RandomSource; var rotationSpeeds:flight._internal._Float32Array; var scales:flight._internal._Float32Array; var spawnAccumulator:Float; var velocities:flight._internal._Float32Array; };
+typedef ParticleEmitterState = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var burstTimer:Float; var colorBirth:flight._internal._Float32Array; var colorDeath:flight._internal._Float32Array; var emitterAge:Float; var lifetimes:flight._internal._Float32Array; var prevX:Float; var prevY:Float; var prevZ:Float; var random:RandomSource; var rotationSpeeds:flight._internal._Float32Array; var scales:flight._internal._Float32Array; var spawnAccumulator:Float; var velocities:flight._internal._Float32Array; };
 #end

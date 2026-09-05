@@ -9,6 +9,7 @@ export const buildRenderQueue = api.buildRenderQueue;
 export const clearRenderQueue = api.clearRenderQueue;
 export const compareRenderQueueEntries = api.compareRenderQueueEntries;
 export const createRenderQueue = api.createRenderQueue;
+export const initializeRenderQueue = api.initializeRenderQueue;
 export const packRenderSortKey = api.packRenderSortKey;
 export const pushRenderQueueEntry = api.pushRenderQueueEntry;
 export const sortRenderQueue = api.sortRenderQueue;

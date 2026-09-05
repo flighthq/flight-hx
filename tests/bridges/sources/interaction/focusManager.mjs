@@ -13,5 +13,6 @@ export const focusNodeInDirection = api.focusNodeInDirection;
 export const focusPreviousNode = api.focusPreviousNode;
 export const getFocusedNode = api.getFocusedNode;
 export const getFocusOrder = api.getFocusOrder;
+export const initializeFocusManager = api.initializeFocusManager;
 export const isNodeFocused = api.isNodeFocused;
 export const setFocusedNode = api.setFocusedNode;

@@ -5,3 +5,5 @@ __syncDependencies();
 
 export * from './menu-templates.mjs';
 export * from './menu.mjs';
+export { initializeMenuHighlight } from './menu.mjs';
+export { initializeMenuSelect } from './menu.mjs';

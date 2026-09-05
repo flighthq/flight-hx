@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const getAdjustmentColorTransform = api.getAdjustmentColorTransform;
+export const initializeColorLutAdjustment = api.initializeColorLutAdjustment;
 export const isColorLutAdjustment = api.isColorLutAdjustment;

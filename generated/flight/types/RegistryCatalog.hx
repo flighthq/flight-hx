@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef RegistryCatalog = { var entries:Array<RegistryCatalogEntry>; };
+#if !flight_struct_typedef
+@:allow(flight._RegistryCatalog)
+@:keep
+@:structInit
+class RegistryCatalog {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var entries:Array<RegistryCatalogEntry>;
+
+  private function new(entries:Array<RegistryCatalogEntry>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.entries = entries;
+  }
+}
+#else
+typedef RegistryCatalog = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var entries:Array<RegistryCatalogEntry>; };
+#end

@@ -9,3 +9,4 @@ export * from './flexLayout.mjs';
 export * from './gridLayout.mjs';
 export * from './layoutState.mjs';
 export * from './resolveLayoutTree.mjs';
+export { initializeLayoutState } from './layoutState.mjs';

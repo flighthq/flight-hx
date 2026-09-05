@@ -32,6 +32,7 @@ export const getAppSystemLocale = api.getAppSystemLocale;
 export const getAppVersion = api.getAppVersion;
 export const hasAppSingleInstanceLock = api.hasAppSingleInstanceLock;
 export const hideApp = api.hideApp;
+export const initializeApp = api.initializeApp;
 export const isAppHidden = api.isAppHidden;
 export const quitApp = api.quitApp;
 export const relaunchApp = api.relaunchApp;

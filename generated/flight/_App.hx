@@ -3,7 +3,8 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Signals.clearSignal;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
@@ -36,7 +37,7 @@ import flight.types.AppSingleInstanceBackend;
 import flight.types.AppUserModelIdBackend;
 import flight.types.AppVersionBackend;
 import flight.types.AppVisibilityQueryBackend;
-import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.HasAppActivate;
 import flight.types.HasAppActivationPolicy;
 import flight.types.HasAppAllWindowsClosed;
@@ -130,7 +131,10 @@ class _App {
   }
 
   public static function createApp():App {
-    return cast (cast createEntity((cast ({ onActivate: (cast (cast createSignal() : Signal<Void->Void>) : Dynamic), onAllWindowsClosed: (cast (cast createSignal() : Signal<Void->Void>) : Dynamic), onOpenFile: (cast (cast createSignal() : Signal<String->Void>) : Dynamic), onQuitRequest: (cast (cast createSignal() : Signal<Void->Void>) : Dynamic), onReady: (cast (cast createSignal() : Signal<Void->Void>) : Dynamic), onSecondInstance: (cast (cast createSignal() : Signal<Array<String>->Void>) : Dynamic) } : App) : Dynamic)) : App);
+    var out:EntityConstruction<App> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ onActivate: cast _Runtime.UNDEFINED, onAllWindowsClosed: cast _Runtime.UNDEFINED, onOpenFile: cast _Runtime.UNDEFINED, onQuitRequest: cast _Runtime.UNDEFINED, onReady: cast _Runtime.UNDEFINED, onSecondInstance: cast _Runtime.UNDEFINED } : App); }) #end));
+    initializeApp(({ final __callArgument52:Dynamic = out; __callArgument52; }));
+    return cast out;
     return cast null;
   }
 
@@ -145,7 +149,7 @@ class _App {
   }
 
   public static function disposeApp(app:App):Void {
-    detachApp(({ final __callArgument54:Dynamic = app; __callArgument54; }));
+    detachApp(({ final __callArgument56:Dynamic = app; __callArgument56; }));
     clearSignal((cast app.onActivate : Dynamic));
     clearSignal((cast app.onAllWindowsClosed : Dynamic));
     clearSignal((cast app.onOpenFile : Dynamic));
@@ -159,7 +163,7 @@ class _App {
   }
 
   public static function getAppDirectoryPath(host:HasAppPath, kind:AppPathKind):String {
-    return cast (cast (cast (cast host : HasAppPath).app : { var path:AppPathBackend; }).path : AppPathBackend).getAppDirectoryPath(({ final __callArgument56:Dynamic = kind; __callArgument56; }));
+    return cast (cast (cast (cast host : HasAppPath).app : { var path:AppPathBackend; }).path : AppPathBackend).getAppDirectoryPath(({ final __callArgument58:Dynamic = kind; __callArgument58; }));
     return cast null;
   }
 
@@ -212,6 +216,17 @@ class _App {
     (cast (cast (cast host : HasAppHide).app : { var hide:AppHideBackend; }).hide : AppHideBackend).hideApp();
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeApp(out:EntityConstruction<App>):Void {
+    _Runtime.setField(out, 'onActivate', (cast createSignal() : Signal<Void->Void>));
+    _Runtime.setField(out, 'onAllWindowsClosed', (cast createSignal() : Signal<Void->Void>));
+    _Runtime.setField(out, 'onOpenFile', (cast createSignal() : Signal<String->Void>));
+    _Runtime.setField(out, 'onQuitRequest', (cast createSignal() : Signal<Void->Void>));
+    _Runtime.setField(out, 'onReady', (cast createSignal() : Signal<Void->Void>));
+    _Runtime.setField(out, 'onSecondInstance', (cast createSignal() : Signal<Array<String>->Void>));
+  }
+
   public static function isAppHidden(host:HasAppHiddenQuery):Bool {
     return cast (cast (cast (cast host : HasAppHiddenQuery).app : { var hiddenQuery:AppVisibilityQueryBackend; }).hiddenQuery : AppVisibilityQueryBackend).isAppHidden();
     return cast null;
@@ -240,7 +255,7 @@ class _App {
   }
 
   public static function setAppActivationPolicy(host:HasAppActivationPolicy, policy:AppActivationPolicy):Void {
-    (cast (cast (cast host : HasAppActivationPolicy).app : { var activationPolicy:AppActivationPolicyBackend; }).activationPolicy : AppActivationPolicyBackend).setActivationPolicy(({ final __callArgument57:Dynamic = policy; __callArgument57; }));
+    (cast (cast (cast host : HasAppActivationPolicy).app : { var activationPolicy:AppActivationPolicyBackend; }).activationPolicy : AppActivationPolicyBackend).setActivationPolicy(({ final __callArgument59:Dynamic = policy; __callArgument59; }));
   }
 
   public static function setAppBadgeCount(host:HasAppBadge, count:Float):flight._internal._Promise<Bool> {
@@ -253,11 +268,11 @@ class _App {
   }
 
   public static function setAppDockMenu(host:HasAppDock, items:Array<MenuItemTemplate>):Void {
-    (cast (cast (cast host : HasAppDock).app : { var dock:AppDockBackend; }).dock : AppDockBackend).setDockMenu(({ final __callArgument58:Dynamic = items; __callArgument58; }));
+    (cast (cast (cast host : HasAppDock).app : { var dock:AppDockBackend; }).dock : AppDockBackend).setDockMenu(({ final __callArgument60:Dynamic = items; __callArgument60; }));
   }
 
   public static function setAppLoginItem(host:HasAppLoginItem, settings:AppLoginItemLike):Void {
-    (cast (cast (cast host : HasAppLoginItem).app : { var loginItem:AppLoginItemBackend; }).loginItem : AppLoginItemBackend).setLoginItem(({ final __callArgument59:Dynamic = settings; __callArgument59; }));
+    (cast (cast (cast host : HasAppLoginItem).app : { var loginItem:AppLoginItemBackend; }).loginItem : AppLoginItemBackend).setLoginItem(({ final __callArgument61:Dynamic = settings; __callArgument61; }));
   }
 
   public static function setAppName(host:HasAppNameWrite, name:String):Void {

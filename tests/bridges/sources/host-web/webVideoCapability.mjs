@@ -5,4 +5,6 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebVideoCapability = api.enableHostWebVideoCapability;
+export const createWebVideoCapabilityBackend = api.createWebVideoCapabilityBackend;
+export const initializeWebVideoCapabilityBackend = api.initializeWebVideoCapabilityBackend;
+export const webVideoCapabilityBackend = api.webVideoCapabilityBackend;

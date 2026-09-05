@@ -5,5 +5,6 @@ const api = compiled.flight._Bitmap;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const initializeBitmap__bitmapChannel = api.initializeBitmap__bitmapChannel;
 export const mergeBitmapChannels = api.mergeBitmapChannels;
 export const splitBitmapChannels = api.splitBitmapChannels;

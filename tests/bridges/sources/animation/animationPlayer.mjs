@@ -10,6 +10,7 @@ export const cloneAnimationPlayer = api.cloneAnimationPlayer;
 export const createAnimationPlayer = api.createAnimationPlayer;
 export const enableAnimationPlayerSignals = api.enableAnimationPlayerSignals;
 export const getAnimationPlayerNormalizedTime = api.getAnimationPlayerNormalizedTime;
+export const initializeAnimationPlayer = api.initializeAnimationPlayer;
 export const playAnimationPlayer = api.playAnimationPlayer;
 export const seekAnimationPlayer = api.seekAnimationPlayer;
 export const stopAnimationPlayer = api.stopAnimationPlayer;

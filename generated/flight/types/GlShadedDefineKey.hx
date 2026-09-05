@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlShadedDefineKey = { var alphaMaskEnabled:Bool; @:optional var hasColorAdjustment:Bool; @:optional var hasColorMatrix:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; @:optional var hasSkin:Bool; var hasSpecularMap:Bool; var hasUvTransform:Bool; };
+typedef GlShadedDefineKey = { var alphaMaskEnabled:Bool; @:optional var hasColorAdjustment:Bool; @:optional var hasColorMatrix:Bool; var hasDiffuseMap:Bool; @:optional var hasInstances:Bool; var hasNormalMap:Bool; @:optional var hasSkin:Bool; var hasSpecularMap:Bool; var hasUvTransform:Bool; };

@@ -4,4 +4,69 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef RigidBody2D = { var index:Float; var type:Physics2DBodyType; var x:Float; var y:Float; var angle:Float; var velocityX:Float; var velocityY:Float; var angularVelocity:Float; var forceX:Float; var forceY:Float; var torque:Float; var mass:Float; var inverseMass:Float; var inertia:Float; var inverseInertia:Float; var centerX:Float; var centerY:Float; var linearDamping:Float; var angularDamping:Float; var gravityScale:Float; var fixedRotation:Bool; var bullet:Bool; var sleeping:Bool; var sleepEnabled:Bool; var sleepTimer:Float; var colliders:Array<Physics2DCollider>; };
+#if !flight_struct_typedef
+@:allow(flight._Physics2D)
+@:keep
+@:structInit
+class RigidBody2D {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var index:Float;
+  public var type:Physics2DBodyType;
+  public var x:Float;
+  public var y:Float;
+  public var angle:Float;
+  public var velocityX:Float;
+  public var velocityY:Float;
+  public var angularVelocity:Float;
+  public var forceX:Float;
+  public var forceY:Float;
+  public var torque:Float;
+  public var mass:Float;
+  public var inverseMass:Float;
+  public var inertia:Float;
+  public var inverseInertia:Float;
+  public var centerX:Float;
+  public var centerY:Float;
+  public var linearDamping:Float;
+  public var angularDamping:Float;
+  public var gravityScale:Float;
+  public var fixedRotation:Bool;
+  public var bullet:Bool;
+  public var sleeping:Bool;
+  public var sleepEnabled:Bool;
+  public var sleepTimer:Float;
+  public var colliders:Array<Physics2DCollider>;
+
+  private function new(index:Float, type:Physics2DBodyType, x:Float, y:Float, angle:Float, velocityX:Float, velocityY:Float, angularVelocity:Float, forceX:Float, forceY:Float, torque:Float, mass:Float, inverseMass:Float, inertia:Float, inverseInertia:Float, centerX:Float, centerY:Float, linearDamping:Float, angularDamping:Float, gravityScale:Float, fixedRotation:Bool, bullet:Bool, sleeping:Bool, sleepEnabled:Bool, sleepTimer:Float, colliders:Array<Physics2DCollider>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.index = index;
+    this.type = type;
+    this.x = x;
+    this.y = y;
+    this.angle = angle;
+    this.velocityX = velocityX;
+    this.velocityY = velocityY;
+    this.angularVelocity = angularVelocity;
+    this.forceX = forceX;
+    this.forceY = forceY;
+    this.torque = torque;
+    this.mass = mass;
+    this.inverseMass = inverseMass;
+    this.inertia = inertia;
+    this.inverseInertia = inverseInertia;
+    this.centerX = centerX;
+    this.centerY = centerY;
+    this.linearDamping = linearDamping;
+    this.angularDamping = angularDamping;
+    this.gravityScale = gravityScale;
+    this.fixedRotation = fixedRotation;
+    this.bullet = bullet;
+    this.sleeping = sleeping;
+    this.sleepEnabled = sleepEnabled;
+    this.sleepTimer = sleepTimer;
+    this.colliders = colliders;
+  }
+}
+#else
+typedef RigidBody2D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var index:Float; var type:Physics2DBodyType; var x:Float; var y:Float; var angle:Float; var velocityX:Float; var velocityY:Float; var angularVelocity:Float; var forceX:Float; var forceY:Float; var torque:Float; var mass:Float; var inverseMass:Float; var inertia:Float; var inverseInertia:Float; var centerX:Float; var centerY:Float; var linearDamping:Float; var angularDamping:Float; var gravityScale:Float; var fixedRotation:Bool; var bullet:Bool; var sleeping:Bool; var sleepEnabled:Bool; var sleepTimer:Float; var colliders:Array<Physics2DCollider>; };
+#end

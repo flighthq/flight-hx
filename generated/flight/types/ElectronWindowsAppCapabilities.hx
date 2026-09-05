@@ -4,5 +4,24 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:noCompletion
+@:allow(flight._HostElectron)
+@:keep
+@:structInit
+class ElectronWindowsAppCapabilities extends flight.types.ElectronCommonAppCapabilities {
+  public var loginItem:AppLoginItemBackend;
+  public var recentDocuments:AppRecentDocumentsBackend;
+  public var userModelId:AppUserModelIdBackend;
+
+  private function new(name:AppNameBackend, version:AppVersionBackend, path:AppPathBackend, allWindowsClosed:AppAllWindowsClosedBackend, quitRequest:AppQuitRequestBackend, ready:AppReadyBackend, secondInstance:AppSecondInstanceBackend, focus:AppFocusBackend, quit:AppQuitBackend, locale:AppLocaleBackend, nameWrite:AppNameWriteBackend, relaunch:AppRelaunchBackend, singleInstance:AppSingleInstanceBackend, loginItem:AppLoginItemBackend, recentDocuments:AppRecentDocumentsBackend, userModelId:AppUserModelIdBackend):Void {
+    super(name, version, path, allWindowsClosed, quitRequest, ready, secondInstance, focus, quit, locale, nameWrite, relaunch, singleInstance);
+    this.loginItem = loginItem;
+    this.recentDocuments = recentDocuments;
+    this.userModelId = userModelId;
+  }
+}
+#else
 @:noCompletion
 typedef ElectronWindowsAppCapabilities = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var name:AppNameBackend; var version:AppVersionBackend; var path:AppPathBackend; var allWindowsClosed:AppAllWindowsClosedBackend; var quitRequest:AppQuitRequestBackend; var ready:AppReadyBackend; var secondInstance:AppSecondInstanceBackend; var focus:AppFocusBackend; var quit:AppQuitBackend; var locale:AppLocaleBackend; var nameWrite:AppNameWriteBackend; var relaunch:AppRelaunchBackend; var singleInstance:AppSingleInstanceBackend; var loginItem:AppLoginItemBackend; var recentDocuments:AppRecentDocumentsBackend; var userModelId:AppUserModelIdBackend; };
+#end

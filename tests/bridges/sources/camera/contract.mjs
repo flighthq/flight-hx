@@ -20,3 +20,6 @@ export * from './shadowCamera.mjs';
 export * from './viewMatrix.mjs';
 export * from './visibleBounds.mjs';
 export * from './zoom.mjs';
+export { initializeCamera3D } from './camera.mjs';
+export { initializeOrthographicProjection } from './projection.mjs';
+export { initializePerspectiveProjection } from './projection.mjs';

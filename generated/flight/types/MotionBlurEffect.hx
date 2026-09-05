@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MotionBlurEffect = { var kind:String; @:optional var intensity:Float; @:optional var samples:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class MotionBlurEffect extends flight.types.RenderEffect<String> {
+  public var intensity:Null<Float>;
+  public var samples:Null<Float>;
+
+  private function new(kind:String, ?intensity:Null<Float>, ?samples:Null<Float>):Void {
+    super(kind);
+    this.intensity = intensity;
+    this.samples = samples;
+  }
+}
+#else
+typedef MotionBlurEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var intensity:Float; @:optional var samples:Float; };
+#end

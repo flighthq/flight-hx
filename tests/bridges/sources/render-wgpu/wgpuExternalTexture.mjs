@@ -7,3 +7,5 @@ __syncDependencies();
 
 export const createExternalWgpuTexture = api.createExternalWgpuTexture;
 export const disposeExternalWgpuTexture = api.disposeExternalWgpuTexture;
+export const initializeExternalWgpuTextureEntry = api.initializeExternalWgpuTextureEntry;
+export const initializeExternalWgpuTextureSource = api.initializeExternalWgpuTextureSource;

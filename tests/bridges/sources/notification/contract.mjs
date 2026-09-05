@@ -4,3 +4,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './notification.mjs';
+export { initializeNotificationResource } from './notification.mjs';
+export { initializeScheduledNotificationResource } from './notification.mjs';

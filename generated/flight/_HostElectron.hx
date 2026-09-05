@@ -5,31 +5,44 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Application.notifyWindowClosed;
 import flight._Dialog.createFileDialogHandle;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Notification.bindNotificationClose;
 import flight._Notification.createNotificationResource;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
 import flight._Types.EntityRuntimeKey;
 import flight.types.Accelerator;
+import flight.types.AppActivateBackend;
+import flight.types.AppActivationPolicy;
+import flight.types.AppActivationPolicyBackend;
 import flight.types.AppAllWindowsClosedBackend;
+import flight.types.AppBadgeBackend;
+import flight.types.AppDockBackend;
 import flight.types.AppFocusBackend;
+import flight.types.AppHideBackend;
 import flight.types.AppLocaleBackend;
 import flight.types.AppLoginItem;
+import flight.types.AppLoginItemBackend;
 import flight.types.AppLoginItemLike;
 import flight.types.AppNameBackend;
 import flight.types.AppNameWriteBackend;
+import flight.types.AppOpenFileBackend;
 import flight.types.AppPathBackend;
 import flight.types.AppPathKind;
 import flight.types.AppQuitBackend;
 import flight.types.AppQuitRequestBackend;
 import flight.types.AppReadyBackend;
+import flight.types.AppRecentDocumentsBackend;
 import flight.types.AppRelaunchBackend;
 import flight.types.AppSecondInstanceBackend;
+import flight.types.AppShowBackend;
 import flight.types.AppSingleInstanceBackend;
 import flight.types.AppUpdateCheckOutcome;
 import flight.types.AppUpdateInstallOutcome;
+import flight.types.AppUserModelIdBackend;
 import flight.types.AppVersionBackend;
+import flight.types.AppVisibilityQueryBackend;
 import flight.types.ApplicationWindow;
 import flight.types.ClipboardBookmark;
 import flight.types.ClipboardBookmarkBackend;
@@ -94,6 +107,7 @@ import flight.types.ElectronTrayCapabilitiesFor;
 import flight.types.ElectronTrayConstructor;
 import flight.types.ElectronWindowsAppCapabilities;
 import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.EntityRuntime;
 import flight.types.EntityWithoutRuntime;
 import flight.types.FileDialogFilter;
@@ -102,10 +116,31 @@ import flight.types.FileOpenDialogBackend;
 import flight.types.FileOpenDialogResult;
 import flight.types.FileSaveDialogBackend;
 import flight.types.FileSaveDialogResult;
+import flight.types.HostAccessibilityCapabilities;
 import flight.types.HostAppCapabilities;
+import flight.types.HostClipboardCapabilities;
+import flight.types.HostConnectivityCapabilities;
+import flight.types.HostDialogCapabilities;
+import flight.types.HostGraphicsCapabilities;
+import flight.types.HostInputCapabilities;
+import flight.types.HostIpcCapabilities;
+import flight.types.HostMediaCapabilities;
+import flight.types.HostMenuCapabilities;
+import flight.types.HostMidiCapabilities;
+import flight.types.HostNetCapabilities;
+import flight.types.HostNotificationCapabilities;
+import flight.types.HostPowerCapabilities;
+import flight.types.HostProtocolCapabilities;
 import flight.types.HostScreenCapabilities;
+import flight.types.HostShareCapabilities;
 import flight.types.HostShellCapabilities;
+import flight.types.HostShortcutCapabilities;
+import flight.types.HostStorageCapabilities;
+import flight.types.HostSystemCapabilities;
+import flight.types.HostTextCapabilities;
 import flight.types.HostTrayCapabilities;
+import flight.types.HostUiCapabilities;
+import flight.types.HostUpdaterCapabilities;
 import flight.types.IpcHandleBackend;
 import flight.types.IpcInvokeBackend;
 import flight.types.IpcMessageBackend;
@@ -119,8 +154,10 @@ import flight.types.MessageDialogBackend;
 import flight.types.MessageDialogOptions;
 import flight.types.MessageDialogResult;
 import flight.types.NativeWindowHandle;
+import flight.types.NonEntityCreateResult;
 import flight.types.Notification;
 import flight.types.NotificationAction;
+import flight.types.NotificationActionBackend;
 import flight.types.NotificationClickBackend;
 import flight.types.NotificationCloseBackend;
 import flight.types.NotificationCloseOutcome;
@@ -133,6 +170,7 @@ import flight.types.NotificationLifecycleBackend;
 import flight.types.NotificationLifecycleFailure;
 import flight.types.NotificationLifecycleOutcome;
 import flight.types.NotificationReceivedBackend;
+import flight.types.NotificationReplyBackend;
 import flight.types.NotificationRequest;
 import flight.types.NotificationRequestField;
 import flight.types.OpenDirectoryDialogOptions;
@@ -156,6 +194,11 @@ import flight.types.PowerStatusBackend;
 import flight.types.PowerSuspensionBackend;
 import flight.types.PowerThermalBackend;
 import flight.types.PowerThermalState;
+import flight.types.ProtocolDefaultBackend;
+import flight.types.ProtocolOpenBackend;
+import flight.types.ProtocolRegistrationBackend;
+import flight.types.ProtocolRegistrationQueryBackend;
+import flight.types.ProtocolUnregistrationBackend;
 import flight.types.SaveFileDialogOptions;
 import flight.types.ScreenChangeBackend;
 import flight.types.ScreenChangeEvent;
@@ -194,13 +237,43 @@ import flight.types.StorageRemoveItemFailureReason;
 import flight.types.StorageRemoveItemResult;
 import flight.types.StorageSetItemFailureReason;
 import flight.types.StorageSetItemResult;
+import flight.types.TrayBalloonBackend;
+import flight.types.TrayBalloonDisplayResult;
 import flight.types.TrayBalloonEvent;
+import flight.types.TrayBalloonEventsBackend;
 import flight.types.TrayBalloonOptions;
+import flight.types.TrayBalloonRemoveResult;
+import flight.types.TrayBoundsBackend;
+import flight.types.TrayBoundsResult;
+import flight.types.TrayCreateProviderResult;
+import flight.types.TrayDestroyProviderResult;
+import flight.types.TrayDoubleClickPolicyBackend;
+import flight.types.TrayDoubleClickPolicyUpdateResult;
 import flight.types.TrayDropEvent;
+import flight.types.TrayDropEventsBackend;
 import flight.types.TrayIcon;
 import flight.types.TrayIconOptions;
+import flight.types.TrayImageBackend;
+import flight.types.TrayImageUpdateResult;
 import flight.types.TrayInteractionEvent;
+import flight.types.TrayInteractionEventsBackend;
+import flight.types.TrayLifecycleBackend;
+import flight.types.TrayMenuBackend;
 import flight.types.TrayMenuSelectionEvent;
+import flight.types.TrayMenuSelectionEventsBackend;
+import flight.types.TrayMenuUpdateResult;
+import flight.types.TrayPopupMenuBackend;
+import flight.types.TrayPopupMenuResult;
+import flight.types.TrayPressedImageBackend;
+import flight.types.TrayPressedImageUpdateResult;
+import flight.types.TrayTemplateImageBackend;
+import flight.types.TrayTemplateImageUpdateResult;
+import flight.types.TrayTitleBackend;
+import flight.types.TrayTitleReadResult;
+import flight.types.TrayTitleUpdateResult;
+import flight.types.TrayTooltipBackend;
+import flight.types.TrayTooltipReadResult;
+import flight.types.TrayTooltipUpdateResult;
 import flight.types.UpdateInfo;
 import flight.types.UpdaterCommandBackend;
 import flight.types.Vector2Like;
@@ -208,608 +281,7 @@ import flight.types.WindowAttachmentOwnership;
 import flight.types.WindowBackend;
 import flight.types.WindowBounds;
 import flight.types.WindowOptions;
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL42C36__electronApp {
-  public var subscribe:(Void->Void)->(Void->Void);
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(subscribe:(Void->Void)->(Void->Void)):Void {
-    this.__symbol__EntityRuntime = null;
-    this.subscribe = subscribe;
-  }
-}
-#else
-private typedef EntityShapeL42C36__electronApp = { var subscribe:(Void->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL43C25__electronApp {
-  public var focus:Void->Void;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(focus:Void->Void):Void {
-    this.__symbol__EntityRuntime = null;
-    this.focus = focus;
-  }
-}
-#else
-private typedef EntityShapeL43C25__electronApp = { var focus:Void->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL44C26__electronApp {
-  public var getLocale:Void->String;
-  public var getPreferredSystemLanguages:Void->Array<String>;
-  public var getSystemLocale:Void->String;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(getLocale:Void->String, getPreferredSystemLanguages:Void->Array<String>, getSystemLocale:Void->String):Void {
-    this.__symbol__EntityRuntime = null;
-    this.getLocale = getLocale;
-    this.getPreferredSystemLanguages = getPreferredSystemLanguages;
-    this.getSystemLocale = getSystemLocale;
-  }
-}
-#else
-private typedef EntityShapeL44C26__electronApp = { var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<String>; var getSystemLocale:Void->String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL49C24__electronApp {
-  public var getName:Void->String;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(getName:Void->String):Void {
-    this.__symbol__EntityRuntime = null;
-    this.getName = getName;
-  }
-}
-#else
-private typedef EntityShapeL49C24__electronApp = { var getName:Void->String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL50C29__electronApp {
-  public var setName:String->Void;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(setName:String->Void):Void {
-    this.__symbol__EntityRuntime = null;
-    this.setName = setName;
-  }
-}
-#else
-private typedef EntityShapeL50C29__electronApp = { var setName:String->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL51C24__electronApp {
-  public var getAppDirectoryPath:AppPathKind->String;
-  public var getAppPath:Void->String;
-  public var getExecutablePath:Void->String;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(getAppDirectoryPath:AppPathKind->String, getAppPath:Void->String, getExecutablePath:Void->String):Void {
-    this.__symbol__EntityRuntime = null;
-    this.getAppDirectoryPath = getAppDirectoryPath;
-    this.getAppPath = getAppPath;
-    this.getExecutablePath = getExecutablePath;
-  }
-}
-#else
-private typedef EntityShapeL51C24__electronApp = { var getAppDirectoryPath:AppPathKind->String; var getAppPath:Void->String; var getExecutablePath:Void->String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL56C24__electronApp {
-  public var quit:Void->Void;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(quit:Void->Void):Void {
-    this.__symbol__EntityRuntime = null;
-    this.quit = quit;
-  }
-}
-#else
-private typedef EntityShapeL56C24__electronApp = { var quit:Void->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL57C31__electronApp {
-  public var subscribe:((Void->Void)->Void)->(Void->Void);
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(subscribe:((Void->Void)->Void)->(Void->Void)):Void {
-    this.__symbol__EntityRuntime = null;
-    this.subscribe = subscribe;
-  }
-}
-#else
-private typedef EntityShapeL57C31__electronApp = { var subscribe:((Void->Void)->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL65C25__electronApp {
-  public var subscribe:(Void->Void)->(Void->Void);
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(subscribe:(Void->Void)->(Void->Void)):Void {
-    this.__symbol__EntityRuntime = null;
-    this.subscribe = subscribe;
-  }
-}
-#else
-private typedef EntityShapeL65C25__electronApp = { var subscribe:(Void->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL66C28__electronApp {
-  public var relaunch:Void->Void;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(relaunch:Void->Void):Void {
-    this.__symbol__EntityRuntime = null;
-    this.relaunch = relaunch;
-  }
-}
-#else
-private typedef EntityShapeL66C28__electronApp = { var relaunch:Void->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL67C34__electronApp {
-  public var subscribe:(Array<String>->Void)->(Void->Void);
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(subscribe:(Array<String>->Void)->(Void->Void)):Void {
-    this.__symbol__EntityRuntime = null;
-    this.subscribe = subscribe;
-  }
-}
-#else
-private typedef EntityShapeL67C34__electronApp = { var subscribe:(Array<String>->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL72C34__electronApp {
-  public var hasSingleInstanceLock:Void->Bool;
-  public var releaseSingleInstanceLock:Void->Void;
-  public var requestSingleInstanceLock:Void->Bool;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(hasSingleInstanceLock:Void->Bool, releaseSingleInstanceLock:Void->Void, requestSingleInstanceLock:Void->Bool):Void {
-    this.__symbol__EntityRuntime = null;
-    this.hasSingleInstanceLock = hasSingleInstanceLock;
-    this.releaseSingleInstanceLock = releaseSingleInstanceLock;
-    this.requestSingleInstanceLock = requestSingleInstanceLock;
-  }
-}
-#else
-private typedef EntityShapeL72C34__electronApp = { var hasSingleInstanceLock:Void->Bool; var releaseSingleInstanceLock:Void->Void; var requestSingleInstanceLock:Void->Bool; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL77C27__electronApp {
-  public var getVersion:Void->String;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(getVersion:Void->String):Void {
-    this.__symbol__EntityRuntime = null;
-    this.getVersion = getVersion;
-  }
-}
-#else
-private typedef EntityShapeL77C27__electronApp = { var getVersion:Void->String; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL83C25__electronApp {
-  public var activate:{ >Entity, var subscribe:(Void->Void)->(Void->Void); };
-  public var activationPolicy:{ >Entity, var setActivationPolicy:String->Void; };
-  public var badge:{ >Entity, var setBadgeCount:Float->flight._internal._Promise<Bool>; };
-  public var dock:{ >Entity, var bounceDock:Void->Float; var cancelAttention:Float->Void; var cancelDockBounce:Float->Void; var requestAttention:Bool->Float; var setDockBadge:String->Void; var setDockMenu:Array<MenuItemTemplate>->Void; };
-  public var loginItem:{ >Entity, var getLoginItem:Void->{ var args:Array<flight._internal._Any>; var openAsHidden:Bool; var openAtLogin:Bool; var path:String; }; var setLoginItem:AppLoginItemLike->Void; };
-  public var openFile:{ >Entity, var subscribe:(String->Void)->(Void->Void); };
-  public var hiddenQuery:{ >Entity, var isAppHidden:Void->Bool; };
-  public var hide:{ >Entity, var hideApp:Void->Void; };
-  public var recentDocuments:{ >Entity, var addRecentDocument:String->Void; var clearRecentDocuments:Void->Void; };
-  public var show:{ >Entity, var showApp:Void->Void; };
-  public var name:AppNameBackend;
-  public var version:AppVersionBackend;
-  public var path:AppPathBackend;
-  public var allWindowsClosed:AppAllWindowsClosedBackend;
-  public var quitRequest:AppQuitRequestBackend;
-  public var ready:AppReadyBackend;
-  public var secondInstance:AppSecondInstanceBackend;
-  public var focus:AppFocusBackend;
-  public var quit:AppQuitBackend;
-  public var locale:AppLocaleBackend;
-  public var nameWrite:AppNameWriteBackend;
-  public var relaunch:AppRelaunchBackend;
-  public var singleInstance:AppSingleInstanceBackend;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(activate:{ >Entity, var subscribe:(Void->Void)->(Void->Void); }, activationPolicy:{ >Entity, var setActivationPolicy:String->Void; }, badge:{ >Entity, var setBadgeCount:Float->flight._internal._Promise<Bool>; }, dock:{ >Entity, var bounceDock:Void->Float; var cancelAttention:Float->Void; var cancelDockBounce:Float->Void; var requestAttention:Bool->Float; var setDockBadge:String->Void; var setDockMenu:Array<MenuItemTemplate>->Void; }, loginItem:{ >Entity, var getLoginItem:Void->{ var args:Array<flight._internal._Any>; var openAsHidden:Bool; var openAtLogin:Bool; var path:String; }; var setLoginItem:AppLoginItemLike->Void; }, openFile:{ >Entity, var subscribe:(String->Void)->(Void->Void); }, hiddenQuery:{ >Entity, var isAppHidden:Void->Bool; }, hide:{ >Entity, var hideApp:Void->Void; }, recentDocuments:{ >Entity, var addRecentDocument:String->Void; var clearRecentDocuments:Void->Void; }, show:{ >Entity, var showApp:Void->Void; }, name:AppNameBackend, version:AppVersionBackend, path:AppPathBackend, allWindowsClosed:AppAllWindowsClosedBackend, quitRequest:AppQuitRequestBackend, ready:AppReadyBackend, secondInstance:AppSecondInstanceBackend, focus:AppFocusBackend, quit:AppQuitBackend, locale:AppLocaleBackend, nameWrite:AppNameWriteBackend, relaunch:AppRelaunchBackend, singleInstance:AppSingleInstanceBackend):Void {
-    this.__symbol__EntityRuntime = null;
-    this.activate = activate;
-    this.activationPolicy = activationPolicy;
-    this.badge = badge;
-    this.dock = dock;
-    this.loginItem = loginItem;
-    this.openFile = openFile;
-    this.hiddenQuery = hiddenQuery;
-    this.hide = hide;
-    this.recentDocuments = recentDocuments;
-    this.show = show;
-    this.name = name;
-    this.version = version;
-    this.path = path;
-    this.allWindowsClosed = allWindowsClosed;
-    this.quitRequest = quitRequest;
-    this.ready = ready;
-    this.secondInstance = secondInstance;
-    this.focus = focus;
-    this.quit = quit;
-    this.locale = locale;
-    this.nameWrite = nameWrite;
-    this.relaunch = relaunch;
-    this.singleInstance = singleInstance;
-  }
-}
-#else
-private typedef EntityShapeL83C25__electronApp = { var activate:{ >Entity, var subscribe:(Void->Void)->(Void->Void); }; var activationPolicy:{ >Entity, var setActivationPolicy:String->Void; }; var badge:{ >Entity, var setBadgeCount:Float->flight._internal._Promise<Bool>; }; var dock:{ >Entity, var bounceDock:Void->Float; var cancelAttention:Float->Void; var cancelDockBounce:Float->Void; var requestAttention:Bool->Float; var setDockBadge:String->Void; var setDockMenu:Array<MenuItemTemplate>->Void; }; var loginItem:{ >Entity, var getLoginItem:Void->{ var args:Array<flight._internal._Any>; var openAsHidden:Bool; var openAtLogin:Bool; var path:String; }; var setLoginItem:AppLoginItemLike->Void; }; var openFile:{ >Entity, var subscribe:(String->Void)->(Void->Void); }; var hiddenQuery:{ >Entity, var isAppHidden:Void->Bool; }; var hide:{ >Entity, var hideApp:Void->Void; }; var recentDocuments:{ >Entity, var addRecentDocument:String->Void; var clearRecentDocuments:Void->Void; }; var show:{ >Entity, var showApp:Void->Void; }; var name:AppNameBackend; var version:AppVersionBackend; var path:AppPathBackend; var allWindowsClosed:AppAllWindowsClosedBackend; var quitRequest:AppQuitRequestBackend; var ready:AppReadyBackend; var secondInstance:AppSecondInstanceBackend; var focus:AppFocusBackend; var quit:AppQuitBackend; var locale:AppLocaleBackend; var nameWrite:AppNameWriteBackend; var relaunch:AppRelaunchBackend; var singleInstance:AppSingleInstanceBackend; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL85C30__electronApp {
-  public var subscribe:(Void->Void)->(Void->Void);
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(subscribe:(Void->Void)->(Void->Void)):Void {
-    this.__symbol__EntityRuntime = null;
-    this.subscribe = subscribe;
-  }
-}
-#else
-private typedef EntityShapeL85C30__electronApp = { var subscribe:(Void->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL86C38__electronApp {
-  public var setActivationPolicy:String->Void;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(setActivationPolicy:String->Void):Void {
-    this.__symbol__EntityRuntime = null;
-    this.setActivationPolicy = setActivationPolicy;
-  }
-}
-#else
-private typedef EntityShapeL86C38__electronApp = { var setActivationPolicy:String->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL89C27__electronApp {
-  public var setBadgeCount:Float->flight._internal._Promise<Bool>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(setBadgeCount:Float->flight._internal._Promise<Bool>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.setBadgeCount = setBadgeCount;
-  }
-}
-#else
-private typedef EntityShapeL89C27__electronApp = { var setBadgeCount:Float->flight._internal._Promise<Bool>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL90C26__electronApp {
-  public var bounceDock:Void->Float;
-  public var cancelAttention:Float->Void;
-  public var cancelDockBounce:Float->Void;
-  public var requestAttention:Bool->Float;
-  public var setDockBadge:String->Void;
-  public var setDockMenu:Array<MenuItemTemplate>->Void;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(bounceDock:Void->Float, cancelAttention:Float->Void, cancelDockBounce:Float->Void, requestAttention:Bool->Float, setDockBadge:String->Void, setDockMenu:Array<MenuItemTemplate>->Void):Void {
-    this.__symbol__EntityRuntime = null;
-    this.bounceDock = bounceDock;
-    this.cancelAttention = cancelAttention;
-    this.cancelDockBounce = cancelDockBounce;
-    this.requestAttention = requestAttention;
-    this.setDockBadge = setDockBadge;
-    this.setDockMenu = setDockMenu;
-  }
-}
-#else
-private typedef EntityShapeL90C26__electronApp = { var bounceDock:Void->Float; var cancelAttention:Float->Void; var cancelDockBounce:Float->Void; var requestAttention:Bool->Float; var setDockBadge:String->Void; var setDockMenu:Array<MenuItemTemplate>->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL100C30__electronApp {
-  public var subscribe:(String->Void)->(Void->Void);
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(subscribe:(String->Void)->(Void->Void)):Void {
-    this.__symbol__EntityRuntime = null;
-    this.subscribe = subscribe;
-  }
-}
-#else
-private typedef EntityShapeL100C30__electronApp = { var subscribe:(String->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL105C33__electronApp {
-  public var isAppHidden:Void->Bool;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(isAppHidden:Void->Bool):Void {
-    this.__symbol__EntityRuntime = null;
-    this.isAppHidden = isAppHidden;
-  }
-}
-#else
-private typedef EntityShapeL105C33__electronApp = { var isAppHidden:Void->Bool; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL106C26__electronApp {
-  public var hideApp:Void->Void;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(hideApp:Void->Void):Void {
-    this.__symbol__EntityRuntime = null;
-    this.hideApp = hideApp;
-  }
-}
-#else
-private typedef EntityShapeL106C26__electronApp = { var hideApp:Void->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL108C26__electronApp {
-  public var showApp:Void->Void;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(showApp:Void->Void):Void {
-    this.__symbol__EntityRuntime = null;
-    this.showApp = showApp;
-  }
-}
-#else
-private typedef EntityShapeL108C26__electronApp = { var showApp:Void->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL113C25__electronApp {
-  public var loginItem:{ >Entity, var getLoginItem:Void->{ var args:Array<flight._internal._Any>; var openAsHidden:Bool; var openAtLogin:Bool; var path:String; }; var setLoginItem:AppLoginItemLike->Void; };
-  public var recentDocuments:{ >Entity, var addRecentDocument:String->Void; var clearRecentDocuments:Void->Void; };
-  public var userModelId:{ >Entity, var setUserModelId:String->Void; };
-  public var name:AppNameBackend;
-  public var version:AppVersionBackend;
-  public var path:AppPathBackend;
-  public var allWindowsClosed:AppAllWindowsClosedBackend;
-  public var quitRequest:AppQuitRequestBackend;
-  public var ready:AppReadyBackend;
-  public var secondInstance:AppSecondInstanceBackend;
-  public var focus:AppFocusBackend;
-  public var quit:AppQuitBackend;
-  public var locale:AppLocaleBackend;
-  public var nameWrite:AppNameWriteBackend;
-  public var relaunch:AppRelaunchBackend;
-  public var singleInstance:AppSingleInstanceBackend;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(loginItem:{ >Entity, var getLoginItem:Void->{ var args:Array<flight._internal._Any>; var openAsHidden:Bool; var openAtLogin:Bool; var path:String; }; var setLoginItem:AppLoginItemLike->Void; }, recentDocuments:{ >Entity, var addRecentDocument:String->Void; var clearRecentDocuments:Void->Void; }, userModelId:{ >Entity, var setUserModelId:String->Void; }, name:AppNameBackend, version:AppVersionBackend, path:AppPathBackend, allWindowsClosed:AppAllWindowsClosedBackend, quitRequest:AppQuitRequestBackend, ready:AppReadyBackend, secondInstance:AppSecondInstanceBackend, focus:AppFocusBackend, quit:AppQuitBackend, locale:AppLocaleBackend, nameWrite:AppNameWriteBackend, relaunch:AppRelaunchBackend, singleInstance:AppSingleInstanceBackend):Void {
-    this.__symbol__EntityRuntime = null;
-    this.loginItem = loginItem;
-    this.recentDocuments = recentDocuments;
-    this.userModelId = userModelId;
-    this.name = name;
-    this.version = version;
-    this.path = path;
-    this.allWindowsClosed = allWindowsClosed;
-    this.quitRequest = quitRequest;
-    this.ready = ready;
-    this.secondInstance = secondInstance;
-    this.focus = focus;
-    this.quit = quit;
-    this.locale = locale;
-    this.nameWrite = nameWrite;
-    this.relaunch = relaunch;
-    this.singleInstance = singleInstance;
-  }
-}
-#else
-private typedef EntityShapeL113C25__electronApp = { var loginItem:{ >Entity, var getLoginItem:Void->{ var args:Array<flight._internal._Any>; var openAsHidden:Bool; var openAtLogin:Bool; var path:String; }; var setLoginItem:AppLoginItemLike->Void; }; var recentDocuments:{ >Entity, var addRecentDocument:String->Void; var clearRecentDocuments:Void->Void; }; var userModelId:{ >Entity, var setUserModelId:String->Void; }; var name:AppNameBackend; var version:AppVersionBackend; var path:AppPathBackend; var allWindowsClosed:AppAllWindowsClosedBackend; var quitRequest:AppQuitRequestBackend; var ready:AppReadyBackend; var secondInstance:AppSecondInstanceBackend; var focus:AppFocusBackend; var quit:AppQuitBackend; var locale:AppLocaleBackend; var nameWrite:AppNameWriteBackend; var relaunch:AppRelaunchBackend; var singleInstance:AppSingleInstanceBackend; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL117C33__electronApp {
-  public var setUserModelId:String->Void;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(setUserModelId:String->Void):Void {
-    this.__symbol__EntityRuntime = null;
-    this.setUserModelId = setUserModelId;
-  }
-}
-#else
-private typedef EntityShapeL117C33__electronApp = { var setUserModelId:String->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL121C23__electronApp {
-  public var badge:{ >Entity, var setBadgeCount:Float->flight._internal._Promise<Bool>; };
-  public var name:AppNameBackend;
-  public var version:AppVersionBackend;
-  public var path:AppPathBackend;
-  public var allWindowsClosed:AppAllWindowsClosedBackend;
-  public var quitRequest:AppQuitRequestBackend;
-  public var ready:AppReadyBackend;
-  public var secondInstance:AppSecondInstanceBackend;
-  public var focus:AppFocusBackend;
-  public var quit:AppQuitBackend;
-  public var locale:AppLocaleBackend;
-  public var nameWrite:AppNameWriteBackend;
-  public var relaunch:AppRelaunchBackend;
-  public var singleInstance:AppSingleInstanceBackend;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(badge:{ >Entity, var setBadgeCount:Float->flight._internal._Promise<Bool>; }, name:AppNameBackend, version:AppVersionBackend, path:AppPathBackend, allWindowsClosed:AppAllWindowsClosedBackend, quitRequest:AppQuitRequestBackend, ready:AppReadyBackend, secondInstance:AppSecondInstanceBackend, focus:AppFocusBackend, quit:AppQuitBackend, locale:AppLocaleBackend, nameWrite:AppNameWriteBackend, relaunch:AppRelaunchBackend, singleInstance:AppSingleInstanceBackend):Void {
-    this.__symbol__EntityRuntime = null;
-    this.badge = badge;
-    this.name = name;
-    this.version = version;
-    this.path = path;
-    this.allWindowsClosed = allWindowsClosed;
-    this.quitRequest = quitRequest;
-    this.ready = ready;
-    this.secondInstance = secondInstance;
-    this.focus = focus;
-    this.quit = quit;
-    this.locale = locale;
-    this.nameWrite = nameWrite;
-    this.relaunch = relaunch;
-    this.singleInstance = singleInstance;
-  }
-}
-#else
-private typedef EntityShapeL121C23__electronApp = { var badge:{ >Entity, var setBadgeCount:Float->flight._internal._Promise<Bool>; }; var name:AppNameBackend; var version:AppVersionBackend; var path:AppPathBackend; var allWindowsClosed:AppAllWindowsClosedBackend; var quitRequest:AppQuitRequestBackend; var ready:AppReadyBackend; var secondInstance:AppSecondInstanceBackend; var focus:AppFocusBackend; var quit:AppQuitBackend; var locale:AppLocaleBackend; var nameWrite:AppNameWriteBackend; var relaunch:AppRelaunchBackend; var singleInstance:AppSingleInstanceBackend; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL123C25__electronApp {
-  public var setBadgeCount:Float->flight._internal._Promise<Bool>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(setBadgeCount:Float->flight._internal._Promise<Bool>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.setBadgeCount = setBadgeCount;
-  }
-}
-#else
-private typedef EntityShapeL123C25__electronApp = { var setBadgeCount:Float->flight._internal._Promise<Bool>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL128C23__electronApp {
-  public var getLoginItem:Void->{ var args:Array<flight._internal._Any>; var openAsHidden:Bool; var openAtLogin:Bool; var path:String; };
-  public var setLoginItem:AppLoginItemLike->Void;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(getLoginItem:Void->{ var args:Array<flight._internal._Any>; var openAsHidden:Bool; var openAtLogin:Bool; var path:String; }, setLoginItem:AppLoginItemLike->Void):Void {
-    this.__symbol__EntityRuntime = null;
-    this.getLoginItem = getLoginItem;
-    this.setLoginItem = setLoginItem;
-  }
-}
-#else
-private typedef EntityShapeL128C23__electronApp = { var getLoginItem:Void->{ var args:Array<flight._internal._Any>; var openAsHidden:Bool; var openAtLogin:Bool; var path:String; }; var setLoginItem:AppLoginItemLike->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL150C23__electronApp {
-  public var addRecentDocument:String->Void;
-  public var clearRecentDocuments:Void->Void;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(addRecentDocument:String->Void, clearRecentDocuments:Void->Void):Void {
-    this.__symbol__EntityRuntime = null;
-    this.addRecentDocument = addRecentDocument;
-    this.clearRecentDocuments = clearRecentDocuments;
-  }
-}
-#else
-private typedef EntityShapeL150C23__electronApp = { var addRecentDocument:String->Void; var clearRecentDocuments:Void->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
+import flight.types.WindowResizeTargetHandle;
 
 typedef ElectronClipboardBackend__electronClipboard = { var readBookmark:Void->flight._internal._Promise<Null<ClipboardBookmark>>; var writeBookmark:String->String->flight._internal._Promise<Bool>; @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getFormats:Void->flight._internal._Promise<Array<String>>; var hasFormat:String->flight._internal._Promise<Bool>; var readFormat:String->flight._internal._Promise<String>; var readHtml:Void->flight._internal._Promise<String>; var readItems:Array<String>->flight._internal._Promise<flight._internal._Record<String, String>>; var readRTF:Void->flight._internal._Promise<String>; var writeFormat:String->String->flight._internal._Promise<Bool>; var writeHtml:String->flight._internal._Promise<Bool>; var writeItems:Array<ClipboardWriteItem>->flight._internal._Promise<Bool>; var writeRTF:String->flight._internal._Promise<Bool>; var hasImage:Void->flight._internal._Promise<Bool>; var readImage:Void->flight._internal._Promise<String>; var writeImage:String->flight._internal._Promise<Bool>; var clear:Void->flight._internal._Promise<Bool>; var hasText:Void->flight._internal._Promise<Bool>; var readText:Void->flight._internal._Promise<String>; var writeText:String->flight._internal._Promise<Bool>; };
 
@@ -817,111 +289,60 @@ typedef ElectronClipboardBackend__electronClipboard = { var readBookmark:Void->f
 @:allow(flight._HostElectron)
 @:keep
 @:structInit
-private class EntityShapeL23C23__electronClipboard {
-  public var readText:Void->flight._internal._Promise<String>;
-  public var writeText:String->flight._internal._Promise<Bool>;
-  public var readHtml:Void->flight._internal._Promise<String>;
-  public var writeHtml:String->flight._internal._Promise<Bool>;
-  public var hasText:Void->flight._internal._Promise<Bool>;
-  public var readImage:Void->flight._internal._Promise<String>;
-  public var writeImage:String->flight._internal._Promise<Bool>;
-  public var hasImage:Void->flight._internal._Promise<Bool>;
-  public var readRTF:Void->flight._internal._Promise<String>;
-  public var writeRTF:String->flight._internal._Promise<Bool>;
+private class EntityShapeL23C15__electronClipboard {
   public var readBookmark:Void->flight._internal._Promise<Null<ClipboardBookmark>>;
   public var writeBookmark:String->String->flight._internal._Promise<Bool>;
-  public var readFormat:String->flight._internal._Promise<String>;
-  public var writeFormat:String->String->flight._internal._Promise<Bool>;
-  public var hasFormat:String->flight._internal._Promise<Bool>;
   public var getFormats:Void->flight._internal._Promise<Array<String>>;
+  public var hasFormat:String->flight._internal._Promise<Bool>;
+  public var readFormat:String->flight._internal._Promise<String>;
+  public var readHtml:Void->flight._internal._Promise<String>;
   public var readItems:Array<String>->flight._internal._Promise<flight._internal._Record<String, String>>;
+  public var readRTF:Void->flight._internal._Promise<String>;
+  public var writeFormat:String->String->flight._internal._Promise<Bool>;
+  public var writeHtml:String->flight._internal._Promise<Bool>;
   public var writeItems:Array<ClipboardWriteItem>->flight._internal._Promise<Bool>;
+  public var writeRTF:String->flight._internal._Promise<Bool>;
+  public var hasImage:Void->flight._internal._Promise<Bool>;
+  public var readImage:Void->flight._internal._Promise<String>;
+  public var writeImage:String->flight._internal._Promise<Bool>;
   public var clear:Void->flight._internal._Promise<Bool>;
+  public var hasText:Void->flight._internal._Promise<Bool>;
+  public var readText:Void->flight._internal._Promise<String>;
+  public var writeText:String->flight._internal._Promise<Bool>;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
-  private function new(readText:Void->flight._internal._Promise<String>, writeText:String->flight._internal._Promise<Bool>, readHtml:Void->flight._internal._Promise<String>, writeHtml:String->flight._internal._Promise<Bool>, hasText:Void->flight._internal._Promise<Bool>, readImage:Void->flight._internal._Promise<String>, writeImage:String->flight._internal._Promise<Bool>, hasImage:Void->flight._internal._Promise<Bool>, readRTF:Void->flight._internal._Promise<String>, writeRTF:String->flight._internal._Promise<Bool>, readBookmark:Void->flight._internal._Promise<Null<ClipboardBookmark>>, writeBookmark:String->String->flight._internal._Promise<Bool>, readFormat:String->flight._internal._Promise<String>, writeFormat:String->String->flight._internal._Promise<Bool>, hasFormat:String->flight._internal._Promise<Bool>, getFormats:Void->flight._internal._Promise<Array<String>>, readItems:Array<String>->flight._internal._Promise<flight._internal._Record<String, String>>, writeItems:Array<ClipboardWriteItem>->flight._internal._Promise<Bool>, clear:Void->flight._internal._Promise<Bool>):Void {
+  private function new(readBookmark:Void->flight._internal._Promise<Null<ClipboardBookmark>>, writeBookmark:String->String->flight._internal._Promise<Bool>, getFormats:Void->flight._internal._Promise<Array<String>>, hasFormat:String->flight._internal._Promise<Bool>, readFormat:String->flight._internal._Promise<String>, readHtml:Void->flight._internal._Promise<String>, readItems:Array<String>->flight._internal._Promise<flight._internal._Record<String, String>>, readRTF:Void->flight._internal._Promise<String>, writeFormat:String->String->flight._internal._Promise<Bool>, writeHtml:String->flight._internal._Promise<Bool>, writeItems:Array<ClipboardWriteItem>->flight._internal._Promise<Bool>, writeRTF:String->flight._internal._Promise<Bool>, hasImage:Void->flight._internal._Promise<Bool>, readImage:Void->flight._internal._Promise<String>, writeImage:String->flight._internal._Promise<Bool>, clear:Void->flight._internal._Promise<Bool>, hasText:Void->flight._internal._Promise<Bool>, readText:Void->flight._internal._Promise<String>, writeText:String->flight._internal._Promise<Bool>):Void {
     this.__symbol__EntityRuntime = null;
-    this.readText = readText;
-    this.writeText = writeText;
-    this.readHtml = readHtml;
-    this.writeHtml = writeHtml;
-    this.hasText = hasText;
-    this.readImage = readImage;
-    this.writeImage = writeImage;
-    this.hasImage = hasImage;
-    this.readRTF = readRTF;
-    this.writeRTF = writeRTF;
     this.readBookmark = readBookmark;
     this.writeBookmark = writeBookmark;
-    this.readFormat = readFormat;
-    this.writeFormat = writeFormat;
-    this.hasFormat = hasFormat;
     this.getFormats = getFormats;
+    this.hasFormat = hasFormat;
+    this.readFormat = readFormat;
+    this.readHtml = readHtml;
     this.readItems = readItems;
+    this.readRTF = readRTF;
+    this.writeFormat = writeFormat;
+    this.writeHtml = writeHtml;
     this.writeItems = writeItems;
+    this.writeRTF = writeRTF;
+    this.hasImage = hasImage;
+    this.readImage = readImage;
+    this.writeImage = writeImage;
     this.clear = clear;
+    this.hasText = hasText;
+    this.readText = readText;
+    this.writeText = writeText;
   }
 }
 #else
-private typedef EntityShapeL23C23__electronClipboard = { var readText:Void->flight._internal._Promise<String>; var writeText:String->flight._internal._Promise<Bool>; var readHtml:Void->flight._internal._Promise<String>; var writeHtml:String->flight._internal._Promise<Bool>; var hasText:Void->flight._internal._Promise<Bool>; var readImage:Void->flight._internal._Promise<String>; var writeImage:String->flight._internal._Promise<Bool>; var hasImage:Void->flight._internal._Promise<Bool>; var readRTF:Void->flight._internal._Promise<String>; var writeRTF:String->flight._internal._Promise<Bool>; var readBookmark:Void->flight._internal._Promise<Null<ClipboardBookmark>>; var writeBookmark:String->String->flight._internal._Promise<Bool>; var readFormat:String->flight._internal._Promise<String>; var writeFormat:String->String->flight._internal._Promise<Bool>; var hasFormat:String->flight._internal._Promise<Bool>; var getFormats:Void->flight._internal._Promise<Array<String>>; var readItems:Array<String>->flight._internal._Promise<flight._internal._Record<String, String>>; var writeItems:Array<ClipboardWriteItem>->flight._internal._Promise<Bool>; var clear:Void->flight._internal._Promise<Bool>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL23C15__electronClipboard = { var readBookmark:Void->flight._internal._Promise<Null<ClipboardBookmark>>; var writeBookmark:String->String->flight._internal._Promise<Bool>; var getFormats:Void->flight._internal._Promise<Array<String>>; var hasFormat:String->flight._internal._Promise<Bool>; var readFormat:String->flight._internal._Promise<String>; var readHtml:Void->flight._internal._Promise<String>; var readItems:Array<String>->flight._internal._Promise<flight._internal._Record<String, String>>; var readRTF:Void->flight._internal._Promise<String>; var writeFormat:String->String->flight._internal._Promise<Bool>; var writeHtml:String->flight._internal._Promise<Bool>; var writeItems:Array<ClipboardWriteItem>->flight._internal._Promise<Bool>; var writeRTF:String->flight._internal._Promise<Bool>; var hasImage:Void->flight._internal._Promise<Bool>; var readImage:Void->flight._internal._Promise<String>; var writeImage:String->flight._internal._Promise<Bool>; var clear:Void->flight._internal._Promise<Bool>; var hasText:Void->flight._internal._Promise<Bool>; var readText:Void->flight._internal._Promise<String>; var writeText:String->flight._internal._Promise<Bool>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
 @:keep
 @:structInit
-private class EntityShapeL18C23__electronDialog {
-  public var open:Null<OpenDirectoryDialogOptions>->flight._internal._Promise<DirectoryOpenDialogResult>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(open:Null<OpenDirectoryDialogOptions>->flight._internal._Promise<DirectoryOpenDialogResult>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.open = open;
-  }
-}
-#else
-private typedef EntityShapeL18C23__electronDialog = { var open:Null<OpenDirectoryDialogOptions>->flight._internal._Promise<DirectoryOpenDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL40C23__electronDialog {
-  public var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.open = open;
-  }
-}
-#else
-private typedef EntityShapeL40C23__electronDialog = { var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL67C23__electronDialog {
-  public var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.save = save;
-  }
-}
-#else
-private typedef EntityShapeL67C23__electronDialog = { var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL62C77__electronIpc {
+private class EntityShapeL44C15__electronIpc {
   public var send:flight._internal._Any->String->Array<flight._internal._Any>->Void;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
@@ -931,60 +352,7 @@ private class EntityShapeL62C77__electronIpc {
   }
 }
 #else
-private typedef EntityShapeL62C77__electronIpc = { var send:flight._internal._Any->String->Array<flight._internal._Any>->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL27C77__electronMenu {
-  public var destroy:Void->Void;
-  public var setApplicationMenu:Array<MenuItemTemplate>->Bool;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(destroy:Void->Void, setApplicationMenu:Array<MenuItemTemplate>->Bool):Void {
-    this.__symbol__EntityRuntime = null;
-    this.destroy = destroy;
-    this.setApplicationMenu = setApplicationMenu;
-  }
-}
-#else
-private typedef EntityShapeL27C77__electronMenu = { var destroy:Void->Void; var setApplicationMenu:Array<MenuItemTemplate>->Bool; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL42C65__electronMenu {
-  public var popup:Array<MenuItemTemplate>->Float->Float->flight._internal._Promise<Null<String>>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(popup:Array<MenuItemTemplate>->Float->Float->flight._internal._Promise<Null<String>>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.popup = popup;
-  }
-}
-#else
-private typedef EntityShapeL42C65__electronMenu = { var popup:Array<MenuItemTemplate>->Float->Float->flight._internal._Promise<Null<String>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL57C67__electronMenu {
-  public var subscribe:(String->Void)->(Void->Void);
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(subscribe:(String->Void)->(Void->Void)):Void {
-    this.__symbol__EntityRuntime = null;
-    this.subscribe = subscribe;
-  }
-}
-#else
-private typedef EntityShapeL57C67__electronMenu = { var subscribe:(String->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL44C15__electronIpc = { var send:flight._internal._Any->String->Array<flight._internal._Any>->Void; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef ElectronNotificationCapabilitiesFor__electronNotification<Profile> = flight._internal._Conditional<Profile, String, ElectronMacosNotificationCapabilities, ElectronNotificationCapabilities>;
@@ -993,352 +361,36 @@ typedef ElectronNotificationCapabilitiesFor__electronNotification<Profile> = fli
 @:allow(flight._HostElectron)
 @:keep
 @:structInit
-private class EntityShapeL75C89__electronNotification {
-  public var click:{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; };
-  public var close:{ var closeAllNotifications:Void->flight._internal._Promise<NotificationLifecycleOutcome>; };
-  public var delivery:{ var notify:NotificationRequest->flight._internal._Promise<NotificationDeliveryOutcome>; };
-  public var dismiss:{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; };
-  public var lifecycle:{ var destroy:Void->flight._internal._Promise<NotificationLifecycleOutcome>; };
-  public var received:{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; };
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(click:{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }, close:{ var closeAllNotifications:Void->flight._internal._Promise<NotificationLifecycleOutcome>; }, delivery:{ var notify:NotificationRequest->flight._internal._Promise<NotificationDeliveryOutcome>; }, dismiss:{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }, lifecycle:{ var destroy:Void->flight._internal._Promise<NotificationLifecycleOutcome>; }, received:{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }):Void {
-    this.__symbol__EntityRuntime = null;
-    this.click = click;
-    this.close = close;
-    this.delivery = delivery;
-    this.dismiss = dismiss;
-    this.lifecycle = lifecycle;
-    this.received = received;
-  }
-}
-#else
-private typedef EntityShapeL75C89__electronNotification = { var click:{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }; var close:{ var closeAllNotifications:Void->flight._internal._Promise<NotificationLifecycleOutcome>; }; var delivery:{ var notify:NotificationRequest->flight._internal._Promise<NotificationDeliveryOutcome>; }; var dismiss:{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }; var lifecycle:{ var destroy:Void->flight._internal._Promise<NotificationLifecycleOutcome>; }; var received:{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL178C23__electronNotification {
-  public var action:{ var attach:(Notification->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; };
-  public var reply:{ var attach:(Notification->String->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; };
-  public var delivery:NotificationDeliveryBackend;
-  public var close:NotificationCloseBackend;
-  public var click:NotificationClickBackend;
-  public var lifecycle:NotificationLifecycleBackend;
-  public var dismiss:NotificationDismissBackend;
-  public var received:NotificationReceivedBackend;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(action:{ var attach:(Notification->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }, reply:{ var attach:(Notification->String->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }, delivery:NotificationDeliveryBackend, close:NotificationCloseBackend, click:NotificationClickBackend, lifecycle:NotificationLifecycleBackend, dismiss:NotificationDismissBackend, received:NotificationReceivedBackend):Void {
-    this.__symbol__EntityRuntime = null;
-    this.action = action;
-    this.reply = reply;
-    this.delivery = delivery;
-    this.close = close;
-    this.click = click;
-    this.lifecycle = lifecycle;
-    this.dismiss = dismiss;
-    this.received = received;
-  }
-}
-#else
-private typedef EntityShapeL178C23__electronNotification = { var action:{ var attach:(Notification->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }; var reply:{ var attach:(Notification->String->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }; var delivery:NotificationDeliveryBackend; var close:NotificationCloseBackend; var click:NotificationClickBackend; var lifecycle:NotificationLifecycleBackend; var dismiss:NotificationDismissBackend; var received:NotificationReceivedBackend; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL9C23__electronPlatform {
-  public var getInfo:PlatformInfo->PlatformInfo;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(getInfo:PlatformInfo->PlatformInfo):Void {
-    this.__symbol__EntityRuntime = null;
-    this.getInfo = getInfo;
-  }
-}
-#else
-private typedef EntityShapeL9C23__electronPlatform = { var getInfo:PlatformInfo->PlatformInfo; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL37C82__electronPower {
-  public var getBatteryHealth:PowerBatteryHealth->PowerBatteryHealth;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(getBatteryHealth:PowerBatteryHealth->PowerBatteryHealth):Void {
-    this.__symbol__EntityRuntime = null;
-    this.getBatteryHealth = getBatteryHealth;
-  }
-}
-#else
-private typedef EntityShapeL37C82__electronPower = { var getBatteryHealth:PowerBatteryHealth->PowerBatteryHealth; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL42C68__electronPower {
-  public var subscribe:(Void->Void)->(Void->Void);
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(subscribe:(Void->Void)->(Void->Void)):Void {
-    this.__symbol__EntityRuntime = null;
-    this.subscribe = subscribe;
-  }
-}
-#else
-private typedef EntityShapeL42C68__electronPower = { var subscribe:(Void->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL52C64__electronPower {
-  public var getIdleState:Float->PowerIdleState;
-  public var getIdleTimeSeconds:Void->Float;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(getIdleState:Float->PowerIdleState, getIdleTimeSeconds:Void->Float):Void {
-    this.__symbol__EntityRuntime = null;
-    this.getIdleState = getIdleState;
-    this.getIdleTimeSeconds = getIdleTimeSeconds;
-  }
-}
-#else
-private typedef EntityShapeL52C64__electronPower = { var getIdleState:Float->PowerIdleState; var getIdleTimeSeconds:Void->Float; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL62C74__electronPower {
-  public var acquire:PowerKeepAwakeMode->flight._internal._Promise<PowerKeepAwakeAcquireResult>;
-  public var destroy:Void->Void;
-  public var isActive:Void->Bool;
-  public var release:Void->flight._internal._Promise<PowerKeepAwakeReleaseResult>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(acquire:PowerKeepAwakeMode->flight._internal._Promise<PowerKeepAwakeAcquireResult>, destroy:Void->Void, isActive:Void->Bool, release:Void->flight._internal._Promise<PowerKeepAwakeReleaseResult>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.acquire = acquire;
-    this.destroy = destroy;
-    this.isActive = isActive;
-    this.release = release;
-  }
-}
-#else
-private typedef EntityShapeL62C74__electronPower = { var acquire:PowerKeepAwakeMode->flight._internal._Promise<PowerKeepAwakeAcquireResult>; var destroy:Void->Void; var isActive:Void->Bool; var release:Void->flight._internal._Promise<PowerKeepAwakeReleaseResult>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL95C78__electronPower {
-  public var subscribeLock:(Void->Void)->(Void->Void);
-  public var subscribeUnlock:(Void->Void)->(Void->Void);
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(subscribeLock:(Void->Void)->(Void->Void), subscribeUnlock:(Void->Void)->(Void->Void)):Void {
-    this.__symbol__EntityRuntime = null;
-    this.subscribeLock = subscribeLock;
-    this.subscribeUnlock = subscribeUnlock;
-  }
-}
-#else
-private typedef EntityShapeL95C78__electronPower = { var subscribeLock:(Void->Void)->(Void->Void); var subscribeUnlock:(Void->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL105C68__electronPower {
-  public var getStatus:PowerStatus->PowerStatus;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(getStatus:PowerStatus->PowerStatus):Void {
-    this.__symbol__EntityRuntime = null;
-    this.getStatus = getStatus;
-  }
-}
-#else
-private typedef EntityShapeL105C68__electronPower = { var getStatus:PowerStatus->PowerStatus; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL119C76__electronPower {
-  public var subscribeResume:(Void->Void)->(Void->Void);
-  public var subscribeSuspend:(Void->Void)->(Void->Void);
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(subscribeResume:(Void->Void)->(Void->Void), subscribeSuspend:(Void->Void)->(Void->Void)):Void {
-    this.__symbol__EntityRuntime = null;
-    this.subscribeResume = subscribeResume;
-    this.subscribeSuspend = subscribeSuspend;
-  }
-}
-#else
-private typedef EntityShapeL119C76__electronPower = { var subscribeResume:(Void->Void)->(Void->Void); var subscribeSuspend:(Void->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL139C70__electronPower {
-  public var getThermalState:Void->PowerThermalState;
-  public var subscribeThermalStateChange:(PowerThermalState->Void)->(Void->Void);
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(getThermalState:Void->PowerThermalState, subscribeThermalStateChange:(PowerThermalState->Void)->(Void->Void)):Void {
-    this.__symbol__EntityRuntime = null;
-    this.getThermalState = getThermalState;
-    this.subscribeThermalStateChange = subscribeThermalStateChange;
-  }
-}
-#else
-private typedef EntityShapeL139C70__electronPower = { var getThermalState:Void->PowerThermalState; var subscribeThermalStateChange:(PowerThermalState->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL7C37__electronProtocol {
-  public var getRegisteredSchemes:Void->Array<String>;
-  public var register:String->Bool;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(getRegisteredSchemes:Void->Array<String>, register:String->Bool):Void {
-    this.__symbol__EntityRuntime = null;
-    this.getRegisteredSchemes = getRegisteredSchemes;
-    this.register = register;
-  }
-}
-#else
-private typedef EntityShapeL7C37__electronProtocol = { var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL16C27__electronProtocol {
-  public var isDefault:String->Bool;
-  public var removeAsDefault:String->Bool;
-  public var setAsDefault:String->Bool;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(isDefault:String->Bool, removeAsDefault:String->Bool, setAsDefault:String->Bool):Void {
-    this.__symbol__EntityRuntime = null;
-    this.isDefault = isDefault;
-    this.removeAsDefault = removeAsDefault;
-    this.setAsDefault = setAsDefault;
-  }
-}
-#else
-private typedef EntityShapeL16C27__electronProtocol = { var isDefault:String->Bool; var removeAsDefault:String->Bool; var setAsDefault:String->Bool; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL25C24__electronProtocol {
-  public var subscribe:(String->Void)->(Void->Void);
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(subscribe:(String->Void)->(Void->Void)):Void {
-    this.__symbol__EntityRuntime = null;
-    this.subscribe = subscribe;
-  }
-}
-#else
-private typedef EntityShapeL25C24__electronProtocol = { var subscribe:(String->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL33C37__electronProtocol {
-  public var isRegistered:String->Bool;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(isRegistered:String->Bool):Void {
-    this.__symbol__EntityRuntime = null;
-    this.isRegistered = isRegistered;
-  }
-}
-#else
-private typedef EntityShapeL33C37__electronProtocol = { var isRegistered:String->Bool; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL34C34__electronProtocol {
-  public var unregister:String->Bool;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(unregister:String->Bool):Void {
-    this.__symbol__EntityRuntime = null;
-    this.unregister = unregister;
-  }
-}
-#else
-private typedef EntityShapeL34C34__electronProtocol = { var unregister:String->Bool; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL93C23__electronRegister {
-  public var accessibility:{  };
-  public var app:flight._internal._Union2<flight._internal._Union2<ElectronMacosAppCapabilities, ElectronWindowsAppCapabilities>, ElectronLinuxAppCapabilities>;
-  public var clipboard:{ var bookmark:ElectronClipboardBackend__electronClipboard; var formats:ElectronClipboardBackend__electronClipboard; var image:ElectronClipboardBackend__electronClipboard; var text:ElectronClipboardBackend__electronClipboard; };
-  public var connectivity:{  };
-  public var dialog:{ var directoryOpen:{ >DirectoryOpenDialogBackend, >Entity, }; var fileOpen:{ >FileOpenDialogBackend, >Entity, }; var fileSave:{ >FileSaveDialogBackend, >Entity, }; var message:MessageDialogBackend; };
-  public var graphics:{  };
-  public var input:{  };
-  public var ipc:{ var handle:IpcHandleBackend; var message:IpcMessageBackend; var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; };
-  public var media:{  };
-  public var menu:ElectronMenuCapabilities;
-  public var midi:{  };
-  public var net:{  };
-  public var power:ElectronPowerCapabilities;
-  public var protocol:ElectronProtocolCapabilities;
-  public var notification:flight._internal._Union2<ElectronNotificationCapabilities, ElectronMacosNotificationCapabilities>;
-  public var shortcut:{ var query:ShortcutQueryBackend; var trigger:ShortcutTriggerBackend; };
-  public var screen:flight._internal._Any;
-  public var share:{  };
-  public var shell:HostShellCapabilities;
-  public var storage:{ var local:{ >StorageBackend, >Entity, }; };
-  public var system:{ var platform:{ >PlatformBackend, >Entity, }; };
-  public var text:{  };
-  public var tray:flight._internal._Any;
-  public var ui:{  };
-  public var updater:{ var command:UpdaterCommandBackend; };
+private class EntityShapeL126C15__electronRegister {
+  public var accessibility:HostAccessibilityCapabilities;
+  public var app:flight._internal._Intersection2<HostAppCapabilities, Entity>;
+  public var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>;
+  public var connectivity:HostConnectivityCapabilities;
+  public var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>;
+  public var graphics:HostGraphicsCapabilities;
+  public var input:HostInputCapabilities;
+  public var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>;
+  public var media:HostMediaCapabilities;
+  public var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>;
+  public var midi:HostMidiCapabilities;
+  public var net:HostNetCapabilities;
+  public var power:HostPowerCapabilities;
+  public var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>;
+  public var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>;
+  public var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>;
+  public var share:HostShareCapabilities;
+  public var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>;
+  public var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>;
+  public var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>;
+  public var system:HostSystemCapabilities;
+  public var text:HostTextCapabilities;
+  public var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>;
+  public var ui:HostUiCapabilities;
+  public var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>;
   public var window:WindowBackend;
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
-  private function new(accessibility:{  }, app:flight._internal._Union2<flight._internal._Union2<ElectronMacosAppCapabilities, ElectronWindowsAppCapabilities>, ElectronLinuxAppCapabilities>, clipboard:{ var bookmark:ElectronClipboardBackend__electronClipboard; var formats:ElectronClipboardBackend__electronClipboard; var image:ElectronClipboardBackend__electronClipboard; var text:ElectronClipboardBackend__electronClipboard; }, connectivity:{  }, dialog:{ var directoryOpen:{ >DirectoryOpenDialogBackend, >Entity, }; var fileOpen:{ >FileOpenDialogBackend, >Entity, }; var fileSave:{ >FileSaveDialogBackend, >Entity, }; var message:MessageDialogBackend; }, graphics:{  }, input:{  }, ipc:{ var handle:IpcHandleBackend; var message:IpcMessageBackend; var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }, media:{  }, menu:ElectronMenuCapabilities, midi:{  }, net:{  }, power:ElectronPowerCapabilities, protocol:ElectronProtocolCapabilities, notification:flight._internal._Union2<ElectronNotificationCapabilities, ElectronMacosNotificationCapabilities>, shortcut:{ var query:ShortcutQueryBackend; var trigger:ShortcutTriggerBackend; }, screen:flight._internal._Any, share:{  }, shell:HostShellCapabilities, storage:{ var local:{ >StorageBackend, >Entity, }; }, system:{ var platform:{ >PlatformBackend, >Entity, }; }, text:{  }, tray:flight._internal._Any, ui:{  }, updater:{ var command:UpdaterCommandBackend; }, window:WindowBackend):Void {
+  private function new(accessibility:HostAccessibilityCapabilities, app:flight._internal._Intersection2<HostAppCapabilities, Entity>, clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>, connectivity:HostConnectivityCapabilities, dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>, graphics:HostGraphicsCapabilities, input:HostInputCapabilities, ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>, media:HostMediaCapabilities, menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>, midi:HostMidiCapabilities, net:HostNetCapabilities, power:HostPowerCapabilities, protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>, notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>, screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>, share:HostShareCapabilities, shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>, shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>, storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>, system:HostSystemCapabilities, text:HostTextCapabilities, tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>, ui:HostUiCapabilities, updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>, window:WindowBackend):Void {
     this.__symbol__EntityRuntime = null;
     this.accessibility = accessibility;
     this.app = app;
@@ -1355,10 +407,10 @@ private class EntityShapeL93C23__electronRegister {
     this.power = power;
     this.protocol = protocol;
     this.notification = notification;
-    this.shortcut = shortcut;
     this.screen = screen;
     this.share = share;
     this.shell = shell;
+    this.shortcut = shortcut;
     this.storage = storage;
     this.system = system;
     this.text = text;
@@ -1369,52 +421,14 @@ private class EntityShapeL93C23__electronRegister {
   }
 }
 #else
-private typedef EntityShapeL93C23__electronRegister = { var accessibility:{  }; var app:flight._internal._Union2<flight._internal._Union2<ElectronMacosAppCapabilities, ElectronWindowsAppCapabilities>, ElectronLinuxAppCapabilities>; var clipboard:{ var bookmark:ElectronClipboardBackend__electronClipboard; var formats:ElectronClipboardBackend__electronClipboard; var image:ElectronClipboardBackend__electronClipboard; var text:ElectronClipboardBackend__electronClipboard; }; var connectivity:{  }; var dialog:{ var directoryOpen:{ >DirectoryOpenDialogBackend, >Entity, }; var fileOpen:{ >FileOpenDialogBackend, >Entity, }; var fileSave:{ >FileSaveDialogBackend, >Entity, }; var message:MessageDialogBackend; }; var graphics:{  }; var input:{  }; var ipc:{ var handle:IpcHandleBackend; var message:IpcMessageBackend; var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }; var media:{  }; var menu:ElectronMenuCapabilities; var midi:{  }; var net:{  }; var power:ElectronPowerCapabilities; var protocol:ElectronProtocolCapabilities; var notification:flight._internal._Union2<ElectronNotificationCapabilities, ElectronMacosNotificationCapabilities>; var shortcut:{ var query:ShortcutQueryBackend; var trigger:ShortcutTriggerBackend; }; var screen:flight._internal._Any; var share:{  }; var shell:HostShellCapabilities; var storage:{ var local:{ >StorageBackend, >Entity, }; }; var system:{ var platform:{ >PlatformBackend, >Entity, }; }; var text:{  }; var tray:flight._internal._Any; var ui:{  }; var updater:{ var command:UpdaterCommandBackend; }; var window:WindowBackend; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL126C15__electronRegister = { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
 @:keep
 @:structInit
-private class EntityShapeL17C30__electronScreen {
-  public var getCursorPosition:{ var x:Float; var y:Float; }->{ var x:Float; var y:Float; };
-  public var getPrimaryScreen:ScreenInfo->ScreenInfo;
-  public var getScreens:Array<ScreenInfo>->Array<ScreenInfo>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(getCursorPosition:{ var x:Float; var y:Float; }->{ var x:Float; var y:Float; }, getPrimaryScreen:ScreenInfo->ScreenInfo, getScreens:Array<ScreenInfo>->Array<ScreenInfo>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.getCursorPosition = getCursorPosition;
-    this.getPrimaryScreen = getPrimaryScreen;
-    this.getScreens = getScreens;
-  }
-}
-#else
-private typedef EntityShapeL17C30__electronScreen = { var getCursorPosition:{ var x:Float; var y:Float; }->{ var x:Float; var y:Float; }; var getPrimaryScreen:ScreenInfo->ScreenInfo; var getScreens:Array<ScreenInfo>->Array<ScreenInfo>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL36C31__electronScreen {
-  public var subscribe:(ScreenChangeEvent->Void)->(Void->Void);
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(subscribe:(ScreenChangeEvent->Void)->(Void->Void)):Void {
-    this.__symbol__EntityRuntime = null;
-    this.subscribe = subscribe;
-  }
-}
-#else
-private typedef EntityShapeL36C31__electronScreen = { var subscribe:(ScreenChangeEvent->Void)->(Void->Void); @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL46C28__electronShortcut {
+private class EntityShapeL46C41__electronShortcut {
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
   private function new():Void {
@@ -1422,37 +436,12 @@ private class EntityShapeL46C28__electronShortcut {
   }
 }
 #else
-private typedef EntityShapeL46C28__electronShortcut = { @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL46C41__electronShortcut = { @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef StorageRecord__electronStorage = flight._internal._Record<String, String>;
 
 typedef StorageRecordResult__electronStorage = flight._internal._Union2<{ var reason:String; var value:StorageRecord__electronStorage; }, { var reason:StorageGetItemFailureReason; var value:Dynamic; }>;
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL76C23__electronStorage {
-  public var clear:Void->{ var reason:String; };
-  public var getItem:String->flight._internal._Union2<{ var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }, { var reason:String; var value:Null<String>; }>;
-  public var keys:Void->flight._internal._Union2<{ var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }, { var reason:String; var value:Array<String>; }>;
-  public var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageGetItemFailureReason; }>;
-  public var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageGetItemFailureReason; }>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(clear:Void->{ var reason:String; }, getItem:String->flight._internal._Union2<{ var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }, { var reason:String; var value:Null<String>; }>, keys:Void->flight._internal._Union2<{ var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }, { var reason:String; var value:Array<String>; }>, removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageGetItemFailureReason; }>, setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageGetItemFailureReason; }>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.clear = clear;
-    this.getItem = getItem;
-    this.keys = keys;
-    this.removeItem = removeItem;
-    this.setItem = setItem;
-  }
-}
-#else
-private typedef EntityShapeL76C23__electronStorage = { var clear:Void->{ var reason:String; }; var getItem:String->flight._internal._Union2<{ var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }, { var reason:String; var value:Null<String>; }>; var keys:Void->flight._internal._Union2<{ var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }, { var reason:String; var value:Array<String>; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageGetItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageGetItemFailureReason; }>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
 
 typedef NativeListener__electronTray = { var event:String; var listener:Array<flight._internal._Any>->Void; };
 
@@ -1462,267 +451,45 @@ typedef TrayRecord__electronTray = { var balloonActive:Bool; var balloonEvents:S
 @:allow(flight._HostElectron)
 @:keep
 @:structInit
-private class EntityShapeL51C34__electronTray {
-  public var create:TrayIcon->TrayIconOptions->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
-  public var destroy:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var failures:flight._internal._Any; }, { var failures:Array<{ @:optional var error:flight._internal._Any; var step:String; }>; var outcome:String; }>>;
-  public var isDestroyed:TrayIcon->Bool;
-  public var list:Void->Array<TrayIcon>;
+private class EntityShapeL149C17__electronTray {
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
-  private function new(create:TrayIcon->TrayIconOptions->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>, destroy:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var failures:flight._internal._Any; }, { var failures:Array<{ @:optional var error:flight._internal._Any; var step:String; }>; var outcome:String; }>>, isDestroyed:TrayIcon->Bool, list:Void->Array<TrayIcon>):Void {
+  private function new():Void {
     this.__symbol__EntityRuntime = null;
-    this.create = create;
-    this.destroy = destroy;
-    this.isDestroyed = isDestroyed;
-    this.list = list;
   }
 }
 #else
-private typedef EntityShapeL51C34__electronTray = { var create:TrayIcon->TrayIconOptions->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; var destroy:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var failures:flight._internal._Any; }, { var failures:Array<{ @:optional var error:flight._internal._Any; var step:String; }>; var outcome:String; }>>; var isDestroyed:TrayIcon->Bool; var list:Void->Array<TrayIcon>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL149C17__electronTray = { @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
 @:keep
 @:structInit
-private class EntityShapeL114C30__electronTray {
-  public var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
+private class EntityShapeL167C17__electronTray {
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
-  private function new(set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>):Void {
+  private function new():Void {
     this.__symbol__EntityRuntime = null;
-    this.set = set;
   }
 }
 #else
-private typedef EntityShapeL114C30__electronTray = { var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL167C17__electronTray = { @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 #if !flight_struct_typedef
 @:allow(flight._HostElectron)
 @:keep
 @:structInit
-private class EntityShapeL134C32__electronTray {
-  public var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var tooltip:flight._internal._Any; }, { var outcome:String; var tooltip:String; }>>;
-  public var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
+private class EntityShapeL174C15__electronTray {
   public var __symbol__EntityRuntime:Null<Dynamic>;
 
-  private function new(get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var tooltip:flight._internal._Any; }, { var outcome:String; var tooltip:String; }>>, set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>):Void {
+  private function new():Void {
     this.__symbol__EntityRuntime = null;
-    this.get = get;
-    this.set = set;
   }
 }
 #else
-private typedef EntityShapeL134C32__electronTray = { var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var tooltip:flight._internal._Any; }, { var outcome:String; var tooltip:String; }>>; var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL154C29__electronTray {
-  public var set:TrayIcon->Array<MenuItemTemplate>->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(set:TrayIcon->Array<MenuItemTemplate>->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.set = set;
-  }
-}
-#else
-private typedef EntityShapeL154C29__electronTray = { var set:TrayIcon->Array<MenuItemTemplate>->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL177C26__electronTray {
-  public var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<{ var outcome:String; @:optional var bounds:flight._internal._Any; @:optional var error:flight._internal._Any; }, { var bounds:{ var height:Float; var width:Float; var x:Float; var y:Float; }; var outcome:String; @:optional var error:flight._internal._Any; }>, { var error:flight._internal._Any; var outcome:String; @:optional var bounds:flight._internal._Any; }>>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(get:TrayIcon->flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<{ var outcome:String; @:optional var bounds:flight._internal._Any; @:optional var error:flight._internal._Any; }, { var bounds:{ var height:Float; var width:Float; var x:Float; var y:Float; }; var outcome:String; @:optional var error:flight._internal._Any; }>, { var error:flight._internal._Any; var outcome:String; @:optional var bounds:flight._internal._Any; }>>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.get = get;
-  }
-}
-#else
-private typedef EntityShapeL177C26__electronTray = { var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<{ var outcome:String; @:optional var bounds:flight._internal._Any; @:optional var error:flight._internal._Any; }, { var bounds:{ var height:Float; var width:Float; var x:Float; var y:Float; }; var outcome:String; @:optional var error:flight._internal._Any; }>, { var error:flight._internal._Any; var outcome:String; @:optional var bounds:flight._internal._Any; }>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL189C37__electronTray {
-  public var getSignal:TrayIcon->Null<Signal<TrayInteractionEvent->Void>>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(getSignal:TrayIcon->Null<Signal<TrayInteractionEvent->Void>>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.getSignal = getSignal;
-  }
-}
-#else
-private typedef EntityShapeL189C37__electronTray = { var getSignal:TrayIcon->Null<Signal<TrayInteractionEvent->Void>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL192C39__electronTray {
-  public var getSignal:TrayIcon->Null<Signal<TrayMenuSelectionEvent->Void>>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(getSignal:TrayIcon->Null<Signal<TrayMenuSelectionEvent->Void>>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.getSignal = getSignal;
-  }
-}
-#else
-private typedef EntityShapeL192C39__electronTray = { var getSignal:TrayIcon->Null<Signal<TrayMenuSelectionEvent->Void>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL195C29__electronTray {
-  public var popup:TrayIcon->Null<Vector2Like>->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(popup:TrayIcon->Null<Vector2Like>->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.popup = popup;
-  }
-}
-#else
-private typedef EntityShapeL195C29__electronTray = { var popup:TrayIcon->Null<Vector2Like>->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL213C39__electronTray {
-  public var setIgnore:TrayIcon->Bool->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(setIgnore:TrayIcon->Bool->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.setIgnore = setIgnore;
-  }
-}
-#else
-private typedef EntityShapeL213C39__electronTray = { var setIgnore:TrayIcon->Bool->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL220C32__electronTray {
-  public var getSignal:TrayIcon->Null<Signal<TrayDropEvent->Void>>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(getSignal:TrayIcon->Null<Signal<TrayDropEvent->Void>>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.getSignal = getSignal;
-  }
-}
-#else
-private typedef EntityShapeL220C32__electronTray = { var getSignal:TrayIcon->Null<Signal<TrayDropEvent->Void>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL221C34__electronTray {
-  public var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.set = set;
-  }
-}
-#else
-private typedef EntityShapeL221C34__electronTray = { var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL239C35__electronTray {
-  public var set:TrayIcon->Bool->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(set:TrayIcon->Bool->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.set = set;
-  }
-}
-#else
-private typedef EntityShapeL239C35__electronTray = { var set:TrayIcon->Bool->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL252C27__electronTray {
-  public var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var title:flight._internal._Any; }, { var outcome:String; var title:String; }>>;
-  public var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var title:flight._internal._Any; }, { var outcome:String; var title:String; }>>, set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.get = get;
-    this.set = set;
-  }
-}
-#else
-private typedef EntityShapeL252C27__electronTray = { var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var title:flight._internal._Any; }, { var outcome:String; var title:String; }>>; var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL280C29__electronTray {
-  public var display:TrayIcon->TrayBalloonOptions->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
-  public var remove:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(display:TrayIcon->TrayBalloonOptions->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>, remove:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.display = display;
-    this.remove = remove;
-  }
-}
-#else
-private typedef EntityShapeL280C29__electronTray = { var display:TrayIcon->TrayBalloonOptions->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; var remove:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
-#end
-
-#if !flight_struct_typedef
-@:allow(flight._HostElectron)
-@:keep
-@:structInit
-private class EntityShapeL313C35__electronTray {
-  public var getSignal:TrayIcon->Null<Signal<TrayBalloonEvent->Void>>;
-  public var __symbol__EntityRuntime:Null<Dynamic>;
-
-  private function new(getSignal:TrayIcon->Null<Signal<TrayBalloonEvent->Void>>):Void {
-    this.__symbol__EntityRuntime = null;
-    this.getSignal = getSignal;
-  }
-}
-#else
-private typedef EntityShapeL313C35__electronTray = { var getSignal:TrayIcon->Null<Signal<TrayBalloonEvent->Void>>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+private typedef EntityShapeL174C15__electronTray = { @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
 #end
 
 typedef NativeListener__electronUpdater = Array<flight._internal._Any>->Void;
@@ -1732,6 +499,89 @@ typedef NativeCleanup__electronUpdater = Void->Void;
 typedef CheckTransaction__electronUpdater = { var active:Bool; var cleanups:flight._internal._Set<NativeCleanup__electronUpdater>; var resolve:AppUpdateCheckOutcome->Void; };
 
 typedef ElectronWindowRecord__electronWindow = { var cleanup:Array<Void->Void>; var handle:ElectronBrowserWindow; var ownership:WindowAttachmentOwnership; };
+
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:keep
+@:structInit
+private class EntityShapeL17C15__electronWindow {
+  public var attach:ApplicationWindow->flight._internal._Any->WindowAttachmentOwnership->Bool;
+  public var open:ApplicationWindow->WindowOptions->Bool;
+  public var close:ApplicationWindow->Void;
+  public var setTitle:Null<ApplicationWindow->String->Void>;
+  public var setPosition:Null<ApplicationWindow->Float->Float->Void>;
+  public var setSize:Null<ApplicationWindow->Float->Float->Void>;
+  public var getBounds:Null<ApplicationWindow->WindowBounds->WindowBounds>;
+  public var minimize:Null<ApplicationWindow->Void>;
+  public var maximize:Null<ApplicationWindow->Void>;
+  public var restore:Null<ApplicationWindow->Void>;
+  public var focus:Null<ApplicationWindow->Void>;
+  public var show:Null<ApplicationWindow->Void>;
+  public var hide:Null<ApplicationWindow->Void>;
+  public var center:Null<ApplicationWindow->Void>;
+  public var setResizable:Null<ApplicationWindow->Bool->Void>;
+  public var setAlwaysOnTop:Null<ApplicationWindow->Bool->Void>;
+  public var setMinimumSize:Null<ApplicationWindow->Float->Float->Void>;
+  public var setMaximumSize:Null<ApplicationWindow->Float->Float->Void>;
+  public var setFullscreen:Null<ApplicationWindow->Bool->Void>;
+  public var setIcon:Null<ApplicationWindow->String->Void>;
+  public var setOpacity:Null<ApplicationWindow->Float->Void>;
+  public var setSkipTaskbar:Null<ApplicationWindow->Bool->Void>;
+  public var setMenuBarVisible:Null<ApplicationWindow->Bool->Void>;
+  public var setParent:Null<ApplicationWindow->Null<ApplicationWindow>->Void>;
+  public var setProgress:Null<ApplicationWindow->Float->Void>;
+  public var requestAttention:Null<ApplicationWindow->Bool->Void>;
+  public var setContentProtection:Null<ApplicationWindow->Bool->Void>;
+  public var flashWindowFrame:Null<ApplicationWindow->Void>;
+  public var setHasShadow:Null<ApplicationWindow->Bool->Void>;
+  public var subscribeClose:Null<(Void->Bool)->(Void->Void)->(Void->Void)>;
+  public var subscribeMove:Null<(Float->Float->Void)->(Void->Void)>;
+  public var subscribeOrientation:Null<(Void->Void)->(Void->Void)>;
+  public var subscribeResize:Null<WindowResizeTargetHandle->(Float->Float->Float->Void)->(Void->Void)>;
+  public var subscribeVisibility:Null<(Bool->Void)->(Void->Void)>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(attach:ApplicationWindow->flight._internal._Any->WindowAttachmentOwnership->Bool, open:ApplicationWindow->WindowOptions->Bool, close:ApplicationWindow->Void, setTitle:Null<ApplicationWindow->String->Void>, setPosition:Null<ApplicationWindow->Float->Float->Void>, setSize:Null<ApplicationWindow->Float->Float->Void>, getBounds:Null<ApplicationWindow->WindowBounds->WindowBounds>, minimize:Null<ApplicationWindow->Void>, maximize:Null<ApplicationWindow->Void>, restore:Null<ApplicationWindow->Void>, focus:Null<ApplicationWindow->Void>, show:Null<ApplicationWindow->Void>, hide:Null<ApplicationWindow->Void>, center:Null<ApplicationWindow->Void>, setResizable:Null<ApplicationWindow->Bool->Void>, setAlwaysOnTop:Null<ApplicationWindow->Bool->Void>, setMinimumSize:Null<ApplicationWindow->Float->Float->Void>, setMaximumSize:Null<ApplicationWindow->Float->Float->Void>, setFullscreen:Null<ApplicationWindow->Bool->Void>, setIcon:Null<ApplicationWindow->String->Void>, setOpacity:Null<ApplicationWindow->Float->Void>, setSkipTaskbar:Null<ApplicationWindow->Bool->Void>, setMenuBarVisible:Null<ApplicationWindow->Bool->Void>, setParent:Null<ApplicationWindow->Null<ApplicationWindow>->Void>, setProgress:Null<ApplicationWindow->Float->Void>, requestAttention:Null<ApplicationWindow->Bool->Void>, setContentProtection:Null<ApplicationWindow->Bool->Void>, flashWindowFrame:Null<ApplicationWindow->Void>, setHasShadow:Null<ApplicationWindow->Bool->Void>, subscribeClose:Null<(Void->Bool)->(Void->Void)->(Void->Void)>, subscribeMove:Null<(Float->Float->Void)->(Void->Void)>, subscribeOrientation:Null<(Void->Void)->(Void->Void)>, subscribeResize:Null<WindowResizeTargetHandle->(Float->Float->Float->Void)->(Void->Void)>, subscribeVisibility:Null<(Bool->Void)->(Void->Void)>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.attach = attach;
+    this.open = open;
+    this.close = close;
+    this.setTitle = setTitle;
+    this.setPosition = setPosition;
+    this.setSize = setSize;
+    this.getBounds = getBounds;
+    this.minimize = minimize;
+    this.maximize = maximize;
+    this.restore = restore;
+    this.focus = focus;
+    this.show = show;
+    this.hide = hide;
+    this.center = center;
+    this.setResizable = setResizable;
+    this.setAlwaysOnTop = setAlwaysOnTop;
+    this.setMinimumSize = setMinimumSize;
+    this.setMaximumSize = setMaximumSize;
+    this.setFullscreen = setFullscreen;
+    this.setIcon = setIcon;
+    this.setOpacity = setOpacity;
+    this.setSkipTaskbar = setSkipTaskbar;
+    this.setMenuBarVisible = setMenuBarVisible;
+    this.setParent = setParent;
+    this.setProgress = setProgress;
+    this.requestAttention = requestAttention;
+    this.setContentProtection = setContentProtection;
+    this.flashWindowFrame = flashWindowFrame;
+    this.setHasShadow = setHasShadow;
+    this.subscribeClose = subscribeClose;
+    this.subscribeMove = subscribeMove;
+    this.subscribeOrientation = subscribeOrientation;
+    this.subscribeResize = subscribeResize;
+    this.subscribeVisibility = subscribeVisibility;
+  }
+}
+#else
+private typedef EntityShapeL17C15__electronWindow = { var attach:ApplicationWindow->flight._internal._Any->WindowAttachmentOwnership->Bool; var open:ApplicationWindow->WindowOptions->Bool; var close:ApplicationWindow->Void; var setTitle:Null<ApplicationWindow->String->Void>; var setPosition:Null<ApplicationWindow->Float->Float->Void>; var setSize:Null<ApplicationWindow->Float->Float->Void>; var getBounds:Null<ApplicationWindow->WindowBounds->WindowBounds>; var minimize:Null<ApplicationWindow->Void>; var maximize:Null<ApplicationWindow->Void>; var restore:Null<ApplicationWindow->Void>; var focus:Null<ApplicationWindow->Void>; var show:Null<ApplicationWindow->Void>; var hide:Null<ApplicationWindow->Void>; var center:Null<ApplicationWindow->Void>; var setResizable:Null<ApplicationWindow->Bool->Void>; var setAlwaysOnTop:Null<ApplicationWindow->Bool->Void>; var setMinimumSize:Null<ApplicationWindow->Float->Float->Void>; var setMaximumSize:Null<ApplicationWindow->Float->Float->Void>; var setFullscreen:Null<ApplicationWindow->Bool->Void>; var setIcon:Null<ApplicationWindow->String->Void>; var setOpacity:Null<ApplicationWindow->Float->Void>; var setSkipTaskbar:Null<ApplicationWindow->Bool->Void>; var setMenuBarVisible:Null<ApplicationWindow->Bool->Void>; var setParent:Null<ApplicationWindow->Null<ApplicationWindow>->Void>; var setProgress:Null<ApplicationWindow->Float->Void>; var requestAttention:Null<ApplicationWindow->Bool->Void>; var setContentProtection:Null<ApplicationWindow->Bool->Void>; var flashWindowFrame:Null<ApplicationWindow->Void>; var setHasShadow:Null<ApplicationWindow->Bool->Void>; var subscribeClose:Null<(Void->Bool)->(Void->Void)->(Void->Void)>; var subscribeMove:Null<(Float->Float->Void)->(Void->Void)>; var subscribeOrientation:Null<(Void->Void)->(Void->Void)>; var subscribeResize:Null<WindowResizeTargetHandle->(Float->Float->Float->Void)->(Void->Void)>; var subscribeVisibility:Null<(Bool->Void)->(Void->Void)>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
 
 @:noCompletion
 class _HostElectron {
@@ -1744,71 +594,443 @@ class _HostElectron {
     var app:ElectronApp = cast _Runtime.UNDEFINED;
     var subscribe:String->(Array<flight._internal._Any>->Void)->(Void->Void) = cast _Runtime.UNDEFINED;
     var common:ElectronCommonAppCapabilities = cast _Runtime.UNDEFINED;
+    var linux:EntityConstruction<ElectronLinuxAppCapabilities> = cast _Runtime.UNDEFINED;
+    var badge:AppBadgeBackend = cast _Runtime.UNDEFINED;
     app = electron.app;
     subscribe = (cast function(event:String, listener:Array<flight._internal._Any>->Void):Void->Void {
       (cast app : ElectronApp).on((cast event : String), ({ final __callArgument0:Dynamic = listener; __callArgument0; }));
       return cast function():Void { (cast app : ElectronApp).removeListener((cast event : String), ({ final __callArgument1:Dynamic = listener; __callArgument1; })); };
       return cast _Runtime.UNDEFINED;
     });
-    common = (cast createEntity((cast ({ allWindowsClosed: (cast (cast createEntity(({ final __callArgument136:Dynamic = ({ subscribe: (cast function(listener:Void->Void):Void->Void return (cast subscribe((cast 'window-all-closed' : String), ({ final __callArgument134:Dynamic = function(__unused0:Array<flight._internal._Any>):Void { listener(); }; __callArgument134; })) : Void->Void) : Dynamic) } : EntityShapeL42C36__electronApp); __callArgument136; })) : EntityShapeL42C36__electronApp) : Dynamic), focus: (cast (cast createEntity(({ final __callArgument142:Dynamic = ({ focus: (cast function():Void { (cast app : ElectronApp).focus(); } : Dynamic) } : EntityShapeL43C25__electronApp); __callArgument142; })) : EntityShapeL43C25__electronApp) : Dynamic), locale: (cast (cast createEntity(({ final __callArgument144:Dynamic = ({ getLocale: (cast function():String return (cast app : ElectronApp).getLocale() : Dynamic), getPreferredSystemLanguages: (cast function():Array<String> return (cast app : ElectronApp).getPreferredSystemLanguages() : Dynamic), getSystemLocale: (cast function():String return (cast app : ElectronApp).getSystemLocale() : Dynamic) } : EntityShapeL44C26__electronApp); __callArgument144; })) : EntityShapeL44C26__electronApp) : Dynamic), name: (cast (cast createEntity(({ final __callArgument146:Dynamic = ({ getName: (cast function():String return (cast app : ElectronApp).getName() : Dynamic) } : EntityShapeL49C24__electronApp); __callArgument146; })) : EntityShapeL49C24__electronApp) : Dynamic), nameWrite: (cast (cast createEntity(({ final __callArgument148:Dynamic = ({ setName: (cast function(name:String):Void { (cast app : ElectronApp).setName((cast name : String)); } : Dynamic) } : EntityShapeL50C29__electronApp); __callArgument148; })) : EntityShapeL50C29__electronApp) : Dynamic), path: (cast (cast createEntity(({ final __callArgument154:Dynamic = ({ getAppDirectoryPath: (cast function(kind:AppPathKind):String return (cast app : ElectronApp).getPath((cast (cast _HostElectron.toElectronPathName__electronApp(({ final __callArgument152:Dynamic = kind; __callArgument152; })) : String) : String)) : Dynamic), getAppPath: (cast function():String return (cast app : ElectronApp).getAppPath() : Dynamic), getExecutablePath: (cast function():String return (cast app : ElectronApp).getPath((cast 'exe' : String)) : Dynamic) } : EntityShapeL51C24__electronApp); __callArgument154; })) : EntityShapeL51C24__electronApp) : Dynamic), quit: (cast (cast createEntity(({ final __callArgument160:Dynamic = ({ quit: (cast function():Void { (cast app : ElectronApp).quit(); } : Dynamic) } : EntityShapeL56C24__electronApp); __callArgument160; })) : EntityShapeL56C24__electronApp) : Dynamic), quitRequest: (cast (cast createEntity(({ final __callArgument190:Dynamic = ({ subscribe: (cast function(listener:(Void->Void)->Void):Void->Void {
-      return cast (cast subscribe((cast 'before-quit' : String), ({ final __callArgument182:Dynamic = _Runtime.haxeRest(function(...args:flight._internal._Any):Void {
-        var event:Null<{ @:optional var preventDefault:Null<Void->Void>; }> = cast _Runtime.UNDEFINED;
-        event = (cast flight._internal._StaticIndex.readArray(args, 0.0) : Null<{ @:optional var preventDefault:Void->Void; }>);
-        listener(({ final __callArgument178:Dynamic = function():Void { ({ final __optionalOwner177 = event; if (__optionalOwner177 != null) { final __optionalCall176 = (cast __optionalOwner177 : { @:optional var preventDefault:Null<Void->Void>; }).preventDefault; if (__optionalCall176 != null) __optionalCall176(); } }); }; __callArgument178; }));
-      }, 0); __callArgument182; })) : Void->Void);
+    common = _Runtime.callValue(function():ElectronCommonAppCapabilities {
+      var out:EntityConstruction<ElectronCommonAppCapabilities> = cast _Runtime.UNDEFINED;
+      var allWindowsClosed:AppAllWindowsClosedBackend = cast _Runtime.UNDEFINED;
+      var focus:AppFocusBackend = cast _Runtime.UNDEFINED;
+      var locale:AppLocaleBackend = cast _Runtime.UNDEFINED;
+      var name:AppNameBackend = cast _Runtime.UNDEFINED;
+      var nameWrite:AppNameWriteBackend = cast _Runtime.UNDEFINED;
+      var path:AppPathBackend = cast _Runtime.UNDEFINED;
+      var quit:AppQuitBackend = cast _Runtime.UNDEFINED;
+      var quitRequest:AppQuitRequestBackend = cast _Runtime.UNDEFINED;
+      var ready:AppReadyBackend = cast _Runtime.UNDEFINED;
+      var relaunch:AppRelaunchBackend = cast _Runtime.UNDEFINED;
+      var secondInstance:AppSecondInstanceBackend = cast _Runtime.UNDEFINED;
+      var singleInstance:AppSingleInstanceBackend = cast _Runtime.UNDEFINED;
+      var version:AppVersionBackend = cast _Runtime.UNDEFINED;
+      out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ allWindowsClosed: cast _Runtime.UNDEFINED, focus: cast _Runtime.UNDEFINED, locale: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, nameWrite: cast _Runtime.UNDEFINED, path: cast _Runtime.UNDEFINED, quit: cast _Runtime.UNDEFINED, quitRequest: cast _Runtime.UNDEFINED, ready: cast _Runtime.UNDEFINED, relaunch: cast _Runtime.UNDEFINED, secondInstance: cast _Runtime.UNDEFINED, singleInstance: cast _Runtime.UNDEFINED, version: cast _Runtime.UNDEFINED } : ElectronCommonAppCapabilities); }) #end));
+      allWindowsClosed = _Runtime.callValue(function():AppAllWindowsClosedBackend {
+        var b:EntityConstruction<AppAllWindowsClosedBackend> = cast _Runtime.UNDEFINED;
+        b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ subscribe: cast _Runtime.UNDEFINED } : AppAllWindowsClosedBackend); }) #end));
+        initializeAppAllWindowsClosedBackend(({ final __callArgument2:Dynamic = b; __callArgument2; }), ({ final __callArgument3:Dynamic = subscribe; __callArgument3; }));
+        return cast b;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>));
+      focus = _Runtime.callValue(function():AppFocusBackend {
+        var b:EntityConstruction<AppFocusBackend> = cast _Runtime.UNDEFINED;
+        b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ focus: cast _Runtime.UNDEFINED } : AppFocusBackend); }) #end));
+        initializeAppFocusBackend(({ final __callArgument6:Dynamic = b; __callArgument6; }), ({ final __callArgument7:Dynamic = app; __callArgument7; }));
+        return cast b;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>));
+      locale = _Runtime.callValue(function():AppLocaleBackend {
+        var b:EntityConstruction<AppLocaleBackend> = cast _Runtime.UNDEFINED;
+        b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ getLocale: cast _Runtime.UNDEFINED, getPreferredSystemLanguages: cast _Runtime.UNDEFINED, getSystemLocale: cast _Runtime.UNDEFINED } : AppLocaleBackend); }) #end));
+        initializeAppLocaleBackend(({ final __callArgument10:Dynamic = b; __callArgument10; }), ({ final __callArgument11:Dynamic = app; __callArgument11; }));
+        return cast b;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>));
+      name = _Runtime.callValue(function():AppNameBackend {
+        var b:EntityConstruction<AppNameBackend> = cast _Runtime.UNDEFINED;
+        b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ getName: cast _Runtime.UNDEFINED } : AppNameBackend); }) #end));
+        initializeAppNameBackend(({ final __callArgument14:Dynamic = b; __callArgument14; }), ({ final __callArgument15:Dynamic = app; __callArgument15; }));
+        return cast b;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>));
+      nameWrite = _Runtime.callValue(function():AppNameWriteBackend {
+        var b:EntityConstruction<AppNameWriteBackend> = cast _Runtime.UNDEFINED;
+        b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ setName: cast _Runtime.UNDEFINED } : AppNameWriteBackend); }) #end));
+        initializeAppNameWriteBackend(({ final __callArgument18:Dynamic = b; __callArgument18; }), ({ final __callArgument19:Dynamic = app; __callArgument19; }));
+        return cast b;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>));
+      path = _Runtime.callValue(function():AppPathBackend {
+        var b:EntityConstruction<AppPathBackend> = cast _Runtime.UNDEFINED;
+        b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ getAppDirectoryPath: cast _Runtime.UNDEFINED, getAppPath: cast _Runtime.UNDEFINED, getExecutablePath: cast _Runtime.UNDEFINED } : AppPathBackend); }) #end));
+        initializeAppPathBackend(({ final __callArgument22:Dynamic = b; __callArgument22; }), ({ final __callArgument23:Dynamic = app; __callArgument23; }));
+        return cast b;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>));
+      quit = _Runtime.callValue(function():AppQuitBackend {
+        var b:EntityConstruction<AppQuitBackend> = cast _Runtime.UNDEFINED;
+        b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ quit: cast _Runtime.UNDEFINED } : AppQuitBackend); }) #end));
+        initializeAppQuitBackend(({ final __callArgument26:Dynamic = b; __callArgument26; }), ({ final __callArgument27:Dynamic = app; __callArgument27; }));
+        return cast b;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>));
+      quitRequest = _Runtime.callValue(function():AppQuitRequestBackend {
+        var b:EntityConstruction<AppQuitRequestBackend> = cast _Runtime.UNDEFINED;
+        b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ subscribe: cast _Runtime.UNDEFINED } : AppQuitRequestBackend); }) #end));
+        initializeAppQuitRequestBackend(({ final __callArgument30:Dynamic = b; __callArgument30; }), ({ final __callArgument31:Dynamic = subscribe; __callArgument31; }));
+        return cast b;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>));
+      ready = _Runtime.callValue(function():AppReadyBackend {
+        var b:EntityConstruction<AppReadyBackend> = cast _Runtime.UNDEFINED;
+        b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ subscribe: cast _Runtime.UNDEFINED } : AppReadyBackend); }) #end));
+        initializeAppReadyBackend(({ final __callArgument34:Dynamic = b; __callArgument34; }), ({ final __callArgument35:Dynamic = subscribe; __callArgument35; }));
+        return cast b;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>));
+      relaunch = _Runtime.callValue(function():AppRelaunchBackend {
+        var b:EntityConstruction<AppRelaunchBackend> = cast _Runtime.UNDEFINED;
+        b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ relaunch: cast _Runtime.UNDEFINED } : AppRelaunchBackend); }) #end));
+        initializeAppRelaunchBackend(({ final __callArgument38:Dynamic = b; __callArgument38; }), ({ final __callArgument39:Dynamic = app; __callArgument39; }));
+        return cast b;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>));
+      secondInstance = _Runtime.callValue(function():AppSecondInstanceBackend {
+        var b:EntityConstruction<AppSecondInstanceBackend> = cast _Runtime.UNDEFINED;
+        b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ subscribe: cast _Runtime.UNDEFINED } : AppSecondInstanceBackend); }) #end));
+        initializeAppSecondInstanceBackend(({ final __callArgument42:Dynamic = b; __callArgument42; }), ({ final __callArgument43:Dynamic = subscribe; __callArgument43; }));
+        return cast b;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>));
+      singleInstance = _Runtime.callValue(function():AppSingleInstanceBackend {
+        var b:EntityConstruction<AppSingleInstanceBackend> = cast _Runtime.UNDEFINED;
+        b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ hasSingleInstanceLock: cast _Runtime.UNDEFINED, releaseSingleInstanceLock: cast _Runtime.UNDEFINED, requestSingleInstanceLock: cast _Runtime.UNDEFINED } : AppSingleInstanceBackend); }) #end));
+        initializeAppSingleInstanceBackend(({ final __callArgument46:Dynamic = b; __callArgument46; }), ({ final __callArgument47:Dynamic = app; __callArgument47; }));
+        return cast b;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>));
+      version = _Runtime.callValue(function():AppVersionBackend {
+        var b:EntityConstruction<AppVersionBackend> = cast _Runtime.UNDEFINED;
+        b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ getVersion: cast _Runtime.UNDEFINED } : AppVersionBackend); }) #end));
+        initializeAppVersionBackend(({ final __callArgument50:Dynamic = b; __callArgument50; }), ({ final __callArgument51:Dynamic = app; __callArgument51; }));
+        return cast b;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>));
+      initializeElectronCommonAppCapabilities(({ final __callArgument54:Dynamic = out; __callArgument54; }), ({ final __callArgument55:Dynamic = allWindowsClosed; __callArgument55; }), ({ final __callArgument56:Dynamic = focus; __callArgument56; }), ({ final __callArgument57:Dynamic = locale; __callArgument57; }), ({ final __callArgument58:Dynamic = name; __callArgument58; }), ({ final __callArgument59:Dynamic = nameWrite; __callArgument59; }), ({ final __callArgument60:Dynamic = path; __callArgument60; }), ({ final __callArgument61:Dynamic = quit; __callArgument61; }), ({ final __callArgument62:Dynamic = quitRequest; __callArgument62; }), ({ final __callArgument63:Dynamic = ready; __callArgument63; }), ({ final __callArgument64:Dynamic = relaunch; __callArgument64; }), ({ final __callArgument65:Dynamic = secondInstance; __callArgument65; }), ({ final __callArgument66:Dynamic = singleInstance; __callArgument66; }), ({ final __callArgument67:Dynamic = version; __callArgument67; }));
+      return cast out;
       return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL57C31__electronApp); __callArgument190; })) : EntityShapeL57C31__electronApp) : Dynamic), ready: (cast (cast createEntity(({ final __callArgument224:Dynamic = ({ subscribe: (cast function(listener:Void->Void):Void->Void return (cast subscribe((cast 'ready' : String), ({ final __callArgument222:Dynamic = function(__unused1:Array<flight._internal._Any>):Void { listener(); }; __callArgument222; })) : Void->Void) : Dynamic) } : EntityShapeL65C25__electronApp); __callArgument224; })) : EntityShapeL65C25__electronApp) : Dynamic), relaunch: (cast (cast createEntity(({ final __callArgument230:Dynamic = ({ relaunch: (cast function():Void { (cast app : ElectronApp).relaunch(); } : Dynamic) } : EntityShapeL66C28__electronApp); __callArgument230; })) : EntityShapeL66C28__electronApp) : Dynamic), secondInstance: (cast (cast createEntity(({ final __callArgument244:Dynamic = ({ subscribe: (cast function(listener:Array<String>->Void):Void->Void {
-      return cast (cast subscribe((cast 'second-instance' : String), ({ final __callArgument240:Dynamic = _Runtime.haxeRest(function(...args:flight._internal._Any):Void { listener(({ final __callArgument238:Dynamic = _Runtime.coalesce((cast flight._internal._StaticIndex.readArray(args, 1.0) : Array<String>), function():Dynamic return cast cast ([] : Array<Dynamic>)); __callArgument238; })); }, 0); __callArgument240; })) : Void->Void);
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL67C34__electronApp); __callArgument244; })) : EntityShapeL67C34__electronApp) : Dynamic), singleInstance: (cast (cast createEntity(({ final __callArgument258:Dynamic = ({ hasSingleInstanceLock: (cast function():Bool return (cast app : ElectronApp).hasSingleInstanceLock() : Dynamic), releaseSingleInstanceLock: (cast function():Void { (cast app : ElectronApp).releaseSingleInstanceLock(); } : Dynamic), requestSingleInstanceLock: (cast function():Bool return (cast app : ElectronApp).requestSingleInstanceLock() : Dynamic) } : EntityShapeL72C34__electronApp); __callArgument258; })) : EntityShapeL72C34__electronApp) : Dynamic), version: (cast (cast createEntity(({ final __callArgument260:Dynamic = ({ getVersion: (cast function():String return (cast app : ElectronApp).getVersion() : Dynamic) } : EntityShapeL77C27__electronApp); __callArgument260; })) : EntityShapeL77C27__electronApp) : Dynamic) } : ElectronCommonAppCapabilities) : Dynamic)) : ElectronCommonAppCapabilities);
+    }, cast ([] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(profile, 'macos') : Bool)) {
       var dock:Null<ElectronDock> = (cast app : ElectronApp).dock;
       if ((cast _Runtime.strictEquals(dock, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.throwValue(_Runtime.error('Electron macOS app capabilities require app.dock')); }
-      return cast (cast createEntity((cast (#if flight_struct_typedef _Runtime.mergeObjects([common, { activate: (cast createEntity(({ final __callArgument526:Dynamic = ({ subscribe: (cast function(listener:Void->Void):Void->Void return (cast subscribe((cast 'activate' : String), ({ final __callArgument524:Dynamic = function(__unused2:Array<flight._internal._Any>):Void { listener(); }; __callArgument524; })) : Void->Void) : Dynamic) } : EntityShapeL85C30__electronApp); __callArgument526; })) : EntityShapeL85C30__electronApp) }, { activationPolicy: (cast createEntity(({ final __callArgument532:Dynamic = ({ setActivationPolicy: (cast function(policy:String):Void { (cast app : ElectronApp).setActivationPolicy((cast policy : String)); } : Dynamic) } : EntityShapeL86C38__electronApp); __callArgument532; })) : EntityShapeL86C38__electronApp) }, { badge: (cast createEntity(({ final __callArgument534:Dynamic = ({ setBadgeCount: (cast function(count:Float):flight._internal._Promise<Bool> {
-        return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-          return flight._internal._Async.resolve((cast app : ElectronApp).setBadgeCount((cast count : Float)));
-        }));
-      } : Dynamic) } : EntityShapeL89C27__electronApp); __callArgument534; })) : EntityShapeL89C27__electronApp) }, { dock: (cast createEntity(({ final __callArgument542:Dynamic = ({ bounceDock: (cast function():Float return (cast dock : ElectronDock).bounce(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Dynamic), cancelAttention: (cast function(id:Float):Void { (cast dock : ElectronDock).cancelBounce((cast id : Float)); } : Dynamic), cancelDockBounce: (cast function(id:Float):Void { (cast dock : ElectronDock).cancelBounce((cast id : Float)); } : Dynamic), requestAttention: (cast function(critical:Bool):Float return (cast dock : ElectronDock).bounce(({ final __callArgument539:Dynamic = ((cast critical : Bool) ? (cast 'critical' : Dynamic) : (cast 'informational' : Dynamic)); __callArgument539; })) : Dynamic), setDockBadge: (cast function(text:String):Void { (cast dock : ElectronDock).setBadge((cast text : String)); } : Dynamic), setDockMenu: (cast function(items:Array<MenuItemTemplate>):Void { (cast dock : ElectronDock).setMenu((cast electron.Menu : ElectronMenuConstructor).buildFromTemplate((cast (cast (#if js _Runtime.callValue(toElectronTemplate, cast ([({ final __callArgument541:Dynamic = items; __callArgument541; })] : Array<Dynamic>)) #else toElectronTemplate(({ final __callArgument540:Dynamic = items; __callArgument540; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Array<ElectronMenuItemOptions>) : Dynamic))); } : Dynamic) } : EntityShapeL90C26__electronApp); __callArgument542; })) : EntityShapeL90C26__electronApp) }, { loginItem: (cast _HostElectron.createElectronLoginItemBackend__electronApp(({ final __callArgument550:Dynamic = electron; __callArgument550; })) : { >Entity, var getLoginItem:Void->{ var args:Array<flight._internal._Any>; var openAsHidden:Bool; var openAtLogin:Bool; var path:String; }; var setLoginItem:AppLoginItemLike->Void; }) }, { openFile: (cast createEntity(({ final __callArgument556:Dynamic = ({ subscribe: (cast function(listener:String->Void):Void->Void {
-        return cast (cast subscribe((cast 'open-file' : String), ({ final __callArgument554:Dynamic = _Runtime.haxeRest(function(...args:flight._internal._Any):Void { listener((cast Std.string(_Runtime.coalesce(flight._internal._StaticIndex.readArray(args, 1.0), function():Dynamic return cast '')) : String)); }, 0); __callArgument554; })) : Void->Void);
+      var macos:EntityConstruction<ElectronMacosAppCapabilities> = cast _Runtime.UNDEFINED;
+      macos = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ activate: cast _Runtime.UNDEFINED, activationPolicy: cast _Runtime.UNDEFINED, allWindowsClosed: cast _Runtime.UNDEFINED, badge: cast _Runtime.UNDEFINED, dock: cast _Runtime.UNDEFINED, focus: cast _Runtime.UNDEFINED, hiddenQuery: cast _Runtime.UNDEFINED, hide: cast _Runtime.UNDEFINED, locale: cast _Runtime.UNDEFINED, loginItem: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, nameWrite: cast _Runtime.UNDEFINED, openFile: cast _Runtime.UNDEFINED, path: cast _Runtime.UNDEFINED, quit: cast _Runtime.UNDEFINED, quitRequest: cast _Runtime.UNDEFINED, ready: cast _Runtime.UNDEFINED, recentDocuments: cast _Runtime.UNDEFINED, relaunch: cast _Runtime.UNDEFINED, secondInstance: cast _Runtime.UNDEFINED, show: cast _Runtime.UNDEFINED, singleInstance: cast _Runtime.UNDEFINED, version: cast _Runtime.UNDEFINED } : ElectronMacosAppCapabilities); }) #end));
+      var activate:AppActivateBackend = _Runtime.callValue(function():AppActivateBackend {
+        var b:EntityConstruction<AppActivateBackend> = cast _Runtime.UNDEFINED;
+        b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ subscribe: cast _Runtime.UNDEFINED } : AppActivateBackend); }) #end));
+        initializeAppActivateBackend(({ final __callArgument82:Dynamic = b; __callArgument82; }), ({ final __callArgument83:Dynamic = subscribe; __callArgument83; }));
+        return cast b;
         return cast _Runtime.UNDEFINED;
-      } : Dynamic) } : EntityShapeL100C30__electronApp); __callArgument556; })) : EntityShapeL100C30__electronApp) }, { hiddenQuery: (cast createEntity(({ final __callArgument562:Dynamic = ({ isAppHidden: (cast function():Bool return (cast app : ElectronApp).isHidden() : Dynamic) } : EntityShapeL105C33__electronApp); __callArgument562; })) : EntityShapeL105C33__electronApp) }, { hide: (cast createEntity(({ final __callArgument564:Dynamic = ({ hideApp: (cast function():Void { (cast app : ElectronApp).hide(); } : Dynamic) } : EntityShapeL106C26__electronApp); __callArgument564; })) : EntityShapeL106C26__electronApp) }, { recentDocuments: (cast _HostElectron.createElectronRecentDocumentsBackend__electronApp(({ final __callArgument566:Dynamic = electron; __callArgument566; })) : { >Entity, var addRecentDocument:String->Void; var clearRecentDocuments:Void->Void; }) }, { show: (cast createEntity(({ final __callArgument568:Dynamic = ({ showApp: (cast function():Void { (cast app : ElectronApp).show(); } : Dynamic) } : EntityShapeL108C26__electronApp); __callArgument568; })) : EntityShapeL108C26__electronApp) }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([common, { activate: (cast createEntity(({ final __callArgument526:Dynamic = ({ subscribe: (cast function(listener:Void->Void):Void->Void return (cast subscribe((cast 'activate' : String), ({ final __callArgument524:Dynamic = function(__unused2:Array<flight._internal._Any>):Void { listener(); }; __callArgument524; })) : Void->Void) : Dynamic) } : EntityShapeL85C30__electronApp); __callArgument526; })) : EntityShapeL85C30__electronApp) }, { activationPolicy: (cast createEntity(({ final __callArgument532:Dynamic = ({ setActivationPolicy: (cast function(policy:String):Void { (cast app : ElectronApp).setActivationPolicy((cast policy : String)); } : Dynamic) } : EntityShapeL86C38__electronApp); __callArgument532; })) : EntityShapeL86C38__electronApp) }, { badge: (cast createEntity(({ final __callArgument534:Dynamic = ({ setBadgeCount: (cast function(count:Float):flight._internal._Promise<Bool> {
-        return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-          return flight._internal._Async.resolve((cast app : ElectronApp).setBadgeCount((cast count : Float)));
-        }));
-      } : Dynamic) } : EntityShapeL89C27__electronApp); __callArgument534; })) : EntityShapeL89C27__electronApp) }, { dock: (cast createEntity(({ final __callArgument542:Dynamic = ({ bounceDock: (cast function():Float return (cast dock : ElectronDock).bounce(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Dynamic), cancelAttention: (cast function(id:Float):Void { (cast dock : ElectronDock).cancelBounce((cast id : Float)); } : Dynamic), cancelDockBounce: (cast function(id:Float):Void { (cast dock : ElectronDock).cancelBounce((cast id : Float)); } : Dynamic), requestAttention: (cast function(critical:Bool):Float return (cast dock : ElectronDock).bounce(({ final __callArgument539:Dynamic = ((cast critical : Bool) ? (cast 'critical' : Dynamic) : (cast 'informational' : Dynamic)); __callArgument539; })) : Dynamic), setDockBadge: (cast function(text:String):Void { (cast dock : ElectronDock).setBadge((cast text : String)); } : Dynamic), setDockMenu: (cast function(items:Array<MenuItemTemplate>):Void { (cast dock : ElectronDock).setMenu((cast electron.Menu : ElectronMenuConstructor).buildFromTemplate((cast (cast (#if js _Runtime.callValue(toElectronTemplate, cast ([({ final __callArgument541:Dynamic = items; __callArgument541; })] : Array<Dynamic>)) #else toElectronTemplate(({ final __callArgument540:Dynamic = items; __callArgument540; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Array<ElectronMenuItemOptions>) : Dynamic))); } : Dynamic) } : EntityShapeL90C26__electronApp); __callArgument542; })) : EntityShapeL90C26__electronApp) }, { loginItem: (cast _HostElectron.createElectronLoginItemBackend__electronApp(({ final __callArgument550:Dynamic = electron; __callArgument550; })) : { >Entity, var getLoginItem:Void->{ var args:Array<flight._internal._Any>; var openAsHidden:Bool; var openAtLogin:Bool; var path:String; }; var setLoginItem:AppLoginItemLike->Void; }) }, { openFile: (cast createEntity(({ final __callArgument556:Dynamic = ({ subscribe: (cast function(listener:String->Void):Void->Void {
-        return cast (cast subscribe((cast 'open-file' : String), ({ final __callArgument554:Dynamic = _Runtime.haxeRest(function(...args:flight._internal._Any):Void { listener((cast Std.string(_Runtime.coalesce(flight._internal._StaticIndex.readArray(args, 1.0), function():Dynamic return cast '')) : String)); }, 0); __callArgument554; })) : Void->Void);
+      }, cast ([] : Array<Dynamic>));
+      var activationPolicy:AppActivationPolicyBackend = _Runtime.callValue(function():AppActivationPolicyBackend {
+        var b:EntityConstruction<AppActivationPolicyBackend> = cast _Runtime.UNDEFINED;
+        b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ setActivationPolicy: cast _Runtime.UNDEFINED } : AppActivationPolicyBackend); }) #end));
+        initializeAppActivationPolicyBackend(({ final __callArgument86:Dynamic = b; __callArgument86; }), ({ final __callArgument87:Dynamic = app; __callArgument87; }));
+        return cast b;
         return cast _Runtime.UNDEFINED;
-      } : Dynamic) } : EntityShapeL100C30__electronApp); __callArgument556; })) : EntityShapeL100C30__electronApp) }, { hiddenQuery: (cast createEntity(({ final __callArgument562:Dynamic = ({ isAppHidden: (cast function():Bool return (cast app : ElectronApp).isHidden() : Dynamic) } : EntityShapeL105C33__electronApp); __callArgument562; })) : EntityShapeL105C33__electronApp) }, { hide: (cast createEntity(({ final __callArgument564:Dynamic = ({ hideApp: (cast function():Void { (cast app : ElectronApp).hide(); } : Dynamic) } : EntityShapeL106C26__electronApp); __callArgument564; })) : EntityShapeL106C26__electronApp) }, { recentDocuments: (cast _HostElectron.createElectronRecentDocumentsBackend__electronApp(({ final __callArgument566:Dynamic = electron; __callArgument566; })) : { >Entity, var addRecentDocument:String->Void; var clearRecentDocuments:Void->Void; }) }, { show: (cast createEntity(({ final __callArgument568:Dynamic = ({ showApp: (cast function():Void { (cast app : ElectronApp).show(); } : Dynamic) } : EntityShapeL108C26__electronApp); __callArgument568; })) : EntityShapeL108C26__electronApp) }]); ({ activate: _Runtime.field(__structInitSource, 'activate'), activationPolicy: _Runtime.field(__structInitSource, 'activationPolicy'), badge: _Runtime.field(__structInitSource, 'badge'), dock: _Runtime.field(__structInitSource, 'dock'), loginItem: _Runtime.field(__structInitSource, 'loginItem'), openFile: _Runtime.field(__structInitSource, 'openFile'), hiddenQuery: _Runtime.field(__structInitSource, 'hiddenQuery'), hide: _Runtime.field(__structInitSource, 'hide'), recentDocuments: _Runtime.field(__structInitSource, 'recentDocuments'), show: _Runtime.field(__structInitSource, 'show'), name: _Runtime.field(__structInitSource, 'name'), version: _Runtime.field(__structInitSource, 'version'), path: _Runtime.field(__structInitSource, 'path'), allWindowsClosed: _Runtime.field(__structInitSource, 'allWindowsClosed'), quitRequest: _Runtime.field(__structInitSource, 'quitRequest'), ready: _Runtime.field(__structInitSource, 'ready'), secondInstance: _Runtime.field(__structInitSource, 'secondInstance'), focus: _Runtime.field(__structInitSource, 'focus'), quit: _Runtime.field(__structInitSource, 'quit'), locale: _Runtime.field(__structInitSource, 'locale'), nameWrite: _Runtime.field(__structInitSource, 'nameWrite'), relaunch: _Runtime.field(__structInitSource, 'relaunch'), singleInstance: _Runtime.field(__structInitSource, 'singleInstance') } : EntityShapeL83C25__electronApp); }) #end) : Dynamic)) : EntityShapeL83C25__electronApp);
+      }, cast ([] : Array<Dynamic>));
+      var badge:AppBadgeBackend = _Runtime.callValue(function():AppBadgeBackend {
+        var b:EntityConstruction<AppBadgeBackend> = cast _Runtime.UNDEFINED;
+        b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ setBadgeCount: cast _Runtime.UNDEFINED } : AppBadgeBackend); }) #end));
+        initializeAppBadgeBackend(({ final __callArgument90:Dynamic = b; __callArgument90; }), ({ final __callArgument91:Dynamic = app; __callArgument91; }));
+        return cast b;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>));
+      var dockBackend:AppDockBackend = _Runtime.callValue(function():AppDockBackend {
+        var b:EntityConstruction<AppDockBackend> = cast _Runtime.UNDEFINED;
+        b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ bounceDock: cast _Runtime.UNDEFINED, cancelAttention: cast _Runtime.UNDEFINED, cancelDockBounce: cast _Runtime.UNDEFINED, requestAttention: cast _Runtime.UNDEFINED, setDockBadge: cast _Runtime.UNDEFINED, setDockMenu: cast _Runtime.UNDEFINED } : AppDockBackend); }) #end));
+        initializeAppDockBackend(({ final __callArgument94:Dynamic = b; __callArgument94; }), ({ final __callArgument95:Dynamic = dock; __callArgument95; }), ({ final __callArgument96:Dynamic = electron; __callArgument96; }));
+        return cast b;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>));
+      var hide:AppHideBackend = _Runtime.callValue(function():AppHideBackend {
+        var b:EntityConstruction<AppHideBackend> = cast _Runtime.UNDEFINED;
+        b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ hideApp: cast _Runtime.UNDEFINED } : AppHideBackend); }) #end));
+        initializeAppHideBackend(({ final __callArgument100:Dynamic = b; __callArgument100; }), ({ final __callArgument101:Dynamic = app; __callArgument101; }));
+        return cast b;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>));
+      var hiddenQuery:AppVisibilityQueryBackend = _Runtime.callValue(function():AppVisibilityQueryBackend {
+        var b:EntityConstruction<AppVisibilityQueryBackend> = cast _Runtime.UNDEFINED;
+        b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ isAppHidden: cast _Runtime.UNDEFINED } : AppVisibilityQueryBackend); }) #end));
+        initializeAppVisibilityQueryBackend(({ final __callArgument104:Dynamic = b; __callArgument104; }), ({ final __callArgument105:Dynamic = app; __callArgument105; }));
+        return cast b;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>));
+      var loginItem:AppLoginItemBackend = (cast _HostElectron.createElectronLoginItemBackend__electronApp(({ final __callArgument108:Dynamic = electron; __callArgument108; })) : AppLoginItemBackend);
+      var openFile:AppOpenFileBackend = _Runtime.callValue(function():AppOpenFileBackend {
+        var b:EntityConstruction<AppOpenFileBackend> = cast _Runtime.UNDEFINED;
+        b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ subscribe: cast _Runtime.UNDEFINED } : AppOpenFileBackend); }) #end));
+        initializeAppOpenFileBackend(({ final __callArgument110:Dynamic = b; __callArgument110; }), ({ final __callArgument111:Dynamic = subscribe; __callArgument111; }));
+        return cast b;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>));
+      var recentDocuments:AppRecentDocumentsBackend = (cast _HostElectron.createElectronRecentDocumentsBackend__electronApp(({ final __callArgument114:Dynamic = electron; __callArgument114; })) : AppRecentDocumentsBackend);
+      var show:AppShowBackend = _Runtime.callValue(function():AppShowBackend {
+        var b:EntityConstruction<AppShowBackend> = cast _Runtime.UNDEFINED;
+        b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ showApp: cast _Runtime.UNDEFINED } : AppShowBackend); }) #end));
+        initializeAppShowBackend(({ final __callArgument116:Dynamic = b; __callArgument116; }), ({ final __callArgument117:Dynamic = app; __callArgument117; }));
+        return cast b;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>));
+      initializeElectronMacosAppCapabilities(({ final __callArgument120:Dynamic = macos; __callArgument120; }), ({ final __callArgument121:Dynamic = common; __callArgument121; }), ({ final __callArgument122:Dynamic = activate; __callArgument122; }), ({ final __callArgument123:Dynamic = activationPolicy; __callArgument123; }), ({ final __callArgument124:Dynamic = badge; __callArgument124; }), ({ final __callArgument125:Dynamic = dockBackend; __callArgument125; }), ({ final __callArgument126:Dynamic = hide; __callArgument126; }), ({ final __callArgument127:Dynamic = hiddenQuery; __callArgument127; }), ({ final __callArgument128:Dynamic = loginItem; __callArgument128; }), ({ final __callArgument129:Dynamic = openFile; __callArgument129; }), ({ final __callArgument130:Dynamic = recentDocuments; __callArgument130; }), ({ final __callArgument131:Dynamic = show; __callArgument131; }));
+      return cast macos;
     }
     if ((cast _Runtime.strictEquals(profile, 'windows') : Bool)) {
-      return cast (cast createEntity((cast (#if flight_struct_typedef _Runtime.mergeObjects([common, { loginItem: (cast _HostElectron.createElectronLoginItemBackend__electronApp(({ final __callArgument618:Dynamic = electron; __callArgument618; })) : { >Entity, var getLoginItem:Void->{ var args:Array<flight._internal._Any>; var openAsHidden:Bool; var openAtLogin:Bool; var path:String; }; var setLoginItem:AppLoginItemLike->Void; }) }, { recentDocuments: (cast _HostElectron.createElectronRecentDocumentsBackend__electronApp(({ final __callArgument620:Dynamic = electron; __callArgument620; })) : { >Entity, var addRecentDocument:String->Void; var clearRecentDocuments:Void->Void; }) }, { userModelId: (cast createEntity(({ final __callArgument622:Dynamic = ({ setUserModelId: (cast function(id:String):Void { (cast app : ElectronApp).setAppUserModelId((cast id : String)); } : Dynamic) } : EntityShapeL117C33__electronApp); __callArgument622; })) : EntityShapeL117C33__electronApp) }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([common, { loginItem: (cast _HostElectron.createElectronLoginItemBackend__electronApp(({ final __callArgument618:Dynamic = electron; __callArgument618; })) : { >Entity, var getLoginItem:Void->{ var args:Array<flight._internal._Any>; var openAsHidden:Bool; var openAtLogin:Bool; var path:String; }; var setLoginItem:AppLoginItemLike->Void; }) }, { recentDocuments: (cast _HostElectron.createElectronRecentDocumentsBackend__electronApp(({ final __callArgument620:Dynamic = electron; __callArgument620; })) : { >Entity, var addRecentDocument:String->Void; var clearRecentDocuments:Void->Void; }) }, { userModelId: (cast createEntity(({ final __callArgument622:Dynamic = ({ setUserModelId: (cast function(id:String):Void { (cast app : ElectronApp).setAppUserModelId((cast id : String)); } : Dynamic) } : EntityShapeL117C33__electronApp); __callArgument622; })) : EntityShapeL117C33__electronApp) }]); ({ loginItem: _Runtime.field(__structInitSource, 'loginItem'), recentDocuments: _Runtime.field(__structInitSource, 'recentDocuments'), userModelId: _Runtime.field(__structInitSource, 'userModelId'), name: _Runtime.field(__structInitSource, 'name'), version: _Runtime.field(__structInitSource, 'version'), path: _Runtime.field(__structInitSource, 'path'), allWindowsClosed: _Runtime.field(__structInitSource, 'allWindowsClosed'), quitRequest: _Runtime.field(__structInitSource, 'quitRequest'), ready: _Runtime.field(__structInitSource, 'ready'), secondInstance: _Runtime.field(__structInitSource, 'secondInstance'), focus: _Runtime.field(__structInitSource, 'focus'), quit: _Runtime.field(__structInitSource, 'quit'), locale: _Runtime.field(__structInitSource, 'locale'), nameWrite: _Runtime.field(__structInitSource, 'nameWrite'), relaunch: _Runtime.field(__structInitSource, 'relaunch'), singleInstance: _Runtime.field(__structInitSource, 'singleInstance') } : EntityShapeL113C25__electronApp); }) #end) : Dynamic)) : EntityShapeL113C25__electronApp);
+      var win:EntityConstruction<ElectronWindowsAppCapabilities> = cast _Runtime.UNDEFINED;
+      win = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ allWindowsClosed: cast _Runtime.UNDEFINED, focus: cast _Runtime.UNDEFINED, locale: cast _Runtime.UNDEFINED, loginItem: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, nameWrite: cast _Runtime.UNDEFINED, path: cast _Runtime.UNDEFINED, quit: cast _Runtime.UNDEFINED, quitRequest: cast _Runtime.UNDEFINED, ready: cast _Runtime.UNDEFINED, recentDocuments: cast _Runtime.UNDEFINED, relaunch: cast _Runtime.UNDEFINED, secondInstance: cast _Runtime.UNDEFINED, singleInstance: cast _Runtime.UNDEFINED, userModelId: cast _Runtime.UNDEFINED, version: cast _Runtime.UNDEFINED } : ElectronWindowsAppCapabilities); }) #end));
+      var loginItem:AppLoginItemBackend = (cast _HostElectron.createElectronLoginItemBackend__electronApp(({ final __callArgument144:Dynamic = electron; __callArgument144; })) : AppLoginItemBackend);
+      var recentDocuments:AppRecentDocumentsBackend = (cast _HostElectron.createElectronRecentDocumentsBackend__electronApp(({ final __callArgument146:Dynamic = electron; __callArgument146; })) : AppRecentDocumentsBackend);
+      var userModelId:AppUserModelIdBackend = _Runtime.callValue(function():AppUserModelIdBackend {
+        var b:EntityConstruction<AppUserModelIdBackend> = cast _Runtime.UNDEFINED;
+        b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ setUserModelId: cast _Runtime.UNDEFINED } : AppUserModelIdBackend); }) #end));
+        initializeAppUserModelIdBackend(({ final __callArgument148:Dynamic = b; __callArgument148; }), ({ final __callArgument149:Dynamic = app; __callArgument149; }));
+        return cast b;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>));
+      initializeElectronWindowsAppCapabilities(({ final __callArgument152:Dynamic = win; __callArgument152; }), ({ final __callArgument153:Dynamic = common; __callArgument153; }), ({ final __callArgument154:Dynamic = loginItem; __callArgument154; }), ({ final __callArgument155:Dynamic = recentDocuments; __callArgument155; }), ({ final __callArgument156:Dynamic = userModelId; __callArgument156; }));
+      return cast win;
     }
-    return cast (cast createEntity((cast (#if flight_struct_typedef _Runtime.mergeObjects([common, { badge: (cast createEntity(({ final __callArgument630:Dynamic = ({ setBadgeCount: (cast function(count:Float):flight._internal._Promise<Bool> {
-      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        return flight._internal._Async.resolve((cast app : ElectronApp).setBadgeCount((cast count : Float)));
-      }));
-    } : Dynamic) } : EntityShapeL123C25__electronApp); __callArgument630; })) : EntityShapeL123C25__electronApp) }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([common, { badge: (cast createEntity(({ final __callArgument630:Dynamic = ({ setBadgeCount: (cast function(count:Float):flight._internal._Promise<Bool> {
-      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        return flight._internal._Async.resolve((cast app : ElectronApp).setBadgeCount((cast count : Float)));
-      }));
-    } : Dynamic) } : EntityShapeL123C25__electronApp); __callArgument630; })) : EntityShapeL123C25__electronApp) }]); ({ badge: _Runtime.field(__structInitSource, 'badge'), name: _Runtime.field(__structInitSource, 'name'), version: _Runtime.field(__structInitSource, 'version'), path: _Runtime.field(__structInitSource, 'path'), allWindowsClosed: _Runtime.field(__structInitSource, 'allWindowsClosed'), quitRequest: _Runtime.field(__structInitSource, 'quitRequest'), ready: _Runtime.field(__structInitSource, 'ready'), secondInstance: _Runtime.field(__structInitSource, 'secondInstance'), focus: _Runtime.field(__structInitSource, 'focus'), quit: _Runtime.field(__structInitSource, 'quit'), locale: _Runtime.field(__structInitSource, 'locale'), nameWrite: _Runtime.field(__structInitSource, 'nameWrite'), relaunch: _Runtime.field(__structInitSource, 'relaunch'), singleInstance: _Runtime.field(__structInitSource, 'singleInstance') } : EntityShapeL121C23__electronApp); }) #end) : Dynamic)) : EntityShapeL121C23__electronApp);
+    linux = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ allWindowsClosed: cast _Runtime.UNDEFINED, badge: cast _Runtime.UNDEFINED, focus: cast _Runtime.UNDEFINED, locale: cast _Runtime.UNDEFINED, name: cast _Runtime.UNDEFINED, nameWrite: cast _Runtime.UNDEFINED, path: cast _Runtime.UNDEFINED, quit: cast _Runtime.UNDEFINED, quitRequest: cast _Runtime.UNDEFINED, ready: cast _Runtime.UNDEFINED, relaunch: cast _Runtime.UNDEFINED, secondInstance: cast _Runtime.UNDEFINED, singleInstance: cast _Runtime.UNDEFINED, version: cast _Runtime.UNDEFINED } : ElectronLinuxAppCapabilities); }) #end));
+    badge = _Runtime.callValue(function():AppBadgeBackend {
+      var b:EntityConstruction<AppBadgeBackend> = cast _Runtime.UNDEFINED;
+      b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ setBadgeCount: cast _Runtime.UNDEFINED } : AppBadgeBackend); }) #end));
+      initializeAppBadgeBackend(({ final __callArgument162:Dynamic = b; __callArgument162; }), ({ final __callArgument163:Dynamic = app; __callArgument163; }));
+      return cast b;
+      return cast _Runtime.UNDEFINED;
+    }, cast ([] : Array<Dynamic>));
+    initializeElectronLinuxAppCapabilities(({ final __callArgument166:Dynamic = linux; __callArgument166; }), ({ final __callArgument167:Dynamic = common; __callArgument167; }), ({ final __callArgument168:Dynamic = badge; __callArgument168; }));
+    return cast linux;
     return cast null;
   }
 
-  public static function createElectronLoginItemBackend__electronApp(electron:ElectronApi):{ >Entity, var getLoginItem:Void->{ var args:Array<flight._internal._Any>; var openAsHidden:Bool; var openAtLogin:Bool; var path:String; }; var setLoginItem:AppLoginItemLike->Void; } {
-    return cast (cast createEntity((cast ({ getLoginItem: (cast function():{ var args:Array<flight._internal._Any>; var openAsHidden:Bool; var openAtLogin:Bool; var path:String; } {
+  public static function initializeAppActivateBackend(out:EntityConstruction<AppActivateBackend>, subscribe:String->(Array<flight._internal._Any>->Void)->(Void->Void)):Void {
+    ((cast out : { var subscribe:(Void->Void)->(Void->Void); }).subscribe = (cast function(listener:Void->Void):Void->Void return (cast subscribe((cast 'activate' : String), ({ final __callArgument172:Dynamic = function(__unused0:Array<flight._internal._Any>):Void { listener(); }; __callArgument172; })) : Void->Void)));
+  }
+
+  public static function initializeAppActivationPolicyBackend(out:EntityConstruction<AppActivationPolicyBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var setActivationPolicy:AppActivationPolicy->Void; }).setActivationPolicy = (cast function(policy:String):Void { (cast app : { var setActivationPolicy:String->Void; }).setActivationPolicy((cast policy : String)); }));
+  }
+
+  public static function initializeAppAllWindowsClosedBackend(out:EntityConstruction<AppAllWindowsClosedBackend>, subscribe:String->(Array<flight._internal._Any>->Void)->(Void->Void)):Void {
+    ((cast out : { var subscribe:(Void->Void)->(Void->Void); }).subscribe = (cast function(listener:Void->Void):Void->Void return (cast subscribe((cast 'window-all-closed' : String), ({ final __callArgument174:Dynamic = function(__unused1:Array<flight._internal._Any>):Void { listener(); }; __callArgument174; })) : Void->Void)));
+  }
+
+  public static function initializeAppBadgeBackend(out:EntityConstruction<AppBadgeBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var setBadgeCount:Float->flight._internal._Promise<Bool>; }).setBadgeCount = (cast function(count:Float):flight._internal._Promise<Bool> {
+      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+        return flight._internal._Async.resolve((cast app : { var setBadgeCount:Float->Bool; }).setBadgeCount((cast count : Float)));
+      }));
+    }));
+  }
+
+  public static function initializeAppDockBackend(out:EntityConstruction<AppDockBackend>, dock:flight._internal._IndexedAccess<flight._internal._IndexedAccess<ElectronApi, String>, String>, electron:ElectronApi):Void {
+    ((cast out : { var bounceDock:Void->Float; }).bounceDock = (cast function():Float return (cast dock : { var bounce:Null<String>->Float; }).bounce(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end)));
+    ((cast out : { var cancelAttention:Float->Void; }).cancelAttention = (cast function(id:Float):Void { (cast dock : { var cancelBounce:Float->Void; }).cancelBounce((cast id : Float)); }));
+    ((cast out : { var cancelDockBounce:Float->Void; }).cancelDockBounce = (cast function(id:Float):Void { (cast dock : { var cancelBounce:Float->Void; }).cancelBounce((cast id : Float)); }));
+    ((cast out : { var requestAttention:Bool->Float; }).requestAttention = (cast function(critical:Bool):Float return (cast dock : { var bounce:Null<String>->Float; }).bounce(({ final __callArgument176:Dynamic = ((cast critical : Bool) ? (cast 'critical' : Dynamic) : (cast 'informational' : Dynamic)); __callArgument176; }))));
+    ((cast out : { var setDockBadge:String->Void; }).setDockBadge = (cast function(text:String):Void { (cast dock : { var setBadge:String->Void; }).setBadge((cast text : String)); }));
+    ((cast out : { var setDockMenu:Array<MenuItemTemplate>->Void; }).setDockMenu = (cast function(items:Array<MenuItemTemplate>):Void { (cast dock : { var setMenu:ElectronMenu->Void; }).setMenu((cast electron.Menu : ElectronMenuConstructor).buildFromTemplate((cast (cast (#if js _Runtime.callValue(toElectronTemplate, cast ([({ final __callArgument178:Dynamic = items; __callArgument178; })] : Array<Dynamic>)) #else toElectronTemplate(({ final __callArgument177:Dynamic = items; __callArgument177; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Array<ElectronMenuItemOptions>) : Dynamic))); }));
+  }
+
+  public static function initializeAppFocusBackend(out:EntityConstruction<AppFocusBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var focus:Void->Void; }).focus = (cast function():Void { (cast app : { var focus:Void->Void; }).focus(); }));
+  }
+
+  public static function initializeAppHideBackend(out:EntityConstruction<AppHideBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var hideApp:Void->Void; }).hideApp = (cast function():Void { (cast app : { var hide:Void->Void; }).hide(); }));
+  }
+
+  public static function initializeAppLocaleBackend(out:EntityConstruction<AppLocaleBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var getLocale:Void->String; }).getLocale = (cast function():String return (cast app : { var getLocale:Void->String; }).getLocale()));
+    ((cast out : { var getPreferredSystemLanguages:Void->Array<String>; }).getPreferredSystemLanguages = (cast function():Array<String> return (cast app : { var getPreferredSystemLanguages:Void->Array<String>; }).getPreferredSystemLanguages()));
+    ((cast out : { var getSystemLocale:Void->String; }).getSystemLocale = (cast function():String return (cast app : { var getSystemLocale:Void->String; }).getSystemLocale()));
+  }
+
+  public static function initializeAppLoginItemBackend(out:EntityConstruction<AppLoginItemBackend>, electron:ElectronApi):Void {
+    ((cast out : { var getLoginItem:Void->AppLoginItem; }).getLoginItem = (cast function():AppLoginItem {
       var settings:ElectronLoginItemSettings = cast _Runtime.UNDEFINED;
       settings = (cast electron.app : ElectronApp).getLoginItemSettings();
       return cast { args: cast ([] : Array<Dynamic>), openAsHidden: (cast settings : ElectronLoginItemSettings).openAsHidden, openAtLogin: (cast settings : ElectronLoginItemSettings).openAtLogin, path: '' };
       return cast _Runtime.UNDEFINED;
-    } : Dynamic), setLoginItem: (cast function(settings:flight._internal._IndexedAccess<Array<Dynamic>, Float>):Void {
-      (cast electron.app : ElectronApp).setLoginItemSettings(({ final __callArgument635:Dynamic = { args: _Runtime.select((cast settings : { @:optional var args:Null<Array<String>>; }).args, function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray((cast settings : { @:optional var args:Null<Array<String>>; }).args)]), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), openAsHidden: (cast settings : { @:optional var openAsHidden:Null<Bool>; }).openAsHidden, openAtLogin: (cast settings : { @:optional var openAtLogin:Null<Bool>; }).openAtLogin, path: (cast settings : { @:optional var path:Null<String>; }).path }; __callArgument635; }));
-    } : Dynamic) } : EntityShapeL128C23__electronApp) : Dynamic)) : EntityShapeL128C23__electronApp);
+    }));
+    ((cast out : { var setLoginItem:AppLoginItemLike->Void; }).setLoginItem = (cast function(settings:flight._internal._IndexedAccess<Array<Dynamic>, Float>):Void {
+      (cast electron.app : ElectronApp).setLoginItemSettings(({ final __callArgument179:Dynamic = { args: _Runtime.select((cast settings : { @:optional var args:Null<Array<String>>; }).args, function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray((cast settings : { @:optional var args:Null<Array<String>>; }).args)]), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), openAsHidden: (cast settings : { @:optional var openAsHidden:Null<Bool>; }).openAsHidden, openAtLogin: (cast settings : { @:optional var openAtLogin:Null<Bool>; }).openAtLogin, path: (cast settings : { @:optional var path:Null<String>; }).path }; __callArgument179; }));
+    }));
+  }
+
+  public static function initializeAppNameBackend(out:EntityConstruction<AppNameBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var getName:Void->String; }).getName = (cast function():String return (cast app : { var getName:Void->String; }).getName()));
+  }
+
+  public static function initializeAppNameWriteBackend(out:EntityConstruction<AppNameWriteBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var setName:String->Void; }).setName = (cast function(name:String):Void { (cast app : { var setName:String->Void; }).setName((cast name : String)); }));
+  }
+
+  public static function initializeAppOpenFileBackend(out:EntityConstruction<AppOpenFileBackend>, subscribe:String->(Array<flight._internal._Any>->Void)->(Void->Void)):Void {
+    ((cast out : { var subscribe:(String->Void)->(Void->Void); }).subscribe = (cast function(listener:String->Void):Void->Void {
+      return cast (cast subscribe((cast 'open-file' : String), ({ final __callArgument180:Dynamic = _Runtime.haxeRest(function(...args:flight._internal._Any):Void { listener((cast Std.string(_Runtime.coalesce(flight._internal._StaticIndex.readArray(args, 1.0), function():Dynamic return cast '')) : String)); }, 0); __callArgument180; })) : Void->Void);
+      return cast _Runtime.UNDEFINED;
+    }));
+  }
+
+  public static function initializeAppPathBackend(out:EntityConstruction<AppPathBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var getAppDirectoryPath:AppPathKind->String; }).getAppDirectoryPath = (cast function(kind:AppPathKind):String return (cast app : { var getPath:String->String; }).getPath((cast (cast _HostElectron.toElectronPathName__electronApp(({ final __callArgument182:Dynamic = kind; __callArgument182; })) : String) : String))));
+    ((cast out : { var getAppPath:Void->String; }).getAppPath = (cast function():String return (cast app : { var getAppPath:Void->String; }).getAppPath()));
+    ((cast out : { var getExecutablePath:Void->String; }).getExecutablePath = (cast function():String return (cast app : { var getPath:String->String; }).getPath((cast 'exe' : String))));
+  }
+
+  public static function initializeAppQuitBackend(out:EntityConstruction<AppQuitBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var quit:Void->Void; }).quit = (cast function():Void { (cast app : { var quit:Void->Void; }).quit(); }));
+  }
+
+  public static function initializeAppQuitRequestBackend(out:EntityConstruction<AppQuitRequestBackend>, subscribe:String->(Array<flight._internal._Any>->Void)->(Void->Void)):Void {
+    ((cast out : { var subscribe:((Void->Void)->Void)->(Void->Void); }).subscribe = (cast function(listener:(Void->Void)->Void):Void->Void {
+      return cast (cast subscribe((cast 'before-quit' : String), ({ final __callArgument190:Dynamic = _Runtime.haxeRest(function(...args:flight._internal._Any):Void {
+        var event:Null<{ @:optional var preventDefault:Null<Void->Void>; }> = cast _Runtime.UNDEFINED;
+        event = (cast flight._internal._StaticIndex.readArray(args, 0.0) : Null<{ @:optional var preventDefault:Void->Void; }>);
+        listener(({ final __callArgument186:Dynamic = function():Void { ({ final __optionalOwner185 = event; if (__optionalOwner185 != null) { final __optionalCall184 = (cast __optionalOwner185 : { @:optional var preventDefault:Null<Void->Void>; }).preventDefault; if (__optionalCall184 != null) __optionalCall184(); } }); }; __callArgument186; }));
+      }, 0); __callArgument190; })) : Void->Void);
+      return cast _Runtime.UNDEFINED;
+    }));
+  }
+
+  public static function initializeAppReadyBackend(out:EntityConstruction<AppReadyBackend>, subscribe:String->(Array<flight._internal._Any>->Void)->(Void->Void)):Void {
+    ((cast out : { var subscribe:(Void->Void)->(Void->Void); }).subscribe = (cast function(listener:Void->Void):Void->Void return (cast subscribe((cast 'ready' : String), ({ final __callArgument198:Dynamic = function(__unused2:Array<flight._internal._Any>):Void { listener(); }; __callArgument198; })) : Void->Void)));
+  }
+
+  public static function initializeAppRecentDocumentsBackend(out:EntityConstruction<AppRecentDocumentsBackend>, electron:ElectronApi):Void {
+    ((cast out : { var addRecentDocument:String->Void; }).addRecentDocument = (cast function(path:String):Void { (cast electron.app : ElectronApp).addRecentDocument((cast path : String)); }));
+    ((cast out : { var clearRecentDocuments:Void->Void; }).clearRecentDocuments = (cast function():Void { (cast electron.app : ElectronApp).clearRecentDocuments(); }));
+  }
+
+  public static function initializeAppRelaunchBackend(out:EntityConstruction<AppRelaunchBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var relaunch:Void->Void; }).relaunch = (cast function():Void { (cast app : { var relaunch:Void->Void; }).relaunch(); }));
+  }
+
+  public static function initializeAppSecondInstanceBackend(out:EntityConstruction<AppSecondInstanceBackend>, subscribe:String->(Array<flight._internal._Any>->Void)->(Void->Void)):Void {
+    ((cast out : { var subscribe:(Array<String>->Void)->(Void->Void); }).subscribe = (cast function(listener:Array<String>->Void):Void->Void {
+      return cast (cast subscribe((cast 'second-instance' : String), ({ final __callArgument202:Dynamic = _Runtime.haxeRest(function(...args:flight._internal._Any):Void { listener(({ final __callArgument200:Dynamic = _Runtime.coalesce((cast flight._internal._StaticIndex.readArray(args, 1.0) : Array<String>), function():Dynamic return cast cast ([] : Array<Dynamic>)); __callArgument200; })); }, 0); __callArgument202; })) : Void->Void);
+      return cast _Runtime.UNDEFINED;
+    }));
+  }
+
+  public static function initializeAppShowBackend(out:EntityConstruction<AppShowBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var showApp:Void->Void; }).showApp = (cast function():Void { (cast app : { var show:Void->Void; }).show(); }));
+  }
+
+  public static function initializeAppSingleInstanceBackend(out:EntityConstruction<AppSingleInstanceBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var hasSingleInstanceLock:Void->Bool; }).hasSingleInstanceLock = (cast function():Bool return (cast app : { var hasSingleInstanceLock:Void->Bool; }).hasSingleInstanceLock()));
+    ((cast out : { var releaseSingleInstanceLock:Void->Void; }).releaseSingleInstanceLock = (cast function():Void { (cast app : { var releaseSingleInstanceLock:Void->Void; }).releaseSingleInstanceLock(); }));
+    ((cast out : { var requestSingleInstanceLock:Void->Bool; }).requestSingleInstanceLock = (cast function():Bool return (cast app : { var requestSingleInstanceLock:Void->Bool; }).requestSingleInstanceLock()));
+  }
+
+  public static function initializeAppUserModelIdBackend(out:EntityConstruction<AppUserModelIdBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var setUserModelId:String->Void; }).setUserModelId = (cast function(id:String):Void { (cast app : { var setAppUserModelId:String->Void; }).setAppUserModelId((cast id : String)); }));
+  }
+
+  public static function initializeAppVersionBackend(out:EntityConstruction<AppVersionBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var getVersion:Void->String; }).getVersion = (cast function():String return (cast app : { var getVersion:Void->String; }).getVersion()));
+  }
+
+  public static function initializeAppVisibilityQueryBackend(out:EntityConstruction<AppVisibilityQueryBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var isAppHidden:Void->Bool; }).isAppHidden = (cast function():Bool return (cast app : { var isHidden:Void->Bool; }).isHidden()));
+  }
+
+  public static function initializeElectronCommonAppCapabilities(out:EntityConstruction<ElectronCommonAppCapabilities>, allWindowsClosed:AppAllWindowsClosedBackend, focus:AppFocusBackend, locale:AppLocaleBackend, name:AppNameBackend, nameWrite:AppNameWriteBackend, path:AppPathBackend, quit:AppQuitBackend, quitRequest:AppQuitRequestBackend, ready:AppReadyBackend, relaunch:AppRelaunchBackend, secondInstance:AppSecondInstanceBackend, singleInstance:AppSingleInstanceBackend, version:AppVersionBackend):Void {
+    _Runtime.setField(out, 'allWindowsClosed', allWindowsClosed);
+    _Runtime.setField(out, 'focus', focus);
+    _Runtime.setField(out, 'locale', locale);
+    _Runtime.setField(out, 'name', name);
+    _Runtime.setField(out, 'nameWrite', nameWrite);
+    _Runtime.setField(out, 'path', path);
+    _Runtime.setField(out, 'quit', quit);
+    _Runtime.setField(out, 'quitRequest', quitRequest);
+    _Runtime.setField(out, 'ready', ready);
+    _Runtime.setField(out, 'relaunch', relaunch);
+    _Runtime.setField(out, 'secondInstance', secondInstance);
+    _Runtime.setField(out, 'singleInstance', singleInstance);
+    _Runtime.setField(out, 'version', version);
+  }
+
+  public static function initializeElectronLinuxAppCapabilities(out:EntityConstruction<ElectronLinuxAppCapabilities>, common:ElectronCommonAppCapabilities, badge:AppBadgeBackend):Void {
+    _Runtime.setField(out, 'allWindowsClosed', _Runtime.field(common, 'allWindowsClosed'));
+    _Runtime.setField(out, 'badge', badge);
+    _Runtime.setField(out, 'focus', _Runtime.field(common, 'focus'));
+    _Runtime.setField(out, 'locale', _Runtime.field(common, 'locale'));
+    _Runtime.setField(out, 'name', _Runtime.field(common, 'name'));
+    _Runtime.setField(out, 'nameWrite', _Runtime.field(common, 'nameWrite'));
+    _Runtime.setField(out, 'path', _Runtime.field(common, 'path'));
+    _Runtime.setField(out, 'quit', _Runtime.field(common, 'quit'));
+    _Runtime.setField(out, 'quitRequest', _Runtime.field(common, 'quitRequest'));
+    _Runtime.setField(out, 'ready', _Runtime.field(common, 'ready'));
+    _Runtime.setField(out, 'relaunch', _Runtime.field(common, 'relaunch'));
+    _Runtime.setField(out, 'secondInstance', _Runtime.field(common, 'secondInstance'));
+    _Runtime.setField(out, 'singleInstance', _Runtime.field(common, 'singleInstance'));
+    _Runtime.setField(out, 'version', _Runtime.field(common, 'version'));
+  }
+
+  public static function initializeElectronMacosAppCapabilities(out:EntityConstruction<ElectronMacosAppCapabilities>, common:ElectronCommonAppCapabilities, activate:AppActivateBackend, activationPolicy:AppActivationPolicyBackend, badge:AppBadgeBackend, dock:AppDockBackend, hide:AppHideBackend, hiddenQuery:AppVisibilityQueryBackend, loginItem:AppLoginItemBackend, openFile:AppOpenFileBackend, recentDocuments:AppRecentDocumentsBackend, show:AppShowBackend):Void {
+    _Runtime.setField(out, 'activate', activate);
+    _Runtime.setField(out, 'activationPolicy', activationPolicy);
+    _Runtime.setField(out, 'allWindowsClosed', _Runtime.field(common, 'allWindowsClosed'));
+    _Runtime.setField(out, 'badge', badge);
+    _Runtime.setField(out, 'dock', dock);
+    _Runtime.setField(out, 'focus', _Runtime.field(common, 'focus'));
+    _Runtime.setField(out, 'hide', hide);
+    _Runtime.setField(out, 'hiddenQuery', hiddenQuery);
+    _Runtime.setField(out, 'locale', _Runtime.field(common, 'locale'));
+    _Runtime.setField(out, 'loginItem', loginItem);
+    _Runtime.setField(out, 'name', _Runtime.field(common, 'name'));
+    _Runtime.setField(out, 'nameWrite', _Runtime.field(common, 'nameWrite'));
+    _Runtime.setField(out, 'openFile', openFile);
+    _Runtime.setField(out, 'path', _Runtime.field(common, 'path'));
+    _Runtime.setField(out, 'quit', _Runtime.field(common, 'quit'));
+    _Runtime.setField(out, 'quitRequest', _Runtime.field(common, 'quitRequest'));
+    _Runtime.setField(out, 'ready', _Runtime.field(common, 'ready'));
+    _Runtime.setField(out, 'recentDocuments', recentDocuments);
+    _Runtime.setField(out, 'relaunch', _Runtime.field(common, 'relaunch'));
+    _Runtime.setField(out, 'secondInstance', _Runtime.field(common, 'secondInstance'));
+    _Runtime.setField(out, 'show', show);
+    _Runtime.setField(out, 'singleInstance', _Runtime.field(common, 'singleInstance'));
+    _Runtime.setField(out, 'version', _Runtime.field(common, 'version'));
+  }
+
+  public static function initializeElectronWindowsAppCapabilities(out:EntityConstruction<ElectronWindowsAppCapabilities>, common:ElectronCommonAppCapabilities, loginItem:AppLoginItemBackend, recentDocuments:AppRecentDocumentsBackend, userModelId:AppUserModelIdBackend):Void {
+    _Runtime.setField(out, 'allWindowsClosed', _Runtime.field(common, 'allWindowsClosed'));
+    _Runtime.setField(out, 'focus', _Runtime.field(common, 'focus'));
+    _Runtime.setField(out, 'locale', _Runtime.field(common, 'locale'));
+    _Runtime.setField(out, 'loginItem', loginItem);
+    _Runtime.setField(out, 'name', _Runtime.field(common, 'name'));
+    _Runtime.setField(out, 'nameWrite', _Runtime.field(common, 'nameWrite'));
+    _Runtime.setField(out, 'path', _Runtime.field(common, 'path'));
+    _Runtime.setField(out, 'quit', _Runtime.field(common, 'quit'));
+    _Runtime.setField(out, 'quitRequest', _Runtime.field(common, 'quitRequest'));
+    _Runtime.setField(out, 'ready', _Runtime.field(common, 'ready'));
+    _Runtime.setField(out, 'recentDocuments', recentDocuments);
+    _Runtime.setField(out, 'relaunch', _Runtime.field(common, 'relaunch'));
+    _Runtime.setField(out, 'secondInstance', _Runtime.field(common, 'secondInstance'));
+    _Runtime.setField(out, 'singleInstance', _Runtime.field(common, 'singleInstance'));
+    _Runtime.setField(out, 'userModelId', userModelId);
+    _Runtime.setField(out, 'version', _Runtime.field(common, 'version'));
+  }
+
+  public static function createElectronLoginItemBackend__electronApp(electron:ElectronApi):AppLoginItemBackend {
+    var out:EntityConstruction<AppLoginItemBackend> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ getLoginItem: cast _Runtime.UNDEFINED, setLoginItem: cast _Runtime.UNDEFINED } : AppLoginItemBackend); }) #end));
+    initializeAppLoginItemBackend(({ final __callArgument206:Dynamic = out; __callArgument206; }), ({ final __callArgument207:Dynamic = electron; __callArgument207; }));
+    return cast out;
     return cast null;
   }
 
-  public static function createElectronRecentDocumentsBackend__electronApp(electron:ElectronApi):{ >Entity, var addRecentDocument:String->Void; var clearRecentDocuments:Void->Void; } {
-    return cast (cast createEntity(({ final __callArgument638:Dynamic = ({ addRecentDocument: (cast function(path:String):Void { (cast electron.app : ElectronApp).addRecentDocument((cast path : String)); } : Dynamic), clearRecentDocuments: (cast function():Void { (cast electron.app : ElectronApp).clearRecentDocuments(); } : Dynamic) } : EntityShapeL150C23__electronApp); __callArgument638; })) : EntityShapeL150C23__electronApp);
+  public static function createElectronRecentDocumentsBackend__electronApp(electron:ElectronApi):AppRecentDocumentsBackend {
+    var out:EntityConstruction<AppRecentDocumentsBackend> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ addRecentDocument: cast _Runtime.UNDEFINED, clearRecentDocuments: cast _Runtime.UNDEFINED } : AppRecentDocumentsBackend); }) #end));
+    initializeAppRecentDocumentsBackend(({ final __callArgument210:Dynamic = out; __callArgument210; }), ({ final __callArgument211:Dynamic = electron; __callArgument211; }));
+    return cast out;
     return cast null;
   }
 
@@ -1821,179 +1043,193 @@ class _HostElectron {
 
   public static function createElectronClipboardBackend(electron:ElectronApi):ElectronClipboardBackend__electronClipboard {
     var cb:ElectronClipboard = cast _Runtime.UNDEFINED;
+    var out:EntityConstruction<ElectronClipboardBackend__electronClipboard> = cast _Runtime.UNDEFINED;
     cb = electron.clipboard;
-    return cast (cast createEntity((cast ({ readText: (cast function():flight._internal._Promise<String> {
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ readBookmark: cast _Runtime.UNDEFINED, writeBookmark: cast _Runtime.UNDEFINED, getFormats: cast _Runtime.UNDEFINED, hasFormat: cast _Runtime.UNDEFINED, readFormat: cast _Runtime.UNDEFINED, readHtml: cast _Runtime.UNDEFINED, readItems: cast _Runtime.UNDEFINED, readRTF: cast _Runtime.UNDEFINED, writeFormat: cast _Runtime.UNDEFINED, writeHtml: cast _Runtime.UNDEFINED, writeItems: cast _Runtime.UNDEFINED, writeRTF: cast _Runtime.UNDEFINED, hasImage: cast _Runtime.UNDEFINED, readImage: cast _Runtime.UNDEFINED, writeImage: cast _Runtime.UNDEFINED, clear: cast _Runtime.UNDEFINED, hasText: cast _Runtime.UNDEFINED, readText: cast _Runtime.UNDEFINED, writeText: cast _Runtime.UNDEFINED } : EntityShapeL23C15__electronClipboard); }) #end));
+    initializeElectronClipboardBackend((cast out : Dynamic), ({ final __callArgument214:Dynamic = cb; __callArgument214; }), ({ final __callArgument215:Dynamic = electron; __callArgument215; }));
+    return cast out;
+    return cast null;
+  }
+
+  public static function initializeElectronClipboardBackend(out:EntityConstruction<ElectronClipboardBackend__electronClipboard>, cb:flight._internal._IndexedAccess<ElectronApi, String>, electron:ElectronApi):Void {
+    ((cast out : { var clear:Void->flight._internal._Promise<Bool>; }).clear = (cast function():flight._internal._Promise<Bool> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         try {
-          return cast (cast cb : ElectronClipboard).readText();
-        } catch (__error:Dynamic) {
-          return cast '';
-        }
-        return cast null;
-      }));
-    } : Dynamic), writeText: (cast function(text:String):flight._internal._Promise<Bool> {
-      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        try {
-          (cast cb : ElectronClipboard).writeText((cast text : String));
+          (cast cb : { var clear:Void->Void; }).clear();
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;
         }
         return cast null;
       }));
-    } : Dynamic), readHtml: (cast function():flight._internal._Promise<String> {
+    }));
+    ((cast out : { var getFormats:Void->flight._internal._Promise<Array<String>>; }).getFormats = (cast function():flight._internal._Promise<Array<String>> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         try {
-          return cast (cast cb : ElectronClipboard).readHTML();
+          return cast (cast cb : { var availableFormats:Void->Array<String>; }).availableFormats();
+        } catch (__error:Dynamic) {
+          return cast cast ([] : Array<Dynamic>);
+        }
+        return cast null;
+      }));
+    }));
+    ((cast out : { var hasFormat:String->flight._internal._Promise<Bool>; }).hasFormat = (cast function(format:String):flight._internal._Promise<Bool> {
+      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+        try {
+          return cast (cast cb : { var has:String->Bool; }).has((cast format : String));
+        } catch (__error:Dynamic) {
+          return cast false;
+        }
+        return cast null;
+      }));
+    }));
+    ((cast out : { var hasImage:Void->flight._internal._Promise<Bool>; }).hasImage = (cast function():flight._internal._Promise<Bool> {
+      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+        try {
+          return cast !(cast (cast (cast cb : { var readImage:Void->ElectronNativeImage; }).readImage() : ElectronNativeImage).isEmpty() : Bool);
+        } catch (__error:Dynamic) {
+          return cast false;
+        }
+        return cast null;
+      }));
+    }));
+    ((cast out : { var hasText:Void->flight._internal._Promise<Bool>; }).hasText = (cast function():flight._internal._Promise<Bool> {
+      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+        try {
+          return cast ((cast _Runtime.field((cast cb : { var readText:Void->String; }).readText(), 'length') : Float) > (cast 0.0 : Float));
+        } catch (__error:Dynamic) {
+          return cast false;
+        }
+        return cast null;
+      }));
+    }));
+    ((cast out : { var readBookmark:Void->flight._internal._Promise<Null<ClipboardBookmark>>; }).readBookmark = (cast function():flight._internal._Promise<Null<ClipboardBookmark>> {
+      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+        try {
+          var bookmark:{ var title:String; var url:String; } = (cast cb : { var readBookmark:Void->{ var title:String; var url:String; }; }).readBookmark();
+          if ((cast ((cast _Runtime.strictEquals((cast bookmark : { var title:String; var url:String; }).title, '') : Bool) && (cast _Runtime.strictEquals((cast bookmark : { var title:String; var url:String; }).url, '') : Bool)) : Bool)) { return cast null; }
+          var result:ClipboardBookmark = cast _Runtime.UNDEFINED;
+          result = (cast { title: (cast bookmark : { var title:String; var url:String; }).title, url: (cast bookmark : { var title:String; var url:String; }).url });
+          return cast result;
+        } catch (__error:Dynamic) {
+          return cast null;
+        }
+        return cast null;
+      }));
+    }));
+    ((cast out : { var readFormat:String->flight._internal._Promise<String>; }).readFormat = (cast function(format:String):flight._internal._Promise<String> {
+      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+        try {
+          return cast (cast cb : { var read:String->String; }).read((cast format : String));
         } catch (__error:Dynamic) {
           return cast '';
         }
         return cast null;
       }));
-    } : Dynamic), writeHtml: (cast function(html:String):flight._internal._Promise<Bool> {
+    }));
+    ((cast out : { var readHtml:Void->flight._internal._Promise<String>; }).readHtml = (cast function():flight._internal._Promise<String> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         try {
-          (cast cb : ElectronClipboard).writeHTML((cast html : String));
-          return cast true;
+          return cast (cast cb : { var readHTML:Void->String; }).readHTML();
         } catch (__error:Dynamic) {
-          return cast false;
+          return cast '';
         }
         return cast null;
       }));
-    } : Dynamic), hasText: (cast function():flight._internal._Promise<Bool> {
+    }));
+    ((cast out : { var readImage:Void->flight._internal._Promise<String>; }).readImage = (cast function():flight._internal._Promise<String> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         try {
-          return cast ((cast _Runtime.field((cast cb : ElectronClipboard).readText(), 'length') : Float) > (cast 0.0 : Float));
-        } catch (__error:Dynamic) {
-          return cast false;
-        }
-        return cast null;
-      }));
-    } : Dynamic), readImage: (cast function():flight._internal._Promise<String> {
-      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        try {
-          var image:ElectronNativeImage = (cast cb : ElectronClipboard).readImage();
+          var image:ElectronNativeImage = (cast cb : { var readImage:Void->ElectronNativeImage; }).readImage();
           return cast ((cast (cast image : ElectronNativeImage).isEmpty() : Bool) ? (cast '' : Dynamic) : (cast (cast image : ElectronNativeImage).toDataURL() : Dynamic));
         } catch (__error:Dynamic) {
           return cast '';
         }
         return cast null;
       }));
-    } : Dynamic), writeImage: (cast function(dataUrl:String):flight._internal._Promise<Bool> {
+    }));
+    ((cast out : { var readItems:Array<String>->flight._internal._Promise<flight._internal._Record<String, String>>; }).readItems = (cast function(formats:Array<String>):flight._internal._Promise<flight._internal._Record<String, String>> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        try {
-          (cast cb : ElectronClipboard).writeImage((cast electron.nativeImage : ElectronNativeImageModule).createFromDataURL((cast dataUrl : String)));
-          return cast true;
-        } catch (__error:Dynamic) {
-          return cast false;
+        var items:flight._internal._Record<String, String> = cast _Runtime.UNDEFINED;
+        items = (cast {  });
+        for (format in _Runtime.iterable(formats)) {
+          try {
+            if ((cast (cast cb : { var has:String->Bool; }).has((cast format : String)) : Bool)) { _Runtime.setIndex(items, format, (cast cb : { var read:String->String; }).read((cast format : String))); }
+          } catch (__error:Dynamic) {
+          }
         }
+        return cast items;
         return cast null;
       }));
-    } : Dynamic), hasImage: (cast function():flight._internal._Promise<Bool> {
+    }));
+    ((cast out : { var readRTF:Void->flight._internal._Promise<String>; }).readRTF = (cast function():flight._internal._Promise<String> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         try {
-          return cast !(cast (cast (cast cb : ElectronClipboard).readImage() : ElectronNativeImage).isEmpty() : Bool);
-        } catch (__error:Dynamic) {
-          return cast false;
-        }
-        return cast null;
-      }));
-    } : Dynamic), readRTF: (cast function():flight._internal._Promise<String> {
-      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        try {
-          return cast (cast cb : ElectronClipboard).readRTF();
+          return cast (cast cb : { var readRTF:Void->String; }).readRTF();
         } catch (__error:Dynamic) {
           return cast '';
         }
         return cast null;
       }));
-    } : Dynamic), writeRTF: (cast function(rtf:String):flight._internal._Promise<Bool> {
+    }));
+    ((cast out : { var readText:Void->flight._internal._Promise<String>; }).readText = (cast function():flight._internal._Promise<String> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         try {
-          (cast cb : ElectronClipboard).writeRTF((cast rtf : String));
-          return cast true;
-        } catch (__error:Dynamic) {
-          return cast false;
-        }
-        return cast null;
-      }));
-    } : Dynamic), readBookmark: (cast function():flight._internal._Promise<Null<ClipboardBookmark>> {
-      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        try {
-          var bookmark:{ var title:String; var url:String; } = (cast cb : ElectronClipboard).readBookmark();
-          if ((cast ((cast _Runtime.strictEquals((cast bookmark : { var title:String; var url:String; }).title, '') : Bool) && (cast _Runtime.strictEquals((cast bookmark : { var title:String; var url:String; }).url, '') : Bool)) : Bool)) { return cast null; }
-          var out:ClipboardBookmark = cast _Runtime.UNDEFINED;
-          out = (cast { title: (cast bookmark : { var title:String; var url:String; }).title, url: (cast bookmark : { var title:String; var url:String; }).url });
-          return cast out;
-        } catch (__error:Dynamic) {
-          return cast null;
-        }
-        return cast null;
-      }));
-    } : Dynamic), writeBookmark: (cast function(title:String, url:String):flight._internal._Promise<Bool> {
-      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        try {
-          (cast cb : ElectronClipboard).writeBookmark((cast title : String), (cast url : String));
-          return cast true;
-        } catch (__error:Dynamic) {
-          return cast false;
-        }
-        return cast null;
-      }));
-    } : Dynamic), readFormat: (cast function(format:String):flight._internal._Promise<String> {
-      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        try {
-          return cast (cast cb : ElectronClipboard).read((cast format : String));
+          return cast (cast cb : { var readText:Void->String; }).readText();
         } catch (__error:Dynamic) {
           return cast '';
         }
         return cast null;
       }));
-    } : Dynamic), writeFormat: (cast function(format:String, data:String):flight._internal._Promise<Bool> {
+    }));
+    ((cast out : { var writeBookmark:String->String->flight._internal._Promise<Bool>; }).writeBookmark = (cast function(title:String, url:String):flight._internal._Promise<Bool> {
+      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+        try {
+          (cast cb : { var writeBookmark:String->String->Void; }).writeBookmark((cast title : String), (cast url : String));
+          return cast true;
+        } catch (__error:Dynamic) {
+          return cast false;
+        }
+        return cast null;
+      }));
+    }));
+    ((cast out : { var writeFormat:String->String->flight._internal._Promise<Bool>; }).writeFormat = (cast function(format:String, data:String):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         try {
           var payload:ElectronClipboardData = cast _Runtime.UNDEFINED;
           payload = (cast {  });
           _Runtime.setIndex(payload, (cast _HostElectron.formatKey__electronClipboard((cast format : String)) : String), data);
-          (cast cb : ElectronClipboard).write(({ final __callArgument646:Dynamic = payload; __callArgument646; }));
+          (cast cb : { var write:ElectronClipboardData->Void; }).write(({ final __callArgument220:Dynamic = payload; __callArgument220; }));
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;
         }
         return cast null;
       }));
-    } : Dynamic), hasFormat: (cast function(format:String):flight._internal._Promise<Bool> {
+    }));
+    ((cast out : { var writeHtml:String->flight._internal._Promise<Bool>; }).writeHtml = (cast function(html:String):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         try {
-          return cast (cast cb : ElectronClipboard).has((cast format : String));
+          (cast cb : { var writeHTML:String->Void; }).writeHTML((cast html : String));
+          return cast true;
         } catch (__error:Dynamic) {
           return cast false;
         }
         return cast null;
       }));
-    } : Dynamic), getFormats: (cast function():flight._internal._Promise<Array<String>> {
+    }));
+    ((cast out : { var writeImage:String->flight._internal._Promise<Bool>; }).writeImage = (cast function(dataUrl:String):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         try {
-          return cast (cast cb : ElectronClipboard).availableFormats();
+          (cast cb : { var writeImage:ElectronNativeImage->Void; }).writeImage((cast electron.nativeImage : ElectronNativeImageModule).createFromDataURL((cast dataUrl : String)));
+          return cast true;
         } catch (__error:Dynamic) {
-          return cast cast ([] : Array<Dynamic>);
+          return cast false;
         }
         return cast null;
       }));
-    } : Dynamic), readItems: (cast function(formats:Array<String>):flight._internal._Promise<flight._internal._Record<String, String>> {
-      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        var out:flight._internal._Record<String, String> = cast _Runtime.UNDEFINED;
-        out = (cast {  });
-        for (format in _Runtime.iterable(formats)) {
-          try {
-            if ((cast (cast cb : ElectronClipboard).has((cast format : String)) : Bool)) { _Runtime.setIndex(out, format, (cast cb : ElectronClipboard).read((cast format : String))); }
-          } catch (__error:Dynamic) {
-          }
-        }
-        return cast out;
-        return cast null;
-      }));
-    } : Dynamic), writeItems: (cast function(items:Array<ClipboardWriteItem>):flight._internal._Promise<Bool> {
+    }));
+    ((cast out : { var writeItems:Array<ClipboardWriteItem>->flight._internal._Promise<Bool>; }).writeItems = (cast function(items:Array<ClipboardWriteItem>):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         try {
           var data:ElectronClipboardData = cast _Runtime.UNDEFINED;
@@ -2001,25 +1237,36 @@ class _HostElectron {
           for (item in _Runtime.iterable(items)) {
             _Runtime.setIndex(data, (cast _HostElectron.formatKey__electronClipboard((cast item.format : String)) : String), item.data);
           }
-          (cast cb : ElectronClipboard).write(({ final __callArgument651:Dynamic = data; __callArgument651; }));
+          (cast cb : { var write:ElectronClipboardData->Void; }).write(({ final __callArgument223:Dynamic = data; __callArgument223; }));
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;
         }
         return cast null;
       }));
-    } : Dynamic), clear: (cast function():flight._internal._Promise<Bool> {
+    }));
+    ((cast out : { var writeRTF:String->flight._internal._Promise<Bool>; }).writeRTF = (cast function(rtf:String):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         try {
-          (cast cb : ElectronClipboard).clear();
+          (cast cb : { var writeRTF:String->Void; }).writeRTF((cast rtf : String));
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;
         }
         return cast null;
       }));
-    } : Dynamic) } : EntityShapeL23C23__electronClipboard) : Dynamic)) : EntityShapeL23C23__electronClipboard);
-    return cast null;
+    }));
+    ((cast out : { var writeText:String->flight._internal._Promise<Bool>; }).writeText = (cast function(text:String):flight._internal._Promise<Bool> {
+      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+        try {
+          (cast cb : { var writeText:String->Void; }).writeText((cast text : String));
+          return cast true;
+        } catch (__error:Dynamic) {
+          return cast false;
+        }
+        return cast null;
+      }));
+    }));
   }
 
   public static function formatKey__electronClipboard(format:String):String {
@@ -2030,56 +1277,88 @@ class _HostElectron {
     return cast null;
   }
 
-  public static function createElectronDirectoryOpenDialogBackend(electron:ElectronApi):{ >DirectoryOpenDialogBackend, >Entity, } {
-    return cast (cast createEntity((cast ({ open: (cast function(options:Null<OpenDirectoryDialogOptions>):flight._internal._Promise<DirectoryOpenDialogResult> {
+  public static function createElectronDirectoryOpenDialogBackend(electron:ElectronApi):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>; } {
+    var out:EntityConstruction<DirectoryOpenDialogBackend> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ open: cast _Runtime.UNDEFINED } : DirectoryOpenDialogBackend); }) #end));
+    initializeElectronDirectoryOpenDialogBackend(({ final __callArgument224:Dynamic = out; __callArgument224; }), ({ final __callArgument225:Dynamic = electron; __callArgument225; }));
+    return cast out;
+    return cast null;
+  }
+
+  public static function createElectronFileOpenDialogBackend(electron:ElectronApi):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; } {
+    var out:EntityConstruction<FileOpenDialogBackend> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ open: cast _Runtime.UNDEFINED } : FileOpenDialogBackend); }) #end));
+    initializeElectronFileOpenDialogBackend(({ final __callArgument228:Dynamic = out; __callArgument228; }), ({ final __callArgument229:Dynamic = electron; __callArgument229; }));
+    return cast out;
+    return cast null;
+  }
+
+  public static function createElectronFileSaveDialogBackend(electron:ElectronApi):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; } {
+    var out:EntityConstruction<FileSaveDialogBackend> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ save: cast _Runtime.UNDEFINED } : FileSaveDialogBackend); }) #end));
+    initializeElectronFileSaveDialogBackend(({ final __callArgument232:Dynamic = out; __callArgument232; }), ({ final __callArgument233:Dynamic = electron; __callArgument233; }));
+    return cast out;
+    return cast null;
+  }
+
+  public static function createElectronMessageDialogBackend(electron:ElectronApi):MessageDialogBackend {
+    var out:EntityConstruction<MessageDialogBackend> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ confirm: cast _Runtime.UNDEFINED, message: cast _Runtime.UNDEFINED } : MessageDialogBackend); }) #end));
+    initializeElectronMessageDialogBackend(({ final __callArgument236:Dynamic = out; __callArgument236; }), ({ final __callArgument237:Dynamic = electron; __callArgument237; }));
+    return cast out;
+    return cast null;
+  }
+
+  public static function initializeElectronDirectoryOpenDialogBackend(out:EntityConstruction<DirectoryOpenDialogBackend>, electron:ElectronApi):Void {
+    ((cast out : { var open:Null<OpenDirectoryDialogOptions>->flight._internal._Promise<DirectoryOpenDialogResult>; }).open = (cast function(options:Null<OpenDirectoryDialogOptions>):flight._internal._Promise<DirectoryOpenDialogResult> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var dialog:ElectronDialog = cast _Runtime.UNDEFINED;
-          var __flowBranch675:Dynamic;
-          if (_Runtime.truthy(({ final __hostType674 = ({ final __structural673 = options; __structural673 == null ? _Runtime.UNDEFINED : (cast __structural673 : { @:optional var signal:Null<flight._internal.dom.AbortSignal>; }).signal; }); __hostType674 == null ? _Runtime.UNDEFINED : (cast __hostType674 : flight._internal.dom.AbortSignal).aborted; }))) {
-            __flowBranch675 = flight._internal._Async.protect(function():Dynamic {
+          var __flowBranch242:Dynamic;
+          if (_Runtime.truthy(({ final __hostType241 = ({ final __structural240 = options; __structural240 == null ? _Runtime.UNDEFINED : (cast __structural240 : { @:optional var signal:Null<flight._internal.dom.AbortSignal>; }).signal; }); __hostType241 == null ? _Runtime.UNDEFINED : (cast __hostType241 : flight._internal.dom.AbortSignal).aborted; }))) {
+            __flowBranch242 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn({ outcome: 'cancelled' });
             });
           } else {
-            __flowBranch675 = flight._internal._Async.flowNormal();
+            __flowBranch242 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch675, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch242, function():Dynamic {
             dialog = electron.dialog;
-            var __flowBranch677:Dynamic;
-            if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(({ final __structural676 = dialog; __structural676 == null ? _Runtime.UNDEFINED : (cast __structural676 : ElectronDialog).showOpenDialog; })), 'function') : Bool)) {
-              __flowBranch677 = flight._internal._Async.protect(function():Dynamic {
+            var __flowBranch244:Dynamic;
+            if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(({ final __structural243 = dialog; __structural243 == null ? _Runtime.UNDEFINED : (cast __structural243 : ElectronDialog).showOpenDialog; })), 'function') : Bool)) {
+              __flowBranch244 = flight._internal._Async.protect(function():Dynamic {
                 return flight._internal._Async.flowReturn({ outcome: 'runtime-unavailable' });
               });
             } else {
-              __flowBranch677 = flight._internal._Async.flowNormal();
+              __flowBranch244 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch677, function():Dynamic {
+            return flight._internal._Async.continueFlow(__flowBranch244, function():Dynamic {
               return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
                 var result:{ var canceled:Bool; var filePaths:Array<String>; } = cast _Runtime.UNDEFINED;
                 var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
                 var path:String = cast _Runtime.UNDEFINED;
-                return flight._internal._Async.flatMap((cast dialog : ElectronDialog).showOpenDialog((cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic), ({ final __callArgument681:Dynamic = { properties: cast (['openDirectory'] : Array<Dynamic>) }; __callArgument681; })), function(__awaitValue678:Dynamic):Dynamic {
-                  result = __awaitValue678;
-                  var __flowBranch679:Dynamic;
+                return flight._internal._Async.flatMap((cast dialog : ElectronDialog).showOpenDialog((cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic), ({ final __callArgument248:Dynamic = { properties: cast (['openDirectory'] : Array<Dynamic>) }; __callArgument248; })), function(__awaitValue245:Dynamic):Dynamic {
+                  result = __awaitValue245;
+                  var __flowBranch246:Dynamic;
                   if ((cast (cast result : { var canceled:Bool; var filePaths:Array<String>; }).canceled : Bool)) {
-                    __flowBranch679 = flight._internal._Async.protect(function():Dynamic {
+                    __flowBranch246 = flight._internal._Async.protect(function():Dynamic {
                       return flight._internal._Async.flowReturn({ outcome: 'cancelled' });
                     });
                   } else {
-                    __flowBranch679 = flight._internal._Async.flowNormal();
+                    __flowBranch246 = flight._internal._Async.flowNormal();
                   }
-                  return flight._internal._Async.continueFlow(__flowBranch679, function():Dynamic {
+                  return flight._internal._Async.continueFlow(__flowBranch246, function():Dynamic {
                     __destructure0 = (cast result : { var canceled:Bool; var filePaths:Array<String>; }).filePaths;
                     path = flight._internal._StaticIndex.readArray(__destructure0, 0.0);
-                    var __flowBranch680:Dynamic;
+                    var __flowBranch247:Dynamic;
                     if ((cast _Runtime.strictEquals(path, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-                      __flowBranch680 = flight._internal._Async.protect(function():Dynamic {
+                      __flowBranch247 = flight._internal._Async.protect(function():Dynamic {
                         return flight._internal._Async.flowReturn({ outcome: 'directory-open-failed' });
                       });
                     } else {
-                      __flowBranch680 = flight._internal._Async.flowNormal();
+                      __flowBranch247 = flight._internal._Async.flowNormal();
                     }
-                    return flight._internal._Async.continueFlow(__flowBranch680, function():Dynamic {
+                    return flight._internal._Async.continueFlow(__flowBranch247, function():Dynamic {
                       return flight._internal._Async.flowReturn({ handle: (cast _HostElectron.createNativeHandle__electronDialog((cast path : String), (cast 'Directory' : String)) : FileDialogHandle), outcome: 'selected' });
                     });
                   });
@@ -2096,69 +1375,68 @@ class _HostElectron {
           });
         })
       );
-    } : Dynamic) } : EntityShapeL18C23__electronDialog) : Dynamic)) : EntityShapeL18C23__electronDialog);
-    return cast null;
+    }));
   }
 
-  public static function createElectronFileOpenDialogBackend(electron:ElectronApi):{ >FileOpenDialogBackend, >Entity, } {
-    return cast (cast createEntity((cast ({ open: (cast function(options:OpenFileDialogOptions):flight._internal._Promise<FileOpenDialogResult> {
+  public static function initializeElectronFileOpenDialogBackend(out:EntityConstruction<FileOpenDialogBackend>, electron:ElectronApi):Void {
+    ((cast out : { var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; }).open = (cast function(options:OpenFileDialogOptions):flight._internal._Promise<FileOpenDialogResult> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var dialog:ElectronDialog = cast _Runtime.UNDEFINED;
-          var __flowBranch710:Dynamic;
-          if (_Runtime.truthy(({ final __hostType709 = options.signal; __hostType709 == null ? _Runtime.UNDEFINED : (cast __hostType709 : flight._internal.dom.AbortSignal).aborted; }))) {
-            __flowBranch710 = flight._internal._Async.protect(function():Dynamic {
+          var __flowBranch250:Dynamic;
+          if (_Runtime.truthy(({ final __hostType249 = options.signal; __hostType249 == null ? _Runtime.UNDEFINED : (cast __hostType249 : flight._internal.dom.AbortSignal).aborted; }))) {
+            __flowBranch250 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn({ outcome: 'cancelled' });
             });
           } else {
-            __flowBranch710 = flight._internal._Async.flowNormal();
+            __flowBranch250 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch710, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch250, function():Dynamic {
             dialog = electron.dialog;
-            var __flowBranch712:Dynamic;
-            if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(({ final __structural711 = dialog; __structural711 == null ? _Runtime.UNDEFINED : (cast __structural711 : ElectronDialog).showOpenDialog; })), 'function') : Bool)) {
-              __flowBranch712 = flight._internal._Async.protect(function():Dynamic {
+            var __flowBranch252:Dynamic;
+            if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(({ final __structural251 = dialog; __structural251 == null ? _Runtime.UNDEFINED : (cast __structural251 : ElectronDialog).showOpenDialog; })), 'function') : Bool)) {
+              __flowBranch252 = flight._internal._Async.protect(function():Dynamic {
                 return flight._internal._Async.flowReturn({ outcome: 'runtime-unavailable' });
               });
             } else {
-              __flowBranch712 = flight._internal._Async.flowNormal();
+              __flowBranch252 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch712, function():Dynamic {
+            return flight._internal._Async.continueFlow(__flowBranch252, function():Dynamic {
               return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
                 var properties:Array<String> = cast _Runtime.UNDEFINED;
                 var result:{ var canceled:Bool; var filePaths:Array<String>; } = cast _Runtime.UNDEFINED;
                 var handles:Array<FileDialogHandle> = cast _Runtime.UNDEFINED;
                 properties = cast (['openFile'] : Array<Dynamic>);
-                var __flowBranch713:Dynamic;
+                var __flowBranch253:Dynamic;
                 if ((cast _Runtime.strictEquals(options.multiple, true) : Bool)) {
-                  __flowBranch713 = flight._internal._Async.protect(function():Dynamic {
+                  __flowBranch253 = flight._internal._Async.protect(function():Dynamic {
                     _Runtime.callProperty(properties, 'push', cast (['multiSelections'] : Array<Dynamic>));
                     return flight._internal._Async.flowNormal();
                   });
                 } else {
-                  __flowBranch713 = flight._internal._Async.flowNormal();
+                  __flowBranch253 = flight._internal._Async.flowNormal();
                 }
-                return flight._internal._Async.continueFlow(__flowBranch713, function():Dynamic {
-                  return flight._internal._Async.flatMap((cast dialog : ElectronDialog).showOpenDialog((cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic), ({ final __callArgument717:Dynamic = { filters: (cast _HostElectron.toElectronFilters__electronDialog(options.filters) : Null<Array<{ var name:String; var extensions:Array<String>; }>>), properties: properties }; __callArgument717; })), function(__awaitValue714:Dynamic):Dynamic {
-                    result = __awaitValue714;
-                    var __flowBranch715:Dynamic;
+                return flight._internal._Async.continueFlow(__flowBranch253, function():Dynamic {
+                  return flight._internal._Async.flatMap((cast dialog : ElectronDialog).showOpenDialog((cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic), ({ final __callArgument257:Dynamic = { filters: (cast _HostElectron.toElectronFilters__electronDialog(options.filters) : Null<Array<{ var name:String; var extensions:Array<String>; }>>), properties: properties }; __callArgument257; })), function(__awaitValue254:Dynamic):Dynamic {
+                    result = __awaitValue254;
+                    var __flowBranch255:Dynamic;
                     if ((cast (cast result : { var canceled:Bool; var filePaths:Array<String>; }).canceled : Bool)) {
-                      __flowBranch715 = flight._internal._Async.protect(function():Dynamic {
+                      __flowBranch255 = flight._internal._Async.protect(function():Dynamic {
                         return flight._internal._Async.flowReturn({ outcome: 'cancelled' });
                       });
                     } else {
-                      __flowBranch715 = flight._internal._Async.flowNormal();
+                      __flowBranch255 = flight._internal._Async.flowNormal();
                     }
-                    return flight._internal._Async.continueFlow(__flowBranch715, function():Dynamic {
-                      var __flowBranch716:Dynamic;
+                    return flight._internal._Async.continueFlow(__flowBranch255, function():Dynamic {
+                      var __flowBranch256:Dynamic;
                       if ((cast _Runtime.strictEquals(_Runtime.field((cast result : { var canceled:Bool; var filePaths:Array<String>; }).filePaths, 'length'), 0.0) : Bool)) {
-                        __flowBranch716 = flight._internal._Async.protect(function():Dynamic {
+                        __flowBranch256 = flight._internal._Async.protect(function():Dynamic {
                           return flight._internal._Async.flowReturn({ outcome: 'file-open-failed' });
                         });
                       } else {
-                        __flowBranch716 = flight._internal._Async.flowNormal();
+                        __flowBranch256 = flight._internal._Async.flowNormal();
                       }
-                      return flight._internal._Async.continueFlow(__flowBranch716, function():Dynamic {
+                      return flight._internal._Async.continueFlow(__flowBranch256, function():Dynamic {
                         handles = (cast _Runtime.mapArray((cast (cast result : { var canceled:Bool; var filePaths:Array<String>; }).filePaths : Array<String>), function(path:String, __unused1:Float, __unused2:Array<String>):FileDialogHandle return (cast _HostElectron.createNativeHandle__electronDialog((cast path : String), (cast 'File' : String)) : FileDialogHandle), _Runtime.UNDEFINED));
                         return flight._internal._Async.flowReturn({ handles: (cast handles : Array<flight._internal._IndexedAccess<Dynamic, Float>>), outcome: 'selected' });
                       });
@@ -2177,56 +1455,55 @@ class _HostElectron {
           });
         })
       );
-    } : Dynamic) } : EntityShapeL40C23__electronDialog) : Dynamic)) : EntityShapeL40C23__electronDialog);
-    return cast null;
+    }));
   }
 
-  public static function createElectronFileSaveDialogBackend(electron:ElectronApi):{ >FileSaveDialogBackend, >Entity, } {
-    return cast (cast createEntity((cast ({ save: (cast function(options:SaveFileDialogOptions):flight._internal._Promise<FileSaveDialogResult> {
+  public static function initializeElectronFileSaveDialogBackend(out:EntityConstruction<FileSaveDialogBackend>, electron:ElectronApi):Void {
+    ((cast out : { var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; }).save = (cast function(options:SaveFileDialogOptions):flight._internal._Promise<FileSaveDialogResult> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var dialog:ElectronDialog = cast _Runtime.UNDEFINED;
-          var __flowBranch745:Dynamic;
-          if (_Runtime.truthy(({ final __hostType744 = options.signal; __hostType744 == null ? _Runtime.UNDEFINED : (cast __hostType744 : flight._internal.dom.AbortSignal).aborted; }))) {
-            __flowBranch745 = flight._internal._Async.protect(function():Dynamic {
+          var __flowBranch259:Dynamic;
+          if (_Runtime.truthy(({ final __hostType258 = options.signal; __hostType258 == null ? _Runtime.UNDEFINED : (cast __hostType258 : flight._internal.dom.AbortSignal).aborted; }))) {
+            __flowBranch259 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn({ outcome: 'cancelled' });
             });
           } else {
-            __flowBranch745 = flight._internal._Async.flowNormal();
+            __flowBranch259 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch745, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch259, function():Dynamic {
             dialog = electron.dialog;
-            var __flowBranch747:Dynamic;
-            if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(({ final __structural746 = dialog; __structural746 == null ? _Runtime.UNDEFINED : (cast __structural746 : ElectronDialog).showSaveDialog; })), 'function') : Bool)) {
-              __flowBranch747 = flight._internal._Async.protect(function():Dynamic {
+            var __flowBranch261:Dynamic;
+            if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(({ final __structural260 = dialog; __structural260 == null ? _Runtime.UNDEFINED : (cast __structural260 : ElectronDialog).showSaveDialog; })), 'function') : Bool)) {
+              __flowBranch261 = flight._internal._Async.protect(function():Dynamic {
                 return flight._internal._Async.flowReturn({ outcome: 'runtime-unavailable' });
               });
             } else {
-              __flowBranch747 = flight._internal._Async.flowNormal();
+              __flowBranch261 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch747, function():Dynamic {
+            return flight._internal._Async.continueFlow(__flowBranch261, function():Dynamic {
               return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
                 var result:{ var canceled:Bool; @:optional var filePath:Null<String>; } = cast _Runtime.UNDEFINED;
-                return flight._internal._Async.flatMap((cast dialog : ElectronDialog).showSaveDialog((cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic), ({ final __callArgument751:Dynamic = { defaultPath: options.defaultName, filters: (cast _HostElectron.toElectronFilters__electronDialog(options.filters) : Null<Array<{ var name:String; var extensions:Array<String>; }>>) }; __callArgument751; })), function(__awaitValue748:Dynamic):Dynamic {
-                  result = __awaitValue748;
-                  var __flowBranch749:Dynamic;
+                return flight._internal._Async.flatMap((cast dialog : ElectronDialog).showSaveDialog((cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic), ({ final __callArgument265:Dynamic = { defaultPath: options.defaultName, filters: (cast _HostElectron.toElectronFilters__electronDialog(options.filters) : Null<Array<{ var name:String; var extensions:Array<String>; }>>) }; __callArgument265; })), function(__awaitValue262:Dynamic):Dynamic {
+                  result = __awaitValue262;
+                  var __flowBranch263:Dynamic;
                   if ((cast (cast result : { var canceled:Bool; @:optional var filePath:Null<String>; }).canceled : Bool)) {
-                    __flowBranch749 = flight._internal._Async.protect(function():Dynamic {
+                    __flowBranch263 = flight._internal._Async.protect(function():Dynamic {
                       return flight._internal._Async.flowReturn({ outcome: 'cancelled' });
                     });
                   } else {
-                    __flowBranch749 = flight._internal._Async.flowNormal();
+                    __flowBranch263 = flight._internal._Async.flowNormal();
                   }
-                  return flight._internal._Async.continueFlow(__flowBranch749, function():Dynamic {
-                    var __flowBranch750:Dynamic;
+                  return flight._internal._Async.continueFlow(__flowBranch263, function():Dynamic {
+                    var __flowBranch264:Dynamic;
                     if ((cast ((cast _Runtime.strictEquals((cast result : { var canceled:Bool; @:optional var filePath:Null<String>; }).filePath, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals((cast result : { var canceled:Bool; @:optional var filePath:Null<String>; }).filePath, '') : Bool)) : Bool)) {
-                      __flowBranch750 = flight._internal._Async.protect(function():Dynamic {
+                      __flowBranch264 = flight._internal._Async.protect(function():Dynamic {
                         return flight._internal._Async.flowReturn({ outcome: 'file-save-failed' });
                       });
                     } else {
-                      __flowBranch750 = flight._internal._Async.flowNormal();
+                      __flowBranch264 = flight._internal._Async.flowNormal();
                     }
-                    return flight._internal._Async.continueFlow(__flowBranch750, function():Dynamic {
+                    return flight._internal._Async.continueFlow(__flowBranch264, function():Dynamic {
                       return flight._internal._Async.flowReturn({ handle: (cast _HostElectron.createNativeHandle__electronDialog((cast (cast result : { var canceled:Bool; @:optional var filePath:Null<String>; }).filePath : String), (cast 'File' : String)) : FileDialogHandle), outcome: 'selected' });
                     });
                   });
@@ -2243,59 +1520,58 @@ class _HostElectron {
           });
         })
       );
-    } : Dynamic) } : EntityShapeL67C23__electronDialog) : Dynamic)) : EntityShapeL67C23__electronDialog);
-    return cast null;
+    }));
   }
 
-  public static function createElectronMessageDialogBackend(electron:ElectronApi):MessageDialogBackend {
+  public static function initializeElectronMessageDialogBackend(out:EntityConstruction<MessageDialogBackend>, electron:ElectronApi):Void {
     var dialog:ElectronDialog = cast _Runtime.UNDEFINED;
     dialog = electron.dialog;
-    return cast { message: function(options:MessageDialogOptions):flight._internal._Promise<MessageDialogResult> {
+    ((cast out : { var message:MessageDialogOptions->flight._internal._Promise<MessageDialogResult>; }).message = (cast function(options:MessageDialogOptions):flight._internal._Promise<MessageDialogResult> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var result:{ var response:Float; var checkboxChecked:Bool; } = cast _Runtime.UNDEFINED;
-          var __flowBranch769:Dynamic;
-          if (_Runtime.truthy(({ final __hostType768 = options.signal; __hostType768 == null ? _Runtime.UNDEFINED : (cast __hostType768 : flight._internal.dom.AbortSignal).aborted; }))) {
-            __flowBranch769 = flight._internal._Async.protect(function():Dynamic {
+          var __flowBranch267:Dynamic;
+          if (_Runtime.truthy(({ final __hostType266 = options.signal; __hostType266 == null ? _Runtime.UNDEFINED : (cast __hostType266 : flight._internal.dom.AbortSignal).aborted; }))) {
+            __flowBranch267 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn({ buttonIndex: _Runtime.coalesce(options.cancelId, function():Dynamic return cast 0.0), cancelled: true, checkboxChecked: _Runtime.coalesce(options.checkboxChecked, function():Dynamic return cast false) });
             });
           } else {
-            __flowBranch769 = flight._internal._Async.flowNormal();
+            __flowBranch267 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch769, function():Dynamic {
-            return flight._internal._Async.flatMap((cast dialog : ElectronDialog).showMessageBox((cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic), ({ final __callArgument771:Dynamic = _Runtime.mergeObjects([{ type: options.kind }, { title: options.title }, { message: options.message }, { detail: options.detail }, { buttons: options.buttons }, { defaultId: options.defaultId }, { cancelId: options.cancelId }, ((cast _Runtime.strictEquals(options.signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast {  } : Dynamic) : (cast { signal: options.signal } : Dynamic)), { checkboxLabel: options.checkboxLabel }, { checkboxChecked: options.checkboxChecked }]); __callArgument771; })), function(__awaitValue770:Dynamic):Dynamic {
-              result = __awaitValue770;
+          return flight._internal._Async.continueFlow(__flowBranch267, function():Dynamic {
+            return flight._internal._Async.flatMap((cast dialog : ElectronDialog).showMessageBox((cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic), ({ final __callArgument269:Dynamic = _Runtime.mergeObjects([{ type: options.kind }, { title: options.title }, { message: options.message }, { detail: options.detail }, { buttons: options.buttons }, { defaultId: options.defaultId }, { cancelId: options.cancelId }, ((cast _Runtime.strictEquals(options.signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast {  } : Dynamic) : (cast { signal: options.signal } : Dynamic)), { checkboxLabel: options.checkboxLabel }, { checkboxChecked: options.checkboxChecked }]); __callArgument269; })), function(__awaitValue268:Dynamic):Dynamic {
+              result = __awaitValue268;
               return flight._internal._Async.flowReturn({ buttonIndex: (cast result : { var response:Float; var checkboxChecked:Bool; }).response, cancelled: ((cast !_Runtime.strictEquals(options.cancelId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast result : { var response:Float; var checkboxChecked:Bool; }).response, options.cancelId) : Bool)), checkboxChecked: (cast result : { var response:Float; var checkboxChecked:Bool; }).checkboxChecked });
             });
           });
         })
       );
-    }, confirm: function(options:MessageDialogOptions):flight._internal._Promise<Bool> {
+    }));
+    ((cast out : { var confirm:MessageDialogOptions->flight._internal._Promise<Bool>; }).confirm = (cast function(options:MessageDialogOptions):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var result:{ var response:Float; var checkboxChecked:Bool; } = cast _Runtime.UNDEFINED;
-          var __flowBranch773:Dynamic;
-          if (_Runtime.truthy(({ final __hostType772 = options.signal; __hostType772 == null ? _Runtime.UNDEFINED : (cast __hostType772 : flight._internal.dom.AbortSignal).aborted; }))) {
-            __flowBranch773 = flight._internal._Async.protect(function():Dynamic {
+          var __flowBranch271:Dynamic;
+          if (_Runtime.truthy(({ final __hostType270 = options.signal; __hostType270 == null ? _Runtime.UNDEFINED : (cast __hostType270 : flight._internal.dom.AbortSignal).aborted; }))) {
+            __flowBranch271 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(false);
             });
           } else {
-            __flowBranch773 = flight._internal._Async.flowNormal();
+            __flowBranch271 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch773, function():Dynamic {
-            return flight._internal._Async.flatMap((cast dialog : ElectronDialog).showMessageBox((cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic), ({ final __callArgument775:Dynamic = _Runtime.mergeObjects([{ type: options.kind }, { title: options.title }, { message: options.message }, { detail: options.detail }, { buttons: cast (['OK', 'Cancel'] : Array<Dynamic>) }, { defaultId: 0.0 }, { cancelId: 1.0 }, ((cast _Runtime.strictEquals(options.signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast {  } : Dynamic) : (cast { signal: options.signal } : Dynamic))]); __callArgument775; })), function(__awaitValue774:Dynamic):Dynamic {
-              result = __awaitValue774;
+          return flight._internal._Async.continueFlow(__flowBranch271, function():Dynamic {
+            return flight._internal._Async.flatMap((cast dialog : ElectronDialog).showMessageBox((cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic), ({ final __callArgument273:Dynamic = _Runtime.mergeObjects([{ type: options.kind }, { title: options.title }, { message: options.message }, { detail: options.detail }, { buttons: cast (['OK', 'Cancel'] : Array<Dynamic>) }, { defaultId: 0.0 }, { cancelId: 1.0 }, ((cast _Runtime.strictEquals(options.signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast {  } : Dynamic) : (cast { signal: options.signal } : Dynamic))]); __callArgument273; })), function(__awaitValue272:Dynamic):Dynamic {
+              result = __awaitValue272;
               return flight._internal._Async.flowReturn(_Runtime.strictEquals((cast result : { var response:Float; var checkboxChecked:Bool; }).response, 0.0));
             });
           });
         })
       );
-    } };
-    return cast null;
+    }));
   }
 
   public static function createNativeHandle__electronDialog(path:String, kind:String):FileDialogHandle {
-    return cast (cast (#if js _Runtime.callValue(createFileDialogHandle, cast ([(cast kind : String), (cast (cast _HostElectron.basename__electronDialog((cast path : String)) : String) : String), ({ final __callArgument777:Dynamic = path; __callArgument777; })] : Array<Dynamic>)) #else createFileDialogHandle((cast kind : String), (cast (cast _HostElectron.basename__electronDialog((cast path : String)) : String) : String), ({ final __callArgument776:Dynamic = path; __callArgument776; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : FileDialogHandle);
+    return cast (cast (#if js _Runtime.callValue(createFileDialogHandle, cast ([(cast kind : String), (cast (cast _HostElectron.basename__electronDialog((cast path : String)) : String) : String), ({ final __callArgument275:Dynamic = path; __callArgument275; })] : Array<Dynamic>)) #else createFileDialogHandle((cast kind : String), (cast (cast _HostElectron.basename__electronDialog((cast path : String)) : String) : String), ({ final __callArgument274:Dynamic = path; __callArgument274; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : FileDialogHandle);
     return cast null;
   }
 
@@ -2312,7 +1588,7 @@ class _HostElectron {
   public static function toElectronFilters__electronDialog(filters:Null<Array<FileDialogFilter>>):Null<Array<{ var name:String; var extensions:Array<String>; }>> {
     var result:Array<{ var name:String; var extensions:Array<String>; }> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(filters, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _Runtime.field(_Runtime, 'UNDEFINED'); }
-    result = (cast _Runtime.filterArray((cast (cast _Runtime.mapArray((cast filters : Array<FileDialogFilter>), function(filter:FileDialogFilter, __unused3:Float, __unused4:Array<FileDialogFilter>):{ var name:String; var extensions:Array<String>; } return { name: filter.name, extensions: (cast _HostElectron.flattenExtensions__electronDialog(({ final __callArgument780:Dynamic = filter; __callArgument780; })) : Array<String>) }, _Runtime.UNDEFINED)) : Array<{ var name:String; var extensions:Array<String>; }>), function(filter:{ var name:String; var extensions:Array<String>; }, __unused5:Float, __unused6:Array<{ var name:String; var extensions:Array<String>; }>):Bool return ((cast _Runtime.field((cast filter : { var name:String; var extensions:Array<String>; }).extensions, 'length') : Float) > (cast 0.0 : Float)), _Runtime.UNDEFINED));
+    result = (cast _Runtime.filterArray((cast (cast _Runtime.mapArray((cast filters : Array<FileDialogFilter>), function(filter:FileDialogFilter, __unused3:Float, __unused4:Array<FileDialogFilter>):{ var name:String; var extensions:Array<String>; } return { name: filter.name, extensions: (cast _HostElectron.flattenExtensions__electronDialog(({ final __callArgument278:Dynamic = filter; __callArgument278; })) : Array<String>) }, _Runtime.UNDEFINED)) : Array<{ var name:String; var extensions:Array<String>; }>), function(filter:{ var name:String; var extensions:Array<String>; }, __unused5:Float, __unused6:Array<{ var name:String; var extensions:Array<String>; }>):Bool return ((cast _Runtime.field((cast filter : { var name:String; var extensions:Array<String>; }).extensions, 'length') : Float) > (cast 0.0 : Float)), _Runtime.UNDEFINED));
     return cast ((cast ((cast _Runtime.field(result, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast result : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
     return cast null;
   }
@@ -2343,11 +1619,51 @@ class _HostElectron {
   }
 
   public static function createElectronIpcHandleBackend(electron:ElectronApi):IpcHandleBackend {
+    var out:EntityConstruction<IpcHandleBackend> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ handle: cast _Runtime.UNDEFINED } : IpcHandleBackend); }) #end));
+    initializeElectronIpcHandleBackend(({ final __callArgument284:Dynamic = out; __callArgument284; }), ({ final __callArgument285:Dynamic = electron; __callArgument285; }));
+    return cast out;
+    return cast null;
+  }
+
+  public static function createElectronIpcInvokeBackend(ipcRenderer:ElectronIpcRenderer):IpcInvokeBackend {
+    var out:EntityConstruction<IpcInvokeBackend> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ invoke: cast _Runtime.UNDEFINED } : IpcInvokeBackend); }) #end));
+    initializeElectronIpcInvokeBackend(({ final __callArgument288:Dynamic = out; __callArgument288; }), ({ final __callArgument289:Dynamic = ipcRenderer; __callArgument289; }));
+    return cast out;
+    return cast null;
+  }
+
+  public static function createElectronIpcMessageBackend(electron:ElectronApi):IpcMessageBackend {
+    var out:EntityConstruction<IpcMessageBackend> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ subscribe: cast _Runtime.UNDEFINED } : IpcMessageBackend); }) #end));
+    initializeElectronIpcMessageBackend(({ final __callArgument292:Dynamic = out; __callArgument292; }), ({ final __callArgument293:Dynamic = electron; __callArgument293; }));
+    return cast out;
+    return cast null;
+  }
+
+  public static function createElectronIpcSendBackend(ipcRenderer:ElectronIpcRenderer):IpcSendBackend {
+    var out:EntityConstruction<IpcSendBackend> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ send: cast _Runtime.UNDEFINED } : IpcSendBackend); }) #end));
+    initializeElectronIpcSendBackend(({ final __callArgument296:Dynamic = out; __callArgument296; }), ({ final __callArgument297:Dynamic = ipcRenderer; __callArgument297; }));
+    return cast out;
+    return cast null;
+  }
+
+  public static function createElectronIpcTargetedSendBackend<Target:ElectronIpcTarget>():IpcTargetedSendBackend<Target> {
+    var out:EntityConstruction<IpcTargetedSendBackend<Target>> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ send: cast _Runtime.UNDEFINED } : EntityShapeL44C15__electronIpc); }) #end));
+    initializeElectronIpcTargetedSendBackend((cast out : Dynamic));
+    return cast out;
+    return cast null;
+  }
+
+  public static function initializeElectronIpcHandleBackend(out:EntityConstruction<IpcHandleBackend>, electron:ElectronApi):Void {
     var ipcMain:ElectronIpcMain = cast _Runtime.UNDEFINED;
     ipcMain = electron.ipcMain;
-    return cast (cast createEntity(({ final __callArgument788:Dynamic = ({ handle: (cast function(channel:String, handler:Array<flight._internal._Any>->flight._internal._Any):Void->Void {
+    ((cast out : { var handle:String->(Array<flight._internal._Any>->flight._internal._Any)->(Void->Void); }).handle = (cast function(channel:String, handler:Array<flight._internal._Any>->flight._internal._Any):Void->Void {
       var active:Bool = cast _Runtime.UNDEFINED;
-      (cast ipcMain : ElectronIpcMain).handle((cast channel : String), ({ final __callArgument787:Dynamic = _Runtime.haxeRest(function(_event:flight._internal._Any, ...args:flight._internal._Any):flight._internal._Any return _Runtime.callHaxeRestValue(handler, _Runtime.concatArrays([_Runtime.toArray(args)]), 0), 1); __callArgument787; }));
+      (cast ipcMain : ElectronIpcMain).handle((cast channel : String), ({ final __callArgument300:Dynamic = _Runtime.haxeRest(function(_event:flight._internal._Any, ...args:flight._internal._Any):flight._internal._Any return _Runtime.callHaxeRestValue(handler, _Runtime.concatArrays([_Runtime.toArray(args)]), 0), 1); __callArgument300; }));
       active = true;
       return cast function():Void {
         if ((cast !(cast active : Bool) : Bool)) { return; }
@@ -2355,77 +1671,116 @@ class _HostElectron {
         (cast ipcMain : ElectronIpcMain).removeHandler((cast channel : String));
       };
       return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : IpcHandleBackend); __callArgument788; })) : IpcHandleBackend);
-    return cast null;
+    }));
   }
 
-  public static function createElectronIpcInvokeBackend(ipcRenderer:ElectronIpcRenderer):IpcInvokeBackend {
-    return cast (cast createEntity(({ final __callArgument792:Dynamic = ({ invoke: (cast function(channel:String, args:Array<flight._internal._Any>):flight._internal._Promise<flight._internal._Any> {
+  public static function initializeElectronIpcInvokeBackend(out:EntityConstruction<IpcInvokeBackend>, ipcRenderer:ElectronIpcRenderer):Void {
+    ((cast out : { var invoke:String->Array<flight._internal._Any>->flight._internal._Promise<flight._internal._Any>; }).invoke = (cast function(channel:String, args:Array<flight._internal._Any>):flight._internal._Promise<flight._internal._Any> {
       return cast _Runtime.callHaxeRestProperty(ipcRenderer, 'invoke', _Runtime.concatArrays([[channel], _Runtime.toArray(args)]), 1);
       return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : IpcInvokeBackend); __callArgument792; })) : IpcInvokeBackend);
-    return cast null;
+    }));
   }
 
-  public static function createElectronIpcMessageBackend(electron:ElectronApi):IpcMessageBackend {
+  public static function initializeElectronIpcMessageBackend(out:EntityConstruction<IpcMessageBackend>, electron:ElectronApi):Void {
     var ipcMain:ElectronIpcMain = cast _Runtime.UNDEFINED;
     ipcMain = electron.ipcMain;
-    return cast (cast createEntity(({ final __callArgument802:Dynamic = ({ subscribe: (cast function(channel:String, listener:Array<flight._internal._Any>->Void):Void->Void {
+    ((cast out : { var subscribe:String->(Array<flight._internal._Any>->Void)->(Void->Void); }).subscribe = (cast function(channel:String, listener:Array<flight._internal._Any>->Void):Void->Void {
       var handler:flight._internal._Any->Array<flight._internal._Any>->Void = cast _Runtime.UNDEFINED;
-      handler = (cast _Runtime.haxeRest(function(_event:flight._internal._Any, ...args:flight._internal._Any):Void { listener(({ final __callArgument798:Dynamic = args; __callArgument798; })); }, 1));
-      (cast ipcMain : ElectronIpcMain).on((cast channel : String), ({ final __callArgument800:Dynamic = handler; __callArgument800; }));
-      return cast function():Void { (cast ipcMain : ElectronIpcMain).removeListener((cast channel : String), ({ final __callArgument801:Dynamic = handler; __callArgument801; })); };
+      handler = (cast _Runtime.haxeRest(function(_event:flight._internal._Any, ...args:flight._internal._Any):Void { listener(({ final __callArgument301:Dynamic = args; __callArgument301; })); }, 1));
+      (cast ipcMain : ElectronIpcMain).on((cast channel : String), ({ final __callArgument303:Dynamic = handler; __callArgument303; }));
+      return cast function():Void { (cast ipcMain : ElectronIpcMain).removeListener((cast channel : String), ({ final __callArgument304:Dynamic = handler; __callArgument304; })); };
       return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : IpcMessageBackend); __callArgument802; })) : IpcMessageBackend);
-    return cast null;
+    }));
   }
 
-  public static function createElectronIpcSendBackend(ipcRenderer:ElectronIpcRenderer):IpcSendBackend {
-    return cast (cast createEntity(({ final __callArgument812:Dynamic = ({ send: (cast function(channel:String, args:Array<flight._internal._Any>):Void {
+  public static function initializeElectronIpcSendBackend(out:EntityConstruction<IpcSendBackend>, ipcRenderer:ElectronIpcRenderer):Void {
+    ((cast out : { var send:String->Array<flight._internal._Any>->Void; }).send = (cast function(channel:String, args:Array<flight._internal._Any>):Void {
       _Runtime.callHaxeRestProperty(ipcRenderer, 'send', _Runtime.concatArrays([[channel], _Runtime.toArray(args)]), 1);
-    } : Dynamic) } : IpcSendBackend); __callArgument812; })) : IpcSendBackend);
-    return cast null;
+    }));
   }
 
-  public static function createElectronIpcTargetedSendBackend<Target:ElectronIpcTarget>():IpcTargetedSendBackend<Target> {
-    return cast (cast createEntity((cast ({ send: (cast function(target:Target, channel:String, args:Array<flight._internal._Any>):Void {
+  public static function initializeElectronIpcTargetedSendBackend<Target:ElectronIpcTarget>(out:EntityConstruction<IpcTargetedSendBackend<Target>>):Void {
+    ((cast out : { var send:Target->String->Array<flight._internal._Any>->Void; }).send = (cast function(target:Target, channel:String, args:Array<flight._internal._Any>):Void {
       _Runtime.callHaxeRestProperty(target, 'send', _Runtime.concatArrays([[channel], _Runtime.toArray(args)]), 1);
-    } : Dynamic) } : EntityShapeL62C77__electronIpc) : Dynamic)) : EntityShapeL62C77__electronIpc);
-    return cast null;
+    }));
   }
 
   public static function createElectronMenuBackends(electron:ElectronApi):ElectronMenuCapabilities {
-    var selectListener:Null<String->Void> = cast _Runtime.UNDEFINED;
-    var destroyed:Bool = cast _Runtime.UNDEFINED;
-    selectListener = null;
-    destroyed = false;
-    return cast (cast createEntity((cast ({ application: (cast (cast createEntity((cast ({ destroy: (cast function():Void {
-      if ((cast destroyed : Bool)) { return; }
-      (destroyed = cast (true : Dynamic));
+    var menuState:{ var selectListener:Null<String->Void>; var destroyed:Bool; } = cast _Runtime.UNDEFINED;
+    var application:MenuApplicationBackend = cast _Runtime.UNDEFINED;
+    var popup:MenuPopupBackend = cast _Runtime.UNDEFINED;
+    var select:MenuSelectBackend = cast _Runtime.UNDEFINED;
+    var out:EntityConstruction<ElectronMenuCapabilities> = cast _Runtime.UNDEFINED;
+    menuState = (cast { selectListener: (cast null : Null<String->Void>), destroyed: false });
+    application = _Runtime.callValue(function():MenuApplicationBackend {
+      var b:EntityConstruction<MenuApplicationBackend> = cast _Runtime.UNDEFINED;
+      b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ destroy: cast _Runtime.UNDEFINED, setApplicationMenu: cast _Runtime.UNDEFINED } : MenuApplicationBackend); }) #end));
+      initializeMenuApplicationBackend(({ final __callArgument305:Dynamic = b; __callArgument305; }), ({ final __callArgument306:Dynamic = electron; __callArgument306; }), ({ final __callArgument307:Dynamic = menuState; __callArgument307; }));
+      return cast b;
+      return cast _Runtime.UNDEFINED;
+    }, cast ([] : Array<Dynamic>));
+    popup = _Runtime.callValue(function():MenuPopupBackend {
+      var b:EntityConstruction<MenuPopupBackend> = cast _Runtime.UNDEFINED;
+      b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ popup: cast _Runtime.UNDEFINED } : MenuPopupBackend); }) #end));
+      initializeMenuPopupBackend(({ final __callArgument311:Dynamic = b; __callArgument311; }), ({ final __callArgument312:Dynamic = electron; __callArgument312; }));
+      return cast b;
+      return cast _Runtime.UNDEFINED;
+    }, cast ([] : Array<Dynamic>));
+    select = _Runtime.callValue(function():MenuSelectBackend {
+      var b:EntityConstruction<MenuSelectBackend> = cast _Runtime.UNDEFINED;
+      b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ subscribe: cast _Runtime.UNDEFINED } : MenuSelectBackend); }) #end));
+      initializeMenuSelectBackend(({ final __callArgument315:Dynamic = b; __callArgument315; }), ({ final __callArgument316:Dynamic = menuState; __callArgument316; }));
+      return cast b;
+      return cast _Runtime.UNDEFINED;
+    }, cast ([] : Array<Dynamic>));
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ application: cast _Runtime.UNDEFINED, popup: cast _Runtime.UNDEFINED, select: cast _Runtime.UNDEFINED } : ElectronMenuCapabilities); }) #end));
+    initializeElectronMenuCapabilities(({ final __callArgument319:Dynamic = out; __callArgument319; }), ({ final __callArgument320:Dynamic = application; __callArgument320; }), ({ final __callArgument321:Dynamic = popup; __callArgument321; }), ({ final __callArgument322:Dynamic = select; __callArgument322; }));
+    return cast out;
+    return cast null;
+  }
+
+  public static function initializeElectronMenuCapabilities(out:EntityConstruction<ElectronMenuCapabilities>, application:MenuApplicationBackend, popup:MenuPopupBackend, select:MenuSelectBackend):Void {
+    _Runtime.setField(out, 'application', application);
+    _Runtime.setField(out, 'popup', popup);
+    _Runtime.setField(out, 'select', select);
+  }
+
+  public static function initializeMenuApplicationBackend(out:EntityConstruction<MenuApplicationBackend>, electron:ElectronApi, menuState:{ var selectListener:Null<String->Void>; var destroyed:Bool; }):Void {
+    ((cast out : { @:optional var destroy:Null<Void->Void>; }).destroy = (cast function():Void {
+      if ((cast (cast menuState : { var selectListener:Null<String->Void>; var destroyed:Bool; }).destroyed : Bool)) { return; }
+      ((cast menuState : { var selectListener:Null<String->Void>; var destroyed:Bool; }).destroyed = true);
       (cast electron.Menu : ElectronMenuConstructor).setApplicationMenu((cast null : Dynamic));
-    } : Dynamic), setApplicationMenu: (cast function(items:Array<MenuItemTemplate>):Bool {
-      (cast electron.Menu : ElectronMenuConstructor).setApplicationMenu((cast (cast electron.Menu : ElectronMenuConstructor).buildFromTemplate((cast (cast toElectronTemplate((cast items : Dynamic), ({ final __callArgument862:Dynamic = function(id:String):Void { _Runtime.callOptionalValue(selectListener, cast ([id] : Array<Dynamic>)); }; __callArgument862; })) : Array<ElectronMenuItemOptions>) : Dynamic)) : Dynamic));
+    }));
+    ((cast out : { var setApplicationMenu:Array<MenuItemTemplate>->Bool; }).setApplicationMenu = (cast function(items:Array<MenuItemTemplate>):Bool {
+      (cast electron.Menu : ElectronMenuConstructor).setApplicationMenu((cast (cast electron.Menu : ElectronMenuConstructor).buildFromTemplate((cast (cast toElectronTemplate((cast items : Dynamic), ({ final __callArgument328:Dynamic = function(id:String):Void { ({ final __optionalCall327 = (cast menuState : { var selectListener:Null<String->Void>; var destroyed:Bool; }).selectListener; if (__optionalCall327 != null) __optionalCall327((cast id : String)); }); }; __callArgument328; })) : Array<ElectronMenuItemOptions>) : Dynamic)) : Dynamic));
       return cast true;
       return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL27C77__electronMenu) : Dynamic)) : EntityShapeL27C77__electronMenu) : Dynamic), popup: (cast (cast createEntity((cast ({ popup: (cast function(items:Array<MenuItemTemplate>, x:Float, y:Float):flight._internal._Promise<Null<String>> {
+    }));
+  }
+
+  public static function initializeMenuPopupBackend(out:EntityConstruction<MenuPopupBackend>, electron:ElectronApi):Void {
+    ((cast out : { var popup:Array<MenuItemTemplate>->Float->Float->flight._internal._Promise<Null<String>>; }).popup = (cast function(items:Array<MenuItemTemplate>, x:Float, y:Float):flight._internal._Promise<Null<String>> {
       return cast flight._internal._Async.create(function(resolve:flight._internal._Any, __unused0:flight._internal._Any):Void {
         var menu:ElectronMenu = cast _Runtime.UNDEFINED;
-        menu = (cast electron.Menu : ElectronMenuConstructor).buildFromTemplate((cast (cast toElectronTemplate((cast items : Dynamic), ({ final __callArgument879:Dynamic = function(id:String):Void { resolve(({ final __callArgument877:Dynamic = id; __callArgument877; })); }; __callArgument879; })) : Array<ElectronMenuItemOptions>) : Dynamic));
+        menu = (cast electron.Menu : ElectronMenuConstructor).buildFromTemplate((cast (cast toElectronTemplate((cast items : Dynamic), ({ final __callArgument333:Dynamic = function(id:String):Void { resolve(({ final __callArgument331:Dynamic = id; __callArgument331; })); }; __callArgument333; })) : Array<ElectronMenuItemOptions>) : Dynamic));
         try {
-          (cast menu : ElectronMenu).popup(({ final __callArgument883:Dynamic = { x: x, y: y }; __callArgument883; }));
+          (cast menu : ElectronMenu).popup(({ final __callArgument337:Dynamic = { x: x, y: y }; __callArgument337; }));
         } catch (__error:Dynamic) {
-          resolve(({ final __callArgument884:Dynamic = null; __callArgument884; }));
+          resolve(({ final __callArgument338:Dynamic = null; __callArgument338; }));
         }
       });
       return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL42C65__electronMenu) : Dynamic)) : EntityShapeL42C65__electronMenu) : Dynamic), select: (cast (cast createEntity(({ final __callArgument904:Dynamic = ({ subscribe: (cast function(listener:String->Void):Void->Void {
-      (selectListener = cast (listener : Dynamic));
+    }));
+  }
+
+  public static function initializeMenuSelectBackend(out:EntityConstruction<MenuSelectBackend>, menuState:{ var selectListener:Null<String->Void>; var destroyed:Bool; }):Void {
+    ((cast out : { var subscribe:(String->Void)->(Void->Void); }).subscribe = (cast function(listener:String->Void):Void->Void {
+      ((cast menuState : { var selectListener:Null<String->Void>; }).selectListener = (cast listener));
       return cast function():Void {
-        if ((cast _Runtime.strictEquals(selectListener, listener) : Bool)) { (selectListener = cast (null : Dynamic)); }
+        if ((cast _Runtime.strictEquals((cast menuState : { var selectListener:Null<String->Void>; var destroyed:Bool; }).selectListener, listener) : Bool)) { ((cast menuState : { var selectListener:Null<String->Void>; }).selectListener = (cast null)); }
       };
       return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL57C67__electronMenu); __callArgument904; })) : EntityShapeL57C67__electronMenu) : Dynamic) } : ElectronMenuCapabilities) : Dynamic)) : ElectronMenuCapabilities);
-    return cast null;
+    }));
   }
 
   public static function toElectronTemplate(items:Array<MenuItemTemplate>, ?onSelect:String->Void):Array<ElectronMenuItemOptions> {
@@ -2433,7 +1788,7 @@ class _HostElectron {
       var options:ElectronMenuItemOptions = cast _Runtime.UNDEFINED;
       options = (cast { accelerator: item.accelerator, checked: item.checked, enabled: item.enabled, id: item.id, label: item.label, role: (cast _HostElectron.toElectronRole__electronMenuTemplate(item.role) : Null<String>), type: item.type });
       if (_Runtime.truthy(item.submenu)) {
-        ((cast options : ElectronMenuItemOptions).submenu = (cast toElectronTemplate(item.submenu, ({ final __callArgument998:Dynamic = onSelect; __callArgument998; })) : Array<ElectronMenuItemOptions>));
+        ((cast options : ElectronMenuItemOptions).submenu = (cast toElectronTemplate(item.submenu, ({ final __callArgument340:Dynamic = onSelect; __callArgument340; })) : Array<ElectronMenuItemOptions>));
       } else { if (_Runtime.truthy(_Runtime.andValue(onSelect, function():Dynamic return cast !_Runtime.strictEquals(item.id, _Runtime.field(_Runtime, 'UNDEFINED'))))) {
         ((cast options : { @:optional var click:Null<Void->Void>; }).click = (cast function():Void { onSelect((cast item.id : String)); }));
       } }
@@ -2469,6 +1824,7 @@ class _HostElectron {
     var destroyCompleted:Bool = cast _Runtime.UNDEFINED;
     var nextId:Float = cast _Runtime.UNDEFINED;
     var capabilities:{ var click:NotificationClickBackend; var close:NotificationCloseBackend; var delivery:NotificationDeliveryBackend; var dismiss:NotificationDismissBackend; var lifecycle:NotificationLifecycleBackend; var received:NotificationReceivedBackend; } = cast _Runtime.UNDEFINED;
+    var out:EntityConstruction<ElectronMacosNotificationCapabilities> = cast _Runtime.UNDEFINED;
     closeOne = (cast function(notification:Notification):flight._internal._Promise<{ var reason:String; }> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var native:Null<ElectronNotification> = cast _Runtime.UNDEFINED;
@@ -2489,24 +1845,24 @@ class _HostElectron {
         flight._internal._Async.protect(function():Dynamic {
           var failures:Array<NotificationLifecycleFailure> = cast _Runtime.UNDEFINED;
           failures = cast ([] : Array<Dynamic>);
-          var __flowIterator1000:Array<Dynamic> = _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(((cast nativeByNotification : flight._internal._Map<Notification, ElectronNotification>).keys()))]));
-          var __flowIndex1001:Int = 0;
+          var __flowIterator342:Array<Dynamic> = _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(((cast nativeByNotification : flight._internal._Map<Notification, ElectronNotification>).keys()))]));
+          var __flowIndex343:Int = 0;
           return flight._internal._Async.continueFlow(flight._internal._Async.repeatFlow(function():Dynamic {
-            if (__flowIndex1001 >= __flowIterator1000.length) return flight._internal._Async.flowBreak();
-            var notification:Dynamic = __flowIterator1000[__flowIndex1001++];
+            if (__flowIndex343 >= __flowIterator342.length) return flight._internal._Async.flowBreak();
+            var notification:Dynamic = __flowIterator342[__flowIndex343++];
             var outcome:{ var reason:String; } = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap((cast closeOne(({ final __callArgument1004:Dynamic = notification; __callArgument1004; })) : flight._internal._Promise<{ var reason:String; }>), function(__awaitValue1002:Dynamic):Dynamic {
-              outcome = __awaitValue1002;
-              var __flowBranch1003:Dynamic;
+            return flight._internal._Async.flatMap((cast closeOne(({ final __callArgument346:Dynamic = notification; __callArgument346; })) : flight._internal._Promise<{ var reason:String; }>), function(__awaitValue344:Dynamic):Dynamic {
+              outcome = __awaitValue344;
+              var __flowBranch345:Dynamic;
               if ((cast _Runtime.strictEquals((cast outcome : { var reason:String; }).reason, 'operation-failed') : Bool)) {
-                __flowBranch1003 = flight._internal._Async.protect(function():Dynamic {
+                __flowBranch345 = flight._internal._Async.protect(function():Dynamic {
                   _Runtime.callProperty(failures, 'push', cast ([{ id: (cast notification : Notification).id, operation: 'close' }] : Array<Dynamic>));
                   return flight._internal._Async.flowNormal();
                 });
               } else {
-                __flowBranch1003 = flight._internal._Async.flowNormal();
+                __flowBranch345 = flight._internal._Async.flowNormal();
               }
-              return flight._internal._Async.continueFlow(__flowBranch1003, function():Dynamic {
+              return flight._internal._Async.continueFlow(__flowBranch345, function():Dynamic {
                 return flight._internal._Async.flowNormal();
               });
             });
@@ -2525,14 +1881,14 @@ class _HostElectron {
     destroyed = false;
     destroyCompleted = false;
     nextId = 1.0;
-    capabilities = (cast ({ click: (cast (cast (cast _HostElectron.createElectronNotificationEventBackend__electronNotification : flight._internal._Set<Notification->Void>->(Void->Bool)->{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument1057:Dynamic = clickListeners; __callArgument1057; }), ({ final __callArgument1058:Dynamic = function():Bool return destroyed; __callArgument1058; })) : { var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) : Dynamic), close: (cast { closeAllNotifications: closeAll } : Dynamic), delivery: (cast { notify: function(request:NotificationRequest):flight._internal._Promise<NotificationDeliveryOutcome> {
+    capabilities = (cast { click: (cast (cast _HostElectron.createElectronNotificationEventBackend__electronNotification : flight._internal._Set<Notification->Void>->(Void->Bool)->{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument348:Dynamic = clickListeners; __callArgument348; }), ({ final __callArgument349:Dynamic = function():Bool return destroyed; __callArgument349; })) : { var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }), close: { closeAllNotifications: closeAll }, delivery: { notify: function(request:NotificationRequest):flight._internal._Promise<NotificationDeliveryOutcome> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var invalid:Array<String> = cast _Runtime.UNDEFINED;
         var id:String = cast _Runtime.UNDEFINED;
         var actions:Array<NotificationAction> = cast _Runtime.UNDEFINED;
         var native:ElectronNotification = cast _Runtime.UNDEFINED;
         if ((cast ((cast destroyed : Bool) || (cast !(cast (cast electron.Notification : ElectronNotificationConstructor).isSupported() : Bool) : Bool)) : Bool)) { return cast { reason: 'operation-failed' }; }
-        invalid = (cast _HostElectron.getElectronInvalidNotificationRequestFields__electronNotification(({ final __callArgument1061:Dynamic = request; __callArgument1061; }), (cast _Runtime.strictEquals(_Runtime.field(options, 'platform'), 'macos') : Bool)) : Array<String>);
+        invalid = (cast _HostElectron.getElectronInvalidNotificationRequestFields__electronNotification(({ final __callArgument352:Dynamic = request; __callArgument352; }), (cast _Runtime.strictEquals(_Runtime.field(options, 'platform'), 'macos') : Bool)) : Array<String>);
         if ((cast ((cast _Runtime.field(invalid, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { return cast { fields: invalid, reason: 'invalid-request' }; }
         id = _Runtime.coalesce(request.id, function():Dynamic return cast 'electron-notification-' + Std.string(nextId++) + '');
         actions = _Runtime.coalesce(request.actions, function():Dynamic return cast cast ([] : Array<Dynamic>));
@@ -2551,58 +1907,58 @@ class _HostElectron {
             if ((cast !_Runtime.strictEquals(notification, null) : Bool)) { return cast notification; }
             (notification = cast ((cast (#if js _Runtime.callValue(createNotificationResource, cast ([(cast id : String), (cast request.title : String)] : Array<Dynamic>)) #else createNotificationResource((cast id : String), (cast request.title : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Notification) : Dynamic));
             ((cast nativeByNotification : flight._internal._Map<Notification, ElectronNotification>).set((cast notification), (cast native)));
-            bindNotificationClose(({ final __callArgument1063:Dynamic = notification; __callArgument1063; }), (cast function():flight._internal._Promise<NotificationCloseOutcome> return (cast closeOne(({ final __callArgument1064:Dynamic = notification; __callArgument1064; })) : flight._internal._Promise<{ var reason:String; }>) : Dynamic));
+            bindNotificationClose(({ final __callArgument354:Dynamic = notification; __callArgument354; }), (cast function():flight._internal._Promise<NotificationCloseOutcome> return (cast closeOne(({ final __callArgument355:Dynamic = notification; __callArgument355; })) : flight._internal._Promise<{ var reason:String; }>) : Dynamic));
             return cast notification;
             return cast _Runtime.UNDEFINED;
           });
-          (cast native : ElectronNotification).on((cast 'show' : String), ({ final __callArgument1073:Dynamic = function(__unused3:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
+          (cast native : ElectronNotification).on((cast 'show' : String), ({ final __callArgument364:Dynamic = function(__unused3:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
             var accepted:Notification = cast _Runtime.UNDEFINED;
             accepted = (cast accept() : Notification);
             for (listener in _Runtime.iterable(receivedListeners)) {
-              listener(({ final __callArgument1071:Dynamic = accepted; __callArgument1071; }));
+              listener(({ final __callArgument362:Dynamic = accepted; __callArgument362; }));
             }
             if ((cast !(cast settled : Bool) : Bool)) {
               (settled = cast (true : Dynamic));
               resolve((cast { notification: accepted, reason: 'accepted' } : flight._internal._Any));
             }
-          }, cast ([] : Array<Dynamic>)); }; __callArgument1073; }));
-          (cast native : ElectronNotification).on((cast 'click' : String), ({ final __callArgument1078:Dynamic = function(__unused4:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
+          }, cast ([] : Array<Dynamic>)); }; __callArgument364; }));
+          (cast native : ElectronNotification).on((cast 'click' : String), ({ final __callArgument369:Dynamic = function(__unused4:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
             if ((cast _Runtime.strictEquals(notification, null) : Bool)) { return; }
             for (listener in _Runtime.iterable(clickListeners)) {
-              listener(({ final __callArgument1076:Dynamic = notification; __callArgument1076; }));
+              listener(({ final __callArgument367:Dynamic = notification; __callArgument367; }));
             }
-          }, cast ([] : Array<Dynamic>)); }; __callArgument1078; }));
-          (cast native : ElectronNotification).on((cast 'action' : String), ({ final __callArgument1084:Dynamic = _Runtime.haxeRest(function(...args:flight._internal._Any):Void {
+          }, cast ([] : Array<Dynamic>)); }; __callArgument369; }));
+          (cast native : ElectronNotification).on((cast 'action' : String), ({ final __callArgument375:Dynamic = _Runtime.haxeRest(function(...args:flight._internal._Any):Void {
             var actionId:String = cast _Runtime.UNDEFINED;
             if ((cast ((cast _Runtime.strictEquals(notification, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(options, 'platform'), 'macos') : Bool)) : Bool)) { return; }
-            actionId = _Runtime.coalesce(({ final __typedStruct1079 = flight._internal._StaticIndex.readArray(actions, _Runtime.callValue(flight._internal._HostValueLut.get('Number'), cast ([flight._internal._StaticIndex.readArray(args, 1.0)] : Array<Dynamic>))); __typedStruct1079 == null ? _Runtime.UNDEFINED : (cast __typedStruct1079 : { var id:String; }).id; }), function():Dynamic return cast '');
+            actionId = _Runtime.coalesce(({ final __typedStruct370 = flight._internal._StaticIndex.readArray(actions, _Runtime.callValue(flight._internal._HostValueLut.get('Number'), cast ([flight._internal._StaticIndex.readArray(args, 1.0)] : Array<Dynamic>))); __typedStruct370 == null ? _Runtime.UNDEFINED : (cast __typedStruct370 : { var id:String; }).id; }), function():Dynamic return cast '');
             for (listener in _Runtime.iterable(actionListeners)) {
-              listener(({ final __callArgument1082:Dynamic = notification; __callArgument1082; }), (cast actionId : String));
+              listener(({ final __callArgument373:Dynamic = notification; __callArgument373; }), (cast actionId : String));
             }
-          }, 0); __callArgument1084; }));
-          (cast native : ElectronNotification).on((cast 'reply' : String), ({ final __callArgument1090:Dynamic = _Runtime.haxeRest(function(...args:flight._internal._Any):Void {
+          }, 0); __callArgument375; }));
+          (cast native : ElectronNotification).on((cast 'reply' : String), ({ final __callArgument381:Dynamic = _Runtime.haxeRest(function(...args:flight._internal._Any):Void {
             var text:String = cast _Runtime.UNDEFINED;
             var actionId:String = cast _Runtime.UNDEFINED;
             if ((cast ((cast _Runtime.strictEquals(notification, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(options, 'platform'), 'macos') : Bool)) : Bool)) { return; }
             text = Std.string(_Runtime.coalesce(flight._internal._StaticIndex.readArray(args, 1.0), function():Dynamic return cast ''));
-            actionId = _Runtime.coalesce(({ final __typedStruct1085 = flight._internal._StaticIndex.readArray(actions, 0.0); __typedStruct1085 == null ? _Runtime.UNDEFINED : (cast __typedStruct1085 : { var id:String; }).id; }), function():Dynamic return cast 'reply');
+            actionId = _Runtime.coalesce(({ final __typedStruct376 = flight._internal._StaticIndex.readArray(actions, 0.0); __typedStruct376 == null ? _Runtime.UNDEFINED : (cast __typedStruct376 : { var id:String; }).id; }), function():Dynamic return cast 'reply');
             for (listener in _Runtime.iterable(replyListeners)) {
-              listener(({ final __callArgument1088:Dynamic = notification; __callArgument1088; }), (cast actionId : String), (cast text : String));
+              listener(({ final __callArgument379:Dynamic = notification; __callArgument379; }), (cast actionId : String), (cast text : String));
             }
-          }, 0); __callArgument1090; }));
-          (cast native : ElectronNotification).on((cast 'close' : String), ({ final __callArgument1095:Dynamic = function(__unused5:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
+          }, 0); __callArgument381; }));
+          (cast native : ElectronNotification).on((cast 'close' : String), ({ final __callArgument386:Dynamic = function(__unused5:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
             if ((cast _Runtime.strictEquals(notification, null) : Bool)) { return; }
             ((cast nativeByNotification : flight._internal._Map<Notification, ElectronNotification>).delete_((cast notification)));
             for (listener in _Runtime.iterable(dismissListeners)) {
-              listener(({ final __callArgument1093:Dynamic = notification; __callArgument1093; }));
+              listener(({ final __callArgument384:Dynamic = notification; __callArgument384; }));
             }
-          }, cast ([] : Array<Dynamic>)); }; __callArgument1095; }));
-          (cast native : ElectronNotification).on((cast 'failed' : String), ({ final __callArgument1096:Dynamic = function(__unused6:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
+          }, cast ([] : Array<Dynamic>)); }; __callArgument386; }));
+          (cast native : ElectronNotification).on((cast 'failed' : String), ({ final __callArgument387:Dynamic = function(__unused6:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
             if ((cast !(cast settled : Bool) : Bool)) {
               (settled = cast (true : Dynamic));
               resolve((cast { reason: 'operation-failed' } : flight._internal._Any));
             }
-          }, cast ([] : Array<Dynamic>)); }; __callArgument1096; }));
+          }, cast ([] : Array<Dynamic>)); }; __callArgument387; }));
           try {
             (cast native : ElectronNotification).show();
           } catch (__error:Dynamic) {
@@ -2614,47 +1970,74 @@ class _HostElectron {
         });
         return cast null;
       }));
-    } } : Dynamic), dismiss: (cast (cast (cast _HostElectron.createElectronNotificationEventBackend__electronNotification : flight._internal._Set<Notification->Void>->(Void->Bool)->{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument1097:Dynamic = dismissListeners; __callArgument1097; }), ({ final __callArgument1098:Dynamic = function():Bool return destroyed; __callArgument1098; })) : { var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) : Dynamic), lifecycle: (cast { destroy: function():flight._internal._Promise<NotificationLifecycleOutcome> {
+    } }, dismiss: (cast (cast _HostElectron.createElectronNotificationEventBackend__electronNotification : flight._internal._Set<Notification->Void>->(Void->Bool)->{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument388:Dynamic = dismissListeners; __callArgument388; }), ({ final __callArgument389:Dynamic = function():Bool return destroyed; __callArgument389; })) : { var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }), lifecycle: { destroy: function():flight._internal._Promise<NotificationLifecycleOutcome> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var outcome:NotificationLifecycleOutcome = cast _Runtime.UNDEFINED;
-          var __flowBranch1101:Dynamic;
+          var __flowBranch392:Dynamic;
           if ((cast destroyCompleted : Bool)) {
-            __flowBranch1101 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch392 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn({ reason: 'already-destroyed' });
             });
           } else {
-            __flowBranch1101 = flight._internal._Async.flowNormal();
+            __flowBranch392 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch1101, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch392, function():Dynamic {
             (destroyed = cast (true : Dynamic));
             ((cast actionListeners : flight._internal._Set<Notification->String->Void>).clear());
             ((cast clickListeners : flight._internal._Set<Notification->Void>).clear());
             ((cast dismissListeners : flight._internal._Set<Notification->Void>).clear());
             ((cast receivedListeners : flight._internal._Set<Notification->Void>).clear());
             ((cast replyListeners : flight._internal._Set<Notification->String->String->Void>).clear());
-            return flight._internal._Async.flatMap((cast closeAll() : flight._internal._Promise<NotificationLifecycleOutcome>), function(__awaitValue1102:Dynamic):Dynamic {
-              outcome = __awaitValue1102;
-              var __flowBranch1103:Dynamic;
+            return flight._internal._Async.flatMap((cast closeAll() : flight._internal._Promise<NotificationLifecycleOutcome>), function(__awaitValue393:Dynamic):Dynamic {
+              outcome = __awaitValue393;
+              var __flowBranch394:Dynamic;
               if ((cast _Runtime.strictEquals((cast outcome : { var reason:String; }).reason, 'ok') : Bool)) {
-                __flowBranch1103 = flight._internal._Async.protect(function():Dynamic {
+                __flowBranch394 = flight._internal._Async.protect(function():Dynamic {
                   (destroyCompleted = cast (true : Dynamic));
                   return flight._internal._Async.flowNormal();
                 });
               } else {
-                __flowBranch1103 = flight._internal._Async.flowNormal();
+                __flowBranch394 = flight._internal._Async.flowNormal();
               }
-              return flight._internal._Async.continueFlow(__flowBranch1103, function():Dynamic {
+              return flight._internal._Async.continueFlow(__flowBranch394, function():Dynamic {
                 return flight._internal._Async.flowReturn(outcome);
               });
             });
           });
         })
       );
-    } } : Dynamic), received: (cast (cast (cast _HostElectron.createElectronNotificationEventBackend__electronNotification : flight._internal._Set<Notification->Void>->(Void->Bool)->{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument1104:Dynamic = receivedListeners; __callArgument1104; }), ({ final __callArgument1105:Dynamic = function():Bool return destroyed; __callArgument1105; })) : { var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) : Dynamic) } : EntityShapeL75C89__electronNotification));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'platform'), 'macos') : Bool)) { return cast (cast createEntity((cast capabilities : Dynamic)) : { >Entity, var delivery:NotificationDeliveryBackend; var close:NotificationCloseBackend; var click:NotificationClickBackend; var lifecycle:NotificationLifecycleBackend; var dismiss:NotificationDismissBackend; var received:NotificationReceivedBackend; }); }
-    return cast (cast createEntity((cast (#if flight_struct_typedef _Runtime.mergeObjects([capabilities, { action: (cast (cast _HostElectron.createElectronNotificationEventBackend__electronNotification : flight._internal._Set<Notification->String->Void>->(Void->Bool)->{ var attach:(Notification->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument1108:Dynamic = actionListeners; __callArgument1108; }), ({ final __callArgument1109:Dynamic = function():Bool return destroyed; __callArgument1109; })) : { var attach:(Notification->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) }, { reply: (cast (cast _HostElectron.createElectronNotificationEventBackend__electronNotification : flight._internal._Set<Notification->String->String->Void>->(Void->Bool)->{ var attach:(Notification->String->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument1112:Dynamic = replyListeners; __callArgument1112; }), ({ final __callArgument1113:Dynamic = function():Bool return destroyed; __callArgument1113; })) : { var attach:(Notification->String->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([capabilities, { action: (cast (cast _HostElectron.createElectronNotificationEventBackend__electronNotification : flight._internal._Set<Notification->String->Void>->(Void->Bool)->{ var attach:(Notification->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument1108:Dynamic = actionListeners; __callArgument1108; }), ({ final __callArgument1109:Dynamic = function():Bool return destroyed; __callArgument1109; })) : { var attach:(Notification->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) }, { reply: (cast (cast _HostElectron.createElectronNotificationEventBackend__electronNotification : flight._internal._Set<Notification->String->String->Void>->(Void->Bool)->{ var attach:(Notification->String->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument1112:Dynamic = replyListeners; __callArgument1112; }), ({ final __callArgument1113:Dynamic = function():Bool return destroyed; __callArgument1113; })) : { var attach:(Notification->String->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) }]); ({ action: _Runtime.field(__structInitSource, 'action'), reply: _Runtime.field(__structInitSource, 'reply'), delivery: _Runtime.field(__structInitSource, 'delivery'), close: _Runtime.field(__structInitSource, 'close'), click: _Runtime.field(__structInitSource, 'click'), lifecycle: _Runtime.field(__structInitSource, 'lifecycle'), dismiss: _Runtime.field(__structInitSource, 'dismiss'), received: _Runtime.field(__structInitSource, 'received') } : EntityShapeL178C23__electronNotification); }) #end) : Dynamic)) : EntityShapeL178C23__electronNotification);
+    } }, received: (cast (cast _HostElectron.createElectronNotificationEventBackend__electronNotification : flight._internal._Set<Notification->Void>->(Void->Bool)->{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument395:Dynamic = receivedListeners; __callArgument395; }), ({ final __callArgument396:Dynamic = function():Bool return destroyed; __callArgument396; })) : { var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }) });
+    if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'platform'), 'macos') : Bool)) {
+      var out:EntityConstruction<ElectronNotificationCapabilities> = cast _Runtime.UNDEFINED;
+      out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ click: cast _Runtime.UNDEFINED, close: cast _Runtime.UNDEFINED, delivery: cast _Runtime.UNDEFINED, dismiss: cast _Runtime.UNDEFINED, lifecycle: cast _Runtime.UNDEFINED, received: cast _Runtime.UNDEFINED } : ElectronNotificationCapabilities); }) #end));
+      initializeElectronNotificationCapabilities(({ final __callArgument399:Dynamic = out; __callArgument399; }), (cast capabilities : Dynamic));
+      return cast out;
+    }
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ action: cast _Runtime.UNDEFINED, click: cast _Runtime.UNDEFINED, close: cast _Runtime.UNDEFINED, delivery: cast _Runtime.UNDEFINED, dismiss: cast _Runtime.UNDEFINED, lifecycle: cast _Runtime.UNDEFINED, received: cast _Runtime.UNDEFINED, reply: cast _Runtime.UNDEFINED } : ElectronMacosNotificationCapabilities); }) #end));
+    initializeElectronMacosNotificationCapabilities(({ final __callArgument401:Dynamic = out; __callArgument401; }), (cast capabilities : Dynamic), ({ final __callArgument406:Dynamic = (cast (cast _HostElectron.createElectronNotificationEventBackend__electronNotification : flight._internal._Set<Notification->String->Void>->(Void->Bool)->{ var attach:(Notification->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument402:Dynamic = actionListeners; __callArgument402; }), ({ final __callArgument403:Dynamic = function():Bool return destroyed; __callArgument403; })) : { var attach:(Notification->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }); __callArgument406; }), ({ final __callArgument411:Dynamic = (cast (cast _HostElectron.createElectronNotificationEventBackend__electronNotification : flight._internal._Set<Notification->String->String->Void>->(Void->Bool)->{ var attach:(Notification->String->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; })(({ final __callArgument407:Dynamic = replyListeners; __callArgument407; }), ({ final __callArgument408:Dynamic = function():Bool return destroyed; __callArgument408; })) : { var attach:(Notification->String->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }); __callArgument411; }));
+    return cast out;
     return cast null;
+  }
+
+  public static function initializeElectronMacosNotificationCapabilities(out:EntityConstruction<ElectronMacosNotificationCapabilities>, capabilities:{ var click:NotificationClickBackend; var close:NotificationCloseBackend; var delivery:NotificationDeliveryBackend; var dismiss:NotificationDismissBackend; var lifecycle:NotificationLifecycleBackend; var received:NotificationReceivedBackend; }, action:flight._internal._IndexedAccess<ElectronMacosNotificationCapabilities, String>, reply:flight._internal._IndexedAccess<ElectronMacosNotificationCapabilities, String>):Void {
+    _Runtime.setField(out, 'action', action);
+    _Runtime.setField(out, 'click', (cast capabilities : { var close:NotificationCloseBackend; var delivery:NotificationDeliveryBackend; var click:NotificationClickBackend; var lifecycle:NotificationLifecycleBackend; var dismiss:NotificationDismissBackend; var received:NotificationReceivedBackend; }).click);
+    _Runtime.setField(out, 'close', (cast capabilities : { var close:NotificationCloseBackend; var delivery:NotificationDeliveryBackend; var click:NotificationClickBackend; var lifecycle:NotificationLifecycleBackend; var dismiss:NotificationDismissBackend; var received:NotificationReceivedBackend; }).close);
+    _Runtime.setField(out, 'delivery', (cast capabilities : { var close:NotificationCloseBackend; var delivery:NotificationDeliveryBackend; var click:NotificationClickBackend; var lifecycle:NotificationLifecycleBackend; var dismiss:NotificationDismissBackend; var received:NotificationReceivedBackend; }).delivery);
+    _Runtime.setField(out, 'dismiss', (cast capabilities : { var close:NotificationCloseBackend; var delivery:NotificationDeliveryBackend; var click:NotificationClickBackend; var lifecycle:NotificationLifecycleBackend; var dismiss:NotificationDismissBackend; var received:NotificationReceivedBackend; }).dismiss);
+    _Runtime.setField(out, 'lifecycle', (cast capabilities : { var close:NotificationCloseBackend; var delivery:NotificationDeliveryBackend; var click:NotificationClickBackend; var lifecycle:NotificationLifecycleBackend; var dismiss:NotificationDismissBackend; var received:NotificationReceivedBackend; }).lifecycle);
+    _Runtime.setField(out, 'received', (cast capabilities : { var close:NotificationCloseBackend; var delivery:NotificationDeliveryBackend; var click:NotificationClickBackend; var lifecycle:NotificationLifecycleBackend; var dismiss:NotificationDismissBackend; var received:NotificationReceivedBackend; }).received);
+    _Runtime.setField(out, 'reply', reply);
+  }
+
+  public static function initializeElectronNotificationCapabilities(out:EntityConstruction<ElectronNotificationCapabilities>, capabilities:{ var click:NotificationClickBackend; var close:NotificationCloseBackend; var delivery:NotificationDeliveryBackend; var dismiss:NotificationDismissBackend; var lifecycle:NotificationLifecycleBackend; var received:NotificationReceivedBackend; }):Void {
+    _Runtime.setField(out, 'click', (cast capabilities : { var close:NotificationCloseBackend; var delivery:NotificationDeliveryBackend; var click:NotificationClickBackend; var lifecycle:NotificationLifecycleBackend; var dismiss:NotificationDismissBackend; var received:NotificationReceivedBackend; }).click);
+    _Runtime.setField(out, 'close', (cast capabilities : { var close:NotificationCloseBackend; var delivery:NotificationDeliveryBackend; var click:NotificationClickBackend; var lifecycle:NotificationLifecycleBackend; var dismiss:NotificationDismissBackend; var received:NotificationReceivedBackend; }).close);
+    _Runtime.setField(out, 'delivery', (cast capabilities : { var close:NotificationCloseBackend; var delivery:NotificationDeliveryBackend; var click:NotificationClickBackend; var lifecycle:NotificationLifecycleBackend; var dismiss:NotificationDismissBackend; var received:NotificationReceivedBackend; }).delivery);
+    _Runtime.setField(out, 'dismiss', (cast capabilities : { var close:NotificationCloseBackend; var delivery:NotificationDeliveryBackend; var click:NotificationClickBackend; var lifecycle:NotificationLifecycleBackend; var dismiss:NotificationDismissBackend; var received:NotificationReceivedBackend; }).dismiss);
+    _Runtime.setField(out, 'lifecycle', (cast capabilities : { var close:NotificationCloseBackend; var delivery:NotificationDeliveryBackend; var click:NotificationClickBackend; var lifecycle:NotificationLifecycleBackend; var dismiss:NotificationDismissBackend; var received:NotificationReceivedBackend; }).lifecycle);
+    _Runtime.setField(out, 'received', (cast capabilities : { var close:NotificationCloseBackend; var delivery:NotificationDeliveryBackend; var click:NotificationClickBackend; var lifecycle:NotificationLifecycleBackend; var dismiss:NotificationDismissBackend; var received:NotificationReceivedBackend; }).received);
   }
 
   public static function createElectronNotificationEventBackend__electronNotification<TListener>(listeners:flight._internal._Set<TListener>, isDestroyed:Void->Bool):{ var attach:TListener->flight._internal._Promise<NotificationEventBackendAttachOutcome>; } {
@@ -2686,20 +2069,27 @@ class _HostElectron {
     return cast null;
   }
 
-  public static function createElectronPlatformBackend(electron:ElectronApi):{ >PlatformBackend, >Entity, } {
-    return cast (cast createEntity((cast ({ getInfo: (cast function(out:PlatformInfo):PlatformInfo {
+  public static function createElectronPlatformBackend(electron:ElectronApi):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getInfo:PlatformInfo->PlatformInfo; } {
+    var out:EntityConstruction<PlatformBackend> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ getInfo: cast _Runtime.UNDEFINED } : PlatformBackend); }) #end));
+    initializeElectronPlatformBackend(({ final __callArgument423:Dynamic = out; __callArgument423; }), ({ final __callArgument424:Dynamic = electron; __callArgument424; }));
+    return cast out;
+    return cast null;
+  }
+
+  public static function initializeElectronPlatformBackend(out:EntityConstruction<PlatformBackend>, electron:ElectronApi):Void {
+    ((cast out : { var getInfo:PlatformInfo->PlatformInfo; }).getInfo = (cast function(out:PlatformInfo):PlatformInfo {
       var proc:Null<{ @:optional var platform:Null<String>; @:optional var arch:Null<String>; @:optional var getSystemVersion:Null<Void->String>; }> = cast _Runtime.UNDEFINED;
       proc = ((cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('process'), 'undefined') : Bool) ? (cast (cast flight._internal._HostValueLut.get('process') : { @:optional var platform:String; @:optional var arch:String; @:optional var getSystemVersion:Void->String; }) : Dynamic) : (cast null : Dynamic));
-      (out.name = cast ((cast _HostElectron.toPlatformName__electronPlatform(({ final __structural1128 = proc; __structural1128 == null ? _Runtime.UNDEFINED : (cast __structural1128 : { @:optional var platform:Null<String>; }).platform; })) : PlatformName) : PlatformName));
+      (out.name = cast ((cast _HostElectron.toPlatformName__electronPlatform(({ final __structural427 = proc; __structural427 == null ? _Runtime.UNDEFINED : (cast __structural427 : { @:optional var platform:Null<String>; }).platform; })) : PlatformName) : PlatformName));
       (out.kind = cast ('desktop' : PlatformKind));
-      (out.version = cast (_Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural1130 = proc; __structural1130 == null ? _Runtime.UNDEFINED : (cast __structural1130 : { @:optional var getSystemVersion:Null<Void->String>; }).getSystemVersion; }), cast ([] : Array<Dynamic>)), function():Dynamic return cast '') : String));
-      (out.arch = cast (_Runtime.coalesce(({ final __structural1131 = proc; __structural1131 == null ? _Runtime.UNDEFINED : (cast __structural1131 : { @:optional var arch:Null<String>; }).arch; }), function():Dynamic return cast '') : String));
+      (out.version = cast (_Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural429 = proc; __structural429 == null ? _Runtime.UNDEFINED : (cast __structural429 : { @:optional var getSystemVersion:Null<Void->String>; }).getSystemVersion; }), cast ([] : Array<Dynamic>)), function():Dynamic return cast '') : String));
+      (out.arch = cast (_Runtime.coalesce(({ final __structural430 = proc; __structural430 == null ? _Runtime.UNDEFINED : (cast __structural430 : { @:optional var arch:Null<String>; }).arch; }), function():Dynamic return cast '') : String));
       (out.locale = cast ((cast electron.app : ElectronApp).getLocale() : String));
       (out.isTouch = cast (false : Bool));
       return cast out;
       return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL9C23__electronPlatform) : Dynamic)) : EntityShapeL9C23__electronPlatform);
-    return cast null;
+    }));
   }
 
   public static function toPlatformName__electronPlatform(platform:Null<String>):PlatformName {
@@ -2713,179 +2103,210 @@ class _HostElectron {
   public static function createElectronPowerBackends(electron:ElectronApi):ElectronPowerCapabilities {
     var powerMonitor:ElectronPowerMonitor = cast _Runtime.UNDEFINED;
     var powerSaveBlocker:ElectronPowerSaveBlocker = cast _Runtime.UNDEFINED;
-    var blockerId:Float = cast _Runtime.UNDEFINED;
-    var backends:{ var __symbol__EntityRuntime:Null<EntityRuntime>; var status:PowerStatusBackend; var change:PowerChangeBackend; var batteryHealth:PowerBatteryHealthBackend; var idle:PowerIdleBackend; var keepAwake:PowerKeepAwakeBackend; var sessionLock:PowerSessionLockBackend; var suspension:PowerSuspensionBackend; } = cast _Runtime.UNDEFINED;
+    var batteryHealth:PowerBatteryHealthBackend = cast _Runtime.UNDEFINED;
+    var change:PowerChangeBackend = cast _Runtime.UNDEFINED;
+    var idle:PowerIdleBackend = cast _Runtime.UNDEFINED;
+    var keepAwake:PowerKeepAwakeBackend = cast _Runtime.UNDEFINED;
+    var sessionLock:PowerSessionLockBackend = cast _Runtime.UNDEFINED;
+    var status:PowerStatusBackend = cast _Runtime.UNDEFINED;
+    var suspension:PowerSuspensionBackend = cast _Runtime.UNDEFINED;
+    var backends:EntityConstruction<ElectronPowerCapabilities> = cast _Runtime.UNDEFINED;
     powerMonitor = electron.powerMonitor;
     powerSaveBlocker = electron.powerSaveBlocker;
-    blockerId = -1.0;
-    backends = (cast createEntity((cast (#if flight_struct_typedef { batteryHealth: (cast createEntity(({ final __callArgument1140:Dynamic = ({ getBatteryHealth: (cast function(out:PowerBatteryHealth):PowerBatteryHealth {
-      return cast out;
+    batteryHealth = _Runtime.callValue(function():PowerBatteryHealthBackend {
+      var b:EntityConstruction<PowerBatteryHealthBackend> = cast _Runtime.UNDEFINED;
+      b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ getBatteryHealth: cast _Runtime.UNDEFINED } : PowerBatteryHealthBackend); }) #end));
+      initializePowerBatteryHealthBackend(({ final __callArgument431:Dynamic = b; __callArgument431; }));
+      return cast b;
       return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL37C82__electronPower); __callArgument1140; })) : EntityShapeL37C82__electronPower), change: (cast createEntity(({ final __callArgument1158:Dynamic = ({ subscribe: (cast function(listener:Void->Void):Void->Void {
-      (cast powerMonitor : ElectronPowerMonitor).on(({ final __callArgument1150:Dynamic = 'on-battery'; __callArgument1150; }), ({ final __callArgument1151:Dynamic = listener; __callArgument1151; }));
-      (cast powerMonitor : ElectronPowerMonitor).on(({ final __callArgument1152:Dynamic = 'on-ac'; __callArgument1152; }), ({ final __callArgument1153:Dynamic = listener; __callArgument1153; }));
-      return cast function():Void {
-        (cast powerMonitor : ElectronPowerMonitor).removeListener(({ final __callArgument1154:Dynamic = 'on-battery'; __callArgument1154; }), ({ final __callArgument1155:Dynamic = listener; __callArgument1155; }));
-        (cast powerMonitor : ElectronPowerMonitor).removeListener(({ final __callArgument1156:Dynamic = 'on-ac'; __callArgument1156; }), ({ final __callArgument1157:Dynamic = listener; __callArgument1157; }));
-      };
+    }, cast ([] : Array<Dynamic>));
+    change = _Runtime.callValue(function():PowerChangeBackend {
+      var b:EntityConstruction<PowerChangeBackend> = cast _Runtime.UNDEFINED;
+      b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ subscribe: cast _Runtime.UNDEFINED } : PowerChangeBackend); }) #end));
+      initializePowerChangeBackend(({ final __callArgument433:Dynamic = b; __callArgument433; }), ({ final __callArgument434:Dynamic = powerMonitor; __callArgument434; }));
+      return cast b;
       return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL42C68__electronPower); __callArgument1158; })) : EntityShapeL42C68__electronPower), idle: (cast createEntity(({ final __callArgument1176:Dynamic = ({ getIdleState: (cast function(thresholdSeconds:Float):PowerIdleState {
-      return cast (cast _HostElectron.toIdleState__electronPower((cast (cast powerMonitor : ElectronPowerMonitor).getSystemIdleState((cast thresholdSeconds : Float)) : String)) : PowerIdleState);
+    }, cast ([] : Array<Dynamic>));
+    idle = _Runtime.callValue(function():PowerIdleBackend {
+      var b:EntityConstruction<PowerIdleBackend> = cast _Runtime.UNDEFINED;
+      b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ getIdleState: cast _Runtime.UNDEFINED, getIdleTimeSeconds: cast _Runtime.UNDEFINED } : PowerIdleBackend); }) #end));
+      initializePowerIdleBackend(({ final __callArgument437:Dynamic = b; __callArgument437; }), ({ final __callArgument438:Dynamic = powerMonitor; __callArgument438; }));
+      return cast b;
       return cast _Runtime.UNDEFINED;
-    } : Dynamic), getIdleTimeSeconds: (cast function():Float {
-      return cast (cast powerMonitor : ElectronPowerMonitor).getSystemIdleTime();
+    }, cast ([] : Array<Dynamic>));
+    keepAwake = _Runtime.callValue(function():PowerKeepAwakeBackend {
+      var b:EntityConstruction<PowerKeepAwakeBackend> = cast _Runtime.UNDEFINED;
+      b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ acquire: cast _Runtime.UNDEFINED, destroy: cast _Runtime.UNDEFINED, isActive: cast _Runtime.UNDEFINED, release: cast _Runtime.UNDEFINED } : PowerKeepAwakeBackend); }) #end));
+      initializePowerKeepAwakeBackend(({ final __callArgument441:Dynamic = b; __callArgument441; }), ({ final __callArgument442:Dynamic = powerSaveBlocker; __callArgument442; }));
+      return cast b;
       return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL52C64__electronPower); __callArgument1176; })) : EntityShapeL52C64__electronPower), keepAwake: (cast createEntity(({ final __callArgument1178:Dynamic = ({ acquire: (cast function(mode:PowerKeepAwakeMode):flight._internal._Promise<PowerKeepAwakeAcquireResult> {
-      if ((cast ((cast blockerId : Float) >= (cast 0.0 : Float)) : Bool)) { return cast flight._internal._Async.resolve({ reason: 'ok' }); }
-      try {
-        (blockerId = cast ((cast powerSaveBlocker : ElectronPowerSaveBlocker).start((cast ((cast _Runtime.strictEquals(mode, 'PreventAppSuspension') : Bool) ? (cast 'prevent-app-suspension' : Dynamic) : (cast 'prevent-display-sleep' : Dynamic)) : String)) : Dynamic));
-        return cast flight._internal._Async.resolve({ reason: 'ok' });
-      } catch (__error:Dynamic) {
-        return cast flight._internal._Async.resolve({ reason: 'failed' });
-      }
+    }, cast ([] : Array<Dynamic>));
+    sessionLock = _Runtime.callValue(function():PowerSessionLockBackend {
+      var b:EntityConstruction<PowerSessionLockBackend> = cast _Runtime.UNDEFINED;
+      b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ subscribeLock: cast _Runtime.UNDEFINED, subscribeUnlock: cast _Runtime.UNDEFINED } : PowerSessionLockBackend); }) #end));
+      initializePowerSessionLockBackend(({ final __callArgument445:Dynamic = b; __callArgument445; }), ({ final __callArgument446:Dynamic = powerMonitor; __callArgument446; }));
+      return cast b;
       return cast _Runtime.UNDEFINED;
-    } : Dynamic), destroy: (cast function():Void {
-      if ((cast ((cast blockerId : Float) >= (cast 0.0 : Float)) : Bool)) {
-        (cast powerSaveBlocker : ElectronPowerSaveBlocker).stop((cast blockerId : Float));
-        (blockerId = cast (-1.0 : Dynamic));
-      }
-    } : Dynamic), isActive: (cast function():Bool {
-      return cast ((cast blockerId : Float) >= (cast 0.0 : Float));
+    }, cast ([] : Array<Dynamic>));
+    status = _Runtime.callValue(function():PowerStatusBackend {
+      var b:EntityConstruction<PowerStatusBackend> = cast _Runtime.UNDEFINED;
+      b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ getStatus: cast _Runtime.UNDEFINED } : PowerStatusBackend); }) #end));
+      initializePowerStatusBackend(({ final __callArgument449:Dynamic = b; __callArgument449; }), ({ final __callArgument450:Dynamic = powerMonitor; __callArgument450; }));
+      return cast b;
       return cast _Runtime.UNDEFINED;
-    } : Dynamic), release: (cast function():flight._internal._Promise<PowerKeepAwakeReleaseResult> {
-      if ((cast ((cast blockerId : Float) < (cast 0.0 : Float)) : Bool)) { return cast flight._internal._Async.resolve({ reason: 'inactive' }); }
-      try {
-        (cast powerSaveBlocker : ElectronPowerSaveBlocker).stop((cast blockerId : Float));
-      } catch (__error:Dynamic) {
-        return cast flight._internal._Async.resolve({ reason: 'failed' });
-      }
-      (blockerId = cast (-1.0 : Dynamic));
-      return cast flight._internal._Async.resolve({ reason: 'ok' });
+    }, cast ([] : Array<Dynamic>));
+    suspension = _Runtime.callValue(function():PowerSuspensionBackend {
+      var b:EntityConstruction<PowerSuspensionBackend> = cast _Runtime.UNDEFINED;
+      b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ subscribeResume: cast _Runtime.UNDEFINED, subscribeSuspend: cast _Runtime.UNDEFINED } : PowerSuspensionBackend); }) #end));
+      initializePowerSuspensionBackend(({ final __callArgument453:Dynamic = b; __callArgument453; }), ({ final __callArgument454:Dynamic = powerMonitor; __callArgument454; }));
+      return cast b;
       return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL62C74__electronPower); __callArgument1178; })) : EntityShapeL62C74__electronPower), sessionLock: (cast createEntity(({ final __callArgument1196:Dynamic = ({ subscribeLock: (cast function(listener:Void->Void):Void->Void {
-      (cast powerMonitor : ElectronPowerMonitor).on(({ final __callArgument1188:Dynamic = 'lock-screen'; __callArgument1188; }), ({ final __callArgument1189:Dynamic = listener; __callArgument1189; }));
-      return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener(({ final __callArgument1190:Dynamic = 'lock-screen'; __callArgument1190; }), ({ final __callArgument1191:Dynamic = listener; __callArgument1191; })); };
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic), subscribeUnlock: (cast function(listener:Void->Void):Void->Void {
-      (cast powerMonitor : ElectronPowerMonitor).on(({ final __callArgument1192:Dynamic = 'unlock-screen'; __callArgument1192; }), ({ final __callArgument1193:Dynamic = listener; __callArgument1193; }));
-      return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener(({ final __callArgument1194:Dynamic = 'unlock-screen'; __callArgument1194; }), ({ final __callArgument1195:Dynamic = listener; __callArgument1195; })); };
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL95C78__electronPower); __callArgument1196; })) : EntityShapeL95C78__electronPower), status: (cast createEntity(({ final __callArgument1218:Dynamic = ({ getStatus: (cast function(out:PowerStatus):PowerStatus {
-      var onBattery:Bool = cast _Runtime.UNDEFINED;
-      onBattery = _Runtime.strictEquals((cast powerMonitor : ElectronPowerMonitor).onBatteryPower, true);
-      (out.batteryLevel = cast (-1.0 : Float));
-      (out.chargingTime = cast (-1.0 : Float));
-      (out.dischargingTime = cast (-1.0 : Float));
-      (out.isBatteryLow = cast (false : Bool));
-      (out.isCharging = cast (!(cast onBattery : Bool) : Bool));
-      (out.isLowPower = cast (false : Bool));
-      (out.isOnBattery = cast (onBattery : Bool));
-      (out.thermalState = cast ((cast _HostElectron.readThermalState__electronPower(({ final __callArgument1216:Dynamic = powerMonitor; __callArgument1216; })) : PowerThermalState) : PowerThermalState));
-      return cast out;
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL105C68__electronPower); __callArgument1218; })) : EntityShapeL105C68__electronPower), suspension: (cast createEntity(({ final __callArgument1240:Dynamic = ({ subscribeResume: (cast function(listener:Void->Void):Void->Void {
-      (cast powerMonitor : ElectronPowerMonitor).on(({ final __callArgument1232:Dynamic = 'resume'; __callArgument1232; }), ({ final __callArgument1233:Dynamic = listener; __callArgument1233; }));
-      return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener(({ final __callArgument1234:Dynamic = 'resume'; __callArgument1234; }), ({ final __callArgument1235:Dynamic = listener; __callArgument1235; })); };
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic), subscribeSuspend: (cast function(listener:Void->Void):Void->Void {
-      (cast powerMonitor : ElectronPowerMonitor).on(({ final __callArgument1236:Dynamic = 'suspend'; __callArgument1236; }), ({ final __callArgument1237:Dynamic = listener; __callArgument1237; }));
-      return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener(({ final __callArgument1238:Dynamic = 'suspend'; __callArgument1238; }), ({ final __callArgument1239:Dynamic = listener; __callArgument1239; })); };
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL119C76__electronPower); __callArgument1240; })) : EntityShapeL119C76__electronPower) } #else ({ final __structInitField0:Dynamic = (cast createEntity(({ final __callArgument1258:Dynamic = ({ getBatteryHealth: (cast function(out:PowerBatteryHealth):PowerBatteryHealth {
-      return cast out;
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL37C82__electronPower); __callArgument1258; })) : EntityShapeL37C82__electronPower); final __structInitField1:Dynamic = (cast createEntity(({ final __callArgument1276:Dynamic = ({ subscribe: (cast function(listener:Void->Void):Void->Void {
-      (cast powerMonitor : ElectronPowerMonitor).on(({ final __callArgument1268:Dynamic = 'on-battery'; __callArgument1268; }), ({ final __callArgument1269:Dynamic = listener; __callArgument1269; }));
-      (cast powerMonitor : ElectronPowerMonitor).on(({ final __callArgument1270:Dynamic = 'on-ac'; __callArgument1270; }), ({ final __callArgument1271:Dynamic = listener; __callArgument1271; }));
-      return cast function():Void {
-        (cast powerMonitor : ElectronPowerMonitor).removeListener(({ final __callArgument1272:Dynamic = 'on-battery'; __callArgument1272; }), ({ final __callArgument1273:Dynamic = listener; __callArgument1273; }));
-        (cast powerMonitor : ElectronPowerMonitor).removeListener(({ final __callArgument1274:Dynamic = 'on-ac'; __callArgument1274; }), ({ final __callArgument1275:Dynamic = listener; __callArgument1275; }));
-      };
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL42C68__electronPower); __callArgument1276; })) : EntityShapeL42C68__electronPower); final __structInitField2:Dynamic = (cast createEntity(({ final __callArgument1294:Dynamic = ({ getIdleState: (cast function(thresholdSeconds:Float):PowerIdleState {
-      return cast (cast _HostElectron.toIdleState__electronPower((cast (cast powerMonitor : ElectronPowerMonitor).getSystemIdleState((cast thresholdSeconds : Float)) : String)) : PowerIdleState);
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic), getIdleTimeSeconds: (cast function():Float {
-      return cast (cast powerMonitor : ElectronPowerMonitor).getSystemIdleTime();
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL52C64__electronPower); __callArgument1294; })) : EntityShapeL52C64__electronPower); final __structInitField3:Dynamic = (cast createEntity(({ final __callArgument1296:Dynamic = ({ acquire: (cast function(mode:PowerKeepAwakeMode):flight._internal._Promise<PowerKeepAwakeAcquireResult> {
-      if ((cast ((cast blockerId : Float) >= (cast 0.0 : Float)) : Bool)) { return cast flight._internal._Async.resolve({ reason: 'ok' }); }
-      try {
-        (blockerId = cast ((cast powerSaveBlocker : ElectronPowerSaveBlocker).start((cast ((cast _Runtime.strictEquals(mode, 'PreventAppSuspension') : Bool) ? (cast 'prevent-app-suspension' : Dynamic) : (cast 'prevent-display-sleep' : Dynamic)) : String)) : Dynamic));
-        return cast flight._internal._Async.resolve({ reason: 'ok' });
-      } catch (__error:Dynamic) {
-        return cast flight._internal._Async.resolve({ reason: 'failed' });
-      }
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic), destroy: (cast function():Void {
-      if ((cast ((cast blockerId : Float) >= (cast 0.0 : Float)) : Bool)) {
-        (cast powerSaveBlocker : ElectronPowerSaveBlocker).stop((cast blockerId : Float));
-        (blockerId = cast (-1.0 : Dynamic));
-      }
-    } : Dynamic), isActive: (cast function():Bool {
-      return cast ((cast blockerId : Float) >= (cast 0.0 : Float));
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic), release: (cast function():flight._internal._Promise<PowerKeepAwakeReleaseResult> {
-      if ((cast ((cast blockerId : Float) < (cast 0.0 : Float)) : Bool)) { return cast flight._internal._Async.resolve({ reason: 'inactive' }); }
-      try {
-        (cast powerSaveBlocker : ElectronPowerSaveBlocker).stop((cast blockerId : Float));
-      } catch (__error:Dynamic) {
-        return cast flight._internal._Async.resolve({ reason: 'failed' });
-      }
-      (blockerId = cast (-1.0 : Dynamic));
-      return cast flight._internal._Async.resolve({ reason: 'ok' });
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL62C74__electronPower); __callArgument1296; })) : EntityShapeL62C74__electronPower); final __structInitField4:Dynamic = (cast createEntity(({ final __callArgument1314:Dynamic = ({ subscribeLock: (cast function(listener:Void->Void):Void->Void {
-      (cast powerMonitor : ElectronPowerMonitor).on(({ final __callArgument1306:Dynamic = 'lock-screen'; __callArgument1306; }), ({ final __callArgument1307:Dynamic = listener; __callArgument1307; }));
-      return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener(({ final __callArgument1308:Dynamic = 'lock-screen'; __callArgument1308; }), ({ final __callArgument1309:Dynamic = listener; __callArgument1309; })); };
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic), subscribeUnlock: (cast function(listener:Void->Void):Void->Void {
-      (cast powerMonitor : ElectronPowerMonitor).on(({ final __callArgument1310:Dynamic = 'unlock-screen'; __callArgument1310; }), ({ final __callArgument1311:Dynamic = listener; __callArgument1311; }));
-      return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener(({ final __callArgument1312:Dynamic = 'unlock-screen'; __callArgument1312; }), ({ final __callArgument1313:Dynamic = listener; __callArgument1313; })); };
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL95C78__electronPower); __callArgument1314; })) : EntityShapeL95C78__electronPower); final __structInitField5:Dynamic = (cast createEntity(({ final __callArgument1336:Dynamic = ({ getStatus: (cast function(out:PowerStatus):PowerStatus {
-      var onBattery:Bool = cast _Runtime.UNDEFINED;
-      onBattery = _Runtime.strictEquals((cast powerMonitor : ElectronPowerMonitor).onBatteryPower, true);
-      (out.batteryLevel = cast (-1.0 : Float));
-      (out.chargingTime = cast (-1.0 : Float));
-      (out.dischargingTime = cast (-1.0 : Float));
-      (out.isBatteryLow = cast (false : Bool));
-      (out.isCharging = cast (!(cast onBattery : Bool) : Bool));
-      (out.isLowPower = cast (false : Bool));
-      (out.isOnBattery = cast (onBattery : Bool));
-      (out.thermalState = cast ((cast _HostElectron.readThermalState__electronPower(({ final __callArgument1334:Dynamic = powerMonitor; __callArgument1334; })) : PowerThermalState) : PowerThermalState));
-      return cast out;
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL105C68__electronPower); __callArgument1336; })) : EntityShapeL105C68__electronPower); final __structInitField6:Dynamic = (cast createEntity(({ final __callArgument1358:Dynamic = ({ subscribeResume: (cast function(listener:Void->Void):Void->Void {
-      (cast powerMonitor : ElectronPowerMonitor).on(({ final __callArgument1350:Dynamic = 'resume'; __callArgument1350; }), ({ final __callArgument1351:Dynamic = listener; __callArgument1351; }));
-      return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener(({ final __callArgument1352:Dynamic = 'resume'; __callArgument1352; }), ({ final __callArgument1353:Dynamic = listener; __callArgument1353; })); };
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic), subscribeSuspend: (cast function(listener:Void->Void):Void->Void {
-      (cast powerMonitor : ElectronPowerMonitor).on(({ final __callArgument1354:Dynamic = 'suspend'; __callArgument1354; }), ({ final __callArgument1355:Dynamic = listener; __callArgument1355; }));
-      return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener(({ final __callArgument1356:Dynamic = 'suspend'; __callArgument1356; }), ({ final __callArgument1357:Dynamic = listener; __callArgument1357; })); };
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL119C76__electronPower); __callArgument1358; })) : EntityShapeL119C76__electronPower); ({ batteryHealth: __structInitField0, change: __structInitField1, idle: __structInitField2, keepAwake: __structInitField3, sessionLock: __structInitField4, status: __structInitField5, suspension: __structInitField6, thermal: cast _Runtime.UNDEFINED } : ElectronPowerCapabilities); }) #end) : Dynamic)) : ElectronPowerCapabilities);
+    }, cast ([] : Array<Dynamic>));
+    backends = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ batteryHealth: cast _Runtime.UNDEFINED, change: cast _Runtime.UNDEFINED, idle: cast _Runtime.UNDEFINED, keepAwake: cast _Runtime.UNDEFINED, sessionLock: cast _Runtime.UNDEFINED, status: cast _Runtime.UNDEFINED, suspension: cast _Runtime.UNDEFINED, thermal: cast _Runtime.UNDEFINED } : ElectronPowerCapabilities); }) #end));
+    initializeElectronPowerCapabilities(({ final __callArgument457:Dynamic = backends; __callArgument457; }), ({ final __callArgument458:Dynamic = batteryHealth; __callArgument458; }), ({ final __callArgument459:Dynamic = change; __callArgument459; }), ({ final __callArgument460:Dynamic = idle; __callArgument460; }), ({ final __callArgument461:Dynamic = keepAwake; __callArgument461; }), ({ final __callArgument462:Dynamic = sessionLock; __callArgument462; }), ({ final __callArgument463:Dynamic = status; __callArgument463; }), ({ final __callArgument464:Dynamic = suspension; __callArgument464; }));
     if ((cast !_Runtime.strictEquals(_Runtime.typeofValue((cast powerMonitor : ElectronPowerMonitor).getCurrentThermalState), 'function') : Bool)) { return cast backends; }
-    return cast (cast createEntity((cast (#if flight_struct_typedef _Runtime.mergeObjects([backends, { thermal: (cast createEntity(({ final __callArgument1632:Dynamic = ({ getThermalState: (cast function():PowerThermalState {
-      return cast (cast _HostElectron.readThermalState__electronPower(({ final __callArgument1622:Dynamic = powerMonitor; __callArgument1622; })) : PowerThermalState);
+    _Runtime.setField(backends, 'thermal', _Runtime.callValue(function():PowerThermalBackend {
+      var b:EntityConstruction<PowerThermalBackend> = cast _Runtime.UNDEFINED;
+      b = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ getThermalState: cast _Runtime.UNDEFINED, subscribeThermalStateChange: cast _Runtime.UNDEFINED } : PowerThermalBackend); }) #end));
+      initializePowerThermalBackend(({ final __callArgument473:Dynamic = b; __callArgument473; }), ({ final __callArgument474:Dynamic = powerMonitor; __callArgument474; }));
+      return cast b;
       return cast _Runtime.UNDEFINED;
-    } : Dynamic), subscribeThermalStateChange: (cast function(listener:PowerThermalState->Void):Void->Void {
-      var onChange:Void->Void = cast _Runtime.UNDEFINED;
-      onChange = (cast function():Void { listener((cast _HostElectron.readThermalState__electronPower(({ final __callArgument1624:Dynamic = powerMonitor; __callArgument1624; })) : PowerThermalState)); });
-      (cast powerMonitor : ElectronPowerMonitor).on(({ final __callArgument1628:Dynamic = 'thermal-state-change'; __callArgument1628; }), ({ final __callArgument1629:Dynamic = onChange; __callArgument1629; }));
-      return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener(({ final __callArgument1630:Dynamic = 'thermal-state-change'; __callArgument1630; }), ({ final __callArgument1631:Dynamic = onChange; __callArgument1631; })); };
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL139C70__electronPower); __callArgument1632; })) : EntityShapeL139C70__electronPower) }]) #else ({ final __structInitSource:Dynamic = _Runtime.mergeObjects([backends, { thermal: (cast createEntity(({ final __callArgument1632:Dynamic = ({ getThermalState: (cast function():PowerThermalState {
-      return cast (cast _HostElectron.readThermalState__electronPower(({ final __callArgument1622:Dynamic = powerMonitor; __callArgument1622; })) : PowerThermalState);
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic), subscribeThermalStateChange: (cast function(listener:PowerThermalState->Void):Void->Void {
-      var onChange:Void->Void = cast _Runtime.UNDEFINED;
-      onChange = (cast function():Void { listener((cast _HostElectron.readThermalState__electronPower(({ final __callArgument1624:Dynamic = powerMonitor; __callArgument1624; })) : PowerThermalState)); });
-      (cast powerMonitor : ElectronPowerMonitor).on(({ final __callArgument1628:Dynamic = 'thermal-state-change'; __callArgument1628; }), ({ final __callArgument1629:Dynamic = onChange; __callArgument1629; }));
-      return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener(({ final __callArgument1630:Dynamic = 'thermal-state-change'; __callArgument1630; }), ({ final __callArgument1631:Dynamic = onChange; __callArgument1631; })); };
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL139C70__electronPower); __callArgument1632; })) : EntityShapeL139C70__electronPower) }]); ({ batteryHealth: _Runtime.field(__structInitSource, 'batteryHealth'), change: _Runtime.field(__structInitSource, 'change'), idle: _Runtime.field(__structInitSource, 'idle'), keepAwake: _Runtime.field(__structInitSource, 'keepAwake'), sessionLock: _Runtime.field(__structInitSource, 'sessionLock'), status: _Runtime.field(__structInitSource, 'status'), suspension: _Runtime.field(__structInitSource, 'suspension'), thermal: _Runtime.field(__structInitSource, 'thermal') } : ElectronPowerCapabilities); }) #end) : Dynamic)) : ElectronPowerCapabilities);
+    }, cast ([] : Array<Dynamic>)));
+    return cast backends;
     return cast null;
+  }
+
+  public static function initializeElectronPowerCapabilities(out:EntityConstruction<ElectronPowerCapabilities>, batteryHealth:PowerBatteryHealthBackend, change:PowerChangeBackend, idle:PowerIdleBackend, keepAwake:PowerKeepAwakeBackend, sessionLock:PowerSessionLockBackend, status:PowerStatusBackend, suspension:PowerSuspensionBackend):Void {
+    _Runtime.setField(out, 'batteryHealth', batteryHealth);
+    _Runtime.setField(out, 'change', change);
+    _Runtime.setField(out, 'idle', idle);
+    _Runtime.setField(out, 'keepAwake', keepAwake);
+    _Runtime.setField(out, 'sessionLock', sessionLock);
+    _Runtime.setField(out, 'status', status);
+    _Runtime.setField(out, 'suspension', suspension);
+  }
+
+  public static function initializePowerBatteryHealthBackend(out:EntityConstruction<PowerBatteryHealthBackend>):Void {
+    ((cast out : { var getBatteryHealth:PowerBatteryHealth->PowerBatteryHealth; }).getBatteryHealth = (cast function(out:PowerBatteryHealth):PowerBatteryHealth {
+      return cast out;
+      return cast _Runtime.UNDEFINED;
+    }));
+  }
+
+  public static function initializePowerChangeBackend(out:EntityConstruction<PowerChangeBackend>, powerMonitor:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var subscribe:(Void->Void)->(Void->Void); }).subscribe = (cast function(listener:Void->Void):Void->Void {
+      (cast powerMonitor : { var on:ElectronPowerMonitorEvent->(Void->Void)->Void; }).on(({ final __callArgument477:Dynamic = 'on-battery'; __callArgument477; }), ({ final __callArgument478:Dynamic = listener; __callArgument478; }));
+      (cast powerMonitor : { var on:ElectronPowerMonitorEvent->(Void->Void)->Void; }).on(({ final __callArgument479:Dynamic = 'on-ac'; __callArgument479; }), ({ final __callArgument480:Dynamic = listener; __callArgument480; }));
+      return cast function():Void {
+        (cast powerMonitor : { var removeListener:ElectronPowerMonitorEvent->(Void->Void)->Void; }).removeListener(({ final __callArgument481:Dynamic = 'on-battery'; __callArgument481; }), ({ final __callArgument482:Dynamic = listener; __callArgument482; }));
+        (cast powerMonitor : { var removeListener:ElectronPowerMonitorEvent->(Void->Void)->Void; }).removeListener(({ final __callArgument483:Dynamic = 'on-ac'; __callArgument483; }), ({ final __callArgument484:Dynamic = listener; __callArgument484; }));
+      };
+      return cast _Runtime.UNDEFINED;
+    }));
+  }
+
+  public static function initializePowerIdleBackend(out:EntityConstruction<PowerIdleBackend>, powerMonitor:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var getIdleState:Float->PowerIdleState; }).getIdleState = (cast function(thresholdSeconds:Float):PowerIdleState {
+      return cast (cast _HostElectron.toIdleState__electronPower((cast (cast powerMonitor : { var getSystemIdleState:Float->String; }).getSystemIdleState((cast thresholdSeconds : Float)) : String)) : PowerIdleState);
+      return cast _Runtime.UNDEFINED;
+    }));
+    ((cast out : { var getIdleTimeSeconds:Void->Float; }).getIdleTimeSeconds = (cast function():Float {
+      return cast (cast powerMonitor : { var getSystemIdleTime:Void->Float; }).getSystemIdleTime();
+      return cast _Runtime.UNDEFINED;
+    }));
+  }
+
+  public static function initializePowerKeepAwakeBackend(out:EntityConstruction<PowerKeepAwakeBackend>, powerSaveBlocker:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    var blockerId:Float = cast _Runtime.UNDEFINED;
+    blockerId = -1.0;
+    ((cast out : { var acquire:PowerKeepAwakeMode->flight._internal._Promise<PowerKeepAwakeAcquireResult>; }).acquire = (cast function(mode:PowerKeepAwakeMode):flight._internal._Promise<PowerKeepAwakeAcquireResult> {
+      if ((cast ((cast blockerId : Float) >= (cast 0.0 : Float)) : Bool)) { return cast flight._internal._Async.resolve({ reason: 'ok' }); }
+      try {
+        (blockerId = cast ((cast powerSaveBlocker : { var start:String->Float; }).start((cast ((cast _Runtime.strictEquals(mode, 'PreventAppSuspension') : Bool) ? (cast 'prevent-app-suspension' : Dynamic) : (cast 'prevent-display-sleep' : Dynamic)) : String)) : Dynamic));
+        return cast flight._internal._Async.resolve({ reason: 'ok' });
+      } catch (__error:Dynamic) {
+        return cast flight._internal._Async.resolve({ reason: 'failed' });
+      }
+      return cast _Runtime.UNDEFINED;
+    }));
+    ((cast out : { @:optional var destroy:Null<Void->Void>; }).destroy = (cast function():Void {
+      if ((cast ((cast blockerId : Float) >= (cast 0.0 : Float)) : Bool)) {
+        (cast powerSaveBlocker : { var stop:Float->Void; }).stop((cast blockerId : Float));
+        (blockerId = cast (-1.0 : Dynamic));
+      }
+    }));
+    ((cast out : { var isActive:Void->Bool; }).isActive = (cast function():Bool {
+      return cast ((cast blockerId : Float) >= (cast 0.0 : Float));
+      return cast _Runtime.UNDEFINED;
+    }));
+    ((cast out : { var release:Void->flight._internal._Promise<PowerKeepAwakeReleaseResult>; }).release = (cast function():flight._internal._Promise<PowerKeepAwakeReleaseResult> {
+      if ((cast ((cast blockerId : Float) < (cast 0.0 : Float)) : Bool)) { return cast flight._internal._Async.resolve({ reason: 'inactive' }); }
+      try {
+        (cast powerSaveBlocker : { var stop:Float->Void; }).stop((cast blockerId : Float));
+      } catch (__error:Dynamic) {
+        return cast flight._internal._Async.resolve({ reason: 'failed' });
+      }
+      (blockerId = cast (-1.0 : Dynamic));
+      return cast flight._internal._Async.resolve({ reason: 'ok' });
+      return cast _Runtime.UNDEFINED;
+    }));
+  }
+
+  public static function initializePowerSessionLockBackend(out:EntityConstruction<PowerSessionLockBackend>, powerMonitor:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var subscribeLock:(Void->Void)->(Void->Void); }).subscribeLock = (cast function(listener:Void->Void):Void->Void {
+      (cast powerMonitor : { var on:ElectronPowerMonitorEvent->(Void->Void)->Void; }).on(({ final __callArgument485:Dynamic = 'lock-screen'; __callArgument485; }), ({ final __callArgument486:Dynamic = listener; __callArgument486; }));
+      return cast function():Void { (cast powerMonitor : { var removeListener:ElectronPowerMonitorEvent->(Void->Void)->Void; }).removeListener(({ final __callArgument487:Dynamic = 'lock-screen'; __callArgument487; }), ({ final __callArgument488:Dynamic = listener; __callArgument488; })); };
+      return cast _Runtime.UNDEFINED;
+    }));
+    ((cast out : { var subscribeUnlock:(Void->Void)->(Void->Void); }).subscribeUnlock = (cast function(listener:Void->Void):Void->Void {
+      (cast powerMonitor : { var on:ElectronPowerMonitorEvent->(Void->Void)->Void; }).on(({ final __callArgument489:Dynamic = 'unlock-screen'; __callArgument489; }), ({ final __callArgument490:Dynamic = listener; __callArgument490; }));
+      return cast function():Void { (cast powerMonitor : { var removeListener:ElectronPowerMonitorEvent->(Void->Void)->Void; }).removeListener(({ final __callArgument491:Dynamic = 'unlock-screen'; __callArgument491; }), ({ final __callArgument492:Dynamic = listener; __callArgument492; })); };
+      return cast _Runtime.UNDEFINED;
+    }));
+  }
+
+  public static function initializePowerStatusBackend(out:EntityConstruction<PowerStatusBackend>, powerMonitor:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var getStatus:PowerStatus->PowerStatus; }).getStatus = (cast function(out:PowerStatus):PowerStatus {
+      var onBattery:Bool = cast _Runtime.UNDEFINED;
+      onBattery = _Runtime.strictEquals((cast powerMonitor : { @:optional var onBatteryPower:Null<Bool>; }).onBatteryPower, true);
+      (out.batteryLevel = cast (-1.0 : Float));
+      (out.chargingTime = cast (-1.0 : Float));
+      (out.dischargingTime = cast (-1.0 : Float));
+      (out.isBatteryLow = cast (false : Bool));
+      (out.isCharging = cast (!(cast onBattery : Bool) : Bool));
+      (out.isLowPower = cast (false : Bool));
+      (out.isOnBattery = cast (onBattery : Bool));
+      (out.thermalState = cast ((cast _HostElectron.readThermalState__electronPower(({ final __callArgument493:Dynamic = powerMonitor; __callArgument493; })) : PowerThermalState) : PowerThermalState));
+      return cast out;
+      return cast _Runtime.UNDEFINED;
+    }));
+  }
+
+  public static function initializePowerSuspensionBackend(out:EntityConstruction<PowerSuspensionBackend>, powerMonitor:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var subscribeResume:(Void->Void)->(Void->Void); }).subscribeResume = (cast function(listener:Void->Void):Void->Void {
+      (cast powerMonitor : { var on:ElectronPowerMonitorEvent->(Void->Void)->Void; }).on(({ final __callArgument495:Dynamic = 'resume'; __callArgument495; }), ({ final __callArgument496:Dynamic = listener; __callArgument496; }));
+      return cast function():Void { (cast powerMonitor : { var removeListener:ElectronPowerMonitorEvent->(Void->Void)->Void; }).removeListener(({ final __callArgument497:Dynamic = 'resume'; __callArgument497; }), ({ final __callArgument498:Dynamic = listener; __callArgument498; })); };
+      return cast _Runtime.UNDEFINED;
+    }));
+    ((cast out : { var subscribeSuspend:(Void->Void)->(Void->Void); }).subscribeSuspend = (cast function(listener:Void->Void):Void->Void {
+      (cast powerMonitor : { var on:ElectronPowerMonitorEvent->(Void->Void)->Void; }).on(({ final __callArgument499:Dynamic = 'suspend'; __callArgument499; }), ({ final __callArgument500:Dynamic = listener; __callArgument500; }));
+      return cast function():Void { (cast powerMonitor : { var removeListener:ElectronPowerMonitorEvent->(Void->Void)->Void; }).removeListener(({ final __callArgument501:Dynamic = 'suspend'; __callArgument501; }), ({ final __callArgument502:Dynamic = listener; __callArgument502; })); };
+      return cast _Runtime.UNDEFINED;
+    }));
+  }
+
+  public static function initializePowerThermalBackend(out:EntityConstruction<PowerThermalBackend>, powerMonitor:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var getThermalState:Void->PowerThermalState; }).getThermalState = (cast function():PowerThermalState {
+      return cast (cast _HostElectron.readThermalState__electronPower(({ final __callArgument503:Dynamic = powerMonitor; __callArgument503; })) : PowerThermalState);
+      return cast _Runtime.UNDEFINED;
+    }));
+    ((cast out : { var subscribeThermalStateChange:(PowerThermalState->Void)->(Void->Void); }).subscribeThermalStateChange = (cast function(listener:PowerThermalState->Void):Void->Void {
+      var onChange:Void->Void = cast _Runtime.UNDEFINED;
+      onChange = (cast function():Void { listener((cast _HostElectron.readThermalState__electronPower(({ final __callArgument505:Dynamic = powerMonitor; __callArgument505; })) : PowerThermalState)); });
+      (cast powerMonitor : { var on:ElectronPowerMonitorEvent->(Void->Void)->Void; }).on(({ final __callArgument509:Dynamic = 'thermal-state-change'; __callArgument509; }), ({ final __callArgument510:Dynamic = onChange; __callArgument510; }));
+      return cast function():Void { (cast powerMonitor : { var removeListener:ElectronPowerMonitorEvent->(Void->Void)->Void; }).removeListener(({ final __callArgument511:Dynamic = 'thermal-state-change'; __callArgument511; }), ({ final __callArgument512:Dynamic = onChange; __callArgument512; })); };
+      return cast _Runtime.UNDEFINED;
+    }));
   }
 
   public static function readThermalState__electronPower(powerMonitor:flight._internal._IndexedAccess<ElectronApi, String>):PowerThermalState {
@@ -2909,54 +2330,117 @@ class _HostElectron {
   public static function createElectronProtocolCapabilities(electron:ElectronApi):ElectronProtocolCapabilities {
     var app:ElectronApp = cast _Runtime.UNDEFINED;
     var registered:flight._internal._Set<String> = cast _Runtime.UNDEFINED;
-    var registration:{ >Entity, var getRegisteredSchemes:Void->Array<String>; var register:String->Bool; } = cast _Runtime.UNDEFINED;
+    var registration:EntityConstruction<ProtocolRegistrationBackend> = cast _Runtime.UNDEFINED;
+    var defaultBackend:EntityConstruction<ProtocolDefaultBackend> = cast _Runtime.UNDEFINED;
+    var open:EntityConstruction<ProtocolOpenBackend> = cast _Runtime.UNDEFINED;
+    var registrationQuery:EntityConstruction<ProtocolRegistrationQueryBackend> = cast _Runtime.UNDEFINED;
+    var unregistration:EntityConstruction<ProtocolUnregistrationBackend> = cast _Runtime.UNDEFINED;
+    var out:EntityConstruction<ElectronProtocolCapabilities> = cast _Runtime.UNDEFINED;
     app = electron.app;
     registered = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
-    registration = (cast createEntity(({ final __callArgument1696:Dynamic = ({ getRegisteredSchemes: (cast function():Array<String> return _Runtime.concatArrays([_Runtime.toArray(registered)]) : Dynamic), register: (cast function(scheme:String):Bool {
-      var succeeded:Bool = cast _Runtime.UNDEFINED;
-      succeeded = (cast app : ElectronApp).setAsDefaultProtocolClient((cast scheme : String));
-      if ((cast succeeded : Bool)) { ((cast registered : flight._internal._Set<String>).add((cast scheme))); }
-      return cast succeeded;
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL7C37__electronProtocol); __callArgument1696; })) : EntityShapeL7C37__electronProtocol);
-    return cast (cast createEntity((cast (#if (flight_struct_typedef || js) _Runtime.objectFromPairs([{ key: 'default', value: (cast createEntity(({ final __callArgument1698:Dynamic = ({ isDefault: (cast function(scheme:String):Bool return (cast app : ElectronApp).isDefaultProtocolClient((cast scheme : String)) : Dynamic), removeAsDefault: (cast function(scheme:String):Bool return (cast app : ElectronApp).removeAsDefaultProtocolClient((cast scheme : String)) : Dynamic), setAsDefault: (cast function(scheme:String):Bool {
-      var succeeded:Bool = cast _Runtime.UNDEFINED;
-      succeeded = (cast app : ElectronApp).setAsDefaultProtocolClient((cast scheme : String));
-      if ((cast succeeded : Bool)) { ((cast registered : flight._internal._Set<String>).add((cast scheme))); }
-      return cast succeeded;
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL16C27__electronProtocol); __callArgument1698; })) : EntityShapeL16C27__electronProtocol) }, { key: 'open', value: (cast createEntity(({ final __callArgument1704:Dynamic = ({ subscribe: (cast function(listener:String->Void):Void->Void {
-      var handler:Array<flight._internal._Any>->Void = cast _Runtime.UNDEFINED;
-      handler = (cast _Runtime.haxeRest(function(...args:flight._internal._Any):Void { listener((cast Std.string(_Runtime.coalesce(flight._internal._StaticIndex.readArray(args, 1.0), function():Dynamic return cast '')) : String)); }, 0));
-      (cast app : ElectronApp).on((cast 'open-url' : String), ({ final __callArgument1702:Dynamic = handler; __callArgument1702; }));
-      return cast function():Void { (cast app : ElectronApp).removeListener((cast 'open-url' : String), ({ final __callArgument1703:Dynamic = handler; __callArgument1703; })); };
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL25C24__electronProtocol); __callArgument1704; })) : EntityShapeL25C24__electronProtocol) }, { key: 'registration', value: registration }, { key: 'registrationQuery', value: (cast createEntity(({ final __callArgument1710:Dynamic = ({ isRegistered: (cast function(scheme:String):Bool return (cast app : ElectronApp).isDefaultProtocolClient((cast scheme : String)) : Dynamic) } : EntityShapeL33C37__electronProtocol); __callArgument1710; })) : EntityShapeL33C37__electronProtocol) }, { key: 'unregistration', value: (cast createEntity(({ final __callArgument1712:Dynamic = ({ unregister: (cast function(scheme:String):Bool {
-      var succeeded:Bool = cast _Runtime.UNDEFINED;
-      succeeded = (cast app : ElectronApp).removeAsDefaultProtocolClient((cast scheme : String));
-      if ((cast succeeded : Bool)) { ((cast registered : flight._internal._Set<String>).delete_((cast scheme))); }
-      return cast succeeded;
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL34C34__electronProtocol); __callArgument1712; })) : EntityShapeL34C34__electronProtocol) }]) #else ({ default_: (cast (cast createEntity(({ final __callArgument1714:Dynamic = ({ isDefault: (cast function(scheme:String):Bool return (cast app : ElectronApp).isDefaultProtocolClient((cast scheme : String)) : Dynamic), removeAsDefault: (cast function(scheme:String):Bool return (cast app : ElectronApp).removeAsDefaultProtocolClient((cast scheme : String)) : Dynamic), setAsDefault: (cast function(scheme:String):Bool {
-      var succeeded:Bool = cast _Runtime.UNDEFINED;
-      succeeded = (cast app : ElectronApp).setAsDefaultProtocolClient((cast scheme : String));
-      if ((cast succeeded : Bool)) { ((cast registered : flight._internal._Set<String>).add((cast scheme))); }
-      return cast succeeded;
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL16C27__electronProtocol); __callArgument1714; })) : EntityShapeL16C27__electronProtocol) : Dynamic), open: (cast (cast createEntity(({ final __callArgument1720:Dynamic = ({ subscribe: (cast function(listener:String->Void):Void->Void {
-      var handler:Array<flight._internal._Any>->Void = cast _Runtime.UNDEFINED;
-      handler = (cast _Runtime.haxeRest(function(...args:flight._internal._Any):Void { listener((cast Std.string(_Runtime.coalesce(flight._internal._StaticIndex.readArray(args, 1.0), function():Dynamic return cast '')) : String)); }, 0));
-      (cast app : ElectronApp).on((cast 'open-url' : String), ({ final __callArgument1718:Dynamic = handler; __callArgument1718; }));
-      return cast function():Void { (cast app : ElectronApp).removeListener((cast 'open-url' : String), ({ final __callArgument1719:Dynamic = handler; __callArgument1719; })); };
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL25C24__electronProtocol); __callArgument1720; })) : EntityShapeL25C24__electronProtocol) : Dynamic), registration: (cast registration : Dynamic), registrationQuery: (cast (cast createEntity(({ final __callArgument1726:Dynamic = ({ isRegistered: (cast function(scheme:String):Bool return (cast app : ElectronApp).isDefaultProtocolClient((cast scheme : String)) : Dynamic) } : EntityShapeL33C37__electronProtocol); __callArgument1726; })) : EntityShapeL33C37__electronProtocol) : Dynamic), unregistration: (cast (cast createEntity(({ final __callArgument1728:Dynamic = ({ unregister: (cast function(scheme:String):Bool {
-      var succeeded:Bool = cast _Runtime.UNDEFINED;
-      succeeded = (cast app : ElectronApp).removeAsDefaultProtocolClient((cast scheme : String));
-      if ((cast succeeded : Bool)) { ((cast registered : flight._internal._Set<String>).delete_((cast scheme))); }
-      return cast succeeded;
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL34C34__electronProtocol); __callArgument1728; })) : EntityShapeL34C34__electronProtocol) : Dynamic) } : ElectronProtocolCapabilities) #end) : Dynamic)) : ElectronProtocolCapabilities);
+    registration = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ getRegisteredSchemes: cast _Runtime.UNDEFINED, register: cast _Runtime.UNDEFINED } : ProtocolRegistrationBackend); }) #end));
+    initializeProtocolRegistrationBackend(({ final __callArgument513:Dynamic = registration; __callArgument513; }), ({ final __callArgument514:Dynamic = app; __callArgument514; }), ({ final __callArgument515:Dynamic = registered; __callArgument515; }));
+    registration;
+    defaultBackend = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ isDefault: cast _Runtime.UNDEFINED, removeAsDefault: cast _Runtime.UNDEFINED, setAsDefault: cast _Runtime.UNDEFINED } : ProtocolDefaultBackend); }) #end));
+    initializeProtocolDefaultBackend(({ final __callArgument519:Dynamic = defaultBackend; __callArgument519; }), ({ final __callArgument520:Dynamic = app; __callArgument520; }), ({ final __callArgument521:Dynamic = registered; __callArgument521; }));
+    defaultBackend;
+    open = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ subscribe: cast _Runtime.UNDEFINED } : ProtocolOpenBackend); }) #end));
+    initializeProtocolOpenBackend(({ final __callArgument525:Dynamic = open; __callArgument525; }), ({ final __callArgument526:Dynamic = app; __callArgument526; }));
+    open;
+    registrationQuery = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ isRegistered: cast _Runtime.UNDEFINED } : ProtocolRegistrationQueryBackend); }) #end));
+    initializeProtocolRegistrationQueryBackend(({ final __callArgument529:Dynamic = registrationQuery; __callArgument529; }), ({ final __callArgument530:Dynamic = app; __callArgument530; }));
+    registrationQuery;
+    unregistration = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ unregister: cast _Runtime.UNDEFINED } : ProtocolUnregistrationBackend); }) #end));
+    initializeProtocolUnregistrationBackend(({ final __callArgument533:Dynamic = unregistration; __callArgument533; }), ({ final __callArgument534:Dynamic = app; __callArgument534; }), ({ final __callArgument535:Dynamic = registered; __callArgument535; }));
+    unregistration;
+    out = (cast (#if (flight_struct_typedef || js) ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ default_: cast _Runtime.UNDEFINED, open: cast _Runtime.UNDEFINED, registration: cast _Runtime.UNDEFINED, registrationQuery: cast _Runtime.UNDEFINED, unregistration: cast _Runtime.UNDEFINED } : ElectronProtocolCapabilities); }) #end));
+    initializeElectronProtocolCapabilities(({ final __callArgument539:Dynamic = out; __callArgument539; }), ({ final __callArgument540:Dynamic = defaultBackend; __callArgument540; }), ({ final __callArgument541:Dynamic = open; __callArgument541; }), ({ final __callArgument542:Dynamic = registration; __callArgument542; }), ({ final __callArgument543:Dynamic = registrationQuery; __callArgument543; }), ({ final __callArgument544:Dynamic = unregistration; __callArgument544; }));
+    return cast out;
     return cast null;
+  }
+
+  public static function initializeElectronProtocolCapabilities(out:EntityConstruction<ElectronProtocolCapabilities>, defaultBackend:ProtocolDefaultBackend, open:ProtocolOpenBackend, registration:ProtocolRegistrationBackend, registrationQuery:ProtocolRegistrationQueryBackend, unregistration:ProtocolUnregistrationBackend):Void {
+    _Runtime.setField(out, 'default', defaultBackend);
+    _Runtime.setField(out, 'open', open);
+    _Runtime.setField(out, 'registration', registration);
+    _Runtime.setField(out, 'registrationQuery', registrationQuery);
+    _Runtime.setField(out, 'unregistration', unregistration);
+  }
+
+  public static function initializeProtocolDefaultBackend(out:EntityConstruction<ProtocolDefaultBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>, registered:flight._internal._Set<String>):Void {
+    ((cast out : { var isDefault:String->Bool; }).isDefault = (cast function(scheme:String):Bool return (cast app : { var isDefaultProtocolClient:String->Bool; }).isDefaultProtocolClient((cast scheme : String))));
+    ((cast out : { var removeAsDefault:String->Bool; }).removeAsDefault = (cast function(scheme:String):Bool return (cast app : { var removeAsDefaultProtocolClient:String->Bool; }).removeAsDefaultProtocolClient((cast scheme : String))));
+    ((cast out : { var setAsDefault:String->Bool; }).setAsDefault = (cast function(scheme:String):Bool {
+      var succeeded:Bool = cast _Runtime.UNDEFINED;
+      succeeded = (cast app : { var setAsDefaultProtocolClient:String->Bool; }).setAsDefaultProtocolClient((cast scheme : String));
+      if ((cast succeeded : Bool)) { ((cast registered : flight._internal._Set<String>).add((cast scheme))); }
+      return cast succeeded;
+      return cast _Runtime.UNDEFINED;
+    }));
+  }
+
+  public static function initializeProtocolOpenBackend(out:EntityConstruction<ProtocolOpenBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var subscribe:(String->Void)->(Void->Void); }).subscribe = (cast function(listener:String->Void):Void->Void {
+      var handler:Array<flight._internal._Any>->Void = cast _Runtime.UNDEFINED;
+      handler = (cast _Runtime.haxeRest(function(...args:flight._internal._Any):Void { listener((cast Std.string(_Runtime.coalesce(flight._internal._StaticIndex.readArray(args, 1.0), function():Dynamic return cast '')) : String)); }, 0));
+      (cast app : { var on:String->(Array<flight._internal._Any>->Void)->Void; }).on((cast 'open-url' : String), ({ final __callArgument551:Dynamic = handler; __callArgument551; }));
+      return cast function():Void { (cast app : { var removeListener:String->(Array<flight._internal._Any>->Void)->Void; }).removeListener((cast 'open-url' : String), ({ final __callArgument552:Dynamic = handler; __callArgument552; })); };
+      return cast _Runtime.UNDEFINED;
+    }));
+  }
+
+  public static function initializeProtocolRegistrationBackend(out:EntityConstruction<ProtocolRegistrationBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>, registered:flight._internal._Set<String>):Void {
+    ((cast out : { var getRegisteredSchemes:Void->Array<String>; }).getRegisteredSchemes = (cast function():Array<String> return _Runtime.concatArrays([_Runtime.toArray(registered)])));
+    ((cast out : { var register:String->Bool; }).register = (cast function(scheme:String):Bool {
+      var succeeded:Bool = cast _Runtime.UNDEFINED;
+      succeeded = (cast app : { var setAsDefaultProtocolClient:String->Bool; }).setAsDefaultProtocolClient((cast scheme : String));
+      if ((cast succeeded : Bool)) { ((cast registered : flight._internal._Set<String>).add((cast scheme))); }
+      return cast succeeded;
+      return cast _Runtime.UNDEFINED;
+    }));
+  }
+
+  public static function initializeProtocolRegistrationQueryBackend(out:EntityConstruction<ProtocolRegistrationQueryBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var isRegistered:String->Bool; }).isRegistered = (cast function(scheme:String):Bool return (cast app : { var isDefaultProtocolClient:String->Bool; }).isDefaultProtocolClient((cast scheme : String))));
+  }
+
+  public static function initializeProtocolUnregistrationBackend(out:EntityConstruction<ProtocolUnregistrationBackend>, app:flight._internal._IndexedAccess<ElectronApi, String>, registered:flight._internal._Set<String>):Void {
+    ((cast out : { var unregister:String->Bool; }).unregister = (cast function(scheme:String):Bool {
+      var succeeded:Bool = cast _Runtime.UNDEFINED;
+      succeeded = (cast app : { var removeAsDefaultProtocolClient:String->Bool; }).removeAsDefaultProtocolClient((cast scheme : String));
+      if ((cast succeeded : Bool)) { ((cast registered : flight._internal._Set<String>).delete_((cast scheme))); }
+      return cast succeeded;
+      return cast _Runtime.UNDEFINED;
+    }));
+  }
+
+  public static function initializeElectronHost(out:EntityConstruction<ElectronHost<DesktopOsProfile>>, values:EntityWithoutRuntime<ElectronHost<DesktopOsProfile>>):Void {
+    _Runtime.setField(out, 'accessibility', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).accessibility);
+    _Runtime.setField(out, 'app', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).app);
+    _Runtime.setField(out, 'clipboard', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).clipboard);
+    _Runtime.setField(out, 'connectivity', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).connectivity);
+    _Runtime.setField(out, 'dialog', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).dialog);
+    _Runtime.setField(out, 'graphics', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).graphics);
+    _Runtime.setField(out, 'input', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).input);
+    _Runtime.setField(out, 'ipc', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).ipc);
+    _Runtime.setField(out, 'media', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).media);
+    _Runtime.setField(out, 'menu', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).menu);
+    _Runtime.setField(out, 'midi', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).midi);
+    _Runtime.setField(out, 'net', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).net);
+    _Runtime.setField(out, 'notification', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).notification);
+    _Runtime.setField(out, 'power', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).power);
+    _Runtime.setField(out, 'protocol', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).protocol);
+    _Runtime.setField(out, 'screen', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).screen);
+    _Runtime.setField(out, 'share', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).share);
+    _Runtime.setField(out, 'shell', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).shell);
+    _Runtime.setField(out, 'shortcut', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).shortcut);
+    _Runtime.setField(out, 'storage', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).storage);
+    _Runtime.setField(out, 'system', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).system);
+    _Runtime.setField(out, 'text', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).text);
+    _Runtime.setField(out, 'tray', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).tray);
+    _Runtime.setField(out, 'ui', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).ui);
+    _Runtime.setField(out, 'updater', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).updater);
+    _Runtime.setField(out, 'window', (cast values : { var accessibility:HostAccessibilityCapabilities; var app:flight._internal._Intersection2<HostAppCapabilities, Entity>; var clipboard:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostClipboardCapabilities, { var bookmark:ClipboardBookmarkBackend; }>, { var formats:ClipboardFormatsBackend; }>, { var image:ClipboardImageBackend; }>, { var text:ClipboardTextBackend; }>; var connectivity:HostConnectivityCapabilities; var dialog:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostDialogCapabilities, { var directoryOpen:DirectoryOpenDialogBackend; }>, { var fileOpen:FileOpenDialogBackend; }>, { var fileSave:FileSaveDialogBackend; }>, { var message:MessageDialogBackend; }>; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostIpcCapabilities, { var handle:IpcHandleBackend; }>, { var message:IpcMessageBackend; }>, { var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; }>; var media:HostMediaCapabilities; var menu:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostMenuCapabilities, { var application:MenuApplicationBackend; }>, { var popup:MenuPopupBackend; }>, { var select:MenuSelectBackend; }>; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:flight._internal._Intersection2<HostProtocolCapabilities, Entity>; var notification:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostNotificationCapabilities, { var click:NotificationClickBackend; }>, { var close:NotificationCloseBackend; }>, { var delivery:NotificationDeliveryBackend; }>, { var dismiss:NotificationDismissBackend; }>, { var lifecycle:NotificationLifecycleBackend; }>, { var received:NotificationReceivedBackend; }>; var screen:flight._internal._Intersection2<flight._internal._Intersection2<HostScreenCapabilities, { var change:ScreenChangeBackend; }>, { var query:ScreenQueryBackend; }>; var share:HostShareCapabilities; var shell:flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HostShellCapabilities, { var beep:ShellBeepBackend; }>, { var external:ShellExternalBackend; }>, { var pathOpen:ShellPathOpenBackend; }>, { var pathReveal:ShellPathRevealBackend; }>, { var trash:ShellTrashBackend; }>; var shortcut:flight._internal._Intersection2<flight._internal._Intersection2<HostShortcutCapabilities, { var query:ShortcutQueryBackend; }>, { var trigger:ShortcutTriggerBackend; }>; var storage:flight._internal._Intersection2<HostStorageCapabilities, { var local:StorageBackend; }>; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:flight._internal._Intersection2<HostTrayCapabilities, Entity>; var ui:HostUiCapabilities; var updater:flight._internal._Intersection2<HostUpdaterCapabilities, { var command:UpdaterCommandBackend; }>; var window:WindowBackend; }).window);
   }
 
   @:overload(function(electron:ElectronApi, options:flight._internal._Intersection2<ElectronBackendOptions, { var platform:String; }>):ElectronMacosHost {})
@@ -2964,8 +2448,8 @@ class _HostElectron {
   @:overload(function(electron:ElectronApi, options:flight._internal._Intersection2<ElectronBackendOptions, { var platform:DesktopOsProfile; }>):flight._internal._Union2<ElectronHost<DesktopOsProfile>, ElectronMacosHost> {})
   public static function registerElectronBackends(electron:ElectronApi, options:flight._internal._Intersection2<ElectronBackendOptions, { var platform:DesktopOsProfile; }>):flight._internal._Union2<ElectronHost<DesktopOsProfile>, ElectronMacosHost> {
     var clipboard:ElectronClipboardBackend__electronClipboard = cast _Runtime.UNDEFINED;
-    var app:flight._internal._Union2<flight._internal._Union2<ElectronMacosAppCapabilities, ElectronWindowsAppCapabilities>, ElectronLinuxAppCapabilities> = cast _Runtime.UNDEFINED;
-    var dialog:{ var directoryOpen:{ >DirectoryOpenDialogBackend, >Entity, }; var fileOpen:{ >FileOpenDialogBackend, >Entity, }; var fileSave:{ >FileSaveDialogBackend, >Entity, }; var message:MessageDialogBackend; } = cast _Runtime.UNDEFINED;
+    var app:flight._internal._Union2<flight._internal._Union2<ElectronLinuxAppCapabilities, ElectronMacosAppCapabilities>, ElectronWindowsAppCapabilities> = cast _Runtime.UNDEFINED;
+    var dialog:{ var directoryOpen:{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>; }; var fileOpen:{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; }; var fileSave:{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; }; var message:MessageDialogBackend; } = cast _Runtime.UNDEFINED;
     var notification:flight._internal._Union2<ElectronNotificationCapabilities, ElectronMacosNotificationCapabilities> = cast _Runtime.UNDEFINED;
     var screen:flight._internal._Any = cast _Runtime.UNDEFINED;
     var ipc:{ var handle:IpcHandleBackend; var message:IpcMessageBackend; var targetedSend:IpcTargetedSendBackend<ElectronIpcTarget>; } = cast _Runtime.UNDEFINED;
@@ -2974,55 +2458,77 @@ class _HostElectron {
     var menu:ElectronMenuCapabilities = cast _Runtime.UNDEFINED;
     var power:ElectronPowerCapabilities = cast _Runtime.UNDEFINED;
     var protocol:ElectronProtocolCapabilities = cast _Runtime.UNDEFINED;
-    var storage:{ >StorageBackend, >Entity, } = cast _Runtime.UNDEFINED;
+    var storage:{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var clear:Void->StorageClearResult; var getItem:String->StorageGetItemResult; var keys:Void->StorageKeysResult; var removeItem:String->StorageRemoveItemResult; var setItem:String->String->StorageSetItemResult; } = cast _Runtime.UNDEFINED;
     var updater:UpdaterCommandBackend = cast _Runtime.UNDEFINED;
     var shell:HostShellCapabilities = cast _Runtime.UNDEFINED;
     var window:WindowBackend = cast _Runtime.UNDEFINED;
-    clipboard = (cast createElectronClipboardBackend(({ final __callArgument1762:Dynamic = electron; __callArgument1762; })) : ElectronClipboardBackend__electronClipboard);
-    app = (cast createElectronAppCapabilities(({ final __callArgument1764:Dynamic = electron; __callArgument1764; }), (cast (cast options : { var platform:String; }).platform : String)) : flight._internal._Union2<flight._internal._Union2<ElectronMacosAppCapabilities, ElectronWindowsAppCapabilities>, ElectronLinuxAppCapabilities>);
-    dialog = (cast { directoryOpen: (cast createElectronDirectoryOpenDialogBackend(({ final __callArgument1766:Dynamic = electron; __callArgument1766; })) : { >DirectoryOpenDialogBackend, >Entity, }), fileOpen: (cast createElectronFileOpenDialogBackend(({ final __callArgument1768:Dynamic = electron; __callArgument1768; })) : { >FileOpenDialogBackend, >Entity, }), fileSave: (cast createElectronFileSaveDialogBackend(({ final __callArgument1770:Dynamic = electron; __callArgument1770; })) : { >FileSaveDialogBackend, >Entity, }), message: (cast createElectronMessageDialogBackend(({ final __callArgument1772:Dynamic = electron; __callArgument1772; })) : MessageDialogBackend) });
-    notification = (cast createElectronNotificationCapabilities(({ final __callArgument1774:Dynamic = electron; __callArgument1774; }), ({ final __callArgument1775:Dynamic = options; __callArgument1775; })) : flight._internal._Union2<ElectronNotificationCapabilities, ElectronMacosNotificationCapabilities>);
-    screen = createElectronScreenCapabilities(({ final __callArgument1778:Dynamic = electron; __callArgument1778; }));
-    ipc = (cast { handle: (cast createElectronIpcHandleBackend(({ final __callArgument1780:Dynamic = electron; __callArgument1780; })) : IpcHandleBackend), message: (cast createElectronIpcMessageBackend(({ final __callArgument1782:Dynamic = electron; __callArgument1782; })) : IpcMessageBackend), targetedSend: (cast createElectronIpcTargetedSendBackend() : IpcTargetedSendBackend<ElectronIpcTarget>) });
-    query = (cast createElectronShortcutQueryBackend(({ final __callArgument1784:Dynamic = electron; __callArgument1784; })) : ShortcutQueryBackend);
-    trigger = (cast createElectronShortcutTriggerBackend(({ final __callArgument1786:Dynamic = electron; __callArgument1786; })) : ShortcutTriggerBackend);
-    menu = (cast createElectronMenuBackends(({ final __callArgument1788:Dynamic = electron; __callArgument1788; })) : ElectronMenuCapabilities);
-    power = (cast createElectronPowerBackends(({ final __callArgument1790:Dynamic = electron; __callArgument1790; })) : ElectronPowerCapabilities);
-    protocol = (cast createElectronProtocolCapabilities(({ final __callArgument1792:Dynamic = electron; __callArgument1792; })) : ElectronProtocolCapabilities);
-    storage = (cast createElectronStorageBackend(({ final __callArgument1794:Dynamic = electron; __callArgument1794; }), (cast (cast options : { @:optional var storageFileName:Null<String>; }).storageFileName : String)) : { >StorageBackend, >Entity, });
-    updater = (cast createElectronUpdaterBackend(({ final __callArgument1796:Dynamic = electron; __callArgument1796; }), (cast options : { @:optional var updaterFeedUrl:Null<String>; }).updaterFeedUrl) : UpdaterCommandBackend);
-    shell = (cast makeElectronShellCapabilities(({ final __callArgument1798:Dynamic = electron; __callArgument1798; }), ({ final __callArgument1799:Dynamic = (cast options : { var platform:String; }).platform; __callArgument1799; })) : HostShellCapabilities);
-    window = (cast createElectronWindowBackend(({ final __callArgument1802:Dynamic = electron; __callArgument1802; })) : WindowBackend);
-    return cast (cast createEntity((cast ({ accessibility: (cast {  } : Dynamic), app: (cast app : Dynamic), clipboard: (cast { bookmark: clipboard, formats: clipboard, image: clipboard, text: clipboard } : Dynamic), connectivity: (cast {  } : Dynamic), dialog: (cast dialog : Dynamic), graphics: (cast {  } : Dynamic), input: (cast {  } : Dynamic), ipc: (cast ipc : Dynamic), media: (cast {  } : Dynamic), menu: (cast menu : Dynamic), midi: (cast {  } : Dynamic), net: (cast {  } : Dynamic), power: (cast power : Dynamic), protocol: (cast protocol : Dynamic), notification: (cast notification : Dynamic), shortcut: (cast { query: query, trigger: trigger } : Dynamic), screen: (cast screen : Dynamic), share: (cast {  } : Dynamic), shell: (cast shell : Dynamic), storage: (cast { local: storage } : Dynamic), system: (cast { platform: (cast createElectronPlatformBackend(({ final __callArgument1808:Dynamic = electron; __callArgument1808; })) : { >PlatformBackend, >Entity, }) } : Dynamic), text: (cast {  } : Dynamic), tray: (cast (cast (cast createElectronTrayCapabilities : ElectronApi->String->flight._internal._Any)(({ final __callArgument1810:Dynamic = electron; __callArgument1810; }), (cast (cast options : { var platform:String; }).platform : String)) : HostTrayCapabilities) : Dynamic), ui: (cast {  } : Dynamic), updater: (cast { command: updater } : Dynamic), window: (cast window : Dynamic) } : EntityShapeL93C23__electronRegister) : Dynamic)) : EntityShapeL93C23__electronRegister);
+    var out:EntityConstruction<ElectronHost<DesktopOsProfile>> = cast _Runtime.UNDEFINED;
+    clipboard = (cast createElectronClipboardBackend(({ final __callArgument553:Dynamic = electron; __callArgument553; })) : ElectronClipboardBackend__electronClipboard);
+    app = (cast createElectronAppCapabilities(({ final __callArgument555:Dynamic = electron; __callArgument555; }), (cast (cast options : { var platform:String; }).platform : String)) : flight._internal._Union2<flight._internal._Union2<ElectronLinuxAppCapabilities, ElectronMacosAppCapabilities>, ElectronWindowsAppCapabilities>);
+    dialog = (cast { directoryOpen: (cast createElectronDirectoryOpenDialogBackend(({ final __callArgument557:Dynamic = electron; __callArgument557; })) : { >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var open:OpenDirectoryDialogOptions->flight._internal._Promise<DirectoryOpenDialogResult>; }), fileOpen: (cast createElectronFileOpenDialogBackend(({ final __callArgument559:Dynamic = electron; __callArgument559; })) : { >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; }), fileSave: (cast createElectronFileSaveDialogBackend(({ final __callArgument561:Dynamic = electron; __callArgument561; })) : { >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; }), message: (cast createElectronMessageDialogBackend(({ final __callArgument563:Dynamic = electron; __callArgument563; })) : MessageDialogBackend) });
+    notification = (cast createElectronNotificationCapabilities(({ final __callArgument565:Dynamic = electron; __callArgument565; }), ({ final __callArgument566:Dynamic = options; __callArgument566; })) : flight._internal._Union2<ElectronNotificationCapabilities, ElectronMacosNotificationCapabilities>);
+    screen = createElectronScreenCapabilities(({ final __callArgument569:Dynamic = electron; __callArgument569; }));
+    ipc = (cast { handle: (cast createElectronIpcHandleBackend(({ final __callArgument571:Dynamic = electron; __callArgument571; })) : IpcHandleBackend), message: (cast createElectronIpcMessageBackend(({ final __callArgument573:Dynamic = electron; __callArgument573; })) : IpcMessageBackend), targetedSend: (cast createElectronIpcTargetedSendBackend() : IpcTargetedSendBackend<ElectronIpcTarget>) });
+    query = (cast createElectronShortcutQueryBackend(({ final __callArgument575:Dynamic = electron; __callArgument575; })) : ShortcutQueryBackend);
+    trigger = (cast createElectronShortcutTriggerBackend(({ final __callArgument577:Dynamic = electron; __callArgument577; })) : ShortcutTriggerBackend);
+    menu = (cast createElectronMenuBackends(({ final __callArgument579:Dynamic = electron; __callArgument579; })) : ElectronMenuCapabilities);
+    power = (cast createElectronPowerBackends(({ final __callArgument581:Dynamic = electron; __callArgument581; })) : ElectronPowerCapabilities);
+    protocol = (cast createElectronProtocolCapabilities(({ final __callArgument583:Dynamic = electron; __callArgument583; })) : ElectronProtocolCapabilities);
+    storage = (cast createElectronStorageBackend(({ final __callArgument585:Dynamic = electron; __callArgument585; }), (cast (cast options : { @:optional var storageFileName:Null<String>; }).storageFileName : String)) : { >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var clear:Void->StorageClearResult; var getItem:String->StorageGetItemResult; var keys:Void->StorageKeysResult; var removeItem:String->StorageRemoveItemResult; var setItem:String->String->StorageSetItemResult; });
+    updater = (cast createElectronUpdaterBackend(({ final __callArgument587:Dynamic = electron; __callArgument587; }), (cast options : { @:optional var updaterFeedUrl:Null<String>; }).updaterFeedUrl) : UpdaterCommandBackend);
+    shell = (cast makeElectronShellCapabilities(({ final __callArgument589:Dynamic = electron; __callArgument589; }), ({ final __callArgument590:Dynamic = (cast options : { var platform:String; }).platform; __callArgument590; })) : HostShellCapabilities);
+    window = (cast createElectronWindowBackend(({ final __callArgument593:Dynamic = electron; __callArgument593; })) : WindowBackend);
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ accessibility: cast _Runtime.UNDEFINED, app: cast _Runtime.UNDEFINED, clipboard: cast _Runtime.UNDEFINED, connectivity: cast _Runtime.UNDEFINED, dialog: cast _Runtime.UNDEFINED, graphics: cast _Runtime.UNDEFINED, input: cast _Runtime.UNDEFINED, ipc: cast _Runtime.UNDEFINED, media: cast _Runtime.UNDEFINED, menu: cast _Runtime.UNDEFINED, midi: cast _Runtime.UNDEFINED, net: cast _Runtime.UNDEFINED, power: cast _Runtime.UNDEFINED, protocol: cast _Runtime.UNDEFINED, notification: cast _Runtime.UNDEFINED, screen: cast _Runtime.UNDEFINED, share: cast _Runtime.UNDEFINED, shell: cast _Runtime.UNDEFINED, shortcut: cast _Runtime.UNDEFINED, storage: cast _Runtime.UNDEFINED, system: cast _Runtime.UNDEFINED, text: cast _Runtime.UNDEFINED, tray: cast _Runtime.UNDEFINED, ui: cast _Runtime.UNDEFINED, updater: cast _Runtime.UNDEFINED, window: cast _Runtime.UNDEFINED } : EntityShapeL126C15__electronRegister); }) #end));
+    initializeElectronHost(({ final __callArgument595:Dynamic = out; __callArgument595; }), (cast { accessibility: {  }, app: app, clipboard: { bookmark: clipboard, formats: clipboard, image: clipboard, text: clipboard }, connectivity: {  }, dialog: dialog, graphics: {  }, input: {  }, ipc: ipc, media: {  }, menu: menu, midi: {  }, net: {  }, notification: notification, power: power, protocol: protocol, screen: screen, share: {  }, shell: shell, shortcut: { query: query, trigger: trigger }, storage: { local: storage }, system: { platform: (cast createElectronPlatformBackend(({ final __callArgument596:Dynamic = electron; __callArgument596; })) : { >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getInfo:PlatformInfo->PlatformInfo; }) }, text: {  }, tray: (cast createElectronTrayCapabilities(({ final __callArgument598:Dynamic = electron; __callArgument598; }), (cast (cast options : { var platform:String; }).platform : String)) : Entity), ui: {  }, updater: { command: updater }, window: window } : Dynamic));
+    return cast out;
     return cast null;
   }
 
-  public static function createElectronScreenCapabilities(electron:ElectronApi):flight._internal._Required<{ @:optional var change:Null<ScreenChangeBackend>; @:optional var query:Null<ScreenQueryBackend>; }> {
+  public static function createElectronScreenCapabilities(electron:ElectronApi):NonEntityCreateResult<flight._internal._Required<{ @:optional var change:Null<ScreenChangeBackend>; @:optional var query:Null<ScreenQueryBackend>; }>, String> {
     var screen:ElectronScreen = cast _Runtime.UNDEFINED;
-    var query:{ >Entity, var getCursorPosition:{ var x:Float; var y:Float; }->{ var x:Float; var y:Float; }; var getPrimaryScreen:ScreenInfo->ScreenInfo; var getScreens:Array<ScreenInfo>->Array<ScreenInfo>; } = cast _Runtime.UNDEFINED;
-    var change:{ >Entity, var subscribe:(ScreenChangeEvent->Void)->(Void->Void); } = cast _Runtime.UNDEFINED;
+    var query:EntityConstruction<ScreenQueryBackend> = cast _Runtime.UNDEFINED;
+    var change:EntityConstruction<ScreenChangeBackend> = cast _Runtime.UNDEFINED;
     screen = electron.screen;
-    query = (cast createEntity(({ final __callArgument1832:Dynamic = ({ getCursorPosition: (cast function(out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
-      flight._internal.DynamicObject.assign(out, (cast screen : ElectronScreen).getCursorScreenPoint());
-      return cast out;
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic), getPrimaryScreen: (cast function(out:ScreenInfo):ScreenInfo {
-      return cast (cast _HostElectron.fillScreenInfo__electronScreen(({ final __callArgument1826:Dynamic = out; __callArgument1826; }), (cast screen : ElectronScreen).getPrimaryDisplay(), (cast true : Bool)) : ScreenInfo);
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic), getScreens: (cast function(out:Array<ScreenInfo>):Array<ScreenInfo> {
-      var displays:Array<ElectronDisplay> = cast _Runtime.UNDEFINED;
-      var primaryId:Float = cast _Runtime.UNDEFINED;
-      displays = (cast screen : ElectronScreen).getAllDisplays();
-      primaryId = (cast (cast screen : ElectronScreen).getPrimaryDisplay() : { var id:Float; }).id;
-      _Runtime.setLength(out, _Runtime.field(displays, 'length'));
-      _Runtime.forEachArray((cast displays : Array<ElectronDisplay>), function(display:ElectronDisplay, index:Float, __unused0:Array<ElectronDisplay>):Void {
-        ({ var __indexedObject1828:Dynamic = out; var __indexedKey1829:Dynamic = index; flight._internal._StaticIndex.writeArray(__indexedObject1828, __indexedKey1829, (flight._internal._StaticIndex.readArray(__indexedObject1828, __indexedKey1829) ?? (cast _HostElectron.emptyScreenInfo__electronScreen() : ScreenInfo))); });
-        (cast _HostElectron.fillScreenInfo__electronScreen(flight._internal._StaticIndex.readArray(out, index), ({ final __callArgument1830:Dynamic = display; __callArgument1830; }), (cast _Runtime.strictEquals(display.id, primaryId) : Bool)) : ScreenInfo);
-      }, _Runtime.UNDEFINED);
-      return cast out;
-      return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL17C30__electronScreen); __callArgument1832; })) : EntityShapeL17C30__electronScreen);
-    change = (cast createEntity(({ final __callArgument1882:Dynamic = ({ subscribe: (cast function(listener:ScreenChangeEvent->Void):Void->Void {
+    query = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ destroy: cast _Runtime.UNDEFINED, getCursorPosition: cast _Runtime.UNDEFINED, getPrimaryScreen: cast _Runtime.UNDEFINED, getScreens: cast _Runtime.UNDEFINED } : ScreenQueryBackend); }) #end));
+    initializeScreenQueryBackend(({ final __callArgument605:Dynamic = query; __callArgument605; }), ({ final __callArgument606:Dynamic = screen; __callArgument606; }));
+    query;
+    change = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ subscribe: cast _Runtime.UNDEFINED } : ScreenChangeBackend); }) #end));
+    initializeScreenChangeBackend(({ final __callArgument609:Dynamic = change; __callArgument609; }), ({ final __callArgument610:Dynamic = screen; __callArgument610; }));
+    change;
+    return cast { change: change, query: query };
+    return cast null;
+  }
+
+  public static function initializeEmptyScreenInfo(out:EntityConstruction<ScreenInfo>):Void {
+    _Runtime.setField(out, 'colorDepth', -1.0);
+    _Runtime.setField(out, 'colorSpace', (cast 'srgb' : ScreenColorSpace));
+    _Runtime.setField(out, 'depthPerComponent', -1.0);
+    _Runtime.setField(out, 'dpi', -1.0);
+    _Runtime.setField(out, 'height', 0.0);
+    _Runtime.setField(out, 'id', 0.0);
+    _Runtime.setField(out, 'internal', false);
+    _Runtime.setField(out, 'isHdr', false);
+    _Runtime.setField(out, 'isPrimary', false);
+    _Runtime.setField(out, 'label', '');
+    _Runtime.setField(out, 'maxLuminance', -1.0);
+    _Runtime.setField(out, 'monochrome', false);
+    _Runtime.setField(out, 'orientation', (cast 'Landscape' : ScreenOrientation));
+    _Runtime.setField(out, 'physicalHeight', -1.0);
+    _Runtime.setField(out, 'physicalWidth', -1.0);
+    _Runtime.setField(out, 'pixelDepth', -1.0);
+    _Runtime.setField(out, 'refreshRate', -1.0);
+    _Runtime.setField(out, 'rotation', -1.0);
+    _Runtime.setField(out, 'scaleFactor', 1.0);
+    _Runtime.setField(out, 'touchSupport', 'unknown');
+    _Runtime.setField(out, 'width', 0.0);
+    _Runtime.setField(out, 'workHeight', 0.0);
+    _Runtime.setField(out, 'workWidth', 0.0);
+    _Runtime.setField(out, 'x', 0.0);
+    _Runtime.setField(out, 'y', 0.0);
+  }
+
+  public static function initializeScreenChangeBackend(out:EntityConstruction<ScreenChangeBackend>, screen:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var subscribe:(ScreenChangeEvent->Void)->(Void->Void); }).subscribe = (cast function(listener:ScreenChangeEvent->Void):Void->Void {
       var makeHandler:ScreenChangeKind->(Array<flight._internal._Any>->Void) = cast _Runtime.UNDEFINED;
       var added:Array<flight._internal._Any>->Void = cast _Runtime.UNDEFINED;
       var removed:Array<flight._internal._Any>->Void = cast _Runtime.UNDEFINED;
@@ -3030,27 +2536,53 @@ class _HostElectron {
       makeHandler = (cast function(kind:ScreenChangeKind):Array<flight._internal._Any>->Void return _Runtime.haxeRest(function(...args:flight._internal._Any):Void {
         var display:Null<ElectronDisplay> = cast _Runtime.UNDEFINED;
         display = (cast flight._internal._StaticIndex.readArray(args, 1.0) : Null<ElectronDisplay>);
-        listener(({ final __callArgument1866:Dynamic = { kind: kind, screen: ((cast _Runtime.strictEquals(display, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast _HostElectron.emptyScreenInfo__electronScreen() : ScreenInfo) : Dynamic) : (cast (cast _HostElectron.fillScreenInfo__electronScreen((cast _HostElectron.emptyScreenInfo__electronScreen() : ScreenInfo), ({ final __callArgument1864:Dynamic = display; __callArgument1864; }), (cast _Runtime.strictEquals((cast display : { var id:Float; }).id, (cast (cast screen : ElectronScreen).getPrimaryDisplay() : { var id:Float; }).id) : Bool)) : ScreenInfo) : Dynamic)), changedMetrics: ((cast _Runtime.strictEquals(kind, 'ScreenMetricsChanged') : Bool) ? (cast { bounds: true, workArea: true, scaleFactor: true, orientation: true } : Dynamic) : (cast null : Dynamic)) }; __callArgument1866; }));
+        listener(({ final __callArgument615:Dynamic = { kind: kind, screen: ((cast _Runtime.strictEquals(display, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast _HostElectron.emptyScreenInfo__electronScreen() : ScreenInfo) : Dynamic) : (cast (cast _HostElectron.fillScreenInfo__electronScreen((cast _HostElectron.emptyScreenInfo__electronScreen() : ScreenInfo), ({ final __callArgument613:Dynamic = display; __callArgument613; }), (cast _Runtime.strictEquals((cast display : { var id:Float; }).id, (cast (cast screen : { var getPrimaryDisplay:Void->ElectronDisplay; }).getPrimaryDisplay() : { var id:Float; }).id) : Bool)) : ScreenInfo) : Dynamic)), changedMetrics: ((cast _Runtime.strictEquals(kind, 'ScreenMetricsChanged') : Bool) ? (cast { bounds: true, workArea: true, scaleFactor: true, orientation: true } : Dynamic) : (cast null : Dynamic)) }; __callArgument615; }));
       }, 0));
-      added = (cast makeHandler(({ final __callArgument1870:Dynamic = 'ScreenAdded'; __callArgument1870; })) : Array<flight._internal._Any>->Void);
-      removed = (cast makeHandler(({ final __callArgument1872:Dynamic = 'ScreenRemoved'; __callArgument1872; })) : Array<flight._internal._Any>->Void);
-      metrics = (cast makeHandler(({ final __callArgument1874:Dynamic = 'ScreenMetricsChanged'; __callArgument1874; })) : Array<flight._internal._Any>->Void);
-      (cast screen : ElectronScreen).on((cast 'display-added' : String), ({ final __callArgument1876:Dynamic = added; __callArgument1876; }));
-      (cast screen : ElectronScreen).on((cast 'display-removed' : String), ({ final __callArgument1877:Dynamic = removed; __callArgument1877; }));
-      (cast screen : ElectronScreen).on((cast 'display-metrics-changed' : String), ({ final __callArgument1878:Dynamic = metrics; __callArgument1878; }));
+      added = (cast makeHandler(({ final __callArgument619:Dynamic = 'ScreenAdded'; __callArgument619; })) : Array<flight._internal._Any>->Void);
+      removed = (cast makeHandler(({ final __callArgument621:Dynamic = 'ScreenRemoved'; __callArgument621; })) : Array<flight._internal._Any>->Void);
+      metrics = (cast makeHandler(({ final __callArgument623:Dynamic = 'ScreenMetricsChanged'; __callArgument623; })) : Array<flight._internal._Any>->Void);
+      (cast screen : { var on:String->(Array<flight._internal._Any>->Void)->Void; }).on((cast 'display-added' : String), ({ final __callArgument625:Dynamic = added; __callArgument625; }));
+      (cast screen : { var on:String->(Array<flight._internal._Any>->Void)->Void; }).on((cast 'display-removed' : String), ({ final __callArgument626:Dynamic = removed; __callArgument626; }));
+      (cast screen : { var on:String->(Array<flight._internal._Any>->Void)->Void; }).on((cast 'display-metrics-changed' : String), ({ final __callArgument627:Dynamic = metrics; __callArgument627; }));
       return cast function():Void {
-        (cast screen : ElectronScreen).removeListener((cast 'display-added' : String), ({ final __callArgument1879:Dynamic = added; __callArgument1879; }));
-        (cast screen : ElectronScreen).removeListener((cast 'display-removed' : String), ({ final __callArgument1880:Dynamic = removed; __callArgument1880; }));
-        (cast screen : ElectronScreen).removeListener((cast 'display-metrics-changed' : String), ({ final __callArgument1881:Dynamic = metrics; __callArgument1881; }));
+        (cast screen : { var removeListener:String->(Array<flight._internal._Any>->Void)->Void; }).removeListener((cast 'display-added' : String), ({ final __callArgument628:Dynamic = added; __callArgument628; }));
+        (cast screen : { var removeListener:String->(Array<flight._internal._Any>->Void)->Void; }).removeListener((cast 'display-removed' : String), ({ final __callArgument629:Dynamic = removed; __callArgument629; }));
+        (cast screen : { var removeListener:String->(Array<flight._internal._Any>->Void)->Void; }).removeListener((cast 'display-metrics-changed' : String), ({ final __callArgument630:Dynamic = metrics; __callArgument630; }));
       };
       return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL36C31__electronScreen); __callArgument1882; })) : EntityShapeL36C31__electronScreen);
-    return cast { change: change, query: query };
-    return cast null;
+    }));
+  }
+
+  public static function initializeScreenQueryBackend(out:EntityConstruction<ScreenQueryBackend>, screen:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var getCursorPosition:{ var x:Float; var y:Float; }->{ var x:Float; var y:Float; }; }).getCursorPosition = (cast function(target:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
+      flight._internal.DynamicObject.assign(target, (cast screen : { var getCursorScreenPoint:Void->{ var x:Float; var y:Float; }; }).getCursorScreenPoint());
+      return cast target;
+      return cast _Runtime.UNDEFINED;
+    }));
+    ((cast out : { var getPrimaryScreen:ScreenInfo->ScreenInfo; }).getPrimaryScreen = (cast function(target:ScreenInfo):ScreenInfo {
+      return cast (cast _HostElectron.fillScreenInfo__electronScreen(({ final __callArgument631:Dynamic = target; __callArgument631; }), (cast screen : { var getPrimaryDisplay:Void->ElectronDisplay; }).getPrimaryDisplay(), (cast true : Bool)) : ScreenInfo);
+      return cast _Runtime.UNDEFINED;
+    }));
+    ((cast out : { var getScreens:Array<ScreenInfo>->Array<ScreenInfo>; }).getScreens = (cast function(target:Array<ScreenInfo>):Array<ScreenInfo> {
+      var displays:Array<ElectronDisplay> = cast _Runtime.UNDEFINED;
+      var primaryId:Float = cast _Runtime.UNDEFINED;
+      displays = (cast screen : { var getAllDisplays:Void->Array<ElectronDisplay>; }).getAllDisplays();
+      primaryId = (cast (cast screen : { var getPrimaryDisplay:Void->ElectronDisplay; }).getPrimaryDisplay() : { var id:Float; }).id;
+      _Runtime.setLength(target, _Runtime.field(displays, 'length'));
+      _Runtime.forEachArray((cast displays : Array<ElectronDisplay>), function(display:ElectronDisplay, index:Float, __unused0:Array<ElectronDisplay>):Void {
+        ({ var __indexedObject633:Dynamic = target; var __indexedKey634:Dynamic = index; flight._internal._StaticIndex.writeArray(__indexedObject633, __indexedKey634, (flight._internal._StaticIndex.readArray(__indexedObject633, __indexedKey634) ?? (cast _HostElectron.emptyScreenInfo__electronScreen() : ScreenInfo))); });
+        (cast _HostElectron.fillScreenInfo__electronScreen(flight._internal._StaticIndex.readArray(target, index), ({ final __callArgument635:Dynamic = display; __callArgument635; }), (cast _Runtime.strictEquals(display.id, primaryId) : Bool)) : ScreenInfo);
+      }, _Runtime.UNDEFINED);
+      return cast target;
+      return cast _Runtime.UNDEFINED;
+    }));
   }
 
   public static function emptyScreenInfo__electronScreen():ScreenInfo {
-    return cast (cast createEntity(({ final __callArgument1920:Dynamic = (#if flight_struct_typedef { id: 0.0, x: 0.0, y: 0.0, width: 0.0, height: 0.0, workWidth: 0.0, workHeight: 0.0, scaleFactor: 1.0, isPrimary: false, rotation: -1.0, orientation: (cast 'Landscape' : ScreenOrientation), refreshRate: -1.0, colorDepth: -1.0, pixelDepth: -1.0, physicalWidth: -1.0, physicalHeight: -1.0, isHdr: false, colorSpace: (cast 'srgb' : ScreenColorSpace), maxLuminance: -1.0, depthPerComponent: -1.0, dpi: -1.0, label: '', internal: false, touchSupport: 'unknown', monochrome: false } #else ({ final __structInitField0:Dynamic = 0.0; final __structInitField1:Dynamic = 0.0; final __structInitField2:Dynamic = 0.0; final __structInitField3:Dynamic = 0.0; final __structInitField4:Dynamic = 0.0; final __structInitField5:Dynamic = 0.0; final __structInitField6:Dynamic = 0.0; final __structInitField7:Dynamic = 1.0; final __structInitField8:Dynamic = false; final __structInitField9:Dynamic = -1.0; final __structInitField10:Dynamic = (cast 'Landscape' : ScreenOrientation); final __structInitField11:Dynamic = -1.0; final __structInitField12:Dynamic = -1.0; final __structInitField13:Dynamic = -1.0; final __structInitField14:Dynamic = -1.0; final __structInitField15:Dynamic = -1.0; final __structInitField16:Dynamic = false; final __structInitField17:Dynamic = (cast 'srgb' : ScreenColorSpace); final __structInitField18:Dynamic = -1.0; final __structInitField19:Dynamic = -1.0; final __structInitField20:Dynamic = -1.0; final __structInitField21:Dynamic = ''; final __structInitField22:Dynamic = false; final __structInitField23:Dynamic = 'unknown'; final __structInitField24:Dynamic = false; ({ colorDepth: __structInitField12, colorSpace: __structInitField17, depthPerComponent: __structInitField19, dpi: __structInitField20, height: __structInitField4, id: __structInitField0, internal: __structInitField22, isHdr: __structInitField16, isPrimary: __structInitField8, label: __structInitField21, maxLuminance: __structInitField18, monochrome: __structInitField24, orientation: __structInitField10, physicalHeight: __structInitField15, physicalWidth: __structInitField14, pixelDepth: __structInitField13, refreshRate: __structInitField11, rotation: __structInitField9, scaleFactor: __structInitField7, touchSupport: __structInitField23, width: __structInitField3, workHeight: __structInitField6, workWidth: __structInitField5, x: __structInitField1, y: __structInitField2 } : ScreenInfo); }) #end); __callArgument1920; })) : ScreenInfo);
+    var out:EntityConstruction<ScreenInfo> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ colorDepth: cast _Runtime.UNDEFINED, colorSpace: cast _Runtime.UNDEFINED, depthPerComponent: cast _Runtime.UNDEFINED, dpi: cast _Runtime.UNDEFINED, height: cast _Runtime.UNDEFINED, id: cast _Runtime.UNDEFINED, internal: cast _Runtime.UNDEFINED, isHdr: cast _Runtime.UNDEFINED, isPrimary: cast _Runtime.UNDEFINED, label: cast _Runtime.UNDEFINED, maxLuminance: cast _Runtime.UNDEFINED, monochrome: cast _Runtime.UNDEFINED, orientation: cast _Runtime.UNDEFINED, physicalHeight: cast _Runtime.UNDEFINED, physicalWidth: cast _Runtime.UNDEFINED, pixelDepth: cast _Runtime.UNDEFINED, refreshRate: cast _Runtime.UNDEFINED, rotation: cast _Runtime.UNDEFINED, scaleFactor: cast _Runtime.UNDEFINED, touchSupport: cast _Runtime.UNDEFINED, width: cast _Runtime.UNDEFINED, workHeight: cast _Runtime.UNDEFINED, workWidth: cast _Runtime.UNDEFINED, x: cast _Runtime.UNDEFINED, y: cast _Runtime.UNDEFINED } : ScreenInfo); }) #end));
+    initializeEmptyScreenInfo(({ final __callArgument637:Dynamic = out; __callArgument637; }));
+    return cast out;
     return cast null;
   }
 
@@ -3059,7 +2591,7 @@ class _HostElectron {
     var colorDepth:Float = cast _Runtime.UNDEFINED;
     rotation = _Runtime.coalesce(display.rotation, function():Dynamic return cast -1.0);
     colorDepth = _Runtime.coalesce(display.colorDepth, function():Dynamic return cast -1.0);
-    flight._internal.DynamicObject.assign(out, { id: display.id, x: (cast display.bounds : { var x:Float; var y:Float; var width:Float; var height:Float; }).x, y: (cast display.bounds : { var x:Float; var y:Float; var width:Float; var height:Float; }).y, width: (cast display.bounds : { var x:Float; var y:Float; var width:Float; var height:Float; }).width, height: (cast display.bounds : { var x:Float; var y:Float; var width:Float; var height:Float; }).height, workWidth: (cast display.workArea : { var x:Float; var y:Float; var width:Float; var height:Float; }).width, workHeight: (cast display.workArea : { var x:Float; var y:Float; var width:Float; var height:Float; }).height, scaleFactor: display.scaleFactor, isPrimary: isPrimary, rotation: rotation, orientation: (cast _HostElectron.orientationFor__electronScreen(({ final __callArgument1922:Dynamic = display; __callArgument1922; }), (cast rotation : Float)) : ScreenOrientation), refreshRate: _Runtime.coalesce(display.displayFrequency, function():Dynamic return cast -1.0), colorDepth: colorDepth, pixelDepth: colorDepth, physicalWidth: HxMath.round(((cast display.bounds : { var x:Float; var y:Float; var width:Float; var height:Float; }).width * display.scaleFactor)), physicalHeight: HxMath.round(((cast display.bounds : { var x:Float; var y:Float; var width:Float; var height:Float; }).height * display.scaleFactor)), isHdr: false, colorSpace: (cast _HostElectron.normalizeColorSpace__electronScreen(display.colorSpace) : ScreenColorSpace), maxLuminance: -1.0, depthPerComponent: ((cast ((cast colorDepth : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((colorDepth / 3.0)) : Dynamic) : (cast -1.0 : Dynamic)), dpi: ((cast ((cast display.scaleFactor : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.round((display.scaleFactor * 96.0)) : Dynamic) : (cast -1.0 : Dynamic)), label: _Runtime.coalesce(display.label, function():Dynamic return cast ''), internal: _Runtime.coalesce(display.internal, function():Dynamic return cast false), touchSupport: _Runtime.coalesce(display.touchSupport, function():Dynamic return cast 'unknown'), monochrome: _Runtime.coalesce(display.monochrome, function():Dynamic return cast false) });
+    flight._internal.DynamicObject.assign(out, { id: display.id, x: (cast display.bounds : { var x:Float; var y:Float; var width:Float; var height:Float; }).x, y: (cast display.bounds : { var x:Float; var y:Float; var width:Float; var height:Float; }).y, width: (cast display.bounds : { var x:Float; var y:Float; var width:Float; var height:Float; }).width, height: (cast display.bounds : { var x:Float; var y:Float; var width:Float; var height:Float; }).height, workWidth: (cast display.workArea : { var x:Float; var y:Float; var width:Float; var height:Float; }).width, workHeight: (cast display.workArea : { var x:Float; var y:Float; var width:Float; var height:Float; }).height, scaleFactor: display.scaleFactor, isPrimary: isPrimary, rotation: rotation, orientation: (cast _HostElectron.orientationFor__electronScreen(({ final __callArgument639:Dynamic = display; __callArgument639; }), (cast rotation : Float)) : ScreenOrientation), refreshRate: _Runtime.coalesce(display.displayFrequency, function():Dynamic return cast -1.0), colorDepth: colorDepth, pixelDepth: colorDepth, physicalWidth: HxMath.round(((cast display.bounds : { var x:Float; var y:Float; var width:Float; var height:Float; }).width * display.scaleFactor)), physicalHeight: HxMath.round(((cast display.bounds : { var x:Float; var y:Float; var width:Float; var height:Float; }).height * display.scaleFactor)), isHdr: false, colorSpace: (cast _HostElectron.normalizeColorSpace__electronScreen(display.colorSpace) : ScreenColorSpace), maxLuminance: -1.0, depthPerComponent: ((cast ((cast colorDepth : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor((colorDepth / 3.0)) : Dynamic) : (cast -1.0 : Dynamic)), dpi: ((cast ((cast display.scaleFactor : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.round((display.scaleFactor * 96.0)) : Dynamic) : (cast -1.0 : Dynamic)), label: _Runtime.coalesce(display.label, function():Dynamic return cast ''), internal: _Runtime.coalesce(display.internal, function():Dynamic return cast false), touchSupport: _Runtime.coalesce(display.touchSupport, function():Dynamic return cast 'unknown'), monochrome: _Runtime.coalesce(display.monochrome, function():Dynamic return cast false) });
     return cast out;
     return cast null;
   }
@@ -3078,24 +2610,19 @@ class _HostElectron {
     return cast null;
   }
 
-  public static function makeElectronShellCapabilities(electron:ElectronApi, platform:PlatformName):flight._internal._Intersection2<HostShellCapabilities, flight._internal._Required<{ @:optional var beep:Null<ShellBeepBackend>; @:optional var external:Null<ShellExternalBackend>; @:optional var pathOpen:Null<ShellPathOpenBackend>; @:optional var pathReveal:Null<ShellPathRevealBackend>; @:optional var trash:Null<ShellTrashBackend>; }>> {
-    var shell:ElectronShell = cast _Runtime.UNDEFINED;
-    var beep:ShellBeepBackend = cast _Runtime.UNDEFINED;
-    var external:ShellExternalBackend = cast _Runtime.UNDEFINED;
-    var pathOpen:ShellPathOpenBackend = cast _Runtime.UNDEFINED;
-    var pathReveal:ShellPathRevealBackend = cast _Runtime.UNDEFINED;
-    var trash:ShellTrashBackend = cast _Runtime.UNDEFINED;
-    var shared:{ var beep:ShellBeepBackend; var external:ShellExternalBackend; var pathOpen:ShellPathOpenBackend; var pathReveal:ShellPathRevealBackend; var trash:ShellTrashBackend; } = cast _Runtime.UNDEFINED;
-    shell = electron.shell;
-    beep = (cast createEntity(({ final __callArgument1924:Dynamic = ({ beep: (cast function():Void {
-      (cast shell : ElectronShell).beep();
-    } : Dynamic) } : ShellBeepBackend); __callArgument1924; })) : ShellBeepBackend);
-    external = (cast createEntity(({ final __callArgument1928:Dynamic = ({ open: (cast function(url:String):flight._internal._Promise<ShellExternalOutcome> {
+  public static function initializeShellBeepBackend(out:EntityConstruction<ShellBeepBackend>, shell:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var beep:Void->Void; }).beep = (cast function():Void {
+      (cast shell : { var beep:Void->Void; }).beep();
+    }));
+  }
+
+  public static function initializeShellExternalBackend(out:EntityConstruction<ShellExternalBackend>, shell:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var open:String->flight._internal._Promise<ShellExternalOutcome>; }).open = (cast function(url:String):flight._internal._Promise<ShellExternalOutcome> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.flatMap((cast shell : ElectronShell).openExternal((cast url : String)), function(__awaitValue1927:Dynamic):Dynamic {
-              __awaitValue1927;
+            return flight._internal._Async.flatMap((cast shell : { var openExternal:String->flight._internal._Promise<flight._internal._Nothing>; }).openExternal((cast url : String)), function(__awaitValue641:Dynamic):Dynamic {
+              __awaitValue641;
               return flight._internal._Async.flowReturn({ reason: 'ok' });
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -3108,14 +2635,17 @@ class _HostElectron {
           });
         })
       );
-    } : Dynamic) } : ShellExternalBackend); __callArgument1928; })) : ShellExternalBackend);
-    pathOpen = (cast createEntity(({ final __callArgument1934:Dynamic = ({ open: (cast function(path:String):flight._internal._Promise<ShellPathOpenOutcome> {
+    }));
+  }
+
+  public static function initializeShellPathOpenBackend(out:EntityConstruction<ShellPathOpenBackend>, shell:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var open:String->flight._internal._Promise<ShellPathOpenOutcome>; }).open = (cast function(path:String):flight._internal._Promise<ShellPathOpenOutcome> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
             var message:String = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap((cast shell : ElectronShell).openPath((cast path : String)), function(__awaitValue1933:Dynamic):Dynamic {
-              message = __awaitValue1933;
+            return flight._internal._Async.flatMap((cast shell : { var openPath:String->flight._internal._Promise<String>; }).openPath((cast path : String)), function(__awaitValue642:Dynamic):Dynamic {
+              message = __awaitValue642;
               return flight._internal._Async.flowReturn(((cast _Runtime.strictEquals(message, '') : Bool) ? (cast { reason: 'ok' } : Dynamic) : (cast { message: message, reason: 'operation-failed' } : Dynamic)));
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -3128,24 +2658,58 @@ class _HostElectron {
           });
         })
       );
-    } : Dynamic) } : ShellPathOpenBackend); __callArgument1934; })) : ShellPathOpenBackend);
-    pathReveal = (cast createEntity(({ final __callArgument1938:Dynamic = ({ reveal: (cast function(path:String):flight._internal._Promise<ShellPathRevealOutcome> {
+    }));
+  }
+
+  public static function initializeShellPathRevealBackend(out:EntityConstruction<ShellPathRevealBackend>, shell:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var reveal:String->flight._internal._Promise<ShellPathRevealOutcome>; }).reveal = (cast function(path:String):flight._internal._Promise<ShellPathRevealOutcome> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         try {
-          (cast shell : ElectronShell).showItemInFolder((cast path : String));
+          (cast shell : { var showItemInFolder:String->Void; }).showItemInFolder((cast path : String));
           return cast { reason: 'ok' };
         } catch (__error:Dynamic) {
           return cast { reason: 'operation-failed' };
         }
         return cast null;
       }));
-    } : Dynamic) } : ShellPathRevealBackend); __callArgument1938; })) : ShellPathRevealBackend);
-    trash = (cast createEntity(({ final __callArgument1942:Dynamic = ({ moveToTrash: (cast function(path:String):flight._internal._Promise<ShellTrashOutcome> {
+    }));
+  }
+
+  public static function initializeShellShortcutLinkBackend(out:EntityConstruction<ShellShortcutLinkBackend>, shell:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var read:String->flight._internal._Promise<ShellShortcutLinkReadOutcome>; }).read = (cast function(shortcutPath:String):flight._internal._Promise<ShellShortcutLinkReadOutcome> {
+      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+        try {
+          var details:ElectronShortcutDetails = (cast shell : { var readShortcutLink:String->ElectronShortcutDetails; }).readShortcutLink((cast shortcutPath : String));
+          var link:ShellShortcutLink = cast _Runtime.UNDEFINED;
+          link = (cast { target: (cast details : ElectronShortcutDetails).target, appUserModelId: (cast details : ElectronShortcutDetails).appUserModelId, args: (cast details : ElectronShortcutDetails).args, description: (cast details : ElectronShortcutDetails).description, icon: (cast details : ElectronShortcutDetails).icon, iconIndex: (cast details : ElectronShortcutDetails).iconIndex, workingDirectory: (cast details : ElectronShortcutDetails).cwd });
+          return cast { link: link, reason: 'ok' };
+        } catch (error:Dynamic) {
+          return cast { message: (cast _HostElectron.errorMessage__electronShell((cast error : flight._internal._Any)) : String), reason: 'operation-failed' };
+        }
+        return cast null;
+      }));
+    }));
+    ((cast out : { var write:String->ShellShortcutLink->ShellShortcutWriteOperation->flight._internal._Promise<ShellShortcutLinkWriteOutcome>; }).write = (cast function(shortcutPath:String, link:ShellShortcutLink, operation:ShellShortcutWriteOperation):flight._internal._Promise<ShellShortcutLinkWriteOutcome> {
+      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+        try {
+          var details:ElectronShortcutDetails = cast _Runtime.UNDEFINED;
+          details = (cast { target: link.target, appUserModelId: link.appUserModelId, args: link.args, description: link.description, icon: link.icon, iconIndex: link.iconIndex, cwd: link.workingDirectory });
+          return cast { reason: ((cast (cast shell : { var writeShortcutLink:String->String->ElectronShortcutDetails->Bool; }).writeShortcutLink((cast shortcutPath : String), (cast operation : String), ({ final __callArgument643:Dynamic = details; __callArgument643; })) : Bool) ? (cast 'ok' : Dynamic) : (cast 'operation-failed' : Dynamic)) };
+        } catch (__error:Dynamic) {
+          return cast { reason: 'operation-failed' };
+        }
+        return cast null;
+      }));
+    }));
+  }
+
+  public static function initializeShellTrashBackend(out:EntityConstruction<ShellTrashBackend>, shell:flight._internal._IndexedAccess<ElectronApi, String>):Void {
+    ((cast out : { var moveToTrash:String->flight._internal._Promise<ShellTrashOutcome>; }).moveToTrash = (cast function(path:String):flight._internal._Promise<ShellTrashOutcome> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.flatMap((cast shell : ElectronShell).trashItem((cast path : String)), function(__awaitValue1941:Dynamic):Dynamic {
-              __awaitValue1941;
+            return flight._internal._Async.flatMap((cast shell : { var trashItem:String->flight._internal._Promise<flight._internal._Nothing>; }).trashItem((cast path : String)), function(__awaitValue644:Dynamic):Dynamic {
+              __awaitValue644;
               return flight._internal._Async.flowReturn({ reason: 'ok' });
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -3158,40 +2722,59 @@ class _HostElectron {
           });
         })
       );
-    } : Dynamic) } : ShellTrashBackend); __callArgument1942; })) : ShellTrashBackend);
+    }));
+  }
+
+  public static function makeElectronShellCapabilities(electron:ElectronApi, platform:PlatformName):flight._internal._Intersection2<HostShellCapabilities, flight._internal._Required<{ @:optional var beep:Null<ShellBeepBackend>; @:optional var external:Null<ShellExternalBackend>; @:optional var pathOpen:Null<ShellPathOpenBackend>; @:optional var pathReveal:Null<ShellPathRevealBackend>; @:optional var trash:Null<ShellTrashBackend>; }>> {
+    var shell:ElectronShell = cast _Runtime.UNDEFINED;
+    var beep:EntityConstruction<ShellBeepBackend> = cast _Runtime.UNDEFINED;
+    var external:ShellExternalBackend = cast _Runtime.UNDEFINED;
+    var pathOpen:ShellPathOpenBackend = cast _Runtime.UNDEFINED;
+    var pathReveal:ShellPathRevealBackend = cast _Runtime.UNDEFINED;
+    var trash:ShellTrashBackend = cast _Runtime.UNDEFINED;
+    var shared:{ var beep:EntityConstruction<ShellBeepBackend>; var external:ShellExternalBackend; var pathOpen:ShellPathOpenBackend; var pathReveal:ShellPathRevealBackend; var trash:ShellTrashBackend; } = cast _Runtime.UNDEFINED;
+    shell = electron.shell;
+    beep = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ beep: cast _Runtime.UNDEFINED } : ShellBeepBackend); }) #end));
+    initializeShellBeepBackend(({ final __callArgument645:Dynamic = beep; __callArgument645; }), ({ final __callArgument646:Dynamic = shell; __callArgument646; }));
+    external = _Runtime.callValue(function():ShellExternalBackend {
+      var out:EntityConstruction<ShellExternalBackend> = cast _Runtime.UNDEFINED;
+      out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ open: cast _Runtime.UNDEFINED } : ShellExternalBackend); }) #end));
+      initializeShellExternalBackend(({ final __callArgument649:Dynamic = out; __callArgument649; }), ({ final __callArgument650:Dynamic = shell; __callArgument650; }));
+      return cast out;
+      return cast _Runtime.UNDEFINED;
+    }, cast ([] : Array<Dynamic>));
+    pathOpen = _Runtime.callValue(function():ShellPathOpenBackend {
+      var out:EntityConstruction<ShellPathOpenBackend> = cast _Runtime.UNDEFINED;
+      out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ open: cast _Runtime.UNDEFINED } : ShellPathOpenBackend); }) #end));
+      initializeShellPathOpenBackend(({ final __callArgument653:Dynamic = out; __callArgument653; }), ({ final __callArgument654:Dynamic = shell; __callArgument654; }));
+      return cast out;
+      return cast _Runtime.UNDEFINED;
+    }, cast ([] : Array<Dynamic>));
+    pathReveal = _Runtime.callValue(function():ShellPathRevealBackend {
+      var out:EntityConstruction<ShellPathRevealBackend> = cast _Runtime.UNDEFINED;
+      out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ reveal: cast _Runtime.UNDEFINED } : ShellPathRevealBackend); }) #end));
+      initializeShellPathRevealBackend(({ final __callArgument657:Dynamic = out; __callArgument657; }), ({ final __callArgument658:Dynamic = shell; __callArgument658; }));
+      return cast out;
+      return cast _Runtime.UNDEFINED;
+    }, cast ([] : Array<Dynamic>));
+    trash = _Runtime.callValue(function():ShellTrashBackend {
+      var out:EntityConstruction<ShellTrashBackend> = cast _Runtime.UNDEFINED;
+      out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ moveToTrash: cast _Runtime.UNDEFINED } : ShellTrashBackend); }) #end));
+      initializeShellTrashBackend(({ final __callArgument661:Dynamic = out; __callArgument661; }), ({ final __callArgument662:Dynamic = shell; __callArgument662; }));
+      return cast out;
+      return cast _Runtime.UNDEFINED;
+    }, cast ([] : Array<Dynamic>));
     shared = (cast { beep: beep, external: external, pathOpen: pathOpen, pathReveal: pathReveal, trash: trash });
     if ((cast !_Runtime.strictEquals(platform, 'windows') : Bool)) { return cast shared; }
-    return cast _Runtime.mergeObjects([shared, { shortcutLink: (cast _HostElectron.createElectronShellShortcutLinkBackend__electronShell(({ final __callArgument1946:Dynamic = electron; __callArgument1946; })) : ShellShortcutLinkBackend) }]);
+    return cast _Runtime.mergeObjects([shared, { shortcutLink: (cast _HostElectron.createElectronShellShortcutLinkBackend__electronShell(({ final __callArgument665:Dynamic = electron; __callArgument665; })) : ShellShortcutLinkBackend) }]);
     return cast null;
   }
 
   public static function createElectronShellShortcutLinkBackend__electronShell(electron:ElectronApi):ShellShortcutLinkBackend {
-    var shell:ElectronShell = cast _Runtime.UNDEFINED;
-    shell = electron.shell;
-    return cast (cast createEntity((cast ({ read: (cast function(shortcutPath:String):flight._internal._Promise<ShellShortcutLinkReadOutcome> {
-      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        try {
-          var details:ElectronShortcutDetails = (cast shell : ElectronShell).readShortcutLink((cast shortcutPath : String));
-          var link:ShellShortcutLink = cast _Runtime.UNDEFINED;
-          link = (cast { target: (cast details : ElectronShortcutDetails).target, appUserModelId: (cast details : ElectronShortcutDetails).appUserModelId, args: (cast details : ElectronShortcutDetails).args, description: (cast details : ElectronShortcutDetails).description, icon: (cast details : ElectronShortcutDetails).icon, iconIndex: (cast details : ElectronShortcutDetails).iconIndex, workingDirectory: (cast details : ElectronShortcutDetails).cwd });
-          return cast { link: link, reason: 'ok' };
-        } catch (error:Dynamic) {
-          return cast { message: (cast _HostElectron.errorMessage__electronShell((cast error : flight._internal._Any)) : String), reason: 'operation-failed' };
-        }
-        return cast null;
-      }));
-    } : Dynamic), write: (cast function(shortcutPath:String, link:ShellShortcutLink, operation:ShellShortcutWriteOperation):flight._internal._Promise<ShellShortcutLinkWriteOutcome> {
-      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        try {
-          var details:ElectronShortcutDetails = cast _Runtime.UNDEFINED;
-          details = (cast { target: link.target, appUserModelId: link.appUserModelId, args: link.args, description: link.description, icon: link.icon, iconIndex: link.iconIndex, cwd: link.workingDirectory });
-          return cast { reason: ((cast (cast shell : ElectronShell).writeShortcutLink((cast shortcutPath : String), (cast operation : String), ({ final __callArgument1949:Dynamic = details; __callArgument1949; })) : Bool) ? (cast 'ok' : Dynamic) : (cast 'operation-failed' : Dynamic)) };
-        } catch (__error:Dynamic) {
-          return cast { reason: 'operation-failed' };
-        }
-        return cast null;
-      }));
-    } : Dynamic) } : ShellShortcutLinkBackend) : Dynamic)) : ShellShortcutLinkBackend);
+    var out:EntityConstruction<ShellShortcutLinkBackend> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ read: cast _Runtime.UNDEFINED, write: cast _Runtime.UNDEFINED } : ShellShortcutLinkBackend); }) #end));
+    initializeShellShortcutLinkBackend(({ final __callArgument667:Dynamic = out; __callArgument667; }), electron.shell);
+    return cast out;
     return cast null;
   }
 
@@ -3201,12 +2784,9 @@ class _HostElectron {
   }
 
   public static function createElectronShortcutQueryBackend(electron:ElectronApi):ShortcutQueryBackend {
-    var provider:ShortcutQueryBackend = cast _Runtime.UNDEFINED;
-    provider = (cast createEntity(({ final __callArgument1952:Dynamic = ({ isRegistered: (cast function(accelerator:Accelerator):flight._internal._Promise<Bool> {
-      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        return flight._internal._Async.resolve((cast electron.globalShortcut : ElectronGlobalShortcut).isRegistered((cast accelerator : String)));
-      }));
-    } : Dynamic) } : ShortcutQueryBackend); __callArgument1952; })) : ShortcutQueryBackend);
+    var provider:EntityConstruction<ShortcutQueryBackend> = cast _Runtime.UNDEFINED;
+    provider = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ isRegistered: cast _Runtime.UNDEFINED } : ShortcutQueryBackend); }) #end));
+    initializeElectronShortcutQueryBackend(({ final __callArgument669:Dynamic = provider; __callArgument669; }), ({ final __callArgument670:Dynamic = electron; __callArgument670; }));
     return cast provider;
     return cast null;
   }
@@ -3229,94 +2809,118 @@ class _HostElectron {
     });
     globalShortcut = electron.globalShortcut;
     registrations = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
-    provider = (cast createEntity((cast ({ destroy: (cast function():flight._internal._Promise<flight._internal._Nothing> {
-      return cast flight._internal._Async.finishFlow(
-        flight._internal._Async.protect(function():Dynamic {
-          var firstError:flight._internal._Any = cast _Runtime.UNDEFINED;
-          var accelerators:flight._internal._Set<String> = cast _Runtime.UNDEFINED;
-          accelerators = _Runtime.construct(flight._internal._HostValueLut.get('Set'), [((cast registrations : flight._internal._Map<ShortcutTriggerSubscription, String>).values())]);
-          var __flowIterator1964:Array<Dynamic> = _Runtime.iterable(accelerators);
-          var __flowIndex1965:Int = 0;
-          return flight._internal._Async.continueFlow(flight._internal._Async.repeatFlow(function():Dynamic {
-            if (__flowIndex1965 >= __flowIterator1964.length) return flight._internal._Async.flowBreak();
-            var accelerator:Dynamic = __flowIterator1964[__flowIndex1965++];
-            return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-              return flight._internal._Async.flatMap((cast releaseAccelerator((cast accelerator : String)) : flight._internal._Promise<flight._internal._Nothing>), function(__awaitValue1966:Dynamic):Dynamic {
-                __awaitValue1966;
-                return flight._internal._Async.flowNormal();
-              });
-            }), function(__caughtError:Dynamic):Dynamic {
-              var error:Dynamic = __caughtError;
-              return flight._internal._Async.protect(function():Dynamic {
-                var __flowBranch1967:Dynamic;
-                if ((cast _Runtime.strictEquals(firstError, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-                  __flowBranch1967 = flight._internal._Async.protect(function():Dynamic {
-                    (firstError = cast (error : Dynamic));
-                    return flight._internal._Async.flowNormal();
-                  });
-                } else {
-                  __flowBranch1967 = flight._internal._Async.flowNormal();
-                }
-                return flight._internal._Async.continueFlow(__flowBranch1967, function():Dynamic {
+    provider = _Runtime.callValue(function():ShortcutTriggerBackend {
+      var out:EntityConstruction<ShortcutTriggerBackend> = cast _Runtime.UNDEFINED;
+      out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ destroy: cast _Runtime.UNDEFINED, subscribe: cast _Runtime.UNDEFINED, unsubscribe: cast _Runtime.UNDEFINED } : ShortcutTriggerBackend); }) #end));
+      ((cast out : { var destroy:Void->flight._internal._Promise<flight._internal._Nothing>; }).destroy = (cast function():flight._internal._Promise<flight._internal._Nothing> {
+        return cast flight._internal._Async.finishFlow(
+          flight._internal._Async.protect(function():Dynamic {
+            var firstError:flight._internal._Any = cast _Runtime.UNDEFINED;
+            var accelerators:flight._internal._Set<String> = cast _Runtime.UNDEFINED;
+            accelerators = _Runtime.construct(flight._internal._HostValueLut.get('Set'), [((cast registrations : flight._internal._Map<ShortcutTriggerSubscription, String>).values())]);
+            var __flowIterator675:Array<Dynamic> = _Runtime.iterable(accelerators);
+            var __flowIndex676:Int = 0;
+            return flight._internal._Async.continueFlow(flight._internal._Async.repeatFlow(function():Dynamic {
+              if (__flowIndex676 >= __flowIterator675.length) return flight._internal._Async.flowBreak();
+              var accelerator:Dynamic = __flowIterator675[__flowIndex676++];
+              return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
+                return flight._internal._Async.flatMap((cast releaseAccelerator((cast accelerator : String)) : flight._internal._Promise<flight._internal._Nothing>), function(__awaitValue677:Dynamic):Dynamic {
+                  __awaitValue677;
                   return flight._internal._Async.flowNormal();
                 });
+              }), function(__caughtError:Dynamic):Dynamic {
+                var error:Dynamic = __caughtError;
+                return flight._internal._Async.protect(function():Dynamic {
+                  var __flowBranch678:Dynamic;
+                  if ((cast _Runtime.strictEquals(firstError, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+                    __flowBranch678 = flight._internal._Async.protect(function():Dynamic {
+                      (firstError = cast (error : Dynamic));
+                      return flight._internal._Async.flowNormal();
+                    });
+                  } else {
+                    __flowBranch678 = flight._internal._Async.flowNormal();
+                  }
+                  return flight._internal._Async.continueFlow(__flowBranch678, function():Dynamic {
+                    return flight._internal._Async.flowNormal();
+                  });
+                });
+              }), function():Dynamic {
+                return flight._internal._Async.flowNormal();
               });
             }), function():Dynamic {
-              return flight._internal._Async.flowNormal();
+              var __flowBranch679:Dynamic;
+              if ((cast !_Runtime.strictEquals(firstError, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+                __flowBranch679 = flight._internal._Async.protect(function():Dynamic {
+                  return flight._internal._Async.reject(firstError);
+                });
+              } else {
+                __flowBranch679 = flight._internal._Async.flowNormal();
+              }
+              return flight._internal._Async.continueFlow(__flowBranch679, function():Dynamic {
+                return flight._internal._Async.flowNormal();
+              });
             });
-          }), function():Dynamic {
-            var __flowBranch1968:Dynamic;
-            if ((cast !_Runtime.strictEquals(firstError, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-              __flowBranch1968 = flight._internal._Async.protect(function():Dynamic {
-                return flight._internal._Async.reject(firstError);
+          })
+        );
+      }));
+      ((cast out : { var subscribe:String->(Void->Void)->flight._internal._Promise<ShortcutTriggerSubscribeOutcome>; }).subscribe = (cast function(accelerator:Accelerator, trigger:Void->Void):flight._internal._Promise<ShortcutTriggerSubscribeOutcome> {
+        return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+          var subscription:Entity = cast _Runtime.UNDEFINED;
+          var registered:Bool = cast _Runtime.UNDEFINED;
+          subscription = (cast ({  } : EntityShapeL46C41__electronShortcut));
+          registered = (cast globalShortcut : ElectronGlobalShortcut).register((cast accelerator : String), ({ final __callArgument680:Dynamic = trigger; __callArgument680; }));
+          if ((cast !(cast registered : Bool) : Bool)) { return cast { reason: 'refused' }; }
+          ((cast registrations : flight._internal._Map<ShortcutTriggerSubscription, String>).set((cast subscription), (cast accelerator)));
+          return cast { reason: 'subscribed', subscription: subscription };
+          return cast null;
+        }));
+      }));
+      ((cast out : { var unsubscribe:ShortcutTriggerSubscription->flight._internal._Promise<ShortcutTriggerUnsubscribeOutcome>; }).unsubscribe = (cast function(subscription:ShortcutTriggerSubscription):flight._internal._Promise<ShortcutTriggerUnsubscribeOutcome> {
+        return cast flight._internal._Async.finishFlow(
+          flight._internal._Async.protect(function():Dynamic {
+            var accelerator:Null<String> = cast _Runtime.UNDEFINED;
+            accelerator = ((cast registrations : flight._internal._Map<ShortcutTriggerSubscription, String>).get((cast subscription)));
+            var __flowBranch681:Dynamic;
+            if ((cast _Runtime.strictEquals(accelerator, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+              __flowBranch681 = flight._internal._Async.protect(function():Dynamic {
+                return flight._internal._Async.flowReturn({ reason: 'unknown-subscription' });
               });
             } else {
-              __flowBranch1968 = flight._internal._Async.flowNormal();
+              __flowBranch681 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch1968, function():Dynamic {
-              return flight._internal._Async.flowNormal();
+            return flight._internal._Async.continueFlow(__flowBranch681, function():Dynamic {
+              return flight._internal._Async.flatMap((cast releaseAccelerator((cast accelerator : String)) : flight._internal._Promise<flight._internal._Nothing>), function(__awaitValue682:Dynamic):Dynamic {
+                __awaitValue682;
+                return flight._internal._Async.flowReturn({ reason: 'unsubscribed' });
+              });
             });
-          });
-        })
-      );
-    } : Dynamic), subscribe: (cast function(accelerator:Accelerator, trigger:Void->Void):flight._internal._Promise<ShortcutTriggerSubscribeOutcome> {
-      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        var subscription:Entity = cast _Runtime.UNDEFINED;
-        var registered:Bool = cast _Runtime.UNDEFINED;
-        subscription = (cast createEntity(({  } : EntityShapeL46C28__electronShortcut)) : EntityShapeL46C28__electronShortcut);
-        registered = (cast globalShortcut : ElectronGlobalShortcut).register((cast accelerator : String), ({ final __callArgument1969:Dynamic = trigger; __callArgument1969; }));
-        if ((cast !(cast registered : Bool) : Bool)) { return cast { reason: 'refused' }; }
-        ((cast registrations : flight._internal._Map<ShortcutTriggerSubscription, String>).set((cast subscription), (cast accelerator)));
-        return cast { reason: 'subscribed', subscription: subscription };
-        return cast null;
+          })
+        );
       }));
-    } : Dynamic), unsubscribe: (cast function(subscription:ShortcutTriggerSubscription):flight._internal._Promise<ShortcutTriggerUnsubscribeOutcome> {
-      return cast flight._internal._Async.finishFlow(
-        flight._internal._Async.protect(function():Dynamic {
-          var accelerator:Null<String> = cast _Runtime.UNDEFINED;
-          accelerator = ((cast registrations : flight._internal._Map<ShortcutTriggerSubscription, String>).get((cast subscription)));
-          var __flowBranch1970:Dynamic;
-          if ((cast _Runtime.strictEquals(accelerator, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-            __flowBranch1970 = flight._internal._Async.protect(function():Dynamic {
-              return flight._internal._Async.flowReturn({ reason: 'unknown-subscription' });
-            });
-          } else {
-            __flowBranch1970 = flight._internal._Async.flowNormal();
-          }
-          return flight._internal._Async.continueFlow(__flowBranch1970, function():Dynamic {
-            return flight._internal._Async.flatMap((cast releaseAccelerator((cast accelerator : String)) : flight._internal._Promise<flight._internal._Nothing>), function(__awaitValue1971:Dynamic):Dynamic {
-              __awaitValue1971;
-              return flight._internal._Async.flowReturn({ reason: 'unsubscribed' });
-            });
-          });
-        })
-      );
-    } : Dynamic) } : ShortcutTriggerBackend) : Dynamic)) : ShortcutTriggerBackend);
+      return cast out;
+      return cast _Runtime.UNDEFINED;
+    }, cast ([] : Array<Dynamic>));
     return cast provider;
     return cast null;
   }
 
-  public static function createElectronStorageBackend(electron:ElectronApi, fileName:String = 'storage.json'):{ >StorageBackend, >Entity, } {
+  public static function initializeElectronShortcutQueryBackend(provider:EntityConstruction<ShortcutQueryBackend>, electron:ElectronApi):Void {
+    ((cast provider : { var isRegistered:String->flight._internal._Promise<Bool>; }).isRegistered = (cast function(accelerator:Accelerator):flight._internal._Promise<Bool> {
+      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+        return flight._internal._Async.resolve((cast electron.globalShortcut : ElectronGlobalShortcut).isRegistered((cast accelerator : String)));
+      }));
+    }));
+  }
+
+  public static function createElectronStorageBackend(electron:ElectronApi, fileName:String = 'storage.json'):{ >Entity, @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var clear:Void->StorageClearResult; var getItem:String->StorageGetItemResult; var keys:Void->StorageKeysResult; var removeItem:String->StorageRemoveItemResult; var setItem:String->String->StorageSetItemResult; } {
+    var out:EntityConstruction<StorageBackend> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ clear: cast _Runtime.UNDEFINED, getItem: cast _Runtime.UNDEFINED, keys: cast _Runtime.UNDEFINED, removeItem: cast _Runtime.UNDEFINED, setItem: cast _Runtime.UNDEFINED } : StorageBackend); }) #end));
+    initializeElectronStorageBackend(({ final __callArgument683:Dynamic = out; __callArgument683; }), ({ final __callArgument684:Dynamic = electron; __callArgument684; }), (cast fileName : String));
+    return cast out;
+    return cast null;
+  }
+
+  public static function initializeElectronStorageBackend(out:EntityConstruction<StorageBackend>, electron:ElectronApi, fileName:String = 'storage.json'):Void {
     var fs:ElectronFs = cast _Runtime.UNDEFINED;
     var cache:Null<StorageRecord__electronStorage> = cast _Runtime.UNDEFINED;
     var temporaryId:Float = cast _Runtime.UNDEFINED;
@@ -3366,7 +2970,7 @@ class _HostElectron {
       return cast _Runtime.UNDEFINED;
     });
     storagePath = (cast function():String return '' + Std.string((cast electron.app : ElectronApp).getPath((cast 'userData' : String))) + '/' + Std.string(fileName) + '');
-    return cast (cast (cast createEntity : Null<{ var clear:Void->{ var reason:String; }; var getItem:String->flight._internal._Union2<{ var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }, { var reason:String; var value:Null<String>; }>; var keys:Void->flight._internal._Union2<{ var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }, { var reason:String; var value:Array<String>; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageGetItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageGetItemFailureReason; }>; }>->{ >Entity, var clear:Void->{ var reason:String; }; var getItem:String->flight._internal._Union2<{ var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }, { var reason:String; var value:Null<String>; }>; var keys:Void->flight._internal._Union2<{ var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }, { var reason:String; var value:Array<String>; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageGetItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageGetItemFailureReason; }>; })(({ final __callArgument1988:Dynamic = ({ clear: (cast function():StorageClearResult {
+    ((cast out : { var clear:Void->StorageClearResult; }).clear = (cast function():StorageClearResult {
       var candidate:StorageRecord__electronStorage = cast _Runtime.UNDEFINED;
       var result:{ var reason:String; } = cast _Runtime.UNDEFINED;
       candidate = (cast {  });
@@ -3374,19 +2978,22 @@ class _HostElectron {
       if ((cast _Runtime.strictEquals((cast result : { var reason:String; }).reason, 'ok') : Bool)) { (cache = cast (candidate : Dynamic)); }
       return cast result;
       return cast _Runtime.UNDEFINED;
-    } : Dynamic), getItem: (cast function(key:String):StorageGetItemResult {
+    }));
+    ((cast out : { var getItem:String->StorageGetItemResult; }).getItem = (cast function(key:String):StorageGetItemResult {
       var loaded:StorageRecordResult__electronStorage = cast _Runtime.UNDEFINED;
       loaded = (cast load() : StorageRecordResult__electronStorage);
       if ((cast !_Runtime.strictEquals((cast loaded : { var reason:String; }).reason, 'ok') : Bool)) { return cast loaded; }
       return cast { reason: 'ok', value: ((cast _Runtime.callProperty(_Runtime.field(flight._internal.DynamicObject.field('prototype'), 'hasOwnProperty'), 'call', cast ([(cast loaded : { var reason:String; var value:StorageRecord__electronStorage; }).value, key] : Array<Dynamic>)) : Bool) ? (cast _Runtime.getIndex((cast loaded : { var reason:String; var value:StorageRecord__electronStorage; }).value, key) : Dynamic) : (cast null : Dynamic)) };
       return cast _Runtime.UNDEFINED;
-    } : Dynamic), keys: (cast function():StorageKeysResult {
+    }));
+    ((cast out : { var keys:Void->StorageKeysResult; }).keys = (cast function():StorageKeysResult {
       var loaded:StorageRecordResult__electronStorage = cast _Runtime.UNDEFINED;
       loaded = (cast load() : StorageRecordResult__electronStorage);
       if ((cast !_Runtime.strictEquals((cast loaded : { var reason:String; }).reason, 'ok') : Bool)) { return cast loaded; }
       return cast { reason: 'ok', value: flight._internal.DynamicObject.keys((cast loaded : { var reason:String; var value:StorageRecord__electronStorage; }).value) };
       return cast _Runtime.UNDEFINED;
-    } : Dynamic), removeItem: (cast function(key:String):StorageRemoveItemResult {
+    }));
+    ((cast out : { var removeItem:String->StorageRemoveItemResult; }).removeItem = (cast function(key:String):StorageRemoveItemResult {
       var loaded:StorageRecordResult__electronStorage = cast _Runtime.UNDEFINED;
       var candidate:{  } = cast _Runtime.UNDEFINED;
       var result:{ var reason:String; } = cast _Runtime.UNDEFINED;
@@ -3399,7 +3006,8 @@ class _HostElectron {
       if ((cast _Runtime.strictEquals((cast result : { var reason:String; }).reason, 'ok') : Bool)) { (cache = cast (candidate : Dynamic)); }
       return cast result;
       return cast _Runtime.UNDEFINED;
-    } : Dynamic), setItem: (cast function(key:String, value:String):StorageSetItemResult {
+    }));
+    ((cast out : { var setItem:String->String->StorageSetItemResult; }).setItem = (cast function(key:String, value:String):StorageSetItemResult {
       var loaded:StorageRecordResult__electronStorage = cast _Runtime.UNDEFINED;
       var candidate:{  } = cast _Runtime.UNDEFINED;
       var result:{ var reason:String; } = cast _Runtime.UNDEFINED;
@@ -3410,8 +3018,7 @@ class _HostElectron {
       if ((cast _Runtime.strictEquals((cast result : { var reason:String; }).reason, 'ok') : Bool)) { (cache = cast (candidate : Dynamic)); }
       return cast result;
       return cast _Runtime.UNDEFINED;
-    } : Dynamic) } : EntityShapeL76C23__electronStorage); __callArgument1988; })) : EntityShapeL76C23__electronStorage);
-    return cast null;
+    }));
   }
 
   public static function classifyMutationFailure__electronStorage<FailureReason>(error:flight._internal._Any, fallback:FailureReason):flight._internal._Union2<FailureReason, String> {
@@ -3457,14 +3064,232 @@ class _HostElectron {
   }
 
   public static function createElectronTrayCapabilities<Profile:DesktopOsProfile>(electron:ElectronApi, profile:Profile):ElectronTrayCapabilitiesFor<Profile> {
-    var attachNativeListeners:TrayRecord__electronTray->DesktopOsProfile->Void = cast _Runtime.UNDEFINED;
-    var addListener:TrayRecord__electronTray->String->(Array<flight._internal._Any>->Void)->Void = cast _Runtime.UNDEFINED;
     var records:flight._internal._Map<TrayIcon, TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
-    var lifecycle:{ >Entity, var create:TrayIcon->TrayIconOptions->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; var destroy:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var failures:flight._internal._Any; }, { var failures:Array<{ @:optional var error:flight._internal._Any; var step:String; }>; var outcome:String; }>>; var isDestroyed:TrayIcon->Bool; var list:Void->Array<TrayIcon>; } = cast _Runtime.UNDEFINED;
-    var image:{ >Entity, var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; } = cast _Runtime.UNDEFINED;
-    var tooltip:{ >Entity, var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var tooltip:flight._internal._Any; }, { var outcome:String; var tooltip:String; }>>; var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; } = cast _Runtime.UNDEFINED;
-    var menu:{ >Entity, var set:TrayIcon->Array<MenuItemTemplate>->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; } = cast _Runtime.UNDEFINED;
-    var common:{ var bounds:{ >Entity, var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<{ var outcome:String; @:optional var bounds:flight._internal._Any; @:optional var error:flight._internal._Any; }, { var bounds:{ var height:Float; var width:Float; var x:Float; var y:Float; }; var outcome:String; @:optional var error:flight._internal._Any; }>, { var error:flight._internal._Any; var outcome:String; @:optional var bounds:flight._internal._Any; }>>; }; var image:{ >Entity, var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; }; var interactionEvents:{ >Entity, var getSignal:TrayIcon->Null<Signal<TrayInteractionEvent->Void>>; }; var lifecycle:{ >Entity, var create:TrayIcon->TrayIconOptions->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; var destroy:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var failures:flight._internal._Any; }, { var failures:Array<{ @:optional var error:flight._internal._Any; var step:String; }>; var outcome:String; }>>; var isDestroyed:TrayIcon->Bool; var list:Void->Array<TrayIcon>; }; var menu:{ >Entity, var set:TrayIcon->Array<MenuItemTemplate>->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; }; var menuSelectionEvents:{ >Entity, var getSignal:TrayIcon->Null<Signal<TrayMenuSelectionEvent->Void>>; }; var popupMenu:{ >Entity, var popup:TrayIcon->Null<Vector2Like>->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; }; var tooltip:{ >Entity, var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var tooltip:flight._internal._Any; }, { var outcome:String; var tooltip:String; }>>; var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; }; } = cast _Runtime.UNDEFINED;
+    var lifecycle:TrayLifecycleBackend = cast _Runtime.UNDEFINED;
+    var image:TrayImageBackend = cast _Runtime.UNDEFINED;
+    var tooltip:TrayTooltipBackend = cast _Runtime.UNDEFINED;
+    var menu:TrayMenuBackend = cast _Runtime.UNDEFINED;
+    var common:{ var bounds:TrayBoundsBackend; var image:TrayImageBackend; var interactionEvents:TrayInteractionEventsBackend; var lifecycle:TrayLifecycleBackend; var menu:TrayMenuBackend; var menuSelectionEvents:TrayMenuSelectionEventsBackend; var popupMenu:TrayPopupMenuBackend; var tooltip:TrayTooltipBackend; } = cast _Runtime.UNDEFINED;
+    var out:EntityConstruction<Entity> = cast _Runtime.UNDEFINED;
+    records = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
+    lifecycle = _Runtime.callValue(function():TrayLifecycleBackend {
+      var out:EntityConstruction<TrayLifecycleBackend> = cast _Runtime.UNDEFINED;
+      out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ create: cast _Runtime.UNDEFINED, destroy: cast _Runtime.UNDEFINED, isDestroyed: cast _Runtime.UNDEFINED, list: cast _Runtime.UNDEFINED } : TrayLifecycleBackend); }) #end));
+      initializeTrayLifecycleBackend(({ final __callArgument687:Dynamic = out; __callArgument687; }), (cast records : Dynamic), ({ final __callArgument688:Dynamic = electron; __callArgument688; }), ({ final __callArgument689:Dynamic = profile; __callArgument689; }));
+      return cast out;
+      return cast _Runtime.UNDEFINED;
+    }, cast ([] : Array<Dynamic>));
+    image = _Runtime.callValue(function():TrayImageBackend {
+      var out:EntityConstruction<TrayImageBackend> = cast _Runtime.UNDEFINED;
+      out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ set: cast _Runtime.UNDEFINED } : TrayImageBackend); }) #end));
+      initializeTrayImageBackend(({ final __callArgument693:Dynamic = out; __callArgument693; }), (cast records : Dynamic), ({ final __callArgument694:Dynamic = electron; __callArgument694; }));
+      return cast out;
+      return cast _Runtime.UNDEFINED;
+    }, cast ([] : Array<Dynamic>));
+    tooltip = _Runtime.callValue(function():TrayTooltipBackend {
+      var out:EntityConstruction<TrayTooltipBackend> = cast _Runtime.UNDEFINED;
+      out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ get: cast _Runtime.UNDEFINED, set: cast _Runtime.UNDEFINED } : TrayTooltipBackend); }) #end));
+      initializeTrayTooltipBackend(({ final __callArgument697:Dynamic = out; __callArgument697; }), (cast records : Dynamic));
+      return cast out;
+      return cast _Runtime.UNDEFINED;
+    }, cast ([] : Array<Dynamic>));
+    menu = _Runtime.callValue(function():TrayMenuBackend {
+      var out:EntityConstruction<TrayMenuBackend> = cast _Runtime.UNDEFINED;
+      out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ set: cast _Runtime.UNDEFINED } : TrayMenuBackend); }) #end));
+      initializeTrayMenuBackend(({ final __callArgument699:Dynamic = out; __callArgument699; }), (cast records : Dynamic), ({ final __callArgument700:Dynamic = electron; __callArgument700; }));
+      return cast out;
+      return cast _Runtime.UNDEFINED;
+    }, cast ([] : Array<Dynamic>));
+    common = (cast { bounds: _Runtime.callValue(function():TrayBoundsBackend {
+      var out:EntityConstruction<TrayBoundsBackend> = cast _Runtime.UNDEFINED;
+      out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ get: cast _Runtime.UNDEFINED } : TrayBoundsBackend); }) #end));
+      initializeTrayBoundsBackend(({ final __callArgument703:Dynamic = out; __callArgument703; }), (cast records : Dynamic));
+      return cast out;
+      return cast _Runtime.UNDEFINED;
+    }, cast ([] : Array<Dynamic>)), image: image, interactionEvents: _Runtime.callValue(function():TrayInteractionEventsBackend {
+      var out:EntityConstruction<TrayInteractionEventsBackend> = cast _Runtime.UNDEFINED;
+      out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ getSignal: cast _Runtime.UNDEFINED } : TrayInteractionEventsBackend); }) #end));
+      initializeTrayInteractionEventsBackend(({ final __callArgument705:Dynamic = out; __callArgument705; }), (cast records : Dynamic));
+      return cast out;
+      return cast _Runtime.UNDEFINED;
+    }, cast ([] : Array<Dynamic>)), lifecycle: lifecycle, menu: menu, menuSelectionEvents: _Runtime.callValue(function():TrayMenuSelectionEventsBackend {
+      var out:EntityConstruction<TrayMenuSelectionEventsBackend> = cast _Runtime.UNDEFINED;
+      out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ getSignal: cast _Runtime.UNDEFINED } : TrayMenuSelectionEventsBackend); }) #end));
+      initializeTrayMenuSelectionEventsBackend(({ final __callArgument707:Dynamic = out; __callArgument707; }), (cast records : Dynamic));
+      return cast out;
+      return cast _Runtime.UNDEFINED;
+    }, cast ([] : Array<Dynamic>)), popupMenu: _Runtime.callValue(function():TrayPopupMenuBackend {
+      var out:EntityConstruction<TrayPopupMenuBackend> = cast _Runtime.UNDEFINED;
+      out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ popup: cast _Runtime.UNDEFINED } : TrayPopupMenuBackend); }) #end));
+      initializeTrayPopupMenuBackend(({ final __callArgument709:Dynamic = out; __callArgument709; }), (cast records : Dynamic));
+      return cast out;
+      return cast _Runtime.UNDEFINED;
+    }, cast ([] : Array<Dynamic>)), tooltip: tooltip });
+    if ((cast _Runtime.strictEquals(profile, 'macos') : Bool)) {
+      var macos:{ var doubleClickPolicy:TrayDoubleClickPolicyBackend; var dropEvents:TrayDropEventsBackend; var pressedImage:TrayPressedImageBackend; var templateImage:TrayTemplateImageBackend; var title:TrayTitleBackend; } = cast _Runtime.UNDEFINED;
+      macos = (cast { doubleClickPolicy: _Runtime.callValue(function():TrayDoubleClickPolicyBackend {
+        var out:EntityConstruction<TrayDoubleClickPolicyBackend> = cast _Runtime.UNDEFINED;
+        out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ setIgnore: cast _Runtime.UNDEFINED } : TrayDoubleClickPolicyBackend); }) #end));
+        initializeTrayDoubleClickPolicyBackend(({ final __callArgument711:Dynamic = out; __callArgument711; }), (cast records : Dynamic));
+        return cast out;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>)), dropEvents: _Runtime.callValue(function():TrayDropEventsBackend {
+        var out:EntityConstruction<TrayDropEventsBackend> = cast _Runtime.UNDEFINED;
+        out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ getSignal: cast _Runtime.UNDEFINED } : TrayDropEventsBackend); }) #end));
+        initializeTrayDropEventsBackend(({ final __callArgument713:Dynamic = out; __callArgument713; }), (cast records : Dynamic));
+        return cast out;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>)), pressedImage: _Runtime.callValue(function():TrayPressedImageBackend {
+        var out:EntityConstruction<TrayPressedImageBackend> = cast _Runtime.UNDEFINED;
+        out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ set: cast _Runtime.UNDEFINED } : TrayPressedImageBackend); }) #end));
+        initializeTrayPressedImageBackend(({ final __callArgument715:Dynamic = out; __callArgument715; }), (cast records : Dynamic), ({ final __callArgument716:Dynamic = electron; __callArgument716; }));
+        return cast out;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>)), templateImage: _Runtime.callValue(function():TrayTemplateImageBackend {
+        var out:EntityConstruction<TrayTemplateImageBackend> = cast _Runtime.UNDEFINED;
+        out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ set: cast _Runtime.UNDEFINED } : TrayTemplateImageBackend); }) #end));
+        initializeTrayTemplateImageBackend(({ final __callArgument719:Dynamic = out; __callArgument719; }), (cast records : Dynamic));
+        return cast out;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>)), title: _Runtime.callValue(function():TrayTitleBackend {
+        var out:EntityConstruction<TrayTitleBackend> = cast _Runtime.UNDEFINED;
+        out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ get: cast _Runtime.UNDEFINED, set: cast _Runtime.UNDEFINED } : TrayTitleBackend); }) #end));
+        initializeTrayTitleBackend(({ final __callArgument721:Dynamic = out; __callArgument721; }), (cast records : Dynamic));
+        return cast out;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>)) });
+      var out:EntityConstruction<Entity> = cast _Runtime.UNDEFINED;
+      out = (cast ({  } : EntityShapeL149C17__electronTray));
+      flight._internal.DynamicObject.assign(out, common, macos);
+      return cast (cast (cast out : flight._internal._Any) : ElectronTrayCapabilitiesFor<Profile>);
+    }
+    if ((cast _Runtime.strictEquals(profile, 'windows') : Bool)) {
+      var windows:{ var balloon:TrayBalloonBackend; var balloonEvents:TrayBalloonEventsBackend; } = cast _Runtime.UNDEFINED;
+      windows = (cast { balloon: _Runtime.callValue(function():TrayBalloonBackend {
+        var out:EntityConstruction<TrayBalloonBackend> = cast _Runtime.UNDEFINED;
+        out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ display: cast _Runtime.UNDEFINED, remove: cast _Runtime.UNDEFINED } : TrayBalloonBackend); }) #end));
+        initializeTrayBalloonBackend(({ final __callArgument723:Dynamic = out; __callArgument723; }), (cast records : Dynamic));
+        return cast out;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>)), balloonEvents: _Runtime.callValue(function():TrayBalloonEventsBackend {
+        var out:EntityConstruction<TrayBalloonEventsBackend> = cast _Runtime.UNDEFINED;
+        out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ getSignal: cast _Runtime.UNDEFINED } : TrayBalloonEventsBackend); }) #end));
+        initializeTrayBalloonEventsBackend(({ final __callArgument725:Dynamic = out; __callArgument725; }), (cast records : Dynamic));
+        return cast out;
+        return cast _Runtime.UNDEFINED;
+      }, cast ([] : Array<Dynamic>)) });
+      var out:EntityConstruction<Entity> = cast _Runtime.UNDEFINED;
+      out = (cast ({  } : EntityShapeL167C17__electronTray));
+      flight._internal.DynamicObject.assign(out, common, windows);
+      return cast (cast (cast out : flight._internal._Any) : ElectronTrayCapabilitiesFor<Profile>);
+    }
+    out = (cast ({  } : EntityShapeL174C15__electronTray));
+    flight._internal.DynamicObject.assign(out, common);
+    return cast (cast (cast out : flight._internal._Any) : ElectronTrayCapabilitiesFor<Profile>);
+    return cast null;
+  }
+
+  public static function initializeTrayBalloonBackend(out:EntityConstruction<TrayBalloonBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>):Void {
+    ((cast out : { var display:TrayIcon->TrayBalloonOptions->flight._internal._Promise<TrayBalloonDisplayResult>; }).display = (cast function(tray:TrayIcon, options:flight._internal._IndexedAccess<Array<Dynamic>, Float>):flight._internal._Promise<TrayBalloonDisplayResult> {
+      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+        var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
+        record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray)));
+        if ((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { outcome: 'tray-destroyed' }; }
+        try {
+          (cast (cast record : TrayRecord__electronTray).tray : ElectronTray).displayBalloon(({ final __callArgument727:Dynamic = { content: (cast options : { var text:String; }).text, icon: (cast options : { @:optional var icon:Null<String>; }).icon, iconType: (cast options : { @:optional var iconType:Null<String>; }).iconType, largeIcon: (cast options : { @:optional var largeIcon:Null<Bool>; }).largeIcon, noSound: (cast options : { @:optional var noSound:Null<Bool>; }).noSound, respectQuietTime: (cast options : { @:optional var respectQuietTime:Null<Bool>; }).respectQuietTime, title: (cast options : { var title:String; }).title }; __callArgument727; }));
+          ((cast record : TrayRecord__electronTray).balloonActive = true);
+          return cast { outcome: 'displayed' };
+        } catch (error:Dynamic) {
+          return cast { error: error, outcome: 'balloon-display-failed' };
+        }
+        return cast null;
+      }));
+    }));
+    ((cast out : { var remove:TrayIcon->flight._internal._Promise<TrayBalloonRemoveResult>; }).remove = (cast function(tray:TrayIcon):flight._internal._Promise<TrayBalloonRemoveResult> {
+      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+        var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
+        record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray)));
+        if ((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { outcome: 'tray-destroyed' }; }
+        if ((cast !(cast (cast record : TrayRecord__electronTray).balloonActive : Bool) : Bool)) { return cast { outcome: 'balloon-not-active' }; }
+        try {
+          (cast (cast record : TrayRecord__electronTray).tray : ElectronTray).removeBalloon();
+          ((cast record : TrayRecord__electronTray).balloonActive = false);
+          return cast { outcome: 'removed' };
+        } catch (error:Dynamic) {
+          return cast { error: error, outcome: 'balloon-remove-failed' };
+        }
+        return cast null;
+      }));
+    }));
+  }
+
+  public static function initializeTrayBalloonEventsBackend(out:EntityConstruction<TrayBalloonEventsBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>):Void {
+    ((cast out : { var getSignal:TrayIcon->Null<Signal<TrayBalloonEvent->Void>>; }).getSignal = (cast function(tray:TrayIcon):Null<Signal<TrayBalloonEvent->Void>> return _Runtime.coalesce(({ final __structural728 = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray))); __structural728 == null ? _Runtime.UNDEFINED : (cast __structural728 : { var balloonEvents:Signal<TrayBalloonEvent->Void>; }).balloonEvents; }), function():Dynamic return cast null)));
+  }
+
+  public static function initializeTrayBoundsBackend(out:EntityConstruction<TrayBoundsBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>):Void {
+    ((cast out : { var get:TrayIcon->flight._internal._Promise<TrayBoundsResult>; }).get = (cast function(tray:TrayIcon):flight._internal._Promise<TrayBoundsResult> {
+      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+        var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
+        record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray)));
+        if ((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { outcome: 'tray-destroyed' }; }
+        try {
+          return cast { bounds: (cast _HostElectron.toBounds__electronTray((cast (cast record : TrayRecord__electronTray).tray : ElectronTray).getBounds()) : { var height:Float; var width:Float; var x:Float; var y:Float; }), outcome: 'available' };
+        } catch (error:Dynamic) {
+          return cast { error: error, outcome: 'bounds-read-failed' };
+        }
+        return cast null;
+      }));
+    }));
+  }
+
+  public static function initializeTrayDoubleClickPolicyBackend(out:EntityConstruction<TrayDoubleClickPolicyBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>):Void {
+    ((cast out : { var setIgnore:TrayIcon->Bool->flight._internal._Promise<TrayDoubleClickPolicyUpdateResult>; }).setIgnore = (cast function(tray:TrayIcon, ignore:Bool):flight._internal._Promise<TrayDoubleClickPolicyUpdateResult> {
+      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+        return flight._internal._Async.resolve((cast _HostElectron.update__electronTray((cast records : Dynamic), ({ final __callArgument729:Dynamic = tray; __callArgument729; }), (cast 'double-click-policy-update-failed' : String), (cast function(record:TrayRecord__electronTray):Void { (cast (cast record : TrayRecord__electronTray).tray : ElectronTray).setIgnoreDoubleClickEvents((cast ignore : Bool)); } : Dynamic)) : flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>));
+      }));
+    }));
+  }
+
+  public static function initializeTrayDropEventsBackend(out:EntityConstruction<TrayDropEventsBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>):Void {
+    ((cast out : { var getSignal:TrayIcon->Null<Signal<TrayDropEvent->Void>>; }).getSignal = (cast function(tray:TrayIcon):Null<Signal<TrayDropEvent->Void>> return _Runtime.coalesce(({ final __structural731 = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray))); __structural731 == null ? _Runtime.UNDEFINED : (cast __structural731 : { var dropEvents:Signal<TrayDropEvent->Void>; }).dropEvents; }), function():Dynamic return cast null)));
+  }
+
+  public static function initializeTrayImageBackend(out:EntityConstruction<TrayImageBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>, electron:ElectronApi):Void {
+    ((cast out : { var set:TrayIcon->String->flight._internal._Promise<TrayImageUpdateResult>; }).set = (cast function(tray:TrayIcon, source:String):flight._internal._Promise<TrayImageUpdateResult> {
+      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+        var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
+        var decoded:ElectronNativeImage = cast _Runtime.UNDEFINED;
+        record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray)));
+        if ((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { outcome: 'tray-destroyed' }; }
+        try {
+          (decoded = cast ((cast _HostElectron.decodeImage__electronTray(({ final __callArgument732:Dynamic = electron; __callArgument732; }), (cast source : String)) : ElectronNativeImage) : Dynamic));
+        } catch (error:Dynamic) {
+          return cast { error: error, outcome: 'invalid-icon' };
+        }
+        try {
+          (cast (cast record : TrayRecord__electronTray).tray : ElectronTray).setImage(({ final __callArgument734:Dynamic = decoded; __callArgument734; }));
+          ((cast record : TrayRecord__electronTray).image = decoded);
+          return cast { outcome: 'updated' };
+        } catch (error:Dynamic) {
+          return cast { error: error, outcome: 'image-update-failed' };
+        }
+        return cast null;
+      }));
+    }));
+  }
+
+  public static function initializeTrayInteractionEventsBackend(out:EntityConstruction<TrayInteractionEventsBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>):Void {
+    ((cast out : { var getSignal:TrayIcon->Null<Signal<TrayInteractionEvent->Void>>; }).getSignal = (cast function(tray:TrayIcon):Null<Signal<TrayInteractionEvent->Void>> return _Runtime.coalesce(({ final __structural735 = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray))); __structural735 == null ? _Runtime.UNDEFINED : (cast __structural735 : { var interactionEvents:Signal<TrayInteractionEvent->Void>; }).interactionEvents; }), function():Dynamic return cast null)));
+  }
+
+  public static function initializeTrayLifecycleBackend(out:EntityConstruction<TrayLifecycleBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>, electron:ElectronApi, profile:DesktopOsProfile):Void {
+    var addListener:TrayRecord__electronTray->String->(Array<flight._internal._Any>->Void)->Void = cast _Runtime.UNDEFINED;
+    var attachNativeListeners:TrayRecord__electronTray->DesktopOsProfile->Void = cast _Runtime.UNDEFINED;
+    addListener = (cast function addListener(record:TrayRecord__electronTray, event:String, listener:Array<flight._internal._Any>->Void):Void {
+      (cast (cast record : TrayRecord__electronTray).tray : ElectronTray).on((cast event : String), ({ final __callArgument736:Dynamic = listener; __callArgument736; }));
+      _Runtime.callProperty((cast record : TrayRecord__electronTray).listeners, 'push', cast ([{ event: event, listener: listener }] : Array<Dynamic>));
+    });
     attachNativeListeners = (cast function attachNativeListeners(record:TrayRecord__electronTray, osProfile:DesktopOsProfile):Void {
       var interaction:String->(Array<flight._internal._Any>->Void) = cast _Runtime.UNDEFINED;
       interaction = (cast function(type:flight._internal._IndexedAccess<TrayInteractionEvent, String>):Array<flight._internal._Any>->Void return _Runtime.haxeRest(function(...args:flight._internal._Any):Void {
@@ -3478,45 +3303,40 @@ class _HostElectron {
       addListener((cast record : Dynamic), (cast 'right-click' : String), (cast interaction((cast 'rightClick' : String)) : Array<flight._internal._Any>->Void));
       addListener((cast record : Dynamic), (cast 'double-click' : String), (cast interaction((cast 'doubleClick' : String)) : Array<flight._internal._Any>->Void));
       if ((cast _Runtime.strictEquals(osProfile, 'windows') : Bool)) {
-        addListener((cast record : Dynamic), (cast 'balloon-click' : String), ({ final __callArgument1990:Dynamic = function(__unused0:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast record : TrayRecord__electronTray).balloonEvents], [{ type: 'click' }]]), 1); }, cast ([] : Array<Dynamic>)); }; __callArgument1990; }));
-        addListener((cast record : Dynamic), (cast 'balloon-closed' : String), ({ final __callArgument1992:Dynamic = function(__unused1:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast record : TrayRecord__electronTray).balloonEvents], [{ type: 'close' }]]), 1); }, cast ([] : Array<Dynamic>)); }; __callArgument1992; }));
-        addListener((cast record : Dynamic), (cast 'balloon-show' : String), ({ final __callArgument1994:Dynamic = function(__unused2:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast record : TrayRecord__electronTray).balloonEvents], [{ type: 'show' }]]), 1); }, cast ([] : Array<Dynamic>)); }; __callArgument1994; }));
+        addListener((cast record : Dynamic), (cast 'balloon-click' : String), ({ final __callArgument737:Dynamic = function(__unused0:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast record : TrayRecord__electronTray).balloonEvents], [{ type: 'click' }]]), 1); }, cast ([] : Array<Dynamic>)); }; __callArgument737; }));
+        addListener((cast record : Dynamic), (cast 'balloon-closed' : String), ({ final __callArgument739:Dynamic = function(__unused1:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast record : TrayRecord__electronTray).balloonEvents], [{ type: 'close' }]]), 1); }, cast ([] : Array<Dynamic>)); }; __callArgument739; }));
+        addListener((cast record : Dynamic), (cast 'balloon-show' : String), ({ final __callArgument741:Dynamic = function(__unused2:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast record : TrayRecord__electronTray).balloonEvents], [{ type: 'show' }]]), 1); }, cast ([] : Array<Dynamic>)); }; __callArgument741; }));
       }
       if ((cast _Runtime.strictEquals(osProfile, 'macos') : Bool)) {
-        addListener((cast record : Dynamic), (cast 'drop-files' : String), ({ final __callArgument1996:Dynamic = _Runtime.haxeRest(function(...args:flight._internal._Any):Void {
+        addListener((cast record : Dynamic), (cast 'drop-files' : String), ({ final __callArgument743:Dynamic = _Runtime.haxeRest(function(...args:flight._internal._Any):Void {
           var files:Array<String> = cast _Runtime.UNDEFINED;
           files = ((cast _Runtime.isArray(_Runtime.callProperty(args, 'at', cast ([-1.0] : Array<Dynamic>))) : Bool) ? (cast (cast _Runtime.callProperty(args, 'at', cast ([-1.0] : Array<Dynamic>)) : Array<String>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
           _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast record : TrayRecord__electronTray).dropEvents], [{ files: _Runtime.slice(files, 0, null), type: 'files' }]]), 1);
-        }, 0); __callArgument1996; }));
-        addListener((cast record : Dynamic), (cast 'drop-text' : String), ({ final __callArgument1998:Dynamic = _Runtime.haxeRest(function(...args:flight._internal._Any):Void {
+        }, 0); __callArgument743; }));
+        addListener((cast record : Dynamic), (cast 'drop-text' : String), ({ final __callArgument745:Dynamic = _Runtime.haxeRest(function(...args:flight._internal._Any):Void {
           var text:flight._internal._Any = cast _Runtime.UNDEFINED;
           text = _Runtime.callProperty(args, 'at', cast ([-1.0] : Array<Dynamic>));
           _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast record : TrayRecord__electronTray).dropEvents], [{ text: ((cast _Runtime.strictEquals(_Runtime.typeofValue(text), 'string') : Bool) ? (cast text : Dynamic) : (cast '' : Dynamic)), type: 'text' }]]), 1);
-        }, 0); __callArgument1998; }));
+        }, 0); __callArgument745; }));
       }
     });
-    addListener = (cast function addListener(record:TrayRecord__electronTray, event:String, listener:Array<flight._internal._Any>->Void):Void {
-      (cast (cast record : TrayRecord__electronTray).tray : ElectronTray).on((cast event : String), ({ final __callArgument2000:Dynamic = listener; __callArgument2000; }));
-      _Runtime.callProperty((cast record : TrayRecord__electronTray).listeners, 'push', cast ([{ event: event, listener: listener }] : Array<Dynamic>));
-    });
-    records = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
-    lifecycle = (cast createEntity(({ final __callArgument2039:Dynamic = ({ create: (cast function(tray:TrayIcon, options:TrayIconOptions):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
+    ((cast out : { var create:TrayIcon->TrayIconOptions->flight._internal._Promise<TrayCreateProviderResult>; }).create = (cast function(tray:TrayIcon, options:TrayIconOptions):flight._internal._Promise<TrayCreateProviderResult> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var image:ElectronNativeImage = cast _Runtime.UNDEFINED;
           var nativeTray:ElectronTray = cast _Runtime.UNDEFINED;
           var record:TrayRecord__electronTray = cast _Runtime.UNDEFINED;
-          var __flowBranch2021:Dynamic;
-          if (_Runtime.truthy(({ final __hostType2020 = options.signal; __hostType2020 == null ? _Runtime.UNDEFINED : (cast __hostType2020 : flight._internal.dom.AbortSignal).aborted; }))) {
-            __flowBranch2021 = flight._internal._Async.protect(function():Dynamic {
+          var __flowBranch748:Dynamic;
+          if (_Runtime.truthy(({ final __hostType747 = options.signal; __hostType747 == null ? _Runtime.UNDEFINED : (cast __hostType747 : flight._internal.dom.AbortSignal).aborted; }))) {
+            __flowBranch748 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn({ outcome: 'cancelled' });
             });
           } else {
-            __flowBranch2021 = flight._internal._Async.flowNormal();
+            __flowBranch748 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch2021, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch748, function():Dynamic {
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-              (image = cast ((cast _HostElectron.decodeImage__electronTray(({ final __callArgument2022:Dynamic = electron; __callArgument2022; }), (cast _Runtime.coalesce(options.icon, function():Dynamic return cast '') : String)) : ElectronNativeImage) : Dynamic));
+              (image = cast ((cast _HostElectron.decodeImage__electronTray(({ final __callArgument749:Dynamic = electron; __callArgument749; }), (cast _Runtime.coalesce(options.icon, function():Dynamic return cast '') : String)) : ElectronNativeImage) : Dynamic));
               (cast image : ElectronNativeImage).setTemplateImage((cast _Runtime.coalesce(options.iconTemplate, function():Dynamic return cast false) : Bool));
               return flight._internal._Async.flowNormal();
             }), function(__caughtError:Dynamic):Dynamic {
@@ -3536,41 +3356,41 @@ class _HostElectron {
               }), function():Dynamic {
                 record = { balloonActive: false, balloonEvents: (cast (cast createSignal : Void->Signal<TrayBalloonEvent->Void>)() : Signal<TrayBalloonEvent->Void>), dropEvents: (cast (cast createSignal : Void->Signal<TrayDropEvent->Void>)() : Signal<TrayDropEvent->Void>), image: image, interactionEvents: (cast (cast createSignal : Void->Signal<TrayInteractionEvent->Void>)() : Signal<TrayInteractionEvent->Void>), listeners: cast ([] : Array<Dynamic>), menu: null, menuSelectionEvents: (cast (cast createSignal : Void->Signal<TrayMenuSelectionEvent->Void>)() : Signal<TrayMenuSelectionEvent->Void>), nativePending: true, title: '', tooltip: '', tray: nativeTray };
                 return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-                  var __flowBranch2024:Dynamic;
+                  var __flowBranch751:Dynamic;
                   if ((cast ((cast !_Runtime.strictEquals(options.title, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(profile, 'macos') : Bool)) : Bool)) {
-                    __flowBranch2024 = flight._internal._Async.protect(function():Dynamic {
+                    __flowBranch751 = flight._internal._Async.protect(function():Dynamic {
                       (cast nativeTray : ElectronTray).setTitle((cast options.title : String));
                       ((cast record : TrayRecord__electronTray).title = options.title);
                       return flight._internal._Async.flowNormal();
                     });
                   } else {
-                    __flowBranch2024 = flight._internal._Async.flowNormal();
+                    __flowBranch751 = flight._internal._Async.flowNormal();
                   }
-                  return flight._internal._Async.continueFlow(__flowBranch2024, function():Dynamic {
-                    var __flowBranch2025:Dynamic;
+                  return flight._internal._Async.continueFlow(__flowBranch751, function():Dynamic {
+                    var __flowBranch752:Dynamic;
                     if ((cast !_Runtime.strictEquals(options.tooltip, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-                      __flowBranch2025 = flight._internal._Async.protect(function():Dynamic {
+                      __flowBranch752 = flight._internal._Async.protect(function():Dynamic {
                         (cast nativeTray : ElectronTray).setToolTip((cast options.tooltip : String));
                         ((cast record : TrayRecord__electronTray).tooltip = options.tooltip);
                         return flight._internal._Async.flowNormal();
                       });
                     } else {
-                      __flowBranch2025 = flight._internal._Async.flowNormal();
+                      __flowBranch752 = flight._internal._Async.flowNormal();
                     }
-                    return flight._internal._Async.continueFlow(__flowBranch2025, function():Dynamic {
-                      attachNativeListeners((cast record : Dynamic), ({ final __callArgument2026:Dynamic = profile; __callArgument2026; }));
-                      var __flowBranch2029:Dynamic;
-                      if (_Runtime.truthy(({ final __hostType2028 = options.signal; __hostType2028 == null ? _Runtime.UNDEFINED : (cast __hostType2028 : flight._internal.dom.AbortSignal).aborted; }))) {
-                        __flowBranch2029 = flight._internal._Async.protect(function():Dynamic {
-                          return flight._internal._Async.flatMap((cast _HostElectron.releaseRecord__electronTray((cast record : Dynamic)) : flight._internal._Promise<Array<{ @:optional var error:flight._internal._Any; var step:String; }>>), function(__awaitValue2030:Dynamic):Dynamic {
-                            __awaitValue2030;
+                    return flight._internal._Async.continueFlow(__flowBranch752, function():Dynamic {
+                      attachNativeListeners((cast record : Dynamic), ({ final __callArgument753:Dynamic = profile; __callArgument753; }));
+                      var __flowBranch756:Dynamic;
+                      if (_Runtime.truthy(({ final __hostType755 = options.signal; __hostType755 == null ? _Runtime.UNDEFINED : (cast __hostType755 : flight._internal.dom.AbortSignal).aborted; }))) {
+                        __flowBranch756 = flight._internal._Async.protect(function():Dynamic {
+                          return flight._internal._Async.flatMap((cast _HostElectron.releaseRecord__electronTray((cast record : Dynamic)) : flight._internal._Promise<Array<{ @:optional var error:flight._internal._Any; var step:String; }>>), function(__awaitValue757:Dynamic):Dynamic {
+                            __awaitValue757;
                             return flight._internal._Async.flowReturn({ outcome: 'cancelled' });
                           });
                         });
                       } else {
-                        __flowBranch2029 = flight._internal._Async.flowNormal();
+                        __flowBranch756 = flight._internal._Async.flowNormal();
                       }
-                      return flight._internal._Async.continueFlow(__flowBranch2029, function():Dynamic {
+                      return flight._internal._Async.continueFlow(__flowBranch756, function():Dynamic {
                         ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).set((cast tray), (cast record)));
                         return flight._internal._Async.flowReturn({ outcome: 'created' });
                       });
@@ -3579,8 +3399,8 @@ class _HostElectron {
                 }), function(__caughtError:Dynamic):Dynamic {
                   var error:Dynamic = __caughtError;
                   return flight._internal._Async.protect(function():Dynamic {
-                    return flight._internal._Async.flatMap((cast _HostElectron.releaseRecord__electronTray((cast record : Dynamic)) : flight._internal._Promise<Array<{ @:optional var error:flight._internal._Any; var step:String; }>>), function(__awaitValue2031:Dynamic):Dynamic {
-                      __awaitValue2031;
+                    return flight._internal._Async.flatMap((cast _HostElectron.releaseRecord__electronTray((cast record : Dynamic)) : flight._internal._Promise<Array<{ @:optional var error:flight._internal._Any; var step:String; }>>), function(__awaitValue758:Dynamic):Dynamic {
+                      __awaitValue758;
                       return flight._internal._Async.flowReturn({ error: error, outcome: 'tray-create-failed' });
                     });
                   });
@@ -3592,32 +3412,33 @@ class _HostElectron {
           });
         })
       );
-    } : Dynamic), destroy: (cast function(tray:TrayIcon):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var failures:flight._internal._Any; }, { var failures:Array<{ @:optional var error:flight._internal._Any; var step:String; }>; var outcome:String; }>> {
+    }));
+    ((cast out : { var destroy:TrayIcon->flight._internal._Promise<TrayDestroyProviderResult>; }).destroy = (cast function(tray:TrayIcon):flight._internal._Promise<TrayDestroyProviderResult> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
           var failures:Array<{ @:optional var error:flight._internal._Any; var step:String; }> = cast _Runtime.UNDEFINED;
           record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray)));
-          var __flowBranch2032:Dynamic;
+          var __flowBranch759:Dynamic;
           if ((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-            __flowBranch2032 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch759 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn({ outcome: 'destroyed' });
             });
           } else {
-            __flowBranch2032 = flight._internal._Async.flowNormal();
+            __flowBranch759 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch2032, function():Dynamic {
-            return flight._internal._Async.flatMap((cast _HostElectron.releaseRecord__electronTray((cast record : Dynamic)) : flight._internal._Promise<Array<{ @:optional var error:flight._internal._Any; var step:String; }>>), function(__awaitValue2033:Dynamic):Dynamic {
-              failures = __awaitValue2033;
-              var __flowBranch2034:Dynamic;
+          return flight._internal._Async.continueFlow(__flowBranch759, function():Dynamic {
+            return flight._internal._Async.flatMap((cast _HostElectron.releaseRecord__electronTray((cast record : Dynamic)) : flight._internal._Promise<Array<{ @:optional var error:flight._internal._Any; var step:String; }>>), function(__awaitValue760:Dynamic):Dynamic {
+              failures = __awaitValue760;
+              var __flowBranch761:Dynamic;
               if ((cast ((cast _Runtime.field(failures, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-                __flowBranch2034 = flight._internal._Async.protect(function():Dynamic {
+                __flowBranch761 = flight._internal._Async.protect(function():Dynamic {
                   return flight._internal._Async.flowReturn({ failures: failures, outcome: 'tray-destroy-failed' });
                 });
               } else {
-                __flowBranch2034 = flight._internal._Async.flowNormal();
+                __flowBranch761 = flight._internal._Async.flowNormal();
               }
-              return flight._internal._Async.continueFlow(__flowBranch2034, function():Dynamic {
+              return flight._internal._Async.continueFlow(__flowBranch761, function():Dynamic {
                 ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).delete_((cast tray)));
                 return flight._internal._Async.flowReturn({ outcome: 'destroyed' });
               });
@@ -3625,35 +3446,132 @@ class _HostElectron {
           });
         })
       );
-    } : Dynamic), isDestroyed: (cast function(tray:TrayIcon):Bool return _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural2038 = ({ final __structural2037 = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray))); __structural2037 == null ? _Runtime.UNDEFINED : (cast __structural2037 : { var tray:ElectronTray; }).tray; }); __structural2038 == null ? _Runtime.UNDEFINED : (cast __structural2038 : { var isDestroyed:Void->Bool; }).isDestroyed; }), cast ([] : Array<Dynamic>)), function():Dynamic return cast true) : Dynamic), list: (cast function():Array<TrayIcon> return _Runtime.concatArrays([_Runtime.toArray(((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).keys()))]) : Dynamic) } : EntityShapeL51C34__electronTray); __callArgument2039; })) : EntityShapeL51C34__electronTray);
-    image = (cast createEntity(({ final __callArgument2085:Dynamic = ({ set: (cast function(tray:TrayIcon, source:String):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
+    }));
+    ((cast out : { var isDestroyed:TrayIcon->Bool; }).isDestroyed = (cast function(tray:TrayIcon):Bool return _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural765 = ({ final __structural764 = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray))); __structural764 == null ? _Runtime.UNDEFINED : (cast __structural764 : { var tray:ElectronTray; }).tray; }); __structural765 == null ? _Runtime.UNDEFINED : (cast __structural765 : { var isDestroyed:Void->Bool; }).isDestroyed; }), cast ([] : Array<Dynamic>)), function():Dynamic return cast true)));
+    ((cast out : { var list:Void->Array<TrayIcon>; }).list = (cast function():Array<TrayIcon> return _Runtime.concatArrays([_Runtime.toArray(((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).keys()))])));
+  }
+
+  public static function initializeTrayMenuBackend(out:EntityConstruction<TrayMenuBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>, electron:ElectronApi):Void {
+    ((cast out : { var set:TrayIcon->Array<MenuItemTemplate>->flight._internal._Promise<TrayMenuUpdateResult>; }).set = (cast function(tray:TrayIcon, items:Array<MenuItemTemplate>):flight._internal._Promise<TrayMenuUpdateResult> {
+      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+        var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
+        var built:ElectronMenu = cast _Runtime.UNDEFINED;
+        record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray)));
+        if ((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { outcome: 'tray-destroyed' }; }
+        try {
+          (built = cast ((cast electron.Menu : ElectronMenuConstructor).buildFromTemplate((cast (cast toElectronTemplate(({ final __callArgument766:Dynamic = items; __callArgument766; }), ({ final __callArgument767:Dynamic = function(id:String):Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast record : TrayRecord__electronTray).menuSelectionEvents], [{ id: id }]]), 1); }; __callArgument767; })) : Array<ElectronMenuItemOptions>) : Dynamic)) : Dynamic));
+        } catch (error:Dynamic) {
+          return cast { error: error, outcome: 'menu-build-failed' };
+        }
+        try {
+          (cast (cast record : TrayRecord__electronTray).tray : ElectronTray).setContextMenu(({ final __callArgument770:Dynamic = built; __callArgument770; }));
+          ((cast record : TrayRecord__electronTray).menu = built);
+          return cast { outcome: 'updated' };
+        } catch (error:Dynamic) {
+          return cast { error: error, outcome: 'menu-install-failed' };
+        }
+        return cast null;
+      }));
+    }));
+  }
+
+  public static function initializeTrayMenuSelectionEventsBackend(out:EntityConstruction<TrayMenuSelectionEventsBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>):Void {
+    ((cast out : { var getSignal:TrayIcon->Null<Signal<TrayMenuSelectionEvent->Void>>; }).getSignal = (cast function(tray:TrayIcon):Null<Signal<TrayMenuSelectionEvent->Void>> return _Runtime.coalesce(({ final __structural771 = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray))); __structural771 == null ? _Runtime.UNDEFINED : (cast __structural771 : { var menuSelectionEvents:Signal<TrayMenuSelectionEvent->Void>; }).menuSelectionEvents; }), function():Dynamic return cast null)));
+  }
+
+  public static function initializeTrayPopupMenuBackend(out:EntityConstruction<TrayPopupMenuBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>):Void {
+    ((cast out : { var popup:TrayIcon->Null<Vector2Like>->flight._internal._Promise<TrayPopupMenuResult>; }).popup = (cast function(tray:TrayIcon, ?position:Vector2Like):flight._internal._Promise<TrayPopupMenuResult> {
+      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+        var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
+        record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray)));
+        if ((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { outcome: 'tray-destroyed' }; }
+        if ((cast _Runtime.strictEquals((cast record : TrayRecord__electronTray).menu, null) : Bool)) { return cast { outcome: 'menu-not-set' }; }
+        try {
+          (cast (cast record : TrayRecord__electronTray).tray : ElectronTray).popUpContextMenu(({ final __callArgument772:Dynamic = (cast record : TrayRecord__electronTray).menu; __callArgument772; }), _Runtime.select(position, function():Dynamic return cast { x: position.x, y: position.y }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')));
+          return cast { outcome: 'shown' };
+        } catch (error:Dynamic) {
+          return cast { error: error, outcome: 'popup-failed' };
+        }
+        return cast null;
+      }));
+    }));
+  }
+
+  public static function initializeTrayPressedImageBackend(out:EntityConstruction<TrayPressedImageBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>, electron:ElectronApi):Void {
+    ((cast out : { var set:TrayIcon->String->flight._internal._Promise<TrayPressedImageUpdateResult>; }).set = (cast function(tray:TrayIcon, source:String):flight._internal._Promise<TrayPressedImageUpdateResult> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
         var decoded:ElectronNativeImage = cast _Runtime.UNDEFINED;
         record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray)));
         if ((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { outcome: 'tray-destroyed' }; }
         try {
-          (decoded = cast ((cast _HostElectron.decodeImage__electronTray(({ final __callArgument2082:Dynamic = electron; __callArgument2082; }), (cast source : String)) : ElectronNativeImage) : Dynamic));
+          (decoded = cast ((cast _HostElectron.decodeImage__electronTray(({ final __callArgument773:Dynamic = electron; __callArgument773; }), (cast source : String)) : ElectronNativeImage) : Dynamic));
         } catch (error:Dynamic) {
           return cast { error: error, outcome: 'invalid-icon' };
         }
         try {
-          (cast (cast record : TrayRecord__electronTray).tray : ElectronTray).setImage(({ final __callArgument2084:Dynamic = decoded; __callArgument2084; }));
-          ((cast record : TrayRecord__electronTray).image = decoded);
+          (cast (cast record : TrayRecord__electronTray).tray : ElectronTray).setPressedImage(({ final __callArgument775:Dynamic = decoded; __callArgument775; }));
           return cast { outcome: 'updated' };
         } catch (error:Dynamic) {
-          return cast { error: error, outcome: 'image-update-failed' };
+          return cast { error: error, outcome: 'pressed-image-update-failed' };
         }
         return cast null;
       }));
-    } : Dynamic) } : EntityShapeL114C30__electronTray); __callArgument2085; })) : EntityShapeL114C30__electronTray);
-    tooltip = (cast createEntity(({ final __callArgument2093:Dynamic = ({ get: (cast function(tray:TrayIcon):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var tooltip:flight._internal._Any; }, { var outcome:String; var tooltip:String; }>> {
+    }));
+  }
+
+  public static function initializeTrayTemplateImageBackend(out:EntityConstruction<TrayTemplateImageBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>):Void {
+    ((cast out : { var set:TrayIcon->Bool->flight._internal._Promise<TrayTemplateImageUpdateResult>; }).set = (cast function(tray:TrayIcon, isTemplate:Bool):flight._internal._Promise<TrayTemplateImageUpdateResult> {
+      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+        var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
+        record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray)));
+        if ((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { outcome: 'tray-destroyed' }; }
+        try {
+          (cast (cast record : TrayRecord__electronTray).image : ElectronNativeImage).setTemplateImage((cast isTemplate : Bool));
+          (cast (cast record : TrayRecord__electronTray).tray : ElectronTray).setImage(({ final __callArgument776:Dynamic = (cast record : TrayRecord__electronTray).image; __callArgument776; }));
+          return cast { outcome: 'updated' };
+        } catch (error:Dynamic) {
+          return cast { error: error, outcome: 'template-image-update-failed' };
+        }
+        return cast null;
+      }));
+    }));
+  }
+
+  public static function initializeTrayTitleBackend(out:EntityConstruction<TrayTitleBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>):Void {
+    ((cast out : { var get:TrayIcon->flight._internal._Promise<TrayTitleReadResult>; }).get = (cast function(tray:TrayIcon):flight._internal._Promise<TrayTitleReadResult> {
+      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+        var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
+        record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray)));
+        return flight._internal._Async.resolve(((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { outcome: 'tray-destroyed' } : Dynamic) : (cast { outcome: 'available', title: (cast record : TrayRecord__electronTray).title } : Dynamic)));
+      }));
+    }));
+    ((cast out : { var set:TrayIcon->String->flight._internal._Promise<TrayTitleUpdateResult>; }).set = (cast function(tray:TrayIcon, value:String):flight._internal._Promise<TrayTitleUpdateResult> {
+      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+        var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
+        record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray)));
+        if ((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { outcome: 'tray-destroyed' }; }
+        try {
+          (cast (cast record : TrayRecord__electronTray).tray : ElectronTray).setTitle((cast value : String));
+          ((cast record : TrayRecord__electronTray).title = value);
+          return cast { outcome: 'updated' };
+        } catch (error:Dynamic) {
+          return cast { error: error, outcome: 'title-update-failed' };
+        }
+        return cast null;
+      }));
+    }));
+  }
+
+  public static function initializeTrayTooltipBackend(out:EntityConstruction<TrayTooltipBackend>, records:flight._internal._Map<TrayIcon, TrayRecord__electronTray>):Void {
+    ((cast out : { var get:TrayIcon->flight._internal._Promise<TrayTooltipReadResult>; }).get = (cast function(tray:TrayIcon):flight._internal._Promise<TrayTooltipReadResult> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
         record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray)));
         return flight._internal._Async.resolve(((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { outcome: 'tray-destroyed' } : Dynamic) : (cast { outcome: 'available', tooltip: (cast record : TrayRecord__electronTray).tooltip } : Dynamic)));
       }));
-    } : Dynamic), set: (cast function(tray:TrayIcon, value:String):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
+    }));
+    ((cast out : { var set:TrayIcon->String->flight._internal._Promise<TrayTooltipUpdateResult>; }).set = (cast function(tray:TrayIcon, value:String):flight._internal._Promise<TrayTooltipUpdateResult> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
         record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray)));
@@ -3667,153 +3585,7 @@ class _HostElectron {
         }
         return cast null;
       }));
-    } : Dynamic) } : EntityShapeL134C32__electronTray); __callArgument2093; })) : EntityShapeL134C32__electronTray);
-    menu = (cast createEntity(({ final __callArgument2105:Dynamic = ({ set: (cast function(tray:TrayIcon, items:Array<MenuItemTemplate>):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
-      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
-        var built:ElectronMenu = cast _Runtime.UNDEFINED;
-        record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray)));
-        if ((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { outcome: 'tray-destroyed' }; }
-        try {
-          (built = cast ((cast electron.Menu : ElectronMenuConstructor).buildFromTemplate((cast (cast toElectronTemplate(({ final __callArgument2100:Dynamic = items; __callArgument2100; }), ({ final __callArgument2101:Dynamic = function(id:String):Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast record : TrayRecord__electronTray).menuSelectionEvents], [{ id: id }]]), 1); }; __callArgument2101; })) : Array<ElectronMenuItemOptions>) : Dynamic)) : Dynamic));
-        } catch (error:Dynamic) {
-          return cast { error: error, outcome: 'menu-build-failed' };
-        }
-        try {
-          (cast (cast record : TrayRecord__electronTray).tray : ElectronTray).setContextMenu(({ final __callArgument2104:Dynamic = built; __callArgument2104; }));
-          ((cast record : TrayRecord__electronTray).menu = built);
-          return cast { outcome: 'updated' };
-        } catch (error:Dynamic) {
-          return cast { error: error, outcome: 'menu-install-failed' };
-        }
-        return cast null;
-      }));
-    } : Dynamic) } : EntityShapeL154C29__electronTray); __callArgument2105; })) : EntityShapeL154C29__electronTray);
-    common = (cast { bounds: (cast createEntity(({ final __callArgument2117:Dynamic = ({ get: (cast function(tray:TrayIcon):flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<{ var outcome:String; @:optional var bounds:flight._internal._Any; @:optional var error:flight._internal._Any; }, { var bounds:{ var height:Float; var width:Float; var x:Float; var y:Float; }; var outcome:String; @:optional var error:flight._internal._Any; }>, { var error:flight._internal._Any; var outcome:String; @:optional var bounds:flight._internal._Any; }>> {
-      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
-        record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray)));
-        if ((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { outcome: 'tray-destroyed' }; }
-        try {
-          return cast { bounds: (cast _HostElectron.toBounds__electronTray((cast (cast record : TrayRecord__electronTray).tray : ElectronTray).getBounds()) : { var height:Float; var width:Float; var x:Float; var y:Float; }), outcome: 'available' };
-        } catch (error:Dynamic) {
-          return cast { error: error, outcome: 'bounds-read-failed' };
-        }
-        return cast null;
-      }));
-    } : Dynamic) } : EntityShapeL177C26__electronTray); __callArgument2117; })) : EntityShapeL177C26__electronTray), image: image, interactionEvents: (cast createEntity(({ final __callArgument2121:Dynamic = ({ getSignal: (cast function(tray:TrayIcon):Null<Signal<TrayInteractionEvent->Void>> return _Runtime.coalesce(({ final __structural2120 = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray))); __structural2120 == null ? _Runtime.UNDEFINED : (cast __structural2120 : { var interactionEvents:Signal<TrayInteractionEvent->Void>; }).interactionEvents; }), function():Dynamic return cast null) : Dynamic) } : EntityShapeL189C37__electronTray); __callArgument2121; })) : EntityShapeL189C37__electronTray), lifecycle: lifecycle, menu: menu, menuSelectionEvents: (cast createEntity(({ final __callArgument2127:Dynamic = ({ getSignal: (cast function(tray:TrayIcon):Null<Signal<TrayMenuSelectionEvent->Void>> return _Runtime.coalesce(({ final __structural2126 = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray))); __structural2126 == null ? _Runtime.UNDEFINED : (cast __structural2126 : { var menuSelectionEvents:Signal<TrayMenuSelectionEvent->Void>; }).menuSelectionEvents; }), function():Dynamic return cast null) : Dynamic) } : EntityShapeL192C39__electronTray); __callArgument2127; })) : EntityShapeL192C39__electronTray), popupMenu: (cast createEntity(({ final __callArgument2133:Dynamic = ({ popup: (cast function(tray:TrayIcon, ?position:Vector2Like):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
-      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
-        record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray)));
-        if ((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { outcome: 'tray-destroyed' }; }
-        if ((cast _Runtime.strictEquals((cast record : TrayRecord__electronTray).menu, null) : Bool)) { return cast { outcome: 'menu-not-set' }; }
-        try {
-          (cast (cast record : TrayRecord__electronTray).tray : ElectronTray).popUpContextMenu(({ final __callArgument2132:Dynamic = (cast record : TrayRecord__electronTray).menu; __callArgument2132; }), _Runtime.select(position, function():Dynamic return cast { x: position.x, y: position.y }, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')));
-          return cast { outcome: 'shown' };
-        } catch (error:Dynamic) {
-          return cast { error: error, outcome: 'popup-failed' };
-        }
-        return cast null;
-      }));
-    } : Dynamic) } : EntityShapeL195C29__electronTray); __callArgument2133; })) : EntityShapeL195C29__electronTray), tooltip: tooltip });
-    if ((cast _Runtime.strictEquals(profile, 'macos') : Bool)) {
-      var macos:{ var doubleClickPolicy:{ >Entity, var setIgnore:TrayIcon->Bool->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; }; var dropEvents:{ >Entity, var getSignal:TrayIcon->Null<Signal<TrayDropEvent->Void>>; }; var pressedImage:{ >Entity, var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; }; var templateImage:{ >Entity, var set:TrayIcon->Bool->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; }; var title:{ >Entity, var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var title:flight._internal._Any; }, { var outcome:String; var title:String; }>>; var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; }; } = cast _Runtime.UNDEFINED;
-      macos = (cast { doubleClickPolicy: (cast createEntity(({ final __callArgument2141:Dynamic = ({ setIgnore: (cast function(tray:TrayIcon, ignore:Bool):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
-        return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-          return flight._internal._Async.resolve((cast _HostElectron.update__electronTray((cast records : Dynamic), ({ final __callArgument2139:Dynamic = tray; __callArgument2139; }), (cast 'double-click-policy-update-failed' : String), (cast function(record:TrayRecord__electronTray):Void { (cast (cast record : TrayRecord__electronTray).tray : ElectronTray).setIgnoreDoubleClickEvents((cast ignore : Bool)); } : Dynamic)) : flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>));
-        }));
-      } : Dynamic) } : EntityShapeL213C39__electronTray); __callArgument2141; })) : EntityShapeL213C39__electronTray), dropEvents: (cast createEntity(({ final __callArgument2149:Dynamic = ({ getSignal: (cast function(tray:TrayIcon):Null<Signal<TrayDropEvent->Void>> return _Runtime.coalesce(({ final __structural2148 = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray))); __structural2148 == null ? _Runtime.UNDEFINED : (cast __structural2148 : { var dropEvents:Signal<TrayDropEvent->Void>; }).dropEvents; }), function():Dynamic return cast null) : Dynamic) } : EntityShapeL220C32__electronTray); __callArgument2149; })) : EntityShapeL220C32__electronTray), pressedImage: (cast createEntity(({ final __callArgument2159:Dynamic = ({ set: (cast function(tray:TrayIcon, source:String):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
-        return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-          var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
-          var decoded:ElectronNativeImage = cast _Runtime.UNDEFINED;
-          record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray)));
-          if ((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { outcome: 'tray-destroyed' }; }
-          try {
-            (decoded = cast ((cast _HostElectron.decodeImage__electronTray(({ final __callArgument2156:Dynamic = electron; __callArgument2156; }), (cast source : String)) : ElectronNativeImage) : Dynamic));
-          } catch (error:Dynamic) {
-            return cast { error: error, outcome: 'invalid-icon' };
-          }
-          try {
-            (cast (cast record : TrayRecord__electronTray).tray : ElectronTray).setPressedImage(({ final __callArgument2158:Dynamic = decoded; __callArgument2158; }));
-            return cast { outcome: 'updated' };
-          } catch (error:Dynamic) {
-            return cast { error: error, outcome: 'pressed-image-update-failed' };
-          }
-          return cast null;
-        }));
-      } : Dynamic) } : EntityShapeL221C34__electronTray); __callArgument2159; })) : EntityShapeL221C34__electronTray), templateImage: (cast createEntity(({ final __callArgument2169:Dynamic = ({ set: (cast function(tray:TrayIcon, isTemplate:Bool):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
-        return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-          var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
-          record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray)));
-          if ((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { outcome: 'tray-destroyed' }; }
-          try {
-            (cast (cast record : TrayRecord__electronTray).image : ElectronNativeImage).setTemplateImage((cast isTemplate : Bool));
-            (cast (cast record : TrayRecord__electronTray).tray : ElectronTray).setImage(({ final __callArgument2168:Dynamic = (cast record : TrayRecord__electronTray).image; __callArgument2168; }));
-            return cast { outcome: 'updated' };
-          } catch (error:Dynamic) {
-            return cast { error: error, outcome: 'template-image-update-failed' };
-          }
-          return cast null;
-        }));
-      } : Dynamic) } : EntityShapeL239C35__electronTray); __callArgument2169; })) : EntityShapeL239C35__electronTray), title: (cast createEntity(({ final __callArgument2173:Dynamic = ({ get: (cast function(tray:TrayIcon):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var title:flight._internal._Any; }, { var outcome:String; var title:String; }>> {
-        return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-          var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
-          record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray)));
-          return flight._internal._Async.resolve(((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { outcome: 'tray-destroyed' } : Dynamic) : (cast { outcome: 'available', title: (cast record : TrayRecord__electronTray).title } : Dynamic)));
-        }));
-      } : Dynamic), set: (cast function(tray:TrayIcon, value:String):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
-        return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-          var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
-          record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray)));
-          if ((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { outcome: 'tray-destroyed' }; }
-          try {
-            (cast (cast record : TrayRecord__electronTray).tray : ElectronTray).setTitle((cast value : String));
-            ((cast record : TrayRecord__electronTray).title = value);
-            return cast { outcome: 'updated' };
-          } catch (error:Dynamic) {
-            return cast { error: error, outcome: 'title-update-failed' };
-          }
-          return cast null;
-        }));
-      } : Dynamic) } : EntityShapeL252C27__electronTray); __callArgument2173; })) : EntityShapeL252C27__electronTray) });
-      return cast (cast (cast _Runtime.mergeObjects([common, macos]) : flight._internal._Any) : ElectronTrayCapabilitiesFor<Profile>);
-    }
-    if ((cast _Runtime.strictEquals(profile, 'windows') : Bool)) {
-      var windows:{ var balloon:{ >Entity, var display:TrayIcon->TrayBalloonOptions->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; var remove:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; }; var balloonEvents:{ >Entity, var getSignal:TrayIcon->Null<Signal<TrayBalloonEvent->Void>>; }; } = cast _Runtime.UNDEFINED;
-      windows = (cast { balloon: (cast createEntity((cast ({ display: (cast function(tray:TrayIcon, options:flight._internal._IndexedAccess<Array<Dynamic>, Float>):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
-        return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-          var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
-          record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray)));
-          if ((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { outcome: 'tray-destroyed' }; }
-          try {
-            (cast (cast record : TrayRecord__electronTray).tray : ElectronTray).displayBalloon(({ final __callArgument2176:Dynamic = { content: (cast options : { var text:String; }).text, icon: (cast options : { @:optional var icon:Null<String>; }).icon, iconType: (cast options : { @:optional var iconType:Null<String>; }).iconType, largeIcon: (cast options : { @:optional var largeIcon:Null<Bool>; }).largeIcon, noSound: (cast options : { @:optional var noSound:Null<Bool>; }).noSound, respectQuietTime: (cast options : { @:optional var respectQuietTime:Null<Bool>; }).respectQuietTime, title: (cast options : { var title:String; }).title }; __callArgument2176; }));
-            ((cast record : TrayRecord__electronTray).balloonActive = true);
-            return cast { outcome: 'displayed' };
-          } catch (error:Dynamic) {
-            return cast { error: error, outcome: 'balloon-display-failed' };
-          }
-          return cast null;
-        }));
-      } : Dynamic), remove: (cast function(tray:TrayIcon):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
-        return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-          var record:Null<TrayRecord__electronTray> = cast _Runtime.UNDEFINED;
-          record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray)));
-          if ((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { outcome: 'tray-destroyed' }; }
-          if ((cast !(cast (cast record : TrayRecord__electronTray).balloonActive : Bool) : Bool)) { return cast { outcome: 'balloon-not-active' }; }
-          try {
-            (cast (cast record : TrayRecord__electronTray).tray : ElectronTray).removeBalloon();
-            ((cast record : TrayRecord__electronTray).balloonActive = false);
-            return cast { outcome: 'removed' };
-          } catch (error:Dynamic) {
-            return cast { error: error, outcome: 'balloon-remove-failed' };
-          }
-          return cast null;
-        }));
-      } : Dynamic) } : EntityShapeL280C29__electronTray) : Dynamic)) : EntityShapeL280C29__electronTray), balloonEvents: (cast createEntity(({ final __callArgument2181:Dynamic = ({ getSignal: (cast function(tray:TrayIcon):Null<Signal<TrayBalloonEvent->Void>> return _Runtime.coalesce(({ final __structural2180 = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__electronTray>).get((cast tray))); __structural2180 == null ? _Runtime.UNDEFINED : (cast __structural2180 : { var balloonEvents:Signal<TrayBalloonEvent->Void>; }).balloonEvents; }), function():Dynamic return cast null) : Dynamic) } : EntityShapeL313C35__electronTray); __callArgument2181; })) : EntityShapeL313C35__electronTray) });
-      return cast (cast (cast _Runtime.mergeObjects([common, windows]) : flight._internal._Any) : ElectronTrayCapabilitiesFor<Profile>);
-    }
-    return cast (cast (cast common : flight._internal._Any) : ElectronTrayCapabilitiesFor<Profile>);
-    return cast null;
+    }));
   }
 
   public static function releaseRecord__electronTray(record:TrayRecord__electronTray):flight._internal._Promise<Array<{ @:optional var error:flight._internal._Any; var step:String; }>> {
@@ -3895,6 +3667,14 @@ class _HostElectron {
   public static final INSTALL_OK__electronUpdater:AppUpdateInstallOutcome = (cast flight._internal.DynamicObject.freeze({ reason: 'ok' }) : AppUpdateInstallOutcome);
 
   public static function createElectronUpdaterBackend(electron:ElectronApi, ?feedUrl:String):UpdaterCommandBackend {
+    var out:EntityConstruction<UpdaterCommandBackend> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ check: cast _Runtime.UNDEFINED, destroy: cast _Runtime.UNDEFINED, install: cast _Runtime.UNDEFINED } : UpdaterCommandBackend); }) #end));
+    initializeElectronUpdaterBackend(({ final __callArgument777:Dynamic = out; __callArgument777; }), ({ final __callArgument778:Dynamic = electron; __callArgument778; }), ({ final __callArgument779:Dynamic = feedUrl; __callArgument779; }));
+    return cast out;
+    return cast null;
+  }
+
+  public static function initializeElectronUpdaterBackend(out:EntityConstruction<UpdaterCommandBackend>, electron:ElectronApi, ?feedUrl:String):Void {
     var attach:CheckTransaction__electronUpdater->String->NativeListener__electronUpdater->Void = cast _Runtime.UNDEFINED;
     var release:flight._internal._Set<NativeCleanup__electronUpdater>->Null<flight._internal._Any> = cast _Runtime.UNDEFINED;
     var settle:CheckTransaction__electronUpdater->AppUpdateCheckOutcome->Void = cast _Runtime.UNDEFINED;
@@ -3905,8 +3685,8 @@ class _HostElectron {
     var destroyed:Bool = cast _Runtime.UNDEFINED;
     attach = (cast function attach(transaction:CheckTransaction__electronUpdater, event:String, listener:NativeListener__electronUpdater):Void {
       var cleanup:Void->Void = cast _Runtime.UNDEFINED;
-      (cast autoUpdater : ElectronAutoUpdater).on((cast event : String), ({ final __callArgument2185:Dynamic = listener; __callArgument2185; }));
-      cleanup = (cast function():Void { (cast autoUpdater : ElectronAutoUpdater).removeListener((cast event : String), ({ final __callArgument2186:Dynamic = listener; __callArgument2186; })); });
+      (cast autoUpdater : ElectronAutoUpdater).on((cast event : String), ({ final __callArgument783:Dynamic = listener; __callArgument783; }));
+      cleanup = (cast function():Void { (cast autoUpdater : ElectronAutoUpdater).removeListener((cast event : String), ({ final __callArgument784:Dynamic = listener; __callArgument784; })); });
       ((cast (cast transaction : CheckTransaction__electronUpdater).cleanups : flight._internal._Set<NativeCleanup__electronUpdater>).add((cast cleanup)));
       ((cast providerCleanups : flight._internal._Set<NativeCleanup__electronUpdater>).add((cast cleanup)));
     });
@@ -3932,19 +3712,19 @@ class _HostElectron {
       ((cast transaction : CheckTransaction__electronUpdater).active = false);
       if ((cast _Runtime.strictEquals(current, transaction) : Bool)) { (current = cast (null : Dynamic)); }
       if ((cast !_Runtime.strictEquals(release((cast (cast transaction : CheckTransaction__electronUpdater).cleanups : Dynamic)), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        (cast transaction : CheckTransaction__electronUpdater).resolve(({ final __callArgument2189:Dynamic = _HostElectron.OPERATION_FAILED__electronUpdater; __callArgument2189; }));
+        (cast transaction : CheckTransaction__electronUpdater).resolve(({ final __callArgument787:Dynamic = _HostElectron.OPERATION_FAILED__electronUpdater; __callArgument787; }));
         return;
       }
       if ((cast _Runtime.strictEquals((cast outcome : { var reason:String; }).reason, 'downloaded') : Bool)) { ((cast downloadedUpdates : flight._internal._WeakSet<DownloadedUpdate>).add((cast (cast outcome : { var reason:String; var update:DownloadedUpdate; }).update))); }
-      (cast transaction : CheckTransaction__electronUpdater).resolve(({ final __callArgument2190:Dynamic = outcome; __callArgument2190; }));
+      (cast transaction : CheckTransaction__electronUpdater).resolve(({ final __callArgument788:Dynamic = outcome; __callArgument788; }));
     });
     autoUpdater = electron.autoUpdater;
     providerCleanups = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
     downloadedUpdates = _Runtime.construct(flight._internal._HostValueLut.get('WeakSet'), []);
     current = null;
     destroyed = false;
-    if ((cast !_Runtime.strictEquals(feedUrl, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast autoUpdater : ElectronAutoUpdater).setFeedURL(({ final __callArgument2191:Dynamic = { url: feedUrl }; __callArgument2191; })); }
-    return cast (cast createEntity(({ final __callArgument2234:Dynamic = ({ check: (cast function():flight._internal._Promise<AppUpdateCheckOutcome> {
+    if ((cast !_Runtime.strictEquals(feedUrl, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (cast autoUpdater : ElectronAutoUpdater).setFeedURL(({ final __callArgument789:Dynamic = { url: feedUrl }; __callArgument789; })); }
+    ((cast out : { var check:Void->flight._internal._Promise<AppUpdateCheckOutcome>; }).check = (cast function():flight._internal._Promise<AppUpdateCheckOutcome> {
       if ((cast destroyed : Bool)) { return cast flight._internal._Async.resolve(_HostElectron.OPERATION_FAILED__electronUpdater); }
       if ((cast !_Runtime.strictEquals(current, null) : Bool)) { return cast flight._internal._Async.resolve(_HostElectron.CHECK_IN_PROGRESS__electronUpdater); }
       return cast flight._internal._Async.create(function(resolve:flight._internal._Any, __unused0:flight._internal._Any):Void {
@@ -3958,20 +3738,21 @@ class _HostElectron {
         try {
           attach((cast transaction : Dynamic), (cast 'checking-for-update' : String), (cast function(__unused1:Array<flight._internal._Any>):Void { activeNoop(); } : Dynamic));
           attach((cast transaction : Dynamic), (cast 'update-available' : String), (cast function(__unused2:Array<flight._internal._Any>):Void { activeNoop(); } : Dynamic));
-          attach((cast transaction : Dynamic), (cast 'update-not-available' : String), (cast function(__unused3:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { settle((cast transaction : Dynamic), ({ final __callArgument2213:Dynamic = _HostElectron.NOT_AVAILABLE__electronUpdater; __callArgument2213; })); }, cast ([] : Array<Dynamic>)); } : Dynamic));
+          attach((cast transaction : Dynamic), (cast 'update-not-available' : String), (cast function(__unused3:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { settle((cast transaction : Dynamic), ({ final __callArgument790:Dynamic = _HostElectron.NOT_AVAILABLE__electronUpdater; __callArgument790; })); }, cast ([] : Array<Dynamic>)); } : Dynamic));
           attach((cast transaction : Dynamic), (cast 'update-downloaded' : String), (cast _Runtime.haxeRest(function(...args:flight._internal._Any):Void {
             var update:DownloadedUpdate = cast _Runtime.UNDEFINED;
-            update = (cast _HostElectron.createDownloadedUpdate__electronUpdater(({ final __callArgument2217:Dynamic = args; __callArgument2217; })) : DownloadedUpdate);
-            settle((cast transaction : Dynamic), ({ final __callArgument2219:Dynamic = flight._internal.DynamicObject.freeze({ reason: 'downloaded', update: update }); __callArgument2219; }));
+            update = (cast _HostElectron.createDownloadedUpdate__electronUpdater(({ final __callArgument794:Dynamic = args; __callArgument794; })) : DownloadedUpdate);
+            settle((cast transaction : Dynamic), ({ final __callArgument796:Dynamic = flight._internal.DynamicObject.freeze({ reason: 'downloaded', update: update }); __callArgument796; }));
           }, 0) : Dynamic));
-          attach((cast transaction : Dynamic), (cast 'error' : String), (cast function(__unused4:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { settle((cast transaction : Dynamic), ({ final __callArgument2225:Dynamic = _HostElectron.OPERATION_FAILED__electronUpdater; __callArgument2225; })); }, cast ([] : Array<Dynamic>)); } : Dynamic));
+          attach((cast transaction : Dynamic), (cast 'error' : String), (cast function(__unused4:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { settle((cast transaction : Dynamic), ({ final __callArgument802:Dynamic = _HostElectron.OPERATION_FAILED__electronUpdater; __callArgument802; })); }, cast ([] : Array<Dynamic>)); } : Dynamic));
           (cast autoUpdater : ElectronAutoUpdater).checkForUpdates();
         } catch (__error:Dynamic) {
-          settle((cast transaction : Dynamic), ({ final __callArgument2229:Dynamic = _HostElectron.OPERATION_FAILED__electronUpdater; __callArgument2229; }));
+          settle((cast transaction : Dynamic), ({ final __callArgument806:Dynamic = _HostElectron.OPERATION_FAILED__electronUpdater; __callArgument806; }));
         }
       });
       return cast _Runtime.UNDEFINED;
-    } : Dynamic), destroy: (cast function():Void {
+    }));
+    ((cast out : { var destroy:Void->Void; }).destroy = (cast function():Void {
       var transaction:Null<CheckTransaction__electronUpdater> = cast _Runtime.UNDEFINED;
       var cleanupError:flight._internal._Any = cast _Runtime.UNDEFINED;
       (destroyed = cast (true : Dynamic));
@@ -3981,9 +3762,10 @@ class _HostElectron {
         (current = cast (null : Dynamic));
       }
       cleanupError = release((cast providerCleanups : Dynamic));
-      ({ final __optionalOwner2233 = transaction; if (__optionalOwner2233 != null) { final __optionalCall2232 = (cast __optionalOwner2233 : { var resolve:AppUpdateCheckOutcome->Void; }).resolve; if (__optionalCall2232 != null) __optionalCall2232(({ final __callArgument2231:Dynamic = _HostElectron.OPERATION_FAILED__electronUpdater; __callArgument2231; })); } });
+      ({ final __optionalOwner810 = transaction; if (__optionalOwner810 != null) { final __optionalCall809 = (cast __optionalOwner810 : { var resolve:AppUpdateCheckOutcome->Void; }).resolve; if (__optionalCall809 != null) __optionalCall809(({ final __callArgument808:Dynamic = _HostElectron.OPERATION_FAILED__electronUpdater; __callArgument808; })); } });
       if ((cast !_Runtime.strictEquals(cleanupError, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.throwValue(cleanupError); }
-    } : Dynamic), install: (cast function(update:DownloadedUpdate):flight._internal._Promise<AppUpdateInstallOutcome> {
+    }));
+    ((cast out : { var install:DownloadedUpdate->flight._internal._Promise<AppUpdateInstallOutcome>; }).install = (cast function(update:DownloadedUpdate):flight._internal._Promise<AppUpdateInstallOutcome> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         if ((cast ((cast destroyed : Bool) || (cast !(cast ((cast downloadedUpdates : flight._internal._WeakSet<DownloadedUpdate>).has((cast update))) : Bool) : Bool)) : Bool)) { return cast _HostElectron.OPERATION_FAILED__electronUpdater; }
         try {
@@ -3995,14 +3777,19 @@ class _HostElectron {
         }
         return cast null;
       }));
-    } : Dynamic) } : UpdaterCommandBackend); __callArgument2234; })) : UpdaterCommandBackend);
-    return cast null;
+    }));
   }
 
   public static function createDownloadedUpdate__electronUpdater(args:Array<flight._internal._Any>):DownloadedUpdate {
     var info:UpdateInfo = cast _Runtime.UNDEFINED;
     info = flight._internal.DynamicObject.freeze({ downloadSizeBytes: null, isMandatory: null, minimumOsVersion: null, notes: (cast _HostElectron.knownString__electronUpdater((cast flight._internal._StaticIndex.readArray(args, 1.0) : flight._internal._Any)) : Null<String>), releaseDate: (cast _HostElectron.knownString__electronUpdater((cast flight._internal._StaticIndex.readArray(args, 3.0) : flight._internal._Any)) : Null<String>), sha512: null, version: (cast _HostElectron.knownString__electronUpdater((cast flight._internal._StaticIndex.readArray(args, 2.0) : flight._internal._Any)) : Null<String>) });
-    return cast flight._internal.DynamicObject.freeze((cast createEntity(({ final __callArgument2278:Dynamic = ({ info: (cast info : Dynamic) } : DownloadedUpdate); __callArgument2278; })) : DownloadedUpdate));
+    return cast flight._internal.DynamicObject.freeze(_Runtime.callValue(function():DownloadedUpdate {
+      var out:EntityConstruction<DownloadedUpdate> = cast _Runtime.UNDEFINED;
+      out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ info: cast _Runtime.UNDEFINED } : DownloadedUpdate); }) #end));
+      _Runtime.setField(out, 'info', info);
+      return cast out;
+      return cast _Runtime.UNDEFINED;
+    }, cast ([] : Array<Dynamic>)));
     return cast null;
   }
 
@@ -4012,24 +3799,50 @@ class _HostElectron {
   }
 
   public static function createElectronWindowBackend(electron:ElectronApi):flight._internal._Intersection2<WindowBackend, flight._internal._Required<{ @:optional var attach:Null<ApplicationWindow->flight._internal._Any->WindowAttachmentOwnership->Bool>; @:optional var open:Null<ApplicationWindow->WindowOptions->Bool>; @:optional var close:Null<ApplicationWindow->Void>; }>> {
-    return cast { attach: function(win:ApplicationWindow, handle:flight._internal._Any, ownership:WindowAttachmentOwnership):Bool {
+    var out:EntityConstruction<WindowBackend> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ attach: cast _Runtime.UNDEFINED, open: cast _Runtime.UNDEFINED, close: cast _Runtime.UNDEFINED, setTitle: cast _Runtime.UNDEFINED, setPosition: cast _Runtime.UNDEFINED, setSize: cast _Runtime.UNDEFINED, getBounds: cast _Runtime.UNDEFINED, minimize: cast _Runtime.UNDEFINED, maximize: cast _Runtime.UNDEFINED, restore: cast _Runtime.UNDEFINED, focus: cast _Runtime.UNDEFINED, show: cast _Runtime.UNDEFINED, hide: cast _Runtime.UNDEFINED, center: cast _Runtime.UNDEFINED, setResizable: cast _Runtime.UNDEFINED, setAlwaysOnTop: cast _Runtime.UNDEFINED, setMinimumSize: cast _Runtime.UNDEFINED, setMaximumSize: cast _Runtime.UNDEFINED, setFullscreen: cast _Runtime.UNDEFINED, setIcon: cast _Runtime.UNDEFINED, setOpacity: cast _Runtime.UNDEFINED, setSkipTaskbar: cast _Runtime.UNDEFINED, setMenuBarVisible: cast _Runtime.UNDEFINED, setParent: cast _Runtime.UNDEFINED, setProgress: cast _Runtime.UNDEFINED, requestAttention: cast _Runtime.UNDEFINED, setContentProtection: cast _Runtime.UNDEFINED, flashWindowFrame: cast _Runtime.UNDEFINED, setHasShadow: cast _Runtime.UNDEFINED, subscribeClose: cast _Runtime.UNDEFINED, subscribeMove: cast _Runtime.UNDEFINED, subscribeOrientation: cast _Runtime.UNDEFINED, subscribeResize: cast _Runtime.UNDEFINED, subscribeVisibility: cast _Runtime.UNDEFINED } : EntityShapeL17C15__electronWindow); }) #end));
+    initializeElectronWindowBackend(({ final __callArgument811:Dynamic = out; __callArgument811; }), ({ final __callArgument812:Dynamic = electron; __callArgument812; }));
+    return cast out;
+    return cast null;
+  }
+
+  public static function getApplicationWindowForElectronId(id:Float):Null<ApplicationWindow> {
+    return cast _Runtime.coalesce(((cast _HostElectron._windowsById__electronWindow : flight._internal._Map<Float, ApplicationWindow>).get((cast id))), function():Dynamic return cast null);
+    return cast null;
+  }
+
+  public static function getElectronBrowserWindow(win:ApplicationWindow):Null<ElectronBrowserWindow> {
+    return cast _Runtime.coalesce(((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast (cast win : ApplicationWindow)))), function():Dynamic return cast null);
+    return cast null;
+  }
+
+  public static function getElectronWindowId(win:ApplicationWindow):Float {
+    return cast _Runtime.coalesce(({ final __structural815 = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast (cast win : ApplicationWindow)))); __structural815 == null ? _Runtime.UNDEFINED : (cast __structural815 : { var id:Float; }).id; }), function():Dynamic return cast -1.0);
+    return cast null;
+  }
+
+  public static function initializeElectronWindowBackend(out:EntityConstruction<flight._internal._Intersection2<WindowBackend, flight._internal._Required<{ @:optional var attach:Null<ApplicationWindow->flight._internal._Any->WindowAttachmentOwnership->Bool>; @:optional var open:Null<ApplicationWindow->WindowOptions->Bool>; @:optional var close:Null<ApplicationWindow->Void>; }>>>, electron:ElectronApi):Void {
+    ((cast out : { var attach:ApplicationWindow->flight._internal._Any->WindowAttachmentOwnership->Bool; }).attach = (cast function(win:ApplicationWindow, handle:flight._internal._Any, ownership:WindowAttachmentOwnership):Bool {
       if ((cast !(cast (cast _HostElectron.isElectronBrowserWindow__electronWindow((cast handle : flight._internal._Any)) : Bool) : Bool) : Bool)) { return cast false; }
-      return cast (cast _HostElectron.attachElectronWindow__electronWindow(({ final __callArgument2280:Dynamic = win; __callArgument2280; }), ({ final __callArgument2281:Dynamic = handle; __callArgument2281; }), ({ final __callArgument2282:Dynamic = ownership; __callArgument2282; })) : Bool);
+      return cast (cast _HostElectron.attachElectronWindow__electronWindow(({ final __callArgument816:Dynamic = win; __callArgument816; }), ({ final __callArgument817:Dynamic = handle; __callArgument817; }), ({ final __callArgument818:Dynamic = ownership; __callArgument818; })) : Bool);
       return cast _Runtime.UNDEFINED;
-    }, open: function(win:ApplicationWindow, options:WindowOptions):Bool {
+    }));
+    ((cast out : { var open:ApplicationWindow->WindowOptions->Bool; }).open = (cast function(win:ApplicationWindow, options:WindowOptions):Bool {
       var bw:ElectronBrowserWindow = cast _Runtime.UNDEFINED;
       if ((cast ((cast _HostElectron._windowRecords__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronWindowRecord__electronWindow>).has((cast win))) : Bool)) { return cast true; }
       bw = _Runtime.construct(electron.BrowserWindow, [{ title: options.title, x: options.x, y: options.y, width: options.width, height: options.height, resizable: options.resizable, alwaysOnTop: options.alwaysOnTop, fullscreen: options.fullscreen, show: options.visible, minWidth: options.minWidth, minHeight: options.minHeight, maxWidth: options.maxWidth, maxHeight: options.maxHeight, frame: options.frame, transparent: options.transparent }]);
-      if ((cast (cast _HostElectron.attachElectronWindow__electronWindow(({ final __callArgument2286:Dynamic = win; __callArgument2286; }), ({ final __callArgument2287:Dynamic = bw; __callArgument2287; }), ({ final __callArgument2288:Dynamic = 'flight'; __callArgument2288; })) : Bool) : Bool)) { return cast true; }
+      if ((cast (cast _HostElectron.attachElectronWindow__electronWindow(({ final __callArgument822:Dynamic = win; __callArgument822; }), ({ final __callArgument823:Dynamic = bw; __callArgument823; }), ({ final __callArgument824:Dynamic = 'flight'; __callArgument824; })) : Bool) : Bool)) { return cast true; }
       try {
         (cast bw : ElectronBrowserWindow).close();
       } catch (__error:Dynamic) {
       }
       return cast false;
       return cast _Runtime.UNDEFINED;
-    }, close: function(win:ApplicationWindow):Void {
-      _HostElectron.detachElectronWindow__electronWindow(({ final __callArgument2292:Dynamic = win; __callArgument2292; }), (cast true : Bool));
-    }, setTitle: function(win:ApplicationWindow, title:String):Void {
+    }));
+    ((cast out : { var close:ApplicationWindow->Void; }).close = (cast function(win:ApplicationWindow):Void {
+      _HostElectron.detachElectronWindow__electronWindow(({ final __callArgument828:Dynamic = win; __callArgument828; }), (cast true : Bool));
+    }));
+    ((cast out : { @:optional var setTitle:Null<ApplicationWindow->String->Void>; }).setTitle = (cast function(win:ApplicationWindow, title:String):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -4037,7 +3850,8 @@ class _HostElectron {
         (cast bw : ElectronBrowserWindow).setTitle((cast title : String));
       } catch (__error:Dynamic) {
       }
-    }, setPosition: function(win:ApplicationWindow, x:Float, y:Float):Void {
+    }));
+    ((cast out : { @:optional var setPosition:Null<ApplicationWindow->Float->Float->Void>; }).setPosition = (cast function(win:ApplicationWindow, x:Float, y:Float):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -4045,7 +3859,8 @@ class _HostElectron {
         (cast bw : ElectronBrowserWindow).setPosition((cast x : Float), (cast y : Float));
       } catch (__error:Dynamic) {
       }
-    }, setSize: function(win:ApplicationWindow, width:Float, height:Float):Void {
+    }));
+    ((cast out : { @:optional var setSize:Null<ApplicationWindow->Float->Float->Void>; }).setSize = (cast function(win:ApplicationWindow, width:Float, height:Float):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -4053,7 +3868,8 @@ class _HostElectron {
         (cast bw : ElectronBrowserWindow).setSize((cast width : Float), (cast height : Float));
       } catch (__error:Dynamic) {
       }
-    }, getBounds: function(win:ApplicationWindow, out:WindowBounds):WindowBounds {
+    }));
+    ((cast out : { @:optional var getBounds:Null<ApplicationWindow->WindowBounds->WindowBounds>; }).getBounds = (cast function(win:ApplicationWindow, out:WindowBounds):WindowBounds {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
@@ -4077,7 +3893,8 @@ class _HostElectron {
       }
       return cast out;
       return cast _Runtime.UNDEFINED;
-    }, minimize: function(win:ApplicationWindow):Void {
+    }));
+    ((cast out : { @:optional var minimize:Null<ApplicationWindow->Void>; }).minimize = (cast function(win:ApplicationWindow):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -4085,7 +3902,8 @@ class _HostElectron {
         (cast bw : ElectronBrowserWindow).minimize();
       } catch (__error:Dynamic) {
       }
-    }, maximize: function(win:ApplicationWindow):Void {
+    }));
+    ((cast out : { @:optional var maximize:Null<ApplicationWindow->Void>; }).maximize = (cast function(win:ApplicationWindow):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -4093,7 +3911,8 @@ class _HostElectron {
         (cast bw : ElectronBrowserWindow).maximize();
       } catch (__error:Dynamic) {
       }
-    }, restore: function(win:ApplicationWindow):Void {
+    }));
+    ((cast out : { @:optional var restore:Null<ApplicationWindow->Void>; }).restore = (cast function(win:ApplicationWindow):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -4101,7 +3920,8 @@ class _HostElectron {
         if ((cast (cast bw : ElectronBrowserWindow).isMinimized() : Bool)) { (cast bw : ElectronBrowserWindow).restore(); } else { (cast bw : ElectronBrowserWindow).unmaximize(); }
       } catch (__error:Dynamic) {
       }
-    }, focus: function(win:ApplicationWindow):Void {
+    }));
+    ((cast out : { @:optional var focus:Null<ApplicationWindow->Void>; }).focus = (cast function(win:ApplicationWindow):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -4109,7 +3929,8 @@ class _HostElectron {
         (cast bw : ElectronBrowserWindow).focus();
       } catch (__error:Dynamic) {
       }
-    }, show: function(win:ApplicationWindow):Void {
+    }));
+    ((cast out : { @:optional var show:Null<ApplicationWindow->Void>; }).show = (cast function(win:ApplicationWindow):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -4117,7 +3938,8 @@ class _HostElectron {
         (cast bw : ElectronBrowserWindow).show();
       } catch (__error:Dynamic) {
       }
-    }, hide: function(win:ApplicationWindow):Void {
+    }));
+    ((cast out : { @:optional var hide:Null<ApplicationWindow->Void>; }).hide = (cast function(win:ApplicationWindow):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -4125,7 +3947,8 @@ class _HostElectron {
         (cast bw : ElectronBrowserWindow).hide();
       } catch (__error:Dynamic) {
       }
-    }, center: function(win:ApplicationWindow):Void {
+    }));
+    ((cast out : { @:optional var center:Null<ApplicationWindow->Void>; }).center = (cast function(win:ApplicationWindow):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -4133,7 +3956,8 @@ class _HostElectron {
         (cast bw : ElectronBrowserWindow).center();
       } catch (__error:Dynamic) {
       }
-    }, setResizable: function(win:ApplicationWindow, resizable:Bool):Void {
+    }));
+    ((cast out : { @:optional var setResizable:Null<ApplicationWindow->Bool->Void>; }).setResizable = (cast function(win:ApplicationWindow, resizable:Bool):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -4141,7 +3965,8 @@ class _HostElectron {
         (cast bw : ElectronBrowserWindow).setResizable((cast resizable : Bool));
       } catch (__error:Dynamic) {
       }
-    }, setAlwaysOnTop: function(win:ApplicationWindow, alwaysOnTop:Bool):Void {
+    }));
+    ((cast out : { @:optional var setAlwaysOnTop:Null<ApplicationWindow->Bool->Void>; }).setAlwaysOnTop = (cast function(win:ApplicationWindow, alwaysOnTop:Bool):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -4149,7 +3974,8 @@ class _HostElectron {
         (cast bw : ElectronBrowserWindow).setAlwaysOnTop((cast alwaysOnTop : Bool));
       } catch (__error:Dynamic) {
       }
-    }, setMinimumSize: function(win:ApplicationWindow, width:Float, height:Float):Void {
+    }));
+    ((cast out : { @:optional var setMinimumSize:Null<ApplicationWindow->Float->Float->Void>; }).setMinimumSize = (cast function(win:ApplicationWindow, width:Float, height:Float):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -4157,7 +3983,8 @@ class _HostElectron {
         (cast bw : ElectronBrowserWindow).setMinimumSize((cast width : Float), (cast height : Float));
       } catch (__error:Dynamic) {
       }
-    }, setMaximumSize: function(win:ApplicationWindow, width:Float, height:Float):Void {
+    }));
+    ((cast out : { @:optional var setMaximumSize:Null<ApplicationWindow->Float->Float->Void>; }).setMaximumSize = (cast function(win:ApplicationWindow, width:Float, height:Float):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -4165,7 +3992,8 @@ class _HostElectron {
         (cast bw : ElectronBrowserWindow).setMaximumSize((cast width : Float), (cast height : Float));
       } catch (__error:Dynamic) {
       }
-    }, setFullscreen: function(win:ApplicationWindow, fullscreen:Bool):Void {
+    }));
+    ((cast out : { @:optional var setFullscreen:Null<ApplicationWindow->Bool->Void>; }).setFullscreen = (cast function(win:ApplicationWindow, fullscreen:Bool):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -4173,7 +4001,8 @@ class _HostElectron {
         (cast bw : ElectronBrowserWindow).setFullScreen((cast fullscreen : Bool));
       } catch (__error:Dynamic) {
       }
-    }, setIcon: function(win:ApplicationWindow, icon:String):Void {
+    }));
+    ((cast out : { @:optional var setIcon:Null<ApplicationWindow->String->Void>; }).setIcon = (cast function(win:ApplicationWindow, icon:String):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -4181,7 +4010,8 @@ class _HostElectron {
         (cast bw : ElectronBrowserWindow).setIcon((cast icon : Dynamic));
       } catch (__error:Dynamic) {
       }
-    }, setOpacity: function(win:ApplicationWindow, opacity:Float):Void {
+    }));
+    ((cast out : { @:optional var setOpacity:Null<ApplicationWindow->Float->Void>; }).setOpacity = (cast function(win:ApplicationWindow, opacity:Float):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -4189,7 +4019,8 @@ class _HostElectron {
         (cast bw : ElectronBrowserWindow).setOpacity((cast opacity : Float));
       } catch (__error:Dynamic) {
       }
-    }, setSkipTaskbar: function(win:ApplicationWindow, skip:Bool):Void {
+    }));
+    ((cast out : { @:optional var setSkipTaskbar:Null<ApplicationWindow->Bool->Void>; }).setSkipTaskbar = (cast function(win:ApplicationWindow, skip:Bool):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -4197,7 +4028,8 @@ class _HostElectron {
         (cast bw : ElectronBrowserWindow).setSkipTaskbar((cast skip : Bool));
       } catch (__error:Dynamic) {
       }
-    }, setMenuBarVisible: function(win:ApplicationWindow, visible:Bool):Void {
+    }));
+    ((cast out : { @:optional var setMenuBarVisible:Null<ApplicationWindow->Bool->Void>; }).setMenuBarVisible = (cast function(win:ApplicationWindow, visible:Bool):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -4205,17 +4037,19 @@ class _HostElectron {
         (cast bw : ElectronBrowserWindow).setMenuBarVisibility((cast visible : Bool));
       } catch (__error:Dynamic) {
       }
-    }, setParent: function(win:ApplicationWindow, parent:Null<ApplicationWindow>):Void {
+    }));
+    ((cast out : { @:optional var setParent:Null<ApplicationWindow->Null<ApplicationWindow>->Void>; }).setParent = (cast function(win:ApplicationWindow, parent:Null<ApplicationWindow>):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       var parentBw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       parentBw = ((cast _Runtime.strictEquals(parent, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.coalesce(((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast parent))), function():Dynamic return cast null) : Dynamic));
       try {
-        (cast bw : ElectronBrowserWindow).setParentWindow(({ final __callArgument2294:Dynamic = parentBw; __callArgument2294; }));
+        (cast bw : ElectronBrowserWindow).setParentWindow(({ final __callArgument830:Dynamic = parentBw; __callArgument830; }));
       } catch (__error:Dynamic) {
       }
-    }, setProgress: function(win:ApplicationWindow, progress:Float):Void {
+    }));
+    ((cast out : { @:optional var setProgress:Null<ApplicationWindow->Float->Void>; }).setProgress = (cast function(win:ApplicationWindow, progress:Float):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -4223,7 +4057,8 @@ class _HostElectron {
         (cast bw : ElectronBrowserWindow).setProgressBar((cast progress : Float));
       } catch (__error:Dynamic) {
       }
-    }, requestAttention: function(win:ApplicationWindow, attention:Bool):Void {
+    }));
+    ((cast out : { @:optional var requestAttention:Null<ApplicationWindow->Bool->Void>; }).requestAttention = (cast function(win:ApplicationWindow, attention:Bool):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -4231,7 +4066,8 @@ class _HostElectron {
         (cast bw : ElectronBrowserWindow).flashFrame((cast attention : Bool));
       } catch (__error:Dynamic) {
       }
-    }, setContentProtection: function(win:ApplicationWindow, enabled:Bool):Void {
+    }));
+    ((cast out : { @:optional var setContentProtection:Null<ApplicationWindow->Bool->Void>; }).setContentProtection = (cast function(win:ApplicationWindow, enabled:Bool):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -4239,7 +4075,8 @@ class _HostElectron {
         (cast bw : ElectronBrowserWindow).setContentProtection((cast enabled : Bool));
       } catch (__error:Dynamic) {
       }
-    }, flashWindowFrame: function(win:ApplicationWindow):Void {
+    }));
+    ((cast out : { @:optional var flashWindowFrame:Null<ApplicationWindow->Void>; }).flashWindowFrame = (cast function(win:ApplicationWindow):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -4247,7 +4084,8 @@ class _HostElectron {
         (cast bw : ElectronBrowserWindow).flashFrame((cast true : Bool));
       } catch (__error:Dynamic) {
       }
-    }, setHasShadow: function(win:ApplicationWindow, hasShadow:Bool):Void {
+    }));
+    ((cast out : { @:optional var setHasShadow:Null<ApplicationWindow->Bool->Void>; }).setHasShadow = (cast function(win:ApplicationWindow, hasShadow:Bool):Void {
       var bw:Null<ElectronBrowserWindow> = cast _Runtime.UNDEFINED;
       bw = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast win)));
       if ((cast _Runtime.strictEquals(bw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -4255,23 +4093,7 @@ class _HostElectron {
         (cast bw : ElectronBrowserWindow).setHasShadow((cast hasShadow : Bool));
       } catch (__error:Dynamic) {
       }
-    } };
-    return cast null;
-  }
-
-  public static function getApplicationWindowForElectronId(id:Float):Null<ApplicationWindow> {
-    return cast _Runtime.coalesce(((cast _HostElectron._windowsById__electronWindow : flight._internal._Map<Float, ApplicationWindow>).get((cast id))), function():Dynamic return cast null);
-    return cast null;
-  }
-
-  public static function getElectronBrowserWindow(win:ApplicationWindow):Null<ElectronBrowserWindow> {
-    return cast _Runtime.coalesce(((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast (cast win : ApplicationWindow)))), function():Dynamic return cast null);
-    return cast null;
-  }
-
-  public static function getElectronWindowId(win:ApplicationWindow):Float {
-    return cast _Runtime.coalesce(({ final __structural2295 = ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).get((cast (cast win : ApplicationWindow)))); __structural2295 == null ? _Runtime.UNDEFINED : (cast __structural2295 : { var id:Float; }).id; }), function():Dynamic return cast -1.0);
-    return cast null;
+    }));
   }
 
   public static function resetElectronWindowBackendForTest():Void {
@@ -4299,62 +4121,62 @@ class _HostElectron {
     ((cast _HostElectron._windowRecords__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronWindowRecord__electronWindow>).set((cast win), (cast record)));
     ((cast _HostElectron._windows__electronWindow : flight._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).set((cast win), (cast handle)));
     ((cast _HostElectron._windowsById__electronWindow : flight._internal._Map<Float, ApplicationWindow>).set((cast (cast handle : ElectronBrowserWindow).id), (cast win)));
-    _HostElectron.addElectronWindowListener__electronWindow((cast record : Dynamic), (cast 'move' : String), ({ final __callArgument2296:Dynamic = function(__unused0:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
+    _HostElectron.addElectronWindowListener__electronWindow((cast record : Dynamic), (cast 'move' : String), ({ final __callArgument831:Dynamic = function(__unused0:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
       var bounds:ElectronRectangle = cast _Runtime.UNDEFINED;
       bounds = (cast handle : ElectronBrowserWindow).getBounds();
       (win.x = cast (bounds.x : Float));
       (win.y = cast (bounds.y : Float));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onMove]]), 1);
-    }, cast ([] : Array<Dynamic>)); }; __callArgument2296; }));
-    _HostElectron.addElectronWindowListener__electronWindow((cast record : Dynamic), (cast 'resize' : String), ({ final __callArgument2298:Dynamic = function(__unused1:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
+    }, cast ([] : Array<Dynamic>)); }; __callArgument831; }));
+    _HostElectron.addElectronWindowListener__electronWindow((cast record : Dynamic), (cast 'resize' : String), ({ final __callArgument833:Dynamic = function(__unused1:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
       var bounds:ElectronRectangle = cast _Runtime.UNDEFINED;
       bounds = (cast handle : ElectronBrowserWindow).getBounds();
       (win.width = cast (bounds.width : Float));
       (win.height = cast (bounds.height : Float));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onResize]]), 1);
-    }, cast ([] : Array<Dynamic>)); }; __callArgument2298; }));
-    _HostElectron.addElectronWindowListener__electronWindow((cast record : Dynamic), (cast 'minimize' : String), ({ final __callArgument2300:Dynamic = function(__unused2:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
+    }, cast ([] : Array<Dynamic>)); }; __callArgument833; }));
+    _HostElectron.addElectronWindowListener__electronWindow((cast record : Dynamic), (cast 'minimize' : String), ({ final __callArgument835:Dynamic = function(__unused2:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
       (win.minimized = cast (true : Bool));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onMinimize]]), 1);
-    }, cast ([] : Array<Dynamic>)); }; __callArgument2300; }));
-    _HostElectron.addElectronWindowListener__electronWindow((cast record : Dynamic), (cast 'maximize' : String), ({ final __callArgument2302:Dynamic = function(__unused3:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
+    }, cast ([] : Array<Dynamic>)); }; __callArgument835; }));
+    _HostElectron.addElectronWindowListener__electronWindow((cast record : Dynamic), (cast 'maximize' : String), ({ final __callArgument837:Dynamic = function(__unused3:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
       (win.maximized = cast (true : Bool));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onMaximize]]), 1);
-    }, cast ([] : Array<Dynamic>)); }; __callArgument2302; }));
+    }, cast ([] : Array<Dynamic>)); }; __callArgument837; }));
     onUnmaximize = (cast function():Void {
       (win.minimized = cast (false : Bool));
       (win.maximized = cast (false : Bool));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onRestore]]), 1);
     });
-    _HostElectron.addElectronWindowListener__electronWindow((cast record : Dynamic), (cast 'unmaximize' : String), ({ final __callArgument2304:Dynamic = function(__unused4:Array<flight._internal._Any>):Void { onUnmaximize(); }; __callArgument2304; }));
-    _HostElectron.addElectronWindowListener__electronWindow((cast record : Dynamic), (cast 'restore' : String), ({ final __callArgument2306:Dynamic = function(__unused5:Array<flight._internal._Any>):Void { onUnmaximize(); }; __callArgument2306; }));
-    _HostElectron.addElectronWindowListener__electronWindow((cast record : Dynamic), (cast 'enter-full-screen' : String), ({ final __callArgument2308:Dynamic = function(__unused6:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
+    _HostElectron.addElectronWindowListener__electronWindow((cast record : Dynamic), (cast 'unmaximize' : String), ({ final __callArgument839:Dynamic = function(__unused4:Array<flight._internal._Any>):Void { onUnmaximize(); }; __callArgument839; }));
+    _HostElectron.addElectronWindowListener__electronWindow((cast record : Dynamic), (cast 'restore' : String), ({ final __callArgument841:Dynamic = function(__unused5:Array<flight._internal._Any>):Void { onUnmaximize(); }; __callArgument841; }));
+    _HostElectron.addElectronWindowListener__electronWindow((cast record : Dynamic), (cast 'enter-full-screen' : String), ({ final __callArgument843:Dynamic = function(__unused6:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
       (win.fullscreen = cast (true : Bool));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onFullscreenChanged]]), 1);
-    }, cast ([] : Array<Dynamic>)); }; __callArgument2308; }));
-    _HostElectron.addElectronWindowListener__electronWindow((cast record : Dynamic), (cast 'leave-full-screen' : String), ({ final __callArgument2310:Dynamic = function(__unused7:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
+    }, cast ([] : Array<Dynamic>)); }; __callArgument843; }));
+    _HostElectron.addElectronWindowListener__electronWindow((cast record : Dynamic), (cast 'leave-full-screen' : String), ({ final __callArgument845:Dynamic = function(__unused7:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
       (win.fullscreen = cast (false : Bool));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onFullscreenChanged]]), 1);
-    }, cast ([] : Array<Dynamic>)); }; __callArgument2310; }));
-    _HostElectron.addElectronWindowListener__electronWindow((cast record : Dynamic), (cast 'focus' : String), ({ final __callArgument2312:Dynamic = function(__unused8:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
+    }, cast ([] : Array<Dynamic>)); }; __callArgument845; }));
+    _HostElectron.addElectronWindowListener__electronWindow((cast record : Dynamic), (cast 'focus' : String), ({ final __callArgument847:Dynamic = function(__unused8:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
       (win.focused = cast (true : Bool));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onFocusIn]]), 1);
-    }, cast ([] : Array<Dynamic>)); }; __callArgument2312; }));
-    _HostElectron.addElectronWindowListener__electronWindow((cast record : Dynamic), (cast 'blur' : String), ({ final __callArgument2314:Dynamic = function(__unused9:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
+    }, cast ([] : Array<Dynamic>)); }; __callArgument847; }));
+    _HostElectron.addElectronWindowListener__electronWindow((cast record : Dynamic), (cast 'blur' : String), ({ final __callArgument849:Dynamic = function(__unused9:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
       (win.focused = cast (false : Bool));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onFocusOut]]), 1);
-    }, cast ([] : Array<Dynamic>)); }; __callArgument2314; }));
-    _HostElectron.addElectronWindowListener__electronWindow((cast record : Dynamic), (cast 'closed' : String), ({ final __callArgument2320:Dynamic = function(__unused10:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
-      _HostElectron.detachElectronWindow__electronWindow(({ final __callArgument2316:Dynamic = win; __callArgument2316; }), (cast false : Bool));
-      notifyWindowClosed(({ final __callArgument2318:Dynamic = win; __callArgument2318; }));
-    }, cast ([] : Array<Dynamic>)); }; __callArgument2320; }));
+    }, cast ([] : Array<Dynamic>)); }; __callArgument849; }));
+    _HostElectron.addElectronWindowListener__electronWindow((cast record : Dynamic), (cast 'closed' : String), ({ final __callArgument855:Dynamic = function(__unused10:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
+      _HostElectron.detachElectronWindow__electronWindow(({ final __callArgument851:Dynamic = win; __callArgument851; }), (cast false : Bool));
+      notifyWindowClosed(({ final __callArgument853:Dynamic = win; __callArgument853; }));
+    }, cast ([] : Array<Dynamic>)); }; __callArgument855; }));
     return cast true;
     return cast null;
   }
 
   public static function addElectronWindowListener__electronWindow(record:ElectronWindowRecord__electronWindow, event:String, listener:Array<flight._internal._Any>->Void):Void {
-    (cast (cast record : ElectronWindowRecord__electronWindow).handle : ElectronBrowserWindow).on((cast event : String), ({ final __callArgument2326:Dynamic = listener; __callArgument2326; }));
-    _Runtime.callProperty((cast record : ElectronWindowRecord__electronWindow).cleanup, 'push', cast ([function():Void { (cast (cast record : ElectronWindowRecord__electronWindow).handle : ElectronBrowserWindow).off((cast event : String), ({ final __callArgument2327:Dynamic = listener; __callArgument2327; })); }] : Array<Dynamic>));
+    (cast (cast record : ElectronWindowRecord__electronWindow).handle : ElectronBrowserWindow).on((cast event : String), ({ final __callArgument861:Dynamic = listener; __callArgument861; }));
+    _Runtime.callProperty((cast record : ElectronWindowRecord__electronWindow).cleanup, 'push', cast ([function():Void { (cast (cast record : ElectronWindowRecord__electronWindow).handle : ElectronBrowserWindow).off((cast event : String), ({ final __callArgument862:Dynamic = listener; __callArgument862; })); }] : Array<Dynamic>));
   }
 
   public static function detachElectronWindow__electronWindow(win:ApplicationWindow, closeOwned:Bool):Void {

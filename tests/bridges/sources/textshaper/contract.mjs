@@ -11,3 +11,5 @@ export * from './textShaperItemize.mjs';
 export * from './textShaperPool.mjs';
 export * from './textShaperRun.mjs';
 export * from './textShaperSignals.mjs';
+export { initializeShapedRun } from './textShaperRun.mjs';
+export { initializeTextShaperCache } from './textShaperCache.mjs';

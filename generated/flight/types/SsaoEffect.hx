@@ -4,4 +4,24 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SsaoEffect = { var kind:String; @:optional var radius:Float; @:optional var intensity:Float; @:optional var bias:Float; @:optional var samples:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class SsaoEffect extends flight.types.RenderEffect<String> {
+  public var radius:Null<Float>;
+  public var intensity:Null<Float>;
+  public var bias:Null<Float>;
+  public var samples:Null<Float>;
+
+  private function new(kind:String, ?radius:Null<Float>, ?intensity:Null<Float>, ?bias:Null<Float>, ?samples:Null<Float>):Void {
+    super(kind);
+    this.radius = radius;
+    this.intensity = intensity;
+    this.bias = bias;
+    this.samples = samples;
+  }
+}
+#else
+typedef SsaoEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var radius:Float; @:optional var intensity:Float; @:optional var bias:Float; @:optional var samples:Float; };
+#end

@@ -7,6 +7,7 @@ __syncDependencies();
 
 export const clearSpatialIndex2D = api.clearSpatialIndex2D;
 export const createSpatialIndex2D = api.createSpatialIndex2D;
+export const initializeSpatialIndex2D = api.initializeSpatialIndex2D;
 export const insertSpatialObject2D = api.insertSpatialObject2D;
 export const querySpatialPairs2D = api.querySpatialPairs2D;
 export const querySpatialPoint2D = api.querySpatialPoint2D;

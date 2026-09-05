@@ -6,5 +6,11 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createPhysics3DColliderWorldShape = api.createPhysics3DColliderWorldShape;
+export const initializeCollisionBox3D = api.initializeCollisionBox3D;
+export const initializeCollisionCapsule3D = api.initializeCollisionCapsule3D;
+export const initializeCollisionCone3D = api.initializeCollisionCone3D;
+export const initializeCollisionConvex3D = api.initializeCollisionConvex3D;
+export const initializeCollisionCylinder3D = api.initializeCollisionCylinder3D;
+export const initializeCollisionSphere3D = api.initializeCollisionSphere3D;
 export const updatePhysics3DColliderWorldShape = api.updatePhysics3DColliderWorldShape;
 export const writePhysics3DColliderBounds = api.writePhysics3DColliderBounds;

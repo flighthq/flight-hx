@@ -3,7 +3,6 @@ import compiled from '../../build/haxe-js/flight.cjs';
 
 export const clearGeolocationWatch = compiled.flight.Geolocation.clearGeolocationWatch;
 export const createGeoPosition = compiled.flight.Geolocation.createGeoPosition;
-export const explainGeolocationBackend = compiled.flight.Geolocation.explainGeolocationBackend;
 export const getCurrentGeoPosition = compiled.flight.Geolocation.getCurrentGeoPosition;
 export const getCurrentGeoPositionResult = compiled.flight.Geolocation.getCurrentGeoPositionResult;
 export const isGeolocationAvailable = compiled.flight.Geolocation.isGeolocationAvailable;

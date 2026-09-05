@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createParticleEmitterConfig = api.createParticleEmitterConfig;
+export const initializeParticleEmitterConfig = api.initializeParticleEmitterConfig;

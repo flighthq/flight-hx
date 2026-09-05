@@ -4,4 +4,35 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SpritesheetPlayer = { var animation:Null<SpritesheetAnimation>; var complete:Bool; var elapsed:Float; var paused:Bool; var speed:Float; var frameIndex:Float; var onComplete:Signal<Void->Void>; var onLoop:Signal<Void->Void>; var queue:Array<SpritesheetAnimation>; };
+#if !flight_struct_typedef
+@:allow(flight._Spritesheet)
+@:keep
+@:structInit
+class SpritesheetPlayer {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var animation:Null<SpritesheetAnimation>;
+  public var complete:Bool;
+  public var elapsed:Float;
+  public var paused:Bool;
+  public var speed:Float;
+  public var frameIndex:Float;
+  public var onComplete:Signal<Void->Void>;
+  public var onLoop:Signal<Void->Void>;
+  public var queue:Array<SpritesheetAnimation>;
+
+  private function new(animation:Null<SpritesheetAnimation>, complete:Bool, elapsed:Float, paused:Bool, speed:Float, frameIndex:Float, onComplete:Signal<Void->Void>, onLoop:Signal<Void->Void>, queue:Array<SpritesheetAnimation>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.animation = animation;
+    this.complete = complete;
+    this.elapsed = elapsed;
+    this.paused = paused;
+    this.speed = speed;
+    this.frameIndex = frameIndex;
+    this.onComplete = onComplete;
+    this.onLoop = onLoop;
+    this.queue = queue;
+  }
+}
+#else
+typedef SpritesheetPlayer = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var animation:Null<SpritesheetAnimation>; var complete:Bool; var elapsed:Float; var paused:Bool; var speed:Float; var frameIndex:Float; var onComplete:Signal<Void->Void>; var onLoop:Signal<Void->Void>; var queue:Array<SpritesheetAnimation>; };
+#end

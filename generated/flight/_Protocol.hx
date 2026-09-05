@@ -3,11 +3,12 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Signals.clearSignal;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
-import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.HasProtocolDefault;
 import flight.types.HasProtocolLaunch;
 import flight.types.HasProtocolOpen;
@@ -34,7 +35,10 @@ class _Protocol {
   }
 
   public static function createProtocolHandler():ProtocolHandler {
-    return cast (cast createEntity((cast ({ onOpenUrl: (cast (cast createSignal() : Signal<String->Void>) : Dynamic) } : ProtocolHandler) : Dynamic)) : ProtocolHandler);
+    var out:EntityConstruction<ProtocolHandler> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ onOpenUrl: cast _Runtime.UNDEFINED } : ProtocolHandler); }) #end));
+    initializeProtocolHandler(({ final __callArgument3:Dynamic = out; __callArgument3; }));
+    return cast out;
     return cast null;
   }
 
@@ -82,7 +86,7 @@ class _Protocol {
   }
 
   public static function disposeProtocolHandler(handler:ProtocolHandler):Void {
-    detachProtocolHandler(({ final __callArgument3:Dynamic = handler; __callArgument3; }));
+    detachProtocolHandler(({ final __callArgument5:Dynamic = handler; __callArgument5; }));
     clearSignal((cast handler.onOpenUrl : Dynamic));
   }
 
@@ -94,6 +98,12 @@ class _Protocol {
   public static function getRegisteredProtocolSchemes(host:HasProtocolRegistration):Array<String> {
     return cast (cast (cast (cast host : HasProtocolRegistration).protocol : { var registration:ProtocolRegistrationBackend; }).registration : ProtocolRegistrationBackend).getRegisteredSchemes();
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeProtocolHandler(out:EntityConstruction<ProtocolHandler>):Void {
+    _Runtime.setField(out, 'onOpenUrl', (cast createSignal() : Signal<String->Void>));
   }
 
   public static function isProtocolSchemeDefault(host:HasProtocolDefault, scheme:String):Bool {

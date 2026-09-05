@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createCamera2D = api.createCamera2D;
+export const initializeCamera2D = api.initializeCamera2D;

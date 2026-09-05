@@ -4,4 +4,34 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ParticleEmitterData = { var alphas:flight._internal._Float32Array; var atlas:Null<TextureAtlas>; var colors:flight._internal._Float32Array; var ids:flight._internal._UInt16Array; var particleCount:Float; var positionsZ:flight._internal._Float32Array; var transforms:flight._internal._Float32Array; var velocities:flight._internal._Float32Array; var worldSpace:Bool; };
+#if !flight_struct_typedef
+@:allow(flight._ParticleEmitter)
+@:keep
+@:structInit
+class ParticleEmitterData extends flight.types.Node2DData {
+  public var alphas:flight._internal._Float32Array;
+  public var atlas:Null<TextureAtlas>;
+  public var colors:flight._internal._Float32Array;
+  public var ids:flight._internal._UInt16Array;
+  public var particleCount:Float;
+  public var positionsZ:flight._internal._Float32Array;
+  public var transforms:flight._internal._Float32Array;
+  public var velocities:flight._internal._Float32Array;
+  public var worldSpace:Bool;
+
+  private function new(alphas:flight._internal._Float32Array, atlas:Null<TextureAtlas>, colors:flight._internal._Float32Array, ids:flight._internal._UInt16Array, particleCount:Float, positionsZ:flight._internal._Float32Array, transforms:flight._internal._Float32Array, velocities:flight._internal._Float32Array, worldSpace:Bool):Void {
+    super();
+    this.alphas = alphas;
+    this.atlas = atlas;
+    this.colors = colors;
+    this.ids = ids;
+    this.particleCount = particleCount;
+    this.positionsZ = positionsZ;
+    this.transforms = transforms;
+    this.velocities = velocities;
+    this.worldSpace = worldSpace;
+  }
+}
+#else
+typedef ParticleEmitterData = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var alphas:flight._internal._Float32Array; var atlas:Null<TextureAtlas>; var colors:flight._internal._Float32Array; var ids:flight._internal._UInt16Array; var particleCount:Float; var positionsZ:flight._internal._Float32Array; var transforms:flight._internal._Float32Array; var velocities:flight._internal._Float32Array; var worldSpace:Bool; };
+#end

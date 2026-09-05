@@ -4,4 +4,31 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef DeviceDisplayMetrics = { var colorDepth:Float; var densityDpi:Float; var logicalHeight:Float; var logicalWidth:Float; var physicalHeight:Float; var physicalWidth:Float; var pixelRatio:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Device)
+@:keep
+@:structInit
+class DeviceDisplayMetrics {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var colorDepth:Float;
+  public var densityDpi:Float;
+  public var logicalHeight:Float;
+  public var logicalWidth:Float;
+  public var physicalHeight:Float;
+  public var physicalWidth:Float;
+  public var pixelRatio:Float;
+
+  private function new(colorDepth:Float, densityDpi:Float, logicalHeight:Float, logicalWidth:Float, physicalHeight:Float, physicalWidth:Float, pixelRatio:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.colorDepth = colorDepth;
+    this.densityDpi = densityDpi;
+    this.logicalHeight = logicalHeight;
+    this.logicalWidth = logicalWidth;
+    this.physicalHeight = physicalHeight;
+    this.physicalWidth = physicalWidth;
+    this.pixelRatio = pixelRatio;
+  }
+}
+#else
+typedef DeviceDisplayMetrics = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var colorDepth:Float; var densityDpi:Float; var logicalHeight:Float; var logicalWidth:Float; var physicalHeight:Float; var physicalWidth:Float; var pixelRatio:Float; };
+#end

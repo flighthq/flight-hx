@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const createInnerGlowEffect = api.createInnerGlowEffect;
 export const getInnerGlowEffectPadding = api.getInnerGlowEffectPadding;
+export const initializeInnerGlowEffect = api.initializeInnerGlowEffect;
 export const registerInnerGlowEffectPaddingResolver = api.registerInnerGlowEffectPaddingResolver;

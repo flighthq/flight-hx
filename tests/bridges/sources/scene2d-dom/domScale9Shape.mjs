@@ -8,3 +8,4 @@ __syncDependencies();
 export const createDomScale9ShapeData = api.createDomScale9ShapeData;
 export const defaultDomScale9ShapeRenderer = api.defaultDomScale9ShapeRenderer;
 export const drawDomScale9Shape = api.drawDomScale9Shape;
+export const initializeDomScale9ShapeData = api.initializeDomScale9ShapeData;

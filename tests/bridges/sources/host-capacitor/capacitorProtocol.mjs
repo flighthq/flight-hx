@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createCapacitorProtocolCapabilities = api.createCapacitorProtocolCapabilities;
+export const initializeCapacitorProtocolCapabilities = api.initializeCapacitorProtocolCapabilities;

@@ -3,11 +3,12 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Signals.clearSignal;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
-import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.HasShareContent;
 import flight.types.HasShareFiles;
 import flight.types.ShareContent;
@@ -47,7 +48,10 @@ class _Share {
   }
 
   public static function enableShareSignals():ShareSignals {
-    return cast (cast createEntity((cast ({ onShareResult: (cast (cast createSignal() : Signal<ShareResult->Void>) : Dynamic) } : ShareSignals) : Dynamic)) : ShareSignals);
+    var out:EntityConstruction<ShareSignals> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ onShareResult: cast _Runtime.UNDEFINED } : ShareSignals); }) #end));
+    initializeShareSignals(({ final __callArgument8:Dynamic = out; __callArgument8; }));
+    return cast out;
     return cast null;
   }
 
@@ -59,9 +63,15 @@ class _Share {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeShareSignals(out:EntityConstruction<ShareSignals>):Void {
+    _Runtime.setField(out, 'onShareResult', (cast createSignal() : Signal<ShareResult->Void>));
+  }
+
   public static function shareContent(host:HasShareContent, content:ShareContent):flight._internal._Promise<Bool> {
-    if ((cast !(cast (cast hasShareContentFields(({ final __callArgument8:Dynamic = content; __callArgument8; })) : Bool) : Bool) : Bool)) { return cast flight._internal._Async.resolve(false); }
-    return cast (cast (cast (cast host : HasShareContent).share : { var content:ShareContentBackend; }).content : ShareContentBackend).shareContent(({ final __callArgument10:Dynamic = content; __callArgument10; }));
+    if ((cast !(cast (cast hasShareContentFields(({ final __callArgument10:Dynamic = content; __callArgument10; })) : Bool) : Bool) : Bool)) { return cast flight._internal._Async.resolve(false); }
+    return cast (cast (cast (cast host : HasShareContent).share : { var content:ShareContentBackend; }).content : ShareContentBackend).shareContent(({ final __callArgument12:Dynamic = content; __callArgument12; }));
     return cast null;
   }
 
@@ -69,17 +79,17 @@ class _Share {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var result:ShareResult = cast _Runtime.UNDEFINED;
-        var __flowBranch18:Dynamic;
-        if ((cast !(cast (cast hasShareContentFields(({ final __callArgument16:Dynamic = content; __callArgument16; })) : Bool) : Bool) : Bool)) {
-          __flowBranch18 = flight._internal._Async.protect(function():Dynamic {
+        var __flowBranch20:Dynamic;
+        if ((cast !(cast (cast hasShareContentFields(({ final __callArgument18:Dynamic = content; __callArgument18; })) : Bool) : Bool) : Bool)) {
+          __flowBranch20 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn({ completed: false, activityType: null, dismissed: false });
           });
         } else {
-          __flowBranch18 = flight._internal._Async.flowNormal();
+          __flowBranch20 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch18, function():Dynamic {
-          return flight._internal._Async.flatMap((cast (cast (cast host : HasShareContent).share : { var content:ShareContentBackend; }).content : ShareContentBackend).shareContentWithResult(({ final __callArgument22:Dynamic = content; __callArgument22; })), function(__awaitValue19:Dynamic):Dynamic {
-            result = __awaitValue19;
+        return flight._internal._Async.continueFlow(__flowBranch20, function():Dynamic {
+          return flight._internal._Async.flatMap((cast (cast (cast host : HasShareContent).share : { var content:ShareContentBackend; }).content : ShareContentBackend).shareContentWithResult(({ final __callArgument24:Dynamic = content; __callArgument24; })), function(__awaitValue21:Dynamic):Dynamic {
+            result = __awaitValue21;
             for (signals in _Runtime.iterable(_Share._attachedSignals__share)) {
               _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signals.onShareResult], [result]]), 1);
             }
@@ -92,19 +102,19 @@ class _Share {
 
   public static function shareFiles(host:HasShareFiles, files:Array<ShareFile>):flight._internal._Promise<Bool> {
     var content:Null<ShareFilesContent> = cast _Runtime.UNDEFINED;
-    content = (cast _Share.filesContent__share(({ final __callArgument23:Dynamic = files; __callArgument23; })) : Null<ShareFilesContent>);
+    content = (cast _Share.filesContent__share(({ final __callArgument25:Dynamic = files; __callArgument25; })) : Null<ShareFilesContent>);
     if ((cast _Runtime.strictEquals(content, null) : Bool)) { return cast flight._internal._Async.resolve(false); }
-    return cast (cast (cast (cast host : HasShareFiles).share : { var files:ShareFilesBackend; }).files : ShareFilesBackend).shareContent(({ final __callArgument25:Dynamic = content; __callArgument25; }));
+    return cast (cast (cast (cast host : HasShareFiles).share : { var files:ShareFilesBackend; }).files : ShareFilesBackend).shareContent(({ final __callArgument27:Dynamic = content; __callArgument27; }));
     return cast null;
   }
 
   public static function shareText(host:HasShareContent, text:String):flight._internal._Promise<Bool> {
-    return cast (cast shareContent(({ final __callArgument26:Dynamic = host; __callArgument26; }), ({ final __callArgument27:Dynamic = { text: text }; __callArgument27; })) : flight._internal._Promise<Bool>);
+    return cast (cast shareContent(({ final __callArgument28:Dynamic = host; __callArgument28; }), ({ final __callArgument29:Dynamic = { text: text }; __callArgument29; })) : flight._internal._Promise<Bool>);
     return cast null;
   }
 
   public static function shareUrl(host:HasShareContent, url:String):flight._internal._Promise<Bool> {
-    return cast (cast shareContent(({ final __callArgument30:Dynamic = host; __callArgument30; }), ({ final __callArgument31:Dynamic = { url: url }; __callArgument31; })) : flight._internal._Promise<Bool>);
+    return cast (cast shareContent(({ final __callArgument32:Dynamic = host; __callArgument32; }), ({ final __callArgument33:Dynamic = { url: url }; __callArgument33; })) : flight._internal._Promise<Bool>);
     return cast null;
   }
 

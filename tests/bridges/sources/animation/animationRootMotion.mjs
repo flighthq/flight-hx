@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const createAnimationRootMotionExtractor = api.createAnimationRootMotionExtractor;
 export const extractAnimationRootMotion = api.extractAnimationRootMotion;
+export const initializeAnimationRootMotionExtractor = api.initializeAnimationRootMotionExtractor;

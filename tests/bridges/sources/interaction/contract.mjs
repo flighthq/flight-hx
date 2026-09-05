@@ -18,3 +18,7 @@ export * from './registerSpriteHitTest.mjs';
 export * from './registerTextHitTest.mjs';
 export * from './spatialQuery.mjs';
 export * from './spriteHitTests.mjs';
+export { initializeFocusManager } from './focusManager.mjs';
+export { initializeInteractionManager } from './interactionManager.mjs';
+export { initializeInteractionSignals } from './interactionManager.mjs';
+export { initializeNodeInteractionState } from './nodeInteractionState.mjs';

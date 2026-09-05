@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWebCursorBackend = api.createWebCursorBackend;
+export const initializeWebCursorBackend = api.initializeWebCursorBackend;

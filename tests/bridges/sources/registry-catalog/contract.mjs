@@ -5,3 +5,4 @@ __syncDependencies();
 
 export * from './builtInRegistryCatalogEntries.mjs';
 export * from './registryCatalog.mjs';
+export { initializeRegistryCatalog } from './registryCatalog.mjs';

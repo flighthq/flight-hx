@@ -4,4 +4,20 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ScanlinesEffect = { var kind:String; @:optional var count:Float; @:optional var intensity:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class ScanlinesEffect extends flight.types.RenderEffect<String> {
+  public var count:Null<Float>;
+  public var intensity:Null<Float>;
+
+  private function new(kind:String, ?count:Null<Float>, ?intensity:Null<Float>):Void {
+    super(kind);
+    this.count = count;
+    this.intensity = intensity;
+  }
+}
+#else
+typedef ScanlinesEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var count:Float; @:optional var intensity:Float; };
+#end

@@ -5,4 +5,17 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Types.EntityRuntimeKey;
 
-typedef NodeData = flight._internal._Object;
+#if !flight_struct_typedef
+@:allow(flight.types.Node2DData)
+@:keep
+@:structInit
+class NodeData {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+
+  private function new():Void {
+    this.__symbol__EntityRuntime = null;
+  }
+}
+#else
+typedef NodeData = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; };
+#end

@@ -4,4 +4,39 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Sensors = { var onAbsoluteOrientation:Signal<OrientationReading->Void>; var onAccelerometer:Signal<MotionReading->Void>; var onAmbientLight:Signal<AmbientLightReading->Void>; var onBarometer:Signal<PressureReading->Void>; var onGravity:Signal<MotionReading->Void>; var onGyroscope:Signal<RotationRateReading->Void>; var onLinearAcceleration:Signal<MotionReading->Void>; var onMagnetometer:Signal<MotionReading->Void>; var onOrientation:Signal<OrientationReading->Void>; var onProximity:Signal<ProximityReading->Void>; var onQuaternion:Signal<QuaternionReading->Void>; };
+#if !flight_struct_typedef
+@:allow(flight._Sensors)
+@:keep
+@:structInit
+class Sensors {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onAbsoluteOrientation:Signal<OrientationReading->Void>;
+  public var onAccelerometer:Signal<MotionReading->Void>;
+  public var onAmbientLight:Signal<AmbientLightReading->Void>;
+  public var onBarometer:Signal<PressureReading->Void>;
+  public var onGravity:Signal<MotionReading->Void>;
+  public var onGyroscope:Signal<RotationRateReading->Void>;
+  public var onLinearAcceleration:Signal<MotionReading->Void>;
+  public var onMagnetometer:Signal<MotionReading->Void>;
+  public var onOrientation:Signal<OrientationReading->Void>;
+  public var onProximity:Signal<ProximityReading->Void>;
+  public var onQuaternion:Signal<QuaternionReading->Void>;
+
+  private function new(onAbsoluteOrientation:Signal<OrientationReading->Void>, onAccelerometer:Signal<MotionReading->Void>, onAmbientLight:Signal<AmbientLightReading->Void>, onBarometer:Signal<PressureReading->Void>, onGravity:Signal<MotionReading->Void>, onGyroscope:Signal<RotationRateReading->Void>, onLinearAcceleration:Signal<MotionReading->Void>, onMagnetometer:Signal<MotionReading->Void>, onOrientation:Signal<OrientationReading->Void>, onProximity:Signal<ProximityReading->Void>, onQuaternion:Signal<QuaternionReading->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onAbsoluteOrientation = onAbsoluteOrientation;
+    this.onAccelerometer = onAccelerometer;
+    this.onAmbientLight = onAmbientLight;
+    this.onBarometer = onBarometer;
+    this.onGravity = onGravity;
+    this.onGyroscope = onGyroscope;
+    this.onLinearAcceleration = onLinearAcceleration;
+    this.onMagnetometer = onMagnetometer;
+    this.onOrientation = onOrientation;
+    this.onProximity = onProximity;
+    this.onQuaternion = onQuaternion;
+  }
+}
+#else
+typedef Sensors = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onAbsoluteOrientation:Signal<OrientationReading->Void>; var onAccelerometer:Signal<MotionReading->Void>; var onAmbientLight:Signal<AmbientLightReading->Void>; var onBarometer:Signal<PressureReading->Void>; var onGravity:Signal<MotionReading->Void>; var onGyroscope:Signal<RotationRateReading->Void>; var onLinearAcceleration:Signal<MotionReading->Void>; var onMagnetometer:Signal<MotionReading->Void>; var onOrientation:Signal<OrientationReading->Void>; var onProximity:Signal<ProximityReading->Void>; var onQuaternion:Signal<QuaternionReading->Void>; };
+#end

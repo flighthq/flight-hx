@@ -4,4 +4,30 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GeolocationBackend = { var getCurrentPosition:GeolocationRequestOptions->flight._internal._Promise<Null<GeoPosition>>; var getCurrentPositionResult:GeolocationRequestOptions->flight._internal._Promise<GeoPositionResult>; var isAvailable:Void->Bool; var watchPosition:(GeoPosition->Void)->GeolocationRequestOptions->(GeolocationErrorReason->Void)->Float; var clearWatch:Float->Void; var promptForAccess:Void->flight._internal._Promise<GeolocationAccessOutcome>; };
+#if !flight_struct_typedef
+@:allow(flight._Geolocation)
+@:allow(flight._HostCapacitor)
+@:keep
+@:structInit
+class GeolocationBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var getCurrentPosition:GeolocationRequestOptions->flight._internal._Promise<Null<GeoPosition>>;
+  public var getCurrentPositionResult:GeolocationRequestOptions->flight._internal._Promise<GeoPositionResult>;
+  public var isAvailable:Void->Bool;
+  public var watchPosition:(GeoPosition->Void)->GeolocationRequestOptions->(GeolocationErrorReason->Void)->Float;
+  public var clearWatch:Float->Void;
+  public var promptForAccess:Void->flight._internal._Promise<GeolocationAccessOutcome>;
+
+  private function new(getCurrentPosition:GeolocationRequestOptions->flight._internal._Promise<Null<GeoPosition>>, getCurrentPositionResult:GeolocationRequestOptions->flight._internal._Promise<GeoPositionResult>, isAvailable:Void->Bool, watchPosition:(GeoPosition->Void)->GeolocationRequestOptions->(GeolocationErrorReason->Void)->Float, clearWatch:Float->Void, promptForAccess:Void->flight._internal._Promise<GeolocationAccessOutcome>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getCurrentPosition = getCurrentPosition;
+    this.getCurrentPositionResult = getCurrentPositionResult;
+    this.isAvailable = isAvailable;
+    this.watchPosition = watchPosition;
+    this.clearWatch = clearWatch;
+    this.promptForAccess = promptForAccess;
+  }
+}
+#else
+typedef GeolocationBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getCurrentPosition:GeolocationRequestOptions->flight._internal._Promise<Null<GeoPosition>>; var getCurrentPositionResult:GeolocationRequestOptions->flight._internal._Promise<GeoPositionResult>; var isAvailable:Void->Bool; var watchPosition:(GeoPosition->Void)->GeolocationRequestOptions->(GeolocationErrorReason->Void)->Float; var clearWatch:Float->Void; var promptForAccess:Void->flight._internal._Promise<GeolocationAccessOutcome>; };
+#end

@@ -4,4 +4,25 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ClipRegion = { var rect:Rectangle; var contours:Null<Array<Array<Float>>>; var winding:PathWinding; var version:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Clip)
+@:keep
+@:structInit
+class ClipRegion {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var rect:Rectangle;
+  public var contours:Null<Array<Array<Float>>>;
+  public var winding:PathWinding;
+  public var version:Float;
+
+  private function new(rect:Rectangle, contours:Null<Array<Array<Float>>>, winding:PathWinding, version:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.rect = rect;
+    this.contours = contours;
+    this.winding = winding;
+    this.version = version;
+  }
+}
+#else
+typedef ClipRegion = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var rect:Rectangle; var contours:Null<Array<Array<Float>>>; var winding:PathWinding; var version:Float; };
+#end

@@ -4,6 +4,8 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight.Types.EntityRuntimeKey;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Geometry.createRectangle;
 import flight._Geometry.enclosesRectangle;
 import flight._Geometry.intersectsRectangle;
@@ -13,6 +15,7 @@ import flight._Signals.emitSignal;
 import flight._Types.EntityRuntimeKey;
 import flight._Types.PathCommandValue;
 import flight.types.BoundsNodeAny;
+import flight.types.EntityConstruction;
 import flight.types.EntityRuntime;
 import flight.types.HierarchyNodeAny;
 import flight.types.LassoSelection;
@@ -22,6 +25,7 @@ import flight.types.MarqueeSelectionMode;
 import flight.types.MarqueeSelectionRuntime;
 import flight.types.Path;
 import flight.types.PathCommand;
+import flight.types.PathWinding;
 import flight.types.Rectangle;
 import flight.types.RectangleLike;
 import flight.types.SelectionModifierState;
@@ -52,10 +56,19 @@ class _Selection {
   }
 
   public static function createLassoSelection():LassoSelection {
-    var selection:LassoSelection = cast _Runtime.UNDEFINED;
-    var runtime:{ var active:Bool; var binding:flight._internal._Any; var path:{ var commands:Array<flight._internal._Any>; var data:Array<flight._internal._Any>; var winding:String; }; } = cast _Runtime.UNDEFINED;
-    selection = (cast _Runtime.objectFromPairs([{ key: EntityRuntimeKey, value: _Runtime.field(_Runtime, 'UNDEFINED') }]) : LassoSelection);
-    runtime = (cast { active: false, binding: null, path: { commands: cast ([] : Array<Dynamic>), data: cast ([] : Array<Dynamic>), winding: 'evenOdd' } });
+    var selection:EntityConstruction<LassoSelection> = cast _Runtime.UNDEFINED;
+    var runtime:{ var active:Bool; var binding:flight._internal._Any; var path:Path; } = cast _Runtime.UNDEFINED;
+    selection = (cast ({  } : LassoSelection));
+    initializeLassoSelection(({ final __callArgument4:Dynamic = selection; __callArgument4; }));
+    runtime = (cast { active: false, binding: null, path: _Runtime.callValue(function():Path {
+      var out:EntityConstruction<Path> = cast _Runtime.UNDEFINED;
+      out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ commands: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, winding: cast _Runtime.UNDEFINED } : Path); }) #end));
+      _Runtime.setField(out, 'commands', (cast cast ([] : Array<Dynamic>) : Array<Float>));
+      _Runtime.setField(out, 'data', (cast cast ([] : Array<Dynamic>) : Array<Float>));
+      _Runtime.setField(out, 'winding', 'evenOdd');
+      return cast out;
+      return cast _Runtime.UNDEFINED;
+    }, cast ([] : Array<Dynamic>)) });
     _Runtime.setIndex(selection, EntityRuntimeKey, runtime);
     return cast selection;
     return cast null;
@@ -63,7 +76,7 @@ class _Selection {
 
   public static function endLassoSelection(selection:LassoSelection):Path {
     var runtime:LassoSelectionRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast _Selection.getLassoSelectionRuntime__lassoSelection(({ final __callArgument4:Dynamic = selection; __callArgument4; })) : LassoSelectionRuntime);
+    runtime = (cast _Selection.getLassoSelectionRuntime__lassoSelection(({ final __callArgument6:Dynamic = selection; __callArgument6; })) : LassoSelectionRuntime);
     if ((cast (cast runtime : LassoSelectionRuntime).active : Bool)) { _Runtime.callProperty((cast (cast runtime : LassoSelectionRuntime).path : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CLOSE] : Array<Dynamic>)); }
     ((cast runtime : LassoSelectionRuntime).active = false);
     return cast (cast runtime : LassoSelectionRuntime).path;
@@ -73,7 +86,7 @@ class _Selection {
   public static function findNodesInLassoSelection<NodeType:BoundsNodeAny>(selection:LassoSelection, candidates:Array<NodeType>):Array<NodeType> {
     var path:Path = cast _Runtime.UNDEFINED;
     var matches:Array<NodeType> = cast _Runtime.UNDEFINED;
-    path = (cast (cast _Selection.getLassoSelectionRuntime__lassoSelection(({ final __callArgument6:Dynamic = selection; __callArgument6; })) : LassoSelectionRuntime) : LassoSelectionRuntime).path;
+    path = (cast (cast _Selection.getLassoSelectionRuntime__lassoSelection(({ final __callArgument8:Dynamic = selection; __callArgument8; })) : LassoSelectionRuntime) : LassoSelectionRuntime).path;
     if ((cast ((cast _Runtime.field((cast path : Path).data, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     matches = (cast cast ([] : Array<Dynamic>));
     {
@@ -92,8 +105,13 @@ class _Selection {
   }
 
   public static function getLassoSelectionPath(selection:LassoSelection):Path {
-    return cast (cast (cast _Selection.getLassoSelectionRuntime__lassoSelection(({ final __callArgument8:Dynamic = selection; __callArgument8; })) : LassoSelectionRuntime) : LassoSelectionRuntime).path;
+    return cast (cast (cast _Selection.getLassoSelectionRuntime__lassoSelection(({ final __callArgument10:Dynamic = selection; __callArgument10; })) : LassoSelectionRuntime) : LassoSelectionRuntime).path;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeLassoSelection(_out:EntityConstruction<LassoSelection>):Void {
   }
 
   public static function getLassoSelectionRuntime__lassoSelection(selection:LassoSelection):LassoSelectionRuntime {
@@ -139,7 +157,7 @@ class _Selection {
 
   public static function beginMarqueeSelection(selection:MarqueeSelection, startX:Float, startY:Float):Void {
     var runtime:MarqueeSelectionRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast _Selection.getMarqueeSelectionRuntime__marqueeSelection(({ final __callArgument10:Dynamic = selection; __callArgument10; })) : MarqueeSelectionRuntime);
+    runtime = (cast _Selection.getMarqueeSelectionRuntime__marqueeSelection(({ final __callArgument12:Dynamic = selection; __callArgument12; })) : MarqueeSelectionRuntime);
     ((cast runtime : MarqueeSelectionRuntime).active = true);
     ((cast runtime : MarqueeSelectionRuntime).startX = startX);
     ((cast runtime : MarqueeSelectionRuntime).startY = startY);
@@ -158,7 +176,7 @@ class _Selection {
 
   public static function endMarqueeSelection(selection:MarqueeSelection):Rectangle {
     var runtime:MarqueeSelectionRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast _Selection.getMarqueeSelectionRuntime__marqueeSelection(({ final __callArgument12:Dynamic = selection; __callArgument12; })) : MarqueeSelectionRuntime);
+    runtime = (cast _Selection.getMarqueeSelectionRuntime__marqueeSelection(({ final __callArgument14:Dynamic = selection; __callArgument14; })) : MarqueeSelectionRuntime);
     ((cast runtime : MarqueeSelectionRuntime).active = false);
     return cast (cast runtime : MarqueeSelectionRuntime).rectangle;
     return cast null;
@@ -167,14 +185,14 @@ class _Selection {
   public static function findNodesInMarqueeSelection<NodeType:BoundsNodeAny>(selection:MarqueeSelection, candidates:Array<NodeType>, mode:MarqueeSelectionMode = 'intersect'):Array<NodeType> {
     var rectangle:Rectangle = cast _Runtime.UNDEFINED;
     var matches:Array<NodeType> = cast _Runtime.UNDEFINED;
-    rectangle = (cast (cast _Selection.getMarqueeSelectionRuntime__marqueeSelection(({ final __callArgument14:Dynamic = selection; __callArgument14; })) : MarqueeSelectionRuntime) : MarqueeSelectionRuntime).rectangle;
+    rectangle = (cast (cast _Selection.getMarqueeSelectionRuntime__marqueeSelection(({ final __callArgument16:Dynamic = selection; __callArgument16; })) : MarqueeSelectionRuntime) : MarqueeSelectionRuntime).rectangle;
     matches = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(candidates, 'length') : Float)) : Bool)) {
         var candidate:NodeType = flight._internal._StaticIndex.readArray(candidates, i);
         var bounds:Rectangle = (cast (cast getNodeLocalBoundsRectangle : flight._internal._Any->Rectangle)((cast candidate : flight._internal._Any)) : Rectangle);
-        if ((cast ((cast _Runtime.strictEquals(mode, 'contain') : Bool) ? (cast (cast enclosesRectangle(({ final __callArgument16:Dynamic = rectangle; __callArgument16; }), ({ final __callArgument17:Dynamic = bounds; __callArgument17; })) : Bool) : Dynamic) : (cast (cast intersectsRectangle(({ final __callArgument20:Dynamic = rectangle; __callArgument20; }), ({ final __callArgument21:Dynamic = bounds; __callArgument21; })) : Bool) : Dynamic)) : Bool)) {
+        if ((cast ((cast _Runtime.strictEquals(mode, 'contain') : Bool) ? (cast (cast enclosesRectangle(({ final __callArgument18:Dynamic = rectangle; __callArgument18; }), ({ final __callArgument19:Dynamic = bounds; __callArgument19; })) : Bool) : Dynamic) : (cast (cast intersectsRectangle(({ final __callArgument22:Dynamic = rectangle; __callArgument22; }), ({ final __callArgument23:Dynamic = bounds; __callArgument23; })) : Bool) : Dynamic)) : Bool)) {
           _Runtime.callProperty(matches, 'push', cast ([candidate] : Array<Dynamic>));
         }
         i++;
@@ -185,13 +203,13 @@ class _Selection {
   }
 
   public static function getMarqueeRectangle(selection:MarqueeSelection):Rectangle {
-    return cast (cast (cast _Selection.getMarqueeSelectionRuntime__marqueeSelection(({ final __callArgument24:Dynamic = selection; __callArgument24; })) : MarqueeSelectionRuntime) : MarqueeSelectionRuntime).rectangle;
+    return cast (cast (cast _Selection.getMarqueeSelectionRuntime__marqueeSelection(({ final __callArgument26:Dynamic = selection; __callArgument26; })) : MarqueeSelectionRuntime) : MarqueeSelectionRuntime).rectangle;
     return cast null;
   }
 
   public static function updateMarqueeSelection(selection:MarqueeSelection, currentX:Float, currentY:Float):Void {
     var runtime:MarqueeSelectionRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast _Selection.getMarqueeSelectionRuntime__marqueeSelection(({ final __callArgument26:Dynamic = selection; __callArgument26; })) : MarqueeSelectionRuntime);
+    runtime = (cast _Selection.getMarqueeSelectionRuntime__marqueeSelection(({ final __callArgument28:Dynamic = selection; __callArgument28; })) : MarqueeSelectionRuntime);
     if ((cast !(cast (cast runtime : MarqueeSelectionRuntime).active : Bool) : Bool)) { return; }
     _Selection.setMarqueeRectangle__marqueeSelection((cast runtime : MarqueeSelectionRuntime).rectangle, (cast (cast runtime : MarqueeSelectionRuntime).startX : Float), (cast (cast runtime : MarqueeSelectionRuntime).startY : Float), (cast currentX : Float), (cast currentY : Float));
   }
@@ -211,10 +229,10 @@ class _Selection {
   public static function applyPointerSelectionPolicy<NodeType:HierarchyNodeAny>(state:SelectionState<NodeType>, hit:Null<NodeType>, modifiers:SelectionModifierState):Void {
     if ((cast _Runtime.field(modifiers, 'altKey') : Bool)) { return; }
     if ((cast _Runtime.strictEquals(hit, null) : Bool)) {
-      if ((cast !(cast (cast _Selection.hasToggleModifier__pointerSelectionPolicy(({ final __callArgument28:Dynamic = modifiers; __callArgument28; })) : Bool) : Bool) : Bool)) { clearSelection((cast state : Dynamic)); }
+      if ((cast !(cast (cast _Selection.hasToggleModifier__pointerSelectionPolicy(({ final __callArgument30:Dynamic = modifiers; __callArgument30; })) : Bool) : Bool) : Bool)) { clearSelection((cast state : Dynamic)); }
       return;
     }
-    if ((cast (cast _Selection.hasToggleModifier__pointerSelectionPolicy(({ final __callArgument30:Dynamic = modifiers; __callArgument30; })) : Bool) : Bool)) {
+    if ((cast (cast _Selection.hasToggleModifier__pointerSelectionPolicy(({ final __callArgument32:Dynamic = modifiers; __callArgument32; })) : Bool) : Bool)) {
       if ((cast ((cast _Runtime.field(modifiers, 'shiftKey') : Bool) && (cast !(cast (cast isNodeSelected((cast state : Dynamic), (cast hit : Dynamic)) : Bool) : Bool) : Bool)) : Bool)) {
         addNodeToSelection((cast state : Dynamic), (cast hit : Dynamic));
       } else {
@@ -226,12 +244,12 @@ class _Selection {
   }
 
   public static function applyPointerUpSelectionPolicy<NodeType:HierarchyNodeAny>(state:SelectionState<NodeType>, hit:Null<NodeType>, modifiers:SelectionModifierState, didDrag:Bool):Void {
-    if ((cast ((cast ((cast ((cast didDrag : Bool) || (cast _Runtime.strictEquals(hit, null) : Bool)) : Bool) || (cast (cast _Selection.hasAnyModifier__pointerSelectionPolicy(({ final __callArgument32:Dynamic = modifiers; __callArgument32; })) : Bool) : Bool)) : Bool) || (cast !(cast (cast isNodeSelected((cast state : Dynamic), (cast hit : Dynamic)) : Bool) : Bool) : Bool)) : Bool)) { return; }
+    if ((cast ((cast ((cast ((cast didDrag : Bool) || (cast _Runtime.strictEquals(hit, null) : Bool)) : Bool) || (cast (cast _Selection.hasAnyModifier__pointerSelectionPolicy(({ final __callArgument34:Dynamic = modifiers; __callArgument34; })) : Bool) : Bool)) : Bool) || (cast !(cast (cast isNodeSelected((cast state : Dynamic), (cast hit : Dynamic)) : Bool) : Bool) : Bool)) : Bool)) { return; }
     selectNode((cast state : Dynamic), (cast hit : Dynamic));
   }
 
   public static function hasAnyModifier__pointerSelectionPolicy(modifiers:SelectionModifierState):Bool {
-    return cast ((cast _Runtime.field(modifiers, 'altKey') : Bool) || (cast (cast _Selection.hasToggleModifier__pointerSelectionPolicy(({ final __callArgument34:Dynamic = modifiers; __callArgument34; })) : Bool) : Bool));
+    return cast ((cast _Runtime.field(modifiers, 'altKey') : Bool) || (cast (cast _Selection.hasToggleModifier__pointerSelectionPolicy(({ final __callArgument36:Dynamic = modifiers; __callArgument36; })) : Bool) : Bool));
     return cast null;
   }
 

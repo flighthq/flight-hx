@@ -9,3 +9,4 @@ export * from './commandHistory.mjs';
 export * from './commandHistorySignals.mjs';
 export * from './commandTransaction.mjs';
 export * from './explainCommandDispatch.mjs';
+export { initializeCommandHistory } from './commandHistory.mjs';

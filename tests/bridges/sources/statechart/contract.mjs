@@ -6,3 +6,4 @@ __syncDependencies();
 export * from './enableStatechartGuards.mjs';
 export * from './statechart.mjs';
 export * from './statechartSignals.mjs';
+export { initializeStatechartInstance } from './statechart.mjs';

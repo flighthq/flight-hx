@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef RichTextContent = { var formatRanges:Array<TextFormatRange>; var text:String; };
+#if !flight_struct_typedef
+@:allow(flight._TextLayout)
+@:keep
+@:structInit
+class RichTextContent {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var formatRanges:Array<TextFormatRange>;
+  public var text:String;
+
+  private function new(formatRanges:Array<TextFormatRange>, text:String):Void {
+    this.__symbol__EntityRuntime = null;
+    this.formatRanges = formatRanges;
+    this.text = text;
+  }
+}
+#else
+typedef RichTextContent = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var formatRanges:Array<TextFormatRange>; var text:String; };
+#end

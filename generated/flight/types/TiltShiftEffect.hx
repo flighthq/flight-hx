@@ -4,4 +4,22 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TiltShiftEffect = { var kind:String; @:optional var center:Float; @:optional var width:Float; @:optional var blur:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class TiltShiftEffect extends flight.types.RenderEffect<String> {
+  public var center:Null<Float>;
+  public var width:Null<Float>;
+  public var blur:Null<Float>;
+
+  private function new(kind:String, ?center:Null<Float>, ?width:Null<Float>, ?blur:Null<Float>):Void {
+    super(kind);
+    this.center = center;
+    this.width = width;
+    this.blur = blur;
+  }
+}
+#else
+typedef TiltShiftEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var center:Float; @:optional var width:Float; @:optional var blur:Float; };
+#end

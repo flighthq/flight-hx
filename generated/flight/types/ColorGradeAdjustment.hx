@@ -4,4 +4,34 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ColorGradeAdjustment = { var kind:String; var transform:ColorTransformFunction; @:optional var exposure:Float; @:optional var brightness:Float; @:optional var contrast:Float; @:optional var saturation:Float; @:optional var temperature:Float; @:optional var tint:Float; @:optional var lift:Float; @:optional var gamma:Float; @:optional var gain:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Adjustments)
+@:keep
+@:structInit
+class ColorGradeAdjustment extends flight.types.ColorLutAdjustment<String> {
+  public var exposure:Null<Float>;
+  public var brightness:Null<Float>;
+  public var contrast:Null<Float>;
+  public var saturation:Null<Float>;
+  public var temperature:Null<Float>;
+  public var tint:Null<Float>;
+  public var lift:Null<Float>;
+  public var gamma:Null<Float>;
+  public var gain:Null<Float>;
+
+  private function new(kind:String, transform:ColorTransformFunction, ?exposure:Null<Float>, ?brightness:Null<Float>, ?contrast:Null<Float>, ?saturation:Null<Float>, ?temperature:Null<Float>, ?tint:Null<Float>, ?lift:Null<Float>, ?gamma:Null<Float>, ?gain:Null<Float>):Void {
+    super(kind, transform);
+    this.exposure = exposure;
+    this.brightness = brightness;
+    this.contrast = contrast;
+    this.saturation = saturation;
+    this.temperature = temperature;
+    this.tint = tint;
+    this.lift = lift;
+    this.gamma = gamma;
+    this.gain = gain;
+  }
+}
+#else
+typedef ColorGradeAdjustment = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var transform:ColorTransformFunction; @:optional var exposure:Float; @:optional var brightness:Float; @:optional var contrast:Float; @:optional var saturation:Float; @:optional var temperature:Float; @:optional var tint:Float; @:optional var lift:Float; @:optional var gamma:Float; @:optional var gain:Float; };
+#end

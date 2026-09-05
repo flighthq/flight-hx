@@ -9,3 +9,7 @@ export const createTauriDirectoryOpenDialogBackend = api.createTauriDirectoryOpe
 export const createTauriFileOpenDialogBackend = api.createTauriFileOpenDialogBackend;
 export const createTauriFileSaveDialogBackend = api.createTauriFileSaveDialogBackend;
 export const createTauriMessageDialogBackend = api.createTauriMessageDialogBackend;
+export const initializeTauriDirectoryOpenDialogBackend = api.initializeTauriDirectoryOpenDialogBackend;
+export const initializeTauriFileOpenDialogBackend = api.initializeTauriFileOpenDialogBackend;
+export const initializeTauriFileSaveDialogBackend = api.initializeTauriFileSaveDialogBackend;
+export const initializeTauriMessageDialogBackend = api.initializeTauriMessageDialogBackend;

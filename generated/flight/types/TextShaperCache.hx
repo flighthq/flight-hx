@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TextShaperCache = { var _entries:flight._internal._Map<String, ShapedRun>; };
+#if !flight_struct_typedef
+@:allow(flight._TextShaper)
+@:keep
+@:structInit
+class TextShaperCache {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var _entries:flight._internal._Map<String, ShapedRun>;
+
+  private function new(_entries:flight._internal._Map<String, ShapedRun>):Void {
+    this.__symbol__EntityRuntime = null;
+    this._entries = _entries;
+  }
+}
+#else
+typedef TextShaperCache = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var _entries:flight._internal._Map<String, ShapedRun>; };
+#end

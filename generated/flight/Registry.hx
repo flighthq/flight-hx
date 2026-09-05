@@ -4,6 +4,7 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Registry as Facade_Registry_flight__Registry;
+import flight.types.Entity;
 import flight.types.KeyedTable;
 import flight.types.Kind;
 import flight.types.OrdinalTable;
@@ -13,22 +14,22 @@ import flight.types.RegistryTable;
 import flight.types.SlotTable;
 
 class Registry {
-  public static function concatRegistryTable<T>(base:flight._internal._Union2<KeyedTable<T>, SlotTable<T>>, overlay:flight._internal._Union2<KeyedTable<T>, SlotTable<T>>):flight._internal._Union2<KeyedTable<T>, SlotTable<T>> {
+  public static function concatRegistryTable<T>(base:flight._internal._Union2<KeyedTable<T>, SlotTable<T>>, overlay:flight._internal._Union2<KeyedTable<T>, SlotTable<T>>):flight._internal._Union2<{ >KeyedTable<T>, >Entity, }, { >SlotTable<T>, >Entity, }> {
     return cast Facade_Registry_flight__Registry.concatRegistryTable(base, overlay);
     return cast null;
   }
 
-  public static function createKeyedTable<T>(registry:RegistryId, onMiss:RegistryMissPolicy):KeyedTable<T> {
+  public static function createKeyedTable<T>(registry:RegistryId, onMiss:RegistryMissPolicy):{ >KeyedTable<T>, >Entity, } {
     return cast Facade_Registry_flight__Registry.createKeyedTable(registry, onMiss);
     return cast null;
   }
 
-  public static function createOrdinalTable<T>(registry:RegistryId, onMiss:RegistryMissPolicy, vocabulary:Array<Kind>):OrdinalTable<T> {
+  public static function createOrdinalTable<T>(registry:RegistryId, onMiss:RegistryMissPolicy, vocabulary:Array<Kind>):{ >OrdinalTable<T>, >Entity, } {
     return cast Facade_Registry_flight__Registry.createOrdinalTable(registry, onMiss, vocabulary);
     return cast null;
   }
 
-  public static function createSlotTable<T>(registry:RegistryId, onMiss:RegistryMissPolicy):SlotTable<T> {
+  public static function createSlotTable<T>(registry:RegistryId, onMiss:RegistryMissPolicy):{ >SlotTable<T>, >Entity, } {
     return cast Facade_Registry_flight__Registry.createSlotTable(registry, onMiss);
     return cast null;
   }
@@ -52,17 +53,17 @@ class Registry {
     return cast null;
   }
 
-  public static function withoutRegistryTableEntry<T>(table:KeyedTable<T>, key:Kind):KeyedTable<T> {
+  public static function withoutRegistryTableEntry<T>(table:KeyedTable<T>, key:Kind):{ >KeyedTable<T>, >Entity, } {
     return cast Facade_Registry_flight__Registry.withoutRegistryTableEntry(table, key);
     return cast null;
   }
 
-  public static function withRegistryTableEntry<T>(table:KeyedTable<T>, key:Kind, value:T):KeyedTable<T> {
+  public static function withRegistryTableEntry<T>(table:KeyedTable<T>, key:Kind, value:T):{ >KeyedTable<T>, >Entity, } {
     return cast Facade_Registry_flight__Registry.withRegistryTableEntry(table, key, value);
     return cast null;
   }
 
-  public static function withRegistryTableTombstone<T>(table:KeyedTable<T>, key:Kind):KeyedTable<T> {
+  public static function withRegistryTableTombstone<T>(table:KeyedTable<T>, key:Kind):{ >KeyedTable<T>, >Entity, } {
     return cast Facade_Registry_flight__Registry.withRegistryTableTombstone(table, key);
     return cast null;
   }

@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef PlatformBackend = { var getInfo:PlatformInfo->PlatformInfo; };
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:allow(flight._HostTauri)
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class PlatformBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var getInfo:PlatformInfo->PlatformInfo;
+
+  private function new(getInfo:PlatformInfo->PlatformInfo):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getInfo = getInfo;
+  }
+}
+#else
+typedef PlatformBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getInfo:PlatformInfo->PlatformInfo; };
+#end

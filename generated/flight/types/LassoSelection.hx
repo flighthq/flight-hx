@@ -4,4 +4,17 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._Selection)
+@:keep
+@:structInit
+class LassoSelection {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+
+  private function new():Void {
+    this.__symbol__EntityRuntime = null;
+  }
+}
+#else
 typedef LassoSelection = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; };
+#end

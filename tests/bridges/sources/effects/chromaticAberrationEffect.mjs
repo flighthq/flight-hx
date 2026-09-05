@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createChromaticAberrationEffect = api.createChromaticAberrationEffect;
+export const initializeChromaticAberrationEffect = api.initializeChromaticAberrationEffect;

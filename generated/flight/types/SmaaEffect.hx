@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SmaaEffect = { var kind:String; @:optional var threshold:Float; };
+#if (!flight_struct_typedef || js)
+@:allow(flight._Effects)
+@:keep
+@:structInit
+class SmaaEffect extends flight.types.RenderEffect<String> {
+  public var threshold:Null<Float>;
+
+  private function new(kind:String, ?threshold:Null<Float>):Void {
+    super(kind);
+    this.threshold = threshold;
+  }
+}
+#else
+typedef SmaaEffect = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; @:optional var threshold:Float; };
+#end

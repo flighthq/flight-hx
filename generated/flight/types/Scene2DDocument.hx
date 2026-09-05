@@ -4,4 +4,29 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Scene2DDocument = { var audioResources:Array<AudioResourceReference>; var backgroundColor:Null<Float>; var imageResources:Array<ImageResourceReference>; var root:Node2D; var slots:Array<Scene2DSlotReference>; var sourceKind:Null<String>; };
+#if !flight_struct_typedef
+@:allow(flight._Scene2DResources)
+@:keep
+@:structInit
+class Scene2DDocument {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var audioResources:Array<AudioResourceReference>;
+  public var backgroundColor:Null<Float>;
+  public var imageResources:Array<ImageResourceReference>;
+  public var root:Node2D;
+  public var slots:Array<Scene2DSlotReference>;
+  public var sourceKind:Null<String>;
+
+  private function new(audioResources:Array<AudioResourceReference>, backgroundColor:Null<Float>, imageResources:Array<ImageResourceReference>, root:Node2D, slots:Array<Scene2DSlotReference>, sourceKind:Null<String>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.audioResources = audioResources;
+    this.backgroundColor = backgroundColor;
+    this.imageResources = imageResources;
+    this.root = root;
+    this.slots = slots;
+    this.sourceKind = sourceKind;
+  }
+}
+#else
+typedef Scene2DDocument = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var audioResources:Array<AudioResourceReference>; var backgroundColor:Null<Float>; var imageResources:Array<ImageResourceReference>; var root:Node2D; var slots:Array<Scene2DSlotReference>; var sourceKind:Null<String>; };
+#end

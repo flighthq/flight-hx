@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWebNetBackend = api.createWebNetBackend;
+export const initializeWebNetBackend = api.initializeWebNetBackend;
 export const webNetBackend = api.webNetBackend;

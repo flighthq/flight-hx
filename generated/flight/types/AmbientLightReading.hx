@@ -4,4 +4,25 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AmbientLightReading = { var accuracy:SensorAccuracy; var interval:Float; var timestamp:Float; var illuminance:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Sensors)
+@:keep
+@:structInit
+class AmbientLightReading {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var accuracy:SensorAccuracy;
+  public var interval:Float;
+  public var timestamp:Float;
+  public var illuminance:Float;
+
+  private function new(accuracy:SensorAccuracy, interval:Float, timestamp:Float, illuminance:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.accuracy = accuracy;
+    this.interval = interval;
+    this.timestamp = timestamp;
+    this.illuminance = illuminance;
+  }
+}
+#else
+typedef AmbientLightReading = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var accuracy:SensorAccuracy; var interval:Float; var timestamp:Float; var illuminance:Float; };
+#end

@@ -6,3 +6,5 @@ __syncDependencies();
 export * from './application.mjs';
 export * from './applicationRenderView.mjs';
 export * from './window.mjs';
+export { initializeApplication } from './application.mjs';
+export { initializeApplicationWindow } from './window.mjs';

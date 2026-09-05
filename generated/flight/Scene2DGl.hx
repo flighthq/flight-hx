@@ -58,6 +58,8 @@ class Scene2DGl {
 
   public static final defaultGlScale9ShapeRenderer:Scene2DRenderer = Facade_Scene2DGl_flight__Scene2DGl.defaultGlScale9ShapeRenderer;
 
+  public static final defaultGlScale9SpriteRenderer:Scene2DRenderer = Facade_Scene2DGl_flight__Scene2DGl.defaultGlScale9SpriteRenderer;
+
   public static final defaultGlScene2DRenderer:Scene2DRenderer = Facade_Scene2DGl_flight__Scene2DGl.defaultGlScene2DRenderer;
 
   public static final defaultGlShapeCommands:Array<CanvasShapeCommand<String>> = Facade_Scene2DGl_flight__Scene2DCanvas.defaultCanvasShapeCommands;
@@ -71,6 +73,10 @@ class Scene2DGl {
   public static final defaultGlTextureShapeCommands:Array<CanvasShapeCommand<String>> = Facade_Scene2DGl_flight__Scene2DCanvas.defaultCanvasTextureShapeCommands;
 
   public static final defaultGlTilemapRenderer:SpriteRenderer = Facade_Scene2DGl_flight__Scene2DGl.defaultGlTilemapRenderer;
+
+  public static function drawGlScale9Sprite(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+    Facade_Scene2DGl_flight__Scene2DGl.drawGlScale9Sprite(state, renderProxy);
+  }
 
   public static function drawGlSprite(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     Facade_Scene2DGl_flight__Scene2DGl.drawGlSprite(state, renderProxy);

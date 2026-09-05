@@ -4,4 +4,23 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:keep
+@:structInit
+class ProtocolDefaultBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var isDefault:String->Bool;
+  public var removeAsDefault:String->Bool;
+  public var setAsDefault:String->Bool;
+
+  private function new(isDefault:String->Bool, removeAsDefault:String->Bool, setAsDefault:String->Bool):Void {
+    this.__symbol__EntityRuntime = null;
+    this.isDefault = isDefault;
+    this.removeAsDefault = removeAsDefault;
+    this.setAsDefault = setAsDefault;
+  }
+}
+#else
 typedef ProtocolDefaultBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var isDefault:String->Bool; var removeAsDefault:String->Bool; var setAsDefault:String->Bool; };
+#end

@@ -6,6 +6,7 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createMarkupTagRegistry = api.createMarkupTagRegistry;
+export const initializeMarkupTagRegistry = api.initializeMarkupTagRegistry;
 export const registerMarkupTag = api.registerMarkupTag;
 export const registerStandardMarkupTags = api.registerStandardMarkupTags;
 export const resolveMarkupHexColor = api.resolveMarkupHexColor;

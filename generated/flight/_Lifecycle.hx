@@ -3,6 +3,8 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
 import flight.types.AppLaunchKind;
@@ -10,6 +12,7 @@ import flight.types.AppLifecycle;
 import flight.types.AppLifecycleState;
 import flight.types.AppMemoryPressure;
 import flight.types.BackendOperationExplanation;
+import flight.types.EntityConstruction;
 import flight.types.HasSystemLifecycle;
 import flight.types.LifecycleBackend;
 import flight.types.LifecycleOperation;
@@ -59,85 +62,20 @@ class _Lifecycle {
   }
 
   public static function createAppLifecycle():AppLifecycle {
-    return cast { onStateChange: (cast createSignal() : Signal<AppLifecycleState->Void>), onResume: (cast createSignal() : Signal<Void->Void>), onPause: (cast createSignal() : Signal<Void->Void>), onBackButton: (cast createSignal() : Signal<Void->Void>), onMemoryWarning: (cast createSignal() : Signal<AppMemoryPressure->Void>), onSaveState: (cast createSignal() : Signal<flight._internal._Record<String, flight._internal._Any>->Void>), onRestoreState: (cast createSignal() : Signal<flight._internal._Record<String, flight._internal._Any>->Void>) };
+    var out:EntityConstruction<AppLifecycle> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ onBackButton: cast _Runtime.UNDEFINED, onMemoryWarning: cast _Runtime.UNDEFINED, onPause: cast _Runtime.UNDEFINED, onRestoreState: cast _Runtime.UNDEFINED, onResume: cast _Runtime.UNDEFINED, onSaveState: cast _Runtime.UNDEFINED, onStateChange: cast _Runtime.UNDEFINED } : AppLifecycle); }) #end));
+    initializeAppLifecycle(({ final __callArgument3:Dynamic = out; __callArgument3; }));
+    return cast out;
     return cast null;
   }
 
   @:allow(flight)
   @:keep
   private static function createWebLifecycleBackend():LifecycleBackend {
-    var _windowFocused:Bool = cast _Runtime.UNDEFINED;
-    _windowFocused = !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined');
-    return cast { getState: function():AppLifecycleState {
-      if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return cast 'active'; }
-      if ((cast flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'hidden') : Bool)) { return cast 'background'; }
-      return cast ((cast _windowFocused : Bool) ? (cast 'active' : Dynamic) : (cast 'inactive' : Dynamic));
-      return cast _Runtime.UNDEFINED;
-    }, subscribe: function(listener:Void->Void):Void->Void {
-      var onFocus:Void->Void = cast _Runtime.UNDEFINED;
-      var onBlur:Void->Void = cast _Runtime.UNDEFINED;
-      if ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) || (cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) : Bool)) { return cast function():Void {
-
-      }; }
-      (_windowFocused = cast (flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'hasFocus', cast ([] : Array<Dynamic>)) : Dynamic));
-      onFocus = (cast function():Void {
-        (_windowFocused = cast (true : Dynamic));
-        listener();
-      });
-      onBlur = (cast function():Void {
-        (_windowFocused = cast (false : Dynamic));
-        listener();
-      });
-      flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'addEventListener', cast (['visibilitychange', listener] : Array<Dynamic>));
-      flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['pagehide', listener] : Array<Dynamic>));
-      flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['pageshow', listener] : Array<Dynamic>));
-      flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['focus', onFocus] : Array<Dynamic>));
-      flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['blur', onBlur] : Array<Dynamic>));
-      return cast function():Void {
-        flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'removeEventListener', cast (['visibilitychange', listener] : Array<Dynamic>));
-        flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['pagehide', listener] : Array<Dynamic>));
-        flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['pageshow', listener] : Array<Dynamic>));
-        flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['focus', onFocus] : Array<Dynamic>));
-        flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['blur', onBlur] : Array<Dynamic>));
-      };
-      return cast _Runtime.UNDEFINED;
-    }, getLaunchKind: function():AppLaunchKind {
-      var entries:Array<flight._internal.dom.PerformanceNavigationTiming> = cast _Runtime.UNDEFINED;
-      if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('performance'), 'undefined') : Bool)) { return cast 'cold'; }
-      entries = (cast (cast flight._internal._HostValueLut.get('performance') : flight._internal.dom.Performance).getEntriesByType('navigation') : Array<flight._internal.dom.PerformanceNavigationTiming>);
-      if ((cast ((cast ((cast _Runtime.field(entries, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals((cast flight._internal._StaticIndex.readArray(entries, 0.0) : flight._internal.dom.PerformanceNavigationTiming).type, 'back_forward') : Bool)) : Bool)) { return cast 'warm'; }
-      return cast 'cold';
-      return cast _Runtime.UNDEFINED;
-    }, subscribeMemoryWarning: function(listener:AppMemoryPressure->Void):Void->Void {
-      var onPressure:flight._internal.dom.Event->Void = cast _Runtime.UNDEFINED;
-      var onPressureRelieved:Void->Void = cast _Runtime.UNDEFINED;
-      if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast function():Void {
-
-      }; }
-      onPressure = (cast function(e:flight._internal.dom.Event):Void {
-        var detail:{ @:optional var pressure:Null<String>; } = cast _Runtime.UNDEFINED;
-        var pressure:Null<String> = cast _Runtime.UNDEFINED;
-        detail = (cast e : flight._internal.dom.CustomEvent<{ @:optional var pressure:String; }>).detail;
-        pressure = ({ final __structural3 = detail; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var pressure:Null<String>; }).pressure; });
-        if ((cast _Runtime.strictEquals(pressure, 'critical') : Bool)) {
-          listener(({ final __callArgument4:Dynamic = 'critical'; __callArgument4; }));
-        } else { if ((cast _Runtime.strictEquals(pressure, 'moderate') : Bool)) {
-          listener(({ final __callArgument6:Dynamic = 'moderate'; __callArgument6; }));
-        } else {
-          listener(({ final __callArgument8:Dynamic = 'moderate'; __callArgument8; }));
-        } }
-      });
-      onPressureRelieved = (cast function():Void {
-        listener(({ final __callArgument10:Dynamic = 'normal'; __callArgument10; }));
-      });
-      flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['memory-pressure', onPressure] : Array<Dynamic>));
-      flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['memory-pressure-relieved', onPressureRelieved] : Array<Dynamic>));
-      return cast function():Void {
-        flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['memory-pressure', onPressure] : Array<Dynamic>));
-        flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['memory-pressure-relieved', onPressureRelieved] : Array<Dynamic>));
-      };
-      return cast _Runtime.UNDEFINED;
-    } };
+    var out:EntityConstruction<LifecycleBackend> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ getLaunchKind: cast _Runtime.UNDEFINED, getState: cast _Runtime.UNDEFINED, subscribe: cast _Runtime.UNDEFINED, subscribeMemoryWarning: cast _Runtime.UNDEFINED } : LifecycleBackend); }) #end));
+    initializeWebLifecycleBackend(({ final __callArgument5:Dynamic = out; __callArgument5; }));
+    return cast out;
     return cast null;
   }
 
@@ -151,7 +89,7 @@ class _Lifecycle {
   }
 
   public static function disposeAppLifecycle(app:AppLifecycle):Void {
-    detachAppLifecycle(({ final __callArgument12:Dynamic = app; __callArgument12; }));
+    detachAppLifecycle(({ final __callArgument7:Dynamic = app; __callArgument7; }));
     ((cast _Lifecycle._savedState__lifecycle : flight._internal._WeakMap<AppLifecycle, flight._internal._Record<String, flight._internal._Any>>).delete_((cast app)));
   }
 
@@ -179,8 +117,100 @@ class _Lifecycle {
   @:allow(flight)
   @:keep
   private static function hasLifecycleOperation(host:HasSystemLifecycle, operation:LifecycleOperation):Bool {
-    return cast (cast (cast explainLifecycleOperation(({ final __callArgument14:Dynamic = host; __callArgument14; }), (cast operation : String)) : BackendOperationExplanation) : BackendOperationExplanation).implemented;
+    return cast (cast (cast explainLifecycleOperation(({ final __callArgument9:Dynamic = host; __callArgument9; }), ({ final __callArgument10:Dynamic = operation; __callArgument10; })) : BackendOperationExplanation) : BackendOperationExplanation).implemented;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeAppLifecycle(out:EntityConstruction<AppLifecycle>):Void {
+    _Runtime.setField(out, 'onStateChange', (cast createSignal() : Signal<AppLifecycleState->Void>));
+    _Runtime.setField(out, 'onResume', (cast createSignal() : Signal<Void->Void>));
+    _Runtime.setField(out, 'onPause', (cast createSignal() : Signal<Void->Void>));
+    _Runtime.setField(out, 'onBackButton', (cast createSignal() : Signal<Void->Void>));
+    _Runtime.setField(out, 'onMemoryWarning', (cast createSignal() : Signal<AppMemoryPressure->Void>));
+    _Runtime.setField(out, 'onSaveState', (cast createSignal() : Signal<flight._internal._Record<String, flight._internal._Any>->Void>));
+    _Runtime.setField(out, 'onRestoreState', (cast createSignal() : Signal<flight._internal._Record<String, flight._internal._Any>->Void>));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeWebLifecycleBackend(out:EntityConstruction<LifecycleBackend>):Void {
+    var _windowFocused:Bool = cast _Runtime.UNDEFINED;
+    _windowFocused = !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined');
+    ((cast out : { var getState:Void->AppLifecycleState; }).getState = (cast function():AppLifecycleState {
+      if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return cast 'active'; }
+      if ((cast flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'hidden') : Bool)) { return cast 'background'; }
+      return cast ((cast _windowFocused : Bool) ? (cast 'active' : Dynamic) : (cast 'inactive' : Dynamic));
+      return cast _Runtime.UNDEFINED;
+    }));
+    ((cast out : { var subscribe:(Void->Void)->(Void->Void); }).subscribe = (cast function(listener:Void->Void):Void->Void {
+      var onFocus:Void->Void = cast _Runtime.UNDEFINED;
+      var onBlur:Void->Void = cast _Runtime.UNDEFINED;
+      if ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) || (cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) : Bool)) { return cast function():Void {
+
+      }; }
+      (_windowFocused = cast (flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'hasFocus', cast ([] : Array<Dynamic>)) : Dynamic));
+      onFocus = (cast function():Void {
+        (_windowFocused = cast (true : Dynamic));
+        listener();
+      });
+      onBlur = (cast function():Void {
+        (_windowFocused = cast (false : Dynamic));
+        listener();
+      });
+      flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'addEventListener', cast (['visibilitychange', listener] : Array<Dynamic>));
+      flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['pagehide', listener] : Array<Dynamic>));
+      flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['pageshow', listener] : Array<Dynamic>));
+      flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['focus', onFocus] : Array<Dynamic>));
+      flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['blur', onBlur] : Array<Dynamic>));
+      return cast function():Void {
+        flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'removeEventListener', cast (['visibilitychange', listener] : Array<Dynamic>));
+        flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['pagehide', listener] : Array<Dynamic>));
+        flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['pageshow', listener] : Array<Dynamic>));
+        flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['focus', onFocus] : Array<Dynamic>));
+        flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['blur', onBlur] : Array<Dynamic>));
+      };
+      return cast _Runtime.UNDEFINED;
+    }));
+    ((cast out : { @:optional var getLaunchKind:Null<Void->AppLaunchKind>; }).getLaunchKind = (cast function():AppLaunchKind {
+      var entries:Array<flight._internal.dom.PerformanceNavigationTiming> = cast _Runtime.UNDEFINED;
+      if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('performance'), 'undefined') : Bool)) { return cast 'cold'; }
+      entries = (cast (cast flight._internal._HostValueLut.get('performance') : flight._internal.dom.Performance).getEntriesByType('navigation') : Array<flight._internal.dom.PerformanceNavigationTiming>);
+      if ((cast ((cast ((cast _Runtime.field(entries, 'length') : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals((cast flight._internal._StaticIndex.readArray(entries, 0.0) : flight._internal.dom.PerformanceNavigationTiming).type, 'back_forward') : Bool)) : Bool)) { return cast 'warm'; }
+      return cast 'cold';
+      return cast _Runtime.UNDEFINED;
+    }));
+    ((cast out : { @:optional var subscribeMemoryWarning:Null<(AppMemoryPressure->Void)->(Void->Void)>; }).subscribeMemoryWarning = (cast function(listener:AppMemoryPressure->Void):Void->Void {
+      var onPressure:flight._internal.dom.Event->Void = cast _Runtime.UNDEFINED;
+      var onPressureRelieved:Void->Void = cast _Runtime.UNDEFINED;
+      if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast function():Void {
+
+      }; }
+      onPressure = (cast function(e:flight._internal.dom.Event):Void {
+        var detail:{ @:optional var pressure:Null<String>; } = cast _Runtime.UNDEFINED;
+        var pressure:Null<String> = cast _Runtime.UNDEFINED;
+        detail = (cast e : flight._internal.dom.CustomEvent<{ @:optional var pressure:String; }>).detail;
+        pressure = ({ final __structural13 = detail; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { @:optional var pressure:Null<String>; }).pressure; });
+        if ((cast _Runtime.strictEquals(pressure, 'critical') : Bool)) {
+          listener(({ final __callArgument14:Dynamic = 'critical'; __callArgument14; }));
+        } else { if ((cast _Runtime.strictEquals(pressure, 'moderate') : Bool)) {
+          listener(({ final __callArgument16:Dynamic = 'moderate'; __callArgument16; }));
+        } else {
+          listener(({ final __callArgument18:Dynamic = 'moderate'; __callArgument18; }));
+        } }
+      });
+      onPressureRelieved = (cast function():Void {
+        listener(({ final __callArgument20:Dynamic = 'normal'; __callArgument20; }));
+      });
+      flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['memory-pressure', onPressure] : Array<Dynamic>));
+      flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['memory-pressure-relieved', onPressureRelieved] : Array<Dynamic>));
+      return cast function():Void {
+        flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['memory-pressure', onPressure] : Array<Dynamic>));
+        flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['memory-pressure-relieved', onPressureRelieved] : Array<Dynamic>));
+      };
+      return cast _Runtime.UNDEFINED;
+    }));
   }
 
   public static function isAppActive(host:HasSystemLifecycle):Bool {
@@ -200,7 +230,7 @@ class _Lifecycle {
 
   public static function requestAppBack(app:AppLifecycle):Bool {
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onBackButton]]), 1);
-    return cast !_Runtime.strictEquals(({ final __typedStruct16 = (cast app.onBackButton : { var data:Null<SignalData<Void->Void>>; }).data; __typedStruct16 == null ? _Runtime.UNDEFINED : (cast __typedStruct16 : { var cancelled:Bool; }).cancelled; }), true);
+    return cast !_Runtime.strictEquals(({ final __typedStruct22 = (cast app.onBackButton : { var data:Null<SignalData<Void->Void>>; }).data; __typedStruct22 == null ? _Runtime.UNDEFINED : (cast __typedStruct22 : { var cancelled:Bool; }).cancelled; }), true);
     return cast null;
   }
 

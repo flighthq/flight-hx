@@ -4,4 +4,21 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostElectron)
+@:allow(flight._HostTauri)
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class AppRelaunchBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var relaunch:Void->Void;
+
+  private function new(relaunch:Void->Void):Void {
+    this.__symbol__EntityRuntime = null;
+    this.relaunch = relaunch;
+  }
+}
+#else
 typedef AppRelaunchBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var relaunch:Void->Void; };
+#end

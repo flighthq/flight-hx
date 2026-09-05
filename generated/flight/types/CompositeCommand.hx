@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CompositeCommand = { var kind:Kind; var label:String; var children:Array<Command>; };
+#if !flight_struct_typedef
+@:allow(flight._Command)
+@:keep
+@:structInit
+class CompositeCommand extends flight.types.Command {
+  public var children:Array<Command>;
+
+  private function new(kind:Kind, label:String, children:Array<Command>):Void {
+    super(kind, label);
+    this.children = children;
+  }
+}
+#else
+typedef CompositeCommand = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Kind; var label:String; var children:Array<Command>; };
+#end

@@ -9,6 +9,7 @@ import flight._internal._Runtime;
 @:keep
 @:structInit
 class Camera2D {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
   public var rotation:Float;
   public var viewportHeight:Float;
   public var viewportWidth:Float;
@@ -17,6 +18,7 @@ class Camera2D {
   public var zoom:Float;
 
   private function new(rotation:Float, viewportHeight:Float, viewportWidth:Float, x:Float, y:Float, zoom:Float):Void {
+    this.__symbol__EntityRuntime = null;
     this.rotation = rotation;
     this.viewportHeight = viewportHeight;
     this.viewportWidth = viewportWidth;
@@ -26,5 +28,5 @@ class Camera2D {
   }
 }
 #else
-typedef Camera2D = { var rotation:Float; var viewportHeight:Float; var viewportWidth:Float; var x:Float; var y:Float; var zoom:Float; };
+typedef Camera2D = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var rotation:Float; var viewportHeight:Float; var viewportWidth:Float; var x:Float; var y:Float; var zoom:Float; };
 #end

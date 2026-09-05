@@ -4,4 +4,66 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics3DGeneric6DofJoint = { var kind:Physics3DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorAZ:Float; var localAnchorBX:Float; var localAnchorBY:Float; var localAnchorBZ:Float; var collideConnected:Bool; var breakForce:Float; var breakTorque:Float; var broken:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var impulse3:Float; var impulse4:Float; var impulse5:Float; var rAX:Float; var rAY:Float; var rAZ:Float; var rBX:Float; var rBY:Float; var rBZ:Float; var localRotationAX:Float; var localRotationAY:Float; var localRotationAZ:Float; var localRotationAW:Float; var localRotationBX:Float; var localRotationBY:Float; var localRotationBZ:Float; var localRotationBW:Float; var lowerLinearX:Float; var lowerLinearY:Float; var lowerLinearZ:Float; var upperLinearX:Float; var upperLinearY:Float; var upperLinearZ:Float; var lowerAngularX:Float; var lowerAngularY:Float; var lowerAngularZ:Float; var upperAngularX:Float; var upperAngularY:Float; var upperAngularZ:Float; var enableLimitSpring:Bool; var limitFrequencyHz:Float; var limitDampingRatio:Float; var lowerLimitImpulses:Array<Float>; var upperLimitImpulses:Array<Float>; };
+#if !flight_struct_typedef
+@:allow(flight._Physics3D)
+@:keep
+@:structInit
+class Physics3DGeneric6DofJoint extends flight.types.Physics3DJoint {
+  public var localRotationAX:Float;
+  public var localRotationAY:Float;
+  public var localRotationAZ:Float;
+  public var localRotationAW:Float;
+  public var localRotationBX:Float;
+  public var localRotationBY:Float;
+  public var localRotationBZ:Float;
+  public var localRotationBW:Float;
+  public var lowerLinearX:Float;
+  public var lowerLinearY:Float;
+  public var lowerLinearZ:Float;
+  public var upperLinearX:Float;
+  public var upperLinearY:Float;
+  public var upperLinearZ:Float;
+  public var lowerAngularX:Float;
+  public var lowerAngularY:Float;
+  public var lowerAngularZ:Float;
+  public var upperAngularX:Float;
+  public var upperAngularY:Float;
+  public var upperAngularZ:Float;
+  public var enableLimitSpring:Bool;
+  public var limitFrequencyHz:Float;
+  public var limitDampingRatio:Float;
+  public var lowerLimitImpulses:Array<Float>;
+  public var upperLimitImpulses:Array<Float>;
+
+  private function new(kind:Physics3DJointKind, bodyA:Float, bodyB:Float, localAnchorAX:Float, localAnchorAY:Float, localAnchorAZ:Float, localAnchorBX:Float, localAnchorBY:Float, localAnchorBZ:Float, collideConnected:Bool, breakForce:Float, breakTorque:Float, broken:Bool, impulse0:Float, impulse1:Float, impulse2:Float, impulse3:Float, impulse4:Float, impulse5:Float, rAX:Float, rAY:Float, rAZ:Float, rBX:Float, rBY:Float, rBZ:Float, localRotationAX:Float, localRotationAY:Float, localRotationAZ:Float, localRotationAW:Float, localRotationBX:Float, localRotationBY:Float, localRotationBZ:Float, localRotationBW:Float, lowerLinearX:Float, lowerLinearY:Float, lowerLinearZ:Float, upperLinearX:Float, upperLinearY:Float, upperLinearZ:Float, lowerAngularX:Float, lowerAngularY:Float, lowerAngularZ:Float, upperAngularX:Float, upperAngularY:Float, upperAngularZ:Float, enableLimitSpring:Bool, limitFrequencyHz:Float, limitDampingRatio:Float, lowerLimitImpulses:Array<Float>, upperLimitImpulses:Array<Float>):Void {
+    super(kind, bodyA, bodyB, localAnchorAX, localAnchorAY, localAnchorAZ, localAnchorBX, localAnchorBY, localAnchorBZ, collideConnected, breakForce, breakTorque, broken, impulse0, impulse1, impulse2, impulse3, impulse4, impulse5, rAX, rAY, rAZ, rBX, rBY, rBZ);
+    this.localRotationAX = localRotationAX;
+    this.localRotationAY = localRotationAY;
+    this.localRotationAZ = localRotationAZ;
+    this.localRotationAW = localRotationAW;
+    this.localRotationBX = localRotationBX;
+    this.localRotationBY = localRotationBY;
+    this.localRotationBZ = localRotationBZ;
+    this.localRotationBW = localRotationBW;
+    this.lowerLinearX = lowerLinearX;
+    this.lowerLinearY = lowerLinearY;
+    this.lowerLinearZ = lowerLinearZ;
+    this.upperLinearX = upperLinearX;
+    this.upperLinearY = upperLinearY;
+    this.upperLinearZ = upperLinearZ;
+    this.lowerAngularX = lowerAngularX;
+    this.lowerAngularY = lowerAngularY;
+    this.lowerAngularZ = lowerAngularZ;
+    this.upperAngularX = upperAngularX;
+    this.upperAngularY = upperAngularY;
+    this.upperAngularZ = upperAngularZ;
+    this.enableLimitSpring = enableLimitSpring;
+    this.limitFrequencyHz = limitFrequencyHz;
+    this.limitDampingRatio = limitDampingRatio;
+    this.lowerLimitImpulses = lowerLimitImpulses;
+    this.upperLimitImpulses = upperLimitImpulses;
+  }
+}
+#else
+typedef Physics3DGeneric6DofJoint = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Physics3DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorAZ:Float; var localAnchorBX:Float; var localAnchorBY:Float; var localAnchorBZ:Float; var collideConnected:Bool; var breakForce:Float; var breakTorque:Float; var broken:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var impulse3:Float; var impulse4:Float; var impulse5:Float; var rAX:Float; var rAY:Float; var rAZ:Float; var rBX:Float; var rBY:Float; var rBZ:Float; var localRotationAX:Float; var localRotationAY:Float; var localRotationAZ:Float; var localRotationAW:Float; var localRotationBX:Float; var localRotationBY:Float; var localRotationBZ:Float; var localRotationBW:Float; var lowerLinearX:Float; var lowerLinearY:Float; var lowerLinearZ:Float; var upperLinearX:Float; var upperLinearY:Float; var upperLinearZ:Float; var lowerAngularX:Float; var lowerAngularY:Float; var lowerAngularZ:Float; var upperAngularX:Float; var upperAngularY:Float; var upperAngularZ:Float; var enableLimitSpring:Bool; var limitFrequencyHz:Float; var limitDampingRatio:Float; var lowerLimitImpulses:Array<Float>; var upperLimitImpulses:Array<Float>; };
+#end

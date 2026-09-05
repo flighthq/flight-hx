@@ -3,8 +3,11 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Math.CIRCLE_KAPPA;
 import flight._Types.PathCommandValue;
+import flight.types.EntityConstruction;
 import flight.types.MatrixLike;
 import flight.types.Path;
 import flight.types.PathCommand;
@@ -379,7 +382,10 @@ class _Path {
 
   public static function copyPath(source:Path, ?out:Path):Path {
     if ((cast _Runtime.strictEquals(out, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      return cast { commands: _Runtime.slice(_Runtime.field(source, 'commands'), 0, null), data: _Runtime.slice(_Runtime.field(source, 'data'), 0, null), winding: _Runtime.field(source, 'winding') };
+      var out:EntityConstruction<Path> = cast _Runtime.UNDEFINED;
+      out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ commands: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, winding: cast _Runtime.UNDEFINED } : Path); }) #end));
+      _Path.assignPathFields__copyPath(({ final __callArgument16:Dynamic = out; __callArgument16; }), _Runtime.slice(_Runtime.field(source, 'commands'), 0, null), _Runtime.slice(_Runtime.field(source, 'data'), 0, null), _Runtime.field(source, 'winding'));
+      return cast out;
     }
     if ((cast !_Runtime.strictEquals(out, source) : Bool)) {
       _Runtime.setLength((cast out : Path).commands, 0.0);
@@ -404,20 +410,26 @@ class _Path {
     return cast null;
   }
 
+  public static function assignPathFields__copyPath(out:EntityConstruction<Path>, commands:Array<Float>, data:Array<Float>, winding:PathWinding):Void {
+    _Runtime.setField(out, 'commands', commands);
+    _Runtime.setField(out, 'data', data);
+    _Runtime.setField(out, 'winding', winding);
+  }
+
   public static function dashPath(source:Path, dash:Array<Float>, dashOffset:Float, out:Path, tolerance:Float = 0.25):Void {
     var totalDashLength:Float = cast _Runtime.UNDEFINED;
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     _Runtime.setLength((cast out : Path).commands, 0.0);
     _Runtime.setLength((cast out : Path).data, 0.0);
     ((cast out : Path).winding = _Runtime.field(source, 'winding'));
-    totalDashLength = (cast _Path.dashTotal__dashPath(({ final __callArgument16:Dynamic = dash; __callArgument16; })) : Float);
+    totalDashLength = (cast _Path.dashTotal__dashPath(({ final __callArgument18:Dynamic = dash; __callArgument18; })) : Float);
     if ((cast ((cast totalDashLength : Float) <= (cast 0.0 : Float)) : Bool)) {
-      _Path.copyCommands__dashPath(({ final __callArgument18:Dynamic = source; __callArgument18; }), ({ final __callArgument19:Dynamic = out; __callArgument19; }));
+      _Path.copyCommands__dashPath(({ final __callArgument20:Dynamic = source; __callArgument20; }), ({ final __callArgument21:Dynamic = out; __callArgument21; }));
       return;
     }
-    contours = (cast flattenPath(({ final __callArgument22:Dynamic = source; __callArgument22; }), (cast tolerance : Float)) : Array<Array<Float>>);
+    contours = (cast flattenPath(({ final __callArgument24:Dynamic = source; __callArgument24; }), (cast tolerance : Float)) : Array<Array<Float>>);
     for (contour in _Runtime.iterable(contours)) {
-      _Path.applyDashToContour__dashPath(({ final __callArgument26:Dynamic = contour; __callArgument26; }), ({ final __callArgument27:Dynamic = dash; __callArgument27; }), (cast dashOffset : Float), (cast totalDashLength : Float), ({ final __callArgument28:Dynamic = out; __callArgument28; }));
+      _Path.applyDashToContour__dashPath(({ final __callArgument28:Dynamic = contour; __callArgument28; }), ({ final __callArgument29:Dynamic = dash; __callArgument29; }), (cast dashOffset : Float), (cast totalDashLength : Float), ({ final __callArgument30:Dynamic = out; __callArgument30; }));
     }
   }
 
@@ -537,7 +549,7 @@ class _Path {
 
   public static function decimatePath(source:Path, tolerance:Float, out:Path, flattenTolerance:Float = 0.25):Void {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath(({ final __callArgument32:Dynamic = source; __callArgument32; }), (cast flattenTolerance : Float)) : Array<Array<Float>>);
+    contours = (cast flattenPath(({ final __callArgument34:Dynamic = source; __callArgument34; }), (cast flattenTolerance : Float)) : Array<Array<Float>>);
     _Runtime.setLength((cast out : Path).commands, 0.0);
     _Runtime.setLength((cast out : Path).data, 0.0);
     ((cast out : Path).winding = _Runtime.field(source, 'winding'));
@@ -549,7 +561,7 @@ class _Path {
       var keep:flight._internal._UInt8Array = new flight._internal._UInt8Array(last);
       flight._internal._StaticIndex.writeUint8ArrayTyped((cast keep : flight._internal._UInt8Array), (cast 0.0 : Float), (cast 1.0 : Float));
       flight._internal._StaticIndex.writeUint8ArrayTyped((cast keep : flight._internal._UInt8Array), (cast (last - 1.0) : Float), (cast 1.0 : Float));
-      _Path.douglasPeucker__decimatePath(({ final __callArgument36:Dynamic = contour; __callArgument36; }), (cast 0.0 : Float), (cast (last - 1.0) : Float), (cast (tolerance * tolerance) : Float), ({ final __callArgument37:Dynamic = keep; __callArgument37; }));
+      _Path.douglasPeucker__decimatePath(({ final __callArgument38:Dynamic = contour; __callArgument38; }), (cast 0.0 : Float), (cast (last - 1.0) : Float), (cast (tolerance * tolerance) : Float), ({ final __callArgument39:Dynamic = keep; __callArgument39; }));
       var first:Bool = true;
       {
         var i:Float = 0.0;
@@ -614,14 +626,14 @@ class _Path {
     }
     if ((cast ((cast maxDistSq : Float) > (cast toleranceSq : Float)) : Bool)) {
       flight._internal._StaticIndex.writeUint8ArrayTyped((cast keep : flight._internal._UInt8Array), (cast maxIdx : Float), (cast 1.0 : Float));
-      _Path.douglasPeucker__decimatePath(({ final __callArgument40:Dynamic = pts; __callArgument40; }), (cast first : Float), (cast maxIdx : Float), (cast toleranceSq : Float), ({ final __callArgument41:Dynamic = keep; __callArgument41; }));
-      _Path.douglasPeucker__decimatePath(({ final __callArgument44:Dynamic = pts; __callArgument44; }), (cast maxIdx : Float), (cast last : Float), (cast toleranceSq : Float), ({ final __callArgument45:Dynamic = keep; __callArgument45; }));
+      _Path.douglasPeucker__decimatePath(({ final __callArgument42:Dynamic = pts; __callArgument42; }), (cast first : Float), (cast maxIdx : Float), (cast toleranceSq : Float), ({ final __callArgument43:Dynamic = keep; __callArgument43; }));
+      _Path.douglasPeucker__decimatePath(({ final __callArgument46:Dynamic = pts; __callArgument46; }), (cast maxIdx : Float), (cast last : Float), (cast toleranceSq : Float), ({ final __callArgument47:Dynamic = keep; __callArgument47; }));
     }
   }
 
   public static function explainPathMorphCreation(start:Path, end:Path):PathMorphCreationExplanation {
     var result:PathMorphBuildResult__pathMorphGeometry = cast _Runtime.UNDEFINED;
-    result = (cast buildPathMorph(({ final __callArgument48:Dynamic = start; __callArgument48; }), ({ final __callArgument49:Dynamic = end; __callArgument49; })) : PathMorphBuildResult__pathMorphGeometry);
+    result = (cast buildPathMorph(({ final __callArgument50:Dynamic = start; __callArgument50; }), ({ final __callArgument51:Dynamic = end; __callArgument51; })) : PathMorphBuildResult__pathMorphGeometry);
     return cast { contour: (cast result : PathMorphBuildResult__pathMorphGeometry).contour, reason: (cast _Path.getReason__explainPathMorphCreation((cast (cast result : PathMorphBuildResult__pathMorphGeometry).issue : Float)) : PathMorphCreationReason), supported: _Runtime.strictEquals((cast result : PathMorphBuildResult__pathMorphGeometry).issue, PathMorphIssueNone) };
     return cast null;
   }
@@ -637,7 +649,7 @@ class _Path {
 
   public static function explainStrokePathTessellation(path:Path, style:StrokeStyle, tolerance:Float = 0.25):StrokePathTessellationExplanation {
     var geometry:StrokePathGeometry__strokePathGeometry = cast _Runtime.UNDEFINED;
-    geometry = (cast buildStrokePathGeometry(({ final __callArgument52:Dynamic = path; __callArgument52; }), ({ final __callArgument53:Dynamic = style; __callArgument53; }), (cast tolerance : Float)) : StrokePathGeometry__strokePathGeometry);
+    geometry = (cast buildStrokePathGeometry(({ final __callArgument54:Dynamic = path; __callArgument54; }), ({ final __callArgument55:Dynamic = style; __callArgument55; }), (cast tolerance : Float)) : StrokePathGeometry__strokePathGeometry);
     return cast { reason: (cast _Path.getReason__explainStrokePathTessellation((cast (cast geometry : StrokePathGeometry__strokePathGeometry).issue : Float)) : StrokePathTessellationReason), subpath: (cast geometry : StrokePathGeometry__strokePathGeometry).issueSubpath, supported: _Runtime.strictEquals((cast geometry : StrokePathGeometry__strokePathGeometry).issue, StrokePathTessellationIssueNone) };
     return cast null;
   }
@@ -655,7 +667,7 @@ class _Path {
   public static function fitPathCurves(source:Path, tolerance:Float, out:Path, flattenTolerance:Float = 0.25):Void {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var toleranceSq:Float = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath(({ final __callArgument56:Dynamic = source; __callArgument56; }), (cast flattenTolerance : Float)) : Array<Array<Float>>);
+    contours = (cast flattenPath(({ final __callArgument58:Dynamic = source; __callArgument58; }), (cast flattenTolerance : Float)) : Array<Array<Float>>);
     _Runtime.setLength((cast out : Path).commands, 0.0);
     _Runtime.setLength((cast out : Path).data, 0.0);
     ((cast out : Path).winding = _Runtime.field(source, 'winding'));
@@ -675,7 +687,7 @@ class _Path {
         if ((cast closed : Bool)) { _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CLOSE] : Array<Dynamic>)); }
         continue;
       }
-      var corners:Array<Float> = (cast _Path.findCorners__fitPathCurves(({ final __callArgument60:Dynamic = pts; __callArgument60; }), (cast pn : Float)) : Array<Float>);
+      var corners:Array<Float> = (cast _Path.findCorners__fitPathCurves(({ final __callArgument62:Dynamic = pts; __callArgument62; }), (cast pn : Float)) : Array<Float>);
       _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO] : Array<Dynamic>));
       _Runtime.pushMany((cast out : Path).data, cast ([flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast 0.0 : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast 1.0 : Float))] : Array<Dynamic>));
       {
@@ -689,9 +701,9 @@ class _Path {
             ci++;
             continue;
           }
-          var tHat1:Array<Float> = (cast _Path.computeLeftTangent__fitPathCurves(({ final __callArgument62:Dynamic = pts; __callArgument62; }), (cast first : Float)) : Array<Float>);
-          var tHat2:Array<Float> = (cast _Path.computeRightTangent__fitPathCurves(({ final __callArgument64:Dynamic = pts; __callArgument64; }), (cast last : Float)) : Array<Float>);
-          _Path.fitCubic__fitPathCurves(({ final __callArgument66:Dynamic = pts; __callArgument66; }), (cast first : Float), (cast last : Float), ({ final __callArgument67:Dynamic = tHat1; __callArgument67; }), ({ final __callArgument68:Dynamic = tHat2; __callArgument68; }), (cast toleranceSq : Float), ({ final __callArgument69:Dynamic = out; __callArgument69; }));
+          var tHat1:Array<Float> = (cast _Path.computeLeftTangent__fitPathCurves(({ final __callArgument64:Dynamic = pts; __callArgument64; }), (cast first : Float)) : Array<Float>);
+          var tHat2:Array<Float> = (cast _Path.computeRightTangent__fitPathCurves(({ final __callArgument66:Dynamic = pts; __callArgument66; }), (cast last : Float)) : Array<Float>);
+          _Path.fitCubic__fitPathCurves(({ final __callArgument68:Dynamic = pts; __callArgument68; }), (cast first : Float), (cast last : Float), ({ final __callArgument69:Dynamic = tHat1; __callArgument69; }), ({ final __callArgument70:Dynamic = tHat2; __callArgument70; }), (cast toleranceSq : Float), ({ final __callArgument71:Dynamic = out; __callArgument71; }));
           ci++;
         }
       }
@@ -762,7 +774,7 @@ class _Path {
       {
         var i:Float = 1.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(u, 'length') : Float)) : Bool)) {
-          ({ var __indexedObject74:Array<Float> = u; var __indexedKey75:Float = i; flight._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject74 : Array<Float>), (cast __indexedKey75 : Float), (cast (flight._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject74 : Array<Float>), (cast __indexedKey75 : Float)) / total) : Float)); });
+          ({ var __indexedObject76:Array<Float> = u; var __indexedKey77:Float = i; flight._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject76 : Array<Float>), (cast __indexedKey77 : Float), (cast (flight._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject76 : Array<Float>), (cast __indexedKey77 : Float)) / total) : Float)); });
           i++;
         }
       }
@@ -783,13 +795,13 @@ class _Path {
       _Runtime.pushMany((cast out : Path).data, cast ([(flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast (first * 2.0) : Float)) + (flight._internal._StaticIndex.readFloatArrayTyped((cast tHat1 : Array<Float>), (cast 0.0 : Float)) * d)), (flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast ((first * 2.0) + 1.0) : Float)) + (flight._internal._StaticIndex.readFloatArrayTyped((cast tHat1 : Array<Float>), (cast 1.0 : Float)) * d)), (flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast (last * 2.0) : Float)) + (flight._internal._StaticIndex.readFloatArrayTyped((cast tHat2 : Array<Float>), (cast 0.0 : Float)) * d)), (flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast ((last * 2.0) + 1.0) : Float)) + (flight._internal._StaticIndex.readFloatArrayTyped((cast tHat2 : Array<Float>), (cast 1.0 : Float)) * d)), flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast (last * 2.0) : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast ((last * 2.0) + 1.0) : Float))] : Array<Dynamic>));
       return;
     }
-    u = (cast _Path.chordLengthParameterize__fitPathCurves(({ final __callArgument76:Dynamic = pts; __callArgument76; }), (cast first : Float), (cast last : Float)) : Array<Float>);
+    u = (cast _Path.chordLengthParameterize__fitPathCurves(({ final __callArgument78:Dynamic = pts; __callArgument78; }), (cast first : Float), (cast last : Float)) : Array<Float>);
     MAX_ITERATIONS = 4.0;
     {
       var iter:Float = 0.0;
       while ((cast ((cast iter : Float) <= (cast MAX_ITERATIONS : Float)) : Bool)) {
-        var bezier:Array<Float> = (cast _Path.generateBezier__fitPathCurves(({ final __callArgument78:Dynamic = pts; __callArgument78; }), (cast first : Float), (cast last : Float), ({ final __callArgument79:Dynamic = u; __callArgument79; }), ({ final __callArgument80:Dynamic = tHat1; __callArgument80; }), ({ final __callArgument81:Dynamic = tHat2; __callArgument81; })) : Array<Float>);
-        var __destructure0 = (cast _Path.computeMaxError__fitPathCurves(({ final __callArgument86:Dynamic = pts; __callArgument86; }), (cast first : Float), (cast last : Float), ({ final __callArgument87:Dynamic = bezier; __callArgument87; }), ({ final __callArgument88:Dynamic = u; __callArgument88; })) : Array<Float>);
+        var bezier:Array<Float> = (cast _Path.generateBezier__fitPathCurves(({ final __callArgument80:Dynamic = pts; __callArgument80; }), (cast first : Float), (cast last : Float), ({ final __callArgument81:Dynamic = u; __callArgument81; }), ({ final __callArgument82:Dynamic = tHat1; __callArgument82; }), ({ final __callArgument83:Dynamic = tHat2; __callArgument83; })) : Array<Float>);
+        var __destructure0 = (cast _Path.computeMaxError__fitPathCurves(({ final __callArgument88:Dynamic = pts; __callArgument88; }), (cast first : Float), (cast last : Float), ({ final __callArgument89:Dynamic = bezier; __callArgument89; }), ({ final __callArgument90:Dynamic = u; __callArgument90; })) : Array<Float>);
         var maxErr:Float = flight._internal._StaticIndex.readArray(__destructure0, 0.0);
         var splitPoint:Float = flight._internal._StaticIndex.readArray(__destructure0, 1.0);
         if ((cast ((cast maxErr : Float) < (cast toleranceSq : Float)) : Bool)) {
@@ -798,11 +810,11 @@ class _Path {
           return;
         }
         if ((cast ((cast iter : Float) < (cast MAX_ITERATIONS : Float)) : Bool)) {
-          (u = cast ((cast _Path.reparameterize__fitPathCurves(({ final __callArgument92:Dynamic = pts; __callArgument92; }), (cast first : Float), (cast last : Float), ({ final __callArgument93:Dynamic = u; __callArgument93; }), ({ final __callArgument94:Dynamic = bezier; __callArgument94; })) : Array<Float>) : Dynamic));
+          (u = cast ((cast _Path.reparameterize__fitPathCurves(({ final __callArgument94:Dynamic = pts; __callArgument94; }), (cast first : Float), (cast last : Float), ({ final __callArgument95:Dynamic = u; __callArgument95; }), ({ final __callArgument96:Dynamic = bezier; __callArgument96; })) : Array<Float>) : Dynamic));
         } else {
-          var tHatCenter:Array<Float> = (cast _Path.computeCenterTangent__fitPathCurves(({ final __callArgument98:Dynamic = pts; __callArgument98; }), (cast splitPoint : Float)) : Array<Float>);
-          _Path.fitCubic__fitPathCurves(({ final __callArgument100:Dynamic = pts; __callArgument100; }), (cast first : Float), (cast splitPoint : Float), ({ final __callArgument101:Dynamic = tHat1; __callArgument101; }), ({ final __callArgument102:Dynamic = cast ([-flight._internal._StaticIndex.readFloatArrayTyped((cast tHatCenter : Array<Float>), (cast 0.0 : Float)), -flight._internal._StaticIndex.readFloatArrayTyped((cast tHatCenter : Array<Float>), (cast 1.0 : Float))] : Array<Dynamic>); __callArgument102; }), (cast toleranceSq : Float), ({ final __callArgument103:Dynamic = out; __callArgument103; }));
-          _Path.fitCubic__fitPathCurves(({ final __callArgument108:Dynamic = pts; __callArgument108; }), (cast splitPoint : Float), (cast last : Float), ({ final __callArgument109:Dynamic = tHatCenter; __callArgument109; }), ({ final __callArgument110:Dynamic = tHat2; __callArgument110; }), (cast toleranceSq : Float), ({ final __callArgument111:Dynamic = out; __callArgument111; }));
+          var tHatCenter:Array<Float> = (cast _Path.computeCenterTangent__fitPathCurves(({ final __callArgument100:Dynamic = pts; __callArgument100; }), (cast splitPoint : Float)) : Array<Float>);
+          _Path.fitCubic__fitPathCurves(({ final __callArgument102:Dynamic = pts; __callArgument102; }), (cast first : Float), (cast splitPoint : Float), ({ final __callArgument103:Dynamic = tHat1; __callArgument103; }), ({ final __callArgument104:Dynamic = cast ([-flight._internal._StaticIndex.readFloatArrayTyped((cast tHatCenter : Array<Float>), (cast 0.0 : Float)), -flight._internal._StaticIndex.readFloatArrayTyped((cast tHatCenter : Array<Float>), (cast 1.0 : Float))] : Array<Dynamic>); __callArgument104; }), (cast toleranceSq : Float), ({ final __callArgument105:Dynamic = out; __callArgument105; }));
+          _Path.fitCubic__fitPathCurves(({ final __callArgument110:Dynamic = pts; __callArgument110; }), (cast splitPoint : Float), (cast last : Float), ({ final __callArgument111:Dynamic = tHatCenter; __callArgument111; }), ({ final __callArgument112:Dynamic = tHat2; __callArgument112; }), (cast toleranceSq : Float), ({ final __callArgument113:Dynamic = out; __callArgument113; }));
         }
         iter++;
       }
@@ -898,7 +910,7 @@ class _Path {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) <= (cast (last - first) : Float)) : Bool)) {
-        _Runtime.callProperty(uPrime, 'push', cast ([(cast _Path.newtonRaphsonRootFind__fitPathCurves(({ final __callArgument116:Dynamic = bezier; __callArgument116; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast ((first + i) * 2.0) : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast (((first + i) * 2.0) + 1.0) : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast u : Array<Float>), (cast i : Float)) : Float)) : Float)] : Array<Dynamic>));
+        _Runtime.callProperty(uPrime, 'push', cast ([(cast _Path.newtonRaphsonRootFind__fitPathCurves(({ final __callArgument118:Dynamic = bezier; __callArgument118; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast ((first + i) * 2.0) : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast (((first + i) * 2.0) + 1.0) : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast u : Array<Float>), (cast i : Float)) : Float)) : Float)] : Array<Dynamic>));
         i++;
       }
     }
@@ -983,26 +995,26 @@ class _Path {
           (contour = cast (cast ([x, y] : Array<Dynamic>) : Dynamic));
           _Runtime.callProperty(contours, 'push', cast ([contour] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO) : Bool)) {
-          (contour = cast ((cast _Path.ensureContour__flattenPath(({ final __callArgument118:Dynamic = contours; __callArgument118; }), ({ final __callArgument119:Dynamic = contour; __callArgument119; })) : Array<Float>) : Dynamic));
+          (contour = cast ((cast _Path.ensureContour__flattenPath(({ final __callArgument120:Dynamic = contours; __callArgument120; }), ({ final __callArgument121:Dynamic = contour; __callArgument121; })) : Array<Float>) : Dynamic));
           (x = cast (flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float)) : Dynamic));
           (y = cast (flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float)) : Dynamic));
           (di = cast ((di + 2.0) : Dynamic));
           _Runtime.pushMany(contour, cast ([x, y] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).WIDE_LINE_TO) : Bool)) {
-          (contour = cast ((cast _Path.ensureContour__flattenPath(({ final __callArgument122:Dynamic = contours; __callArgument122; }), ({ final __callArgument123:Dynamic = contour; __callArgument123; })) : Array<Float>) : Dynamic));
+          (contour = cast ((cast _Path.ensureContour__flattenPath(({ final __callArgument124:Dynamic = contours; __callArgument124; }), ({ final __callArgument125:Dynamic = contour; __callArgument125; })) : Array<Float>) : Dynamic));
           (x = cast (flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float)) : Dynamic));
           (y = cast (flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
           _Runtime.pushMany(contour, cast ([x, y] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CURVE_TO) : Bool)) {
-          (contour = cast ((cast _Path.ensureContour__flattenPath(({ final __callArgument126:Dynamic = contours; __callArgument126; }), ({ final __callArgument127:Dynamic = contour; __callArgument127; })) : Array<Float>) : Dynamic));
-          _Path.flattenQuadratic__flattenPath(({ final __callArgument130:Dynamic = contour; __callArgument130; }), (cast x : Float), (cast y : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float)) : Float), (cast toleranceSq : Float), (cast 0.0 : Float));
+          (contour = cast ((cast _Path.ensureContour__flattenPath(({ final __callArgument128:Dynamic = contours; __callArgument128; }), ({ final __callArgument129:Dynamic = contour; __callArgument129; })) : Array<Float>) : Dynamic));
+          _Path.flattenQuadratic__flattenPath(({ final __callArgument132:Dynamic = contour; __callArgument132; }), (cast x : Float), (cast y : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float)) : Float), (cast toleranceSq : Float), (cast 0.0 : Float));
           (x = cast (flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float)) : Dynamic));
           (y = cast (flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float)) : Dynamic));
           (di = cast ((di + 4.0) : Dynamic));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CUBIC_CURVE_TO) : Bool)) {
-          (contour = cast ((cast _Path.ensureContour__flattenPath(({ final __callArgument132:Dynamic = contours; __callArgument132; }), ({ final __callArgument133:Dynamic = contour; __callArgument133; })) : Array<Float>) : Dynamic));
-          _Path.flattenCubic__flattenPath(({ final __callArgument136:Dynamic = contour; __callArgument136; }), (cast x : Float), (cast y : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 4.0) : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 5.0) : Float)) : Float), (cast toleranceSq : Float), (cast 0.0 : Float));
+          (contour = cast ((cast _Path.ensureContour__flattenPath(({ final __callArgument134:Dynamic = contours; __callArgument134; }), ({ final __callArgument135:Dynamic = contour; __callArgument135; })) : Array<Float>) : Dynamic));
+          _Path.flattenCubic__flattenPath(({ final __callArgument138:Dynamic = contour; __callArgument138; }), (cast x : Float), (cast y : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 4.0) : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 5.0) : Float)) : Float), (cast toleranceSq : Float), (cast 0.0 : Float));
           (x = cast (flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 4.0) : Float)) : Dynamic));
           (y = cast (flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 5.0) : Float)) : Dynamic));
           (di = cast ((di + 6.0) : Dynamic));
@@ -1083,8 +1095,8 @@ class _Path {
     y123 = ((y12 + y23) / 2.0);
     xm = ((x012 + x123) / 2.0);
     ym = ((y012 + y123) / 2.0);
-    _Path.flattenCubic__flattenPath(({ final __callArgument138:Dynamic = out; __callArgument138; }), (cast x0 : Float), (cast y0 : Float), (cast x01 : Float), (cast y01 : Float), (cast x012 : Float), (cast y012 : Float), (cast xm : Float), (cast ym : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
-    _Path.flattenCubic__flattenPath(({ final __callArgument140:Dynamic = out; __callArgument140; }), (cast xm : Float), (cast ym : Float), (cast x123 : Float), (cast y123 : Float), (cast x23 : Float), (cast y23 : Float), (cast x1 : Float), (cast y1 : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
+    _Path.flattenCubic__flattenPath(({ final __callArgument140:Dynamic = out; __callArgument140; }), (cast x0 : Float), (cast y0 : Float), (cast x01 : Float), (cast y01 : Float), (cast x012 : Float), (cast y012 : Float), (cast xm : Float), (cast ym : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
+    _Path.flattenCubic__flattenPath(({ final __callArgument142:Dynamic = out; __callArgument142; }), (cast xm : Float), (cast ym : Float), (cast x123 : Float), (cast y123 : Float), (cast x23 : Float), (cast y23 : Float), (cast x1 : Float), (cast y1 : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
   }
 
   public static function flattenQuadratic__flattenPath(out:Array<Float>, x0:Float, y0:Float, cx:Float, cy:Float, x1:Float, y1:Float, toleranceSq:Float, depth:Float):Void {
@@ -1104,8 +1116,8 @@ class _Path {
     y12 = ((cy + y1) / 2.0);
     xm = ((x01 + x12) / 2.0);
     ym = ((y01 + y12) / 2.0);
-    _Path.flattenQuadratic__flattenPath(({ final __callArgument142:Dynamic = out; __callArgument142; }), (cast x0 : Float), (cast y0 : Float), (cast x01 : Float), (cast y01 : Float), (cast xm : Float), (cast ym : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
-    _Path.flattenQuadratic__flattenPath(({ final __callArgument144:Dynamic = out; __callArgument144; }), (cast xm : Float), (cast ym : Float), (cast x12 : Float), (cast y12 : Float), (cast x1 : Float), (cast y1 : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
+    _Path.flattenQuadratic__flattenPath(({ final __callArgument144:Dynamic = out; __callArgument144; }), (cast x0 : Float), (cast y0 : Float), (cast x01 : Float), (cast y01 : Float), (cast xm : Float), (cast ym : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
+    _Path.flattenQuadratic__flattenPath(({ final __callArgument146:Dynamic = out; __callArgument146; }), (cast xm : Float), (cast ym : Float), (cast x12 : Float), (cast y12 : Float), (cast x1 : Float), (cast y1 : Float), (cast toleranceSq : Float), (cast (depth + 1.0) : Float));
   }
 
   public static function forEachPathSegment(path:Path, visitor:PathSegment->Void):Void {
@@ -1123,29 +1135,29 @@ class _Path {
           var x:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float));
           var y:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float));
           (di = cast ((di + 2.0) : Dynamic));
-          visitor(({ final __callArgument146:Dynamic = { kind: 'moveTo', x: x, y: y }; __callArgument146; }));
+          visitor(({ final __callArgument148:Dynamic = { kind: 'moveTo', x: x, y: y }; __callArgument148; }));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).WIDE_MOVE_TO) : Bool)) {
           var x:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float));
           var y:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float));
           (di = cast ((di + 4.0) : Dynamic));
-          visitor(({ final __callArgument148:Dynamic = { kind: 'moveTo', x: x, y: y }; __callArgument148; }));
+          visitor(({ final __callArgument150:Dynamic = { kind: 'moveTo', x: x, y: y }; __callArgument150; }));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).LINE_TO) : Bool)) {
           var x:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float));
           var y:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float));
           (di = cast ((di + 2.0) : Dynamic));
-          visitor(({ final __callArgument150:Dynamic = { kind: 'lineTo', x: x, y: y }; __callArgument150; }));
+          visitor(({ final __callArgument152:Dynamic = { kind: 'lineTo', x: x, y: y }; __callArgument152; }));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).WIDE_LINE_TO) : Bool)) {
           var x:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float));
           var y:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float));
           (di = cast ((di + 4.0) : Dynamic));
-          visitor(({ final __callArgument152:Dynamic = { kind: 'lineTo', x: x, y: y }; __callArgument152; }));
+          visitor(({ final __callArgument154:Dynamic = { kind: 'lineTo', x: x, y: y }; __callArgument154; }));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CURVE_TO) : Bool)) {
           var controlX:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float));
           var controlY:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float));
           var x:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float));
           var y:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float));
           (di = cast ((di + 4.0) : Dynamic));
-          visitor(({ final __callArgument154:Dynamic = { kind: 'curveTo', controlX: controlX, controlY: controlY, x: x, y: y }; __callArgument154; }));
+          visitor(({ final __callArgument156:Dynamic = { kind: 'curveTo', controlX: controlX, controlY: controlY, x: x, y: y }; __callArgument156; }));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CUBIC_CURVE_TO) : Bool)) {
           var control1X:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast di : Float));
           var control1Y:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 1.0) : Float));
@@ -1154,9 +1166,9 @@ class _Path {
           var x:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 4.0) : Float));
           var y:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 5.0) : Float));
           (di = cast ((di + 6.0) : Dynamic));
-          visitor(({ final __callArgument156:Dynamic = { kind: 'cubicCurveTo', control1X: control1X, control1Y: control1Y, control2X: control2X, control2Y: control2Y, x: x, y: y }; __callArgument156; }));
+          visitor(({ final __callArgument158:Dynamic = { kind: 'cubicCurveTo', control1X: control1X, control1Y: control1Y, control2X: control2X, control2Y: control2Y, x: x, y: y }; __callArgument158; }));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CLOSE) : Bool)) {
-          visitor(({ final __callArgument158:Dynamic = { kind: 'close' }; __callArgument158; }));
+          visitor(({ final __callArgument160:Dynamic = { kind: 'close' }; __callArgument160; }));
         } } } } } } }
         ci++;
       }
@@ -1223,7 +1235,7 @@ class _Path {
           var ax:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 2.0) : Float));
           var ay:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 3.0) : Float));
           (di = cast ((di + 4.0) : Dynamic));
-          _Path.expandQuadraticBounds__getPathBounds((cast x : Float), (cast y : Float), (cast cx : Float), (cast cy : Float), (cast ax : Float), (cast ay : Float), ({ final __callArgument160:Dynamic = expand; __callArgument160; }));
+          _Path.expandQuadraticBounds__getPathBounds((cast x : Float), (cast y : Float), (cast cx : Float), (cast cy : Float), (cast ax : Float), (cast ay : Float), ({ final __callArgument162:Dynamic = expand; __callArgument162; }));
           (x = cast (ax : Dynamic));
           (y = cast (ay : Dynamic));
         } else { if ((cast _Runtime.strictEquals(command, (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CUBIC_CURVE_TO) : Bool)) {
@@ -1234,7 +1246,7 @@ class _Path {
           var ax:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 4.0) : Float));
           var ay:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast (di + 5.0) : Float));
           (di = cast ((di + 6.0) : Dynamic));
-          _Path.expandCubicBounds__getPathBounds((cast x : Float), (cast y : Float), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast ax : Float), (cast ay : Float), ({ final __callArgument162:Dynamic = expand; __callArgument162; }));
+          _Path.expandCubicBounds__getPathBounds((cast x : Float), (cast y : Float), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast ax : Float), (cast ay : Float), ({ final __callArgument164:Dynamic = expand; __callArgument164; }));
           (x = cast (ax : Dynamic));
           (y = cast (ay : Dynamic));
         } } } } } }
@@ -1298,12 +1310,12 @@ class _Path {
 
   public static function expandCubicBounds__getPathBounds(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x3:Float, y3:Float, expand:Float->Float->Void):Void {
     expand((cast x3 : Float), (cast y3 : Float));
-    _Path.cubicExtremumRoots__getPathBounds((cast x0 : Float), (cast c1x : Float), (cast c2x : Float), (cast x3 : Float), ({ final __callArgument164:Dynamic = function(t:Float):Void {
-      expand((cast (cast _Path.evalCubic__getPathBounds((cast x0 : Float), (cast c1x : Float), (cast c2x : Float), (cast x3 : Float), (cast t : Float)) : Float) : Float), (cast (cast _Path.evalCubic__getPathBounds((cast y0 : Float), (cast c1y : Float), (cast c2y : Float), (cast y3 : Float), (cast t : Float)) : Float) : Float));
-    }; __callArgument164; }));
-    _Path.cubicExtremumRoots__getPathBounds((cast y0 : Float), (cast c1y : Float), (cast c2y : Float), (cast y3 : Float), ({ final __callArgument166:Dynamic = function(t:Float):Void {
+    _Path.cubicExtremumRoots__getPathBounds((cast x0 : Float), (cast c1x : Float), (cast c2x : Float), (cast x3 : Float), ({ final __callArgument166:Dynamic = function(t:Float):Void {
       expand((cast (cast _Path.evalCubic__getPathBounds((cast x0 : Float), (cast c1x : Float), (cast c2x : Float), (cast x3 : Float), (cast t : Float)) : Float) : Float), (cast (cast _Path.evalCubic__getPathBounds((cast y0 : Float), (cast c1y : Float), (cast c2y : Float), (cast y3 : Float), (cast t : Float)) : Float) : Float));
     }; __callArgument166; }));
+    _Path.cubicExtremumRoots__getPathBounds((cast y0 : Float), (cast c1y : Float), (cast c2y : Float), (cast y3 : Float), ({ final __callArgument168:Dynamic = function(t:Float):Void {
+      expand((cast (cast _Path.evalCubic__getPathBounds((cast x0 : Float), (cast c1x : Float), (cast c2x : Float), (cast x3 : Float), (cast t : Float)) : Float) : Float), (cast (cast _Path.evalCubic__getPathBounds((cast y0 : Float), (cast c1y : Float), (cast c2y : Float), (cast y3 : Float), (cast t : Float)) : Float) : Float));
+    }; __callArgument168; }));
   }
 
   public static function expandQuadraticBounds__getPathBounds(x0:Float, y0:Float, cx:Float, cy:Float, x2:Float, y2:Float, expand:Float->Float->Void):Void {
@@ -1329,7 +1341,7 @@ class _Path {
   public static function getPathContourLengths(path:Path, tolerance:Float = 0.25):Array<Float> {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var lengths:Array<Float> = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath(({ final __callArgument168:Dynamic = path; __callArgument168; }), (cast tolerance : Float)) : Array<Array<Float>>);
+    contours = (cast flattenPath(({ final __callArgument170:Dynamic = path; __callArgument170; }), (cast tolerance : Float)) : Array<Array<Float>>);
     lengths = (cast cast ([] : Array<Dynamic>));
     {
       var ci:Float = 0.0;
@@ -1361,7 +1373,7 @@ class _Path {
   public static function getPathLength(path:Path, tolerance:Float = 0.25):Float {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var total:Float = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath(({ final __callArgument170:Dynamic = path; __callArgument170; }), (cast tolerance : Float)) : Array<Array<Float>>);
+    contours = (cast flattenPath(({ final __callArgument172:Dynamic = path; __callArgument172; }), (cast tolerance : Float)) : Array<Array<Float>>);
     total = 0.0;
     {
       var ci:Float = 0.0;
@@ -1395,7 +1407,7 @@ class _Path {
     var bestDistSq:Float = cast _Runtime.UNDEFINED;
     var bestX:Float = cast _Runtime.UNDEFINED;
     var bestY:Float = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath(({ final __callArgument172:Dynamic = path; __callArgument172; }), (cast tolerance : Float)) : Array<Array<Float>>);
+    contours = (cast flattenPath(({ final __callArgument174:Dynamic = path; __callArgument174; }), (cast tolerance : Float)) : Array<Array<Float>>);
     bestDistSq = HxMath.POSITIVE_INFINITY;
     bestX = 0.0;
     bestY = 0.0;
@@ -1443,25 +1455,25 @@ class _Path {
 
   public static function getPathPointAtDistance(path:Path, distance:Float, out:Vector2Like, tolerance:Float = 0.25):Bool {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath(({ final __callArgument174:Dynamic = path; __callArgument174; }), (cast tolerance : Float)) : Array<Array<Float>>);
-    return cast (cast _Path.samplePathPoint__getPathPointAtDistance(({ final __callArgument176:Dynamic = contours; __callArgument176; }), (cast distance : Float), ({ final __callArgument177:Dynamic = out; __callArgument177; })) : Bool);
+    contours = (cast flattenPath(({ final __callArgument176:Dynamic = path; __callArgument176; }), (cast tolerance : Float)) : Array<Array<Float>>);
+    return cast (cast _Path.samplePathPoint__getPathPointAtDistance(({ final __callArgument178:Dynamic = contours; __callArgument178; }), (cast distance : Float), ({ final __callArgument179:Dynamic = out; __callArgument179; })) : Bool);
     return cast null;
   }
 
   public static function getPathPositionAtDistance(path:Path, distance:Float, pointOut:Vector2Like, tangentOut:Vector2Like, tolerance:Float = 0.25):Bool {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var hasPoint:Bool = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath(({ final __callArgument180:Dynamic = path; __callArgument180; }), (cast tolerance : Float)) : Array<Array<Float>>);
-    hasPoint = (cast _Path.samplePathPoint__getPathPointAtDistance(({ final __callArgument182:Dynamic = contours; __callArgument182; }), (cast distance : Float), ({ final __callArgument183:Dynamic = pointOut; __callArgument183; })) : Bool);
-    (cast _Path.samplePathTangent__getPathPointAtDistance(({ final __callArgument186:Dynamic = contours; __callArgument186; }), (cast distance : Float), ({ final __callArgument187:Dynamic = tangentOut; __callArgument187; })) : Bool);
+    contours = (cast flattenPath(({ final __callArgument182:Dynamic = path; __callArgument182; }), (cast tolerance : Float)) : Array<Array<Float>>);
+    hasPoint = (cast _Path.samplePathPoint__getPathPointAtDistance(({ final __callArgument184:Dynamic = contours; __callArgument184; }), (cast distance : Float), ({ final __callArgument185:Dynamic = pointOut; __callArgument185; })) : Bool);
+    (cast _Path.samplePathTangent__getPathPointAtDistance(({ final __callArgument188:Dynamic = contours; __callArgument188; }), (cast distance : Float), ({ final __callArgument189:Dynamic = tangentOut; __callArgument189; })) : Bool);
     return cast hasPoint;
     return cast null;
   }
 
   public static function getPathTangentAtDistance(path:Path, distance:Float, out:Vector2Like, tolerance:Float = 0.25):Bool {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath(({ final __callArgument190:Dynamic = path; __callArgument190; }), (cast tolerance : Float)) : Array<Array<Float>>);
-    return cast (cast _Path.samplePathTangent__getPathPointAtDistance(({ final __callArgument192:Dynamic = contours; __callArgument192; }), (cast distance : Float), ({ final __callArgument193:Dynamic = out; __callArgument193; })) : Bool);
+    contours = (cast flattenPath(({ final __callArgument192:Dynamic = path; __callArgument192; }), (cast tolerance : Float)) : Array<Array<Float>>);
+    return cast (cast _Path.samplePathTangent__getPathPointAtDistance(({ final __callArgument194:Dynamic = contours; __callArgument194; }), (cast distance : Float), ({ final __callArgument195:Dynamic = out; __callArgument195; })) : Bool);
     return cast null;
   }
 
@@ -1583,12 +1595,12 @@ class _Path {
   }
 
   public static function getPathSegmentPointAtParameter(path:Path, segmentIndex:Float, t:Float, out:Vector2Like):Bool {
-    return cast (cast _Path.walkPathSegment__getPathSegmentAtParameter(({ final __callArgument196:Dynamic = path; __callArgument196; }), (cast segmentIndex : Float), (cast t : Float), ({ final __callArgument197:Dynamic = out; __callArgument197; }), (cast false : Bool)) : Bool);
+    return cast (cast _Path.walkPathSegment__getPathSegmentAtParameter(({ final __callArgument198:Dynamic = path; __callArgument198; }), (cast segmentIndex : Float), (cast t : Float), ({ final __callArgument199:Dynamic = out; __callArgument199; }), (cast false : Bool)) : Bool);
     return cast null;
   }
 
   public static function getPathSegmentTangentAtParameter(path:Path, segmentIndex:Float, t:Float, out:Vector2Like):Bool {
-    return cast (cast _Path.walkPathSegment__getPathSegmentAtParameter(({ final __callArgument200:Dynamic = path; __callArgument200; }), (cast segmentIndex : Float), (cast t : Float), ({ final __callArgument201:Dynamic = out; __callArgument201; }), (cast true : Bool)) : Bool);
+    return cast (cast _Path.walkPathSegment__getPathSegmentAtParameter(({ final __callArgument202:Dynamic = path; __callArgument202; }), (cast segmentIndex : Float), (cast t : Float), ({ final __callArgument203:Dynamic = out; __callArgument203; }), (cast true : Bool)) : Bool);
     return cast null;
   }
 
@@ -1677,9 +1689,9 @@ class _Path {
           (di = cast ((di + 4.0) : Dynamic));
           if ((cast _Runtime.strictEquals(currentSegment, segmentIndex) : Bool)) {
             if ((cast wantTangent : Bool)) {
-              (cast getQuadraticBezierTangent((cast x : Float), (cast y : Float), (cast cx : Float), (cast cy : Float), (cast x1 : Float), (cast y1 : Float), (cast t : Float), ({ final __callArgument204:Dynamic = out; __callArgument204; })) : Vector2Like);
+              (cast getQuadraticBezierTangent((cast x : Float), (cast y : Float), (cast cx : Float), (cast cy : Float), (cast x1 : Float), (cast y1 : Float), (cast t : Float), ({ final __callArgument206:Dynamic = out; __callArgument206; })) : Vector2Like);
             } else {
-              (cast getQuadraticBezierPoint((cast x : Float), (cast y : Float), (cast cx : Float), (cast cy : Float), (cast x1 : Float), (cast y1 : Float), (cast t : Float), ({ final __callArgument206:Dynamic = out; __callArgument206; })) : Vector2Like);
+              (cast getQuadraticBezierPoint((cast x : Float), (cast y : Float), (cast cx : Float), (cast cy : Float), (cast x1 : Float), (cast y1 : Float), (cast t : Float), ({ final __callArgument208:Dynamic = out; __callArgument208; })) : Vector2Like);
             }
             return cast true;
           }
@@ -1696,9 +1708,9 @@ class _Path {
           (di = cast ((di + 6.0) : Dynamic));
           if ((cast _Runtime.strictEquals(currentSegment, segmentIndex) : Bool)) {
             if ((cast wantTangent : Bool)) {
-              (cast getCubicBezierTangent((cast x : Float), (cast y : Float), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast x1 : Float), (cast y1 : Float), (cast t : Float), ({ final __callArgument208:Dynamic = out; __callArgument208; })) : Vector2Like);
+              (cast getCubicBezierTangent((cast x : Float), (cast y : Float), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast x1 : Float), (cast y1 : Float), (cast t : Float), ({ final __callArgument210:Dynamic = out; __callArgument210; })) : Vector2Like);
             } else {
-              (cast getCubicBezierPoint((cast x : Float), (cast y : Float), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast x1 : Float), (cast y1 : Float), (cast t : Float), ({ final __callArgument210:Dynamic = out; __callArgument210; })) : Vector2Like);
+              (cast getCubicBezierPoint((cast x : Float), (cast y : Float), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast x1 : Float), (cast y1 : Float), (cast t : Float), ({ final __callArgument212:Dynamic = out; __callArgument212; })) : Vector2Like);
             }
             return cast true;
           }
@@ -1717,7 +1729,7 @@ class _Path {
   public static function getPathContourOrientation(path:Path, tolerance:Float = 0.25):String {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var area:Float = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath(({ final __callArgument212:Dynamic = path; __callArgument212; }), (cast tolerance : Float)) : Array<Array<Float>>);
+    contours = (cast flattenPath(({ final __callArgument214:Dynamic = path; __callArgument214; }), (cast tolerance : Float)) : Array<Array<Float>>);
     if ((cast _Runtime.strictEquals(_Runtime.field(contours, 'length'), 0.0) : Bool)) { return cast 'degenerate'; }
     area = (cast _Path.shoelaceArea__getPathSignedArea(flight._internal._StaticIndex.readArray(contours, 0.0)) : Float);
     if ((cast ((cast area : Float) > (cast 0.0 : Float)) : Bool)) { return cast 'ccw'; }
@@ -1729,7 +1741,7 @@ class _Path {
   public static function getPathSignedArea(path:Path, tolerance:Float = 0.25):Float {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var total:Float = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath(({ final __callArgument214:Dynamic = path; __callArgument214; }), (cast tolerance : Float)) : Array<Array<Float>>);
+    contours = (cast flattenPath(({ final __callArgument216:Dynamic = path; __callArgument216; }), (cast tolerance : Float)) : Array<Array<Float>>);
     total = 0.0;
     {
       var ci:Float = 0.0;
@@ -1775,11 +1787,11 @@ class _Path {
     arcStartX = (cx + _Runtime.multiplyNumbers(HxMath.cos(startAngle), radius));
     arcStartY = (cy + _Runtime.multiplyNumbers(HxMath.sin(startAngle), radius));
     if ((cast connectToCurrent : Bool)) {
-      appendPathLineTo(({ final __callArgument216:Dynamic = path; __callArgument216; }), (cast arcStartX : Float), (cast arcStartY : Float));
+      appendPathLineTo(({ final __callArgument218:Dynamic = path; __callArgument218; }), (cast arcStartX : Float), (cast arcStartY : Float));
     } else {
-      appendPathMoveTo(({ final __callArgument218:Dynamic = path; __callArgument218; }), (cast arcStartX : Float), (cast arcStartY : Float));
+      appendPathMoveTo(({ final __callArgument220:Dynamic = path; __callArgument220; }), (cast arcStartX : Float), (cast arcStartY : Float));
     }
-    _Path.appendArcCubics__path(({ final __callArgument220:Dynamic = path; __callArgument220; }), (cast cx : Float), (cast cy : Float), (cast radius : Float), (cast radius : Float), (cast 0.0 : Float), (cast startAngle : Float), (cast sweep : Float));
+    _Path.appendArcCubics__path(({ final __callArgument222:Dynamic = path; __callArgument222; }), (cast cx : Float), (cast cy : Float), (cast radius : Float), (cast radius : Float), (cast 0.0 : Float), (cast startAngle : Float), (cast sweep : Float));
   }
 
   public static function appendPathArcTo(path:Path, radiusX:Float, radiusY:Float, xAxisRotation:Float, largeArc:Bool, sweep:Bool, endX:Float, endY:Float):Void {
@@ -1817,13 +1829,13 @@ class _Path {
     var theta1:Float = cast _Runtime.UNDEFINED;
     var dtheta:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(radiusX, 0.0) : Bool) || (cast _Runtime.strictEquals(radiusY, 0.0) : Bool)) : Bool)) {
-      appendPathLineTo(({ final __callArgument222:Dynamic = path; __callArgument222; }), (cast endX : Float), (cast endY : Float));
+      appendPathLineTo(({ final __callArgument224:Dynamic = path; __callArgument224; }), (cast endX : Float), (cast endY : Float));
       return;
     }
     x1 = 0.0;
     y1 = 0.0;
     {
-      var last:Null<Array<Float>> = (cast getPathLastPoint(({ final __callArgument224:Dynamic = path; __callArgument224; })) : Null<Array<Float>>);
+      var last:Null<Array<Float>> = (cast getPathLastPoint(({ final __callArgument226:Dynamic = path; __callArgument226; })) : Null<Array<Float>>);
       if ((cast !_Runtime.strictEquals(last, null) : Bool)) {
         (x1 = cast (flight._internal._StaticIndex.readFloatArrayTyped((cast last : Array<Float>), (cast 0.0 : Float)) : Dynamic));
         (y1 = cast (flight._internal._StaticIndex.readFloatArrayTyped((cast last : Array<Float>), (cast 1.0 : Float)) : Dynamic));
@@ -1868,11 +1880,11 @@ class _Path {
     dtheta = (cast _Path.vectorAngle__path((cast ux : Float), (cast uy : Float), (cast vx : Float), (cast vy : Float)) : Float);
     if ((cast ((cast !(cast sweep : Bool) : Bool) && (cast ((cast dtheta : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { (dtheta = cast ((dtheta - (HxMath.PI * 2.0)) : Dynamic)); }
     if ((cast ((cast sweep : Bool) && (cast ((cast dtheta : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { (dtheta = cast ((dtheta + (HxMath.PI * 2.0)) : Dynamic)); }
-    _Path.appendArcCubics__path(({ final __callArgument226:Dynamic = path; __callArgument226; }), (cast cx : Float), (cast cy : Float), (cast rx : Float), (cast ry : Float), (cast xAxisRotation : Float), (cast theta1 : Float), (cast dtheta : Float));
+    _Path.appendArcCubics__path(({ final __callArgument228:Dynamic = path; __callArgument228; }), (cast cx : Float), (cast cy : Float), (cast rx : Float), (cast ry : Float), (cast xAxisRotation : Float), (cast theta1 : Float), (cast dtheta : Float));
   }
 
   public static function appendPathCircle(path:Path, cx:Float, cy:Float, radius:Float):Void {
-    appendPathEllipse(({ final __callArgument228:Dynamic = path; __callArgument228; }), (cast cx : Float), (cast cy : Float), (cast radius : Float), (cast radius : Float));
+    appendPathEllipse(({ final __callArgument230:Dynamic = path; __callArgument230; }), (cast cx : Float), (cast cy : Float), (cast radius : Float), (cast radius : Float));
   }
 
   public static function appendPathClose(path:Path):Void {
@@ -1894,12 +1906,12 @@ class _Path {
     var ky:Float = cast _Runtime.UNDEFINED;
     kx = (radiusX * CIRCLE_KAPPA);
     ky = (radiusY * CIRCLE_KAPPA);
-    appendPathMoveTo(({ final __callArgument230:Dynamic = path; __callArgument230; }), (cast (cx + radiusX) : Float), (cast cy : Float));
-    appendPathCubicCurveTo(({ final __callArgument232:Dynamic = path; __callArgument232; }), (cast (cx + radiusX) : Float), (cast (cy - ky) : Float), (cast (cx + kx) : Float), (cast (cy - radiusY) : Float), (cast cx : Float), (cast (cy - radiusY) : Float));
-    appendPathCubicCurveTo(({ final __callArgument234:Dynamic = path; __callArgument234; }), (cast (cx - kx) : Float), (cast (cy - radiusY) : Float), (cast (cx - radiusX) : Float), (cast (cy - ky) : Float), (cast (cx - radiusX) : Float), (cast cy : Float));
-    appendPathCubicCurveTo(({ final __callArgument236:Dynamic = path; __callArgument236; }), (cast (cx - radiusX) : Float), (cast (cy + ky) : Float), (cast (cx - kx) : Float), (cast (cy + radiusY) : Float), (cast cx : Float), (cast (cy + radiusY) : Float));
-    appendPathCubicCurveTo(({ final __callArgument238:Dynamic = path; __callArgument238; }), (cast (cx + kx) : Float), (cast (cy + radiusY) : Float), (cast (cx + radiusX) : Float), (cast (cy + ky) : Float), (cast (cx + radiusX) : Float), (cast cy : Float));
-    appendPathClose(({ final __callArgument240:Dynamic = path; __callArgument240; }));
+    appendPathMoveTo(({ final __callArgument232:Dynamic = path; __callArgument232; }), (cast (cx + radiusX) : Float), (cast cy : Float));
+    appendPathCubicCurveTo(({ final __callArgument234:Dynamic = path; __callArgument234; }), (cast (cx + radiusX) : Float), (cast (cy - ky) : Float), (cast (cx + kx) : Float), (cast (cy - radiusY) : Float), (cast cx : Float), (cast (cy - radiusY) : Float));
+    appendPathCubicCurveTo(({ final __callArgument236:Dynamic = path; __callArgument236; }), (cast (cx - kx) : Float), (cast (cy - radiusY) : Float), (cast (cx - radiusX) : Float), (cast (cy - ky) : Float), (cast (cx - radiusX) : Float), (cast cy : Float));
+    appendPathCubicCurveTo(({ final __callArgument238:Dynamic = path; __callArgument238; }), (cast (cx - radiusX) : Float), (cast (cy + ky) : Float), (cast (cx - kx) : Float), (cast (cy + radiusY) : Float), (cast cx : Float), (cast (cy + radiusY) : Float));
+    appendPathCubicCurveTo(({ final __callArgument240:Dynamic = path; __callArgument240; }), (cast (cx + kx) : Float), (cast (cy + radiusY) : Float), (cast (cx + radiusX) : Float), (cast (cy + ky) : Float), (cast (cx + radiusX) : Float), (cast cy : Float));
+    appendPathClose(({ final __callArgument242:Dynamic = path; __callArgument242; }));
   }
 
   public static function appendPathLineTo(path:Path, x:Float, y:Float):Void {
@@ -1914,35 +1926,35 @@ class _Path {
 
   public static function appendPathPolygon(path:Path, points:Array<Float>):Void {
     if ((cast ((cast _Runtime.field(points, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { return; }
-    appendPathMoveTo(({ final __callArgument242:Dynamic = path; __callArgument242; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 0.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 1.0 : Float)) : Float));
+    appendPathMoveTo(({ final __callArgument244:Dynamic = path; __callArgument244; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 0.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 1.0 : Float)) : Float));
     {
       var i:Float = 2.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) {
-        appendPathLineTo(({ final __callArgument244:Dynamic = path; __callArgument244; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast i : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (i + 1.0) : Float)) : Float));
+        appendPathLineTo(({ final __callArgument246:Dynamic = path; __callArgument246; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast i : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (i + 1.0) : Float)) : Float));
         (i = cast ((i + 2.0) : Dynamic));
       }
     }
-    appendPathClose(({ final __callArgument246:Dynamic = path; __callArgument246; }));
+    appendPathClose(({ final __callArgument248:Dynamic = path; __callArgument248; }));
   }
 
   public static function appendPathPolyline(path:Path, points:Array<Float>):Void {
     if ((cast ((cast _Runtime.field(points, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return; }
-    appendPathMoveTo(({ final __callArgument248:Dynamic = path; __callArgument248; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 0.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 1.0 : Float)) : Float));
+    appendPathMoveTo(({ final __callArgument250:Dynamic = path; __callArgument250; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 0.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 1.0 : Float)) : Float));
     {
       var i:Float = 2.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) {
-        appendPathLineTo(({ final __callArgument250:Dynamic = path; __callArgument250; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast i : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (i + 1.0) : Float)) : Float));
+        appendPathLineTo(({ final __callArgument252:Dynamic = path; __callArgument252; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast i : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (i + 1.0) : Float)) : Float));
         (i = cast ((i + 2.0) : Dynamic));
       }
     }
   }
 
   public static function appendPathRectangle(path:Path, x:Float, y:Float, width:Float, height:Float):Void {
-    appendPathMoveTo(({ final __callArgument252:Dynamic = path; __callArgument252; }), (cast x : Float), (cast y : Float));
-    appendPathLineTo(({ final __callArgument254:Dynamic = path; __callArgument254; }), (cast (x + width) : Float), (cast y : Float));
-    appendPathLineTo(({ final __callArgument256:Dynamic = path; __callArgument256; }), (cast (x + width) : Float), (cast (y + height) : Float));
-    appendPathLineTo(({ final __callArgument258:Dynamic = path; __callArgument258; }), (cast x : Float), (cast (y + height) : Float));
-    appendPathClose(({ final __callArgument260:Dynamic = path; __callArgument260; }));
+    appendPathMoveTo(({ final __callArgument254:Dynamic = path; __callArgument254; }), (cast x : Float), (cast y : Float));
+    appendPathLineTo(({ final __callArgument256:Dynamic = path; __callArgument256; }), (cast (x + width) : Float), (cast y : Float));
+    appendPathLineTo(({ final __callArgument258:Dynamic = path; __callArgument258; }), (cast (x + width) : Float), (cast (y + height) : Float));
+    appendPathLineTo(({ final __callArgument260:Dynamic = path; __callArgument260; }), (cast x : Float), (cast (y + height) : Float));
+    appendPathClose(({ final __callArgument262:Dynamic = path; __callArgument262; }));
   }
 
   public static function appendPathRoundRectangle(path:Path, x:Float, y:Float, width:Float, height:Float, radius:flight._internal._Union2<Float, Array<Float>>):Void {
@@ -1951,25 +1963,36 @@ class _Path {
     var rtr:Float = cast _Runtime.UNDEFINED;
     var rbr:Float = cast _Runtime.UNDEFINED;
     var rbl:Float = cast _Runtime.UNDEFINED;
-    __destructure0 = (cast _Path.normalizeCornerRadii__path(({ final __callArgument262:Dynamic = radius; __callArgument262; }), (cast width : Float), (cast height : Float)) : Array<Float>);
+    __destructure0 = (cast _Path.normalizeCornerRadii__path(({ final __callArgument264:Dynamic = radius; __callArgument264; }), (cast width : Float), (cast height : Float)) : Array<Float>);
     rtl = flight._internal._StaticIndex.readArray(__destructure0, 0.0);
     rtr = flight._internal._StaticIndex.readArray(__destructure0, 1.0);
     rbr = flight._internal._StaticIndex.readArray(__destructure0, 2.0);
     rbl = flight._internal._StaticIndex.readArray(__destructure0, 3.0);
-    appendPathMoveTo(({ final __callArgument264:Dynamic = path; __callArgument264; }), (cast (x + rtl) : Float), (cast y : Float));
-    appendPathLineTo(({ final __callArgument266:Dynamic = path; __callArgument266; }), (cast ((x + width) - rtr) : Float), (cast y : Float));
-    _Path.appendCornerArc__path(({ final __callArgument268:Dynamic = path; __callArgument268; }), (cast ((x + width) - rtr) : Float), (cast (y + rtr) : Float), (cast rtr : Float), (cast (-HxMath.PI / 2.0) : Float), (cast 0.0 : Float));
-    appendPathLineTo(({ final __callArgument270:Dynamic = path; __callArgument270; }), (cast (x + width) : Float), (cast ((y + height) - rbr) : Float));
-    _Path.appendCornerArc__path(({ final __callArgument272:Dynamic = path; __callArgument272; }), (cast ((x + width) - rbr) : Float), (cast ((y + height) - rbr) : Float), (cast rbr : Float), (cast 0.0 : Float), (cast (HxMath.PI / 2.0) : Float));
-    appendPathLineTo(({ final __callArgument274:Dynamic = path; __callArgument274; }), (cast (x + rbl) : Float), (cast (y + height) : Float));
-    _Path.appendCornerArc__path(({ final __callArgument276:Dynamic = path; __callArgument276; }), (cast (x + rbl) : Float), (cast ((y + height) - rbl) : Float), (cast rbl : Float), (cast (HxMath.PI / 2.0) : Float), (cast HxMath.PI : Float));
-    appendPathLineTo(({ final __callArgument278:Dynamic = path; __callArgument278; }), (cast x : Float), (cast (y + rtl) : Float));
-    _Path.appendCornerArc__path(({ final __callArgument280:Dynamic = path; __callArgument280; }), (cast (x + rtl) : Float), (cast (y + rtl) : Float), (cast rtl : Float), (cast HxMath.PI : Float), (cast ((HxMath.PI * 3.0) / 2.0) : Float));
-    appendPathClose(({ final __callArgument282:Dynamic = path; __callArgument282; }));
+    appendPathMoveTo(({ final __callArgument266:Dynamic = path; __callArgument266; }), (cast (x + rtl) : Float), (cast y : Float));
+    appendPathLineTo(({ final __callArgument268:Dynamic = path; __callArgument268; }), (cast ((x + width) - rtr) : Float), (cast y : Float));
+    _Path.appendCornerArc__path(({ final __callArgument270:Dynamic = path; __callArgument270; }), (cast ((x + width) - rtr) : Float), (cast (y + rtr) : Float), (cast rtr : Float), (cast (-HxMath.PI / 2.0) : Float), (cast 0.0 : Float));
+    appendPathLineTo(({ final __callArgument272:Dynamic = path; __callArgument272; }), (cast (x + width) : Float), (cast ((y + height) - rbr) : Float));
+    _Path.appendCornerArc__path(({ final __callArgument274:Dynamic = path; __callArgument274; }), (cast ((x + width) - rbr) : Float), (cast ((y + height) - rbr) : Float), (cast rbr : Float), (cast 0.0 : Float), (cast (HxMath.PI / 2.0) : Float));
+    appendPathLineTo(({ final __callArgument276:Dynamic = path; __callArgument276; }), (cast (x + rbl) : Float), (cast (y + height) : Float));
+    _Path.appendCornerArc__path(({ final __callArgument278:Dynamic = path; __callArgument278; }), (cast (x + rbl) : Float), (cast ((y + height) - rbl) : Float), (cast rbl : Float), (cast (HxMath.PI / 2.0) : Float), (cast HxMath.PI : Float));
+    appendPathLineTo(({ final __callArgument280:Dynamic = path; __callArgument280; }), (cast x : Float), (cast (y + rtl) : Float));
+    _Path.appendCornerArc__path(({ final __callArgument282:Dynamic = path; __callArgument282; }), (cast (x + rtl) : Float), (cast (y + rtl) : Float), (cast rtl : Float), (cast HxMath.PI : Float), (cast ((HxMath.PI * 3.0) / 2.0) : Float));
+    appendPathClose(({ final __callArgument284:Dynamic = path; __callArgument284; }));
   }
 
   public static function createPath(winding:PathWinding = 'nonZero'):Path {
-    return cast { commands: cast ([] : Array<Dynamic>), data: cast ([] : Array<Dynamic>), winding: winding };
+    var out:EntityConstruction<Path> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ commands: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, winding: cast _Runtime.UNDEFINED } : Path); }) #end));
+    initializePath(({ final __callArgument286:Dynamic = out; __callArgument286; }), ({ final __callArgument287:Dynamic = winding; __callArgument287; }));
+    return cast out;
+    return cast null;
+  }
+
+  public static function getPathLastPoint(path:Path):Null<Array<Float>> {
+    var data:Array<Float> = cast _Runtime.UNDEFINED;
+    data = _Runtime.field(path, 'data');
+    if ((cast ((cast _Runtime.field(data, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { return cast null; }
+    return cast cast ([flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(data, 'length'), 2.0) : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(data, 'length'), 1.0) : Float))] : Array<Dynamic>);
     return cast null;
   }
 
@@ -1985,7 +2008,7 @@ class _Path {
     sinStart = HxMath.sin(startAngle);
     cosEnd = HxMath.cos(endAngle);
     sinEnd = HxMath.sin(endAngle);
-    appendPathCubicCurveTo(({ final __callArgument284:Dynamic = path; __callArgument284; }), (cast ((cx + (cosStart * radius)) - (sinStart * k)) : Float), (cast ((cy + (sinStart * radius)) + (cosStart * k)) : Float), (cast ((cx + (cosEnd * radius)) + (sinEnd * k)) : Float), (cast ((cy + (sinEnd * radius)) - (cosEnd * k)) : Float), (cast (cx + (cosEnd * radius)) : Float), (cast (cy + (sinEnd * radius)) : Float));
+    appendPathCubicCurveTo(({ final __callArgument290:Dynamic = path; __callArgument290; }), (cast ((cx + (cosStart * radius)) - (sinStart * k)) : Float), (cast ((cy + (sinStart * radius)) + (cosStart * k)) : Float), (cast ((cx + (cosEnd * radius)) + (sinEnd * k)) : Float), (cast ((cy + (sinEnd * radius)) - (cosEnd * k)) : Float), (cast (cx + (cosEnd * radius)) : Float), (cast (cy + (sinEnd * radius)) : Float));
   }
 
   public static function appendArcCubics__path(path:Path, cx:Float, cy:Float, rx:Float, ry:Float, xAxisRotation:Float, theta1:Float, dtheta:Float):Void {
@@ -2020,18 +2043,18 @@ class _Path {
         var c1y:Float = ((p1y + (sin_u3C6_ * dx1)) + (cos_u3C6_ * dy1));
         var c2x:Float = ((p2x + (cos_u3C6_ * dx2)) - (sin_u3C6_ * dy2));
         var c2y:Float = ((p2y + (sin_u3C6_ * dx2)) + (cos_u3C6_ * dy2));
-        appendPathCubicCurveTo(({ final __callArgument286:Dynamic = path; __callArgument286; }), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast p2x : Float), (cast p2y : Float));
+        appendPathCubicCurveTo(({ final __callArgument292:Dynamic = path; __callArgument292; }), (cast c1x : Float), (cast c1y : Float), (cast c2x : Float), (cast c2y : Float), (cast p2x : Float), (cast p2y : Float));
         i++;
       }
     }
   }
 
-  public static function getPathLastPoint(path:Path):Null<Array<Float>> {
-    var data:Array<Float> = cast _Runtime.UNDEFINED;
-    data = _Runtime.field(path, 'data');
-    if ((cast ((cast _Runtime.field(data, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { return cast null; }
-    return cast cast ([flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(data, 'length'), 2.0) : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast data : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(data, 'length'), 1.0) : Float))] : Array<Dynamic>);
-    return cast null;
+  @:allow(flight)
+  @:keep
+  private static function initializePath(out:EntityConstruction<Path>, winding:PathWinding = 'nonZero'):Void {
+    _Runtime.setField(out, 'commands', cast ([] : Array<Dynamic>));
+    _Runtime.setField(out, 'data', cast ([] : Array<Dynamic>));
+    _Runtime.setField(out, 'winding', winding);
   }
 
   public static function normalizeCornerRadii__path(radius:flight._internal._Union2<Float, Array<Float>>, width:Float, height:Float):Array<Float> {
@@ -2083,7 +2106,7 @@ class _Path {
     mesh = ((cast ((cast _Runtime.field(_Path.pathMeshPool__pathMeshPool, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callProperty(_Path.pathMeshPool__pathMeshPool, 'pop', cast ([] : Array<Dynamic>)) : Dynamic) : (cast { vertices: cast ([] : Array<Dynamic>), indices: cast ([] : Array<Dynamic>) } : Dynamic));
     _Runtime.setLength(mesh.vertices, 0.0);
     _Runtime.setLength(mesh.indices, 0.0);
-    fresh = (cast tessellatePath(({ final __callArgument288:Dynamic = path; __callArgument288; }), (cast tolerance : Float)) : PathMesh);
+    fresh = (cast tessellatePath(({ final __callArgument294:Dynamic = path; __callArgument294; }), (cast tolerance : Float)) : PathMesh);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(fresh.vertices, 'length') : Float)) : Bool)) {
@@ -2107,7 +2130,7 @@ class _Path {
   public static function acquirePathMeshTyped(path:Path, tolerance:Float = 0.25):PathMeshTyped {
     var fresh:PathMeshTyped = cast _Runtime.UNDEFINED;
     var mesh:PathMeshTyped = cast _Runtime.UNDEFINED;
-    fresh = (cast tessellatePathTyped(({ final __callArgument290:Dynamic = path; __callArgument290; }), (cast tolerance : Float)) : PathMeshTyped);
+    fresh = (cast tessellatePathTyped(({ final __callArgument296:Dynamic = path; __callArgument296; }), (cast tolerance : Float)) : PathMeshTyped);
     mesh = ((cast ((cast _Runtime.field(_Path.typedPool__pathMeshPool, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callProperty(_Path.typedPool__pathMeshPool, 'pop', cast ([] : Array<Dynamic>)) : Dynamic) : (cast { vertices: new flight._internal._Float32Array(0.0), indices: new flight._internal._UInt32Array(0.0) } : Dynamic));
     ((cast mesh : PathMeshTyped).vertices = (cast fresh : PathMeshTyped).vertices);
     ((cast mesh : PathMeshTyped).indices = (cast fresh : PathMeshTyped).indices);
@@ -2134,8 +2157,23 @@ class _Path {
   public static final typedPool__pathMeshPool:Array<PathMeshTyped> = (cast cast ([] : Array<Dynamic>));
 
   public static function createPathMorph(start:Path, end:Path):Null<PathMorph> {
-    return cast (cast (cast buildPathMorph(({ final __callArgument292:Dynamic = start; __callArgument292; }), ({ final __callArgument293:Dynamic = end; __callArgument293; })) : PathMorphBuildResult__pathMorphGeometry) : PathMorphBuildResult__pathMorphGeometry).morph;
+    var morph:Null<PathMorph> = cast _Runtime.UNDEFINED;
+    var out:EntityConstruction<PathMorph> = cast _Runtime.UNDEFINED;
+    morph = (cast (cast buildPathMorph(({ final __callArgument298:Dynamic = start; __callArgument298; }), ({ final __callArgument299:Dynamic = end; __callArgument299; })) : PathMorphBuildResult__pathMorphGeometry) : PathMorphBuildResult__pathMorphGeometry).morph;
+    if ((cast _Runtime.strictEquals(morph, null) : Bool)) { return cast null; }
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ commands: cast _Runtime.UNDEFINED, endData: cast _Runtime.UNDEFINED, startData: cast _Runtime.UNDEFINED, winding: cast _Runtime.UNDEFINED } : PathMorph); }) #end));
+    initializePathMorph(({ final __callArgument302:Dynamic = out; __callArgument302; }), ({ final __callArgument303:Dynamic = morph; __callArgument303; }));
+    return cast out;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializePathMorph(out:EntityConstruction<PathMorph>, morph:PathMorph):Void {
+    _Runtime.setField(out, 'commands', _Runtime.field(morph, 'commands'));
+    _Runtime.setField(out, 'endData', _Runtime.field(morph, 'endData'));
+    _Runtime.setField(out, 'startData', _Runtime.field(morph, 'startData'));
+    _Runtime.setField(out, 'winding', _Runtime.field(morph, 'winding'));
   }
 
   public static function samplePathMorph(out:Path, morph:PathMorph, progress:Float):Void {
@@ -2198,8 +2236,8 @@ class _Path {
     if ((cast !_Runtime.strictEquals(_Runtime.field(start, 'winding'), _Runtime.field(end, 'winding')) : Bool)) {
       return cast { contour: null, issue: PathMorphIssueWindingMismatch, morph: null };
     }
-    startContours = (cast _Path.decodeCubicContours__pathMorphGeometry(({ final __callArgument296:Dynamic = start; __callArgument296; })) : Array<CubicContour__pathMorphGeometry>);
-    endContours = (cast _Path.decodeCubicContours__pathMorphGeometry(({ final __callArgument298:Dynamic = end; __callArgument298; })) : Array<CubicContour__pathMorphGeometry>);
+    startContours = (cast _Path.decodeCubicContours__pathMorphGeometry(({ final __callArgument306:Dynamic = start; __callArgument306; })) : Array<CubicContour__pathMorphGeometry>);
+    endContours = (cast _Path.decodeCubicContours__pathMorphGeometry(({ final __callArgument308:Dynamic = end; __callArgument308; })) : Array<CubicContour__pathMorphGeometry>);
     if ((cast !_Runtime.strictEquals(_Runtime.field(startContours, 'length'), _Runtime.field(endContours, 'length')) : Bool)) {
       return cast { contour: null, issue: PathMorphIssueContourCountMismatch, morph: null };
     }
@@ -2232,12 +2270,25 @@ class _Path {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(startContours, 'length') : Float)) : Bool)) {
-        _Path.appendCubicContourPair__pathMorphGeometry(({ final __callArgument300:Dynamic = commands; __callArgument300; }), ({ final __callArgument301:Dynamic = startData; __callArgument301; }), ({ final __callArgument302:Dynamic = endData; __callArgument302; }), (cast flight._internal._StaticIndex.readArray(startContours, i) : Dynamic), (cast flight._internal._StaticIndex.readArray(endContours, i) : Dynamic));
+        _Path.appendCubicContourPair__pathMorphGeometry(({ final __callArgument310:Dynamic = commands; __callArgument310; }), ({ final __callArgument311:Dynamic = startData; __callArgument311; }), ({ final __callArgument312:Dynamic = endData; __callArgument312; }), (cast flight._internal._StaticIndex.readArray(startContours, i) : Dynamic), (cast flight._internal._StaticIndex.readArray(endContours, i) : Dynamic));
         i++;
       }
     }
-    return cast { contour: null, issue: PathMorphIssueNone, morph: { commands: commands, endData: endData, startData: startData, winding: _Runtime.field(start, 'winding') } };
+    return cast { contour: null, issue: PathMorphIssueNone, morph: _Runtime.callValue(function():PathMorph {
+      var out:EntityConstruction<PathMorph> = cast _Runtime.UNDEFINED;
+      out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ commands: cast _Runtime.UNDEFINED, endData: cast _Runtime.UNDEFINED, startData: cast _Runtime.UNDEFINED, winding: cast _Runtime.UNDEFINED } : PathMorph); }) #end));
+      _Path.initializePathMorph__pathMorphGeometry(({ final __callArgument316:Dynamic = out; __callArgument316; }), ({ final __callArgument317:Dynamic = commands; __callArgument317; }), ({ final __callArgument318:Dynamic = endData; __callArgument318; }), ({ final __callArgument319:Dynamic = startData; __callArgument319; }), _Runtime.field(start, 'winding'));
+      return cast out;
+      return cast _Runtime.UNDEFINED;
+    }, cast ([] : Array<Dynamic>)) };
     return cast null;
+  }
+
+  public static function initializePathMorph__pathMorphGeometry(out:EntityConstruction<PathMorph>, commands:Array<Float>, endData:Array<Float>, startData:Array<Float>, winding:flight._internal._IndexedAccess<Path, String>):Void {
+    _Runtime.setField(out, 'commands', commands);
+    _Runtime.setField(out, 'endData', endData);
+    _Runtime.setField(out, 'startData', startData);
+    _Runtime.setField(out, 'winding', winding);
   }
 
   public static function normalizeCubicContourOrientations__pathMorphGeometry(start:Array<CubicContour__pathMorphGeometry>, end:Array<CubicContour__pathMorphGeometry>, winding:flight._internal._IndexedAccess<Path, String>):Null<Float> {
@@ -2464,7 +2515,7 @@ class _Path {
       return cast contour;
       return cast _Runtime.UNDEFINED;
     });
-    forEachPathSegment(({ final __callArgument306:Dynamic = path; __callArgument306; }), (cast function(segment:PathSegment):Void {
+    forEachPathSegment(({ final __callArgument324:Dynamic = path; __callArgument324; }), (cast function(segment:PathSegment):Void {
       if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'moveTo') : Bool)) {
         (contour = cast ((cast _Path.createCubicContour__pathMorphGeometry((cast (cast segment : { var kind:String; var x:Float; var y:Float; }).x : Float), (cast (cast segment : { var kind:String; var x:Float; var y:Float; }).y : Float)) : CubicContour__pathMorphGeometry) : Dynamic));
         _Runtime.callProperty(contours, 'push', cast ([contour] : Array<Dynamic>));
@@ -2591,12 +2642,12 @@ class _Path {
 
   public static function reversePath(source:Path, out:Path):Void {
     var subpaths:Array<Subpath__reversePath> = cast _Runtime.UNDEFINED;
-    subpaths = (cast _Path.decodeSubpaths__reversePath(({ final __callArgument308:Dynamic = source; __callArgument308; })) : Array<Subpath__reversePath>);
+    subpaths = (cast _Path.decodeSubpaths__reversePath(({ final __callArgument326:Dynamic = source; __callArgument326; })) : Array<Subpath__reversePath>);
     _Runtime.setLength((cast out : Path).commands, 0.0);
     _Runtime.setLength((cast out : Path).data, 0.0);
     ((cast out : Path).winding = _Runtime.field(source, 'winding'));
     for (subpath in _Runtime.iterable(subpaths)) {
-      _Path.encodeReversedSubpath__reversePath((cast subpath : Dynamic), ({ final __callArgument312:Dynamic = out; __callArgument312; }));
+      _Path.encodeReversedSubpath__reversePath((cast subpath : Dynamic), ({ final __callArgument330:Dynamic = out; __callArgument330; }));
     }
   }
 
@@ -2614,7 +2665,7 @@ class _Path {
       return cast current;
       return cast _Runtime.UNDEFINED;
     });
-    forEachPathSegment(({ final __callArgument314:Dynamic = path; __callArgument314; }), (cast function(segment:PathSegment):Void {
+    forEachPathSegment(({ final __callArgument332:Dynamic = path; __callArgument332; }), (cast function(segment:PathSegment):Void {
       if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'moveTo') : Bool)) {
         (current = cast ({ points: cast ([{ x: (cast segment : { var kind:String; var x:Float; var y:Float; }).x, y: (cast segment : { var kind:String; var x:Float; var y:Float; }).y, kind: 'move' }] : Array<Dynamic>), closed: false } : Dynamic));
         _Runtime.callProperty(subpaths, 'push', cast ([current] : Array<Dynamic>));
@@ -2666,12 +2717,12 @@ class _Path {
   public static function strokePath(path:Path, style:StrokeStyle, tolerance:Float = 0.25):Path {
     var result:Path = cast _Runtime.UNDEFINED;
     var geometry:StrokePathGeometry__strokePathGeometry = cast _Runtime.UNDEFINED;
-    result = (cast createPath(({ final __callArgument316:Dynamic = 'nonZero'; __callArgument316; })) : Path);
-    geometry = (cast buildStrokePathGeometry(({ final __callArgument318:Dynamic = path; __callArgument318; }), ({ final __callArgument319:Dynamic = style; __callArgument319; }), (cast tolerance : Float)) : StrokePathGeometry__strokePathGeometry);
+    result = (cast createPath(({ final __callArgument334:Dynamic = 'nonZero'; __callArgument334; })) : Path);
+    geometry = (cast buildStrokePathGeometry(({ final __callArgument336:Dynamic = path; __callArgument336; }), ({ final __callArgument337:Dynamic = style; __callArgument337; }), (cast tolerance : Float)) : StrokePathGeometry__strokePathGeometry);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast geometry : StrokePathGeometry__strokePathGeometry).pieces, 'length') : Float)) : Bool)) {
-        _Path.appendPieceOutline__strokePath(({ final __callArgument322:Dynamic = result; __callArgument322; }), ({ final __callArgument323:Dynamic = flight._internal._StaticIndex.readArray((cast geometry : StrokePathGeometry__strokePathGeometry).pieces, i); __callArgument323; }));
+        _Path.appendPieceOutline__strokePath(({ final __callArgument340:Dynamic = result; __callArgument340; }), ({ final __callArgument341:Dynamic = flight._internal._StaticIndex.readArray((cast geometry : StrokePathGeometry__strokePathGeometry).pieces, i); __callArgument341; }));
         i++;
       }
     }
@@ -2681,35 +2732,35 @@ class _Path {
 
   public static function appendPieceOutline__strokePath(path:Path, piece:{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }):Void {
     if ((cast ((cast ((cast _Runtime.field((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left, 'length') : Float) < (cast 4.0 : Float)) : Bool) || (cast ((cast _Runtime.field((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right, 'length') : Float) < (cast 4.0 : Float)) : Bool)) : Bool)) { return; }
-    _Path.appendContour__strokePath(({ final __callArgument326:Dynamic = path; __callArgument326; }), (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left, (cast false : Bool), ((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).closed : Bool) ? (cast _Path.EMPTY_POINTS__strokePath : Dynamic) : (cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).endCap : Dynamic)), ((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).closed : Bool) ? (cast _Path.EMPTY_POINTS__strokePath : Dynamic) : (cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).startCap : Dynamic)), (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right);
-    if ((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).closed : Bool)) { _Path.appendContour__strokePath(({ final __callArgument328:Dynamic = path; __callArgument328; }), (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right, (cast true : Bool), ({ final __callArgument329:Dynamic = _Path.EMPTY_POINTS__strokePath; __callArgument329; }), ({ final __callArgument330:Dynamic = _Path.EMPTY_POINTS__strokePath; __callArgument330; }), ({ final __callArgument331:Dynamic = _Path.EMPTY_POINTS__strokePath; __callArgument331; })); }
+    _Path.appendContour__strokePath(({ final __callArgument344:Dynamic = path; __callArgument344; }), (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left, (cast false : Bool), ((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).closed : Bool) ? (cast _Path.EMPTY_POINTS__strokePath : Dynamic) : (cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).endCap : Dynamic)), ((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).closed : Bool) ? (cast _Path.EMPTY_POINTS__strokePath : Dynamic) : (cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).startCap : Dynamic)), (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right);
+    if ((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).closed : Bool)) { _Path.appendContour__strokePath(({ final __callArgument346:Dynamic = path; __callArgument346; }), (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right, (cast true : Bool), ({ final __callArgument347:Dynamic = _Path.EMPTY_POINTS__strokePath; __callArgument347; }), ({ final __callArgument348:Dynamic = _Path.EMPTY_POINTS__strokePath; __callArgument348; }), ({ final __callArgument349:Dynamic = _Path.EMPTY_POINTS__strokePath; __callArgument349; })); }
   }
 
   public static function appendContour__strokePath(path:Path, primary:Array<Float>, reversePrimary:Bool, afterPrimary:Array<Float>, afterSecondary:Array<Float>, secondary:Array<Float>):Void {
     if ((cast reversePrimary : Bool)) {
-      appendPathMoveTo(({ final __callArgument336:Dynamic = path; __callArgument336; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast primary : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(primary, 'length'), 2.0) : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast primary : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(primary, 'length'), 1.0) : Float)) : Float));
+      appendPathMoveTo(({ final __callArgument354:Dynamic = path; __callArgument354; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast primary : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(primary, 'length'), 2.0) : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast primary : Array<Float>), (cast _Runtime.subtractNumbers(_Runtime.field(primary, 'length'), 1.0) : Float)) : Float));
       {
         var i:Float = _Runtime.subtractNumbers(_Runtime.field(primary, 'length'), 4.0);
         while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-          appendPathLineTo(({ final __callArgument338:Dynamic = path; __callArgument338; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast primary : Array<Float>), (cast i : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast primary : Array<Float>), (cast (i + 1.0) : Float)) : Float));
+          appendPathLineTo(({ final __callArgument356:Dynamic = path; __callArgument356; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast primary : Array<Float>), (cast i : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast primary : Array<Float>), (cast (i + 1.0) : Float)) : Float));
           (i = cast ((i - 2.0) : Dynamic));
         }
       }
     } else {
-      appendPathMoveTo(({ final __callArgument340:Dynamic = path; __callArgument340; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast primary : Array<Float>), (cast 0.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast primary : Array<Float>), (cast 1.0 : Float)) : Float));
-      _Path.appendPoints__strokePath(({ final __callArgument342:Dynamic = path; __callArgument342; }), ({ final __callArgument343:Dynamic = primary; __callArgument343; }), (cast 2.0 : Float), (cast 2.0 : Float));
+      appendPathMoveTo(({ final __callArgument358:Dynamic = path; __callArgument358; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast primary : Array<Float>), (cast 0.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast primary : Array<Float>), (cast 1.0 : Float)) : Float));
+      _Path.appendPoints__strokePath(({ final __callArgument360:Dynamic = path; __callArgument360; }), ({ final __callArgument361:Dynamic = primary; __callArgument361; }), (cast 2.0 : Float), (cast 2.0 : Float));
     }
-    _Path.appendPoints__strokePath(({ final __callArgument346:Dynamic = path; __callArgument346; }), ({ final __callArgument347:Dynamic = afterPrimary; __callArgument347; }), (cast 0.0 : Float), (cast 2.0 : Float));
-    _Path.appendPoints__strokePath(({ final __callArgument350:Dynamic = path; __callArgument350; }), ({ final __callArgument351:Dynamic = secondary; __callArgument351; }), (cast _Runtime.subtractNumbers(_Runtime.field(secondary, 'length'), 2.0) : Float), (cast -2.0 : Float));
-    _Path.appendPoints__strokePath(({ final __callArgument354:Dynamic = path; __callArgument354; }), ({ final __callArgument355:Dynamic = afterSecondary; __callArgument355; }), (cast 0.0 : Float), (cast 2.0 : Float));
-    appendPathClose(({ final __callArgument358:Dynamic = path; __callArgument358; }));
+    _Path.appendPoints__strokePath(({ final __callArgument364:Dynamic = path; __callArgument364; }), ({ final __callArgument365:Dynamic = afterPrimary; __callArgument365; }), (cast 0.0 : Float), (cast 2.0 : Float));
+    _Path.appendPoints__strokePath(({ final __callArgument368:Dynamic = path; __callArgument368; }), ({ final __callArgument369:Dynamic = secondary; __callArgument369; }), (cast _Runtime.subtractNumbers(_Runtime.field(secondary, 'length'), 2.0) : Float), (cast -2.0 : Float));
+    _Path.appendPoints__strokePath(({ final __callArgument372:Dynamic = path; __callArgument372; }), ({ final __callArgument373:Dynamic = afterSecondary; __callArgument373; }), (cast 0.0 : Float), (cast 2.0 : Float));
+    appendPathClose(({ final __callArgument376:Dynamic = path; __callArgument376; }));
   }
 
   public static function appendPoints__strokePath(path:Path, points:Array<Float>, start:Float, step:Float):Void {
     {
       var i:Float = start;
       while ((cast ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) : Bool)) {
-        appendPathLineTo(({ final __callArgument360:Dynamic = path; __callArgument360; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast i : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (i + 1.0) : Float)) : Float));
+        appendPathLineTo(({ final __callArgument378:Dynamic = path; __callArgument378; }), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast i : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (i + 1.0) : Float)) : Float));
         (i = cast ((i + step) : Dynamic));
       }
     }
@@ -2758,7 +2809,7 @@ class _Path {
         i++;
       }
     }
-    source = (cast _Path.createStrokeSubpaths__strokePathGeometry(({ final __callArgument362:Dynamic = path; __callArgument362; }), (cast tolerance : Float)) : Array<StrokeSubpath__strokePathGeometry>);
+    source = (cast _Path.createStrokeSubpaths__strokePathGeometry(({ final __callArgument380:Dynamic = path; __callArgument380; }), (cast tolerance : Float)) : Array<StrokeSubpath__strokePathGeometry>);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(source, 'length') : Float)) : Bool)) {
@@ -2779,7 +2830,7 @@ class _Path {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(source, 'length') : Float)) : Bool)) {
         var subpath:StrokeSubpath__strokePathGeometry = flight._internal._StaticIndex.readArray(source, i);
-        var spans:Array<StrokeSubpath__strokePathGeometry> = ((cast ((cast _Runtime.field(dash, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast _Path.applyDash__strokePathGeometry((cast subpath : Dynamic), ({ final __callArgument364:Dynamic = dash; __callArgument364; }), (cast dashOffset : Float)) : Array<StrokeSubpath__strokePathGeometry>) : Dynamic) : (cast cast ([subpath] : Array<Dynamic>) : Dynamic));
+        var spans:Array<StrokeSubpath__strokePathGeometry> = ((cast ((cast _Runtime.field(dash, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast _Path.applyDash__strokePathGeometry((cast subpath : Dynamic), ({ final __callArgument382:Dynamic = dash; __callArgument382; }), (cast dashOffset : Float)) : Array<StrokeSubpath__strokePathGeometry>) : Dynamic) : (cast cast ([subpath] : Array<Dynamic>) : Dynamic));
         {
           var j:Float = 0.0;
           while ((cast ((cast j : Float) < (cast _Runtime.field(spans, 'length') : Float)) : Bool)) {
@@ -2808,7 +2859,7 @@ class _Path {
   public static function createStrokeSubpaths__strokePathGeometry(path:Path, tolerance:Float):Array<StrokeSubpath__strokePathGeometry> {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var result:Array<StrokeSubpath__strokePathGeometry> = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath(({ final __callArgument366:Dynamic = path; __callArgument366; }), (cast tolerance : Float)) : Array<Array<Float>>);
+    contours = (cast flattenPath(({ final __callArgument384:Dynamic = path; __callArgument384; }), (cast tolerance : Float)) : Array<Array<Float>>);
     result = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
@@ -3063,7 +3114,7 @@ class _Path {
             (remaining = cast (flight._internal._StaticIndex.readFloatArrayTyped((cast pattern : Array<Float>), (cast patternIndex : Float)) : Dynamic));
             (on = cast (_Runtime.strictEquals(_Runtime.fmod(patternIndex, 2.0), 0.0) : Dynamic));
             if ((cast ((cast !(cast on : Bool) : Bool) && (cast !_Runtime.strictEquals(current, null) : Bool)) : Bool)) {
-              _Path.pushDash__strokePathGeometry((cast result : Dynamic), ({ final __callArgument368:Dynamic = current; __callArgument368; }), (cast (cast subpath : StrokeSubpath__strokePathGeometry).sourceIndex : Float));
+              _Path.pushDash__strokePathGeometry((cast result : Dynamic), ({ final __callArgument386:Dynamic = current; __callArgument386; }), (cast (cast subpath : StrokeSubpath__strokePathGeometry).sourceIndex : Float));
               (current = cast (null : Dynamic));
             }
           }
@@ -3077,7 +3128,7 @@ class _Path {
             (current ??= cast ([startX, startY] : Array<Dynamic>));
             _Runtime.pushMany(current, cast ([endX, endY] : Array<Dynamic>));
           } else { if ((cast !_Runtime.strictEquals(current, null) : Bool)) {
-            _Path.pushDash__strokePathGeometry((cast result : Dynamic), ({ final __callArgument370:Dynamic = current; __callArgument370; }), (cast (cast subpath : StrokeSubpath__strokePathGeometry).sourceIndex : Float));
+            _Path.pushDash__strokePathGeometry((cast result : Dynamic), ({ final __callArgument388:Dynamic = current; __callArgument388; }), (cast (cast subpath : StrokeSubpath__strokePathGeometry).sourceIndex : Float));
             (current = cast (null : Dynamic));
           } }
           (remaining = cast ((remaining - step) : Dynamic));
@@ -3085,7 +3136,7 @@ class _Path {
         segment++;
       }
     }
-    if ((cast !_Runtime.strictEquals(current, null) : Bool)) { _Path.pushDash__strokePathGeometry((cast result : Dynamic), ({ final __callArgument372:Dynamic = current; __callArgument372; }), (cast (cast subpath : StrokeSubpath__strokePathGeometry).sourceIndex : Float)); }
+    if ((cast !_Runtime.strictEquals(current, null) : Bool)) { _Path.pushDash__strokePathGeometry((cast result : Dynamic), ({ final __callArgument390:Dynamic = current; __callArgument390; }), (cast (cast subpath : StrokeSubpath__strokePathGeometry).sourceIndex : Float)); }
     return cast result;
     return cast null;
   }
@@ -3122,29 +3173,29 @@ class _Path {
     left = (cast _Path.removeConsecutiveDuplicates__strokePathGeometry((cast piece : StrokePathPieceGeometry__strokePathGeometry).left) : Array<Float>);
     right = (cast _Path.removeConsecutiveDuplicates__strokePathGeometry((cast piece : StrokePathPieceGeometry__strokePathGeometry).right) : Array<Float>);
     if ((cast (cast piece : StrokePathPieceGeometry__strokePathGeometry).closed : Bool)) {
-      return cast _Runtime.orValue(((cast (cast _Path.hasPolylineSelfIntersection__strokePathGeometry(({ final __callArgument374:Dynamic = left; __callArgument374; }), (cast true : Bool)) : Bool) : Bool) || (cast (cast _Path.hasPolylineSelfIntersection__strokePathGeometry(({ final __callArgument376:Dynamic = right; __callArgument376; }), (cast true : Bool)) : Bool) : Bool)), function():Dynamic return cast (cast _Path.doPolylinesIntersect__strokePathGeometry(({ final __callArgument378:Dynamic = left; __callArgument378; }), (cast true : Bool), ({ final __callArgument379:Dynamic = right; __callArgument379; }), (cast true : Bool)) : Bool));
+      return cast _Runtime.orValue(((cast (cast _Path.hasPolylineSelfIntersection__strokePathGeometry(({ final __callArgument392:Dynamic = left; __callArgument392; }), (cast true : Bool)) : Bool) : Bool) || (cast (cast _Path.hasPolylineSelfIntersection__strokePathGeometry(({ final __callArgument394:Dynamic = right; __callArgument394; }), (cast true : Bool)) : Bool) : Bool)), function():Dynamic return cast (cast _Path.doPolylinesIntersect__strokePathGeometry(({ final __callArgument396:Dynamic = left; __callArgument396; }), (cast true : Bool), ({ final __callArgument397:Dynamic = right; __callArgument397; }), (cast true : Bool)) : Bool));
     }
-    outline = _Runtime.callProperty(left, 'concat', cast ([(cast piece : StrokePathPieceGeometry__strokePathGeometry).endCap, (cast _Path.reversePoints__strokePathGeometry(({ final __callArgument382:Dynamic = right; __callArgument382; })) : Array<Float>), (cast piece : StrokePathPieceGeometry__strokePathGeometry).startCap] : Array<Dynamic>));
-    return cast (cast _Path.hasPolylineSelfIntersection__strokePathGeometry((cast _Path.removeConsecutiveDuplicates__strokePathGeometry(({ final __callArgument384:Dynamic = outline; __callArgument384; })) : Array<Float>), (cast true : Bool)) : Bool);
+    outline = _Runtime.callProperty(left, 'concat', cast ([(cast piece : StrokePathPieceGeometry__strokePathGeometry).endCap, (cast _Path.reversePoints__strokePathGeometry(({ final __callArgument400:Dynamic = right; __callArgument400; })) : Array<Float>), (cast piece : StrokePathPieceGeometry__strokePathGeometry).startCap] : Array<Dynamic>));
+    return cast (cast _Path.hasPolylineSelfIntersection__strokePathGeometry((cast _Path.removeConsecutiveDuplicates__strokePathGeometry(({ final __callArgument402:Dynamic = outline; __callArgument402; })) : Array<Float>), (cast true : Bool)) : Bool);
     return cast null;
   }
 
   public static function hasPolylineSelfIntersection__strokePathGeometry(points:Array<Float>, closed:Bool):Bool {
     var count:Float = cast _Runtime.UNDEFINED;
     var segmentCount:Float = cast _Runtime.UNDEFINED;
-    count = (cast _Path.getPolylinePointCount__strokePathGeometry(({ final __callArgument388:Dynamic = points; __callArgument388; }), (cast closed : Bool)) : Float);
+    count = (cast _Path.getPolylinePointCount__strokePathGeometry(({ final __callArgument406:Dynamic = points; __callArgument406; }), (cast closed : Bool)) : Float);
     segmentCount = ((cast closed : Bool) ? (cast count : Dynamic) : (cast (count - 1.0) : Dynamic));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast segmentCount : Float)) : Bool)) {
         var iNext:Float = _Runtime.fmod((i + 1.0), count);
-        if ((cast (cast _Path.samePoint__strokePathGeometry(({ final __callArgument390:Dynamic = points; __callArgument390; }), (cast i : Float), (cast iNext : Float)) : Bool) : Bool)) { i++; continue; }
+        if ((cast (cast _Path.samePoint__strokePathGeometry(({ final __callArgument408:Dynamic = points; __callArgument408; }), (cast i : Float), (cast iNext : Float)) : Bool) : Bool)) { i++; continue; }
         {
           var j:Float = (i + 1.0);
           while ((cast ((cast j : Float) < (cast segmentCount : Float)) : Bool)) {
             var jNext:Float = _Runtime.fmod((j + 1.0), count);
-            if ((cast ((cast (cast _Path.samePoint__strokePathGeometry(({ final __callArgument392:Dynamic = points; __callArgument392; }), (cast j : Float), (cast jNext : Float)) : Bool) : Bool) || (cast (cast _Path.segmentsAreAdjacent__strokePathGeometry((cast i : Float), (cast j : Float), (cast segmentCount : Float), (cast closed : Bool)) : Bool) : Bool)) : Bool)) { j++; continue; }
-            if ((cast (cast _Path.segmentsIntersect__strokePathGeometry(({ final __callArgument394:Dynamic = points; __callArgument394; }), (cast i : Float), (cast iNext : Float), ({ final __callArgument395:Dynamic = points; __callArgument395; }), (cast j : Float), (cast jNext : Float)) : Bool) : Bool)) { return cast true; }
+            if ((cast ((cast (cast _Path.samePoint__strokePathGeometry(({ final __callArgument410:Dynamic = points; __callArgument410; }), (cast j : Float), (cast jNext : Float)) : Bool) : Bool) || (cast (cast _Path.segmentsAreAdjacent__strokePathGeometry((cast i : Float), (cast j : Float), (cast segmentCount : Float), (cast closed : Bool)) : Bool) : Bool)) : Bool)) { j++; continue; }
+            if ((cast (cast _Path.segmentsIntersect__strokePathGeometry(({ final __callArgument412:Dynamic = points; __callArgument412; }), (cast i : Float), (cast iNext : Float), ({ final __callArgument413:Dynamic = points; __callArgument413; }), (cast j : Float), (cast jNext : Float)) : Bool) : Bool)) { return cast true; }
             j++;
           }
         }
@@ -3160,21 +3211,21 @@ class _Path {
     var bCount:Float = cast _Runtime.UNDEFINED;
     var aSegments:Float = cast _Runtime.UNDEFINED;
     var bSegments:Float = cast _Runtime.UNDEFINED;
-    aCount = (cast _Path.getPolylinePointCount__strokePathGeometry(({ final __callArgument398:Dynamic = a; __callArgument398; }), (cast aClosed : Bool)) : Float);
-    bCount = (cast _Path.getPolylinePointCount__strokePathGeometry(({ final __callArgument400:Dynamic = b; __callArgument400; }), (cast bClosed : Bool)) : Float);
+    aCount = (cast _Path.getPolylinePointCount__strokePathGeometry(({ final __callArgument416:Dynamic = a; __callArgument416; }), (cast aClosed : Bool)) : Float);
+    bCount = (cast _Path.getPolylinePointCount__strokePathGeometry(({ final __callArgument418:Dynamic = b; __callArgument418; }), (cast bClosed : Bool)) : Float);
     aSegments = ((cast aClosed : Bool) ? (cast aCount : Dynamic) : (cast (aCount - 1.0) : Dynamic));
     bSegments = ((cast bClosed : Bool) ? (cast bCount : Dynamic) : (cast (bCount - 1.0) : Dynamic));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast aSegments : Float)) : Bool)) {
         var iNext:Float = _Runtime.fmod((i + 1.0), aCount);
-        if ((cast (cast _Path.samePoint__strokePathGeometry(({ final __callArgument402:Dynamic = a; __callArgument402; }), (cast i : Float), (cast iNext : Float)) : Bool) : Bool)) { i++; continue; }
+        if ((cast (cast _Path.samePoint__strokePathGeometry(({ final __callArgument420:Dynamic = a; __callArgument420; }), (cast i : Float), (cast iNext : Float)) : Bool) : Bool)) { i++; continue; }
         {
           var j:Float = 0.0;
           while ((cast ((cast j : Float) < (cast bSegments : Float)) : Bool)) {
             var jNext:Float = _Runtime.fmod((j + 1.0), bCount);
-            if ((cast (cast _Path.samePoint__strokePathGeometry(({ final __callArgument404:Dynamic = b; __callArgument404; }), (cast j : Float), (cast jNext : Float)) : Bool) : Bool)) { j++; continue; }
-            if ((cast (cast _Path.segmentsIntersect__strokePathGeometry(({ final __callArgument406:Dynamic = a; __callArgument406; }), (cast i : Float), (cast iNext : Float), ({ final __callArgument407:Dynamic = b; __callArgument407; }), (cast j : Float), (cast jNext : Float)) : Bool) : Bool)) { return cast true; }
+            if ((cast (cast _Path.samePoint__strokePathGeometry(({ final __callArgument422:Dynamic = b; __callArgument422; }), (cast j : Float), (cast jNext : Float)) : Bool) : Bool)) { j++; continue; }
+            if ((cast (cast _Path.segmentsIntersect__strokePathGeometry(({ final __callArgument424:Dynamic = a; __callArgument424; }), (cast i : Float), (cast iNext : Float), ({ final __callArgument425:Dynamic = b; __callArgument425; }), (cast j : Float), (cast jNext : Float)) : Bool) : Bool)) { return cast true; }
             j++;
           }
         }
@@ -3188,7 +3239,7 @@ class _Path {
   public static function getPolylinePointCount__strokePathGeometry(points:Array<Float>, closed:Bool):Float {
     var count:Float = cast _Runtime.UNDEFINED;
     count = (_Runtime.toInt32(_Runtime.field(points, 'length')) >> 1);
-    return cast ((cast ((cast ((cast closed : Bool) && (cast ((cast count : Float) > (cast 1.0 : Float)) : Bool)) : Bool) && (cast (cast _Path.samePoint__strokePathGeometry(({ final __callArgument410:Dynamic = points; __callArgument410; }), (cast 0.0 : Float), (cast (count - 1.0) : Float)) : Bool) : Bool)) : Bool) ? (cast (count - 1.0) : Dynamic) : (cast count : Dynamic));
+    return cast ((cast ((cast ((cast closed : Bool) && (cast ((cast count : Float) > (cast 1.0 : Float)) : Bool)) : Bool) && (cast (cast _Path.samePoint__strokePathGeometry(({ final __callArgument428:Dynamic = points; __callArgument428; }), (cast 0.0 : Float), (cast (count - 1.0) : Float)) : Bool) : Bool)) : Bool) ? (cast (count - 1.0) : Dynamic) : (cast count : Dynamic));
     return cast null;
   }
 
@@ -3302,13 +3353,13 @@ class _Path {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var vertices:Array<Float> = cast _Runtime.UNDEFINED;
     var indices:Array<Float> = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath(({ final __callArgument412:Dynamic = path; __callArgument412; }), (cast tolerance : Float)) : Array<Array<Float>>);
+    contours = (cast flattenPath(({ final __callArgument430:Dynamic = path; __callArgument430; }), (cast tolerance : Float)) : Array<Array<Float>>);
     vertices = (cast cast ([] : Array<Dynamic>));
     indices = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(contours, 'length') : Float)) : Bool)) {
-        _Path.tessellateContour__tessellatePath(flight._internal._StaticIndex.readArray(contours, i), ({ final __callArgument414:Dynamic = vertices; __callArgument414; }), ({ final __callArgument415:Dynamic = indices; __callArgument415; }));
+        _Path.tessellateContour__tessellatePath(flight._internal._StaticIndex.readArray(contours, i), ({ final __callArgument432:Dynamic = vertices; __callArgument432; }), ({ final __callArgument433:Dynamic = indices; __callArgument433; }));
         i++;
       }
     }
@@ -3385,7 +3436,7 @@ class _Path {
           var a:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast _Runtime.fmod((_Runtime.addNumbers(i, _Runtime.field(ring, 'length')) - 1.0), _Runtime.field(ring, 'length')) : Float));
           var b:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast i : Float));
           var c:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast _Runtime.fmod((i + 1.0), _Runtime.field(ring, 'length')) : Float));
-          if ((cast (cast _Path.isEar__tessellatePath(({ final __callArgument418:Dynamic = contour; __callArgument418; }), ({ final __callArgument419:Dynamic = ring; __callArgument419; }), (cast a : Float), (cast b : Float), (cast c : Float)) : Bool) : Bool)) {
+          if ((cast (cast _Path.isEar__tessellatePath(({ final __callArgument436:Dynamic = contour; __callArgument436; }), ({ final __callArgument437:Dynamic = ring; __callArgument437; }), (cast a : Float), (cast b : Float), (cast c : Float)) : Bool) : Bool)) {
             _Runtime.pushMany(indices, cast ([(base + a), (base + b), (base + c)] : Array<Dynamic>));
             _Runtime.splice(ring, Std.int(i), Std.int(1.0), []);
             (clipped = cast (true : Dynamic));
@@ -3445,7 +3496,7 @@ class _Path {
 
   public static function tessellatePathTyped(path:Path, tolerance:Float = 0.25):PathMeshTyped {
     var mesh:PathMesh = cast _Runtime.UNDEFINED;
-    mesh = (cast tessellatePath(({ final __callArgument422:Dynamic = path; __callArgument422; }), (cast tolerance : Float)) : PathMesh);
+    mesh = (cast tessellatePath(({ final __callArgument440:Dynamic = path; __callArgument440; }), (cast tolerance : Float)) : PathMesh);
     return cast { vertices: new flight._internal._Float32Array(mesh.vertices), indices: new flight._internal._UInt32Array(mesh.indices) };
     return cast null;
   }
@@ -3453,13 +3504,13 @@ class _Path {
   public static function tessellateStrokePath(path:Path, style:StrokeStyle, tolerance:Float = 0.25):Null<PathMesh> {
     var geometry:StrokePathGeometry__strokePathGeometry = cast _Runtime.UNDEFINED;
     var mesh:PathMesh = cast _Runtime.UNDEFINED;
-    geometry = (cast buildStrokePathGeometry(({ final __callArgument424:Dynamic = path; __callArgument424; }), ({ final __callArgument425:Dynamic = style; __callArgument425; }), (cast tolerance : Float)) : StrokePathGeometry__strokePathGeometry);
+    geometry = (cast buildStrokePathGeometry(({ final __callArgument442:Dynamic = path; __callArgument442; }), ({ final __callArgument443:Dynamic = style; __callArgument443; }), (cast tolerance : Float)) : StrokePathGeometry__strokePathGeometry);
     if ((cast !_Runtime.strictEquals((cast geometry : StrokePathGeometry__strokePathGeometry).issue, StrokePathTessellationIssueNone) : Bool)) { return cast null; }
     mesh = (cast { indices: cast ([] : Array<Dynamic>), vertices: cast ([] : Array<Dynamic>) });
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast geometry : StrokePathGeometry__strokePathGeometry).pieces, 'length') : Float)) : Bool)) {
-        _Path.appendStrokePieceMesh__tessellateStrokePath(({ final __callArgument428:Dynamic = mesh; __callArgument428; }), ({ final __callArgument429:Dynamic = flight._internal._StaticIndex.readArray((cast geometry : StrokePathGeometry__strokePathGeometry).pieces, i); __callArgument429; }));
+        _Path.appendStrokePieceMesh__tessellateStrokePath(({ final __callArgument446:Dynamic = mesh; __callArgument446; }), ({ final __callArgument447:Dynamic = flight._internal._StaticIndex.readArray((cast geometry : StrokePathGeometry__strokePathGeometry).pieces, i); __callArgument447; }));
         i++;
       }
     }
@@ -3490,21 +3541,21 @@ class _Path {
         var right:Float = (left + 1.0);
         var nextLeft:Float = (base + (next * 2.0));
         var nextRight:Float = (nextLeft + 1.0);
-        _Path.appendTriangle__tessellateStrokePath(({ final __callArgument432:Dynamic = mesh; __callArgument432; }), (cast left : Float), (cast right : Float), (cast nextLeft : Float));
-        _Path.appendTriangle__tessellateStrokePath(({ final __callArgument434:Dynamic = mesh; __callArgument434; }), (cast nextLeft : Float), (cast right : Float), (cast nextRight : Float));
+        _Path.appendTriangle__tessellateStrokePath(({ final __callArgument450:Dynamic = mesh; __callArgument450; }), (cast left : Float), (cast right : Float), (cast nextLeft : Float));
+        _Path.appendTriangle__tessellateStrokePath(({ final __callArgument452:Dynamic = mesh; __callArgument452; }), (cast nextLeft : Float), (cast right : Float), (cast nextRight : Float));
         i++;
       }
     }
     if ((cast ((cast !(cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).closed : Bool) : Bool) && (cast ((cast _Runtime.field((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).startCap, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       var right:Array<Float> = (cast cast ([flight._internal._StaticIndex.readFloatArrayTyped((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right : Array<Float>), (cast 0.0 : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right : Array<Float>), (cast 1.0 : Float))] : Array<Dynamic>));
       var left:Array<Float> = (cast cast ([flight._internal._StaticIndex.readFloatArrayTyped((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left : Array<Float>), (cast 0.0 : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left : Array<Float>), (cast 1.0 : Float))] : Array<Dynamic>));
-      _Path.appendRoundCap__tessellateStrokePath(({ final __callArgument436:Dynamic = mesh; __callArgument436; }), ({ final __callArgument437:Dynamic = right; __callArgument437; }), (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).startCap, ({ final __callArgument438:Dynamic = left; __callArgument438; }));
+      _Path.appendRoundCap__tessellateStrokePath(({ final __callArgument454:Dynamic = mesh; __callArgument454; }), ({ final __callArgument455:Dynamic = right; __callArgument455; }), (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).startCap, ({ final __callArgument456:Dynamic = left; __callArgument456; }));
     }
     if ((cast ((cast !(cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).closed : Bool) : Bool) && (cast ((cast _Runtime.field((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).endCap, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       var end:Float = _Runtime.subtractNumbers(_Runtime.field((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left, 'length'), 2.0);
       var left:Array<Float> = (cast cast ([flight._internal._StaticIndex.readFloatArrayTyped((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left : Array<Float>), (cast end : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left : Array<Float>), (cast (end + 1.0) : Float))] : Array<Dynamic>));
       var right:Array<Float> = (cast cast ([flight._internal._StaticIndex.readFloatArrayTyped((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right : Array<Float>), (cast end : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right : Array<Float>), (cast (end + 1.0) : Float))] : Array<Dynamic>));
-      _Path.appendRoundCap__tessellateStrokePath(({ final __callArgument442:Dynamic = mesh; __callArgument442; }), ({ final __callArgument443:Dynamic = left; __callArgument443; }), (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).endCap, ({ final __callArgument444:Dynamic = right; __callArgument444; }));
+      _Path.appendRoundCap__tessellateStrokePath(({ final __callArgument460:Dynamic = mesh; __callArgument460; }), ({ final __callArgument461:Dynamic = left; __callArgument461; }), (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).endCap, ({ final __callArgument462:Dynamic = right; __callArgument462; }));
     }
   }
 
@@ -3520,7 +3571,7 @@ class _Path {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast (arcCount - 1.0) : Float)) : Bool)) {
-        _Path.appendTriangle__tessellateStrokePath(({ final __callArgument448:Dynamic = mesh; __callArgument448; }), (cast center : Float), (cast (arcBase + i) : Float), (cast ((arcBase + i) + 1.0) : Float));
+        _Path.appendTriangle__tessellateStrokePath(({ final __callArgument466:Dynamic = mesh; __callArgument466; }), (cast center : Float), (cast (arcBase + i) : Float), (cast ((arcBase + i) + 1.0) : Float));
         i++;
       }
     }
@@ -3563,7 +3614,7 @@ class _Path {
     d = __destructure0.d;
     tx = __destructure0.tx;
     ty = __destructure0.ty;
-    (cast copyPath(({ final __callArgument450:Dynamic = source; __callArgument450; }), ({ final __callArgument451:Dynamic = out; __callArgument451; })) : Path);
+    (cast copyPath(({ final __callArgument468:Dynamic = source; __callArgument468; }), ({ final __callArgument469:Dynamic = out; __callArgument469; })) : Path);
     data = (cast out : Path).data;
     commands = _Runtime.field(source, 'commands');
     di = 0.0;
@@ -3614,6 +3665,6 @@ class _Path {
   }
 
   public static function translatePath(source:Path, dx:Float, dy:Float, out:Path):Void {
-    transformPath(({ final __callArgument454:Dynamic = source; __callArgument454; }), ({ final __callArgument455:Dynamic = { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: dx, ty: dy }; __callArgument455; }), ({ final __callArgument456:Dynamic = out; __callArgument456; }));
+    transformPath(({ final __callArgument472:Dynamic = source; __callArgument472; }), ({ final __callArgument473:Dynamic = { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: dx, ty: dy }; __callArgument473; }), ({ final __callArgument474:Dynamic = out; __callArgument474; }));
   }
 }

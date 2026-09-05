@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class VideoCaptureDialogBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var capture:CaptureVideoDialogOptions->flight._internal._Promise<VideoCaptureDialogResult>;
+
+  private function new(capture:CaptureVideoDialogOptions->flight._internal._Promise<VideoCaptureDialogResult>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.capture = capture;
+  }
+}
+#else
 typedef VideoCaptureDialogBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var capture:CaptureVideoDialogOptions->flight._internal._Promise<VideoCaptureDialogResult>; };
+#end

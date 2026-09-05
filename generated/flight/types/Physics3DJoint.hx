@@ -4,4 +4,73 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics3DJoint = { var kind:Physics3DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorAZ:Float; var localAnchorBX:Float; var localAnchorBY:Float; var localAnchorBZ:Float; var collideConnected:Bool; var breakForce:Float; var breakTorque:Float; var broken:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var impulse3:Float; var impulse4:Float; var impulse5:Float; var rAX:Float; var rAY:Float; var rAZ:Float; var rBX:Float; var rBY:Float; var rBZ:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Physics3D)
+@:allow(flight.types.Physics3DConeTwistJoint)
+@:allow(flight.types.Physics3DDistanceJoint)
+@:allow(flight.types.Physics3DFixedJoint)
+@:allow(flight.types.Physics3DGeneric6DofJoint)
+@:allow(flight.types.Physics3DHingeJoint)
+@:allow(flight.types.Physics3DSliderJoint)
+@:keep
+@:structInit
+class Physics3DJoint {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var kind:Physics3DJointKind;
+  public var bodyA:Float;
+  public var bodyB:Float;
+  public var localAnchorAX:Float;
+  public var localAnchorAY:Float;
+  public var localAnchorAZ:Float;
+  public var localAnchorBX:Float;
+  public var localAnchorBY:Float;
+  public var localAnchorBZ:Float;
+  public var collideConnected:Bool;
+  public var breakForce:Float;
+  public var breakTorque:Float;
+  public var broken:Bool;
+  public var impulse0:Float;
+  public var impulse1:Float;
+  public var impulse2:Float;
+  public var impulse3:Float;
+  public var impulse4:Float;
+  public var impulse5:Float;
+  public var rAX:Float;
+  public var rAY:Float;
+  public var rAZ:Float;
+  public var rBX:Float;
+  public var rBY:Float;
+  public var rBZ:Float;
+
+  private function new(kind:Physics3DJointKind, bodyA:Float, bodyB:Float, localAnchorAX:Float, localAnchorAY:Float, localAnchorAZ:Float, localAnchorBX:Float, localAnchorBY:Float, localAnchorBZ:Float, collideConnected:Bool, breakForce:Float, breakTorque:Float, broken:Bool, impulse0:Float, impulse1:Float, impulse2:Float, impulse3:Float, impulse4:Float, impulse5:Float, rAX:Float, rAY:Float, rAZ:Float, rBX:Float, rBY:Float, rBZ:Float):Void {
+    this.__symbol__EntityRuntime = null;
+    this.kind = kind;
+    this.bodyA = bodyA;
+    this.bodyB = bodyB;
+    this.localAnchorAX = localAnchorAX;
+    this.localAnchorAY = localAnchorAY;
+    this.localAnchorAZ = localAnchorAZ;
+    this.localAnchorBX = localAnchorBX;
+    this.localAnchorBY = localAnchorBY;
+    this.localAnchorBZ = localAnchorBZ;
+    this.collideConnected = collideConnected;
+    this.breakForce = breakForce;
+    this.breakTorque = breakTorque;
+    this.broken = broken;
+    this.impulse0 = impulse0;
+    this.impulse1 = impulse1;
+    this.impulse2 = impulse2;
+    this.impulse3 = impulse3;
+    this.impulse4 = impulse4;
+    this.impulse5 = impulse5;
+    this.rAX = rAX;
+    this.rAY = rAY;
+    this.rAZ = rAZ;
+    this.rBX = rBX;
+    this.rBY = rBY;
+    this.rBZ = rBZ;
+  }
+}
+#else
+typedef Physics3DJoint = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:Physics3DJointKind; var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorAZ:Float; var localAnchorBX:Float; var localAnchorBY:Float; var localAnchorBZ:Float; var collideConnected:Bool; var breakForce:Float; var breakTorque:Float; var broken:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var impulse3:Float; var impulse4:Float; var impulse5:Float; var rAX:Float; var rAY:Float; var rAZ:Float; var rBX:Float; var rBY:Float; var rBZ:Float; };
+#end

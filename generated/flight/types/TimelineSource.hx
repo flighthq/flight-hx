@@ -4,4 +4,29 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TimelineSource = { var totalFrames:Float; var labels:Array<TimelineLabel>; var cues:Array<TimelineCue>; var frameRate:Null<Float>; var constructFrame:Node2D->Float->Void; };
+#if !flight_struct_typedef
+@:allow(flight._MovieClip)
+@:allow(flight._Swf)
+@:allow(flight._Timeline)
+@:keep
+@:structInit
+class TimelineSource {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var totalFrames:Float;
+  public var labels:Array<TimelineLabel>;
+  public var cues:Array<TimelineCue>;
+  public var frameRate:Null<Float>;
+  public var constructFrame:Node2D->Float->Void;
+
+  private function new(totalFrames:Float, labels:Array<TimelineLabel>, cues:Array<TimelineCue>, frameRate:Null<Float>, constructFrame:Node2D->Float->Void):Void {
+    this.__symbol__EntityRuntime = null;
+    this.totalFrames = totalFrames;
+    this.labels = labels;
+    this.cues = cues;
+    this.frameRate = frameRate;
+    this.constructFrame = constructFrame;
+  }
+}
+#else
+typedef TimelineSource = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var totalFrames:Float; var labels:Array<TimelineLabel>; var cues:Array<TimelineCue>; var frameRate:Null<Float>; var constructFrame:Node2D->Float->Void; };
+#end

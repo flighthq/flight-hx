@@ -7,6 +7,7 @@ __syncDependencies();
 
 export const applySpringImpulse2D = api.applySpringImpulse2D;
 export const createSpring2D = api.createSpring2D;
+export const initializeSpring2D = api.initializeSpring2D;
 export const isSpring2DSettled = api.isSpring2DSettled;
 export const resetSpring2D = api.resetSpring2D;
 export const updateSpring2D = api.updateSpring2D;

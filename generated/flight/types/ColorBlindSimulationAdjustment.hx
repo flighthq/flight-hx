@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ColorBlindSimulationAdjustment = { var kind:String; var colorMatrix:Array<Float>; @:optional var type:ColorBlindType; };
+#if !flight_struct_typedef
+@:allow(flight._Adjustments)
+@:keep
+@:structInit
+class ColorBlindSimulationAdjustment extends flight.types.ColorMatrixAdjustment<String> {
+  public var type:Null<ColorBlindType>;
+
+  private function new(kind:String, colorMatrix:Array<Float>, ?type:Null<ColorBlindType>):Void {
+    super(kind, colorMatrix);
+    this.type = type;
+  }
+}
+#else
+typedef ColorBlindSimulationAdjustment = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var colorMatrix:Array<Float>; @:optional var type:ColorBlindType; };
+#end

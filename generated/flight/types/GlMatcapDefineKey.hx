@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlMatcapDefineKey = { var alphaMaskEnabled:Bool; var hasMatcap:Bool; @:optional var hasSkin:Bool; };
+typedef GlMatcapDefineKey = { var alphaMaskEnabled:Bool; @:optional var hasInstances:Bool; var hasMatcap:Bool; @:optional var hasSkin:Bool; };

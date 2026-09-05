@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createHalftoneEffect = api.createHalftoneEffect;
+export const initializeHalftoneEffect = api.initializeHalftoneEffect;

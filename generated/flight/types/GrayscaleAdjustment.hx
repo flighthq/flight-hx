@@ -4,4 +4,18 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GrayscaleAdjustment = { var kind:String; var colorMatrix:Array<Float>; @:optional var intensity:Float; };
+#if !flight_struct_typedef
+@:allow(flight._Adjustments)
+@:keep
+@:structInit
+class GrayscaleAdjustment extends flight.types.ColorMatrixAdjustment<String> {
+  public var intensity:Null<Float>;
+
+  private function new(kind:String, colorMatrix:Array<Float>, ?intensity:Null<Float>):Void {
+    super(kind, colorMatrix);
+    this.intensity = intensity;
+  }
+}
+#else
+typedef GrayscaleAdjustment = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var kind:String; var colorMatrix:Array<Float>; @:optional var intensity:Float; };
+#end

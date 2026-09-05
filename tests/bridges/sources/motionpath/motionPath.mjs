@@ -9,6 +9,7 @@ export const createMotionPath = api.createMotionPath;
 export const getMotionPathHeading = api.getMotionPathHeading;
 export const getMotionPathPosition = api.getMotionPathPosition;
 export const getMotionPathProgress = api.getMotionPathProgress;
+export const initializeMotionPath = api.initializeMotionPath;
 export const setMotionPathDistance = api.setMotionPathDistance;
 export const setMotionPathProgress = api.setMotionPathProgress;
 export const updateMotionPath = api.updateMotionPath;

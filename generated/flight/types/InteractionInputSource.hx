@@ -3,5 +3,6 @@ package flight.types;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight._Types.EntityRuntimeKey;
 
 typedef InteractionInputSource = { var onKeyDown:Signal<InputKeyboardData->Void>; var onKeyUp:Signal<InputKeyboardData->Void>; var onPointerCancel:Signal<InputPointerData->Void>; var onPointerDown:Signal<InputPointerData->Void>; var onPointerMove:Signal<InputPointerData->Void>; var onPointerUp:Signal<InputPointerData->Void>; var onWheel:Signal<InputPointerData->Void>; };

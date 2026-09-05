@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ParticleConfigIssue = { var field:String; var message:String; var severity:String; };
+typedef ParticleConfigIssue = { var field:flight._internal._Union2<flight._internal._Symbol, String>; var message:String; var severity:String; };

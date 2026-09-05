@@ -6,4 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createLayoutState = api.createLayoutState;
+export const initializeLayoutState = api.initializeLayoutState;
 export const registerLayoutResolver = api.registerLayoutResolver;

@@ -4,4 +4,25 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ResourceLoaderItemSignals = { var onItemComplete:Signal<String->flight._internal._Any->Void>; var onItemError:Signal<String->flight._internal._Any->Float->Void>; var onItemRetry:Signal<String->Float->Float->Void>; var onItemStart:Signal<String->Void>; };
+#if !flight_struct_typedef
+@:allow(flight._Loader)
+@:keep
+@:structInit
+class ResourceLoaderItemSignals {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var onItemComplete:Signal<String->flight._internal._Any->Void>;
+  public var onItemError:Signal<String->flight._internal._Any->Float->Void>;
+  public var onItemRetry:Signal<String->Float->Float->Void>;
+  public var onItemStart:Signal<String->Void>;
+
+  private function new(onItemComplete:Signal<String->flight._internal._Any->Void>, onItemError:Signal<String->flight._internal._Any->Float->Void>, onItemRetry:Signal<String->Float->Float->Void>, onItemStart:Signal<String->Void>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.onItemComplete = onItemComplete;
+    this.onItemError = onItemError;
+    this.onItemRetry = onItemRetry;
+    this.onItemStart = onItemStart;
+  }
+}
+#else
+typedef ResourceLoaderItemSignals = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var onItemComplete:Signal<String->flight._internal._Any->Void>; var onItemError:Signal<String->flight._internal._Any->Float->Void>; var onItemRetry:Signal<String->Float->Float->Void>; var onItemStart:Signal<String->Void>; };
+#end

@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const createWebWindowStoragePersistenceCapabilities = api.createWebWindowStoragePersistenceCapabilities;
 export const createWebWorkerStoragePersistenceCapabilities = api.createWebWorkerStoragePersistenceCapabilities;
+export const initializeWebWorkerStoragePersistenceCapabilities = api.initializeWebWorkerStoragePersistenceCapabilities;

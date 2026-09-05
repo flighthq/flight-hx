@@ -14,6 +14,7 @@ import flight.types.MenuItemTemplate;
 import flight.types.MenuItemType;
 import flight.types.MenuSelect;
 import flight.types.MenuSignals;
+import flight.types.NonEntityCreateResult;
 
 class Menu {
   public static function attachMenuHighlight(host:HasMenuHighlight, highlight:MenuHighlight):Void {
@@ -29,32 +30,32 @@ class Menu {
     return cast null;
   }
 
-  public static function createDefaultAppMenuTemplate(appName:String):MenuItemTemplate {
+  public static function createDefaultAppMenuTemplate(appName:String):NonEntityCreateResult<MenuItemTemplate, String> {
     return cast Facade_Menu_flight__Menu.createDefaultAppMenuTemplate(appName);
     return cast null;
   }
 
-  public static function createDefaultEditMenuTemplate():MenuItemTemplate {
+  public static function createDefaultEditMenuTemplate():NonEntityCreateResult<MenuItemTemplate, String> {
     return cast Facade_Menu_flight__Menu.createDefaultEditMenuTemplate();
     return cast null;
   }
 
-  public static function createDefaultFileMenuTemplate():MenuItemTemplate {
+  public static function createDefaultFileMenuTemplate():NonEntityCreateResult<MenuItemTemplate, String> {
     return cast Facade_Menu_flight__Menu.createDefaultFileMenuTemplate();
     return cast null;
   }
 
-  public static function createDefaultHelpMenuTemplate():MenuItemTemplate {
+  public static function createDefaultHelpMenuTemplate():NonEntityCreateResult<MenuItemTemplate, String> {
     return cast Facade_Menu_flight__Menu.createDefaultHelpMenuTemplate();
     return cast null;
   }
 
-  public static function createDefaultViewMenuTemplate():MenuItemTemplate {
+  public static function createDefaultViewMenuTemplate():NonEntityCreateResult<MenuItemTemplate, String> {
     return cast Facade_Menu_flight__Menu.createDefaultViewMenuTemplate();
     return cast null;
   }
 
-  public static function createDefaultWindowMenuTemplate():MenuItemTemplate {
+  public static function createDefaultWindowMenuTemplate():NonEntityCreateResult<MenuItemTemplate, String> {
     return cast Facade_Menu_flight__Menu.createDefaultWindowMenuTemplate();
     return cast null;
   }
@@ -64,7 +65,7 @@ class Menu {
     return cast null;
   }
 
-  public static function createMenuItemTemplate(?template:{ @:optional var id:Null<String>; @:optional var label:Null<String>; @:optional var type:Null<MenuItemType>; @:optional var role:Null<MenuItemRole>; @:optional var accelerator:Null<String>; @:optional var enabled:Null<Bool>; @:optional var checked:Null<Bool>; @:optional var visible:Null<Bool>; @:optional var sublabel:Null<String>; @:optional var toolTip:Null<String>; @:optional var submenu:Null<Array<MenuItemTemplate>>; }):MenuItemTemplate {
+  public static function createMenuItemTemplate(?template:{ @:optional var id:Null<String>; @:optional var label:Null<String>; @:optional var type:Null<MenuItemType>; @:optional var role:Null<MenuItemRole>; @:optional var accelerator:Null<String>; @:optional var enabled:Null<Bool>; @:optional var checked:Null<Bool>; @:optional var visible:Null<Bool>; @:optional var sublabel:Null<String>; @:optional var toolTip:Null<String>; @:optional var submenu:Null<Array<MenuItemTemplate>>; }):NonEntityCreateResult<MenuItemTemplate, String> {
     return cast Facade_Menu_flight__Menu.createMenuItemTemplate(template);
     return cast null;
   }

@@ -7,7 +7,8 @@ import flight.Types.PathAttachment2DKind;
 import flight._Animation.createAnimationChannel;
 import flight._Animation.createAnimationTrack;
 import flight._Animation.sampleAnimationTrack;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Geometry.inverseMatrix;
 import flight._Geometry.matrixTransformPointXY;
 import flight._Geometry.multiplyMatrix;
@@ -43,6 +44,7 @@ import flight.types.Bone2D;
 import flight.types.BoundingBoxAttachment2D;
 import flight.types.ClippingAttachment2D;
 import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.KeyedTable;
 import flight.types.LogLevel;
 import flight.types.MatrixLike;
@@ -85,6 +87,27 @@ import flight.types.SkinAttachment2D;
 import flight.types.Slot2D;
 import flight.types.TransformInherit2D;
 import flight.types.Vector2Like;
+
+#if !flight_struct_typedef
+@:allow(flight._Skeleton2D)
+@:keep
+@:structInit
+private class EntityShapeL26C15__skeleton2dDrawOrderTarget {
+  public var kind:String;
+  public var nodes:Array<Null<Node<flight._internal._Any>>>;
+  public var orderList:NodeOrderList<flight._internal._Any>;
+  public var __symbol__EntityRuntime:Null<Dynamic>;
+
+  private function new(kind:String, nodes:Array<Null<Node<flight._internal._Any>>>, orderList:NodeOrderList<flight._internal._Any>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.kind = kind;
+    this.nodes = nodes;
+    this.orderList = orderList;
+  }
+}
+#else
+private typedef EntityShapeL26C15__skeleton2dDrawOrderTarget = { var kind:String; var nodes:Array<Null<Node<flight._internal._Any>>>; var orderList:NodeOrderList<flight._internal._Any>; @:optional var __symbol__EntityRuntime:Null<Dynamic>; };
+#end
 
 @:noCompletion
 class _Skeleton2D {
@@ -391,6 +414,12 @@ class _Skeleton2D {
 
   public static final MATRIX_STRIDE__pathConstraint2D:Float = 6.0;
 
+  public static function assignPathFields__pathConstraint2D(out:EntityConstruction<Path>, commands:Array<Float>, data:Array<Float>, winding:flight._internal._IndexedAccess<Path, String>):Void {
+    _Runtime.setField(out, 'commands', commands);
+    _Runtime.setField(out, 'data', data);
+    _Runtime.setField(out, 'winding', winding);
+  }
+
   public static function registerSkeleton2DPathConstraintSolver():Void {
     registerSkeleton2DConstraintSolver((cast (cast Skeleton2DConstraintKindValue : { var Ik:String; var Path:String; var Transform:String; }).Path : String), ({ final __callArgument64:Dynamic = solveSkeleton2DPathConstraint; __callArgument64; }));
   }
@@ -553,7 +582,15 @@ class _Skeleton2D {
 
   public static final MINIMUM_DETERMINANT__pathConstraint2D:Float = 1e-9;
 
-  public static final _path__pathConstraint2D:Path = (cast { commands: cast ([] : Array<Dynamic>), data: cast ([] : Array<Dynamic>), winding: 'nonZero' });
+  public static function createScratchPath__pathConstraint2D():Path {
+    var out:EntityConstruction<Path> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ commands: cast _Runtime.UNDEFINED, data: cast _Runtime.UNDEFINED, winding: cast _Runtime.UNDEFINED } : Path); }) #end));
+    _Skeleton2D.assignPathFields__pathConstraint2D(({ final __callArgument102:Dynamic = out; __callArgument102; }), (cast cast ([] : Array<Dynamic>) : Array<Float>), (cast cast ([] : Array<Dynamic>) : Array<Float>), ({ final __callArgument103:Dynamic = 'nonZero'; __callArgument103; }));
+    return cast out;
+    return cast null;
+  }
+
+  public static final _path__pathConstraint2D:Path = (cast _Skeleton2D.createScratchPath__pathConstraint2D() : Path);
 
   public static final _point__pathConstraint2D:{ var x:Float; var y:Float; } = (cast { x: 0.0, y: 0.0 });
 
@@ -608,7 +645,7 @@ class _Skeleton2D {
     var hh:Float = cast _Runtime.UNDEFINED;
     world = skeleton.worldMatrices;
     if ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast (boneIndex * _Skeleton2D.MATRIX_STRIDE__regionAttachment2D) : Float) >= (cast _Runtime.field(world, 'length') : Float)) : Bool)) : Bool)) { return; }
-    setTransformMatrix(({ final __callArgument102:Dynamic = _Skeleton2D._local__regionAttachment2D; __callArgument102; }), (cast attachment.scaleX : Float), (cast attachment.scaleY : Float), (cast (attachment.rotation * DEG_TO_RAD) : Float), (cast attachment.x : Float), (cast attachment.y : Float));
+    setTransformMatrix(({ final __callArgument106:Dynamic = _Skeleton2D._local__regionAttachment2D; __callArgument106; }), (cast attachment.scaleX : Float), (cast attachment.scaleY : Float), (cast (attachment.rotation * DEG_TO_RAD) : Float), (cast attachment.x : Float), (cast attachment.y : Float));
     b = (boneIndex * _Skeleton2D.MATRIX_STRIDE__regionAttachment2D);
     (_Skeleton2D._bone__regionAttachment2D.a = cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast world : flight._internal._Float32Array), (cast b : Float)) : Float));
     (_Skeleton2D._bone__regionAttachment2D.b = cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast world : flight._internal._Float32Array), (cast (b + 1.0) : Float)) : Float));
@@ -616,19 +653,19 @@ class _Skeleton2D {
     (_Skeleton2D._bone__regionAttachment2D.d = cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast world : flight._internal._Float32Array), (cast (b + 3.0) : Float)) : Float));
     (_Skeleton2D._bone__regionAttachment2D.tx = cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast world : flight._internal._Float32Array), (cast (b + 4.0) : Float)) : Float));
     (_Skeleton2D._bone__regionAttachment2D.ty = cast (flight._internal._StaticIndex.readFloat32ArrayTyped((cast world : flight._internal._Float32Array), (cast (b + 5.0) : Float)) : Float));
-    multiplyMatrix(({ final __callArgument104:Dynamic = _Skeleton2D._combined__regionAttachment2D; __callArgument104; }), ({ final __callArgument105:Dynamic = _Skeleton2D._bone__regionAttachment2D; __callArgument105; }), ({ final __callArgument106:Dynamic = _Skeleton2D._local__regionAttachment2D; __callArgument106; }));
+    multiplyMatrix(({ final __callArgument108:Dynamic = _Skeleton2D._combined__regionAttachment2D; __callArgument108; }), ({ final __callArgument109:Dynamic = _Skeleton2D._bone__regionAttachment2D; __callArgument109; }), ({ final __callArgument110:Dynamic = _Skeleton2D._local__regionAttachment2D; __callArgument110; }));
     hw = (attachment.width / 2.0);
     hh = (attachment.height / 2.0);
-    matrixTransformPointXY(({ final __callArgument110:Dynamic = _Skeleton2D._corner__regionAttachment2D; __callArgument110; }), ({ final __callArgument111:Dynamic = _Skeleton2D._combined__regionAttachment2D; __callArgument111; }), (cast -hw : Float), (cast -hh : Float));
+    matrixTransformPointXY(({ final __callArgument114:Dynamic = _Skeleton2D._corner__regionAttachment2D; __callArgument114; }), ({ final __callArgument115:Dynamic = _Skeleton2D._combined__regionAttachment2D; __callArgument115; }), (cast -hw : Float), (cast -hh : Float));
     flight._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flight._internal._Float32Array), (cast 0.0 : Float), (cast (cast _Skeleton2D._corner__regionAttachment2D : { var x:Float; var y:Float; }).x : Float));
     flight._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flight._internal._Float32Array), (cast 1.0 : Float), (cast (cast _Skeleton2D._corner__regionAttachment2D : { var x:Float; var y:Float; }).y : Float));
-    matrixTransformPointXY(({ final __callArgument114:Dynamic = _Skeleton2D._corner__regionAttachment2D; __callArgument114; }), ({ final __callArgument115:Dynamic = _Skeleton2D._combined__regionAttachment2D; __callArgument115; }), (cast -hw : Float), (cast hh : Float));
+    matrixTransformPointXY(({ final __callArgument118:Dynamic = _Skeleton2D._corner__regionAttachment2D; __callArgument118; }), ({ final __callArgument119:Dynamic = _Skeleton2D._combined__regionAttachment2D; __callArgument119; }), (cast -hw : Float), (cast hh : Float));
     flight._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flight._internal._Float32Array), (cast 2.0 : Float), (cast (cast _Skeleton2D._corner__regionAttachment2D : { var x:Float; var y:Float; }).x : Float));
     flight._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flight._internal._Float32Array), (cast 3.0 : Float), (cast (cast _Skeleton2D._corner__regionAttachment2D : { var x:Float; var y:Float; }).y : Float));
-    matrixTransformPointXY(({ final __callArgument118:Dynamic = _Skeleton2D._corner__regionAttachment2D; __callArgument118; }), ({ final __callArgument119:Dynamic = _Skeleton2D._combined__regionAttachment2D; __callArgument119; }), (cast hw : Float), (cast hh : Float));
+    matrixTransformPointXY(({ final __callArgument122:Dynamic = _Skeleton2D._corner__regionAttachment2D; __callArgument122; }), ({ final __callArgument123:Dynamic = _Skeleton2D._combined__regionAttachment2D; __callArgument123; }), (cast hw : Float), (cast hh : Float));
     flight._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flight._internal._Float32Array), (cast 4.0 : Float), (cast (cast _Skeleton2D._corner__regionAttachment2D : { var x:Float; var y:Float; }).x : Float));
     flight._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flight._internal._Float32Array), (cast 5.0 : Float), (cast (cast _Skeleton2D._corner__regionAttachment2D : { var x:Float; var y:Float; }).y : Float));
-    matrixTransformPointXY(({ final __callArgument122:Dynamic = _Skeleton2D._corner__regionAttachment2D; __callArgument122; }), ({ final __callArgument123:Dynamic = _Skeleton2D._combined__regionAttachment2D; __callArgument123; }), (cast hw : Float), (cast -hh : Float));
+    matrixTransformPointXY(({ final __callArgument126:Dynamic = _Skeleton2D._corner__regionAttachment2D; __callArgument126; }), ({ final __callArgument127:Dynamic = _Skeleton2D._combined__regionAttachment2D; __callArgument127; }), (cast hw : Float), (cast -hh : Float));
     flight._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flight._internal._Float32Array), (cast 6.0 : Float), (cast (cast _Skeleton2D._corner__regionAttachment2D : { var x:Float; var y:Float; }).x : Float));
     flight._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flight._internal._Float32Array), (cast 7.0 : Float), (cast (cast _Skeleton2D._corner__regionAttachment2D : { var x:Float; var y:Float; }).y : Float));
   }
@@ -644,7 +681,10 @@ class _Skeleton2D {
   public static final MATRIX_STRIDE__skeleton2d:Float = 6.0;
 
   public static function cloneSkeleton2D(skeleton:Skeleton2D):Skeleton2D {
-    return cast (cast createEntity((cast ({ boneMatrices: (cast _Runtime.slice(skeleton.boneMatrices, 0, null) : Dynamic), bones: (cast (cast _Runtime.mapArray((cast skeleton.bones : Array<Bone2D>), function(bone:Bone2D, __unused0:Float, __unused1:Array<Bone2D>):{ var length:Float; @:optional var name:Null<String>; var parentIndex:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var shearX:Float; var shearY:Float; var transformMode:TransformInherit2D; var x:Float; var y:Float; } return _Runtime.mergeObjects([bone]), _Runtime.UNDEFINED)) : Dynamic), inverseBindMatrices: (cast _Runtime.slice(skeleton.inverseBindMatrices, 0, null) : Dynamic), skins: (cast skeleton.skins : Dynamic), slots: (cast ((cast ((cast _Runtime.strictEquals(skeleton.slots, null) : Bool) || (cast _Runtime.strictEquals(skeleton.slots, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast skeleton.slots : Dynamic) : (cast (cast _Runtime.mapArray((cast skeleton.slots : Array<Slot2D>), function(s:Slot2D, __unused2:Float, __unused3:Array<Slot2D>):{ @:optional var attachment:Null<Attachment2D>; @:optional var deform:Null<Skeleton2DSlotDeform>; var boneIndex:Float; @:optional var color:Null<Float>; @:optional var name:Null<String>; } return _Runtime.mergeObjects([s]), _Runtime.UNDEFINED)) : Dynamic)) : Dynamic), worldMatrices: (cast _Runtime.slice(skeleton.worldMatrices, 0, null) : Dynamic) } : Skeleton2D) : Dynamic)) : Skeleton2D);
+    var out:EntityConstruction<Skeleton2D> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ boneMatrices: cast _Runtime.UNDEFINED, bones: cast _Runtime.UNDEFINED, inverseBindMatrices: cast _Runtime.UNDEFINED, skins: cast _Runtime.UNDEFINED, slots: cast _Runtime.UNDEFINED, worldMatrices: cast _Runtime.UNDEFINED } : Skeleton2D); }) #end));
+    initializeSkeleton2D(({ final __callArgument130:Dynamic = out; __callArgument130; }), _Runtime.slice(skeleton.boneMatrices, 0, null), ({ final __callArgument131:Dynamic = (cast _Runtime.mapArray((cast skeleton.bones : Array<Bone2D>), function(bone:Bone2D, __unused0:Float, __unused1:Array<Bone2D>):{ var length:Float; @:optional var name:Null<String>; var parentIndex:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var shearX:Float; var shearY:Float; var transformMode:TransformInherit2D; var x:Float; var y:Float; } return _Runtime.mergeObjects([bone]), _Runtime.UNDEFINED)); __callArgument131; }), _Runtime.slice(skeleton.inverseBindMatrices, 0, null), skeleton.skins, (cast ((cast ((cast _Runtime.strictEquals(skeleton.slots, null) : Bool) || (cast _Runtime.strictEquals(skeleton.slots, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast skeleton.slots : Dynamic) : (cast (cast _Runtime.mapArray((cast skeleton.slots : Array<Slot2D>), function(s:Slot2D, __unused2:Float, __unused3:Array<Slot2D>):{ @:optional var attachment:Null<Attachment2D>; @:optional var deform:Null<Skeleton2DSlotDeform>; var boneIndex:Float; @:optional var color:Null<Float>; @:optional var name:Null<String>; } return _Runtime.mergeObjects([s]), _Runtime.UNDEFINED)) : Dynamic)) : Dynamic), _Runtime.slice(skeleton.worldMatrices, 0, null));
+    return cast out;
     return cast null;
   }
 
@@ -661,10 +701,10 @@ class _Skeleton2D {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         var o:Float = (i * _Skeleton2D.MATRIX_STRIDE__skeleton2d);
-        _Skeleton2D.readMatrix__skeleton2d(({ final __callArgument126:Dynamic = _Skeleton2D._scratchA__skeleton2d; __callArgument126; }), ({ final __callArgument127:Dynamic = world; __callArgument127; }), (cast o : Float));
-        _Skeleton2D.readMatrix__skeleton2d(({ final __callArgument130:Dynamic = _Skeleton2D._scratchB__skeleton2d; __callArgument130; }), ({ final __callArgument131:Dynamic = invBind; __callArgument131; }), (cast o : Float));
-        multiplyMatrix(({ final __callArgument134:Dynamic = _Skeleton2D._scratchC__skeleton2d; __callArgument134; }), ({ final __callArgument135:Dynamic = _Skeleton2D._scratchA__skeleton2d; __callArgument135; }), ({ final __callArgument136:Dynamic = _Skeleton2D._scratchB__skeleton2d; __callArgument136; }));
-        _Skeleton2D.writeMatrix__skeleton2d(({ final __callArgument140:Dynamic = out; __callArgument140; }), (cast o : Float), ({ final __callArgument141:Dynamic = _Skeleton2D._scratchC__skeleton2d; __callArgument141; }));
+        _Skeleton2D.readMatrix__skeleton2d(({ final __callArgument134:Dynamic = _Skeleton2D._scratchA__skeleton2d; __callArgument134; }), ({ final __callArgument135:Dynamic = world; __callArgument135; }), (cast o : Float));
+        _Skeleton2D.readMatrix__skeleton2d(({ final __callArgument138:Dynamic = _Skeleton2D._scratchB__skeleton2d; __callArgument138; }), ({ final __callArgument139:Dynamic = invBind; __callArgument139; }), (cast o : Float));
+        multiplyMatrix(({ final __callArgument142:Dynamic = _Skeleton2D._scratchC__skeleton2d; __callArgument142; }), ({ final __callArgument143:Dynamic = _Skeleton2D._scratchA__skeleton2d; __callArgument143; }), ({ final __callArgument144:Dynamic = _Skeleton2D._scratchB__skeleton2d; __callArgument144; }));
+        _Skeleton2D.writeMatrix__skeleton2d(({ final __callArgument148:Dynamic = out; __callArgument148; }), (cast o : Float), ({ final __callArgument149:Dynamic = _Skeleton2D._scratchC__skeleton2d; __callArgument149; }));
         i++;
       }
     }
@@ -754,7 +794,7 @@ class _Skeleton2D {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        computeSkeleton2DBoneWorldTransform(({ final __callArgument144:Dynamic = skeleton; __callArgument144; }), (cast i : Float));
+        computeSkeleton2DBoneWorldTransform(({ final __callArgument152:Dynamic = skeleton; __callArgument152; }), (cast i : Float));
         i++;
       }
     }
@@ -763,8 +803,11 @@ class _Skeleton2D {
   public static function createSkeleton2D(bones:Array<Bone2D>, ?slots:flight._internal._IndexedAccess<Skeleton2D, String>):Skeleton2D {
     if (slots == null) slots = cast (null : Dynamic);
     var count:Float = cast _Runtime.UNDEFINED;
+    var out:EntityConstruction<Skeleton2D> = cast _Runtime.UNDEFINED;
     count = _Runtime.field(bones, 'length');
-    return cast (cast createEntity((cast (#if flight_struct_typedef { boneMatrices: new flight._internal._Float32Array((count * _Skeleton2D.MATRIX_STRIDE__skeleton2d)), bones: bones, inverseBindMatrices: new flight._internal._Float32Array((count * _Skeleton2D.MATRIX_STRIDE__skeleton2d)), slots: slots, worldMatrices: new flight._internal._Float32Array((count * _Skeleton2D.MATRIX_STRIDE__skeleton2d)) } #else ({ final __structInitField0:Dynamic = new flight._internal._Float32Array((count * _Skeleton2D.MATRIX_STRIDE__skeleton2d)); final __structInitField1:Dynamic = bones; final __structInitField2:Dynamic = new flight._internal._Float32Array((count * _Skeleton2D.MATRIX_STRIDE__skeleton2d)); final __structInitField3:Dynamic = slots; final __structInitField4:Dynamic = new flight._internal._Float32Array((count * _Skeleton2D.MATRIX_STRIDE__skeleton2d)); ({ boneMatrices: __structInitField0, bones: __structInitField1, inverseBindMatrices: __structInitField2, skins: cast _Runtime.UNDEFINED, slots: __structInitField3, worldMatrices: __structInitField4 } : Skeleton2D); }) #end) : Dynamic)) : Skeleton2D);
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ boneMatrices: cast _Runtime.UNDEFINED, bones: cast _Runtime.UNDEFINED, inverseBindMatrices: cast _Runtime.UNDEFINED, skins: cast _Runtime.UNDEFINED, slots: cast _Runtime.UNDEFINED, worldMatrices: cast _Runtime.UNDEFINED } : Skeleton2D); }) #end));
+    initializeSkeleton2D(({ final __callArgument154:Dynamic = out; __callArgument154; }), new flight._internal._Float32Array((count * _Skeleton2D.MATRIX_STRIDE__skeleton2d)), ({ final __callArgument155:Dynamic = bones; __callArgument155; }), new flight._internal._Float32Array((count * _Skeleton2D.MATRIX_STRIDE__skeleton2d)), ({ final __callArgument156:Dynamic = null; __callArgument156; }), (cast slots : Dynamic), new flight._internal._Float32Array((count * _Skeleton2D.MATRIX_STRIDE__skeleton2d)));
+    return cast out;
     return cast null;
   }
 
@@ -807,7 +850,7 @@ class _Skeleton2D {
 
   public static function getSkeleton2DBoneWorldMatrix(out:MatrixLike, skeleton:Skeleton2D, boneIndex:Float):Bool {
     if ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast boneIndex : Float) >= (cast _Runtime.field(skeleton.bones, 'length') : Float)) : Bool)) : Bool)) { return cast false; }
-    _Skeleton2D.readMatrix__skeleton2d(({ final __callArgument146:Dynamic = out; __callArgument146; }), skeleton.worldMatrices, (cast (boneIndex * _Skeleton2D.MATRIX_STRIDE__skeleton2d) : Float));
+    _Skeleton2D.readMatrix__skeleton2d(({ final __callArgument160:Dynamic = out; __callArgument160; }), skeleton.worldMatrices, (cast (boneIndex * _Skeleton2D.MATRIX_STRIDE__skeleton2d) : Float));
     return cast true;
     return cast null;
   }
@@ -825,6 +868,17 @@ class _Skeleton2D {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeSkeleton2D(out:EntityConstruction<Skeleton2D>, boneMatrices:flight._internal._Float32Array, bones:Array<Bone2D>, inverseBindMatrices:flight._internal._Float32Array, skins:flight._internal._IndexedAccess<Skeleton2D, String>, slots:flight._internal._IndexedAccess<Skeleton2D, String>, worldMatrices:flight._internal._Float32Array):Void {
+    _Runtime.setField(out, 'boneMatrices', boneMatrices);
+    _Runtime.setField(out, 'bones', bones);
+    _Runtime.setField(out, 'inverseBindMatrices', inverseBindMatrices);
+    _Runtime.setField(out, 'skins', skins);
+    _Runtime.setField(out, 'slots', slots);
+    _Runtime.setField(out, 'worldMatrices', worldMatrices);
+  }
+
   public static function setSkeleton2DBindPose(skeleton:Skeleton2D):Void {
     var world:flight._internal._Float32Array = cast _Runtime.UNDEFINED;
     var out:flight._internal._Float32Array = cast _Runtime.UNDEFINED;
@@ -836,9 +890,9 @@ class _Skeleton2D {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         var o:Float = (i * _Skeleton2D.MATRIX_STRIDE__skeleton2d);
-        _Skeleton2D.readMatrix__skeleton2d(({ final __callArgument150:Dynamic = _Skeleton2D._scratchA__skeleton2d; __callArgument150; }), ({ final __callArgument151:Dynamic = world; __callArgument151; }), (cast o : Float));
-        if ((cast !(cast (cast inverseMatrix(({ final __callArgument154:Dynamic = _Skeleton2D._scratchB__skeleton2d; __callArgument154; }), ({ final __callArgument155:Dynamic = _Skeleton2D._scratchA__skeleton2d; __callArgument155; })) : Bool) : Bool) : Bool)) { _Skeleton2D.setMatrixIdentityLocal__skeleton2d(({ final __callArgument158:Dynamic = _Skeleton2D._scratchB__skeleton2d; __callArgument158; })); }
-        _Skeleton2D.writeMatrix__skeleton2d(({ final __callArgument160:Dynamic = out; __callArgument160; }), (cast o : Float), ({ final __callArgument161:Dynamic = _Skeleton2D._scratchB__skeleton2d; __callArgument161; }));
+        _Skeleton2D.readMatrix__skeleton2d(({ final __callArgument164:Dynamic = _Skeleton2D._scratchA__skeleton2d; __callArgument164; }), ({ final __callArgument165:Dynamic = world; __callArgument165; }), (cast o : Float));
+        if ((cast !(cast (cast inverseMatrix(({ final __callArgument168:Dynamic = _Skeleton2D._scratchB__skeleton2d; __callArgument168; }), ({ final __callArgument169:Dynamic = _Skeleton2D._scratchA__skeleton2d; __callArgument169; })) : Bool) : Bool) : Bool)) { _Skeleton2D.setMatrixIdentityLocal__skeleton2d(({ final __callArgument172:Dynamic = _Skeleton2D._scratchB__skeleton2d; __callArgument172; })); }
+        _Skeleton2D.writeMatrix__skeleton2d(({ final __callArgument174:Dynamic = out; __callArgument174; }), (cast o : Float), ({ final __callArgument175:Dynamic = _Skeleton2D._scratchB__skeleton2d; __callArgument175; }));
         i++;
       }
     }
@@ -912,13 +966,19 @@ class _Skeleton2D {
   public static final _scratchC__skeleton2d:MatrixLike = (cast { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0 });
 
   public static function createSkeleton2DBoneAnimationTarget(boneIndex:Float, path:Skeleton2DAnimationPath):Skeleton2DAnimationTarget {
-    return cast { boneIndex: boneIndex, kind: (cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).Bone, path: path };
+    var out:EntityConstruction<Skeleton2DAnimationTarget> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ boneIndex: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, path: cast _Runtime.UNDEFINED } : Skeleton2DAnimationTarget); }) #end));
+    initializeSkeleton2DBoneAnimationTarget(({ final __callArgument180:Dynamic = out; __callArgument180; }), (cast boneIndex : Float), ({ final __callArgument181:Dynamic = path; __callArgument181; }));
+    return cast out;
     return cast null;
   }
 
   public static function createSkeleton2DSlotAnimationTarget(slotIndex:Float, path:Skeleton2DSlotAnimationPath, ?attachments:Null<Array<Null<Attachment2D>>>):Skeleton2DSlotAnimationTarget {
     if (attachments == null) attachments = cast (null : Dynamic);
-    return cast { attachments: attachments, kind: (cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).Slot, path: path, slotIndex: slotIndex };
+    var out:EntityConstruction<Skeleton2DSlotAnimationTarget> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ attachments: cast _Runtime.UNDEFINED, kind: cast _Runtime.UNDEFINED, path: cast _Runtime.UNDEFINED, slotIndex: cast _Runtime.UNDEFINED } : Skeleton2DSlotAnimationTarget); }) #end));
+    initializeSkeleton2DSlotAnimationTarget(({ final __callArgument184:Dynamic = out; __callArgument184; }), (cast slotIndex : Float), ({ final __callArgument185:Dynamic = path; __callArgument185; }), ({ final __callArgument186:Dynamic = attachments; __callArgument186; }));
+    return cast out;
     return cast null;
   }
 
@@ -947,17 +1007,35 @@ class _Skeleton2D {
   public static function getSkeleton2DAnimationTargetBinderKinds():Array<Skeleton2DAnimationTargetKind> {
     var kinds:Array<Skeleton2DAnimationTargetKind> = cast _Runtime.UNDEFINED;
     kinds = (cast cast ([] : Array<Dynamic>));
-    getRegistryTableKeys(({ final __callArgument166:Dynamic = kinds; __callArgument166; }), (cast (cast _Skeleton2D.getSkeleton2DAnimationTargetBinderRegistry__skeleton2dAnimationTarget() : KeyedTable<Skeleton2DAnimationTargetBinder>) : Dynamic));
+    getRegistryTableKeys(({ final __callArgument190:Dynamic = kinds; __callArgument190; }), (cast (cast _Skeleton2D.getSkeleton2DAnimationTargetBinderRegistry__skeleton2dAnimationTarget() : KeyedTable<Skeleton2DAnimationTargetBinder>) : Dynamic));
     return cast kinds;
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeSkeleton2DBoneAnimationTarget(out:EntityConstruction<Skeleton2DAnimationTarget>, boneIndex:Float, path:Skeleton2DAnimationPath):Void {
+    _Runtime.setField(out, 'boneIndex', boneIndex);
+    _Runtime.setField(out, 'kind', (cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).Bone);
+    _Runtime.setField(out, 'path', path);
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeSkeleton2DSlotAnimationTarget(out:EntityConstruction<Skeleton2DSlotAnimationTarget>, slotIndex:Float, path:Skeleton2DSlotAnimationPath, ?attachments:Null<Array<Null<Attachment2D>>>):Void {
+    if (attachments == null) attachments = cast (null : Dynamic);
+    _Runtime.setField(out, 'attachments', attachments);
+    _Runtime.setField(out, 'kind', (cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).Slot);
+    _Runtime.setField(out, 'path', path);
+    _Runtime.setField(out, 'slotIndex', slotIndex);
+  }
+
   public static function registerSkeleton2DAnimationTargetBinder(kind:Skeleton2DAnimationTargetKind, bind:Skeleton2DAnimationTargetBinder):Void {
-    (_Skeleton2D._binders__skeleton2dAnimationTarget = cast ((cast (cast withRegistryTableEntry : KeyedTable<Skeleton2DAnimationTargetBinder>->String->Skeleton2DAnimationTargetBinder->KeyedTable<Skeleton2DAnimationTargetBinder>)((cast _Skeleton2D.getSkeleton2DAnimationTargetBinderRegistry__skeleton2dAnimationTarget() : KeyedTable<Skeleton2DAnimationTargetBinder>), (cast kind : String), ({ final __callArgument168:Dynamic = bind; __callArgument168; })) : KeyedTable<Skeleton2DAnimationTargetBinder>) : Dynamic));
+    (_Skeleton2D._binders__skeleton2dAnimationTarget = cast ((cast withRegistryTableEntry((cast _Skeleton2D.getSkeleton2DAnimationTargetBinderRegistry__skeleton2dAnimationTarget() : KeyedTable<Skeleton2DAnimationTargetBinder>), (cast kind : String), ({ final __callArgument192:Dynamic = bind; __callArgument192; })) : { >KeyedTable<Skeleton2DAnimationTargetBinder>, >Entity, }) : Dynamic));
   }
 
   public static function unregisterSkeleton2DAnimationTargetBinder(kind:Skeleton2DAnimationTargetKind):Void {
-    (_Skeleton2D._binders__skeleton2dAnimationTarget = cast ((cast (cast withoutRegistryTableEntry : KeyedTable<Skeleton2DAnimationTargetBinder>->String->KeyedTable<Skeleton2DAnimationTargetBinder>)((cast _Skeleton2D.getSkeleton2DAnimationTargetBinderRegistry__skeleton2dAnimationTarget() : KeyedTable<Skeleton2DAnimationTargetBinder>), (cast kind : String)) : KeyedTable<Skeleton2DAnimationTargetBinder>) : Dynamic));
+    (_Skeleton2D._binders__skeleton2dAnimationTarget = cast ((cast withoutRegistryTableEntry((cast _Skeleton2D.getSkeleton2DAnimationTargetBinderRegistry__skeleton2dAnimationTarget() : KeyedTable<Skeleton2DAnimationTargetBinder>), (cast kind : String)) : { >KeyedTable<Skeleton2DAnimationTargetBinder>, >Entity, }) : Dynamic));
   }
 
   public static function bindSkeleton2DBoneChannel__skeleton2dAnimationTarget(channel:AnimationChannel, setup:Skeleton2D, pose:Skeleton2D, target:flight._internal._Any, time:Float):Void {
@@ -973,7 +1051,7 @@ class _Skeleton2D {
     poseBones = pose.bones;
     if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(boneIndex), 'number') : Bool)) { return; }
     if ((cast ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast boneIndex : Float) >= (cast _Runtime.field(poseBones, 'length') : Float)) : Bool)) : Bool) || (cast ((cast boneIndex : Float) >= (cast _Runtime.field(setupBones, 'length') : Float)) : Bool)) : Bool)) { return; }
-    sampleAnimationTrack(({ final __callArgument170:Dynamic = _Skeleton2D._scratch__skeleton2dAnimationTarget; __callArgument170; }), channel.track, (cast time : Float));
+    sampleAnimationTrack(({ final __callArgument194:Dynamic = _Skeleton2D._scratch__skeleton2dAnimationTarget; __callArgument194; }), channel.track, (cast time : Float));
     setupBone = flight._internal._StaticIndex.readArray(setupBones, boneIndex);
     poseBone = flight._internal._StaticIndex.readArray(poseBones, boneIndex);
     {
@@ -1026,11 +1104,11 @@ class _Skeleton2D {
     slotIndex = _Runtime.field(slotTarget, 'slotIndex');
     if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(slotIndex), 'number') : Bool) || (cast ((cast slotIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast slotIndex : Float) >= (cast _Runtime.field(slots, 'length') : Float)) : Bool)) : Bool)) { return; }
     if ((cast _Runtime.strictEquals(_Runtime.field(slotTarget, 'path'), (cast SlotPath : { var Attachment:String; var Color:String; }).Attachment) : Bool)) {
-      _Skeleton2D.bindSkeleton2DSlotAttachment__skeleton2dAnimationTarget(({ final __callArgument172:Dynamic = channel; __callArgument172; }), flight._internal._StaticIndex.readArray(slots, slotIndex), ({ final __callArgument173:Dynamic = slotTarget; __callArgument173; }), (cast time : Float));
+      _Skeleton2D.bindSkeleton2DSlotAttachment__skeleton2dAnimationTarget(({ final __callArgument196:Dynamic = channel; __callArgument196; }), flight._internal._StaticIndex.readArray(slots, slotIndex), ({ final __callArgument197:Dynamic = slotTarget; __callArgument197; }), (cast time : Float));
       return;
     }
     if ((cast !_Runtime.strictEquals(_Runtime.field(slotTarget, 'path'), (cast SlotPath : { var Attachment:String; var Color:String; }).Color) : Bool)) { return; }
-    sampleAnimationTrack(({ final __callArgument176:Dynamic = _Skeleton2D._scratch__skeleton2dAnimationTarget; __callArgument176; }), channel.track, (cast time : Float));
+    sampleAnimationTrack(({ final __callArgument200:Dynamic = _Skeleton2D._scratch__skeleton2dAnimationTarget; __callArgument200; }), channel.track, (cast time : Float));
     ((cast flight._internal._StaticIndex.readArray(slots, slotIndex) : Slot2D).color = _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((cast _Skeleton2D.clampColorChannel__skeleton2dAnimationTarget((cast flight._internal._StaticIndex.readFloatArrayTyped((cast _Skeleton2D._scratch__skeleton2dAnimationTarget : Array<Float>), (cast 0.0 : Float)) : Float)) : Float)) << 24)) | _Runtime.toInt32((_Runtime.toInt32((cast _Skeleton2D.clampColorChannel__skeleton2dAnimationTarget((cast flight._internal._StaticIndex.readFloatArrayTyped((cast _Skeleton2D._scratch__skeleton2dAnimationTarget : Array<Float>), (cast 1.0 : Float)) : Float)) : Float)) << 16)))) | _Runtime.toInt32((_Runtime.toInt32((cast _Skeleton2D.clampColorChannel__skeleton2dAnimationTarget((cast flight._internal._StaticIndex.readFloatArrayTyped((cast _Skeleton2D._scratch__skeleton2dAnimationTarget : Array<Float>), (cast 2.0 : Float)) : Float)) : Float)) << 8)))) | _Runtime.toInt32((cast _Skeleton2D.clampColorChannel__skeleton2dAnimationTarget((cast flight._internal._StaticIndex.readFloatArrayTyped((cast _Skeleton2D._scratch__skeleton2dAnimationTarget : Array<Float>), (cast 3.0 : Float)) : Float)) : Float)))), 0));
   }
 
@@ -1056,9 +1134,9 @@ class _Skeleton2D {
 
   public static function getSkeleton2DAnimationTargetBinderRegistry__skeleton2dAnimationTarget():KeyedTable<Skeleton2DAnimationTargetBinder> {
     if ((cast !_Runtime.strictEquals(_Skeleton2D._binders__skeleton2dAnimationTarget, null) : Bool)) { return cast _Skeleton2D._binders__skeleton2dAnimationTarget; }
-    (_Skeleton2D._binders__skeleton2dAnimationTarget = cast ((cast (cast createKeyedTable : String->String->KeyedTable<Skeleton2DAnimationTargetBinder>)((cast 'Skeleton2DAnimationTargetBinder' : String), (cast 'Unclaimed' : String)) : KeyedTable<Skeleton2DAnimationTargetBinder>) : Dynamic));
-    (_Skeleton2D._binders__skeleton2dAnimationTarget = cast ((cast (cast withRegistryTableEntry : KeyedTable<AnimationChannel->Skeleton2D->Skeleton2D->flight._internal._Any->Float->Void>->String->(AnimationChannel->Skeleton2D->Skeleton2D->flight._internal._Any->Float->Void)->KeyedTable<AnimationChannel->Skeleton2D->Skeleton2D->flight._internal._Any->Float->Void>)(({ final __callArgument178:Dynamic = _Skeleton2D._binders__skeleton2dAnimationTarget; __callArgument178; }), (cast (cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).Bone : String), ({ final __callArgument179:Dynamic = _Skeleton2D.bindSkeleton2DBoneChannel__skeleton2dAnimationTarget; __callArgument179; })) : KeyedTable<AnimationChannel->Skeleton2D->Skeleton2D->flight._internal._Any->Float->Void>) : Dynamic));
-    (_Skeleton2D._binders__skeleton2dAnimationTarget = cast ((cast (cast withRegistryTableEntry : KeyedTable<AnimationChannel->Skeleton2D->Skeleton2D->flight._internal._Any->Float->Void>->String->(AnimationChannel->Skeleton2D->Skeleton2D->flight._internal._Any->Float->Void)->KeyedTable<AnimationChannel->Skeleton2D->Skeleton2D->flight._internal._Any->Float->Void>)(({ final __callArgument182:Dynamic = _Skeleton2D._binders__skeleton2dAnimationTarget; __callArgument182; }), (cast (cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).Slot : String), ({ final __callArgument183:Dynamic = _Skeleton2D.bindSkeleton2DSlotChannel__skeleton2dAnimationTarget; __callArgument183; })) : KeyedTable<AnimationChannel->Skeleton2D->Skeleton2D->flight._internal._Any->Float->Void>) : Dynamic));
+    (_Skeleton2D._binders__skeleton2dAnimationTarget = cast ((cast createKeyedTable((cast 'Skeleton2DAnimationTargetBinder' : String), (cast 'Unclaimed' : String)) : { >KeyedTable<Skeleton2DAnimationTargetBinder>, >Entity, }) : Dynamic));
+    (_Skeleton2D._binders__skeleton2dAnimationTarget = cast ((cast withRegistryTableEntry(({ final __callArgument202:Dynamic = _Skeleton2D._binders__skeleton2dAnimationTarget; __callArgument202; }), (cast (cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).Bone : String), ({ final __callArgument203:Dynamic = _Skeleton2D.bindSkeleton2DBoneChannel__skeleton2dAnimationTarget; __callArgument203; })) : { >KeyedTable<AnimationChannel->Skeleton2D->Skeleton2D->flight._internal._Any->Float->Void>, >Entity, }) : Dynamic));
+    (_Skeleton2D._binders__skeleton2dAnimationTarget = cast ((cast withRegistryTableEntry(({ final __callArgument206:Dynamic = _Skeleton2D._binders__skeleton2dAnimationTarget; __callArgument206; }), (cast (cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).Slot : String), ({ final __callArgument207:Dynamic = _Skeleton2D.bindSkeleton2DSlotChannel__skeleton2dAnimationTarget; __callArgument207; })) : { >KeyedTable<AnimationChannel->Skeleton2D->Skeleton2D->flight._internal._Any->Float->Void>, >Entity, }) : Dynamic));
     return cast _Skeleton2D._binders__skeleton2dAnimationTarget;
     return cast null;
   }
@@ -1087,7 +1165,7 @@ class _Skeleton2D {
         var constraint:Skeleton2DConstraint = flight._internal._StaticIndex.readArray(constraints, i);
         var solve:Null<Skeleton2DConstraintSolver> = ((cast _Skeleton2D._solvers__skeleton2dConstraint : flight._internal._Map<String, Skeleton2DConstraintSolver>).get((cast _Runtime.field(constraint, 'kind'))));
         if ((cast _Runtime.strictEquals(solve, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
-        solve(({ final __callArgument186:Dynamic = skeleton; __callArgument186; }), ({ final __callArgument187:Dynamic = constraint; __callArgument187; }));
+        solve(({ final __callArgument210:Dynamic = skeleton; __callArgument210; }), ({ final __callArgument211:Dynamic = constraint; __callArgument211; }));
         i++;
       }
     }
@@ -1104,7 +1182,10 @@ class _Skeleton2D {
   @:allow(flight)
   @:keep
   private static function createSkeleton2DDrawOrderAnimationTarget<Traits:flight._internal._Object>(nodes:Array<Null<Node<Traits>>>, orderList:NodeOrderList<Traits>):Skeleton2DDrawOrderAnimationTarget<Traits> {
-    return cast { kind: (cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).DrawOrder, nodes: nodes, orderList: orderList };
+    var out:EntityConstruction<Skeleton2DDrawOrderAnimationTarget<Traits>> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ kind: cast _Runtime.UNDEFINED, nodes: cast _Runtime.UNDEFINED, orderList: cast _Runtime.UNDEFINED } : EntityShapeL26C15__skeleton2dDrawOrderTarget); }) #end));
+    initializeSkeleton2DDrawOrderAnimationTarget((cast out : Dynamic), (cast nodes : Dynamic), (cast orderList : Dynamic));
+    return cast out;
     return cast null;
   }
 
@@ -1123,8 +1204,16 @@ class _Skeleton2D {
 
   @:allow(flight)
   @:keep
+  private static function initializeSkeleton2DDrawOrderAnimationTarget<Traits:flight._internal._Object>(out:EntityConstruction<Skeleton2DDrawOrderAnimationTarget<Traits>>, nodes:Array<Null<Node<Traits>>>, orderList:NodeOrderList<Traits>):Void {
+    _Runtime.setField(out, 'kind', (cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).DrawOrder);
+    _Runtime.setField(out, 'nodes', nodes);
+    _Runtime.setField(out, 'orderList', orderList);
+  }
+
+  @:allow(flight)
+  @:keep
   private static function registerSkeleton2DDrawOrderAnimationBinder():Void {
-    registerSkeleton2DAnimationTargetBinder((cast (cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).DrawOrder : String), ({ final __callArgument190:Dynamic = _Skeleton2D.bindSkeleton2DDrawOrderChannel__skeleton2dDrawOrderTarget; __callArgument190; }));
+    registerSkeleton2DAnimationTargetBinder((cast (cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).DrawOrder : String), ({ final __callArgument214:Dynamic = _Skeleton2D.bindSkeleton2DDrawOrderChannel__skeleton2dDrawOrderTarget; __callArgument214; }));
   }
 
   @:allow(flight)
@@ -1154,7 +1243,7 @@ class _Skeleton2D {
     if ((cast !_Runtime.strictEquals(track.interpolation, _Skeleton2D.STEP_INTERPOLATION__skeleton2dDrawOrderTarget) : Bool)) {
       reportSkeleton2DCoercedInterpolation((cast _Skeleton2D.DRAW_ORDER_SUBJECT__skeleton2dDrawOrderTarget : String), (cast track.interpolation : String), (cast _Skeleton2D.STEP_INTERPOLATION__skeleton2dDrawOrderTarget : String));
     }
-    (cast clearNodeOrderList : NodeOrderList<NodeTraits>->Void)(({ final __callArgument192:Dynamic = orderList; __callArgument192; }));
+    (cast clearNodeOrderList : NodeOrderList<NodeTraits>->Void)(({ final __callArgument216:Dynamic = orderList; __callArgument216; }));
     base = (keyframe * components);
     count = ((cast ((cast components : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool) ? (cast components : Dynamic) : (cast _Runtime.field(nodes, 'length') : Dynamic));
     {
@@ -1162,7 +1251,7 @@ class _Skeleton2D {
       while ((cast ((cast slot : Float) < (cast count : Float)) : Bool)) {
         var node:Null<Node<NodeTraits>> = flight._internal._StaticIndex.readArray(nodes, slot);
         if ((cast ((cast _Runtime.strictEquals(node, null) : Bool) || (cast _Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { slot++; continue; }
-        (cast addNodeOrderListEntry : NodeOrderList<NodeTraits>->Node<NodeTraits>->Float->Void)(({ final __callArgument194:Dynamic = orderList; __callArgument194; }), ({ final __callArgument195:Dynamic = node; __callArgument195; }), (cast _Runtime.getIndex(track.values, (base + slot)) : Float));
+        (cast addNodeOrderListEntry : NodeOrderList<NodeTraits>->Node<NodeTraits>->Float->Void)(({ final __callArgument218:Dynamic = orderList; __callArgument218; }), ({ final __callArgument219:Dynamic = node; __callArgument219; }), (cast _Runtime.getIndex(track.values, (base + slot)) : Float));
         slot++;
       }
     }
@@ -1176,14 +1265,14 @@ class _Skeleton2D {
   @:keep
   private static function reportSkeleton2DCoercedInterpolation(subject:String, stated:String, applied:String):Void {
     if ((cast _Runtime.strictEquals(_Skeleton2D._coercedInterpolationGuard__skeleton2dGuards, null) : Bool)) { return; }
-    _Skeleton2D._coercedInterpolationGuard__skeleton2dGuards(({ final __callArgument198:Dynamic = { applied: applied, stated: stated, subject: subject }; __callArgument198; }));
+    _Skeleton2D._coercedInterpolationGuard__skeleton2dGuards(({ final __callArgument222:Dynamic = { applied: applied, stated: stated, subject: subject }; __callArgument222; }));
   }
 
   @:allow(flight)
   @:keep
   private static function reportSkeleton2DDeformLengthMismatch(subject:String, offsets:Float, addressed:Float):Void {
     if ((cast _Runtime.strictEquals(_Skeleton2D._deformLengthGuard__skeleton2dGuards, null) : Bool)) { return; }
-    _Skeleton2D._deformLengthGuard__skeleton2dGuards(({ final __callArgument200:Dynamic = { addressed: addressed, offsets: offsets, subject: subject }; __callArgument200; }));
+    _Skeleton2D._deformLengthGuard__skeleton2dGuards(({ final __callArgument224:Dynamic = { addressed: addressed, offsets: offsets, subject: subject }; __callArgument224; }));
   }
 
   @:allow(flight)
@@ -1201,6 +1290,21 @@ class _Skeleton2D {
   public static var _coercedInterpolationGuard__skeleton2dGuards:Null<Skeleton2DCoercedInterpolationGuard> = _Runtime.explicitNull();
 
   public static var _deformLengthGuard__skeleton2dGuards:Null<Skeleton2DDeformLengthGuard> = _Runtime.explicitNull();
+
+  public static function createSkin2D(influenceCounts:flight._internal._UInt16Array, influences:flight._internal._Float32Array):Skin2D {
+    var out:EntityConstruction<Skin2D> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ influenceCounts: cast _Runtime.UNDEFINED, influences: cast _Runtime.UNDEFINED } : Skin2D); }) #end));
+    initializeSkin2D(({ final __callArgument226:Dynamic = out; __callArgument226; }), ({ final __callArgument227:Dynamic = influenceCounts; __callArgument227; }), ({ final __callArgument228:Dynamic = influences; __callArgument228; }));
+    return cast out;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function initializeSkin2D(out:EntityConstruction<Skin2D>, influenceCounts:flight._internal._UInt16Array, influences:flight._internal._Float32Array):Void {
+    _Runtime.setField(out, 'influenceCounts', influenceCounts);
+    _Runtime.setField(out, 'influences', influences);
+  }
 
   public static final MATRIX_STRIDE__skinAttachment2DPoints:Float = 6.0;
 
@@ -1310,7 +1414,7 @@ class _Skeleton2D {
   public static final MATRIX_STRIDE__transformConstraint2D:Float = 6.0;
 
   public static function registerSkeleton2DTransformConstraintSolver():Void {
-    registerSkeleton2DConstraintSolver((cast (cast Skeleton2DConstraintKindValue : { var Ik:String; var Path:String; var Transform:String; }).Transform : String), ({ final __callArgument202:Dynamic = solveSkeleton2DTransformConstraint; __callArgument202; }));
+    registerSkeleton2DConstraintSolver((cast (cast Skeleton2DConstraintKindValue : { var Ik:String; var Path:String; var Transform:String; }).Transform : String), ({ final __callArgument232:Dynamic = solveSkeleton2DTransformConstraint; __callArgument232; }));
   }
 
   @:allow(flight)
@@ -1372,13 +1476,13 @@ class _Skeleton2D {
       if ((cast ((cast !_Runtime.strictEquals(translateXMix, 0.0) : Bool) || (cast !_Runtime.strictEquals(translateYMix, 0.0) : Bool)) : Bool)) {
         var wantedX:Float = (flight._internal._StaticIndex.readFloat32ArrayTyped((cast world : flight._internal._Float32Array), (cast (o + 4.0) : Float)) + (((targetX + transform.offsetX) - flight._internal._StaticIndex.readFloat32ArrayTyped((cast world : flight._internal._Float32Array), (cast (o + 4.0) : Float))) * translateXMix));
         var wantedY:Float = (flight._internal._StaticIndex.readFloat32ArrayTyped((cast world : flight._internal._Float32Array), (cast (o + 5.0) : Float)) + (((targetY + transform.offsetY) - flight._internal._StaticIndex.readFloat32ArrayTyped((cast world : flight._internal._Float32Array), (cast (o + 5.0) : Float))) * translateYMix));
-        var local:Null<{ var x:Float; var y:Float; }> = (cast _Skeleton2D.toSkeleton2DParentSpace__transformConstraint2D(({ final __callArgument206:Dynamic = skeleton; __callArgument206; }), (cast boneIndex : Float), (cast wantedX : Float), (cast wantedY : Float)) : Null<{ var x:Float; var y:Float; }>);
+        var local:Null<{ var x:Float; var y:Float; }> = (cast _Skeleton2D.toSkeleton2DParentSpace__transformConstraint2D(({ final __callArgument236:Dynamic = skeleton; __callArgument236; }), (cast boneIndex : Float), (cast wantedX : Float), (cast wantedY : Float)) : Null<{ var x:Float; var y:Float; }>);
         if ((cast !_Runtime.strictEquals(local, null) : Bool)) {
           ((cast bone : Bone2D).x = (cast local : { var x:Float; var y:Float; }).x);
           ((cast bone : Bone2D).y = (cast local : { var x:Float; var y:Float; }).y);
         }
       }
-      computeSkeleton2DBoneWorldTransform(({ final __callArgument208:Dynamic = skeleton; __callArgument208; }), (cast boneIndex : Float));
+      computeSkeleton2DBoneWorldTransform(({ final __callArgument238:Dynamic = skeleton; __callArgument238; }), (cast boneIndex : Float));
     }
   }
 

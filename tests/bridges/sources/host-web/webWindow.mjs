@@ -7,6 +7,8 @@ __syncDependencies();
 
 export const createWebFullscreenTargetHandle = api.createWebFullscreenTargetHandle;
 export const createWebWindowResizeTargetHandle = api.createWebWindowResizeTargetHandle;
+export const initializeWebFullscreenTargetHandle = api.initializeWebFullscreenTargetHandle;
+export const initializeWebWindowResizeTargetHandle = api.initializeWebWindowResizeTargetHandle;
 export const resetWebWindowBackendForTest = api.resetWebWindowBackendForTest;
 export const webFullscreenBackend = api.webFullscreenBackend;
 export const webWindowBackend = api.webWindowBackend;

@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createCapacitorClipboardBackend = api.createCapacitorClipboardBackend;
+export const initializeCapacitorClipboardBackend = api.initializeCapacitorClipboardBackend;

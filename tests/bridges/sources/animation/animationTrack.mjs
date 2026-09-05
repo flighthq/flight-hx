@@ -7,6 +7,7 @@ __syncDependencies();
 
 export const cloneAnimationTrack = api.cloneAnimationTrack;
 export const createAnimationTrack = api.createAnimationTrack;
+export const initializeAnimationTrack = api.initializeAnimationTrack;
 export const sampleAnimationTrack = api.sampleAnimationTrack;
 export const trimAnimationTrack = api.trimAnimationTrack;
 export const validateAnimationTrack = api.validateAnimationTrack;

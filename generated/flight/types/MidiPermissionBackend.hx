@@ -4,4 +4,19 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
+#if !flight_struct_typedef
+@:allow(flight._HostWeb)
+@:keep
+@:structInit
+class MidiPermissionBackend {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var getPermission:Void->flight._internal._Promise<PermissionQueryOutcome>;
+
+  private function new(getPermission:Void->flight._internal._Promise<PermissionQueryOutcome>):Void {
+    this.__symbol__EntityRuntime = null;
+    this.getPermission = getPermission;
+  }
+}
+#else
 typedef MidiPermissionBackend = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var getPermission:Void->flight._internal._Promise<PermissionQueryOutcome>; };
+#end

@@ -3,11 +3,12 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
-import flight._Entity.createEntity;
+import flight._Entity.allocateEntity;
+import flight._Entity.finishEntity;
 import flight._Signals.clearSignal;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
-import flight.types.Entity;
+import flight.types.EntityConstruction;
 import flight.types.HasMediaSession;
 import flight.types.HasMediaSessionAction;
 import flight.types.MediaSessionAction;
@@ -52,7 +53,10 @@ class _MediaSession {
   }
 
   public static function createMediaSessionActionSignal(action:MediaSessionAction):MediaSessionActionSignal {
-    return cast (cast createEntity((cast ({ action: (cast action : Dynamic), onAction: (cast (cast createSignal() : Signal<MediaSessionActionDetails->Void>) : Dynamic) } : MediaSessionActionSignal) : Dynamic)) : MediaSessionActionSignal);
+    var out:EntityConstruction<MediaSessionActionSignal> = cast _Runtime.UNDEFINED;
+    out = (cast (#if flight_struct_typedef ({ final __entityRuntimeSlot:Dynamic = {  }; _Runtime.setIndex(__entityRuntimeSlot, flight.Types.EntityRuntimeKey, cast _Runtime.UNDEFINED); __entityRuntimeSlot; }) #else ({  ({ action: cast _Runtime.UNDEFINED, onAction: cast _Runtime.UNDEFINED } : MediaSessionActionSignal); }) #end));
+    initializeMediaSessionActionSignal(({ final __callArgument2:Dynamic = out; __callArgument2; }), ({ final __callArgument3:Dynamic = action; __callArgument3; }));
+    return cast out;
     return cast null;
   }
 
@@ -84,21 +88,28 @@ class _MediaSession {
   public static function disposeMediaSessionActionSignal(signal:MediaSessionActionSignal):Void {
     try {
       try {
-        detachMediaSessionAction(({ final __callArgument4:Dynamic = signal; __callArgument4; }));
+        detachMediaSessionAction(({ final __callArgument8:Dynamic = signal; __callArgument8; }));
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError6:Dynamic) {
+    } catch (__finallyError10:Dynamic) {
       {
         clearSignal((cast (cast signal : MediaSessionActionSignal).onAction : Dynamic));
       }
-      _Runtime.throwValue(__finallyError6);
+      _Runtime.throwValue(__finallyError10);
     }
     {
       clearSignal((cast (cast signal : MediaSessionActionSignal).onAction : Dynamic));
     }
   }
 
+  @:allow(flight)
+  @:keep
+  private static function initializeMediaSessionActionSignal(out:EntityConstruction<MediaSessionActionSignal>, action:MediaSessionAction):Void {
+    _Runtime.setField(out, 'action', action);
+    _Runtime.setField(out, 'onAction', (cast createSignal() : Signal<MediaSessionActionDetails->Void>));
+  }
+
   public static function setMediaSessionMetadata(host:HasMediaSession, metadata:MediaSessionMetadata):MediaSessionSetMetadataOutcome {
-    return cast (cast (cast (cast host : HasMediaSession).media : { var session:MediaSessionBackend; }).session : MediaSessionBackend).setMetadata(({ final __callArgument7:Dynamic = metadata; __callArgument7; }));
+    return cast (cast (cast (cast host : HasMediaSession).media : { var session:MediaSessionBackend; }).session : MediaSessionBackend).setMetadata(({ final __callArgument11:Dynamic = metadata; __callArgument11; }));
     return cast null;
   }
 
@@ -106,7 +117,7 @@ class _MediaSession {
     if ((cast ((cast ((cast !_Runtime.strictEquals(state, 'none') : Bool) && (cast !_Runtime.strictEquals(state, 'paused') : Bool)) : Bool) && (cast !_Runtime.strictEquals(state, 'playing') : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.typeError('Invalid media-session playback state: ' + Std.string(Std.string(state)) + ''));
     }
-    return cast (cast (cast (cast host : HasMediaSession).media : { var session:MediaSessionBackend; }).session : MediaSessionBackend).setPlaybackState(({ final __callArgument8:Dynamic = state; __callArgument8; }));
+    return cast (cast (cast (cast host : HasMediaSession).media : { var session:MediaSessionBackend; }).session : MediaSessionBackend).setPlaybackState(({ final __callArgument12:Dynamic = state; __callArgument12; }));
     return cast null;
   }
 
@@ -116,7 +127,7 @@ class _MediaSession {
       return cast _MediaSession.INVALID_POSITION__mediasession;
     }
     if ((cast ((cast !(cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isFinite', cast ([state.playbackRate] : Array<Dynamic>)) : Bool) : Bool) || (cast _Runtime.strictEquals(state.playbackRate, 0.0) : Bool)) : Bool)) { return cast _MediaSession.INVALID_PLAYBACK_RATE__mediasession; }
-    return cast (cast (cast (cast host : HasMediaSession).media : { var session:MediaSessionBackend; }).session : MediaSessionBackend).setPositionState(({ final __callArgument9:Dynamic = state; __callArgument9; }));
+    return cast (cast (cast (cast host : HasMediaSession).media : { var session:MediaSessionBackend; }).session : MediaSessionBackend).setPositionState(({ final __callArgument13:Dynamic = state; __callArgument13; }));
     return cast null;
   }
 

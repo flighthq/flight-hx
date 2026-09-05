@@ -4,4 +4,45 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Physics3DContact = { var bodyA:Float; var bodyB:Float; var colliderA:Float; var colliderB:Float; var normalX:Float; var normalY:Float; var normalZ:Float; var pointCount:Float; var points:Array<Physics3DContactPoint>; var friction:Float; var restitution:Float; var enabled:Bool; var sensor:Bool; var touching:Bool; };
+#if !flight_struct_typedef
+@:allow(flight._Physics3D)
+@:keep
+@:structInit
+class Physics3DContact {
+  public var __symbol__EntityRuntime:Null<EntityRuntime>;
+  public var bodyA:Float;
+  public var bodyB:Float;
+  public var colliderA:Float;
+  public var colliderB:Float;
+  public var normalX:Float;
+  public var normalY:Float;
+  public var normalZ:Float;
+  public var pointCount:Float;
+  public var points:Array<Physics3DContactPoint>;
+  public var friction:Float;
+  public var restitution:Float;
+  public var enabled:Bool;
+  public var sensor:Bool;
+  public var touching:Bool;
+
+  private function new(bodyA:Float, bodyB:Float, colliderA:Float, colliderB:Float, normalX:Float, normalY:Float, normalZ:Float, pointCount:Float, points:Array<Physics3DContactPoint>, friction:Float, restitution:Float, enabled:Bool, sensor:Bool, touching:Bool):Void {
+    this.__symbol__EntityRuntime = null;
+    this.bodyA = bodyA;
+    this.bodyB = bodyB;
+    this.colliderA = colliderA;
+    this.colliderB = colliderB;
+    this.normalX = normalX;
+    this.normalY = normalY;
+    this.normalZ = normalZ;
+    this.pointCount = pointCount;
+    this.points = points;
+    this.friction = friction;
+    this.restitution = restitution;
+    this.enabled = enabled;
+    this.sensor = sensor;
+    this.touching = touching;
+  }
+}
+#else
+typedef Physics3DContact = { @:optional var __symbol__EntityRuntime:Null<EntityRuntime>; var bodyA:Float; var bodyB:Float; var colliderA:Float; var colliderB:Float; var normalX:Float; var normalY:Float; var normalZ:Float; var pointCount:Float; var points:Array<Physics3DContactPoint>; var friction:Float; var restitution:Float; var enabled:Bool; var sensor:Bool; var touching:Bool; };
+#end

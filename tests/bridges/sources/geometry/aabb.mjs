@@ -15,6 +15,7 @@ export const getAabbCenter = api.getAabbCenter;
 export const getAabbExtents = api.getAabbExtents;
 export const getAabbSize = api.getAabbSize;
 export const getClosestPointOnAabb = api.getClosestPointOnAabb;
+export const initializeAabb = api.initializeAabb;
 export const intersectAabb = api.intersectAabb;
 export const isAabbIntersectingAabb = api.isAabbIntersectingAabb;
 export const isAabbIntersectingSphere = api.isAabbIntersectingSphere;
