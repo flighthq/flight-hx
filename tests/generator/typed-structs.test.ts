@@ -4440,6 +4440,50 @@ describe('typed struct analysis', () => {
     ).not.toThrow();
   });
 
+  it('reconstructs a spread into an audit-only nominal entity so the hxcpp class cast stays non-null', () => {
+    // An audit-only entity (nominal identity, but not a `direct` typed-struct) is
+    // still emitted as an @:structInit class. A pure `{ ...source }` spread assigned
+    // to it has no `direct` cppStructInit construction, so previously it lowered to a
+    // bare `cast (mergeObjects(...) : Class)` — which yields null on hxcpp. The
+    // nominal-identity fallback must project the merge into a real construction.
+    const candidate: TypedStructCandidate = {
+      emission: 'audit-only',
+      name: 'RegistriesFixture',
+      packageName: '@flighthq/types',
+      purpose: 'audit-only entity spread fixture',
+      source: 'upstream/packages/types/src/RegistriesFixture.ts',
+    };
+    const result = lowerFixture(
+      `
+        export interface RegistriesFixture { renderers: number; strokeTessellator: number; }
+        export function copyRegistries(source: RegistriesFixture): RegistriesFixture {
+          return { ...source };
+        }
+      `,
+      candidate,
+    );
+    const object = result.lowered.declarations
+      .filter((item) => item.kind === 'function' && item.name === 'copyRegistries')
+      .flatMap((item) => (item.kind === 'function' ? item.body : []))
+      .map((statement) => (statement.kind === 'return' ? statement.expression : undefined))
+      .find((expression) => expression?.kind === 'object');
+    // The fallback resolved a construction even though the schema is audit-only.
+    if (!object || object.kind !== 'object' || !object.cppStructInit) {
+      throw new Error('Expected the audit-only entity spread to acquire a nominal construction');
+    }
+    const output = emitHaxeModule({
+      declarations: result.lowered.declarations,
+      haxePackage: 'flight.types',
+      imports: [],
+      name: 'RegistriesFixture',
+      packageName: '@flighthq/types',
+    });
+    expect(result.lowered.diagnostics).toEqual([]);
+    expect(output).toContain('final __structInitSource:Dynamic = _Runtime.mergeObjects([source]);');
+    expect(output).toContain("renderers: _Runtime.field(__structInitSource, 'renderers')");
+    expect(output).toContain(': RegistriesFixture);');
+  });
+
   it('keeps sparse typedef construction while initializing the nominal layout', () => {
     const candidate: TypedStructCandidate = {
       emission: 'direct',

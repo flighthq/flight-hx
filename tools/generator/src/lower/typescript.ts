@@ -4557,13 +4557,37 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
         typeArguments: [],
       };
     }
-    const contextualCppStructInit =
+    const contextualConstructionType =
       context.checker && context.typedStructs
-        ? context.typedStructs.resolveCppStructInitConstruction(
-            context.checker.getContextualType(node) ?? context.checker.getTypeAtLocation(node),
-          )
+        ? (context.checker.getContextualType(node) ?? context.checker.getTypeAtLocation(node))
         : undefined;
-    const cppStructInit = contextualCppStructInit ?? cppStructInitEntityFactoryConstruction(node, context);
+    const contextualCppStructInit =
+      context.typedStructs && contextualConstructionType
+        ? context.typedStructs.resolveCppStructInitConstruction(contextualConstructionType)
+        : undefined;
+    // A spread whose contextual type is a nominal-identity entity class — e.g.
+    // `{ ...pipeline.registries }` typed as the @:structInit class GlRenderRegistries —
+    // has no `direct` typed-struct construction, so without this it lowers to a bare
+    // `_Runtime.mergeObjects(...)` that the surrounding code casts to the class. On
+    // hxcpp, casting a merged anonymous object to a nominal class yields null (the
+    // same class of regression as fc5a360f). Fall back to the nominal-identity
+    // construction so the spread emitter rebuilds a real instance on the nominal
+    // path while still emitting the plain merge on the structural/js path.
+    const spreadEntityConstruction =
+      !contextualCppStructInit &&
+      context.typedStructs &&
+      contextualConstructionType &&
+      // A union alias (e.g. CollisionColliderShape3D = A | B) resolves to a schema
+      // carrying only the common discriminant, so reconstructing from it would drop
+      // the member fields — and a union is a structural typedef that never suffers
+      // the nominal-class null cast anyway. Only a concrete (non-union) nominal
+      // entity needs the reconstruction.
+      !contextualConstructionType.isUnion() &&
+      node.properties.some((property) => ts.isSpreadAssignment(property))
+        ? context.typedStructs.resolveFactoryIdentityConstruction(contextualConstructionType)
+        : undefined;
+    const cppStructInit =
+      contextualCppStructInit ?? spreadEntityConstruction ?? cppStructInitEntityFactoryConstruction(node, context);
     const objectAllocator = isDirectNodeAllocationObject(node)
       ? '__nodeAllocator'
       : isDirectPromotedEntityFactoryAllocationObject(node, context)
