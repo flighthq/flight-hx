@@ -4956,4 +4956,44 @@ describe('TypeScript lowering and Haxe emission', () => {
       iterationBindings: 0,
     });
   });
+
+  it('emits a readonly nullable reference field as a covariant `(default, never)` structure field', () => {
+    // A `readonly` field only becomes `(default, never)` — the covariant read-only
+    // form that lets a node subtype narrowing `data` unify with `Node<Traits>` — when
+    // its type is a nullable reference (`NodeData | null`). Leaf types (String,
+    // number) and non-nullable named/enum-like types stay plain `var`, so they keep
+    // matching the writable inline structural casts the emitter synthesizes for reads.
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/types/src/Node.ts',
+      `
+        export interface NodeDataFixture {}
+        export interface NodeFixture {
+          readonly data: NodeDataFixture | null;
+          readonly label: string;
+          readonly count: number;
+          readonly owner: NodeDataFixture;
+          mutableData: NodeDataFixture | null;
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/types', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'NodeFixture',
+      packageName: '@flighthq/types',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    // positive: readonly nullable reference -> covariant read-only field
+    expect(output).toContain('data(default, never):');
+    // negative: readonly leaf types stay writable (covariance is meaningless and
+    // `(default, never)` would break structural setter unification)
+    expect(output).not.toContain('label(default, never)');
+    expect(output).not.toContain('count(default, never)');
+    // negative: readonly non-nullable named (enum-like/handle) stays writable
+    expect(output).not.toContain('owner(default, never)');
+    // negative: a non-readonly nullable reference stays writable
+    expect(output).not.toContain('mutableData(default, never)');
+  });
 });

@@ -33,6 +33,7 @@ export interface IrTypeField {
   contextualParameters?: IrParameter[] | undefined;
   name: string;
   optional: boolean;
+  readonly?: boolean | undefined;
   type: IrType;
 }
 

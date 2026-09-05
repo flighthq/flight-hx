@@ -2532,6 +2532,35 @@ function emitExpression(expression: IrExpression): string {
           if (expression.left.optional) {
             throw new Error(`Optional typed-struct assignment is not supported: ${expression.left.name}`);
           }
+          if (expression.left.typedStructBinding.field.readonly) {
+            // The structural representation of a `readonly` field is `(default, never)`
+            // (covariant read-only), which forbids a direct field assignment on that
+            // view. Upstream still writes the field at construction, so route the write
+            // through reflection: it succeeds on both the nominal class (writable field)
+            // and the structural typedef, and keeps the binding present so read emission
+            // and typed-struct coverage stay consistent.
+            const left = expression.left;
+            const name = quote(left.name);
+            const assignedValue = (value: string): string =>
+              typedStructAssignmentValue(left, value, expression.nominalEntityCast === true);
+            if (expression.operator === '=') {
+              return `_Runtime.setField(${object}, ${name}, ${assignedValue(emitExpression(expression.right))})`;
+            }
+            const ownerTemporary = `__readonlyOwner${String(temporaryIndex++)}`;
+            const current = `_Runtime.field(${ownerTemporary}, ${name})`;
+            if (expression.operator === '??=') {
+              const valueTemporary = `__readonlyValue${String(temporaryIndex++)}`;
+              return `({ final ${ownerTemporary}:Dynamic = ${object}; final ${valueTemporary}:Dynamic = ${current}; ${valueTemporary} == null ? _Runtime.setField(${ownerTemporary}, ${name}, ${assignedValue(emitExpression(expression.right))}) : ${valueTemporary}; })`;
+            }
+            return `({ final ${ownerTemporary}:Dynamic = ${object}; _Runtime.setField(${ownerTemporary}, ${name}, ${assignedValue(
+              emitCompoundOperation(
+                current,
+                expression.operator.slice(0, -1),
+                expression.right,
+                compoundUsesRuntimeNumber(expression),
+              ),
+            )}); })`;
+          }
           if (expression.operator === '??=') {
             const left = expression.left;
             const binding = left.typedStructBinding!;
@@ -4224,6 +4253,26 @@ function flattenAnonymousType(type: Extract<IrType, { kind: 'anonymous' }>): {
   return { extends: extends_, fields };
 }
 
+// A `readonly` field is emitted as a covariant read-only structure field
+// `(default, never)` only when covariance can actually be exercised: a *nullable
+// reference* field (e.g. `Null<NodeData>`) that a subtype narrows to a subtype of
+// the inner type (a node subtype's `Null<ParticleEmitterData>`). Restricting to
+// the nullable form keeps this precise and side-effect-free:
+//   - Leaf types (String, Int, Float, Bool, arrays, functions) gain nothing from
+//     read-only covariance, and `(default, never)` on them only breaks the
+//     structure-to-structure unification Haxe requires against the synthesized
+//     writable inline casts the emitter produces for reads (`{ var state:String; }`).
+//   - A non-nullable named field is, in practice, enum-like or a typed-array
+//     handle (e.g. `NotificationPermission`, `_UInt8ClampedArray`): not narrowed
+//     by a subtype, and marking it read-only desynchronizes its setter from the
+//     writable copy the typed-struct projection of the same field emits.
+// Those all stay plain `var`.
+function isCovariantReadonlyType(type: IrType): boolean {
+  if (type.kind !== 'nullable') return false;
+  const inner = type.inner;
+  return inner.kind === 'named' || inner.kind === 'union' || inner.kind === 'anonymous';
+}
+
 export function emitType(type: IrType): string {
   switch (type.kind) {
     case 'anonymous': {
@@ -4233,7 +4282,15 @@ export function emitType(type: IrType): string {
         ...flattened.extends.map((parent) => `>${emitType(parent)},`),
         ...[...fields.values()].map(
           (field) =>
-            `${field.optional ? '@:optional ' : ''}var ${typeFieldName(field.name)}:${emitValueType(field.type)};`,
+            // A `readonly` upstream property becomes a read-only Haxe structure field
+            // `(default, never)`. Unlike a plain `var` (which Haxe holds invariant),
+            // a read-only structure field is covariant, so a subtype that narrows the
+            // field (e.g. ParticleEmitter3D's `data:ParticleEmitterData`) unifies with
+            // the wider structural type (`Node<Traits>.data:Null<NodeData>`). Object
+            // literals may still supply the initial value; only reassignment through
+            // this structural view is blocked (writes go through the nominal class or
+            // reflection).
+            `${field.optional ? '@:optional ' : ''}var ${typeFieldName(field.name)}${field.readonly && isCovariantReadonlyType(field.type) ? '(default, never)' : ''}:${emitValueType(field.type)};`,
         ),
       ];
       return `{ ${members.join(' ')} }`;

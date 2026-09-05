@@ -9486,26 +9486,37 @@ describe('typed struct analysis', () => {
     expect(output).toContain('(cast value : { var collision:Float; }).collision');
   });
 
-  it('rejects unknown and readonly named writes before an emitter can trust them', () => {
+  it('rejects unknown named writes but routes readonly named writes through reflection', () => {
     const unknown = lowerFixture(`
       export interface Vector2 { readonly x: number; y: number; }
       export function invalid(value: Vector2): number { return value.missing; }
     `);
-    const readonly = lowerFixture(`
-      export interface Vector2 { readonly x: number; y: number; }
-      export function invalid(value: Vector2): void { value.x = 1; }
+    const readonlyWrite = lowerFixture(`
+      export interface NodeDataFixture {}
+      export interface Vector2 { readonly data: NodeDataFixture | null; y: number; }
+      export function assign(value: Vector2, next: NodeDataFixture): void { value.data = next; }
     `);
 
+    // An unknown member is still an unsupported access and drops the declaration.
     expect(unknown.lowered.diagnostics).toEqual([
       expect.objectContaining({ message: 'Unsupported TypeScript unknown typed-struct field Vector2.missing' }),
     ]);
-    expect(readonly.lowered.diagnostics).toEqual([
-      expect.objectContaining({
-        message: 'Unsupported TypeScript assignment to readonly typed-struct field Vector2.x',
-      }),
-    ]);
     expect(unknown.lowered.declarations.some((declaration) => declaration.name === 'invalid')).toBe(false);
-    expect(readonly.lowered.declarations.some((declaration) => declaration.name === 'invalid')).toBe(false);
+
+    // A write to a readonly field is legal at construction upstream. Rather than
+    // reject it (which silently dropped the whole declaration), the emitter keeps
+    // the declaration and routes the write through reflection so it compiles
+    // against the covariant read-only `(default, never)` structural field.
+    expect(readonlyWrite.lowered.diagnostics).toEqual([]);
+    expect(readonlyWrite.lowered.declarations.some((declaration) => declaration.name === 'assign')).toBe(true);
+    const output = emitHaxeModule({
+      declarations: readonlyWrite.lowered.declarations,
+      imports: [],
+      name: 'Vector2',
+      packageName: '@flighthq/types',
+    });
+    expect(output).toContain("_Runtime.setField(value, 'data',");
+    expect(output).not.toContain('value.data = next');
   });
 
   it('keeps computed and presence-sensitive accesses dynamic while typing a common union field', () => {

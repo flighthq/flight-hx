@@ -173,4 +173,31 @@ describe('maintained runtime bindings', () => {
     );
     execFileSync(process.execPath, [output], { cwd: workspace, stdio: 'pipe' });
   });
+
+  it('unifies a data-narrowing node subtype with Node<Traits> on both representations', () => {
+    // The `Node<Traits>.data(default, never)` covariance fix must hold on the nominal
+    // class representation and on `-D flight_struct_typedef`, where structure-to-structure
+    // unification is strictest. Compiling NodeCovarianceSmoke (whose `acceptsNode(emitter)`
+    // passes a Node3D<ParticleEmitterData> where a structural Node<Traits> is expected) is
+    // the assertion on each.
+    for (const defines of [[], ['-D', 'flight_struct_typedef']]) {
+      execFileSync(
+        process.execPath,
+        [
+          'tools/haxe.mjs',
+          '-cp',
+          'src',
+          '-cp',
+          'generated',
+          '-cp',
+          'tests/haxe',
+          '--main',
+          'NodeCovarianceSmoke',
+          '--interp',
+          ...defines,
+        ],
+        { cwd: workspace, stdio: 'pipe' },
+      );
+    }
+  });
 });

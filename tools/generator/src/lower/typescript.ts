@@ -2442,10 +2442,7 @@ function normalizedBasename(fileName: string): string {
  */
 const barrelCanonicalExportSources = new WeakMap<ts.Program, Map<string, Map<string, string>>>();
 
-function packageBarrelCanonicalExportSources(
-  packageDirectory: string,
-  context: LoweringContext,
-): Map<string, string> {
+function packageBarrelCanonicalExportSources(packageDirectory: string, context: LoweringContext): Map<string, string> {
   const program = context.program;
   const checker = context.checker;
   if (!program || !checker) return new Map();
@@ -2500,10 +2497,7 @@ function isExportedValueDeclaration(declaration: ts.Declaration): boolean {
  * Returns undefined for the canonical winner, types, locals, and any reference
  * outside the declaration's own package.
  */
-function sourceDefinedDuplicateExportName(
-  symbol: ts.Symbol | undefined,
-  context: LoweringContext,
-): string | undefined {
+function sourceDefinedDuplicateExportName(symbol: ts.Symbol | undefined, context: LoweringContext): string | undefined {
   const checker = context.checker;
   if (!symbol || !checker) return undefined;
   const currentPackageDirectory = upstreamPackageSourceDirectory(context.sourceFile, context.workspaceDirectory);
@@ -2923,6 +2917,7 @@ function lowerTypeMember(node: ts.TypeElement, context: LoweringContext) {
         : undefined,
       name: propertyName(node.name, context),
       optional: Boolean(node.questionToken) || ts.isComputedPropertyName(node.name),
+      readonly: (ts.getCombinedModifierFlags(node) & ts.ModifierFlags.Readonly) !== 0,
       type: lowerType(node.type, context),
     };
   }
@@ -3835,9 +3830,12 @@ function typedStructPropertyBinding(
   const field = binding.field;
   if (field.receiverSensitive) return undefined;
   if (ts.isDeleteExpression(node.parent)) return undefined;
-  if (field.readonly && isTypedStructWrite(node)) {
-    return unsupported(node, context, `assignment to readonly typed-struct field ${schema.name}.${node.name.text}`);
-  }
+  // A write to a `readonly` typed-struct field is still legal at construction time
+  // upstream (e.g. `target.data = {…}` inside a factory). The nominal class keeps the
+  // field writable, but the structural representation emits it as `(default, never)`
+  // for covariance, so such a write must not go through a direct field assignment on
+  // the structural view. Keep the binding (so read emission and coverage stay intact)
+  // and let the emitter route readonly-field writes through reflection.
   const propertyDeclaration = property?.valueDeclaration ?? property?.declarations?.[0] ?? node;
   const fieldType = property
     ? lowerCheckerType(checker.getTypeOfSymbolAtLocation(property, propertyDeclaration), node, context, new Set())
@@ -4044,22 +4042,6 @@ function checkerTypesHaveConflictingProperties(types: readonly ts.Type[], checke
     }
   }
   return false;
-}
-
-function isTypedStructWrite(node: ts.PropertyAccessExpression): boolean {
-  const parent = node.parent;
-  if (
-    ts.isBinaryExpression(parent) &&
-    parent.left === node &&
-    parent.operatorToken.kind >= ts.SyntaxKind.FirstAssignment &&
-    parent.operatorToken.kind <= ts.SyntaxKind.LastAssignment
-  ) {
-    return true;
-  }
-  return (
-    (ts.isPrefixUnaryExpression(parent) || ts.isPostfixUnaryExpression(parent)) &&
-    (parent.operator === ts.SyntaxKind.PlusPlusToken || parent.operator === ts.SyntaxKind.MinusMinusToken)
-  );
 }
 
 function cppStructInitEntityFactoryConstruction(
@@ -4281,12 +4263,10 @@ function syntheticEntityBaseType(
         // Reject a base that carries a BRANDED runtime key (a *WithRuntime variant); the plain
         // synthetic only has the generic `__@EntityRuntimeKey@` marker, so it cannot supply that
         // inherited field and could not extend it.
-        !checker
-          .getPropertiesOfType(type)
-          .some((property) => {
-            const propertyName = property.getName();
-            return propertyName.startsWith('__@') && !propertyName.startsWith('__@EntityRuntimeKey@');
-          }),
+        !checker.getPropertiesOfType(type).some((property) => {
+          const propertyName = property.getName();
+          return propertyName.startsWith('__@') && !propertyName.startsWith('__@EntityRuntimeKey@');
+        }),
     );
   return base ? { arguments: [], kind: 'named', name: base.binding.schemaHaxeType } : undefined;
 }
