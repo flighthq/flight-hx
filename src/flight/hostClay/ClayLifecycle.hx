@@ -8,7 +8,7 @@ package flight.hostClay;
 class ClayLifecycle {
   static var listener:Null<String->Void> = null;
 
-  /** Install via `flight._Lifecycle.installLifecycleHostBackend`. */
+  /** Composed into the host `system.lifecycle` slot by HostClay. */
   public static function createClayLifecycleBackend():Dynamic {
     final backend:Dynamic = ({} : Dynamic);
     backend.subscribe = function(cb:String->Void):(Void->Void) {

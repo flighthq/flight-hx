@@ -10,7 +10,7 @@ package flight.hostClay;
 import clay.opengl.GL;
 
 class ClayBitmap {
-  /** Install via `flight._Bitmap.installBitmapReadbackHostBackend`. */
+  /** Composed into the host `graphics.bitmapReadback` slot by HostClay. */
   public static function createClayBitmapReadbackBackend():Dynamic {
     return {
       readBitmap: function(source:Dynamic, width:Int, height:Int, mode:Dynamic):Dynamic {
@@ -25,7 +25,7 @@ class ClayBitmap {
     };
   }
 
-  /** Install via `flight._Bitmap.installBitmapEncodeHostBackend`. */
+  /** Composed into the host `graphics.bitmapEncode` slot by HostClay. */
   public static function createClayBitmapEncodeBackend():Dynamic {
     return {
       supportedFormats: (cast ['png', 'jpeg'] : Array<Dynamic>),

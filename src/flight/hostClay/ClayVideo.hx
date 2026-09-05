@@ -6,7 +6,7 @@ package flight.hostClay;
 
 #if clay
 class ClayVideo {
-  /** Install via `flight._Video.installVideoCapabilityHostBackend`. */
+  /** Composed into the host `media.video` slot by HostClay. */
   public static function createClayVideoCapabilityBackend():Dynamic {
     return {
       canPlayType: function(mimeType:String):Bool return false,

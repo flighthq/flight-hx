@@ -6,7 +6,7 @@ package flight.hostClay;
 
 #if clay
 class ClayAudioBackend {
-  /** Install via `flight._Audio.installAudioHostBackend`. */
+  /** Composed into the host `media.audioCodec` slot by HostClay. */
   public static function createClayAudioBackend():Dynamic {
     return {
       // SoLoud decodes ogg/wav via linc_ogg / stb; mp3 via stb where built.

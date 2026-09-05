@@ -8,7 +8,12 @@ package flight.hostClay;
 
 #if clay
 class ClayTextShaper {
-  /** Install via `flight._TextLayout.setTextShaperBackend`. */
+  /**
+   * A TextShaperBackend for develop's `@flighthq/textshaper` `setTextShaperBackend`
+   * seam. That seam is not yet emitted by the generator, so HostClay currently
+   * feeds `measureText` to `setTextLayoutMeasureProvider` (the surviving
+   * lower-level fallback) instead.
+   */
   public static function createClayTextShaperBackend():Dynamic {
     return {
       // Required. TODO(develop): measure `text` in `format` via stb TrueType

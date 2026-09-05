@@ -4,7 +4,7 @@ package flight.hostClay;
 
 #if clay
 class ClayPlatform {
-  /** Install via `flight._Platform.installPlatformHostBackend`. */
+  /** Composed into the host `system.platform` slot by HostClay. */
   public static function createClayPlatformBackend():Dynamic {
     final backend:Dynamic = ({} : Dynamic);
     #if sys

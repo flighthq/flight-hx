@@ -2,7 +2,7 @@
 
 A second Haxe host for Flight, alongside `flight.hostLime`, backed by [Clay](https://github.com/ceramic-engine/clay) (the platform layer beneath Ceramic). Clay exposes a raw WebGL-shaped `clay.opengl.GL`, so it feeds Flight's existing `render-gl` with no new render backend. See [`agents/host-strategy.md`](../../../agents/host-strategy.md) for why Clay was chosen.
 
-**Architecture** follows hostLime's matured idiom: each seam adapter copies Flight's capability sentinel (`Reflect.copy((flight._<Pkg>._sentinel__<name> : Dynamic))`, reachable via `@:allow(flight)`) and overrides what Clay can supply; `HostClay` is the aggregator that installs them via `flight._<Pkg>.install<Name>HostBackend`. Verified to compile in-repo against real generated `flight.types.*` with Clay pinned at `8ae994a`. Adapters exist for app, loop, clipboard, dialog, filesystem, storage, plus the GL surface, cursor, and net; deeper Clay implementations and the newer seams (screen/platform/lifecycle/haptics, image/glyph via `linc_stb`) remain `TODO(hostClay)`.
+**Architecture** follows hostLime's matured idiom. On develop the host seam is explicit: instead of global `install<Name>HostBackend` calls, every capability Clay can supply is composed into one `createHost({...})` object built by `HostClay.createClayHost()` and passed to Flight functions (or their capability slices) by the caller. Slots wired today: `app` (+`app.loop`), `clipboard`, `dialog`, `screen`, `graphics.bitmapReadback`/`graphics.bitmapEncode`, `text.fontLoading`, `media.audioCodec`/`media.audioDevice`/`media.video`, `input.haptics`/`input.ingress`, `net.http`, `system.platform`/`system.lifecycle`, and — on `sys` targets — `storage.local`/`storage.fileSystem`. Text measurement rides the surviving `setTextLayoutMeasureProvider` provider seam (not a host slot); the preferred `@flighthq/textshaper` `setTextShaperBackend` seam is not yet emitted by the generator. Adapters exist for the GL surface, cursor, and net as well; deeper Clay implementations remain `TODO(hostClay)`. **Not yet compile-verified against develop** — Clay is not pinned in `haxe_libraries/`, so this package cannot be built in-repo (see Verification status).
 
 ## Seam parity with hostLime
 
@@ -34,9 +34,9 @@ Clay is subclass-driven (no `onUpdate` signal). The host app's `clay.Events` sub
 
 ```haxe
 class MyEvents extends clay.Events {
-  final loop = flight.hostClay.ClayLoop.createClayLoopBackend();
-  override function ready() { flight.Lifecycle.setLoopBackend(loop.backend()); /* + install other backends */ }
-  override function tick(delta:Float) { loop.pump(); }
+  var host:flight.types.Host;
+  override function ready() { host = flight.hostClay.HostClay.createClayHost(); /* pass host / host.<slice> to Flight */ }
+  override function tick(delta:Float) { flight.hostClay.HostClay.pumpLoop(); }
 }
 ```
 
@@ -52,7 +52,7 @@ Defines: `-D clay -D clay_native -D clay_sdl -D clay_use_glew -D clay_soloud -D 
 
 ## Verification status (honest)
 
-- **Compiles in-repo against real generated types.** The whole `flight.hostClay` package typechecks with `-cp src -cp generated` + Clay (pinned `8ae994a`) + `linc_opengl/linc_ogg/linc_stb/linc_timestamp` + `-D clay -D clay_web -D web`, via `--macro include('flight.hostClay')`. Sentinel copies, install calls, and the GL adapter all resolve against the current generated `flight._*` modules.
+- **Migrated to develop's host-slot model by inspection; not yet compile-verified against develop.** The install-based aggregator was rewritten to compose `createHost({...})` (see Architecture). Because Clay is not pinned in `haxe_libraries/`, the package cannot currently be built in this repo, so the develop migration is verified structurally (mirroring the compile-green `flight.hostLime`) rather than by a Haxe compile. An earlier install-based revision did typecheck with `-cp src -cp generated` + Clay (pinned `8ae994a`) + `linc_opengl/linc_ogg/linc_stb/linc_timestamp` + `-D clay -D clay_web -D web` via `--macro include('flight.hostClay')`; re-establishing that gate against develop is tracked below.
 - **GL adapter is complete and coverage-gated.** render-gl routes all GL through `flight._internal.backend.WebGl2Backend`, which dispatches **102** distinct methods on the context (`GlContext = Dynamic` on Clay, so unchecked at compile time). `ClayGlContext` forwards all 102 to `clay.opengl.GL`; `tests/generator/hostclay-gl-coverage.test.ts` asserts completeness from source. Measured GL capability of Clay's binding vs the 102 required: **native `opengl.WebGL` (linc_opengl) covers 96/102; web covers 90/102.** The 6 native gaps are GLES3 methods absent from linc_opengl (`texImage3D`, `texStorage3D`, `compressedTexSubImage3D`, `readBuffer`, `clearBufferfi`, `vertexAttribIPointer`) — the adapter throws a clear unsupported error for these rather than corrupting GL state, so a scene that needs 3D/array textures, integer vertex attributes, or MRT read-buffers fails loudly. The other 96 map 1:1. (web also lacks VAO/instancing/`drawBuffers`, but Clay-on-web is not the intended target; native is.)
 - **Clay pin.** Clay HEAD has internal drift (`GLGraphicsDriver` doesn't satisfy Clay's own `GraphicsDriver` spec, introduced by the `GraphicsBatcher` refactor `c24a8ac`). Pin at its parent `8ae994a`, which compiles clean. hostClay never uses Clay's graphics driver, but a full Clay compile needs the clean pin.
 

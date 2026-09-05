@@ -12,7 +12,7 @@ import flight._internal._Promise;
 import flight._internal._Runtime;
 
 class ClayNet {
-  /** Install via `flight._Net.installNetHostBackend`. */
+  /** Composed into the host `net.http` slot by HostClay. */
   public static function createClayNetBackend():NetBackend {
     #if js
     return flight._HostWeb.createWebNetBackend();

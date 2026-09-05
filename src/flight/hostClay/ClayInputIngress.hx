@@ -23,7 +23,7 @@ class ClayInputIngress {
   static final text:Array<InputIngressSink> = [];
   static final gamepad:Array<InputIngressSink> = [];
 
-  /** Allocation entry point. Install via `flight._Input.installInputIngressHostBackend`. */
+  /** Allocation entry point. Composed into the host `input.ingress` slot by HostClay. */
   public static function createClayInputIngressBackend():InputIngressBackend {
     return cast {
       attachPointer: function(source:Dynamic, sink:InputIngressSink, ?options:Dynamic):Void->Void

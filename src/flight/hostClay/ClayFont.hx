@@ -9,7 +9,7 @@ package flight.hostClay;
 class ClayFont {
   static final faces = new Map<String, Dynamic>(); // shorthand -> FontFace
 
-  /** Install via `flight._Font.installFontLoadingHostBackend`. */
+  /** Composed into the host `text.fontLoading` slot by HostClay. */
   public static function createClayFontLoadingBackend():Dynamic {
     return {
       addFontFace: function(face:Dynamic):Void {

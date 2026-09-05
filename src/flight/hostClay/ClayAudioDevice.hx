@@ -29,7 +29,7 @@ class ClayAudioDevice {
   static final buffers = new Map<Int, Dynamic>();       // handle -> AudioData
   static final sources = new Map<Int, ClaySource>();    // handle -> source record
 
-  /** Allocation entry point. Install via `flight._Media.installAudioDeviceHostBackend`. */
+  /** Allocation entry point. Composed into the host `media.audioDevice` slot by HostClay. */
   public static function createClayAudioDeviceBackend():Dynamic {
     return {
       createDevice: function(sampleRate:Float):Dynamic {
