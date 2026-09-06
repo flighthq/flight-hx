@@ -9,7 +9,7 @@ import lime.ui.Window;
 class LimeLifecycle {
   public static function createLimeLifecycleBackend(application:Application):LifecycleBackend {
     var state = currentState(application);
-    return cast {
+    return ({
       getState: function():String {
         final observed = currentState(application);
         return observed == 'background' ? observed : state;
@@ -53,7 +53,7 @@ class LimeLifecycle {
           }
         };
       },
-    };
+    } : LifecycleBackend);
   }
 
   static function currentState(application:Application):String {

@@ -161,7 +161,11 @@ class LimeWindow {
       }
     };
 
-    return cast {
+    // `WindowBackend` is a nominal @:structInit class on the class/hxcpp target
+    // (a typedef only under -D flight_struct_typedef). Returning a bare `cast {…}`
+    // coerces the anonymous record to that class, which yields null on hxcpp;
+    // construct it with a structInit object instead so the instance survives.
+    return ({
       attach: function(win:ApplicationWindow, handle:Dynamic, ownership:WindowAttachmentOwnership):Bool {
         if (!Std.isOfType(handle, Window)) {
           return false;
@@ -254,7 +258,7 @@ class LimeWindow {
         run(win, 'setTitle', function(handle:Window):Void handle.title = title);
       },
       show: function(win:ApplicationWindow):Void run(win, 'show', function(handle:Window):Void handle.visible = true),
-    };
+    } : WindowBackend);
   }
 
   static function copyBounds(win:ApplicationWindow, out:WindowBounds):WindowBounds {

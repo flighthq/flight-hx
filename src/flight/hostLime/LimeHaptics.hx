@@ -7,7 +7,7 @@ import lime.ui.Haptic;
 /** Conservative Flight haptics over Lime's duration-based vibration API. */
 class LimeHaptics {
   public static function createLimeHapticsBackend():HapticsBackend {
-    return cast {
+    return ({
       cancel: function():Bool {
         if (!isSupported()) return false;
         Haptic.vibrate(0, 0);
@@ -37,7 +37,7 @@ class LimeHaptics {
       // Lime has a periodic vibration API, not Flight's arbitrary on/off
       // sequence contract. Do not claim support by approximating the pattern.
       vibratePattern: function(_pattern:Array<Float>):Bool return false,
-    };
+    } : HapticsBackend);
   }
 
   static function vibrate(duration:Int):Bool {

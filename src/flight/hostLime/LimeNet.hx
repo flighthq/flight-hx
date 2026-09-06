@@ -34,11 +34,11 @@ class LimeNet {
     #if js
     return flight._HostWeb.createWebNetBackend();
     #else
-    return cast {
+    return ({
       sendNetRequest: function(request:Dynamic, ?options:Dynamic):_Promise<NetResponse> {
         return sendThroughLime(request, options);
       },
-    };
+    } : NetBackend);
     #end
   }
 

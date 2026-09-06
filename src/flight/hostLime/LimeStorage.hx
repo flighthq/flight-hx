@@ -16,7 +16,7 @@ class LimeStorage {
     // The upstream StorageBackend seam returns union results: success is
     // { reason: 'ok' } (plus `value` for reads), a failure carries a non-'ok'
     // reason. A single-process file store only fails on persistence denial.
-    return cast {
+    return ({
       getItem: function(key:String):Dynamic return {reason: 'ok', value: store.get(key)},
       setItem: function(key:String, value:String):Dynamic {
         return store.set(key, value) ? {reason: 'ok'} : {reason: 'storage-unavailable'};
@@ -26,7 +26,7 @@ class LimeStorage {
       },
       clear: function():Dynamic return store.clear() ? {reason: 'ok'} : {reason: 'storage-unavailable'},
       keys: function():Dynamic return {reason: 'ok', value: store.keys()},
-    };
+    } : flight.types.StorageBackend);
   }
 }
 

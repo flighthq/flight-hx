@@ -14,11 +14,13 @@ class LimeImage {
     // ImageBackend, so cast (matching the native branch below).
     return cast flight.HostWeb.createWebImageBackend();
     #else
-    return cast {
+    // ImageBackend is a nominal @:structInit class on hxcpp; a bare `cast {…}`
+    // coerces to null there, so construct it with a structInit object instead.
+    return ({
       loadImageFromUrl: function(url:String, _crossOrigin:Null<String>, signal:Null<AbortSignal>):_Promise<flight.types.ImageResource> {
         return loadNativeImage(url, signal);
       },
-    };
+    } : ImageBackend);
     #end
   }
 

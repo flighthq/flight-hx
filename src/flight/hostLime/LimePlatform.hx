@@ -8,7 +8,7 @@ import lime.system.System;
 /** Exposes the native platform metadata Lime can report reliably. */
 class LimePlatform {
   public static function createLimePlatformBackend():PlatformBackend {
-    return cast {getInfo: function(defaults:Dynamic):Dynamic {
+    return ({getInfo: function(defaults:Dynamic):Dynamic {
       defaults.name = platformName();
       defaults.kind = platformKind();
       defaults.version = nullToEmpty(System.platformVersion);
@@ -27,7 +27,7 @@ class LimePlatform {
       defaults.distro = #if linux nullToEmpty(System.platformName) #else '' #end;
       defaults.distroVersion = #if linux nullToEmpty(System.platformVersion) #else '' #end;
       return defaults;
-    }};
+    }} : PlatformBackend);
   }
 
   static function platformName():String {
