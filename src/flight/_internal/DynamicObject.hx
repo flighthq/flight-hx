@@ -10,20 +10,64 @@ import Math as HxMath;
  */
 class DynamicObject {
   #if !js
-  static final declaredFieldsByClass:Map<String, Map<String, Bool>> = [];
-  static final frozenObjects:_IdentityMap<Bool> = new _IdentityMap();
+  // These caches are reached through null-checking property getters rather than
+  // eager static initializers. On hxcpp the order in which class `__init__`
+  // methods run across modules is not guaranteed, so another class's `__init__`
+  // can call into DynamicObject (via a signal, an Entity field write, or any
+  // reflective access) before this class's statics are constructed. An eager
+  // `static final` is still null at that moment, which crashes with a Null Object
+  // Reference; a lazy getter constructs the backing store on first touch, so the
+  // access is safe whatever the init order turns out to be.
+  static var declaredFieldsByClass(get, never):Map<String, Map<String, Bool>>;
+  static var _declaredFieldsByClass:Null<Map<String, Map<String, Bool>>> = null;
+  static inline function get_declaredFieldsByClass():Map<String, Map<String, Bool>> {
+    if (_declaredFieldsByClass == null) _declaredFieldsByClass = [];
+    return _declaredFieldsByClass;
+  }
+
+  static var frozenObjects(get, never):_IdentityMap<Bool>;
+  static var _frozenObjects:Null<_IdentityMap<Bool>> = null;
+  static inline function get_frozenObjects():_IdentityMap<Bool> {
+    if (_frozenObjects == null) _frozenObjects = new _IdentityMap();
+    return _frozenObjects;
+  }
+
   // Native Haxe classes cannot own fields that were not declared at compile
   // time. Preserve JavaScript's object-expando behavior in an identity sidecar
   // so open Entity records can still use nominal classes on hxcpp.
   #if cpp
-  static final objectFields:haxe.ds.WeakMap<{}, Dynamic> = new haxe.ds.WeakMap();
+  static var objectFields(get, never):haxe.ds.WeakMap<{}, Dynamic>;
+  static var _objectFields:Null<haxe.ds.WeakMap<{}, Dynamic>> = null;
+  static inline function get_objectFields():haxe.ds.WeakMap<{}, Dynamic> {
+    if (_objectFields == null) _objectFields = new haxe.ds.WeakMap();
+    return _objectFields;
+  }
   #else
-  static final objectFields:_IdentityMap<Dynamic> = new _IdentityMap();
+  static var objectFields(get, never):_IdentityMap<Dynamic>;
+  static var _objectFields:Null<_IdentityMap<Dynamic>> = null;
+  static inline function get_objectFields():_IdentityMap<Dynamic> {
+    if (_objectFields == null) _objectFields = new _IdentityMap();
+    return _objectFields;
+  }
   #end
+
   // JavaScript functions are objects and can own fields. Native Haxe closure
   // values cannot, so retain fields assigned to them behind the same identity.
-  static final callableTargets:Array<Dynamic> = [];
-  static final callableFields:Array<Dynamic> = [];
+  // `callableTargets` and `callableFields` are parallel arrays; each lazily
+  // constructs to an empty array, so they stay index-aligned as they grow.
+  static var callableTargets(get, never):Array<Dynamic>;
+  static var _callableTargets:Null<Array<Dynamic>> = null;
+  static inline function get_callableTargets():Array<Dynamic> {
+    if (_callableTargets == null) _callableTargets = [];
+    return _callableTargets;
+  }
+
+  static var callableFields(get, never):Array<Dynamic>;
+  static var _callableFields:Null<Array<Dynamic>> = null;
+  static inline function get_callableFields():Array<Dynamic> {
+    if (_callableFields == null) _callableFields = [];
+    return _callableFields;
+  }
   #end
 
   @:noInline public static function assign(target:Dynamic, sources:haxe.Rest<Dynamic>):Dynamic {

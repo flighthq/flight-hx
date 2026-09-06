@@ -9,17 +9,46 @@ class _Runtime {
   public static inline final NUMBER_MAX_VALUE:Float = 1.7976931348623157e308;
   public static inline final NUMBER_MIN_VALUE:Float = 5e-324;
 
+  // These registries are reached through null-checking property getters rather
+  // than eager static initializers. On hxcpp the order of class `__init__`
+  // methods across modules is not guaranteed, so a module-level value that wraps
+  // a Haxe function (e.g. a callback stored in a const registry) can register a
+  // callable here before _Runtime's statics are constructed. An eager `static
+  // final` is still null then and crashes; a lazy getter builds the array on
+  // first touch regardless of init order.
   #if !js
-  static final haxeArityCallables:Array<Dynamic> = [];
-  static final haxeArities:Array<Int> = [];
+  static var haxeArityCallables(get, never):Array<Dynamic>;
+  static var _haxeArityCallables:Null<Array<Dynamic>> = null;
+  static inline function get_haxeArityCallables():Array<Dynamic> {
+    if (_haxeArityCallables == null) _haxeArityCallables = [];
+    return _haxeArityCallables;
+  }
+
+  static var haxeArities(get, never):Array<Int>;
+  static var _haxeArities:Null<Array<Int>> = null;
+  static inline function get_haxeArities():Array<Int> {
+    if (_haxeArities == null) _haxeArities = [];
+    return _haxeArities;
+  }
   #end
 
   #if !(js || python)
   // Neko function values cannot key ObjectMap. Preserve source-declared rest
   // provenance by closure identity so untyped calls pack only genuine Haxe-rest
   // values, not a fixed callable hidden behind a variadic type assertion.
-  static final haxeRestCallables:Array<Dynamic> = [];
-  static final haxeRestIndices:Array<Int> = [];
+  static var haxeRestCallables(get, never):Array<Dynamic>;
+  static var _haxeRestCallables:Null<Array<Dynamic>> = null;
+  static inline function get_haxeRestCallables():Array<Dynamic> {
+    if (_haxeRestCallables == null) _haxeRestCallables = [];
+    return _haxeRestCallables;
+  }
+
+  static var haxeRestIndices(get, never):Array<Int>;
+  static var _haxeRestIndices:Null<Array<Int>> = null;
+  static inline function get_haxeRestIndices():Array<Int> {
+    if (_haxeRestIndices == null) _haxeRestIndices = [];
+    return _haxeRestIndices;
+  }
   #end
 
   #if js
