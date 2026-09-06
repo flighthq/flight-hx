@@ -70,9 +70,17 @@ class LimeAudioDevice {
         final s = sources.get(Std.int(cast source));
         if (s != null) { s.gain = gain; s.source.gain = gain; }
       },
+      setSourcePan: function(source:Dynamic, _pan:Float):Void {
+        // Required by the AudioDeviceBackend contract; omitting it crashes callers
+        // that pan a channel. lime's stereo pan rides AudioSource.position, but a
+        // positional source is distance-attenuated, so a naive mapping quietens or
+        // silences the sound. Leave it as a volume-preserving center until a proper
+        // relative/no-rolloff panning model is wired up.
+        // TODO(builder review): implement pan via AudioSource.position without rolloff.
+      },
       setSourcePlaybackRate: function(source:Dynamic, rate:Float):Void {
-        // TODO(builder review): lime AudioSource has no portable playback-rate;
-        // OpenAL AL_PITCH via lime.media backend, or document as unsupported.
+        final s = sources.get(Std.int(cast source));
+        if (s != null) s.source.pitch = rate;
       },
       onSourceEnded: function(source:Dynamic, callback:Null<Void->Void>):Void {
         final s = sources.get(Std.int(cast source));
