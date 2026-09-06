@@ -88,7 +88,11 @@ class LimeAudioDevice {
     var o = 0;
     for (i in 0...length) {
       for (c in 0...channels) {
-        final src:Array<Float> = cast data[c];
+        // The contract passes per-channel data as `_Float32Array` (a typed-array
+        // abstract), not a Haxe `Array<Float>`; casting to Array and indexing it
+        // reads through Array.__get, which is a null deref on the underlying typed
+        // array on hxcpp. Keep the typed-array type so `[i]` uses its arrayRead.
+        final src:flight._internal._Float32Array = cast data[c];
         var v = src[i];
         if (v > 1) v = 1; else if (v < -1) v = -1;
         final s = Std.int(v * 32767);
