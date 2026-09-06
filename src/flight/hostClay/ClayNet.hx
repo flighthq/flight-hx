@@ -17,7 +17,7 @@ class ClayNet {
     #if js
     return flight._HostWeb.createWebNetBackend();
     #else
-    return cast {
+    return ({
       sendNetRequest: function(request:Dynamic, ?options:Dynamic):_Promise<Dynamic> {
         return new _Promise(function(resolve:Dynamic->Void, _reject) {
           final url:String = request.url;
@@ -46,7 +46,7 @@ class ClayNet {
           try http.request(method == 'POST' || body != null) catch (_:Dynamic) fail('network error');
         });
       },
-    };
+    } : NetBackend);
     #end
   }
 

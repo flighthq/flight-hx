@@ -15,7 +15,7 @@ class ClayStorage {
     // The upstream StorageBackend seam returns union results: success is
     // { reason: 'ok' } (plus `value` for reads). Clay's write-through is
     // best-effort, so mutations report success optimistically.
-    return cast {
+    return ({
       getItem: function(key:String):Dynamic return {reason: 'ok', value: store.exists(key) ? store.get(key) : null},
       setItem: function(key:String, value:String):Dynamic {
         store.set(key, value);
@@ -33,7 +33,7 @@ class ClayStorage {
         return {reason: 'ok'};
       },
       keys: function():Dynamic return {reason: 'ok', value: [for (k in store.keys()) k]},
-    };
+    } : flight.types.StorageBackend);
   }
 
   static function load(file:String):Map<String, String> {
