@@ -211,7 +211,16 @@ class _HostValueLut {
   static var dateConstructorValue:_HostConstructor;
   static var performanceValue:_Performance;
   static var regExpConstructorValue:_HostConstructor;
-  static final typedArrayConstructorValues:Map<String, _HostConstructor> = [];
+  // Lazy (see the DynamicObject/_Runtime caches): a const-level typed-array value
+  // can resolve its constructor here during another module's `__init__`, before
+  // this class's statics run on hxcpp, where an eager `static final` would still
+  // be null. A null-checking getter builds it on first touch, order-independent.
+  static var typedArrayConstructorValues(get, never):Map<String, _HostConstructor>;
+  static var _typedArrayConstructorValues:Null<Map<String, _HostConstructor>> = null;
+  static inline function get_typedArrayConstructorValues():Map<String, _HostConstructor> {
+    if (_typedArrayConstructorValues == null) _typedArrayConstructorValues = [];
+    return _typedArrayConstructorValues;
+  }
 
   static function globalThisNamespace():Dynamic {
     if (globalThisValue == null) {
