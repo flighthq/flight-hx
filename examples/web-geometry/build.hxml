@@ -1,0 +1,16 @@
+# hostWeb / ESM build: the GENERATED flight.* bindings -> static named ESM imports -> a bundle the
+# bundler tree-shakes (pay-per-use). Paths are relative to the repo root.
+#
+#   node tools/haxe.mjs examples/web-geometry/build.hxml           # emit JS with static imports
+#   node tools/esm/bundle.mjs bin/webgeom.js bin/webgeom.bundle.mjs # bundle against real Flight ESM
+#
+# `npm run gate:web` / `npm run gate:dce` do this end to end (compile+bundle+run / +assert tree-shake).
+-cp generated
+-cp generated/js
+-cp examples/web-geometry
+-cp tools/esm
+--main WebGeometry
+-D flight_esm
+-dce full
+--macro EsmGenerator.use()
+-js bin/webgeom.js

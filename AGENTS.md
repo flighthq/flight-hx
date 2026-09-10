@@ -196,7 +196,21 @@ Tiers (host per the host-axis rule — core examples use no host or Flight's own
 ## Status
 
 Greenfield restart in progress. Foundation (dependency lock, skeleton, this document) and a
-hand-written **proof-of-shape** (`ProofOfShape`, compiling under `-D flight_hx`) are in place; the
-proof validates the `flight.*` → `_hx`/`_cpp`/`_js` unification and the fail-loud selector without
-requiring the not-yet-available C++/JS artifacts. Next: stand up `tools/backend-hx` against
-flight-compiler's inventory; stand up `tools/esm`; wire the native co-compile against flight-cpp.
+hand-written **proof-of-shape** (`ProofOfShape`, `-D flight_hx`) validate the `flight.*` → `_hx`/`_cpp`/`_js`
+unification and the fail-loud selector.
+
+**The ESM (web) path is real end to end.** `tools/backend-hx/generate.mjs` consumes flight-compiler's
+stable inventory (`lowerTypeScriptSource` → IR; signatures/types/export names, bodies ignored) and
+emits the checked-in `generated/` bindings — currently the `geometry`/`Vector2` slice (30 functions).
+`tools/esm/EsmGenerator.hx` (the vendored ESM generator) makes Haxe emit static named imports; with
+`-dce full` + esbuild, `examples/web-geometry` runs against the **real `@flighthq/geometry`** and
+**tree-shakes** (an unused Flight function is absent from the bundle). Gated by `gate:web` (behavioral)
+and `gate:dce` (pay-per-use); both skip cleanly without built deps.
+
+Note: flight-compiler already ships `compiler-backend-hx`, but it emits **transpiled** Haxe (the
+archived approach) and there is no `--target js` — so the ESM-**externs** backend is genuinely new and
+lives here as skunkworks, consuming only the inventory, per the promotion plan above.
+
+Next: widen the generator past `vector2` (the type mapper needs union/array/`Float32Array`/`Vector3`/
+Entity types); generate the `_cpp`/`_hx` backings from the same inventory; wire the native co-compile
+against flight-cpp; a windowed `window-web` app on top of the proven ESM pipeline.
