@@ -1,3 +1,5 @@
+.quimby
+
 # Pinned sibling repos, materialized by `npm run rehydrate` — disposable build inputs, never committed.
 .dependencies/
 
