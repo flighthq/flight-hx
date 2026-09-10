@@ -1,94 +1,31 @@
 # flight-hx
 
-`flight-hx` is a mechanically generated Haxe source port of the Flight SDK. It preserves Flight's deliberately searchable free-function API as root modules such as `flight.Geometry` and uses `flight` as the Haxelib name. Each public package facade has one completion-hidden implementation sibling (`flight.Geometry` → `flight._Geometry`); upstream source files do not become public Haxe modules.
+Haxe **bindings** for the [Flight SDK](https://github.com/flighthq/flight) — one `flight.*` surface
+that resolves, by compile define, to compiled Flight: C++ (via [flight-cpp](https://github.com/flighthq/flight-cpp))
+on native, ESM on web, and an optional transpiled-Haxe fallback for pure-VM targets.
 
-The upstream npm scope remains `@flighthq/*`; `flight.*` is the Haxe namespace used by this port.
+This is not a Haxe reimplementation of Flight; it binds to it. See [AGENTS.md](AGENTS.md) for the
+architecture, the rationale, and the decisions behind every part.
 
-The current generation inventories 153 upstream packages, 36,488 export records, and 1,599 upstream test files. Lowering has zero diagnostics; the two tooling-only package exclusions and current parity results are recorded in the generated reports.
+## Layout
 
-## API shape
+- `src/flight/` — maintained runtime shim + a hand-written proof-of-shape (`Vector2`, `Geom`) across
+  the `flight.*` / `_cpp` / `_js` / `_hx` structure.
+- `generated/{hx,cpp,js}` — checked-in generated bindings (empty until the backend lands).
+- `tools/backend-hx/` — skunkworks bindings backend (promotes to flight-compiler later).
+- `tools/esm/` — the vendored ESM generator (web pay-per-use).
+- `tests/gates/` — behavioral, backend-parity, and web-DCE gates.
+- `dependencies.lock.json` + `scripts/` — pins `flight`/`flight-compiler`/`flight-cpp`, rehydrated
+  into a gitignored `.dependencies/`.
 
-Use the package facade when you know the Flight domain:
-
-```haxe
-import flight.Geometry.*;
-import flight.types.Vector2Like;
-
-final point:Vector2Like = createVector2(3, 4);
-trace(getVector2Length(point));
-```
-
-Use the generated SDK facade for broad discoverability:
-
-```haxe
-import flight.Sdk.*;
-
-final point = createVector2(3, 4);
-```
-
-The qualified form is `flight.Geometry.createVector2()`. Function names remain unchanged; `createVector2` does not become a constructor, and `getVector2Length` does not become an instance method. Every exported canonical type is directly addressable by name under `flight.types`, independent of its defining TypeScript file.
-
-## Lime host
-
-Enable the optional Lime host after Lime creates its first window:
-
-```haxe
-import flight.hostLime.HostLime;
-
-override function onWindowCreate():Void {
-  HostLime.enableHostLime(this);
-  // Create the GL/Cairo surface and Flight render state here.
-}
-```
-
-The enabler is idempotent for one application and installs through Flight's host layer, preserving `custom > host > sentinel` precedence. It currently covers application identity and lifecycle, the frame loop, native image loading and Cairo glyph rasterization, text clipboard, native file dialogs, platform and display metadata, conservative haptics, filesystem, and persistent storage. GL surfaces, native audio contexts, cursor mapping, font registration, and input attachment remain explicit per-window/per-context factories.
-
-Connect a Flight input manager to a Lime window explicitly and retain its disposer:
-
-```haxe
-import flight.hostLime.LimeInput;
-
-final input = flight.Input.createInputManager();
-final detachInput = LimeInput.attachLimeInput(window, input, {gamepads: true});
-// Call detachInput() when the window closes.
-```
-
-The adapter includes pointer, keyboard, composition/text, touch, and standardized gamepad events. Lime does not retain a touch event's originating window, so multi-window applications should attach touch to only one binding or provide `touchFilter`.
-
-The adapter is compiled only with Lime's `lime` define, so base Flight does not depend on Lime. Its maintained smoke test compiles and executes against pinned Lime 8.3.2. Native HTTP exists but is not installed by the umbrella because Flight's Net contract does not yet have a host-layer slot; audio remains an explicit context because Flight has no `AudioBackend`. The detailed support and design-gap matrix is in [agents/host-lime-maturity.md](agents/host-lime-maturity.md).
-
-## Repository setup
-
-Node.js 22 and npm install the project tooling, the exact Haxe 4.3.7 compiler, Lix, and pinned Haxe libraries locally:
+## Develop
 
 ```sh
-git submodule update --init --recursive
-npm ci
-npm run setup
+npm ci && npm run setup     # provision the pinned Haxe (4.3.7)
+npm run rehydrate           # materialize pinned flight / flight-compiler / flight-cpp
+npm run proof               # compile + run the proof-of-shape on the flight_hx backend
+npm run gate:proof          # behavioral gate: proof runs, and no-backend fails loud
 ```
 
-No global Haxe or Lix installation is required. The setup fallback currently supports Linux x64 and uses `curl` and `tar`. The complete portability matrix additionally needs Python 3 and a C++ compiler (`g++` or `clang++`). Haxelib package-install verification needs Neko for the Haxe-distributed `haxelib` executable.
-
-## Commands
-
-```sh
-npm run generate       # regenerate generated/, bridges, and reports
-npm run check          # drift, type, lint, format, and API checks
-npm run test           # unit, Haxe, portability, and upstream parity suites
-npm run test:coverage  # maintained TypeScript coverage
-npm run package        # build, install, and consume the Haxelib zip
-npm run ci             # complete release-quality surface
-```
-
-Generated Haxe under `generated/` is disposable. Maintained runtime and host integration live under `src/`; generator code and semantic patches live under `tools/generator/`. Change those sources instead of editing generated output. See [AGENTS.md](AGENTS.md) and [agents/architecture.md](agents/architecture.md) for the durable design.
-
-## Porting to native targets
-
-Native rendering uses the same generated code as the web, with two rules that are easy to miss:
-
-- **Mark adapter classes `@:keep`.** Objects you hand to Flight (renderers, canvas/surface adapters, texture resolvers, media sources) are currently reached reflectively, so dead-code elimination will silently strip members the compiler cannot see being used, and Haxe properties (`get`/`set`) reflect as absent — use plain physical fields for values Flight reads (for example a surface's `width`/`height`). `flight.Scene2DCairo.createCairoSurface` exposes the reference adapter. Typed protocol access is planned, which will turn these rules into ordinary compile-time contracts.
-- **On Neko, callbacks must match arity exactly.** Neko dispatch requires the declared parameter count, including trailing optionals; JavaScript's drop-or-pad tolerance does not apply. Prefer callbacks without optional parameters, and call optional-arity Flight endpoints with every argument supplied. C++ (`hxcpp`) is the primary native target and does not have this restriction; Neko remains supported as the fast-iteration target.
-- **On Neko, `-dce full` is required.** Without dead-code elimination the whole generated SDK links into the module (~9 MB), and Neko fails at load with `module.c(560) : Stack check failed for function scope` — an error that looks nothing like its cause. Every project under `examples/` sets `<haxeflag name="-dce" value="full" />`; copy it into any new Lime project consuming this library.
-- **Public escapes for toolkit types.** Consumer code should not reach into `flight._internal`: typed arrays are exported at the package root (`flight.Float32Array`, `flight.UInt8Array`, … — natively their constructors accept `haxe.io.Bytes` directly, so SWF or asset bytes wrap without an element copy), the union carrier as `flight.Union2`, and Lime font registration as `flight.hostLime.LimeFonts.registerLimeFont`.
-
-The examples under `examples/` are working Lime applications demonstrating the full wiring, including the per-frame present-skip (`window.onRender.cancel()`) that avoids double-buffer flicker when a scene is unchanged.
+Status: greenfield restart. The proof-of-shape compiles and runs; the bindings backend and ESM
+generator are next. The previous transpile-based flight-hx is archived as `flight-hx-archive`.

@@ -1,0 +1,24 @@
+{
+  "schema": "flight-dependency-lock/1",
+  "directory": ".dependencies",
+  "dependencies": [
+    {
+      "name": "flight",
+      "repository": "https://github.com/flighthq/flight",
+      "branch": "main",
+      "commit": "65889a191bb0d2f5f2f95148590874f3e49bf9d4"
+    },
+    {
+      "name": "flight-compiler",
+      "repository": "https://github.com/flighthq/flight-compiler",
+      "branch": "main",
+      "commit": "c4ee57c495816c5d4671017669e16390188c51c7"
+    },
+    {
+      "name": "flight-cpp",
+      "repository": "https://github.com/flighthq/flight-cpp",
+      "branch": "main",
+      "commit": "87ee3d6c345afb32f28f9dc9d5495b90a33b5c97"
+    }
+  ]
+}

@@ -1,13 +1,13 @@
+# Pinned sibling repos, materialized by `npm run rehydrate` — disposable build inputs, never committed.
+.dependencies/
+
+# Node / Haxe build artifacts
 node_modules/
-.cache/
 .haxe/
 .haxelib/
-dist/
-build/
-coverage/
-*.log
-*.tsbuildinfo
-.DS_Store
-bin/
-.quimby
+haxe_libraries/
+.cache/
 .artifacts/
+build/
+dist/
+*.n

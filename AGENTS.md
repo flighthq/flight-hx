@@ -1,100 +1,139 @@
-# Flight Haxe Port
+# flight-hx
 
-This repository builds a real, mechanically generated Haxe port of the Flight TypeScript SDK in [`upstream/`](upstream/). Externs are not a port. The emitted Haxe must contain executable implementations and must be reproducible from a fresh clone of the upstream submodule.
+Haxe **bindings** for the [Flight SDK](https://github.com/flighthq/flight). This repo is a thin,
+generated binding + runtime layer that presents one `flight.*` Haxe surface backed by compiled
+Flight — **not** a Haxe reimplementation of Flight.
 
-This document is the authoritative entry point for agents working in this repository. Keep it useful and current. Put durable project rules here and put detailed designs, plans, and continuity notes in [`agents/`](agents/README.md).
+This document is the authoritative entry point. It records the decisions that shaped this repo so
+they don't have to be rediscovered. Read it before changing structure.
 
-## Read Before Working
+## What changed, and why (the pivot)
 
-Read the documents relevant to the task:
+The previous flight-hx mechanically transpiled Flight's TypeScript **implementation** into Haxe and
+compiled that through hxcpp. That path is archived as `flight-hx-archive`. It hit an architectural
+ceiling: Flight is deliberately C-like (free functions over separate structs, `create<Type>`
+allocation, `out` params, no OO), which is *foreign* to Haxe's nominal/GC/reflection model. The
+result was a steady stream of native-only representation bugs (anonymous records coerced to nominal
+`@:structInit` classes returning null on hxcpp; static-init-order crashes; reflective field-access
+tax) and a performance ceiling that could only be raised by OO-ifying the library — i.e. by making
+it no longer Flight.
 
-- [`agents/architecture.md`](agents/architecture.md) for the translation model, public Haxe API, type placement, runtime boundary, and Vitest bridge.
-- [`agents/layout.md`](agents/layout.md) before creating or moving files.
-- [`agents/patches.md`](agents/patches.md) before adding an exception, override, template, handwritten Haxe fragment, or unsupported declaration.
-- [`agents/quality.md`](agents/quality.md) before adding scripts or deciding which checks to run.
-- [`agents/plan.md`](agents/plan.md) for the implementation sequence and completion criteria.
-- [`agents/status.md`](agents/status.md) for current decisions, unresolved items, and the next safe work.
-- [`upstream/AGENTS.md`](upstream/AGENTS.md) before translating Flight behavior or making assumptions about its package architecture and API conventions.
+The same property that fights Haxe (types separate from implementation = a header/source split)
+*rewards* C++. So the native implementation of Flight is [flight-cpp](https://github.com/flighthq/flight-cpp),
+and **Haxe binds to compiled Flight instead of reimplementing it**:
 
-`upstream/` is the behavioral and API source of truth. Do not edit the submodule unless the user explicitly asks for an upstream Flight change.
+- **Native / hxcpp** → bind to flight-cpp's C++ via direct C++ externs. Because hxcpp *is* C++,
+  this is ordinary C++ calls, not a marshaling bridge — native speed, and the whole anon→nominal bug
+  class disappears (Flight is no longer Haxe).
+- **Web / JS** → bind to Flight's ESM output via externs, co-bundled and tree-shaken.
+- **Transpiled Haxe** → an optional fallback for pure-VM Haxe targets that can't link C++/JS
+  (HashLink/Neko/etc.). Reach, not performance.
 
-## Non-Negotiable Goals
+Lossless: TS *types* → Haxe *externs* is mechanical and total; it's the TS *implementation* → Haxe
+*implementation* translation (the archived approach) that was lossy and bug-prone. We keep the
+former and drop the latter.
 
-- Generate Haxe source implementations, not externs or declaration-only shells.
-- Make generation deterministic and idempotent. Identical upstream, generator, configuration, templates, and patches must produce byte-identical output.
-- Treat generated Haxe as disposable. Never solve a problem by editing generated output directly.
-- Keep every handwritten exception in configuration, patches, templates, or the portable runtime source of truth.
-- Account for every upstream public export. A declaration is translated, patched, or explicitly excluded with a recorded reason; it is never silently dropped.
-- Fail loudly on unsupported syntax, stale patches, ambiguous mappings, duplicate Haxe names, or an output drift check.
-- Cover all upstream packages. `tool-capture` may be scheduled after the runtime and SDK packages, but it is not silently outside the inventory.
-- Preserve portability as the default. Target-specific code belongs behind explicit, narrow seams and conditional adapters, separate from bulk generated code.
-- Compile generated Haxe to JavaScript and exercise it through the upstream Vitest harness. Reuse upstream test bodies and assertions wherever mechanically possible.
+## The public shape: one `flight.*` over three backends
 
-## API Preservation
+Every public module resolves, by compile define, to one of three hidden backends: `flight._cpp.*`
+(`#if cpp`), `flight._js.*` (`#if js`), `flight._hx.*` (`#if flight_hx`, optional). Two unification
+mechanisms, because Haxe can alias a type but not a free function:
 
-Flight is intentionally optimized for globally searchable, free-function APIs. That property is more important than converting the port to an object-oriented Haxe style.
+- **Types are conditional typedefs.** `flight.Vector2` aliases the active backend's type. Types stay
+  **structural typedefs** wherever the backend is structural (not forced into nominal classes).
+- **Function facades are module-level free functions whose bodies `#if`-dispatch** to hidden extern
+  classes. `flight.Geom.addVector2(...)` is a module-level free function; its `inline` body forwards
+  to `flight._cpp.Geom.addVector2` / `flight._js.Geom.addVector2` / `flight._hx.Geom.addVector2`.
+  Module-level (not class statics) so that free functions keep Flight's globally-searchable feel and
+  `import flight.Geom.*` yields unqualified calls; the hidden `_cpp`/`_js` classes are `extern`
+  because that's where `@:native`/`@:jsRequire` binding actually works. `inline` makes the forwarder
+  zero-cost.
 
-- Preserve exported Flight identifiers exactly whenever Haxe permits it.
-- Keep free functions as module-level functions. Do not turn them into instance methods or abbreviate `verb + type + modifier` names.
-- Keep `create<Type>` as the public allocation boundary. Do not rewrite it as public `new()`.
-- Classes may be used as an internal representation when nominal identity or a target requires them, but they do not acquire behavioral methods merely to look idiomatic in Haxe.
-- Preserve explicit `out` parameters, aliasing guarantees, sentinel returns, allocation vocabulary, and side-effect boundaries.
-- Prefer a boring, grepable one-to-one mapping over a clever transformation.
+The selector **fails loud** on an unsupported target (`#error`), never silently resolves to nothing.
+Keep the guard define and the selector define identical (`cpp` guards and selects `_cpp`; a custom
+`flight_hx` does both for `_hx`).
 
-The public namespace is addressed by Flight intent rather than upstream file layout: an npm package such as `@flighthq/render-gl` maps its free functions and values to the `flight.RenderGl` facade, backed by one completion-hidden `flight._RenderGl` implementation module, while every exported `@flighthq/types` declaration owns `flight.types.<TypeName>`. Declarations retain source provenance for generated bridges and diagnostics without exposing the upstream file topology. See [`agents/architecture.md`](agents/architecture.md) for placement, visibility, and collision validation.
+Rejected alternatives and why: a Haxe *reimplementation* (the archive — capped + bug-prone); OO
+abstracts/wrappers in the core (off-thesis, defeats tree-shaking, the marriage cost lands on hot
+value types); typedef-to-extern-class-with-statics for facades (can't wildcard-import through the
+alias, forces value types into extern classes). Fluent value ergonomics, if ever wanted, are an
+opt-in `using` extension or a facade like openfl-flight layered **on top** — never in the core.
 
-## Translation Discipline
+## Pay-per-use survives the binding — but only under specific packaging
 
-- Parse TypeScript with a real TypeScript AST. Do not build a regex transpiler.
-- Resolve symbols and the complete upstream export graph before emitting Haxe.
-- Translate into a normalized intermediate representation, apply semantic patches to that representation, then emit Haxe.
-- Target patches by stable upstream identity: npm package, source path, and export name. Do not target generated line numbers.
-- Use normalized declaration fingerprints so upstream changes invalidate affected patches.
-- Promote repeated exceptions into general lowering rules. Patches are for genuine exceptions, not a substitute for translator work.
-- Retain upstream provenance for every emitted declaration so reports and errors lead back to the TypeScript source.
-- Generate a machine-readable API/coverage manifest and patch audit on every full generation.
+Flight's "billed for what you buy" property is the crown jewel; the binding preserves it only if you
+**co-compile Flight's target source into the same unit and let the target's native DCE see through
+the externs** — never bind to an opaque prebuilt blob.
 
-## Source Boundaries
+- **Web:** Flight ESM + Haxe emitting **static named ESM imports** + a bundler. `__init__`/`untyped js`
+  produce runtime `require`/dynamic-`import` which is NOT tree-shakeable — do not use them for
+  imports. This needs a vendored ESM generator (see `tools/esm/`), because native Haxe ESM output is
+  not reliably static-named. A bundler is part of the web pipeline; document that "Flight-on-web"
+  implies compiling with the vendored generator.
+- **Native:** static-linked / compile-from-source flight-cpp + direct C++ externs (not CFFI, which
+  pins symbols) + `-ffunction-sections`/`--gc-sections` and/or LTO. Shared `.so` exports everything
+  and defeats DCE — don't. LTO also inlines tiny extern calls, so per-op forwarding is free here;
+  hot-math-inlined-in-Haxe matters on JS, not C++.
 
-The intended source-of-truth split is:
+Flight's free-function architecture is exactly what makes both collectors effective (individually
+collectable symbols / named exports). Don't let a monolith form on top.
 
-- `upstream/`: read-only Flight TypeScript input.
-- `tools/generator/`: TypeScript analyzer, intermediate model, transforms, emitter, semantic patches, and generator templates.
-- `src/`: maintained publishable Haxe, including `flight._internal` runtime types and conditional host adapters.
-- `generated/`: disposable publishable Haxe produced by generation.
-- `tests/`: generator, Haxe, portability, and bridge tests.
-- `build/`: ignored transient compiler and test output.
+## Dependencies: lock-file rehydration, not submodules
 
-Do not edit `generated/` directly. Handwritten runtime and adapter code belongs in `src/`; handwritten generator fragments belong under `tools/generator/patches/`.
+This repo pins `flight`, `flight-compiler`, and `flight-cpp` in `dependencies.lock.json` and
+materializes them into a **gitignored** `.dependencies/` via `npm run rehydrate` (scripts adopted
+verbatim from flight-cpp). The lock is the only thing that decides which revision a gate reads;
+`--check` gates CI, `--update` re-pins to branch head. Generated bindings are **checked in**, so a
+consumer `haxelib`s this repo with no Node/compiler dependency — only regeneration needs them.
+Submodules were dropped: there are three cross-repo pins, and dependencies are disposable inputs, not
+tree members.
 
-## Tooling and Commands
+## The generator: rely on flight-compiler; the bindings backend incubates here
 
-Use `npm`, not pnpm or Yarn. The TypeScript generator, formatting, linting, Vitest, and the project-local Haxe toolchain share the root npm command surface.
+The semantic work (analysis, IR, provenance, coverage, patches) lives in
+[flight-compiler](https://github.com/flighthq/flight-compiler); this repo owns no generator. The
+**bindings backend** (flight-compiler IR → Haxe externs + forwarders) lives here **for now** as
+skunkworks (`tools/backend-hx/`) while its shape is iterated, then promotes upstream to
+`compiler-backend-hx` once formalized — by which time flight-cpp's C++ output should be mature.
+Keep it promotable:
 
-The planned toolchain uses a pinned local Lix dependency. `package-lock.json` pins Node tooling and Lix, `.haxerc` pins Haxe, and committed `haxe_libraries/*.hxml` files pin Haxe libraries. Do not require a global Haxe or Lix installation.
+- One-way boundary: the backend imports flight-compiler's **public** surface only (never deep
+  internals), depends on nothing in this repo's runtime/build, and is a pure function
+  (flight-compiler analysis → Haxe source strings). Runtime/build consume its *output*, never its code.
+- It only needs flight-compiler's **stable** half — the API/type **inventory** (signatures, type
+  shapes, provenance, target symbol names), not the volatile statement/expression lowering, because
+  externs have no bodies. Derive C++ symbol names from flight-compiler's own naming (the same that
+  produced flight-cpp) so externs can't drift from real symbols.
+- Mirror flight-compiler conventions (flat source, functions + plain data, centralized contracts,
+  co-located tests) so promotion is a `git mv`, not a rewrite. Mark it transient.
 
-The target quality commands are documented in [`agents/quality.md`](agents/quality.md). Until their implementations exist, do not claim that they ran. Once present:
+## What this repo owns
 
-- Run the narrowest meaningful test while iterating.
-- Run `npm run fix` after editing maintained source or documentation.
-- Run `npm run check` for a completed focused change.
-- Run `npm run ci` before calling a broad translation or architecture phase complete.
-- Run `npm run generate:check` whenever generator rules, patches, templates, upstream revision, or generated Haxe changes.
+- `dependencies.lock.json` + `scripts/` rehydrate infra.
+- `generated/{hx,cpp,js}` — checked-in Haxe extern bindings (so consumers need no compiler).
+- `src/flight/` — the maintained runtime shim: public unifiers, hidden `_hx` bodies + `_cpp`/`_js`
+  extern drafts, the small inlined-Haxe value primitives (hot math, most valuable on JS).
+- `tools/backend-hx/` — the skunkworks bindings backend (promotes upstream later).
+- `tools/esm/` — the vendored, purpose-built ESM generator (genes as reference, not a fork; scoped
+  to this repo's generated vocabulary; pinned Haxe underneath).
+- `tests/gates/` — the gates below. `tests/haxe/` — consumer-style Haxe fixtures.
+- Build wiring (hxml + `@:buildXml` DCE flags), examples, host/oracle wiring.
 
-## Testing Rules
+## Gates (fail-loud, per the Flight discipline)
 
-- Generator transforms require focused unit tests with positive, negative, and ambiguity cases.
-- Every bug found in generated Haxe should first gain the smallest regression test that exposes the faulty general rule. Add a patch test as well when the fix is a legitimate exception.
-- Generated public signatures must be compile-tested from consumer-style Haxe fixtures.
-- Upstream Vitest is the primary behavioral oracle on the JavaScript target.
-- Portability is verified by compiling and smoke-running representative code on more than one Haxe target; a JavaScript-only success is insufficient for code classified as portable.
-- Test both distinct and aliased outputs for translated Flight functions with an `out` parameter.
-- Never weaken or silently skip an upstream test to make the port look complete. Record unsupported tests with a reason and a source identity in the coverage report.
+- **Behavioral gate** — compile a Haxe consumer against the bindings, link/co-compile the backend,
+  run it. This is the only check that catches native-only breakage; byte-diffing and the JS oracle
+  are blind to it. It is the lesson the archive paid for repeatedly.
+- **Backend-parity gate** — the three `_cpp`/`_js`/`_hx` backings must expose an identical public
+  surface (generated from one IR); structurally diff their signatures and fail on drift, or `flight.*`
+  silently diverges per target.
+- **Web-DCE gate** — build a sample, bundle it, assert imports are static `import { … }` and an
+  unused Flight function is absent from the bundle. Defines "the ESM generator works precisely."
 
-## Commit Conventions
+## Status
 
-Every commit message is a single [Conventional Commits](https://www.conventionalcommits.org/) line — `type(scope): summary` — and nothing else. No body, no blank line, no bullet list, and no `Co-Authored-By` (or any other) trailer. Use `feat`, `fix`, `refactor`, `docs`, `test`, `chore`, `style`, `perf`, or `build`, with an optional scope such as `emit`, `generator`, `examples`, or `upstream`.
-
-## Continuity
-
-Keep transient work state out of generated code and source comments. Update [`agents/status.md`](agents/status.md) when a phase changes, a decision is made, a new blocker appears, or work stops midstream. The status file should tell the next agent what is true, what was verified, and what to do next without reconstructing the project from chat history.
+Greenfield restart in progress. Foundation (dependency lock, skeleton, this document) and a
+hand-written **proof-of-shape** (`ProofOfShape`, compiling under `-D flight_hx`) are in place; the
+proof validates the `flight.*` → `_hx`/`_cpp`/`_js` unification and the fail-loud selector without
+requiring the not-yet-available C++/JS artifacts. Next: stand up `tools/backend-hx` against
+flight-compiler's inventory; stand up `tools/esm`; wire the native co-compile against flight-cpp.
