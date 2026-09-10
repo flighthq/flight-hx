@@ -12,15 +12,3 @@ inline function createFlightDocumentTokenResolverRegistry():flight.FlightDocumen
   #error "flight.Tokens: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
 }
-
-inline function readFlightDocumentTokenReferenceKey(value:String):Null<String> {
-  #if flight_hx
-  return flight._hx._fn.Tokens.readFlightDocumentTokenReferenceKey(value);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Tokens.readFlightDocumentTokenReferenceKey(value);
-  #elseif cpp
-  return flight._cpp._fn.Tokens.readFlightDocumentTokenReferenceKey(value);
-  #else
-  #error "flight.Tokens: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}

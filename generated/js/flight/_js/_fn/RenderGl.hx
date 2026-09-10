@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/render-gl, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/render-gl/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/render-gl")
+@:jsRequire("@flighthq/render-gl/contract")
 extern class RenderGl {
   static function acquireGlRenderTarget(state:flight.GlRenderState, pool:flight.GlRenderTargetPool, descriptor:flight.RenderTargetDescriptor, ?formatPolicy:String):Null<flight.GlRenderTarget>;
   static function acquireGlRenderTexture(state:flight.GlRenderState, pool:flight.GlRenderTexturePool, descriptor:flight.RenderTargetDescriptor):flight.RenderTexture;
@@ -63,7 +63,6 @@ extern class RenderGl {
   static function isBlendModeSupported(state:flight.GlRenderState, blendMode:String):Bool;
   static function isGlRenderTargetFormatSupported(state:flight.GlRenderState, format:String):Bool;
   static function isGlRenderTextureReady(state:flight.GlRenderState, renderTexture:flight.RenderTexture):Bool;
-  static function makeShaderLoc():flight.GlShaderLocations;
   static function popGlRenderState(state:flight.GlRenderState):Void;
   static function presentGlRenderTarget(state:flight.GlRenderState, target:flight.GlRenderTarget, ?dest:Null<flight.GlRenderTarget>):Void;
   static function pushGlRenderState(state:flight.GlRenderState):Void;

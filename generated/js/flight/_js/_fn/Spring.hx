@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/spring, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/spring/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/spring")
+@:jsRequire("@flighthq/spring/contract")
 extern class Spring {
   static function addSpringImpulse(spring:flight.Spring, velocity:Float):Void;
   static function addSpringImpulse2D(spring2D:flight.Spring2D, velocityX:Float, velocityY:Float):Void;

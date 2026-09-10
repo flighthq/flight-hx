@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/mediasession, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/mediasession/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/mediasession")
+@:jsRequire("@flighthq/mediasession/contract")
 extern class Mediasession {
   static function attachMediaSessionAction(host:flight.HasMediaSessionAction, signal:flight.MediaSessionActionSignal):Bool;
   static function clearMediaSessionMetadata(host:flight.HasMediaSession):flight.MediaSessionOperationOutcome;

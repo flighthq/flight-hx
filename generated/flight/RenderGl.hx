@@ -685,18 +685,6 @@ inline function isGlRenderTextureReady(state:flight.GlRenderState, renderTexture
   #end
 }
 
-inline function makeShaderLoc():flight.GlShaderLocations {
-  #if flight_hx
-  return flight._hx._fn.RenderGl.makeShaderLoc();
-  #elseif (js && flight_esm)
-  return flight._js._fn.RenderGl.makeShaderLoc();
-  #elseif cpp
-  return flight._cpp._fn.RenderGl.makeShaderLoc();
-  #else
-  #error "flight.RenderGl: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function popGlRenderState(state:flight.GlRenderState):Void {
   #if flight_hx
   flight._hx._fn.RenderGl.popGlRenderState(state);

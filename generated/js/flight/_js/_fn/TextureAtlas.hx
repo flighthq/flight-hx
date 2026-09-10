@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/textureatlas, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/textureatlas/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/textureatlas")
+@:jsRequire("@flighthq/textureatlas/contract")
 extern class TextureAtlas {
   static function addTextureAtlasRegion(target:flight.TextureAtlas, x:Float, y:Float, width:Float, height:Float, ?pivotX:Float, ?pivotY:Float, ?name:String):Void;
   static function addTextureAtlasRegionCorners(target:flight.TextureAtlas, ax:Float, ay:Float, bx:Float, by:Float, ?pivotX:Float, ?pivotY:Float, ?name:String):Void;

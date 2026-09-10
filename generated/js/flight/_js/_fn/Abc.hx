@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/abc, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/abc/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/abc")
+@:jsRequire("@flighthq/abc/contract")
 extern class Abc {
   static function readAbcFile(source:js.lib.Uint8Array):Null<flight.AbcFile>;
   static function readAbcInstructions(code:js.lib.Uint8Array):Null<Array<flight.AbcInstruction>>;

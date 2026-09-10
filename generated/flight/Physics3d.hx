@@ -73,42 +73,6 @@ inline function applyPhysics3DForceAtPoint(body:flight.RigidBody3D, x:Float, y:F
   #end
 }
 
-inline function applyPhysics3DJointAngularImpulse(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, impulseX:Float, impulseY:Float, impulseZ:Float):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.applyPhysics3DJointAngularImpulse(bodyA, bodyB, impulseX, impulseY, impulseZ);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.applyPhysics3DJointAngularImpulse(bodyA, bodyB, impulseX, impulseY, impulseZ);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.applyPhysics3DJointAngularImpulse(bodyA, bodyB, impulseX, impulseY, impulseZ);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function applyPhysics3DJointImpulse(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, rAX:Float, rAY:Float, rAZ:Float, rBX:Float, rBY:Float, rBZ:Float, impulseX:Float, impulseY:Float, impulseZ:Float):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.applyPhysics3DJointImpulse(bodyA, bodyB, rAX, rAY, rAZ, rBX, rBY, rBZ, impulseX, impulseY, impulseZ);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.applyPhysics3DJointImpulse(bodyA, bodyB, rAX, rAY, rAZ, rBX, rBY, rBZ, impulseX, impulseY, impulseZ);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.applyPhysics3DJointImpulse(bodyA, bodyB, rAX, rAY, rAZ, rBX, rBY, rBZ, impulseX, impulseY, impulseZ);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function applyPhysics3DJointRowImpulse(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, directionX:Float, directionY:Float, directionZ:Float, armAX:Float, armAY:Float, armAZ:Float, armBX:Float, armBY:Float, armBZ:Float, impulse:Float):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.applyPhysics3DJointRowImpulse(bodyA, bodyB, directionX, directionY, directionZ, armAX, armAY, armAZ, armBX, armBY, armBZ, impulse);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.applyPhysics3DJointRowImpulse(bodyA, bodyB, directionX, directionY, directionZ, armAX, armAY, armAZ, armBX, armBY, armBZ, impulse);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.applyPhysics3DJointRowImpulse(bodyA, bodyB, directionX, directionY, directionZ, armAX, armAY, armAZ, armBX, armBY, armBZ, impulse);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function applyPhysics3DLinearImpulse(body:flight.RigidBody3D, x:Float, y:Float, z:Float):Bool {
   #if flight_hx
   return flight._hx._fn.Physics3d.applyPhysics3DLinearImpulse(body, x, y, z);
@@ -145,18 +109,6 @@ inline function applyPhysics3DTorque(body:flight.RigidBody3D, x:Float, y:Float, 
   #end
 }
 
-inline function applyRow(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, state:Array<Float>, offset:Float, impulse:Float):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.applyRow(bodyA, bodyB, state, offset, impulse);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.applyRow(bodyA, bodyB, state, offset, impulse);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.applyRow(bodyA, bodyB, state, offset, impulse);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function arePhysics3DGuardsEnabled():Bool {
   #if flight_hx
   return flight._hx._fn.Physics3d.arePhysics3DGuardsEnabled();
@@ -164,42 +116,6 @@ inline function arePhysics3DGuardsEnabled():Bool {
   return flight._js._fn.Physics3d.arePhysics3DGuardsEnabled();
   #elseif cpp
   return flight._cpp._fn.Physics3d.arePhysics3DGuardsEnabled();
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function assertPhysics3DBodyNotStepping(body:flight.RigidBody3D):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.assertPhysics3DBodyNotStepping(body);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.assertPhysics3DBodyNotStepping(body);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.assertPhysics3DBodyNotStepping(body);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function assertPhysics3DWorldNotStepping(world:flight.Physics3DWorld):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.assertPhysics3DWorldNotStepping(world);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.assertPhysics3DWorldNotStepping(world);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.assertPhysics3DWorldNotStepping(world);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function beginJointSolve(joint:flight.Physics3DJoint, length:Float):Array<Float> {
-  #if flight_hx
-  return flight._hx._fn.Physics3d.beginJointSolve(joint, length);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Physics3d.beginJointSolve(joint, length);
-  #elseif cpp
-  return flight._cpp._fn.Physics3d.beginJointSolve(joint, length);
   #else
   #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -236,18 +152,6 @@ inline function buildPhysics3DSolveIslands(world:flight.Physics3DWorld):Void {
   flight._js._fn.Physics3d.buildPhysics3DSolveIslands(world);
   #elseif cpp
   flight._cpp._fn.Physics3d.buildPhysics3DSolveIslands(world);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function clearJointSolve(joint:flight.Physics3DJoint):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.clearJointSolve(joint);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.clearJointSolve(joint);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.clearJointSolve(joint);
   #else
   #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -673,18 +577,6 @@ inline function findPhysics3DBody(world:flight.Physics3DWorld, index:Float):Null
   #end
 }
 
-inline function getJointSolveState(joint:flight.Physics3DJoint):Null<Array<Float>> {
-  #if flight_hx
-  return flight._hx._fn.Physics3d.getJointSolveState(joint);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Physics3d.getJointSolveState(joint);
-  #elseif cpp
-  return flight._cpp._fn.Physics3d.getJointSolveState(joint);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function getPhysics3DJointReactionForce(reaction:flight.Physics3DJointReaction):Float {
   #if flight_hx
   return flight._hx._fn.Physics3d.getPhysics3DJointReactionForce(reaction);
@@ -709,30 +601,6 @@ inline function getPhysics3DJointReactionTorque(reaction:flight.Physics3DJointRe
   #end
 }
 
-inline function getPhysics3DJointRowMass(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, directionX:Float, directionY:Float, directionZ:Float, armAX:Float, armAY:Float, armAZ:Float, armBX:Float, armBY:Float, armBZ:Float):Float {
-  #if flight_hx
-  return flight._hx._fn.Physics3d.getPhysics3DJointRowMass(bodyA, bodyB, directionX, directionY, directionZ, armAX, armAY, armAZ, armBX, armBY, armBZ);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Physics3d.getPhysics3DJointRowMass(bodyA, bodyB, directionX, directionY, directionZ, armAX, armAY, armAZ, armBX, armBY, armBZ);
-  #elseif cpp
-  return flight._cpp._fn.Physics3d.getPhysics3DJointRowMass(bodyA, bodyB, directionX, directionY, directionZ, armAX, armAY, armAZ, armBX, armBY, armBZ);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function getPhysics3DJointRowVelocity(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, directionX:Float, directionY:Float, directionZ:Float, armAX:Float, armAY:Float, armAZ:Float, armBX:Float, armBY:Float, armBZ:Float):Float {
-  #if flight_hx
-  return flight._hx._fn.Physics3d.getPhysics3DJointRowVelocity(bodyA, bodyB, directionX, directionY, directionZ, armAX, armAY, armAZ, armBX, armBY, armBZ);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Physics3d.getPhysics3DJointRowVelocity(bodyA, bodyB, directionX, directionY, directionZ, armAX, armAY, armAZ, armBX, armBY, armBZ);
-  #elseif cpp
-  return flight._cpp._fn.Physics3d.getPhysics3DJointRowVelocity(bodyA, bodyB, directionX, directionY, directionZ, armAX, armAY, armAZ, armBX, armBY, armBZ);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function getPhysics3DJointSolver(world:flight.Physics3DWorld, kind:String):Null<flight.Physics3DJointSolver> {
   #if flight_hx
   return flight._hx._fn.Physics3d.getPhysics3DJointSolver(world, kind);
@@ -740,30 +608,6 @@ inline function getPhysics3DJointSolver(world:flight.Physics3DWorld, kind:String
   return flight._js._fn.Physics3d.getPhysics3DJointSolver(world, kind);
   #elseif cpp
   return flight._cpp._fn.Physics3d.getPhysics3DJointSolver(world, kind);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function getRowMass(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, state:Array<Float>, offset:Float):Float {
-  #if flight_hx
-  return flight._hx._fn.Physics3d.getRowMass(bodyA, bodyB, state, offset);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Physics3d.getRowMass(bodyA, bodyB, state, offset);
-  #elseif cpp
-  return flight._cpp._fn.Physics3d.getRowMass(bodyA, bodyB, state, offset);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function getRowVelocity(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, state:Array<Float>, offset:Float):Float {
-  #if flight_hx
-  return flight._hx._fn.Physics3d.getRowVelocity(bodyA, bodyB, state, offset);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Physics3d.getRowVelocity(bodyA, bodyB, state, offset);
-  #elseif cpp
-  return flight._cpp._fn.Physics3d.getRowVelocity(bodyA, bodyB, state, offset);
   #else
   #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1057,18 +901,6 @@ inline function mixPhysics3DRestitution(first:Float, second:Float):Float {
   #end
 }
 
-inline function prepareAngularBlock(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, state:Array<Float>, massOffset:Float, biasOffset:Float, dt:Float):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.prepareAngularBlock(bodyA, bodyB, state, massOffset, biasOffset, dt);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.prepareAngularBlock(bodyA, bodyB, state, massOffset, biasOffset, dt);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.prepareAngularBlock(bodyA, bodyB, state, massOffset, biasOffset, dt);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function preparePhysics3DContactConstraints(world:flight.Physics3DWorld):Void {
   #if flight_hx
   flight._hx._fn.Physics3d.preparePhysics3DContactConstraints(world);
@@ -1076,18 +908,6 @@ inline function preparePhysics3DContactConstraints(world:flight.Physics3DWorld):
   flight._js._fn.Physics3d.preparePhysics3DContactConstraints(world);
   #elseif cpp
   flight._cpp._fn.Physics3d.preparePhysics3DContactConstraints(world);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function preparePointBlock(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, joint:flight.Physics3DJoint, state:Array<Float>, dt:Float):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.preparePointBlock(bodyA, bodyB, joint, state, dt);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.preparePointBlock(bodyA, bodyB, joint, state, dt);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.preparePointBlock(bodyA, bodyB, joint, state, dt);
   #else
   #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1112,42 +932,6 @@ inline function queryPhysics3DRegion(world:flight.Physics3DWorld, region:flight.
   flight._js._fn.Physics3d.queryPhysics3DRegion(world, region, out, filter);
   #elseif cpp
   flight._cpp._fn.Physics3d.queryPhysics3DRegion(world, region, out, filter);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function readFrameBases(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, frames:flight.Physics3DJointFrames):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.readFrameBases(bodyA, bodyB, frames);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.readFrameBases(bodyA, bodyB, frames);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.readFrameBases(bodyA, bodyB, frames);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function readFrameRotations(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, frames:flight.Physics3DJointFrames):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.readFrameRotations(bodyA, bodyB, frames);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.readFrameRotations(bodyA, bodyB, frames);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.readFrameRotations(bodyA, bodyB, frames);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function readJointImpulse(joint:flight.Physics3DJoint, slot:Float):Float {
-  #if flight_hx
-  return flight._hx._fn.Physics3d.readJointImpulse(joint, slot);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Physics3d.readJointImpulse(joint, slot);
-  #elseif cpp
-  return flight._cpp._fn.Physics3d.readJointImpulse(joint, slot);
   #else
   #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1249,18 +1033,6 @@ inline function removePhysics3DJoint(world:flight.Physics3DWorld, joint:flight.P
   #end
 }
 
-inline function reportPhysics3DSpatialIndexing(world:flight.Physics3DWorld):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.reportPhysics3DSpatialIndexing(world);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.reportPhysics3DSpatialIndexing(world);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.reportPhysics3DSpatialIndexing(world);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function setPhysics3DBodyBullet(body:flight.RigidBody3D, bullet:Bool):Bool {
   #if flight_hx
   return flight._hx._fn.Physics3d.setPhysics3DBodyBullet(body, bullet);
@@ -1333,54 +1105,6 @@ inline function setRigidBody3DMassData(body:flight.RigidBody3D, data:flight.Phys
   #end
 }
 
-inline function solveAngularBlock(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, joint:flight.Physics3DJoint, state:Array<Float>, massOffset:Float, biasOffset:Float):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.solveAngularBlock(bodyA, bodyB, joint, state, massOffset, biasOffset);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.solveAngularBlock(bodyA, bodyB, joint, state, massOffset, biasOffset);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.solveAngularBlock(bodyA, bodyB, joint, state, massOffset, biasOffset);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function solveEqualityRow(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, joint:flight.Physics3DJoint, slot:Float, state:Array<Float>, offset:Float, mass:Float, error:Float, biasFactor:Float):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.solveEqualityRow(bodyA, bodyB, joint, slot, state, offset, mass, error, biasFactor);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.solveEqualityRow(bodyA, bodyB, joint, slot, state, offset, mass, error, biasFactor);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.solveEqualityRow(bodyA, bodyB, joint, slot, state, offset, mass, error, biasFactor);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function solveLowerLimitRow(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, state:Array<Float>, offset:Float, mass:Float, error:Float, biasFactor:Float, accumulatorSlot:Float, ?gamma:Float):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.solveLowerLimitRow(bodyA, bodyB, state, offset, mass, error, biasFactor, accumulatorSlot, gamma);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.solveLowerLimitRow(bodyA, bodyB, state, offset, mass, error, biasFactor, accumulatorSlot, gamma);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.solveLowerLimitRow(bodyA, bodyB, state, offset, mass, error, biasFactor, accumulatorSlot, gamma);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function solveMotorRow(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, state:Array<Float>, offset:Float, mass:Float, speed:Float, maxImpulse:Float, previous:Float):Float {
-  #if flight_hx
-  return flight._hx._fn.Physics3d.solveMotorRow(bodyA, bodyB, state, offset, mass, speed, maxImpulse, previous);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Physics3d.solveMotorRow(bodyA, bodyB, state, offset, mass, speed, maxImpulse, previous);
-  #elseif cpp
-  return flight._cpp._fn.Physics3d.solveMotorRow(bodyA, bodyB, state, offset, mass, speed, maxImpulse, previous);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function solvePhysics3DContactPositions(world:flight.Physics3DWorld):Float {
   #if flight_hx
   return flight._hx._fn.Physics3d.solvePhysics3DContactPositions(world);
@@ -1405,30 +1129,6 @@ inline function solvePhysics3DContactVelocities(world:flight.Physics3DWorld):Voi
   #end
 }
 
-inline function solvePointBlock(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, joint:flight.Physics3DJoint, state:Array<Float>):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.solvePointBlock(bodyA, bodyB, joint, state);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.solvePointBlock(bodyA, bodyB, joint, state);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.solvePointBlock(bodyA, bodyB, joint, state);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function solveUpperLimitRow(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, state:Array<Float>, offset:Float, mass:Float, error:Float, biasFactor:Float, accumulatorSlot:Float, ?gamma:Float):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.solveUpperLimitRow(bodyA, bodyB, state, offset, mass, error, biasFactor, accumulatorSlot, gamma);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.solveUpperLimitRow(bodyA, bodyB, state, offset, mass, error, biasFactor, accumulatorSlot, gamma);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.solveUpperLimitRow(bodyA, bodyB, state, offset, mass, error, biasFactor, accumulatorSlot, gamma);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function stepPhysics3D(world:flight.Physics3DWorld, dt:Float):Void {
   #if flight_hx
   flight._hx._fn.Physics3d.stepPhysics3D(world, dt);
@@ -1448,18 +1148,6 @@ inline function stepPhysics3DInterval(world:flight.Physics3DWorld, dt:Float):Voi
   flight._js._fn.Physics3d.stepPhysics3DInterval(world, dt);
   #elseif cpp
   flight._cpp._fn.Physics3d.stepPhysics3DInterval(world, dt);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function swapPhysics3DJointFrames(frames:flight.Physics3DJointFrames):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.swapPhysics3DJointFrames(frames);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.swapPhysics3DJointFrames(frames);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.swapPhysics3DJointFrames(frames);
   #else
   #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1537,18 +1225,6 @@ inline function wakePhysics3DBody(body:flight.RigidBody3D):Void {
   #end
 }
 
-inline function warmStartAngularBlock(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, joint:flight.Physics3DJoint):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.warmStartAngularBlock(bodyA, bodyB, joint);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.warmStartAngularBlock(bodyA, bodyB, joint);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.warmStartAngularBlock(bodyA, bodyB, joint);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function warmStartPhysics3DContacts(world:flight.Physics3DWorld):Void {
   #if flight_hx
   flight._hx._fn.Physics3d.warmStartPhysics3DContacts(world);
@@ -1556,42 +1232,6 @@ inline function warmStartPhysics3DContacts(world:flight.Physics3DWorld):Void {
   flight._js._fn.Physics3d.warmStartPhysics3DContacts(world);
   #elseif cpp
   flight._cpp._fn.Physics3d.warmStartPhysics3DContacts(world);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function warmStartPointBlock(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, joint:flight.Physics3DJoint):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.warmStartPointBlock(bodyA, bodyB, joint);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.warmStartPointBlock(bodyA, bodyB, joint);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.warmStartPointBlock(bodyA, bodyB, joint);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function writeAngularRow(state:Array<Float>, offset:Float, axisX:Float, axisY:Float, axisZ:Float):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.writeAngularRow(state, offset, axisX, axisY, axisZ);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.writeAngularRow(state, offset, axisX, axisY, axisZ);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.writeAngularRow(state, offset, axisX, axisY, axisZ);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function writeJointImpulse(joint:flight.Physics3DJoint, slot:Float, value:Float):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.writeJointImpulse(joint, slot, value);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.writeJointImpulse(joint, slot, value);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.writeJointImpulse(joint, slot, value);
   #else
   #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1621,78 +1261,6 @@ inline function writePhysics3DDebugGeometry(world:flight.Physics3DWorld, out:fli
   #end
 }
 
-inline function writePhysics3DJointAnchorVelocity(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, joint:flight.Physics3DJoint, out:Array<Float>):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.writePhysics3DJointAnchorVelocity(bodyA, bodyB, joint, out);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.writePhysics3DJointAnchorVelocity(bodyA, bodyB, joint, out);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.writePhysics3DJointAnchorVelocity(bodyA, bodyB, joint, out);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function writePhysics3DJointAnchors(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, joint:flight.Physics3DJoint):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.writePhysics3DJointAnchors(bodyA, bodyB, joint);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.writePhysics3DJointAnchors(bodyA, bodyB, joint);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.writePhysics3DJointAnchors(bodyA, bodyB, joint);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function writePhysics3DJointAngularMass(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, out:Array<Float>):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.writePhysics3DJointAngularMass(bodyA, bodyB, out);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.writePhysics3DJointAngularMass(bodyA, bodyB, out);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.writePhysics3DJointAngularMass(bodyA, bodyB, out);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function writePhysics3DJointFrameBasis(body:flight.RigidBody3D, localRotationX:Float, localRotationY:Float, localRotationZ:Float, localRotationW:Float, out:Array<Float>):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.writePhysics3DJointFrameBasis(body, localRotationX, localRotationY, localRotationZ, localRotationW, out);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.writePhysics3DJointFrameBasis(body, localRotationX, localRotationY, localRotationZ, localRotationW, out);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.writePhysics3DJointFrameBasis(body, localRotationX, localRotationY, localRotationZ, localRotationW, out);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function writePhysics3DJointFrameRotation(body:flight.RigidBody3D, localRotationX:Float, localRotationY:Float, localRotationZ:Float, localRotationW:Float, out:Array<Float>):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.writePhysics3DJointFrameRotation(body, localRotationX, localRotationY, localRotationZ, localRotationW, out);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.writePhysics3DJointFrameRotation(body, localRotationX, localRotationY, localRotationZ, localRotationW, out);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.writePhysics3DJointFrameRotation(body, localRotationX, localRotationY, localRotationZ, localRotationW, out);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function writePhysics3DJointPointMass(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, rAX:Float, rAY:Float, rAZ:Float, rBX:Float, rBY:Float, rBZ:Float, out:Array<Float>):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.writePhysics3DJointPointMass(bodyA, bodyB, rAX, rAY, rAZ, rBX, rBY, rBZ, out);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.writePhysics3DJointPointMass(bodyA, bodyB, rAX, rAY, rAZ, rBX, rBY, rBZ, out);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.writePhysics3DJointPointMass(bodyA, bodyB, rAX, rAY, rAZ, rBX, rBY, rBZ, out);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function writePhysics3DJointReaction(world:flight.Physics3DWorld, joint:flight.Physics3DJoint, dt:Float, out:flight.Physics3DJointReaction):Bool {
   #if flight_hx
   return flight._hx._fn.Physics3d.writePhysics3DJointReaction(world, joint, dt, out);
@@ -1700,42 +1268,6 @@ inline function writePhysics3DJointReaction(world:flight.Physics3DWorld, joint:f
   return flight._js._fn.Physics3d.writePhysics3DJointReaction(world, joint, dt, out);
   #elseif cpp
   return flight._cpp._fn.Physics3d.writePhysics3DJointReaction(world, joint, dt, out);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function writePhysics3DJointRelativeRotation(frameAX:Float, frameAY:Float, frameAZ:Float, frameAW:Float, frameBX:Float, frameBY:Float, frameBZ:Float, frameBW:Float, out:Array<Float>):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.writePhysics3DJointRelativeRotation(frameAX, frameAY, frameAZ, frameAW, frameBX, frameBY, frameBZ, frameBW, out);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.writePhysics3DJointRelativeRotation(frameAX, frameAY, frameAZ, frameAW, frameBX, frameBY, frameBZ, frameBW, out);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.writePhysics3DJointRelativeRotation(frameAX, frameAY, frameAZ, frameAW, frameBX, frameBY, frameBZ, frameBW, out);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function writePhysics3DJointRotationError(frameAX:Float, frameAY:Float, frameAZ:Float, frameAW:Float, frameBX:Float, frameBY:Float, frameBZ:Float, frameBW:Float, out:Array<Float>):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.writePhysics3DJointRotationError(frameAX, frameAY, frameAZ, frameAW, frameBX, frameBY, frameBZ, frameBW, out);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.writePhysics3DJointRotationError(frameAX, frameAY, frameAZ, frameAW, frameBX, frameBY, frameBZ, frameBW, out);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.writePhysics3DJointRotationError(frameAX, frameAY, frameAZ, frameAW, frameBX, frameBY, frameBZ, frameBW, out);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function writePhysics3DJointSeparation(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, joint:flight.Physics3DJoint, out:Array<Float>):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.writePhysics3DJointSeparation(bodyA, bodyB, joint, out);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.writePhysics3DJointSeparation(bodyA, bodyB, joint, out);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.writePhysics3DJointSeparation(bodyA, bodyB, joint, out);
   #else
   #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1753,18 +1285,6 @@ inline function writePhysics3DRotationalCcdEnvelope(angularSpeed:Float, maximumR
   #end
 }
 
-inline function writePhysics3DSoftRowParameters(mass:Float, frequencyHz:Float, dampingRatio:Float, dt:Float, hardBiasFactor:Float, out:Array<Float>):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.writePhysics3DSoftRowParameters(mass, frequencyHz, dampingRatio, dt, hardBiasFactor, out);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.writePhysics3DSoftRowParameters(mass, frequencyHz, dampingRatio, dt, hardBiasFactor, out);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.writePhysics3DSoftRowParameters(mass, frequencyHz, dampingRatio, dt, hardBiasFactor, out);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function writeRigidBody3DWorldCenter(body:flight.RigidBody3D, out:Array<Float>):Void {
   #if flight_hx
   flight._hx._fn.Physics3d.writeRigidBody3DWorldCenter(body, out);
@@ -1772,18 +1292,6 @@ inline function writeRigidBody3DWorldCenter(body:flight.RigidBody3D, out:Array<F
   flight._js._fn.Physics3d.writeRigidBody3DWorldCenter(body, out);
   #elseif cpp
   flight._cpp._fn.Physics3d.writeRigidBody3DWorldCenter(body, out);
-  #else
-  #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function writeRow(state:Array<Float>, offset:Float, directionX:Float, directionY:Float, directionZ:Float, armAX:Float, armAY:Float, armAZ:Float, armBX:Float, armBY:Float, armBZ:Float):Void {
-  #if flight_hx
-  flight._hx._fn.Physics3d.writeRow(state, offset, directionX, directionY, directionZ, armAX, armAY, armAZ, armBX, armBY, armBZ);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics3d.writeRow(state, offset, directionX, directionY, directionZ, armAX, armAY, armAZ, armBX, armBY, armBZ);
-  #elseif cpp
-  flight._cpp._fn.Physics3d.writeRow(state, offset, directionX, directionY, directionZ, armAX, armAY, armAZ, armBX, armBY, armBZ);
   #else
   #error "flight.Physics3d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end

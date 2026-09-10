@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/path-boolean, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/path-boolean/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/path-boolean")
+@:jsRequire("@flighthq/path-boolean/contract")
 extern class PathBoolean {
   static function booleanPaths(subject:flight.Path, clip:flight.Path, operation:String, ?out:flight.Path, ?options:flight.PathBooleanOptions):flight.Path;
   static function createDefaultPathBooleanBackend():flight.PathBooleanBackend;
@@ -19,7 +19,6 @@ extern class PathBoolean {
   static function simplifyPath(path:flight.Path, ?options:flight.PathBooleanOptions, ?out:flight.Path):flight.Path;
   static function unionAllPaths(paths:Array<flight.Path>, ?out:flight.Path, ?options:flight.PathBooleanOptions):flight.Path;
   static function unionPaths(a:flight.Path, b:flight.Path, ?out:flight.Path, ?options:flight.PathBooleanOptions):flight.Path;
-  static function writePathBooleanContours(contours:Array<Array<Float>>, ?out:flight.Path):flight.Path;
   static function xorPaths(a:flight.Path, b:flight.Path, ?out:flight.Path, ?options:flight.PathBooleanOptions):flight.Path;
 }
 #end

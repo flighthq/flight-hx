@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/scene3d, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/scene3d/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/scene3d")
+@:jsRequire("@flighthq/scene3d/contract")
 extern class Scene3D {
   static function appendInstancedMeshInstance(target:flight.InstancedMesh, matrix:flight.Matrix4):Float;
   static function applyAnimationClipToScene3D(clip:flight.AnimationClip, time:Float):Void;

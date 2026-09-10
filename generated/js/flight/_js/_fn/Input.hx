@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/input, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/input/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/input")
+@:jsRequire("@flighthq/input/contract")
 extern class Input {
   static function applyGamepadAxisDeadZone(value:Float, deadZone:Float):Float;
   static function applyGamepadStickDeadZone(out:{ x:Float, y:Float }, x:Float, y:Float, deadZone:Float):Void;

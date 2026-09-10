@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/scene2d-gl, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/scene2d-gl/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/scene2d-gl")
+@:jsRequire("@flighthq/scene2d-gl/contract")
 extern class Scene2dGl {
   static function acquireGlScale9ShapeRasterSurface(provider:flight.Raster2DSurfaceProvider, data:flight.GlScale9ShapeData):Null<flight.Raster2DSurface>;
   static function acquireGlShapeRasterSurface(provider:flight.Raster2DSurfaceProvider, data:flight.GlShapeRendererData):Null<flight.Raster2DSurface>;

@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/geolocation, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/geolocation/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/geolocation")
+@:jsRequire("@flighthq/geolocation/contract")
 extern class Geolocation {
   static function clearGeolocationWatch(host:flight.HasSystemGeolocation, id:Float):Void;
   static function createWebGeolocationBackend():flight.GeolocationBackend;

@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/bitmapfont, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/bitmapfont/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/bitmapfont")
+@:jsRequire("@flighthq/bitmapfont/contract")
 extern class BitmapFont {
   static function createBitmapFont(data:flight.BitmapFontData):flight.BitmapFont;
   static function createBitmapFontFromGlyphAtlas(atlas:flight.GlyphAtlas):flight.BitmapFont;

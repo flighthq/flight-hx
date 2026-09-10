@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/platform, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/platform/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/platform")
+@:jsRequire("@flighthq/platform/contract")
 extern class Platform {
   static function comparePlatformVersions(a:String, b:String):String;
   static function createPlatformInfo():flight.PlatformInfo;

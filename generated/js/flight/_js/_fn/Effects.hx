@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/effects, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/effects/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/effects")
+@:jsRequire("@flighthq/effects/contract")
 extern class Effects {
   static function canLerpRenderEffects(a:flight.RenderEffect, b:flight.RenderEffect):Bool;
   static function computeAcesToneMap(x:Float):Float;

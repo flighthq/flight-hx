@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/node, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/node/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/node")
+@:jsRequire("@flighthq/node/contract")
 extern class Node {
   static function areNodeGuardsEnabled():Bool;
   static function clearNodeOrderList(list:flight.NodeOrderList):Void;

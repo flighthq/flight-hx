@@ -2,11 +2,10 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/tokens, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/tokens/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/tokens")
+@:jsRequire("@flighthq/tokens/contract")
 extern class Tokens {
   static function createFlightDocumentTokenResolverRegistry():flight.FlightDocumentTokenResolverRegistry;
-  static function readFlightDocumentTokenReferenceKey(value:String):Null<String>;
 }
 #end

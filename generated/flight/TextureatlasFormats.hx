@@ -85,18 +85,6 @@ inline function parseTexturePackerAtlasJson(json:String, atlas:flight.TextureAtl
   #end
 }
 
-inline function resetTextureAtlasPageMeta(atlas:flight.TextureAtlas):Void {
-  #if flight_hx
-  flight._hx._fn.TextureatlasFormats.resetTextureAtlasPageMeta(atlas);
-  #elseif (js && flight_esm)
-  flight._js._fn.TextureatlasFormats.resetTextureAtlasPageMeta(atlas);
-  #elseif cpp
-  flight._cpp._fn.TextureatlasFormats.resetTextureAtlasPageMeta(atlas);
-  #else
-  #error "flight.TextureatlasFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function unregisterTextureAtlasFormat(kind:String):Void {
   #if flight_hx
   flight._hx._fn.TextureatlasFormats.unregisterTextureAtlasFormat(kind);

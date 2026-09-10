@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/shortcut, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/shortcut/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/shortcut")
+@:jsRequire("@flighthq/shortcut/contract")
 extern class Shortcut {
   static function equalsAccelerator(a:String, b:String):Bool;
   static function findAcceleratorConflict(accelerator:String, candidates:Array<String>):Null<String>;

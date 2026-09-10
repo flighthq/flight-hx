@@ -13,18 +13,6 @@ inline function areSwfGuardsEnabled():Bool {
   #end
 }
 
-inline function buildFrameScriptAbc(?handlerNameIndex:Float):js.lib.Uint8Array {
-  #if flight_hx
-  return flight._hx._fn.Swf.buildFrameScriptAbc(handlerNameIndex);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Swf.buildFrameScriptAbc(handlerNameIndex);
-  #elseif cpp
-  return flight._cpp._fn.Swf.buildFrameScriptAbc(handlerNameIndex);
-  #else
-  #error "flight.Swf: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function createScene2DFromSwf(source:js.lib.Uint8Array, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.Scene2DDocument> {
   #if flight_hx
   return flight._hx._fn.Swf.createScene2DFromSwf(source, diagnostics);
@@ -68,18 +56,6 @@ inline function createSwfJpegAlphaBitmap(decoded:flight.DecodedImage, payload:fl
   return flight._js._fn.Swf.createSwfJpegAlphaBitmap(decoded, payload);
   #elseif cpp
   return flight._cpp._fn.Swf.createSwfJpegAlphaBitmap(decoded, payload);
-  #else
-  #error "flight.Swf: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function createSwfLosslessBitmap(payload:js.lib.Uint8Array, hasAlpha:Bool):Null<flight.Bitmap> {
-  #if flight_hx
-  return flight._hx._fn.Swf.createSwfLosslessBitmap(payload, hasAlpha);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Swf.createSwfLosslessBitmap(payload, hasAlpha);
-  #elseif cpp
-  return flight._cpp._fn.Swf.createSwfLosslessBitmap(payload, hasAlpha);
   #else
   #error "flight.Swf: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -140,18 +116,6 @@ inline function registerSwfScene2DDocumentImporter(registry:flight.Scene2DDocume
   flight._js._fn.Swf.registerSwfScene2DDocumentImporter(registry);
   #elseif cpp
   flight._cpp._fn.Swf.registerSwfScene2DDocumentImporter(registry);
-  #else
-  #error "flight.Swf: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function resolveSwfFontUnitsPerEm(version:Float):Float {
-  #if flight_hx
-  return flight._hx._fn.Swf.resolveSwfFontUnitsPerEm(version);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Swf.resolveSwfFontUnitsPerEm(version);
-  #elseif cpp
-  return flight._cpp._fn.Swf.resolveSwfFontUnitsPerEm(version);
   #else
   #error "flight.Swf: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end

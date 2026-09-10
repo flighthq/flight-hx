@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/effects-wgpu, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/effects-wgpu/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/effects-wgpu")
+@:jsRequire("@flighthq/effects-wgpu/contract")
 extern class EffectsWgpu {
   static function applyBitmapDisplacementEffectToWgpu(state:flight.WgpuRenderState, source:flight.WgpuRenderTarget, dest:flight.WgpuRenderTarget, effect:flight.BitmapDisplacementEffect):Void;
   static function applyBlendEffectToWgpu(state:flight.WgpuRenderState, source:flight.WgpuRenderTarget, dest:flight.WgpuRenderTarget, effect:flight.BlendEffect):Void;
@@ -62,7 +62,6 @@ extern class EffectsWgpu {
   static function getWgpuBlendEffectBackdrop(state:flight.WgpuRenderState, backdropKey:Null<String>):Null<flight.WgpuRenderTarget>;
   static function getWgpuBlendEffectModeIndex(mode:String):Float;
   static function getWgpuCompositeEffectOperatorIndex(operator_:String):Float;
-  static function getWgpuEffectLogicalResolution(state:flight.WgpuRenderState, target:flight.WgpuRenderTarget):flight.WgpuEffectLogicalResolution;
   static function getWgpuRenderTargetTexelScale(targetWidth:Float, canvasWidth:Float):Float;
   static function hasWgpuRenderEffectRunner(state:flight.WgpuRenderState, kind:String):Bool;
   static function isWgpuBitmapDisplacementEffectResolvable(state:flight.WgpuRenderState, effect:flight.RenderEffect):Bool;

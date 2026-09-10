@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/storage, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/storage/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/storage")
+@:jsRequire("@flighthq/storage/contract")
 extern class Storage {
   static function attachStorage(host:flight.HasStorageChange, signals:flight.StorageSignals):Bool;
   static function createStorageSignals():flight.StorageSignals;

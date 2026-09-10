@@ -673,18 +673,6 @@ inline function getWgpuCompositeEffectOperatorIndex(operator_:String):Float {
   #end
 }
 
-inline function getWgpuEffectLogicalResolution(state:flight.WgpuRenderState, target:flight.WgpuRenderTarget):flight.WgpuEffectLogicalResolution {
-  #if flight_hx
-  return flight._hx._fn.EffectsWgpu.getWgpuEffectLogicalResolution(state, target);
-  #elseif (js && flight_esm)
-  return flight._js._fn.EffectsWgpu.getWgpuEffectLogicalResolution(state, target);
-  #elseif cpp
-  return flight._cpp._fn.EffectsWgpu.getWgpuEffectLogicalResolution(state, target);
-  #else
-  #error "flight.EffectsWgpu: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function getWgpuRenderTargetTexelScale(targetWidth:Float, canvasWidth:Float):Float {
   #if flight_hx
   return flight._hx._fn.EffectsWgpu.getWgpuRenderTargetTexelScale(targetWidth, canvasWidth);

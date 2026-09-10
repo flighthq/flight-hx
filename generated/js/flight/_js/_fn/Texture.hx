@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/texture, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/texture/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/texture")
+@:jsRequire("@flighthq/texture/contract")
 extern class Texture {
   static function cloneSampler(source:flight.Sampler):flight.Sampler;
   static function copySampler(out:flight.Sampler, source:flight.Sampler):Void;

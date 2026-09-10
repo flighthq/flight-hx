@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/textshaper-canvas, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/textshaper-canvas/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/textshaper-canvas")
+@:jsRequire("@flighthq/textshaper-canvas/contract")
 extern class TextshaperCanvas {
   static function clearCanvasTextShaperBackendCache(backend:flight.CanvasTextShaperBackend):Void;
   static function createCanvasTextShaperBackend():flight.CanvasTextShaperBackend;

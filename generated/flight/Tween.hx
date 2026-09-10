@@ -73,30 +73,6 @@ inline function getTweenProgress(tween:flight.Tween):Float {
   #end
 }
 
-inline function hasTweenProperty(tween:flight.Tween, key:String):Bool {
-  #if flight_hx
-  return flight._hx._fn.Tween.hasTweenProperty(tween, key);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Tween.hasTweenProperty(tween, key);
-  #elseif cpp
-  return flight._cpp._fn.Tween.hasTweenProperty(tween, key);
-  #else
-  #error "flight.Tween: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function initializeTween(tween:flight.Tween):Void {
-  #if flight_hx
-  flight._hx._fn.Tween.initializeTween(tween);
-  #elseif (js && flight_esm)
-  flight._js._fn.Tween.initializeTween(tween);
-  #elseif cpp
-  flight._cpp._fn.Tween.initializeTween(tween);
-  #else
-  #error "flight.Tween: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function invalidateTween(tween:flight.Tween):Void {
   #if flight_hx
   flight._hx._fn.Tween.invalidateTween(tween);

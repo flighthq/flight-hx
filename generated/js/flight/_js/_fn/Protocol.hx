@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/protocol, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/protocol/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/protocol")
+@:jsRequire("@flighthq/protocol/contract")
 extern class Protocol {
   static function attachProtocolHandler(host:flight.HasProtocolOpen, handler:flight.ProtocolHandler):Void;
   static function createProtocolHandler():flight.ProtocolHandler;

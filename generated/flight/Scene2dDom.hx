@@ -13,18 +13,6 @@ inline function areDomTextureResolverGuardsEnabled(state:flight.DomRenderState):
   #end
 }
 
-inline function buildDomScale9Mapper(bounds:flight.Rectangle, scale9Grid:flight.Rectangle, scaleX:Float, scaleY:Float):Null<flight.Scale9Mapper> {
-  #if flight_hx
-  return flight._hx._fn.Scene2dDom.buildDomScale9Mapper(bounds, scale9Grid, scaleX, scaleY);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Scene2dDom.buildDomScale9Mapper(bounds, scale9Grid, scaleX, scaleY);
-  #elseif cpp
-  return flight._cpp._fn.Scene2dDom.buildDomScale9Mapper(bounds, scale9Grid, scaleX, scaleY);
-  #else
-  #error "flight.Scene2dDom: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function createDomRenderStateRuntime():flight.DomRenderStateRuntime {
   #if flight_hx
   return flight._hx._fn.Scene2dDom.createDomRenderStateRuntime();
@@ -265,18 +253,6 @@ inline function getDomCssFilter(renderProxy:flight.RenderProxy2D):Null<String> {
   #end
 }
 
-inline function getDomFontAscentCached(font:String):Null<Float> {
-  #if flight_hx
-  return flight._hx._fn.Scene2dDom.getDomFontAscentCached(font);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Scene2dDom.getDomFontAscentCached(font);
-  #elseif cpp
-  return flight._cpp._fn.Scene2dDom.getDomFontAscentCached(font);
-  #else
-  #error "flight.Scene2dDom: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function getDomRenderCacheTarget(state:flight.DomRenderState, cache:flight.RenderCache):Null<flight.CanvasRenderTarget> {
   #if flight_hx
   return flight._hx._fn.Scene2dDom.getDomRenderCacheTarget(state, cache);
@@ -296,18 +272,6 @@ inline function getDomRenderStateRuntime(state:flight.DomRenderState):flight.Dom
   return flight._js._fn.Scene2dDom.getDomRenderStateRuntime(state);
   #elseif cpp
   return flight._cpp._fn.Scene2dDom.getDomRenderStateRuntime(state);
-  #else
-  #error "flight.Scene2dDom: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function hasDomStructureChanged(runtime:flight.DomRenderStateRuntime, newLength:Float, needsReconcile:Bool):Bool {
-  #if flight_hx
-  return flight._hx._fn.Scene2dDom.hasDomStructureChanged(runtime, newLength, needsReconcile);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Scene2dDom.hasDomStructureChanged(runtime, newLength, needsReconcile);
-  #elseif cpp
-  return flight._cpp._fn.Scene2dDom.hasDomStructureChanged(runtime, newLength, needsReconcile);
   #else
   #error "flight.Scene2dDom: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -380,30 +344,6 @@ inline function setDomClipHooks(state:flight.DomRenderState):Void {
   flight._js._fn.Scene2dDom.setDomClipHooks(state);
   #elseif cpp
   flight._cpp._fn.Scene2dDom.setDomClipHooks(state);
-  #else
-  #error "flight.Scene2dDom: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function setDomFontAscentCached(font:String, ascent:Float):Void {
-  #if flight_hx
-  flight._hx._fn.Scene2dDom.setDomFontAscentCached(font, ascent);
-  #elseif (js && flight_esm)
-  flight._js._fn.Scene2dDom.setDomFontAscentCached(font, ascent);
-  #elseif cpp
-  flight._cpp._fn.Scene2dDom.setDomFontAscentCached(font, ascent);
-  #else
-  #error "flight.Scene2dDom: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function swapDomOrderLists(runtime:flight.DomRenderStateRuntime, newLength:Float):Void {
-  #if flight_hx
-  flight._hx._fn.Scene2dDom.swapDomOrderLists(runtime, newLength);
-  #elseif (js && flight_esm)
-  flight._js._fn.Scene2dDom.swapDomOrderLists(runtime, newLength);
-  #elseif cpp
-  flight._cpp._fn.Scene2dDom.swapDomOrderLists(runtime, newLength);
   #else
   #error "flight.Scene2dDom: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end

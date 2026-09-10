@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/image-codec, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/image-codec/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/image-codec")
+@:jsRequire("@flighthq/image-codec/contract")
 extern class ImageCodec {
   static function clearImageBitmapComposers():Void;
   static function clearImageDecoders():Void;

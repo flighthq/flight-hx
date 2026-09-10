@@ -2,12 +2,11 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/scene3d-formats, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/scene3d-formats/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/scene3d-formats")
+@:jsRequire("@flighthq/scene3d-formats/contract")
 extern class Scene3dFormats {
   static function attachGltfPbrExtension(document:flight.Scene3DDocument, index:Float, extension:flight.PbrExtension):Bool;
-  static function convertTransformLhToRh(transform:js.lib.Float64Array):Void;
   static function createScene3DFrom3ds(bytes:js.lib.Uint8Array, ?diagnostics:Array<flight.ImportDiagnostic>):flight.Scene3D;
   static function createScene3DFromAwd2(bytes:js.lib.Uint8Array, ?diagnostics:Array<flight.ImportDiagnostic>):flight.Scene3D;
   static function createScene3DFromGlb(bytes:js.lib.Uint8Array, ?diagnostics:Array<flight.ImportDiagnostic>, ?options:flight.GltfImportOptions):flight.Scene3D;
@@ -21,8 +20,6 @@ extern class Scene3dFormats {
   static function findGltfPbrExtension(document:flight.Scene3DDocument, index:Float, kind:String):Null<flight.PbrExtension>;
   static function hasGltfDracoDecoder():Bool;
   static function importMd5Mesh(meshSource:String, ?animSource:Null<String>, ?diagnostics:Array<flight.ImportDiagnostic>):flight.Scene3D;
-  static function negateVec3Z(values:Array<Float>):Void;
-  static function packSkinInfluences(influences:Array<flight.SkinInfluence>, outJoints:Array<Float>, outWeights:Array<Float>):Void;
   static function parse3ds(bytes:js.lib.Uint8Array, ?diagnostics:Array<flight.ImportDiagnostic>):flight.Scene3DDocument;
   static function parseAwd2(bytes:js.lib.Uint8Array, ?diagnostics:Array<flight.ImportDiagnostic>):flight.Scene3DDocument;
   static function parseCollada(xml:String, ?options:flight.ColladaImportOptions):flight.ColladaParseResult;
@@ -30,8 +27,6 @@ extern class Scene3dFormats {
   static function parseMd2(bytes:js.lib.Uint8Array, ?diagnostics:Array<flight.ImportDiagnostic>):flight.Scene3DDocument;
   static function parseObj(source:String, ?materials:flight.ObjMaterialLibrary, ?diagnostics:Array<flight.ImportDiagnostic>):flight.Scene3DDocument;
   static function parseObjMaterialLibrary(source:String, ?diagnostics:Array<flight.ImportDiagnostic>):flight.ObjMaterialLibrary;
-  static function reverseTriangleWinding(indices:Array<Float>):Void;
-  static function reverseVertexTriangleWinding(vertices:js.lib.Float32Array, floatsPerVertex:Float):Void;
   static function unregisterGltfDracoDecoder():Void;
 }
 #end

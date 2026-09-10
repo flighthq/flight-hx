@@ -13,18 +13,6 @@ inline function acquireCanvasRenderTarget(pool:flight.CanvasRenderTargetPool, wi
   #end
 }
 
-inline function acquireTestCanvasRenderSurface(?width:Float, ?height:Float):flight.CanvasRenderSurface {
-  #if flight_hx
-  return flight._hx._fn.EffectsCanvas.acquireTestCanvasRenderSurface(width, height);
-  #elseif (js && flight_esm)
-  return flight._js._fn.EffectsCanvas.acquireTestCanvasRenderSurface(width, height);
-  #elseif cpp
-  return flight._cpp._fn.EffectsCanvas.acquireTestCanvasRenderSurface(width, height);
-  #else
-  #error "flight.EffectsCanvas: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function applyBlendEffectToCanvas(state:flight.CanvasRenderState, source:flight.CanvasRenderTarget, dest:flight.CanvasRenderTarget, effect:flight.BlendEffect):Void {
   #if flight_hx
   flight._hx._fn.EffectsCanvas.applyBlendEffectToCanvas(state, source, dest, effect);
@@ -205,30 +193,6 @@ inline function beginCanvasRenderEffectPipeline(state:flight.CanvasRenderState, 
   #end
 }
 
-inline function clearCanvasTarget(dest:flight.CanvasRenderTarget):Void {
-  #if flight_hx
-  flight._hx._fn.EffectsCanvas.clearCanvasTarget(dest);
-  #elseif (js && flight_esm)
-  flight._js._fn.EffectsCanvas.clearCanvasTarget(dest);
-  #elseif cpp
-  flight._cpp._fn.EffectsCanvas.clearCanvasTarget(dest);
-  #else
-  #error "flight.EffectsCanvas: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function compositeCanvasSourceMode(dest:flight.CanvasRenderTarget, source:flight.CanvasRenderTarget, sourceMode:String):Void {
-  #if flight_hx
-  flight._hx._fn.EffectsCanvas.compositeCanvasSourceMode(dest, source, sourceMode);
-  #elseif (js && flight_esm)
-  flight._js._fn.EffectsCanvas.compositeCanvasSourceMode(dest, source, sourceMode);
-  #elseif cpp
-  flight._cpp._fn.EffectsCanvas.compositeCanvasSourceMode(dest, source, sourceMode);
-  #else
-  #error "flight.EffectsCanvas: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function computeDropShadowEffectCss(effect:flight.DropShadowEffect):Null<String> {
   #if flight_hx
   return flight._hx._fn.EffectsCanvas.computeDropShadowEffectCss(effect);
@@ -265,18 +229,6 @@ inline function createCanvasRenderEffectPipeline(state:flight.CanvasRenderState,
   #end
 }
 
-inline function createCanvasRenderTarget(width:Float, height:Float):flight.CanvasRenderTarget {
-  #if flight_hx
-  return flight._hx._fn.EffectsCanvas.createCanvasRenderTarget(width, height);
-  #elseif (js && flight_esm)
-  return flight._js._fn.EffectsCanvas.createCanvasRenderTarget(width, height);
-  #elseif cpp
-  return flight._cpp._fn.EffectsCanvas.createCanvasRenderTarget(width, height);
-  #else
-  #error "flight.EffectsCanvas: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function createCanvasRenderTargetPool(creator:flight.CanvasRenderSurfaceCreator):flight.CanvasRenderTargetPool {
   #if flight_hx
   return flight._hx._fn.EffectsCanvas.createCanvasRenderTargetPool(creator);
@@ -296,30 +248,6 @@ inline function destroyCanvasRenderEffectPipeline(_state:flight.CanvasRenderStat
   flight._js._fn.EffectsCanvas.destroyCanvasRenderEffectPipeline(_state, pipeline);
   #elseif cpp
   flight._cpp._fn.EffectsCanvas.destroyCanvasRenderEffectPipeline(_state, pipeline);
-  #else
-  #error "flight.EffectsCanvas: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function drawCanvasInvertedTintedAlphaMask(dest:flight.CanvasRenderTarget, source:flight.CanvasRenderTarget, color:Float, alpha:Float, strength:Float, ?offsetX:Float, ?offsetY:Float):Void {
-  #if flight_hx
-  flight._hx._fn.EffectsCanvas.drawCanvasInvertedTintedAlphaMask(dest, source, color, alpha, strength, offsetX, offsetY);
-  #elseif (js && flight_esm)
-  flight._js._fn.EffectsCanvas.drawCanvasInvertedTintedAlphaMask(dest, source, color, alpha, strength, offsetX, offsetY);
-  #elseif cpp
-  flight._cpp._fn.EffectsCanvas.drawCanvasInvertedTintedAlphaMask(dest, source, color, alpha, strength, offsetX, offsetY);
-  #else
-  #error "flight.EffectsCanvas: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function drawCanvasTintedAlphaMask(dest:flight.CanvasRenderTarget, source:flight.CanvasRenderTarget, color:Float, alpha:Float, strength:Float):Void {
-  #if flight_hx
-  flight._hx._fn.EffectsCanvas.drawCanvasTintedAlphaMask(dest, source, color, alpha, strength);
-  #elseif (js && flight_esm)
-  flight._js._fn.EffectsCanvas.drawCanvasTintedAlphaMask(dest, source, color, alpha, strength);
-  #elseif cpp
-  flight._cpp._fn.EffectsCanvas.drawCanvasTintedAlphaMask(dest, source, color, alpha, strength);
   #else
   #error "flight.EffectsCanvas: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end

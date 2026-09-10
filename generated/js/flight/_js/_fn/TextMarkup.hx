@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/text-markup, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/text-markup/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/text-markup")
+@:jsRequire("@flighthq/text-markup/contract")
 extern class TextMarkup {
   static function createMarkupTagRegistry():flight.MarkupTagRegistry;
   static function disableTextMarkupGuards():Void;

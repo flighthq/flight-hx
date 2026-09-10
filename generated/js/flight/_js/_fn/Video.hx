@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/video, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/video/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/video")
+@:jsRequire("@flighthq/video/contract")
 extern class Video {
   static function canPlayVideoType(backend:flight.VideoCapabilityBackend, mimeType:String):Bool;
   static function destroyVideoResource(resource:flight.VideoResource):Void;

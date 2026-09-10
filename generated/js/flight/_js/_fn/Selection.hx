@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/selection, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/selection/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/selection")
+@:jsRequire("@flighthq/selection/contract")
 extern class Selection {
   static function addLassoSelectionPoint(selection:flight.LassoSelection, x:Float, y:Float):Void;
   static function beginLassoSelection(selection:flight.LassoSelection, startX:Float, startY:Float):Void;

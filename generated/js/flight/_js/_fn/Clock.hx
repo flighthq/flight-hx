@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/clock, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/clock/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/clock")
+@:jsRequire("@flighthq/clock/contract")
 extern class Clock {
   static function addClockChild(parent:flight.Clock, child:flight.Clock):Void;
   static function advanceClock(clock:flight.Clock, deltaSeconds:Float):Void;

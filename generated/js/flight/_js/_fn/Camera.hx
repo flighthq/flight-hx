@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/camera, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/camera/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/camera")
+@:jsRequire("@flighthq/camera/contract")
 extern class Camera {
   static function applyObliqueNearClipPlane(projection:flight.Matrix4, viewSpacePlane:flight.Plane):Void;
   static function areCameraGuardsEnabled():Bool;

@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/physics2d, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/physics2d/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/physics2d")
+@:jsRequire("@flighthq/physics2d/contract")
 extern class Physics2d {
   static function addPhysics2DBody(world:flight.Physics2DWorld, body:flight.RigidBody2D):flight.RigidBody2D;
   static function addPhysics2DCollider(world:flight.Physics2DWorld, body:flight.RigidBody2D, collider:flight.Physics2DCollider):flight.Physics2DCollider;
@@ -16,11 +16,7 @@ extern class Physics2d {
   static function applyPhysics2DLinearImpulseAtPoint(body:flight.RigidBody2D, impulseX:Float, impulseY:Float, pointX:Float, pointY:Float):Bool;
   static function applyPhysics2DTorque(body:flight.RigidBody2D, torque:Float):Bool;
   static function arePhysics2DGuardsEnabled():Bool;
-  static function assertPhysics2DBodyNotStepping(body:flight.RigidBody2D):Void;
-  static function assertPhysics2DWorldNotStepping(world:flight.Physics2DWorld):Void;
-  static function buildPhysics2DSolveIslands(world:flight.Physics2DWorld):Void;
   static function computePhysics2DColliderMassData(collider:flight.Physics2DCollider, out:flight.Physics2DMassData):Void;
-  static function createPhysics2DDebugGeometry():flight.Physics2DDebugGeometry;
   static function createPhysics2DDistanceJoint(options:flight.Physics2DDistanceJointOptions):flight.Physics2DDistanceJoint;
   static function createPhysics2DGearJoint(options:flight.Physics2DGearJointOptions):flight.Physics2DGearJoint;
   static function createPhysics2DJointReaction():flight.Physics2DJointReaction;
@@ -50,7 +46,6 @@ extern class Physics2d {
   static function isPhysics2DContactValid(contact:flight.Physics2DContact):Bool;
   static function isPhysics2DGravityValid(world:flight.Physics2DWorld):Bool;
   static function isPhysics2DJointStateValid(world:flight.Physics2DWorld):Bool;
-  static function isPhysics2DPairJointSuppressed(world:flight.Physics2DWorld, bodyA:Float, bodyB:Float):Bool;
   static function isPhysics2DPairOrdered(a:flight.RigidBody2D, b:flight.RigidBody2D):Bool;
   static function isPhysics2DPreviousTimestepValid(world:flight.Physics2DWorld):Bool;
   static function isPhysics2DSolverConfigValid(config:flight.Physics2DSolverConfig):Bool;
@@ -60,7 +55,6 @@ extern class Physics2d {
   static function mixPhysics2DRestitution(first:Float, second:Float):Float;
   static function queryPhysics2DPoint(world:flight.Physics2DWorld, x:Float, y:Float, out:flight.Physics2DQueryResult, ?filter:flight.Physics2DQueryFilter):Void;
   static function queryPhysics2DRegion(world:flight.Physics2DWorld, region:flight.SpatialAabb2D, out:flight.Physics2DQueryResult, ?filter:flight.Physics2DQueryFilter):Void;
-  static function rebuildPhysics2DJointCollisionSuppressions(world:flight.Physics2DWorld):Void;
   static function registerBuiltInPhysics2DJointSolvers(world:flight.Physics2DWorld):Void;
   static function registerPhysics2DJointSolver(world:flight.Physics2DWorld, kind:String, solver:flight.Physics2DJointSolver):Void;
   static function relativeNormalVelocity(bodyA:flight.RigidBody2D, bodyB:flight.RigidBody2D, point:flight.Physics2DContactPoint, normalX:Float, normalY:Float):Float;
@@ -71,21 +65,15 @@ extern class Physics2d {
   static function setPhysics2DBodyFixedRotation(world:flight.Physics2DWorld, body:flight.RigidBody2D, fixedRotation:Bool):Bool;
   static function setPhysics2DBodySleepEnabled(world:flight.Physics2DWorld, body:flight.RigidBody2D, sleepEnabled:Bool):Bool;
   static function setPhysics2DBodyTransform(world:flight.Physics2DWorld, body:flight.RigidBody2D, x:Float, y:Float, angle:Float):Bool;
-  static function solvePhysics2DContactIndicesOnce(world:flight.Physics2DWorld, indices:Array<Float>, start:Float, count:Float):Void;
   static function solvePhysics2DContacts(world:flight.Physics2DWorld):Void;
   static function solvePhysics2DContactsOnce(world:flight.Physics2DWorld):Void;
   static function stepPhysics2D(world:flight.Physics2DWorld, dt:Float):Void;
-  static function synchronizePhysics2DBroadphase(world:flight.Physics2DWorld):Void;
-  static function synchronizePhysics2DSweptBroadphase(world:flight.Physics2DWorld, dt:Float):Void;
   static function updatePhysics2DColliderWorldShape(collider:flight.Physics2DCollider, body:flight.RigidBody2D):Void;
   static function updatePhysics2DSleep(world:flight.Physics2DWorld, dt:Float):Void;
   static function updateRigidBody2DMassData(body:flight.RigidBody2D):Void;
   static function wakePhysics2DBody(body:flight.RigidBody2D):Void;
-  static function warmStartPhysics2DContactIndices(world:flight.Physics2DWorld, indices:Array<Float>, start:Float, count:Float):Void;
   static function warmStartPhysics2DContacts(world:flight.Physics2DWorld):Void;
   static function writePhysics2DColliderBounds(collider:flight.Physics2DCollider, out:{ minX:Float, minY:Float, maxX:Float, maxY:Float }):Void;
-  static function writePhysics2DDebugGeometry(world:flight.Physics2DWorld, out:flight.Physics2DDebugGeometry, ?options:flight.Physics2DDebugGeometryOptions):Void;
   static function writePhysics2DJointReaction(world:flight.Physics2DWorld, joint:flight.Physics2DJoint, dt:Float, out:flight.Physics2DJointReaction):Bool;
-  static function writePhysics2DSoftRowParameters(mass:Float, frequencyHz:Float, dampingRatio:Float, dt:Float, hardBiasFactor:Float, out:Array<Float>):Void;
 }
 #end

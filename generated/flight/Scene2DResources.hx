@@ -121,18 +121,6 @@ inline function registerSvgScene2DDocumentImporter(registry:flight.Scene2DDocume
   #end
 }
 
-inline function reportScene2DResourceFailure(notice:flight.Scene2DResourceFailureNotice):Void {
-  #if flight_hx
-  flight._hx._fn.Scene2DResources.reportScene2DResourceFailure(notice);
-  #elseif (js && flight_esm)
-  flight._js._fn.Scene2DResources.reportScene2DResourceFailure(notice);
-  #elseif cpp
-  flight._cpp._fn.Scene2DResources.reportScene2DResourceFailure(notice);
-  #else
-  #error "flight.Scene2DResources: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function resolveScene2DResources(document:flight.Scene2DDocument, ?options:flight.ResolveScene2DResourcesOptions):flight.Scene2DResources {
   #if flight_hx
   return flight._hx._fn.Scene2DResources.resolveScene2DResources(document, options);

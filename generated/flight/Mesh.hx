@@ -661,30 +661,6 @@ inline function getVertexAttributeFloatOffset(layout:flight.VertexAttributeLayou
   #end
 }
 
-inline function getVertexFormatByteLength(format:String):Float {
-  #if flight_hx
-  return flight._hx._fn.Mesh.getVertexFormatByteLength(format);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Mesh.getVertexFormatByteLength(format);
-  #elseif cpp
-  return flight._cpp._fn.Mesh.getVertexFormatByteLength(format);
-  #else
-  #error "flight.Mesh: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function getVertexFormatComponentCount(format:String):Float {
-  #if flight_hx
-  return flight._hx._fn.Mesh.getVertexFormatComponentCount(format);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Mesh.getVertexFormatComponentCount(format);
-  #elseif cpp
-  return flight._cpp._fn.Mesh.getVertexFormatComponentCount(format);
-  #else
-  #error "flight.Mesh: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function hasMeshGeometrySkin(geometry:flight.MeshGeometry):Bool {
   #if flight_hx
   return flight._hx._fn.Mesh.hasMeshGeometrySkin(geometry);

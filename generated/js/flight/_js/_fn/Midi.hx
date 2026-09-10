@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/midi, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/midi/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/midi")
+@:jsRequire("@flighthq/midi/contract")
 extern class Midi {
   static function createMidiAccessResource(operations:flight.MidiAccessResourceOperations):flight.MidiAccess;
   static function createMidiAccessStateSubscription():flight.MidiAccessStateSubscription;
@@ -12,10 +12,6 @@ extern class Midi {
   static function createMidiInputPortResource(metadata:flight.MidiPortMetadata, operations:flight.MidiInputPortResourceOperations):flight.MidiInputPort;
   static function createMidiOutputPortResource(metadata:flight.MidiPortMetadata, operations:flight.MidiOutputPortResourceOperations):flight.MidiOutputPort;
   static function createMidiPortStateSubscription():flight.MidiPortStateSubscription;
-  static function getMidiAccessResourceState(access:flight.MidiAccess):Null<flight.MidiAccessResourceState>;
-  static function retainMidiAccessResourceState(access:flight.MidiAccess, operations:flight.MidiAccessResourceOperations):Void;
-  static function retainMidiInputPortResourceState(port:flight.MidiInputPort, operations:flight.MidiInputPortResourceOperations):Void;
-  static function retainMidiOutputPortResourceState(port:flight.MidiOutputPort, operations:flight.MidiOutputPortResourceOperations):Void;
   static function sendMidiMessage(port:flight.MidiOutputPort, data:js.lib.Uint8Array, ?timestamp:Float):{ reason:String };
 }
 #end

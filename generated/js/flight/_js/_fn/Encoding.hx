@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/encoding, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/encoding/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/encoding")
+@:jsRequire("@flighthq/encoding/contract")
 extern class Encoding {
   static function decodeUTF8(bytes:js.lib.Uint8Array, ?offset:Float, ?length:Float):String;
   static function encodeUTF8(text:String):js.lib.Uint8Array;

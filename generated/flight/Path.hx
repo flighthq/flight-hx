@@ -181,30 +181,6 @@ inline function appendPathRectangle(path:flight.Path, x:Float, y:Float, width:Fl
   #end
 }
 
-inline function buildPathMorph(start:flight.Path, end:flight.Path):flight.PathMorphBuildResult {
-  #if flight_hx
-  return flight._hx._fn.Path.buildPathMorph(start, end);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Path.buildPathMorph(start, end);
-  #elseif cpp
-  return flight._cpp._fn.Path.buildPathMorph(start, end);
-  #else
-  #error "flight.Path: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function buildStrokePathGeometry(path:flight.Path, style:flight.StrokeStyle, tolerance:Float):flight.StrokePathGeometry {
-  #if flight_hx
-  return flight._hx._fn.Path.buildStrokePathGeometry(path, style, tolerance);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Path.buildStrokePathGeometry(path, style, tolerance);
-  #elseif cpp
-  return flight._cpp._fn.Path.buildStrokePathGeometry(path, style, tolerance);
-  #else
-  #error "flight.Path: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function cleanPath(source:flight.Path, tolerance:Float, out:flight.Path, ?flattenTolerance:Float):Void {
   #if flight_hx
   flight._hx._fn.Path.cleanPath(source, tolerance, out, flattenTolerance);

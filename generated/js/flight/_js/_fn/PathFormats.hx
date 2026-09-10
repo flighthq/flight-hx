@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/path-formats, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/path-formats/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/path-formats")
+@:jsRequire("@flighthq/path-formats/contract")
 extern class PathFormats {
   static function appendSvgPathData(path:flight.Path, d:String):Bool;
   static function explainSvgPathData(d:String):Null<{ position:Float, reason:String }>;

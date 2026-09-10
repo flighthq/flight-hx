@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/effects-gl, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/effects-gl/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/effects-gl")
+@:jsRequire("@flighthq/effects-gl/contract")
 extern class EffectsGl {
   static function applyBevelEffectToGl(state:flight.GlRenderState, source:flight.GlRenderTarget, dest:flight.GlRenderTarget, pool:flight.GlRenderTargetPool, effect:flight.BevelEffect):Void;
   static function applyBitmapDisplacementEffectToGl(state:flight.GlRenderState, source:flight.GlRenderTarget, dest:flight.GlRenderTarget, effect:flight.BitmapDisplacementEffect):Void;

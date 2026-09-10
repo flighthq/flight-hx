@@ -2,12 +2,11 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/effects-canvas, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/effects-canvas/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/effects-canvas")
+@:jsRequire("@flighthq/effects-canvas/contract")
 extern class EffectsCanvas {
   static function acquireCanvasRenderTarget(pool:flight.CanvasRenderTargetPool, width:Float, height:Float):flight.CanvasRenderTarget;
-  static function acquireTestCanvasRenderSurface(?width:Float, ?height:Float):flight.CanvasRenderSurface;
   static function applyBlendEffectToCanvas(state:flight.CanvasRenderState, source:flight.CanvasRenderTarget, dest:flight.CanvasRenderTarget, effect:flight.BlendEffect):Void;
   static function applyBloomEffectToCanvas(source:flight.CanvasRenderTarget, dest:flight.CanvasRenderTarget, pool:flight.CanvasRenderTargetPool, effect:flight.BloomEffect):Void;
   static function applyBlurEffectToCanvas(source:flight.CanvasRenderTarget, dest:flight.CanvasRenderTarget, effect:flight.BlurEffect):Void;
@@ -23,16 +22,11 @@ extern class EffectsCanvas {
   static function applyTiltShiftEffectToCanvas(source:flight.CanvasRenderTarget, dest:flight.CanvasRenderTarget, effect:flight.TiltShiftEffect):Void;
   static function applyVignetteEffectToCanvas(source:flight.CanvasRenderTarget, dest:flight.CanvasRenderTarget, effect:flight.VignetteEffect):Void;
   static function beginCanvasRenderEffectPipeline(state:flight.CanvasRenderState, pipeline:flight.CanvasRenderEffectPipeline):Void;
-  static function clearCanvasTarget(dest:flight.CanvasRenderTarget):Void;
-  static function compositeCanvasSourceMode(dest:flight.CanvasRenderTarget, source:flight.CanvasRenderTarget, sourceMode:String):Void;
   static function computeDropShadowEffectCss(effect:flight.DropShadowEffect):Null<String>;
   static function computeOuterGlowEffectCss(effect:flight.OuterGlowEffect):Null<String>;
   static function createCanvasRenderEffectPipeline(state:flight.CanvasRenderState, ?options:flight.RenderEffectPipelineOptions):flight.CanvasRenderEffectPipeline;
-  static function createCanvasRenderTarget(width:Float, height:Float):flight.CanvasRenderTarget;
   static function createCanvasRenderTargetPool(creator:flight.CanvasRenderSurfaceCreator):flight.CanvasRenderTargetPool;
   static function destroyCanvasRenderEffectPipeline(_state:flight.CanvasRenderState, pipeline:flight.CanvasRenderEffectPipeline):Void;
-  static function drawCanvasInvertedTintedAlphaMask(dest:flight.CanvasRenderTarget, source:flight.CanvasRenderTarget, color:Float, alpha:Float, strength:Float, ?offsetX:Float, ?offsetY:Float):Void;
-  static function drawCanvasTintedAlphaMask(dest:flight.CanvasRenderTarget, source:flight.CanvasRenderTarget, color:Float, alpha:Float, strength:Float):Void;
   static function getCanvasBlendEffectBackdrop(state:flight.CanvasRenderState, backdropKey:Null<String>):Null<flight.CanvasRenderTarget>;
   static function hasCanvasRenderEffectRunner(state:flight.CanvasRenderState, kind:String):Bool;
   static function passthroughCanvasEffectPass(dest:flight.CanvasRenderTarget, source:flight.CanvasRenderTarget):Void;

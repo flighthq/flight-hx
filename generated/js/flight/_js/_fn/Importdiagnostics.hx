@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/importdiagnostics, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/importdiagnostics/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/importdiagnostics")
+@:jsRequire("@flighthq/importdiagnostics/contract")
 extern class Importdiagnostics {
   static function formatImportDiagnostic(diagnostic:flight.ImportDiagnostic):String;
 }

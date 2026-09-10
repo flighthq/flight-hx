@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/path, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/path/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/path")
+@:jsRequire("@flighthq/path/contract")
 extern class Path {
   static function acquirePathMesh(path:flight.Path, ?tolerance:Float):flight.PathMesh;
   static function acquirePathMeshTyped(path:flight.Path, ?tolerance:Float):flight.PathMeshTyped;
@@ -20,8 +20,6 @@ extern class Path {
   static function appendPathPolygon(path:flight.Path, points:Array<Float>):Void;
   static function appendPathPolyline(path:flight.Path, points:Array<Float>):Void;
   static function appendPathRectangle(path:flight.Path, x:Float, y:Float, width:Float, height:Float):Void;
-  static function buildPathMorph(start:flight.Path, end:flight.Path):flight.PathMorphBuildResult;
-  static function buildStrokePathGeometry(path:flight.Path, style:flight.StrokeStyle, tolerance:Float):flight.StrokePathGeometry;
   static function cleanPath(source:flight.Path, tolerance:Float, out:flight.Path, ?flattenTolerance:Float):Void;
   static function clonePath(source:flight.Path):flight.Path;
   static function containsPathPoint(path:flight.Path, px:Float, py:Float, ?tolerance:Float):Bool;

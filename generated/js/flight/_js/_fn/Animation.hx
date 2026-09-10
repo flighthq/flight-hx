@@ -2,17 +2,15 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/animation, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/animation/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/animation")
+@:jsRequire("@flighthq/animation/contract")
 extern class Animation {
   static function advanceAnimationBlendTree(tree:flight.AnimationBlendTree, dt:Float):Void;
   static function advanceAnimationCrossfade(state:flight.AnimationCrossfade, dt:Float):Void;
   static function advanceAnimationLayerStack(stack:flight.AnimationLayerStack, dt:Float):Void;
   static function advanceAnimationPlayer(player:flight.AnimationPlayer, dt:Float):Void;
-  static function advanceAnimationPlayers(players:Array<flight.AnimationPlayer>, dt:Float, advanced:Array<flight.AnimationPlayer>):Void;
   static function advanceAnimationStateMachine(machine:flight.AnimationStateMachine, dt:Float):Void;
-  static function advanceAnimationStateMachineWithScratch(machine:flight.AnimationStateMachine, dt:Float, advanced:Array<flight.AnimationPlayer>):Void;
   static function cloneAnimationClip(clip:flight.AnimationClip):flight.AnimationClip;
   static function cloneAnimationPlayer(player:flight.AnimationPlayer):flight.AnimationPlayer;
   static function cloneAnimationTrack(track:flight.AnimationTrack):flight.AnimationTrack;

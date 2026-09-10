@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/bitmaptext, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/bitmaptext/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/bitmaptext")
+@:jsRequire("@flighthq/bitmaptext/contract")
 extern class BitmapText {
   static function computeBitmapTextLocalBoundsRectangle(out:flight.Rectangle, source:flight.BitmapText):Void;
   static function createBitmapText(glyphSource:Null<flight.GlyphSource>, ?options:flight.BitmapTextOptions):flight.BitmapText;

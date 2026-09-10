@@ -169,6 +169,11 @@ Keep it promotable:
   silently diverges per target.
 - **Web-DCE gate** — build a sample, bundle it, assert imports are static `import { … }` and an
   unused Flight function is absent from the bundle. Defines "the ESM generator works precisely."
+- **Binding-existence gate** — the validation type-checking cannot do: a Haxe extern is an unchecked
+  promise, so load the *real* Flight ESM for every generated function module and assert each bound
+  `@:jsRequire` static resolves to an exported function. Covers the whole surface (~3900 functions),
+  not the few an example calls. Types aren't checked (TS interfaces are erased from ESM); their
+  fidelity rests on the shared inventory + the surface type-check.
 
 ## Examples: for the layer, not for Flight
 
@@ -205,9 +210,13 @@ emits the checked-in `generated/` bindings for the **whole Flight SDK** — ever
 the `sdk` aggregate depends on (**154 packages**). One lowering pass builds a value-type registry and
 stashes each package's exported functions; the result is **1629 public modules** (146 free-function
 modules + 1519 value-type typedefs; ~36 carry both, since a package and a type often share a concept
-name like `shape`/`Shape` — folded into one module, case-insensitively). **4032 of 6376 functions
-bound (~63%)**; the rest are skipped and reported (top reasons: `EntityConstruction` allocation-marker,
-callback/function types, `Promise`, intersections, `Omit`/`Pick`, tuples). The type mapper handles
+name like `shape`/`Shape` — folded into one module, case-insensitively). Functions bind via each
+package's **`./contract`** lane (its full inter-package surface; `.`/index re-exports only a curated
+subset), and are filtered to the package's *real* exported functions — a source-level `export` that
+neither lane re-exports is package-internal and dropped. **3870 functions bound (~62%)**, and **every
+one is validated to resolve to a real Flight export** (`gate:bindings`); the rest are skipped and
+reported (top reasons: `EntityConstruction` allocation-marker, callback/function types, `Promise`,
+intersections, `Omit`/`Pick`, tuples). The type mapper handles
 `Readonly`/`EntityWithoutRuntime` unwrap, `*Like` aliases, typed arrays → `js.lib.*`, `X|null` →
 `Null<X>`, string-literal unions → `String`, inline object types → anonymous structures; a value-type
 field beyond the mapper degrades to `Dynamic` (keeps the binding compiling) rather than dropping the

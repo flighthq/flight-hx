@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/shape, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/shape/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/shape")
+@:jsRequire("@flighthq/shape/contract")
 extern class Shape {
   static function appendMorphShapeBeginFill(shape:flight.MorphShape, start:flight.MorphShapeColorEndpoint, end:flight.MorphShapeColorEndpoint):Void;
   static function appendMorphShapeBeginGradientFill(shape:flight.MorphShape, gradientType:String, start:flight.MorphShapeGradientEndpoint, end:flight.MorphShapeGradientEndpoint, ?spreadMethod:String, ?interpolationMethod:String):Bool;
@@ -35,7 +35,6 @@ extern class Shape {
   static function areShapeBoundsGuardsEnabled():Bool;
   static function clearShapeBoundsCommands():Void;
   static function clearShapeCommands(shape:flight.Shape):Void;
-  static function compactStrokePath(path:flight.Path, style:flight.StrokeStyle, ?tolerance:Float):flight.Path;
   static function copyShapeCommands(out:flight.Shape, source:flight.Shape):Void;
   static function createMorphShapeAnimationTarget(shape:flight.MorphShape):flight.MorphShapeAnimationTarget;
   static function createMorphShapeData(morph:flight.PathMorph, ?data:flight.MorphShapeData):flight.MorphShapeData;
@@ -48,7 +47,6 @@ extern class Shape {
   static function enableShapeBoundsGuards():Void;
   static function explainMorphShapeGradientEndpoints(start:flight.MorphShapeGradientEndpoint, end:flight.MorphShapeGradientEndpoint):flight.MorphShapeGradientEndpointExplanation;
   static function explainShapeBounds(source:flight.Shape, ?mode:String):flight.ShapeBoundsExplanation;
-  static function getMorphShapeGradientEndpointIssue(start:flight.MorphShapeGradientEndpoint, end:flight.MorphShapeGradientEndpoint):Float;
   static function getMorphShapeRuntime(source:flight.MorphShape):flight.MorphShapeRuntime;
   static function getPathCommandOperandCount(verb:Float):Float;
   static function getScale9ShapeRuntime(source:flight.Scale9Shape):flight.Scale9ShapeRuntime;
@@ -62,7 +60,6 @@ extern class Shape {
   static function normalizeShapeStrokeWidth(width:Float):Float;
   static function registerDefaultShapeBoundsCommands():Void;
   static function registerShapeBoundsCommand(command:flight.ShapeBoundsCommand):Void;
-  static function sampleMorphShapePaintBindings(data:flight.MorphShapeData, progress:Float):Void;
   static function setMorphShapeProgress(shape:flight.MorphShape, progress:Float):Void;
   static function unregisterShapeBoundsCommand(key:String):Void;
 }

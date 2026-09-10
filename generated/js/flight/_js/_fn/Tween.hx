@@ -2,17 +2,15 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/tween, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/tween/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/tween")
+@:jsRequire("@flighthq/tween/contract")
 extern class Tween {
   static function completeTween(tween:flight.Tween):Void;
   static function createTweenManager(?options:flight.TweenManagerOptions):flight.TweenManager;
   static function createTweenTimer(manager:flight.TweenManager, duration:Float, ?options:flight.TweenOptions):flight.Tween;
   static function getActiveTweenCount(manager:flight.TweenManager):Float;
   static function getTweenProgress(tween:flight.Tween):Float;
-  static function hasTweenProperty(tween:flight.Tween, key:String):Bool;
-  static function initializeTween(tween:flight.Tween):Void;
   static function invalidateTween(tween:flight.Tween):Void;
   static function killTweensOfProperty(manager:flight.TweenManager, key:String):Void;
   static function pauseAllTweens(manager:flight.TweenManager):Void;

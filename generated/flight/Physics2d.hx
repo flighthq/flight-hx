@@ -121,42 +121,6 @@ inline function arePhysics2DGuardsEnabled():Bool {
   #end
 }
 
-inline function assertPhysics2DBodyNotStepping(body:flight.RigidBody2D):Void {
-  #if flight_hx
-  flight._hx._fn.Physics2d.assertPhysics2DBodyNotStepping(body);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics2d.assertPhysics2DBodyNotStepping(body);
-  #elseif cpp
-  flight._cpp._fn.Physics2d.assertPhysics2DBodyNotStepping(body);
-  #else
-  #error "flight.Physics2d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function assertPhysics2DWorldNotStepping(world:flight.Physics2DWorld):Void {
-  #if flight_hx
-  flight._hx._fn.Physics2d.assertPhysics2DWorldNotStepping(world);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics2d.assertPhysics2DWorldNotStepping(world);
-  #elseif cpp
-  flight._cpp._fn.Physics2d.assertPhysics2DWorldNotStepping(world);
-  #else
-  #error "flight.Physics2d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function buildPhysics2DSolveIslands(world:flight.Physics2DWorld):Void {
-  #if flight_hx
-  flight._hx._fn.Physics2d.buildPhysics2DSolveIslands(world);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics2d.buildPhysics2DSolveIslands(world);
-  #elseif cpp
-  flight._cpp._fn.Physics2d.buildPhysics2DSolveIslands(world);
-  #else
-  #error "flight.Physics2d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function computePhysics2DColliderMassData(collider:flight.Physics2DCollider, out:flight.Physics2DMassData):Void {
   #if flight_hx
   flight._hx._fn.Physics2d.computePhysics2DColliderMassData(collider, out);
@@ -164,18 +128,6 @@ inline function computePhysics2DColliderMassData(collider:flight.Physics2DCollid
   flight._js._fn.Physics2d.computePhysics2DColliderMassData(collider, out);
   #elseif cpp
   flight._cpp._fn.Physics2d.computePhysics2DColliderMassData(collider, out);
-  #else
-  #error "flight.Physics2d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function createPhysics2DDebugGeometry():flight.Physics2DDebugGeometry {
-  #if flight_hx
-  return flight._hx._fn.Physics2d.createPhysics2DDebugGeometry();
-  #elseif (js && flight_esm)
-  return flight._js._fn.Physics2d.createPhysics2DDebugGeometry();
-  #elseif cpp
-  return flight._cpp._fn.Physics2d.createPhysics2DDebugGeometry();
   #else
   #error "flight.Physics2d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -529,18 +481,6 @@ inline function isPhysics2DJointStateValid(world:flight.Physics2DWorld):Bool {
   #end
 }
 
-inline function isPhysics2DPairJointSuppressed(world:flight.Physics2DWorld, bodyA:Float, bodyB:Float):Bool {
-  #if flight_hx
-  return flight._hx._fn.Physics2d.isPhysics2DPairJointSuppressed(world, bodyA, bodyB);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Physics2d.isPhysics2DPairJointSuppressed(world, bodyA, bodyB);
-  #elseif cpp
-  return flight._cpp._fn.Physics2d.isPhysics2DPairJointSuppressed(world, bodyA, bodyB);
-  #else
-  #error "flight.Physics2d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function isPhysics2DPairOrdered(a:flight.RigidBody2D, b:flight.RigidBody2D):Bool {
   #if flight_hx
   return flight._hx._fn.Physics2d.isPhysics2DPairOrdered(a, b);
@@ -644,18 +584,6 @@ inline function queryPhysics2DRegion(world:flight.Physics2DWorld, region:flight.
   flight._js._fn.Physics2d.queryPhysics2DRegion(world, region, out, filter);
   #elseif cpp
   flight._cpp._fn.Physics2d.queryPhysics2DRegion(world, region, out, filter);
-  #else
-  #error "flight.Physics2d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function rebuildPhysics2DJointCollisionSuppressions(world:flight.Physics2DWorld):Void {
-  #if flight_hx
-  flight._hx._fn.Physics2d.rebuildPhysics2DJointCollisionSuppressions(world);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics2d.rebuildPhysics2DJointCollisionSuppressions(world);
-  #elseif cpp
-  flight._cpp._fn.Physics2d.rebuildPhysics2DJointCollisionSuppressions(world);
   #else
   #error "flight.Physics2d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -781,18 +709,6 @@ inline function setPhysics2DBodyTransform(world:flight.Physics2DWorld, body:flig
   #end
 }
 
-inline function solvePhysics2DContactIndicesOnce(world:flight.Physics2DWorld, indices:Array<Float>, start:Float, count:Float):Void {
-  #if flight_hx
-  flight._hx._fn.Physics2d.solvePhysics2DContactIndicesOnce(world, indices, start, count);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics2d.solvePhysics2DContactIndicesOnce(world, indices, start, count);
-  #elseif cpp
-  flight._cpp._fn.Physics2d.solvePhysics2DContactIndicesOnce(world, indices, start, count);
-  #else
-  #error "flight.Physics2d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function solvePhysics2DContacts(world:flight.Physics2DWorld):Void {
   #if flight_hx
   flight._hx._fn.Physics2d.solvePhysics2DContacts(world);
@@ -824,30 +740,6 @@ inline function stepPhysics2D(world:flight.Physics2DWorld, dt:Float):Void {
   flight._js._fn.Physics2d.stepPhysics2D(world, dt);
   #elseif cpp
   flight._cpp._fn.Physics2d.stepPhysics2D(world, dt);
-  #else
-  #error "flight.Physics2d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function synchronizePhysics2DBroadphase(world:flight.Physics2DWorld):Void {
-  #if flight_hx
-  flight._hx._fn.Physics2d.synchronizePhysics2DBroadphase(world);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics2d.synchronizePhysics2DBroadphase(world);
-  #elseif cpp
-  flight._cpp._fn.Physics2d.synchronizePhysics2DBroadphase(world);
-  #else
-  #error "flight.Physics2d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function synchronizePhysics2DSweptBroadphase(world:flight.Physics2DWorld, dt:Float):Void {
-  #if flight_hx
-  flight._hx._fn.Physics2d.synchronizePhysics2DSweptBroadphase(world, dt);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics2d.synchronizePhysics2DSweptBroadphase(world, dt);
-  #elseif cpp
-  flight._cpp._fn.Physics2d.synchronizePhysics2DSweptBroadphase(world, dt);
   #else
   #error "flight.Physics2d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -901,18 +793,6 @@ inline function wakePhysics2DBody(body:flight.RigidBody2D):Void {
   #end
 }
 
-inline function warmStartPhysics2DContactIndices(world:flight.Physics2DWorld, indices:Array<Float>, start:Float, count:Float):Void {
-  #if flight_hx
-  flight._hx._fn.Physics2d.warmStartPhysics2DContactIndices(world, indices, start, count);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics2d.warmStartPhysics2DContactIndices(world, indices, start, count);
-  #elseif cpp
-  flight._cpp._fn.Physics2d.warmStartPhysics2DContactIndices(world, indices, start, count);
-  #else
-  #error "flight.Physics2d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function warmStartPhysics2DContacts(world:flight.Physics2DWorld):Void {
   #if flight_hx
   flight._hx._fn.Physics2d.warmStartPhysics2DContacts(world);
@@ -937,18 +817,6 @@ inline function writePhysics2DColliderBounds(collider:flight.Physics2DCollider, 
   #end
 }
 
-inline function writePhysics2DDebugGeometry(world:flight.Physics2DWorld, out:flight.Physics2DDebugGeometry, ?options:flight.Physics2DDebugGeometryOptions):Void {
-  #if flight_hx
-  flight._hx._fn.Physics2d.writePhysics2DDebugGeometry(world, out, options);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics2d.writePhysics2DDebugGeometry(world, out, options);
-  #elseif cpp
-  flight._cpp._fn.Physics2d.writePhysics2DDebugGeometry(world, out, options);
-  #else
-  #error "flight.Physics2d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function writePhysics2DJointReaction(world:flight.Physics2DWorld, joint:flight.Physics2DJoint, dt:Float, out:flight.Physics2DJointReaction):Bool {
   #if flight_hx
   return flight._hx._fn.Physics2d.writePhysics2DJointReaction(world, joint, dt, out);
@@ -956,18 +824,6 @@ inline function writePhysics2DJointReaction(world:flight.Physics2DWorld, joint:f
   return flight._js._fn.Physics2d.writePhysics2DJointReaction(world, joint, dt, out);
   #elseif cpp
   return flight._cpp._fn.Physics2d.writePhysics2DJointReaction(world, joint, dt, out);
-  #else
-  #error "flight.Physics2d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function writePhysics2DSoftRowParameters(mass:Float, frequencyHz:Float, dampingRatio:Float, dt:Float, hardBiasFactor:Float, out:Array<Float>):Void {
-  #if flight_hx
-  flight._hx._fn.Physics2d.writePhysics2DSoftRowParameters(mass, frequencyHz, dampingRatio, dt, hardBiasFactor, out);
-  #elseif (js && flight_esm)
-  flight._js._fn.Physics2d.writePhysics2DSoftRowParameters(mass, frequencyHz, dampingRatio, dt, hardBiasFactor, out);
-  #elseif cpp
-  flight._cpp._fn.Physics2d.writePhysics2DSoftRowParameters(mass, frequencyHz, dampingRatio, dt, hardBiasFactor, out);
   #else
   #error "flight.Physics2d: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end

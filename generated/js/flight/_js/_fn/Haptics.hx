@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/haptics, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/haptics/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/haptics")
+@:jsRequire("@flighthq/haptics/contract")
 extern class Haptics {
   static function cancelDeviceVibration(host:flight.HasInputHaptics):Bool;
   static function getHapticsCapabilities(host:flight.HasInputHaptics, out:flight.HapticsCapabilities):flight.HapticsCapabilities;

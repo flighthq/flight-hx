@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/tilemap-formats, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/tilemap-formats/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/tilemap-formats")
+@:jsRequire("@flighthq/tilemap-formats/contract")
 extern class TilemapFormats {
   static function decodeTiledCsvLayer(text:String):js.lib.Uint32Array;
   static function decodeTiledGid(gid:Float):flight.TiledGid;

@@ -2,14 +2,13 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/scene2d-canvas, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/scene2d-canvas/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/scene2d-canvas")
+@:jsRequire("@flighthq/scene2d-canvas/contract")
 extern class Scene2dCanvas {
   static function acquireCanvasRenderSurface(creator:flight.CanvasRenderSurfaceCreator, options:flight.CanvasRenderSurfaceOptions):Null<flight.CanvasRenderSurface>;
   static function acquireCanvasRenderTexture(state:flight.CanvasRenderState, pool:flight.CanvasRenderTexturePool, descriptor:flight.RenderTargetDescriptor):flight.RenderTexture;
   static function acquireCanvasTextureResolverSurface(resolvers:flight.CanvasTextureResolvers, options:flight.CanvasRenderSurfaceOptions):Null<flight.CanvasRenderSurface>;
-  static function acquireTestCanvasRenderSurface(?width:Float, ?height:Float):flight.CanvasRenderSurface;
   static function applyCanvasBlendMode(state:flight.CanvasRenderState, value:Null<String>):Void;
   static function applyCanvasMaterial(state:flight.CanvasRenderState, material:Null<flight.Material>):Bool;
   static function areCanvasTextureResolverGuardsEnabled(state:flight.CanvasRenderState):Bool;

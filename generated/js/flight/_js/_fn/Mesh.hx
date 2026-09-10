@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/mesh, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/mesh/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/mesh")
+@:jsRequire("@flighthq/mesh/contract")
 extern class Mesh {
   static function addMeshGeometrySubset(geometry:flight.MeshGeometry, subset:flight.MeshSubset):Void;
   static function blendMeshGeometryMorph(geometry:flight.MeshGeometry, morph:flight.MeshMorph, bindPose:flight.MeshMorphBindPose):Void;
@@ -60,8 +60,6 @@ extern class Mesh {
   static function getMeshGeometryVertexWeights0(out:{ w:Float, x:Float, y:Float, z:Float }, geometry:flight.MeshGeometry, vertexIndex:Float):Bool;
   static function getVertexAttribute(layout:flight.VertexAttributeLayout, semantic:String):Null<flight.VertexAttribute>;
   static function getVertexAttributeFloatOffset(layout:flight.VertexAttributeLayout, semantic:String):Float;
-  static function getVertexFormatByteLength(format:String):Float;
-  static function getVertexFormatComponentCount(format:String):Float;
   static function hasMeshGeometrySkin(geometry:flight.MeshGeometry):Bool;
   static function indexMeshGeometryVertices(geometry:flight.MeshGeometry):flight.MeshGeometry;
   static function invalidateMeshGeometry(geometry:flight.MeshGeometry):Void;

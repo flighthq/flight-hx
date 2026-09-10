@@ -973,18 +973,6 @@ inline function getGlScene3DTime(state:flight.GlRenderState):Float {
   #end
 }
 
-inline function getGlScene3DViewportAspect(state:flight.GlRenderState):Float {
-  #if flight_hx
-  return flight._hx._fn.Scene3dGl.getGlScene3DViewportAspect(state);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Scene3dGl.getGlScene3DViewportAspect(state);
-  #elseif cpp
-  return flight._cpp._fn.Scene3dGl.getGlScene3DViewportAspect(state);
-  #else
-  #error "flight.Scene3dGl: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function getGlToonFragmentSourceForKey(key:flight.GlToonDefineKey):String {
   #if flight_hx
   return flight._hx._fn.Scene3dGl.getGlToonFragmentSourceForKey(key);

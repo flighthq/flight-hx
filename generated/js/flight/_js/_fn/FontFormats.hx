@@ -2,23 +2,17 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/font-formats, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/font-formats/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/font-formats")
+@:jsRequire("@flighthq/font-formats/contract")
 extern class FontFormats {
   static function assembleSfntFont(flavor:Float, tables:Array<{ data:js.lib.Uint8Array, tag:Float }>):js.lib.Uint8Array;
-  static function cffOperand(value:Float):Float;
   static function cffSubroutineBias(count:Float):Float;
   static function computeSfntTableChecksum(data:js.lib.Uint8Array, ?isHeadTable:Bool):Float;
-  static function createSyntheticFont(?options:flight.SyntheticFontOptions):js.lib.Uint8Array;
   static function decodeWoff2Triplet(code:Float, glyphStream:js.lib.Uint8Array, at:Float):Null<{ dx:Float, dy:Float, used:Float }>;
-  static function emptySyntheticGlyph():flight.SyntheticGlyph;
   static function encodeSfntCompositeGlyph(components:js.lib.Uint8Array, instructions:js.lib.Uint8Array, bounds:{ xMax:Float, xMin:Float, yMax:Float, yMin:Float }, hasInstructions:Bool):js.lib.Uint8Array;
   static function encodeSfntLoca(glyphLengths:Array<Float>, indexFormat:Float):Null<js.lib.Uint8Array>;
   static function encodeSfntSimpleGlyph(endPtsOfContours:Array<Float>, xs:Array<Float>, ys:Array<Float>, onCurve:Array<Bool>, instructions:js.lib.Uint8Array, bounds:{ xMax:Float, xMin:Float, yMax:Float, yMin:Float }):js.lib.Uint8Array;
-  static function encodeSyntheticCff(charstrings:Array<js.lib.Uint8Array>, ?cid:flight.SyntheticCidOptions):js.lib.Uint8Array;
-  static function encodeSyntheticWoff(sfnt:js.lib.Uint8Array, ?reverseTableOrder:Bool):js.lib.Uint8Array;
-  static function encodeSyntheticWoff2(sfnt:js.lib.Uint8Array, ?transformTags:Array<String>):js.lib.Uint8Array;
   static function explainOpenTypeFont(bytes:js.lib.Uint8Array):flight.OpenTypeFontExplanation;
   static function getWoff2BboxBitmapByteLength(glyphCount:Float):Float;
   static function hasWoff2GlyphBbox(bboxStream:js.lib.Uint8Array, glyphIndex:Float):Bool;
@@ -41,7 +35,5 @@ extern class FontFormats {
   static function readWoff2Short(bytes:js.lib.Uint8Array, cursor:{ at:Float }, end:Float):Float;
   static function readWoff2TableDirectory(bytes:js.lib.Uint8Array):Null<flight.Woff2TableDirectory>;
   static function reverseWoff2GlyfTransform(streams:flight.Woff2GlyfStreams):Null<{ glyf:js.lib.Uint8Array, loca:js.lib.Uint8Array }>;
-  static function ringSyntheticGlyph(?reverseCounter:Bool, ?flipBoth:Bool):flight.SyntheticGlyph;
-  static function squareSyntheticGlyph(size:Float):flight.SyntheticGlyph;
 }
 #end

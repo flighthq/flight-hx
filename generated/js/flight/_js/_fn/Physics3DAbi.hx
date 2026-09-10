@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/physics3d-abi, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/physics3d-abi/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/physics3d-abi")
+@:jsRequire("@flighthq/physics3d-abi/contract")
 extern class Physics3DAbi {
   static function clearPhysics3DAbiCommandBuffer(out:flight.Physics3DAbiCommandBuffer):Void;
   static function createPhysics3DAbi():flight.Physics3DAbi;
@@ -15,7 +15,6 @@ extern class Physics3DAbi {
   static function createPhysics3DAbiJointBuffer(capacity:Float):flight.Physics3DAbiJointBuffer;
   static function createPhysics3DAbiQueryBuffer(capacity:Float):flight.Physics3DAbiQueryBuffer;
   static function createPhysics3DAbiWorld(abi:flight.Physics3DAbi):Float;
-  static function createReferencePhysics3DAbi():flight.Physics3DAbi;
   static function destroyPhysics3DAbiWorld(abi:flight.Physics3DAbi, world:Float):Bool;
   static function executePhysics3DAbiCommands(abi:flight.Physics3DAbi, world:Float, commands:flight.Physics3DAbiCommandBuffer, out:flight.Physics3DAbiExecutionResult):Bool;
   static function getPhysics3DAbiCommandBufferRemainingByteLength(buffer:flight.Physics3DAbiCommandBuffer):Float;

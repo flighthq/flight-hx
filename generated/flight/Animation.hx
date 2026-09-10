@@ -49,18 +49,6 @@ inline function advanceAnimationPlayer(player:flight.AnimationPlayer, dt:Float):
   #end
 }
 
-inline function advanceAnimationPlayers(players:Array<flight.AnimationPlayer>, dt:Float, advanced:Array<flight.AnimationPlayer>):Void {
-  #if flight_hx
-  flight._hx._fn.Animation.advanceAnimationPlayers(players, dt, advanced);
-  #elseif (js && flight_esm)
-  flight._js._fn.Animation.advanceAnimationPlayers(players, dt, advanced);
-  #elseif cpp
-  flight._cpp._fn.Animation.advanceAnimationPlayers(players, dt, advanced);
-  #else
-  #error "flight.Animation: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function advanceAnimationStateMachine(machine:flight.AnimationStateMachine, dt:Float):Void {
   #if flight_hx
   flight._hx._fn.Animation.advanceAnimationStateMachine(machine, dt);
@@ -68,18 +56,6 @@ inline function advanceAnimationStateMachine(machine:flight.AnimationStateMachin
   flight._js._fn.Animation.advanceAnimationStateMachine(machine, dt);
   #elseif cpp
   flight._cpp._fn.Animation.advanceAnimationStateMachine(machine, dt);
-  #else
-  #error "flight.Animation: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function advanceAnimationStateMachineWithScratch(machine:flight.AnimationStateMachine, dt:Float, advanced:Array<flight.AnimationPlayer>):Void {
-  #if flight_hx
-  flight._hx._fn.Animation.advanceAnimationStateMachineWithScratch(machine, dt, advanced);
-  #elseif (js && flight_esm)
-  flight._js._fn.Animation.advanceAnimationStateMachineWithScratch(machine, dt, advanced);
-  #elseif cpp
-  flight._cpp._fn.Animation.advanceAnimationStateMachineWithScratch(machine, dt, advanced);
   #else
   #error "flight.Animation: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end

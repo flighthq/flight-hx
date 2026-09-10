@@ -2,22 +2,19 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/swf, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/swf/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/swf")
+@:jsRequire("@flighthq/swf/contract")
 extern class Swf {
   static function areSwfGuardsEnabled():Bool;
-  static function buildFrameScriptAbc(?handlerNameIndex:Float):js.lib.Uint8Array;
   static function createScene2DFromSwf(source:js.lib.Uint8Array, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.Scene2DDocument>;
   static function createScene2DImportFromSwf(source:js.lib.Uint8Array, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.SwfDocumentImport>;
   static function createScene2DSymbolFromSwf(source:js.lib.Uint8Array, linkageName:String, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.Scene2DDocument>;
   static function createSwfJpegAlphaBitmap(decoded:flight.DecodedImage, payload:flight.SwfJpegAlphaPayload):Null<flight.Bitmap>;
-  static function createSwfLosslessBitmap(payload:js.lib.Uint8Array, hasAlpha:Bool):Null<flight.Bitmap>;
   static function disableSwfGuards():Void;
   static function enableSwfGuards():Void;
   static function readSwfExportedSymbolNames(source:js.lib.Uint8Array):Array<String>;
   static function registerSwfImageDecoders():Void;
   static function registerSwfScene2DDocumentImporter(registry:flight.Scene2DDocumentImporterRegistry):Void;
-  static function resolveSwfFontUnitsPerEm(version:Float):Float;
 }
 #end

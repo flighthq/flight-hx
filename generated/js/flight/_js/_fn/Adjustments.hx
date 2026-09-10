@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/adjustments, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/adjustments/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/adjustments")
+@:jsRequire("@flighthq/adjustments/contract")
 extern class Adjustments {
   static function applyColorMatrixToColor(matrix:Array<Float>, packedRgba:Float):Float;
   static function bakeColorLutForRun(cache:flight.ColorLutCache, run:Array<{ kind:String }>, ?size:Float):flight.ColorLut;

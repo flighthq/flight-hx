@@ -37,18 +37,6 @@ inline function acquireCanvasTextureResolverSurface(resolvers:flight.CanvasTextu
   #end
 }
 
-inline function acquireTestCanvasRenderSurface(?width:Float, ?height:Float):flight.CanvasRenderSurface {
-  #if flight_hx
-  return flight._hx._fn.Scene2dCanvas.acquireTestCanvasRenderSurface(width, height);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Scene2dCanvas.acquireTestCanvasRenderSurface(width, height);
-  #elseif cpp
-  return flight._cpp._fn.Scene2dCanvas.acquireTestCanvasRenderSurface(width, height);
-  #else
-  #error "flight.Scene2dCanvas: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function applyCanvasBlendMode(state:flight.CanvasRenderState, value:Null<String>):Void {
   #if flight_hx
   flight._hx._fn.Scene2dCanvas.applyCanvasBlendMode(state, value);

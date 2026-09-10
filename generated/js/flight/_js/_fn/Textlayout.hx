@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/textlayout, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/textlayout/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/textlayout")
+@:jsRequire("@flighthq/textlayout/contract")
 extern class Textlayout {
   static function clearRichTextContent(runtime:flight.RichTextRuntime):Void;
   static function clearTextLayoutResult(runtime:flight.TextLabelRuntime):Void;

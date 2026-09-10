@@ -13,18 +13,6 @@ inline function assembleSfntFont(flavor:Float, tables:Array<{ data:js.lib.Uint8A
   #end
 }
 
-inline function cffOperand(value:Float):Float {
-  #if flight_hx
-  return flight._hx._fn.FontFormats.cffOperand(value);
-  #elseif (js && flight_esm)
-  return flight._js._fn.FontFormats.cffOperand(value);
-  #elseif cpp
-  return flight._cpp._fn.FontFormats.cffOperand(value);
-  #else
-  #error "flight.FontFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function cffSubroutineBias(count:Float):Float {
   #if flight_hx
   return flight._hx._fn.FontFormats.cffSubroutineBias(count);
@@ -49,18 +37,6 @@ inline function computeSfntTableChecksum(data:js.lib.Uint8Array, ?isHeadTable:Bo
   #end
 }
 
-inline function createSyntheticFont(?options:flight.SyntheticFontOptions):js.lib.Uint8Array {
-  #if flight_hx
-  return flight._hx._fn.FontFormats.createSyntheticFont(options);
-  #elseif (js && flight_esm)
-  return flight._js._fn.FontFormats.createSyntheticFont(options);
-  #elseif cpp
-  return flight._cpp._fn.FontFormats.createSyntheticFont(options);
-  #else
-  #error "flight.FontFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function decodeWoff2Triplet(code:Float, glyphStream:js.lib.Uint8Array, at:Float):Null<{ dx:Float, dy:Float, used:Float }> {
   #if flight_hx
   return flight._hx._fn.FontFormats.decodeWoff2Triplet(code, glyphStream, at);
@@ -68,18 +44,6 @@ inline function decodeWoff2Triplet(code:Float, glyphStream:js.lib.Uint8Array, at
   return flight._js._fn.FontFormats.decodeWoff2Triplet(code, glyphStream, at);
   #elseif cpp
   return flight._cpp._fn.FontFormats.decodeWoff2Triplet(code, glyphStream, at);
-  #else
-  #error "flight.FontFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function emptySyntheticGlyph():flight.SyntheticGlyph {
-  #if flight_hx
-  return flight._hx._fn.FontFormats.emptySyntheticGlyph();
-  #elseif (js && flight_esm)
-  return flight._js._fn.FontFormats.emptySyntheticGlyph();
-  #elseif cpp
-  return flight._cpp._fn.FontFormats.emptySyntheticGlyph();
   #else
   #error "flight.FontFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -116,42 +80,6 @@ inline function encodeSfntSimpleGlyph(endPtsOfContours:Array<Float>, xs:Array<Fl
   return flight._js._fn.FontFormats.encodeSfntSimpleGlyph(endPtsOfContours, xs, ys, onCurve, instructions, bounds);
   #elseif cpp
   return flight._cpp._fn.FontFormats.encodeSfntSimpleGlyph(endPtsOfContours, xs, ys, onCurve, instructions, bounds);
-  #else
-  #error "flight.FontFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function encodeSyntheticCff(charstrings:Array<js.lib.Uint8Array>, ?cid:flight.SyntheticCidOptions):js.lib.Uint8Array {
-  #if flight_hx
-  return flight._hx._fn.FontFormats.encodeSyntheticCff(charstrings, cid);
-  #elseif (js && flight_esm)
-  return flight._js._fn.FontFormats.encodeSyntheticCff(charstrings, cid);
-  #elseif cpp
-  return flight._cpp._fn.FontFormats.encodeSyntheticCff(charstrings, cid);
-  #else
-  #error "flight.FontFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function encodeSyntheticWoff(sfnt:js.lib.Uint8Array, ?reverseTableOrder:Bool):js.lib.Uint8Array {
-  #if flight_hx
-  return flight._hx._fn.FontFormats.encodeSyntheticWoff(sfnt, reverseTableOrder);
-  #elseif (js && flight_esm)
-  return flight._js._fn.FontFormats.encodeSyntheticWoff(sfnt, reverseTableOrder);
-  #elseif cpp
-  return flight._cpp._fn.FontFormats.encodeSyntheticWoff(sfnt, reverseTableOrder);
-  #else
-  #error "flight.FontFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function encodeSyntheticWoff2(sfnt:js.lib.Uint8Array, ?transformTags:Array<String>):js.lib.Uint8Array {
-  #if flight_hx
-  return flight._hx._fn.FontFormats.encodeSyntheticWoff2(sfnt, transformTags);
-  #elseif (js && flight_esm)
-  return flight._js._fn.FontFormats.encodeSyntheticWoff2(sfnt, transformTags);
-  #elseif cpp
-  return flight._cpp._fn.FontFormats.encodeSyntheticWoff2(sfnt, transformTags);
   #else
   #error "flight.FontFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -416,30 +344,6 @@ inline function reverseWoff2GlyfTransform(streams:flight.Woff2GlyfStreams):Null<
   return flight._js._fn.FontFormats.reverseWoff2GlyfTransform(streams);
   #elseif cpp
   return flight._cpp._fn.FontFormats.reverseWoff2GlyfTransform(streams);
-  #else
-  #error "flight.FontFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function ringSyntheticGlyph(?reverseCounter:Bool, ?flipBoth:Bool):flight.SyntheticGlyph {
-  #if flight_hx
-  return flight._hx._fn.FontFormats.ringSyntheticGlyph(reverseCounter, flipBoth);
-  #elseif (js && flight_esm)
-  return flight._js._fn.FontFormats.ringSyntheticGlyph(reverseCounter, flipBoth);
-  #elseif cpp
-  return flight._cpp._fn.FontFormats.ringSyntheticGlyph(reverseCounter, flipBoth);
-  #else
-  #error "flight.FontFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function squareSyntheticGlyph(size:Float):flight.SyntheticGlyph {
-  #if flight_hx
-  return flight._hx._fn.FontFormats.squareSyntheticGlyph(size);
-  #elseif (js && flight_esm)
-  return flight._js._fn.FontFormats.squareSyntheticGlyph(size);
-  #elseif cpp
-  return flight._cpp._fn.FontFormats.squareSyntheticGlyph(size);
   #else
   #error "flight.FontFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end

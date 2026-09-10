@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/screen, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/screen/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/screen")
+@:jsRequire("@flighthq/screen/contract")
 extern class Screen {
   static function attachScreenPermissionChange(host:flight.HasScreenPermissionChange, permissionChange:flight.ScreenPermissionChange):Void;
   static function attachScreenSignals(host:flight.HasScreenChange, signals:flight.ScreenSignals):Void;

@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/scene3d-wgpu, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/scene3d-wgpu/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/scene3d-wgpu")
+@:jsRequire("@flighthq/scene3d-wgpu/contract")
 extern class Scene3dWgpu {
   static function areWgpuScene3DCustomShaderGuardsEnabled(state:flight.WgpuRenderState):Bool;
   static function areWgpuScene3DForwardLightSelectionGuardsEnabled(state:flight.WgpuRenderState):Bool;
@@ -49,8 +49,6 @@ extern class Scene3dWgpu {
   static function getWgpuWireframeModuleSource(?alphaMaskEnabled:Bool):String;
   static function hasWgpuScene3DCoverage(state:flight.WgpuRenderState, usage:flight.Scene3DKindUsage):Bool;
   static function isWgpuMeshGpuSkinned(state:flight.WgpuRenderState, mesh:flight.Mesh):Bool;
-  static function makeWgpuScene3DState(?pipeline:flight.WgpuPipeline):{ fake:flight.FakeWgpu, state:flight.WgpuPresentationRenderState };
-  static function makeWgpuSkinningAdapter():flight.WgpuSkinningAdapter;
   static function prepareWgpuScene3DForwardLights(state:flight.WgpuRenderState, sceneRenderList:flight.Scene3DRenderList, lights:flight.Scene3DLights):flight.WgpuScene3DForwardLightList;
   static function registerBuiltInWgpuModifierSnippets(state:flight.WgpuRenderState):Void;
   static function registerWgpuBlinnPhongMaterial(state:flight.WgpuRenderState):Void;

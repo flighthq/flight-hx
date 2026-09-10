@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/picking, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/picking/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/picking")
+@:jsRequire("@flighthq/picking/contract")
 extern class Picking {
   static function createScene3DHit():flight.Scene3DHit;
   static function getScene3DHitMaterial(hit:flight.Scene3DHit):Null<flight.Material>;

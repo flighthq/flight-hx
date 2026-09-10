@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/loader, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/loader/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/loader")
+@:jsRequire("@flighthq/loader/contract")
 extern class Loader {
   static function createResourceLoader(?options:flight.ResourceLoaderOptions):flight.ResourceLoader;
 }

@@ -25,18 +25,6 @@ inline function compressDeflateZlib(bytes:js.lib.Uint8Array):js.lib.Uint8Array {
   #end
 }
 
-inline function computeAdler32(input:js.lib.Uint8Array):Float {
-  #if flight_hx
-  return flight._hx._fn.Compression.computeAdler32(input);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Compression.computeAdler32(input);
-  #elseif cpp
-  return flight._cpp._fn.Compression.computeAdler32(input);
-  #else
-  #error "flight.Compression: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function registerDeflateDecompressor():Void {
   #if flight_hx
   flight._hx._fn.Compression.registerDeflateDecompressor();

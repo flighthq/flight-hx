@@ -13,18 +13,6 @@ inline function computeTextureContainerLevels(format:String, baseWidth:Float, ba
   #end
 }
 
-inline function createByteReader(bytes:js.lib.Uint8Array, ?offset:Float):flight.ByteReader {
-  #if flight_hx
-  return flight._hx._fn.TextureFormats.createByteReader(bytes, offset);
-  #elseif (js && flight_esm)
-  return flight._js._fn.TextureFormats.createByteReader(bytes, offset);
-  #elseif cpp
-  return flight._cpp._fn.TextureFormats.createByteReader(bytes, offset);
-  #else
-  #error "flight.TextureFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function detectTextureContainer(bytes:js.lib.Uint8Array):Null<String> {
   #if flight_hx
   return flight._hx._fn.TextureFormats.detectTextureContainer(bytes);
@@ -49,54 +37,6 @@ inline function explainTextureContainerParse(bytes:js.lib.Uint8Array):Null<fligh
   #end
 }
 
-inline function getAtfParseFailureReason(bytes:js.lib.Uint8Array):Null<String> {
-  #if flight_hx
-  return flight._hx._fn.TextureFormats.getAtfParseFailureReason(bytes);
-  #elseif (js && flight_esm)
-  return flight._js._fn.TextureFormats.getAtfParseFailureReason(bytes);
-  #elseif cpp
-  return flight._cpp._fn.TextureFormats.getAtfParseFailureReason(bytes);
-  #else
-  #error "flight.TextureFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function getBasisParseFailureReason(bytes:js.lib.Uint8Array):Null<String> {
-  #if flight_hx
-  return flight._hx._fn.TextureFormats.getBasisParseFailureReason(bytes);
-  #elseif (js && flight_esm)
-  return flight._js._fn.TextureFormats.getBasisParseFailureReason(bytes);
-  #elseif cpp
-  return flight._cpp._fn.TextureFormats.getBasisParseFailureReason(bytes);
-  #else
-  #error "flight.TextureFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function getDdsParseFailureReason(bytes:js.lib.Uint8Array):Null<String> {
-  #if flight_hx
-  return flight._hx._fn.TextureFormats.getDdsParseFailureReason(bytes);
-  #elseif (js && flight_esm)
-  return flight._js._fn.TextureFormats.getDdsParseFailureReason(bytes);
-  #elseif cpp
-  return flight._cpp._fn.TextureFormats.getDdsParseFailureReason(bytes);
-  #else
-  #error "flight.TextureFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function getKtx2ParseFailureReason(bytes:js.lib.Uint8Array):Null<String> {
-  #if flight_hx
-  return flight._hx._fn.TextureFormats.getKtx2ParseFailureReason(bytes);
-  #elseif (js && flight_esm)
-  return flight._js._fn.TextureFormats.getKtx2ParseFailureReason(bytes);
-  #elseif cpp
-  return flight._cpp._fn.TextureFormats.getKtx2ParseFailureReason(bytes);
-  #else
-  #error "flight.TextureFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function getTextureContainerLevelByteLength(format:String, width:Float, height:Float):Float {
   #if flight_hx
   return flight._hx._fn.TextureFormats.getTextureContainerLevelByteLength(format, width, height);
@@ -104,18 +44,6 @@ inline function getTextureContainerLevelByteLength(format:String, width:Float, h
   return flight._js._fn.TextureFormats.getTextureContainerLevelByteLength(format, width, height);
   #elseif cpp
   return flight._cpp._fn.TextureFormats.getTextureContainerLevelByteLength(format, width, height);
-  #else
-  #error "flight.TextureFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function hasByteReaderBytes(reader:flight.ByteReader, count:Float):Bool {
-  #if flight_hx
-  return flight._hx._fn.TextureFormats.hasByteReaderBytes(reader, count);
-  #elseif (js && flight_esm)
-  return flight._js._fn.TextureFormats.hasByteReaderBytes(reader, count);
-  #elseif cpp
-  return flight._cpp._fn.TextureFormats.hasByteReaderBytes(reader, count);
   #else
   #error "flight.TextureFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -169,90 +97,6 @@ inline function parseKtx2(bytes:js.lib.Uint8Array):Null<flight.TextureContainer>
   #end
 }
 
-inline function readByteReaderU16(reader:flight.ByteReader):Float {
-  #if flight_hx
-  return flight._hx._fn.TextureFormats.readByteReaderU16(reader);
-  #elseif (js && flight_esm)
-  return flight._js._fn.TextureFormats.readByteReaderU16(reader);
-  #elseif cpp
-  return flight._cpp._fn.TextureFormats.readByteReaderU16(reader);
-  #else
-  #error "flight.TextureFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function readByteReaderU24(reader:flight.ByteReader):Float {
-  #if flight_hx
-  return flight._hx._fn.TextureFormats.readByteReaderU24(reader);
-  #elseif (js && flight_esm)
-  return flight._js._fn.TextureFormats.readByteReaderU24(reader);
-  #elseif cpp
-  return flight._cpp._fn.TextureFormats.readByteReaderU24(reader);
-  #else
-  #error "flight.TextureFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function readByteReaderU24BigEndian(reader:flight.ByteReader):Float {
-  #if flight_hx
-  return flight._hx._fn.TextureFormats.readByteReaderU24BigEndian(reader);
-  #elseif (js && flight_esm)
-  return flight._js._fn.TextureFormats.readByteReaderU24BigEndian(reader);
-  #elseif cpp
-  return flight._cpp._fn.TextureFormats.readByteReaderU24BigEndian(reader);
-  #else
-  #error "flight.TextureFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function readByteReaderU32(reader:flight.ByteReader):Float {
-  #if flight_hx
-  return flight._hx._fn.TextureFormats.readByteReaderU32(reader);
-  #elseif (js && flight_esm)
-  return flight._js._fn.TextureFormats.readByteReaderU32(reader);
-  #elseif cpp
-  return flight._cpp._fn.TextureFormats.readByteReaderU32(reader);
-  #else
-  #error "flight.TextureFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function readByteReaderU32BigEndian(reader:flight.ByteReader):Float {
-  #if flight_hx
-  return flight._hx._fn.TextureFormats.readByteReaderU32BigEndian(reader);
-  #elseif (js && flight_esm)
-  return flight._js._fn.TextureFormats.readByteReaderU32BigEndian(reader);
-  #elseif cpp
-  return flight._cpp._fn.TextureFormats.readByteReaderU32BigEndian(reader);
-  #else
-  #error "flight.TextureFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function readByteReaderU64(reader:flight.ByteReader):Float {
-  #if flight_hx
-  return flight._hx._fn.TextureFormats.readByteReaderU64(reader);
-  #elseif (js && flight_esm)
-  return flight._js._fn.TextureFormats.readByteReaderU64(reader);
-  #elseif cpp
-  return flight._cpp._fn.TextureFormats.readByteReaderU64(reader);
-  #else
-  #error "flight.TextureFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function readByteReaderU8(reader:flight.ByteReader):Float {
-  #if flight_hx
-  return flight._hx._fn.TextureFormats.readByteReaderU8(reader);
-  #elseif (js && flight_esm)
-  return flight._js._fn.TextureFormats.readByteReaderU8(reader);
-  #elseif cpp
-  return flight._cpp._fn.TextureFormats.readByteReaderU8(reader);
-  #else
-  #error "flight.TextureFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function selectTextureContainer(containers:Array<flight.TextureContainer>, supportedFormats:Array<String>):Null<flight.TextureContainer> {
   #if flight_hx
   return flight._hx._fn.TextureFormats.selectTextureContainer(containers, supportedFormats);
@@ -260,18 +104,6 @@ inline function selectTextureContainer(containers:Array<flight.TextureContainer>
   return flight._js._fn.TextureFormats.selectTextureContainer(containers, supportedFormats);
   #elseif cpp
   return flight._cpp._fn.TextureFormats.selectTextureContainer(containers, supportedFormats);
-  #else
-  #error "flight.TextureFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function skipByteReader(reader:flight.ByteReader, count:Float):Void {
-  #if flight_hx
-  flight._hx._fn.TextureFormats.skipByteReader(reader, count);
-  #elseif (js && flight_esm)
-  flight._js._fn.TextureFormats.skipByteReader(reader, count);
-  #elseif cpp
-  flight._cpp._fn.TextureFormats.skipByteReader(reader, count);
   #else
   #error "flight.TextureFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end

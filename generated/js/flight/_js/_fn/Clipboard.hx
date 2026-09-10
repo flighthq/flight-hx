@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/clipboard, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/clipboard/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/clipboard")
+@:jsRequire("@flighthq/clipboard/contract")
 extern class Clipboard {
   static function attachClipboardWatch(host:flight.HasClipboardChange, watch:flight.ClipboardWatch):Void;
   static function createClipboardWatch():flight.ClipboardWatch;

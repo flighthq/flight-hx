@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/assets, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/assets/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/assets")
+@:jsRequire("@flighthq/assets/contract")
 extern class Assets {
   static function areAssetGuardsEnabled(library:flight.AssetLibrary):Bool;
   static function createAssetLibrary():flight.AssetLibrary;

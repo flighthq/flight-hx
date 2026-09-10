@@ -73,54 +73,6 @@ inline function createMidiPortStateSubscription():flight.MidiPortStateSubscripti
   #end
 }
 
-inline function getMidiAccessResourceState(access:flight.MidiAccess):Null<flight.MidiAccessResourceState> {
-  #if flight_hx
-  return flight._hx._fn.Midi.getMidiAccessResourceState(access);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Midi.getMidiAccessResourceState(access);
-  #elseif cpp
-  return flight._cpp._fn.Midi.getMidiAccessResourceState(access);
-  #else
-  #error "flight.Midi: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function retainMidiAccessResourceState(access:flight.MidiAccess, operations:flight.MidiAccessResourceOperations):Void {
-  #if flight_hx
-  flight._hx._fn.Midi.retainMidiAccessResourceState(access, operations);
-  #elseif (js && flight_esm)
-  flight._js._fn.Midi.retainMidiAccessResourceState(access, operations);
-  #elseif cpp
-  flight._cpp._fn.Midi.retainMidiAccessResourceState(access, operations);
-  #else
-  #error "flight.Midi: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function retainMidiInputPortResourceState(port:flight.MidiInputPort, operations:flight.MidiInputPortResourceOperations):Void {
-  #if flight_hx
-  flight._hx._fn.Midi.retainMidiInputPortResourceState(port, operations);
-  #elseif (js && flight_esm)
-  flight._js._fn.Midi.retainMidiInputPortResourceState(port, operations);
-  #elseif cpp
-  flight._cpp._fn.Midi.retainMidiInputPortResourceState(port, operations);
-  #else
-  #error "flight.Midi: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function retainMidiOutputPortResourceState(port:flight.MidiOutputPort, operations:flight.MidiOutputPortResourceOperations):Void {
-  #if flight_hx
-  flight._hx._fn.Midi.retainMidiOutputPortResourceState(port, operations);
-  #elseif (js && flight_esm)
-  flight._js._fn.Midi.retainMidiOutputPortResourceState(port, operations);
-  #elseif cpp
-  flight._cpp._fn.Midi.retainMidiOutputPortResourceState(port, operations);
-  #else
-  #error "flight.Midi: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function sendMidiMessage(port:flight.MidiOutputPort, data:js.lib.Uint8Array, ?timestamp:Float):{ reason:String } {
   #if flight_hx
   return flight._hx._fn.Midi.sendMidiMessage(port, data, timestamp);

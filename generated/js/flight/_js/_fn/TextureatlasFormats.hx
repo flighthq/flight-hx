@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/textureatlas-formats, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/textureatlas-formats/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/textureatlas-formats")
+@:jsRequire("@flighthq/textureatlas-formats/contract")
 extern class TextureatlasFormats {
   static function detectTextureAtlasFormat(content:String):Null<String>;
   static function getTextureAtlasFormatKinds():Array<String>;
@@ -13,7 +13,6 @@ extern class TextureatlasFormats {
   static function parseTextureAtlasLibgdxAtlas(text:String, atlas:flight.TextureAtlas):flight.TextureAtlas;
   static function parseTextureAtlasStarlingXml(xml:String, atlas:flight.TextureAtlas):flight.TextureAtlas;
   static function parseTexturePackerAtlasJson(json:String, atlas:flight.TextureAtlas, ?options:flight.TexturePackerAtlasParseOptions):flight.TextureAtlas;
-  static function resetTextureAtlasPageMeta(atlas:flight.TextureAtlas):Void;
   static function unregisterTextureAtlasFormat(kind:String):Void;
 }
 #end

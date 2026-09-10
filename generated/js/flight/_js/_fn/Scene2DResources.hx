@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/scene2d-resources, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/scene2d-resources/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/scene2d-resources")
+@:jsRequire("@flighthq/scene2d-resources/contract")
 extern class Scene2DResources {
   static function areScene2DResourceFailureGuardsEnabled():Bool;
   static function createScene2DDocumentFromBytes(source:js.lib.Uint8Array, registry:flight.Scene2DDocumentImporterRegistry, ?context:flight.Scene2DDocumentImportContext):Null<flight.Scene2DDocument>;
@@ -15,7 +15,6 @@ extern class Scene2DResources {
   static function registerLottieScene2DDocumentImporter(registry:flight.Scene2DDocumentImporterRegistry):Void;
   static function registerRiveScene2DDocumentImporter(registry:flight.Scene2DDocumentImporterRegistry):Void;
   static function registerSvgScene2DDocumentImporter(registry:flight.Scene2DDocumentImporterRegistry):Void;
-  static function reportScene2DResourceFailure(notice:flight.Scene2DResourceFailureNotice):Void;
   static function resolveScene2DResources(document:flight.Scene2DDocument, ?options:flight.ResolveScene2DResourcesOptions):flight.Scene2DResources;
   static function unregisterScene2DDocumentImporter(registry:flight.Scene2DDocumentImporterRegistry, kind:String):Bool;
 }

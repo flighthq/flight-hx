@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/capture, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/capture/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/capture")
+@:jsRequire("@flighthq/capture/contract")
 extern class Capture {
   static function compareCaptureFingerprints(a:String, b:String):Float;
   static function evaluateCaptureParity(a:String, b:String, ?tolerance:Float):flight.CaptureCheckResult;

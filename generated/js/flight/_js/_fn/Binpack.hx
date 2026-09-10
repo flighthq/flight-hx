@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/binpack, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/binpack/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/binpack")
+@:jsRequire("@flighthq/binpack/contract")
 extern class Binpack {
   static function explainUnpackedRectangles(rectangles:Array<flight.PackableRectangle>, ?options:flight.BinPackOptions):Array<flight.UnpackedRectangleExplanation>;
   static function getPackResultOccupancy(result:flight.PackResult):Float;

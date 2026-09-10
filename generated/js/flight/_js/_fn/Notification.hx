@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/notification, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/notification/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/notification")
+@:jsRequire("@flighthq/notification/contract")
 extern class Notification {
   static function createNotificationActionSubscription():flight.NotificationActionSubscription;
   static function createNotificationClickSubscription():flight.NotificationClickSubscription;

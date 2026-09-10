@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/particles, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/particles/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/particles")
+@:jsRequire("@flighthq/particles/contract")
 extern class Particles {
   static function createParticleEmitterConfig(?config:flight.ParticleEmitterConfig):flight.ParticleEmitterConfig;
   static function createParticleEmitterSignals():flight.ParticleEmitterSignals;

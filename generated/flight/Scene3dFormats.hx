@@ -13,18 +13,6 @@ inline function attachGltfPbrExtension(document:flight.Scene3DDocument, index:Fl
   #end
 }
 
-inline function convertTransformLhToRh(transform:js.lib.Float64Array):Void {
-  #if flight_hx
-  flight._hx._fn.Scene3dFormats.convertTransformLhToRh(transform);
-  #elseif (js && flight_esm)
-  flight._js._fn.Scene3dFormats.convertTransformLhToRh(transform);
-  #elseif cpp
-  flight._cpp._fn.Scene3dFormats.convertTransformLhToRh(transform);
-  #else
-  #error "flight.Scene3dFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function createScene3DFrom3ds(bytes:js.lib.Uint8Array, ?diagnostics:Array<flight.ImportDiagnostic>):flight.Scene3D {
   #if flight_hx
   return flight._hx._fn.Scene3dFormats.createScene3DFrom3ds(bytes, diagnostics);
@@ -181,30 +169,6 @@ inline function importMd5Mesh(meshSource:String, ?animSource:Null<String>, ?diag
   #end
 }
 
-inline function negateVec3Z(values:Array<Float>):Void {
-  #if flight_hx
-  flight._hx._fn.Scene3dFormats.negateVec3Z(values);
-  #elseif (js && flight_esm)
-  flight._js._fn.Scene3dFormats.negateVec3Z(values);
-  #elseif cpp
-  flight._cpp._fn.Scene3dFormats.negateVec3Z(values);
-  #else
-  #error "flight.Scene3dFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function packSkinInfluences(influences:Array<flight.SkinInfluence>, outJoints:Array<Float>, outWeights:Array<Float>):Void {
-  #if flight_hx
-  flight._hx._fn.Scene3dFormats.packSkinInfluences(influences, outJoints, outWeights);
-  #elseif (js && flight_esm)
-  flight._js._fn.Scene3dFormats.packSkinInfluences(influences, outJoints, outWeights);
-  #elseif cpp
-  flight._cpp._fn.Scene3dFormats.packSkinInfluences(influences, outJoints, outWeights);
-  #else
-  #error "flight.Scene3dFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function parse3ds(bytes:js.lib.Uint8Array, ?diagnostics:Array<flight.ImportDiagnostic>):flight.Scene3DDocument {
   #if flight_hx
   return flight._hx._fn.Scene3dFormats.parse3ds(bytes, diagnostics);
@@ -284,30 +248,6 @@ inline function parseObjMaterialLibrary(source:String, ?diagnostics:Array<flight
   return flight._js._fn.Scene3dFormats.parseObjMaterialLibrary(source, diagnostics);
   #elseif cpp
   return flight._cpp._fn.Scene3dFormats.parseObjMaterialLibrary(source, diagnostics);
-  #else
-  #error "flight.Scene3dFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function reverseTriangleWinding(indices:Array<Float>):Void {
-  #if flight_hx
-  flight._hx._fn.Scene3dFormats.reverseTriangleWinding(indices);
-  #elseif (js && flight_esm)
-  flight._js._fn.Scene3dFormats.reverseTriangleWinding(indices);
-  #elseif cpp
-  flight._cpp._fn.Scene3dFormats.reverseTriangleWinding(indices);
-  #else
-  #error "flight.Scene3dFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function reverseVertexTriangleWinding(vertices:js.lib.Float32Array, floatsPerVertex:Float):Void {
-  #if flight_hx
-  flight._hx._fn.Scene3dFormats.reverseVertexTriangleWinding(vertices, floatsPerVertex);
-  #elseif (js && flight_esm)
-  flight._js._fn.Scene3dFormats.reverseVertexTriangleWinding(vertices, floatsPerVertex);
-  #elseif cpp
-  flight._cpp._fn.Scene3dFormats.reverseVertexTriangleWinding(vertices, floatsPerVertex);
   #else
   #error "flight.Scene3dFormats: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end

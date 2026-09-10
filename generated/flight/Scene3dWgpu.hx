@@ -517,30 +517,6 @@ inline function isWgpuMeshGpuSkinned(state:flight.WgpuRenderState, mesh:flight.M
   #end
 }
 
-inline function makeWgpuScene3DState(?pipeline:flight.WgpuPipeline):{ fake:flight.FakeWgpu, state:flight.WgpuPresentationRenderState } {
-  #if flight_hx
-  return flight._hx._fn.Scene3dWgpu.makeWgpuScene3DState(pipeline);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Scene3dWgpu.makeWgpuScene3DState(pipeline);
-  #elseif cpp
-  return flight._cpp._fn.Scene3dWgpu.makeWgpuScene3DState(pipeline);
-  #else
-  #error "flight.Scene3dWgpu: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function makeWgpuSkinningAdapter():flight.WgpuSkinningAdapter {
-  #if flight_hx
-  return flight._hx._fn.Scene3dWgpu.makeWgpuSkinningAdapter();
-  #elseif (js && flight_esm)
-  return flight._js._fn.Scene3dWgpu.makeWgpuSkinningAdapter();
-  #elseif cpp
-  return flight._cpp._fn.Scene3dWgpu.makeWgpuSkinningAdapter();
-  #else
-  #error "flight.Scene3dWgpu: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function prepareWgpuScene3DForwardLights(state:flight.WgpuRenderState, sceneRenderList:flight.Scene3DRenderList, lights:flight.Scene3DLights):flight.WgpuScene3DForwardLightList {
   #if flight_hx
   return flight._hx._fn.Scene3dWgpu.prepareWgpuScene3DForwardLights(state, sceneRenderList, lights);

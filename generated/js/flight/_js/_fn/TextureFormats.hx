@@ -2,32 +2,18 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/texture-formats, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/texture-formats/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/texture-formats")
+@:jsRequire("@flighthq/texture-formats/contract")
 extern class TextureFormats {
   static function computeTextureContainerLevels(format:String, baseWidth:Float, baseHeight:Float, mipLevels:Float, layers:Float, faces:Float, startOffset:Float):Null<{ levels:Array<flight.TextureContainerLevel>, endOffset:Float }>;
-  static function createByteReader(bytes:js.lib.Uint8Array, ?offset:Float):flight.ByteReader;
   static function detectTextureContainer(bytes:js.lib.Uint8Array):Null<String>;
   static function explainTextureContainerParse(bytes:js.lib.Uint8Array):Null<flight.TextureContainerParseExplanation>;
-  static function getAtfParseFailureReason(bytes:js.lib.Uint8Array):Null<String>;
-  static function getBasisParseFailureReason(bytes:js.lib.Uint8Array):Null<String>;
-  static function getDdsParseFailureReason(bytes:js.lib.Uint8Array):Null<String>;
-  static function getKtx2ParseFailureReason(bytes:js.lib.Uint8Array):Null<String>;
   static function getTextureContainerLevelByteLength(format:String, width:Float, height:Float):Float;
-  static function hasByteReaderBytes(reader:flight.ByteReader, count:Float):Bool;
   static function parseAtf(bytes:js.lib.Uint8Array):Null<Array<flight.TextureContainer>>;
   static function parseBasis(bytes:js.lib.Uint8Array):Null<flight.TextureContainer>;
   static function parseDds(bytes:js.lib.Uint8Array):Null<flight.TextureContainer>;
   static function parseKtx2(bytes:js.lib.Uint8Array):Null<flight.TextureContainer>;
-  static function readByteReaderU16(reader:flight.ByteReader):Float;
-  static function readByteReaderU24(reader:flight.ByteReader):Float;
-  static function readByteReaderU24BigEndian(reader:flight.ByteReader):Float;
-  static function readByteReaderU32(reader:flight.ByteReader):Float;
-  static function readByteReaderU32BigEndian(reader:flight.ByteReader):Float;
-  static function readByteReaderU64(reader:flight.ByteReader):Float;
-  static function readByteReaderU8(reader:flight.ByteReader):Float;
   static function selectTextureContainer(containers:Array<flight.TextureContainer>, supportedFormats:Array<String>):Null<flight.TextureContainer>;
-  static function skipByteReader(reader:flight.ByteReader, count:Float):Void;
 }
 #end

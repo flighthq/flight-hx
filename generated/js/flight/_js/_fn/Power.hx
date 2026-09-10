@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/power, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/power/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/power")
+@:jsRequire("@flighthq/power/contract")
 extern class Power {
   static function attachPower(host:flight.PowerAttachHost, power:flight.Power, ?idleThresholdSeconds:Float):Void;
   static function createPower():flight.Power;

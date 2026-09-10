@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/skeleton2d, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/skeleton2d/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/skeleton2d")
+@:jsRequire("@flighthq/skeleton2d/contract")
 extern class Skeleton2D {
   static function applyAnimationClipToSkeleton2D(clip:flight.AnimationClip, setup:flight.Skeleton2D, pose:flight.Skeleton2D, time:Float):Void;
   static function cloneSkeleton2D(skeleton:flight.Skeleton2D):flight.Skeleton2D;

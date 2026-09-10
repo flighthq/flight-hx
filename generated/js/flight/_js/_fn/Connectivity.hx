@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/connectivity, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/connectivity/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/connectivity")
+@:jsRequire("@flighthq/connectivity/contract")
 extern class Connectivity {
   static function createConnectivity():flight.Connectivity;
   static function destroyConnectivity(host:flight.HasConnectivityChange):Void;

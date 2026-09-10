@@ -12,7 +12,9 @@
 // Unmappable signatures are SKIPPED and reported per reason, so the emitted surface always compiles.
 // This is the ESM half of the bindings backend that AGENTS.md says promotes upstream to
 // compiler-backend-hx.
+import { build } from 'esbuild';
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { resolveDependency } from '../../scripts/dependencyLock.mjs';
@@ -164,7 +166,39 @@ function mapFunctions(decls) {
 const mappedPackages = [];
 for (const [pkgName, decls] of packageFns) {
   const fns = mapFunctions(decls);
-  if (fns.length) mappedPackages.push({ pkgName, specifier: pkgName, fns });
+  // Bind via the package's `./contract` lane: index.ts re-exports only a curated public subset, but
+  // contract.ts re-exports the FULL surface (every source `export function`). A complete binding needs
+  // the full surface, and it's the only lane where every lowered function is guaranteed present.
+  if (fns.length) mappedPackages.push({ pkgName, specifier: `${pkgName}/contract`, fns });
+}
+
+// A source-level `export function` is not necessarily part of the package's export surface — some are
+// re-exported by neither index.ts nor contract.ts (package-internal, importable by no consumer). Bind
+// only what the real `./contract` lane actually exports, so every emitted binding resolves. This reads
+// the real (built) Flight ESM — the "names come from Flight, can't drift" discipline, enforced here.
+const flightNodeModules = join(flight.directory, 'node_modules');
+if (!existsSync(join(flight.directory, 'packages/geometry/dist/index.js'))) {
+  console.error('Flight is not built — the generator resolves each package\'s real export surface.');
+  console.error('Build it: (cd .dependencies/flight && npm install && npm run build)');
+  process.exit(1);
+}
+async function realFunctionExports(specifier) {
+  const entry = join(tmpdir(), `flight-hx-gen-${specifier.replace(/[^\w]/g, '_')}.entry.mjs`);
+  const out = join(tmpdir(), `flight-hx-gen-${specifier.replace(/[^\w]/g, '_')}.mjs`);
+  writeFileSync(entry, `export * as ns from ${JSON.stringify(specifier)};\n`);
+  await build({ entryPoints: [entry], outfile: out, bundle: true, format: 'esm', platform: 'neutral',
+    mainFields: ['module', 'main'], conditions: ['import', 'default'], nodePaths: [flightNodeModules], logLevel: 'silent' });
+  const ns = (await import(`${pathToFileURL(out).href}?t=${Date.now()}`)).ns;
+  return new Set(Object.keys(ns).filter((k) => typeof ns[k] === 'function'));
+}
+let internalDropped = 0;
+for (const p of mappedPackages) {
+  let real;
+  try { real = await realFunctionExports(p.specifier); }
+  catch { try { real = await realFunctionExports(p.pkgName); p.specifier = p.pkgName; } catch { real = new Set(); } }
+  const before = p.fns.length;
+  p.fns = p.fns.filter((f) => real.has(f.name));
+  internalDropped += before - p.fns.length;
 }
 
 // A function module shares the `flight.<Name>` namespace with value types. Flight names both the same
@@ -176,6 +210,7 @@ const canonicalType = new Map();
 for (const name of emitTypes) canonicalType.set(name.toLowerCase(), name);
 const modules = new Map(); // module name -> { pkgName, module, specifier, fns }
 for (const p of mappedPackages) {
+  if (!p.fns.length) continue;
   const base = moduleName(p.pkgName);
   const module = canonicalType.get(base.toLowerCase()) ?? base;
   if (modules.has(module)) { // two packages folding to one name — merge, keeping unique fn names
@@ -302,6 +337,7 @@ const totalSkipped = [...skipReasons.values()].reduce((a, b) => a + b, 0);
 console.log(`\ngenerated ${publicNames.size} public modules (${modules.size} with functions, ${emitted.size} value types, ${merged.length} carrying both).`);
 console.log(`functions bound: ${totalFns}  (skipped: ${totalSkipped}, coverage ${(100 * totalFns / (totalFns + totalSkipped)).toFixed(1)}%)`);
 console.log(`value-type fields degraded to Dynamic: ${degradedFields}; dropped (keyword name): ${droppedFields}`);
+console.log(`functions dropped (source-exported but not in the package's real export surface): ${internalDropped}`);
 console.log('\ntop modules by function count:');
 for (const m of [...modules.values()].sort((a, b) => b.fns.length - a.fns.length).slice(0, 15)) console.log(`  ${m.module.padEnd(20)} ${m.fns.length}`);
 console.log('\nskipped by reason (top 15):');

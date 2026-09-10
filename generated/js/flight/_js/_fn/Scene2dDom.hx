@@ -2,12 +2,11 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/scene2d-dom, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/scene2d-dom/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/scene2d-dom")
+@:jsRequire("@flighthq/scene2d-dom/contract")
 extern class Scene2dDom {
   static function areDomTextureResolverGuardsEnabled(state:flight.DomRenderState):Bool;
-  static function buildDomScale9Mapper(bounds:flight.Rectangle, scale9Grid:flight.Rectangle, scaleX:Float, scaleY:Float):Null<flight.Scale9Mapper>;
   static function createDomRenderStateRuntime():flight.DomRenderStateRuntime;
   static function createDomSvgConvolutionFilter(effect:flight.ConvolutionEffect):String;
   static function createDomSvgDisplacementMapFilter(effect:flight.DisplacementEffect):String;
@@ -28,17 +27,13 @@ extern class Scene2dDom {
   static function escapeDomHtmlString(str:String):String;
   static function getDomBlendModeFidelity(blendMode:String):String;
   static function getDomCssFilter(renderProxy:flight.RenderProxy2D):Null<String>;
-  static function getDomFontAscentCached(font:String):Null<Float>;
   static function getDomRenderCacheTarget(state:flight.DomRenderState, cache:flight.RenderCache):Null<flight.CanvasRenderTarget>;
   static function getDomRenderStateRuntime(state:flight.DomRenderState):flight.DomRenderStateRuntime;
-  static function hasDomStructureChanged(runtime:flight.DomRenderStateRuntime, newLength:Float, needsReconcile:Bool):Bool;
   static function invalidateDomFontResource(source:flight.FontResource):Void;
   static function registerDomBitmapTextureResolver(host:flight.HasGraphicsImage, state:flight.DomRenderState):Void;
   static function registerDomImageTextureResolver(state:flight.DomRenderState):Void;
   static function releaseDomRenderCache(state:flight.DomRenderState, cache:flight.RenderCache):Void;
   static function renderDomBackground(state:flight.DomRenderState):Void;
   static function setDomClipHooks(state:flight.DomRenderState):Void;
-  static function setDomFontAscentCached(font:String, ascent:Float):Void;
-  static function swapDomOrderLists(runtime:flight.DomRenderStateRuntime, newLength:Float):Void;
 }
 #end

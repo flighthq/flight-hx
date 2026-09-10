@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/clip, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/clip/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/clip")
+@:jsRequire("@flighthq/clip/contract")
 extern class Clip {
   static function acquireClipRegion():flight.ClipRegion;
   static function clipRegionContainsClipRegion(a:flight.ClipRegion, b:flight.ClipRegion):Bool;

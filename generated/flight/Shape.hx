@@ -361,18 +361,6 @@ inline function clearShapeCommands(shape:flight.Shape):Void {
   #end
 }
 
-inline function compactStrokePath(path:flight.Path, style:flight.StrokeStyle, ?tolerance:Float):flight.Path {
-  #if flight_hx
-  return flight._hx._fn.Shape.compactStrokePath(path, style, tolerance);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Shape.compactStrokePath(path, style, tolerance);
-  #elseif cpp
-  return flight._cpp._fn.Shape.compactStrokePath(path, style, tolerance);
-  #else
-  #error "flight.Shape: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function copyShapeCommands(out:flight.Shape, source:flight.Shape):Void {
   #if flight_hx
   flight._hx._fn.Shape.copyShapeCommands(out, source);
@@ -512,18 +500,6 @@ inline function explainShapeBounds(source:flight.Shape, ?mode:String):flight.Sha
   return flight._js._fn.Shape.explainShapeBounds(source, mode);
   #elseif cpp
   return flight._cpp._fn.Shape.explainShapeBounds(source, mode);
-  #else
-  #error "flight.Shape: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function getMorphShapeGradientEndpointIssue(start:flight.MorphShapeGradientEndpoint, end:flight.MorphShapeGradientEndpoint):Float {
-  #if flight_hx
-  return flight._hx._fn.Shape.getMorphShapeGradientEndpointIssue(start, end);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Shape.getMorphShapeGradientEndpointIssue(start, end);
-  #elseif cpp
-  return flight._cpp._fn.Shape.getMorphShapeGradientEndpointIssue(start, end);
   #else
   #error "flight.Shape: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -680,18 +656,6 @@ inline function registerShapeBoundsCommand(command:flight.ShapeBoundsCommand):Vo
   flight._js._fn.Shape.registerShapeBoundsCommand(command);
   #elseif cpp
   flight._cpp._fn.Shape.registerShapeBoundsCommand(command);
-  #else
-  #error "flight.Shape: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function sampleMorphShapePaintBindings(data:flight.MorphShapeData, progress:Float):Void {
-  #if flight_hx
-  flight._hx._fn.Shape.sampleMorphShapePaintBindings(data, progress);
-  #elseif (js && flight_esm)
-  flight._js._fn.Shape.sampleMorphShapePaintBindings(data, progress);
-  #elseif cpp
-  flight._cpp._fn.Shape.sampleMorphShapePaintBindings(data, progress);
   #else
   #error "flight.Shape: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end

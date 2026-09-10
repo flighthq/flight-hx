@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/collision, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/collision/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/collision")
+@:jsRequire("@flighthq/collision/contract")
 extern class Collision {
   static function areCollisionGuardsEnabled():Bool;
   static function clearCollisionContactManifold2D(out:flight.CollisionContactManifold2D):Void;
@@ -16,12 +16,7 @@ extern class Collision {
   static function collideAabbAabbContactManifold2D(a:flight.CollisionAabb2D, b:flight.CollisionAabb2D, out:flight.CollisionContactManifold2D):Bool;
   static function collideAabbObbContactManifold2D(a:flight.CollisionAabb2D, b:flight.CollisionObb2D, out:flight.CollisionContactManifold2D):Bool;
   static function collideAabbPolygonContactManifold2D(a:flight.CollisionAabb2D, b:flight.CollisionPolygon2D, out:flight.CollisionContactManifold2D):Bool;
-  static function collideCapsuleAabbContactManifold2D(a:flight.CollisionCapsule2D, b:flight.CollisionAabb2D, out:flight.CollisionContactManifold2D):Bool;
-  static function collideCapsuleCapsuleContactManifold2D(a:flight.CollisionCapsule2D, b:flight.CollisionCapsule2D, out:flight.CollisionContactManifold2D):Bool;
-  static function collideCapsuleObbContactManifold2D(a:flight.CollisionCapsule2D, b:flight.CollisionObb2D, out:flight.CollisionContactManifold2D):Bool;
-  static function collideCapsulePolygonContactManifold2D(a:flight.CollisionCapsule2D, b:flight.CollisionPolygon2D, out:flight.CollisionContactManifold2D):Bool;
   static function collideCircleAabbContactManifold2D(a:flight.CollisionCircle2D, b:flight.CollisionAabb2D, out:flight.CollisionContactManifold2D):Bool;
-  static function collideCircleCapsuleContactManifold2D(a:flight.CollisionCircle2D, b:flight.CollisionCapsule2D, out:flight.CollisionContactManifold2D):Bool;
   static function collideCircleCircleContactManifold2D(a:flight.CollisionCircle2D, b:flight.CollisionCircle2D, out:flight.CollisionContactManifold2D):Bool;
   static function collideCircleObbContactManifold2D(a:flight.CollisionCircle2D, b:flight.CollisionObb2D, out:flight.CollisionContactManifold2D):Bool;
   static function collideCirclePolygonContactManifold2D(a:flight.CollisionCircle2D, b:flight.CollisionPolygon2D, out:flight.CollisionContactManifold2D):Bool;
@@ -47,7 +42,6 @@ extern class Collision {
   static function getCollisionTriangleMeshValidationStatus3D(mesh:flight.CollisionTriangleMesh3D):Null<String>;
   static function invalidateCollisionHeightfield3D(heightfield:flight.CollisionHeightfield3D):Void;
   static function invalidateCollisionTriangleMesh3D(mesh:flight.CollisionTriangleMesh3D):Void;
-  static function packContactFeatureId(referenceIsA:Bool, referenceEdge:Float, incidentEdge:Float, secondPoint:Bool):Float;
   static function registerBuiltInCollisionFaceQueries3D():Void;
   static function registerBuiltInCollisionPairTests2D():Void;
   static function registerBuiltInCollisionPairTests3D():Void;
@@ -76,10 +70,8 @@ extern class Collision {
   static function testSphereBoxCollision3D(a:flight.CollisionSphere3D, b:flight.CollisionBox3D, out:flight.CollisionManifold3D):Bool;
   static function testSphereCapsuleCollision3D(a:flight.CollisionSphere3D, b:flight.CollisionCapsule3D, out:flight.CollisionManifold3D):Bool;
   static function testSphereSphereCollision3D(a:flight.CollisionSphere3D, b:flight.CollisionSphere3D, out:flight.CollisionManifold3D):Bool;
-  static function writeAabbVertices(aabb:flight.CollisionAabb2D, out:js.lib.Float64Array):Void;
   static function writeCollisionConvexHullFaces3D(points:Array<Float>, out:Array<Float>):Float;
   static function writeCollisionHeightfieldBounds3D(heightfield:flight.CollisionHeightfield3D, out:flight.CollisionAabb3D):Void;
   static function writeCollisionTriangleMeshBounds3D(mesh:flight.CollisionTriangleMesh3D, out:flight.CollisionAabb3D):Void;
-  static function writeObbVertices(obb:flight.CollisionObb2D, out:js.lib.Float64Array):Void;
 }
 #end

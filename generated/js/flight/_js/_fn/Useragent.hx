@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/useragent, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/useragent/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/useragent")
+@:jsRequire("@flighthq/useragent/contract")
 extern class Useragent {
   static function detectEndianness():String;
   static function parseUserAgentArch(ua:String, ?uadPlatform:String):String;

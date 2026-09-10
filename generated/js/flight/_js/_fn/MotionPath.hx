@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/motionpath, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/motionpath/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/motionpath")
+@:jsRequire("@flighthq/motionpath/contract")
 extern class MotionPath {
   static function createMotionPath(path:flight.Path, ?speed:Float, ?loopMode:String, ?tolerance:Float):flight.MotionPath;
   static function getMotionPathHeading(mp:flight.MotionPath):Float;

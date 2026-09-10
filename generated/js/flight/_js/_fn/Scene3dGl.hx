@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/scene3d-gl, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/scene3d-gl/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/scene3d-gl")
+@:jsRequire("@flighthq/scene3d-gl/contract")
 extern class Scene3dGl {
   static function areGlPbrExtensionGuardsEnabled(state:flight.GlRenderState):Bool;
   static function areGlScene3DColorSpaceGuardsEnabled(state:flight.GlRenderState):Bool;
@@ -87,7 +87,6 @@ extern class Scene3dGl {
   static function getGlPbrVertexSourceForKey(key:flight.GlPbrDefineKey):String;
   static function getGlScene3DRuntime(state:flight.GlRenderState):flight.GlScene3DRuntime;
   static function getGlScene3DTime(state:flight.GlRenderState):Float;
-  static function getGlScene3DViewportAspect(state:flight.GlRenderState):Float;
   static function getGlToonFragmentSourceForKey(key:flight.GlToonDefineKey):String;
   static function getGlToonVertexSourceForKey(key:flight.GlToonDefineKey):String;
   static function getGlUnlitFragmentSourceForKey(key:flight.GlUnlitDefineKey):String;

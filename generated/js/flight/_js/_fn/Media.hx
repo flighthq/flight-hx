@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/media, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/media/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/media")
+@:jsRequire("@flighthq/media/contract")
 extern class Media {
   static function addAudioBusToMixer(mixer:flight.AudioMixer, bus:flight.AudioBus):Void;
   static function clearAudioChannelLoopRegion(channel:flight.AudioChannel):Void;

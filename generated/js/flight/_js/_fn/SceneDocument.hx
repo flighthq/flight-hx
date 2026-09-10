@@ -2,14 +2,10 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/scene-document, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/scene-document/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/scene-document")
+@:jsRequire("@flighthq/scene-document/contract")
 extern class SceneDocument {
-  static function checkFlightDocumentInteractiveStates(node:flight.FlightDocumentNode, dimension:String, schemas:flight.FlightDocumentSchemaRegistry, sceneIndex:Float, nodePath:String):Null<flight.FlightDocumentRefusalExplanation>;
-  static function checkFlightDocumentLayoutTargets(layouts:Array<flight.FlightDocumentLayoutDescriptor>, root:flight.FlightDocumentNode, sceneIndex:Float):Null<flight.FlightDocumentRefusalExplanation>;
-  static function checkFlightDocumentNodeFields(node:flight.FlightDocumentNode, schemas:flight.FlightDocumentSchemaRegistry, sceneIndex:Float, nodePath:String):Null<flight.FlightDocumentRefusalExplanation>;
-  static function checkUnregisteredNodeKinds(node:flight.FlightDocumentNode, schemas:flight.FlightDocumentSchemaRegistry, sceneIndex:Float, nodePath:String):Null<flight.FlightDocumentRefusalExplanation>;
   static function createFlightDocumentScene2DMaterialization(document:flight.FlightDocument, schemas:flight.FlightDocumentSchemaRegistry, ?resolvers:flight.FlightDocumentResourceResolverRegistry, ?sceneIndex:Float):Null<flight.FlightDocumentScene2DMaterialization>;
   static function createFlightDocumentScene2DMaterializationFromText(text:String, schemas:flight.FlightDocumentSchemaRegistry, ?resolvers:flight.FlightDocumentResourceResolverRegistry, ?sceneIndex:Float):Null<flight.FlightDocumentScene2DMaterialization>;
   static function createFlightDocumentScene3DMaterialization(document:flight.FlightDocument, schemas:flight.FlightDocumentSchemaRegistry, ?resolvers:flight.FlightDocumentResourceResolverRegistry, ?sceneIndex:Float):Null<flight.FlightDocumentScene3DMaterialization>;

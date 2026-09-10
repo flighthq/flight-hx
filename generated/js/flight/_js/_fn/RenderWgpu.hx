@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/render-wgpu, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/render-wgpu/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/render-wgpu")
+@:jsRequire("@flighthq/render-wgpu/contract")
 extern class RenderWgpu {
   static function acquireWgpuRenderTexture(state:flight.WgpuRenderState, pool:flight.WgpuRenderTexturePool, descriptor:flight.RenderTargetDescriptor):flight.RenderTexture;
   static function applyWgpuBlendMode(state:flight.WgpuRenderState, blendMode:Null<String>):Void;

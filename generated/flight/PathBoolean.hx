@@ -157,18 +157,6 @@ inline function unionPaths(a:flight.Path, b:flight.Path, ?out:flight.Path, ?opti
   #end
 }
 
-inline function writePathBooleanContours(contours:Array<Array<Float>>, ?out:flight.Path):flight.Path {
-  #if flight_hx
-  return flight._hx._fn.PathBoolean.writePathBooleanContours(contours, out);
-  #elseif (js && flight_esm)
-  return flight._js._fn.PathBoolean.writePathBooleanContours(contours, out);
-  #elseif cpp
-  return flight._cpp._fn.PathBoolean.writePathBooleanContours(contours, out);
-  #else
-  #error "flight.PathBoolean: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function xorPaths(a:flight.Path, b:flight.Path, ?out:flight.Path, ?options:flight.PathBooleanOptions):flight.Path {
   #if flight_hx
   return flight._hx._fn.PathBoolean.xorPaths(a, b, out, options);

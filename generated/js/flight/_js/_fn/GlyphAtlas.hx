@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/glyphatlas, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/glyphatlas/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/glyphatlas")
+@:jsRequire("@flighthq/glyphatlas/contract")
 extern class GlyphAtlas {
   static function clearGlyphAtlasDirty(atlas:flight.GlyphAtlas):Void;
   static function createGlyphAtlas(options:flight.GlyphAtlasOptions):flight.GlyphAtlas;

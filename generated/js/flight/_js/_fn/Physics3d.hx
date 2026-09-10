@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/physics3d, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/physics3d/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/physics3d")
+@:jsRequire("@flighthq/physics3d/contract")
 extern class Physics3d {
   static function accumulatePhysics3DJointRowReaction(joint:flight.Physics3DJoint, state:Array<Float>, offset:Float, impulse:Float, out:flight.Physics3DJointReaction):Void;
   static function addPhysics3DBody(world:flight.Physics3DWorld, body:flight.RigidBody3D):Float;
@@ -12,21 +12,13 @@ extern class Physics3d {
   static function applyPhysics3DAngularImpulse(body:flight.RigidBody3D, x:Float, y:Float, z:Float):Bool;
   static function applyPhysics3DForce(body:flight.RigidBody3D, x:Float, y:Float, z:Float):Bool;
   static function applyPhysics3DForceAtPoint(body:flight.RigidBody3D, x:Float, y:Float, z:Float, pointX:Float, pointY:Float, pointZ:Float):Bool;
-  static function applyPhysics3DJointAngularImpulse(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, impulseX:Float, impulseY:Float, impulseZ:Float):Void;
-  static function applyPhysics3DJointImpulse(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, rAX:Float, rAY:Float, rAZ:Float, rBX:Float, rBY:Float, rBZ:Float, impulseX:Float, impulseY:Float, impulseZ:Float):Void;
-  static function applyPhysics3DJointRowImpulse(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, directionX:Float, directionY:Float, directionZ:Float, armAX:Float, armAY:Float, armAZ:Float, armBX:Float, armBY:Float, armBZ:Float, impulse:Float):Void;
   static function applyPhysics3DLinearImpulse(body:flight.RigidBody3D, x:Float, y:Float, z:Float):Bool;
   static function applyPhysics3DLinearImpulseAtPoint(body:flight.RigidBody3D, x:Float, y:Float, z:Float, pointX:Float, pointY:Float, pointZ:Float):Bool;
   static function applyPhysics3DTorque(body:flight.RigidBody3D, x:Float, y:Float, z:Float):Bool;
-  static function applyRow(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, state:Array<Float>, offset:Float, impulse:Float):Void;
   static function arePhysics3DGuardsEnabled():Bool;
-  static function assertPhysics3DBodyNotStepping(body:flight.RigidBody3D):Void;
-  static function assertPhysics3DWorldNotStepping(world:flight.Physics3DWorld):Void;
-  static function beginJointSolve(joint:flight.Physics3DJoint, length:Float):Array<Float>;
   static function breakPhysics3DJoint(world:flight.Physics3DWorld, joint:flight.Physics3DJoint):Void;
   static function buildPhysics3DContacts(world:flight.Physics3DWorld):Void;
   static function buildPhysics3DSolveIslands(world:flight.Physics3DWorld):Void;
-  static function clearJointSolve(joint:flight.Physics3DJoint):Void;
   static function clearPhysics3DJointReaction(out:flight.Physics3DJointReaction):Void;
   static function clearRigidBody3DForces(body:flight.RigidBody3D):Void;
   static function combinePhysics3DMassData(target:flight.Physics3DMassData, addend:flight.Physics3DMassData):Void;
@@ -62,14 +54,9 @@ extern class Physics3d {
   static function explainPhysics3DJoints(world:flight.Physics3DWorld):Array<flight.Physics3DJointExplanation>;
   static function explainPhysics3DStep(world:flight.Physics3DWorld, dt:Float):flight.Physics3DStepExplanation;
   static function findPhysics3DBody(world:flight.Physics3DWorld, index:Float):Null<flight.RigidBody3D>;
-  static function getJointSolveState(joint:flight.Physics3DJoint):Null<Array<Float>>;
   static function getPhysics3DJointReactionForce(reaction:flight.Physics3DJointReaction):Float;
   static function getPhysics3DJointReactionTorque(reaction:flight.Physics3DJointReaction):Float;
-  static function getPhysics3DJointRowMass(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, directionX:Float, directionY:Float, directionZ:Float, armAX:Float, armAY:Float, armAZ:Float, armBX:Float, armBY:Float, armBZ:Float):Float;
-  static function getPhysics3DJointRowVelocity(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, directionX:Float, directionY:Float, directionZ:Float, armAX:Float, armAY:Float, armAZ:Float, armBX:Float, armBY:Float, armBZ:Float):Float;
   static function getPhysics3DJointSolver(world:flight.Physics3DWorld, kind:String):Null<flight.Physics3DJointSolver>;
-  static function getRowMass(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, state:Array<Float>, offset:Float):Float;
-  static function getRowVelocity(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, state:Array<Float>, offset:Float):Float;
   static function hasActivePhysics3DBullet(world:flight.Physics3DWorld):Bool;
   static function hydratePhysics3DWorld(world:flight.Physics3DWorld):Bool;
   static function integratePhysics3DContinuous(world:flight.Physics3DWorld, dt:Float):Void;
@@ -94,14 +81,9 @@ extern class Physics3d {
   static function isRigidBody3DPairAwake(a:flight.RigidBody3D, b:flight.RigidBody3D):Bool;
   static function mixPhysics3DFriction(first:Float, second:Float):Float;
   static function mixPhysics3DRestitution(first:Float, second:Float):Float;
-  static function prepareAngularBlock(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, state:Array<Float>, massOffset:Float, biasOffset:Float, dt:Float):Void;
   static function preparePhysics3DContactConstraints(world:flight.Physics3DWorld):Void;
-  static function preparePointBlock(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, joint:flight.Physics3DJoint, state:Array<Float>, dt:Float):Void;
   static function queryPhysics3DPoint(world:flight.Physics3DWorld, x:Float, y:Float, z:Float, out:flight.Physics3DQueryResult, ?filter:flight.Physics3DQueryFilter):Void;
   static function queryPhysics3DRegion(world:flight.Physics3DWorld, region:flight.SpatialAabb3D, out:flight.Physics3DQueryResult, ?filter:flight.Physics3DQueryFilter):Void;
-  static function readFrameBases(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, frames:flight.Physics3DJointFrames):Void;
-  static function readFrameRotations(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, frames:flight.Physics3DJointFrames):Void;
-  static function readJointImpulse(joint:flight.Physics3DJoint, slot:Float):Float;
   static function rebuildPhysics3DJointCollisionSuppressions(world:flight.Physics3DWorld):Void;
   static function refreshPhysics3DContacts(world:flight.Physics3DWorld):Void;
   static function refreshRigidBody3DWorldInertia(body:flight.RigidBody3D):Void;
@@ -110,50 +92,27 @@ extern class Physics3d {
   static function removePhysics3DBody(world:flight.Physics3DWorld, body:flight.RigidBody3D):Bool;
   static function removePhysics3DCollider(world:flight.Physics3DWorld, body:flight.RigidBody3D, collider:flight.Physics3DCollider):Bool;
   static function removePhysics3DJoint(world:flight.Physics3DWorld, joint:flight.Physics3DJoint):Bool;
-  static function reportPhysics3DSpatialIndexing(world:flight.Physics3DWorld):Void;
   static function setPhysics3DBodyBullet(body:flight.RigidBody3D, bullet:Bool):Bool;
   static function setPhysics3DBodyFixedRotation(body:flight.RigidBody3D, fixedRotation:Bool):Bool;
   static function setPhysics3DBodySleepEnabled(body:flight.RigidBody3D, sleepEnabled:Bool):Bool;
   static function setPhysics3DBodyTransform(body:flight.RigidBody3D, x:Float, y:Float, z:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Bool;
   static function setPhysics3DBodyType(body:flight.RigidBody3D, type:String):Bool;
   static function setRigidBody3DMassData(body:flight.RigidBody3D, data:flight.Physics3DMassData):Void;
-  static function solveAngularBlock(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, joint:flight.Physics3DJoint, state:Array<Float>, massOffset:Float, biasOffset:Float):Void;
-  static function solveEqualityRow(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, joint:flight.Physics3DJoint, slot:Float, state:Array<Float>, offset:Float, mass:Float, error:Float, biasFactor:Float):Void;
-  static function solveLowerLimitRow(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, state:Array<Float>, offset:Float, mass:Float, error:Float, biasFactor:Float, accumulatorSlot:Float, ?gamma:Float):Void;
-  static function solveMotorRow(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, state:Array<Float>, offset:Float, mass:Float, speed:Float, maxImpulse:Float, previous:Float):Float;
   static function solvePhysics3DContactPositions(world:flight.Physics3DWorld):Float;
   static function solvePhysics3DContactVelocities(world:flight.Physics3DWorld):Void;
-  static function solvePointBlock(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, joint:flight.Physics3DJoint, state:Array<Float>):Void;
-  static function solveUpperLimitRow(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, state:Array<Float>, offset:Float, mass:Float, error:Float, biasFactor:Float, accumulatorSlot:Float, ?gamma:Float):Void;
   static function stepPhysics3D(world:flight.Physics3DWorld, dt:Float):Void;
   static function stepPhysics3DInterval(world:flight.Physics3DWorld, dt:Float):Void;
-  static function swapPhysics3DJointFrames(frames:flight.Physics3DJointFrames):Void;
   static function synchronizePhysics3DBroadphase(world:flight.Physics3DWorld):Void;
   static function synchronizePhysics3DSweptBroadphase(world:flight.Physics3DWorld, dt:Float):Void;
   static function updatePhysics3DColliderWorldShape(collider:flight.Physics3DCollider, body:flight.RigidBody3D):Void;
   static function updatePhysics3DSleep(world:flight.Physics3DWorld, dt:Float):Void;
   static function updateRigidBody3DMassData(body:flight.RigidBody3D):Void;
   static function wakePhysics3DBody(body:flight.RigidBody3D):Void;
-  static function warmStartAngularBlock(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, joint:flight.Physics3DJoint):Void;
   static function warmStartPhysics3DContacts(world:flight.Physics3DWorld):Void;
-  static function warmStartPointBlock(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, joint:flight.Physics3DJoint):Void;
-  static function writeAngularRow(state:Array<Float>, offset:Float, axisX:Float, axisY:Float, axisZ:Float):Void;
-  static function writeJointImpulse(joint:flight.Physics3DJoint, slot:Float, value:Float):Void;
   static function writePhysics3DColliderBounds(collider:flight.Physics3DCollider, out:flight.SpatialAabb3D):Void;
   static function writePhysics3DDebugGeometry(world:flight.Physics3DWorld, out:flight.Physics3DDebugGeometry, ?options:flight.Physics3DDebugGeometryOptions):Void;
-  static function writePhysics3DJointAnchorVelocity(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, joint:flight.Physics3DJoint, out:Array<Float>):Void;
-  static function writePhysics3DJointAnchors(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, joint:flight.Physics3DJoint):Void;
-  static function writePhysics3DJointAngularMass(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, out:Array<Float>):Void;
-  static function writePhysics3DJointFrameBasis(body:flight.RigidBody3D, localRotationX:Float, localRotationY:Float, localRotationZ:Float, localRotationW:Float, out:Array<Float>):Void;
-  static function writePhysics3DJointFrameRotation(body:flight.RigidBody3D, localRotationX:Float, localRotationY:Float, localRotationZ:Float, localRotationW:Float, out:Array<Float>):Void;
-  static function writePhysics3DJointPointMass(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, rAX:Float, rAY:Float, rAZ:Float, rBX:Float, rBY:Float, rBZ:Float, out:Array<Float>):Void;
   static function writePhysics3DJointReaction(world:flight.Physics3DWorld, joint:flight.Physics3DJoint, dt:Float, out:flight.Physics3DJointReaction):Bool;
-  static function writePhysics3DJointRelativeRotation(frameAX:Float, frameAY:Float, frameAZ:Float, frameAW:Float, frameBX:Float, frameBY:Float, frameBZ:Float, frameBW:Float, out:Array<Float>):Void;
-  static function writePhysics3DJointRotationError(frameAX:Float, frameAY:Float, frameAZ:Float, frameAW:Float, frameBX:Float, frameBY:Float, frameBZ:Float, frameBW:Float, out:Array<Float>):Void;
-  static function writePhysics3DJointSeparation(bodyA:flight.RigidBody3D, bodyB:flight.RigidBody3D, joint:flight.Physics3DJoint, out:Array<Float>):Void;
   static function writePhysics3DRotationalCcdEnvelope(angularSpeed:Float, maximumRadius:Float, dt:Float, maxSubsteps:Float, out:flight.Physics3DRotationalCcdEnvelope):Bool;
-  static function writePhysics3DSoftRowParameters(mass:Float, frequencyHz:Float, dampingRatio:Float, dt:Float, hardBiasFactor:Float, out:Array<Float>):Void;
   static function writeRigidBody3DWorldCenter(body:flight.RigidBody3D, out:Array<Float>):Void;
-  static function writeRow(state:Array<Float>, offset:Float, directionX:Float, directionY:Float, directionZ:Float, armAX:Float, armAY:Float, armAZ:Float, armBX:Float, armBY:Float, armBZ:Float):Void;
 }
 #end

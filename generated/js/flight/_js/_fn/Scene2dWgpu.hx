@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/scene2d-wgpu, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/scene2d-wgpu/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/scene2d-wgpu")
+@:jsRequire("@flighthq/scene2d-wgpu/contract")
 extern class Scene2dWgpu {
   static function acquireWgpuScale9ShapeRasterSurface(provider:flight.Raster2DSurfaceProvider, data:flight.WgpuScale9ShapeData):Null<flight.Raster2DSurface>;
   static function acquireWgpuShapeRasterSurface(provider:flight.Raster2DSurfaceProvider, data:flight.WgpuShapeRendererData):Null<flight.Raster2DSurface>;

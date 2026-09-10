@@ -121,18 +121,6 @@ inline function createPhysics2DAbiWorld(abi:flight.Physics2DAbi):Float {
   #end
 }
 
-inline function createReferencePhysics2DAbi():flight.Physics2DAbi {
-  #if flight_hx
-  return flight._hx._fn.Physics2DAbi.createReferencePhysics2DAbi();
-  #elseif (js && flight_esm)
-  return flight._js._fn.Physics2DAbi.createReferencePhysics2DAbi();
-  #elseif cpp
-  return flight._cpp._fn.Physics2DAbi.createReferencePhysics2DAbi();
-  #else
-  #error "flight.Physics2DAbi: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function destroyPhysics2DAbiWorld(abi:flight.Physics2DAbi, world:Float):Bool {
   #if flight_hx
   return flight._hx._fn.Physics2DAbi.destroyPhysics2DAbiWorld(abi, world);

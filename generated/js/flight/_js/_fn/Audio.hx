@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/audio, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/audio/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/audio")
+@:jsRequire("@flighthq/audio/contract")
 extern class Audio {
   static function canPlayAudioType(host:flight.HasMediaAudioCodec, mimeType:String):Bool;
   static function cloneAudioResource(resource:flight.AudioResource):flight.AudioResource;

@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/skeleton3d, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/skeleton3d/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/skeleton3d")
+@:jsRequire("@flighthq/skeleton3d/contract")
 extern class Skeleton3D {
   static function areSkeleton3DGuardsEnabled():Bool;
   static function captureMeshSkinBindPose(geometry:flight.MeshGeometry):flight.MeshSkinBindPose;

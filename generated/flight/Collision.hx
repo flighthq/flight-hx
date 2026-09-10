@@ -121,54 +121,6 @@ inline function collideAabbPolygonContactManifold2D(a:flight.CollisionAabb2D, b:
   #end
 }
 
-inline function collideCapsuleAabbContactManifold2D(a:flight.CollisionCapsule2D, b:flight.CollisionAabb2D, out:flight.CollisionContactManifold2D):Bool {
-  #if flight_hx
-  return flight._hx._fn.Collision.collideCapsuleAabbContactManifold2D(a, b, out);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Collision.collideCapsuleAabbContactManifold2D(a, b, out);
-  #elseif cpp
-  return flight._cpp._fn.Collision.collideCapsuleAabbContactManifold2D(a, b, out);
-  #else
-  #error "flight.Collision: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function collideCapsuleCapsuleContactManifold2D(a:flight.CollisionCapsule2D, b:flight.CollisionCapsule2D, out:flight.CollisionContactManifold2D):Bool {
-  #if flight_hx
-  return flight._hx._fn.Collision.collideCapsuleCapsuleContactManifold2D(a, b, out);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Collision.collideCapsuleCapsuleContactManifold2D(a, b, out);
-  #elseif cpp
-  return flight._cpp._fn.Collision.collideCapsuleCapsuleContactManifold2D(a, b, out);
-  #else
-  #error "flight.Collision: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function collideCapsuleObbContactManifold2D(a:flight.CollisionCapsule2D, b:flight.CollisionObb2D, out:flight.CollisionContactManifold2D):Bool {
-  #if flight_hx
-  return flight._hx._fn.Collision.collideCapsuleObbContactManifold2D(a, b, out);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Collision.collideCapsuleObbContactManifold2D(a, b, out);
-  #elseif cpp
-  return flight._cpp._fn.Collision.collideCapsuleObbContactManifold2D(a, b, out);
-  #else
-  #error "flight.Collision: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function collideCapsulePolygonContactManifold2D(a:flight.CollisionCapsule2D, b:flight.CollisionPolygon2D, out:flight.CollisionContactManifold2D):Bool {
-  #if flight_hx
-  return flight._hx._fn.Collision.collideCapsulePolygonContactManifold2D(a, b, out);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Collision.collideCapsulePolygonContactManifold2D(a, b, out);
-  #elseif cpp
-  return flight._cpp._fn.Collision.collideCapsulePolygonContactManifold2D(a, b, out);
-  #else
-  #error "flight.Collision: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function collideCircleAabbContactManifold2D(a:flight.CollisionCircle2D, b:flight.CollisionAabb2D, out:flight.CollisionContactManifold2D):Bool {
   #if flight_hx
   return flight._hx._fn.Collision.collideCircleAabbContactManifold2D(a, b, out);
@@ -176,18 +128,6 @@ inline function collideCircleAabbContactManifold2D(a:flight.CollisionCircle2D, b
   return flight._js._fn.Collision.collideCircleAabbContactManifold2D(a, b, out);
   #elseif cpp
   return flight._cpp._fn.Collision.collideCircleAabbContactManifold2D(a, b, out);
-  #else
-  #error "flight.Collision: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function collideCircleCapsuleContactManifold2D(a:flight.CollisionCircle2D, b:flight.CollisionCapsule2D, out:flight.CollisionContactManifold2D):Bool {
-  #if flight_hx
-  return flight._hx._fn.Collision.collideCircleCapsuleContactManifold2D(a, b, out);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Collision.collideCircleCapsuleContactManifold2D(a, b, out);
-  #elseif cpp
-  return flight._cpp._fn.Collision.collideCircleCapsuleContactManifold2D(a, b, out);
   #else
   #error "flight.Collision: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -488,18 +428,6 @@ inline function invalidateCollisionTriangleMesh3D(mesh:flight.CollisionTriangleM
   flight._js._fn.Collision.invalidateCollisionTriangleMesh3D(mesh);
   #elseif cpp
   flight._cpp._fn.Collision.invalidateCollisionTriangleMesh3D(mesh);
-  #else
-  #error "flight.Collision: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function packContactFeatureId(referenceIsA:Bool, referenceEdge:Float, incidentEdge:Float, secondPoint:Bool):Float {
-  #if flight_hx
-  return flight._hx._fn.Collision.packContactFeatureId(referenceIsA, referenceEdge, incidentEdge, secondPoint);
-  #elseif (js && flight_esm)
-  return flight._js._fn.Collision.packContactFeatureId(referenceIsA, referenceEdge, incidentEdge, secondPoint);
-  #elseif cpp
-  return flight._cpp._fn.Collision.packContactFeatureId(referenceIsA, referenceEdge, incidentEdge, secondPoint);
   #else
   #error "flight.Collision: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -841,18 +769,6 @@ inline function testSphereSphereCollision3D(a:flight.CollisionSphere3D, b:flight
   #end
 }
 
-inline function writeAabbVertices(aabb:flight.CollisionAabb2D, out:js.lib.Float64Array):Void {
-  #if flight_hx
-  flight._hx._fn.Collision.writeAabbVertices(aabb, out);
-  #elseif (js && flight_esm)
-  flight._js._fn.Collision.writeAabbVertices(aabb, out);
-  #elseif cpp
-  flight._cpp._fn.Collision.writeAabbVertices(aabb, out);
-  #else
-  #error "flight.Collision: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
 inline function writeCollisionConvexHullFaces3D(points:Array<Float>, out:Array<Float>):Float {
   #if flight_hx
   return flight._hx._fn.Collision.writeCollisionConvexHullFaces3D(points, out);
@@ -884,18 +800,6 @@ inline function writeCollisionTriangleMeshBounds3D(mesh:flight.CollisionTriangle
   flight._js._fn.Collision.writeCollisionTriangleMeshBounds3D(mesh, out);
   #elseif cpp
   flight._cpp._fn.Collision.writeCollisionTriangleMeshBounds3D(mesh, out);
-  #else
-  #error "flight.Collision: no backend — define flight_hx, or js+flight_esm, or target cpp.";
-  #end
-}
-
-inline function writeObbVertices(obb:flight.CollisionObb2D, out:js.lib.Float64Array):Void {
-  #if flight_hx
-  flight._hx._fn.Collision.writeObbVertices(obb, out);
-  #elseif (js && flight_esm)
-  flight._js._fn.Collision.writeObbVertices(obb, out);
-  #elseif cpp
-  flight._cpp._fn.Collision.writeObbVertices(obb, out);
   #else
   #error "flight.Collision: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end

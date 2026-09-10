@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/velocity, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/velocity/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/velocity")
+@:jsRequire("@flighthq/velocity/contract")
 extern class Velocity {
   static function addVelocity(out:flight.Velocity2D, a:flight.Velocity2D, b:flight.Velocity2D):flight.Velocity2D;
   static function beginVelocityFrame(field:flight.VelocityField):Void;

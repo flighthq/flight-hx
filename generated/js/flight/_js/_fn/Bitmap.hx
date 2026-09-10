@@ -2,9 +2,9 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/bitmap, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/bitmap/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/bitmap")
+@:jsRequire("@flighthq/bitmap/contract")
 extern class Bitmap {
   static function applyBitmapColorScaleBias(dest:flight.BitmapRegion, source:flight.BitmapRegion, ct:flight.ColorScaleBias):Void;
   static function applyBitmapLevels(out:flight.BitmapRegion, source:flight.BitmapRegion, ?blackPoint:Float, ?whitePoint:Float, ?gamma:Float):Void;

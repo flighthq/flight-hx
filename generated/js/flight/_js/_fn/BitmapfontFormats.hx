@@ -2,17 +2,15 @@
 #if js
 package flight._js._fn;
 
-// Named ESM exports of @flighthq/bitmapfont-formats, bound as extern statics; @:jsRequire binds each to the module's
+// Named ESM exports of @flighthq/bitmapfont-formats/contract, bound as extern statics; @:jsRequire binds each to the module's
 // like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
-@:jsRequire("@flighthq/bitmapfont-formats")
+@:jsRequire("@flighthq/bitmapfont-formats/contract")
 extern class BitmapfontFormats {
-  static function buildBitmapFontFromRecord(record:flight.BitmapFontRecord, ?options:flight.BitmapFontParseOptions):Null<flight.BitmapFont>;
   static function explainBitmapFontParse(text:String, ?options:flight.BitmapFontParseOptions):flight.BitmapFontParseExplanation;
   static function formatBitmapFontFnt(font:flight.BitmapFont):String;
   static function parseBitmapFontBinary(bytes:js.lib.Uint8Array, ?options:flight.BitmapFontParseOptions, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.BitmapFont>;
   static function parseBitmapFontFnt(text:String, ?options:flight.BitmapFontParseOptions, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.BitmapFont>;
   static function parseBitmapFontJson(text:String, ?options:flight.BitmapFontParseOptions, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.BitmapFont>;
   static function parseBitmapFontXml(text:String, ?options:flight.BitmapFontParseOptions, ?diagnostics:Array<flight.ImportDiagnostic>):Null<flight.BitmapFont>;
-  static function reportDroppedBitmapFontRecords(diagnostics:Null<Array<flight.ImportDiagnostic>>, origin:String, pages:Float, chars:Float, kernings:Float):Void;
 }
 #end
