@@ -13,6 +13,7 @@
     "generate": "node tools/backend-hx/generate.mjs",
     "proof": "node tools/haxe.mjs -cp src -cp tests/haxe --main ProofOfShape --interp -D flight_hx",
     "gate:proof": "node tests/gates/proofShape.mjs",
+    "gate:surface": "node tests/gates/generatedSurface.mjs",
     "gate:web": "node tests/gates/webBehavioral.mjs",
     "gate:parity": "node tests/gates/backendParity.mjs",
     "gate:dce": "node tests/gates/webDce.mjs",

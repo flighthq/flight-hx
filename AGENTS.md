@@ -201,11 +201,18 @@ unification and the fail-loud selector.
 
 **The ESM (web) path is real end to end.** `tools/backend-hx/generate.mjs` consumes flight-compiler's
 stable inventory (`lowerTypeScriptSource` → IR; signatures/types/export names, bodies ignored) and
-emits the checked-in `generated/` bindings — currently the `geometry`/`Vector2` slice (30 functions).
+emits the checked-in `generated/` bindings — currently the whole **`@flighthq/geometry`** package
+(**380 of 398** functions bound; 18 skipped: `EntityConstruction` allocation-marker + one function-type
+alias) plus the **17 value types** its signatures reference (`Vector2/3/4`, `Matrix/3/4`, `Rectangle`,
+`Quaternion`, `Aabb`, …), resolved from `@flighthq/types`. The type mapper handles `Readonly`/
+`EntityWithoutRuntime` unwrap, `*Like` aliases, typed arrays → `js.lib.*`, `X|null` → `Null<X>`,
+string-literal unions → `String`, and inline object types → anonymous structures; anything else is
+skipped and reported (never a silent miscompile).
 `tools/esm/EsmGenerator.hx` (the vendored ESM generator) makes Haxe emit static named imports; with
 `-dce full` + esbuild, `examples/web-geometry` runs against the **real `@flighthq/geometry`** and
-**tree-shakes** (an unused Flight function is absent from the bundle). Gated by `gate:web` (behavioral)
-and `gate:dce` (pay-per-use); both skip cleanly without built deps.
+**tree-shakes** (an unused Flight function is absent from the bundle). Gated by `gate:surface` (the
+full generated surface type-checks), `gate:web` (behavioral), and `gate:dce` (pay-per-use); all skip
+cleanly without built deps.
 
 Note: flight-compiler already ships `compiler-backend-hx`, but it emits **transpiled** Haxe (the
 archived approach) and there is no `--target js` — so the ESM-**externs** backend is genuinely new and

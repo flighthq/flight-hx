@@ -1,5 +1,5 @@
 import flight.Vector2;
-import flight.Geom; // bare module import -> unqualified free functions, bound to real Flight ESM
+import flight.Geometry; // bare module import -> unqualified free functions, bound to real Flight ESM
 
 // Runs the GENERATED flight.* bindings against the real @flighthq/geometry ESM package — real
 // Flight functions (out-param first, createVector2 allocation, radians), not a hand-written toy.

@@ -26,7 +26,7 @@ export function webBuildBlockedReason() {
     return 'flight-compiler not built (cd .dependencies/flight-compiler && npm i && npm run build)';
   if (!existsSync(join(flight.directory, 'packages/geometry/dist/index.js')))
     return 'flight geometry not built (cd .dependencies/flight && npm i && npx tsc -b packages/geometry)';
-  if (!existsSync(join(repoRoot, 'generated/flight/Geom.hx')))
+  if (!existsSync(join(repoRoot, 'generated/flight/Geometry.hx')))
     return 'bindings not generated (run `npm run generate`)';
   return null;
 }
