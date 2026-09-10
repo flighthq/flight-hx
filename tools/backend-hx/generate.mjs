@@ -4,15 +4,15 @@
 // parse TypeScript itself — it lowers Flight source through @flighthq/tool-compiler and reads the IR
 // (signatures, type shapes, export names). Bodies are ignored (externs have none).
 //
-// Scope: one Flight package of free functions (geometry) + the value types those functions reference
-// (resolved from @flighthq/types). Emits:
-//   generated/flight/<Type>.hx        public backend-dispatching typedef per value type
-//   generated/js/flight/_js/<Type>.hx structural JS typedef per value type
-//   generated/flight/<Module>.hx      public module-level forwarders for the package's free functions
-//   generated/js/flight/_js/<Module>.hx  @:jsRequire extern binding the package's named ESM exports
-// Unmappable signatures are SKIPPED and reported, so the emitted surface always compiles. This is the
-// ESM half of the bindings backend that AGENTS.md says promotes upstream to compiler-backend-hx.
-import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+// Scope: the WHOLE Flight SDK — every @flighthq/* package the sdk aggregate depends on. Each package
+// of free functions becomes one `flight.<Package>` module (backed by a @:jsRequire extern); every
+// value type those signatures reference becomes a `flight.<Type>` structural typedef. Emits:
+//   generated/flight/<Type>.hx / generated/js/flight/_js/<Type>.hx       value typedefs
+//   generated/flight/<Package>.hx / generated/js/flight/_js/<Package>.hx free-function modules
+// Unmappable signatures are SKIPPED and reported per reason, so the emitted surface always compiles.
+// This is the ESM half of the bindings backend that AGENTS.md says promotes upstream to
+// compiler-backend-hx.
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { resolveDependency } from '../../scripts/dependencyLock.mjs';
@@ -32,50 +32,67 @@ try {
   process.exit(1);
 }
 
-// --- the slice to generate -------------------------------------------------
-// One package of free functions, plus the type package its signatures reference.
-const PACKAGE = { name: '@flighthq/geometry', specifier: '@flighthq/geometry', module: 'Geometry', srcDir: 'packages/geometry/src' };
-const TYPES = { name: '@flighthq/types', srcDir: 'packages/types/src' };
+// --- discover the SDK package set -----------------------------------------
+const pkgRoot = join(flight.directory, 'packages');
+const nameToDir = new Map();
+for (const dir of readdirSync(pkgRoot)) {
+  const manifest = join(pkgRoot, dir, 'package.json');
+  if (!existsSync(manifest)) continue;
+  const json = JSON.parse(readFileSync(manifest, 'utf8'));
+  if (json.name?.startsWith('@flighthq/')) nameToDir.set(json.name, dir);
+}
+const sdkManifest = JSON.parse(readFileSync(join(pkgRoot, nameToDir.get('@flighthq/sdk'), 'package.json'), 'utf8'));
+// The SDK aggregate's @flighthq/* dependencies are "all of Flight" a web consumer sees.
+const sdkPackages = Object.keys(sdkManifest.dependencies ?? {}).filter((n) => n.startsWith('@flighthq/') && nameToDir.has(n));
 
-// Generic wrappers that carry no runtime shape of their own — unwrap to the argument.
-const WRAPPERS = new Set(['Readonly', 'ReadonlyArray', 'EntityWithoutRuntime', 'Partial', 'Writable']);
-// Native JS typed arrays -> Haxe js.lib externs.
+// @flighthq/display-list -> DisplayList
+function moduleName(pkgName) {
+  return pkgName.slice('@flighthq/'.length).split(/[-_]/).map((s) => s.charAt(0).toUpperCase() + s.slice(1)).join('');
+}
+function sourceFiles(pkgName) {
+  const src = join(pkgRoot, nameToDir.get(pkgName), 'src');
+  if (!existsSync(src)) return [];
+  return readdirSync(src)
+    .filter((f) => f.endsWith('.ts') && !f.endsWith('.test.ts') && !f.endsWith('.d.ts') && f !== 'index.ts' && f !== 'contract.ts')
+    .map((f) => join(src, f));
+}
+
+// --- single lowering pass: registry (types) + stashed function decls -------
+const registry = new Map();                 // type name -> declaration (interface/alias), any package
+const packageFns = new Map();               // pkgName -> function declarations (exported)
+console.error('lowering the SDK source (one pass)…');
+for (const pkgName of sdkPackages) {
+  const fns = [];
+  for (const file of sourceFiles(pkgName)) {
+    let mod;
+    try { mod = tc.lowerTypeScriptSource(tc.parseTypeScriptSource(file, readFileSync(file, 'utf8')), { packageName: pkgName, upstreamDirectory: flight.directory }).module; }
+    catch { continue; }
+    for (const d of mod.declarations) {
+      const name = d.binding?.name ?? d.name;
+      if ((d.kind === 'interface' || d.kind === 'typeAlias') && name && !registry.has(name)) registry.set(name, d);
+      if (d.kind === 'function' && d.exported === true) fns.push(d);
+    }
+  }
+  if (fns.length) packageFns.set(pkgName, fns);
+}
+
+// --- IR type -> Haxe type --------------------------------------------------
+const WRAPPERS = new Set(['Readonly', 'ReadonlyArray', 'EntityWithoutRuntime', 'Partial', 'Writable', 'Required']);
 const TYPED_ARRAYS = new Map([
   ['Float32Array', 'js.lib.Float32Array'], ['Float64Array', 'js.lib.Float64Array'],
   ['Int8Array', 'js.lib.Int8Array'], ['Int16Array', 'js.lib.Int16Array'], ['Int32Array', 'js.lib.Int32Array'],
   ['Uint8Array', 'js.lib.Uint8Array'], ['Uint16Array', 'js.lib.Uint16Array'], ['Uint32Array', 'js.lib.Uint32Array'],
 ]);
-
-// --- lower + registry ------------------------------------------------------
-function lowerFile(pkg, file) {
-  const path = join(flight.directory, pkg.srcDir, file);
-  const sf = tc.parseTypeScriptSource(path, readFileSync(path, 'utf8'));
-  return tc.lowerTypeScriptSource(sf, { packageName: pkg.name, upstreamDirectory: flight.directory }).module;
-}
-function sourceFiles(pkg) {
-  return readdirSync(join(flight.directory, pkg.srcDir))
-    .filter((f) => f.endsWith('.ts') && !f.endsWith('.test.ts') && !f.endsWith('.d.ts') && f !== 'index.ts' && f !== 'contract.ts');
-}
-
-// name -> declaration, for every type in @flighthq/types (interfaces + aliases).
-const registry = new Map();
-for (const file of sourceFiles(TYPES)) {
-  let mod;
-  try { mod = lowerFile(TYPES, file); } catch { continue; }
-  for (const d of mod.declarations) {
-    const name = d.binding?.name ?? d.name;
-    if (name && !registry.has(name)) registry.set(name, d);
-  }
-}
-
-// --- IR type -> Haxe type --------------------------------------------------
 class Unmappable extends Error {}
-const emitTypes = new Set(); // interface names that need a generated typedef
+const emitTypes = new Set();
 
-function refName(t) {
-  const r = t.reference ?? {};
-  return r.binding?.name ?? (r.kind === 'ambient' ? r.name : r.kind);
-}
+// Haxe reserved words. A param that is one is cosmetically renamed (extern binding is positional).
+const KEYWORDS = new Set(('abstract break case cast catch class continue default do dynamic else enum extends '
+  + 'extern false final for function if implements import in inline interface macro new null operator overload '
+  + 'override package private public return static switch this throw true try typedef untyped using var while').split(' '));
+const safeParam = (name) => (KEYWORDS.has(name) ? `${name}_` : name);
+
+const refName = (t) => { const r = t.reference ?? {}; return r.binding?.name ?? (r.kind === 'ambient' ? r.name : r.kind); };
 
 function mapType(t, depth = 0) {
   if (!t || typeof t !== 'object' || depth > 24) throw new Unmappable('missing/deep type');
@@ -90,7 +107,9 @@ function mapType(t, depth = 0) {
       }
     case 'array': return 'Array<' + mapType(t.element ?? t.elementType, depth + 1) + '>';
     case 'object': {
-      const props = (t.properties ?? []).map((p) => `${p.optional ? '?' : ''}${p.name}:${mapType(p.type, depth + 1)}`);
+      const props = (t.properties ?? [])
+        .filter((p) => !KEYWORDS.has(p.name)) // a keyword field name is invalid in an anon structure
+        .map((p) => `${p.optional ? '?' : ''}${p.name}:${mapType(p.type, depth + 1)}`);
       if (!props.length) throw new Unmappable('empty object');
       return `{ ${props.join(', ')} }`;
     }
@@ -107,47 +126,91 @@ function mapType(t, depth = 0) {
     default: throw new Unmappable(`kind ${t.kind}`);
   }
 }
-
 function mapUnion(t, depth) {
   const members = t.types ?? [];
   const nonNull = members.filter((k) => k.kind !== 'null' && k.kind !== 'undefined');
   const nullable = nonNull.length !== members.length;
-  if (nonNull.length && nonNull.every((k) => k.kind === 'literal')) return 'String'; // string-literal union
+  if (nonNull.length && nonNull.every((k) => k.kind === 'literal')) return 'String';
   if (nonNull.length === 1) { const inner = mapType(nonNull[0], depth + 1); return nullable ? `Null<${inner}>` : inner; }
   throw new Unmappable(`union of ${nonNull.length}`);
 }
 
-// --- collect functions -----------------------------------------------------
-function collectFunctions() {
+// --- map (no lowering) -----------------------------------------------------
+const skipReasons = new Map();
+function mapFunctions(decls) {
   const kept = [];
-  const skipped = [];
-  for (const file of sourceFiles(PACKAGE)) {
-    const mod = lowerFile(PACKAGE, file);
-    for (const d of mod.declarations) {
-      if (d.kind !== 'function' || d.exported !== true) continue;
-      try {
-        const params = d.parameters.map((p) => {
-          if (p.rest) throw new Unmappable('rest param');
-          return { name: p.binding.name, type: mapType(p.type), optional: Boolean(p.optional) };
-        });
-        kept.push({ name: d.binding.name, params, returns: mapType(d.returns) });
-      } catch (error) {
-        if (error instanceof Unmappable) skipped.push({ name: d.binding?.name, reason: error.message });
-        else throw error;
-      }
+  const seen = new Set();
+  for (const d of decls) {
+    // Flight overloads a few free functions (same name, different signatures). Haxe module-level
+    // functions can't overload, so bind the first and skip the rest (reported).
+    if (seen.has(d.binding?.name)) { skipReasons.set('overloaded name', (skipReasons.get('overloaded name') ?? 0) + 1); continue; }
+    try {
+      const params = d.parameters.map((p) => {
+        if (p.rest) throw new Unmappable('rest param');
+        return { name: safeParam(p.binding.name), type: mapType(p.type), optional: Boolean(p.optional) };
+      });
+      kept.push({ name: d.binding.name, params, returns: mapType(d.returns) });
+      seen.add(d.binding.name);
+    } catch (error) {
+      if (!(error instanceof Unmappable)) throw error;
+      skipReasons.set(error.message, (skipReasons.get(error.message) ?? 0) + 1);
     }
   }
   kept.sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
-  return { kept, skipped };
+  return kept;
+}
+
+// Map every package's functions first (this also populates emitTypes with referenced value types).
+const mappedPackages = [];
+for (const [pkgName, decls] of packageFns) {
+  const fns = mapFunctions(decls);
+  if (fns.length) mappedPackages.push({ pkgName, specifier: pkgName, fns });
+}
+
+// A function module shares the `flight.<Name>` namespace with value types. Flight names both the same
+// concept with differing case (`scene2d` package / `Scene2D` type, `bitmapfont` / `BitmapFont`), and
+// two files differing only by case break on case-insensitive filesystems. Fold each function module
+// onto the value type it case-matches (using the TYPE's exact casing, since signatures reference it),
+// so the pair merges into one module — exactly as the exact-match `Shape` case already does.
+const canonicalType = new Map();
+for (const name of emitTypes) canonicalType.set(name.toLowerCase(), name);
+const modules = new Map(); // module name -> { pkgName, module, specifier, fns }
+for (const p of mappedPackages) {
+  const base = moduleName(p.pkgName);
+  const module = canonicalType.get(base.toLowerCase()) ?? base;
+  if (modules.has(module)) { // two packages folding to one name — merge, keeping unique fn names
+    const existing = modules.get(module);
+    const seen = new Set(existing.fns.map((f) => f.name));
+    for (const f of p.fns) if (!seen.has(f.name)) existing.fns.push(f);
+  } else {
+    modules.set(module, { pkgName: p.pkgName, module, specifier: p.specifier, fns: p.fns });
+  }
 }
 
 // --- emitters --------------------------------------------------------------
+// Two independent axes share the `flight.<Name>` namespace: value TYPES (a typedef) and PACKAGES of
+// free functions (module-level functions). Flight often names both the same (`Shape` the type, `shape`
+// the package), so a public module may carry BOTH. Backings never collide: type typedefs live at
+// `flight._js.<Type>`, function externs at `flight._js._fn.<Module>` (a subpackage).
 const header = (from) => `// Generated by tools/backend-hx from ${from} at flight@${flight.commit.slice(0, 12)}. Do not edit.\n`;
 const sig = (f) => `${f.name}(${f.params.map((p) => `${p.optional ? '?' : ''}${p.name}:${p.type}`).join(', ')}):${f.returns}`;
 
-function emitTypedefBacking(name) {
-  const props = (registry.get(name).properties ?? []).map((p) => `  ${p.optional ? '?' : ''}var ${p.name}:${mapType(p.type)};`).join('\n');
-  return `${header(`${TYPES.name}/packages/types/src/${name}.ts`)}#if js
+let degradedFields = 0;
+let droppedFields = 0;
+// A value type must stay emittable even if a field's type is beyond the mapper — functions already
+// reference it, so dropping it would break compilation. A hard field degrades to `Dynamic` (reported),
+// which keeps the binding compiling and the field accessible, just untyped.
+function mapField(t) {
+  try { return mapType(t); }
+  catch (error) { if (error instanceof Unmappable) { degradedFields++; return 'Dynamic'; } throw error; }
+}
+function typedefBackingFile(name) {
+  const props = (registry.get(name).properties ?? [])
+    // A field whose name is a Haxe keyword can't be a struct field and can't be renamed without
+    // breaking the structural JS mapping — omit it (reported). Rare.
+    .filter((p) => { if (KEYWORDS.has(p.name)) { droppedFields++; return false; } return true; })
+    .map((p) => `  ${p.optional ? '@:optional ' : ''}var ${p.name}:${mapField(p.type)};`).join('\n');
+  return `${header(`type ${name}`)}#if js
 package flight._js;
 
 typedef ${name} = {
@@ -156,11 +219,22 @@ ${props}
 #end
 `;
 }
+function functionsBackingFile(m) {
+  const methods = m.fns.map((f) => `  static function ${sig(f)};`).join('\n');
+  return `${header(m.pkgName)}#if js
+package flight._js._fn;
 
-function emitTypedefPublic(name) {
-  return `${header(`${TYPES.name}/packages/types/src/${name}.ts`)}package flight;
+// Named ESM exports of ${m.specifier}, bound as extern statics; @:jsRequire binds each to the module's
+// like-named export. The vendored ESM generator (tools/esm) turns that into a tree-shakeable import.
+@:jsRequire("${m.specifier}")
+extern class ${m.module} {
+${methods}
+}
+#end
+`;
+}
 
-#if flight_hx
+const typedefSelector = (name) => `#if flight_hx
 typedef ${name} = flight._hx.${name};
 #elseif (js && flight_esm)
 typedef ${name} = flight._js.${name};
@@ -170,32 +244,13 @@ typedef ${name} = flight._cpp.${name};
 #error "flight on js: define flight_esm for the hostWeb ESM pipeline, or flight_hx for the transpiled fallback."
 #else
 #error "flight: no backend for this target — define flight_hx, or target cpp / (js + flight_esm)."
-#end
-`;
-}
+#end`;
 
-function emitFunctionsBacking(fns) {
-  const methods = fns.map((f) => `  static function ${sig(f)};`).join('\n');
-  return `${header(`${PACKAGE.name}`)}#if js
-package flight._js;
-
-// Named ESM exports of ${PACKAGE.specifier}, bound as extern statics. @:jsRequire without a member
-// name binds each static to the module's like-named named export; the vendored ESM generator
-// (tools/esm) turns that into a tree-shakeable static import.
-@:jsRequire("${PACKAGE.specifier}")
-extern class ${PACKAGE.module} {
-${methods}
-}
-#end
-`;
-}
-
-function emitFunctionsPublic(fns) {
-  const fwd = (f) => {
-    const args = f.params.map((p) => p.name).join(', ');
-    const ret = f.returns === 'Void' ? '' : 'return ';
-    const call = (b) => `flight._${b}.${PACKAGE.module}.${f.name}(${args})`;
-    return `inline function ${sig(f)} {
+function forwarder(m, f) {
+  const args = f.params.map((p) => p.name).join(', ');
+  const ret = f.returns === 'Void' ? '' : 'return ';
+  const call = (b) => `flight._${b}._fn.${m.module}.${f.name}(${args})`;
+  return `inline function ${sig(f)} {
   #if flight_hx
   ${ret}${call('hx')};
   #elseif (js && flight_esm)
@@ -203,13 +258,20 @@ function emitFunctionsPublic(fns) {
   #elseif cpp
   ${ret}${call('cpp')};
   #else
-  #error "flight.${PACKAGE.module}: no backend — define flight_hx, or js+flight_esm, or target cpp.";
+  #error "flight.${m.module}: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
 }`;
-  };
-  return `${header(`${PACKAGE.name}`)}package flight;
+}
 
-${fns.map(fwd).join('\n\n')}
+// A public module composes an optional value typedef and optional free functions under one name.
+function publicFile(name, hasType, m) {
+  const parts = [];
+  if (hasType) parts.push(typedefSelector(name));
+  if (m) parts.push(m.fns.map((f) => forwarder(m, f)).join('\n\n'));
+  const from = m ? m.pkgName : `type ${name}`;
+  return `${header(from)}package flight;
+
+${parts.join('\n\n')}
 `;
 }
 
@@ -218,28 +280,29 @@ const outPublic = join(repoRoot, 'generated');
 const outJs = join(repoRoot, 'generated/js');
 rmSync(join(outPublic, 'flight'), { recursive: true, force: true });
 rmSync(join(outJs, 'flight'), { recursive: true, force: true });
+const write = (base, rel, contents) => { const t = join(base, rel); mkdirSync(dirname(t), { recursive: true }); writeFileSync(t, contents); };
 
-function write(base, rel, contents) {
-  const target = join(base, rel);
-  mkdirSync(dirname(target), { recursive: true });
-  writeFileSync(target, contents);
+// Function backings + closure over value types they reference (mapping props may register more types).
+for (const m of modules.values()) write(outJs, `flight/_js/_fn/${m.module}.hx`, functionsBackingFile(m));
+const emitted = new Set();
+while (emitTypes.size > emitted.size) {
+  for (const name of [...emitTypes]) {
+    if (emitted.has(name)) continue;
+    emitted.add(name);
+    write(outJs, `flight/_js/${name}.hx`, typedefBackingFile(name));
+  }
 }
+// Public modules: the union of every name that is a type and/or a function package.
+const publicNames = new Set([...emitted, ...modules.keys()]);
+for (const name of publicNames) write(outPublic, `flight/${name}.hx`, publicFile(name, emitted.has(name), modules.get(name)));
 
-const { kept, skipped } = collectFunctions();
-// emitTypes was populated as a side effect of mapping the kept functions' signatures.
-const typeNames = [...emitTypes].sort();
-for (const name of typeNames) {
-  write(outJs, `flight/_js/${name}.hx`, emitTypedefBacking(name));
-  write(outPublic, `flight/${name}.hx`, emitTypedefPublic(name));
-}
-write(outJs, `flight/_js/${PACKAGE.module}.hx`, emitFunctionsBacking(kept));
-write(outPublic, `flight/${PACKAGE.module}.hx`, emitFunctionsPublic(kept));
-
-console.log(`${PACKAGE.module}: ${kept.length} functions bound, ${skipped.length} skipped; ${typeNames.length} value types generated.`);
-console.log(`types: ${typeNames.join(', ')}`);
-if (skipped.length) {
-  const byReason = new Map();
-  for (const s of skipped) byReason.set(s.reason, (byReason.get(s.reason) ?? 0) + 1);
-  console.log('\nskipped by reason:');
-  for (const [reason, count] of [...byReason].sort((a, b) => b[1] - a[1])) console.log(`  ${count}x ${reason}`);
-}
+const merged = [...publicNames].filter((n) => emitted.has(n) && modules.has(n));
+const totalFns = [...modules.values()].reduce((n, m) => n + m.fns.length, 0);
+const totalSkipped = [...skipReasons.values()].reduce((a, b) => a + b, 0);
+console.log(`\ngenerated ${publicNames.size} public modules (${modules.size} with functions, ${emitted.size} value types, ${merged.length} carrying both).`);
+console.log(`functions bound: ${totalFns}  (skipped: ${totalSkipped}, coverage ${(100 * totalFns / (totalFns + totalSkipped)).toFixed(1)}%)`);
+console.log(`value-type fields degraded to Dynamic: ${degradedFields}; dropped (keyword name): ${droppedFields}`);
+console.log('\ntop modules by function count:');
+for (const m of [...modules.values()].sort((a, b) => b.fns.length - a.fns.length).slice(0, 15)) console.log(`  ${m.module.padEnd(20)} ${m.fns.length}`);
+console.log('\nskipped by reason (top 15):');
+for (const [reason, count] of [...skipReasons].sort((a, b) => b[1] - a[1]).slice(0, 15)) console.log(`  ${String(count).padStart(5)}x ${reason}`);

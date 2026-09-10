@@ -3,11 +3,11 @@ package flight;
 
 inline function acquireEmptyRectangle():flight.Rectangle {
   #if flight_hx
-  return flight._hx.Geometry.acquireEmptyRectangle();
+  return flight._hx._fn.Geometry.acquireEmptyRectangle();
   #elseif (js && flight_esm)
-  return flight._js.Geometry.acquireEmptyRectangle();
+  return flight._js._fn.Geometry.acquireEmptyRectangle();
   #elseif cpp
-  return flight._cpp.Geometry.acquireEmptyRectangle();
+  return flight._cpp._fn.Geometry.acquireEmptyRectangle();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -15,11 +15,11 @@ inline function acquireEmptyRectangle():flight.Rectangle {
 
 inline function acquireEmptyVector2():flight.Vector2 {
   #if flight_hx
-  return flight._hx.Geometry.acquireEmptyVector2();
+  return flight._hx._fn.Geometry.acquireEmptyVector2();
   #elseif (js && flight_esm)
-  return flight._js.Geometry.acquireEmptyVector2();
+  return flight._js._fn.Geometry.acquireEmptyVector2();
   #elseif cpp
-  return flight._cpp.Geometry.acquireEmptyVector2();
+  return flight._cpp._fn.Geometry.acquireEmptyVector2();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -27,11 +27,11 @@ inline function acquireEmptyVector2():flight.Vector2 {
 
 inline function acquireEmptyVector3():flight.Vector3 {
   #if flight_hx
-  return flight._hx.Geometry.acquireEmptyVector3();
+  return flight._hx._fn.Geometry.acquireEmptyVector3();
   #elseif (js && flight_esm)
-  return flight._js.Geometry.acquireEmptyVector3();
+  return flight._js._fn.Geometry.acquireEmptyVector3();
   #elseif cpp
-  return flight._cpp.Geometry.acquireEmptyVector3();
+  return flight._cpp._fn.Geometry.acquireEmptyVector3();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -39,11 +39,11 @@ inline function acquireEmptyVector3():flight.Vector3 {
 
 inline function acquireEmptyVector4():flight.Vector4 {
   #if flight_hx
-  return flight._hx.Geometry.acquireEmptyVector4();
+  return flight._hx._fn.Geometry.acquireEmptyVector4();
   #elseif (js && flight_esm)
-  return flight._js.Geometry.acquireEmptyVector4();
+  return flight._js._fn.Geometry.acquireEmptyVector4();
   #elseif cpp
-  return flight._cpp.Geometry.acquireEmptyVector4();
+  return flight._cpp._fn.Geometry.acquireEmptyVector4();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -51,11 +51,11 @@ inline function acquireEmptyVector4():flight.Vector4 {
 
 inline function acquireIdentityMatrix():flight.Matrix {
   #if flight_hx
-  return flight._hx.Geometry.acquireIdentityMatrix();
+  return flight._hx._fn.Geometry.acquireIdentityMatrix();
   #elseif (js && flight_esm)
-  return flight._js.Geometry.acquireIdentityMatrix();
+  return flight._js._fn.Geometry.acquireIdentityMatrix();
   #elseif cpp
-  return flight._cpp.Geometry.acquireIdentityMatrix();
+  return flight._cpp._fn.Geometry.acquireIdentityMatrix();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -63,11 +63,11 @@ inline function acquireIdentityMatrix():flight.Matrix {
 
 inline function acquireIdentityMatrix3():flight.Matrix3 {
   #if flight_hx
-  return flight._hx.Geometry.acquireIdentityMatrix3();
+  return flight._hx._fn.Geometry.acquireIdentityMatrix3();
   #elseif (js && flight_esm)
-  return flight._js.Geometry.acquireIdentityMatrix3();
+  return flight._js._fn.Geometry.acquireIdentityMatrix3();
   #elseif cpp
-  return flight._cpp.Geometry.acquireIdentityMatrix3();
+  return flight._cpp._fn.Geometry.acquireIdentityMatrix3();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -75,11 +75,11 @@ inline function acquireIdentityMatrix3():flight.Matrix3 {
 
 inline function acquireIdentityMatrix4():flight.Matrix4 {
   #if flight_hx
-  return flight._hx.Geometry.acquireIdentityMatrix4();
+  return flight._hx._fn.Geometry.acquireIdentityMatrix4();
   #elseif (js && flight_esm)
-  return flight._js.Geometry.acquireIdentityMatrix4();
+  return flight._js._fn.Geometry.acquireIdentityMatrix4();
   #elseif cpp
-  return flight._cpp.Geometry.acquireIdentityMatrix4();
+  return flight._cpp._fn.Geometry.acquireIdentityMatrix4();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -87,11 +87,11 @@ inline function acquireIdentityMatrix4():flight.Matrix4 {
 
 inline function acquireIdentityQuaternion():flight.Quaternion {
   #if flight_hx
-  return flight._hx.Geometry.acquireIdentityQuaternion();
+  return flight._hx._fn.Geometry.acquireIdentityQuaternion();
   #elseif (js && flight_esm)
-  return flight._js.Geometry.acquireIdentityQuaternion();
+  return flight._js._fn.Geometry.acquireIdentityQuaternion();
   #elseif cpp
-  return flight._cpp.Geometry.acquireIdentityQuaternion();
+  return flight._cpp._fn.Geometry.acquireIdentityQuaternion();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -99,11 +99,11 @@ inline function acquireIdentityQuaternion():flight.Quaternion {
 
 inline function acquireMatrix():flight.Matrix {
   #if flight_hx
-  return flight._hx.Geometry.acquireMatrix();
+  return flight._hx._fn.Geometry.acquireMatrix();
   #elseif (js && flight_esm)
-  return flight._js.Geometry.acquireMatrix();
+  return flight._js._fn.Geometry.acquireMatrix();
   #elseif cpp
-  return flight._cpp.Geometry.acquireMatrix();
+  return flight._cpp._fn.Geometry.acquireMatrix();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -111,11 +111,11 @@ inline function acquireMatrix():flight.Matrix {
 
 inline function acquireMatrix3():flight.Matrix3 {
   #if flight_hx
-  return flight._hx.Geometry.acquireMatrix3();
+  return flight._hx._fn.Geometry.acquireMatrix3();
   #elseif (js && flight_esm)
-  return flight._js.Geometry.acquireMatrix3();
+  return flight._js._fn.Geometry.acquireMatrix3();
   #elseif cpp
-  return flight._cpp.Geometry.acquireMatrix3();
+  return flight._cpp._fn.Geometry.acquireMatrix3();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -123,11 +123,11 @@ inline function acquireMatrix3():flight.Matrix3 {
 
 inline function acquireMatrix4():flight.Matrix4 {
   #if flight_hx
-  return flight._hx.Geometry.acquireMatrix4();
+  return flight._hx._fn.Geometry.acquireMatrix4();
   #elseif (js && flight_esm)
-  return flight._js.Geometry.acquireMatrix4();
+  return flight._js._fn.Geometry.acquireMatrix4();
   #elseif cpp
-  return flight._cpp.Geometry.acquireMatrix4();
+  return flight._cpp._fn.Geometry.acquireMatrix4();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -135,11 +135,11 @@ inline function acquireMatrix4():flight.Matrix4 {
 
 inline function acquireQuaternion():flight.Quaternion {
   #if flight_hx
-  return flight._hx.Geometry.acquireQuaternion();
+  return flight._hx._fn.Geometry.acquireQuaternion();
   #elseif (js && flight_esm)
-  return flight._js.Geometry.acquireQuaternion();
+  return flight._js._fn.Geometry.acquireQuaternion();
   #elseif cpp
-  return flight._cpp.Geometry.acquireQuaternion();
+  return flight._cpp._fn.Geometry.acquireQuaternion();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -147,11 +147,11 @@ inline function acquireQuaternion():flight.Quaternion {
 
 inline function acquireRectangle():flight.Rectangle {
   #if flight_hx
-  return flight._hx.Geometry.acquireRectangle();
+  return flight._hx._fn.Geometry.acquireRectangle();
   #elseif (js && flight_esm)
-  return flight._js.Geometry.acquireRectangle();
+  return flight._js._fn.Geometry.acquireRectangle();
   #elseif cpp
-  return flight._cpp.Geometry.acquireRectangle();
+  return flight._cpp._fn.Geometry.acquireRectangle();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -159,11 +159,11 @@ inline function acquireRectangle():flight.Rectangle {
 
 inline function acquireVector2():flight.Vector2 {
   #if flight_hx
-  return flight._hx.Geometry.acquireVector2();
+  return flight._hx._fn.Geometry.acquireVector2();
   #elseif (js && flight_esm)
-  return flight._js.Geometry.acquireVector2();
+  return flight._js._fn.Geometry.acquireVector2();
   #elseif cpp
-  return flight._cpp.Geometry.acquireVector2();
+  return flight._cpp._fn.Geometry.acquireVector2();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -171,11 +171,11 @@ inline function acquireVector2():flight.Vector2 {
 
 inline function acquireVector3():flight.Vector3 {
   #if flight_hx
-  return flight._hx.Geometry.acquireVector3();
+  return flight._hx._fn.Geometry.acquireVector3();
   #elseif (js && flight_esm)
-  return flight._js.Geometry.acquireVector3();
+  return flight._js._fn.Geometry.acquireVector3();
   #elseif cpp
-  return flight._cpp.Geometry.acquireVector3();
+  return flight._cpp._fn.Geometry.acquireVector3();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -183,11 +183,11 @@ inline function acquireVector3():flight.Vector3 {
 
 inline function acquireVector4():flight.Vector4 {
   #if flight_hx
-  return flight._hx.Geometry.acquireVector4();
+  return flight._hx._fn.Geometry.acquireVector4();
   #elseif (js && flight_esm)
-  return flight._js.Geometry.acquireVector4();
+  return flight._js._fn.Geometry.acquireVector4();
   #elseif cpp
-  return flight._cpp.Geometry.acquireVector4();
+  return flight._cpp._fn.Geometry.acquireVector4();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -195,11 +195,11 @@ inline function acquireVector4():flight.Vector4 {
 
 inline function addVector2(out:flight.Vector2, a:flight.Vector2, b:flight.Vector2):Void {
   #if flight_hx
-  flight._hx.Geometry.addVector2(out, a, b);
+  flight._hx._fn.Geometry.addVector2(out, a, b);
   #elseif (js && flight_esm)
-  flight._js.Geometry.addVector2(out, a, b);
+  flight._js._fn.Geometry.addVector2(out, a, b);
   #elseif cpp
-  flight._cpp.Geometry.addVector2(out, a, b);
+  flight._cpp._fn.Geometry.addVector2(out, a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -207,11 +207,11 @@ inline function addVector2(out:flight.Vector2, a:flight.Vector2, b:flight.Vector
 
 inline function addVector3(out:flight.Vector3, a:flight.Vector3, b:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.addVector3(out, a, b);
+  flight._hx._fn.Geometry.addVector3(out, a, b);
   #elseif (js && flight_esm)
-  flight._js.Geometry.addVector3(out, a, b);
+  flight._js._fn.Geometry.addVector3(out, a, b);
   #elseif cpp
-  flight._cpp.Geometry.addVector3(out, a, b);
+  flight._cpp._fn.Geometry.addVector3(out, a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -219,11 +219,11 @@ inline function addVector3(out:flight.Vector3, a:flight.Vector3, b:flight.Vector
 
 inline function addVector4(out:flight.Vector4, a:flight.Vector4, b:flight.Vector4):Void {
   #if flight_hx
-  flight._hx.Geometry.addVector4(out, a, b);
+  flight._hx._fn.Geometry.addVector4(out, a, b);
   #elseif (js && flight_esm)
-  flight._js.Geometry.addVector4(out, a, b);
+  flight._js._fn.Geometry.addVector4(out, a, b);
   #elseif cpp
-  flight._cpp.Geometry.addVector4(out, a, b);
+  flight._cpp._fn.Geometry.addVector4(out, a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -231,11 +231,11 @@ inline function addVector4(out:flight.Vector4, a:flight.Vector4, b:flight.Vector
 
 inline function appendMatrix4(out:flight.Matrix4, source:flight.Matrix4, other:flight.Matrix4):Void {
   #if flight_hx
-  flight._hx.Geometry.appendMatrix4(out, source, other);
+  flight._hx._fn.Geometry.appendMatrix4(out, source, other);
   #elseif (js && flight_esm)
-  flight._js.Geometry.appendMatrix4(out, source, other);
+  flight._js._fn.Geometry.appendMatrix4(out, source, other);
   #elseif cpp
-  flight._cpp.Geometry.appendMatrix4(out, source, other);
+  flight._cpp._fn.Geometry.appendMatrix4(out, source, other);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -243,11 +243,11 @@ inline function appendMatrix4(out:flight.Matrix4, source:flight.Matrix4, other:f
 
 inline function appendRotationMatrix4(out:flight.Matrix4, source:flight.Matrix4, radians:Float, axis:flight.Vector4, ?pivotPoint:flight.Vector4):Void {
   #if flight_hx
-  flight._hx.Geometry.appendRotationMatrix4(out, source, radians, axis, pivotPoint);
+  flight._hx._fn.Geometry.appendRotationMatrix4(out, source, radians, axis, pivotPoint);
   #elseif (js && flight_esm)
-  flight._js.Geometry.appendRotationMatrix4(out, source, radians, axis, pivotPoint);
+  flight._js._fn.Geometry.appendRotationMatrix4(out, source, radians, axis, pivotPoint);
   #elseif cpp
-  flight._cpp.Geometry.appendRotationMatrix4(out, source, radians, axis, pivotPoint);
+  flight._cpp._fn.Geometry.appendRotationMatrix4(out, source, radians, axis, pivotPoint);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -255,11 +255,11 @@ inline function appendRotationMatrix4(out:flight.Matrix4, source:flight.Matrix4,
 
 inline function appendScaleMatrix4(out:flight.Matrix4, source:flight.Matrix4, xScale:Float, yScale:Float, zScale:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.appendScaleMatrix4(out, source, xScale, yScale, zScale);
+  flight._hx._fn.Geometry.appendScaleMatrix4(out, source, xScale, yScale, zScale);
   #elseif (js && flight_esm)
-  flight._js.Geometry.appendScaleMatrix4(out, source, xScale, yScale, zScale);
+  flight._js._fn.Geometry.appendScaleMatrix4(out, source, xScale, yScale, zScale);
   #elseif cpp
-  flight._cpp.Geometry.appendScaleMatrix4(out, source, xScale, yScale, zScale);
+  flight._cpp._fn.Geometry.appendScaleMatrix4(out, source, xScale, yScale, zScale);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -267,11 +267,11 @@ inline function appendScaleMatrix4(out:flight.Matrix4, source:flight.Matrix4, xS
 
 inline function appendTranslationMatrix4(out:flight.Matrix4, source:flight.Matrix4, x:Float, y:Float, z:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.appendTranslationMatrix4(out, source, x, y, z);
+  flight._hx._fn.Geometry.appendTranslationMatrix4(out, source, x, y, z);
   #elseif (js && flight_esm)
-  flight._js.Geometry.appendTranslationMatrix4(out, source, x, y, z);
+  flight._js._fn.Geometry.appendTranslationMatrix4(out, source, x, y, z);
   #elseif cpp
-  flight._cpp.Geometry.appendTranslationMatrix4(out, source, x, y, z);
+  flight._cpp._fn.Geometry.appendTranslationMatrix4(out, source, x, y, z);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -279,11 +279,11 @@ inline function appendTranslationMatrix4(out:flight.Matrix4, source:flight.Matri
 
 inline function areGeometryPoolGuardsEnabled():Bool {
   #if flight_hx
-  return flight._hx.Geometry.areGeometryPoolGuardsEnabled();
+  return flight._hx._fn.Geometry.areGeometryPoolGuardsEnabled();
   #elseif (js && flight_esm)
-  return flight._js.Geometry.areGeometryPoolGuardsEnabled();
+  return flight._js._fn.Geometry.areGeometryPoolGuardsEnabled();
   #elseif cpp
-  return flight._cpp.Geometry.areGeometryPoolGuardsEnabled();
+  return flight._cpp._fn.Geometry.areGeometryPoolGuardsEnabled();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -291,11 +291,11 @@ inline function areGeometryPoolGuardsEnabled():Bool {
 
 inline function clampVector2(out:flight.Vector2, value:flight.Vector2, min:flight.Vector2, max:flight.Vector2):Void {
   #if flight_hx
-  flight._hx.Geometry.clampVector2(out, value, min, max);
+  flight._hx._fn.Geometry.clampVector2(out, value, min, max);
   #elseif (js && flight_esm)
-  flight._js.Geometry.clampVector2(out, value, min, max);
+  flight._js._fn.Geometry.clampVector2(out, value, min, max);
   #elseif cpp
-  flight._cpp.Geometry.clampVector2(out, value, min, max);
+  flight._cpp._fn.Geometry.clampVector2(out, value, min, max);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -303,11 +303,11 @@ inline function clampVector2(out:flight.Vector2, value:flight.Vector2, min:fligh
 
 inline function clampVector3(out:flight.Vector3, value:flight.Vector3, min:flight.Vector3, max:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.clampVector3(out, value, min, max);
+  flight._hx._fn.Geometry.clampVector3(out, value, min, max);
   #elseif (js && flight_esm)
-  flight._js.Geometry.clampVector3(out, value, min, max);
+  flight._js._fn.Geometry.clampVector3(out, value, min, max);
   #elseif cpp
-  flight._cpp.Geometry.clampVector3(out, value, min, max);
+  flight._cpp._fn.Geometry.clampVector3(out, value, min, max);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -315,11 +315,11 @@ inline function clampVector3(out:flight.Vector3, value:flight.Vector3, min:fligh
 
 inline function clampVector4(out:flight.Vector4, value:flight.Vector4, min:flight.Vector4, max:flight.Vector4):Void {
   #if flight_hx
-  flight._hx.Geometry.clampVector4(out, value, min, max);
+  flight._hx._fn.Geometry.clampVector4(out, value, min, max);
   #elseif (js && flight_esm)
-  flight._js.Geometry.clampVector4(out, value, min, max);
+  flight._js._fn.Geometry.clampVector4(out, value, min, max);
   #elseif cpp
-  flight._cpp.Geometry.clampVector4(out, value, min, max);
+  flight._cpp._fn.Geometry.clampVector4(out, value, min, max);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -327,11 +327,11 @@ inline function clampVector4(out:flight.Vector4, value:flight.Vector4, min:fligh
 
 inline function clearMatrix3Pool():Void {
   #if flight_hx
-  flight._hx.Geometry.clearMatrix3Pool();
+  flight._hx._fn.Geometry.clearMatrix3Pool();
   #elseif (js && flight_esm)
-  flight._js.Geometry.clearMatrix3Pool();
+  flight._js._fn.Geometry.clearMatrix3Pool();
   #elseif cpp
-  flight._cpp.Geometry.clearMatrix3Pool();
+  flight._cpp._fn.Geometry.clearMatrix3Pool();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -339,11 +339,11 @@ inline function clearMatrix3Pool():Void {
 
 inline function clearMatrix4Pool():Void {
   #if flight_hx
-  flight._hx.Geometry.clearMatrix4Pool();
+  flight._hx._fn.Geometry.clearMatrix4Pool();
   #elseif (js && flight_esm)
-  flight._js.Geometry.clearMatrix4Pool();
+  flight._js._fn.Geometry.clearMatrix4Pool();
   #elseif cpp
-  flight._cpp.Geometry.clearMatrix4Pool();
+  flight._cpp._fn.Geometry.clearMatrix4Pool();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -351,11 +351,11 @@ inline function clearMatrix4Pool():Void {
 
 inline function clearMatrixPool():Void {
   #if flight_hx
-  flight._hx.Geometry.clearMatrixPool();
+  flight._hx._fn.Geometry.clearMatrixPool();
   #elseif (js && flight_esm)
-  flight._js.Geometry.clearMatrixPool();
+  flight._js._fn.Geometry.clearMatrixPool();
   #elseif cpp
-  flight._cpp.Geometry.clearMatrixPool();
+  flight._cpp._fn.Geometry.clearMatrixPool();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -363,11 +363,11 @@ inline function clearMatrixPool():Void {
 
 inline function clearQuaternionPool():Void {
   #if flight_hx
-  flight._hx.Geometry.clearQuaternionPool();
+  flight._hx._fn.Geometry.clearQuaternionPool();
   #elseif (js && flight_esm)
-  flight._js.Geometry.clearQuaternionPool();
+  flight._js._fn.Geometry.clearQuaternionPool();
   #elseif cpp
-  flight._cpp.Geometry.clearQuaternionPool();
+  flight._cpp._fn.Geometry.clearQuaternionPool();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -375,11 +375,11 @@ inline function clearQuaternionPool():Void {
 
 inline function clearRectanglePool():Void {
   #if flight_hx
-  flight._hx.Geometry.clearRectanglePool();
+  flight._hx._fn.Geometry.clearRectanglePool();
   #elseif (js && flight_esm)
-  flight._js.Geometry.clearRectanglePool();
+  flight._js._fn.Geometry.clearRectanglePool();
   #elseif cpp
-  flight._cpp.Geometry.clearRectanglePool();
+  flight._cpp._fn.Geometry.clearRectanglePool();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -387,11 +387,11 @@ inline function clearRectanglePool():Void {
 
 inline function clearVector2Pool():Void {
   #if flight_hx
-  flight._hx.Geometry.clearVector2Pool();
+  flight._hx._fn.Geometry.clearVector2Pool();
   #elseif (js && flight_esm)
-  flight._js.Geometry.clearVector2Pool();
+  flight._js._fn.Geometry.clearVector2Pool();
   #elseif cpp
-  flight._cpp.Geometry.clearVector2Pool();
+  flight._cpp._fn.Geometry.clearVector2Pool();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -399,11 +399,11 @@ inline function clearVector2Pool():Void {
 
 inline function clearVector3Pool():Void {
   #if flight_hx
-  flight._hx.Geometry.clearVector3Pool();
+  flight._hx._fn.Geometry.clearVector3Pool();
   #elseif (js && flight_esm)
-  flight._js.Geometry.clearVector3Pool();
+  flight._js._fn.Geometry.clearVector3Pool();
   #elseif cpp
-  flight._cpp.Geometry.clearVector3Pool();
+  flight._cpp._fn.Geometry.clearVector3Pool();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -411,11 +411,11 @@ inline function clearVector3Pool():Void {
 
 inline function clearVector4Pool():Void {
   #if flight_hx
-  flight._hx.Geometry.clearVector4Pool();
+  flight._hx._fn.Geometry.clearVector4Pool();
   #elseif (js && flight_esm)
-  flight._js.Geometry.clearVector4Pool();
+  flight._js._fn.Geometry.clearVector4Pool();
   #elseif cpp
-  flight._cpp.Geometry.clearVector4Pool();
+  flight._cpp._fn.Geometry.clearVector4Pool();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -423,11 +423,11 @@ inline function clearVector4Pool():Void {
 
 inline function cloneAabb(source:{ max:flight.Vector3, min:flight.Vector3 }):flight.Aabb {
   #if flight_hx
-  return flight._hx.Geometry.cloneAabb(source);
+  return flight._hx._fn.Geometry.cloneAabb(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.cloneAabb(source);
+  return flight._js._fn.Geometry.cloneAabb(source);
   #elseif cpp
-  return flight._cpp.Geometry.cloneAabb(source);
+  return flight._cpp._fn.Geometry.cloneAabb(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -435,11 +435,11 @@ inline function cloneAabb(source:{ max:flight.Vector3, min:flight.Vector3 }):fli
 
 inline function cloneBoundingSphere(source:flight.BoundingSphere):flight.BoundingSphere {
   #if flight_hx
-  return flight._hx.Geometry.cloneBoundingSphere(source);
+  return flight._hx._fn.Geometry.cloneBoundingSphere(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.cloneBoundingSphere(source);
+  return flight._js._fn.Geometry.cloneBoundingSphere(source);
   #elseif cpp
-  return flight._cpp.Geometry.cloneBoundingSphere(source);
+  return flight._cpp._fn.Geometry.cloneBoundingSphere(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -447,11 +447,11 @@ inline function cloneBoundingSphere(source:flight.BoundingSphere):flight.Boundin
 
 inline function cloneMatrix(source:flight.Matrix):flight.Matrix {
   #if flight_hx
-  return flight._hx.Geometry.cloneMatrix(source);
+  return flight._hx._fn.Geometry.cloneMatrix(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.cloneMatrix(source);
+  return flight._js._fn.Geometry.cloneMatrix(source);
   #elseif cpp
-  return flight._cpp.Geometry.cloneMatrix(source);
+  return flight._cpp._fn.Geometry.cloneMatrix(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -459,11 +459,11 @@ inline function cloneMatrix(source:flight.Matrix):flight.Matrix {
 
 inline function cloneMatrix3(source:flight.Matrix3):flight.Matrix3 {
   #if flight_hx
-  return flight._hx.Geometry.cloneMatrix3(source);
+  return flight._hx._fn.Geometry.cloneMatrix3(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.cloneMatrix3(source);
+  return flight._js._fn.Geometry.cloneMatrix3(source);
   #elseif cpp
-  return flight._cpp.Geometry.cloneMatrix3(source);
+  return flight._cpp._fn.Geometry.cloneMatrix3(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -471,11 +471,11 @@ inline function cloneMatrix3(source:flight.Matrix3):flight.Matrix3 {
 
 inline function cloneMatrix4(source:flight.Matrix4):flight.Matrix4 {
   #if flight_hx
-  return flight._hx.Geometry.cloneMatrix4(source);
+  return flight._hx._fn.Geometry.cloneMatrix4(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.cloneMatrix4(source);
+  return flight._js._fn.Geometry.cloneMatrix4(source);
   #elseif cpp
-  return flight._cpp.Geometry.cloneMatrix4(source);
+  return flight._cpp._fn.Geometry.cloneMatrix4(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -483,11 +483,11 @@ inline function cloneMatrix4(source:flight.Matrix4):flight.Matrix4 {
 
 inline function clonePlane(source:flight.Plane):flight.Plane {
   #if flight_hx
-  return flight._hx.Geometry.clonePlane(source);
+  return flight._hx._fn.Geometry.clonePlane(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.clonePlane(source);
+  return flight._js._fn.Geometry.clonePlane(source);
   #elseif cpp
-  return flight._cpp.Geometry.clonePlane(source);
+  return flight._cpp._fn.Geometry.clonePlane(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -495,11 +495,11 @@ inline function clonePlane(source:flight.Plane):flight.Plane {
 
 inline function cloneQuaternion(source:flight.Quaternion):flight.Quaternion {
   #if flight_hx
-  return flight._hx.Geometry.cloneQuaternion(source);
+  return flight._hx._fn.Geometry.cloneQuaternion(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.cloneQuaternion(source);
+  return flight._js._fn.Geometry.cloneQuaternion(source);
   #elseif cpp
-  return flight._cpp.Geometry.cloneQuaternion(source);
+  return flight._cpp._fn.Geometry.cloneQuaternion(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -507,11 +507,11 @@ inline function cloneQuaternion(source:flight.Quaternion):flight.Quaternion {
 
 inline function cloneRectangle(source:flight.Rectangle):flight.Rectangle {
   #if flight_hx
-  return flight._hx.Geometry.cloneRectangle(source);
+  return flight._hx._fn.Geometry.cloneRectangle(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.cloneRectangle(source);
+  return flight._js._fn.Geometry.cloneRectangle(source);
   #elseif cpp
-  return flight._cpp.Geometry.cloneRectangle(source);
+  return flight._cpp._fn.Geometry.cloneRectangle(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -519,11 +519,11 @@ inline function cloneRectangle(source:flight.Rectangle):flight.Rectangle {
 
 inline function cloneVector2(source:flight.Vector2):flight.Vector2 {
   #if flight_hx
-  return flight._hx.Geometry.cloneVector2(source);
+  return flight._hx._fn.Geometry.cloneVector2(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.cloneVector2(source);
+  return flight._js._fn.Geometry.cloneVector2(source);
   #elseif cpp
-  return flight._cpp.Geometry.cloneVector2(source);
+  return flight._cpp._fn.Geometry.cloneVector2(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -531,11 +531,11 @@ inline function cloneVector2(source:flight.Vector2):flight.Vector2 {
 
 inline function cloneVector3(source:flight.Vector3):flight.Vector3 {
   #if flight_hx
-  return flight._hx.Geometry.cloneVector3(source);
+  return flight._hx._fn.Geometry.cloneVector3(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.cloneVector3(source);
+  return flight._js._fn.Geometry.cloneVector3(source);
   #elseif cpp
-  return flight._cpp.Geometry.cloneVector3(source);
+  return flight._cpp._fn.Geometry.cloneVector3(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -543,11 +543,11 @@ inline function cloneVector3(source:flight.Vector3):flight.Vector3 {
 
 inline function cloneVector4(source:flight.Vector4):flight.Vector4 {
   #if flight_hx
-  return flight._hx.Geometry.cloneVector4(source);
+  return flight._hx._fn.Geometry.cloneVector4(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.cloneVector4(source);
+  return flight._js._fn.Geometry.cloneVector4(source);
   #elseif cpp
-  return flight._cpp.Geometry.cloneVector4(source);
+  return flight._cpp._fn.Geometry.cloneVector4(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -555,11 +555,11 @@ inline function cloneVector4(source:flight.Vector4):flight.Vector4 {
 
 inline function composeMatrix4(out:flight.Matrix4, position:flight.Vector3, rotation:flight.Quaternion, scale:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.composeMatrix4(out, position, rotation, scale);
+  flight._hx._fn.Geometry.composeMatrix4(out, position, rotation, scale);
   #elseif (js && flight_esm)
-  flight._js.Geometry.composeMatrix4(out, position, rotation, scale);
+  flight._js._fn.Geometry.composeMatrix4(out, position, rotation, scale);
   #elseif cpp
-  flight._cpp.Geometry.composeMatrix4(out, position, rotation, scale);
+  flight._cpp._fn.Geometry.composeMatrix4(out, position, rotation, scale);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -567,11 +567,11 @@ inline function composeMatrix4(out:flight.Matrix4, position:flight.Vector3, rota
 
 inline function composeMatrix4FromTransform3D(out:flight.Matrix4, source:flight.Transform3D):Void {
   #if flight_hx
-  flight._hx.Geometry.composeMatrix4FromTransform3D(out, source);
+  flight._hx._fn.Geometry.composeMatrix4FromTransform3D(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.composeMatrix4FromTransform3D(out, source);
+  flight._js._fn.Geometry.composeMatrix4FromTransform3D(out, source);
   #elseif cpp
-  flight._cpp.Geometry.composeMatrix4FromTransform3D(out, source);
+  flight._cpp._fn.Geometry.composeMatrix4FromTransform3D(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -579,11 +579,11 @@ inline function composeMatrix4FromTransform3D(out:flight.Matrix4, source:flight.
 
 inline function computeRectangleIntersection(out:flight.Rectangle, a:flight.Rectangle, b:flight.Rectangle):Void {
   #if flight_hx
-  flight._hx.Geometry.computeRectangleIntersection(out, a, b);
+  flight._hx._fn.Geometry.computeRectangleIntersection(out, a, b);
   #elseif (js && flight_esm)
-  flight._js.Geometry.computeRectangleIntersection(out, a, b);
+  flight._js._fn.Geometry.computeRectangleIntersection(out, a, b);
   #elseif cpp
-  flight._cpp.Geometry.computeRectangleIntersection(out, a, b);
+  flight._cpp._fn.Geometry.computeRectangleIntersection(out, a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -591,11 +591,11 @@ inline function computeRectangleIntersection(out:flight.Rectangle, a:flight.Rect
 
 inline function conjugateQuaternion(out:flight.Quaternion, source:flight.Quaternion):Void {
   #if flight_hx
-  flight._hx.Geometry.conjugateQuaternion(out, source);
+  flight._hx._fn.Geometry.conjugateQuaternion(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.conjugateQuaternion(out, source);
+  flight._js._fn.Geometry.conjugateQuaternion(out, source);
   #elseif cpp
-  flight._cpp.Geometry.conjugateQuaternion(out, source);
+  flight._cpp._fn.Geometry.conjugateQuaternion(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -603,11 +603,11 @@ inline function conjugateQuaternion(out:flight.Quaternion, source:flight.Quatern
 
 inline function containsAabbPoint(aabb:{ max:flight.Vector3, min:flight.Vector3 }, point:flight.Vector3):Bool {
   #if flight_hx
-  return flight._hx.Geometry.containsAabbPoint(aabb, point);
+  return flight._hx._fn.Geometry.containsAabbPoint(aabb, point);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.containsAabbPoint(aabb, point);
+  return flight._js._fn.Geometry.containsAabbPoint(aabb, point);
   #elseif cpp
-  return flight._cpp.Geometry.containsAabbPoint(aabb, point);
+  return flight._cpp._fn.Geometry.containsAabbPoint(aabb, point);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -615,11 +615,11 @@ inline function containsAabbPoint(aabb:{ max:flight.Vector3, min:flight.Vector3 
 
 inline function containsBoundingSpherePoint(sphere:flight.BoundingSphere, point:flight.Vector3):Bool {
   #if flight_hx
-  return flight._hx.Geometry.containsBoundingSpherePoint(sphere, point);
+  return flight._hx._fn.Geometry.containsBoundingSpherePoint(sphere, point);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.containsBoundingSpherePoint(sphere, point);
+  return flight._js._fn.Geometry.containsBoundingSpherePoint(sphere, point);
   #elseif cpp
-  return flight._cpp.Geometry.containsBoundingSpherePoint(sphere, point);
+  return flight._cpp._fn.Geometry.containsBoundingSpherePoint(sphere, point);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -627,11 +627,11 @@ inline function containsBoundingSpherePoint(sphere:flight.BoundingSphere, point:
 
 inline function containsRectanglePoint(source:flight.Rectangle, vector:flight.Vector2):Bool {
   #if flight_hx
-  return flight._hx.Geometry.containsRectanglePoint(source, vector);
+  return flight._hx._fn.Geometry.containsRectanglePoint(source, vector);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.containsRectanglePoint(source, vector);
+  return flight._js._fn.Geometry.containsRectanglePoint(source, vector);
   #elseif cpp
-  return flight._cpp.Geometry.containsRectanglePoint(source, vector);
+  return flight._cpp._fn.Geometry.containsRectanglePoint(source, vector);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -639,11 +639,11 @@ inline function containsRectanglePoint(source:flight.Rectangle, vector:flight.Ve
 
 inline function containsRectanglePointXY(source:flight.Rectangle, x:Float, y:Float):Bool {
   #if flight_hx
-  return flight._hx.Geometry.containsRectanglePointXY(source, x, y);
+  return flight._hx._fn.Geometry.containsRectanglePointXY(source, x, y);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.containsRectanglePointXY(source, x, y);
+  return flight._js._fn.Geometry.containsRectanglePointXY(source, x, y);
   #elseif cpp
-  return flight._cpp.Geometry.containsRectanglePointXY(source, x, y);
+  return flight._cpp._fn.Geometry.containsRectanglePointXY(source, x, y);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -651,11 +651,11 @@ inline function containsRectanglePointXY(source:flight.Rectangle, x:Float, y:Flo
 
 inline function copyAabb(out:{ max:flight.Vector3, min:flight.Vector3 }, source:{ max:flight.Vector3, min:flight.Vector3 }):Void {
   #if flight_hx
-  flight._hx.Geometry.copyAabb(out, source);
+  flight._hx._fn.Geometry.copyAabb(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.copyAabb(out, source);
+  flight._js._fn.Geometry.copyAabb(out, source);
   #elseif cpp
-  flight._cpp.Geometry.copyAabb(out, source);
+  flight._cpp._fn.Geometry.copyAabb(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -663,11 +663,11 @@ inline function copyAabb(out:{ max:flight.Vector3, min:flight.Vector3 }, source:
 
 inline function copyBoundingSphere(out:flight.BoundingSphere, source:flight.BoundingSphere):Void {
   #if flight_hx
-  flight._hx.Geometry.copyBoundingSphere(out, source);
+  flight._hx._fn.Geometry.copyBoundingSphere(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.copyBoundingSphere(out, source);
+  flight._js._fn.Geometry.copyBoundingSphere(out, source);
   #elseif cpp
-  flight._cpp.Geometry.copyBoundingSphere(out, source);
+  flight._cpp._fn.Geometry.copyBoundingSphere(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -675,11 +675,11 @@ inline function copyBoundingSphere(out:flight.BoundingSphere, source:flight.Boun
 
 inline function copyMatrix(out:flight.Matrix, source:flight.Matrix):Void {
   #if flight_hx
-  flight._hx.Geometry.copyMatrix(out, source);
+  flight._hx._fn.Geometry.copyMatrix(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.copyMatrix(out, source);
+  flight._js._fn.Geometry.copyMatrix(out, source);
   #elseif cpp
-  flight._cpp.Geometry.copyMatrix(out, source);
+  flight._cpp._fn.Geometry.copyMatrix(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -687,11 +687,11 @@ inline function copyMatrix(out:flight.Matrix, source:flight.Matrix):Void {
 
 inline function copyMatrix3(out:flight.Matrix3, source:flight.Matrix3):Void {
   #if flight_hx
-  flight._hx.Geometry.copyMatrix3(out, source);
+  flight._hx._fn.Geometry.copyMatrix3(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.copyMatrix3(out, source);
+  flight._js._fn.Geometry.copyMatrix3(out, source);
   #elseif cpp
-  flight._cpp.Geometry.copyMatrix3(out, source);
+  flight._cpp._fn.Geometry.copyMatrix3(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -699,11 +699,11 @@ inline function copyMatrix3(out:flight.Matrix3, source:flight.Matrix3):Void {
 
 inline function copyMatrix3ColumnFromVector3(out:flight.Matrix3, column:Float, source:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.copyMatrix3ColumnFromVector3(out, column, source);
+  flight._hx._fn.Geometry.copyMatrix3ColumnFromVector3(out, column, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.copyMatrix3ColumnFromVector3(out, column, source);
+  flight._js._fn.Geometry.copyMatrix3ColumnFromVector3(out, column, source);
   #elseif cpp
-  flight._cpp.Geometry.copyMatrix3ColumnFromVector3(out, column, source);
+  flight._cpp._fn.Geometry.copyMatrix3ColumnFromVector3(out, column, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -711,11 +711,11 @@ inline function copyMatrix3ColumnFromVector3(out:flight.Matrix3, column:Float, s
 
 inline function copyMatrix3ColumnToVector3(out:flight.Vector3, column:Float, source:flight.Matrix3):Void {
   #if flight_hx
-  flight._hx.Geometry.copyMatrix3ColumnToVector3(out, column, source);
+  flight._hx._fn.Geometry.copyMatrix3ColumnToVector3(out, column, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.copyMatrix3ColumnToVector3(out, column, source);
+  flight._js._fn.Geometry.copyMatrix3ColumnToVector3(out, column, source);
   #elseif cpp
-  flight._cpp.Geometry.copyMatrix3ColumnToVector3(out, column, source);
+  flight._cpp._fn.Geometry.copyMatrix3ColumnToVector3(out, column, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -723,11 +723,11 @@ inline function copyMatrix3ColumnToVector3(out:flight.Vector3, column:Float, sou
 
 inline function copyMatrix3RowFromVector3(out:flight.Matrix3, row:Float, source:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.copyMatrix3RowFromVector3(out, row, source);
+  flight._hx._fn.Geometry.copyMatrix3RowFromVector3(out, row, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.copyMatrix3RowFromVector3(out, row, source);
+  flight._js._fn.Geometry.copyMatrix3RowFromVector3(out, row, source);
   #elseif cpp
-  flight._cpp.Geometry.copyMatrix3RowFromVector3(out, row, source);
+  flight._cpp._fn.Geometry.copyMatrix3RowFromVector3(out, row, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -735,11 +735,11 @@ inline function copyMatrix3RowFromVector3(out:flight.Matrix3, row:Float, source:
 
 inline function copyMatrix3RowToVector3(out:flight.Vector3, row:Float, source:flight.Matrix3):Void {
   #if flight_hx
-  flight._hx.Geometry.copyMatrix3RowToVector3(out, row, source);
+  flight._hx._fn.Geometry.copyMatrix3RowToVector3(out, row, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.copyMatrix3RowToVector3(out, row, source);
+  flight._js._fn.Geometry.copyMatrix3RowToVector3(out, row, source);
   #elseif cpp
-  flight._cpp.Geometry.copyMatrix3RowToVector3(out, row, source);
+  flight._cpp._fn.Geometry.copyMatrix3RowToVector3(out, row, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -747,11 +747,11 @@ inline function copyMatrix3RowToVector3(out:flight.Vector3, row:Float, source:fl
 
 inline function copyMatrix4(out:flight.Matrix4, source:flight.Matrix4):Void {
   #if flight_hx
-  flight._hx.Geometry.copyMatrix4(out, source);
+  flight._hx._fn.Geometry.copyMatrix4(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.copyMatrix4(out, source);
+  flight._js._fn.Geometry.copyMatrix4(out, source);
   #elseif cpp
-  flight._cpp.Geometry.copyMatrix4(out, source);
+  flight._cpp._fn.Geometry.copyMatrix4(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -759,11 +759,11 @@ inline function copyMatrix4(out:flight.Matrix4, source:flight.Matrix4):Void {
 
 inline function copyMatrix4ColumnFromVector4(out:flight.Matrix4, column:Float, source:flight.Vector4):Void {
   #if flight_hx
-  flight._hx.Geometry.copyMatrix4ColumnFromVector4(out, column, source);
+  flight._hx._fn.Geometry.copyMatrix4ColumnFromVector4(out, column, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.copyMatrix4ColumnFromVector4(out, column, source);
+  flight._js._fn.Geometry.copyMatrix4ColumnFromVector4(out, column, source);
   #elseif cpp
-  flight._cpp.Geometry.copyMatrix4ColumnFromVector4(out, column, source);
+  flight._cpp._fn.Geometry.copyMatrix4ColumnFromVector4(out, column, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -771,11 +771,11 @@ inline function copyMatrix4ColumnFromVector4(out:flight.Matrix4, column:Float, s
 
 inline function copyMatrix4ColumnToVector4(out:flight.Vector4, column:Float, source:flight.Matrix4):Void {
   #if flight_hx
-  flight._hx.Geometry.copyMatrix4ColumnToVector4(out, column, source);
+  flight._hx._fn.Geometry.copyMatrix4ColumnToVector4(out, column, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.copyMatrix4ColumnToVector4(out, column, source);
+  flight._js._fn.Geometry.copyMatrix4ColumnToVector4(out, column, source);
   #elseif cpp
-  flight._cpp.Geometry.copyMatrix4ColumnToVector4(out, column, source);
+  flight._cpp._fn.Geometry.copyMatrix4ColumnToVector4(out, column, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -783,11 +783,11 @@ inline function copyMatrix4ColumnToVector4(out:flight.Vector4, column:Float, sou
 
 inline function copyMatrix4RowFromVector4(out:flight.Matrix4, row:Float, source:flight.Vector4):Void {
   #if flight_hx
-  flight._hx.Geometry.copyMatrix4RowFromVector4(out, row, source);
+  flight._hx._fn.Geometry.copyMatrix4RowFromVector4(out, row, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.copyMatrix4RowFromVector4(out, row, source);
+  flight._js._fn.Geometry.copyMatrix4RowFromVector4(out, row, source);
   #elseif cpp
-  flight._cpp.Geometry.copyMatrix4RowFromVector4(out, row, source);
+  flight._cpp._fn.Geometry.copyMatrix4RowFromVector4(out, row, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -795,11 +795,11 @@ inline function copyMatrix4RowFromVector4(out:flight.Matrix4, row:Float, source:
 
 inline function copyMatrix4RowToVector4(out:flight.Vector4, row:Float, source:flight.Matrix4):Void {
   #if flight_hx
-  flight._hx.Geometry.copyMatrix4RowToVector4(out, row, source);
+  flight._hx._fn.Geometry.copyMatrix4RowToVector4(out, row, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.copyMatrix4RowToVector4(out, row, source);
+  flight._js._fn.Geometry.copyMatrix4RowToVector4(out, row, source);
   #elseif cpp
-  flight._cpp.Geometry.copyMatrix4RowToVector4(out, row, source);
+  flight._cpp._fn.Geometry.copyMatrix4RowToVector4(out, row, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -807,11 +807,11 @@ inline function copyMatrix4RowToVector4(out:flight.Vector4, row:Float, source:fl
 
 inline function copyMatrixColumnFromVector3(out:flight.Matrix, column:Float, source:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.copyMatrixColumnFromVector3(out, column, source);
+  flight._hx._fn.Geometry.copyMatrixColumnFromVector3(out, column, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.copyMatrixColumnFromVector3(out, column, source);
+  flight._js._fn.Geometry.copyMatrixColumnFromVector3(out, column, source);
   #elseif cpp
-  flight._cpp.Geometry.copyMatrixColumnFromVector3(out, column, source);
+  flight._cpp._fn.Geometry.copyMatrixColumnFromVector3(out, column, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -819,11 +819,11 @@ inline function copyMatrixColumnFromVector3(out:flight.Matrix, column:Float, sou
 
 inline function copyMatrixColumnToVector3(out:flight.Vector3, column:Float, source:flight.Matrix):Void {
   #if flight_hx
-  flight._hx.Geometry.copyMatrixColumnToVector3(out, column, source);
+  flight._hx._fn.Geometry.copyMatrixColumnToVector3(out, column, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.copyMatrixColumnToVector3(out, column, source);
+  flight._js._fn.Geometry.copyMatrixColumnToVector3(out, column, source);
   #elseif cpp
-  flight._cpp.Geometry.copyMatrixColumnToVector3(out, column, source);
+  flight._cpp._fn.Geometry.copyMatrixColumnToVector3(out, column, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -831,11 +831,11 @@ inline function copyMatrixColumnToVector3(out:flight.Vector3, column:Float, sour
 
 inline function copyMatrixRowFromVector3(out:flight.Matrix, row:Float, source:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.copyMatrixRowFromVector3(out, row, source);
+  flight._hx._fn.Geometry.copyMatrixRowFromVector3(out, row, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.copyMatrixRowFromVector3(out, row, source);
+  flight._js._fn.Geometry.copyMatrixRowFromVector3(out, row, source);
   #elseif cpp
-  flight._cpp.Geometry.copyMatrixRowFromVector3(out, row, source);
+  flight._cpp._fn.Geometry.copyMatrixRowFromVector3(out, row, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -843,11 +843,11 @@ inline function copyMatrixRowFromVector3(out:flight.Matrix, row:Float, source:fl
 
 inline function copyMatrixRowToVector3(out:flight.Vector3, row:Float, source:flight.Matrix):Void {
   #if flight_hx
-  flight._hx.Geometry.copyMatrixRowToVector3(out, row, source);
+  flight._hx._fn.Geometry.copyMatrixRowToVector3(out, row, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.copyMatrixRowToVector3(out, row, source);
+  flight._js._fn.Geometry.copyMatrixRowToVector3(out, row, source);
   #elseif cpp
-  flight._cpp.Geometry.copyMatrixRowToVector3(out, row, source);
+  flight._cpp._fn.Geometry.copyMatrixRowToVector3(out, row, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -855,11 +855,11 @@ inline function copyMatrixRowToVector3(out:flight.Vector3, row:Float, source:fli
 
 inline function copyPlane(out:flight.Plane, source:flight.Plane):Void {
   #if flight_hx
-  flight._hx.Geometry.copyPlane(out, source);
+  flight._hx._fn.Geometry.copyPlane(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.copyPlane(out, source);
+  flight._js._fn.Geometry.copyPlane(out, source);
   #elseif cpp
-  flight._cpp.Geometry.copyPlane(out, source);
+  flight._cpp._fn.Geometry.copyPlane(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -867,11 +867,11 @@ inline function copyPlane(out:flight.Plane, source:flight.Plane):Void {
 
 inline function copyQuaternion(out:flight.Quaternion, source:flight.Quaternion):Void {
   #if flight_hx
-  flight._hx.Geometry.copyQuaternion(out, source);
+  flight._hx._fn.Geometry.copyQuaternion(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.copyQuaternion(out, source);
+  flight._js._fn.Geometry.copyQuaternion(out, source);
   #elseif cpp
-  flight._cpp.Geometry.copyQuaternion(out, source);
+  flight._cpp._fn.Geometry.copyQuaternion(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -879,11 +879,11 @@ inline function copyQuaternion(out:flight.Quaternion, source:flight.Quaternion):
 
 inline function copyRectangle(out:flight.Rectangle, source:flight.Rectangle):Void {
   #if flight_hx
-  flight._hx.Geometry.copyRectangle(out, source);
+  flight._hx._fn.Geometry.copyRectangle(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.copyRectangle(out, source);
+  flight._js._fn.Geometry.copyRectangle(out, source);
   #elseif cpp
-  flight._cpp.Geometry.copyRectangle(out, source);
+  flight._cpp._fn.Geometry.copyRectangle(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -891,11 +891,11 @@ inline function copyRectangle(out:flight.Rectangle, source:flight.Rectangle):Voi
 
 inline function copyVector2(out:flight.Vector2, source:flight.Vector2):Void {
   #if flight_hx
-  flight._hx.Geometry.copyVector2(out, source);
+  flight._hx._fn.Geometry.copyVector2(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.copyVector2(out, source);
+  flight._js._fn.Geometry.copyVector2(out, source);
   #elseif cpp
-  flight._cpp.Geometry.copyVector2(out, source);
+  flight._cpp._fn.Geometry.copyVector2(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -903,11 +903,11 @@ inline function copyVector2(out:flight.Vector2, source:flight.Vector2):Void {
 
 inline function copyVector3(out:flight.Vector3, source:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.copyVector3(out, source);
+  flight._hx._fn.Geometry.copyVector3(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.copyVector3(out, source);
+  flight._js._fn.Geometry.copyVector3(out, source);
   #elseif cpp
-  flight._cpp.Geometry.copyVector3(out, source);
+  flight._cpp._fn.Geometry.copyVector3(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -915,11 +915,11 @@ inline function copyVector3(out:flight.Vector3, source:flight.Vector3):Void {
 
 inline function copyVector4(out:flight.Vector4, source:flight.Vector4):Void {
   #if flight_hx
-  flight._hx.Geometry.copyVector4(out, source);
+  flight._hx._fn.Geometry.copyVector4(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.copyVector4(out, source);
+  flight._js._fn.Geometry.copyVector4(out, source);
   #elseif cpp
-  flight._cpp.Geometry.copyVector4(out, source);
+  flight._cpp._fn.Geometry.copyVector4(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -927,11 +927,11 @@ inline function copyVector4(out:flight.Vector4, source:flight.Vector4):Void {
 
 inline function createAabb(?minX:Float, ?minY:Float, ?minZ:Float, ?maxX:Float, ?maxY:Float, ?maxZ:Float):flight.Aabb {
   #if flight_hx
-  return flight._hx.Geometry.createAabb(minX, minY, minZ, maxX, maxY, maxZ);
+  return flight._hx._fn.Geometry.createAabb(minX, minY, minZ, maxX, maxY, maxZ);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.createAabb(minX, minY, minZ, maxX, maxY, maxZ);
+  return flight._js._fn.Geometry.createAabb(minX, minY, minZ, maxX, maxY, maxZ);
   #elseif cpp
-  return flight._cpp.Geometry.createAabb(minX, minY, minZ, maxX, maxY, maxZ);
+  return flight._cpp._fn.Geometry.createAabb(minX, minY, minZ, maxX, maxY, maxZ);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -939,11 +939,11 @@ inline function createAabb(?minX:Float, ?minY:Float, ?minZ:Float, ?maxX:Float, ?
 
 inline function createBoundingSphere(?centerX:Float, ?centerY:Float, ?centerZ:Float, ?radius:Float):flight.BoundingSphere {
   #if flight_hx
-  return flight._hx.Geometry.createBoundingSphere(centerX, centerY, centerZ, radius);
+  return flight._hx._fn.Geometry.createBoundingSphere(centerX, centerY, centerZ, radius);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.createBoundingSphere(centerX, centerY, centerZ, radius);
+  return flight._js._fn.Geometry.createBoundingSphere(centerX, centerY, centerZ, radius);
   #elseif cpp
-  return flight._cpp.Geometry.createBoundingSphere(centerX, centerY, centerZ, radius);
+  return flight._cpp._fn.Geometry.createBoundingSphere(centerX, centerY, centerZ, radius);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -951,11 +951,11 @@ inline function createBoundingSphere(?centerX:Float, ?centerY:Float, ?centerZ:Fl
 
 inline function createCapsule(startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):flight.Capsule {
   #if flight_hx
-  return flight._hx.Geometry.createCapsule(startX, startY, startZ, endX, endY, endZ, radius);
+  return flight._hx._fn.Geometry.createCapsule(startX, startY, startZ, endX, endY, endZ, radius);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.createCapsule(startX, startY, startZ, endX, endY, endZ, radius);
+  return flight._js._fn.Geometry.createCapsule(startX, startY, startZ, endX, endY, endZ, radius);
   #elseif cpp
-  return flight._cpp.Geometry.createCapsule(startX, startY, startZ, endX, endY, endZ, radius);
+  return flight._cpp._fn.Geometry.createCapsule(startX, startY, startZ, endX, endY, endZ, radius);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -963,11 +963,11 @@ inline function createCapsule(startX:Float, startY:Float, startZ:Float, endX:Flo
 
 inline function createFrustum():flight.Frustum {
   #if flight_hx
-  return flight._hx.Geometry.createFrustum();
+  return flight._hx._fn.Geometry.createFrustum();
   #elseif (js && flight_esm)
-  return flight._js.Geometry.createFrustum();
+  return flight._js._fn.Geometry.createFrustum();
   #elseif cpp
-  return flight._cpp.Geometry.createFrustum();
+  return flight._cpp._fn.Geometry.createFrustum();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -975,11 +975,11 @@ inline function createFrustum():flight.Frustum {
 
 inline function createGradientTransformMatrix(width:Float, height:Float, ?rotation:Float, ?tx:Float, ?ty:Float):flight.Matrix {
   #if flight_hx
-  return flight._hx.Geometry.createGradientTransformMatrix(width, height, rotation, tx, ty);
+  return flight._hx._fn.Geometry.createGradientTransformMatrix(width, height, rotation, tx, ty);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.createGradientTransformMatrix(width, height, rotation, tx, ty);
+  return flight._js._fn.Geometry.createGradientTransformMatrix(width, height, rotation, tx, ty);
   #elseif cpp
-  return flight._cpp.Geometry.createGradientTransformMatrix(width, height, rotation, tx, ty);
+  return flight._cpp._fn.Geometry.createGradientTransformMatrix(width, height, rotation, tx, ty);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -987,11 +987,11 @@ inline function createGradientTransformMatrix(width:Float, height:Float, ?rotati
 
 inline function createMatrix(?a:Float, ?b:Float, ?c:Float, ?d:Float, ?tx:Float, ?ty:Float):flight.Matrix {
   #if flight_hx
-  return flight._hx.Geometry.createMatrix(a, b, c, d, tx, ty);
+  return flight._hx._fn.Geometry.createMatrix(a, b, c, d, tx, ty);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.createMatrix(a, b, c, d, tx, ty);
+  return flight._js._fn.Geometry.createMatrix(a, b, c, d, tx, ty);
   #elseif cpp
-  return flight._cpp.Geometry.createMatrix(a, b, c, d, tx, ty);
+  return flight._cpp._fn.Geometry.createMatrix(a, b, c, d, tx, ty);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -999,11 +999,11 @@ inline function createMatrix(?a:Float, ?b:Float, ?c:Float, ?d:Float, ?tx:Float, 
 
 inline function createMatrix3(?m00:Float, ?m01:Float, ?m02:Float, ?m10:Float, ?m11:Float, ?m12:Float, ?m20:Float, ?m21:Float, ?m22:Float):flight.Matrix3 {
   #if flight_hx
-  return flight._hx.Geometry.createMatrix3(m00, m01, m02, m10, m11, m12, m20, m21, m22);
+  return flight._hx._fn.Geometry.createMatrix3(m00, m01, m02, m10, m11, m12, m20, m21, m22);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.createMatrix3(m00, m01, m02, m10, m11, m12, m20, m21, m22);
+  return flight._js._fn.Geometry.createMatrix3(m00, m01, m02, m10, m11, m12, m20, m21, m22);
   #elseif cpp
-  return flight._cpp.Geometry.createMatrix3(m00, m01, m02, m10, m11, m12, m20, m21, m22);
+  return flight._cpp._fn.Geometry.createMatrix3(m00, m01, m02, m10, m11, m12, m20, m21, m22);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1011,11 +1011,11 @@ inline function createMatrix3(?m00:Float, ?m01:Float, ?m02:Float, ?m10:Float, ?m
 
 inline function createMatrix4(?m00:Float, ?m01:Float, ?m02:Float, ?m03:Float, ?m10:Float, ?m11:Float, ?m12:Float, ?m13:Float, ?m20:Float, ?m21:Float, ?m22:Float, ?m23:Float, ?m30:Float, ?m31:Float, ?m32:Float, ?m33:Float):flight.Matrix4 {
   #if flight_hx
-  return flight._hx.Geometry.createMatrix4(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
+  return flight._hx._fn.Geometry.createMatrix4(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.createMatrix4(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
+  return flight._js._fn.Geometry.createMatrix4(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
   #elseif cpp
-  return flight._cpp.Geometry.createMatrix4(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
+  return flight._cpp._fn.Geometry.createMatrix4(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1023,11 +1023,11 @@ inline function createMatrix4(?m00:Float, ?m01:Float, ?m02:Float, ?m03:Float, ?m
 
 inline function createMatrix4From2D(a:Float, b:Float, c:Float, d:Float, ?tx:Float, ?ty:Float):flight.Matrix4 {
   #if flight_hx
-  return flight._hx.Geometry.createMatrix4From2D(a, b, c, d, tx, ty);
+  return flight._hx._fn.Geometry.createMatrix4From2D(a, b, c, d, tx, ty);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.createMatrix4From2D(a, b, c, d, tx, ty);
+  return flight._js._fn.Geometry.createMatrix4From2D(a, b, c, d, tx, ty);
   #elseif cpp
-  return flight._cpp.Geometry.createMatrix4From2D(a, b, c, d, tx, ty);
+  return flight._cpp._fn.Geometry.createMatrix4From2D(a, b, c, d, tx, ty);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1035,11 +1035,11 @@ inline function createMatrix4From2D(a:Float, b:Float, c:Float, d:Float, ?tx:Floa
 
 inline function createObb(centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):flight.Obb {
   #if flight_hx
-  return flight._hx.Geometry.createObb(centerX, centerY, centerZ, halfExtentX, halfExtentY, halfExtentZ, orientationX, orientationY, orientationZ, orientationW);
+  return flight._hx._fn.Geometry.createObb(centerX, centerY, centerZ, halfExtentX, halfExtentY, halfExtentZ, orientationX, orientationY, orientationZ, orientationW);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.createObb(centerX, centerY, centerZ, halfExtentX, halfExtentY, halfExtentZ, orientationX, orientationY, orientationZ, orientationW);
+  return flight._js._fn.Geometry.createObb(centerX, centerY, centerZ, halfExtentX, halfExtentY, halfExtentZ, orientationX, orientationY, orientationZ, orientationW);
   #elseif cpp
-  return flight._cpp.Geometry.createObb(centerX, centerY, centerZ, halfExtentX, halfExtentY, halfExtentZ, orientationX, orientationY, orientationZ, orientationW);
+  return flight._cpp._fn.Geometry.createObb(centerX, centerY, centerZ, halfExtentX, halfExtentY, halfExtentZ, orientationX, orientationY, orientationZ, orientationW);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1047,11 +1047,11 @@ inline function createObb(centerX:Float, centerY:Float, centerZ:Float, halfExten
 
 inline function createOrthographicMatrix4(left:Float, right:Float, bottom:Float, top:Float, zNear:Float, zFar:Float):flight.Matrix4 {
   #if flight_hx
-  return flight._hx.Geometry.createOrthographicMatrix4(left, right, bottom, top, zNear, zFar);
+  return flight._hx._fn.Geometry.createOrthographicMatrix4(left, right, bottom, top, zNear, zFar);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.createOrthographicMatrix4(left, right, bottom, top, zNear, zFar);
+  return flight._js._fn.Geometry.createOrthographicMatrix4(left, right, bottom, top, zNear, zFar);
   #elseif cpp
-  return flight._cpp.Geometry.createOrthographicMatrix4(left, right, bottom, top, zNear, zFar);
+  return flight._cpp._fn.Geometry.createOrthographicMatrix4(left, right, bottom, top, zNear, zFar);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1059,11 +1059,11 @@ inline function createOrthographicMatrix4(left:Float, right:Float, bottom:Float,
 
 inline function createPerspectiveMatrix4(tanHalfFovY:Float, aspect:Float, zNear:Float, zFar:Float):flight.Matrix4 {
   #if flight_hx
-  return flight._hx.Geometry.createPerspectiveMatrix4(tanHalfFovY, aspect, zNear, zFar);
+  return flight._hx._fn.Geometry.createPerspectiveMatrix4(tanHalfFovY, aspect, zNear, zFar);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.createPerspectiveMatrix4(tanHalfFovY, aspect, zNear, zFar);
+  return flight._js._fn.Geometry.createPerspectiveMatrix4(tanHalfFovY, aspect, zNear, zFar);
   #elseif cpp
-  return flight._cpp.Geometry.createPerspectiveMatrix4(tanHalfFovY, aspect, zNear, zFar);
+  return flight._cpp._fn.Geometry.createPerspectiveMatrix4(tanHalfFovY, aspect, zNear, zFar);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1071,11 +1071,11 @@ inline function createPerspectiveMatrix4(tanHalfFovY:Float, aspect:Float, zNear:
 
 inline function createPlane(?a:Float, ?b:Float, ?c:Float, ?d:Float):flight.Plane {
   #if flight_hx
-  return flight._hx.Geometry.createPlane(a, b, c, d);
+  return flight._hx._fn.Geometry.createPlane(a, b, c, d);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.createPlane(a, b, c, d);
+  return flight._js._fn.Geometry.createPlane(a, b, c, d);
   #elseif cpp
-  return flight._cpp.Geometry.createPlane(a, b, c, d);
+  return flight._cpp._fn.Geometry.createPlane(a, b, c, d);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1083,11 +1083,11 @@ inline function createPlane(?a:Float, ?b:Float, ?c:Float, ?d:Float):flight.Plane
 
 inline function createQuaternion(?x:Float, ?y:Float, ?z:Float, ?w:Float):flight.Quaternion {
   #if flight_hx
-  return flight._hx.Geometry.createQuaternion(x, y, z, w);
+  return flight._hx._fn.Geometry.createQuaternion(x, y, z, w);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.createQuaternion(x, y, z, w);
+  return flight._js._fn.Geometry.createQuaternion(x, y, z, w);
   #elseif cpp
-  return flight._cpp.Geometry.createQuaternion(x, y, z, w);
+  return flight._cpp._fn.Geometry.createQuaternion(x, y, z, w);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1095,11 +1095,11 @@ inline function createQuaternion(?x:Float, ?y:Float, ?z:Float, ?w:Float):flight.
 
 inline function createRay3D(?originX:Float, ?originY:Float, ?originZ:Float, ?directionX:Float, ?directionY:Float, ?directionZ:Float):flight.Ray3D {
   #if flight_hx
-  return flight._hx.Geometry.createRay3D(originX, originY, originZ, directionX, directionY, directionZ);
+  return flight._hx._fn.Geometry.createRay3D(originX, originY, originZ, directionX, directionY, directionZ);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.createRay3D(originX, originY, originZ, directionX, directionY, directionZ);
+  return flight._js._fn.Geometry.createRay3D(originX, originY, originZ, directionX, directionY, directionZ);
   #elseif cpp
-  return flight._cpp.Geometry.createRay3D(originX, originY, originZ, directionX, directionY, directionZ);
+  return flight._cpp._fn.Geometry.createRay3D(originX, originY, originZ, directionX, directionY, directionZ);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1107,11 +1107,11 @@ inline function createRay3D(?originX:Float, ?originY:Float, ?originZ:Float, ?dir
 
 inline function createRectangle(?x:Float, ?y:Float, ?width:Float, ?height:Float):flight.Rectangle {
   #if flight_hx
-  return flight._hx.Geometry.createRectangle(x, y, width, height);
+  return flight._hx._fn.Geometry.createRectangle(x, y, width, height);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.createRectangle(x, y, width, height);
+  return flight._js._fn.Geometry.createRectangle(x, y, width, height);
   #elseif cpp
-  return flight._cpp.Geometry.createRectangle(x, y, width, height);
+  return flight._cpp._fn.Geometry.createRectangle(x, y, width, height);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1119,11 +1119,11 @@ inline function createRectangle(?x:Float, ?y:Float, ?width:Float, ?height:Float)
 
 inline function createTransform2D(?x:Float, ?y:Float, ?rotation:Float, ?scaleX:Float, ?scaleY:Float, ?skewX:Float, ?skewY:Float, ?pivotX:Float, ?pivotY:Float):flight.Transform2D {
   #if flight_hx
-  return flight._hx.Geometry.createTransform2D(x, y, rotation, scaleX, scaleY, skewX, skewY, pivotX, pivotY);
+  return flight._hx._fn.Geometry.createTransform2D(x, y, rotation, scaleX, scaleY, skewX, skewY, pivotX, pivotY);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.createTransform2D(x, y, rotation, scaleX, scaleY, skewX, skewY, pivotX, pivotY);
+  return flight._js._fn.Geometry.createTransform2D(x, y, rotation, scaleX, scaleY, skewX, skewY, pivotX, pivotY);
   #elseif cpp
-  return flight._cpp.Geometry.createTransform2D(x, y, rotation, scaleX, scaleY, skewX, skewY, pivotX, pivotY);
+  return flight._cpp._fn.Geometry.createTransform2D(x, y, rotation, scaleX, scaleY, skewX, skewY, pivotX, pivotY);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1131,11 +1131,11 @@ inline function createTransform2D(?x:Float, ?y:Float, ?rotation:Float, ?scaleX:F
 
 inline function createTransform3D():flight.Transform3D {
   #if flight_hx
-  return flight._hx.Geometry.createTransform3D();
+  return flight._hx._fn.Geometry.createTransform3D();
   #elseif (js && flight_esm)
-  return flight._js.Geometry.createTransform3D();
+  return flight._js._fn.Geometry.createTransform3D();
   #elseif cpp
-  return flight._cpp.Geometry.createTransform3D();
+  return flight._cpp._fn.Geometry.createTransform3D();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1143,11 +1143,11 @@ inline function createTransform3D():flight.Transform3D {
 
 inline function createTransformMatrix(scaleX:Float, scaleY:Float, ?rotation:Float, ?tx:Float, ?ty:Float):flight.Matrix {
   #if flight_hx
-  return flight._hx.Geometry.createTransformMatrix(scaleX, scaleY, rotation, tx, ty);
+  return flight._hx._fn.Geometry.createTransformMatrix(scaleX, scaleY, rotation, tx, ty);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.createTransformMatrix(scaleX, scaleY, rotation, tx, ty);
+  return flight._js._fn.Geometry.createTransformMatrix(scaleX, scaleY, rotation, tx, ty);
   #elseif cpp
-  return flight._cpp.Geometry.createTransformMatrix(scaleX, scaleY, rotation, tx, ty);
+  return flight._cpp._fn.Geometry.createTransformMatrix(scaleX, scaleY, rotation, tx, ty);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1155,11 +1155,11 @@ inline function createTransformMatrix(scaleX:Float, scaleY:Float, ?rotation:Floa
 
 inline function createVector2(?x:Float, ?y:Float):flight.Vector2 {
   #if flight_hx
-  return flight._hx.Geometry.createVector2(x, y);
+  return flight._hx._fn.Geometry.createVector2(x, y);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.createVector2(x, y);
+  return flight._js._fn.Geometry.createVector2(x, y);
   #elseif cpp
-  return flight._cpp.Geometry.createVector2(x, y);
+  return flight._cpp._fn.Geometry.createVector2(x, y);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1167,11 +1167,11 @@ inline function createVector2(?x:Float, ?y:Float):flight.Vector2 {
 
 inline function createVector2FromPolar(length:Float, angle:Float):flight.Vector2 {
   #if flight_hx
-  return flight._hx.Geometry.createVector2FromPolar(length, angle);
+  return flight._hx._fn.Geometry.createVector2FromPolar(length, angle);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.createVector2FromPolar(length, angle);
+  return flight._js._fn.Geometry.createVector2FromPolar(length, angle);
   #elseif cpp
-  return flight._cpp.Geometry.createVector2FromPolar(length, angle);
+  return flight._cpp._fn.Geometry.createVector2FromPolar(length, angle);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1179,11 +1179,11 @@ inline function createVector2FromPolar(length:Float, angle:Float):flight.Vector2
 
 inline function createVector3(?x:Float, ?y:Float, ?z:Float):flight.Vector3 {
   #if flight_hx
-  return flight._hx.Geometry.createVector3(x, y, z);
+  return flight._hx._fn.Geometry.createVector3(x, y, z);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.createVector3(x, y, z);
+  return flight._js._fn.Geometry.createVector3(x, y, z);
   #elseif cpp
-  return flight._cpp.Geometry.createVector3(x, y, z);
+  return flight._cpp._fn.Geometry.createVector3(x, y, z);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1191,11 +1191,11 @@ inline function createVector3(?x:Float, ?y:Float, ?z:Float):flight.Vector3 {
 
 inline function createVector3FromSpherical(radius:Float, theta:Float, phi:Float):flight.Vector3 {
   #if flight_hx
-  return flight._hx.Geometry.createVector3FromSpherical(radius, theta, phi);
+  return flight._hx._fn.Geometry.createVector3FromSpherical(radius, theta, phi);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.createVector3FromSpherical(radius, theta, phi);
+  return flight._js._fn.Geometry.createVector3FromSpherical(radius, theta, phi);
   #elseif cpp
-  return flight._cpp.Geometry.createVector3FromSpherical(radius, theta, phi);
+  return flight._cpp._fn.Geometry.createVector3FromSpherical(radius, theta, phi);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1203,11 +1203,11 @@ inline function createVector3FromSpherical(radius:Float, theta:Float, phi:Float)
 
 inline function createVector4(?x:Float, ?y:Float, ?z:Float, ?w:Float):flight.Vector4 {
   #if flight_hx
-  return flight._hx.Geometry.createVector4(x, y, z, w);
+  return flight._hx._fn.Geometry.createVector4(x, y, z, w);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.createVector4(x, y, z, w);
+  return flight._js._fn.Geometry.createVector4(x, y, z, w);
   #elseif cpp
-  return flight._cpp.Geometry.createVector4(x, y, z, w);
+  return flight._cpp._fn.Geometry.createVector4(x, y, z, w);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1215,11 +1215,11 @@ inline function createVector4(?x:Float, ?y:Float, ?z:Float, ?w:Float):flight.Vec
 
 inline function crossVector2(a:flight.Vector2, b:flight.Vector2):Float {
   #if flight_hx
-  return flight._hx.Geometry.crossVector2(a, b);
+  return flight._hx._fn.Geometry.crossVector2(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.crossVector2(a, b);
+  return flight._js._fn.Geometry.crossVector2(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.crossVector2(a, b);
+  return flight._cpp._fn.Geometry.crossVector2(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1227,11 +1227,11 @@ inline function crossVector2(a:flight.Vector2, b:flight.Vector2):Float {
 
 inline function crossVector3(out:flight.Vector3, source:flight.Vector3, other:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.crossVector3(out, source, other);
+  flight._hx._fn.Geometry.crossVector3(out, source, other);
   #elseif (js && flight_esm)
-  flight._js.Geometry.crossVector3(out, source, other);
+  flight._js._fn.Geometry.crossVector3(out, source, other);
   #elseif cpp
-  flight._cpp.Geometry.crossVector3(out, source, other);
+  flight._cpp._fn.Geometry.crossVector3(out, source, other);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1239,11 +1239,11 @@ inline function crossVector3(out:flight.Vector3, source:flight.Vector3, other:fl
 
 inline function decomposeMatrix4(outPosition:flight.Vector3, outRotation:flight.Quaternion, outScale:flight.Vector3, m:flight.Matrix4):Void {
   #if flight_hx
-  flight._hx.Geometry.decomposeMatrix4(outPosition, outRotation, outScale, m);
+  flight._hx._fn.Geometry.decomposeMatrix4(outPosition, outRotation, outScale, m);
   #elseif (js && flight_esm)
-  flight._js.Geometry.decomposeMatrix4(outPosition, outRotation, outScale, m);
+  flight._js._fn.Geometry.decomposeMatrix4(outPosition, outRotation, outScale, m);
   #elseif cpp
-  flight._cpp.Geometry.decomposeMatrix4(outPosition, outRotation, outScale, m);
+  flight._cpp._fn.Geometry.decomposeMatrix4(outPosition, outRotation, outScale, m);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1251,11 +1251,11 @@ inline function decomposeMatrix4(outPosition:flight.Vector3, outRotation:flight.
 
 inline function decomposeMatrix4ToTransform3D(out:flight.Transform3D, m:flight.Matrix4):Void {
   #if flight_hx
-  flight._hx.Geometry.decomposeMatrix4ToTransform3D(out, m);
+  flight._hx._fn.Geometry.decomposeMatrix4ToTransform3D(out, m);
   #elseif (js && flight_esm)
-  flight._js.Geometry.decomposeMatrix4ToTransform3D(out, m);
+  flight._js._fn.Geometry.decomposeMatrix4ToTransform3D(out, m);
   #elseif cpp
-  flight._cpp.Geometry.decomposeMatrix4ToTransform3D(out, m);
+  flight._cpp._fn.Geometry.decomposeMatrix4ToTransform3D(out, m);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1263,11 +1263,11 @@ inline function decomposeMatrix4ToTransform3D(out:flight.Transform3D, m:flight.M
 
 inline function decomposeMatrixToTransform2D(out:flight.Transform2D, source:flight.Matrix):Void {
   #if flight_hx
-  flight._hx.Geometry.decomposeMatrixToTransform2D(out, source);
+  flight._hx._fn.Geometry.decomposeMatrixToTransform2D(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.decomposeMatrixToTransform2D(out, source);
+  flight._js._fn.Geometry.decomposeMatrixToTransform2D(out, source);
   #elseif cpp
-  flight._cpp.Geometry.decomposeMatrixToTransform2D(out, source);
+  flight._cpp._fn.Geometry.decomposeMatrixToTransform2D(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1275,11 +1275,11 @@ inline function decomposeMatrixToTransform2D(out:flight.Transform2D, source:flig
 
 inline function disableGeometryPoolGuards():Void {
   #if flight_hx
-  flight._hx.Geometry.disableGeometryPoolGuards();
+  flight._hx._fn.Geometry.disableGeometryPoolGuards();
   #elseif (js && flight_esm)
-  flight._js.Geometry.disableGeometryPoolGuards();
+  flight._js._fn.Geometry.disableGeometryPoolGuards();
   #elseif cpp
-  flight._cpp.Geometry.disableGeometryPoolGuards();
+  flight._cpp._fn.Geometry.disableGeometryPoolGuards();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1287,11 +1287,11 @@ inline function disableGeometryPoolGuards():Void {
 
 inline function divideVector2(out:flight.Vector2, source:flight.Vector2, divisor:flight.Vector2):Void {
   #if flight_hx
-  flight._hx.Geometry.divideVector2(out, source, divisor);
+  flight._hx._fn.Geometry.divideVector2(out, source, divisor);
   #elseif (js && flight_esm)
-  flight._js.Geometry.divideVector2(out, source, divisor);
+  flight._js._fn.Geometry.divideVector2(out, source, divisor);
   #elseif cpp
-  flight._cpp.Geometry.divideVector2(out, source, divisor);
+  flight._cpp._fn.Geometry.divideVector2(out, source, divisor);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1299,11 +1299,11 @@ inline function divideVector2(out:flight.Vector2, source:flight.Vector2, divisor
 
 inline function divideVector3(out:flight.Vector3, source:flight.Vector3, divisor:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.divideVector3(out, source, divisor);
+  flight._hx._fn.Geometry.divideVector3(out, source, divisor);
   #elseif (js && flight_esm)
-  flight._js.Geometry.divideVector3(out, source, divisor);
+  flight._js._fn.Geometry.divideVector3(out, source, divisor);
   #elseif cpp
-  flight._cpp.Geometry.divideVector3(out, source, divisor);
+  flight._cpp._fn.Geometry.divideVector3(out, source, divisor);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1311,11 +1311,11 @@ inline function divideVector3(out:flight.Vector3, source:flight.Vector3, divisor
 
 inline function divideVector4(out:flight.Vector4, source:flight.Vector4, divisor:flight.Vector4):Void {
   #if flight_hx
-  flight._hx.Geometry.divideVector4(out, source, divisor);
+  flight._hx._fn.Geometry.divideVector4(out, source, divisor);
   #elseif (js && flight_esm)
-  flight._js.Geometry.divideVector4(out, source, divisor);
+  flight._js._fn.Geometry.divideVector4(out, source, divisor);
   #elseif cpp
-  flight._cpp.Geometry.divideVector4(out, source, divisor);
+  flight._cpp._fn.Geometry.divideVector4(out, source, divisor);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1323,11 +1323,11 @@ inline function divideVector4(out:flight.Vector4, source:flight.Vector4, divisor
 
 inline function enableGeometryPoolGuards():Void {
   #if flight_hx
-  flight._hx.Geometry.enableGeometryPoolGuards();
+  flight._hx._fn.Geometry.enableGeometryPoolGuards();
   #elseif (js && flight_esm)
-  flight._js.Geometry.enableGeometryPoolGuards();
+  flight._js._fn.Geometry.enableGeometryPoolGuards();
   #elseif cpp
-  flight._cpp.Geometry.enableGeometryPoolGuards();
+  flight._cpp._fn.Geometry.enableGeometryPoolGuards();
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1335,11 +1335,11 @@ inline function enableGeometryPoolGuards():Void {
 
 inline function enclosesRectangle(source:flight.Rectangle, other:flight.Rectangle):Bool {
   #if flight_hx
-  return flight._hx.Geometry.enclosesRectangle(source, other);
+  return flight._hx._fn.Geometry.enclosesRectangle(source, other);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.enclosesRectangle(source, other);
+  return flight._js._fn.Geometry.enclosesRectangle(source, other);
   #elseif cpp
-  return flight._cpp.Geometry.enclosesRectangle(source, other);
+  return flight._cpp._fn.Geometry.enclosesRectangle(source, other);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1347,11 +1347,11 @@ inline function enclosesRectangle(source:flight.Rectangle, other:flight.Rectangl
 
 inline function equalsMatrix(a:Null<flight.Matrix>, b:Null<flight.Matrix>, ?compareTranslation:Bool):Bool {
   #if flight_hx
-  return flight._hx.Geometry.equalsMatrix(a, b, compareTranslation);
+  return flight._hx._fn.Geometry.equalsMatrix(a, b, compareTranslation);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.equalsMatrix(a, b, compareTranslation);
+  return flight._js._fn.Geometry.equalsMatrix(a, b, compareTranslation);
   #elseif cpp
-  return flight._cpp.Geometry.equalsMatrix(a, b, compareTranslation);
+  return flight._cpp._fn.Geometry.equalsMatrix(a, b, compareTranslation);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1359,11 +1359,11 @@ inline function equalsMatrix(a:Null<flight.Matrix>, b:Null<flight.Matrix>, ?comp
 
 inline function equalsMatrix3(a:Null<flight.Matrix3>, b:Null<flight.Matrix3>):Bool {
   #if flight_hx
-  return flight._hx.Geometry.equalsMatrix3(a, b);
+  return flight._hx._fn.Geometry.equalsMatrix3(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.equalsMatrix3(a, b);
+  return flight._js._fn.Geometry.equalsMatrix3(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.equalsMatrix3(a, b);
+  return flight._cpp._fn.Geometry.equalsMatrix3(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1371,11 +1371,11 @@ inline function equalsMatrix3(a:Null<flight.Matrix3>, b:Null<flight.Matrix3>):Bo
 
 inline function equalsMatrix4(a:Null<flight.Matrix4>, b:Null<flight.Matrix4>):Bool {
   #if flight_hx
-  return flight._hx.Geometry.equalsMatrix4(a, b);
+  return flight._hx._fn.Geometry.equalsMatrix4(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.equalsMatrix4(a, b);
+  return flight._js._fn.Geometry.equalsMatrix4(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.equalsMatrix4(a, b);
+  return flight._cpp._fn.Geometry.equalsMatrix4(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1383,11 +1383,11 @@ inline function equalsMatrix4(a:Null<flight.Matrix4>, b:Null<flight.Matrix4>):Bo
 
 inline function equalsQuaternion(a:Null<flight.Quaternion>, b:Null<flight.Quaternion>):Bool {
   #if flight_hx
-  return flight._hx.Geometry.equalsQuaternion(a, b);
+  return flight._hx._fn.Geometry.equalsQuaternion(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.equalsQuaternion(a, b);
+  return flight._js._fn.Geometry.equalsQuaternion(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.equalsQuaternion(a, b);
+  return flight._cpp._fn.Geometry.equalsQuaternion(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1395,11 +1395,11 @@ inline function equalsQuaternion(a:Null<flight.Quaternion>, b:Null<flight.Quater
 
 inline function equalsRectangle(a:Null<flight.Rectangle>, b:Null<flight.Rectangle>):Bool {
   #if flight_hx
-  return flight._hx.Geometry.equalsRectangle(a, b);
+  return flight._hx._fn.Geometry.equalsRectangle(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.equalsRectangle(a, b);
+  return flight._js._fn.Geometry.equalsRectangle(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.equalsRectangle(a, b);
+  return flight._cpp._fn.Geometry.equalsRectangle(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1407,11 +1407,11 @@ inline function equalsRectangle(a:Null<flight.Rectangle>, b:Null<flight.Rectangl
 
 inline function equalsVector2(a:Null<flight.Vector2>, b:Null<flight.Vector2>):Bool {
   #if flight_hx
-  return flight._hx.Geometry.equalsVector2(a, b);
+  return flight._hx._fn.Geometry.equalsVector2(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.equalsVector2(a, b);
+  return flight._js._fn.Geometry.equalsVector2(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.equalsVector2(a, b);
+  return flight._cpp._fn.Geometry.equalsVector2(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1419,11 +1419,11 @@ inline function equalsVector2(a:Null<flight.Vector2>, b:Null<flight.Vector2>):Bo
 
 inline function equalsVector3(a:Null<flight.Vector3>, b:Null<flight.Vector3>):Bool {
   #if flight_hx
-  return flight._hx.Geometry.equalsVector3(a, b);
+  return flight._hx._fn.Geometry.equalsVector3(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.equalsVector3(a, b);
+  return flight._js._fn.Geometry.equalsVector3(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.equalsVector3(a, b);
+  return flight._cpp._fn.Geometry.equalsVector3(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1431,11 +1431,11 @@ inline function equalsVector3(a:Null<flight.Vector3>, b:Null<flight.Vector3>):Bo
 
 inline function equalsVector4(a:Null<flight.Vector4>, b:Null<flight.Vector4>):Bool {
   #if flight_hx
-  return flight._hx.Geometry.equalsVector4(a, b);
+  return flight._hx._fn.Geometry.equalsVector4(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.equalsVector4(a, b);
+  return flight._js._fn.Geometry.equalsVector4(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.equalsVector4(a, b);
+  return flight._cpp._fn.Geometry.equalsVector4(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1443,11 +1443,11 @@ inline function equalsVector4(a:Null<flight.Vector4>, b:Null<flight.Vector4>):Bo
 
 inline function expandAabbByPoint(out:{ max:flight.Vector3, min:flight.Vector3 }, aabb:{ max:flight.Vector3, min:flight.Vector3 }, point:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.expandAabbByPoint(out, aabb, point);
+  flight._hx._fn.Geometry.expandAabbByPoint(out, aabb, point);
   #elseif (js && flight_esm)
-  flight._js.Geometry.expandAabbByPoint(out, aabb, point);
+  flight._js._fn.Geometry.expandAabbByPoint(out, aabb, point);
   #elseif cpp
-  flight._cpp.Geometry.expandAabbByPoint(out, aabb, point);
+  flight._cpp._fn.Geometry.expandAabbByPoint(out, aabb, point);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1455,11 +1455,11 @@ inline function expandAabbByPoint(out:{ max:flight.Vector3, min:flight.Vector3 }
 
 inline function expandAabbBySphere(out:{ max:flight.Vector3, min:flight.Vector3 }, aabb:{ max:flight.Vector3, min:flight.Vector3 }, sphere:flight.BoundingSphere):Void {
   #if flight_hx
-  flight._hx.Geometry.expandAabbBySphere(out, aabb, sphere);
+  flight._hx._fn.Geometry.expandAabbBySphere(out, aabb, sphere);
   #elseif (js && flight_esm)
-  flight._js.Geometry.expandAabbBySphere(out, aabb, sphere);
+  flight._js._fn.Geometry.expandAabbBySphere(out, aabb, sphere);
   #elseif cpp
-  flight._cpp.Geometry.expandAabbBySphere(out, aabb, sphere);
+  flight._cpp._fn.Geometry.expandAabbBySphere(out, aabb, sphere);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1467,11 +1467,11 @@ inline function expandAabbBySphere(out:{ max:flight.Vector3, min:flight.Vector3 
 
 inline function expandRectangleToPoint(out:flight.Rectangle, sourceRect:flight.Rectangle, sourceVec2:flight.Vector2):Void {
   #if flight_hx
-  flight._hx.Geometry.expandRectangleToPoint(out, sourceRect, sourceVec2);
+  flight._hx._fn.Geometry.expandRectangleToPoint(out, sourceRect, sourceVec2);
   #elseif (js && flight_esm)
-  flight._js.Geometry.expandRectangleToPoint(out, sourceRect, sourceVec2);
+  flight._js._fn.Geometry.expandRectangleToPoint(out, sourceRect, sourceVec2);
   #elseif cpp
-  flight._cpp.Geometry.expandRectangleToPoint(out, sourceRect, sourceVec2);
+  flight._cpp._fn.Geometry.expandRectangleToPoint(out, sourceRect, sourceVec2);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1479,11 +1479,11 @@ inline function expandRectangleToPoint(out:flight.Rectangle, sourceRect:flight.R
 
 inline function getAabbCenter(out:flight.Vector3, aabb:{ max:flight.Vector3, min:flight.Vector3 }):Void {
   #if flight_hx
-  flight._hx.Geometry.getAabbCenter(out, aabb);
+  flight._hx._fn.Geometry.getAabbCenter(out, aabb);
   #elseif (js && flight_esm)
-  flight._js.Geometry.getAabbCenter(out, aabb);
+  flight._js._fn.Geometry.getAabbCenter(out, aabb);
   #elseif cpp
-  flight._cpp.Geometry.getAabbCenter(out, aabb);
+  flight._cpp._fn.Geometry.getAabbCenter(out, aabb);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1491,11 +1491,11 @@ inline function getAabbCenter(out:flight.Vector3, aabb:{ max:flight.Vector3, min
 
 inline function getAabbExtents(out:flight.Vector3, aabb:{ max:flight.Vector3, min:flight.Vector3 }):Void {
   #if flight_hx
-  flight._hx.Geometry.getAabbExtents(out, aabb);
+  flight._hx._fn.Geometry.getAabbExtents(out, aabb);
   #elseif (js && flight_esm)
-  flight._js.Geometry.getAabbExtents(out, aabb);
+  flight._js._fn.Geometry.getAabbExtents(out, aabb);
   #elseif cpp
-  flight._cpp.Geometry.getAabbExtents(out, aabb);
+  flight._cpp._fn.Geometry.getAabbExtents(out, aabb);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1503,11 +1503,11 @@ inline function getAabbExtents(out:flight.Vector3, aabb:{ max:flight.Vector3, mi
 
 inline function getAabbSize(out:flight.Vector3, aabb:{ max:flight.Vector3, min:flight.Vector3 }):Void {
   #if flight_hx
-  flight._hx.Geometry.getAabbSize(out, aabb);
+  flight._hx._fn.Geometry.getAabbSize(out, aabb);
   #elseif (js && flight_esm)
-  flight._js.Geometry.getAabbSize(out, aabb);
+  flight._js._fn.Geometry.getAabbSize(out, aabb);
   #elseif cpp
-  flight._cpp.Geometry.getAabbSize(out, aabb);
+  flight._cpp._fn.Geometry.getAabbSize(out, aabb);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1515,11 +1515,11 @@ inline function getAabbSize(out:flight.Vector3, aabb:{ max:flight.Vector3, min:f
 
 inline function getClosestPointBetweenRay3Ds(outA:flight.Vector3, outB:flight.Vector3, a:flight.Ray3D, b:flight.Ray3D):Void {
   #if flight_hx
-  flight._hx.Geometry.getClosestPointBetweenRay3Ds(outA, outB, a, b);
+  flight._hx._fn.Geometry.getClosestPointBetweenRay3Ds(outA, outB, a, b);
   #elseif (js && flight_esm)
-  flight._js.Geometry.getClosestPointBetweenRay3Ds(outA, outB, a, b);
+  flight._js._fn.Geometry.getClosestPointBetweenRay3Ds(outA, outB, a, b);
   #elseif cpp
-  flight._cpp.Geometry.getClosestPointBetweenRay3Ds(outA, outB, a, b);
+  flight._cpp._fn.Geometry.getClosestPointBetweenRay3Ds(outA, outB, a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1527,11 +1527,11 @@ inline function getClosestPointBetweenRay3Ds(outA:flight.Vector3, outB:flight.Ve
 
 inline function getClosestPointOnAabb(out:flight.Vector3, aabb:{ max:flight.Vector3, min:flight.Vector3 }, point:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.getClosestPointOnAabb(out, aabb, point);
+  flight._hx._fn.Geometry.getClosestPointOnAabb(out, aabb, point);
   #elseif (js && flight_esm)
-  flight._js.Geometry.getClosestPointOnAabb(out, aabb, point);
+  flight._js._fn.Geometry.getClosestPointOnAabb(out, aabb, point);
   #elseif cpp
-  flight._cpp.Geometry.getClosestPointOnAabb(out, aabb, point);
+  flight._cpp._fn.Geometry.getClosestPointOnAabb(out, aabb, point);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1539,11 +1539,11 @@ inline function getClosestPointOnAabb(out:flight.Vector3, aabb:{ max:flight.Vect
 
 inline function getClosestPointOnBoundingSphere(out:flight.Vector3, sphere:flight.BoundingSphere, point:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.getClosestPointOnBoundingSphere(out, sphere, point);
+  flight._hx._fn.Geometry.getClosestPointOnBoundingSphere(out, sphere, point);
   #elseif (js && flight_esm)
-  flight._js.Geometry.getClosestPointOnBoundingSphere(out, sphere, point);
+  flight._js._fn.Geometry.getClosestPointOnBoundingSphere(out, sphere, point);
   #elseif cpp
-  flight._cpp.Geometry.getClosestPointOnBoundingSphere(out, sphere, point);
+  flight._cpp._fn.Geometry.getClosestPointOnBoundingSphere(out, sphere, point);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1551,11 +1551,11 @@ inline function getClosestPointOnBoundingSphere(out:flight.Vector3, sphere:fligh
 
 inline function getClosestPointOnCapsule(out:flight.Vector3, capsule:flight.Capsule, point:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.getClosestPointOnCapsule(out, capsule, point);
+  flight._hx._fn.Geometry.getClosestPointOnCapsule(out, capsule, point);
   #elseif (js && flight_esm)
-  flight._js.Geometry.getClosestPointOnCapsule(out, capsule, point);
+  flight._js._fn.Geometry.getClosestPointOnCapsule(out, capsule, point);
   #elseif cpp
-  flight._cpp.Geometry.getClosestPointOnCapsule(out, capsule, point);
+  flight._cpp._fn.Geometry.getClosestPointOnCapsule(out, capsule, point);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1563,11 +1563,11 @@ inline function getClosestPointOnCapsule(out:flight.Vector3, capsule:flight.Caps
 
 inline function getClosestPointOnObb(out:flight.Vector3, obb:flight.Obb, point:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.getClosestPointOnObb(out, obb, point);
+  flight._hx._fn.Geometry.getClosestPointOnObb(out, obb, point);
   #elseif (js && flight_esm)
-  flight._js.Geometry.getClosestPointOnObb(out, obb, point);
+  flight._js._fn.Geometry.getClosestPointOnObb(out, obb, point);
   #elseif cpp
-  flight._cpp.Geometry.getClosestPointOnObb(out, obb, point);
+  flight._cpp._fn.Geometry.getClosestPointOnObb(out, obb, point);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1575,11 +1575,11 @@ inline function getClosestPointOnObb(out:flight.Vector3, obb:flight.Obb, point:f
 
 inline function getClosestPointOnPlane(out:flight.Vector3, plane:flight.Plane, point:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.getClosestPointOnPlane(out, plane, point);
+  flight._hx._fn.Geometry.getClosestPointOnPlane(out, plane, point);
   #elseif (js && flight_esm)
-  flight._js.Geometry.getClosestPointOnPlane(out, plane, point);
+  flight._js._fn.Geometry.getClosestPointOnPlane(out, plane, point);
   #elseif cpp
-  flight._cpp.Geometry.getClosestPointOnPlane(out, plane, point);
+  flight._cpp._fn.Geometry.getClosestPointOnPlane(out, plane, point);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1587,11 +1587,11 @@ inline function getClosestPointOnPlane(out:flight.Vector3, plane:flight.Plane, p
 
 inline function getClosestPointOnRay3D(out:flight.Vector3, ray:flight.Ray3D, point:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.getClosestPointOnRay3D(out, ray, point);
+  flight._hx._fn.Geometry.getClosestPointOnRay3D(out, ray, point);
   #elseif (js && flight_esm)
-  flight._js.Geometry.getClosestPointOnRay3D(out, ray, point);
+  flight._js._fn.Geometry.getClosestPointOnRay3D(out, ray, point);
   #elseif cpp
-  flight._cpp.Geometry.getClosestPointOnRay3D(out, ray, point);
+  flight._cpp._fn.Geometry.getClosestPointOnRay3D(out, ray, point);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1599,11 +1599,11 @@ inline function getClosestPointOnRay3D(out:flight.Vector3, ray:flight.Ray3D, poi
 
 inline function getFrustumCorners(out:Array<flight.Vector3>, inverseViewProjection:flight.Matrix4):Void {
   #if flight_hx
-  flight._hx.Geometry.getFrustumCorners(out, inverseViewProjection);
+  flight._hx._fn.Geometry.getFrustumCorners(out, inverseViewProjection);
   #elseif (js && flight_esm)
-  flight._js.Geometry.getFrustumCorners(out, inverseViewProjection);
+  flight._js._fn.Geometry.getFrustumCorners(out, inverseViewProjection);
   #elseif cpp
-  flight._cpp.Geometry.getFrustumCorners(out, inverseViewProjection);
+  flight._cpp._fn.Geometry.getFrustumCorners(out, inverseViewProjection);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1611,11 +1611,11 @@ inline function getFrustumCorners(out:Array<flight.Vector3>, inverseViewProjecti
 
 inline function getMatrix3Determinant(source:flight.Matrix3):Float {
   #if flight_hx
-  return flight._hx.Geometry.getMatrix3Determinant(source);
+  return flight._hx._fn.Geometry.getMatrix3Determinant(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getMatrix3Determinant(source);
+  return flight._js._fn.Geometry.getMatrix3Determinant(source);
   #elseif cpp
-  return flight._cpp.Geometry.getMatrix3Determinant(source);
+  return flight._cpp._fn.Geometry.getMatrix3Determinant(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1623,11 +1623,11 @@ inline function getMatrix3Determinant(source:flight.Matrix3):Float {
 
 inline function getMatrix3Element(source:flight.Matrix3, row:Float, column:Float):Float {
   #if flight_hx
-  return flight._hx.Geometry.getMatrix3Element(source, row, column);
+  return flight._hx._fn.Geometry.getMatrix3Element(source, row, column);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getMatrix3Element(source, row, column);
+  return flight._js._fn.Geometry.getMatrix3Element(source, row, column);
   #elseif cpp
-  return flight._cpp.Geometry.getMatrix3Element(source, row, column);
+  return flight._cpp._fn.Geometry.getMatrix3Element(source, row, column);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1635,11 +1635,11 @@ inline function getMatrix3Element(source:flight.Matrix3, row:Float, column:Float
 
 inline function getMatrix4Determinant(source:flight.Matrix4):Float {
   #if flight_hx
-  return flight._hx.Geometry.getMatrix4Determinant(source);
+  return flight._hx._fn.Geometry.getMatrix4Determinant(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getMatrix4Determinant(source);
+  return flight._js._fn.Geometry.getMatrix4Determinant(source);
   #elseif cpp
-  return flight._cpp.Geometry.getMatrix4Determinant(source);
+  return flight._cpp._fn.Geometry.getMatrix4Determinant(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1647,11 +1647,11 @@ inline function getMatrix4Determinant(source:flight.Matrix4):Float {
 
 inline function getMatrix4Element(source:flight.Matrix4, row:Float, column:Float):Float {
   #if flight_hx
-  return flight._hx.Geometry.getMatrix4Element(source, row, column);
+  return flight._hx._fn.Geometry.getMatrix4Element(source, row, column);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getMatrix4Element(source, row, column);
+  return flight._js._fn.Geometry.getMatrix4Element(source, row, column);
   #elseif cpp
-  return flight._cpp.Geometry.getMatrix4Element(source, row, column);
+  return flight._cpp._fn.Geometry.getMatrix4Element(source, row, column);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1659,11 +1659,11 @@ inline function getMatrix4Element(source:flight.Matrix4, row:Float, column:Float
 
 inline function getMatrix4Position(out:flight.Vector3, source:flight.Matrix4):Void {
   #if flight_hx
-  flight._hx.Geometry.getMatrix4Position(out, source);
+  flight._hx._fn.Geometry.getMatrix4Position(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.getMatrix4Position(out, source);
+  flight._js._fn.Geometry.getMatrix4Position(out, source);
   #elseif cpp
-  flight._cpp.Geometry.getMatrix4Position(out, source);
+  flight._cpp._fn.Geometry.getMatrix4Position(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1671,11 +1671,11 @@ inline function getMatrix4Position(out:flight.Vector3, source:flight.Matrix4):Vo
 
 inline function getPlaneCoplanarPoint(out:flight.Vector3, plane:flight.Plane):Void {
   #if flight_hx
-  flight._hx.Geometry.getPlaneCoplanarPoint(out, plane);
+  flight._hx._fn.Geometry.getPlaneCoplanarPoint(out, plane);
   #elseif (js && flight_esm)
-  flight._js.Geometry.getPlaneCoplanarPoint(out, plane);
+  flight._js._fn.Geometry.getPlaneCoplanarPoint(out, plane);
   #elseif cpp
-  flight._cpp.Geometry.getPlaneCoplanarPoint(out, plane);
+  flight._cpp._fn.Geometry.getPlaneCoplanarPoint(out, plane);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1683,11 +1683,11 @@ inline function getPlaneCoplanarPoint(out:flight.Vector3, plane:flight.Plane):Vo
 
 inline function getPlaneSignedDistanceToPoint(plane:flight.Plane, point:flight.Vector3):Float {
   #if flight_hx
-  return flight._hx.Geometry.getPlaneSignedDistanceToPoint(plane, point);
+  return flight._hx._fn.Geometry.getPlaneSignedDistanceToPoint(plane, point);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getPlaneSignedDistanceToPoint(plane, point);
+  return flight._js._fn.Geometry.getPlaneSignedDistanceToPoint(plane, point);
   #elseif cpp
-  return flight._cpp.Geometry.getPlaneSignedDistanceToPoint(plane, point);
+  return flight._cpp._fn.Geometry.getPlaneSignedDistanceToPoint(plane, point);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1695,11 +1695,11 @@ inline function getPlaneSignedDistanceToPoint(plane:flight.Plane, point:flight.V
 
 inline function getQuaternionAngleBetween(a:flight.Quaternion, b:flight.Quaternion):Float {
   #if flight_hx
-  return flight._hx.Geometry.getQuaternionAngleBetween(a, b);
+  return flight._hx._fn.Geometry.getQuaternionAngleBetween(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getQuaternionAngleBetween(a, b);
+  return flight._js._fn.Geometry.getQuaternionAngleBetween(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.getQuaternionAngleBetween(a, b);
+  return flight._cpp._fn.Geometry.getQuaternionAngleBetween(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1707,11 +1707,11 @@ inline function getQuaternionAngleBetween(a:flight.Quaternion, b:flight.Quaterni
 
 inline function getQuaternionAxisAngle(outAxis:flight.Vector3, source:flight.Quaternion):Float {
   #if flight_hx
-  return flight._hx.Geometry.getQuaternionAxisAngle(outAxis, source);
+  return flight._hx._fn.Geometry.getQuaternionAxisAngle(outAxis, source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getQuaternionAxisAngle(outAxis, source);
+  return flight._js._fn.Geometry.getQuaternionAxisAngle(outAxis, source);
   #elseif cpp
-  return flight._cpp.Geometry.getQuaternionAxisAngle(outAxis, source);
+  return flight._cpp._fn.Geometry.getQuaternionAxisAngle(outAxis, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1719,11 +1719,11 @@ inline function getQuaternionAxisAngle(outAxis:flight.Vector3, source:flight.Qua
 
 inline function getQuaternionDot(a:flight.Quaternion, b:flight.Quaternion):Float {
   #if flight_hx
-  return flight._hx.Geometry.getQuaternionDot(a, b);
+  return flight._hx._fn.Geometry.getQuaternionDot(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getQuaternionDot(a, b);
+  return flight._js._fn.Geometry.getQuaternionDot(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.getQuaternionDot(a, b);
+  return flight._cpp._fn.Geometry.getQuaternionDot(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1731,11 +1731,11 @@ inline function getQuaternionDot(a:flight.Quaternion, b:flight.Quaternion):Float
 
 inline function getQuaternionEuler(out:flight.Vector3, source:flight.Quaternion, ?order:String):Void {
   #if flight_hx
-  flight._hx.Geometry.getQuaternionEuler(out, source, order);
+  flight._hx._fn.Geometry.getQuaternionEuler(out, source, order);
   #elseif (js && flight_esm)
-  flight._js.Geometry.getQuaternionEuler(out, source, order);
+  flight._js._fn.Geometry.getQuaternionEuler(out, source, order);
   #elseif cpp
-  flight._cpp.Geometry.getQuaternionEuler(out, source, order);
+  flight._cpp._fn.Geometry.getQuaternionEuler(out, source, order);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1743,11 +1743,11 @@ inline function getQuaternionEuler(out:flight.Vector3, source:flight.Quaternion,
 
 inline function getRay3DPointAt(out:flight.Vector3, ray:flight.Ray3D, t:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.getRay3DPointAt(out, ray, t);
+  flight._hx._fn.Geometry.getRay3DPointAt(out, ray, t);
   #elseif (js && flight_esm)
-  flight._js.Geometry.getRay3DPointAt(out, ray, t);
+  flight._js._fn.Geometry.getRay3DPointAt(out, ray, t);
   #elseif cpp
-  flight._cpp.Geometry.getRay3DPointAt(out, ray, t);
+  flight._cpp._fn.Geometry.getRay3DPointAt(out, ray, t);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1755,11 +1755,11 @@ inline function getRay3DPointAt(out:flight.Vector3, ray:flight.Ray3D, t:Float):V
 
 inline function getRectangleBottom(source:flight.Rectangle):Float {
   #if flight_hx
-  return flight._hx.Geometry.getRectangleBottom(source);
+  return flight._hx._fn.Geometry.getRectangleBottom(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getRectangleBottom(source);
+  return flight._js._fn.Geometry.getRectangleBottom(source);
   #elseif cpp
-  return flight._cpp.Geometry.getRectangleBottom(source);
+  return flight._cpp._fn.Geometry.getRectangleBottom(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1767,11 +1767,11 @@ inline function getRectangleBottom(source:flight.Rectangle):Float {
 
 inline function getRectangleBottomRight(out:flight.Vector2, source:flight.Rectangle):Void {
   #if flight_hx
-  flight._hx.Geometry.getRectangleBottomRight(out, source);
+  flight._hx._fn.Geometry.getRectangleBottomRight(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.getRectangleBottomRight(out, source);
+  flight._js._fn.Geometry.getRectangleBottomRight(out, source);
   #elseif cpp
-  flight._cpp.Geometry.getRectangleBottomRight(out, source);
+  flight._cpp._fn.Geometry.getRectangleBottomRight(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1779,11 +1779,11 @@ inline function getRectangleBottomRight(out:flight.Vector2, source:flight.Rectan
 
 inline function getRectangleLeft(source:flight.Rectangle):Float {
   #if flight_hx
-  return flight._hx.Geometry.getRectangleLeft(source);
+  return flight._hx._fn.Geometry.getRectangleLeft(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getRectangleLeft(source);
+  return flight._js._fn.Geometry.getRectangleLeft(source);
   #elseif cpp
-  return flight._cpp.Geometry.getRectangleLeft(source);
+  return flight._cpp._fn.Geometry.getRectangleLeft(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1791,11 +1791,11 @@ inline function getRectangleLeft(source:flight.Rectangle):Float {
 
 inline function getRectangleMaxX(source:flight.Rectangle):Float {
   #if flight_hx
-  return flight._hx.Geometry.getRectangleMaxX(source);
+  return flight._hx._fn.Geometry.getRectangleMaxX(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getRectangleMaxX(source);
+  return flight._js._fn.Geometry.getRectangleMaxX(source);
   #elseif cpp
-  return flight._cpp.Geometry.getRectangleMaxX(source);
+  return flight._cpp._fn.Geometry.getRectangleMaxX(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1803,11 +1803,11 @@ inline function getRectangleMaxX(source:flight.Rectangle):Float {
 
 inline function getRectangleMaxY(source:flight.Rectangle):Float {
   #if flight_hx
-  return flight._hx.Geometry.getRectangleMaxY(source);
+  return flight._hx._fn.Geometry.getRectangleMaxY(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getRectangleMaxY(source);
+  return flight._js._fn.Geometry.getRectangleMaxY(source);
   #elseif cpp
-  return flight._cpp.Geometry.getRectangleMaxY(source);
+  return flight._cpp._fn.Geometry.getRectangleMaxY(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1815,11 +1815,11 @@ inline function getRectangleMaxY(source:flight.Rectangle):Float {
 
 inline function getRectangleMinX(source:flight.Rectangle):Float {
   #if flight_hx
-  return flight._hx.Geometry.getRectangleMinX(source);
+  return flight._hx._fn.Geometry.getRectangleMinX(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getRectangleMinX(source);
+  return flight._js._fn.Geometry.getRectangleMinX(source);
   #elseif cpp
-  return flight._cpp.Geometry.getRectangleMinX(source);
+  return flight._cpp._fn.Geometry.getRectangleMinX(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1827,11 +1827,11 @@ inline function getRectangleMinX(source:flight.Rectangle):Float {
 
 inline function getRectangleMinY(source:flight.Rectangle):Float {
   #if flight_hx
-  return flight._hx.Geometry.getRectangleMinY(source);
+  return flight._hx._fn.Geometry.getRectangleMinY(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getRectangleMinY(source);
+  return flight._js._fn.Geometry.getRectangleMinY(source);
   #elseif cpp
-  return flight._cpp.Geometry.getRectangleMinY(source);
+  return flight._cpp._fn.Geometry.getRectangleMinY(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1839,11 +1839,11 @@ inline function getRectangleMinY(source:flight.Rectangle):Float {
 
 inline function getRectangleNormalizedBottomRight(out:flight.Vector2, source:flight.Rectangle):Void {
   #if flight_hx
-  flight._hx.Geometry.getRectangleNormalizedBottomRight(out, source);
+  flight._hx._fn.Geometry.getRectangleNormalizedBottomRight(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.getRectangleNormalizedBottomRight(out, source);
+  flight._js._fn.Geometry.getRectangleNormalizedBottomRight(out, source);
   #elseif cpp
-  flight._cpp.Geometry.getRectangleNormalizedBottomRight(out, source);
+  flight._cpp._fn.Geometry.getRectangleNormalizedBottomRight(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1851,11 +1851,11 @@ inline function getRectangleNormalizedBottomRight(out:flight.Vector2, source:fli
 
 inline function getRectangleNormalizedTopLeft(out:flight.Vector2, source:flight.Rectangle):Void {
   #if flight_hx
-  flight._hx.Geometry.getRectangleNormalizedTopLeft(out, source);
+  flight._hx._fn.Geometry.getRectangleNormalizedTopLeft(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.getRectangleNormalizedTopLeft(out, source);
+  flight._js._fn.Geometry.getRectangleNormalizedTopLeft(out, source);
   #elseif cpp
-  flight._cpp.Geometry.getRectangleNormalizedTopLeft(out, source);
+  flight._cpp._fn.Geometry.getRectangleNormalizedTopLeft(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1863,11 +1863,11 @@ inline function getRectangleNormalizedTopLeft(out:flight.Vector2, source:flight.
 
 inline function getRectangleRight(source:flight.Rectangle):Float {
   #if flight_hx
-  return flight._hx.Geometry.getRectangleRight(source);
+  return flight._hx._fn.Geometry.getRectangleRight(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getRectangleRight(source);
+  return flight._js._fn.Geometry.getRectangleRight(source);
   #elseif cpp
-  return flight._cpp.Geometry.getRectangleRight(source);
+  return flight._cpp._fn.Geometry.getRectangleRight(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1875,11 +1875,11 @@ inline function getRectangleRight(source:flight.Rectangle):Float {
 
 inline function getRectangleSize(out:flight.Vector2, source:flight.Rectangle):Void {
   #if flight_hx
-  flight._hx.Geometry.getRectangleSize(out, source);
+  flight._hx._fn.Geometry.getRectangleSize(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.getRectangleSize(out, source);
+  flight._js._fn.Geometry.getRectangleSize(out, source);
   #elseif cpp
-  flight._cpp.Geometry.getRectangleSize(out, source);
+  flight._cpp._fn.Geometry.getRectangleSize(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1887,11 +1887,11 @@ inline function getRectangleSize(out:flight.Vector2, source:flight.Rectangle):Vo
 
 inline function getRectangleTop(source:flight.Rectangle):Float {
   #if flight_hx
-  return flight._hx.Geometry.getRectangleTop(source);
+  return flight._hx._fn.Geometry.getRectangleTop(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getRectangleTop(source);
+  return flight._js._fn.Geometry.getRectangleTop(source);
   #elseif cpp
-  return flight._cpp.Geometry.getRectangleTop(source);
+  return flight._cpp._fn.Geometry.getRectangleTop(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1899,11 +1899,11 @@ inline function getRectangleTop(source:flight.Rectangle):Float {
 
 inline function getRectangleTopLeft(out:flight.Vector2, source:flight.Rectangle):Void {
   #if flight_hx
-  flight._hx.Geometry.getRectangleTopLeft(out, source);
+  flight._hx._fn.Geometry.getRectangleTopLeft(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.getRectangleTopLeft(out, source);
+  flight._js._fn.Geometry.getRectangleTopLeft(out, source);
   #elseif cpp
-  flight._cpp.Geometry.getRectangleTopLeft(out, source);
+  flight._cpp._fn.Geometry.getRectangleTopLeft(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1911,11 +1911,11 @@ inline function getRectangleTopLeft(out:flight.Vector2, source:flight.Rectangle)
 
 inline function getVector2Angle(source:flight.Vector2):Float {
   #if flight_hx
-  return flight._hx.Geometry.getVector2Angle(source);
+  return flight._hx._fn.Geometry.getVector2Angle(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getVector2Angle(source);
+  return flight._js._fn.Geometry.getVector2Angle(source);
   #elseif cpp
-  return flight._cpp.Geometry.getVector2Angle(source);
+  return flight._cpp._fn.Geometry.getVector2Angle(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1923,11 +1923,11 @@ inline function getVector2Angle(source:flight.Vector2):Float {
 
 inline function getVector2AngleBetween(a:flight.Vector2, b:flight.Vector2):Float {
   #if flight_hx
-  return flight._hx.Geometry.getVector2AngleBetween(a, b);
+  return flight._hx._fn.Geometry.getVector2AngleBetween(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getVector2AngleBetween(a, b);
+  return flight._js._fn.Geometry.getVector2AngleBetween(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.getVector2AngleBetween(a, b);
+  return flight._cpp._fn.Geometry.getVector2AngleBetween(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1935,11 +1935,11 @@ inline function getVector2AngleBetween(a:flight.Vector2, b:flight.Vector2):Float
 
 inline function getVector2Distance(a:flight.Vector2, b:flight.Vector2):Float {
   #if flight_hx
-  return flight._hx.Geometry.getVector2Distance(a, b);
+  return flight._hx._fn.Geometry.getVector2Distance(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getVector2Distance(a, b);
+  return flight._js._fn.Geometry.getVector2Distance(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.getVector2Distance(a, b);
+  return flight._cpp._fn.Geometry.getVector2Distance(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1947,11 +1947,11 @@ inline function getVector2Distance(a:flight.Vector2, b:flight.Vector2):Float {
 
 inline function getVector2DistanceSquared(a:flight.Vector2, b:flight.Vector2):Float {
   #if flight_hx
-  return flight._hx.Geometry.getVector2DistanceSquared(a, b);
+  return flight._hx._fn.Geometry.getVector2DistanceSquared(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getVector2DistanceSquared(a, b);
+  return flight._js._fn.Geometry.getVector2DistanceSquared(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.getVector2DistanceSquared(a, b);
+  return flight._cpp._fn.Geometry.getVector2DistanceSquared(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1959,11 +1959,11 @@ inline function getVector2DistanceSquared(a:flight.Vector2, b:flight.Vector2):Fl
 
 inline function getVector2Dot(a:flight.Vector2, b:flight.Vector2):Float {
   #if flight_hx
-  return flight._hx.Geometry.getVector2Dot(a, b);
+  return flight._hx._fn.Geometry.getVector2Dot(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getVector2Dot(a, b);
+  return flight._js._fn.Geometry.getVector2Dot(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.getVector2Dot(a, b);
+  return flight._cpp._fn.Geometry.getVector2Dot(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1971,11 +1971,11 @@ inline function getVector2Dot(a:flight.Vector2, b:flight.Vector2):Float {
 
 inline function getVector2Length(source:flight.Vector2):Float {
   #if flight_hx
-  return flight._hx.Geometry.getVector2Length(source);
+  return flight._hx._fn.Geometry.getVector2Length(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getVector2Length(source);
+  return flight._js._fn.Geometry.getVector2Length(source);
   #elseif cpp
-  return flight._cpp.Geometry.getVector2Length(source);
+  return flight._cpp._fn.Geometry.getVector2Length(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1983,11 +1983,11 @@ inline function getVector2Length(source:flight.Vector2):Float {
 
 inline function getVector2LengthSquared(source:flight.Vector2):Float {
   #if flight_hx
-  return flight._hx.Geometry.getVector2LengthSquared(source);
+  return flight._hx._fn.Geometry.getVector2LengthSquared(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getVector2LengthSquared(source);
+  return flight._js._fn.Geometry.getVector2LengthSquared(source);
   #elseif cpp
-  return flight._cpp.Geometry.getVector2LengthSquared(source);
+  return flight._cpp._fn.Geometry.getVector2LengthSquared(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -1995,11 +1995,11 @@ inline function getVector2LengthSquared(source:flight.Vector2):Float {
 
 inline function getVector3AngleBetween(a:flight.Vector3, b:flight.Vector3):Float {
   #if flight_hx
-  return flight._hx.Geometry.getVector3AngleBetween(a, b);
+  return flight._hx._fn.Geometry.getVector3AngleBetween(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getVector3AngleBetween(a, b);
+  return flight._js._fn.Geometry.getVector3AngleBetween(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.getVector3AngleBetween(a, b);
+  return flight._cpp._fn.Geometry.getVector3AngleBetween(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2007,11 +2007,11 @@ inline function getVector3AngleBetween(a:flight.Vector3, b:flight.Vector3):Float
 
 inline function getVector3Distance(a:flight.Vector3, b:flight.Vector3):Float {
   #if flight_hx
-  return flight._hx.Geometry.getVector3Distance(a, b);
+  return flight._hx._fn.Geometry.getVector3Distance(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getVector3Distance(a, b);
+  return flight._js._fn.Geometry.getVector3Distance(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.getVector3Distance(a, b);
+  return flight._cpp._fn.Geometry.getVector3Distance(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2019,11 +2019,11 @@ inline function getVector3Distance(a:flight.Vector3, b:flight.Vector3):Float {
 
 inline function getVector3DistanceSquared(a:flight.Vector3, b:flight.Vector3):Float {
   #if flight_hx
-  return flight._hx.Geometry.getVector3DistanceSquared(a, b);
+  return flight._hx._fn.Geometry.getVector3DistanceSquared(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getVector3DistanceSquared(a, b);
+  return flight._js._fn.Geometry.getVector3DistanceSquared(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.getVector3DistanceSquared(a, b);
+  return flight._cpp._fn.Geometry.getVector3DistanceSquared(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2031,11 +2031,11 @@ inline function getVector3DistanceSquared(a:flight.Vector3, b:flight.Vector3):Fl
 
 inline function getVector3Dot(a:flight.Vector3, b:flight.Vector3):Float {
   #if flight_hx
-  return flight._hx.Geometry.getVector3Dot(a, b);
+  return flight._hx._fn.Geometry.getVector3Dot(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getVector3Dot(a, b);
+  return flight._js._fn.Geometry.getVector3Dot(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.getVector3Dot(a, b);
+  return flight._cpp._fn.Geometry.getVector3Dot(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2043,11 +2043,11 @@ inline function getVector3Dot(a:flight.Vector3, b:flight.Vector3):Float {
 
 inline function getVector3Length(source:flight.Vector3):Float {
   #if flight_hx
-  return flight._hx.Geometry.getVector3Length(source);
+  return flight._hx._fn.Geometry.getVector3Length(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getVector3Length(source);
+  return flight._js._fn.Geometry.getVector3Length(source);
   #elseif cpp
-  return flight._cpp.Geometry.getVector3Length(source);
+  return flight._cpp._fn.Geometry.getVector3Length(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2055,11 +2055,11 @@ inline function getVector3Length(source:flight.Vector3):Float {
 
 inline function getVector3LengthSquared(source:flight.Vector3):Float {
   #if flight_hx
-  return flight._hx.Geometry.getVector3LengthSquared(source);
+  return flight._hx._fn.Geometry.getVector3LengthSquared(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getVector3LengthSquared(source);
+  return flight._js._fn.Geometry.getVector3LengthSquared(source);
   #elseif cpp
-  return flight._cpp.Geometry.getVector3LengthSquared(source);
+  return flight._cpp._fn.Geometry.getVector3LengthSquared(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2067,11 +2067,11 @@ inline function getVector3LengthSquared(source:flight.Vector3):Float {
 
 inline function getVector3Spherical(out:flight.Vector3, source:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.getVector3Spherical(out, source);
+  flight._hx._fn.Geometry.getVector3Spherical(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.getVector3Spherical(out, source);
+  flight._js._fn.Geometry.getVector3Spherical(out, source);
   #elseif cpp
-  flight._cpp.Geometry.getVector3Spherical(out, source);
+  flight._cpp._fn.Geometry.getVector3Spherical(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2079,11 +2079,11 @@ inline function getVector3Spherical(out:flight.Vector3, source:flight.Vector3):V
 
 inline function getVector4AngleBetween(a:flight.Vector4, b:flight.Vector4):Float {
   #if flight_hx
-  return flight._hx.Geometry.getVector4AngleBetween(a, b);
+  return flight._hx._fn.Geometry.getVector4AngleBetween(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getVector4AngleBetween(a, b);
+  return flight._js._fn.Geometry.getVector4AngleBetween(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.getVector4AngleBetween(a, b);
+  return flight._cpp._fn.Geometry.getVector4AngleBetween(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2091,11 +2091,11 @@ inline function getVector4AngleBetween(a:flight.Vector4, b:flight.Vector4):Float
 
 inline function getVector4Distance(a:flight.Vector4, b:flight.Vector4):Float {
   #if flight_hx
-  return flight._hx.Geometry.getVector4Distance(a, b);
+  return flight._hx._fn.Geometry.getVector4Distance(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getVector4Distance(a, b);
+  return flight._js._fn.Geometry.getVector4Distance(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.getVector4Distance(a, b);
+  return flight._cpp._fn.Geometry.getVector4Distance(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2103,11 +2103,11 @@ inline function getVector4Distance(a:flight.Vector4, b:flight.Vector4):Float {
 
 inline function getVector4DistanceSquared(a:flight.Vector4, b:flight.Vector4):Float {
   #if flight_hx
-  return flight._hx.Geometry.getVector4DistanceSquared(a, b);
+  return flight._hx._fn.Geometry.getVector4DistanceSquared(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getVector4DistanceSquared(a, b);
+  return flight._js._fn.Geometry.getVector4DistanceSquared(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.getVector4DistanceSquared(a, b);
+  return flight._cpp._fn.Geometry.getVector4DistanceSquared(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2115,11 +2115,11 @@ inline function getVector4DistanceSquared(a:flight.Vector4, b:flight.Vector4):Fl
 
 inline function getVector4Dot(a:flight.Vector4, b:flight.Vector4):Float {
   #if flight_hx
-  return flight._hx.Geometry.getVector4Dot(a, b);
+  return flight._hx._fn.Geometry.getVector4Dot(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getVector4Dot(a, b);
+  return flight._js._fn.Geometry.getVector4Dot(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.getVector4Dot(a, b);
+  return flight._cpp._fn.Geometry.getVector4Dot(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2127,11 +2127,11 @@ inline function getVector4Dot(a:flight.Vector4, b:flight.Vector4):Float {
 
 inline function getVector4Length(source:flight.Vector4):Float {
   #if flight_hx
-  return flight._hx.Geometry.getVector4Length(source);
+  return flight._hx._fn.Geometry.getVector4Length(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getVector4Length(source);
+  return flight._js._fn.Geometry.getVector4Length(source);
   #elseif cpp
-  return flight._cpp.Geometry.getVector4Length(source);
+  return flight._cpp._fn.Geometry.getVector4Length(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2139,11 +2139,11 @@ inline function getVector4Length(source:flight.Vector4):Float {
 
 inline function getVector4LengthSquared(source:flight.Vector4):Float {
   #if flight_hx
-  return flight._hx.Geometry.getVector4LengthSquared(source);
+  return flight._hx._fn.Geometry.getVector4LengthSquared(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.getVector4LengthSquared(source);
+  return flight._js._fn.Geometry.getVector4LengthSquared(source);
   #elseif cpp
-  return flight._cpp.Geometry.getVector4LengthSquared(source);
+  return flight._cpp._fn.Geometry.getVector4LengthSquared(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2151,11 +2151,11 @@ inline function getVector4LengthSquared(source:flight.Vector4):Float {
 
 inline function inflateRectangle(out:flight.Rectangle, source:flight.Rectangle, dx:Float, dy:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.inflateRectangle(out, source, dx, dy);
+  flight._hx._fn.Geometry.inflateRectangle(out, source, dx, dy);
   #elseif (js && flight_esm)
-  flight._js.Geometry.inflateRectangle(out, source, dx, dy);
+  flight._js._fn.Geometry.inflateRectangle(out, source, dx, dy);
   #elseif cpp
-  flight._cpp.Geometry.inflateRectangle(out, source, dx, dy);
+  flight._cpp._fn.Geometry.inflateRectangle(out, source, dx, dy);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2163,11 +2163,11 @@ inline function inflateRectangle(out:flight.Rectangle, source:flight.Rectangle, 
 
 inline function interpolateMatrix4(out:flight.Matrix4, a:flight.Matrix4, b:flight.Matrix4, t:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.interpolateMatrix4(out, a, b, t);
+  flight._hx._fn.Geometry.interpolateMatrix4(out, a, b, t);
   #elseif (js && flight_esm)
-  flight._js.Geometry.interpolateMatrix4(out, a, b, t);
+  flight._js._fn.Geometry.interpolateMatrix4(out, a, b, t);
   #elseif cpp
-  flight._cpp.Geometry.interpolateMatrix4(out, a, b, t);
+  flight._cpp._fn.Geometry.interpolateMatrix4(out, a, b, t);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2175,11 +2175,11 @@ inline function interpolateMatrix4(out:flight.Matrix4, a:flight.Matrix4, b:fligh
 
 inline function interpolateVector2(out:flight.Vector2, a:flight.Vector2, b:flight.Vector2, t:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.interpolateVector2(out, a, b, t);
+  flight._hx._fn.Geometry.interpolateVector2(out, a, b, t);
   #elseif (js && flight_esm)
-  flight._js.Geometry.interpolateVector2(out, a, b, t);
+  flight._js._fn.Geometry.interpolateVector2(out, a, b, t);
   #elseif cpp
-  flight._cpp.Geometry.interpolateVector2(out, a, b, t);
+  flight._cpp._fn.Geometry.interpolateVector2(out, a, b, t);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2187,11 +2187,11 @@ inline function interpolateVector2(out:flight.Vector2, a:flight.Vector2, b:fligh
 
 inline function interpolateVector3(out:flight.Vector3, a:flight.Vector3, b:flight.Vector3, t:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.interpolateVector3(out, a, b, t);
+  flight._hx._fn.Geometry.interpolateVector3(out, a, b, t);
   #elseif (js && flight_esm)
-  flight._js.Geometry.interpolateVector3(out, a, b, t);
+  flight._js._fn.Geometry.interpolateVector3(out, a, b, t);
   #elseif cpp
-  flight._cpp.Geometry.interpolateVector3(out, a, b, t);
+  flight._cpp._fn.Geometry.interpolateVector3(out, a, b, t);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2199,11 +2199,11 @@ inline function interpolateVector3(out:flight.Vector3, a:flight.Vector3, b:fligh
 
 inline function interpolateVector4(out:flight.Vector4, a:flight.Vector4, b:flight.Vector4, t:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.interpolateVector4(out, a, b, t);
+  flight._hx._fn.Geometry.interpolateVector4(out, a, b, t);
   #elseif (js && flight_esm)
-  flight._js.Geometry.interpolateVector4(out, a, b, t);
+  flight._js._fn.Geometry.interpolateVector4(out, a, b, t);
   #elseif cpp
-  flight._cpp.Geometry.interpolateVector4(out, a, b, t);
+  flight._cpp._fn.Geometry.interpolateVector4(out, a, b, t);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2211,11 +2211,11 @@ inline function interpolateVector4(out:flight.Vector4, a:flight.Vector4, b:fligh
 
 inline function intersectAabb(out:{ max:flight.Vector3, min:flight.Vector3 }, a:{ max:flight.Vector3, min:flight.Vector3 }, b:{ max:flight.Vector3, min:flight.Vector3 }):Void {
   #if flight_hx
-  flight._hx.Geometry.intersectAabb(out, a, b);
+  flight._hx._fn.Geometry.intersectAabb(out, a, b);
   #elseif (js && flight_esm)
-  flight._js.Geometry.intersectAabb(out, a, b);
+  flight._js._fn.Geometry.intersectAabb(out, a, b);
   #elseif cpp
-  flight._cpp.Geometry.intersectAabb(out, a, b);
+  flight._cpp._fn.Geometry.intersectAabb(out, a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2223,11 +2223,11 @@ inline function intersectAabb(out:{ max:flight.Vector3, min:flight.Vector3 }, a:
 
 inline function intersectRay3DAabb(ray:flight.Ray3D, aabb:{ max:flight.Vector3, min:flight.Vector3 }):Float {
   #if flight_hx
-  return flight._hx.Geometry.intersectRay3DAabb(ray, aabb);
+  return flight._hx._fn.Geometry.intersectRay3DAabb(ray, aabb);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.intersectRay3DAabb(ray, aabb);
+  return flight._js._fn.Geometry.intersectRay3DAabb(ray, aabb);
   #elseif cpp
-  return flight._cpp.Geometry.intersectRay3DAabb(ray, aabb);
+  return flight._cpp._fn.Geometry.intersectRay3DAabb(ray, aabb);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2235,11 +2235,11 @@ inline function intersectRay3DAabb(ray:flight.Ray3D, aabb:{ max:flight.Vector3, 
 
 inline function intersectRay3DCapsule(ray:flight.Ray3D, capsule:flight.Capsule):Float {
   #if flight_hx
-  return flight._hx.Geometry.intersectRay3DCapsule(ray, capsule);
+  return flight._hx._fn.Geometry.intersectRay3DCapsule(ray, capsule);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.intersectRay3DCapsule(ray, capsule);
+  return flight._js._fn.Geometry.intersectRay3DCapsule(ray, capsule);
   #elseif cpp
-  return flight._cpp.Geometry.intersectRay3DCapsule(ray, capsule);
+  return flight._cpp._fn.Geometry.intersectRay3DCapsule(ray, capsule);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2247,11 +2247,11 @@ inline function intersectRay3DCapsule(ray:flight.Ray3D, capsule:flight.Capsule):
 
 inline function intersectRay3DObb(ray:flight.Ray3D, obb:flight.Obb):Float {
   #if flight_hx
-  return flight._hx.Geometry.intersectRay3DObb(ray, obb);
+  return flight._hx._fn.Geometry.intersectRay3DObb(ray, obb);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.intersectRay3DObb(ray, obb);
+  return flight._js._fn.Geometry.intersectRay3DObb(ray, obb);
   #elseif cpp
-  return flight._cpp.Geometry.intersectRay3DObb(ray, obb);
+  return flight._cpp._fn.Geometry.intersectRay3DObb(ray, obb);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2259,11 +2259,11 @@ inline function intersectRay3DObb(ray:flight.Ray3D, obb:flight.Obb):Float {
 
 inline function intersectRay3DPlane(ray:flight.Ray3D, plane:flight.Plane):Float {
   #if flight_hx
-  return flight._hx.Geometry.intersectRay3DPlane(ray, plane);
+  return flight._hx._fn.Geometry.intersectRay3DPlane(ray, plane);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.intersectRay3DPlane(ray, plane);
+  return flight._js._fn.Geometry.intersectRay3DPlane(ray, plane);
   #elseif cpp
-  return flight._cpp.Geometry.intersectRay3DPlane(ray, plane);
+  return flight._cpp._fn.Geometry.intersectRay3DPlane(ray, plane);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2271,11 +2271,11 @@ inline function intersectRay3DPlane(ray:flight.Ray3D, plane:flight.Plane):Float 
 
 inline function intersectRay3DSphere(ray:flight.Ray3D, sphere:flight.BoundingSphere):Float {
   #if flight_hx
-  return flight._hx.Geometry.intersectRay3DSphere(ray, sphere);
+  return flight._hx._fn.Geometry.intersectRay3DSphere(ray, sphere);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.intersectRay3DSphere(ray, sphere);
+  return flight._js._fn.Geometry.intersectRay3DSphere(ray, sphere);
   #elseif cpp
-  return flight._cpp.Geometry.intersectRay3DSphere(ray, sphere);
+  return flight._cpp._fn.Geometry.intersectRay3DSphere(ray, sphere);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2283,11 +2283,11 @@ inline function intersectRay3DSphere(ray:flight.Ray3D, sphere:flight.BoundingSph
 
 inline function intersectRay3DTriangle(ray:flight.Ray3D, a:flight.Vector3, b:flight.Vector3, c:flight.Vector3):Float {
   #if flight_hx
-  return flight._hx.Geometry.intersectRay3DTriangle(ray, a, b, c);
+  return flight._hx._fn.Geometry.intersectRay3DTriangle(ray, a, b, c);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.intersectRay3DTriangle(ray, a, b, c);
+  return flight._js._fn.Geometry.intersectRay3DTriangle(ray, a, b, c);
   #elseif cpp
-  return flight._cpp.Geometry.intersectRay3DTriangle(ray, a, b, c);
+  return flight._cpp._fn.Geometry.intersectRay3DTriangle(ray, a, b, c);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2295,11 +2295,11 @@ inline function intersectRay3DTriangle(ray:flight.Ray3D, a:flight.Vector3, b:fli
 
 inline function intersectsRectangle(a:flight.Rectangle, b:flight.Rectangle):Bool {
   #if flight_hx
-  return flight._hx.Geometry.intersectsRectangle(a, b);
+  return flight._hx._fn.Geometry.intersectsRectangle(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.intersectsRectangle(a, b);
+  return flight._js._fn.Geometry.intersectsRectangle(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.intersectsRectangle(a, b);
+  return flight._cpp._fn.Geometry.intersectsRectangle(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2307,11 +2307,11 @@ inline function intersectsRectangle(a:flight.Rectangle, b:flight.Rectangle):Bool
 
 inline function inverseMatrix(out:flight.Matrix, source:flight.Matrix):Bool {
   #if flight_hx
-  return flight._hx.Geometry.inverseMatrix(out, source);
+  return flight._hx._fn.Geometry.inverseMatrix(out, source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.inverseMatrix(out, source);
+  return flight._js._fn.Geometry.inverseMatrix(out, source);
   #elseif cpp
-  return flight._cpp.Geometry.inverseMatrix(out, source);
+  return flight._cpp._fn.Geometry.inverseMatrix(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2319,11 +2319,11 @@ inline function inverseMatrix(out:flight.Matrix, source:flight.Matrix):Bool {
 
 inline function inverseMatrix3(out:flight.Matrix3, source:flight.Matrix3):Bool {
   #if flight_hx
-  return flight._hx.Geometry.inverseMatrix3(out, source);
+  return flight._hx._fn.Geometry.inverseMatrix3(out, source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.inverseMatrix3(out, source);
+  return flight._js._fn.Geometry.inverseMatrix3(out, source);
   #elseif cpp
-  return flight._cpp.Geometry.inverseMatrix3(out, source);
+  return flight._cpp._fn.Geometry.inverseMatrix3(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2331,11 +2331,11 @@ inline function inverseMatrix3(out:flight.Matrix3, source:flight.Matrix3):Bool {
 
 inline function inverseMatrix4(out:flight.Matrix4, source:flight.Matrix4):Bool {
   #if flight_hx
-  return flight._hx.Geometry.inverseMatrix4(out, source);
+  return flight._hx._fn.Geometry.inverseMatrix4(out, source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.inverseMatrix4(out, source);
+  return flight._js._fn.Geometry.inverseMatrix4(out, source);
   #elseif cpp
-  return flight._cpp.Geometry.inverseMatrix4(out, source);
+  return flight._cpp._fn.Geometry.inverseMatrix4(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2343,11 +2343,11 @@ inline function inverseMatrix4(out:flight.Matrix4, source:flight.Matrix4):Bool {
 
 inline function inverseMatrixTransformPoint(out:flight.Vector2, matrix:flight.Matrix, point:flight.Vector2):Void {
   #if flight_hx
-  flight._hx.Geometry.inverseMatrixTransformPoint(out, matrix, point);
+  flight._hx._fn.Geometry.inverseMatrixTransformPoint(out, matrix, point);
   #elseif (js && flight_esm)
-  flight._js.Geometry.inverseMatrixTransformPoint(out, matrix, point);
+  flight._js._fn.Geometry.inverseMatrixTransformPoint(out, matrix, point);
   #elseif cpp
-  flight._cpp.Geometry.inverseMatrixTransformPoint(out, matrix, point);
+  flight._cpp._fn.Geometry.inverseMatrixTransformPoint(out, matrix, point);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2355,11 +2355,11 @@ inline function inverseMatrixTransformPoint(out:flight.Vector2, matrix:flight.Ma
 
 inline function inverseMatrixTransformPointXY(out:flight.Vector2, source:flight.Matrix, x:Float, y:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.inverseMatrixTransformPointXY(out, source, x, y);
+  flight._hx._fn.Geometry.inverseMatrixTransformPointXY(out, source, x, y);
   #elseif (js && flight_esm)
-  flight._js.Geometry.inverseMatrixTransformPointXY(out, source, x, y);
+  flight._js._fn.Geometry.inverseMatrixTransformPointXY(out, source, x, y);
   #elseif cpp
-  flight._cpp.Geometry.inverseMatrixTransformPointXY(out, source, x, y);
+  flight._cpp._fn.Geometry.inverseMatrixTransformPointXY(out, source, x, y);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2367,11 +2367,11 @@ inline function inverseMatrixTransformPointXY(out:flight.Vector2, source:flight.
 
 inline function inverseMatrixTransformVector(out:flight.Vector2, matrix:flight.Matrix, vector:flight.Vector2):Void {
   #if flight_hx
-  flight._hx.Geometry.inverseMatrixTransformVector(out, matrix, vector);
+  flight._hx._fn.Geometry.inverseMatrixTransformVector(out, matrix, vector);
   #elseif (js && flight_esm)
-  flight._js.Geometry.inverseMatrixTransformVector(out, matrix, vector);
+  flight._js._fn.Geometry.inverseMatrixTransformVector(out, matrix, vector);
   #elseif cpp
-  flight._cpp.Geometry.inverseMatrixTransformVector(out, matrix, vector);
+  flight._cpp._fn.Geometry.inverseMatrixTransformVector(out, matrix, vector);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2379,11 +2379,11 @@ inline function inverseMatrixTransformVector(out:flight.Vector2, matrix:flight.M
 
 inline function inverseMatrixTransformVectorXY(out:flight.Vector2, source:flight.Matrix, x:Float, y:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.inverseMatrixTransformVectorXY(out, source, x, y);
+  flight._hx._fn.Geometry.inverseMatrixTransformVectorXY(out, source, x, y);
   #elseif (js && flight_esm)
-  flight._js.Geometry.inverseMatrixTransformVectorXY(out, source, x, y);
+  flight._js._fn.Geometry.inverseMatrixTransformVectorXY(out, source, x, y);
   #elseif cpp
-  flight._cpp.Geometry.inverseMatrixTransformVectorXY(out, source, x, y);
+  flight._cpp._fn.Geometry.inverseMatrixTransformVectorXY(out, source, x, y);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2391,11 +2391,11 @@ inline function inverseMatrixTransformVectorXY(out:flight.Vector2, source:flight
 
 inline function inverseQuaternion(out:flight.Quaternion, source:flight.Quaternion):Void {
   #if flight_hx
-  flight._hx.Geometry.inverseQuaternion(out, source);
+  flight._hx._fn.Geometry.inverseQuaternion(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.inverseQuaternion(out, source);
+  flight._js._fn.Geometry.inverseQuaternion(out, source);
   #elseif cpp
-  flight._cpp.Geometry.inverseQuaternion(out, source);
+  flight._cpp._fn.Geometry.inverseQuaternion(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2403,11 +2403,11 @@ inline function inverseQuaternion(out:flight.Quaternion, source:flight.Quaternio
 
 inline function isAabbIntersectingAabb(a:{ max:flight.Vector3, min:flight.Vector3 }, b:{ max:flight.Vector3, min:flight.Vector3 }):Bool {
   #if flight_hx
-  return flight._hx.Geometry.isAabbIntersectingAabb(a, b);
+  return flight._hx._fn.Geometry.isAabbIntersectingAabb(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.isAabbIntersectingAabb(a, b);
+  return flight._js._fn.Geometry.isAabbIntersectingAabb(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.isAabbIntersectingAabb(a, b);
+  return flight._cpp._fn.Geometry.isAabbIntersectingAabb(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2415,11 +2415,11 @@ inline function isAabbIntersectingAabb(a:{ max:flight.Vector3, min:flight.Vector
 
 inline function isAabbIntersectingSphere(aabb:{ max:flight.Vector3, min:flight.Vector3 }, sphere:flight.BoundingSphere):Bool {
   #if flight_hx
-  return flight._hx.Geometry.isAabbIntersectingSphere(aabb, sphere);
+  return flight._hx._fn.Geometry.isAabbIntersectingSphere(aabb, sphere);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.isAabbIntersectingSphere(aabb, sphere);
+  return flight._js._fn.Geometry.isAabbIntersectingSphere(aabb, sphere);
   #elseif cpp
-  return flight._cpp.Geometry.isAabbIntersectingSphere(aabb, sphere);
+  return flight._cpp._fn.Geometry.isAabbIntersectingSphere(aabb, sphere);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2427,11 +2427,11 @@ inline function isAabbIntersectingSphere(aabb:{ max:flight.Vector3, min:flight.V
 
 inline function isAffineMatrix3(source:flight.Matrix3):Bool {
   #if flight_hx
-  return flight._hx.Geometry.isAffineMatrix3(source);
+  return flight._hx._fn.Geometry.isAffineMatrix3(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.isAffineMatrix3(source);
+  return flight._js._fn.Geometry.isAffineMatrix3(source);
   #elseif cpp
-  return flight._cpp.Geometry.isAffineMatrix3(source);
+  return flight._cpp._fn.Geometry.isAffineMatrix3(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2439,11 +2439,11 @@ inline function isAffineMatrix3(source:flight.Matrix3):Bool {
 
 inline function isAffineMatrix4(source:flight.Matrix4):Bool {
   #if flight_hx
-  return flight._hx.Geometry.isAffineMatrix4(source);
+  return flight._hx._fn.Geometry.isAffineMatrix4(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.isAffineMatrix4(source);
+  return flight._js._fn.Geometry.isAffineMatrix4(source);
   #elseif cpp
-  return flight._cpp.Geometry.isAffineMatrix4(source);
+  return flight._cpp._fn.Geometry.isAffineMatrix4(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2451,11 +2451,11 @@ inline function isAffineMatrix4(source:flight.Matrix4):Bool {
 
 inline function isBoundingSphereIntersectingBoundingSphere(a:flight.BoundingSphere, b:flight.BoundingSphere):Bool {
   #if flight_hx
-  return flight._hx.Geometry.isBoundingSphereIntersectingBoundingSphere(a, b);
+  return flight._hx._fn.Geometry.isBoundingSphereIntersectingBoundingSphere(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.isBoundingSphereIntersectingBoundingSphere(a, b);
+  return flight._js._fn.Geometry.isBoundingSphereIntersectingBoundingSphere(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.isBoundingSphereIntersectingBoundingSphere(a, b);
+  return flight._cpp._fn.Geometry.isBoundingSphereIntersectingBoundingSphere(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2463,11 +2463,11 @@ inline function isBoundingSphereIntersectingBoundingSphere(a:flight.BoundingSphe
 
 inline function isCapsuleIntersectingAabb(capsule:flight.Capsule, aabb:{ max:flight.Vector3, min:flight.Vector3 }):Bool {
   #if flight_hx
-  return flight._hx.Geometry.isCapsuleIntersectingAabb(capsule, aabb);
+  return flight._hx._fn.Geometry.isCapsuleIntersectingAabb(capsule, aabb);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.isCapsuleIntersectingAabb(capsule, aabb);
+  return flight._js._fn.Geometry.isCapsuleIntersectingAabb(capsule, aabb);
   #elseif cpp
-  return flight._cpp.Geometry.isCapsuleIntersectingAabb(capsule, aabb);
+  return flight._cpp._fn.Geometry.isCapsuleIntersectingAabb(capsule, aabb);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2475,11 +2475,11 @@ inline function isCapsuleIntersectingAabb(capsule:flight.Capsule, aabb:{ max:fli
 
 inline function isCapsuleIntersectingCapsule(a:flight.Capsule, b:flight.Capsule):Bool {
   #if flight_hx
-  return flight._hx.Geometry.isCapsuleIntersectingCapsule(a, b);
+  return flight._hx._fn.Geometry.isCapsuleIntersectingCapsule(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.isCapsuleIntersectingCapsule(a, b);
+  return flight._js._fn.Geometry.isCapsuleIntersectingCapsule(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.isCapsuleIntersectingCapsule(a, b);
+  return flight._cpp._fn.Geometry.isCapsuleIntersectingCapsule(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2487,11 +2487,11 @@ inline function isCapsuleIntersectingCapsule(a:flight.Capsule, b:flight.Capsule)
 
 inline function isCapsuleIntersectingSphere(capsule:flight.Capsule, sphere:flight.BoundingSphere):Bool {
   #if flight_hx
-  return flight._hx.Geometry.isCapsuleIntersectingSphere(capsule, sphere);
+  return flight._hx._fn.Geometry.isCapsuleIntersectingSphere(capsule, sphere);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.isCapsuleIntersectingSphere(capsule, sphere);
+  return flight._js._fn.Geometry.isCapsuleIntersectingSphere(capsule, sphere);
   #elseif cpp
-  return flight._cpp.Geometry.isCapsuleIntersectingSphere(capsule, sphere);
+  return flight._cpp._fn.Geometry.isCapsuleIntersectingSphere(capsule, sphere);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2499,11 +2499,11 @@ inline function isCapsuleIntersectingSphere(capsule:flight.Capsule, sphere:fligh
 
 inline function isEmptyRectangle(source:flight.Rectangle):Bool {
   #if flight_hx
-  return flight._hx.Geometry.isEmptyRectangle(source);
+  return flight._hx._fn.Geometry.isEmptyRectangle(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.isEmptyRectangle(source);
+  return flight._js._fn.Geometry.isEmptyRectangle(source);
   #elseif cpp
-  return flight._cpp.Geometry.isEmptyRectangle(source);
+  return flight._cpp._fn.Geometry.isEmptyRectangle(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2511,11 +2511,11 @@ inline function isEmptyRectangle(source:flight.Rectangle):Bool {
 
 inline function isFlippedXRectangle(source:flight.Rectangle):Bool {
   #if flight_hx
-  return flight._hx.Geometry.isFlippedXRectangle(source);
+  return flight._hx._fn.Geometry.isFlippedXRectangle(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.isFlippedXRectangle(source);
+  return flight._js._fn.Geometry.isFlippedXRectangle(source);
   #elseif cpp
-  return flight._cpp.Geometry.isFlippedXRectangle(source);
+  return flight._cpp._fn.Geometry.isFlippedXRectangle(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2523,11 +2523,11 @@ inline function isFlippedXRectangle(source:flight.Rectangle):Bool {
 
 inline function isFlippedYRectangle(source:flight.Rectangle):Bool {
   #if flight_hx
-  return flight._hx.Geometry.isFlippedYRectangle(source);
+  return flight._hx._fn.Geometry.isFlippedYRectangle(source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.isFlippedYRectangle(source);
+  return flight._js._fn.Geometry.isFlippedYRectangle(source);
   #elseif cpp
-  return flight._cpp.Geometry.isFlippedYRectangle(source);
+  return flight._cpp._fn.Geometry.isFlippedYRectangle(source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2535,11 +2535,11 @@ inline function isFlippedYRectangle(source:flight.Rectangle):Bool {
 
 inline function isFrustumContainingPoint(frustum:flight.Frustum, point:flight.Vector3):Bool {
   #if flight_hx
-  return flight._hx.Geometry.isFrustumContainingPoint(frustum, point);
+  return flight._hx._fn.Geometry.isFrustumContainingPoint(frustum, point);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.isFrustumContainingPoint(frustum, point);
+  return flight._js._fn.Geometry.isFrustumContainingPoint(frustum, point);
   #elseif cpp
-  return flight._cpp.Geometry.isFrustumContainingPoint(frustum, point);
+  return flight._cpp._fn.Geometry.isFrustumContainingPoint(frustum, point);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2547,11 +2547,11 @@ inline function isFrustumContainingPoint(frustum:flight.Frustum, point:flight.Ve
 
 inline function isFrustumIntersectingAabb(frustum:flight.Frustum, aabb:{ max:flight.Vector3, min:flight.Vector3 }):Bool {
   #if flight_hx
-  return flight._hx.Geometry.isFrustumIntersectingAabb(frustum, aabb);
+  return flight._hx._fn.Geometry.isFrustumIntersectingAabb(frustum, aabb);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.isFrustumIntersectingAabb(frustum, aabb);
+  return flight._js._fn.Geometry.isFrustumIntersectingAabb(frustum, aabb);
   #elseif cpp
-  return flight._cpp.Geometry.isFrustumIntersectingAabb(frustum, aabb);
+  return flight._cpp._fn.Geometry.isFrustumIntersectingAabb(frustum, aabb);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2559,11 +2559,11 @@ inline function isFrustumIntersectingAabb(frustum:flight.Frustum, aabb:{ max:fli
 
 inline function isFrustumIntersectingObb(frustum:flight.Frustum, obb:flight.Obb):Bool {
   #if flight_hx
-  return flight._hx.Geometry.isFrustumIntersectingObb(frustum, obb);
+  return flight._hx._fn.Geometry.isFrustumIntersectingObb(frustum, obb);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.isFrustumIntersectingObb(frustum, obb);
+  return flight._js._fn.Geometry.isFrustumIntersectingObb(frustum, obb);
   #elseif cpp
-  return flight._cpp.Geometry.isFrustumIntersectingObb(frustum, obb);
+  return flight._cpp._fn.Geometry.isFrustumIntersectingObb(frustum, obb);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2571,11 +2571,11 @@ inline function isFrustumIntersectingObb(frustum:flight.Frustum, obb:flight.Obb)
 
 inline function isFrustumIntersectingSphere(frustum:flight.Frustum, sphere:flight.BoundingSphere):Bool {
   #if flight_hx
-  return flight._hx.Geometry.isFrustumIntersectingSphere(frustum, sphere);
+  return flight._hx._fn.Geometry.isFrustumIntersectingSphere(frustum, sphere);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.isFrustumIntersectingSphere(frustum, sphere);
+  return flight._js._fn.Geometry.isFrustumIntersectingSphere(frustum, sphere);
   #elseif cpp
-  return flight._cpp.Geometry.isFrustumIntersectingSphere(frustum, sphere);
+  return flight._cpp._fn.Geometry.isFrustumIntersectingSphere(frustum, sphere);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2583,11 +2583,11 @@ inline function isFrustumIntersectingSphere(frustum:flight.Frustum, sphere:fligh
 
 inline function isObbIntersectingAabb(obb:flight.Obb, aabb:{ max:flight.Vector3, min:flight.Vector3 }):Bool {
   #if flight_hx
-  return flight._hx.Geometry.isObbIntersectingAabb(obb, aabb);
+  return flight._hx._fn.Geometry.isObbIntersectingAabb(obb, aabb);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.isObbIntersectingAabb(obb, aabb);
+  return flight._js._fn.Geometry.isObbIntersectingAabb(obb, aabb);
   #elseif cpp
-  return flight._cpp.Geometry.isObbIntersectingAabb(obb, aabb);
+  return flight._cpp._fn.Geometry.isObbIntersectingAabb(obb, aabb);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2595,11 +2595,11 @@ inline function isObbIntersectingAabb(obb:flight.Obb, aabb:{ max:flight.Vector3,
 
 inline function isObbIntersectingObb(a:flight.Obb, b:flight.Obb):Bool {
   #if flight_hx
-  return flight._hx.Geometry.isObbIntersectingObb(a, b);
+  return flight._hx._fn.Geometry.isObbIntersectingObb(a, b);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.isObbIntersectingObb(a, b);
+  return flight._js._fn.Geometry.isObbIntersectingObb(a, b);
   #elseif cpp
-  return flight._cpp.Geometry.isObbIntersectingObb(a, b);
+  return flight._cpp._fn.Geometry.isObbIntersectingObb(a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2607,11 +2607,11 @@ inline function isObbIntersectingObb(a:flight.Obb, b:flight.Obb):Bool {
 
 inline function isObbIntersectingSphere(obb:flight.Obb, sphere:flight.BoundingSphere):Bool {
   #if flight_hx
-  return flight._hx.Geometry.isObbIntersectingSphere(obb, sphere);
+  return flight._hx._fn.Geometry.isObbIntersectingSphere(obb, sphere);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.isObbIntersectingSphere(obb, sphere);
+  return flight._js._fn.Geometry.isObbIntersectingSphere(obb, sphere);
   #elseif cpp
-  return flight._cpp.Geometry.isObbIntersectingSphere(obb, sphere);
+  return flight._cpp._fn.Geometry.isObbIntersectingSphere(obb, sphere);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2619,11 +2619,11 @@ inline function isObbIntersectingSphere(obb:flight.Obb, sphere:flight.BoundingSp
 
 inline function matrix4TransformPoint(out:flight.Vector3, source:flight.Matrix4, point:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.matrix4TransformPoint(out, source, point);
+  flight._hx._fn.Geometry.matrix4TransformPoint(out, source, point);
   #elseif (js && flight_esm)
-  flight._js.Geometry.matrix4TransformPoint(out, source, point);
+  flight._js._fn.Geometry.matrix4TransformPoint(out, source, point);
   #elseif cpp
-  flight._cpp.Geometry.matrix4TransformPoint(out, source, point);
+  flight._cpp._fn.Geometry.matrix4TransformPoint(out, source, point);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2631,11 +2631,11 @@ inline function matrix4TransformPoint(out:flight.Vector3, source:flight.Matrix4,
 
 inline function matrix4TransformVector(out:flight.Vector4, source:flight.Matrix4, vector:flight.Vector4):Void {
   #if flight_hx
-  flight._hx.Geometry.matrix4TransformVector(out, source, vector);
+  flight._hx._fn.Geometry.matrix4TransformVector(out, source, vector);
   #elseif (js && flight_esm)
-  flight._js.Geometry.matrix4TransformVector(out, source, vector);
+  flight._js._fn.Geometry.matrix4TransformVector(out, source, vector);
   #elseif cpp
-  flight._cpp.Geometry.matrix4TransformVector(out, source, vector);
+  flight._cpp._fn.Geometry.matrix4TransformVector(out, source, vector);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2643,11 +2643,11 @@ inline function matrix4TransformVector(out:flight.Vector4, source:flight.Matrix4
 
 inline function matrix4TransformVectors(out:js.lib.Float32Array, source:flight.Matrix4, vectors:js.lib.Float32Array):Void {
   #if flight_hx
-  flight._hx.Geometry.matrix4TransformVectors(out, source, vectors);
+  flight._hx._fn.Geometry.matrix4TransformVectors(out, source, vectors);
   #elseif (js && flight_esm)
-  flight._js.Geometry.matrix4TransformVectors(out, source, vectors);
+  flight._js._fn.Geometry.matrix4TransformVectors(out, source, vectors);
   #elseif cpp
-  flight._cpp.Geometry.matrix4TransformVectors(out, source, vectors);
+  flight._cpp._fn.Geometry.matrix4TransformVectors(out, source, vectors);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2655,11 +2655,11 @@ inline function matrix4TransformVectors(out:js.lib.Float32Array, source:flight.M
 
 inline function matrixTransformBounds(out:flight.Rectangle, source:flight.Matrix, ax:Float, ay:Float, bx:Float, by:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.matrixTransformBounds(out, source, ax, ay, bx, by);
+  flight._hx._fn.Geometry.matrixTransformBounds(out, source, ax, ay, bx, by);
   #elseif (js && flight_esm)
-  flight._js.Geometry.matrixTransformBounds(out, source, ax, ay, bx, by);
+  flight._js._fn.Geometry.matrixTransformBounds(out, source, ax, ay, bx, by);
   #elseif cpp
-  flight._cpp.Geometry.matrixTransformBounds(out, source, ax, ay, bx, by);
+  flight._cpp._fn.Geometry.matrixTransformBounds(out, source, ax, ay, bx, by);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2667,11 +2667,11 @@ inline function matrixTransformBounds(out:flight.Rectangle, source:flight.Matrix
 
 inline function matrixTransformBoundsVector2(out:flight.Rectangle, matrix:flight.Matrix, a:flight.Vector2, b:flight.Vector2):Void {
   #if flight_hx
-  flight._hx.Geometry.matrixTransformBoundsVector2(out, matrix, a, b);
+  flight._hx._fn.Geometry.matrixTransformBoundsVector2(out, matrix, a, b);
   #elseif (js && flight_esm)
-  flight._js.Geometry.matrixTransformBoundsVector2(out, matrix, a, b);
+  flight._js._fn.Geometry.matrixTransformBoundsVector2(out, matrix, a, b);
   #elseif cpp
-  flight._cpp.Geometry.matrixTransformBoundsVector2(out, matrix, a, b);
+  flight._cpp._fn.Geometry.matrixTransformBoundsVector2(out, matrix, a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2679,11 +2679,11 @@ inline function matrixTransformBoundsVector2(out:flight.Rectangle, matrix:flight
 
 inline function matrixTransformPoint(out:flight.Vector2, matrix:flight.Matrix, point:flight.Vector2):Void {
   #if flight_hx
-  flight._hx.Geometry.matrixTransformPoint(out, matrix, point);
+  flight._hx._fn.Geometry.matrixTransformPoint(out, matrix, point);
   #elseif (js && flight_esm)
-  flight._js.Geometry.matrixTransformPoint(out, matrix, point);
+  flight._js._fn.Geometry.matrixTransformPoint(out, matrix, point);
   #elseif cpp
-  flight._cpp.Geometry.matrixTransformPoint(out, matrix, point);
+  flight._cpp._fn.Geometry.matrixTransformPoint(out, matrix, point);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2691,11 +2691,11 @@ inline function matrixTransformPoint(out:flight.Vector2, matrix:flight.Matrix, p
 
 inline function matrixTransformPointXY(out:flight.Vector2, source:flight.Matrix, x:Float, y:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.matrixTransformPointXY(out, source, x, y);
+  flight._hx._fn.Geometry.matrixTransformPointXY(out, source, x, y);
   #elseif (js && flight_esm)
-  flight._js.Geometry.matrixTransformPointXY(out, source, x, y);
+  flight._js._fn.Geometry.matrixTransformPointXY(out, source, x, y);
   #elseif cpp
-  flight._cpp.Geometry.matrixTransformPointXY(out, source, x, y);
+  flight._cpp._fn.Geometry.matrixTransformPointXY(out, source, x, y);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2703,11 +2703,11 @@ inline function matrixTransformPointXY(out:flight.Vector2, source:flight.Matrix,
 
 inline function matrixTransformRectangle(out:flight.Rectangle, matrix:flight.Matrix, source:flight.Rectangle):Void {
   #if flight_hx
-  flight._hx.Geometry.matrixTransformRectangle(out, matrix, source);
+  flight._hx._fn.Geometry.matrixTransformRectangle(out, matrix, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.matrixTransformRectangle(out, matrix, source);
+  flight._js._fn.Geometry.matrixTransformRectangle(out, matrix, source);
   #elseif cpp
-  flight._cpp.Geometry.matrixTransformRectangle(out, matrix, source);
+  flight._cpp._fn.Geometry.matrixTransformRectangle(out, matrix, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2715,11 +2715,11 @@ inline function matrixTransformRectangle(out:flight.Rectangle, matrix:flight.Mat
 
 inline function matrixTransformVector(out:flight.Vector2, matrix:flight.Matrix, vector:flight.Vector2):Void {
   #if flight_hx
-  flight._hx.Geometry.matrixTransformVector(out, matrix, vector);
+  flight._hx._fn.Geometry.matrixTransformVector(out, matrix, vector);
   #elseif (js && flight_esm)
-  flight._js.Geometry.matrixTransformVector(out, matrix, vector);
+  flight._js._fn.Geometry.matrixTransformVector(out, matrix, vector);
   #elseif cpp
-  flight._cpp.Geometry.matrixTransformVector(out, matrix, vector);
+  flight._cpp._fn.Geometry.matrixTransformVector(out, matrix, vector);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2727,11 +2727,11 @@ inline function matrixTransformVector(out:flight.Vector2, matrix:flight.Matrix, 
 
 inline function matrixTransformVectorXY(out:flight.Vector2, source:flight.Matrix, x:Float, y:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.matrixTransformVectorXY(out, source, x, y);
+  flight._hx._fn.Geometry.matrixTransformVectorXY(out, source, x, y);
   #elseif (js && flight_esm)
-  flight._js.Geometry.matrixTransformVectorXY(out, source, x, y);
+  flight._js._fn.Geometry.matrixTransformVectorXY(out, source, x, y);
   #elseif cpp
-  flight._cpp.Geometry.matrixTransformVectorXY(out, source, x, y);
+  flight._cpp._fn.Geometry.matrixTransformVectorXY(out, source, x, y);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2739,11 +2739,11 @@ inline function matrixTransformVectorXY(out:flight.Vector2, source:flight.Matrix
 
 inline function maxVector2(out:flight.Vector2, a:flight.Vector2, b:flight.Vector2):Void {
   #if flight_hx
-  flight._hx.Geometry.maxVector2(out, a, b);
+  flight._hx._fn.Geometry.maxVector2(out, a, b);
   #elseif (js && flight_esm)
-  flight._js.Geometry.maxVector2(out, a, b);
+  flight._js._fn.Geometry.maxVector2(out, a, b);
   #elseif cpp
-  flight._cpp.Geometry.maxVector2(out, a, b);
+  flight._cpp._fn.Geometry.maxVector2(out, a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2751,11 +2751,11 @@ inline function maxVector2(out:flight.Vector2, a:flight.Vector2, b:flight.Vector
 
 inline function maxVector3(out:flight.Vector3, a:flight.Vector3, b:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.maxVector3(out, a, b);
+  flight._hx._fn.Geometry.maxVector3(out, a, b);
   #elseif (js && flight_esm)
-  flight._js.Geometry.maxVector3(out, a, b);
+  flight._js._fn.Geometry.maxVector3(out, a, b);
   #elseif cpp
-  flight._cpp.Geometry.maxVector3(out, a, b);
+  flight._cpp._fn.Geometry.maxVector3(out, a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2763,11 +2763,11 @@ inline function maxVector3(out:flight.Vector3, a:flight.Vector3, b:flight.Vector
 
 inline function maxVector4(out:flight.Vector4, a:flight.Vector4, b:flight.Vector4):Void {
   #if flight_hx
-  flight._hx.Geometry.maxVector4(out, a, b);
+  flight._hx._fn.Geometry.maxVector4(out, a, b);
   #elseif (js && flight_esm)
-  flight._js.Geometry.maxVector4(out, a, b);
+  flight._js._fn.Geometry.maxVector4(out, a, b);
   #elseif cpp
-  flight._cpp.Geometry.maxVector4(out, a, b);
+  flight._cpp._fn.Geometry.maxVector4(out, a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2775,11 +2775,11 @@ inline function maxVector4(out:flight.Vector4, a:flight.Vector4, b:flight.Vector
 
 inline function mergeBoundingSphere(out:flight.BoundingSphere, a:flight.BoundingSphere, b:flight.BoundingSphere):Void {
   #if flight_hx
-  flight._hx.Geometry.mergeBoundingSphere(out, a, b);
+  flight._hx._fn.Geometry.mergeBoundingSphere(out, a, b);
   #elseif (js && flight_esm)
-  flight._js.Geometry.mergeBoundingSphere(out, a, b);
+  flight._js._fn.Geometry.mergeBoundingSphere(out, a, b);
   #elseif cpp
-  flight._cpp.Geometry.mergeBoundingSphere(out, a, b);
+  flight._cpp._fn.Geometry.mergeBoundingSphere(out, a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2787,11 +2787,11 @@ inline function mergeBoundingSphere(out:flight.BoundingSphere, a:flight.Bounding
 
 inline function mergeRectangle(out:flight.Rectangle, source:flight.Rectangle, other:flight.Rectangle):Void {
   #if flight_hx
-  flight._hx.Geometry.mergeRectangle(out, source, other);
+  flight._hx._fn.Geometry.mergeRectangle(out, source, other);
   #elseif (js && flight_esm)
-  flight._js.Geometry.mergeRectangle(out, source, other);
+  flight._js._fn.Geometry.mergeRectangle(out, source, other);
   #elseif cpp
-  flight._cpp.Geometry.mergeRectangle(out, source, other);
+  flight._cpp._fn.Geometry.mergeRectangle(out, source, other);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2799,11 +2799,11 @@ inline function mergeRectangle(out:flight.Rectangle, source:flight.Rectangle, ot
 
 inline function minVector2(out:flight.Vector2, a:flight.Vector2, b:flight.Vector2):Void {
   #if flight_hx
-  flight._hx.Geometry.minVector2(out, a, b);
+  flight._hx._fn.Geometry.minVector2(out, a, b);
   #elseif (js && flight_esm)
-  flight._js.Geometry.minVector2(out, a, b);
+  flight._js._fn.Geometry.minVector2(out, a, b);
   #elseif cpp
-  flight._cpp.Geometry.minVector2(out, a, b);
+  flight._cpp._fn.Geometry.minVector2(out, a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2811,11 +2811,11 @@ inline function minVector2(out:flight.Vector2, a:flight.Vector2, b:flight.Vector
 
 inline function minVector3(out:flight.Vector3, a:flight.Vector3, b:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.minVector3(out, a, b);
+  flight._hx._fn.Geometry.minVector3(out, a, b);
   #elseif (js && flight_esm)
-  flight._js.Geometry.minVector3(out, a, b);
+  flight._js._fn.Geometry.minVector3(out, a, b);
   #elseif cpp
-  flight._cpp.Geometry.minVector3(out, a, b);
+  flight._cpp._fn.Geometry.minVector3(out, a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2823,11 +2823,11 @@ inline function minVector3(out:flight.Vector3, a:flight.Vector3, b:flight.Vector
 
 inline function minVector4(out:flight.Vector4, a:flight.Vector4, b:flight.Vector4):Void {
   #if flight_hx
-  flight._hx.Geometry.minVector4(out, a, b);
+  flight._hx._fn.Geometry.minVector4(out, a, b);
   #elseif (js && flight_esm)
-  flight._js.Geometry.minVector4(out, a, b);
+  flight._js._fn.Geometry.minVector4(out, a, b);
   #elseif cpp
-  flight._cpp.Geometry.minVector4(out, a, b);
+  flight._cpp._fn.Geometry.minVector4(out, a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2835,11 +2835,11 @@ inline function minVector4(out:flight.Vector4, a:flight.Vector4, b:flight.Vector
 
 inline function multiplyMatrix(out:flight.Matrix, a:flight.Matrix, b:flight.Matrix):Void {
   #if flight_hx
-  flight._hx.Geometry.multiplyMatrix(out, a, b);
+  flight._hx._fn.Geometry.multiplyMatrix(out, a, b);
   #elseif (js && flight_esm)
-  flight._js.Geometry.multiplyMatrix(out, a, b);
+  flight._js._fn.Geometry.multiplyMatrix(out, a, b);
   #elseif cpp
-  flight._cpp.Geometry.multiplyMatrix(out, a, b);
+  flight._cpp._fn.Geometry.multiplyMatrix(out, a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2847,11 +2847,11 @@ inline function multiplyMatrix(out:flight.Matrix, a:flight.Matrix, b:flight.Matr
 
 inline function multiplyMatrix3(out:flight.Matrix3, a:flight.Matrix3, b:flight.Matrix3):Void {
   #if flight_hx
-  flight._hx.Geometry.multiplyMatrix3(out, a, b);
+  flight._hx._fn.Geometry.multiplyMatrix3(out, a, b);
   #elseif (js && flight_esm)
-  flight._js.Geometry.multiplyMatrix3(out, a, b);
+  flight._js._fn.Geometry.multiplyMatrix3(out, a, b);
   #elseif cpp
-  flight._cpp.Geometry.multiplyMatrix3(out, a, b);
+  flight._cpp._fn.Geometry.multiplyMatrix3(out, a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2859,11 +2859,11 @@ inline function multiplyMatrix3(out:flight.Matrix3, a:flight.Matrix3, b:flight.M
 
 inline function multiplyMatrix4(out:flight.Matrix4, a:flight.Matrix4, b:flight.Matrix4):Void {
   #if flight_hx
-  flight._hx.Geometry.multiplyMatrix4(out, a, b);
+  flight._hx._fn.Geometry.multiplyMatrix4(out, a, b);
   #elseif (js && flight_esm)
-  flight._js.Geometry.multiplyMatrix4(out, a, b);
+  flight._js._fn.Geometry.multiplyMatrix4(out, a, b);
   #elseif cpp
-  flight._cpp.Geometry.multiplyMatrix4(out, a, b);
+  flight._cpp._fn.Geometry.multiplyMatrix4(out, a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2871,11 +2871,11 @@ inline function multiplyMatrix4(out:flight.Matrix4, a:flight.Matrix4, b:flight.M
 
 inline function multiplyQuaternion(out:flight.Quaternion, a:flight.Quaternion, b:flight.Quaternion):Void {
   #if flight_hx
-  flight._hx.Geometry.multiplyQuaternion(out, a, b);
+  flight._hx._fn.Geometry.multiplyQuaternion(out, a, b);
   #elseif (js && flight_esm)
-  flight._js.Geometry.multiplyQuaternion(out, a, b);
+  flight._js._fn.Geometry.multiplyQuaternion(out, a, b);
   #elseif cpp
-  flight._cpp.Geometry.multiplyQuaternion(out, a, b);
+  flight._cpp._fn.Geometry.multiplyQuaternion(out, a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2883,11 +2883,11 @@ inline function multiplyQuaternion(out:flight.Quaternion, a:flight.Quaternion, b
 
 inline function multiplyVector2(out:flight.Vector2, a:flight.Vector2, b:flight.Vector2):Void {
   #if flight_hx
-  flight._hx.Geometry.multiplyVector2(out, a, b);
+  flight._hx._fn.Geometry.multiplyVector2(out, a, b);
   #elseif (js && flight_esm)
-  flight._js.Geometry.multiplyVector2(out, a, b);
+  flight._js._fn.Geometry.multiplyVector2(out, a, b);
   #elseif cpp
-  flight._cpp.Geometry.multiplyVector2(out, a, b);
+  flight._cpp._fn.Geometry.multiplyVector2(out, a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2895,11 +2895,11 @@ inline function multiplyVector2(out:flight.Vector2, a:flight.Vector2, b:flight.V
 
 inline function multiplyVector3(out:flight.Vector3, a:flight.Vector3, b:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.multiplyVector3(out, a, b);
+  flight._hx._fn.Geometry.multiplyVector3(out, a, b);
   #elseif (js && flight_esm)
-  flight._js.Geometry.multiplyVector3(out, a, b);
+  flight._js._fn.Geometry.multiplyVector3(out, a, b);
   #elseif cpp
-  flight._cpp.Geometry.multiplyVector3(out, a, b);
+  flight._cpp._fn.Geometry.multiplyVector3(out, a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2907,11 +2907,11 @@ inline function multiplyVector3(out:flight.Vector3, a:flight.Vector3, b:flight.V
 
 inline function multiplyVector4(out:flight.Vector4, a:flight.Vector4, b:flight.Vector4):Void {
   #if flight_hx
-  flight._hx.Geometry.multiplyVector4(out, a, b);
+  flight._hx._fn.Geometry.multiplyVector4(out, a, b);
   #elseif (js && flight_esm)
-  flight._js.Geometry.multiplyVector4(out, a, b);
+  flight._js._fn.Geometry.multiplyVector4(out, a, b);
   #elseif cpp
-  flight._cpp.Geometry.multiplyVector4(out, a, b);
+  flight._cpp._fn.Geometry.multiplyVector4(out, a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2919,11 +2919,11 @@ inline function multiplyVector4(out:flight.Vector4, a:flight.Vector4, b:flight.V
 
 inline function nearEqualsVector2(a:flight.Vector2, b:flight.Vector2, ?tolerance:Float):Bool {
   #if flight_hx
-  return flight._hx.Geometry.nearEqualsVector2(a, b, tolerance);
+  return flight._hx._fn.Geometry.nearEqualsVector2(a, b, tolerance);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.nearEqualsVector2(a, b, tolerance);
+  return flight._js._fn.Geometry.nearEqualsVector2(a, b, tolerance);
   #elseif cpp
-  return flight._cpp.Geometry.nearEqualsVector2(a, b, tolerance);
+  return flight._cpp._fn.Geometry.nearEqualsVector2(a, b, tolerance);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2931,11 +2931,11 @@ inline function nearEqualsVector2(a:flight.Vector2, b:flight.Vector2, ?tolerance
 
 inline function nearEqualsVector3(a:flight.Vector3, b:flight.Vector3, ?tolerance:Float):Bool {
   #if flight_hx
-  return flight._hx.Geometry.nearEqualsVector3(a, b, tolerance);
+  return flight._hx._fn.Geometry.nearEqualsVector3(a, b, tolerance);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.nearEqualsVector3(a, b, tolerance);
+  return flight._js._fn.Geometry.nearEqualsVector3(a, b, tolerance);
   #elseif cpp
-  return flight._cpp.Geometry.nearEqualsVector3(a, b, tolerance);
+  return flight._cpp._fn.Geometry.nearEqualsVector3(a, b, tolerance);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2943,11 +2943,11 @@ inline function nearEqualsVector3(a:flight.Vector3, b:flight.Vector3, ?tolerance
 
 inline function nearEqualsVector4(a:flight.Vector4, b:flight.Vector4, ?tolerance:Float):Bool {
   #if flight_hx
-  return flight._hx.Geometry.nearEqualsVector4(a, b, tolerance);
+  return flight._hx._fn.Geometry.nearEqualsVector4(a, b, tolerance);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.nearEqualsVector4(a, b, tolerance);
+  return flight._js._fn.Geometry.nearEqualsVector4(a, b, tolerance);
   #elseif cpp
-  return flight._cpp.Geometry.nearEqualsVector4(a, b, tolerance);
+  return flight._cpp._fn.Geometry.nearEqualsVector4(a, b, tolerance);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2955,11 +2955,11 @@ inline function nearEqualsVector4(a:flight.Vector4, b:flight.Vector4, ?tolerance
 
 inline function negateVector2(out:flight.Vector2, source:flight.Vector2):Void {
   #if flight_hx
-  flight._hx.Geometry.negateVector2(out, source);
+  flight._hx._fn.Geometry.negateVector2(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.negateVector2(out, source);
+  flight._js._fn.Geometry.negateVector2(out, source);
   #elseif cpp
-  flight._cpp.Geometry.negateVector2(out, source);
+  flight._cpp._fn.Geometry.negateVector2(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2967,11 +2967,11 @@ inline function negateVector2(out:flight.Vector2, source:flight.Vector2):Void {
 
 inline function negateVector3(out:flight.Vector3, source:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.negateVector3(out, source);
+  flight._hx._fn.Geometry.negateVector3(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.negateVector3(out, source);
+  flight._js._fn.Geometry.negateVector3(out, source);
   #elseif cpp
-  flight._cpp.Geometry.negateVector3(out, source);
+  flight._cpp._fn.Geometry.negateVector3(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2979,11 +2979,11 @@ inline function negateVector3(out:flight.Vector3, source:flight.Vector3):Void {
 
 inline function negateVector4(out:flight.Vector4, source:flight.Vector4):Void {
   #if flight_hx
-  flight._hx.Geometry.negateVector4(out, source);
+  flight._hx._fn.Geometry.negateVector4(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.negateVector4(out, source);
+  flight._js._fn.Geometry.negateVector4(out, source);
   #elseif cpp
-  flight._cpp.Geometry.negateVector4(out, source);
+  flight._cpp._fn.Geometry.negateVector4(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -2991,11 +2991,11 @@ inline function negateVector4(out:flight.Vector4, source:flight.Vector4):Void {
 
 inline function normalizePlane(out:flight.Plane, source:flight.Plane):Void {
   #if flight_hx
-  flight._hx.Geometry.normalizePlane(out, source);
+  flight._hx._fn.Geometry.normalizePlane(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.normalizePlane(out, source);
+  flight._js._fn.Geometry.normalizePlane(out, source);
   #elseif cpp
-  flight._cpp.Geometry.normalizePlane(out, source);
+  flight._cpp._fn.Geometry.normalizePlane(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3003,11 +3003,11 @@ inline function normalizePlane(out:flight.Plane, source:flight.Plane):Void {
 
 inline function normalizeQuaternion(out:flight.Quaternion, source:flight.Quaternion):Float {
   #if flight_hx
-  return flight._hx.Geometry.normalizeQuaternion(out, source);
+  return flight._hx._fn.Geometry.normalizeQuaternion(out, source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.normalizeQuaternion(out, source);
+  return flight._js._fn.Geometry.normalizeQuaternion(out, source);
   #elseif cpp
-  return flight._cpp.Geometry.normalizeQuaternion(out, source);
+  return flight._cpp._fn.Geometry.normalizeQuaternion(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3015,11 +3015,11 @@ inline function normalizeQuaternion(out:flight.Quaternion, source:flight.Quatern
 
 inline function normalizeRectangle(out:flight.Rectangle, source:flight.Rectangle):Void {
   #if flight_hx
-  flight._hx.Geometry.normalizeRectangle(out, source);
+  flight._hx._fn.Geometry.normalizeRectangle(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.normalizeRectangle(out, source);
+  flight._js._fn.Geometry.normalizeRectangle(out, source);
   #elseif cpp
-  flight._cpp.Geometry.normalizeRectangle(out, source);
+  flight._cpp._fn.Geometry.normalizeRectangle(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3027,11 +3027,11 @@ inline function normalizeRectangle(out:flight.Rectangle, source:flight.Rectangle
 
 inline function normalizeVector2(out:flight.Vector2, source:flight.Vector2):Float {
   #if flight_hx
-  return flight._hx.Geometry.normalizeVector2(out, source);
+  return flight._hx._fn.Geometry.normalizeVector2(out, source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.normalizeVector2(out, source);
+  return flight._js._fn.Geometry.normalizeVector2(out, source);
   #elseif cpp
-  return flight._cpp.Geometry.normalizeVector2(out, source);
+  return flight._cpp._fn.Geometry.normalizeVector2(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3039,11 +3039,11 @@ inline function normalizeVector2(out:flight.Vector2, source:flight.Vector2):Floa
 
 inline function normalizeVector3(out:flight.Vector3, source:flight.Vector3):Float {
   #if flight_hx
-  return flight._hx.Geometry.normalizeVector3(out, source);
+  return flight._hx._fn.Geometry.normalizeVector3(out, source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.normalizeVector3(out, source);
+  return flight._js._fn.Geometry.normalizeVector3(out, source);
   #elseif cpp
-  return flight._cpp.Geometry.normalizeVector3(out, source);
+  return flight._cpp._fn.Geometry.normalizeVector3(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3051,11 +3051,11 @@ inline function normalizeVector3(out:flight.Vector3, source:flight.Vector3):Floa
 
 inline function normalizeVector4(out:flight.Vector4, source:flight.Vector4):Float {
   #if flight_hx
-  return flight._hx.Geometry.normalizeVector4(out, source);
+  return flight._hx._fn.Geometry.normalizeVector4(out, source);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.normalizeVector4(out, source);
+  return flight._js._fn.Geometry.normalizeVector4(out, source);
   #elseif cpp
-  return flight._cpp.Geometry.normalizeVector4(out, source);
+  return flight._cpp._fn.Geometry.normalizeVector4(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3063,11 +3063,11 @@ inline function normalizeVector4(out:flight.Vector4, source:flight.Vector4):Floa
 
 inline function offsetRectangle(out:flight.Rectangle, source:flight.Rectangle, dx:Float, dy:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.offsetRectangle(out, source, dx, dy);
+  flight._hx._fn.Geometry.offsetRectangle(out, source, dx, dy);
   #elseif (js && flight_esm)
-  flight._js.Geometry.offsetRectangle(out, source, dx, dy);
+  flight._js._fn.Geometry.offsetRectangle(out, source, dx, dy);
   #elseif cpp
-  flight._cpp.Geometry.offsetRectangle(out, source, dx, dy);
+  flight._cpp._fn.Geometry.offsetRectangle(out, source, dx, dy);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3075,11 +3075,11 @@ inline function offsetRectangle(out:flight.Rectangle, source:flight.Rectangle, d
 
 inline function offsetRectangleByPoint(out:flight.Rectangle, source:flight.Rectangle, point:flight.Vector2):Void {
   #if flight_hx
-  flight._hx.Geometry.offsetRectangleByPoint(out, source, point);
+  flight._hx._fn.Geometry.offsetRectangleByPoint(out, source, point);
   #elseif (js && flight_esm)
-  flight._js.Geometry.offsetRectangleByPoint(out, source, point);
+  flight._js._fn.Geometry.offsetRectangleByPoint(out, source, point);
   #elseif cpp
-  flight._cpp.Geometry.offsetRectangleByPoint(out, source, point);
+  flight._cpp._fn.Geometry.offsetRectangleByPoint(out, source, point);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3087,11 +3087,11 @@ inline function offsetRectangleByPoint(out:flight.Rectangle, source:flight.Recta
 
 inline function offsetVector2(out:flight.Vector2, source:flight.Vector2, dx:Float, dy:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.offsetVector2(out, source, dx, dy);
+  flight._hx._fn.Geometry.offsetVector2(out, source, dx, dy);
   #elseif (js && flight_esm)
-  flight._js.Geometry.offsetVector2(out, source, dx, dy);
+  flight._js._fn.Geometry.offsetVector2(out, source, dx, dy);
   #elseif cpp
-  flight._cpp.Geometry.offsetVector2(out, source, dx, dy);
+  flight._cpp._fn.Geometry.offsetVector2(out, source, dx, dy);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3099,11 +3099,11 @@ inline function offsetVector2(out:flight.Vector2, source:flight.Vector2, dx:Floa
 
 inline function offsetVector3(out:flight.Vector3, source:flight.Vector3, dx:Float, dy:Float, dz:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.offsetVector3(out, source, dx, dy, dz);
+  flight._hx._fn.Geometry.offsetVector3(out, source, dx, dy, dz);
   #elseif (js && flight_esm)
-  flight._js.Geometry.offsetVector3(out, source, dx, dy, dz);
+  flight._js._fn.Geometry.offsetVector3(out, source, dx, dy, dz);
   #elseif cpp
-  flight._cpp.Geometry.offsetVector3(out, source, dx, dy, dz);
+  flight._cpp._fn.Geometry.offsetVector3(out, source, dx, dy, dz);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3111,11 +3111,11 @@ inline function offsetVector3(out:flight.Vector3, source:flight.Vector3, dx:Floa
 
 inline function offsetVector4(out:flight.Vector4, source:flight.Vector4, dx:Float, dy:Float, dz:Float, dw:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.offsetVector4(out, source, dx, dy, dz, dw);
+  flight._hx._fn.Geometry.offsetVector4(out, source, dx, dy, dz, dw);
   #elseif (js && flight_esm)
-  flight._js.Geometry.offsetVector4(out, source, dx, dy, dz, dw);
+  flight._js._fn.Geometry.offsetVector4(out, source, dx, dy, dz, dw);
   #elseif cpp
-  flight._cpp.Geometry.offsetVector4(out, source, dx, dy, dz, dw);
+  flight._cpp._fn.Geometry.offsetVector4(out, source, dx, dy, dz, dw);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3123,11 +3123,11 @@ inline function offsetVector4(out:flight.Vector4, source:flight.Vector4, dx:Floa
 
 inline function prependMatrix4(out:flight.Matrix4, source:flight.Matrix4, other:flight.Matrix4):Void {
   #if flight_hx
-  flight._hx.Geometry.prependMatrix4(out, source, other);
+  flight._hx._fn.Geometry.prependMatrix4(out, source, other);
   #elseif (js && flight_esm)
-  flight._js.Geometry.prependMatrix4(out, source, other);
+  flight._js._fn.Geometry.prependMatrix4(out, source, other);
   #elseif cpp
-  flight._cpp.Geometry.prependMatrix4(out, source, other);
+  flight._cpp._fn.Geometry.prependMatrix4(out, source, other);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3135,11 +3135,11 @@ inline function prependMatrix4(out:flight.Matrix4, source:flight.Matrix4, other:
 
 inline function prependRotationMatrix4(out:flight.Matrix4, source:flight.Matrix4, radians:Float, axis:flight.Vector4, ?pivotPoint:flight.Vector4):Void {
   #if flight_hx
-  flight._hx.Geometry.prependRotationMatrix4(out, source, radians, axis, pivotPoint);
+  flight._hx._fn.Geometry.prependRotationMatrix4(out, source, radians, axis, pivotPoint);
   #elseif (js && flight_esm)
-  flight._js.Geometry.prependRotationMatrix4(out, source, radians, axis, pivotPoint);
+  flight._js._fn.Geometry.prependRotationMatrix4(out, source, radians, axis, pivotPoint);
   #elseif cpp
-  flight._cpp.Geometry.prependRotationMatrix4(out, source, radians, axis, pivotPoint);
+  flight._cpp._fn.Geometry.prependRotationMatrix4(out, source, radians, axis, pivotPoint);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3147,11 +3147,11 @@ inline function prependRotationMatrix4(out:flight.Matrix4, source:flight.Matrix4
 
 inline function prependScaleMatrix4(out:flight.Matrix4, source:flight.Matrix4, xScale:Float, yScale:Float, zScale:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.prependScaleMatrix4(out, source, xScale, yScale, zScale);
+  flight._hx._fn.Geometry.prependScaleMatrix4(out, source, xScale, yScale, zScale);
   #elseif (js && flight_esm)
-  flight._js.Geometry.prependScaleMatrix4(out, source, xScale, yScale, zScale);
+  flight._js._fn.Geometry.prependScaleMatrix4(out, source, xScale, yScale, zScale);
   #elseif cpp
-  flight._cpp.Geometry.prependScaleMatrix4(out, source, xScale, yScale, zScale);
+  flight._cpp._fn.Geometry.prependScaleMatrix4(out, source, xScale, yScale, zScale);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3159,11 +3159,11 @@ inline function prependScaleMatrix4(out:flight.Matrix4, source:flight.Matrix4, x
 
 inline function prependTranslationMatrix4(out:flight.Matrix4, source:flight.Matrix4, x:Float, y:Float, z:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.prependTranslationMatrix4(out, source, x, y, z);
+  flight._hx._fn.Geometry.prependTranslationMatrix4(out, source, x, y, z);
   #elseif (js && flight_esm)
-  flight._js.Geometry.prependTranslationMatrix4(out, source, x, y, z);
+  flight._js._fn.Geometry.prependTranslationMatrix4(out, source, x, y, z);
   #elseif cpp
-  flight._cpp.Geometry.prependTranslationMatrix4(out, source, x, y, z);
+  flight._cpp._fn.Geometry.prependTranslationMatrix4(out, source, x, y, z);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3171,11 +3171,11 @@ inline function prependTranslationMatrix4(out:flight.Matrix4, source:flight.Matr
 
 inline function projectVector3(out:flight.Vector2, source:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.projectVector3(out, source);
+  flight._hx._fn.Geometry.projectVector3(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.projectVector3(out, source);
+  flight._js._fn.Geometry.projectVector3(out, source);
   #elseif cpp
-  flight._cpp.Geometry.projectVector3(out, source);
+  flight._cpp._fn.Geometry.projectVector3(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3183,11 +3183,11 @@ inline function projectVector3(out:flight.Vector2, source:flight.Vector3):Void {
 
 inline function projectVector3OntoPlane(out:flight.Vector3, point:flight.Vector3, plane:flight.Plane):Void {
   #if flight_hx
-  flight._hx.Geometry.projectVector3OntoPlane(out, point, plane);
+  flight._hx._fn.Geometry.projectVector3OntoPlane(out, point, plane);
   #elseif (js && flight_esm)
-  flight._js.Geometry.projectVector3OntoPlane(out, point, plane);
+  flight._js._fn.Geometry.projectVector3OntoPlane(out, point, plane);
   #elseif cpp
-  flight._cpp.Geometry.projectVector3OntoPlane(out, point, plane);
+  flight._cpp._fn.Geometry.projectVector3OntoPlane(out, point, plane);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3195,11 +3195,11 @@ inline function projectVector3OntoPlane(out:flight.Vector3, point:flight.Vector3
 
 inline function projectVector4(out:flight.Vector3, source:flight.Vector4):Void {
   #if flight_hx
-  flight._hx.Geometry.projectVector4(out, source);
+  flight._hx._fn.Geometry.projectVector4(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.projectVector4(out, source);
+  flight._js._fn.Geometry.projectVector4(out, source);
   #elseif cpp
-  flight._cpp.Geometry.projectVector4(out, source);
+  flight._cpp._fn.Geometry.projectVector4(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3207,11 +3207,11 @@ inline function projectVector4(out:flight.Vector3, source:flight.Vector4):Void {
 
 inline function reflectVector2(out:flight.Vector2, incident:flight.Vector2, normal:flight.Vector2):Void {
   #if flight_hx
-  flight._hx.Geometry.reflectVector2(out, incident, normal);
+  flight._hx._fn.Geometry.reflectVector2(out, incident, normal);
   #elseif (js && flight_esm)
-  flight._js.Geometry.reflectVector2(out, incident, normal);
+  flight._js._fn.Geometry.reflectVector2(out, incident, normal);
   #elseif cpp
-  flight._cpp.Geometry.reflectVector2(out, incident, normal);
+  flight._cpp._fn.Geometry.reflectVector2(out, incident, normal);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3219,11 +3219,11 @@ inline function reflectVector2(out:flight.Vector2, incident:flight.Vector2, norm
 
 inline function reflectVector3(out:flight.Vector3, incident:flight.Vector3, normal:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.reflectVector3(out, incident, normal);
+  flight._hx._fn.Geometry.reflectVector3(out, incident, normal);
   #elseif (js && flight_esm)
-  flight._js.Geometry.reflectVector3(out, incident, normal);
+  flight._js._fn.Geometry.reflectVector3(out, incident, normal);
   #elseif cpp
-  flight._cpp.Geometry.reflectVector3(out, incident, normal);
+  flight._cpp._fn.Geometry.reflectVector3(out, incident, normal);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3231,11 +3231,11 @@ inline function reflectVector3(out:flight.Vector3, incident:flight.Vector3, norm
 
 inline function reflectVector4(out:flight.Vector4, incident:flight.Vector4, normal:flight.Vector4):Void {
   #if flight_hx
-  flight._hx.Geometry.reflectVector4(out, incident, normal);
+  flight._hx._fn.Geometry.reflectVector4(out, incident, normal);
   #elseif (js && flight_esm)
-  flight._js.Geometry.reflectVector4(out, incident, normal);
+  flight._js._fn.Geometry.reflectVector4(out, incident, normal);
   #elseif cpp
-  flight._cpp.Geometry.reflectVector4(out, incident, normal);
+  flight._cpp._fn.Geometry.reflectVector4(out, incident, normal);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3243,11 +3243,11 @@ inline function reflectVector4(out:flight.Vector4, incident:flight.Vector4, norm
 
 inline function releaseMatrix(m:flight.Matrix):Void {
   #if flight_hx
-  flight._hx.Geometry.releaseMatrix(m);
+  flight._hx._fn.Geometry.releaseMatrix(m);
   #elseif (js && flight_esm)
-  flight._js.Geometry.releaseMatrix(m);
+  flight._js._fn.Geometry.releaseMatrix(m);
   #elseif cpp
-  flight._cpp.Geometry.releaseMatrix(m);
+  flight._cpp._fn.Geometry.releaseMatrix(m);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3255,11 +3255,11 @@ inline function releaseMatrix(m:flight.Matrix):Void {
 
 inline function releaseMatrix3(m:flight.Matrix3):Void {
   #if flight_hx
-  flight._hx.Geometry.releaseMatrix3(m);
+  flight._hx._fn.Geometry.releaseMatrix3(m);
   #elseif (js && flight_esm)
-  flight._js.Geometry.releaseMatrix3(m);
+  flight._js._fn.Geometry.releaseMatrix3(m);
   #elseif cpp
-  flight._cpp.Geometry.releaseMatrix3(m);
+  flight._cpp._fn.Geometry.releaseMatrix3(m);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3267,11 +3267,11 @@ inline function releaseMatrix3(m:flight.Matrix3):Void {
 
 inline function releaseMatrix4(m:flight.Matrix4):Void {
   #if flight_hx
-  flight._hx.Geometry.releaseMatrix4(m);
+  flight._hx._fn.Geometry.releaseMatrix4(m);
   #elseif (js && flight_esm)
-  flight._js.Geometry.releaseMatrix4(m);
+  flight._js._fn.Geometry.releaseMatrix4(m);
   #elseif cpp
-  flight._cpp.Geometry.releaseMatrix4(m);
+  flight._cpp._fn.Geometry.releaseMatrix4(m);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3279,11 +3279,11 @@ inline function releaseMatrix4(m:flight.Matrix4):Void {
 
 inline function releaseQuaternion(q:flight.Quaternion):Void {
   #if flight_hx
-  flight._hx.Geometry.releaseQuaternion(q);
+  flight._hx._fn.Geometry.releaseQuaternion(q);
   #elseif (js && flight_esm)
-  flight._js.Geometry.releaseQuaternion(q);
+  flight._js._fn.Geometry.releaseQuaternion(q);
   #elseif cpp
-  flight._cpp.Geometry.releaseQuaternion(q);
+  flight._cpp._fn.Geometry.releaseQuaternion(q);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3291,11 +3291,11 @@ inline function releaseQuaternion(q:flight.Quaternion):Void {
 
 inline function releaseRectangle(r:flight.Rectangle):Void {
   #if flight_hx
-  flight._hx.Geometry.releaseRectangle(r);
+  flight._hx._fn.Geometry.releaseRectangle(r);
   #elseif (js && flight_esm)
-  flight._js.Geometry.releaseRectangle(r);
+  flight._js._fn.Geometry.releaseRectangle(r);
   #elseif cpp
-  flight._cpp.Geometry.releaseRectangle(r);
+  flight._cpp._fn.Geometry.releaseRectangle(r);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3303,11 +3303,11 @@ inline function releaseRectangle(r:flight.Rectangle):Void {
 
 inline function releaseVector2(v:flight.Vector2):Void {
   #if flight_hx
-  flight._hx.Geometry.releaseVector2(v);
+  flight._hx._fn.Geometry.releaseVector2(v);
   #elseif (js && flight_esm)
-  flight._js.Geometry.releaseVector2(v);
+  flight._js._fn.Geometry.releaseVector2(v);
   #elseif cpp
-  flight._cpp.Geometry.releaseVector2(v);
+  flight._cpp._fn.Geometry.releaseVector2(v);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3315,11 +3315,11 @@ inline function releaseVector2(v:flight.Vector2):Void {
 
 inline function releaseVector3(v:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.releaseVector3(v);
+  flight._hx._fn.Geometry.releaseVector3(v);
   #elseif (js && flight_esm)
-  flight._js.Geometry.releaseVector3(v);
+  flight._js._fn.Geometry.releaseVector3(v);
   #elseif cpp
-  flight._cpp.Geometry.releaseVector3(v);
+  flight._cpp._fn.Geometry.releaseVector3(v);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3327,11 +3327,11 @@ inline function releaseVector3(v:flight.Vector3):Void {
 
 inline function releaseVector4(v:flight.Vector4):Void {
   #if flight_hx
-  flight._hx.Geometry.releaseVector4(v);
+  flight._hx._fn.Geometry.releaseVector4(v);
   #elseif (js && flight_esm)
-  flight._js.Geometry.releaseVector4(v);
+  flight._js._fn.Geometry.releaseVector4(v);
   #elseif cpp
-  flight._cpp.Geometry.releaseVector4(v);
+  flight._cpp._fn.Geometry.releaseVector4(v);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3339,11 +3339,11 @@ inline function releaseVector4(v:flight.Vector4):Void {
 
 inline function reserveFloat32Array(array:js.lib.Float32Array, capacity:Float):js.lib.Float32Array {
   #if flight_hx
-  return flight._hx.Geometry.reserveFloat32Array(array, capacity);
+  return flight._hx._fn.Geometry.reserveFloat32Array(array, capacity);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.reserveFloat32Array(array, capacity);
+  return flight._js._fn.Geometry.reserveFloat32Array(array, capacity);
   #elseif cpp
-  return flight._cpp.Geometry.reserveFloat32Array(array, capacity);
+  return flight._cpp._fn.Geometry.reserveFloat32Array(array, capacity);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3351,11 +3351,11 @@ inline function reserveFloat32Array(array:js.lib.Float32Array, capacity:Float):j
 
 inline function reserveInt16Array(array:js.lib.Int16Array, capacity:Float):js.lib.Int16Array {
   #if flight_hx
-  return flight._hx.Geometry.reserveInt16Array(array, capacity);
+  return flight._hx._fn.Geometry.reserveInt16Array(array, capacity);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.reserveInt16Array(array, capacity);
+  return flight._js._fn.Geometry.reserveInt16Array(array, capacity);
   #elseif cpp
-  return flight._cpp.Geometry.reserveInt16Array(array, capacity);
+  return flight._cpp._fn.Geometry.reserveInt16Array(array, capacity);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3363,11 +3363,11 @@ inline function reserveInt16Array(array:js.lib.Int16Array, capacity:Float):js.li
 
 inline function reserveUint16Array(array:js.lib.Uint16Array, capacity:Float):js.lib.Uint16Array {
   #if flight_hx
-  return flight._hx.Geometry.reserveUint16Array(array, capacity);
+  return flight._hx._fn.Geometry.reserveUint16Array(array, capacity);
   #elseif (js && flight_esm)
-  return flight._js.Geometry.reserveUint16Array(array, capacity);
+  return flight._js._fn.Geometry.reserveUint16Array(array, capacity);
   #elseif cpp
-  return flight._cpp.Geometry.reserveUint16Array(array, capacity);
+  return flight._cpp._fn.Geometry.reserveUint16Array(array, capacity);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3375,11 +3375,11 @@ inline function reserveUint16Array(array:js.lib.Uint16Array, capacity:Float):js.
 
 inline function rotateMatrix(out:flight.Matrix, source:flight.Matrix, theta:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.rotateMatrix(out, source, theta);
+  flight._hx._fn.Geometry.rotateMatrix(out, source, theta);
   #elseif (js && flight_esm)
-  flight._js.Geometry.rotateMatrix(out, source, theta);
+  flight._js._fn.Geometry.rotateMatrix(out, source, theta);
   #elseif cpp
-  flight._cpp.Geometry.rotateMatrix(out, source, theta);
+  flight._cpp._fn.Geometry.rotateMatrix(out, source, theta);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3387,11 +3387,11 @@ inline function rotateMatrix(out:flight.Matrix, source:flight.Matrix, theta:Floa
 
 inline function rotateMatrix3(out:flight.Matrix3, source:flight.Matrix3, theta:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.rotateMatrix3(out, source, theta);
+  flight._hx._fn.Geometry.rotateMatrix3(out, source, theta);
   #elseif (js && flight_esm)
-  flight._js.Geometry.rotateMatrix3(out, source, theta);
+  flight._js._fn.Geometry.rotateMatrix3(out, source, theta);
   #elseif cpp
-  flight._cpp.Geometry.rotateMatrix3(out, source, theta);
+  flight._cpp._fn.Geometry.rotateMatrix3(out, source, theta);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3399,11 +3399,11 @@ inline function rotateMatrix3(out:flight.Matrix3, source:flight.Matrix3, theta:F
 
 inline function rotateMatrix4(out:flight.Matrix4, source:flight.Matrix4, axis:flight.Vector3, radians:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.rotateMatrix4(out, source, axis, radians);
+  flight._hx._fn.Geometry.rotateMatrix4(out, source, axis, radians);
   #elseif (js && flight_esm)
-  flight._js.Geometry.rotateMatrix4(out, source, axis, radians);
+  flight._js._fn.Geometry.rotateMatrix4(out, source, axis, radians);
   #elseif cpp
-  flight._cpp.Geometry.rotateMatrix4(out, source, axis, radians);
+  flight._cpp._fn.Geometry.rotateMatrix4(out, source, axis, radians);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3411,11 +3411,11 @@ inline function rotateMatrix4(out:flight.Matrix4, source:flight.Matrix4, axis:fl
 
 inline function rotateVector2(out:flight.Vector2, source:flight.Vector2, angle:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.rotateVector2(out, source, angle);
+  flight._hx._fn.Geometry.rotateVector2(out, source, angle);
   #elseif (js && flight_esm)
-  flight._js.Geometry.rotateVector2(out, source, angle);
+  flight._js._fn.Geometry.rotateVector2(out, source, angle);
   #elseif cpp
-  flight._cpp.Geometry.rotateVector2(out, source, angle);
+  flight._cpp._fn.Geometry.rotateVector2(out, source, angle);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3423,11 +3423,11 @@ inline function rotateVector2(out:flight.Vector2, source:flight.Vector2, angle:F
 
 inline function rotateVector3ByQuaternion(out:flight.Vector3, vector:flight.Vector3, q:flight.Quaternion):Void {
   #if flight_hx
-  flight._hx.Geometry.rotateVector3ByQuaternion(out, vector, q);
+  flight._hx._fn.Geometry.rotateVector3ByQuaternion(out, vector, q);
   #elseif (js && flight_esm)
-  flight._js.Geometry.rotateVector3ByQuaternion(out, vector, q);
+  flight._js._fn.Geometry.rotateVector3ByQuaternion(out, vector, q);
   #elseif cpp
-  flight._cpp.Geometry.rotateVector3ByQuaternion(out, vector, q);
+  flight._cpp._fn.Geometry.rotateVector3ByQuaternion(out, vector, q);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3435,11 +3435,11 @@ inline function rotateVector3ByQuaternion(out:flight.Vector3, vector:flight.Vect
 
 inline function scaleMatrix(out:flight.Matrix, source:flight.Matrix, sx:Float, sy:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.scaleMatrix(out, source, sx, sy);
+  flight._hx._fn.Geometry.scaleMatrix(out, source, sx, sy);
   #elseif (js && flight_esm)
-  flight._js.Geometry.scaleMatrix(out, source, sx, sy);
+  flight._js._fn.Geometry.scaleMatrix(out, source, sx, sy);
   #elseif cpp
-  flight._cpp.Geometry.scaleMatrix(out, source, sx, sy);
+  flight._cpp._fn.Geometry.scaleMatrix(out, source, sx, sy);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3447,11 +3447,11 @@ inline function scaleMatrix(out:flight.Matrix, source:flight.Matrix, sx:Float, s
 
 inline function scaleMatrix3(out:flight.Matrix3, source:flight.Matrix3, sx:Float, sy:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.scaleMatrix3(out, source, sx, sy);
+  flight._hx._fn.Geometry.scaleMatrix3(out, source, sx, sy);
   #elseif (js && flight_esm)
-  flight._js.Geometry.scaleMatrix3(out, source, sx, sy);
+  flight._js._fn.Geometry.scaleMatrix3(out, source, sx, sy);
   #elseif cpp
-  flight._cpp.Geometry.scaleMatrix3(out, source, sx, sy);
+  flight._cpp._fn.Geometry.scaleMatrix3(out, source, sx, sy);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3459,11 +3459,11 @@ inline function scaleMatrix3(out:flight.Matrix3, source:flight.Matrix3, sx:Float
 
 inline function scaleMatrix4(out:flight.Matrix4, source:flight.Matrix4, sx:Float, sy:Float, sz:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.scaleMatrix4(out, source, sx, sy, sz);
+  flight._hx._fn.Geometry.scaleMatrix4(out, source, sx, sy, sz);
   #elseif (js && flight_esm)
-  flight._js.Geometry.scaleMatrix4(out, source, sx, sy, sz);
+  flight._js._fn.Geometry.scaleMatrix4(out, source, sx, sy, sz);
   #elseif cpp
-  flight._cpp.Geometry.scaleMatrix4(out, source, sx, sy, sz);
+  flight._cpp._fn.Geometry.scaleMatrix4(out, source, sx, sy, sz);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3471,11 +3471,11 @@ inline function scaleMatrix4(out:flight.Matrix4, source:flight.Matrix4, sx:Float
 
 inline function scaleVector2(out:flight.Vector2, source:flight.Vector2, scalar:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.scaleVector2(out, source, scalar);
+  flight._hx._fn.Geometry.scaleVector2(out, source, scalar);
   #elseif (js && flight_esm)
-  flight._js.Geometry.scaleVector2(out, source, scalar);
+  flight._js._fn.Geometry.scaleVector2(out, source, scalar);
   #elseif cpp
-  flight._cpp.Geometry.scaleVector2(out, source, scalar);
+  flight._cpp._fn.Geometry.scaleVector2(out, source, scalar);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3483,11 +3483,11 @@ inline function scaleVector2(out:flight.Vector2, source:flight.Vector2, scalar:F
 
 inline function scaleVector2ToLength(out:flight.Vector2, source:flight.Vector2, length:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.scaleVector2ToLength(out, source, length);
+  flight._hx._fn.Geometry.scaleVector2ToLength(out, source, length);
   #elseif (js && flight_esm)
-  flight._js.Geometry.scaleVector2ToLength(out, source, length);
+  flight._js._fn.Geometry.scaleVector2ToLength(out, source, length);
   #elseif cpp
-  flight._cpp.Geometry.scaleVector2ToLength(out, source, length);
+  flight._cpp._fn.Geometry.scaleVector2ToLength(out, source, length);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3495,11 +3495,11 @@ inline function scaleVector2ToLength(out:flight.Vector2, source:flight.Vector2, 
 
 inline function scaleVector3(out:flight.Vector3, source:flight.Vector3, scalar:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.scaleVector3(out, source, scalar);
+  flight._hx._fn.Geometry.scaleVector3(out, source, scalar);
   #elseif (js && flight_esm)
-  flight._js.Geometry.scaleVector3(out, source, scalar);
+  flight._js._fn.Geometry.scaleVector3(out, source, scalar);
   #elseif cpp
-  flight._cpp.Geometry.scaleVector3(out, source, scalar);
+  flight._cpp._fn.Geometry.scaleVector3(out, source, scalar);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3507,11 +3507,11 @@ inline function scaleVector3(out:flight.Vector3, source:flight.Vector3, scalar:F
 
 inline function scaleVector4(out:flight.Vector4, source:flight.Vector4, scalar:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.scaleVector4(out, source, scalar);
+  flight._hx._fn.Geometry.scaleVector4(out, source, scalar);
   #elseif (js && flight_esm)
-  flight._js.Geometry.scaleVector4(out, source, scalar);
+  flight._js._fn.Geometry.scaleVector4(out, source, scalar);
   #elseif cpp
-  flight._cpp.Geometry.scaleVector4(out, source, scalar);
+  flight._cpp._fn.Geometry.scaleVector4(out, source, scalar);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3519,11 +3519,11 @@ inline function scaleVector4(out:flight.Vector4, source:flight.Vector4, scalar:F
 
 inline function setAabb(out:{ max:flight.Vector3, min:flight.Vector3 }, minX:Float, minY:Float, minZ:Float, maxX:Float, maxY:Float, maxZ:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setAabb(out, minX, minY, minZ, maxX, maxY, maxZ);
+  flight._hx._fn.Geometry.setAabb(out, minX, minY, minZ, maxX, maxY, maxZ);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setAabb(out, minX, minY, minZ, maxX, maxY, maxZ);
+  flight._js._fn.Geometry.setAabb(out, minX, minY, minZ, maxX, maxY, maxZ);
   #elseif cpp
-  flight._cpp.Geometry.setAabb(out, minX, minY, minZ, maxX, maxY, maxZ);
+  flight._cpp._fn.Geometry.setAabb(out, minX, minY, minZ, maxX, maxY, maxZ);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3531,11 +3531,11 @@ inline function setAabb(out:{ max:flight.Vector3, min:flight.Vector3 }, minX:Flo
 
 inline function setAabbFromPoints(out:{ max:flight.Vector3, min:flight.Vector3 }, points:Array<flight.Vector3>):Void {
   #if flight_hx
-  flight._hx.Geometry.setAabbFromPoints(out, points);
+  flight._hx._fn.Geometry.setAabbFromPoints(out, points);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setAabbFromPoints(out, points);
+  flight._js._fn.Geometry.setAabbFromPoints(out, points);
   #elseif cpp
-  flight._cpp.Geometry.setAabbFromPoints(out, points);
+  flight._cpp._fn.Geometry.setAabbFromPoints(out, points);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3543,11 +3543,11 @@ inline function setAabbFromPoints(out:{ max:flight.Vector3, min:flight.Vector3 }
 
 inline function setBoundingSphere(out:flight.BoundingSphere, centerX:Float, centerY:Float, centerZ:Float, radius:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setBoundingSphere(out, centerX, centerY, centerZ, radius);
+  flight._hx._fn.Geometry.setBoundingSphere(out, centerX, centerY, centerZ, radius);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setBoundingSphere(out, centerX, centerY, centerZ, radius);
+  flight._js._fn.Geometry.setBoundingSphere(out, centerX, centerY, centerZ, radius);
   #elseif cpp
-  flight._cpp.Geometry.setBoundingSphere(out, centerX, centerY, centerZ, radius);
+  flight._cpp._fn.Geometry.setBoundingSphere(out, centerX, centerY, centerZ, radius);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3555,11 +3555,11 @@ inline function setBoundingSphere(out:flight.BoundingSphere, centerX:Float, cent
 
 inline function setBoundingSphereFromAabb(out:flight.BoundingSphere, aabb:{ max:flight.Vector3, min:flight.Vector3 }):Void {
   #if flight_hx
-  flight._hx.Geometry.setBoundingSphereFromAabb(out, aabb);
+  flight._hx._fn.Geometry.setBoundingSphereFromAabb(out, aabb);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setBoundingSphereFromAabb(out, aabb);
+  flight._js._fn.Geometry.setBoundingSphereFromAabb(out, aabb);
   #elseif cpp
-  flight._cpp.Geometry.setBoundingSphereFromAabb(out, aabb);
+  flight._cpp._fn.Geometry.setBoundingSphereFromAabb(out, aabb);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3567,11 +3567,11 @@ inline function setBoundingSphereFromAabb(out:flight.BoundingSphere, aabb:{ max:
 
 inline function setCapsule(out:flight.Capsule, startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setCapsule(out, startX, startY, startZ, endX, endY, endZ, radius);
+  flight._hx._fn.Geometry.setCapsule(out, startX, startY, startZ, endX, endY, endZ, radius);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setCapsule(out, startX, startY, startZ, endX, endY, endZ, radius);
+  flight._js._fn.Geometry.setCapsule(out, startX, startY, startZ, endX, endY, endZ, radius);
   #elseif cpp
-  flight._cpp.Geometry.setCapsule(out, startX, startY, startZ, endX, endY, endZ, radius);
+  flight._cpp._fn.Geometry.setCapsule(out, startX, startY, startZ, endX, endY, endZ, radius);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3579,11 +3579,11 @@ inline function setCapsule(out:flight.Capsule, startX:Float, startY:Float, start
 
 inline function setEmptyRectangle(out:flight.Rectangle):Void {
   #if flight_hx
-  flight._hx.Geometry.setEmptyRectangle(out);
+  flight._hx._fn.Geometry.setEmptyRectangle(out);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setEmptyRectangle(out);
+  flight._js._fn.Geometry.setEmptyRectangle(out);
   #elseif cpp
-  flight._cpp.Geometry.setEmptyRectangle(out);
+  flight._cpp._fn.Geometry.setEmptyRectangle(out);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3591,11 +3591,11 @@ inline function setEmptyRectangle(out:flight.Rectangle):Void {
 
 inline function setFrustumFromMatrix4(out:flight.Frustum, viewProjection:flight.Matrix4):Void {
   #if flight_hx
-  flight._hx.Geometry.setFrustumFromMatrix4(out, viewProjection);
+  flight._hx._fn.Geometry.setFrustumFromMatrix4(out, viewProjection);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setFrustumFromMatrix4(out, viewProjection);
+  flight._js._fn.Geometry.setFrustumFromMatrix4(out, viewProjection);
   #elseif cpp
-  flight._cpp.Geometry.setFrustumFromMatrix4(out, viewProjection);
+  flight._cpp._fn.Geometry.setFrustumFromMatrix4(out, viewProjection);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3603,11 +3603,11 @@ inline function setFrustumFromMatrix4(out:flight.Frustum, viewProjection:flight.
 
 inline function setGradientTransformMatrix(out:flight.Matrix, width:Float, height:Float, ?rotation:Float, ?tx:Float, ?ty:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setGradientTransformMatrix(out, width, height, rotation, tx, ty);
+  flight._hx._fn.Geometry.setGradientTransformMatrix(out, width, height, rotation, tx, ty);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setGradientTransformMatrix(out, width, height, rotation, tx, ty);
+  flight._js._fn.Geometry.setGradientTransformMatrix(out, width, height, rotation, tx, ty);
   #elseif cpp
-  flight._cpp.Geometry.setGradientTransformMatrix(out, width, height, rotation, tx, ty);
+  flight._cpp._fn.Geometry.setGradientTransformMatrix(out, width, height, rotation, tx, ty);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3615,11 +3615,11 @@ inline function setGradientTransformMatrix(out:flight.Matrix, width:Float, heigh
 
 inline function setMatrix(out:flight.Matrix, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setMatrix(out, a, b, c, d, tx, ty);
+  flight._hx._fn.Geometry.setMatrix(out, a, b, c, d, tx, ty);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setMatrix(out, a, b, c, d, tx, ty);
+  flight._js._fn.Geometry.setMatrix(out, a, b, c, d, tx, ty);
   #elseif cpp
-  flight._cpp.Geometry.setMatrix(out, a, b, c, d, tx, ty);
+  flight._cpp._fn.Geometry.setMatrix(out, a, b, c, d, tx, ty);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3627,11 +3627,11 @@ inline function setMatrix(out:flight.Matrix, a:Float, b:Float, c:Float, d:Float,
 
 inline function setMatrix3(out:flight.Matrix3, m00:Float, m01:Float, m02:Float, m10:Float, m11:Float, m12:Float, m20:Float, m21:Float, m22:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setMatrix3(out, m00, m01, m02, m10, m11, m12, m20, m21, m22);
+  flight._hx._fn.Geometry.setMatrix3(out, m00, m01, m02, m10, m11, m12, m20, m21, m22);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setMatrix3(out, m00, m01, m02, m10, m11, m12, m20, m21, m22);
+  flight._js._fn.Geometry.setMatrix3(out, m00, m01, m02, m10, m11, m12, m20, m21, m22);
   #elseif cpp
-  flight._cpp.Geometry.setMatrix3(out, m00, m01, m02, m10, m11, m12, m20, m21, m22);
+  flight._cpp._fn.Geometry.setMatrix3(out, m00, m01, m02, m10, m11, m12, m20, m21, m22);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3639,11 +3639,11 @@ inline function setMatrix3(out:flight.Matrix3, m00:Float, m01:Float, m02:Float, 
 
 inline function setMatrix3Element(out:flight.Matrix3, row:Float, column:Float, value:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setMatrix3Element(out, row, column, value);
+  flight._hx._fn.Geometry.setMatrix3Element(out, row, column, value);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setMatrix3Element(out, row, column, value);
+  flight._js._fn.Geometry.setMatrix3Element(out, row, column, value);
   #elseif cpp
-  flight._cpp.Geometry.setMatrix3Element(out, row, column, value);
+  flight._cpp._fn.Geometry.setMatrix3Element(out, row, column, value);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3651,11 +3651,11 @@ inline function setMatrix3Element(out:flight.Matrix3, row:Float, column:Float, v
 
 inline function setMatrix3FromFloat32Array(out:flight.Matrix3, offset:Float, source:js.lib.Float32Array):Void {
   #if flight_hx
-  flight._hx.Geometry.setMatrix3FromFloat32Array(out, offset, source);
+  flight._hx._fn.Geometry.setMatrix3FromFloat32Array(out, offset, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setMatrix3FromFloat32Array(out, offset, source);
+  flight._js._fn.Geometry.setMatrix3FromFloat32Array(out, offset, source);
   #elseif cpp
-  flight._cpp.Geometry.setMatrix3FromFloat32Array(out, offset, source);
+  flight._cpp._fn.Geometry.setMatrix3FromFloat32Array(out, offset, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3663,11 +3663,11 @@ inline function setMatrix3FromFloat32Array(out:flight.Matrix3, offset:Float, sou
 
 inline function setMatrix3FromMatrix(out:flight.Matrix3, source:flight.Matrix):Void {
   #if flight_hx
-  flight._hx.Geometry.setMatrix3FromMatrix(out, source);
+  flight._hx._fn.Geometry.setMatrix3FromMatrix(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setMatrix3FromMatrix(out, source);
+  flight._js._fn.Geometry.setMatrix3FromMatrix(out, source);
   #elseif cpp
-  flight._cpp.Geometry.setMatrix3FromMatrix(out, source);
+  flight._cpp._fn.Geometry.setMatrix3FromMatrix(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3675,11 +3675,11 @@ inline function setMatrix3FromMatrix(out:flight.Matrix3, source:flight.Matrix):V
 
 inline function setMatrix3FromMatrix4(out:flight.Matrix3, source:flight.Matrix4):Void {
   #if flight_hx
-  flight._hx.Geometry.setMatrix3FromMatrix4(out, source);
+  flight._hx._fn.Geometry.setMatrix3FromMatrix4(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setMatrix3FromMatrix4(out, source);
+  flight._js._fn.Geometry.setMatrix3FromMatrix4(out, source);
   #elseif cpp
-  flight._cpp.Geometry.setMatrix3FromMatrix4(out, source);
+  flight._cpp._fn.Geometry.setMatrix3FromMatrix4(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3687,11 +3687,11 @@ inline function setMatrix3FromMatrix4(out:flight.Matrix3, source:flight.Matrix4)
 
 inline function setMatrix3Identity(out:flight.Matrix3):Void {
   #if flight_hx
-  flight._hx.Geometry.setMatrix3Identity(out);
+  flight._hx._fn.Geometry.setMatrix3Identity(out);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setMatrix3Identity(out);
+  flight._js._fn.Geometry.setMatrix3Identity(out);
   #elseif cpp
-  flight._cpp.Geometry.setMatrix3Identity(out);
+  flight._cpp._fn.Geometry.setMatrix3Identity(out);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3699,11 +3699,11 @@ inline function setMatrix3Identity(out:flight.Matrix3):Void {
 
 inline function setMatrix3NormalFromMatrix4(out:flight.Matrix3, source:flight.Matrix4):Void {
   #if flight_hx
-  flight._hx.Geometry.setMatrix3NormalFromMatrix4(out, source);
+  flight._hx._fn.Geometry.setMatrix3NormalFromMatrix4(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setMatrix3NormalFromMatrix4(out, source);
+  flight._js._fn.Geometry.setMatrix3NormalFromMatrix4(out, source);
   #elseif cpp
-  flight._cpp.Geometry.setMatrix3NormalFromMatrix4(out, source);
+  flight._cpp._fn.Geometry.setMatrix3NormalFromMatrix4(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3711,11 +3711,11 @@ inline function setMatrix3NormalFromMatrix4(out:flight.Matrix3, source:flight.Ma
 
 inline function setMatrix4(out:flight.Matrix4, m00:Float, m01:Float, m02:Float, m03:Float, m10:Float, m11:Float, m12:Float, m13:Float, m20:Float, m21:Float, m22:Float, m23:Float, m30:Float, m31:Float, m32:Float, m33:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setMatrix4(out, m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
+  flight._hx._fn.Geometry.setMatrix4(out, m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setMatrix4(out, m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
+  flight._js._fn.Geometry.setMatrix4(out, m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
   #elseif cpp
-  flight._cpp.Geometry.setMatrix4(out, m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
+  flight._cpp._fn.Geometry.setMatrix4(out, m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3723,11 +3723,11 @@ inline function setMatrix4(out:flight.Matrix4, m00:Float, m01:Float, m02:Float, 
 
 inline function setMatrix4Element(out:flight.Matrix4, row:Float, column:Float, value:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setMatrix4Element(out, row, column, value);
+  flight._hx._fn.Geometry.setMatrix4Element(out, row, column, value);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setMatrix4Element(out, row, column, value);
+  flight._js._fn.Geometry.setMatrix4Element(out, row, column, value);
   #elseif cpp
-  flight._cpp.Geometry.setMatrix4Element(out, row, column, value);
+  flight._cpp._fn.Geometry.setMatrix4Element(out, row, column, value);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3735,11 +3735,11 @@ inline function setMatrix4Element(out:flight.Matrix4, row:Float, column:Float, v
 
 inline function setMatrix4From2D(out:flight.Matrix4, a:Float, b:Float, c:Float, d:Float, ?tx:Float, ?ty:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setMatrix4From2D(out, a, b, c, d, tx, ty);
+  flight._hx._fn.Geometry.setMatrix4From2D(out, a, b, c, d, tx, ty);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setMatrix4From2D(out, a, b, c, d, tx, ty);
+  flight._js._fn.Geometry.setMatrix4From2D(out, a, b, c, d, tx, ty);
   #elseif cpp
-  flight._cpp.Geometry.setMatrix4From2D(out, a, b, c, d, tx, ty);
+  flight._cpp._fn.Geometry.setMatrix4From2D(out, a, b, c, d, tx, ty);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3747,11 +3747,11 @@ inline function setMatrix4From2D(out:flight.Matrix4, a:Float, b:Float, c:Float, 
 
 inline function setMatrix4FromFloat32Array(out:flight.Matrix4, offset:Float, source:js.lib.Float32Array):Void {
   #if flight_hx
-  flight._hx.Geometry.setMatrix4FromFloat32Array(out, offset, source);
+  flight._hx._fn.Geometry.setMatrix4FromFloat32Array(out, offset, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setMatrix4FromFloat32Array(out, offset, source);
+  flight._js._fn.Geometry.setMatrix4FromFloat32Array(out, offset, source);
   #elseif cpp
-  flight._cpp.Geometry.setMatrix4FromFloat32Array(out, offset, source);
+  flight._cpp._fn.Geometry.setMatrix4FromFloat32Array(out, offset, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3759,11 +3759,11 @@ inline function setMatrix4FromFloat32Array(out:flight.Matrix4, offset:Float, sou
 
 inline function setMatrix4FromMatrix(out:flight.Matrix4, source:flight.Matrix):Void {
   #if flight_hx
-  flight._hx.Geometry.setMatrix4FromMatrix(out, source);
+  flight._hx._fn.Geometry.setMatrix4FromMatrix(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setMatrix4FromMatrix(out, source);
+  flight._js._fn.Geometry.setMatrix4FromMatrix(out, source);
   #elseif cpp
-  flight._cpp.Geometry.setMatrix4FromMatrix(out, source);
+  flight._cpp._fn.Geometry.setMatrix4FromMatrix(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3771,11 +3771,11 @@ inline function setMatrix4FromMatrix(out:flight.Matrix4, source:flight.Matrix):V
 
 inline function setMatrix4FromMatrix3(out:flight.Matrix4, source:flight.Matrix3):Void {
   #if flight_hx
-  flight._hx.Geometry.setMatrix4FromMatrix3(out, source);
+  flight._hx._fn.Geometry.setMatrix4FromMatrix3(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setMatrix4FromMatrix3(out, source);
+  flight._js._fn.Geometry.setMatrix4FromMatrix3(out, source);
   #elseif cpp
-  flight._cpp.Geometry.setMatrix4FromMatrix3(out, source);
+  flight._cpp._fn.Geometry.setMatrix4FromMatrix3(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3783,11 +3783,11 @@ inline function setMatrix4FromMatrix3(out:flight.Matrix4, source:flight.Matrix3)
 
 inline function setMatrix4FromQuaternion(out:flight.Matrix4, source:flight.Quaternion):Void {
   #if flight_hx
-  flight._hx.Geometry.setMatrix4FromQuaternion(out, source);
+  flight._hx._fn.Geometry.setMatrix4FromQuaternion(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setMatrix4FromQuaternion(out, source);
+  flight._js._fn.Geometry.setMatrix4FromQuaternion(out, source);
   #elseif cpp
-  flight._cpp.Geometry.setMatrix4FromQuaternion(out, source);
+  flight._cpp._fn.Geometry.setMatrix4FromQuaternion(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3795,11 +3795,11 @@ inline function setMatrix4FromQuaternion(out:flight.Matrix4, source:flight.Quate
 
 inline function setMatrix4Identity(out:flight.Matrix4):Void {
   #if flight_hx
-  flight._hx.Geometry.setMatrix4Identity(out);
+  flight._hx._fn.Geometry.setMatrix4Identity(out);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setMatrix4Identity(out);
+  flight._js._fn.Geometry.setMatrix4Identity(out);
   #elseif cpp
-  flight._cpp.Geometry.setMatrix4Identity(out);
+  flight._cpp._fn.Geometry.setMatrix4Identity(out);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3807,11 +3807,11 @@ inline function setMatrix4Identity(out:flight.Matrix4):Void {
 
 inline function setMatrix4LookAt(out:flight.Matrix4, eye:flight.Vector3, target:flight.Vector3, up:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.setMatrix4LookAt(out, eye, target, up);
+  flight._hx._fn.Geometry.setMatrix4LookAt(out, eye, target, up);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setMatrix4LookAt(out, eye, target, up);
+  flight._js._fn.Geometry.setMatrix4LookAt(out, eye, target, up);
   #elseif cpp
-  flight._cpp.Geometry.setMatrix4LookAt(out, eye, target, up);
+  flight._cpp._fn.Geometry.setMatrix4LookAt(out, eye, target, up);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3819,11 +3819,11 @@ inline function setMatrix4LookAt(out:flight.Matrix4, eye:flight.Vector3, target:
 
 inline function setMatrix4Position(out:flight.Matrix4, source:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.setMatrix4Position(out, source);
+  flight._hx._fn.Geometry.setMatrix4Position(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setMatrix4Position(out, source);
+  flight._js._fn.Geometry.setMatrix4Position(out, source);
   #elseif cpp
-  flight._cpp.Geometry.setMatrix4Position(out, source);
+  flight._cpp._fn.Geometry.setMatrix4Position(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3831,11 +3831,11 @@ inline function setMatrix4Position(out:flight.Matrix4, source:flight.Vector3):Vo
 
 inline function setMatrixFromFloat32Array(out:flight.Matrix, offset:Float, source:js.lib.Float32Array):Void {
   #if flight_hx
-  flight._hx.Geometry.setMatrixFromFloat32Array(out, offset, source);
+  flight._hx._fn.Geometry.setMatrixFromFloat32Array(out, offset, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setMatrixFromFloat32Array(out, offset, source);
+  flight._js._fn.Geometry.setMatrixFromFloat32Array(out, offset, source);
   #elseif cpp
-  flight._cpp.Geometry.setMatrixFromFloat32Array(out, offset, source);
+  flight._cpp._fn.Geometry.setMatrixFromFloat32Array(out, offset, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3843,11 +3843,11 @@ inline function setMatrixFromFloat32Array(out:flight.Matrix, offset:Float, sourc
 
 inline function setMatrixFromMatrix3(out:flight.Matrix, source:flight.Matrix3):Void {
   #if flight_hx
-  flight._hx.Geometry.setMatrixFromMatrix3(out, source);
+  flight._hx._fn.Geometry.setMatrixFromMatrix3(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setMatrixFromMatrix3(out, source);
+  flight._js._fn.Geometry.setMatrixFromMatrix3(out, source);
   #elseif cpp
-  flight._cpp.Geometry.setMatrixFromMatrix3(out, source);
+  flight._cpp._fn.Geometry.setMatrixFromMatrix3(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3855,11 +3855,11 @@ inline function setMatrixFromMatrix3(out:flight.Matrix, source:flight.Matrix3):V
 
 inline function setMatrixFromMatrix4(out:flight.Matrix, source:flight.Matrix4):Void {
   #if flight_hx
-  flight._hx.Geometry.setMatrixFromMatrix4(out, source);
+  flight._hx._fn.Geometry.setMatrixFromMatrix4(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setMatrixFromMatrix4(out, source);
+  flight._js._fn.Geometry.setMatrixFromMatrix4(out, source);
   #elseif cpp
-  flight._cpp.Geometry.setMatrixFromMatrix4(out, source);
+  flight._cpp._fn.Geometry.setMatrixFromMatrix4(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3867,11 +3867,11 @@ inline function setMatrixFromMatrix4(out:flight.Matrix, source:flight.Matrix4):V
 
 inline function setMatrixIdentity(out:flight.Matrix):Void {
   #if flight_hx
-  flight._hx.Geometry.setMatrixIdentity(out);
+  flight._hx._fn.Geometry.setMatrixIdentity(out);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setMatrixIdentity(out);
+  flight._js._fn.Geometry.setMatrixIdentity(out);
   #elseif cpp
-  flight._cpp.Geometry.setMatrixIdentity(out);
+  flight._cpp._fn.Geometry.setMatrixIdentity(out);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3879,11 +3879,11 @@ inline function setMatrixIdentity(out:flight.Matrix):Void {
 
 inline function setObb(out:flight.Obb, centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setObb(out, centerX, centerY, centerZ, halfExtentX, halfExtentY, halfExtentZ, orientationX, orientationY, orientationZ, orientationW);
+  flight._hx._fn.Geometry.setObb(out, centerX, centerY, centerZ, halfExtentX, halfExtentY, halfExtentZ, orientationX, orientationY, orientationZ, orientationW);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setObb(out, centerX, centerY, centerZ, halfExtentX, halfExtentY, halfExtentZ, orientationX, orientationY, orientationZ, orientationW);
+  flight._js._fn.Geometry.setObb(out, centerX, centerY, centerZ, halfExtentX, halfExtentY, halfExtentZ, orientationX, orientationY, orientationZ, orientationW);
   #elseif cpp
-  flight._cpp.Geometry.setObb(out, centerX, centerY, centerZ, halfExtentX, halfExtentY, halfExtentZ, orientationX, orientationY, orientationZ, orientationW);
+  flight._cpp._fn.Geometry.setObb(out, centerX, centerY, centerZ, halfExtentX, halfExtentY, halfExtentZ, orientationX, orientationY, orientationZ, orientationW);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3891,11 +3891,11 @@ inline function setObb(out:flight.Obb, centerX:Float, centerY:Float, centerZ:Flo
 
 inline function setOrthographicMatrix4(out:flight.Matrix4, left:Float, right:Float, bottom:Float, top:Float, zNear:Float, zFar:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setOrthographicMatrix4(out, left, right, bottom, top, zNear, zFar);
+  flight._hx._fn.Geometry.setOrthographicMatrix4(out, left, right, bottom, top, zNear, zFar);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setOrthographicMatrix4(out, left, right, bottom, top, zNear, zFar);
+  flight._js._fn.Geometry.setOrthographicMatrix4(out, left, right, bottom, top, zNear, zFar);
   #elseif cpp
-  flight._cpp.Geometry.setOrthographicMatrix4(out, left, right, bottom, top, zNear, zFar);
+  flight._cpp._fn.Geometry.setOrthographicMatrix4(out, left, right, bottom, top, zNear, zFar);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3903,11 +3903,11 @@ inline function setOrthographicMatrix4(out:flight.Matrix4, left:Float, right:Flo
 
 inline function setPerspectiveMatrix4(out:flight.Matrix4, tanHalfFovY:Float, aspect:Float, zNear:Float, zFar:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setPerspectiveMatrix4(out, tanHalfFovY, aspect, zNear, zFar);
+  flight._hx._fn.Geometry.setPerspectiveMatrix4(out, tanHalfFovY, aspect, zNear, zFar);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setPerspectiveMatrix4(out, tanHalfFovY, aspect, zNear, zFar);
+  flight._js._fn.Geometry.setPerspectiveMatrix4(out, tanHalfFovY, aspect, zNear, zFar);
   #elseif cpp
-  flight._cpp.Geometry.setPerspectiveMatrix4(out, tanHalfFovY, aspect, zNear, zFar);
+  flight._cpp._fn.Geometry.setPerspectiveMatrix4(out, tanHalfFovY, aspect, zNear, zFar);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3915,11 +3915,11 @@ inline function setPerspectiveMatrix4(out:flight.Matrix4, tanHalfFovY:Float, asp
 
 inline function setPlane(out:flight.Plane, a:Float, b:Float, c:Float, d:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setPlane(out, a, b, c, d);
+  flight._hx._fn.Geometry.setPlane(out, a, b, c, d);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setPlane(out, a, b, c, d);
+  flight._js._fn.Geometry.setPlane(out, a, b, c, d);
   #elseif cpp
-  flight._cpp.Geometry.setPlane(out, a, b, c, d);
+  flight._cpp._fn.Geometry.setPlane(out, a, b, c, d);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3927,11 +3927,11 @@ inline function setPlane(out:flight.Plane, a:Float, b:Float, c:Float, d:Float):V
 
 inline function setPlaneFromNormalAndPoint(out:flight.Plane, normal:flight.Vector3, point:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.setPlaneFromNormalAndPoint(out, normal, point);
+  flight._hx._fn.Geometry.setPlaneFromNormalAndPoint(out, normal, point);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setPlaneFromNormalAndPoint(out, normal, point);
+  flight._js._fn.Geometry.setPlaneFromNormalAndPoint(out, normal, point);
   #elseif cpp
-  flight._cpp.Geometry.setPlaneFromNormalAndPoint(out, normal, point);
+  flight._cpp._fn.Geometry.setPlaneFromNormalAndPoint(out, normal, point);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3939,11 +3939,11 @@ inline function setPlaneFromNormalAndPoint(out:flight.Plane, normal:flight.Vecto
 
 inline function setPlaneFromPoints(out:flight.Plane, a:flight.Vector3, b:flight.Vector3, c:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.setPlaneFromPoints(out, a, b, c);
+  flight._hx._fn.Geometry.setPlaneFromPoints(out, a, b, c);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setPlaneFromPoints(out, a, b, c);
+  flight._js._fn.Geometry.setPlaneFromPoints(out, a, b, c);
   #elseif cpp
-  flight._cpp.Geometry.setPlaneFromPoints(out, a, b, c);
+  flight._cpp._fn.Geometry.setPlaneFromPoints(out, a, b, c);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3951,11 +3951,11 @@ inline function setPlaneFromPoints(out:flight.Plane, a:flight.Vector3, b:flight.
 
 inline function setQuaternion(out:flight.Quaternion, x:Float, y:Float, z:Float, w:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setQuaternion(out, x, y, z, w);
+  flight._hx._fn.Geometry.setQuaternion(out, x, y, z, w);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setQuaternion(out, x, y, z, w);
+  flight._js._fn.Geometry.setQuaternion(out, x, y, z, w);
   #elseif cpp
-  flight._cpp.Geometry.setQuaternion(out, x, y, z, w);
+  flight._cpp._fn.Geometry.setQuaternion(out, x, y, z, w);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3963,11 +3963,11 @@ inline function setQuaternion(out:flight.Quaternion, x:Float, y:Float, z:Float, 
 
 inline function setQuaternionFromAxisAngle(out:flight.Quaternion, axis:flight.Vector3, angle:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setQuaternionFromAxisAngle(out, axis, angle);
+  flight._hx._fn.Geometry.setQuaternionFromAxisAngle(out, axis, angle);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setQuaternionFromAxisAngle(out, axis, angle);
+  flight._js._fn.Geometry.setQuaternionFromAxisAngle(out, axis, angle);
   #elseif cpp
-  flight._cpp.Geometry.setQuaternionFromAxisAngle(out, axis, angle);
+  flight._cpp._fn.Geometry.setQuaternionFromAxisAngle(out, axis, angle);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3975,11 +3975,11 @@ inline function setQuaternionFromAxisAngle(out:flight.Quaternion, axis:flight.Ve
 
 inline function setQuaternionFromEuler(out:flight.Quaternion, x:Float, y:Float, z:Float, ?order:String):Void {
   #if flight_hx
-  flight._hx.Geometry.setQuaternionFromEuler(out, x, y, z, order);
+  flight._hx._fn.Geometry.setQuaternionFromEuler(out, x, y, z, order);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setQuaternionFromEuler(out, x, y, z, order);
+  flight._js._fn.Geometry.setQuaternionFromEuler(out, x, y, z, order);
   #elseif cpp
-  flight._cpp.Geometry.setQuaternionFromEuler(out, x, y, z, order);
+  flight._cpp._fn.Geometry.setQuaternionFromEuler(out, x, y, z, order);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3987,11 +3987,11 @@ inline function setQuaternionFromEuler(out:flight.Quaternion, x:Float, y:Float, 
 
 inline function setQuaternionFromMatrix4(out:flight.Quaternion, source:flight.Matrix4):Void {
   #if flight_hx
-  flight._hx.Geometry.setQuaternionFromMatrix4(out, source);
+  flight._hx._fn.Geometry.setQuaternionFromMatrix4(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setQuaternionFromMatrix4(out, source);
+  flight._js._fn.Geometry.setQuaternionFromMatrix4(out, source);
   #elseif cpp
-  flight._cpp.Geometry.setQuaternionFromMatrix4(out, source);
+  flight._cpp._fn.Geometry.setQuaternionFromMatrix4(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -3999,11 +3999,11 @@ inline function setQuaternionFromMatrix4(out:flight.Quaternion, source:flight.Ma
 
 inline function setQuaternionFromUnitVectors(out:flight.Quaternion, from:flight.Vector3, to:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.setQuaternionFromUnitVectors(out, from, to);
+  flight._hx._fn.Geometry.setQuaternionFromUnitVectors(out, from, to);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setQuaternionFromUnitVectors(out, from, to);
+  flight._js._fn.Geometry.setQuaternionFromUnitVectors(out, from, to);
   #elseif cpp
-  flight._cpp.Geometry.setQuaternionFromUnitVectors(out, from, to);
+  flight._cpp._fn.Geometry.setQuaternionFromUnitVectors(out, from, to);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4011,11 +4011,11 @@ inline function setQuaternionFromUnitVectors(out:flight.Quaternion, from:flight.
 
 inline function setQuaternionIdentity(out:flight.Quaternion):Void {
   #if flight_hx
-  flight._hx.Geometry.setQuaternionIdentity(out);
+  flight._hx._fn.Geometry.setQuaternionIdentity(out);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setQuaternionIdentity(out);
+  flight._js._fn.Geometry.setQuaternionIdentity(out);
   #elseif cpp
-  flight._cpp.Geometry.setQuaternionIdentity(out);
+  flight._cpp._fn.Geometry.setQuaternionIdentity(out);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4023,11 +4023,11 @@ inline function setQuaternionIdentity(out:flight.Quaternion):Void {
 
 inline function setQuaternionLookRotation(out:flight.Quaternion, forward:flight.Vector3, up:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.setQuaternionLookRotation(out, forward, up);
+  flight._hx._fn.Geometry.setQuaternionLookRotation(out, forward, up);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setQuaternionLookRotation(out, forward, up);
+  flight._js._fn.Geometry.setQuaternionLookRotation(out, forward, up);
   #elseif cpp
-  flight._cpp.Geometry.setQuaternionLookRotation(out, forward, up);
+  flight._cpp._fn.Geometry.setQuaternionLookRotation(out, forward, up);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4035,11 +4035,11 @@ inline function setQuaternionLookRotation(out:flight.Quaternion, forward:flight.
 
 inline function setRay3D(out:flight.Ray3D, origin:flight.Vector3, direction:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.setRay3D(out, origin, direction);
+  flight._hx._fn.Geometry.setRay3D(out, origin, direction);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setRay3D(out, origin, direction);
+  flight._js._fn.Geometry.setRay3D(out, origin, direction);
   #elseif cpp
-  flight._cpp.Geometry.setRay3D(out, origin, direction);
+  flight._cpp._fn.Geometry.setRay3D(out, origin, direction);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4047,11 +4047,11 @@ inline function setRay3D(out:flight.Ray3D, origin:flight.Vector3, direction:flig
 
 inline function setRectangle(out:flight.Rectangle, x:Float, y:Float, width:Float, height:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setRectangle(out, x, y, width, height);
+  flight._hx._fn.Geometry.setRectangle(out, x, y, width, height);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setRectangle(out, x, y, width, height);
+  flight._js._fn.Geometry.setRectangle(out, x, y, width, height);
   #elseif cpp
-  flight._cpp.Geometry.setRectangle(out, x, y, width, height);
+  flight._cpp._fn.Geometry.setRectangle(out, x, y, width, height);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4059,11 +4059,11 @@ inline function setRectangle(out:flight.Rectangle, x:Float, y:Float, width:Float
 
 inline function setRectangleBottom(target:flight.Rectangle, value:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setRectangleBottom(target, value);
+  flight._hx._fn.Geometry.setRectangleBottom(target, value);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setRectangleBottom(target, value);
+  flight._js._fn.Geometry.setRectangleBottom(target, value);
   #elseif cpp
-  flight._cpp.Geometry.setRectangleBottom(target, value);
+  flight._cpp._fn.Geometry.setRectangleBottom(target, value);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4071,11 +4071,11 @@ inline function setRectangleBottom(target:flight.Rectangle, value:Float):Void {
 
 inline function setRectangleBottomRight(target:flight.Rectangle, point:flight.Vector2):Void {
   #if flight_hx
-  flight._hx.Geometry.setRectangleBottomRight(target, point);
+  flight._hx._fn.Geometry.setRectangleBottomRight(target, point);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setRectangleBottomRight(target, point);
+  flight._js._fn.Geometry.setRectangleBottomRight(target, point);
   #elseif cpp
-  flight._cpp.Geometry.setRectangleBottomRight(target, point);
+  flight._cpp._fn.Geometry.setRectangleBottomRight(target, point);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4083,11 +4083,11 @@ inline function setRectangleBottomRight(target:flight.Rectangle, point:flight.Ve
 
 inline function setRectangleLeft(target:flight.Rectangle, value:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setRectangleLeft(target, value);
+  flight._hx._fn.Geometry.setRectangleLeft(target, value);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setRectangleLeft(target, value);
+  flight._js._fn.Geometry.setRectangleLeft(target, value);
   #elseif cpp
-  flight._cpp.Geometry.setRectangleLeft(target, value);
+  flight._cpp._fn.Geometry.setRectangleLeft(target, value);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4095,11 +4095,11 @@ inline function setRectangleLeft(target:flight.Rectangle, value:Float):Void {
 
 inline function setRectangleRight(target:flight.Rectangle, value:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setRectangleRight(target, value);
+  flight._hx._fn.Geometry.setRectangleRight(target, value);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setRectangleRight(target, value);
+  flight._js._fn.Geometry.setRectangleRight(target, value);
   #elseif cpp
-  flight._cpp.Geometry.setRectangleRight(target, value);
+  flight._cpp._fn.Geometry.setRectangleRight(target, value);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4107,11 +4107,11 @@ inline function setRectangleRight(target:flight.Rectangle, value:Float):Void {
 
 inline function setRectangleSize(out:flight.Rectangle, size:flight.Vector2):Void {
   #if flight_hx
-  flight._hx.Geometry.setRectangleSize(out, size);
+  flight._hx._fn.Geometry.setRectangleSize(out, size);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setRectangleSize(out, size);
+  flight._js._fn.Geometry.setRectangleSize(out, size);
   #elseif cpp
-  flight._cpp.Geometry.setRectangleSize(out, size);
+  flight._cpp._fn.Geometry.setRectangleSize(out, size);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4119,11 +4119,11 @@ inline function setRectangleSize(out:flight.Rectangle, size:flight.Vector2):Void
 
 inline function setRectangleTop(target:flight.Rectangle, value:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setRectangleTop(target, value);
+  flight._hx._fn.Geometry.setRectangleTop(target, value);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setRectangleTop(target, value);
+  flight._js._fn.Geometry.setRectangleTop(target, value);
   #elseif cpp
-  flight._cpp.Geometry.setRectangleTop(target, value);
+  flight._cpp._fn.Geometry.setRectangleTop(target, value);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4131,11 +4131,11 @@ inline function setRectangleTop(target:flight.Rectangle, value:Float):Void {
 
 inline function setRectangleTopLeft(out:flight.Rectangle, point:flight.Vector2):Void {
   #if flight_hx
-  flight._hx.Geometry.setRectangleTopLeft(out, point);
+  flight._hx._fn.Geometry.setRectangleTopLeft(out, point);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setRectangleTopLeft(out, point);
+  flight._js._fn.Geometry.setRectangleTopLeft(out, point);
   #elseif cpp
-  flight._cpp.Geometry.setRectangleTopLeft(out, point);
+  flight._cpp._fn.Geometry.setRectangleTopLeft(out, point);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4143,11 +4143,11 @@ inline function setRectangleTopLeft(out:flight.Rectangle, point:flight.Vector2):
 
 inline function setTransformMatrix(out:flight.Matrix, scaleX:Float, scaleY:Float, ?rotation:Float, ?tx:Float, ?ty:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setTransformMatrix(out, scaleX, scaleY, rotation, tx, ty);
+  flight._hx._fn.Geometry.setTransformMatrix(out, scaleX, scaleY, rotation, tx, ty);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setTransformMatrix(out, scaleX, scaleY, rotation, tx, ty);
+  flight._js._fn.Geometry.setTransformMatrix(out, scaleX, scaleY, rotation, tx, ty);
   #elseif cpp
-  flight._cpp.Geometry.setTransformMatrix(out, scaleX, scaleY, rotation, tx, ty);
+  flight._cpp._fn.Geometry.setTransformMatrix(out, scaleX, scaleY, rotation, tx, ty);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4155,11 +4155,11 @@ inline function setTransformMatrix(out:flight.Matrix, scaleX:Float, scaleY:Float
 
 inline function setVector2(out:flight.Vector2, x:Float, y:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setVector2(out, x, y);
+  flight._hx._fn.Geometry.setVector2(out, x, y);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setVector2(out, x, y);
+  flight._js._fn.Geometry.setVector2(out, x, y);
   #elseif cpp
-  flight._cpp.Geometry.setVector2(out, x, y);
+  flight._cpp._fn.Geometry.setVector2(out, x, y);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4167,11 +4167,11 @@ inline function setVector2(out:flight.Vector2, x:Float, y:Float):Void {
 
 inline function setVector2FromFloat32Array(out:flight.Vector2, offset:Float, source:js.lib.Float32Array):Void {
   #if flight_hx
-  flight._hx.Geometry.setVector2FromFloat32Array(out, offset, source);
+  flight._hx._fn.Geometry.setVector2FromFloat32Array(out, offset, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setVector2FromFloat32Array(out, offset, source);
+  flight._js._fn.Geometry.setVector2FromFloat32Array(out, offset, source);
   #elseif cpp
-  flight._cpp.Geometry.setVector2FromFloat32Array(out, offset, source);
+  flight._cpp._fn.Geometry.setVector2FromFloat32Array(out, offset, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4179,11 +4179,11 @@ inline function setVector2FromFloat32Array(out:flight.Vector2, offset:Float, sou
 
 inline function setVector2FromPolar(out:flight.Vector2, length:Float, angle:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setVector2FromPolar(out, length, angle);
+  flight._hx._fn.Geometry.setVector2FromPolar(out, length, angle);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setVector2FromPolar(out, length, angle);
+  flight._js._fn.Geometry.setVector2FromPolar(out, length, angle);
   #elseif cpp
-  flight._cpp.Geometry.setVector2FromPolar(out, length, angle);
+  flight._cpp._fn.Geometry.setVector2FromPolar(out, length, angle);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4191,11 +4191,11 @@ inline function setVector2FromPolar(out:flight.Vector2, length:Float, angle:Floa
 
 inline function setVector2FromVector3(out:flight.Vector2, source:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.setVector2FromVector3(out, source);
+  flight._hx._fn.Geometry.setVector2FromVector3(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setVector2FromVector3(out, source);
+  flight._js._fn.Geometry.setVector2FromVector3(out, source);
   #elseif cpp
-  flight._cpp.Geometry.setVector2FromVector3(out, source);
+  flight._cpp._fn.Geometry.setVector2FromVector3(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4203,11 +4203,11 @@ inline function setVector2FromVector3(out:flight.Vector2, source:flight.Vector3)
 
 inline function setVector3(out:flight.Vector3, x:Float, y:Float, z:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setVector3(out, x, y, z);
+  flight._hx._fn.Geometry.setVector3(out, x, y, z);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setVector3(out, x, y, z);
+  flight._js._fn.Geometry.setVector3(out, x, y, z);
   #elseif cpp
-  flight._cpp.Geometry.setVector3(out, x, y, z);
+  flight._cpp._fn.Geometry.setVector3(out, x, y, z);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4215,11 +4215,11 @@ inline function setVector3(out:flight.Vector3, x:Float, y:Float, z:Float):Void {
 
 inline function setVector3FromFloat32Array(out:flight.Vector3, offset:Float, source:js.lib.Float32Array):Void {
   #if flight_hx
-  flight._hx.Geometry.setVector3FromFloat32Array(out, offset, source);
+  flight._hx._fn.Geometry.setVector3FromFloat32Array(out, offset, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setVector3FromFloat32Array(out, offset, source);
+  flight._js._fn.Geometry.setVector3FromFloat32Array(out, offset, source);
   #elseif cpp
-  flight._cpp.Geometry.setVector3FromFloat32Array(out, offset, source);
+  flight._cpp._fn.Geometry.setVector3FromFloat32Array(out, offset, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4227,11 +4227,11 @@ inline function setVector3FromFloat32Array(out:flight.Vector3, offset:Float, sou
 
 inline function setVector3FromSpherical(out:flight.Vector3, radius:Float, theta:Float, phi:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setVector3FromSpherical(out, radius, theta, phi);
+  flight._hx._fn.Geometry.setVector3FromSpherical(out, radius, theta, phi);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setVector3FromSpherical(out, radius, theta, phi);
+  flight._js._fn.Geometry.setVector3FromSpherical(out, radius, theta, phi);
   #elseif cpp
-  flight._cpp.Geometry.setVector3FromSpherical(out, radius, theta, phi);
+  flight._cpp._fn.Geometry.setVector3FromSpherical(out, radius, theta, phi);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4239,11 +4239,11 @@ inline function setVector3FromSpherical(out:flight.Vector3, radius:Float, theta:
 
 inline function setVector3FromVector4(out:flight.Vector3, source:flight.Vector4):Void {
   #if flight_hx
-  flight._hx.Geometry.setVector3FromVector4(out, source);
+  flight._hx._fn.Geometry.setVector3FromVector4(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setVector3FromVector4(out, source);
+  flight._js._fn.Geometry.setVector3FromVector4(out, source);
   #elseif cpp
-  flight._cpp.Geometry.setVector3FromVector4(out, source);
+  flight._cpp._fn.Geometry.setVector3FromVector4(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4251,11 +4251,11 @@ inline function setVector3FromVector4(out:flight.Vector3, source:flight.Vector4)
 
 inline function setVector4(out:flight.Vector4, x:Float, y:Float, z:Float, w:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setVector4(out, x, y, z, w);
+  flight._hx._fn.Geometry.setVector4(out, x, y, z, w);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setVector4(out, x, y, z, w);
+  flight._js._fn.Geometry.setVector4(out, x, y, z, w);
   #elseif cpp
-  flight._cpp.Geometry.setVector4(out, x, y, z, w);
+  flight._cpp._fn.Geometry.setVector4(out, x, y, z, w);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4263,11 +4263,11 @@ inline function setVector4(out:flight.Vector4, x:Float, y:Float, z:Float, w:Floa
 
 inline function setVector4FromFloat32Array(out:flight.Vector4, offset:Float, source:js.lib.Float32Array):Void {
   #if flight_hx
-  flight._hx.Geometry.setVector4FromFloat32Array(out, offset, source);
+  flight._hx._fn.Geometry.setVector4FromFloat32Array(out, offset, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setVector4FromFloat32Array(out, offset, source);
+  flight._js._fn.Geometry.setVector4FromFloat32Array(out, offset, source);
   #elseif cpp
-  flight._cpp.Geometry.setVector4FromFloat32Array(out, offset, source);
+  flight._cpp._fn.Geometry.setVector4FromFloat32Array(out, offset, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4275,11 +4275,11 @@ inline function setVector4FromFloat32Array(out:flight.Vector4, offset:Float, sou
 
 inline function setVector4FromVector3(out:flight.Vector4, source:flight.Vector3, ?w:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.setVector4FromVector3(out, source, w);
+  flight._hx._fn.Geometry.setVector4FromVector3(out, source, w);
   #elseif (js && flight_esm)
-  flight._js.Geometry.setVector4FromVector3(out, source, w);
+  flight._js._fn.Geometry.setVector4FromVector3(out, source, w);
   #elseif cpp
-  flight._cpp.Geometry.setVector4FromVector3(out, source, w);
+  flight._cpp._fn.Geometry.setVector4FromVector3(out, source, w);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4287,11 +4287,11 @@ inline function setVector4FromVector3(out:flight.Vector4, source:flight.Vector3,
 
 inline function slerpQuaternion(out:flight.Quaternion, a:flight.Quaternion, b:flight.Quaternion, t:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.slerpQuaternion(out, a, b, t);
+  flight._hx._fn.Geometry.slerpQuaternion(out, a, b, t);
   #elseif (js && flight_esm)
-  flight._js.Geometry.slerpQuaternion(out, a, b, t);
+  flight._js._fn.Geometry.slerpQuaternion(out, a, b, t);
   #elseif cpp
-  flight._cpp.Geometry.slerpQuaternion(out, a, b, t);
+  flight._cpp._fn.Geometry.slerpQuaternion(out, a, b, t);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4299,11 +4299,11 @@ inline function slerpQuaternion(out:flight.Quaternion, a:flight.Quaternion, b:fl
 
 inline function subtractVector2(out:flight.Vector2, source:flight.Vector2, other:flight.Vector2):Void {
   #if flight_hx
-  flight._hx.Geometry.subtractVector2(out, source, other);
+  flight._hx._fn.Geometry.subtractVector2(out, source, other);
   #elseif (js && flight_esm)
-  flight._js.Geometry.subtractVector2(out, source, other);
+  flight._js._fn.Geometry.subtractVector2(out, source, other);
   #elseif cpp
-  flight._cpp.Geometry.subtractVector2(out, source, other);
+  flight._cpp._fn.Geometry.subtractVector2(out, source, other);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4311,11 +4311,11 @@ inline function subtractVector2(out:flight.Vector2, source:flight.Vector2, other
 
 inline function subtractVector3(out:flight.Vector3, source:flight.Vector3, other:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.subtractVector3(out, source, other);
+  flight._hx._fn.Geometry.subtractVector3(out, source, other);
   #elseif (js && flight_esm)
-  flight._js.Geometry.subtractVector3(out, source, other);
+  flight._js._fn.Geometry.subtractVector3(out, source, other);
   #elseif cpp
-  flight._cpp.Geometry.subtractVector3(out, source, other);
+  flight._cpp._fn.Geometry.subtractVector3(out, source, other);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4323,11 +4323,11 @@ inline function subtractVector3(out:flight.Vector3, source:flight.Vector3, other
 
 inline function subtractVector4(out:flight.Vector4, source:flight.Vector4, other:flight.Vector4):Void {
   #if flight_hx
-  flight._hx.Geometry.subtractVector4(out, source, other);
+  flight._hx._fn.Geometry.subtractVector4(out, source, other);
   #elseif (js && flight_esm)
-  flight._js.Geometry.subtractVector4(out, source, other);
+  flight._js._fn.Geometry.subtractVector4(out, source, other);
   #elseif cpp
-  flight._cpp.Geometry.subtractVector4(out, source, other);
+  flight._cpp._fn.Geometry.subtractVector4(out, source, other);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4335,11 +4335,11 @@ inline function subtractVector4(out:flight.Vector4, source:flight.Vector4, other
 
 inline function transformAabbByMatrix4(out:{ max:flight.Vector3, min:flight.Vector3 }, aabb:{ max:flight.Vector3, min:flight.Vector3 }, m:flight.Matrix4):Void {
   #if flight_hx
-  flight._hx.Geometry.transformAabbByMatrix4(out, aabb, m);
+  flight._hx._fn.Geometry.transformAabbByMatrix4(out, aabb, m);
   #elseif (js && flight_esm)
-  flight._js.Geometry.transformAabbByMatrix4(out, aabb, m);
+  flight._js._fn.Geometry.transformAabbByMatrix4(out, aabb, m);
   #elseif cpp
-  flight._cpp.Geometry.transformAabbByMatrix4(out, aabb, m);
+  flight._cpp._fn.Geometry.transformAabbByMatrix4(out, aabb, m);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4347,11 +4347,11 @@ inline function transformAabbByMatrix4(out:{ max:flight.Vector3, min:flight.Vect
 
 inline function transformBoundingSphereByMatrix4(out:flight.BoundingSphere, sphere:flight.BoundingSphere, m:flight.Matrix4):Void {
   #if flight_hx
-  flight._hx.Geometry.transformBoundingSphereByMatrix4(out, sphere, m);
+  flight._hx._fn.Geometry.transformBoundingSphereByMatrix4(out, sphere, m);
   #elseif (js && flight_esm)
-  flight._js.Geometry.transformBoundingSphereByMatrix4(out, sphere, m);
+  flight._js._fn.Geometry.transformBoundingSphereByMatrix4(out, sphere, m);
   #elseif cpp
-  flight._cpp.Geometry.transformBoundingSphereByMatrix4(out, sphere, m);
+  flight._cpp._fn.Geometry.transformBoundingSphereByMatrix4(out, sphere, m);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4359,11 +4359,11 @@ inline function transformBoundingSphereByMatrix4(out:flight.BoundingSphere, sphe
 
 inline function transformObbByMatrix4(out:flight.Obb, obb:flight.Obb, m:flight.Matrix4):Void {
   #if flight_hx
-  flight._hx.Geometry.transformObbByMatrix4(out, obb, m);
+  flight._hx._fn.Geometry.transformObbByMatrix4(out, obb, m);
   #elseif (js && flight_esm)
-  flight._js.Geometry.transformObbByMatrix4(out, obb, m);
+  flight._js._fn.Geometry.transformObbByMatrix4(out, obb, m);
   #elseif cpp
-  flight._cpp.Geometry.transformObbByMatrix4(out, obb, m);
+  flight._cpp._fn.Geometry.transformObbByMatrix4(out, obb, m);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4371,11 +4371,11 @@ inline function transformObbByMatrix4(out:flight.Obb, obb:flight.Obb, m:flight.M
 
 inline function transformRay3DByMatrix4(out:flight.Ray3D, ray:flight.Ray3D, m:flight.Matrix4):Void {
   #if flight_hx
-  flight._hx.Geometry.transformRay3DByMatrix4(out, ray, m);
+  flight._hx._fn.Geometry.transformRay3DByMatrix4(out, ray, m);
   #elseif (js && flight_esm)
-  flight._js.Geometry.transformRay3DByMatrix4(out, ray, m);
+  flight._js._fn.Geometry.transformRay3DByMatrix4(out, ray, m);
   #elseif cpp
-  flight._cpp.Geometry.transformRay3DByMatrix4(out, ray, m);
+  flight._cpp._fn.Geometry.transformRay3DByMatrix4(out, ray, m);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4383,11 +4383,11 @@ inline function transformRay3DByMatrix4(out:flight.Ray3D, ray:flight.Ray3D, m:fl
 
 inline function transformVector3ByMatrix3(out:flight.Vector3, source:flight.Vector3, matrix:flight.Matrix3):Void {
   #if flight_hx
-  flight._hx.Geometry.transformVector3ByMatrix3(out, source, matrix);
+  flight._hx._fn.Geometry.transformVector3ByMatrix3(out, source, matrix);
   #elseif (js && flight_esm)
-  flight._js.Geometry.transformVector3ByMatrix3(out, source, matrix);
+  flight._js._fn.Geometry.transformVector3ByMatrix3(out, source, matrix);
   #elseif cpp
-  flight._cpp.Geometry.transformVector3ByMatrix3(out, source, matrix);
+  flight._cpp._fn.Geometry.transformVector3ByMatrix3(out, source, matrix);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4395,11 +4395,11 @@ inline function transformVector3ByMatrix3(out:flight.Vector3, source:flight.Vect
 
 inline function translateMatrix(out:flight.Matrix, source:flight.Matrix, dx:Float, dy:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.translateMatrix(out, source, dx, dy);
+  flight._hx._fn.Geometry.translateMatrix(out, source, dx, dy);
   #elseif (js && flight_esm)
-  flight._js.Geometry.translateMatrix(out, source, dx, dy);
+  flight._js._fn.Geometry.translateMatrix(out, source, dx, dy);
   #elseif cpp
-  flight._cpp.Geometry.translateMatrix(out, source, dx, dy);
+  flight._cpp._fn.Geometry.translateMatrix(out, source, dx, dy);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4407,11 +4407,11 @@ inline function translateMatrix(out:flight.Matrix, source:flight.Matrix, dx:Floa
 
 inline function translateMatrix3(out:flight.Matrix3, source:flight.Matrix3, tx:Float, ty:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.translateMatrix3(out, source, tx, ty);
+  flight._hx._fn.Geometry.translateMatrix3(out, source, tx, ty);
   #elseif (js && flight_esm)
-  flight._js.Geometry.translateMatrix3(out, source, tx, ty);
+  flight._js._fn.Geometry.translateMatrix3(out, source, tx, ty);
   #elseif cpp
-  flight._cpp.Geometry.translateMatrix3(out, source, tx, ty);
+  flight._cpp._fn.Geometry.translateMatrix3(out, source, tx, ty);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4419,11 +4419,11 @@ inline function translateMatrix3(out:flight.Matrix3, source:flight.Matrix3, tx:F
 
 inline function translateMatrix4(out:flight.Matrix4, source:flight.Matrix4, tx:Float, ty:Float, tz:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.translateMatrix4(out, source, tx, ty, tz);
+  flight._hx._fn.Geometry.translateMatrix4(out, source, tx, ty, tz);
   #elseif (js && flight_esm)
-  flight._js.Geometry.translateMatrix4(out, source, tx, ty, tz);
+  flight._js._fn.Geometry.translateMatrix4(out, source, tx, ty, tz);
   #elseif cpp
-  flight._cpp.Geometry.translateMatrix4(out, source, tx, ty, tz);
+  flight._cpp._fn.Geometry.translateMatrix4(out, source, tx, ty, tz);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4431,11 +4431,11 @@ inline function translateMatrix4(out:flight.Matrix4, source:flight.Matrix4, tx:F
 
 inline function translateMatrixByVector(out:flight.Matrix, matrix:flight.Matrix, vector:flight.Vector2):Void {
   #if flight_hx
-  flight._hx.Geometry.translateMatrixByVector(out, matrix, vector);
+  flight._hx._fn.Geometry.translateMatrixByVector(out, matrix, vector);
   #elseif (js && flight_esm)
-  flight._js.Geometry.translateMatrixByVector(out, matrix, vector);
+  flight._js._fn.Geometry.translateMatrixByVector(out, matrix, vector);
   #elseif cpp
-  flight._cpp.Geometry.translateMatrixByVector(out, matrix, vector);
+  flight._cpp._fn.Geometry.translateMatrixByVector(out, matrix, vector);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4443,11 +4443,11 @@ inline function translateMatrixByVector(out:flight.Matrix, matrix:flight.Matrix,
 
 inline function translateMatrixByVectorXY(out:flight.Matrix, source:flight.Matrix, x:Float, y:Float):Void {
   #if flight_hx
-  flight._hx.Geometry.translateMatrixByVectorXY(out, source, x, y);
+  flight._hx._fn.Geometry.translateMatrixByVectorXY(out, source, x, y);
   #elseif (js && flight_esm)
-  flight._js.Geometry.translateMatrixByVectorXY(out, source, x, y);
+  flight._js._fn.Geometry.translateMatrixByVectorXY(out, source, x, y);
   #elseif cpp
-  flight._cpp.Geometry.translateMatrixByVectorXY(out, source, x, y);
+  flight._cpp._fn.Geometry.translateMatrixByVectorXY(out, source, x, y);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4455,11 +4455,11 @@ inline function translateMatrixByVectorXY(out:flight.Matrix, source:flight.Matri
 
 inline function transposeMatrix3(out:flight.Matrix3, source:flight.Matrix3):Void {
   #if flight_hx
-  flight._hx.Geometry.transposeMatrix3(out, source);
+  flight._hx._fn.Geometry.transposeMatrix3(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.transposeMatrix3(out, source);
+  flight._js._fn.Geometry.transposeMatrix3(out, source);
   #elseif cpp
-  flight._cpp.Geometry.transposeMatrix3(out, source);
+  flight._cpp._fn.Geometry.transposeMatrix3(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4467,11 +4467,11 @@ inline function transposeMatrix3(out:flight.Matrix3, source:flight.Matrix3):Void
 
 inline function transposeMatrix4(out:flight.Matrix4, source:flight.Matrix4):Void {
   #if flight_hx
-  flight._hx.Geometry.transposeMatrix4(out, source);
+  flight._hx._fn.Geometry.transposeMatrix4(out, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.transposeMatrix4(out, source);
+  flight._js._fn.Geometry.transposeMatrix4(out, source);
   #elseif cpp
-  flight._cpp.Geometry.transposeMatrix4(out, source);
+  flight._cpp._fn.Geometry.transposeMatrix4(out, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4479,11 +4479,11 @@ inline function transposeMatrix4(out:flight.Matrix4, source:flight.Matrix4):Void
 
 inline function unionAabb(out:{ max:flight.Vector3, min:flight.Vector3 }, a:{ max:flight.Vector3, min:flight.Vector3 }, b:{ max:flight.Vector3, min:flight.Vector3 }):Void {
   #if flight_hx
-  flight._hx.Geometry.unionAabb(out, a, b);
+  flight._hx._fn.Geometry.unionAabb(out, a, b);
   #elseif (js && flight_esm)
-  flight._js.Geometry.unionAabb(out, a, b);
+  flight._js._fn.Geometry.unionAabb(out, a, b);
   #elseif cpp
-  flight._cpp.Geometry.unionAabb(out, a, b);
+  flight._cpp._fn.Geometry.unionAabb(out, a, b);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4491,11 +4491,11 @@ inline function unionAabb(out:{ max:flight.Vector3, min:flight.Vector3 }, a:{ ma
 
 inline function writeMatrix3ToFloat32Array(out:js.lib.Float32Array, offset:Float, source:flight.Matrix3):Void {
   #if flight_hx
-  flight._hx.Geometry.writeMatrix3ToFloat32Array(out, offset, source);
+  flight._hx._fn.Geometry.writeMatrix3ToFloat32Array(out, offset, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.writeMatrix3ToFloat32Array(out, offset, source);
+  flight._js._fn.Geometry.writeMatrix3ToFloat32Array(out, offset, source);
   #elseif cpp
-  flight._cpp.Geometry.writeMatrix3ToFloat32Array(out, offset, source);
+  flight._cpp._fn.Geometry.writeMatrix3ToFloat32Array(out, offset, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4503,11 +4503,11 @@ inline function writeMatrix3ToFloat32Array(out:js.lib.Float32Array, offset:Float
 
 inline function writeMatrix4ToFloat32Array(out:js.lib.Float32Array, offset:Float, source:flight.Matrix4):Void {
   #if flight_hx
-  flight._hx.Geometry.writeMatrix4ToFloat32Array(out, offset, source);
+  flight._hx._fn.Geometry.writeMatrix4ToFloat32Array(out, offset, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.writeMatrix4ToFloat32Array(out, offset, source);
+  flight._js._fn.Geometry.writeMatrix4ToFloat32Array(out, offset, source);
   #elseif cpp
-  flight._cpp.Geometry.writeMatrix4ToFloat32Array(out, offset, source);
+  flight._cpp._fn.Geometry.writeMatrix4ToFloat32Array(out, offset, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4515,11 +4515,11 @@ inline function writeMatrix4ToFloat32Array(out:js.lib.Float32Array, offset:Float
 
 inline function writeMatrixToFloat32Array(out:js.lib.Float32Array, offset:Float, source:flight.Matrix):Void {
   #if flight_hx
-  flight._hx.Geometry.writeMatrixToFloat32Array(out, offset, source);
+  flight._hx._fn.Geometry.writeMatrixToFloat32Array(out, offset, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.writeMatrixToFloat32Array(out, offset, source);
+  flight._js._fn.Geometry.writeMatrixToFloat32Array(out, offset, source);
   #elseif cpp
-  flight._cpp.Geometry.writeMatrixToFloat32Array(out, offset, source);
+  flight._cpp._fn.Geometry.writeMatrixToFloat32Array(out, offset, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4527,11 +4527,11 @@ inline function writeMatrixToFloat32Array(out:js.lib.Float32Array, offset:Float,
 
 inline function writeVector2ToFloat32Array(out:js.lib.Float32Array, offset:Float, source:flight.Vector2):Void {
   #if flight_hx
-  flight._hx.Geometry.writeVector2ToFloat32Array(out, offset, source);
+  flight._hx._fn.Geometry.writeVector2ToFloat32Array(out, offset, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.writeVector2ToFloat32Array(out, offset, source);
+  flight._js._fn.Geometry.writeVector2ToFloat32Array(out, offset, source);
   #elseif cpp
-  flight._cpp.Geometry.writeVector2ToFloat32Array(out, offset, source);
+  flight._cpp._fn.Geometry.writeVector2ToFloat32Array(out, offset, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4539,11 +4539,11 @@ inline function writeVector2ToFloat32Array(out:js.lib.Float32Array, offset:Float
 
 inline function writeVector3ToFloat32Array(out:js.lib.Float32Array, offset:Float, source:flight.Vector3):Void {
   #if flight_hx
-  flight._hx.Geometry.writeVector3ToFloat32Array(out, offset, source);
+  flight._hx._fn.Geometry.writeVector3ToFloat32Array(out, offset, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.writeVector3ToFloat32Array(out, offset, source);
+  flight._js._fn.Geometry.writeVector3ToFloat32Array(out, offset, source);
   #elseif cpp
-  flight._cpp.Geometry.writeVector3ToFloat32Array(out, offset, source);
+  flight._cpp._fn.Geometry.writeVector3ToFloat32Array(out, offset, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end
@@ -4551,11 +4551,11 @@ inline function writeVector3ToFloat32Array(out:js.lib.Float32Array, offset:Float
 
 inline function writeVector4ToFloat32Array(out:js.lib.Float32Array, offset:Float, source:flight.Vector4):Void {
   #if flight_hx
-  flight._hx.Geometry.writeVector4ToFloat32Array(out, offset, source);
+  flight._hx._fn.Geometry.writeVector4ToFloat32Array(out, offset, source);
   #elseif (js && flight_esm)
-  flight._js.Geometry.writeVector4ToFloat32Array(out, offset, source);
+  flight._js._fn.Geometry.writeVector4ToFloat32Array(out, offset, source);
   #elseif cpp
-  flight._cpp.Geometry.writeVector4ToFloat32Array(out, offset, source);
+  flight._cpp._fn.Geometry.writeVector4ToFloat32Array(out, offset, source);
   #else
   #error "flight.Geometry: no backend — define flight_hx, or js+flight_esm, or target cpp.";
   #end

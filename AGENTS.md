@@ -201,13 +201,17 @@ unification and the fail-loud selector.
 
 **The ESM (web) path is real end to end.** `tools/backend-hx/generate.mjs` consumes flight-compiler's
 stable inventory (`lowerTypeScriptSource` → IR; signatures/types/export names, bodies ignored) and
-emits the checked-in `generated/` bindings — currently the whole **`@flighthq/geometry`** package
-(**380 of 398** functions bound; 18 skipped: `EntityConstruction` allocation-marker + one function-type
-alias) plus the **17 value types** its signatures reference (`Vector2/3/4`, `Matrix/3/4`, `Rectangle`,
-`Quaternion`, `Aabb`, …), resolved from `@flighthq/types`. The type mapper handles `Readonly`/
-`EntityWithoutRuntime` unwrap, `*Like` aliases, typed arrays → `js.lib.*`, `X|null` → `Null<X>`,
-string-literal unions → `String`, and inline object types → anonymous structures; anything else is
-skipped and reported (never a silent miscompile).
+emits the checked-in `generated/` bindings for the **whole Flight SDK** — every `@flighthq/*` package
+the `sdk` aggregate depends on (**154 packages**). One lowering pass builds a value-type registry and
+stashes each package's exported functions; the result is **1629 public modules** (146 free-function
+modules + 1519 value-type typedefs; ~36 carry both, since a package and a type often share a concept
+name like `shape`/`Shape` — folded into one module, case-insensitively). **4032 of 6376 functions
+bound (~63%)**; the rest are skipped and reported (top reasons: `EntityConstruction` allocation-marker,
+callback/function types, `Promise`, intersections, `Omit`/`Pick`, tuples). The type mapper handles
+`Readonly`/`EntityWithoutRuntime` unwrap, `*Like` aliases, typed arrays → `js.lib.*`, `X|null` →
+`Null<X>`, string-literal unions → `String`, inline object types → anonymous structures; a value-type
+field beyond the mapper degrades to `Dynamic` (keeps the binding compiling) rather than dropping the
+type. Nothing is a silent miscompile — the full surface type-checks (`gate:surface`).
 `tools/esm/EsmGenerator.hx` (the vendored ESM generator) makes Haxe emit static named imports; with
 `-dce full` + esbuild, `examples/web-geometry` runs against the **real `@flighthq/geometry`** and
 **tree-shakes** (an unused Flight function is absent from the bundle). Gated by `gate:surface` (the
