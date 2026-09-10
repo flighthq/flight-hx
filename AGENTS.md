@@ -45,19 +45,57 @@ mechanisms, because Haxe can alias a type but not a free function:
   classes. `flight.Geom.addVector2(...)` is a module-level free function; its `inline` body forwards
   to `flight._cpp.Geom.addVector2` / `flight._js.Geom.addVector2` / `flight._hx.Geom.addVector2`.
   Module-level (not class statics) so that free functions keep Flight's globally-searchable feel and
-  `import flight.Geom.*` yields unqualified calls; the hidden `_cpp`/`_js` classes are `extern`
+  a bare `import flight.Geom` yields unqualified calls to *all* its free functions (the `.*` wildcard
+  does **not** — it resolves to a type named `Geom`, which the module deliberately lacks; import the
+  module itself, or a named field `import flight.Geom.addVector2`); the hidden `_cpp`/`_js` classes are `extern`
   because that's where `@:native`/`@:jsRequire` binding actually works. `inline` makes the forwarder
   zero-cost.
 
 The selector **fails loud** on an unsupported target (`#error`), never silently resolves to nothing.
-Keep the guard define and the selector define identical (`cpp` guards and selects `_cpp`; a custom
-`flight_hx` does both for `_hx`).
+It keys on the **packaging pipeline, not the raw target** (see the host-axis section) — precedence:
+
+```
+flight_hx         -> _hx   // transpiled Flight: pure-VM targets, and cross-target hosts on web
+js && flight_esm  -> _js   // ESM Flight: hostWeb only (our ESM generator + bundler own the build)
+cpp               -> _cpp  // flight-cpp externs: native, unambiguous (every native host links it)
+js (no pipeline)  -> #error naming the two web choices
+```
+
+`flight_hx` comes first so it wins even on a `js`/`cpp` target — that is how a Lime/Clay web build
+(a `js` target) opts out of the ESM path. A bare `js` never auto-selects `_js`: without `flight_esm`
+it would emit non-tree-shakeable `require()`s into a foreign bundle, so it fails loud instead. `cpp`
+stays guard==selector (no native ambiguity); the `js` axis is the only one that needs a pipeline define.
 
 Rejected alternatives and why: a Haxe *reimplementation* (the archive — capped + bug-prone); OO
 abstracts/wrappers in the core (off-thesis, defeats tree-shaking, the marriage cost lands on hot
 value types); typedef-to-extern-class-with-statics for facades (can't wildcard-import through the
 alias, forces value types into extern classes). Fluent value ergonomics, if ever wanted, are an
 opt-in `using` extension or a facade like openfl-flight layered **on top** — never in the core.
+
+## The host axis is not the target axis
+
+A *host* is "who provides the platform (window / GL / audio / input) to Flight" — a different axis
+from the compile target, and the two must not be conflated. The platform layer comes from the
+*target's* Flight: **native** links flight-cpp's own host (SDL/etc.); **web** uses the browser.
+`hostLime` / `hostClay` are the exception — "run Flight, but let Lime/Clay provide the platform
+instead" — and they are **on-top integrations** (the same category as openfl-flight), consuming
+flight-hx as a normal `haxelib`, never part of the core binding.
+
+The trap: Lime and Clay are cross-target Haxe frameworks that each fan out to *both* `js` and `cpp`
+and **own their own output pipeline**. So a Lime web build reaches the `js` target without granting
+us the ESM-generator+bundler pipeline the `_js` binding needs — Haxe emits one JS module through one
+generator per invocation, and Lime's HTML5 packaging isn't a node-resolving bundler. Binding Flight
+as tree-shakeable ESM there is unreachable. Hence the pipeline-define selector above, and:
+
+- **hostWeb** (`js` + `flight_esm`): we own the whole compile→bundle pipeline → `_js`, tree-shaken.
+  **Bundler-grade pay-per-use on web is a hostWeb-only guarantee.**
+- **Any native host** (`cpp`): flight-cpp externs, linker-DCE'd. Pay-per-use holds regardless of host.
+- **Lime/Clay on web** (`js` + `flight_hx`): the transpiled `_hx` backend, compiled inline through
+  the host's own Haxe→JS. It *works* and keeps only Haxe `-dce full` — the "reach, not performance"
+  tier, now covering "any web build whose host owns the output pipeline," not just pure-VM targets.
+
+Teaching Lime/Clay's HTML5 build to consume Flight-as-external-ESM is a real future option, but it is
+a change to *their* build, not ours — never a v1 assumption.
 
 ## Pay-per-use survives the binding — but only under specific packaging
 
@@ -117,7 +155,9 @@ Keep it promotable:
 - `tools/esm/` — the vendored, purpose-built ESM generator (genes as reference, not a fork; scoped
   to this repo's generated vocabulary; pinned Haxe underneath).
 - `tests/gates/` — the gates below. `tests/haxe/` — consumer-style Haxe fixtures.
-- Build wiring (hxml + `@:buildXml` DCE flags), examples, host/oracle wiring.
+- `examples/` — layer examples, scoped per the Examples section (not a port of Flight's catalog).
+- Build wiring (hxml + `@:buildXml` DCE flags). Host *backends* are on-top integrations, not owned
+  here (see the host-axis section).
 
 ## Gates (fail-loud, per the Flight discipline)
 
@@ -129,6 +169,29 @@ Keep it promotable:
   silently diverges per target.
 - **Web-DCE gate** — build a sample, bundle it, assert imports are static `import { … }` and an
   unused Flight function is absent from the bundle. Defines "the ESM generator works precisely."
+
+## Examples: for the layer, not for Flight
+
+Examples here prove **the binding is faithful, ergonomic, and pays-per-use** — not "what Flight can
+do." Capability demos (a particle sim, a game) are the same idea in any language and belong
+**upstream in Flight**; hand-porting Flight's catalog would be a parallel suite that rots as Flight's
+evolves, in a repo whose thesis is *bind, don't reimplement*. Litmus test: *does this teach something
+about flight-hx that the same example in Flight's TypeScript wouldn't?* If it's just a cool demo →
+upstream. If it shows the Haxe surface, a pipeline linking, or the bundle staying small → here.
+
+Because the Haxe surface is generated from the same flight-compiler IR that produced Flight's TS, a
+Flight TS example is near-mechanically translatable to Haxe — so "Flight example N in Haxe" is a
+*generated artifact on demand*, not a hand-maintained parallel suite.
+
+Tiers (host per the host-axis rule — core examples use no host or Flight's own; never Lime/Clay):
+
+- `examples/headless/` — no host; `flight.*` calls under all backends. The bulk lives here.
+- `examples/fallback-hx/` — the `_hx` fallback compiling+running on a `js` target (the Lime/Clay-web
+  scenario) via a define flip, **without** a real Lime dependency.
+- `examples/window-native/` — Flight's own host, `cpp` → `_cpp`; the one real end-to-end app on
+  native (feeds the behavioral gate). Stubbed until the `_cpp` backend lands.
+- `examples/window-web/` — Flight's own host, `js` + `flight_esm` → `_js`; the same app proving the
+  ESM/bundle/DCE path (feeds the web-DCE gate). Stubbed until the `_js` backend + `tools/esm` land.
 
 ## Status
 

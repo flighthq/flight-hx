@@ -17,6 +17,16 @@ class ProofOfShape {
     final len = flight.Geom.lengthVector2({x: 3.0, y: 4.0}); // qualified free function
     if (Math.abs(len - 5.0) > 1e-9) throw 'lengthVector2 wrong: $len';
 
-    Sys.println('PROOF_OF_SHAPE_OK: flight.* unified over the active backend, structural type + free-function facade');
+    report('PROOF_OF_SHAPE_OK: flight.* unified over the active backend, structural type + free-function facade');
+  }
+
+  // Portable output: `Sys` is absent on the js target, which the Lime/Clay-web
+  // fallback (js + flight_hx) exercises. `trace` maps to console.log there.
+  static inline function report(msg:String):Void {
+    #if sys
+    Sys.println(msg);
+    #else
+    trace(msg);
+    #end
   }
 }

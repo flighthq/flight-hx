@@ -1,0 +1,9 @@
+# Headless example on the transpiled-Haxe backend (no host, no platform link).
+# Paths are relative to the repo root — run from there: `node tools/haxe.mjs examples/headless/build.hxml`.
+# Swap the pipeline define to retarget: `-D flight_esm` + `-js out.js` for hostWeb,
+# or `-cpp out` on a cpp toolchain for native — the source does not change.
+-cp src
+-cp examples/headless
+--main Headless
+-D flight_hx
+--interp
