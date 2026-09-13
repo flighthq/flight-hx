@@ -33,4 +33,4 @@ typedef NodeAny = Node<Dynamic>;
 
 final NodeKind:String = "Node";
 
-final NullScene3D:Dynamic = new js.lib.Symbol("NullScene3D");
+final NullScene3D:Dynamic = flight._internal._Symbol.create("NullScene3D");

@@ -26,8 +26,8 @@ function rgbToHsl(out:HslColor, color:Float):HslColor {
   final r:Float = (Std.int((Std.int(color) >>> Std.int(24))) & Std.int(255)) / 255;
   final g:Float = (Std.int((Std.int(color) >>> Std.int(16))) & Std.int(255)) / 255;
   final b:Float = (Std.int((Std.int(color) >>> Std.int(8))) & Std.int(255)) / 255;
-  final max:Dynamic = Math.max(Math.max(r, g), b);
-  final min:Dynamic = Math.min(Math.min(r, g), b);
+  final max:Dynamic = flight._internal._Math.max(flight._internal._Math.max(r, g), b);
+  final min:Dynamic = flight._internal._Math.min(flight._internal._Math.min(r, g), b);
   final l:Float = (max + min) / 2;
   if (max == min) {
     out[0] = 0;

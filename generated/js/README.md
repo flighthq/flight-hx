@@ -6,7 +6,7 @@ Do not edit it by hand.
 
 The compiler emitted 1635 of 2855 dependency-closed source modules
 from 154 SDK packages into 2096 Haxe files. The flight-hx integration added 2016 public type aliases so the extern tree is self-contained. The contract filter removed 113 functions and 123 values that the package source does not re-export from `/contract`. It refused
-1220 modules; every refusal is recorded in `refusals.json`.
+1220 modules; every refusal is recorded in `refusals.json`. Public runtime-export coverage and the compiler-emitted type inventory are recorded in `public-surface.json`.
 
 Regenerate this mode from the flight-hx repository root:
 

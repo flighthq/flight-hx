@@ -1,16 +1,16 @@
 // Bindings-existence gate: the validation type-checking CANNOT do. A Haxe @:jsImport extern is an
 // unchecked promise — it can name an export that doesn't exist, or bind to the wrong package, and the
-// compiler will never notice. This gate loads the REAL Flight ESM for every generated function module
-// and asserts each bound static actually resolves to an exported function of that package. It covers
-// the whole surface (all ~4000 bound functions), not the handful an example calls.
+// compiler will never notice. This gate loads the REAL Flight ESM for every generated contract
+// holder and asserts that each bound function and value resolves to the expected kind of export.
 //
 // Types are not checked here: Flight's types are TS interfaces, erased from the ESM output, so there
 // is nothing to resolve at runtime — their fidelity rests on the shared inventory + gate:surface.
 // Skips (labeled) without the rehydrated + built dependencies.
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import path, { join } from 'node:path';
 import process from 'node:process';
+import { collectExternSurface } from '../../tools/backend-hx/haxeSurface.mjs';
 import { bundleFlightJs } from '../../tools/esm/bundle.mjs';
 import { webBuildBlockedReason } from '../../tools/esm/buildWeb.mjs';
 
@@ -21,37 +21,51 @@ if (blocked) {
 }
 
 const repoRoot = join(import.meta.dirname, '..', '..');
-const fnDir = join(repoRoot, 'generated/js/flight/_js/_fn');
-
-// Parse each generated function-module backing: its import specifier + static function names.
-const modules = [];
-for (const file of readdirSync(fnDir).filter((f) => f.endsWith('.hx'))) {
-  const text = readFileSync(join(fnDir, file), 'utf8');
-  const specifier = text.match(/@:(?:jsImport|jsRequire)\("([^"]+)"\)/)?.[1];
-  const names = [...text.matchAll(/static function (\w+)\(/g)].map((m) => m[1]);
-  if (specifier && names.length) modules.push({ module: file.replace(/\.hx$/, ''), specifier, names });
+const externRoot = join(repoRoot, 'generated/js');
+const surface = collectExternSurface(
+  filesUnder(externRoot)
+    .filter((filename) => filename.endsWith('.hx'))
+    .map((filename) => ({
+      contents: readFileSync(filename, 'utf8'),
+      path: path.relative(externRoot, filename).split(path.sep).join('/'),
+    })),
+);
+const declarationsByPackage = new Map();
+for (const declaration of [...surface.functions, ...surface.values]) {
+  const declarations = declarationsByPackage.get(declaration.sourcePackage) ?? [];
+  declarations.push(declaration);
+  declarationsByPackage.set(declaration.sourcePackage, declarations);
 }
 
 let checkedFns = 0;
+let checkedValues = 0;
 const problems = [];
-for (const m of modules) {
+for (const [packageName, declarations] of [...declarationsByPackage].sort(([left], [right]) => left.localeCompare(right))) {
   // Bundle a re-export of the real package (Flight dist is bundler-targeted ESM), import, enumerate.
-  const entry = join(tmpdir(), `flight-hx-exists-${m.module}.entry.mjs`);
-  const out = join(tmpdir(), `flight-hx-exists-${m.module}.mjs`);
+  const packageSlug = packageName.slice('@flighthq/'.length);
+  const specifier = `${packageName}/contract`;
+  const entry = join(tmpdir(), `flight-hx-exists-${packageSlug}.entry.mjs`);
+  const out = join(tmpdir(), `flight-hx-exists-${packageSlug}.mjs`);
   try {
-    writeEntry(entry, m.specifier);
+    writeEntry(entry, specifier);
     await bundleFlightJs({ entry, outfile: out, format: 'esm', platform: 'neutral' });
-    const ns = (await import(`${out}?t=${checkedFns}`)).ns;
-    for (const name of m.names) {
-      checkedFns++;
-      if (typeof ns[name] !== 'function')
+    const ns = (await import(`${out}?t=${checkedFns + checkedValues}`)).ns;
+    for (const declaration of declarations) {
+      if (declaration.kind === 'function') {
+        checkedFns += 1;
+        if (typeof ns[declaration.sourceName] === 'function') continue;
         problems.push(
-          `${m.specifier} · ${name} (${ns[name] === undefined ? 'missing' : 'not a function: ' + typeof ns[name]})`,
+          `${specifier} · ${declaration.sourceName} (${ns[declaration.sourceName] === undefined ? 'missing' : `not a function: ${typeof ns[declaration.sourceName]}`})`,
         );
+      } else {
+        checkedValues += 1;
+        if (Object.hasOwn(ns, declaration.sourceName)) continue;
+        problems.push(`${specifier} · ${declaration.sourceName} (missing value export)`);
+      }
     }
   } catch (error) {
     problems.push(
-      `${m.specifier}: could not load real package — ${(error?.errors ?? [{ text: error?.message }]).map((e) => e.text).join('; ')}`,
+      `${specifier}: could not load real package — ${(error?.errors ?? [{ text: error?.message }]).map((e) => e.text).join('; ')}`,
     );
   }
 }
@@ -69,5 +83,12 @@ if (problems.length) {
   process.exit(1);
 }
 process.stdout.write(
-  `bindings-existence gate: all ${checkedFns} generated functions across ${modules.length} modules resolve to real Flight exports.\n`,
+  `bindings-existence gate: all ${checkedFns} functions and ${checkedValues} values across ${declarationsByPackage.size} package contracts resolve to real Flight exports.\n`,
 );
+
+function filesUnder(directory) {
+  return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const filename = join(directory, entry.name);
+    return entry.isDirectory() ? filesUnder(filename) : [filename];
+  });
+}

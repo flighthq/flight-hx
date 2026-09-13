@@ -8,14 +8,14 @@ function computeBoxBlurPassRadius(sigma:Float, passes:Float, pass:Float):Float {
   final lowerWidth:Float = computeBoxBlurLowerWidth(sigma, passes);
   final lowerCount:Float = computeBoxBlurLowerPassCount(sigma, passes, lowerWidth);
   final width:Float = (pass < lowerCount) ? lowerWidth : (lowerWidth + 2);
-  return Math.max(0, ((width - 1) / 2));
+  return flight._internal._Math.max(0, ((width - 1) / 2));
 }
 
 function computeBoxBlurRadius(sigma:Float, passes:Float):Float {
   if (sigma <= 0) {
     return 0;
   }
-  return Math.max(0, Math.round(((- 1 + Math.sqrt((1 + (((12 * sigma) * sigma) / passes)))) / 2)));
+  return flight._internal._Math.max(0, flight._internal._Math.round(((- 1 + flight._internal._Math.sqrt((1 + (((12 * sigma) * sigma) / passes)))) / 2)));
 }
 
 function computeGaussianSigmaForBlurRadius(radius:Float, passes:Float):Float {
@@ -23,11 +23,11 @@ function computeGaussianSigmaForBlurRadius(radius:Float, passes:Float):Float {
     return 0;
   }
   final width:Float = (2 * radius) + 1;
-  return Math.sqrt((((passes * width) * width) / 12));
+  return flight._internal._Math.sqrt((((passes * width) * width) / 12));
 }
 
 function computeBoxBlurLowerWidth(sigma:Float, passes:Float):Float {
-  var width:Dynamic = Math.floor(Math.sqrt(((((12 * sigma) * sigma) / passes) + 1)));
+  var width:Dynamic = flight._internal._Math.floor(flight._internal._Math.sqrt(((((12 * sigma) * sigma) / passes) + 1)));
   if ((width % 2) == 0) {
     width -= 1;
   }
@@ -35,5 +35,5 @@ function computeBoxBlurLowerWidth(sigma:Float, passes:Float):Float {
 }
 
 function computeBoxBlurLowerPassCount(sigma:Float, passes:Float, lowerWidth:Float):Float {
-  return Math.round(((((12 * sigma) * sigma) - (passes * (((lowerWidth * lowerWidth) + (4 * lowerWidth)) + 3))) / ((- 4 * lowerWidth) - 4)));
+  return flight._internal._Math.round(((((12 * sigma) * sigma) - (passes * (((lowerWidth * lowerWidth) + (4 * lowerWidth)) + 3))) / ((- 4 * lowerWidth) - 4)));
 }

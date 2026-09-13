@@ -20,11 +20,11 @@ function easeCubicBezier(x1:Float, y1:Float, x2:Float, y2:Float):EasingFunction 
     while (i < 8) {
       {
         final xError:Float = sampleX(s) - x;
-        if (Math.abs(xError) < epsilon) {
+        if (flight._internal._Math.abs(xError) < epsilon) {
           return s;
         }
         final derivative:Float = sampleDerivativeX(s);
-        if (Math.abs(derivative) < 0.000001) {
+        if (flight._internal._Math.abs(derivative) < 0.000001) {
           break;
         }
         s -= (xError / derivative);
@@ -43,7 +43,7 @@ function easeCubicBezier(x1:Float, y1:Float, x2:Float, y2:Float):EasingFunction 
   }
   while (low < high) {
     final sampled:Float = sampleX(s);
-    if (Math.abs((sampled - x)) < epsilon) {
+    if (flight._internal._Math.abs((sampled - x)) < epsilon) {
       return s;
     }
     if (x > sampled) {

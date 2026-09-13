@@ -48,4 +48,4 @@ typedef Node2DRuntimeFactory<R:Node2DRuntime> = NodeRuntimeFactory<R>;
 
 final DisplayObjectKind:String = "DisplayObject";
 
-final Node2DTraitsKey:Dynamic = new js.lib.Symbol("Node2DTraits");
+final Node2DTraitsKey:Dynamic = flight._internal._Symbol.create("Node2DTraits");

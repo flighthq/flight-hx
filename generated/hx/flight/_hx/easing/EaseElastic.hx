@@ -7,7 +7,7 @@ final easeInElastic:EasingFunction = function(t:Float) {
   if ((t == 0) || (t == 1)) {
     return t;
   }
-  return - (Math.pow(2, (10 * (t -= 1))) * Math.sin((((t - s) * (2 * Math.PI)) / p)));
+  return - (flight._internal._Math.pow(2, (10 * (t -= 1))) * flight._internal._Math.sin((((t - s) * (2 * flight._internal._Math.PI)) / p)));
 };
 
 final easeInOutElastic:EasingFunction = function(t:Float) {
@@ -15,22 +15,22 @@ final easeInOutElastic:EasingFunction = function(t:Float) {
     return t;
   }
   if ((t *= 2) < 1) {
-    return - 0.5 * (Math.pow(2, (10 * (t -= 1))) * Math.sin((((t - s2) * (2 * Math.PI)) / p2)));
+    return - 0.5 * (flight._internal._Math.pow(2, (10 * (t -= 1))) * flight._internal._Math.sin((((t - s2) * (2 * flight._internal._Math.PI)) / p2)));
   }
-  return ((0.5 * Math.pow(2, (-10 * (t -= 1)))) * Math.sin((((t - s2) * (2 * Math.PI)) / p2))) + 1;
+  return ((0.5 * flight._internal._Math.pow(2, (-10 * (t -= 1)))) * flight._internal._Math.sin((((t - s2) * (2 * flight._internal._Math.PI)) / p2))) + 1;
 };
 
 final easeOutElastic:EasingFunction = function(t:Float) {
   if ((t == 0) || (t == 1)) {
     return t;
   }
-  return (Math.pow(2, (- 10 * t)) * Math.sin((((t - s) * (2 * Math.PI)) / p))) + 1;
+  return (flight._internal._Math.pow(2, (- 10 * t)) * flight._internal._Math.sin((((t - s) * (2 * flight._internal._Math.PI)) / p))) + 1;
 };
 
 final p:Float = 0.4;
 
 final p2:Float = 0.45;
 
-final s:Float = ((p / (2 * Math.PI)) * Math.asin(1));
+final s:Float = ((p / (2 * flight._internal._Math.PI)) * flight._internal._Math.asin(1));
 
-final s2:Float = ((p2 / (2 * Math.PI)) * Math.asin(1));
+final s2:Float = ((p2 / (2 * flight._internal._Math.PI)) * flight._internal._Math.asin(1));

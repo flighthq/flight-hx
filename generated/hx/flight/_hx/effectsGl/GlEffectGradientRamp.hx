@@ -35,7 +35,7 @@ function buildRampData(colors:Array<Float>, alphas:Array<Float>, ratios:Array<Fl
           r = (Std.int((Std.int(c) >> Std.int(16))) & Std.int(255));
           g = (Std.int((Std.int(c) >> Std.int(8))) & Std.int(255));
           b = (Std.int(c) & Std.int(255));
-          a = Math.round((alphas[0] * 255));
+          a = flight._internal._Math.round((alphas[0] * 255));
         }
         else {
           if (t >= ratios[Std.int((ratios.length - 1))]) {
@@ -43,7 +43,7 @@ function buildRampData(colors:Array<Float>, alphas:Array<Float>, ratios:Array<Fl
             r = (Std.int((Std.int(c_2) >> Std.int(16))) & Std.int(255));
             g = (Std.int((Std.int(c_2) >> Std.int(8))) & Std.int(255));
             b = (Std.int(c_2) & Std.int(255));
-            a = Math.round((alphas[Std.int((alphas.length - 1))] * 255));
+            a = flight._internal._Math.round((alphas[Std.int((alphas.length - 1))] * 255));
           }
           else {
             {
@@ -56,10 +56,10 @@ function buildRampData(colors:Array<Float>, alphas:Array<Float>, ratios:Array<Fl
                     final blend:Float = (r1 > r0) ? ((t - r0) / (r1 - r0)) : 0;
                     final c0:Float = colors[Std.int(j)];
                     final c1:Float = colors[Std.int((j + 1))];
-                    r = Math.round((((Std.int((Std.int(c0) >> Std.int(16))) & Std.int(255)) * (1 - blend)) + ((Std.int((Std.int(c1) >> Std.int(16))) & Std.int(255)) * blend)));
-                    g = Math.round((((Std.int((Std.int(c0) >> Std.int(8))) & Std.int(255)) * (1 - blend)) + ((Std.int((Std.int(c1) >> Std.int(8))) & Std.int(255)) * blend)));
-                    b = Math.round((((Std.int(c0) & Std.int(255)) * (1 - blend)) + ((Std.int(c1) & Std.int(255)) * blend)));
-                    a = Math.round((((alphas[Std.int(j)] * 255) * (1 - blend)) + ((alphas[Std.int((j + 1))] * 255) * blend)));
+                    r = flight._internal._Math.round((((Std.int((Std.int(c0) >> Std.int(16))) & Std.int(255)) * (1 - blend)) + ((Std.int((Std.int(c1) >> Std.int(16))) & Std.int(255)) * blend)));
+                    g = flight._internal._Math.round((((Std.int((Std.int(c0) >> Std.int(8))) & Std.int(255)) * (1 - blend)) + ((Std.int((Std.int(c1) >> Std.int(8))) & Std.int(255)) * blend)));
+                    b = flight._internal._Math.round((((Std.int(c0) & Std.int(255)) * (1 - blend)) + ((Std.int(c1) & Std.int(255)) * blend)));
+                    a = flight._internal._Math.round((((alphas[Std.int(j)] * 255) * (1 - blend)) + ((alphas[Std.int((j + 1))] * 255) * blend)));
                     break;
                   }
                 }

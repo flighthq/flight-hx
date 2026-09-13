@@ -17,7 +17,7 @@ function quantize(value:Float, steps:Float, min:Float, max:Float):Float {
     return min;
   }
   final t:Float = (value - min) / (max - min);
-  return min + ((Math.round((Math.max(0, Math.min(1, t)) * steps)) / steps) * (max - min));
+  return min + ((flight._internal._Math.round((flight._internal._Math.max(0, flight._internal._Math.min(1, t)) * steps)) / steps) * (max - min));
 }
 
 function sign(value:Float):Float {

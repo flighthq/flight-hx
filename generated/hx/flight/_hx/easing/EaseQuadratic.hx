@@ -3,7 +3,7 @@ package flight._hx.easing;
 
 import flight._hx.types.EasingFunction.EasingFunction;
 
-final easeInOutQuadratic:EasingFunction = function(t:Float) return ((t < 0.5) ? ((2 * t) * t) : (1 - (Math.pow(((- 2 * t) + 2), 2) / 2)));
+final easeInOutQuadratic:EasingFunction = function(t:Float) return ((t < 0.5) ? ((2 * t) * t) : (1 - (flight._internal._Math.pow(((- 2 * t) + 2), 2) / 2)));
 
 final easeInQuadratic:EasingFunction = function(t:Float) return (t * t);
 

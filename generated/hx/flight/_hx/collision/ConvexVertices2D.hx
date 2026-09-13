@@ -24,8 +24,8 @@ function writeObbVertices(obb:CollisionObb2D, out:flight._internal._Float64Array
   final cy:Float = obb.y;
   final halfW:Float = obb.halfW;
   final halfH:Float = obb.halfH;
-  final cos:Dynamic = Math.cos(obb.rotation);
-  final sin:Dynamic = Math.sin(obb.rotation);
+  final cos:Dynamic = flight._internal._Math.cos(obb.rotation);
+  final sin:Dynamic = flight._internal._Math.sin(obb.rotation);
   final wx:Float = cos * halfW;
   final wy:Float = sin * halfW;
   final hx:Float = - sin * halfH;

@@ -11,7 +11,7 @@
       "flight-hx-type-alias-value-collision/1",
       "flight-hx-source-default-type-parameters/1",
       "flight-hx-unique-symbol-void-brand/1",
-      "flight-hx-symbol-self-call-constructor/1",
+      "flight-hx-symbol-runtime-shim/1",
       "flight-hx-standard-library-spellings/1",
       "flight-hx-constant-default-arguments/1",
       "flight-hx-array-api/1",
@@ -25,7 +25,8 @@
       "flight-hx-typed-array-integer-write/1",
       "flight-hx-callable-generic-constraint/1",
       "flight-hx-erased-entity-constraint/1",
-      "flight-hx-promise-void-carrier/1"
+      "flight-hx-promise-void-carrier/1",
+      "flight-hx-transpiled-public-backend/1"
     ],
     "emissionMode": "transpile",
     "repository": "https://github.com/flighthq/flight-compiler",
@@ -958,6 +959,29 @@
       "sourceModules": 4
     }
   ],
+  "runtime": {
+    "constructorAbi": "flight-runtime-constructor-abi/1",
+    "externalSymbols": "flight-runtime-contract/2",
+    "profiles": {
+      "javascript": {
+        "coverage": "complete",
+        "implementation": "native-ecmascript"
+      },
+      "portable": {
+        "capabilities": [
+          "float32-array",
+          "map",
+          "set",
+          "symbol",
+          "task"
+        ],
+        "coverage": "host-free-subset",
+        "taskDelivery": "immediate-no-portable-microtask-queue",
+        "weakMapRetention": "strong-fallback"
+      }
+    },
+    "taskAbi": "flight-runtime-task-capability-abi/1"
+  },
   "source": {
     "package": "@flighthq/sdk",
     "repository": "https://github.com/flighthq/flight",
@@ -970,8 +994,19 @@
     "packages": 154,
     "refusedModules": 1756,
     "sourceModules": 2866,
-    "compatibilityFiles": 0,
-    "generatedFiles": 1110,
-    "publicFacadeFiles": 0
+    "compatibilityFiles": 4085,
+    "generatedFiles": 5195,
+    "publicFacadeFiles": 0,
+    "publicRuntimeSurface": {
+      "publicFunctions": 2625,
+      "publicTypes": 2016,
+      "publicValues": 468,
+      "supportedFunctions": 175,
+      "supportedTypes": 2016,
+      "supportedValues": 345,
+      "unavailableFunctions": 2450,
+      "unavailableTypes": 0,
+      "unavailableValues": 123
+    }
   }
 }

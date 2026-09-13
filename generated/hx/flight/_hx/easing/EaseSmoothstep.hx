@@ -10,7 +10,7 @@ final easeSmoothstep:EasingFunction = function(t:Float) return ((t * t) * (3 - (
 
 function easeSmoothstepRange(edge0:Float, edge1:Float):ScalarRemap {
   return function(x:Float) {
-  final t:Dynamic = Math.max(0, Math.min(1, ((x - edge0) / (edge1 - edge0))));
+  final t:Dynamic = flight._internal._Math.max(0, flight._internal._Math.min(1, ((x - edge0) / (edge1 - edge0))));
   return (t * t) * (3 - (2 * t));
 };
 }

@@ -2,7 +2,7 @@
 package flight._hx.math;
 
 function factorial(n:Float):Float {
-  if (! (function(numberValue:Float) return Math.isFinite(numberValue) && Math.ffloor(numberValue) == numberValue)(n) || (n < 0)) {
+  if (! (function(numberValue:Float) return flight._internal._Math.isFinite(numberValue) && flight._internal._Math.ffloor(numberValue) == numberValue)(n) || (n < 0)) {
     throw new haxe.Exception("factorial: n must be a non-negative integer");
   }
   if ((n == 0) || (n == 1)) {
@@ -20,11 +20,11 @@ function factorial(n:Float):Float {
 }
 
 function gcd(a:Float, b:Float):Float {
-  if (! Math.isFinite(a) || ! Math.isFinite(b)) {
+  if (! flight._internal._Math.isFinite(a) || ! flight._internal._Math.isFinite(b)) {
     throw new haxe.Exception("gcd: arguments must be finite");
   }
-  a = Math.abs(flight._internal._Math.trunc(a));
-  b = Math.abs(flight._internal._Math.trunc(b));
+  a = flight._internal._Math.abs(flight._internal._Math.trunc(a));
+  b = flight._internal._Math.abs(flight._internal._Math.trunc(b));
   if ((a == 0) && (b == 0)) {
     throw new haxe.Exception("gcd: both arguments must not be 0");
   }
@@ -50,5 +50,5 @@ function isOdd(n:Float):Bool {
 
 function lcm(a:Float, b:Float):Float {
   final g:Float = gcd(a, b);
-  return (Math.abs(flight._internal._Math.trunc(a)) / g) * Math.abs(flight._internal._Math.trunc(b));
+  return (flight._internal._Math.abs(flight._internal._Math.trunc(a)) / g) * flight._internal._Math.abs(flight._internal._Math.trunc(b));
 }

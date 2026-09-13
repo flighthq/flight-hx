@@ -30,7 +30,7 @@ function getTextLineBreaks(out:Array<Float>, text:String):Void {
     if ((lf == - 1) && (cr == - 1)) {
       break;
     }
-    index = ((cr == - 1) ? lf : ((lf == - 1) ? cr : Math.min(cr, lf)));
+    index = ((cr == - 1) ? lf : ((lf == - 1) ? cr : flight._internal._Math.min(cr, lf)));
     out.push(index);
   }
 }

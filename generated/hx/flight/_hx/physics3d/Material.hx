@@ -2,9 +2,9 @@
 package flight._hx.physics3d;
 
 function mixPhysics3DFriction(first:Float, second:Float):Float {
-  return Math.sqrt(first) * Math.sqrt(second);
+  return flight._internal._Math.sqrt(first) * flight._internal._Math.sqrt(second);
 }
 
 function mixPhysics3DRestitution(first:Float, second:Float):Float {
-  return Math.max(first, second);
+  return flight._internal._Math.max(first, second);
 }

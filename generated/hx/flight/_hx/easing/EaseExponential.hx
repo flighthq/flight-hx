@@ -3,13 +3,13 @@ package flight._hx.easing;
 
 import flight._hx.types.EasingFunction.EasingFunction;
 
-final easeInExponential:EasingFunction = function(t:Float) return ((t == 0) ? 0 : Math.pow(2, ((10 * t) - 10)));
+final easeInExponential:EasingFunction = function(t:Float) return ((t == 0) ? 0 : flight._internal._Math.pow(2, ((10 * t) - 10)));
 
 final easeInOutExponential:EasingFunction = function(t:Float) {
   if ((t == 0) || (t == 1)) {
     return t;
   }
-  return (t < 0.5) ? (Math.pow(2, ((20 * t) - 10)) / 2) : ((2 - Math.pow(2, ((- 20 * t) + 10))) / 2);
+  return (t < 0.5) ? (flight._internal._Math.pow(2, ((20 * t) - 10)) / 2) : ((2 - flight._internal._Math.pow(2, ((- 20 * t) + 10))) / 2);
 };
 
-final easeOutExponential:EasingFunction = function(t:Float) return ((t == 1) ? 1 : (1 - Math.pow(2, (- 10 * t))));
+final easeOutExponential:EasingFunction = function(t:Float) return ((t == 1) ? 1 : (1 - flight._internal._Math.pow(2, (- 10 * t))));

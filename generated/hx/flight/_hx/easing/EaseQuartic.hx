@@ -3,8 +3,8 @@ package flight._hx.easing;
 
 import flight._hx.types.EasingFunction.EasingFunction;
 
-final easeInOutQuartic:EasingFunction = function(t:Float) return ((t < 0.5) ? ((((8 * t) * t) * t) * t) : (1 - (Math.pow(((- 2 * t) + 2), 4) / 2)));
+final easeInOutQuartic:EasingFunction = function(t:Float) return ((t < 0.5) ? ((((8 * t) * t) * t) * t) : (1 - (flight._internal._Math.pow(((- 2 * t) + 2), 4) / 2)));
 
 final easeInQuartic:EasingFunction = function(t:Float) return (((t * t) * t) * t);
 
-final easeOutQuartic:EasingFunction = function(t:Float) return (1 - Math.pow((1 - t), 4));
+final easeOutQuartic:EasingFunction = function(t:Float) return (1 - flight._internal._Math.pow((1 - t), 4));

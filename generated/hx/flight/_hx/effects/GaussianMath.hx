@@ -2,27 +2,27 @@
 package flight._hx.effects;
 
 function computeGaussianRadiusFromSigma(sigma:Float):Float {
-  return Math.ceil((3 * Math.max(0, sigma)));
+  return flight._internal._Math.ceil((3 * flight._internal._Math.max(0, sigma)));
 }
 
 function computeGaussianSigmaFromRadius(radius:Float):Float {
-  return Math.max(0, radius) / 3;
+  return flight._internal._Math.max(0, radius) / 3;
 }
 
 function computeSeparableBlurPassCount(samples:Null<Float>):Float {
-  return Math.max(1, Math.round((samples ?? 1)));
+  return flight._internal._Math.max(1, flight._internal._Math.round((samples ?? 1)));
 }
 
 function createGaussianKernelWeights(radius:Float, sigma:Float, out:flight._internal._Float32Array):Float {
-  final r:Dynamic = Math.max(0, Math.ceil(radius));
-  final s:Dynamic = Math.max(0.000001, sigma);
+  final r:Dynamic = flight._internal._Math.max(0, flight._internal._Math.ceil(radius));
+  final s:Dynamic = flight._internal._Math.max(0.000001, sigma);
   final twoSigmaSq:Float = (2 * s) * s;
   var sum:Float = 0;
   {
     var i:Float = 0;
     while (i <= r) {
       {
-        final w:Dynamic = Math.exp((- (i * i) / twoSigmaSq));
+        final w:Dynamic = flight._internal._Math.exp((- (i * i) / twoSigmaSq));
         out[Std.int(i)] = w;
         sum += ((i == 0) ? w : (2 * w));
       }

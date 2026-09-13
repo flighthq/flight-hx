@@ -8,12 +8,12 @@ function randomBool(random:RandomSource, probability:Float = 0.5):Bool {
 }
 
 function randomInt(random:RandomSource, min:Float, max:Float):Float {
-  final lo:Dynamic = Math.floor(min);
-  final hi:Dynamic = Math.floor(max);
+  final lo:Dynamic = flight._internal._Math.floor(min);
+  final hi:Dynamic = flight._internal._Math.floor(max);
   if (lo > hi) {
     throw new haxe.Exception("randomInt: min must be <= max");
   }
-  return lo + Math.floor((random() * ((hi - lo) + 1)));
+  return lo + flight._internal._Math.floor((random() * ((hi - lo) + 1)));
 }
 
 function randomRange(random:RandomSource, min:Float, max:Float):Float {

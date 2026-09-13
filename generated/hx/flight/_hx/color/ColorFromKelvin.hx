@@ -2,7 +2,7 @@
 package flight._hx.color;
 
 function colorFromKelvin(kelvin:Float):Float {
-  final temp:Float = Math.max(1000, Math.min(40000, kelvin)) / 100;
+  final temp:Float = flight._internal._Math.max(1000, flight._internal._Math.min(40000, kelvin)) / 100;
   var r:Float;
   var g:Float;
   var b:Float;
@@ -10,13 +10,13 @@ function colorFromKelvin(kelvin:Float):Float {
     r = 255;
   }
   else {
-    r = (329.698727446 * Math.pow((temp - 60), - 0.1332047592));
+    r = (329.698727446 * flight._internal._Math.pow((temp - 60), - 0.1332047592));
   }
   if (temp <= 66) {
-    g = ((99.4708025861 * Math.log(temp)) - 161.1195681661);
+    g = ((99.4708025861 * flight._internal._Math.log(temp)) - 161.1195681661);
   }
   else {
-    g = (288.1221695283 * Math.pow((temp - 60), - 0.0755148492));
+    g = (288.1221695283 * flight._internal._Math.pow((temp - 60), - 0.0755148492));
   }
   if (temp >= 66) {
     b = 255;
@@ -26,11 +26,11 @@ function colorFromKelvin(kelvin:Float):Float {
       b = 0;
     }
     else {
-      b = ((138.5177312231 * Math.log((temp - 10))) - 305.0447927307);
+      b = ((138.5177312231 * flight._internal._Math.log((temp - 10))) - 305.0447927307);
     }
   }
-  final ri:Dynamic = Math.max(0, Math.min(255, Math.round(r)));
-  final gi:Dynamic = Math.max(0, Math.min(255, Math.round(g)));
-  final bi:Dynamic = Math.max(0, Math.min(255, Math.round(b)));
+  final ri:Dynamic = flight._internal._Math.max(0, flight._internal._Math.min(255, flight._internal._Math.round(r)));
+  final gi:Dynamic = flight._internal._Math.max(0, flight._internal._Math.min(255, flight._internal._Math.round(g)));
+  final bi:Dynamic = flight._internal._Math.max(0, flight._internal._Math.min(255, flight._internal._Math.round(b)));
   return Std.int((Std.int((Std.int((Std.int((Std.int(ri) << Std.int(24))) | Std.int((Std.int(gi) << Std.int(16))))) | Std.int((Std.int(bi) << Std.int(8))))) | Std.int(255))) >>> Std.int(0);
 }

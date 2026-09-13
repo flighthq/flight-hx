@@ -5,10 +5,10 @@ final CIRCLE_KAPPA:Float = 0.5522847498307936;
 
 final EPSILON:Float = 0.000001;
 
-final TAU:Float = (Math.PI * 2);
+final TAU:Float = (flight._internal._Math.PI * 2);
 
-final HALF_PI:Float = (Math.PI / 2);
+final HALF_PI:Float = (flight._internal._Math.PI / 2);
 
-final DEG_TO_RAD:Float = (Math.PI / 180);
+final DEG_TO_RAD:Float = (flight._internal._Math.PI / 180);
 
-final RAD_TO_DEG:Float = (180 / Math.PI);
+final RAD_TO_DEG:Float = (180 / flight._internal._Math.PI);

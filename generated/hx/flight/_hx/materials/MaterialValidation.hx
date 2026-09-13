@@ -5,28 +5,28 @@ import flight._hx.types.StandardPbrMaterial.StandardPbrMaterialProperties;
 import flight._hx.types.Texture.Texture;
 
 function clampStandardPbrMaterialProperties(out:StandardPbrMaterialProperties):StandardPbrMaterialProperties {
-  out.metallic = Math.min(1, Math.max(0, out.metallic));
-  out.roughness = Math.min(1, Math.max(0, out.roughness));
-  out.occlusionStrength = Math.min(1, Math.max(0, out.occlusionStrength));
-  out.emissiveStrength = Math.max(0, out.emissiveStrength);
-  out.normalScale = Math.max(0, out.normalScale);
+  out.metallic = flight._internal._Math.min(1, flight._internal._Math.max(0, out.metallic));
+  out.roughness = flight._internal._Math.min(1, flight._internal._Math.max(0, out.roughness));
+  out.occlusionStrength = flight._internal._Math.min(1, flight._internal._Math.max(0, out.occlusionStrength));
+  out.emissiveStrength = flight._internal._Math.max(0, out.emissiveStrength);
+  out.normalScale = flight._internal._Math.max(0, out.normalScale);
   return out;
 }
 
 function isValidMaterialClearcoat(value:Float):Bool {
-  return (Math.isFinite(value) && (value >= 0)) && (value <= 1);
+  return (flight._internal._Math.isFinite(value) && (value >= 0)) && (value <= 1);
 }
 
 function isValidMaterialIor(value:Float):Bool {
-  return (Math.isFinite(value) && (value >= MIN_MATERIAL_IOR)) && (value <= MAX_MATERIAL_IOR);
+  return (flight._internal._Math.isFinite(value) && (value >= MIN_MATERIAL_IOR)) && (value <= MAX_MATERIAL_IOR);
 }
 
 function isValidMaterialIridescenceThickness(value:Float):Bool {
-  return Math.isFinite(value) && (value >= 0);
+  return flight._internal._Math.isFinite(value) && (value >= 0);
 }
 
 function isValidMaterialWeight(value:Float):Bool {
-  return (Math.isFinite(value) && (value >= 0)) && (value <= 1);
+  return (flight._internal._Math.isFinite(value) && (value >= 0)) && (value <= 1);
 }
 
 final MIN_MATERIAL_IOR:Float = 1;

@@ -4,15 +4,15 @@ package flight._hx.math;
 import flight._hx.math.Constants.EPSILON;
 
 function approxEqual(a:Float, b:Float, epsilon:Float = 0.000001):Bool {
-  return Math.abs((a - b)) <= epsilon;
+  return flight._internal._Math.abs((a - b)) <= epsilon;
 }
 
 function approxEqualRelative(a:Float, b:Float, relativeEpsilon:Float = 0.000001):Bool {
-  final diff:Dynamic = Math.abs((a - b));
-  final largest:Dynamic = Math.max(Math.abs(a), Math.abs(b));
-  return diff <= Math.max((relativeEpsilon * largest), EPSILON);
+  final diff:Dynamic = flight._internal._Math.abs((a - b));
+  final largest:Dynamic = flight._internal._Math.max(flight._internal._Math.abs(a), flight._internal._Math.abs(b));
+  return diff <= flight._internal._Math.max((relativeEpsilon * largest), EPSILON);
 }
 
 function approxZero(value:Float, epsilon:Float = 0.000001):Bool {
-  return Math.abs(value) <= epsilon;
+  return flight._internal._Math.abs(value) <= epsilon;
 }

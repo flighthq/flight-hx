@@ -13,7 +13,7 @@ function easeSteps(count:Float, position:StepPosition = "jumpEnd"):EasingFunctio
   final jumps:Float = (position == "jumpNone") ? (count - 1) : ((position == "jumpBoth") ? (count + 1) : count);
   final startOffset:Float = ((position == "jumpStart") || (position == "jumpBoth")) ? 1 : 0;
   return function(t:Float) {
-  var step:Float = Math.floor((t * count)) + startOffset;
+  var step:Float = flight._internal._Math.floor((t * count)) + startOffset;
   if ((t >= 0) && (step < 0)) {
     step = 0;
   }

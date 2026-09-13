@@ -2,30 +2,30 @@
 package flight._hx.effects;
 
 function computeColorTemperatureRgb(kelvin:Float, out:Array<Float>):Void {
-  final temp:Float = Math.max(1000, Math.min(40000, kelvin)) / 100;
+  final temp:Float = flight._internal._Math.max(1000, flight._internal._Math.min(40000, kelvin)) / 100;
   var r:Float;
   var g:Float;
   var b:Float;
   if (temp <= 66) {
     r = 1;
-    g = (((99.4708025861 * Math.log(temp)) - 161.1195681661) / 255);
-    b = ((temp <= 19) ? 0 : (((138.5177312231 * Math.log((temp - 10))) - 305.0447927307) / 255));
+    g = (((99.4708025861 * flight._internal._Math.log(temp)) - 161.1195681661) / 255);
+    b = ((temp <= 19) ? 0 : (((138.5177312231 * flight._internal._Math.log((temp - 10))) - 305.0447927307) / 255));
   }
   else {
-    r = ((329.698727446 * Math.pow((temp - 60), - 0.1332047592)) / 255);
-    g = ((288.1221695283 * Math.pow((temp - 60), - 0.0755148492)) / 255);
+    r = ((329.698727446 * flight._internal._Math.pow((temp - 60), - 0.1332047592)) / 255);
+    g = ((288.1221695283 * flight._internal._Math.pow((temp - 60), - 0.0755148492)) / 255);
     b = 1;
   }
-  out[0] = Math.max(0, Math.min(1, r));
-  out[1] = Math.max(0, Math.min(1, g));
-  out[2] = Math.max(0, Math.min(1, b));
+  out[0] = flight._internal._Math.max(0, flight._internal._Math.min(1, r));
+  out[1] = flight._internal._Math.max(0, flight._internal._Math.min(1, g));
+  out[2] = flight._internal._Math.max(0, flight._internal._Math.min(1, b));
 }
 
 function computeWhiteBalanceMultipliers(temperature:Float, tint:Float, out:Array<Float>):Void {
   final kelvin:Float = 6500 - (temperature * 4500);
   computeColorTemperatureRgb(kelvin, out);
   final greenShift:Float = - tint * 0.1;
-  out[0] = Math.max(0, out[0]);
-  out[1] = Math.max(0, (out[1] + greenShift));
-  out[2] = Math.max(0, out[2]);
+  out[0] = flight._internal._Math.max(0, out[0]);
+  out[1] = flight._internal._Math.max(0, (out[1] + greenShift));
+  out[2] = flight._internal._Math.max(0, out[2]);
 }

@@ -3,8 +3,8 @@ package flight._hx.easing;
 
 import flight._hx.types.EasingFunction.EasingFunction;
 
-final easeInCircular:EasingFunction = function(t:Float) return (1 - Math.sqrt((1 - (t * t))));
+final easeInCircular:EasingFunction = function(t:Float) return (1 - flight._internal._Math.sqrt((1 - (t * t))));
 
-final easeInOutCircular:EasingFunction = function(t:Float) return ((t < 0.5) ? ((1 - Math.sqrt((1 - ((4 * t) * t)))) / 2) : ((Math.sqrt((1 - Math.pow(((- 2 * t) + 2), 2))) + 1) / 2));
+final easeInOutCircular:EasingFunction = function(t:Float) return ((t < 0.5) ? ((1 - flight._internal._Math.sqrt((1 - ((4 * t) * t)))) / 2) : ((flight._internal._Math.sqrt((1 - flight._internal._Math.pow(((- 2 * t) + 2), 2))) + 1) / 2));
 
-final easeOutCircular:EasingFunction = function(t:Float) return Math.sqrt((1 - ((t - 1) * (t - 1))));
+final easeOutCircular:EasingFunction = function(t:Float) return flight._internal._Math.sqrt((1 - ((t - 1) * (t - 1))));

@@ -5,14 +5,14 @@ function getBlurDownsampleLevel(sigma:Float):Float {
   if (sigma <= BLUR_DOWNSAMPLE_MAX_SIGMA) {
     return 0;
   }
-  return Math.ceil(flight._internal._Math.log2((sigma / BLUR_DOWNSAMPLE_MAX_SIGMA)));
+  return flight._internal._Math.ceil(flight._internal._Math.log2((sigma / BLUR_DOWNSAMPLE_MAX_SIGMA)));
 }
 
 function getBlurResidualSigma(sigma:Float, level:Float):Float {
   if (sigma <= 0) {
     return 0;
   }
-  return sigma / Math.pow(2, level);
+  return sigma / flight._internal._Math.pow(2, level);
 }
 
 final BLUR_DOWNSAMPLE_MAX_SIGMA:Float = 4;

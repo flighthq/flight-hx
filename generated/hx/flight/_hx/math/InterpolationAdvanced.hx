@@ -5,13 +5,13 @@ function damp(current:Float, target:Float, lambda:Float, deltaTime:Float):Float 
   if ((deltaTime <= 0) || (lambda <= 0)) {
     return current;
   }
-  return target + ((current - target) * Math.exp((- lambda * deltaTime)));
+  return target + ((current - target) * flight._internal._Math.exp((- lambda * deltaTime)));
 }
 
 function lerpAngle(a:Float, b:Float, t:Float):Float {
-  final TAU:Float = Math.PI * 2;
+  final TAU:Float = flight._internal._Math.PI * 2;
   var diff:Float = (((b - a) % TAU) + TAU) % TAU;
-  if (diff > Math.PI) {
+  if (diff > flight._internal._Math.PI) {
     diff -= TAU;
   }
   return a + (diff * t);
@@ -19,7 +19,7 @@ function lerpAngle(a:Float, b:Float, t:Float):Float {
 
 function moveTowards(current:Float, target:Float, maxDelta:Float):Float {
   final delta:Float = target - current;
-  if (Math.abs(delta) <= maxDelta) {
+  if (flight._internal._Math.abs(delta) <= maxDelta) {
     return target;
   }
   return current + (flight._internal._Math.sign(delta) * maxDelta);

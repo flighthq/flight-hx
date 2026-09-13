@@ -59,4 +59,4 @@ typedef UpdateScene3DResourceStreamingOptions = { ?select:(Texture, ImageResourc
 
 typedef Scene3DResourceRevealOptions = { ?ease:EasingFunction, ?fadeSeconds:Float, ?from:Float };
 
-final Scene3DResourceResolverRuntimeKey:Dynamic = new js.lib.Symbol("Scene3DResourceResolverRuntime");
+final Scene3DResourceResolverRuntimeKey:Dynamic = flight._internal._Symbol.create("Scene3DResourceResolverRuntime");

@@ -6,11 +6,11 @@ package flight._hx;
 #if flight_hx
 class Geom {
   public static function addVector2(a:Vector2, b:Vector2):Vector2 {
-    return {x: a.x + b.x, y: a.y + b.y};
+    return cast {EntityRuntimeKey: null, x: a.x + b.x, y: a.y + b.y};
   }
 
   public static function lengthVector2(a:Vector2):Float {
-    return Math.sqrt(a.x * a.x + a.y * a.y);
+    return flight._internal._Math.sqrt(a.x * a.x + a.y * a.y);
   }
 }
 #end

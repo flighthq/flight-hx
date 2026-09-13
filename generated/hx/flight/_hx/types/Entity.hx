@@ -20,4 +20,4 @@ typedef EntityRuntimeWriteGuard = (EntityRuntimeWriteSlot)->Void;
 
 typedef EntityRuntimeWriteExplanation = { message:String, slot:EntityRuntimeWriteSlot, useInstead:Array<String> };
 
-final EntityRuntimeKey:Dynamic = js.lib.Symbol.for_("EntityRuntime");
+final EntityRuntimeKey:Dynamic = flight._internal._Symbol.for_("EntityRuntime");

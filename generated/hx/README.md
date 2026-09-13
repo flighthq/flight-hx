@@ -5,8 +5,8 @@ This tree is generated from `@flighthq/sdk` 0.5.0 at
 Do not edit it by hand.
 
 The compiler emitted 1110 of 2866 dependency-closed source modules
-from 154 SDK packages into 1110 Haxe files. It refused
-1756 modules; every refusal is recorded in `refusals.json`.
+from 154 SDK packages into 1110 Haxe files. The flight-hx integration added 4085 derived public/backend files so the supported transpiled surface is consumer-ready. It refused
+1756 modules; every refusal is recorded in `refusals.json`. The exact supported and unavailable public `flight.*` partitions are recorded in `public-surface.json`.
 
 Regenerate this mode from the flight-hx repository root:
 

@@ -4,7 +4,7 @@ package flight._hx.effects;
 import flight._hx.types.KuwaharaEffect.KuwaharaEffect;
 
 function computeKuwaharaGaussianWeights(radius:Float, out:flight._internal._Float32Array):Float {
-  final r:Dynamic = Math.max(1, Math.floor(radius));
+  final r:Dynamic = flight._internal._Math.max(1, flight._internal._Math.floor(radius));
   final size:Float = r + 1;
   final sigma:Float = r / 2;
   final twoSigmaSq:Float = (2 * sigma) * sigma;
@@ -18,7 +18,7 @@ function computeKuwaharaGaussianWeights(radius:Float, out:flight._internal._Floa
           while (x < size) {
             {
               final d:Float = (x * x) + (y * y);
-              out[Std.int(((y * size) + x))] = Math.exp((- d / twoSigmaSq));
+              out[Std.int(((y * size) + x))] = flight._internal._Math.exp((- d / twoSigmaSq));
               sum += out[Std.int(((y * size) + x))];
             }
             x += 1;
@@ -42,7 +42,7 @@ function computeKuwaharaGaussianWeights(radius:Float, out:flight._internal._Floa
 }
 
 function computeKuwaharaSectorOffsets(radius:Float, out:Array<Float>):Void {
-  final r:Dynamic = Math.max(1, Math.floor(radius));
+  final r:Dynamic = flight._internal._Math.max(1, flight._internal._Math.floor(radius));
   final half:Dynamic = r;
   final v0:Float = - half;
   final v1:Float = - half;
@@ -68,5 +68,5 @@ function computeKuwaharaSectorPixelCount(effect:KuwaharaEffect):Float {
 }
 
 function computeKuwaharaSectorSize(effect:KuwaharaEffect):Float {
-  return Math.max(1, Math.floor((effect.radius ?? 3))) + 1;
+  return flight._internal._Math.max(1, flight._internal._Math.floor((effect.radius ?? 3))) + 1;
 }

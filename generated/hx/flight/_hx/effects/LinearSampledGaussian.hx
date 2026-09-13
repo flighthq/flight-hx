@@ -36,7 +36,7 @@ function computeLinearSampledGaussian(sigma:Float, outWeights:Array<Float>, outO
 }
 
 function getLinearSampledGaussianTapCount(sigma:Float):Float {
-  return Math.ceil((getGaussianKernelSize(sigma) / 2));
+  return flight._internal._Math.ceil((getGaussianKernelSize(sigma) / 2));
 }
 
 final scratchWeights:Array<Float> = [];

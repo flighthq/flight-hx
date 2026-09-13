@@ -20,4 +20,4 @@ function writePhysics2DSoftRowParameters(mass:Float, frequencyHz:Float, dampingR
   out[2] = gamma;
 }
 
-final TAU:Float = (2 * Math.PI);
+final TAU:Float = (2 * flight._internal._Math.PI);

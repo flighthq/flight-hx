@@ -11,12 +11,12 @@ function degToRad(degrees:Float):Float {
 
 function deltaAngle(from:Float, to:Float):Float {
   final diff:Float = (((to - from) % TAU) + TAU) % TAU;
-  return (diff > Math.PI) ? (diff - TAU) : diff;
+  return (diff > flight._internal._Math.PI) ? (diff - TAU) : diff;
 }
 
 function normalizeAngle(radians:Float):Float {
   final wrapped:Float = ((radians % TAU) + TAU) % TAU;
-  return (wrapped >= Math.PI) ? (wrapped - TAU) : wrapped;
+  return (wrapped >= flight._internal._Math.PI) ? (wrapped - TAU) : wrapped;
 }
 
 function radToDeg(radians:Float):Float {

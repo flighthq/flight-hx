@@ -3,9 +3,9 @@ package flight._hx.color;
 
 function premultiplyColorAlpha(color:Float):Float {
   final a:Float = (Std.int(color) & Std.int(255)) / 255;
-  final r:Dynamic = Math.round(((Std.int((Std.int(color) >>> Std.int(24))) & Std.int(255)) * a));
-  final g:Dynamic = Math.round(((Std.int((Std.int(color) >>> Std.int(16))) & Std.int(255)) * a));
-  final b:Dynamic = Math.round(((Std.int((Std.int(color) >>> Std.int(8))) & Std.int(255)) * a));
+  final r:Dynamic = flight._internal._Math.round(((Std.int((Std.int(color) >>> Std.int(24))) & Std.int(255)) * a));
+  final g:Dynamic = flight._internal._Math.round(((Std.int((Std.int(color) >>> Std.int(16))) & Std.int(255)) * a));
+  final b:Dynamic = flight._internal._Math.round(((Std.int((Std.int(color) >>> Std.int(8))) & Std.int(255)) * a));
   return Std.int((Std.int((Std.int((Std.int((Std.int(r) << Std.int(24))) | Std.int((Std.int(g) << Std.int(16))))) | Std.int((Std.int(b) << Std.int(8))))) | Std.int((Std.int(color) & Std.int(255))))) >>> Std.int(0);
 }
 
@@ -14,8 +14,8 @@ function unpremultiplyColorAlpha(color:Float):Float {
   if (a == 0) {
     return color;
   }
-  final r:Dynamic = Math.min(255, Math.round(((Std.int((Std.int(color) >>> Std.int(24))) & Std.int(255)) / a)));
-  final g:Dynamic = Math.min(255, Math.round(((Std.int((Std.int(color) >>> Std.int(16))) & Std.int(255)) / a)));
-  final b:Dynamic = Math.min(255, Math.round(((Std.int((Std.int(color) >>> Std.int(8))) & Std.int(255)) / a)));
+  final r:Dynamic = flight._internal._Math.min(255, flight._internal._Math.round(((Std.int((Std.int(color) >>> Std.int(24))) & Std.int(255)) / a)));
+  final g:Dynamic = flight._internal._Math.min(255, flight._internal._Math.round(((Std.int((Std.int(color) >>> Std.int(16))) & Std.int(255)) / a)));
+  final b:Dynamic = flight._internal._Math.min(255, flight._internal._Math.round(((Std.int((Std.int(color) >>> Std.int(8))) & Std.int(255)) / a)));
   return Std.int((Std.int((Std.int((Std.int((Std.int(r) << Std.int(24))) | Std.int((Std.int(g) << Std.int(16))))) | Std.int((Std.int(b) << Std.int(8))))) | Std.int((Std.int(color) & Std.int(255))))) >>> Std.int(0);
 }

@@ -5,7 +5,7 @@ function ceilTo(value:Float, step:Float):Float {
   if (step <= 0) {
     return value;
   }
-  return Math.ceil((value / step)) * step;
+  return flight._internal._Math.ceil((value / step)) * step;
 }
 
 function euclideanMod(value:Float, divisor:Float):Float {
@@ -19,7 +19,7 @@ function floorTo(value:Float, step:Float):Float {
   if (step <= 0) {
     return value;
   }
-  return Math.floor((value / step)) * step;
+  return flight._internal._Math.floor((value / step)) * step;
 }
 
 function fract(value:Float):Float {
@@ -30,7 +30,7 @@ function roundTo(value:Float, step:Float):Float {
   if (step <= 0) {
     return value;
   }
-  final magnitude:Float = Math.round((Math.abs(value) / step)) * step;
+  final magnitude:Float = flight._internal._Math.round((flight._internal._Math.abs(value) / step)) * step;
   if (magnitude == 0) {
     return 0;
   }

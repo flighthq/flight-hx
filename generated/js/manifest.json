@@ -11,7 +11,7 @@
       "flight-hx-type-alias-value-collision/1",
       "flight-hx-source-default-type-parameters/1",
       "flight-hx-unique-symbol-void-brand/1",
-      "flight-hx-symbol-self-call-constructor/1",
+      "flight-hx-symbol-runtime-shim/1",
       "flight-hx-standard-library-spellings/1",
       "flight-hx-constant-default-arguments/1",
       "flight-hx-array-api/1",
@@ -963,6 +963,29 @@
       "sourceModules": 4
     }
   ],
+  "runtime": {
+    "constructorAbi": "flight-runtime-constructor-abi/1",
+    "externalSymbols": "flight-runtime-contract/2",
+    "profiles": {
+      "javascript": {
+        "coverage": "complete",
+        "implementation": "native-ecmascript"
+      },
+      "portable": {
+        "capabilities": [
+          "float32-array",
+          "map",
+          "set",
+          "symbol",
+          "task"
+        ],
+        "coverage": "host-free-subset",
+        "taskDelivery": "immediate-no-portable-microtask-queue",
+        "weakMapRetention": "strong-fallback"
+      }
+    },
+    "taskAbi": "flight-runtime-task-capability-abi/1"
+  },
   "source": {
     "package": "@flighthq/sdk",
     "repository": "https://github.com/flighthq/flight",
@@ -979,6 +1002,15 @@
     "generatedFiles": 4112,
     "publicFacadeFiles": 1365,
     "filteredContractFunctions": 113,
-    "filteredContractValues": 123
+    "filteredContractValues": 123,
+    "publicRuntimeSurface": {
+      "emittedDeclarations": 3093,
+      "emittedTypes": 2016,
+      "expectedDeclarations": 7082,
+      "fullyCoveredPackages": 59,
+      "missingDeclarations": 3989,
+      "packages": 154,
+      "unexpectedDeclarations": 0
+    }
   }
 }

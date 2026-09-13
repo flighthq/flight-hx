@@ -18,4 +18,4 @@ typedef Node3DRuntime = Dynamic;
 
 final Node3DKind:String = "Node3D";
 
-final Node3DTraitsKey:Dynamic = new js.lib.Symbol("Node3DTraits");
+final Node3DTraitsKey:Dynamic = flight._internal._Symbol.create("Node3DTraits");

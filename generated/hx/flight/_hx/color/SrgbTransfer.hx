@@ -2,9 +2,9 @@
 package flight._hx.color;
 
 function linearChannelToSrgb(value:Float):Float {
-  return (value <= 0.0031308) ? (value * 12.92) : ((1.055 * Math.pow(value, (1 / 2.4))) - 0.055);
+  return (value <= 0.0031308) ? (value * 12.92) : ((1.055 * flight._internal._Math.pow(value, (1 / 2.4))) - 0.055);
 }
 
 function srgbChannelToLinear(value:Float):Float {
-  return (value <= 0.04045) ? (value / 12.92) : Math.pow(((value + 0.055) / 1.055), 2.4);
+  return (value <= 0.04045) ? (value / 12.92) : flight._internal._Math.pow(((value + 0.055) / 1.055), 2.4);
 }

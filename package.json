@@ -16,11 +16,14 @@
     "gate:proof": "node tests/gates/proofShape.mjs",
     "gate:surface": "node tests/gates/generatedSurface.mjs",
     "gate:bindings": "node tests/gates/bindingsExistence.mjs",
+    "gate:behavior": "node tests/gates/transpiledBehavior.mjs",
+    "gate:coverage": "node tests/gates/compilerCoverage.mjs",
     "gate:web": "node tests/gates/webBehavioral.mjs",
     "gate:parity": "node tests/gates/backendParity.mjs",
+    "gate:runtime": "node tests/gates/runtimeContract.mjs",
     "gate:transpile": "node tests/gates/transpiledSources.mjs",
     "gate:dce": "node tests/gates/webDce.mjs",
-    "check": "npm run rehydrate:check && npm run gate:proof && npm run gate:surface && npm run gate:bindings && npm run gate:transpile"
+    "check": "node tests/gates/all.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.28.2",

@@ -6,8 +6,8 @@ import flight._hx.color.SrgbTransfer.srgbChannelToLinear;
 function getColorContrastRatio(a:Float, b:Float):Float {
   final la:Float = getColorLuminance(a);
   final lb:Float = getColorLuminance(b);
-  final lighter:Dynamic = Math.max(la, lb);
-  final darker:Dynamic = Math.min(la, lb);
+  final lighter:Dynamic = flight._internal._Math.max(la, lb);
+  final darker:Dynamic = flight._internal._Math.min(la, lb);
   return (lighter + 0.05) / (darker + 0.05);
 }
 

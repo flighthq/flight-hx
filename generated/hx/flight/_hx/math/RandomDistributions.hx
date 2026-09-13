@@ -13,31 +13,31 @@ function pick<T>(random:RandomSource, items:Array<T>):Null<T> {
   if (items.length == 0) {
     return null;
   }
-  return items[Std.int(Math.floor((random() * items.length)))];
+  return items[Std.int(flight._internal._Math.floor((random() * items.length)))];
 }
 
 function randomExponential(random:RandomSource, rate:Float = 1):Float {
-  if (! Math.isFinite(rate) || (rate <= 0)) {
+  if (! flight._internal._Math.isFinite(rate) || (rate <= 0)) {
     throw new haxe.Exception("randomExponential: rate must be finite and > 0");
   }
   final u:Float = random();
-  return - Math.log(((u == 0) ? 2.220446049250313e-16 : u)) / rate;
+  return - flight._internal._Math.log(((u == 0) ? 2.220446049250313e-16 : u)) / rate;
 }
 
 function randomGaussian(random:RandomSource, mean:Float = 0, standardDeviation:Float = 1):Float {
   final u1:Float = random();
   final u2:Float = random();
-  final z:Float = Math.sqrt((- 2 * Math.log(((u1 == 0) ? 2.220446049250313e-16 : u1)))) * Math.cos(((Math.PI * 2) * u2));
+  final z:Float = flight._internal._Math.sqrt((- 2 * flight._internal._Math.log(((u1 == 0) ? 2.220446049250313e-16 : u1)))) * flight._internal._Math.cos(((flight._internal._Math.PI * 2) * u2));
   return mean + (z * standardDeviation);
 }
 
 function randomGaussianPair(random:RandomSource, mean:Float = 0, standardDeviation:Float = 1):Array<Float> {
   final u1:Float = random();
   final u2:Float = random();
-  final mag:Dynamic = Math.sqrt((- 2 * Math.log(((u1 == 0) ? 2.220446049250313e-16 : u1))));
-  final angle:Float = (Math.PI * 2) * u2;
-  final z0:Float = mean + ((mag * Math.cos(angle)) * standardDeviation);
-  final z1:Float = mean + ((mag * Math.sin(angle)) * standardDeviation);
+  final mag:Dynamic = flight._internal._Math.sqrt((- 2 * flight._internal._Math.log(((u1 == 0) ? 2.220446049250313e-16 : u1))));
+  final angle:Float = (flight._internal._Math.PI * 2) * u2;
+  final z0:Float = mean + ((mag * flight._internal._Math.cos(angle)) * standardDeviation);
+  final z1:Float = mean + ((mag * flight._internal._Math.sin(angle)) * standardDeviation);
   return [z0, z1];
 }
 
@@ -67,9 +67,9 @@ function randomInsideUnitSphere(random:RandomSource, out:Vector3Like):Void {
 }
 
 function randomOnUnitCircle(random:RandomSource, out:Vector2Like):Void {
-  final angle:Float = (random() * Math.PI) * 2;
-  final x:Dynamic = Math.cos(angle);
-  final y:Dynamic = Math.sin(angle);
+  final angle:Float = (random() * flight._internal._Math.PI) * 2;
+  final x:Dynamic = flight._internal._Math.cos(angle);
+  final y:Dynamic = flight._internal._Math.sin(angle);
   out.x = x;
   out.y = y;
 }
@@ -83,7 +83,7 @@ function randomOnUnitSphere(random:RandomSource, out:Vector3Like):Void {
     y = ((random() * 2) - 1);
     s = ((x * x) + (y * y));
   } while ((s >= 1));
-  final f:Float = 2 * Math.sqrt((1 - s));
+  final f:Float = 2 * flight._internal._Math.sqrt((1 - s));
   final rx:Float = x * f;
   final ry:Float = y * f;
   final rz:Float = 1 - (2 * s);
@@ -93,10 +93,10 @@ function randomOnUnitSphere(random:RandomSource, out:Vector3Like):Void {
 }
 
 function randomPoisson(random:RandomSource, lambda:Float = 1):Float {
-  if (! Math.isFinite(lambda) || (lambda <= 0)) {
+  if (! flight._internal._Math.isFinite(lambda) || (lambda <= 0)) {
     throw new haxe.Exception("randomPoisson: lambda must be finite and > 0");
   }
-  final limit:Dynamic = Math.exp(- lambda);
+  final limit:Dynamic = flight._internal._Math.exp(- lambda);
   var k:Float = 0;
   var product:Float = random();
   while (product > limit) {
@@ -145,7 +145,7 @@ function shuffleInPlace<T>(random:RandomSource, items:Array<T>):Void {
     var i:Float = items.length - 1;
     while (i > 0) {
       {
-        final j:Dynamic = Math.floor((random() * (i + 1)));
+        final j:Dynamic = flight._internal._Math.floor((random() * (i + 1)));
         final tmp:T = items[Std.int(i)];
         items[Std.int(i)] = items[Std.int(j)];
         items[Std.int(j)] = tmp;

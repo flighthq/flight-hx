@@ -6,7 +6,7 @@ import flight._hx.types.Matrix.Matrix;
 
 function setCanvasTransform(state:CanvasRenderState, context:js.html.CanvasRenderingContext2D, transform:Matrix):Void {
   if (state.roundPixels) {
-    context.setTransform(transform.a, transform.b, transform.c, transform.d, Math.fround(transform.tx), Math.fround(transform.ty));
+    context.setTransform(transform.a, transform.b, transform.c, transform.d, flight._internal._Math.fround(transform.tx), flight._internal._Math.fround(transform.ty));
   }
   else {
     context.setTransform(transform.a, transform.b, transform.c, transform.d, transform.tx, transform.ty);

@@ -12,7 +12,7 @@ function easeInDampedSine(amplitude:Float, period:Float):EasingFunction {
     return t;
   }
   final time:Float = t - 1;
-  return - ((overshoot * Math.pow(2, (10 * time))) * Math.sin((((time - phase) * TAU) / wavelength)));
+  return - ((overshoot * flight._internal._Math.pow(2, (10 * time))) * flight._internal._Math.sin((((time - phase) * TAU) / wavelength)));
 };
 }
 
@@ -26,9 +26,9 @@ function easeInOutDampedSine(amplitude:Float, period:Float):EasingFunction {
   }
   final time:Float = (t * 2) - 1;
   if (time < 0) {
-    return ((- 0.5 * overshoot) * Math.pow(2, (10 * time))) * Math.sin((((time - phase) * TAU) / wavelength));
+    return ((- 0.5 * overshoot) * flight._internal._Math.pow(2, (10 * time))) * flight._internal._Math.sin((((time - phase) * TAU) / wavelength));
   }
-  return (((0.5 * overshoot) * Math.pow(2, (- 10 * time))) * Math.sin((((time - phase) * TAU) / wavelength))) + 1;
+  return (((0.5 * overshoot) * flight._internal._Math.pow(2, (- 10 * time))) * flight._internal._Math.sin((((time - phase) * TAU) / wavelength))) + 1;
 };
 }
 
@@ -40,12 +40,12 @@ function easeOutDampedSine(amplitude:Float, period:Float):EasingFunction {
   if ((t == 0) || (t == 1)) {
     return t;
   }
-  return ((overshoot * Math.pow(2, (- 10 * t))) * Math.sin((((t - phase) * TAU) / wavelength))) + 1;
+  return ((overshoot * flight._internal._Math.pow(2, (- 10 * t))) * flight._internal._Math.sin((((t - phase) * TAU) / wavelength))) + 1;
 };
 }
 
 function toDampedSinePhase(overshoot:Float, wavelength:Float):Float {
-  return (wavelength / TAU) * Math.asin((1 / overshoot));
+  return (wavelength / TAU) * flight._internal._Math.asin((1 / overshoot));
 }
 
 function toDampedSineOvershoot(amplitude:Float):Float {
@@ -56,6 +56,6 @@ function toDampedSineWavelength(period:Float):Float {
   return (period > 0) ? period : DEFAULT_DAMPED_SINE_PERIOD;
 }
 
-final TAU:Float = (2 * Math.PI);
+final TAU:Float = (2 * flight._internal._Math.PI);
 
 final DEFAULT_DAMPED_SINE_PERIOD:Float = 0.4;

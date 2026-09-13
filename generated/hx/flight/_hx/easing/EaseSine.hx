@@ -3,8 +3,8 @@ package flight._hx.easing;
 
 import flight._hx.types.EasingFunction.EasingFunction;
 
-final easeInOutSine:EasingFunction = function(t:Float) return (- (Math.cos((Math.PI * t)) - 1) / 2);
+final easeInOutSine:EasingFunction = function(t:Float) return (- (flight._internal._Math.cos((flight._internal._Math.PI * t)) - 1) / 2);
 
-final easeInSine:EasingFunction = function(t:Float) return (1 - Math.cos(((t * Math.PI) / 2)));
+final easeInSine:EasingFunction = function(t:Float) return (1 - flight._internal._Math.cos(((t * flight._internal._Math.PI) / 2)));
 
-final easeOutSine:EasingFunction = function(t:Float) return Math.sin(((t * Math.PI) / 2));
+final easeOutSine:EasingFunction = function(t:Float) return flight._internal._Math.sin(((t * flight._internal._Math.PI) / 2));

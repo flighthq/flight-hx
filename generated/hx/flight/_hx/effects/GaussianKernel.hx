@@ -16,7 +16,7 @@ function computeGaussianKernelWeights(sigma:Float, out:Array<Float>):Array<Float
     while (i < size) {
       {
         final x:Float = i - radius;
-        final weight:Dynamic = Math.exp((- (x * x) / twoSigmaSquared));
+        final weight:Dynamic = flight._internal._Math.exp((- (x * x) / twoSigmaSquared));
         out[Std.int(i)] = weight;
         sum += weight;
       }
@@ -40,6 +40,6 @@ function getGaussianKernelSize(sigma:Float):Float {
   if (sigma <= 0) {
     return 1;
   }
-  final radius:Dynamic = Math.ceil((3 * sigma));
+  final radius:Dynamic = flight._internal._Math.ceil((3 * sigma));
   return (radius * 2) + 1;
 }

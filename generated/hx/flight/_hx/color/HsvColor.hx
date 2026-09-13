@@ -15,8 +15,8 @@ function hsvToRgb(out:Array<Float>, h:Float, s:Float, v:Float):Void {
     return;
   }
   final hn:Float = ((h % 360) + 360) % 360;
-  final i:Float = Math.floor((hn / 60)) % 6;
-  final f:Float = (hn / 60) - Math.floor((hn / 60));
+  final i:Float = flight._internal._Math.floor((hn / 60)) % 6;
+  final f:Float = (hn / 60) - flight._internal._Math.floor((hn / 60));
   final p:Float = v * (1 - s);
   final q:Float = v * (1 - (f * s));
   final t:Float = v * (1 - ((1 - f) * s));
@@ -52,8 +52,8 @@ function rgbToHsv(out:HsvColor, color:Float):HsvColor {
   final r:Float = (Std.int((Std.int(color) >>> Std.int(24))) & Std.int(255)) / 255;
   final g:Float = (Std.int((Std.int(color) >>> Std.int(16))) & Std.int(255)) / 255;
   final b:Float = (Std.int((Std.int(color) >>> Std.int(8))) & Std.int(255)) / 255;
-  final max:Dynamic = Math.max(Math.max(r, g), b);
-  final min:Dynamic = Math.min(Math.min(r, g), b);
+  final max:Dynamic = flight._internal._Math.max(flight._internal._Math.max(r, g), b);
+  final min:Dynamic = flight._internal._Math.min(flight._internal._Math.min(r, g), b);
   final d:Float = max - min;
   final v:Dynamic = max;
   final s:Float = (max == 0) ? 0 : (d / max);

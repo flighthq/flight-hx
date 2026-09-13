@@ -5,6 +5,6 @@ import flight._hx.types.EasingFunction.EasingFunction;
 
 final easeInCubic:EasingFunction = function(t:Float) return ((t * t) * t);
 
-final easeInOutCubic:EasingFunction = function(t:Float) return ((t < 0.5) ? (((4 * t) * t) * t) : (1 - (Math.pow(((- 2 * t) + 2), 3) / 2)));
+final easeInOutCubic:EasingFunction = function(t:Float) return ((t < 0.5) ? (((4 * t) * t) * t) : (1 - (flight._internal._Math.pow(((- 2 * t) + 2), 3) / 2)));
 
-final easeOutCubic:EasingFunction = function(t:Float) return (1 - Math.pow((1 - t), 3));
+final easeOutCubic:EasingFunction = function(t:Float) return (1 - flight._internal._Math.pow((1 - t), 3));

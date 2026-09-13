@@ -6,16 +6,16 @@ import flight._hx.types.EasingFunction.EasingFunction;
 function easeInOutPower(exponent:Float):EasingFunction {
   return function(t:Float) {
   if (t < 0.5) {
-    return Math.pow((t * 2), exponent) * 0.5;
+    return flight._internal._Math.pow((t * 2), exponent) * 0.5;
   }
-  return 1 - (Math.pow(((1 - t) * 2), exponent) * 0.5);
+  return 1 - (flight._internal._Math.pow(((1 - t) * 2), exponent) * 0.5);
 };
 }
 
 function easeInPower(exponent:Float):EasingFunction {
-  return function(t:Float) return Math.pow(t, exponent);
+  return function(t:Float) return flight._internal._Math.pow(t, exponent);
 }
 
 function easeOutPower(exponent:Float):EasingFunction {
-  return function(t:Float) return (1 - Math.pow((1 - t), exponent));
+  return function(t:Float) return (1 - flight._internal._Math.pow((1 - t), exponent));
 }

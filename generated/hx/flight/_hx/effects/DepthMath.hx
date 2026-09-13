@@ -2,10 +2,10 @@
 package flight._hx.effects;
 
 function computeDepthOfFieldCoc(depth:Float, focusDistance:Float, aperture:Float, focalLength:Float):Float {
-  final fd:Dynamic = Math.max(0.00001, focusDistance);
-  final fl:Float = Math.max(0.00001, focalLength) / 1000;
-  final d:Dynamic = Math.max(0.00001, depth);
-  final a:Float = fl / Math.max(0.00001, aperture);
+  final fd:Dynamic = flight._internal._Math.max(0.00001, focusDistance);
+  final fl:Float = flight._internal._Math.max(0.00001, focalLength) / 1000;
+  final d:Dynamic = flight._internal._Math.max(0.00001, depth);
+  final a:Float = fl / flight._internal._Math.max(0.00001, aperture);
   return (a * (d - fd)) / (d * (fd - fl));
 }
 
@@ -14,20 +14,20 @@ function computeLinearDepthFromNonlinear(depth:Float, near:Float, far:Float):Flo
 }
 
 function computeSsaoSampleKernel(samples:Float, out:flight._internal._Float32Array):Float {
-  final n:Dynamic = Math.max(1, Math.round(samples));
+  final n:Dynamic = flight._internal._Math.max(1, flight._internal._Math.round(samples));
   {
     var i:Float = 0;
     while (i < n) {
       {
         final h2:Float = halton((i + 1), 2);
         final h3:Float = halton((i + 1), 3);
-        final theta:Float = (h2 * 2) * Math.PI;
-        final phi:Dynamic = Math.acos((1 - h3));
+        final theta:Float = (h2 * 2) * flight._internal._Math.PI;
+        final phi:Dynamic = flight._internal._Math.acos((1 - h3));
         final scale:Float = i / n;
         final dist:Float = 0.1 + ((0.9 * scale) * scale);
-        out[Std.int(((i * 3) + 0))] = ((Math.sin(phi) * Math.cos(theta)) * dist);
-        out[Std.int(((i * 3) + 1))] = ((Math.sin(phi) * Math.sin(theta)) * dist);
-        out[Std.int(((i * 3) + 2))] = (Math.cos(phi) * dist);
+        out[Std.int(((i * 3) + 0))] = ((flight._internal._Math.sin(phi) * flight._internal._Math.cos(theta)) * dist);
+        out[Std.int(((i * 3) + 1))] = ((flight._internal._Math.sin(phi) * flight._internal._Math.sin(theta)) * dist);
+        out[Std.int(((i * 3) + 2))] = (flight._internal._Math.cos(phi) * dist);
       }
       i += 1;
     }
@@ -42,7 +42,7 @@ function halton(index:Float, base:Float):Float {
   while (i > 0) {
     f /= base;
     result += (f * (i % base));
-    i = Math.floor((i / base));
+    i = flight._internal._Math.floor((i / base));
   }
   return result;
 }

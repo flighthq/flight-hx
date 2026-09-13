@@ -19,9 +19,11 @@ const compile = spawnSync(
   [
     'tools/haxe.mjs',
     '-cp',
-    'generated/hx',
+    'generated',
     '-cp',
     'src',
+    '-cp',
+    'generated/hx',
     '-cp',
     'tests/haxe',
     '--main',
@@ -48,6 +50,31 @@ if (run.status !== 0 || !(run.stdout + run.stderr).includes('GENERATED_TRANSPILE
   process.exit(1);
 }
 
+const portable = spawnSync(
+  'node',
+  [
+    'tools/haxe.mjs',
+    '-cp',
+    'src',
+    '-cp',
+    'generated/hx',
+    '-cp',
+    'tests/haxe',
+    '--main',
+    'GeneratedTranspilePortableSmoke',
+    '--interp',
+    '-D',
+    'flight_hx',
+  ],
+  { encoding: 'utf8' },
+);
+if (portable.status !== 0 || !(portable.stdout + portable.stderr).includes('GENERATED_TRANSPILE_PORTABLE_OK')) {
+  process.stderr.write(
+    `transpiled-source gate: public host-free slice did not run on Haxe eval:\n${portable.stdout}${portable.stderr}`,
+  );
+  process.exit(1);
+}
+
 process.stdout.write(
-  `transpiled-source gate: compiled ${String(manifest.summary.emittedFiles)} files and executed compiler-emitted code.\n`,
+  `transpiled-source gate: compiled ${String(manifest.summary.generatedFiles)} generated files, executed the public JS fallback, and ran a host-free public slice on Haxe eval.\n`,
 );

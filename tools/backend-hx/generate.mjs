@@ -15,6 +15,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 import { resolveDependency } from '../../scripts/dependencyLock.mjs';
+import { buildTranspiledBackendSurface, collectExternSurface } from './haxeSurface.mjs';
 
 // flight-hx owns the reproducible integration edge around flight-compiler: checkout discovery,
 // compiler installation/build, output layout, manifests, refusal ledgers, and write/check modes.
@@ -271,10 +272,12 @@ function generateMode(outputRoot, mode, input, flightDependency, compilerDepende
     mkdirSync(path.dirname(target), { recursive: true });
     writeFileSync(target, file.contents);
   }
+  const transpiledPublicBackend =
+    mode === 'transpile' ? emitTranspiledPublicBackend(outputRoot, contractFiltered.files) : undefined;
   const compatibilityFiles =
     mode === 'extern'
       ? emitMissingExternPublicAliases(outputRoot, contractFiltered.files, flightDependency, compilerDependency)
-      : 0;
+      : transpiledPublicBackend.files;
   const publicFacades =
     mode === 'extern' ? synchronizeExternPublicFacades(compilation.compilation.files, !check) : { files: 0, drift: [] };
   if (publicFacades.drift.length > 0 && check) {
@@ -308,6 +311,11 @@ function generateMode(outputRoot, mode, input, flightDependency, compilerDepende
   if (mode === 'extern') {
     summary.filteredContractFunctions = contractFiltered.removedFunctions;
     summary.filteredContractValues = contractFiltered.removedValues;
+    const publicSurface = externContractCoverage(contractFiltered.files, input.contractValueExports);
+    summary.publicRuntimeSurface = publicSurface.summary;
+    writeFileSync(path.join(outputRoot, 'public-surface.json'), `${JSON.stringify(publicSurface, undefined, 2)}\n`);
+  } else {
+    summary.publicRuntimeSurface = transpiledPublicBackend.summary;
   }
   const refusals = compilation.report.modules.flatMap((module) =>
     module.refusals.map((refusal) => ({
@@ -333,7 +341,7 @@ function generateMode(outputRoot, mode, input, flightDependency, compilerDepende
         'flight-hx-type-alias-value-collision/1',
         'flight-hx-source-default-type-parameters/1',
         'flight-hx-unique-symbol-void-brand/1',
-        'flight-hx-symbol-self-call-constructor/1',
+        'flight-hx-symbol-runtime-shim/1',
         'flight-hx-standard-library-spellings/1',
         'flight-hx-constant-default-arguments/1',
         'flight-hx-array-api/1',
@@ -353,6 +361,7 @@ function generateMode(outputRoot, mode, input, flightDependency, compilerDepende
         ...(mode === 'extern' ? ['flight-hx-contract-export-filter/1'] : []),
         ...(mode === 'extern' ? ['flight-hx-public-extern-aliases/1'] : []),
         ...(mode === 'extern' ? ['flight-hx-public-extern-generics/1'] : []),
+        ...(mode === 'transpile' ? ['flight-hx-transpiled-public-backend/1'] : []),
       ],
       emissionMode: mode,
       repository: compilerDependency.repository,
@@ -360,6 +369,23 @@ function generateMode(outputRoot, mode, input, flightDependency, compilerDepende
       target: 'haxe',
     },
     packages,
+    runtime: {
+      constructorAbi: 'flight-runtime-constructor-abi/1',
+      externalSymbols: 'flight-runtime-contract/2',
+      profiles: {
+        javascript: {
+          coverage: 'complete',
+          implementation: 'native-ecmascript',
+        },
+        portable: {
+          capabilities: ['float32-array', 'map', 'set', 'symbol', 'task'],
+          coverage: 'host-free-subset',
+          taskDelivery: 'immediate-no-portable-microtask-queue',
+          weakMapRetention: 'strong-fallback',
+        },
+      },
+      taskAbi: 'flight-runtime-task-capability-abi/1',
+    },
     source: {
       package: String(input.sdkManifest.name),
       repository: flightDependency.repository,
@@ -385,6 +411,77 @@ function generateMode(outputRoot, mode, input, flightDependency, compilerDepende
   );
   writeFileSync(path.join(outputRoot, 'README.md'), generatedReadme(manifest));
   return summary;
+}
+
+function emitTranspiledPublicBackend(outputRoot, transpiledFiles) {
+  const externRoot = path.join(root, 'generated', 'js');
+  if (!existsSync(path.join(externRoot, 'manifest.json'))) {
+    throw new Error('Transpiled public backend requires generated/js; run extern generation first');
+  }
+  const externFiles = filesUnder(externRoot)
+    .filter((filename) => filename.endsWith('.hx'))
+    .map((filename) => ({
+      contents: readFileSync(filename, 'utf8'),
+      path: portable(path.relative(externRoot, filename)),
+    }));
+  const surface = buildTranspiledBackendSurface(externFiles, transpiledFiles);
+  for (const file of surface.files) {
+    const target = path.join(outputRoot, file.path);
+    mkdirSync(path.dirname(target), { recursive: true });
+    writeFileSync(target, file.contents);
+  }
+  writeFileSync(path.join(outputRoot, 'public-surface.json'), `${JSON.stringify(surface.report, undefined, 2)}\n`);
+  return { files: surface.files.length, summary: surface.report.summary };
+}
+
+function externContractCoverage(files, valueExportsByPackage) {
+  const surface = collectExternSurface(files);
+  const emittedByPackage = new Map();
+  for (const declaration of [...surface.functions, ...surface.values]) {
+    const names = emittedByPackage.get(declaration.sourcePackage) ?? new Set();
+    names.add(declaration.sourceName);
+    emittedByPackage.set(declaration.sourcePackage, names);
+  }
+  const packages = [...valueExportsByPackage]
+    .map(([packageName, names]) => {
+      const expected = [...names].sort(compareText);
+      const emitted = [...(emittedByPackage.get(packageName) ?? new Set())].sort(compareText);
+      const expectedSet = new Set(expected);
+      const emittedSet = new Set(emitted);
+      return {
+        emitted,
+        expected,
+        missing: expected.filter((name) => !emittedSet.has(name)),
+        package: packageName,
+        unexpected: emitted.filter((name) => !expectedSet.has(name)),
+      };
+    })
+    .sort((left, right) => compareText(left.package, right.package));
+  return {
+    packages,
+    schema: 'flight-hx-extern-public-runtime-surface/1',
+    summary: packages.reduce(
+      (summary, package_) => ({
+        emittedDeclarations: summary.emittedDeclarations + package_.emitted.length,
+        emittedTypes: summary.emittedTypes,
+        expectedDeclarations: summary.expectedDeclarations + package_.expected.length,
+        fullyCoveredPackages: summary.fullyCoveredPackages + (package_.missing.length === 0 ? 1 : 0),
+        missingDeclarations: summary.missingDeclarations + package_.missing.length,
+        packages: packages.length,
+        unexpectedDeclarations: summary.unexpectedDeclarations + package_.unexpected.length,
+      }),
+      {
+        emittedDeclarations: 0,
+        emittedTypes: surface.types.length,
+        expectedDeclarations: 0,
+        fullyCoveredPackages: 0,
+        missingDeclarations: 0,
+        packages: 0,
+        unexpectedDeclarations: 0,
+      },
+    ),
+    types: surface.types.map((entry) => ({ name: entry.publicName, source: entry.externPath })),
+  };
 }
 
 function filterExternContractMembers(files, valueExportsByPackage) {
@@ -574,8 +671,8 @@ function createHaxeCompilationSmoke() {
 //   that have them in the pinned TypeScript, using Dynamic as Haxe's constraint-compatible carrier.
 // - Optional unique-symbol branding fields carry TypeScript `void`, which Haxe forbids for structure
 //   fields. Dynamic retains the non-runtime marker without inventing a callable/value contract.
-// - Haxe's `js.lib.Symbol` models JavaScript's self-call through its constructor syntax; emitting
-//   `new` is required by Haxe and still generates the source-language `Symbol(...)` expression.
+// - TypeScript symbols route through the maintained runtime shim so entity brands compile on JS
+//   and remain opaque, stable keys on host-free Haxe targets.
 // - ECMAScript Math methods and zero-argument Array.slice use maintained Haxe equivalents.
 // - Haxe requires default arguments to be literal constants, so inline the two emitted SDK constants.
 function normalizeCompilerHaxe(contents, defaultGenericDeclarations, mode) {
@@ -585,7 +682,8 @@ function normalizeCompilerHaxe(contents, defaultGenericDeclarations, mode) {
         contents
           .replaceAll('flighthq._internal.', 'flight._internal.')
           .replaceAll('->()->Void', '->(()->Void)')
-          .replaceAll('js.lib.Symbol(', 'new js.lib.Symbol(')
+          .replaceAll('js.lib.Symbol.for_(', 'flight._internal._Symbol.for_(')
+          .replaceAll('js.lib.Symbol(', 'flight._internal._Symbol.create(')
           .replaceAll('Math.log2(', 'flight._internal._Math.log2(')
           .replaceAll('Math.sign(', 'flight._internal._Math.sign(')
           .replaceAll('Math.trunc(', 'flight._internal._Math.trunc(')
@@ -639,7 +737,7 @@ function normalizeCompilerHaxe(contents, defaultGenericDeclarations, mode) {
           .replaceAll('typedef IpcTargetedSendBackend<Target> =', 'typedef IpcTargetedSendBackend<Target = Dynamic> ='),
       ),
     ),
-  );
+  ).replace(/(?<![A-Za-z0-9_.])Math\./gu, 'flight._internal._Math.');
   const normalizedDefaults = addDefaultTypeParameters(
     mode === 'extern' ? normalizeExternTypeAliases(normalized) : normalized,
     defaultGenericDeclarations,
@@ -932,12 +1030,18 @@ function enumMemberIdentifier(name) {
 function generatedReadme(manifest) {
   const backend = manifest.compiler.emissionMode === 'extern' ? 'JavaScript extern' : 'transpiled Haxe';
   const compatibility = manifest.summary.compatibilityFiles
-    ? ` The flight-hx integration added ${manifest.summary.compatibilityFiles} public type aliases so the extern tree is self-contained.`
+    ? manifest.compiler.emissionMode === 'extern'
+      ? ` The flight-hx integration added ${manifest.summary.compatibilityFiles} public type aliases so the extern tree is self-contained.`
+      : ` The flight-hx integration added ${manifest.summary.compatibilityFiles} derived public/backend files so the supported transpiled surface is consumer-ready.`
     : '';
   const filtered = manifest.summary.filteredContractFunctions
     ? ` The contract filter removed ${manifest.summary.filteredContractFunctions} functions and ${manifest.summary.filteredContractValues} values that the package source does not re-export from \`/contract\`.`
     : '';
-  return `# Generated ${backend} SDK\n\nThis tree is generated from \`${manifest.source.package}\` ${manifest.source.version} at\n\`${manifest.source.revision}\` by \`flight-compiler\` at \`${manifest.compiler.revision}\`.\nDo not edit it by hand.\n\nThe compiler emitted ${manifest.summary.emittedModules} of ${manifest.summary.sourceModules} dependency-closed source modules\nfrom ${manifest.summary.packages} SDK packages into ${manifest.summary.emittedFiles} Haxe files.${compatibility}${filtered} It refused\n${manifest.summary.refusedModules} modules; every refusal is recorded in \`refusals.json\`.\n\nRegenerate this mode from the flight-hx repository root:\n\n\`\`\`sh\nnpm run generate -- --${manifest.compiler.emissionMode}\nnpm run generate:check -- --${manifest.compiler.emissionMode}\n\`\`\`\n`;
+  const publicSurface =
+    manifest.compiler.emissionMode === 'extern'
+      ? ` Public runtime-export coverage and the compiler-emitted type inventory are recorded in \`public-surface.json\`.`
+      : ` The exact supported and unavailable public \`flight.*\` partitions are recorded in \`public-surface.json\`.`;
+  return `# Generated ${backend} SDK\n\nThis tree is generated from \`${manifest.source.package}\` ${manifest.source.version} at\n\`${manifest.source.revision}\` by \`flight-compiler\` at \`${manifest.compiler.revision}\`.\nDo not edit it by hand.\n\nThe compiler emitted ${manifest.summary.emittedModules} of ${manifest.summary.sourceModules} dependency-closed source modules\nfrom ${manifest.summary.packages} SDK packages into ${manifest.summary.emittedFiles} Haxe files.${compatibility}${filtered} It refused\n${manifest.summary.refusedModules} modules; every refusal is recorded in \`refusals.json\`.${publicSurface}\n\nRegenerate this mode from the flight-hx repository root:\n\n\`\`\`sh\nnpm run generate -- --${manifest.compiler.emissionMode}\nnpm run generate:check -- --${manifest.compiler.emissionMode}\n\`\`\`\n`;
 }
 
 function validateInput(flightDependency, compilerDependency) {
@@ -1018,6 +1122,6 @@ function label(mode) {
 }
 
 function formatSummary(prefix, summary) {
-  const compatibility = summary.compatibilityFiles ? ` plus ${String(summary.compatibilityFiles)} public aliases` : '';
+  const compatibility = summary.compatibilityFiles ? ` plus ${String(summary.compatibilityFiles)} integration files` : '';
   return `${prefix}: ${String(summary.emittedModules)}/${String(summary.sourceModules)} modules and ${String(summary.emittedFiles)} compiler files${compatibility} across ${String(summary.packages)} packages; ${String(summary.refusedModules)} refusals recorded.\n`;
 }

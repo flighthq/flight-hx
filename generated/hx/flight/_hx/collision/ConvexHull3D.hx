@@ -3,7 +3,7 @@ package flight._hx.collision;
 
 function writeCollisionConvexHullFaces3D(points:Array<Float>, out:Array<Float>):Float {
   out.resize(Std.int(0));
-  final count:Dynamic = Math.floor((points.length / 3));
+  final count:Dynamic = flight._internal._Math.floor((points.length / 3));
   if (count < 4) {
     return 0;
   }
@@ -187,7 +187,7 @@ function findInitialTetrahedron(points:Array<Float>, count:Float):Null<Array<Flo
           i_3 += 1;
           continue;
         }
-        final volume:Dynamic = Math.abs(isPointAbovePlane(points, a, b, c, i_3));
+        final volume:Dynamic = flight._internal._Math.abs(isPointAbovePlane(points, a, b, c, i_3));
         if (volume > best) {
           best = volume;
           d = i_3;

@@ -4,10 +4,10 @@ package flight._hx.easing;
 import flight._hx.types.EasingFunction.EasingFunction;
 
 function createEasingSamples(ease:EasingFunction, count:Float, ?out:flight._internal._Float32Array):flight._internal._Float32Array {
-  if (! Math.isFinite(count) || (count < 1)) {
+  if (! flight._internal._Math.isFinite(count) || (count < 1)) {
     throw new haxe.Exception("createEasingSamples: count must be a finite integer >= 1");
   }
-  final n:Dynamic = Math.floor(count);
+  final n:Dynamic = flight._internal._Math.floor(count);
   final result:flight._internal._Float32Array = out ?? new flight._internal._Float32Array(n);
   if (n == 1) {
     result[0] = ease(0.5);

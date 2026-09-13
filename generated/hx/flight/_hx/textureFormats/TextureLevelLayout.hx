@@ -24,8 +24,8 @@ function computeTextureContainerLevels(format:TextureContainerFormat, baseWidth:
                 var mip:Float = 0;
                 while (mip < mipLevels) {
                   {
-                    final width:Dynamic = Math.max(1, (Std.int(baseWidth) >> Std.int(mip)));
-                    final height:Dynamic = Math.max(1, (Std.int(baseHeight) >> Std.int(mip)));
+                    final width:Dynamic = flight._internal._Math.max(1, (Std.int(baseWidth) >> Std.int(mip)));
+                    final height:Dynamic = flight._internal._Math.max(1, (Std.int(baseHeight) >> Std.int(mip)));
                     final byteLength:Float = getTextureContainerLevelByteLength(format, width, height);
                     levels.push({ byteOffset: offset, byteLength: byteLength, height: height, width: width });
                     offset += byteLength;
@@ -49,8 +49,8 @@ function getTextureContainerLevelByteLength(format:TextureContainerFormat, width
   if (block == null) {
     return - 1;
   }
-  final blocksWide:Dynamic = Math.ceil((width / cast(block).blockWidth));
-  final blocksHigh:Dynamic = Math.ceil((height / cast(block).blockHeight));
+  final blocksWide:Dynamic = flight._internal._Math.ceil((width / cast(block).blockWidth));
+  final blocksHigh:Dynamic = flight._internal._Math.ceil((height / cast(block).blockHeight));
   return (blocksWide * blocksHigh) * cast(block).bytesPerBlock;
 }
 
