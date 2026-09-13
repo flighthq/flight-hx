@@ -4,7 +4,7 @@ package flight;
 #if flight_hx
 typedef NodeRuntime = flight._hx.NodeRuntime;
 #elseif (js && flight_esm)
-typedef NodeRuntime = flight._js.NodeRuntime;
+typedef NodeRuntime<Traits:Dynamic = Dynamic> = flight._js.NodeRuntime<Traits>;
 #elseif cpp
 typedef NodeRuntime = flight._cpp.NodeRuntime;
 #elseif js

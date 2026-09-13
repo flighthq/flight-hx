@@ -4,7 +4,7 @@ package flight;
 #if flight_hx
 typedef Signal = flight._hx.Signal;
 #elseif (js && flight_esm)
-typedef Signal = flight._js.Signal;
+typedef Signal<T> = flight._js.Signal<T>;
 #elseif cpp
 typedef Signal = flight._cpp.Signal;
 #elseif js

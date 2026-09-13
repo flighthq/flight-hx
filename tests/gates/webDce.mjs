@@ -9,8 +9,8 @@ import { readFileSync } from 'node:fs';
 import process from 'node:process';
 import { buildWebBundle, webBuildBlockedReason } from '../../tools/esm/buildWeb.mjs';
 
-const USED = 'createVector2';       // WebGeometry calls this
-const UNUSED = 'reflectVector2';    // a real @flighthq/geometry export WebGeometry never calls
+const USED = 'createVector2'; // WebGeometry calls this
+const UNUSED = 'reflectVector2'; // a real @flighthq/geometry export WebGeometry never calls
 
 const blocked = webBuildBlockedReason();
 if (blocked) {
@@ -20,7 +20,7 @@ if (blocked) {
 
 const built = await buildWebBundle({
   main: 'WebGeometry',
-  classpaths: ['generated', 'generated/js', 'examples/web-geometry'],
+  classpaths: ['generated/js', 'generated', 'examples/web-geometry'],
   tag: 'web-dce',
 });
 if (!built.ok) {
@@ -39,4 +39,6 @@ if (failures.length) {
   process.stderr.write(`web-DCE gate failed:\n- ${failures.join('\n- ')}\n`);
   process.exit(1);
 }
-process.stdout.write(`web-DCE gate: ${USED} present, ${UNUSED} tree-shaken away (bundle ${bundle.length} bytes) — pay-per-use holds.\n`);
+process.stdout.write(
+  `web-DCE gate: ${USED} present, ${UNUSED} tree-shaken away (bundle ${bundle.length} bytes) — pay-per-use holds.\n`,
+);

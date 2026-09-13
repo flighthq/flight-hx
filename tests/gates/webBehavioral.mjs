@@ -15,7 +15,7 @@ if (blocked) {
 
 const built = await buildWebBundle({
   main: 'WebGeometry',
-  classpaths: ['generated', 'generated/js', 'examples/web-geometry'],
+  classpaths: ['generated/js', 'generated', 'examples/web-geometry'],
   tag: 'web-behavioral',
 });
 if (!built.ok) {
@@ -28,4 +28,6 @@ if (!(run.stdout + run.stderr).includes('WEB_GEOMETRY_OK')) {
   process.stderr.write(`web-behavioral gate: run did not reach WEB_GEOMETRY_OK:\n${run.stdout}${run.stderr}\n`);
   process.exit(1);
 }
-process.stdout.write('web-behavioral gate: generated flight.* ran against real @flighthq/geometry ESM (static-import bundle).\n');
+process.stdout.write(
+  'web-behavioral gate: generated flight.* ran against real @flighthq/geometry ESM (static-import bundle).\n',
+);

@@ -4,7 +4,7 @@ package flight;
 #if flight_hx
 typedef KeyedTable = flight._hx.KeyedTable;
 #elseif (js && flight_esm)
-typedef KeyedTable = flight._js.KeyedTable;
+typedef KeyedTable<T> = flight._js.KeyedTable<T>;
 #elseif cpp
 typedef KeyedTable = flight._cpp.KeyedTable;
 #elseif js

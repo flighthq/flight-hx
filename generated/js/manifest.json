@@ -1,0 +1,984 @@
+{
+  "schema": "flight-hx-generated-sdk/1",
+  "compiler": {
+    "compatibilityCorrections": [
+      "flight-hx-runtime-module-member-prefix/1",
+      "flight-hx-nested-callback-return-parentheses/1",
+      "flight-hx-enum-abstract-member-identifiers/1",
+      "flight-hx-ipc-target-default-type-parameter/1",
+      "flight-hx-optional-call-lowering/1",
+      "flight-hx-enum-value-type-collision/1",
+      "flight-hx-type-alias-value-collision/1",
+      "flight-hx-source-default-type-parameters/1",
+      "flight-hx-unique-symbol-void-brand/1",
+      "flight-hx-symbol-self-call-constructor/1",
+      "flight-hx-standard-library-spellings/1",
+      "flight-hx-constant-default-arguments/1",
+      "flight-hx-array-api/1",
+      "flight-hx-dynamic-access-keys/1",
+      "flight-hx-optional-backend-arguments/1",
+      "flight-hx-webgl-static-constants/1",
+      "flight-hx-assignment-expression-parentheses/1",
+      "flight-hx-parameter-dependent-defaults/1",
+      "flight-hx-structural-cast/1",
+      "flight-hx-empty-void-function/1",
+      "flight-hx-typed-array-integer-write/1",
+      "flight-hx-callable-generic-constraint/1",
+      "flight-hx-erased-entity-constraint/1",
+      "flight-hx-promise-void-carrier/1",
+      "flight-hx-extern-type-alias-inlining/1",
+      "flight-hx-refused-extern-type-carriers/1",
+      "flight-hx-contract-export-filter/1",
+      "flight-hx-public-extern-aliases/1",
+      "flight-hx-public-extern-generics/1"
+    ],
+    "emissionMode": "extern",
+    "repository": "https://github.com/flighthq/flight-compiler",
+    "revision": "56496423fd865a51023e72966190d10d886eae40",
+    "target": "haxe"
+  },
+  "packages": [
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/abc",
+      "refusedModules": 4,
+      "sourceModules": 4
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/accessibility",
+      "refusedModules": 0,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 22,
+      "package": "@flighthq/adjustments",
+      "refusedModules": 0,
+      "sourceModules": 22
+    },
+    {
+      "emittedModules": 13,
+      "package": "@flighthq/animation",
+      "refusedModules": 0,
+      "sourceModules": 13
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/app",
+      "refusedModules": 0,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 1,
+      "package": "@flighthq/application",
+      "refusedModules": 4,
+      "sourceModules": 5
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/application-gl",
+      "refusedModules": 3,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 1,
+      "package": "@flighthq/assets",
+      "refusedModules": 4,
+      "sourceModules": 5
+    },
+    {
+      "emittedModules": 5,
+      "package": "@flighthq/audio",
+      "refusedModules": 3,
+      "sourceModules": 8
+    },
+    {
+      "emittedModules": 4,
+      "package": "@flighthq/binpack",
+      "refusedModules": 0,
+      "sourceModules": 4
+    },
+    {
+      "emittedModules": 15,
+      "package": "@flighthq/bitmap",
+      "refusedModules": 30,
+      "sourceModules": 45
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/bitmapfont",
+      "refusedModules": 8,
+      "sourceModules": 8
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/bitmapfont-formats",
+      "refusedModules": 8,
+      "sourceModules": 8
+    },
+    {
+      "emittedModules": 1,
+      "package": "@flighthq/bitmaptext",
+      "refusedModules": 5,
+      "sourceModules": 6
+    },
+    {
+      "emittedModules": 18,
+      "package": "@flighthq/camera",
+      "refusedModules": 3,
+      "sourceModules": 21
+    },
+    {
+      "emittedModules": 7,
+      "package": "@flighthq/camera-controls",
+      "refusedModules": 0,
+      "sourceModules": 7
+    },
+    {
+      "emittedModules": 4,
+      "package": "@flighthq/capture",
+      "refusedModules": 0,
+      "sourceModules": 4
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/clip",
+      "refusedModules": 4,
+      "sourceModules": 4
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/clipboard",
+      "refusedModules": 0,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 4,
+      "package": "@flighthq/clock",
+      "refusedModules": 0,
+      "sourceModules": 4
+    },
+    {
+      "emittedModules": 35,
+      "package": "@flighthq/collision",
+      "refusedModules": 3,
+      "sourceModules": 38
+    },
+    {
+      "emittedModules": 11,
+      "package": "@flighthq/color",
+      "refusedModules": 0,
+      "sourceModules": 11
+    },
+    {
+      "emittedModules": 1,
+      "package": "@flighthq/command",
+      "refusedModules": 7,
+      "sourceModules": 8
+    },
+    {
+      "emittedModules": 2,
+      "package": "@flighthq/compression",
+      "refusedModules": 4,
+      "sourceModules": 6
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/connectivity",
+      "refusedModules": 0,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/debug",
+      "refusedModules": 4,
+      "sourceModules": 4
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/device",
+      "refusedModules": 0,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 5,
+      "package": "@flighthq/dialog",
+      "refusedModules": 0,
+      "sourceModules": 5
+    },
+    {
+      "emittedModules": 20,
+      "package": "@flighthq/easing",
+      "refusedModules": 3,
+      "sourceModules": 23
+    },
+    {
+      "emittedModules": 50,
+      "package": "@flighthq/effects",
+      "refusedModules": 27,
+      "sourceModules": 77
+    },
+    {
+      "emittedModules": 6,
+      "package": "@flighthq/effects-canvas",
+      "refusedModules": 24,
+      "sourceModules": 30
+    },
+    {
+      "emittedModules": 1,
+      "package": "@flighthq/effects-gl",
+      "refusedModules": 59,
+      "sourceModules": 60
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/effects-wgpu",
+      "refusedModules": 60,
+      "sourceModules": 60
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/encoding",
+      "refusedModules": 0,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 11,
+      "package": "@flighthq/entity",
+      "refusedModules": 0,
+      "sourceModules": 11
+    },
+    {
+      "emittedModules": 1,
+      "package": "@flighthq/filesystem",
+      "refusedModules": 2,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/flow",
+      "refusedModules": 4,
+      "sourceModules": 4
+    },
+    {
+      "emittedModules": 6,
+      "package": "@flighthq/font",
+      "refusedModules": 3,
+      "sourceModules": 9
+    },
+    {
+      "emittedModules": 9,
+      "package": "@flighthq/font-formats",
+      "refusedModules": 7,
+      "sourceModules": 16
+    },
+    {
+      "emittedModules": 4,
+      "package": "@flighthq/geolocation",
+      "refusedModules": 0,
+      "sourceModules": 4
+    },
+    {
+      "emittedModules": 27,
+      "package": "@flighthq/geometry",
+      "refusedModules": 3,
+      "sourceModules": 30
+    },
+    {
+      "emittedModules": 1,
+      "package": "@flighthq/gizmo",
+      "refusedModules": 4,
+      "sourceModules": 5
+    },
+    {
+      "emittedModules": 4,
+      "package": "@flighthq/glyphatlas",
+      "refusedModules": 6,
+      "sourceModules": 10
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/gui",
+      "refusedModules": 19,
+      "sourceModules": 19
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/haptics",
+      "refusedModules": 0,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 2,
+      "package": "@flighthq/image",
+      "refusedModules": 3,
+      "sourceModules": 5
+    },
+    {
+      "emittedModules": 12,
+      "package": "@flighthq/image-codec",
+      "refusedModules": 0,
+      "sourceModules": 12
+    },
+    {
+      "emittedModules": 1,
+      "package": "@flighthq/importdiagnostics",
+      "refusedModules": 3,
+      "sourceModules": 4
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/input",
+      "refusedModules": 3,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/interaction",
+      "refusedModules": 19,
+      "sourceModules": 19
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/intl",
+      "refusedModules": 9,
+      "sourceModules": 9
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/ipc",
+      "refusedModules": 0,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/keyboard",
+      "refusedModules": 0,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 2,
+      "package": "@flighthq/layout",
+      "refusedModules": 6,
+      "sourceModules": 8
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/lifecycle",
+      "refusedModules": 0,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 14,
+      "package": "@flighthq/lighting",
+      "refusedModules": 0,
+      "sourceModules": 14
+    },
+    {
+      "emittedModules": 1,
+      "package": "@flighthq/loader",
+      "refusedModules": 3,
+      "sourceModules": 4
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/log",
+      "refusedModules": 3,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 12,
+      "package": "@flighthq/materials",
+      "refusedModules": 12,
+      "sourceModules": 24
+    },
+    {
+      "emittedModules": 17,
+      "package": "@flighthq/math",
+      "refusedModules": 0,
+      "sourceModules": 17
+    },
+    {
+      "emittedModules": 2,
+      "package": "@flighthq/media",
+      "refusedModules": 6,
+      "sourceModules": 8
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/mediasession",
+      "refusedModules": 0,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 4,
+      "package": "@flighthq/menu",
+      "refusedModules": 0,
+      "sourceModules": 4
+    },
+    {
+      "emittedModules": 13,
+      "package": "@flighthq/mesh",
+      "refusedModules": 3,
+      "sourceModules": 16
+    },
+    {
+      "emittedModules": 5,
+      "package": "@flighthq/midi",
+      "refusedModules": 2,
+      "sourceModules": 7
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/motionpath",
+      "refusedModules": 3,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/movieclip",
+      "refusedModules": 5,
+      "sourceModules": 5
+    },
+    {
+      "emittedModules": 2,
+      "package": "@flighthq/net",
+      "refusedModules": 3,
+      "sourceModules": 5
+    },
+    {
+      "emittedModules": 7,
+      "package": "@flighthq/node",
+      "refusedModules": 14,
+      "sourceModules": 21
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/notification",
+      "refusedModules": 0,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/particleemitter",
+      "refusedModules": 12,
+      "sourceModules": 12
+    },
+    {
+      "emittedModules": 8,
+      "package": "@flighthq/particles",
+      "refusedModules": 5,
+      "sourceModules": 13
+    },
+    {
+      "emittedModules": 5,
+      "package": "@flighthq/particles-formats",
+      "refusedModules": 12,
+      "sourceModules": 17
+    },
+    {
+      "emittedModules": 1,
+      "package": "@flighthq/path",
+      "refusedModules": 30,
+      "sourceModules": 31
+    },
+    {
+      "emittedModules": 2,
+      "package": "@flighthq/path-boolean",
+      "refusedModules": 9,
+      "sourceModules": 11
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/path-formats",
+      "refusedModules": 3,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 4,
+      "package": "@flighthq/permissions",
+      "refusedModules": 0,
+      "sourceModules": 4
+    },
+    {
+      "emittedModules": 22,
+      "package": "@flighthq/physics2d",
+      "refusedModules": 4,
+      "sourceModules": 26
+    },
+    {
+      "emittedModules": 8,
+      "package": "@flighthq/physics2d-abi",
+      "refusedModules": 0,
+      "sourceModules": 8
+    },
+    {
+      "emittedModules": 32,
+      "package": "@flighthq/physics3d",
+      "refusedModules": 4,
+      "sourceModules": 36
+    },
+    {
+      "emittedModules": 8,
+      "package": "@flighthq/physics3d-abi",
+      "refusedModules": 0,
+      "sourceModules": 8
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/picking",
+      "refusedModules": 4,
+      "sourceModules": 4
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/platform",
+      "refusedModules": 0,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/power",
+      "refusedModules": 0,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/protocol",
+      "refusedModules": 0,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/quadbatch",
+      "refusedModules": 3,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/registry",
+      "refusedModules": 3,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 1,
+      "package": "@flighthq/registry-catalog",
+      "refusedModules": 3,
+      "sourceModules": 4
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/registry-codegen",
+      "refusedModules": 3,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 2,
+      "package": "@flighthq/render",
+      "refusedModules": 24,
+      "sourceModules": 26
+    },
+    {
+      "emittedModules": 6,
+      "package": "@flighthq/render-gl",
+      "refusedModules": 28,
+      "sourceModules": 34
+    },
+    {
+      "emittedModules": 4,
+      "package": "@flighthq/render-wgpu",
+      "refusedModules": 26,
+      "sourceModules": 30
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/requirements",
+      "refusedModules": 4,
+      "sourceModules": 4
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/scene-document",
+      "refusedModules": 11,
+      "sourceModules": 11
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/scene2d",
+      "refusedModules": 10,
+      "sourceModules": 10
+    },
+    {
+      "emittedModules": 6,
+      "package": "@flighthq/scene2d-canvas",
+      "refusedModules": 45,
+      "sourceModules": 51
+    },
+    {
+      "emittedModules": 5,
+      "package": "@flighthq/scene2d-dom",
+      "refusedModules": 29,
+      "sourceModules": 34
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/scene2d-formats",
+      "refusedModules": 20,
+      "sourceModules": 23
+    },
+    {
+      "emittedModules": 1,
+      "package": "@flighthq/scene2d-gl",
+      "refusedModules": 31,
+      "sourceModules": 32
+    },
+    {
+      "emittedModules": 1,
+      "package": "@flighthq/scene2d-resources",
+      "refusedModules": 11,
+      "sourceModules": 12
+    },
+    {
+      "emittedModules": 2,
+      "package": "@flighthq/scene2d-wgpu",
+      "refusedModules": 31,
+      "sourceModules": 33
+    },
+    {
+      "emittedModules": 1,
+      "package": "@flighthq/scene3d",
+      "refusedModules": 20,
+      "sourceModules": 21
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/scene3d-formats",
+      "refusedModules": 25,
+      "sourceModules": 28
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/scene3d-gl",
+      "refusedModules": 63,
+      "sourceModules": 66
+    },
+    {
+      "emittedModules": 12,
+      "package": "@flighthq/scene3d-resources",
+      "refusedModules": 16,
+      "sourceModules": 28
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/scene3d-wgpu",
+      "refusedModules": 45,
+      "sourceModules": 48
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/screen",
+      "refusedModules": 0,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 2,
+      "package": "@flighthq/selection",
+      "refusedModules": 4,
+      "sourceModules": 6
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/sensors",
+      "refusedModules": 0,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/shading",
+      "refusedModules": 16,
+      "sourceModules": 19
+    },
+    {
+      "emittedModules": 2,
+      "package": "@flighthq/shape",
+      "refusedModules": 17,
+      "sourceModules": 19
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/shape-formats",
+      "refusedModules": 4,
+      "sourceModules": 4
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/share",
+      "refusedModules": 0,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/shell",
+      "refusedModules": 0,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 4,
+      "package": "@flighthq/shortcut",
+      "refusedModules": 0,
+      "sourceModules": 4
+    },
+    {
+      "emittedModules": 6,
+      "package": "@flighthq/signals",
+      "refusedModules": 4,
+      "sourceModules": 10
+    },
+    {
+      "emittedModules": 14,
+      "package": "@flighthq/skeleton2d",
+      "refusedModules": 11,
+      "sourceModules": 25
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/skeleton2d-formats",
+      "refusedModules": 7,
+      "sourceModules": 10
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/skeleton3d",
+      "refusedModules": 7,
+      "sourceModules": 10
+    },
+    {
+      "emittedModules": 2,
+      "package": "@flighthq/snapshot",
+      "refusedModules": 5,
+      "sourceModules": 7
+    },
+    {
+      "emittedModules": 2,
+      "package": "@flighthq/socket",
+      "refusedModules": 3,
+      "sourceModules": 5
+    },
+    {
+      "emittedModules": 8,
+      "package": "@flighthq/spatial",
+      "refusedModules": 3,
+      "sourceModules": 11
+    },
+    {
+      "emittedModules": 6,
+      "package": "@flighthq/spring",
+      "refusedModules": 0,
+      "sourceModules": 6
+    },
+    {
+      "emittedModules": 2,
+      "package": "@flighthq/spritesheet",
+      "refusedModules": 7,
+      "sourceModules": 9
+    },
+    {
+      "emittedModules": 5,
+      "package": "@flighthq/spritesheet-formats",
+      "refusedModules": 8,
+      "sourceModules": 13
+    },
+    {
+      "emittedModules": 1,
+      "package": "@flighthq/statechart",
+      "refusedModules": 4,
+      "sourceModules": 5
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/statusbar",
+      "refusedModules": 0,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 1,
+      "package": "@flighthq/storage",
+      "refusedModules": 3,
+      "sourceModules": 4
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/swf",
+      "refusedModules": 13,
+      "sourceModules": 13
+    },
+    {
+      "emittedModules": 1,
+      "package": "@flighthq/text",
+      "refusedModules": 8,
+      "sourceModules": 9
+    },
+    {
+      "emittedModules": 5,
+      "package": "@flighthq/text-markup",
+      "refusedModules": 3,
+      "sourceModules": 8
+    },
+    {
+      "emittedModules": 5,
+      "package": "@flighthq/textbidi",
+      "refusedModules": 3,
+      "sourceModules": 8
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/textinput",
+      "refusedModules": 6,
+      "sourceModules": 6
+    },
+    {
+      "emittedModules": 14,
+      "package": "@flighthq/textlayout",
+      "refusedModules": 0,
+      "sourceModules": 14
+    },
+    {
+      "emittedModules": 4,
+      "package": "@flighthq/textsegment",
+      "refusedModules": 3,
+      "sourceModules": 7
+    },
+    {
+      "emittedModules": 8,
+      "package": "@flighthq/textshaper",
+      "refusedModules": 3,
+      "sourceModules": 11
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/textshaper-canvas",
+      "refusedModules": 0,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/texture",
+      "refusedModules": 6,
+      "sourceModules": 9
+    },
+    {
+      "emittedModules": 11,
+      "package": "@flighthq/texture-formats",
+      "refusedModules": 0,
+      "sourceModules": 11
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/textureatlas",
+      "refusedModules": 7,
+      "sourceModules": 7
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/textureatlas-formats",
+      "refusedModules": 8,
+      "sourceModules": 8
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/tilemap",
+      "refusedModules": 3,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 4,
+      "package": "@flighthq/tilemap-formats",
+      "refusedModules": 7,
+      "sourceModules": 11
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/timeline",
+      "refusedModules": 0,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 1,
+      "package": "@flighthq/tokens",
+      "refusedModules": 4,
+      "sourceModules": 5
+    },
+    {
+      "emittedModules": 0,
+      "package": "@flighthq/tray",
+      "refusedModules": 4,
+      "sourceModules": 4
+    },
+    {
+      "emittedModules": 10,
+      "package": "@flighthq/tween",
+      "refusedModules": 0,
+      "sourceModules": 10
+    },
+    {
+      "emittedModules": 895,
+      "package": "@flighthq/types",
+      "refusedModules": 88,
+      "sourceModules": 983
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/updater",
+      "refusedModules": 0,
+      "sourceModules": 3
+    },
+    {
+      "emittedModules": 4,
+      "package": "@flighthq/useragent",
+      "refusedModules": 0,
+      "sourceModules": 4
+    },
+    {
+      "emittedModules": 2,
+      "package": "@flighthq/velocity",
+      "refusedModules": 3,
+      "sourceModules": 5
+    },
+    {
+      "emittedModules": 3,
+      "package": "@flighthq/video",
+      "refusedModules": 2,
+      "sourceModules": 5
+    },
+    {
+      "emittedModules": 2,
+      "package": "@flighthq/webcam",
+      "refusedModules": 0,
+      "sourceModules": 2
+    },
+    {
+      "emittedModules": 4,
+      "package": "@flighthq/xml",
+      "refusedModules": 0,
+      "sourceModules": 4
+    }
+  ],
+  "source": {
+    "package": "@flighthq/sdk",
+    "repository": "https://github.com/flighthq/flight",
+    "revision": "65889a191bb0d2f5f2f95148590874f3e49bf9d4",
+    "version": "0.5.0"
+  },
+  "summary": {
+    "emittedFiles": 2096,
+    "emittedModules": 1635,
+    "packages": 154,
+    "refusedModules": 1220,
+    "sourceModules": 2855,
+    "compatibilityFiles": 2016,
+    "generatedFiles": 4112,
+    "publicFacadeFiles": 1365,
+    "filteredContractFunctions": 113,
+    "filteredContractValues": 123
+  }
+}

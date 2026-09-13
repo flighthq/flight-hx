@@ -4,7 +4,7 @@ package flight;
 #if flight_hx
 typedef Scene2DFitContext = flight._hx.Scene2DFitContext;
 #elseif (js && flight_esm)
-typedef Scene2DFitContext = flight._js.Scene2DFitContext;
+typedef Scene2DFitContext<Traits:Dynamic = Dynamic> = flight._js.Scene2DFitContext<Traits>;
 #elseif cpp
 typedef Scene2DFitContext = flight._cpp.Scene2DFitContext;
 #elseif js

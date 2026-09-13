@@ -4,7 +4,7 @@ package flight;
 #if flight_hx
 typedef InteractionManager = flight._hx.InteractionManager;
 #elseif (js && flight_esm)
-typedef InteractionManager = flight._js.InteractionManager;
+typedef InteractionManager<N:flight.Node<Dynamic> = Dynamic> = flight._js.InteractionManager<N>;
 #elseif cpp
 typedef InteractionManager = flight._cpp.InteractionManager;
 #elseif js

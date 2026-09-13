@@ -29,6 +29,7 @@ process.stdout.write('Repository-local Haxe libraries are ready.\n');
 
 function downloadLibraries(lixExecutable) {
   const directory = path.join(workspace, 'haxe_libraries');
+  if (!existsSync(directory)) return;
   for (const file of readdirSync(directory)
     .filter((name) => name.endsWith('.hxml'))
     .sort()) {
@@ -87,7 +88,9 @@ function installCompiler() {
 }
 
 function ensureHxcppRunner() {
-  const specification = readFileSync(path.join(workspace, 'haxe_libraries', 'hxcpp.hxml'), 'utf8');
+  const specificationPath = path.join(workspace, 'haxe_libraries', 'hxcpp.hxml');
+  if (!existsSync(specificationPath)) return;
+  const specification = readFileSync(specificationPath, 'utf8');
   const relativeCachePath = / into (hxcpp\/[^\s"]+)/u.exec(specification)?.[1];
   if (!relativeCachePath) throw new Error('Could not resolve the pinned hxcpp cache path.');
   const libraryCache = process.env.HAXE_LIBCACHE ?? path.join(os.homedir(), 'haxe', 'haxe_libraries');

@@ -4,7 +4,7 @@ package flight;
 #if flight_hx
 typedef OrdinalTable = flight._hx.OrdinalTable;
 #elseif (js && flight_esm)
-typedef OrdinalTable = flight._js.OrdinalTable;
+typedef OrdinalTable<T> = flight._js.OrdinalTable<T>;
 #elseif cpp
 typedef OrdinalTable = flight._cpp.OrdinalTable;
 #elseif js

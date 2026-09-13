@@ -4,7 +4,7 @@ package flight;
 #if flight_hx
 typedef LayoutNode = flight._hx.LayoutNode;
 #elseif (js && flight_esm)
-typedef LayoutNode = flight._js.LayoutNode;
+typedef LayoutNode<ContainerStyle:Dynamic = Dynamic, ItemStyle:Dynamic = Dynamic> = flight._js.LayoutNode<ContainerStyle, ItemStyle>;
 #elseif cpp
 typedef LayoutNode = flight._cpp.LayoutNode;
 #elseif js

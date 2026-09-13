@@ -7,6 +7,7 @@
 // directory is named for, and is not built yet. Until then a require()-based entry bundles correctly
 // but pulls the whole package (no pay-per-use); see tests/gates/webDce.mjs.
 import { build } from 'esbuild';
+import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { resolveDependency } from '../../scripts/dependencyLock.mjs';
@@ -24,11 +25,26 @@ export async function bundleFlightJs({ entry, outfile, format = 'cjs', platform 
     mainFields: ['module', 'main'],
     conditions: ['import', 'default'],
     nodePaths: [join(flight.directory, 'node_modules')], // resolve @flighthq/* from Flight's workspace
+    plugins: [flightWorkspacePackages(flight.directory)],
     treeShaking: true,
     metafile: true,
     logLevel: 'silent',
   });
   return { inputCount: Object.keys(result.metafile.inputs).length, metafile: result.metafile };
+}
+
+function flightWorkspacePackages(flightDirectory) {
+  return {
+    name: 'flight-workspace-packages',
+    setup(build_) {
+      build_.onResolve({ filter: /^@flighthq\// }, ({ path: specifier }) => {
+        const match = /^@flighthq\/([^/]+)(?:\/(.+))?$/u.exec(specifier);
+        if (!match) return undefined;
+        const entry = join(flightDirectory, 'packages', match[1], 'dist', `${match[2] ?? 'index'}.js`);
+        return existsSync(entry) ? { path: entry } : undefined;
+      });
+    },
+  };
 }
 
 // CLI: node tools/esm/bundle.mjs <entry.js> <outfile.js>

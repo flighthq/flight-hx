@@ -4,7 +4,7 @@ package flight;
 #if flight_hx
 typedef SlotTable = flight._hx.SlotTable;
 #elseif (js && flight_esm)
-typedef SlotTable = flight._js.SlotTable;
+typedef SlotTable<T> = flight._js.SlotTable<T>;
 #elseif cpp
 typedef SlotTable = flight._cpp.SlotTable;
 #elseif js

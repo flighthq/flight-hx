@@ -4,7 +4,7 @@ package flight;
 #if flight_hx
 typedef HasIpcTargetedSend = flight._hx.HasIpcTargetedSend;
 #elseif (js && flight_esm)
-typedef HasIpcTargetedSend = flight._js.HasIpcTargetedSend;
+typedef HasIpcTargetedSend<Target> = flight._js.HasIpcTargetedSend<Target>;
 #elseif cpp
 typedef HasIpcTargetedSend = flight._cpp.HasIpcTargetedSend;
 #elseif js

@@ -4,7 +4,7 @@ package flight;
 #if flight_hx
 typedef FlightDocumentLayoutBinding = flight._hx.FlightDocumentLayoutBinding;
 #elseif (js && flight_esm)
-typedef FlightDocumentLayoutBinding = flight._js.FlightDocumentLayoutBinding;
+typedef FlightDocumentLayoutBinding<N:flight.Node<Dynamic> = Dynamic> = flight._js.FlightDocumentLayoutBinding<N>;
 #elseif cpp
 typedef FlightDocumentLayoutBinding = flight._cpp.FlightDocumentLayoutBinding;
 #elseif js

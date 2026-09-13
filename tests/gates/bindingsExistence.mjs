@@ -1,4 +1,4 @@
-// Bindings-existence gate: the validation type-checking CANNOT do. A Haxe @:jsRequire extern is an
+// Bindings-existence gate: the validation type-checking CANNOT do. A Haxe @:jsImport extern is an
 // unchecked promise — it can name an export that doesn't exist, or bind to the wrong package, and the
 // compiler will never notice. This gate loads the REAL Flight ESM for every generated function module
 // and asserts each bound static actually resolves to an exported function of that package. It covers
@@ -23,11 +23,11 @@ if (blocked) {
 const repoRoot = join(import.meta.dirname, '..', '..');
 const fnDir = join(repoRoot, 'generated/js/flight/_js/_fn');
 
-// Parse each generated function-module backing: its @:jsRequire specifier + static function names.
+// Parse each generated function-module backing: its import specifier + static function names.
 const modules = [];
 for (const file of readdirSync(fnDir).filter((f) => f.endsWith('.hx'))) {
   const text = readFileSync(join(fnDir, file), 'utf8');
-  const specifier = text.match(/@:jsRequire\("([^"]+)"\)/)?.[1];
+  const specifier = text.match(/@:(?:jsImport|jsRequire)\("([^"]+)"\)/)?.[1];
   const names = [...text.matchAll(/static function (\w+)\(/g)].map((m) => m[1]);
   if (specifier && names.length) modules.push({ module: file.replace(/\.hx$/, ''), specifier, names });
 }
@@ -44,10 +44,15 @@ for (const m of modules) {
     const ns = (await import(`${out}?t=${checkedFns}`)).ns;
     for (const name of m.names) {
       checkedFns++;
-      if (typeof ns[name] !== 'function') problems.push(`${m.specifier} · ${name} (${ns[name] === undefined ? 'missing' : 'not a function: ' + typeof ns[name]})`);
+      if (typeof ns[name] !== 'function')
+        problems.push(
+          `${m.specifier} · ${name} (${ns[name] === undefined ? 'missing' : 'not a function: ' + typeof ns[name]})`,
+        );
     }
   } catch (error) {
-    problems.push(`${m.specifier}: could not load real package — ${(error?.errors ?? [{ text: error?.message }]).map((e) => e.text).join('; ')}`);
+    problems.push(
+      `${m.specifier}: could not load real package — ${(error?.errors ?? [{ text: error?.message }]).map((e) => e.text).join('; ')}`,
+    );
   }
 }
 
@@ -56,9 +61,13 @@ function writeEntry(path, specifier) {
 }
 
 if (problems.length) {
-  process.stderr.write(`bindings-existence gate: ${problems.length} generated bindings do not resolve to a real Flight export:\n`);
+  process.stderr.write(
+    `bindings-existence gate: ${problems.length} generated bindings do not resolve to a real Flight export:\n`,
+  );
   for (const p of problems.slice(0, 40)) process.stderr.write(`  - ${p}\n`);
   if (problems.length > 40) process.stderr.write(`  … and ${problems.length - 40} more\n`);
   process.exit(1);
 }
-process.stdout.write(`bindings-existence gate: all ${checkedFns} generated functions across ${modules.length} modules resolve to real Flight exports.\n`);
+process.stdout.write(
+  `bindings-existence gate: all ${checkedFns} generated functions across ${modules.length} modules resolve to real Flight exports.\n`,
+);

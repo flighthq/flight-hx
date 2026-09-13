@@ -4,7 +4,7 @@ package flight;
 #if flight_hx
 typedef IpcTargetedSendBackend = flight._hx.IpcTargetedSendBackend;
 #elseif (js && flight_esm)
-typedef IpcTargetedSendBackend = flight._js.IpcTargetedSendBackend;
+typedef IpcTargetedSendBackend<Target = Dynamic> = flight._js.IpcTargetedSendBackend<Target>;
 #elseif cpp
 typedef IpcTargetedSendBackend = flight._cpp.IpcTargetedSendBackend;
 #elseif js

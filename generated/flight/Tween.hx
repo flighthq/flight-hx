@@ -4,7 +4,7 @@ package flight;
 #if flight_hx
 typedef Tween = flight._hx.Tween;
 #elseif (js && flight_esm)
-typedef Tween = flight._js.Tween;
+typedef Tween<T:Dynamic> = flight._js.Tween<T>;
 #elseif cpp
 typedef Tween = flight._cpp.Tween;
 #elseif js

@@ -4,7 +4,7 @@ package flight;
 #if flight_hx
 typedef NodeOrderList = flight._hx.NodeOrderList;
 #elseif (js && flight_esm)
-typedef NodeOrderList = flight._js.NodeOrderList;
+typedef NodeOrderList<Traits:Dynamic = Dynamic> = flight._js.NodeOrderList<Traits>;
 #elseif cpp
 typedef NodeOrderList = flight._cpp.NodeOrderList;
 #elseif js

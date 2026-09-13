@@ -37,17 +37,39 @@ export async function buildWebBundle({ main, classpaths, tag = 'web' }) {
   const cpArgs = [];
   for (const cp of classpaths) cpArgs.push('-cp', cp);
 
-  const compile = spawnSync('node', [
-    'tools/haxe.mjs', ...cpArgs, '-cp', 'tools/esm',
-    '--main', main, '-D', 'flight_esm', '-dce', 'full',
-    '--macro', 'EsmGenerator.use()', '-js', jsPath,
-  ], { cwd: repoRoot, encoding: 'utf8' });
+  const compile = spawnSync(
+    'node',
+    [
+      'tools/haxe.mjs',
+      ...cpArgs,
+      '-cp',
+      'src',
+      '-cp',
+      'tools/esm',
+      '--main',
+      main,
+      '-D',
+      'flight_esm',
+      '-dce',
+      'full',
+      '--macro',
+      'EsmGenerator.use()',
+      '-js',
+      jsPath,
+    ],
+    { cwd: repoRoot, encoding: 'utf8' },
+  );
   if (compile.status !== 0) {
     return { ok: false, stage: 'compile', message: compile.stdout + compile.stderr };
   }
 
   try {
-    const { inputCount } = await bundleFlightJs({ entry: jsPath, outfile: bundlePath, format: 'esm', platform: 'neutral' });
+    const { inputCount } = await bundleFlightJs({
+      entry: jsPath,
+      outfile: bundlePath,
+      format: 'esm',
+      platform: 'neutral',
+    });
     return { ok: true, jsPath, bundlePath, inputCount };
   } catch (error) {
     return { ok: false, stage: 'bundle', message: (error?.errors ?? []).map((e) => e.text).join('\n') };

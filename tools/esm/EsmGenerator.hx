@@ -9,7 +9,7 @@ using Lambda;
 // Vendored, purpose-built ESM generator (genes is the reference, not a fork). It is a custom Haxe JS
 // generator scoped to this repo's binding vocabulary: it reuses the compiler's own expression codegen
 // (JSGenApi.generateValue/generateStatement) and only owns module structure — declared package
-// objects (ESM is strict-mode) and, the whole point, turning `@:jsRequire("pkg")` externs into hoisted
+// objects (ESM is strict-mode) and, the whole point, turning `@:jsImport("pkg")` externs into hoisted
 // static `import * as alias from "pkg"` with the type accessor pointing at the alias. All uses are
 // static member accesses (alias.addVector2), which a bundler tree-shakes — so pay-per-use survives,
 // unlike Haxe's default `require()` namespace pull-in.
@@ -26,27 +26,29 @@ class EsmGenerator {
 
   public function new(api) {
     this.api = api;
-    // Pre-pass: map every @:jsRequire extern to an import alias so the type accessor can resolve it.
+    // Pre-pass: map every compiler @:jsImport extern (plus legacy @:jsRequire output) to an import
+    // alias so the type accessor can resolve it.
     for (t in api.types) switch (t) {
       case TInst(ref, _):
         final c = ref.get();
-        if (c.isExtern && c.meta.has(':jsRequire')) registerImport(c);
+        if (c.isExtern && (c.meta.has(':jsImport') || c.meta.has(':jsRequire'))) registerImport(c);
       default:
     }
     api.setTypeAccessor(getType);
   }
 
   function registerImport(c:ClassType) {
-    final meta = c.meta.extract(':jsRequire')[0];
+    final metadataName = c.meta.has(':jsImport') ? ':jsImport' : ':jsRequire';
+    final meta = c.meta.extract(metadataName)[0];
     final specifier = switch (meta.params) {
-      case [expr]: switch (expr.expr) { case EConst(CString(s)): s; default: fail(c, '@:jsRequire needs a string module'); };
-      default: fail(c, '@:jsRequire with a member name is not supported by this scoped generator; bind the whole module');
+      case [expr]: switch (expr.expr) { case EConst(CString(s)): s; default: fail(c, '$metadataName needs a string module'); };
+      default: fail(c, '$metadataName with a member name is not supported by this scoped generator; bind the whole module');
     };
     if (!imports.exists(specifier)) imports.set(specifier, 'flight_esm_' + imports.count());
     externModule.set(getPath(c), specifier);
   }
 
-  // A type reference resolves to its import alias (extern @:jsRequire) or to a flat top-level `var`
+  // A type reference resolves to its import alias (extern @:jsImport/@:jsRequire) or a flat `var`
   // binding. Flat bindings (not nested package-object mutation) are what let the bundler drop the
   // unused ones — the whole basis of pay-per-use survival.
   function getType(t:Type):String {
@@ -60,7 +62,7 @@ class EsmGenerator {
 
   function classAccessor(c:ClassType):String {
     final path = getPath(c);
-    if (externModule.exists(path)) return imports.get(externModule.get(path)); // @:jsRequire -> import alias
+    if (externModule.exists(path)) return imports.get(externModule.get(path)); // extern metadata -> import alias
     if (c.isExtern) return nativeName(c); // native global (Error, Math, ...) — never flattened, never a var
     return flatName(path); // our own class -> flat top-level binding (bundler can DCE it)
   }

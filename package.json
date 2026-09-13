@@ -11,14 +11,16 @@
     "rehydrate:update": "node scripts/rehydrate.mjs --update",
     "haxe": "node tools/haxe.mjs",
     "generate": "node tools/backend-hx/generate.mjs",
+    "generate:check": "node tools/backend-hx/generate.mjs --check",
     "proof": "node tools/haxe.mjs -cp src -cp tests/haxe --main ProofOfShape --interp -D flight_hx",
     "gate:proof": "node tests/gates/proofShape.mjs",
     "gate:surface": "node tests/gates/generatedSurface.mjs",
     "gate:bindings": "node tests/gates/bindingsExistence.mjs",
     "gate:web": "node tests/gates/webBehavioral.mjs",
     "gate:parity": "node tests/gates/backendParity.mjs",
+    "gate:transpile": "node tests/gates/transpiledSources.mjs",
     "gate:dce": "node tests/gates/webDce.mjs",
-    "check": "npm run rehydrate:check && npm run gate:proof"
+    "check": "npm run rehydrate:check && npm run gate:proof && npm run gate:surface && npm run gate:bindings && npm run gate:transpile"
   },
   "devDependencies": {
     "esbuild": "^0.28.2",
