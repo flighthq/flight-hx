@@ -12,7 +12,7 @@
       "name": "flight-compiler",
       "repository": "https://github.com/flighthq/flight-compiler",
       "branch": "main",
-      "commit": "56496423fd865a51023e72966190d10d886eae40"
+      "commit": "9edfcca46db71d6a6a53aafa2718d8c9f9d5df7c"
     },
     {
       "name": "flight-cpp",
