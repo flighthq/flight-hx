@@ -1,7 +1,36 @@
 package flight._internal;
 
 #if js
-typedef _Promise<T> = js.lib.Promise<T>;
+@:forward
+abstract _Promise<T>(js.lib.Promise<T>) from js.lib.Promise<T> to js.lib.Promise<T> {
+  public inline function new(executor:Dynamic) {
+    this = new js.lib.Promise(executor);
+  }
+
+  public static inline function resolve<T>(value:Dynamic):_Promise<T> {
+    return cast js.lib.Promise.resolve(value);
+  }
+
+  public static inline function reject<T>(reason:Dynamic):_Promise<T> {
+    return cast js.lib.Promise.reject(reason);
+  }
+
+  public static inline function all<T>(values:Array<Dynamic>):_Promise<Array<T>> {
+    return cast js.lib.Promise.all(values);
+  }
+
+  public static inline function allSettled<T>(values:Array<Dynamic>):_Promise<Array<Dynamic>> {
+    return cast js.Syntax.code("Promise.allSettled({0})", values);
+  }
+
+  public static inline function race<T>(values:Array<Dynamic>):_Promise<T> {
+    return cast js.lib.Promise.race(values);
+  }
+
+  public static inline function finallyTask<T>(task:_Promise<T>, onFinally:Dynamic):_Promise<T> {
+    return cast (cast task : js.lib.Promise<T>).finally(onFinally);
+  }
+}
 #else
 /**
   Small Promises/A+-style carrier for host-free targets. Delivery is immediate because Haxe has no
@@ -80,12 +109,39 @@ class _Promise<T> {
     return promise;
   }
 
+  public static function allSettled<T>(values:Array<Dynamic>):_Promise<Array<Dynamic>> {
+    final promise:_Promise<Array<Dynamic>> = pending();
+    if (values.length == 0) {
+      promise.settleFulfilled([]);
+      return promise;
+    }
+    final results:Array<Dynamic> = [];
+    results.resize(values.length);
+    var remaining = values.length;
+    final complete = (index:Int, result:Dynamic) -> {
+      results[index] = result;
+      remaining -= 1;
+      if (remaining == 0) promise.settleFulfilled(results);
+    };
+    for (index in 0...values.length) {
+      _Promise.resolve(values[index]).subscribe(
+        (value) -> complete(index, {status: 'fulfilled', value: value}),
+        (reason) -> complete(index, {status: 'rejected', reason: reason}),
+      );
+    }
+    return promise;
+  }
+
   public static function race<T>(values:Array<Dynamic>):_Promise<T> {
     final promise:_Promise<T> = pending();
     for (value in values) {
       _Promise.resolve(value).subscribe(promise.settleFulfilled, promise.settleRejected);
     }
     return promise;
+  }
+
+  public static function finallyTask<T>(task:_Promise<T>, onFinally:Dynamic):_Promise<T> {
+    return task.finally(onFinally);
   }
 
   static function pending<T>():_Promise<T> {

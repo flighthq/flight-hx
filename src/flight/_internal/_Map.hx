@@ -1,7 +1,60 @@
 package flight._internal;
 
 #if js
-typedef _Map<K, V> = js.lib.Map<K, V>;
+@:forward
+abstract _Map<K, V>(js.lib.Map<K, V>) from js.lib.Map<K, V> to js.lib.Map<K, V> {
+  public inline function new(?entries:Dynamic) {
+    this = cast js.Syntax.code("{0} == null ? new Map() : new Map({0})", entries);
+  }
+
+  public inline function entries():_MapIterator<Dynamic> {
+    return new _MapIterator(cast (cast this : js.lib.Map<K, V>).entries());
+  }
+
+  public inline function keys():_MapIterator<K> {
+    return new _MapIterator((cast this : js.lib.Map<K, V>).keys());
+  }
+
+  /** TypeScript Map iteration yields key/value entries, unlike Haxe's native JS Map adapter. */
+  public inline function iterator():_MapIterator<Dynamic> {
+    return entries();
+  }
+
+  public inline function values():_MapIterator<V> {
+    return new _MapIterator((cast this : js.lib.Map<K, V>).values());
+  }
+}
+
+class _MapIterator<T> {
+  final source:js.lib.Iterator<T>;
+  var step:Null<js.lib.Iterator.IteratorStep<T>>;
+
+  public inline function new(source:js.lib.Iterator<T>) {
+    this.source = source;
+  }
+
+  public function copy():Array<T> {
+    final values:Array<T> = [];
+    while (hasNext()) values.push(next());
+    return values;
+  }
+
+  public inline function iterator():_MapIterator<T> {
+    return this;
+  }
+
+  public function hasNext():Bool {
+    if (step == null) step = source.next();
+    return !step.done;
+  }
+
+  public function next():T {
+    if (step == null) step = source.next();
+    final value:T = cast step.value;
+    step = null;
+    return value;
+  }
+}
 #else
 /** Cross-target Map carrier for host-free transpiled modules. */
 class _Map<K, V> {
@@ -45,6 +98,10 @@ class _Map<K, V> {
 
   public function keys():Iterator<K> {
     return [for (item in items) item.key].iterator();
+  }
+
+  public function iterator():Iterator<Array<Dynamic>> {
+    return entries();
   }
 
   public function set(key:K, value:V):_Map<K, V> {

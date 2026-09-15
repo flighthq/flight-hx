@@ -6,23 +6,16 @@ import path from 'node:path';
 import process from 'node:process';
 
 const repoRoot = path.join(import.meta.dirname, '..', '..');
-const requiredModules = new Set([
-  '_Date',
-  '_Float32Array',
-  '_Float64Array',
-  '_Int8Array',
-  '_Int16Array',
-  '_Int32Array',
-  '_Map',
-  '_Promise',
-  '_Set',
-  '_Symbol',
-  '_UInt8Array',
-  '_UInt8ClampedArray',
-  '_UInt16Array',
-  '_UInt32Array',
-  '_WeakMap',
-]);
+const manifests = new Map(
+  ['js', 'hx'].map((directory) => [
+    directory,
+    JSON.parse(readFileSync(path.join(repoRoot, 'generated', directory, 'manifest.json'), 'utf8')),
+  ]),
+);
+const runtimeContract = collectRuntimeContract(manifests.get('js').runtime?.abi);
+const requiredModules = runtimeContract.modules;
+const failures = [];
+equal('compiler Haxe runtime ABI', manifests.get('js').runtime?.abi?.schema, 'flight-haxe-runtime-abi/2');
 for (const filename of filesUnder(path.join(repoRoot, 'generated', 'hx')).filter((entry) => entry.endsWith('.hx'))) {
   const contents = readFileSync(filename, 'utf8');
   for (const match of contents.matchAll(/\bflight\._internal\.(_[A-Za-z_][A-Za-z0-9_]*)\b/gu)) {
@@ -30,14 +23,21 @@ for (const filename of filesUnder(path.join(repoRoot, 'generated', 'hx')).filter
   }
 }
 
-const failures = [];
 for (const moduleName of [...requiredModules].sort()) {
-  if (!existsSync(path.join(repoRoot, 'src', 'flight', '_internal', `${moduleName}.hx`))) {
+  const filename = path.join(repoRoot, 'src', 'flight', '_internal', `${moduleName}.hx`);
+  if (!existsSync(filename)) {
     failures.push(`generated code references runtime module ${moduleName}, but ${moduleName}.hx is missing`);
+    continue;
+  }
+  const contents = readFileSync(filename, 'utf8');
+  for (const member of [...(runtimeContract.members.get(moduleName) ?? [])].sort()) {
+    if (!new RegExp(`\\b(?:function|var)\\s+${member}\\b`, 'u').test(contents)) {
+      failures.push(`runtime ABI declares ${moduleName}.${member}, but ${moduleName}.hx does not implement it`);
+    }
   }
 }
 for (const directory of ['js', 'hx']) {
-  const manifest = JSON.parse(readFileSync(path.join(repoRoot, 'generated', directory, 'manifest.json'), 'utf8'));
+  const manifest = manifests.get(directory);
   equal(`${directory} external symbol contract`, manifest.runtime?.externalSymbols, 'flight-runtime-contract/2');
   equal(`${directory} constructor ABI`, manifest.runtime?.constructorAbi, 'flight-runtime-constructor-abi/1');
   equal(`${directory} task ABI`, manifest.runtime?.taskAbi, 'flight-runtime-task-capability-abi/1');
@@ -46,6 +46,7 @@ for (const directory of ['js', 'hx']) {
 }
 if (failures.length > 0) fail();
 
+const jsOutput = path.join(tmpdir(), 'flight-hx-runtime-contract.js');
 const jsCompile = spawnSync(
   'node',
   [
@@ -57,7 +58,7 @@ const jsCompile = spawnSync(
     '--main',
     'RuntimeContractCompile',
     '-js',
-    path.join(tmpdir(), 'flight-hx-runtime-contract.js'),
+    jsOutput,
     '-D',
     'flight_hx',
     '--macro',
@@ -67,6 +68,12 @@ const jsCompile = spawnSync(
 );
 if (jsCompile.status !== 0) {
   failures.push(`JavaScript runtime modules did not compile:\n${jsCompile.stdout}${jsCompile.stderr}`);
+}
+if (jsCompile.status === 0) {
+  const jsRun = spawnSync('node', [jsOutput], { cwd: repoRoot, encoding: 'utf8' });
+  if (jsRun.status !== 0 || !(jsRun.stdout + jsRun.stderr).includes('RUNTIME_CONTRACT_OK')) {
+    failures.push(`JavaScript runtime behavior failed:\n${jsRun.stdout}${jsRun.stderr}`);
+  }
 }
 
 const portableRun = spawnSync(
@@ -93,7 +100,7 @@ if (portableRun.status !== 0 || !(portableRun.stdout + portableRun.stderr).inclu
 if (failures.length > 0) fail();
 
 process.stdout.write(
-  `runtime-contract gate: ${String(requiredModules.size)} referenced runtime modules satisfy the declared JavaScript ABI; the host-free portable subset executed on Haxe eval.\n`,
+  `runtime-contract gate: ${String(requiredModules.size)} declared runtime modules compile and the elected JavaScript helpers execute; the host-free portable subset executed on Haxe eval.\n`,
 );
 
 function equal(label, actual, expected) {
@@ -103,6 +110,37 @@ function equal(label, actual, expected) {
 function fail() {
   process.stderr.write(`runtime-contract gate failed:\n- ${failures.join('\n- ')}\n`);
   process.exit(1);
+}
+
+function collectRuntimeContract(abi) {
+  const modules = new Set();
+  const members = new Map();
+  if (abi?.schema !== 'flight-haxe-runtime-abi/2') return { members, modules };
+  const visit = (value) => {
+    if (Array.isArray(value)) {
+      for (const entry of value) visit(entry);
+    } else if (value && typeof value === 'object') {
+      const target = typeof value.targetName === 'string' ? /^(_[A-Za-z][A-Za-z0-9]*)$/u.exec(value.targetName) : undefined;
+      if (target && Array.isArray(value.members) && value.members.every((entry) => typeof entry === 'string')) {
+        const moduleMembers = members.get(target[1]) ?? new Set();
+        for (const member of value.members) moduleMembers.add(member);
+        members.set(target[1], moduleMembers);
+      }
+      for (const entry of Object.values(value)) visit(entry);
+    } else if (typeof value === 'string') {
+      const target = /^(_[A-Za-z][A-Za-z0-9]*)(?:\.([A-Za-z_][A-Za-z0-9_]*))?/u.exec(value);
+      if (target) {
+        modules.add(target[1]);
+        if (target[2]) {
+          const moduleMembers = members.get(target[1]) ?? new Set();
+          moduleMembers.add(target[2]);
+          members.set(target[1], moduleMembers);
+        }
+      }
+    }
+  };
+  visit(abi);
+  return { members, modules };
 }
 
 function filesUnder(directory) {

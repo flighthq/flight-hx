@@ -47,13 +47,14 @@ export function buildTranspiledBackendSurface(externFiles, transpiledFiles) {
   };
 }
 
-export function collectExternSurface(files) {
+export function collectExternSurface(files, publicTypeNames = inferPublicExternTypeNames(files)) {
   const functions = [];
   const types = [];
   const values = [];
   for (const file of files) {
     const typeMatch = /^flight\/_js\/([A-Za-z_][A-Za-z0-9_]*)\.hx$/u.exec(file.path);
     if (typeMatch) {
+      if (!publicTypeNames.has(typeMatch[1])) continue;
       const declaration = parseTypeDeclaration(file.contents, typeMatch[1]);
       if (!declaration) throw new Error(`Extern ${file.path} has no matching public type declaration`);
       types.push({
@@ -96,6 +97,15 @@ export function collectExternSurface(files) {
     types: types.sort(comparePublicEntries),
     values: values.sort(comparePublicEntries),
   };
+}
+
+function inferPublicExternTypeNames(files) {
+  const names = new Set();
+  for (const file of files) {
+    const match = /^flight\/([A-Za-z_][A-Za-z0-9_]*)\.hx$/u.exec(file.path);
+    if (match && parseTypeDeclaration(file.contents, match[1])) names.add(match[1]);
+  }
+  return names;
 }
 
 export function collectPublicHaxeSurface(files) {

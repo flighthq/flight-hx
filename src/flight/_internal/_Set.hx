@@ -1,7 +1,22 @@
 package flight._internal;
 
 #if js
-typedef _Set<T> = js.lib.Set<T>;
+@:forward
+abstract _Set<T>(js.lib.Set<T>) from js.lib.Set<T> to js.lib.Set<T> {
+  public inline function new(?values:Dynamic) {
+    this = cast js.Syntax.code("{0} == null ? new Set() : new Set({0})", values);
+  }
+
+  /** Implements the array-shaped operation emitted for Set spreads. */
+  public inline function copy():Array<T> {
+    return cast js.Syntax.code("Array.from({0})", this);
+  }
+
+  @:to
+  public inline function toArray():Array<T> {
+    return copy();
+  }
+}
 #else
 /** Cross-target Set carrier for host-free transpiled modules. */
 class _Set<T> {
@@ -41,6 +56,10 @@ class _Set<T> {
 
   public function keys():Iterator<T> {
     return valuesByKey.keys();
+  }
+
+  public function copy():Array<T> {
+    return [for (value in valuesByKey.keys()) value];
   }
 
   public function values():Iterator<T> {

@@ -1,7 +1,49 @@
 package flight._internal;
 
 #if js
-typedef _Float32Array<T = Dynamic> = js.lib.Float32Array;
+typedef _Float32Array<T = Dynamic> = _Float32ArrayImpl;
+
+@:forward
+abstract _Float32ArrayImpl(js.lib.Float32Array) from js.lib.Float32Array to js.lib.Float32Array {
+  public inline function new(?source:Dynamic, ?byteOffset:Float, ?length:Float) {
+    this = cast js.Syntax.code(
+      "{2} != null ? new Float32Array({0}, {1}, {2}) : {1} != null ? new Float32Array({0}, {1}) : {0} == null ? new Float32Array() : new Float32Array({0})",
+      source,
+      byteOffset,
+      length,
+    );
+  }
+
+  @:arrayAccess
+  public inline function get(index:Float):Float {
+    return js.Syntax.code("{0}[{1}]", this, index);
+  }
+
+  @:arrayAccess
+  public inline function setAt(index:Float, value:Float):Float {
+    return js.Syntax.code("{0}[{1}] = {2}", this, index, value);
+  }
+
+  public inline function fill(value:Float, start:Float = 0, ?end:Float):_Float32ArrayImpl {
+    return cast js.Syntax.code("{2} == null ? {0}.fill({1}, {3}) : {0}.fill({1}, {3}, {2})", this, value, end, start);
+  }
+
+  public inline function set(source:Dynamic, offset:Float = 0):Void {
+    js.Syntax.code("{0}.set({1}, {2})", this, source, offset);
+  }
+
+  public inline function slice(start:Float = 0, ?end:Float):_Float32ArrayImpl {
+    return cast js.Syntax.code("{2} == null ? {0}.slice({1}) : {0}.slice({1}, {2})", this, start, end);
+  }
+
+  public inline function subarray(start:Float = 0, ?end:Float):_Float32ArrayImpl {
+    return cast js.Syntax.code("{2} == null ? {0}.subarray({1}) : {0}.subarray({1}, {2})", this, start, end);
+  }
+
+  public static inline function from<T>(value:Dynamic, ?map:Dynamic):_Float32Array<T> {
+    return cast js.Syntax.code("{1} == null ? Float32Array.from({0}) : Float32Array.from({0}, {1})", value, map);
+  }
+}
 #else
 /** Float32-backed array semantics for host-free transpiled modules. */
 abstract _Float32Array<T = Dynamic>(Array<Float>) {

@@ -36,6 +36,14 @@ for (const declaration of [...surface.functions, ...surface.values]) {
   declarations.push(declaration);
   declarationsByPackage.set(declaration.sourcePackage, declarations);
 }
+const publicSurface = JSON.parse(readFileSync(path.join(externRoot, 'public-surface.json'), 'utf8'));
+for (const package_ of publicSurface.packages) {
+  for (const sourceName of package_.inlined ?? []) {
+    const declarations = declarationsByPackage.get(package_.package) ?? [];
+    declarations.push({ kind: 'value', sourceName });
+    declarationsByPackage.set(package_.package, declarations);
+  }
+}
 
 let checkedFns = 0;
 let checkedValues = 0;

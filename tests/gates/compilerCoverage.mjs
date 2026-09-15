@@ -5,17 +5,17 @@ import process from 'node:process';
 
 const budgets = {
   extern: {
-    compatibilityCorrections: 29,
-    dependencyRefusals: 1146,
-    emittedDeclarations: 3093,
-    emittedTypes: 2016,
-    expectedDeclarations: 7082,
-    fullyCoveredPackages: 59,
-    internalErrors: 20,
-    rootRefusals: 74,
-    missingDeclarations: 3989,
+    compatibilityCorrections: 0,
+    dependencyRefusals: 0,
+    emittedDeclarations: 7077,
+    emittedTypes: 2197,
+    expectedDeclarations: 7077,
+    fullyCoveredPackages: 154,
+    internalErrors: 0,
+    rootRefusals: 0,
+    missingDeclarations: 0,
     sourceModules: 2855,
-    totalRefusals: 1220,
+    totalRefusals: 0,
   },
   transpile: {
     compatibilityCorrections: 25,

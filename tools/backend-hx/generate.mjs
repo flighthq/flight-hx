@@ -79,11 +79,21 @@ for (const mode of modes) {
   const temporaryRoot = mkdtempSync(path.join(tmpdir(), `flight-hx-${mode}-generation-`));
   const candidateRoot = path.join(temporaryRoot, mode);
   const generatedRoot = path.join(root, 'generated', mode === 'extern' ? 'js' : 'hx');
+  let preserveTemporaryRoot = false;
   try {
-    const summary = generateMode(candidateRoot, mode, input, flight, compiler, {
+    const generation = generateMode(candidateRoot, mode, input, flight, compiler, {
       compileTypeScriptPackageGraph,
       createHaxeCompilerBackend,
     });
+    const { summary } = generation;
+    if (mode === 'extern') {
+      const failure = validateExternCandidate(candidateRoot, temporaryRoot);
+      if (failure !== undefined) {
+        preserveTemporaryRoot = true;
+        process.stderr.write(`Failed extern smoke preserved outside the repository at ${temporaryRoot}\n`);
+        throw new Error(`Generated Haxe extern surface did not compile:\n${failure}`);
+      }
+    }
     if (check) {
       const drift = compareTrees(candidateRoot, generatedRoot);
       if (drift.length > 0) {
@@ -101,10 +111,11 @@ for (const mode of modes) {
       rmSync(generatedRoot, { force: true, recursive: true });
       mkdirSync(path.dirname(generatedRoot), { recursive: true });
       cpSync(candidateRoot, generatedRoot, { recursive: true });
+      if (mode === 'extern') synchronizeExternPublicFacades(generation.compilerFiles, true);
       process.stdout.write(formatSummary(`${label(mode)} output updated`, summary));
     }
   } finally {
-    rmSync(temporaryRoot, { force: true, recursive: true });
+    if (!preserveTemporaryRoot) rmSync(temporaryRoot, { force: true, recursive: true });
   }
 }
 
@@ -130,19 +141,17 @@ function createSdkInput(flightDependency, parseTypeScript, mode) {
     const packageRoot = directoryByName.get(name);
     const manifest = JSON.parse(readFileSync(path.join(packageRoot, 'package.json'), 'utf8'));
     return {
-      contractValueExports: collectModuleValueExports(path.join(packageRoot, 'src', 'contract.ts')),
       dependencies: Object.keys(manifest.dependencies ?? {})
         .filter((dependency) => includedPackages.has(dependency))
         .sort(compareText),
       name,
       root: packageRoot,
-      sources: filesUnder(path.join(packageRoot, 'src')).filter(
-        (filename) =>
-          filename.endsWith('.ts') &&
-          !filename.endsWith('.d.ts') &&
-          !filename.endsWith('.test.ts') &&
-          (mode !== 'extern' || !filename.endsWith('TestHelper.ts')),
-      ),
+      sources: filesUnder(path.join(packageRoot, 'src')).filter((filename) => {
+        if (!filename.endsWith('.ts') || filename.endsWith('.d.ts') || filename.endsWith('.test.ts')) return false;
+        if (mode !== 'extern' || !/testhelper\.ts$/iu.test(filename)) return true;
+        return portable(path.relative(flightDependency.directory, filename)) ===
+          'packages/render-wgpu/src/wgpuTestHelper.ts';
+      }),
     };
   });
   const sourceInputs = packages.flatMap((package_) =>
@@ -160,7 +169,6 @@ function createSdkInput(flightDependency, parseTypeScript, mode) {
     }),
   );
   return {
-    defaultGenericDeclarations: new Set(sourceInputs.flatMap(({ contents }) => typeDeclarationsWithDefaults(contents))),
     graph: {
       entries: [],
       moduleDependencies: [],
@@ -173,7 +181,6 @@ function createSdkInput(flightDependency, parseTypeScript, mode) {
     },
     moduleResolution: createModuleResolutionPlan(packages, flightDependency.directory),
     packages,
-    contractValueExports: new Map(packages.map((package_) => [package_.name, package_.contractValueExports])),
     sdkManifest,
     sources: sourceInputs.map(({ compilerSource }) => compilerSource),
   };
@@ -199,56 +206,36 @@ function createModuleResolutionPlan(packages, upstreamDirectory) {
   return { edges, schema: 'flight-compiler-module-resolution/1' };
 }
 
-function collectModuleValueExports(filename, cache = new Map(), active = new Set()) {
-  if (!existsSync(filename)) return new Set();
-  const normalized = path.resolve(filename);
-  if (cache.has(normalized)) return cache.get(normalized);
-  if (active.has(normalized)) return new Set();
-  const nextActive = new Set(active).add(normalized);
-  const contents = readFileSync(normalized, 'utf8');
-  const exports = new Set();
-  for (const match of contents.matchAll(
-    /\bexport\s+(?:(?:declare|async)\s+)*(?:function|const|let|var|class|enum)\s+([A-Za-z_][A-Za-z0-9_]*)/gu,
-  )) {
-    exports.add(match[1]);
+function collectCompilerContractExports(facade, packages) {
+  if (facade?.schema !== 'flight-compiler-module-facade/1' || !Array.isArray(facade.modules)) {
+    throw new Error('Pinned flight-compiler did not publish its public module-facade plan');
   }
-  for (const match of contents.matchAll(/\bexport\s+(?!type\b)\{([\s\S]*?)\}\s*(?:from\s+['"]([^'"]+)['"])?\s*;/gu)) {
-    for (const item of match[1].split(',')) {
-      const clean = item
-        .replace(/\/\*[\s\S]*?\*\//gu, '')
-        .replace(/\/\/.*$/gu, '')
-        .trim();
-      if (!clean || clean.startsWith('type ')) continue;
-      const parts = clean.split(/\s+as\s+/u);
-      const exported = parts.at(-1)?.trim();
-      if (/^[A-Za-z_][A-Za-z0-9_]*$/u.test(exported ?? '')) exports.add(exported);
+  const packageNames = new Set(packages.map((package_) => package_.name));
+  const valuesByPackage = new Map([...packageNames].sort(compareText).map((name) => [name, new Set()]));
+  const typesByPackage = new Map([...packageNames].sort(compareText).map((name) => [name, new Set()]));
+  const typeNames = new Set();
+  const contractPackages = new Set();
+  for (const module of facade.modules) {
+    if (!/(?:^|\/)contract\.[cm]?tsx?$/u.test(module.module.source)) continue;
+    if (!packageNames.has(module.module.packageName)) continue;
+    contractPackages.add(module.module.packageName);
+    for (const slot of module.slots) {
+      if (slot.lane === 'type') {
+        typeNames.add(slot.exportName);
+        typesByPackage.get(module.module.packageName).add(slot.exportName);
+      } else valuesByPackage.get(module.module.packageName).add(slot.exportName);
     }
   }
-  for (const match of contents.matchAll(/\bexport\s+\*\s+from\s+['"]([^'"]+)['"]\s*;/gu)) {
-    const target = resolveTypeScriptModule(normalized, match[1]);
-    if (!target) continue;
-    for (const name of collectModuleValueExports(target, cache, nextActive)) exports.add(name);
+  const missingPackages = [...packageNames].filter((name) => !contractPackages.has(name)).sort(compareText);
+  if (missingPackages.length > 0) {
+    throw new Error(`Compiler public facade has no emitted contract lane for ${missingPackages.join(', ')}`);
   }
-  cache.set(normalized, exports);
-  return exports;
-}
-
-function resolveTypeScriptModule(importer, specifier) {
-  if (!specifier.startsWith('.')) return undefined;
-  const unresolved = path.resolve(path.dirname(importer), specifier);
-  const candidates = [
-    unresolved,
-    `${unresolved}.ts`,
-    path.join(unresolved, 'index.ts'),
-    ...(unresolved.endsWith('.js') ? [`${unresolved.slice(0, -3)}.ts`] : []),
-  ];
-  return candidates.find((candidate) => existsSync(candidate));
+  return { typeNames, typesByPackage, valuesByPackage };
 }
 
 function generateMode(outputRoot, mode, input, flightDependency, compilerDependency, compilerApi) {
-  const backend = createNormalizedHaxeBackend(compilerApi.createHaxeCompilerBackend(), (contents) =>
-    normalizeCompilerHaxe(contents, input.defaultGenericDeclarations, mode),
-  );
+  const compatibilityCorrections = [];
+  const backend = createNormalizedHaxeBackend(compilerApi.createHaxeCompilerBackend(), (contents) => contents);
   const compilation = compilerApi.compileTypeScriptPackageGraph({
     backend,
     backendOptions: {
@@ -263,9 +250,13 @@ function generateMode(outputRoot, mode, input, flightDependency, compilerDepende
     sources: input.sources,
     ...(mode === 'transpile' ? { targetCompilationSmoke: createHaxeCompilationSmoke() } : {}),
   });
+  if (!compilation.report.runtimeAbi) {
+    throw new Error('Pinned flight-compiler did not publish its Haxe runtime ABI manifest');
+  }
+  const publicExports = collectCompilerContractExports(compilation.report.exports, input.packages);
   const contractFiltered =
     mode === 'extern'
-      ? filterExternContractMembers(compilation.compilation.files, input.contractValueExports)
+      ? filterExternContractMembers(compilation.compilation.files, publicExports.valuesByPackage)
       : { files: compilation.compilation.files, removedFunctions: 0, removedValues: 0 };
   for (const file of contractFiltered.files) {
     const target = path.join(outputRoot, file.path);
@@ -276,10 +267,16 @@ function generateMode(outputRoot, mode, input, flightDependency, compilerDepende
     mode === 'transpile' ? emitTranspiledPublicBackend(outputRoot, contractFiltered.files) : undefined;
   const compatibilityFiles =
     mode === 'extern'
-      ? emitMissingExternPublicAliases(outputRoot, contractFiltered.files, flightDependency, compilerDependency)
+      ? emitMissingExternPublicAliases(
+          outputRoot,
+          contractFiltered.files,
+          publicExports.typeNames,
+          flightDependency,
+          compilerDependency,
+        )
       : transpiledPublicBackend.files;
   const publicFacades =
-    mode === 'extern' ? synchronizeExternPublicFacades(compilation.compilation.files, !check) : { files: 0, drift: [] };
+    mode === 'extern' ? synchronizeExternPublicFacades(compilation.compilation.files, false) : { files: 0, drift: [] };
   if (publicFacades.drift.length > 0 && check) {
     process.stderr.write(`Haxe extern public facade differs in ${String(publicFacades.drift.length)} path(s):\n`);
     for (const filename of publicFacades.drift.slice(0, 20)) process.stderr.write(`- ${filename}\n`);
@@ -311,7 +308,7 @@ function generateMode(outputRoot, mode, input, flightDependency, compilerDepende
   if (mode === 'extern') {
     summary.filteredContractFunctions = contractFiltered.removedFunctions;
     summary.filteredContractValues = contractFiltered.removedValues;
-    const publicSurface = externContractCoverage(contractFiltered.files, input.contractValueExports);
+    const publicSurface = externContractCoverage(contractFiltered.files, publicExports);
     summary.publicRuntimeSurface = publicSurface.summary;
     writeFileSync(path.join(outputRoot, 'public-surface.json'), `${JSON.stringify(publicSurface, undefined, 2)}\n`);
   } else {
@@ -331,38 +328,7 @@ function generateMode(outputRoot, mode, input, flightDependency, compilerDepende
   const manifest = {
     schema: 'flight-hx-generated-sdk/1',
     compiler: {
-      compatibilityCorrections: [
-        'flight-hx-runtime-module-member-prefix/1',
-        'flight-hx-nested-callback-return-parentheses/1',
-        'flight-hx-enum-abstract-member-identifiers/1',
-        'flight-hx-ipc-target-default-type-parameter/1',
-        'flight-hx-optional-call-lowering/1',
-        'flight-hx-enum-value-type-collision/1',
-        'flight-hx-type-alias-value-collision/1',
-        'flight-hx-source-default-type-parameters/1',
-        'flight-hx-unique-symbol-void-brand/1',
-        'flight-hx-symbol-runtime-shim/1',
-        'flight-hx-standard-library-spellings/1',
-        'flight-hx-constant-default-arguments/1',
-        'flight-hx-array-api/1',
-        'flight-hx-dynamic-access-keys/1',
-        'flight-hx-optional-backend-arguments/1',
-        'flight-hx-webgl-static-constants/1',
-        'flight-hx-assignment-expression-parentheses/1',
-        'flight-hx-parameter-dependent-defaults/1',
-        'flight-hx-structural-cast/1',
-        'flight-hx-empty-void-function/1',
-        'flight-hx-typed-array-integer-write/1',
-        'flight-hx-callable-generic-constraint/1',
-        'flight-hx-erased-entity-constraint/1',
-        'flight-hx-promise-void-carrier/1',
-        ...(mode === 'extern' ? ['flight-hx-extern-type-alias-inlining/1'] : []),
-        ...(mode === 'extern' ? ['flight-hx-refused-extern-type-carriers/1'] : []),
-        ...(mode === 'extern' ? ['flight-hx-contract-export-filter/1'] : []),
-        ...(mode === 'extern' ? ['flight-hx-public-extern-aliases/1'] : []),
-        ...(mode === 'extern' ? ['flight-hx-public-extern-generics/1'] : []),
-        ...(mode === 'transpile' ? ['flight-hx-transpiled-public-backend/1'] : []),
-      ],
+      compatibilityCorrections,
       emissionMode: mode,
       repository: compilerDependency.repository,
       revision: compilerDependency.commit,
@@ -370,6 +336,7 @@ function generateMode(outputRoot, mode, input, flightDependency, compilerDepende
     },
     packages,
     runtime: {
+      abi: compilation.report.runtimeAbi,
       constructorAbi: 'flight-runtime-constructor-abi/1',
       externalSymbols: 'flight-runtime-contract/2',
       profiles: {
@@ -410,7 +377,10 @@ function generateMode(outputRoot, mode, input, flightDependency, compilerDepende
     `${JSON.stringify(compilation.report.initialization, undefined, 2)}\n`,
   );
   writeFileSync(path.join(outputRoot, 'README.md'), generatedReadme(manifest));
-  return summary;
+  return {
+    compilerFiles: mode === 'extern' ? compilation.compilation.files : [],
+    summary,
+  };
 }
 
 function emitTranspiledPublicBackend(outputRoot, transpiledFiles) {
@@ -434,23 +404,29 @@ function emitTranspiledPublicBackend(outputRoot, transpiledFiles) {
   return { files: surface.files.length, summary: surface.report.summary };
 }
 
-function externContractCoverage(files, valueExportsByPackage) {
-  const surface = collectExternSurface(files);
+function externContractCoverage(files, publicExports) {
+  const surface = collectExternSurface(files, publicExports.typeNames);
   const emittedByPackage = new Map();
+  const emittedTypeNames = new Set(surface.types.map((entry) => entry.publicName));
   for (const declaration of [...surface.functions, ...surface.values]) {
     const names = emittedByPackage.get(declaration.sourcePackage) ?? new Set();
     names.add(declaration.sourceName);
     emittedByPackage.set(declaration.sourcePackage, names);
   }
-  const packages = [...valueExportsByPackage]
+  const packages = [...publicExports.valuesByPackage]
     .map(([packageName, names]) => {
       const expected = [...names].sort(compareText);
-      const emitted = [...(emittedByPackage.get(packageName) ?? new Set())].sort(compareText);
+      const holderDeclarations = emittedByPackage.get(packageName) ?? new Set();
+      const inlined = [...(publicExports.typesByPackage.get(packageName) ?? new Set())]
+        .filter((name) => names.has(name) && emittedTypeNames.has(name) && !holderDeclarations.has(name))
+        .sort(compareText);
+      const emitted = [...new Set([...holderDeclarations, ...inlined])].sort(compareText);
       const expectedSet = new Set(expected);
       const emittedSet = new Set(emitted);
       return {
         emitted,
         expected,
+        inlined,
         missing: expected.filter((name) => !emittedSet.has(name)),
         package: packageName,
         unexpected: emitted.filter((name) => !expectedSet.has(name)),
@@ -523,12 +499,19 @@ function filterExternContractMembers(files, valueExportsByPackage) {
   };
 }
 
-function emitMissingExternPublicAliases(outputRoot, compilerFiles, flightDependency, compilerDependency) {
+function emitMissingExternPublicAliases(
+  outputRoot,
+  compilerFiles,
+  publicTypeNames,
+  flightDependency,
+  compilerDependency,
+) {
   let emitted = 0;
   for (const file of compilerFiles) {
     const match = /^flight\/_js\/([A-Za-z_][A-Za-z0-9_]*)\.hx$/u.exec(file.path);
     if (!match) continue;
     const typeName = match[1];
+    if (!publicTypeNames.has(typeName)) continue;
     const parameters = haxeTypeParameters(file.contents, typeName);
     const arguments_ = haxeTypeArguments(parameters);
     const target = path.join(outputRoot, 'flight', `${typeName}.hx`);
@@ -595,6 +578,7 @@ function createNormalizedHaxeBackend(backend, normalize) {
       return normalizeFiles(backend.emitModule(module, context));
     },
     name: backend.name,
+    ...(backend.runtimeAbi ? { runtimeAbi: backend.runtimeAbi } : {}),
     ...(backend.createEmissionSession
       ? {
           createEmissionSession(context) {
@@ -610,6 +594,7 @@ function createHaxeCompilationSmoke() {
   return {
     compileEmittedSources(files) {
       const temporaryRoot = mkdtempSync(path.join(tmpdir(), 'flight-hx-compiler-smoke-'));
+      let passed = false;
       try {
         for (const file of files) {
           const target = path.join(temporaryRoot, file.path);
@@ -639,10 +624,14 @@ function createHaxeCompilationSmoke() {
           ],
           { cwd: root, encoding: 'utf8' },
         );
-        if (result.status === 0) return [];
+        if (result.status === 0) {
+          passed = true;
+          return [];
+        }
         throw new Error(`Haxe ${String(result.status)}:\n${result.stdout}${result.stderr}`);
       } finally {
-        rmSync(temporaryRoot, { force: true, recursive: true });
+        if (passed) rmSync(temporaryRoot, { force: true, recursive: true });
+        else process.stderr.write(`Failed compiler smoke preserved outside the repository at ${temporaryRoot}\n`);
       }
     },
     name: 'Haxe 4.3.7 complete generated-source compilation',
@@ -650,229 +639,31 @@ function createHaxeCompilationSmoke() {
   };
 }
 
-// These are narrow integration corrections for compiler output already represented correctly in
-// neutral IR. Keep them named and byte-stable until flight-compiler emits the same spellings:
-// - ambient member routes currently retain the compiler's default runtime prefix despite the
-//   runtimeModule option;
-// - a callback returning another zero-argument callback needs parentheses around the return type in
-//   Haxe (`()->(()->Void)`), while the compiler currently emits the unparsable `()->()->Void`.
-// - string-literal enum members need valid Haxe identifiers when their values are empty, numeric,
-//   symbolic, or contain punctuation. The string representation itself is left byte-for-byte intact.
-// - IpcTargetedSendBackend's source default (`Target = never`) is absent from emitted Haxe even
-//   though HostIpcCapabilities consumes its bare form; Dynamic is the usable Haxe default carrier.
-// - Haxe supports optional field access but not JavaScript's `callee?.()` grammar. Evaluate the
-//   callee once and call it only when present, preserving optional-call semantics.
-// - TypeScript's common `const X = {...} as const; type X = ...` pattern occupies both namespaces.
-//   Haxe enum abstracts represent both at once; merge the duplicate value object into the abstract,
-//   retaining its declared public member names and exact backing strings.
-// - The same value/type pattern may lower its type side to a primitive typedef. Promote that pair
-//   to an enum abstract too, inferring Dynamic's concrete backing from the constant values.
-// - The compiler currently omits source generic defaults. Restore defaults only for declarations
-//   that have them in the pinned TypeScript, using Dynamic as Haxe's constraint-compatible carrier.
-// - Optional unique-symbol branding fields carry TypeScript `void`, which Haxe forbids for structure
-//   fields. Dynamic retains the non-runtime marker without inventing a callable/value contract.
-// - TypeScript symbols route through the maintained runtime shim so entity brands compile on JS
-//   and remain opaque, stable keys on host-free Haxe targets.
-// - ECMAScript Math methods and zero-argument Array.slice use maintained Haxe equivalents.
-// - Haxe requires default arguments to be literal constants, so inline the two emitted SDK constants.
-function normalizeCompilerHaxe(contents, defaultGenericDeclarations, mode) {
-  const normalized = normalizeArrayPushCalls(
-    normalizeTypeAliasValueObjects(
-      normalizeEnumValueObjects(
-        contents
-          .replaceAll('flighthq._internal.', 'flight._internal.')
-          .replaceAll('->()->Void', '->(()->Void)')
-          .replaceAll('js.lib.Symbol.for_(', 'flight._internal._Symbol.for_(')
-          .replaceAll('js.lib.Symbol(', 'flight._internal._Symbol.create(')
-          .replaceAll('Math.log2(', 'flight._internal._Math.log2(')
-          .replaceAll('Math.sign(', 'flight._internal._Math.sign(')
-          .replaceAll('Math.trunc(', 'flight._internal._Math.trunc(')
-          .replaceAll('.slice()', '.copy()')
-          .replaceAll(':Float = EPSILON', ':Float = 0.000001')
-          .replaceAll(':Float = defaultEpsilon', ':Float = 0.000001')
-          .replace(/^([ \t]*)([A-Za-z_][A-Za-z0-9_]*)\.length = (.+);$/gmu, '$1$2.resize(Std.int($3));')
-          .replace(/^([ \t]*)([A-Za-z_][A-Za-z0-9_]*)\.length -= (.+);$/gmu, '$1$2.resize($2.length - Std.int($3));')
-          .replaceAll('styles[Std.int(className)]', 'styles[className]')
-          .replaceAll('RENDER_EFFECT_INPUTS[Std.int(effect.kind)]', 'RENDER_EFFECT_INPUTS[effect.kind]')
-          .replaceAll('formatBlockInfo[Std.int(format)]', 'formatBlockInfo[cast format]')
-          .replaceAll('host.dialog.photoCapture.capture()', 'host.dialog.photoCapture.capture(null)')
-          .replaceAll('host.dialog.videoCapture.capture()', 'host.dialog.videoCapture.capture(null)')
-          .replaceAll('host.dialog.imageOpen.open()', 'host.dialog.imageOpen.open(null)')
-          .replace(/\bgl\.([A-Z][A-Z0-9_]*)\b/gu, 'js.html.webgl.WebGL2RenderingContext.$1')
-          .replaceAll('Math.max(r, g, b)', 'Math.max(Math.max(r, g), b)')
-          .replaceAll('Math.min(r, g, b)', 'Math.min(Math.min(r, g), b)')
-          .replaceAll('source[Std.int(EntityRuntimeKey)]', 'source.EntityRuntimeKey')
-          .replaceAll('cast(cast(state, Dynamic))', 'cast state')
-          .replaceAll(
-            'function defaultComputeLocalBoundsRectangle(_out:Rectangle, _source:BoundsNodeAny):Dynamic',
-            'function defaultComputeLocalBoundsRectangle(_out:Rectangle, _source:BoundsNodeAny):Void',
-          )
-          .replaceAll('if (t *= 2 < 1)', 'if ((t *= 2) < 1)')
-          .replaceAll('Math.pow(2, (10 * t -= 1))', 'Math.pow(2, (10 * (t -= 1)))')
-          .replaceAll('Math.pow(2, (- 10 * t -= 1))', 'Math.pow(2, (-10 * (t -= 1)))')
-          .replaceAll(
-            'final easeInOutBack:EasingFunction = function(t:Float) return ((t *= 2 < 1) ? (0.5 * ((t * t) * (((s2 + 1) * t) - s2))) : (0.5 * (((t -= 2 * t) * (((s2 + 1) * t) + s2)) + 2)));',
-            'final easeInOutBack:EasingFunction = function(t:Float) return (((t *= 2) < 1) ? (0.5 * ((t * t) * (((s2 + 1) * t) - s2))) : (0.5 * ((((t -= 2) * t) * (((s2 + 1) * t) + s2)) + 2)));',
-          )
-          .replaceAll(
-            'final easeOutBack:EasingFunction = function(t:Float) return (((t -= 1 * t) * (((s + 1) * t) + s)) + 1);',
-            'final easeOutBack:EasingFunction = function(t:Float) return ((((t -= 1) * t) * (((s + 1) * t) + s)) + 1);',
-          )
-          .replaceAll('width:Float = bitmap.width', '?width:Float')
-          .replaceAll('height:Float = bitmap.height', '?height:Float')
-          .replaceAll(
-            '{ bitmap: bitmap, x: x, y: y, width: width, height: height }',
-            '{ bitmap: bitmap, x: x, y: y, width: width ?? bitmap.width, height: height ?? bitmap.height }',
-          )
-          .replaceAll('out.width = width;', 'out.width = width ?? bitmap.width;')
-          .replaceAll('out.height = height;', 'out.height = height ?? bitmap.height;')
-          .replace(/^([ \t]*)out\[(Std\.int\([^\n]+\))\] = ([rgba]);$/gmu, '$1out[$2] = Std.int($3);')
-          .replaceAll('T:(Array<Dynamic>)->Void', 'T')
-          .replaceAll('<Type:Entity', '<Type')
-          .replaceAll('flight._internal._Promise<Void>', 'flight._internal._Promise<Dynamic>')
-          .replace(/^(\s*(?:@:optional )?)var operator:/gmu, '$1@:native("operator") var operator_:')
-          .replace(/\boperator:/gu, 'operator_:')
-          .replace(/\?([A-Za-z_][A-Za-z0-9_]*TypeKey):Void/gu, '?$1:Dynamic')
-          .replace(/@:optional var ([A-Za-z_][A-Za-z0-9_]*TypeKey):Void;/gu, '@:optional var $1:Dynamic;')
-          .replaceAll('typedef IpcTargetedSendBackend<Target> =', 'typedef IpcTargetedSendBackend<Target = Dynamic> ='),
-      ),
-    ),
-  ).replace(/(?<![A-Za-z0-9_.])Math\./gu, 'flight._internal._Math.');
-  const normalizedDefaults = addDefaultTypeParameters(
-    mode === 'extern' ? normalizeExternTypeAliases(normalized) : normalized,
-    defaultGenericDeclarations,
+function validateExternCandidate(candidateRoot, temporaryRoot) {
+  const result = spawnSync(
+    process.execPath,
+    [
+      'tools/haxe.mjs',
+      '-cp',
+      candidateRoot,
+      '-cp',
+      'src',
+      '-D',
+      'flight_esm',
+      '-js',
+      path.join(temporaryRoot, 'extern-smoke.js'),
+      '--macro',
+      "include('flight')",
+      '--macro',
+      "include('flight._js')",
+    ],
+    { cwd: root, encoding: 'utf8' },
   );
-  let inEnumAbstract = false;
-  let optionalCallIndex = 0;
-  return normalizedDefaults
-    .split('\n')
-    .map((line) => {
-      if (line.startsWith('enum abstract ')) inEnumAbstract = true;
-      const member = inEnumAbstract ? /^(\s*var )(.*?)( = .*;)$/.exec(line) : undefined;
-      let result = member ? `${member[1]}${enumMemberIdentifier(member[2])}${member[3]}` : line;
-      const optionalCall = /^(\s*)(.+?)\?\.\((.*)\);$/u.exec(result);
-      if (optionalCall) {
-        const temporary = `__flightOptionalCall${String(optionalCallIndex)}`;
-        optionalCallIndex += 1;
-        result = `${optionalCall[1]}final ${temporary} = ${optionalCall[2]};\n${optionalCall[1]}if (${temporary} != null) ${temporary}(${optionalCall[3]});`;
-      }
-      if (inEnumAbstract && line === '}') inEnumAbstract = false;
-      return result;
-    })
-    .join('\n');
+  if (result.status === 0) return undefined;
+  return `${result.stdout ?? ''}${result.stderr ?? ''}`;
 }
 
-function normalizeExternTypeAliases(contents) {
-  const stringAliases = [
-    'AudioResourceFailureKind',
-    'AudioResourceReferenceKind',
-    'CompressionFraming',
-    'EmissiveModifierFacing',
-    'FlightDocumentRefusalReason',
-    'FogModifierMode',
-    'ImageResourceFailureKind',
-    'ImageResourceReferenceKind',
-    'ImportDiagnosticSeverity',
-    'LayoutResolutionFailureKind',
-    'NodeInteractiveStateRefusalReason',
-    'RenderCacheKind',
-    'RiveAnimationLoop',
-    'RiveWeightedPointKind',
-    'Skeleton2DConstraintKind',
-    'Skeleton2DPathPositionMode',
-    'Skeleton2DPathRotateMode',
-    'Skeleton2DPathSpacingMode',
-    'Skeleton2DSlotAnimationPath',
-    'StandardMaterialKind',
-    'StatechartComparison',
-    'StatechartInputKind',
-    'StatechartTransitionStatus',
-    'TimelineFrameEntryCause',
-    'VertexDisplaceModifierSource',
-  ];
-  let normalized = contents;
-  for (const alias of stringAliases) normalized = normalized.replaceAll(`flight.${alias}`, 'String');
-  normalized = normalized.replace(/flight\.ApplicationRenderView<[^>\n]+>/gu, 'Dynamic');
-  for (const alias of [
-    'ApplicationRenderView',
-    'GlMeshMaterialRenderer',
-    'GlModifierSnippet',
-    'GlRenderEffectContext',
-    'GlRenderState',
-    'RenderState',
-  ]) {
-    normalized = normalized.replaceAll(`flight.${alias}`, 'Dynamic');
-  }
-  return normalized
-    .replaceAll('flight.Kind', 'String')
-    .replaceAll('flight.RenderRegistry', 'Int')
-    .replaceAll('flight.RiveFieldType', 'Float')
-    .replaceAll(
-      'flight.CatalogEntry',
-      '{ kind:String, registrations:Array<{ module:String, registrar:String }>, registry:Int }',
-    );
-}
-
-function normalizeArrayPushCalls(contents) {
-  return contents
-    .split('\n')
-    .map((line) => {
-      const push = /^([ \t]*)([A-Za-z_][A-Za-z0-9_]*)\.push\((.*)\);$/u.exec(line);
-      if (!push || !hasTopLevelComma(push[3])) return line;
-      return `${push[1]}flight._internal._ArrayTools.pushMany(${push[2]}, [${push[3]}]);`;
-    })
-    .join('\n');
-}
-
-function hasTopLevelComma(value) {
-  let quote;
-  let escaped = false;
-  let depth = 0;
-  for (const character of value) {
-    if (quote) {
-      if (escaped) escaped = false;
-      else if (character === '\\') escaped = true;
-      else if (character === quote) quote = undefined;
-    } else if (character === '"' || character === "'") quote = character;
-    else if ('<([{'.includes(character)) depth += 1;
-    else if ('>)]}'.includes(character)) depth -= 1;
-    else if (character === ',' && depth === 0) return true;
-  }
-  return false;
-}
-
-function typeDeclarationsWithDefaults(contents) {
-  const declarations = [];
-  for (const match of contents.matchAll(
-    /\bexport\s+(?:(?:abstract\s+)?class|interface|type)\s+([A-Za-z_][A-Za-z0-9_]*)\s*</gu,
-  )) {
-    const start = contents.indexOf('<', match.index);
-    const end = findTypeParameterEnd(contents, start);
-    if (end !== -1 && splitTypeParameters(contents.slice(start + 1, end)).some(hasTopLevelEquals)) {
-      declarations.push(match[1]);
-    }
-  }
-  return declarations;
-}
-
-function addDefaultTypeParameters(contents, declarationNames) {
-  return contents
-    .split('\n')
-    .map((line) => {
-      const declaration = /^(?:typedef|class|interface|enum abstract) ([A-Za-z_][A-Za-z0-9_]*)</u.exec(line);
-      if (!declaration || !declarationNames.has(declaration[1])) return line;
-      const start = line.indexOf('<', declaration[0].length - 1);
-      const end = findTypeParameterEnd(line, start);
-      if (end === -1) return line;
-      const parameters = splitTypeParameters(line.slice(start + 1, end));
-      const withDefaults = parameters
-        .map((parameter) => (hasTopLevelEquals(parameter) ? parameter : `${parameter} = Dynamic`))
-        .join(',');
-      return `${line.slice(0, start + 1)}${withDefaults}${line.slice(end)}`;
-    })
-    .join('\n');
-}
-
+// No target rewrites live here: compiler output must pass the downstream Haxe smoke unchanged.
 function findTypeParameterEnd(line, start) {
   let depth = 0;
   for (let index = start; index < line.length; index += 1) {
@@ -900,131 +691,6 @@ function splitTypeParameters(parameters) {
   }
   result.push(parameters.slice(start));
   return result;
-}
-
-function hasTopLevelEquals(parameter) {
-  let depth = 0;
-  for (let index = 0; index < parameter.length; index += 1) {
-    if ('<([{'.includes(parameter[index])) depth += 1;
-    else if ('>)]}'.includes(parameter[index]) && parameter[index - 1] !== '-' && parameter[index - 1] !== '=')
-      depth -= 1;
-    else if (parameter[index] === '=' && parameter[index + 1] !== '>' && depth === 0) return true;
-  }
-  return false;
-}
-
-function normalizeTypeAliasValueObjects(contents) {
-  const aliases = new Map(
-    [...contents.matchAll(/^typedef ([A-Za-z_][A-Za-z0-9_]*)_2 = (String|Float|Dynamic);$/gmu)].map((match) => [
-      match[1],
-      match[2],
-    ]),
-  );
-  if (aliases.size === 0) return contents;
-
-  const valuesByType = new Map();
-  for (const line of contents.split('\n')) {
-    const valueObject = /^final ([A-Za-z_][A-Za-z0-9_]*):\{.*\} = \{ (.*) \};$/u.exec(line);
-    if (valueObject && aliases.has(valueObject[1])) {
-      valuesByType.set(
-        valueObject[1],
-        [...valueObject[2].matchAll(/([A-Za-z_][A-Za-z0-9_]*): ("(?:\\.|[^"])*"|[-+]?\d+(?:\.\d+)?)/gu)].map(
-          (member) => ({ name: member[1], value: member[2] }),
-        ),
-      );
-      continue;
-    }
-    const scalar = /^final ([A-Za-z_][A-Za-z0-9_]*):(String|Float) = (.+);$/u.exec(line);
-    if (scalar && aliases.has(scalar[1])) {
-      valuesByType.set(scalar[1], [{ name: scalar[1], value: scalar[3] }]);
-    }
-  }
-
-  return contents
-    .split('\n')
-    .flatMap((line) => {
-      const declaration = /^typedef ([A-Za-z_][A-Za-z0-9_]*)_2 = (String|Float|Dynamic);$/u.exec(line);
-      if (declaration) {
-        const members = valuesByType.get(declaration[1]);
-        if (!members || members.length === 0) return [line];
-        const backing =
-          declaration[2] === 'Dynamic'
-            ? members.every(({ value }) => value.startsWith('"'))
-              ? 'String'
-              : members.every(({ value }) => /^[-+]?\d+(?:\.\d+)?$/u.test(value))
-                ? 'Float'
-                : 'Dynamic'
-            : declaration[2];
-        return [
-          `enum abstract ${declaration[1]}(${backing}) from ${backing} to ${backing} {`,
-          ...members.map(({ name, value }) => `  var ${name} = ${value};`),
-          '}',
-        ];
-      }
-      const value = /^final ([A-Za-z_][A-Za-z0-9_]*)(?::\{|:(?:String|Float) =)/u.exec(line);
-      if (value && aliases.has(value[1]) && valuesByType.has(value[1])) return [];
-      return [line];
-    })
-    .join('\n');
-}
-
-function normalizeEnumValueObjects(contents) {
-  const collisionNames = new Set(
-    [...contents.matchAll(/^enum abstract ([A-Za-z_][A-Za-z0-9_]*)_2\b/gmu)].map((match) => match[1]),
-  );
-  if (collisionNames.size === 0) return contents;
-
-  const membersByType = new Map();
-  for (const line of contents.split('\n')) {
-    const valueObject = /^final ([A-Za-z_][A-Za-z0-9_]*):\{.*\} = \{ (.*) \};$/u.exec(line);
-    if (!valueObject || !collisionNames.has(valueObject[1])) continue;
-    const membersByValue = new Map();
-    for (const member of valueObject[2].matchAll(/([A-Za-z_][A-Za-z0-9_]*): ("(?:\\.|[^"])*"|[-+]?\d+(?:\.\d+)?)/gu)) {
-      membersByValue.set(member[2], member[1]);
-    }
-    membersByType.set(valueObject[1], membersByValue);
-  }
-
-  let currentType;
-  return contents
-    .split('\n')
-    .flatMap((line) => {
-      const declaration = /^enum abstract ([A-Za-z_][A-Za-z0-9_]*)_2\b/u.exec(line);
-      if (declaration && collisionNames.has(declaration[1])) {
-        currentType = declaration[1];
-        return [line.replace(`${currentType}_2`, currentType)];
-      }
-      const valueObject = /^final ([A-Za-z_][A-Za-z0-9_]*):\{/u.exec(line);
-      if (valueObject && collisionNames.has(valueObject[1])) return [];
-      const member = currentType ? /^(\s*var )(.+?)( = (.+);)$/u.exec(line) : undefined;
-      if (member) {
-        const publicName = membersByType.get(currentType)?.get(member[4]);
-        if (publicName) return [`${member[1]}${publicName}${member[3]}`];
-      }
-      if (currentType && line === '}') currentType = undefined;
-      return [line];
-    })
-    .join('\n');
-}
-
-function enumMemberIdentifier(name) {
-  if (/^[A-Za-z_][A-Za-z0-9_]*$/u.test(name)) return name;
-  const operatorNames = new Map([
-    ['!=', 'NotEqual'],
-    ['<', 'LessThan'],
-    ['<=', 'LessThanOrEqual'],
-    ['==', 'Equal'],
-    ['>', 'GreaterThan'],
-    ['>=', 'GreaterThanOrEqual'],
-  ]);
-  if (operatorNames.has(name)) return operatorNames.get(name);
-  if (name.length === 0) return 'Empty';
-  const identifier = name
-    .split(/[^A-Za-z0-9]+/u)
-    .filter(Boolean)
-    .map((part) => `${part[0].toUpperCase()}${part.slice(1)}`)
-    .join('');
-  return /^[0-9]/u.test(identifier) ? `Value${identifier}` : identifier;
 }
 
 function generatedReadme(manifest) {
