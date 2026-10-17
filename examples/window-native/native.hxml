@@ -1,0 +1,8 @@
+-cp src
+-cp generated
+-cp src-cpp
+-cp examples/window-native
+--main WindowNative
+-D HXCPP_NO_CPP11
+# Supply `-cpp <output>` plus absolute `flight_cpp_root`, `flight_cpp_build`, and
+# `flight_hx_root` defines at invocation. The CMake build must contain Flight::HostSdlGl.

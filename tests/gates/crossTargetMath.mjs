@@ -21,20 +21,29 @@ const expectedCorrections = [
   'flight-hx-flight-cpp-null-namespace-collision/1',
   'flight-hx-hxcpp-cpp11-override/1',
 ];
+const expectedNativeHost = {
+  module: 'flight.HostSdlGl',
+  function: 'runHostSdlGlSmoke',
+  profile: 'sdl-gl',
+  target: 'Flight::HostSdlGl',
+  requiresBuildDefine: 'flight_cpp_build',
+};
 const temporaryRoot = mkdtempSync(path.join(tmpdir(), 'flight-hx-cross-target-math-'));
 
 try {
   const flightCpp = resolveDependency(repoRoot, 'flight-cpp');
   validateHaxelibMetadata();
-  const bindings = validateNativeManifest(flightCpp);
+  const { bindings, nativeHost } = validateNativeManifest(flightCpp);
   const consumer = createHaxelibConsumer();
   runNative(flightCpp, bindings, consumer);
+  runNativeHost(flightCpp, nativeHost, consumer);
   runFallback(consumer);
   await runWeb(bindings, consumer);
   process.stdout.write(
     `cross-target scalar gate: an isolated -lib flight consumer ran ${String(bindings.length)} ` +
       `manifest-recorded Color/Math functions on Flight ESM and direct flight-cpp; the optional ` +
-      `pure-Haxe backend ran the same source.\n`,
+      `pure-Haxe backend ran the same source; the packaged native extension also created and ` +
+      `presented a real flight-cpp SDL3/GL surface.\n`,
   );
 } finally {
   rmSync(temporaryRoot, { force: true, recursive: true });
@@ -67,6 +76,9 @@ function validateNativeManifest(flightCpp) {
   if (manifest.cppStandard !== 20) fail(`native manifest requires unexpected C++${manifest.cppStandard}`);
   if (JSON.stringify(manifest.corrections) !== JSON.stringify(expectedCorrections)) {
     fail(`native correction inventory drifted: ${manifest.corrections?.join(', ')}`);
+  }
+  if (manifest.hosts?.length !== 1 || JSON.stringify(manifest.hosts[0]) !== JSON.stringify(expectedNativeHost)) {
+    fail(`native host inventory drifted: ${JSON.stringify(manifest.hosts)}`);
   }
 
   const generatedManifest = JSON.parse(
@@ -137,7 +149,7 @@ function validateNativeManifest(flightCpp) {
       bindings.push({ ...binding, adapter, module: module.module });
     }
   }
-  return bindings;
+  return { bindings, nativeHost: manifest.hosts[0] };
 }
 
 function createHaxelibConsumer() {
@@ -223,6 +235,69 @@ function runNative(flightCpp, bindings, consumer) {
     if (!generated.includes(`${binding.adapter}(`)) {
       fail(`generated C++ has no direct ${binding.module}.${binding.name} call`);
     }
+  }
+}
+
+function runNativeHost(flightCpp, nativeHost, consumer) {
+  const cmake = process.platform === 'win32' ? 'cmake.exe' : 'cmake';
+  const configure = spawnSync(
+    cmake,
+    [
+      '--preset',
+      'development',
+      '-DFLIGHT_CPP_BUILD_HOST_SDL=ON',
+      '-DFLIGHT_CPP_BUILD_HOST_SDL_VULKAN=OFF',
+    ],
+    { cwd: flightCpp.directory, encoding: 'utf8', env: consumer.environment },
+  );
+  if (configure.status !== 0) {
+    fail(
+      `could not configure ${nativeHost.target}; install CMake, Ninja, and SDL 3.2+ development files:\n` +
+        `${configure.stdout}${configure.stderr}`,
+    );
+  }
+  const build = spawnSync(cmake, ['--build', '--preset', 'development', '--target', 'flight_host_sdl_gl'], {
+    cwd: flightCpp.directory,
+    encoding: 'utf8',
+    env: consumer.environment,
+  });
+  if (build.status !== 0) fail(`could not build ${nativeHost.target}:\n${build.stdout}${build.stderr}`);
+
+  const flightCppBuild = path.join(flightCpp.directory, 'out', 'cmake', 'development');
+  const output = path.join(temporaryRoot, 'window-native');
+  const compile = spawnSync(
+    consumer.haxe,
+    [
+      '-lib',
+      'flight',
+      '-cp',
+      path.join(repoRoot, 'examples', 'window-native'),
+      '--main',
+      'WindowNative',
+      '-cpp',
+      output,
+      '-D',
+      `flight_cpp_root=${flightCpp.directory}`,
+      '-D',
+      `${nativeHost.requiresBuildDefine}=${flightCppBuild}`,
+    ],
+    { cwd: consumer.work, encoding: 'utf8', env: consumer.environment },
+  );
+  if (compile.status !== 0) fail(`packaged native-host compile failed:\n${compile.stdout}${compile.stderr}`);
+
+  const executable = path.join(output, process.platform === 'win32' ? 'WindowNative.exe' : 'WindowNative');
+  const runEnvironment = { ...consumer.environment };
+  if (process.platform === 'linux') {
+    runEnvironment.LIBGL_ALWAYS_SOFTWARE = '1';
+    runEnvironment.SDL_VIDEODRIVER = 'offscreen';
+  }
+  const run = spawnSync(executable, [], {
+    encoding: 'utf8',
+    env: runEnvironment,
+  });
+  const transcript = `${run.stdout ?? ''}${run.stderr ?? ''}`;
+  if (run.status !== 0 || !transcript.includes('WINDOW_NATIVE_OK')) {
+    fail(`native host did not create and present its SDL3/GL surface:\n${transcript}`);
   }
 }
 

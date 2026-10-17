@@ -6,7 +6,7 @@
   "description": "Haxe bindings for Flight: direct flight-cpp on native, ESM externs on web, and an optional transpiled fallback.",
   "version": "0.5.0",
   "classPath": "lib",
-  "releasenote": "Complete Flight 0.5 web extern SDK and the first manifest-pinned direct flight-cpp native surface.",
+  "releasenote": "Current Flight 0.5 web extern SDK plus manifest-pinned flight-cpp scalar and SDL3/OpenGL host bindings.",
   "contributors": ["singmajesty"],
   "dependencies": {}
 }

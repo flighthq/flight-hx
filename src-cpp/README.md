@@ -7,21 +7,14 @@ headers. Public facade overrides deliberately expose nothing outside that manife
 
 ## Current compile audit
 
-The pinned flight-cpp SDK reports 314 emitted and 2,537 refused modules from its older pinned Flight
-graph. A standalone C++20 syntax audit found callable functions in 30 generated headers. Only four
-of those headers compile unchanged against the pinned runtime:
-
-- `flight/math/clamp.hpp`
-- `flight/math/interpolation.hpp`
-- `flight/color/srgb_transfer.hpp`
-- `flight/geometry/geometry_pool_guards.hpp`
-
-The first three have current extern-compatible scalar signatures and form the ten-function native
-partition. The geometry header installs a process-global callback; it stays unbound until ownership,
-threading, and callback lifetime are specified for Haxe. The remaining 26 callable headers fail
-standalone compilation because of compiler/runtime gaps such as missing helpers, declaration order,
-an invalid `cmath.exp` qualifier, a constant/function name collision, or stale runtime member names.
-This is the concrete golden reference for future flight-compiler and flight-cpp improvements.
+The current pin's generated SDK uses the same Flight and flight-compiler revisions as this repo. It
+reports 2,563 emitted and 588 refused modules from 3,151 profile inputs across 153 packages. The
+exact general-purpose Haxe-callable partition remains intentionally smaller: ten scalar functions
+from `flight/math/clamp.hpp`, `flight/math/interpolation.hpp`, and
+`flight/color/srgb_transfer.hpp`. They are compared with the current web extern signatures and
+compiled and executed from one Haxe source in the cross-target gate. Expanding that partition must
+remain manifest-first and compile-proven; the much larger generated C++ inventory is not silently
+claimed as Haxe support.
 
 The bridges do not reimplement Flight. They include the generated headers and forward directly to
 their functions. Their only semantic correction renames flight-cpp's `flight::null` helper while the
@@ -31,10 +24,12 @@ C++20 build.
 
 ## Window/render status
 
-flight-cpp contains a real optional SDL3 host that owns lifecycle, events, windows, and graphics
-surface acquisition. It intentionally does not yet wire the generated Flight renderer contracts;
-`flight-cpp/docs/host-sdl.md` identifies that adapter and a compilable types package as remaining
-work. Consequently `examples/window-native` cannot honestly become a Flight-rendering sample from
-the current SDK. The host additionally requires an external SDL 3.2+ development package. Keep the
-window example fail-loud until both the upstream adapter surface and its native dependency are
-available; do not replace it with a local renderer or a fake window.
+The current flight-cpp pin contains the real optional SDL3 host and its OpenGL adapter. The
+manifest-recorded `flight.HostSdlGl` extension now lets `examples/window-native` construct that host,
+create a hidden SDL OpenGL window/context, issue a clear through flight-cpp's WebGL-shaped adapter,
+and present. The installed-package cross-target gate builds and runs this path offscreen.
+
+This is a real host/window/GL/presentation proof, but not a claim that every generated Flight
+renderer contract is available through Haxe. Keep the native extension separate from the generated
+portable surface until that mapping is complete. Building it requires CMake, Ninja, and external SDL
+3.2+ development files; the Haxelib packages bridge source, not SDL or prebuilt flight-cpp binaries.

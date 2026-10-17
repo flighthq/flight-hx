@@ -14,8 +14,8 @@ integrations that consume flight-hx as a `haxelib`.
 | [`headless/`](headless/) | none | any backend | ✅ runnable now (`flight_hx`) |
 | [`fallback-hx/`](fallback-hx/) | none | `js` + `flight_hx` | ✅ covered by the proof gate |
 | [`web-geometry/`](web-geometry/) | none | `js` + `flight_esm` → `_js` | ✅ **generated** bindings on **real** `@flighthq/geometry`, tree-shaken (`gate:web`, `gate:dce`) |
-| [`window-native/`](window-native/) | Flight's own | `cpp` → `_cpp` | ⏳ stub (awaits flight-cpp's generated host/render adapter; basic `_cpp` works) |
-| [`window-web/`](window-web/) | Flight's own | `js` + `flight_esm` → `_js` | ⏳ stub — windowed app; `web-geometry` already proves the ESM pipeline |
+| [`window-native/`](window-native/) | Flight's own SDL3/GL host | `cpp` → `_cpp` | ✅ real window/context/clear/present through current flight-cpp (`gate:cross-target`) |
+| [`window-web/`](window-web/) | Flight's browser host | `js` + `flight_esm` → `_js` | ⏳ portable window/render counterpart; web ESM pipeline already works |
 
 Run the headless example:
 

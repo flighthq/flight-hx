@@ -20,10 +20,11 @@ This is not a Haxe reimplementation of Flight; it binds to it. See [AGENTS.md](A
 The haxelib name is `flight`. Its initialization macro selects exactly one checked-in backend root,
 so consumers use `-lib flight` instead of reproducing this repository's classpath ordering. Web
 builds additionally define `flight_esm` and use the bundled static ESM generator; native builds pass
-`-D flight_cpp_root=/path/to/flight-cpp` and link the pinned-compatible flight-cpp SDK. Defining
+`-D flight_cpp_root=/path/to/flight-cpp` and link the pinned-compatible flight-cpp SDK. The optional
+SDL3/GL host extension also receives `-D flight_cpp_build=/path/to/flight-cpp/build`. Defining
 `flight_hx` elects the optional pure-Haxe fallback. The cross-target gate registers a clean isolated
-haxelib repository, builds and installs the deterministic consumer archive, and proves all three
-forms from the same source.
+haxelib repository, builds and installs the deterministic consumer archive, proves one Haxe source
+on all three forms, and separately creates and presents a real flight-cpp SDL3/GL surface.
 
 ## Develop
 
@@ -41,35 +42,38 @@ npm run gate:parity         # exact JS↔HX signatures + supported/unavailable p
 npm run gate:runtime        # declared compiler runtime ABI + portable behavior
 npm run gate:transpile      # compile the full generated HX tree and execute public facades
 npm run gate:behavior       # differential HX-vs-pinned-Flight semantic oracle
-npm run gate:cross-target   # run one isolated haxelib consumer on ESM, hxcpp, and pure Haxe
+npm run gate:cross-target   # run one consumer on 3 backends + the real SDL3/GL native host
 npm run generate:check:extern # regenerate externs in memory and reject drift
 npm run refresh:transpile-surface:check # reject fallback facade/partition drift
 npm run check               # run every production gate, including web behavior/DCE and drift
 ```
 
-The pinned compiler scans the complete 154-package Flight SDK graph. Extern generation accepts all
-2,855 production modules and emits 3,166 compiler files plus 3,012 public type aliases. The complete
-surface contains 6,204 functions and 873 values; all 7,077 public runtime declarations are accounted
-for, all 154 packages are fully covered, and nothing is missing or unexpected. Two narrow downstream
-Haxe syntax corrections are manifest-recorded with exact application counts and fail on drift.
+The pins now move together for the production SDK: Flight `a627849`, flight-compiler `806d257`, and
+flight-cpp `f4821b`. The compiler scans the complete current 153-package Flight SDK graph. Extern
+generation accepts all 3,144 production modules and emits 3,224 compiler files plus 3,071 public
+type aliases. All 8,167 public runtime declarations and 3,071 types are accounted for, every package
+is fully covered, and nothing is missing or unexpected. Two narrow downstream compatibility
+corrections are manifest-recorded with exact application counts and fail on drift.
 
-The optional transpilation corpus accepts 1,110 of 2,866 non-test modules and contains 1,110
+The optional transpilation corpus intentionally remains at Flight `65889a` and accepts 1,110 of
+2,866 non-test modules, producing 1,110
 compiler-emitted implementation files. A deterministic downstream refresh intersects those pinned
-implementations with the current extern golden reference, deriving 6,114 backing/public files. The
-usable `flight.*` fallback surface contains 3,012 type identities, 237 functions, and 382 values;
-function/value signatures and type generic arity match the extern backend. The remaining 6,452
-extern declarations are explicitly unavailable in `generated/hx/public-surface.json`, which records
-both compiler revisions. Unsupported source modules remain explicit in each mode's `refusals.json`;
-generated files are never silent stubs.
+implementations with the matching extern golden reference when their source pins agree. Until that
+optional corpus is regenerated at `a627849`, refresh and parity gates report an explicit cross-pin
+skip instead of claiming that its older surface matches the current web SDK. Its checked-in surface
+still contains 3,012 type identities, 237 functions, and 382 values; unsupported source modules
+remain explicit in `generated/hx/refusals.json`, never silent stubs.
 
 The complete 7,224-file transpiled tree compiles and executes on JavaScript using the native ECMAScript implementation of `flight-runtime-contract/2`. A host-free public Math/Effects slice plus compiler-emitted easing and Rive table code also runs on Haxe eval through the maintained portable Float32, map, set, symbol, and task shims. Browser-specific modules remain JavaScript-target APIs rather than pretending to be portable DOM implementations.
 
-Native integration starts from what the pinned flight-cpp SDK actually provides, rather than waiting
+Native integration starts from what the pinned current flight-cpp SDK actually provides, rather than waiting
 for full TS-to-Haxe transpilation or claiming parity it has not earned. `src-cpp/manifest.json` records
 ten compile-proven scalar bindings across Math and Color, the generated SDK's distinct source/compiler
-revisions, C++20, and the two downstream hxcpp/flight-cpp corrections. A C++ header audit found only
-four of 30 callable generated headers compile unchanged today; three form this safe scalar partition,
-while the fourth has unresolved callback ownership. `examples/cross-target-math/` compiles and runs
-the same installed-package consumer against those headers on desktop and the complete ESM externs on
-web. Future flight-compiler and flight-cpp improvements should shrink the correction inventory and
-expand the manifest.
+revisions, C++20, and the two downstream hxcpp/flight-cpp corrections. The current generated native
+SDK reports 2,563 emitted modules; Haxe exposes only the smaller exact partition it actually proves.
+`examples/cross-target-math/` compiles and runs the same installed-package consumer against those
+headers on desktop and the current complete ESM externs on web. `examples/window-native/` additionally
+links `Flight::HostSdlGl` and uses the real SDL3 window, OpenGL context, clear, and presentation path.
+It is explicitly a native platform extension, not yet the portable generated renderer contract.
+Future flight-compiler and flight-cpp improvements should shrink the correction inventory and expand
+that manifest without weakening its fail-loud boundary.
