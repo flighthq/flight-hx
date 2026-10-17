@@ -12,6 +12,10 @@
     "haxe": "node tools/haxe.mjs",
     "generate": "node tools/backend-hx/generate.mjs",
     "generate:check": "node tools/backend-hx/generate.mjs --check",
+    "generate:check:extern": "node tools/backend-hx/generate.mjs --check --extern",
+    "generate:check:transpile": "node tools/backend-hx/generate.mjs --check --transpile",
+    "refresh:transpile-surface": "node tools/backend-hx/refreshTranspiledSurface.mjs",
+    "refresh:transpile-surface:check": "node tools/backend-hx/refreshTranspiledSurface.mjs --check",
     "proof": "node tools/haxe.mjs -cp src -cp tests/haxe --main ProofOfShape --interp -D flight_hx",
     "gate:proof": "node tests/gates/proofShape.mjs",
     "gate:surface": "node tests/gates/generatedSurface.mjs",
@@ -23,6 +27,7 @@
     "gate:runtime": "node tests/gates/runtimeContract.mjs",
     "gate:transpile": "node tests/gates/transpiledSources.mjs",
     "gate:dce": "node tests/gates/webDce.mjs",
+    "gate:cross-target": "node tests/gates/crossTargetMath.mjs",
     "check": "node tests/gates/all.mjs"
   },
   "devDependencies": {

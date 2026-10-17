@@ -5,6 +5,6 @@ inline function reportTextBidiCompactTableMiss(codepoint:Float):Void {
   flight._hx.textbidi.TextBidiGuards.reportTextBidiCompactTableMiss(cast codepoint);
 }
 
-inline function setTextBidiGuard(guard:Null<(Float)->Void>):Void {
+inline function setTextBidiGuard(guard:Null<flight.TextBidiGuard>):Void {
   flight._hx.textbidi.TextBidiGuards.setTextBidiGuard(cast guard);
 }

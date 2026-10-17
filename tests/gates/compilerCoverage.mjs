@@ -23,9 +23,9 @@ const budgets = {
     internalErrors: 20,
     rootRefusals: 834,
     sourceModules: 2866,
-    supportedFunctions: 175,
-    supportedTypes: 2016,
-    supportedValues: 345,
+    supportedFunctions: 237,
+    supportedTypes: 3012,
+    supportedValues: 382,
     totalRefusals: 1756,
   },
 };

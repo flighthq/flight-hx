@@ -11,13 +11,15 @@ const scripts = [
   'gate:proof',
   'gate:surface',
   'gate:bindings',
+  'refresh:transpile-surface:check',
   'gate:parity',
   'gate:runtime',
   'gate:transpile',
   'gate:behavior',
   'gate:web',
   'gate:dce',
-  'generate:check',
+  'gate:cross-target',
+  'generate:check:extern',
 ];
 const failures = [];
 

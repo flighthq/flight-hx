@@ -2,3 +2,15 @@
 package flight;
 
 typedef Bitmap = flight._hx.Bitmap;
+
+inline function createBitmapRegion(bitmap:flight.Bitmap, ?x:Float, ?y:Float, ?width:Float, ?height:Float):flight.BitmapRegion {
+  return flight._hx._fn.Bitmap.createBitmapRegion(bitmap, x, y, width, height);
+}
+
+inline function explainBitmapReadback(host:flight.HasGraphicsBitmapReadback, source:Dynamic, width:Float, height:Float):flight.BitmapReadbackExplanation {
+  return flight._hx._fn.Bitmap.explainBitmapReadback(host, source, width, height);
+}
+
+inline function setBitmapRegion(out:flight.BitmapRegion, bitmap:flight.Bitmap, ?x:Float, ?y:Float, ?width:Float, ?height:Float):flight.BitmapRegion {
+  return flight._hx._fn.Bitmap.setBitmapRegion(out, bitmap, x, y, width, height);
+}

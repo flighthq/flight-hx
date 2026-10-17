@@ -1,7 +1,9 @@
 # window-native — the one real end-to-end app (native)
 
-**Stub.** Blocked on the `_cpp` backend + the native co-compile against
-[flight-cpp](https://github.com/flighthq/flight-cpp).
+**Stub.** The direct `_cpp` pipeline now works for the representative host-free Math slice in
+[`../cross-target-math/`](../cross-target-math/). This windowed follow-up is blocked on expanding the
+manifest-recorded native surface to the required host and rendering APIs in
+[flight-cpp](https://github.com/flighthq/flight-cpp), not on basic hxcpp/C++ integration.
 
 A real windowed render loop using **Flight's own host** (the platform layer flight-cpp links — SDL/
 etc.), compiled `cpp` → `_cpp`. This is the *representative* whole-stack app: it proves the host

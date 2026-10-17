@@ -7,7 +7,7 @@ inline function createEntityRuntime():flight.EntityRuntime {
   return flight._hx._fn.Entity.createEntityRuntime();
 }
 
-inline function explainEntityRuntimeWrite(slot:Dynamic):flight.EntityRuntimeWriteExplanation {
+inline function explainEntityRuntimeWrite(slot:flight.EntityRuntimeWriteSlot):flight.EntityRuntimeWriteExplanation {
   return flight._hx._fn.Entity.explainEntityRuntimeWrite(slot);
 }
 

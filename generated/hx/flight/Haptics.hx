@@ -17,11 +17,11 @@ inline function prepareHaptics(host:flight.HasInputHaptics):Void {
   flight._hx._fn.Haptics.prepareHaptics(host);
 }
 
-inline function triggerHapticImpact(host:flight.HasInputHaptics, style:Dynamic, ?intensity:Float):Bool {
+inline function triggerHapticImpact(host:flight.HasInputHaptics, style:flight.HapticImpactStyle, ?intensity:Float):Bool {
   return flight._hx._fn.Haptics.triggerHapticImpact(host, style, intensity);
 }
 
-inline function triggerHapticNotification(host:flight.HasInputHaptics, type:Dynamic):Bool {
+inline function triggerHapticNotification(host:flight.HasInputHaptics, type:flight.HapticNotificationType):Bool {
   return flight._hx._fn.Haptics.triggerHapticNotification(host, type);
 }
 

@@ -1,8 +1,8 @@
 // Structural parity for the compiler-generated public backends. The transpiled backend is an
 // explicitly reported subset while flight-compiler still refuses modules: every available Haxe
 // declaration must match the JavaScript extern signature, and every JavaScript declaration must
-// appear in exactly one of the supported/unavailable partitions. Native generation is a separate
-// flight-cpp integration task and is not represented by a generated manifest yet.
+// appear in exactly one of the supported/unavailable partitions. Native support is independently
+// recorded as the exact smaller partition in src-cpp/manifest.json.
 import { readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';

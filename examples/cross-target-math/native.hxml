@@ -1,0 +1,7 @@
+-cp src
+-cp generated
+-cp src-cpp
+-cp examples/cross-target-math
+--main CrossTargetMath
+-D HXCPP_NO_CPP11
+# Supply `-cpp <output>` plus absolute `flight_cpp_root` and `flight_hx_root` defines at invocation.

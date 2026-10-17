@@ -7,7 +7,9 @@
 node_modules/
 .haxe/
 .haxelib/
-haxe_libraries/
+!haxe_libraries/
+haxe_libraries/*
+!haxe_libraries/hxcpp.hxml
 .cache/
 .artifacts/
 build/

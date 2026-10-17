@@ -994,19 +994,26 @@
     "packages": 154,
     "refusedModules": 1756,
     "sourceModules": 2866,
-    "compatibilityFiles": 4085,
-    "generatedFiles": 5195,
+    "compatibilityFiles": 6114,
+    "generatedFiles": 7224,
     "publicFacadeFiles": 0,
     "publicRuntimeSurface": {
-      "publicFunctions": 2625,
-      "publicTypes": 2016,
-      "publicValues": 468,
-      "supportedFunctions": 175,
-      "supportedTypes": 2016,
-      "supportedValues": 345,
-      "unavailableFunctions": 2450,
+      "publicFunctions": 6204,
+      "publicTypes": 3012,
+      "publicValues": 867,
+      "supportedFunctions": 237,
+      "supportedTypes": 3012,
+      "supportedValues": 382,
+      "unavailableFunctions": 5967,
       "unavailableTypes": 0,
-      "unavailableValues": 123
+      "unavailableValues": 485
     }
+  },
+  "publicSurface": {
+    "schema": "flight-hx-transpiled-public-derivation/1",
+    "externCompilerRevision": "9edfcca46db71d6a6a53aafa2718d8c9f9d5df7c",
+    "externSourceRevision": "65889a191bb0d2f5f2f95148590874f3e49bf9d4",
+    "transpiledCompilerRevision": "56496423fd865a51023e72966190d10d886eae40",
+    "transpiledSourceRevision": "65889a191bb0d2f5f2f95148590874f3e49bf9d4"
   }
 }

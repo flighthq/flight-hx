@@ -65,10 +65,17 @@ This repo pins `flight`, `flight-compiler`, and `flight-cpp` in `dependencies.lo
 
 Analysis, IR, lowering, naming, extern emission, and transpiled-source emission live in [flight-compiler](https://github.com/flighthq/flight-compiler). `tools/backend-hx/generate.mjs` is only the downstream integration driver: it constructs the same complete SDK graph as flight-cpp, invokes the compiler's public API in `extern` and `transpile` modes, applies named compatibility corrections, runs the complete transpiled output through Haxe 4.3.7, and owns atomic write/check modes plus manifests and refusal ledgers. Do not reintroduce a local TypeScript parser or lowering implementation here.
 
+The working-package boundary is downstream-first: flight-hx may own narrow, deterministic,
+manifest-recorded corrections and explicit native overrides needed to make the published Haxe surface
+actually compile and run. That working result is the golden reference for later flight-compiler and
+flight-cpp improvements, which should reduce the correction/override inventory over time. Full
+TS-to-Haxe transpilation is useful optional reach, not a prerequisite for the web + native SDK.
+
 ## What this repo owns
 
 - `dependencies.lock.json` + `scripts/` rehydrate infra.
 - `generated/js` — checked-in JavaScript extern bindings; `generated/hx` — checked-in transpiled Haxe fallback sources. Consumers need neither Node nor flight-compiler.
+- `src-cpp/` — checked-in native facade overrides, C++ bridge headers, and the exact flight-cpp support/correction manifest.
 - `src/flight/` — the maintained runtime shim: public unifiers, hidden `_hx` bodies + `_cpp`/`_js` extern drafts, the small inlined-Haxe value primitives (hot math, most valuable on JS).
 - `tools/backend-hx/` — the thin flight-compiler integration and downstream compatibility boundary.
 - `tools/esm/` — the vendored, purpose-built ESM generator (genes as reference, not a fork; scoped to this repo's generated vocabulary; pinned Haxe underneath).
@@ -78,14 +85,14 @@ Analysis, IR, lowering, naming, extern emission, and transpiled-source emission 
 
 ## Gates (fail-loud, per the Flight discipline)
 
-- **Behavioral gate** — compile a Haxe consumer against the bindings, link/co-compile the backend, run it. This is the only check that catches native-only breakage; byte-diffing and the JS oracle are blind to it. It is the lesson the archive paid for repeatedly.
-- **Backend-parity gate** — every available `_hx` function/value must exactly match its `_js` signature, type identities must match in name and generic arity, and every `_js` declaration must occur in exactly one supported/unavailable partition. Haxe treats interface methods and function-valued fields as distinct assignability representations even though calls are equivalent; normalizing that compiler-emission seam belongs upstream. Native parity remains gated by the separate flight-cpp integration because no generated `_cpp` manifest exists yet.
+- **Cross-target behavioral gate** — compile one Haxe consumer against the complete ESM externs and the manifest-recorded direct flight-cpp subset, link/bundle both backends, run both, and inspect generated C++ for direct calls. This is the check that catches native-only breakage; byte-diffing and the JS oracle are blind to it.
+- **Backend-parity gate** — every available `_hx` function/value must exactly match its `_js` signature, type identities must match in name and generic arity, and every `_js` declaration must occur in exactly one supported/unavailable partition. Haxe treats interface methods and function-valued fields as distinct assignability representations even though calls are equivalent; normalizing that compiler-emission seam belongs upstream. Native support is deliberately a smaller, exact partition in `src-cpp/manifest.json` until flight-cpp catches up.
 - **Web-DCE gate** — build a sample, bundle it, assert imports are static `import { … }` and an unused Flight function is absent from the bundle. Defines "the ESM generator works precisely."
-- **Binding-existence gate** — the validation type-checking cannot do: a Haxe extern is an unchecked promise, so load the _real_ Flight ESM for every generated contract holder and assert each bound function and value resolves to the right runtime export. Covers the emitted surface (2,625 functions and 468 values), not the few an example calls. Types aren't checked at runtime (TS interfaces are erased from ESM); their fidelity rests on the shared inventory + the surface type-check.
+- **Binding-existence gate** — the validation type-checking cannot do: a Haxe extern is an unchecked promise, so load the _real_ Flight ESM for every generated contract holder and assert each bound function and value resolves to the right runtime export. Covers the emitted surface (6,204 functions and 873 values), not the few an example calls. Types aren't checked at runtime (TS interfaces are erased from ESM); their fidelity rests on the shared inventory + the surface type-check.
 - **Generated-surface gate** — type-check all compiler-emitted externs and compiler-derived public aliases at once. Refused legacy facade modules stay outside this dependency-closed output gate.
 - **Compiler-coverage gate** — reconcile manifests, initialization plans, refusal ledgers, public runtime export partitions, and public type aliases in both directions; ratchet the pinned corpus so support may improve but cannot silently shrink.
 - **Runtime-contract gate** — declare and verify `flight-runtime-contract/2`, `flight-runtime-constructor-abi/1`, and `flight-runtime-task-capability-abi/1`; compile every maintained runtime module on JS and execute the host-free portable subset on Haxe eval.
-- **Transpiled-source gate** — type-check all 5,195 compiler and compiler-derived backend files, execute public `flight.*` functions on JS, then run public Math/Effects plus compiler-emitted Float32/map/task code on Haxe eval.
+- **Transpiled-source gate** — type-check all 7,224 compiler and compiler-derived backend files, execute public `flight.*` functions on JS, then run public Math/Effects plus compiler-emitted Float32/map/task code on Haxe eval.
 - **Differential-behavior gate** — compare deterministic compiler-emitted Haxe results with the same pinned Flight JavaScript functions through a real bundled ESM oracle.
 
 ## Examples: for the layer, not for Flight
@@ -96,6 +103,7 @@ Because the Haxe surface is generated from the same flight-compiler IR that prod
 
 Tiers (host per the host-axis rule — core examples use no host or Flight's own; never Lime/Clay):
 
+- `examples/cross-target-math/` — one source file compiled and executed through both the complete web externs and the representative direct flight-cpp native path.
 - `examples/headless/` — no host; `flight.*` calls under all backends. The bulk lives here.
 - `examples/fallback-hx/` — the `_hx` fallback compiling+running on a `js` target (the Lime/Clay-web scenario) via a define flip, **without** a real Lime dependency.
 - `examples/window-native/` — Flight's own host, `cpp` → `_cpp`; the one real end-to-end app on native (feeds the behavioral gate). Stubbed until the `_cpp` backend lands.
@@ -103,8 +111,17 @@ Tiers (host per the host-axis rule — core examples use no host or Flight's own
 
 ## Status
 
-`flight-compiler` is the only source generator. The lock pins compiler revision `5649642`. Extern mode scans 2,855 production modules in the 154-package SDK graph (excluding eleven `*TestHelper.ts` modules), accepts 1,635, and emits 2,096 compiler files plus 2,016 public aliases. Its full surface type-checks; all 2,625 functions and 468 values across 80 emitted package contracts resolve to real Flight ESM exports. The reverse contract inventory records 7,082 expected runtime exports, 3,093 emitted, 3,989 missing because their modules or declarations remain unsupported, and zero unexpected. Contract filtering removed 113 source-exported functions and 123 values that are not in their package's public `/contract` lane.
+`flight-compiler` is the only source generator. The lock pins compiler revision `9edfcca`. Extern mode scans and accepts all 2,855 production modules in the 154-package SDK graph (excluding eleven `*TestHelper.ts` modules), emits 3,166 compiler files plus 3,012 public aliases, and records two exact downstream syntax corrections. Its full surface type-checks; all 6,204 functions and 873 values resolve to real Flight ESM exports. The reverse inventory records all 7,077 expected runtime exports, zero missing, and zero unexpected.
 
-Transpile mode scans all 2,866 non-test modules and emits 1,110 dependency-closed implementation modules. From the compiler-emitted extern and implementation declarations, flight-hx derives 4,085 backing/public files: 2,016 public types, 175 functions, and 345 values exactly match the JS signatures, while 2,573 unavailable declarations stay machine-readable. Its complete 5,195-file tree compiles under Haxe 4.3.7; public fallback behavior matches pinned Flight JavaScript for 39 deterministic results. The maintained JavaScript runtime implements the complete declared compiler ABI, and the portable host-free subset executes on Haxe eval. The remaining 1,756 source modules are explicit upstream compiler refusals recorded in `generated/hx/refusals.json`, never stubs.
+The optional transpile implementation corpus remains pinned at compiler revision `5649642`: it scans
+all 2,866 non-test modules and emits 1,110 dependency-closed implementation modules. The lightweight
+`refresh:transpile-surface` step intersects those files with the current extern golden reference and
+derives 6,114 backing/public files: 3,012 public types, 237 functions, and 382 values exactly match the
+JS signatures, while 6,452 unavailable declarations stay machine-readable. Both compiler revisions
+are explicit in the derivation ledger. The complete 7,224-file tree compiles under Haxe 4.3.7; public
+fallback behavior matches pinned Flight JavaScript for 39 deterministic results. The maintained
+JavaScript runtime implements the complete declared compiler ABI, and the portable host-free subset
+executes on Haxe eval. The remaining 1,756 source modules are explicit upstream compiler refusals
+recorded in `generated/hx/refusals.json`, never stubs.
 
-The ESM path consumes compiler-emitted `@:jsImport` externs through the vendored static-module generator. Generation is deterministic (`npm run generate:check`), checked in, and records both source/compiler revisions and all downstream compatibility corrections. Native `_cpp` integration remains a separate flight-cpp binding task.
+The ESM path consumes compiler-emitted `@:jsImport` externs through the vendored static-module generator. Extern generation (`generate:check:extern`) and downstream fallback-surface derivation (`refresh:transpile-surface:check`) are independently deterministic and part of the production check; a full new TS-to-Haxe transpile remains an explicit compiler-maintenance task. The first direct `_cpp` slice is live: one cross-target Haxe Math sample compiles and runs against pinned flight-cpp on hxcpp and against ESM on web. Its exact three-function native partition and correction inventory are recorded in `src-cpp/manifest.json`; expanding that partition and landing the real windowed native example remain follow-up work.

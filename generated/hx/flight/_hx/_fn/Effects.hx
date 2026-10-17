@@ -91,7 +91,7 @@ inline function getLinearSampledGaussianTapCount(sigma:Float):Float {
   return cast flight._hx.effects.LinearSampledGaussian.getLinearSampledGaussianTapCount(cast sigma);
 }
 
-inline function getRenderEffectInputs(effect:flight.RenderEffect):Array<Dynamic> {
+inline function getRenderEffectInputs(effect:flight.RenderEffect):Array<flight.RenderEffectInput> {
   return cast flight._hx.effects.RenderEffectInputs.getRenderEffectInputs(cast effect);
 }
 
@@ -99,10 +99,10 @@ inline function getRenderEffectKinds():Array<String> {
   return cast flight._hx.effects.RenderEffectInputs.getRenderEffectKinds();
 }
 
-inline function initializeRenderEffect<T:flight.RenderEffect>(out:T, kind:String):Void {
+inline function initializeRenderEffect<T:flight.RenderEffect>(out:flight.EntityConstruction<T>, kind:flight.Kind):Void {
   flight._hx.effects.RenderEffect.initializeRenderEffect(cast out, cast kind);
 }
 
-inline function validateRenderEffectList(effects:Array<flight.RenderEffect>, available:Array<Dynamic>):Null<Dynamic> {
+inline function validateRenderEffectList(effects:Array<flight.RenderEffect>, available:Array<flight.RenderEffectInput>):Null<flight.RenderEffectInput> {
   return cast flight._hx.effects.RenderEffectValidation.validateRenderEffectList(cast effects, cast available);
 }

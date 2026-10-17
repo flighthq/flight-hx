@@ -1,0 +1,9 @@
+-cp generated
+-cp generated/js
+-cp examples/cross-target-math
+-cp tools/esm
+--main CrossTargetMath
+-D flight_esm
+-dce full
+--macro EsmGenerator.use()
+-js build/cross-target-math.js

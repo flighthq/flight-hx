@@ -125,7 +125,7 @@ inline function normalizeAngle(radians:Float):Float {
   return flight._hx._fn.Math.normalizeAngle(radians);
 }
 
-inline function pick<T>(random:()->Float, items:Array<T>):Null<T> {
+inline function pick<T>(random:flight.RandomSource, items:Array<T>):Null<T> {
   return flight._hx._fn.Math.pick(random, items);
 }
 
@@ -145,55 +145,55 @@ inline function radToDeg(radians:Float):Float {
   return flight._hx._fn.Math.radToDeg(radians);
 }
 
-inline function randomBool(random:()->Float, ?probability:Float):Bool {
+inline function randomBool(random:flight.RandomSource, ?probability:Float):Bool {
   return flight._hx._fn.Math.randomBool(random, probability);
 }
 
-inline function randomExponential(random:()->Float, ?rate:Float):Float {
+inline function randomExponential(random:flight.RandomSource, ?rate:Float):Float {
   return flight._hx._fn.Math.randomExponential(random, rate);
 }
 
-inline function randomGaussian(random:()->Float, ?mean:Float, ?standardDeviation:Float):Float {
+inline function randomGaussian(random:flight.RandomSource, ?mean:Float, ?standardDeviation:Float):Float {
   return flight._hx._fn.Math.randomGaussian(random, mean, standardDeviation);
 }
 
-inline function randomGaussianPair(random:()->Float, ?mean:Float, ?standardDeviation:Float):Array<Float> {
+inline function randomGaussianPair(random:flight.RandomSource, ?mean:Float, ?standardDeviation:Float):Array<Float> {
   return flight._hx._fn.Math.randomGaussianPair(random, mean, standardDeviation);
 }
 
-inline function randomInsideUnitDisc(random:()->Float, out:flight.Vector2):Void {
+inline function randomInsideUnitDisc(random:flight.RandomSource, out:flight.Vector2Like):Void {
   flight._hx._fn.Math.randomInsideUnitDisc(random, out);
 }
 
-inline function randomInsideUnitSphere(random:()->Float, out:flight.Vector3):Void {
+inline function randomInsideUnitSphere(random:flight.RandomSource, out:flight.Vector3Like):Void {
   flight._hx._fn.Math.randomInsideUnitSphere(random, out);
 }
 
-inline function randomInt(random:()->Float, min:Float, max:Float):Float {
+inline function randomInt(random:flight.RandomSource, min:Float, max:Float):Float {
   return flight._hx._fn.Math.randomInt(random, min, max);
 }
 
-inline function randomOnUnitCircle(random:()->Float, out:flight.Vector2):Void {
+inline function randomOnUnitCircle(random:flight.RandomSource, out:flight.Vector2Like):Void {
   flight._hx._fn.Math.randomOnUnitCircle(random, out);
 }
 
-inline function randomOnUnitSphere(random:()->Float, out:flight.Vector3):Void {
+inline function randomOnUnitSphere(random:flight.RandomSource, out:flight.Vector3Like):Void {
   flight._hx._fn.Math.randomOnUnitSphere(random, out);
 }
 
-inline function randomPoisson(random:()->Float, ?lambda:Float):Float {
+inline function randomPoisson(random:flight.RandomSource, ?lambda:Float):Float {
   return flight._hx._fn.Math.randomPoisson(random, lambda);
 }
 
-inline function randomRange(random:()->Float, min:Float, max:Float):Float {
+inline function randomRange(random:flight.RandomSource, min:Float, max:Float):Float {
   return flight._hx._fn.Math.randomRange(random, min, max);
 }
 
-inline function randomSign(random:()->Float):Float {
+inline function randomSign(random:flight.RandomSource):Float {
   return flight._hx._fn.Math.randomSign(random);
 }
 
-inline function randomWeighted(random:()->Float, weights:Array<Float>):Float {
+inline function randomWeighted(random:flight.RandomSource, weights:Array<Float>):Float {
   return flight._hx._fn.Math.randomWeighted(random, weights);
 }
 
@@ -213,11 +213,11 @@ inline function saturate(value:Float):Float {
   return flight._hx._fn.Math.saturate(value);
 }
 
-inline function shuffle<T>(random:()->Float, items:Array<T>):Array<T> {
+inline function shuffle<T>(random:flight.RandomSource, items:Array<T>):Array<T> {
   return flight._hx._fn.Math.shuffle(random, items);
 }
 
-inline function shuffleInPlace<T>(random:()->Float, items:Array<T>):Void {
+inline function shuffleInPlace<T>(random:flight.RandomSource, items:Array<T>):Void {
   flight._hx._fn.Math.shuffleInPlace(random, items);
 }
 

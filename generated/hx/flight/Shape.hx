@@ -2,3 +2,7 @@
 package flight;
 
 typedef Shape = flight._hx.Shape;
+
+inline function mapScale9ShapeCommands(out:Array<flight.ShapeCommandToken>, source:Array<flight.ShapeCommandToken>, mapper:flight.Scale9Mapper):Void {
+  flight._hx._fn.Shape.mapScale9ShapeCommands(out, source, mapper);
+}

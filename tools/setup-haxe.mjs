@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, readdirSync, renameSync, rmSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import os from 'node:os';
 import path from 'node:path';
@@ -96,13 +96,17 @@ function ensureHxcppRunner() {
   const libraryCache = process.env.HAXE_LIBCACHE ?? path.join(os.homedir(), 'haxe', 'haxe_libraries');
   const hxcppDirectory = path.join(libraryCache, relativeCachePath);
   const runner = path.join(hxcppDirectory, process.platform === 'win32' ? 'hxcpp.exe' : 'hxcpp.n');
-  if (existsSync(runner)) return;
-  if (!existsSync(hxcppDirectory)) throw new Error(`Pinned hxcpp was not downloaded to ${hxcppDirectory}`);
-  process.stdout.write('Building the pinned hxcpp command runner.\n');
-  run(executable, ['compile.hxml'], {
-    cwd: path.join(hxcppDirectory, 'tools', 'hxcpp'),
-    env: { ...process.env, HAXE_STD_PATH: path.join(installDirectory, 'std') },
-  });
+  if (!existsSync(runner)) {
+    if (!existsSync(hxcppDirectory)) throw new Error(`Pinned hxcpp was not downloaded to ${hxcppDirectory}`);
+    process.stdout.write('Building the pinned hxcpp command runner.\n');
+    run(executable, ['compile.hxml'], {
+      cwd: path.join(hxcppDirectory, 'tools', 'hxcpp'),
+      env: { ...process.env, HAXE_STD_PATH: path.join(installDirectory, 'std') },
+    });
+  }
+  const haxelibDirectory = path.join(workspace, '.haxelib', 'hxcpp');
+  mkdirSync(haxelibDirectory, { recursive: true });
+  writeFileSync(path.join(haxelibDirectory, '.dev'), `${hxcppDirectory}\n`);
 }
 
 function run(command, args, options = {}) {

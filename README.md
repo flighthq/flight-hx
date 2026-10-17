@@ -7,6 +7,7 @@ This is not a Haxe reimplementation of Flight; it binds to it. See [AGENTS.md](A
 ## Layout
 
 - `src/flight/` — maintained runtime shim + the `flight.*` backend selectors.
+- `src-cpp/` — explicit native facade overrides, bridge headers, and the pinned support manifest.
 - `generated/js` — compiler-emitted ESM externs; `generated/hx` — compiler-emitted transpiled fallback.
 - `tools/backend-hx/` — deterministic flight-compiler integration, compatibility, and provenance.
 - `tools/esm/` — the vendored ESM generator (web pay-per-use).
@@ -16,9 +17,10 @@ This is not a Haxe reimplementation of Flight; it binds to it. See [AGENTS.md](A
 ## Develop
 
 ```sh
-npm ci && npm run setup     # provision the pinned Haxe (4.3.7)
+npm ci && npm run setup     # provision pinned Haxe 4.3.7 + hxcpp
 npm run rehydrate           # materialize pinned flight / flight-compiler / flight-cpp
-npm install --prefix .dependencies/flight-compiler && npm run generate
+npm install --prefix .dependencies/flight-compiler && npm run generate -- --extern
+npm run refresh:transpile-surface # re-derive the fallback's public subset from current externs
 npm run proof               # compile + run the proof-of-shape on the flight_hx backend
 npm run gate:proof          # behavioral gate: proof runs, and no-backend fails loud
 npm run gate:surface        # type-check every emitted extern and public type alias
@@ -27,12 +29,32 @@ npm run gate:parity         # exact JS↔HX signatures + supported/unavailable p
 npm run gate:runtime        # declared compiler runtime ABI + portable behavior
 npm run gate:transpile      # compile the full generated HX tree and execute public facades
 npm run gate:behavior       # differential HX-vs-pinned-Flight semantic oracle
-npm run generate:check      # regenerate both modes in memory and reject drift
+npm run gate:cross-target   # compile and run one Haxe sample on web + desktop
+npm run generate:check:extern # regenerate externs in memory and reject drift
+npm run refresh:transpile-surface:check # reject fallback facade/partition drift
 npm run check               # run every production gate, including web behavior/DCE and drift
 ```
 
-The pinned compiler scans the complete 154-package Flight SDK graph. Extern generation accepts 1,635 of 2,855 production modules, emits 2,096 compiler files plus 2,016 public type aliases, and binds 2,625 functions plus 468 values that are checked against real Flight ESM. Its reverse inventory accounts for all 7,082 public contract value exports: 3,093 emitted, 3,989 explicitly missing, and zero unexpected.
+The pinned compiler scans the complete 154-package Flight SDK graph. Extern generation accepts all
+2,855 production modules and emits 3,166 compiler files plus 3,012 public type aliases. The complete
+surface contains 6,204 functions and 873 values; all 7,077 public runtime declarations are accounted
+for, all 154 packages are fully covered, and nothing is missing or unexpected. Two narrow downstream
+Haxe syntax corrections are manifest-recorded with exact application counts and fail on drift.
 
-Transpilation accepts 1,110 of 2,866 non-test modules and produces 1,110 compiler files plus 4,085 compiler-derived backing/public facade files. The usable `flight.*` fallback surface contains 2,016 compiler-correlated type identities, 175 functions, and 345 values; function/value signatures and type generic arity match the extern backend. The remaining 2,573 extern declarations are explicitly unavailable in `generated/hx/public-surface.json`. Unsupported source modules remain explicit in each mode's `refusals.json`; generated files are never silent stubs.
+The optional transpilation corpus accepts 1,110 of 2,866 non-test modules and contains 1,110
+compiler-emitted implementation files. A deterministic downstream refresh intersects those pinned
+implementations with the current extern golden reference, deriving 6,114 backing/public files. The
+usable `flight.*` fallback surface contains 3,012 type identities, 237 functions, and 382 values;
+function/value signatures and type generic arity match the extern backend. The remaining 6,452
+extern declarations are explicitly unavailable in `generated/hx/public-surface.json`, which records
+both compiler revisions. Unsupported source modules remain explicit in each mode's `refusals.json`;
+generated files are never silent stubs.
 
-The complete 5,195-file transpiled tree compiles and executes on JavaScript using the native ECMAScript implementation of `flight-runtime-contract/2`. A host-free public Math/Effects slice plus compiler-emitted easing and Rive table code also runs on Haxe eval through the maintained portable Float32, map, set, symbol, and task shims. Browser-specific modules remain JavaScript-target APIs rather than pretending to be portable DOM implementations.
+The complete 7,224-file transpiled tree compiles and executes on JavaScript using the native ECMAScript implementation of `flight-runtime-contract/2`. A host-free public Math/Effects slice plus compiler-emitted easing and Rive table code also runs on Haxe eval through the maintained portable Float32, map, set, symbol, and task shims. Browser-specific modules remain JavaScript-target APIs rather than pretending to be portable DOM implementations.
+
+Native integration starts from what the pinned flight-cpp SDK actually provides, rather than waiting
+for full TS-to-Haxe transpilation or claiming parity it has not earned. `src-cpp/manifest.json` records
+the current representative direct bindings (`clamp`, `lerp`, and `saturate`), the C++20 requirement,
+and the two downstream hxcpp/flight-cpp corrections. `examples/cross-target-math/` compiles and runs
+the same Haxe source against those headers on desktop and the complete ESM externs on web. Future
+flight-compiler and flight-cpp improvements should shrink these corrections and expand the manifest.
