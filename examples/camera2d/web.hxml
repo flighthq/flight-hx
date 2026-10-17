@@ -1,0 +1,10 @@
+-cp src
+-cp generated
+-cp generated/js
+-cp tools/esm
+-cp examples/camera2d
+--main Camera2d
+-D flight_esm
+-dce full
+--macro EsmGenerator.use()
+-js bin/camera2d.js

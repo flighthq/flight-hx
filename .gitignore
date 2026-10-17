@@ -13,5 +13,6 @@ haxe_libraries/*
 .cache/
 .artifacts/
 build/
+bin/
 dist/
 *.n

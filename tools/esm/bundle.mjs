@@ -4,8 +4,8 @@
 //
 // This is the *bundler* half of the web pipeline. The other half — making Haxe emit static named
 // `import { … }` instead of `require()` so this bundle tree-shakes — is the vendored generator this
-// directory is named for, and is not built yet. Until then a require()-based entry bundles correctly
-// but pulls the whole package (no pay-per-use); see tests/gates/webDce.mjs.
+// directory is named for. The web behavior and DCE gates exercise both halves together and reject
+// require()-based output that would pull whole packages instead of preserving pay-per-use imports.
 import { build } from 'esbuild';
 import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -47,15 +47,22 @@ function flightWorkspacePackages(flightDirectory) {
   };
 }
 
-// CLI: node tools/esm/bundle.mjs <entry.js> <outfile.js>
+// CLI: node tools/esm/bundle.mjs <entry.js> <outfile.js> [--browser]
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const [entry, outfile] = process.argv.slice(2);
-  if (!entry || !outfile) {
-    console.error('usage: node tools/esm/bundle.mjs <entry.js> <outfile.js>');
+  const [entry, outfile, ...flags] = process.argv.slice(2);
+  const unknown = flags.filter((flag) => flag !== '--browser');
+  if (!entry || !outfile || unknown.length > 0) {
+    console.error('usage: node tools/esm/bundle.mjs <entry.js> <outfile.js> [--browser]');
     process.exit(2);
   }
   try {
-    const { inputCount } = await bundleFlightJs({ entry, outfile });
+    const browser = flags.includes('--browser');
+    const { inputCount } = await bundleFlightJs({
+      entry,
+      outfile,
+      format: browser ? 'esm' : 'cjs',
+      platform: browser ? 'browser' : 'node',
+    });
     console.log(`bundled ${outfile} (${inputCount} input modules)`);
   } catch (error) {
     for (const message of error?.errors ?? []) console.error('esbuild:', message.text);

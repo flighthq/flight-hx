@@ -20,6 +20,16 @@
       "requiresBuildDefine": "flight_cpp_build"
     }
   ],
+  "extensions": [
+    {
+      "module": "flight.Camera2dScene",
+      "profile": "scene2d-gl",
+      "target": "Flight::HostSdlGl+Flight::SdkPreview",
+      "requiresBuildDefine": "flight_cpp_build",
+      "includeRoots": ["include", "overrides/include", "generated/include"],
+      "example": "examples/camera2d"
+    }
+  ],
   "modules": [
     {
       "module": "flight.Color",

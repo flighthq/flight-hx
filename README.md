@@ -42,7 +42,7 @@ npm run gate:parity         # exact JS↔HX signatures + supported/unavailable p
 npm run gate:runtime        # declared compiler runtime ABI + portable behavior
 npm run gate:transpile      # compile the full generated HX tree and execute public facades
 npm run gate:behavior       # differential HX-vs-pinned-Flight semantic oracle
-npm run gate:cross-target   # run one consumer on 3 backends + the real SDL3/GL native host
+npm run gate:cross-target   # 3-backend scalar proof + SDL3/GL host and Camera2D framebuffer proofs
 npm run generate:check:extern # regenerate externs in memory and reject drift
 npm run refresh:transpile-surface:check # reject fallback facade/partition drift
 npm run check               # run every production gate, including web behavior/DCE and drift
@@ -74,6 +74,10 @@ SDK reports 2,563 emitted modules; Haxe exposes only the smaller exact partition
 `examples/cross-target-math/` compiles and runs the same installed-package consumer against those
 headers on desktop and the current complete ESM externs on web. `examples/window-native/` additionally
 links `Flight::HostSdlGl` and uses the real SDL3 window, OpenGL context, clear, and presentation path.
-It is explicitly a native platform extension, not yet the portable generated renderer contract.
+`examples/camera2d/` then authors one deterministic Haxe Scene2D graph for both current ESM externs
+and a narrow flight-cpp ownership adapter. The cross-target gate compiles and bundles the web form,
+runs flight-cpp's full upstream Camera2D smoke as a control, and requires three native offscreen
+frames to pass coverage and center-player pixel checks. These are explicit platform extensions, not
+yet a claim that every generated renderer contract is portable through the common facade.
 Future flight-compiler and flight-cpp improvements should shrink the correction inventory and expand
 that manifest without weakening its fail-loud boundary.

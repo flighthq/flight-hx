@@ -1,0 +1,9 @@
+-cp src
+-cp src-cpp
+-cp examples/camera2d
+--main Camera2d
+-debug
+-D HXCPP_NO_CPP11
+
+# Supply -cpp <output> plus absolute flight_cpp_root, flight_cpp_build, and flight_hx_root defines
+# at invocation.

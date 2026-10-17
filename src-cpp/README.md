@@ -33,3 +33,16 @@ This is a real host/window/GL/presentation proof, but not a claim that every gen
 renderer contract is available through Haxe. Keep the native extension separate from the generated
 portable surface until that mapping is complete. Building it requires CMake, Ninja, and external SDL
 3.2+ development files; the Haxelib packages bridge source, not SDL or prebuilt flight-cpp binaries.
+
+`examples/camera2d` advances that seam into a genuine Scene2D GL workload. One Haxe source authors
+the deterministic graph used by both targets. The web adapter calls the current compiler-emitted
+ESM extern holders; the native adapter owns the otherwise GC-unsafe C++ objects and forwards each
+fine-grained scene command to flight-cpp. Its declaration-only header keeps the large renderer
+include closure out of hxcpp-generated translation units.
+
+The native extension is recorded separately in `manifest.json`, including the three flight-cpp
+include roots it needs. Their order is significant: `include`, then flight-cpp's own
+`overrides/include`, then `generated/include`. The overrides are part of the pinned flight-cpp SDK,
+not hidden flight-hx patches. The cross-target gate first runs flight-cpp's full Camera2D smoke as a
+control, then compiles the example from an isolated Haxelib installation and requires three real
+offscreen framebuffer reads with scene coverage and the yellow center player.

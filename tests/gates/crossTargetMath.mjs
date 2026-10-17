@@ -1,6 +1,6 @@
-// One Haxe source must compile and execute through both production backends: the complete Flight
-// ESM extern surface on web and the manifest-recorded direct flight-cpp subset on hxcpp. This is the
-// representative native behavioral gate; the manifest keeps partial native coverage fail-loud.
+// Installed consumers must cross both production backends: the complete Flight ESM extern surface
+// on web and the manifest-recorded direct flight-cpp subset/extensions on hxcpp. Scalar behavior,
+// host creation, and a Scene2D GL framebuffer each have an explicit oracle here.
 import { spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -28,22 +28,33 @@ const expectedNativeHost = {
   target: 'Flight::HostSdlGl',
   requiresBuildDefine: 'flight_cpp_build',
 };
+const expectedNativeExtension = {
+  module: 'flight.Camera2dScene',
+  profile: 'scene2d-gl',
+  target: 'Flight::HostSdlGl+Flight::SdkPreview',
+  requiresBuildDefine: 'flight_cpp_build',
+  includeRoots: ['include', 'overrides/include', 'generated/include'],
+  example: 'examples/camera2d',
+};
 const temporaryRoot = mkdtempSync(path.join(tmpdir(), 'flight-hx-cross-target-math-'));
 
 try {
   const flightCpp = resolveDependency(repoRoot, 'flight-cpp');
   validateHaxelibMetadata();
-  const { bindings, nativeHost } = validateNativeManifest(flightCpp);
+  const { bindings, nativeExtension, nativeHost } = validateNativeManifest(flightCpp);
   const consumer = createHaxelibConsumer();
   runNative(flightCpp, bindings, consumer);
   runNativeHost(flightCpp, nativeHost, consumer);
+  runNativeCamera2d(flightCpp, nativeExtension, consumer);
   runFallback(consumer);
   await runWeb(bindings, consumer);
+  await buildWebCamera2d(nativeExtension, consumer);
   process.stdout.write(
-    `cross-target scalar gate: an isolated -lib flight consumer ran ${String(bindings.length)} ` +
+    `cross-target gate: an isolated -lib flight consumer ran ${String(bindings.length)} ` +
       `manifest-recorded Color/Math functions on Flight ESM and direct flight-cpp; the optional ` +
-      `pure-Haxe backend ran the same source; the packaged native extension also created and ` +
-      `presented a real flight-cpp SDL3/GL surface.\n`,
+      `pure-Haxe backend ran the same source; the packaged native extensions also created and ` +
+      `presented a real flight-cpp SDL3/GL surface, and the Haxe-authored Camera2D scene passed ` +
+      `the upstream-control and native framebuffer oracles while linking against current Flight ESM.\n`,
   );
 } finally {
   rmSync(temporaryRoot, { force: true, recursive: true });
@@ -79,6 +90,17 @@ function validateNativeManifest(flightCpp) {
   }
   if (manifest.hosts?.length !== 1 || JSON.stringify(manifest.hosts[0]) !== JSON.stringify(expectedNativeHost)) {
     fail(`native host inventory drifted: ${JSON.stringify(manifest.hosts)}`);
+  }
+  if (
+    manifest.extensions?.length !== 1 ||
+    JSON.stringify(manifest.extensions[0]) !== JSON.stringify(expectedNativeExtension)
+  ) {
+    fail(`native extension inventory drifted: ${JSON.stringify(manifest.extensions)}`);
+  }
+  for (const includeRoot of expectedNativeExtension.includeRoots) {
+    if (!existsSync(path.join(flightCpp.directory, includeRoot))) {
+      fail(`native extension include root is missing from pinned flight-cpp: ${includeRoot}`);
+    }
   }
 
   const generatedManifest = JSON.parse(
@@ -149,7 +171,11 @@ function validateNativeManifest(flightCpp) {
       bindings.push({ ...binding, adapter, module: module.module });
     }
   }
-  return { bindings, nativeHost: manifest.hosts[0] };
+  return {
+    bindings,
+    nativeExtension: manifest.extensions[0],
+    nativeHost: manifest.hosts[0],
+  };
 }
 
 function createHaxelibConsumer() {
@@ -301,6 +327,71 @@ function runNativeHost(flightCpp, nativeHost, consumer) {
   }
 }
 
+function runNativeCamera2d(flightCpp, nativeExtension, consumer) {
+  const cmake = process.platform === 'win32' ? 'cmake.exe' : 'cmake';
+  const build = spawnSync(
+    cmake,
+    ['--build', '--preset', 'development', '--target', 'flight_cpp_upstream_camera2d'],
+    { cwd: flightCpp.directory, encoding: 'utf8', env: consumer.environment },
+  );
+  if (build.status !== 0) {
+    fail(`could not build the pinned flight-cpp Camera2D control:\n${build.stdout}${build.stderr}`);
+  }
+
+  const flightCppBuild = path.join(flightCpp.directory, 'out', 'cmake', 'development');
+  const runEnvironment = offscreenEnvironment(consumer.environment);
+  const upstreamExecutable = path.join(
+    flightCppBuild,
+    'examples',
+    'upstream',
+    process.platform === 'win32' ? 'flight_cpp_upstream_camera2d.exe' : 'flight_cpp_upstream_camera2d',
+  );
+  const upstreamRun = spawnSync(upstreamExecutable, ['--smoke'], {
+    encoding: 'utf8',
+    env: runEnvironment,
+  });
+  const upstreamTranscript = `${upstreamRun.stdout ?? ''}${upstreamRun.stderr ?? ''}`;
+  if (upstreamRun.status !== 0 || !upstreamTranscript.includes('rendered 3 verified frames')) {
+    fail(`pinned flight-cpp Camera2D control failed:\n${upstreamTranscript}`);
+  }
+
+  const output = path.join(temporaryRoot, 'camera2d-native');
+  const compile = spawnSync(
+    consumer.haxe,
+    [
+      '-lib',
+      'flight',
+      '-cp',
+      path.join(repoRoot, nativeExtension.example),
+      '--main',
+      'Camera2d',
+      '-debug',
+      '-cpp',
+      output,
+      '-D',
+      `flight_cpp_root=${flightCpp.directory}`,
+      '-D',
+      `${nativeExtension.requiresBuildDefine}=${flightCppBuild}`,
+    ],
+    { cwd: consumer.work, encoding: 'utf8', env: consumer.environment },
+  );
+  if (compile.status !== 0) fail(`packaged Camera2D native compile failed:\n${compile.stdout}${compile.stderr}`);
+
+  const executable = path.join(output, process.platform === 'win32' ? 'Camera2d-debug.exe' : 'Camera2d-debug');
+  const run = spawnSync(executable, [], { encoding: 'utf8', env: runEnvironment });
+  const transcript = `${run.stdout ?? ''}${run.stderr ?? ''}`;
+  if (
+    run.status !== 0 ||
+    !/CAMERA2D_NATIVE_OK nodes=72 shapes=67 coverage=[1-9][0-9]*/u.test(transcript)
+  ) {
+    fail(
+      `packaged Camera2D native framebuffer proof failed ` +
+        `(status=${String(run.status)}, signal=${String(run.signal)}, error=${String(run.error ?? 'none')}):\n` +
+        transcript,
+    );
+  }
+}
+
 function runFallback(consumer) {
   const output = path.join(temporaryRoot, 'fallback.js');
   const compile = spawnSync(
@@ -374,6 +465,69 @@ async function runWeb(bindings, consumer) {
   }
 }
 
+async function buildWebCamera2d(nativeExtension, consumer) {
+  const jsPath = path.join(temporaryRoot, 'camera2d.js');
+  const bundlePath = path.join(temporaryRoot, 'camera2d.bundle.mjs');
+  const compile = spawnSync(
+    consumer.haxe,
+    [
+      '-lib',
+      'flight',
+      '-cp',
+      path.join(repoRoot, nativeExtension.example),
+      '--main',
+      'Camera2d',
+      '-D',
+      'flight_esm',
+      '-dce',
+      'full',
+      '--macro',
+      'EsmGenerator.use()',
+      '-js',
+      jsPath,
+    ],
+    { cwd: consumer.work, encoding: 'utf8', env: consumer.environment },
+  );
+  if (compile.status !== 0) fail(`packaged Camera2D web compile failed:\n${compile.stdout}${compile.stderr}`);
+  try {
+    await bundleFlightJs({ entry: jsPath, format: 'esm', outfile: bundlePath, platform: 'browser' });
+  } catch (error) {
+    fail(
+      `packaged Camera2D web bundle failed:\n${(error?.errors ?? [error])
+        .map((entry) => entry.text ?? entry)
+        .join('\n')}`,
+    );
+  }
+
+  const generated = readFileSync(jsPath, 'utf8');
+  for (const packageName of [
+    '@flighthq/node',
+    '@flighthq/path',
+    '@flighthq/render',
+    '@flighthq/render-gl',
+    '@flighthq/scene2d',
+    '@flighthq/scene2d-gl',
+    '@flighthq/shape',
+    '@flighthq/types',
+  ]) {
+    if (!generated.includes(`from \"${packageName}`)) {
+      fail(`Camera2D web output has no static import from ${packageName}`);
+    }
+  }
+  if (!readFileSync(bundlePath, 'utf8').includes('CAMERA2D_WEB_OK')) {
+    fail('Camera2D web bundle does not contain its completion marker');
+  }
+}
+
+function offscreenEnvironment(environment) {
+  if (process.platform !== 'linux') return environment;
+  return {
+    ...environment,
+    LIBGL_ALWAYS_SOFTWARE: '1',
+    SDL_VIDEODRIVER: 'offscreen',
+  };
+}
+
 function byName(entries) {
   return new Map(entries.map((entry) => [entry.name, entry]));
 }
@@ -386,6 +540,6 @@ function filesUnder(directory) {
 }
 
 function fail(message) {
-  process.stderr.write(`cross-target scalar gate: ${message}\n`);
+  process.stderr.write(`cross-target gate: ${message}\n`);
   process.exit(1);
 }
