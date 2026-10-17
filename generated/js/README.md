@@ -5,8 +5,8 @@ This tree is generated from `@flighthq/sdk` 0.5.0 at
 Do not edit it by hand.
 
 The compiler emitted 3144 of 3144 dependency-closed source modules
-from 153 SDK packages into 3224 Haxe files. The flight-hx integration added 3071 public type aliases so the extern tree is self-contained. It refused
-0 modules; every refusal is recorded in `refusals.json`. Public runtime-export coverage and the compiler-emitted type inventory are recorded in `public-surface.json`.
+from 153 SDK packages into 3224 Haxe files. The flight-hx integration added 3197 complete default-public-API modules so every current type, function, and value is available through `flight.*` on the ESM backend. It refused
+0 modules; every refusal is recorded in `refusals.json`. Public runtime-export coverage and the compiler-emitted type inventory are recorded in `public-surface.json`; the exact default `flight.*` facade is recorded in `default-api.json`.
 
 Regenerate this mode from the flight-hx repository root:
 

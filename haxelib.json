@@ -6,7 +6,7 @@
   "description": "Haxe bindings for Flight: direct flight-cpp on native, ESM externs on web, and an optional transpiled fallback.",
   "version": "0.5.0",
   "classPath": "lib",
-  "releasenote": "Current Flight 0.5 web extern SDK plus manifest-pinned flight-cpp scalar, SDL3/OpenGL host, and unified public Camera2D Scene2D GL proof.",
+  "releasenote": "Complete current Flight 0.5 default web API plus manifest-pinned flight-cpp scalar/Scene2D bindings, SDL3/OpenGL host, and checked native reconciliation.",
   "contributors": ["singmajesty"],
   "dependencies": {}
 }

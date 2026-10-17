@@ -7,7 +7,7 @@ import haxe.macro.Context;
 
 // Haxelib exposes one static classPath, while Flight deliberately has target-specific generated
 // roots. This initialization macro elects exactly one backend root and keeps its precedence over
-// the common maintained/generated roots. Direct repository builds may continue to spell the same
+// the common maintained root. Direct repository builds may continue to spell the same
 // classpaths explicitly; installed consumers only need `-lib flight` and their pipeline define.
 class Package {
   static var configured = false;
@@ -19,7 +19,6 @@ class Package {
     final macroFile = Context.resolvePath('flight_hx/Package.hx');
     final root = Path.normalize(Path.join([Path.directory(macroFile), '..', '..']));
     Compiler.addClassPath(Path.join([root, 'src']));
-    Compiler.addClassPath(Path.join([root, 'generated']));
 
     if (Context.defined('flight_hx')) {
       Compiler.addClassPath(Path.join([root, 'generated', 'hx']));

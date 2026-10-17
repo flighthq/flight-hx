@@ -5738,9 +5738,17 @@
     "packages": 153,
     "refusedModules": 0,
     "sourceModules": 3144,
-    "compatibilityFiles": 3071,
-    "generatedFiles": 6295,
+    "compatibilityFiles": 3197,
+    "generatedFiles": 6421,
     "publicFacadeFiles": 1169,
+    "defaultPublicApi": {
+      "files": 3197,
+      "functions": 6906,
+      "holders": 152,
+      "packages": 153,
+      "types": 3071,
+      "values": 1254
+    },
     "filteredContractFunctions": 0,
     "filteredContractValues": 0,
     "publicRuntimeSurface": {

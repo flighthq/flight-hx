@@ -6,13 +6,22 @@ The Haxe backend itself lives in `flight-compiler`. This directory owns only fli
 
 The integration also owns the boundaries that only a consumer repository can verify:
 
-- compiler-emitted JS externs receive public `flight.*` type aliases and are filtered to values actually exported from each package's `/contract` source graph;
+- compiler-emitted JS externs receive a complete public `flight.*` facade (types, functions, and
+  values) and are filtered to declarations actually exported from each package's `/contract`
+  source graph;
 - narrow Haxe compatibility corrections remain named in each manifest, include exact per-file
   application counts, and fail generation when their expected inputs drift;
 - all emitted transpiled files must pass a compiler callback using pinned Haxe 4.3.7 before output is accepted;
 - `--check` builds candidate trees in temporary directories and rejects byte drift.
 
 Analysis, TypeScript parsing, IR, lowering, and primary Haxe emission must remain compiler-owned. Do not add a second frontend or general-purpose transpiler here.
+
+`generate.mjs` writes `generated/js/default-api.json` as the exact per-package public contract.
+`reconcileNativeSurface.mjs` then compares it with flight-cpp's best-effort/refusal inventories and
+the manifest-pinned native Haxe partition. Its `src-cpp/reconciliation.json` output distinguishes
+dependency-complete headers, dependency-incomplete headers, hard refusals, compile-proven bindings,
+and header-confirmed scalar probe candidates. It never treats a generated header as proof that
+Haxe's ABI, ownership, nullable/union, callbacks, and structural identities are reconciled.
 
 The checked-in extern tree is the downstream golden reference: all 3,144 modules in the current
 153-package SDK graph compile after two exact, manifest-recorded compatibility corrections. Those

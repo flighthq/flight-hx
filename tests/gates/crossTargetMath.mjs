@@ -46,6 +46,7 @@ try {
   const { bindings, nativeExtension, nativeHost } = validateNativeManifest(flightCpp);
   const consumer = createHaxelibConsumer();
   runNative(flightCpp, bindings, consumer);
+  rejectUnsupportedNative(flightCpp, consumer);
   runNativeHost(flightCpp, nativeHost, consumer);
   runNativeCamera2d(flightCpp, nativeExtension, consumer);
   runFallback(consumer);
@@ -296,6 +297,29 @@ function runNative(flightCpp, bindings, consumer) {
     if (!generated.includes(`${binding.adapter}(`)) {
       fail(`generated C++ has no direct ${binding.module}.${binding.name} call`);
     }
+  }
+}
+
+function rejectUnsupportedNative(flightCpp, consumer) {
+  const compile = spawnSync(
+    consumer.haxe,
+    [
+      '-lib',
+      'flight',
+      '-cp',
+      path.join(repoRoot, 'tests', 'haxe'),
+      '--main',
+      'NativeUnsupportedApi',
+      '-cpp',
+      path.join(temporaryRoot, 'unsupported-native'),
+      '-D',
+      `flight_cpp_root=${flightCpp.directory}`,
+    ],
+    { cwd: consumer.work, encoding: 'utf8', env: consumer.environment },
+  );
+  const transcript = `${compile.stdout ?? ''}${compile.stderr ?? ''}`;
+  if (compile.status === 0 || !transcript.includes('colorFromKelvin')) {
+    fail(`unbound native API did not fail loudly at the exact public facade:\n${transcript}`);
   }
 }
 

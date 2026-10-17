@@ -18,10 +18,24 @@ TS _types_ → Haxe _externs_ remains the mechanical binding goal. The compiler 
 
 ## The public shape: one `flight.*` over three backends
 
-Every public module resolves, by compile define, to one of three hidden backends: `flight._cpp.*` (`#if cpp`), `flight._js.*` (`#if js`), `flight._hx.*` (`#if flight_hx`, optional). Two unification mechanisms, because Haxe can alias a type but not a free function:
+Every consumer imports the same `flight.*` names. The Haxelib initialization macro selects a
+target-specific public facade root by compile define, and each facade forwards to one hidden
+backend: `flight._cpp.*`, `flight._js.*`, or `flight._hx.*`. This whole-root selection is important:
+Haxe resolves every signature in a loaded module, so a single mixed module with per-function
+conditionals would let one unsupported native type poison otherwise usable declarations.
 
-- **Types are conditional typedefs.** `flight.Vector2` aliases the active backend's type. Types stay **structural typedefs** wherever the backend is structural (not forced into nominal classes).
-- **Function facades are module-level free functions whose bodies `#if`-dispatch** to hidden extern classes. `flight.Geom.addVector2(...)` is a module-level free function; its `inline` body forwards to `flight._cpp.Geom.addVector2` / `flight._js.Geom.addVector2` / `flight._hx.Geom.addVector2`. Module-level (not class statics) so that free functions keep Flight's globally-searchable feel and a bare `import flight.Geom` yields unqualified calls to _all_ its free functions (the `.*` wildcard does **not** — it resolves to a type named `Geom`, which the module deliberately lacks; import the module itself, or a named field `import flight.Geom.addVector2`); the hidden `_cpp`/`_js` classes are `extern` because that's where `@:native`/`@:jsImport` binding actually works. `inline` makes the forwarder zero-cost.
+- **Types are target-specific typedefs or exact native handles.** On web, `flight.Vector2` aliases
+  the compiler-emitted structural `flight._js.Vector2`; native overrides may use an opaque handle
+  when flight-cpp ownership requires it. Types stay structural wherever the backend is structural.
+- **Function facades are module-level free functions.** `flight.Math.lerp(...)` forwards to the
+  target root's hidden extern holder. Module-level (not class statics) keeps Flight's searchable
+  free-function shape, and `inline` makes the forwarding layer zero-cost. A bare
+  `import flight.Math` yields its unqualified functions; `import flight.Math.*` does not, because
+  Haxe interprets that as a type wildcard.
+- **Web is generated complete; native is fail-loud and manifest-exact.** `generated/js/flight`
+  contains every current SDK type, function, and value. `src-cpp/flight` shadows only declarations
+  proven against flight-cpp. Importing an unbound native module fails at compile time instead of
+  falling through to a stale or fictitious implementation.
 
 The selector **fails loud** on an unsupported target (`#error`), never silently resolves to nothing. It keys on the **packaging pipeline, not the raw target** (see the host-axis section) — precedence:
 
@@ -91,6 +105,13 @@ TS-to-Haxe transpilation is useful optional reach, not a prerequisite for the we
 - **Web-DCE gate** — build a sample, bundle it, assert imports are static `import { … }` and an unused Flight function is absent from the bundle. Defines "the ESM generator works precisely."
 - **Binding-existence gate** — the validation type-checking cannot do: a Haxe extern is an unchecked promise, so load the _real_ Flight ESM for every generated contract holder and assert each bound function and value resolves to the right runtime export. Covers the emitted surface (6,906 functions and 1,261 values), not the few an example calls. Types aren't checked at runtime (TS interfaces are erased from ESM); their fidelity rests on the shared inventory + the surface type-check.
 - **Generated-surface gate** — type-check all compiler-emitted externs and compiler-derived public aliases at once. Refused legacy facade modules stay outside this dependency-closed output gate.
+- **Default-public-API gate** — compare every generated web `flight.*` type, function signature,
+  and value in both directions against the hidden compiler extern contract and its per-package
+  ledger. Missing, invented, duplicated, or drifted public declarations fail.
+- **Native-surface reconciliation gate** — reconcile all 153 web package contracts with
+  flight-cpp's complete/dependency-incomplete/refused module inventory and the exact
+  `src-cpp/manifest.json` partition. Header-confirmed scalar functions remain probe candidates,
+  never silently promoted to support.
 - **Compiler-coverage gate** — reconcile manifests, initialization plans, refusal ledgers, public runtime export partitions, and public type aliases in both directions; ratchet the pinned corpus so support may improve but cannot silently shrink.
 - **Runtime-contract gate** — declare and verify `flight-runtime-contract/2`, `flight-runtime-constructor-abi/1`, and `flight-runtime-task-capability-abi/1`; compile every maintained runtime module on JS and execute the host-free portable subset on Haxe eval.
 - **Transpiled-source gate** — type-check all 7,224 compiler and compiler-derived backend files, execute public `flight.*` functions on JS, then run public Math/Effects plus compiler-emitted Float32/map/task code on Haxe eval.
@@ -115,10 +136,12 @@ Tiers (host per the host-axis rule — core examples use no host or Flight's own
 
 `flight-compiler` is the only source generator. The production lock pins Flight `a627849`, compiler
 `806d257`, and flight-cpp `f4821b`. Extern mode scans and accepts all 3,144 production modules in the
-153-package SDK graph, emits 3,224 compiler files plus 3,071 public aliases, and records two exact
-downstream compatibility corrections. Its full surface type-checks; all 6,906 functions and 1,261
-values resolve to real Flight ESM exports. The reverse inventory records all 8,167 expected runtime
-declarations, zero missing, and zero unexpected.
+153-package SDK graph, emits 3,224 compiler files plus 3,197 complete public facade modules, and
+records two exact downstream compatibility corrections. Its full surface type-checks; the default
+`flight.*` API contains all 3,071 types, 6,906 functions, and 1,254 value fields. Those fields plus
+seven runtime type/value identities account for all 8,167 expected ESM declarations, with zero
+missing and zero unexpected. `@flighthq/webcam` is retained in the package ledger but currently has
+an empty contract.
 
 The optional transpile implementation corpus remains pinned at Flight `65889a` and compiler
 `5649642`: it scans all 2,866 non-test modules and emits 1,110 dependency-closed implementation
@@ -137,3 +160,10 @@ current flight-cpp on hxcpp and current Flight ESM on web. The same gate builds 
 `Flight::HostSdlGl`, then compiles and runs the packaged Haxe native sample through a real SDL3 window,
 OpenGL context, clear, and present. The portable generated renderer surface remains future work; the
 native platform extension does not overstate it.
+
+`src-cpp/reconciliation.json` makes the remaining native work concrete: flight-cpp currently has
+1,893 dependency-complete modules, 670 dependency-incomplete modules, and 588 refused modules. The
+default native surface proves ten functions and three upstream Scene2D types (plus the maintained
+`Scene2dNode` integration handle). It also locates 183 public scalar functions with inline generated
+C++ definitions; ten are already bound, leaving 173 compile-probe candidates across 45 packages.
+All other signatures remain explicit representation/ownership or compiler-closure work.

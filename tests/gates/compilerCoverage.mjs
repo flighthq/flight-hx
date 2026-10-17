@@ -6,6 +6,12 @@ import process from 'node:process';
 const budgets = {
   extern: {
     compatibilityCorrections: 2,
+    defaultApiFiles: 3197,
+    defaultApiFunctions: 6906,
+    defaultApiHolders: 152,
+    defaultApiPackages: 153,
+    defaultApiTypes: 3071,
+    defaultApiValues: 1254,
     dependencyRefusals: 0,
     emittedDeclarations: 8167,
     emittedTypes: 3071,
@@ -96,6 +102,7 @@ for (const [mode, directory] of [
 
   if (mode === 'extern') {
     const publicSurface = readJson('generated/js/public-surface.json');
+    const defaultApi = readJson('generated/js/default-api.json');
     const runtimeTotals = publicSurface.packages.reduce(
       (total, package_) => ({
         emittedDeclarations: total.emittedDeclarations + package_.emitted.length,
@@ -118,6 +125,11 @@ for (const [mode, directory] of [
       equal(`extern public runtime ${name}`, publicSurface.summary[name], actual);
     }
     equal('extern public surface manifest summary', JSON.stringify(manifest.summary.publicRuntimeSurface), JSON.stringify(publicSurface.summary));
+    equal('extern default API schema', defaultApi.schema, 'flight-hx-default-public-api/1');
+    equal('extern default API manifest summary', JSON.stringify(manifest.summary.defaultPublicApi), JSON.stringify(defaultApi.summary));
+    for (const field of ['files', 'functions', 'holders', 'packages', 'types', 'values']) {
+      equal(`extern default API ${field}`, defaultApi.summary[field], budget[`defaultApi${capitalize(field)}`]);
+    }
     equal('extern unexpected public runtime declarations', publicSurface.summary.unexpectedDeclarations, 0);
     equal('extern reported type count', publicSurface.types.length, publicSurface.summary.emittedTypes);
     equal('extern expected public runtime declarations', publicSurface.summary.expectedDeclarations, budget.expectedDeclarations);
@@ -209,4 +221,8 @@ function validateCompatibilityCorrectionApplications(mode, compiler) {
 
 function moduleKey(module) {
   return `${module.packageName}\0${module.source}`;
+}
+
+function capitalize(value) {
+  return `${value[0].toUpperCase()}${value.slice(1)}`;
 }

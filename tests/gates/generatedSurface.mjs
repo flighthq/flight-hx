@@ -1,6 +1,6 @@
 // Generated-surface gate: type-check the ENTIRE compiler-emitted extern surface — every function,
-// value and public type alias — not just the subset an example happens to call. The legacy common
-// facade contains declarations for modules that the pinned compiler explicitly refused, so it is
+// value, type alias, and default public facade — not just the subset an example happens to call.
+// The legacy common facade contains declarations for modules that the pinned compiler explicitly refused, so it is
 // intentionally outside this dependency-closed compiler-output gate.
 import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';

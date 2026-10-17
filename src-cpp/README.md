@@ -16,6 +16,14 @@ compiled and executed from one Haxe source in the cross-target gate. Expanding t
 remain manifest-first and compile-proven; the much larger generated C++ inventory is not silently
 claimed as Haxe support.
 
+`reconciliation.json` is the checked package-by-package difference between that exact partition and
+the complete default web API. It records 1,893 dependency-complete modules, 670
+dependency-incomplete modules, 588 refused modules, and all associated refusal codes. It also finds
+183 public scalar signatures with matching inline definitions in generated C++ headers. Ten are the
+current manifest bindings; the remaining 173 across 45 packages are concrete compile-probe
+candidates, not promised support. Complex signatures stay classified for identity, lifetime,
+nullable/union, callback, and structural-owner review.
+
 The bridges do not reimplement Flight. They include the generated headers and forward directly to
 their functions. Their only semantic correction renames flight-cpp's `flight::null` helper while the
 headers are parsed, because hxcpp generates unqualified `null()` calls inside namespace `flight`.

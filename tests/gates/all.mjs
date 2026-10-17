@@ -10,6 +10,8 @@ const scripts = [
   'gate:coverage',
   'gate:proof',
   'gate:surface',
+  'gate:default-api',
+  'gate:native-surface',
   'gate:bindings',
   'refresh:transpile-surface:check',
   'gate:parity',
