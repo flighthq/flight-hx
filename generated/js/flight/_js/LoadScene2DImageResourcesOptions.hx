@@ -2,8 +2,8 @@
 package flight._js;
 
 typedef LoadScene2DImageResourcesOptions = {
-  @:optional var fetch:(flight.ExternalImageResourceReference, js.html.AbortSignal)->flight._internal._Promise<Null<flight.ImageResource>>;
+  @:optional var fetch:flight.ImageResourceFetch;
   @:optional var progress:flight.Signal<(flight.Scene2DImageResourceLoadProgress)->Void>;
-  @:optional function select(reference:Dynamic):Bool;
+  @:optional function select(reference:flight.ImageResourceReference):Bool;
   @:optional var signal:js.html.AbortSignal;
 };

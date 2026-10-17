@@ -4,7 +4,7 @@ package flight._js;
 typedef StatechartInstance = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var chart:flight.Statechart;
-  var durationGuard:Null<(flight.StatechartInstance, flight.StatechartTransitionExplanation)->Void>;
+  var durationGuard:Null<flight.StatechartDurationGuard>;
   var inputValues:flight._internal._Float64Array;
   var regionBlend:flight._internal._Float32Array;
   var regionDuration:flight._internal._Float64Array;

@@ -6,10 +6,10 @@ typedef IridescencePbrExtension = {
   var kind:String;
   var iridescence:Float;
   var iridescenceIor:Float;
-  var iridescenceMap:Null<Dynamic>;
-  var iridescenceMapUvSet:Dynamic;
-  var iridescenceThicknessMap:Null<Dynamic>;
-  var iridescenceThicknessMapUvSet:Dynamic;
+  var iridescenceMap:Null<flight.Texture>;
+  var iridescenceMapUvSet:flight.PbrUvSet;
+  var iridescenceThicknessMap:Null<flight.Texture>;
+  var iridescenceThicknessMapUvSet:flight.PbrUvSet;
   var iridescenceThicknessMax:Float;
   var iridescenceThicknessMin:Float;
 };

@@ -2,12 +2,12 @@
 package flight._js;
 
 typedef Scene3DPipelineCoverageExplanation = {
-  var registeredKinds:Array<String>;
-  var registeredMaterialKinds:Array<String>;
-  var uncoveredKinds:Array<String>;
-  var uncoveredMaterialKinds:Array<String>;
-  var unusedMaterialRegistrations:Array<String>;
-  var unusedRegistrations:Array<String>;
-  var usedKinds:Array<String>;
-  var usedMaterialKinds:Array<String>;
+  var registeredKinds:Array<flight.Kind>;
+  var registeredMaterialKinds:Array<flight.Kind>;
+  var uncoveredKinds:Array<flight.Kind>;
+  var uncoveredMaterialKinds:Array<flight.Kind>;
+  var unusedMaterialRegistrations:Array<flight.Kind>;
+  var unusedRegistrations:Array<flight.Kind>;
+  var usedKinds:Array<flight.Kind>;
+  var usedMaterialKinds:Array<flight.Kind>;
 };

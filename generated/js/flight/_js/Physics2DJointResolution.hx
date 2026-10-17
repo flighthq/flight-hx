@@ -3,12 +3,12 @@ package flight._js;
 
 typedef Physics2DJointResolution = {
   var jointIndex:Float;
-  var kind:String;
+  var kind:flight.Physics2DJointKind;
   var bodyA:Float;
   var bodyB:Float;
   var bodyAFound:Bool;
   var bodyAUsed:Bool;
   var bodyBFound:Bool;
   var solverRegistered:Bool;
-  var status:Dynamic;
+  var status:flight.Physics2DJointResolutionStatus;
 };

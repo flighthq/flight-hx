@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef StrokePathTessellationExplanation = {
-  var reason:Dynamic;
+  var reason:flight.StrokePathTessellationReason;
   var subpath:Null<Float>;
   var supported:Bool;
 };

@@ -3,9 +3,9 @@ package flight._js;
 
 typedef Scene2DSlotReference = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var content:Null<Dynamic>;
+  var content:Null<flight.Node2D>;
   var linkage:Null<String>;
   var name:String;
   var required:Bool;
-  var target:Dynamic;
+  var target:flight.Node2D;
 };

@@ -2,7 +2,7 @@
 package flight;
 
 #if (js && flight_esm)
-typedef Node<Traits:Dynamic = Dynamic> = flight._js.Node<Traits>;
+typedef Node<Traits:Dynamic = flight.NodeTraits> = flight._js.Node<Traits>;
 #end
 
 inline function areNodeGuardsEnabled():Bool {

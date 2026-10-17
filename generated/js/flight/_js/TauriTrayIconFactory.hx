@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef TauriTrayIconFactory = {
-  function new_(?options:flight.TauriTrayIconOptions):flight._internal._Promise<flight.TauriTrayIcon>;
+  @:native("new") function new_(?options:flight.TauriTrayIconOptions):flight._internal._Promise<flight.TauriTrayIcon>;
 };

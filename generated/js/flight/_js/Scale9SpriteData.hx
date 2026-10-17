@@ -3,6 +3,6 @@ package flight._js;
 
 typedef Scale9SpriteData = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var texture:Null<Dynamic>;
-  var scale9Grid:flight.Rectangle;
+  var texture:Null<flight.Texture>;
+  var scale9Grid:flight.RectangleLike;
 };

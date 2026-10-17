@@ -3,6 +3,6 @@ package flight._js;
 
 typedef MarkupTagEffect = {
   @:optional var breakBefore:Bool;
-  @:optional var format:flight.TextFormat;
+  @:optional var format:Dynamic;
   @:optional var text:String;
 };

@@ -4,8 +4,8 @@ package flight._js;
 typedef FlightDocumentScene3DMaterialization = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var cameras:Array<flight.Camera3D>;
-  var interactiveStateBindings:Array<flight.FlightDocumentInteractiveStateBinding<Dynamic>>;
-  var layoutBindings:Array<flight.FlightDocumentLayoutBinding<Dynamic>>;
+  var interactiveStateBindings:Array<flight.FlightDocumentInteractiveStateBinding<flight.Node3D>>;
+  var layoutBindings:Array<flight.FlightDocumentLayoutBinding<flight.Node3D>>;
   var lights:flight.Scene3DLights;
   var scene:flight.Scene3D;
 };

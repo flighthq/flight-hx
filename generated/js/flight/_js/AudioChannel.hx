@@ -12,6 +12,6 @@ typedef AudioChannel = {
   var pan:Float;
   var playbackRate:Float;
   var source:flight.AudioResource;
-  var state:Dynamic;
+  var state:flight.AudioChannelState;
   var onComplete:flight.Signal<()->Void>;
 };

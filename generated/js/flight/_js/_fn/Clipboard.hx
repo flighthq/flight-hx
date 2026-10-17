@@ -16,7 +16,7 @@ extern class Clipboard {
   static function hasClipboardImage(host:flight.HasClipboardImage):flight._internal._Promise<Bool>;
   static function hasClipboardRTF(host:flight.HasClipboardFormats):flight._internal._Promise<Bool>;
   static function hasClipboardText(host:flight.HasClipboardText):flight._internal._Promise<Bool>;
-  static function initializeClipboardWatch(out:flight.ClipboardWatch):Void;
+  static function initializeClipboardWatch(out:flight.EntityConstruction<flight.ClipboardWatch>):Void;
   static function readClipboard(host:flight.HasClipboardFormats, formats:Array<String>):flight._internal._Promise<haxe.DynamicAccess<String>>;
   static function readClipboardBookmark(host:flight.HasClipboardBookmark):flight._internal._Promise<Null<flight.ClipboardBookmark>>;
   static function readClipboardFormat(host:flight.HasClipboardFormats, format:String):flight._internal._Promise<String>;

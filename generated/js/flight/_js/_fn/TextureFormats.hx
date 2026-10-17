@@ -4,14 +4,14 @@ package flight._js._fn;
 
 @:jsImport("@flighthq/texture-formats/contract")
 extern class TextureFormats {
-  static function computeTextureContainerLevels(format:Dynamic, baseWidth:Float, baseHeight:Float, mipLevels:Float, layers:Float, faces:Float, startOffset:Float):Null<{ levels:Array<flight.TextureContainerLevel>, endOffset:Float }>;
-  static function detectTextureContainer(bytes:flight._internal._UInt8Array):Null<Dynamic>;
+  static function computeTextureContainerLevels(format:flight.TextureContainerFormat, baseWidth:Float, baseHeight:Float, mipLevels:Float, layers:Float, faces:Float, startOffset:Float):Null<{ levels:Array<flight.TextureContainerLevel>, endOffset:Float }>;
+  static function detectTextureContainer(bytes:flight._internal._UInt8Array):Null<flight.TextureContainerKind>;
   static function explainTextureContainerParse(bytes:flight._internal._UInt8Array):Null<flight.TextureContainerParseExplanation>;
-  static function getTextureContainerLevelByteLength(format:Dynamic, width:Float, height:Float):Float;
+  static function getTextureContainerLevelByteLength(format:flight.TextureContainerFormat, width:Float, height:Float):Float;
   static function parseAtf(bytes:flight._internal._UInt8Array):Null<Array<flight.TextureContainer>>;
   static function parseBasis(bytes:flight._internal._UInt8Array):Null<flight.TextureContainer>;
   static function parseDds(bytes:flight._internal._UInt8Array):Null<flight.TextureContainer>;
   static function parseKtx2(bytes:flight._internal._UInt8Array):Null<flight.TextureContainer>;
-  static function selectTextureContainer(containers:Array<flight.TextureContainer>, supportedFormats:Array<Dynamic>):Null<flight.TextureContainer>;
+  static function selectTextureContainer(containers:Array<flight.TextureContainer>, supportedFormats:Array<flight.TextureContainerFormat>):Null<flight.TextureContainer>;
 }
 #end

@@ -4,17 +4,17 @@ package flight._js._fn;
 
 @:jsImport("@flighthq/useragent/contract")
 extern class Useragent {
-  static function detectEndianness():Dynamic;
+  static function detectEndianness():flight.PlatformEndianness;
   static function parseUserAgentArch(ua:String, ?uadPlatform:String):String;
-  static function parseUserAgentEngine(ua:String):Dynamic;
-  static function parseUserAgentEngineVersion(ua:String, engine:Dynamic):String;
-  static function parseUserAgentFormFactor(ua:String, maxTouchPoints:Float):String;
-  static function parseUserAgentKind(name:Dynamic):Dynamic;
-  static function parseUserAgentName(ua:String):Dynamic;
+  static function parseUserAgentEngine(ua:String):flight.PlatformEngine;
+  static function parseUserAgentEngineVersion(ua:String, engine:flight.PlatformEngine):String;
+  static function parseUserAgentFormFactor(ua:String, maxTouchPoints:Float):flight.DeviceFormFactor;
+  static function parseUserAgentKind(name:flight.PlatformName):flight.PlatformKind;
+  static function parseUserAgentName(ua:String):flight.PlatformName;
   static function parseUserAgentOsName(ua:String):String;
   static function parseUserAgentOsVersion(ua:String):String;
   static function parseUserAgentPointerWidth(arch:String):Dynamic;
-  static function parseUserAgentRuntime(win:Dynamic):Dynamic;
-  static function parseUserAgentVersion(ua:String, name:Dynamic):String;
+  static function parseUserAgentRuntime(win:Dynamic):flight.PlatformRuntime;
+  static function parseUserAgentVersion(ua:String, name:flight.PlatformName):String;
 }
 #end

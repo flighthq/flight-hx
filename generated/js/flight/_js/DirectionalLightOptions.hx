@@ -6,10 +6,10 @@ typedef DirectionalLightOptions = {
   @:optional var cascadeSplits:Array<Float>;
   @:optional var castsShadow:Bool;
   @:optional var color:Float;
-  @:optional var direction:flight.Vector3;
+  @:optional var direction:flight.Vector3Like;
   @:optional var enabled:Bool;
   @:optional var intensity:Float;
-  @:optional var intensityUnit:Dynamic;
+  @:optional var intensityUnit:flight.LightUnit;
   @:optional var normalBias:Float;
   @:optional var pcfRadius:Float;
   @:optional var shadowBias:Float;

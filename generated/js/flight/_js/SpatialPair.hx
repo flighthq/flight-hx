@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef SpatialPair = {
-  var a:Float;
-  var b:Float;
+  var a:flight.SpatialObjectId;
+  var b:flight.SpatialObjectId;
 };

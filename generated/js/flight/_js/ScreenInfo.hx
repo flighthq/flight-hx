@@ -13,14 +13,14 @@ typedef ScreenInfo = {
   var scaleFactor:Float;
   var isPrimary:Bool;
   var rotation:Float;
-  var orientation:Dynamic;
+  var orientation:flight.ScreenOrientation;
   var refreshRate:Float;
   var colorDepth:Float;
   var pixelDepth:Float;
   var physicalWidth:Float;
   var physicalHeight:Float;
   var isHdr:Bool;
-  var colorSpace:Dynamic;
+  var colorSpace:flight.ScreenColorSpace;
   var maxLuminance:Float;
   var depthPerComponent:Float;
   var dpi:Float;

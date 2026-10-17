@@ -5,6 +5,6 @@ typedef Scene3D = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var animations:haxe.DynamicAccess<flight.AnimationClip>;
   var metadata:Null<flight.Scene3DMetadata>;
-  var resources:Array<Dynamic>;
-  var root:Dynamic;
+  var resources:Array<flight.ImageResourceReference>;
+  var root:flight.Node3D;
 };

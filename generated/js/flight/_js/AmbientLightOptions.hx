@@ -5,5 +5,5 @@ typedef AmbientLightOptions = {
   @:optional var color:Float;
   @:optional var enabled:Bool;
   @:optional var intensity:Float;
-  @:optional var intensityUnit:Dynamic;
+  @:optional var intensityUnit:flight.LightUnit;
 };

@@ -8,7 +8,7 @@ typedef Texture2D = {
   var uvOffset:flight.Vector2;
   var uvRotation:Float;
   var uvScale:flight.Vector2;
-  var colorSpace:Dynamic;
+  var colorSpace:flight.TextureColorSpace;
   var sampler:flight.Sampler;
   var version:Float;
   var dimension:String;

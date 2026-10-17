@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef NotificationEventAttachment = {
-  function release():flight._internal._Promise<{ reason:Dynamic }>;
+  function release():flight._internal._Promise<flight.NotificationEventReleaseOutcome>;
 };

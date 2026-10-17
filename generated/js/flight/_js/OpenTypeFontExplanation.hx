@@ -3,7 +3,7 @@ package flight._js;
 
 typedef OpenTypeFontExplanation = {
   var accepted:Bool;
-  var reason:Dynamic;
+  var reason:flight.OpenTypeFontExplanationReason;
   var format:String;
   var table:String;
   var tableCount:Float;

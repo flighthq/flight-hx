@@ -6,12 +6,12 @@ package flight._js._fn;
 extern class Protocol {
   static function attachProtocolHandler(host:flight.HasProtocolOpen, handler:flight.ProtocolHandler):Void;
   static function createProtocolHandler():flight.ProtocolHandler;
-  static function createProtocolUrl(parts:flight.ParsedProtocolUrl):String;
+  static function createProtocolUrl(parts:Dynamic):String;
   static function detachProtocolHandler(handler:flight.ProtocolHandler):Void;
   static function disposeProtocolHandler(handler:flight.ProtocolHandler):Void;
   static function getProtocolLaunchUrl(host:flight.HasProtocolLaunch):Null<String>;
   static function getRegisteredProtocolSchemes(host:flight.HasProtocolRegistration):Array<String>;
-  static function initializeProtocolHandler(out:flight.ProtocolHandler):Void;
+  static function initializeProtocolHandler(out:flight.EntityConstruction<flight.ProtocolHandler>):Void;
   static function isProtocolSchemeDefault(host:flight.HasProtocolDefault, scheme:String):Bool;
   static function isProtocolSchemeRegistered(host:flight.HasProtocolRegistrationQuery, scheme:String):Bool;
   static function isValidProtocolScheme(scheme:String):Bool;

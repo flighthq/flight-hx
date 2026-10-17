@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef TreeViewControllerOptions = {
-  @:optional var transition:flight.NodeInteractiveStateTransition<Dynamic, Dynamic>;
+  @:optional var transition:flight.GuiTransitionDescriptor;
   var items:Array<flight.TreeViewControllerItem>;
   @:optional var selectedItem:Null<flight.TreeViewControllerItem>;
 };

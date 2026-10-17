@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef HostProtocolCapabilities = {
-  @:optional var default_:flight.ProtocolDefaultBackend;
+  @:optional @:native("default") var default_:flight.ProtocolDefaultBackend;
   @:optional var launch:flight.ProtocolLaunchBackend;
   @:optional var open:flight.ProtocolOpenBackend;
   @:optional var registration:flight.ProtocolRegistrationBackend;

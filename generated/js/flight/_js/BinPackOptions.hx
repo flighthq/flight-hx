@@ -9,6 +9,6 @@ typedef BinPackOptions = {
   @:optional var powerOfTwo:Bool;
   @:optional var square:Bool;
   @:optional var allowRotation:Bool;
-  @:optional var heuristic:Dynamic;
+  @:optional var heuristic:flight.BinPackHeuristic;
   @:optional var growable:Bool;
 };

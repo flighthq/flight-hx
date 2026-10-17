@@ -3,7 +3,7 @@ package flight._js;
 
 typedef RiveAnimationClip = {
   var clip:flight.AnimationClip;
-  var loop:String;
+  var loop:flight.RiveAnimationLoop;
   var name:String;
   var speed:Float;
   var workAreaEnd:Null<Float>;

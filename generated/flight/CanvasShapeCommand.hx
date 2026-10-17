@@ -4,7 +4,7 @@ package flight;
 #if flight_hx
 typedef CanvasShapeCommand = flight._hx.CanvasShapeCommand;
 #elseif (js && flight_esm)
-typedef CanvasShapeCommand = flight._js.CanvasShapeCommand;
+typedef CanvasShapeCommand<K:flight.ShapeCommandKey = flight.ShapeCommandKey> = flight._js.CanvasShapeCommand<K>;
 #elseif cpp
 typedef CanvasShapeCommand = flight._cpp.CanvasShapeCommand;
 #elseif js

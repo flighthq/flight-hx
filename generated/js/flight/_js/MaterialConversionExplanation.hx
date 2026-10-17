@@ -3,5 +3,5 @@ package flight._js;
 
 typedef MaterialConversionExplanation = {
   var droppedMaps:Array<String>;
-  var reason:Null<Dynamic>;
+  var reason:Null<flight.MaterialConversionDropReason>;
 };

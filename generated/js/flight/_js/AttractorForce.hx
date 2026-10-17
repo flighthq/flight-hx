@@ -8,5 +8,5 @@ typedef AttractorForce = {
   @:optional var z:Float;
   var strength:Float;
   @:optional var radius:Float;
-  @:optional var falloff:Dynamic;
+  @:optional var falloff:flight.ForceFalloff;
 };

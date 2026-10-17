@@ -5,5 +5,5 @@ typedef RivePathRecord = {
   var commands:Array<Float>;
   var data:Array<Float>;
   var pathIndex:Float;
-  var winding:Dynamic;
+  var winding:flight.PathWinding;
 };

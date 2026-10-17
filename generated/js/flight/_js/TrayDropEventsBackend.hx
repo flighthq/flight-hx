@@ -3,5 +3,5 @@ package flight._js;
 
 typedef TrayDropEventsBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function getSignal(tray:flight.TrayIcon):Null<flight.Signal<(Dynamic)->Void>>;
+  function getSignal(tray:flight.TrayIcon):Null<flight.Signal<(flight.TrayDropEvent)->Void>>;
 };

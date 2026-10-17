@@ -3,6 +3,6 @@ package flight._js;
 
 typedef ColorMatrixAdjustment = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var kind:String;
+  var kind:flight.AdjustmentKind;
   var colorMatrix:Array<Float>;
 };

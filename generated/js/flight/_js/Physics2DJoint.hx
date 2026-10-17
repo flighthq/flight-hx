@@ -3,7 +3,7 @@ package flight._js;
 
 typedef Physics2DJoint = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var kind:String;
+  var kind:flight.Physics2DJointKind;
   var bodyA:Float;
   var bodyB:Float;
   var localAnchorAX:Float;

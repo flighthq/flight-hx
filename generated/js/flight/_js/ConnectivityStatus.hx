@@ -3,7 +3,7 @@ package flight._js;
 
 typedef ConnectivityStatus = {
   var online:Null<Bool>;
-  var type:Dynamic;
+  var type:flight.ConnectivityConnectionType;
   var downlink:Float;
   var downlinkMax:Float;
   var effectiveType:String;

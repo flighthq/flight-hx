@@ -3,6 +3,6 @@ package flight._js;
 
 typedef TiledProperty = {
   var name:String;
-  var type:Dynamic;
+  var type:flight.TiledPropertyType;
   var value:Dynamic;
 };

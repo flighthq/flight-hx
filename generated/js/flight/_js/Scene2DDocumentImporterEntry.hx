@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef Scene2DDocumentImporterEntry = {
-  var importDocument:(flight._internal._UInt8Array, flight.Scene2DDocumentImportContext)->Null<flight.Scene2DDocument>;
+  var importDocument:flight.Scene2DDocumentImporter;
   var kind:String;
-  var matches:(flight._internal._UInt8Array, flight.Scene2DDocumentImportContext)->Bool;
+  var matches:flight.Scene2DDocumentImporterMatcher;
 };

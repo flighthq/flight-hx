@@ -5,10 +5,10 @@ typedef EmbeddedImageResourceReference = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var failure:Null<flight.ImageResourceFailure>;
   var mimeType:Null<String>;
-  var state:Dynamic;
-  @:optional var textures:Array<Dynamic>;
+  var state:flight.ResourceResolutionState;
+  @:optional var textures:Array<flight.Texture>;
   var kind:String;
-  var alphaType:Dynamic;
+  var alphaType:flight.AlphaType;
   @:optional var bitmapComposition:flight.ImageBitmapComposition;
   var bytes:flight._internal._UInt8Array;
 };

@@ -3,6 +3,6 @@ package flight._js;
 
 typedef NodeInteractiveStateExplanation = {
   var kind:String;
-  @:optional var property:Dynamic;
-  var reason:String;
+  @:optional var property:flight.NodeInteractiveStateProperty;
+  var reason:flight.NodeInteractiveStateRefusalReason;
 };

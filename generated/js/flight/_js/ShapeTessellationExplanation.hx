@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef ShapeTessellationExplanation = {
-  var blockedBy:Dynamic;
-  var status:Dynamic;
+  var blockedBy:flight.ShapeTessellationBlocker;
+  var status:flight.ShapeTessellationStatus;
 };

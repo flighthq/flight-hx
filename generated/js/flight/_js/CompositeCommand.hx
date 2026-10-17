@@ -3,7 +3,7 @@ package flight._js;
 
 typedef CompositeCommand = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var kind:String;
+  var kind:flight.Kind;
   var label:String;
   var children:Array<flight.Command>;
 };

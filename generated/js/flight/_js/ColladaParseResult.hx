@@ -4,6 +4,6 @@ package flight._js;
 typedef ColladaParseResult = {
   var document:flight.Scene3DDocument;
   var diagnostics:Array<flight.ImportDiagnostic>;
-  var upAxis:Dynamic;
+  var upAxis:flight.ColladaUpAxis;
   var rootTransform:Array<Float>;
 };

@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef Scene2DSlotResolution = {
-  var content:Dynamic;
+  var content:flight.Node2D;
   var reference:flight.Scene2DSlotReference;
 };

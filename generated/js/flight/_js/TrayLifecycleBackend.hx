@@ -3,8 +3,8 @@ package flight._js;
 
 typedef TrayLifecycleBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function create(tray:flight.TrayIcon, options:flight.TrayIconOptions):flight._internal._Promise<Dynamic>;
-  function destroy(tray:flight.TrayIcon):flight._internal._Promise<Dynamic>;
+  function create(tray:flight.TrayIcon, options:flight.TrayIconOptions):flight._internal._Promise<flight.TrayCreateProviderResult>;
+  function destroy(tray:flight.TrayIcon):flight._internal._Promise<flight.TrayDestroyProviderResult>;
   function isDestroyed(tray:flight.TrayIcon):Bool;
   function list():Array<flight.TrayIcon>;
 };

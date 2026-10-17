@@ -6,7 +6,7 @@ typedef GeolocationBackend = {
   function getCurrentPosition(options:flight.GeolocationRequestOptions):flight._internal._Promise<Null<flight.GeolocationPosition>>;
   function getCurrentPositionResult(options:flight.GeolocationRequestOptions):flight._internal._Promise<flight.GeolocationPositionResult>;
   function isAvailable():Bool;
-  function watchPosition(listener:(flight.GeolocationPosition)->Void, options:flight.GeolocationRequestOptions, ?onError:(Dynamic)->Void):Float;
+  function watchPosition(listener:(flight.GeolocationPosition)->Void, options:flight.GeolocationRequestOptions, ?onError:(flight.GeolocationErrorReason)->Void):Float;
   function clearWatch(id:Float):Void;
-  function promptForAccess():flight._internal._Promise<{ reason:Dynamic }>;
+  function promptForAccess():flight._internal._Promise<flight.GeolocationAccessOutcome>;
 };

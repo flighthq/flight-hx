@@ -2,20 +2,20 @@
 package flight._js;
 
 typedef CreateRenderTextureOptions = {
-  @:optional var colorSpace:Dynamic;
+  @:optional var colorSpace:flight.TextureColorSpace;
   @:optional var colorAttachments:Float;
-  @:optional var colorFormats:Array<Dynamic>;
+  @:optional var colorFormats:Array<flight.RenderTargetFormat>;
   @:optional var clearColors:Array<Float>;
   @:optional var clearDepth:Float;
-  @:optional var depth:Dynamic;
+  @:optional var depth:flight.RenderTargetDepth;
   @:optional var flipX:Bool;
   @:optional var flipY:Bool;
-  @:optional var format:Dynamic;
+  @:optional var format:flight.RenderTargetFormat;
   var height:Float;
   @:optional var sampleCount:Float;
-  @:optional var sampler:flight.Sampler;
-  @:optional var uvOffset:flight.Vector2;
+  @:optional var sampler:flight.SamplerLike;
+  @:optional var uvOffset:flight.Vector2Like;
   @:optional var uvRotation:Float;
-  @:optional var uvScale:flight.Vector2;
+  @:optional var uvScale:flight.Vector2Like;
   var width:Float;
 };

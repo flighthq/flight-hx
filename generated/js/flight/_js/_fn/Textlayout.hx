@@ -17,10 +17,10 @@ extern class Textlayout {
   static function computeRichTextMaxScrollV(data:flight.RichTextData, layout:flight.TextLayoutResult):Float;
   static function computeRichTextTextHeight(layout:flight.TextLayoutResult):Float;
   static function computeRichTextTextWidth(layout:flight.TextLayoutResult):Float;
-  static function computeTextBoundsHeight(spec:{ autoSize:Dynamic, height:Float, width:Float, ?wordWrap:Bool }, layout:flight.TextLayoutResult):Float;
-  static function computeTextBoundsOffsetX(spec:{ autoSize:Dynamic, height:Float, width:Float, ?wordWrap:Bool }, layout:flight.TextLayoutResult):Float;
-  static function computeTextBoundsRectangle(out:flight.Rectangle, spec:{ autoSize:Dynamic, height:Float, width:Float, ?wordWrap:Bool }, layout:flight.TextLayoutResult):Void;
-  static function computeTextBoundsWidth(spec:{ autoSize:Dynamic, height:Float, width:Float, ?wordWrap:Bool }, layout:flight.TextLayoutResult):Float;
+  static function computeTextBoundsHeight(spec:flight.TextBoundsSpec, layout:flight.TextLayoutResult):Float;
+  static function computeTextBoundsOffsetX(spec:flight.TextBoundsSpec, layout:flight.TextLayoutResult):Float;
+  static function computeTextBoundsRectangle(out:flight.RectangleLike, spec:flight.TextBoundsSpec, layout:flight.TextLayoutResult):Void;
+  static function computeTextBoundsWidth(spec:flight.TextBoundsSpec, layout:flight.TextLayoutResult):Float;
   static function computeTextLayout(out:flight.TextLayoutResult, params:flight.TextLayoutParams):Void;
   static function createRichTextContent():flight.RichTextContent;
   static function createTextFormatRange(format:flight.TextFormat, start:Float, end:Float):flight.TextFormatRange;
@@ -43,18 +43,18 @@ extern class Textlayout {
   static function getTextFormatDescent(format:flight.TextFormat):Float;
   static function getTextFormatHeight(format:flight.TextFormat):Float;
   static function getTextFormatLeading(format:flight.TextFormat):Float;
-  static function getTextLayoutMeasureProvider():Null<(String, flight.TextFormat)->Float>;
+  static function getTextLayoutMeasureProvider():Null<flight.TextMeasureFunction>;
   static function getTextLayoutResult(runtime:flight.TextLabelRuntime):flight.TextLayoutResult;
   static function getTextLineBreakIndex(lineBreaks:Array<Float>, ?startIndex:Float):Float;
   static function getTextLineBreaks(out:Array<Float>, text:String):Void;
   static function getTextMetrics(out:flight.TextMetrics, layout:flight.TextLayoutResult):Void;
-  static function initializeRichTextContent(out:flight.RichTextContent):Void;
-  static function initializeTextFormatRange(out:flight.TextFormatRange, format:flight.TextFormat, start:Float, end:Float):Void;
-  static function initializeTextLayoutGroup(out:flight.TextLayoutGroup, format:flight.TextFormat, startIndex:Float, endIndex:Float):Void;
-  static function initializeTextLayoutResult(out:flight.TextLayoutResult):Void;
-  static function initializeTextMetrics(out:flight.TextMetrics):Void;
+  static function initializeRichTextContent(out:flight.EntityConstruction<flight.RichTextContent>):Void;
+  static function initializeTextFormatRange(out:flight.EntityConstruction<flight.TextFormatRange>, format:flight.TextFormat, start:Float, end:Float):Void;
+  static function initializeTextLayoutGroup(out:flight.EntityConstruction<flight.TextLayoutGroup>, format:flight.TextFormat, startIndex:Float, endIndex:Float):Void;
+  static function initializeTextLayoutResult(out:flight.EntityConstruction<flight.TextLayoutResult>):Void;
+  static function initializeTextMetrics(out:flight.EntityConstruction<flight.TextMetrics>):Void;
   static function isTextLayoutTruncated(layout:flight.TextLayoutResult, params:flight.TextLayoutParams):Bool;
   static function mergeTextFormat(base:flight.TextFormat, override_:flight.TextFormat):flight.TextFormat;
-  static function setTextLayoutMeasureProvider(measure:Null<(String, flight.TextFormat)->Float>):Void;
+  static function setTextLayoutMeasureProvider(measure:Null<flight.TextMeasureFunction>):Void;
 }
 #end

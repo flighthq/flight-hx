@@ -4,5 +4,5 @@ package flight._js;
 typedef MediaSessionActionBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   function destroy():Void;
-  function subscribe(action:Dynamic, listener:(flight.MediaSessionActionDetails)->Void):Null<()->Void>;
+  function subscribe(action:flight.MediaSessionAction, listener:(flight.MediaSessionActionDetails)->Void):Null<()->Void>;
 };

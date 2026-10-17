@@ -3,6 +3,6 @@ package flight._js;
 
 typedef TrayTooltipBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function get(tray:flight.TrayIcon):flight._internal._Promise<Dynamic>;
-  function set(tray:flight.TrayIcon, tooltip:String):flight._internal._Promise<Dynamic>;
+  function get(tray:flight.TrayIcon):flight._internal._Promise<flight.TrayTooltipReadResult>;
+  function set(tray:flight.TrayIcon, tooltip:String):flight._internal._Promise<flight.TrayTooltipUpdateResult>;
 };

@@ -7,7 +7,7 @@ typedef EmissiveModifier = {
   var slot:String;
   var color:Float;
   var strength:Float;
-  @:optional var mask:Dynamic;
-  @:optional var facing:String;
+  @:optional var mask:flight.Texture;
+  @:optional var facing:flight.EmissiveModifierFacing;
   @:optional var facingSoftness:Float;
 };

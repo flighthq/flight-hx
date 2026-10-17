@@ -8,7 +8,7 @@ typedef Physics2DWorld = {
   var bodyByIndex:flight._internal._Map<Float, flight.RigidBody2D>;
   var contacts:Array<flight.Physics2DContact>;
   var joints:Array<flight.Physics2DJoint>;
-  var jointSolvers:flight._internal._Map<String, flight.Physics2DJointSolver>;
+  var jointSolvers:flight._internal._Map<flight.Physics2DJointKind, flight.Physics2DJointSolver>;
   var jointCollisionSuppressions:flight._internal._Map<Float, flight._internal._Map<Float, Float>>;
   var events:flight.Physics2DContactEvents;
   var jointEvents:flight.Physics2DJointEvents;

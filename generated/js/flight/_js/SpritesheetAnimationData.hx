@@ -3,7 +3,7 @@ package flight._js;
 
 typedef SpritesheetAnimationData = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var direction:Dynamic;
+  var direction:flight.SpritesheetAnimationDirection;
   var frameDuration:Float;
   var frameDurations:Null<Array<Float>>;
   var frameNames:Array<String>;

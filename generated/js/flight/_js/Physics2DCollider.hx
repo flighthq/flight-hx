@@ -3,8 +3,8 @@ package flight._js;
 
 typedef Physics2DCollider = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var local:Dynamic;
-  var world:Dynamic;
+  var local:flight.CollisionBuiltInShape2D;
+  var world:flight.CollisionBuiltInShape2D;
   var material:flight.Physics2DMaterial;
   var filter:flight.Physics2DCollisionFilter;
   var sensor:Bool;

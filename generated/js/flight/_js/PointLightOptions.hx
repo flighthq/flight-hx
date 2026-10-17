@@ -9,10 +9,10 @@ typedef PointLightOptions = {
   @:optional var decay:Float;
   @:optional var enabled:Bool;
   @:optional var intensity:Float;
-  @:optional var intensityUnit:Dynamic;
+  @:optional var intensityUnit:flight.LightUnit;
   @:optional var normalBias:Float;
   @:optional var pcfRadius:Float;
-  @:optional var position:flight.Vector3;
+  @:optional var position:flight.Vector3Like;
   @:optional var range:Float;
   @:optional var shadowBias:Float;
   @:optional var shadowFar:Float;

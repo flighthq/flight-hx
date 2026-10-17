@@ -9,12 +9,12 @@ extern class Lifecycle {
   static function createWebLifecycleBackend():flight.LifecycleBackend;
   static function detachAppLifecycle(app:flight.AppLifecycle):Void;
   static function disposeAppLifecycle(app:flight.AppLifecycle):Void;
-  static function explainLifecycleOperation(host:flight.HasSystemLifecycle, operation:Dynamic):flight.BackendOperationExplanation;
-  static function getAppLaunchKind(host:flight.HasSystemLifecycle):Dynamic;
-  static function getAppLifecycleState(host:flight.HasSystemLifecycle):Dynamic;
-  static function hasLifecycleOperation(host:flight.HasSystemLifecycle, operation:Dynamic):Bool;
-  static function initializeAppLifecycle(out:flight.AppLifecycle):Void;
-  static function initializeWebLifecycleBackend(out:flight.LifecycleBackend):Void;
+  static function explainLifecycleOperation(host:flight.HasSystemLifecycle, operation:flight.LifecycleOperation):flight.BackendOperationExplanation;
+  static function getAppLaunchKind(host:flight.HasSystemLifecycle):flight.AppLaunchKind;
+  static function getAppLifecycleState(host:flight.HasSystemLifecycle):flight.AppLifecycleState;
+  static function hasLifecycleOperation(host:flight.HasSystemLifecycle, operation:flight.LifecycleOperation):Bool;
+  static function initializeAppLifecycle(out:flight.EntityConstruction<flight.AppLifecycle>):Void;
+  static function initializeWebLifecycleBackend(out:flight.EntityConstruction<flight.LifecycleBackend>):Void;
   static function isAppActive(host:flight.HasSystemLifecycle):Bool;
   static function isAppBackground(host:flight.HasSystemLifecycle):Bool;
   static function isAppInactive(host:flight.HasSystemLifecycle):Bool;

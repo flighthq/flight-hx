@@ -7,5 +7,5 @@ typedef TimelineSource = {
   var labels:Array<flight.TimelineLabel>;
   var cues:Array<flight.TimelineCue>;
   var frameRate:Null<Float>;
-  function constructFrame(target:Dynamic, frame:Float):Void;
+  function constructFrame(target:flight.Node2D, frame:Float):Void;
 };

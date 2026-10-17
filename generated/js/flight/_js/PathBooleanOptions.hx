@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef PathBooleanOptions = {
-  @:optional var fillRule:Dynamic;
+  @:optional var fillRule:flight.PathWinding;
   @:optional var tolerance:Float;
 };

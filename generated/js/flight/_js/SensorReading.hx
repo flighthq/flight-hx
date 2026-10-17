@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef SensorReading = {
-  var accuracy:Dynamic;
+  var accuracy:flight.SensorAccuracy;
   var interval:Float;
   var timestamp:Float;
 };

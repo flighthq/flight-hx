@@ -3,5 +3,5 @@ package flight._js;
 
 typedef SoftKeyboardResizeModeWriteBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function setResizeMode(mode:String):flight._internal._Promise<Dynamic>;
+  function setResizeMode(mode:flight.SoftKeyboardResizeMode):flight._internal._Promise<flight.SoftKeyboardSetterResult>;
 };

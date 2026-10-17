@@ -3,8 +3,8 @@ package flight._js;
 
 typedef LifecycleBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function getState():Dynamic;
+  function getState():flight.AppLifecycleState;
   function subscribe(listener:()->Void):()->Void;
-  @:optional function getLaunchKind():Dynamic;
-  @:optional function subscribeMemoryWarning(listener:(Dynamic)->Void):()->Void;
+  @:optional function getLaunchKind():flight.AppLaunchKind;
+  @:optional function subscribeMemoryWarning(listener:(flight.AppMemoryPressure)->Void):()->Void;
 };

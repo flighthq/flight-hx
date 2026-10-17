@@ -3,16 +3,16 @@ package flight._js;
 
 typedef PlatformInfo = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var name:Dynamic;
-  var kind:Dynamic;
+  var name:flight.PlatformName;
+  var kind:flight.PlatformKind;
   var version:String;
   var arch:String;
   var locale:String;
   var isTouch:Bool;
-  var runtime:Dynamic;
-  var engine:Dynamic;
+  var runtime:flight.PlatformRuntime;
+  var engine:flight.PlatformEngine;
   var engineVersion:String;
-  var endianness:Dynamic;
+  var endianness:flight.PlatformEndianness;
   var pointerWidth:Dynamic;
   var osBuild:String;
   var distro:String;

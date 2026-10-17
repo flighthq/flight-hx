@@ -4,13 +4,13 @@ package flight._js;
 typedef Timeline = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var source:Null<flight.TimelineSource>;
-  var target:Null<Dynamic>;
+  var target:Null<flight.Node2D>;
   var currentFrame:Float;
   var cueRegistry:Null<flight.TimelineCueRegistry>;
-  var frameScripts:Null<flight._internal._Map<Float, (Dynamic, Float)->Void>>;
+  var frameScripts:Null<flight._internal._Map<Float, flight.FrameScript>>;
   var isPlaying:Bool;
   var timeElapsed:Float;
   var lastFrameUpdate:Float;
-  var playMode:Dynamic;
+  var playMode:flight.TimelinePlayMode;
   var signals:Null<flight.TimelineSignals>;
 };

@@ -3,6 +3,6 @@ package flight._js;
 
 typedef Scene3DDocumentAnimationChannel = {
   var node:Float;
-  var path:Dynamic;
+  var path:flight.Scene3DAnimationPath;
   var track:flight.AnimationTrack;
 };

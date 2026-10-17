@@ -3,5 +3,5 @@ package flight._js;
 
 typedef SoftKeyboardStyleBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function setStyle(style:String):flight._internal._Promise<Dynamic>;
+  function setStyle(style:flight.SoftKeyboardStyleKind):flight._internal._Promise<flight.SoftKeyboardSetterResult>;
 };

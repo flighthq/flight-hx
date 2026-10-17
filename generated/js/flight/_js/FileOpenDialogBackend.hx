@@ -3,5 +3,5 @@ package flight._js;
 
 typedef FileOpenDialogBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function open(options:flight.OpenFileDialogOptions):flight._internal._Promise<Dynamic>;
+  function open(options:flight.OpenFileDialogOptions):flight._internal._Promise<flight.FileOpenDialogResult>;
 };

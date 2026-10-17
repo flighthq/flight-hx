@@ -12,5 +12,5 @@ typedef ShapeBoundsContext = {
   function flushPath():Void;
   function lineTo(x:Float, y:Float):Void;
   function moveTo(x:Float, y:Float):Void;
-  function setStrokeStyle(width:Float, caps:Dynamic, joints:Dynamic, miterLimit:Float):Void;
+  function setStrokeStyle(width:Float, caps:flight.CapsStyle, joints:flight.JointStyle, miterLimit:Float):Void;
 };

@@ -4,7 +4,7 @@ package flight;
 #if flight_hx
 typedef NodeInteractiveStateTransition = flight._hx.NodeInteractiveStateTransition;
 #elseif (js && flight_esm)
-typedef NodeInteractiveStateTransition<N:flight.Node<Dynamic> = Dynamic, P:String = Dynamic> = flight._js.NodeInteractiveStateTransition<N, P>;
+typedef NodeInteractiveStateTransition<N:flight.NodeAny = flight.NodeAny, P:String = String> = flight._js.NodeInteractiveStateTransition<N, P>;
 #elseif cpp
 typedef NodeInteractiveStateTransition = flight._cpp.NodeInteractiveStateTransition;
 #elseif js

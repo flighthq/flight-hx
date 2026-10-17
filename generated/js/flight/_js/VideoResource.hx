@@ -3,7 +3,7 @@ package flight._js;
 
 typedef VideoResource = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var element:Null<Dynamic>;
+  var element:Null<flight.HostImageSource>;
   var objectUrl:Null<String>;
   var ownsElement:Bool;
 };

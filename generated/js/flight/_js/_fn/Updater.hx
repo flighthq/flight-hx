@@ -4,7 +4,7 @@ package flight._js._fn;
 
 @:jsImport("@flighthq/updater/contract")
 extern class Updater {
-  static function checkForAppUpdate(host:flight.HasUpdaterCommand):flight._internal._Promise<Dynamic>;
+  static function checkForAppUpdate(host:flight.HasUpdaterCommand):flight._internal._Promise<flight.AppUpdateCheckOutcome>;
   static function destroyUpdater(host:flight.HasUpdaterCommand):Void;
   static function installDownloadedUpdate(host:flight.HasUpdaterCommand, update:flight.DownloadedUpdate):flight._internal._Promise<flight.AppUpdateInstallOutcome>;
 }

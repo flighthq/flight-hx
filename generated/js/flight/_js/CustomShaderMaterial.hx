@@ -6,10 +6,10 @@ typedef CustomShaderMaterial = {
   var kind:String;
   @:optional var name:Null<String>;
   var alphaCutoff:Float;
-  var alphaMode:Dynamic;
-  var blendMode:String;
+  var alphaMode:flight.MaterialAlphaMode;
+  var blendMode:flight.BlendMode;
   var doubleSided:Bool;
   var shaderKey:String;
-  var textures:Null<haxe.DynamicAccess<Dynamic>>;
+  var textures:Null<haxe.DynamicAccess<flight.Texture>>;
   var uniforms:Null<haxe.DynamicAccess<Dynamic>>;
 };

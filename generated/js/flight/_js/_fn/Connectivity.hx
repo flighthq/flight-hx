@@ -13,7 +13,7 @@ extern class Connectivity {
   static function getConnectivityOnline(host:flight.HasConnectivityStatus):Null<Bool>;
   static function getConnectivityStatus(host:flight.HasConnectivityStatus, out:flight.ConnectivityStatus):flight.ConnectivityStatus;
   static function hasConnectivityStatusChanged(a:flight.ConnectivityStatus, b:flight.ConnectivityStatus):Bool;
-  static function initializeConnectivity(out:flight.Connectivity):Void;
+  static function initializeConnectivity(out:flight.EntityConstruction<flight.Connectivity>):Void;
   static function isConnectivityMetered(host:flight.HasConnectivityStatus):Bool;
   static function isConnectivitySaveDataEnabled(host:flight.HasConnectivityStatus):Bool;
 }

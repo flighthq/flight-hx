@@ -3,7 +3,7 @@ package flight._js;
 
 typedef PowerKeepAwakeBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function acquire(mode:Dynamic):flight._internal._Promise<flight.PowerKeepAwakeAcquireResult>;
+  function acquire(mode:flight.PowerKeepAwakeMode):flight._internal._Promise<flight.PowerKeepAwakeAcquireResult>;
   @:optional function destroy():Void;
   function isActive():Bool;
   function release():flight._internal._Promise<flight.PowerKeepAwakeReleaseResult>;

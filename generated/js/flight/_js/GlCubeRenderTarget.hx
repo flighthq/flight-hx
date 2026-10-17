@@ -3,7 +3,7 @@ package flight._js;
 
 typedef GlCubeRenderTarget = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var colorSpace:Dynamic;
+  var colorSpace:flight.RenderTargetColorSpace;
   var depthStencilRenderbuffer:Null<js.html.webgl.Renderbuffer>;
   var framebuffer:js.html.webgl.Framebuffer;
   var height:Float;

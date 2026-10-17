@@ -2,8 +2,8 @@
 package flight._js;
 
 typedef CollisionTestExplanation3D = {
-  var kind:Null<Dynamic>;
+  var kind:Null<flight.CollisionShapeKind3D>;
   var overlapping:Bool;
   var shapeIndex:Dynamic;
-  var status:Dynamic;
+  var status:flight.CollisionTestStatus;
 };

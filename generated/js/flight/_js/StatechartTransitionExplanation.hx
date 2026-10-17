@@ -6,7 +6,7 @@ typedef StatechartTransitionExplanation = {
   var conditionIndex:Float;
   var regionIndex:Float;
   var sourceStateIndex:Float;
-  var status:String;
+  var status:flight.StatechartTransitionStatus;
   var targetStateIndex:Float;
   var transitionIndex:Float;
 };

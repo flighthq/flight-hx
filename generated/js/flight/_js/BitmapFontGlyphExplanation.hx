@@ -3,7 +3,7 @@ package flight._js;
 
 typedef BitmapFontGlyphExplanation = {
   var renderable:Bool;
-  var reason:Dynamic;
+  var reason:flight.BitmapFontGlyphExplanationReason;
   var page:Float;
   var pageCount:Float;
   var glyphWidth:Float;

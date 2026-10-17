@@ -4,7 +4,7 @@ package flight._js;
 typedef EmissiveModifierOptions = {
   var color:Float;
   @:optional var strength:Float;
-  @:optional var mask:Dynamic;
-  @:optional var facing:Dynamic;
+  @:optional var mask:flight.Texture;
+  @:optional var facing:flight.EmissiveModifierFacing;
   @:optional var facingSoftness:Float;
 };

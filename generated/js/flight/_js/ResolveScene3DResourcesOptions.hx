@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef ResolveScene3DResourcesOptions = {
-  @:optional function select(texture:Dynamic, ref:Dynamic):Bool;
+  @:optional function select(texture:flight.Texture, ref:flight.ImageResourceReference):Bool;
 };

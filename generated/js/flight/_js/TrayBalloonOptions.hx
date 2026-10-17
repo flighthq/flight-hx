@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef TrayBalloonOptions = {
-  @:optional var icon:String;
+  @:optional var icon:flight.TrayIconSource;
   @:optional var iconType:Dynamic;
   @:optional var largeIcon:Bool;
   @:optional var noSound:Bool;

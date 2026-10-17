@@ -5,6 +5,6 @@ typedef FlightDocumentNode = {
   var children:Array<flight.FlightDocumentNode>;
   var fields:flight.FlightDocumentFields;
   @:optional var interactiveStates:Null<flight.FlightDocumentInteractiveStates>;
-  var kind:String;
+  var kind:flight.Kind;
   @:optional var transition:Null<flight.FlightDocumentInteractiveStateTransitionDescriptor>;
 };

@@ -6,8 +6,8 @@ typedef LottieRepeaterShapeItem = {
   @:optional var ix:Float;
   @:optional var nm:String;
   var ty:String;
-  var c:Dynamic;
+  var c:flight.LottieAnimatable<Float>;
   @:optional var m:Dynamic;
-  var o:Dynamic;
+  var o:flight.LottieAnimatable<Float>;
   var tr:flight.LottieRepeaterTransform;
 };

@@ -10,6 +10,6 @@ typedef Power = {
   var onLockScreen:Null<flight.Signal<()->Void>>;
   var onResume:Null<flight.Signal<()->Void>>;
   var onSuspend:Null<flight.Signal<()->Void>>;
-  var onThermalStateChange:Null<flight.Signal<(Dynamic)->Void>>;
+  var onThermalStateChange:Null<flight.Signal<(flight.PowerThermalState)->Void>>;
   var onUnlockScreen:Null<flight.Signal<()->Void>>;
 };

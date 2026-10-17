@@ -13,10 +13,10 @@ extern class Device {
   static function getDeviceId(host:flight.HasSystemDevice):String;
   static function getDeviceInfo(host:flight.HasSystemDevice, out:flight.DeviceInfo):flight.DeviceInfo;
   static function getSafeAreaInsets(host:flight.HasSystemDevice, out:flight.SafeAreaInsets):flight.SafeAreaInsets;
-  static function initializeDeviceCapabilities(out:flight.DeviceCapabilities):Void;
-  static function initializeDeviceDisplayMetrics(out:flight.DeviceDisplayMetrics):Void;
-  static function initializeDeviceInfo(out:flight.DeviceInfo):Void;
-  static function initializeSafeAreaInsets(out:flight.SafeAreaInsets):Void;
+  static function initializeDeviceCapabilities(out:flight.EntityConstruction<flight.DeviceCapabilities>):Void;
+  static function initializeDeviceDisplayMetrics(out:flight.EntityConstruction<flight.DeviceDisplayMetrics>):Void;
+  static function initializeDeviceInfo(out:flight.EntityConstruction<flight.DeviceInfo>):Void;
+  static function initializeSafeAreaInsets(out:flight.EntityConstruction<flight.SafeAreaInsets>):Void;
   static function refreshDeviceInfo(host:flight.HasSystemDevice):Void;
 }
 #end

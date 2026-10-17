@@ -13,6 +13,6 @@ typedef GradientBevelEffect = {
   @:optional var distance:Float;
   @:optional var quality:Float;
   var ratios:Array<Float>;
-  @:optional var sourceMode:Dynamic;
+  @:optional var sourceMode:flight.EffectSourceMode;
   @:optional var strength:Float;
 };

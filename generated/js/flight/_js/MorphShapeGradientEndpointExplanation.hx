@@ -3,7 +3,7 @@ package flight._js;
 
 typedef MorphShapeGradientEndpointExplanation = {
   var endStopCount:Float;
-  var reason:Dynamic;
+  var reason:flight.MorphShapeGradientEndpointReason;
   var startStopCount:Float;
   var supported:Bool;
 };

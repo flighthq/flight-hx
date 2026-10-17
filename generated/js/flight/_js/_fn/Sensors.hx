@@ -22,7 +22,7 @@ extern class Sensors {
   static function createWebSensorsBackend():flight.SensorsBackend;
   static function detachSensors(sensors:flight.Sensors):Void;
   static function disposeSensors(sensors:flight.Sensors):Void;
-  static function getSensorsPermissionState(host:flight.HasSystemSensors, ?sensor:Dynamic):flight._internal._Promise<Dynamic>;
+  static function getSensorsPermissionState(host:flight.HasSystemSensors, ?sensor:Dynamic):flight._internal._Promise<flight.SensorsPermissionState>;
   static function hasAccelerometer(host:flight.HasSystemSensors):Bool;
   static function hasAmbientLightSensor(host:flight.HasSystemSensors):Bool;
   static function hasBarometer(host:flight.HasSystemSensors):Bool;
@@ -32,14 +32,14 @@ extern class Sensors {
   static function hasMagnetometer(host:flight.HasSystemSensors):Bool;
   static function hasOrientationSensor(host:flight.HasSystemSensors):Bool;
   static function hasProximitySensor(host:flight.HasSystemSensors):Bool;
-  static function initializeAmbientLightReading(out:flight.AmbientLightReading):Void;
-  static function initializeMotionReading(out:flight.MotionReading):Void;
-  static function initializeOrientationReading(out:flight.OrientationReading):Void;
-  static function initializePressureReading(out:flight.PressureReading):Void;
-  static function initializeProximityReading(out:flight.ProximityReading):Void;
-  static function initializeQuaternionReading(out:flight.QuaternionReading):Void;
-  static function initializeRotationRateReading(out:flight.RotationRateReading):Void;
-  static function initializeSensors(out:flight.Sensors):Void;
+  static function initializeAmbientLightReading(out:flight.EntityConstruction<flight.AmbientLightReading>):Void;
+  static function initializeMotionReading(out:flight.EntityConstruction<flight.MotionReading>):Void;
+  static function initializeOrientationReading(out:flight.EntityConstruction<flight.OrientationReading>):Void;
+  static function initializePressureReading(out:flight.EntityConstruction<flight.PressureReading>):Void;
+  static function initializeProximityReading(out:flight.EntityConstruction<flight.ProximityReading>):Void;
+  static function initializeQuaternionReading(out:flight.EntityConstruction<flight.QuaternionReading>):Void;
+  static function initializeRotationRateReading(out:flight.EntityConstruction<flight.RotationRateReading>):Void;
+  static function initializeSensors(out:flight.EntityConstruction<flight.Sensors>):Void;
   static function isSensorsSupported(host:flight.HasSystemSensors):Bool;
   static function requestSensorsPermission(host:flight.HasSystemSensors):flight._internal._Promise<Bool>;
 }

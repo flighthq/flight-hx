@@ -6,6 +6,6 @@ typedef Scene3DDocumentCamera = {
   @:optional var name:String;
   var near:Float;
   @:optional var node:Float;
-  var projection:Dynamic;
+  var projection:flight.Projection;
   var transform:flight.Transform3D;
 };

@@ -3,6 +3,6 @@ package flight._js;
 
 typedef RiveProperty = {
   var key:Float;
-  var type:Float;
-  var value:Dynamic;
+  var type:flight.RiveFieldType;
+  var value:flight.RiveValue;
 };

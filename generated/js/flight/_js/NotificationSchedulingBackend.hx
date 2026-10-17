@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef NotificationSchedulingBackend = {
-  function cancelAllScheduledNotifications():flight._internal._Promise<Dynamic>;
-  function getPendingNotifications():flight._internal._Promise<Dynamic>;
-  function scheduleNotification(request:flight.NotificationRequest, schedule:flight.NotificationSchedule):flight._internal._Promise<Dynamic>;
+  function cancelAllScheduledNotifications():flight._internal._Promise<flight.NotificationLifecycleOutcome>;
+  function getPendingNotifications():flight._internal._Promise<flight.NotificationPendingListOutcome>;
+  function scheduleNotification(request:flight.NotificationRequest, schedule:flight.NotificationSchedule):flight._internal._Promise<flight.NotificationScheduleOutcome>;
 };

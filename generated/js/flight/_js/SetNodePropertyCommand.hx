@@ -3,7 +3,7 @@ package flight._js;
 
 typedef SetNodePropertyCommand = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var kind:String;
+  var kind:flight.Kind;
   var label:String;
   var entries:Array<flight.CommandPropertyEntry>;
   var mergeWindow:Float;

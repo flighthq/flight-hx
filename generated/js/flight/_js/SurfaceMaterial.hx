@@ -3,10 +3,10 @@ package flight._js;
 
 typedef SurfaceMaterial = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var kind:String;
+  var kind:flight.Kind;
   @:optional var name:Null<String>;
   var alphaCutoff:Float;
-  var alphaMode:Dynamic;
-  var blendMode:String;
+  var alphaMode:flight.MaterialAlphaMode;
+  var blendMode:flight.BlendMode;
   var doubleSided:Bool;
 };

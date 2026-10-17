@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef TextureAtlasAsepriteHashDocument = {
-  var frames:haxe.DynamicAccess<flight.TextureAtlasAsepriteBaseFrame>;
+  var frames:haxe.DynamicAccess<flight.TextureAtlasAsepriteHashFrame>;
   var meta:flight.TextureAtlasAsepriteMeta;
 };

@@ -2,9 +2,9 @@
 package flight._js;
 
 typedef OrdinalTable<T> = {
-  var onMiss:String;
-  var registry:String;
+  var onMiss:flight.RegistryMissPolicy;
+  var registry:flight.RegistryId;
   var entries:Array<Null<T>>;
   var shape:String;
-  var vocabulary:Array<String>;
+  var vocabulary:Array<flight.Kind>;
 };

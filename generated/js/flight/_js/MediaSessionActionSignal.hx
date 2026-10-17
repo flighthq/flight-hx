@@ -3,6 +3,6 @@ package flight._js;
 
 typedef MediaSessionActionSignal = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var action:Dynamic;
+  var action:flight.MediaSessionAction;
   var onAction:flight.Signal<(flight.MediaSessionActionDetails)->Void>;
 };

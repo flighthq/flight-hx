@@ -5,10 +5,10 @@ typedef WrappedDiffusePbrExtension = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var kind:String;
   var thickness:Float;
-  var thicknessMap:Null<Dynamic>;
-  var thicknessMapUvSet:Dynamic;
+  var thicknessMap:Null<flight.Texture>;
+  var thicknessMapUvSet:flight.PbrUvSet;
   var wrappedDiffuseColor:Float;
-  var wrappedDiffuseMap:Null<Dynamic>;
-  var wrappedDiffuseMapUvSet:Dynamic;
+  var wrappedDiffuseMap:Null<flight.Texture>;
+  var wrappedDiffuseMapUvSet:flight.PbrUvSet;
   var wrappedDiffuseStrength:Float;
 };

@@ -10,5 +10,5 @@ typedef BitmapBevelOptions = {
   @:optional var highlightColor:Float;
   @:optional var shadowColor:Float;
   @:optional var intensity:Float;
-  @:optional var type:Dynamic;
+  @:optional var type:flight.BitmapBevelType;
 };

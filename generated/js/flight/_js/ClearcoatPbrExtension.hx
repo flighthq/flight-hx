@@ -5,12 +5,12 @@ typedef ClearcoatPbrExtension = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var kind:String;
   var clearcoat:Float;
-  var clearcoatMap:Null<Dynamic>;
-  var clearcoatMapUvSet:Dynamic;
-  var clearcoatNormalMap:Null<Dynamic>;
-  var clearcoatNormalMapUvSet:Dynamic;
+  var clearcoatMap:Null<flight.Texture>;
+  var clearcoatMapUvSet:flight.PbrUvSet;
+  var clearcoatNormalMap:Null<flight.Texture>;
+  var clearcoatNormalMapUvSet:flight.PbrUvSet;
   var clearcoatNormalScale:Float;
   var clearcoatRoughness:Float;
-  var clearcoatRoughnessMap:Null<Dynamic>;
-  var clearcoatRoughnessMapUvSet:Dynamic;
+  var clearcoatRoughnessMap:Null<flight.Texture>;
+  var clearcoatRoughnessMapUvSet:flight.PbrUvSet;
 };

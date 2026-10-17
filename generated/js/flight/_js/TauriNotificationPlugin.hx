@@ -3,6 +3,6 @@ package flight._js;
 
 typedef TauriNotificationPlugin = {
   function isPermissionGranted():flight._internal._Promise<Bool>;
-  function requestPermission():flight._internal._Promise<Dynamic>;
+  function requestPermission():flight._internal._Promise<flight.TauriNotificationPermission>;
   function sendNotification(options:flight.TauriNotificationOptions):Void;
 };

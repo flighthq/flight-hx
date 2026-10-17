@@ -7,5 +7,5 @@ typedef ResourceLoadReport = {
   var elapsedMs:Float;
   var group:Null<String>;
   var key:String;
-  var status:Dynamic;
+  var status:flight.ResourceLoadReportStatus;
 };

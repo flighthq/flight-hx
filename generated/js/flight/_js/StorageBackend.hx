@@ -3,9 +3,9 @@ package flight._js;
 
 typedef StorageBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function clear():Dynamic;
-  function getItem(key:String):Dynamic;
-  function keys():Dynamic;
-  function removeItem(key:String):Dynamic;
-  function setItem(key:String, value:String):Dynamic;
+  function clear():flight.StorageClearResult;
+  function getItem(key:String):flight.StorageGetItemResult;
+  function keys():flight.StorageKeysResult;
+  function removeItem(key:String):flight.StorageRemoveItemResult;
+  function setItem(key:String, value:String):flight.StorageSetItemResult;
 };

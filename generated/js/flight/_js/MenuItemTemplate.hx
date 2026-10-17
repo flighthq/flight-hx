@@ -4,8 +4,8 @@ package flight._js;
 typedef MenuItemTemplate = {
   @:optional var id:String;
   @:optional var label:String;
-  @:optional var type:Dynamic;
-  @:optional var role:Dynamic;
+  @:optional var type:flight.MenuItemType;
+  @:optional var role:flight.MenuItemRole;
   @:optional var accelerator:String;
   @:optional var enabled:Bool;
   @:optional var checked:Bool;

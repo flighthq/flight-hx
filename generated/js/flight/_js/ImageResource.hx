@@ -3,11 +3,11 @@ package flight._js;
 
 typedef ImageResource = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var alphaType:Dynamic;
+  var alphaType:flight.AlphaType;
   var gamut:Dynamic;
   var height:Float;
   var kind:String;
   var version:Float;
   var width:Float;
-  var source:Dynamic;
+  var source:flight.HostImageSource;
 };

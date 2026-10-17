@@ -12,9 +12,9 @@ typedef HtmlViewRuntime = {
   var boundsUsingLocalBoundsId:Float;
   var boundsUsingLocalTransformId:Float;
   function canAddChild(target:flight.Node<flight.Node2DTraits>, child:flight.Node<flight.Node2DTraits>):Bool;
-  var children:Null<Array<Dynamic>>;
+  var children:Null<Array<flight.NodeOf<flight.Node2DTraits>>>;
   var childrenId:Float;
-  @:optional var traits:Dynamic;
+  @:optional var traits:flight.NodeTraitsKey<flight.Node2DTraits>;
   var interactionSignals:Null<flight.InteractionSignals>;
   var localBoundsId:Float;
   var localBoundsUsingLocalBoundsId:Float;
@@ -23,7 +23,7 @@ typedef HtmlViewRuntime = {
   var localTransformUsingLocalTransformId:Float;
   var nodeSignals:Null<flight.NodeSignals>;
   var interactionState:Null<flight.NodeInteractionState>;
-  var parent:Null<Dynamic>;
+  var parent:Null<flight.NodeOf<flight.Node2DTraits>>;
   var parentReferenceId:Float;
   var worldBoundsUsingLocalBoundsId:Float;
   var worldBoundsUsingWorldTransformId:Float;
@@ -36,8 +36,8 @@ typedef HtmlViewRuntime = {
   var rotationSine:Float;
   var worldMatrix:Null<flight.Matrix>;
   var boundsRectangle:Null<flight.Rectangle>;
-  function computeLocalBoundsRectangle(out:flight.Rectangle, source:Dynamic):Void;
-  var isLocalBoundsRectangleValid:Null<(Dynamic)->Bool>;
+  function computeLocalBoundsRectangle(out:flight.Rectangle, source:flight.BoundsNodeAny):Void;
+  var isLocalBoundsRectangleValid:Null<(flight.BoundsNodeAny)->Bool>;
   var localBoundsRectangle:Null<flight.Rectangle>;
   var worldBoundsRectangle:Null<flight.Rectangle>;
   var scene2d:Null<flight.Scene2D>;

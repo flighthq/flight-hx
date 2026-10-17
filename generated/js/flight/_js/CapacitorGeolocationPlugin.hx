@@ -6,5 +6,5 @@ typedef CapacitorGeolocationPlugin = {
   function clearWatch(options:{ id:String }):flight._internal._Promise<Dynamic>;
   function getCurrentPosition(?options:flight.CapacitorGeolocationOptions):flight._internal._Promise<flight.CapacitorPosition>;
   function requestPermissions(?options:flight.CapacitorGeolocationPermissionOptions):flight._internal._Promise<flight.CapacitorGeolocationPermissionStatus>;
-  function watchPosition(options:flight.CapacitorGeolocationOptions, callback:(Null<flight.CapacitorPosition>, Dynamic)->Void):flight._internal._Promise<String>;
+  function watchPosition(options:flight.CapacitorGeolocationOptions, callback:(Null<flight.CapacitorPosition>, ?Dynamic)->Void):flight._internal._Promise<String>;
 };

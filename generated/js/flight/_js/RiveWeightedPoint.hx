@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef RiveWeightedPoint = {
-  var kind:String;
+  var kind:flight.RiveWeightedPointKind;
   var vertex:Float;
   var x:Float;
   var y:Float;

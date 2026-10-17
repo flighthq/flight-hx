@@ -5,7 +5,7 @@ typedef ResourceLoadItem<T> = {
   @:optional var bytesHint:Float;
   @:optional var group:String;
   @:optional var key:String;
-  function load(signal:js.html.AbortSignal, reportBytes:(Float, Float)->Void):flight._internal._Promise<T>;
+  function load(signal:js.html.AbortSignal, reportBytes:flight.ResourceLoadBytesReporter):flight._internal._Promise<T>;
   @:optional function onBytesProgress(loaded:Float, total:Float):Void;
   @:optional var priority:Float;
   @:optional var retries:Float;

@@ -5,9 +5,9 @@ typedef HapticsBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   function cancel():Bool;
   function capabilities(out:flight.HapticsCapabilities):flight.HapticsCapabilities;
-  function impact(style:Dynamic, ?intensity:Float):Bool;
+  function impact(style:flight.HapticImpactStyle, ?intensity:Float):Bool;
   function isSupported():Bool;
-  function notification(type:Dynamic):Bool;
+  function notification(type:flight.HapticNotificationType):Bool;
   @:optional function prepare():Void;
   function selection():Bool;
   function vibrate(durationMs:Float):Bool;

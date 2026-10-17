@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef NotificationActionBackend = {
-  function attach(listener:(flight.Notification, String)->Void):flight._internal._Promise<Dynamic>;
+  function attach(listener:(flight.Notification, String)->Void):flight._internal._Promise<flight.NotificationEventBackendAttachOutcome>;
 };

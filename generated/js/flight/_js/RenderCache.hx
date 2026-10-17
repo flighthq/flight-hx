@@ -3,6 +3,6 @@ package flight._js;
 
 typedef RenderCache = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var kind:String;
+  var kind:flight.RenderCacheKind;
   var transform:flight.Matrix;
 };

@@ -3,7 +3,7 @@ package flight._js;
 
 typedef LayoutResolutionExplanation = {
   var actualLength:Float;
-  var kind:String;
+  var kind:flight.LayoutResolutionFailureKind;
   var nodeIndex:Float;
   var parentIndex:Float;
   var requiredLength:Float;

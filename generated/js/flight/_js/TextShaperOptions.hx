@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef TextShaperOptions = {
-  @:optional var direction:Dynamic;
+  @:optional var direction:flight.TextDirection;
   @:optional var features:Array<flight.TextFeature>;
   @:optional var language:String;
   @:optional var script:String;

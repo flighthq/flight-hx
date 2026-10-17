@@ -4,7 +4,7 @@ package flight;
 #if flight_hx
 typedef ShapeBoundsCommand = flight._hx.ShapeBoundsCommand;
 #elseif (js && flight_esm)
-typedef ShapeBoundsCommand<K:Dynamic = Dynamic> = flight._js.ShapeBoundsCommand<K>;
+typedef ShapeBoundsCommand<K:flight.ShapeCommandKey = flight.ShapeCommandKey> = flight._js.ShapeBoundsCommand<K>;
 #elseif cpp
 typedef ShapeBoundsCommand = flight._cpp.ShapeBoundsCommand;
 #elseif js

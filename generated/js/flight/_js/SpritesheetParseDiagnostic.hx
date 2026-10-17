@@ -5,5 +5,5 @@ typedef SpritesheetParseDiagnostic = {
   @:optional var frameName:String;
   @:optional var field:String;
   var message:String;
-  var severity:Dynamic;
+  var severity:flight.SpritesheetParseDiagnosticSeverity;
 };

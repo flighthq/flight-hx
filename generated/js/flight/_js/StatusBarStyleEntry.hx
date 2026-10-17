@@ -2,9 +2,9 @@
 package flight._js;
 
 typedef StatusBarStyleEntry = {
-  @:optional var animation:Dynamic;
+  @:optional var animation:flight.StatusBarAnimation;
   @:optional var color:Float;
   @:optional var overlaysContent:Bool;
-  @:optional var style:Dynamic;
+  @:optional var style:flight.StatusBarStyle;
   @:optional var visible:Bool;
 };

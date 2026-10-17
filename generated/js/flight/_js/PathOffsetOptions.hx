@@ -2,8 +2,8 @@
 package flight._js;
 
 typedef PathOffsetOptions = {
-  @:optional var join:Dynamic;
-  @:optional var end:Dynamic;
+  @:optional var join:flight.PathOffsetJoin;
+  @:optional var end:flight.PathOffsetEnd;
   @:optional var miterLimit:Float;
   @:optional var tolerance:Float;
   @:optional var arcTolerance:Float;

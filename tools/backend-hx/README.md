@@ -7,7 +7,8 @@ The Haxe backend itself lives in `flight-compiler`. This directory owns only fli
 The integration also owns the boundaries that only a consumer repository can verify:
 
 - compiler-emitted JS externs receive public `flight.*` type aliases and are filtered to values actually exported from each package's `/contract` source graph;
-- narrow Haxe compatibility corrections remain named in each manifest;
+- narrow Haxe compatibility corrections remain named in each manifest, include exact per-file
+  application counts, and fail generation when their expected inputs drift;
 - all emitted transpiled files must pass a compiler callback using pinned Haxe 4.3.7 before output is accepted;
 - `--check` builds candidate trees in temporary directories and rejects byte drift.
 

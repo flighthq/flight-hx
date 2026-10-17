@@ -4,6 +4,6 @@ package flight._js;
 typedef NodeTraits = {
   var data:Null<flight.NodeData>;
   var enabled:Bool;
-  var kind:String;
+  var kind:flight.Kind;
   var name:Null<String>;
 };

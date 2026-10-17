@@ -7,7 +7,7 @@ typedef LottieRectangleShapeItem = {
   @:optional var nm:String;
   var ty:String;
   @:optional var d:Dynamic;
-  var p:Dynamic;
-  var r:Dynamic;
-  var s:Dynamic;
+  var p:flight.LottieAnimatable<Array<Float>>;
+  var r:flight.LottieAnimatable<Float>;
+  var s:flight.LottieAnimatable<Array<Float>>;
 };

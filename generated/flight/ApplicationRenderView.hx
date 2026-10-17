@@ -4,7 +4,7 @@ package flight;
 #if flight_hx
 typedef ApplicationRenderView = flight._hx.ApplicationRenderView;
 #elseif (js && flight_esm)
-typedef ApplicationRenderView = flight._js.ApplicationRenderView;
+typedef ApplicationRenderView<State:flight.RenderState = flight.RenderState, Target:flight.RenderTargetDimensions = flight.RenderTargetDimensions> = flight._js.ApplicationRenderView<State, Target>;
 #elseif cpp
 typedef ApplicationRenderView = flight._cpp.ApplicationRenderView;
 #elseif js

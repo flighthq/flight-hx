@@ -2,9 +2,9 @@
 package flight._js;
 
 typedef BidiClassBackendExplanation = {
-  var backend:Dynamic;
+  var backend:flight.BidiClassBackendKind;
   var coverage:Dynamic;
   var coveredCodePointRanges:Array<flight.BidiCodePointRange>;
-  var fallbackClass:Null<Dynamic>;
+  var fallbackClass:Null<flight.BidiClass>;
   var tableValid:Null<Bool>;
 };

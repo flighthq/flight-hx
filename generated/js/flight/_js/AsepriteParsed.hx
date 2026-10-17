@@ -3,5 +3,5 @@ package flight._js;
 
 typedef AsepriteParsed = {
   var data:flight.SpritesheetData;
-  var document:Dynamic;
+  var document:flight.AsepriteDocument;
 };

@@ -5,16 +5,16 @@ package flight._js._fn;
 @:jsImport("@flighthq/share/contract")
 extern class Share {
   static function attachShareSignals(signals:flight.ShareSignals):Void;
-  static function canShareContent(host:flight.HasShareContent, content:Dynamic):Bool;
+  static function canShareContent(host:flight.HasShareContent, content:flight.ShareContent):Bool;
   static function canShareFiles(host:flight.HasShareFiles, files:Array<flight.ShareFile>):Bool;
   static function detachShareSignals(signals:flight.ShareSignals):Void;
   static function disposeShareSignals(signals:flight.ShareSignals):Void;
   static function enableShareSignals():flight.ShareSignals;
-  static function hasShareContentFields(content:Dynamic):Bool;
-  static function initializeShareSignals(out:flight.ShareSignals):Void;
+  static function hasShareContentFields(content:flight.ShareContent):Bool;
+  static function initializeShareSignals(out:flight.EntityConstruction<flight.ShareSignals>):Void;
   static function isShareFileValid(file:flight.ShareFile):Bool;
-  static function shareContent(host:flight.HasShareContent, content:Dynamic):flight._internal._Promise<Bool>;
-  static function shareContentWithResult(host:flight.HasShareContent, content:Dynamic):flight._internal._Promise<flight.ShareResult>;
+  static function shareContent(host:flight.HasShareContent, content:flight.ShareContent):flight._internal._Promise<Bool>;
+  static function shareContentWithResult(host:flight.HasShareContent, content:flight.ShareContent):flight._internal._Promise<flight.ShareResult>;
   static function shareFiles(host:flight.HasShareFiles, files:Array<flight.ShareFile>):flight._internal._Promise<Bool>;
   static function shareText(host:flight.HasShareContent, text:String):flight._internal._Promise<Bool>;
   static function shareUrl(host:flight.HasShareContent, url:String):flight._internal._Promise<Bool>;

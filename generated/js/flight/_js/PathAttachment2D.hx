@@ -9,5 +9,5 @@ typedef PathAttachment2D = {
   var pointCount:Float;
   @:optional var skin:Null<flight.Skin2D>;
   @:optional var vertices:Null<flight._internal._Float32Array>;
-  var winding:Dynamic;
+  var winding:flight.PathWinding;
 };

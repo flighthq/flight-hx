@@ -20,7 +20,7 @@ extern class App {
   static function detachApp(app:flight.App):Void;
   static function disposeApp(app:flight.App):Void;
   static function focusApp(host:flight.HasAppFocus):Void;
-  static function getAppDirectoryPath(host:flight.HasAppPath, kind:Dynamic):String;
+  static function getAppDirectoryPath(host:flight.HasAppPath, kind:flight.AppPathKind):String;
   static function getAppExecutablePath(host:flight.HasAppPath):String;
   static function getAppLocale(host:flight.HasAppLocale):String;
   static function getAppLoginItem(host:flight.HasAppLoginItem):flight.AppLoginItem;
@@ -31,14 +31,14 @@ extern class App {
   static function getAppVersion(host:flight.HasAppVersion):String;
   static function hasAppSingleInstanceLock(host:flight.HasAppSingleInstance):Bool;
   static function hideApp(host:flight.HasAppHide):Void;
-  static function initializeApp(out:flight.App):Void;
+  static function initializeApp(out:flight.EntityConstruction<flight.App>):Void;
   static function isAppHidden(host:flight.HasAppHiddenQuery):Bool;
   static function quitApp(host:flight.HasAppQuit):Void;
   static function relaunchApp(host:flight.HasAppRelaunch):Void;
   static function releaseAppSingleInstanceLock(host:flight.HasAppSingleInstance):Void;
   static function requestAppAttention(host:flight.HasAppDock, critical:Bool):Float;
   static function requestAppSingleInstanceLock(host:flight.HasAppSingleInstance):Bool;
-  static function setAppActivationPolicy(host:flight.HasAppActivationPolicy, policy:Dynamic):Void;
+  static function setAppActivationPolicy(host:flight.HasAppActivationPolicy, policy:flight.AppActivationPolicy):Void;
   static function setAppBadgeCount(host:flight.HasAppBadge, count:Float):flight._internal._Promise<Bool>;
   static function setAppDockBadge(host:flight.HasAppDock, text:String):Void;
   static function setAppDockMenu(host:flight.HasAppDock, items:Array<flight.MenuItemTemplate>):Void;

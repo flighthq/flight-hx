@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef AnimationCrossfadeOptions = {
-  @:optional var curve:(Float)->Float;
+  @:optional var curve:flight.EasingFunction;
 };

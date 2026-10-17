@@ -6,10 +6,10 @@ typedef EmissiveMaterial = {
   var kind:String;
   @:optional var name:Null<String>;
   var alphaCutoff:Float;
-  var alphaMode:Dynamic;
-  var blendMode:String;
+  var alphaMode:flight.MaterialAlphaMode;
+  var blendMode:flight.BlendMode;
   var doubleSided:Bool;
   var emissive:Float;
-  var emissiveMap:Null<Dynamic>;
+  var emissiveMap:Null<flight.Texture>;
   var emissiveStrength:Float;
 };

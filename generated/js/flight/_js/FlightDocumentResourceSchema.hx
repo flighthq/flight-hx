@@ -3,5 +3,5 @@ package flight._js;
 
 typedef FlightDocumentResourceSchema = {
   var fields:Array<flight.FlightDocumentFieldSchema>;
-  var kind:String;
+  var kind:flight.Kind;
 };

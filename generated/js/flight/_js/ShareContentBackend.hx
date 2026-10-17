@@ -3,7 +3,7 @@ package flight._js;
 
 typedef ShareContentBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function canShareContent(content:Dynamic):Bool;
-  function shareContent(content:Dynamic):flight._internal._Promise<Bool>;
-  function shareContentWithResult(content:Dynamic):flight._internal._Promise<flight.ShareResult>;
+  function canShareContent(content:flight.ShareContent):Bool;
+  function shareContent(content:flight.ShareContent):flight._internal._Promise<Bool>;
+  function shareContentWithResult(content:flight.ShareContent):flight._internal._Promise<flight.ShareResult>;
 };

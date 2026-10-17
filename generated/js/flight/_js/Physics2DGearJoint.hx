@@ -3,7 +3,7 @@ package flight._js;
 
 typedef Physics2DGearJoint = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var kind:String;
+  var kind:flight.Physics2DJointKind;
   var bodyA:Float;
   var bodyB:Float;
   var localAnchorAX:Float;
@@ -20,8 +20,8 @@ typedef Physics2DGearJoint = {
   var rBY:Float;
   var breakForce:Float;
   var breakTorque:Float;
-  var coordinateA:Dynamic;
-  var coordinateB:Dynamic;
+  var coordinateA:flight.Physics2DGearCoordinateKind;
+  var coordinateB:flight.Physics2DGearCoordinateKind;
   var axisAX:Float;
   var axisAY:Float;
   var axisBX:Float;

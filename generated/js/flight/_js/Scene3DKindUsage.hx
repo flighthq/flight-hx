@@ -3,9 +3,9 @@ package flight._js;
 
 typedef Scene3DKindUsage = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var materialKinds:Array<String>;
-  var modifierKinds:Array<String>;
-  var nodeKinds:Array<String>;
+  var materialKinds:Array<flight.Kind>;
+  var modifierKinds:Array<flight.Kind>;
+  var nodeKinds:Array<flight.Kind>;
   var resourceMimeTypes:Array<String>;
-  var textureSourceKinds:Array<String>;
+  var textureSourceKinds:Array<flight.TextureSourceKind>;
 };

@@ -11,8 +11,8 @@ typedef Physics2DGearJointOptions = {
   @:optional var collideConnected:Bool;
   @:optional var breakForce:Float;
   @:optional var breakTorque:Float;
-  var coordinateA:Dynamic;
-  var coordinateB:Dynamic;
+  var coordinateA:flight.Physics2DGearCoordinateKind;
+  var coordinateB:flight.Physics2DGearCoordinateKind;
   var constant:Float;
   @:optional var axisAX:Float;
   @:optional var axisAY:Float;

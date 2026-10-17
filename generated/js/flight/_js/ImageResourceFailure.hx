@@ -3,7 +3,7 @@ package flight._js;
 
 typedef ImageResourceFailure = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var kind:String;
+  var kind:flight.ImageResourceFailureKind;
   var message:String;
   var name:Null<String>;
 };

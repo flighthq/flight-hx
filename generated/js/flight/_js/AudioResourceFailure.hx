@@ -3,7 +3,7 @@ package flight._js;
 
 typedef AudioResourceFailure = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var kind:String;
+  var kind:flight.AudioResourceFailureKind;
   var message:String;
   var name:Null<String>;
 };

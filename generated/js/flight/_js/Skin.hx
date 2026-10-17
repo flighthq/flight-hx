@@ -3,5 +3,5 @@ package flight._js;
 
 typedef Skin = {
   var skeleton:flight.Skeleton3D;
-  @:optional var skeletonRoot:Null<Dynamic>;
+  @:optional var skeletonRoot:Null<flight.Node3D>;
 };

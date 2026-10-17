@@ -3,6 +3,6 @@ package flight._js;
 
 typedef Scene2DImageResourceLoadProgress = {
   var loaded:Float;
-  var reference:Dynamic;
+  var reference:flight.ImageResourceReference;
   var total:Float;
 };

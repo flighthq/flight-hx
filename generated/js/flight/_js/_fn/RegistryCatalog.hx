@@ -6,9 +6,9 @@ package flight._js._fn;
 extern class RegistryCatalog {
   static var BUILT_IN_REGISTRY_CATALOG_ENTRIES:Array<flight.RegistryCatalogEntry>;
   static function createRegistryCatalog(?entries:Array<flight.RegistryCatalogEntry>):flight.RegistryCatalog;
-  static function findRegistryCatalogEntries(catalog:flight.RegistryCatalog, backend:String, facet:Dynamic, kind:String):Array<flight.RegistryCatalogEntry>;
+  static function findRegistryCatalogEntries(catalog:flight.RegistryCatalog, backend:String, facet:flight.RequirementFacet, kind:flight.Kind):Array<flight.RegistryCatalogEntry>;
   static function getRegistryCatalogEntries(catalog:flight.RegistryCatalog):Array<flight.RegistryCatalogEntry>;
-  static function initializeRegistryCatalog(out:flight.RegistryCatalog, ?entries:Array<flight.RegistryCatalogEntry>):Void;
+  static function initializeRegistryCatalog(out:flight.EntityConstruction<flight.RegistryCatalog>, ?entries:Array<flight.RegistryCatalogEntry>):Void;
   static function registerRegistryCatalogEntry(catalog:flight.RegistryCatalog, entry:flight.RegistryCatalogEntry):Void;
   static function unregisterRegistryCatalogEntry(catalog:flight.RegistryCatalog, entry:flight.RegistryCatalogEntry):Bool;
 }

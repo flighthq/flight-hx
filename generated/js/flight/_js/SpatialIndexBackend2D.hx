@@ -2,13 +2,13 @@
 package flight._js;
 
 typedef SpatialIndexBackend2D = {
-  function insertSpatialObject(id:Float, bounds:flight.SpatialAabb2D):Bool;
-  function updateSpatialObject(id:Float, bounds:flight.SpatialAabb2D):Bool;
-  function removeSpatialObject(id:Float):Void;
+  function insertSpatialObject(id:flight.SpatialObjectId, bounds:flight.SpatialAabb2D):Bool;
+  function updateSpatialObject(id:flight.SpatialObjectId, bounds:flight.SpatialAabb2D):Bool;
+  function removeSpatialObject(id:flight.SpatialObjectId):Void;
   function clearSpatialIndex():Void;
-  function explainSpatialIndexing(id:Float):flight.SpatialIndexingExplanation;
+  function explainSpatialIndexing(id:flight.SpatialObjectId):flight.SpatialIndexingExplanation;
   function querySpatialPairs(out:Array<flight.SpatialPair>):Void;
-  function querySpatialRegion(region:flight.SpatialAabb2D, out:Array<Float>):Void;
-  function querySpatialPoint(x:Float, y:Float, out:Array<Float>):Void;
-  function querySpatialRay(x:Float, y:Float, dx:Float, dy:Float, out:Array<Float>):Void;
+  function querySpatialRegion(region:flight.SpatialAabb2D, out:Array<flight.SpatialObjectId>):Void;
+  function querySpatialPoint(x:Float, y:Float, out:Array<flight.SpatialObjectId>):Void;
+  function querySpatialRay(x:Float, y:Float, dx:Float, dy:Float, out:Array<flight.SpatialObjectId>):Void;
 };

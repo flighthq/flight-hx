@@ -3,6 +3,6 @@ package flight._js;
 
 typedef PowerIdleBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function getIdleState(thresholdSeconds:Float):Dynamic;
+  function getIdleState(thresholdSeconds:Float):flight.PowerIdleState;
   function getIdleTimeSeconds():Float;
 };

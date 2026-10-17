@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef NotificationPermissionBackend = {
-  function getPermission():flight._internal._Promise<Dynamic>;
-  function requestPermission():flight._internal._Promise<{ reason:Dynamic }>;
+  function getPermission():flight._internal._Promise<flight.NotificationPermissionQueryOutcome>;
+  function requestPermission():flight._internal._Promise<flight.NotificationPermissionRequestOutcome>;
 };

@@ -12,7 +12,7 @@ extern class Clock {
   static function enableClockSignals(clock:flight.Clock):flight.Signal<(Float)->Void>;
   static function getClockEffectiveScale(clock:flight.Clock):Float;
   static function getClockParent(clock:flight.Clock):Null<flight.Clock>;
-  static function initializeClock(out:flight.Clock, ?options:flight.ClockOptions):Void;
+  static function initializeClock(out:flight.EntityConstruction<flight.Clock>, ?options:flight.ClockOptions):Void;
   static function isClockEffectivelyPaused(clock:flight.Clock):Bool;
   static function pauseClock(clock:flight.Clock):Void;
   static function removeClockChild(parent:flight.Clock, child:flight.Clock):Void;

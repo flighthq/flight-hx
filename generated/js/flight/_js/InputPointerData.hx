@@ -12,14 +12,14 @@ typedef InputPointerData = {
   var isPrimary:Bool;
   var metaKey:Bool;
   var pointerId:Float;
-  var pointerType:Dynamic;
+  var pointerType:flight.PointerType;
   var pressure:Float;
   var shiftKey:Bool;
   var tiltX:Float;
   var tiltY:Float;
   var timeStamp:Float;
   var twist:Float;
-  var wheelMode:Dynamic;
+  var wheelMode:flight.MouseWheelMode;
   var width:Float;
   var x:Float;
   var y:Float;

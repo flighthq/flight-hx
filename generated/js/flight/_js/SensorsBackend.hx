@@ -3,7 +3,7 @@ package flight._js;
 
 typedef SensorsBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function getPermissionState(?sensor:Dynamic):flight._internal._Promise<Dynamic>;
+  function getPermissionState(?sensor:Dynamic):flight._internal._Promise<flight.SensorsPermissionState>;
   function isAmbientLightSupported():Bool;
   function isBarometerSupported():Bool;
   function isGravitySupported():Bool;

@@ -8,5 +8,5 @@ typedef LottieShapePathItem = {
   var ty:String;
   @:optional var d:Dynamic;
   @:optional var ind:Float;
-  var ks:Dynamic;
+  var ks:flight.LottieAnimatable<flight.LottieShapePath>;
 };

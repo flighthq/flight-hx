@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef Scene3DResourceResolverOptions = {
-  @:optional var fetch:(flight.ExternalImageResourceReference, js.html.AbortSignal)->flight._internal._Promise<Null<flight.ImageResource>>;
+  @:optional var fetch:flight.ImageResourceFetch;
   @:optional var maxConcurrent:Float;
   @:optional var registry:flight.Scene3DMaterialTextureRegistry;
 };

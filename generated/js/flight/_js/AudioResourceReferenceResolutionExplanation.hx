@@ -3,7 +3,7 @@ package flight._js;
 
 typedef AudioResourceReferenceResolutionExplanation = {
   var failure:Null<flight.AudioResourceFailure>;
-  var kind:String;
+  var kind:flight.AudioResourceReferenceKind;
   var retryable:Bool;
-  var state:Dynamic;
+  var state:flight.ResourceResolutionState;
 };

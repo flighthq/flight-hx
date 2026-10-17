@@ -5,7 +5,7 @@ typedef AnimationPlayer = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var clip:flight.AnimationClip;
   var loop:Bool;
-  @:optional var loopMode:Dynamic;
+  @:optional var loopMode:flight.AnimationLoopMode;
   @:optional var onEvent:Null<flight.Signal<(flight.AnimationClipEvent)->Void>>;
   @:optional var onFinished:Null<flight.Signal<()->Void>>;
   @:optional var onLooped:Null<flight.Signal<()->Void>>;

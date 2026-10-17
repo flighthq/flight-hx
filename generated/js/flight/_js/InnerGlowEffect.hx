@@ -9,6 +9,6 @@ typedef InnerGlowEffect = {
   @:optional var blurY:Float;
   @:optional var color:Float;
   @:optional var quality:Float;
-  @:optional var sourceMode:Dynamic;
+  @:optional var sourceMode:flight.InnerEffectSourceMode;
   @:optional var strength:Float;
 };

@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef TextureContainerParseExplanation = {
-  var container:Null<Dynamic>;
-  var reason:Dynamic;
+  var container:Null<flight.TextureContainerKind>;
+  var reason:flight.TextureContainerParseFailureReason;
 };

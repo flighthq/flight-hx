@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef UpdateScene3DResourceStreamingOptions = {
-  @:optional function select(texture:Dynamic, ref:Dynamic):Bool;
-  @:optional function priority(texture:Dynamic, ref:Dynamic):Float;
+  @:optional function select(texture:flight.Texture, ref:flight.ImageResourceReference):Bool;
+  @:optional function priority(texture:flight.Texture, ref:flight.ImageResourceReference):Float;
 };

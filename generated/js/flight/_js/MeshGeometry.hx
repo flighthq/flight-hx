@@ -7,7 +7,7 @@ typedef MeshGeometry = {
   var indices:Dynamic;
   var layout:flight.VertexAttributeLayout;
   var subsets:Array<flight.MeshSubset>;
-  var topology:Dynamic;
+  var topology:flight.PrimitiveTopology;
   var version:Float;
-  var vertices:flight._internal._Float32Array<haxe.io.Bytes>;
+  var vertices:flight._internal._Float32Array<flight._internal._ArrayBuffer>;
 };

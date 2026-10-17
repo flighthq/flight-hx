@@ -2,9 +2,9 @@
 package flight._js;
 
 typedef ComboBoxControllerOptions = {
-  @:optional var transition:flight.NodeInteractiveStateTransition<Dynamic, Dynamic>;
+  @:optional var transition:flight.GuiTransitionDescriptor;
   var button:flight.ButtonController;
-  @:optional var display:Dynamic;
+  @:optional var display:flight.Node2D;
   var list:flight.ListController;
   @:optional var open:Bool;
 };

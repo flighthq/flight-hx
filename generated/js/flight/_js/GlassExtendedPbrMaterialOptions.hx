@@ -3,9 +3,9 @@ package flight._js;
 
 typedef GlassExtendedPbrMaterialOptions = {
   @:optional var alphaCutoff:Float;
-  @:optional var alphaMode:Dynamic;
-  @:optional var blendMode:String;
+  @:optional var alphaMode:flight.MaterialAlphaMode;
+  @:optional var blendMode:flight.BlendMode;
   @:optional var doubleSided:Bool;
-  @:optional var standard:flight.StandardPbrMaterialProperties;
-  @:optional var transmissionVolume:flight.TransmissionVolumePbrExtension;
+  @:optional var standard:Dynamic;
+  @:optional var transmissionVolume:Dynamic;
 };

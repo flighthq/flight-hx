@@ -2,8 +2,8 @@
 package flight._js;
 
 typedef Scene2DKindUsage = {
-  var blendModes:Array<String>;
-  var materialKinds:Array<String>;
-  var nodeKinds:Array<String>;
+  var blendModes:Array<flight.BlendMode>;
+  var materialKinds:Array<flight.Kind>;
+  var nodeKinds:Array<flight.Kind>;
   var shapeCommandKeys:Array<String>;
 };

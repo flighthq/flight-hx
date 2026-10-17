@@ -3,6 +3,6 @@ package flight._js;
 
 typedef Physics3DAbiContactHooks = {
   var buffer:flight.Physics3DAbiContactBuffer;
-  var preSolve:Null<(flight.Physics3DAbiContactBuffer)->Void>;
-  var postSolve:Null<(flight.Physics3DAbiContactBuffer)->Void>;
+  var preSolve:Null<flight.Physics3DAbiContactHook>;
+  var postSolve:Null<flight.Physics3DAbiContactHook>;
 };

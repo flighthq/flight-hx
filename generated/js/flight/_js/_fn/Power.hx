@@ -4,7 +4,7 @@ package flight._js._fn;
 
 @:jsImport("@flighthq/power/contract")
 extern class Power {
-  static function acquirePowerKeepAwake(host:flight.HasPowerKeepAwake, ?mode:Dynamic):flight._internal._Promise<flight.PowerKeepAwakeAcquireResult>;
+  static function acquirePowerKeepAwake(host:flight.HasPowerKeepAwake, ?mode:flight.PowerKeepAwakeMode):flight._internal._Promise<flight.PowerKeepAwakeAcquireResult>;
   static function attachPower(host:flight.PowerAttachHost, power:flight.Power, ?idleThresholdSeconds:Float):Void;
   static function createPower():flight.Power;
   static function destroyPowerKeepAwake(...hosts:flight.HasPowerKeepAwake):Void;
@@ -14,10 +14,10 @@ extern class Power {
   static function getPowerBatteryHealth(host:{ power:{ batteryHealth:{ getBatteryHealth:(flight.PowerBatteryHealth)->flight.PowerBatteryHealth } } }, out:flight.PowerBatteryHealth):flight.PowerBatteryHealth;
   static function getPowerIdlePollingIntervalMs():Float;
   static function getPowerStatus(host:flight.HasPowerStatus, out:flight.PowerStatus):flight.PowerStatus;
-  static function getPowerSystemIdleState(host:flight.HasPowerIdle, thresholdSeconds:Float):Dynamic;
+  static function getPowerSystemIdleState(host:flight.HasPowerIdle, thresholdSeconds:Float):flight.PowerIdleState;
   static function getPowerSystemIdleTime(host:flight.HasPowerIdle):Float;
-  static function getPowerThermalState(host:flight.HasPowerThermal):Dynamic;
-  static function initializePower(out:flight.Power):Void;
+  static function getPowerThermalState(host:flight.HasPowerThermal):flight.PowerThermalState;
+  static function initializePower(out:flight.EntityConstruction<flight.Power>):Void;
   static function isPowerKeepAwakeActive(host:flight.HasPowerKeepAwake):Bool;
   static function makePowerBatteryHealth():flight.PowerBatteryHealth;
   static function makePowerStatus():flight.PowerStatus;

@@ -3,5 +3,5 @@ package flight._js;
 
 typedef TrayMenuBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function set(tray:flight.TrayIcon, items:Array<flight.MenuItemTemplate>):flight._internal._Promise<Dynamic>;
+  function set(tray:flight.TrayIcon, items:Array<flight.MenuItemTemplate>):flight._internal._Promise<flight.TrayMenuUpdateResult>;
 };

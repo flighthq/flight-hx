@@ -4,9 +4,9 @@ package flight._js;
 typedef Sampler = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var anisotropy:Float;
-  var magFilter:Dynamic;
-  var minFilter:Dynamic;
+  var magFilter:flight.TextureFilter;
+  var minFilter:flight.TextureFilter;
   var mipmaps:Bool;
-  var wrapU:Dynamic;
-  var wrapV:Dynamic;
+  var wrapU:flight.TextureWrap;
+  var wrapV:flight.TextureWrap;
 };

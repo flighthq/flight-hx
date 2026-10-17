@@ -3,5 +3,5 @@ package flight._js;
 
 typedef FlightDocumentInteractiveStateExtensionDescriptor = {
   var fields:flight.FlightDocumentFields;
-  var kind:String;
+  var kind:flight.Kind;
 };

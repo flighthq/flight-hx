@@ -3,7 +3,7 @@ package flight._js;
 
 typedef FlightDocumentScene2DMaterialization = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var interactiveStateBindings:Array<flight.FlightDocumentInteractiveStateBinding<Dynamic>>;
-  var layoutBindings:Array<flight.FlightDocumentLayoutBinding<Dynamic>>;
+  var interactiveStateBindings:Array<flight.FlightDocumentInteractiveStateBinding<flight.Node2D>>;
+  var layoutBindings:Array<flight.FlightDocumentLayoutBinding<flight.Node2D>>;
   var scene:flight.Scene2D;
 };

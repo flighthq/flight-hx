@@ -4,29 +4,29 @@ package flight._js._fn;
 
 @:jsImport("@flighthq/entity/contract")
 extern class Entity {
-  static function allocateEntity<Type:flight.Entity>():Type;
+  static function allocateEntity<Type>():flight.EntityConstruction<Type>;
   static function areEntityRuntimeGuardsEnabled():Bool;
   static function attachEntityBinding(entity:flight.Entity, binding:Dynamic):Void;
-  static function cloneEntity<Type:flight.Entity>(source:Type):Type;
+  static function cloneEntity<Type>(source:Type):Type;
   static function createEntityRuntime():flight.EntityRuntime;
   static function createGuardedEntity<Type:Dynamic>(entity:Dynamic):Dynamic;
   static function createGuardedEntityRuntime(runtime:flight.EntityRuntime):flight.EntityRuntime;
-  static function createHost<Capabilities:flight.Host>(?capabilities:Capabilities):Dynamic;
+  static function createHost<Capabilities:Dynamic>(?capabilities:Capabilities):Dynamic;
   static function detachEntityBinding(entity:flight.Entity):Void;
   static function disableEntityRuntimeGuards():Void;
-  static function enableEntityRuntimeGuards(report:(Dynamic)->Void):Void;
-  static function explainEntityRuntimeWrite(slot:Dynamic):flight.EntityRuntimeWriteExplanation;
-  static function finishEntity<Type:flight.Entity>(out:Type):Type;
+  static function enableEntityRuntimeGuards(report:flight.EntityRuntimeWriteGuard):Void;
+  static function explainEntityRuntimeWrite(slot:flight.EntityRuntimeWriteSlot):flight.EntityRuntimeWriteExplanation;
+  static function finishEntity<Type>(out:flight.EntityConstruction<Type>):Type;
   static function getEntityBinding(source:flight.Entity):Null<Dynamic>;
   static function getEntityBindingAs<Type>(source:flight.Entity):Null<Type>;
   static function getEntityRuntime(source:flight.Entity):flight.EntityRuntime;
   static function getEntityUid(source:flight.Entity):String;
   static function hasEntityBinding(source:flight.Entity):Bool;
   static function hasEntityRuntime(source:flight.Entity):Bool;
-  static function initializeHost<Capabilities:flight.Host>(out:Dynamic, capabilities:Capabilities):Void;
+  static function initializeHost<Capabilities:Dynamic>(out:flight.EntityConstruction<Dynamic>, capabilities:Capabilities):Void;
   static function setEntityRuntimeGuardMode(enabled:Bool):Void;
-  static function setEntityRuntimeWriteGuard(guard:Null<(Dynamic)->Void>):Void;
+  static function setEntityRuntimeWriteGuard(guard:Null<flight.EntityRuntimeWriteGuard>):Void;
   static function setEntityUid(source:flight.Entity, uid:String):Void;
-  static function stripEntityRuntime<Type:flight.Entity>(source:Type):Type;
+  static function stripEntityRuntime<Type>(source:Type):flight.EntityWithoutRuntime<Type>;
 }
 #end

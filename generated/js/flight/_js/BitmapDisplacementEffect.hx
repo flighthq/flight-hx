@@ -5,9 +5,9 @@ typedef BitmapDisplacementEffect = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var kind:String;
   var map:Null<flight.Texture2D>;
-  @:optional var componentX:Float;
-  @:optional var componentY:Float;
+  @:optional var componentX:flight.ImageChannel;
+  @:optional var componentY:flight.ImageChannel;
   @:optional var scaleX:Float;
   @:optional var scaleY:Float;
-  @:optional var edgeMode:Dynamic;
+  @:optional var edgeMode:flight.BitmapDisplacementEffectEdgeMode;
 };

@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef ShapeRunOptions = {
-  @:optional var direction:Dynamic;
+  @:optional var direction:flight.TextDirection;
   @:optional var script:String;
 };

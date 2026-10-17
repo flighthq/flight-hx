@@ -4,11 +4,11 @@ package flight._js._fn;
 
 @:jsImport("@flighthq/accessibility/contract")
 extern class Accessibility {
-  static function announceAccessibility(host:flight.HasAccessibilityProvider, message:String, ?liveness:Dynamic):Dynamic;
-  static function clearAccessibilityTree(host:flight.HasAccessibilityProvider):Dynamic;
+  static function announceAccessibility(host:flight.HasAccessibilityProvider, message:String, ?liveness:flight.AccessibilityLiveness):flight.AccessibilityOperationOutcome<Dynamic>;
+  static function clearAccessibilityTree(host:flight.HasAccessibilityProvider):flight.AccessibilityOperationOutcome<Dynamic>;
   static function destroyAccessibility(host:flight.HasAccessibilityProvider):Void;
-  static function removeAccessibilityNode(host:flight.HasAccessibilityProvider, id:String):Dynamic;
-  static function setAccessibilityFocus(host:flight.HasAccessibilityProvider, id:String):Dynamic;
-  static function setAccessibilityNode(host:flight.HasAccessibilityProvider, node:flight.AccessibilityNode):Dynamic;
+  static function removeAccessibilityNode(host:flight.HasAccessibilityProvider, id:String):flight.AccessibilityOperationOutcome<Dynamic>;
+  static function setAccessibilityFocus(host:flight.HasAccessibilityProvider, id:String):flight.AccessibilityOperationOutcome<Dynamic>;
+  static function setAccessibilityNode(host:flight.HasAccessibilityProvider, node:flight.AccessibilityNode):flight.AccessibilityOperationOutcome<Dynamic>;
 }
 #end

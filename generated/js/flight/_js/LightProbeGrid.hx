@@ -3,8 +3,8 @@ package flight._js;
 
 typedef LightProbeGrid = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var bounds:{ max:flight.Vector3, min:flight.Vector3 };
+  var bounds:flight.AabbLike;
   var enabled:Bool;
   var probes:Array<flight.LightProbe>;
-  var resolution:flight.Vector3;
+  var resolution:flight.Vector3Like;
 };

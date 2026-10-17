@@ -3,6 +3,6 @@ package flight._js;
 
 typedef Modifier = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var kind:String;
-  var slot:String;
+  var kind:flight.ModifierKind;
+  var slot:flight.ModifierSlot;
 };

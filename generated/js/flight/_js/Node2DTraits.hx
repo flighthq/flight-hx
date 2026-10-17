@@ -4,11 +4,11 @@ package flight._js;
 typedef Node2DTraits = {
   var data:Null<flight.Node2DData>;
   var enabled:Bool;
-  var kind:String;
+  var kind:flight.Kind;
   var name:Null<String>;
   var alpha:Float;
   var visible:Bool;
-  var blendMode:Null<String>;
+  var blendMode:Null<flight.BlendMode>;
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var clip:Null<flight.ClipRegion>;
   var material:Null<flight.Material>;

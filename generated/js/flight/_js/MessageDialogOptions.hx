@@ -6,7 +6,7 @@ typedef MessageDialogOptions = {
   var message:String;
   @:optional var detail:String;
   @:optional var buttons:Array<String>;
-  @:optional var kind:Dynamic;
+  @:optional var kind:flight.MessageDialogKind;
   @:optional var checkboxLabel:String;
   @:optional var checkboxChecked:Bool;
   @:optional var defaultId:Float;

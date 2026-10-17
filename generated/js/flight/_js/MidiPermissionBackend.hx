@@ -3,5 +3,5 @@ package flight._js;
 
 typedef MidiPermissionBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function getPermission():flight._internal._Promise<Dynamic>;
+  function getPermission():flight._internal._Promise<flight.PermissionQueryOutcome>;
 };

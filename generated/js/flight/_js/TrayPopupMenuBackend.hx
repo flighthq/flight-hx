@@ -3,5 +3,5 @@ package flight._js;
 
 typedef TrayPopupMenuBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function popup(tray:flight.TrayIcon, ?position:flight.Vector2):flight._internal._Promise<Dynamic>;
+  function popup(tray:flight.TrayIcon, ?position:flight.Vector2Like):flight._internal._Promise<flight.TrayPopupMenuResult>;
 };

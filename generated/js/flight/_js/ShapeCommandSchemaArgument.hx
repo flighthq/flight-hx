@@ -3,5 +3,5 @@ package flight._js;
 
 typedef ShapeCommandSchemaArgument = {
   var name:String;
-  var type:Dynamic;
+  var type:flight.ShapeCommandSchemaArgumentType;
 };

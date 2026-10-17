@@ -3,7 +3,7 @@ package flight._js;
 
 typedef ParticleDesignerDocument = {
   var maxParticles:Float;
-  var emitterType:Dynamic;
+  var emitterType:flight.ParticleDesignerEmitterType;
   var duration:Float;
   var particleLifespan:Float;
   var particleLifespanVariance:Float;

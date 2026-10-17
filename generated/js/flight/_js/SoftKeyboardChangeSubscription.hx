@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef SoftKeyboardChangeSubscription = {
-  var result:Dynamic;
+  var result:flight.SoftKeyboardAttachResult;
   var unsubscribe:Null<()->Void>;
 };

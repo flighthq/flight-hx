@@ -3,5 +3,5 @@ package flight._js;
 
 typedef PhotoCaptureDialogBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function capture(?options:flight.CapturePhotoDialogOptions):flight._internal._Promise<Dynamic>;
+  function capture(?options:flight.CapturePhotoDialogOptions):flight._internal._Promise<flight.PhotoCaptureDialogResult>;
 };

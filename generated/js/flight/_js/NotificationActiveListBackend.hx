@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef NotificationActiveListBackend = {
-  function getActiveNotifications():flight._internal._Promise<Dynamic>;
+  function getActiveNotifications():flight._internal._Promise<flight.NotificationActiveListOutcome>;
 };

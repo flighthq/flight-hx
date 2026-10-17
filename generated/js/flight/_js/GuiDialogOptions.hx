@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef GuiDialogOptions = {
-  @:optional var transition:flight.NodeInteractiveStateTransition<Dynamic, Dynamic>;
-  @:optional var backdrop:Dynamic;
-  @:optional var focusManager:flight.FocusManager<Dynamic>;
+  @:optional var transition:flight.GuiTransitionDescriptor;
+  @:optional var backdrop:flight.Node2D;
+  @:optional var focusManager:flight.FocusManager<flight.Node2D>;
 };

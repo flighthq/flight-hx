@@ -5,6 +5,6 @@ typedef Environment = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var kind:String;
   var enabled:Bool;
-  var environment:Null<Dynamic>;
+  var environment:Null<flight.Texture>;
   var intensity:Float;
 };

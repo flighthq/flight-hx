@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef Scene3DResourceResolution = {
-  var ref:Dynamic;
-  var textures:Array<Dynamic>;
+  var ref:flight.ImageResourceReference;
+  var textures:Array<flight.Texture>;
   var source:flight.TextureSource;
 };

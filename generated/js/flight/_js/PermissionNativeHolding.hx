@@ -2,8 +2,8 @@
 package flight._js;
 
 typedef PermissionNativeHolding = {
-  var futureClaimingDomain:Dynamic;
-  var id:Dynamic;
+  var futureClaimingDomain:flight.PermissionNativeHoldingId;
+  var id:flight.PermissionNativeHoldingId;
   var mode:Dynamic;
   var permissionNames:Array<String>;
 };

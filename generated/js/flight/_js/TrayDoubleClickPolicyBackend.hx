@@ -3,5 +3,5 @@ package flight._js;
 
 typedef TrayDoubleClickPolicyBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function setIgnore(tray:flight.TrayIcon, ignore:Bool):flight._internal._Promise<Dynamic>;
+  function setIgnore(tray:flight.TrayIcon, ignore:Bool):flight._internal._Promise<flight.TrayDoubleClickPolicyUpdateResult>;
 };

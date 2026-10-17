@@ -3,11 +3,11 @@ package flight._js;
 
 typedef AnimationTrack = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var interpolation:Dynamic;
+  var interpolation:flight.AnimationInterpolation;
   var times:Dynamic;
   var values:Dynamic;
   var components:Float;
   var quaternion:Bool;
-  var easing:Null<(Float)->Float>;
-  var segmentEasings:Null<Array<Null<(Float)->Float>>>;
+  var easing:Null<flight.EasingFunction>;
+  var segmentEasings:Null<Array<Null<flight.EasingFunction>>>;
 };

@@ -12,5 +12,5 @@ typedef GlClassicDefineKey = {
   @:optional var hasSkin:Bool;
   var hasSpecularMap:Bool;
   var hasUvTransform:Bool;
-  var lightingModel:Dynamic;
+  var lightingModel:flight.GlClassicLightingModel;
 };

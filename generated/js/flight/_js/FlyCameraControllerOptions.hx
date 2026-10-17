@@ -5,7 +5,7 @@ typedef FlyCameraControllerOptions = {
   @:optional var maxPitch:Float;
   @:optional var minPitch:Float;
   @:optional var pitch:Float;
-  @:optional var position:flight.Vector3;
+  @:optional var position:flight.Vector3Like;
   @:optional var smoothTime:Float;
   @:optional var yaw:Float;
 };

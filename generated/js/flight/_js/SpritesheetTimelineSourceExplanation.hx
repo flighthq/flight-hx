@@ -3,5 +3,5 @@ package flight._js;
 
 typedef SpritesheetTimelineSourceExplanation = {
   var directionMaterialized:Bool;
-  var unsupportedFields:Array<Dynamic>;
+  var unsupportedFields:Array<flight.SpritesheetTimelineSourceUnsupportedField>;
 };

@@ -3,5 +3,5 @@ package flight._js;
 
 typedef SpriteData = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var texture:Null<Dynamic>;
+  var texture:Null<flight.Texture>;
 };

@@ -4,5 +4,5 @@ package flight._js;
 typedef FlightDocumentInteractiveStateTransitionSchema = {
   function createTransition(fields:flight.FlightDocumentFields):Null<flight.NodeInteractiveStateTransition>;
   var fields:Array<flight.FlightDocumentFieldSchema>;
-  var kind:String;
+  var kind:flight.Kind;
 };

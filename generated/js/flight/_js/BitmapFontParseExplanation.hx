@@ -3,10 +3,10 @@ package flight._js;
 
 typedef BitmapFontParseExplanation = {
   var charCount:Float;
-  var detectedFormat:Dynamic;
+  var detectedFormat:flight.BitmapFontParseExplanationFormat;
   var kerningCount:Float;
   var pageCount:Float;
-  var reason:Dynamic;
+  var reason:flight.BitmapFontParseExplanationReason;
   var success:Bool;
   var unresolvedPages:Array<Float>;
 };

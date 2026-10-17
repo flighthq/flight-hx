@@ -5,8 +5,8 @@ typedef ExternalImageResourceReference = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var failure:Null<flight.ImageResourceFailure>;
   var mimeType:Null<String>;
-  var state:Dynamic;
-  @:optional var textures:Array<Dynamic>;
+  var state:flight.ResourceResolutionState;
+  @:optional var textures:Array<flight.Texture>;
   var kind:String;
   var uri:String;
   var basePath:Null<String>;

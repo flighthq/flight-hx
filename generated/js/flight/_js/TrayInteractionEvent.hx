@@ -3,10 +3,10 @@ package flight._js;
 
 typedef TrayInteractionEvent = {
   var altKey:Bool;
-  var bounds:Null<flight.Rectangle>;
+  var bounds:Null<flight.RectangleLike>;
   var ctrlKey:Bool;
   var metaKey:Bool;
-  var position:Null<flight.Vector2>;
+  var position:Null<flight.Vector2Like>;
   var shiftKey:Bool;
   var type:Dynamic;
 };

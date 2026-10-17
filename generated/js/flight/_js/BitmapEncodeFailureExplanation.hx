@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef BitmapEncodeFailureExplanation = {
-  var format:Dynamic;
+  var format:flight.ImageFormat;
   var reason:Dynamic;
 };

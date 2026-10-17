@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef PowerAttachHost = {
-  var power:flight.HostPowerCapabilities;
+  var power:Dynamic;
 };

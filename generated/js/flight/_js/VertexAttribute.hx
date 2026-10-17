@@ -3,6 +3,6 @@ package flight._js;
 
 typedef VertexAttribute = {
   var byteOffset:Float;
-  var format:Dynamic;
-  var semantic:Dynamic;
+  var format:flight.VertexFormat;
+  var semantic:flight.VertexSemantic;
 };

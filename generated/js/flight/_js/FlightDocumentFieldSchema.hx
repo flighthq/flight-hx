@@ -2,8 +2,8 @@
 package flight._js;
 
 typedef FlightDocumentFieldSchema = {
-  @:optional var defaultValue:Dynamic;
+  @:optional var defaultValue:flight.FlightDocumentValue;
   var name:String;
   var required:Bool;
-  var validate:(Dynamic)->Bool;
+  var validate:flight.FlightDocumentFieldValidator;
 };

@@ -8,5 +8,5 @@ typedef BitmapGradientBevelOptions = {
   @:optional var radiusY:Float;
   @:optional var passes:Float;
   @:optional var intensity:Float;
-  @:optional var type:Dynamic;
+  @:optional var type:flight.BitmapBevelType;
 };

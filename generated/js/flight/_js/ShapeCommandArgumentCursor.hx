@@ -3,5 +3,5 @@ package flight._js;
 
 typedef ShapeCommandArgumentCursor = {
   var length:Float;
-  function getArgument(relativeIndex:Float):Null<Dynamic>;
+  function getArgument(relativeIndex:Float):Null<flight.ShapeCommandToken>;
 };

@@ -2,11 +2,11 @@
 package flight._js;
 
 typedef ListControllerOptions = {
-  @:optional var transition:flight.NodeInteractiveStateTransition<Dynamic, Dynamic>;
-  var content:Dynamic;
-  var items:Array<Dynamic>;
+  @:optional var transition:flight.GuiTransitionDescriptor;
+  var content:flight.Node2D;
+  var items:Array<flight.Node2D>;
   @:optional var scrollBar:flight.ScrollBarController;
   @:optional var selectable:Bool;
   @:optional var selectedIndex:Float;
-  var viewport:Dynamic;
+  var viewport:flight.Node2D;
 };

@@ -3,7 +3,7 @@ package flight._js;
 
 typedef WindowBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  @:optional function attach(win:flight.ApplicationWindow, handle:Dynamic, ownership:Dynamic):Bool;
+  @:optional function attach(win:flight.ApplicationWindow, handle:flight.NativeWindowHandle, ownership:flight.WindowAttachmentOwnership):Bool;
   @:optional function open(win:flight.ApplicationWindow, options:flight.WindowOptions):Bool;
   @:optional function close(win:flight.ApplicationWindow):Void;
   @:optional function setTitle(win:flight.ApplicationWindow, title:String):Void;
@@ -35,6 +35,6 @@ typedef WindowBackend = {
   @:optional function subscribeClose(onCloseRequest:()->Bool, onClose:()->Void):()->Void;
   @:optional function subscribeMove(listener:(Float, Float)->Void):()->Void;
   @:optional function subscribeOrientation(listener:()->Void):()->Void;
-  @:optional function subscribeResize(target:Dynamic, listener:(Float, Float, Float)->Void):()->Void;
+  @:optional function subscribeResize(target:flight.WindowResizeTargetHandle, listener:(Float, Float, Float)->Void):()->Void;
   @:optional function subscribeVisibility(listener:(Bool)->Void):()->Void;
 };

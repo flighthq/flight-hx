@@ -3,5 +3,5 @@ package flight._js;
 
 typedef GeolocationPositionResult = {
   var position:Null<flight.GeolocationPosition>;
-  var reason:Null<Dynamic>;
+  var reason:Null<flight.GeolocationErrorReason>;
 };

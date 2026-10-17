@@ -3,6 +3,6 @@ package flight._js;
 
 typedef Scene2DAudioResourceLoadProgress = {
   var loaded:Float;
-  var reference:Dynamic;
+  var reference:flight.AudioResourceReference;
   var total:Float;
 };

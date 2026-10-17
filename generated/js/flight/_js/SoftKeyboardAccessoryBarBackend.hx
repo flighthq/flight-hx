@@ -3,5 +3,5 @@ package flight._js;
 
 typedef SoftKeyboardAccessoryBarBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function setAccessoryBarVisible(visible:Bool):flight._internal._Promise<Dynamic>;
+  function setAccessoryBarVisible(visible:Bool):flight._internal._Promise<flight.SoftKeyboardSetterResult>;
 };

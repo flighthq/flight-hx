@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef Physics3DContactHooks = {
-  var preSolve:Null<(flight.Physics3DWorld, flight.Physics3DContact)->Void>;
-  var postSolve:Null<(flight.Physics3DWorld, flight.Physics3DContact)->Void>;
+  var preSolve:Null<flight.Physics3DContactCallback>;
+  var postSolve:Null<flight.Physics3DContactCallback>;
 };

@@ -7,7 +7,7 @@ typedef LottieFillShapeItem = {
   @:optional var nm:String;
   var ty:String;
   @:optional var bm:Float;
-  var c:Dynamic;
+  var c:flight.LottieAnimatable<Array<Float>>;
   @:optional var r:Dynamic;
-  var o:Dynamic;
+  var o:flight.LottieAnimatable<Float>;
 };

@@ -4,10 +4,12 @@ package flight._js._fn;
 
 @:jsImport("@flighthq/snapshot/contract")
 extern class Snapshot {
-  static function captureSnapshot<T>(source:T):Dynamic;
+  static function captureSnapshot<T>(source:T):flight.Snapshot<T>;
   static function disableSnapshotGuards():Void;
   static function enableSnapshotGuards():Void;
-  static function equalsSnapshot<T>(a:Dynamic, b:Dynamic):Bool;
+  static function equalsSnapshot<T>(a:flight.Snapshot<T>, b:flight.Snapshot<T>):Bool;
+  static function interpolateSnapshots<T>(a:flight.Snapshot<T>, b:flight.Snapshot<T>, t:Float, out:T, ?schema:flight.SnapshotSchema):Void;
+  static function restoreSnapshot<T>(snapshot:flight.Snapshot<T>, target:T):Void;
   static function setSnapshotCaptureGuard(guard:Null<(Dynamic)->Void>):Void;
 }
 #end

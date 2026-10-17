@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef FlightDocumentLayoutTree = {
-  var nodes:Array<flight.LayoutNode<flight.FlightDocumentFields, flight.FlightDocumentFields>>;
+  var nodes:Array<flight.FlightDocumentLayoutNode>;
 };

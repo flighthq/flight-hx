@@ -2,13 +2,13 @@
 package flight._js;
 
 typedef TextureContainer = {
-  var format:Dynamic;
+  var format:flight.TextureContainerFormat;
   var width:Float;
   var height:Float;
   var depth:Float;
   var mipLevels:Float;
   var layers:Float;
   var faces:Float;
-  var supercompression:Dynamic;
+  var supercompression:flight.TextureContainerSupercompression;
   var levels:Array<flight.TextureContainerLevel>;
 };

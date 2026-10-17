@@ -3,7 +3,7 @@ package flight._js;
 
 typedef GlPbrExtensionBindContext = {
   function bindTransmissionSceneColor(samplerUniform:String, maxLodUniform:String):Bool;
-  function bindTexture(samplerUniform:String, uvSetUniform:String, uvTransformUniform:String, texture:Null<Dynamic>, uvSet:Dynamic):Bool;
+  function bindTexture(samplerUniform:String, uvSetUniform:String, uvTransformUniform:String, texture:Null<flight.Texture>, uvSet:flight.PbrUvSet):Bool;
   function setLinearColor(uniform:String, color:Float):Void;
   function setFloat(uniform:String, value:Float):Void;
 };

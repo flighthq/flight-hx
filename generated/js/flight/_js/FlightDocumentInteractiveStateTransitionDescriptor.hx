@@ -3,5 +3,5 @@ package flight._js;
 
 typedef FlightDocumentInteractiveStateTransitionDescriptor = {
   var fields:flight.FlightDocumentFields;
-  var kind:String;
+  var kind:flight.Kind;
 };

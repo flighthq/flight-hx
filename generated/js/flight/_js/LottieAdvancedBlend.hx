@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef LottieAdvancedBlend = {
-  var mode:String;
+  var mode:flight.AdvancedBlendMode;
   var node:flight.DisplayObject;
 };

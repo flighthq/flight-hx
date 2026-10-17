@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef Requirement = {
-  var facet:Dynamic;
-  var key:String;
+  var facet:flight.RequirementFacet;
+  var key:flight.Kind;
 };

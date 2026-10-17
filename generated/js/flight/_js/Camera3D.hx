@@ -7,6 +7,6 @@ typedef Camera3D = {
   var inverseViewProjection:flight.Matrix4;
   var jitter:flight.Vector2;
   var near:Float;
-  var projection:Dynamic;
+  var projection:flight.Projection;
   var view:flight.Matrix4;
 };

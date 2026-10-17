@@ -4,8 +4,8 @@ package flight._js;
 typedef AnisotropyPbrExtension = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var kind:String;
-  var anisotropyMap:Null<Dynamic>;
-  var anisotropyMapUvSet:Dynamic;
+  var anisotropyMap:Null<flight.Texture>;
+  var anisotropyMapUvSet:flight.PbrUvSet;
   var anisotropyRotation:Float;
   var anisotropyStrength:Float;
 };

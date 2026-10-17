@@ -2,11 +2,11 @@
 package flight._js;
 
 typedef ButtonControllerOptions = {
-  @:optional var transition:flight.NodeInteractiveStateTransition<Dynamic, Dynamic>;
+  @:optional var transition:flight.GuiTransitionDescriptor;
   @:optional var disabled:Bool;
-  @:optional var downState:Dynamic;
-  @:optional var hitArea:Dynamic;
+  @:optional var downState:flight.Node2D;
+  @:optional var hitArea:flight.Node2D;
   @:optional var interactiveStateBinding:flight.NodeInteractiveStateBinding;
-  @:optional var overState:Dynamic;
-  var upState:Dynamic;
+  @:optional var overState:flight.Node2D;
+  var upState:flight.Node2D;
 };

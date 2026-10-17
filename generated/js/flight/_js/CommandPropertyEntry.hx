@@ -5,5 +5,5 @@ typedef CommandPropertyEntry = {
   var after:Dynamic;
   var before:Dynamic;
   var property:String;
-  var target:flight.Node<Dynamic>;
+  var target:flight.NodeAny;
 };

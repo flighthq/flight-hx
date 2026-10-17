@@ -9,10 +9,10 @@ extern class Geolocation {
   static function createWebGeolocationBackend():flight.GeolocationBackend;
   static function getCurrentGeolocationPosition(host:flight.HasSystemGeolocation, ?options:flight.GeolocationRequestOptions):flight._internal._Promise<Null<flight.GeolocationPosition>>;
   static function getCurrentGeolocationPositionResult(host:flight.HasSystemGeolocation, ?options:flight.GeolocationRequestOptions):flight._internal._Promise<flight.GeolocationPositionResult>;
-  static function initializeGeolocationPosition(out:flight.GeolocationPosition):Void;
-  static function initializeWebGeolocationBackend(out:flight.GeolocationBackend):Void;
+  static function initializeGeolocationPosition(out:flight.EntityConstruction<flight.GeolocationPosition>):Void;
+  static function initializeWebGeolocationBackend(out:flight.EntityConstruction<flight.GeolocationBackend>):Void;
   static function isGeolocationAvailable(host:flight.HasSystemGeolocation):Bool;
-  static function promptForGeolocationAccess(host:flight.Host):flight._internal._Promise<{ reason:Dynamic }>;
-  static function watchGeolocationPosition(host:flight.HasSystemGeolocation, handler:(flight.GeolocationPosition)->Void, ?options:flight.GeolocationRequestOptions, ?onError:(Dynamic)->Void):Float;
+  static function promptForGeolocationAccess(host:flight.Host):flight._internal._Promise<flight.GeolocationAccessOutcome>;
+  static function watchGeolocationPosition(host:flight.HasSystemGeolocation, handler:(flight.GeolocationPosition)->Void, ?options:flight.GeolocationRequestOptions, ?onError:(flight.GeolocationErrorReason)->Void):Float;
 }
 #end

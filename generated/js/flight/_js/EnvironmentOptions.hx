@@ -3,6 +3,6 @@ package flight._js;
 
 typedef EnvironmentOptions = {
   @:optional var enabled:Bool;
-  @:optional var environment:Null<Dynamic>;
+  @:optional var environment:Null<flight.Texture>;
   @:optional var intensity:Float;
 };

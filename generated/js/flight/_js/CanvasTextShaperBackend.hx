@@ -8,7 +8,7 @@ typedef CanvasTextShaperBackend = {
   @:optional function getGlyphExtents(glyphId:Float):Null<flight.GlyphExtents>;
   @:optional function getGlyphIndexForCodePoint(codePoint:Float):Float;
   @:optional function getGlyphName(glyphId:Float):String;
-  var measureText:(String, flight.TextFormat)->Float;
+  var measureText:flight.TextMeasureFunction;
   @:optional function shapeRun(text:String, format:flight.TextFormat, ?options:flight.ShapeRunOptions):flight.ShapedRun;
   function clearCache():Void;
 };

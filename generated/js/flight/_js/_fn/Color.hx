@@ -4,9 +4,9 @@ package flight._js._fn;
 
 @:jsImport("@flighthq/color/contract")
 extern class Color {
-  static function allocateHslColor():Array<Float>;
-  static function allocateHsvColor():Array<Float>;
-  static function allocateLinearColor():Array<Float>;
+  static function allocateHslColor():flight.HslColor;
+  static function allocateHsvColor():flight.HsvColor;
+  static function allocateLinearColor():flight.LinearColor;
   static function clampLinearRgb(out:Array<Float>, r:Float, g:Float, b:Float):Void;
   static function colorFromKelvin(kelvin:Float):Float;
   static function computeRgbHexString(color:Float):String;
@@ -20,20 +20,20 @@ extern class Color {
   static function hslToRgb(out:Array<Float>, h:Float, s:Float, l:Float):Void;
   static function hsvToRgb(out:Array<Float>, h:Float, s:Float, v:Float):Void;
   static function lerpColor(start:Float, end:Float, t:Float):Float;
-  static function lerpLinearColor(out:Array<Float>, start:Array<Float>, end:Array<Float>, t:Float):Array<Float>;
+  static function lerpLinearColor(out:flight.LinearColor, start:flight.LinearColor, end:flight.LinearColor, t:Float):flight.LinearColor;
   static function linearChannelToSrgb(value:Float):Float;
   static function linearRgbToOklab(out:Array<Float>, r:Float, g:Float, b:Float):Void;
   static function oklabToLinearRgb(out:Array<Float>, L:Float, a:Float, b:Float):Void;
   static function packColor(r:Float, g:Float, b:Float, a:Float):Float;
-  static function packLinearToColor(color:Array<Float>):Float;
+  static function packLinearToColor(color:flight.LinearColor):Float;
   static function packOpaqueColor(rgb:Float):Float;
   static function premultiplyColorAlpha(color:Float):Float;
-  static function rgbToHsl(out:Array<Float>, color:Float):Array<Float>;
-  static function rgbToHsv(out:Array<Float>, color:Float):Array<Float>;
+  static function rgbToHsl(out:flight.HslColor, color:Float):flight.HslColor;
+  static function rgbToHsv(out:flight.HsvColor, color:Float):flight.HsvColor;
   static function setColorAlpha(color:Float, alpha:Float):Float;
   static function srgbChannelToLinear(value:Float):Float;
   static function unpackColorRgba(out:Array<Float>, color:Float):Void;
-  static function unpackColorToLinear(out:Array<Float>, color:Float):Array<Float>;
+  static function unpackColorToLinear(out:flight.LinearColor, color:Float):flight.LinearColor;
   static function unpremultiplyColorAlpha(color:Float):Float;
 }
 #end

@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef GlEnvironmentCaptureOptions = {
-  @:optional var excludeNode:Dynamic;
+  @:optional var excludeNode:flight.Node3D;
   @:optional var far:Float;
   @:optional var near:Float;
 };

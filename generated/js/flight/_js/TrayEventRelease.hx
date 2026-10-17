@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef TrayEventRelease = {
-  function release():flight._internal._Promise<Dynamic>;
+  function release():flight._internal._Promise<flight.TrayReleaseResult>;
 };

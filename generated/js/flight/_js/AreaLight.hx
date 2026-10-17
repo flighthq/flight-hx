@@ -10,7 +10,7 @@ typedef AreaLight = {
   var direction:flight.Vector3;
   var enabled:Bool;
   var intensity:Float;
-  var intensityUnit:Dynamic;
+  var intensityUnit:flight.LightUnit;
   var normalBias:Float;
   var pcfRadius:Float;
   var position:flight.Vector3;

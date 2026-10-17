@@ -3,5 +3,5 @@ package flight._js;
 
 typedef ParsedAccelerator = {
   var key:Dynamic;
-  var modifiers:Array<Dynamic>;
+  var modifiers:Array<flight.ShortcutModifier>;
 };

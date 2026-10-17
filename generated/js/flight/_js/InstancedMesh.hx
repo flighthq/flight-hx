@@ -4,7 +4,7 @@ package flight._js;
 typedef InstancedMesh = {
   var data:Null<flight.NodeData>;
   var enabled:Bool;
-  var kind:String;
+  var kind:flight.Kind;
   var name:Null<String>;
   var EntityRuntimeKey:Null<flight.NodeRuntime<flight.Node3DTraits>>;
   var alpha:Float;
@@ -13,7 +13,7 @@ typedef InstancedMesh = {
   var rotation:flight.Quaternion;
   var scale:flight.Vector3;
   var geometry:flight.MeshGeometry;
-  var instanceColors:Null<flight._internal._UInt32Array<haxe.io.Bytes>>;
+  var instanceColors:Null<flight._internal._UInt32Array<flight._internal._ArrayBuffer>>;
   var instanceCount:Float;
   var instanceMatrices:Array<flight.Matrix4>;
   var materials:Array<Null<flight.Material>>;

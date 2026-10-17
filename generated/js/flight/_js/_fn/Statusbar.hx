@@ -5,22 +5,22 @@ package flight._js._fn;
 @:jsImport("@flighthq/statusbar/contract")
 extern class Statusbar {
   static function attachStatusBar(host:Dynamic, bar:flight.StatusBar):Void;
-  static function clearStatusBarStyleStack(host:Dynamic):Void;
+  static function clearStatusBarStyleStack(host:flight.HasUiStatusBarStyleStack):Void;
   static function createStatusBar():flight.StatusBar;
   static function createStatusBarInfo():flight.StatusBarInfo;
   static function detachStatusBar(bar:flight.StatusBar):Void;
   static function disposeStatusBar(bar:flight.StatusBar):Void;
   static function getStatusBarHeight(host:flight.HasUiStatusBarInfo):Float;
   static function getStatusBarInfo(host:flight.HasUiStatusBarInfo, out:flight.StatusBarInfo):flight.StatusBarInfo;
-  static function hasStatusBarStyleEntry(host:Dynamic, handle:Float):Bool;
-  static function initializeStatusBar(out:flight.StatusBar):Void;
-  static function initializeStatusBarInfo(out:flight.StatusBarInfo):Void;
+  static function hasStatusBarStyleEntry(host:flight.HasUiStatusBarStyleStack, handle:flight.StatusBarStyleEntryHandle):Bool;
+  static function initializeStatusBar(out:flight.EntityConstruction<flight.StatusBar>):Void;
+  static function initializeStatusBarInfo(out:flight.EntityConstruction<flight.StatusBarInfo>):Void;
   static function packedRgbaToHexColor(color:Float):String;
-  static function popStatusBarStyleEntry(host:Dynamic, handle:Float):Void;
-  static function pushStatusBarStyleEntry(host:Dynamic, entry:flight.StatusBarStyleEntry):Float;
+  static function popStatusBarStyleEntry(host:flight.HasUiStatusBarStyleStack, handle:flight.StatusBarStyleEntryHandle):Void;
+  static function pushStatusBarStyleEntry(host:flight.HasUiStatusBarStyleStack, entry:flight.StatusBarStyleEntry):flight.StatusBarStyleEntryHandle;
   static function setStatusBarColor(host:flight.HasUiStatusBarColor, color:Float, ?animated:Bool):Void;
   static function setStatusBarOverlaysContent(host:flight.HasUiStatusBarOverlays, overlay:Bool):Void;
-  static function setStatusBarStyle(host:flight.HasUiStatusBarStyle, style:Dynamic):Void;
-  static function setStatusBarVisible(host:flight.HasUiStatusBarVisibility, visible:Bool, ?animation:Dynamic):Void;
+  static function setStatusBarStyle(host:flight.HasUiStatusBarStyle, style:flight.StatusBarStyle):Void;
+  static function setStatusBarVisible(host:flight.HasUiStatusBarVisibility, visible:Bool, ?animation:flight.StatusBarAnimation):Void;
 }
 #end

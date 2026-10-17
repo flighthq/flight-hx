@@ -4,7 +4,7 @@ package flight._js;
 typedef PowerBatteryHealth = {
   var capacityWearLevel:Float;
   var cycleCount:Float;
-  var healthState:Dynamic;
+  var healthState:flight.PowerBatteryHealthState;
   var temperatureCelsius:Float;
   var voltage:Float;
 };

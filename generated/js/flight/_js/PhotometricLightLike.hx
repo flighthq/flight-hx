@@ -3,5 +3,5 @@ package flight._js;
 
 typedef PhotometricLightLike = {
   var intensity:Float;
-  var intensityUnit:Dynamic;
+  var intensityUnit:flight.LightUnit;
 };

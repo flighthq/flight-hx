@@ -3,5 +3,5 @@ package flight._js;
 
 typedef GlPbrExtensionShaderContext = {
   function hasTransmissionSceneColor():Bool;
-  function isTextureReady(texture:Null<Dynamic>):Bool;
+  function isTextureReady(texture:Null<flight.Texture>):Bool;
 };

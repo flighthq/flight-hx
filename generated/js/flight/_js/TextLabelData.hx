@@ -3,10 +3,10 @@ package flight._js;
 
 typedef TextLabelData = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var autoSize:Dynamic;
+  var autoSize:flight.TextAutoSize;
   var height:Float;
   var text:String;
   var textFormat:flight.TextFormat;
-  var verticalAlign:Dynamic;
+  var verticalAlign:flight.TextVerticalAlign;
   var width:Float;
 };

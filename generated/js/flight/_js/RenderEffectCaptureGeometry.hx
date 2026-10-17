@@ -2,8 +2,8 @@
 package flight._js;
 
 typedef RenderEffectCaptureGeometry = {
-  var bounds:flight.Rectangle;
-  var captureTransform:flight.Matrix;
+  var bounds:flight.RectangleLike;
+  var captureTransform:flight.MatrixLike;
   var padding:flight.RenderEffectPadding;
   var targetHeight:Float;
   var targetWidth:Float;

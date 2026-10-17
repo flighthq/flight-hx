@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef AsepriteHashDocument = {
-  var frames:haxe.DynamicAccess<flight.AsepriteBaseFrame>;
+  var frames:haxe.DynamicAccess<flight.AsepriteHashFrame>;
   var meta:flight.AsepriteMeta;
 };

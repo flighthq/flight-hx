@@ -3,5 +3,5 @@ package flight._js;
 
 typedef ShellTrashBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function moveToTrash(path:String):flight._internal._Promise<{ reason:Dynamic }>;
+  function moveToTrash(path:String):flight._internal._Promise<flight.ShellTrashOutcome>;
 };

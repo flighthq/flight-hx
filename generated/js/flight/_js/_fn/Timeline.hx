@@ -4,21 +4,21 @@ package flight._js._fn;
 
 @:jsImport("@flighthq/timeline/contract")
 extern class Timeline {
-  static function addTimelineFrameScript(timeline:flight.Timeline, frame:Dynamic, script:(Dynamic, Float)->Void):Void;
+  static function addTimelineFrameScript(timeline:flight.Timeline, frame:Dynamic, script:flight.FrameScript):Void;
   static function clearTimelineFrameScripts(timeline:flight.Timeline):Void;
-  static function createTimeline(?obj:flight.Timeline):flight.Timeline;
-  static function createTimelineSource(obj:{ ?totalFrames:Float, ?frameRate:Null<Float>, ?labels:Array<flight.TimelineLabel>, ?cues:Array<flight.TimelineCue>, ?constructFrame:(Dynamic, Float)->Void }):flight.TimelineSource;
+  static function createTimeline(?obj:Dynamic):flight.Timeline;
+  static function createTimelineSource(obj:{ ?totalFrames:Float, ?frameRate:Null<Float>, ?labels:Array<flight.TimelineLabel>, ?cues:Array<flight.TimelineCue>, ?constructFrame:(flight.Node2D, Float)->Void }):flight.TimelineSource;
   static function disposeTimelineSignals(timeline:flight.Timeline):Void;
   static function enableTimelineSignals(timeline:flight.Timeline):flight.TimelineSignals;
   static function findTimelineLabel(timeline:flight.Timeline, name:String):Null<flight.TimelineLabel>;
   static function getTimelineCurrentLabel(timeline:flight.Timeline):Null<flight.TimelineLabel>;
-  static function getTimelineFrameScript(timeline:flight.Timeline, frame:Dynamic):Null<(Dynamic, Float)->Void>;
+  static function getTimelineFrameScript(timeline:flight.Timeline, frame:Dynamic):Null<flight.FrameScript>;
   static function getTimelineFrameScriptFrames(timeline:flight.Timeline):Array<Float>;
   static function getTimelineLabels(timeline:flight.Timeline):Array<flight.TimelineLabel>;
   static function gotoAndPlayTimeline(timeline:flight.Timeline, frame:Dynamic):Void;
   static function gotoAndStopTimeline(timeline:flight.Timeline, frame:Dynamic):Void;
-  static function initializeTimeline(out:flight.Timeline, ?obj:flight.Timeline):Void;
-  static function initializeTimelineSource(out:flight.TimelineSource, obj:{ ?totalFrames:Float, ?frameRate:Null<Float>, ?labels:Array<flight.TimelineLabel>, ?cues:Array<flight.TimelineCue>, ?constructFrame:(Dynamic, Float)->Void }):Void;
+  static function initializeTimeline(out:flight.EntityConstruction<flight.Timeline>, ?obj:Dynamic):Void;
+  static function initializeTimelineSource(out:flight.EntityConstruction<flight.TimelineSource>, obj:{ ?totalFrames:Float, ?frameRate:Null<Float>, ?labels:Array<flight.TimelineLabel>, ?cues:Array<flight.TimelineCue>, ?constructFrame:(flight.Node2D, Float)->Void }):Void;
   static function nextFrameTimeline(timeline:flight.Timeline):Void;
   static function playTimeline(timeline:flight.Timeline):Void;
   static function prevFrameTimeline(timeline:flight.Timeline):Void;

@@ -14,7 +14,7 @@ extern class Textshaper {
   static function disposeTextShaperSignals():Void;
   static function enableTextShaperGuards():Void;
   static function enableTextShaperSignals():flight.TextShaperSignals;
-  static function explainTextShaperOperation(operation:Dynamic, ?host:flight.HasTextShaper):flight.BackendOperationExplanation;
+  static function explainTextShaperOperation(operation:flight.TextShaperOperation, ?host:flight.HasTextShaper):flight.BackendOperationExplanation;
   static function getCaretPositionsForRun(run:flight.ShapedRun):Array<Float>;
   static function getClusterForIndex(run:flight.ShapedRun, stringIndex:Float):Float;
   static function getCodePointForGlyph(glyphId:Float, _format:flight.TextFormat, ?host:flight.HasTextShaper):Float;
@@ -29,10 +29,10 @@ extern class Textshaper {
   static function getIndexRangeForCluster(run:flight.ShapedRun, cluster:Float, ?stringLength:Float):Null<Array<Float>>;
   static function getTextShaperBackend(?host:flight.HasTextShaper):Null<flight.TextShaperBackend>;
   static function getTextShaperSignals():Null<flight.TextShaperSignals>;
-  static function hasTextShaperOperation(operation:Dynamic, ?host:flight.HasTextShaper):Bool;
-  static function initializeShapedRun(out:Dynamic):Void;
-  static function initializeTextShaperCache(out:flight.TextShaperCache):Void;
-  static function initializeTextShaperSignals(out:flight.TextShaperSignals):Void;
+  static function hasTextShaperOperation(operation:flight.TextShaperOperation, ?host:flight.HasTextShaper):Bool;
+  static function initializeShapedRun(out:flight.EntityConstruction<Dynamic>):Void;
+  static function initializeTextShaperCache(out:flight.EntityConstruction<flight.TextShaperCache>):Void;
+  static function initializeTextShaperSignals(out:flight.EntityConstruction<flight.TextShaperSignals>):Void;
   static function itemizeText(text:String, _format:flight.TextFormat, ?options:flight.TextShaperOptions):Array<flight.TextItem>;
   static function measureText(text:String, format:flight.TextFormat, ?host:flight.HasTextShaper):Float;
   static function releaseShapedRun(run:flight.ShapedRun):Void;

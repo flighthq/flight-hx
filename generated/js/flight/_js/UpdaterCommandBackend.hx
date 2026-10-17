@@ -3,7 +3,7 @@ package flight._js;
 
 typedef UpdaterCommandBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function check():flight._internal._Promise<Dynamic>;
+  function check():flight._internal._Promise<flight.AppUpdateCheckOutcome>;
   function destroy():Void;
   function install(update:flight.DownloadedUpdate):flight._internal._Promise<flight.AppUpdateInstallOutcome>;
 };

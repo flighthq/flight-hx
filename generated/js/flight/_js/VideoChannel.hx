@@ -9,6 +9,6 @@ typedef VideoChannel = {
   var muted:Bool;
   var playbackRate:Float;
   var source:Null<flight.VideoResource>;
-  var state:Dynamic;
+  var state:flight.VideoChannelState;
   var onComplete:flight.Signal<()->Void>;
 };

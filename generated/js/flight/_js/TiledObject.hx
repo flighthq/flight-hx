@@ -12,8 +12,8 @@ typedef TiledObject = {
   var gid:Null<Float>;
   var point:Bool;
   var ellipse:Bool;
-  var polygon:Null<Array<flight.Vector2>>;
-  var polyline:Null<Array<flight.Vector2>>;
+  var polygon:Null<Array<flight.Vector2Like>>;
+  var polyline:Null<Array<flight.Vector2Like>>;
   var rotation:Float;
   var visible:Bool;
   var properties:Array<flight.TiledProperty>;

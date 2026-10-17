@@ -14,7 +14,7 @@ typedef TiledTileset = {
   var spacing:Float;
   var tileOffsetX:Float;
   var tileOffsetY:Float;
-  var objectAlignment:Dynamic;
+  var objectAlignment:flight.TiledObjectAlignment;
   var tiles:Array<flight.TiledTilesetTile>;
   var properties:Array<flight.TiledProperty>;
 };

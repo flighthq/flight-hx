@@ -3,7 +3,7 @@ package flight._js;
 
 typedef Scene3DLightBlock = {
   var ambientCount:Float;
-  var data:flight._internal._Float32Array<haxe.io.Bytes>;
+  var data:flight._internal._Float32Array<flight._internal._ArrayBuffer>;
   var directionalCount:Float;
   var hemisphereCount:Float;
   var pointCount:Float;

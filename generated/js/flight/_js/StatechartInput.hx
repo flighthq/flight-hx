@@ -3,6 +3,6 @@ package flight._js;
 
 typedef StatechartInput = {
   var initialValue:Float;
-  var kind:String;
+  var kind:flight.StatechartInputKind;
   @:optional var name:String;
 };

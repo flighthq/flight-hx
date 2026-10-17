@@ -3,9 +3,9 @@ package flight._js;
 
 typedef RemoveNodeChildCommand = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var kind:String;
+  var kind:flight.Kind;
   var label:String;
-  var child:flight.Node<Dynamic>;
+  var child:flight.NodeAny;
   var index:Float;
-  var parent:flight.Node<Dynamic>;
+  var parent:flight.NodeAny;
 };

@@ -4,12 +4,12 @@ package flight._js;
 typedef RenderTargetDescriptor = {
   var width:Float;
   var height:Float;
-  @:optional var format:Dynamic;
+  @:optional var format:flight.RenderTargetFormat;
   @:optional var colorAttachments:Float;
-  @:optional var colorFormats:Array<Dynamic>;
+  @:optional var colorFormats:Array<flight.RenderTargetFormat>;
   @:optional var sampleCount:Float;
-  @:optional var depth:Dynamic;
-  @:optional var colorSpace:Dynamic;
+  @:optional var depth:flight.RenderTargetDepth;
+  @:optional var colorSpace:flight.RenderTargetColorSpace;
   @:optional var clearColors:Array<Float>;
   @:optional var clearDepth:Float;
 };

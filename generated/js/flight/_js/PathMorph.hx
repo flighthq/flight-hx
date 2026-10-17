@@ -6,5 +6,5 @@ typedef PathMorph = {
   var commands:Array<Float>;
   var endData:Array<Float>;
   var startData:Array<Float>;
-  var winding:Dynamic;
+  var winding:flight.PathWinding;
 };

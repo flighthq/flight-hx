@@ -4,8 +4,8 @@ package flight._js._fn;
 
 @:jsImport("@flighthq/permissions/contract")
 extern class Permissions {
-  static function getPermissionState(host:flight.Host, name:Dynamic):flight._internal._Promise<Dynamic>;
-  static function getPermissionStates(host:flight.Host, names:Array<Dynamic>):flight._internal._Promise<Array<Dynamic>>;
-  static function requestPermission(host:flight.Host, name:Dynamic):flight._internal._Promise<Dynamic>;
+  static function getPermissionState(host:flight.Host, name:flight.PermissionName):flight._internal._Promise<flight.PermissionQueryOutcome>;
+  static function getPermissionStates(host:flight.Host, names:Array<flight.PermissionName>):flight._internal._Promise<Array<flight.PermissionQueryOutcome>>;
+  static function requestPermission(host:flight.Host, name:flight.PermissionName):flight._internal._Promise<flight.PermissionRequestOutcome>;
 }
 #end

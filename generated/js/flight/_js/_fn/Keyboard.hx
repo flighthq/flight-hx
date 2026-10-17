@@ -4,19 +4,19 @@ package flight._js._fn;
 
 @:jsImport("@flighthq/keyboard/contract")
 extern class Keyboard {
-  static function attachSoftKeyboard(host:Dynamic, keyboard:flight.SoftKeyboard):flight._internal._Promise<Dynamic>;
+  static function attachSoftKeyboard(host:Dynamic, keyboard:flight.SoftKeyboard):flight._internal._Promise<flight.SoftKeyboardAttachResult>;
   static function createSoftKeyboard():Dynamic;
   static function detachSoftKeyboard(keyboard:flight.SoftKeyboard):Void;
   static function disposeSoftKeyboard(keyboard:flight.SoftKeyboard):Void;
   static function getSoftKeyboardHeight(host:flight.HasSoftKeyboardInfo):Float;
   static function getSoftKeyboardInfo(host:flight.HasSoftKeyboardInfo, out:flight.SoftKeyboardInfo):flight.SoftKeyboardInfo;
-  static function hideSoftKeyboard(host:flight.HasSoftKeyboardVisibility):flight._internal._Promise<Dynamic>;
-  static function initializeSoftKeyboard(out:Dynamic):Void;
+  static function hideSoftKeyboard(host:flight.HasSoftKeyboardVisibility):flight._internal._Promise<flight.SoftKeyboardVisibilityResult>;
+  static function initializeSoftKeyboard(out:flight.EntityConstruction<Dynamic>):Void;
   static function isSoftKeyboardVisible(host:flight.HasSoftKeyboardInfo):Bool;
-  static function setSoftKeyboardAccessoryBarVisible(host:flight.HasSoftKeyboardAccessoryBar, visible:Bool):flight._internal._Promise<Dynamic>;
-  static function setSoftKeyboardResizeMode(host:flight.HasSoftKeyboardResizeModeWrite, mode:String):flight._internal._Promise<Dynamic>;
-  static function setSoftKeyboardScrollAssistEnabled(host:flight.HasSoftKeyboardScrollAssist, enabled:Bool):flight._internal._Promise<Dynamic>;
-  static function setSoftKeyboardStyle(host:flight.HasSoftKeyboardStyle, style:String):flight._internal._Promise<Dynamic>;
-  static function showSoftKeyboard(host:flight.HasSoftKeyboardVisibility):flight._internal._Promise<Dynamic>;
+  static function setSoftKeyboardAccessoryBarVisible(host:flight.HasSoftKeyboardAccessoryBar, visible:Bool):flight._internal._Promise<flight.SoftKeyboardSetterResult>;
+  static function setSoftKeyboardResizeMode(host:flight.HasSoftKeyboardResizeModeWrite, mode:flight.SoftKeyboardResizeMode):flight._internal._Promise<flight.SoftKeyboardSetterResult>;
+  static function setSoftKeyboardScrollAssistEnabled(host:flight.HasSoftKeyboardScrollAssist, enabled:Bool):flight._internal._Promise<flight.SoftKeyboardSetterResult>;
+  static function setSoftKeyboardStyle(host:flight.HasSoftKeyboardStyle, style:flight.SoftKeyboardStyleKind):flight._internal._Promise<flight.SoftKeyboardSetterResult>;
+  static function showSoftKeyboard(host:flight.HasSoftKeyboardVisibility):flight._internal._Promise<flight.SoftKeyboardVisibilityResult>;
 }
 #end

@@ -3,7 +3,7 @@ package flight._js;
 
 typedef Physics3DSliderJoint = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var kind:String;
+  var kind:flight.Physics3DJointKind;
   var bodyA:Float;
   var bodyB:Float;
   var localAnchorAX:Float;

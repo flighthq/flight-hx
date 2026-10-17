@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef TabBarControllerOptions = {
-  @:optional var transition:flight.NodeInteractiveStateTransition<Dynamic, Dynamic>;
+  @:optional var transition:flight.GuiTransitionDescriptor;
   @:optional var selectedIndex:Float;
   var tabs:Array<flight.TabBarControllerItem>;
 };

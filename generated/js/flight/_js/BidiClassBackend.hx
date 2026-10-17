@@ -3,5 +3,5 @@ package flight._js;
 
 typedef BidiClassBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function getBidiClass(codepoint:Float):Dynamic;
+  function getBidiClass(codepoint:Float):flight.BidiClass;
 };

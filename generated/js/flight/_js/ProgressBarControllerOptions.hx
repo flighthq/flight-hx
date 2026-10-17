@@ -2,11 +2,11 @@
 package flight._js;
 
 typedef ProgressBarControllerOptions = {
-  @:optional var transition:flight.NodeInteractiveStateTransition<Dynamic, Dynamic>;
-  var fill:Dynamic;
+  @:optional var transition:flight.GuiTransitionDescriptor;
+  var fill:flight.Node2D;
   @:optional var maximum:Float;
   @:optional var minimum:Float;
-  @:optional var orientation:Dynamic;
-  var track:Dynamic;
+  @:optional var orientation:flight.GuiOrientation;
+  var track:flight.Node2D;
   @:optional var value:Float;
 };

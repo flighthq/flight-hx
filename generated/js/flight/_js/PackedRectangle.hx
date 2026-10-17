@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef PackedRectangle = {
-  var id:Dynamic;
+  var id:flight.RectangleId;
   var x:Float;
   var y:Float;
   var width:Float;

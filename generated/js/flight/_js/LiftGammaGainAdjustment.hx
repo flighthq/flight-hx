@@ -4,7 +4,7 @@ package flight._js;
 typedef LiftGammaGainAdjustment = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var kind:String;
-  var transform:(Array<Float>, Float, Float, Float)->Void;
+  var transform:flight.ColorTransformFunction;
   @:optional var lift:Float;
   @:optional var gamma:Float;
   @:optional var gain:Float;

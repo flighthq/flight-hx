@@ -2,12 +2,12 @@
 package flight._js;
 
 typedef LottieTransform = {
-  @:optional var a:Dynamic;
-  @:optional var o:Dynamic;
-  @:optional var p:Dynamic;
-  @:optional var r:Dynamic;
-  @:optional var rz:Dynamic;
-  @:optional var s:Dynamic;
-  @:optional var sa:Dynamic;
-  @:optional var sk:Dynamic;
+  @:optional var a:flight.LottieAnimatable<Array<Float>>;
+  @:optional var o:flight.LottieAnimatable<Float>;
+  @:optional var p:flight.LottiePositionProperty;
+  @:optional var r:flight.LottieAnimatable<Float>;
+  @:optional var rz:flight.LottieAnimatable<Float>;
+  @:optional var s:flight.LottieAnimatable<Array<Float>>;
+  @:optional var sa:flight.LottieAnimatable<Float>;
+  @:optional var sk:flight.LottieAnimatable<Float>;
 };

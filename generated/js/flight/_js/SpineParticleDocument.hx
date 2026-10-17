@@ -23,7 +23,7 @@ typedef SpineParticleDocument = {
   var scaleEnd:flight.SpineRangeValue;
   var tint:Array<flight.SpineTintKeyframe>;
   var alpha:Array<flight.SpineAlphaKeyframe>;
-  var blendMode:Dynamic;
+  var blendMode:flight.SpineBlendMode;
   var premultiplied:Bool;
   var images:Array<String>;
 };

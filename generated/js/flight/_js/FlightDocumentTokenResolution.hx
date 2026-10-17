@@ -3,5 +3,5 @@ package flight._js;
 
 typedef FlightDocumentTokenResolution = {
   var mode:String;
-  var values:haxe.DynamicAccess<Dynamic>;
+  var values:haxe.DynamicAccess<flight.FlightDocumentValue>;
 };

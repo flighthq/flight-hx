@@ -2,8 +2,8 @@
 package flight._js;
 
 typedef ElectronPowerMonitor = {
-  function on(event:Dynamic, listener:()->Void):Void;
-  function removeListener(event:Dynamic, listener:()->Void):Void;
+  function on(event:flight.ElectronPowerMonitorEvent, listener:()->Void):Void;
+  function removeListener(event:flight.ElectronPowerMonitorEvent, listener:()->Void):Void;
   @:optional function getCurrentThermalState():Dynamic;
   function getSystemIdleState(idleThresholdSeconds:Float):Dynamic;
   function getSystemIdleTime():Float;

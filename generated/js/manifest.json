@@ -1,47 +1,42 @@
 {
   "schema": "flight-hx-generated-sdk/1",
   "compiler": {
+    "compatibilityCorrectionApplications": [
+      {
+        "files": [
+          {
+            "path": "flight/_js/_fn/Application.hx",
+            "replacements": 27
+          }
+        ],
+        "id": "flight-hx-anonymous-record-specialization-erasure/1",
+        "replacements": 27
+      },
+      {
+        "files": [
+          {
+            "path": "flight/_js/_fn/Interaction.hx",
+            "replacements": 2
+          }
+        ],
+        "id": "flight-hx-void-return-type-parameter-erasure/1",
+        "replacements": 2
+      }
+    ],
     "compatibilityCorrections": [
-      "flight-hx-runtime-module-member-prefix/1",
-      "flight-hx-nested-callback-return-parentheses/1",
-      "flight-hx-enum-abstract-member-identifiers/1",
-      "flight-hx-ipc-target-default-type-parameter/1",
-      "flight-hx-optional-call-lowering/1",
-      "flight-hx-enum-value-type-collision/1",
-      "flight-hx-type-alias-value-collision/1",
-      "flight-hx-source-default-type-parameters/1",
-      "flight-hx-unique-symbol-void-brand/1",
-      "flight-hx-symbol-runtime-shim/1",
-      "flight-hx-standard-library-spellings/1",
-      "flight-hx-constant-default-arguments/1",
-      "flight-hx-array-api/1",
-      "flight-hx-dynamic-access-keys/1",
-      "flight-hx-optional-backend-arguments/1",
-      "flight-hx-webgl-static-constants/1",
-      "flight-hx-assignment-expression-parentheses/1",
-      "flight-hx-parameter-dependent-defaults/1",
-      "flight-hx-structural-cast/1",
-      "flight-hx-empty-void-function/1",
-      "flight-hx-typed-array-integer-write/1",
-      "flight-hx-callable-generic-constraint/1",
-      "flight-hx-erased-entity-constraint/1",
-      "flight-hx-promise-void-carrier/1",
-      "flight-hx-extern-type-alias-inlining/1",
-      "flight-hx-refused-extern-type-carriers/1",
-      "flight-hx-contract-export-filter/1",
-      "flight-hx-public-extern-aliases/1",
-      "flight-hx-public-extern-generics/1"
+      "flight-hx-anonymous-record-specialization-erasure/1",
+      "flight-hx-void-return-type-parameter-erasure/1"
     ],
     "emissionMode": "extern",
     "repository": "https://github.com/flighthq/flight-compiler",
-    "revision": "56496423fd865a51023e72966190d10d886eae40",
+    "revision": "9edfcca46db71d6a6a53aafa2718d8c9f9d5df7c",
     "target": "haxe"
   },
   "packages": [
     {
-      "emittedModules": 0,
+      "emittedModules": 4,
       "package": "@flighthq/abc",
-      "refusedModules": 4,
+      "refusedModules": 0,
       "sourceModules": 4
     },
     {
@@ -69,27 +64,27 @@
       "sourceModules": 3
     },
     {
-      "emittedModules": 1,
+      "emittedModules": 5,
       "package": "@flighthq/application",
-      "refusedModules": 4,
+      "refusedModules": 0,
       "sourceModules": 5
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 3,
       "package": "@flighthq/application-gl",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 3
     },
     {
-      "emittedModules": 1,
+      "emittedModules": 5,
       "package": "@flighthq/assets",
-      "refusedModules": 4,
+      "refusedModules": 0,
       "sourceModules": 5
     },
     {
-      "emittedModules": 5,
+      "emittedModules": 8,
       "package": "@flighthq/audio",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 8
     },
     {
@@ -99,33 +94,33 @@
       "sourceModules": 4
     },
     {
-      "emittedModules": 15,
+      "emittedModules": 45,
       "package": "@flighthq/bitmap",
-      "refusedModules": 30,
+      "refusedModules": 0,
       "sourceModules": 45
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 8,
       "package": "@flighthq/bitmapfont",
-      "refusedModules": 8,
+      "refusedModules": 0,
       "sourceModules": 8
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 8,
       "package": "@flighthq/bitmapfont-formats",
-      "refusedModules": 8,
+      "refusedModules": 0,
       "sourceModules": 8
     },
     {
-      "emittedModules": 1,
+      "emittedModules": 6,
       "package": "@flighthq/bitmaptext",
-      "refusedModules": 5,
+      "refusedModules": 0,
       "sourceModules": 6
     },
     {
-      "emittedModules": 18,
+      "emittedModules": 21,
       "package": "@flighthq/camera",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 21
     },
     {
@@ -141,9 +136,9 @@
       "sourceModules": 4
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 4,
       "package": "@flighthq/clip",
-      "refusedModules": 4,
+      "refusedModules": 0,
       "sourceModules": 4
     },
     {
@@ -159,9 +154,9 @@
       "sourceModules": 4
     },
     {
-      "emittedModules": 35,
+      "emittedModules": 38,
       "package": "@flighthq/collision",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 38
     },
     {
@@ -171,15 +166,15 @@
       "sourceModules": 11
     },
     {
-      "emittedModules": 1,
+      "emittedModules": 8,
       "package": "@flighthq/command",
-      "refusedModules": 7,
+      "refusedModules": 0,
       "sourceModules": 8
     },
     {
-      "emittedModules": 2,
+      "emittedModules": 6,
       "package": "@flighthq/compression",
-      "refusedModules": 4,
+      "refusedModules": 0,
       "sourceModules": 6
     },
     {
@@ -189,9 +184,9 @@
       "sourceModules": 3
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 4,
       "package": "@flighthq/debug",
-      "refusedModules": 4,
+      "refusedModules": 0,
       "sourceModules": 4
     },
     {
@@ -207,33 +202,33 @@
       "sourceModules": 5
     },
     {
-      "emittedModules": 20,
+      "emittedModules": 23,
       "package": "@flighthq/easing",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 23
     },
     {
-      "emittedModules": 50,
+      "emittedModules": 77,
       "package": "@flighthq/effects",
-      "refusedModules": 27,
+      "refusedModules": 0,
       "sourceModules": 77
     },
     {
-      "emittedModules": 6,
+      "emittedModules": 30,
       "package": "@flighthq/effects-canvas",
-      "refusedModules": 24,
+      "refusedModules": 0,
       "sourceModules": 30
     },
     {
-      "emittedModules": 1,
+      "emittedModules": 60,
       "package": "@flighthq/effects-gl",
-      "refusedModules": 59,
+      "refusedModules": 0,
       "sourceModules": 60
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 60,
       "package": "@flighthq/effects-wgpu",
-      "refusedModules": 60,
+      "refusedModules": 0,
       "sourceModules": 60
     },
     {
@@ -249,27 +244,27 @@
       "sourceModules": 11
     },
     {
-      "emittedModules": 1,
+      "emittedModules": 3,
       "package": "@flighthq/filesystem",
-      "refusedModules": 2,
+      "refusedModules": 0,
       "sourceModules": 3
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 4,
       "package": "@flighthq/flow",
-      "refusedModules": 4,
+      "refusedModules": 0,
       "sourceModules": 4
     },
     {
-      "emittedModules": 6,
+      "emittedModules": 9,
       "package": "@flighthq/font",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 9
     },
     {
-      "emittedModules": 9,
+      "emittedModules": 16,
       "package": "@flighthq/font-formats",
-      "refusedModules": 7,
+      "refusedModules": 0,
       "sourceModules": 16
     },
     {
@@ -279,27 +274,27 @@
       "sourceModules": 4
     },
     {
-      "emittedModules": 27,
+      "emittedModules": 30,
       "package": "@flighthq/geometry",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 30
     },
     {
-      "emittedModules": 1,
+      "emittedModules": 5,
       "package": "@flighthq/gizmo",
-      "refusedModules": 4,
+      "refusedModules": 0,
       "sourceModules": 5
     },
     {
-      "emittedModules": 4,
+      "emittedModules": 10,
       "package": "@flighthq/glyphatlas",
-      "refusedModules": 6,
+      "refusedModules": 0,
       "sourceModules": 10
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 19,
       "package": "@flighthq/gui",
-      "refusedModules": 19,
+      "refusedModules": 0,
       "sourceModules": 19
     },
     {
@@ -309,9 +304,9 @@
       "sourceModules": 3
     },
     {
-      "emittedModules": 2,
+      "emittedModules": 5,
       "package": "@flighthq/image",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 5
     },
     {
@@ -321,27 +316,27 @@
       "sourceModules": 12
     },
     {
-      "emittedModules": 1,
+      "emittedModules": 4,
       "package": "@flighthq/importdiagnostics",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 4
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 3,
       "package": "@flighthq/input",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 3
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 19,
       "package": "@flighthq/interaction",
-      "refusedModules": 19,
+      "refusedModules": 0,
       "sourceModules": 19
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 9,
       "package": "@flighthq/intl",
-      "refusedModules": 9,
+      "refusedModules": 0,
       "sourceModules": 9
     },
     {
@@ -357,9 +352,9 @@
       "sourceModules": 3
     },
     {
-      "emittedModules": 2,
+      "emittedModules": 8,
       "package": "@flighthq/layout",
-      "refusedModules": 6,
+      "refusedModules": 0,
       "sourceModules": 8
     },
     {
@@ -375,21 +370,21 @@
       "sourceModules": 14
     },
     {
-      "emittedModules": 1,
+      "emittedModules": 4,
       "package": "@flighthq/loader",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 4
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 3,
       "package": "@flighthq/log",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 3
     },
     {
-      "emittedModules": 12,
+      "emittedModules": 24,
       "package": "@flighthq/materials",
-      "refusedModules": 12,
+      "refusedModules": 0,
       "sourceModules": 24
     },
     {
@@ -399,9 +394,9 @@
       "sourceModules": 17
     },
     {
-      "emittedModules": 2,
+      "emittedModules": 8,
       "package": "@flighthq/media",
-      "refusedModules": 6,
+      "refusedModules": 0,
       "sourceModules": 8
     },
     {
@@ -417,39 +412,39 @@
       "sourceModules": 4
     },
     {
-      "emittedModules": 13,
+      "emittedModules": 16,
       "package": "@flighthq/mesh",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 16
     },
     {
-      "emittedModules": 5,
+      "emittedModules": 7,
       "package": "@flighthq/midi",
-      "refusedModules": 2,
+      "refusedModules": 0,
       "sourceModules": 7
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 3,
       "package": "@flighthq/motionpath",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 3
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 5,
       "package": "@flighthq/movieclip",
-      "refusedModules": 5,
+      "refusedModules": 0,
       "sourceModules": 5
     },
     {
-      "emittedModules": 2,
+      "emittedModules": 5,
       "package": "@flighthq/net",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 5
     },
     {
-      "emittedModules": 7,
+      "emittedModules": 21,
       "package": "@flighthq/node",
-      "refusedModules": 14,
+      "refusedModules": 0,
       "sourceModules": 21
     },
     {
@@ -459,39 +454,39 @@
       "sourceModules": 3
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 12,
       "package": "@flighthq/particleemitter",
-      "refusedModules": 12,
+      "refusedModules": 0,
       "sourceModules": 12
     },
     {
-      "emittedModules": 8,
+      "emittedModules": 13,
       "package": "@flighthq/particles",
-      "refusedModules": 5,
+      "refusedModules": 0,
       "sourceModules": 13
     },
     {
-      "emittedModules": 5,
+      "emittedModules": 17,
       "package": "@flighthq/particles-formats",
-      "refusedModules": 12,
+      "refusedModules": 0,
       "sourceModules": 17
     },
     {
-      "emittedModules": 1,
+      "emittedModules": 31,
       "package": "@flighthq/path",
-      "refusedModules": 30,
+      "refusedModules": 0,
       "sourceModules": 31
     },
     {
-      "emittedModules": 2,
+      "emittedModules": 11,
       "package": "@flighthq/path-boolean",
-      "refusedModules": 9,
+      "refusedModules": 0,
       "sourceModules": 11
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 3,
       "package": "@flighthq/path-formats",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 3
     },
     {
@@ -501,9 +496,9 @@
       "sourceModules": 4
     },
     {
-      "emittedModules": 22,
+      "emittedModules": 26,
       "package": "@flighthq/physics2d",
-      "refusedModules": 4,
+      "refusedModules": 0,
       "sourceModules": 26
     },
     {
@@ -513,9 +508,9 @@
       "sourceModules": 8
     },
     {
-      "emittedModules": 32,
+      "emittedModules": 36,
       "package": "@flighthq/physics3d",
-      "refusedModules": 4,
+      "refusedModules": 0,
       "sourceModules": 36
     },
     {
@@ -525,9 +520,9 @@
       "sourceModules": 8
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 4,
       "package": "@flighthq/picking",
-      "refusedModules": 4,
+      "refusedModules": 0,
       "sourceModules": 4
     },
     {
@@ -549,129 +544,129 @@
       "sourceModules": 3
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 3,
       "package": "@flighthq/quadbatch",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 3
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 3,
       "package": "@flighthq/registry",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 3
-    },
-    {
-      "emittedModules": 1,
-      "package": "@flighthq/registry-catalog",
-      "refusedModules": 3,
-      "sourceModules": 4
-    },
-    {
-      "emittedModules": 0,
-      "package": "@flighthq/registry-codegen",
-      "refusedModules": 3,
-      "sourceModules": 3
-    },
-    {
-      "emittedModules": 2,
-      "package": "@flighthq/render",
-      "refusedModules": 24,
-      "sourceModules": 26
-    },
-    {
-      "emittedModules": 6,
-      "package": "@flighthq/render-gl",
-      "refusedModules": 28,
-      "sourceModules": 34
     },
     {
       "emittedModules": 4,
-      "package": "@flighthq/render-wgpu",
-      "refusedModules": 26,
-      "sourceModules": 30
-    },
-    {
-      "emittedModules": 0,
-      "package": "@flighthq/requirements",
-      "refusedModules": 4,
+      "package": "@flighthq/registry-catalog",
+      "refusedModules": 0,
       "sourceModules": 4
     },
     {
-      "emittedModules": 0,
-      "package": "@flighthq/scene-document",
-      "refusedModules": 11,
-      "sourceModules": 11
+      "emittedModules": 3,
+      "package": "@flighthq/registry-codegen",
+      "refusedModules": 0,
+      "sourceModules": 3
     },
     {
-      "emittedModules": 0,
-      "package": "@flighthq/scene2d",
-      "refusedModules": 10,
-      "sourceModules": 10
+      "emittedModules": 26,
+      "package": "@flighthq/render",
+      "refusedModules": 0,
+      "sourceModules": 26
     },
     {
-      "emittedModules": 6,
-      "package": "@flighthq/scene2d-canvas",
-      "refusedModules": 45,
-      "sourceModules": 51
-    },
-    {
-      "emittedModules": 5,
-      "package": "@flighthq/scene2d-dom",
-      "refusedModules": 29,
+      "emittedModules": 34,
+      "package": "@flighthq/render-gl",
+      "refusedModules": 0,
       "sourceModules": 34
     },
     {
-      "emittedModules": 3,
-      "package": "@flighthq/scene2d-formats",
-      "refusedModules": 20,
-      "sourceModules": 23
+      "emittedModules": 31,
+      "package": "@flighthq/render-wgpu",
+      "refusedModules": 0,
+      "sourceModules": 31
     },
     {
-      "emittedModules": 1,
+      "emittedModules": 4,
+      "package": "@flighthq/requirements",
+      "refusedModules": 0,
+      "sourceModules": 4
+    },
+    {
+      "emittedModules": 11,
+      "package": "@flighthq/scene-document",
+      "refusedModules": 0,
+      "sourceModules": 11
+    },
+    {
+      "emittedModules": 10,
+      "package": "@flighthq/scene2d",
+      "refusedModules": 0,
+      "sourceModules": 10
+    },
+    {
+      "emittedModules": 51,
+      "package": "@flighthq/scene2d-canvas",
+      "refusedModules": 0,
+      "sourceModules": 51
+    },
+    {
+      "emittedModules": 34,
+      "package": "@flighthq/scene2d-dom",
+      "refusedModules": 0,
+      "sourceModules": 34
+    },
+    {
+      "emittedModules": 22,
+      "package": "@flighthq/scene2d-formats",
+      "refusedModules": 0,
+      "sourceModules": 22
+    },
+    {
+      "emittedModules": 32,
       "package": "@flighthq/scene2d-gl",
-      "refusedModules": 31,
+      "refusedModules": 0,
       "sourceModules": 32
     },
     {
-      "emittedModules": 1,
+      "emittedModules": 12,
       "package": "@flighthq/scene2d-resources",
-      "refusedModules": 11,
+      "refusedModules": 0,
       "sourceModules": 12
     },
     {
-      "emittedModules": 2,
+      "emittedModules": 33,
       "package": "@flighthq/scene2d-wgpu",
-      "refusedModules": 31,
+      "refusedModules": 0,
       "sourceModules": 33
     },
     {
-      "emittedModules": 1,
+      "emittedModules": 21,
       "package": "@flighthq/scene3d",
-      "refusedModules": 20,
+      "refusedModules": 0,
       "sourceModules": 21
     },
     {
-      "emittedModules": 3,
+      "emittedModules": 28,
       "package": "@flighthq/scene3d-formats",
-      "refusedModules": 25,
+      "refusedModules": 0,
       "sourceModules": 28
     },
     {
-      "emittedModules": 3,
+      "emittedModules": 66,
       "package": "@flighthq/scene3d-gl",
-      "refusedModules": 63,
+      "refusedModules": 0,
       "sourceModules": 66
     },
     {
-      "emittedModules": 12,
+      "emittedModules": 28,
       "package": "@flighthq/scene3d-resources",
-      "refusedModules": 16,
+      "refusedModules": 0,
       "sourceModules": 28
     },
     {
-      "emittedModules": 3,
+      "emittedModules": 48,
       "package": "@flighthq/scene3d-wgpu",
-      "refusedModules": 45,
+      "refusedModules": 0,
       "sourceModules": 48
     },
     {
@@ -681,9 +676,9 @@
       "sourceModules": 3
     },
     {
-      "emittedModules": 2,
+      "emittedModules": 6,
       "package": "@flighthq/selection",
-      "refusedModules": 4,
+      "refusedModules": 0,
       "sourceModules": 6
     },
     {
@@ -693,21 +688,21 @@
       "sourceModules": 3
     },
     {
-      "emittedModules": 3,
+      "emittedModules": 19,
       "package": "@flighthq/shading",
-      "refusedModules": 16,
+      "refusedModules": 0,
       "sourceModules": 19
     },
     {
-      "emittedModules": 2,
+      "emittedModules": 19,
       "package": "@flighthq/shape",
-      "refusedModules": 17,
+      "refusedModules": 0,
       "sourceModules": 19
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 4,
       "package": "@flighthq/shape-formats",
-      "refusedModules": 4,
+      "refusedModules": 0,
       "sourceModules": 4
     },
     {
@@ -729,45 +724,45 @@
       "sourceModules": 4
     },
     {
-      "emittedModules": 6,
+      "emittedModules": 10,
       "package": "@flighthq/signals",
-      "refusedModules": 4,
+      "refusedModules": 0,
       "sourceModules": 10
     },
     {
-      "emittedModules": 14,
+      "emittedModules": 25,
       "package": "@flighthq/skeleton2d",
-      "refusedModules": 11,
+      "refusedModules": 0,
       "sourceModules": 25
     },
     {
-      "emittedModules": 3,
+      "emittedModules": 10,
       "package": "@flighthq/skeleton2d-formats",
-      "refusedModules": 7,
+      "refusedModules": 0,
       "sourceModules": 10
     },
     {
-      "emittedModules": 3,
+      "emittedModules": 10,
       "package": "@flighthq/skeleton3d",
-      "refusedModules": 7,
+      "refusedModules": 0,
       "sourceModules": 10
     },
     {
-      "emittedModules": 2,
+      "emittedModules": 7,
       "package": "@flighthq/snapshot",
-      "refusedModules": 5,
+      "refusedModules": 0,
       "sourceModules": 7
     },
     {
-      "emittedModules": 2,
+      "emittedModules": 5,
       "package": "@flighthq/socket",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 5
     },
     {
-      "emittedModules": 8,
+      "emittedModules": 11,
       "package": "@flighthq/spatial",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 11
     },
     {
@@ -777,21 +772,21 @@
       "sourceModules": 6
     },
     {
-      "emittedModules": 2,
+      "emittedModules": 9,
       "package": "@flighthq/spritesheet",
-      "refusedModules": 7,
+      "refusedModules": 0,
       "sourceModules": 9
     },
     {
-      "emittedModules": 5,
+      "emittedModules": 13,
       "package": "@flighthq/spritesheet-formats",
-      "refusedModules": 8,
+      "refusedModules": 0,
       "sourceModules": 13
     },
     {
-      "emittedModules": 1,
+      "emittedModules": 5,
       "package": "@flighthq/statechart",
-      "refusedModules": 4,
+      "refusedModules": 0,
       "sourceModules": 5
     },
     {
@@ -801,39 +796,39 @@
       "sourceModules": 3
     },
     {
-      "emittedModules": 1,
+      "emittedModules": 4,
       "package": "@flighthq/storage",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 4
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 13,
       "package": "@flighthq/swf",
-      "refusedModules": 13,
+      "refusedModules": 0,
       "sourceModules": 13
     },
     {
-      "emittedModules": 1,
+      "emittedModules": 9,
       "package": "@flighthq/text",
-      "refusedModules": 8,
+      "refusedModules": 0,
       "sourceModules": 9
     },
     {
-      "emittedModules": 5,
+      "emittedModules": 8,
       "package": "@flighthq/text-markup",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 8
     },
     {
-      "emittedModules": 5,
+      "emittedModules": 8,
       "package": "@flighthq/textbidi",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 8
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 6,
       "package": "@flighthq/textinput",
-      "refusedModules": 6,
+      "refusedModules": 0,
       "sourceModules": 6
     },
     {
@@ -843,15 +838,15 @@
       "sourceModules": 14
     },
     {
-      "emittedModules": 4,
+      "emittedModules": 7,
       "package": "@flighthq/textsegment",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 7
     },
     {
-      "emittedModules": 8,
+      "emittedModules": 11,
       "package": "@flighthq/textshaper",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 11
     },
     {
@@ -861,9 +856,9 @@
       "sourceModules": 3
     },
     {
-      "emittedModules": 3,
+      "emittedModules": 9,
       "package": "@flighthq/texture",
-      "refusedModules": 6,
+      "refusedModules": 0,
       "sourceModules": 9
     },
     {
@@ -873,27 +868,27 @@
       "sourceModules": 11
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 7,
       "package": "@flighthq/textureatlas",
-      "refusedModules": 7,
+      "refusedModules": 0,
       "sourceModules": 7
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 8,
       "package": "@flighthq/textureatlas-formats",
-      "refusedModules": 8,
+      "refusedModules": 0,
       "sourceModules": 8
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 3,
       "package": "@flighthq/tilemap",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 3
     },
     {
-      "emittedModules": 4,
+      "emittedModules": 11,
       "package": "@flighthq/tilemap-formats",
-      "refusedModules": 7,
+      "refusedModules": 0,
       "sourceModules": 11
     },
     {
@@ -903,15 +898,15 @@
       "sourceModules": 3
     },
     {
-      "emittedModules": 1,
+      "emittedModules": 5,
       "package": "@flighthq/tokens",
-      "refusedModules": 4,
+      "refusedModules": 0,
       "sourceModules": 5
     },
     {
-      "emittedModules": 0,
+      "emittedModules": 4,
       "package": "@flighthq/tray",
-      "refusedModules": 4,
+      "refusedModules": 0,
       "sourceModules": 4
     },
     {
@@ -921,9 +916,9 @@
       "sourceModules": 10
     },
     {
-      "emittedModules": 895,
+      "emittedModules": 983,
       "package": "@flighthq/types",
-      "refusedModules": 88,
+      "refusedModules": 0,
       "sourceModules": 983
     },
     {
@@ -939,15 +934,15 @@
       "sourceModules": 4
     },
     {
-      "emittedModules": 2,
+      "emittedModules": 5,
       "package": "@flighthq/velocity",
-      "refusedModules": 3,
+      "refusedModules": 0,
       "sourceModules": 5
     },
     {
-      "emittedModules": 3,
+      "emittedModules": 5,
       "package": "@flighthq/video",
-      "refusedModules": 2,
+      "refusedModules": 0,
       "sourceModules": 5
     },
     {
@@ -964,6 +959,4749 @@
     }
   ],
   "runtime": {
+    "abi": {
+      "ambientMembers": {
+        "bindings": [
+          {
+            "binding": {
+              "kind": "property",
+              "targetName": "aborted"
+            },
+            "receiver": "abortSignal",
+            "sourceMember": "aborted"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "throwIfAborted"
+            },
+            "receiver": "abortSignal",
+            "sourceMember": "throwIfAborted"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "runtimeCall",
+              "targetName": "_Array.at"
+            },
+            "receiver": "array",
+            "sourceMember": "at"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "concat"
+            },
+            "receiver": "array",
+            "sourceMember": "concat"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "copy"
+            },
+            "receiver": "array",
+            "sourceMember": "copy"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0,
+                1,
+                2
+              ],
+              "kind": "runtimeCall",
+              "targetName": "_Array.copyWithin"
+            },
+            "receiver": "array",
+            "sourceMember": "copyWithin"
+          },
+          {
+            "binding": {
+              "kind": "runtimeCall",
+              "targetName": "_Array.entries"
+            },
+            "receiver": "array",
+            "sourceMember": "entries"
+          },
+          {
+            "binding": {
+              "kind": "staticCall",
+              "targetPath": "Lambda.foreach"
+            },
+            "receiver": "array",
+            "sourceMember": "every"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                1,
+                2
+              ],
+              "kind": "runtimeCall",
+              "targetName": "_Array.fill"
+            },
+            "receiver": "array",
+            "sourceMember": "fill"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "filter"
+            },
+            "receiver": "array",
+            "sourceMember": "filter"
+          },
+          {
+            "binding": {
+              "kind": "staticCall",
+              "targetPath": "Lambda.find"
+            },
+            "receiver": "array",
+            "sourceMember": "find"
+          },
+          {
+            "binding": {
+              "kind": "runtimeCall",
+              "targetName": "_Array.findIndex"
+            },
+            "receiver": "array",
+            "sourceMember": "findIndex"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "runtimeCall",
+              "targetName": "_Array.flat"
+            },
+            "receiver": "array",
+            "sourceMember": "flat"
+          },
+          {
+            "binding": {
+              "kind": "runtimeCall",
+              "targetName": "_Array.flatMap"
+            },
+            "receiver": "array",
+            "sourceMember": "flatMap"
+          },
+          {
+            "binding": {
+              "kind": "staticCall",
+              "targetPath": "Lambda.iter"
+            },
+            "receiver": "array",
+            "sourceMember": "forEach"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "contains"
+            },
+            "receiver": "array",
+            "sourceMember": "includes"
+          },
+          {
+            "binding": {
+              "kind": "property",
+              "targetName": "index"
+            },
+            "receiver": "array",
+            "sourceMember": "index"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                1
+              ],
+              "kind": "method",
+              "targetName": "indexOf"
+            },
+            "receiver": "array",
+            "sourceMember": "indexOf"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "join"
+            },
+            "receiver": "array",
+            "sourceMember": "join"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                1
+              ],
+              "kind": "method",
+              "targetName": "lastIndexOf"
+            },
+            "receiver": "array",
+            "sourceMember": "lastIndexOf"
+          },
+          {
+            "binding": {
+              "kind": "property",
+              "targetName": "length"
+            },
+            "receiver": "array",
+            "sourceMember": "length"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "map"
+            },
+            "receiver": "array",
+            "sourceMember": "map"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "pop"
+            },
+            "receiver": "array",
+            "sourceMember": "pop"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "push"
+            },
+            "receiver": "array",
+            "sourceMember": "push"
+          },
+          {
+            "binding": {
+              "kind": "staticFold",
+              "targetPath": "Lambda.fold"
+            },
+            "receiver": "array",
+            "sourceMember": "reduce"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "reverse"
+            },
+            "receiver": "array",
+            "sourceMember": "reverse"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "shift"
+            },
+            "receiver": "array",
+            "sourceMember": "shift"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "slice"
+            },
+            "receiver": "array",
+            "sourceMember": "slice"
+          },
+          {
+            "binding": {
+              "kind": "staticCall",
+              "targetPath": "Lambda.exists"
+            },
+            "receiver": "array",
+            "sourceMember": "some"
+          },
+          {
+            "binding": {
+              "kind": "runtimeCall",
+              "targetName": "_Array.sort"
+            },
+            "receiver": "array",
+            "sourceMember": "sort"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0,
+                1
+              ],
+              "kind": "method",
+              "targetName": "splice"
+            },
+            "receiver": "array",
+            "sourceMember": "splice"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "unshift"
+            },
+            "receiver": "array",
+            "sourceMember": "unshift"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0,
+                1
+              ],
+              "kind": "runtimeCall",
+              "targetName": "_ArrayBuffer.slice"
+            },
+            "receiver": "arrayBuffer",
+            "sourceMember": "slice"
+          },
+          {
+            "binding": {
+              "kind": "property",
+              "targetName": "buffer"
+            },
+            "receiver": "dataView",
+            "sourceMember": "buffer"
+          },
+          {
+            "binding": {
+              "kind": "property",
+              "targetName": "byteLength"
+            },
+            "receiver": "dataView",
+            "sourceMember": "byteLength"
+          },
+          {
+            "binding": {
+              "kind": "property",
+              "targetName": "byteOffset"
+            },
+            "receiver": "dataView",
+            "sourceMember": "byteOffset"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "method",
+              "targetName": "getFloat32"
+            },
+            "receiver": "dataView",
+            "sourceMember": "getFloat32"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "method",
+              "targetName": "getFloat64"
+            },
+            "receiver": "dataView",
+            "sourceMember": "getFloat64"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "method",
+              "targetName": "getInt16"
+            },
+            "receiver": "dataView",
+            "sourceMember": "getInt16"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "method",
+              "targetName": "getInt32"
+            },
+            "receiver": "dataView",
+            "sourceMember": "getInt32"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "method",
+              "targetName": "getInt8"
+            },
+            "receiver": "dataView",
+            "sourceMember": "getInt8"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "method",
+              "targetName": "getUint16"
+            },
+            "receiver": "dataView",
+            "sourceMember": "getUint16"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "method",
+              "targetName": "getUint32"
+            },
+            "receiver": "dataView",
+            "sourceMember": "getUint32"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "method",
+              "targetName": "getUint8"
+            },
+            "receiver": "dataView",
+            "sourceMember": "getUint8"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "method",
+              "targetName": "setFloat32"
+            },
+            "receiver": "dataView",
+            "sourceMember": "setFloat32"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "method",
+              "targetName": "setFloat64"
+            },
+            "receiver": "dataView",
+            "sourceMember": "setFloat64"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "method",
+              "targetName": "setInt16"
+            },
+            "receiver": "dataView",
+            "sourceMember": "setInt16"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "method",
+              "targetName": "setInt32"
+            },
+            "receiver": "dataView",
+            "sourceMember": "setInt32"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "method",
+              "targetName": "setInt8"
+            },
+            "receiver": "dataView",
+            "sourceMember": "setInt8"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "method",
+              "targetName": "setUint16"
+            },
+            "receiver": "dataView",
+            "sourceMember": "setUint16"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "method",
+              "targetName": "setUint32"
+            },
+            "receiver": "dataView",
+            "sourceMember": "setUint32"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "method",
+              "targetName": "setUint8"
+            },
+            "receiver": "dataView",
+            "sourceMember": "setUint8"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "getDate"
+            },
+            "receiver": "date",
+            "sourceMember": "getDate"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "getDay"
+            },
+            "receiver": "date",
+            "sourceMember": "getDay"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "getFullYear"
+            },
+            "receiver": "date",
+            "sourceMember": "getFullYear"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "getHours"
+            },
+            "receiver": "date",
+            "sourceMember": "getHours"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "getMilliseconds"
+            },
+            "receiver": "date",
+            "sourceMember": "getMilliseconds"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "getMinutes"
+            },
+            "receiver": "date",
+            "sourceMember": "getMinutes"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "getMonth"
+            },
+            "receiver": "date",
+            "sourceMember": "getMonth"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "getSeconds"
+            },
+            "receiver": "date",
+            "sourceMember": "getSeconds"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "getTime"
+            },
+            "receiver": "date",
+            "sourceMember": "getTime"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "toISOString"
+            },
+            "receiver": "date",
+            "sourceMember": "toISOString"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "toString"
+            },
+            "receiver": "date",
+            "sourceMember": "toString"
+          },
+          {
+            "binding": {
+              "kind": "property",
+              "targetName": "cause"
+            },
+            "receiver": "error",
+            "sourceMember": "cause"
+          },
+          {
+            "binding": {
+              "kind": "property",
+              "targetName": "message"
+            },
+            "receiver": "error",
+            "sourceMember": "message"
+          },
+          {
+            "binding": {
+              "kind": "property",
+              "targetName": "name"
+            },
+            "receiver": "error",
+            "sourceMember": "name"
+          },
+          {
+            "binding": {
+              "kind": "property",
+              "targetName": "stack"
+            },
+            "receiver": "error",
+            "sourceMember": "stack"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "clear"
+            },
+            "receiver": "map",
+            "sourceMember": "clear"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "delete"
+            },
+            "receiver": "map",
+            "sourceMember": "delete"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "entries"
+            },
+            "receiver": "map",
+            "sourceMember": "entries"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "forEach"
+            },
+            "receiver": "map",
+            "sourceMember": "forEach"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "get"
+            },
+            "receiver": "map",
+            "sourceMember": "get"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "has"
+            },
+            "receiver": "map",
+            "sourceMember": "has"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "keys"
+            },
+            "receiver": "map",
+            "sourceMember": "keys"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "set"
+            },
+            "receiver": "map",
+            "sourceMember": "set"
+          },
+          {
+            "binding": {
+              "kind": "property",
+              "targetName": "size"
+            },
+            "receiver": "map",
+            "sourceMember": "size"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "values"
+            },
+            "receiver": "map",
+            "sourceMember": "values"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "runtimeCall",
+              "targetName": "_Number.toFixed"
+            },
+            "receiver": "number",
+            "sourceMember": "toFixed"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "runtimeCall",
+              "targetName": "_Number.toString"
+            },
+            "receiver": "number",
+            "sourceMember": "toString"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "exec"
+            },
+            "receiver": "regexp",
+            "sourceMember": "exec"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "test"
+            },
+            "receiver": "regexp",
+            "sourceMember": "test"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "add"
+            },
+            "receiver": "set",
+            "sourceMember": "add"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "clear"
+            },
+            "receiver": "set",
+            "sourceMember": "clear"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "delete"
+            },
+            "receiver": "set",
+            "sourceMember": "delete"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "has"
+            },
+            "receiver": "set",
+            "sourceMember": "has"
+          },
+          {
+            "binding": {
+              "kind": "property",
+              "targetName": "size"
+            },
+            "receiver": "set",
+            "sourceMember": "size"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "method",
+              "targetName": "charAt"
+            },
+            "receiver": "string",
+            "sourceMember": "charAt"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "method",
+              "targetName": "charCodeAt"
+            },
+            "receiver": "string",
+            "sourceMember": "charCodeAt"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "runtimeCall",
+              "targetName": "_StringTools.codePointAt"
+            },
+            "receiver": "string",
+            "sourceMember": "codePointAt"
+          },
+          {
+            "binding": {
+              "kind": "staticCall",
+              "targetPath": "StringTools.endsWith"
+            },
+            "receiver": "string",
+            "sourceMember": "endsWith"
+          },
+          {
+            "binding": {
+              "kind": "staticCall",
+              "targetPath": "StringTools.contains"
+            },
+            "receiver": "string",
+            "sourceMember": "includes"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                1
+              ],
+              "kind": "method",
+              "targetName": "indexOf"
+            },
+            "receiver": "string",
+            "sourceMember": "indexOf"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                1
+              ],
+              "kind": "method",
+              "targetName": "lastIndexOf"
+            },
+            "receiver": "string",
+            "sourceMember": "lastIndexOf"
+          },
+          {
+            "binding": {
+              "kind": "property",
+              "targetName": "length"
+            },
+            "receiver": "string",
+            "sourceMember": "length"
+          },
+          {
+            "binding": {
+              "kind": "runtimeCall",
+              "targetName": "_StringTools.localeCompare"
+            },
+            "receiver": "string",
+            "sourceMember": "localeCompare"
+          },
+          {
+            "binding": {
+              "kind": "runtimeCall",
+              "targetName": "_StringTools.match"
+            },
+            "receiver": "string",
+            "sourceMember": "match"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "runtimeCall",
+              "targetName": "_StringTools.padEnd"
+            },
+            "receiver": "string",
+            "sourceMember": "padEnd"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "runtimeCall",
+              "targetName": "_StringTools.padStart"
+            },
+            "receiver": "string",
+            "sourceMember": "padStart"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0
+              ],
+              "kind": "runtimeCall",
+              "targetName": "_StringTools.repeat"
+            },
+            "receiver": "string",
+            "sourceMember": "repeat"
+          },
+          {
+            "binding": {
+              "kind": "runtimeCall",
+              "targetName": "_StringTools.replaceFirst"
+            },
+            "receiver": "string",
+            "sourceMember": "replace"
+          },
+          {
+            "binding": {
+              "kind": "staticCall",
+              "targetPath": "StringTools.replace"
+            },
+            "receiver": "string",
+            "sourceMember": "replaceAll"
+          },
+          {
+            "binding": {
+              "kind": "runtimeCall",
+              "targetName": "_StringTools.search"
+            },
+            "receiver": "string",
+            "sourceMember": "search"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0,
+                1
+              ],
+              "kind": "runtimeCall",
+              "targetName": "_StringTools.slice"
+            },
+            "receiver": "string",
+            "sourceMember": "slice"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                1
+              ],
+              "kind": "runtimeCall",
+              "targetName": "_StringTools.split"
+            },
+            "receiver": "string",
+            "sourceMember": "split"
+          },
+          {
+            "binding": {
+              "kind": "staticCall",
+              "targetPath": "StringTools.startsWith"
+            },
+            "receiver": "string",
+            "sourceMember": "startsWith"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0,
+                1
+              ],
+              "kind": "method",
+              "targetName": "substring"
+            },
+            "receiver": "string",
+            "sourceMember": "substring"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "toLowerCase"
+            },
+            "receiver": "string",
+            "sourceMember": "toLowerCase"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "toUpperCase"
+            },
+            "receiver": "string",
+            "sourceMember": "toUpperCase"
+          },
+          {
+            "binding": {
+              "kind": "staticCall",
+              "targetPath": "StringTools.trim"
+            },
+            "receiver": "string",
+            "sourceMember": "trim"
+          },
+          {
+            "binding": {
+              "kind": "runtimeCall",
+              "targetName": "_StringTools.trimEnd"
+            },
+            "receiver": "string",
+            "sourceMember": "trimEnd"
+          },
+          {
+            "binding": {
+              "kind": "runtimeCall",
+              "targetName": "_StringTools.trimStart"
+            },
+            "receiver": "string",
+            "sourceMember": "trimStart"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "catchError"
+            },
+            "receiver": "task",
+            "sourceMember": "catch"
+          },
+          {
+            "binding": {
+              "kind": "runtimeCall",
+              "targetName": "_Promise.finallyTask"
+            },
+            "receiver": "task",
+            "sourceMember": "finally"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "then"
+            },
+            "receiver": "task",
+            "sourceMember": "then"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "decode"
+            },
+            "receiver": "textDecoder",
+            "sourceMember": "decode"
+          },
+          {
+            "binding": {
+              "kind": "staticCall",
+              "targetPath": "Lambda.foreach"
+            },
+            "receiver": "tuple",
+            "sourceMember": "every"
+          },
+          {
+            "binding": {
+              "kind": "property",
+              "targetName": "length"
+            },
+            "receiver": "tuple",
+            "sourceMember": "length"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "map"
+            },
+            "receiver": "tuple",
+            "sourceMember": "map"
+          },
+          {
+            "binding": {
+              "kind": "method",
+              "targetName": "slice"
+            },
+            "receiver": "tuple",
+            "sourceMember": "slice"
+          },
+          {
+            "binding": {
+              "kind": "property",
+              "targetName": "buffer"
+            },
+            "receiver": "typedArray",
+            "sourceMember": "buffer"
+          },
+          {
+            "binding": {
+              "kind": "property",
+              "targetName": "byteLength"
+            },
+            "receiver": "typedArray",
+            "sourceMember": "byteLength"
+          },
+          {
+            "binding": {
+              "kind": "property",
+              "targetName": "byteOffset"
+            },
+            "receiver": "typedArray",
+            "sourceMember": "byteOffset"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0,
+                1,
+                2
+              ],
+              "kind": "runtimeCall",
+              "targetName": "_TypedArray.copyWithin"
+            },
+            "receiver": "typedArray",
+            "sourceMember": "copyWithin"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                1,
+                2
+              ],
+              "kind": "method",
+              "targetName": "fill"
+            },
+            "receiver": "typedArray",
+            "sourceMember": "fill"
+          },
+          {
+            "binding": {
+              "kind": "property",
+              "targetName": "length"
+            },
+            "receiver": "typedArray",
+            "sourceMember": "length"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                1
+              ],
+              "kind": "method",
+              "targetName": "set"
+            },
+            "receiver": "typedArray",
+            "sourceMember": "set"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0,
+                1
+              ],
+              "kind": "method",
+              "targetName": "slice"
+            },
+            "receiver": "typedArray",
+            "sourceMember": "slice"
+          },
+          {
+            "binding": {
+              "intArguments": [
+                0,
+                1
+              ],
+              "kind": "method",
+              "targetName": "subarray"
+            },
+            "receiver": "typedArray",
+            "sourceMember": "subarray"
+          },
+          {
+            "binding": {
+              "kind": "property",
+              "targetName": "origin"
+            },
+            "receiver": "url",
+            "sourceMember": "origin"
+          },
+          {
+            "binding": {
+              "kind": "property",
+              "targetName": "protocol"
+            },
+            "receiver": "url",
+            "sourceMember": "protocol"
+          }
+        ],
+        "schema": "flight-haxe-ambient-member-bindings/1"
+      },
+      "constructors": {
+        "constructors": [
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "AbortController",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Array",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "ArrayBuffer",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              1
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "AudioBuffer",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              1
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "AudioContext",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Blob",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "DataView",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Date",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "DOMException",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Error",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Float32Array",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Float64Array",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "FontFace",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              2,
+              3
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Function",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              1
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "ImageData",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              2,
+              3
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Int16Array",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Int32Array",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Int8Array",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Intl.Collator",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Intl.DateTimeFormat",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Intl.ListFormat",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Intl.NumberFormat",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Intl.PluralRules",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Intl.RelativeTimeFormat",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Intl.Segmenter",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Map",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "OffscreenCanvas",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              2
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Promise",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              1
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Proxy",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              2
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "RangeError",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "RegExp",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Set",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "SharedArrayBuffer",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              1
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "TextDecoder",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "TextEncoder",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "TypeError",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Uint16Array",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Uint32Array",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Uint8Array",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "Uint8ClampedArray",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "URL",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              1,
+              2
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "WeakMap",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "WeakSet",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              0,
+              1
+            ]
+          },
+          {
+            "dynamicArguments": false,
+            "externalSymbol": {
+              "sourceName": "WebSocket",
+              "space": "value"
+            },
+            "fixedArgumentCounts": [
+              1,
+              2
+            ]
+          }
+        ],
+        "contract": "flight-runtime-constructor-abi/1"
+      },
+      "externalSymbols": {
+        "bindings": [
+          {
+            "externalSymbol": {
+              "sourceName": "AbortSignalEventMap",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "AddEventListenerOptions",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "AudioBufferOptions",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "AudioContextOptions",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "AudioParam",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "BlobPart",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "BlobPropertyBag",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "ChildNode",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "CloseEvent",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "CollatorOptions",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "CompositionEvent",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "CustomEvent",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "DateTimeFormatOptions",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "DOMMatrix",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "DOMPointInit",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "DOMRect",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Element",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Event",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "EventListener",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "EventListenerOptions",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "EventTarget",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "EXT_color_buffer_float",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "EXT_texture_compression_bptc",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "EXT_texture_compression_rgtc",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GainNode",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Gamepad",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GamepadButton",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GamepadEvent",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Geolocation",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GeolocationCoordinates",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GeolocationPosition",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GeolocationPositionError",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPU",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUAllowSharedBufferSource",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUBindGroupEntry",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUBindGroupLayoutEntry",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUBlendComponent",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUBlendFactor",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUBlendOperation",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUBufferDescriptor",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUColor",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUCommandBuffer",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUCopyExternalImageDestInfo",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUCopyExternalImageSource",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUCopyExternalImageSourceInfo",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUDeviceDescriptor",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUExtent3D",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUExtent3DDict",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUFeatureName",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUFilterMode",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUMipmapFilterMode",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUOrigin3D",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUQueue",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPURenderPipelineDescriptor",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUSamplerDescriptor",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUStencilFaceState",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUStencilOperation",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUTexelCopyBufferLayout",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUTexelCopyTextureInfo",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUTextureDescriptor",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "HTMLElementTagNameMap",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "HTMLSpanElement",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "HTMLStyleElement",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "ImageDataArray",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "ImageEncodeOptions",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "InputEvent",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl.SegmentData",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "ListFormatOptions",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "LocalesArgument",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "MediaDevices",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "MediaStreamConstraints",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "MediaStreamTrack",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "MessageEvent",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "MouseEvent",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Navigator",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Node",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "NodeListOf",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "NumberFormatOptions",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "OES_texture_float_linear",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "OffscreenCanvas",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "OffscreenCanvasRenderingContext2D",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "PerformanceEntryList",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "PerformanceNavigationTiming",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "PermissionDescriptor",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "PermissionName",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Permissions",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "PermissionStatus",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "PluralRulesOptions",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "PositionErrorCallback",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "PositionOptions",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "PromiseFulfilledResult",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "PromiseRejectedResult",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "PropertyDescriptor",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "PropertyDescriptorMap",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "ProxyHandler",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "RelativeTimeFormatOptions",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "SegmenterOptions",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Segments",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "StereoPannerNode",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "SVGDefsElement",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "SVGFilterElement",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "SVGImageElement",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "SVGSVGElement",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Text",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "TextMetrics",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "timers.global.NodeJS.Timeout",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "VideoFrame",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WakeLock",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WakeLockSentinel",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WebGLActiveInfo",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WEBGL_compressed_texture_astc",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WEBGL_compressed_texture_etc",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WEBGL_compressed_texture_pvrtc",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WEBGL_compressed_texture_s3tc",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WEBGL_compressed_texture_s3tc_srgb",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WheelEvent",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WritableStreamDefaultWriter",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "AbortController",
+              "space": "value"
+            },
+            "targetName": "js.html.AbortController",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "AudioBuffer",
+              "space": "value"
+            },
+            "targetName": "js.html.audio.AudioBuffer",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "AudioContext",
+              "space": "value"
+            },
+            "targetName": "js.html.audio.AudioContext",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "atob",
+              "space": "value"
+            },
+            "targetName": "js.Browser.window.atob",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Blob",
+              "space": "value"
+            },
+            "targetName": "js.html.Blob",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Boolean",
+              "space": "value"
+            },
+            "targetName": "js.Syntax.code(\"Boolean\")",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "cancelAnimationFrame",
+              "space": "value"
+            },
+            "targetName": "js.Browser.window.cancelAnimationFrame",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "clearInterval",
+              "space": "value"
+            },
+            "targetName": "js.Browser.window.clearInterval",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "clearTimeout",
+              "space": "value"
+            },
+            "targetName": "js.Browser.window.clearTimeout",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "console",
+              "space": "value"
+            },
+            "targetName": "js.Browser.console",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "createImageBitmap",
+              "space": "value"
+            },
+            "targetName": "js.Browser.window.createImageBitmap",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "decodeURIComponent",
+              "space": "value"
+            },
+            "targetName": "js.Syntax.code(\"decodeURIComponent\")",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "DeviceMotionEvent",
+              "space": "value"
+            },
+            "targetName": "js.html.DeviceMotionEvent",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "DeviceOrientationEvent",
+              "space": "value"
+            },
+            "targetName": "js.Syntax.code(\"DeviceOrientationEvent\")",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "document",
+              "space": "value"
+            },
+            "targetName": "js.Browser.document",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "DOMException",
+              "space": "value"
+            },
+            "targetName": "js.html.DOMException",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "encodeURIComponent",
+              "space": "value"
+            },
+            "targetName": "js.Syntax.code(\"encodeURIComponent\")",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "FontFace",
+              "space": "value"
+            },
+            "targetName": "js.html.FontFace",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Function",
+              "space": "value"
+            },
+            "targetName": "js.Syntax.code(\"Function\")",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "globalThis",
+              "space": "value"
+            },
+            "targetName": "js.Syntax.code(\"globalThis\")",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUBufferUsage",
+              "space": "value"
+            },
+            "targetName": "js.Syntax.code(\"GPUBufferUsage\")",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUColorWrite",
+              "space": "value"
+            },
+            "targetName": "js.Syntax.code(\"GPUColorWrite\")",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUMapMode",
+              "space": "value"
+            },
+            "targetName": "js.Syntax.code(\"GPUMapMode\")",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUShaderStage",
+              "space": "value"
+            },
+            "targetName": "js.Syntax.code(\"GPUShaderStage\")",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUTextureUsage",
+              "space": "value"
+            },
+            "targetName": "js.Syntax.code(\"GPUTextureUsage\")",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "HTMLCanvasElement",
+              "space": "value"
+            },
+            "targetName": "js.html.CanvasElement",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "HTMLImageElement",
+              "space": "value"
+            },
+            "targetName": "js.html.ImageElement",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "HTMLVideoElement",
+              "space": "value"
+            },
+            "targetName": "js.html.VideoElement",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "ImageBitmap",
+              "space": "value"
+            },
+            "targetName": "js.html.ImageBitmap",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "ImageData",
+              "space": "value"
+            },
+            "targetName": "js.html.ImageData",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "KeyboardEvent",
+              "space": "value"
+            },
+            "targetName": "js.html.KeyboardEvent",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "location",
+              "space": "value"
+            },
+            "targetName": "js.Browser.window.location",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Magnetometer",
+              "space": "value"
+            },
+            "targetName": "js.Syntax.code(\"Magnetometer\")",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "navigator",
+              "space": "value"
+            },
+            "targetName": "js.Browser.navigator",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "OffscreenCanvas",
+              "space": "value"
+            },
+            "targetName": "js.Syntax.code(\"OffscreenCanvas\")",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "performance",
+              "space": "value"
+            },
+            "targetName": "js.Browser.window.performance",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "requestAnimationFrame",
+              "space": "value"
+            },
+            "targetName": "js.Browser.window.requestAnimationFrame",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "setInterval",
+              "space": "value"
+            },
+            "targetName": "js.Browser.window.setInterval",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "setTimeout",
+              "space": "value"
+            },
+            "targetName": "js.Browser.window.setTimeout",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "TextEncoder",
+              "space": "value"
+            },
+            "targetName": "js.html.TextEncoder",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "VideoFrame",
+              "space": "value"
+            },
+            "targetName": "js.Syntax.code(\"VideoFrame\")",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "vi",
+              "space": "value"
+            },
+            "targetName": "js.Syntax.code(\"vi\")",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WebSocket",
+              "space": "value"
+            },
+            "targetName": "js.html.WebSocket",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WheelEvent",
+              "space": "value"
+            },
+            "targetName": "js.html.WheelEvent",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "window",
+              "space": "value"
+            },
+            "targetName": "js.Browser.window",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "AbortController",
+              "space": "type"
+            },
+            "targetName": "js.html.AbortController",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "AbortSignal",
+              "space": "type"
+            },
+            "targetName": "js.html.AbortSignal",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Array",
+              "space": "type"
+            },
+            "targetName": "Array",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Function",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Array",
+              "space": "value"
+            },
+            "members": [
+              {
+                "sourceMember": "isArray",
+                "targetName": "_Array.isArray"
+              }
+            ],
+            "targetName": "_Array",
+            "capability": "array",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "ArrayBuffer",
+              "space": "type"
+            },
+            "targetName": "_ArrayBuffer",
+            "capability": "array-buffer",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "ArrayBuffer",
+              "space": "value"
+            },
+            "targetName": "_ArrayBuffer",
+            "capability": "array-buffer",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "ArrayBufferLike",
+              "space": "type"
+            },
+            "targetName": "_ArrayBuffer",
+            "capability": "array-buffer",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "ArrayBufferView",
+              "space": "type"
+            },
+            "targetName": "haxe.io.ArrayBufferView",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "ArrayLike",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "ArrayIterator",
+              "space": "type"
+            },
+            "targetName": "Iterator",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "AsyncIterable",
+              "space": "type"
+            },
+            "targetName": "_AsyncIterable",
+            "capability": "async-iterable",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "AsyncIterable",
+              "space": "value"
+            },
+            "members": [
+              {
+                "sourceMember": "forEachAsync",
+                "targetName": "_AsyncIterable.forEachAsync"
+              }
+            ],
+            "targetName": "_AsyncIterable",
+            "capability": "async-iterable",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "AudioBuffer",
+              "space": "type"
+            },
+            "targetName": "js.html.audio.AudioBuffer",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "AudioBufferSourceNode",
+              "space": "type"
+            },
+            "targetName": "js.html.audio.AudioBufferSourceNode",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "AudioContext",
+              "space": "type"
+            },
+            "targetName": "js.html.audio.AudioContext",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "AudioNode",
+              "space": "type"
+            },
+            "targetName": "js.html.audio.AudioNode",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Blob",
+              "space": "type"
+            },
+            "targetName": "js.html.Blob",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Boolean",
+              "space": "type"
+            },
+            "targetName": "Bool",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "CanvasLineCap",
+              "space": "type"
+            },
+            "targetName": "String",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "CanvasLineJoin",
+              "space": "type"
+            },
+            "targetName": "String",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "CanvasFillRule",
+              "space": "type"
+            },
+            "targetName": "js.html.CanvasWindingRule",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "CanvasGradient",
+              "space": "type"
+            },
+            "targetName": "js.html.CanvasGradient",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "CanvasImageSource",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "CanvasPattern",
+              "space": "type"
+            },
+            "targetName": "js.html.CanvasPattern",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "CanvasRenderingContext2D",
+              "space": "type"
+            },
+            "targetName": "js.html.CanvasRenderingContext2D",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "CanvasRenderingContext2DSettings",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "CSSStyleDeclaration",
+              "space": "type"
+            },
+            "targetName": "js.html.CSSStyleDeclaration",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "DataView",
+              "space": "type"
+            },
+            "targetName": "_DataView",
+            "capability": "data-view",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "DataView",
+              "space": "value"
+            },
+            "targetName": "_DataView",
+            "capability": "data-view",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Date",
+              "space": "type"
+            },
+            "targetName": "_Date",
+            "capability": "date",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Date",
+              "space": "value"
+            },
+            "targetName": "_Date",
+            "capability": "date",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "DOMHighResTimeStamp",
+              "space": "type"
+            },
+            "targetName": "Float",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "DOMException",
+              "space": "type"
+            },
+            "targetName": "js.html.DOMException",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Error",
+              "space": "type"
+            },
+            "targetName": "haxe.Exception",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Error",
+              "space": "value"
+            },
+            "targetName": "haxe.Exception",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "EXT_texture_filter_anisotropic",
+              "space": "type"
+            },
+            "targetName": "js.html.webgl.extension.EXTTextureFilterAnisotropic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Float32Array",
+              "space": "type"
+            },
+            "targetName": "_Float32Array",
+            "capability": "float32-array",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "FontFace",
+              "space": "type"
+            },
+            "targetName": "js.html.FontFace",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GlobalCompositeOperation",
+              "space": "type"
+            },
+            "targetName": "js.html.CompositeOperation",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GLenum",
+              "space": "type"
+            },
+            "targetName": "Int",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GLuint",
+              "space": "type"
+            },
+            "targetName": "Int",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUAdapter",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUBlendState",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUBindGroup",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUBindGroupLayout",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUBuffer",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUCanvasContext",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUCommandEncoder",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUDevice",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUDeviceLostInfo",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUIndexFormat",
+              "space": "type"
+            },
+            "targetName": "String",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPULoadOp",
+              "space": "type"
+            },
+            "targetName": "String",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUPipelineLayout",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUPowerPreference",
+              "space": "type"
+            },
+            "targetName": "String",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUPrimitiveTopology",
+              "space": "type"
+            },
+            "targetName": "String",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPURenderPassEncoder",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPURenderPipeline",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUSampler",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUShaderModule",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUTexture",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUTextureFormat",
+              "space": "type"
+            },
+            "targetName": "String",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUTextureView",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "GPUVertexBufferLayout",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "HTMLCanvasElement",
+              "space": "type"
+            },
+            "targetName": "js.html.CanvasElement",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "HTMLDivElement",
+              "space": "type"
+            },
+            "targetName": "js.html.DivElement",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "HTMLElement",
+              "space": "type"
+            },
+            "targetName": "js.html.Element",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "HTMLImageElement",
+              "space": "type"
+            },
+            "targetName": "js.html.ImageElement",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "HTMLVideoElement",
+              "space": "type"
+            },
+            "targetName": "js.html.VideoElement",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "ImageBitmap",
+              "space": "type"
+            },
+            "targetName": "js.html.ImageBitmap",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "ImageData",
+              "space": "type"
+            },
+            "targetName": "js.html.ImageData",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "ImageSmoothingQuality",
+              "space": "type"
+            },
+            "targetName": "String",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Iterable",
+              "space": "type"
+            },
+            "targetName": "Iterable",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "LDMLPluralRule",
+              "space": "type"
+            },
+            "targetName": "String",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Float32Array",
+              "space": "value"
+            },
+            "targetName": "_Float32Array",
+            "capability": "float32-array",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Float64Array",
+              "space": "type"
+            },
+            "targetName": "_Float64Array",
+            "capability": "float64-array",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Float64Array",
+              "space": "value"
+            },
+            "targetName": "_Float64Array",
+            "capability": "float64-array",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Int16Array",
+              "space": "type"
+            },
+            "targetName": "_Int16Array",
+            "capability": "int16-array",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Int16Array",
+              "space": "value"
+            },
+            "targetName": "_Int16Array",
+            "capability": "int16-array",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Int32Array",
+              "space": "type"
+            },
+            "targetName": "_Int32Array",
+            "capability": "int32-array",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Int32Array",
+              "space": "value"
+            },
+            "targetName": "_Int32Array",
+            "capability": "int32-array",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Int8Array",
+              "space": "type"
+            },
+            "targetName": "_Int8Array",
+            "capability": "int8-array",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Int8Array",
+              "space": "value"
+            },
+            "targetName": "_Int8Array",
+            "capability": "int8-array",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl",
+              "space": "value"
+            },
+            "members": [
+              {
+                "sourceMember": "Collator",
+                "targetName": "_IntlCollator"
+              },
+              {
+                "sourceMember": "DateTimeFormat",
+                "targetName": "_IntlDateTimeFormat"
+              },
+              {
+                "sourceMember": "ListFormat",
+                "targetName": "_IntlListFormat"
+              },
+              {
+                "sourceMember": "NumberFormat",
+                "targetName": "_IntlNumberFormat"
+              },
+              {
+                "sourceMember": "PluralRules",
+                "targetName": "_IntlPluralRules"
+              },
+              {
+                "sourceMember": "RelativeTimeFormat",
+                "targetName": "_IntlRelativeTimeFormat"
+              },
+              {
+                "sourceMember": "Segmenter",
+                "targetName": "_IntlSegmenter"
+              }
+            ],
+            "targetName": "_Intl",
+            "capability": "internationalization",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl.Collator",
+              "space": "type"
+            },
+            "targetName": "_IntlCollator",
+            "capability": "internationalization",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl.CollatorOptions",
+              "space": "type"
+            },
+            "targetName": "_IntlCollatorOptions",
+            "capability": "internationalization",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl.DateTimeFormat",
+              "space": "type"
+            },
+            "targetName": "_IntlDateTimeFormat",
+            "capability": "internationalization",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl.DateTimeFormatOptions",
+              "space": "type"
+            },
+            "targetName": "_IntlDateTimeFormatOptions",
+            "capability": "internationalization",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl.LDMLPluralRule",
+              "space": "type"
+            },
+            "targetName": "_IntlPluralRule",
+            "capability": "internationalization",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl.ListFormat",
+              "space": "type"
+            },
+            "targetName": "_IntlListFormat",
+            "capability": "internationalization",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl.ListFormatOptions",
+              "space": "type"
+            },
+            "targetName": "_IntlListFormatOptions",
+            "capability": "internationalization",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl.NumberFormat",
+              "space": "type"
+            },
+            "targetName": "_IntlNumberFormat",
+            "capability": "internationalization",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl.NumberFormatOptions",
+              "space": "type"
+            },
+            "targetName": "_IntlNumberFormatOptions",
+            "capability": "internationalization",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl.PluralRules",
+              "space": "type"
+            },
+            "targetName": "_IntlPluralRules",
+            "capability": "internationalization",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl.PluralRulesOptions",
+              "space": "type"
+            },
+            "targetName": "_IntlPluralRulesOptions",
+            "capability": "internationalization",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl.RelativeTimeFormat",
+              "space": "type"
+            },
+            "targetName": "_IntlRelativeTimeFormat",
+            "capability": "internationalization",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl.RelativeTimeFormatOptions",
+              "space": "type"
+            },
+            "targetName": "_IntlRelativeTimeFormatOptions",
+            "capability": "internationalization",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl.RelativeTimeFormatUnit",
+              "space": "type"
+            },
+            "targetName": "_IntlRelativeTimeFormatUnit",
+            "capability": "internationalization",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl.Segmenter",
+              "space": "type"
+            },
+            "targetName": "_IntlSegmenter",
+            "capability": "internationalization",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl.SegmenterOptions",
+              "space": "type"
+            },
+            "targetName": "_IntlSegmenterOptions",
+            "capability": "internationalization",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl.Collator",
+              "space": "value"
+            },
+            "targetName": "_IntlCollator",
+            "capability": "internationalization",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl.DateTimeFormat",
+              "space": "value"
+            },
+            "targetName": "_IntlDateTimeFormat",
+            "capability": "internationalization",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl.ListFormat",
+              "space": "value"
+            },
+            "targetName": "_IntlListFormat",
+            "capability": "internationalization",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl.NumberFormat",
+              "space": "value"
+            },
+            "targetName": "_IntlNumberFormat",
+            "capability": "internationalization",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl.PluralRules",
+              "space": "value"
+            },
+            "targetName": "_IntlPluralRules",
+            "capability": "internationalization",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl.RelativeTimeFormat",
+              "space": "value"
+            },
+            "targetName": "_IntlRelativeTimeFormat",
+            "capability": "internationalization",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Intl.Segmenter",
+              "space": "value"
+            },
+            "targetName": "_IntlSegmenter",
+            "capability": "internationalization",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "KeyboardEvent",
+              "space": "type"
+            },
+            "targetName": "js.html.KeyboardEvent",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Map",
+              "space": "type"
+            },
+            "targetName": "_Map",
+            "capability": "map",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Map",
+              "space": "value"
+            },
+            "targetName": "_Map",
+            "capability": "map",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "MediaStream",
+              "space": "type"
+            },
+            "targetName": "js.html.MediaStream",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "MapIterator",
+              "space": "type"
+            },
+            "targetName": "Iterator",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Infinity",
+              "space": "value"
+            },
+            "targetName": "Math.POSITIVE_INFINITY",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Math",
+              "space": "value"
+            },
+            "targetName": "Math",
+            "kind": "native",
+            "runtimeMembers": [
+              {
+                "sourceMember": "log2",
+                "targetName": "_Math.log2"
+              },
+              {
+                "sourceMember": "sign",
+                "targetName": "_Math.sign"
+              },
+              {
+                "sourceMember": "trunc",
+                "targetName": "_Math.trunc"
+              }
+            ]
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "NaN",
+              "space": "value"
+            },
+            "targetName": "Math.NaN",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Number",
+              "space": "value"
+            },
+            "members": [
+              {
+                "sourceMember": "EPSILON",
+                "targetName": "2.220446049250313e-16"
+              },
+              {
+                "sourceMember": "MAX_SAFE_INTEGER",
+                "targetName": "9.007199254740991e15"
+              },
+              {
+                "sourceMember": "MAX_VALUE",
+                "targetName": "1.7976931348623157e308"
+              },
+              {
+                "sourceMember": "MIN_SAFE_INTEGER",
+                "targetName": "-9.007199254740991e15"
+              },
+              {
+                "sourceMember": "MIN_VALUE",
+                "targetName": "4.9406564584124654e-324"
+              },
+              {
+                "sourceMember": "NaN",
+                "targetName": "Math.NaN"
+              },
+              {
+                "sourceMember": "NEGATIVE_INFINITY",
+                "targetName": "Math.NEGATIVE_INFINITY"
+              },
+              {
+                "sourceMember": "POSITIVE_INFINITY",
+                "targetName": "Math.POSITIVE_INFINITY"
+              },
+              {
+                "sourceMember": "isFinite",
+                "targetName": "Math.isFinite"
+              },
+              {
+                "sourceMember": "isInteger",
+                "targetName": "(function(numberValue:Float) return Math.isFinite(numberValue) && Math.ffloor(numberValue) == numberValue)"
+              },
+              {
+                "sourceMember": "isNaN",
+                "targetName": "Math.isNaN"
+              },
+              {
+                "sourceMember": "isSafeInteger",
+                "targetName": "(function(numberValue:Float) return Math.isFinite(numberValue) && Math.ffloor(numberValue) == numberValue && Math.abs(numberValue) <= 9.007199254740991e15)"
+              },
+              {
+                "sourceMember": "parseFloat",
+                "targetName": "Std.parseFloat"
+              }
+            ],
+            "targetName": "Number",
+            "kind": "native",
+            "runtimeMembers": [
+              {
+                "sourceMember": "parseInt",
+                "targetName": "_Number.parseInt"
+              }
+            ]
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Object",
+              "space": "value"
+            },
+            "members": [
+              {
+                "sourceMember": "assign",
+                "targetName": "_Object.assign"
+              },
+              {
+                "sourceMember": "entries",
+                "targetName": "_Object.entries"
+              },
+              {
+                "sourceMember": "is",
+                "targetName": "_Object.is"
+              },
+              {
+                "sourceMember": "keys",
+                "targetName": "_Object.keys"
+              }
+            ],
+            "targetName": "_Object",
+            "capability": "object",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Promise",
+              "space": "type"
+            },
+            "targetName": "_Promise",
+            "capability": "task",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Promise",
+              "space": "value"
+            },
+            "targetName": "_Promise",
+            "capability": "task",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "PromiseLike",
+              "space": "type"
+            },
+            "targetName": "_Promise",
+            "capability": "task",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Proxy",
+              "space": "value"
+            },
+            "targetName": "_Proxy",
+            "capability": "structural-proxy",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "ReadableStream",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "RangeError",
+              "space": "type"
+            },
+            "targetName": "haxe.Exception",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "RangeError",
+              "space": "value"
+            },
+            "targetName": "haxe.Exception",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Record",
+              "space": "type"
+            },
+            "targetName": "haxe.DynamicAccess",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "RegExp",
+              "space": "type"
+            },
+            "targetName": "_RegExp",
+            "capability": "regexp",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "RegExp",
+              "space": "value"
+            },
+            "targetName": "_RegExp",
+            "capability": "regexp",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "RegExpExecArray",
+              "space": "type"
+            },
+            "targetName": "_RegExpExecArray",
+            "capability": "regexp",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "ReadonlyMap",
+              "space": "type"
+            },
+            "targetName": "_Map",
+            "capability": "map",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "ReadonlySet",
+              "space": "type"
+            },
+            "targetName": "_Set",
+            "capability": "set",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Set",
+              "space": "type"
+            },
+            "targetName": "_Set",
+            "capability": "set",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Set",
+              "space": "value"
+            },
+            "targetName": "_Set",
+            "capability": "set",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "SharedArrayBuffer",
+              "space": "type"
+            },
+            "targetName": "js.lib.SharedArrayBuffer",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "SharedArrayBuffer",
+              "space": "value"
+            },
+            "targetName": "js.lib.SharedArrayBuffer",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "String",
+              "space": "type"
+            },
+            "targetName": "String",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "String",
+              "space": "value"
+            },
+            "members": [
+              {
+                "sourceMember": "fromCodePoint",
+                "targetName": "js.Syntax.code(\"String.fromCodePoint\")"
+              }
+            ],
+            "targetName": "String",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Symbol",
+              "space": "value"
+            },
+            "members": [
+              {
+                "sourceMember": "for",
+                "targetName": "_Symbol.forKey"
+              }
+            ],
+            "targetName": "_Symbol",
+            "capability": "symbol",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "TextDecoder",
+              "space": "type"
+            },
+            "targetName": "_TextDecoder",
+            "capability": "text-decoder",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "TexImageSource",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "TextDecoder",
+              "space": "value"
+            },
+            "targetName": "_TextDecoder",
+            "capability": "text-decoder",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "TypeError",
+              "space": "type"
+            },
+            "targetName": "haxe.Exception",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "TypeError",
+              "space": "value"
+            },
+            "targetName": "haxe.Exception",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Uint16Array",
+              "space": "type"
+            },
+            "targetName": "_UInt16Array",
+            "capability": "uint16-array",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Uint16Array",
+              "space": "value"
+            },
+            "targetName": "_UInt16Array",
+            "capability": "uint16-array",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Uint32Array",
+              "space": "type"
+            },
+            "targetName": "_UInt32Array",
+            "capability": "uint32-array",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Uint32Array",
+              "space": "value"
+            },
+            "targetName": "_UInt32Array",
+            "capability": "uint32-array",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Uint8Array",
+              "space": "type"
+            },
+            "targetName": "_UInt8Array",
+            "capability": "uint8-array",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Uint8Array",
+              "space": "value"
+            },
+            "targetName": "_UInt8Array",
+            "capability": "uint8-array",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Uint8ClampedArray",
+              "space": "type"
+            },
+            "targetName": "_UInt8ClampedArray",
+            "capability": "uint8-clamped-array",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "URL",
+              "space": "type"
+            },
+            "targetName": "_Url",
+            "capability": "url",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "URL",
+              "space": "value"
+            },
+            "targetName": "_Url",
+            "capability": "url",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "Uint8ClampedArray",
+              "space": "value"
+            },
+            "targetName": "_UInt8ClampedArray",
+            "capability": "uint8-clamped-array",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WeakMap",
+              "space": "type"
+            },
+            "targetName": "_WeakMap",
+            "capability": "weak-map",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WeakMap",
+              "space": "value"
+            },
+            "targetName": "_WeakMap",
+            "capability": "weak-map",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WeakSet",
+              "space": "type"
+            },
+            "targetName": "_WeakSet",
+            "capability": "weak-set",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WeakSet",
+              "space": "value"
+            },
+            "targetName": "_WeakSet",
+            "capability": "weak-set",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WakeLockType",
+              "space": "type"
+            },
+            "targetName": "String",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WebGLBuffer",
+              "space": "type"
+            },
+            "targetName": "js.html.webgl.Buffer",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WebGLContextAttributes",
+              "space": "type"
+            },
+            "targetName": "js.html.webgl.ContextAttributes",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WebSocket",
+              "space": "type"
+            },
+            "targetName": "js.html.WebSocket",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WebGLFramebuffer",
+              "space": "type"
+            },
+            "targetName": "js.html.webgl.Framebuffer",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WebGLPowerPreference",
+              "space": "type"
+            },
+            "targetName": "js.html.webgl.PowerPreference",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WebGLProgram",
+              "space": "type"
+            },
+            "targetName": "js.html.webgl.Program",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WebGLRenderbuffer",
+              "space": "type"
+            },
+            "targetName": "js.html.webgl.Renderbuffer",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WebGLShader",
+              "space": "type"
+            },
+            "targetName": "js.html.webgl.Shader",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WebGLTexture",
+              "space": "type"
+            },
+            "targetName": "js.html.webgl.Texture",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WebGLUniformLocation",
+              "space": "type"
+            },
+            "targetName": "js.html.webgl.UniformLocation",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WebGL2RenderingContext",
+              "space": "type"
+            },
+            "targetName": "js.html.webgl.WebGL2RenderingContext",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WebGLRenderingContext",
+              "space": "type"
+            },
+            "targetName": "js.html.webgl.RenderingContext",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WebGLVertexArrayObject",
+              "space": "type"
+            },
+            "targetName": "js.html.webgl.VertexArrayObject",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "PointerEvent",
+              "space": "type"
+            },
+            "targetName": "js.html.PointerEvent",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "WritableStream",
+              "space": "type"
+            },
+            "targetName": "Dynamic",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "JSON",
+              "space": "value"
+            },
+            "targetName": "_Json",
+            "capability": "json",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "parseInt",
+              "space": "value"
+            },
+            "targetName": "_Number.parseInt",
+            "capability": "number-parsing",
+            "kind": "runtime"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "parseFloat",
+              "space": "value"
+            },
+            "targetName": "Std.parseFloat",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "isFinite",
+              "space": "value"
+            },
+            "targetName": "Math.isFinite",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "isNaN",
+              "space": "value"
+            },
+            "targetName": "Math.isNaN",
+            "kind": "native"
+          },
+          {
+            "externalSymbol": {
+              "sourceName": "structuredClone",
+              "space": "value"
+            },
+            "targetName": "_Object.structuredClone",
+            "capability": "object",
+            "kind": "runtime"
+          }
+        ],
+        "contract": "flight-runtime-contract/2",
+        "schema": "flight-haxe-runtime-external-symbol-bindings/1"
+      },
+      "intrinsics": {
+        "requirements": [
+          {
+            "capability": "array",
+            "members": [
+              "pushMany"
+            ],
+            "targetName": "_ArrayTools"
+          },
+          {
+            "capability": "javascript-semantics",
+            "members": [
+              "add",
+              "bitwiseAnd",
+              "bitwiseNot",
+              "bitwiseOr",
+              "bitwiseXor",
+              "deleteProperty",
+              "divide",
+              "getProperty",
+              "greaterThan",
+              "greaterThanOrEqual",
+              "inOperator",
+              "instanceOf",
+              "lessThan",
+              "lessThanOrEqual",
+              "looseEqual",
+              "multiply",
+              "power",
+              "remainder",
+              "setProperty",
+              "shiftLeft",
+              "shiftRight",
+              "shiftRightUnsigned",
+              "strictEqual",
+              "subtract",
+              "toNumber",
+              "truthy",
+              "typeOf"
+            ],
+            "targetName": "_Js"
+          }
+        ],
+        "schema": "flight-haxe-runtime-intrinsics/1"
+      },
+      "schema": "flight-haxe-runtime-abi/2",
+      "tasks": {
+        "capabilities": [
+          {
+            "capability": "cleanup",
+            "invocation": "instanceMethod",
+            "memberName": "finally",
+            "operation": "finally",
+            "operationSemantics": "flight-compiler-task-operation-semantics/1"
+          },
+          {
+            "capability": "construct",
+            "completionSemantics": "flight-compiler-async-task-completion/1",
+            "executorInvocation": "synchronous",
+            "executorParameters": [
+              "resolve",
+              "reject"
+            ],
+            "invocation": "constructor",
+            "settlementCallbacks": "first-call-wins-assimilating-resolve-exact-reject"
+          },
+          {
+            "awaitSemantics": "flight-compiler-await-semantics/1",
+            "capability": "continue",
+            "invocation": "instanceMethod",
+            "memberName": "then",
+            "operation": "then",
+            "operationSemantics": "flight-compiler-task-operation-semantics/1"
+          },
+          {
+            "capability": "joinAll",
+            "invocation": "staticMethod",
+            "memberName": "all",
+            "operation": "joinAll",
+            "operationSemantics": "flight-compiler-task-operation-semantics/1"
+          },
+          {
+            "capability": "normalize",
+            "invocation": "staticMethod",
+            "memberName": "resolve",
+            "operation": "ready",
+            "operationSemantics": "flight-compiler-task-operation-semantics/1"
+          },
+          {
+            "capability": "reject",
+            "invocation": "staticMethod",
+            "memberName": "reject",
+            "operation": "reject",
+            "operationSemantics": "flight-compiler-task-operation-semantics/1"
+          }
+        ],
+        "contract": "flight-runtime-task-capability-abi/1"
+      }
+    },
     "constructorAbi": "flight-runtime-constructor-abi/1",
     "externalSymbols": "flight-runtime-contract/2",
     "profiles": {
@@ -993,22 +5731,22 @@
     "version": "0.5.0"
   },
   "summary": {
-    "emittedFiles": 2096,
-    "emittedModules": 1635,
+    "emittedFiles": 3166,
+    "emittedModules": 2855,
     "packages": 154,
-    "refusedModules": 1220,
+    "refusedModules": 0,
     "sourceModules": 2855,
-    "compatibilityFiles": 2016,
-    "generatedFiles": 4112,
-    "publicFacadeFiles": 1365,
-    "filteredContractFunctions": 113,
-    "filteredContractValues": 123,
+    "compatibilityFiles": 3012,
+    "generatedFiles": 6178,
+    "publicFacadeFiles": 1507,
+    "filteredContractFunctions": 0,
+    "filteredContractValues": 0,
     "publicRuntimeSurface": {
-      "emittedDeclarations": 3093,
-      "emittedTypes": 2016,
-      "expectedDeclarations": 7082,
-      "fullyCoveredPackages": 59,
-      "missingDeclarations": 3989,
+      "emittedDeclarations": 7077,
+      "emittedTypes": 3012,
+      "expectedDeclarations": 7077,
+      "fullyCoveredPackages": 154,
+      "missingDeclarations": 0,
       "packages": 154,
       "unexpectedDeclarations": 0
     }

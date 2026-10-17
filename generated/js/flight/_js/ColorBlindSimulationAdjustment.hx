@@ -5,5 +5,5 @@ typedef ColorBlindSimulationAdjustment = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var kind:String;
   var colorMatrix:Array<Float>;
-  @:optional var type:Dynamic;
+  @:optional var type:flight.ColorBlindType;
 };

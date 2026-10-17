@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef BitmapResizeOptions = {
-  @:optional var mode:Dynamic;
-  @:optional var edgeMode:Dynamic;
+  @:optional var mode:flight.BitmapResizeMode;
+  @:optional var edgeMode:flight.BitmapEdgeMode;
   @:optional var premultiplied:Bool;
 };

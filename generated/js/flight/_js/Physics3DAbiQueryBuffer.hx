@@ -3,9 +3,9 @@ package flight._js;
 
 typedef Physics3DAbiQueryBuffer = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var bodyIds:flight._internal._UInt32Array<haxe.io.Bytes>;
-  var colliderIds:flight._internal._UInt32Array<haxe.io.Bytes>;
-  var values:flight._internal._Float64Array<haxe.io.Bytes>;
+  var bodyIds:flight._internal._UInt32Array<flight._internal._ArrayBuffer>;
+  var colliderIds:flight._internal._UInt32Array<flight._internal._ArrayBuffer>;
+  var values:flight._internal._Float64Array<flight._internal._ArrayBuffer>;
   var count:Float;
   var requiredCount:Float;
 };

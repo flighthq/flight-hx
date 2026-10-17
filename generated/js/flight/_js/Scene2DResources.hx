@@ -4,6 +4,6 @@ package flight._js;
 typedef Scene2DResources = {
   var document:flight.Scene2DDocument;
   var resolved:Array<flight.Scene2DSlotResolution>;
-  var root:Dynamic;
+  var root:flight.Node2D;
   var unresolved:Array<flight.Scene2DSlotReference>;
 };

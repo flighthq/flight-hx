@@ -5,13 +5,13 @@ typedef FlightDocumentRefusalExplanation = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var actual:Null<Float>;
   var column:Null<Float>;
-  var kind:Null<String>;
+  var kind:Null<flight.Kind>;
   var limit:Null<Float>;
   var line:Null<Float>;
   var mode:Null<String>;
   var offset:Null<Float>;
   var path:String;
-  var reason:String;
+  var reason:flight.FlightDocumentRefusalReason;
   var resourceKey:Null<String>;
   var tokenKey:Null<String>;
   var version:Null<Float>;

@@ -4,26 +4,26 @@ package flight._js._fn;
 
 @:jsImport("@flighthq/shortcut/contract")
 extern class Shortcut {
-  static function attachGlobalShortcut(host:flight.HasShortcutTrigger, shortcut:flight.GlobalShortcut):flight._internal._Promise<{ reason:Dynamic }>;
-  static function createGlobalShortcut(accelerator:String):Dynamic;
+  static function attachGlobalShortcut(host:flight.HasShortcutTrigger, shortcut:flight.GlobalShortcut):flight._internal._Promise<flight.GlobalShortcutAttachOutcome>;
+  static function createGlobalShortcut(accelerator:String):flight.CreateGlobalShortcutOutcome;
   static function destroyShortcutTrigger(host:flight.HasShortcutTrigger):flight._internal._Promise<Dynamic>;
-  static function detachGlobalShortcut(host:flight.HasShortcutTrigger, shortcut:flight.GlobalShortcut):flight._internal._Promise<{ reason:Dynamic }>;
-  static function disposeGlobalShortcut(host:flight.HasShortcutTrigger, shortcut:flight.GlobalShortcut):flight._internal._Promise<{ reason:Dynamic }>;
+  static function detachGlobalShortcut(host:flight.HasShortcutTrigger, shortcut:flight.GlobalShortcut):flight._internal._Promise<flight.GlobalShortcutDetachOutcome>;
+  static function disposeGlobalShortcut(host:flight.HasShortcutTrigger, shortcut:flight.GlobalShortcut):flight._internal._Promise<flight.GlobalShortcutDetachOutcome>;
   static function equalsAccelerator(a:String, b:String):Bool;
   static function findAcceleratorConflict(accelerator:String, candidates:Array<String>):Null<String>;
-  static function formatAcceleratorForDisplay(accelerator:String, platform:Dynamic):String;
-  static function getAcceleratorKey(accelerator:String):Null<Dynamic>;
-  static function getAcceleratorKeyLabel(key:Dynamic):String;
-  static function getAcceleratorModifierLabel(modifier:Dynamic, platform:Dynamic):String;
-  static function getAcceleratorModifiers(accelerator:String, out:Array<Dynamic>):Null<Array<Dynamic>>;
-  static function initializeGlobalShortcut(out:flight.GlobalShortcut, accelerator:String):Void;
+  static function formatAcceleratorForDisplay(accelerator:String, platform:flight.PlatformName):String;
+  static function getAcceleratorKey(accelerator:String):Null<flight.ShortcutKeyName>;
+  static function getAcceleratorKeyLabel(key:flight.ShortcutKeyName):String;
+  static function getAcceleratorModifierLabel(modifier:flight.ShortcutModifier, platform:flight.PlatformName):String;
+  static function getAcceleratorModifiers(accelerator:String, out:Array<flight.ShortcutModifier>):Null<Array<flight.ShortcutModifier>>;
+  static function initializeGlobalShortcut(out:flight.EntityConstruction<flight.GlobalShortcut>, accelerator:flight.Accelerator):Void;
   static function isAcceleratorValid(input:String):Bool;
   static function makeParsedAccelerator():flight.ParsedAccelerator;
-  static function normalizeAccelerator(input:String):Null<String>;
+  static function normalizeAccelerator(input:String):Null<flight.Accelerator>;
   static function parseAccelerator(input:String, out:flight.ParsedAccelerator):Null<flight.ParsedAccelerator>;
   static function parseAcceleratorDetailed(input:String, out:flight.ParsedAccelerator):Dynamic;
-  static function queryGlobalShortcutConflict(host:flight.HasShortcutQuery, accelerator:String):flight._internal._Promise<Dynamic>;
-  static function queryGlobalShortcutRegistration(host:flight.HasShortcutQuery, accelerator:String):flight._internal._Promise<Dynamic>;
-  static function resolveCommandOrControlModifier(platform:Dynamic):Dynamic;
+  static function queryGlobalShortcutConflict(host:flight.HasShortcutQuery, accelerator:String):flight._internal._Promise<flight.GlobalShortcutQueryOutcome>;
+  static function queryGlobalShortcutRegistration(host:flight.HasShortcutQuery, accelerator:String):flight._internal._Promise<flight.GlobalShortcutQueryOutcome>;
+  static function resolveCommandOrControlModifier(platform:flight.PlatformName):flight.ShortcutModifier;
 }
 #end

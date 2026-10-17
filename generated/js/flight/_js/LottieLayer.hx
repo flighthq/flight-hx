@@ -17,7 +17,7 @@ typedef LottieLayer = {
   @:optional var masksProperties:Array<flight.LottieMask>;
   @:optional var nm:String;
   @:optional var refId:String;
-  @:optional var shapes:Array<Dynamic>;
+  @:optional var shapes:Array<flight.LottieShapeItem>;
   @:optional var sc:String;
   @:optional var sh:Float;
   @:optional var sw:Float;
@@ -26,5 +26,5 @@ typedef LottieLayer = {
   @:optional var td:Float;
   @:optional var tp:Float;
   var ty:Float;
-  @:optional var tm:Dynamic;
+  @:optional var tm:flight.LottieAnimatable<Float>;
 };

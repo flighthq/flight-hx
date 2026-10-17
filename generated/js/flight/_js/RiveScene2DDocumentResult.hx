@@ -3,7 +3,7 @@ package flight._js;
 
 typedef RiveScene2DDocumentResult = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var imageResources:Array<Dynamic>;
+  var imageResources:Array<flight.ImageResourceReference>;
   var imported:flight.RiveDocumentImportResult;
   var root:flight.DisplayObject;
   var slots:Array<flight.Scene2DSlotReference>;

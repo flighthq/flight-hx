@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef RegistryTableBase = {
-  var onMiss:String;
-  var registry:String;
+  var onMiss:flight.RegistryMissPolicy;
+  var registry:flight.RegistryId;
 };

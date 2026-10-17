@@ -3,6 +3,6 @@ package flight._js;
 
 typedef Scene3DResourceResolver = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var fetch:(flight.ExternalImageResourceReference, js.html.AbortSignal)->flight._internal._Promise<Null<flight.ImageResource>>;
+  var fetch:flight.ImageResourceFetch;
   var registry:flight.Scene3DMaterialTextureRegistry;
 };

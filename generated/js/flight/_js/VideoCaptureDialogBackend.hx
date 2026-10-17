@@ -3,5 +3,5 @@ package flight._js;
 
 typedef VideoCaptureDialogBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function capture(?options:flight.CaptureVideoDialogOptions):flight._internal._Promise<Dynamic>;
+  function capture(?options:flight.CaptureVideoDialogOptions):flight._internal._Promise<flight.VideoCaptureDialogResult>;
 };

@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef ShapeJsonParseOptions = {
-  @:optional function resolveTexture(reference:flight.ShapeTextureReference):Null<Dynamic>;
+  @:optional function resolveTexture(reference:flight.ShapeTextureReference):Null<flight.Texture>;
 };

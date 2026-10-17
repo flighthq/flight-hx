@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef Scene3DDocumentSkin = {
-  var inverseBind:Array<flight.Matrix4>;
+  var inverseBind:Array<flight.Matrix4Like>;
   var joints:Array<Float>;
 };

@@ -4,7 +4,7 @@ package flight._js;
 typedef ColorGradeAdjustment = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var kind:String;
-  var transform:(Array<Float>, Float, Float, Float)->Void;
+  var transform:flight.ColorTransformFunction;
   @:optional var exposure:Float;
   @:optional var brightness:Float;
   @:optional var contrast:Float;

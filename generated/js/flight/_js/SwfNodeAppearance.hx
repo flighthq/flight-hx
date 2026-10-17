@@ -2,8 +2,8 @@
 package flight._js;
 
 typedef SwfNodeAppearance = {
-  var advancedBlendMode:Null<String>;
+  var advancedBlendMode:Null<flight.AdvancedBlendMode>;
   var effects:Array<flight.RenderEffect>;
   var frame:Float;
-  var node:Dynamic;
+  var node:flight.Node2D;
 };

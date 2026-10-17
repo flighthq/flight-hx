@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef Scene3DResourceEvent = {
-  var ref:Dynamic;
-  var texture:Dynamic;
+  var ref:flight.ImageResourceReference;
+  var texture:flight.Texture;
 };

@@ -2,8 +2,8 @@
 package flight._js;
 
 typedef FlightDocumentNodeSchema = {
-  var createNode:(flight.FlightDocumentFields, haxe.DynamicAccess<Dynamic>)->Null<flight.Node<Dynamic>>;
+  var createNode:flight.FlightDocumentNodeFactory;
   var fields:Array<flight.FlightDocumentFieldSchema>;
-  var kind:String;
-  var writeNodeFields:(flight.FlightDocumentFields, flight.Node<Dynamic>, haxe.DynamicAccess<Dynamic>)->Bool;
+  var kind:flight.Kind;
+  var writeNodeFields:flight.FlightDocumentNodeFieldWriter;
 };

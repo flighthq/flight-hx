@@ -14,7 +14,7 @@ extern class Menu {
   static function createDefaultViewMenuTemplate():flight.MenuItemTemplate;
   static function createDefaultWindowMenuTemplate():flight.MenuItemTemplate;
   static function createMenuHighlight():flight.MenuHighlight;
-  static function createMenuItemTemplate(?template:flight.MenuItemTemplate):flight.MenuItemTemplate;
+  static function createMenuItemTemplate(?template:Dynamic):flight.MenuItemTemplate;
   static function createMenuSelect():flight.MenuSelect;
   static function destroyMenuApplication(...hosts:flight.HasMenuApplication):Void;
   static function detachMenuHighlight(highlight:flight.MenuHighlight):Void;
@@ -23,8 +23,8 @@ extern class Menu {
   static function disposeMenuSelect(select:flight.MenuSelect):Void;
   static function enableMenuSignals():flight.MenuSignals;
   static function getMenuSignals():Null<flight.MenuSignals>;
-  static function initializeMenuHighlight(out:flight.MenuHighlight):Void;
-  static function initializeMenuSelect(out:flight.MenuSelect):Void;
+  static function initializeMenuHighlight(out:flight.EntityConstruction<flight.MenuHighlight>):Void;
+  static function initializeMenuSelect(out:flight.EntityConstruction<flight.MenuSelect>):Void;
   static function setApplicationMenu(host:flight.HasMenuApplication, items:Array<flight.MenuItemTemplate>):Bool;
   static function showContextMenu(host:flight.HasMenuPopup, items:Array<flight.MenuItemTemplate>, x:Float, y:Float):flight._internal._Promise<Null<String>>;
   static function validateMenuItemTemplate(template:flight.MenuItemTemplate):Null<String>;

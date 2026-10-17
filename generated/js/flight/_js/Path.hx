@@ -5,5 +5,5 @@ typedef Path = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var commands:Array<Float>;
   var data:Array<Float>;
-  var winding:Dynamic;
+  var winding:flight.PathWinding;
 };

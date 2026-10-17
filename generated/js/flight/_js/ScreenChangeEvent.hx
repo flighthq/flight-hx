@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef ScreenChangeEvent = {
-  var kind:Dynamic;
+  var kind:flight.ScreenChangeKind;
   var screen:flight.ScreenInfo;
   var changedMetrics:Null<flight.ScreenChangedMetrics>;
 };

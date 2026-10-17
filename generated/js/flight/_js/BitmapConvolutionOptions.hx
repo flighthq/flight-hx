@@ -3,7 +3,7 @@ package flight._js;
 
 typedef BitmapConvolutionOptions = {
   @:optional var bias:Float;
-  @:optional var edge:Dynamic;
+  @:optional var edge:flight.BitmapEdgeMode;
   @:optional var divisor:Float;
   var matrix:Array<Float>;
   var matrixX:Float;

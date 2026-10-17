@@ -6,6 +6,6 @@ typedef NetResponse = {
   var statusText:String;
   var ok:Bool;
   var headers:haxe.DynamicAccess<String>;
-  var body:Dynamic;
+  var body:flight.NetResponseBody;
   var url:String;
 };

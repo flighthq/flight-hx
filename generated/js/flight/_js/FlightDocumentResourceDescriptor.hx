@@ -4,5 +4,5 @@ package flight._js;
 typedef FlightDocumentResourceDescriptor = {
   var fields:flight.FlightDocumentFields;
   var key:String;
-  var kind:String;
+  var kind:flight.Kind;
 };

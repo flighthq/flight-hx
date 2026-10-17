@@ -3,6 +3,6 @@ package flight._js;
 
 typedef TrayBalloonBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function display(tray:flight.TrayIcon, options:flight.TrayBalloonOptions):flight._internal._Promise<Dynamic>;
-  function remove(tray:flight.TrayIcon):flight._internal._Promise<Dynamic>;
+  function display(tray:flight.TrayIcon, options:flight.TrayBalloonOptions):flight._internal._Promise<flight.TrayBalloonDisplayResult>;
+  function remove(tray:flight.TrayIcon):flight._internal._Promise<flight.TrayBalloonRemoveResult>;
 };

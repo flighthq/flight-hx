@@ -3,5 +3,5 @@ package flight._js;
 
 typedef ShellPathRevealBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function reveal(path:String):flight._internal._Promise<{ reason:Dynamic }>;
+  function reveal(path:String):flight._internal._Promise<flight.ShellPathRevealOutcome>;
 };

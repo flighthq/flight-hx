@@ -3,10 +3,10 @@ package flight._js;
 
 typedef MorphShapeData = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var commands:Array<Dynamic>;
+  var commands:Array<flight.ShapeCommandToken>;
   var morph:flight.PathMorph;
   var path:flight.Path;
-  var paintBindings:Array<Dynamic>;
+  var paintBindings:Array<flight.MorphShapePaintBinding>;
   var pathBindings:Array<flight.MorphShapePathBinding>;
   var progress:Float;
 };

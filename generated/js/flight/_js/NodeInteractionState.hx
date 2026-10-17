@@ -5,8 +5,8 @@ typedef NodeInteractionState = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var hitTestEnabled:Bool;
   var childrenHitTestEnabled:Bool;
-  var hitArea:Null<Dynamic>;
-  var cursor:Null<Dynamic>;
+  var hitArea:Null<flight.HitArea>;
+  var cursor:Null<flight.Cursor>;
   var focusable:Bool;
   var pointerDoubleClickEnabled:Bool;
   var tabIndex:Float;

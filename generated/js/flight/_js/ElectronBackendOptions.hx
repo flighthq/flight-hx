@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef ElectronBackendOptions = {
-  var platform:Dynamic;
+  var platform:flight.PlatformName;
   @:optional var storageFileName:String;
   @:optional var updaterFeedUrl:String;
 };

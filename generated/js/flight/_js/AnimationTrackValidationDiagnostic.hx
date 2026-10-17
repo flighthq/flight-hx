@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef AnimationTrackValidationDiagnostic = {
-  var code:Dynamic;
+  var code:flight.AnimationTrackValidationCode;
   var index:Null<Float>;
   var message:String;
 };

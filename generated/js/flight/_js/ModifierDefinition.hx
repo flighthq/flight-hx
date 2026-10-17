@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef ModifierDefinition = {
-  var kind:String;
-  var slot:String;
+  var kind:flight.ModifierKind;
+  var slot:flight.ModifierSlot;
   @:optional function getDefineSignature(modifier:flight.Modifier):String;
 };

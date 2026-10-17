@@ -4,7 +4,7 @@ package flight;
 #if flight_hx
 typedef FocusManager = flight._hx.FocusManager;
 #elseif (js && flight_esm)
-typedef FocusManager<N:flight.Node<Dynamic> = Dynamic> = flight._js.FocusManager<N>;
+typedef FocusManager<N:flight.NodeAny = flight.Node<flight.NodeTraits>> = flight._js.FocusManager<N>;
 #elseif cpp
 typedef FocusManager = flight._cpp.FocusManager;
 #elseif js

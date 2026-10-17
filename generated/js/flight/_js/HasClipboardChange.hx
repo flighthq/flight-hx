@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef HasClipboardChange = {
-  var clipboard:{ change:flight.ClipboardChangeBackend };
+  var clipboard:{ change:Dynamic };
 };

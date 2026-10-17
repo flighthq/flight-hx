@@ -11,7 +11,7 @@ typedef ParticleEmitterState = {
   var prevX:Float;
   var prevY:Float;
   var prevZ:Float;
-  var random:()->Float;
+  var random:flight.RandomSource;
   var rotationSpeeds:flight._internal._Float32Array;
   var scales:flight._internal._Float32Array;
   var spawnAccumulator:Float;

@@ -2,8 +2,8 @@
 package flight._js;
 
 typedef FlightDocumentInteractiveStateExtensionSchema = {
-  function createExtension(node:flight.Node<Dynamic>, fieldNames:Array<String>):Null<flight.NodeInteractiveStateExtensionRuntime>;
+  function createExtension(node:flight.NodeAny, fieldNames:Array<String>):Null<flight.NodeInteractiveStateExtensionRuntime>;
   var fields:Array<flight.FlightDocumentFieldSchema>;
-  function isSupported(node:flight.Node<Dynamic>):Bool;
-  var kind:String;
+  function isSupported(node:flight.NodeAny):Bool;
+  var kind:flight.Kind;
 };

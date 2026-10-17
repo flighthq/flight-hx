@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef NotificationLifecycleBackend = {
-  function destroy():flight._internal._Promise<Dynamic>;
+  function destroy():flight._internal._Promise<flight.NotificationLifecycleOutcome>;
 };

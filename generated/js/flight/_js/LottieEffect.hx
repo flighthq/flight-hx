@@ -7,5 +7,5 @@ typedef LottieEffect = {
   @:optional var mn:String;
   @:optional var nm:String;
   @:optional var ty:Float;
-  @:optional var v:Dynamic;
+  @:optional var v:flight.LottieAnimatable<Dynamic>;
 };

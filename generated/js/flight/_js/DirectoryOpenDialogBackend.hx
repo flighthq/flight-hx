@@ -3,5 +3,5 @@ package flight._js;
 
 typedef DirectoryOpenDialogBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function open(?options:flight.OpenDirectoryDialogOptions):flight._internal._Promise<Dynamic>;
+  function open(?options:flight.OpenDirectoryDialogOptions):flight._internal._Promise<flight.DirectoryOpenDialogResult>;
 };

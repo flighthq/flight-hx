@@ -3,6 +3,6 @@ package flight._js;
 
 typedef Skeleton2DConstraint = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var kind:String;
+  var kind:flight.Skeleton2DConstraintKind;
   var mix:Float;
 };

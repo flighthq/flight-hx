@@ -3,6 +3,6 @@ package flight._js;
 
 typedef Skeleton2DDeformAnimationTarget = {
   var attachment:Null<flight.Attachment2D>;
-  var kind:String;
+  var kind:flight.Skeleton2DAnimationTargetKind;
   var slotIndex:Float;
 };

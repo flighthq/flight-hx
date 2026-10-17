@@ -6,7 +6,7 @@ typedef SpritesheetAnimation = {
   var frames:Array<Float>;
   var frameDuration:Float;
   var frameDurations:Null<Array<Float>>;
-  var direction:Dynamic;
+  var direction:flight.SpritesheetAnimationDirection;
   var repeatCount:Float;
   var originX:Float;
   var originY:Float;

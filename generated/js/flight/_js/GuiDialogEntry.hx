@@ -4,6 +4,6 @@ package flight._js;
 typedef GuiDialogEntry = {
   @:optional var dismissOnBackdrop:Bool;
   var id:String;
-  @:optional var initialFocus:Dynamic;
-  var root:Dynamic;
+  @:optional var initialFocus:flight.Node2D;
+  var root:flight.Node2D;
 };

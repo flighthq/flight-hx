@@ -6,11 +6,11 @@ typedef GlRenderTarget = {
   var height:Float;
   var width:Float;
   var requestedAxes:flight.RenderTargetAxes;
-  var format:Dynamic;
+  var format:flight.RenderTargetFormat;
   var colorAttachments:Float;
-  var colorFormats:Array<Dynamic>;
-  var depth:Dynamic;
-  var colorSpace:Dynamic;
+  var colorFormats:Array<flight.RenderTargetFormat>;
+  var depth:flight.RenderTargetDepth;
+  var colorSpace:flight.RenderTargetColorSpace;
   var clearColors:Array<Float>;
   var clearDepth:Float;
   var sampleCount:Float;

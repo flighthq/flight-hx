@@ -3,6 +3,6 @@ package flight._js;
 
 typedef GuiDialogCloseResult = {
   var entryId:String;
-  var reason:Dynamic;
+  var reason:flight.GuiDialogCloseReason;
   @:optional var value:Dynamic;
 };

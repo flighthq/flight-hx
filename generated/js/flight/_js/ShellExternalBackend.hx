@@ -3,5 +3,5 @@ package flight._js;
 
 typedef ShellExternalBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function open(url:String):flight._internal._Promise<{ reason:Dynamic }>;
+  function open(url:String):flight._internal._Promise<flight.ShellExternalOutcome>;
 };

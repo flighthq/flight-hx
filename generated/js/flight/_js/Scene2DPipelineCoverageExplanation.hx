@@ -2,8 +2,8 @@
 package flight._js;
 
 typedef Scene2DPipelineCoverageExplanation = {
-  var registeredKinds:Array<String>;
-  var uncoveredKinds:Array<String>;
-  var unusedRegistrations:Array<String>;
-  var usedKinds:Array<String>;
+  var registeredKinds:Array<flight.Kind>;
+  var uncoveredKinds:Array<flight.Kind>;
+  var unusedRegistrations:Array<flight.Kind>;
+  var usedKinds:Array<flight.Kind>;
 };

@@ -6,6 +6,6 @@ typedef StatusBarInfo = {
   var color:Float;
   var height:Float;
   var overlaysContent:Bool;
-  var style:Dynamic;
+  var style:flight.StatusBarStyle;
   var visible:Bool;
 };

@@ -4,7 +4,7 @@ package flight._js;
 typedef SocketRuntime = {
   var connection:Null<flight.SocketConnection>;
   var signals:Null<flight.SocketSignals>;
-  var readyState:Dynamic;
+  var readyState:flight.SocketReadyState;
   var delivering:Bool;
   var disposed:Bool;
 };

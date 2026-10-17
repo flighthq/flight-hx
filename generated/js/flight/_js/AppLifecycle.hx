@@ -3,11 +3,11 @@ package flight._js;
 
 typedef AppLifecycle = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var onStateChange:flight.Signal<(Dynamic)->Void>;
+  var onStateChange:flight.Signal<(flight.AppLifecycleState)->Void>;
   var onResume:flight.Signal<()->Void>;
   var onPause:flight.Signal<()->Void>;
   var onBackButton:flight.Signal<()->Void>;
-  var onMemoryWarning:flight.Signal<(Dynamic)->Void>;
+  var onMemoryWarning:flight.Signal<(flight.AppMemoryPressure)->Void>;
   var onSaveState:flight.Signal<(haxe.DynamicAccess<Dynamic>)->Void>;
   var onRestoreState:flight.Signal<(haxe.DynamicAccess<Dynamic>)->Void>;
 };

@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef LottieDocument = {
-  @:optional var assets:Array<Dynamic>;
+  @:optional var assets:Array<flight.LottieAsset>;
   @:optional var chars:Array<Dynamic>;
   @:optional var ddd:Dynamic;
   @:optional var fonts:{ list:Array<flight.LottieFont> };

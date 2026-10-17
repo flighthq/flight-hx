@@ -2,8 +2,8 @@
 package flight._js;
 
 typedef CreateExternalTextureOptions = {
-  @:optional var colorSpace:Dynamic;
+  @:optional var colorSpace:flight.TextureColorSpace;
   var height:Float;
-  @:optional var sampler:flight.Sampler;
+  @:optional var sampler:flight.SamplerLike;
   var width:Float;
 };

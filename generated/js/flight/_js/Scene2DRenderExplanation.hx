@@ -2,10 +2,10 @@
 package flight._js;
 
 typedef Scene2DRenderExplanation = {
-  var kind:String;
+  var kind:flight.Kind;
   var hasRenderer:Bool;
   var prepared:Bool;
   var visible:Bool;
   var effectiveAlpha:Float;
-  var reason:Dynamic;
+  var reason:flight.Scene2DRenderBlankReason;
 };

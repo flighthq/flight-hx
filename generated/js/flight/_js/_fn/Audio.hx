@@ -13,9 +13,9 @@ extern class Audio {
   static function createExternalAudioResourceReference(uri:String, ?basePath:Null<String>, ?mimeType:Null<String>, ?name:Null<String>):flight.ExternalAudioResourceReference;
   static function detectAudioMimeType(data:Dynamic):Null<String>;
   static function disposeAudioResource(resource:flight.AudioResource):Void;
-  static function explainAudioResourceReferenceResolution(ref:Dynamic):flight.AudioResourceReferenceResolutionExplanation;
-  static function findAudioResourceReferenceByName(references:Array<Dynamic>, name:String):Null<Dynamic>;
-  static function getAudioDecoder(mimeType:String):Null<(flight._internal._UInt8Array, String, js.html.AbortSignal)->flight._internal._Promise<Null<flight.AudioResource>>>;
+  static function explainAudioResourceReferenceResolution(ref:flight.AudioResourceReference):flight.AudioResourceReferenceResolutionExplanation;
+  static function findAudioResourceReferenceByName(references:Array<flight.AudioResourceReference>, name:String):Null<flight.AudioResourceReference>;
+  static function getAudioDecoder(mimeType:String):Null<flight.AudioDecoder>;
   static function getAudioDecoderMimeTypes():Array<String>;
   static function getAudioMimeTypeEssence(mimeType:String):String;
   static function getAudioMimeTypeParameter(mimeType:String, name:String):Null<String>;
@@ -27,18 +27,18 @@ extern class Audio {
   static function hasAudioDecoder(mimeType:String):Bool;
   static function hasAudioResourceBuffer(resource:flight.AudioResource):Bool;
   static function inferAudioMimeType(url:String):Null<String>;
-  static function initializeAudioResource(out:flight.AudioResource, ?buffer:js.html.audio.AudioBuffer):Void;
-  static function initializeEmbeddedAudioResourceReference(out:flight.EmbeddedAudioResourceReference, bytes:flight._internal._UInt8Array, ?mimeType:Null<String>, ?name:Null<String>):Void;
-  static function initializeExternalAudioResourceReference(out:flight.ExternalAudioResourceReference, uri:String, ?basePath:Null<String>, ?mimeType:Null<String>, ?name:Null<String>):Void;
+  static function initializeAudioResource(out:flight.EntityConstruction<flight.AudioResource>, ?buffer:js.html.audio.AudioBuffer):Void;
+  static function initializeEmbeddedAudioResourceReference(out:flight.EntityConstruction<flight.EmbeddedAudioResourceReference>, bytes:flight._internal._UInt8Array, ?mimeType:Null<String>, ?name:Null<String>):Void;
+  static function initializeExternalAudioResourceReference(out:flight.EntityConstruction<flight.ExternalAudioResourceReference>, uri:String, ?basePath:Null<String>, ?mimeType:Null<String>, ?name:Null<String>):Void;
   static function isAudioResourceEmpty(resource:flight.AudioResource):Bool;
   static function loadAudioResourceFromBase64(context:js.html.audio.AudioContext, base64:String, mimeType:String, ?signal:js.html.AbortSignal):flight._internal._Promise<flight.AudioResource>;
   static function loadAudioResourceFromBlob(context:js.html.audio.AudioContext, blob:js.html.Blob, ?signal:js.html.AbortSignal):flight._internal._Promise<flight.AudioResource>;
   static function loadAudioResourceFromBytes(context:js.html.audio.AudioContext, bytes:flight._internal._UInt8Array, ?mimeType:String, ?signal:js.html.AbortSignal):flight._internal._Promise<flight.AudioResource>;
   static function loadAudioResourceFromUrl(host:flight.HasNetHttp, context:js.html.audio.AudioContext, url:String, ?signal:js.html.AbortSignal):flight._internal._Promise<flight.AudioResource>;
   static function loadAudioResourceFromUrls(host:Dynamic, context:js.html.audio.AudioContext, sources:Array<flight.AudioResourceUrl>, ?signal:js.html.AbortSignal):flight._internal._Promise<flight.AudioResource>;
-  static function registerAudioDecoder(mimeType:String, decoder:(flight._internal._UInt8Array, String, js.html.AbortSignal)->flight._internal._Promise<Null<flight.AudioResource>>):Void;
-  static function resetFailedAudioResourceReference(ref:Dynamic):Bool;
-  static function resolveAudioResourceReference(ref:Dynamic, context:Null<js.html.audio.AudioContext>, fetch:(flight.ExternalAudioResourceReference, js.html.AbortSignal)->flight._internal._Promise<Null<flight.AudioResource>>, signal:js.html.AbortSignal):flight._internal._Promise<Null<flight.AudioResource>>;
+  static function registerAudioDecoder(mimeType:String, decoder:flight.AudioDecoder):Void;
+  static function resetFailedAudioResourceReference(ref:flight.AudioResourceReference):Bool;
+  static function resolveAudioResourceReference(ref:flight.AudioResourceReference, context:Null<js.html.audio.AudioContext>, fetch:flight.AudioResourceFetch, signal:js.html.AbortSignal):flight._internal._Promise<Null<flight.AudioResource>>;
   static function selectAudioResourceUrl(host:flight.HasMediaAudioCodec, sources:Array<flight.AudioResourceUrl>):Null<String>;
   static function unregisterAudioDecoder(mimeType:String):Void;
 }

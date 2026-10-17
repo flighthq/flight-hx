@@ -6,12 +6,12 @@ package flight._js._fn;
 extern class Platform {
   static function comparePlatformVersions(a:String, b:String):Dynamic;
   static function createPlatformInfo():flight.PlatformInfo;
-  static function getPlatformEngine(host:flight.HasSystemPlatform):Dynamic;
+  static function getPlatformEngine(host:flight.HasSystemPlatform):flight.PlatformEngine;
   static function getPlatformInfo(host:flight.HasSystemPlatform, out:flight.PlatformInfo):flight.PlatformInfo;
-  static function getPlatformKind(host:flight.HasSystemPlatform):Dynamic;
-  static function getPlatformName(host:flight.HasSystemPlatform):Dynamic;
-  static function getPlatformRuntime(host:flight.HasSystemPlatform):Dynamic;
-  static function initializePlatformInfo(out:flight.PlatformInfo):Void;
+  static function getPlatformKind(host:flight.HasSystemPlatform):flight.PlatformKind;
+  static function getPlatformName(host:flight.HasSystemPlatform):flight.PlatformName;
+  static function getPlatformRuntime(host:flight.HasSystemPlatform):flight.PlatformRuntime;
+  static function initializePlatformInfo(out:flight.EntityConstruction<flight.PlatformInfo>):Void;
   static function isPlatformDesktop(host:flight.HasSystemPlatform):Bool;
   static function isPlatformMobile(host:flight.HasSystemPlatform):Bool;
   static function isPlatformNative(host:flight.HasSystemPlatform):Bool;

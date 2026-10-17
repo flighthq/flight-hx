@@ -3,7 +3,7 @@ package flight._js;
 
 typedef Scene3DDocumentNode = {
   var children:Array<Float>;
-  var kind:String;
+  var kind:flight.Kind;
   @:optional var mesh:Float;
   @:optional var name:String;
   var transform:flight.Transform3D;

@@ -3,6 +3,6 @@ package flight._js;
 
 typedef Scene2DImageResources = {
   var document:flight.Scene2DDocument;
-  var resolved:Array<Dynamic>;
-  var unresolved:Array<Dynamic>;
+  var resolved:Array<flight.ImageResourceReference>;
+  var unresolved:Array<flight.ImageResourceReference>;
 };

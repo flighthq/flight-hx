@@ -3,5 +3,5 @@ package flight._js;
 
 typedef ImageOpenDialogBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function open(?options:flight.OpenImageDialogOptions):flight._internal._Promise<Dynamic>;
+  function open(?options:flight.OpenImageDialogOptions):flight._internal._Promise<flight.ImageOpenDialogResult>;
 };

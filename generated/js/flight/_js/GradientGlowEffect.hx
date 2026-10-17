@@ -10,6 +10,6 @@ typedef GradientGlowEffect = {
   var colors:Array<Float>;
   @:optional var quality:Float;
   var ratios:Array<Float>;
-  @:optional var sourceMode:Dynamic;
+  @:optional var sourceMode:flight.EffectSourceMode;
   @:optional var strength:Float;
 };

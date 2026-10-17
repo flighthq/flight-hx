@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef GlPbrExtensionIssue = {
-  var code:Dynamic;
-  var kind:String;
+  var code:flight.GlPbrExtensionIssueCode;
+  var kind:flight.Kind;
 };

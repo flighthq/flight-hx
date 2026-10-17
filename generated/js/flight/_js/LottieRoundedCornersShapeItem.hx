@@ -6,5 +6,5 @@ typedef LottieRoundedCornersShapeItem = {
   @:optional var ix:Float;
   @:optional var nm:String;
   var ty:String;
-  var r:Dynamic;
+  var r:flight.LottieAnimatable<Float>;
 };

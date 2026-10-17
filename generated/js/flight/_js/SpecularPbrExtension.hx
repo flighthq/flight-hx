@@ -6,8 +6,8 @@ typedef SpecularPbrExtension = {
   var kind:String;
   var specular:Float;
   var specularColor:Float;
-  var specularColorMap:Null<Dynamic>;
-  var specularColorMapUvSet:Dynamic;
-  var specularMap:Null<Dynamic>;
-  var specularMapUvSet:Dynamic;
+  var specularColorMap:Null<flight.Texture>;
+  var specularColorMapUvSet:flight.PbrUvSet;
+  var specularMap:Null<flight.Texture>;
+  var specularMapUvSet:flight.PbrUvSet;
 };

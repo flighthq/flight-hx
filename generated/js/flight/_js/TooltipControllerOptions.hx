@@ -2,9 +2,9 @@
 package flight._js;
 
 typedef TooltipControllerOptions = {
-  @:optional var transition:flight.NodeInteractiveStateTransition<Dynamic, Dynamic>;
-  var content:Dynamic;
+  @:optional var transition:flight.GuiTransitionDescriptor;
+  var content:flight.Node2D;
   @:optional var delay:Float;
-  @:optional var offset:flight.Vector2;
-  var target:Dynamic;
+  @:optional var offset:flight.Vector2Like;
+  var target:flight.Node2D;
 };

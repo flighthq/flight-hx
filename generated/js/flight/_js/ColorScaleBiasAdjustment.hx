@@ -5,5 +5,5 @@ typedef ColorScaleBiasAdjustment = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var kind:String;
   var colorMatrix:Array<Float>;
-  var colorScaleBias:flight.ColorScaleBias;
+  var colorScaleBias:flight.ColorScaleBiasLike;
 };

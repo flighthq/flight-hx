@@ -3,5 +3,5 @@ package flight._js;
 
 typedef TexturePackerParsed = {
   var data:flight.SpritesheetData;
-  var document:Dynamic;
+  var document:flight.TexturePackerDocument;
 };

@@ -3,6 +3,6 @@ package flight._js;
 
 typedef Scene3DMaterialTextureRegistry = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var extensionListers:flight._internal._Map<String, (flight.PbrExtension, Array<Dynamic>)->Void>;
-  var listers:flight._internal._Map<String, (flight.Material, Array<Dynamic>)->Void>;
+  var extensionListers:flight._internal._Map<flight.Kind, flight.Scene3DPbrExtensionTextureLister>;
+  var listers:flight._internal._Map<flight.Kind, flight.Scene3DMaterialTextureLister>;
 };

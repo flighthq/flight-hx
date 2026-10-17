@@ -4,6 +4,6 @@ package flight._js;
 typedef CompositeEffect = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var kind:String;
-  @:native("operator") var operator_:String;
+  @:native("operator") var operator_:flight.CompositeOperator;
   @:optional var backdropKey:String;
 };

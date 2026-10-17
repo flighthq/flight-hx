@@ -3,10 +3,10 @@ package flight._js;
 
 typedef Scene2DDocument = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var audioResources:Array<Dynamic>;
+  var audioResources:Array<flight.AudioResourceReference>;
   var backgroundColor:Null<Float>;
-  var imageResources:Array<Dynamic>;
-  var root:Dynamic;
+  var imageResources:Array<flight.ImageResourceReference>;
+  var root:flight.Node2D;
   var slots:Array<flight.Scene2DSlotReference>;
   var sourceKind:Null<String>;
 };

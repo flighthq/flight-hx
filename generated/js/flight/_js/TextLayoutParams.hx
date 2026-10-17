@@ -2,18 +2,18 @@
 package flight._js;
 
 typedef TextLayoutParams = {
-  @:optional var autoSize:Dynamic;
+  @:optional var autoSize:flight.TextAutoSize;
   @:optional var border:Bool;
-  @:optional var direction:Dynamic;
+  @:optional var direction:flight.TextDirection;
   var formatRanges:Array<flight.TextFormatRange>;
   var height:Float;
-  @:optional var justification:Dynamic;
+  @:optional var justification:flight.TextJustification;
   @:optional var maxLines:Float;
-  var measure:(String, flight.TextFormat)->Float;
+  var measure:flight.TextMeasureFunction;
   @:optional var multiline:Bool;
   var text:String;
   @:optional var truncationCharacter:String;
-  @:optional var verticalAlign:Dynamic;
+  @:optional var verticalAlign:flight.TextVerticalAlign;
   var width:Float;
   @:optional var wordWrap:Bool;
 };

@@ -3,7 +3,7 @@ package flight._js;
 
 typedef TweenOptions = {
   @:optional var delay:Float;
-  @:optional var ease:(Float)->Float;
+  @:optional var ease:flight.EasingFunction;
   @:optional var overwrite:Bool;
   @:optional var reflect:Bool;
   @:optional var repeat:Float;

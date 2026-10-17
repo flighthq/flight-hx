@@ -9,12 +9,12 @@ extern class Textbidi {
   static function enableTextBidiGuards():Void;
   static function explainBidiClassBackend(?bidiClassBackend:flight.BidiClassBackend):flight.BidiClassBackendExplanation;
   static function getBidiClassBackend():flight.BidiClassBackend;
-  static function getBidiRuns(text:String, baseDirection:Dynamic, ?bidiClassBackend:flight.BidiClassBackend):Array<flight.BidiRun>;
-  static function initializeCompactBidiClassBackend(out:flight.BidiClassBackend):Void;
+  static function getBidiRuns(text:String, baseDirection:flight.BidiDirection, ?bidiClassBackend:flight.BidiClassBackend):Array<flight.BidiRun>;
+  static function initializeCompactBidiClassBackend(out:flight.EntityConstruction<flight.BidiClassBackend>):Void;
   static function reorderBidiLine(levels:flight._internal._UInt8Array, start:Float, end:Float, out:Array<Float>):Void;
   static function reportTextBidiCompactTableMiss(codepoint:Float):Void;
-  static function resolveBidiLevels(text:String, baseDirection:Dynamic, ?bidiClassBackend:flight.BidiClassBackend):flight._internal._UInt8Array;
+  static function resolveBidiLevels(text:String, baseDirection:flight.BidiDirection, ?bidiClassBackend:flight.BidiClassBackend):flight._internal._UInt8Array;
   static function setBidiClassBackend(backend:Null<flight.BidiClassBackend>):Void;
-  static function setTextBidiGuard(guard:Null<(Float)->Void>):Void;
+  static function setTextBidiGuard(guard:Null<flight.TextBidiGuard>):Void;
 }
 #end

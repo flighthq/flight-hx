@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef Physics3DDebugLine = {
-  var feature:Dynamic;
+  var feature:flight.Physics3DDebugFeature;
   var bodyA:Float;
   var bodyB:Float;
   var x0:Float;

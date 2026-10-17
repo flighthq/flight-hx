@@ -5,6 +5,6 @@ typedef MeshGeometryOptions = {
   @:optional var indices:Dynamic;
   var layout:flight.VertexAttributeLayout;
   @:optional var subsets:Array<flight.MeshSubset>;
-  @:optional var topology:Dynamic;
-  var vertices:flight._internal._Float32Array<haxe.io.Bytes>;
+  @:optional var topology:flight.PrimitiveTopology;
+  var vertices:flight._internal._Float32Array<flight._internal._ArrayBuffer>;
 };

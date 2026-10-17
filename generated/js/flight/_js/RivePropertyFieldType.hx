@@ -3,5 +3,5 @@ package flight._js;
 
 typedef RivePropertyFieldType = {
   var key:Float;
-  var type:Float;
+  var type:flight.RiveFieldType;
 };

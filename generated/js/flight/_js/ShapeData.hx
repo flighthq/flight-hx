@@ -3,5 +3,5 @@ package flight._js;
 
 typedef ShapeData = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var commands:Array<Dynamic>;
+  var commands:Array<flight.ShapeCommandToken>;
 };

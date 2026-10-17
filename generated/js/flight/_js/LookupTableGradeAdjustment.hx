@@ -4,7 +4,7 @@ package flight._js;
 typedef LookupTableGradeAdjustment = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var kind:String;
-  var transform:(Array<Float>, Float, Float, Float)->Void;
+  var transform:flight.ColorTransformFunction;
   @:optional var lut:flight.ColorLut;
   @:optional var strength:Float;
 };

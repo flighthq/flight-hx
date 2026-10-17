@@ -3,5 +3,5 @@ package flight._js;
 
 typedef ScreenPermissionChange = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var onChange:flight.Signal<(Dynamic)->Void>;
+  var onChange:flight.Signal<(flight.ScreenPermissionState)->Void>;
 };

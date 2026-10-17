@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef NotificationCloseBackend = {
-  function closeAllNotifications():flight._internal._Promise<Dynamic>;
+  function closeAllNotifications():flight._internal._Promise<flight.NotificationLifecycleOutcome>;
 };

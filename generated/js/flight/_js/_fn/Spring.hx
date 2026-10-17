@@ -15,11 +15,11 @@ extern class Spring {
   static function createSpring3D(?valueX:Float, ?valueY:Float, ?valueZ:Float, ?velocityX:Float, ?velocityY:Float, ?velocityZ:Float):flight.Spring3D;
   static function createSpringConfig(frequency:Float, dampingRatio:Float):flight.SpringConfig;
   static function createSpringConfigFromPhysical(stiffness:Float, damping:Float, mass:Float):flight.SpringConfig;
-  static function initializeSpring(out:flight.Spring, ?value:Float, ?velocity:Float):Void;
-  static function initializeSpring2D(out:flight.Spring2D, ?valueX:Float, ?valueY:Float, ?velocityX:Float, ?velocityY:Float):Void;
-  static function initializeSpring3D(out:flight.Spring3D, ?valueX:Float, ?valueY:Float, ?valueZ:Float, ?velocityX:Float, ?velocityY:Float, ?velocityZ:Float):Void;
-  static function initializeSpringConfig(out:flight.SpringConfig, frequency:Float, dampingRatio:Float):Void;
-  static function initializeSpringConfigFromPhysical(out:flight.SpringConfig, stiffness:Float, damping:Float, mass:Float):Void;
+  static function initializeSpring(out:flight.EntityConstruction<flight.Spring>, ?value:Float, ?velocity:Float):Void;
+  static function initializeSpring2D(out:flight.EntityConstruction<flight.Spring2D>, ?valueX:Float, ?valueY:Float, ?velocityX:Float, ?velocityY:Float):Void;
+  static function initializeSpring3D(out:flight.EntityConstruction<flight.Spring3D>, ?valueX:Float, ?valueY:Float, ?valueZ:Float, ?velocityX:Float, ?velocityY:Float, ?velocityZ:Float):Void;
+  static function initializeSpringConfig(out:flight.EntityConstruction<flight.SpringConfig>, frequency:Float, dampingRatio:Float):Void;
+  static function initializeSpringConfigFromPhysical(out:flight.EntityConstruction<flight.SpringConfig>, stiffness:Float, damping:Float, mass:Float):Void;
   static function isSpring2DSettled(spring2D:flight.Spring2D, targetX:Float, targetY:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool;
   static function isSpring3DSettled(spring3D:flight.Spring3D, targetX:Float, targetY:Float, targetZ:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool;
   static function isSpringSettled(spring:flight.Spring, target:Float, ?positionEpsilon:Float, ?velocityEpsilon:Float):Bool;

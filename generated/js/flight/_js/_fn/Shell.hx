@@ -5,14 +5,14 @@ package flight._js._fn;
 @:jsImport("@flighthq/shell/contract")
 extern class Shell {
   static function isShellUrlAllowed(url:String, policy:flight.ShellExternalUrlPolicy):Bool;
-  static function moveShellItemToTrash(host:flight.HasShellTrash, path:String):flight._internal._Promise<{ reason:Dynamic }>;
-  static function moveShellItemsToTrash(host:flight.HasShellTrash, paths:Array<String>):flight._internal._Promise<Array<{ reason:Dynamic }>>;
-  static function openShellExternalUrl(host:flight.HasShellExternal, url:String, policy:flight.ShellExternalUrlPolicy):flight._internal._Promise<{ reason:Dynamic }>;
-  static function openShellPath(host:flight.HasShellPathOpen, path:String):flight._internal._Promise<Dynamic>;
-  static function readShellShortcutLink(host:flight.HasShellShortcutLink, shortcutPath:String):flight._internal._Promise<Dynamic>;
-  static function revealShellPath(host:flight.HasShellPathReveal, path:String):flight._internal._Promise<{ reason:Dynamic }>;
+  static function moveShellItemToTrash(host:flight.HasShellTrash, path:String):flight._internal._Promise<flight.ShellTrashOutcome>;
+  static function moveShellItemsToTrash(host:flight.HasShellTrash, paths:Array<String>):flight._internal._Promise<Array<flight.ShellTrashOutcome>>;
+  static function openShellExternalUrl(host:flight.HasShellExternal, url:String, policy:flight.ShellExternalUrlPolicy):flight._internal._Promise<flight.ShellExternalOutcome>;
+  static function openShellPath(host:flight.HasShellPathOpen, path:String):flight._internal._Promise<flight.ShellPathOpenOutcome>;
+  static function readShellShortcutLink(host:flight.HasShellShortcutLink, shortcutPath:String):flight._internal._Promise<flight.ShellShortcutLinkReadOutcome>;
+  static function revealShellPath(host:flight.HasShellPathReveal, path:String):flight._internal._Promise<flight.ShellPathRevealOutcome>;
   static function shellBeep(host:flight.HasShellBeep):Void;
   static function spawnShellProcess(host:flight.ShellProcessHost, command:String, args:Array<String>, ?options:flight.ShellProcessOptions):Null<flight.ShellProcess>;
-  static function writeShellShortcutLink(host:flight.HasShellShortcutLink, shortcutPath:String, link:flight.ShellShortcutLink, operation:Dynamic):flight._internal._Promise<{ reason:Dynamic }>;
+  static function writeShellShortcutLink(host:flight.HasShellShortcutLink, shortcutPath:String, link:flight.ShellShortcutLink, operation:flight.ShellShortcutWriteOperation):flight._internal._Promise<flight.ShellShortcutLinkWriteOutcome>;
 }
 #end

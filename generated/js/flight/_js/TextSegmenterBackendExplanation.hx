@@ -3,6 +3,6 @@ package flight._js;
 
 typedef TextSegmenterBackendExplanation = {
   var available:Bool;
-  var backend:Dynamic;
+  var backend:flight.TextSegmenterBackendKind;
   var intlSegmenterAvailable:Bool;
 };

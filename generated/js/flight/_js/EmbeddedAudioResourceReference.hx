@@ -7,7 +7,7 @@ typedef EmbeddedAudioResourceReference = {
   var mimeType:Null<String>;
   var name:Null<String>;
   var resource:flight.AudioResource;
-  var state:Dynamic;
+  var state:flight.ResourceResolutionState;
   var kind:String;
   var bytes:flight._internal._UInt8Array;
 };

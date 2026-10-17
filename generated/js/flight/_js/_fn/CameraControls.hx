@@ -14,12 +14,12 @@ extern class CameraControls {
   static function createFlyCameraController(?options:flight.FlyCameraControllerOptions):flight.FlyCameraController;
   static function createOrbitCameraController(?options:flight.OrbitCameraControllerOptions):flight.OrbitCameraController;
   static function dollyOrbitCameraController(controller:flight.OrbitCameraController, deltaDistance:Float):Void;
-  static function frameOrbitCameraControllerToSphere(controller:flight.OrbitCameraController, projection:Dynamic, sphere:flight.BoundingSphere, aspect:Float, ?padding:Float):Bool;
+  static function frameOrbitCameraControllerToSphere(controller:flight.OrbitCameraController, projection:flight.Projection, sphere:flight.BoundingSphereLike, aspect:Float, ?padding:Float):Bool;
   static function getPerspectiveProjectionFrameDistanceToSphere(projection:flight.PerspectiveProjection, radius:Float, aspect:Float, ?padding:Float):Float;
-  static function initializeCameraShake(out:flight.CameraShake, ?options:flight.CameraShakeOptions):Void;
-  static function initializeCameraShakeOffset(out:flight.CameraShakeOffset):Void;
-  static function initializeFlyCameraController(out:flight.FlyCameraController, ?options:flight.FlyCameraControllerOptions):Void;
-  static function initializeOrbitCameraController(out:flight.OrbitCameraController, ?options:flight.OrbitCameraControllerOptions):Void;
+  static function initializeCameraShake(out:flight.EntityConstruction<flight.CameraShake>, ?options:flight.CameraShakeOptions):Void;
+  static function initializeCameraShakeOffset(out:flight.EntityConstruction<flight.CameraShakeOffset>):Void;
+  static function initializeFlyCameraController(out:flight.EntityConstruction<flight.FlyCameraController>, ?options:flight.FlyCameraControllerOptions):Void;
+  static function initializeOrbitCameraController(out:flight.EntityConstruction<flight.OrbitCameraController>, ?options:flight.OrbitCameraControllerOptions):Void;
   static function lookFlyCameraController(controller:flight.FlyCameraController, deltaYaw:Float, deltaPitch:Float):Void;
   static function moveFlyCameraController(controller:flight.FlyCameraController, forward:Float, right:Float, up:Float):Void;
   static function panOrbitCameraController(controller:flight.OrbitCameraController, deltaRight:Float, deltaUp:Float):Void;

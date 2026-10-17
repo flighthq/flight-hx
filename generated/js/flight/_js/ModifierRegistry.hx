@@ -3,5 +3,5 @@ package flight._js;
 
 typedef ModifierRegistry = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var definitions:flight._internal._Map<String, flight.ModifierDefinition>;
+  var definitions:flight._internal._Map<flight.ModifierKind, flight.ModifierDefinition>;
 };

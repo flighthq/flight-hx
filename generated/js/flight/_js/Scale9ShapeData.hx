@@ -3,6 +3,6 @@ package flight._js;
 
 typedef Scale9ShapeData = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var commands:Array<Dynamic>;
-  var scale9Grid:flight.Rectangle;
+  var commands:Array<flight.ShapeCommandToken>;
+  var scale9Grid:flight.RectangleLike;
 };

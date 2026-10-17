@@ -4,7 +4,7 @@ package flight._js;
 typedef ToneMapEffect = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var kind:String;
-  @:optional @:native("operator") var operator_:Dynamic;
+  @:optional @:native("operator") var operator_:flight.ToneMapOperator;
   @:optional var exposure:Float;
   @:optional var white:Float;
 };

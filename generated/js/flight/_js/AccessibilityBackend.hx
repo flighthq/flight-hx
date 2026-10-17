@@ -3,10 +3,10 @@ package flight._js;
 
 typedef AccessibilityBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function announce(message:String, liveness:Dynamic):Dynamic;
-  function clear():Dynamic;
+  function announce(message:String, liveness:flight.AccessibilityLiveness):flight.AccessibilityOperationOutcome<Dynamic>;
+  function clear():flight.AccessibilityOperationOutcome<Dynamic>;
   function destroy():Void;
-  function removeNode(id:String):Dynamic;
-  function setFocus(id:String):Dynamic;
-  function setNode(node:flight.AccessibilityNode):Dynamic;
+  function removeNode(id:String):flight.AccessibilityOperationOutcome<Dynamic>;
+  function setFocus(id:String):flight.AccessibilityOperationOutcome<Dynamic>;
+  function setNode(node:flight.AccessibilityNode):flight.AccessibilityOperationOutcome<Dynamic>;
 };

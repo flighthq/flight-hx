@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef NotificationDeliveryBackend = {
-  function notify(request:flight.NotificationRequest):flight._internal._Promise<Dynamic>;
+  function notify(request:flight.NotificationRequest):flight._internal._Promise<flight.NotificationDeliveryOutcome>;
 };

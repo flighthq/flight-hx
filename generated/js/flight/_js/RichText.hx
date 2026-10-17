@@ -4,12 +4,12 @@ package flight._js;
 typedef RichText = {
   var data:flight.RichTextData;
   var enabled:Bool;
-  var kind:String;
+  var kind:flight.Kind;
   var name:Null<String>;
   var EntityRuntimeKey:Null<flight.NodeRuntime<flight.Node2DTraits>>;
   var alpha:Float;
   var visible:Bool;
-  var blendMode:Null<String>;
+  var blendMode:Null<flight.BlendMode>;
   var clip:Null<flight.ClipRegion>;
   var material:Null<flight.Material>;
   var materialData:Null<flight.MaterialData>;

@@ -4,7 +4,7 @@ package flight._js;
 typedef Billboard = {
   var data:Null<flight.NodeData>;
   var enabled:Bool;
-  var kind:String;
+  var kind:flight.Kind;
   var name:Null<String>;
   var EntityRuntimeKey:Null<flight.NodeRuntime<flight.Node3DTraits>>;
   var alpha:Float;
@@ -14,5 +14,5 @@ typedef Billboard = {
   var scale:flight.Vector3;
   var geometry:flight.MeshGeometry;
   var materials:Array<Null<flight.Material>>;
-  var mode:Dynamic;
+  var mode:flight.BillboardMode;
 };

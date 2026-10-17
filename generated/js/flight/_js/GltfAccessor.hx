@@ -4,7 +4,7 @@ package flight._js;
 typedef GltfAccessor = {
   @:optional var bufferView:Float;
   @:optional var byteOffset:Float;
-  var componentType:Dynamic;
+  var componentType:flight.GltfComponentType;
   var count:Float;
   @:optional var normalized:Bool;
   var type:Dynamic;

@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef PowerKeepAwakeReleaseResult = {
-  var reason:Dynamic;
+  var reason:flight.PowerKeepAwakeReleaseReason;
 };

@@ -3,8 +3,8 @@ package flight._js;
 
 typedef LoadScene2DAudioResourcesOptions = {
   @:optional var context:Null<js.html.audio.AudioContext>;
-  @:optional var fetch:(flight.ExternalAudioResourceReference, js.html.AbortSignal)->flight._internal._Promise<Null<flight.AudioResource>>;
+  @:optional var fetch:flight.AudioResourceFetch;
   @:optional var progress:flight.Signal<(flight.Scene2DAudioResourceLoadProgress)->Void>;
-  @:optional function select(reference:Dynamic):Bool;
+  @:optional function select(reference:flight.AudioResourceReference):Bool;
   @:optional var signal:js.html.AbortSignal;
 };

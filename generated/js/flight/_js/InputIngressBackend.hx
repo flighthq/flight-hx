@@ -2,10 +2,10 @@
 package flight._js;
 
 typedef InputIngressBackend = {
-  function attachGamepad(source:Dynamic, sink:flight.InputIngressSink, ?options:flight.AttachInputOptions):()->Void;
-  function attachKeyboard(source:Dynamic, sink:flight.InputIngressSink, ?options:flight.AttachInputOptions):()->Void;
-  function attachPointer(source:Dynamic, sink:flight.InputIngressSink, ?options:flight.AttachInputOptions):()->Void;
-  function attachRelativePointer(source:Dynamic, sink:flight.InputIngressSink, ?options:flight.AttachInputOptions):()->Void;
-  function attachText(source:Dynamic, sink:flight.InputIngressSink, ?options:flight.AttachInputOptions):()->Void;
-  function attachWheel(source:Dynamic, sink:flight.InputIngressSink, ?options:flight.AttachInputOptions):()->Void;
+  function attachGamepad(source:flight.InputIngressSource, sink:flight.InputIngressSink, ?options:flight.AttachInputOptions):()->Void;
+  function attachKeyboard(source:flight.InputIngressSource, sink:flight.InputIngressSink, ?options:flight.AttachInputOptions):()->Void;
+  function attachPointer(source:flight.InputIngressSource, sink:flight.InputIngressSink, ?options:flight.AttachInputOptions):()->Void;
+  function attachRelativePointer(source:flight.InputIngressSource, sink:flight.InputIngressSink, ?options:flight.AttachInputOptions):()->Void;
+  function attachText(source:flight.InputIngressSource, sink:flight.InputIngressSink, ?options:flight.AttachInputOptions):()->Void;
+  function attachWheel(source:flight.InputIngressSource, sink:flight.InputIngressSink, ?options:flight.AttachInputOptions):()->Void;
 };

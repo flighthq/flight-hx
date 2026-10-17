@@ -7,15 +7,15 @@ typedef SpotLightOptions = {
   @:optional var priority:Float;
   @:optional var color:Float;
   @:optional var decay:Float;
-  @:optional var direction:flight.Vector3;
+  @:optional var direction:flight.Vector3Like;
   @:optional var enabled:Bool;
   @:optional var innerConeDegrees:Float;
   @:optional var intensity:Float;
-  @:optional var intensityUnit:Dynamic;
+  @:optional var intensityUnit:flight.LightUnit;
   @:optional var normalBias:Float;
   @:optional var outerConeDegrees:Float;
   @:optional var pcfRadius:Float;
-  @:optional var position:flight.Vector3;
+  @:optional var position:flight.Vector3Like;
   @:optional var range:Float;
   @:optional var shadowBias:Float;
   @:optional var shadowFar:Float;

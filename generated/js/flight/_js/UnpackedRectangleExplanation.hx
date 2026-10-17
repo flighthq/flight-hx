@@ -2,8 +2,8 @@
 package flight._js;
 
 typedef UnpackedRectangleExplanation = {
-  var id:Dynamic;
-  var reason:Dynamic;
+  var id:flight.RectangleId;
+  var reason:flight.UnpackedRectangleReason;
   var usableWidth:Float;
   var usableHeight:Float;
 };

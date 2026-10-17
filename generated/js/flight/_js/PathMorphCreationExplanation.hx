@@ -3,6 +3,6 @@ package flight._js;
 
 typedef PathMorphCreationExplanation = {
   var contour:Null<Float>;
-  var reason:Dynamic;
+  var reason:flight.PathMorphCreationReason;
   var supported:Bool;
 };

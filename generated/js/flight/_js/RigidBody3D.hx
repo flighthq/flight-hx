@@ -4,7 +4,7 @@ package flight._js;
 typedef RigidBody3D = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var index:Float;
-  var type:Dynamic;
+  var type:flight.Physics3DBodyType;
   var x:Float;
   var y:Float;
   var z:Float;

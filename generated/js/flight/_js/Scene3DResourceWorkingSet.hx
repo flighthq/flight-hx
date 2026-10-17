@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef Scene3DResourceWorkingSet = {
-  var ref:Dynamic;
-  var textures:Array<Dynamic>;
+  var ref:flight.ImageResourceReference;
+  var textures:Array<flight.Texture>;
 };

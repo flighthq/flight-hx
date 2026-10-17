@@ -3,5 +3,5 @@ package flight._js;
 
 typedef LottieGradient = {
   var p:Float;
-  var k:Dynamic;
+  var k:flight.LottieAnimatable<Array<Float>>;
 };

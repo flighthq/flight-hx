@@ -3,7 +3,7 @@ package flight._js;
 
 typedef Physics2DAbiCommandBuffer = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var data:flight._internal._UInt8Array<haxe.io.Bytes>;
+  var data:flight._internal._UInt8Array<flight._internal._ArrayBuffer>;
   var byteLength:Float;
   var commandCount:Float;
 };

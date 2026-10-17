@@ -9,5 +9,5 @@ typedef PowerStatus = {
   var isCharging:Bool;
   var isLowPower:Bool;
   var isOnBattery:Bool;
-  var thermalState:Dynamic;
+  var thermalState:flight.PowerThermalState;
 };

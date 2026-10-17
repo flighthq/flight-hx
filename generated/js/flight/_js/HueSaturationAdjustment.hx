@@ -4,7 +4,7 @@ package flight._js;
 typedef HueSaturationAdjustment = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var kind:String;
-  var transform:(Array<Float>, Float, Float, Float)->Void;
+  var transform:flight.ColorTransformFunction;
   @:optional var hue:Float;
   @:optional var saturation:Float;
   @:optional var lightness:Float;

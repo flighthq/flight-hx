@@ -5,5 +5,5 @@ typedef ImportDiagnostic = {
   @:optional var detail:haxe.DynamicAccess<Dynamic>;
   var kind:String;
   var origin:String;
-  var severity:String;
+  var severity:flight.ImportDiagnosticSeverity;
 };

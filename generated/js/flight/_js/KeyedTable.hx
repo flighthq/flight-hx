@@ -2,8 +2,8 @@
 package flight._js;
 
 typedef KeyedTable<T> = {
-  var onMiss:String;
-  var registry:String;
-  var entries:flight._internal._Map<String, Dynamic>;
+  var onMiss:flight.RegistryMissPolicy;
+  var registry:flight.RegistryId;
+  var entries:flight._internal._Map<flight.Kind, flight.RegistryTableEntry<T>>;
   var shape:String;
 };

@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef ByteReader = {
-  var view:js.lib.DataView;
+  var view:flight._internal._DataView;
   var offset:Float;
 };

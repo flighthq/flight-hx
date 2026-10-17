@@ -5,6 +5,6 @@ typedef ClipRegion = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var rect:flight.Rectangle;
   var contours:Null<Array<Array<Float>>>;
-  var winding:Dynamic;
+  var winding:flight.PathWinding;
   var version:Float;
 };

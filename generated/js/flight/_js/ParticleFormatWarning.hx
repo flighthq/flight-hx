@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef ParticleFormatWarning = {
-  var format:Dynamic;
+  var format:flight.ParticleFormatKind;
   var code:String;
   var message:String;
 };

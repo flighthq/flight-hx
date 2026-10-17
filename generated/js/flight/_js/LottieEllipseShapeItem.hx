@@ -7,6 +7,6 @@ typedef LottieEllipseShapeItem = {
   @:optional var nm:String;
   var ty:String;
   @:optional var d:Dynamic;
-  var p:Dynamic;
-  var s:Dynamic;
+  var p:flight.LottieAnimatable<Array<Float>>;
+  var s:flight.LottieAnimatable<Array<Float>>;
 };

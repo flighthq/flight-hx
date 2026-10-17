@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef CollisionVendorShape3D = {
-  var kind:String;
+  var kind:flight.CollisionVendorKind3D;
 };

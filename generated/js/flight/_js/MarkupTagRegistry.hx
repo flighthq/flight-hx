@@ -3,7 +3,7 @@ package flight._js;
 
 typedef MarkupTagRegistry = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  @:optional var classResolver:(String)->Null<flight.TextFormat>;
-  @:optional var colorResolver:(String)->Null<Float>;
-  var handlers:flight._internal._Map<String, (haxe.DynamicAccess<String>, flight.TextFormat)->Dynamic>;
+  @:optional var classResolver:flight.MarkupClassResolver;
+  @:optional var colorResolver:flight.MarkupColorResolver;
+  var handlers:flight._internal._Map<String, flight.MarkupTagHandler>;
 };

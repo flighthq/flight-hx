@@ -4,5 +4,5 @@ package flight._js;
 typedef Camera3DOptions = {
   var far:Float;
   var near:Float;
-  var projection:Dynamic;
+  var projection:flight.Projection;
 };

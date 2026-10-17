@@ -3,10 +3,10 @@ package flight._js;
 
 typedef MediaSessionBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function clearMetadata():flight.MediaSessionOperationOutcome<Dynamic>;
-  function clearPositionState():flight.MediaSessionOperationOutcome<Dynamic>;
+  function clearMetadata():flight.MediaSessionClearMetadataOutcome;
+  function clearPositionState():flight.MediaSessionClearPositionStateOutcome;
   function destroy():Void;
-  function setMetadata(metadata:flight.MediaSessionMetadata):flight.MediaSessionOperationOutcome<Dynamic>;
-  function setPlaybackState(state:Dynamic):flight.MediaSessionOperationOutcome<Dynamic>;
-  function setPositionState(state:flight.MediaSessionPositionState):flight.MediaSessionOperationOutcome<Dynamic>;
+  function setMetadata(metadata:flight.MediaSessionMetadata):flight.MediaSessionSetMetadataOutcome;
+  function setPlaybackState(state:flight.MediaSessionPlaybackState):flight.MediaSessionSetPlaybackStateOutcome;
+  function setPositionState(state:flight.MediaSessionPositionState):flight.MediaSessionSetPositionStateOutcome;
 };

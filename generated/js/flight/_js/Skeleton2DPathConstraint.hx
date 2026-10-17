@@ -10,9 +10,9 @@ typedef Skeleton2DPathConstraint = {
   var mixX:Float;
   var mixY:Float;
   var position:Float;
-  var positionMode:String;
-  var rotateMode:String;
+  var positionMode:flight.Skeleton2DPathPositionMode;
+  var rotateMode:flight.Skeleton2DPathRotateMode;
   var spacing:Float;
-  var spacingMode:String;
+  var spacingMode:flight.Skeleton2DPathSpacingMode;
   var targetSlotIndex:Float;
 };

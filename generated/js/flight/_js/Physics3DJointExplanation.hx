@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef Physics3DJointExplanation = {
-  var kind:String;
+  var kind:flight.Physics3DJointKind;
   var index:Float;
   var hasSolver:Bool;
   var bodiesResolvable:Bool;

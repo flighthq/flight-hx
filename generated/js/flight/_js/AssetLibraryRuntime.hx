@@ -2,8 +2,8 @@
 package flight._js;
 
 typedef AssetLibraryRuntime = {
-  var acquireGuard:Null<(flight.AssetLibrary, flight.AssetLoadExplanation)->Void>;
-  var adapters:flight._internal._Map<Dynamic, flight.AssetLoaderAdapter>;
+  var acquireGuard:Null<flight.AssetAcquireGuard>;
+  var adapters:flight._internal._Map<flight.AssetType, flight.AssetLoaderAdapter>;
   var descriptors:flight._internal._Map<String, flight.AssetDescriptor>;
   var entries:flight._internal._Map<String, flight.AssetEntry>;
   var freedIds:flight._internal._Set<String>;

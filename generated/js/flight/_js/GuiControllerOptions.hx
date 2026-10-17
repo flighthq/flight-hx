@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef GuiControllerOptions = {
-  @:optional var transition:flight.NodeInteractiveStateTransition<Dynamic, Dynamic>;
+  @:optional var transition:flight.GuiTransitionDescriptor;
 };

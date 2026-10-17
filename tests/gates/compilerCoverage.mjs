@@ -5,7 +5,7 @@ import process from 'node:process';
 
 const budgets = {
   extern: {
-    compatibilityCorrections: 0,
+    compatibilityCorrections: 2,
     dependencyRefusals: 0,
     emittedDeclarations: 7077,
     emittedTypes: 2197,
@@ -92,6 +92,7 @@ for (const [mode, directory] of [
     manifest.compiler.compatibilityCorrections.length,
     budget.compatibilityCorrections,
   );
+  validateCompatibilityCorrectionApplications(mode, manifest.compiler);
 
   if (mode === 'extern') {
     const publicSurface = readJson('generated/js/public-surface.json');
@@ -177,6 +178,32 @@ function validateRuntimePartition(package_) {
   }
   for (const name of emitted) {
     equal(`${package_.package} runtime declaration ${name} unexpected status`, unexpected.has(name), !expected.has(name));
+  }
+}
+
+function validateCompatibilityCorrectionApplications(mode, compiler) {
+  const ids = compiler.compatibilityCorrections;
+  const applications = compiler.compatibilityCorrectionApplications;
+  if (!Array.isArray(applications)) {
+    // The checked-in transpiled fallback predates the application ledger and remains pinned until
+    // the new compiler's transpile candidate is usable. Every artifact produced by the current
+    // generator includes this field, including an empty array when no corrections apply.
+    if (mode !== 'transpile') failures.push(`${mode} compatibility correction applications are missing`);
+    return;
+  }
+  equal(`${mode} compatibility correction application count`, applications.length, ids.length);
+  equal(`${mode} unique compatibility correction ids`, new Set(ids).size, ids.length);
+  equal(
+    `${mode} correction ids match applications`,
+    JSON.stringify(applications.map(({ id }) => id)),
+    JSON.stringify(ids),
+  );
+  for (const application of applications) {
+    const fileReplacements = Array.isArray(application.files)
+      ? application.files.reduce((total, file) => total + file.replacements, 0)
+      : -1;
+    equal(`${mode} correction ${application.id} replacement total`, application.replacements, fileReplacements);
+    if (application.replacements <= 0) failures.push(`${mode} correction ${application.id} applied zero times`);
   }
 }
 

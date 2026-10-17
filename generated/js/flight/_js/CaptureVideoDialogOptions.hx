@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef CaptureVideoDialogOptions = {
-  @:optional var facingMode:Dynamic;
+  @:optional var facingMode:flight.MediaCaptureDialogFacingMode;
   @:optional var signal:js.html.AbortSignal;
 };

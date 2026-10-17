@@ -9,7 +9,7 @@ typedef Physics3DWorld = {
   var index:flight.SpatialIndexBackend3D;
   var contacts:Array<flight.Physics3DContact>;
   var joints:Array<flight.Physics3DJoint>;
-  var jointSolvers:flight._internal._Map<String, flight.Physics3DJointSolver>;
+  var jointSolvers:flight._internal._Map<flight.Physics3DJointKind, flight.Physics3DJointSolver>;
   var jointCollisionSuppressions:flight._internal._Map<Float, flight._internal._Map<Float, Float>>;
   var events:flight.Physics3DContactEvents;
   var jointEvents:flight.Physics3DJointEvents;

@@ -3,5 +3,5 @@ package flight._js;
 
 typedef FlightDocumentTokenResolverRegistry = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var resolvers:flight.KeyedTable<(Dynamic, flight.FlightDocumentToken)->Null<Dynamic>>;
+  var resolvers:flight.KeyedTable<flight.FlightDocumentTokenResolver>;
 };

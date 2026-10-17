@@ -5,5 +5,5 @@ typedef AssetLoadExplanation = {
   var id:String;
   var refCount:Float;
   var status:Dynamic;
-  var type:Null<Dynamic>;
+  var type:Null<flight.AssetType>;
 };

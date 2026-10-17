@@ -3,6 +3,6 @@ package flight._js;
 
 typedef InputPointerLockBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function exit():flight._internal._Promise<Dynamic>;
-  function request(target:flight.InputTargetHandle):flight._internal._Promise<Dynamic>;
+  function exit():flight._internal._Promise<flight.InputPointerLockExitOutcome>;
+  function request(target:flight.InputTargetHandle):flight._internal._Promise<flight.InputPointerLockRequestOutcome>;
 };

@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef Node2DAnimationTarget = {
-  var node:Dynamic;
-  var path:Dynamic;
+  var node:flight.Node2D;
+  var path:flight.Node2DAnimationPath;
 };

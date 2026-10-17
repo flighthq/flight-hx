@@ -4,6 +4,6 @@ package flight._js;
 typedef ShortcutTriggerBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   function destroy():flight._internal._Promise<Dynamic>;
-  function subscribe(accelerator:String, trigger:()->Void):flight._internal._Promise<Dynamic>;
+  function subscribe(accelerator:flight.Accelerator, trigger:()->Void):flight._internal._Promise<flight.ShortcutTriggerSubscribeOutcome>;
   function unsubscribe(subscription:flight.ShortcutTriggerSubscription):flight._internal._Promise<flight.ShortcutTriggerUnsubscribeOutcome>;
 };

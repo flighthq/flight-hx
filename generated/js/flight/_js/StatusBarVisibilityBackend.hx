@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef StatusBarVisibilityBackend = {
-  function setVisible(visible:Bool, ?animation:Dynamic):Void;
+  function setVisible(visible:Bool, ?animation:flight.StatusBarAnimation):Void;
 };

@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef TextureResolutionExplanation = {
-  var kind:Null<String>;
-  var status:Dynamic;
+  var kind:Null<flight.TextureSourceKind>;
+  var status:flight.TextureResolutionStatus;
 };

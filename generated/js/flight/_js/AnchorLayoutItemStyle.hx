@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef AnchorLayoutItemStyle = {
-  @:optional var align:Dynamic;
+  @:optional var align:flight.ViewportAlign;
   @:optional var bottom:Null<Float>;
   @:optional var height:Null<Float>;
   @:optional var left:Null<Float>;

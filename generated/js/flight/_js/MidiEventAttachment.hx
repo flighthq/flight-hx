@@ -3,5 +3,5 @@ package flight._js;
 
 typedef MidiEventAttachment = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function release():flight._internal._Promise<{ reason:Dynamic }>;
+  function release():flight._internal._Promise<flight.MidiEventReleaseOutcome>;
 };

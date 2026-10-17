@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef FocusEventData = {
-  var currentTarget:Null<flight.Node<Dynamic>>;
-  var relatedTarget:Null<flight.Node<Dynamic>>;
-  var target:Null<flight.Node<Dynamic>>;
+  var currentTarget:Null<flight.NodeAny>;
+  var relatedTarget:Null<flight.NodeAny>;
+  var target:Null<flight.NodeAny>;
 };

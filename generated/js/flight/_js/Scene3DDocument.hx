@@ -5,11 +5,11 @@ typedef Scene3DDocument = {
   var animations:Array<flight.Scene3DDocumentAnimation>;
   var cameras:Array<flight.Scene3DDocumentCamera>;
   var lights:Array<flight.Scene3DDocumentLight>;
-  var materials:Array<flight.Material>;
+  var materials:Array<flight.MaterialLike>;
   var meshes:Array<flight.Scene3DDocumentMesh>;
   var metadata:Null<flight.Scene3DMetadata>;
   var nodes:Array<flight.Scene3DDocumentNode>;
-  var resources:Array<Dynamic>;
+  var resources:Array<flight.ImageResourceReference>;
   var scenes:Array<flight.Scene3DDocumentScene>;
   var skins:Array<flight.Scene3DDocumentSkin>;
 };

@@ -6,7 +6,7 @@ typedef Tween<T:Dynamic> = {
   var complete:Bool;
   var delay:Float;
   var duration:Float;
-  var ease:(Float)->Float;
+  var ease:flight.EasingFunction;
   var elapsed:Float;
   var initialized:Bool;
   var onComplete:flight.Signal<()->Void>;
@@ -15,7 +15,7 @@ typedef Tween<T:Dynamic> = {
   var onYoyo:flight.Signal<()->Void>;
   var paused:Bool;
   var properties:Array<flight.TweenPropertyDetail>;
-  var propertyMap:Dynamic;
+  var propertyMap:flight.NumericProps<T>;
   var reflect:Bool;
   var repeat:Float;
   var reverse:Bool;

@@ -3,6 +3,6 @@ package flight._js;
 
 typedef ScreenDetailsBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function queryPermission():flight._internal._Promise<Dynamic>;
+  function queryPermission():flight._internal._Promise<flight.ScreenPermissionState>;
   function request():flight._internal._Promise<Bool>;
 };

@@ -10,5 +10,5 @@ typedef OrbitCameraControllerOptions = {
   @:optional var minPolar:Float;
   @:optional var polar:Float;
   @:optional var smoothTime:Float;
-  @:optional var target:flight.Vector3;
+  @:optional var target:flight.Vector3Like;
 };

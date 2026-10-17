@@ -6,6 +6,6 @@ typedef Skeleton3D = {
   var inverseBindMatrices:flight._internal._Float32Array;
   var jointMatrices:flight._internal._Float32Array;
   var normalMatrices:flight._internal._Float32Array;
-  var joints:Array<Dynamic>;
+  var joints:Array<flight.Node3D>;
   @:optional var names:Null<Array<String>>;
 };

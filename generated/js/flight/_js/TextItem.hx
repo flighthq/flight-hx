@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef TextItem = {
-  var direction:Dynamic;
+  var direction:flight.TextDirection;
   var end:Float;
   var script:String;
   var start:Float;

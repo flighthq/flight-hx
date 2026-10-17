@@ -4,7 +4,7 @@ package flight._js;
 typedef Skeleton2DSlotAnimationTarget = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   @:optional var attachments:Null<Array<Null<flight.Attachment2D>>>;
-  var kind:String;
-  var path:String;
+  var kind:flight.Skeleton2DAnimationTargetKind;
+  var path:flight.Skeleton2DSlotAnimationPath;
   var slotIndex:Float;
 };

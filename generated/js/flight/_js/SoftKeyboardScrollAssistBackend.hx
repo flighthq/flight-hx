@@ -3,5 +3,5 @@ package flight._js;
 
 typedef SoftKeyboardScrollAssistBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function setScrollAssistEnabled(enabled:Bool):flight._internal._Promise<Dynamic>;
+  function setScrollAssistEnabled(enabled:Bool):flight._internal._Promise<flight.SoftKeyboardSetterResult>;
 };

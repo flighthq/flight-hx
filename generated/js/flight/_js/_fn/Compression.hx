@@ -6,11 +6,11 @@ package flight._js._fn;
 extern class Compression {
   static function compressDeflate(bytes:flight._internal._UInt8Array):flight._internal._UInt8Array;
   static function compressDeflateZlib(bytes:flight._internal._UInt8Array):flight._internal._UInt8Array;
-  static function getDecompressor(compression:Dynamic):Null<(flight._internal._UInt8Array, Float, String)->Null<flight._internal._UInt8Array>>;
-  static function hasDecompressor(compression:Dynamic):Bool;
-  static var inflateDeflate:(flight._internal._UInt8Array, Float, String)->Null<flight._internal._UInt8Array>;
-  static function registerDecompressor(compression:Dynamic, decompress:(flight._internal._UInt8Array, Float, String)->Null<flight._internal._UInt8Array>):Void;
+  static function getDecompressor(compression:flight.Compression):Null<flight.Decompressor>;
+  static function hasDecompressor(compression:flight.Compression):Bool;
+  static var inflateDeflate:flight.Decompressor;
+  static function registerDecompressor(compression:flight.Compression, decompress:flight.Decompressor):Void;
   static function registerDeflateDecompressor():Void;
-  static function unregisterDecompressor(compression:Dynamic):Void;
+  static function unregisterDecompressor(compression:flight.Compression):Void;
 }
 #end

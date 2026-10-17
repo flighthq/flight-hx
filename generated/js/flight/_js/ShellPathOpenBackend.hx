@@ -3,5 +3,5 @@ package flight._js;
 
 typedef ShellPathOpenBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function open(path:String):flight._internal._Promise<Dynamic>;
+  function open(path:String):flight._internal._Promise<flight.ShellPathOpenOutcome>;
 };

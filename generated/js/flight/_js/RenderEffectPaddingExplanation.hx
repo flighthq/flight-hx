@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef RenderEffectPaddingExplanation = {
-  var missingKinds:Array<String>;
+  var missingKinds:Array<flight.Kind>;
   var padding:flight.RenderEffectPadding;
-  var status:Dynamic;
+  var status:flight.RenderEffectPaddingStatus;
 };

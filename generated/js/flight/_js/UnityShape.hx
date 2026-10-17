@@ -3,7 +3,7 @@ package flight._js;
 
 typedef UnityShape = {
   var enabled:Bool;
-  var shapeType:Dynamic;
+  var shapeType:flight.UnityParticleShapeType;
   var radius:Float;
   var angle:Float;
   var scale:{ x:Float, y:Float, z:Float };

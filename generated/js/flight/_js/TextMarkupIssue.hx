@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef TextMarkupIssue = {
-  var kind:Dynamic;
+  var kind:flight.TextMarkupIssueKind;
   var offset:Float;
   var tag:String;
   var value:Null<String>;

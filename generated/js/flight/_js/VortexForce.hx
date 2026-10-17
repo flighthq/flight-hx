@@ -11,5 +11,5 @@ typedef VortexForce = {
   @:optional var axisZ:Float;
   var strength:Float;
   @:optional var radius:Float;
-  @:optional var falloff:Dynamic;
+  @:optional var falloff:flight.ForceFalloff;
 };

@@ -6,9 +6,9 @@ typedef MatcapMaterial = {
   var kind:String;
   @:optional var name:Null<String>;
   var alphaCutoff:Float;
-  var alphaMode:Dynamic;
-  var blendMode:String;
+  var alphaMode:flight.MaterialAlphaMode;
+  var blendMode:flight.BlendMode;
   var doubleSided:Bool;
-  var matcap:Null<Dynamic>;
+  var matcap:Null<flight.Texture>;
   var tint:Float;
 };

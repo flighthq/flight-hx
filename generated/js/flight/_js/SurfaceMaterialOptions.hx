@@ -3,7 +3,7 @@ package flight._js;
 
 typedef SurfaceMaterialOptions = {
   @:optional var alphaCutoff:Float;
-  @:optional var alphaMode:Dynamic;
-  @:optional var blendMode:String;
+  @:optional var alphaMode:flight.MaterialAlphaMode;
+  @:optional var blendMode:flight.BlendMode;
   @:optional var doubleSided:Bool;
 };

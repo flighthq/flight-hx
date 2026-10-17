@@ -3,7 +3,7 @@ package flight._js;
 
 typedef ShapedRun = {
   var advanceWidth:Float;
-  var direction:Dynamic;
+  var direction:flight.TextDirection;
   var font:Null<flight.FontResource>;
   var glyphCount:Float;
   var glyphs:Array<flight.ShapedGlyph>;

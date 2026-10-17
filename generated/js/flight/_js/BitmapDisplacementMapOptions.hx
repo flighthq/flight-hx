@@ -7,7 +7,7 @@ typedef BitmapDisplacementMapOptions = {
   @:optional var componentY:Float;
   @:optional var scaleX:Float;
   @:optional var scaleY:Float;
-  @:optional var mode:Dynamic;
-  @:optional var edgeMode:Dynamic;
+  @:optional var mode:flight.BitmapDisplacementMapMode;
+  @:optional var edgeMode:flight.BitmapEdgeMode;
   @:optional var fillColor:Float;
 };

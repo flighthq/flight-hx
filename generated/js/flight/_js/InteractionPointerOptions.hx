@@ -7,7 +7,7 @@ typedef InteractionPointerOptions = {
   @:optional var ctrlKey:Bool;
   @:optional var metaKey:Bool;
   @:optional var pointerId:Float;
-  @:optional var pointerType:Dynamic;
+  @:optional var pointerType:flight.PointerType;
   @:optional var shiftKey:Bool;
   @:optional var timeStamp:Float;
 };

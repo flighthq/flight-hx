@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef HasBlendMode = {
-  var blendMode:Null<String>;
+  var blendMode:Null<flight.BlendMode>;
 };

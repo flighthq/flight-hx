@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef ResolveScene2DResourcesOptions = {
-  @:optional var resolveSlotContent:(flight.Scene2DSlotReference)->Null<Dynamic>;
+  @:optional var resolveSlotContent:flight.Scene2DSlotContentResolver;
   @:optional function select(reference:flight.Scene2DSlotReference):Bool;
 };

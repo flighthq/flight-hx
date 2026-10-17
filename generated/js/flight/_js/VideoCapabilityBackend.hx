@@ -3,5 +3,5 @@ package flight._js;
 
 typedef VideoCapabilityBackend = {
   function canPlayType(mimeType:String):Bool;
-  @:optional function createVideoElement():Null<Dynamic>;
+  @:optional function createVideoElement():Null<flight.HostImageSource>;
 };

@@ -6,6 +6,6 @@ typedef GltfExtensionContext = {
   @:optional var diagnostics:Array<flight.ImportDiagnostic>;
   var document:flight.Scene3DDocument;
   var nodeIndices:Array<Float>;
-  function resolveTexture(info:Null<flight.GltfTextureInfo>, colorSpace:Dynamic):Null<Dynamic>;
+  function resolveTexture(info:Null<flight.GltfTextureInfo>, colorSpace:flight.TextureColorSpace):Null<flight.Texture>;
   var source:flight.GltfDocument;
 };

@@ -3,5 +3,5 @@ package flight._js;
 
 typedef BitmapReadbackOutcome = {
   var bitmap:Null<flight.Bitmap>;
-  var reason:Dynamic;
+  var reason:flight.BitmapReadbackBackendReason;
 };

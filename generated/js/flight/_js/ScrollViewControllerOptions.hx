@@ -2,10 +2,10 @@
 package flight._js;
 
 typedef ScrollViewControllerOptions = {
-  @:optional var transition:flight.NodeInteractiveStateTransition<Dynamic, Dynamic>;
-  var content:Dynamic;
+  @:optional var transition:flight.GuiTransitionDescriptor;
+  var content:flight.Node2D;
   @:optional var horizontalScrollBar:flight.ScrollBarController;
   @:optional var mouseWheelEnabled:Bool;
-  var viewport:Dynamic;
+  var viewport:flight.Node2D;
   @:optional var verticalScrollBar:flight.ScrollBarController;
 };

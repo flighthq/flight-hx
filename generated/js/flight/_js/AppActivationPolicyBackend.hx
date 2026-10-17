@@ -3,5 +3,5 @@ package flight._js;
 
 typedef AppActivationPolicyBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function setActivationPolicy(policy:Dynamic):Void;
+  function setActivationPolicy(policy:flight.AppActivationPolicy):Void;
 };

@@ -4,6 +4,6 @@ package flight._js;
 typedef Skeleton2DAnimationTarget = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var boneIndex:Float;
-  var kind:String;
-  var path:Dynamic;
+  var kind:flight.Skeleton2DAnimationTargetKind;
+  var path:flight.Skeleton2DAnimationPath;
 };

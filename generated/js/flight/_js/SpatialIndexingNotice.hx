@@ -3,9 +3,9 @@ package flight._js;
 
 typedef SpatialIndexingNotice = {
   var cellSize:Float;
-  var id:Float;
-  var mode:Dynamic;
-  var operation:Dynamic;
+  var id:flight.SpatialObjectId;
+  var mode:flight.SpatialIndexingMode;
+  var operation:flight.SpatialIndexingOperation;
   var wouldOccupyBucketCount:Float;
-  var reason:Null<Dynamic>;
+  var reason:Null<flight.SpatialIndexingReason>;
 };

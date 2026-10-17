@@ -3,7 +3,7 @@ package flight._js;
 
 typedef LottieSeparatedPositionProperty = {
   var s:Bool;
-  var x:Dynamic;
-  var y:Dynamic;
-  @:optional var z:Dynamic;
+  var x:flight.LottieAnimatable<Float>;
+  var y:flight.LottieAnimatable<Float>;
+  @:optional var z:flight.LottieAnimatable<Float>;
 };

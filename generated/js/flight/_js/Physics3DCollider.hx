@@ -3,8 +3,8 @@ package flight._js;
 
 typedef Physics3DCollider = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var local:Dynamic;
-  var world:Dynamic;
+  var local:flight.CollisionColliderShape3D;
+  var world:flight.CollisionColliderShape3D;
   var material:flight.Physics3DMaterial;
   var filter:flight.Physics3DCollisionFilter;
   var sensor:Bool;

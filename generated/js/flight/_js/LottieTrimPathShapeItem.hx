@@ -6,8 +6,8 @@ typedef LottieTrimPathShapeItem = {
   @:optional var ix:Float;
   @:optional var nm:String;
   var ty:String;
-  var e:Dynamic;
+  var e:flight.LottieAnimatable<Float>;
   var m:Dynamic;
-  var o:Dynamic;
-  var s:Dynamic;
+  var o:flight.LottieAnimatable<Float>;
+  var s:flight.LottieAnimatable<Float>;
 };

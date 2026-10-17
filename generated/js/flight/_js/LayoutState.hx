@@ -3,12 +3,12 @@ package flight._js;
 
 typedef LayoutState = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var guard:Null<(flight.LayoutResolutionExplanation)->Void>;
+  var guard:Null<flight.LayoutResolutionGuard>;
   var lastFailureActualLength:Float;
-  var lastFailureKind:Null<String>;
+  var lastFailureKind:Null<flight.LayoutResolutionFailureKind>;
   var lastFailureNodeIndex:Float;
   var lastFailureParentIndex:Float;
   var lastFailureRequiredLength:Float;
   var lastFailureResolverKind:Null<String>;
-  var resolvers:flight._internal._Map<String, (flight._internal._Float32Array, flight.LayoutTree, Dynamic, Float, Float)->Null<String>>;
+  var resolvers:flight._internal._Map<String, flight.LayoutResolver>;
 };

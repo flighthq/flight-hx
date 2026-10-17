@@ -9,7 +9,7 @@ typedef DeviceInfo = {
   var colorGamut:String;
   var cpuCores:Float;
   var fontScale:Float;
-  var formFactor:String;
+  var formFactor:flight.DeviceFormFactor;
   var gpuRenderer:String;
   var gpuVendor:String;
   var isHdr:Bool;

@@ -5,8 +5,8 @@ typedef HasBoundsRectangleRuntime = {
   var binding:Null<Dynamic>;
   @:optional var uid:String;
   var boundsRectangle:Null<flight.Rectangle>;
-  function computeLocalBoundsRectangle(out:flight.Rectangle, source:Dynamic):Void;
-  var isLocalBoundsRectangleValid:Null<(Dynamic)->Bool>;
+  function computeLocalBoundsRectangle(out:flight.Rectangle, source:flight.BoundsNodeAny):Void;
+  var isLocalBoundsRectangleValid:Null<(flight.BoundsNodeAny)->Bool>;
   var localBoundsRectangle:Null<flight.Rectangle>;
   var worldBoundsRectangle:Null<flight.Rectangle>;
 };

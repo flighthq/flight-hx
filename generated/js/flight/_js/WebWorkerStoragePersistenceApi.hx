@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef WebWorkerStoragePersistenceApi = {
-  function getPermissionState():flight._internal._Promise<Dynamic>;
+  function getPermissionState():flight._internal._Promise<flight.PermissionState>;
   function persisted():flight._internal._Promise<Bool>;
 };

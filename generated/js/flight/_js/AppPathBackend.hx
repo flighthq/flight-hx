@@ -3,7 +3,7 @@ package flight._js;
 
 typedef AppPathBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function getAppDirectoryPath(kind:Dynamic):String;
+  function getAppDirectoryPath(kind:flight.AppPathKind):String;
   function getAppPath():String;
   function getExecutablePath():String;
 };

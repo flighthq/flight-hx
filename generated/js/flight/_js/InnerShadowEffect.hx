@@ -11,6 +11,6 @@ typedef InnerShadowEffect = {
   @:optional var color:Float;
   @:optional var distance:Float;
   @:optional var quality:Float;
-  @:optional var sourceMode:Dynamic;
+  @:optional var sourceMode:flight.InnerEffectSourceMode;
   @:optional var strength:Float;
 };

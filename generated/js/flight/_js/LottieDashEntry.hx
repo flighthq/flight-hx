@@ -4,5 +4,5 @@ package flight._js;
 typedef LottieDashEntry = {
   var n:Dynamic;
   @:optional var nm:String;
-  var v:Dynamic;
+  var v:flight.LottieAnimatable<Float>;
 };

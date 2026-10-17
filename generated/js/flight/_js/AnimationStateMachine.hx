@@ -9,7 +9,7 @@ typedef AnimationStateMachine = {
   var fromSample:flight._internal._Float32Array;
   var states:Array<flight.AnimationStateMachineState>;
   var toSample:flight._internal._Float32Array;
-  var transitionCurve:(Float)->Float;
+  var transitionCurve:flight.EasingFunction;
   var transitionDuration:Float;
   var transitionElapsed:Float;
   var transitionFromStateIndex:Null<Float>;

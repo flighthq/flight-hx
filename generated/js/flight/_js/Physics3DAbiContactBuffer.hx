@@ -3,13 +3,13 @@ package flight._js;
 
 typedef Physics3DAbiContactBuffer = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var ids:flight._internal._UInt32Array<haxe.io.Bytes>;
-  var flags:flight._internal._UInt32Array<haxe.io.Bytes>;
-  var pointStarts:flight._internal._UInt32Array<haxe.io.Bytes>;
-  var pointCounts:flight._internal._UInt32Array<haxe.io.Bytes>;
-  var values:flight._internal._Float64Array<haxe.io.Bytes>;
-  var pointFeatureIds:flight._internal._UInt32Array<haxe.io.Bytes>;
-  var pointValues:flight._internal._Float64Array<haxe.io.Bytes>;
+  var ids:flight._internal._UInt32Array<flight._internal._ArrayBuffer>;
+  var flags:flight._internal._UInt32Array<flight._internal._ArrayBuffer>;
+  var pointStarts:flight._internal._UInt32Array<flight._internal._ArrayBuffer>;
+  var pointCounts:flight._internal._UInt32Array<flight._internal._ArrayBuffer>;
+  var values:flight._internal._Float64Array<flight._internal._ArrayBuffer>;
+  var pointFeatureIds:flight._internal._UInt32Array<flight._internal._ArrayBuffer>;
+  var pointValues:flight._internal._Float64Array<flight._internal._ArrayBuffer>;
   var count:Float;
   var pointCount:Float;
   var requiredCount:Float;

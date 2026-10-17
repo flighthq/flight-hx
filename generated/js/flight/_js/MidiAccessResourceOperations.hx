@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef MidiAccessResourceOperations = {
-  function attachStateChange(listener:(Dynamic)->Void):flight._internal._Promise<Dynamic>;
+  function attachStateChange(listener:(flight.MidiPort)->Void):flight._internal._Promise<flight.MidiEventBackendAttachOutcome>;
   function getInputPorts():Array<flight.MidiInputPort>;
   function getOutputPorts():Array<flight.MidiOutputPort>;
 };

@@ -3,5 +3,5 @@ package flight._js;
 
 typedef TrayTemplateImageBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function set(tray:flight.TrayIcon, isTemplate:Bool):flight._internal._Promise<Dynamic>;
+  function set(tray:flight.TrayIcon, isTemplate:Bool):flight._internal._Promise<flight.TrayTemplateImageUpdateResult>;
 };

@@ -3,6 +3,6 @@ package flight._js;
 
 typedef FlightDocumentToken = {
   var key:String;
-  var kind:String;
+  var kind:flight.Kind;
   var values:flight.FlightDocumentTokenValues;
 };

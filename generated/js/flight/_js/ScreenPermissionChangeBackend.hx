@@ -3,5 +3,5 @@ package flight._js;
 
 typedef ScreenPermissionChangeBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function subscribe(listener:(Dynamic)->Void):()->Void;
+  function subscribe(listener:(flight.ScreenPermissionState)->Void):()->Void;
 };

@@ -3,7 +3,7 @@ package flight._js;
 
 typedef FullscreenBackend = {
   function exit():flight._internal._Promise<Bool>;
-  function request(target:Dynamic):flight._internal._Promise<Bool>;
+  function request(target:flight.FullscreenTargetHandle):flight._internal._Promise<Bool>;
   @:optional function subscribe(callback:(Bool)->Void):Void;
   @:optional function unsubscribe(callback:(Bool)->Void):Void;
 };

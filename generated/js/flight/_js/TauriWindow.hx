@@ -7,10 +7,10 @@ typedef TauriWindow = {
   function hide():flight._internal._Promise<Dynamic>;
   function maximize():flight._internal._Promise<Dynamic>;
   function minimize():flight._internal._Promise<Dynamic>;
-  function onCloseRequested(handler:(flight.TauriCloseRequestedEvent)->Void):flight._internal._Promise<()->Void>;
-  function onFocusChanged(handler:({ payload:Bool })->Void):flight._internal._Promise<()->Void>;
-  function onMoved(handler:({ payload:flight.TauriPhysicalPositionLike })->Void):flight._internal._Promise<()->Void>;
-  function onResized(handler:({ payload:flight.TauriLogicalSizeLike })->Void):flight._internal._Promise<()->Void>;
+  function onCloseRequested(handler:(flight.TauriCloseRequestedEvent)->Void):flight._internal._Promise<flight.TauriUnlisten>;
+  function onFocusChanged(handler:({ payload:Bool })->Void):flight._internal._Promise<flight.TauriUnlisten>;
+  function onMoved(handler:({ payload:flight.TauriPhysicalPositionLike })->Void):flight._internal._Promise<flight.TauriUnlisten>;
+  function onResized(handler:({ payload:flight.TauriLogicalSizeLike })->Void):flight._internal._Promise<flight.TauriUnlisten>;
   function requestUserAttention(kind:Null<Float>):flight._internal._Promise<Dynamic>;
   function setAlwaysOnTop(alwaysOnTop:Bool):flight._internal._Promise<Dynamic>;
   function setContentProtected(protected_:Bool):flight._internal._Promise<Dynamic>;

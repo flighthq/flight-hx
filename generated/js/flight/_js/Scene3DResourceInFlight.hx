@@ -4,5 +4,5 @@ package flight._js;
 typedef Scene3DResourceInFlight = {
   var controller:js.html.AbortController;
   var promise:flight._internal._Promise<Dynamic>;
-  var subscribers:flight._internal._Set<Dynamic>;
+  var subscribers:flight._internal._Set<flight.Texture>;
 };

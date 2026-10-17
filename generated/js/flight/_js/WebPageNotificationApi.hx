@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef WebPageNotificationApi = {
-  var Notification:{ construct:(String, flight.WebNotificationOptions)->flight.WebPageNotificationInstance, permission:Dynamic, requestPermission:()->flight._internal._Promise<Dynamic> };
+  var Notification:{ construct:(String, ?flight.WebNotificationOptions)->flight.WebPageNotificationInstance, permission:flight.NotificationPermission, requestPermission:()->flight._internal._Promise<flight.NotificationPermission> };
 };

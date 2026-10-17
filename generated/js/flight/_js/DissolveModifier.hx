@@ -8,6 +8,6 @@ typedef DissolveModifier = {
   var threshold:Float;
   var edgeColor:Float;
   @:optional var edgeWidth:Float;
-  @:optional var map:Dynamic;
+  @:optional var map:flight.Texture;
   @:optional var scale:Float;
 };

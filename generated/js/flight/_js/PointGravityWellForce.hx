@@ -8,6 +8,6 @@ typedef PointGravityWellForce = {
   var strength:Float;
   @:optional var radius:Float;
   @:optional var minRadius:Float;
-  @:optional var falloff:Dynamic;
+  @:optional var falloff:flight.ForceFalloff;
   @:optional var repulse:Bool;
 };

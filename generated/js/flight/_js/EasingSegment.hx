@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef EasingSegment = {
-  var ease:(Float)->Float;
+  var ease:flight.EasingFunction;
   @:optional var weight:Float;
 };

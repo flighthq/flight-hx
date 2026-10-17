@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef WebWindowStoragePersistenceApi = {
-  function getPermissionState():flight._internal._Promise<Dynamic>;
+  function getPermissionState():flight._internal._Promise<flight.PermissionState>;
   function persisted():flight._internal._Promise<Bool>;
   function persist():flight._internal._Promise<Bool>;
 };

@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef WebServiceWorkerNotificationApi = {
-  var permission:{ getPermission:()->Dynamic, requestPermission:()->flight._internal._Promise<Dynamic> };
+  var permission:{ getPermission:()->flight.NotificationPermission, requestPermission:()->flight._internal._Promise<flight.NotificationPermission> };
   var registration:flight.WebServiceWorkerNotificationRegistration;
 };

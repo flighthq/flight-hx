@@ -3,10 +3,10 @@ package flight._js;
 
 typedef TextureSource = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var alphaType:Dynamic;
+  var alphaType:flight.AlphaType;
   var gamut:Dynamic;
   var height:Float;
-  var kind:String;
+  var kind:flight.TextureSourceKind;
   var version:Float;
   var width:Float;
 };

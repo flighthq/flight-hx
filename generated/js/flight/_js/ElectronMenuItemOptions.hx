@@ -5,7 +5,7 @@ typedef ElectronMenuItemOptions = {
   @:optional var id:String;
   @:optional var label:String;
   @:optional var type:Dynamic;
-  @:optional var role:Dynamic;
+  @:optional var role:flight.ElectronMenuItemRole;
   @:optional var accelerator:String;
   @:optional var enabled:Bool;
   @:optional var checked:Bool;

@@ -3,6 +3,6 @@ package flight._js;
 
 typedef SpriteIdentityRendererData = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var textureIdentity:Null<Dynamic>;
+  var textureIdentity:Null<flight.Texture>;
   var textureVersion:Float;
 };

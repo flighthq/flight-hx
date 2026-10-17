@@ -2,11 +2,11 @@
 package flight._js;
 
 typedef VertexDisplaceModifierOptions = {
-  var source:Dynamic;
+  var source:flight.VertexDisplaceModifierSource;
   var amplitude:Float;
-  @:optional var axis:flight.Vector3;
-  @:optional var map:Dynamic;
+  @:optional var axis:flight.Vector3Like;
+  @:optional var map:flight.Texture;
   @:optional var frequency:Float;
   @:optional var speed:Float;
-  @:optional var direction:flight.Vector3;
+  @:optional var direction:flight.Vector3Like;
 };

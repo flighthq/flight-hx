@@ -3,7 +3,7 @@ package flight._js;
 
 typedef ImageResourceReferenceResolutionExplanation = {
   var failure:Null<flight.ImageResourceFailure>;
-  var kind:String;
+  var kind:flight.ImageResourceReferenceKind;
   var retryable:Bool;
-  var state:Dynamic;
+  var state:flight.ResourceResolutionState;
 };

@@ -3,11 +3,11 @@ package flight._js;
 
 typedef GridLayoutContainerStyle = {
   @:optional var columnGap:Float;
-  var columns:Array<Dynamic>;
+  var columns:Array<flight.GridLayoutTrack>;
   @:optional var paddingBottom:Float;
   @:optional var paddingLeft:Float;
   @:optional var paddingRight:Float;
   @:optional var paddingTop:Float;
   @:optional var rowGap:Float;
-  var rows:Array<Dynamic>;
+  var rows:Array<flight.GridLayoutTrack>;
 };

@@ -3,5 +3,5 @@ package flight._js;
 
 typedef ShortcutQueryBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function isRegistered(accelerator:String):flight._internal._Promise<Bool>;
+  function isRegistered(accelerator:flight.Accelerator):flight._internal._Promise<Bool>;
 };

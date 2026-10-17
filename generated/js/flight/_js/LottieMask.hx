@@ -5,8 +5,8 @@ typedef LottieMask = {
   @:optional var inv:Bool;
   var mode:Dynamic;
   @:optional var nm:String;
-  var o:Dynamic;
-  var pt:Dynamic;
-  @:optional var f:Dynamic;
-  @:optional var x:Dynamic;
+  var o:flight.LottieAnimatable<Float>;
+  var pt:flight.LottieAnimatable<flight.LottieShapePath>;
+  @:optional var f:flight.LottieAnimatable<Array<Float>>;
+  @:optional var x:flight.LottieAnimatable<Float>;
 };

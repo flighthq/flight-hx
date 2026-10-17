@@ -2,16 +2,16 @@
 package flight._js;
 
 typedef ScrollBarControllerOptions = {
-  @:optional var transition:flight.NodeInteractiveStateTransition<Dynamic, Dynamic>;
-  @:optional var downButton:Dynamic;
+  @:optional var transition:flight.GuiTransitionDescriptor;
+  @:optional var downButton:flight.Node2D;
   @:optional var lineSize:Float;
   @:optional var maximum:Float;
   @:optional var minimum:Float;
-  @:optional var orientation:Dynamic;
+  @:optional var orientation:flight.GuiOrientation;
   @:optional var pageSize:Float;
   @:optional var repeatInterval:Float;
-  var thumb:Dynamic;
-  var track:Dynamic;
-  @:optional var upButton:Dynamic;
+  var thumb:flight.Node2D;
+  var track:flight.Node2D;
+  @:optional var upButton:flight.Node2D;
   @:optional var value:Float;
 };

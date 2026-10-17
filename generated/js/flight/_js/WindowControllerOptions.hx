@@ -2,14 +2,14 @@
 package flight._js;
 
 typedef WindowControllerOptions = {
-  @:optional var transition:flight.NodeInteractiveStateTransition<Dynamic, Dynamic>;
+  @:optional var transition:flight.GuiTransitionDescriptor;
   @:optional var closeButton:flight.ButtonController;
-  @:optional var content:Dynamic;
+  @:optional var content:flight.Node2D;
   @:optional var draggable:Bool;
-  var frame:Dynamic;
+  var frame:flight.Node2D;
   @:optional var minimumHeight:Float;
   @:optional var minimumWidth:Float;
   @:optional var resizable:Bool;
-  @:optional var resizeHandle:Dynamic;
-  @:optional var titleBar:Dynamic;
+  @:optional var resizeHandle:flight.Node2D;
+  @:optional var titleBar:flight.Node2D;
 };

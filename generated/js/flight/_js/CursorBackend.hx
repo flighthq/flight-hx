@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef CursorBackend = {
-  function setCursor(cursor:Null<Dynamic>):Void;
+  function setCursor(cursor:Null<flight.Cursor>):Void;
 };

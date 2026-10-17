@@ -4,7 +4,7 @@ package flight._js;
 typedef LodMesh = {
   var data:Null<flight.NodeData>;
   var enabled:Bool;
-  var kind:String;
+  var kind:flight.Kind;
   var name:Null<String>;
   var EntityRuntimeKey:Null<flight.NodeRuntime<flight.Node3DTraits>>;
   var alpha:Float;

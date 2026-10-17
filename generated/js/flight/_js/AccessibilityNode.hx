@@ -3,7 +3,7 @@ package flight._js;
 
 typedef AccessibilityNode = {
   var id:String;
-  var role:Dynamic;
+  var role:flight.AccessibilityRole;
   @:optional var label:String;
   @:optional var description:String;
   @:optional var value:String;

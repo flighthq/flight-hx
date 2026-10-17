@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef CreateCubeTextureOptions = {
-  @:optional var colorSpace:Dynamic;
-  @:optional var sampler:flight.Sampler;
-  @:optional var sources:Array<Null<flight.TextureSource>>;
+  @:optional var colorSpace:flight.TextureColorSpace;
+  @:optional var sampler:flight.SamplerLike;
+  @:optional var sources:flight.TextureSourceCubeFaces;
 };

@@ -3,7 +3,7 @@ package flight._js;
 
 typedef GlyphAtlasEntryExplanation = {
   var renderable:Bool;
-  var reason:Dynamic;
+  var reason:flight.GlyphAtlasEntryBlockReason;
   var glyphWidth:Float;
   var glyphHeight:Float;
   var usableWidth:Float;

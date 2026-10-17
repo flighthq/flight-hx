@@ -3,6 +3,6 @@ package flight._js;
 
 typedef EntityRuntimeWriteExplanation = {
   var message:String;
-  var slot:Dynamic;
+  var slot:flight.EntityRuntimeWriteSlot;
   var useInstead:Array<String>;
 };

@@ -3,5 +3,5 @@ package flight._js;
 
 typedef AcceleratorParseError = {
   var token:String;
-  var reason:Dynamic;
+  var reason:flight.AcceleratorParseErrorReason;
 };

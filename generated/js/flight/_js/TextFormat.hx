@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef TextFormat = {
-  @:optional var align:Dynamic;
+  @:optional var align:flight.TextFormatAlign;
   @:optional var blockIndent:Float;
   @:optional var bold:Bool;
   @:optional var bullet:Bool;
@@ -14,7 +14,7 @@ typedef TextFormat = {
   @:optional var leading:Float;
   @:optional var leftMargin:Float;
   @:optional var letterSpacing:Float;
-  @:optional var listMarker:Dynamic;
+  @:optional var listMarker:flight.TextFormatListMarker;
   @:optional var rightMargin:Float;
   @:optional var size:Float;
   @:optional var strikethrough:Bool;

@@ -3,7 +3,7 @@ package flight._js;
 
 typedef SpineBinaryVersionFailure = {
   var bytes:Float;
-  var reason:Dynamic;
+  var reason:flight.SpineBinaryVersionFailureReason;
   var v3Candidate:Null<String>;
   var v4Candidate:Null<String>;
 };

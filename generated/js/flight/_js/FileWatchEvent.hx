@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef FileWatchEvent = {
-  var type:Dynamic;
+  var type:flight.FileWatchEventType;
   var path:String;
 };

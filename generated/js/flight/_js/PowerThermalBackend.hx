@@ -3,6 +3,6 @@ package flight._js;
 
 typedef PowerThermalBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function getThermalState():Dynamic;
-  function subscribeThermalStateChange(listener:(Dynamic)->Void):()->Void;
+  function getThermalState():flight.PowerThermalState;
+  function subscribeThermalStateChange(listener:(flight.PowerThermalState)->Void):()->Void;
 };

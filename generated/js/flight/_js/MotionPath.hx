@@ -6,7 +6,7 @@ typedef MotionPath = {
   var direction:Dynamic;
   var distance:Float;
   var length:Float;
-  var loopMode:Dynamic;
+  var loopMode:flight.MotionPathLoopMode;
   var path:flight.Path;
   var speed:Float;
 };

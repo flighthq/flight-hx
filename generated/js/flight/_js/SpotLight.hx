@@ -11,7 +11,7 @@ typedef SpotLight = {
   var enabled:Bool;
   var innerConeCos:Float;
   var intensity:Float;
-  var intensityUnit:Dynamic;
+  var intensityUnit:flight.LightUnit;
   var layerMask:Float;
   var priority:Float;
   var normalBias:Float;

@@ -4,7 +4,7 @@ package flight;
 #if flight_hx
 typedef SignalConnection = flight._hx.SignalConnection;
 #elseif (js && flight_esm)
-typedef SignalConnection<T = Dynamic> = flight._js.SignalConnection<T>;
+typedef SignalConnection<T = (Array<Dynamic>)->Void> = flight._js.SignalConnection<T>;
 #elseif cpp
 typedef SignalConnection = flight._cpp.SignalConnection;
 #elseif js

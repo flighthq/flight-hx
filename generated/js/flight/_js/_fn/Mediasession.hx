@@ -5,15 +5,15 @@ package flight._js._fn;
 @:jsImport("@flighthq/mediasession/contract")
 extern class Mediasession {
   static function attachMediaSessionAction(host:flight.HasMediaSessionAction, signal:flight.MediaSessionActionSignal):Bool;
-  static function clearMediaSessionMetadata(host:flight.HasMediaSession):flight.MediaSessionOperationOutcome<Dynamic>;
-  static function clearMediaSessionPositionState(host:flight.HasMediaSession):flight.MediaSessionOperationOutcome<Dynamic>;
-  static function createMediaSessionActionSignal(action:Dynamic):flight.MediaSessionActionSignal;
+  static function clearMediaSessionMetadata(host:flight.HasMediaSession):flight.MediaSessionClearMetadataOutcome;
+  static function clearMediaSessionPositionState(host:flight.HasMediaSession):flight.MediaSessionClearPositionStateOutcome;
+  static function createMediaSessionActionSignal(action:flight.MediaSessionAction):flight.MediaSessionActionSignal;
   static function destroyMediaSession(host:Dynamic):Void;
   static function detachMediaSessionAction(signal:flight.MediaSessionActionSignal):Void;
   static function disposeMediaSessionActionSignal(signal:flight.MediaSessionActionSignal):Void;
-  static function initializeMediaSessionActionSignal(out:flight.MediaSessionActionSignal, action:Dynamic):Void;
-  static function setMediaSessionMetadata(host:flight.HasMediaSession, metadata:flight.MediaSessionMetadata):flight.MediaSessionOperationOutcome<Dynamic>;
-  static function setMediaSessionPlaybackState(host:flight.HasMediaSession, state:Dynamic):flight.MediaSessionOperationOutcome<Dynamic>;
-  static function setMediaSessionPositionState(host:flight.HasMediaSession, state:flight.MediaSessionPositionState):flight.MediaSessionOperationOutcome<Dynamic>;
+  static function initializeMediaSessionActionSignal(out:flight.EntityConstruction<flight.MediaSessionActionSignal>, action:flight.MediaSessionAction):Void;
+  static function setMediaSessionMetadata(host:flight.HasMediaSession, metadata:flight.MediaSessionMetadata):flight.MediaSessionSetMetadataOutcome;
+  static function setMediaSessionPlaybackState(host:flight.HasMediaSession, state:flight.MediaSessionPlaybackState):flight.MediaSessionSetPlaybackStateOutcome;
+  static function setMediaSessionPositionState(host:flight.HasMediaSession, state:flight.MediaSessionPositionState):flight.MediaSessionSetPositionStateOutcome;
 }
 #end

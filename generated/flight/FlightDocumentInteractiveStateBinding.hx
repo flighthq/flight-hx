@@ -4,7 +4,7 @@ package flight;
 #if flight_hx
 typedef FlightDocumentInteractiveStateBinding = flight._hx.FlightDocumentInteractiveStateBinding;
 #elseif (js && flight_esm)
-typedef FlightDocumentInteractiveStateBinding<N:flight.Node<Dynamic> = Dynamic> = flight._js.FlightDocumentInteractiveStateBinding<N>;
+typedef FlightDocumentInteractiveStateBinding<N:flight.NodeAny = flight.NodeAny> = flight._js.FlightDocumentInteractiveStateBinding<N>;
 #elseif cpp
 typedef FlightDocumentInteractiveStateBinding = flight._cpp.FlightDocumentInteractiveStateBinding;
 #elseif js

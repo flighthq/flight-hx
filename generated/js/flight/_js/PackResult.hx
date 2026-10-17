@@ -5,5 +5,5 @@ typedef PackResult = {
   var placements:Array<flight.PackedRectangle>;
   var width:Float;
   var height:Float;
-  var unpacked:Array<Dynamic>;
+  var unpacked:Array<flight.RectangleId>;
 };

@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef TrayIconOptions = {
-  @:optional var icon:String;
+  @:optional var icon:flight.TrayIconSource;
   @:optional var iconTemplate:Bool;
   @:optional var signal:js.html.AbortSignal;
   @:optional var title:String;

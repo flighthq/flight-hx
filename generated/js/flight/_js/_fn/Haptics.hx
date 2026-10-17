@@ -8,8 +8,8 @@ extern class Haptics {
   static function getHapticsCapabilities(host:flight.HasInputHaptics, out:flight.HapticsCapabilities):flight.HapticsCapabilities;
   static function isHapticsSupported(host:flight.HasInputHaptics):Bool;
   static function prepareHaptics(host:flight.HasInputHaptics):Void;
-  static function triggerHapticImpact(host:flight.HasInputHaptics, style:Dynamic, ?intensity:Float):Bool;
-  static function triggerHapticNotification(host:flight.HasInputHaptics, type:Dynamic):Bool;
+  static function triggerHapticImpact(host:flight.HasInputHaptics, style:flight.HapticImpactStyle, ?intensity:Float):Bool;
+  static function triggerHapticNotification(host:flight.HasInputHaptics, type:flight.HapticNotificationType):Bool;
   static function triggerHapticSelection(host:flight.HasInputHaptics):Bool;
   static function vibrateDevice(host:flight.HasInputHaptics, durationMs:Float):Bool;
   static function vibrateDevicePattern(host:flight.HasInputHaptics, pattern:Array<Float>):Bool;

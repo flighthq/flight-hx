@@ -3,10 +3,10 @@ package flight._js;
 
 typedef NativeTextData = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var autoSize:Dynamic;
+  var autoSize:flight.TextAutoSize;
   var height:Float;
   var style:flight.NativeTextStyle;
   var text:String;
-  var verticalAlign:Dynamic;
+  var verticalAlign:flight.TextVerticalAlign;
   var width:Float;
 };

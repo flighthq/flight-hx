@@ -2,9 +2,9 @@
 package flight._js;
 
 typedef TextInputControllerOptions = {
-  @:optional var transition:flight.NodeInteractiveStateTransition<Dynamic, Dynamic>;
-  @:optional var background:Dynamic;
-  @:optional var caret:Dynamic;
+  @:optional var transition:flight.GuiTransitionDescriptor;
+  @:optional var background:flight.Node2D;
+  @:optional var caret:flight.Node2D;
   @:optional var input:flight.TextInputSource;
   @:optional var manager:flight.TextInputManager;
   var textField:flight.RichText;

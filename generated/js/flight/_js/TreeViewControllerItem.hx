@@ -4,5 +4,5 @@ package flight._js;
 typedef TreeViewControllerItem = {
   @:optional var children:Array<flight.TreeViewControllerItem>;
   @:optional var expanded:Bool;
-  var visual:Dynamic;
+  var visual:flight.Node2D;
 };

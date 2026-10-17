@@ -7,12 +7,12 @@ typedef LottieStrokeShapeItem = {
   @:optional var nm:String;
   var ty:String;
   @:optional var bm:Float;
-  var c:Dynamic;
+  var c:flight.LottieAnimatable<Array<Float>>;
   @:optional var d:Array<flight.LottieDashEntry>;
   @:optional var lc:Dynamic;
   @:optional var lj:Dynamic;
   @:optional var ml:Float;
-  @:optional var ml2:Dynamic;
-  var o:Dynamic;
-  var w:Dynamic;
+  @:optional var ml2:flight.LottieAnimatable<Float>;
+  var o:flight.LottieAnimatable<Float>;
+  var w:flight.LottieAnimatable<Float>;
 };

@@ -7,14 +7,14 @@ extern class Capture {
   static var CAPTURE_PARITY_TOLERANCE:Float;
   static var CAPTURE_REGRESSION_TOLERANCE:Float;
   static function compareCaptureFingerprints(a:String, b:String):Float;
-  static function createCaptureBaseline():haxe.DynamicAccess<flight.CaptureColumnBaseline>;
+  static function createCaptureBaseline():flight.CaptureBaseline;
   static function evaluateCaptureParity(a:String, b:String, ?tolerance:Float):flight.CaptureCheckResult;
   static function evaluateCaptureRegression(fingerprint:String, baselineFingerprint:String, ?tolerance:Float):flight.CaptureCheckResult;
-  static function formatCaptureBaseline(baseline:haxe.DynamicAccess<flight.CaptureColumnBaseline>):String;
-  static function getCaptureBaselineField(baseline:haxe.DynamicAccess<flight.CaptureColumnBaseline>, column:String, field:Dynamic):Null<String>;
-  static function getCaptureBaselineProvenance(baseline:haxe.DynamicAccess<flight.CaptureColumnBaseline>, column:String, field:Dynamic):Null<flight.CaptureBaselineProvenance>;
-  static function parseCaptureBaseline(text:String):Null<haxe.DynamicAccess<flight.CaptureColumnBaseline>>;
-  static function setCaptureBaselineField(baseline:haxe.DynamicAccess<flight.CaptureColumnBaseline>, column:String, field:Dynamic, value:String):Void;
-  static function setCaptureBaselineProvenance(baseline:haxe.DynamicAccess<flight.CaptureColumnBaseline>, column:String, field:Dynamic, provenance:flight.CaptureBaselineProvenance):Void;
+  static function formatCaptureBaseline(baseline:flight.CaptureBaseline):String;
+  static function getCaptureBaselineField(baseline:flight.CaptureBaseline, column:String, field:flight.CaptureBaselineField):Null<String>;
+  static function getCaptureBaselineProvenance(baseline:flight.CaptureBaseline, column:String, field:flight.CaptureBaselineProvenanceField):Null<flight.CaptureBaselineProvenance>;
+  static function parseCaptureBaseline(text:String):Null<flight.CaptureBaseline>;
+  static function setCaptureBaselineField(baseline:flight.CaptureBaseline, column:String, field:flight.CaptureBaselineField, value:String):Void;
+  static function setCaptureBaselineProvenance(baseline:flight.CaptureBaseline, column:String, field:flight.CaptureBaselineProvenanceField, provenance:flight.CaptureBaselineProvenance):Void;
 }
 #end

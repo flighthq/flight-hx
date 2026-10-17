@@ -6,6 +6,6 @@ package flight._js._fn;
 extern class TextshaperCanvas {
   static function clearCanvasTextShaperBackendCache(backend:flight.CanvasTextShaperBackend):Void;
   static function createCanvasTextShaperBackend():flight.CanvasTextShaperBackend;
-  static function initializeCanvasTextShaperBackend(out:flight.CanvasTextShaperBackend, backend:flight.CanvasTextShaperBackend):Void;
+  static function initializeCanvasTextShaperBackend(out:flight.EntityConstruction<flight.CanvasTextShaperBackend>, backend:flight.EntityWithoutRuntime<flight.CanvasTextShaperBackend>):Void;
 }
 #end

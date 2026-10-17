@@ -3,8 +3,8 @@ package flight._js;
 
 typedef NodeSignals = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var onChildAdded:flight.Signal<(flight.Node<Dynamic>)->Void>;
-  var onChildRemoved:flight.Signal<(flight.Node<Dynamic>)->Void>;
+  var onChildAdded:flight.Signal<(flight.NodeAny)->Void>;
+  var onChildRemoved:flight.Signal<(flight.NodeAny)->Void>;
   var onChildrenChanged:flight.Signal<()->Void>;
   var onChildrenOrderChanged:flight.Signal<()->Void>;
   var onParentChanged:flight.Signal<()->Void>;

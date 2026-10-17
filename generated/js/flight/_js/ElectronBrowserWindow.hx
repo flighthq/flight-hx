@@ -10,7 +10,7 @@ typedef ElectronBrowserWindow = {
   function setPosition(x:Float, y:Float):Void;
   function setSize(width:Float, height:Float):Void;
   function getBounds():flight.ElectronRectangle;
-  function setBounds(bounds:flight.ElectronRectangle):Void;
+  function setBounds(bounds:Dynamic):Void;
   function minimize():Void;
   function maximize():Void;
   function unmaximize():Void;

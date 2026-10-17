@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef BitmapReadbackBackend = {
-  function readBitmap(source:Dynamic, width:Float, height:Float, mode:Dynamic):flight.BitmapReadbackOutcome;
+  function readBitmap(source:flight.HostImageSource, width:Float, height:Float, mode:flight.BitmapReadbackMode):flight.BitmapReadbackOutcome;
 };

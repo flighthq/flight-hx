@@ -2,9 +2,9 @@
 package flight._js;
 
 typedef CommandBindingTable = {
-  var onMiss:String;
-  var registry:String;
-  var entries:flight._internal._Map<String, Dynamic>;
+  var onMiss:flight.RegistryMissPolicy;
+  var registry:flight.RegistryId;
+  var entries:flight._internal._Map<flight.Kind, flight.RegistryTableEntry<flight.CommandBinding>>;
   var shape:String;
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
 };

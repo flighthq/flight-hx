@@ -3,6 +3,6 @@ package flight._js;
 
 typedef TrayTitleBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function get(tray:flight.TrayIcon):flight._internal._Promise<Dynamic>;
-  function set(tray:flight.TrayIcon, title:String):flight._internal._Promise<Dynamic>;
+  function get(tray:flight.TrayIcon):flight._internal._Promise<flight.TrayTitleReadResult>;
+  function set(tray:flight.TrayIcon, title:String):flight._internal._Promise<flight.TrayTitleUpdateResult>;
 };

@@ -3,6 +3,6 @@ package flight._js;
 
 typedef ShellShortcutLinkBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function read(shortcutPath:String):flight._internal._Promise<Dynamic>;
-  function write(shortcutPath:String, link:flight.ShellShortcutLink, operation:Dynamic):flight._internal._Promise<{ reason:Dynamic }>;
+  function read(shortcutPath:String):flight._internal._Promise<flight.ShellShortcutLinkReadOutcome>;
+  function write(shortcutPath:String, link:flight.ShellShortcutLink, operation:flight.ShellShortcutWriteOperation):flight._internal._Promise<flight.ShellShortcutLinkWriteOutcome>;
 };

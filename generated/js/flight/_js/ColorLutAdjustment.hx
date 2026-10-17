@@ -3,6 +3,6 @@ package flight._js;
 
 typedef ColorLutAdjustment = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var kind:String;
-  var transform:(Array<Float>, Float, Float, Float)->Void;
+  var kind:flight.AdjustmentKind;
+  var transform:flight.ColorTransformFunction;
 };

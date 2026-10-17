@@ -3,5 +3,5 @@ package flight._js;
 
 typedef FileSaveDialogBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function save(options:flight.SaveFileDialogOptions):flight._internal._Promise<Dynamic>;
+  function save(options:flight.SaveFileDialogOptions):flight._internal._Promise<flight.FileSaveDialogResult>;
 };

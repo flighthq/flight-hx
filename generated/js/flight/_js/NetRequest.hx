@@ -2,12 +2,12 @@
 package flight._js;
 
 typedef NetRequest = {
-  var method:Dynamic;
+  var method:flight.NetMethod;
   var url:String;
   @:optional var headers:haxe.DynamicAccess<String>;
-  @:optional var body:Dynamic;
-  @:optional var responseType:Dynamic;
+  @:optional var body:flight.NetBody;
+  @:optional var responseType:flight.NetResponseType;
   @:optional var timeoutMs:Float;
-  @:optional var credentials:Dynamic;
-  @:optional var redirect:Dynamic;
+  @:optional var credentials:flight.NetCredentials;
+  @:optional var redirect:flight.NetRedirect;
 };

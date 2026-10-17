@@ -3,7 +3,7 @@ package flight._js;
 
 typedef ExternalTexture = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var alphaType:Dynamic;
+  var alphaType:flight.AlphaType;
   var gamut:Dynamic;
   var height:Float;
   var kind:String;

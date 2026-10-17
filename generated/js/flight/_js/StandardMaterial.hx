@@ -3,6 +3,6 @@ package flight._js;
 
 typedef StandardMaterial = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var kind:String;
+  var kind:flight.StandardMaterialKind;
   @:optional var name:Null<String>;
 };

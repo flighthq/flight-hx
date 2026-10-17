@@ -4,19 +4,19 @@ package flight._js._fn;
 
 @:jsImport("@flighthq/tween/contract")
 extern class Tween {
-  static function applyTween<T:Dynamic>(manager:flight.TweenManager, target:T, propertyMap:Dynamic):Void;
+  static function applyTween<T:Dynamic>(manager:flight.TweenManager, target:T, propertyMap:flight.NumericProps<T>):Void;
   static function completeTween<T:Dynamic>(tween:flight.Tween<T>):Void;
   static function createColorTween(manager:flight.TweenManager, target:haxe.DynamicAccess<Float>, property:String, duration:Float, toColor:Float, ?options:flight.TweenOptions):flight.Tween<{ b:Float, g:Float, r:Float }>;
   static function createTween<T:Dynamic>(managerOrTarget:Dynamic, targetOrDuration:Dynamic, durationOrProps:Dynamic, ?propsOrOptions:Dynamic, ?maybeOptions:flight.TweenOptions):flight.Tween<T>;
   static function createTweenManager(?options:flight.TweenManagerOptions):flight.TweenManager;
-  static function createTweenStagger<T:Dynamic>(manager:flight.TweenManager, targets:Array<T>, duration:Float, propertyMap:Dynamic, ?stagger:flight.TweenStaggerOptions, ?options:flight.TweenOptions):Array<flight.Tween<T>>;
+  static function createTweenStagger<T:Dynamic>(manager:flight.TweenManager, targets:Array<T>, duration:Float, propertyMap:flight.NumericProps<T>, ?stagger:flight.TweenStaggerOptions, ?options:flight.TweenOptions):Array<flight.Tween<T>>;
   static function createTweenTimer(manager:flight.TweenManager, duration:Float, ?options:flight.TweenOptions):flight.Tween<Dynamic>;
   static var defaultManager:flight.TweenManager;
   static function getActiveTweenCount(manager:flight.TweenManager):Float;
   static function getTweenProgress(tween:flight.Tween<Dynamic>):Float;
   static function getTweensOf(manager:flight.TweenManager, target:Dynamic):Array<flight.Tween<Dynamic>>;
   static function hasTweensOf(manager:flight.TweenManager, target:Dynamic):Bool;
-  static function initializeTweenManager(out:flight.TweenManager, ?options:flight.TweenManagerOptions):Void;
+  static function initializeTweenManager(out:flight.EntityConstruction<flight.TweenManager>, ?options:flight.TweenManagerOptions):Void;
   static function invalidateTween(tween:flight.Tween<Dynamic>):Void;
   static function killTweensOfProperty(manager:flight.TweenManager, key:String):Void;
   static function pauseAllTweens(manager:flight.TweenManager):Void;
@@ -31,7 +31,7 @@ extern class Tween {
   static function setTweenProgress(tween:flight.Tween<Dynamic>, progress:Float):Void;
   static function stopAllTweens(manager:flight.TweenManager, ?options:flight.StopTweenOptions):Void;
   static function stopTween(tween:flight.Tween<Dynamic>, ?options:flight.StopTweenOptions):Void;
-  static function stopTweens(manager:flight.TweenManager, target:Dynamic, ?propertyMap:Dynamic, ?options:flight.StopTweenOptions):Void;
+  static function stopTweens(manager:flight.TweenManager, target:Dynamic, ?propertyMap:flight.NumericProps<Dynamic>, ?options:flight.StopTweenOptions):Void;
   static function updateTweens(manager:flight.TweenManager, deltaTime:Float):Void;
 }
 #end

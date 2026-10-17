@@ -9,8 +9,8 @@ extern class Font {
   static function detectFontFormat(bytes:Dynamic):Null<String>;
   static function getFontShorthand(family:String, ?style:String):String;
   static function inferFontFormatFromUrl(url:String):Null<String>;
-  static function initializeFontResource(out:flight.FontResource, family:String):Void;
-  static function initializeGlyphRasterizerBackendFromGlyphOutlineSource(out:Dynamic, source:flight.GlyphOutlineSource):Void;
+  static function initializeFontResource(out:flight.EntityConstruction<flight.FontResource>, family:String):Void;
+  static function initializeGlyphRasterizerBackendFromGlyphOutlineSource(out:flight.EntityConstruction<Dynamic>, source:flight.GlyphOutlineSource):Void;
   static function isFontLoaded(backend:flight.FontLoadingBackend, family:String, ?style:String):Bool;
   static function loadFontResourceFromBytes(backend:flight.FontLoadingBackend, out:flight.FontResource, bytes:flight._internal._UInt8Array):flight._internal._Promise<flight.FontResource>;
   static function loadFontResourceFromName(backend:flight.FontLoadingBackend, out:flight.FontResource):flight._internal._Promise<flight.FontResource>;

@@ -2,8 +2,8 @@
 package flight._js;
 
 typedef MeshGeometryUvSetExplanation = {
-  var availableUvSets:Array<Dynamic>;
-  var requestedUvSets:Array<Dynamic>;
+  var availableUvSets:Array<flight.PbrUvSet>;
+  var requestedUvSets:Array<flight.PbrUvSet>;
   var samplesAtOrigin:Bool;
-  var unservedUvSets:Array<Dynamic>;
+  var unservedUvSets:Array<flight.PbrUvSet>;
 };

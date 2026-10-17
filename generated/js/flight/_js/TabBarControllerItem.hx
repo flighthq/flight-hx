@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef TabBarControllerItem = {
-  var selectedState:Dynamic;
-  var unselectedState:Dynamic;
+  var selectedState:flight.Node2D;
+  var unselectedState:flight.Node2D;
 };

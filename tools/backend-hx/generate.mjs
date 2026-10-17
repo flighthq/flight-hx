@@ -18,9 +18,27 @@ import { resolveDependency } from '../../scripts/dependencyLock.mjs';
 import { buildTranspiledBackendSurface, collectExternSurface } from './haxeSurface.mjs';
 
 // flight-hx owns the reproducible integration edge around flight-compiler: checkout discovery,
-// compiler installation/build, output layout, manifests, refusal ledgers, and write/check modes.
-// TypeScript analysis, package-graph semantics, Haxe lowering, and both Haxe emitters remain entirely
-// compiler-owned. This driver intentionally contains no TypeScript parser or target lowering rules.
+// compiler installation/build, narrow fail-loud target corrections, output layout, manifests,
+// refusal ledgers, and write/check modes. TypeScript analysis, package-graph semantics, Haxe
+// lowering, and both Haxe emitters remain compiler-owned. This driver intentionally contains no
+// TypeScript parser or general-purpose target lowering rules.
+
+const compatibilityCorrectionSpecs = [
+  {
+    expectedApplications: [{ path: 'flight/_js/_fn/Application.hx', replacements: 27 }],
+    id: 'flight-hx-anonymous-record-specialization-erasure/1',
+    modes: new Set(['extern']),
+    pattern: /\{ window:Dynamic \}<String>/gu,
+    replacement: '{ window:Dynamic }',
+  },
+  {
+    expectedApplications: [{ path: 'flight/_js/_fn/Interaction.hx', replacements: 2 }],
+    id: 'flight-hx-void-return-type-parameter-erasure/1',
+    modes: new Set(['extern']),
+    pattern: /\(Dynamic\)->Void<Name>/gu,
+    replacement: '(Dynamic)->Void',
+  },
+];
 
 const root = path.resolve(import.meta.dirname, '..', '..');
 const options = process.argv.slice(2);
@@ -234,8 +252,10 @@ function collectCompilerContractExports(facade, packages) {
 }
 
 function generateMode(outputRoot, mode, input, flightDependency, compilerDependency, compilerApi) {
-  const compatibilityCorrections = [];
-  const backend = createNormalizedHaxeBackend(compilerApi.createHaxeCompilerBackend(), (contents) => contents);
+  const correctionApplications = new Map();
+  const backend = createNormalizedHaxeBackend(compilerApi.createHaxeCompilerBackend(), (contents, filename) =>
+    applyCompatibilityCorrections(contents, filename, mode, correctionApplications),
+  );
   const compilation = compilerApi.compileTypeScriptPackageGraph({
     backend,
     backendOptions: {
@@ -253,6 +273,12 @@ function generateMode(outputRoot, mode, input, flightDependency, compilerDepende
   if (!compilation.report.runtimeAbi) {
     throw new Error('Pinned flight-compiler did not publish its Haxe runtime ABI manifest');
   }
+  const compatibilityCorrectionApplications = validateCompatibilityCorrections(
+    mode,
+    correctionApplications,
+    compilation.compilation.files,
+  );
+  const compatibilityCorrections = compatibilityCorrectionApplications.map(({ id }) => id);
   const publicExports = collectCompilerContractExports(compilation.report.exports, input.packages);
   const contractFiltered =
     mode === 'extern'
@@ -328,6 +354,7 @@ function generateMode(outputRoot, mode, input, flightDependency, compilerDepende
   const manifest = {
     schema: 'flight-hx-generated-sdk/1',
     compiler: {
+      compatibilityCorrectionApplications,
       compatibilityCorrections,
       emissionMode: mode,
       repository: compilerDependency.repository,
@@ -572,7 +599,8 @@ function haxeTypeArguments(parameters) {
 }
 
 function createNormalizedHaxeBackend(backend, normalize) {
-  const normalizeFiles = (files) => files.map((file) => ({ ...file, contents: normalize(file.contents) }));
+  const normalizeFiles = (files) =>
+    files.map((file) => ({ ...file, contents: normalize(file.contents, file.path) }));
   return {
     emitModule(module, context) {
       return normalizeFiles(backend.emitModule(module, context));
@@ -588,6 +616,53 @@ function createNormalizedHaxeBackend(backend, normalize) {
         }
       : {}),
   };
+}
+
+function applyCompatibilityCorrections(contents, filename, mode, applications) {
+  let corrected = contents;
+  for (const spec of compatibilityCorrectionSpecs) {
+    if (!spec.modes.has(mode)) continue;
+    const matches = [...corrected.matchAll(new RegExp(spec.pattern.source, spec.pattern.flags))];
+    if (matches.length === 0) continue;
+    const files = applications.get(spec.id) ?? new Map();
+    files.set(filename, (files.get(filename) ?? 0) + matches.length);
+    applications.set(spec.id, files);
+    corrected = corrected.replace(new RegExp(spec.pattern.source, spec.pattern.flags), spec.replacement);
+  }
+  return corrected;
+}
+
+function validateCompatibilityCorrections(mode, applications, emittedFiles) {
+  const reports = [];
+  for (const spec of compatibilityCorrectionSpecs.filter(({ modes }) => modes.has(mode))) {
+    const actual = [...(applications.get(spec.id) ?? new Map())]
+      .map(([filename, replacements]) => ({ path: filename, replacements }))
+      .sort((left, right) => compareText(left.path, right.path));
+    const expected = [...spec.expectedApplications].sort((left, right) => compareText(left.path, right.path));
+    if (JSON.stringify(actual) !== JSON.stringify(expected)) {
+      throw new Error(
+        `Compatibility correction ${spec.id} application drifted:\n` +
+          `expected ${JSON.stringify(expected)}\n` +
+          `actual ${JSON.stringify(actual)}`,
+      );
+    }
+    const remaining = emittedFiles.flatMap((file) => {
+      const matches = [...file.contents.matchAll(new RegExp(spec.pattern.source, spec.pattern.flags))];
+      return matches.length === 0 ? [] : [{ path: file.path, replacements: matches.length }];
+    });
+    if (remaining.length > 0) {
+      throw new Error(`Compatibility correction ${spec.id} left matching output: ${JSON.stringify(remaining)}`);
+    }
+    reports.push({
+      files: actual,
+      id: spec.id,
+      replacements: actual.reduce((total, file) => total + file.replacements, 0),
+    });
+  }
+  if (applications.size !== reports.length) {
+    throw new Error(`Unreported compatibility corrections: ${[...applications.keys()].join(', ')}`);
+  }
+  return reports;
 }
 
 function createHaxeCompilationSmoke() {
@@ -663,7 +738,6 @@ function validateExternCandidate(candidateRoot, temporaryRoot) {
   return `${result.stdout ?? ''}${result.stderr ?? ''}`;
 }
 
-// No target rewrites live here: compiler output must pass the downstream Haxe smoke unchanged.
 function findTypeParameterEnd(line, start) {
   let depth = 0;
   for (let index = start; index < line.length; index += 1) {

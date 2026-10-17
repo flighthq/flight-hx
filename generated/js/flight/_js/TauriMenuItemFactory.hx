@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef TauriMenuItemFactory = {
-  function new_(?options:flight.TauriMenuItemOptions):flight._internal._Promise<flight.TauriMenuItemHandle>;
+  @:native("new") function new_(?options:flight.TauriMenuItemOptions):flight._internal._Promise<flight.TauriMenuItemHandle>;
 };

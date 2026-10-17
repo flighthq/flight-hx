@@ -3,7 +3,7 @@ package flight._js;
 
 typedef FogModifierOptions = {
   var color:Float;
-  @:optional var mode:Dynamic;
+  @:optional var mode:flight.FogModifierMode;
   @:optional var near:Float;
   @:optional var far:Float;
   @:optional var density:Float;

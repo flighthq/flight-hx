@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef NativeTextStyle = {
-  @:optional var align:Dynamic;
+  @:optional var align:flight.TextFormatAlign;
   @:optional var bold:Bool;
   @:optional var color:Float;
   @:optional var font:String;

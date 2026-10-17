@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef StatechartCondition = {
-  var comparison:String;
+  var comparison:flight.StatechartComparison;
   var inputIndex:Float;
   var value:Float;
 };

@@ -2,8 +2,8 @@
 package flight._js;
 
 typedef Scene2DResourceFailureNotice = {
-  var operation:Dynamic;
-  var reason:Dynamic;
+  var operation:flight.Scene2DResourceFailureOperation;
+  var reason:flight.Scene2DResourceFailureReason;
   var total:Float;
   var unresolved:Float;
   var url:Null<String>;

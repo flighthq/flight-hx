@@ -2,8 +2,8 @@
 package flight._js;
 
 typedef SlotTable<T> = {
-  var onMiss:String;
-  var registry:String;
-  var entry:Null<Dynamic>;
+  var onMiss:flight.RegistryMissPolicy;
+  var registry:flight.RegistryId;
+  var entry:Null<flight.RegistryTableEntry<T>>;
   var shape:String;
 };

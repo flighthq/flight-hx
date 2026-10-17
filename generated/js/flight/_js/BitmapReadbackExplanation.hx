@@ -3,5 +3,5 @@ package flight._js;
 
 typedef BitmapReadbackExplanation = {
   var readable:Bool;
-  var reason:Dynamic;
+  var reason:flight.BitmapReadbackBlockReason;
 };

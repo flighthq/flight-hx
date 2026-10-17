@@ -2,8 +2,8 @@
 package flight._js;
 
 typedef SpatialIndexingExplanation = {
-  var id:Float;
-  var mode:Dynamic;
+  var id:flight.SpatialObjectId;
+  var mode:flight.SpatialIndexingMode;
   var bucketCount:Float;
-  var reason:Null<Dynamic>;
+  var reason:Null<flight.SpatialDeclineReason>;
 };

@@ -4,5 +4,5 @@ package flight._js;
 typedef InputGamepadConnectData = {
   var gamepad:Float;
   var id:String;
-  var mapping:Dynamic;
+  var mapping:flight.GamepadMapping;
 };

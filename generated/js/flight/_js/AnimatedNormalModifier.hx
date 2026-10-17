@@ -5,9 +5,9 @@ typedef AnimatedNormalModifier = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var kind:String;
   var slot:String;
-  var map:Null<Dynamic>;
-  var scroll:flight.Vector2;
+  var map:Null<flight.Texture>;
+  var scroll:flight.Vector2Like;
   @:optional var strength:Float;
-  @:optional var secondaryMap:Dynamic;
-  @:optional var secondaryScroll:flight.Vector2;
+  @:optional var secondaryMap:flight.Texture;
+  @:optional var secondaryScroll:flight.Vector2Like;
 };

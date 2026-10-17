@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef FlightDocumentResourceResolverRegistry = {
-  var resolvers:flight.KeyedTable<(String, flight.FlightDocumentResourceDescriptor)->Null<Dynamic>>;
+  var resolvers:flight.KeyedTable<flight.FlightDocumentResourceResolver>;
 };

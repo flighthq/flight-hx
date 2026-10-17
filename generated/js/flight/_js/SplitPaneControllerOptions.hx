@@ -2,14 +2,14 @@
 package flight._js;
 
 typedef SplitPaneControllerOptions = {
-  @:optional var transition:flight.NodeInteractiveStateTransition<Dynamic, Dynamic>;
-  var divider:Dynamic;
-  var firstRegion:Dynamic;
+  @:optional var transition:flight.GuiTransitionDescriptor;
+  var divider:flight.Node2D;
+  var firstRegion:flight.Node2D;
   @:optional var maximumFirst:Float;
   @:optional var minimumFirst:Float;
   @:optional var minimumSecond:Float;
-  @:optional var orientation:Dynamic;
+  @:optional var orientation:flight.GuiOrientation;
   @:optional var position:Float;
-  var secondRegion:Dynamic;
+  var secondRegion:flight.Node2D;
   @:optional var totalSize:Float;
 };

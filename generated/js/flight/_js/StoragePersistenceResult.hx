@@ -3,5 +3,5 @@ package flight._js;
 
 typedef StoragePersistenceResult = {
   var outcome:Dynamic;
-  var permissionState:Null<Dynamic>;
+  var permissionState:Null<flight.PermissionState>;
 };

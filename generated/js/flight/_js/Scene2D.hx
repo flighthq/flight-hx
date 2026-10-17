@@ -3,10 +3,10 @@ package flight._js;
 
 typedef Scene2D = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var align:Dynamic;
+  var align:flight.ViewportAlign;
   var color:Null<Float>;
-  var root:Dynamic;
-  var scaleMode:Dynamic;
+  var root:flight.Node2D;
+  var scaleMode:flight.ViewportScaleMode;
   var scene2dHeight:Float;
   var scene2dWidth:Float;
 };

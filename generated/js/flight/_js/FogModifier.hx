@@ -6,7 +6,7 @@ typedef FogModifier = {
   var kind:String;
   var slot:String;
   var color:Float;
-  @:optional var mode:String;
+  @:optional var mode:flight.FogModifierMode;
   @:optional var near:Float;
   @:optional var far:Float;
   @:optional var density:Float;

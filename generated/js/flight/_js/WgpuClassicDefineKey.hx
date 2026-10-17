@@ -10,5 +10,5 @@ typedef WgpuClassicDefineKey = {
   var hasDiffuseMap:Bool;
   var hasNormalMap:Bool;
   var hasSpecularMap:Bool;
-  var lightingModel:Dynamic;
+  var lightingModel:flight.WgpuClassicLightingModel;
 };

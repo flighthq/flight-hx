@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef Scene3DResourceRevealOptions = {
-  @:optional var ease:(Float)->Float;
+  @:optional var ease:flight.EasingFunction;
   @:optional var fadeSeconds:Float;
   @:optional var from:Float;
 };

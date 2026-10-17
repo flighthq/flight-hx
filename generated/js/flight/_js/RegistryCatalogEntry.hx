@@ -3,10 +3,10 @@ package flight._js;
 
 typedef RegistryCatalogEntry = {
   var backend:String;
-  var facet:Dynamic;
+  var facet:flight.RequirementFacet;
   var implementationImport:String;
   var implementationSymbol:String;
-  var kind:String;
+  var kind:flight.Kind;
   var registrarImport:String;
   var registrarSymbol:String;
 };

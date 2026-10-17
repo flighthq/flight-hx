@@ -4,5 +4,5 @@ package flight._js;
 typedef ShapeBoundsExplanation = {
   var complete:Bool;
   var missingCommandKeys:Array<String>;
-  var mode:Dynamic;
+  var mode:flight.ShapeBoundsMode;
 };

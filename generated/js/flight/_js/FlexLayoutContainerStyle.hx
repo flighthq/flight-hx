@@ -2,13 +2,13 @@
 package flight._js;
 
 typedef FlexLayoutContainerStyle = {
-  @:optional var align:Dynamic;
-  @:optional var direction:Dynamic;
+  @:optional var align:flight.FlexLayoutAlign;
+  @:optional var direction:flight.FlexLayoutDirection;
   @:optional var gap:Float;
-  @:optional var justify:Dynamic;
+  @:optional var justify:flight.FlexLayoutJustify;
   @:optional var paddingBottom:Float;
   @:optional var paddingLeft:Float;
   @:optional var paddingRight:Float;
   @:optional var paddingTop:Float;
-  @:optional var wrap:Dynamic;
+  @:optional var wrap:flight.FlexLayoutWrap;
 };

@@ -3,5 +3,5 @@ package flight._js;
 
 typedef RenderBlendStateEntry = {
   var alpha:Float;
-  var blendMode:Null<String>;
+  var blendMode:Null<flight.BlendMode>;
 };

@@ -4,5 +4,5 @@ package flight._js;
 typedef TweenStaggerOptions = {
   @:optional var each:Float;
   @:optional var from:Dynamic;
-  @:optional var staggerEase:(Float)->Float;
+  @:optional var staggerEase:flight.EasingFunction;
 };

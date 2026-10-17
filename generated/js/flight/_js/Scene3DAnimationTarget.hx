@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef Scene3DAnimationTarget = {
-  var node:Dynamic;
-  var path:Dynamic;
+  var node:flight.Node3D;
+  var path:flight.Scene3DAnimationPath;
 };

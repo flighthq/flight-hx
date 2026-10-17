@@ -4,6 +4,6 @@ package flight._js;
 typedef HitTestResult = {
   var localX:Float;
   var localY:Float;
-  var node:flight.Node<Dynamic>;
+  var node:flight.NodeAny;
   var subIndex:Float;
 };

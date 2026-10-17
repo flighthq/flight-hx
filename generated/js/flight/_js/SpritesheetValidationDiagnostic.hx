@@ -5,5 +5,5 @@ typedef SpritesheetValidationDiagnostic = {
   var animationName:Null<String>;
   var frameIndex:Null<Float>;
   var message:String;
-  var severity:Dynamic;
+  var severity:flight.SpritesheetValidationSeverity;
 };

@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef BitmapEncodeBackend = {
-  function encodeBitmap(source:flight.Bitmap, format:Dynamic, quality:Float):flight._internal._UInt8Array;
-  var supportedFormats:Array<Dynamic>;
+  function encodeBitmap(source:flight.Bitmap, format:flight.ImageFormat, quality:Float):flight._internal._UInt8Array;
+  var supportedFormats:Array<flight.ImageFormat>;
 };

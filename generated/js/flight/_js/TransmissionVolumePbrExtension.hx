@@ -8,9 +8,9 @@ typedef TransmissionVolumePbrExtension = {
   var attenuationDistance:Float;
   var ior:Float;
   var thickness:Float;
-  var thicknessMap:Null<Dynamic>;
-  var thicknessMapUvSet:Dynamic;
+  var thicknessMap:Null<flight.Texture>;
+  var thicknessMapUvSet:flight.PbrUvSet;
   var transmission:Float;
-  var transmissionMap:Null<Dynamic>;
-  var transmissionMapUvSet:Dynamic;
+  var transmissionMap:Null<flight.Texture>;
+  var transmissionMapUvSet:flight.PbrUvSet;
 };

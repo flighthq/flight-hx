@@ -5,7 +5,7 @@ typedef ParticleEmitterConfig = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var alphaEnd:Float;
   var alphaStart:Float;
-  var blendMode:Null<Dynamic>;
+  var blendMode:Null<flight.ParticleBlendMode>;
   var colorEndB:Float;
   var colorEndG:Float;
   var colorEndR:Float;
@@ -28,7 +28,7 @@ typedef ParticleEmitterConfig = {
   var emitterDepth:Float;
   var emitterHeight:Float;
   var emitterRadius:Float;
-  var emitterShape:Dynamic;
+  var emitterShape:flight.ParticleEmitterShape;
   var emitterWidth:Float;
   var burstCount:Float;
   var burstInterval:Float;
@@ -51,8 +51,8 @@ typedef ParticleEmitterConfig = {
   var rotationSpeedMax:Float;
   var rotationSpeedMin:Float;
   var velocityInheritance:Float;
-  var alphaCurve:Null<Array<Float>>;
-  var colorCurve:Null<Array<Float>>;
-  var scaleCurve:Null<Array<Float>>;
+  var alphaCurve:Null<flight.ParticleCurve>;
+  var colorCurve:Null<flight.ParticleCurve>;
+  var scaleCurve:Null<flight.ParticleCurve>;
   var worldSpace:Bool;
 };

@@ -4,7 +4,7 @@ package flight._js;
 typedef Connectivity = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var onChange:flight.Signal<(flight.ConnectivityStatus)->Void>;
-  var onConnectionTypeChange:flight.Signal<(Dynamic)->Void>;
+  var onConnectionTypeChange:flight.Signal<(flight.ConnectivityConnectionType)->Void>;
   var onMeteredChange:flight.Signal<(Bool)->Void>;
   var onOnline:flight.Signal<()->Void>;
   var onOffline:flight.Signal<()->Void>;

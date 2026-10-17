@@ -11,8 +11,8 @@ typedef TiledGroupLayer = {
   var tintColor:Null<Float>;
   var parallaxX:Float;
   var parallaxY:Float;
-  var class_:String;
+  @:native("class") var class_:String;
   var properties:Array<flight.TiledProperty>;
   var type:String;
-  var layers:Array<Dynamic>;
+  var layers:Array<flight.TiledLayer>;
 };

@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef TweenManagerOptions = {
-  @:optional var defaultEase:(Float)->Float;
+  @:optional var defaultEase:flight.EasingFunction;
 };

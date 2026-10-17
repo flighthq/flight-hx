@@ -4,7 +4,7 @@ package flight._js;
 typedef AnimationCrossfade = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var channels:Array<flight.AnimationCrossfadeChannel>;
-  var curve:(Float)->Float;
+  var curve:flight.EasingFunction;
   var duration:Float;
   var elapsed:Float;
   var from:flight.AnimationPlayer;

@@ -4,7 +4,7 @@ package flight._js;
 typedef MeshGeometryRuntime = {
   var binding:Null<Dynamic>;
   @:optional var uid:String;
-  var attributeDataView:Null<{ buffer:haxe.io.Bytes, byteOffset:Float, byteLength:Float, view:js.lib.DataView }>;
+  var attributeDataView:Null<{ buffer:flight._internal._ArrayBuffer, byteOffset:Float, byteLength:Float, view:flight._internal._DataView }>;
   var boundsVersion:Float;
   var morphBindPose:Null<flight.MeshMorphBindPose>;
   var morphBlendedWeights:Null<flight._internal._Float32Array>;

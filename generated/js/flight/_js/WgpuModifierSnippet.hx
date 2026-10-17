@@ -2,10 +2,10 @@
 package flight._js;
 
 typedef WgpuModifierSnippet = {
-  var kind:String;
-  var slot:String;
+  var kind:flight.ModifierKind;
+  var slot:flight.ModifierSlot;
   @:optional function getDefineSignature(modifier:flight.Modifier):String;
   @:optional function bind(modifier:flight.Modifier, out:flight._internal._Float32Array, offset:Float):Void;
   function contribution(modifier:flight.Modifier, index:Float, context:flight.WgpuModifierCompileContext):flight.WgpuModifierContribution;
-  @:optional function textures(modifier:flight.Modifier, out:Array<Null<Dynamic>>, offset:Float):Float;
+  @:optional function textures(modifier:flight.Modifier, out:Array<Null<flight.Texture>>, offset:Float):Float;
 };

@@ -2,12 +2,12 @@
 package flight._js;
 
 typedef GlTextureDescriptor = {
-  @:optional var wrapS:Dynamic;
-  @:optional var wrapT:Dynamic;
-  @:optional var minFilter:Dynamic;
-  @:optional var magFilter:Dynamic;
+  @:optional var wrapS:flight.GlTextureWrapKind;
+  @:optional var wrapT:flight.GlTextureWrapKind;
+  @:optional var minFilter:flight.GlTextureFilterKind;
+  @:optional var magFilter:flight.GlTextureFilterKind;
   @:optional var mipmaps:Bool;
   @:optional var anisotropy:Float;
   @:optional var premultiplyAlpha:Bool;
-  @:optional var format:Dynamic;
+  @:optional var format:flight.GlTextureInternalFormat;
 };

@@ -5,6 +5,6 @@ typedef HemisphereLightOptions = {
   @:optional var enabled:Bool;
   @:optional var groundColor:Float;
   @:optional var intensity:Float;
-  @:optional var intensityUnit:Dynamic;
+  @:optional var intensityUnit:flight.LightUnit;
   @:optional var skyColor:Float;
 };

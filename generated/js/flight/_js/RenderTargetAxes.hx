@@ -4,10 +4,10 @@ package flight._js;
 typedef RenderTargetAxes = {
   var width:Float;
   var height:Float;
-  var format:Dynamic;
+  var format:flight.RenderTargetFormat;
   var colorAttachments:Float;
-  var colorFormats:Array<Dynamic>;
+  var colorFormats:Array<flight.RenderTargetFormat>;
   var sampleCount:Float;
-  var depth:Dynamic;
-  var colorSpace:Dynamic;
+  var depth:flight.RenderTargetDepth;
+  var colorSpace:flight.RenderTargetColorSpace;
 };

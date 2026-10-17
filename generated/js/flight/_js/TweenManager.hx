@@ -4,6 +4,6 @@ package flight._js;
 typedef TweenManager = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var __brand:String;
-  var defaultEase:(Float)->Float;
+  var defaultEase:flight.EasingFunction;
   var tweens:flight._internal._Map<Dynamic, Array<flight.Tween<Dynamic>>>;
 };

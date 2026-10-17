@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef WgpuModifierCompileContext = {
-  function acquireTexture(texture:Dynamic):Float;
+  function acquireTexture(texture:flight.Texture):Float;
   var uniformBase:Float;
 };

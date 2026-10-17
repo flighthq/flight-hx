@@ -2,6 +2,6 @@
 package flight._js;
 
 typedef CommandDispatchExplanation = {
-  var missingKind:Null<String>;
+  var missingKind:Null<flight.Kind>;
   var resolved:Bool;
 };

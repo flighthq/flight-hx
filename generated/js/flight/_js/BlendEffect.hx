@@ -4,7 +4,7 @@ package flight._js;
 typedef BlendEffect = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var kind:String;
-  var mode:String;
+  var mode:flight.AdvancedBlendMode;
   @:optional var backdropKey:String;
   @:optional var opacity:Float;
 };

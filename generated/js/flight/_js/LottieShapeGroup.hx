@@ -6,6 +6,6 @@ typedef LottieShapeGroup = {
   @:optional var ix:Float;
   @:optional var nm:String;
   var ty:String;
-  var it:Array<Dynamic>;
+  var it:Array<flight.LottieShapeItem>;
   @:optional var np:Float;
 };

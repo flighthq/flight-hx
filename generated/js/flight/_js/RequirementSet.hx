@@ -3,6 +3,6 @@ package flight._js;
 
 typedef RequirementSet = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var covers:Array<Dynamic>;
+  var covers:Array<flight.RequirementFacet>;
   var requirements:Array<flight.Requirement>;
 };

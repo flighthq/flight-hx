@@ -3,5 +3,5 @@ package flight._js;
 
 typedef MidiPortStateSubscription = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var onMidiPortStateChange:flight.Signal<(Dynamic)->Void>;
+  var onMidiPortStateChange:flight.Signal<(flight.MidiPort)->Void>;
 };

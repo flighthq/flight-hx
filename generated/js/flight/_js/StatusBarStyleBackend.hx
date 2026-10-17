@@ -2,5 +2,5 @@
 package flight._js;
 
 typedef StatusBarStyleBackend = {
-  function setStyle(style:Dynamic):Void;
+  function setStyle(style:flight.StatusBarStyle):Void;
 };

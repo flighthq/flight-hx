@@ -2,17 +2,17 @@
 package flight._js;
 
 typedef StandardPbrMaterialProperties = {
-  var alphaMap:Null<Dynamic>;
+  var alphaMap:Null<flight.Texture>;
   var baseColor:Float;
-  var baseColorMap:Null<Dynamic>;
+  var baseColorMap:Null<flight.Texture>;
   var emissive:Float;
-  var emissiveMap:Null<Dynamic>;
+  var emissiveMap:Null<flight.Texture>;
   var emissiveStrength:Float;
   var metallic:Float;
-  var metallicRoughnessMap:Null<Dynamic>;
-  var normalMap:Null<Dynamic>;
+  var metallicRoughnessMap:Null<flight.Texture>;
+  var normalMap:Null<flight.Texture>;
   var normalScale:Float;
-  var occlusionMap:Null<Dynamic>;
+  var occlusionMap:Null<flight.Texture>;
   var occlusionStrength:Float;
   var roughness:Float;
 };

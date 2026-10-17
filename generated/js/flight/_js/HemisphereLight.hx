@@ -7,6 +7,6 @@ typedef HemisphereLight = {
   var enabled:Bool;
   var groundColor:Float;
   var intensity:Float;
-  var intensityUnit:Dynamic;
+  var intensityUnit:flight.LightUnit;
   var skyColor:Float;
 };

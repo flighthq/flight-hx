@@ -14,6 +14,6 @@ typedef BevelEffect = {
   @:optional var quality:Float;
   @:optional var shadowAlpha:Float;
   @:optional var shadowColor:Float;
-  @:optional var sourceMode:Dynamic;
+  @:optional var sourceMode:flight.EffectSourceMode;
   @:optional var strength:Float;
 };

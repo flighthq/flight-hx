@@ -3,13 +3,13 @@ package flight._js;
 
 typedef VoxelGrid = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var alphaType:Dynamic;
+  var alphaType:flight.AlphaType;
   var gamut:Dynamic;
   var height:Float;
   var kind:String;
   var version:Float;
   var width:Float;
-  var data:flight._internal._UInt8Array<haxe.io.Bytes>;
+  var data:flight._internal._UInt8Array<flight._internal._ArrayBuffer>;
   var depth:Float;
-  var format:Dynamic;
+  var format:flight.PixelFormat;
 };

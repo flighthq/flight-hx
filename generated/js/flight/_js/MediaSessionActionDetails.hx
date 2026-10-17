@@ -2,7 +2,7 @@
 package flight._js;
 
 typedef MediaSessionActionDetails = {
-  var action:Dynamic;
+  var action:flight.MediaSessionAction;
   @:optional var seekTime:Float;
   @:optional var seekOffset:Float;
   @:optional var fastSeek:Bool;

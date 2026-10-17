@@ -5,9 +5,9 @@ typedef SheenPbrExtension = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
   var kind:String;
   var sheenColor:Float;
-  var sheenColorMap:Null<Dynamic>;
-  var sheenColorMapUvSet:Dynamic;
+  var sheenColorMap:Null<flight.Texture>;
+  var sheenColorMapUvSet:flight.PbrUvSet;
   var sheenRoughness:Float;
-  var sheenRoughnessMap:Null<Dynamic>;
-  var sheenRoughnessMapUvSet:Dynamic;
+  var sheenRoughnessMap:Null<flight.Texture>;
+  var sheenRoughnessMapUvSet:flight.PbrUvSet;
 };

@@ -3,5 +3,5 @@ package flight._js;
 
 typedef TextSegmenterBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function segment(text:String, granularity:Dynamic, ?locale:String):Array<flight.TextSegment>;
+  function segment(text:String, granularity:flight.TextSegmentGranularity, ?locale:String):Array<flight.TextSegment>;
 };

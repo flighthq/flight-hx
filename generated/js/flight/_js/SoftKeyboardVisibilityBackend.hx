@@ -3,6 +3,6 @@ package flight._js;
 
 typedef SoftKeyboardVisibilityBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function show():flight._internal._Promise<Dynamic>;
-  function hide():flight._internal._Promise<Dynamic>;
+  function show():flight._internal._Promise<flight.SoftKeyboardVisibilityResult>;
+  function hide():flight._internal._Promise<flight.SoftKeyboardVisibilityResult>;
 };

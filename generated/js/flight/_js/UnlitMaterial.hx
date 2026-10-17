@@ -6,9 +6,9 @@ typedef UnlitMaterial = {
   var kind:String;
   @:optional var name:Null<String>;
   var alphaCutoff:Float;
-  var alphaMode:Dynamic;
-  var blendMode:String;
+  var alphaMode:flight.MaterialAlphaMode;
+  var blendMode:flight.BlendMode;
   var doubleSided:Bool;
   var baseColor:Float;
-  var baseColorMap:Null<Dynamic>;
+  var baseColorMap:Null<flight.Texture>;
 };

@@ -3,6 +3,6 @@ package flight._js;
 
 typedef GlobalShortcut = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var accelerator:String;
+  var accelerator:flight.Accelerator;
   var onTrigger:flight.Signal<()->Void>;
 };

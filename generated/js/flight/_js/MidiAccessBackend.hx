@@ -3,5 +3,5 @@ package flight._js;
 
 typedef MidiAccessBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function requestAccess():flight._internal._Promise<Dynamic>;
+  function requestAccess():flight._internal._Promise<flight.MidiAccessRequestOutcome>;
 };

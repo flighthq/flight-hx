@@ -3,10 +3,10 @@ package flight._js;
 
 typedef ReorderNodeChildCommand = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var kind:String;
+  var kind:flight.Kind;
   var label:String;
-  var child:flight.Node<Dynamic>;
+  var child:flight.NodeAny;
   var fromIndex:Float;
-  var parent:flight.Node<Dynamic>;
+  var parent:flight.NodeAny;
   var toIndex:Float;
 };

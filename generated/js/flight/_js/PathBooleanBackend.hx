@@ -3,5 +3,5 @@ package flight._js;
 
 typedef PathBooleanBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function computePathBoolean(subject:Array<Array<Float>>, clip:Array<Array<Float>>, operation:Dynamic, fillRule:Dynamic):Array<Array<Float>>;
+  function computePathBoolean(subject:Array<flight.PathBooleanContour>, clip:Array<flight.PathBooleanContour>, operation:flight.PathBooleanOperation, fillRule:flight.PathBooleanFillRule):Array<flight.PathBooleanContour>;
 };

@@ -3,7 +3,7 @@ package flight._js;
 
 typedef Physics2DAbiExecutionResult = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var status:Dynamic;
+  var status:flight.Physics2DAbiExecutionStatus;
   var commandIndex:Float;
   var byteOffset:Float;
   var commandKind:Float;

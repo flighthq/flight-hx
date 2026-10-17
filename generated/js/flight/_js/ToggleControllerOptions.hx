@@ -2,10 +2,10 @@
 package flight._js;
 
 typedef ToggleControllerOptions = {
-  @:optional var transition:flight.NodeInteractiveStateTransition<Dynamic, Dynamic>;
+  @:optional var transition:flight.GuiTransitionDescriptor;
   @:optional var checked:Bool;
-  var checkedState:Dynamic;
-  @:optional var label:Dynamic;
-  @:optional var overState:Dynamic;
-  var uncheckedState:Dynamic;
+  var checkedState:flight.Node2D;
+  @:optional var label:flight.Node2D;
+  @:optional var overState:flight.Node2D;
+  var uncheckedState:flight.Node2D;
 };

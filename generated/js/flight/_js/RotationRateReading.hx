@@ -3,7 +3,7 @@ package flight._js;
 
 typedef RotationRateReading = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var accuracy:Dynamic;
+  var accuracy:flight.SensorAccuracy;
   var interval:Float;
   var timestamp:Float;
   var alpha:Float;

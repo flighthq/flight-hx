@@ -3,5 +3,5 @@ package flight._js;
 
 typedef TrayBoundsBackend = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  function get(tray:flight.TrayIcon):flight._internal._Promise<Dynamic>;
+  function get(tray:flight.TrayIcon):flight._internal._Promise<flight.TrayBoundsResult>;
 };

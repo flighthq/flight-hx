@@ -4,6 +4,6 @@ package flight._js;
 typedef AssetDescriptor = {
   var id:String;
   var url:String;
-  var type:Dynamic;
+  var type:flight.AssetType;
   @:optional var groups:Array<String>;
 };

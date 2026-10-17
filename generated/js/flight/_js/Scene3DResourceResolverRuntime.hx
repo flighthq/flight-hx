@@ -2,8 +2,8 @@
 package flight._js;
 
 typedef Scene3DResourceResolverRuntime = {
-  var inFlight:flight._internal._Map<Dynamic, flight.Scene3DResourceInFlight>;
+  var inFlight:flight._internal._Map<flight.ImageResourceReference, flight.Scene3DResourceInFlight>;
   var loader:flight.ResourceLoader;
-  var resolved:flight._internal._Map<Dynamic, flight.TextureSource>;
+  var resolved:flight._internal._Map<flight.ImageResourceReference, flight.TextureSource>;
   var signals:Null<flight.Scene3DResourceSignals>;
 };

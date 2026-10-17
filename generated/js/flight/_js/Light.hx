@@ -3,5 +3,5 @@ package flight._js;
 
 typedef Light = {
   var EntityRuntimeKey:Null<flight.EntityRuntime>;
-  var kind:String;
+  var kind:flight.Kind;
 };

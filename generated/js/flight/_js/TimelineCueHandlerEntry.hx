@@ -3,6 +3,6 @@ package flight._js;
 
 typedef TimelineCueHandlerEntry = {
   var dispatchOnSeek:Bool;
-  var handle:(flight.Timeline, flight.TimelineCue, String)->Void;
+  var handle:flight.TimelineCueHandler;
   var kind:String;
 };

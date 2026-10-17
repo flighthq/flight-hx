@@ -4,7 +4,7 @@ package flight;
 #if flight_hx
 typedef MediaSessionOperationOutcome = flight._hx.MediaSessionOperationOutcome;
 #elseif (js && flight_esm)
-typedef MediaSessionOperationOutcome<BlockReason:Dynamic = Dynamic> = flight._js.MediaSessionOperationOutcome<BlockReason>;
+typedef MediaSessionOperationOutcome<BlockReason:flight.MediaSessionOperationBlockReason = flight.MediaSessionOperationBlockReason> = flight._js.MediaSessionOperationOutcome<BlockReason>;
 #elseif cpp
 typedef MediaSessionOperationOutcome = flight._cpp.MediaSessionOperationOutcome;
 #elseif js
