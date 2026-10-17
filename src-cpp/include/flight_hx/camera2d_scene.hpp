@@ -11,6 +11,15 @@ void destroy(Scene* scene) noexcept;
 int root(const Scene* scene) noexcept;
 int create_display_object(Scene* scene, int parent);
 int create_shape(Scene* scene, int parent);
+int create_solid_sprite(
+    Scene* scene,
+    int parent,
+    double color,
+    double x,
+    double y,
+    double width,
+    double height,
+    double alpha);
 void begin_fill(Scene* scene, int handle, double color, double alpha);
 void end_fill(Scene* scene, int handle);
 void line_style(Scene* scene, int handle, double thickness, double color, double alpha);
@@ -32,6 +41,7 @@ void set_transform(
 bool render_frame(Scene* scene) noexcept;
 int node_count(const Scene* scene) noexcept;
 int shape_count(const Scene* scene) noexcept;
+int sprite_count(const Scene* scene) noexcept;
 int verified_frames(const Scene* scene) noexcept;
 int maximum_coverage(const Scene* scene) noexcept;
 

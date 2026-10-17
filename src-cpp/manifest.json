@@ -22,7 +22,14 @@
   ],
   "extensions": [
     {
-      "module": "flight.Camera2dScene",
+      "module": "flight.Scene2dApp",
+      "nativeBridge": "flight._cpp.Camera2dScene",
+      "publicTypes": [
+        "flight.DisplayObject",
+        "flight.Scene2dNode",
+        "flight.Shape",
+        "flight.Sprite"
+      ],
       "profile": "scene2d-gl",
       "target": "Flight::HostSdlGl+Flight::SdkPreview",
       "requiresBuildDefine": "flight_cpp_build",

@@ -29,7 +29,9 @@ const expectedNativeHost = {
   requiresBuildDefine: 'flight_cpp_build',
 };
 const expectedNativeExtension = {
-  module: 'flight.Camera2dScene',
+  module: 'flight.Scene2dApp',
+  nativeBridge: 'flight._cpp.Camera2dScene',
+  publicTypes: ['flight.DisplayObject', 'flight.Scene2dNode', 'flight.Shape', 'flight.Sprite'],
   profile: 'scene2d-gl',
   target: 'Flight::HostSdlGl+Flight::SdkPreview',
   requiresBuildDefine: 'flight_cpp_build',
@@ -100,6 +102,39 @@ function validateNativeManifest(flightCpp) {
   for (const includeRoot of expectedNativeExtension.includeRoots) {
     if (!existsSync(path.join(flightCpp.directory, includeRoot))) {
       fail(`native extension include root is missing from pinned flight-cpp: ${includeRoot}`);
+    }
+  }
+  const cameraSource = readFileSync(path.join(repoRoot, expectedNativeExtension.example, 'Camera2d.hx'), 'utf8');
+  for (const backendDetail of [
+    '#if',
+    'flight._js',
+    'flight._cpp',
+    'Camera2dScene',
+    'NativeCamera2dSceneSink',
+    'WebCamera2dSceneSink',
+  ]) {
+    if (cameraSource.includes(backendDetail)) {
+      fail(`Camera2D public sample exposes backend detail ${backendDetail}`);
+    }
+  }
+  if (
+    !cameraSource.includes('import flight.Scene2dApp;') ||
+    !cameraSource.includes('import flight.Sprite;') ||
+    !cameraSource.includes('final sprite:Sprite = app.createSolidSprite')
+  ) {
+    fail('Camera2D public sample does not exercise the unified Scene2dApp/Sprite API');
+  }
+  for (const typeName of expectedNativeExtension.publicTypes) {
+    const holder = typeName.replace(/^flight\./u, '');
+    const selector = path.join(
+      repoRoot,
+      holder === 'Scene2dNode' ? 'src' : 'src-cpp',
+      'flight',
+      `${holder}.hx`,
+    );
+    const implementation = path.join(repoRoot, 'src-cpp', 'flight', '_cpp', `${holder}.hx`);
+    if (!existsSync(selector) || !existsSync(implementation)) {
+      fail(`native public Scene2D type selector or implementation is missing: ${typeName}`);
     }
   }
 
@@ -382,7 +417,7 @@ function runNativeCamera2d(flightCpp, nativeExtension, consumer) {
   const transcript = `${run.stdout ?? ''}${run.stderr ?? ''}`;
   if (
     run.status !== 0 ||
-    !/CAMERA2D_NATIVE_OK nodes=72 shapes=67 coverage=[1-9][0-9]*/u.test(transcript)
+    !/CAMERA2D_NATIVE_OK nodes=116 shapes=66 sprites=44 coverage=[1-9][0-9]*/u.test(transcript)
   ) {
     fail(
       `packaged Camera2D native framebuffer proof failed ` +
@@ -501,6 +536,7 @@ async function buildWebCamera2d(nativeExtension, consumer) {
 
   const generated = readFileSync(jsPath, 'utf8');
   for (const packageName of [
+    '@flighthq/bitmap',
     '@flighthq/node',
     '@flighthq/path',
     '@flighthq/render',
@@ -509,6 +545,7 @@ async function buildWebCamera2d(nativeExtension, consumer) {
     '@flighthq/scene2d-gl',
     '@flighthq/shape',
     '@flighthq/types',
+    '@flighthq/texture',
   ]) {
     if (!generated.includes(`from \"${packageName}`)) {
       fail(`Camera2D web output has no static import from ${packageName}`);

@@ -35,10 +35,13 @@ portable surface until that mapping is complete. Building it requires CMake, Nin
 3.2+ development files; the Haxelib packages bridge source, not SDL or prebuilt flight-cpp binaries.
 
 `examples/camera2d` advances that seam into a genuine Scene2D GL workload. One Haxe source authors
-the deterministic graph used by both targets. The web adapter calls the current compiler-emitted
-ESM extern holders; the native adapter owns the otherwise GC-unsafe C++ objects and forwards each
-fine-grained scene command to flight-cpp. Its declaration-only header keeps the large renderer
-include closure out of hxcpp-generated translation units.
+the deterministic graph used by both targets through `flight.Scene2dApp`; it contains no backend
+conditional or hidden-package import. On web, public `flight.Sprite`, `Shape`, and `DisplayObject`
+are the current compiler-emitted structural externs. On native, the same names are typed handles
+into the session, which owns the otherwise GC-unsafe C++ objects and forwards each fine-grained
+scene command to flight-cpp. The internal declaration-only bridge header keeps the large renderer
+include closure out of hxcpp-generated translation units. The sample's 44-node shared-texture grid
+exercises the public `Sprite` identity and Flight's GL Sprite renderer on both targets.
 
 The native extension is recorded separately in `manifest.json`, including the three flight-cpp
 include roots it needs. Their order is significant: `include`, then flight-cpp's own

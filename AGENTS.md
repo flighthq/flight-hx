@@ -108,7 +108,7 @@ Tiers (host per the host-axis rule — core examples use no host or Flight's own
 - `examples/headless/` — no host; `flight.*` calls under all backends. The bulk lives here.
 - `examples/fallback-hx/` — the `_hx` fallback compiling+running on a `js` target (the Lime/Clay-web scenario) via a define flip, **without** a real Lime dependency.
 - `examples/window-native/` — Flight's own host, `cpp` → `_cpp`; an executable manifest-recorded platform extension that creates a real SDL3/OpenGL surface, clears it through flight-cpp's adapter, and presents it. This proves the native host seam without claiming the entire generated renderer contract.
-- `examples/camera2d/` — one Haxe-authored deterministic Scene2D graph compiled for current Flight ESM and current flight-cpp. The gate builds and runs flight-cpp's upstream Camera2D smoke as the control, compiles/links the web bundle, and runs three offscreen native frames with framebuffer coverage and center-player pixel checks.
+- `examples/camera2d/` — one branch-free Haxe-authored deterministic Scene2D graph using public `flight.Scene2dApp`, `Sprite`, `Shape`, and `DisplayObject` names. Those types resolve to current Flight ESM structural externs on web and session-owned flight-cpp handles on native. The gate builds and runs flight-cpp's upstream Camera2D smoke as the control, compiles/links the web bundle, and runs three offscreen native frames with framebuffer coverage and center-player pixel checks.
 - `examples/window-web/` — Flight's own browser host, `js` + `flight_esm` → `_js`; still awaiting the portable window/render counterpart. The `_js` backend, `tools/esm`, web behavior, and DCE gates are already live.
 
 ## Status

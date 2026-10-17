@@ -74,8 +74,10 @@ SDK reports 2,563 emitted modules; Haxe exposes only the smaller exact partition
 `examples/cross-target-math/` compiles and runs the same installed-package consumer against those
 headers on desktop and the current complete ESM externs on web. `examples/window-native/` additionally
 links `Flight::HostSdlGl` and uses the real SDL3 window, OpenGL context, clear, and presentation path.
-`examples/camera2d/` then authors one deterministic Haxe Scene2D graph for both current ESM externs
-and a narrow flight-cpp ownership adapter. The cross-target gate compiles and bundles the web form,
+`examples/camera2d/` then authors one deterministic Haxe Scene2D graph through the public
+`flight.Scene2dApp`, `Sprite`, `Shape`, and `DisplayObject` surface. Its sample has no target branch:
+the library selects current ESM structural externs on web and opaque handles into a narrow
+flight-cpp ownership session on native. The cross-target gate compiles and bundles the web form,
 runs flight-cpp's full upstream Camera2D smoke as a control, and requires three native offscreen
 frames to pass coverage and center-player pixel checks. These are explicit platform extensions, not
 yet a claim that every generated renderer contract is portable through the common facade.

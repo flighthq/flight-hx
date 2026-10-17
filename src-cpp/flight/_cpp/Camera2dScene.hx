@@ -1,4 +1,4 @@
-package flight;
+package flight._cpp;
 
 #if cpp
 @:buildXml('
@@ -41,6 +41,17 @@ extern class Camera2dScene {
   static function createDisplayObject(scene:cpp.Pointer<Camera2dScene>, parent:Int):Int;
   @:native("flight_hx::camera2d::create_shape")
   static function createShape(scene:cpp.Pointer<Camera2dScene>, parent:Int):Int;
+  @:native("flight_hx::camera2d::create_solid_sprite")
+  static function createSolidSprite(
+    scene:cpp.Pointer<Camera2dScene>,
+    parent:Int,
+    color:Float,
+    x:Float,
+    y:Float,
+    width:Float,
+    height:Float,
+    alpha:Float
+  ):Int;
   @:native("flight_hx::camera2d::begin_fill")
   static function beginFill(scene:cpp.Pointer<Camera2dScene>, handle:Int, color:Float, alpha:Float):Void;
   @:native("flight_hx::camera2d::end_fill")
@@ -67,6 +78,8 @@ extern class Camera2dScene {
   static function nodeCount(scene:cpp.Pointer<Camera2dScene>):Int;
   @:native("flight_hx::camera2d::shape_count")
   static function shapeCount(scene:cpp.Pointer<Camera2dScene>):Int;
+  @:native("flight_hx::camera2d::sprite_count")
+  static function spriteCount(scene:cpp.Pointer<Camera2dScene>):Int;
   @:native("flight_hx::camera2d::verified_frames")
   static function verifiedFrames(scene:cpp.Pointer<Camera2dScene>):Int;
   @:native("flight_hx::camera2d::maximum_coverage")

@@ -2,17 +2,19 @@
 
 This is a binding example, not a second hand-maintained Flight demo. It takes the deterministic
 scene and framebuffer oracle from flight-cpp's `camera2d` port and keeps the authored graph in one
-Haxe source:
+backend-neutral Haxe source. The sample imports only `flight.Scene2dApp` and public `flight.*` types;
+the target selection lives in the library:
 
-- `js + flight_esm` maps the scene commands directly to the generated Flight ESM externs and
-  renders them with browser WebGL2.
-- `cpp` maps the same commands to a narrow, manifest-recorded flight-cpp ownership adapter and
-  renders three verified offscreen SDL3/OpenGL frames.
+- `js + flight_esm` makes `flight.Sprite`, `Shape`, and `DisplayObject` the current generated Flight
+  ESM structural externs; `Scene2dApp` renders them with browser WebGL2.
+- `cpp` makes those same public names opaque typed handles into a narrow, manifest-recorded
+  flight-cpp ownership session, which renders three verified offscreen SDL3/OpenGL frames.
 
-The first slice deliberately omits input, text, and the raster fallback. It still covers 72 nodes,
-67 Shapes, deterministic fills and strokes, hierarchy and transform invalidation, renderer and
-material registration, render-pass lifecycle, mesh preparation, and native framebuffer readback.
-Both adapters require more than 5,000 non-background pixels and the authored yellow player at the
+The first slice deliberately omits input, text, and the raster fallback. It covers 116 nodes,
+66 Shapes, 44 Sprites sharing one one-pixel texture, deterministic fills and strokes, hierarchy and
+transform invalidation, renderer and material registration, render-pass lifecycle, mesh
+preparation, texture upload/batching, and native framebuffer readback. Both backends require more
+than 5,000 non-background pixels and the authored yellow player at the
 center of every frame before printing their success marker.
 
 The repository's cross-target gate builds both targets from a freshly installed Haxelib and runs

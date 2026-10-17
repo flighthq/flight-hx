@@ -15,7 +15,7 @@ integrations that consume flight-hx as a `haxelib`.
 | [`fallback-hx/`](fallback-hx/) | none | `js` + `flight_hx` | ✅ covered by the proof gate |
 | [`web-geometry/`](web-geometry/) | none | `js` + `flight_esm` → `_js` | ✅ **generated** bindings on **real** `@flighthq/geometry`, tree-shaken (`gate:web`, `gate:dce`) |
 | [`window-native/`](window-native/) | Flight's own SDL3/GL host | `cpp` → `_cpp` | ✅ real window/context/clear/present through current flight-cpp (`gate:cross-target`) |
-| [`camera2d/`](camera2d/) | Flight Scene2D GL | one Haxe scene → current ESM externs and flight-cpp | ✅ web compile/link plus native 3-frame pixel oracle, checked against flight-cpp's upstream control (`gate:cross-target`) |
+| [`camera2d/`](camera2d/) | Flight Scene2D GL | one branch-free `flight.Scene2dApp` scene → current ESM externs and flight-cpp | ✅ public `Sprite`/`Shape`/`DisplayObject`, web compile/link, and native 3-frame pixel oracle checked against flight-cpp's upstream control (`gate:cross-target`) |
 | [`window-web/`](window-web/) | Flight's browser host | `js` + `flight_esm` → `_js` | ⏳ portable window/render counterpart; web ESM pipeline already works |
 
 Run the headless example:

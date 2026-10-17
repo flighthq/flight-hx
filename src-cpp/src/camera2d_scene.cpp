@@ -4,11 +4,13 @@
 // only the native Flight objects whose identity and lifetime cannot safely cross the hxcpp GC
 // boundary. Every command below forwards to the corresponding generated flight-cpp API.
 #define null flight_hx_presence_null
+#include <flight/bitmap/bitmap.hpp>
 #include <flight/host_sdl/host.hpp>
 #include <flight/host_sdl/webgl.hpp>
 #include <flight/host_sdl/web_platform.hpp>
 #include <flight/node/native_node2d_access.hpp>
 #include <flight/scene2d/display_object.hpp>
+#include <flight/scene2d/sprite.hpp>
 #include <flight/shape/shape.hpp>
 #include <flight/shape/shape_commands.hpp>
 #include <flight/path/tessellate_stroke_path.hpp>
@@ -19,11 +21,14 @@
 #include <flight/render_gl/gl_texture_resolver.hpp>
 #include <flight/scene2d_gl/gl_node_2d.hpp>
 #include <flight/scene2d_gl/gl_mesh_shape_renderer.hpp>
+#include <flight/scene2d_gl/gl_sprite.hpp>
 #include <flight/scene2d_gl/gl_standard_material.hpp>
+#include <flight/texture/texture.hpp>
 #undef null
 
 #include <algorithm>
 #include <cstddef>
+#include <cstdint>
 #include <memory>
 #include <unordered_map>
 #include <utility>
@@ -41,6 +46,7 @@ template <typename Value>
 struct Scene final {
   using Node = flight::types::Node2D;
   using Shape = flight::Ref<flight::types::Shape>;
+  using Texture = flight::Ref<flight::types::Texture2D>;
 
   Scene(int width_value, int height_value)
       : canvas(flight::host_sdl::GlCanvas::create(
@@ -68,6 +74,8 @@ struct Scene final {
         state, flight::types::display_object_kind, flight::scene2d_gl::gl_scene_2d_renderer);
     flight::render::register_node_renderer(
         state, flight::types::shape_kind, flight::scene2d_gl::gl_mesh_shape_renderer);
+    flight::render::register_node_renderer(
+        state, flight::types::sprite_kind, flight::scene2d_gl::gl_sprite_renderer);
     flight::scene2d_gl::register_gl_standard_material(state);
     target = flight::render_gl::create_gl_screen_render_target(gl);
     clear = flight::make_ref<flight::types::RenderTargetClear>();
@@ -100,6 +108,19 @@ struct Scene final {
     return found->second;
   }
 
+  [[nodiscard]] Texture solid_texture(double color) {
+    const auto key = static_cast<std::uint32_t>(color);
+    const auto found = solid_textures.find(key);
+    if (found != solid_textures.end()) return found->second;
+    auto bitmap = flight::bitmap::create_bitmap(1.0, 1.0, color);
+    auto options = flight::make_ref<flight::types::CreateTexture2DOptions>();
+    options->source = bitmap;
+    auto texture = flight::texture::create_texture_2d(readonly_row(options));
+    solid_bitmaps.emplace(key, std::move(bitmap));
+    solid_textures.emplace(key, texture);
+    return texture;
+  }
+
   flight::host_sdl::Host host;
   flight::host_sdl::GlCanvas canvas;
   flight::host_sdl::WebGl2Context gl;
@@ -110,6 +131,9 @@ struct Scene final {
   flight::Ref<flight::types::RenderTargetClear> clear;
   std::vector<Node> nodes;
   std::unordered_map<int, Shape> shapes;
+  std::unordered_map<std::uint32_t, flight::Ref<flight::types::Bitmap>> solid_bitmaps;
+  std::unordered_map<std::uint32_t, Texture> solid_textures;
+  int sprites{0};
   int verified_frames{0};
   std::size_t maximum_coverage{0};
 };
@@ -133,6 +157,27 @@ int create_shape(Scene* scene, int parent) {
   auto value = flight::shape::create_shape();
   const int handle = scene->attach(parent, flight::node::native_node_2d(value));
   scene->shapes.emplace(handle, std::move(value));
+  return handle;
+}
+
+int create_solid_sprite(
+    Scene* scene,
+    int parent,
+    double color,
+    double x,
+    double y,
+    double width,
+    double height,
+    double alpha) {
+  auto value = flight::scene2d::create_sprite();
+  value->data->texture = flight::types::Texture{scene->solid_texture(color)};
+  value->x = x;
+  value->y = y;
+  value->scale_x = width;
+  value->scale_y = height;
+  value->alpha = alpha;
+  const int handle = scene->attach(parent, flight::node::native_node_2d(value));
+  ++scene->sprites;
   return handle;
 }
 
@@ -249,6 +294,7 @@ bool render_frame(Scene* scene) noexcept {
 
 int node_count(const Scene* scene) noexcept { return static_cast<int>(scene->nodes.size()); }
 int shape_count(const Scene* scene) noexcept { return static_cast<int>(scene->shapes.size()); }
+int sprite_count(const Scene* scene) noexcept { return scene->sprites; }
 int verified_frames(const Scene* scene) noexcept { return scene->verified_frames; }
 int maximum_coverage(const Scene* scene) noexcept {
   return static_cast<int>(scene->maximum_coverage);
