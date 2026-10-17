@@ -8,11 +8,22 @@ This is not a Haxe reimplementation of Flight; it binds to it. See [AGENTS.md](A
 
 - `src/flight/` — maintained runtime shim + the `flight.*` backend selectors.
 - `src-cpp/` — explicit native facade overrides, bridge headers, and the pinned support manifest.
+- `haxelib.json` + `lib/flight_hx/Package.hx` — installed-package metadata and target classpath election.
 - `generated/js` — compiler-emitted ESM externs; `generated/hx` — compiler-emitted transpiled fallback.
 - `tools/backend-hx/` — deterministic flight-compiler integration, compatibility, and provenance.
 - `tools/esm/` — the vendored ESM generator (web pay-per-use).
 - `tests/gates/` — behavioral, backend-parity, and web-DCE gates.
 - `dependencies.lock.json` + `scripts/` — pins `flight`/`flight-compiler`/`flight-cpp`, rehydrated into a gitignored `.dependencies/`.
+
+## Consume
+
+The haxelib name is `flight`. Its initialization macro selects exactly one checked-in backend root,
+so consumers use `-lib flight` instead of reproducing this repository's classpath ordering. Web
+builds additionally define `flight_esm` and use the bundled static ESM generator; native builds pass
+`-D flight_cpp_root=/path/to/flight-cpp` and link the pinned-compatible flight-cpp SDK. Defining
+`flight_hx` elects the optional pure-Haxe fallback. The cross-target gate registers a clean isolated
+haxelib repository, builds and installs the deterministic consumer archive, and proves all three
+forms from the same source.
 
 ## Develop
 
@@ -21,6 +32,7 @@ npm ci && npm run setup     # provision pinned Haxe 4.3.7 + hxcpp
 npm run rehydrate           # materialize pinned flight / flight-compiler / flight-cpp
 npm install --prefix .dependencies/flight-compiler && npm run generate -- --extern
 npm run refresh:transpile-surface # re-derive the fallback's public subset from current externs
+npm run package:haxelib      # build dist/flight-0.5.0.zip from the consumer-only allowlist
 npm run proof               # compile + run the proof-of-shape on the flight_hx backend
 npm run gate:proof          # behavioral gate: proof runs, and no-backend fails loud
 npm run gate:surface        # type-check every emitted extern and public type alias
@@ -29,7 +41,7 @@ npm run gate:parity         # exact JS↔HX signatures + supported/unavailable p
 npm run gate:runtime        # declared compiler runtime ABI + portable behavior
 npm run gate:transpile      # compile the full generated HX tree and execute public facades
 npm run gate:behavior       # differential HX-vs-pinned-Flight semantic oracle
-npm run gate:cross-target   # compile and run one Haxe sample on web + desktop
+npm run gate:cross-target   # run one isolated haxelib consumer on ESM, hxcpp, and pure Haxe
 npm run generate:check:extern # regenerate externs in memory and reject drift
 npm run refresh:transpile-surface:check # reject fallback facade/partition drift
 npm run check               # run every production gate, including web behavior/DCE and drift
@@ -54,7 +66,10 @@ The complete 7,224-file transpiled tree compiles and executes on JavaScript usin
 
 Native integration starts from what the pinned flight-cpp SDK actually provides, rather than waiting
 for full TS-to-Haxe transpilation or claiming parity it has not earned. `src-cpp/manifest.json` records
-the current representative direct bindings (`clamp`, `lerp`, and `saturate`), the C++20 requirement,
-and the two downstream hxcpp/flight-cpp corrections. `examples/cross-target-math/` compiles and runs
-the same Haxe source against those headers on desktop and the complete ESM externs on web. Future
-flight-compiler and flight-cpp improvements should shrink these corrections and expand the manifest.
+ten compile-proven scalar bindings across Math and Color, the generated SDK's distinct source/compiler
+revisions, C++20, and the two downstream hxcpp/flight-cpp corrections. A C++ header audit found only
+four of 30 callable generated headers compile unchanged today; three form this safe scalar partition,
+while the fourth has unresolved callback ownership. `examples/cross-target-math/` compiles and runs
+the same installed-package consumer against those headers on desktop and the complete ESM externs on
+web. Future flight-compiler and flight-cpp improvements should shrink the correction inventory and
+expand the manifest.

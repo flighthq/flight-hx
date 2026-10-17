@@ -1,0 +1,12 @@
+{
+  "name": "flight",
+  "url": "https://github.com/flighthq/flight-hx",
+  "license": "MIT",
+  "tags": ["cross", "cpp", "externs", "flight", "haxe", "javascript"],
+  "description": "Haxe bindings for Flight: direct flight-cpp on native, ESM externs on web, and an optional transpiled fallback.",
+  "version": "0.5.0",
+  "classPath": "lib",
+  "releasenote": "Complete Flight 0.5 web extern SDK and the first manifest-pinned direct flight-cpp native surface.",
+  "contributors": ["singmajesty"],
+  "dependencies": {}
+}

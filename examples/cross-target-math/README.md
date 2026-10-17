@@ -1,9 +1,12 @@
-# Cross-target Math
+# Cross-target scalar SDK slice
 
-`CrossTargetMath.hx` is one host-free Haxe program compiled two ways:
+`CrossTargetMath.hx` is one host-free Haxe program compiled three ways from an isolated `-lib flight`
+consumer:
 
 - web uses the complete generated Flight ESM extern surface and the static-import bundler pipeline;
-- desktop uses hxcpp and direct C++ calls into the pinned flight-cpp generated headers.
+- desktop uses hxcpp and direct C++ calls into every compile-proven scalar Math/Color function in
+  the pinned flight-cpp generated headers;
+- fallback uses the compiler-emitted pure-Haxe implementation subset on ordinary Haxe-to-JS.
 
 Run the reproducible compile, link, and behavioral proof for both targets:
 
@@ -13,7 +16,7 @@ npm run rehydrate
 npm run gate:cross-target
 ```
 
-The native proof is intentionally representative, not a claim of complete native parity. The exact
+The native proof is an exact supported partition, not a claim of complete native parity. The exact
 available functions, required C++ standard, flight-cpp revision, headers, and downstream corrections
 are recorded in `src-cpp/manifest.json`. Add native bindings there only when the pinned flight-cpp
 SDK actually provides them; unsupported calls should remain compile-time unavailable.

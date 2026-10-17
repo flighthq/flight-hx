@@ -1,9 +1,10 @@
 # window-native — the one real end-to-end app (native)
 
-**Stub.** The direct `_cpp` pipeline now works for the representative host-free Math slice in
-[`../cross-target-math/`](../cross-target-math/). This windowed follow-up is blocked on expanding the
-manifest-recorded native surface to the required host and rendering APIs in
-[flight-cpp](https://github.com/flighthq/flight-cpp), not on basic hxcpp/C++ integration.
+**Stub.** The installed-package `_cpp` pipeline now works for all ten compile-proven scalar Math and
+Color bindings in [`../cross-target-math/`](../cross-target-math/). flight-cpp also contains a real
+SDL3 lifecycle/window/surface host, but its own `docs/host-sdl.md` explicitly records the generated
+types and GL/WGPU renderer adapter as unfinished. This sample is blocked on that upstream surface
+(and an SDL 3.2+ development package), not on haxelib, hxcpp, or basic direct C++ integration.
 
 A real windowed render loop using **Flight's own host** (the platform layer flight-cpp links — SDL/
 etc.), compiled `cpp` → `_cpp`. This is the *representative* whole-stack app: it proves the host

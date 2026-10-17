@@ -1,12 +1,32 @@
 {
   "schema": "flight-hx-cpp-bindings/1",
   "flightCppRevision": "87ee3d6c345afb32f28f9dc9d5495b90a33b5c97",
+  "generatedSdk": {
+    "compilerRevision": "b5c9ee1bfa0e0d27ee7b821536f5dd94ee2e946b",
+    "sourceRevision": "1274ec5c923947dc64d5ffedcbd8169fc758cd9f",
+    "emittedModules": 314
+  },
   "cppStandard": 20,
   "corrections": [
     "flight-hx-flight-cpp-null-namespace-collision/1",
     "flight-hx-hxcpp-cpp11-override/1"
   ],
   "modules": [
+    {
+      "module": "flight.Color",
+      "functions": [
+        {
+          "name": "linearChannelToSrgb",
+          "native": "flight::color::linear_channel_to_srgb",
+          "header": "flight/color/srgb_transfer.hpp"
+        },
+        {
+          "name": "srgbChannelToLinear",
+          "native": "flight::color::srgb_channel_to_linear",
+          "header": "flight/color/srgb_transfer.hpp"
+        }
+      ]
+    },
     {
       "module": "flight.Math",
       "functions": [
@@ -16,14 +36,39 @@
           "header": "flight/math/clamp.hpp"
         },
         {
+          "name": "inRange",
+          "native": "flight::math::in_range",
+          "header": "flight/math/clamp.hpp"
+        },
+        {
+          "name": "inverseLerp",
+          "native": "flight::math::inverse_lerp",
+          "header": "flight/math/interpolation.hpp"
+        },
+        {
           "name": "lerp",
           "native": "flight::math::lerp",
+          "header": "flight/math/interpolation.hpp"
+        },
+        {
+          "name": "remap",
+          "native": "flight::math::remap",
           "header": "flight/math/interpolation.hpp"
         },
         {
           "name": "saturate",
           "native": "flight::math::saturate",
           "header": "flight/math/clamp.hpp"
+        },
+        {
+          "name": "smoothStep",
+          "native": "flight::math::smooth_step",
+          "header": "flight/math/interpolation.hpp"
+        },
+        {
+          "name": "step",
+          "native": "flight::math::step",
+          "header": "flight/math/interpolation.hpp"
         }
       ]
     }

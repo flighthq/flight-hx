@@ -1,6 +1,6 @@
 {
   "name": "@flighthq/flight-hx",
-  "version": "0.0.0",
+  "version": "0.5.0",
   "private": true,
   "description": "Haxe bindings for the Flight SDK: one flight.* surface over C++ (flight-cpp), ESM (flight-js), and an optional transpiled-Haxe fallback.",
   "type": "module",
@@ -10,6 +10,7 @@
     "rehydrate:check": "node scripts/rehydrate.mjs --check",
     "rehydrate:update": "node scripts/rehydrate.mjs --update",
     "haxe": "node tools/haxe.mjs",
+    "package:haxelib": "node tools/package-haxelib.mjs",
     "generate": "node tools/backend-hx/generate.mjs",
     "generate:check": "node tools/backend-hx/generate.mjs --check",
     "generate:check:extern": "node tools/backend-hx/generate.mjs --check --extern",
