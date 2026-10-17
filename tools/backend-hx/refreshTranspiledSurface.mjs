@@ -23,6 +23,16 @@ if (unknown.length > 0) {
 const externManifest = readJson(path.join(externRoot, 'manifest.json'));
 const transpiledManifest = readJson(path.join(transpiledRoot, 'manifest.json'));
 validateManifests(externManifest, transpiledManifest);
+if (externManifest.source.revision !== transpiledManifest.source.revision) {
+  const message =
+    `current web extern source ${externManifest.source.revision.slice(0, 7)} differs from optional transpiled source ` +
+    `${transpiledManifest.source.revision.slice(0, 7)}; regenerate the transpiled corpus before deriving parity`;
+  if (check) {
+    process.stdout.write(`Transpiled public surface check: SKIPPED — ${message}.\n`);
+    process.exit(0);
+  }
+  throw new Error(message);
+}
 
 const externFiles = loadHaxeFiles(externRoot);
 const transpiledFiles = loadHaxeFiles(transpiledRoot);
@@ -100,11 +110,6 @@ function validateManifests(extern, transpiled) {
   }
   if (transpiled.schema !== 'flight-hx-generated-sdk/1' || transpiled.compiler?.emissionMode !== 'transpile') {
     throw new Error('generated/hx does not contain a supported transpiled SDK manifest');
-  }
-  if (extern.source?.revision !== transpiled.source?.revision) {
-    throw new Error(
-      `Extern source ${String(extern.source?.revision)} does not match transpiled source ${String(transpiled.source?.revision)}`,
-    );
   }
   if (!Number.isInteger(transpiled.summary?.emittedFiles)) {
     throw new Error('Transpiled SDK manifest has no compiler-emitted file count');

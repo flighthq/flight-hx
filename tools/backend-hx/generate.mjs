@@ -23,20 +23,35 @@ import { buildTranspiledBackendSurface, collectExternSurface } from './haxeSurfa
 // lowering, and both Haxe emitters remain compiler-owned. This driver intentionally contains no
 // TypeScript parser or general-purpose target lowering rules.
 
+// Current flight-compiler output needs no downstream syntax corrections. Keep this inventory
+// explicit so any future integration workaround remains named, counted, and ratcheted.
 const compatibilityCorrectionSpecs = [
   {
-    expectedApplications: [{ path: 'flight/_js/_fn/Application.hx', replacements: 27 }],
-    id: 'flight-hx-anonymous-record-specialization-erasure/1',
+    expectedApplications: [
+      { path: 'flight/_js/_fn/RenderGl.hx', replacements: 1 },
+      { path: 'flight/_js/_fn/RenderWgpu.hx', replacements: 1 },
+    ],
+    id: 'flight-hx-private-texture-resolver-owner/1',
     modes: new Set(['extern']),
-    pattern: /\{ window:Dynamic \}<String>/gu,
-    replacement: '{ window:Dynamic }',
+    pattern: /flight\.Resolve(Gl|Wgpu)ImageTexture/gu,
+    replacement: 'flight.$1TextureResolver',
   },
+];
+
+// GPUCanvasAlphaMode is a WebGPU string-literal union. The Haxe backend already represents the
+// neighboring GPU*Mode ambient types as String, but its current external-symbol table omits this
+// newly used name. Correct the two exact source references before lowering; the counted patch must
+// drift loudly when Flight moves either use, and can disappear when flight-compiler owns the binding.
+const sourceCompatibilityCorrectionSpecs = [
   {
-    expectedApplications: [{ path: 'flight/_js/_fn/Interaction.hx', replacements: 2 }],
-    id: 'flight-hx-void-return-type-parameter-erasure/1',
-    modes: new Set(['extern']),
-    pattern: /\(Dynamic\)->Void<Name>/gu,
-    replacement: '(Dynamic)->Void',
+    expectedApplications: [
+      { path: 'packages/types/src/WgpuHost.ts', replacements: 1 },
+      { path: 'packages/types/src/WgpuRenderTarget.ts', replacements: 1 },
+    ],
+    id: 'flight-hx-gpu-canvas-alpha-mode-string-binding/1',
+    modes: new Set(['extern', 'transpile']),
+    pattern: /\bGPUCanvasAlphaMode\b/gu,
+    replacement: 'string',
   },
 ];
 
@@ -164,17 +179,26 @@ function createSdkInput(flightDependency, parseTypeScript, mode) {
         .sort(compareText),
       name,
       root: packageRoot,
+      // Test-helper modules exported by a package contract are part of that public contract. Keep
+      // them unless they depend on the Vitest runner itself; a public contract that ever imports one
+      // of those excluded modules will fail dependency-closed initialization rather than disappear.
       sources: filesUnder(path.join(packageRoot, 'src')).filter((filename) => {
         if (!filename.endsWith('.ts') || filename.endsWith('.d.ts') || filename.endsWith('.test.ts')) return false;
-        if (mode !== 'extern' || !/testhelper\.ts$/iu.test(filename)) return true;
-        return portable(path.relative(flightDependency.directory, filename)) ===
-          'packages/render-wgpu/src/wgpuTestHelper.ts';
+        return !/\bfrom\s+['"]vitest['"]/u.test(readFileSync(filename, 'utf8'));
       }),
     };
   });
+  const sourceCorrectionApplications = new Map();
   const sourceInputs = packages.flatMap((package_) =>
     package_.sources.map((sourcePath) => {
-      const contents = readFileSync(sourcePath, 'utf8');
+      const relativeSourcePath = portable(path.relative(flightDependency.directory, sourcePath));
+      const contents = applyCorrectionSpecs(
+        readFileSync(sourcePath, 'utf8'),
+        relativeSourcePath,
+        mode,
+        sourceCorrectionApplications,
+        sourceCompatibilityCorrectionSpecs,
+      );
       return {
         contents,
         compilerSource: {
@@ -185,6 +209,12 @@ function createSdkInput(flightDependency, parseTypeScript, mode) {
         },
       };
     }),
+  );
+  const sourceCompatibilityCorrectionApplications = validateCompatibilityCorrections(
+    mode,
+    sourceCorrectionApplications,
+    sourceInputs.map(({ contents, compilerSource }) => ({ contents, path: compilerSource.sourceFile.fileName })),
+    sourceCompatibilityCorrectionSpecs,
   );
   return {
     graph: {
@@ -200,6 +230,7 @@ function createSdkInput(flightDependency, parseTypeScript, mode) {
     moduleResolution: createModuleResolutionPlan(packages, flightDependency.directory),
     packages,
     sdkManifest,
+    sourceCompatibilityCorrectionApplications,
     sources: sourceInputs.map(({ compilerSource }) => compilerSource),
   };
 }
@@ -224,7 +255,7 @@ function createModuleResolutionPlan(packages, upstreamDirectory) {
   return { edges, schema: 'flight-compiler-module-resolution/1' };
 }
 
-function collectCompilerContractExports(facade, packages) {
+function collectCompilerContractExports(facade, packages, report) {
   if (facade?.schema !== 'flight-compiler-module-facade/1' || !Array.isArray(facade.modules)) {
     throw new Error('Pinned flight-compiler did not publish its public module-facade plan');
   }
@@ -246,7 +277,27 @@ function collectCompilerContractExports(facade, packages) {
   }
   const missingPackages = [...packageNames].filter((name) => !contractPackages.has(name)).sort(compareText);
   if (missingPackages.length > 0) {
-    throw new Error(`Compiler public facade has no emitted contract lane for ${missingPackages.join(', ')}`);
+    const directRefusals = report.modules
+      .flatMap((module) =>
+        module.refusals
+          .filter((refusal) => refusal.code !== 'dependency-refused')
+          .map((refusal) => ({
+            code: refusal.code,
+            module: `${module.module.packageName}/${module.module.source}`,
+            reason: refusal.message,
+            stage: refusal.stage,
+          })),
+      )
+      .sort((left, right) => compareText(left.module, right.module) || compareText(left.code, right.code));
+    const causes = directRefusals
+      .slice(0, 20)
+      .map(({ code, module, reason, stage }) => `${module} (${stage}/${code}): ${reason}`)
+      .join('\n- ');
+    throw new Error(
+      `Compiler public facade has no emitted contract lane for ${missingPackages.join(', ')}` +
+        `\nDirect compiler refusals (${String(directRefusals.length)} total, first 20):` +
+        (causes ? `\n- ${causes}` : ' none'),
+    );
   }
   return { typeNames, typesByPackage, valuesByPackage };
 }
@@ -273,13 +324,16 @@ function generateMode(outputRoot, mode, input, flightDependency, compilerDepende
   if (!compilation.report.runtimeAbi) {
     throw new Error('Pinned flight-compiler did not publish its Haxe runtime ABI manifest');
   }
-  const compatibilityCorrectionApplications = validateCompatibilityCorrections(
-    mode,
-    correctionApplications,
-    compilation.compilation.files,
+  const compatibilityCorrectionApplications = input.sourceCompatibilityCorrectionApplications.concat(
+    validateCompatibilityCorrections(
+      mode,
+      correctionApplications,
+      compilation.compilation.files,
+      compatibilityCorrectionSpecs,
+    ),
   );
   const compatibilityCorrections = compatibilityCorrectionApplications.map(({ id }) => id);
-  const publicExports = collectCompilerContractExports(compilation.report.exports, input.packages);
+  const publicExports = collectCompilerContractExports(compilation.report.exports, input.packages, compilation.report);
   const contractFiltered =
     mode === 'extern'
       ? filterExternContractMembers(compilation.compilation.files, publicExports.valuesByPackage)
@@ -579,9 +633,10 @@ function synchronizeExternPublicFacades(compilerFiles, write) {
 }
 
 function haxeTypeParameters(contents, typeName) {
-  const declaration = new RegExp(`^(?:typedef|class|interface|enum abstract) ${typeName}(?=[<{( =])`, 'mu').exec(
-    contents,
-  );
+  const declaration = new RegExp(
+    `^(?:typedef|extern class|class|interface|enum abstract) ${typeName}(?=[<{( =])`,
+    'mu',
+  ).exec(contents);
   if (!declaration) throw new Error(`Compiler extern ${typeName}.hx has no matching declaration`);
   const start = declaration.index + declaration[0].length;
   if (contents[start] !== '<') return '';
@@ -619,8 +674,12 @@ function createNormalizedHaxeBackend(backend, normalize) {
 }
 
 function applyCompatibilityCorrections(contents, filename, mode, applications) {
+  return applyCorrectionSpecs(contents, filename, mode, applications, compatibilityCorrectionSpecs);
+}
+
+function applyCorrectionSpecs(contents, filename, mode, applications, specs) {
   let corrected = contents;
-  for (const spec of compatibilityCorrectionSpecs) {
+  for (const spec of specs) {
     if (!spec.modes.has(mode)) continue;
     const matches = [...corrected.matchAll(new RegExp(spec.pattern.source, spec.pattern.flags))];
     if (matches.length === 0) continue;
@@ -632,9 +691,9 @@ function applyCompatibilityCorrections(contents, filename, mode, applications) {
   return corrected;
 }
 
-function validateCompatibilityCorrections(mode, applications, emittedFiles) {
+function validateCompatibilityCorrections(mode, applications, emittedFiles, specs) {
   const reports = [];
-  for (const spec of compatibilityCorrectionSpecs.filter(({ modes }) => modes.has(mode))) {
+  for (const spec of specs.filter(({ modes }) => modes.has(mode))) {
     const actual = [...(applications.get(spec.id) ?? new Map())]
       .map(([filename, replacements]) => ({ path: filename, replacements }))
       .sort((left, right) => compareText(left.path, right.path));

@@ -6,19 +6,19 @@
       "name": "flight",
       "repository": "https://github.com/flighthq/flight",
       "branch": "main",
-      "commit": "65889a191bb0d2f5f2f95148590874f3e49bf9d4"
+      "commit": "a62784923f3be814463286c9fb28edfe6ab15789"
     },
     {
       "name": "flight-compiler",
       "repository": "https://github.com/flighthq/flight-compiler",
       "branch": "main",
-      "commit": "9edfcca46db71d6a6a53aafa2718d8c9f9d5df7c"
+      "commit": "806d257d2f4100de745cc97340e61c2f301b0f24"
     },
     {
       "name": "flight-cpp",
       "repository": "https://github.com/flighthq/flight-cpp",
       "branch": "main",
-      "commit": "87ee3d6c345afb32f28f9dc9d5495b90a33b5c97"
+      "commit": "f4821bd28f92d6b617e8fed30c4d088b4e3dcc72"
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "schema": "flight-hx-generated-sdk-refusals/1",
-  "compilerRevision": "9edfcca46db71d6a6a53aafa2718d8c9f9d5df7c",
+  "compilerRevision": "806d257d2f4100de745cc97340e61c2f301b0f24",
   "emissionMode": "extern",
   "refusals": [],
-  "sourceRevision": "65889a191bb0d2f5f2f95148590874f3e49bf9d4"
+  "sourceRevision": "a62784923f3be814463286c9fb28edfe6ab15789"
 }

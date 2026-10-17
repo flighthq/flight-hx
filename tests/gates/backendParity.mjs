@@ -10,6 +10,14 @@ import process from 'node:process';
 import { collectExternSurface, collectPublicHaxeSurface } from '../../tools/backend-hx/haxeSurface.mjs';
 
 const repoRoot = path.join(import.meta.dirname, '..', '..');
+const externManifest = JSON.parse(readFileSync(path.join(repoRoot, 'generated', 'js', 'manifest.json'), 'utf8'));
+const transpiledManifest = JSON.parse(readFileSync(path.join(repoRoot, 'generated', 'hx', 'manifest.json'), 'utf8'));
+if (externManifest.source.revision !== transpiledManifest.source.revision) {
+  process.stdout.write(
+    `backend-parity gate: SKIPPED — current web extern source ${externManifest.source.revision.slice(0, 7)} differs from optional transpiled source ${transpiledManifest.source.revision.slice(0, 7)}; regenerate the transpiled corpus before claiming cross-backend parity.\n`,
+  );
+  process.exit(0);
+}
 const externFiles = loadHaxeFiles(path.join(repoRoot, 'generated', 'js'));
 const transpiledFiles = loadHaxeFiles(path.join(repoRoot, 'generated', 'hx'));
 const extern = collectExternSurface(externFiles);

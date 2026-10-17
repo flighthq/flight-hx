@@ -395,7 +395,7 @@ function parseTypeDeclaration(contents, name) {
 }
 
 function parseTypeDeclarationLine(line) {
-  const match = /^(typedef|class|interface|enum abstract) ([A-Za-z_][A-Za-z0-9_]*)/u.exec(line);
+  const match = /^(typedef|extern class|class|interface|enum abstract) ([A-Za-z_][A-Za-z0-9_]*)/u.exec(line);
   if (!match) return undefined;
   const parameterStart = match[0].length;
   let typeParameters = '';

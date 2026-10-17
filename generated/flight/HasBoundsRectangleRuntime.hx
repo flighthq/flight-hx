@@ -4,7 +4,7 @@ package flight;
 #if flight_hx
 typedef HasBoundsRectangleRuntime = flight._hx.HasBoundsRectangleRuntime;
 #elseif (js && flight_esm)
-typedef HasBoundsRectangleRuntime = flight._js.HasBoundsRectangleRuntime;
+typedef HasBoundsRectangleRuntime<Traits:Dynamic = flight.NodeTraits> = flight._js.HasBoundsRectangleRuntime<Traits>;
 #elseif cpp
 typedef HasBoundsRectangleRuntime = flight._cpp.HasBoundsRectangleRuntime;
 #elseif js
