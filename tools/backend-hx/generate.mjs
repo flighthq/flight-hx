@@ -666,7 +666,50 @@ function createNativeBindingPlanningReport(
   const declarationKinds = countBy(cppExternPlan.declarations, ({ kind }) => kind);
   const headerStatusesByDeclaration = countBy(declarations, ({ headerStatus }) => headerStatus);
   const externRefusalsByKey = new Map(cppExternPlan.refusals.map((refusal) => [refusal.key, refusal]));
+  const externDeclarationsByKey = new Map(cppExternPlan.declarations.map((declaration) => [declaration.key, declaration]));
   const refusalCodes = countBy(cppExternPlan.refusals, ({ code, detailCode }) => `${code}${detailCode ? `/${detailCode}` : ''}`);
+  const bindingAttempts = plan.bindings
+    .map(({ cpp, identity, key, publicHaxe }) => {
+      const declaration = externDeclarationsByKey.get(key);
+      const refusal = externRefusalsByKey.get(key);
+      const compactRefusal = refusal
+        ? {
+            code: refusal.code,
+            ...(refusal.detailCode ? { detailCode: refusal.detailCode } : {}),
+            message: refusal.message,
+            phase: refusal.phase,
+          }
+        : {
+            code: 'declaration-missing',
+            message: 'No Haxe/C++ declaration or refusal was recorded',
+            phase: 'planning',
+          };
+      return {
+        cpp:
+          cpp.availability === 'available'
+            ? cpp
+            : {
+                availability: 'refused',
+                refusal: {
+                  code: cpp.refusal.code,
+                  ...(cpp.refusal.detailCode ? { detailCode: cpp.refusal.detailCode } : {}),
+                  message: cpp.refusal.message,
+                },
+              },
+        haxeCpp: declaration
+          ? { status: 'emitted' }
+          : { refusal: compactRefusal, status: 'refused' },
+        package: identity.packageName,
+        publicHaxe,
+        source: identity.source,
+      };
+    })
+    .sort(
+      (left, right) =>
+        compareText(left.publicHaxe.qualifiedName, right.publicHaxe.qualifiedName) ||
+        compareText(left.package, right.package) ||
+        compareText(left.source, right.source),
+    );
   const namingDivergences = plan.bindings
     .filter(
       ({ javascript, publicHaxe }) =>
@@ -694,6 +737,7 @@ function createNativeBindingPlanningReport(
       };
     });
   return {
+    bindingAttempts,
     declarations,
     namingDivergences,
     packages,

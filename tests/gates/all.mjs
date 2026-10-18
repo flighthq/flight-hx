@@ -12,6 +12,8 @@ const scripts = [
   'gate:surface',
   'gate:default-api',
   'gate:native-surface',
+  'gate:native-types',
+  'gate:native-attempts',
   'gate:bindings',
   'refresh:transpile-surface:check',
   'gate:parity',

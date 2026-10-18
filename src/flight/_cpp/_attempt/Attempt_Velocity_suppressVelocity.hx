@@ -1,0 +1,11 @@
+// Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.
+package flight._cpp._attempt;
+
+#if cpp
+import flight.*;
+@:include("flight/velocity/contract.hpp")
+extern class Attempt_Velocity_suppressVelocity extends AttemptConfig {
+  @:native("flight::velocity::suppress_velocity")
+  public static function suppressVelocity(field:flight.VelocityField, source:Dynamic):Void;
+}
+#end

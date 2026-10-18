@@ -32,10 +32,12 @@ conditionals would let one unsupported native type poison otherwise usable decla
   free-function shape, and `inline` makes the forwarding layer zero-cost. A bare
   `import flight.Math` yields its unqualified functions; `import flight.Math.*` does not, because
   Haxe interprets that as a type wildcard.
-- **Web is generated complete; native is fail-loud and manifest-exact.** `generated/js/flight`
-  contains every current SDK type, function, and value. `src-cpp/flight` shadows only declarations
-  proven against flight-cpp. Importing an unbound native module fails at compile time instead of
-  falling through to a stale or fictitious implementation.
+- **Web is generated complete; native has proven and attempted tiers.** `generated/js/flight`
+  contains every current SDK type, function, and value. `src-cpp/manifest.json` remains the exact
+  compile/run-proven flight-cpp partition. Alongside it, generated native facades materialize every
+  declaration for which flight-cpp exposes a symbol, including compiler-refused experiments; their
+  separate attempt ledgers prevent Haxe type-check success from being mistaken for ABI proof.
+  Declarations with no flight-cpp symbol remain fail-loud and are recorded rather than invented.
 
 The selector **fails loud** on an unsupported target (`#error`), never silently resolves to nothing. It keys on the **packaging pipeline, not the raw target** (see the host-axis section) — precedence:
 
@@ -110,8 +112,10 @@ TS-to-Haxe transpilation is useful optional reach, not a prerequisite for the we
   ledger. Missing, invented, duplicated, or drifted public declarations fail.
 - **Native-surface reconciliation gate** — reconcile all 153 web package contracts with
   flight-cpp's complete/dependency-incomplete/refused module inventory and the exact
-  `src-cpp/manifest.json` partition. Header-confirmed scalar functions remain probe candidates,
-  never silently promoted to support.
+  `src-cpp/manifest.json` partition plus the symbol-backed type/function/value attempt ledgers.
+  The attempt gates load all 3,073 types and all 1,126 unproven function/value declarations on the
+  C++ target. Header-confirmed or Haxe-type-checking declarations remain probe candidates, never
+  silently promoted to compile-proven support.
 - **Compiler-coverage gate** — reconcile manifests, initialization plans, refusal ledgers, public runtime export partitions, and public type aliases in both directions; ratchet the pinned corpus so support may improve but cannot silently shrink.
 - **Runtime-contract gate** — declare and verify `flight-runtime-contract/2`, `flight-runtime-constructor-abi/1`, and `flight-runtime-task-capability-abi/1`; compile every maintained runtime module on JS and execute the host-free portable subset on Haxe eval.
 - **Transpiled-source gate** — type-check all 7,224 compiler and compiler-derived backend files, execute public `flight.*` functions on JS, then run public Math/Effects plus compiler-emitted Float32/map/task code on Haxe eval.
@@ -135,7 +139,8 @@ Tiers (host per the host-axis rule — core examples use no host or Flight's own
 ## Status
 
 `flight-compiler` is the only source generator. The production lock pins Flight `a627849`, compiler
-`806d257`, and flight-cpp `f4821b`. Extern mode scans and accepts all 3,144 production modules in the
+`804435a`, and flight-cpp `a2fdb53`. The pinned flight-cpp SDK was generated with compiler `806d257`;
+both compiler revisions are recorded instead of being treated as equal. Extern mode scans and accepts all 3,144 production modules in the
 153-package SDK graph, emits 3,224 compiler files plus 3,197 complete public facade modules, and
 records two exact downstream compatibility corrections. Its full surface type-checks; the default
 `flight.*` API contains all 3,071 types, 6,906 functions, and 1,254 value fields. Those fields plus
@@ -154,16 +159,22 @@ The remaining 1,756 source modules stay explicit upstream compiler refusals, nev
 The ESM path consumes compiler-emitted `@:jsImport` externs through the vendored static-module
 generator. Extern generation (`generate:check:extern`) remains deterministic and part of the
 production check; a full new TS-to-Haxe transpile remains an explicit optional compiler-maintenance
-task. The direct `_cpp` slice exposes all ten manifest-recorded scalar functions from three generated
-Math/Color headers. An isolated `-lib flight` consumer compiles and runs the same Haxe source against
+task. The compile-proven `_cpp` slice exposes 122 functions across 24 holders. An isolated `-lib flight` consumer compiles and runs the same Haxe source against
 current flight-cpp on hxcpp and current Flight ESM on web. The same gate builds the current
 `Flight::HostSdlGl`, then compiles and runs the packaged Haxe native sample through a real SDL3 window,
 OpenGL context, clear, and present. The portable generated renderer surface remains future work; the
 native platform extension does not overstate it.
 
 `src-cpp/reconciliation.json` makes the remaining native work concrete: flight-cpp currently has
-1,893 dependency-complete modules, 670 dependency-incomplete modules, and 588 refused modules. The
-default native surface proves ten functions and three upstream Scene2D types (plus the maintained
-`Scene2dNode` integration handle). It also locates 183 public scalar functions with inline generated
-C++ definitions; ten are already bound, leaving 173 compile-probe candidates across 45 packages.
-All other signatures remain explicit representation/ownership or compiler-closure work.
+1,902 dependency-complete modules, 672 dependency-incomplete modules, and 577 refused modules. The
+compile/run-proven native surface has 122 functions and three upstream Scene2D types (plus the
+maintained `Scene2dNode` integration handle). The broader default native root attempts every one of
+the 4,268 declarations for which flight-cpp provides a locator: 3,073 types, 747 still-unproven
+functions, 379 still-unproven values, and 69 already-proven functions are materialized; 44 nested
+generic reference types use generated alias-template adapters. Every unproven function/value has a
+per-symbol hidden `extern inline` boundary, preventing an imported proven holder from compiling all
+of its experimental siblings. The other 6,979 public rows have no flight-cpp symbol and remain
+explicitly unavailable. All attempts type-check on the Haxe C++ target, while an actual hxcpp probe
+records the first concrete ABI seam—`flight::Array<double>` cannot become hxcpp `Array<double>`
+without an adapter. The 69 remaining header-confirmed scalar candidates and every complex carrier
+remain unpromoted until compile/run evidence exists.

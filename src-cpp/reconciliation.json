@@ -1,6 +1,10 @@
 {
   "limitations": [
     {
+      "code": "attempted-is-not-compile-proven",
+      "reason": "Every flight-cpp-symbol-backed declaration is materialized in the default native Haxe root, but declarations outside nativeDefault remain explicit experiments. Haxe target type-checking proves their public tree; per-carrier hxcpp adapters and compile/run promotion are still required before they count as compile-proven."
+    },
+    {
       "code": "target-specific-facade-roots",
       "reason": "Haxe resolves every signature in a loaded module, so one mixed facade would let an unsupported native type poison otherwise supported declarations. Package.configure selects complete target-specific roots behind flight_hx, js+flight_esm, or cpp defines."
     },
@@ -139,12 +143,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 2
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 2
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 2,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/abc",
       "scalarProbeCandidates": [],
@@ -183,12 +197,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 6
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 6
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 6,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/accessibility",
       "scalarProbeCandidates": [],
@@ -231,12 +255,26 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 69
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 64
+        },
+        {
+          "code": "native-materialized-unproven-values",
+          "count": 5
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 64,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 5
       },
       "package": "@flighthq/adjustments",
       "scalarProbeCandidates": [],
@@ -292,12 +330,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 67
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 67
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 67,
+        "values": 0
       },
       "package": "@flighthq/animation",
       "scalarProbeCandidates": [],
@@ -353,12 +401,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 127
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 127
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 127,
+        "values": 0
       },
       "package": "@flighthq/app",
       "scalarProbeCandidates": [],
@@ -418,12 +476,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 19
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 19
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 19,
+        "values": 0
       },
       "package": "@flighthq/assets",
       "scalarProbeCandidates": [],
@@ -462,6 +530,10 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 34
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 34
         }
       ],
       "nativeDefault": {
@@ -475,6 +547,12 @@
         ],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 34,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/audio",
       "scalarProbeCandidates": [],
@@ -517,12 +595,26 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 4
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 3
+        },
+        {
+          "code": "native-materialized-unproven-values",
+          "count": 1
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 3,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 1
       },
       "package": "@flighthq/binpack",
       "scalarProbeCandidates": [],
@@ -569,12 +661,30 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 113
+        },
+        {
+          "code": "native-materialized-unproven-types",
+          "count": 1
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 106
+        },
+        {
+          "code": "native-materialized-unproven-values",
+          "count": 6
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 106,
+        "types": 1,
+        "unavailableUpstream": 0,
+        "values": 6
       },
       "package": "@flighthq/bitmap",
       "scalarProbeCandidates": [],
@@ -634,6 +744,10 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 18
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 18
         }
       ],
       "nativeDefault": {
@@ -647,6 +761,12 @@
         ],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 18,
+        "values": 0
       },
       "package": "@flighthq/bitmapfont",
       "scalarProbeCandidates": [
@@ -731,12 +851,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 22
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 22
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 22,
+        "values": 0
       },
       "package": "@flighthq/bitmapfont-formats",
       "scalarProbeCandidates": [],
@@ -796,12 +926,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 26
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 26
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 26,
+        "values": 0
       },
       "package": "@flighthq/bitmaptext",
       "scalarProbeCandidates": [
@@ -878,12 +1018,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 55
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 55
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 55,
+        "values": 0
       },
       "package": "@flighthq/camera",
       "scalarProbeCandidates": [
@@ -959,12 +1109,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 31
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 31
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 31,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/camera-controls",
       "scalarProbeCandidates": [],
@@ -1024,12 +1184,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 12
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 12
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 12,
+        "values": 0
       },
       "package": "@flighthq/capture",
       "scalarProbeCandidates": [],
@@ -1081,12 +1251,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 36
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 36
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 36,
+        "values": 0
       },
       "package": "@flighthq/clip",
       "scalarProbeCandidates": [
@@ -1150,12 +1330,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 27
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 27
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 27,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/clipboard",
       "scalarProbeCandidates": [],
@@ -1194,12 +1384,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 15
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 15
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 15,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/clock",
       "scalarProbeCandidates": [],
@@ -1259,6 +1459,10 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 141
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 141
         }
       ],
       "nativeDefault": {
@@ -1272,6 +1476,12 @@
         ],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 141,
+        "values": 0
       },
       "package": "@flighthq/collision",
       "scalarProbeCandidates": [],
@@ -1309,6 +1519,10 @@
         },
         {
           "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 16
+        },
+        {
+          "code": "native-materialized-unproven-functions",
           "count": 16
         }
       ],
@@ -1408,6 +1622,12 @@
         "types": [],
         "values": []
       },
+      "nativeAttempts": {
+        "functions": 16,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
+      },
       "package": "@flighthq/color",
       "scalarProbeCandidates": [],
       "status": "partial-native",
@@ -1462,12 +1682,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 36
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 36
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 36,
+        "values": 0
       },
       "package": "@flighthq/command",
       "scalarProbeCandidates": [],
@@ -1510,12 +1740,26 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 14
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 4
+        },
+        {
+          "code": "native-materialized-unproven-values",
+          "count": 10
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 4,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 10
       },
       "package": "@flighthq/compression",
       "scalarProbeCandidates": [],
@@ -1571,12 +1815,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 12
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 12
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 12,
+        "values": 0
       },
       "package": "@flighthq/connectivity",
       "scalarProbeCandidates": [],
@@ -1632,12 +1886,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 10
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 10
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 10,
+        "values": 0
       },
       "package": "@flighthq/debug",
       "scalarProbeCandidates": [],
@@ -1676,12 +1940,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 10
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 10
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 10,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/device",
       "scalarProbeCandidates": [],
@@ -1737,12 +2011,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 16
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 16
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 16,
+        "values": 0
       },
       "package": "@flighthq/dialog",
       "scalarProbeCandidates": [],
@@ -1806,12 +2090,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 54
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 54
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 54,
+        "values": 0
       },
       "package": "@flighthq/easing",
       "scalarProbeCandidates": [
@@ -1895,6 +2189,10 @@
         },
         {
           "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 213
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
           "count": 213
         }
       ],
@@ -2000,6 +2298,12 @@
         "types": [],
         "values": []
       },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 213,
+        "values": 0
+      },
       "package": "@flighthq/effects",
       "scalarProbeCandidates": [],
       "status": "partial-native",
@@ -2058,12 +2362,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 88
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 88
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 88,
+        "values": 0
       },
       "package": "@flighthq/effects-canvas",
       "scalarProbeCandidates": [],
@@ -2123,12 +2437,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 187
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 187
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 187,
+        "values": 0
       },
       "package": "@flighthq/effects-gl",
       "scalarProbeCandidates": [],
@@ -2192,12 +2516,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 187
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 187
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 187,
+        "values": 0
       },
       "package": "@flighthq/effects-wgpu",
       "scalarProbeCandidates": [
@@ -2249,12 +2583,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 2
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 2
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 2,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/encoding",
       "scalarProbeCandidates": [],
@@ -2293,6 +2637,10 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 19
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 19
         }
       ],
       "nativeDefault": {
@@ -2318,6 +2666,12 @@
         ],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 19,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/entity",
       "scalarProbeCandidates": [],
@@ -2373,12 +2727,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 40
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 40
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 40,
+        "values": 0
       },
       "package": "@flighthq/filesystem",
       "scalarProbeCandidates": [],
@@ -2430,12 +2794,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 13
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 13
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 13,
+        "values": 0
       },
       "package": "@flighthq/flow",
       "scalarProbeCandidates": [
@@ -2516,12 +2890,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 17
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 17
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 17,
+        "values": 0
       },
       "package": "@flighthq/font",
       "scalarProbeCandidates": [],
@@ -2585,6 +2969,10 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 58
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 58
         }
       ],
       "nativeDefault": {
@@ -2610,6 +2998,12 @@
         ],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 58,
+        "values": 0
       },
       "package": "@flighthq/font-formats",
       "scalarProbeCandidates": [],
@@ -2648,12 +3042,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 8
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 8
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 8,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/geolocation",
       "scalarProbeCandidates": [],
@@ -2708,6 +3112,10 @@
         },
         {
           "code": "compiler-haxe-cpp-refused-bindings",
+          "count": 408
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
           "count": 408
         }
       ],
@@ -2764,6 +3172,12 @@
         ],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 408,
+        "values": 0
       },
       "package": "@flighthq/geometry",
       "scalarProbeCandidates": [
@@ -2856,12 +3270,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 18
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 18
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 18,
+        "values": 0
       },
       "package": "@flighthq/gizmo",
       "scalarProbeCandidates": [],
@@ -2921,12 +3345,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 19
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 19
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 19,
+        "values": 0
       },
       "package": "@flighthq/glyphatlas",
       "scalarProbeCandidates": [
@@ -3007,12 +3441,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 106
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 106
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 106,
+        "values": 0
       },
       "package": "@flighthq/gui",
       "scalarProbeCandidates": [],
@@ -3051,12 +3495,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 10
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 10
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 10,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/haptics",
       "scalarProbeCandidates": [],
@@ -3104,12 +3558,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 67
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 67
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 67,
+        "values": 0
       },
       "package": "@flighthq/host",
       "scalarProbeCandidates": [],
@@ -3169,6 +3633,10 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 28
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 28
         }
       ],
       "nativeDefault": {
@@ -3188,6 +3656,12 @@
         ],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 28,
+        "values": 0
       },
       "package": "@flighthq/image",
       "scalarProbeCandidates": [],
@@ -3226,12 +3700,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 4
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 4
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 4,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/image-codec",
       "scalarProbeCandidates": [],
@@ -3270,12 +3754,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 3
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 3
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 3,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/importdiagnostics",
       "scalarProbeCandidates": [],
@@ -3314,6 +3808,10 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 33
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 33
         }
       ],
       "nativeDefault": {
@@ -3327,6 +3825,12 @@
         ],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 33,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/input",
       "scalarProbeCandidates": [],
@@ -3386,12 +3890,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 92
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 92
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 92,
+        "values": 0
       },
       "package": "@flighthq/interaction",
       "scalarProbeCandidates": [
@@ -3484,12 +3998,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 16
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 16
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 16,
+        "values": 0
       },
       "package": "@flighthq/intl",
       "scalarProbeCandidates": [],
@@ -3528,12 +4052,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 6
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 6
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 6,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/ipc",
       "scalarProbeCandidates": [],
@@ -3572,12 +4106,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 14
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 14
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 14,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/keyboard",
       "scalarProbeCandidates": [],
@@ -3633,12 +4177,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 9
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 9
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 9,
+        "values": 0
       },
       "package": "@flighthq/layout",
       "scalarProbeCandidates": [],
@@ -3694,12 +4248,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 13
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 13
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 13,
+        "values": 0
       },
       "package": "@flighthq/lifecycle",
       "scalarProbeCandidates": [],
@@ -3755,6 +4319,10 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 49
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 49
         }
       ],
       "nativeDefault": {
@@ -3768,6 +4336,12 @@
         ],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 49,
+        "values": 0
       },
       "package": "@flighthq/lighting",
       "scalarProbeCandidates": [],
@@ -3823,12 +4397,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 18
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 18
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 18,
+        "values": 0
       },
       "package": "@flighthq/loader",
       "scalarProbeCandidates": [],
@@ -3884,12 +4468,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 61
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 61
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 61,
+        "values": 0
       },
       "package": "@flighthq/log",
       "scalarProbeCandidates": [],
@@ -3949,6 +4543,10 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 95
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 95
         }
       ],
       "nativeDefault": {
@@ -4004,6 +4602,12 @@
         ],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 95,
+        "values": 0
       },
       "package": "@flighthq/materials",
       "scalarProbeCandidates": [
@@ -4075,6 +4679,18 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 33
+        },
+        {
+          "code": "native-materialized-unproven-types",
+          "count": 1
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 23
+        },
+        {
+          "code": "native-materialized-unproven-values",
+          "count": 6
         }
       ],
       "nativeDefault": {
@@ -4347,6 +4963,12 @@
         "types": [],
         "values": []
       },
+      "nativeAttempts": {
+        "functions": 23,
+        "types": 1,
+        "unavailableUpstream": 0,
+        "values": 6
+      },
       "package": "@flighthq/math",
       "scalarProbeCandidates": [],
       "status": "partial-native",
@@ -4405,12 +5027,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 59
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 59
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 59,
+        "values": 0
       },
       "package": "@flighthq/media",
       "scalarProbeCandidates": [
@@ -4474,12 +5106,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 11
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 11
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 11,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/mediasession",
       "scalarProbeCandidates": [],
@@ -4535,12 +5177,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 24
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 24
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 24,
+        "values": 0
       },
       "package": "@flighthq/menu",
       "scalarProbeCandidates": [],
@@ -4600,12 +5252,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 89
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 89
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 89,
+        "values": 0
       },
       "package": "@flighthq/mesh",
       "scalarProbeCandidates": [],
@@ -4661,12 +5323,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 37
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 37
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 37,
+        "values": 0
       },
       "package": "@flighthq/midi",
       "scalarProbeCandidates": [],
@@ -4705,12 +5377,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 10
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 10
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 10,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/motionpath",
       "scalarProbeCandidates": [],
@@ -4770,12 +5452,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 30
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 30
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 30,
+        "values": 0
       },
       "package": "@flighthq/movieclip",
       "scalarProbeCandidates": [
@@ -4868,12 +5560,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 8
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 8
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 8,
+        "values": 0
       },
       "package": "@flighthq/net",
       "scalarProbeCandidates": [
@@ -4962,12 +5664,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 134
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 134
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 134,
+        "values": 0
       },
       "package": "@flighthq/node",
       "scalarProbeCandidates": [
@@ -5060,12 +5772,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 36
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 36
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 36,
+        "values": 0
       },
       "package": "@flighthq/notification",
       "scalarProbeCandidates": [],
@@ -5129,12 +5851,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 53
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 53
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 53,
+        "values": 0
       },
       "package": "@flighthq/particleemitter",
       "scalarProbeCandidates": [],
@@ -5194,12 +5926,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 32
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 32
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 32,
+        "values": 0
       },
       "package": "@flighthq/particles",
       "scalarProbeCandidates": [],
@@ -5259,12 +6001,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 41
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 41
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 41,
+        "values": 0
       },
       "package": "@flighthq/particles-formats",
       "scalarProbeCandidates": [],
@@ -5311,6 +6063,18 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 77
+        },
+        {
+          "code": "native-materialized-unproven-types",
+          "count": 6
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 64
+        },
+        {
+          "code": "native-materialized-unproven-values",
+          "count": 11
         }
       ],
       "nativeDefault": {
@@ -5330,6 +6094,12 @@
         ],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 64,
+        "types": 6,
+        "unavailableUpstream": 0,
+        "values": 11
       },
       "package": "@flighthq/path",
       "scalarProbeCandidates": [],
@@ -5389,12 +6159,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 15
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 15
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 15,
+        "values": 0
       },
       "package": "@flighthq/path-boolean",
       "scalarProbeCandidates": [],
@@ -5433,12 +6213,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 4
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 4
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 4,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/path-formats",
       "scalarProbeCandidates": [],
@@ -5477,12 +6267,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 3
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 3
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 3,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/permissions",
       "scalarProbeCandidates": [],
@@ -5542,12 +6342,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 140
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 140
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 140,
+        "values": 0
       },
       "package": "@flighthq/physics2d",
       "scalarProbeCandidates": [],
@@ -5607,12 +6417,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 82
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 82
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 82,
+        "values": 0
       },
       "package": "@flighthq/physics2d-abi",
       "scalarProbeCandidates": [],
@@ -5672,12 +6492,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 233
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 233
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 233,
+        "values": 0
       },
       "package": "@flighthq/physics3d",
       "scalarProbeCandidates": [],
@@ -5737,12 +6567,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 78
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 78
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 78,
+        "values": 0
       },
       "package": "@flighthq/physics3d-abi",
       "scalarProbeCandidates": [],
@@ -5798,12 +6638,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 12
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 12
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 12,
+        "values": 0
       },
       "package": "@flighthq/picking",
       "scalarProbeCandidates": [],
@@ -5842,12 +6692,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 14
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 14
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 14,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/platform",
       "scalarProbeCandidates": [],
@@ -5886,6 +6746,10 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 17
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 17
         }
       ],
       "nativeDefault": {
@@ -5905,6 +6769,12 @@
         ],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 17,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/power",
       "scalarProbeCandidates": [],
@@ -5960,12 +6830,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 39
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 39
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 39,
+        "values": 0
       },
       "package": "@flighthq/preferences",
       "scalarProbeCandidates": [],
@@ -6004,6 +6884,10 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 17
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 17
         }
       ],
       "nativeDefault": {
@@ -6017,6 +6901,12 @@
         ],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 17,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/protocol",
       "scalarProbeCandidates": [],
@@ -6076,12 +6966,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 33
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 33
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 33,
+        "values": 0
       },
       "package": "@flighthq/quadbatch",
       "scalarProbeCandidates": [],
@@ -6120,12 +7020,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 6
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 6
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 6,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/registry",
       "scalarProbeCandidates": [],
@@ -6193,12 +7103,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 84
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 84
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 84,
+        "values": 0
       },
       "package": "@flighthq/render",
       "scalarProbeCandidates": [
@@ -6283,12 +7203,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 144
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 144
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 144,
+        "values": 0
       },
       "package": "@flighthq/render-gl",
       "scalarProbeCandidates": [],
@@ -6352,12 +7282,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 156
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 156
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 156,
+        "values": 0
       },
       "package": "@flighthq/render-wgpu",
       "scalarProbeCandidates": [
@@ -6409,12 +7349,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 6
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 6
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 6,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/requirement",
       "scalarProbeCandidates": [],
@@ -6457,12 +7407,26 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 9
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 5
+        },
+        {
+          "code": "native-materialized-unproven-values",
+          "count": 4
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 5,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 4
       },
       "package": "@flighthq/requirement-catalog",
       "scalarProbeCandidates": [],
@@ -6501,12 +7465,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 2
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 2
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 2,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/requirement-codegen",
       "scalarProbeCandidates": [],
@@ -6562,12 +7536,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 36
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 36
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 36,
+        "values": 0
       },
       "package": "@flighthq/scene-document",
       "scalarProbeCandidates": [],
@@ -6623,12 +7607,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 44
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 44
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 44,
+        "values": 0
       },
       "package": "@flighthq/scene2d",
       "scalarProbeCandidates": [],
@@ -6692,12 +7686,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 146
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 146
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 146,
+        "values": 0
       },
       "package": "@flighthq/scene2d-canvas",
       "scalarProbeCandidates": [
@@ -6774,12 +7778,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 87
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 87
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 87,
+        "values": 0
       },
       "package": "@flighthq/scene2d-dom",
       "scalarProbeCandidates": [
@@ -6852,6 +7866,10 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 215
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 215
         }
       ],
       "nativeDefault": {
@@ -6871,6 +7889,12 @@
         ],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 215,
+        "values": 0
       },
       "package": "@flighthq/scene2d-formats",
       "scalarProbeCandidates": [],
@@ -6934,12 +7958,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 93
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 93
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 93,
+        "values": 0
       },
       "package": "@flighthq/scene2d-gl",
       "scalarProbeCandidates": [
@@ -7000,12 +8034,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 22
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 22
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 22,
+        "values": 0
       },
       "package": "@flighthq/scene2d-resources",
       "scalarProbeCandidates": [],
@@ -7069,12 +8113,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 91
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 91
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 91,
+        "values": 0
       },
       "package": "@flighthq/scene2d-wgpu",
       "scalarProbeCandidates": [
@@ -7147,12 +8201,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 70
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 70
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 70,
+        "values": 0
       },
       "package": "@flighthq/scene3d",
       "scalarProbeCandidates": [],
@@ -7216,6 +8280,10 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 344
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 344
         }
       ],
       "nativeDefault": {
@@ -7235,6 +8303,12 @@
         ],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 344,
+        "values": 0
       },
       "package": "@flighthq/scene3d-formats",
       "scalarProbeCandidates": [
@@ -7335,12 +8409,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 205
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 205
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 205,
+        "values": 0
       },
       "package": "@flighthq/scene3d-gl",
       "scalarProbeCandidates": [],
@@ -7400,12 +8484,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 54
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 54
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 54,
+        "values": 0
       },
       "package": "@flighthq/scene3d-resources",
       "scalarProbeCandidates": [],
@@ -7469,12 +8563,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 170
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 170
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 170,
+        "values": 0
       },
       "package": "@flighthq/scene3d-wgpu",
       "scalarProbeCandidates": [],
@@ -7513,12 +8617,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 31
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 31
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 31,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/screen",
       "scalarProbeCandidates": [],
@@ -7574,12 +8688,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 28
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 28
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 28,
+        "values": 0
       },
       "package": "@flighthq/selection",
       "scalarProbeCandidates": [],
@@ -7618,12 +8742,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 37
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 37
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 37,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/sensors",
       "scalarProbeCandidates": [],
@@ -7683,12 +8817,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 36
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 36
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 36,
+        "values": 0
       },
       "package": "@flighthq/shading",
       "scalarProbeCandidates": [],
@@ -7756,6 +8900,10 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 101
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 101
         }
       ],
       "nativeDefault": {
@@ -7781,6 +8929,12 @@
         ],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 101,
+        "values": 0
       },
       "package": "@flighthq/shape",
       "scalarProbeCandidates": [
@@ -7889,12 +9043,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 3
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 3
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 3,
+        "values": 0
       },
       "package": "@flighthq/shape-formats",
       "scalarProbeCandidates": [],
@@ -7950,12 +9114,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 14
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 14
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 14,
+        "values": 0
       },
       "package": "@flighthq/share",
       "scalarProbeCandidates": [],
@@ -7994,12 +9168,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 10
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 10
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 10,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/shell",
       "scalarProbeCandidates": [],
@@ -8055,12 +9239,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 21
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 21
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 21,
+        "values": 0
       },
       "package": "@flighthq/shortcut",
       "scalarProbeCandidates": [],
@@ -8120,12 +9314,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 21
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 21
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 21,
+        "values": 0
       },
       "package": "@flighthq/signals",
       "scalarProbeCandidates": [],
@@ -8185,12 +9389,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 64
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 64
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 64,
+        "values": 0
       },
       "package": "@flighthq/skeleton2d",
       "scalarProbeCandidates": [],
@@ -8250,6 +9464,10 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 209
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 209
         }
       ],
       "nativeDefault": {
@@ -8269,6 +9487,12 @@
         ],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 209,
+        "values": 0
       },
       "package": "@flighthq/skeleton2d-formats",
       "scalarProbeCandidates": [],
@@ -8324,12 +9548,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 27
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 27
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 27,
+        "values": 0
       },
       "package": "@flighthq/skeleton3d",
       "scalarProbeCandidates": [],
@@ -8385,12 +9619,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 7
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 7
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 7,
+        "values": 0
       },
       "package": "@flighthq/snapshot",
       "scalarProbeCandidates": [],
@@ -8442,12 +9686,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 14
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 14
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 14,
+        "values": 0
       },
       "package": "@flighthq/socket",
       "scalarProbeCandidates": [
@@ -8544,12 +9798,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 34
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 34
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 34,
+        "values": 0
       },
       "package": "@flighthq/spatial",
       "scalarProbeCandidates": [],
@@ -8592,12 +9856,26 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 24
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 21
+        },
+        {
+          "code": "native-materialized-unproven-values",
+          "count": 3
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 21,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 3
       },
       "package": "@flighthq/spring",
       "scalarProbeCandidates": [],
@@ -8657,12 +9935,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 38
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 38
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 38,
+        "values": 0
       },
       "package": "@flighthq/spritesheet",
       "scalarProbeCandidates": [],
@@ -8722,12 +10010,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 27
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 27
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 27,
+        "values": 0
       },
       "package": "@flighthq/spritesheet-formats",
       "scalarProbeCandidates": [],
@@ -8775,12 +10073,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 17
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 17
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 17,
+        "values": 0
       },
       "package": "@flighthq/statechart",
       "scalarProbeCandidates": [],
@@ -8836,12 +10144,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 18
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 18
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 18,
+        "values": 0
       },
       "package": "@flighthq/statusbar",
       "scalarProbeCandidates": [],
@@ -8897,12 +10215,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 14
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 14
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 14,
+        "values": 0
       },
       "package": "@flighthq/surface",
       "scalarProbeCandidates": [],
@@ -8970,6 +10298,10 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 114
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 114
         }
       ],
       "nativeDefault": {
@@ -8983,6 +10315,12 @@
         ],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 114,
+        "values": 0
       },
       "package": "@flighthq/swf",
       "scalarProbeCandidates": [
@@ -9079,12 +10417,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 93
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 93
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 93,
+        "values": 0
       },
       "package": "@flighthq/text",
       "scalarProbeCandidates": [
@@ -9169,12 +10517,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 13
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 13
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 13,
+        "values": 0
       },
       "package": "@flighthq/text-markup",
       "scalarProbeCandidates": [
@@ -9263,6 +10621,10 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 11
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 11
         }
       ],
       "nativeDefault": {
@@ -9276,6 +10638,12 @@
         ],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 11,
+        "values": 0
       },
       "package": "@flighthq/textbidi",
       "scalarProbeCandidates": [
@@ -9356,12 +10724,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 57
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 57
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 57,
+        "values": 0
       },
       "package": "@flighthq/textinput",
       "scalarProbeCandidates": [],
@@ -9421,12 +10799,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 52
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 52
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 52,
+        "values": 0
       },
       "package": "@flighthq/textlayout",
       "scalarProbeCandidates": [],
@@ -9490,6 +10878,10 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 16
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 16
         }
       ],
       "nativeDefault": {
@@ -9503,6 +10895,12 @@
         ],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 16,
+        "values": 0
       },
       "package": "@flighthq/textsegment",
       "scalarProbeCandidates": [
@@ -9587,6 +10985,10 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 36
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 36
         }
       ],
       "nativeDefault": {
@@ -9600,6 +11002,12 @@
         ],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 36,
+        "values": 0
       },
       "package": "@flighthq/textshaper",
       "scalarProbeCandidates": [
@@ -9680,12 +11088,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 59
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 59
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 59,
+        "values": 0
       },
       "package": "@flighthq/texture",
       "scalarProbeCandidates": [],
@@ -9741,12 +11159,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 23
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 23
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 23,
+        "values": 0
       },
       "package": "@flighthq/texture-formats",
       "scalarProbeCandidates": [],
@@ -9802,12 +11230,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 36
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 36
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 36,
+        "values": 0
       },
       "package": "@flighthq/textureatlas",
       "scalarProbeCandidates": [],
@@ -9859,12 +11297,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 20
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 20
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 20,
+        "values": 0
       },
       "package": "@flighthq/textureatlas-formats",
       "scalarProbeCandidates": [],
@@ -9920,12 +11368,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 24
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 24
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 24,
+        "values": 0
       },
       "package": "@flighthq/tilemap",
       "scalarProbeCandidates": [],
@@ -9989,12 +11447,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 38
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 38
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 38,
+        "values": 0
       },
       "package": "@flighthq/tilemap-formats",
       "scalarProbeCandidates": [
@@ -10058,12 +11526,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 21
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 21
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 21,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/timeline",
       "scalarProbeCandidates": [],
@@ -10123,12 +11601,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 10
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 10
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 10,
+        "values": 0
       },
       "package": "@flighthq/tokens",
       "scalarProbeCandidates": [],
@@ -10188,12 +11676,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 30
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 30
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 30,
+        "values": 0
       },
       "package": "@flighthq/tray",
       "scalarProbeCandidates": [
@@ -10278,12 +11776,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 33
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 33
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 33,
+        "values": 0
       },
       "package": "@flighthq/tween",
       "scalarProbeCandidates": [],
@@ -10322,6 +11830,14 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 1223
+        },
+        {
+          "code": "native-materialized-unproven-types",
+          "count": 3065
+        },
+        {
+          "code": "native-materialized-unproven-values",
+          "count": 333
         }
       ],
       "nativeDefault": {
@@ -10332,6 +11848,12 @@
           "Sprite"
         ],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 3065,
+        "unavailableUpstream": 0,
+        "values": 333
       },
       "package": "@flighthq/types",
       "scalarProbeCandidates": [],
@@ -10387,12 +11909,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 3
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 3
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 3,
+        "values": 0
       },
       "package": "@flighthq/updater",
       "scalarProbeCandidates": [],
@@ -10448,12 +11980,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 12
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 12
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 12,
+        "values": 0
       },
       "package": "@flighthq/useragent",
       "scalarProbeCandidates": [],
@@ -10492,12 +12034,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 22
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 22
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 22,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/velocity",
       "scalarProbeCandidates": [],
@@ -10553,12 +12105,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 17
+        },
+        {
+          "code": "flight-cpp-symbol-unavailable",
+          "count": 17
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 17,
+        "values": 0
       },
       "package": "@flighthq/video",
       "scalarProbeCandidates": [],
@@ -10590,6 +12152,12 @@
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 0,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/webcam",
       "scalarProbeCandidates": [],
@@ -10628,12 +12196,22 @@
         {
           "code": "compiler-haxe-cpp-refused-bindings",
           "count": 6
+        },
+        {
+          "code": "native-materialized-unproven-functions",
+          "count": 6
         }
       ],
       "nativeDefault": {
         "functions": [],
         "types": [],
         "values": []
+      },
+      "nativeAttempts": {
+        "functions": 6,
+        "types": 0,
+        "unavailableUpstream": 0,
+        "values": 0
       },
       "package": "@flighthq/xml",
       "scalarProbeCandidates": [],
@@ -10670,6 +12248,55 @@
       "scalarOverrideRefusals": 0,
       "types": 3,
       "values": 0
+    },
+    "nativeAttempts": {
+      "bindingCarrierFamilies": [
+        {
+          "count": 80,
+          "name": "anonymous-structure"
+        },
+        {
+          "count": 122,
+          "name": "array"
+        },
+        {
+          "count": 12,
+          "name": "callback"
+        },
+        {
+          "count": 76,
+          "name": "dynamic"
+        },
+        {
+          "count": 19,
+          "name": "generic-function"
+        },
+        {
+          "count": 748,
+          "name": "named"
+        },
+        {
+          "count": 69,
+          "name": "nullable"
+        },
+        {
+          "count": 298,
+          "name": "scalar-value"
+        },
+        {
+          "count": 53,
+          "name": "typed-array"
+        }
+      ],
+      "compileProbes": 1,
+      "cppAvailable": 4268,
+      "cppUnavailable": 6979,
+      "functions": 747,
+      "genericReferenceTemplateAdapters": 44,
+      "haxeTypecheck": "pass",
+      "isolatedFunctionValueExterns": 1126,
+      "types": 3073,
+      "values": 379
     },
     "compilerPlan": {
       "bindings": 11247,

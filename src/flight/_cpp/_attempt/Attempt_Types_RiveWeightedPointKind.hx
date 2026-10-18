@@ -1,0 +1,11 @@
+// Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.
+package flight._cpp._attempt;
+
+#if cpp
+import flight.*;
+@:include("flight/types/contract.hpp")
+extern class Attempt_Types_RiveWeightedPointKind extends AttemptConfig {
+  @:native("flight::types::rive_weighted_point_kind")
+  public static var RiveWeightedPointKind:{ Point:String, In:String, Out:String };
+}
+#end

@@ -2,10 +2,13 @@
 package flight._cpp._fn;
 
 #if cpp
+import flight.*;
 @:buildXml('
 <error value="flight_cpp_root must name the pinned or installed flight-cpp root" unless="flight_cpp_root" />
 <error value="flight_hx_root must name the flight-hx package root" unless="flight_hx_root" />
 <set name="NO_PRECOMPILED_HEADERS" value="1" />
+<set name="HXCPP_NO_CPP11" value="1" />
+<unset name="HXCPP_CPP11" />
 <files id="haxe">
   <file name="${removeQuotes:flight_hx_root}/src-cpp/src/effects.cpp" />
   <compilerflag value="/std:c++20" if="windows" />

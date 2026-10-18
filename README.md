@@ -7,7 +7,8 @@ This is not a Haxe reimplementation of Flight; it binds to it. See [AGENTS.md](A
 ## Layout
 
 - `src/flight/` — maintained runtime shim + the `flight.*` backend selectors.
-- `src-cpp/` — explicit native facade overrides, bridge headers, and the pinned support manifest.
+- `src-cpp/` — the compile-proven native manifest plus generated, explicitly unproven bindings for
+  every declaration that current flight-cpp locates.
 - `haxelib.json` + `lib/flight_hx/Package.hx` — installed-package metadata and target classpath election.
 - `generated/js` — compiler-emitted ESM externs; `generated/hx` — compiler-emitted transpiled fallback.
 - `tools/backend-hx/` — deterministic flight-compiler integration, compatibility, and provenance.
@@ -40,6 +41,8 @@ npm run gate:proof          # behavioral gate: proof runs, and no-backend fails 
 npm run gate:surface        # type-check every emitted extern and public type alias
 npm run gate:default-api    # exact bidirectional hidden-extern ↔ public flight.* comparison
 npm run gate:native-surface # reject drift in the package-by-package C++ reconciliation
+npm run gate:native-types   # type-check every symbol-backed native type attempt
+npm run gate:native-attempts # type-check every symbol-backed function/value attempt
 npm run gate:bindings       # verify every extern function/value against built real Flight ESM
 npm run gate:parity         # exact JS↔HX signatures + supported/unavailable partitions
 npm run gate:runtime        # declared compiler runtime ABI + portable behavior
@@ -91,13 +94,30 @@ compiler-emitted UTF-8 String adapters, 53 required-primitive overrides, and thr
 adapters from dependency-complete
 flight-cpp headers. It also records the generated SDK's
 distinct source/compiler revisions, C++20, and the two downstream hxcpp/flight-cpp corrections. The current generated native
-SDK reports 2,574 emitted modules; Haxe exposes only the smaller exact partition it actually proves.
+SDK reports 2,574 emitted modules. The manifest remains the exact compile/run-proven partition; the
+default native Haxe root now also exposes a separately recorded attempt tier instead of hiding
+unproven declarations.
 The checked `src-cpp/reconciliation.json` splits that total into 1,902 dependency-complete and 672
 dependency-incomplete modules, alongside 577 refused modules. It reconciles every web package with
 the 122 bound functions, three upstream Scene2D handle types, one integration-only handle, and the
-remaining gaps. It also identifies 69 unbound scalar functions across 32 packages whose signatures
-and inline generated C++ definitions make them the next compile-probe candidates; header presence
-does not promote them to support.
+remaining gaps. Of 11,247 public SDK rows, flight-cpp provides a locator for 4,268. All 3,073
+symbol-backed type attempts are materialized, including 894 declarations previously refused by the
+Haxe/C++ planner; 44 nested generic reference carriers use generated C++ alias templates. The same
+default `flight.*` root now contains the 69 compiler-located functions already in the proven
+partition plus 747 unproven function attempts and 379 unproven value attempts across 42 holders.
+Each attempt forwards through its own hidden `extern inline` class, so importing one proven holder
+does not compile all of its experimental siblings; selecting an attempt still reaches its real
+Flight header and symbol.
+The other 6,979 rows remain explicit `flight-cpp-symbol-unavailable` entries:
+there is no native symbol to bind yet.
+
+The attempt gates prove that this entire tree resolves and type-checks as Haxe for the C++ target;
+they deliberately do not relabel it ABI-safe. An actual hxcpp probe of
+`Adjustments.createBrightnessColorMatrix` reaches its Flight symbol and then fails at the first
+known carrier seam (`flight::Array<double>` versus hxcpp `Array<double>`), recorded as requiring an
+array adapter. Carrier-family counts in `src-cpp/binding-attempts.json` make the next adapter work
+concrete. The reconciliation still identifies 69 unpromoted scalar functions across 32 packages;
+header presence or type-check success never silently promotes an attempt to compile-proven support.
 The compiler-owned dual plan covers all 11,247 public rows and emits 2,245 Haxe-C++ declarations.
 All 66 header-passing function candidates are promoted: 62 directly and four through the compiler's
 exact adapter emissions (`Audio.getAudioMimeTypeEssence`, `Color.computeRgbHexString`,

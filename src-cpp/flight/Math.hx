@@ -176,3 +176,131 @@ inline function smoothStep(edge0:Float, edge1:Float, x:Float):Float {
 inline function step(edge:Float, x:Float):Float {
   return flight._cpp._fn.Math.step(edge, x);
 }
+
+var CIRCLE_KAPPA(get, set):Float;
+
+private extern inline function get_CIRCLE_KAPPA():Float return flight._cpp._attempt.Attempt_Math_CIRCLE_KAPPA.CIRCLE_KAPPA;
+
+private extern inline function set_CIRCLE_KAPPA(value:Float):Float return flight._cpp._attempt.Attempt_Math_CIRCLE_KAPPA.CIRCLE_KAPPA = value;
+
+var DEG_TO_RAD(get, set):Float;
+
+private extern inline function get_DEG_TO_RAD():Float return flight._cpp._attempt.Attempt_Math_DEG_TO_RAD.DEG_TO_RAD;
+
+private extern inline function set_DEG_TO_RAD(value:Float):Float return flight._cpp._attempt.Attempt_Math_DEG_TO_RAD.DEG_TO_RAD = value;
+
+var EPSILON(get, set):Float;
+
+private extern inline function get_EPSILON():Float return flight._cpp._attempt.Attempt_Math_EPSILON.EPSILON;
+
+private extern inline function set_EPSILON(value:Float):Float return flight._cpp._attempt.Attempt_Math_EPSILON.EPSILON = value;
+
+var HALF_PI(get, set):Float;
+
+private extern inline function get_HALF_PI():Float return flight._cpp._attempt.Attempt_Math_HALF_PI.HALF_PI;
+
+private extern inline function set_HALF_PI(value:Float):Float return flight._cpp._attempt.Attempt_Math_HALF_PI.HALF_PI = value;
+
+var RAD_TO_DEG(get, set):Float;
+
+private extern inline function get_RAD_TO_DEG():Float return flight._cpp._attempt.Attempt_Math_RAD_TO_DEG.RAD_TO_DEG;
+
+private extern inline function set_RAD_TO_DEG(value:Float):Float return flight._cpp._attempt.Attempt_Math_RAD_TO_DEG.RAD_TO_DEG = value;
+
+var TAU(get, set):Float;
+
+private extern inline function get_TAU():Float return flight._cpp._attempt.Attempt_Math_TAU.TAU;
+
+private extern inline function set_TAU(value:Float):Float return flight._cpp._attempt.Attempt_Math_TAU.TAU = value;
+
+extern inline function createRandomSource(seed:Float):flight.RandomSource {
+  return flight._cpp._attempt.Attempt_Math_createRandomSource.createRandomSource(seed);
+}
+
+extern inline function createRandomSourceFromHash(x:Float, y:Float):flight.RandomSource {
+  return flight._cpp._attempt.Attempt_Math_createRandomSourceFromHash.createRandomSourceFromHash(x, y);
+}
+
+extern inline function mean(values:Array<Float>):Float {
+  return flight._cpp._attempt.Attempt_Math_mean.mean(values);
+}
+
+extern inline function median(values:Array<Float>):Float {
+  return flight._cpp._attempt.Attempt_Math_median.median(values);
+}
+
+extern inline function pick<T>(random:flight.RandomSource, items:Array<T>):Null<T> {
+  return flight._cpp._attempt.Attempt_Math_pick.pick(random, items);
+}
+
+extern inline function randomBool(random:flight.RandomSource, ?probability:Float):Bool {
+  return flight._cpp._attempt.Attempt_Math_randomBool.randomBool(random, probability);
+}
+
+extern inline function randomExponential(random:flight.RandomSource, ?rate:Float):Float {
+  return flight._cpp._attempt.Attempt_Math_randomExponential.randomExponential(random, rate);
+}
+
+extern inline function randomGaussian(random:flight.RandomSource, ?mean:Float, ?standardDeviation:Float):Float {
+  return flight._cpp._attempt.Attempt_Math_randomGaussian.randomGaussian(random, mean, standardDeviation);
+}
+
+extern inline function randomGaussianPair(random:flight.RandomSource, ?mean:Float, ?standardDeviation:Float):Array<Float> {
+  return flight._cpp._attempt.Attempt_Math_randomGaussianPair.randomGaussianPair(random, mean, standardDeviation);
+}
+
+extern inline function randomInsideUnitDisc(random:flight.RandomSource, out:flight.Vector2Like):Void {
+  flight._cpp._attempt.Attempt_Math_randomInsideUnitDisc.randomInsideUnitDisc(random, out);
+}
+
+extern inline function randomInsideUnitSphere(random:flight.RandomSource, out:flight.Vector3Like):Void {
+  flight._cpp._attempt.Attempt_Math_randomInsideUnitSphere.randomInsideUnitSphere(random, out);
+}
+
+extern inline function randomInt(random:flight.RandomSource, min:Float, max:Float):Float {
+  return flight._cpp._attempt.Attempt_Math_randomInt.randomInt(random, min, max);
+}
+
+extern inline function randomOnUnitCircle(random:flight.RandomSource, out:flight.Vector2Like):Void {
+  flight._cpp._attempt.Attempt_Math_randomOnUnitCircle.randomOnUnitCircle(random, out);
+}
+
+extern inline function randomOnUnitSphere(random:flight.RandomSource, out:flight.Vector3Like):Void {
+  flight._cpp._attempt.Attempt_Math_randomOnUnitSphere.randomOnUnitSphere(random, out);
+}
+
+extern inline function randomPoisson(random:flight.RandomSource, ?lambda:Float):Float {
+  return flight._cpp._attempt.Attempt_Math_randomPoisson.randomPoisson(random, lambda);
+}
+
+extern inline function randomRange(random:flight.RandomSource, min:Float, max:Float):Float {
+  return flight._cpp._attempt.Attempt_Math_randomRange.randomRange(random, min, max);
+}
+
+extern inline function randomSign(random:flight.RandomSource):Float {
+  return flight._cpp._attempt.Attempt_Math_randomSign.randomSign(random);
+}
+
+extern inline function randomWeighted(random:flight.RandomSource, weights:Array<Float>):Float {
+  return flight._cpp._attempt.Attempt_Math_randomWeighted.randomWeighted(random, weights);
+}
+
+extern inline function shuffle<T>(random:flight.RandomSource, items:Array<T>):Array<T> {
+  return flight._cpp._attempt.Attempt_Math_shuffle.shuffle(random, items);
+}
+
+extern inline function shuffleInPlace<T>(random:flight.RandomSource, items:Array<T>):Void {
+  flight._cpp._attempt.Attempt_Math_shuffleInPlace.shuffleInPlace(random, items);
+}
+
+extern inline function standardDeviation(values:Array<Float>):Float {
+  return flight._cpp._attempt.Attempt_Math_standardDeviation.standardDeviation(values);
+}
+
+extern inline function variance(values:Array<Float>):Float {
+  return flight._cpp._attempt.Attempt_Math_variance.variance(values);
+}
+
+extern inline function weightedAverage(values:Array<Float>, weights:Array<Float>):Float {
+  return flight._cpp._attempt.Attempt_Math_weightedAverage.weightedAverage(values, weights);
+}

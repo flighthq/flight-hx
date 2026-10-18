@@ -1,0 +1,11 @@
+// Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.
+package flight._cpp._attempt;
+
+#if cpp
+import flight.*;
+@:include("flight/audio/contract.hpp")
+extern class Attempt_Audio_resetFailedAudioResourceReference extends AttemptConfig {
+  @:native("flight::audio::reset_failed_audio_resource_reference")
+  public static function resetFailedAudioResourceReference(ref:flight.AudioResourceReference):Bool;
+}
+#end

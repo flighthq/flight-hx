@@ -1,0 +1,11 @@
+// Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.
+package flight._cpp._attempt;
+
+#if cpp
+import flight.*;
+@:include("flight/types/contract.hpp")
+extern class Attempt_Types_SpineJsonSectionKind extends AttemptConfig {
+  @:native("flight::types::spine_json_section_kind")
+  public static var SpineJsonSectionKind:{ Animations:String, Bones:String, Events:String, IkConstraints:String, PathConstraints:String, Skins:String, Slots:String, TransformConstraints:String };
+}
+#end

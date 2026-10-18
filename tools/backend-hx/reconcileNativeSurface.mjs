@@ -23,6 +23,8 @@ const defaultApi = readJson(path.join(root, 'generated', 'js', 'default-api.json
 const webManifest = readJson(path.join(root, 'generated', 'js', 'manifest.json'));
 const nativePlanning = readJson(path.join(root, 'generated', 'js', 'native-planning.json'));
 const nativeManifest = readJson(path.join(root, 'src-cpp', 'manifest.json'));
+const nativeTypeAttempts = readJson(path.join(root, 'src-cpp', 'type-attempts.json'));
+const nativeBindingAttempts = readJson(path.join(root, 'src-cpp', 'binding-attempts.json'));
 const cppManifest = readJson(path.join(flightCpp.directory, 'generated', 'manifest.json'));
 const bestEffort = readJson(path.join(flightCpp.directory, 'generated', 'best-effort.json'));
 const refusalLedger = readJson(path.join(flightCpp.directory, 'generated', 'refusals.json'));
@@ -42,6 +44,12 @@ const compilerFunctionCandidatesByPackage = groupBy(
   nativePlanning.declarations.filter(({ kind }) => kind === 'function'),
   ({ package: packageName }) => packageName,
 );
+const typeAttemptsByPackage = groupBy(nativeTypeAttempts.declarations, ({ package: packageName }) => packageName);
+const bindingAttemptsByPackage = groupBy(nativeBindingAttempts.declarations, ({ package: packageName }) => packageName);
+const unavailableAttemptsByPackage = groupBy(
+  nativePlanning.bindingAttempts.filter(({ cpp }) => cpp.availability !== 'available'),
+  ({ package: packageName }) => packageName,
+);
 const allScalarCandidates = [];
 const allCompilerFunctionCandidates = [];
 
@@ -50,6 +58,9 @@ const packages = defaultApi.packages.map((package_) => {
   const refusals = refusalsByPackage.get(package_.package) ?? [];
   const nativeFunctions = nativeFunctionIndex.get(package_.package) ?? [];
   const nativeTypes = [...(nativeTypeIndex.get(package_.package) ?? [])].sort(compareText);
+  const packageTypeAttempts = typeAttemptsByPackage.get(package_.package) ?? [];
+  const packageBindingAttempts = bindingAttemptsByPackage.get(package_.package) ?? [];
+  const packageUnavailableAttempts = unavailableAttemptsByPackage.get(package_.package) ?? [];
   const scalarCandidates = package_.functions
     .filter(({ signature }) => isDirectScalarSignature(signature))
     .map((entry) => headerConfirmedCandidate(package_.package, entry))
@@ -94,6 +105,10 @@ const packages = defaultApi.packages.map((package_) => {
     issue('header-confirmed-scalar-probe-candidates', unboundScalarCandidates.length),
     issue('compiler-haxe-cpp-function-candidates', unboundCompilerFunctionCandidates.length),
     issue('compiler-haxe-cpp-refused-bindings', compilerPackage.cppExternRefusals),
+    issue('native-materialized-unproven-types', packageTypeAttempts.length),
+    issue('native-materialized-unproven-functions', packageBindingAttempts.filter(({ kind }) => kind === 'function').length),
+    issue('native-materialized-unproven-values', packageBindingAttempts.filter(({ kind }) => kind === 'value').length),
+    issue('flight-cpp-symbol-unavailable', packageUnavailableAttempts.length),
   ].filter(({ count }) => count > 0);
   const webDeclarations = package_.functions.length + package_.types.length + package_.values.length;
   const nativeDeclarations = nativeFunctions.length + nativeTypes.length;
@@ -128,6 +143,12 @@ const packages = defaultApi.packages.map((package_) => {
       functions: nativeFunctions,
       types: nativeTypes,
       values: [],
+    },
+    nativeAttempts: {
+      functions: packageBindingAttempts.filter(({ kind }) => kind === 'function').length,
+      types: packageTypeAttempts.length,
+      unavailableUpstream: packageUnavailableAttempts.length,
+      values: packageBindingAttempts.filter(({ kind }) => kind === 'value').length,
     },
     package: package_.package,
     scalarProbeCandidates: unboundScalarCandidates,
@@ -165,6 +186,11 @@ const unboundScalarCandidates = allScalarCandidates.filter(
 );
 const report = {
   limitations: [
+    {
+      code: 'attempted-is-not-compile-proven',
+      reason:
+        'Every flight-cpp-symbol-backed declaration is materialized in the default native Haxe root, but declarations outside nativeDefault remain explicit experiments. Haxe target type-checking proves their public tree; per-carrier hxcpp adapters and compile/run promotion are still required before they count as compile-proven.',
+    },
     {
       code: 'target-specific-facade-roots',
       reason:
@@ -238,6 +264,18 @@ const report = {
       scalarOverrideRefusals: (nativeManifest.scalarOverrideRefusals ?? []).length,
       types: nativeUpstreamTypes.size,
       values: 0,
+    },
+    nativeAttempts: {
+      bindingCarrierFamilies: nativeBindingAttempts.summary.carrierFamilies,
+      compileProbes: nativeBindingAttempts.compileProbes.length,
+      cppAvailable: nativePlanning.bindingAttempts.filter(({ cpp }) => cpp.availability === 'available').length,
+      cppUnavailable: nativePlanning.bindingAttempts.filter(({ cpp }) => cpp.availability !== 'available').length,
+      functions: nativeBindingAttempts.summary.functions,
+      genericReferenceTemplateAdapters: nativeTypeAttempts.summary.templateAdapters,
+      haxeTypecheck: 'pass',
+      isolatedFunctionValueExterns: nativeBindingAttempts.summary.isolatedExterns,
+      types: nativeTypeAttempts.summary.totalAttempts,
+      values: nativeBindingAttempts.summary.values,
     },
     compilerPlan: {
       ...nativePlanning.summary,
@@ -365,6 +403,12 @@ function validatePins() {
   includes('web/native Flight source pin', cppSourceRevisions, webManifest.source.revision);
   equal('native-plan flight-cpp pin', nativePlanning.pins.flightCpp, flightCpp.commit);
   equal('native-plan flight-compiler pin', nativePlanning.pins.flightCompiler, compiler.commit);
+  equal('native type-attempt schema', nativeTypeAttempts.schema, 'flight-hx-native-type-attempts/1');
+  equal('native binding-attempt schema', nativeBindingAttempts.schema, 'flight-hx-native-binding-attempts/1');
+  equal('native type-attempt flight-cpp pin', nativeTypeAttempts.pins.flightCpp, flightCpp.commit);
+  equal('native binding-attempt flight-cpp pin', nativeBindingAttempts.pins.flightCpp, flightCpp.commit);
+  equal('native type-attempt compiler pin', nativeTypeAttempts.pins.flightCompiler, compiler.commit);
+  equal('native binding-attempt compiler pin', nativeBindingAttempts.pins.flightCompiler, compiler.commit);
   includes('native-plan generated Flight pin', cppSourceRevisions, nativePlanning.pins.flightCppSource);
   equal('native-plan generated compiler pin', nativePlanning.pins.flightCppCompiler, cppManifest.compiler.revision);
   equal('native manifest Haxe-plan schema', nativeManifest.haxeBindingPlan.schema, nativePlanning.schemas.cppExternPlan);
@@ -469,6 +513,9 @@ function formatSummary(prefix) {
   return (
     `${prefix}: ${String(report.summary.nativeDefault.functions)} functions and ` +
     `${String(report.summary.nativeDefault.types)} upstream types are compile-proven; ` +
+    `${String(report.summary.nativeAttempts.types)} types, ${String(report.summary.nativeAttempts.functions)} functions, and ` +
+    `${String(report.summary.nativeAttempts.values)} values are materialized as unproven attempts; ` +
+    `${String(report.summary.nativeAttempts.cppUnavailable)} declarations have no flight-cpp symbol; ` +
     `${String(report.summary.scalarExpansion.unboundProbeCandidates)} header-confirmed scalar candidates remain.\n`
   );
 }

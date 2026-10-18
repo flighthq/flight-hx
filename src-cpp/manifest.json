@@ -11,6 +11,7 @@
     "compilerRevision": "804435ad89716bd3ddb8144e435adb0be6c9477b",
     "candidateArtifact": "generated/js/native-planning.json",
     "promotion": "compiler-emitted-header-pass-compile-run",
+    "typeAttempt": "compiler-emitted-unproven-materialization",
     "overridePromotion": "dependency-complete-required-scalar-compile-run",
     "optionalOverridePromotion": "dependency-complete-optional-scalar-adapter-compile-run"
   },

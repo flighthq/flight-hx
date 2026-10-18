@@ -2,7 +2,7 @@
 // signatures, native locators, exact adapter emissions, and explicit downstream scalar overrides.
 // Every path uses declaration-only hxcpp headers plus isolated C++ translation units so flight::*
 // names never enter hxcpp-generated namespace flight.
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import { resolveDependency } from '../../scripts/dependencyLock.mjs';
@@ -18,6 +18,7 @@ if (unknown.length > 0) {
 const manifest = readJson(path.join(root, 'src-cpp', 'manifest.json'));
 const defaultApi = readJson(path.join(root, 'generated', 'js', 'default-api.json'));
 const planning = readJson(path.join(root, 'generated', 'js', 'native-planning.json'));
+const typeAttempts = readJson(path.join(root, 'src-cpp', 'type-attempts.json'));
 const flightCpp = resolveDependency(root, 'flight-cpp');
 const flightCppBestEffort = readJson(path.join(flightCpp.directory, 'generated', 'best-effort.json'));
 const compilerPlanProvenance = 'flight-compiler/haxe-cpp-plan/1';
@@ -62,12 +63,43 @@ const publicFunctions = new Map(
     package_.functions.map((declaration) => [`flight.${declaration.holder}.${declaration.name}`, declaration]),
   ),
 );
-const nativeFacadeTypes = new Set(manifest.extensions.flatMap(({ publicTypes }) => publicTypes));
+const nativeFacadeTypes = new Map(typeAttempts.declarations.map((declaration) => [declaration.publicName, declaration]));
+const manifestPublicNameSet = new Set(
+  manifest.modules.flatMap(({ module, functions }) => functions.map(({ name }) => `${module}.${name}`)),
+);
+const unprovenAttempts = planning.bindingAttempts
+  .filter(
+    ({ cpp, haxeCpp, publicHaxe }) =>
+      cpp.availability === 'available' &&
+      haxeCpp.status === 'refused' &&
+      (publicHaxe.kind === 'function' || publicHaxe.kind === 'value') &&
+      !manifestPublicNameSet.has(publicHaxe.qualifiedName),
+  )
+  .map((attempt) => {
+    if (attempt.publicHaxe.kind === 'function') {
+      const declaration = publicFunctions.get(attempt.publicHaxe.qualifiedName);
+      if (!declaration) throw new Error(`${attempt.publicHaxe.qualifiedName} is absent from the complete default web API`);
+      return {
+        ...attempt,
+        publicHaxe: { ...attempt.publicHaxe, signature: `${normalizeNativeHaxeType(declaration.signature)};` },
+      };
+    }
+    return {
+      ...attempt,
+      publicHaxe: {
+        ...attempt.publicHaxe,
+        typeIdentity: normalizeNativeHaxeType(attempt.publicHaxe.typeIdentity),
+      },
+    };
+  });
+const attemptsByOwner = Map.groupBy(unprovenAttempts, ({ publicHaxe }) => publicHaxe.owner);
 
 const expected = new Map();
 const manifestEntries = [];
 for (const module of manifest.modules) {
   const holder = module.module.replace(/^flight\./u, '');
+  const holderAttempts = attemptsByOwner.get(module.module) ?? [];
+  attemptsByOwner.delete(module.module);
   const bindings = module.functions.map((binding) => {
     const publicName = `${module.module}.${binding.name}`;
     const provenance = binding.provenance ?? compilerPlanProvenance;
@@ -120,9 +152,12 @@ for (const module of manifest.modules) {
   const adapterBindings = bindings.filter(({ plan }) => plan.transport === 'adapter');
   expected.set(
     path.join(root, 'src-cpp', 'flight', `${holder}.hx`),
-    emitFacade(holder, bindings, nativeFacadeTypes.has(module.module)),
+    emitFacade(holder, bindings, nativeFacadeTypes.get(module.module), holderAttempts),
   );
-  expected.set(path.join(root, 'src', 'flight', '_cpp', '_fn', `${holder}.hx`), emitExtern(holder, bindings));
+  expected.set(
+    path.join(root, 'src', 'flight', '_cpp', '_fn', `${holder}.hx`),
+    emitExtern(holder, bindings),
+  );
   if (directBindings.length > 0) {
     expected.set(
       path.join(root, 'src-cpp', 'include', 'flight_hx', `${holder.toLowerCase()}.hpp`),
@@ -142,6 +177,31 @@ for (const module of manifest.modules) {
     expected.set(path.join(root, 'src-cpp', 'src', 'adapters', `${name}.cpp`), emitAdapterSource(binding));
   }
 }
+
+for (const [owner, holderAttempts] of [...attemptsByOwner].sort(([left], [right]) => compareText(left, right))) {
+  const holder = owner.replace(/^flight\./u, '');
+  if (!/^[A-Za-z_][A-Za-z0-9_]*$/u.test(holder)) throw new Error(`Unsupported native attempt owner ${owner}`);
+  expected.set(
+    path.join(root, 'src-cpp', 'flight', `${holder}.hx`),
+    emitFacade(holder, [], nativeFacadeTypes.get(owner), holderAttempts),
+  );
+}
+
+expected.set(
+  path.join(root, 'src', 'flight', '_cpp', '_attempt', 'AttemptConfig.hx'),
+  emitAttemptConfig(),
+);
+for (const attempt of unprovenAttempts) {
+  expected.set(
+    path.join(root, 'src', 'flight', '_cpp', '_attempt', `${attemptExternClass(attempt)}.hx`),
+    emitAttemptExtern(attempt),
+  );
+}
+
+expected.set(
+  path.join(root, 'src-cpp', 'binding-attempts.json'),
+  `${JSON.stringify(createBindingAttemptReport(unprovenAttempts), undefined, 2)}\n`,
+);
 
 const manifestPublicNames = manifestEntries.map(({ publicName }) => publicName);
 const duplicatePublicNames = manifestPublicNames.filter((name, index) => manifestPublicNames.indexOf(name) !== index);
@@ -172,6 +232,18 @@ if (JSON.stringify(recordedPublicNames) !== JSON.stringify(promotablePublicNames
 }
 
 const drift = [];
+const generatedMarker = '// Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.\n';
+const generatedPaths = [
+  ...filesUnder(path.join(root, 'src', 'flight', '_cpp', '_fn')),
+  ...filesUnder(path.join(root, 'src', 'flight', '_cpp', '_attempt')),
+].filter((filename) => readFileSync(filename, 'utf8').startsWith(generatedMarker));
+const stale = generatedPaths.filter((filename) => !expected.has(filename));
+if (stale.length > 0) {
+  if (check) {
+    throw new Error(`Stale native function output must be removed: ${stale.map((filename) => path.relative(root, filename)).join(', ')}`);
+  }
+  for (const filename of stale) rmSync(filename);
+}
 for (const [filename, contents] of expected) {
   if (existsSync(filename) && readFileSync(filename, 'utf8') === contents) continue;
   drift.push(path.relative(root, filename).split(path.sep).join('/'));
@@ -192,17 +264,21 @@ process.stdout.write(
     `(${String(planning.declarations.filter(({ kind, transport, headerStatus }) => kind === 'function' && transport === 'direct' && headerStatus === 'pass').length)} direct, ` +
     `${String(planning.declarations.filter(({ kind, transport, headerStatus }) => kind === 'function' && transport === 'adapter' && headerStatus === 'pass').length)} compiler adapter, ` +
     `${String(manifestEntries.filter(({ provenance }) => provenance === scalarOverrideProvenance).length)} required scalar override, ` +
-    `${String(manifestEntries.filter(({ provenance }) => provenance === optionalScalarOverrideProvenance).length)} optional scalar adapter).\n`,
+    `${String(manifestEntries.filter(({ provenance }) => provenance === optionalScalarOverrideProvenance).length)} optional scalar adapter); ` +
+    `${String(unprovenAttempts.filter(({ publicHaxe }) => publicHaxe.kind === 'function').length)} unproven function attempt(s) and ` +
+    `${String(unprovenAttempts.filter(({ publicHaxe }) => publicHaxe.kind === 'value').length)} unproven value attempt(s) across ` +
+    `${String(new Set(unprovenAttempts.map(({ publicHaxe }) => publicHaxe.owner)).size)} holder(s).\n`,
 );
 
-function emitFacade(holder, bindings, includeNativeTypeAlias) {
+function emitFacade(holder, bindings, nativeType, attempts = []) {
   const lines = [
     '// Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.',
     'package flight;',
     '',
   ];
-  if (includeNativeTypeAlias) {
-    lines.push(`typedef ${holder} = flight._cpp.${holder};`, '');
+  if (nativeType) {
+    const parameters = nativeType.genericArity > 0 ? `<${genericNames(nativeType.genericArity).join(', ')}>` : '';
+    lines.push(`typedef ${holder}${parameters} = flight._cpp.${holder}${parameters};`, '');
   }
   for (const binding of bindings) {
     const { declaration, parsed } = binding;
@@ -210,6 +286,27 @@ function emitFacade(holder, bindings, includeNativeTypeAlias) {
     const call = `flight._cpp._fn.${holder}.${declaration.name}(${facadeArguments(binding).join(', ')})`;
     lines.push(parsed.result === 'Void' ? `  ${call};` : `  return ${call};`);
     lines.push('}', '');
+  }
+  for (const attempt of attempts.sort(compareAttempts)) {
+    if (attempt.publicHaxe.kind === 'function') {
+      const parsed = parseAttemptSignature(attempt.publicHaxe.signature);
+      // `extern inline` makes the attempted call exist at the public API while preventing Haxe
+      // from emitting every sibling wrapper merely because a proven member imports this holder.
+      // A selected attempt is still inlined and reaches the native symbol, so ABI failures remain
+      // visible at its actual use site.
+      lines.push(`extern inline ${attempt.publicHaxe.signature.slice(0, -1)} {`);
+      const call = `flight._cpp._attempt.${attemptExternClass(attempt)}.${attempt.publicHaxe.name}(${parsed.parameters.map(({ call }) => call).join(', ')})`;
+      lines.push(parsed.result === 'Void' ? `  ${call};` : `  return ${call};`);
+      lines.push('}', '');
+      continue;
+    }
+    const { name, typeIdentity } = attempt.publicHaxe;
+    lines.push(`var ${name}(get, set):${typeIdentity};`, '');
+    lines.push(`private extern inline function get_${name}():${typeIdentity} return flight._cpp._attempt.${attemptExternClass(attempt)}.${name};`, '');
+    lines.push(
+      `private extern inline function set_${name}(value:${typeIdentity}):${typeIdentity} return flight._cpp._attempt.${attemptExternClass(attempt)}.${name} = value;`,
+      '',
+    );
   }
   return lines.join('\n');
 }
@@ -221,10 +318,10 @@ function emitExtern(holder, bindings) {
     ...(direct.length > 0 ? [`${holder.toLowerCase()}.cpp`] : []),
     ...adapters.map((binding) => `adapters/${adapterIdentity(binding).name}.cpp`),
   ];
-  const includes = [
+  const includes = [...new Set([
     ...(direct.length > 0 ? [`flight_hx/${holder.toLowerCase()}.hpp`] : []),
     ...adapters.map((binding) => `flight_hx/adapters/${adapterIdentity(binding).name}.hpp`),
-  ];
+  ])].sort(compareText);
   const sourceFiles = sources
     .map((source) => `  <file name="\${removeQuotes:flight_hx_root}/src-cpp/src/${source}" />`)
     .join('\n');
@@ -233,7 +330,8 @@ function emitExtern(holder, bindings) {
     'package flight._cpp._fn;',
     '',
     '#if cpp',
-    `@:buildXml('\n<error value="flight_cpp_root must name the pinned or installed flight-cpp root" unless="flight_cpp_root" />\n<error value="flight_hx_root must name the flight-hx package root" unless="flight_hx_root" />\n<set name="NO_PRECOMPILED_HEADERS" value="1" />\n<files id="haxe">\n${sourceFiles}\n  <compilerflag value="/std:c++20" if="windows" />\n  <compilerflag value="-std=c++20" unless="windows" />\n  <compilerflag value="/I\${removeQuotes:flight_cpp_root}/include" if="windows" />\n  <compilerflag value="/I\${removeQuotes:flight_cpp_root}/overrides/include" if="windows" />\n  <compilerflag value="/I\${removeQuotes:flight_cpp_root}/generated/include" if="windows" />\n  <compilerflag value="/I\${removeQuotes:flight_hx_root}/src-cpp/include" if="windows" />\n  <compilerflag value="-I\${removeQuotes:flight_cpp_root}/include" unless="windows" />\n  <compilerflag value="-I\${removeQuotes:flight_cpp_root}/overrides/include" unless="windows" />\n  <compilerflag value="-I\${removeQuotes:flight_cpp_root}/generated/include" unless="windows" />\n  <compilerflag value="-I\${removeQuotes:flight_hx_root}/src-cpp/include" unless="windows" />\n</files>\n')`,
+    'import flight.*;',
+    emitBuildXml(sourceFiles),
     ...includes.map((include) => `@:include(${JSON.stringify(include)})`),
     `extern class ${holder} {`,
   ];
@@ -245,6 +343,46 @@ function emitExtern(holder, bindings) {
   if (lines.at(-1) === '') lines.pop();
   lines.push('}', '#end', '');
   return lines.join('\n');
+}
+
+function emitAttemptExtern(attempt) {
+  const className = attemptExternClass(attempt);
+  const nativeName = `${attempt.cpp.locator.namespace}::${attempt.cpp.locator.spelling}`;
+  const declaration =
+    attempt.publicHaxe.kind === 'function'
+      ? `  public static ${attempt.publicHaxe.signature}`
+      : `  public static var ${attempt.publicHaxe.name}:${attempt.publicHaxe.typeIdentity};`;
+  return [
+    '// Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.',
+    'package flight._cpp._attempt;',
+    '',
+    '#if cpp',
+    'import flight.*;',
+    `@:include(${JSON.stringify(attempt.cpp.locator.include)})`,
+    `extern class ${className} extends AttemptConfig {`,
+    `  @:native(${JSON.stringify(nativeName)})`,
+    declaration,
+    '}',
+    '#end',
+    '',
+  ].join('\n');
+}
+
+function emitAttemptConfig() {
+  return [
+    '// Generated from src-cpp/manifest.json and flight-compiler native-planning.json. Do not edit.',
+    'package flight._cpp._attempt;',
+    '',
+    '#if cpp',
+    emitBuildXml(''),
+    'extern class AttemptConfig {}',
+    '#end',
+    '',
+  ].join('\n');
+}
+
+function emitBuildXml(sourceFiles) {
+  return `@:buildXml('\n<error value="flight_cpp_root must name the pinned or installed flight-cpp root" unless="flight_cpp_root" />\n<error value="flight_hx_root must name the flight-hx package root" unless="flight_hx_root" />\n<set name="NO_PRECOMPILED_HEADERS" value="1" />\n<set name="HXCPP_NO_CPP11" value="1" />\n<unset name="HXCPP_CPP11" />\n<files id="haxe">\n${sourceFiles}\n  <compilerflag value="/std:c++20" if="windows" />\n  <compilerflag value="-std=c++20" unless="windows" />\n  <compilerflag value="/I\${removeQuotes:flight_cpp_root}/include" if="windows" />\n  <compilerflag value="/I\${removeQuotes:flight_cpp_root}/overrides/include" if="windows" />\n  <compilerflag value="/I\${removeQuotes:flight_cpp_root}/generated/include" if="windows" />\n  <compilerflag value="/I\${removeQuotes:flight_hx_root}/src-cpp/include" if="windows" />\n  <compilerflag value="-I\${removeQuotes:flight_cpp_root}/include" unless="windows" />\n  <compilerflag value="-I\${removeQuotes:flight_cpp_root}/overrides/include" unless="windows" />\n  <compilerflag value="-I\${removeQuotes:flight_cpp_root}/generated/include" unless="windows" />\n  <compilerflag value="-I\${removeQuotes:flight_hx_root}/src-cpp/include" unless="windows" />\n</files>\n')`;
 }
 
 function validateCompilerAdapter(publicName, binding, plan) {
@@ -498,6 +636,149 @@ function emitInternalSignature(binding) {
   return `function ${binding.declaration.name}(${parameters}):${binding.parsed.result}`;
 }
 
+function createBindingAttemptReport(attempts) {
+  const declarations = attempts.sort(compareAttempts).map(({ cpp, haxeCpp, package: packageName, publicHaxe, source }) => ({
+    carrierFamilies: classifyAttemptCarriers(publicHaxe),
+    externClass: `flight._cpp._attempt.${attemptExternClass({ publicHaxe })}`,
+    header: cpp.locator.include,
+    kind: publicHaxe.kind,
+    nativeName: `${cpp.locator.namespace}::${cpp.locator.spelling}`,
+    package: packageName,
+    publicName: publicHaxe.qualifiedName,
+    refusal: haxeCpp.refusal,
+    source,
+    status: 'materialized-unproven',
+    transport: 'isolated-extern-inline',
+  }));
+  const carrierFamilies = Object.entries(
+    declarations.flatMap(({ carrierFamilies: families }) => families).reduce((counts, family) => {
+      counts[family] = (counts[family] ?? 0) + 1;
+      return counts;
+    }, {}),
+  )
+    .sort(([left], [right]) => compareText(left, right))
+    .map(([name, count]) => ({ count, name }));
+  return {
+    compileProbes: [
+      {
+        cppCompilation: 'failed-as-classified',
+        diagnostic: "conversion from 'flight::Array<double>' to non-scalar type 'Array<double>' requested",
+        fixture: 'tests/haxe/NativeAttemptCompile.hx',
+        haxeCodeGeneration: 'pass',
+        publicName: 'flight.Adjustments.createBrightnessColorMatrix',
+        requiredAdapter: 'flight-array-to-hxcpp-array',
+        status: 'adapter-required',
+      },
+    ],
+    declarations,
+    pins: planning.pins,
+    schema: 'flight-hx-native-binding-attempts/1',
+    summary: {
+      functions: declarations.filter(({ kind }) => kind === 'function').length,
+      carrierFamilies,
+      holders: new Set(attempts.map(({ publicHaxe }) => publicHaxe.owner)).size,
+      isolatedExterns: declarations.length,
+      total: declarations.length,
+      values: declarations.filter(({ kind }) => kind === 'value').length,
+    },
+  };
+}
+
+function classifyAttemptCarriers(publicHaxe) {
+  const source = publicHaxe.kind === 'function' ? publicHaxe.signature : publicHaxe.typeIdentity;
+  const families = [];
+  if (/^function\s+[A-Za-z_][A-Za-z0-9_]*</u.test(source)) families.push('generic-function');
+  if (source.includes('Array<')) families.push('array');
+  if (/flight\._internal\._(?:UInt|Int|Float|ArrayBuffer)/u.test(source)) families.push('typed-array');
+  if (source.includes('Null<')) families.push('nullable');
+  if (source.includes('Dynamic')) families.push('dynamic');
+  if (source.includes('->')) families.push('callback');
+  if (/\{[^}]*:/u.test(source)) families.push('anonymous-structure');
+  const namedTokens = [...source.matchAll(/\b(?:flight\.)?([A-Z][A-Za-z0-9_]*)\b/gu)]
+    .map((match) => match[1])
+    .filter((name) => !new Set(['Array', 'Bool', 'Dynamic', 'Float', 'Int', 'Null', 'String', 'Void']).has(name));
+  if (namedTokens.length > 0) {
+    families.push('named');
+  }
+  if (families.length === 0) families.push(publicHaxe.kind === 'value' ? 'scalar-value' : 'scalar');
+  return [...new Set(families)].sort(compareText);
+}
+
+function parseAttemptSignature(signature) {
+  const nameMatch = /^function\s+([A-Za-z_][A-Za-z0-9_]*)/u.exec(signature);
+  if (!nameMatch || !signature.endsWith(';')) throw new Error(`Unsupported native attempt signature: ${signature}`);
+  const open = signature.indexOf('(', nameMatch[0].length);
+  if (open < 0) throw new Error(`Native attempt signature has no parameter list: ${signature}`);
+  const close = matchingDelimiter(signature, open, '(', ')');
+  if (signature[close + 1] !== ':') throw new Error(`Native attempt signature has no result type: ${signature}`);
+  const parameterSource = signature.slice(open + 1, close);
+  const parameters = parameterSource
+    ? splitHaxeTopLevel(parameterSource).map((parameter) => {
+        const match = /^(\.\.\.)?\??([A-Za-z_][A-Za-z0-9_]*)\s*:/u.exec(parameter);
+        if (!match) throw new Error(`Unsupported native attempt parameter ${parameter} in ${signature}`);
+        return { call: `${match[1] ?? ''}${match[2]}`, name: match[2] };
+      })
+    : [];
+  return { parameters, result: signature.slice(close + 2, -1) };
+}
+
+function matchingDelimiter(source, start, open, close) {
+  let depth = 0;
+  for (let index = start; index < source.length; index += 1) {
+    if (source[index] === open) depth += 1;
+    else if (source[index] === close) depth -= 1;
+    if (depth === 0) return index;
+  }
+  throw new Error(`Unterminated ${open}${close} group in ${source}`);
+}
+
+function splitHaxeTopLevel(source) {
+  const result = [];
+  let start = 0;
+  const depth = { angle: 0, brace: 0, bracket: 0, parenthesis: 0 };
+  for (let index = 0; index < source.length; index += 1) {
+    const character = source[index];
+    if (character === '<') depth.angle += 1;
+    else if (character === '>' && source[index - 1] !== '-') depth.angle -= 1;
+    else if (character === '{') depth.brace += 1;
+    else if (character === '}') depth.brace -= 1;
+    else if (character === '[') depth.bracket += 1;
+    else if (character === ']') depth.bracket -= 1;
+    else if (character === '(') depth.parenthesis += 1;
+    else if (character === ')') depth.parenthesis -= 1;
+    else if (character === ',' && Object.values(depth).every((value) => value === 0)) {
+      result.push(source.slice(start, index).trim());
+      start = index + 1;
+    }
+  }
+  result.push(source.slice(start).trim());
+  return result;
+}
+
+function genericNames(arity) {
+  return Array.from({ length: arity }, (_, index) => `T${String(index)}`);
+}
+
+function compareAttempts(left, right) {
+  return compareText(left.publicHaxe.qualifiedName, right.publicHaxe.qualifiedName);
+}
+
+function attemptExternClass(attempt) {
+  const holder = attempt.publicHaxe.owner.replace(/^flight\./u, '');
+  const { name } = attempt.publicHaxe;
+  if (!/^[A-Za-z_][A-Za-z0-9_]*$/u.test(holder) || !/^[A-Za-z_][A-Za-z0-9_]*$/u.test(name)) {
+    throw new Error(`Unsupported attempted extern identity ${attempt.publicHaxe.qualifiedName}`);
+  }
+  return `Attempt_${holder}_${name}`;
+}
+
+function normalizeNativeHaxeType(source) {
+  return source
+    .replaceAll('js.html.audio.AudioBuffer', 'flight.AudioBuffer')
+    .replaceAll('js.html.AbortSignal', 'flight.AbortSignal')
+    .replaceAll('js.html.Blob', 'flight.Blob');
+}
+
 function haxeZero(type) {
   if (type === 'Bool') return 'false';
   if (type === 'Float') return '0.0';
@@ -532,6 +813,16 @@ function safeCppName(name) {
 
 function readJson(filename) {
   return JSON.parse(readFileSync(filename, 'utf8'));
+}
+
+function filesUnder(directory) {
+  if (!existsSync(directory)) return [];
+  return readdirSync(directory)
+    .sort(compareText)
+    .flatMap((entry) => {
+      const filename = path.join(directory, entry);
+      return statSync(filename).isDirectory() ? filesUnder(filename) : [filename];
+    });
 }
 
 function compareText(left, right) {
